@@ -360,6 +360,418 @@
   .btn-secondary { background: transparent; border-color: var(--border-strong); color: var(--text-primary); }
   .btn-secondary:hover { background: var(--bg-hover); }
 
+  /* LEVEL COMPLETE */
+  .level-complete {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 32px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 30%, color-mix(in oklab, var(--card-color) 18%, transparent), transparent 70%),
+      var(--bg-base);
+  }
+  .lc-headline {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--card-color);
+    text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+  }
+  .lc-headline.grand { font-size: 2.6rem; }
+  .lc-level { font-size: 1rem; color: var(--text-secondary); letter-spacing: 0.04em; }
+  .lc-stars { display: flex; gap: 14px; }
+  .lc-star {
+    font-size: 56px;
+    color: rgba(255,255,255,0.12);
+    transition: color 0.4s var(--ease-spring), transform 0.4s var(--ease-spring);
+  }
+  .lc-star.earned {
+    color: var(--theme-volume);
+    text-shadow: 0 0 24px rgba(242,205,55,0.55);
+    animation: starpop 0.5s var(--ease-spring);
+  }
+  @keyframes starpop {
+    from { transform: scale(0.4) rotate(-20deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0); opacity: 1; }
+  }
+  .lc-score { font-size: 1.05rem; color: var(--text-primary); }
+  .lc-grand-msg { font-size: 0.95rem; color: var(--text-secondary); max-width: 460px; }
+  .lc-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
+
+  /* ============================================================
+     MODULE 2: F1 APEX DECIMALS  (.mod-f1)
+     ============================================================ */
+  .mod-f1 {
+    width: 100%;
+    height: 100%;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, system-ui, sans-serif;
+    background:
+      radial-gradient(ellipse 60% 40% at 30% 0%, rgba(255,128,0,0.10), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 70% 100%, rgba(238,29,82,0.06), transparent 60%),
+      var(--bg-base);
+    position: relative;
+    overflow: hidden;
+  }
+  .mod-f1::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px);
+    pointer-events: none;
+  }
+
+  /* Driver picker */
+  .f1-pick {
+    position: relative;
+    z-index: 1;
+    padding: 24px 28px;
+    height: 100%;
+    overflow-y: auto;
+  }
+  .f1-pick-head { text-align: center; margin-bottom: 22px; }
+  .f1-pick-head h2 {
+    font-size: 1.6rem; font-weight: 800;
+    letter-spacing: -0.02em; margin-bottom: 6px;
+  }
+  .f1-pick-head p { font-size: 0.92rem; color: var(--text-secondary); }
+  .f1-pick-head .lvl-badge {
+    display: inline-block; margin-top: 10px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(255,128,0,0.14);
+    border: 1px solid rgba(255,128,0,0.3);
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #ffb35a;
+  }
+  .f1-driver-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .f1-driver {
+    background: var(--bg-card);
+    border: 2px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 14px;
+    cursor: pointer;
+    transition: transform 0.18s var(--ease-spring), border-color 0.18s var(--ease-out), background 0.18s var(--ease-out);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .f1-driver:hover { transform: translateY(-4px); background: var(--bg-elevated); }
+  .f1-driver.selected { border-color: var(--driver-color); background: var(--bg-elevated); }
+  .f1-driver::before {
+    content: '';
+    position: absolute; left: 0; right: 0; top: 0; height: 6px;
+    background: var(--driver-color);
+  }
+  .f1-helmet {
+    width: 86px; height: 86px;
+    margin: 8px auto 10px;
+    border-radius: 44px 44px 30px 30px / 50px 50px 30px 30px;
+    background: var(--driver-color);
+    position: relative;
+    box-shadow:
+      inset 0 -8px 12px rgba(0,0,0,0.3),
+      inset 0 6px 10px rgba(255,255,255,0.20),
+      0 4px 12px rgba(0,0,0,0.4);
+  }
+  .f1-helmet::before {
+    /* visor */
+    content: '';
+    position: absolute;
+    left: 12%; right: 12%;
+    top: 38%; height: 22%;
+    background: linear-gradient(180deg, #0a0a0a, #1a1a1a);
+    border-radius: 50% 50% 30% 30% / 100% 100% 0 0;
+    border: 2px solid rgba(0,0,0,0.5);
+  }
+  .f1-helmet::after {
+    /* accent stripe per driver */
+    content: var(--driver-accent, '');
+    position: absolute; left: 0; right: 0; top: 16%;
+    height: 14%;
+    background: var(--driver-accent-color, transparent);
+    opacity: 0.7;
+  }
+  .f1-driver-num {
+    position: absolute;
+    top: 14px; right: 14px;
+    font-size: 1.6rem; font-weight: 900;
+    color: var(--driver-color);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .f1-driver-name { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+  .f1-driver-team { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; letter-spacing: 0.04em; }
+  .f1-driver-flag { font-size: 1.1rem; margin-top: 6px; }
+
+  .f1-pick-actions {
+    display: flex; gap: 10px; justify-content: center;
+    margin-top: 22px;
+  }
+  .f1-go {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #ff8000, #ee1d52);
+    color: white;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255,128,0,0.3);
+    font-family: inherit;
+    transition: transform 0.16s var(--ease-spring), filter 0.16s var(--ease-out);
+  }
+  .f1-go:hover { transform: translateY(-2px); filter: brightness(1.1); }
+  .f1-go:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  /* Race screen */
+  .f1-race {
+    position: relative; z-index: 1;
+    width: 100%; height: 100%;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "tower header"
+      "tower main"
+      "tower foot";
+    gap: 12px;
+    padding: 14px;
+  }
+  .f1-tower {
+    grid-area: tower;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    font-feature-settings: 'tnum' 1;
+  }
+  .f1-tower-head {
+    display: flex; justify-content: space-between;
+    font-size: 0.65rem; font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    padding: 4px 6px 8px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 6px;
+  }
+  .f1-tower-row {
+    display: grid;
+    grid-template-columns: 24px 18px 1fr auto;
+    gap: 6px;
+    padding: 5px 6px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    align-items: center;
+    transition: background 0.18s var(--ease-out);
+  }
+  .f1-tower-row.you {
+    background: rgba(255,128,0,0.16);
+    box-shadow: inset 3px 0 0 #ff8000;
+  }
+  .f1-tower-row.move-up {
+    animation: rowflash-up 0.6s var(--ease-out);
+  }
+  .f1-tower-row.move-down {
+    animation: rowflash-down 0.6s var(--ease-out);
+  }
+  @keyframes rowflash-up   { 0% { background: rgba(74,222,128,0.5); } 100% {} }
+  @keyframes rowflash-down { 0% { background: rgba(248,113,113,0.5); } 100% {} }
+  .f1-pos { font-weight: 800; color: var(--text-primary); }
+  .f1-team-tab {
+    width: 4px; height: 18px;
+    background: var(--row-color, var(--text-muted));
+    border-radius: 2px;
+  }
+  .f1-driver-code {
+    font-weight: 700; font-size: 0.82rem;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+  }
+  .f1-gap {
+    font-size: 0.72rem; color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .f1-header {
+    grid-area: header;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 10px 16px;
+  }
+  .f1-stat {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.85rem;
+  }
+  .f1-stat-label { color: var(--text-muted); font-weight: 600; letter-spacing: 0.06em; font-size: 0.7rem; text-transform: uppercase; }
+  .f1-stat-value { color: var(--text-primary); font-weight: 800; font-feature-settings: 'tnum' 1; }
+  .f1-stat-value.good { color: var(--acc-success); }
+  .f1-stat-value.bad  { color: var(--acc-error);   }
+  .f1-stat-value.warn { color: var(--acc-warning); }
+  .f1-streak-pip {
+    width: 8px; height: 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.12);
+  }
+  .f1-streak-pip.lit { background: var(--theme-volume); box-shadow: 0 0 6px var(--theme-volume); }
+
+  .f1-main {
+    grid-area: main;
+    display: grid;
+    grid-template-rows: minmax(140px, 30%) 1fr;
+    gap: 12px;
+    overflow: hidden;
+  }
+  .f1-circuit {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .f1-circuit svg { width: 100%; height: 100%; display: block; }
+  .f1-question {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
+  }
+  .f1-q-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.75rem; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;
+  }
+  .f1-q-prompt {
+    font-size: 1.18rem; line-height: 1.5;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .f1-q-prompt strong { color: var(--theme-decimals); font-weight: 800; font-feature-settings: 'tnum' 1; }
+  .f1-q-prompt em { font-style: normal; color: var(--text-secondary); }
+  .f1-answers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+  }
+  .f1-ans {
+    padding: 14px 16px;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    font-feature-settings: 'tnum' 1;
+    transition: transform 0.14s var(--ease-spring), border-color 0.14s var(--ease-out), background 0.14s var(--ease-out);
+  }
+  .f1-ans:hover:not(:disabled) {
+    transform: translateY(-2px);
+    border-color: var(--theme-decimals);
+    background: var(--bg-hover);
+  }
+  .f1-ans.correct {
+    border-color: var(--acc-success);
+    background: rgba(74,222,128,0.18);
+    color: var(--acc-success);
+    animation: ansgood 0.4s var(--ease-spring);
+  }
+  .f1-ans.wrong {
+    border-color: var(--acc-error);
+    background: rgba(248,113,113,0.18);
+    color: var(--acc-error);
+    animation: ansbad 0.4s var(--ease-out);
+  }
+  .f1-ans:disabled { cursor: not-allowed; }
+  @keyframes ansgood { 0% {} 50% { transform: scale(1.07); } 100% {} }
+  @keyframes ansbad  { 0% {} 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } 100% {} }
+
+  .f1-foot {
+    grid-area: foot;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .f1-radio { font-style: italic; color: var(--text-secondary); }
+  .f1-lives { display: flex; gap: 6px; align-items: center; }
+  .f1-life {
+    width: 10px; height: 10px;
+    border-radius: 5px;
+    background: var(--acc-error);
+    box-shadow: 0 0 6px rgba(248,113,113,0.4);
+  }
+  .f1-life.lost { background: rgba(255,255,255,0.10); box-shadow: none; }
+
+  /* Lights-out overlay */
+  .f1-lights {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 18px;
+    z-index: 50;
+    transition: opacity 0.4s ease-out;
+  }
+  .f1-lights-row {
+    display: flex; gap: 10px;
+  }
+  .f1-light {
+    width: 38px; height: 38px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 2px solid rgba(255,255,255,0.12);
+  }
+  .f1-light.on {
+    background: #c80000;
+    box-shadow: 0 0 16px rgba(238,29,82,0.7), inset 0 0 8px rgba(255,255,255,0.3);
+  }
+  .f1-lights-msg {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: white;
+  }
+  .f1-lights.fade { opacity: 0; pointer-events: none; }
+
+  @media (max-width: 900px) {
+    .f1-race {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "header"
+        "tower"
+        "main"
+        "foot";
+    }
+    .f1-tower { max-height: 200px; }
+  }
+
   /* RESPONSIVE */
   @media (max-width: 720px) {
     #app { padding: 16px; }
@@ -487,8 +899,7 @@ const MODULES = [
     icon: '🏎️',
     color: '#ff8000',
     description: 'Pick a driver. Race a Grand Prix. Sector splits, lap times, fuel and tire wear gate every overtake.',
-    unlocked: false,
-    lockedMessage: 'Coming next — Module 2 in active build.',
+    unlocked: true,
     levels: [
       { id: 1, name: 'Free Practice',           goal: 'Set a clean lap',          questions: 15, type: 'place-value' },
       { id: 2, name: 'Qualifying',              goal: 'Take pole position',       questions: 18, type: 'compare-order' },
@@ -580,6 +991,9 @@ const MODULES = [
     grandGoal: '1st Mate P. Bear',
   },
 ];
+
+// Inline module registry. Each entry: { init(host, levelIndex, callbacks) -> cleanupFn }.
+const InlineModules = {};
 
 // ============================================================
 // SAVE SYSTEM
@@ -869,9 +1283,21 @@ function renderLevels() {
   }
 }
 
+let activeModuleCleanup = null;
+
+function disposeActiveModule() {
+  if (activeModuleCleanup) {
+    try { activeModuleCleanup(); }
+    catch (e) { console.warn('Module cleanup failed:', e); }
+    activeModuleCleanup = null;
+  }
+}
+
 function playLevel(levelIndex) {
   const m = MODULES.find(x => x.id === currentModuleId);
   if (!m) return;
+
+  disposeActiveModule();
 
   if (m.portMode === 'standalone-link' && m.standaloneFile) {
     const ok = confirm(
@@ -887,19 +1313,530 @@ function playLevel(levelIndex) {
 
   $('host-title').textContent = `${m.name} — L${levelIndex + 1}: ${m.levels[levelIndex].name}`;
   showScreen('module');
-  $('host-frame').innerHTML =
+
+  const host = $('host-frame');
+  host.innerHTML = '';
+
+  if (InlineModules[m.id]) {
+    activeModuleCleanup = InlineModules[m.id].init(host, levelIndex, {
+      onComplete: (score, stars) => {
+        Save.recordLevel(m.id, levelIndex, stars, score);
+        renderHeader();
+        showLevelComplete(m, levelIndex, score, stars);
+      },
+      onExit: () => {
+        disposeActiveModule();
+        exitToLevels();
+      },
+    });
+    return;
+  }
+
+  host.innerHTML =
     '<div class="host-placeholder">' +
-      'Module ' + m.name + ' is coming next.<br>' +
-      'Locked / unbuilt module level. Click ← Levels to go back.' +
+      m.name + ' is on the build queue.<br>' +
+      'Click &larr; Levels to go back.' +
     '</div>';
 }
 
-function exitToLevels()   { showScreen('levels');   renderLevels(); }
-function exitToLauncher() { showScreen('launcher'); renderLauncher(); renderHeader(); }
+function showLevelComplete(module, levelIndex, score, stars) {
+  disposeActiveModule();
+  const host = $('host-frame');
+  const lvl = module.levels[levelIndex];
+  const isLastLevel = levelIndex === module.levels.length - 1;
+  const headline = stars > 0 ? 'LEVEL CLEARED' : 'NOT QUITE';
+
+  const starsHtml = [1, 2, 3].map(n =>
+    `<span class="lc-star ${stars >= n ? 'earned' : ''}">★</span>`
+  ).join('');
+
+  host.innerHTML = `
+    <div class="level-complete" style="--card-color: ${module.color};">
+      <div class="lc-headline">${headline}</div>
+      <div class="lc-level">L${lvl.id} &middot; ${lvl.name}</div>
+      <div class="lc-stars">${starsHtml}</div>
+      <div class="lc-score">Score: <strong>${score}</strong></div>
+      <div class="lc-actions">
+        <button class="btn btn-secondary" id="lc-back">&larr; Levels</button>
+        <button class="btn btn-secondary" id="lc-retry">Retry</button>
+        ${stars > 0 && !isLastLevel ? `<button class="btn btn-primary" id="lc-next">Next Level &rarr;</button>` : ''}
+        ${stars > 0 && isLastLevel ? `<button class="btn btn-primary" id="lc-grand">Claim ${module.grandGoal} ★</button>` : ''}
+      </div>
+    </div>
+  `;
+
+  const back = $('lc-back');   if (back)  back.addEventListener('click', exitToLevels);
+  const retry = $('lc-retry'); if (retry) retry.addEventListener('click', () => playLevel(levelIndex));
+  const next  = $('lc-next');  if (next)  next.addEventListener('click', () => playLevel(levelIndex + 1));
+  const grand = $('lc-grand'); if (grand) grand.addEventListener('click', () => showGrandComplete(module));
+}
+
+function showGrandComplete(module) {
+  const host = $('host-frame');
+  host.innerHTML = `
+    <div class="level-complete grand" style="--card-color: ${module.color};">
+      <div class="lc-headline grand">${module.grandGoal.toUpperCase()}</div>
+      <div class="lc-level">${module.name} &middot; section complete</div>
+      <div class="lc-grand-msg">All six levels cleared. The next section is unlocked.</div>
+      <div class="lc-actions">
+        <button class="btn btn-primary" id="lc-launcher">Back to Multiverse</button>
+      </div>
+    </div>
+  `;
+  $('lc-launcher').addEventListener('click', exitToLauncher);
+}
+
+function exitToLevels()   { disposeActiveModule(); showScreen('levels');   renderLevels(); }
+function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); renderLauncher(); renderHeader(); }
 
 // ============================================================
 // EVENT WIRING
 // ============================================================
+
+// ============================================================
+// MODULE 2: F1 APEX DECIMALS
+// ============================================================
+(function() {
+
+  const DRIVERS = [
+    { id: 'VER', short: 'M. VERSTAPPEN', last: 'VERSTAPPEN', team: 'RED BULL',  num: 3,  flag: '🇳🇱', color: '#1e3a8a', accent: '#ee1c25' },
+    { id: 'HAM', short: 'L. HAMILTON',   last: 'HAMILTON',   team: 'FERRARI',   num: 44, flag: '🇬🇧', color: '#dc0000', accent: '#fcd700' },
+    { id: 'LEC', short: 'C. LECLERC',    last: 'LECLERC',    team: 'FERRARI',   num: 16, flag: '🇲🇨', color: '#dc0000', accent: '#ffffff' },
+    { id: 'RUS', short: 'G. RUSSELL',    last: 'RUSSELL',    team: 'MERCEDES',  num: 63, flag: '🇬🇧', color: '#27f4d2', accent: '#0a1428' },
+    { id: 'ANT', short: 'K. ANTONELLI',  last: 'ANTONELLI',  team: 'MERCEDES',  num: 12, flag: '🇮🇹', color: '#27f4d2', accent: '#1e3a8a' },
+    { id: 'NOR', short: 'L. NORRIS',     last: 'NORRIS',     team: 'MCLAREN',   num: 1,  flag: '🇬🇧', color: '#ff8000', accent: '#ffd400' },
+    { id: 'PIA', short: 'O. PIASTRI',    last: 'PIASTRI',    team: 'MCLAREN',   num: 81, flag: '🇦🇺', color: '#ff8000', accent: '#1e3a8a' },
+  ];
+
+  const F1_LEVELS = [
+    { id: 1, name: 'Free Practice',        circuit: 'Bahrain',     gridSize: 10, gen: 'place-value' },
+    { id: 2, name: 'Qualifying',           circuit: 'Bahrain',     gridSize: 10, gen: 'compare-order' },
+    { id: 3, name: 'Sprint Race',          circuit: 'Bahrain',     gridSize: 12, gen: 'add-sub' },
+    { id: 4, name: 'Monaco GP',            circuit: 'Monaco',      gridSize: 16, gen: 'multiply' },
+    { id: 5, name: 'Silverstone GP',       circuit: 'Silverstone', gridSize: 18, gen: 'divide' },
+    { id: 6, name: 'Suzuka Title Decider', circuit: 'Suzuka',      gridSize: 20, gen: 'mixed-all' },
+  ];
+
+  const QPL = [15, 18, 18, 20, 20, 20];
+
+  const ri = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+  function ensureFour(set, gen) {
+    let safety = 200;
+    while (set.size < 4 && safety-- > 0) set.add(gen());
+    while (set.size < 4) set.add(`${ri(1,99)}.${ri(0,99).toString().padStart(2,'0')}`);
+    return Array.from(set).slice(0, 4);
+  }
+
+  // -------- Problem generators (CCSS 5.NBT, decimal-themed) --------
+
+  function genPlaceValue() {
+    const places = [
+      { name: 'tenths',      power: 1, val: ri(1, 9) },
+      { name: 'hundredths',  power: 2, val: ri(1, 9) },
+      { name: 'thousandths', power: 3, val: ri(1, 9) },
+    ];
+    const target = pick(places);
+    const others = places.filter(p => p !== target);
+    const tDigit = target.val;
+    const hDigit = (target.name === 'hundredths' ? target.val : others.find(p => p.name === 'hundredths').val);
+    const td = (target.name === 'tenths' ? target.val : others.find(p => p.name === 'tenths').val);
+    const thd = (target.name === 'thousandths' ? target.val : others.find(p => p.name === 'thousandths').val);
+    const lap = `1:${ri(20, 35)}.${td}${hDigit}${thd}`;
+    const correctNum = tDigit * Math.pow(10, -target.power);
+    const correct = correctNum.toString();
+    const opts = new Set([correct]);
+    while (opts.size < 4) {
+      opts.add((ri(1, 9) * Math.pow(10, -ri(1, 3))).toString());
+    }
+    const arr = shuffle(Array.from(opts));
+    const driver = pick(DRIVERS);
+    return {
+      prompt: `Crofty: <em>"${driver.last} just set a <strong>${lap}</strong>. What is the value of the digit in the <strong>${target.name}</strong> place?"</em>`,
+      answers: arr,
+      correctIdx: arr.indexOf(correct),
+    };
+  }
+
+  function genCompareOrder() {
+    const base = ri(20, 32);
+    const a = base + ri(0, 999) / 1000;
+    let b;
+    do { b = base + ri(0, 999) / 1000; } while (Math.abs(a - b) < 0.005);
+    const aStr = `1:${a.toFixed(3)}`;
+    const bStr = `1:${b.toFixed(3)}`;
+    const d1 = pick(DRIVERS);
+    let d2; do { d2 = pick(DRIVERS); } while (d2.id === d1.id);
+    const correct = a < b ? d1.last : d2.last;
+    const wrong   = a < b ? d2.last : d1.last;
+    const opts = shuffle([correct, wrong, 'Same lap', 'Cannot tell']);
+    return {
+      prompt: `Brundle: <em>"${d1.last} laps in <strong>${aStr}</strong>, ${d2.last} laps in <strong>${bStr}</strong>. Who is <strong>faster</strong>?"</em>`,
+      answers: opts,
+      correctIdx: opts.indexOf(correct),
+    };
+  }
+
+  function genAddSub() {
+    const a = ri(20, 30) + ri(100, 999) / 1000;
+    const b = ri(20, 30) + ri(100, 999) / 1000;
+    const c = ri(20, 30) + ri(100, 999) / 1000;
+    const sum = +(a + b + c).toFixed(3);
+    const correct = sum.toFixed(3);
+    const opts = ensureFour(new Set([correct]), () => (sum + (ri(-300, 300) / 1000)).toFixed(3));
+    shuffle(opts);
+    return {
+      prompt: `Engineer: <em>"S1 ${a.toFixed(3)}, S2 ${b.toFixed(3)}, S3 ${c.toFixed(3)}. <strong>Lap time</strong>?"</em>`,
+      answers: opts,
+      correctIdx: opts.indexOf(correct),
+    };
+  }
+
+  function genMultiply() {
+    const dec = ri(1, 9) * 0.01 + ri(0, 9) * 0.001;
+    const decR = +dec.toFixed(3);
+    const whole = ri(8, 30);
+    const product = +(decR * whole).toFixed(3);
+    const correct = product.toString();
+    const opts = ensureFour(new Set([correct]), () => +(product + ri(-50, 50) / 100).toFixed(3) + '');
+    shuffle(opts);
+    return {
+      prompt: `Pirelli: <em>"Tires lose <strong>${decR}</strong> sec per lap. After <strong>${whole}</strong> laps, total time lost?"</em>`,
+      answers: opts,
+      correctIdx: opts.indexOf(correct),
+    };
+  }
+
+  function genDivide() {
+    const lapDist = +(ri(40, 70) / 10).toFixed(1);
+    const laps = ri(20, 50);
+    const totalKm = +(lapDist * laps).toFixed(1);
+    const correct = lapDist.toFixed(1);
+    const opts = ensureFour(new Set([correct]), () => (lapDist + ri(-15, 15) / 10).toFixed(1));
+    shuffle(opts);
+    return {
+      prompt: `Strategy: <em>"<strong>${laps}</strong> laps cover <strong>${totalKm.toFixed(1)} km</strong>. What is the <strong>lap distance</strong>?"</em>`,
+      answers: opts.map(o => o + ' km'),
+      correctIdx: opts.indexOf(correct),
+    };
+  }
+
+  function genMixed() {
+    const fns = [genPlaceValue, genCompareOrder, genAddSub, genMultiply, genDivide];
+    return pick(fns)();
+  }
+
+  const GEN_BY_TYPE = {
+    'place-value':  genPlaceValue,
+    'compare-order': genCompareOrder,
+    'add-sub':      genAddSub,
+    'multiply':     genMultiply,
+    'divide':       genDivide,
+    'mixed-all':    genMixed,
+  };
+
+  // -------- Audio (Web Audio API synthesis) --------
+
+  let actx_ = null;
+  function actx() {
+    if (!actx_) {
+      try { actx_ = new (window.AudioContext || window.webkitAudioContext)(); }
+      catch (e) { actx_ = null; }
+    }
+    return actx_;
+  }
+  function tone(freq, dur, type='sine', vol=0.16, attack=0.01) {
+    const ac = actx(); if (!ac) return;
+    if (ac.state === 'suspended') ac.resume().catch(() => {});
+    const osc = ac.createOscillator();
+    const g = ac.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, ac.currentTime);
+    g.gain.setValueAtTime(0, ac.currentTime);
+    g.gain.linearRampToValueAtTime(vol, ac.currentTime + attack);
+    g.gain.linearRampToValueAtTime(0, ac.currentTime + dur);
+    osc.connect(g).connect(ac.destination);
+    osc.start();
+    osc.stop(ac.currentTime + dur + 0.05);
+  }
+  function sfxCorrect()  { tone(700, 0.10, 'sine', 0.18); setTimeout(() => tone(1100, 0.18, 'sine', 0.18), 60); }
+  function sfxWrong()    { tone(220, 0.08, 'sawtooth', 0.16); setTimeout(() => tone(140, 0.20, 'sawtooth', 0.16), 60); }
+  function sfxLight()    { tone(880, 0.10, 'square', 0.14); }
+  function sfxGo()       { tone(440, 0.06, 'sine', 0.18); setTimeout(() => tone(660, 0.06, 'sine', 0.18), 60); setTimeout(() => tone(880, 0.18, 'sine', 0.18), 120); }
+  function sfxFastest()  { for (let i = 0; i < 3; i++) setTimeout(() => tone(1320 + i * 110, 0.07, 'triangle', 0.15), i * 70); }
+
+  // -------- Circuit SVG paths --------
+
+  const CIRCUITS = {
+    Bahrain:     'M 50 90 L 220 90 Q 250 90 250 70 L 250 50 Q 250 30 230 30 L 80 30 Q 50 30 50 60 Z',
+    Monaco:      'M 50 95 L 110 95 Q 130 95 130 75 L 130 60 L 200 60 Q 220 60 220 80 L 220 100 L 280 100 Q 295 100 295 85 L 295 50 Q 295 35 280 35 L 70 35 Q 50 35 50 60 Z',
+    Silverstone: 'M 50 85 Q 50 60 75 60 L 130 60 L 150 40 L 230 40 Q 245 40 245 55 L 245 75 L 280 75 Q 295 75 295 90 L 295 100 Q 295 115 275 115 L 70 115 Q 50 115 50 95 Z',
+    Suzuka:      'M 60 105 Q 60 80 85 80 L 130 80 Q 145 80 145 65 L 145 50 Q 145 35 165 35 L 220 35 Q 240 35 240 55 L 240 75 Q 240 95 220 95 L 200 95 Q 180 95 180 110 L 180 120 Q 180 130 165 130 L 80 130 Q 60 130 60 110 Z',
+  };
+
+  function renderCircuit(host, circuitName, color) {
+    const path = CIRCUITS[circuitName] || CIRCUITS.Bahrain;
+    host.innerHTML =
+      '<svg viewBox="0 0 350 160" preserveAspectRatio="xMidYMid meet">' +
+        '<defs><filter id="cglow"><feGaussianBlur stdDeviation="2.4"/></filter></defs>' +
+        `<path d="${path}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="22" stroke-linejoin="round"/>` +
+        `<path d="${path}" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1.5" stroke-dasharray="5 7" stroke-linejoin="round"/>` +
+        `<text x="175" y="155" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.4)" font-family="system-ui, sans-serif" font-weight="700" letter-spacing="2">${circuitName.toUpperCase()}</text>` +
+        `<circle cx="50" cy="60" r="7" fill="${color}" filter="url(#cglow)" opacity="0.7"/>` +
+        `<circle cx="50" cy="60" r="3.5" fill="${color}"/>` +
+      '</svg>';
+  }
+
+  // -------- F1 module main --------
+
+  InlineModules['f1-decimals'] = {
+    init(host, levelIndex, callbacks) {
+      const lvl = F1_LEVELS[levelIndex];
+      const totalQ = QPL[levelIndex];
+
+      const state = {
+        phase: 'pick',
+        chosen: null,
+        rivals: [],
+        questionNum: 0,
+        score: 0,
+        streak: 0,
+        livesLost: 0,
+        position: lvl.gridSize,
+        questions: [],
+      };
+
+      let timeouts = [];
+      const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
+
+      host.innerHTML = '<div class="mod-f1"></div>';
+      const root = host.querySelector('.mod-f1');
+
+      function renderPick() {
+        state.phase = 'pick';
+        root.innerHTML = `
+          <div class="f1-pick">
+            <div class="f1-pick-head">
+              <h2>Choose Your Driver</h2>
+              <p>${lvl.name} &middot; ${lvl.circuit} &middot; ${totalQ} questions</p>
+              <div class="lvl-badge">LEVEL ${lvl.id} &middot; ${lvl.gen.toUpperCase().replace(/-/g, ' ')}</div>
+            </div>
+            <div class="f1-driver-grid">
+              ${DRIVERS.map(d => `
+                <div class="f1-driver" data-id="${d.id}" style="--driver-color: ${d.color}; --driver-accent-color: ${d.accent};">
+                  <div class="f1-driver-num">${d.num}</div>
+                  <div class="f1-helmet"></div>
+                  <div class="f1-driver-name">${d.short}</div>
+                  <div class="f1-driver-team">${d.team}</div>
+                  <div class="f1-driver-flag">${d.flag}</div>
+                </div>
+              `).join('')}
+            </div>
+            <div class="f1-pick-actions">
+              <button class="btn btn-secondary" id="f1-back">&larr; Levels</button>
+              <button class="f1-go" id="f1-go" disabled>LIGHTS OUT &rarr;</button>
+            </div>
+          </div>
+        `;
+        root.querySelectorAll('.f1-driver').forEach(c => {
+          c.addEventListener('click', () => {
+            root.querySelectorAll('.f1-driver').forEach(x => x.classList.remove('selected'));
+            c.classList.add('selected');
+            state.chosen = DRIVERS.find(d => d.id === c.dataset.id);
+            root.querySelector('#f1-go').disabled = false;
+          });
+        });
+        root.querySelector('#f1-back').addEventListener('click', () => callbacks.onExit());
+        root.querySelector('#f1-go').addEventListener('click', () => {
+          if (!state.chosen) return;
+          state.rivals = DRIVERS.filter(d => d.id !== state.chosen.id);
+          startRace();
+        });
+      }
+
+      function startRace() {
+        state.questionNum = 0;
+        state.score = 0;
+        state.streak = 0;
+        state.livesLost = 0;
+        state.position = lvl.gridSize;
+        state.questions = [];
+        const gen = GEN_BY_TYPE[lvl.gen];
+        for (let i = 0; i < totalQ; i++) state.questions.push(gen());
+        state.phase = 'lights';
+        renderRace();
+        playLightsOut();
+      }
+
+      function rivalForPos(pos) {
+        return state.rivals[(pos * 7 + lvl.id * 13 + pos) % state.rivals.length];
+      }
+
+      function renderRace() {
+        const d = state.chosen;
+        const totalGrid = lvl.gridSize;
+        const playerPos = state.position;
+        const showCount = Math.min(8, totalGrid);
+        const startPos = Math.max(1, Math.min(playerPos - 3, totalGrid - showCount + 1));
+
+        let towerHtml = `<div class="f1-tower-head"><span>POS</span><span>GAP</span></div>`;
+        for (let pos = startPos; pos < startPos + showCount; pos++) {
+          const isYou = pos === playerPos;
+          const drv = isYou ? d : rivalForPos(pos);
+          const gap = pos === 1 ? 'LEADER' : `+${(0.28 * (pos - 1) + ((pos * 31) % 17) / 100).toFixed(3)}`;
+          towerHtml += `
+            <div class="f1-tower-row ${isYou ? 'you' : ''}" data-pos="${pos}">
+              <span class="f1-pos">P${pos}</span>
+              <span class="f1-team-tab" style="--row-color: ${drv.color};"></span>
+              <span class="f1-driver-code">${drv.id}</span>
+              <span class="f1-gap">${gap}</span>
+            </div>
+          `;
+        }
+
+        const livesHtml = [0,1,2].map(i => `<span class="f1-life ${i < state.livesLost ? 'lost' : ''}"></span>`).join('');
+
+        root.innerHTML = `
+          <div class="f1-race">
+            <div class="f1-tower" id="f1-tower">${towerHtml}</div>
+            <div class="f1-header">
+              <div class="f1-stat"><span class="f1-stat-label">Track</span><span class="f1-stat-value">${lvl.circuit}</span></div>
+              <div class="f1-stat"><span class="f1-stat-label">Lap</span><span class="f1-stat-value">${state.questionNum + 1} / ${totalQ}</span></div>
+              <div class="f1-stat"><span class="f1-stat-label">Streak</span><div style="display:flex;gap:3px;">${[0,1,2].map(i => `<span class="f1-streak-pip ${i < state.streak ? 'lit' : ''}"></span>`).join('')}</div></div>
+              <div class="f1-stat"><span class="f1-stat-label">Score</span><span class="f1-stat-value">${state.score}</span></div>
+              <div class="f1-stat"><span class="f1-stat-label">Position</span><span class="f1-stat-value ${state.position === 1 ? 'good' : (state.position <= 3 ? 'warn' : '')}">P${state.position}</span></div>
+            </div>
+            <div class="f1-main">
+              <div class="f1-circuit" id="f1-circuit"></div>
+              <div class="f1-question" id="f1-question"></div>
+            </div>
+            <div class="f1-foot">
+              <div class="f1-radio">${state.chosen.last} on radio: <em>"Box this lap, box this lap..."</em></div>
+              <div class="f1-lives">Lives: ${livesHtml}</div>
+            </div>
+          </div>
+        `;
+
+        renderCircuit(root.querySelector('#f1-circuit'), lvl.circuit, d.color);
+        if (state.phase === 'racing') showQuestion();
+      }
+
+      function playLightsOut() {
+        const overlay = document.createElement('div');
+        overlay.className = 'f1-lights';
+        overlay.innerHTML = `
+          <div class="f1-lights-row">
+            <div class="f1-light"></div><div class="f1-light"></div><div class="f1-light"></div><div class="f1-light"></div><div class="f1-light"></div>
+          </div>
+          <div class="f1-lights-msg">LIGHTS OUT</div>
+        `;
+        const race = root.querySelector('.f1-race');
+        race.appendChild(overlay);
+        const lights = overlay.querySelectorAll('.f1-light');
+        const msg = overlay.querySelector('.f1-lights-msg');
+
+        for (let i = 0; i < 5; i++) {
+          later(450 + i * 600, () => { lights[i].classList.add('on'); sfxLight(); });
+        }
+        const goDelay = 450 + 5 * 600 + 600 + Math.random() * 1400;
+        later(goDelay, () => {
+          lights.forEach(l => l.classList.remove('on'));
+          msg.textContent = 'AND WE GO!';
+          sfxGo();
+          later(700, () => {
+            overlay.classList.add('fade');
+            later(450, () => {
+              overlay.remove();
+              state.phase = 'racing';
+              showQuestion();
+            });
+          });
+        });
+      }
+
+      function showQuestion() {
+        const qEl = root.querySelector('#f1-question');
+        if (!qEl) return;
+        const q = state.questions[state.questionNum];
+        if (!q) { endLevel(); return; }
+        qEl.innerHTML = `
+          <div class="f1-q-meta">
+            <span>Q ${state.questionNum + 1} / ${totalQ}</span>
+            <span>${lvl.gen.toUpperCase().replace(/-/g, ' ')}</span>
+          </div>
+          <div class="f1-q-prompt">${q.prompt}</div>
+          <div class="f1-answers">
+            ${q.answers.map((a, i) => `<button class="f1-ans" data-idx="${i}">${a}</button>`).join('')}
+          </div>
+        `;
+        const buttons = qEl.querySelectorAll('.f1-ans');
+        buttons.forEach(b => b.addEventListener('click', () => answer(parseInt(b.dataset.idx, 10), buttons, q)));
+      }
+
+      function answer(idx, buttons, q) {
+        if (state.phase !== 'racing') return;
+        state.phase = 'between';
+        const correct = idx === q.correctIdx;
+        buttons.forEach(b => b.disabled = true);
+        buttons[q.correctIdx].classList.add('correct');
+        if (!correct) buttons[idx].classList.add('wrong');
+
+        if (correct) {
+          state.streak = Math.min(3, state.streak + 1);
+          const gain = state.streak >= 3 ? 2 : 1;
+          state.position = Math.max(1, state.position - gain);
+          state.score += 100 + (state.streak >= 3 ? 100 : 0);
+          if (state.streak === 3) sfxFastest(); else sfxCorrect();
+        } else {
+          state.streak = 0;
+          state.livesLost = Math.min(3, state.livesLost + 1);
+          state.position = Math.min(lvl.gridSize, state.position + 1);
+          sfxWrong();
+        }
+
+        later(1300, () => {
+          state.questionNum++;
+          if (state.livesLost >= 3 || state.questionNum >= totalQ) {
+            endLevel();
+          } else {
+            state.phase = 'racing';
+            renderRace();
+          }
+        });
+      }
+
+      function endLevel() {
+        state.phase = 'end';
+        const dnf = state.livesLost >= 3;
+        let stars = 0;
+        if (!dnf) {
+          if (state.position === 1)      stars = 3;
+          else if (state.position <= 3)  stars = 2;
+          else if (state.position <= 8)  stars = 1;
+          else stars = 0;
+        }
+        // Bonus: perfect run on Practice / Qualifying
+        if (!dnf && lvl.id <= 2 && state.streak >= 3 && state.score >= totalQ * 100) stars = Math.max(stars, 2);
+        callbacks.onComplete(state.score, stars);
+      }
+
+      // Boot
+      renderPick();
+
+      return function cleanup() {
+        timeouts.forEach(clearTimeout);
+        timeouts = [];
+      };
+    },
+  };
+})();
 
 document.addEventListener('DOMContentLoaded', () => {
   Save.load();
