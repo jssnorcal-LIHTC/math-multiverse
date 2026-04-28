@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza Shop Fractions - Math Game</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Trebuchet MS', 'Comic Sans MS', sans-serif;
+    background: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #ff9f43 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 12s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #2c3e50;
+    overflow-x: hidden;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .game-container {
+    background: #fff8e7;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35), 0 0 0 8px rgba(255,255,255,0.3);
+    padding: 28px;
+    max-width: 720px;
+    width: 100%;
+    position: relative;
+  }
+
+  h1 {
+    text-align: center;
+    color: #c0392b;
+    font-size: 2.4em;
+    margin-bottom: 8px;
+    text-shadow: 3px 3px 0 #f39c12, 6px 6px 0 rgba(0,0,0,0.1);
+    letter-spacing: 1px;
+  }
+
+  .tagline {
+    text-align: center;
+    font-size: 1.1em;
+    color: #7f8c8d;
+    margin-bottom: 18px;
+  }
+
+  /* HEADER STATS */
+  .header {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    background: #2c3e50;
+    color: white;
+    padding: 14px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-size: 0.75em;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .stat-val {
+    font-size: 1.4em;
+    color: #f39c12;
+  }
+
+  .lives-display { font-size: 1.3em; letter-spacing: 2px; }
+
+  /* PROGRESS BAR */
+  .progress-wrap {
+    background: #ecf0f1;
+    height: 14px;
+    border-radius: 7px;
+    overflow: hidden;
+    margin-bottom: 6px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .progress-fill {
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+    height: 100%;
+    transition: width 0.4s ease;
+    border-radius: 7px;
+  }
+
+  .progress-label {
+    text-align: center;
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin-bottom: 14px;
+  }
+
+  /* CUSTOMER AREA */
+  .customer-area {
+    background: linear-gradient(135deg, #fff 0%, #ecf0f1 100%);
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 16px;
+    text-align: center;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+    position: relative;
+    min-height: 220px;
+  }
+
+  .customer {
+    font-size: 4.5em;
+    display: inline-block;
+    animation: bobble 2s ease-in-out infinite;
+    filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.2));
+  }
+
+  @keyframes bobble {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-6px) rotate(2deg); }
+  }
+
+  .customer-name {
+    font-weight: bold;
+    color: #c0392b;
+    margin-top: -4px;
+    margin-bottom: 8px;
+  }
+
+  .speech-bubble {
+    background: white;
+    border: 3px solid #2c3e50;
+    border-radius: 18px;
+    padding: 16px 20px;
+    margin-top: 10px;
+    font-size: 1.15em;
+    line-height: 1.4;
+    position: relative;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .speech-bubble::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 30px;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 16px solid #2c3e50;
+  }
+
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 33px;
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 13px solid white;
+  }
+
+  .equation {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #c0392b;
+    text-align: center;
+    margin: 14px 0 6px 0;
+    letter-spacing: 1px;
+  }
+
+  /* PIZZA VISUALIZATION */
+  .pizza-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 12px 0;
+    flex-wrap: wrap;
+  }
+
+  .pizza-block {
+    text-align: center;
+  }
+
+  .pizza {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid #8b4513;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    position: relative;
+  }
+
+  .pizza-frac {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 6px;
+  }
+
+  /* ANSWER BUTTONS */
+  .answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .answer-btn {
+    background: linear-gradient(135deg, #3498db, #2874a6);
+    color: white;
+    border: none;
+    padding: 18px;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+    box-shadow: 0 5px 0 #1a5276, 0 8px 16px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .answer-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 #1a5276, 0 10px 20px rgba(0,0,0,0.2);
+  }
+
+  .answer-btn:active:not(:disabled) {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #1a5276;
+  }
+
+  .answer-btn:disabled { cursor: not-allowed; opacity: 0.85; }
+
+  .answer-btn.correct {
+    background: linear-gradient(135deg, #2ecc71, #229954);
+    box-shadow: 0 5px 0 #196f3d;
+    animation: correctPop 0.6s ease;
+  }
+
+  .answer-btn.wrong {
+    background: linear-gradient(135deg, #e74c3c, #a93226);
+    box-shadow: 0 5px 0 #6e2c1f;
+    animation: wrongShake 0.5s ease;
+  }
+
+  .answer-btn.faded { opacity: 0.4; }
+
+  @keyframes correctPop {
+    0%, 100% { transform: scale(1); }
+    30% { transform: scale(1.15); }
+    60% { transform: scale(0.95); }
+  }
+
+  @keyframes wrongShake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-12px); }
+    40% { transform: translateX(12px); }
+    60% { transform: translateX(-8px); }
+    80% { transform: translateX(8px); }
+  }
+
+  /* FLOATING POINTS */
+  .float-points {
+    position: absolute;
+    font-size: 2em;
+    font-weight: bold;
+    color: #f39c12;
+    text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(0,0,0,0.2);
+    pointer-events: none;
+    animation: floatUp 1.2s ease-out forwards;
+    z-index: 100;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+    100% { transform: translateY(-120px) scale(1); opacity: 0; }
+  }
+
+  /* CONFETTI */
+  .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    z-index: 200;
+    animation: confettiFall 2s linear forwards;
+  }
+
+  @keyframes confettiFall {
+    0% { transform: translateY(-20px) rotate(0); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* SCREENS */
+  .screen { padding: 20px; text-align: center; }
+
+  .screen h1 { margin-bottom: 14px; }
+
+  .screen p { font-size: 1.15em; margin: 12px 0; line-height: 1.5; }
+
+  .difficulty-selector {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 18px 0;
+    flex-wrap: wrap;
+  }
+
+  .diff-btn {
+    background: white;
+    border: 3px solid #3498db;
+    color: #3498db;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+
+  .diff-btn:hover { transform: translateY(-2px); }
+
+  .diff-btn.selected {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+  }
+
+  .play-btn {
+    background: linear-gradient(135deg, #e74c3c, #a93226);
+    color: white;
+    border: none;
+    padding: 18px 36px;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 14px;
+    cursor: pointer;
+    margin-top: 12px;
+    box-shadow: 0 6px 0 #6e2c1f, 0 10px 20px rgba(0,0,0,0.2);
+    transition: all 0.2s;
+    font-family: inherit;
+    letter-spacing: 1px;
+  }
+
+  .play-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #6e2c1f, 0 12px 24px rgba(0,0,0,0.25);
+  }
+
+  .play-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 #6e2c1f;
+  }
+
+  .best-score {
+    background: #fff3cd;
+    border: 2px dashed #f39c12;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 16px 0;
+    font-size: 1.1em;
+  }
+
+  .rank-badge {
+    font-size: 4em;
+    margin: 16px 0;
+  }
+
+  .stats-summary {
+    background: white;
+    border-radius: 14px;
+    padding: 16px;
+    margin: 16px 0;
+    text-align: left;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #ecf0f1;
+  }
+
+  .stat-row:last-child { border-bottom: none; }
+
+  .hidden { display: none !important; }
+
+  /* STREAK FIRE */
+  .streak-fire {
+    display: inline-block;
+    animation: flicker 0.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes flicker {
+    from { transform: scale(1); }
+    to { transform: scale(1.2) rotate(5deg); }
+  }
+
+  /* TOAST MESSAGE */
+  .toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    background: #2c3e50;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.4s ease;
+    z-index: 300;
+    font-size: 1.1em;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  .toast.success { background: #27ae60; }
+  .toast.warn { background: #e67e22; }
+
+  @media (max-width: 600px) {
+    .header { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .answers { grid-template-columns: 1fr; }
+    h1 { font-size: 1.8em; }
+    .equation { font-size: 1.3em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="game-container">
+
+  <!-- START SCREEN -->
+  <div id="start-screen" class="screen">
+    <h1>🍕 Pizza Shop Fractions 🍕</h1>
+    <p class="tagline">Help customers, solve fractions, become a Master Chef!</p>
+
+    <p>Customers are pouring in!  Solve their fraction orders before you run out of patience (lives).  Build streaks for bonus points!</p>
+
+    <h3 style="margin-top: 20px;">Choose your level:</h3>
+    <div class="difficulty-selector">
+      <button class="diff-btn selected" data-diff="easy">🌱 Apprentice<br><small>denominators 2-4</small></button>
+      <button class="diff-btn" data-diff="medium">🍕 Chef<br><small>denominators 2-8</small></button>
+      <button class="diff-btn" data-diff="hard">👨‍🍳 Master<br><small>2-12, all ops</small></button>
+    </div>
+
+    <div class="best-score">
+      🏆 Best Score: <strong id="best-score-display">0</strong>
+    </div>
+
+    <button class="play-btn" onclick="startGame()">START GAME 🎮</button>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="game-screen" class="hidden">
+    <div class="header">
+      <div class="stat">
+        <div class="stat-label">Score</div>
+        <div class="stat-val" id="score-display">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Lives</div>
+        <div class="stat-val lives-display" id="lives-display">❤️❤️❤️</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Streak</div>
+        <div class="stat-val" id="streak-display">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Coins</div>
+        <div class="stat-val" id="coins-display">🪙 0</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+    </div>
+    <div class="progress-label">Customer <span id="q-num">1</span> of <span id="q-total">10</span></div>
+
+    <div class="customer-area">
+      <div class="customer" id="customer-emoji">😊</div>
+      <div class="customer-name" id="customer-name">Maya</div>
+      <div class="speech-bubble" id="speech-bubble">
+        <div id="problem-text">Loading...</div>
+        <div class="equation" id="equation"></div>
+        <div class="pizza-row" id="pizza-visual"></div>
+      </div>
+    </div>
+
+    <div class="answers" id="answers"></div>
+  </div>
+
+  <!-- LEVEL COMPLETE -->
+  <div id="complete-screen" class="screen hidden">
+    <div class="rank-badge" id="rank-emoji">🏆</div>
+    <h1 id="complete-title">Level Complete!</h1>
+    <p id="complete-message" style="font-size: 1.3em;"></p>
+
+    <div class="stats-summary">
+      <div class="stat-row">
+        <span>Final Score:</span>
+        <strong id="final-score">0</strong>
+      </div>
+      <div class="stat-row">
+        <span>Best Streak:</span>
+        <strong id="final-streak">0</strong>
+      </div>
+      <div class="stat-row">
+        <span>Coins Earned:</span>
+        <strong id="final-coins">🪙 0</strong>
+      </div>
+      <div class="stat-row">
+        <span>Accuracy:</span>
+        <strong id="final-accuracy">0%</strong>
+      </div>
+    </div>
+
+    <button class="play-btn" onclick="resetToStart()">PLAY AGAIN 🔄</button>
+  </div>
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+//=========================================
+// GAME STATE
+//=========================================
+const state = {
+  difficulty: 'easy',
+  score: 0,
+  lives: 3,
+  streak: 0,
+  bestStreak: 0,
+  coins: 0,
+  questionNum: 0,
+  totalQuestions: 10,
+  correct: 0,
+  answered: false,
+  currentProblem: null
+};
+
+const customers = ['😊', '😎', '🤓', '😋', '🥳', '🤠', '😇', '🦸', '🧙', '🥷', '🐱', '🐶', '🦊', '🐼', '🐰'];
+const customerNames = ['Maya', 'Jake', 'Zoe', 'Theo', 'Luna', 'Max', 'Ava', 'Sam', 'Mia', 'Leo', 'Ruby', 'Finn', 'Iris', 'Owen', 'Nora'];
+
+//=========================================
+// MATH HELPERS
+//=========================================
+function gcd(a, b) {
+  a = Math.abs(a); b = Math.abs(b);
+  return b === 0 ? a : gcd(b, a % b);
+}
+
+function lcm(a, b) {
+  return Math.abs(a * b) / gcd(a, b);
+}
+
+function simplify(num, den) {
+  if (den === 0) return [num, 1];
+  if (num === 0) return [0, 1];
+  const g = gcd(num, den);
+  return [num / g, den / g];
+}
+
+function fracEqual(n1, d1, n2, d2) {
+  return n1 * d2 === n2 * d1;
+}
+
+function rand(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function pick(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function fracToString(num, den) {
+  [num, den] = simplify(num, den);
+  if (den === 1) return `${num}`;
+  if (num === 0) return '0';
+  if (Math.abs(num) >= den) {
+    const whole = Math.floor(Math.abs(num) / den);
+    const rem = Math.abs(num) % den;
+    const sign = num < 0 ? '-' : '';
+    if (rem === 0) return `${sign}${whole}`;
+    return `${sign}${whole} ${rem}/${den}`;
+  }
+  return `${num}/${den}`;
+}
+
+function fracToSimpleString(num, den) {
+  [num, den] = simplify(num, den);
+  if (den === 1) return `${num}`;
+  return `${num}/${den}`;
+}
+
+//=========================================
+// PROBLEM GENERATORS
+//=========================================
+function genAdd(maxDen) {
+  const d1 = rand(2, maxDen);
+  const d2 = rand(2, maxDen);
+  const n1 = rand(1, d1 - 1);
+  const n2 = rand(1, d2 - 1);
+  const L = lcm(d1, d2);
+  const sumNum = n1 * (L / d1) + n2 * (L / d2);
+
+  return {
+    text: pick([
+      `Hi!  I'd like ${fracToString(n1,d1)} of a pepperoni pizza AND ${fracToString(n2,d2)} of a cheese pizza.  How much pizza is that?`,
+      `Can I get ${fracToString(n1,d1)} of a veggie pizza plus ${fracToString(n2,d2)} of a sausage pizza?  How much total?`,
+      `I'll have ${fracToString(n1,d1)} of a Hawaiian and add ${fracToString(n2,d2)} of a margherita.  Total please!`
+    ]),
+    equation: `${n1}/${d1} + ${n2}/${d2} = ?`,
+    answer: { num: sumNum, den: L },
+    visualize: [{n: n1, d: d1, color: '#e74c3c'}, {n: n2, d: d2, color: '#f39c12'}]
+  };
+}
+
+function genSub(maxDen) {
+  const d1 = rand(2, maxDen);
+  const d2 = rand(2, maxDen);
+  const L = lcm(d1, d2);
+  let n1 = rand(1, d1 - 1);
+  let n2 = rand(1, d2 - 1);
+
+  let v1 = n1 * (L / d1);
+  let v2 = n2 * (L / d2);
+  if (v1 < v2) { [v1, v2] = [v2, v1]; [n1, n2] = [n2, n1]; [d1, d2] = [d2, d1]; }
+  if (v1 === v2) v2 = Math.max(1, v2 - 1);
+
+  const diffNum = n1 * (L / d1) - n2 * (L / d2);
+
+  return {
+    text: pick([
+      `I had ${fracToString(n1,d1)} of a pizza, but I gave away ${fracToString(n2,d2)}.  How much do I have left?`,
+      `My pizza is ${fracToString(n1,d1)} full.  My friend ate ${fracToString(n2,d2)}.  How much remains?`,
+      `Started with ${fracToString(n1,d1)} pizza, ate ${fracToString(n2,d2)}.  What's left?`
+    ]),
+    equation: `${n1}/${d1} − ${n2}/${d2} = ?`,
+    answer: { num: diffNum, den: L },
+    visualize: [{n: n1, d: d1, color: '#e74c3c'}, {n: n2, d: d2, color: '#95a5a6'}]
+  };
+}
+
+function genMultFrac(maxDen) {
+  const d1 = rand(2, Math.min(maxDen, 6));
+  const d2 = rand(2, Math.min(maxDen, 6));
+  const n1 = rand(1, d1 - 1);
+  const n2 = rand(1, d2 - 1);
+
+  return {
+    text: pick([
+      `I want ${fracToString(n1,d1)} of ${fracToString(n2,d2)} of a pizza.  How much is that?`,
+      `Give me ${fracToString(n1,d1)} of a pizza that's already only ${fracToString(n2,d2)} a pizza.  How much pizza?`,
+      `My recipe needs ${fracToString(n1,d1)} cup of sauce, but I'm only making ${fracToString(n2,d2)} of the recipe.  How much sauce?`
+    ]),
+    equation: `${n1}/${d1} × ${n2}/${d2} = ?`,
+    answer: { num: n1 * n2, den: d1 * d2 },
+    visualize: [{n: n1, d: d1, color: '#e74c3c'}, {n: n2, d: d2, color: '#f39c12'}]
+  };
+}
+
+function genMultWhole(maxDen) {
+  const d = rand(2, maxDen);
+  const n = rand(1, d - 1);
+  const w = rand(2, 6);
+
+  return {
+    text: pick([
+      `I need ${w} servings, each is ${fracToString(n,d)} of a pizza.  How much pizza total?`,
+      `${w} pizzas, each cut so I take ${fracToString(n,d)} of each.  Total amount?`,
+      `My recipe uses ${fracToString(n,d)} cup flour per batch.  Make ${w} batches.  Total flour?`
+    ]),
+    equation: `${w} × ${n}/${d} = ?`,
+    answer: { num: w * n, den: d },
+    visualize: [{n: n, d: d, color: '#e74c3c'}]
+  };
+}
+
+function genDivWholeByUnit(maxDen) {
+  const d = rand(2, Math.min(maxDen, 6));
+  const w = rand(1, 5);
+
+  return {
+    text: pick([
+      `I have ${w} whole pizzas.  I cut each into pieces of size 1/${d}.  How many pieces total?`,
+      `${w} pizzas, slice each into 1/${d} chunks.  How many chunks?`,
+      `${w} sticks of butter, each cut into 1/${d} pieces.  Total pieces?`
+    ]),
+    equation: `${w} ÷ 1/${d} = ?`,
+    answer: { num: w * d, den: 1 },
+    visualize: []
+  };
+}
+
+function genDivUnitByWhole(maxDen) {
+  const d = rand(2, Math.min(maxDen, 6));
+  const w = rand(2, 5);
+
+  return {
+    text: pick([
+      `I have 1/${d} of a pizza to share equally with ${w} friends.  How much does each get?`,
+      `Split 1/${d} of a cake among ${w} people equally.  Each share?`,
+      `${w} kids share 1/${d} of a pizza equally.  Each kid gets?`
+    ]),
+    equation: `1/${d} ÷ ${w} = ?`,
+    answer: { num: 1, den: d * w },
+    visualize: []
+  };
+}
+
+function generateProblem() {
+  let types;
+  let maxDen;
+
+  if (state.difficulty === 'easy') {
+    types = [genAdd, genSub, genAdd, genMultWhole];
+    maxDen = 4;
+  } else if (state.difficulty === 'medium') {
+    types = [genAdd, genSub, genMultFrac, genMultWhole, genDivWholeByUnit];
+    maxDen = 8;
+  } else {
+    types = [genAdd, genSub, genMultFrac, genMultWhole, genDivWholeByUnit, genDivUnitByWhole];
+    maxDen = 12;
+  }
+
+  const generator = pick(types);
+  return generator(maxDen);
+}
+
+//=========================================
+// ANSWER CHOICES
+//=========================================
+function generateChoices(problem) {
+  const correct = problem.answer;
+  const correctStr = fracToString(correct.num, correct.den);
+
+  const choices = new Set([correctStr]);
+  let attempts = 0;
+
+  while (choices.size < 4 && attempts < 50) {
+    attempts++;
+    const distractor = makeDistractor(problem);
+    if (distractor && distractor !== correctStr) {
+      choices.add(distractor);
+    }
+  }
+
+  while (choices.size < 4) {
+    const altNum = correct.num + rand(-3, 3);
+    const altDen = Math.max(1, correct.den + rand(-2, 2));
+    const s = fracToString(altNum, altDen);
+    if (s !== correctStr) choices.add(s);
+  }
+
+  const arr = Array.from(choices);
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+
+  return arr.map(text => ({ text, correct: text === correctStr }));
+}
+
+function makeDistractor(problem) {
+  const eq = problem.equation;
+  const correct = problem.answer;
+
+  if (eq.includes('+')) {
+    const [, a, b, c, d] = eq.match(/(\d+)\/(\d+)\s*\+\s*(\d+)\/(\d+)/) || [];
+    if (a) {
+      const trick = pick([
+        () => fracToString(+a + +c, +b + +d),
+        () => fracToString(+a + +c, Math.max(+b, +d)),
+        () => fracToString(correct.num + rand(1,2), correct.den),
+        () => fracToString(correct.num, correct.den + 1)
+      ]);
+      return trick();
+    }
+  } else if (eq.includes('−') || eq.includes('-')) {
+    const [, a, b, c, d] = eq.match(/(\d+)\/(\d+)\s*[−-]\s*(\d+)\/(\d+)/) || [];
+    if (a) {
+      const trick = pick([
+        () => fracToString(+a - +c, +b - +d || 1),
+        () => fracToString(+a - +c, Math.max(+b, +d)),
+        () => fracToString(correct.num + 1, correct.den),
+        () => fracToString(correct.num, correct.den - 1 || 1)
+      ]);
+      return trick();
+    }
+  } else if (eq.includes('×')) {
+    const [, a, b, c, d] = eq.match(/(\d+)(?:\/(\d+))?\s*×\s*(\d+)(?:\/(\d+))?/) || [];
+    if (a) {
+      const trick = pick([
+        () => fracToString((+a) + (+c), (+b||1) + (+d||1)),
+        () => fracToString(correct.num + rand(1,3), correct.den),
+        () => fracToString(correct.num, correct.den * 2),
+        () => fracToString(correct.num + correct.den, correct.den)
+      ]);
+      return trick();
+    }
+  } else if (eq.includes('÷')) {
+    return pick([
+      fracToString(correct.num + rand(1,3), correct.den),
+      fracToString(Math.max(1, correct.num - 1), correct.den),
+      fracToString(correct.num, correct.den + rand(1,3)),
+      fracToString(correct.num * 2, correct.den)
+    ]);
+  }
+
+  return fracToString(correct.num + rand(-2, 2), correct.den + rand(-1, 1));
+}
+
+//=========================================
+// PIZZA VISUALIZATION
+//=========================================
+function makePizzaSVG(num, den, color) {
+  const angle = (num / den) * 360;
+  const colorStr = color || '#e74c3c';
+
+  const gradient = num >= den
+    ? colorStr
+    : `conic-gradient(${colorStr} ${angle}deg, #fffacd ${angle}deg)`;
+
+  return `
+    <div class="pizza-block">
+      <div class="pizza" style="background: ${gradient};"></div>
+      <div class="pizza-frac">${fracToString(num, den)}</div>
+    </div>
+  `;
+}
+
+//=========================================
+// SOUND
+//=========================================
+let audioCtx;
+function getAudioCtx() {
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    catch (e) { audioCtx = null; }
+  }
+  return audioCtx;
+}
+
+function beep(freq, duration, type = 'sine', volume = 0.15) {
+  const ctx = getAudioCtx();
+  if (!ctx) return;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.type = type;
+  osc.frequency.value = freq;
+  gain.gain.setValueAtTime(volume, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+  osc.start();
+  osc.stop(ctx.currentTime + duration);
+}
+
+function playCorrect() {
+  beep(523, 0.1);
+  setTimeout(() => beep(659, 0.1), 100);
+  setTimeout(() => beep(784, 0.18), 200);
+}
+
+function playWrong() {
+  beep(220, 0.15, 'square', 0.12);
+  setTimeout(() => beep(180, 0.25, 'square', 0.12), 150);
+}
+
+function playStreak() {
+  beep(880, 0.08);
+  setTimeout(() => beep(1047, 0.08), 80);
+  setTimeout(() => beep(1318, 0.15), 160);
+}
+
+function playFanfare() {
+  beep(523, 0.15);
+  setTimeout(() => beep(659, 0.15), 150);
+  setTimeout(() => beep(784, 0.15), 300);
+  setTimeout(() => beep(1047, 0.4), 450);
+}
+
+//=========================================
+// UI / GAME FLOW
+//=========================================
+function showScreen(id) {
+  ['start-screen', 'game-screen', 'complete-screen'].forEach(s => {
+    document.getElementById(s).classList.add('hidden');
+  });
+  document.getElementById(id).classList.remove('hidden');
+}
+
+function startGame() {
+  state.score = 0;
+  state.lives = 3;
+  state.streak = 0;
+  state.bestStreak = 0;
+  state.coins = 0;
+  state.questionNum = 0;
+  state.correct = 0;
+  state.totalQuestions = 10;
+
+  updateHUD();
+  showScreen('game-screen');
+  nextQuestion();
+}
+
+function nextQuestion() {
+  if (state.questionNum >= state.totalQuestions || state.lives <= 0) {
+    return endGame();
+  }
+
+  state.questionNum++;
+  state.answered = false;
+  state.currentProblem = generateProblem();
+
+  document.getElementById('customer-emoji').textContent = pick(customers);
+  document.getElementById('customer-name').textContent = pick(customerNames);
+  document.getElementById('problem-text').textContent = state.currentProblem.text;
+  document.getElementById('equation').textContent = state.currentProblem.equation;
+
+  const visualHTML = state.currentProblem.visualize
+    .map(v => makePizzaSVG(v.n, v.d, v.color)).join('');
+  document.getElementById('pizza-visual').innerHTML = visualHTML;
+
+  const choices = generateChoices(state.currentProblem);
+  const answersDiv = document.getElementById('answers');
+  answersDiv.innerHTML = '';
+
+  choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn';
+    btn.textContent = c.text;
+    btn.onclick = () => handleAnswer(btn, c.correct);
+    answersDiv.appendChild(btn);
+  });
+
+  updateHUD();
+}
+
+function handleAnswer(btn, isCorrect) {
+  if (state.answered) return;
+  state.answered = true;
+
+  document.querySelectorAll('.answer-btn').forEach(b => {
+    b.disabled = true;
+    if (b !== btn) b.classList.add('faded');
+  });
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    state.correct++;
+    state.streak++;
+    if (state.streak > state.bestStreak) state.bestStreak = state.streak;
+
+    let points = 10;
+    if (state.streak >= 3) points += 5;
+    if (state.streak >= 5) points += 5;
+    if (state.streak >= 8) points += 10;
+
+    state.score += points;
+    state.coins += 1 + Math.floor(state.streak / 3);
+
+    spawnFloatPoints(btn, `+${points}`);
+    playCorrect();
+
+    if (state.streak === 3) {
+      showToast('🔥 3-streak!  +5 bonus per answer!', 'success');
+      playStreak();
+    } else if (state.streak === 5) {
+      showToast('🔥🔥 5-streak!  ON FIRE!', 'success');
+      playStreak();
+      spawnConfetti();
+    } else if (state.streak === 8) {
+      showToast('🔥🔥🔥 LEGENDARY 8-STREAK!', 'success');
+      playStreak();
+      spawnConfetti();
+    }
+  } else {
+    btn.classList.add('wrong');
+    state.streak = 0;
+    state.lives--;
+
+    document.querySelectorAll('.answer-btn').forEach(b => {
+      if (b.textContent === fracToString(state.currentProblem.answer.num, state.currentProblem.answer.den)) {
+        setTimeout(() => b.classList.add('correct'), 300);
+      }
+    });
+
+    playWrong();
+
+    if (state.lives === 0) {
+      showToast('💔 Game over!', 'warn');
+    } else {
+      showToast(`The right answer was ${fracToString(state.currentProblem.answer.num, state.currentProblem.answer.den)}`, 'warn');
+    }
+  }
+
+  updateHUD();
+
+  setTimeout(() => nextQuestion(), 2200);
+}
+
+function spawnFloatPoints(near, text) {
+  const rect = near.getBoundingClientRect();
+  const div = document.createElement('div');
+  div.className = 'float-points';
+  div.textContent = text;
+  div.style.left = (rect.left + rect.width / 2 - 30) + 'px';
+  div.style.top = (rect.top - 10) + 'px';
+  div.style.position = 'fixed';
+  document.body.appendChild(div);
+  setTimeout(() => div.remove(), 1300);
+}
+
+function spawnConfetti() {
+  const colors = ['#e74c3c', '#f39c12', '#2ecc71', '#3498db', '#9b59b6', '#1abc9c'];
+  for (let i = 0; i < 40; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = pick(colors);
+    c.style.animationDelay = Math.random() * 0.5 + 's';
+    c.style.animationDuration = (1.5 + Math.random()) + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 2500);
+  }
+}
+
+function showToast(msg, type = '') {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = 'toast show ' + type;
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+function updateHUD() {
+  document.getElementById('score-display').textContent = state.score;
+  document.getElementById('lives-display').textContent = '❤️'.repeat(state.lives) + '🖤'.repeat(3 - state.lives);
+  document.getElementById('streak-display').innerHTML = state.streak >= 3 ? `${state.streak} <span class="streak-fire">🔥</span>` : state.streak;
+  document.getElementById('coins-display').textContent = '🪙 ' + state.coins;
+  document.getElementById('q-num').textContent = state.questionNum;
+  document.getElementById('q-total').textContent = state.totalQuestions;
+  document.getElementById('progress-fill').style.width = (state.questionNum / state.totalQuestions * 100) + '%';
+}
+
+function endGame() {
+  const isWin = state.lives > 0;
+  const accuracy = state.questionNum > 0 ? Math.round(state.correct / state.questionNum * 100) : 0;
+
+  let rankEmoji, rankTitle, rankMsg;
+
+  if (state.lives === 0) {
+    rankEmoji = '💔';
+    rankTitle = 'Game Over';
+    rankMsg = "Don't give up!  Even master chefs make mistakes.  Try again!";
+  } else if (accuracy >= 90 && state.bestStreak >= 5) {
+    rankEmoji = '👑';
+    rankTitle = 'PIZZA LEGEND!';
+    rankMsg = 'Incredible!  You served everyone perfectly!';
+    playFanfare();
+    spawnConfetti();
+  } else if (accuracy >= 80) {
+    rankEmoji = '👨‍🍳';
+    rankTitle = 'Master Chef!';
+    rankMsg = 'Excellent work!  The shop is thriving!';
+    playFanfare();
+    spawnConfetti();
+  } else if (accuracy >= 60) {
+    rankEmoji = '🍕';
+    rankTitle = 'Solid Chef!';
+    rankMsg = 'Good job!  Keep practicing those fractions!';
+    playCorrect();
+  } else {
+    rankEmoji = '🌱';
+    rankTitle = 'Keep Practicing!';
+    rankMsg = 'Every chef starts somewhere.  Try again and improve!';
+  }
+
+  document.getElementById('rank-emoji').textContent = rankEmoji;
+  document.getElementById('complete-title').textContent = rankTitle;
+  document.getElementById('complete-message').textContent = rankMsg;
+  document.getElementById('final-score').textContent = state.score;
+  document.getElementById('final-streak').textContent = state.bestStreak;
+  document.getElementById('final-coins').textContent = '🪙 ' + state.coins;
+  document.getElementById('final-accuracy').textContent = accuracy + '%';
+
+  const best = parseInt(localStorage.getItem('pizzaShopBest') || '0');
+  if (state.score > best) {
+    localStorage.setItem('pizzaShopBest', state.score);
+    setTimeout(() => showToast('🏆 NEW HIGH SCORE!', 'success'), 600);
+  }
+
+  showScreen('complete-screen');
+}
+
+function resetToStart() {
+  document.getElementById('best-score-display').textContent = localStorage.getItem('pizzaShopBest') || '0';
+  showScreen('start-screen');
+}
+
+//=========================================
+// INIT
+//=========================================
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('best-score-display').textContent = localStorage.getItem('pizzaShopBest') || '0';
+
+  document.querySelectorAll('.diff-btn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.difficulty = btn.dataset.diff;
+    };
+  });
+
+  document.addEventListener('click', () => { getAudioCtx(); }, { once: true });
+});
+</script>
+
+</body>
+</html>

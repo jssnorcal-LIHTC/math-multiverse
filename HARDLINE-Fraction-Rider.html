@@ -1,0 +1,2632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HARDLINE · Fraction Rider</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-darkest: #08090b;
+    --bg-base: #0e1015;
+    --bg-card: #15181f;
+    --bg-elevated: #1d2129;
+    --bg-hover: #252934;
+
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-strong: rgba(255, 255, 255, 0.14);
+
+    --text-primary: #f0f4f8;
+    --text-secondary: #a0a8b3;
+    --text-muted: #6b7280;
+    --text-dim: #4b5563;
+
+    --rb-red: #ee1d52;
+    --rb-yellow: #ffcc00;
+    --rb-blue: #1e3a8a;
+
+    --acc-electric: #00d9ff;
+    --acc-lime: #a3e635;
+    --acc-amber: #f59e0b;
+    --acc-orange: #ff6b35;
+    --acc-crimson: #ef4444;
+    --acc-purple: #a855f7;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+    --shadow-lg: 0 16px 48px rgba(0,0,0,0.6);
+
+    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  html { font-size: 16px; }
+
+  html, body { height: 100%; overflow: hidden; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, system-ui, sans-serif;
+    font-feature-settings: 'tnum' 1, 'cv11' 1;
+    background: var(--bg-darkest);
+    background-image:
+      radial-gradient(ellipse 50% 40% at 0% 0%, rgba(238, 29, 82, 0.08), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 100% 100%, rgba(255, 204, 0, 0.05), transparent 60%),
+      radial-gradient(ellipse 80% 50% at 50% 50%, rgba(0,0,0,0.3), transparent 70%);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* TOPOGRAPHIC BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(135deg, transparent 0, transparent 79px, rgba(255,255,255,0.018) 80px, rgba(255,255,255,0.018) 81px),
+      repeating-linear-gradient(45deg, transparent 0, transparent 119px, rgba(255,255,255,0.012) 120px, rgba(255,255,255,0.012) 121px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(238, 29, 82, 0.04), transparent 25%),
+      radial-gradient(circle at 80% 70%, rgba(255, 204, 0, 0.03), transparent 30%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .game-container {
+    background: var(--bg-base);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 14px 16px;
+    max-width: 1180px;
+    width: 100%;
+    max-height: calc(100vh - 24px);
+    position: relative;
+    z-index: 1;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  /* Game screen uses 2-column layout for widescreen */
+  #game-screen {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+    gap: 14px;
+    height: 100%;
+    min-height: calc(100vh - 56px);
+    overflow: hidden;
+  }
+
+  .col-left, .col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .col-left .sur-ronster-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    min-height: 0;
+    max-height: 360px;
+  }
+
+  .col-left .trail-scene {
+    flex: 1;
+    height: auto !important;
+    min-height: 160px;
+    max-height: 280px;
+  }
+
+  .col-right .customer-area { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+  .col-right .answers { margin-top: 0; }
+  .col-right .answer-btn { padding: 18px 14px; font-size: 1.25rem; }
+
+  /* Start screen stays single column centered */
+  #start-screen { max-width: 600px; margin: 0 auto; }
+  #complete-screen { max-width: 540px; margin: 0 auto; }
+
+  /* BRAND MARK */
+  .brand-mark {
+    text-align: center;
+    margin-bottom: 14px;
+  }
+
+  .bull-tag {
+    display: inline-block;
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: var(--rb-yellow);
+    background: var(--rb-red);
+    padding: 3px 9px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+    transform: skewX(-12deg);
+  }
+
+  .bull-tag span { display: inline-block; transform: skewX(12deg); }
+
+  h1 {
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    font-stretch: condensed;
+    text-shadow: 0 4px 24px rgba(238, 29, 82, 0.3);
+  }
+
+  .brand-sub {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+    padding-top: 6px;
+    border-top: 1px solid var(--border-subtle);
+    display: inline-block;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  /* HERO TEXT */
+  .hero-text {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+    margin: 8px auto;
+    max-width: 540px;
+    text-align: center;
+  }
+
+  .hero-text strong { color: var(--text-primary); font-weight: 700; }
+
+  /* HEADER HUD - TELEMETRY BAR */
+  .header {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 7px 6px;
+    position: relative;
+    background: var(--bg-card);
+  }
+
+  .stat:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 25%;
+    bottom: 25%;
+    width: 1px;
+    background: var(--border-subtle);
+  }
+
+  .stat-label {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .stat-val {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-feature-settings: 'tnum' 1;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .stat-val .unit {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-left: 2px;
+  }
+
+  .lives-display {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    height: 18px;
+  }
+
+  .life-pip {
+    width: 6px;
+    height: 18px;
+    border-radius: 1px;
+    background: var(--acc-lime);
+    box-shadow: 0 0 6px rgba(163, 230, 53, 0.5);
+    transition: all 0.3s var(--ease-spring);
+  }
+
+  .life-pip.lost {
+    background: var(--bg-elevated);
+    box-shadow: none;
+  }
+
+  .streak-icon {
+    color: var(--rb-yellow);
+    margin-right: 3px;
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    background: var(--bg-card);
+    height: 3px;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 3px;
+  }
+
+  .progress-fill {
+    background: linear-gradient(90deg, var(--rb-red), var(--rb-yellow));
+    height: 100%;
+    transition: width 0.4s var(--ease-spring);
+    box-shadow: 0 0 8px rgba(238, 29, 82, 0.4);
+  }
+
+  .progress-label {
+    text-align: center;
+    font-size: 0.5625rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  /* SUR RONSTER · LIVE TRAIL FEED */
+  .sur-ronster-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .sr-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border-subtle);
+    position: relative;
+    z-index: 5;
+    flex-wrap: wrap;
+  }
+
+  /* TRAIL SCENE - LIVE VIDEO FEED */
+  .trail-scene {
+    position: relative;
+    height: clamp(140px, 22vh, 200px);
+    background: #000 url('sur-ronster.jpg') center/cover no-repeat;
+    overflow: hidden;
+    transition: filter 0.5s ease;
+  }
+
+  .trail-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.6s ease, transform 0.4s ease;
+    will-change: transform, filter;
+    filter: contrast(1.05) saturate(1.1);
+  }
+
+  /* Subtle lens vignette over video */
+  .trail-scene::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 50%, transparent 35%, rgba(0,0,0,0.55) 100%),
+      linear-gradient(180deg, rgba(0,0,0,0.25) 0%, transparent 25%, transparent 75%, rgba(0,0,0,0.55) 100%);
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .trail-scene::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(180deg, transparent, transparent 2px, rgba(255,255,255,0.018) 2px, rgba(255,255,255,0.018) 3px);
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  /* LIVE recording indicator - red blinking dot baked into video frame */
+  .rec-indicator {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(0,0,0,0.65);
+    padding: 3px 7px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.2);
+    pointer-events: none;
+  }
+
+  .rec-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ee1d52;
+    animation: recPulse 1.2s ease-in-out infinite;
+  }
+
+  @keyframes recPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(238,29,82,0.8); }
+    50% { opacity: 0.4; box-shadow: 0 0 0 rgba(238,29,82,0); }
+  }
+
+  .rec-text {
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  .rec-time {
+    color: var(--rb-yellow);
+    font-family: 'SF Mono', monospace;
+    font-size: 0.625rem;
+    margin-left: 4px;
+  }
+
+  /* Vignette + atmospheric overlay */
+  .trail-scene::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.45) 100%),
+      linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.5));
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .trail-scene::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(180deg, transparent, transparent 2px, rgba(255,255,255,0.018) 2px, rgba(255,255,255,0.018) 3px);
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  /* Hide the old parallax + SVG rider */
+  .trail-mountains,
+  .trail-mountains-back,
+  .trail-trees,
+  .trail-line,
+  .trail-ground,
+  .dust-trail,
+  .rider-wrap,
+  .rider,
+  .rider-shadow { display: none !important; }
+
+  /* PARALLAX MOUNTAINS - far layer */
+  .trail-mountains-back {
+    position: absolute;
+    bottom: 36%;
+    left: 0;
+    width: 200%;
+    height: 26px;
+    background: rgba(238, 29, 82, 0.18);
+    clip-path: polygon(0 100%, 5% 60%, 11% 88%, 17% 30%, 24% 75%, 30% 50%, 37% 95%, 43% 35%, 50% 70%, 56% 50%, 63% 85%, 69% 45%, 76% 80%, 82% 50%, 89% 92%, 95% 60%, 100% 75%, 100% 100%);
+    animation: scrollX 50s linear infinite;
+    z-index: 1;
+  }
+
+  .trail-mountains {
+    position: absolute;
+    bottom: 32%;
+    left: 0;
+    width: 200%;
+    height: 36px;
+    background: rgba(0,0,0,0.55);
+    clip-path: polygon(0 100%, 6% 50%, 12% 80%, 19% 25%, 26% 70%, 33% 45%, 40% 92%, 47% 20%, 54% 65%, 61% 35%, 68% 78%, 75% 50%, 82% 88%, 89% 35%, 96% 72%, 100% 55%, 100% 100%);
+    animation: scrollX 30s linear infinite;
+    z-index: 1;
+  }
+
+  /* TREES - mid parallax */
+  .trail-trees {
+    position: absolute;
+    bottom: 30%;
+    left: 0;
+    width: 200%;
+    font-size: 1.4rem;
+    letter-spacing: 28px;
+    white-space: nowrap;
+    filter: brightness(0.4) saturate(0.5);
+    z-index: 2;
+    opacity: 0.65;
+    animation: scrollX 8s linear infinite;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* HARDLINE RED ACCENT LINE */
+  .trail-line {
+    position: absolute;
+    bottom: 30%;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--rb-red) 30%, var(--rb-red) 70%, transparent);
+    opacity: 0.5;
+    box-shadow: 0 0 8px var(--rb-red);
+    z-index: 2;
+  }
+
+  /* GROUND - fastest scroll */
+  .trail-ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 30%;
+    background:
+      repeating-linear-gradient(90deg, transparent 0, transparent 32px, rgba(0,0,0,0.4) 32px, rgba(0,0,0,0.4) 34px),
+      linear-gradient(180deg, #4a3020 0%, #2a1810 60%, #1a0f08 100%);
+    animation: scrollX 1.4s linear infinite;
+    z-index: 2;
+  }
+
+  @keyframes scrollX {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SPEED LINES */
+  .speed-lines {
+    position: absolute;
+    inset: 8% 0 32% 0;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.7;
+    transition: opacity 0.5s;
+  }
+
+  .speed-line {
+    position: absolute;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+    border-radius: 2px;
+    animation: speedFly 0.55s linear infinite;
+  }
+
+  .speed-line:nth-child(1) { top: 12%; right: 8%; width: 38px; animation-delay: 0s; }
+  .speed-line:nth-child(2) { top: 32%; right: 28%; width: 52px; animation-delay: 0.18s; }
+  .speed-line:nth-child(3) { top: 55%; right: 12%; width: 28px; animation-delay: 0.36s; }
+  .speed-line:nth-child(4) { top: 78%; right: 38%; width: 44px; animation-delay: 0.1s; }
+  .speed-line:nth-child(5) { top: 22%; right: 52%; width: 24px; animation-delay: 0.42s; }
+  .speed-line:nth-child(6) { top: 65%; right: 60%; width: 32px; animation-delay: 0.25s; }
+
+  @keyframes speedFly {
+    0% { transform: translateX(80px); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateX(-120px); opacity: 0; }
+  }
+
+  /* DUST TRAIL behind rider's rear wheel (left side, since rider goes right) */
+  .dust-trail {
+    position: absolute;
+    bottom: 22%;
+    left: 32%;
+    width: 60px;
+    height: 32px;
+    z-index: 3;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+
+  .dust-puff {
+    position: absolute;
+    bottom: 0;
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(circle, rgba(180, 130, 80, 0.7), rgba(160, 110, 70, 0.25) 60%, transparent);
+    border-radius: 50%;
+    animation: dustFly 0.85s ease-out infinite;
+  }
+
+  .dust-puff:nth-child(1) { left: 0; animation-delay: 0s; }
+  .dust-puff:nth-child(2) { left: 12px; animation-delay: 0.2s; }
+  .dust-puff:nth-child(3) { left: 24px; animation-delay: 0.4s; }
+  .dust-puff:nth-child(4) { left: 36px; animation-delay: 0.6s; }
+
+  @keyframes dustFly {
+    0% { transform: translateX(0) translateY(0) scale(0.4); opacity: 0; }
+    15% { transform: translateX(-3px) translateY(-2px) scale(0.8); opacity: 0.8; }
+    100% { transform: translateX(-55px) translateY(-18px) scale(2.4); opacity: 0; }
+  }
+
+  /* RIDER - LARGE & CENTERED (SVG) */
+  .rider-wrap {
+    position: absolute;
+    bottom: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .rider-shadow {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 170px;
+    height: 16px;
+    background: radial-gradient(ellipse, rgba(0,0,0,0.7), transparent 70%);
+    filter: blur(5px);
+    z-index: 0;
+    animation: shadowPulse 0.5s ease-in-out infinite;
+  }
+
+  @keyframes shadowPulse {
+    0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.7; }
+    50% { transform: translateX(-50%) scaleX(0.88); opacity: 0.5; }
+  }
+
+  .rider {
+    width: 100%;
+    height: 100%;
+    line-height: 1;
+    display: block;
+    filter: drop-shadow(0 8px 14px rgba(0,0,0,0.65));
+    position: relative;
+    z-index: 5;
+    transition: filter 0.3s;
+  }
+
+  .rider svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+  .rider.cruise { animation: riderBob 0.45s ease-in-out infinite; }
+  .rider.wobble { animation: riderWobble 0.35s ease-in-out infinite; filter: drop-shadow(0 8px 14px rgba(245, 158, 11, 0.4)) hue-rotate(15deg); }
+  .rider.trouble { animation: riderTrouble 0.2s ease-in-out infinite; filter: drop-shadow(0 8px 14px rgba(239, 68, 68, 0.5)) hue-rotate(-15deg) saturate(1.3); }
+
+  @keyframes riderBob {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-5px) rotate(2deg); }
+  }
+
+  @keyframes riderWobble {
+    0%, 100% { transform: translateY(-2px) rotate(-10deg); }
+    50% { transform: translateY(4px) rotate(10deg); }
+  }
+
+  @keyframes riderTrouble {
+    0% { transform: translateY(-6px) rotate(-18deg) scale(1.05); }
+    33% { transform: translateY(4px) rotate(15deg) scale(0.95); }
+    66% { transform: translateY(-7px) rotate(-16deg) scale(1.06); }
+    100% { transform: translateY(4px) rotate(18deg) scale(0.96); }
+  }
+
+  /* SCENE STATE VARIATIONS - filters on the video */
+  .trail-scene.warn .trail-video {
+    filter: hue-rotate(-15deg) saturate(1.4) brightness(0.92) contrast(1.1);
+  }
+  .trail-scene.warn .speed-lines { opacity: 0.3; }
+
+  .trail-scene.danger {
+    animation: dangerFlicker 0.5s infinite;
+  }
+  .trail-scene.danger .trail-video {
+    filter: hue-rotate(-30deg) saturate(1.7) brightness(0.82) contrast(1.2);
+    animation: dangerShake 0.22s ease-in-out infinite;
+  }
+  .trail-scene.danger .speed-lines { opacity: 0; }
+
+  @keyframes dangerShake {
+    0%, 100% { transform: scale(1.1) translateX(0); }
+    25% { transform: scale(1.1) translateX(-3px) translateY(-1px); }
+    50% { transform: scale(1.1) translateX(3px) translateY(1px); }
+    75% { transform: scale(1.1) translateX(-2px) translateY(2px); }
+  }
+
+  @keyframes dangerFlicker {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.05); }
+  }
+
+  /* Tilt overlay - red tint at danger level */
+  .trail-scene.danger::before {
+    background:
+      radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(80,0,0,0.5) 100%),
+      linear-gradient(180deg, transparent 60%, rgba(80,0,0,0.6));
+  }
+
+  /* SR FOOTER */
+  .sr-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-subtle);
+    position: relative;
+    z-index: 5;
+    gap: 10px;
+  }
+
+  .sr-event.right { margin-left: auto; }
+
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--rb-red);
+    color: white;
+    font-size: 0.5625rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .live-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: white;
+    animation: liveDot 1.4s ease-in-out infinite;
+  }
+
+  @keyframes liveDot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .sr-name {
+    font-size: 0.8125rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--text-primary);
+    text-transform: uppercase;
+  }
+
+  .sr-event {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .sr-status {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .sr-status.warn { color: var(--acc-amber); }
+  .sr-status.danger { color: var(--acc-crimson); animation: pulse 0.6s ease-in-out infinite; }
+  .sr-status.safe { color: var(--acc-lime); }
+
+  .danger-meter {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+  }
+
+  .danger-label {
+    font-size: 0.5625rem;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .danger-segments {
+    display: flex;
+    gap: 2px;
+  }
+
+  .danger-segment {
+    width: 18px;
+    height: 8px;
+    background: var(--bg-darkest);
+    border: 1px solid var(--border-subtle);
+    border-radius: 1px;
+    transition: all 0.3s var(--ease-spring);
+  }
+
+  .danger-segment.lit-1 {
+    background: var(--acc-amber);
+    border-color: var(--acc-amber);
+    box-shadow: 0 0 6px rgba(245, 158, 11, 0.6);
+  }
+
+  .danger-segment.lit-2 {
+    background: var(--acc-orange);
+    border-color: var(--acc-orange);
+    box-shadow: 0 0 6px rgba(255, 107, 53, 0.6);
+  }
+
+  .danger-segment.lit-3 {
+    background: var(--acc-crimson);
+    border-color: var(--acc-crimson);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.8);
+    animation: pulseDanger 0.4s infinite;
+  }
+
+  @keyframes pulseDanger {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.4); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  /* PROBLEM CARD */
+  .customer-area {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .customer-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border-subtle);
+  }
+
+  .customer-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .customer-name {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--rb-yellow);
+    text-transform: uppercase;
+  }
+
+  .customer-tag {
+    font-size: 0.5625rem;
+    color: var(--text-muted);
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-left: auto;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    padding: 3px 7px;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+
+  .problem-text {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .equation {
+    font-family: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-primary);
+    margin: 6px 0;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 24px rgba(238, 29, 82, 0.25);
+  }
+
+  .equation .op { color: var(--rb-red); margin: 0 5px; }
+  .equation .eq { color: var(--text-muted); margin: 0 5px; }
+
+  .pizza-row {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+
+  .pizza-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .pizza {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    position: relative;
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.5));
+  }
+
+  .pizza-frac {
+    font-family: 'SF Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+  }
+
+  /* ANSWER BUTTONS */
+  .answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .answer-btn {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-strong);
+    color: var(--text-primary);
+    padding: 10px 14px;
+    font-family: 'SF Mono', 'Cascadia Code', monospace;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.18s var(--ease-spring);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+  }
+
+  .answer-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(238, 29, 82, 0.08));
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+
+  .answer-btn:hover:not(:disabled) {
+    border-color: var(--rb-red);
+    transform: translateY(-1px);
+    background: var(--bg-hover);
+  }
+
+  .answer-btn:hover:not(:disabled)::before { opacity: 1; }
+
+  .answer-btn:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
+  }
+
+  .answer-btn:disabled { cursor: default; }
+
+  .answer-btn.correct {
+    background: rgba(163, 230, 53, 0.12);
+    border-color: var(--acc-lime);
+    color: var(--acc-lime);
+    box-shadow: 0 0 24px rgba(163, 230, 53, 0.25), inset 0 0 24px rgba(163, 230, 53, 0.08);
+    animation: correctPulse 0.5s var(--ease-spring);
+  }
+
+  .answer-btn.wrong {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: var(--acc-crimson);
+    color: var(--acc-crimson);
+    animation: wrongShake 0.4s var(--ease-spring);
+  }
+
+  .answer-btn.faded { opacity: 0.25; }
+
+  @keyframes correctPulse {
+    0%, 100% { transform: scale(1); }
+    40% { transform: scale(1.03); }
+  }
+
+  @keyframes wrongShake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+  }
+
+  /* FLOATING POINTS */
+  .float-points {
+    position: fixed;
+    font-family: 'SF Mono', monospace;
+    font-size: 1.375rem;
+    font-weight: 800;
+    color: var(--rb-yellow);
+    text-shadow: 0 0 16px rgba(255, 204, 0, 0.6);
+    pointer-events: none;
+    z-index: 100;
+    animation: floatUp 1.1s var(--ease-out) forwards;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(0.85); opacity: 0; }
+    20% { transform: translateY(-16px) scale(1); opacity: 1; }
+    100% { transform: translateY(-90px) scale(0.9); opacity: 0; }
+  }
+
+  /* CINEMATIC CRASH OVERLAY */
+  .crash-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(80,0,0,0.7), rgba(0,0,0,0.96));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    animation: crashIn 0.18s var(--ease-out);
+    padding: 20px;
+  }
+
+  /* Red flash that fires at moment of impact */
+  .crash-flash {
+    position: fixed;
+    inset: 0;
+    background: var(--acc-crimson);
+    opacity: 0;
+    z-index: 499;
+    pointer-events: none;
+    animation: crashFlash 0.5s ease-out forwards;
+  }
+
+  @keyframes crashFlash {
+    0% { opacity: 0.85; }
+    20% { opacity: 0.4; }
+    50% { opacity: 0.6; }
+    100% { opacity: 0; }
+  }
+
+  /* Whole-screen shake during crash */
+  .game-container.crashing { animation: screenShake 0.5s var(--ease-spring); }
+
+  @keyframes screenShake {
+    0%, 100% { transform: translate(0, 0) rotate(0); }
+    10% { transform: translate(-8px, -4px) rotate(-1deg); }
+    20% { transform: translate(8px, 6px) rotate(1deg); }
+    30% { transform: translate(-10px, 4px) rotate(-1.5deg); }
+    40% { transform: translate(8px, -8px) rotate(1deg); }
+    50% { transform: translate(-6px, 6px) rotate(-1deg); }
+    60% { transform: translate(6px, -4px) rotate(0.5deg); }
+    70% { transform: translate(-4px, 4px) rotate(-0.5deg); }
+    80% { transform: translate(3px, -2px) rotate(0.25deg); }
+    90% { transform: translate(-2px, 1px) rotate(0); }
+  }
+
+  @keyframes crashIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .crash-card {
+    background: var(--bg-card);
+    border: 2px solid var(--acc-crimson);
+    border-radius: 10px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 24px 80px rgba(239, 68, 68, 0.5), 0 0 120px rgba(239, 68, 68, 0.25);
+    overflow: hidden;
+    animation: crashSlide 0.45s var(--ease-spring);
+  }
+
+  @keyframes crashSlide {
+    0% { transform: translateY(60px) scale(0.85) rotate(-2deg); opacity: 0; }
+    50% { transform: translateY(-8px) scale(1.04) rotate(1deg); opacity: 1; }
+    100% { transform: translateY(0) scale(1) rotate(0); opacity: 1; }
+  }
+
+  .crash-header {
+    background: var(--acc-crimson);
+    padding: 7px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+    animation: alertStrobe 0.4s ease-in-out infinite alternate;
+  }
+
+  @keyframes alertStrobe {
+    0% { background: var(--acc-crimson); }
+    100% { background: #ff2a5e; }
+  }
+
+  .crash-replay {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .crash-replay::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 6px white;
+    animation: liveDot 0.5s ease-in-out infinite;
+  }
+
+  .crash-body {
+    padding: 26px 22px 22px;
+    text-align: center;
+  }
+
+  .crash-impact-banner {
+    display: inline-block;
+    background: var(--rb-yellow);
+    color: var(--bg-darkest);
+    padding: 4px 14px;
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    margin-bottom: 12px;
+    transform: skewX(-12deg);
+    animation: bannerPulse 0.6s ease-in-out infinite alternate;
+  }
+
+  @keyframes bannerPulse {
+    0% { transform: skewX(-12deg) scale(1); }
+    100% { transform: skewX(-12deg) scale(1.06); }
+  }
+
+  .crash-emoji {
+    font-size: 5rem;
+    margin-bottom: 10px;
+    animation: crashShake 0.5s var(--ease-spring), emojiFloat 1.5s ease-in-out infinite alternate;
+    display: inline-block;
+    filter: drop-shadow(0 12px 28px rgba(239, 68, 68, 0.6));
+    line-height: 1;
+  }
+
+  @keyframes crashShake {
+    0% { transform: rotate(-30deg) scale(0.3); opacity: 0; }
+    40% { transform: rotate(20deg) scale(1.2); }
+    70% { transform: rotate(-8deg) scale(0.95); }
+    100% { transform: rotate(0) scale(1); opacity: 1; }
+  }
+
+  @keyframes emojiFloat {
+    from { transform: translateY(0); }
+    to { transform: translateY(-4px); }
+  }
+
+  .crash-title {
+    font-size: 1.85rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    background: linear-gradient(135deg, var(--rb-red), var(--acc-orange), var(--rb-yellow));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 8px;
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+  }
+
+  .crash-message {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Impact debris particles */
+  .crash-debris {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: #fbbf24;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 498;
+  }
+
+  /* HEAL POP */
+  .heal-pop {
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-elevated);
+    border: 1px solid var(--acc-lime);
+    color: var(--acc-lime);
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    box-shadow: 0 8px 32px rgba(163, 230, 53, 0.3);
+    z-index: 400;
+    animation: healPop 1.6s var(--ease-out) forwards;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  @keyframes healPop {
+    0% { transform: translateX(-50%) translateY(-16px); opacity: 0; }
+    15% { transform: translateX(-50%) translateY(0); opacity: 1; }
+    85% { transform: translateX(-50%) translateY(0); opacity: 1; }
+    100% { transform: translateX(-50%) translateY(-16px); opacity: 0; }
+  }
+
+  /* SCREENS */
+  .screen { padding: 8px; text-align: center; }
+
+  .screen p { font-size: 0.9375rem; color: var(--text-secondary); margin: 12px 0; line-height: 1.6; }
+
+  .screen p strong { color: var(--text-primary); font-weight: 700; }
+
+  .screen h3 {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 20px 0 12px;
+  }
+
+  .difficulty-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin: 8px 0 12px;
+  }
+
+  .diff-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    color: var(--text-primary);
+    padding: 9px 8px;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s var(--ease-spring);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .diff-btn small {
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .diff-btn:hover { border-color: var(--rb-red); }
+
+  .diff-btn.selected {
+    background: rgba(238, 29, 82, 0.1);
+    border-color: var(--rb-red);
+    color: var(--rb-red);
+    box-shadow: 0 0 16px rgba(238, 29, 82, 0.2);
+  }
+
+  .diff-btn.selected small { color: var(--rb-red); opacity: 0.7; }
+
+  .play-btn {
+    background: var(--rb-red);
+    color: white;
+    border: none;
+    padding: 11px 30px;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 8px;
+    text-transform: uppercase;
+    transition: all 0.2s var(--ease-spring);
+    box-shadow: 0 8px 24px rgba(238, 29, 82, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .play-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--rb-red), #c41a47);
+    z-index: 0;
+  }
+
+  .play-btn span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .play-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(238, 29, 82, 0.4);
+  }
+
+  .play-btn:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  .best-score {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .best-score-label {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .best-score-val {
+    color: var(--rb-yellow);
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    font-family: 'SF Mono', monospace;
+  }
+
+  .rank-badge {
+    font-size: 4rem;
+    margin: 8px 0 12px;
+    line-height: 1;
+  }
+
+  .rank-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .stats-summary {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 20px 0;
+    text-align: left;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .stat-row:last-child { border-bottom: none; }
+
+  .stat-row span:first-child {
+    color: var(--text-muted);
+    font-size: 0.6875rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .stat-row strong {
+    color: var(--text-primary);
+    font-family: 'SF Mono', monospace;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-80px);
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    color: var(--text-primary);
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s var(--ease-spring);
+    z-index: 300;
+    letter-spacing: 0.3px;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast.success { border-color: var(--acc-lime); color: var(--acc-lime); }
+  .toast.warn { border-color: var(--acc-amber); color: var(--acc-amber); }
+
+  .confetti {
+    position: fixed;
+    width: 6px;
+    height: 12px;
+    pointer-events: none;
+    z-index: 200;
+    animation: confettiFall 2s linear forwards;
+  }
+
+  @keyframes confettiFall {
+    0% { transform: translateY(-20px) rotate(0); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 600px) {
+    .game-container { padding: 16px; border-radius: 12px; }
+    .header { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(2)::after { display: none; }
+    .answers { grid-template-columns: 1fr; }
+    .difficulty-selector { grid-template-columns: 1fr; }
+    .sur-ronster-panel { grid-template-columns: auto 1fr; gap: 10px; }
+    .danger-meter { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 8px; padding-top: 4px; border-top: 1px dashed var(--border-subtle); margin-top: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="game-container">
+
+  <!-- START SCREEN -->
+  <div id="start-screen" class="screen">
+    <div class="brand-mark">
+      <div class="bull-tag"><span>RED BULL</span></div>
+      <h1>HARDLINE</h1>
+      <div class="brand-sub">Fraction Rider</div>
+    </div>
+
+    <p class="hero-text">
+      <strong>Sur Ronster</strong> is dropping in on the gnarliest line in mountain biking.  Each section needs a math call from race control.  Three wrong calls and he <strong>WIPES OUT</strong> in spectacular (but harmless) fashion.
+    </p>
+
+    <p class="hero-text" style="font-size: 0.8125rem; color: var(--text-muted);">
+      Hit a 3-streak and your spotter pulls him back from the brink.
+    </p>
+
+    <h3>Select your line</h3>
+    <div class="difficulty-selector">
+      <button class="diff-btn selected" data-diff="easy">Rookie<small>denominators 2-4</small></button>
+      <button class="diff-btn" data-diff="medium">Pro<small>denominators 2-8</small></button>
+      <button class="diff-btn" data-diff="hard">Hardline<small>2-12, all ops</small></button>
+    </div>
+
+    <div class="best-score">
+      <span class="best-score-label">Personal Best</span>
+      <span class="best-score-val" id="best-score-display">0</span>
+    </div>
+
+    <button class="play-btn" onclick="startGame()"><span>Drop In</span></button>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="game-screen" class="hidden">
+
+   <div class="col-left">
+    <div class="sur-ronster-panel">
+      <div class="sr-top">
+        <span class="live-badge"><span class="live-dot"></span>LIVE</span>
+        <span class="sr-name">Sur Ronster</span>
+        <span class="sr-event right">Hardline 26 · Tasmania</span>
+      </div>
+
+      <div class="trail-scene" id="trail-scene">
+        <video class="trail-video" id="trail-video" autoplay loop muted playsinline poster="sur-ronster.jpg" preload="auto">
+          <source src="sur-ronster.webm" type="video/webm">
+        </video>
+
+        <div class="rec-indicator">
+          <span class="rec-dot"></span>
+          <span class="rec-text">REC</span>
+          <span class="rec-time" id="rec-time">00:00</span>
+        </div>
+
+        <div class="speed-lines">
+          <div class="speed-line"></div>
+          <div class="speed-line"></div>
+          <div class="speed-line"></div>
+          <div class="speed-line"></div>
+          <div class="speed-line"></div>
+          <div class="speed-line"></div>
+        </div>
+
+        <div class="dust-trail" id="dust-trail">
+          <div class="dust-puff"></div>
+          <div class="dust-puff"></div>
+          <div class="dust-puff"></div>
+          <div class="dust-puff"></div>
+        </div>
+
+        <div class="rider-wrap">
+          <div class="rider-shadow"></div>
+          <div class="rider cruise" id="sr-portrait">
+            <svg viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+              <!-- REAR WHEEL (smaller, less dominant) -->
+              <circle cx="60" cy="118" r="20" fill="#0a0a0a"/>
+              <circle cx="60" cy="118" r="15" fill="none" stroke="#222" stroke-width="1.5"/>
+              <circle cx="60" cy="118" r="4" fill="#555"/>
+              <g stroke="#555" stroke-width="0.6" fill="none">
+                <line x1="60" y1="100" x2="60" y2="136"/>
+                <line x1="42" y1="118" x2="78" y2="118"/>
+                <line x1="48" y1="106" x2="72" y2="130"/>
+                <line x1="48" y1="130" x2="72" y2="106"/>
+              </g>
+
+              <!-- FRONT WHEEL -->
+              <circle cx="180" cy="118" r="20" fill="#0a0a0a"/>
+              <circle cx="180" cy="118" r="15" fill="none" stroke="#222" stroke-width="1.5"/>
+              <circle cx="180" cy="118" r="4" fill="#555"/>
+              <g stroke="#555" stroke-width="0.6" fill="none">
+                <line x1="180" y1="100" x2="180" y2="136"/>
+                <line x1="162" y1="118" x2="198" y2="118"/>
+                <line x1="168" y1="106" x2="192" y2="130"/>
+                <line x1="168" y1="130" x2="192" y2="106"/>
+              </g>
+
+              <!-- BIKE FRAME -->
+              <path d="M60,118 L100,90 L150,86 L170,80" stroke="#1a1a1a" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Seat tube -->
+              <line x1="100" y1="90" x2="118" y2="55" stroke="#1a1a1a" stroke-width="6" stroke-linecap="round"/>
+              <!-- Chain stay -->
+              <line x1="60" y1="118" x2="100" y2="105" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round"/>
+              <!-- Seat stay -->
+              <line x1="60" y1="118" x2="100" y2="90" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+
+              <!-- E-MTB MOTOR -->
+              <ellipse cx="100" cy="105" rx="20" ry="12" fill="#0a0a0a" stroke="#3a3a3a" stroke-width="1.5"/>
+              <rect x="92" y="103" width="16" height="2" fill="#ee1d52"/>
+              <rect x="86" y="108" width="7" height="2" fill="#a3e635" rx="0.5"/>
+
+              <!-- SUSPENSION FORK -->
+              <path d="M180,118 L165,82 L160,62" stroke="#2a2a2a" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <rect x="162" y="72" width="5" height="14" fill="#444"/>
+
+              <!-- HANDLEBAR -->
+              <path d="M160,62 L153,52 M160,62 L168,52" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              <ellipse cx="151" cy="50" rx="3" ry="4" fill="#1a1a1a"/>
+              <ellipse cx="170" cy="50" rx="3" ry="4" fill="#1a1a1a"/>
+
+              <!-- SADDLE -->
+              <path d="M110,52 L132,52 L130,48 L112,48 Z" fill="#1a1a1a"/>
+              <path d="M114,49 L128,49" stroke="#333" stroke-width="0.5"/>
+
+              <!-- ===== RIDER (BIG and BOLD) ===== -->
+
+              <!-- FAR LEG -->
+              <path d="M114,52 Q102,68 88,80" stroke="#2a2a2a" stroke-width="11" fill="none" stroke-linecap="round"/>
+              <ellipse cx="89" cy="82" rx="7" ry="3" fill="#0a0a0a"/>
+
+              <!-- FAR ARM -->
+              <path d="M132,30 Q150,42 162,55" stroke="#2a2a2a" stroke-width="7" fill="none" stroke-linecap="round"/>
+
+              <!-- TORSO (red jersey, BIG filled shape) -->
+              <path d="M110,52 L132,52 L150,28 L122,18 Z" fill="#ee1d52"/>
+              <!-- Jersey shadow side -->
+              <path d="M132,52 L150,28 L144,28 L130,52 Z" fill="#cc1644"/>
+              <!-- Yellow Red Bull stripe -->
+              <path d="M120,46 L142,22" stroke="#ffcc00" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <!-- Sponsor patch -->
+              <rect x="118" y="38" width="6" height="3" fill="#ffcc00" rx="0.5"/>
+              <!-- Chest seam -->
+              <path d="M125,42 L130,52" stroke="#0a0a0a" stroke-width="0.8" fill="none"/>
+
+              <!-- NEAR LEG -->
+              <path d="M126,52 Q120,68 105,76" stroke="#1a1a1a" stroke-width="13" fill="none" stroke-linecap="round"/>
+              <path d="M105,76 Q95,86 88,82" stroke="#1a1a1a" stroke-width="11" fill="none" stroke-linecap="round"/>
+              <!-- Knee pad (prominent) -->
+              <ellipse cx="106" cy="74" rx="8" ry="6" fill="#444" stroke="#888" stroke-width="0.8"/>
+              <ellipse cx="106" cy="74" rx="4" ry="3" fill="#222"/>
+              <!-- Shoe -->
+              <ellipse cx="89" cy="84" rx="9" ry="4" fill="#0a0a0a"/>
+              <line x1="84" y1="83" x2="94" y2="83" stroke="#333" stroke-width="0.8"/>
+
+              <!-- NEAR ARM -->
+              <path d="M138,24 Q155,38 168,50" stroke="#0a0a0a" stroke-width="9" fill="none" stroke-linecap="round"/>
+              <!-- Forearm armor -->
+              <path d="M152,36 Q162,44 167,48" stroke="#333" stroke-width="5" fill="none"/>
+              <!-- Glove -->
+              <ellipse cx="170" cy="51" rx="5.5" ry="4.5" fill="#0a0a0a" stroke="#444" stroke-width="0.5"/>
+
+              <!-- HELMET (BIG full-face MTB) -->
+              <!-- Main shell -->
+              <ellipse cx="148" cy="14" rx="22" ry="15" fill="#0a0a0a"/>
+              <!-- Visor brim -->
+              <path d="M126,9 L132,1 L156,1 L162,8 Q146,12 128,14 Z" fill="#1a1a1a"/>
+              <!-- Goggle white frame -->
+              <ellipse cx="148" cy="14" rx="19" ry="4" fill="#fff"/>
+              <!-- Goggle lens (dark) -->
+              <ellipse cx="148" cy="14" rx="16" ry="3" fill="#0a0a0a"/>
+              <!-- Lens reflections (electric cyan) -->
+              <ellipse cx="140" cy="14" rx="4.5" ry="1.5" fill="#00d9ff" opacity="0.7"/>
+              <ellipse cx="155" cy="14" rx="3.5" ry="1.2" fill="#00d9ff" opacity="0.5"/>
+              <!-- Chin bar (defines full-face shape) -->
+              <path d="M128,17 Q132,30 148,30 Q164,28 168,18 Q160,24 148,24 Q132,24 128,17 Z" fill="#0a0a0a"/>
+              <!-- Mouth grille suggestion -->
+              <line x1="138" y1="26" x2="158" y2="26" stroke="#222" stroke-width="0.8"/>
+              <!-- Helmet stripe accent -->
+              <path d="M128,21 Q148,25 168,21" stroke="#ee1d52" stroke-width="2" fill="none"/>
+              <!-- Helmet vents -->
+              <g stroke="#222" stroke-width="1" fill="none">
+                <line x1="135" y1="5" x2="139" y2="2"/>
+                <line x1="143" y1="3" x2="148" y2="0"/>
+                <line x1="152" y1="3" x2="157" y2="6"/>
+              </g>
+              <!-- Helmet top highlight -->
+              <path d="M132,4 Q148,1 162,5" stroke="#333" stroke-width="1" fill="none"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="sr-bottom">
+        <div class="sr-status safe" id="sr-status">Locked in &amp; sending</div>
+        <div class="danger-meter">
+          <div class="danger-label">Risk</div>
+          <div class="danger-segments">
+            <div class="danger-segment" id="seg-1"></div>
+            <div class="danger-segment" id="seg-2"></div>
+            <div class="danger-segment" id="seg-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div><!-- /col-left -->
+
+   <div class="col-right">
+    <div class="header">
+      <div class="stat">
+        <div class="stat-label">Score</div>
+        <div class="stat-val" id="score-display">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Lives</div>
+        <div class="lives-display" id="lives-display">
+          <div class="life-pip"></div>
+          <div class="life-pip"></div>
+          <div class="life-pip"></div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Streak</div>
+        <div class="stat-val"><span class="streak-icon" id="streak-icon"></span><span id="streak-display">0</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Coins</div>
+        <div class="stat-val" id="coins-display">0</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+    </div>
+    <div class="progress-label">Section <span id="q-num">1</span> / <span id="q-total">10</span></div>
+
+    <div class="customer-area">
+      <div class="customer-row">
+        <div class="customer-avatar" id="customer-emoji">😎</div>
+        <div class="customer-name" id="customer-name">Maya</div>
+        <div class="customer-tag">Spotter</div>
+      </div>
+      <div class="problem-text" id="problem-text">Loading...</div>
+      <div class="equation" id="equation"></div>
+      <div class="pizza-row" id="pizza-visual"></div>
+    </div>
+
+    <div class="answers" id="answers"></div>
+   </div><!-- /col-right -->
+  </div>
+
+  <!-- COMPLETE SCREEN -->
+  <div id="complete-screen" class="screen hidden">
+    <div class="rank-badge" id="rank-emoji">🏆</div>
+    <div class="rank-title" id="complete-title">Run Complete</div>
+    <p id="complete-message" style="font-size: 0.9375rem;"></p>
+
+    <div class="stats-summary">
+      <div class="stat-row"><span>Final Score</span><strong id="final-score">0</strong></div>
+      <div class="stat-row"><span>Best Streak</span><strong id="final-streak">0</strong></div>
+      <div class="stat-row"><span>Coins Earned</span><strong id="final-coins">0</strong></div>
+      <div class="stat-row"><span>Accuracy</span><strong id="final-accuracy">0%</strong></div>
+    </div>
+
+    <button class="play-btn" onclick="resetToStart()"><span>Run It Back</span></button>
+  </div>
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+//=========================================
+// GAME STATE
+//=========================================
+const state = {
+  difficulty: 'easy',
+  score: 0,
+  lives: 3,
+  streak: 0,
+  bestStreak: 0,
+  coins: 0,
+  questionNum: 0,
+  totalQuestions: 10,
+  correct: 0,
+  answered: false,
+  currentProblem: null,
+  dangerLevel: 0,
+  crashCount: 0
+};
+
+const customers = ['😎', '🤘', '🧢', '🥽', '😤', '🤠', '🦸', '🥷', '🐱', '🐶', '🦊', '🐼', '🦅', '🦉', '🐺'];
+const customerNames = ['Maya', 'Jake', 'Zoe', 'Theo', 'Luna', 'Max', 'Ava', 'Sam', 'Mia', 'Leo', 'Ruby', 'Finn', 'Iris', 'Owen', 'Nora'];
+const customerTags = ['Spotter', 'Pit Crew', 'Spotter', 'Mechanic', 'Spotter', 'Race Control', 'Spotter', 'Trail Crew'];
+
+const crashScenes = [
+  { emoji: '🚵💥', title: 'Cased the Gap!', msg: 'Sur Ronster came up short on the gap jump.  The dirt tasted weird.' },
+  { emoji: '🌲💥', title: 'Into the Trees!', msg: 'Sur Ronster departed the trail and hugged a Tasmanian eucalyptus.  Tree wins.' },
+  { emoji: '🪵😵', title: 'Wood Bridge Wipeout!', msg: 'Got crossed up on the wooden bridge.  The bridge filed a complaint.' },
+  { emoji: '🪨💥', title: 'Rock Garden Chaos!', msg: 'Sent it too hot into the rocks.  Bike is fine.  Pride is reconsidering its life choices.' },
+  { emoji: '🤸💥', title: 'Over the Bars!', msg: 'Sur Ronster endo\'d at full tilt and stuck the landing... face first.' },
+  { emoji: '🌿💨', title: 'Off-Piste!', msg: 'Took the scenic route through the underbrush.  Returned with souvenirs.' },
+  { emoji: '🦘😱', title: 'Wildlife Incident!', msg: 'A wallaby crossed the line.  Sur Ronster yielded.  Aggressively.' },
+  { emoji: '💦😖', title: 'Creek Crossing Fail!', msg: 'Sur Ronster found the creek the hard way.  It is now in his shoes.' },
+  { emoji: '🌳😵', title: 'Root Network!', msg: 'Front wheel met an angry root.  The geometry of the bike was reconsidered.' },
+  { emoji: '🌪️🚲', title: 'Wrong Line!', msg: 'Sur Ronster picked the wrong line.  The trail picked his pocket.' },
+  { emoji: '💨💥', title: 'Washed Out!', msg: 'Lost the front tire in the loamy berm.  Now sliding to nowhere fast.' },
+  { emoji: '🦘🤣', title: 'Kangaroo Check!', msg: 'A kangaroo refused to budge.  Sur Ronster did the moving.  Kangaroo is fine.' },
+  { emoji: '🚧💥', title: 'Hit the Tape!', msg: 'Sur Ronster met the course tape.  Officials are filing paperwork.' },
+  { emoji: '🌫️😖', title: 'Dust Cloud Chaos!', msg: 'Eyes full of dirt.  Vision impaired.  Spectacular dismount executed.' }
+];
+
+//=========================================
+// MATH HELPERS
+//=========================================
+function gcd(a, b) {
+  a = Math.abs(a); b = Math.abs(b);
+  return b === 0 ? a : gcd(b, a % b);
+}
+
+function lcm(a, b) {
+  return Math.abs(a * b) / gcd(a, b);
+}
+
+function simplify(num, den) {
+  if (den === 0) return [num, 1];
+  if (num === 0) return [0, 1];
+  const g = gcd(num, den);
+  return [num / g, den / g];
+}
+
+function rand(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function pick(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function fracToString(num, den) {
+  [num, den] = simplify(num, den);
+  if (den === 1) return `${num}`;
+  if (num === 0) return '0';
+  if (Math.abs(num) >= den) {
+    const whole = Math.floor(Math.abs(num) / den);
+    const rem = Math.abs(num) % den;
+    const sign = num < 0 ? '-' : '';
+    if (rem === 0) return `${sign}${whole}`;
+    return `${sign}${whole} ${rem}/${den}`;
+  }
+  return `${num}/${den}`;
+}
+
+//=========================================
+// PROBLEM GENERATORS
+//=========================================
+function genAddLike(maxDen) {
+  // Same-denominator addition (warmup, no LCM)
+  const d = rand(2, maxDen);
+  const n1 = rand(1, d - 1);
+  const n2 = rand(1, d - 1);
+
+  return {
+    text: pick([
+      `Rider eats ${n1}/${d} of a pizza, then ${n2}/${d} more.  Total eaten?`,
+      `Pit fuel: ${n1}/${d} pepperoni plus ${n2}/${d} more pepperoni.  How much pizza?`,
+      `${n1}/${d} of a granola bar + ${n2}/${d} of the same bar.  Total?`
+    ]),
+    equation: `${n1}/${d} <span class="op">+</span> ${n2}/${d} <span class="eq">=</span> ?`,
+    answer: { num: n1 + n2, den: d },
+    visualize: [{n: n1, d: d, color: '#ee1d52'}, {n: n2, d: d, color: '#ffcc00'}]
+  };
+}
+
+function genSubLike(maxDen) {
+  const d = rand(3, maxDen);
+  let n1 = rand(2, d - 1);
+  let n2 = rand(1, n1 - 1);
+
+  return {
+    text: pick([
+      `Sur Ronster had ${n1}/${d} of a pizza, ate ${n2}/${d}.  How much remains?`,
+      `Started the section with ${n1}/${d} stamina, used ${n2}/${d}.  Left?`,
+      `${n1}/${d} of a snack, gave away ${n2}/${d}.  What's left?`
+    ]),
+    equation: `${n1}/${d} <span class="op">−</span> ${n2}/${d} <span class="eq">=</span> ?`,
+    answer: { num: n1 - n2, den: d },
+    visualize: [{n: n1, d: d, color: '#ee1d52'}, {n: n2, d: d, color: '#6b7280'}]
+  };
+}
+
+function genAdd(maxDen, easyMode) {
+  let d1 = rand(2, maxDen);
+  let d2;
+  if (easyMode) {
+    // In easy mode, ensure one denominator divides the other (small LCM)
+    const opts = [d1, d1 * 2, Math.max(2, Math.floor(d1 / 2))].filter(x => x >= 2 && x <= maxDen);
+    d2 = pick(opts);
+  } else {
+    d2 = rand(2, maxDen);
+  }
+  const n1 = rand(1, d1 - 1);
+  const n2 = rand(1, d2 - 1);
+  const L = lcm(d1, d2);
+  const sumNum = n1 * (L / d1) + n2 * (L / d2);
+
+  return {
+    text: pick([
+      `Rider needs ${fracToString(n1,d1)} of a pepperoni AND ${fracToString(n2,d2)} of a cheese.  Combined order?`,
+      `Trail-side fuel: ${fracToString(n1,d1)} veggie plus ${fracToString(n2,d2)} sausage.  Total?`,
+      `Pit stop order: ${fracToString(n1,d1)} of a Hawaiian + ${fracToString(n2,d2)} of a margherita.  Total?`
+    ]),
+    equation: `${n1}/${d1} <span class="op">+</span> ${n2}/${d2} <span class="eq">=</span> ?`,
+    answer: { num: sumNum, den: L },
+    visualize: [{n: n1, d: d1, color: '#ee1d52'}, {n: n2, d: d2, color: '#ffcc00'}]
+  };
+}
+
+function genSub(maxDen, easyMode) {
+  let d1 = rand(2, maxDen);
+  let d2;
+  if (easyMode) {
+    const opts = [d1, d1 * 2, Math.max(2, Math.floor(d1 / 2))].filter(x => x >= 2 && x <= maxDen);
+    d2 = pick(opts);
+  } else {
+    d2 = rand(2, maxDen);
+  }
+  const L = lcm(d1, d2);
+  let n1 = rand(1, d1 - 1);
+  let n2 = rand(1, d2 - 1);
+
+  let v1 = n1 * (L / d1);
+  let v2 = n2 * (L / d2);
+  if (v1 < v2) { [v1, v2] = [v2, v1]; [n1, n2] = [n2, n1]; [d1, d2] = [d2, d1]; }
+  if (v1 === v2) { n2 = Math.max(1, n2 - 1); v2 = n2 * (L / d2); }
+
+  const diffNum = n1 * (L / d1) - n2 * (L / d2);
+
+  return {
+    text: pick([
+      `Rider had ${fracToString(n1,d1)} of a pizza, gave ${fracToString(n2,d2)} to the photographer.  How much left?`,
+      `Sur Ronster's pizza is ${fracToString(n1,d1)} full.  Shared ${fracToString(n2,d2)} with mechanic.  Remaining?`,
+      `Started with ${fracToString(n1,d1)} pizza, ate ${fracToString(n2,d2)} on the lift.  What's left?`
+    ]),
+    equation: `${n1}/${d1} <span class="op">−</span> ${n2}/${d2} <span class="eq">=</span> ?`,
+    answer: { num: diffNum, den: L },
+    visualize: [{n: n1, d: d1, color: '#ee1d52'}, {n: n2, d: d2, color: '#6b7280'}]
+  };
+}
+
+function genMultFrac(maxDen) {
+  const d1 = rand(2, Math.min(maxDen, 6));
+  const d2 = rand(2, Math.min(maxDen, 6));
+  const n1 = rand(1, d1 - 1);
+  const n2 = rand(1, d2 - 1);
+
+  return {
+    text: pick([
+      `Sur Ronster wants ${fracToString(n1,d1)} of ${fracToString(n2,d2)} of a pizza.  How much?`,
+      `Pit recipe needs ${fracToString(n1,d1)} cup sauce, but only making ${fracToString(n2,d2)} of the recipe.  How much sauce?`,
+      `Trail-side slice: ${fracToString(n1,d1)} of a pizza that\'s already ${fracToString(n2,d2)} a pizza.  Final size?`
+    ]),
+    equation: `${n1}/${d1} <span class="op">×</span> ${n2}/${d2} <span class="eq">=</span> ?`,
+    answer: { num: n1 * n2, den: d1 * d2 },
+    visualize: [{n: n1, d: d1, color: '#ee1d52'}, {n: n2, d: d2, color: '#ffcc00'}]
+  };
+}
+
+function genMultWhole(maxDen) {
+  const d = rand(2, maxDen);
+  const n = rand(1, d - 1);
+  const w = rand(2, 6);
+
+  return {
+    text: pick([
+      `${w} riders need fuel, each takes ${fracToString(n,d)} of a pizza.  Total pizza?`,
+      `${w} pit stops, each consuming ${fracToString(n,d)} of a pizza.  Sum?`,
+      `Recipe uses ${fracToString(n,d)} cup flour per batch.  Make ${w} batches.  Total flour?`
+    ]),
+    equation: `${w} <span class="op">×</span> ${n}/${d} <span class="eq">=</span> ?`,
+    answer: { num: w * n, den: d },
+    visualize: [{n: n, d: d, color: '#ee1d52'}]
+  };
+}
+
+function genDivWholeByUnit(maxDen) {
+  const d = rand(2, Math.min(maxDen, 6));
+  const w = rand(1, 5);
+
+  return {
+    text: pick([
+      `${w} whole pizzas at the trail-side stand.  Each gets cut into 1/${d} pieces.  How many pieces total?`,
+      `${w} pizzas, sliced into 1/${d} chunks for the spectators.  Total chunks?`,
+      `${w} energy bars, each cut into 1/${d} bites.  Total bites?`
+    ]),
+    equation: `${w} <span class="op">÷</span> 1/${d} <span class="eq">=</span> ?`,
+    answer: { num: w * d, den: 1 },
+    visualize: []
+  };
+}
+
+function genDivUnitByWhole(maxDen) {
+  const d = rand(2, Math.min(maxDen, 6));
+  const w = rand(2, 5);
+
+  return {
+    text: pick([
+      `1/${d} of a pizza shared equally among ${w} crew members.  Each gets?`,
+      `Split 1/${d} of a recovery shake among ${w} riders.  Each share?`,
+      `${w} kids share 1/${d} of a pizza equally at the finish line.  Each kid gets?`
+    ]),
+    equation: `1/${d} <span class="op">÷</span> ${w} <span class="eq">=</span> ?`,
+    answer: { num: 1, den: d * w },
+    visualize: []
+  };
+}
+
+function generateProblem() {
+  // Progressive difficulty WITHIN a round (early questions easier, later harder)
+  const progress = (state.questionNum - 1) / Math.max(1, state.totalQuestions - 1);
+  let types;
+  let maxDen;
+  let easyMode = false;
+
+  if (state.difficulty === 'easy') {
+    if (progress < 0.35) {
+      types = [genAddLike, genSubLike, genAddLike];
+      maxDen = 4;
+      easyMode = true;
+    } else if (progress < 0.75) {
+      types = [genAdd, genSub, genMultWhole];
+      maxDen = 4;
+      easyMode = true;
+    } else {
+      types = [genAdd, genSub, genMultWhole, genMultFrac];
+      maxDen = 5;
+      easyMode = true;
+    }
+  } else if (state.difficulty === 'medium') {
+    if (progress < 0.35) {
+      types = [genAdd, genSub, genMultWhole];
+      maxDen = 6;
+    } else if (progress < 0.75) {
+      types = [genAdd, genSub, genMultFrac, genMultWhole];
+      maxDen = 8;
+    } else {
+      types = [genAdd, genSub, genMultFrac, genMultWhole, genDivWholeByUnit];
+      maxDen = 8;
+    }
+  } else {
+    if (progress < 0.35) {
+      types = [genAdd, genSub, genMultFrac, genMultWhole];
+      maxDen = 8;
+    } else if (progress < 0.75) {
+      types = [genAdd, genSub, genMultFrac, genMultWhole, genDivWholeByUnit];
+      maxDen = 10;
+    } else {
+      types = [genAdd, genSub, genMultFrac, genMultWhole, genDivWholeByUnit, genDivUnitByWhole];
+      maxDen = 12;
+    }
+  }
+
+  const generator = pick(types);
+  return generator(maxDen, easyMode);
+}
+
+//=========================================
+// ANSWER CHOICES
+//=========================================
+function generateChoices(problem) {
+  const correct = problem.answer;
+  const correctStr = fracToString(correct.num, correct.den);
+
+  const choices = new Set([correctStr]);
+  let attempts = 0;
+
+  while (choices.size < 4 && attempts < 50) {
+    attempts++;
+    const distractor = makeDistractor(problem);
+    if (distractor && distractor !== correctStr) {
+      choices.add(distractor);
+    }
+  }
+
+  while (choices.size < 4) {
+    const altNum = correct.num + rand(-3, 3);
+    const altDen = Math.max(1, correct.den + rand(-2, 2));
+    const s = fracToString(altNum, altDen);
+    if (s !== correctStr) choices.add(s);
+  }
+
+  const arr = Array.from(choices);
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+
+  return arr.map(text => ({ text, correct: text === correctStr }));
+}
+
+function makeDistractor(problem) {
+  const eq = problem.equation;
+  const correct = problem.answer;
+
+  if (eq.includes('+')) {
+    const [, a, b, c, d] = eq.match(/(\d+)\/(\d+)[^]*?(\d+)\/(\d+)/) || [];
+    if (a) {
+      const trick = pick([
+        () => fracToString(+a + +c, +b + +d),
+        () => fracToString(+a + +c, Math.max(+b, +d)),
+        () => fracToString(correct.num + rand(1,2), correct.den),
+        () => fracToString(correct.num, correct.den + 1)
+      ]);
+      return trick();
+    }
+  } else if (eq.includes('−') || eq.includes('-')) {
+    const [, a, b, c, d] = eq.match(/(\d+)\/(\d+)[^]*?(\d+)\/(\d+)/) || [];
+    if (a) {
+      const trick = pick([
+        () => fracToString(+a - +c, +b - +d || 1),
+        () => fracToString(+a - +c, Math.max(+b, +d)),
+        () => fracToString(correct.num + 1, correct.den),
+        () => fracToString(correct.num, correct.den - 1 || 1)
+      ]);
+      return trick();
+    }
+  } else if (eq.includes('×')) {
+    const [, a, b, c, d] = eq.match(/(\d+)(?:\/(\d+))?[^]*?(\d+)(?:\/(\d+))?/) || [];
+    if (a) {
+      const trick = pick([
+        () => fracToString((+a) + (+c), (+b||1) + (+d||1)),
+        () => fracToString(correct.num + rand(1,3), correct.den),
+        () => fracToString(correct.num, correct.den * 2),
+        () => fracToString(correct.num + correct.den, correct.den)
+      ]);
+      return trick();
+    }
+  } else if (eq.includes('÷')) {
+    return pick([
+      fracToString(correct.num + rand(1,3), correct.den),
+      fracToString(Math.max(1, correct.num - 1), correct.den),
+      fracToString(correct.num, correct.den + rand(1,3)),
+      fracToString(correct.num * 2, correct.den)
+    ]);
+  }
+
+  return fracToString(correct.num + rand(-2, 2), correct.den + rand(-1, 1));
+}
+
+//=========================================
+// PIZZA VISUALIZATION
+//=========================================
+function makePizzaSVG(num, den, color) {
+  const angle = (num / den) * 360;
+  const colorStr = color || '#ee1d52';
+
+  const gradient = num >= den
+    ? colorStr
+    : `conic-gradient(${colorStr} ${angle}deg, #2a2a2a ${angle}deg)`;
+
+  return `
+    <div class="pizza-block">
+      <div class="pizza" style="background: ${gradient};"></div>
+      <div class="pizza-frac">${fracToString(num, den)}</div>
+    </div>
+  `;
+}
+
+//=========================================
+// SOUND
+//=========================================
+let audioCtx;
+function getAudioCtx() {
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    catch (e) { audioCtx = null; }
+  }
+  return audioCtx;
+}
+
+function beep(freq, duration, type = 'sine', volume = 0.12) {
+  const ctx = getAudioCtx();
+  if (!ctx) return;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.type = type;
+  osc.frequency.value = freq;
+  gain.gain.setValueAtTime(volume, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+  osc.start();
+  osc.stop(ctx.currentTime + duration);
+}
+
+function playCorrect() {
+  beep(880, 0.06, 'triangle', 0.1);
+  setTimeout(() => beep(1175, 0.08, 'triangle', 0.1), 70);
+}
+
+function playWrong() {
+  beep(220, 0.12, 'square', 0.1);
+  setTimeout(() => beep(165, 0.2, 'square', 0.1), 110);
+}
+
+function playStreak() {
+  beep(880, 0.05, 'triangle', 0.1);
+  setTimeout(() => beep(1175, 0.05, 'triangle', 0.1), 50);
+  setTimeout(() => beep(1568, 0.12, 'triangle', 0.1), 100);
+}
+
+function playFanfare() {
+  beep(523, 0.1, 'triangle', 0.12);
+  setTimeout(() => beep(659, 0.1, 'triangle', 0.12), 100);
+  setTimeout(() => beep(784, 0.1, 'triangle', 0.12), 200);
+  setTimeout(() => beep(1047, 0.3, 'triangle', 0.12), 300);
+}
+
+//=========================================
+// SUR RONSTER
+//=========================================
+function updateSurRonster() {
+  const level = state.dangerLevel;
+  const portrait = document.getElementById('sr-portrait');
+  const status = document.getElementById('sr-status');
+  const scene = document.getElementById('trail-scene');
+  const video = document.getElementById('trail-video');
+
+  portrait.classList.remove('cruise', 'wobble', 'trouble');
+  status.classList.remove('safe', 'warn', 'danger');
+  scene.classList.remove('warn', 'danger');
+
+  if (level <= 0) {
+    portrait.classList.add('cruise');
+    status.classList.add('safe');
+    status.textContent = pick(['Locked in & sending', 'Holding the line', 'Smooth & dialed', 'In the zone']);
+    if (video) video.playbackRate = 1.3;
+  } else if (level === 1) {
+    portrait.classList.add('wobble');
+    status.classList.add('warn');
+    status.textContent = pick(['Off-line, recovering...', 'Wobbling on the rough', 'Pumping for grip', 'Adjusting mid-line']);
+    scene.classList.add('warn');
+    if (video) video.playbackRate = 1.0;
+  } else if (level === 2) {
+    portrait.classList.add('trouble');
+    status.classList.add('danger');
+    status.textContent = pick(['LOSING IT', 'OFF THE LINE', 'BAILING SETUP', 'CRITICAL ZONE']);
+    scene.classList.add('danger');
+    if (video) video.playbackRate = 0.7;
+  } else {
+    portrait.classList.add('trouble');
+    status.classList.add('danger');
+    status.textContent = 'WIPEOUT';
+    scene.classList.add('danger');
+    if (video) video.playbackRate = 0.4;
+  }
+
+  for (let i = 1; i <= 3; i++) {
+    const seg = document.getElementById('seg-' + i);
+    seg.classList.remove('lit-1', 'lit-2', 'lit-3');
+    if (i <= level) {
+      seg.classList.add('lit-' + Math.min(level, 3));
+    }
+  }
+}
+
+function triggerCrash() {
+  const scene = pick(crashScenes);
+  state.crashCount++;
+
+  const video = document.getElementById('trail-video');
+  const container = document.querySelector('.game-container');
+
+  // 1. Red flash burst
+  const flash = document.createElement('div');
+  flash.className = 'crash-flash';
+  document.body.appendChild(flash);
+  setTimeout(() => flash.remove(), 600);
+
+  // 2. Whole-screen shake
+  if (container) {
+    container.classList.add('crashing');
+    setTimeout(() => container.classList.remove('crashing'), 600);
+  }
+
+  // 3. Freeze the video (drama)
+  if (video) {
+    video.pause();
+    video.style.filter = 'hue-rotate(-30deg) saturate(2) brightness(0.5) contrast(1.4) blur(2px)';
+    setTimeout(() => {
+      video.style.filter = '';
+      video.play().catch(() => {});
+    }, 4800);
+  }
+
+  // 4. Debris particles flying
+  spawnCrashDebris();
+
+  // 5. Crash card overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'crash-overlay';
+  overlay.innerHTML = `
+    <div class="crash-card">
+      <div class="crash-header">
+        <span class="crash-replay">REPLAY · WIPEOUT ${state.crashCount}</span>
+        <span>HARDLINE 26 · TASMANIA</span>
+      </div>
+      <div class="crash-body">
+        <div class="crash-impact-banner">⚠ Impact Detected</div>
+        <div class="crash-emoji">${scene.emoji}</div>
+        <div class="crash-title">${scene.title}</div>
+        <div class="crash-message">${scene.msg}</div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  playCrashSound();
+
+  setTimeout(() => overlay.remove(), 4800);
+}
+
+function spawnCrashDebris() {
+  const colors = ['#fbbf24', '#ee1d52', '#ff6b35', '#fff'];
+  for (let i = 0; i < 24; i++) {
+    const d = document.createElement('div');
+    d.className = 'crash-debris';
+    d.style.left = '50vw';
+    d.style.top = '40vh';
+    d.style.background = pick(colors);
+    const angle = (Math.PI * 2 * i) / 24 + (Math.random() * 0.4);
+    const dist = 200 + Math.random() * 250;
+    const dx = Math.cos(angle) * dist;
+    const dy = Math.sin(angle) * dist;
+    d.style.transition = `transform 1.2s cubic-bezier(0.2, 0.8, 0.4, 1), opacity 1.2s ease-out`;
+    document.body.appendChild(d);
+    requestAnimationFrame(() => {
+      d.style.transform = `translate(${dx}px, ${dy}px) rotate(${Math.random() * 720}deg)`;
+      d.style.opacity = '0';
+    });
+    setTimeout(() => d.remove(), 1300);
+  }
+}
+
+function triggerHeal() {
+  if (state.dangerLevel <= 0) return;
+  state.dangerLevel--;
+  if (state.lives < 3) state.lives++;
+
+  const pop = document.createElement('div');
+  pop.className = 'heal-pop';
+  pop.textContent = 'Spotter Save · +1 Life';
+  document.body.appendChild(pop);
+  setTimeout(() => pop.remove(), 1700);
+
+  playHealSound();
+  updateSurRonster();
+  updateHUD();
+}
+
+function playCrashSound() {
+  const ctx = getAudioCtx();
+  if (!ctx) return;
+
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(900, ctx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.55);
+  gain.gain.setValueAtTime(0.15, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.65);
+  osc.start();
+  osc.stop(ctx.currentTime + 0.65);
+
+  setTimeout(() => {
+    try {
+      const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.4, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < data.length; i++) {
+        data[i] = (Math.random() * 2 - 1) * (1 - i / data.length);
+      }
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const ngain = ctx.createGain();
+      ngain.gain.setValueAtTime(0.16, ctx.currentTime);
+      ngain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+      noise.connect(ngain);
+      ngain.connect(ctx.destination);
+      noise.start();
+    } catch (e) {}
+  }, 600);
+}
+
+function playHealSound() {
+  beep(523, 0.07, 'triangle', 0.1);
+  setTimeout(() => beep(784, 0.08, 'triangle', 0.1), 70);
+  setTimeout(() => beep(1047, 0.15, 'triangle', 0.1), 150);
+}
+
+//=========================================
+// UI / GAME FLOW
+//=========================================
+function showScreen(id) {
+  ['start-screen', 'game-screen', 'complete-screen'].forEach(s => {
+    document.getElementById(s).classList.add('hidden');
+  });
+  document.getElementById(id).classList.remove('hidden');
+}
+
+function startGame() {
+  state.score = 0;
+  state.lives = 3;
+  state.streak = 0;
+  state.bestStreak = 0;
+  state.coins = 0;
+  state.questionNum = 0;
+  state.correct = 0;
+  state.totalQuestions = 10;
+  state.dangerLevel = 0;
+  state.crashCount = 0;
+
+  updateHUD();
+  updateSurRonster();
+  showScreen('game-screen');
+  nextQuestion();
+}
+
+function nextQuestion() {
+  if (state.questionNum >= state.totalQuestions || state.lives <= 0) {
+    return endGame();
+  }
+
+  state.questionNum++;
+  state.answered = false;
+  state.currentProblem = generateProblem();
+
+  document.getElementById('customer-emoji').textContent = pick(customers);
+  document.getElementById('customer-name').textContent = pick(customerNames);
+  document.getElementById('problem-text').textContent = state.currentProblem.text;
+  document.getElementById('equation').innerHTML = state.currentProblem.equation;
+
+  const visualHTML = state.currentProblem.visualize
+    .map(v => makePizzaSVG(v.n, v.d, v.color)).join('');
+  document.getElementById('pizza-visual').innerHTML = visualHTML;
+
+  const choices = generateChoices(state.currentProblem);
+  const answersDiv = document.getElementById('answers');
+  answersDiv.innerHTML = '';
+
+  choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn';
+    btn.textContent = c.text;
+    btn.onclick = () => handleAnswer(btn, c.correct);
+    answersDiv.appendChild(btn);
+  });
+
+  updateHUD();
+}
+
+function handleAnswer(btn, isCorrect) {
+  if (state.answered) return;
+  state.answered = true;
+
+  document.querySelectorAll('.answer-btn').forEach(b => {
+    b.disabled = true;
+    if (b !== btn) b.classList.add('faded');
+  });
+
+  if (isCorrect) {
+    btn.classList.add('correct');
+    state.correct++;
+    state.streak++;
+    if (state.streak > state.bestStreak) state.bestStreak = state.streak;
+
+    let points = 10;
+    if (state.streak >= 3) points += 5;
+    if (state.streak >= 5) points += 5;
+    if (state.streak >= 8) points += 10;
+
+    state.score += points;
+    state.coins += 1 + Math.floor(state.streak / 3);
+
+    spawnFloatPoints(btn, `+${points}`);
+    playCorrect();
+
+    if (state.streak === 3) {
+      showToast('3-Streak · Bonus engaged', 'success');
+      playStreak();
+    } else if (state.streak === 5) {
+      showToast('5-Streak · Holding the line', 'success');
+      playStreak();
+      spawnConfetti();
+    } else if (state.streak === 8) {
+      showToast('8-Streak · Sending it', 'success');
+      playStreak();
+      spawnConfetti();
+    }
+
+    if (state.streak > 0 && state.streak % 3 === 0 && state.dangerLevel > 0) {
+      setTimeout(() => triggerHeal(), 600);
+    }
+  } else {
+    btn.classList.add('wrong');
+    state.streak = 0;
+    state.lives--;
+    state.dangerLevel++;
+
+    document.querySelectorAll('.answer-btn').forEach(b => {
+      if (b.textContent === fracToString(state.currentProblem.answer.num, state.currentProblem.answer.den)) {
+        setTimeout(() => b.classList.add('correct'), 250);
+      }
+    });
+
+    playWrong();
+    updateSurRonster();
+
+    if (state.lives === 0) {
+      setTimeout(() => triggerCrash(), 700);
+    } else {
+      showToast(`Answer: ${fracToString(state.currentProblem.answer.num, state.currentProblem.answer.den)}`, 'warn');
+    }
+  }
+
+  updateHUD();
+
+  const delay = state.lives === 0 ? 5800 : 2000;
+  setTimeout(() => nextQuestion(), delay);
+}
+
+function spawnFloatPoints(near, text) {
+  const rect = near.getBoundingClientRect();
+  const div = document.createElement('div');
+  div.className = 'float-points';
+  div.textContent = text;
+  div.style.left = (rect.left + rect.width / 2 - 30) + 'px';
+  div.style.top = (rect.top - 10) + 'px';
+  document.body.appendChild(div);
+  setTimeout(() => div.remove(), 1200);
+}
+
+function spawnConfetti() {
+  const colors = ['#ee1d52', '#ffcc00', '#00d9ff', '#a3e635'];
+  for (let i = 0; i < 30; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = pick(colors);
+    c.style.animationDelay = Math.random() * 0.4 + 's';
+    c.style.animationDuration = (1.5 + Math.random()) + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 2400);
+  }
+}
+
+function showToast(msg, type = '') {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = 'toast show ' + type;
+  setTimeout(() => toast.classList.remove('show'), 1900);
+}
+
+function updateHUD() {
+  document.getElementById('score-display').textContent = state.score.toLocaleString();
+
+  const livesEl = document.getElementById('lives-display');
+  livesEl.innerHTML = '';
+  for (let i = 0; i < 3; i++) {
+    const pip = document.createElement('div');
+    pip.className = 'life-pip' + (i >= state.lives ? ' lost' : '');
+    livesEl.appendChild(pip);
+  }
+
+  document.getElementById('streak-display').textContent = state.streak;
+  document.getElementById('streak-icon').textContent = state.streak >= 3 ? '⚡' : '';
+
+  document.getElementById('coins-display').textContent = state.coins;
+  document.getElementById('q-num').textContent = state.questionNum;
+  document.getElementById('q-total').textContent = state.totalQuestions;
+  document.getElementById('progress-fill').style.width = (state.questionNum / state.totalQuestions * 100) + '%';
+}
+
+function endGame() {
+  const accuracy = state.questionNum > 0 ? Math.round(state.correct / state.questionNum * 100) : 0;
+
+  let rankEmoji, rankTitle, rankMsg;
+
+  if (state.lives === 0) {
+    rankEmoji = '🚑';
+    rankTitle = 'Wiped Out';
+    rankMsg = "Tough run.  Sur Ronster needs ice and a sandwich.  Hit it again.";
+  } else if (accuracy >= 90 && state.bestStreak >= 5 && state.crashCount === 0) {
+    rankEmoji = '🏆';
+    rankTitle = 'Hardline Hero';
+    rankMsg = 'Clean run, top to bottom.  Sur Ronster is high-fiving the whole pit crew.';
+    playFanfare();
+    spawnConfetti();
+  } else if (accuracy >= 80) {
+    rankEmoji = '🥇';
+    rankTitle = 'Podium Finish';
+    rankMsg = state.crashCount === 0
+      ? 'Fast and clean.  Sur Ronster is on the box.'
+      : 'A wipeout cost time, but the run was solid.';
+    playFanfare();
+    spawnConfetti();
+  } else if (accuracy >= 60) {
+    rankEmoji = '🤘';
+    rankTitle = 'Solid Run';
+    rankMsg = 'Made it down.  Plenty to clean up next run.';
+    playCorrect();
+  } else {
+    rankEmoji = '🛠️';
+    rankTitle = 'Practice Run';
+    rankMsg = 'Every Hardline starts with rough laps.  Drop in again.';
+  }
+
+  document.getElementById('rank-emoji').textContent = rankEmoji;
+  document.getElementById('complete-title').textContent = rankTitle;
+  document.getElementById('complete-message').textContent = rankMsg;
+  document.getElementById('final-score').textContent = state.score.toLocaleString();
+  document.getElementById('final-streak').textContent = state.bestStreak;
+  document.getElementById('final-coins').textContent = state.coins;
+  document.getElementById('final-accuracy').textContent = accuracy + '%';
+
+  const best = parseInt(localStorage.getItem('hardlineFractionBest') || '0');
+  if (state.score > best) {
+    localStorage.setItem('hardlineFractionBest', state.score);
+    setTimeout(() => showToast('NEW PERSONAL BEST', 'success'), 600);
+  }
+
+  showScreen('complete-screen');
+}
+
+function resetToStart() {
+  document.getElementById('best-score-display').textContent = (parseInt(localStorage.getItem('hardlineFractionBest') || '0')).toLocaleString();
+  showScreen('start-screen');
+}
+
+//=========================================
+// INIT
+//=========================================
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('best-score-display').textContent = (parseInt(localStorage.getItem('hardlineFractionBest') || '0')).toLocaleString();
+
+  document.querySelectorAll('.diff-btn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.difficulty = btn.dataset.diff;
+    };
+  });
+
+  document.addEventListener('click', () => { getAudioCtx(); }, { once: true });
+
+  // Video setup: faster playback for race energy, REC timer
+  const video = document.getElementById('trail-video');
+  if (video) {
+    video.playbackRate = 1.3;
+    const recTime = document.getElementById('rec-time');
+    setInterval(() => {
+      if (!video || !recTime) return;
+      const t = Math.floor(video.currentTime);
+      const m = String(Math.floor(t / 60)).padStart(2, '0');
+      const s = String(t % 60).padStart(2, '0');
+      recTime.textContent = `${m}:${s}`;
+    }, 500);
+  }
+});
+</script>
+
+</body>
+</html>

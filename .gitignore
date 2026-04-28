@@ -1,0 +1,37 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# Editor & IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*~
+
+# Build artifacts (none yet, reserved)
+node_modules/
+dist/
+build/
+
+# Local-only scratch
+scratch/
+.notes-local/
+
+# Heavy intermediate assets kept locally only
+# (reorganize later: assets stay in repo, scratch downloads do not)
+archive/test-*.jpg
+archive/test-*.png
+archive/sur-ronster-orig.jpg
+archive/sur-ronster-supplied.png
+archive/mtb-source.webm
+archive/sur-ronster-grid.jpg
+
+# Local server logs / temp files
+*.log
+*.tmp
+*.pid
