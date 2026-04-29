@@ -5735,11 +5735,40 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     return `${b.name}: <em>"${fragment}"</em>`;
   }
 
+  // Pedagogical distractor builder. Pass an array of intentional mistakes (numbers
+  // a student might compute via known errors). Filters out anything that equals the
+  // correct answer or duplicates, pads with sensible fallbacks if fewer than 3 unique
+  // mistakes are available. Returns 4 unique options.
+  function distractors(correct, mistakes, fallbackBase) {
+    const out = new Set([correct]);
+    for (const m of mistakes) {
+      if (typeof m !== 'number' || !isFinite(m)) continue;
+      const v = Math.max(1, Math.round(m));
+      if (v !== correct) out.add(v);
+      if (out.size >= 4) break;
+    }
+    // Fallback: nearby off-by-one offsets if we still need more
+    const base = fallbackBase != null ? fallbackBase : correct;
+    const offsets = [base + 1, base - 1, base + 2, base - 2, correct + 10, correct - 10, correct * 2, Math.max(1, Math.floor(correct / 2))];
+    for (const o of offsets) {
+      if (out.size >= 4) break;
+      const v = Math.max(1, Math.round(o));
+      out.add(v);
+    }
+    return shuffle(Array.from(out).slice(0, 4));
+  }
+
   function genLwh(builderId) {
     const l = ri(2, 8), w = ri(2, 6), h = ri(1, 4);
     const v = l * w * h;
-    const opts = ensureFour(new Set([v]), () => Math.max(1, v + ri(-12, 12)));
-    shuffle(opts);
+    const opts = distractors(v, [
+      l + w + h,           // added all three instead of multiplying
+      l * w + h,           // forgot final multiplication, added height
+      l * w,               // dropped the height entirely (base area)
+      l * (w + h),         // multiplied the wrong pair
+      v + h,               // off-by-one-layer (one extra unit cube layer)
+      v - h,               // missed a layer
+    ]);
     return {
       prompt: quoteFor(builderId, `My next piece is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. <strong>Volume in stud cubes</strong>?`),
       answers: opts.map(o => o + ' studs³'),
@@ -5752,8 +5781,13 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const base = ri(8, 30);
     const h = ri(2, 6);
     const v = base * h;
-    const opts = ensureFour(new Set([v]), () => Math.max(1, v + ri(-15, 15)));
-    shuffle(opts);
+    const opts = distractors(v, [
+      base + h,            // added instead of multiplied
+      base * (h - 1),      // off-by-one in height (down)
+      base * (h + 1),      // off-by-one in height (up)
+      (base - 1) * h,      // off-by-one in base (down)
+      (base + 1) * h,      // off-by-one in base (up)
+    ]);
     return {
       prompt: quoteFor(builderId, `Base area is <strong>${base}</strong> stud-squares and the height is <strong>${h}</strong> studs. <strong>Volume</strong>?`),
       answers: opts.map(o => o + ' studs³'),
@@ -5768,8 +5802,14 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const va = a1 * a2 * a3;
     const vb = b1 * b2 * b3;
     const total = va + vb;
-    const opts = ensureFour(new Set([total]), () => Math.max(1, total + ri(-15, 15)));
-    shuffle(opts);
+    const opts = distractors(total, [
+      va,                  // forgot to add cabin volume
+      vb,                  // forgot hull
+      total - vb,          // same as va, redundant safe-guard
+      va * 2,              // doubled hull instead of adding
+      a1 + a2 + a3 + b1 + b2 + b3,  // added all dimensions
+      va + vb + 1,         // off-by-one
+    ]);
     return {
       prompt: quoteFor(builderId, `Hull is <strong>${a1}×${a2}×${a3}</strong>, cabin on top is <strong>${b1}×${b2}×${b3}</strong>. <strong>Total volume</strong>?`),
       answers: opts.map(o => o + ' studs³'),
@@ -5781,8 +5821,12 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
   function genMissingDim(builderId) {
     const l = ri(2, 6), w = ri(2, 5), h = ri(2, 5);
     const v = l * w * h;
-    const opts = ensureFour(new Set([h]), () => Math.max(1, h + ri(-3, 3)));
-    shuffle(opts);
+    const opts = distractors(h, [
+      h + 1,               // off-by-one
+      h - 1,
+      Math.max(2, v - l * w), // common error: subtract instead of divide
+      Math.max(2, Math.round(v / (l + w))), // divided by sum instead of product
+    ]);
     return {
       prompt: quoteFor(builderId, `This piece has <strong>volume ${v} stud cubes</strong> and a base of <strong>${l}×${w}</strong>. <strong>Height</strong>?`),
       answers: opts.map(o => o + ' studs'),
@@ -5797,8 +5841,13 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const lw = ri(2, 5);
     const wd = ri(2, 4);
     const v = layers * lw * wd;
-    const opts = ensureFour(new Set([v]), () => Math.max(1, v + ri(-12, 12)));
-    shuffle(opts);
+    const opts = distractors(v, [
+      lw * wd,             // counted just one layer
+      lw + wd + layers,    // added all three
+      lw * wd * (layers - 1), // missed the top layer
+      lw * wd * (layers + 1), // counted an extra layer
+      v + lw,              // off by one row
+    ]);
     return {
       prompt: quoteFor(builderId, `Count the unit cubes: a ${lw}-wide × ${wd}-deep slab, stacked <strong>${layers}</strong> layers high. <strong>Total cubes</strong>?`),
       answers: opts.map(o => o + ' cubes'),
@@ -5833,8 +5882,14 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const outer = L * W * H;
     const inner = il * iw * ih;
     const v = outer - inner;
-    const opts = ensureFour(new Set([v]), () => Math.max(1, v + ri(-15, 15)));
-    shuffle(opts);
+    const opts = distractors(v, [
+      outer,               // forgot to subtract the hollow
+      inner,               // returned the hollow instead of the brick
+      outer + inner,       // added instead of subtracted
+      L + W + H - il - iw - ih, // subtracted dimensions instead of volumes
+      v + 1,
+      v - 1,
+    ]);
     return {
       prompt: quoteFor(builderId, `Solid build is <strong>${L}×${W}×${H}</strong>. A hollow chamber inside is <strong>${il}×${iw}×${ih}</strong>. <strong>Brick volume</strong> (solid minus hollow)?`),
       answers: opts.map(o => o + ' studs³'),
@@ -5850,8 +5905,14 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const factor = pick([2, 3]);
     const dim = pick(['length', 'width', 'height']);
     const v2 = v1 * factor;
-    const opts = ensureFour(new Set([v2]), () => Math.max(1, v2 + ri(-12, 12)));
-    shuffle(opts);
+    const opts = distractors(v2, [
+      v1,                  // forgot to scale (returned A's volume)
+      v1 + factor,         // added the factor instead of multiplying
+      v1 * factor * factor,// over-scaled (squared the factor)
+      l * w * h * (factor - 1), // off-by-one factor
+      v2 + 1,
+      v2 - 1,
+    ]);
     return {
       prompt: quoteFor(builderId, `Build A is <strong>${l}×${w}×${h}</strong>. Build B has the same shape but the <strong>${dim}</strong> is <strong>${factor}× larger</strong>. <strong>Volume of B</strong>?`),
       answers: opts.map(o => o + ' studs³'),
@@ -6223,7 +6284,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     `;
 
     return `
-      <svg viewBox="0 0 ${s} ${s}" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 ${s} ${s}" width="${s}" height="${s}" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="rkBody${idSuffix}" cx="0.42" cy="0.38" r="0.65">
             <stop offset="0" stop-color="#9a7c66"/>
@@ -6263,7 +6324,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const k = small ? 0.45 : 1;
     const t = (n) => (n * k).toFixed(1);
     return `
-      <svg viewBox="0 0 ${s} ${s}" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 ${s} ${s}" width="${s}" height="${s}" xmlns="http://www.w3.org/2000/svg">
         <!-- body -->
         <rect x="${t(70)}" y="${t(100)}" width="${t(60)}" height="${t(80)}" fill="#e0e0e8" rx="4" stroke="#a0a8b3"/>
         <rect x="${t(50)}" y="${t(108)}" width="${t(20)}" height="${t(60)}" fill="#e0e0e8" rx="4" stroke="#a0a8b3"/>
