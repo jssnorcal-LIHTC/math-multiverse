@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Math Multiverse</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ee1d52'/%3E%3Ctext x='16' y='22' font-family='system-ui' font-size='15' font-weight='800' fill='white' text-anchor='middle'%3EM%C2%B7M%3C/text%3E%3C/svg%3E">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -275,7 +276,12 @@
   .lock-overlay { position: absolute; bottom: 10px; right: 14px; font-size: 13px; color: var(--text-muted); }
 
   /* MODULE HOST */
-  #module-host { width: 100%; min-height: calc(100vh - 100px); position: relative; }
+  #module-host {
+    width: 100%;
+    min-height: calc(100vh - 100px);
+    min-height: calc(100dvh - 100px);
+    position: relative;
+  }
   .host-toolbar {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -292,6 +298,7 @@
   .host-frame {
     width: 100%;
     height: calc(100vh - 160px);
+    height: calc(100dvh - 160px);
     border: 1px solid var(--border-subtle);
     border-radius: 14px;
     background: var(--bg-base);
@@ -2220,7 +2227,8 @@ const MODULES = [
     icon: '🏎️',
     color: '#ff8000',
     description: 'Pick a driver. Race a Grand Prix. Sector splits, lap times, fuel and tire wear gate every overtake.',
-    unlocked: true,
+    unlocked: false,
+    lockedMessage: 'Beat HARDLINE Fraction Rider to unlock.',
     levels: [
       { id: 1, name: 'Free Practice',           goal: 'Set a clean lap',          questions: 15, type: 'place-value' },
       { id: 2, name: 'Qualifying',              goal: 'Take pole position',       questions: 18, type: 'compare-order' },
@@ -2239,7 +2247,8 @@ const MODULES = [
     icon: '🛸',
     color: '#00d9ff',
     description: 'Fly Mando and Grogu through hyperspace. Plot coordinates to dodge asteroids and outrun TIE fighters.',
-    unlocked: true,
+    unlocked: false,
+    lockedMessage: 'Beat F1: Apex Decimals to unlock.',
     levels: [
       { id: 1, name: 'Departing Nevarro',         goal: 'Plot the way out',           questions: 15 },
       { id: 2, name: 'Asteroid Field Run',        goal: 'Cross to clean space',       questions: 18 },
@@ -2258,7 +2267,8 @@ const MODULES = [
     icon: '🧱',
     color: '#f2cd37',
     description: 'See the bricks. Build Bricksburg, calculate volumes, end with Benny\'s SPACESHIP!',
-    unlocked: true,
+    unlocked: false,
+    lockedMessage: 'Beat Razor Crest Navigator to unlock.',
     levels: [
       { id: 1, name: 'Emmet\'s House',          goal: 'Build the cottage',         questions: 15 },
       { id: 2, name: 'Patrol Cruiser',          goal: 'Roll out Bad Cop',          questions: 18 },
@@ -2277,7 +2287,8 @@ const MODULES = [
     icon: '🪨',
     color: '#c93d3d',
     description: 'Save Rocky. Translate between Eridian and human units to keep the Hail Mary alive.',
-    unlocked: true,
+    unlocked: false,
+    lockedMessage: 'Beat LEGO Master Builder to unlock.',
     levels: [
       { id: 1, name: 'Hello, Question?',        goal: 'First contact',             questions: 15 },
       { id: 2, name: 'Mass and Atmosphere',     goal: 'Build the dictionary',      questions: 18 },
@@ -2296,7 +2307,8 @@ const MODULES = [
     icon: '🐻',
     color: '#d4a24c',
     description: 'It rained, and it rained, and it rained. Save Pooh and Piglet from the flood with parentheses and brackets.',
-    unlocked: true,
+    unlocked: false,
+    lockedMessage: 'Beat Rocky\'s Dictionary to unlock.',
     levels: [
       { id: 1, name: 'Light Drizzle',           goal: 'Keep the jars dry',         questions: 15 },
       { id: 2, name: 'Steady Rain',             goal: 'Pooh sits tight',           questions: 18 },
