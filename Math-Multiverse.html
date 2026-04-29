@@ -3907,84 +3907,253 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 
   // ---- Razor Crest visual ----
   function razorCrestSvg(view, hullPct) {
-    const tint = hullPct < 33 ? '#a04848' : (hullPct < 66 ? '#a08848' : '#5b6168');
+    const damage = hullPct < 33 ? 0.7 : (hullPct < 66 ? 0.4 : 0);
+    const bodyColor = hullPct < 33 ? '#7a4a48' : (hullPct < 66 ? '#7a6a4a' : '#5b6168');
+    const accentColor = hullPct < 33 ? '#5a3030' : (hullPct < 66 ? '#5a5030' : '#3a3e44');
+
     if (view === 'cockpit') {
-      // First-person view from inside cockpit
+      // First-person from inside cockpit, looking out through canopy
       return `
-        <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice">
+        <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="visor" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0" stop-color="rgba(80,160,200,0.20)"/>
-              <stop offset="1" stop-color="rgba(20,40,60,0.50)"/>
+            <linearGradient id="rcVisor" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stop-color="rgba(80,160,200,0.22)"/>
+              <stop offset="0.5" stop-color="rgba(40,80,120,0.10)"/>
+              <stop offset="1" stop-color="rgba(20,40,60,0.55)"/>
+            </linearGradient>
+            <linearGradient id="rcDash" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stop-color="#1a1d24"/>
+              <stop offset="1" stop-color="#0a0e15"/>
             </linearGradient>
           </defs>
-          <!-- canopy frame (foreground) -->
-          <path d="M 0 0 L 0 80 Q 40 60 100 50 L 250 40 Q 350 36 450 40 L 500 50 Q 560 60 600 80 L 600 0 Z" fill="#1a1d24" />
-          <!-- canopy glass (transparent center) -->
-          <path d="M 60 80 Q 150 60 300 55 Q 450 60 540 80 L 540 220 L 60 220 Z" fill="url(#visor)" />
-          <!-- left HUD elements -->
-          <rect x="20" y="100" width="50" height="6" fill="rgba(0,217,255,0.5)"/>
-          <rect x="20" y="112" width="32" height="4" fill="rgba(0,217,255,0.3)"/>
-          <text x="22" y="135" fill="rgba(0,217,255,0.7)" font-size="8" font-family="system-ui" font-weight="700">HYPERDRIVE ${Math.round(hullPct)}%</text>
-          <!-- right HUD elements -->
-          <circle cx="560" cy="120" r="14" fill="none" stroke="rgba(0,217,255,0.6)" stroke-width="1.5"/>
-          <line x1="546" y1="120" x2="574" y2="120" stroke="rgba(0,217,255,0.4)" stroke-width="0.5"/>
-          <line x1="560" y1="106" x2="560" y2="134" stroke="rgba(0,217,255,0.4)" stroke-width="0.5"/>
-          <text x="540" y="155" fill="rgba(0,217,255,0.7)" font-size="8" font-family="system-ui" font-weight="700">NAVCOM</text>
-          <!-- bottom dash with throttle -->
-          <rect x="0" y="180" width="600" height="40" fill="#0f1218"/>
-          <rect x="60" y="190" width="200" height="8" fill="#1a1d24" rx="2"/>
-          <rect x="60" y="190" width="${1.6 * hullPct}" height="8" fill="${tint}" rx="2"/>
-          <text x="60" y="212" fill="rgba(0,217,255,0.7)" font-size="8" font-family="system-ui" font-weight="700">HULL</text>
-          <!-- Mando silhouette (right side, helmet edge) -->
-          <ellipse cx="465" cy="195" rx="30" ry="22" fill="#3a3e44"/>
-          <ellipse cx="465" cy="183" rx="22" ry="18" fill="#5a626c"/>
-          <rect x="450" y="175" width="30" height="6" fill="#1a1d24"/>
-          <!-- Grogu silhouette (left, peeking) -->
-          <ellipse cx="135" cy="195" rx="14" ry="11" fill="#6b8a4a"/>
-          <ellipse cx="135" cy="186" rx="11" ry="10" fill="#7da05a"/>
-          <ellipse cx="120" cy="184" rx="6" ry="9" fill="#7da05a"/>
-          <ellipse cx="150" cy="184" rx="6" ry="9" fill="#7da05a"/>
+          <!-- Star field through canopy -->
+          <rect width="600" height="220" fill="#0a0e18"/>
+          <g opacity="0.7">
+            <circle cx="120" cy="50" r="0.8" fill="#fff"/><circle cx="280" cy="35" r="1" fill="#fff"/><circle cx="450" cy="60" r="0.7" fill="#fff"/>
+            <circle cx="180" cy="90" r="0.6" fill="#cce0ff"/><circle cx="370" cy="100" r="1" fill="#fff"/><circle cx="540" cy="80" r="0.8" fill="#fff"/>
+            <circle cx="210" cy="65" r="0.5" fill="#fff"/><circle cx="320" cy="75" r="0.7" fill="#cce0ff"/>
+          </g>
+          <!-- Hyperspace streaks -->
+          <line x1="100" y1="70" x2="180" y2="68" stroke="rgba(150,200,255,0.5)" stroke-width="0.6"/>
+          <line x1="380" y1="55" x2="460" y2="53" stroke="rgba(150,200,255,0.4)" stroke-width="0.5"/>
+          <line x1="240" y1="95" x2="310" y2="93" stroke="rgba(150,200,255,0.3)" stroke-width="0.5"/>
+          <!-- Canopy frame top + sides (foreground) -->
+          <path d="M 0 0 L 0 70 Q 30 50 90 42 L 250 32 Q 350 28 450 32 L 510 42 Q 570 50 600 70 L 600 0 Z" fill="#15181f" stroke="#0a0e15" stroke-width="1"/>
+          <!-- Canopy glass tint -->
+          <path d="M 50 70 Q 140 50 300 45 Q 460 50 550 70 L 550 130 L 50 130 Z" fill="url(#rcVisor)"/>
+          <!-- Canopy frame mullions (vertical struts) -->
+          <line x1="200" y1="44" x2="200" y2="130" stroke="#0a0e15" stroke-width="2"/>
+          <line x1="400" y1="44" x2="400" y2="130" stroke="#0a0e15" stroke-width="2"/>
+          <!-- Dashboard (foreground) -->
+          <rect x="0" y="130" width="600" height="90" fill="url(#rcDash)"/>
+          <!-- Center yoke / control column -->
+          <rect x="278" y="155" width="44" height="10" rx="2" fill="#3a3e44" stroke="#0a0e15" stroke-width="1"/>
+          <circle cx="300" cy="160" r="4" fill="#5a626c"/>
+          <line x1="295" y1="160" x2="305" y2="160" stroke="#0a0e15" stroke-width="1"/>
+          <line x1="300" y1="155" x2="300" y2="165" stroke="#0a0e15" stroke-width="1"/>
+          <!-- Twin throttle quadrant left -->
+          <rect x="40" y="150" width="80" height="16" rx="2" fill="#1a1d24" stroke="#0a0e15"/>
+          <rect x="50" y="152" width="14" height="12" fill="#3a3e44"/>
+          <rect x="68" y="152" width="14" height="12" fill="#3a3e44"/>
+          <rect x="86" y="152" width="14" height="12" fill="#5a626c"/>
+          <!-- Right MFD (multifunction display) -->
+          <rect x="480" y="142" width="100" height="40" rx="3" fill="#0a1828" stroke="#1a4060" stroke-width="1.5"/>
+          <circle cx="530" cy="162" r="14" fill="none" stroke="rgba(0,217,255,0.6)" stroke-width="0.8"/>
+          <circle cx="530" cy="162" r="9" fill="none" stroke="rgba(0,217,255,0.4)" stroke-width="0.5"/>
+          <line x1="516" y1="162" x2="544" y2="162" stroke="rgba(0,217,255,0.4)" stroke-width="0.5"/>
+          <line x1="530" y1="148" x2="530" y2="176" stroke="rgba(0,217,255,0.4)" stroke-width="0.5"/>
+          <text x="530" y="178" text-anchor="middle" fill="rgba(0,217,255,0.7)" font-size="6" font-family="system-ui" font-weight="700">NAV-COMP</text>
+          <!-- Left HUD readout -->
+          <rect x="20" y="172" width="100" height="42" fill="#0a1828" stroke="#1a4060" stroke-width="1.5" rx="2"/>
+          <text x="26" y="184" fill="rgba(0,217,255,0.85)" font-size="7" font-family="system-ui" font-weight="700">HYPERDRIVE</text>
+          <rect x="26" y="188" width="80" height="6" fill="#1a1d24" rx="1"/>
+          <rect x="26" y="188" width="${0.8 * hullPct}" height="6" fill="${hullPct > 50 ? '#27f4d2' : '#fbbf24'}" rx="1"/>
+          <text x="26" y="204" fill="rgba(0,217,255,0.7)" font-size="6" font-family="system-ui" font-weight="700">HULL ${Math.round(hullPct)}%</text>
+          <!-- Mando T-visor helmet (right side, peeking into frame) -->
+          <g transform="translate(420, 168)">
+            <!-- Beskar shoulder pauldron -->
+            <path d="M 22 30 Q 28 18 42 18 Q 56 18 62 30 L 62 52 L 22 52 Z" fill="#9aa4ae" stroke="#1a1d24" stroke-width="1"/>
+            <!-- Mudhorn signet on right pauldron -->
+            <g transform="translate(54, 26) scale(0.4)" opacity="0.7">
+              <path d="M -10 4 Q -6 -8 6 -8 Q 14 -4 12 4 L 14 8 L 8 6 L 0 8 L -8 6 L -12 8 Z" fill="#5a626c" stroke="#0a0e15" stroke-width="1"/>
+            </g>
+            <!-- Helmet -->
+            <path d="M 24 24 Q 26 8 42 6 Q 58 8 60 24 L 58 30 L 26 30 Z" fill="#c0c8d0" stroke="#1a1d24" stroke-width="1.2"/>
+            <!-- T-visor -->
+            <path d="M 28 16 L 56 16 L 56 22 L 46 22 L 46 30 L 38 30 L 38 22 L 28 22 Z" fill="#0a0a0a"/>
+            <!-- Helmet shine -->
+            <path d="M 28 10 Q 30 6 36 6 L 32 14 Z" fill="rgba(255,255,255,0.4)"/>
+          </g>
+          <!-- Grogu (left side, peeking up from co-pilot's pram) -->
+          <g transform="translate(120, 178)">
+            <!-- Floating pram rim -->
+            <ellipse cx="0" cy="34" rx="40" ry="6" fill="#5a626c" stroke="#1a1d24" stroke-width="1"/>
+            <ellipse cx="0" cy="34" rx="36" ry="4" fill="#3a3e44"/>
+            <!-- Pram interior (brown) -->
+            <ellipse cx="0" cy="32" rx="32" ry="3" fill="#5a4030"/>
+            <!-- Grogu body / robe -->
+            <path d="M -16 28 Q -12 16 0 14 Q 12 16 16 28 Z" fill="#5a4530"/>
+            <!-- Grogu head -->
+            <ellipse cx="0" cy="6" rx="14" ry="13" fill="#a8c47a" stroke="#5a7a3a" stroke-width="0.8"/>
+            <!-- Grogu ears (long, sideways) -->
+            <path d="M -14 6 Q -22 4 -28 0 Q -28 6 -22 10 Q -16 10 -14 8 Z" fill="#a8c47a" stroke="#5a7a3a" stroke-width="0.8"/>
+            <path d="M 14 6 Q 22 4 28 0 Q 28 6 22 10 Q 16 10 14 8 Z" fill="#a8c47a" stroke="#5a7a3a" stroke-width="0.8"/>
+            <!-- Wispy hair tufts -->
+            <line x1="-3" y1="-4" x2="-2" y2="-7" stroke="#7a8a5a" stroke-width="0.6"/>
+            <line x1="0" y1="-5" x2="0" y2="-8" stroke="#7a8a5a" stroke-width="0.6"/>
+            <line x1="3" y1="-4" x2="2" y2="-7" stroke="#7a8a5a" stroke-width="0.6"/>
+            <!-- Big dark eyes -->
+            <ellipse cx="-4.5" cy="6" rx="2.4" ry="3.4" fill="#1a0a00"/>
+            <ellipse cx="4.5" cy="6" rx="2.4" ry="3.4" fill="#1a0a00"/>
+            <ellipse cx="-3.8" cy="4.5" rx="0.8" ry="1.2" fill="#fff" opacity="0.6"/>
+            <ellipse cx="5.2" cy="4.5" rx="0.8" ry="1.2" fill="#fff" opacity="0.6"/>
+            <!-- Mouth -->
+            <path d="M -2 11 Q 0 12 2 11" stroke="#5a4030" stroke-width="0.6" fill="none"/>
+          </g>
+          ${damage > 0.4 ? `<rect x="0" y="0" width="600" height="220" fill="rgba(238,29,82,0.15)"/>` : ''}
         </svg>
       `;
     }
-    // chase cam: ship from behind/above
+
+    // CHASE CAM: Ship from behind and slightly above
     return `
-      <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice">
+      <svg viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id="thrust" cx="0.5" cy="0.5">
-            <stop offset="0" stop-color="#ffaa55" stop-opacity="0.95"/>
-            <stop offset="0.5" stop-color="#ff6a1f" stop-opacity="0.7"/>
+          <radialGradient id="rcThrust" cx="0.5" cy="0.5">
+            <stop offset="0" stop-color="#ffe0a0" stop-opacity="0.95"/>
+            <stop offset="0.4" stop-color="#ffaa55" stop-opacity="0.85"/>
+            <stop offset="0.7" stop-color="#ff6a1f" stop-opacity="0.55"/>
             <stop offset="1" stop-color="#ff6a1f" stop-opacity="0"/>
           </radialGradient>
-          <linearGradient id="canopy" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0" stop-color="rgba(80,150,200,0.7)"/>
-            <stop offset="1" stop-color="rgba(20,40,60,0.95)"/>
+          <linearGradient id="rcCanopy" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="rgba(120,180,220,0.55)"/>
+            <stop offset="1" stop-color="rgba(15,30,50,0.95)"/>
+          </linearGradient>
+          <linearGradient id="rcBody" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="${bodyColor}"/>
+            <stop offset="1" stop-color="${accentColor}"/>
+          </linearGradient>
+          <linearGradient id="rcEngine" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="${accentColor}"/>
+            <stop offset="0.5" stop-color="#1a1d24"/>
+            <stop offset="1" stop-color="${accentColor}"/>
           </linearGradient>
         </defs>
-        <!-- thrust glows (back of ship) -->
-        <ellipse cx="200" cy="170" rx="40" ry="14" fill="url(#thrust)"/>
-        <ellipse cx="400" cy="170" rx="40" ry="14" fill="url(#thrust)"/>
-        <!-- engine pods -->
-        <ellipse cx="200" cy="155" rx="50" ry="22" fill="#3a3e44" stroke="#1a1d24" stroke-width="2"/>
-        <ellipse cx="400" cy="155" rx="50" ry="22" fill="#3a3e44" stroke="#1a1d24" stroke-width="2"/>
-        <ellipse cx="200" cy="155" rx="14" ry="6" fill="#0a0a0a"/>
-        <ellipse cx="400" cy="155" rx="14" ry="6" fill="#0a0a0a"/>
-        <!-- main body trapezoid (gunship grey, weathered) -->
-        <polygon points="180,150 420,150 380,90 220,90" fill="${tint}" stroke="#1a1d24" stroke-width="2"/>
-        <!-- weathering -->
-        <polygon points="220,148 240,140 260,148 250,150" fill="#3a3e44" opacity="0.5"/>
-        <polygon points="380,140 360,148 350,142 370,138" fill="#3a3e44" opacity="0.4"/>
-        <line x1="240" y1="120" x2="360" y2="120" stroke="#1a1d24" stroke-width="1" opacity="0.5"/>
-        <!-- canopy with silhouettes -->
-        <path d="M 250 100 L 350 100 L 340 80 L 260 80 Z" fill="url(#canopy)" stroke="#1a1d24" stroke-width="1.5"/>
-        <ellipse cx="287" cy="92" rx="9" ry="7" fill="#222" opacity="0.95"/> <!-- Mando helmet -->
-        <rect x="280" y="88" width="14" height="3" fill="#000" opacity="0.95"/>
-        <ellipse cx="313" cy="94" rx="6" ry="5" fill="#5a7a3a" opacity="0.95"/> <!-- Grogu -->
-        <ellipse cx="307" cy="93" rx="3" ry="5" fill="#5a7a3a" opacity="0.95"/>
-        <ellipse cx="319" cy="93" rx="3" ry="5" fill="#5a7a3a" opacity="0.95"/>
-        <!-- top fin -->
-        <polygon points="290,80 310,80 305,70 295,70" fill="#3a3e44"/>
+        <!-- Star field -->
+        <rect width="600" height="300" fill="#0a0e18"/>
+        <g opacity="0.6">
+          <circle cx="50" cy="40" r="0.9" fill="#fff"/><circle cx="180" cy="25" r="0.7" fill="#cce0ff"/>
+          <circle cx="350" cy="50" r="1" fill="#fff"/><circle cx="520" cy="30" r="0.6" fill="#fff"/>
+          <circle cx="80" cy="80" r="0.5" fill="#fff"/><circle cx="450" cy="75" r="0.8" fill="#cce0ff"/>
+          <circle cx="280" cy="280" r="0.7" fill="#fff"/><circle cx="100" cy="270" r="0.6" fill="#fff"/>
+        </g>
+        <!-- Hyperspace streaks -->
+        <line x1="50" y1="120" x2="120" y2="118" stroke="rgba(150,200,255,0.4)" stroke-width="0.6"/>
+        <line x1="450" y1="100" x2="530" y2="98" stroke="rgba(150,200,255,0.5)" stroke-width="0.7"/>
+        <line x1="70" y1="60" x2="140" y2="58" stroke="rgba(150,200,255,0.3)" stroke-width="0.5"/>
+
+        <!-- THRUST GLOWS (behind ship, blooming) -->
+        <ellipse cx="155" cy="245" rx="48" ry="18" fill="url(#rcThrust)"/>
+        <ellipse cx="445" cy="245" rx="48" ry="18" fill="url(#rcThrust)"/>
+        <!-- Inner thrust cores -->
+        <ellipse cx="155" cy="245" rx="16" ry="6" fill="#fff" opacity="0.9"/>
+        <ellipse cx="445" cy="245" rx="16" ry="6" fill="#fff" opacity="0.9"/>
+
+        <!-- ENGINE PODS (lateral booms) -->
+        <!-- Left engine pod -->
+        <ellipse cx="155" cy="220" rx="60" ry="28" fill="url(#rcEngine)" stroke="#0a0e15" stroke-width="2"/>
+        <ellipse cx="155" cy="245" rx="20" ry="8" fill="#0a0a0a"/>
+        <!-- Engine pod top fin -->
+        <path d="M 130 195 L 180 195 L 175 175 L 135 175 Z" fill="${accentColor}" stroke="#0a0e15" stroke-width="1.5"/>
+        <!-- Left engine intake (front) -->
+        <ellipse cx="155" cy="195" rx="48" ry="10" fill="${accentColor}" stroke="#0a0e15" stroke-width="1.5"/>
+        <ellipse cx="155" cy="195" rx="36" ry="6" fill="#0a0a0a"/>
+        <!-- Right engine pod -->
+        <ellipse cx="445" cy="220" rx="60" ry="28" fill="url(#rcEngine)" stroke="#0a0e15" stroke-width="2"/>
+        <ellipse cx="445" cy="245" rx="20" ry="8" fill="#0a0a0a"/>
+        <path d="M 420 195 L 470 195 L 465 175 L 425 175 Z" fill="${accentColor}" stroke="#0a0e15" stroke-width="1.5"/>
+        <ellipse cx="445" cy="195" rx="48" ry="10" fill="${accentColor}" stroke="#0a0e15" stroke-width="1.5"/>
+        <ellipse cx="445" cy="195" rx="36" ry="6" fill="#0a0a0a"/>
+
+        <!-- LATERAL BOOM (connects pods to body) -->
+        <path d="M 195 215 L 405 215 L 405 230 L 195 230 Z" fill="${accentColor}" stroke="#0a0e15" stroke-width="1.5"/>
+
+        <!-- MAIN HULL (gunship blue-grey) -->
+        <path d="M 200 200 L 400 200 L 410 150 L 380 110 L 220 110 L 190 150 Z" fill="url(#rcBody)" stroke="#0a0e15" stroke-width="2"/>
+
+        <!-- Panel lines (longitudinal) -->
+        <line x1="220" y1="115" x2="225" y2="200" stroke="#0a0e15" stroke-width="0.8" opacity="0.6"/>
+        <line x1="380" y1="115" x2="375" y2="200" stroke="#0a0e15" stroke-width="0.8" opacity="0.6"/>
+        <line x1="300" y1="110" x2="300" y2="195" stroke="#0a0e15" stroke-width="0.6" opacity="0.4"/>
+
+        <!-- Panel lines (transverse) -->
+        <line x1="200" y1="170" x2="400" y2="170" stroke="#0a0e15" stroke-width="0.6" opacity="0.4"/>
+        <line x1="195" y1="155" x2="405" y2="155" stroke="#0a0e15" stroke-width="0.4" opacity="0.3"/>
+
+        <!-- Hull weathering (panel discoloration) -->
+        <path d="M 230 170 L 245 165 L 250 180 L 235 185 Z" fill="#3a3e44" opacity="0.4"/>
+        <path d="M 360 175 L 375 170 L 370 185 L 355 188 Z" fill="#3a3e44" opacity="0.35"/>
+        <path d="M 290 130 L 310 130 L 308 145 L 288 145 Z" fill="#2a2d35" opacity="0.3"/>
+
+        <!-- Carbon scoring (battle damage) -->
+        ${damage > 0.3 ? `
+          <path d="M 250 140 L 260 145 L 258 155 L 250 152 L 245 148 Z" fill="#0a0a0a" opacity="0.6"/>
+          <path d="M 340 165 L 348 162 L 350 175 L 342 178 L 338 172 Z" fill="#0a0a0a" opacity="0.5"/>
+        ` : ''}
+
+        <!-- COCKPIT CANOPY (trapezoidal, glass) -->
+        <path d="M 250 95 L 350 95 L 340 70 L 260 70 Z" fill="url(#rcCanopy)" stroke="#0a0e15" stroke-width="1.8"/>
+        <!-- Canopy frame mullions -->
+        <line x1="280" y1="95" x2="282" y2="72" stroke="#0a0e15" stroke-width="1.2"/>
+        <line x1="320" y1="95" x2="318" y2="72" stroke="#0a0e15" stroke-width="1.2"/>
+        <!-- Canopy reflection -->
+        <path d="M 254 92 L 268 76 L 280 76 L 264 92 Z" fill="rgba(255,255,255,0.18)"/>
+
+        <!-- MANDO SILHOUETTE (left seat, T-visor visible) -->
+        <g transform="translate(280, 85)">
+          <!-- Beskar helmet body -->
+          <path d="M -8 -4 Q -6 -12 0 -13 Q 6 -12 8 -4 L 8 6 L -8 6 Z" fill="#7a8290" stroke="#0a0e15" stroke-width="0.6"/>
+          <!-- T-visor (the iconic shape) -->
+          <path d="M -6 -8 L 6 -8 L 6 -5 L 1.5 -5 L 1.5 0 L -1.5 0 L -1.5 -5 L -6 -5 Z" fill="#0a0a0a"/>
+          <!-- Helmet shine -->
+          <path d="M -6 -10 Q -4 -12 -2 -12 L -3 -8 Z" fill="rgba(255,255,255,0.4)"/>
+          <!-- Beskar pauldrons -->
+          <path d="M -10 5 L -14 14 L -8 16 L -6 8 Z" fill="#7a8290" stroke="#0a0e15" stroke-width="0.6"/>
+          <path d="M 10 5 L 14 14 L 8 16 L 6 8 Z" fill="#7a8290" stroke="#0a0e15" stroke-width="0.6"/>
+        </g>
+
+        <!-- GROGU SILHOUETTE (right seat / co-pilot perch, ears visible) -->
+        <g transform="translate(320, 88)">
+          <!-- Robe collar -->
+          <path d="M -8 4 Q -6 14 6 14 Q 8 6 8 4 Z" fill="#5a4530"/>
+          <!-- Big ears (long, horizontal) -->
+          <path d="M -8 -4 Q -16 -6 -20 -3 Q -18 1 -10 0 Z" fill="#a8c47a" stroke="#5a7a3a" stroke-width="0.4"/>
+          <path d="M 8 -4 Q 16 -6 20 -3 Q 18 1 10 0 Z" fill="#a8c47a" stroke="#5a7a3a" stroke-width="0.4"/>
+          <!-- Head -->
+          <ellipse cx="0" cy="-2" rx="8" ry="7" fill="#a8c47a" stroke="#5a7a3a" stroke-width="0.5"/>
+          <!-- Wispy hair tufts -->
+          <line x1="-1.5" y1="-9" x2="-1.5" y2="-11" stroke="#7a8a5a" stroke-width="0.5"/>
+          <line x1="0.5" y1="-9.5" x2="0.5" y2="-11.5" stroke="#7a8a5a" stroke-width="0.5"/>
+          <line x1="2" y1="-9" x2="2" y2="-11" stroke="#7a8a5a" stroke-width="0.5"/>
+          <!-- Eyes -->
+          <ellipse cx="-2.5" cy="-2" rx="1.4" ry="2" fill="#1a0a00"/>
+          <ellipse cx="2.5" cy="-2" rx="1.4" ry="2" fill="#1a0a00"/>
+          <!-- Eye shine -->
+          <ellipse cx="-2.2" cy="-2.6" rx="0.4" ry="0.7" fill="#fff" opacity="0.7"/>
+          <ellipse cx="2.8" cy="-2.6" rx="0.4" ry="0.7" fill="#fff" opacity="0.7"/>
+        </g>
+
+        <!-- TOP DORSAL FIN -->
+        <polygon points="290,70 310,70 305,55 295,55" fill="${accentColor}" stroke="#0a0e15" stroke-width="1"/>
+        <!-- Antenna -->
+        <line x1="300" y1="55" x2="300" y2="42" stroke="#0a0e15" stroke-width="1.2"/>
+        <circle cx="300" cy="42" r="1.5" fill="${accentColor}" stroke="#0a0e15" stroke-width="0.5"/>
+
+        <!-- WING-TIP NAVIGATION LIGHTS -->
+        <circle cx="100" cy="220" r="3" fill="#ee1c25" opacity="0.9"/>
+        <circle cx="500" cy="220" r="3" fill="#27f4d2" opacity="0.9"/>
+
+        ${damage > 0.4 ? `<rect x="0" y="0" width="600" height="300" fill="rgba(238,29,82,0.10)"/>` : ''}
       </svg>
     `;
   }
