@@ -3240,6 +3240,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
             <div class="fr-left">
               <div class="fr-trail ${trailClass}" id="fr-trail">
                 <video class="fr-video" id="fr-video" autoplay loop muted playsinline poster="sur-ronster.jpg" preload="auto">
+                  <source src="sur-ronster.mp4" type="video/mp4">
                   <source src="sur-ronster.webm" type="video/webm">
                 </video>
                 <div class="fr-trail-overlay"></div>
@@ -6261,6 +6262,9 @@ document.addEventListener('DOMContentLoaded', () => {
   $('btn-back-levels').addEventListener('click', exitToLevels);
 
   $('btn-preview').addEventListener('click', () => {
+    const code = prompt('Enter unlock code to toggle Preview Mode:');
+    if (code === null) return;
+    if (code !== '0000') { return; }
     Save.togglePreview();
     renderHeader();
     if (currentScreen === 'launcher') renderLauncher();
