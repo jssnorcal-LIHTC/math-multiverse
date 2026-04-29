@@ -190,6 +190,14 @@
   .module-card.locked { opacity: 0.55; cursor: not-allowed; }
   .mc-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
   .mc-icon { font-size: 22px; line-height: 1; }
+  .mc-logo {
+    height: 26px;
+    width: auto;
+    max-width: 80px;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+  }
   .mc-ccss {
     background: rgba(255,255,255,0.06);
     border: 1px solid var(--border-subtle);
@@ -2468,6 +2476,7 @@ const MODULES = [
     domain: 'Fractions',
     ccss: '5.NF',
     icon: '🚵',
+    logoUrl: 'https://en.wikipedia.org/wiki/Special:FilePath/Red_Bull.svg',
     color: '#ee1d52',
     description: 'Send Sur Ronster down the Hardline track. Fraction operations gate every drop.',
     unlocked: true,
@@ -2487,6 +2496,7 @@ const MODULES = [
     domain: 'Decimals & Place Value',
     ccss: '5.NBT',
     icon: '🏎️',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/33/F1.svg',
     color: '#ff8000',
     description: 'Pick a driver. Race a Grand Prix. Sector splits, lap times, fuel and tire wear gate every overtake.',
     unlocked: false,
@@ -2507,6 +2517,7 @@ const MODULES = [
     domain: 'Coordinate Plane',
     ccss: '5.G',
     icon: '🛸',
+    logoUrl: 'https://en.wikipedia.org/wiki/Special:FilePath/Star_Wars_Logo.svg',
     color: '#00d9ff',
     description: 'Fly Mando and Grogu through hyperspace. Plot coordinates to dodge asteroids and outrun TIE fighters.',
     unlocked: false,
@@ -2527,6 +2538,7 @@ const MODULES = [
     domain: 'Volume',
     ccss: '5.MD.C',
     icon: '🧱',
+    logoUrl: 'https://en.wikipedia.org/wiki/Special:FilePath/LEGO_logo.svg',
     color: '#f2cd37',
     description: 'See the bricks. Build Bricksburg, calculate volumes, end with Benny\'s SPACESHIP!',
     unlocked: false,
@@ -2547,6 +2559,7 @@ const MODULES = [
     domain: 'Measurement Conversion',
     ccss: '5.MD.A',
     icon: '🪨',
+    logoUrl: 'https://en.wikipedia.org/wiki/Special:FilePath/NASA_logo.svg',
     color: '#c93d3d',
     description: 'Save Rocky. Translate between Eridian and human units to keep the Hail Mary alive.',
     unlocked: false,
@@ -2567,6 +2580,7 @@ const MODULES = [
     domain: 'Order of Operations',
     ccss: '5.OA',
     icon: '🐻',
+    logoUrl: 'https://www.gutenberg.org/files/67098/67098-h/images/cover.jpg',
     color: '#d4a24c',
     description: 'It rained, and it rained, and it rained. Save Pooh and Piglet from the flood with parentheses and brackets.',
     unlocked: false,
@@ -2828,9 +2842,13 @@ function renderLauncher() {
       ? (cleared === total ? '★ COMPLETED' : 'PLAY →')
       : '🔒';
 
+    const iconHtml = m.logoUrl
+      ? `<img class="mc-logo" src="${m.logoUrl}" alt="${m.domain}" loading="lazy" onerror="this.outerHTML = '<div class=&quot;mc-icon&quot;>${m.icon}</div>';">`
+      : `<div class="mc-icon">${m.icon}</div>`;
+
     card.innerHTML = `
       <div class="mc-header">
-        <div class="mc-icon">${m.icon}</div>
+        ${iconHtml}
         <div class="mc-ccss">CCSS ${m.ccss}</div>
       </div>
       <div class="mc-title">${m.name}</div>
@@ -5689,39 +5707,114 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
   // ---- Rocky / Grace SVG avatars ----
 
   function rockySvg(small) {
-    const s = small ? 90 : 200;
-    const r = small ? 30 : 60;
+    // Top-down view of canonical Rocky from Project Hail Mary:
+    // pentaradial carapace, 5 articulated limbs at 72° with three-finger
+    // claws, fipple vent on top center, granite/silica rock texture.
+    const s = small ? 90 : 220;
     const cx = s / 2, cy = s / 2;
+    const bodyR = small ? 22 : 52;          // carapace radius
+    const hingeOut = small ? 12 : 28;       // limb segment 1 length (shoulder→elbow)
+    const tipOut = small ? 11 : 24;         // limb segment 2 length (elbow→claw)
+    const segWidth = small ? 6 : 13;        // limb thickness
+    const clawLen = small ? 4 : 9;          // individual claw length
+    const idSuffix = small ? 's' : 'l';
+
+    // 5 vertex angles, top vertex pointed up
     const verts = [];
     for (let i = 0; i < 5; i++) {
-      const ang = -Math.PI/2 + i * 2 * Math.PI / 5;
-      verts.push({ x: cx + r * Math.cos(ang), y: cy + r * Math.sin(ang), ang });
+      const ang = -Math.PI / 2 + i * 2 * Math.PI / 5;
+      verts.push({ x: cx + bodyR * Math.cos(ang), y: cy + bodyR * Math.sin(ang), ang });
     }
     const polyPts = verts.map(v => `${v.x.toFixed(1)},${v.y.toFixed(1)}`).join(' ');
-    let limbs = '';
-    for (const v of verts) {
-      const ex = cx + (r + (small ? 14 : 30)) * Math.cos(v.ang);
-      const ey = cy + (r + (small ? 14 : 30)) * Math.sin(v.ang);
-      limbs += `<line x1="${v.x.toFixed(1)}" y1="${v.y.toFixed(1)}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="#5a3a2a" stroke-width="${small ? 4 : 8}" stroke-linecap="round"/>`;
-      // 3-claw tip
-      const tipR = small ? 3 : 6;
-      const claw1 = `${(ex + tipR).toFixed(1)},${(ey + tipR).toFixed(1)}`;
-      const claw2 = `${(ex - tipR).toFixed(1)},${(ey + tipR).toFixed(1)}`;
-      const claw3 = `${ex.toFixed(1)},${(ey + tipR * 1.5).toFixed(1)}`;
-      limbs += `<circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="${tipR}" fill="#3a2a1a"/>`;
+
+    // Limbs: from each vertex, segment 1 angled slightly off-radial,
+    // hinge joint, segment 2, then 3-claw tip
+    let limbsHtml = '';
+    verts.forEach((v, i) => {
+      const radialAng = v.ang;
+      // shoulder to elbow — bend slightly clockwise for natural look
+      const bendAng = (i % 2 === 0 ? 0.18 : -0.18);
+      const elbowAng = radialAng + bendAng;
+      const elbow = {
+        x: v.x + hingeOut * Math.cos(elbowAng),
+        y: v.y + hingeOut * Math.sin(elbowAng),
+      };
+      // elbow to claw tip — straighten back
+      const tip = {
+        x: elbow.x + tipOut * Math.cos(radialAng),
+        y: elbow.y + tipOut * Math.sin(radialAng),
+      };
+      // Segment 1 (shoulder–elbow)
+      limbsHtml += `<line x1="${v.x.toFixed(1)}" y1="${v.y.toFixed(1)}" x2="${elbow.x.toFixed(1)}" y2="${elbow.y.toFixed(1)}" stroke="url(#rkLimb${idSuffix})" stroke-width="${segWidth}" stroke-linecap="round"/>`;
+      // Segment 2 (elbow–claw)
+      limbsHtml += `<line x1="${elbow.x.toFixed(1)}" y1="${elbow.y.toFixed(1)}" x2="${tip.x.toFixed(1)}" y2="${tip.y.toFixed(1)}" stroke="url(#rkLimb${idSuffix})" stroke-width="${segWidth - 1}" stroke-linecap="round"/>`;
+      // Hinge joint detail
+      limbsHtml += `<circle cx="${elbow.x.toFixed(1)}" cy="${elbow.y.toFixed(1)}" r="${segWidth * 0.35}" fill="#3a2818" stroke="#1a0a00" stroke-width="0.8"/>`;
+      // Three-claw fingertips, splayed at angles ±0.5 around the radial direction
+      const clawCenter = tip;
+      const clawAngles = [radialAng - 0.45, radialAng, radialAng + 0.45];
+      clawAngles.forEach(ca => {
+        const cx2 = clawCenter.x + clawLen * Math.cos(ca);
+        const cy2 = clawCenter.y + clawLen * Math.sin(ca);
+        limbsHtml += `<line x1="${clawCenter.x.toFixed(1)}" y1="${clawCenter.y.toFixed(1)}" x2="${cx2.toFixed(1)}" y2="${cy2.toFixed(1)}" stroke="#2a1a0a" stroke-width="${small ? 1.6 : 3.2}" stroke-linecap="round"/>`;
+      });
+      // Claw base palm
+      limbsHtml += `<circle cx="${clawCenter.x.toFixed(1)}" cy="${clawCenter.y.toFixed(1)}" r="${segWidth * 0.55}" fill="#3a2818" stroke="#1a0a00" stroke-width="0.8"/>`;
+    });
+
+    // Granite rock-texture speckle pattern over the carapace
+    let speckle = '';
+    const speckleCount = small ? 14 : 32;
+    for (let i = 0; i < speckleCount; i++) {
+      const ang = (i * 137.5) * Math.PI / 180; // golden-angle spread
+      const dist = (small ? 4 : 10) + ((i * 7) % (bodyR - (small ? 4 : 10)));
+      const sx = cx + dist * Math.cos(ang);
+      const sy = cy + dist * Math.sin(ang);
+      const sr = small ? (0.6 + (i % 3) * 0.4) : (1.2 + (i % 4) * 0.7);
+      const c = i % 3 === 0 ? '#5a3a28' : (i % 3 === 1 ? '#3a2818' : '#7a5d40');
+      speckle += `<circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="${sr.toFixed(1)}" fill="${c}" opacity="0.55"/>`;
     }
+
+    // Fipple/whistle organ on top center (Rocky's mouth/speech vent)
+    const fippleY = cy - bodyR * 0.30;
+    const fippleR = small ? 4 : 9;
+    const fippleHtml = `
+      <ellipse cx="${cx}" cy="${fippleY}" rx="${fippleR}" ry="${fippleR * 0.55}" fill="#1a0a00" stroke="#3a2818" stroke-width="${small ? 0.8 : 1.5}"/>
+      <ellipse cx="${cx}" cy="${fippleY - fippleR * 0.18}" rx="${fippleR * 0.55}" ry="${fippleR * 0.18}" fill="#5a3a28" opacity="0.7"/>
+    `;
+
     return `
       <svg viewBox="0 0 ${s} ${s}" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id="rkBody${small?'s':'l'}" cx="0.4" cy="0.4">
-            <stop offset="0" stop-color="#a8856e"/>
-            <stop offset="1" stop-color="#4a3120"/>
+          <radialGradient id="rkBody${idSuffix}" cx="0.42" cy="0.38" r="0.65">
+            <stop offset="0" stop-color="#9a7c66"/>
+            <stop offset="0.55" stop-color="#6e5440"/>
+            <stop offset="1" stop-color="#3a2818"/>
           </radialGradient>
+          <linearGradient id="rkLimb${idSuffix}" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#7a5d40"/>
+            <stop offset="0.5" stop-color="#5a3a28"/>
+            <stop offset="1" stop-color="#3a2818"/>
+          </linearGradient>
+          <filter id="rkBlur${idSuffix}"><feGaussianBlur stdDeviation="${small ? 0.4 : 1}"/></filter>
         </defs>
-        ${limbs}
-        <polygon points="${polyPts}" fill="url(#rkBody${small?'s':'l'})" stroke="#2a1a0a" stroke-width="${small ? 1.5 : 3}"/>
-        <circle cx="${cx - r * 0.2}" cy="${cy - r * 0.2}" r="${r * 0.18}" fill="rgba(255,200,150,0.4)"/>
-        <text x="${cx}" y="${cy + (small ? 4 : 8)}" text-anchor="middle" fill="#1a0a00" font-size="${small ? 8 : 14}" font-weight="800" font-family="system-ui">♪</text>
+        <!-- limbs underneath body -->
+        ${limbsHtml}
+        <!-- carapace shadow -->
+        <polygon points="${polyPts}" fill="#1a0a00" opacity="0.4" transform="translate(${small ? 1.5 : 3}, ${small ? 2 : 4})"/>
+        <!-- carapace body -->
+        <polygon points="${polyPts}" fill="url(#rkBody${idSuffix})" stroke="#1a0a00" stroke-width="${small ? 1.2 : 2.5}" stroke-linejoin="round"/>
+        <!-- granite speckle texture (clipped to body via overlap) -->
+        <g filter="url(#rkBlur${idSuffix})">${speckle}</g>
+        <!-- highlight on top-left of carapace -->
+        <ellipse cx="${cx - bodyR * 0.32}" cy="${cy - bodyR * 0.30}" rx="${bodyR * 0.30}" ry="${bodyR * 0.18}" fill="rgba(255,220,180,0.35)"/>
+        <!-- fipple speech vent -->
+        ${fippleHtml}
+        <!-- pentagon edge highlights to suggest 3D facets -->
+        ${verts.map((v, i) => {
+          const next = verts[(i + 1) % 5];
+          return `<line x1="${v.x.toFixed(1)}" y1="${v.y.toFixed(1)}" x2="${next.x.toFixed(1)}" y2="${next.y.toFixed(1)}" stroke="rgba(255,220,180,0.18)" stroke-width="${small ? 0.6 : 1.2}"/>`;
+        }).join('')}
       </svg>
     `;
   }
