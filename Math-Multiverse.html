@@ -1189,20 +1189,35 @@
     position: relative; z-index: 1;
     width: 100%; height: 100%;
     display: grid;
-    grid-template-rows: minmax(80px, 18%) auto 1fr auto;
+    grid-template-columns: minmax(220px, 28%) 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "ship  header"
+      "ship  main"
+      "ship  foot";
     gap: 8px;
     padding: 8px 10px;
     min-height: 0;
   }
+  @media (max-width: 760px) {
+    .rc-flight {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(80px, 18%) auto 1fr auto;
+      grid-template-areas: "ship" "header" "main" "foot";
+    }
+  }
   .rc-ship {
+    grid-area: ship;
     background: linear-gradient(180deg, transparent, rgba(0,0,0,0.4));
     border: 1px solid var(--border-subtle);
     border-radius: 10px;
     position: relative;
     overflow: hidden;
+    min-height: 0;
   }
   .rc-ship svg { width: 100%; height: 100%; display: block; }
   .rc-hud {
+    grid-area: header;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1211,6 +1226,8 @@
     border: 1px solid rgba(0,217,255,0.2);
     border-radius: 8px;
     font-feature-settings: 'tnum' 1;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .rc-stat { display: flex; flex-direction: column; align-items: flex-start; }
   .rc-stat-label {
@@ -1230,14 +1247,35 @@
   .rc-stat-value.good { color: var(--acc-success); }
 
   .rc-question {
+    grid-area: main;
     background: rgba(15, 22, 38, 0.6);
     border: 1px solid var(--border-subtle);
     border-radius: 10px;
-    padding: 12px 14px;
-    overflow-y: auto;
+    padding: 14px 16px;
+    overflow: hidden;
     min-height: 0;
     display: flex;
     flex-direction: column;
+  }
+  .rc-q-body {
+    flex: 1 1 auto;
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+    min-height: 0;
+    margin-top: 8px;
+  }
+  @media (max-width: 760px) {
+    .rc-q-body { flex-direction: column; }
+  }
+  .rc-q-body .rc-q-prompt {
+    flex: 1 1 0;
+    margin-bottom: 0;
+    min-width: 220px;
+    max-width: 380px;
+    overflow-y: auto;
+    align-self: flex-start;
+    padding-top: 4px;
   }
   .rc-q-meta {
     display: flex; justify-content: space-between;
@@ -1255,26 +1293,28 @@
 
   .rc-grid-wrap {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-    gap: 14px;
-    flex: 0 0 auto;
-  }
-  @media (max-width: 700px) {
-    .rc-grid-wrap { flex-direction: column; }
+    gap: 12px;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
   }
 
   #rc-gridhost {
-    width: 280px;
-    height: 280px;
+    aspect-ratio: 1 / 1;
+    height: 100%;
+    width: auto;
     max-width: 100%;
-    flex-shrink: 0;
+    max-height: 100%;
+    align-self: center;
   }
 
   .rc-plot-grid {
     display: block;
     width: 100%;
     height: 100%;
+    max-height: 100%;
   }
   .rc-cell {
     fill: rgba(0,217,255,0.04);
@@ -1334,6 +1374,7 @@
   .rc-ans:disabled { cursor: not-allowed; }
 
   .rc-foot {
+    grid-area: foot;
     display: flex; justify-content: space-between; align-items: center;
     padding: 8px 12px;
     background: rgba(0, 30, 50, 0.5);
@@ -1341,6 +1382,8 @@
     border-radius: 8px;
     font-size: 0.78rem;
     color: var(--text-muted);
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .rc-radio { font-style: italic; color: var(--text-secondary); }
   .rc-hull-pips { display: flex; gap: 6px; }
@@ -1472,10 +1515,22 @@
     position: relative; z-index: 1;
     width: 100%; height: 100%;
     display: grid;
-    grid-template-rows: minmax(120px, 22%) auto 1fr auto;
+    grid-template-columns: minmax(240px, 32%) 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "stage  status"
+      "stage  question"
+      "stage  foot";
     gap: 8px;
     padding: 8px 10px;
     min-height: 0;
+  }
+  @media (max-width: 760px) {
+    .mb-build {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(140px, 26%) auto 1fr auto;
+      grid-template-areas: "stage" "status" "question" "foot";
+    }
   }
   .mb-build::after {
     /* ground */
@@ -1486,14 +1541,17 @@
     z-index: 0;
   }
   .mb-stage {
+    grid-area: stage;
     position: relative;
     background: rgba(20, 30, 60, 0.0);
     border-radius: 10px;
     overflow: hidden;
     z-index: 1;
+    min-height: 0;
   }
   .mb-stage svg { width: 100%; height: 100%; display: block; }
   .mb-status-bar {
+    grid-area: status;
     background: rgba(20, 25, 35, 0.9);
     border: 2px solid #1a1d24;
     border-radius: 8px;
@@ -1504,6 +1562,7 @@
     gap: 10px;
     color: #f0f4f8;
     font-feature-settings: 'tnum' 1;
+    flex-wrap: wrap;
   }
   .mb-stat { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
   .mb-stat-label {
@@ -1517,14 +1576,17 @@
   .mb-stat-value.ok { color: #4ade80; }
 
   .mb-question {
+    grid-area: question;
     background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
     border: 2px solid #1a1d24;
     border-radius: 10px;
-    padding: 12px 14px;
+    padding: 14px 16px;
     overflow-y: auto;
     color: #1a1a1a;
     box-shadow: 0 4px 0 #1a1a1a;
     min-height: 0;
+    display: flex;
+    flex-direction: column;
   }
   .mb-q-meta {
     display: flex; justify-content: space-between;
@@ -1578,6 +1640,7 @@
   .mb-ans:disabled { cursor: not-allowed; }
 
   .mb-foot {
+    grid-area: foot;
     background: rgba(20, 25, 35, 0.85);
     border: 2px solid #1a1d24;
     border-radius: 8px;
@@ -1587,6 +1650,8 @@
     justify-content: space-between;
     align-items: center;
     font-size: 0.78rem;
+    flex-wrap: wrap;
+    gap: 6px;
   }
   .mb-vo {
     font-style: italic;
@@ -1723,16 +1788,33 @@
     position: relative; z-index: 1;
     width: 100%; height: 100%;
     display: grid;
-    grid-template-columns: 1fr 220px;
-    grid-template-rows: minmax(140px, 24%) auto 1fr auto;
+    grid-template-columns: minmax(240px, 30%) 1fr 200px;
+    grid-template-rows: auto 1fr auto;
     grid-template-areas:
-      "scene  dict"
-      "status dict"
-      "qbox   dict"
-      "foot   foot";
+      "scene status dict"
+      "scene qbox   dict"
+      "foot  foot   foot";
     gap: 8px;
     padding: 8px 10px;
     min-height: 0;
+  }
+  @media (max-width: 980px) {
+    .rk-room {
+      grid-template-columns: minmax(200px, 30%) 1fr;
+      grid-template-rows: auto 1fr 140px auto;
+      grid-template-areas:
+        "scene status"
+        "scene qbox"
+        "dict  dict"
+        "foot  foot";
+    }
+  }
+  @media (max-width: 700px) {
+    .rk-room {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(140px, 22%) auto 1fr 140px auto;
+      grid-template-areas: "scene" "status" "qbox" "dict" "foot";
+    }
   }
   .rk-scene {
     grid-area: scene;
@@ -1868,8 +1950,7 @@
   }
   .rk-pip.lost { background: rgba(255,255,255,0.1); }
 
-  @media (max-width: 800px) {
-    .rk-room { grid-template-columns: 1fr; grid-template-areas: "scene" "status" "qbox" "dict" "foot"; }
+  @media (max-width: 980px) {
     .rk-dict { max-height: 200px; }
   }
 
@@ -1999,22 +2080,37 @@
     position: relative; z-index: 1;
     width: 100%; height: 100%;
     display: grid;
-    grid-template-rows: minmax(150px, 26%) auto 1fr auto;
+    grid-template-columns: minmax(220px, 32%) 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "stage  status"
+      "stage  question"
+      "stage  foot";
     gap: 8px;
-    padding: 8px 10px;
+    padding: 10px 12px;
     min-height: 0;
   }
+  @media (max-width: 760px) {
+    .fb-story {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(140px, 26%) auto 1fr auto;
+      grid-template-areas: "stage" "status" "question" "foot";
+    }
+  }
   .fb-stage {
+    grid-area: stage;
     border: 1px solid rgba(139, 90, 43, 0.3);
     border-radius: 4px;
     background: #F8F0DD;
     position: relative;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(74, 53, 38, 0.1);
+    min-height: 0;
   }
   .fb-stage svg { width: 100%; height: 100%; display: block; }
 
   .fb-status {
+    grid-area: status;
     background: rgba(245, 230, 200, 0.85);
     border: 1px solid rgba(139, 90, 43, 0.3);
     border-radius: 4px;
@@ -2023,6 +2119,8 @@
     justify-content: space-between;
     align-items: center;
     font-feature-settings: 'tnum' 1;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .fb-stat { display: flex; align-items: center; gap: 6px; }
   .fb-stat-label {
@@ -2041,10 +2139,11 @@
   }
 
   .fb-question {
+    grid-area: question;
     background: #FAF3E0;
     border: 1px solid rgba(139, 90, 43, 0.3);
     border-radius: 4px;
-    padding: 14px 16px;
+    padding: 16px 20px;
     overflow-y: auto;
     box-shadow: 0 2px 8px rgba(74, 53, 38, 0.08);
     min-height: 0;
@@ -2102,6 +2201,7 @@
   .fb-ans:disabled { cursor: not-allowed; }
 
   .fb-foot {
+    grid-area: foot;
     background: rgba(245, 230, 200, 0.7);
     border: 1px solid rgba(139, 90, 43, 0.3);
     border-radius: 4px;
@@ -2112,6 +2212,8 @@
     font-size: 0.85rem;
     font-style: italic;
     color: #8B5A2B;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .fb-jar {
     display: inline-block;
@@ -4559,10 +4661,12 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
             <span>JUMP ${state.questionNum + 1} / ${totalQ}</span>
             <span>${q.type === 'plot' ? 'PLOT THE COORDINATE' : 'NAVCOM QUERY'}</span>
           </div>
-          <div class="rc-q-prompt">${q.prompt}</div>
-          <div class="rc-grid-wrap">
-            <div id="rc-gridhost"></div>
-            ${q.type === 'mc' ? `<div class="rc-answers" id="rc-answers"></div>` : ''}
+          <div class="rc-q-body">
+            <div class="rc-q-prompt">${q.prompt}</div>
+            <div class="rc-grid-wrap">
+              <div id="rc-gridhost"></div>
+              ${q.type === 'mc' ? `<div class="rc-answers" id="rc-answers"></div>` : ''}
+            </div>
           </div>
         `;
         const gridHost = qEl.querySelector('#rc-gridhost');
