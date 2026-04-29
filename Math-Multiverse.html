@@ -892,9 +892,10 @@
   .f1-main {
     grid-area: main;
     display: grid;
-    grid-template-rows: minmax(140px, 30%) 1fr;
-    gap: 12px;
+    grid-template-rows: minmax(110px, 22%) 1fr;
+    gap: 10px;
     overflow: hidden;
+    min-height: 0;
   }
   .f1-circuit {
     background: var(--bg-card);
@@ -930,19 +931,20 @@
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: 10px;
-    padding: 18px;
+    padding: 14px 16px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
     overflow-y: auto;
+    min-height: 0;
   }
   .f1-q-meta {
     display: flex; align-items: center; justify-content: space-between;
-    font-size: 0.75rem; color: var(--text-muted);
+    font-size: 0.7rem; color: var(--text-muted);
     text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;
   }
   .f1-q-prompt {
-    font-size: 1.18rem; line-height: 1.5;
+    font-size: 1.05rem; line-height: 1.45;
     color: var(--text-primary);
     font-weight: 500;
   }
@@ -954,12 +956,12 @@
     gap: 10px;
   }
   .f1-ans {
-    padding: 14px 16px;
+    padding: 11px 14px;
     background: var(--bg-elevated);
     border: 2px solid var(--border-subtle);
     border-radius: 8px;
     color: var(--text-primary);
-    font-size: 1.1rem;
+    font-size: 1.02rem;
     font-weight: 700;
     cursor: pointer;
     font-family: inherit;
@@ -1187,9 +1189,10 @@
     position: relative; z-index: 1;
     width: 100%; height: 100%;
     display: grid;
-    grid-template-rows: minmax(180px, 35%) auto 1fr auto;
-    gap: 10px;
-    padding: 10px;
+    grid-template-rows: minmax(140px, 24%) auto 1fr auto;
+    gap: 8px;
+    padding: 8px 10px;
+    min-height: 0;
   }
   .rc-ship {
     background: linear-gradient(180deg, transparent, rgba(0,0,0,0.4));
@@ -1230,8 +1233,9 @@
     background: rgba(15, 22, 38, 0.6);
     border: 1px solid var(--border-subtle);
     border-radius: 10px;
-    padding: 16px;
+    padding: 12px 14px;
     overflow-y: auto;
+    min-height: 0;
   }
   .rc-q-meta {
     display: flex; justify-content: space-between;
@@ -1240,9 +1244,9 @@
     margin-bottom: 10px;
   }
   .rc-q-prompt {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    margin-bottom: 12px;
+    font-size: 1rem;
+    line-height: 1.45;
+    margin-bottom: 10px;
   }
   .rc-q-prompt strong { color: var(--theme-coords); font-feature-settings: 'tnum' 1; }
   .rc-q-prompt em { font-style: italic; color: var(--text-secondary); }
@@ -1457,9 +1461,10 @@
     position: relative; z-index: 1;
     width: 100%; height: 100%;
     display: grid;
-    grid-template-rows: minmax(240px, 45%) auto 1fr auto;
-    gap: 10px;
-    padding: 10px;
+    grid-template-rows: minmax(120px, 22%) auto 1fr auto;
+    gap: 8px;
+    padding: 8px 10px;
+    min-height: 0;
   }
   .mb-build::after {
     /* ground */
@@ -1504,10 +1509,11 @@
     background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
     border: 2px solid #1a1d24;
     border-radius: 10px;
-    padding: 16px;
+    padding: 12px 14px;
     overflow-y: auto;
     color: #1a1a1a;
     box-shadow: 0 4px 0 #1a1a1a;
+    min-height: 0;
   }
   .mb-q-meta {
     display: flex; justify-content: space-between;
@@ -1516,9 +1522,9 @@
     margin-bottom: 10px;
   }
   .mb-q-prompt {
-    font-size: 1.15rem;
-    line-height: 1.5;
-    margin-bottom: 12px;
+    font-size: 1rem;
+    line-height: 1.45;
+    margin-bottom: 10px;
     font-weight: 500;
   }
   .mb-q-prompt strong {
@@ -1706,15 +1712,16 @@
     position: relative; z-index: 1;
     width: 100%; height: 100%;
     display: grid;
-    grid-template-columns: 1fr 240px;
-    grid-template-rows: minmax(180px, 35%) auto 1fr auto;
+    grid-template-columns: 1fr 220px;
+    grid-template-rows: minmax(140px, 24%) auto 1fr auto;
     grid-template-areas:
       "scene  dict"
       "status dict"
       "qbox   dict"
       "foot   foot";
-    gap: 10px;
-    padding: 10px;
+    gap: 8px;
+    padding: 8px 10px;
+    min-height: 0;
   }
   .rk-scene {
     grid-area: scene;
@@ -1749,11 +1756,12 @@
     background: rgba(15, 22, 38, 0.7);
     border: 1px solid var(--border-subtle);
     border-radius: 10px;
-    padding: 16px;
+    padding: 12px 14px;
     overflow-y: auto;
+    min-height: 0;
   }
-  .rk-q-meta { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 10px; }
-  .rk-q-prompt { font-size: 1.1rem; line-height: 1.5; margin-bottom: 12px; }
+  .rk-q-meta { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+  .rk-q-prompt { font-size: 1rem; line-height: 1.45; margin-bottom: 10px; }
   .rk-q-prompt strong { color: #ff8c5a; font-feature-settings: 'tnum' 1; background: rgba(255,140,80,0.1); padding: 0 4px; border-radius: 3px; }
   .rk-q-prompt em { font-style: italic; color: var(--text-secondary); }
   .rk-rocky-tag {
@@ -1980,9 +1988,10 @@
     position: relative; z-index: 1;
     width: 100%; height: 100%;
     display: grid;
-    grid-template-rows: minmax(220px, 38%) auto 1fr auto;
-    gap: 12px;
-    padding: 12px;
+    grid-template-rows: minmax(150px, 26%) auto 1fr auto;
+    gap: 8px;
+    padding: 8px 10px;
+    min-height: 0;
   }
   .fb-stage {
     border: 1px solid rgba(139, 90, 43, 0.3);
@@ -2024,9 +2033,10 @@
     background: #FAF3E0;
     border: 1px solid rgba(139, 90, 43, 0.3);
     border-radius: 4px;
-    padding: 18px 20px;
+    padding: 14px 16px;
     overflow-y: auto;
     box-shadow: 0 2px 8px rgba(74, 53, 38, 0.08);
+    min-height: 0;
   }
   .fb-q-meta {
     display: flex; justify-content: space-between;
@@ -2036,10 +2046,10 @@
     margin-bottom: 10px;
   }
   .fb-q-prompt {
-    font-size: 1.18rem;
-    line-height: 1.55;
+    font-size: 1.05rem;
+    line-height: 1.5;
     color: #2A1F16;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
   .fb-q-prompt strong {
     font-weight: 700;
