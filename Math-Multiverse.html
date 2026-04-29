@@ -404,6 +404,245 @@
   .lc-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
 
   /* ============================================================
+     MODULE 1: HARDLINE FRACTION RIDER  (.mod-fr)
+     ============================================================ */
+  .mod-fr {
+    width: 100%; height: 100%;
+    position: relative;
+    color: var(--text-primary);
+    background:
+      radial-gradient(ellipse 50% 40% at 0% 0%, rgba(238,29,82,0.08), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 100% 100%, rgba(255,204,0,0.05), transparent 60%),
+      var(--bg-base);
+    overflow: hidden;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  .fr-stage {
+    width: 100%; height: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+    gap: 12px;
+    padding: 12px;
+  }
+  @media (max-width: 860px) {
+    .fr-stage { grid-template-columns: 1fr; grid-template-rows: minmax(180px, 30%) 1fr; }
+  }
+
+  .fr-left {
+    display: flex; flex-direction: column; gap: 10px;
+    min-height: 0;
+  }
+  .fr-right {
+    display: flex; flex-direction: column; gap: 10px;
+    min-height: 0;
+  }
+
+  .fr-trail {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    flex: 1;
+    min-height: 160px;
+    max-height: 340px;
+    transition: filter 0.4s var(--ease-out);
+  }
+  .fr-trail.warn   { filter: hue-rotate(-12deg) saturate(1.1); }
+  .fr-trail.danger { filter: hue-rotate(-22deg) saturate(1.3) brightness(0.85); }
+  .fr-trail video {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+    transition: filter 0.4s var(--ease-out);
+  }
+  .fr-trail-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(8,9,11,0.7) 100%);
+    pointer-events: none;
+  }
+  .fr-trail-tag {
+    position: absolute; top: 10px; left: 10px;
+    background: var(--rb-red, #ee1d52);
+    color: var(--rb-yellow, #ffcc00);
+    font-size: 0.62rem; font-weight: 800; letter-spacing: 0.2em;
+    padding: 3px 8px;
+    border-radius: 3px;
+    transform: skewX(-10deg);
+  }
+  .fr-trail-tag span { display: inline-block; transform: skewX(10deg); }
+
+  .fr-status {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px;
+  }
+  .fr-status-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.78rem; font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .fr-status-pill.safe   { background: rgba(74,222,128,0.18); color: #4ade80; }
+  .fr-status-pill.warn   { background: rgba(251,191,36,0.18); color: #fbbf24; }
+  .fr-status-pill.danger { background: rgba(248,113,113,0.20); color: #f87171; }
+  .fr-danger-meter {
+    display: flex; gap: 4px;
+  }
+  .fr-seg {
+    width: 22px; height: 8px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.08);
+  }
+  .fr-seg.lit-1 { background: #fbbf24; }
+  .fr-seg.lit-2 { background: #ff8000; }
+  .fr-seg.lit-3 { background: #ef4444; box-shadow: 0 0 8px rgba(239,68,68,0.5); }
+
+  .fr-info {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .fr-info strong { color: var(--rb-yellow, #ffcc00); font-weight: 700; }
+
+  .fr-header {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .fr-stat { display: flex; flex-direction: column; align-items: flex-start; }
+  .fr-stat-label { font-size: 0.62rem; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
+  .fr-stat-value { font-size: 1rem; font-weight: 800; color: var(--text-primary); }
+  .fr-stat-value.streak { color: var(--rb-yellow, #ffcc00); }
+  .fr-streak-pips { display: flex; gap: 3px; margin-top: 2px; }
+  .fr-pip {
+    width: 7px; height: 7px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.10);
+  }
+  .fr-pip.lit { background: var(--rb-yellow, #ffcc00); box-shadow: 0 0 4px var(--rb-yellow, #ffcc00); }
+
+  .fr-question {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 16px;
+    flex: 1;
+    overflow-y: auto;
+  }
+  .fr-q-meta { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+  .fr-q-text { font-size: 1.05rem; line-height: 1.45; margin-bottom: 12px; }
+  .fr-eq {
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 8px 0 14px;
+    padding: 8px 16px;
+    background: rgba(255,204,0,0.10);
+    border-left: 3px solid var(--rb-yellow, #ffcc00);
+    border-radius: 0 6px 6px 0;
+  }
+  .fr-eq .op { color: var(--rb-red, #ee1d52); margin: 0 4px; }
+  .fr-eq .eq { color: var(--text-muted); margin: 0 4px; }
+  .fr-pizzas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; align-items: center; }
+  .fr-pizza-block { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .fr-pizza {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    border: 2px solid #1a1d24;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+  .fr-pizza-frac { font-size: 0.72rem; color: var(--text-secondary); font-weight: 700; }
+  .fr-answers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .fr-ans {
+    padding: 16px 14px;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1.18rem;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.14s var(--ease-spring), border-color 0.14s var(--ease-out), background 0.14s var(--ease-out);
+  }
+  .fr-ans:hover:not(:disabled) {
+    transform: translateY(-2px);
+    border-color: var(--rb-yellow, #ffcc00);
+    background: var(--bg-hover);
+  }
+  .fr-ans.correct { border-color: #4ade80; background: rgba(74,222,128,0.18); color: #4ade80; }
+  .fr-ans.wrong   { border-color: #f87171; background: rgba(248,113,113,0.18); color: #f87171; }
+  .fr-ans:disabled { cursor: not-allowed; }
+
+  /* Crash overlay */
+  .fr-crash-overlay {
+    position: absolute; inset: 0; z-index: 80;
+    background: rgba(8, 9, 11, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    animation: frCrashFade 0.3s var(--ease-out);
+  }
+  @keyframes frCrashFade { from { opacity: 0; } to { opacity: 1; } }
+  .fr-crash-card {
+    width: 100%; max-width: 460px;
+    background: linear-gradient(135deg, #1d2129, #15181f);
+    border: 2px solid var(--rb-red, #ee1d52);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 16px 48px rgba(238,29,82,0.4);
+  }
+  .fr-crash-head {
+    display: flex; justify-content: space-between;
+    font-size: 0.7rem; font-weight: 800;
+    letter-spacing: 0.2em;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .fr-crash-head .replay { color: var(--rb-red, #ee1d52); }
+  .fr-crash-head .meta   { color: var(--text-muted); }
+  .fr-crash-impact {
+    background: var(--rb-red, #ee1d52);
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 0.78rem; font-weight: 800;
+    letter-spacing: 0.16em;
+    margin-bottom: 14px;
+    border-radius: 4px;
+  }
+  .fr-crash-emoji { font-size: 3.4rem; text-align: center; margin-bottom: 10px; }
+  .fr-crash-title { font-size: 1.4rem; font-weight: 900; text-align: center; color: var(--rb-yellow, #ffcc00); margin-bottom: 10px; letter-spacing: -0.01em; }
+  .fr-crash-msg   { font-size: 0.92rem; text-align: center; color: var(--text-secondary); line-height: 1.5; }
+
+  @keyframes frShake {
+    0%,100% { transform: translate(0,0); }
+    20% { transform: translate(-6px,3px); }
+    40% { transform: translate(5px,-3px); }
+    60% { transform: translate(-4px,4px); }
+    80% { transform: translate(3px,-2px); }
+  }
+  .fr-shake { animation: frShake 0.5s var(--ease-out); }
+
+  /* ============================================================
      MODULE 2: F1 APEX DECIMALS  (.mod-f1)
      ============================================================ */
   .mod-f1 {
@@ -1920,8 +2159,6 @@ const MODULES = [
     color: '#ee1d52',
     description: 'Send Sur Ronster down the Hardline track. Fraction operations gate every drop.',
     unlocked: true,
-    portMode: 'standalone-link',
-    standaloneFile: 'HARDLINE-Fraction-Rider.html',
     levels: [
       { id: 1, name: 'Drop In',         goal: 'Stay on the bike, no wipeouts',    questions: 15, type: 'like-denom' },
       { id: 2, name: 'First Section',   goal: 'Set a clean run time',             questions: 18, type: 'unlike-easy' },
@@ -1931,7 +2168,6 @@ const MODULES = [
       { id: 6, name: 'Final Send',      goal: 'Cross the Hardline finish',        questions: 20, type: 'mixed-all' },
     ],
     grandGoal: 'Hardline Champion',
-    notes: 'Standalone game opens for now; full 6-level campaign integration coming after Module 2 ships.',
   },
   {
     id: 'f1-decimals',
@@ -2430,6 +2666,501 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 // ============================================================
 // EVENT WIRING
 // ============================================================
+
+// ============================================================
+// MODULE 1: HARDLINE FRACTION RIDER (inline port)
+// ============================================================
+(function() {
+
+  const FR_LEVELS = [
+    { id: 1, name: 'Drop In',       gen: 'like-denom',   maxDen: 4 },
+    { id: 2, name: 'First Section', gen: 'unlike-easy',  maxDen: 6 },
+    { id: 3, name: 'Wallride',      gen: 'unlike-mixed', maxDen: 8 },
+    { id: 4, name: 'Step Down',     gen: 'multiply',     maxDen: 8 },
+    { id: 5, name: 'Massive Air',   gen: 'divide',       maxDen: 8 },
+    { id: 6, name: 'Final Send',    gen: 'mixed-all',    maxDen: 12 },
+  ];
+  const FR_QPL = [15, 18, 18, 20, 20, 20];
+
+  const FR_CRASH_SCENES = [
+    { emoji: '🚵💥', title: 'Cased the Gap!',          msg: 'Sur Ronster came up short on the gap jump. The dirt tasted weird.' },
+    { emoji: '🌲💥', title: 'Into the Trees!',         msg: 'Departed the trail and hugged a Tasmanian eucalyptus. Tree wins.' },
+    { emoji: '🪨💥', title: 'Rock Garden Chaos!',      msg: 'Sent it too hot into the rocks. Bike is fine. Pride is reconsidering.' },
+    { emoji: '🤸💥', title: 'Over the Bars!',          msg: 'Endo at full tilt and stuck the landing... face first.' },
+    { emoji: '🦘😱', title: 'Wildlife Incident!',      msg: 'A wallaby crossed the line. Sur Ronster yielded. Aggressively.' },
+    { emoji: '🌳😵', title: 'Root Network!',           msg: 'Front wheel met an angry root. Bike geometry reconsidered.' },
+    { emoji: '🌪️🚲', title: 'Wrong Line!',             msg: 'Picked the wrong line. The trail picked his pocket.' },
+    { emoji: '💨💥', title: 'Washed Out!',             msg: 'Lost the front tire in the loamy berm. Sliding to nowhere fast.' },
+  ];
+
+  // ---- Math helpers ----
+  function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); return b === 0 ? a : gcd(b, a % b); }
+  function lcm(a, b) { return Math.abs(a * b) / gcd(a, b); }
+  function simplify(num, den) {
+    if (den === 0) return [num, 1];
+    if (num === 0) return [0, 1];
+    const g = gcd(num, den);
+    return [num / g, den / g];
+  }
+  const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+  function shuffle(a) { for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+  function fracToString(num, den) {
+    [num, den] = simplify(num, den);
+    if (den === 1) return `${num}`;
+    if (num === 0) return '0';
+    if (Math.abs(num) >= den) {
+      const whole = Math.floor(Math.abs(num) / den);
+      const rem = Math.abs(num) % den;
+      const sign = num < 0 ? '-' : '';
+      if (rem === 0) return `${sign}${whole}`;
+      return `${sign}${whole} ${rem}/${den}`;
+    }
+    return `${num}/${den}`;
+  }
+
+  // ---- Problem generators (ported from standalone) ----
+
+  function genAddLike(maxDen) {
+    const d = ri(2, maxDen);
+    const n1 = ri(1, d - 1);
+    const n2 = ri(1, d - 1);
+    return {
+      text: pick([
+        `Rider eats ${n1}/${d} of a pizza, then ${n2}/${d} more. Total eaten?`,
+        `Pit fuel: ${n1}/${d} pepperoni plus ${n2}/${d} more. How much pizza?`,
+        `${n1}/${d} of a granola bar + ${n2}/${d} of the same bar. Total?`,
+      ]),
+      equation: `${n1}/${d} <span class="op">+</span> ${n2}/${d} <span class="eq">=</span> ?`,
+      answer: { num: n1 + n2, den: d },
+      visualize: [{ n: n1, d, color: '#ee1d52' }, { n: n2, d, color: '#ffcc00' }],
+    };
+  }
+
+  function genSubLike(maxDen) {
+    const d = ri(3, maxDen);
+    const n1 = ri(2, d - 1);
+    const n2 = ri(1, n1 - 1);
+    return {
+      text: pick([
+        `Sur Ronster had ${n1}/${d} of a pizza, ate ${n2}/${d}. How much remains?`,
+        `Started with ${n1}/${d} stamina, used ${n2}/${d}. Left?`,
+        `${n1}/${d} of a snack, gave away ${n2}/${d}. What's left?`,
+      ]),
+      equation: `${n1}/${d} <span class="op">−</span> ${n2}/${d} <span class="eq">=</span> ?`,
+      answer: { num: n1 - n2, den: d },
+      visualize: [{ n: n1, d, color: '#ee1d52' }, { n: n2, d, color: '#6b7280' }],
+    };
+  }
+
+  function genAdd(maxDen, easy) {
+    let d1 = ri(2, maxDen);
+    let d2;
+    if (easy) {
+      const opts = [d1, d1 * 2, Math.max(2, Math.floor(d1 / 2))].filter(x => x >= 2 && x <= maxDen);
+      d2 = pick(opts);
+    } else d2 = ri(2, maxDen);
+    const n1 = ri(1, d1 - 1);
+    const n2 = ri(1, d2 - 1);
+    const L = lcm(d1, d2);
+    const sumNum = n1 * (L / d1) + n2 * (L / d2);
+    return {
+      text: pick([
+        `Rider grabs ${fracToString(n1, d1)} of pepperoni and ${fracToString(n2, d2)} of cheese. Combined?`,
+        `Trail fuel: ${fracToString(n1, d1)} veggie plus ${fracToString(n2, d2)} sausage. Total?`,
+        `Pit order: ${fracToString(n1, d1)} of a Hawaiian + ${fracToString(n2, d2)} of a margherita. Total?`,
+      ]),
+      equation: `${n1}/${d1} <span class="op">+</span> ${n2}/${d2} <span class="eq">=</span> ?`,
+      answer: { num: sumNum, den: L },
+      visualize: [{ n: n1, d: d1, color: '#ee1d52' }, { n: n2, d: d2, color: '#ffcc00' }],
+    };
+  }
+
+  function genSub(maxDen, easy) {
+    let d1 = ri(2, maxDen), d2;
+    if (easy) {
+      const opts = [d1, d1 * 2, Math.max(2, Math.floor(d1 / 2))].filter(x => x >= 2 && x <= maxDen);
+      d2 = pick(opts);
+    } else d2 = ri(2, maxDen);
+    const L = lcm(d1, d2);
+    let n1 = ri(1, d1 - 1), n2 = ri(1, d2 - 1);
+    let v1 = n1 * (L / d1), v2 = n2 * (L / d2);
+    if (v1 < v2) { [v1, v2] = [v2, v1]; [n1, n2] = [n2, n1]; [d1, d2] = [d2, d1]; }
+    if (v1 === v2) { n2 = Math.max(1, n2 - 1); }
+    const diffNum = n1 * (L / d1) - n2 * (L / d2);
+    return {
+      text: pick([
+        `Rider had ${fracToString(n1, d1)} of a pizza, gave ${fracToString(n2, d2)} to the photographer. Left?`,
+        `Pizza ${fracToString(n1, d1)} full. Shared ${fracToString(n2, d2)} with mechanic. Remaining?`,
+        `Started with ${fracToString(n1, d1)} pizza, ate ${fracToString(n2, d2)} on the lift. Left?`,
+      ]),
+      equation: `${n1}/${d1} <span class="op">−</span> ${n2}/${d2} <span class="eq">=</span> ?`,
+      answer: { num: diffNum, den: L },
+      visualize: [{ n: n1, d: d1, color: '#ee1d52' }, { n: n2, d: d2, color: '#6b7280' }],
+    };
+  }
+
+  function genMultFrac(maxDen) {
+    const d1 = ri(2, Math.min(maxDen, 6));
+    const d2 = ri(2, Math.min(maxDen, 6));
+    const n1 = ri(1, d1 - 1);
+    const n2 = ri(1, d2 - 1);
+    return {
+      text: pick([
+        `Sur Ronster wants ${fracToString(n1, d1)} of ${fracToString(n2, d2)} of a pizza. How much?`,
+        `Pit recipe needs ${fracToString(n1, d1)} cup sauce, but only making ${fracToString(n2, d2)} of the recipe. How much?`,
+        `Slice: ${fracToString(n1, d1)} of a pizza that's already ${fracToString(n2, d2)} a pizza. Final size?`,
+      ]),
+      equation: `${n1}/${d1} <span class="op">×</span> ${n2}/${d2} <span class="eq">=</span> ?`,
+      answer: { num: n1 * n2, den: d1 * d2 },
+      visualize: [{ n: n1, d: d1, color: '#ee1d52' }, { n: n2, d: d2, color: '#ffcc00' }],
+    };
+  }
+
+  function genMultWhole(maxDen) {
+    const d = ri(2, maxDen);
+    const n = ri(1, d - 1);
+    const w = ri(2, 6);
+    return {
+      text: pick([
+        `${w} riders need fuel, each takes ${fracToString(n, d)} of a pizza. Total?`,
+        `${w} pit stops, each consuming ${fracToString(n, d)} of a pizza. Sum?`,
+        `Recipe uses ${fracToString(n, d)} cup flour per batch. Make ${w} batches. Total flour?`,
+      ]),
+      equation: `${w} <span class="op">×</span> ${n}/${d} <span class="eq">=</span> ?`,
+      answer: { num: w * n, den: d },
+      visualize: [{ n, d, color: '#ee1d52' }],
+    };
+  }
+
+  function genDivWholeByUnit(maxDen) {
+    const d = ri(2, Math.min(maxDen, 6));
+    const w = ri(1, 5);
+    return {
+      text: pick([
+        `${w} whole pizzas. Each gets cut into 1/${d} pieces. How many pieces total?`,
+        `${w} pizzas, sliced into 1/${d} chunks for spectators. Total chunks?`,
+        `${w} energy bars, each cut into 1/${d} bites. Total bites?`,
+      ]),
+      equation: `${w} <span class="op">÷</span> 1/${d} <span class="eq">=</span> ?`,
+      answer: { num: w * d, den: 1 },
+      visualize: [],
+    };
+  }
+
+  function genDivUnitByWhole(maxDen) {
+    const d = ri(2, Math.min(maxDen, 6));
+    const w = ri(2, 5);
+    return {
+      text: pick([
+        `1/${d} of a pizza shared among ${w} crew members. Each gets?`,
+        `Split 1/${d} of a recovery shake among ${w} riders. Each share?`,
+        `${w} kids share 1/${d} of a pizza equally. Each kid gets?`,
+      ]),
+      equation: `1/${d} <span class="op">÷</span> ${w} <span class="eq">=</span> ?`,
+      answer: { num: 1, den: d * w },
+      visualize: [],
+    };
+  }
+
+  function genForLevel(level) {
+    const md = level.maxDen;
+    if (level.gen === 'like-denom')   return pick([genAddLike, genSubLike])(md);
+    if (level.gen === 'unlike-easy')  return pick([() => genAdd(md, true), () => genSub(md, true), () => genMultWhole(md)])();
+    if (level.gen === 'unlike-mixed') return pick([() => genAdd(md, false), () => genSub(md, false), () => genMultWhole(md)])();
+    if (level.gen === 'multiply')     return pick([() => genMultFrac(md), () => genMultWhole(md)])();
+    if (level.gen === 'divide')       return pick([() => genDivWholeByUnit(md), () => genDivUnitByWhole(md), () => genMultFrac(md)])();
+    if (level.gen === 'mixed-all') {
+      const all = [
+        () => genAdd(md, false), () => genSub(md, false),
+        () => genMultFrac(md), () => genMultWhole(md),
+        () => genDivWholeByUnit(md), () => genDivUnitByWhole(md),
+      ];
+      return pick(all)();
+    }
+    return genAddLike(md);
+  }
+
+  // ---- Distractor + choices ----
+  function makeDistractor(problem) {
+    const correct = problem.answer;
+    const eq = problem.equation;
+    const pickTrick = () => {
+      if (eq.includes('+') || eq.includes('−') || eq.includes('-')) {
+        return pick([
+          fracToString(correct.num + ri(1, 2), correct.den),
+          fracToString(correct.num, Math.max(1, correct.den + ri(-1, 1))),
+          fracToString(Math.max(0, correct.num - 1), correct.den),
+          fracToString(correct.num + correct.den, correct.den),
+        ]);
+      }
+      if (eq.includes('×')) {
+        return pick([
+          fracToString(correct.num + ri(1, 3), correct.den),
+          fracToString(correct.num, Math.max(1, correct.den * 2)),
+          fracToString(correct.num + correct.den, correct.den),
+        ]);
+      }
+      return pick([
+        fracToString(correct.num + ri(-2, 2), Math.max(1, correct.den + ri(-1, 1))),
+        fracToString(correct.num * 2, correct.den),
+        fracToString(correct.num, correct.den + 1),
+      ]);
+    };
+    return pickTrick();
+  }
+
+  function makeChoices(problem) {
+    const correct = problem.answer;
+    const correctStr = fracToString(correct.num, correct.den);
+    const set = new Set([correctStr]);
+    let safety = 60;
+    while (set.size < 4 && safety-- > 0) {
+      const d = makeDistractor(problem);
+      if (d && d !== correctStr) set.add(d);
+    }
+    while (set.size < 4) {
+      set.add(fracToString(correct.num + ri(-3, 3), Math.max(1, correct.den + ri(-2, 2))));
+    }
+    const arr = shuffle(Array.from(set));
+    return arr.map(t => ({ text: t, correct: t === correctStr }));
+  }
+
+  // ---- Pizza visualization ----
+  function pizzaSvgFor(num, den, color) {
+    const angle = (num / den) * 360;
+    const fill = num >= den ? color : `conic-gradient(${color} ${angle}deg, #2a2a2a ${angle}deg)`;
+    return `
+      <div class="fr-pizza-block">
+        <div class="fr-pizza" style="background: ${fill};"></div>
+        <div class="fr-pizza-frac">${fracToString(num, den)}</div>
+      </div>
+    `;
+  }
+
+  // ---- Audio ----
+  let actx_ = null;
+  function actx() { if (!actx_) { try { actx_ = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { actx_ = null; } } return actx_; }
+  function tone(freq, dur, type='sine', vol=0.12) {
+    const ac = actx(); if (!ac) return;
+    if (ac.state === 'suspended') ac.resume().catch(() => {});
+    const osc = ac.createOscillator(); const g = ac.createGain();
+    osc.type = type; osc.frequency.value = freq;
+    g.gain.setValueAtTime(vol, ac.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + dur);
+    osc.connect(g).connect(ac.destination);
+    osc.start(); osc.stop(ac.currentTime + dur);
+  }
+  function sfxCorrect() { tone(880, 0.06, 'triangle', 0.10); setTimeout(() => tone(1175, 0.08, 'triangle', 0.10), 70); }
+  function sfxWrong() { tone(220, 0.12, 'square', 0.10); setTimeout(() => tone(165, 0.20, 'square', 0.10), 110); }
+  function sfxStreak() { tone(880, 0.05, 'triangle', 0.10); setTimeout(() => tone(1175, 0.05, 'triangle', 0.10), 50); setTimeout(() => tone(1568, 0.12, 'triangle', 0.10), 100); }
+  function sfxFanfare() {
+    [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => tone(f, 0.20, 'triangle', 0.12), i * 110));
+  }
+  function sfxCrash() {
+    tone(160, 0.18, 'sawtooth', 0.20);
+    setTimeout(() => tone(110, 0.30, 'sawtooth', 0.20), 100);
+  }
+
+  // ---- Module main ----
+
+  InlineModules['fraction-rider'] = {
+    init(host, levelIndex, callbacks) {
+      const lvl = FR_LEVELS[levelIndex];
+      const totalQ = FR_QPL[levelIndex];
+
+      const state = {
+        questionNum: 0,
+        score: 0,
+        streak: 0,
+        bestStreak: 0,
+        livesLost: 0,
+        dangerLevel: 0,
+        crashCount: 0,
+        questions: [],
+        currentChoices: null,
+        phase: 'racing',
+      };
+      let timeouts = [];
+      const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
+
+      // Pre-generate questions for the level
+      for (let i = 0; i < totalQ; i++) state.questions.push(genForLevel(lvl));
+
+      host.innerHTML = '<div class="mod-fr"></div>';
+      const root = host.querySelector('.mod-fr');
+
+      function render() {
+        const trailClass = state.dangerLevel === 0 ? '' : (state.dangerLevel === 1 ? 'warn' : 'danger');
+        const statusClass = state.dangerLevel === 0 ? 'safe' : (state.dangerLevel === 1 ? 'warn' : 'danger');
+        const statusLabel = state.dangerLevel === 0 ? 'LOCKED IN' : (state.dangerLevel === 1 ? 'OFF LINE' : 'CRITICAL');
+        const segs = [1, 2, 3].map(i => `<div class="fr-seg ${i <= state.dangerLevel ? 'lit-' + Math.min(state.dangerLevel, 3) : ''}"></div>`).join('');
+        const pips = [0, 1, 2].map(i => `<span class="fr-pip ${i < state.streak ? 'lit' : ''}"></span>`).join('');
+
+        root.innerHTML = `
+          <div class="fr-stage">
+            <div class="fr-left">
+              <div class="fr-trail ${trailClass}" id="fr-trail">
+                <video class="fr-video" id="fr-video" autoplay loop muted playsinline poster="sur-ronster.jpg" preload="auto">
+                  <source src="sur-ronster.webm" type="video/webm">
+                </video>
+                <div class="fr-trail-overlay"></div>
+                <div class="fr-trail-tag"><span>RED BULL HARDLINE · TASMANIA</span></div>
+              </div>
+              <div class="fr-status">
+                <div class="fr-status-pill ${statusClass}">SUR RONSTER · ${statusLabel}</div>
+                <div class="fr-danger-meter">${segs}</div>
+              </div>
+              <div class="fr-info">L${lvl.id} <strong>${lvl.name}</strong> · ${totalQ} questions · 3 wipeouts ends the run.</div>
+            </div>
+            <div class="fr-right">
+              <div class="fr-header">
+                <div class="fr-stat"><span class="fr-stat-label">Question</span><span class="fr-stat-value">${state.questionNum + 1} / ${totalQ}</span></div>
+                <div class="fr-stat"><span class="fr-stat-label">Score</span><span class="fr-stat-value">${state.score}</span></div>
+                <div class="fr-stat"><span class="fr-stat-label">Streak</span><span class="fr-stat-value streak">${state.streak}</span><div class="fr-streak-pips">${pips}</div></div>
+                <div class="fr-stat"><span class="fr-stat-label">Wipeouts</span><span class="fr-stat-value">${state.crashCount} / 3</span></div>
+              </div>
+              <div class="fr-question" id="fr-question"></div>
+            </div>
+          </div>
+        `;
+
+        const video = root.querySelector('#fr-video');
+        if (video) {
+          if (state.dangerLevel === 0) video.playbackRate = 1.3;
+          else if (state.dangerLevel === 1) video.playbackRate = 1.0;
+          else video.playbackRate = 0.6;
+          video.play().catch(() => {});
+        }
+
+        showQuestion();
+      }
+
+      function showQuestion() {
+        const qEl = root.querySelector('#fr-question');
+        if (!qEl) return;
+        const q = state.questions[state.questionNum];
+        if (!q) { endLevel(); return; }
+        const choices = makeChoices(q);
+        state.currentChoices = choices;
+
+        let pizzasHtml = '';
+        if (q.visualize && q.visualize.length) {
+          pizzasHtml = '<div class="fr-pizzas">' + q.visualize.map(v => pizzaSvgFor(v.n, v.d, v.color)).join('') + '</div>';
+        }
+
+        qEl.innerHTML = `
+          <div class="fr-q-meta">
+            <span>Q ${state.questionNum + 1} / ${totalQ}</span>
+            <span>${lvl.gen.replace(/-/g, ' ').toUpperCase()}</span>
+          </div>
+          <div class="fr-q-text">${q.text}</div>
+          ${pizzasHtml}
+          <div class="fr-eq">${q.equation}</div>
+          <div class="fr-answers">
+            ${choices.map((c, i) => `<button class="fr-ans" data-idx="${i}">${c.text}</button>`).join('')}
+          </div>
+        `;
+
+        const buttons = qEl.querySelectorAll('.fr-ans');
+        buttons.forEach(b => b.addEventListener('click', () => answer(parseInt(b.dataset.idx, 10), buttons)));
+      }
+
+      function answer(idx, buttons) {
+        if (state.phase !== 'racing') return;
+        state.phase = 'between';
+        const choice = state.currentChoices[idx];
+        const correct = !!choice.correct;
+        buttons.forEach(b => b.disabled = true);
+        const correctIdx = state.currentChoices.findIndex(c => c.correct);
+        buttons[correctIdx].classList.add('correct');
+        if (!correct) buttons[idx].classList.add('wrong');
+
+        if (correct) {
+          state.streak = Math.min(99, state.streak + 1);
+          if (state.streak > state.bestStreak) state.bestStreak = state.streak;
+          state.score += 100 + (state.streak >= 3 ? 60 : 0);
+          state.dangerLevel = Math.max(0, state.dangerLevel - 1);
+          if (state.streak >= 3) sfxStreak(); else sfxCorrect();
+        } else {
+          state.streak = 0;
+          state.dangerLevel++;
+          sfxWrong();
+          if (state.dangerLevel >= 3) {
+            state.crashCount++;
+            state.dangerLevel = 0;
+            triggerCrash();
+            return;
+          }
+        }
+
+        later(1100, () => {
+          state.questionNum++;
+          if (state.crashCount >= 3 || state.questionNum >= totalQ) {
+            endLevel();
+          } else {
+            state.phase = 'racing';
+            render();
+          }
+        });
+      }
+
+      function triggerCrash() {
+        const scene = pick(FR_CRASH_SCENES);
+        sfxCrash();
+        const trail = root.querySelector('#fr-trail');
+        if (trail) trail.classList.add('fr-shake');
+
+        const overlay = document.createElement('div');
+        overlay.className = 'fr-crash-overlay';
+        overlay.innerHTML = `
+          <div class="fr-crash-card">
+            <div class="fr-crash-head">
+              <span class="replay">REPLAY · WIPEOUT ${state.crashCount}</span>
+              <span class="meta">L${lvl.id} · ${lvl.name.toUpperCase()}</span>
+            </div>
+            <div class="fr-crash-impact">⚠ IMPACT DETECTED</div>
+            <div class="fr-crash-emoji">${scene.emoji}</div>
+            <div class="fr-crash-title">${scene.title}</div>
+            <div class="fr-crash-msg">${scene.msg}</div>
+          </div>
+        `;
+        root.appendChild(overlay);
+
+        later(3800, () => {
+          overlay.remove();
+          if (trail) trail.classList.remove('fr-shake');
+          if (state.crashCount >= 3) {
+            endLevel();
+          } else {
+            state.questionNum++;
+            if (state.questionNum >= totalQ) endLevel();
+            else { state.phase = 'racing'; render(); }
+          }
+        });
+      }
+
+      function endLevel() {
+        state.phase = 'end';
+        const dnf = state.crashCount >= 3;
+        let stars = 0;
+        if (!dnf) {
+          if (state.crashCount === 0) stars = 3;
+          else if (state.crashCount === 1) stars = 2;
+          else stars = 1;
+          if (stars > 0) sfxFanfare();
+        }
+        callbacks.onComplete(state.score, stars);
+      }
+
+      // Boot
+      render();
+
+      return function cleanup() { timeouts.forEach(clearTimeout); timeouts = []; };
+    },
+  };
+})();
 
 // ============================================================
 // MODULE 2: F1 APEX DECIMALS
