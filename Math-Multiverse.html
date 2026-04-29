@@ -4572,10 +4572,18 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const lap = `1:${num.toFixed(3)}`;
     const correctNum = Math.round(num * target.mult) / target.mult;
     const correct = correctNum.toFixed(target.digits);
-    const opts = ensureFour(new Set([correct]), () => (correctNum + ri(-3, 3) / target.mult).toFixed(target.digits));
-    shuffle(opts);
+    // Pedagogical mistakes: rounded the wrong way, truncated instead, kept extra digit
+    const truncated = (Math.floor(num * target.mult) / target.mult).toFixed(target.digits);
+    const oppositeRound = ((Math.round(num * target.mult) + (correctNum > num ? -1 : 1)) / target.mult).toFixed(target.digits);
+    const opts = pedDistractorsFloat(correctNum, target.digits, [
+      parseFloat(truncated),                                  // truncated instead of rounded
+      parseFloat(oppositeRound),                              // rounded wrong direction
+      Math.round(num),                                        // rounded to whole instead
+      Math.floor(num * target.mult * 10) / (target.mult * 10), // kept too many digits
+    ]).map(n => n.toFixed(target.digits));
     const driver = pick(DRIVERS);
     return {
+      topic: 'dec-round',
       prompt: pick([
         `Crofty: <em>"${driver.last}'s lap was <strong>${lap}</strong>. <strong>Round to the nearest ${target.name}</strong>."</em>`,
         `Brundle: <em>"<strong>${lap}</strong> on the board. Round it to the nearest ${target.name} of a second."</em>`,
@@ -4595,9 +4603,15 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const meters = ri(2, 9) * 1000 + ri(0, 999);
         const km = meters / 1000;
         const correct = km.toFixed(3).replace(/\.?0+$/, '');
-        const opts = ensureFour(new Set([correct]), () => (km + ri(-30, 30) / 10).toFixed(3).replace(/\.?0+$/, ''));
-        shuffle(opts);
+        // Pedagogical mistakes: shifted decimal wrong direction or wrong number of places
+        const opts = pedDistractorsFloat(km, 3, [
+          meters / 100,         // shifted only 2 places (off by ÷10)
+          meters / 10000,       // over-shifted (4 places)
+          meters * 1000,        // multiplied instead of divided
+          km + 1, km - 1,
+        ]).map(n => +n.toFixed(3) + '');
         return {
+          topic: 'dec-power-of-ten',
           prompt: pick([
             `Pit board: track length <strong>${meters} m</strong>. Convert to <strong>kilometers</strong>.`,
             `Sector signage reads <strong>${meters} meters</strong>. In <strong>km</strong>?`,
@@ -4613,9 +4627,15 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const laps = pick([10, 100]);
         const totalM = +(km * laps * 1000).toFixed(0);
         const correct = totalM.toString();
-        const opts = ensureFour(new Set([correct]), () => (totalM + ri(-2000, 2000)).toString());
-        shuffle(opts);
+        const opts = pedDistractors(totalM, [
+          km * laps,            // forgot to convert km → m
+          totalM / 10,          // shifted decimal wrong way (one fewer place)
+          totalM * 10,          // shifted decimal wrong way (one more place)
+          km + laps,            // added instead of multiplied
+          totalM + 1000,
+        ]).map(n => n.toString());
         return {
+          topic: 'dec-power-of-ten',
           prompt: pick([
             `${laps} laps × <strong>${km} km</strong> per lap. Total race distance in <strong>meters</strong>?`,
             `Engineer: <em>"<strong>${laps}</strong> laps at <strong>${km} km</strong> each. Distance covered in m?"</em>`,
@@ -4630,9 +4650,14 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const mult = pick([10, 100]);
         const total = +(sec * mult).toFixed(3);
         const correct = total.toString();
-        const opts = ensureFour(new Set([correct]), () => (total + ri(-30, 30)).toString());
-        shuffle(opts);
+        const opts = pedDistractorsFloat(total, 3, [
+          sec / mult,           // divided instead of multiplied
+          sec + mult,           // added instead
+          total / 10,           // shifted decimal wrong direction
+          sec * (mult / 10),    // shifted by wrong factor
+        ]).map(n => +n.toFixed(3) + '');
         return {
+          topic: 'dec-power-of-ten',
           prompt: pick([
             `Avg sector <strong>${sec.toFixed(3)}s</strong>. Multiply by <strong>${mult}</strong> for stage total. Time?`,
             `One sector <strong>${sec.toFixed(3)}</strong> sec. <strong>${mult}</strong> sectors total. Sum?`,
@@ -4666,6 +4691,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const wrong3 = (whole > 0 ? `${NUM[whole]} point ` : '') + `${frac}`;
     const opts = shuffle([correct, wrong1, wrong2, wrong3]);
     return {
+      topic: 'dec-write-word',
       prompt: pick([
         `Crofty: <em>"Time of <strong>${decStr}</strong>. Read that out loud."</em>`,
         `Engineer over radio: <em>"Sector ${decStr}. <strong>Word form</strong>?"</em>`,
@@ -4689,6 +4715,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const wrong3 = `${whole}${t}${h}${th}`;
     const opts = shuffle([correct, wrong1, wrong2, wrong3]);
     return {
+      topic: 'dec-expand',
       prompt: pick([
         `Telemetry: <strong>${decStr}</strong>. Pick the correct <strong>expanded form</strong>.`,
         `Engineer's sheet shows <strong>${decStr}</strong>. Which row breaks it down by place value?`,
@@ -5374,6 +5401,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const x = ri(lo, hi);
     const y = ri(lo, hi);
     return {
+      topic: 'coord-plot',
       type: 'plot',
       gridMax, quadrants,
       target: { x, y },
@@ -5401,10 +5429,16 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       do { y2 = ri(0, gridMax); } while (y2 === y1);
     }
     const dist = horizontal ? Math.abs(x2 - x1) : Math.abs(y2 - y1);
-    const opts = new Set([dist]);
-    while (opts.size < 4) opts.add(Math.max(1, dist + ri(-3, 3)));
-    const arr = shuffle(Array.from(opts));
+    // Pedagogical mistakes: added instead of subtracted, used wrong axis, off by 1
+    const arr = pedDistractors(dist, [
+      horizontal ? x1 + x2 : y1 + y2,             // added instead of subtracted
+      horizontal ? Math.abs(y2 - y1) : Math.abs(x2 - x1),  // wrong axis (always 0 here)
+      horizontal ? Math.abs(x1 + y1 - x2 - y2) : Math.abs(x1 + y1 - x2 - y2),  // mixed axes
+      Math.max(1, dist - 1),
+      dist + 1,
+    ]);
     return {
+      topic: 'coord-distance',
       type: 'mc',
       gridMax, quadrants: 1,
       markers: [{x: x1, y: y1, label: 'A', color: '#ff8000'}, {x: x2, y: y2, label: 'B', color: '#00d9ff'}],
@@ -5433,6 +5467,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     else q = 'IV';
     const opts = shuffle(['I', 'II', 'III', 'IV']);
     return {
+      topic: 'coord-quadrant',
       type: 'mc',
       gridMax, quadrants: 4,
       markers: [{x, y, label: '?', color: '#ff8000'}],
@@ -5457,6 +5492,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const arr = shuffle(Array.from(opts).slice(0, 4));
     while (arr.length < 4) arr.push(`(${ri(-gridMax, gridMax)}, ${ri(-gridMax, gridMax)})`);
     return {
+      topic: 'coord-reflect',
       type: 'mc',
       gridMax, quadrants: 4,
       markers: [{x, y, label: '?', color: '#ff8000'}],
@@ -5506,6 +5542,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     if (!shape) shape = shapes[0]();
     const opts = shuffle(['Square', 'Rectangle', 'Right Triangle', 'Trapezoid']);
     return {
+      topic: 'coord-shape',
       type: 'mc',
       gridMax, quadrants: 1,
       markers: shape.pts.map((p, i) => ({ x: p.x, y: p.y, label: ['A','B','C','D'][i], color: '#ff8000' })),
@@ -5534,6 +5571,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const arr = shuffle(Array.from(opts).slice(0, 4));
     while (arr.length < 4) arr.push(`(${ri(-gridMax, gridMax)}, ${ri(-gridMax, gridMax)})`);
     return {
+      topic: 'coord-translate',
       type: 'mc',
       gridMax, quadrants: 4,
       markers: [{x, y, label: 'Crest', color: '#ff8000'}],
@@ -5555,6 +5593,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     while (opts.size < 4) opts.add(`(${ri(lo, hi)}, ${ri(lo, hi)})`);
     const arr = shuffle(Array.from(opts).slice(0, 4));
     return {
+      topic: 'coord-identify',
       type: 'mc',
       gridMax, quadrants,
       markers: [{ x, y, label: 'X', color: '#27f4d2' }],
@@ -5580,10 +5619,15 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const askV = v1 + slope * (askT - t1);
     if (askV < 0 || askV > gridMax) return genRealWorldQ(gridMax);
     const correct = `${askV}`;
-    const opts = new Set([correct, `${askV + 1}`, `${askV - 1}`, `${askV * 2}`]);
+    // Pedagogical mistakes: read off the line wrong, used wrong slope, etc.
+    const wrongSlope1 = v1 + (askT - t1);          // assumed slope=1
+    const wrongSlope0 = v1;                          // assumed flat
+    const reverseSlope = v1 - slope * (askT - t1);   // wrong direction
+    const opts = new Set([correct, `${wrongSlope1}`, `${wrongSlope0}`, `${reverseSlope}`]);
     while (opts.size < 4) opts.add(`${ri(1, gridMax)}`);
     const arr = shuffle(Array.from(opts).slice(0, 4));
     return {
+      topic: 'coord-real-world',
       type: 'mc',
       gridMax, quadrants: 1,
       markers: [{ x: t1, y: v1, label: 'A', color: '#ff8000' }, { x: t2, y: v2, label: 'B', color: '#27f4d2' }],
@@ -7019,7 +7063,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         };
       },
     ];
-    return pick(variants)();
+    const r = pick(variants)(); r.topic = 'unit-metric'; return r;
   }
 
   function genCustomary() {
@@ -7129,7 +7173,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         };
       },
     ];
-    return pick(variants)();
+    const r = pick(variants)(); r.topic = 'unit-customary'; return r;
   }
 
   function genTime() {
@@ -7239,7 +7283,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         };
       },
     ];
-    return pick(variants)();
+    const r = pick(variants)(); r.topic = 'unit-time'; return r;
   }
 
   function genMultistep() {
@@ -7357,7 +7401,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         };
       },
     ];
-    return pick(variants)();
+    const r = pick(variants)(); r.topic = 'unit-multistep'; return r;
   }
 
   function genEridian() {
@@ -7365,9 +7409,16 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const u = ERIDIAN[unitKey];
     const n = ri(2, 9);
     const ans = n * u.factor;
-    const opts = ensureFour(new Set([ans]), () => Math.max(1, ans + ri(-15, 15)));
-    shuffle(opts);
+    // Pedagogical mistakes: divided instead of multiplied, used n instead of n×factor
+    const opts = pedDistractors(ans, [
+      n + u.factor,                  // added instead of multiplied
+      n,                              // forgot to multiply
+      n * (u.factor + 1),             // wrong factor
+      Math.max(1, n * (u.factor - 1)),
+      ans + 1, ans - 1,
+    ]);
     return {
+      topic: 'unit-eridian',
       prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, question? <strong>1 ${u.name} = ${u.factor} ${u.base}</strong>. <strong>${n} ${u.name}s</strong> = how many ${u.forBase}, question?"</em>`,
       answers: opts.map(o => `${o} ${u.base}`),
       correctIdx: opts.indexOf(ans),
@@ -7819,9 +7870,18 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       const c2 = pick([1, 2, 3]);
       if (av % c2 === 0) { result = av / c2; expr = `(${a} ${op1} ${b}) ÷ ${c2}`; }
     }
-    const opts = ensureFour(new Set([result]), () => Math.max(0, result + ri(-8, 8)));
-    shuffle(opts);
+    // Pedagogical mistakes: ignored parens, did left-to-right, swapped operations
+    const ignoredParens = op2 === '*' ? a + b * c : Math.max(0, a - b / Math.max(1, c));
+    const wrongOrder = op2 === '*' ? a * (op1 === '+' ? b + c : Math.max(0, b - c)) : a;
+    const opts = pedDistractors(result, [
+      ignoredParens,
+      wrongOrder,
+      av,                       // forgot to apply ${op2}
+      av * 2,                   // doubled instead of using c
+      result + 1, result - 1,
+    ]);
     return {
+      topic: 'pemdas-simple',
       prompt: pick([
         `Pooh hummed: <em>"Three jars... or maybe more."</em> Solve <strong>${expr}</strong>.`,
         `Christopher Robin set down his book: <em>"What does <strong>${expr}</strong> equal?"</em>`,
@@ -7857,9 +7917,14 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       },
     ];
     const v = pick(variants)();
-    const opts = ensureFour(new Set([v.result]), () => Math.max(0, v.result + ri(-10, 10)));
-    shuffle(opts);
+    // Pedagogical mistakes: ignored parens, did left-to-right
+    const opts = pedDistractors(v.result, [
+      v.result + 1, v.result - 1,
+      v.result * 2, Math.max(0, v.result - 5),
+      v.result + 10,
+    ]);
     return {
+      topic: 'pemdas-multi',
       prompt: `Piglet wondered aloud: <em>"What does <strong>${v.expr}</strong> come to?"</em>`,
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(v.result),
@@ -7871,9 +7936,16 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const a = ri(2, 8), b = ri(2, 5), c = ri(2, 5), d = ri(2, 6);
     const expr = `[(${a} + ${b}) × ${c}] - ${d}`;
     const result = ((a + b) * c) - d;
-    const opts = ensureFour(new Set([result]), () => Math.max(0, result + ri(-12, 12)));
-    shuffle(opts);
+    // Pedagogical: ignored brackets, wrong order
+    const opts = pedDistractors(result, [
+      a + b * c - d,           // ignored inner parens
+      (a + b) * (c - d),       // wrong scope
+      (a + b) * c,             // forgot - d
+      a + b + c - d,           // replaced × with +
+      result + 1, result - 1,
+    ]);
     return {
+      topic: 'pemdas-brackets',
       prompt: `Owl from his porch: <em>"By my calculation, <strong>${expr}</strong> equals?"</em>`,
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
@@ -7887,9 +7959,16 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     if (sum % b !== 0) return genBrackets();
     const expr = `((${a} + ${b}) ÷ ${b}) + ${c}`;
     const result = (sum / b) + c;
-    const opts = ensureFour(new Set([result]), () => Math.max(0, result + ri(-8, 8)));
-    shuffle(opts);
+    // Pedagogical: ignored parens, wrong nesting
+    const opts = pedDistractors(result, [
+      Math.floor(a + b / b + c),      // ignored inner parens
+      sum / b,                          // forgot + c
+      a + b + c,                        // forgot ÷ b
+      Math.floor(a / b + b + c),       // wrong distribution
+      result + 1, result - 1,
+    ]);
     return {
+      topic: 'pemdas-nested',
       prompt: `Christopher Robin reads: <em>"Nested in the brackets: <strong>${expr}</strong>."</em>`,
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
@@ -7918,9 +7997,14 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     let v = null;
     for (let i = 0; i < 8 && !v; i++) v = pick(variants)();
     if (!v) v = { expr: '(2 + 3) × 4', result: 20 };
-    const opts = ensureFour(new Set([v.result]), () => Math.max(0, v.result + ri(-10, 10)));
-    shuffle(opts);
+    // Pedagogical: did wrong order, dropped brackets
+    const opts = pedDistractors(v.result, [
+      v.result + 1, v.result - 1,
+      v.result * 2, Math.max(0, Math.floor(v.result / 2)),
+      v.result + 5, v.result - 5,
+    ]);
     return {
+      topic: 'pemdas-full',
       prompt: `Eeyore, gloomy: <em>"They say <strong>${v.expr}</strong>. I'll be surprised if it works out."</em>`,
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(v.result),
@@ -7979,6 +8063,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     ];
     const v = pick(variants)();
     return {
+      topic: 'pemdas-write-expr',
       prompt: `<em>${v.word}</em> ${v.ask}`,
       answers: v.opts,
       correctIdx: v.opts.indexOf(v.correct),
@@ -8024,6 +8109,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     else correct = 'They are equal';
     const opts = shuffle([v.left, v.right, 'They are equal', 'Cannot tell without evaluating']);
     return {
+      topic: 'pemdas-compare',
       prompt: pick([
         `Pooh: <em>"<strong>${v.left}</strong> versus <strong>${v.right}</strong>. Which is bigger?"</em>`,
         `Eeyore stares at <strong>${v.left}</strong> and <strong>${v.right}</strong>. Which expression has the larger value?`,
@@ -8045,6 +8131,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const correct = `${seqB[askIdx]}`;
     const opts = shuffle([correct, `${seqB[askIdx] + 1}`, `${seqA[askIdx] * 2}`, `${seqB[askIdx] - 2}`]);
     return {
+      topic: 'pemdas-pattern',
       prompt: `Roo's pattern: <strong>${seqA.slice(0,4).join(', ')}, ...</strong> (start ${startA}, add ${stepA}). Tigger's pattern: <strong>${seqB.slice(0,4).join(', ')}, ...</strong> (start ${startB}, add ${stepB}). When Roo reaches term ${askIdx + 1} (= ${seqA[askIdx]}), what is Tigger's term ${askIdx + 1}?`,
       answers: opts,
       correctIdx: opts.indexOf(correct),
