@@ -3261,6 +3261,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         livesLost: 0,
         dangerLevel: 0,
         crashCount: 0,
+        correctCount: 0,
         questions: [],
         currentChoices: null,
         phase: 'racing',
@@ -3374,6 +3375,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         }
 
         if (correct) {
+          state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
           if (state.streak > state.bestStreak) state.bestStreak = state.streak;
           state.score += 100 + (state.streak >= 3 ? 60 : 0);
@@ -3444,11 +3446,13 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       function endLevel() {
         state.phase = 'end';
         const dnf = state.crashCount >= 3;
+        const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (state.crashCount === 0) stars = 3;
-          else if (state.crashCount === 1) stars = 2;
-          else stars = 1;
+          if (pct >= 0.95)      stars = 3;
+          else if (pct >= 0.85) stars = 2;
+          else if (pct >= 0.80) stars = 1;
+          else                  stars = 0; // failed accuracy threshold
           if (stars > 0) sfxFanfare();
         }
         callbacks.onComplete(state.score, stars);
@@ -3851,6 +3855,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         score: 0,
         streak: 0,
         livesLost: 0,
+        correctCount: 0,
         position: lvl.gridSize,
         questions: [],
       };
@@ -4036,6 +4041,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         if (!correct) buttons[idx].classList.add('wrong');
 
         if (correct) {
+          state.correctCount++;
           state.streak = Math.min(3, state.streak + 1);
           const gain = state.streak >= 3 ? 2 : 1;
           state.position = Math.max(1, state.position - gain);
@@ -4062,15 +4068,14 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       function endLevel() {
         state.phase = 'end';
         const dnf = state.livesLost >= 3;
+        const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (state.position === 1)      stars = 3;
-          else if (state.position <= 3)  stars = 2;
-          else if (state.position <= 8)  stars = 1;
-          else stars = 0;
+          if (pct >= 0.95)      stars = 3;
+          else if (pct >= 0.85) stars = 2;
+          else if (pct >= 0.80) stars = 1;
+          else                  stars = 0;
         }
-        // Bonus: perfect run on Practice / Qualifying
-        if (!dnf && lvl.id <= 2 && state.streak >= 3 && state.score >= totalQ * 100) stars = Math.max(stars, 2);
         callbacks.onComplete(state.score, stars);
       }
 
@@ -4621,6 +4626,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         streak: 0,
         hullPct: 100,
         livesLost: 0,
+        correctCount: 0,
         questions: [],
       };
 
@@ -4769,6 +4775,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 
       function afterAnswer(correct) {
         if (correct) {
+          state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
           state.score += 100 + (state.streak >= 3 ? 80 : 0);
           sfxCorrect();
@@ -4796,13 +4803,13 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       function endLevel() {
         state.phase = 'end';
         const dnf = state.livesLost >= 3;
-        const correctCount = totalQ - state.livesLost - (totalQ - state.questionNum);
+        const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          const pct = state.questionNum / totalQ;
-          if (pct >= 1 && state.livesLost === 0) stars = 3;
-          else if (pct >= 1 && state.livesLost <= 1) stars = 2;
-          else if (pct >= 1) stars = 1;
+          if (pct >= 0.95)      stars = 3;
+          else if (pct >= 0.85) stars = 2;
+          else if (pct >= 0.80) stars = 1;
+          else                  stars = 0;
         }
         callbacks.onComplete(state.score, stars);
       }
@@ -5122,6 +5129,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         score: 0,
         streak: 0,
         livesLost: 0,
+        correctCount: 0,
         questions: [],
         bricks: [],
       };
@@ -5254,6 +5262,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         if (!correct) buttons[idx].classList.add('wrong');
 
         if (correct) {
+          state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
           state.score += 100 + (state.streak >= 3 ? 50 : 0);
           // Add brick to structure
@@ -5281,12 +5290,14 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       function endLevel() {
         state.phase = 'end';
         const dnf = state.livesLost >= 3;
+        const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (state.livesLost === 0) stars = 3;
-          else if (state.livesLost === 1) stars = 2;
-          else stars = 1;
-          sfxAwesome();
+          if (pct >= 0.95)      stars = 3;
+          else if (pct >= 0.85) stars = 2;
+          else if (pct >= 0.80) stars = 1;
+          else                  stars = 0;
+          if (stars > 0) sfxAwesome();
         }
         callbacks.onComplete(state.score, stars);
       }
@@ -5653,6 +5664,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         score: 0,
         streak: 0,
         livesLost: 0,
+        correctCount: 0,
         questions: [],
         dict: [],
         crisisLevel: 0,
@@ -5771,6 +5783,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         if (!correct) buttons[idx].classList.add('wrong');
 
         if (correct) {
+          state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
           state.score += 100 + (state.streak >= 3 ? 60 : 0);
           state.dict.push(q.dict);
@@ -5797,11 +5810,13 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       function endLevel() {
         state.phase = 'end';
         const dnf = state.livesLost >= 3;
+        const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (state.livesLost === 0) stars = 3;
-          else if (state.livesLost === 1) stars = 2;
-          else stars = 1;
+          if (pct >= 0.95)      stars = 3;
+          else if (pct >= 0.85) stars = 2;
+          else if (pct >= 0.80) stars = 1;
+          else                  stars = 0;
         }
         callbacks.onComplete(state.score, stars);
       }
@@ -6177,6 +6192,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         score: 0,
         streak: 0,
         livesLost: 0,
+        correctCount: 0,
         questions: [],
         jarsSaved: 0,
       };
@@ -6274,6 +6290,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         if (!correct) buttons[idx].classList.add('wrong');
 
         if (correct) {
+          state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
           state.score += 100 + (state.streak >= 3 ? 50 : 0);
           state.jarsSaved++;
@@ -6298,11 +6315,13 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       function endLevel() {
         state.phase = 'end';
         const dnf = state.livesLost >= 3;
+        const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (state.livesLost === 0) stars = 3;
-          else if (state.livesLost === 1) stars = 2;
-          else stars = 1;
+          if (pct >= 0.95)      stars = 3;
+          else if (pct >= 0.85) stars = 2;
+          else if (pct >= 0.80) stars = 1;
+          else                  stars = 0;
           if (stars > 0) sfxRescue();
         }
         callbacks.onComplete(state.score, stars);
