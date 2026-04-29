@@ -3043,6 +3043,19 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
   ];
   const FR_QPL = [15, 18, 18, 20, 20, 20];
 
+  // Background trail-cam clips. iPad-compatible H.264 MP4s.
+  // Game randomly picks one per level start so the kid sees fresh
+  // footage every run. Falls back to sur-ronster.webm if MP4 fails.
+  const FR_VIDEOS = [
+    'sur-ronster.mp4',
+    'videos/trail-1.mp4',
+    'videos/trail-2.mp4',
+    'videos/trail-3.mp4',
+    'videos/trail-4.mp4',
+    'videos/trail-5.mp4',
+    'videos/trail-6.mp4',
+  ];
+
   const FR_CRASH_SCENES = [
     { emoji: '🚵💥', title: 'Cased the Gap!',          msg: 'Sur Ronster came up short on the gap jump. The dirt tasted weird.' },
     { emoji: '🌲💥', title: 'Into the Trees!',         msg: 'Departed the trail and hugged a Tasmanian eucalyptus. Tree wins.' },
@@ -3447,6 +3460,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         questions: [],
         currentChoices: null,
         phase: 'racing',
+        videoSrc: pick(FR_VIDEOS),
       };
       let timeouts = [];
       const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
@@ -3469,7 +3483,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
             <div class="fr-left">
               <div class="fr-trail ${trailClass}" id="fr-trail">
                 <video class="fr-video" id="fr-video" autoplay loop muted playsinline poster="sur-ronster.jpg" preload="auto">
-                  <source src="sur-ronster.mp4" type="video/mp4">
+                  <source src="${state.videoSrc}" type="video/mp4">
                   <source src="sur-ronster.webm" type="video/webm">
                 </video>
                 <div class="fr-trail-overlay"></div>
