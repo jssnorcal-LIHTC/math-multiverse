@@ -3430,17 +3430,20 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   // Background trail-cam clips. iPad-compatible H.264 MP4s.
   // Game randomly picks one per level start so the kid sees fresh
   // footage every run. Falls back to sur-ronster.webm if MP4 fails.
+  // All clips are 30+ seconds of original MTB footage so the kid sees real
+  // riding action for a full 30s before any transition. Sources: original
+  // sur-ronster (~111s), Pexels MTB clip (33s), and 6 segments cut from
+  // verified Wikimedia Commons MTB videos (Bwlch Nant yr Arian skills track,
+  // CUBE bikes test footage, Slovenian Alps backcountry POV).
   const FR_VIDEOS = [
     'sur-ronster.mp4',
-    'videos/trail-1.mp4',
-    'videos/trail-2.mp4',
-    'videos/trail-3.mp4',
-    'videos/trail-4.mp4',
-    'videos/trail-5.mp4',
-    'videos/trail-6.mp4',
-    'videos/trail-7.mp4',
-    'videos/trail-8.mp4',
     'videos/trail-9.mp4',
+    'videos/trail-10.mp4',
+    'videos/trail-11.mp4',
+    'videos/trail-12.mp4',
+    'videos/trail-13.mp4',
+    'videos/trail-14.mp4',
+    'videos/trail-15.mp4',
   ];
 
   const FR_CRASH_SCENES = [
