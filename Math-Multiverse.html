@@ -3356,6 +3356,63 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 // ============================================================
 
 // ============================================================
+// SHARED HELPERS (used across all module IIFEs)
+// ============================================================
+
+// Pedagogical distractor builder: takes the correct answer and an array of
+// mistake candidates (numbers a student might compute via known errors),
+// returns 4 unique options. Filters duplicates, pads with off-by-N fallbacks.
+function pedDistractors(correct, mistakes, fallbackBase) {
+  const out = new Set([correct]);
+  for (const m of mistakes) {
+    if (typeof m !== 'number' || !isFinite(m)) continue;
+    const v = Math.max(0, Math.round(m));
+    if (v !== correct) out.add(v);
+    if (out.size >= 4) break;
+  }
+  const base = fallbackBase != null ? fallbackBase : correct;
+  const fb = [base + 1, base - 1, base + 2, base - 2, correct + 10, Math.max(0, correct - 10), correct * 2, Math.max(0, Math.floor(correct / 2))];
+  for (const o of fb) {
+    if (out.size >= 4) break;
+    const v = Math.max(0, Math.round(o));
+    out.add(v);
+  }
+  // Shuffle
+  const arr = Array.from(out).slice(0, 4);
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// Float-aware variant for decimals: tolerates small precision drift, rounds
+// each candidate to the same decimal places as the correct answer.
+function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
+  const fmt = (x) => +(x.toFixed(decimals));
+  const correctFmt = fmt(correct);
+  const out = new Map();
+  out.set(correctFmt, true);
+  for (const m of mistakes) {
+    if (typeof m !== 'number' || !isFinite(m)) continue;
+    const v = fmt(m);
+    if (v !== correctFmt) out.set(v, true);
+    if (out.size >= 4) break;
+  }
+  const fb = fallbackOffsets || [0.01, -0.01, 0.1, -0.1, 1, -1];
+  for (const o of fb) {
+    if (out.size >= 4) break;
+    out.set(fmt(correct + o), true);
+  }
+  const arr = Array.from(out.keys()).slice(0, 4);
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// ============================================================
 // MODULE 1: HARDLINE FRACTION RIDER (inline port)
 // ============================================================
 (function() {
@@ -3432,6 +3489,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const n2 = ri(1, d - 1);
     const correctStr = fracToString(n1 + n2, d);
     return {
+      topic: 'frac-add-like',
       text: pick([
         `Rider eats ${n1}/${d} of a pizza, then ${n2}/${d} more. Total eaten?`,
         `Pit fuel: ${n1}/${d} pepperoni plus ${n2}/${d} more. How much pizza?`,
@@ -3455,6 +3513,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const n2 = ri(1, n1 - 1);
     const correctStr = fracToString(n1 - n2, d);
     return {
+      topic: 'frac-sub-like',
       text: pick([
         `Sur Ronster had ${n1}/${d} of a pizza, ate ${n2}/${d}. How much remains?`,
         `Started with ${n1}/${d} stamina, used ${n2}/${d}. Left?`,
@@ -3486,6 +3545,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const correctStr = fracToString(sumNum, L);
     const a = n1 * (L / d1), b = n2 * (L / d2);
     return {
+      topic: 'frac-add-unlike',
       text: pick([
         `Rider grabs ${fracToString(n1, d1)} of pepperoni and ${fracToString(n2, d2)} of cheese. Combined?`,
         `Trail fuel: ${fracToString(n1, d1)} veggie plus ${fracToString(n2, d2)} sausage. Total?`,
@@ -3519,6 +3579,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const diffNum = a - b;
     const correctStr = fracToString(diffNum, L);
     return {
+      topic: 'frac-sub-unlike',
       text: pick([
         `Rider had ${fracToString(n1, d1)} of a pizza, gave ${fracToString(n2, d2)} to the photographer. Left?`,
         `Pizza ${fracToString(n1, d1)} full. Shared ${fracToString(n2, d2)} with mechanic. Remaining?`,
@@ -3543,6 +3604,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const n2 = ri(1, d2 - 1);
     const correctStr = fracToString(n1 * n2, d1 * d2);
     return {
+      topic: 'frac-mult-frac',
       text: pick([
         `Sur Ronster wants ${fracToString(n1, d1)} of ${fracToString(n2, d2)} of a pizza. How much?`,
         `Pit recipe needs ${fracToString(n1, d1)} cup sauce, but only making ${fracToString(n2, d2)} of the recipe. How much?`,
@@ -3565,6 +3627,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const w = ri(2, 6);
     const correctStr = fracToString(w * n, d);
     return {
+      topic: 'frac-mult-whole',
       text: pick([
         `${w} riders need fuel, each takes ${fracToString(n, d)} of a pizza. Total?`,
         `${w} pit stops, each consuming ${fracToString(n, d)} of a pizza. Sum?`,
@@ -3585,6 +3648,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const d = ri(2, Math.min(maxDen, 6));
     const w = ri(1, 5);
     return {
+      topic: 'frac-div-whole-by-unit',
       text: pick([
         `${w} whole pizzas. Each gets cut into 1/${d} pieces. How many pieces total?`,
         `${w} pizzas, sliced into 1/${d} chunks for spectators. Total chunks?`,
@@ -3605,6 +3669,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const w = ri(2, 5);
     const correctStr = fracToString(1, d * w);
     return {
+      topic: 'frac-div-unit-by-whole',
       text: pick([
         `1/${d} of a pizza shared among ${w} crew members. Each gets?`,
         `Split 1/${d} of a recovery shake among ${w} riders. Each share?`,
@@ -3633,6 +3698,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const wrong   = cv1 > cv2 ? f2Str : f1Str;
     const opts = shuffle([correct, wrong, 'They are equal', 'Cannot tell']);
     return {
+      topic: 'frac-compare',
       text: pick([
         `Sur Ronster ate ${f1Str} of a pizza, photographer ate ${f2Str} of an identical pizza. Who ate more?`,
         `Pit crew A drank ${f1Str} of a sports drink, crew B drank ${f2Str} of one. Which is more?`,
@@ -3656,6 +3722,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const ans = whole * n / d;
     const fracStr = fracToString(n, d);
     return {
+      topic: 'frac-of-whole',
       text: pick([
         `Sur Ronster does ${fracStr} of a ${whole}-mile course. How many miles?`,
         `Crew loads ${fracStr} of ${whole} water bottles into the truck. How many bottles?`,
@@ -3678,6 +3745,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const totalNum = (w1 * d + n1) + (w2 * d + n2);
     const correctStr = fracToString(totalNum, d);
     return {
+      topic: 'frac-mixed-add',
       text: pick([
         `Sur Ronster rode ${w1} ${n1}/${d} miles, then ${w2} ${n2}/${d} miles. Total miles?`,
         `Stage took ${w1} ${n1}/${d} hours plus a ${w2} ${n2}/${d} hour transfer. Total time?`,
@@ -3701,6 +3769,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const totalNum = (w1 * d + n1) - (w2 * d + n2);
     const correctStr = fracToString(totalNum, d);
     return {
+      topic: 'frac-mixed-sub',
       text: pick([
         `Crew had ${w1} ${n1}/${d} pizzas. Ate ${w2} ${n2}/${d}. Pizzas left?`,
         `Trail is ${w1} ${n1}/${d} km. Sur Ronster covered ${w2} ${n2}/${d} km. Distance remaining?`,
@@ -3728,6 +3797,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       `${nNew}/${dNew}`, `${wrong1}/${dNew}`, `${wrong2}/${dNew}`, `${wrong3}/${dNew}`,
     ]);
     return {
+      topic: 'frac-equiv',
       text: pick([
         `Sur Ronster's slice is ${nBase}/${dBase} of a pizza. Cut into ${dNew}-piece form, how many pieces?`,
         `Pit shop ranks fractions by denominator ${dNew}. ${nBase}/${dBase} = ?`,
@@ -3755,6 +3825,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const wrong3 = k > 2 ? `${nBase * 2}/${dBase * 2}` : `${nBase * 3}/${dBase * 3}`;
     const opts = shuffle([correct, wrong1, wrong2, wrong3]);
     return {
+      topic: 'frac-simplify',
       text: pick([
         `Mechanic logs ${num}/${den} kg of grease used. Reduce to lowest terms.`,
         `Sur Ronster covers ${num}/${den} of the trail. Simplest form?`,
@@ -3791,49 +3862,82 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
   }
 
   // ---- Distractor + choices ----
-  function makeDistractor(problem) {
+  // Pedagogical fraction mistakes by operation type. Each entry returns a
+  // string fraction representing what a kid might compute via a common error.
+  function pedFracMistakes(problem) {
     const correct = problem.answer;
     const eq = problem.equation;
-    const pickTrick = () => {
-      if (eq.includes('+') || eq.includes('−') || eq.includes('-')) {
-        return pick([
-          fracToString(correct.num + ri(1, 2), correct.den),
-          fracToString(correct.num, Math.max(1, correct.den + ri(-1, 1))),
-          fracToString(Math.max(0, correct.num - 1), correct.den),
-          fracToString(correct.num + correct.den, correct.den),
-        ]);
-      }
-      if (eq.includes('×')) {
-        return pick([
-          fracToString(correct.num + ri(1, 3), correct.den),
-          fracToString(correct.num, Math.max(1, correct.den * 2)),
-          fracToString(correct.num + correct.den, correct.den),
-        ]);
-      }
-      return pick([
-        fracToString(correct.num + ri(-2, 2), Math.max(1, correct.den + ri(-1, 1))),
-        fracToString(correct.num * 2, correct.den),
-        fracToString(correct.num, correct.den + 1),
-      ]);
-    };
-    return pickTrick();
+    const isAdd = eq.includes('+');
+    const isSub = eq.includes('−') || eq.includes('-');
+    const isMult = eq.includes('×');
+    const isDiv = eq.includes('÷');
+    const candidates = [];
+
+    // Parse operands from equation HTML (e.g., "1/2 <span...>+</span> 1/3...")
+    const tokens = eq.replace(/<[^>]*>/g, ' ').match(/(\d+)\/(\d+)/g) || [];
+    const ops = tokens.map(t => {
+      const [n, d] = t.split('/').map(Number);
+      return { n, d };
+    });
+
+    if ((isAdd || isSub) && ops.length >= 2) {
+      const a = ops[0], b = ops[1];
+      // Mistake: add/subtracted both tops AND bottoms
+      candidates.push(fracToString(isAdd ? a.n + b.n : Math.max(0, a.n - b.n), a.d + b.d));
+      // Mistake: forgot common denominator, just added/subtracted tops over the first denom
+      candidates.push(fracToString(isAdd ? a.n + b.n : Math.max(0, a.n - b.n), a.d));
+      // Mistake: subtracted in wrong order (for sub only)
+      if (isSub) candidates.push(fracToString(b.n * a.d - a.n * b.d, a.d * b.d));
+      // Off-by-one in numerator
+      candidates.push(fracToString(correct.num + 1, correct.den));
+      candidates.push(fracToString(Math.max(0, correct.num - 1), correct.den));
+    }
+
+    if (isMult && ops.length >= 2) {
+      const a = ops[0], b = ops[1];
+      // Mistake: added instead of multiplied
+      candidates.push(fracToString(a.n * b.d + b.n * a.d, a.d * b.d));
+      // Mistake: multiplied tops only, used first denom
+      candidates.push(fracToString(a.n * b.n, a.d));
+      // Mistake: cross-multiplied
+      candidates.push(fracToString(a.n * b.d + b.n * a.d, a.d * b.d));
+      // Off-by-one in numerator of correct
+      candidates.push(fracToString(correct.num + 1, correct.den));
+    }
+
+    if (isDiv && ops.length >= 1) {
+      // Mistake: forgot to invert and multiply (returned the dividend)
+      candidates.push(fracToString(ops[0].n, ops[0].d));
+      // Mistake: used direct division of numerators (1/d ÷ w → 1/(d*w) corrected to d/w)
+      if (ops.length >= 2) candidates.push(fracToString(ops[0].n * ops[1].d, ops[0].d));
+      // Off-by-one
+      candidates.push(fracToString(correct.num + 1, correct.den));
+      candidates.push(fracToString(correct.num, correct.den + 1));
+    }
+
+    // Generic safety net
+    candidates.push(fracToString(correct.num + 1, correct.den));
+    candidates.push(fracToString(correct.num, Math.max(1, correct.den + 1)));
+    candidates.push(fracToString(correct.num * 2, correct.den));
+    return candidates;
   }
 
   function makeChoices(problem) {
     if (problem._customChoices) return problem._customChoices;
     const correct = problem.answer;
     const correctStr = fracToString(correct.num, correct.den);
+    const candidates = pedFracMistakes(problem);
     const set = new Set([correctStr]);
-    let safety = 60;
-    while (set.size < 4 && safety-- > 0) {
-      const d = makeDistractor(problem);
-      if (d && d !== correctStr) set.add(d);
+    for (const c of candidates) {
+      if (c && c !== correctStr) set.add(c);
+      if (set.size >= 4) break;
     }
-    while (set.size < 4) {
+    let safety = 30;
+    while (set.size < 4 && safety-- > 0) {
       set.add(fracToString(correct.num + ri(-3, 3), Math.max(1, correct.den + ri(-2, 2))));
     }
     const arr = shuffle(Array.from(set));
-    return arr.map(t => ({ text: t, correct: t === correctStr }));
+    return arr.slice(0, 4).map(t => ({ text: t, correct: t === correctStr }));
   }
 
   // ---- Pizza visualization ----
@@ -4318,13 +4422,16 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const lap = `1:${ri(20, 35)}.${td}${hDigit}${thd}`;
     const correctNum = tDigit * Math.pow(10, -target.power);
     const correct = correctNum.toString();
-    const opts = new Set([correct]);
-    while (opts.size < 4) {
-      opts.add((ri(1, 9) * Math.pow(10, -ri(1, 3))).toString());
-    }
-    const arr = shuffle(Array.from(opts));
+    // Pedagogical mistakes: kid reads digit at wrong place value
+    const others2 = places.filter(p => p !== target);
+    const candidates = new Set([correct]);
+    candidates.add((tDigit * Math.pow(10, -others2[0].power)).toString());  // wrong place value, same digit
+    candidates.add((tDigit * Math.pow(10, -others2[1].power)).toString());  // other wrong place
+    candidates.add(tDigit.toString());                                        // forgot decimal entirely
+    const arr = shuffle(Array.from(candidates).slice(0, 4));
     const driver = pick(DRIVERS);
     return {
+      topic: 'dec-place-value',
       prompt: pick([
         `Crofty: <em>"${driver.last} just set a <strong>${lap}</strong>. What is the value of the digit in the <strong>${target.name}</strong> place?"</em>`,
         `Brundle on TV: <em>"${driver.last}'s sector reads <strong>${lap}</strong>. The <strong>${target.name}</strong> digit is worth..."</em>`,
@@ -4351,6 +4458,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const wrong   = a < b ? d2.last : d1.last;
     const opts = shuffle([correct, wrong, 'Same lap', 'Cannot tell']);
     return {
+      topic: 'dec-compare',
       prompt: pick([
         `Brundle: <em>"${d1.last} laps in <strong>${aStr}</strong>, ${d2.last} laps in <strong>${bStr}</strong>. Who is <strong>faster</strong>?"</em>`,
         `Crofty: <em>"It's a head-to-head! ${d1.last} <strong>${aStr}</strong> versus ${d2.last} <strong>${bStr}</strong>. Whose lap was quicker?"</em>`,
@@ -4370,9 +4478,16 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const c = ri(20, 30) + ri(100, 999) / 1000;
     const sum = +(a + b + c).toFixed(3);
     const correct = sum.toFixed(3);
-    const opts = ensureFour(new Set([correct]), () => (sum + (ri(-300, 300) / 1000)).toFixed(3));
-    shuffle(opts);
+    // Pedagogical mistakes: misaligned decimal places
+    const opts = pedDistractorsFloat(sum, 3, [
+      sum - 1,                          // missed a digit carry
+      sum + 1,                          // double-carry
+      a + b,                            // forgot to add c
+      a + c,                            // forgot to add b
+      Math.round(a) + Math.round(b) + Math.round(c),  // rounded too early
+    ]).map(n => n.toFixed(3));
     return {
+      topic: 'dec-add-sub',
       prompt: pick([
         `Engineer: <em>"S1 ${a.toFixed(3)}, S2 ${b.toFixed(3)}, S3 ${c.toFixed(3)}. <strong>Lap time</strong>?"</em>`,
         `Pit wall radio: <em>"Sector splits: ${a.toFixed(3)}, ${b.toFixed(3)}, ${c.toFixed(3)}. Total lap?"</em>`,
@@ -4392,9 +4507,17 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const whole = ri(8, 30);
     const product = +(decR * whole).toFixed(3);
     const correct = product.toString();
-    const opts = ensureFour(new Set([correct]), () => +(product + ri(-50, 50) / 100).toFixed(3) + '');
-    shuffle(opts);
+    // Pedagogical mistakes
+    const opts = pedDistractorsFloat(product, 3, [
+      decR + whole,                     // added instead of multiplied
+      product * 10,                     // misplaced decimal (too far right)
+      product / 10,                     // misplaced decimal (too far left)
+      decR * (whole - 1),               // off-by-one in whole
+      decR * (whole + 1),
+    ]).map(n => +n);
+    const optsStr = opts.map(n => n.toString());
     return {
+      topic: 'dec-mult',
       prompt: pick([
         `Pirelli: <em>"Tires lose <strong>${decR}</strong> sec per lap. After <strong>${whole}</strong> laps, total time lost?"</em>`,
         `Strategy engineer: <em>"Tire wear is <strong>${decR}</strong> sec/lap. Run is <strong>${whole}</strong> laps. Cumulative loss?"</em>`,
@@ -4402,8 +4525,8 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         `Stint analysis: <strong>${decR}</strong>s lost each lap over <strong>${whole}</strong> laps. Total time lost?`,
         `Pit wall calc: deg ${decR}s/lap, ${whole} laps to flag. Total time bleed?`,
       ]),
-      answers: opts,
-      correctIdx: opts.indexOf(correct),
+      answers: optsStr,
+      correctIdx: optsStr.indexOf(correct),
       explain: `Multiply: ${decR} × ${whole} = <strong>${correct}</strong>. Multiply as if both were whole numbers, then place the decimal so the answer has the same total decimal places.`,
     };
   }
@@ -4413,9 +4536,16 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const laps = ri(20, 50);
     const totalKm = +(lapDist * laps).toFixed(1);
     const correct = lapDist.toFixed(1);
-    const opts = ensureFour(new Set([correct]), () => (lapDist + ri(-15, 15) / 10).toFixed(1));
-    shuffle(opts);
+    // Pedagogical mistakes
+    const opts = pedDistractorsFloat(lapDist, 1, [
+      totalKm - laps,                   // subtracted instead of divided
+      lapDist * 10,                     // decimal point shifted right
+      lapDist / 10,                     // decimal point shifted left
+      lapDist + 1,                      // off-by-one
+      lapDist - 0.5,                    // partial mistake
+    ]).map(n => n.toFixed(1));
     return {
+      topic: 'dec-div',
       prompt: pick([
         `Strategy: <em>"<strong>${laps}</strong> laps cover <strong>${totalKm.toFixed(1)} km</strong>. What is the <strong>lap distance</strong>?"</em>`,
         `Engineer: <em>"Total race distance <strong>${totalKm.toFixed(1)} km</strong> over <strong>${laps}</strong> laps. Per-lap?"</em>`,
@@ -6492,16 +6622,19 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
   // ---- Rocky / Grace SVG avatars ----
 
   function rockySvg(small) {
-    // Top-down view of canonical Rocky from Project Hail Mary:
-    // pentaradial carapace, 5 articulated limbs at 72° with three-finger
-    // claws, fipple vent on top center, granite/silica rock texture.
-    const s = small ? 90 : 220;
+    // Detailed top-down view of Rocky from Project Hail Mary:
+    // 5-limbed pentaradial alien with granite-textured carapace, articulated
+    // limbs (shoulder + elbow + wrist), 3-finger claws, central fipple speech
+    // organ. Cinematic gradient, drop shadow, edge facet highlights, granite
+    // mottling, soft glow around fipple to suggest his musical chord speech.
+    const s = small ? 90 : 240;
     const cx = s / 2, cy = s / 2;
-    const bodyR = small ? 22 : 52;          // carapace radius
-    const hingeOut = small ? 12 : 28;       // limb segment 1 length (shoulder→elbow)
-    const tipOut = small ? 11 : 24;         // limb segment 2 length (elbow→claw)
-    const segWidth = small ? 6 : 13;        // limb thickness
-    const clawLen = small ? 4 : 9;          // individual claw length
+    const bodyR = small ? 22 : 56;          // carapace radius
+    const seg1Out = small ? 11 : 26;        // shoulder→elbow length
+    const seg2Out = small ? 8  : 19;        // elbow→wrist length
+    const seg3Out = small ? 6  : 14;        // wrist→claw tip
+    const segWidth = small ? 6 : 14;
+    const clawLen = small ? 4 : 10;
     const idSuffix = small ? 's' : 'l';
 
     // 5 vertex angles, top vertex pointed up
@@ -6512,115 +6645,247 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     }
     const polyPts = verts.map(v => `${v.x.toFixed(1)},${v.y.toFixed(1)}`).join(' ');
 
-    // Limbs: from each vertex, segment 1 angled slightly off-radial,
-    // hinge joint, segment 2, then 3-claw tip
+    // Limbs with three jointed segments (shoulder-elbow-wrist-claw) and 3-finger claws
     let limbsHtml = '';
     verts.forEach((v, i) => {
       const radialAng = v.ang;
-      // shoulder to elbow — bend slightly clockwise for natural look
-      const bendAng = (i % 2 === 0 ? 0.18 : -0.18);
-      const elbowAng = radialAng + bendAng;
+      const bend1 = (i % 2 === 0 ? 0.22 : -0.22);   // first joint bend
+      const bend2 = (i % 2 === 0 ? -0.18 : 0.18);   // second joint bend
+      const elbowAng = radialAng + bend1;
       const elbow = {
-        x: v.x + hingeOut * Math.cos(elbowAng),
-        y: v.y + hingeOut * Math.sin(elbowAng),
+        x: v.x + seg1Out * Math.cos(elbowAng),
+        y: v.y + seg1Out * Math.sin(elbowAng),
       };
-      // elbow to claw tip — straighten back
+      const wristAng = elbowAng + bend2;
+      const wrist = {
+        x: elbow.x + seg2Out * Math.cos(wristAng),
+        y: elbow.y + seg2Out * Math.sin(wristAng),
+      };
+      const tipAng = radialAng;
       const tip = {
-        x: elbow.x + tipOut * Math.cos(radialAng),
-        y: elbow.y + tipOut * Math.sin(radialAng),
+        x: wrist.x + seg3Out * Math.cos(tipAng),
+        y: wrist.y + seg3Out * Math.sin(tipAng),
       };
-      // Segment 1 (shoulder–elbow)
+      // Three jointed segments
       limbsHtml += `<line x1="${v.x.toFixed(1)}" y1="${v.y.toFixed(1)}" x2="${elbow.x.toFixed(1)}" y2="${elbow.y.toFixed(1)}" stroke="url(#rkLimb${idSuffix})" stroke-width="${segWidth}" stroke-linecap="round"/>`;
-      // Segment 2 (elbow–claw)
-      limbsHtml += `<line x1="${elbow.x.toFixed(1)}" y1="${elbow.y.toFixed(1)}" x2="${tip.x.toFixed(1)}" y2="${tip.y.toFixed(1)}" stroke="url(#rkLimb${idSuffix})" stroke-width="${segWidth - 1}" stroke-linecap="round"/>`;
-      // Hinge joint detail
-      limbsHtml += `<circle cx="${elbow.x.toFixed(1)}" cy="${elbow.y.toFixed(1)}" r="${segWidth * 0.35}" fill="#3a2818" stroke="#1a0a00" stroke-width="0.8"/>`;
-      // Three-claw fingertips, splayed at angles ±0.5 around the radial direction
+      limbsHtml += `<line x1="${elbow.x.toFixed(1)}" y1="${elbow.y.toFixed(1)}" x2="${wrist.x.toFixed(1)}" y2="${wrist.y.toFixed(1)}" stroke="url(#rkLimb${idSuffix})" stroke-width="${segWidth - 1}" stroke-linecap="round"/>`;
+      limbsHtml += `<line x1="${wrist.x.toFixed(1)}" y1="${wrist.y.toFixed(1)}" x2="${tip.x.toFixed(1)}" y2="${tip.y.toFixed(1)}" stroke="url(#rkLimb${idSuffix})" stroke-width="${segWidth - 2}" stroke-linecap="round"/>`;
+      // Joint detail circles (knuckles)
+      limbsHtml += `<circle cx="${elbow.x.toFixed(1)}" cy="${elbow.y.toFixed(1)}" r="${segWidth * 0.40}" fill="#3a2818" stroke="#1a0a00" stroke-width="${small ? 0.6 : 1}"/>`;
+      limbsHtml += `<circle cx="${wrist.x.toFixed(1)}" cy="${wrist.y.toFixed(1)}" r="${segWidth * 0.32}" fill="#2a1a0a" stroke="#1a0a00" stroke-width="${small ? 0.5 : 0.8}"/>`;
+      // Highlight on each segment for 3D
+      limbsHtml += `<line x1="${(v.x + Math.cos(elbowAng - Math.PI/2) * 1.5).toFixed(1)}" y1="${(v.y + Math.sin(elbowAng - Math.PI/2) * 1.5).toFixed(1)}" x2="${(elbow.x + Math.cos(elbowAng - Math.PI/2) * 1.5).toFixed(1)}" y2="${(elbow.y + Math.sin(elbowAng - Math.PI/2) * 1.5).toFixed(1)}" stroke="rgba(255,220,180,0.28)" stroke-width="${small ? 0.8 : 2}" stroke-linecap="round"/>`;
+
+      // Three-claw fingertips: splayed +/-0.5 around radial direction
       const clawCenter = tip;
-      const clawAngles = [radialAng - 0.45, radialAng, radialAng + 0.45];
+      const clawAngles = [tipAng - 0.50, tipAng, tipAng + 0.50];
       clawAngles.forEach(ca => {
         const cx2 = clawCenter.x + clawLen * Math.cos(ca);
         const cy2 = clawCenter.y + clawLen * Math.sin(ca);
-        limbsHtml += `<line x1="${clawCenter.x.toFixed(1)}" y1="${clawCenter.y.toFixed(1)}" x2="${cx2.toFixed(1)}" y2="${cy2.toFixed(1)}" stroke="#2a1a0a" stroke-width="${small ? 1.6 : 3.2}" stroke-linecap="round"/>`;
+        limbsHtml += `<line x1="${clawCenter.x.toFixed(1)}" y1="${clawCenter.y.toFixed(1)}" x2="${cx2.toFixed(1)}" y2="${cy2.toFixed(1)}" stroke="#1a0a00" stroke-width="${small ? 1.6 : 3.4}" stroke-linecap="round"/>`;
+        // claw tip
+        limbsHtml += `<circle cx="${cx2.toFixed(1)}" cy="${cy2.toFixed(1)}" r="${small ? 0.8 : 1.6}" fill="#5a3a28"/>`;
       });
-      // Claw base palm
-      limbsHtml += `<circle cx="${clawCenter.x.toFixed(1)}" cy="${clawCenter.y.toFixed(1)}" r="${segWidth * 0.55}" fill="#3a2818" stroke="#1a0a00" stroke-width="0.8"/>`;
+      // Palm/wrist pad
+      limbsHtml += `<circle cx="${clawCenter.x.toFixed(1)}" cy="${clawCenter.y.toFixed(1)}" r="${segWidth * 0.50}" fill="#3a2818" stroke="#1a0a00" stroke-width="${small ? 0.6 : 1}"/>`;
     });
 
-    // Granite rock-texture speckle pattern over the carapace
+    // Granite/igneous speckle pattern: many small spots in golden-angle spiral
     let speckle = '';
-    const speckleCount = small ? 14 : 32;
+    const speckleCount = small ? 18 : 50;
     for (let i = 0; i < speckleCount; i++) {
-      const ang = (i * 137.5) * Math.PI / 180; // golden-angle spread
-      const dist = (small ? 4 : 10) + ((i * 7) % (bodyR - (small ? 4 : 10)));
+      const ang = (i * 137.5) * Math.PI / 180;
+      const dist = (small ? 3 : 7) + ((i * 5.7) % (bodyR - (small ? 4 : 8)));
       const sx = cx + dist * Math.cos(ang);
       const sy = cy + dist * Math.sin(ang);
-      const sr = small ? (0.6 + (i % 3) * 0.4) : (1.2 + (i % 4) * 0.7);
-      const c = i % 3 === 0 ? '#5a3a28' : (i % 3 === 1 ? '#3a2818' : '#7a5d40');
-      speckle += `<circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="${sr.toFixed(1)}" fill="${c}" opacity="0.55"/>`;
+      const sr = small ? (0.5 + (i % 3) * 0.3) : (1.0 + (i % 4) * 0.7);
+      const palette = ['#8a6a4e', '#5a3a28', '#2a1a0a', '#a87e5a', '#6e4a30'];
+      const c = palette[i % palette.length];
+      speckle += `<circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="${sr.toFixed(1)}" fill="${c}" opacity="${0.45 + (i % 3) * 0.12}"/>`;
     }
 
-    // Fipple/whistle organ on top center (Rocky's mouth/speech vent)
-    const fippleY = cy - bodyR * 0.30;
-    const fippleR = small ? 4 : 9;
+    // Fipple speech organ — multi-stop cylinder with subtle inner shadow
+    const fippleY = cy - bodyR * 0.32;
+    const fippleR = small ? 4 : 11;
     const fippleHtml = `
-      <ellipse cx="${cx}" cy="${fippleY}" rx="${fippleR}" ry="${fippleR * 0.55}" fill="#1a0a00" stroke="#3a2818" stroke-width="${small ? 0.8 : 1.5}"/>
-      <ellipse cx="${cx}" cy="${fippleY - fippleR * 0.18}" rx="${fippleR * 0.55}" ry="${fippleR * 0.18}" fill="#5a3a28" opacity="0.7"/>
+      <ellipse cx="${cx}" cy="${fippleY + fippleR * 0.18}" rx="${fippleR}" ry="${fippleR * 0.65}" fill="#1a0a00" opacity="0.55"/>
+      <ellipse cx="${cx}" cy="${fippleY}" rx="${fippleR}" ry="${fippleR * 0.55}" fill="url(#rkFipple${idSuffix})" stroke="#3a2818" stroke-width="${small ? 0.8 : 1.5}"/>
+      <ellipse cx="${cx}" cy="${fippleY - fippleR * 0.10}" rx="${fippleR * 0.65}" ry="${fippleR * 0.32}" fill="#0a0a00" opacity="0.7"/>
+      <ellipse cx="${cx}" cy="${fippleY - fippleR * 0.18}" rx="${fippleR * 0.40}" ry="${fippleR * 0.16}" fill="rgba(255,220,180,0.35)"/>
     `;
+
+    // Sub-edges between vertices and center (creates pentagon facet impression)
+    let subEdges = '';
+    verts.forEach((v) => {
+      subEdges += `<line x1="${cx.toFixed(1)}" y1="${cy.toFixed(1)}" x2="${v.x.toFixed(1)}" y2="${v.y.toFixed(1)}" stroke="rgba(0,0,0,0.18)" stroke-width="${small ? 0.4 : 0.9}"/>`;
+    });
 
     return `
       <svg viewBox="0 0 ${s} ${s}" width="${s}" height="${s}" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id="rkBody${idSuffix}" cx="0.42" cy="0.38" r="0.65">
-            <stop offset="0" stop-color="#9a7c66"/>
-            <stop offset="0.55" stop-color="#6e5440"/>
-            <stop offset="1" stop-color="#3a2818"/>
+          <radialGradient id="rkBody${idSuffix}" cx="0.40" cy="0.32" r="0.72">
+            <stop offset="0"    stop-color="#c39870"/>
+            <stop offset="0.30" stop-color="#9a6e4a"/>
+            <stop offset="0.65" stop-color="#5e3e28"/>
+            <stop offset="1"    stop-color="#2a1408"/>
           </radialGradient>
           <linearGradient id="rkLimb${idSuffix}" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0" stop-color="#7a5d40"/>
-            <stop offset="0.5" stop-color="#5a3a28"/>
-            <stop offset="1" stop-color="#3a2818"/>
+            <stop offset="0"    stop-color="#a87e5a"/>
+            <stop offset="0.45" stop-color="#6a4a30"/>
+            <stop offset="1"    stop-color="#2a1a0a"/>
           </linearGradient>
-          <filter id="rkBlur${idSuffix}"><feGaussianBlur stdDeviation="${small ? 0.4 : 1}"/></filter>
+          <radialGradient id="rkFipple${idSuffix}" cx="0.5" cy="0.45" r="0.7">
+            <stop offset="0"    stop-color="#1a0a00"/>
+            <stop offset="0.5"  stop-color="#3a2818"/>
+            <stop offset="1"    stop-color="#5a3a28"/>
+          </radialGradient>
+          <radialGradient id="rkGlow${idSuffix}" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0"    stop-color="rgba(255,180,80,0.45)"/>
+            <stop offset="0.6"  stop-color="rgba(255,180,80,0.1)"/>
+            <stop offset="1"    stop-color="rgba(255,180,80,0)"/>
+          </radialGradient>
+          <filter id="rkBlur${idSuffix}"><feGaussianBlur stdDeviation="${small ? 0.4 : 1.2}"/></filter>
+          <filter id="rkSoft${idSuffix}" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="${small ? 1 : 3}"/>
+          </filter>
         </defs>
+        <!-- ground shadow under body -->
+        <ellipse cx="${cx}" cy="${(cy + bodyR * 0.85).toFixed(1)}" rx="${(bodyR * 0.95).toFixed(1)}" ry="${(bodyR * 0.20).toFixed(1)}" fill="rgba(0,0,0,0.45)" filter="url(#rkSoft${idSuffix})"/>
+        <!-- soft warm glow halo around body to suggest atmospheric heat -->
+        <circle cx="${cx}" cy="${cy}" r="${(bodyR * 1.35).toFixed(1)}" fill="url(#rkGlow${idSuffix})"/>
         <!-- limbs underneath body -->
         ${limbsHtml}
-        <!-- carapace shadow -->
-        <polygon points="${polyPts}" fill="#1a0a00" opacity="0.4" transform="translate(${small ? 1.5 : 3}, ${small ? 2 : 4})"/>
-        <!-- carapace body -->
-        <polygon points="${polyPts}" fill="url(#rkBody${idSuffix})" stroke="#1a0a00" stroke-width="${small ? 1.2 : 2.5}" stroke-linejoin="round"/>
-        <!-- granite speckle texture (clipped to body via overlap) -->
+        <!-- carapace shadow (offset down-right) -->
+        <polygon points="${polyPts}" fill="#1a0a00" opacity="0.55" transform="translate(${small ? 2 : 4}, ${small ? 2.5 : 5})"/>
+        <!-- carapace main body -->
+        <polygon points="${polyPts}" fill="url(#rkBody${idSuffix})" stroke="#1a0a00" stroke-width="${small ? 1.4 : 3}" stroke-linejoin="round"/>
+        <!-- inner facet edges (vertex to center) -->
+        ${subEdges}
+        <!-- granite speckle texture -->
         <g filter="url(#rkBlur${idSuffix})">${speckle}</g>
-        <!-- highlight on top-left of carapace -->
-        <ellipse cx="${cx - bodyR * 0.32}" cy="${cy - bodyR * 0.30}" rx="${bodyR * 0.30}" ry="${bodyR * 0.18}" fill="rgba(255,220,180,0.35)"/>
+        <!-- main highlight on top-left of carapace -->
+        <ellipse cx="${(cx - bodyR * 0.32).toFixed(1)}" cy="${(cy - bodyR * 0.32).toFixed(1)}" rx="${(bodyR * 0.36).toFixed(1)}" ry="${(bodyR * 0.22).toFixed(1)}" fill="rgba(255,235,200,0.40)"/>
+        <!-- secondary smaller highlight -->
+        <ellipse cx="${(cx - bodyR * 0.18).toFixed(1)}" cy="${(cy - bodyR * 0.45).toFixed(1)}" rx="${(bodyR * 0.14).toFixed(1)}" ry="${(bodyR * 0.06).toFixed(1)}" fill="rgba(255,235,200,0.55)"/>
         <!-- fipple speech vent -->
         ${fippleHtml}
-        <!-- pentagon edge highlights to suggest 3D facets -->
+        <!-- pentagon edge highlights -->
         ${verts.map((v, i) => {
           const next = verts[(i + 1) % 5];
-          return `<line x1="${v.x.toFixed(1)}" y1="${v.y.toFixed(1)}" x2="${next.x.toFixed(1)}" y2="${next.y.toFixed(1)}" stroke="rgba(255,220,180,0.18)" stroke-width="${small ? 0.6 : 1.2}"/>`;
+          return `<line x1="${v.x.toFixed(1)}" y1="${v.y.toFixed(1)}" x2="${next.x.toFixed(1)}" y2="${next.y.toFixed(1)}" stroke="rgba(255,235,200,0.30)" stroke-width="${small ? 0.7 : 1.4}"/>`;
+        }).join('')}
+        <!-- crystalline facet bevel: thin dark edges over bright -->
+        ${verts.map((v, i) => {
+          const next = verts[(i + 1) % 5];
+          return `<line x1="${v.x.toFixed(1)}" y1="${v.y.toFixed(1)}" x2="${next.x.toFixed(1)}" y2="${next.y.toFixed(1)}" stroke="rgba(0,0,0,0.30)" stroke-width="${small ? 0.3 : 0.6}" transform="translate(${small ? 0.4 : 0.8}, ${small ? 0.4 : 0.8})"/>`;
         }).join('')}
       </svg>
     `;
   }
 
   function graceSvg(small) {
-    const s = small ? 90 : 200;
+    // Detailed astronaut Grace: NASA-style EMU spacesuit, bubble helmet with
+    // gold-tinted visor, life-support backpack profile, mission patch, gloves,
+    // boots, segmented suit folds, drop shadow.
+    const s = small ? 90 : 220;
     const k = small ? 0.45 : 1;
     const t = (n) => (n * k).toFixed(1);
+    const idSuffix = small ? 's' : 'l';
     return `
       <svg viewBox="0 0 ${s} ${s}" width="${s}" height="${s}" xmlns="http://www.w3.org/2000/svg">
-        <!-- body -->
-        <rect x="${t(70)}" y="${t(100)}" width="${t(60)}" height="${t(80)}" fill="#e0e0e8" rx="4" stroke="#a0a8b3"/>
-        <rect x="${t(50)}" y="${t(108)}" width="${t(20)}" height="${t(60)}" fill="#e0e0e8" rx="4" stroke="#a0a8b3"/>
-        <rect x="${t(130)}" y="${t(108)}" width="${t(20)}" height="${t(60)}" fill="#e0e0e8" rx="4" stroke="#a0a8b3"/>
-        <!-- helmet -->
-        <circle cx="${t(100)}" cy="${t(80)}" r="${t(32)}" fill="#ffffff" stroke="#a0a8b3" stroke-width="2"/>
-        <ellipse cx="${t(100)}" cy="${t(82)}" rx="${t(22)}" ry="${t(18)}" fill="#1a2030" opacity="0.85"/>
-        <ellipse cx="${t(92)}" cy="${t(76)}" rx="${t(6)}" ry="${t(5)}" fill="rgba(150,200,255,0.4)"/>
-        <!-- chest emblem -->
-        <rect x="${t(92)}" y="${t(120)}" width="${t(16)}" height="${t(10)}" fill="#0055BF" rx="2"/>
-        <text x="${t(100)}" y="${t(128)}" text-anchor="middle" fill="#fff" font-size="${t(7)}" font-weight="800" font-family="system-ui">HM</text>
+        <defs>
+          <linearGradient id="grSuit${idSuffix}" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0"    stop-color="#ffffff"/>
+            <stop offset="0.55" stop-color="#dde3ec"/>
+            <stop offset="1"    stop-color="#a5acb6"/>
+          </linearGradient>
+          <radialGradient id="grHelmet${idSuffix}" cx="0.42" cy="0.32" r="0.68">
+            <stop offset="0"   stop-color="#ffffff"/>
+            <stop offset="0.6" stop-color="#d8dfe9"/>
+            <stop offset="1"   stop-color="#9aa3ae"/>
+          </radialGradient>
+          <linearGradient id="grVisor${idSuffix}" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0"    stop-color="#fff5b8" stop-opacity="0.95"/>
+            <stop offset="0.45" stop-color="#d6a64a"/>
+            <stop offset="1"    stop-color="#7c5320"/>
+          </linearGradient>
+          <radialGradient id="grVisorShine${idSuffix}" cx="0.3" cy="0.3" r="0.3">
+            <stop offset="0"   stop-color="rgba(255,255,255,0.65)"/>
+            <stop offset="1"   stop-color="rgba(255,255,255,0)"/>
+          </radialGradient>
+          <linearGradient id="grPack${idSuffix}" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0"   stop-color="#7c8590"/>
+            <stop offset="0.5" stop-color="#a5acb6"/>
+            <stop offset="1"   stop-color="#7c8590"/>
+          </linearGradient>
+          <filter id="grSoft${idSuffix}"><feGaussianBlur stdDeviation="${small ? 0.8 : 2.5}"/></filter>
+        </defs>
+
+        <!-- ground shadow -->
+        <ellipse cx="${t(100)}" cy="${t(196)}" rx="${t(50)}" ry="${t(6)}" fill="rgba(0,0,0,0.45)" filter="url(#grSoft${idSuffix})"/>
+
+        <!-- life-support backpack (behind torso) -->
+        <rect x="${t(58)}" y="${t(96)}" width="${t(84)}" height="${t(78)}" rx="${t(4)}" fill="url(#grPack${idSuffix})" stroke="#5a626c" stroke-width="${t(1)}"/>
+        <line x1="${t(80)}" y1="${t(108)}" x2="${t(80)}" y2="${t(168)}" stroke="#5a626c" stroke-width="${t(0.6)}"/>
+        <line x1="${t(120)}" y1="${t(108)}" x2="${t(120)}" y2="${t(168)}" stroke="#5a626c" stroke-width="${t(0.6)}"/>
+        <!-- antenna stub on top of pack -->
+        <rect x="${t(98)}" y="${t(86)}" width="${t(4)}" height="${t(8)}" fill="#5a626c"/>
+        <circle cx="${t(100)}" cy="${t(85)}" r="${t(1.5)}" fill="#ee5a3a"/>
+
+        <!-- legs -->
+        <rect x="${t(76)}" y="${t(154)}" width="${t(20)}" height="${t(38)}" rx="${t(3)}" fill="url(#grSuit${idSuffix})" stroke="#7c8590" stroke-width="${t(1)}"/>
+        <rect x="${t(104)}" y="${t(154)}" width="${t(20)}" height="${t(38)}" rx="${t(3)}" fill="url(#grSuit${idSuffix})" stroke="#7c8590" stroke-width="${t(1)}"/>
+        <!-- knee folds -->
+        <line x1="${t(76)}" y1="${t(170)}" x2="${t(96)}" y2="${t(170)}" stroke="#9aa3ae" stroke-width="${t(0.6)}"/>
+        <line x1="${t(104)}" y1="${t(170)}" x2="${t(124)}" y2="${t(170)}" stroke="#9aa3ae" stroke-width="${t(0.6)}"/>
+        <!-- boots -->
+        <rect x="${t(72)}" y="${t(186)}" width="${t(28)}" height="${t(10)}" rx="${t(3)}" fill="#3a3e44" stroke="#1a1d24" stroke-width="${t(0.8)}"/>
+        <rect x="${t(100)}" y="${t(186)}" width="${t(28)}" height="${t(10)}" rx="${t(3)}" fill="#3a3e44" stroke="#1a1d24" stroke-width="${t(0.8)}"/>
+
+        <!-- torso (suit body) -->
+        <rect x="${t(70)}" y="${t(102)}" width="${t(60)}" height="${t(60)}" rx="${t(4)}" fill="url(#grSuit${idSuffix})" stroke="#7c8590" stroke-width="${t(1.2)}"/>
+        <!-- torso accordion folds -->
+        ${[110, 120, 130, 140, 150].map(y => `<line x1="${t(72)}" y1="${t(y)}" x2="${t(128)}" y2="${t(y)}" stroke="rgba(150,156,162,0.5)" stroke-width="${t(0.5)}"/>`).join('')}
+
+        <!-- chest control unit -->
+        <rect x="${t(86)}" y="${t(118)}" width="${t(28)}" height="${t(20)}" rx="${t(2)}" fill="#15181f" stroke="#0a0e15" stroke-width="${t(0.8)}"/>
+        <rect x="${t(89)}" y="${t(122)}" width="${t(22)}" height="${t(6)}" fill="#1a4060"/>
+        <rect x="${t(89)}" y="${t(130)}" width="${t(8)}" height="${t(2)}" fill="#27f4d2"/>
+        <rect x="${t(89)}" y="${t(133)}" width="${t(6)}" height="${t(2)}" fill="#fcd700"/>
+        <circle cx="${t(105)}" cy="${t(132)}" r="${t(1.5)}" fill="#ee5a3a"/>
+
+        <!-- mission patch (left chest) -->
+        <circle cx="${t(80)}" cy="${t(116)}" r="${t(7)}" fill="#0a1828" stroke="#fcd700" stroke-width="${t(0.8)}"/>
+        <text x="${t(80)}" y="${t(118.5)}" text-anchor="middle" font-size="${t(6)}" font-weight="900" fill="#fcd700" font-family="system-ui">HM</text>
+        <!-- US flag patch (right chest) -->
+        <rect x="${t(115)}" y="${t(110)}" width="${t(11)}" height="${t(7)}" fill="#bf2c34"/>
+        <rect x="${t(115)}" y="${t(110)}" width="${t(5)}" height="${t(3.5)}" fill="#1a3a8a"/>
+        ${[111.4, 113, 114.6].map(yy => `<line x1="${t(120)}" y1="${t(yy)}" x2="${t(126)}" y2="${t(yy)}" stroke="#fff" stroke-width="${t(0.4)}"/>`).join('')}
+
+        <!-- arms -->
+        <rect x="${t(50)}" y="${t(106)}" width="${t(20)}" height="${t(54)}" rx="${t(4)}" fill="url(#grSuit${idSuffix})" stroke="#7c8590" stroke-width="${t(1)}"/>
+        <rect x="${t(130)}" y="${t(106)}" width="${t(20)}" height="${t(54)}" rx="${t(4)}" fill="url(#grSuit${idSuffix})" stroke="#7c8590" stroke-width="${t(1)}"/>
+        <!-- arm folds -->
+        <line x1="${t(50)}" y1="${t(132)}" x2="${t(70)}" y2="${t(132)}" stroke="#9aa3ae" stroke-width="${t(0.6)}"/>
+        <line x1="${t(130)}" y1="${t(132)}" x2="${t(150)}" y2="${t(132)}" stroke="#9aa3ae" stroke-width="${t(0.6)}"/>
+        <!-- gloves -->
+        <ellipse cx="${t(60)}" cy="${t(166)}" rx="${t(11)}" ry="${t(8)}" fill="#3a3e44" stroke="#1a1d24" stroke-width="${t(0.8)}"/>
+        <ellipse cx="${t(140)}" cy="${t(166)}" rx="${t(11)}" ry="${t(8)}" fill="#3a3e44" stroke="#1a1d24" stroke-width="${t(0.8)}"/>
+
+        <!-- neck ring connecting helmet to suit -->
+        <rect x="${t(86)}" y="${t(94)}" width="${t(28)}" height="${t(10)}" rx="${t(2)}" fill="#5a626c" stroke="#3a3e44" stroke-width="${t(0.8)}"/>
+        <line x1="${t(88)}" y1="${t(99)}" x2="${t(112)}" y2="${t(99)}" stroke="#7c8590" stroke-width="${t(0.4)}"/>
+
+        <!-- helmet outer shell -->
+        <ellipse cx="${t(100)}" cy="${t(64)}" rx="${t(36)}" ry="${t(34)}" fill="url(#grHelmet${idSuffix})" stroke="#7c8590" stroke-width="${t(2)}"/>
+        <!-- gold visor (inset) -->
+        <ellipse cx="${t(100)}" cy="${t(64)}" rx="${t(26)}" ry="${t(24)}" fill="url(#grVisor${idSuffix})" stroke="#5a3a18" stroke-width="${t(1)}"/>
+        <!-- visor reflection (top-left) -->
+        <ellipse cx="${t(89)}" cy="${t(53)}" rx="${t(10)}" ry="${t(6)}" fill="url(#grVisorShine${idSuffix})"/>
+        <!-- horizon reflection -->
+        <line x1="${t(76)}" y1="${t(72)}" x2="${t(124)}" y2="${t(72)}" stroke="rgba(255,255,255,0.18)" stroke-width="${t(0.6)}"/>
+        <!-- helmet frame highlights -->
+        <ellipse cx="${t(100)}" cy="${t(64)}" rx="${t(36)}" ry="${t(34)}" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="${t(0.8)}" transform="translate(${t(-1)}, ${t(-1)})"/>
       </svg>
     `;
   }
