@@ -1017,6 +1017,21 @@
   @keyframes ansgood { 0% {} 50% { transform: scale(1.07); } 100% {} }
   @keyframes ansbad  { 0% {} 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } 100% {} }
 
+  .f1-explain {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    animation: fadein 0.2s ease-out;
+  }
+  .f1-explain.wrong { background: rgba(248,113,113,0.12); border-left: 3px solid #f87171; }
+  .f1-explain.right { background: rgba(74,222,128,0.10); border-left: 3px solid #4ade80; }
+  .f1-explain strong { color: var(--theme-decimals); font-feature-settings: 'tnum' 1; }
+  .f1-explain-head { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .f1-explain.wrong .f1-explain-head { color: #f87171; }
+  .f1-explain.right .f1-explain-head { color: #4ade80; }
+
   .f1-foot {
     grid-area: foot;
     display: flex; justify-content: space-between; align-items: center;
@@ -1401,6 +1416,21 @@
   .rc-ans.wrong   { border-color: var(--acc-error);   background: rgba(248,113,113,0.18); color: var(--acc-error); }
   .rc-ans:disabled { cursor: not-allowed; }
 
+  .rc-explain {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    animation: fadein 0.2s ease-out;
+  }
+  .rc-explain.wrong { background: rgba(248,113,113,0.12); border-left: 3px solid #f87171; }
+  .rc-explain.right { background: rgba(74,222,128,0.10); border-left: 3px solid #4ade80; }
+  .rc-explain strong { color: var(--theme-coords); font-feature-settings: 'tnum' 1; }
+  .rc-explain-head { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .rc-explain.wrong .rc-explain-head { color: #f87171; }
+  .rc-explain.right .rc-explain-head { color: #4ade80; }
+
   .rc-foot {
     grid-area: foot;
     display: flex; justify-content: space-between; align-items: center;
@@ -1666,6 +1696,22 @@
     color: #fff;
   }
   .mb-ans:disabled { cursor: not-allowed; }
+
+  .mb-explain {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    animation: fadein 0.2s ease-out;
+    color: #1a1a1a;
+  }
+  .mb-explain.wrong { background: #FCD9D9; border-left: 3px solid #C91A09; }
+  .mb-explain.right { background: #D4F4DC; border-left: 3px solid #237841; }
+  .mb-explain strong { color: #C91A09; font-feature-settings: 'tnum' 1; }
+  .mb-explain-head { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .mb-explain.wrong .mb-explain-head { color: #C91A09; }
+  .mb-explain.right .mb-explain-head { color: #237841; }
 
   .mb-foot {
     grid-area: foot;
@@ -1958,6 +2004,21 @@
   .rk-dict-grace { color: #6dd5ed; font-weight: 700; text-align: right; font-feature-settings: 'tnum' 1; }
   .rk-dict-empty { color: var(--text-muted); font-style: italic; font-size: 0.82rem; padding: 8px 4px; }
 
+  .rk-explain {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    animation: fadein 0.2s ease-out;
+  }
+  .rk-explain.wrong { background: rgba(248,113,113,0.10); border-left: 3px solid #f87171; }
+  .rk-explain.right { background: rgba(74,222,128,0.10); border-left: 3px solid #4ade80; }
+  .rk-explain strong { color: #ff8c5a; font-feature-settings: 'tnum' 1; }
+  .rk-explain-head { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .rk-explain.wrong .rk-explain-head { color: #f87171; }
+  .rk-explain.right .rk-explain-head { color: #4ade80; }
+
   .rk-foot {
     grid-area: foot;
     background: rgba(20, 25, 35, 0.7);
@@ -2227,6 +2288,23 @@
   .fb-ans.correct { background: #B8D8A8; border-color: #4A6D38; color: #2A4D18; }
   .fb-ans.wrong   { background: #E5B8B8; border-color: #8B0000; color: #6B0000; }
   .fb-ans:disabled { cursor: not-allowed; }
+
+  .fb-explain {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    font-family: inherit;
+    animation: fadein 0.2s ease-out;
+    color: #2A1F16;
+  }
+  .fb-explain.wrong { background: #F4D8D2; border-left: 3px solid #8B0000; }
+  .fb-explain.right { background: #DDE9C8; border-left: 3px solid #4A6D38; }
+  .fb-explain strong { color: #8B0000; font-feature-settings: 'tnum' 1; font-style: italic; }
+  .fb-explain-head { font-size: 0.85rem; font-weight: 700; font-style: italic; margin-bottom: 4px; }
+  .fb-explain.wrong .fb-explain-head { color: #8B0000; }
+  .fb-explain.right .fb-explain-head { color: #2A4D18; }
 
   .fb-foot {
     grid-area: foot;
@@ -3704,6 +3782,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Crofty: <em>"${driver.last} just set a <strong>${lap}</strong>. What is the value of the digit in the <strong>${target.name}</strong> place?"</em>`,
       answers: arr,
       correctIdx: arr.indexOf(correct),
+      explain: `In ${lap}, the digit in the ${target.name} place is <strong>${tDigit}</strong>. Its value is ${tDigit} × 10⁻${target.power} = <strong>${correct}</strong>.`,
     };
   }
 
@@ -3723,6 +3802,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Brundle: <em>"${d1.last} laps in <strong>${aStr}</strong>, ${d2.last} laps in <strong>${bStr}</strong>. Who is <strong>faster</strong>?"</em>`,
       answers: opts,
       correctIdx: opts.indexOf(correct),
+      explain: `Compare digits left to right. ${aStr} vs ${bStr} → ${a < b ? aStr : bStr} is the smaller (faster) lap. <strong>${correct}</strong> wins.`,
     };
   }
 
@@ -3738,6 +3818,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Engineer: <em>"S1 ${a.toFixed(3)}, S2 ${b.toFixed(3)}, S3 ${c.toFixed(3)}. <strong>Lap time</strong>?"</em>`,
       answers: opts,
       correctIdx: opts.indexOf(correct),
+      explain: `Add the three sectors: ${a.toFixed(3)} + ${b.toFixed(3)} + ${c.toFixed(3)} = <strong>${correct}</strong>. Line up the decimal points and add column by column.`,
     };
   }
 
@@ -3753,6 +3834,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Pirelli: <em>"Tires lose <strong>${decR}</strong> sec per lap. After <strong>${whole}</strong> laps, total time lost?"</em>`,
       answers: opts,
       correctIdx: opts.indexOf(correct),
+      explain: `Multiply: ${decR} × ${whole} = <strong>${correct}</strong>. Multiply as if both were whole numbers, then place the decimal so the answer has the same total decimal places.`,
     };
   }
 
@@ -3767,6 +3849,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Strategy: <em>"<strong>${laps}</strong> laps cover <strong>${totalKm.toFixed(1)} km</strong>. What is the <strong>lap distance</strong>?"</em>`,
       answers: opts.map(o => o + ' km'),
       correctIdx: opts.indexOf(correct),
+      explain: `Total ÷ laps: ${totalKm.toFixed(1)} ÷ ${laps} = <strong>${correct} km</strong>. Move the decimal in dividend and divisor together so you can divide by a whole number.`,
     };
   }
 
@@ -4040,6 +4123,17 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         buttons[q.correctIdx].classList.add('correct');
         if (!correct) buttons[idx].classList.add('wrong');
 
+        // Inline explanation panel
+        const qEl = root.querySelector('#f1-question');
+        if (qEl) {
+          const ex = document.createElement('div');
+          ex.className = 'f1-explain ' + (correct ? 'right' : 'wrong');
+          ex.innerHTML = correct
+            ? `<div class="f1-explain-head">✓ FASTEST LAP</div><div>${q.explain || ''}</div>`
+            : `<div class="f1-explain-head">✗ OFF THE PACE</div><div>${q.explain || ''}</div>`;
+          qEl.appendChild(ex);
+        }
+
         if (correct) {
           state.correctCount++;
           state.streak = Math.min(3, state.streak + 1);
@@ -4054,7 +4148,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           sfxWrong();
         }
 
-        later(1300, () => {
+        later(correct ? 1500 : 3800, () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -4438,6 +4532,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         `Engineer: <em>"Lay in coordinates <strong>(${x}, ${y})</strong>, this is the way."</em>`,
         `Hyperspace beacon at <strong>(${x}, ${y})</strong>. <strong>Plot it.</strong>`,
       ]),
+      explain: `From the origin, move <strong>${x}</strong> along the x-axis (${x >= 0 ? 'right' : 'left'}), then <strong>${y}</strong> along the y-axis (${y >= 0 ? 'up' : 'down'}). The cell you tap is at <strong>(${x}, ${y})</strong>.`,
     };
   }
 
@@ -4461,6 +4556,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Mos Eisley landing pad A at <strong>(${x1}, ${y1})</strong>, bay B at <strong>(${x2}, ${y2})</strong>. <strong>Distance</strong> between them?`,
       answers: arr.map(n => `${n} units`),
       correctIdx: arr.indexOf(dist),
+      explain: horizontal
+        ? `Same y-coordinate (${y1}). Subtract the x's: |${x2} − ${x1}| = <strong>${dist}</strong>.`
+        : `Same x-coordinate (${x1}). Subtract the y's: |${y2} − ${y1}| = <strong>${dist}</strong>.`,
     };
   }
 
@@ -4480,6 +4578,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Imperial probe detected at <strong>(${x}, ${y})</strong>. <strong>Which quadrant</strong>?`,
       answers: opts.map(o => 'Quadrant ' + o),
       correctIdx: opts.indexOf(q),
+      explain: `x = ${x} (${x > 0 ? 'positive' : 'negative'}), y = ${y} (${y > 0 ? 'positive' : 'negative'}). That puts (${x}, ${y}) in <strong>Quadrant ${q}</strong>. (Quadrants spiral counter-clockwise from upper-right: I, II, III, IV.)`,
     };
   }
 
@@ -4503,6 +4602,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Imperial sensor mirrors your jump <strong>(${x}, ${y})</strong> across the <strong>${axis}</strong>. Where does the false reading appear?`,
       answers: arr,
       correctIdx: arr.indexOf(correct),
+      explain: axis === 'y-axis'
+        ? `Reflecting across the y-axis flips the sign of x only. (${x}, ${y}) → <strong>(${-x}, ${y})</strong>. The y stays put.`
+        : `Reflecting across the x-axis flips the sign of y only. (${x}, ${y}) → <strong>(${x}, ${-y})</strong>. The x stays put.`,
     };
   }
 
@@ -4526,6 +4628,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Razor Crest at <strong>(${x}, ${y})</strong>. Mando burns thrusters: <strong>${dx >= 0 ? '+' : ''}${dx}</strong> in x, <strong>${dy >= 0 ? '+' : ''}${dy}</strong> in y. <strong>New position</strong>?`,
       answers: arr,
       correctIdx: arr.indexOf(correct),
+      explain: `Add the deltas to the original. x: ${x} + (${dx}) = ${nx}. y: ${y} + (${dy}) = ${ny}. New position: <strong>(${nx}, ${ny})</strong>.`,
     };
   }
 
@@ -4774,12 +4877,22 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       }
 
       function afterAnswer(correct) {
+        const q = state.questions[state.questionNum];
+        const qEl = root.querySelector('#rc-question');
+        if (qEl) {
+          const ex = document.createElement('div');
+          ex.className = 'rc-explain ' + (correct ? 'right' : 'wrong');
+          ex.innerHTML = correct
+            ? `<div class="rc-explain-head">✓ HYPERSPACE LOCKED</div><div>${q && q.explain || ''}</div>`
+            : `<div class="rc-explain-head">✗ NAVCOM REJECTED</div><div>${q && q.explain || ''}</div>`;
+          qEl.appendChild(ex);
+        }
+
         if (correct) {
           state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
           state.score += 100 + (state.streak >= 3 ? 80 : 0);
           sfxCorrect();
-          // hyperspace flash
           const flash = root.querySelector('#rc-flash');
           if (flash) { flash.classList.add('on'); later(500, () => flash.classList.remove('on')); }
           if (state.streak === 3) sfxHyperspace();
@@ -4789,7 +4902,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           state.hullPct = Math.max(0, state.hullPct - 33);
           sfxWrong();
         }
-        later(1400, () => {
+        later(correct ? 1500 : 3800, () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -5055,6 +5168,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: quoteFor(builderId, `My next piece is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. <strong>Volume in stud cubes</strong>?`),
       answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(v),
+      explain: `Volume = length × width × height. ${l} × ${w} × ${h} = <strong>${v} studs³</strong>. (Multiply ${l} × ${w} = ${l*w} first, then × ${h}.)`,
     };
   }
 
@@ -5068,6 +5182,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: quoteFor(builderId, `Base area is <strong>${base}</strong> stud-squares and the height is <strong>${h}</strong> studs. <strong>Volume</strong>?`),
       answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(v),
+      explain: `Volume = base area × height. ${base} × ${h} = <strong>${v} studs³</strong>.`,
     };
   }
 
@@ -5083,6 +5198,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: quoteFor(builderId, `Hull is <strong>${a1}×${a2}×${a3}</strong>, cabin on top is <strong>${b1}×${b2}×${b3}</strong>. <strong>Total volume</strong>?`),
       answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(total),
+      explain: `Find each volume, then add. Hull: ${a1}×${a2}×${a3} = ${va}. Cabin: ${b1}×${b2}×${b3} = ${vb}. Total: ${va} + ${vb} = <strong>${total} studs³</strong>.`,
     };
   }
 
@@ -5095,6 +5211,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: quoteFor(builderId, `This piece has <strong>volume ${v} stud cubes</strong> and a base of <strong>${l}×${w}</strong>. <strong>Height</strong>?`),
       answers: opts.map(o => o + ' studs'),
       correctIdx: opts.indexOf(h),
+      explain: `Volume = length × width × height, so height = volume ÷ (length × width). ${v} ÷ (${l} × ${w}) = ${v} ÷ ${l*w} = <strong>${h} studs</strong>.`,
     };
   }
 
@@ -5261,11 +5378,20 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         buttons[q.correctIdx].classList.add('correct');
         if (!correct) buttons[idx].classList.add('wrong');
 
+        const qEl = root.querySelector('#mb-question');
+        if (qEl) {
+          const ex = document.createElement('div');
+          ex.className = 'mb-explain ' + (correct ? 'right' : 'wrong');
+          ex.innerHTML = correct
+            ? `<div class="mb-explain-head">✓ BRICK LOCKED</div><div>${q.explain || ''}</div>`
+            : `<div class="mb-explain-head">✗ STRUCTURE WOBBLED</div><div>${q.explain || ''}</div>`;
+          qEl.appendChild(ex);
+        }
+
         if (correct) {
           state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
           state.score += 100 + (state.streak >= 3 ? 50 : 0);
-          // Add brick to structure
           state.bricks.push(nextBrickPlacement(state.bricks.length, lvl));
           sfxSnap();
           setTimeout(() => sfxStud(), 80);
@@ -5273,10 +5399,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           state.streak = 0;
           state.livesLost = Math.min(3, state.livesLost + 1);
           sfxRattle();
-          // wobble most recent brick (visual cue) — for v1 just skip animation
         }
 
-        later(1300, () => {
+        later(correct ? 1500 : 3800, () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -5463,6 +5588,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           answers: opts.map(o => o + ' cm'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${m} m`, grace: `${ans} cm` },
+          explain: `1 m = 100 cm. So ${m} × 100 = <strong>${ans} cm</strong>.`,
         };
       },
       () => { // kg to g
@@ -5475,6 +5601,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           answers: opts.map(o => o + ' g'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${kg} kg`, grace: `${ans} g` },
+          explain: `1 kg = 1000 g. So ${kg} × 1000 = <strong>${ans} g</strong>.`,
         };
       },
       () => { // L to mL
@@ -5487,6 +5614,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           answers: opts.map(o => o + ' mL'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${L} L`, grace: `${ans} mL` },
+          explain: `1 L = 1000 mL. So ${L} × 1000 = <strong>${ans} mL</strong>.`,
         };
       },
     ];
@@ -5505,6 +5633,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           answers: opts.map(o => o + ' oz'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${lb} lb`, grace: `${ans} oz` },
+          explain: `1 lb = 16 oz. So ${lb} × 16 = <strong>${ans} oz</strong>.`,
         };
       },
       () => { // ft to in
@@ -5517,6 +5646,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           answers: opts.map(o => o + ' in'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${ft} ft`, grace: `${ans} in` },
+          explain: `1 ft = 12 in. So ${ft} × 12 = <strong>${ans} in</strong>.`,
         };
       },
       () => { // gal to qt
@@ -5529,6 +5659,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           answers: opts.map(o => o + ' qt'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${gal} gal`, grace: `${ans} qt` },
+          explain: `1 gal = 4 qt. So ${gal} × 4 = <strong>${ans} qt</strong>.`,
         };
       },
     ];
@@ -5547,6 +5678,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           answers: opts.map(o => o + ' min'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${hr} hr`, grace: `${ans} min` },
+          explain: `1 hour = 60 minutes. So ${hr} × 60 = <strong>${ans} min</strong>.`,
         };
       },
       () => { // day to hr
@@ -5559,6 +5691,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           answers: opts.map(o => o + ' hr'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${d} days`, grace: `${ans} hr` },
+          explain: `1 day = 24 hours. So ${d} × 24 = <strong>${ans} hr</strong>.`,
         };
       },
       () => { // min to sec
@@ -5571,6 +5704,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           answers: opts.map(o => o + ' s'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${m} min`, grace: `${ans} s` },
+          explain: `1 minute = 60 seconds. So ${m} × 60 = <strong>${ans} s</strong>.`,
         };
       },
     ];
@@ -5590,6 +5724,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           answers: opts.map(o => o + ''),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${5*cycles} hr`, grace: `${ans}×` },
+          explain: `${5*cycles} hours ÷ 5 = ${cycles} doublings. Each doubling: 1 → 2 → 4 → ... After ${cycles} doublings, you have 2^${cycles} = <strong>${ans}</strong>.`,
         };
       },
       () => { // multi-conv
@@ -5603,6 +5738,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           answers: opts.map(o => o + ' cm'),
           correctIdx: opts.indexOf(ansCm),
           dict: { rocky: `${km} km`, grace: `${ansCm} cm` },
+          explain: `Two steps. ${km} km × 1000 = ${ansM} m. Then ${ansM} m × 100 = <strong>${ansCm} cm</strong>.`,
         };
       },
       () => { // hour-day chain
@@ -5616,6 +5752,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           answers: opts.map(o => o + ' min'),
           correctIdx: opts.indexOf(ansMin),
           dict: { rocky: `${days} days`, grace: `${ansMin} min` },
+          explain: `Two steps. ${days} days × 24 = ${ansHr} hours. Then ${ansHr} × 60 = <strong>${ansMin} min</strong>.`,
         };
       },
     ];
@@ -5634,6 +5771,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       answers: opts.map(o => `${o} ${u.base}`),
       correctIdx: opts.indexOf(ans),
       dict: { rocky: `${n} ${u.name}`, grace: `${ans} ${u.base}` },
+      explain: `1 ${u.name} = ${u.factor} ${u.base}. So ${n} ${u.name}s × ${u.factor} = <strong>${ans} ${u.base}</strong>.`,
     };
   }
 
@@ -5782,6 +5920,16 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         buttons[q.correctIdx].classList.add('correct');
         if (!correct) buttons[idx].classList.add('wrong');
 
+        const qEl = root.querySelector('#rk-question');
+        if (qEl) {
+          const ex = document.createElement('div');
+          ex.className = 'rk-explain ' + (correct ? 'right' : 'wrong');
+          ex.innerHTML = correct
+            ? `<div class="rk-explain-head">✓ TRANSLATION ACCEPTED</div><div>${q.explain || ''}</div>`
+            : `<div class="rk-explain-head">✗ ROCKY CONFUSED</div><div>${q.explain || ''}</div>`;
+          qEl.appendChild(ex);
+        }
+
         if (correct) {
           state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
@@ -5796,7 +5944,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           sfxWrong();
         }
 
-        later(1300, () => {
+        later(correct ? 1500 : 3800, () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -6072,6 +6220,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Pooh hummed: <em>"Three jars... or maybe more."</em> Solve <strong>${expr}</strong>.`,
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
+      explain: `Parentheses first: ${a} ${op1} ${b} = ${av}. Then ${av} ${op2 === '*' ? '×' : '÷'} ${expr.match(/[\d]+\s*$/)?.[0] || c} = <strong>${result}</strong>.`,
     };
   }
 
@@ -6103,6 +6252,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Piglet wondered aloud: <em>"What does <strong>${v.expr}</strong> come to?"</em>`,
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(v.result),
+      explain: `PEMDAS: do parentheses and × ÷ before + −. Working through <strong>${v.expr}</strong> step by step gives <strong>${v.result}</strong>.`,
     };
   }
 
@@ -6116,14 +6266,14 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Owl from his porch: <em>"By my calculation, <strong>${expr}</strong> equals?"</em>`,
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
+      explain: `Innermost first: ${a} + ${b} = ${a+b}. Then × ${c} = ${(a+b)*c}. Then − ${d} = <strong>${result}</strong>.`,
     };
   }
 
   function genNested() {
     const a = ri(4, 12), b = ri(2, 4), c = ri(2, 5);
-    // ((a + b) ÷ b)  + c  — make division clean
     const sum = a + b;
-    if (sum % b !== 0) return genBrackets(); // fallback if not clean
+    if (sum % b !== 0) return genBrackets();
     const expr = `((${a} + ${b}) ÷ ${b}) + ${c}`;
     const result = (sum / b) + c;
     const opts = ensureFour(new Set([result]), () => Math.max(0, result + ri(-8, 8)));
@@ -6132,6 +6282,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Christopher Robin reads: <em>"Nested in the brackets: <strong>${expr}</strong>."</em>`,
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
+      explain: `Inside-out. Inner parens: ${a} + ${b} = ${sum}. Then ÷ ${b} = ${sum/b}. Then + ${c} = <strong>${result}</strong>.`,
     };
   }
 
@@ -6162,6 +6313,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       prompt: `Eeyore, gloomy: <em>"They say <strong>${v.expr}</strong>. I'll be surprised if it works out."</em>`,
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(v.result),
+      explain: `Work the innermost grouping first, then outward. <strong>${v.expr}</strong> evaluates to <strong>${v.result}</strong>.`,
     };
   }
 
@@ -6289,6 +6441,16 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         buttons[q.correctIdx].classList.add('correct');
         if (!correct) buttons[idx].classList.add('wrong');
 
+        const qEl = root.querySelector('#fb-question');
+        if (qEl) {
+          const ex = document.createElement('div');
+          ex.className = 'fb-explain ' + (correct ? 'right' : 'wrong');
+          ex.innerHTML = correct
+            ? `<div class="fb-explain-head">✓ Just so</div><div>${q.explain || ''}</div>`
+            : `<div class="fb-explain-head">✗ Not quite, said Pooh</div><div>${q.explain || ''}</div>`;
+          qEl.appendChild(ex);
+        }
+
         if (correct) {
           state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
@@ -6301,7 +6463,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           sfxWrong();
         }
 
-        later(1300, () => {
+        later(correct ? 1500 : 3800, () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
