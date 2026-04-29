@@ -2524,7 +2524,7 @@ const MODULES = [
     domain: 'Fractions',
     ccss: '5.NF',
     icon: '🚵',
-    logoUrl: 'https://en.wikipedia.org/wiki/Special:FilePath/Red_Bull.svg',
+    logoUrl: 'https://en.wikipedia.org/wiki/Special:FilePath/RED_BULL_LOGO_2026.svg',
     color: '#ee1d52',
     description: 'Send Sur Ronster down the Hardline track. Fraction operations gate every drop.',
     unlocked: true,
@@ -4816,6 +4816,10 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         `Grogu coos and points to the navicomputer. Plot waypoint <strong>(${x}, ${y})</strong>.`,
         `Engineer: <em>"Lay in coordinates <strong>(${x}, ${y})</strong>, this is the way."</em>`,
         `Hyperspace beacon at <strong>(${x}, ${y})</strong>. <strong>Plot it.</strong>`,
+        `IG-11 transmits target rendezvous: <strong>(${x}, ${y})</strong>. Plot now.`,
+        `Bo-Katan dispatch: <em>"Drop point is <strong>(${x}, ${y})</strong>. Mark it on the navicomp."</em>`,
+        `Cara Dune over comms: <em>"Get to <strong>(${x}, ${y})</strong>, fast."</em>`,
+        `Greef Karga beacon pulses at <strong>(${x}, ${y})</strong>. Lay in the jump.`,
       ]),
       explain: `From the origin, move <strong>${x}</strong> along the x-axis (${x >= 0 ? 'right' : 'left'}), then <strong>${y}</strong> along the y-axis (${y >= 0 ? 'up' : 'down'}). The cell you tap is at <strong>(${x}, ${y})</strong>.`,
     };
@@ -4838,7 +4842,13 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       type: 'mc',
       gridMax, quadrants: 1,
       markers: [{x: x1, y: y1, label: 'A', color: '#ff8000'}, {x: x2, y: y2, label: 'B', color: '#00d9ff'}],
-      prompt: `Mos Eisley landing pad A at <strong>(${x1}, ${y1})</strong>, bay B at <strong>(${x2}, ${y2})</strong>. <strong>Distance</strong> between them?`,
+      prompt: pick([
+        `Mos Eisley landing pad A at <strong>(${x1}, ${y1})</strong>, bay B at <strong>(${x2}, ${y2})</strong>. <strong>Distance</strong> between them?`,
+        `Two beacons: A at <strong>(${x1}, ${y1})</strong>, B at <strong>(${x2}, ${y2})</strong>. How far apart?`,
+        `Cargo drop A <strong>(${x1}, ${y1})</strong>, pickup B <strong>(${x2}, ${y2})</strong>. Distance the Crest must cover?`,
+        `Sensor pings TIE at <strong>(${x1}, ${y1})</strong> and second TIE at <strong>(${x2}, ${y2})</strong>. Gap between them?`,
+        `Ravager A at <strong>(${x1}, ${y1})</strong>, Razor Crest B at <strong>(${x2}, ${y2})</strong>. Pursuit distance?`,
+      ]),
       answers: arr.map(n => `${n} units`),
       correctIdx: arr.indexOf(dist),
       explain: horizontal
@@ -4893,6 +4903,57 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     };
   }
 
+  function genShapeQ(gridMax) {
+    // CCSS 5.G.B.3 — classify 2D shapes from plotted points
+    const shapes = [
+      // square: 4 corners equal sides
+      () => {
+        const x = ri(1, gridMax - 4), y = ri(1, gridMax - 4), s = ri(2, 4);
+        return {
+          pts: [{x,y},{x:x+s,y},{x:x+s,y:y+s},{x,y:y+s}],
+          name: 'Square',
+          why: `All four sides equal length (${s}) and four right angles.`,
+        };
+      },
+      // rectangle: different width and height
+      () => {
+        const x = ri(1, gridMax - 5), y = ri(1, gridMax - 4), w = ri(3, 5), h = ri(2, 3);
+        if (w === h) return null;
+        return {
+          pts: [{x,y},{x:x+w,y},{x:x+w,y:y+h},{x,y:y+h}],
+          name: 'Rectangle',
+          why: `Opposite sides equal (${w} and ${h}) but adjacent sides differ.`,
+        };
+      },
+      // right triangle
+      () => {
+        const x = ri(1, gridMax - 4), y = ri(1, gridMax - 4), w = ri(2, 4), h = ri(2, 4);
+        return {
+          pts: [{x,y},{x:x+w,y},{x,y:y+h}],
+          name: 'Right Triangle',
+          why: `Three points; two sides meet at 90° at the right angle.`,
+        };
+      },
+    ];
+    let shape = null, safety = 5;
+    while (!shape && safety-- > 0) shape = pick(shapes)();
+    if (!shape) shape = shapes[0]();
+    const opts = shuffle(['Square', 'Rectangle', 'Right Triangle', 'Trapezoid']);
+    return {
+      type: 'mc',
+      gridMax, quadrants: 1,
+      markers: shape.pts.map((p, i) => ({ x: p.x, y: p.y, label: ['A','B','C','D'][i], color: '#ff8000' })),
+      prompt: pick([
+        `Imperial sensor flagged points: ${shape.pts.map(p => `(${p.x},${p.y})`).join(', ')}. <strong>What shape</strong> do they form?`,
+        `Mando sees ${shape.pts.length} markers on the navicomp. ${shape.pts.map((p, i) => `${['A','B','C','D'][i]}=(${p.x},${p.y})`).join(', ')}. Identify the shape.`,
+        `Sensor returns ${shape.pts.length} contacts at ${shape.pts.map(p => `(${p.x},${p.y})`).join(', ')}. <strong>Shape</strong> traced?`,
+      ]),
+      answers: opts,
+      correctIdx: opts.indexOf(shape.name),
+      explain: shape.why + ` <strong>${shape.name}</strong>.`,
+    };
+  }
+
   function genTranslateQ(gridMax) {
     const x = ri(-Math.floor(gridMax/2), Math.floor(gridMax/2));
     const y = ri(-Math.floor(gridMax/2), Math.floor(gridMax/2));
@@ -4922,14 +4983,20 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const g = level.gridMax;
     const q = level.quadrants;
     if (m === 'plot') return genPlotQ(g, q);
-    if (m === 'plot-distance') return Math.random() < 0.5 ? genPlotQ(g, 1) : genDistanceQ(g);
+    if (m === 'plot-distance') {
+      const r = Math.random();
+      if (r < 0.4) return genPlotQ(g, 1);
+      if (r < 0.75) return genDistanceQ(g);
+      return genShapeQ(g);
+    }
     if (m === 'reflect-translate') {
       const r = Math.random();
-      if (r < 0.5) return genReflectQ(g);
-      return genTranslateQ(g);
+      if (r < 0.45) return genReflectQ(g);
+      if (r < 0.8) return genTranslateQ(g);
+      return genShapeQ(g);
     }
     if (m === 'mixed') {
-      const fns = [() => genPlotQ(g, q), () => genDistanceQ(g), () => genQuadrantQ(g), () => genReflectQ(g), () => genTranslateQ(g)];
+      const fns = [() => genPlotQ(g, q), () => genDistanceQ(g), () => genQuadrantQ(g), () => genReflectQ(g), () => genTranslateQ(g), () => genShapeQ(g)];
       return pick(fns)();
     }
     return genPlotQ(g, q);
