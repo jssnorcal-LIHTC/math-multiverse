@@ -597,6 +597,34 @@
   .fr-ans.wrong   { border-color: #f87171; background: rgba(248,113,113,0.18); color: #f87171; }
   .fr-ans:disabled { cursor: not-allowed; }
 
+  .fr-explain {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    animation: fadein 0.2s ease-out;
+  }
+  .fr-explain.wrong {
+    background: rgba(248,113,113,0.10);
+    border-left: 3px solid #f87171;
+    color: var(--text-primary);
+  }
+  .fr-explain.right {
+    background: rgba(74,222,128,0.10);
+    border-left: 3px solid #4ade80;
+    color: var(--text-primary);
+  }
+  .fr-explain strong { color: var(--rb-yellow, #ffcc00); font-feature-settings: 'tnum' 1; }
+  .fr-explain-head {
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .fr-explain.wrong .fr-explain-head { color: #f87171; }
+  .fr-explain.right .fr-explain-head { color: #4ade80; }
+
   /* Crash overlay */
   .fr-crash-overlay {
     position: absolute; inset: 0; z-index: 80;
@@ -2963,6 +2991,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const d = ri(2, maxDen);
     const n1 = ri(1, d - 1);
     const n2 = ri(1, d - 1);
+    const correctStr = fracToString(n1 + n2, d);
     return {
       text: pick([
         `Rider eats ${n1}/${d} of a pizza, then ${n2}/${d} more. Total eaten?`,
@@ -2972,6 +3001,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       equation: `${n1}/${d} <span class="op">+</span> ${n2}/${d} <span class="eq">=</span> ?`,
       answer: { num: n1 + n2, den: d },
       visualize: [{ n: n1, d, color: '#ee1d52' }, { n: n2, d, color: '#ffcc00' }],
+      explain: `Same denominator (${d}), so just add the tops: ${n1} + ${n2} = ${n1 + n2}. Keep the ${d}. Answer: <strong>${correctStr}</strong>.`,
     };
   }
 
@@ -2979,6 +3009,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const d = ri(3, maxDen);
     const n1 = ri(2, d - 1);
     const n2 = ri(1, n1 - 1);
+    const correctStr = fracToString(n1 - n2, d);
     return {
       text: pick([
         `Sur Ronster had ${n1}/${d} of a pizza, ate ${n2}/${d}. How much remains?`,
@@ -2988,6 +3019,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       equation: `${n1}/${d} <span class="op">−</span> ${n2}/${d} <span class="eq">=</span> ?`,
       answer: { num: n1 - n2, den: d },
       visualize: [{ n: n1, d, color: '#ee1d52' }, { n: n2, d, color: '#6b7280' }],
+      explain: `Same denominator (${d}): subtract the tops. ${n1} − ${n2} = ${n1 - n2}. Keep the ${d}. Answer: <strong>${correctStr}</strong>.`,
     };
   }
 
@@ -3002,6 +3034,8 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const n2 = ri(1, d2 - 1);
     const L = lcm(d1, d2);
     const sumNum = n1 * (L / d1) + n2 * (L / d2);
+    const correctStr = fracToString(sumNum, L);
+    const a = n1 * (L / d1), b = n2 * (L / d2);
     return {
       text: pick([
         `Rider grabs ${fracToString(n1, d1)} of pepperoni and ${fracToString(n2, d2)} of cheese. Combined?`,
@@ -3011,6 +3045,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       equation: `${n1}/${d1} <span class="op">+</span> ${n2}/${d2} <span class="eq">=</span> ?`,
       answer: { num: sumNum, den: L },
       visualize: [{ n: n1, d: d1, color: '#ee1d52' }, { n: n2, d: d2, color: '#ffcc00' }],
+      explain: `Common denominator is ${L}. Convert: ${n1}/${d1} = ${a}/${L}, ${n2}/${d2} = ${b}/${L}. Add tops: ${a} + ${b} = ${sumNum}. Answer: <strong>${correctStr}</strong>.`,
     };
   }
 
@@ -3025,7 +3060,10 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     let v1 = n1 * (L / d1), v2 = n2 * (L / d2);
     if (v1 < v2) { [v1, v2] = [v2, v1]; [n1, n2] = [n2, n1]; [d1, d2] = [d2, d1]; }
     if (v1 === v2) { n2 = Math.max(1, n2 - 1); }
-    const diffNum = n1 * (L / d1) - n2 * (L / d2);
+    const a = n1 * (L / d1);
+    const b = n2 * (L / d2);
+    const diffNum = a - b;
+    const correctStr = fracToString(diffNum, L);
     return {
       text: pick([
         `Rider had ${fracToString(n1, d1)} of a pizza, gave ${fracToString(n2, d2)} to the photographer. Left?`,
@@ -3035,6 +3073,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       equation: `${n1}/${d1} <span class="op">−</span> ${n2}/${d2} <span class="eq">=</span> ?`,
       answer: { num: diffNum, den: L },
       visualize: [{ n: n1, d: d1, color: '#ee1d52' }, { n: n2, d: d2, color: '#6b7280' }],
+      explain: `Common denominator is ${L}. Convert: ${n1}/${d1} = ${a}/${L}, ${n2}/${d2} = ${b}/${L}. Subtract tops: ${a} − ${b} = ${diffNum}. Answer: <strong>${correctStr}</strong>.`,
     };
   }
 
@@ -3043,6 +3082,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const d2 = ri(2, Math.min(maxDen, 6));
     const n1 = ri(1, d1 - 1);
     const n2 = ri(1, d2 - 1);
+    const correctStr = fracToString(n1 * n2, d1 * d2);
     return {
       text: pick([
         `Sur Ronster wants ${fracToString(n1, d1)} of ${fracToString(n2, d2)} of a pizza. How much?`,
@@ -3052,6 +3092,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       equation: `${n1}/${d1} <span class="op">×</span> ${n2}/${d2} <span class="eq">=</span> ?`,
       answer: { num: n1 * n2, den: d1 * d2 },
       visualize: [{ n: n1, d: d1, color: '#ee1d52' }, { n: n2, d: d2, color: '#ffcc00' }],
+      explain: `Multiply tops, multiply bottoms: ${n1}×${n2} = ${n1*n2}, ${d1}×${d2} = ${d1*d2}. So ${n1*n2}/${d1*d2}. Simplified: <strong>${correctStr}</strong>.`,
     };
   }
 
@@ -3059,6 +3100,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const d = ri(2, maxDen);
     const n = ri(1, d - 1);
     const w = ri(2, 6);
+    const correctStr = fracToString(w * n, d);
     return {
       text: pick([
         `${w} riders need fuel, each takes ${fracToString(n, d)} of a pizza. Total?`,
@@ -3068,6 +3110,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       equation: `${w} <span class="op">×</span> ${n}/${d} <span class="eq">=</span> ?`,
       answer: { num: w * n, den: d },
       visualize: [{ n, d, color: '#ee1d52' }],
+      explain: `Multiply the whole number by the top: ${w}×${n} = ${w*n}. Keep the ${d}. So ${w*n}/${d} = <strong>${correctStr}</strong>.`,
     };
   }
 
@@ -3083,12 +3126,14 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       equation: `${w} <span class="op">÷</span> 1/${d} <span class="eq">=</span> ?`,
       answer: { num: w * d, den: 1 },
       visualize: [],
+      explain: `Dividing by 1/${d} means multiplying by ${d}. So ${w} × ${d} = <strong>${w*d}</strong>.`,
     };
   }
 
   function genDivUnitByWhole(maxDen) {
     const d = ri(2, Math.min(maxDen, 6));
     const w = ri(2, 5);
+    const correctStr = fracToString(1, d * w);
     return {
       text: pick([
         `1/${d} of a pizza shared among ${w} crew members. Each gets?`,
@@ -3098,6 +3143,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       equation: `1/${d} <span class="op">÷</span> ${w} <span class="eq">=</span> ?`,
       answer: { num: 1, den: d * w },
       visualize: [],
+      explain: `Dividing by ${w} means multiplying by 1/${w}. So 1/${d} × 1/${w} = 1/${d*w} = <strong>${correctStr}</strong>.`,
     };
   }
 
@@ -3310,10 +3356,22 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         state.phase = 'between';
         const choice = state.currentChoices[idx];
         const correct = !!choice.correct;
+        const q = state.questions[state.questionNum];
         buttons.forEach(b => b.disabled = true);
         const correctIdx = state.currentChoices.findIndex(c => c.correct);
         buttons[correctIdx].classList.add('correct');
         if (!correct) buttons[idx].classList.add('wrong');
+
+        // Inline explanation panel
+        const qEl = root.querySelector('#fr-question');
+        if (qEl) {
+          const ex = document.createElement('div');
+          ex.className = 'fr-explain ' + (correct ? 'right' : 'wrong');
+          ex.innerHTML = correct
+            ? `<div class="fr-explain-head">✓ NAILED IT</div><div>${q.explain || ''}</div>`
+            : `<div class="fr-explain-head">✗ NOT QUITE</div><div>${q.explain || ''}</div>`;
+          qEl.appendChild(ex);
+        }
 
         if (correct) {
           state.streak = Math.min(99, state.streak + 1);
@@ -3326,14 +3384,18 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           state.dangerLevel++;
           sfxWrong();
           if (state.dangerLevel >= 3) {
-            state.crashCount++;
-            state.dangerLevel = 0;
-            triggerCrash();
+            // Pause briefly to let kid read the explanation, then crash
+            later(2800, () => {
+              state.crashCount++;
+              state.dangerLevel = 0;
+              triggerCrash();
+            });
             return;
           }
         }
 
-        later(1100, () => {
+        const nextDelay = correct ? 1400 : 3600;
+        later(nextDelay, () => {
           state.questionNum++;
           if (state.crashCount >= 3 || state.questionNum >= totalQ) {
             endLevel();
