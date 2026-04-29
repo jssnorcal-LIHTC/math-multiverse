@@ -752,9 +752,22 @@
     letter-spacing: -0.04em;
     text-shadow: 0 1px 4px rgba(0,0,0,0.5);
   }
-  .f1-driver-name { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+  .f1-driver-name { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+  .f1-team-logo {
+    height: 22px; width: auto; max-width: 90%;
+    margin: 4px auto 6px;
+    display: block;
+    object-fit: contain;
+    filter: brightness(1.1);
+  }
   .f1-driver-team { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; letter-spacing: 0.04em; }
-  .f1-driver-flag { font-size: 1.1rem; margin-top: 6px; }
+  .f1-driver-flag { font-size: 1.1rem; margin-top: 4px; }
+  .f1-brand-logo {
+    width: 88px;
+    height: auto;
+    margin: 0 auto 6px;
+    display: block;
+  }
 
   .f1-pick-actions {
     display: flex; gap: 10px; justify-content: center;
@@ -1049,6 +1062,18 @@
     overflow-y: auto;
     text-align: center;
   }
+  .rc-brand-logo {
+    width: 220px; height: auto;
+    margin: 0 auto 8px;
+    display: block;
+    filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(255,232,0,0.4));
+  }
+  .rc-show-logo {
+    width: 260px; height: auto;
+    margin: 0 auto 14px;
+    display: block;
+    filter: brightness(0) invert(1) opacity(0.85);
+  }
   .rc-pick h2 {
     font-size: 1.7rem;
     font-weight: 800;
@@ -1293,6 +1318,12 @@
     overflow-y: auto;
     color: #f0f4f8;
     background: linear-gradient(180deg, #2a2d35 0%, #1a1d24 100%);
+  }
+  .mb-brand-logo {
+    width: 90px; height: auto;
+    margin: 0 auto 10px;
+    display: block;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
   }
   .mb-pick h2 {
     font-size: 1.8rem; font-weight: 900;
@@ -1553,6 +1584,12 @@
     height: 100%;
     overflow-y: auto;
     text-align: center;
+  }
+  .rk-brand-logo {
+    width: 86px; height: auto;
+    margin: 0 auto 10px;
+    display: block;
+    filter: drop-shadow(0 0 12px rgba(255,255,255,0.2));
   }
   .rk-pick h2 {
     font-size: 1.7rem; font-weight: 800;
@@ -1863,6 +1900,12 @@
     overflow: hidden;
   }
   .fb-illustration svg { width: 100%; height: 100%; display: block; }
+  .fb-illustration .fb-map-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: sepia(0.15) contrast(1.05);
+  }
   .fb-pick-actions { display: flex; justify-content: center; gap: 12px; margin-top: 12px; }
   .fb-go {
     padding: 12px 26px;
@@ -3167,6 +3210,15 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 // ============================================================
 (function() {
 
+  const TEAM_LOGOS = {
+    'RED BULL': 'https://en.wikipedia.org/wiki/Special:FilePath/RED_BULL_LOGO_2026.svg',
+    'FERRARI':  'https://en.wikipedia.org/wiki/Special:FilePath/Ferrari-badge.jpg',
+    'MERCEDES': 'https://en.wikipedia.org/wiki/Special:FilePath/Mercedes_AMG_Petronas_F1_Logo.svg',
+    'MCLAREN':  'https://en.wikipedia.org/wiki/Special:FilePath/McLaren_Speedmark.svg',
+  };
+  const F1_LOGO    = 'https://upload.wikimedia.org/wikipedia/commons/3/33/F1.svg';
+  const PIRELLI_LOGO = 'https://en.wikipedia.org/wiki/Special:FilePath/Pirelli_-_logo_full_(Italy,_1997).svg';
+
   const DRIVERS = [
     { id: 'VER', short: 'M. VERSTAPPEN', last: 'VERSTAPPEN', team: 'RED BULL',  num: 3,  flag: '🇳🇱', color: '#1e3a8a', accent: '#ee1c25' },
     { id: 'HAM', short: 'L. HAMILTON',   last: 'HAMILTON',   team: 'FERRARI',   num: 44, flag: '🇬🇧', color: '#dc0000', accent: '#fcd700' },
@@ -3393,6 +3445,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         root.innerHTML = `
           <div class="f1-pick">
             <div class="f1-pick-head">
+              <img class="f1-brand-logo" src="${F1_LOGO}" alt="Formula 1" onerror="this.remove();">
               <h2>Choose Your Driver</h2>
               <p>${lvl.name} &middot; ${lvl.circuit} &middot; ${totalQ} questions</p>
               <div class="lvl-badge">LEVEL ${lvl.id} &middot; ${lvl.gen.toUpperCase().replace(/-/g, ' ')}</div>
@@ -3403,7 +3456,8 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
                   <div class="f1-driver-num">${d.num}</div>
                   <div class="f1-helmet"></div>
                   <div class="f1-driver-name">${d.short}</div>
-                  <div class="f1-driver-team">${d.team}</div>
+                  <img class="f1-team-logo" src="${TEAM_LOGOS[d.team] || ''}" alt="${d.team}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                  <div class="f1-driver-team" style="display:none;">${d.team}</div>
                   <div class="f1-driver-flag">${d.flag}</div>
                 </div>
               `).join('')}
@@ -3611,6 +3665,10 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 // MODULE 3: RAZOR CREST NAVIGATOR
 // ============================================================
 (function() {
+
+  const STAR_WARS_LOGO  = 'https://en.wikipedia.org/wiki/Special:FilePath/Star_Wars_Logo.svg';
+  const MANDO_LOGO      = 'https://en.wikipedia.org/wiki/Special:FilePath/The_Mandalorian_logo_black.svg';
+  const EMPIRE_COG      = 'https://en.wikipedia.org/wiki/Special:FilePath/Emblem_of_the_First_Galactic_Empire.svg';
 
   const RC_LEVELS = [
     { id: 1, name: 'Departing Nevarro',       gridMax: 7,  quadrants: 1, mix: 'plot' },
@@ -3978,8 +4036,10 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         state.phase = 'pick';
         root.innerHTML = `
           <div class="rc-pick">
-            <h2>Razor Crest Navigator</h2>
-            <p>${lvl.name} &middot; ${totalQ} jumps to the destination</p>
+            <img class="rc-brand-logo" src="${STAR_WARS_LOGO}" alt="Star Wars" onerror="this.remove();">
+            <img class="rc-show-logo" src="${MANDO_LOGO}" alt="The Mandalorian" onerror="this.remove();">
+            <h2>${lvl.name}</h2>
+            <p>${totalQ} jumps to the destination</p>
             <div class="lvl-badge">LEVEL ${lvl.id} &middot; ${lvl.quadrants === 4 ? 'ALL QUADRANTS' : 'QUADRANT I ONLY'}</div>
             <div class="rc-view-grid">
               <div class="rc-view selected" data-view="chase">
@@ -4151,6 +4211,8 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 // MODULE 4: LEGO MASTER BUILDER
 // ============================================================
 (function() {
+
+  const LEGO_LOGO = 'https://en.wikipedia.org/wiki/Special:FilePath/LEGO_logo.svg';
 
   const BUILDERS = [
     { id: 'EMM', name: 'Emmet',     icon: '⛑️', color: '#FE8A18', trim: '#FFD400', line: '"I got it, guys!"' },
@@ -4362,6 +4424,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         root.innerHTML = `
           <div class="mb-pick">
             <div class="mb-pick-head">
+              <img class="mb-brand-logo" src="${LEGO_LOGO}" alt="LEGO" onerror="this.remove();">
               <h2>CHOOSE YOUR MASTER BUILDER</h2>
               <p>${lvl.name} &middot; ${totalQ} pieces to place</p>
               <div class="lvl-badge">LEVEL ${lvl.id} &middot; ${lvl.gen.toUpperCase().replace(/-/g, ' ')}</div>
@@ -4530,6 +4593,8 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 // MODULE 5: ROCKY'S DICTIONARY
 // ============================================================
 (function() {
+
+  const NASA_LOGO = 'https://en.wikipedia.org/wiki/Special:FilePath/NASA_logo.svg';
 
   const RK_LEVELS = [
     { id: 1, name: 'Hello, Question?',         gen: 'metric',   crisis: 'first contact'        },
@@ -4889,8 +4954,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         state.phase = 'pick';
         root.innerHTML = `
           <div class="rk-pick">
+            <img class="rk-brand-logo" src="${NASA_LOGO}" alt="NASA" onerror="this.remove();">
             <h2>${lvl.name}</h2>
-            <p>Crisis: <em>${lvl.crisis}</em> &middot; ${totalQ} translations</p>
+            <p>Crisis: <em>${lvl.crisis}</em> &middot; ${totalQ} translations &middot; Project Hail Mary</p>
             <div class="lvl-badge">LEVEL ${lvl.id} &middot; ${lvl.gen.toUpperCase()}</div>
             <div class="rk-meet">
               <div class="rk-side-grace">
@@ -5038,6 +5104,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 // MODULE 6: THE FLOATING BEAR
 // ============================================================
 (function() {
+
+  const POOH_MAP = 'https://en.wikipedia.org/wiki/Special:FilePath/E._H._Shepard_-_Map_of_the_Hundred_Acre_Wood.jpg';
+  const POOH_COVER = 'https://en.wikipedia.org/wiki/Special:FilePath/Winnie-the-Pooh_(book).png';
 
   const FB_LEVELS = [
     { id: 1, name: 'A Light Drizzle',         gen: 'simple-parens', chapter: 'In which a cloud appears' },
@@ -5414,8 +5483,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
               <div class="fb-chapter">"${lvl.chapter}"</div>
             </div>
             <div class="lvl-badge">${totalQ} expressions to solve</div>
-            <div class="fb-illustration">
-              ${sceneSvg({questionNum: 0, livesLost: 0}, lvl)}
+            <div class="fb-illustration" id="fb-illust-host">
+              <img class="fb-map-img" src="${POOH_MAP}" alt="The Hundred Acre Wood, drawn by E. H. Shepard, 1926" onerror="this.style.display='none'; document.getElementById('fb-illust-svg').style.display='block';">
+              <div id="fb-illust-svg" style="display:none; width:100%; height:100%;">${sceneSvg({questionNum: 0, livesLost: 0}, lvl)}</div>
             </div>
             <div class="fb-pick-actions">
               <button class="fb-back" id="fb-back">&larr; Back to chapters</button>
