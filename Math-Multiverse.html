@@ -3075,6 +3075,11 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         `Rider eats ${n1}/${d} of a pizza, then ${n2}/${d} more. Total eaten?`,
         `Pit fuel: ${n1}/${d} pepperoni plus ${n2}/${d} more. How much pizza?`,
         `${n1}/${d} of a granola bar + ${n2}/${d} of the same bar. Total?`,
+        `Sur Ronster drinks ${n1}/${d} of a sports drink, then ${n2}/${d} more. How much total?`,
+        `Trail mix: ${n1}/${d} of a bag eaten Day 1, ${n2}/${d} on Day 2. Combined?`,
+        `${n1}/${d} of an energy gel before the drop, ${n2}/${d} after. How much eaten?`,
+        `Photographer takes ${n1}/${d} of a battery, then ${n2}/${d} more. Battery used?`,
+        `Mechanic uses ${n1}/${d} of a lubricant tube, then ${n2}/${d} on the chain. Total used?`,
       ]),
       equation: `${n1}/${d} <span class="op">+</span> ${n2}/${d} <span class="eq">=</span> ?`,
       answer: { num: n1 + n2, den: d },
@@ -3093,6 +3098,11 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         `Sur Ronster had ${n1}/${d} of a pizza, ate ${n2}/${d}. How much remains?`,
         `Started with ${n1}/${d} stamina, used ${n2}/${d}. Left?`,
         `${n1}/${d} of a snack, gave away ${n2}/${d}. What's left?`,
+        `${n1}/${d} of a chocolate bar in pocket, dropped ${n2}/${d} on the gnar. Remaining?`,
+        `Tank ${n1}/${d} full, burned ${n2}/${d} on the climb. Left in tank?`,
+        `Bike battery ${n1}/${d} full, ${n2}/${d} drained on stage. Remaining charge?`,
+        `Cooler at ${n1}/${d} ice, ${n2}/${d} melted. How much ice left?`,
+        `${n1}/${d} of a roll of bar tape, ${n2}/${d} used. How much tape remains?`,
       ]),
       equation: `${n1}/${d} <span class="op">−</span> ${n2}/${d} <span class="eq">=</span> ?`,
       answer: { num: n1 - n2, den: d },
@@ -3119,6 +3129,11 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         `Rider grabs ${fracToString(n1, d1)} of pepperoni and ${fracToString(n2, d2)} of cheese. Combined?`,
         `Trail fuel: ${fracToString(n1, d1)} veggie plus ${fracToString(n2, d2)} sausage. Total?`,
         `Pit order: ${fracToString(n1, d1)} of a Hawaiian + ${fracToString(n2, d2)} of a margherita. Total?`,
+        `${fracToString(n1, d1)} of a recovery shake plus ${fracToString(n2, d2)} of a smoothie. Combined?`,
+        `Section 1 took ${fracToString(n1, d1)} of an hour, Section 2 took ${fracToString(n2, d2)} of an hour. Total time?`,
+        `Rider adds ${fracToString(n1, d1)} cup of oats and ${fracToString(n2, d2)} cup of granola to a bowl. Total?`,
+        `Helmet weighs ${fracToString(n1, d1)} kg, pads weigh ${fracToString(n2, d2)} kg. Combined?`,
+        `Sur Ronster runs ${fracToString(n1, d1)} of a mile uphill, ${fracToString(n2, d2)} of a mile back. Total distance?`,
       ]),
       equation: `${n1}/${d1} <span class="op">+</span> ${n2}/${d2} <span class="eq">=</span> ?`,
       answer: { num: sumNum, den: L },
@@ -3147,6 +3162,11 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         `Rider had ${fracToString(n1, d1)} of a pizza, gave ${fracToString(n2, d2)} to the photographer. Left?`,
         `Pizza ${fracToString(n1, d1)} full. Shared ${fracToString(n2, d2)} with mechanic. Remaining?`,
         `Started with ${fracToString(n1, d1)} pizza, ate ${fracToString(n2, d2)} on the lift. Left?`,
+        `Rider had ${fracToString(n1, d1)} of a water bottle, drank ${fracToString(n2, d2)}. How much left?`,
+        `Sur Ronster's bike tire was ${fracToString(n1, d1)} full of air, lost ${fracToString(n2, d2)} on rocks. Pressure left?`,
+        `Energy bar at ${fracToString(n1, d1)}, ate ${fracToString(n2, d2)} mid-stage. How much remains?`,
+        `Trail map ${fracToString(n1, d1)} explored, then ${fracToString(n2, d2)} backtracked. Net explored?`,
+        `Crew has ${fracToString(n1, d1)} of a fuel can, used ${fracToString(n2, d2)} on the chase truck. Remaining?`,
       ]),
       equation: `${n1}/${d1} <span class="op">−</span> ${n2}/${d2} <span class="eq">=</span> ?`,
       answer: { num: diffNum, den: L },
@@ -3166,6 +3186,10 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         `Sur Ronster wants ${fracToString(n1, d1)} of ${fracToString(n2, d2)} of a pizza. How much?`,
         `Pit recipe needs ${fracToString(n1, d1)} cup sauce, but only making ${fracToString(n2, d2)} of the recipe. How much?`,
         `Slice: ${fracToString(n1, d1)} of a pizza that's already ${fracToString(n2, d2)} a pizza. Final size?`,
+        `Pre-ride snack is ${fracToString(n1, d1)} of ${fracToString(n2, d2)} of a granola bar. Portion size?`,
+        `Take ${fracToString(n1, d1)} of ${fracToString(n2, d2)} of an energy gel. How much gel?`,
+        `${fracToString(n1, d1)} of the team eats ${fracToString(n2, d2)} of the food. Portion gone?`,
+        `Trail is ${fracToString(n2, d2)} of a kilometer long. Sur Ronster sends ${fracToString(n1, d1)} of it. Distance covered?`,
       ]),
       equation: `${n1}/${d1} <span class="op">×</span> ${n2}/${d2} <span class="eq">=</span> ?`,
       answer: { num: n1 * n2, den: d1 * d2 },
@@ -3184,6 +3208,10 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         `${w} riders need fuel, each takes ${fracToString(n, d)} of a pizza. Total?`,
         `${w} pit stops, each consuming ${fracToString(n, d)} of a pizza. Sum?`,
         `Recipe uses ${fracToString(n, d)} cup flour per batch. Make ${w} batches. Total flour?`,
+        `${w} stages, each ${fracToString(n, d)} of an hour long. Total race time?`,
+        `Each rider uses ${fracToString(n, d)} of a tube of grip tape. ${w} riders. Total tape?`,
+        `${w} laps. Each lap covers ${fracToString(n, d)} of the course. Total distance?`,
+        `Mechanic torques ${w} bolts. Each takes ${fracToString(n, d)} of a minute. Total time?`,
       ]),
       equation: `${w} <span class="op">×</span> ${n}/${d} <span class="eq">=</span> ?`,
       answer: { num: w * n, den: d },
@@ -3200,6 +3228,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         `${w} whole pizzas. Each gets cut into 1/${d} pieces. How many pieces total?`,
         `${w} pizzas, sliced into 1/${d} chunks for spectators. Total chunks?`,
         `${w} energy bars, each cut into 1/${d} bites. Total bites?`,
+        `${w} whole watermelons split into 1/${d}-melon servings. How many servings?`,
+        `${w} loaves of bread sliced into 1/${d}-loaf portions. Pieces total?`,
+        `${w} water bottles, each split into 1/${d}-bottle sips. Total sips?`,
       ]),
       equation: `${w} <span class="op">÷</span> 1/${d} <span class="eq">=</span> ?`,
       answer: { num: w * d, den: 1 },
@@ -3217,6 +3248,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         `1/${d} of a pizza shared among ${w} crew members. Each gets?`,
         `Split 1/${d} of a recovery shake among ${w} riders. Each share?`,
         `${w} kids share 1/${d} of a pizza equally. Each kid gets?`,
+        `1/${d} of a chocolate bar split between ${w} fans. Each piece?`,
+        `${w} laps share 1/${d} of an hour equally. Time per lap?`,
+        `1/${d} of a fuel can divided among ${w} bikes. Fuel each?`,
       ]),
       equation: `1/${d} <span class="op">÷</span> ${w} <span class="eq">=</span> ?`,
       answer: { num: 1, den: d * w },
@@ -3225,18 +3259,69 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     };
   }
 
+  function genCompareFrac(maxDen) {
+    // Compare two fractions. CCSS 5.NF.A
+    let d1 = ri(2, maxDen), d2 = ri(2, maxDen);
+    let n1 = ri(1, d1 - 1), n2 = ri(1, d2 - 1);
+    const L = lcm(d1, d2);
+    const v1 = n1 * (L / d1), v2 = n2 * (L / d2);
+    if (v1 === v2) { n2 = Math.max(1, n2 - 1); }
+    const cv1 = n1 * (L / d1), cv2 = n2 * (L / d2);
+    const f1Str = fracToString(n1, d1), f2Str = fracToString(n2, d2);
+    const correct = cv1 > cv2 ? f1Str : f2Str;
+    const wrong   = cv1 > cv2 ? f2Str : f1Str;
+    const opts = shuffle([correct, wrong, 'They are equal', 'Cannot tell']);
+    return {
+      text: pick([
+        `Sur Ronster ate ${f1Str} of a pizza, photographer ate ${f2Str} of an identical pizza. Who ate more?`,
+        `Pit crew A drank ${f1Str} of a sports drink, crew B drank ${f2Str} of one. Which is more?`,
+        `Lap 1 took ${f1Str} of an hour, Lap 2 took ${f2Str}. Which lap was longer?`,
+        `Climb 1 covers ${f1Str} of the trail, Climb 2 covers ${f2Str}. Which climbs more?`,
+      ]),
+      equation: `${f1Str} <span class="op">vs</span> ${f2Str}`,
+      answer: { num: cv1 > cv2 ? n1 : n2, den: cv1 > cv2 ? d1 : d2 },
+      visualize: [{ n: n1, d: d1, color: '#ee1d52' }, { n: n2, d: d2, color: '#ffcc00' }],
+      _customChoices: opts.map(t => ({ text: t, correct: t === correct })),
+      explain: `Common denominator ${L}: ${f1Str} = ${cv1}/${L}, ${f2Str} = ${cv2}/${L}. ${cv1 > cv2 ? cv1 : cv2}/${L} > ${cv1 > cv2 ? cv2 : cv1}/${L}, so <strong>${correct}</strong> is bigger.`,
+    };
+  }
+
+  function genFracOfWhole(maxDen) {
+    // Find a fraction of a whole number. CCSS 5.NF.B.4
+    const d = ri(2, Math.min(maxDen, 6));
+    const n = ri(1, d - 1);
+    const wholeBase = ri(2, 6);
+    const whole = wholeBase * d; // ensures clean result
+    const ans = whole * n / d;
+    const fracStr = fracToString(n, d);
+    return {
+      text: pick([
+        `Sur Ronster does ${fracStr} of a ${whole}-mile course. How many miles?`,
+        `Crew loads ${fracStr} of ${whole} water bottles into the truck. How many bottles?`,
+        `${fracStr} of ${whole} riders make it to the finish. How many finish?`,
+        `${fracStr} of ${whole} laps are done. How many laps?`,
+        `Stage is ${whole} minutes long. Sur Ronster has done ${fracStr} of it. How many minutes?`,
+      ]),
+      equation: `${fracStr} <span class="op">of</span> ${whole} <span class="eq">=</span> ?`,
+      answer: { num: ans, den: 1 },
+      visualize: [{ n, d, color: '#ee1d52' }],
+      explain: `${fracStr} of ${whole}: divide ${whole} by ${d}, then multiply by ${n}. ${whole} ÷ ${d} = ${whole/d}. ${whole/d} × ${n} = <strong>${ans}</strong>.`,
+    };
+  }
+
   function genForLevel(level) {
     const md = level.maxDen;
     if (level.gen === 'like-denom')   return pick([genAddLike, genSubLike])(md);
-    if (level.gen === 'unlike-easy')  return pick([() => genAdd(md, true), () => genSub(md, true), () => genMultWhole(md)])();
-    if (level.gen === 'unlike-mixed') return pick([() => genAdd(md, false), () => genSub(md, false), () => genMultWhole(md)])();
-    if (level.gen === 'multiply')     return pick([() => genMultFrac(md), () => genMultWhole(md)])();
+    if (level.gen === 'unlike-easy')  return pick([() => genAdd(md, true), () => genSub(md, true), () => genMultWhole(md), () => genCompareFrac(md)])();
+    if (level.gen === 'unlike-mixed') return pick([() => genAdd(md, false), () => genSub(md, false), () => genMultWhole(md), () => genCompareFrac(md)])();
+    if (level.gen === 'multiply')     return pick([() => genMultFrac(md), () => genMultWhole(md), () => genFracOfWhole(md)])();
     if (level.gen === 'divide')       return pick([() => genDivWholeByUnit(md), () => genDivUnitByWhole(md), () => genMultFrac(md)])();
     if (level.gen === 'mixed-all') {
       const all = [
         () => genAdd(md, false), () => genSub(md, false),
         () => genMultFrac(md), () => genMultWhole(md),
         () => genDivWholeByUnit(md), () => genDivUnitByWhole(md),
+        () => genCompareFrac(md), () => genFracOfWhole(md),
       ];
       return pick(all)();
     }
@@ -3273,6 +3358,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
   }
 
   function makeChoices(problem) {
+    if (problem._customChoices) return problem._customChoices;
     const correct = problem.answer;
     const correctStr = fracToString(correct.num, correct.den);
     const set = new Set([correctStr]);
