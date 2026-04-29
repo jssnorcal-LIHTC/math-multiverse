@@ -1023,7 +1023,289 @@
   }
   .rc-pip.lost { background: rgba(255,255,255,0.10); box-shadow: none; }
 
-  /* Hyperspace flash */
+  /* ============================================================
+     MODULE 4: LEGO MASTER BUILDER  (.mod-mb)
+     ============================================================ */
+  .mod-mb {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(180deg, #87ceeb 0%, #87ceeb 70%, #5a9344 70%, #4a7d3a 100%);
+    color: #1a1a1a;
+    font-family: -apple-system, 'SF Pro Display', 'Segoe UI', Roboto, system-ui, sans-serif;
+  }
+  .mod-mb::before {
+    /* cloud shapes */
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 120px 32px at 18% 22%, #ffffff, rgba(255,255,255,0) 70%),
+      radial-gradient(ellipse 80px 24px at 78% 14%, #ffffff, rgba(255,255,255,0) 70%),
+      radial-gradient(ellipse 100px 28px at 52% 35%, rgba(255,255,255,0.85), rgba(255,255,255,0) 70%);
+    pointer-events: none;
+  }
+
+  .mb-pick {
+    position: relative; z-index: 1;
+    padding: 24px 28px;
+    height: 100%;
+    overflow-y: auto;
+    color: #f0f4f8;
+    background: linear-gradient(180deg, #2a2d35 0%, #1a1d24 100%);
+  }
+  .mb-pick h2 {
+    font-size: 1.8rem; font-weight: 900;
+    text-align: center;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    color: #F2CD37;
+    text-shadow: 0 2px 0 #c89a18, 0 4px 12px rgba(0,0,0,0.4);
+  }
+  .mb-pick > p { text-align: center; color: #a0a8b3; margin-bottom: 12px; font-size: 0.95rem; }
+  .mb-pick .lvl-badge {
+    display: inline-block; margin-bottom: 18px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(242,205,55,0.15);
+    border: 1px solid rgba(242,205,55,0.4);
+    font-size: 0.78rem; font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #F2CD37;
+  }
+  .mb-pick-head { text-align: center; }
+
+  .mb-builder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    max-width: 950px;
+    margin: 0 auto;
+  }
+  .mb-builder {
+    background: linear-gradient(180deg, #15181f 0%, #0e1015 100%);
+    border: 3px solid var(--builder-color);
+    border-radius: 12px;
+    padding: 14px 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.18s var(--ease-spring), box-shadow 0.18s var(--ease-out);
+  }
+  .mb-builder:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  .mb-builder.selected { box-shadow: 0 0 0 3px var(--builder-color), 0 8px 24px rgba(0,0,0,0.4); }
+  .mb-mini {
+    width: 70px; height: 78px;
+    margin: 4px auto 8px;
+    position: relative;
+  }
+  .mb-mini-head {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #F2CD37;
+    border: 2px solid #1a1a1a;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .mb-mini-body {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 50px; height: 44px;
+    background: var(--builder-color);
+    border: 2px solid #1a1a1a;
+    border-radius: 4px 4px 2px 2px;
+  }
+  .mb-mini-body::after {
+    content: '';
+    position: absolute; top: -2px; left: -2px; right: -2px;
+    height: 4px;
+    background: var(--builder-trim, transparent);
+  }
+  .mb-builder-name {
+    font-size: 1rem; font-weight: 800;
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+    color: #f0f4f8;
+  }
+  .mb-builder-line {
+    font-size: 0.74rem; color: #6b7280;
+    font-style: italic;
+    line-height: 1.3;
+    min-height: 2.6em;
+  }
+  .mb-pick-actions { display: flex; justify-content: center; gap: 10px; margin-top: 18px; }
+  .mb-go {
+    padding: 14px 32px;
+    background: linear-gradient(180deg, #F2CD37 0%, #c89a18 100%);
+    color: #1a1a1a;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    border: 2px solid #1a1a1a;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #1a1a1a;
+    font-family: inherit;
+    transition: transform 0.12s var(--ease-spring);
+  }
+  .mb-go:hover { transform: translateY(-2px); }
+  .mb-go:active { transform: translateY(2px); box-shadow: 0 0 0 #1a1a1a; }
+  .mb-go:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: 0 4px 0 #1a1a1a; }
+
+  /* Build screen */
+  .mb-build {
+    position: relative; z-index: 1;
+    width: 100%; height: 100%;
+    display: grid;
+    grid-template-rows: minmax(240px, 45%) auto 1fr auto;
+    gap: 10px;
+    padding: 10px;
+  }
+  .mb-build::after {
+    /* ground */
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 12%;
+    background: linear-gradient(180deg, #5a9344, #4a7d3a);
+    z-index: 0;
+  }
+  .mb-stage {
+    position: relative;
+    background: rgba(20, 30, 60, 0.0);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .mb-stage svg { width: 100%; height: 100%; display: block; }
+  .mb-status-bar {
+    background: rgba(20, 25, 35, 0.9);
+    border: 2px solid #1a1d24;
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    color: #f0f4f8;
+    font-feature-settings: 'tnum' 1;
+  }
+  .mb-stat { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+  .mb-stat-label {
+    font-size: 0.68rem;
+    color: #a0a8b3;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .mb-stat-value { font-weight: 900; color: #F2CD37; }
+  .mb-stat-value.ok { color: #4ade80; }
+
+  .mb-question {
+    background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+    border: 2px solid #1a1d24;
+    border-radius: 10px;
+    padding: 16px;
+    overflow-y: auto;
+    color: #1a1a1a;
+    box-shadow: 0 4px 0 #1a1a1a;
+  }
+  .mb-q-meta {
+    display: flex; justify-content: space-between;
+    font-size: 0.72rem; color: #6b7280;
+    letter-spacing: 0.1em; text-transform: uppercase; font-weight: 800;
+    margin-bottom: 10px;
+  }
+  .mb-q-prompt {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .mb-q-prompt strong {
+    color: #C91A09;
+    background: #F2CD37;
+    padding: 0 4px;
+    border-radius: 2px;
+    font-feature-settings: 'tnum' 1;
+  }
+  .mb-q-prompt em { font-style: italic; color: #6b7280; font-weight: 400; }
+  .mb-answers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 10px;
+  }
+  .mb-ans {
+    padding: 12px 14px;
+    background: linear-gradient(180deg, #F2CD37 0%, #d4a700 100%);
+    border: 2px solid #1a1d24;
+    border-radius: 6px;
+    color: #1a1a1a;
+    font-size: 1.1rem;
+    font-weight: 900;
+    cursor: pointer;
+    font-family: inherit;
+    font-feature-settings: 'tnum' 1;
+    box-shadow: 0 3px 0 #1a1a1a;
+    transition: transform 0.12s var(--ease-spring);
+  }
+  .mb-ans:hover:not(:disabled) { transform: translateY(-2px); }
+  .mb-ans:active { transform: translateY(2px); box-shadow: 0 0 0 #1a1a1a; }
+  .mb-ans.correct {
+    background: linear-gradient(180deg, #4ade80 0%, #22c55e 100%);
+    color: #fff;
+  }
+  .mb-ans.wrong {
+    background: linear-gradient(180deg, #f87171 0%, #dc2626 100%);
+    color: #fff;
+  }
+  .mb-ans:disabled { cursor: not-allowed; }
+
+  .mb-foot {
+    background: rgba(20, 25, 35, 0.85);
+    border: 2px solid #1a1d24;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #f0f4f8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+  }
+  .mb-vo {
+    font-style: italic;
+    color: #a0a8b3;
+  }
+  .mb-life {
+    width: 12px; height: 12px;
+    background: #C91A09;
+    border: 2px solid #1a1a1a;
+    border-radius: 2px;
+    display: inline-block;
+    margin-left: 6px;
+  }
+  .mb-life.lost { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.20); }
+
+  /* Brick snap-in animation */
+  @keyframes mbBrickDrop {
+    from { transform: translateY(-200px); opacity: 0; }
+    70%  { transform: translateY(8px); }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .mb-brick-new {
+    animation: mbBrickDrop 0.42s var(--ease-spring);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  @keyframes mbBrickWobble {
+    0% { transform: rotate(0); }
+    25% { transform: rotate(-6deg); }
+    50% { transform: rotate(5deg); }
+    75% { transform: rotate(-3deg); }
+    100% { transform: rotate(0); }
+  }
+  .mb-brick-wobble { animation: mbBrickWobble 0.5s var(--ease-out); transform-origin: center bottom; transform-box: fill-box; }
+
+  /* Hyperspace flash (Razor Crest, kept) */
   .rc-hyperflash {
     position: absolute; inset: 0; z-index: 40;
     background: radial-gradient(ellipse 50% 30% at 50% 50%, rgba(255,255,255,0.95), rgba(0,217,255,0.4) 30%, transparent 70%);
@@ -1197,8 +1479,7 @@ const MODULES = [
     icon: '🧱',
     color: '#f2cd37',
     description: 'See the bricks. Build Bricksburg, calculate volumes, end with Benny\'s SPACESHIP!',
-    unlocked: false,
-    lockedMessage: 'Beat Razor Crest Navigator to unlock.',
+    unlocked: true,
     levels: [
       { id: 1, name: 'Emmet\'s House',          goal: 'Build the cottage',         questions: 15 },
       { id: 2, name: 'Patrol Cruiser',          goal: 'Roll out Bad Cop',          questions: 18 },
@@ -2633,6 +2914,385 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         timeouts.forEach(clearTimeout);
         timeouts = [];
       };
+    },
+  };
+})();
+
+// ============================================================
+// MODULE 4: LEGO MASTER BUILDER
+// ============================================================
+(function() {
+
+  const BUILDERS = [
+    { id: 'EMM', name: 'Emmet',     icon: '⛑️', color: '#FE8A18', trim: '#FFD400', line: '"I got it, guys!"' },
+    { id: 'LUC', name: 'Lucy',      icon: '🦹‍♀️', color: '#6c2dc7', trim: '#ec4899', line: '"Now we\'re talking."' },
+    { id: 'BAT', name: 'Batman',    icon: '🦇', color: '#2a2d35', trim: '#1a1d24', line: '"I work in black."' },
+    { id: 'VIT', name: 'Vitruvius', icon: '🧙‍♂️', color: '#F4F4F4', trim: '#FE8A18', line: '"Believe, Master Builder."' },
+    { id: 'UNI', name: 'Unikitty',  icon: '🦄', color: '#ec4899', trim: '#F2CD37', line: '"Yay! Friendship!"' },
+    { id: 'BEN', name: 'Benny',     icon: '🚀', color: '#0055BF', trim: '#F4F4F4', line: '"SPAAACESHIP!"' },
+  ];
+
+  const MB_LEVELS = [
+    { id: 1, name: "Emmet's House",          gen: 'lwh',         scene: 'meadow',    palette: ['#C91A09','#F2CD37','#0055BF','#237841','#F4F4F4'] },
+    { id: 2, name: 'Patrol Cruiser',         gen: 'base-height', scene: 'street',    palette: ['#F4F4F4','#0055BF','#05131D','#F2CD37'] },
+    { id: 3, name: 'Sea Cow',                gen: 'composite',   scene: 'sea',       palette: ['#6b4226','#C91A09','#F4F4F4','#FE8A18'] },
+    { id: 4, name: 'Cloud Cuckoo Carousel',  gen: 'missing-dim', scene: 'cloud',     palette: ['#FFB6E1','#D4A8FF','#A8E6CF','#F2CD37'] },
+    { id: 5, name: 'Apocalypseburg Tower',   gen: 'lwh-bh-mix',  scene: 'wasteland', palette: ['#A0A5A9','#FE8A18','#6b4226','#C91A09'] },
+    { id: 6, name: "Benny's SPACESHIP!!",    gen: 'mb-mixed',    scene: 'space',     palette: ['#0055BF','#F4F4F4','#27f4d2','#C91A09','#F2CD37'] },
+  ];
+  const MB_QPL = [15, 18, 18, 20, 20, 20];
+
+  const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+  function shuffle(a) { for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function ensureFour(set, gen) { let s=200; while (set.size<4 && s-- > 0) set.add(gen()); return Array.from(set).slice(0,4); }
+
+  // ---- Audio ----
+  let actx_ = null;
+  function actx() { if (!actx_) { try { actx_ = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { actx_ = null; } } return actx_; }
+  function tone(freq, dur, type='sine', vol=0.16, attack=0.01, freqEnd=null) {
+    const ac = actx(); if (!ac) return;
+    if (ac.state === 'suspended') ac.resume().catch(() => {});
+    const osc = ac.createOscillator(); const g = ac.createGain();
+    osc.type = type; osc.frequency.setValueAtTime(freq, ac.currentTime);
+    if (freqEnd != null) osc.frequency.linearRampToValueAtTime(freqEnd, ac.currentTime + dur);
+    g.gain.setValueAtTime(0, ac.currentTime);
+    g.gain.linearRampToValueAtTime(vol, ac.currentTime + attack);
+    g.gain.linearRampToValueAtTime(0, ac.currentTime + dur);
+    osc.connect(g).connect(ac.destination); osc.start(); osc.stop(ac.currentTime + dur + 0.05);
+  }
+  function sfxSnap()  { tone(2200, 0.04, 'square', 0.18); setTimeout(() => tone(1600, 0.04, 'square', 0.12), 25); }
+  function sfxStud()  { tone(1320, 0.06, 'triangle', 0.14); setTimeout(() => tone(1980, 0.10, 'triangle', 0.12), 40); }
+  function sfxRattle(){ tone(220, 0.04, 'square', 0.14); setTimeout(() => tone(180, 0.05, 'square', 0.12), 30); setTimeout(() => tone(140, 0.06, 'square', 0.10), 70); }
+  function sfxAwesome() {
+    // 4-bar A♭ major-ish chiptune flourish
+    const notes = [415, 523, 622, 698, 622, 523, 415, 622];
+    notes.forEach((f, i) => setTimeout(() => tone(f, 0.16, 'square', 0.14), i * 110));
+    setTimeout(() => tone(415, 0.30, 'triangle', 0.10), 8 * 110);
+  }
+
+  // ---- Bricksburg / scene backgrounds (SVG) ----
+  function sceneBg(scene) {
+    if (scene === 'meadow') return `<rect width="600" height="280" fill="url(#mbSky)"/><rect y="200" width="600" height="80" fill="#5a9344"/>`;
+    if (scene === 'street') return `<rect width="600" height="280" fill="url(#mbSky)"/><rect y="220" width="600" height="60" fill="#3a3e44"/><rect y="225" width="600" height="2" fill="#F2CD37"/>`;
+    if (scene === 'sea')    return `<rect width="600" height="280" fill="url(#mbSky)"/><rect y="200" width="600" height="80" fill="#1d4ed8"/><path d="M 0 200 Q 100 195 200 200 T 400 200 T 600 200 L 600 280 L 0 280 Z" fill="#2563eb" opacity="0.7"/>`;
+    if (scene === 'cloud')  return `<rect width="600" height="280" fill="url(#mbCloud)"/>`;
+    if (scene === 'wasteland') return `<rect width="600" height="280" fill="#7a5a3a"/><rect y="220" width="600" height="60" fill="#5a4530"/>`;
+    if (scene === 'space')  return `<rect width="600" height="280" fill="#0a0a1a"/>`;
+    return `<rect width="600" height="280" fill="url(#mbSky)"/>`;
+  }
+
+  function brickStud(cx, cy, color, dark) {
+    return `<circle cx="${cx}" cy="${cy}" r="3.4" fill="${dark}"/><circle cx="${cx}" cy="${cy - 0.4}" r="2.6" fill="${color}"/><circle cx="${cx - 0.7}" cy="${cy - 0.9}" r="1.2" fill="rgba(255,255,255,0.45)"/>`;
+  }
+
+  function darken(hex, amt) {
+    // amt 0..1, returns darker hex
+    const n = parseInt(hex.replace('#', ''), 16);
+    let r = (n >> 16) & 0xff, g = (n >> 8) & 0xff, b = n & 0xff;
+    r = Math.max(0, Math.floor(r * (1 - amt)));
+    g = Math.max(0, Math.floor(g * (1 - amt)));
+    b = Math.max(0, Math.floor(b * (1 - amt)));
+    return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
+  }
+
+  function brick(b, isNew) {
+    const dark = darken(b.color, 0.38);
+    const studs = Math.max(2, Math.floor(b.w / 14));
+    let studsHtml = '';
+    const studSpacing = b.w / studs;
+    for (let i = 0; i < studs; i++) {
+      studsHtml += brickStud(b.x + studSpacing * (i + 0.5), b.y - 1, b.color, dark);
+    }
+    return `
+      <g class="${isNew ? 'mb-brick-new' : ''}">
+        <rect x="${b.x + 1}" y="${b.y + 4}" width="${b.w}" height="${b.h}" rx="2" fill="rgba(0,0,0,0.30)"/>
+        <rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="2" fill="${b.color}" stroke="${dark}" stroke-width="1"/>
+        <rect x="${b.x + 2}" y="${b.y + 1.5}" width="${b.w - 4}" height="3" fill="rgba(255,255,255,0.30)" rx="1.5"/>
+        ${studsHtml}
+      </g>
+    `;
+  }
+
+  function nextBrickPlacement(qIndex, level) {
+    // Stacking pattern: 5 columns, fills bottom-up
+    const palette = level.palette;
+    const cols = 5;
+    const col = qIndex % cols;
+    const row = Math.floor(qIndex / cols);
+    return {
+      x: 60 + col * 96,
+      y: 200 - row * 28,
+      w: 88,
+      h: 24,
+      color: palette[(qIndex + row * 2) % palette.length],
+    };
+  }
+
+  // ---- Question generators ----
+
+  function quoteFor(builderId, fragment) {
+    const b = BUILDERS.find(x => x.id === builderId) || pick(BUILDERS);
+    return `${b.name}: <em>"${fragment}"</em>`;
+  }
+
+  function genLwh(builderId) {
+    const l = ri(2, 8), w = ri(2, 6), h = ri(1, 4);
+    const v = l * w * h;
+    const opts = ensureFour(new Set([v]), () => Math.max(1, v + ri(-12, 12)));
+    shuffle(opts);
+    return {
+      prompt: quoteFor(builderId, `My next piece is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. <strong>Volume in stud cubes</strong>?`),
+      answers: opts.map(o => o + ' studs³'),
+      correctIdx: opts.indexOf(v),
+    };
+  }
+
+  function genBaseHeight(builderId) {
+    const base = ri(8, 30);
+    const h = ri(2, 6);
+    const v = base * h;
+    const opts = ensureFour(new Set([v]), () => Math.max(1, v + ri(-15, 15)));
+    shuffle(opts);
+    return {
+      prompt: quoteFor(builderId, `Base area is <strong>${base}</strong> stud-squares and the height is <strong>${h}</strong> studs. <strong>Volume</strong>?`),
+      answers: opts.map(o => o + ' studs³'),
+      correctIdx: opts.indexOf(v),
+    };
+  }
+
+  function genComposite(builderId) {
+    const a1 = ri(2, 5), a2 = ri(2, 4), a3 = ri(1, 3);
+    const b1 = ri(2, 4), b2 = ri(2, 3), b3 = ri(1, 2);
+    const va = a1 * a2 * a3;
+    const vb = b1 * b2 * b3;
+    const total = va + vb;
+    const opts = ensureFour(new Set([total]), () => Math.max(1, total + ri(-15, 15)));
+    shuffle(opts);
+    return {
+      prompt: quoteFor(builderId, `Hull is <strong>${a1}×${a2}×${a3}</strong>, cabin on top is <strong>${b1}×${b2}×${b3}</strong>. <strong>Total volume</strong>?`),
+      answers: opts.map(o => o + ' studs³'),
+      correctIdx: opts.indexOf(total),
+    };
+  }
+
+  function genMissingDim(builderId) {
+    const l = ri(2, 6), w = ri(2, 5), h = ri(2, 5);
+    const v = l * w * h;
+    const opts = ensureFour(new Set([h]), () => Math.max(1, h + ri(-3, 3)));
+    shuffle(opts);
+    return {
+      prompt: quoteFor(builderId, `This piece has <strong>volume ${v} stud cubes</strong> and a base of <strong>${l}×${w}</strong>. <strong>Height</strong>?`),
+      answers: opts.map(o => o + ' studs'),
+      correctIdx: opts.indexOf(h),
+    };
+  }
+
+  function genLwhBhMix(builderId) {
+    return Math.random() < 0.5 ? genLwh(builderId) : genBaseHeight(builderId);
+  }
+
+  function genMbMixed(builderId) {
+    return pick([genLwh, genBaseHeight, genComposite, genMissingDim])(builderId);
+  }
+
+  const MB_GEN = {
+    'lwh':         genLwh,
+    'base-height': genBaseHeight,
+    'composite':   genComposite,
+    'missing-dim': genMissingDim,
+    'lwh-bh-mix':  genLwhBhMix,
+    'mb-mixed':    genMbMixed,
+  };
+
+  // ---- Module main ----
+
+  InlineModules['master-builder'] = {
+    init(host, levelIndex, callbacks) {
+      const lvl = MB_LEVELS[levelIndex];
+      const totalQ = MB_QPL[levelIndex];
+
+      const state = {
+        phase: 'pick',
+        builder: null,
+        questionNum: 0,
+        score: 0,
+        streak: 0,
+        livesLost: 0,
+        questions: [],
+        bricks: [],
+      };
+      let timeouts = [];
+      const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
+
+      host.innerHTML = '<div class="mod-mb"></div>';
+      const root = host.querySelector('.mod-mb');
+
+      function renderPick() {
+        state.phase = 'pick';
+        root.innerHTML = `
+          <div class="mb-pick">
+            <div class="mb-pick-head">
+              <h2>CHOOSE YOUR MASTER BUILDER</h2>
+              <p>${lvl.name} &middot; ${totalQ} pieces to place</p>
+              <div class="lvl-badge">LEVEL ${lvl.id} &middot; ${lvl.gen.toUpperCase().replace(/-/g, ' ')}</div>
+            </div>
+            <div class="mb-builder-grid">
+              ${BUILDERS.map(b => `
+                <div class="mb-builder" data-id="${b.id}" style="--builder-color: ${b.color}; --builder-trim: ${b.trim};">
+                  <div class="mb-mini">
+                    <div class="mb-mini-head">${b.icon}</div>
+                    <div class="mb-mini-body"></div>
+                  </div>
+                  <div class="mb-builder-name">${b.name}</div>
+                  <div class="mb-builder-line">${b.line}</div>
+                </div>
+              `).join('')}
+            </div>
+            <div class="mb-pick-actions">
+              <button class="btn btn-secondary" id="mb-back">&larr; Levels</button>
+              <button class="mb-go" id="mb-go" disabled>BEGIN BUILD &rarr;</button>
+            </div>
+          </div>
+        `;
+        root.querySelectorAll('.mb-builder').forEach(c => {
+          c.addEventListener('click', () => {
+            root.querySelectorAll('.mb-builder').forEach(x => x.classList.remove('selected'));
+            c.classList.add('selected');
+            state.builder = BUILDERS.find(b => b.id === c.dataset.id);
+            root.querySelector('#mb-go').disabled = false;
+          });
+        });
+        root.querySelector('#mb-back').addEventListener('click', () => callbacks.onExit());
+        root.querySelector('#mb-go').addEventListener('click', () => startBuild());
+      }
+
+      function startBuild() {
+        state.questionNum = 0;
+        state.score = 0;
+        state.streak = 0;
+        state.livesLost = 0;
+        state.questions = [];
+        state.bricks = [];
+        const gen = MB_GEN[lvl.gen];
+        for (let i = 0; i < totalQ; i++) state.questions.push(gen(state.builder.id));
+        state.phase = 'building';
+        renderBuild(true);
+      }
+
+      function renderBuild(initial) {
+        const lifeHtml = [0,1,2].map(i => `<span class="mb-life ${i < state.livesLost ? 'lost' : ''}"></span>`).join('');
+        const stage = renderStage(initial);
+
+        root.innerHTML = `
+          <div class="mb-build">
+            <div class="mb-stage">${stage}</div>
+            <div class="mb-status-bar">
+              <div class="mb-stat"><span class="mb-stat-label">Build</span><span class="mb-stat-value">${lvl.name}</span></div>
+              <div class="mb-stat"><span class="mb-stat-label">Brick</span><span class="mb-stat-value">${state.questionNum + 1} / ${totalQ}</span></div>
+              <div class="mb-stat"><span class="mb-stat-label">Streak</span><span class="mb-stat-value ok">${state.streak}</span></div>
+              <div class="mb-stat"><span class="mb-stat-label">Studs</span><span class="mb-stat-value">${state.score}</span></div>
+            </div>
+            <div class="mb-question" id="mb-question"></div>
+            <div class="mb-foot">
+              <div class="mb-vo">${state.builder.icon} ${state.builder.name}: ${state.builder.line}</div>
+              <div>Stability:${lifeHtml}</div>
+            </div>
+          </div>
+        `;
+        showQuestion();
+      }
+
+      function renderStage(initial) {
+        let bricksHtml = '';
+        for (let i = 0; i < state.bricks.length; i++) {
+          bricksHtml += brick(state.bricks[i], initial && i === state.bricks.length - 1);
+        }
+        return `
+          <svg viewBox="0 0 600 280" preserveAspectRatio="xMidYMax meet">
+            <defs>
+              <linearGradient id="mbSky" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0" stop-color="#87CEEB"/><stop offset="1" stop-color="#b0d8f0"/>
+              </linearGradient>
+              <linearGradient id="mbCloud" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0" stop-color="#FFD8F1"/><stop offset="1" stop-color="#D4A8FF"/>
+              </linearGradient>
+            </defs>
+            ${sceneBg(lvl.scene)}
+            ${bricksHtml}
+          </svg>
+        `;
+      }
+
+      function showQuestion() {
+        const qEl = root.querySelector('#mb-question');
+        if (!qEl) return;
+        const q = state.questions[state.questionNum];
+        if (!q) { endLevel(); return; }
+        qEl.innerHTML = `
+          <div class="mb-q-meta">
+            <span>BRICK ${state.questionNum + 1} / ${totalQ}</span>
+            <span>${lvl.gen.toUpperCase().replace(/-/g, ' ')}</span>
+          </div>
+          <div class="mb-q-prompt">${q.prompt}</div>
+          <div class="mb-answers">
+            ${q.answers.map((a, i) => `<button class="mb-ans" data-idx="${i}">${a}</button>`).join('')}
+          </div>
+        `;
+        qEl.querySelectorAll('.mb-ans').forEach(b => {
+          b.addEventListener('click', () => answer(parseInt(b.dataset.idx, 10), qEl.querySelectorAll('.mb-ans'), q));
+        });
+      }
+
+      function answer(idx, buttons, q) {
+        if (state.phase !== 'building') return;
+        state.phase = 'between';
+        const correct = idx === q.correctIdx;
+        buttons.forEach(b => b.disabled = true);
+        buttons[q.correctIdx].classList.add('correct');
+        if (!correct) buttons[idx].classList.add('wrong');
+
+        if (correct) {
+          state.streak = Math.min(99, state.streak + 1);
+          state.score += 100 + (state.streak >= 3 ? 50 : 0);
+          // Add brick to structure
+          state.bricks.push(nextBrickPlacement(state.bricks.length, lvl));
+          sfxSnap();
+          setTimeout(() => sfxStud(), 80);
+        } else {
+          state.streak = 0;
+          state.livesLost = Math.min(3, state.livesLost + 1);
+          sfxRattle();
+          // wobble most recent brick (visual cue) — for v1 just skip animation
+        }
+
+        later(1300, () => {
+          state.questionNum++;
+          if (state.livesLost >= 3 || state.questionNum >= totalQ) {
+            endLevel();
+          } else {
+            state.phase = 'building';
+            renderBuild(correct);
+          }
+        });
+      }
+
+      function endLevel() {
+        state.phase = 'end';
+        const dnf = state.livesLost >= 3;
+        let stars = 0;
+        if (!dnf) {
+          if (state.livesLost === 0) stars = 3;
+          else if (state.livesLost === 1) stars = 2;
+          else stars = 1;
+          sfxAwesome();
+        }
+        callbacks.onComplete(state.score, stars);
+      }
+
+      renderPick();
+
+      return function cleanup() { timeouts.forEach(clearTimeout); timeouts = []; };
     },
   };
 })();
