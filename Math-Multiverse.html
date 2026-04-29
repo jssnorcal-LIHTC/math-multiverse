@@ -1267,6 +1267,53 @@
     min-height: 0;
   }
   .rc-ship svg { width: 100%; height: 100%; display: block; }
+  .rc-chase-cam {
+    position: relative;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: #0a0e18;
+  }
+  .rc-starfield {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 17% 23%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 81% 11%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 43% 67%, rgba(255,255,255,0.55), transparent),
+      radial-gradient(1px 1px at 71% 78%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2px 2px at 56% 35%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 9% 82%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 30% 8%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 92% 50%, rgba(255,255,255,0.45), transparent),
+      radial-gradient(1px 1px at 12% 51%, rgba(255,255,255,0.5), transparent);
+    animation: rcStarShift 60s linear infinite;
+  }
+  @keyframes rcStarShift {
+    from { background-position: 0 0; }
+    to { background-position: 0 200%; }
+  }
+  .rc-ship-img {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%; max-height: 85%;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.6));
+    animation: rcShipDrift 6s ease-in-out infinite alternate;
+  }
+  @keyframes rcShipDrift {
+    from { transform: translate(-50%, -52%); }
+    to { transform: translate(-50%, -48%); }
+  }
+  .rc-damage-tint {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(238,29,82,0.30) 100%);
+    pointer-events: none;
+    animation: rcDamagePulse 1.5s ease-in-out infinite;
+  }
+  @keyframes rcDamagePulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
   .rc-hud {
     grid-area: header;
     display: flex;
@@ -1839,15 +1886,16 @@
     opacity: 0.85;
   }
   .rk-meet svg { width: 90px; height: 90px; }
-  .rk-grace-photo {
+  .rk-grace-photo, .rk-rocky-photo {
     width: 110px; height: 110px;
     object-fit: cover;
-    object-position: center top;
+    object-position: center;
     border-radius: 8px;
-    border: 2px solid rgba(0,217,255,0.4);
     box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     display: block;
   }
+  .rk-grace-photo { border: 2px solid rgba(0,217,255,0.4); }
+  .rk-rocky-photo { border: 2px solid rgba(255,140,80,0.6); }
   .rk-pick-actions { display: flex; justify-content: center; gap: 10px; margin-top: 12px; }
   .rk-go {
     padding: 14px 28px;
@@ -4597,7 +4645,18 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       `;
     }
 
-    // CHASE CAM: Ship from behind and slightly above
+    // CHASE CAM: real Razor Crest PNG over animated star field
+    return `
+      <div class="rc-chase-cam">
+        <div class="rc-starfield"></div>
+        <img class="rc-ship-img" src="art/razor-crest.png" alt="Razor Crest" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="rc-ship-svg-fallback" style="display:none;">${rcChaseFallback(bodyColor, accentColor, damage)}</div>
+        ${damage > 0.4 ? `<div class="rc-damage-tint"></div>` : ''}
+      </div>
+    `;
+  }
+
+  function rcChaseFallback(bodyColor, accentColor, damage) {
     return `
       <svg viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -4739,6 +4798,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       </svg>
     `;
   }
+
 
   // ---- Question generators ----
 
@@ -5669,6 +5729,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
   const NASA_EMU = 'https://upload.wikimedia.org/wikipedia/commons/4/4b/NASA_EMU_without_visor.jpg';
   // Project Hail Mary movie poster — Rocky silhouette appears
   const PHM_POSTER = 'https://upload.wikimedia.org/wikipedia/en/3/3b/Project_Hail_Mary_poster.jpg';
+  // Real Rocky concept/movie still — local file
+  const ROCKY_IMG = 'art/rocky-concept.jpg';
+  const ROCKY_STILL = 'art/rocky-still.jpg';
 
   const RK_LEVELS = [
     { id: 1, name: 'Hello, Question?',         gen: 'metric',   crisis: 'first contact'        },
@@ -6123,12 +6186,12 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
             <div class="lvl-badge">LEVEL ${lvl.id} &middot; ${lvl.gen.toUpperCase()}</div>
             <div class="rk-meet">
               <div class="rk-side-grace">
-                <img class="rk-grace-photo" src="${NASA_EMU}" alt="NASA EMU spacesuit" loading="lazy" onerror="this.outerHTML='${graceSvg(true).replace(/'/g, '&apos;').replace(/\n/g, '').replace(/"/g, '&quot;')}';">
+                <img class="rk-grace-photo" src="${NASA_EMU}" alt="NASA EMU spacesuit" loading="lazy" onerror="this.style.display='none';">
                 <div class="rk-side-label" style="color: #6dd5ed;">GRACE</div>
               </div>
               <div class="rk-tunnel"></div>
               <div class="rk-side-rocky">
-                ${rockySvg(true)}
+                <img class="rk-rocky-photo" src="${ROCKY_IMG}" alt="Rocky" loading="lazy">
                 <div class="rk-side-label" style="color: #ff8c5a;">ROCKY</div>
               </div>
             </div>
