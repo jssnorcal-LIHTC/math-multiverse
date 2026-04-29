@@ -2289,7 +2289,7 @@
         <span style="color: var(--text-muted);">·</span>
         <span class="stars-tally"><span id="total-stars">0</span> ★</span>
       </div>
-      <button class="icon-btn" id="btn-preview" title="Preview Mode: when ON, every section and every level is accessible (for browsing). When OFF, normal progression gating applies.">Preview: ON</button>
+      <button class="icon-btn" id="btn-preview" title="Preview Mode: when ON, every section and every level is accessible (for browsing). When OFF, normal progression gating applies.">Preview: OFF</button>
       <button class="icon-btn" id="btn-rename" title="Set player name">Name</button>
       <button class="icon-btn" id="btn-export" title="Download save file">Export</button>
       <button class="icon-btn" id="btn-import" title="Restore from save file">Import</button>
@@ -2506,7 +2506,7 @@ const Save = {
       stats:   { totalCorrect: 0, totalAnswered: 0, sessionCount: 0 },
       modules: moduleStates,
       grandGoals: {},
-      previewMode: true,
+      previewMode: false,
       created: Date.now(),
       lastSaved: Date.now(),
     };
@@ -2521,8 +2521,8 @@ const Save = {
         return;
       }
       this.state = JSON.parse(raw);
-      // Default-on Preview Mode for older saves that predate this flag
-      if (this.state.previewMode === undefined) this.state.previewMode = true;
+      // Older saves without the flag default to progression-locked play
+      if (this.state.previewMode === undefined) this.state.previewMode = false;
       // Reconcile against current MODULES list
       for (const m of MODULES) {
         if (!this.state.modules[m.id]) {
