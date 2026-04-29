@@ -1566,6 +1566,27 @@
     color: #F2CD37;
   }
   .mb-pick-head { text-align: center; }
+  .mb-hero {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto 14px;
+    aspect-ratio: 16 / 6;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #1a1d24;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.5), inset 0 0 0 2px rgba(242,205,55,0.6);
+  }
+  .mb-hero img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center 40%;
+    display: block;
+  }
+  .mb-hero::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(26,29,36,0.85) 100%);
+    pointer-events: none;
+  }
 
   .mb-builder-grid {
     display: grid;
@@ -3102,6 +3123,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     'videos/trail-4.mp4',
     'videos/trail-5.mp4',
     'videos/trail-6.mp4',
+    'videos/trail-7.mp4',
+    'videos/trail-8.mp4',
+    'videos/trail-9.mp4',
   ];
 
   const FR_CRASH_SCENES = [
@@ -4466,7 +4490,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
   const MANDO_LOGO      = 'https://en.wikipedia.org/wiki/Special:FilePath/The_Mandalorian_logo_black.svg';
   const EMPIRE_COG      = 'https://en.wikipedia.org/wiki/Special:FilePath/Emblem_of_the_First_Galactic_Empire.svg';
   // Real character imagery from Wikipedia infoboxes
-  const MANDO_PHOTO     = 'https://upload.wikimedia.org/wikipedia/en/a/a1/TheMandalorian.jpg';
+  const MANDO_PHOTO     = 'art/mando.png';
   const GROGU_PHOTO     = 'https://upload.wikimedia.org/wikipedia/en/a/a0/Grogu_%28Star_Wars%29.jpg';
   // CC0 transparent TIE Fighter render from Wikimedia Commons
   const TIE_FIGHTER     = 'https://upload.wikimedia.org/wikipedia/commons/1/13/TIE_Fighter.webp';
@@ -4544,7 +4568,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     if (view === 'cockpit') {
       // First-person from inside cockpit, looking out through canopy
       return `
-        <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;background:#0a0e18;">
           <defs>
             <linearGradient id="rcVisor" x1="0" x2="0" y1="0" y2="1">
               <stop offset="0" stop-color="rgba(80,160,200,0.22)"/>
@@ -4599,21 +4623,8 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           <rect x="26" y="188" width="80" height="6" fill="#1a1d24" rx="1"/>
           <rect x="26" y="188" width="${0.8 * hullPct}" height="6" fill="${hullPct > 50 ? '#27f4d2' : '#fbbf24'}" rx="1"/>
           <text x="26" y="204" fill="rgba(0,217,255,0.7)" font-size="6" font-family="system-ui" font-weight="700">HULL ${Math.round(hullPct)}%</text>
-          <!-- Mando T-visor helmet (right side, peeking into frame) -->
-          <g transform="translate(420, 168)">
-            <!-- Beskar shoulder pauldron -->
-            <path d="M 22 30 Q 28 18 42 18 Q 56 18 62 30 L 62 52 L 22 52 Z" fill="#9aa4ae" stroke="#1a1d24" stroke-width="1"/>
-            <!-- Mudhorn signet on right pauldron -->
-            <g transform="translate(54, 26) scale(0.4)" opacity="0.7">
-              <path d="M -10 4 Q -6 -8 6 -8 Q 14 -4 12 4 L 14 8 L 8 6 L 0 8 L -8 6 L -12 8 Z" fill="#5a626c" stroke="#0a0e15" stroke-width="1"/>
-            </g>
-            <!-- Helmet -->
-            <path d="M 24 24 Q 26 8 42 6 Q 58 8 60 24 L 58 30 L 26 30 Z" fill="#c0c8d0" stroke="#1a1d24" stroke-width="1.2"/>
-            <!-- T-visor -->
-            <path d="M 28 16 L 56 16 L 56 22 L 46 22 L 46 30 L 38 30 L 38 22 L 28 22 Z" fill="#0a0a0a"/>
-            <!-- Helmet shine -->
-            <path d="M 28 10 Q 30 6 36 6 L 32 14 Z" fill="rgba(255,255,255,0.4)"/>
-          </g>
+          <!-- Mando in right pilot seat (real PNG art) -->
+          <image href="art/mando.png" x="430" y="92" width="120" height="148" preserveAspectRatio="xMidYMax meet"/>
           <!-- Grogu (left side, peeking up from co-pilot's pram) -->
           <g transform="translate(120, 178)">
             <!-- Floating pram rim -->
@@ -5295,6 +5306,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 (function() {
 
   const LEGO_LOGO = 'https://en.wikipedia.org/wiki/Special:FilePath/LEGO_logo.svg';
+  const LEGO_HERO = 'art/lego-emmet-lucy.jpg';
   // Real Unikitty SVG from Wikimedia Commons (CC BY-SA, vectorized from Cartoon Network)
   const UNIKITTY_SVG = 'https://upload.wikimedia.org/wikipedia/commons/8/86/Unikitty_Scratch_sprite.svg';
 
@@ -5649,6 +5661,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         root.innerHTML = `
           <div class="mb-pick">
             <div class="mb-pick-head">
+              <div class="mb-hero"><img src="${LEGO_HERO}" alt="The LEGO Movie" onerror="this.parentElement.style.display='none';"></div>
               <img class="mb-brand-logo" src="${LEGO_LOGO}" alt="LEGO" onerror="this.remove();">
               <h2>CHOOSE YOUR MASTER BUILDER</h2>
               <p>${lvl.name} &middot; ${totalQ} pieces to place</p>
@@ -6083,6 +6096,71 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           explain: `1 L = 1000 mL. So ${L} × 1000 = <strong>${ans} mL</strong>.`,
         };
       },
+      () => { // km to m
+        const km = ri(2, 9);
+        const ans = km * 1000;
+        const opts = ensureFour(new Set([ans]), () => Math.max(500, ans + ri(-2500, 2500)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Tau Ceti beacon, <strong>${km} kilometers</strong> distance, question. <strong>Meters</strong>?"</em>`,
+          answers: opts.map(o => o + ' m'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${km} km`, grace: `${ans} m` },
+          explain: `1 km = 1000 m. So ${km} × 1000 = <strong>${ans} m</strong>.`,
+        };
+      },
+      () => { // mm to cm (division by 10)
+        const cm = ri(3, 12);
+        const mm = cm * 10;
+        const opts = ensureFour(new Set([cm]), () => Math.max(1, cm + ri(-6, 6)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage cell wall is <strong>${mm} millimeters</strong>. <em>In <strong>centimeters</strong>?</em>`,
+          answers: opts.map(o => o + ' cm'),
+          correctIdx: opts.indexOf(cm),
+          dict: { rocky: `${mm} mm`, grace: `${cm} cm` },
+          explain: `10 mm = 1 cm. So ${mm} ÷ 10 = <strong>${cm} cm</strong>.`,
+        };
+      },
+      () => { // g to kg
+        const kg = ri(2, 9);
+        const g = kg * 1000;
+        const opts = ensureFour(new Set([kg]), () => Math.max(1, kg + ri(-5, 5)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Eridian gift cube weighs <strong>${g} grams</strong>. <em>How many <strong>kilograms</strong>?</em>`,
+          answers: opts.map(o => o + ' kg'),
+          correctIdx: opts.indexOf(kg),
+          dict: { rocky: `${g} g`, grace: `${kg} kg` },
+          explain: `1000 g = 1 kg. So ${g} ÷ 1000 = <strong>${kg} kg</strong>.`,
+        };
+      },
+      () => { // mL to L
+        const L = ri(3, 8);
+        const mL = L * 1000;
+        const opts = ensureFour(new Set([L]), () => Math.max(1, L + ri(-4, 4)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, coolant <strong>${mL} milliliters</strong> remaining. Express in <strong>liters</strong>, question?"</em>`,
+          answers: opts.map(o => o + ' L'),
+          correctIdx: opts.indexOf(L),
+          dict: { rocky: `${mL} mL`, grace: `${L} L` },
+          explain: `1000 mL = 1 L. So ${mL} ÷ 1000 = <strong>${L} L</strong>.`,
+        };
+      },
+      () => { // m to mm
+        const m = ri(2, 7);
+        const ans = m * 1000;
+        const opts = ensureFour(new Set([ans]), () => Math.max(100, ans + ri(-2000, 2000)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Spin drive nozzle is <strong>${m} meters</strong> across. <em>How many <strong>millimeters</strong>?</em>`,
+          answers: opts.map(o => o + ' mm'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${m} m`, grace: `${ans} mm` },
+          explain: `1 m = 1000 mm. So ${m} × 1000 = <strong>${ans} mm</strong>.`,
+        };
+      },
     ];
     return pick(variants)();
   }
@@ -6128,6 +6206,71 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           explain: `1 gal = 4 qt. So ${gal} × 4 = <strong>${ans} qt</strong>.`,
         };
       },
+      () => { // qt to pt
+        const qt = ri(2, 9);
+        const ans = qt * 2;
+        const opts = ensureFour(new Set([ans]), () => Math.max(2, ans + ri(-6, 6)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Bouillon pouch <strong>${qt} quarts</strong>. <em>How many <strong>pints</strong>?</em>`,
+          answers: opts.map(o => o + ' pt'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${qt} qt`, grace: `${ans} pt` },
+          explain: `1 qt = 2 pt. So ${qt} × 2 = <strong>${ans} pt</strong>.`,
+        };
+      },
+      () => { // yd to ft
+        const yd = ri(2, 9);
+        const ans = yd * 3;
+        const opts = ensureFour(new Set([ans]), () => Math.max(3, ans + ri(-8, 8)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Tunnel length <strong>${yd} yards</strong>, question. <strong>Feet</strong>?"</em>`,
+          answers: opts.map(o => o + ' ft'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${yd} yd`, grace: `${ans} ft` },
+          explain: `1 yd = 3 ft. So ${yd} × 3 = <strong>${ans} ft</strong>.`,
+        };
+      },
+      () => { // pt to c
+        const pt = ri(2, 8);
+        const ans = pt * 2;
+        const opts = ensureFour(new Set([ans]), () => Math.max(2, ans + ri(-5, 5)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Soup pouch <strong>${pt} pints</strong>. <em>How many <strong>cups</strong>?</em>`,
+          answers: opts.map(o => o + ' c'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${pt} pt`, grace: `${ans} c` },
+          explain: `1 pt = 2 c. So ${pt} × 2 = <strong>${ans} c</strong>.`,
+        };
+      },
+      () => { // mi to yd
+        const mi = ri(1, 4);
+        const ans = mi * 1760;
+        const opts = ensureFour(new Set([ans]), () => Math.max(500, ans + ri(-1000, 1000)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Beacon <strong>${mi} mile${mi>1?'s':''}</strong> away. <em>In <strong>yards</strong>?</em>`,
+          answers: opts.map(o => o + ' yd'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${mi} mi`, grace: `${ans} yd` },
+          explain: `1 mile = 1760 yd. So ${mi} × 1760 = <strong>${ans} yd</strong>.`,
+        };
+      },
+      () => { // oz to lb (division)
+        const lb = ri(2, 8);
+        const oz = lb * 16;
+        const opts = ensureFour(new Set([lb]), () => Math.max(1, lb + ri(-4, 4)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Specimen <strong>${oz} ounces</strong>, friend. Convert <strong>pounds</strong>, question?"</em>`,
+          answers: opts.map(o => o + ' lb'),
+          correctIdx: opts.indexOf(lb),
+          dict: { rocky: `${oz} oz`, grace: `${lb} lb` },
+          explain: `16 oz = 1 lb. So ${oz} ÷ 16 = <strong>${lb} lb</strong>.`,
+        };
+      },
     ];
     return pick(variants)();
   }
@@ -6171,6 +6314,71 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${m} min`, grace: `${ans} s` },
           explain: `1 minute = 60 seconds. So ${m} × 60 = <strong>${ans} s</strong>.`,
+        };
+      },
+      () => { // sec to min (division)
+        const m = ri(2, 8);
+        const sec = m * 60;
+        const opts = ensureFour(new Set([m]), () => Math.max(1, m + ri(-4, 4)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage doubling cycle <strong>${sec} seconds</strong>. <em>How many <strong>minutes</strong>?</em>`,
+          answers: opts.map(o => o + ' min'),
+          correctIdx: opts.indexOf(m),
+          dict: { rocky: `${sec} s`, grace: `${m} min` },
+          explain: `60 sec = 1 min. So ${sec} ÷ 60 = <strong>${m} min</strong>.`,
+        };
+      },
+      () => { // hr to min (alt phrasing)
+        const hr = ri(2, 9);
+        const ans = hr * 60;
+        const opts = ensureFour(new Set([ans]), () => Math.max(10, ans + ri(-60, 60)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Sleep cycle ran <strong>${hr} hours</strong>. <em>How many <strong>minutes</strong>?</em>`,
+          answers: opts.map(o => o + ' min'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${hr} hr`, grace: `${ans} min` },
+          explain: `1 hour = 60 minutes. So ${hr} × 60 = <strong>${ans} min</strong>.`,
+        };
+      },
+      () => { // min to hr (division)
+        const hr = ri(2, 8);
+        const min = hr * 60;
+        const opts = ensureFour(new Set([hr]), () => Math.max(1, hr + ri(-3, 3)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Cooling cycle elapsed <strong>${min} minutes</strong>, question. <strong>Hours</strong>?"</em>`,
+          answers: opts.map(o => o + ' hr'),
+          correctIdx: opts.indexOf(hr),
+          dict: { rocky: `${min} min`, grace: `${hr} hr` },
+          explain: `60 min = 1 hour. So ${min} ÷ 60 = <strong>${hr} hr</strong>.`,
+        };
+      },
+      () => { // wk to days
+        const wk = ri(2, 6);
+        const ans = wk * 7;
+        const opts = ensureFour(new Set([ans]), () => Math.max(2, ans + ri(-6, 6)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Coma duration was <strong>${wk} weeks</strong>. <em>How many <strong>days</strong>?</em>`,
+          answers: opts.map(o => o + ' d'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${wk} wk`, grace: `${ans} d` },
+          explain: `1 week = 7 days. So ${wk} × 7 = <strong>${ans} d</strong>.`,
+        };
+      },
+      () => { // hr to sec (multistep but single ratio for variety)
+        const hr = ri(2, 5);
+        const ans = hr * 3600;
+        const opts = ensureFour(new Set([ans]), () => Math.max(1000, ans + ri(-3000, 3000)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Burn complete <strong>${hr} hours</strong>, friend. Express <strong>seconds</strong>, question?"</em>`,
+          answers: opts.map(o => o + ' s'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${hr} hr`, grace: `${ans} s` },
+          explain: `1 hour = 3600 seconds. So ${hr} × 3600 = <strong>${ans} s</strong>.`,
         };
       },
     ];
@@ -6219,6 +6427,76 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           correctIdx: opts.indexOf(ansMin),
           dict: { rocky: `${days} days`, grace: `${ansMin} min` },
           explain: `Two steps. ${days} days × 24 = ${ansHr} hours. Then ${ansHr} × 60 = <strong>${ansMin} min</strong>.`,
+        };
+      },
+      () => { // m → mm via cm (3-step in 5.MD scope)
+        const m = ri(2, 6);
+        const ansCm = m * 100;
+        const ansMm = ansCm * 10;
+        const opts = ensureFour(new Set([ansMm]), () => Math.max(100, ansMm + ri(-2000, 2000)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Tunnel <strong>${m} meters</strong>, question. Convert <strong>millimeters</strong>, friend."</em>`,
+          answers: opts.map(o => o + ' mm'),
+          correctIdx: opts.indexOf(ansMm),
+          dict: { rocky: `${m} m`, grace: `${ansMm} mm` },
+          explain: `Two steps. ${m} m × 100 = ${ansCm} cm. Then ${ansCm} × 10 = <strong>${ansMm} mm</strong>.`,
+        };
+      },
+      () => { // gal → cups (gal × 4 qt × 2 pt × 2 c = ×16)
+        const gal = ri(2, 5);
+        const ans = gal * 16;
+        const opts = ensureFour(new Set([ans]), () => Math.max(4, ans + ri(-12, 12)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Water reserve <strong>${gal} gallons</strong>. <em>In <strong>cups</strong>?</em>`,
+          answers: opts.map(o => o + ' c'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${gal} gal`, grace: `${ans} c` },
+          explain: `1 gal = 4 qt = 8 pt = 16 c. So ${gal} × 16 = <strong>${ans} c</strong>.`,
+        };
+      },
+      () => { // halving cycle (decay reverse of doubling)
+        const cycles = pick([3, 4, 5]);
+        const start = 1 << cycles;
+        const ans = 1;
+        const opts = ensureFour(new Set([ans]), () => Math.max(0, ri(0, 8)));
+        if (!opts.includes(ans)) opts[0] = ans;
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage <strong>halves every 3 hours</strong> in vacuum. After <strong>${3*cycles} hours</strong>, ${start} spores reduce to how many?`,
+          answers: opts.map(o => o + ''),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${3*cycles} hr`, grace: `${ans}×` },
+          explain: `${3*cycles} hours ÷ 3 = ${cycles} halvings. ${start} → ${start/2} → ${start/4} → ... After ${cycles} halvings, you have <strong>${ans}</strong>.`,
+        };
+      },
+      () => { // ft → in via simple (ft × 12)
+        const ft = ri(2, 8);
+        const ans = ft * 12;
+        const opts = ensureFour(new Set([ans]), () => Math.max(8, ans + ri(-24, 24)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, hatch is <strong>${ft} feet</strong> across. <strong>Inches</strong>?"</em>`,
+          answers: opts.map(o => o + ' in'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${ft} ft`, grace: `${ans} in` },
+          explain: `1 ft = 12 in. So ${ft} × 12 = <strong>${ans} in</strong>.`,
+        };
+      },
+      () => { // weeks → minutes (3-step chain)
+        const wk = ri(1, 3);
+        const days = wk * 7;
+        const hr = days * 24;
+        const min = hr * 60;
+        const opts = ensureFour(new Set([min]), () => Math.max(60, min + ri(-5000, 5000)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Coma was <strong>${wk} week${wk>1?'s':''}</strong>. How many <strong>minutes</strong> total?`,
+          answers: opts.map(o => o + ' min'),
+          correctIdx: opts.indexOf(min),
+          dict: { rocky: `${wk} wk`, grace: `${min} min` },
+          explain: `Three steps. ${wk} wk × 7 = ${days} days. ${days} × 24 = ${hr} hr. ${hr} × 60 = <strong>${min} min</strong>.`,
         };
       },
     ];
