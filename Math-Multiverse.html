@@ -772,6 +772,266 @@
     .f1-tower { max-height: 200px; }
   }
 
+  /* ============================================================
+     MODULE 3: RAZOR CREST NAVIGATOR  (.mod-rc)
+     ============================================================ */
+  .mod-rc {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(0,217,255,0.08), transparent 60%), #0a0e18;
+    color: var(--text-primary);
+  }
+  .mod-rc::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 17% 23%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 81% 11%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 43% 67%, rgba(255,255,255,0.55), transparent),
+      radial-gradient(1px 1px at 71% 78%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 9%  82%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(2px 2px at 56% 35%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 30% 8%,  rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 92% 50%, rgba(255,255,255,0.45), transparent),
+      radial-gradient(1px 1px at 12% 51%, rgba(255,255,255,0.5), transparent);
+    background-size: 100% 100%;
+    opacity: 0.85;
+    animation: starscroll 60s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes starscroll { from { background-position: 0 0; } to { background-position: 0 200%; } }
+
+  .rc-pick {
+    position: relative; z-index: 1;
+    padding: 28px;
+    height: 100%;
+    overflow-y: auto;
+    text-align: center;
+  }
+  .rc-pick h2 {
+    font-size: 1.7rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    color: var(--theme-coords);
+    text-shadow: 0 0 18px rgba(0,217,255,0.4);
+  }
+  .rc-pick p { color: var(--text-secondary); margin-bottom: 18px; font-size: 0.95rem; }
+  .rc-pick .lvl-badge {
+    display: inline-block; margin-bottom: 18px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(0,217,255,0.12);
+    border: 1px solid rgba(0,217,255,0.35);
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--theme-coords);
+  }
+  .rc-view-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 16px;
+    max-width: 720px;
+    margin: 0 auto 24px;
+  }
+  .rc-view {
+    background: rgba(15, 22, 38, 0.7);
+    border: 2px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 18px;
+    cursor: pointer;
+    transition: transform 0.18s var(--ease-spring), border-color 0.18s var(--ease-out), background 0.18s var(--ease-out);
+  }
+  .rc-view:hover { transform: translateY(-3px); border-color: var(--theme-coords); }
+  .rc-view.selected { border-color: var(--theme-coords); background: rgba(0,217,255,0.10); box-shadow: 0 0 24px rgba(0,217,255,0.2); }
+  .rc-view-name { font-size: 1.05rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+  .rc-view-desc { font-size: 0.85rem; color: var(--text-secondary); }
+  .rc-view svg { display: block; width: 100%; max-width: 240px; margin: 12px auto 4px; }
+  .rc-pick-actions { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+  .rc-go {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--theme-coords), #4a8cff);
+    color: #001019;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,217,255,0.35);
+    font-family: inherit;
+    transition: transform 0.16s var(--ease-spring), filter 0.16s var(--ease-out);
+  }
+  .rc-go:hover { transform: translateY(-2px); filter: brightness(1.1); }
+  .rc-go:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  /* In-flight HUD */
+  .rc-flight {
+    position: relative; z-index: 1;
+    width: 100%; height: 100%;
+    display: grid;
+    grid-template-rows: minmax(180px, 35%) auto 1fr auto;
+    gap: 10px;
+    padding: 10px;
+  }
+  .rc-ship {
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.4));
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .rc-ship svg { width: 100%; height: 100%; display: block; }
+  .rc-hud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: rgba(0, 30, 50, 0.55);
+    border: 1px solid rgba(0,217,255,0.2);
+    border-radius: 8px;
+    font-feature-settings: 'tnum' 1;
+  }
+  .rc-stat { display: flex; flex-direction: column; align-items: flex-start; }
+  .rc-stat-label {
+    font-size: 0.65rem;
+    color: rgba(0,217,255,0.7);
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .rc-stat-value {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+  .rc-stat-value.bad { color: var(--acc-error); }
+  .rc-stat-value.warn { color: var(--acc-warning); }
+  .rc-stat-value.good { color: var(--acc-success); }
+
+  .rc-question {
+    background: rgba(15, 22, 38, 0.6);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 16px;
+    overflow-y: auto;
+  }
+  .rc-q-meta {
+    display: flex; justify-content: space-between;
+    font-size: 0.75rem; color: rgba(0,217,255,0.7);
+    letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .rc-q-prompt {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .rc-q-prompt strong { color: var(--theme-coords); font-feature-settings: 'tnum' 1; }
+  .rc-q-prompt em { font-style: italic; color: var(--text-secondary); }
+
+  .rc-grid-wrap {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+  }
+  @media (max-width: 700px) {
+    .rc-grid-wrap { grid-template-columns: 1fr; }
+  }
+
+  .rc-plot-grid {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
+  }
+  .rc-cell {
+    fill: rgba(0,217,255,0.04);
+    stroke: rgba(0,217,255,0.18);
+    stroke-width: 0.5;
+    cursor: crosshair;
+    transition: fill 0.12s ease-out;
+  }
+  .rc-cell:hover { fill: rgba(0,217,255,0.18); }
+  .rc-cell.target.show {
+    fill: rgba(74,222,128,0.5);
+    stroke: var(--acc-success);
+    stroke-width: 1;
+  }
+  .rc-cell.picked {
+    fill: rgba(0,217,255,0.4);
+    stroke: var(--theme-coords);
+    stroke-width: 1;
+  }
+  .rc-cell.wrong {
+    fill: rgba(248,113,113,0.5);
+    stroke: var(--acc-error);
+    stroke-width: 1;
+  }
+  .rc-axis { fill: rgba(255,255,255,0.7); font-size: 5px; font-family: system-ui, sans-serif; }
+  .rc-axis-line { stroke: rgba(255,255,255,0.3); stroke-width: 0.5; }
+
+  .rc-answers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .rc-ans {
+    padding: 12px 14px;
+    background: rgba(0, 30, 50, 0.5);
+    border: 2px solid rgba(0,217,255,0.2);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    font-feature-settings: 'tnum' 1;
+    transition: transform 0.14s var(--ease-spring), border-color 0.14s var(--ease-out), background 0.14s var(--ease-out);
+  }
+  .rc-ans:hover:not(:disabled) {
+    transform: translateY(-2px);
+    border-color: var(--theme-coords);
+    background: rgba(0,217,255,0.12);
+  }
+  .rc-ans.correct { border-color: var(--acc-success); background: rgba(74,222,128,0.18); color: var(--acc-success); }
+  .rc-ans.wrong   { border-color: var(--acc-error);   background: rgba(248,113,113,0.18); color: var(--acc-error); }
+  .rc-ans:disabled { cursor: not-allowed; }
+
+  .rc-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 12px;
+    background: rgba(0, 30, 50, 0.5);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .rc-radio { font-style: italic; color: var(--text-secondary); }
+  .rc-hull-pips { display: flex; gap: 6px; }
+  .rc-pip {
+    width: 10px; height: 10px;
+    border-radius: 5px;
+    background: var(--acc-success);
+    box-shadow: 0 0 6px rgba(74,222,128,0.4);
+  }
+  .rc-pip.lost { background: rgba(255,255,255,0.10); box-shadow: none; }
+
+  /* Hyperspace flash */
+  .rc-hyperflash {
+    position: absolute; inset: 0; z-index: 40;
+    background: radial-gradient(ellipse 50% 30% at 50% 50%, rgba(255,255,255,0.95), rgba(0,217,255,0.4) 30%, transparent 70%);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.5s ease-out;
+  }
+  .rc-hyperflash.on { opacity: 1; }
+
   /* RESPONSIVE */
   @media (max-width: 720px) {
     #app { padding: 16px; }
@@ -918,8 +1178,7 @@ const MODULES = [
     icon: '🛸',
     color: '#00d9ff',
     description: 'Fly Mando and Grogu through hyperspace. Plot coordinates to dodge asteroids and outrun TIE fighters.',
-    unlocked: false,
-    lockedMessage: 'Beat F1: Apex Decimals to unlock.',
+    unlocked: true,
     levels: [
       { id: 1, name: 'Departing Nevarro',         goal: 'Plot the way out',           questions: 15 },
       { id: 2, name: 'Asteroid Field Run',        goal: 'Cross to clean space',       questions: 18 },
@@ -1828,6 +2087,546 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       }
 
       // Boot
+      renderPick();
+
+      return function cleanup() {
+        timeouts.forEach(clearTimeout);
+        timeouts = [];
+      };
+    },
+  };
+})();
+
+// ============================================================
+// MODULE 3: RAZOR CREST NAVIGATOR
+// ============================================================
+(function() {
+
+  const RC_LEVELS = [
+    { id: 1, name: 'Departing Nevarro',       gridMax: 7,  quadrants: 1, mix: 'plot' },
+    { id: 2, name: 'Asteroid Field Run',      gridMax: 8,  quadrants: 1, mix: 'plot' },
+    { id: 3, name: 'Mos Eisley Approach',     gridMax: 8,  quadrants: 1, mix: 'plot-distance' },
+    { id: 4, name: 'Hyperspace Coordinates',  gridMax: 7,  quadrants: 4, mix: 'plot' },
+    { id: 5, name: 'Imperial Pursuit',        gridMax: 7,  quadrants: 4, mix: 'reflect-translate' },
+    { id: 6, name: 'Final Jump to Mandalore', gridMax: 7,  quadrants: 4, mix: 'mixed' },
+  ];
+  const RC_QPL = [15, 18, 18, 20, 20, 20];
+
+  const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // ---- Audio ----
+  let actx_ = null;
+  function actx() {
+    if (!actx_) { try { actx_ = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { actx_ = null; } }
+    return actx_;
+  }
+  function tone(freq, dur, type='sine', vol=0.16, attack=0.01, freqEnd=null) {
+    const ac = actx(); if (!ac) return;
+    if (ac.state === 'suspended') ac.resume().catch(() => {});
+    const osc = ac.createOscillator();
+    const g = ac.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, ac.currentTime);
+    if (freqEnd != null) osc.frequency.linearRampToValueAtTime(freqEnd, ac.currentTime + dur);
+    g.gain.setValueAtTime(0, ac.currentTime);
+    g.gain.linearRampToValueAtTime(vol, ac.currentTime + attack);
+    g.gain.linearRampToValueAtTime(0, ac.currentTime + dur);
+    osc.connect(g).connect(ac.destination);
+    osc.start(); osc.stop(ac.currentTime + dur + 0.05);
+  }
+  function noiseBurst(dur, vol=0.18, filterFreq=2000) {
+    const ac = actx(); if (!ac) return;
+    if (ac.state === 'suspended') ac.resume().catch(() => {});
+    const buffer = ac.createBuffer(1, ac.sampleRate * dur, ac.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1);
+    const src = ac.createBufferSource(); src.buffer = buffer;
+    const filter = ac.createBiquadFilter(); filter.type = 'bandpass'; filter.frequency.value = filterFreq;
+    const g = ac.createGain();
+    g.gain.setValueAtTime(0, ac.currentTime);
+    g.gain.linearRampToValueAtTime(vol, ac.currentTime + 0.01);
+    g.gain.linearRampToValueAtTime(0, ac.currentTime + dur);
+    src.connect(filter).connect(g).connect(ac.destination);
+    src.start(); src.stop(ac.currentTime + dur);
+  }
+  function sfxCorrect() { tone(740, 0.10, 'sine', 0.16); setTimeout(() => tone(1110, 0.18, 'sine', 0.16), 60); }
+  function sfxWrong() { tone(180, 0.10, 'sawtooth', 0.18); noiseBurst(0.16, 0.12, 800); }
+  function sfxHyperspace() {
+    tone(180, 1.5, 'sawtooth', 0.18, 0.05, 2200);
+    noiseBurst(1.2, 0.10, 4000);
+    setTimeout(() => tone(2200, 0.12, 'sine', 0.16), 1400);
+  }
+  function sfxEngine() { tone(70, 0.4, 'sawtooth', 0.10); }
+
+  // ---- Razor Crest visual ----
+  function razorCrestSvg(view, hullPct) {
+    const tint = hullPct < 33 ? '#a04848' : (hullPct < 66 ? '#a08848' : '#5b6168');
+    if (view === 'cockpit') {
+      // First-person view from inside cockpit
+      return `
+        <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="visor" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stop-color="rgba(80,160,200,0.20)"/>
+              <stop offset="1" stop-color="rgba(20,40,60,0.50)"/>
+            </linearGradient>
+          </defs>
+          <!-- canopy frame (foreground) -->
+          <path d="M 0 0 L 0 80 Q 40 60 100 50 L 250 40 Q 350 36 450 40 L 500 50 Q 560 60 600 80 L 600 0 Z" fill="#1a1d24" />
+          <!-- canopy glass (transparent center) -->
+          <path d="M 60 80 Q 150 60 300 55 Q 450 60 540 80 L 540 220 L 60 220 Z" fill="url(#visor)" />
+          <!-- left HUD elements -->
+          <rect x="20" y="100" width="50" height="6" fill="rgba(0,217,255,0.5)"/>
+          <rect x="20" y="112" width="32" height="4" fill="rgba(0,217,255,0.3)"/>
+          <text x="22" y="135" fill="rgba(0,217,255,0.7)" font-size="8" font-family="system-ui" font-weight="700">HYPERDRIVE ${Math.round(hullPct)}%</text>
+          <!-- right HUD elements -->
+          <circle cx="560" cy="120" r="14" fill="none" stroke="rgba(0,217,255,0.6)" stroke-width="1.5"/>
+          <line x1="546" y1="120" x2="574" y2="120" stroke="rgba(0,217,255,0.4)" stroke-width="0.5"/>
+          <line x1="560" y1="106" x2="560" y2="134" stroke="rgba(0,217,255,0.4)" stroke-width="0.5"/>
+          <text x="540" y="155" fill="rgba(0,217,255,0.7)" font-size="8" font-family="system-ui" font-weight="700">NAVCOM</text>
+          <!-- bottom dash with throttle -->
+          <rect x="0" y="180" width="600" height="40" fill="#0f1218"/>
+          <rect x="60" y="190" width="200" height="8" fill="#1a1d24" rx="2"/>
+          <rect x="60" y="190" width="${1.6 * hullPct}" height="8" fill="${tint}" rx="2"/>
+          <text x="60" y="212" fill="rgba(0,217,255,0.7)" font-size="8" font-family="system-ui" font-weight="700">HULL</text>
+          <!-- Mando silhouette (right side, helmet edge) -->
+          <ellipse cx="465" cy="195" rx="30" ry="22" fill="#3a3e44"/>
+          <ellipse cx="465" cy="183" rx="22" ry="18" fill="#5a626c"/>
+          <rect x="450" y="175" width="30" height="6" fill="#1a1d24"/>
+          <!-- Grogu silhouette (left, peeking) -->
+          <ellipse cx="135" cy="195" rx="14" ry="11" fill="#6b8a4a"/>
+          <ellipse cx="135" cy="186" rx="11" ry="10" fill="#7da05a"/>
+          <ellipse cx="120" cy="184" rx="6" ry="9" fill="#7da05a"/>
+          <ellipse cx="150" cy="184" rx="6" ry="9" fill="#7da05a"/>
+        </svg>
+      `;
+    }
+    // chase cam: ship from behind/above
+    return `
+      <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <radialGradient id="thrust" cx="0.5" cy="0.5">
+            <stop offset="0" stop-color="#ffaa55" stop-opacity="0.95"/>
+            <stop offset="0.5" stop-color="#ff6a1f" stop-opacity="0.7"/>
+            <stop offset="1" stop-color="#ff6a1f" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="canopy" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="rgba(80,150,200,0.7)"/>
+            <stop offset="1" stop-color="rgba(20,40,60,0.95)"/>
+          </linearGradient>
+        </defs>
+        <!-- thrust glows (back of ship) -->
+        <ellipse cx="200" cy="170" rx="40" ry="14" fill="url(#thrust)"/>
+        <ellipse cx="400" cy="170" rx="40" ry="14" fill="url(#thrust)"/>
+        <!-- engine pods -->
+        <ellipse cx="200" cy="155" rx="50" ry="22" fill="#3a3e44" stroke="#1a1d24" stroke-width="2"/>
+        <ellipse cx="400" cy="155" rx="50" ry="22" fill="#3a3e44" stroke="#1a1d24" stroke-width="2"/>
+        <ellipse cx="200" cy="155" rx="14" ry="6" fill="#0a0a0a"/>
+        <ellipse cx="400" cy="155" rx="14" ry="6" fill="#0a0a0a"/>
+        <!-- main body trapezoid (gunship grey, weathered) -->
+        <polygon points="180,150 420,150 380,90 220,90" fill="${tint}" stroke="#1a1d24" stroke-width="2"/>
+        <!-- weathering -->
+        <polygon points="220,148 240,140 260,148 250,150" fill="#3a3e44" opacity="0.5"/>
+        <polygon points="380,140 360,148 350,142 370,138" fill="#3a3e44" opacity="0.4"/>
+        <line x1="240" y1="120" x2="360" y2="120" stroke="#1a1d24" stroke-width="1" opacity="0.5"/>
+        <!-- canopy with silhouettes -->
+        <path d="M 250 100 L 350 100 L 340 80 L 260 80 Z" fill="url(#canopy)" stroke="#1a1d24" stroke-width="1.5"/>
+        <ellipse cx="287" cy="92" rx="9" ry="7" fill="#222" opacity="0.95"/> <!-- Mando helmet -->
+        <rect x="280" y="88" width="14" height="3" fill="#000" opacity="0.95"/>
+        <ellipse cx="313" cy="94" rx="6" ry="5" fill="#5a7a3a" opacity="0.95"/> <!-- Grogu -->
+        <ellipse cx="307" cy="93" rx="3" ry="5" fill="#5a7a3a" opacity="0.95"/>
+        <ellipse cx="319" cy="93" rx="3" ry="5" fill="#5a7a3a" opacity="0.95"/>
+        <!-- top fin -->
+        <polygon points="290,80 310,80 305,70 295,70" fill="#3a3e44"/>
+      </svg>
+    `;
+  }
+
+  // ---- Question generators ----
+
+  function genPlotQ(gridMax, quadrants) {
+    const lo = quadrants === 4 ? -gridMax : 0;
+    const hi = gridMax;
+    const x = ri(lo, hi);
+    const y = ri(lo, hi);
+    return {
+      type: 'plot',
+      gridMax, quadrants,
+      target: { x, y },
+      prompt: pick([
+        `Mando dictates: <em>"Plot the safe lane at <strong>(${x}, ${y})</strong>."</em>`,
+        `Grogu coos and points to the navicomputer. Plot waypoint <strong>(${x}, ${y})</strong>.`,
+        `Engineer: <em>"Lay in coordinates <strong>(${x}, ${y})</strong>, this is the way."</em>`,
+        `Hyperspace beacon at <strong>(${x}, ${y})</strong>. <strong>Plot it.</strong>`,
+      ]),
+    };
+  }
+
+  function genDistanceQ(gridMax) {
+    const horizontal = Math.random() < 0.5;
+    const x1 = ri(0, gridMax), y1 = ri(0, gridMax);
+    let x2 = x1, y2 = y1;
+    if (horizontal) {
+      do { x2 = ri(0, gridMax); } while (x2 === x1);
+    } else {
+      do { y2 = ri(0, gridMax); } while (y2 === y1);
+    }
+    const dist = horizontal ? Math.abs(x2 - x1) : Math.abs(y2 - y1);
+    const opts = new Set([dist]);
+    while (opts.size < 4) opts.add(Math.max(1, dist + ri(-3, 3)));
+    const arr = shuffle(Array.from(opts));
+    return {
+      type: 'mc',
+      gridMax, quadrants: 1,
+      markers: [{x: x1, y: y1, label: 'A', color: '#ff8000'}, {x: x2, y: y2, label: 'B', color: '#00d9ff'}],
+      prompt: `Mos Eisley landing pad A at <strong>(${x1}, ${y1})</strong>, bay B at <strong>(${x2}, ${y2})</strong>. <strong>Distance</strong> between them?`,
+      answers: arr.map(n => `${n} units`),
+      correctIdx: arr.indexOf(dist),
+    };
+  }
+
+  function genQuadrantQ(gridMax) {
+    const x = ri(-gridMax, gridMax) || ri(1, gridMax);
+    const y = ri(-gridMax, gridMax) || ri(1, gridMax);
+    let q;
+    if (x > 0 && y > 0) q = 'I';
+    else if (x < 0 && y > 0) q = 'II';
+    else if (x < 0 && y < 0) q = 'III';
+    else q = 'IV';
+    const opts = shuffle(['I', 'II', 'III', 'IV']);
+    return {
+      type: 'mc',
+      gridMax, quadrants: 4,
+      markers: [{x, y, label: '?', color: '#ff8000'}],
+      prompt: `Imperial probe detected at <strong>(${x}, ${y})</strong>. <strong>Which quadrant</strong>?`,
+      answers: opts.map(o => 'Quadrant ' + o),
+      correctIdx: opts.indexOf(q),
+    };
+  }
+
+  function genReflectQ(gridMax) {
+    const axis = pick(['x-axis', 'y-axis']);
+    const x = ri(1, gridMax) * (Math.random() < 0.5 ? -1 : 1);
+    const y = ri(1, gridMax) * (Math.random() < 0.5 ? -1 : 1);
+    const refX = axis === 'y-axis' ? -x : x;
+    const refY = axis === 'x-axis' ? -y : y;
+    const correct = `(${refX}, ${refY})`;
+    const opts = new Set([correct]);
+    opts.add(`(${-refX}, ${refY})`);
+    opts.add(`(${refX}, ${-refY})`);
+    opts.add(`(${x}, ${y})`);
+    const arr = shuffle(Array.from(opts).slice(0, 4));
+    while (arr.length < 4) arr.push(`(${ri(-gridMax, gridMax)}, ${ri(-gridMax, gridMax)})`);
+    return {
+      type: 'mc',
+      gridMax, quadrants: 4,
+      markers: [{x, y, label: '?', color: '#ff8000'}],
+      prompt: `Imperial sensor mirrors your jump <strong>(${x}, ${y})</strong> across the <strong>${axis}</strong>. Where does the false reading appear?`,
+      answers: arr,
+      correctIdx: arr.indexOf(correct),
+    };
+  }
+
+  function genTranslateQ(gridMax) {
+    const x = ri(-Math.floor(gridMax/2), Math.floor(gridMax/2));
+    const y = ri(-Math.floor(gridMax/2), Math.floor(gridMax/2));
+    const dx = ri(-3, 3) || 2;
+    const dy = ri(-3, 3) || -2;
+    const nx = x + dx, ny = y + dy;
+    const correct = `(${nx}, ${ny})`;
+    const opts = new Set([correct]);
+    opts.add(`(${x - dx}, ${y - dy})`);
+    opts.add(`(${x + dy}, ${y + dx})`);
+    opts.add(`(${nx + 1}, ${ny - 1})`);
+    const arr = shuffle(Array.from(opts).slice(0, 4));
+    while (arr.length < 4) arr.push(`(${ri(-gridMax, gridMax)}, ${ri(-gridMax, gridMax)})`);
+    return {
+      type: 'mc',
+      gridMax, quadrants: 4,
+      markers: [{x, y, label: 'Crest', color: '#ff8000'}],
+      prompt: `Razor Crest at <strong>(${x}, ${y})</strong>. Mando burns thrusters: <strong>${dx >= 0 ? '+' : ''}${dx}</strong> in x, <strong>${dy >= 0 ? '+' : ''}${dy}</strong> in y. <strong>New position</strong>?`,
+      answers: arr,
+      correctIdx: arr.indexOf(correct),
+    };
+  }
+
+  function genQuestion(level) {
+    const m = level.mix;
+    const g = level.gridMax;
+    const q = level.quadrants;
+    if (m === 'plot') return genPlotQ(g, q);
+    if (m === 'plot-distance') return Math.random() < 0.5 ? genPlotQ(g, 1) : genDistanceQ(g);
+    if (m === 'reflect-translate') {
+      const r = Math.random();
+      if (r < 0.5) return genReflectQ(g);
+      return genTranslateQ(g);
+    }
+    if (m === 'mixed') {
+      const fns = [() => genPlotQ(g, q), () => genDistanceQ(g), () => genQuadrantQ(g), () => genReflectQ(g), () => genTranslateQ(g)];
+      return pick(fns)();
+    }
+    return genPlotQ(g, q);
+  }
+
+  // ---- Grid renderer ----
+
+  function renderGrid(qBlock, q, onPick) {
+    const gridMax = q.gridMax;
+    const fourQuad = q.quadrants === 4;
+    const lo = fourQuad ? -gridMax : 0;
+    const hi = gridMax;
+    const span = hi - lo + 1;
+    const padding = 12;
+    const view = 100;
+    const cellSize = (view - padding * 2) / span;
+    const xToPx = (x) => padding + (x - lo) * cellSize + cellSize / 2;
+    const yToPx = (y) => view - (padding + (y - lo) * cellSize + cellSize / 2);
+
+    let html = `<svg class="rc-plot-grid" viewBox="0 0 ${view} ${view}" preserveAspectRatio="xMidYMid meet">`;
+
+    // Grid cells
+    for (let yy = lo; yy <= hi; yy++) {
+      for (let xx = lo; xx <= hi; xx++) {
+        const cx = xToPx(xx) - cellSize / 2;
+        const cy = yToPx(yy) - cellSize / 2;
+        const isTarget = q.target && q.target.x === xx && q.target.y === yy;
+        html += `<rect class="rc-cell ${isTarget ? 'target' : ''}" data-x="${xx}" data-y="${yy}" x="${cx}" y="${cy}" width="${cellSize}" height="${cellSize}"/>`;
+      }
+    }
+
+    // Axes
+    if (fourQuad) {
+      html += `<line class="rc-axis-line" x1="${xToPx(lo) - cellSize/2}" y1="${yToPx(0)}" x2="${xToPx(hi) + cellSize/2}" y2="${yToPx(0)}" />`;
+      html += `<line class="rc-axis-line" x1="${xToPx(0)}" y1="${yToPx(lo) - cellSize/2}" x2="${xToPx(0)}" y2="${yToPx(hi) + cellSize/2}" />`;
+    } else {
+      html += `<line class="rc-axis-line" x1="${padding}" y1="${view - padding}" x2="${view - padding}" y2="${view - padding}" />`;
+      html += `<line class="rc-axis-line" x1="${padding}" y1="${padding}" x2="${padding}" y2="${view - padding}" />`;
+    }
+
+    // Tick labels
+    for (let xx = lo; xx <= hi; xx++) {
+      if (xx === 0 && fourQuad) continue;
+      html += `<text class="rc-axis" x="${xToPx(xx)}" y="${fourQuad ? yToPx(0) + 4 : view - padding + 4}" text-anchor="middle">${xx}</text>`;
+    }
+    for (let yy = lo; yy <= hi; yy++) {
+      if (yy === 0 && fourQuad) continue;
+      html += `<text class="rc-axis" x="${fourQuad ? xToPx(0) - 2 : padding - 2}" y="${yToPx(yy) + 1.5}" text-anchor="end">${yy}</text>`;
+    }
+
+    // Markers (for MC questions)
+    if (q.markers) {
+      for (const mk of q.markers) {
+        html += `<circle cx="${xToPx(mk.x)}" cy="${yToPx(mk.y)}" r="2.2" fill="${mk.color}" opacity="0.9"/>`;
+        html += `<circle cx="${xToPx(mk.x)}" cy="${yToPx(mk.y)}" r="1" fill="#fff"/>`;
+        html += `<text x="${xToPx(mk.x)}" y="${yToPx(mk.y) - 3}" fill="#fff" font-size="3.5" text-anchor="middle" font-weight="700">${mk.label}</text>`;
+      }
+    }
+
+    html += '</svg>';
+    qBlock.innerHTML = html;
+
+    if (q.type === 'plot' && onPick) {
+      qBlock.querySelectorAll('.rc-cell').forEach(c => {
+        c.addEventListener('click', () => onPick(parseInt(c.dataset.x, 10), parseInt(c.dataset.y, 10)));
+      });
+    }
+  }
+
+  // ---- Module main ----
+
+  InlineModules['razor-crest'] = {
+    init(host, levelIndex, callbacks) {
+      const lvl = RC_LEVELS[levelIndex];
+      const totalQ = RC_QPL[levelIndex];
+
+      const state = {
+        phase: 'pick',
+        view: 'chase',
+        questionNum: 0,
+        score: 0,
+        streak: 0,
+        hullPct: 100,
+        livesLost: 0,
+        questions: [],
+      };
+
+      let timeouts = [];
+      const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
+
+      host.innerHTML = '<div class="mod-rc"></div>';
+      const root = host.querySelector('.mod-rc');
+
+      function renderPick() {
+        state.phase = 'pick';
+        root.innerHTML = `
+          <div class="rc-pick">
+            <h2>Razor Crest Navigator</h2>
+            <p>${lvl.name} &middot; ${totalQ} jumps to the destination</p>
+            <div class="lvl-badge">LEVEL ${lvl.id} &middot; ${lvl.quadrants === 4 ? 'ALL QUADRANTS' : 'QUADRANT I ONLY'}</div>
+            <div class="rc-view-grid">
+              <div class="rc-view selected" data-view="chase">
+                <div>${razorCrestSvg('chase', 100)}</div>
+                <div class="rc-view-name">CHASE CAM</div>
+                <div class="rc-view-desc">Behind and above the Crest. Mando and Grogu visible through the canopy.</div>
+              </div>
+              <div class="rc-view" data-view="cockpit">
+                <div>${razorCrestSvg('cockpit', 100)}</div>
+                <div class="rc-view-name">COCKPIT POV</div>
+                <div class="rc-view-desc">Look out from the pilot's seat. HUD overlay across the canopy.</div>
+              </div>
+            </div>
+            <div class="rc-pick-actions">
+              <button class="btn btn-secondary" id="rc-back">&larr; Levels</button>
+              <button class="rc-go" id="rc-go">JUMP &rarr;</button>
+            </div>
+          </div>
+        `;
+        root.querySelectorAll('.rc-view').forEach(v => {
+          v.addEventListener('click', () => {
+            root.querySelectorAll('.rc-view').forEach(x => x.classList.remove('selected'));
+            v.classList.add('selected');
+            state.view = v.dataset.view;
+          });
+        });
+        root.querySelector('#rc-back').addEventListener('click', () => callbacks.onExit());
+        root.querySelector('#rc-go').addEventListener('click', () => startFlight());
+      }
+
+      function startFlight() {
+        state.questionNum = 0;
+        state.score = 0;
+        state.streak = 0;
+        state.hullPct = 100;
+        state.livesLost = 0;
+        state.questions = [];
+        for (let i = 0; i < totalQ; i++) state.questions.push(genQuestion(lvl));
+        state.phase = 'flying';
+        sfxHyperspace();
+        renderFlight();
+      }
+
+      function renderFlight() {
+        const livesHtml = [0,1,2].map(i => `<span class="rc-pip ${i < state.livesLost ? 'lost' : ''}"></span>`).join('');
+        const hullClass = state.hullPct > 66 ? 'good' : (state.hullPct > 33 ? 'warn' : 'bad');
+        root.innerHTML = `
+          <div class="rc-flight">
+            <div class="rc-ship">${razorCrestSvg(state.view, state.hullPct)}<div class="rc-hyperflash" id="rc-flash"></div></div>
+            <div class="rc-hud">
+              <div class="rc-stat"><span class="rc-stat-label">Sector</span><span class="rc-stat-value">${lvl.name}</span></div>
+              <div class="rc-stat"><span class="rc-stat-label">Jump</span><span class="rc-stat-value">${state.questionNum + 1} / ${totalQ}</span></div>
+              <div class="rc-stat"><span class="rc-stat-label">Streak</span><span class="rc-stat-value">${state.streak}</span></div>
+              <div class="rc-stat"><span class="rc-stat-label">Hull</span><span class="rc-stat-value ${hullClass}">${state.hullPct}%</span></div>
+              <div class="rc-stat"><span class="rc-stat-label">Score</span><span class="rc-stat-value">${state.score}</span></div>
+            </div>
+            <div class="rc-question" id="rc-question"></div>
+            <div class="rc-foot">
+              <div class="rc-radio">${state.view === 'cockpit' ? 'HUD overlay active' : 'External camera'} &middot; <em>"This is the Way."</em></div>
+              <div class="rc-hull-pips">Lives: ${livesHtml}</div>
+            </div>
+          </div>
+        `;
+        showQuestion();
+      }
+
+      function showQuestion() {
+        const qEl = root.querySelector('#rc-question');
+        if (!qEl) return;
+        const q = state.questions[state.questionNum];
+        if (!q) { endLevel(); return; }
+        qEl.innerHTML = `
+          <div class="rc-q-meta">
+            <span>JUMP ${state.questionNum + 1} / ${totalQ}</span>
+            <span>${q.type === 'plot' ? 'PLOT THE COORDINATE' : 'NAVCOM QUERY'}</span>
+          </div>
+          <div class="rc-q-prompt">${q.prompt}</div>
+          <div class="rc-grid-wrap">
+            <div id="rc-gridhost"></div>
+            ${q.type === 'mc' ? `<div class="rc-answers" id="rc-answers"></div>` : ''}
+          </div>
+        `;
+        const gridHost = qEl.querySelector('#rc-gridhost');
+        renderGrid(gridHost, q, q.type === 'plot' ? (x, y) => answerPlot(x, y, q) : null);
+
+        if (q.type === 'mc') {
+          const ansHost = qEl.querySelector('#rc-answers');
+          ansHost.innerHTML = q.answers.map((a, i) => `<button class="rc-ans" data-idx="${i}">${a}</button>`).join('');
+          ansHost.querySelectorAll('.rc-ans').forEach(b => {
+            b.addEventListener('click', () => answerMC(parseInt(b.dataset.idx, 10), ansHost.querySelectorAll('.rc-ans'), q));
+          });
+        }
+      }
+
+      function answerPlot(x, y, q) {
+        if (state.phase !== 'flying') return;
+        state.phase = 'between';
+        const correct = q.target.x === x && q.target.y === y;
+        const cells = root.querySelectorAll('.rc-cell');
+        cells.forEach(c => c.style.pointerEvents = 'none');
+        const target = root.querySelector(`.rc-cell[data-x="${q.target.x}"][data-y="${q.target.y}"]`);
+        if (target) target.classList.add('target', 'show');
+        const picked = root.querySelector(`.rc-cell[data-x="${x}"][data-y="${y}"]`);
+        if (picked) picked.classList.add(correct ? 'picked' : 'wrong');
+        afterAnswer(correct);
+      }
+
+      function answerMC(idx, buttons, q) {
+        if (state.phase !== 'flying') return;
+        state.phase = 'between';
+        const correct = idx === q.correctIdx;
+        buttons.forEach(b => b.disabled = true);
+        buttons[q.correctIdx].classList.add('correct');
+        if (!correct) buttons[idx].classList.add('wrong');
+        afterAnswer(correct);
+      }
+
+      function afterAnswer(correct) {
+        if (correct) {
+          state.streak = Math.min(99, state.streak + 1);
+          state.score += 100 + (state.streak >= 3 ? 80 : 0);
+          sfxCorrect();
+          // hyperspace flash
+          const flash = root.querySelector('#rc-flash');
+          if (flash) { flash.classList.add('on'); later(500, () => flash.classList.remove('on')); }
+          if (state.streak === 3) sfxHyperspace();
+        } else {
+          state.streak = 0;
+          state.livesLost = Math.min(3, state.livesLost + 1);
+          state.hullPct = Math.max(0, state.hullPct - 33);
+          sfxWrong();
+        }
+        later(1400, () => {
+          state.questionNum++;
+          if (state.livesLost >= 3 || state.questionNum >= totalQ) {
+            endLevel();
+          } else {
+            state.phase = 'flying';
+            renderFlight();
+          }
+        });
+      }
+
+      function endLevel() {
+        state.phase = 'end';
+        const dnf = state.livesLost >= 3;
+        const correctCount = totalQ - state.livesLost - (totalQ - state.questionNum);
+        let stars = 0;
+        if (!dnf) {
+          const pct = state.questionNum / totalQ;
+          if (pct >= 1 && state.livesLost === 0) stars = 3;
+          else if (pct >= 1 && state.livesLost <= 1) stars = 2;
+          else if (pct >= 1) stars = 1;
+        }
+        callbacks.onComplete(state.score, stars);
+      }
+
       renderPick();
 
       return function cleanup() {
