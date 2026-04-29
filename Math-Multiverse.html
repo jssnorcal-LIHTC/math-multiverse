@@ -3412,19 +3412,120 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     };
   }
 
+  function genMixedAdd(maxDen) {
+    // Mixed-number addition with like denominators
+    const d = ri(2, Math.min(maxDen, 8));
+    const w1 = ri(1, 4), w2 = ri(1, 4);
+    const n1 = ri(1, d - 1), n2 = ri(1, d - 1);
+    const totalNum = (w1 * d + n1) + (w2 * d + n2);
+    const correctStr = fracToString(totalNum, d);
+    return {
+      text: pick([
+        `Sur Ronster rode ${w1} ${n1}/${d} miles, then ${w2} ${n2}/${d} miles. Total miles?`,
+        `Stage took ${w1} ${n1}/${d} hours plus a ${w2} ${n2}/${d} hour transfer. Total time?`,
+        `Climbed ${w1} ${n1}/${d} km, descended ${w2} ${n2}/${d} km. Total distance moved?`,
+        `Filled ${w1} ${n1}/${d} bottles before the run, ${w2} ${n2}/${d} after. Total bottles?`,
+        `Pre-stage prep ${w1} ${n1}/${d} hours, post-stage debrief ${w2} ${n2}/${d} hours. Combined?`,
+      ]),
+      equation: `${w1} ${n1}/${d} <span class="op">+</span> ${w2} ${n2}/${d} <span class="eq">=</span> ?`,
+      answer: { num: totalNum, den: d },
+      visualize: [],
+      explain: `Add wholes (${w1}+${w2}=${w1+w2}) and add fractions (${n1}/${d}+${n2}/${d}=${n1+n2}/${d}). Total: ${w1+w2} + ${n1+n2}/${d} = <strong>${correctStr}</strong>.`,
+    };
+  }
+
+  function genMixedSub(maxDen) {
+    // Mixed-number subtraction with like denominators
+    const d = ri(3, Math.min(maxDen, 8));
+    let w1 = ri(2, 5), w2 = ri(1, w1 - 1);
+    let n1 = ri(1, d - 1), n2 = ri(1, d - 1);
+    if (n1 < n2) { w1 += 1; const tmp = n1; n1 = n2 + tmp; }
+    const totalNum = (w1 * d + n1) - (w2 * d + n2);
+    const correctStr = fracToString(totalNum, d);
+    return {
+      text: pick([
+        `Crew had ${w1} ${n1}/${d} pizzas. Ate ${w2} ${n2}/${d}. Pizzas left?`,
+        `Trail is ${w1} ${n1}/${d} km. Sur Ronster covered ${w2} ${n2}/${d} km. Distance remaining?`,
+        `Tank held ${w1} ${n1}/${d} liters, used ${w2} ${n2}/${d}. Fuel left?`,
+        `${w1} ${n1}/${d} hours of practice. Used ${w2} ${n2}/${d} hours. Time left?`,
+      ]),
+      equation: `${w1} ${n1}/${d} <span class="op">−</span> ${w2} ${n2}/${d} <span class="eq">=</span> ?`,
+      answer: { num: totalNum, den: d },
+      visualize: [],
+      explain: `Convert to improper or subtract wholes then fractions. ${w1} ${n1}/${d} − ${w2} ${n2}/${d} = <strong>${correctStr}</strong>.`,
+    };
+  }
+
+  function genEquiv(maxDen) {
+    // Find an equivalent fraction with a target denominator. CCSS 5.NF.A.1
+    const dBase = ri(2, Math.min(maxDen, 6));
+    const nBase = ri(1, dBase - 1);
+    const k = pick([2, 3, 4]);
+    const dNew = dBase * k;
+    const nNew = nBase * k;
+    const wrong1 = nBase + k;
+    const wrong2 = nBase * k + 1;
+    const wrong3 = nBase + 1;
+    const opts = shuffle([
+      `${nNew}/${dNew}`, `${wrong1}/${dNew}`, `${wrong2}/${dNew}`, `${wrong3}/${dNew}`,
+    ]);
+    return {
+      text: pick([
+        `Sur Ronster's slice is ${nBase}/${dBase} of a pizza. Cut into ${dNew}-piece form, how many pieces?`,
+        `Pit shop ranks fractions by denominator ${dNew}. ${nBase}/${dBase} = ?`,
+        `Crew mixes fuel ${nBase}/${dBase} oil. Same ratio in ${dNew}ths?`,
+        `${nBase}/${dBase} of a course. Which is equivalent in /${dNew}?`,
+      ]),
+      equation: `${nBase}/${dBase} <span class="op">=</span> ?/${dNew}`,
+      answer: { num: nNew, den: dNew },
+      visualize: [{ n: nBase, d: dBase, color: '#ee1d52' }],
+      _customChoices: opts.map(t => ({ text: t, correct: t === `${nNew}/${dNew}` })),
+      explain: `Multiply top and bottom by ${k}: ${nBase}×${k} = ${nNew}, ${dBase}×${k} = ${dNew}. Equivalent: <strong>${nNew}/${dNew}</strong>.`,
+    };
+  }
+
+  function genSimplify(maxDen) {
+    // Simplify a fraction to lowest terms. CCSS 5.NF.A.1
+    const dBase = ri(2, 5);
+    const nBase = ri(1, dBase - 1);
+    if (gcd(nBase, dBase) !== 1) return genSimplify(maxDen);  // ensure already simplest
+    const k = pick([2, 3, 4]);
+    const num = nBase * k, den = dBase * k;
+    const correct = `${nBase}/${dBase}`;
+    const wrong1 = `${nBase}/${den}`;
+    const wrong2 = `${num}/${dBase}`;
+    const wrong3 = k > 2 ? `${nBase * 2}/${dBase * 2}` : `${nBase * 3}/${dBase * 3}`;
+    const opts = shuffle([correct, wrong1, wrong2, wrong3]);
+    return {
+      text: pick([
+        `Mechanic logs ${num}/${den} kg of grease used. Reduce to lowest terms.`,
+        `Sur Ronster covers ${num}/${den} of the trail. Simplest form?`,
+        `Pit log: ${num}/${den} bottle drained. Lowest-terms answer?`,
+        `${num}/${den} of the points scored. Simplify.`,
+      ]),
+      equation: `${num}/${den} <span class="op">=</span> ? (lowest terms)`,
+      answer: { num: nBase, den: dBase },
+      visualize: [{ n: nBase, d: dBase, color: '#ee1d52' }],
+      _customChoices: opts.map(t => ({ text: t, correct: t === correct })),
+      explain: `gcd(${num}, ${den}) = ${k}. Divide both by ${k}: ${num}÷${k} = ${nBase}, ${den}÷${k} = ${dBase}. Simplest: <strong>${correct}</strong>.`,
+    };
+  }
+
   function genForLevel(level) {
     const md = level.maxDen;
-    if (level.gen === 'like-denom')   return pick([genAddLike, genSubLike])(md);
-    if (level.gen === 'unlike-easy')  return pick([() => genAdd(md, true), () => genSub(md, true), () => genMultWhole(md), () => genCompareFrac(md)])();
-    if (level.gen === 'unlike-mixed') return pick([() => genAdd(md, false), () => genSub(md, false), () => genMultWhole(md), () => genCompareFrac(md)])();
-    if (level.gen === 'multiply')     return pick([() => genMultFrac(md), () => genMultWhole(md), () => genFracOfWhole(md)])();
-    if (level.gen === 'divide')       return pick([() => genDivWholeByUnit(md), () => genDivUnitByWhole(md), () => genMultFrac(md)])();
+    if (level.gen === 'like-denom')   return pick([genAddLike, genSubLike, genMixedAdd])(md);
+    if (level.gen === 'unlike-easy')  return pick([() => genAdd(md, true), () => genSub(md, true), () => genMultWhole(md), () => genCompareFrac(md), () => genEquiv(md)])();
+    if (level.gen === 'unlike-mixed') return pick([() => genAdd(md, false), () => genSub(md, false), () => genMultWhole(md), () => genCompareFrac(md), () => genEquiv(md), () => genSimplify(md)])();
+    if (level.gen === 'multiply')     return pick([() => genMultFrac(md), () => genMultWhole(md), () => genFracOfWhole(md), () => genMixedAdd(md)])();
+    if (level.gen === 'divide')       return pick([() => genDivWholeByUnit(md), () => genDivUnitByWhole(md), () => genMultFrac(md), () => genSimplify(md)])();
     if (level.gen === 'mixed-all') {
       const all = [
         () => genAdd(md, false), () => genSub(md, false),
         () => genMultFrac(md), () => genMultWhole(md),
         () => genDivWholeByUnit(md), () => genDivUnitByWhole(md),
         () => genCompareFrac(md), () => genFracOfWhole(md),
+        () => genMixedAdd(md), () => genMixedSub(md),
+        () => genEquiv(md), () => genSimplify(md),
       ];
       return pick(all)();
     }
@@ -4150,13 +4251,68 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     return pick(variants)();
   }
 
+  function genWriteWord() {
+    // CCSS 5.NBT.A.3.a — read decimals in word form
+    const NUM = ['zero','one','two','three','four','five','six','seven','eight','nine'];
+    const PLACES = [
+      { name: 'tenths',     digits: 1, divisor: 10 },
+      { name: 'hundredths', digits: 2, divisor: 100 },
+      { name: 'thousandths',digits: 3, divisor: 1000 },
+    ];
+    const tgt = pick(PLACES);
+    const whole = ri(0, 9);
+    const frac = ri(1, tgt.divisor - 1);
+    const fracStr = frac.toString().padStart(tgt.digits, '0');
+    const dec = whole + frac / tgt.divisor;
+    const decStr = `${whole}.${fracStr}`;
+    const correct = (whole > 0 ? `${NUM[whole]} and ` : '') + `${frac} ${tgt.name}`;
+    const wrong1 = `${frac} ${pick(PLACES.filter(p=>p!==tgt)).name}`;
+    const wrong2 = `${frac+1} ${tgt.name}`;
+    const wrong3 = (whole > 0 ? `${NUM[whole]} point ` : '') + `${frac}`;
+    const opts = shuffle([correct, wrong1, wrong2, wrong3]);
+    return {
+      prompt: pick([
+        `Crofty: <em>"Time of <strong>${decStr}</strong>. Read that out loud."</em>`,
+        `Engineer over radio: <em>"Sector ${decStr}. <strong>Word form</strong>?"</em>`,
+        `Race producer asks for <strong>${decStr}</strong> in <strong>words</strong>.`,
+        `Brundle: <em>"<strong>${decStr}</strong> on the board. Speak it correctly."</em>`,
+      ]),
+      answers: opts,
+      correctIdx: opts.indexOf(correct),
+      explain: `${decStr} = ${whole > 0 ? NUM[whole] + ' AND ' : ''}${frac} ${tgt.name}. The decimal point is read as "and"; the digits after it count down to ${tgt.name}.`,
+    };
+  }
+
+  function genExpand() {
+    // CCSS 5.NBT.A.3.a — expanded form
+    const whole = ri(1, 9);
+    const t = ri(1, 9), h = ri(1, 9), th = ri(1, 9);
+    const decStr = `${whole}.${t}${h}${th}`;
+    const correct = `${whole} + ${t / 10} + ${h / 100} + ${th / 1000}`;
+    const wrong1 = `${whole} + ${t} + ${h} + ${th}`;
+    const wrong2 = `${whole} + 0.${t} + 0.${h} + 0.${th}`;
+    const wrong3 = `${whole}${t}${h}${th}`;
+    const opts = shuffle([correct, wrong1, wrong2, wrong3]);
+    return {
+      prompt: pick([
+        `Telemetry: <strong>${decStr}</strong>. Pick the correct <strong>expanded form</strong>.`,
+        `Engineer's sheet shows <strong>${decStr}</strong>. Which row breaks it down by place value?`,
+        `Pirelli telemetry display: <strong>${decStr}</strong>. <strong>Expanded form</strong>?`,
+        `Live timing reads <strong>${decStr}</strong>. Which expansion matches?`,
+      ]),
+      answers: opts,
+      correctIdx: opts.indexOf(correct),
+      explain: `Each digit's value is the digit × its place: ${whole} (ones) + ${t}/10 (tenths) + ${h}/100 (hundredths) + ${th}/1000 (thousandths) = <strong>${correct}</strong>.`,
+    };
+  }
+
   function genMixed() {
-    const fns = [genPlaceValue, genCompareOrder, genAddSub, genMultiply, genDivide, genRound, genPowerOfTen];
+    const fns = [genPlaceValue, genCompareOrder, genAddSub, genMultiply, genDivide, genRound, genPowerOfTen, genWriteWord, genExpand];
     return pick(fns)();
   }
 
   const GEN_BY_TYPE = {
-    'place-value':  () => Math.random() < 0.6 ? genPlaceValue() : genPowerOfTen(),
+    'place-value':  () => { const r = Math.random(); return r < 0.4 ? genPlaceValue() : (r < 0.7 ? genWriteWord() : genExpand()); },
     'compare-order': () => Math.random() < 0.7 ? genCompareOrder() : genRound(),
     'add-sub':      genAddSub,
     'multiply':     () => Math.random() < 0.7 ? genMultiply() : genPowerOfTen(),
@@ -4989,25 +5145,81 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     };
   }
 
+  function genIdentifyQ(gridMax, quadrants) {
+    // Reverse: marker is shown on the grid, name its ordered pair
+    const lo = quadrants === 4 ? -gridMax : 0;
+    const hi = gridMax;
+    const x = ri(lo, hi);
+    const y = ri(lo, hi);
+    const correct = `(${x}, ${y})`;
+    const opts = new Set([correct, `(${y}, ${x})`, `(${x + 1}, ${y})`, `(${x}, ${y + 1})`]);
+    while (opts.size < 4) opts.add(`(${ri(lo, hi)}, ${ri(lo, hi)})`);
+    const arr = shuffle(Array.from(opts).slice(0, 4));
+    return {
+      type: 'mc',
+      gridMax, quadrants,
+      markers: [{ x, y, label: 'X', color: '#27f4d2' }],
+      prompt: pick([
+        `Mando reads the marker on the grid. <strong>What ordered pair</strong> is the X at?`,
+        `Grogu points to the navicomp marker. <strong>Coordinates</strong>?`,
+        `Sensor flags a target. Read its <strong>(x, y)</strong>.`,
+        `IG-11 marks a contact on the grid. <strong>Identify the coordinates</strong>.`,
+      ]),
+      answers: arr,
+      correctIdx: arr.indexOf(correct),
+      explain: `Read the x value first (horizontal): ${x}. Then read y (vertical): ${y}. Coordinates are <strong>(${x}, ${y})</strong> -- always (x, y).`,
+    };
+  }
+
+  function genRealWorldQ(gridMax) {
+    // Real-world data interpretation: hyperspace fuel over time, etc.
+    const t1 = ri(0, 3), v1 = ri(2, gridMax - 2);
+    const slope = pick([1, 2]);
+    const t2 = t1 + 2;
+    const v2 = v1 + slope * 2;
+    const askT = pick([t1 + 1, t1 + 3]);
+    const askV = v1 + slope * (askT - t1);
+    if (askV < 0 || askV > gridMax) return genRealWorldQ(gridMax);
+    const correct = `${askV}`;
+    const opts = new Set([correct, `${askV + 1}`, `${askV - 1}`, `${askV * 2}`]);
+    while (opts.size < 4) opts.add(`${ri(1, gridMax)}`);
+    const arr = shuffle(Array.from(opts).slice(0, 4));
+    return {
+      type: 'mc',
+      gridMax, quadrants: 1,
+      markers: [{ x: t1, y: v1, label: 'A', color: '#ff8000' }, { x: t2, y: v2, label: 'B', color: '#27f4d2' }],
+      prompt: pick([
+        `Hyperdrive temp at t=${t1}h is ${v1}°. At t=${t2}h is ${v2}°. Reading at <strong>t=${askT}h</strong>?`,
+        `Fuel cell graph: at minute ${t1}, charge ${v1}; minute ${t2}, charge ${v2}. <strong>Charge at minute ${askT}</strong>?`,
+        `Mando logs deflector strength: ${v1} at t=${t1}, ${v2} at t=${t2}. Strength at <strong>t=${askT}</strong>?`,
+      ]),
+      answers: arr.map(n => `${n} units`),
+      correctIdx: arr.indexOf(correct),
+      explain: `From (${t1}, ${v1}) to (${t2}, ${v2}), value rises by ${slope} per t. At t=${askT}: ${v1} + ${slope} × ${askT - t1} = <strong>${askV}</strong>.`,
+    };
+  }
+
   function genQuestion(level) {
     const m = level.mix;
     const g = level.gridMax;
     const q = level.quadrants;
-    if (m === 'plot') return genPlotQ(g, q);
+    if (m === 'plot') return Math.random() < 0.7 ? genPlotQ(g, q) : genIdentifyQ(g, q);
     if (m === 'plot-distance') {
       const r = Math.random();
-      if (r < 0.4) return genPlotQ(g, 1);
-      if (r < 0.75) return genDistanceQ(g);
+      if (r < 0.3) return genPlotQ(g, 1);
+      if (r < 0.55) return genIdentifyQ(g, 1);
+      if (r < 0.8) return genDistanceQ(g);
       return genShapeQ(g);
     }
     if (m === 'reflect-translate') {
       const r = Math.random();
-      if (r < 0.45) return genReflectQ(g);
-      if (r < 0.8) return genTranslateQ(g);
+      if (r < 0.40) return genReflectQ(g);
+      if (r < 0.70) return genTranslateQ(g);
+      if (r < 0.85) return genRealWorldQ(g);
       return genShapeQ(g);
     }
     if (m === 'mixed') {
-      const fns = [() => genPlotQ(g, q), () => genDistanceQ(g), () => genQuadrantQ(g), () => genReflectQ(g), () => genTranslateQ(g), () => genShapeQ(g)];
+      const fns = [() => genPlotQ(g, q), () => genDistanceQ(g), () => genQuadrantQ(g), () => genReflectQ(g), () => genTranslateQ(g), () => genShapeQ(g), () => genIdentifyQ(g, q), () => genRealWorldQ(g)];
       return pick(fns)();
     }
     return genPlotQ(g, q);
@@ -5614,13 +5826,47 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     };
   }
 
+  function genHollow(builderId) {
+    // CCSS 5.MD.C.5.c — additive volume: subtract an interior void
+    const L = ri(4, 7), W = ri(4, 6), H = ri(3, 5);
+    const il = ri(2, L - 2), iw = ri(2, W - 2), ih = ri(1, H - 1);
+    const outer = L * W * H;
+    const inner = il * iw * ih;
+    const v = outer - inner;
+    const opts = ensureFour(new Set([v]), () => Math.max(1, v + ri(-15, 15)));
+    shuffle(opts);
+    return {
+      prompt: quoteFor(builderId, `Solid build is <strong>${L}×${W}×${H}</strong>. A hollow chamber inside is <strong>${il}×${iw}×${ih}</strong>. <strong>Brick volume</strong> (solid minus hollow)?`),
+      answers: opts.map(o => o + ' studs³'),
+      correctIdx: opts.indexOf(v),
+      explain: `Outer volume: ${L}×${W}×${H} = ${outer}. Hollow void: ${il}×${iw}×${ih} = ${inner}. Subtract: ${outer} − ${inner} = <strong>${v} studs³</strong>.`,
+    };
+  }
+
+  function genScale(builderId) {
+    // CCSS 5.MD.C — what happens to volume when one dimension doubles
+    const l = ri(2, 5), w = ri(2, 4), h = ri(2, 4);
+    const v1 = l * w * h;
+    const factor = pick([2, 3]);
+    const dim = pick(['length', 'width', 'height']);
+    const v2 = v1 * factor;
+    const opts = ensureFour(new Set([v2]), () => Math.max(1, v2 + ri(-12, 12)));
+    shuffle(opts);
+    return {
+      prompt: quoteFor(builderId, `Build A is <strong>${l}×${w}×${h}</strong>. Build B has the same shape but the <strong>${dim}</strong> is <strong>${factor}× larger</strong>. <strong>Volume of B</strong>?`),
+      answers: opts.map(o => o + ' studs³'),
+      correctIdx: opts.indexOf(v2),
+      explain: `Volume of A = ${l}×${w}×${h} = ${v1}. Multiplying one dimension by ${factor} multiplies volume by ${factor}. ${v1} × ${factor} = <strong>${v2} studs³</strong>.`,
+    };
+  }
+
   function genLwhBhMix(builderId) {
-    const fns = [genLwh, genBaseHeight, genUnitCubeCount];
+    const fns = [genLwh, genBaseHeight, genUnitCubeCount, genHollow];
     return pick(fns)(builderId);
   }
 
   function genMbMixed(builderId) {
-    return pick([genLwh, genBaseHeight, genComposite, genMissingDim, genUnitCubeCount, genCompareVol])(builderId);
+    return pick([genLwh, genBaseHeight, genComposite, genMissingDim, genUnitCubeCount, genCompareVol, genHollow, genScale])(builderId);
   }
 
   const MB_GEN = {
@@ -7125,17 +7371,83 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     };
   }
 
+  function genCompareExpr() {
+    // CCSS 5.OA.A.2 — interpret expressions without evaluating exhaustively
+    const a = ri(3, 9), b = ri(2, 7), c = ri(2, 6);
+    const variants = [
+      () => {
+        const left = `${a} × (${b} + ${c})`;
+        const right = `${a} × ${b} + ${a} × ${c}`;
+        return {
+          left, right,
+          leftVal: a * (b + c), rightVal: a * b + a * c,
+          tag: 'distributive — both equal',
+        };
+      },
+      () => {
+        const left = `(${a} + ${b}) × ${c}`;
+        const right = `${a} + ${b} × ${c}`;
+        return {
+          left, right,
+          leftVal: (a + b) * c, rightVal: a + b * c,
+        };
+      },
+      () => {
+        const left = `${a} × (${b} + ${c})`;
+        const right = `${a} × (${b} - ${c % 4 === 0 ? c - 1 : c})`;
+        const c2 = c % 4 === 0 ? c - 1 : c;
+        return {
+          left, right,
+          leftVal: a * (b + c), rightVal: a * (b - c2),
+        };
+      },
+    ];
+    const v = pick(variants)();
+    let correct;
+    if (v.leftVal > v.rightVal) correct = `${v.left}`;
+    else if (v.rightVal > v.leftVal) correct = `${v.right}`;
+    else correct = 'They are equal';
+    const opts = shuffle([v.left, v.right, 'They are equal', 'Cannot tell without evaluating']);
+    return {
+      prompt: pick([
+        `Pooh: <em>"<strong>${v.left}</strong> versus <strong>${v.right}</strong>. Which is bigger?"</em>`,
+        `Eeyore stares at <strong>${v.left}</strong> and <strong>${v.right}</strong>. Which expression has the larger value?`,
+        `Compare without computing the whole thing if you can: <strong>${v.left}</strong> vs <strong>${v.right}</strong>.`,
+      ]),
+      answers: opts,
+      correctIdx: opts.indexOf(correct),
+      explain: `${v.left} = ${v.leftVal}. ${v.right} = ${v.rightVal}. ${v.leftVal === v.rightVal ? 'Both equal — distributive property.' : `Bigger: <strong>${correct}</strong>.`}`,
+    };
+  }
+
+  function genCorrespondingTerm() {
+    // CCSS 5.OA.B.3 — generate two patterns and find corresponding terms
+    const startA = ri(0, 3), stepA = pick([2, 3, 5]);
+    const startB = ri(0, 3), stepB = stepA * 2;
+    const seqA = [0,1,2,3,4].map(i => startA + stepA * i);
+    const seqB = [0,1,2,3,4].map(i => startB + stepB * i);
+    const askIdx = ri(2, 4);
+    const correct = `${seqB[askIdx]}`;
+    const opts = shuffle([correct, `${seqB[askIdx] + 1}`, `${seqA[askIdx] * 2}`, `${seqB[askIdx] - 2}`]);
+    return {
+      prompt: `Roo's pattern: <strong>${seqA.slice(0,4).join(', ')}, ...</strong> (start ${startA}, add ${stepA}). Tigger's pattern: <strong>${seqB.slice(0,4).join(', ')}, ...</strong> (start ${startB}, add ${stepB}). When Roo reaches term ${askIdx + 1} (= ${seqA[askIdx]}), what is Tigger's term ${askIdx + 1}?`,
+      answers: opts,
+      correctIdx: opts.indexOf(correct),
+      explain: `Roo's term ${askIdx + 1} = ${startA} + ${stepA} × ${askIdx} = ${seqA[askIdx]}. Tigger's term ${askIdx + 1} = ${startB} + ${stepB} × ${askIdx} = <strong>${seqB[askIdx]}</strong>. Notice Tigger's pattern grows ${stepB / stepA}× as fast.`,
+    };
+  }
+
   function genAllMix() {
-    const fns = [genSimpleParens, genParensMulti, genBrackets, genNested, genFullPemdas, genWriteExpr];
+    const fns = [genSimpleParens, genParensMulti, genBrackets, genNested, genFullPemdas, genWriteExpr, genCompareExpr, genCorrespondingTerm];
     return pick(fns)();
   }
 
   const FB_GEN = {
     'simple-parens': genSimpleParens,
-    'parens-multi':  () => Math.random() < 0.75 ? genParensMulti() : genWriteExpr(),
+    'parens-multi':  () => Math.random() < 0.7 ? genParensMulti() : (Math.random() < 0.5 ? genWriteExpr() : genCorrespondingTerm()),
     'brackets':      genBrackets,
-    'nested':        () => Math.random() < 0.75 ? genNested() : genWriteExpr(),
-    'full-pemdas':   genFullPemdas,
+    'nested':        () => Math.random() < 0.7 ? genNested() : (Math.random() < 0.5 ? genWriteExpr() : genCompareExpr()),
+    'full-pemdas':   () => Math.random() < 0.85 ? genFullPemdas() : genCompareExpr(),
     'all-mix':       genAllMix,
   };
 
