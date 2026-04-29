@@ -3995,8 +3995,13 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         questions: [],
         currentChoices: null,
         phase: 'racing',
-        videoSrc: pick(FR_VIDEOS),
+        // Shuffled rotation through ALL trail clips. The video element
+        // listens for `ended` and advances to the next clip so the kid
+        // sees continuous fresh footage instead of one short loop.
+        videoQueue: shuffle([...FR_VIDEOS]),
+        videoIdx: 0,
       };
+      state.videoSrc = state.videoQueue[0];
       let timeouts = [];
       const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
 
@@ -4006,7 +4011,10 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       host.innerHTML = '<div class="mod-fr"></div>';
       const root = host.querySelector('.mod-fr');
 
-      function render() {
+      // Initial build. Runs once per level. Builds the persistent stage so the
+      // <video> element survives later re-renders and continuous playback isn't
+      // restarted on every question state change.
+      function buildStage() {
         const trailClass = state.dangerLevel === 0 ? '' : (state.dangerLevel === 1 ? 'warn' : 'danger');
         const statusClass = state.dangerLevel === 0 ? 'safe' : (state.dangerLevel === 1 ? 'warn' : 'danger');
         const statusLabel = state.dangerLevel === 0 ? 'LOCKED IN' : (state.dangerLevel === 1 ? 'OFF LINE' : 'CRITICAL');
@@ -4017,7 +4025,8 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           <div class="fr-stage">
             <div class="fr-left">
               <div class="fr-trail ${trailClass}" id="fr-trail">
-                <video class="fr-video" id="fr-video" autoplay loop muted playsinline poster="sur-ronster.jpg" preload="auto">
+                <!-- Rotates through videoQueue on the ended event so the kid sees fresh footage continuously, not a 2-second loop. -->
+                <video class="fr-video" id="fr-video" autoplay muted playsinline poster="sur-ronster.jpg" preload="auto">
                   <source src="${state.videoSrc}" type="video/mp4">
                   <source src="sur-ronster.webm" type="video/webm">
                 </video>
@@ -4025,13 +4034,13 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
                 <div class="fr-trail-tag"><span>RED BULL HARDLINE · TASMANIA</span></div>
               </div>
               <div class="fr-status">
-                <div class="fr-status-pill ${statusClass}">SUR RONSTER · ${statusLabel}</div>
-                <div class="fr-danger-meter">${segs}</div>
+                <div class="fr-status-pill ${statusClass}" id="fr-status-pill">SUR RONSTER · ${statusLabel}</div>
+                <div class="fr-danger-meter" id="fr-danger-meter">${segs}</div>
               </div>
               <div class="fr-info">L${lvl.id} <strong>${lvl.name}</strong> · ${totalQ} questions · 3 wipeouts ends the run.</div>
             </div>
             <div class="fr-right">
-              <div class="fr-header">
+              <div class="fr-header" id="fr-header">
                 <div class="fr-stat"><span class="fr-stat-label">Question</span><span class="fr-stat-value">${state.questionNum + 1} / ${totalQ}</span></div>
                 <div class="fr-stat"><span class="fr-stat-label">Score</span><span class="fr-stat-value">${state.score}</span></div>
                 <div class="fr-stat"><span class="fr-stat-label">Streak</span><span class="fr-stat-value streak">${state.streak}</span><div class="fr-streak-pips">${pips}</div></div>
@@ -4041,6 +4050,68 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             </div>
           </div>
         `;
+        wireVideoRotation();
+        state.stageBuilt = true;
+      }
+
+      // Wires the `ended` listener on the video element so when the current
+      // clip finishes naturally, the next clip in the shuffled queue plays.
+      // This is what fixes the "2-second loop is distracting" problem.
+      function wireVideoRotation() {
+        const video = root.querySelector('#fr-video');
+        if (!video) return;
+        video.addEventListener('ended', () => {
+          state.videoIdx = (state.videoIdx + 1) % state.videoQueue.length;
+          state.videoSrc = state.videoQueue[state.videoIdx];
+          // If we've cycled through the entire queue, reshuffle for variety
+          if (state.videoIdx === 0) state.videoQueue = shuffle([...FR_VIDEOS]);
+          video.src = state.videoQueue[state.videoIdx];
+          video.load();
+          video.play().catch(() => {});
+        });
+        // Also handle errors: if a clip fails (404, decode error), skip to next
+        video.addEventListener('error', () => {
+          state.videoIdx = (state.videoIdx + 1) % state.videoQueue.length;
+          state.videoSrc = state.videoQueue[state.videoIdx];
+          video.src = state.videoQueue[state.videoIdx];
+          video.load();
+          video.play().catch(() => {});
+        });
+      }
+
+      function render() {
+        if (!state.stageBuilt) {
+          buildStage();
+        } else {
+          // In-place updates only — preserves the live <video> across re-renders
+          const trail = root.querySelector('#fr-trail');
+          if (trail) {
+            trail.classList.remove('warn', 'danger');
+            if (state.dangerLevel === 1) trail.classList.add('warn');
+            else if (state.dangerLevel >= 2) trail.classList.add('danger');
+          }
+          const pill = root.querySelector('#fr-status-pill');
+          if (pill) {
+            const statusClass = state.dangerLevel === 0 ? 'safe' : (state.dangerLevel === 1 ? 'warn' : 'danger');
+            const statusLabel = state.dangerLevel === 0 ? 'LOCKED IN' : (state.dangerLevel === 1 ? 'OFF LINE' : 'CRITICAL');
+            pill.className = 'fr-status-pill ' + statusClass;
+            pill.textContent = `SUR RONSTER · ${statusLabel}`;
+          }
+          const meter = root.querySelector('#fr-danger-meter');
+          if (meter) {
+            meter.innerHTML = [1, 2, 3].map(i => `<div class="fr-seg ${i <= state.dangerLevel ? 'lit-' + Math.min(state.dangerLevel, 3) : ''}"></div>`).join('');
+          }
+          const pips = [0, 1, 2].map(i => `<span class="fr-pip ${i < state.streak ? 'lit' : ''}"></span>`).join('');
+          const header = root.querySelector('#fr-header');
+          if (header) {
+            header.innerHTML = `
+              <div class="fr-stat"><span class="fr-stat-label">Question</span><span class="fr-stat-value">${state.questionNum + 1} / ${totalQ}</span></div>
+              <div class="fr-stat"><span class="fr-stat-label">Score</span><span class="fr-stat-value">${state.score}</span></div>
+              <div class="fr-stat"><span class="fr-stat-label">Streak</span><span class="fr-stat-value streak">${state.streak}</span><div class="fr-streak-pips">${pips}</div></div>
+              <div class="fr-stat"><span class="fr-stat-label">Wipeouts</span><span class="fr-stat-value">${state.crashCount} / 3</span></div>
+            `;
+          }
+        }
 
         const video = root.querySelector('#fr-video');
         if (video) {
