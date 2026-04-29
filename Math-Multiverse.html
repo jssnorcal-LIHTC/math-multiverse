@@ -727,6 +727,27 @@
     filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
   }
   .f1-helmet-svg { width: 100%; height: 100%; display: block; }
+  .f1-driver-photo-host {
+    position: relative;
+    width: 110px; height: 110px;
+    margin: 8px auto 10px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #0a0e15;
+    border: 2px solid var(--driver-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4), inset 0 0 12px rgba(0,0,0,0.4);
+  }
+  .f1-driver-photo {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.3s var(--ease-out);
+  }
+  .f1-driver:hover .f1-driver-photo { transform: scale(1.05); }
+  .f1-helmet-fallback {
+    width: 100%; height: 100%;
+  }
   .f1-driver-num {
     position: absolute;
     top: 14px; right: 14px;
@@ -1080,6 +1101,29 @@
     display: block;
     filter: brightness(0) invert(1) opacity(0.85);
   }
+  .rc-cast-row {
+    display: flex; gap: 18px;
+    justify-content: center;
+    margin: 16px auto;
+    max-width: 480px;
+  }
+  .rc-cast { text-align: center; }
+  .rc-cast-photo {
+    width: 130px; height: 130px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 10px;
+    border: 2px solid rgba(0,217,255,0.5);
+    box-shadow: 0 4px 16px rgba(0,217,255,0.2);
+    display: block;
+  }
+  .rc-cast-name {
+    margin-top: 8px;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    font-weight: 800;
+    color: var(--theme-coords);
+  }
   .rc-pick h2 {
     font-size: 1.7rem;
     font-weight: 800;
@@ -1376,7 +1420,7 @@
     display: flex; align-items: center; justify-content: center;
     filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
   }
-  .mb-mini-svg svg { width: 100%; height: 100%; display: block; }
+  .mb-mini-svg svg, .mb-mini-svg img { width: 100%; height: 100%; display: block; object-fit: contain; }
   .mb-builder-name {
     font-size: 1rem; font-weight: 800;
     letter-spacing: -0.01em;
@@ -1631,6 +1675,15 @@
     opacity: 0.85;
   }
   .rk-meet svg { width: 90px; height: 90px; }
+  .rk-grace-photo {
+    width: 110px; height: 110px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 8px;
+    border: 2px solid rgba(0,217,255,0.4);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    display: block;
+  }
   .rk-pick-actions { display: flex; justify-content: center; gap: 10px; margin-top: 12px; }
   .rk-go {
     padding: 14px 28px;
@@ -3237,6 +3290,17 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
   const F1_LOGO    = 'https://upload.wikimedia.org/wikipedia/commons/3/33/F1.svg';
   const PIRELLI_LOGO = 'https://en.wikipedia.org/wiki/Special:FilePath/Pirelli_-_logo_full_(Italy,_1997).svg';
 
+  // Real driver photos from Wikipedia infoboxes (verified)
+  const DRIVER_PHOTOS = {
+    VER: 'https://upload.wikimedia.org/wikipedia/commons/5/52/2024-08-25_Motorsport%2C_Formel_1%2C_Gro%C3%9Fer_Preis_der_Niederlande_2024_STP_3973_by_Stepro_%28medium_crop%29.jpg',
+    HAM: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/FIA_F1_Imola_2025_No._44_Hamilton.jpg',
+    LEC: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/2024-08-25_Motorsport%2C_Formel_1%2C_Gro%C3%9Fer_Preis_der_Niederlande_2024_STP_3978_by_Stepro_%28cropped2%29.jpg',
+    RUS: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/KingsLeonSilverstne040724_%2828_of_112%29_%2853838006028%29_%28cropped%29.jpg',
+    ANT: 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Kimi_Antonelli_at_the_2025_US_Grand_Prix_in_Austin%2C_TX_%28cropped%29.jpg',
+    NOR: 'https://upload.wikimedia.org/wikipedia/commons/9/90/2024-08-25_Motorsport%2C_Formel_1%2C_Gro%C3%9Fer_Preis_der_Niederlande_2024_STP_3968_by_Stepro_%28cropped2%29.jpg',
+    PIA: 'https://upload.wikimedia.org/wikipedia/commons/e/e5/2026_Chinese_GP_-_Oscar_Piastri_%28cropped%29_%28cropped%29.jpg',
+  };
+
   // Real Wikipedia track layout SVGs
   const TRACK_LAYOUTS = {
     'Bahrain':     'https://en.wikipedia.org/wiki/Special:FilePath/Bahrain_International_Circuit--Grand_Prix_Layout.svg',
@@ -3625,7 +3689,10 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
               ${DRIVERS.map(d => `
                 <div class="f1-driver" data-id="${d.id}" style="--driver-color: ${d.color}; --driver-accent-color: ${d.accent};">
                   <div class="f1-driver-num">${d.num}</div>
-                  <div class="f1-helmet-host">${helmetSvg(d)}</div>
+                  <div class="f1-driver-photo-host">
+                    <img class="f1-driver-photo" src="${DRIVER_PHOTOS[d.id] || ''}" alt="${d.short}" loading="lazy" onerror="this.style.display='none'; this.parentElement.querySelector('.f1-helmet-fallback').style.display='block';">
+                    <div class="f1-helmet-fallback" style="display:none;">${helmetSvg(d)}</div>
+                  </div>
                   <div class="f1-driver-name">${d.short}</div>
                   <img class="f1-team-logo" src="${TEAM_LOGOS[d.team] || ''}" alt="${d.team}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                   <div class="f1-driver-team" style="display:none;">${d.team}</div>
@@ -3840,6 +3907,11 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
   const STAR_WARS_LOGO  = 'https://en.wikipedia.org/wiki/Special:FilePath/Star_Wars_Logo.svg';
   const MANDO_LOGO      = 'https://en.wikipedia.org/wiki/Special:FilePath/The_Mandalorian_logo_black.svg';
   const EMPIRE_COG      = 'https://en.wikipedia.org/wiki/Special:FilePath/Emblem_of_the_First_Galactic_Empire.svg';
+  // Real character imagery from Wikipedia infoboxes
+  const MANDO_PHOTO     = 'https://upload.wikimedia.org/wikipedia/en/a/a1/TheMandalorian.jpg';
+  const GROGU_PHOTO     = 'https://upload.wikimedia.org/wikipedia/en/a/a0/Grogu_%28Star_Wars%29.jpg';
+  // CC0 transparent TIE Fighter render from Wikimedia Commons
+  const TIE_FIGHTER     = 'https://upload.wikimedia.org/wikipedia/commons/1/13/TIE_Fighter.webp';
 
   const RC_LEVELS = [
     { id: 1, name: 'Departing Nevarro',       gridMax: 7,  quadrants: 1, mix: 'plot' },
@@ -4381,6 +4453,16 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
             <h2>${lvl.name}</h2>
             <p>${totalQ} jumps to the destination</p>
             <div class="lvl-badge">LEVEL ${lvl.id} &middot; ${lvl.quadrants === 4 ? 'ALL QUADRANTS' : 'QUADRANT I ONLY'}</div>
+            <div class="rc-cast-row">
+              <div class="rc-cast">
+                <img class="rc-cast-photo" src="${MANDO_PHOTO}" alt="Din Djarin" loading="lazy" onerror="this.style.display='none';">
+                <div class="rc-cast-name">DIN DJARIN</div>
+              </div>
+              <div class="rc-cast">
+                <img class="rc-cast-photo" src="${GROGU_PHOTO}" alt="Grogu" loading="lazy" onerror="this.style.display='none';">
+                <div class="rc-cast-name">GROGU</div>
+              </div>
+            </div>
             <div class="rc-view-grid">
               <div class="rc-view selected" data-view="chase">
                 <div>${razorCrestSvg('chase', 100)}</div>
@@ -4553,6 +4635,8 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 (function() {
 
   const LEGO_LOGO = 'https://en.wikipedia.org/wiki/Special:FilePath/LEGO_logo.svg';
+  // Real Unikitty SVG from Wikimedia Commons (CC BY-SA, vectorized from Cartoon Network)
+  const UNIKITTY_SVG = 'https://upload.wikimedia.org/wikipedia/commons/8/86/Unikitty_Scratch_sprite.svg';
 
   const BUILDERS = [
     { id: 'EMM', name: 'Emmet',     icon: '⛑️', color: '#FE8A18', trim: '#FFD400', line: '"I got it, guys!"' },
@@ -4872,7 +4956,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
             <div class="mb-builder-grid">
               ${BUILDERS.map(b => `
                 <div class="mb-builder" data-id="${b.id}" style="--builder-color: ${b.color}; --builder-trim: ${b.trim};">
-                  <div class="mb-mini-svg">${minifigSvg(b)}</div>
+                  <div class="mb-mini-svg">${b.id === 'UNI' ? `<img src="${UNIKITTY_SVG}" alt="Unikitty" onerror="this.outerHTML='${minifigSvg(b).replace(/'/g, '&apos;').replace(/\n/g, '')}';">` : minifigSvg(b)}</div>
                   <div class="mb-builder-name">${b.name}</div>
                   <div class="mb-builder-line">${b.line}</div>
                 </div>
@@ -5032,6 +5116,10 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 (function() {
 
   const NASA_LOGO = 'https://en.wikipedia.org/wiki/Special:FilePath/NASA_logo.svg';
+  // Real NASA EMU spacesuit photo from Wikimedia Commons (PD)
+  const NASA_EMU = 'https://upload.wikimedia.org/wikipedia/commons/4/4b/NASA_EMU_without_visor.jpg';
+  // Project Hail Mary movie poster — Rocky silhouette appears
+  const PHM_POSTER = 'https://upload.wikimedia.org/wikipedia/en/3/3b/Project_Hail_Mary_poster.jpg';
 
   const RK_LEVELS = [
     { id: 1, name: 'Hello, Question?',         gen: 'metric',   crisis: 'first contact'        },
@@ -5397,7 +5485,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
             <div class="lvl-badge">LEVEL ${lvl.id} &middot; ${lvl.gen.toUpperCase()}</div>
             <div class="rk-meet">
               <div class="rk-side-grace">
-                ${graceSvg(true)}
+                <img class="rk-grace-photo" src="${NASA_EMU}" alt="NASA EMU spacesuit" loading="lazy" onerror="this.outerHTML='${graceSvg(true).replace(/'/g, '&apos;').replace(/\n/g, '').replace(/"/g, '&quot;')}';">
                 <div class="rk-side-label" style="color: #6dd5ed;">GRACE</div>
               </div>
               <div class="rk-tunnel"></div>
