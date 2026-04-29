@@ -3855,7 +3855,13 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const arr = shuffle(Array.from(opts));
     const driver = pick(DRIVERS);
     return {
-      prompt: `Crofty: <em>"${driver.last} just set a <strong>${lap}</strong>. What is the value of the digit in the <strong>${target.name}</strong> place?"</em>`,
+      prompt: pick([
+        `Crofty: <em>"${driver.last} just set a <strong>${lap}</strong>. What is the value of the digit in the <strong>${target.name}</strong> place?"</em>`,
+        `Brundle on TV: <em>"${driver.last}'s sector reads <strong>${lap}</strong>. The <strong>${target.name}</strong> digit is worth..."</em>`,
+        `Race control feed: <strong>${lap}</strong>. Identify the digit value at the <strong>${target.name}</strong> position.`,
+        `Engineer to ${driver.last}: <em>"Lap of <strong>${lap}</strong>. What's the value in the <strong>${target.name}</strong> column?"</em>`,
+        `Timing tower flashes <strong>${lap}</strong>. The <strong>${target.name}</strong> digit's place value?`,
+      ]),
       answers: arr,
       correctIdx: arr.indexOf(correct),
       explain: `In ${lap}, the digit in the ${target.name} place is <strong>${tDigit}</strong>. Its value is ${tDigit} × 10⁻${target.power} = <strong>${correct}</strong>.`,
@@ -3875,7 +3881,13 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const wrong   = a < b ? d2.last : d1.last;
     const opts = shuffle([correct, wrong, 'Same lap', 'Cannot tell']);
     return {
-      prompt: `Brundle: <em>"${d1.last} laps in <strong>${aStr}</strong>, ${d2.last} laps in <strong>${bStr}</strong>. Who is <strong>faster</strong>?"</em>`,
+      prompt: pick([
+        `Brundle: <em>"${d1.last} laps in <strong>${aStr}</strong>, ${d2.last} laps in <strong>${bStr}</strong>. Who is <strong>faster</strong>?"</em>`,
+        `Crofty: <em>"It's a head-to-head! ${d1.last} <strong>${aStr}</strong> versus ${d2.last} <strong>${bStr}</strong>. Whose lap was quicker?"</em>`,
+        `Live timing: ${d1.last} <strong>${aStr}</strong>, ${d2.last} <strong>${bStr}</strong>. Who set the better time?`,
+        `Comparing sector times: ${d1.last} <strong>${aStr}</strong> vs ${d2.last} <strong>${bStr}</strong>. <strong>Faster lap</strong>?`,
+        `Q3 board shows ${d1.last} <strong>${aStr}</strong> and ${d2.last} <strong>${bStr}</strong>. Who's on provisional pole?`,
+      ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
       explain: `Compare digits left to right. ${aStr} vs ${bStr} → ${a < b ? aStr : bStr} is the smaller (faster) lap. <strong>${correct}</strong> wins.`,
@@ -3891,7 +3903,13 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const opts = ensureFour(new Set([correct]), () => (sum + (ri(-300, 300) / 1000)).toFixed(3));
     shuffle(opts);
     return {
-      prompt: `Engineer: <em>"S1 ${a.toFixed(3)}, S2 ${b.toFixed(3)}, S3 ${c.toFixed(3)}. <strong>Lap time</strong>?"</em>`,
+      prompt: pick([
+        `Engineer: <em>"S1 ${a.toFixed(3)}, S2 ${b.toFixed(3)}, S3 ${c.toFixed(3)}. <strong>Lap time</strong>?"</em>`,
+        `Pit wall radio: <em>"Sector splits: ${a.toFixed(3)}, ${b.toFixed(3)}, ${c.toFixed(3)}. Total lap?"</em>`,
+        `Crofty: <em>"Add up those three sectors: ${a.toFixed(3)} + ${b.toFixed(3)} + ${c.toFixed(3)}. What's the lap?"</em>`,
+        `Tower data: S1 <strong>${a.toFixed(3)}</strong>, S2 <strong>${b.toFixed(3)}</strong>, S3 <strong>${c.toFixed(3)}</strong>. Sum to lap time.`,
+        `Sky F1 graphic flashes ${a.toFixed(3)} / ${b.toFixed(3)} / ${c.toFixed(3)}. Lap total?`,
+      ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
       explain: `Add the three sectors: ${a.toFixed(3)} + ${b.toFixed(3)} + ${c.toFixed(3)} = <strong>${correct}</strong>. Line up the decimal points and add column by column.`,
@@ -3907,7 +3925,13 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const opts = ensureFour(new Set([correct]), () => +(product + ri(-50, 50) / 100).toFixed(3) + '');
     shuffle(opts);
     return {
-      prompt: `Pirelli: <em>"Tires lose <strong>${decR}</strong> sec per lap. After <strong>${whole}</strong> laps, total time lost?"</em>`,
+      prompt: pick([
+        `Pirelli: <em>"Tires lose <strong>${decR}</strong> sec per lap. After <strong>${whole}</strong> laps, total time lost?"</em>`,
+        `Strategy engineer: <em>"Tire wear is <strong>${decR}</strong> sec/lap. Run is <strong>${whole}</strong> laps. Cumulative loss?"</em>`,
+        `Race director update: tire degradation <strong>${decR}</strong> per lap × <strong>${whole}</strong> laps. Total deg?`,
+        `Stint analysis: <strong>${decR}</strong>s lost each lap over <strong>${whole}</strong> laps. Total time lost?`,
+        `Pit wall calc: deg ${decR}s/lap, ${whole} laps to flag. Total time bleed?`,
+      ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
       explain: `Multiply: ${decR} × ${whole} = <strong>${correct}</strong>. Multiply as if both were whole numbers, then place the decimal so the answer has the same total decimal places.`,
@@ -3922,24 +3946,117 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const opts = ensureFour(new Set([correct]), () => (lapDist + ri(-15, 15) / 10).toFixed(1));
     shuffle(opts);
     return {
-      prompt: `Strategy: <em>"<strong>${laps}</strong> laps cover <strong>${totalKm.toFixed(1)} km</strong>. What is the <strong>lap distance</strong>?"</em>`,
+      prompt: pick([
+        `Strategy: <em>"<strong>${laps}</strong> laps cover <strong>${totalKm.toFixed(1)} km</strong>. What is the <strong>lap distance</strong>?"</em>`,
+        `Engineer: <em>"Total race distance <strong>${totalKm.toFixed(1)} km</strong> over <strong>${laps}</strong> laps. Per-lap?"</em>`,
+        `Brundle: <em>"<strong>${laps}</strong> laps to the line, <strong>${totalKm.toFixed(1)} km</strong> total. Lap length?"</em>`,
+        `Race ops: ${totalKm.toFixed(1)}km grand-prix, ${laps} laps scheduled. Single-lap distance?`,
+        `Course breakdown: <strong>${totalKm.toFixed(1)} km</strong> divided by <strong>${laps}</strong> laps. km per lap?`,
+      ]),
       answers: opts.map(o => o + ' km'),
       correctIdx: opts.indexOf(correct),
       explain: `Total ÷ laps: ${totalKm.toFixed(1)} ÷ ${laps} = <strong>${correct} km</strong>. Move the decimal in dividend and divisor together so you can divide by a whole number.`,
     };
   }
 
+  function genRound() {
+    // CCSS 5.NBT.A.4 — round decimals to any place
+    const places = [
+      { name: 'tenth',     digits: 1, mult: 10 },
+      { name: 'hundredth', digits: 2, mult: 100 },
+    ];
+    const target = pick(places);
+    const base = ri(20, 35);
+    const fracPart = ri(100, 999);
+    const num = base + fracPart / 1000;
+    const lap = `1:${num.toFixed(3)}`;
+    const correctNum = Math.round(num * target.mult) / target.mult;
+    const correct = correctNum.toFixed(target.digits);
+    const opts = ensureFour(new Set([correct]), () => (correctNum + ri(-3, 3) / target.mult).toFixed(target.digits));
+    shuffle(opts);
+    const driver = pick(DRIVERS);
+    return {
+      prompt: pick([
+        `Crofty: <em>"${driver.last}'s lap was <strong>${lap}</strong>. <strong>Round to the nearest ${target.name}</strong>."</em>`,
+        `Brundle: <em>"<strong>${lap}</strong> on the board. Round it to the nearest ${target.name} of a second."</em>`,
+        `TV graphic shows <strong>${lap}</strong>. Display rounds to nearest ${target.name}. What's it show?`,
+        `Engineer: <em>"Lap of <strong>${lap}</strong>. Trim to nearest ${target.name}."</em>`,
+      ]),
+      answers: opts.map(o => `1:${(base + parseFloat(o) - base).toFixed(target.digits)}`),
+      correctIdx: opts.indexOf(correct),
+      explain: `Look at the digit just past the ${target.name}s. ${num.toFixed(3)} → digit after the ${target.name} is ${Math.floor(num * target.mult * 10) % 10}. ${Math.floor(num * target.mult * 10) % 10 >= 5 ? 'Round up' : 'Round down'}: <strong>1:${correct}</strong>.`,
+    };
+  }
+
+  function genPowerOfTen() {
+    // CCSS 5.NBT.A.2 — × or ÷ by 10/100/1000 shifts the decimal
+    const variants = [
+      () => { // m → km (÷ 1000)
+        const meters = ri(2, 9) * 1000 + ri(0, 999);
+        const km = meters / 1000;
+        const correct = km.toFixed(3).replace(/\.?0+$/, '');
+        const opts = ensureFour(new Set([correct]), () => (km + ri(-30, 30) / 10).toFixed(3).replace(/\.?0+$/, ''));
+        shuffle(opts);
+        return {
+          prompt: pick([
+            `Pit board: track length <strong>${meters} m</strong>. Convert to <strong>kilometers</strong>.`,
+            `Sector signage reads <strong>${meters} meters</strong>. In <strong>km</strong>?`,
+            `Engineer: <em>"Lap is <strong>${meters} m</strong>. Express as kilometers."</em>`,
+          ]),
+          answers: opts.map(o => o + ' km'),
+          correctIdx: opts.indexOf(correct),
+          explain: `Dividing by 1000 shifts the decimal 3 places left. ${meters} → <strong>${correct} km</strong>.`,
+        };
+      },
+      () => { // km × 10 laps → m total
+        const km = (ri(40, 70) / 10);
+        const laps = pick([10, 100]);
+        const totalM = +(km * laps * 1000).toFixed(0);
+        const correct = totalM.toString();
+        const opts = ensureFour(new Set([correct]), () => (totalM + ri(-2000, 2000)).toString());
+        shuffle(opts);
+        return {
+          prompt: pick([
+            `${laps} laps × <strong>${km} km</strong> per lap. Total race distance in <strong>meters</strong>?`,
+            `Engineer: <em>"<strong>${laps}</strong> laps at <strong>${km} km</strong> each. Distance covered in m?"</em>`,
+          ]),
+          answers: opts.map(o => o + ' m'),
+          correctIdx: opts.indexOf(correct),
+          explain: `${km} km × ${laps} = ${km * laps} km. × 1000 (km → m) = <strong>${totalM} m</strong>.`,
+        };
+      },
+      () => { // sec × 10 = total split
+        const sec = (ri(20, 35) + ri(0, 999) / 1000);
+        const mult = pick([10, 100]);
+        const total = +(sec * mult).toFixed(3);
+        const correct = total.toString();
+        const opts = ensureFour(new Set([correct]), () => (total + ri(-30, 30)).toString());
+        shuffle(opts);
+        return {
+          prompt: pick([
+            `Avg sector <strong>${sec.toFixed(3)}s</strong>. Multiply by <strong>${mult}</strong> for stage total. Time?`,
+            `One sector <strong>${sec.toFixed(3)}</strong> sec. <strong>${mult}</strong> sectors total. Sum?`,
+          ]),
+          answers: opts.map(o => o + ' s'),
+          correctIdx: opts.indexOf(correct),
+          explain: `Multiplying by ${mult} shifts the decimal ${mult === 10 ? 1 : 2} place${mult === 10 ? '' : 's'} right. ${sec.toFixed(3)} → <strong>${correct}</strong>.`,
+        };
+      },
+    ];
+    return pick(variants)();
+  }
+
   function genMixed() {
-    const fns = [genPlaceValue, genCompareOrder, genAddSub, genMultiply, genDivide];
+    const fns = [genPlaceValue, genCompareOrder, genAddSub, genMultiply, genDivide, genRound, genPowerOfTen];
     return pick(fns)();
   }
 
   const GEN_BY_TYPE = {
-    'place-value':  genPlaceValue,
-    'compare-order': genCompareOrder,
+    'place-value':  () => Math.random() < 0.6 ? genPlaceValue() : genPowerOfTen(),
+    'compare-order': () => Math.random() < 0.7 ? genCompareOrder() : genRound(),
     'add-sub':      genAddSub,
-    'multiply':     genMultiply,
-    'divide':       genDivide,
+    'multiply':     () => Math.random() < 0.7 ? genMultiply() : genPowerOfTen(),
+    'divide':       () => Math.random() < 0.7 ? genDivide() : genRound(),
     'mixed-all':    genMixed,
   };
 
