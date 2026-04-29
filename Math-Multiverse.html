@@ -2362,12 +2362,16 @@ const Save = {
             levelBest:  m.levels.map(() => null),
           };
         } else {
-          // Pad arrays if level count grew
           const ms = this.state.modules[m.id];
           while (ms.levelStars.length < m.levels.length) ms.levelStars.push(0);
           while (ms.levelBest.length  < m.levels.length) ms.levelBest.push(null);
+          // Developer override: if MODULES marks a module unlocked-by-default,
+          // honor that on existing saves (otherwise old saves stay locked even
+          // after a metadata change).
+          if (m.unlocked && !ms.unlocked) ms.unlocked = true;
         }
       }
+      this.saveNow();
     } catch (e) {
       console.warn('Save load failed, resetting:', e);
       this.state = this.default();
