@@ -3457,19 +3457,15 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           state.streak = Math.min(99, state.streak + 1);
           if (state.streak > state.bestStreak) state.bestStreak = state.streak;
           state.score += 100 + (state.streak >= 3 ? 60 : 0);
-          state.dangerLevel = Math.max(0, state.dangerLevel - 1);
           if (state.streak >= 3) sfxStreak(); else sfxCorrect();
         } else {
           state.streak = 0;
-          state.dangerLevel++;
+          state.crashCount++; // every wrong is a wipeout
+          state.dangerLevel = state.crashCount; // visual mirror
           sfxWrong();
-          if (state.dangerLevel >= 3) {
-            // Pause briefly to let kid read the explanation, then crash
-            later(2800, () => {
-              state.crashCount++;
-              state.dangerLevel = 0;
-              triggerCrash();
-            });
+          if (state.crashCount >= 3) {
+            // 3 wipeouts = retire. Pause to read the explanation, then crash overlay.
+            later(2800, () => triggerCrash());
             return;
           }
         }
@@ -3500,7 +3496,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
               <span class="replay">REPLAY · WIPEOUT ${state.crashCount}</span>
               <span class="meta">L${lvl.id} · ${lvl.name.toUpperCase()}</span>
             </div>
-            <div class="fr-crash-impact">⚠ IMPACT DETECTED</div>
+            <div class="fr-crash-impact">⚠ ${state.crashCount >= 3 ? 'RUN OVER' : 'IMPACT DETECTED'}</div>
             <div class="fr-crash-emoji">${scene.emoji}</div>
             <div class="fr-crash-title">${scene.title}</div>
             <div class="fr-crash-msg">${scene.msg}</div>
@@ -3511,13 +3507,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         later(3800, () => {
           overlay.remove();
           if (trail) trail.classList.remove('fr-shake');
-          if (state.crashCount >= 3) {
-            endLevel();
-          } else {
-            state.questionNum++;
-            if (state.questionNum >= totalQ) endLevel();
-            else { state.phase = 'racing'; render(); }
-          }
+          endLevel();
         });
       }
 
@@ -3527,9 +3517,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (pct >= 0.95)      stars = 3;
-          else if (pct >= 0.85) stars = 2;
-          else if (pct >= 0.80) stars = 1;
+          if (pct >= 1.00)      stars = 3;
+          else if (pct >= 0.98) stars = 2;
+          else if (pct >= 0.95) stars = 1;
           else                  stars = 0; // failed accuracy threshold
           if (stars > 0) sfxFanfare();
         }
@@ -4165,9 +4155,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (pct >= 0.95)      stars = 3;
-          else if (pct >= 0.85) stars = 2;
-          else if (pct >= 0.80) stars = 1;
+          if (pct >= 1.00)      stars = 3;
+          else if (pct >= 0.98) stars = 2;
+          else if (pct >= 0.95) stars = 1;
           else                  stars = 0;
         }
         callbacks.onComplete(state.score, stars);
@@ -4919,9 +4909,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (pct >= 0.95)      stars = 3;
-          else if (pct >= 0.85) stars = 2;
-          else if (pct >= 0.80) stars = 1;
+          if (pct >= 1.00)      stars = 3;
+          else if (pct >= 0.98) stars = 2;
+          else if (pct >= 0.95) stars = 1;
           else                  stars = 0;
         }
         callbacks.onComplete(state.score, stars);
@@ -5418,9 +5408,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (pct >= 0.95)      stars = 3;
-          else if (pct >= 0.85) stars = 2;
-          else if (pct >= 0.80) stars = 1;
+          if (pct >= 1.00)      stars = 3;
+          else if (pct >= 0.98) stars = 2;
+          else if (pct >= 0.95) stars = 1;
           else                  stars = 0;
           if (stars > 0) sfxAwesome();
         }
@@ -5961,9 +5951,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (pct >= 0.95)      stars = 3;
-          else if (pct >= 0.85) stars = 2;
-          else if (pct >= 0.80) stars = 1;
+          if (pct >= 1.00)      stars = 3;
+          else if (pct >= 0.98) stars = 2;
+          else if (pct >= 0.95) stars = 1;
           else                  stars = 0;
         }
         callbacks.onComplete(state.score, stars);
@@ -6480,9 +6470,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
         const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (pct >= 0.95)      stars = 3;
-          else if (pct >= 0.85) stars = 2;
-          else if (pct >= 0.80) stars = 1;
+          if (pct >= 1.00)      stars = 3;
+          else if (pct >= 0.98) stars = 2;
+          else if (pct >= 0.95) stars = 1;
           else                  stars = 0;
           if (stars > 0) sfxRescue();
         }
