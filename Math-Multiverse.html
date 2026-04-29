@@ -140,6 +140,113 @@
   }
   .icon-btn:hover { background: var(--bg-hover); color: var(--text-primary); border-color: var(--border-strong); }
 
+  /* STATS MODAL */
+  .stats-modal {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(8, 10, 16, 0.78);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .stats-card {
+    width: 100%; max-width: 920px; max-height: 92vh;
+    background: linear-gradient(180deg, #15181f 0%, #1a1d24 100%);
+    border: 1px solid var(--border-strong);
+    border-radius: 14px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .stats-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .stats-head h2 { font-size: 1.15rem; font-weight: 800; color: var(--text-primary); }
+  .stats-body {
+    padding: 18px 24px;
+    overflow-y: auto;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    padding: 14px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+  }
+  .stat-card-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .stat-card-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+  .stat-card-sub {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .stats-section-title {
+    font-size: 0.86rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    margin: 18px 0 10px;
+  }
+  .stats-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 0.86rem;
+  }
+  .stats-row:last-child { border-bottom: none; }
+  .stats-row .label { flex: 1; color: var(--text-primary); font-weight: 600; }
+  .stats-row .bar {
+    flex: 2; height: 8px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .stats-row .bar-fill {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, #ee1d52, #ff8000, #fcd700);
+    transform-origin: left;
+  }
+  .stats-row .num { color: var(--text-secondary); font-variant-numeric: tabular-nums; min-width: 90px; text-align: right; }
+  .stats-row.weak .label::before { content: "⚠ "; color: #ff8000; }
+  .coach-card { max-width: 600px; }
+  .coach-card .stats-head h2 { color: #ff8000; }
+  .coach-body-msg {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+    line-height: 1.55;
+  }
+  .coach-example {
+    padding: 14px 18px;
+    background: rgba(255, 128, 0, 0.08);
+    border-left: 3px solid #ff8000;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .coach-example b, .coach-example strong { color: #ffaa50; }
+
   /* SCREENS */
   .screen { display: none; animation: fadein 0.3s ease-out; }
   .screen.active { display: block; }
@@ -2472,6 +2579,7 @@
         <span style="color: var(--text-muted);">·</span>
         <span class="stars-tally"><span id="total-stars">0</span> ★</span>
       </div>
+      <button class="icon-btn" id="btn-stats" title="View progress stats and which topics need more practice">Stats</button>
       <button class="icon-btn" id="btn-preview" title="Preview Mode: when ON, every section and every level is accessible (for browsing). When OFF, normal progression gating applies.">Preview: OFF</button>
       <button class="icon-btn" id="btn-rename" title="Set player name">Name</button>
       <button class="icon-btn" id="btn-export" title="Download save file">Export</button>
@@ -2479,6 +2587,28 @@
       <button class="icon-btn" id="btn-reset" title="Reset all progress">Reset</button>
     </div>
   </header>
+
+  <!-- Stats modal -->
+  <div id="stats-modal" class="stats-modal" style="display: none;">
+    <div class="stats-card">
+      <div class="stats-head">
+        <h2>Math Multiverse — Progress</h2>
+        <button class="icon-btn" id="btn-stats-close">Close</button>
+      </div>
+      <div class="stats-body" id="stats-body"></div>
+    </div>
+  </div>
+
+  <!-- Coach modal (adaptive learning trigger) -->
+  <div id="coach-modal" class="stats-modal" style="display: none;">
+    <div class="stats-card coach-card">
+      <div class="stats-head">
+        <h2 id="coach-title">Let's slow down</h2>
+        <button class="icon-btn" id="btn-coach-close">Got it</button>
+      </div>
+      <div class="stats-body" id="coach-body"></div>
+    </div>
+  </div>
 
   <main>
     <!-- Screen: Launcher -->
@@ -2698,6 +2828,16 @@ const Save = {
       previewMode: false,
       created: Date.now(),
       lastSaved: Date.now(),
+      analytics: {
+        totalSessions: 0,
+        totalAttempted: 0,
+        totalCorrect: 0,
+        totalTimeMs: 0,
+        perModule: {},   // { moduleId: { attempted, correct, timeMs } }
+        perTopic:  {},   // { topicId:  { attempted, correct, lastWrongAt, recentWrongs: [] } }
+        recentMistakes: [],  // ring buffer of last 50: { topic, qText, picked, correct, ts, moduleId }
+        coachShown: {},  // { topicId: lastShownAt }
+      },
     };
   },
 
@@ -2712,6 +2852,18 @@ const Save = {
       this.state = JSON.parse(raw);
       // Older saves without the flag default to progression-locked play
       if (this.state.previewMode === undefined) this.state.previewMode = false;
+      // Migrate older saves: ensure analytics scaffold exists
+      if (!this.state.analytics) {
+        this.state.analytics = {
+          totalSessions: 0, totalAttempted: 0, totalCorrect: 0, totalTimeMs: 0,
+          perModule: {}, perTopic: {}, recentMistakes: [], coachShown: {},
+        };
+      }
+      const a = this.state.analytics;
+      if (!a.perModule) a.perModule = {};
+      if (!a.perTopic)  a.perTopic  = {};
+      if (!a.recentMistakes) a.recentMistakes = [];
+      if (!a.coachShown) a.coachShown = {};
       // Reconcile against current MODULES list
       for (const m of MODULES) {
         if (!this.state.modules[m.id]) {
@@ -2848,6 +3000,112 @@ const Save = {
     if (!confirm('Reset all Math Multiverse progress? Stars, level unlocks, names — everything. This cannot be undone.')) return;
     this.state = this.default();
     this.saveNow();
+  },
+
+  // -------- ANALYTICS --------
+
+  // Called once per gameplay session start (when a level begins)
+  beginSession() {
+    if (!this._sessionStart) {
+      this._sessionStart = Date.now();
+      this._sessionAttempted = 0;
+      this._sessionCorrect = 0;
+      this._sessionPerModule = {};
+      this._sessionPerTopic = {};
+      this.state.analytics.totalSessions = (this.state.analytics.totalSessions || 0) + 1;
+      this.saveNow();
+    }
+  },
+
+  // Called after every answer (correct or wrong)
+  recordAnswer(moduleId, topic, isCorrect, qText, pickedText, correctText) {
+    if (!this.state.analytics) return;
+    const a = this.state.analytics;
+    a.totalAttempted = (a.totalAttempted || 0) + 1;
+    if (isCorrect) a.totalCorrect = (a.totalCorrect || 0) + 1;
+    if (!a.perModule[moduleId]) a.perModule[moduleId] = { attempted: 0, correct: 0, timeMs: 0 };
+    a.perModule[moduleId].attempted++;
+    if (isCorrect) a.perModule[moduleId].correct++;
+    if (topic) {
+      if (!a.perTopic[topic]) a.perTopic[topic] = { attempted: 0, correct: 0, lastWrongAt: null, recentWrongs: [] };
+      a.perTopic[topic].attempted++;
+      if (isCorrect) a.perTopic[topic].correct++;
+      else {
+        a.perTopic[topic].lastWrongAt = Date.now();
+        a.perTopic[topic].recentWrongs = (a.perTopic[topic].recentWrongs || []).filter(t => Date.now() - t < 7 * 24 * 60 * 60 * 1000);
+        a.perTopic[topic].recentWrongs.push(Date.now());
+      }
+    }
+    if (!isCorrect) {
+      a.recentMistakes.unshift({
+        topic: topic || 'unknown',
+        moduleId,
+        qText: (qText || '').slice(0, 200),
+        picked: (pickedText || '').slice(0, 80),
+        correct: (correctText || '').slice(0, 80),
+        ts: Date.now(),
+      });
+      if (a.recentMistakes.length > 50) a.recentMistakes.length = 50;
+    }
+    this._sessionAttempted = (this._sessionAttempted || 0) + 1;
+    if (isCorrect) this._sessionCorrect = (this._sessionCorrect || 0) + 1;
+    if (moduleId) {
+      this._sessionPerModule[moduleId] = this._sessionPerModule[moduleId] || { attempted: 0, correct: 0 };
+      this._sessionPerModule[moduleId].attempted++;
+      if (isCorrect) this._sessionPerModule[moduleId].correct++;
+    }
+    if (topic) {
+      this._sessionPerTopic[topic] = this._sessionPerTopic[topic] || { attempted: 0, correct: 0 };
+      this._sessionPerTopic[topic].attempted++;
+      if (isCorrect) this._sessionPerTopic[topic].correct++;
+    }
+    this.saveNow();
+  },
+
+  // Returns true if this topic has hit the wrong-answer threshold recently
+  // and a coach card should be shown.
+  shouldCoach(topic) {
+    if (!topic || !this.state.analytics) return false;
+    const t = this.state.analytics.perTopic[topic];
+    if (!t || !t.recentWrongs) return false;
+    const now = Date.now();
+    const recent = t.recentWrongs.filter(ts => now - ts < 7 * 24 * 60 * 60 * 1000);
+    if (recent.length < 3) return false;
+    const last = this.state.analytics.coachShown[topic] || 0;
+    if (now - last < 30 * 60 * 1000) return false;  // don't repeat within 30 min
+    return true;
+  },
+
+  markCoachShown(topic) {
+    if (!this.state.analytics) return;
+    this.state.analytics.coachShown[topic] = Date.now();
+    this.saveNow();
+  },
+
+  sessionStats() {
+    return {
+      attempted: this._sessionAttempted || 0,
+      correct: this._sessionCorrect || 0,
+      timeMs: this._sessionStart ? Date.now() - this._sessionStart : 0,
+      perModule: this._sessionPerModule || {},
+      perTopic: this._sessionPerTopic || {},
+    };
+  },
+
+  weakestTopics(limit = 5) {
+    const a = this.state.analytics;
+    if (!a || !a.perTopic) return [];
+    const entries = Object.entries(a.perTopic)
+      .filter(([_, v]) => v.attempted >= 3)
+      .map(([k, v]) => ({
+        topic: k,
+        attempted: v.attempted,
+        correct: v.correct,
+        accuracy: v.correct / v.attempted,
+        wrongCount: v.attempted - v.correct,
+      }))
+      .sort((x, y) => x.accuracy - y.accuracy);
+    return entries.slice(0, limit);
   },
 };
 
@@ -3743,6 +4001,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           qEl.appendChild(ex);
         }
 
+        // Analytics
+        Save.recordAnswer('fraction-rider', q.topic || 'frac-' + (lvl.gen || 'unknown'), correct,
+          q.text || q.equation, choice.text, (state.currentChoices.find(c => c.correct) || {}).text);
         if (correct) {
           state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
@@ -3754,6 +4015,10 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           state.crashCount++; // every wrong is a wipeout
           state.dangerLevel = state.crashCount; // visual mirror
           sfxWrong();
+          // Adaptive coach: if this topic is a recurring miss, surface the worked-example modal
+          if (Save.shouldCoach(q.topic)) {
+            later(1800, () => showCoach(q.topic));
+          }
           if (state.crashCount >= 3) {
             // 3 wipeouts = retire. Pause to read the explanation, then crash overlay.
             later(2800, () => triggerCrash());
@@ -4587,6 +4852,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           qEl.appendChild(ex);
         }
 
+        // Analytics
+        Save.recordAnswer('f1-decimals', q.topic || 'dec-' + (lvl.gen || 'unknown'), correct,
+          q.prompt, q.answers && q.answers[idx], q.answers && q.answers[q.correctIdx]);
         if (correct) {
           state.correctCount++;
           state.streak = Math.min(3, state.streak + 1);
@@ -4599,6 +4867,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           state.livesLost = Math.min(3, state.livesLost + 1);
           state.position = Math.min(lvl.gridSize, state.position + 1);
           sfxWrong();
+          if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
 
         later(correct ? 1500 : 3800, () => {
@@ -5463,6 +5732,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           qEl.appendChild(ex);
         }
 
+        // Analytics
+        Save.recordAnswer('razor-crest', (q && q.topic) || 'coord-' + (lvl.mix || 'unknown'), correct,
+          q && q.prompt, '', '');
         if (correct) {
           state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
@@ -5476,6 +5748,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           state.livesLost = Math.min(3, state.livesLost + 1);
           state.hullPct = Math.max(0, state.hullPct - 33);
           sfxWrong();
+          if (q && Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
         later(correct ? 1500 : 3800, () => {
           state.questionNum++;
@@ -5770,6 +6043,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       v - h,               // missed a layer
     ]);
     return {
+      topic: 'vol-lwh',
       prompt: quoteFor(builderId, `My next piece is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. <strong>Volume in stud cubes</strong>?`),
       answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(v),
@@ -5789,6 +6063,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       (base + 1) * h,      // off-by-one in base (up)
     ]);
     return {
+      topic: 'vol-base-height',
       prompt: quoteFor(builderId, `Base area is <strong>${base}</strong> stud-squares and the height is <strong>${h}</strong> studs. <strong>Volume</strong>?`),
       answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(v),
@@ -5811,6 +6086,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       va + vb + 1,         // off-by-one
     ]);
     return {
+      topic: 'vol-composite',
       prompt: quoteFor(builderId, `Hull is <strong>${a1}×${a2}×${a3}</strong>, cabin on top is <strong>${b1}×${b2}×${b3}</strong>. <strong>Total volume</strong>?`),
       answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(total),
@@ -5828,6 +6104,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       Math.max(2, Math.round(v / (l + w))), // divided by sum instead of product
     ]);
     return {
+      topic: 'vol-missing-dim',
       prompt: quoteFor(builderId, `This piece has <strong>volume ${v} stud cubes</strong> and a base of <strong>${l}×${w}</strong>. <strong>Height</strong>?`),
       answers: opts.map(o => o + ' studs'),
       correctIdx: opts.indexOf(h),
@@ -5849,6 +6126,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       v + lw,              // off by one row
     ]);
     return {
+      topic: 'vol-unit-cubes',
       prompt: quoteFor(builderId, `Count the unit cubes: a ${lw}-wide × ${wd}-deep slab, stacked <strong>${layers}</strong> layers high. <strong>Total cubes</strong>?`),
       answers: opts.map(o => o + ' cubes'),
       correctIdx: opts.indexOf(v),
@@ -5868,6 +6146,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const correct = vaF > vbF ? 'A' : 'B';
     const opts = shuffle(['A is bigger', 'B is bigger', 'Equal volume', 'Cannot tell']);
     return {
+      topic: 'vol-compare',
       prompt: quoteFor(builderId, `Build A is <strong>${a.l}×${a.w}×${a.h}</strong>. Build B is <strong>${b.l}×${b.w}×${b.h}</strong>. <strong>Which has the larger volume</strong>?`),
       answers: opts,
       correctIdx: opts.indexOf(correct + ' is bigger'),
@@ -5891,6 +6170,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       v - 1,
     ]);
     return {
+      topic: 'vol-hollow',
       prompt: quoteFor(builderId, `Solid build is <strong>${L}×${W}×${H}</strong>. A hollow chamber inside is <strong>${il}×${iw}×${ih}</strong>. <strong>Brick volume</strong> (solid minus hollow)?`),
       answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(v),
@@ -5914,6 +6194,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
       v2 - 1,
     ]);
     return {
+      topic: 'vol-scale',
       prompt: quoteFor(builderId, `Build A is <strong>${l}×${w}×${h}</strong>. Build B has the same shape but the <strong>${dim}</strong> is <strong>${factor}× larger</strong>. <strong>Volume of B</strong>?`),
       answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(v2),
@@ -6096,6 +6377,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           qEl.appendChild(ex);
         }
 
+        // Analytics
+        Save.recordAnswer('master-builder', q.topic || 'vol-' + (lvl.gen || 'unknown'), correct,
+          q.prompt, q.answers && q.answers[idx], q.answers && q.answers[q.correctIdx]);
         if (correct) {
           state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
@@ -6107,6 +6391,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           state.streak = 0;
           state.livesLost = Math.min(3, state.livesLost + 1);
           sfxRattle();
+          if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
 
         later(correct ? 1500 : 3800, () => {
@@ -6981,6 +7266,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           qEl.appendChild(ex);
         }
 
+        // Analytics
+        Save.recordAnswer('rocky-translator', q.topic || 'unit-' + (lvl.gen || 'unknown'), correct,
+          q.prompt, q.answers && q.answers[idx], q.answers && q.answers[q.correctIdx]);
         if (correct) {
           state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
@@ -6993,6 +7281,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           state.livesLost = Math.min(3, state.livesLost + 1);
           state.crisisLevel = Math.min(1, state.crisisLevel + 0.18);
           sfxWrong();
+          if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
 
         later(correct ? 1500 : 3800, () => {
@@ -7632,6 +7921,9 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           qEl.appendChild(ex);
         }
 
+        // Analytics
+        Save.recordAnswer('floating-bear', q.topic || 'pemdas-' + (lvl.gen || 'unknown'), correct,
+          q.prompt, q.answers && q.answers[idx], q.answers && q.answers[q.correctIdx]);
         if (correct) {
           state.correctCount++;
           state.streak = Math.min(99, state.streak + 1);
@@ -7642,6 +7934,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           state.streak = 0;
           state.livesLost = Math.min(3, state.livesLost + 1);
           sfxWrong();
+          if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
 
         later(correct ? 1500 : 3800, () => {
@@ -7679,6 +7972,7 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
 
 document.addEventListener('DOMContentLoaded', () => {
   Save.load();
+  Save.beginSession();
   renderHeader();
   renderLauncher();
 
@@ -7745,7 +8039,293 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter')  { e.preventDefault(); $('btn-save-rename').click(); }
     if (e.key === 'Escape') $('modal-rename').classList.remove('active');
   });
+
+  // STATS MODAL
+  $('btn-stats').addEventListener('click', () => {
+    renderStatsModal();
+    $('stats-modal').style.display = 'flex';
+  });
+  $('btn-stats-close').addEventListener('click', () => {
+    $('stats-modal').style.display = 'none';
+  });
+  $('stats-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'stats-modal') $('stats-modal').style.display = 'none';
+  });
+
+  // COACH MODAL
+  $('btn-coach-close').addEventListener('click', () => {
+    $('coach-modal').style.display = 'none';
+  });
 });
+
+// Topic display labels for stats UI
+const TOPIC_LABELS = {
+  // Fraction Rider
+  'frac-add-like': 'Add fractions, same denominator',
+  'frac-sub-like': 'Subtract fractions, same denominator',
+  'frac-add-unlike': 'Add fractions, unlike denominators',
+  'frac-sub-unlike': 'Subtract fractions, unlike denominators',
+  'frac-mult-frac': 'Multiply fraction × fraction',
+  'frac-mult-whole': 'Multiply fraction × whole',
+  'frac-div-whole-by-unit': 'Divide whole by unit fraction',
+  'frac-div-unit-by-whole': 'Divide unit fraction by whole',
+  'frac-compare': 'Compare fractions',
+  'frac-of-whole': 'Fraction of a whole number',
+  'frac-mixed-add': 'Add mixed numbers',
+  'frac-mixed-sub': 'Subtract mixed numbers',
+  'frac-equiv': 'Equivalent fractions',
+  'frac-simplify': 'Simplify to lowest terms',
+  // F1 Decimals
+  'dec-place-value': 'Decimal place value',
+  'dec-compare': 'Compare/order decimals',
+  'dec-add-sub': 'Add/subtract decimals',
+  'dec-mult': 'Multiply decimals',
+  'dec-div': 'Divide decimals',
+  'dec-round': 'Round decimals',
+  'dec-power-of-ten': '× or ÷ by 10/100/1000',
+  'dec-write-word': 'Write decimal in word form',
+  'dec-expand': 'Expanded form',
+  // Razor Crest
+  'coord-plot': 'Plot ordered pair',
+  'coord-distance': 'Distance on grid',
+  'coord-quadrant': 'Identify quadrant',
+  'coord-reflect': 'Reflect across axis',
+  'coord-shape': 'Identify shape from points',
+  'coord-translate': 'Translate point',
+  'coord-identify': 'Read coords from marker',
+  'coord-real-world': 'Real-world data graph',
+  // Master Builder
+  'vol-lwh': 'Volume = L × W × H',
+  'vol-base-height': 'Volume = base area × height',
+  'vol-composite': 'Composite volume (add)',
+  'vol-missing-dim': 'Find missing dimension',
+  'vol-unit-cubes': 'Count unit cubes',
+  'vol-compare': 'Compare two volumes',
+  'vol-hollow': 'Volume with hollow void (subtract)',
+  'vol-scale': 'Scale a dimension',
+  // Rocky
+  'unit-metric': 'Metric unit conversion',
+  'unit-customary': 'Customary unit conversion',
+  'unit-time': 'Time unit conversion',
+  'unit-multistep': 'Multi-step unit conversion',
+  'unit-eridian': 'Custom (Eridian) unit conversion',
+  // Floating Bear
+  'pemdas-simple': 'Order of operations, simple parens',
+  'pemdas-multi': 'Order of operations + multiplication',
+  'pemdas-brackets': 'Brackets and braces',
+  'pemdas-nested': 'Nested expressions',
+  'pemdas-full': 'Full PEMDAS',
+  'pemdas-write-expr': 'Write an expression',
+  'pemdas-compare': 'Compare two expressions',
+  'pemdas-pattern': 'Corresponding terms in patterns',
+  // Coarse fallback labels (level-gen IDs used when a generator hasn't been tagged with a granular topic yet)
+  'frac-like-denom': 'Fractions (same denominator)',
+  'frac-unlike-easy': 'Fractions (unlike, easy)',
+  'frac-unlike-mixed': 'Fractions (unlike, mixed)',
+  'frac-multiply': 'Fraction multiplication',
+  'frac-divide': 'Fraction division',
+  'frac-mixed-all': 'Mixed fraction practice',
+  'dec-place-value': 'Decimal place value',
+  'dec-compare-order': 'Compare/order decimals',
+  'dec-add-sub': 'Add/subtract decimals',
+  'dec-multiply': 'Multiply decimals',
+  'dec-divide': 'Divide decimals',
+  'dec-mixed-all': 'Mixed decimal practice',
+  'coord-plot': 'Plot ordered pair',
+  'coord-plot-distance': 'Plot + distance',
+  'coord-reflect-translate': 'Reflect + translate',
+  'coord-mixed': 'Mixed coordinate practice',
+  'vol-lwh': 'Volume (L × W × H)',
+  'vol-base-height': 'Volume (base × height)',
+  'vol-composite': 'Composite volume',
+  'vol-missing-dim': 'Missing dimension',
+  'vol-lwh-bh-mix': 'Mixed volume practice (incl. hollow)',
+  'vol-mb-mixed': 'Mixed volume practice (full)',
+  'unit-metric': 'Metric conversion',
+  'unit-customary': 'Customary conversion',
+  'unit-time': 'Time conversion',
+  'unit-multistep': 'Multi-step unit conversion',
+  'unit-eridian': 'Custom Eridian unit',
+  'unit-mixed-all': 'Mixed unit conversion',
+  'pemdas-simple-parens': 'Order of ops, simple parens',
+  'pemdas-parens-multi': 'Order of ops, multi-parens',
+  'pemdas-brackets': 'Brackets',
+  'pemdas-nested': 'Nested expressions',
+  'pemdas-full-pemdas': 'Full PEMDAS',
+  'pemdas-all-mix': 'Full PEMDAS mix',
+};
+
+function topicLabel(topic) {
+  return TOPIC_LABELS[topic] || topic;
+}
+
+function fmtTime(ms) {
+  if (!ms || ms < 1000) return '0 min';
+  const min = Math.floor(ms / 60000);
+  if (min < 60) return `${min} min`;
+  return `${Math.floor(min / 60)}h ${min % 60}m`;
+}
+
+function fmtPct(x) {
+  if (!isFinite(x)) return '—';
+  return Math.round(x * 100) + '%';
+}
+
+function renderStatsModal() {
+  const a = Save.state.analytics || {};
+  const session = Save.sessionStats();
+  const totalAttempted = a.totalAttempted || 0;
+  const totalCorrect = a.totalCorrect || 0;
+  const sessionAcc = session.attempted ? session.correct / session.attempted : NaN;
+  const totalAcc = totalAttempted ? totalCorrect / totalAttempted : NaN;
+
+  const moduleRows = MODULES.map(m => {
+    const pm = (a.perModule || {})[m.id] || { attempted: 0, correct: 0 };
+    const acc = pm.attempted ? pm.correct / pm.attempted : NaN;
+    return { name: m.name, ...pm, acc };
+  });
+
+  const weakest = Save.weakestTopics(8);
+
+  const recent = (a.recentMistakes || []).slice(0, 5);
+
+  $('stats-body').innerHTML = `
+    <div class="stats-section-title">This session</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card-label">Questions answered</div>
+        <div class="stat-card-value">${session.attempted}</div>
+        <div class="stat-card-sub">${session.correct} correct (${fmtPct(sessionAcc)})</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Time played</div>
+        <div class="stat-card-value">${fmtTime(session.timeMs)}</div>
+        <div class="stat-card-sub">since the page opened</div>
+      </div>
+    </div>
+
+    <div class="stats-section-title">Lifetime totals</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card-label">Total questions</div>
+        <div class="stat-card-value">${totalAttempted}</div>
+        <div class="stat-card-sub">${totalCorrect} correct (${fmtPct(totalAcc)})</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Sessions</div>
+        <div class="stat-card-value">${a.totalSessions || 0}</div>
+        <div class="stat-card-sub">distinct play sessions</div>
+      </div>
+    </div>
+
+    <div class="stats-section-title">By section</div>
+    ${moduleRows.map(r => `
+      <div class="stats-row">
+        <div class="label">${r.name}</div>
+        <div class="bar"><div class="bar-fill" style="transform: scaleX(${isFinite(r.acc) ? r.acc.toFixed(2) : 0})"></div></div>
+        <div class="num">${r.correct}/${r.attempted} · ${fmtPct(r.acc)}</div>
+      </div>
+    `).join('')}
+
+    ${weakest.length ? `
+      <div class="stats-section-title">Topics that need more practice</div>
+      ${weakest.map(t => `
+        <div class="stats-row weak">
+          <div class="label">${topicLabel(t.topic)}</div>
+          <div class="bar"><div class="bar-fill" style="transform: scaleX(${t.accuracy.toFixed(2)})"></div></div>
+          <div class="num">${t.correct}/${t.attempted} · ${fmtPct(t.accuracy)}</div>
+        </div>
+      `).join('')}
+    ` : `<div class="stats-section-title">Topics that need more practice</div>
+         <div style="color: var(--text-muted); font-size: 0.86rem; padding: 10px 0;">Not enough data yet — play a few questions and check back.</div>`}
+
+    ${recent.length ? `
+      <div class="stats-section-title">Last 5 misses</div>
+      ${recent.map(m => `
+        <div class="stats-row">
+          <div class="label" style="font-weight: 500; color: var(--text-secondary);">${topicLabel(m.topic)}</div>
+          <div class="num" style="text-align: left; flex: 2;">picked <strong style="color:#f87171">${m.picked}</strong>; correct <strong style="color:#27f4d2">${m.correct}</strong></div>
+        </div>
+      `).join('')}
+    ` : ''}
+  `;
+}
+
+// Adaptive coach: shown after a wrong answer when a topic crosses the threshold.
+// Each module module calls this after its answer-handler.
+const COACH_TIPS = {
+  'frac-add-like':       { tip: 'When the bottoms (denominators) match, only the tops change. Add the tops, keep the bottom.', ex: '<b>2/5 + 1/5</b>: Add tops 2+1=3. Keep 5. = <b>3/5</b>.' },
+  'frac-add-unlike':     { tip: 'Different bottoms? First find a common denominator, then convert both fractions before adding tops.', ex: '<b>1/2 + 1/3</b>: Common bottom 6. 1/2 = 3/6, 1/3 = 2/6. Add: 3/6 + 2/6 = <b>5/6</b>.' },
+  'frac-sub-unlike':     { tip: 'Same trick as adding unlike fractions: common denominator first, THEN subtract tops.', ex: '<b>2/3 − 1/4</b>: Common bottom 12. 2/3 = 8/12, 1/4 = 3/12. Subtract: 8 − 3 = <b>5/12</b>.' },
+  'frac-mult-frac':      { tip: 'Multiplying fractions: tops × tops, bottoms × bottoms. No common denominator needed.', ex: '<b>2/3 × 4/5</b>: 2×4 = 8. 3×5 = 15. = <b>8/15</b>.' },
+  'frac-mult-whole':     { tip: 'A whole × a fraction: just multiply the whole into the top. Bottom stays.', ex: '<b>4 × 2/5</b>: 4×2 = 8. Keep 5. = <b>8/5</b> or <b>1 3/5</b>.' },
+  'frac-div-whole-by-unit': { tip: 'Dividing by 1/n is the same as multiplying by n.', ex: '<b>3 ÷ 1/4</b>: Same as 3 × 4 = <b>12</b>.' },
+  'frac-div-unit-by-whole': { tip: 'Dividing 1/n by a whole w means each share is 1/(n × w).', ex: '<b>1/4 ÷ 3</b>: 1/(4 × 3) = <b>1/12</b>.' },
+  'frac-compare':        { tip: 'Convert to a common denominator, then compare the tops.', ex: '<b>2/3 vs 3/5</b>: Common 15. 2/3 = 10/15, 3/5 = 9/15. <b>2/3 is bigger</b>.' },
+  'frac-equiv':          { tip: 'Equivalent fractions: multiply top and bottom by the SAME number.', ex: '<b>3/4 = ?/12</b>: 4 × 3 = 12, so multiply top by 3 too: <b>9/12</b>.' },
+  'frac-simplify':       { tip: 'To simplify, divide top and bottom by the same number until you can\'t go any smaller.', ex: '<b>6/8</b>: divide both by 2 → <b>3/4</b>.' },
+  'dec-place-value':     { tip: 'Decimal places after the point: tenths, hundredths, thousandths. Each digit\'s VALUE = digit × its place.', ex: 'In <b>3.247</b>: the 4 is in the hundredths, value = 4 × 1/100 = <b>0.04</b>.' },
+  'dec-compare':         { tip: 'Compare digit by digit from the LEFT. First difference wins. Watch place values!', ex: '<b>1.45 vs 1.5</b>: Same 1. Tenths: 4 vs 5. So 1.5 is bigger.' },
+  'dec-add-sub':         { tip: 'Line up the decimal points. Then add or subtract column by column.', ex: '<b>2.50 + 1.37</b>: line up dots. 0+7=7, 5+3=8, 2+1=3. = <b>3.87</b>.' },
+  'dec-mult':            { tip: 'Multiply as if both were whole numbers. Then place the decimal so the answer has the same total decimal places as both inputs combined.', ex: '<b>0.4 × 0.3</b>: 4 × 3 = 12. Two decimal places total. = <b>0.12</b>.' },
+  'dec-power-of-ten':    { tip: 'Multiplying by 10/100/1000 shifts the decimal RIGHT. Dividing shifts it LEFT.', ex: '<b>3.45 × 100</b>: shift 2 right = <b>345</b>. <b>27 ÷ 1000</b>: shift 3 left = <b>0.027</b>.' },
+  'dec-round':           { tip: 'Look at the digit JUST AFTER the place you\'re rounding to. ≥5 round up; <5 round down.', ex: '<b>Round 1.234 to hundredths</b>: digit after hundredths is 4 (<5), round down → <b>1.23</b>.' },
+  'coord-plot':          { tip: 'Always read coordinates as (x, y). x first (horizontal), then y (vertical).', ex: '<b>(3, 5)</b>: from origin, RIGHT 3, then UP 5.' },
+  'coord-distance':      { tip: 'On a grid, distance between two points with the same x or same y is just the difference of the other coord.', ex: '<b>(2, 4) to (7, 4)</b>: same y. Distance = |7 − 2| = <b>5</b>.' },
+  'coord-quadrant':      { tip: 'Quadrant I: x>0, y>0. II: x<0, y>0. III: x<0, y<0. IV: x>0, y<0.', ex: '<b>(−3, 5)</b> has negative x and positive y → quadrant <b>II</b>.' },
+  'vol-lwh':             { tip: 'Volume of a rectangular box = length × width × height. Multiply all three.', ex: '<b>3 × 4 × 5</b> box: 3×4 = 12; 12×5 = <b>60 cubes</b>.' },
+  'vol-base-height':     { tip: 'When the base AREA is given, you only multiply by height once.', ex: 'Base = 12 sq, height = 5 → 12 × 5 = <b>60 cubes</b>.' },
+  'vol-composite':       { tip: 'Find each piece\'s volume separately, then ADD.', ex: 'Hull 2×3×4 = 24. Cabin 1×2×3 = 6. Total = <b>30</b>.' },
+  'vol-missing-dim':     { tip: 'If you know V and two dimensions, divide V by their product to find the missing one.', ex: 'V = 60, base = 3 × 4 = 12 → height = 60 ÷ 12 = <b>5</b>.' },
+  'vol-unit-cubes':      { tip: 'Each layer = length × width cubes. Multiply by number of layers.', ex: '5×3 slab, 4 layers high → 15 × 4 = <b>60 cubes</b>.' },
+  'vol-hollow':          { tip: 'Outer volume MINUS inner hollow volume = brick used.', ex: 'Outer 5×4×3 = 60. Hollow 2×2×2 = 8. Brick = <b>52</b>.' },
+  'vol-scale':           { tip: 'Multiplying ONE dimension by k multiplies the whole volume by k. (Multiplying ALL three would be k³.)', ex: 'V = 24, double the length: new V = <b>48</b>.' },
+  'unit-metric':         { tip: 'Metric: each step is × or ÷ 10, 100, or 1000.', ex: '<b>3 km → m</b>: × 1000 = <b>3000 m</b>. <b>2500 g → kg</b>: ÷ 1000 = <b>2.5 kg</b>.' },
+  'unit-customary':      { tip: 'Customary needs memorized rates: 1 ft = 12 in. 1 lb = 16 oz. 1 gal = 4 qt = 8 pt = 16 cups.', ex: '<b>3 ft → in</b>: × 12 = <b>36 in</b>. <b>4 lb → oz</b>: × 16 = <b>64 oz</b>.' },
+  'unit-time':           { tip: 'Time: 60 sec = 1 min. 60 min = 1 hr. 24 hr = 1 day. 7 days = 1 week.', ex: '<b>3 hr → min</b>: × 60 = <b>180 min</b>.' },
+  'unit-multistep':      { tip: 'Two-step conversions: do them ONE AT A TIME. Don\'t try to combine.', ex: '<b>2 km → cm</b>: km → m × 1000 = 2000 m. m → cm × 100 = <b>200,000 cm</b>.' },
+  'pemdas-simple':       { tip: 'PEMDAS: parens first, then × ÷, then + −. Always do parens before anything else.', ex: '<b>2 + 3 × 4</b>: × first. 3×4 = 12. Then 2 + 12 = <b>14</b>. NOT (2+3) × 4.' },
+  'pemdas-brackets':     { tip: 'Brackets [ ] work like inner parens — work them out from the INSIDE out.', ex: '<b>2 × [3 + (4 − 1)]</b>: innermost parens first. 4−1 = 3. Then [3 + 3] = 6. Then 2 × 6 = <b>12</b>.' },
+  'pemdas-write-expr':   { tip: 'Word → expression. "X plus Y times Z" means parens around X+Y if "plus" comes first phrasing-wise. Read carefully.', ex: '"3 plus 4 groups of 5" = <b>3 + 4 × 5</b> (because "groups of" is multiplication, done FIRST).' },
+  'pemdas-pattern':      { tip: 'When two patterns share a starting position, you can compare term-by-term.', ex: 'Roo: 0,2,4,6 (add 2). Tigger: 0,4,8,12 (add 4). Tigger\'s nth term = 2 × Roo\'s nth term.' },
+  // Coarse fallback tips (when granular topic isn't tagged on the question)
+  'frac-like-denom':     { tip: 'When the bottoms (denominators) match, only the tops change. Add or subtract the tops, keep the bottom.', ex: '<b>2/5 + 1/5</b>: 2+1=3. Keep 5. = <b>3/5</b>.' },
+  'frac-unlike-easy':    { tip: 'Different bottoms? Find a common bottom first, convert both, THEN add or subtract.', ex: '<b>1/2 + 1/3</b>: common 6. 1/2 = 3/6, 1/3 = 2/6. = <b>5/6</b>.' },
+  'frac-unlike-mixed':   { tip: 'Same trick: common denominator first, then add or subtract tops.', ex: '<b>2/3 − 1/4</b>: common 12. 2/3 = 8/12, 1/4 = 3/12. 8 − 3 = <b>5/12</b>.' },
+  'frac-multiply':       { tip: 'Multiplying fractions: tops × tops, bottoms × bottoms. No common bottom needed.', ex: '<b>2/3 × 4/5</b>: 2×4 = 8, 3×5 = 15. = <b>8/15</b>.' },
+  'frac-divide':         { tip: 'Dividing by 1/n is the same as multiplying by n. Dividing by a whole w means each share is 1/w of what you had.', ex: '<b>3 ÷ 1/4</b> = 3 × 4 = <b>12</b>. <b>1/4 ÷ 3</b> = <b>1/12</b>.' },
+  'frac-mixed-all':      { tip: 'Mixed fraction practice: identify the operation FIRST. Then apply the right rule.', ex: 'Adding/subtracting? Common denominator. Multiplying? Tops × tops. Dividing? Flip the second one.' },
+  'dec-compare-order':   { tip: 'Compare decimal digits from LEFT to RIGHT. First difference wins.', ex: '<b>1.45 vs 1.5</b>: tenths 4 vs 5. 1.5 is bigger.' },
+  'dec-multiply':        { tip: 'Multiply as if both were whole numbers. Then place the decimal so the answer has the same total decimal places.', ex: '<b>0.4 × 0.3</b>: 4 × 3 = 12, 2 decimal places → <b>0.12</b>.' },
+  'dec-divide':          { tip: 'When dividing decimals, if the divisor has a decimal, shift BOTH numbers\' decimals the same direction until the divisor is whole.', ex: '<b>4.8 ÷ 0.2</b>: shift both ×10 → 48 ÷ 2 = <b>24</b>.' },
+  'dec-mixed-all':       { tip: 'Mixed decimal practice: read what\'s being asked carefully. Compare? Round? Add? Each operation has its own rule.', ex: 'Always check the place value before doing anything else.' },
+  'coord-plot':          { tip: 'Always read coordinates as (x, y). x first (horizontal), then y (vertical).', ex: '<b>(3, 5)</b>: from origin, RIGHT 3, then UP 5.' },
+  'coord-plot-distance': { tip: 'For points on the same horizontal or vertical line, distance = absolute difference of the changing coord.', ex: '<b>(2, 4) to (7, 4)</b>: |7 − 2| = <b>5</b>.' },
+  'coord-reflect-translate': { tip: 'Reflect across x-axis: flip y\'s sign. Across y-axis: flip x\'s sign. Translate: ADD the deltas.', ex: '<b>(3, 5)</b> reflected across x = (3, −5). Translated +2x −1y = (5, 4).' },
+  'coord-mixed':         { tip: 'Read what\'s being asked. Plot? Distance? Reflect? Each op has its own rule.', ex: 'For ANY (x, y), x is horizontal, y is vertical. Always.' },
+  'vol-lwh-bh-mix':      { tip: 'Volume = L × W × H always. If a hollow chamber is inside, subtract its volume.', ex: '5×4×3 box, 2×2×1 hollow inside: 60 − 4 = <b>56</b> stud cubes.' },
+  'vol-mb-mixed':        { tip: 'Volume rule: multiply the three dimensions. If composite (two pieces stacked), find each volume and ADD.', ex: 'Hull 4×3×2 = 24. Cabin 2×2×1 = 4. Total = 28.' },
+  'unit-mixed-all':      { tip: 'Identify the unit you\'re going TO. Multiply if going to smaller units, divide if going to larger.', ex: 'm → cm: × 100 (smaller). cm → m: ÷ 100 (larger).' },
+  'pemdas-simple-parens': { tip: 'PEMDAS: parens first, THEN multiply/divide, THEN add/subtract.', ex: '<b>(2 + 3) × 4</b>: parens first. 5 × 4 = <b>20</b>.' },
+  'pemdas-parens-multi':  { tip: 'Multiple parens? Resolve each one separately, then combine.', ex: '<b>(2 + 3) × (4 − 1)</b>: 5 × 3 = <b>15</b>.' },
+  'pemdas-full-pemdas':   { tip: 'Full PEMDAS: P(arens), E(xponents), MD (left to right), AS (left to right). Order matters!', ex: '<b>2 + 3 × 4²</b>: 4²=16, 3×16=48, 2+48 = <b>50</b>.' },
+  'pemdas-all-mix':       { tip: 'Identify the operation type FIRST. PEMDAS order applies to all of them.', ex: 'Always: parens → exponents → ×÷ → +−' },
+};
+
+function showCoach(topic) {
+  const tip = COACH_TIPS[topic];
+  if (!tip) return false;
+  $('coach-title').textContent = "Hold up — let's slow down on " + topicLabel(topic);
+  $('coach-body').innerHTML = `
+    <div class="coach-body-msg">You've missed this kind of question a few times in the last week. Here's the trick:</div>
+    <div class="coach-body-msg">${tip.tip}</div>
+    <div class="coach-example"><strong>Worked example.</strong> ${tip.ex}</div>
+    <div class="coach-body-msg" style="font-size: 0.86rem; color: var(--text-secondary);">Take a breath, then keep going.</div>
+  `;
+  $('coach-modal').style.display = 'flex';
+  Save.markCoachShown(topic);
+  return true;
+}
 
 </script>
 </body>
