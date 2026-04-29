@@ -2134,6 +2134,7 @@
         <span style="color: var(--text-muted);">·</span>
         <span class="stars-tally"><span id="total-stars">0</span> ★</span>
       </div>
+      <button class="icon-btn" id="btn-preview" title="Preview Mode: when ON, every section and every level is accessible (for browsing). When OFF, normal progression gating applies.">Preview: ON</button>
       <button class="icon-btn" id="btn-rename" title="Set player name">Name</button>
       <button class="icon-btn" id="btn-export" title="Download save file">Export</button>
       <button class="icon-btn" id="btn-import" title="Restore from save file">Import</button>
@@ -2350,6 +2351,7 @@ const Save = {
       stats:   { totalCorrect: 0, totalAnswered: 0, sessionCount: 0 },
       modules: moduleStates,
       grandGoals: {},
+      previewMode: true,
       created: Date.now(),
       lastSaved: Date.now(),
     };
@@ -2364,6 +2366,8 @@ const Save = {
         return;
       }
       this.state = JSON.parse(raw);
+      // Default-on Preview Mode for older saves that predate this flag
+      if (this.state.previewMode === undefined) this.state.previewMode = true;
       // Reconcile against current MODULES list
       for (const m of MODULES) {
         if (!this.state.modules[m.id]) {
@@ -2411,10 +2415,23 @@ const Save = {
   },
 
   isLevelUnlocked(moduleId, levelIndex) {
+    if (this.state.previewMode) return true;
     if (levelIndex === 0) return true;
     const ms = this.state.modules[moduleId];
     if (!ms) return false;
     return ms.levelsCleared >= levelIndex;
+  },
+
+  togglePreview() {
+    this.state.previewMode = !this.state.previewMode;
+    this.saveNow();
+    return this.state.previewMode;
+  },
+
+  isModuleUnlocked(moduleId) {
+    if (this.state.previewMode) return true;
+    const ms = this.state.modules[moduleId];
+    return !!(ms && ms.unlocked);
   },
 
   recordLevel(moduleId, levelIndex, stars, score) {
@@ -2511,6 +2528,12 @@ function showScreen(name) {
 function renderHeader() {
   $('player-name').textContent = Save.state.profile.name;
   $('total-stars').textContent = Save.totalStars();
+  const btn = $('btn-preview');
+  if (btn) {
+    btn.textContent = Save.state.previewMode ? 'Preview: ON' : 'Preview: OFF';
+    btn.style.color = Save.state.previewMode ? 'var(--theme-volume)' : 'var(--text-secondary)';
+    btn.style.borderColor = Save.state.previewMode ? 'rgba(242,205,55,0.45)' : 'var(--border-subtle)';
+  }
 }
 
 function renderLauncher() {
@@ -2519,7 +2542,7 @@ function renderLauncher() {
   for (let i = 0; i < MODULES.length; i++) {
     const m = MODULES[i];
     const ms = Save.state.modules[m.id];
-    const unlocked = ms.unlocked;
+    const unlocked = Save.isModuleUnlocked(m.id);
     const cleared = ms.levelsCleared;
     const total = m.levels.length;
     const stars = ms.levelStars.reduce((a, b) => a + b, 0);
@@ -5625,6 +5648,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('btn-back-launcher').addEventListener('click', exitToLauncher);
   $('btn-back-levels').addEventListener('click', exitToLevels);
+
+  $('btn-preview').addEventListener('click', () => {
+    Save.togglePreview();
+    renderHeader();
+    if (currentScreen === 'launcher') renderLauncher();
+    else if (currentScreen === 'levels') renderLevels();
+  });
 
   $('btn-export').addEventListener('click', () => Save.exportJSON());
   $('btn-import').addEventListener('click', () => $('import-file-input').click());
