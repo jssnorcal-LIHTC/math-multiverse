@@ -5567,12 +5567,48 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     };
   }
 
+  function genUnitCubeCount(builderId) {
+    // CCSS 5.MD.C.4 — count unit cubes packed without gaps
+    const layers = ri(2, 4);
+    const lw = ri(2, 5);
+    const wd = ri(2, 4);
+    const v = layers * lw * wd;
+    const opts = ensureFour(new Set([v]), () => Math.max(1, v + ri(-12, 12)));
+    shuffle(opts);
+    return {
+      prompt: quoteFor(builderId, `Count the unit cubes: a ${lw}-wide × ${wd}-deep slab, stacked <strong>${layers}</strong> layers high. <strong>Total cubes</strong>?`),
+      answers: opts.map(o => o + ' cubes'),
+      correctIdx: opts.indexOf(v),
+      explain: `Each layer has ${lw} × ${wd} = ${lw*wd} cubes. Stacked ${layers} high: ${lw*wd} × ${layers} = <strong>${v} cubes</strong>.`,
+    };
+  }
+
+  function genCompareVol(builderId) {
+    // CCSS 5.MD.C.5.b — compare volumes of two figures
+    const a = { l: ri(2,6), w: ri(2,5), h: ri(1,4) };
+    const b = { l: ri(2,6), w: ri(2,5), h: ri(1,4) };
+    const va = a.l * a.w * a.h;
+    const vb = b.l * b.w * b.h;
+    if (va === vb) b.h++; // force non-equal
+    const vaF = a.l * a.w * a.h;
+    const vbF = b.l * b.w * b.h;
+    const correct = vaF > vbF ? 'A' : 'B';
+    const opts = shuffle(['A is bigger', 'B is bigger', 'Equal volume', 'Cannot tell']);
+    return {
+      prompt: quoteFor(builderId, `Build A is <strong>${a.l}×${a.w}×${a.h}</strong>. Build B is <strong>${b.l}×${b.w}×${b.h}</strong>. <strong>Which has the larger volume</strong>?`),
+      answers: opts,
+      correctIdx: opts.indexOf(correct + ' is bigger'),
+      explain: `A: ${a.l}×${a.w}×${a.h} = ${vaF}. B: ${b.l}×${b.w}×${b.h} = ${vbF}. <strong>${correct}</strong> wins (${vaF > vbF ? vaF : vbF} > ${vaF > vbF ? vbF : vaF}).`,
+    };
+  }
+
   function genLwhBhMix(builderId) {
-    return Math.random() < 0.5 ? genLwh(builderId) : genBaseHeight(builderId);
+    const fns = [genLwh, genBaseHeight, genUnitCubeCount];
+    return pick(fns)(builderId);
   }
 
   function genMbMixed(builderId) {
-    return pick([genLwh, genBaseHeight, genComposite, genMissingDim])(builderId);
+    return pick([genLwh, genBaseHeight, genComposite, genMissingDim, genUnitCubeCount, genCompareVol])(builderId);
   }
 
   const MB_GEN = {
@@ -6647,7 +6683,13 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     const opts = ensureFour(new Set([result]), () => Math.max(0, result + ri(-8, 8)));
     shuffle(opts);
     return {
-      prompt: `Pooh hummed: <em>"Three jars... or maybe more."</em> Solve <strong>${expr}</strong>.`,
+      prompt: pick([
+        `Pooh hummed: <em>"Three jars... or maybe more."</em> Solve <strong>${expr}</strong>.`,
+        `Christopher Robin set down his book: <em>"What does <strong>${expr}</strong> equal?"</em>`,
+        `Rabbit was busy adding things up: <em>"Tell me, what is <strong>${expr}</strong>?"</em>`,
+        `Owl, peering over his spectacles, asked: <em>"Pray, what does <strong>${expr}</strong> come to?"</em>`,
+        `From the riverbank, Eeyore mumbled: <em>"They want me to figure <strong>${expr}</strong>. As if I could."</em>`,
+      ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
       explain: `Parentheses first: ${a} ${op1} ${b} = ${av}. Then ${av} ${op2 === '*' ? '×' : '÷'} ${expr.match(/[\d]+\s*$/)?.[0] || c} = <strong>${result}</strong>.`,
@@ -6747,16 +6789,74 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
     };
   }
 
+  function genWriteExpr() {
+    // CCSS 5.OA.A.2 — write expressions for verbal descriptions, do not evaluate
+    const variants = [
+      () => {
+        const a = ri(3, 8), b = ri(2, 6), c = ri(2, 4);
+        const correct = `${a} + ${b} × ${c}`;
+        const opts = shuffle([
+          correct,
+          `(${a} + ${b}) × ${c}`,
+          `${a} × ${b} + ${c}`,
+          `${a} + (${b} + ${c})`,
+        ]);
+        return {
+          word: `Pooh has <strong>${a}</strong> jars of honey, then finds <strong>${c}</strong> baskets each holding <strong>${b}</strong> more jars.`,
+          ask: `Which expression matches?`,
+          opts, correct,
+        };
+      },
+      () => {
+        const a = ri(3, 8), b = ri(2, 5), c = ri(2, 4);
+        const correct = `(${a} + ${b}) × ${c}`;
+        const opts = shuffle([
+          correct,
+          `${a} + ${b} × ${c}`,
+          `${a} × (${b} + ${c})`,
+          `${a} × ${b} + ${c}`,
+        ]);
+        return {
+          word: `Christopher Robin gathers <strong>${a}</strong> sticks plus <strong>${b}</strong> stones, then makes <strong>${c}</strong> identical piles.`,
+          ask: `Which expression equals the total items?`,
+          opts, correct,
+        };
+      },
+      () => {
+        const a = ri(8, 16), b = ri(2, 4), c = ri(2, 4);
+        const correct = `${a} − ${b} × ${c}`;
+        const opts = shuffle([
+          correct,
+          `(${a} − ${b}) × ${c}`,
+          `${a} × ${b} − ${c}`,
+          `${a} − (${b} + ${c})`,
+        ]);
+        return {
+          word: `Piglet had <strong>${a}</strong> haycorns. He gave away <strong>${c}</strong> bags with <strong>${b}</strong> haycorns in each.`,
+          ask: `Which expression matches haycorns left?`,
+          opts, correct,
+        };
+      },
+    ];
+    const v = pick(variants)();
+    return {
+      prompt: `<em>${v.word}</em> ${v.ask}`,
+      answers: v.opts,
+      correctIdx: v.opts.indexOf(v.correct),
+      explain: `Translate the words to operations. The correct expression is <strong>${v.correct}</strong>. (Don't evaluate — just match the structure.)`,
+    };
+  }
+
   function genAllMix() {
-    const fns = [genSimpleParens, genParensMulti, genBrackets, genNested, genFullPemdas];
+    const fns = [genSimpleParens, genParensMulti, genBrackets, genNested, genFullPemdas, genWriteExpr];
     return pick(fns)();
   }
 
   const FB_GEN = {
     'simple-parens': genSimpleParens,
-    'parens-multi':  genParensMulti,
+    'parens-multi':  () => Math.random() < 0.75 ? genParensMulti() : genWriteExpr(),
     'brackets':      genBrackets,
-    'nested':        genNested,
+    'nested':        () => Math.random() < 0.75 ? genNested() : genWriteExpr(),
     'full-pemdas':   genFullPemdas,
     'all-mix':       genAllMix,
   };
