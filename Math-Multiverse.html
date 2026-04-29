@@ -594,6 +594,32 @@
   }
   .fr-trail-tag span { display: inline-block; transform: skewX(10deg); }
 
+  /* iOS-Safari autoplay-blocked tap-to-start overlay */
+  .fr-video-tap {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(238,29,82,0.85), rgba(255,204,0,0.75));
+    border: 0; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: #08090b;
+    font-family: inherit;
+    font-size: 1rem; font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    z-index: 10;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .fr-video-tap:hover, .fr-video-tap:active {
+    filter: brightness(1.1);
+  }
+  .fr-video-tap span {
+    padding: 14px 22px;
+    background: rgba(0,0,0,0.7);
+    color: #ffcc00;
+    border-radius: 8px;
+    text-shadow: none;
+  }
+
   .fr-status {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
@@ -4059,20 +4085,17 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
       // Wires the `ended` listener on the video element so when the current
       // clip finishes naturally, the next clip in the shuffled queue plays.
-      // This is what fixes the "2-second loop is distracting" problem.
       function wireVideoRotation() {
         const video = root.querySelector('#fr-video');
         if (!video) return;
         video.addEventListener('ended', () => {
           state.videoIdx = (state.videoIdx + 1) % state.videoQueue.length;
           state.videoSrc = state.videoQueue[state.videoIdx];
-          // If we've cycled through the entire queue, reshuffle for variety
           if (state.videoIdx === 0) state.videoQueue = shuffle([...FR_VIDEOS]);
           video.src = state.videoQueue[state.videoIdx];
           video.load();
           video.play().catch(() => {});
         });
-        // Also handle errors: if a clip fails (404, decode error), skip to next
         video.addEventListener('error', () => {
           state.videoIdx = (state.videoIdx + 1) % state.videoQueue.length;
           state.videoSrc = state.videoQueue[state.videoIdx];
@@ -4080,6 +4103,25 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           video.load();
           video.play().catch(() => {});
         });
+
+        // iOS Safari sometimes blocks autoplay even with muted+playsinline.
+        // If after 1.5s the video is still paused, show a tap-to-start overlay.
+        // Once the kid taps, autoplay works for all subsequent rotation clips.
+        video.play().catch(() => {});
+        setTimeout(() => {
+          if (video.paused) {
+            const trail = root.querySelector('#fr-trail');
+            if (!trail || trail.querySelector('.fr-video-tap')) return;
+            const tap = document.createElement('button');
+            tap.className = 'fr-video-tap';
+            tap.innerHTML = '<span>TAP TO START THE TRAIL CAM</span>';
+            tap.addEventListener('click', () => {
+              video.play().catch(() => {});
+              tap.remove();
+            });
+            trail.appendChild(tap);
+          }
+        }, 1500);
       }
 
       function render() {
