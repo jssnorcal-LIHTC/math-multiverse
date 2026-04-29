@@ -1539,6 +1539,249 @@
     .rk-dict { max-height: 200px; }
   }
 
+  /* ============================================================
+     MODULE 6: THE FLOATING BEAR  (.mod-fb) — Shepard 1926 aesthetic
+     ============================================================ */
+  .mod-fb {
+    width: 100%; height: 100%;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 100% 100% at 50% 50%, #F2E8D5 0%, #E5D4B5 100%);
+    color: #4A3526;
+    font-family: 'Cormorant Garamond', 'Crimson Text', Georgia, 'Times New Roman', serif;
+  }
+  .mod-fb::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(2deg, transparent 0px, transparent 1px, rgba(74, 53, 38, 0.02) 1px, rgba(74, 53, 38, 0.02) 2px),
+      repeating-linear-gradient(-1deg, transparent 0px, transparent 1px, rgba(201, 168, 118, 0.04) 1px, rgba(201, 168, 118, 0.04) 3px);
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+  .mod-fb::after {
+    /* page-edge browning vignette */
+    content: '';
+    position: absolute; inset: 0;
+    box-shadow:
+      inset 0 0 60px rgba(139, 90, 43, 0.25),
+      inset 0 0 140px rgba(139, 90, 43, 0.18);
+    pointer-events: none;
+  }
+
+  .fb-pick {
+    position: relative; z-index: 1;
+    padding: 28px;
+    height: 100%;
+    overflow-y: auto;
+    text-align: center;
+  }
+  .fb-title-stack {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    margin-bottom: 18px;
+  }
+  .fb-pick h2 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    font-style: italic;
+    color: #4A3526;
+    letter-spacing: -0.01em;
+  }
+  .fb-pick .fb-subtitle {
+    font-size: 1.05rem;
+    color: #8B5A2B;
+    font-style: italic;
+    margin-bottom: 4px;
+  }
+  .fb-pick .fb-chapter {
+    font-size: 0.85rem;
+    color: #8B5A2B;
+    letter-spacing: 0.05em;
+    font-style: italic;
+  }
+  .fb-pick .lvl-badge {
+    display: inline-block; margin: 12px auto 18px;
+    padding: 4px 14px;
+    background: rgba(212, 162, 76, 0.18);
+    border: 1px solid rgba(139, 90, 43, 0.4);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #8B5A2B;
+    letter-spacing: 0.06em;
+  }
+  .fb-illustration {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto 20px;
+    aspect-ratio: 3 / 2;
+    position: relative;
+    border: 1px solid rgba(139, 90, 43, 0.3);
+    border-radius: 4px;
+    background: #F8F0DD;
+    box-shadow: 0 2px 8px rgba(74, 53, 38, 0.12);
+    overflow: hidden;
+  }
+  .fb-illustration svg { width: 100%; height: 100%; display: block; }
+  .fb-pick-actions { display: flex; justify-content: center; gap: 12px; margin-top: 12px; }
+  .fb-go {
+    padding: 12px 26px;
+    background: #4A3526;
+    color: #F2E8D5;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    font-style: italic;
+    border: 2px solid #4A3526;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.16s ease-out, transform 0.16s var(--ease-spring);
+    box-shadow: 0 2px 0 #2A1F16;
+  }
+  .fb-go:hover { background: #2A1F16; transform: translateY(-1px); }
+  .fb-back {
+    padding: 12px 22px;
+    background: transparent;
+    color: #4A3526;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-style: italic;
+    border: 1px solid rgba(74, 53, 38, 0.4);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .fb-back:hover { background: rgba(74, 53, 38, 0.06); }
+
+  /* Story screen */
+  .fb-story {
+    position: relative; z-index: 1;
+    width: 100%; height: 100%;
+    display: grid;
+    grid-template-rows: minmax(220px, 38%) auto 1fr auto;
+    gap: 12px;
+    padding: 12px;
+  }
+  .fb-stage {
+    border: 1px solid rgba(139, 90, 43, 0.3);
+    border-radius: 4px;
+    background: #F8F0DD;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(74, 53, 38, 0.1);
+  }
+  .fb-stage svg { width: 100%; height: 100%; display: block; }
+
+  .fb-status {
+    background: rgba(245, 230, 200, 0.85);
+    border: 1px solid rgba(139, 90, 43, 0.3);
+    border-radius: 4px;
+    padding: 8px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-feature-settings: 'tnum' 1;
+  }
+  .fb-stat { display: flex; align-items: center; gap: 6px; }
+  .fb-stat-label {
+    font-size: 0.7rem;
+    color: #8B5A2B;
+    letter-spacing: 0.08em;
+    font-style: italic;
+    font-weight: 500;
+    text-transform: lowercase;
+  }
+  .fb-stat-value {
+    font-weight: 700;
+    color: #4A3526;
+    font-style: italic;
+    font-size: 1rem;
+  }
+
+  .fb-question {
+    background: #FAF3E0;
+    border: 1px solid rgba(139, 90, 43, 0.3);
+    border-radius: 4px;
+    padding: 18px 20px;
+    overflow-y: auto;
+    box-shadow: 0 2px 8px rgba(74, 53, 38, 0.08);
+  }
+  .fb-q-meta {
+    display: flex; justify-content: space-between;
+    font-size: 0.8rem;
+    color: #8B5A2B;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  .fb-q-prompt {
+    font-size: 1.18rem;
+    line-height: 1.55;
+    color: #2A1F16;
+    margin-bottom: 14px;
+  }
+  .fb-q-prompt strong {
+    font-weight: 700;
+    color: #8B0000;
+    font-style: italic;
+    background: rgba(212, 162, 76, 0.20);
+    padding: 0 4px;
+    border-radius: 2px;
+    font-feature-settings: 'tnum' 1;
+  }
+  .fb-q-prompt em {
+    color: #8B5A2B;
+    font-style: italic;
+  }
+
+  .fb-answers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 8px;
+  }
+  .fb-ans {
+    padding: 12px 14px;
+    background: #F2E8D5;
+    border: 2px solid #8B5A2B;
+    border-radius: 4px;
+    color: #4A3526;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-style: italic;
+    cursor: pointer;
+    font-feature-settings: 'tnum' 1;
+    box-shadow: 0 2px 0 rgba(139, 90, 43, 0.4);
+    transition: transform 0.12s var(--ease-spring), background 0.12s ease-out;
+  }
+  .fb-ans:hover:not(:disabled) { transform: translateY(-2px); background: #FAF0D8; }
+  .fb-ans.correct { background: #B8D8A8; border-color: #4A6D38; color: #2A4D18; }
+  .fb-ans.wrong   { background: #E5B8B8; border-color: #8B0000; color: #6B0000; }
+  .fb-ans:disabled { cursor: not-allowed; }
+
+  .fb-foot {
+    background: rgba(245, 230, 200, 0.7);
+    border: 1px solid rgba(139, 90, 43, 0.3);
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #8B5A2B;
+  }
+  .fb-jar {
+    display: inline-block;
+    width: 14px; height: 14px;
+    margin-left: 4px;
+    background: #D4A24C;
+    border: 2px solid #4A3526;
+    border-radius: 4px 4px 6px 6px / 2px 2px 6px 6px;
+    position: relative;
+  }
+  .fb-jar.lost { background: rgba(74, 53, 38, 0.1); border-color: rgba(74, 53, 38, 0.25); }
+
   /* Brick snap-in animation */
   @keyframes mbBrickDrop {
     from { transform: translateY(-200px); opacity: 0; }
@@ -1771,8 +2014,7 @@ const MODULES = [
     icon: '🐻',
     color: '#d4a24c',
     description: 'It rained, and it rained, and it rained. Save Pooh and Piglet from the flood with parentheses and brackets.',
-    unlocked: false,
-    lockedMessage: 'Beat Rocky\'s Dictionary to unlock.',
+    unlocked: true,
     levels: [
       { id: 1, name: 'Light Drizzle',           goal: 'Keep the jars dry',         questions: 15 },
       { id: 2, name: 'Steady Rain',             goal: 'Pooh sits tight',           questions: 18 },
@@ -4047,6 +4289,504 @@ function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); rende
           if (state.livesLost === 0) stars = 3;
           else if (state.livesLost === 1) stars = 2;
           else stars = 1;
+        }
+        callbacks.onComplete(state.score, stars);
+      }
+
+      renderPick();
+
+      return function cleanup() { timeouts.forEach(clearTimeout); timeouts = []; };
+    },
+  };
+})();
+
+// ============================================================
+// MODULE 6: THE FLOATING BEAR
+// ============================================================
+(function() {
+
+  const FB_LEVELS = [
+    { id: 1, name: 'A Light Drizzle',         gen: 'simple-parens', chapter: 'In which a cloud appears' },
+    { id: 2, name: 'A Steady Rain',           gen: 'parens-multi',  chapter: 'In which Pooh saves his honey' },
+    { id: 3, name: 'The Floating Bear',       gen: 'brackets',      chapter: 'In which Pooh sails on a jar' },
+    { id: 4, name: "Piglet's Bottle",         gen: 'nested',        chapter: 'In which Piglet sends a message' },
+    { id: 5, name: 'The Brain of Pooh',       gen: 'full-pemdas',   chapter: 'In which an umbrella becomes a boat' },
+    { id: 6, name: 'Storm of the Century',    gen: 'all-mix',       chapter: 'In which Captain C. Robin rescues all' },
+  ];
+  const FB_QPL = [15, 18, 18, 20, 20, 20];
+
+  const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+  function shuffle(a) { for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function ensureFour(set, gen) { let s=200; while (set.size<4 && s-- > 0) set.add(gen()); return Array.from(set).slice(0,4); }
+
+  // ---- Audio ----
+  let actx_ = null;
+  function actx() { if (!actx_) { try { actx_ = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { actx_ = null; } } return actx_; }
+  function tone(freq, dur, type='sine', vol=0.16, attack=0.01, freqEnd=null) {
+    const ac = actx(); if (!ac) return;
+    if (ac.state === 'suspended') ac.resume().catch(() => {});
+    const osc = ac.createOscillator(); const g = ac.createGain();
+    osc.type = type; osc.frequency.setValueAtTime(freq, ac.currentTime);
+    if (freqEnd != null) osc.frequency.linearRampToValueAtTime(freqEnd, ac.currentTime + dur);
+    g.gain.setValueAtTime(0, ac.currentTime);
+    g.gain.linearRampToValueAtTime(vol, ac.currentTime + attack);
+    g.gain.linearRampToValueAtTime(0, ac.currentTime + dur);
+    osc.connect(g).connect(ac.destination); osc.start(); osc.stop(ac.currentTime + dur + 0.05);
+  }
+  function sfxScratch() {
+    // Pen-on-paper scratch
+    const ac = actx(); if (!ac) return;
+    if (ac.state === 'suspended') ac.resume().catch(() => {});
+    const buffer = ac.createBuffer(1, ac.sampleRate * 0.08, ac.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * 0.5;
+    const src = ac.createBufferSource(); src.buffer = buffer;
+    const filter = ac.createBiquadFilter(); filter.type = 'highpass'; filter.frequency.value = 3000;
+    const g = ac.createGain();
+    g.gain.setValueAtTime(0, ac.currentTime);
+    g.gain.linearRampToValueAtTime(0.10, ac.currentTime + 0.005);
+    g.gain.linearRampToValueAtTime(0, ac.currentTime + 0.08);
+    src.connect(filter).connect(g).connect(ac.destination);
+    src.start(); src.stop(ac.currentTime + 0.08);
+  }
+  function sfxCorrect() { sfxScratch(); setTimeout(() => tone(523, 0.20, 'sine', 0.12), 80); setTimeout(() => tone(659, 0.22, 'sine', 0.12), 200); }
+  function sfxWrong() { tone(220, 0.10, 'sine', 0.14); tone(180, 0.12, 'sine', 0.10, 0.02); }
+  function sfxRescue() {
+    // Triumphant chord progression
+    const notes = [392, 494, 587, 784];
+    notes.forEach((f, i) => setTimeout(() => tone(f, 0.50, 'sine', 0.10), i * 150));
+  }
+
+  // ---- Shepard-style illustrations ----
+
+  function poohSvg(small) {
+    const s = small ? 80 : 160;
+    const k = small ? 0.5 : 1;
+    const t = (n) => (n * k).toFixed(1);
+    return `
+      <svg viewBox="0 0 ${s} ${s}" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#4A3526" stroke-width="${k * 1.5}" fill="none" stroke-linejoin="round">
+          <!-- body -->
+          <ellipse cx="${t(80)}" cy="${t(105)}" rx="${t(38)}" ry="${t(34)}" fill="#D4A878"/>
+          <!-- head -->
+          <circle cx="${t(80)}" cy="${t(55)}" r="${t(28)}" fill="#D4A878"/>
+          <!-- ears -->
+          <ellipse cx="${t(58)}" cy="${t(36)}" rx="${t(8)}" ry="${t(7)}" fill="#D4A878"/>
+          <ellipse cx="${t(102)}" cy="${t(36)}" rx="${t(8)}" ry="${t(7)}" fill="#D4A878"/>
+          <!-- eyes -->
+          <circle cx="${t(72)}" cy="${t(52)}" r="${t(2)}" fill="#4A3526" stroke="none"/>
+          <circle cx="${t(88)}" cy="${t(52)}" r="${t(2)}" fill="#4A3526" stroke="none"/>
+          <!-- nose -->
+          <ellipse cx="${t(80)}" cy="${t(64)}" rx="${t(4)}" ry="${t(3)}" fill="#4A3526" stroke="none"/>
+          <path d="M ${t(80)} ${t(67)} Q ${t(76)} ${t(72)} ${t(74)} ${t(70)}"/>
+          <path d="M ${t(80)} ${t(67)} Q ${t(84)} ${t(72)} ${t(86)} ${t(70)}"/>
+          <!-- arms -->
+          <ellipse cx="${t(50)}" cy="${t(95)}" rx="${t(10)}" ry="${t(18)}" fill="#D4A878"/>
+          <ellipse cx="${t(110)}" cy="${t(95)}" rx="${t(10)}" ry="${t(18)}" fill="#D4A878"/>
+          <!-- legs -->
+          <ellipse cx="${t(65)}" cy="${t(140)}" rx="${t(10)}" ry="${t(8)}" fill="#D4A878"/>
+          <ellipse cx="${t(95)}" cy="${t(140)}" rx="${t(10)}" ry="${t(8)}" fill="#D4A878"/>
+        </g>
+      </svg>
+    `;
+  }
+
+  function pigletSvg(small) {
+    const s = small ? 60 : 120;
+    const k = small ? 0.5 : 1;
+    const t = (n) => (n * k).toFixed(1);
+    return `
+      <svg viewBox="0 0 ${s} ${s}" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#4A3526" stroke-width="${k * 1.2}" fill="none">
+          <!-- body (with stripe waistcoat) -->
+          <ellipse cx="${t(60)}" cy="${t(80)}" rx="${t(22)}" ry="${t(26)}" fill="#E5BFC4"/>
+          <line x1="${t(40)}" y1="${t(75)}" x2="${t(80)}" y2="${t(75)}" stroke="#5A8A5A"/>
+          <line x1="${t(40)}" y1="${t(85)}" x2="${t(80)}" y2="${t(85)}" stroke="#5A8A5A"/>
+          <!-- head -->
+          <circle cx="${t(60)}" cy="${t(40)}" r="${t(20)}" fill="#E5BFC4"/>
+          <!-- ears -->
+          <path d="M ${t(45)} ${t(28)} L ${t(43)} ${t(20)} L ${t(50)} ${t(26)} Z" fill="#E5BFC4"/>
+          <path d="M ${t(75)} ${t(28)} L ${t(77)} ${t(20)} L ${t(70)} ${t(26)} Z" fill="#E5BFC4"/>
+          <!-- snout -->
+          <ellipse cx="${t(60)}" cy="${t(48)}" rx="${t(6)}" ry="${t(4)}" fill="#E5BFC4"/>
+          <circle cx="${t(58)}" cy="${t(48)}" r="${t(1)}" fill="#4A3526" stroke="none"/>
+          <circle cx="${t(62)}" cy="${t(48)}" r="${t(1)}" fill="#4A3526" stroke="none"/>
+          <!-- eyes -->
+          <circle cx="${t(54)}" cy="${t(38)}" r="${t(1.2)}" fill="#4A3526" stroke="none"/>
+          <circle cx="${t(66)}" cy="${t(38)}" r="${t(1.2)}" fill="#4A3526" stroke="none"/>
+        </g>
+      </svg>
+    `;
+  }
+
+  function honeyJarSvg(label) {
+    return `
+      <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#4A3526" stroke-width="1.5" fill="none" stroke-linejoin="round">
+          <!-- jar body -->
+          <path d="M 12 28 L 12 70 Q 12 75 16 75 L 44 75 Q 48 75 48 70 L 48 28 Z" fill="#D4A24C"/>
+          <!-- lid -->
+          <rect x="10" y="22" width="40" height="8" fill="#8B5A2B" rx="1"/>
+          <!-- top inner shadow -->
+          <line x1="12" y1="32" x2="48" y2="32" stroke="#8B5A2B"/>
+          <!-- label -->
+          <rect x="18" y="42" width="24" height="18" fill="#F8F0DD" stroke-width="1"/>
+          <text x="30" y="55" font-size="9" font-family="Georgia, serif" font-style="italic" font-weight="700" fill="#4A3526" text-anchor="middle" stroke="none">${label || 'HUNNY'}</text>
+        </g>
+      </svg>
+    `;
+  }
+
+  function sceneSvg(state, level) {
+    const waterLevel = 220 - state.questionNum * 6 - state.livesLost * 16; // rises with wrongs
+    const waterY = Math.max(110, Math.min(220, waterLevel));
+    const showCR = level.id >= 5 && state.questionNum > 6;
+    const showFloatingBear = level.id >= 3;
+    const showBottle = level.id >= 4 && state.questionNum > 4;
+
+    return `
+      <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="fbSky" cx="0.5" cy="0.3">
+            <stop offset="0" stop-color="#F8E8C0"/>
+            <stop offset="1" stop-color="#D8B898"/>
+          </radialGradient>
+        </defs>
+        <!-- sky / paper -->
+        <rect width="600" height="280" fill="url(#fbSky)"/>
+        <!-- distant trees -->
+        <g stroke="#4A3526" stroke-width="1" fill="#A8B898" opacity="0.5">
+          <ellipse cx="80"  cy="160" rx="32" ry="36"/>
+          <ellipse cx="520" cy="160" rx="32" ry="36"/>
+          <ellipse cx="180" cy="155" rx="22" ry="28"/>
+          <ellipse cx="430" cy="155" rx="22" ry="28"/>
+        </g>
+        <!-- big tree (Pooh's) -->
+        <g stroke="#4A3526" stroke-width="2" fill="none">
+          <path d="M 280 220 L 290 80 L 320 80 L 310 220 Z" fill="#8B5A2B"/>
+          <ellipse cx="300" cy="60" rx="50" ry="38" fill="#7A9A5A"/>
+          <ellipse cx="270" cy="50" rx="32" ry="26" fill="#8AAA6A"/>
+          <ellipse cx="335" cy="55" rx="34" ry="28" fill="#8AAA6A"/>
+        </g>
+        <!-- branch with Pooh -->
+        <line x1="300" y1="100" x2="380" y2="80" stroke="#5A4030" stroke-width="3"/>
+        <g transform="translate(360, 50) scale(0.6)">${poohSvg(false)}</g>
+        <!-- honey jars on branch -->
+        ${[0, 1, 2, 3].map(i => i < (4 - Math.min(4, state.questionNum)) ? `<g transform="translate(${340 + i * 24}, 70) scale(0.4)">${honeyJarSvg('HUNNY')}</g>` : '').join('')}
+        <!-- rain lines -->
+        ${state.questionNum > 0 ? Array.from({length: 30}, (_, i) => {
+          const x = (i * 23 + state.questionNum * 7) % 600;
+          const y = (i * 17 + state.questionNum * 11) % 200;
+          return `<line x1="${x}" y1="${y}" x2="${x - 4}" y2="${y + 12}" stroke="rgba(74, 100, 140, 0.45)" stroke-width="1"/>`;
+        }).join('') : ''}
+        <!-- water -->
+        <path d="M 0 ${waterY} Q 100 ${waterY - 4} 200 ${waterY} T 400 ${waterY} T 600 ${waterY} L 600 280 L 0 280 Z" fill="#5A7AA8" opacity="0.7"/>
+        <path d="M 0 ${waterY} Q 100 ${waterY - 4} 200 ${waterY} T 400 ${waterY} T 600 ${waterY}" stroke="#4A3526" stroke-width="1" fill="none"/>
+        <!-- Floating Bear (Pooh on jar) -->
+        ${showFloatingBear ? `
+          <g transform="translate(150, ${waterY - 50})">
+            <g transform="translate(0, 14) scale(0.7)">${honeyJarSvg('THE FLOATING BEAR')}</g>
+            <g transform="translate(8, -22) scale(0.4)">${poohSvg(false)}</g>
+          </g>
+        ` : ''}
+        <!-- Piglet's bottle -->
+        ${showBottle ? `
+          <g transform="translate(450, ${waterY - 14})">
+            <ellipse cx="0" cy="0" rx="14" ry="6" fill="#D8E8F8" stroke="#4A3526" stroke-width="1"/>
+            <rect x="-3" y="-12" width="6" height="8" fill="#D8E8F8" stroke="#4A3526" stroke-width="1"/>
+            <text x="0" y="3" text-anchor="middle" font-size="5" fill="#4A3526" font-family="Georgia" font-style="italic">HELP</text>
+          </g>
+        ` : ''}
+        <!-- Christopher Robin in umbrella -->
+        ${showCR ? `
+          <g transform="translate(280, ${waterY - 60})">
+            <!-- inverted umbrella as boat -->
+            <path d="M -36 0 Q 0 30 36 0 L 30 8 L 24 4 L 18 8 L 12 4 L 6 8 L 0 4 L -6 8 L -12 4 L -18 8 L -24 4 L -30 8 Z" fill="#A88858" stroke="#4A3526" stroke-width="1.5"/>
+            <line x1="0" y1="-30" x2="0" y2="0" stroke="#4A3526" stroke-width="1.5"/>
+            <!-- Christopher Robin silhouette -->
+            <circle cx="0" cy="-20" r="6" fill="#F0D8B8" stroke="#4A3526" stroke-width="1"/>
+            <rect x="-6" y="-15" width="12" height="14" fill="#9AB0C8" stroke="#4A3526" stroke-width="1"/>
+            <text x="0" y="-30" text-anchor="middle" font-size="6" fill="#4A3526" font-family="Georgia" font-style="italic">"Pooh!"</text>
+          </g>
+        ` : ''}
+        <!-- title vignette -->
+        <text x="300" y="30" text-anchor="middle" font-family="Georgia" font-size="14" font-style="italic" fill="#8B5A2B">${level.chapter}</text>
+      </svg>
+    `;
+  }
+
+  // ---- Question generators (CCSS 5.OA — no exponents) ----
+
+  function genSimpleParens() {
+    const a = ri(2, 9), b = ri(2, 9), c = ri(2, 6);
+    const op1 = pick(['+', '-']);
+    const av = op1 === '+' ? a + b : Math.abs(a - b);
+    const op2 = pick(['*', '/']);
+    let result, expr;
+    if (op2 === '*') {
+      result = av * c;
+      expr = `(${a} ${op1} ${b}) × ${c}`;
+    } else {
+      // ensure clean division
+      result = av;
+      expr = `(${a} ${op1} ${b}) ÷ 1`;
+      // try to make divide clean
+      const c2 = pick([1, 2, 3]);
+      if (av % c2 === 0) { result = av / c2; expr = `(${a} ${op1} ${b}) ÷ ${c2}`; }
+    }
+    const opts = ensureFour(new Set([result]), () => Math.max(0, result + ri(-8, 8)));
+    shuffle(opts);
+    return {
+      prompt: `Pooh hummed: <em>"Three jars... or maybe more."</em> Solve <strong>${expr}</strong>.`,
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(result),
+    };
+  }
+
+  function genParensMulti() {
+    const variants = [
+      () => {
+        const a = ri(2, 8), b = ri(2, 6), c = ri(2, 5), d = ri(2, 5);
+        const expr = `${a} + (${b} × ${c}) - ${d}`;
+        const result = a + (b * c) - d;
+        return { expr, result };
+      },
+      () => {
+        const a = ri(2, 8), b = ri(2, 5), c = ri(2, 5);
+        const expr = `(${a} + ${b}) × ${c}`;
+        const result = (a + b) * c;
+        return { expr, result };
+      },
+      () => {
+        const a = ri(8, 30), b = ri(2, 5), c = ri(2, 5);
+        const expr = `${a} - (${b} × ${c})`;
+        const result = a - (b * c);
+        return { expr, result };
+      },
+    ];
+    const v = pick(variants)();
+    const opts = ensureFour(new Set([v.result]), () => Math.max(0, v.result + ri(-10, 10)));
+    shuffle(opts);
+    return {
+      prompt: `Piglet wondered aloud: <em>"What does <strong>${v.expr}</strong> come to?"</em>`,
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(v.result),
+    };
+  }
+
+  function genBrackets() {
+    const a = ri(2, 8), b = ri(2, 5), c = ri(2, 5), d = ri(2, 6);
+    const expr = `[(${a} + ${b}) × ${c}] - ${d}`;
+    const result = ((a + b) * c) - d;
+    const opts = ensureFour(new Set([result]), () => Math.max(0, result + ri(-12, 12)));
+    shuffle(opts);
+    return {
+      prompt: `Owl from his porch: <em>"By my calculation, <strong>${expr}</strong> equals?"</em>`,
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(result),
+    };
+  }
+
+  function genNested() {
+    const a = ri(4, 12), b = ri(2, 4), c = ri(2, 5);
+    // ((a + b) ÷ b)  + c  — make division clean
+    const sum = a + b;
+    if (sum % b !== 0) return genBrackets(); // fallback if not clean
+    const expr = `((${a} + ${b}) ÷ ${b}) + ${c}`;
+    const result = (sum / b) + c;
+    const opts = ensureFour(new Set([result]), () => Math.max(0, result + ri(-8, 8)));
+    shuffle(opts);
+    return {
+      prompt: `Christopher Robin reads: <em>"Nested in the brackets: <strong>${expr}</strong>."</em>`,
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(result),
+    };
+  }
+
+  function genFullPemdas() {
+    const variants = [
+      () => {
+        const a = ri(6, 24), b = ri(2, 4), c = ri(2, 5), d = ri(2, 4);
+        if ((a) % b !== 0) return null;
+        const expr = `{[${a} ÷ ${b}] + ${c}} × ${d}`;
+        const result = (((a / b) + c) * d);
+        return { expr, result };
+      },
+      () => {
+        const a = ri(2, 6), b = ri(2, 5), c = ri(2, 5), d = ri(2, 6);
+        const expr = `[(${a} + ${b}) × ${c}] ÷ ${d}`;
+        const inner = (a + b) * c;
+        if (inner % d !== 0) return null;
+        const result = inner / d;
+        return { expr, result };
+      },
+    ];
+    let v = null;
+    for (let i = 0; i < 8 && !v; i++) v = pick(variants)();
+    if (!v) v = { expr: '(2 + 3) × 4', result: 20 };
+    const opts = ensureFour(new Set([v.result]), () => Math.max(0, v.result + ri(-10, 10)));
+    shuffle(opts);
+    return {
+      prompt: `Eeyore, gloomy: <em>"They say <strong>${v.expr}</strong>. I'll be surprised if it works out."</em>`,
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(v.result),
+    };
+  }
+
+  function genAllMix() {
+    const fns = [genSimpleParens, genParensMulti, genBrackets, genNested, genFullPemdas];
+    return pick(fns)();
+  }
+
+  const FB_GEN = {
+    'simple-parens': genSimpleParens,
+    'parens-multi':  genParensMulti,
+    'brackets':      genBrackets,
+    'nested':        genNested,
+    'full-pemdas':   genFullPemdas,
+    'all-mix':       genAllMix,
+  };
+
+  // ---- Module main ----
+
+  InlineModules['floating-bear'] = {
+    init(host, levelIndex, callbacks) {
+      const lvl = FB_LEVELS[levelIndex];
+      const totalQ = FB_QPL[levelIndex];
+
+      const state = {
+        phase: 'pick',
+        questionNum: 0,
+        score: 0,
+        streak: 0,
+        livesLost: 0,
+        questions: [],
+        jarsSaved: 0,
+      };
+      let timeouts = [];
+      const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
+
+      host.innerHTML = '<div class="mod-fb"></div>';
+      const root = host.querySelector('.mod-fb');
+
+      function renderPick() {
+        state.phase = 'pick';
+        root.innerHTML = `
+          <div class="fb-pick">
+            <div class="fb-title-stack">
+              <h2>The Floating Bear</h2>
+              <div class="fb-subtitle">Chapter ${lvl.id} &middot; ${lvl.name}</div>
+              <div class="fb-chapter">"${lvl.chapter}"</div>
+            </div>
+            <div class="lvl-badge">${totalQ} expressions to solve</div>
+            <div class="fb-illustration">
+              ${sceneSvg({questionNum: 0, livesLost: 0}, lvl)}
+            </div>
+            <div class="fb-pick-actions">
+              <button class="fb-back" id="fb-back">&larr; Back to chapters</button>
+              <button class="fb-go" id="fb-go">Begin the Story &rarr;</button>
+            </div>
+          </div>
+        `;
+        root.querySelector('#fb-back').addEventListener('click', () => callbacks.onExit());
+        root.querySelector('#fb-go').addEventListener('click', () => startStory());
+      }
+
+      function startStory() {
+        state.questionNum = 0;
+        state.score = 0;
+        state.streak = 0;
+        state.livesLost = 0;
+        state.jarsSaved = 0;
+        state.questions = [];
+        const gen = FB_GEN[lvl.gen];
+        for (let i = 0; i < totalQ; i++) state.questions.push(gen());
+        state.phase = 'reading';
+        renderStory();
+      }
+
+      function renderStory() {
+        const jarsHtml = [0,1,2].map(i => `<span class="fb-jar ${i < state.livesLost ? 'lost' : ''}"></span>`).join('');
+        root.innerHTML = `
+          <div class="fb-story">
+            <div class="fb-stage">${sceneSvg(state, lvl)}</div>
+            <div class="fb-status">
+              <div class="fb-stat"><span class="fb-stat-label">chapter</span><span class="fb-stat-value">${lvl.id}</span></div>
+              <div class="fb-stat"><span class="fb-stat-label">verse</span><span class="fb-stat-value">${state.questionNum + 1} of ${totalQ}</span></div>
+              <div class="fb-stat"><span class="fb-stat-label">streak</span><span class="fb-stat-value">${state.streak}</span></div>
+              <div class="fb-stat"><span class="fb-stat-label">honey jars</span><span class="fb-stat-value">${state.jarsSaved}</span></div>
+              <div class="fb-stat"><span class="fb-stat-label">score</span><span class="fb-stat-value">${state.score}</span></div>
+            </div>
+            <div class="fb-question" id="fb-question"></div>
+            <div class="fb-foot">
+              <em>"It rained, and it rained, and it rained."</em>
+              <div>Jars dry: ${jarsHtml}</div>
+            </div>
+          </div>
+        `;
+        showQuestion();
+      }
+
+      function showQuestion() {
+        const qEl = root.querySelector('#fb-question');
+        if (!qEl) return;
+        const q = state.questions[state.questionNum];
+        if (!q) { endLevel(); return; }
+        qEl.innerHTML = `
+          <div class="fb-q-meta">
+            <span>Verse ${state.questionNum + 1}</span>
+            <span>${lvl.gen.replace(/-/g, ' ')}</span>
+          </div>
+          <div class="fb-q-prompt">${q.prompt}</div>
+          <div class="fb-answers">
+            ${q.answers.map((a, i) => `<button class="fb-ans" data-idx="${i}">${a}</button>`).join('')}
+          </div>
+        `;
+        qEl.querySelectorAll('.fb-ans').forEach(b => {
+          b.addEventListener('click', () => answer(parseInt(b.dataset.idx, 10), qEl.querySelectorAll('.fb-ans'), q));
+        });
+      }
+
+      function answer(idx, buttons, q) {
+        if (state.phase !== 'reading') return;
+        state.phase = 'between';
+        const correct = idx === q.correctIdx;
+        buttons.forEach(b => b.disabled = true);
+        buttons[q.correctIdx].classList.add('correct');
+        if (!correct) buttons[idx].classList.add('wrong');
+
+        if (correct) {
+          state.streak = Math.min(99, state.streak + 1);
+          state.score += 100 + (state.streak >= 3 ? 50 : 0);
+          state.jarsSaved++;
+          sfxCorrect();
+        } else {
+          state.streak = 0;
+          state.livesLost = Math.min(3, state.livesLost + 1);
+          sfxWrong();
+        }
+
+        later(1300, () => {
+          state.questionNum++;
+          if (state.livesLost >= 3 || state.questionNum >= totalQ) {
+            endLevel();
+          } else {
+            state.phase = 'reading';
+            renderStory();
+          }
+        });
+      }
+
+      function endLevel() {
+        state.phase = 'end';
+        const dnf = state.livesLost >= 3;
+        let stars = 0;
+        if (!dnf) {
+          if (state.livesLost === 0) stars = 3;
+          else if (state.livesLost === 1) stars = 2;
+          else stars = 1;
+          if (stars > 0) sfxRescue();
         }
         callbacks.onComplete(state.score, stars);
       }

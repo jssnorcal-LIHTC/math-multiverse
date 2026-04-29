@@ -15,11 +15,11 @@
 | # | Section                        | Domain                  | CCSS    | Status            |
 |---|--------------------------------|-------------------------|---------|-------------------|
 | 1 | HARDLINE Fraction Rider        | Fractions               | 5.NF    | Standalone live; campaign refactor pending |
-| 2 | F1: Apex Decimals              | Decimals & Place Value  | 5.NBT   | In active build   |
-| 3 | Razor Crest Navigator          | Coordinate Plane        | 5.G     | Designed          |
-| 4 | LEGO Master Builder            | Volume                  | 5.MD.C  | Designed          |
-| 5 | Rocky's Dictionary             | Measurement Conversion  | 5.MD.A  | Designed          |
-| 6 | The Floating Bear              | Order of Operations     | 5.OA    | Designed          |
+| 2 | F1: Apex Decimals              | Decimals & Place Value  | 5.NBT   | Live (6 levels)   |
+| 3 | Razor Crest Navigator          | Coordinate Plane        | 5.G     | Live (6 levels)   |
+| 4 | LEGO Master Builder            | Volume                  | 5.MD.C  | Live (6 levels)   |
+| 5 | Rocky's Dictionary             | Measurement Conversion  | 5.MD.A  | Live (6 levels)   |
+| 6 | The Floating Bear              | Order of Operations     | 5.OA    | Live (6 levels)   |
 
 Each section is a six-level campaign.  Level N+1 stays locked until Level N is cleared.  Clear all six to claim the section's grand goal.  Stars (1-3 per level) accumulate across the multiverse.
 
@@ -29,10 +29,8 @@ Progress is held in `localStorage` under `mathMultiverse.save.v1`.  Use the Expo
 
 ## Roadmap
 
-- [ ] Module 2: F1 Apex Decimals — full 6-level inline build
+- [x] Modules 2-6: full 6-level inline campaigns
 - [ ] Module 1 refactor: port HARDLINE Fraction Rider into the new shell with 6-level campaign
-- [ ] Module 3: Razor Crest Navigator (5.G)
-- [ ] Module 4: LEGO Master Builder (5.MD.C)
-- [ ] Module 5: Rocky's Dictionary (5.MD.A)
-- [ ] Module 6: The Floating Bear (5.OA)
+- [ ] Module-to-module unlock gating restored (currently all unlocked for play-test)
 - [ ] Private GitHub Pages deploy after Pro upgrade for iPad / cross-device play
+- [ ] Real driver photos / character imagery to swap into avatars (optional polish pass)
