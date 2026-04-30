@@ -1549,14 +1549,16 @@
 
   #rc-gridhost {
     aspect-ratio: 1 / 1;
-    /* Square coord grid that fills the available space — at least 480px so
-       cells are big enough for the kid to tap accurately on iPad. */
-    width: 100%;
+    /* Square coord grid sized to the available width. flex: 1 lets answers
+       (rc-answers) take their needed width to the right; gridhost fills what's
+       left and stays square via aspect-ratio. */
+    flex: 1 1 auto;
+    width: auto;
     height: auto;
-    min-width: 480px;
-    min-height: 480px;
-    max-width: 560px;
-    max-height: 560px;
+    min-width: 360px;
+    min-height: 360px;
+    max-width: 480px;
+    max-height: 480px;
     align-self: center;
   }
 
@@ -1594,11 +1596,12 @@
 
   .rc-answers {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    gap: 6px;
+    grid-template-columns: 1fr;
+    gap: 8px;
     margin-top: 0;
-    min-width: 160px;
-    align-self: stretch;
+    flex: 0 0 auto;
+    width: 160px;
+    align-self: center;
     align-content: center;
   }
   .rc-ans {
@@ -5374,7 +5377,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     return `
       <div class="rc-chase-cam">
         <div class="rc-starfield"></div>
-        <img class="rc-ship-img" src="art/razor-crest.png" alt="Razor Crest" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <img class="rc-ship-img" src="art/razor-crest.png?v=2" alt="Razor Crest" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <div class="rc-ship-svg-fallback" style="display:none;">${rcChaseFallback(bodyColor, accentColor, damage)}</div>
         ${damage > 0.4 ? `<div class="rc-damage-tint"></div>` : ''}
       </div>
