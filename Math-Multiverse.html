@@ -529,26 +529,31 @@
      MODULE 1: HARDLINE FRACTION RIDER  (.mod-fr)
      ============================================================ */
   .mod-fr {
-    width: 100%; height: 100%;
+    width: 100%;
+    min-height: 100%;
     position: relative;
     color: var(--text-primary);
     background:
       radial-gradient(ellipse 50% 40% at 0% 0%, rgba(238,29,82,0.08), transparent 60%),
       radial-gradient(ellipse 50% 40% at 100% 100%, rgba(255,204,0,0.05), transparent 60%),
       var(--bg-base);
-    overflow: hidden;
+    /* Allow content to flow / page to scroll if the viewport is short. No inner clipping. */
+    overflow: visible;
     font-feature-settings: 'tnum' 1;
   }
 
   .fr-stage {
-    width: 100%; height: 100%;
+    width: 100%;
+    min-height: 100%;
     display: grid;
     grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
     gap: 12px;
     padding: 12px;
+    /* align-items start so each column sizes to its content rather than stretching */
+    align-items: start;
   }
   @media (max-width: 860px) {
-    .fr-stage { grid-template-columns: 1fr; grid-template-rows: minmax(180px, 30%) 1fr; }
+    .fr-stage { grid-template-columns: 1fr; grid-template-rows: auto auto; }
   }
 
   .fr-left {
@@ -566,9 +571,10 @@
     border-radius: 10px;
     overflow: hidden;
     position: relative;
-    flex: 1;
-    min-height: 160px;
-    max-height: 340px;
+    /* Fixed 16:9 framing so the video has a sensible size and never starves
+       the question column on tall layouts. */
+    aspect-ratio: 16 / 9;
+    width: 100%;
     transition: filter 0.4s var(--ease-out);
   }
   .fr-trail.warn   { filter: hue-rotate(-12deg) saturate(1.1); }
@@ -686,8 +692,9 @@
     border: 1px solid var(--border-subtle);
     border-radius: 10px;
     padding: 16px;
-    flex: 1;
-    overflow-y: auto;
+    /* No inner scrollbar — let the question content size to itself. The
+       outer page scrolls if necessary on very small viewports. */
+    overflow: visible;
   }
   .fr-q-meta { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
   .fr-q-text { font-size: 1.05rem; line-height: 1.45; margin-bottom: 12px; }
@@ -823,7 +830,7 @@
      ============================================================ */
   .mod-f1 {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     color: var(--text-primary);
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, system-ui, sans-serif;
     background:
@@ -967,10 +974,10 @@
   /* Race screen */
   .f1-race {
     position: relative; z-index: 1;
-    width: 100%; height: 100%;
+    width: 100%; min-height: 100%;
     display: grid;
     grid-template-columns: 220px 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto auto;
     grid-template-areas:
       "tower header"
       "tower main"
@@ -1104,8 +1111,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    overflow-y: auto;
-    min-height: 0;
+    overflow: visible;
   }
   .f1-q-meta {
     display: flex; align-items: center; justify-content: space-between;
@@ -1242,9 +1248,9 @@
      ============================================================ */
   .mod-rc {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(0,217,255,0.08), transparent 60%), #0a0e18;
     color: var(--text-primary);
   }
@@ -1371,17 +1377,17 @@
   /* In-flight HUD */
   .rc-flight {
     position: relative; z-index: 1;
-    width: 100%; height: 100%;
+    width: 100%; min-height: 100%;
     display: grid;
     grid-template-columns: minmax(220px, 28%) 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto auto;
     grid-template-areas:
       "ship  header"
       "ship  main"
       "ship  foot";
     gap: 8px;
     padding: 8px 10px;
-    min-height: 0;
+    align-items: start;
   }
   @media (max-width: 760px) {
     .rc-flight {
@@ -1504,7 +1510,7 @@
     margin-bottom: 0;
     min-width: 220px;
     max-width: 380px;
-    overflow-y: auto;
+    overflow: visible;
     align-self: flex-start;
     padding-top: 4px;
   }
@@ -1646,9 +1652,9 @@
      ============================================================ */
   .mod-mb {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     background:
       linear-gradient(180deg, #87ceeb 0%, #87ceeb 70%, #5a9344 70%, #4a7d3a 100%);
     color: #1a1a1a;
@@ -1780,17 +1786,17 @@
   /* Build screen */
   .mb-build {
     position: relative; z-index: 1;
-    width: 100%; height: 100%;
+    width: 100%; min-height: 100%;
     display: grid;
     grid-template-columns: minmax(240px, 32%) 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto auto;
     grid-template-areas:
       "stage  status"
       "stage  question"
       "stage  foot";
     gap: 8px;
     padding: 8px 10px;
-    min-height: 0;
+    align-items: start;
   }
   @media (max-width: 760px) {
     .mb-build {
@@ -1848,10 +1854,9 @@
     border: 2px solid #1a1d24;
     border-radius: 10px;
     padding: 14px 16px;
-    overflow-y: auto;
+    overflow: visible;
     color: #1a1a1a;
     box-shadow: 0 4px 0 #1a1a1a;
-    min-height: 0;
     display: flex;
     flex-direction: column;
   }
@@ -1954,9 +1959,9 @@
      MODULE 5: ROCKY'S DICTIONARY  (.mod-rk)
      ============================================================ */
   .mod-rk {
-    width: 100%; height: 100%;
+    width: 100%; min-height: 100%;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     background: #0a0e18;
     color: #f0f4f8;
   }
@@ -2070,17 +2075,17 @@
   /* Conversation screen */
   .rk-room {
     position: relative; z-index: 1;
-    width: 100%; height: 100%;
+    width: 100%; min-height: 100%;
     display: grid;
     grid-template-columns: minmax(240px, 30%) 1fr 200px;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto auto;
     grid-template-areas:
       "scene status dict"
       "scene qbox   dict"
       "foot  foot   foot";
     gap: 8px;
     padding: 8px 10px;
-    min-height: 0;
+    align-items: start;
   }
   @media (max-width: 980px) {
     .rk-room {
@@ -2134,8 +2139,7 @@
     border: 1px solid var(--border-subtle);
     border-radius: 10px;
     padding: 12px 14px;
-    overflow-y: auto;
-    min-height: 0;
+    overflow: visible;
   }
   .rk-q-meta { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
   .rk-q-prompt { font-size: 1rem; line-height: 1.45; margin-bottom: 10px; }
@@ -2257,9 +2261,9 @@
      MODULE 6: THE FLOATING BEAR  (.mod-fb) — Shepard 1926 aesthetic
      ============================================================ */
   .mod-fb {
-    width: 100%; height: 100%;
+    width: 100%; min-height: 100%;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     background:
       radial-gradient(ellipse 100% 100% at 50% 50%, #F2E8D5 0%, #E5D4B5 100%);
     color: #4A3526;
@@ -2377,17 +2381,17 @@
   /* Story screen */
   .fb-story {
     position: relative; z-index: 1;
-    width: 100%; height: 100%;
+    width: 100%; min-height: 100%;
     display: grid;
     grid-template-columns: minmax(220px, 32%) 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto auto;
     grid-template-areas:
       "stage  status"
       "stage  question"
       "stage  foot";
     gap: 8px;
     padding: 10px 12px;
-    min-height: 0;
+    align-items: start;
   }
   @media (max-width: 760px) {
     .fb-story {
@@ -2443,9 +2447,8 @@
     border: 1px solid rgba(139, 90, 43, 0.3);
     border-radius: 4px;
     padding: 16px 20px;
-    overflow-y: auto;
+    overflow: visible;
     box-shadow: 0 2px 8px rgba(74, 53, 38, 0.08);
-    min-height: 0;
   }
   .fb-q-meta {
     display: flex; justify-content: space-between;
