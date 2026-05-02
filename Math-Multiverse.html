@@ -736,10 +736,15 @@
     font-family: inherit;
     transition: transform 0.14s var(--ease-spring), border-color 0.14s var(--ease-out), background 0.14s var(--ease-out);
   }
-  .fr-ans:hover:not(:disabled) {
-    transform: translateY(-2px);
-    border-color: var(--rb-yellow, #ffcc00);
-    background: var(--bg-hover);
+  /* Hover styles only on real hover devices. iPad Safari sticks :hover after
+     tap, which made the previously-tapped button look "selected" on the next
+     question — Justin's son saw highlighted answers carry across. */
+  @media (hover: hover) {
+    .fr-ans:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: var(--rb-yellow, #ffcc00);
+      background: var(--bg-hover);
+    }
   }
   .fr-ans.correct { border-color: #4ade80; background: rgba(74,222,128,0.18); color: #4ade80; }
   .fr-ans.wrong   { border-color: #f87171; background: rgba(248,113,113,0.18); color: #f87171; }
@@ -853,8 +858,11 @@
     position: relative;
     z-index: 1;
     padding: 24px 28px;
-    height: 100%;
-    overflow-y: auto;
+    /* Was height: 100% + overflow-y: auto, but with mod-f1 now min-height: 100%
+       (no fixed parent height), the inner scrollbar didn't appear and the
+       bottom of the screen got clipped. Let the outer page scroll instead. */
+    min-height: 100%;
+    overflow: visible;
   }
   .f1-pick-head { text-align: center; margin-bottom: 22px; }
   .f1-pick-head h2 {
@@ -1143,10 +1151,12 @@
     font-feature-settings: 'tnum' 1;
     transition: transform 0.14s var(--ease-spring), border-color 0.14s var(--ease-out), background 0.14s var(--ease-out);
   }
-  .f1-ans:hover:not(:disabled) {
-    transform: translateY(-2px);
-    border-color: var(--theme-decimals);
-    background: var(--bg-hover);
+  @media (hover: hover) {
+    .f1-ans:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: var(--theme-decimals);
+      background: var(--bg-hover);
+    }
   }
   .f1-ans.correct {
     border-color: var(--acc-success);
@@ -1277,8 +1287,8 @@
   .rc-pick {
     position: relative; z-index: 1;
     padding: 28px;
-    height: 100%;
-    overflow-y: auto;
+    min-height: 100%;
+    overflow: visible;
     text-align: center;
   }
   .rc-brand-logo {
@@ -1617,10 +1627,12 @@
     font-feature-settings: 'tnum' 1;
     transition: transform 0.14s var(--ease-spring), border-color 0.14s var(--ease-out), background 0.14s var(--ease-out);
   }
-  .rc-ans:hover:not(:disabled) {
-    transform: translateY(-2px);
-    border-color: var(--theme-coords);
-    background: rgba(0,217,255,0.12);
+  @media (hover: hover) {
+    .rc-ans:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: var(--theme-coords);
+      background: rgba(0,217,255,0.12);
+    }
   }
   .rc-ans.correct { border-color: var(--acc-success); background: rgba(74,222,128,0.18); color: var(--acc-success); }
   .rc-ans.wrong   { border-color: var(--acc-error);   background: rgba(248,113,113,0.18); color: var(--acc-error); }
@@ -1690,8 +1702,8 @@
   .mb-pick {
     position: relative; z-index: 1;
     padding: 24px 28px;
-    height: 100%;
-    overflow-y: auto;
+    min-height: 100%;
+    overflow: visible;
     color: #f0f4f8;
     background: linear-gradient(180deg, #2a2d35 0%, #1a1d24 100%);
   }
@@ -1915,7 +1927,9 @@
     box-shadow: 0 3px 0 #1a1a1a;
     transition: transform 0.12s var(--ease-spring);
   }
-  .mb-ans:hover:not(:disabled) { transform: translateY(-2px); }
+  @media (hover: hover) {
+    .mb-ans:hover:not(:disabled) { transform: translateY(-2px); }
+  }
   .mb-ans:active { transform: translateY(2px); box-shadow: 0 0 0 #1a1a1a; }
   .mb-ans.correct {
     background: linear-gradient(180deg, #4ade80 0%, #22c55e 100%);
@@ -1997,8 +2011,8 @@
   .rk-pick {
     position: relative; z-index: 1;
     padding: 28px;
-    height: 100%;
-    overflow-y: auto;
+    min-height: 100%;
+    overflow: visible;
     text-align: center;
   }
   .rk-brand-logo {
@@ -2201,7 +2215,9 @@
     font-feature-settings: 'tnum' 1;
     transition: transform 0.14s var(--ease-spring);
   }
-  .rk-ans:hover:not(:disabled) { transform: translateY(-2px); border-color: #ff8c5a; background: rgba(255,140,80,0.1); }
+  @media (hover: hover) {
+    .rk-ans:hover:not(:disabled) { transform: translateY(-2px); border-color: #ff8c5a; background: rgba(255,140,80,0.1); }
+  }
   .rk-ans.correct { border-color: #4ade80; background: rgba(74,222,128,0.18); color: #4ade80; }
   .rk-ans.wrong   { border-color: #f87171; background: rgba(248,113,113,0.18); color: #f87171; }
   .rk-ans:disabled { cursor: not-allowed; }
@@ -2307,8 +2323,8 @@
   .fb-pick {
     position: relative; z-index: 1;
     padding: 28px;
-    height: 100%;
-    overflow-y: auto;
+    min-height: 100%;
+    overflow: visible;
     text-align: center;
   }
   .fb-title-stack {
@@ -2513,7 +2529,9 @@
     box-shadow: 0 2px 0 rgba(139, 90, 43, 0.4);
     transition: transform 0.12s var(--ease-spring), background 0.12s ease-out;
   }
-  .fb-ans:hover:not(:disabled) { transform: translateY(-2px); background: #FAF0D8; }
+  @media (hover: hover) {
+    .fb-ans:hover:not(:disabled) { transform: translateY(-2px); background: #FAF0D8; }
+  }
   .fb-ans.correct { background: #B8D8A8; border-color: #4A6D38; color: #2A4D18; }
   .fb-ans.wrong   { background: #E5B8B8; border-color: #8B0000; color: #6B0000; }
   .fb-ans:disabled { cursor: not-allowed; }
