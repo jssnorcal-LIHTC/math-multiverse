@@ -5863,23 +5863,23 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const m = level.mix;
     const g = level.gridMax;
     const q = level.quadrants;
-    if (m === 'plot') return Math.random() < 0.7 ? genPlotQ(g, q) : genIdentifyQ(g, q);
+    // L1, L2 (mix='plot') are PURE plot questions — kid taps a grid cell.
+    // No MC injection. Test-tomorrow safety: zero chance of a missing-button bug.
+    if (m === 'plot') return genPlotQ(g, q);
     if (m === 'plot-distance') {
       const r = Math.random();
-      if (r < 0.3) return genPlotQ(g, 1);
-      if (r < 0.55) return genIdentifyQ(g, 1);
+      if (r < 0.5) return genPlotQ(g, 1);
       if (r < 0.8) return genDistanceQ(g);
       return genShapeQ(g);
     }
     if (m === 'reflect-translate') {
       const r = Math.random();
-      if (r < 0.40) return genReflectQ(g);
-      if (r < 0.70) return genTranslateQ(g);
-      if (r < 0.85) return genRealWorldQ(g);
+      if (r < 0.45) return genReflectQ(g);
+      if (r < 0.80) return genTranslateQ(g);
       return genShapeQ(g);
     }
     if (m === 'mixed') {
-      const fns = [() => genPlotQ(g, q), () => genDistanceQ(g), () => genQuadrantQ(g), () => genReflectQ(g), () => genTranslateQ(g), () => genShapeQ(g), () => genIdentifyQ(g, q), () => genRealWorldQ(g)];
+      const fns = [() => genPlotQ(g, q), () => genDistanceQ(g), () => genQuadrantQ(g), () => genReflectQ(g), () => genTranslateQ(g), () => genShapeQ(g)];
       return pick(fns)();
     }
     return genPlotQ(g, q);
