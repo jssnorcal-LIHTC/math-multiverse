@@ -1578,7 +1578,11 @@
     cursor: crosshair;
     transition: fill 0.12s ease-out;
   }
-  .rc-cell:hover { fill: rgba(0,217,255,0.18); }
+  /* iPad sticks :hover after tap, leaving the previous-question's cell
+     highlighted on the new question's grid. Gate hover to true-hover devices. */
+  @media (hover: hover) {
+    .rc-cell:hover { fill: rgba(0,217,255,0.18); }
+  }
   .rc-cell.target.show {
     fill: rgba(74,222,128,0.5);
     stroke: var(--acc-success);
