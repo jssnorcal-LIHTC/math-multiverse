@@ -1601,19 +1601,46 @@
   .rc-axis { fill: rgba(255,255,255,0.7); font-size: 5px; font-family: system-ui, sans-serif; }
   .rc-axis-line { stroke: rgba(255,255,255,0.3); stroke-width: 0.5; }
 
-  /* Answers row: full width below the grid; 2 columns on small screens,
-     4 columns on iPad-landscape and bigger. Buttons get plenty of width. */
+  /* Answers row: full width, 2 columns on small screens, 4 on iPad-landscape */
   .rc-answers {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 8px;
+    gap: 12px;
+    margin-top: 12px;
     width: 100%;
   }
   @media (min-width: 720px) {
     .rc-answers { grid-template-columns: repeat(4, 1fr); }
   }
-  .rc-ans { white-space: normal; word-break: normal; min-height: 56px; }
+  .rc-ans { white-space: normal; word-break: normal; min-height: 64px; font-size: 1.1rem; }
+
+  /* MC question layout: prompt up top, optional small grid as visual aid,
+     big answer buttons. NO chance of buttons being hidden below the fold. */
+  .rc-mc-body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding-top: 8px;
+  }
+  .rc-mc-prompt {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.45;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .rc-mc-mini-grid {
+    display: flex;
+    justify-content: center;
+  }
+  .rc-mc-mini-grid #rc-gridhost {
+    width: 240px;
+    height: 240px;
+    aspect-ratio: 1 / 1;
+    max-width: 240px;
+    max-height: 240px;
+  }
   .rc-ans {
     padding: 12px 14px;
     background: rgba(0, 30, 50, 0.5);
@@ -6063,23 +6090,41 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         if (!qEl) return;
         const q = state.questions[state.questionNum];
         if (!q) { endLevel(); return; }
-        qEl.innerHTML = `
-          <div class="rc-q-meta">
-            <span>JUMP ${state.questionNum + 1} / ${totalQ}</span>
-            <span>${q.type === 'plot' ? 'PLOT THE COORDINATE' : 'NAVCOM QUERY'}</span>
-          </div>
-          <div class="rc-q-body">
-            <div class="rc-q-prompt">${q.prompt}</div>
-            <div class="rc-grid-wrap">
-              <div id="rc-gridhost"></div>
+        // Two layouts. Plot: big tappable grid. MC: prompt + 4 answer
+        // buttons stacked vertically — no grid, no scrolling, no chance
+        // of buttons hiding below the fold on iPad.
+        if (q.type === 'plot') {
+          qEl.innerHTML = `
+            <div class="rc-q-meta">
+              <span>JUMP ${state.questionNum + 1} / ${totalQ}</span>
+              <span>PLOT THE COORDINATE</span>
             </div>
-            ${q.type === 'mc' ? `<div class="rc-answers" id="rc-answers"></div>` : ''}
-          </div>
-        `;
-        const gridHost = qEl.querySelector('#rc-gridhost');
-        renderGrid(gridHost, q, q.type === 'plot' ? (x, y) => answerPlot(x, y, q) : null);
-
-        if (q.type === 'mc') {
+            <div class="rc-q-body">
+              <div class="rc-q-prompt">${q.prompt}</div>
+              <div class="rc-grid-wrap">
+                <div id="rc-gridhost"></div>
+              </div>
+            </div>
+          `;
+          const gridHost = qEl.querySelector('#rc-gridhost');
+          renderGrid(gridHost, q, (x, y) => answerPlot(x, y, q));
+        } else {
+          // MC: prompt big and centered, then 4 large answer buttons.
+          // Optional small grid above buttons if there are markers.
+          qEl.innerHTML = `
+            <div class="rc-q-meta">
+              <span>JUMP ${state.questionNum + 1} / ${totalQ}</span>
+              <span>NAVCOM QUERY</span>
+            </div>
+            <div class="rc-mc-body">
+              <div class="rc-q-prompt rc-mc-prompt">${q.prompt}</div>
+              ${q.markers && q.markers.length ? `<div class="rc-mc-mini-grid"><div id="rc-gridhost"></div></div>` : ''}
+              <div class="rc-answers" id="rc-answers"></div>
+            </div>
+          `;
+          if (q.markers && q.markers.length) {
+            renderGrid(qEl.querySelector('#rc-gridhost'), q, null);
+          }
           const ansHost = qEl.querySelector('#rc-answers');
           ansHost.innerHTML = q.answers.map((a, i) => `<button class="rc-ans" data-idx="${i}">${a}</button>`).join('');
           ansHost.querySelectorAll('.rc-ans').forEach(b => {
