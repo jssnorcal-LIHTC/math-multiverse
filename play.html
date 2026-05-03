@@ -1613,16 +1613,21 @@
   .rc-axis { fill: rgba(255,255,255,0.7); font-size: 5px; font-family: system-ui, sans-serif; }
   .rc-axis-line { stroke: rgba(255,255,255,0.3); stroke-width: 0.5; }
 
+  /* Full-width answer row BELOW the grid+prompt, 4 buttons in a 2x2 grid
+     (or single row when there's space). Each button gets enough width to
+     show full text like "(8, 7) units" without truncation. */
   .rc-answers {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    margin-top: 0;
-    flex: 0 0 auto;
-    width: 160px;
-    align-self: center;
-    align-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+    width: 100%;
+    align-self: stretch;
   }
+  @media (min-width: 900px) {
+    .rc-answers { grid-template-columns: repeat(4, 1fr); }
+  }
+  .rc-ans { white-space: normal; word-break: normal; }
   .rc-ans {
     padding: 12px 14px;
     background: rgba(0, 30, 50, 0.5);
@@ -6081,9 +6086,9 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             <div class="rc-q-prompt">${q.prompt}</div>
             <div class="rc-grid-wrap">
               <div id="rc-gridhost"></div>
-              ${q.type === 'mc' ? `<div class="rc-answers" id="rc-answers"></div>` : ''}
             </div>
           </div>
+          ${q.type === 'mc' ? `<div class="rc-answers" id="rc-answers"></div>` : ''}
         `;
         const gridHost = qEl.querySelector('#rc-gridhost');
         renderGrid(gridHost, q, q.type === 'plot' ? (x, y) => answerPlot(x, y, q) : null);
