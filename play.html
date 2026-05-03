@@ -4573,13 +4573,19 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     { id: 'LIN', last: 'LINDBLAD',  team: 'RACING BULLS', num: 32, color: '#4f7197' },                       // Rookie — back of grid
   ];
 
+  // Real F1 race grid is always 22 cars regardless of which event. The
+  // tower shows 8 positions around the player so progress from P22 → P1 is
+  // a long climb across all 15-20 questions. Earlier this was 10/12/16/18/20
+  // which left empty positions when state.position fell into the back of
+  // the real-world 22-driver field.
+  const F1_GRID_SIZE = 22;
   const F1_LEVELS = [
-    { id: 1, name: 'Free Practice',        circuit: 'Bahrain',     gridSize: 10, gen: 'place-value' },
-    { id: 2, name: 'Qualifying',           circuit: 'Bahrain',     gridSize: 10, gen: 'compare-order' },
-    { id: 3, name: 'Sprint Race',          circuit: 'Bahrain',     gridSize: 12, gen: 'add-sub' },
-    { id: 4, name: 'Monaco GP',            circuit: 'Monaco',      gridSize: 16, gen: 'multiply' },
-    { id: 5, name: 'Silverstone GP',       circuit: 'Silverstone', gridSize: 18, gen: 'divide' },
-    { id: 6, name: 'Suzuka Title Decider', circuit: 'Suzuka',      gridSize: 20, gen: 'mixed-all' },
+    { id: 1, name: 'Free Practice',        circuit: 'Bahrain',     gridSize: F1_GRID_SIZE, gen: 'place-value' },
+    { id: 2, name: 'Qualifying',           circuit: 'Bahrain',     gridSize: F1_GRID_SIZE, gen: 'compare-order' },
+    { id: 3, name: 'Sprint Race',          circuit: 'Bahrain',     gridSize: F1_GRID_SIZE, gen: 'add-sub' },
+    { id: 4, name: 'Monaco GP',            circuit: 'Monaco',      gridSize: F1_GRID_SIZE, gen: 'multiply' },
+    { id: 5, name: 'Silverstone GP',       circuit: 'Silverstone', gridSize: F1_GRID_SIZE, gen: 'divide' },
+    { id: 6, name: 'Suzuka Title Decider', circuit: 'Suzuka',      gridSize: F1_GRID_SIZE, gen: 'mixed-all' },
   ];
 
   const QPL = [15, 18, 18, 20, 20, 20];
