@@ -4531,13 +4531,32 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   }
 
   const DRIVERS = [
-    { id: 'VER', short: 'M. VERSTAPPEN', last: 'VERSTAPPEN', team: 'RED BULL',  num: 3,  flag: '🇳🇱', color: '#1e3a8a', accent: '#ee1c25' },
+    { id: 'VER', short: 'M. VERSTAPPEN', last: 'VERSTAPPEN', team: 'RED BULL',  num: 1,  flag: '🇳🇱', color: '#1e3a8a', accent: '#ee1c25' },
     { id: 'HAM', short: 'L. HAMILTON',   last: 'HAMILTON',   team: 'FERRARI',   num: 44, flag: '🇬🇧', color: '#dc0000', accent: '#fcd700' },
     { id: 'LEC', short: 'C. LECLERC',    last: 'LECLERC',    team: 'FERRARI',   num: 16, flag: '🇲🇨', color: '#dc0000', accent: '#ffffff' },
     { id: 'RUS', short: 'G. RUSSELL',    last: 'RUSSELL',    team: 'MERCEDES',  num: 63, flag: '🇬🇧', color: '#27f4d2', accent: '#0a1428' },
     { id: 'ANT', short: 'K. ANTONELLI',  last: 'ANTONELLI',  team: 'MERCEDES',  num: 12, flag: '🇮🇹', color: '#27f4d2', accent: '#1e3a8a' },
-    { id: 'NOR', short: 'L. NORRIS',     last: 'NORRIS',     team: 'MCLAREN',   num: 1,  flag: '🇬🇧', color: '#ff8000', accent: '#ffd400' },
+    { id: 'NOR', short: 'L. NORRIS',     last: 'NORRIS',     team: 'MCLAREN',   num: 4,  flag: '🇬🇧', color: '#ff8000', accent: '#ffd400' },
     { id: 'PIA', short: 'O. PIASTRI',    last: 'PIASTRI',    team: 'MCLAREN',   num: 81, flag: '🇦🇺', color: '#ff8000', accent: '#1e3a8a' },
+  ];
+
+  // Full real 2026 F1 grid for the position tower so it never shows duplicates.
+  // The 7 above are the user-pickable subset; the other 13 fill out the field.
+  const FULL_GRID = [
+    ...DRIVERS,
+    { id: 'TSU', last: 'TSUNODA',   team: 'RED BULL',     num: 22, color: '#1e3a8a' },
+    { id: 'ALO', last: 'ALONSO',    team: 'ASTON MARTIN', num: 14, color: '#006f62' },
+    { id: 'STR', last: 'STROLL',    team: 'ASTON MARTIN', num: 18, color: '#006f62' },
+    { id: 'GAS', last: 'GASLY',     team: 'ALPINE',       num: 10, color: '#2293d1' },
+    { id: 'DOO', last: 'DOOHAN',    team: 'ALPINE',       num: 7,  color: '#2293d1' },
+    { id: 'ALB', last: 'ALBON',     team: 'WILLIAMS',     num: 23, color: '#00a1e8' },
+    { id: 'SAI', last: 'SAINZ',     team: 'WILLIAMS',     num: 55, color: '#00a1e8' },
+    { id: 'OCO', last: 'OCON',      team: 'HAAS',         num: 31, color: '#b5b5b5' },
+    { id: 'BEA', last: 'BEARMAN',   team: 'HAAS',         num: 87, color: '#b5b5b5' },
+    { id: 'HUL', last: 'HULKENBERG',team: 'SAUBER',       num: 27, color: '#00e701' },
+    { id: 'BOR', last: 'BORTOLETO', team: 'SAUBER',       num: 5,  color: '#00e701' },
+    { id: 'HAD', last: 'HADJAR',    team: 'RACING BULLS', num: 6,  color: '#4f7197' },
+    { id: 'LAW', last: 'LAWSON',    team: 'RACING BULLS', num: 30, color: '#4f7197' },
   ];
 
   const F1_LEVELS = [
@@ -5028,7 +5047,6 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         root.querySelector('#f1-back').addEventListener('click', () => callbacks.onExit());
         root.querySelector('#f1-go').addEventListener('click', () => {
           if (!state.chosen) return;
-          state.rivals = DRIVERS.filter(d => d.id !== state.chosen.id);
           startRace();
         });
       }
@@ -5042,13 +5060,48 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         state.questions = [];
         const gen = GEN_BY_TYPE[lvl.gen];
         for (let i = 0; i < totalQ; i++) state.questions.push(gen());
+
+        // Build a real 20-driver F1 grid map: position N → driver. The user's
+        // chosen driver always occupies the player's slot; every other slot
+        // gets a unique driver from FULL_GRID, so no driver appears twice.
+        const rivals = FULL_GRID.filter(d => d.id !== state.chosen.id);
+        // Stable shuffle seeded by level + chosen so the same race produces
+        // a consistent grid order across re-renders, but different levels and
+        // different driver picks reshuffle.
+        const seed = lvl.id * 1000 + state.chosen.id.charCodeAt(0);
+        const ord = rivals.map((d, i) => ({ d, key: ((i + 1) * seed) % 9973 }))
+                          .sort((a, b) => a.key - b.key)
+                          .map(x => x.d);
+        state.gridDrivers = [];
+        let rivalIdx = 0;
+        for (let pos = 1; pos <= lvl.gridSize; pos++) {
+          if (pos === state.position) state.gridDrivers[pos - 1] = state.chosen;
+          else state.gridDrivers[pos - 1] = ord[rivalIdx++] || ord[ord.length - 1];
+        }
+
         state.phase = 'lights';
         renderRace();
         playLightsOut();
       }
 
       function rivalForPos(pos) {
-        return state.rivals[(pos * 7 + lvl.id * 13 + pos) % state.rivals.length];
+        // gridDrivers is 0-indexed; pos is 1-indexed.
+        return state.gridDrivers[pos - 1] || state.gridDrivers[state.gridDrivers.length - 1];
+      }
+
+      // When the player overtakes (or gets overtaken), swap them with whoever
+      // was holding the destination slot so the grid never shows duplicate
+      // drivers — including the user's chosen driver appearing twice.
+      function movePlayerTo(newPos) {
+        const oldPos = state.position;
+        if (newPos === oldPos) return;
+        if (state.gridDrivers && state.gridDrivers.length) {
+          const a = state.gridDrivers[oldPos - 1];
+          const b = state.gridDrivers[newPos - 1];
+          state.gridDrivers[newPos - 1] = a;
+          state.gridDrivers[oldPos - 1] = b;
+        }
+        state.position = newPos;
       }
 
       function renderRace() {
@@ -5178,13 +5231,13 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           state.correctCount++;
           state.streak = Math.min(3, state.streak + 1);
           const gain = state.streak >= 3 ? 2 : 1;
-          state.position = Math.max(1, state.position - gain);
+          movePlayerTo(Math.max(1, state.position - gain));
           state.score += 100 + (state.streak >= 3 ? 100 : 0);
           if (state.streak === 3) sfxFastest(); else sfxCorrect();
         } else {
           state.streak = 0;
           state.livesLost = Math.min(3, state.livesLost + 1);
-          state.position = Math.min(lvl.gridSize, state.position + 1);
+          movePlayerTo(Math.min(lvl.gridSize, state.position + 1));
           sfxWrong();
           if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
