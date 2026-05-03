@@ -4540,23 +4540,34 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     { id: 'PIA', short: 'O. PIASTRI',    last: 'PIASTRI',    team: 'MCLAREN',   num: 81, flag: '🇦🇺', color: '#ff8000', accent: '#1e3a8a' },
   ];
 
-  // Full real 2026 F1 grid for the position tower so it never shows duplicates.
-  // The 7 above are the user-pickable subset; the other 13 fill out the field.
+  // Real 2026 F1 grid (22 drivers, 11 teams including new Cadillac) ordered by
+  // expected race-by-race finishing form based on the 2025 season — front of
+  // the grid = consistent point-scorers, back = rookies + slowest car. The
+  // position tower walks this list top-to-bottom (player slot excluded) so
+  // no driver appears twice and Verstappen never qualifies P11.
   const FULL_GRID = [
-    ...DRIVERS,
-    { id: 'TSU', last: 'TSUNODA',   team: 'RED BULL',     num: 22, color: '#1e3a8a' },
+    DRIVERS.find(d => d.id === 'NOR'),                                                                      // McLaren — championship car
+    DRIVERS.find(d => d.id === 'PIA'),                                                                      // McLaren
+    DRIVERS.find(d => d.id === 'VER'),                                                                      // Red Bull — elite driver
+    DRIVERS.find(d => d.id === 'LEC'),                                                                      // Ferrari
+    DRIVERS.find(d => d.id === 'RUS'),                                                                      // Mercedes
+    DRIVERS.find(d => d.id === 'HAM'),                                                                      // Ferrari
+    DRIVERS.find(d => d.id === 'ANT'),                                                                      // Mercedes (sophomore)
+    { id: 'SAI', last: 'SAINZ',     team: 'WILLIAMS',     num: 55, color: '#00a1e8' },
     { id: 'ALO', last: 'ALONSO',    team: 'ASTON MARTIN', num: 14, color: '#006f62' },
+    { id: 'ALB', last: 'ALBON',     team: 'WILLIAMS',     num: 23, color: '#00a1e8' },
+    { id: 'HAD', last: 'HADJAR',    team: 'RED BULL',     num: 6,  color: '#1e3a8a' },                       // Promoted to Red Bull #2 for 2026
+    { id: 'BEA', last: 'BEARMAN',   team: 'HAAS',         num: 87, color: '#b5b5b5' },
+    { id: 'HUL', last: 'HULKENBERG',team: 'AUDI',         num: 27, color: '#00e701' },                       // Sauber → Audi for 2026
+    { id: 'LAW', last: 'LAWSON',    team: 'RACING BULLS', num: 30, color: '#4f7197' },
     { id: 'STR', last: 'STROLL',    team: 'ASTON MARTIN', num: 18, color: '#006f62' },
     { id: 'GAS', last: 'GASLY',     team: 'ALPINE',       num: 10, color: '#2293d1' },
-    { id: 'DOO', last: 'DOOHAN',    team: 'ALPINE',       num: 7,  color: '#2293d1' },
-    { id: 'ALB', last: 'ALBON',     team: 'WILLIAMS',     num: 23, color: '#00a1e8' },
-    { id: 'SAI', last: 'SAINZ',     team: 'WILLIAMS',     num: 55, color: '#00a1e8' },
     { id: 'OCO', last: 'OCON',      team: 'HAAS',         num: 31, color: '#b5b5b5' },
-    { id: 'BEA', last: 'BEARMAN',   team: 'HAAS',         num: 87, color: '#b5b5b5' },
-    { id: 'HUL', last: 'HULKENBERG',team: 'SAUBER',       num: 27, color: '#00e701' },
-    { id: 'BOR', last: 'BORTOLETO', team: 'SAUBER',       num: 5,  color: '#00e701' },
-    { id: 'HAD', last: 'HADJAR',    team: 'RACING BULLS', num: 6,  color: '#4f7197' },
-    { id: 'LAW', last: 'LAWSON',    team: 'RACING BULLS', num: 30, color: '#4f7197' },
+    { id: 'BOR', last: 'BORTOLETO', team: 'AUDI',         num: 5,  color: '#00e701' },
+    { id: 'PER', last: 'PEREZ',     team: 'CADILLAC',     num: 11, color: '#222222' },                       // New team for 2026
+    { id: 'BOT', last: 'BOTTAS',    team: 'CADILLAC',     num: 77, color: '#222222' },
+    { id: 'COL', last: 'COLAPINTO', team: 'ALPINE',       num: 43, color: '#2293d1' },                       // Replaced Doohan
+    { id: 'LIN', last: 'LINDBLAD',  team: 'RACING BULLS', num: 32, color: '#4f7197' },                       // Rookie — back of grid
   ];
 
   const F1_LEVELS = [
@@ -5061,23 +5072,14 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const gen = GEN_BY_TYPE[lvl.gen];
         for (let i = 0; i < totalQ; i++) state.questions.push(gen());
 
-        // Build a real 20-driver F1 grid map: position N → driver. The user's
-        // chosen driver always occupies the player's slot; every other slot
-        // gets a unique driver from FULL_GRID, so no driver appears twice.
+        // Build the position tower from real form-based ranking. FULL_GRID is
+        // ordered fastest → slowest based on 2025 season finishing positions.
+        // Take the top (gridSize - 1) drivers excluding the user's pick, then
+        // place the user at the back of the grid (state.position = gridSize).
+        // No duplicates, realistic finishing order.
         const rivals = FULL_GRID.filter(d => d.id !== state.chosen.id);
-        // Stable shuffle seeded by level + chosen so the same race produces
-        // a consistent grid order across re-renders, but different levels and
-        // different driver picks reshuffle.
-        const seed = lvl.id * 1000 + state.chosen.id.charCodeAt(0);
-        const ord = rivals.map((d, i) => ({ d, key: ((i + 1) * seed) % 9973 }))
-                          .sort((a, b) => a.key - b.key)
-                          .map(x => x.d);
-        state.gridDrivers = [];
-        let rivalIdx = 0;
-        for (let pos = 1; pos <= lvl.gridSize; pos++) {
-          if (pos === state.position) state.gridDrivers[pos - 1] = state.chosen;
-          else state.gridDrivers[pos - 1] = ord[rivalIdx++] || ord[ord.length - 1];
-        }
+        const front = rivals.slice(0, lvl.gridSize - 1);
+        state.gridDrivers = [...front, state.chosen];
 
         state.phase = 'lights';
         renderRace();
