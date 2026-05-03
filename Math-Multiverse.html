@@ -1521,26 +1521,22 @@
     display: flex;
     flex-direction: column;
   }
+  /* Vertical stack: prompt on top, grid in the middle, answers below.
+     Each row is as tall as it needs. No min-heights, no fixed columns. */
   .rc-q-body {
-    flex: 1 1 auto;
     display: flex;
-    gap: 16px;
+    flex-direction: column;
     align-items: stretch;
-    /* Tall enough that the coord grid is actually usable for tapping. */
-    min-height: 520px;
+    gap: 12px;
     margin-top: 8px;
   }
-  @media (max-width: 760px) {
-    .rc-q-body { flex-direction: column; min-height: auto; }
-  }
   .rc-q-body .rc-q-prompt {
-    flex: 0 0 auto;
     margin-bottom: 0;
-    min-width: 220px;
-    max-width: 280px;
     overflow: visible;
-    align-self: flex-start;
-    padding-top: 4px;
+    text-align: center;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .rc-q-meta {
     display: flex; justify-content: space-between;
@@ -1558,26 +1554,13 @@
 
   .rc-grid-wrap {
     display: flex;
-    align-items: stretch;
     justify-content: center;
-    gap: 12px;
-    flex: 1 1 auto;
-    min-width: 0;
-    min-height: 0;
   }
 
   #rc-gridhost {
     aspect-ratio: 1 / 1;
-    /* Square coord grid sized to the available width. flex: 1 lets answers
-       (rc-answers) take their needed width to the right; gridhost fills what's
-       left and stays square via aspect-ratio. */
-    flex: 1 1 auto;
-    width: auto;
-    height: auto;
-    min-width: 360px;
-    min-height: 360px;
-    max-width: 480px;
-    max-height: 480px;
+    width: 100%;
+    max-width: 460px;
     align-self: center;
   }
 
@@ -1613,21 +1596,19 @@
   .rc-axis { fill: rgba(255,255,255,0.7); font-size: 5px; font-family: system-ui, sans-serif; }
   .rc-axis-line { stroke: rgba(255,255,255,0.3); stroke-width: 0.5; }
 
-  /* Full-width answer row BELOW the grid+prompt, 4 buttons in a 2x2 grid
-     (or single row when there's space). Each button gets enough width to
-     show full text like "(8, 7) units" without truncation. */
+  /* Answers row: full width below the grid; 2 columns on small screens,
+     4 columns on iPad-landscape and bigger. Buttons get plenty of width. */
   .rc-answers {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    margin-top: 14px;
+    margin-top: 8px;
     width: 100%;
-    align-self: stretch;
   }
-  @media (min-width: 900px) {
+  @media (min-width: 720px) {
     .rc-answers { grid-template-columns: repeat(4, 1fr); }
   }
-  .rc-ans { white-space: normal; word-break: normal; }
+  .rc-ans { white-space: normal; word-break: normal; min-height: 56px; }
   .rc-ans {
     padding: 12px 14px;
     background: rgba(0, 30, 50, 0.5);
@@ -6087,8 +6068,8 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             <div class="rc-grid-wrap">
               <div id="rc-gridhost"></div>
             </div>
+            ${q.type === 'mc' ? `<div class="rc-answers" id="rc-answers"></div>` : ''}
           </div>
-          ${q.type === 'mc' ? `<div class="rc-answers" id="rc-answers"></div>` : ''}
         `;
         const gridHost = qEl.querySelector('#rc-gridhost');
         renderGrid(gridHost, q, q.type === 'plot' ? (x, y) => answerPlot(x, y, q) : null);
