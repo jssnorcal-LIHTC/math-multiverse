@@ -6175,7 +6175,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         callbacks.onComplete(state.score, stars);
       }
 
-      renderPick();
+      // Skip the cast/view pick screen — Justin's son saw the Mando/Grogu
+      // cast photos as click targets and got stuck because they were
+      // decorative. Default to chase cam and launch gameplay immediately
+      // when the level is entered.
+      state.view = 'chase';
+      startFlight();
 
       return function cleanup() {
         timeouts.forEach(clearTimeout);
