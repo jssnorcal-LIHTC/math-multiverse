@@ -6065,20 +6065,20 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       }
     }
 
-    // 2) Bold zero-axes (heavier than gridlines so origin / quadrant
-    //    boundaries are easy to see). For Q1 we bold the left & bottom
-    //    edges where x=0 and y=0 actually sit.
+    // 2) Bold zero-axes — both flush with grid edges so horizontal and
+    //    vertical axes terminate at the same boundary (no asymmetric overhang).
     if (fourQuad) {
-      html += `<line class="rc-axis-zero" x1="${plotL - cellW/2}" y1="${yToPx(0)}" x2="${plotR + cellW/2}" y2="${yToPx(0)}" />`;
+      html += `<line class="rc-axis-zero" x1="${plotL}" y1="${yToPx(0)}" x2="${plotR}" y2="${yToPx(0)}" />`;
       html += `<line class="rc-axis-zero" x1="${xToPx(0)}" y1="${plotT}" x2="${xToPx(0)}" y2="${plotB}" />`;
     } else {
-      html += `<line class="rc-axis-zero" x1="${plotL - cellW/2}" y1="${plotB}" x2="${plotR + cellW/2}" y2="${plotB}" />`;
-      html += `<line class="rc-axis-zero" x1="${plotL - cellW/2}" y1="${plotT}" x2="${plotL - cellW/2}" y2="${plotB}" />`;
+      // Q1: x-axis along the bottom edge, y-axis along the left edge.
+      html += `<line class="rc-axis-zero" x1="${plotL}" y1="${plotB}" x2="${plotR}" y2="${plotB}" />`;
+      html += `<line class="rc-axis-zero" x1="${plotL}" y1="${plotT}" x2="${plotL}" y2="${plotB}" />`;
     }
 
     // 3) Tick labels — placed OUTSIDE the plot area in the gutter.
-    //    Skip 0 in both x and y tick loops; we draw a single origin label
-    //    at the corner for Q1, and rely on the bold zero-axes for fourQuad.
+    //    Skip 0 in the tick loops; we draw a single origin label below the
+    //    x=0 column for both fourQuad and Q1 (textbook-style).
     const xLabelY = plotB + 7;
     const yLabelX = plotL - cellW / 2 - 2;
     for (let xx = lo; xx <= hi; xx++) {
@@ -6091,8 +6091,11 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       if (!showLabel(yy)) continue;
       html += `<text class="rc-axis" x="${yLabelX}" y="${yToPx(yy) + 1.6}" text-anchor="end">${yy}</text>`;
     }
-    if (!fourQuad) {
-      // Single origin label at the bottom-left corner
+    // Origin "0" label — for fourQuad it sits in the bottom gutter directly
+    // under the y-axis. For Q1 it sits at the bottom-left gutter intersection.
+    if (fourQuad) {
+      html += `<text class="rc-axis" x="${xToPx(0)}" y="${xLabelY}" text-anchor="middle">0</text>`;
+    } else {
       html += `<text class="rc-axis" x="${yLabelX}" y="${xLabelY}" text-anchor="end">0</text>`;
     }
 
