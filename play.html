@@ -1600,8 +1600,30 @@
     stroke: var(--acc-error);
     stroke-width: 1;
   }
-  .rc-axis { fill: rgba(255,255,255,0.7); font-size: 5px; font-family: system-ui, sans-serif; }
+  .rc-axis {
+    fill: rgba(255,255,255,0.92);
+    font-size: 5px;
+    font-family: system-ui, sans-serif;
+    font-weight: 600;
+    font-feature-settings: 'tnum' 1;
+  }
   .rc-axis-line { stroke: rgba(255,255,255,0.3); stroke-width: 0.5; }
+  /* Bold "zero" axes (x=0 / y=0) — heavier than the gridlines so the origin
+     and quadrant boundaries pop. Gridlines come from .rc-cell strokes. */
+  .rc-axis-zero {
+    stroke: rgba(255,255,255,0.6);
+    stroke-width: 0.9;
+    stroke-linecap: round;
+  }
+  .rc-marker-label {
+    fill: #fff;
+    font-size: 3.8px;
+    font-family: system-ui, sans-serif;
+    font-weight: 800;
+    paint-order: stroke;
+    stroke: rgba(0,10,20,0.85);
+    stroke-width: 0.7;
+  }
 
   /* Answers row: full width, 2 columns on small screens, 4 on iPad-landscape */
   .rc-answers {
@@ -1637,11 +1659,11 @@
     justify-content: center;
   }
   .rc-mc-mini-grid #rc-gridhost {
-    width: 240px;
-    height: 240px;
+    width: min(320px, 38vh);
+    height: min(320px, 38vh);
     aspect-ratio: 1 / 1;
-    max-width: 240px;
-    max-height: 240px;
+    max-width: 320px;
+    max-height: 320px;
   }
   .rc-ans {
     padding: 12px 14px;
@@ -5327,15 +5349,22 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   // CC0 transparent TIE Fighter render from Wikimedia Commons
   const TIE_FIGHTER     = 'https://upload.wikimedia.org/wikipedia/commons/1/13/TIE_Fighter.webp';
 
+  // Six distinct game types — one per level. NO grid-tap anywhere; every
+  // question is multiple choice with 4 big tappable buttons. The grid (when
+  // shown) is read-only reference art.
+  //   L1 Quadrant Trial   — point on grid, tap which quadrant
+  //   L2 Pick the Pair    — point on Q1 grid, pick (x, y) from 4 buttons
+  //   L3 Pick the Pair    — point on 4-quadrant grid, pick (x, y)
+  //   L4 Beskar Path      — sequence of moves from a start point, pick end
+  //   L5 Imperial Mirror  — reflect across x or y axis, pick the new point
+  //   L6 Distance         — two points on grid, pick distance between them
   const RC_LEVELS = [
-    { id: 1, name: 'Departing Nevarro',       gridMax: 7,  quadrants: 1, mix: 'plot' },
-    { id: 2, name: 'Asteroid Field Run',      gridMax: 8,  quadrants: 1, mix: 'plot' },
-    { id: 3, name: 'Mos Eisley Approach',     gridMax: 8,  quadrants: 1, mix: 'plot-distance' },
-    // 4-quadrant levels reduced from gridMax 7 to 5 so cells are big enough
-    // for finger-taps (5×5 in each quadrant = 11×11 grid; 540/11 ≈ 49px cells).
-    { id: 4, name: 'Hyperspace Coordinates',  gridMax: 5,  quadrants: 4, mix: 'plot' },
-    { id: 5, name: 'Imperial Pursuit',        gridMax: 5,  quadrants: 4, mix: 'reflect-translate' },
-    { id: 6, name: 'Final Jump to Mandalore', gridMax: 5,  quadrants: 4, mix: 'mixed' },
+    { id: 1, name: 'Quadrant Trials',         gridMax: 5,  quadrants: 4, mix: 'quadrant' },
+    { id: 2, name: 'Mos Eisley Coordinates',  gridMax: 8,  quadrants: 1, mix: 'identify-q1' },
+    { id: 3, name: 'Hyperspace Lanes',        gridMax: 5,  quadrants: 4, mix: 'identify-4q' },
+    { id: 4, name: 'Beskar Path',             gridMax: 5,  quadrants: 4, mix: 'path' },
+    { id: 5, name: 'Imperial Mirror',         gridMax: 5,  quadrants: 4, mix: 'reflect' },
+    { id: 6, name: 'Distance to Tatooine',    gridMax: 8,  quadrants: 1, mix: 'distance' },
   ];
   const RC_QPL = [15, 18, 18, 20, 20, 20];
 
@@ -5834,6 +5863,100 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     };
   }
 
+  function genPathQ(gridMax, fourQuad) {
+    // CCSS 5.G.A.2 — model real-world movement on a coordinate plane.
+    // Kid follows a sequence of moves ("right 3, then up 2") from a start
+    // point and picks the end coordinate. NO grid-tap. Pure read + add.
+    const startAtOrigin = Math.random() < 0.5;
+    const lo = fourQuad ? -gridMax : 0;
+    const hi = gridMax;
+    let sx = 0, sy = 0;
+    if (!startAtOrigin) {
+      sx = ri(fourQuad ? Math.max(lo + 2, -3) : 1, Math.min(hi - 2, 3));
+      sy = ri(fourQuad ? Math.max(lo + 2, -3) : 1, Math.min(hi - 2, 3));
+    }
+    const moveCount = Math.random() < 0.55 ? 1 : 2;
+    const moves = [];
+    let cx = sx, cy = sy;
+    let safety = 12;
+    while (moves.length < moveCount && safety-- > 0) {
+      const dirs = fourQuad
+        ? ['right', 'left', 'up', 'down']
+        : (cx < hi - 1 && cy < hi - 1 ? ['right', 'up']
+          : (cx < hi - 1 ? ['right'] : (cy < hi - 1 ? ['up'] : [])));
+      if (dirs.length === 0) break;
+      const dir = pick(dirs);
+      const dist = ri(1, 3);
+      let dx = 0, dy = 0;
+      if (dir === 'right') dx = dist;
+      else if (dir === 'left') dx = -dist;
+      else if (dir === 'up') dy = dist;
+      else dy = -dist;
+      const nx = Math.max(lo, Math.min(hi, cx + dx));
+      const ny = Math.max(lo, Math.min(hi, cy + dy));
+      const actualDx = nx - cx, actualDy = ny - cy;
+      if (actualDx === 0 && actualDy === 0) continue;
+      const actualDist = Math.abs(actualDx + actualDy);
+      moves.push({ dir, dist: actualDist });
+      cx = nx; cy = ny;
+    }
+    if (moves.length === 0) return genQuadrantQ(gridMax);
+
+    const startPhrase = startAtOrigin ? 'the origin <strong>(0, 0)</strong>' : `<strong>(${sx}, ${sy})</strong>`;
+    const movePhrase = moves.map(m => `<strong>${m.dir} ${m.dist}</strong>`).join(', then ');
+    const correct = `(${cx}, ${cy})`;
+
+    // Pedagogical distractors:
+    // 1. Reversed direction — kid reads "right" as "left", etc.
+    let revx = sx, revy = sy;
+    for (const m of moves) {
+      if (m.dir === 'right')      revx -= m.dist;
+      else if (m.dir === 'left')  revx += m.dist;
+      else if (m.dir === 'up')    revy -= m.dist;
+      else                         revy += m.dist;
+    }
+    const reversed = `(${revx}, ${revy})`;
+    // 2. Swapped axes — applied move to wrong axis
+    let swx = sx, swy = sy;
+    for (const m of moves) {
+      if (m.dir === 'right')      swy += m.dist;
+      else if (m.dir === 'left')  swy -= m.dist;
+      else if (m.dir === 'up')    swx += m.dist;
+      else                         swx -= m.dist;
+    }
+    const swapped = `(${swx}, ${swy})`;
+    // 3. Off by one in x
+    const offByOne = `(${cx + (Math.random() < 0.5 ? 1 : -1)}, ${cy})`;
+
+    const opts = new Set([correct, reversed, swapped, offByOne]);
+    while (opts.size < 4) opts.add(`(${ri(lo, hi)}, ${ri(lo, hi)})`);
+    const arr = shuffle(Array.from(opts).slice(0, 4));
+
+    const moveExplain = moves.map(m => {
+      if (m.dir === 'right') return `right ${m.dist}: x increases by ${m.dist}`;
+      if (m.dir === 'left')  return `left ${m.dist}: x decreases by ${m.dist}`;
+      if (m.dir === 'up')    return `up ${m.dist}: y increases by ${m.dist}`;
+      return `down ${m.dist}: y decreases by ${m.dist}`;
+    }).join('; then ');
+
+    return {
+      topic: 'coord-path',
+      type: 'mc',
+      gridMax, quadrants: fourQuad ? 4 : 1,
+      markers: [{ x: sx, y: sy, label: 'START', color: '#27f4d2' }],
+      prompt: pick([
+        `Mando engages thrusters from ${startPhrase}: ${movePhrase}. <strong>End coordinates</strong>?`,
+        `Razor Crest at ${startPhrase}. Burn sequence: ${movePhrase}. <strong>New position</strong>?`,
+        `Grogu charts a path from ${startPhrase}: ${movePhrase}. <strong>Where do you end up</strong>?`,
+        `Imperial trace begins at ${startPhrase}: ${movePhrase}. <strong>Final location</strong>?`,
+        `Bo-Katan plots a route from ${startPhrase}: ${movePhrase}. <strong>Drop point</strong>?`,
+      ]),
+      answers: arr,
+      correctIdx: arr.indexOf(correct),
+      explain: `Start at (${sx}, ${sy}). Apply each move: ${moveExplain}. End: <strong>(${cx}, ${cy})</strong>.`,
+    };
+  }
+
   function genIdentifyQ(gridMax, quadrants) {
     // Reverse: marker is shown on the grid, name its ordered pair
     const lo = quadrants === 4 ? -gridMax : 0;
@@ -5897,27 +6020,15 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   function genQuestion(level) {
     const m = level.mix;
     const g = level.gridMax;
-    const q = level.quadrants;
-    // L1, L2 (mix='plot') are PURE plot questions — kid taps a grid cell.
-    // No MC injection. Test-tomorrow safety: zero chance of a missing-button bug.
-    if (m === 'plot') return genPlotQ(g, q);
-    if (m === 'plot-distance') {
-      const r = Math.random();
-      if (r < 0.5) return genPlotQ(g, 1);
-      if (r < 0.8) return genDistanceQ(g);
-      return genShapeQ(g);
-    }
-    if (m === 'reflect-translate') {
-      const r = Math.random();
-      if (r < 0.45) return genReflectQ(g);
-      if (r < 0.80) return genTranslateQ(g);
-      return genShapeQ(g);
-    }
-    if (m === 'mixed') {
-      const fns = [() => genPlotQ(g, q), () => genDistanceQ(g), () => genQuadrantQ(g), () => genReflectQ(g), () => genTranslateQ(g), () => genShapeQ(g)];
-      return pick(fns)();
-    }
-    return genPlotQ(g, q);
+    const fourQuad = level.quadrants === 4;
+    // One generator per level — every level is a different game type.
+    if (m === 'quadrant')    return genQuadrantQ(g);
+    if (m === 'identify-q1') return genIdentifyQ(g, 1);
+    if (m === 'identify-4q') return genIdentifyQ(g, 4);
+    if (m === 'path')        return genPathQ(g, fourQuad);
+    if (m === 'reflect')     return genReflectQ(g);
+    if (m === 'distance')    return genDistanceQ(g);
+    return genQuadrantQ(g);
   }
 
   // ---- Grid renderer ----
@@ -5928,60 +6039,79 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const lo = fourQuad ? -gridMax : 0;
     const hi = gridMax;
     const span = hi - lo + 1;
-    const padding = 12;
-    const view = 100;
-    const cellSize = (view - padding * 2) / span;
-    const xToPx = (x) => padding + (x - lo) * cellSize + cellSize / 2;
-    const yToPx = (y) => view - (padding + (y - lo) * cellSize + cellSize / 2);
+    // ViewBox 120×120 with a clean label gutter outside the plot area.
+    // Plot fills (plotL..plotR, plotT..plotB). Tick labels live in the gutter
+    // so they never collide with cells, axis lines, or the origin marker.
+    // This mirrors how a real math textbook lays out a coordinate plane.
+    const view = 120;
+    const plotL = 16, plotR = 116, plotT = 4, plotB = 104;
+    const plotW = plotR - plotL, plotH = plotB - plotT;
+    const cellW = plotW / span, cellH = plotH / span;
+    const xToPx = (x) => plotL + (x - lo) * cellW + cellW / 2;
+    const yToPx = (y) => plotB - ((y - lo) * cellH + cellH / 2);
+    // Dense grids show only every other tick so labels never crowd.
+    const labelStep = (gridMax >= 8) ? 2 : 1;
+    const showLabel = (n) => (n % labelStep === 0);
 
     let html = `<svg class="rc-plot-grid" viewBox="0 0 ${view} ${view}" preserveAspectRatio="xMidYMid meet">`;
 
-    // Grid cells
+    // 1) Cells. The cell strokes ARE the gridlines.
     for (let yy = lo; yy <= hi; yy++) {
       for (let xx = lo; xx <= hi; xx++) {
-        const cx = xToPx(xx) - cellSize / 2;
-        const cy = yToPx(yy) - cellSize / 2;
+        const cx = xToPx(xx) - cellW / 2;
+        const cy = yToPx(yy) - cellH / 2;
         const isTarget = q.target && q.target.x === xx && q.target.y === yy;
-        html += `<rect class="rc-cell ${isTarget ? 'target' : ''}" data-x="${xx}" data-y="${yy}" x="${cx}" y="${cy}" width="${cellSize}" height="${cellSize}"/>`;
+        html += `<rect class="rc-cell ${isTarget ? 'target' : ''}" data-x="${xx}" data-y="${yy}" x="${cx}" y="${cy}" width="${cellW}" height="${cellH}"/>`;
       }
     }
 
-    // Axes
+    // 2) Bold zero-axes (heavier than gridlines so origin / quadrant
+    //    boundaries are easy to see). For Q1 we bold the left & bottom
+    //    edges where x=0 and y=0 actually sit.
     if (fourQuad) {
-      html += `<line class="rc-axis-line" x1="${xToPx(lo) - cellSize/2}" y1="${yToPx(0)}" x2="${xToPx(hi) + cellSize/2}" y2="${yToPx(0)}" />`;
-      html += `<line class="rc-axis-line" x1="${xToPx(0)}" y1="${yToPx(lo) - cellSize/2}" x2="${xToPx(0)}" y2="${yToPx(hi) + cellSize/2}" />`;
+      html += `<line class="rc-axis-zero" x1="${plotL - cellW/2}" y1="${yToPx(0)}" x2="${plotR + cellW/2}" y2="${yToPx(0)}" />`;
+      html += `<line class="rc-axis-zero" x1="${xToPx(0)}" y1="${plotT}" x2="${xToPx(0)}" y2="${plotB}" />`;
     } else {
-      html += `<line class="rc-axis-line" x1="${padding}" y1="${view - padding}" x2="${view - padding}" y2="${view - padding}" />`;
-      html += `<line class="rc-axis-line" x1="${padding}" y1="${padding}" x2="${padding}" y2="${view - padding}" />`;
+      html += `<line class="rc-axis-zero" x1="${plotL - cellW/2}" y1="${plotB}" x2="${plotR + cellW/2}" y2="${plotB}" />`;
+      html += `<line class="rc-axis-zero" x1="${plotL - cellW/2}" y1="${plotT}" x2="${plotL - cellW/2}" y2="${plotB}" />`;
     }
 
-    // Tick labels
+    // 3) Tick labels — placed OUTSIDE the plot area in the gutter.
+    //    Skip 0 in both x and y tick loops; we draw a single origin label
+    //    at the corner for Q1, and rely on the bold zero-axes for fourQuad.
+    const xLabelY = plotB + 7;
+    const yLabelX = plotL - cellW / 2 - 2;
     for (let xx = lo; xx <= hi; xx++) {
-      if (xx === 0 && fourQuad) continue;
-      html += `<text class="rc-axis" x="${xToPx(xx)}" y="${fourQuad ? yToPx(0) + 4 : view - padding + 4}" text-anchor="middle">${xx}</text>`;
+      if (xx === 0) continue;
+      if (!showLabel(xx)) continue;
+      html += `<text class="rc-axis" x="${xToPx(xx)}" y="${xLabelY}" text-anchor="middle">${xx}</text>`;
     }
     for (let yy = lo; yy <= hi; yy++) {
-      if (yy === 0 && fourQuad) continue;
-      html += `<text class="rc-axis" x="${fourQuad ? xToPx(0) - 2 : padding - 2}" y="${yToPx(yy) + 1.5}" text-anchor="end">${yy}</text>`;
+      if (yy === 0) continue;
+      if (!showLabel(yy)) continue;
+      html += `<text class="rc-axis" x="${yLabelX}" y="${yToPx(yy) + 1.6}" text-anchor="end">${yy}</text>`;
+    }
+    if (!fourQuad) {
+      // Single origin label at the bottom-left corner
+      html += `<text class="rc-axis" x="${yLabelX}" y="${xLabelY}" text-anchor="end">0</text>`;
     }
 
-    // Markers (for MC questions)
+    // 4) Markers — halo + solid + white center, label above with stroke
+    //    so it stays legible no matter what colour cell sits behind it.
     if (q.markers) {
       for (const mk of q.markers) {
-        html += `<circle cx="${xToPx(mk.x)}" cy="${yToPx(mk.y)}" r="2.2" fill="${mk.color}" opacity="0.9"/>`;
-        html += `<circle cx="${xToPx(mk.x)}" cy="${yToPx(mk.y)}" r="1" fill="#fff"/>`;
-        html += `<text x="${xToPx(mk.x)}" y="${yToPx(mk.y) - 3}" fill="#fff" font-size="3.5" text-anchor="middle" font-weight="700">${mk.label}</text>`;
+        const mx = xToPx(mk.x), my = yToPx(mk.y);
+        html += `<circle cx="${mx}" cy="${my}" r="3.6" fill="${mk.color}" opacity="0.35"/>`;
+        html += `<circle cx="${mx}" cy="${my}" r="2.3" fill="${mk.color}"/>`;
+        html += `<circle cx="${mx}" cy="${my}" r="0.9" fill="#fff"/>`;
+        html += `<text class="rc-marker-label" x="${mx}" y="${my - 4.2}" text-anchor="middle">${mk.label}</text>`;
       }
     }
 
     html += '</svg>';
     qBlock.innerHTML = html;
-
-    if (q.type === 'plot' && onPick) {
-      qBlock.querySelectorAll('.rc-cell').forEach(c => {
-        c.addEventListener('click', () => onPick(parseInt(c.dataset.x, 10), parseInt(c.dataset.y, 10)));
-      });
-    }
+    // The grid is read-only reference art — every Razor Crest question is
+    // multiple choice now, so no cell click handlers are wired.
   }
 
   // ---- Module main ----
@@ -6098,60 +6228,28 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         if (!qEl) return;
         const q = state.questions[state.questionNum];
         if (!q) { endLevel(); return; }
-        // Two layouts. Plot: big tappable grid. MC: prompt + 4 answer
-        // buttons stacked vertically — no grid, no scrolling, no chance
-        // of buttons hiding below the fold on iPad.
-        if (q.type === 'plot') {
-          qEl.innerHTML = `
-            <div class="rc-q-meta">
-              <span>JUMP ${state.questionNum + 1} / ${totalQ}</span>
-              <span>PLOT THE COORDINATE</span>
-            </div>
-            <div class="rc-q-body">
-              <div class="rc-q-prompt">${q.prompt}</div>
-              <div class="rc-grid-wrap">
-                <div id="rc-gridhost"></div>
-              </div>
-            </div>
-          `;
-          const gridHost = qEl.querySelector('#rc-gridhost');
-          renderGrid(gridHost, q, (x, y) => answerPlot(x, y, q));
-        } else {
-          // MC: prompt big and centered, then 4 large answer buttons.
-          // Optional small grid above buttons if there are markers.
-          qEl.innerHTML = `
-            <div class="rc-q-meta">
-              <span>JUMP ${state.questionNum + 1} / ${totalQ}</span>
-              <span>NAVCOM QUERY</span>
-            </div>
-            <div class="rc-mc-body">
-              <div class="rc-q-prompt rc-mc-prompt">${q.prompt}</div>
-              ${q.markers && q.markers.length ? `<div class="rc-mc-mini-grid"><div id="rc-gridhost"></div></div>` : ''}
-              <div class="rc-answers" id="rc-answers"></div>
-            </div>
-          `;
-          if (q.markers && q.markers.length) {
-            renderGrid(qEl.querySelector('#rc-gridhost'), q, null);
-          }
-          const ansHost = qEl.querySelector('#rc-answers');
-          ansHost.innerHTML = q.answers.map((a, i) => `<button class="rc-ans" data-idx="${i}">${a}</button>`).join('');
-          ansHost.querySelectorAll('.rc-ans').forEach(b => {
-            b.addEventListener('click', () => answerMC(parseInt(b.dataset.idx, 10), ansHost.querySelectorAll('.rc-ans'), q));
-          });
+        // Single MC layout for every question. Prompt centered, optional
+        // 240px reference grid (read-only — never tapped), 4 large answer
+        // buttons. No scrolling, no precision tapping.
+        qEl.innerHTML = `
+          <div class="rc-q-meta">
+            <span>JUMP ${state.questionNum + 1} / ${totalQ}</span>
+            <span>NAVCOM QUERY</span>
+          </div>
+          <div class="rc-mc-body">
+            <div class="rc-q-prompt rc-mc-prompt">${q.prompt}</div>
+            ${q.markers && q.markers.length ? `<div class="rc-mc-mini-grid"><div id="rc-gridhost"></div></div>` : ''}
+            <div class="rc-answers" id="rc-answers"></div>
+          </div>
+        `;
+        if (q.markers && q.markers.length) {
+          renderGrid(qEl.querySelector('#rc-gridhost'), q, null);
         }
-      }
-
-      function answerPlot(x, y, q) {
-        if (state.phase !== 'flying') return;
-        state.phase = 'between';
-        const correct = q.target.x === x && q.target.y === y;
-        const cells = root.querySelectorAll('.rc-cell');
-        cells.forEach(c => c.style.pointerEvents = 'none');
-        const target = root.querySelector(`.rc-cell[data-x="${q.target.x}"][data-y="${q.target.y}"]`);
-        if (target) target.classList.add('target', 'show');
-        const picked = root.querySelector(`.rc-cell[data-x="${x}"][data-y="${y}"]`);
-        if (picked) picked.classList.add(correct ? 'picked' : 'wrong');
-        afterAnswer(correct);
+        const ansHost = qEl.querySelector('#rc-answers');
+        ansHost.innerHTML = q.answers.map((a, i) => `<button class="rc-ans" data-idx="${i}">${a}</button>`).join('');
+        ansHost.querySelectorAll('.rc-ans').forEach(b => {
+          b.addEventListener('click', () => answerMC(parseInt(b.dataset.idx, 10), ansHost.querySelectorAll('.rc-ans'), q));
+        });
       }
 
       function answerMC(idx, buttons, q) {
