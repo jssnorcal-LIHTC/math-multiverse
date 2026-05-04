@@ -1644,8 +1644,8 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 14px;
-    padding-top: 8px;
+    gap: 10px;
+    padding-top: 4px;
   }
   .rc-mc-prompt {
     text-align: center;
@@ -1659,11 +1659,11 @@
     justify-content: center;
   }
   .rc-mc-mini-grid #rc-gridhost {
-    width: min(320px, 38vh);
-    height: min(320px, 38vh);
+    width: min(300px, 34vh);
+    height: min(300px, 34vh);
     aspect-ratio: 1 / 1;
-    max-width: 320px;
-    max-height: 320px;
+    max-width: 300px;
+    max-height: 300px;
   }
   .rc-ans {
     padding: 12px 14px;
@@ -5777,7 +5777,13 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       type: 'mc',
       gridMax, quadrants: 4,
       markers: [{x, y, label: '?', color: '#ff8000'}],
-      prompt: `Imperial sensor mirrors your jump <strong>(${x}, ${y})</strong> across the <strong>${axis}</strong>. Where does the false reading appear?`,
+      prompt: pick([
+        `Reflect <strong>(${x}, ${y})</strong> across the <strong>${axis}</strong>. <strong>New point</strong>?`,
+        `Imperial mirror flips <strong>(${x}, ${y})</strong> over the <strong>${axis}</strong>. <strong>Result</strong>?`,
+        `Beskar sensor reflects <strong>(${x}, ${y})</strong> across the <strong>${axis}</strong>. <strong>Where</strong>?`,
+        `Mando's jump <strong>(${x}, ${y})</strong> mirrors across the <strong>${axis}</strong>. <strong>New coords</strong>?`,
+        `Hyperdrive ghost: reflect <strong>(${x}, ${y})</strong> across <strong>${axis}</strong>. <strong>Position</strong>?`,
+      ]),
       answers: arr,
       correctIdx: arr.indexOf(correct),
       explain: axis === 'y-axis'
