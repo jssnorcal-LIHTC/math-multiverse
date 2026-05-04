@@ -1560,8 +1560,10 @@
   #rc-gridhost {
     aspect-ratio: 1 / 1;
     width: 100%;
-    max-width: 380px;
-    max-height: 60vh;
+    /* Bigger plot grid so cells are tappable with fingers. iPad finger
+       target ~50-60px; with up to 11 cells (4-quadrant grids), 540 / 11 = ~49px. */
+    max-width: 540px;
+    max-height: 70vh;
     align-self: center;
   }
 
@@ -1728,34 +1730,34 @@
 
   .mb-pick {
     position: relative; z-index: 1;
-    padding: 24px 28px;
+    padding: 12px 18px 16px;
     min-height: 100%;
     overflow: visible;
     color: #f0f4f8;
     background: linear-gradient(180deg, #2a2d35 0%, #1a1d24 100%);
   }
   .mb-brand-logo {
-    width: 90px; height: auto;
-    margin: 0 auto 10px;
+    width: 60px; height: auto;
+    margin: 0 auto 4px;
     display: block;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
   }
   .mb-pick h2 {
-    font-size: 1.8rem; font-weight: 900;
+    font-size: 1.2rem; font-weight: 900;
     text-align: center;
     letter-spacing: -0.01em;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     color: #F2CD37;
     text-shadow: 0 2px 0 #c89a18, 0 4px 12px rgba(0,0,0,0.4);
   }
-  .mb-pick > p { text-align: center; color: #a0a8b3; margin-bottom: 12px; font-size: 0.95rem; }
+  .mb-pick > p { text-align: center; color: #a0a8b3; margin-bottom: 6px; font-size: 0.78rem; }
   .mb-pick .lvl-badge {
-    display: inline-block; margin-bottom: 18px;
-    padding: 4px 12px;
+    display: inline-block; margin-bottom: 8px;
+    padding: 3px 10px;
     border-radius: 999px;
     background: rgba(242,205,55,0.15);
     border: 1px solid rgba(242,205,55,0.4);
-    font-size: 0.78rem; font-weight: 800;
+    font-size: 0.7rem; font-weight: 800;
     letter-spacing: 0.06em;
     color: #F2CD37;
   }
@@ -1763,13 +1765,13 @@
   .mb-hero {
     position: relative;
     width: 100%;
-    max-width: 720px;
-    margin: 0 auto 14px;
-    aspect-ratio: 16 / 6;
-    border-radius: 12px;
+    max-width: 540px;
+    margin: 0 auto 8px;
+    aspect-ratio: 16 / 5;
+    border-radius: 8px;
     overflow: hidden;
     background: #1a1d24;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.5), inset 0 0 0 2px rgba(242,205,55,0.6);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.5), inset 0 0 0 2px rgba(242,205,55,0.6);
   }
   .mb-hero img {
     width: 100%; height: 100%; object-fit: cover;
@@ -1784,42 +1786,46 @@
 
   .mb-builder-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
     max-width: 950px;
     margin: 0 auto;
   }
+  @media (max-width: 760px) {
+    .mb-builder-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  }
   .mb-builder {
     background: linear-gradient(180deg, #15181f 0%, #0e1015 100%);
-    border: 3px solid var(--builder-color);
-    border-radius: 12px;
-    padding: 14px 12px;
+    border: 2px solid var(--builder-color);
+    border-radius: 8px;
+    padding: 6px 4px 8px;
     cursor: pointer;
     text-align: center;
     transition: transform 0.18s var(--ease-spring), box-shadow 0.18s var(--ease-out);
   }
-  .mb-builder:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-  .mb-builder.selected { box-shadow: 0 0 0 3px var(--builder-color), 0 8px 24px rgba(0,0,0,0.4); }
+  @media (hover: hover) {
+    .mb-builder:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+  }
+  .mb-builder.selected { box-shadow: 0 0 0 3px var(--builder-color), 0 4px 12px rgba(0,0,0,0.4); }
   .mb-mini-svg {
-    width: 86px; height: 110px;
-    margin: 4px auto 8px;
+    width: 56px; height: 72px;
+    margin: 4px auto 4px;
     display: flex; align-items: center; justify-content: center;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
   }
   .mb-mini-svg svg, .mb-mini-svg img { width: 100%; height: 100%; display: block; object-fit: contain; }
   .mb-builder-name {
-    font-size: 1rem; font-weight: 800;
+    font-size: 0.78rem; font-weight: 800;
     letter-spacing: -0.01em;
     margin-bottom: 2px;
     color: #f0f4f8;
   }
   .mb-builder-line {
-    font-size: 0.74rem; color: #6b7280;
+    font-size: 0.62rem; color: #6b7280;
     font-style: italic;
-    line-height: 1.3;
-    min-height: 2.6em;
+    line-height: 1.2;
   }
-  .mb-pick-actions { display: flex; justify-content: center; gap: 10px; margin-top: 18px; }
+  .mb-pick-actions { display: flex; justify-content: center; gap: 10px; margin-top: 12px; }
   .mb-go {
     padding: 14px 32px;
     background: linear-gradient(180deg, #F2CD37 0%, #c89a18 100%);
@@ -2037,32 +2043,32 @@
 
   .rk-pick {
     position: relative; z-index: 1;
-    padding: 28px;
+    padding: 12px 18px 16px;
     min-height: 100%;
     overflow: visible;
     text-align: center;
   }
   .rk-brand-logo {
-    width: 86px; height: auto;
-    margin: 0 auto 10px;
+    width: 56px; height: auto;
+    margin: 0 auto 4px;
     display: block;
-    filter: drop-shadow(0 0 12px rgba(255,255,255,0.2));
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
   }
   .rk-pick h2 {
-    font-size: 1.7rem; font-weight: 800;
+    font-size: 1.2rem; font-weight: 800;
     letter-spacing: 0.04em;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     color: #f87171;
-    text-shadow: 0 0 18px rgba(248,113,113,0.4);
+    text-shadow: 0 0 12px rgba(248,113,113,0.4);
   }
-  .rk-pick p { color: var(--text-secondary); margin-bottom: 12px; font-size: 0.95rem; }
+  .rk-pick p { color: var(--text-secondary); margin-bottom: 6px; font-size: 0.78rem; }
   .rk-pick .lvl-badge {
-    display: inline-block; margin-bottom: 18px;
-    padding: 4px 12px;
+    display: inline-block; margin-bottom: 8px;
+    padding: 3px 10px;
     border-radius: 999px;
     background: rgba(201,61,61,0.12);
     border: 1px solid rgba(201,61,61,0.4);
-    font-size: 0.78rem; font-weight: 700;
+    font-size: 0.7rem; font-weight: 700;
     letter-spacing: 0.06em;
     color: #f87171;
   }
@@ -2070,13 +2076,13 @@
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     gap: 0;
-    max-width: 800px;
-    margin: 24px auto 18px;
+    max-width: 540px;
+    margin: 8px auto 8px;
     background: linear-gradient(180deg, #0a1015 0%, #15181f 100%);
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     border: 1px solid var(--border-subtle);
-    aspect-ratio: 5 / 2;
+    aspect-ratio: 16 / 5;
   }
   .rk-side-grace {
     background: radial-gradient(ellipse 80% 60% at 30% 80%, rgba(0,217,255,0.06), transparent), #1a2030;
@@ -2101,13 +2107,13 @@
     margin-top: 6px;
     opacity: 0.85;
   }
-  .rk-meet svg { width: 90px; height: 90px; }
+  .rk-meet svg { width: 60px; height: 60px; }
   .rk-grace-photo, .rk-rocky-photo {
-    width: 110px; height: 110px;
+    width: 70px; height: 70px;
     object-fit: cover;
     object-position: center;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     display: block;
   }
   .rk-grace-photo { border: 2px solid rgba(0,217,255,0.4); }
@@ -2349,49 +2355,49 @@
 
   .fb-pick {
     position: relative; z-index: 1;
-    padding: 28px;
+    padding: 12px 18px 16px;
     min-height: 100%;
     overflow: visible;
     text-align: center;
   }
   .fb-title-stack {
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-    margin-bottom: 18px;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    margin-bottom: 6px;
   }
   .fb-pick h2 {
-    font-size: 2.2rem;
+    font-size: 1.4rem;
     font-weight: 600;
     font-style: italic;
     color: #4A3526;
     letter-spacing: -0.01em;
   }
   .fb-pick .fb-subtitle {
-    font-size: 1.05rem;
+    font-size: 0.85rem;
     color: #8B5A2B;
     font-style: italic;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   .fb-pick .fb-chapter {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     color: #8B5A2B;
     letter-spacing: 0.05em;
     font-style: italic;
   }
   .fb-pick .lvl-badge {
-    display: inline-block; margin: 12px auto 18px;
-    padding: 4px 14px;
+    display: inline-block; margin: 4px auto 8px;
+    padding: 3px 12px;
     background: rgba(212, 162, 76, 0.18);
     border: 1px solid rgba(139, 90, 43, 0.4);
     border-radius: 999px;
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     font-weight: 600;
     color: #8B5A2B;
     letter-spacing: 0.06em;
   }
   .fb-illustration {
     width: 100%;
-    max-width: 480px;
-    margin: 0 auto 20px;
+    max-width: 380px;
+    margin: 0 auto 8px;
     aspect-ratio: 3 / 2;
     position: relative;
     border: 1px solid rgba(139, 90, 43, 0.3);
@@ -5325,9 +5331,11 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     { id: 1, name: 'Departing Nevarro',       gridMax: 7,  quadrants: 1, mix: 'plot' },
     { id: 2, name: 'Asteroid Field Run',      gridMax: 8,  quadrants: 1, mix: 'plot' },
     { id: 3, name: 'Mos Eisley Approach',     gridMax: 8,  quadrants: 1, mix: 'plot-distance' },
-    { id: 4, name: 'Hyperspace Coordinates',  gridMax: 7,  quadrants: 4, mix: 'plot' },
-    { id: 5, name: 'Imperial Pursuit',        gridMax: 7,  quadrants: 4, mix: 'reflect-translate' },
-    { id: 6, name: 'Final Jump to Mandalore', gridMax: 7,  quadrants: 4, mix: 'mixed' },
+    // 4-quadrant levels reduced from gridMax 7 to 5 so cells are big enough
+    // for finger-taps (5×5 in each quadrant = 11×11 grid; 540/11 ≈ 49px cells).
+    { id: 4, name: 'Hyperspace Coordinates',  gridMax: 5,  quadrants: 4, mix: 'plot' },
+    { id: 5, name: 'Imperial Pursuit',        gridMax: 5,  quadrants: 4, mix: 'reflect-translate' },
+    { id: 6, name: 'Final Jump to Mandalore', gridMax: 5,  quadrants: 4, mix: 'mixed' },
   ];
   const RC_QPL = [15, 18, 18, 20, 20, 20];
 
