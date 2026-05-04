@@ -2199,6 +2199,79 @@
     overflow: hidden;
   }
   .rk-scene svg { width: 100%; height: 100%; display: block; }
+  /* In-game Rocky scene uses the same photo art as the title screen.
+     Lays out in normal flow so it gives the .rk-scene container an
+     intrinsic height (the previous SVG was width/height 100% which only
+     filled the space the parent provided — but the grid relies on the
+     scene's content to be tall enough that "scene" stretches to match
+     the status+qbox stack on the right). */
+  .rk-scene-content {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    position: relative;
+  }
+  .rk-scene-side {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 14px;
+    text-align: center;
+    min-height: 180px;
+  }
+  .rk-scene-tunnel {
+    width: 14px;
+    background: linear-gradient(180deg, rgba(140,255,200,0.45), rgba(80,200,140,0.55));
+    box-shadow: inset 0 0 8px rgba(255,255,255,0.4), 0 0 14px rgba(80,200,140,0.5);
+    position: relative;
+  }
+  .rk-scene-tunnel span {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: rgba(140,255,200,0.85);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .rk-scene-photo {
+    width: min(140px, 80%);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    display: block;
+  }
+  .rk-scene-grace-photo { border: 2px solid rgba(0,217,255,0.5); }
+  .rk-scene-rocky-photo { border: 2px solid rgba(255,140,80,0.7); }
+  .rk-scene-name {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-top: 8px;
+    opacity: 0.9;
+  }
+  .rk-scene-grace .rk-scene-name { color: #6dd5ed; }
+  .rk-scene-rocky .rk-scene-name { color: #ff8c5a; }
+  .rk-scene-crisis {
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #ff5050;
+    box-shadow: 0 0 10px rgba(255, 80, 80, 0.7);
+    animation: rkCrisisPulse 1.2s ease-in-out infinite;
+  }
+  @keyframes rkCrisisPulse {
+    0%, 100% { opacity: 0.6; transform: scale(0.95); }
+    50%      { opacity: 1;   transform: scale(1.1); }
+  }
   .rk-status {
     grid-area: status;
     background: rgba(20, 25, 35, 0.7);
@@ -7894,9 +7967,26 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       function renderRoom() {
         const lifeHtml = [0,1,2].map(i => `<span class="rk-pip ${i < state.livesLost ? 'lost' : ''}"></span>`).join('');
         const crisisClass = state.crisisLevel < 0.34 ? 'good' : (state.crisisLevel < 0.67 ? 'warn' : 'bad');
+        // In-game scene uses the same real photos as the title screen
+        // (NASA EMU for Grace, the Rocky concept render for Rocky) instead
+        // of the stylized SVG silhouettes — Justin asked for the title-
+        // screen art to carry through into gameplay.
         root.innerHTML = `
           <div class="rk-room">
-            <div class="rk-scene">${sceneSvg(state)}</div>
+            <div class="rk-scene">
+              <div class="rk-scene-content">
+                <div class="rk-scene-side rk-scene-grace">
+                  <img class="rk-scene-photo rk-scene-grace-photo" src="${NASA_EMU}" alt="Grace" loading="lazy">
+                  <div class="rk-scene-name">GRACE</div>
+                </div>
+                <div class="rk-scene-tunnel"><span>XENONITE</span></div>
+                <div class="rk-scene-side rk-scene-rocky">
+                  <img class="rk-scene-photo rk-scene-rocky-photo" src="${ROCKY_IMG}" alt="Rocky" loading="lazy">
+                  <div class="rk-scene-name">ROCKY</div>
+                </div>
+                ${state.crisisLevel >= 0.5 ? '<div class="rk-scene-crisis"></div>' : ''}
+              </div>
+            </div>
             <div class="rk-status">
               <div class="rk-stat"><span class="rk-stat-label">Mission</span><span class="rk-stat-value">${lvl.name}</span></div>
               <div class="rk-stat"><span class="rk-stat-label">Translation</span><span class="rk-stat-value">${state.questionNum + 1} / ${totalQ}</span></div>
