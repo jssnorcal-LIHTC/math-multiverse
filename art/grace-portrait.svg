@@ -1,0 +1,168 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <radialGradient id="gSpace" cx="0.5" cy="0.35" r="0.85">
+      <stop offset="0" stop-color="#1a2440"/>
+      <stop offset="0.6" stop-color="#0a0e1c"/>
+      <stop offset="1" stop-color="#03060c"/>
+    </radialGradient>
+    <radialGradient id="gEarthGlow" cx="0.5" cy="1.05" r="0.7">
+      <stop offset="0" stop-color="#7ec8f0" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#3a78b0" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#1a3a5f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gHelmetWhite" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#fafbfd"/>
+      <stop offset="0.4" stop-color="#e1e4ea"/>
+      <stop offset="1" stop-color="#7a8290"/>
+    </linearGradient>
+    <radialGradient id="gVisorGold" cx="0.35" cy="0.3" r="0.85">
+      <stop offset="0" stop-color="#f5cf7a" stop-opacity="0.18"/>
+      <stop offset="0.4" stop-color="#c89a3a" stop-opacity="0.40"/>
+      <stop offset="0.85" stop-color="#5a4018" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#1a1208" stop-opacity="0.65"/>
+    </radialGradient>
+    <linearGradient id="gSuitCream" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eeebe1"/>
+      <stop offset="0.5" stop-color="#c8c4b8"/>
+      <stop offset="1" stop-color="#7a7668"/>
+    </linearGradient>
+    <radialGradient id="gHelmetShine" cx="0.3" cy="0.25" r="0.5">
+      <stop offset="0" stop-color="rgba(255,255,255,0.45)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <!-- Clip path matching the visor opening so the face image only shows
+         inside the helmet glass, not over the white shell. -->
+    <clipPath id="gVisorClip">
+      <ellipse cx="200" cy="158" rx="92" ry="102"/>
+    </clipPath>
+  </defs>
+
+  <!-- Space backdrop with subtle Earth glow at bottom -->
+  <rect width="400" height="400" fill="url(#gSpace)"/>
+  <ellipse cx="200" cy="420" rx="320" ry="140" fill="url(#gEarthGlow)"/>
+
+  <!-- Stars -->
+  <g fill="#fff">
+    <circle cx="38" cy="42" r="0.9" opacity="0.85"/>
+    <circle cx="110" cy="22" r="0.6" opacity="0.7"/>
+    <circle cx="180" cy="38" r="0.5" opacity="0.6"/>
+    <circle cx="270" cy="18" r="1.1" opacity="0.9"/>
+    <circle cx="335" cy="52" r="0.7" opacity="0.75"/>
+    <circle cx="378" cy="120" r="0.8" opacity="0.7"/>
+    <circle cx="22" cy="160" r="0.6" opacity="0.65"/>
+    <circle cx="58" cy="220" r="0.5" opacity="0.55"/>
+    <circle cx="350" cy="190" r="0.9" opacity="0.8"/>
+    <circle cx="380" cy="240" r="0.5" opacity="0.5"/>
+  </g>
+
+  <!-- Earth horizon arc -->
+  <path d="M -40 360 Q 200 320 440 360 L 440 400 L -40 400 Z" fill="#3e74a8" opacity="0.65"/>
+  <path d="M -40 360 Q 200 322 440 360" stroke="#bcdcef" stroke-width="1" fill="none" opacity="0.7"/>
+  <path d="M -40 380 Q 200 348 440 380" stroke="#86b6d8" stroke-width="0.6" fill="none" opacity="0.4"/>
+  <ellipse cx="80" cy="378" rx="32" ry="3" fill="#fff" opacity="0.35"/>
+  <ellipse cx="240" cy="382" rx="48" ry="3" fill="#fff" opacity="0.3"/>
+  <ellipse cx="350" cy="386" rx="28" ry="2.5" fill="#fff" opacity="0.32"/>
+
+  <!-- BACKPACK / PLSS hint behind shoulders -->
+  <rect x="60" y="290" width="280" height="110" fill="#cfcdc4" stroke="#5a574e" stroke-width="1.5" rx="6"/>
+  <rect x="80" y="305" width="240" height="3" fill="#5a574e" opacity="0.6"/>
+
+  <!-- SUIT SHOULDERS / TORSO -->
+  <path d="M 38 400 L 70 290 Q 110 270 200 268 Q 290 270 330 290 L 362 400 Z" fill="url(#gSuitCream)" stroke="#5a574e" stroke-width="1.8"/>
+
+  <!-- Suit rib/seam lines -->
+  <path d="M 105 290 Q 100 320 105 360" stroke="#7a7668" stroke-width="1" fill="none" opacity="0.55"/>
+  <path d="M 295 290 Q 300 320 295 360" stroke="#7a7668" stroke-width="1" fill="none" opacity="0.55"/>
+  <line x1="200" y1="285" x2="200" y2="400" stroke="#7a7668" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- Left shoulder NASA mission patch -->
+  <g transform="translate(95, 305)">
+    <rect width="60" height="38" fill="#1a3a8a" rx="2" stroke="#0a1f4a" stroke-width="0.6"/>
+    <text x="30" y="17" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="900" fill="#fff">NASA</text>
+    <line x1="6" y1="25" x2="54" y2="25" stroke="#c9442a" stroke-width="2"/>
+    <text x="30" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" font-weight="700" fill="#fff" opacity="0.85">HAIL MARY</text>
+  </g>
+
+  <!-- Right shoulder life-support tubes -->
+  <g stroke="#7a3a1f" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.92">
+    <path d="M 245 295 Q 252 310 258 330 L 262 360"/>
+    <path d="M 270 292 Q 278 310 285 330 L 290 360"/>
+    <path d="M 295 295 Q 304 312 312 332 L 318 362"/>
+  </g>
+  <g stroke="#c97042" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.7">
+    <path d="M 244 296 Q 251 311 257 331"/>
+    <path d="M 269 293 Q 277 311 284 331"/>
+    <path d="M 294 296 Q 303 313 311 333"/>
+  </g>
+
+  <!-- Chest control unit -->
+  <rect x="172" y="318" width="56" height="32" fill="#2a2d35" stroke="#0a0e15" stroke-width="1" rx="2"/>
+  <circle cx="183" cy="328" r="2.5" fill="#27f4d2"/>
+  <circle cx="195" cy="328" r="2.5" fill="#fbbf24"/>
+  <circle cx="207" cy="328" r="2.5" fill="#ee1c25"/>
+  <rect x="178" y="335" width="44" height="10" fill="#0a1828" stroke="#1a4060" stroke-width="0.5" rx="1"/>
+  <text x="200" y="343" text-anchor="middle" font-family="system-ui" font-size="6" font-weight="800" fill="rgba(0,217,255,0.9)">PROJECT HAIL MARY</text>
+
+  <!-- NECK RING (helmet locking collar) -->
+  <ellipse cx="200" cy="270" rx="78" ry="14" fill="#a8aeb6" stroke="#5a5750" stroke-width="1.8"/>
+  <ellipse cx="200" cy="268" rx="73" ry="10" fill="#7a8088"/>
+  <ellipse cx="200" cy="266" rx="68" ry="6" fill="#3a3e44"/>
+  <g fill="#3a3e44" stroke="#1a1d24" stroke-width="0.4">
+    <circle cx="135" cy="270" r="2"/>
+    <circle cx="165" cy="271" r="2"/>
+    <circle cx="200" cy="271" r="2"/>
+    <circle cx="235" cy="271" r="2"/>
+    <circle cx="265" cy="270" r="2"/>
+  </g>
+
+  <!-- HELMET BACK SHELL -->
+  <ellipse cx="200" cy="158" rx="120" ry="128" fill="url(#gHelmetWhite)" stroke="#5a5750" stroke-width="2"/>
+
+  <!-- VISOR DARK INTERIOR (under face image, in case image fails) -->
+  <ellipse cx="200" cy="158" rx="92" ry="102" fill="#15110a"/>
+
+  <!-- FACE PHOTO inside visor (clipped to visor opening) -->
+  <g clip-path="url(#gVisorClip)">
+    <image href="grace-face.png" x="118" y="68" width="164" height="180" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+
+  <!-- VISOR GOLD GLASS overlay (tints the photo amber, like a real EVA visor) -->
+  <ellipse cx="200" cy="158" rx="92" ry="102" fill="url(#gVisorGold)"/>
+
+  <!-- Visor reflection band (Earth horizon reflected on the glass) -->
+  <path d="M 120 100 Q 200 120 280 105 L 280 130 Q 200 142 120 125 Z"
+        fill="rgba(180,210,255,0.22)"/>
+  <ellipse cx="155" cy="115" rx="32" ry="8" fill="rgba(255,255,255,0.32)" transform="rotate(-12 155 115)"/>
+  <ellipse cx="248" cy="118" rx="18" ry="5" fill="rgba(255,255,255,0.22)" transform="rotate(-8 248 118)"/>
+  <path d="M 130 198 Q 200 218 270 198 L 268 215 Q 200 232 132 215 Z"
+        fill="rgba(120,180,230,0.18)"/>
+
+  <!-- HELMET FRONT RIM around visor -->
+  <ellipse cx="200" cy="158" rx="92" ry="102" fill="none" stroke="#dde1e6" stroke-width="6"/>
+  <ellipse cx="200" cy="158" rx="92" ry="102" fill="none" stroke="#5a5750" stroke-width="1.4"/>
+
+  <!-- Helmet specular shine -->
+  <ellipse cx="118" cy="80" rx="48" ry="22" fill="url(#gHelmetShine)" transform="rotate(-22 118 80)"/>
+  <ellipse cx="290" cy="78" rx="22" ry="10" fill="rgba(255,255,255,0.28)" transform="rotate(18 290 78)"/>
+
+  <!-- Top NASA patch on helmet -->
+  <rect x="172" y="48" width="56" height="14" fill="#1a3a8a" rx="2" stroke="#0a1f4a" stroke-width="0.5"/>
+  <text x="200" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="900" fill="#fff" letter-spacing="1">NASA</text>
+  <!-- Mission emblem -->
+  <circle cx="200" cy="38" r="9" fill="#c9442a" stroke="#0a0a0a" stroke-width="1"/>
+  <text x="200" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="900" fill="#fff">HM</text>
+
+  <!-- Comms antenna -->
+  <line x1="240" y1="46" x2="252" y2="20" stroke="#3a3a3a" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="252" cy="18" r="3" fill="#7a3a1f" stroke="#1a0a00" stroke-width="0.5"/>
+
+  <!-- Helmet bottom locking bolts -->
+  <g fill="#3a3e44" stroke="#1a1d24" stroke-width="0.6">
+    <circle cx="120" cy="246" r="4.5"/>
+    <circle cx="280" cy="246" r="4.5"/>
+  </g>
+  <g fill="#9aa1ac">
+    <circle cx="120" cy="246" r="2"/>
+    <circle cx="280" cy="246" r="2"/>
+  </g>
+</svg>
