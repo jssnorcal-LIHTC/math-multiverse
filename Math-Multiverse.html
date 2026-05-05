@@ -4791,14 +4791,18 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const td = (target.name === 'tenths' ? target.val : others.find(p => p.name === 'tenths').val);
     const thd = (target.name === 'thousandths' ? target.val : others.find(p => p.name === 'thousandths').val);
     const lap = `1:${ri(20, 35)}.${td}${hDigit}${thd}`;
-    const correctNum = tDigit * Math.pow(10, -target.power);
-    const correct = correctNum.toString();
+    // Format the digit's value as a clean decimal string (e.g. 3 in the
+    // tenths place = "0.3", in hundredths = "0.03"). Avoid 0.1 * 3 =
+    // 0.30000000000000004 from JS float arithmetic.
+    const placeValueStr = (digit, power) =>
+      digit === 0 ? '0' : '0.' + '0'.repeat(power - 1) + digit;
+    const correct = placeValueStr(tDigit, target.power);
     // Pedagogical mistakes: kid reads digit at wrong place value
     const others2 = places.filter(p => p !== target);
     const candidates = new Set([correct]);
-    candidates.add((tDigit * Math.pow(10, -others2[0].power)).toString());  // wrong place value, same digit
-    candidates.add((tDigit * Math.pow(10, -others2[1].power)).toString());  // other wrong place
-    candidates.add(tDigit.toString());                                        // forgot decimal entirely
+    candidates.add(placeValueStr(tDigit, others2[0].power));  // wrong place value, same digit
+    candidates.add(placeValueStr(tDigit, others2[1].power));  // other wrong place
+    candidates.add(tDigit.toString());                         // forgot decimal entirely
     const arr = shuffle(Array.from(candidates).slice(0, 4));
     const driver = pick(DRIVERS);
     return {
