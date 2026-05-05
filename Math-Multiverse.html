@@ -578,7 +578,12 @@
     align-items: start;
   }
   @media (max-width: 860px) {
-    .fr-stage { grid-template-columns: 1fr; grid-template-rows: auto auto; }
+    .fr-stage { grid-template-columns: 1fr; grid-template-rows: auto auto; padding: 8px; gap: 8px; }
+    /* iPad 6 portrait + chrome (768x946): a 16:9 video takes 421px and
+       pushes the answers off the bottom edge by ~36px. Cap the video at
+       a flatter 21:9 + max-height so the question card always fits. */
+    .fr-trail { aspect-ratio: 21 / 9; max-height: 32vh; }
+    .fr-ans { padding: 12px 12px; }
   }
 
   .fr-left {
