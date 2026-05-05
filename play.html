@@ -13,6 +13,14 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ee1d52'/%3E%3Ctext x='16' y='22' font-family='system-ui' font-size='15' font-weight='800' fill='white' text-anchor='middle'%3EM%C2%B7M%3C/text%3E%3C/svg%3E">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* iOS Safari: kill the default blue/orange tap flash so answer
+     buttons feel native instead of "web-page". */
+  button, a, [role="button"], .module-card, .level-card,
+  .fr-ans, .f1-ans, .rc-ans, .mb-ans, .rk-ans, .fb-ans,
+  .f1-driver, .mb-builder, .rc-view {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
 
   :root {
     --bg-darkest: #08090b;
