@@ -1731,23 +1731,17 @@
      ============================================================ */
   .mod-mb {
     width: 100%;
+    height: 100%;
     min-height: 100%;
     position: relative;
     overflow: visible;
-    background:
-      linear-gradient(180deg, #87ceeb 0%, #87ceeb 70%, #5a9344 70%, #4a7d3a 100%);
+    /* Solid sky — the .mb-stage SVG renders its own sky+ground horizon
+       internally, so a duplicate gradient on the wrapper would bleed
+       through whenever the build screen's grid leaves empty space and
+       paint a second, mismatched horizon line. */
+    background: #87ceeb;
     color: #1a1a1a;
     font-family: -apple-system, 'SF Pro Display', 'Segoe UI', Roboto, system-ui, sans-serif;
-  }
-  .mod-mb::before {
-    /* cloud shapes */
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      radial-gradient(ellipse 120px 32px at 18% 22%, #ffffff, rgba(255,255,255,0) 70%),
-      radial-gradient(ellipse 80px 24px at 78% 14%, #ffffff, rgba(255,255,255,0) 70%),
-      radial-gradient(ellipse 100px 28px at 52% 35%, rgba(255,255,255,0.85), rgba(255,255,255,0) 70%);
-    pointer-events: none;
   }
 
   .mb-pick {
@@ -1869,23 +1863,25 @@
   /* Build screen */
   .mb-build {
     position: relative; z-index: 1;
-    width: 100%; min-height: 100%;
+    width: 100%; min-height: 100%; height: 100%;
     display: grid;
     grid-template-columns: minmax(240px, 32%) 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto 1fr auto;
     grid-template-areas:
       "stage  status"
       "stage  question"
+      "stage  spacer"
       "stage  foot";
     gap: 8px;
     padding: 8px 10px;
     align-items: start;
+    align-content: start;
   }
   @media (max-width: 760px) {
     .mb-build {
       grid-template-columns: 1fr;
-      grid-template-rows: minmax(140px, 26%) auto 1fr auto;
-      grid-template-areas: "stage" "status" "question" "foot";
+      grid-template-rows: minmax(140px, 26%) auto auto 1fr auto;
+      grid-template-areas: "stage" "status" "question" "spacer" "foot";
     }
   }
   .mb-build::after {
