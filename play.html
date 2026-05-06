@@ -4525,10 +4525,14 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (pct >= 1.00)      stars = 3;
-          else if (pct >= 0.98) stars = 2;
-          else if (pct >= 0.95) stars = 1;
-          else                  stars = 0; // failed accuracy threshold
+          // Star thresholds based on absolute mistakes — consistent across
+          // 15q / 18q / 20q levels. 2 mistakes still earns a star so the
+          // kid can advance without restarting on a single slip-up.
+          // FR uses crashCount instead of livesLost to track wipeouts.
+          if (state.crashCount === 0)      stars = 3;
+          else if (state.crashCount <= 1)  stars = 2;
+          else if (state.crashCount <= 2)  stars = 1;
+          else                              stars = 0;
           if (stars > 0) sfxFanfare();
         }
         callbacks.onComplete(state.score, stars);
@@ -5457,10 +5461,13 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (pct >= 1.00)      stars = 3;
-          else if (pct >= 0.98) stars = 2;
-          else if (pct >= 0.95) stars = 1;
-          else                  stars = 0;
+          // Star thresholds based on absolute mistakes — consistent across
+          // 15q / 18q / 20q levels. 2 mistakes still earns a star so the
+          // kid can advance without restarting on a single slip-up.
+          if (state.livesLost === 0)      stars = 3;
+          else if (state.livesLost <= 1)  stars = 2;
+          else if (state.livesLost <= 2)  stars = 1;
+          else                             stars = 0;
         }
         callbacks.onComplete(state.score, stars);
       }
@@ -6459,10 +6466,13 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (pct >= 1.00)      stars = 3;
-          else if (pct >= 0.98) stars = 2;
-          else if (pct >= 0.95) stars = 1;
-          else                  stars = 0;
+          // Star thresholds based on absolute mistakes — consistent across
+          // 15q / 18q / 20q levels. 2 mistakes still earns a star so the
+          // kid can advance without restarting on a single slip-up.
+          if (state.livesLost === 0)      stars = 3;
+          else if (state.livesLost <= 1)  stars = 2;
+          else if (state.livesLost <= 2)  stars = 1;
+          else                             stars = 0;
         }
         callbacks.onComplete(state.score, stars);
       }
@@ -7108,10 +7118,13 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (pct >= 1.00)      stars = 3;
-          else if (pct >= 0.98) stars = 2;
-          else if (pct >= 0.95) stars = 1;
-          else                  stars = 0;
+          // Star thresholds based on absolute mistakes — consistent across
+          // 15q / 18q / 20q levels. 2 mistakes still earns a star so the
+          // kid can advance without restarting on a single slip-up.
+          if (state.livesLost === 0)      stars = 3;
+          else if (state.livesLost <= 1)  stars = 2;
+          else if (state.livesLost <= 2)  stars = 1;
+          else                             stars = 0;
           if (stars > 0) sfxAwesome();
         }
         callbacks.onComplete(state.score, stars);
@@ -8160,10 +8173,13 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (pct >= 1.00)      stars = 3;
-          else if (pct >= 0.98) stars = 2;
-          else if (pct >= 0.95) stars = 1;
-          else                  stars = 0;
+          // Star thresholds based on absolute mistakes — consistent across
+          // 15q / 18q / 20q levels. 2 mistakes still earns a star so the
+          // kid can advance without restarting on a single slip-up.
+          if (state.livesLost === 0)      stars = 3;
+          else if (state.livesLost <= 1)  stars = 2;
+          else if (state.livesLost <= 2)  stars = 1;
+          else                             stars = 0;
         }
         callbacks.onComplete(state.score, stars);
       }
@@ -8862,10 +8878,13 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const pct = state.correctCount / Math.max(1, totalQ);
         let stars = 0;
         if (!dnf) {
-          if (pct >= 1.00)      stars = 3;
-          else if (pct >= 0.98) stars = 2;
-          else if (pct >= 0.95) stars = 1;
-          else                  stars = 0;
+          // Star thresholds based on absolute mistakes — consistent across
+          // 15q / 18q / 20q levels. 2 mistakes still earns a star so the
+          // kid can advance without restarting on a single slip-up.
+          if (state.livesLost === 0)      stars = 3;
+          else if (state.livesLost <= 1)  stars = 2;
+          else if (state.livesLost <= 2)  stars = 1;
+          else                             stars = 0;
           if (stars > 0) sfxRescue();
         }
         callbacks.onComplete(state.score, stars);
