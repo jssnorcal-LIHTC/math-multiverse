@@ -26,11 +26,15 @@ Recovered from the crashed session, committed as checkpoint (pending fuzz verifi
 - [x] P1 floating-bear `genCompareExpr` — positive subtraction (no negatives)
 - [x] P1 floating-bear `genCorrespondingTerm` — deduped distractors
 - [x] (bonus P2) mixed-number scaled distractors + negative-fraction distractor filter
-Remaining:
-- [ ] **VERIFY** all the above with independent Node fuzz oracles (50k+ iters each; no tautological tests)
-- [ ] P1 rocky conversion distractors — plausible scale-errors (kill guess-by-roundness)
-- [ ] P1 shared Save reconcile — unified `default()` deep-merge in `load()` AND `importJSON`; `.bak` on corrupt
-- [ ] Commit verified Phase 2
+- [x] **VERIFIED** all the above with independent Node fuzz oracles (240k+ questions, 0 failures; mutation self-test catches 100% of corrupted answers; oracle coverage proven)
+- [x] (fuzz-found, fixed) fraction makeChoices negative pad; genSub negative result; genCompareFrac duplicate-correct collapse
+- [x] P1 rocky conversion distractors — scaledOpts (all options multiples of factor); RED->GREEN verified
+- [x] P1 shared Save reconcile — unified `reconcile()` deep-merge in `load()` AND `importJSON`; `.bak` on corrupt; browser round-trip verified
+- [x] Browser smoke: launcher + all 6 modules boot at iPad-6 land/port with 0 console errors (headless --disable-gpu)
+- [x] Committed: 2b418ac, ef39346, aa7e981, 52c5a5c
+
+**PHASE 2 COMPLETE + VERIFIED.** Verification infra in scratchpad: extract.js (dynamic module
+extraction), fuzz.js (independent oracles + mutation self-test), smoke.js (headless visual + Save round-trip).
 
 ## Phase 3 — High-value P2/P3
 - [ ] P2 floating-bear `genSimpleParens` ÷1 degenerate; coach topic-key mismatch (4/8 dead)
