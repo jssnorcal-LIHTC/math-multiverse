@@ -46,7 +46,7 @@ extraction), fuzz.js (independent oracles + mutation self-test), smoke.js (headl
 - [x] Grade 5/6 toggle in launcher; per-grade save namespace; gradeView overlay; modules without g6 show "coming soon". VERIFIED (commit 21561e1).
 - [ ] Per-module grade-6 content (g6 metadata + X_LEVELS_6 + generators + genForLevel branch), fuzz-verified:
   - [x] fraction-rider -> 6.NS (fraction division)  [see ## Verification: fraction-rider g6, below]
-  - [ ] f1-decimals -> 6.NS/6.RP (decimal ops, division, percent) [+ 6.SP stretch: lap-time stats]
+  - [x] f1-decimals -> 6.NS/6.RP/6.SP (decimal ops, division, unit rate, percent, lap-time stats)  [see ## Verification: f1-decimals g6, below]
   - [ ] razor-crest -> 6.NS.6/8 + 6.G.3 (four-quadrant plane, rational coords, distance, polygons)
   - [ ] master-builder -> 6.G (area, volume w/ fractional edges, surface area/nets)
   - [ ] rocky-translator -> 6.RP (ratios, unit rates, ratio tables, percent)
@@ -96,3 +96,43 @@ Grade-5 untouched (confirmed):
   Multi adds "stopped after dividing" and the times-m variants.
 - Straight-across never collides with correct (divisor proper c&lt;d, or improper c&gt;d ⇒ c≠d);
   inverted-dividend never collides with correct (dividend a≠b in every form).
+
+## Verification: f1-decimals g6 (6.NS / 6.RP / 6.SP, added 2026-06-27)
+Additive edits only; grade-5 F1 paths untouched. Inline script parses clean (`node --check`, parse-only).
+
+Line ranges (post-edit):
+- MODULES `g6` block (f1-decimals): lines 2981-2994 (sibling key after `grandGoal: 'World Champion'`;
+  ccss '6.NS / 6.RP', domain 'Decimals, Rates & Data', grandGoal 'Data & Decimals Champion';
+  6 levels id 1..6, questions 15,18,18,20,20,20).
+- `F1_LEVELS_6` (6 entries): lines 5188-5198 (immediately after `F1_LEVELS`, before `QPL`).
+  gen ids g6-dec-divide / g6-dec-ops / g6-unit-rate / g6-percent / g6-stats / g6-allmix.
+- `g6Options` helper: lines 5566-5599.
+- Generators: genG6DecDivide 5601-5630, genG6DecOps 5632-5713 (mul/add/sub branches),
+  genG6UnitRate 5715-5744, genG6Percent 5746-5775, genG6Stats 5777-5825, genG6AllMix 5827-5829.
+- `GEN_BY_TYPE` six new keys at TOP: lines 5833-5838 (grade-5 keys 5839-5844 unchanged).
+- f1 init level-pick ternary: line 5907 (`ACTIVE_GRADE === 6 ? F1_LEVELS_6[i] : F1_LEVELS[i]`).
+
+Grade-5 untouched (confirmed):
+- `F1_LEVELS` (5179-5186), `QPL` (5200), grade-5 generators (genPlaceValue..genMixed),
+  grade-5 `GEN_BY_TYPE` keys (place-value/compare-order/add-sub/multiply/divide/mixed-all): none modified.
+  New keys sit ABOVE grade-5 keys and only fire on the new gen ids. init falls back to
+  `F1_LEVELS[levelIndex]` unless ACTIVE_GRADE===6. Shared QPL gives both grades 15,18,18,20,20,20.
+
+`check:{op,operands,answer}` attached on every grade-6 return (7 sites; genG6DecOps has 3 paths):
+- div  5627 [a,b]→q ; mul 5659 [dec,whole]→ans ; add 5686 [x,y]→ans ; sub 5710 [x,y]→ans ;
+  div(unit-rate) 5741 [d,t]→r ; percent 5772 [rate,base]→rate*base/100 ; stats 5822 [5 vals]→mean|median|range.
+  genG6AllMix delegates to these, so it always carries a check too.
+
+Exactly 4 distinct, one correct, non-negative (by construction of g6Options):
+- correctV added first; mistakes deduped on the value rounded to `decimals`; negatives/non-finite skipped;
+  short lists padded with correct+0.1*k (then +integers), all distinct + non-negative ⇒ array length exactly 4.
+- clean() is a bijection on rounded values (toFixed then strip trailing zeros), so 4 distinct values ⇒
+  4 distinct strings; correctStr appears once ⇒ exactly one correctIdx.
+- answers[correctIdx] parseFloats to check.answer: each answer value is already at the generator's display
+  precision (div/ops/rate/percent 2 dp, stats 1 dp), so round==value and parseFloat(correctStr)===answer.
+- Exact-termination by design: div/rate built from a 2-dp quotient × integer divisor; mul = (k/100)×int;
+  add/sub of 2-dp operands with x>y for sub; percent rate(mult-5)×base(mult-20)/100 is integral; stats sum
+  forced ≡0 (mod 5) so mean is exact 1 dp; median is a list value; range is a difference of list values.
+- Distractor models are decimal/percent/stat mistakes (misplaced decimal ×10 / ÷10, off by 0.1, op swap,
+  percent-as-rate, used-whole-base, mean-vs-median swap, forgot-to-divide-by-count sum, divided-by-4), never
+  the correct value (deduped), never negative (filtered). F1 race voice kept in prompt/explain.
