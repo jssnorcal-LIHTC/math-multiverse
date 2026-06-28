@@ -7539,12 +7539,29 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   function unitOpts(set, gen) { return ensureFour(set, gen); }
 
+  // Conversion distractors that are all multiples of `factor` (same "kind of number"
+  // as the answer) plus one decimal-place slip, so a round answer can't be picked by
+  // its roundness. Returns 4 shuffled options including the correct ans = x * factor.
+  function scaledOpts(ans, factor) {
+    const x = Math.round(ans / factor);
+    const set = new Set([ans]);
+    const cand = [];
+    if (factor % 10 === 0) cand.push(x * factor * 10);   // ×10 decimal slip (still a multiple of factor)
+    cand.push((x + 1) * factor, (x + 2) * factor, (x + 3) * factor);
+    if (x - 1 >= 1) cand.push((x - 1) * factor);
+    if (x - 2 >= 1) cand.push((x - 2) * factor);
+    for (const c of cand) { if (c > 0 && c !== ans) set.add(c); if (set.size >= 4) break; }
+    let k = 4;
+    while (set.size < 4) { set.add((x + k) * factor); k++; }
+    return shuffle(Array.from(set).slice(0, 4));
+  }
+
   function genMetric() {
     const variants = [
       () => { // m to cm
         const m = ri(2, 12);
         const ans = m * 100;
-        const opts = ensureFour(new Set([ans]), () => Math.max(10, ans + ri(-300, 300)));
+        const opts = scaledOpts(ans, 100);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> The Hail Mary lab is <strong>${m} meters</strong> long. <em>How many <strong>centimeters</strong> is that?</em>`,
@@ -7557,7 +7574,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // kg to g
         const kg = ri(2, 10);
         const ans = kg * 1000;
-        const opts = ensureFour(new Set([ans]), () => Math.max(100, ans + ri(-2000, 2000)));
+        const opts = scaledOpts(ans, 1000);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage sample mass is <strong>${kg} kilograms</strong>. <em>In <strong>grams</strong>?</em>`,
@@ -7570,7 +7587,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // L to mL
         const L = ri(2, 8);
         const ans = L * 1000;
-        const opts = ensureFour(new Set([ans]), () => Math.max(100, ans + ri(-1500, 1500)));
+        const opts = scaledOpts(ans, 1000);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Coolant tank holds <strong>${L} liters</strong>. <em>How many <strong>milliliters</strong>?</em>`,
@@ -7583,7 +7600,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // km to m
         const km = ri(2, 9);
         const ans = km * 1000;
-        const opts = ensureFour(new Set([ans]), () => Math.max(500, ans + ri(-2500, 2500)));
+        const opts = scaledOpts(ans, 1000);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Tau Ceti beacon, <strong>${km} kilometers</strong> distance, question. <strong>Meters</strong>?"</em>`,
@@ -7635,7 +7652,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // m to mm
         const m = ri(2, 7);
         const ans = m * 1000;
-        const opts = ensureFour(new Set([ans]), () => Math.max(100, ans + ri(-2000, 2000)));
+        const opts = scaledOpts(ans, 1000);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Spin drive nozzle is <strong>${m} meters</strong> across. <em>How many <strong>millimeters</strong>?</em>`,
@@ -7654,7 +7671,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // lb to oz
         const lb = ri(2, 8);
         const ans = lb * 16;
-        const opts = ensureFour(new Set([ans]), () => Math.max(8, ans + ri(-32, 32)));
+        const opts = scaledOpts(ans, 16);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Food ration: <strong>${lb} pounds</strong>. <em>Convert to <strong>ounces</strong>.</em>`,
@@ -7667,7 +7684,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // ft to in
         const ft = ri(2, 10);
         const ans = ft * 12;
-        const opts = ensureFour(new Set([ans]), () => Math.max(8, ans + ri(-24, 24)));
+        const opts = scaledOpts(ans, 12);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Sample tube is <strong>${ft} feet</strong> long. <em>In <strong>inches</strong>?</em>`,
@@ -7680,7 +7697,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // gal to qt
         const gal = ri(2, 8);
         const ans = gal * 4;
-        const opts = ensureFour(new Set([ans]), () => Math.max(2, ans + ri(-6, 6)));
+        const opts = scaledOpts(ans, 4);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Water reserve <strong>${gal} gallons</strong>. <em>In <strong>quarts</strong>?</em>`,
@@ -7693,7 +7710,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // qt to pt
         const qt = ri(2, 9);
         const ans = qt * 2;
-        const opts = ensureFour(new Set([ans]), () => Math.max(2, ans + ri(-6, 6)));
+        const opts = scaledOpts(ans, 2);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Bouillon pouch <strong>${qt} quarts</strong>. <em>How many <strong>pints</strong>?</em>`,
@@ -7706,7 +7723,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // yd to ft
         const yd = ri(2, 9);
         const ans = yd * 3;
-        const opts = ensureFour(new Set([ans]), () => Math.max(3, ans + ri(-8, 8)));
+        const opts = scaledOpts(ans, 3);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Tunnel length <strong>${yd} yards</strong>, question. <strong>Feet</strong>?"</em>`,
@@ -7719,7 +7736,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // pt to c
         const pt = ri(2, 8);
         const ans = pt * 2;
-        const opts = ensureFour(new Set([ans]), () => Math.max(2, ans + ri(-5, 5)));
+        const opts = scaledOpts(ans, 2);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Soup pouch <strong>${pt} pints</strong>. <em>How many <strong>cups</strong>?</em>`,
@@ -7732,7 +7749,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // mi to yd
         const mi = ri(1, 4);
         const ans = mi * 1760;
-        const opts = ensureFour(new Set([ans]), () => Math.max(500, ans + ri(-1000, 1000)));
+        const opts = scaledOpts(ans, 1760);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Beacon <strong>${mi} mile${mi>1?'s':''}</strong> away. <em>In <strong>yards</strong>?</em>`,
@@ -7764,7 +7781,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // hr to min
         const hr = ri(2, 8);
         const ans = hr * 60;
-        const opts = ensureFour(new Set([ans]), () => Math.max(10, ans + ri(-60, 60)));
+        const opts = scaledOpts(ans, 60);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Cooling cycle <strong>${hr} hours</strong>, question. Convert to <strong>minutes</strong>?"</em>`,
@@ -7777,7 +7794,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // day to hr
         const d = ri(2, 7);
         const ans = d * 24;
-        const opts = ensureFour(new Set([ans]), () => Math.max(8, ans + ri(-12, 12)));
+        const opts = scaledOpts(ans, 24);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Trip take <strong>${d} days</strong>, question. <strong>Hours</strong>?"</em>`,
@@ -7790,7 +7807,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // min to sec
         const m = ri(2, 8);
         const ans = m * 60;
-        const opts = ensureFour(new Set([ans]), () => Math.max(10, ans + ri(-30, 30)));
+        const opts = scaledOpts(ans, 60);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Spin drive burn <strong>${m} minutes</strong>. <strong>Seconds</strong>?"</em>`,
@@ -7816,7 +7833,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // hr to min (alt phrasing)
         const hr = ri(2, 9);
         const ans = hr * 60;
-        const opts = ensureFour(new Set([ans]), () => Math.max(10, ans + ri(-60, 60)));
+        const opts = scaledOpts(ans, 60);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Sleep cycle ran <strong>${hr} hours</strong>. <em>How many <strong>minutes</strong>?</em>`,
@@ -7842,7 +7859,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // wk to days
         const wk = ri(2, 6);
         const ans = wk * 7;
-        const opts = ensureFour(new Set([ans]), () => Math.max(2, ans + ri(-6, 6)));
+        const opts = scaledOpts(ans, 7);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Coma duration was <strong>${wk} weeks</strong>. <em>How many <strong>days</strong>?</em>`,
@@ -7855,7 +7872,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // hr to sec (multistep but single ratio for variety)
         const hr = ri(2, 5);
         const ans = hr * 3600;
-        const opts = ensureFour(new Set([ans]), () => Math.max(1000, ans + ri(-3000, 3000)));
+        const opts = scaledOpts(ans, 3600);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Burn complete <strong>${hr} hours</strong>, friend. Express <strong>seconds</strong>, question?"</em>`,
@@ -7889,7 +7906,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const km = ri(3, 8);
         const ansM = km * 1000;
         const ansCm = ansM * 100;
-        const opts = ensureFour(new Set([ansCm]), () => Math.max(1000, ansCm + ri(-100000, 100000)));
+        const opts = scaledOpts(ansCm, 100000);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Beacon <strong>${km} kilometers</strong> away. Distance in <strong>centimeters</strong>?"</em>`,
@@ -7903,7 +7920,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const days = ri(3, 7);
         const ansHr = days * 24;
         const ansMin = ansHr * 60;
-        const opts = ensureFour(new Set([ansMin]), () => Math.max(60, ansMin + ri(-2000, 2000)));
+        const opts = scaledOpts(ansMin, 1440);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Repair takes <strong>${days} days</strong> straight. How many <strong>minutes</strong>?`,
@@ -7917,7 +7934,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const m = ri(2, 6);
         const ansCm = m * 100;
         const ansMm = ansCm * 10;
-        const opts = ensureFour(new Set([ansMm]), () => Math.max(100, ansMm + ri(-2000, 2000)));
+        const opts = scaledOpts(ansMm, 1000);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Tunnel <strong>${m} meters</strong>, question. Convert <strong>millimeters</strong>, friend."</em>`,
@@ -7930,7 +7947,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // gal → cups (gal × 4 qt × 2 pt × 2 c = ×16)
         const gal = ri(2, 5);
         const ans = gal * 16;
-        const opts = ensureFour(new Set([ans]), () => Math.max(4, ans + ri(-12, 12)));
+        const opts = scaledOpts(ans, 16);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Water reserve <strong>${gal} gallons</strong>. <em>In <strong>cups</strong>?</em>`,
@@ -7958,7 +7975,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // ft → in via simple (ft × 12)
         const ft = ri(2, 8);
         const ans = ft * 12;
-        const opts = ensureFour(new Set([ans]), () => Math.max(8, ans + ri(-24, 24)));
+        const opts = scaledOpts(ans, 12);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, hatch is <strong>${ft} feet</strong> across. <strong>Inches</strong>?"</em>`,
@@ -7973,7 +7990,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const days = wk * 7;
         const hr = days * 24;
         const min = hr * 60;
-        const opts = ensureFour(new Set([min]), () => Math.max(60, min + ri(-5000, 5000)));
+        const opts = scaledOpts(min, 10080);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Coma was <strong>${wk} week${wk>1?'s':''}</strong>. How many <strong>minutes</strong> total?`,
