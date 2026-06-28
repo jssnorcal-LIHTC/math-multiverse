@@ -3013,6 +3013,20 @@ const MODULES = [
       { id: 6, name: 'Final Jump to Mandalore',   goal: 'Bring Grogu home',           questions: 20 },
     ],
     grandGoal: 'This is the Way',
+    g6: {
+      ccss: '6.NS / 6.G',
+      domain: 'Coordinate Plane & Polygons',
+      description: 'Fly Mando and Grogu across all four quadrants: read negative coordinates, mirror points across the axes, measure hyperlane distance, and survey rectangle and triangle area right off the grid.',
+      grandGoal: 'Master of the Four Quadrants',
+      levels: [
+        { id: 1, name: 'Quadrant Lock',         goal: 'Name the quadrant of a negative point', questions: 15, type: 'g6-quadrant' },
+        { id: 2, name: 'Imperial Mirror Run',   goal: 'Reflect points across the x- or y-axis', questions: 18, type: 'g6-reflect' },
+        { id: 3, name: 'Hyperlane Distance',    goal: 'Subtract coordinates to find distance',  questions: 18, type: 'g6-distance' },
+        { id: 4, name: 'Beskar Bay Survey',     goal: 'Area of a rectangle from two corners',   questions: 20, type: 'g6-rect-area' },
+        { id: 5, name: 'Mythosaur Wedge',       goal: 'Area of a triangle: base x height / 2',   questions: 20, type: 'g6-tri-area' },
+        { id: 6, name: "Navigator's Gauntlet",  goal: 'Mix every grade-6 skill to Mandalore',   questions: 20, type: 'g6-allmix' },
+      ],
+    },
   },
   {
     id: 'master-builder',
@@ -6224,6 +6238,17 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     { id: 5, name: 'Imperial Mirror',         gridMax: 5,  quadrants: 4, mix: 'reflect' },
     { id: 6, name: 'Distance to Tatooine',    gridMax: 8,  quadrants: 1, mix: 'distance' },
   ];
+  // Grade 6 (6.NS.6 / 6.NS.8 four-quadrant plane + 6.G.1 / 6.G.3 area on the grid).
+  // Same Mando/Grogu theme; selected only when ACTIVE_GRADE === 6. Grade-5 RC_LEVELS
+  // above is untouched. RC_QPL (15,18,18,20,20,20) is shared by both grades.
+  const RC_LEVELS_6 = [
+    { id: 1, name: 'Quadrant Lock',         gridMax: 6,  quadrants: 4, mix: 'g6-quadrant' },
+    { id: 2, name: 'Imperial Mirror Run',   gridMax: 6,  quadrants: 4, mix: 'g6-reflect' },
+    { id: 3, name: 'Hyperlane Distance',    gridMax: 8,  quadrants: 4, mix: 'g6-distance' },
+    { id: 4, name: 'Beskar Bay Survey',     gridMax: 8,  quadrants: 4, mix: 'g6-rect-area' },
+    { id: 5, name: 'Mythosaur Wedge',       gridMax: 10, quadrants: 4, mix: 'g6-tri-area' },
+    { id: 6, name: "Navigator's Gauntlet",  gridMax: 8,  quadrants: 4, mix: 'g6-allmix' },
+  ];
   const RC_QPL = [15, 18, 18, 20, 20, 20];
 
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
@@ -6885,10 +6910,224 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     };
   }
 
+  // ===== Grade 6 (6.NS.6 / 6.NS.8 four-quadrant plane + 6.G.1 / 6.G.3 area) =====
+  // Grade-5 generators above are untouched; these run only for the RC_LEVELS_6 gen ids.
+  // Each returns the standard MC shape PLUS a `check` verification field with a fixed
+  // contract, and always sets exactly 4 distinct answers with one correctIdx.
+
+  // L1. Name the quadrant of a point with NEGATIVE coords (6.NS.6).
+  function genG6Quadrant(gridMax) {
+    const x = ri(1, gridMax) * (Math.random() < 0.5 ? -1 : 1);
+    const y = ri(1, gridMax) * (Math.random() < 0.5 ? -1 : 1);
+    let rn;
+    if (x > 0 && y > 0) rn = 'I';
+    else if (x < 0 && y > 0) rn = 'II';
+    else if (x < 0 && y < 0) rn = 'III';
+    else rn = 'IV';
+    const answer = 'Quadrant ' + rn;
+    const answers = shuffle(['Quadrant I', 'Quadrant II', 'Quadrant III', 'Quadrant IV']);
+    return {
+      topic: 'g6-quadrant',
+      type: 'mc',
+      gridMax, quadrants: 4,
+      markers: [{ x, y, label: '?', color: '#ff8000' }],
+      prompt: pick([
+        `Imperial probe pings <strong>(${x}, ${y})</strong>. <strong>Which quadrant</strong> is it hiding in?`,
+        `Mando reads a contact at <strong>(${x}, ${y})</strong>. Name the <strong>quadrant</strong>.`,
+        `Grogu points to <strong>(${x}, ${y})</strong> on the navicomp. <strong>Quadrant</strong>?`,
+        `Beskar sensor flags <strong>(${x}, ${y})</strong>. Lock the <strong>quadrant</strong>.`,
+      ]),
+      answers,
+      correctIdx: answers.indexOf(answer),
+      explain: `x = ${x} is ${x > 0 ? 'positive (right)' : 'negative (left)'} and y = ${y} is ${y > 0 ? 'positive (up)' : 'negative (down)'}, so <strong>(${x}, ${y})</strong> sits in <strong>${answer}</strong>. (Quadrants run counter-clockwise from the top-right: I, II, III, IV.)`,
+      check: { op: 'quadrant', point: [x, y], answer },
+    };
+  }
+
+  // L2. Reflect a point across the x-axis or y-axis (6.NS.6).
+  function genG6Reflect(gridMax) {
+    const axis = pick(['x-axis', 'y-axis']);
+    const x = ri(1, gridMax) * (Math.random() < 0.5 ? -1 : 1);
+    const y = ri(1, gridMax) * (Math.random() < 0.5 ? -1 : 1);
+    const rx = axis === 'y-axis' ? -x : x;
+    const ry = axis === 'x-axis' ? -y : y;
+    const answer = `(${rx}, ${ry})`;
+    // The four sign-combinations of (x, y) are all distinct when x,y != 0 and always
+    // include the correct reflection plus three meaningful mistakes (did nothing,
+    // wrong axis, reflected through the origin).
+    const answers = shuffle([
+      `(${x}, ${y})`,
+      `(${-x}, ${y})`,
+      `(${x}, ${-y})`,
+      `(${-x}, ${-y})`,
+    ]);
+    return {
+      topic: 'g6-reflect',
+      type: 'mc',
+      gridMax, quadrants: 4,
+      markers: [{ x, y, label: '?', color: '#ff8000' }],
+      prompt: pick([
+        `Imperial mirror flips <strong>(${x}, ${y})</strong> across the <strong>${axis}</strong>. <strong>New point</strong>?`,
+        `Reflect <strong>(${x}, ${y})</strong> over the <strong>${axis}</strong>. Where does the Crest land?`,
+        `Hyperdrive ghost mirrors <strong>(${x}, ${y})</strong> across the <strong>${axis}</strong>. <strong>Coords</strong>?`,
+        `Mando's jump reflects <strong>(${x}, ${y})</strong> across the <strong>${axis}</strong>. <strong>New position</strong>?`,
+      ]),
+      answers,
+      correctIdx: answers.indexOf(answer),
+      explain: axis === 'y-axis'
+        ? `Reflecting across the y-axis flips the sign of x only: (${x}, ${y}) → <strong>(${rx}, ${ry})</strong>. The y-value stays put.`
+        : `Reflecting across the x-axis flips the sign of y only: (${x}, ${y}) → <strong>(${rx}, ${ry})</strong>. The x-value stays put.`,
+      check: { op: 'reflect', point: [x, y], axis, answer },
+    };
+  }
+
+  // L3. Distance between two points that share an x or a y (6.NS.8): |difference|.
+  function genG6Distance(gridMax) {
+    const horizontal = Math.random() < 0.5;
+    let ax, ay, bx, by;
+    if (horizontal) {
+      ay = by = ri(-gridMax, gridMax);
+      ax = ri(-gridMax, gridMax);
+      do { bx = ri(-gridMax, gridMax); } while (bx === ax);
+    } else {
+      ax = bx = ri(-gridMax, gridMax);
+      ay = ri(-gridMax, gridMax);
+      do { by = ri(-gridMax, gridMax); } while (by === ay);
+    }
+    const dist = horizontal ? Math.abs(bx - ax) : Math.abs(by - ay);
+    // Pedagogical mistakes: added instead of subtracted, treated both coords as
+    // positive (forgot a negative), off by one.
+    const arr = pedDistractors(dist, [
+      Math.abs(horizontal ? ax + bx : ay + by),                                          // added instead of subtracted
+      Math.abs(horizontal ? Math.abs(bx) - Math.abs(ax) : Math.abs(by) - Math.abs(ay)),  // forgot a negative
+      Math.max(0, dist - 1),
+      dist + 1,
+    ]);
+    const answers = arr.map(n => `${n}`);
+    return {
+      topic: 'g6-distance',
+      type: 'mc',
+      gridMax, quadrants: 4,
+      markers: [{ x: ax, y: ay, label: 'A', color: '#ff8000' }, { x: bx, y: by, label: 'B', color: '#00d9ff' }],
+      prompt: pick([
+        `Beacon A at <strong>(${ax}, ${ay})</strong>, beacon B at <strong>(${bx}, ${by})</strong>. <strong>How many units apart</strong>?`,
+        `Mando jumps from <strong>(${ax}, ${ay})</strong> to <strong>(${bx}, ${by})</strong>. <strong>Distance</strong> covered?`,
+        `Sensor pings A <strong>(${ax}, ${ay})</strong> and B <strong>(${bx}, ${by})</strong>. <strong>Gap</strong> between them?`,
+        `Cargo drop A <strong>(${ax}, ${ay})</strong>, pickup B <strong>(${bx}, ${by})</strong>. <strong>Distance</strong>?`,
+      ]),
+      answers,
+      correctIdx: arr.indexOf(dist),
+      explain: horizontal
+        ? `Both points share the same y-value (${ay}), so the hop is purely horizontal. Subtract the x's: |${bx} − ${ax}| = <strong>${dist}</strong>.`
+        : `Both points share the same x-value (${ax}), so the hop is purely vertical. Subtract the y's: |${by} − ${ay}| = <strong>${dist}</strong>.`,
+      check: { op: 'distance', operands: [ax, ay, bx, by], answer: dist },
+    };
+  }
+
+  // L4. Area of an axis-aligned rectangle from two opposite corners (6.G.1 / 6.G.3).
+  function genG6RectArea(gridMax) {
+    const x1 = ri(-gridMax, gridMax);
+    let x2; do { x2 = ri(-gridMax, gridMax); } while (x2 === x1);
+    const y1 = ri(-gridMax, gridMax);
+    let y2; do { y2 = ri(-gridMax, gridMax); } while (y2 === y1);
+    const w = Math.abs(x2 - x1);
+    const h = Math.abs(y2 - y1);
+    const area = w * h;
+    // Pedagogical mistakes: perimeter, added the sides, off-by-one on one side.
+    const arr = pedDistractors(area, [
+      2 * (w + h),          // perimeter instead of area
+      w + h,                // added the sides instead of multiplying
+      (w + 1) * h,          // miscounted one side
+      w * (h + 1),
+      area + 1,
+      Math.max(0, area - 1),
+    ]);
+    const answers = arr.map(n => `${n}`);
+    return {
+      topic: 'g6-rect-area',
+      type: 'mc',
+      gridMax, quadrants: 4,
+      markers: [
+        { x: x1, y: y1, label: 'A', color: '#ff8000' },
+        { x: x2, y: y1, label: 'B', color: '#00d9ff' },
+        { x: x2, y: y2, label: 'C', color: '#ff8000' },
+        { x: x1, y: y2, label: 'D', color: '#00d9ff' },
+      ],
+      prompt: pick([
+        `Mando maps a docking bay with opposite corners <strong>(${x1}, ${y1})</strong> and <strong>(${x2}, ${y2})</strong>. <strong>Area</strong> in square units?`,
+        `Beskar landing pad runs corner <strong>(${x1}, ${y1})</strong> to <strong>(${x2}, ${y2})</strong>. <strong>How many square units</strong>?`,
+        `A rectangular hangar has opposite corners <strong>(${x1}, ${y1})</strong> and <strong>(${x2}, ${y2})</strong>. <strong>Area</strong>?`,
+        `Grogu charts a rectangle from <strong>(${x1}, ${y1})</strong> to <strong>(${x2}, ${y2})</strong>. <strong>Area enclosed</strong>?`,
+      ]),
+      answers,
+      correctIdx: arr.indexOf(area),
+      explain: `Width = |${x2} − ${x1}| = ${w}, height = |${y2} − ${y1}| = ${h}. Area = width × height = ${w} × ${h} = <strong>${area}</strong> square units.`,
+      check: { op: 'rect-area', operands: [x1, y1, x2, y2], answer: area },
+    };
+  }
+
+  // L5. Area of a triangle = base × height ÷ 2 (6.G.1), base & height off the grid.
+  function genG6TriArea(gridMax) {
+    const b = ri(2, 12);
+    const h = ri(2, 10);
+    const area = b * h / 2;            // always a whole number or an x.5 value
+    const correctStr = `${area}`;
+    // Pedagogical mistakes: forgot to halve (b*h), added the legs, off by one/half.
+    const cand = [b * h, b + h, area + 1, area - 1, area + 0.5, area - 0.5, area * 2, b * h + 1];
+    const seen = new Set([correctStr]);
+    const answers = [correctStr];
+    for (const c of cand) {
+      if (answers.length >= 4) break;
+      if (typeof c !== 'number' || !isFinite(c) || c <= 0) continue;
+      const s = `${c}`;
+      if (!seen.has(s)) { seen.add(s); answers.push(s); }
+    }
+    let pad = 2;
+    while (answers.length < 4) {
+      const s = `${area + pad}`;
+      if (!seen.has(s)) { seen.add(s); answers.push(s); }
+      pad++;
+    }
+    shuffle(answers);
+    const g = Math.max(b, h);
+    return {
+      topic: 'g6-tri-area',
+      type: 'mc',
+      gridMax: g, quadrants: 1,
+      markers: [
+        { x: 0, y: 0, label: 'A', color: '#ff8000' },
+        { x: b, y: 0, label: 'B', color: '#00d9ff' },
+        { x: 0, y: h, label: 'C', color: '#27f4d2' },
+      ],
+      prompt: pick([
+        `A triangular beskar plate has base <strong>${b}</strong> and height <strong>${h}</strong>. <strong>Area</strong> in square units?`,
+        `Mando cuts a triangle with base <strong>${b}</strong> and height <strong>${h}</strong>. <strong>How many square units</strong>?`,
+        `Grogu's triangular shield: base <strong>${b}</strong>, height <strong>${h}</strong>. <strong>Area</strong>?`,
+        `A hull panel is a triangle, base <strong>${b}</strong> and height <strong>${h}</strong>. <strong>Area enclosed</strong>?`,
+      ]),
+      answers,
+      correctIdx: answers.indexOf(correctStr),
+      explain: `Area of a triangle = base × height ÷ 2 = ${b} × ${h} ÷ 2 = <strong>${area}</strong> square units. The ÷ 2 makes it half of the matching rectangle.`,
+      check: { op: 'tri-area', operands: [b, h], answer: area },
+    };
+  }
+
+  // L6. Random pick of the five grade-6 generators (always carries a `check`).
+  function genG6AllMix(gridMax) {
+    return pick([genG6Quadrant, genG6Reflect, genG6Distance, genG6RectArea, genG6TriArea])(gridMax);
+  }
+
   function genQuestion(level) {
     const m = level.mix;
     const g = level.gridMax;
     const fourQuad = level.quadrants === 4;
+    // Grade 6 (6.NS.6 / 6.NS.8 + 6.G.1 / 6.G.3) gen ids checked first; grade-5 branches below unchanged.
+    if (m === 'g6-quadrant')  return genG6Quadrant(g);
+    if (m === 'g6-reflect')   return genG6Reflect(g);
+    if (m === 'g6-distance')  return genG6Distance(g);
+    if (m === 'g6-rect-area') return genG6RectArea(g);
+    if (m === 'g6-tri-area')  return genG6TriArea(g);
+    if (m === 'g6-allmix')    return genG6AllMix(g);
     // One generator per level — every level is a different game type.
     if (m === 'quadrant')    return genQuadrantQ(g);
     if (m === 'identify-q1') return genIdentifyQ(g, 1);
@@ -6989,7 +7228,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   InlineModules['razor-crest'] = {
     init(host, levelIndex, callbacks) {
-      const lvl = RC_LEVELS[levelIndex];
+      const lvl = (typeof ACTIVE_GRADE !== 'undefined' && ACTIVE_GRADE === 6 && typeof RC_LEVELS_6 !== 'undefined') ? RC_LEVELS_6[levelIndex] : RC_LEVELS[levelIndex];
       const totalQ = RC_QPL[levelIndex];
 
       const state = {
