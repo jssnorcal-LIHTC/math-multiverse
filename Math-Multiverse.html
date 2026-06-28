@@ -3825,12 +3825,15 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     } else d2 = ri(2, maxDen);
     const L = lcm(d1, d2);
     let n1 = ri(1, d1 - 1), n2 = ri(1, d2 - 1);
+    // Re-roll until the two fractions differ, then put the larger first, so the
+    // difference is strictly positive. Negative (or zero) results are off-CCSS for grade 5.
+    let guard = 16;
+    while (n1 * (L / d1) === n2 * (L / d2) && guard-- > 0) { n1 = ri(1, d1 - 1); n2 = ri(1, d2 - 1); }
     let v1 = n1 * (L / d1), v2 = n2 * (L / d2);
     if (v1 < v2) { [v1, v2] = [v2, v1]; [n1, n2] = [n2, n1]; [d1, d2] = [d2, d1]; }
-    if (v1 === v2) { n2 = Math.max(1, n2 - 1); }
-    const a = n1 * (L / d1);
-    const b = n2 * (L / d2);
-    const diffNum = a - b;
+    const a = v1;
+    const b = v2;
+    const diffNum = a - b;   // >= 0 always (0 only in the degenerate single-fraction case)
     const correctStr = fracToString(diffNum, L);
     return {
       topic: 'frac-sub-unlike',
@@ -3953,7 +3956,14 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       n1 = ri(1, d1 - 1); n2 = ri(1, d2 - 1);
       L = lcm(d1, d2);
     }
-    const cv1 = n1 * (L / d1), cv2 = n2 * (L / d2);
+    let cv1 = n1 * (L / d1), cv2 = n2 * (L / d2);
+    if (cv1 === cv2) {
+      // Re-roll exhausted (maxDen too small for two distinct fractions, e.g. maxDen=2
+      // only has 1/2): fall back to a guaranteed-distinct pair so the four buttons never
+      // collide into duplicates or two "correct" answers.
+      n1 = 1; d1 = 2; n2 = 1; d2 = 3; L = lcm(d1, d2);
+      cv1 = n1 * (L / d1); cv2 = n2 * (L / d2);
+    }
     const f1Str = fracToString(n1, d1), f2Str = fracToString(n2, d2);
     const correct = cv1 > cv2 ? f1Str : f2Str;
     const wrong   = cv1 > cv2 ? f2Str : f1Str;
@@ -4210,10 +4220,16 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       if (c && c !== correctStr && !/[-−]/.test(c)) set.add(c);  // never offer a negative-fraction distractor
       if (set.size >= 4) break;
     }
-    let safety = 30;
+    let safety = 40;
     while (set.size < 4 && safety-- > 0) {
-      set.add(fracToString(correct.num + ri(-3, 3), Math.max(1, correct.den + ri(-2, 2))));
+      const pn = Math.max(0, correct.num + ri(-3, 3));
+      const pd = Math.max(1, correct.den + ri(-2, 2));
+      const c = fracToString(pn, pd);
+      if (c && c !== correctStr && !/[-−–]/.test(c)) set.add(c);   // never a negative distractor
     }
+    // Guarantee four non-negative, distinct options even if the random pad stalls.
+    let bump = 1;
+    while (set.size < 4) { set.add(fracToString(correct.num + bump, Math.max(1, correct.den))); bump++; }
     const arr = shuffle(Array.from(set));
     return arr.slice(0, 4).map(t => ({ text: t, correct: t === correctStr }));
   }
