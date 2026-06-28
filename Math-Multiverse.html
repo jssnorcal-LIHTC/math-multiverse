@@ -2817,7 +2817,7 @@
       <div class="brand-mark">M·M</div>
       <div class="brand-text">
         <h1>Math Multiverse</h1>
-        <p>5th grade CCSS practice across six themed worlds</p>
+        <p id="grade-subtitle">5th grade CCSS practice across six themed worlds</p>
       </div>
     </div>
 
@@ -2826,6 +2826,10 @@
         <span class="player-name" id="player-name">Player</span>
         <span style="color: var(--text-muted);">·</span>
         <span class="stars-tally"><span id="total-stars">0</span> ★</span>
+      </div>
+      <div class="grade-toggle" id="grade-toggle" role="group" aria-label="Grade level">
+        <button class="icon-btn grade-btn" id="btn-grade-5" data-grade="5" title="Grade 5 campaign">Grade 5</button>
+        <button class="icon-btn grade-btn" id="btn-grade-6" data-grade="6" title="Grade 6 campaign">Grade 6</button>
       </div>
       <button class="icon-btn" id="btn-stats" title="View progress stats and which topics need more practice">Stats</button>
       <button class="icon-btn" id="btn-preview" title="Preview Mode: when ON, every section and every level is accessible (for browsing). When OFF, normal progression gating applies.">Preview: OFF</button>
@@ -2939,6 +2943,20 @@ const MODULES = [
       { id: 6, name: 'Final Send',      goal: 'Cross the Hardline finish',        questions: 20, type: 'mixed-all' },
     ],
     grandGoal: 'Hardline Champion',
+    g6: {
+      ccss: '6.NS',
+      domain: 'Fraction Division',
+      description: 'Divide fractions to keep Sur Ronster on the Hardline. Flip, multiply, simplify, send.',
+      grandGoal: 'Number System Champion',
+      levels: [
+        { id: 1, name: 'Reciprocal Drop-In', goal: 'Flip the divisor and roll in',       questions: 15, type: 'ns-div-intro' },
+        { id: 2, name: 'Invert & Send',      goal: 'Keep, flip, multiply through',       questions: 18, type: 'ns-div-frac' },
+        { id: 3, name: 'Mixed-Number Air',   goal: 'Go improper, then divide clean',     questions: 18, type: 'ns-div-mixed' },
+        { id: 4, name: 'Combo Line',         goal: 'Stack two steps, stick the landing', questions: 20, type: 'ns-div-multi' },
+        { id: 5, name: 'Servings Gap',       goal: 'Count the scoops across the gap',     questions: 20, type: 'ns-div-word' },
+        { id: 6, name: 'Final Send',         goal: 'Divide it all and cross the line',    questions: 20, type: 'ns-div-allmix' },
+      ],
+    },
   },
   {
     id: 'f1-decimals',
@@ -2960,6 +2978,20 @@ const MODULES = [
       { id: 6, name: 'Suzuka Title Decider',    goal: 'Win the championship',     questions: 20, type: 'mixed-all' },
     ],
     grandGoal: 'World Champion',
+    g6: {
+      ccss: '6.NS / 6.RP',
+      domain: 'Decimals, Rates & Data',
+      description: 'Run the season on grade-6 math: divide decimals, compute unit rates and percents, and read lap-time data to gate every overtake.',
+      grandGoal: 'Data & Decimals Champion',
+      levels: [
+        { id: 1, name: 'Fuel Stint Division',  goal: 'Divide decimals for per-stint fuel',     questions: 15, type: 'g6-dec-divide' },
+        { id: 2, name: 'Sector Delta Ops',     goal: 'Add, subtract, multiply decimal splits', questions: 18, type: 'g6-dec-ops' },
+        { id: 3, name: 'Pace Unit Rates',      goal: 'Find km-per-lap unit rates',             questions: 18, type: 'g6-unit-rate' },
+        { id: 4, name: 'Grip Percentages',     goal: 'Take a percent of a quantity',           questions: 20, type: 'g6-percent' },
+        { id: 5, name: 'Lap-Time Telemetry',   goal: 'Mean, median and range of lap times',    questions: 20, type: 'g6-stats' },
+        { id: 6, name: 'Data Title Decider',   goal: 'Mix every grade-6 skill to the flag',    questions: 20, type: 'g6-allmix' },
+      ],
+    },
   },
   {
     id: 'razor-crest',
@@ -2981,6 +3013,20 @@ const MODULES = [
       { id: 6, name: 'Final Jump to Mandalore',   goal: 'Bring Grogu home',           questions: 20 },
     ],
     grandGoal: 'This is the Way',
+    g6: {
+      ccss: '6.NS / 6.G',
+      domain: 'Coordinate Plane & Polygons',
+      description: 'Fly Mando and Grogu across all four quadrants: read negative coordinates, mirror points across the axes, measure hyperlane distance, and survey rectangle and triangle area right off the grid.',
+      grandGoal: 'Master of the Four Quadrants',
+      levels: [
+        { id: 1, name: 'Quadrant Lock',         goal: 'Name the quadrant of a negative point', questions: 15, type: 'g6-quadrant' },
+        { id: 2, name: 'Imperial Mirror Run',   goal: 'Reflect points across the x- or y-axis', questions: 18, type: 'g6-reflect' },
+        { id: 3, name: 'Hyperlane Distance',    goal: 'Subtract coordinates to find distance',  questions: 18, type: 'g6-distance' },
+        { id: 4, name: 'Beskar Bay Survey',     goal: 'Area of a rectangle from two corners',   questions: 20, type: 'g6-rect-area' },
+        { id: 5, name: 'Mythosaur Wedge',       goal: 'Area of a triangle: base x height / 2',   questions: 20, type: 'g6-tri-area' },
+        { id: 6, name: "Navigator's Gauntlet",  goal: 'Mix every grade-6 skill to Mandalore',   questions: 20, type: 'g6-allmix' },
+      ],
+    },
   },
   {
     id: 'master-builder',
@@ -3002,6 +3048,20 @@ const MODULES = [
       { id: 6, name: 'Benny\'s SPACESHIP!!',    goal: 'SPAAACESHIP!!',             questions: 20 },
     ],
     grandGoal: 'Master Builder',
+    g6: {
+      ccss: '6.G',
+      domain: 'Area, Surface Area & Volume',
+      description: 'Build Bricksburg with grade-6 geometry: area of plates and gables, volume with half-stud plates, and surface area, all the way to Benny\'s SPACESHIP!',
+      grandGoal: 'Master Geometer',
+      levels: [
+        { id: 1, name: 'Emmet\'s Baseplate',        goal: 'Area of a rectangular plate',        questions: 15, type: 'g6-rect-area' },
+        { id: 2, name: 'Bricksburg Rooftops',       goal: 'Area of a triangular gable',         questions: 18, type: 'g6-tri-area' },
+        { id: 3, name: 'MetalBeard\'s Hold',        goal: 'Volume of a rectangular prism',      questions: 18, type: 'g6-volume' },
+        { id: 4, name: 'Cloud Cuckoo Half-Studs',   goal: 'Volume with a fractional edge',      questions: 20, type: 'g6-volume-frac' },
+        { id: 5, name: 'Apocalypseburg Cladding',   goal: 'Surface area of every face',         questions: 20, type: 'g6-surface-area' },
+        { id: 6, name: 'Benny\'s SPACESHIP Survey', goal: 'Mix every grade-6 build to SPAAACE', questions: 20, type: 'g6-allmix' },
+      ],
+    },
   },
   {
     id: 'rocky-translator',
@@ -3023,6 +3083,20 @@ const MODULES = [
       { id: 6, name: 'The Long Trip Home',      goal: 'Save Earth and Erid',       questions: 20 },
     ],
     grandGoal: 'Friend, question?',
+    g6: {
+      ccss: '6.RP',
+      domain: 'Ratios & Proportions',
+      description: 'Save Rocky with grade-6 ratios: unit rates, ratio tables, equivalent ratios, and percent keep the Hail Mary alive.',
+      grandGoal: 'Eridian Ratio Master',
+      levels: [
+        { id: 1, name: 'Hello, Unit Rate?',       goal: 'Find total-per-one unit rates',      questions: 15, type: 'g6-unit-rate' },
+        { id: 2, name: 'Ratio Table Handshake',   goal: 'Fill the ratio table',               questions: 18, type: 'g6-ratio-table' },
+        { id: 3, name: 'Scaling the Recipe',      goal: 'Build equivalent ratios',            questions: 18, type: 'g6-equiv-ratio' },
+        { id: 4, name: 'Astrophage Percent',      goal: 'Take a percent of a quantity',       questions: 20, type: 'g6-percent' },
+        { id: 5, name: 'What Percent, Question?', goal: 'Find what percent a part is',        questions: 20, type: 'g6-percent-find' },
+        { id: 6, name: 'The Long Trip Home',      goal: 'Mix every 6.RP skill to get home',   questions: 20, type: 'g6-allmix' },
+      ],
+    },
   },
   {
     id: 'floating-bear',
@@ -3044,8 +3118,41 @@ const MODULES = [
       { id: 6, name: 'Storm of the Century',    goal: 'Captain C. Robin rescues',  questions: 20 },
     ],
     grandGoal: '1st Mate P. Bear',
+    g6: {
+      ccss: '6.EE',
+      domain: 'Expressions & Equations',
+      description: 'It still rained, and it rained. Save Pooh and Piglet with exponents, expressions, and one-step equations.',
+      grandGoal: 'Keeper of the Equation',
+      levels: [
+        { id: 1, name: 'Powers of the Rain',      goal: 'Evaluate whole-number exponents',       questions: 15, type: 'g6-exponent' },
+        { id: 2, name: "Pooh's Honey Count",      goal: 'Evaluate a·x + b at a given x',     questions: 18, type: 'g6-evaluate' },
+        { id: 3, name: "Piglet's Missing Acorns", goal: 'Solve x + a = b for x',                  questions: 18, type: 'g6-solve-add' },
+        { id: 4, name: 'Rows on the Raft',        goal: 'Solve a·x = b for x',               questions: 20, type: 'g6-solve-mul' },
+        { id: 5, name: 'The Brain of Pooh',       goal: 'Evaluate grouped a(x + b)',             questions: 20, type: 'g6-evaluate2' },
+        { id: 6, name: 'Storm of the Century',    goal: 'Mix every grade-6 skill to the rescue', questions: 20, type: 'g6-allmix' },
+      ],
+    },
   },
 ];
+
+// --- Grade selection (Grade 5 default; Grade 6 adds harder, on-grade content) ---
+let ACTIVE_GRADE = (() => {
+  try { return parseInt(localStorage.getItem('mathMultiverse.activeGrade'), 10) === 6 ? 6 : 5; }
+  catch (e) { return 5; }
+})();
+const GRADE_SUBTITLE = {
+  5: '5th grade CCSS practice across six themed worlds',
+  6: '6th grade CCSS practice across six themed worlds',
+};
+// Overlay a module's grade-6 fields (its `g6` block) when Grade 6 is active. Modules
+// without a g6 block are not yet available in Grade 6 (rendered as "coming soon").
+function gradeView(m) {
+  if (ACTIVE_GRADE === 6) {
+    return m.g6 ? Object.assign({}, m, m.g6, { _g6ready: true })
+                : Object.assign({}, m, { _g6ready: false });
+  }
+  return Object.assign({}, m, { _g6ready: true });
+}
 
 // Inline module registry. Each entry: { init(host, levelIndex, callbacks) -> cleanupFn }.
 const InlineModules = {};
@@ -3059,6 +3166,18 @@ const SAVE_VERSION = 1;
 
 const Save = {
   state: null,
+
+  // Grade 5 keeps the original key so existing progress is untouched; Grade 6 gets its own.
+  key() { return ACTIVE_GRADE === 6 ? SAVE_KEY.replace('.v1', '.g6.v1') : SAVE_KEY; },
+
+  switchGrade(g) {
+    g = (g === 6) ? 6 : 5;
+    if (g === ACTIVE_GRADE) return;
+    this.saveNow();                                                  // persist the grade we're leaving
+    ACTIVE_GRADE = g;
+    try { localStorage.setItem('mathMultiverse.activeGrade', String(g)); } catch (e) {}
+    this.load();                                                     // load the grade we're entering
+  },
 
   default() {
     const moduleStates = {};
@@ -3092,61 +3211,61 @@ const Save = {
     };
   },
 
-  load() {
-    try {
-      const raw = localStorage.getItem(SAVE_KEY);
-      if (!raw) {
-        this.state = this.default();
-        this.saveNow();
-        return;
-      }
-      this.state = JSON.parse(raw);
-      // Older saves without the flag default to progression-locked play
-      if (this.state.previewMode === undefined) this.state.previewMode = false;
-      // Migrate older saves: ensure analytics scaffold exists
-      if (!this.state.analytics) {
-        this.state.analytics = {
-          totalSessions: 0, totalAttempted: 0, totalCorrect: 0, totalTimeMs: 0,
-          perModule: {}, perTopic: {}, recentMistakes: [], coachShown: {},
-        };
-      }
-      const a = this.state.analytics;
-      if (!a.perModule) a.perModule = {};
-      if (!a.perTopic)  a.perTopic  = {};
-      if (!a.recentMistakes) a.recentMistakes = [];
-      if (!a.coachShown) a.coachShown = {};
-      // Reconcile against current MODULES list
-      for (const m of MODULES) {
-        if (!this.state.modules[m.id]) {
-          this.state.modules[m.id] = {
-            unlocked: !!m.unlocked,
-            levelsCleared: 0,
-            levelStars: m.levels.map(() => 0),
-            levelBest:  m.levels.map(() => null),
-          };
-        } else {
-          const ms = this.state.modules[m.id];
-          while (ms.levelStars.length < m.levels.length) ms.levelStars.push(0);
-          while (ms.levelBest.length  < m.levels.length) ms.levelBest.push(null);
-          // Developer override: if MODULES marks a module unlocked-by-default,
-          // honor that on existing saves (otherwise old saves stay locked even
-          // after a metadata change).
-          if (m.unlocked && !ms.unlocked) ms.unlocked = true;
-        }
-      }
-      this.saveNow();
-    } catch (e) {
-      console.warn('Save load failed, resetting:', e);
-      this.state = this.default();
-      this.saveNow();
+  // Single source of truth for turning a parsed (possibly partial / older / imported)
+  // save object into a complete, valid state: deep-merge over a fresh default() so every
+  // field exists, and clamp/grow each module's level arrays to the current MODULES list.
+  reconcile(obj) {
+    const out = this.default();
+    if (!obj || typeof obj !== 'object') return out;
+    out.version = SAVE_VERSION;
+    if (obj.created) out.created = obj.created;
+    if (obj.profile && typeof obj.profile.name === 'string') out.profile.name = obj.profile.name;
+    if (typeof obj.previewMode === 'boolean') out.previewMode = obj.previewMode;
+    if (obj.stats && typeof obj.stats === 'object') Object.assign(out.stats, obj.stats);
+    if (obj.grandGoals && typeof obj.grandGoals === 'object') out.grandGoals = obj.grandGoals;
+    if (obj.analytics && typeof obj.analytics === 'object') {
+      const a = out.analytics, oa = obj.analytics;
+      for (const k of ['totalSessions', 'totalAttempted', 'totalCorrect', 'totalTimeMs']) if (typeof oa[k] === 'number') a[k] = oa[k];
+      if (oa.perModule && typeof oa.perModule === 'object') a.perModule = oa.perModule;
+      if (oa.perTopic && typeof oa.perTopic === 'object') a.perTopic = oa.perTopic;
+      if (Array.isArray(oa.recentMistakes)) a.recentMistakes = oa.recentMistakes;
+      if (oa.coachShown && typeof oa.coachShown === 'object') a.coachShown = oa.coachShown;
     }
+    for (const m of MODULES) {
+      const tgt = out.modules[m.id];                           // already a fresh default for this module
+      const src = obj.modules && obj.modules[m.id];
+      if (src && typeof src === 'object') {
+        if (typeof src.levelsCleared === 'number') tgt.levelsCleared = Math.max(0, Math.min(src.levelsCleared, m.levels.length));
+        if (Array.isArray(src.levelStars)) for (let i = 0; i < m.levels.length; i++) if (typeof src.levelStars[i] === 'number') tgt.levelStars[i] = src.levelStars[i];
+        if (Array.isArray(src.levelBest)) for (let i = 0; i < m.levels.length; i++) if (src.levelBest[i] != null) tgt.levelBest[i] = src.levelBest[i];
+        // honor a saved unlock, and force-unlock modules that are unlocked-by-default
+        tgt.unlocked = !!src.unlocked || !!m.unlocked;
+      }
+    }
+    return out;
+  },
+
+  load() {
+    const KEY = this.key();
+    let raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (e) { this.state = this.default(); return; }
+    if (!raw) { this.state = this.default(); this.saveNow(); return; }
+    try {
+      this.state = this.reconcile(JSON.parse(raw));
+    } catch (e) {
+      // Corrupt save: back up the raw text before resetting so it isn't silently destroyed.
+      try { localStorage.setItem(KEY + '.bak', raw); } catch (e2) {}
+      console.warn('Save load failed; backed up to ' + KEY + '.bak and reset:', e);
+      this.state = this.default();
+    }
+    this.saveNow();
   },
 
   saveNow() {
     if (!this.state) return;
     this.state.lastSaved = Date.now();
     try {
-      localStorage.setItem(SAVE_KEY, JSON.stringify(this.state));
+      localStorage.setItem(this.key(), JSON.stringify(this.state));
     } catch (e) {
       console.warn('Save persist failed:', e);
     }
@@ -3227,18 +3346,7 @@ const Save = {
     try {
       const obj = JSON.parse(text);
       if (typeof obj !== 'object' || !obj || !obj.modules) throw new Error('Not a Math Multiverse save file.');
-      this.state = obj;
-      // reconcile after import
-      for (const m of MODULES) {
-        if (!this.state.modules[m.id]) {
-          this.state.modules[m.id] = {
-            unlocked: !!m.unlocked,
-            levelsCleared: 0,
-            levelStars: m.levels.map(() => 0),
-            levelBest:  m.levels.map(() => null),
-          };
-        }
-      }
+      this.state = this.reconcile(obj);
       this.saveNow();
       return true;
     } catch (e) {
@@ -3387,6 +3495,17 @@ function renderHeader() {
     btn.style.color = Save.state.previewMode ? 'var(--theme-volume)' : 'var(--text-secondary)';
     btn.style.borderColor = Save.state.previewMode ? 'rgba(242,205,55,0.45)' : 'var(--border-subtle)';
   }
+  const sub = $('grade-subtitle');
+  if (sub) sub.textContent = GRADE_SUBTITLE[ACTIVE_GRADE];
+  for (const g of [5, 6]) {
+    const gb = $('btn-grade-' + g);
+    if (!gb) continue;
+    const on = ACTIVE_GRADE === g;
+    gb.style.background = on ? 'rgba(120,170,255,0.18)' : 'transparent';
+    gb.style.color = on ? '#fff' : 'var(--text-secondary)';
+    gb.style.borderColor = on ? 'rgba(120,170,255,0.55)' : 'var(--border-subtle)';
+    gb.style.fontWeight = on ? '700' : '400';
+  }
 }
 
 function renderLauncher() {
@@ -3394,10 +3513,12 @@ function renderLauncher() {
   grid.innerHTML = '';
   for (let i = 0; i < MODULES.length; i++) {
     const m = MODULES[i];
+    const v = gradeView(m);
+    const comingSoon = !v._g6ready;
     const ms = Save.state.modules[m.id];
-    const unlocked = Save.isModuleUnlocked(m.id);
+    const unlocked = !comingSoon && Save.isModuleUnlocked(m.id);
     const cleared = ms.levelsCleared;
-    const total = m.levels.length;
+    const total = v.levels.length;
     const stars = ms.levelStars.reduce((a, b) => a + b, 0);
     const maxStars = total * 3;
 
@@ -3405,31 +3526,31 @@ function renderLauncher() {
     card.className = 'module-card' + (unlocked ? '' : ' locked');
     card.style.setProperty('--card-color', m.color);
 
-    const dotsHtml = m.levels.map((_, idx) => {
+    const dotsHtml = v.levels.map((_, idx) => {
       let cls = 'lvl-dot';
-      if (idx < cleared) cls += ' cleared';
-      else if (idx === cleared && unlocked) cls += ' current';
+      if (!comingSoon && idx < cleared) cls += ' cleared';
+      else if (!comingSoon && idx === cleared && unlocked) cls += ' current';
       return `<span class="${cls}"></span>`;
     }).join('');
 
-    const subtitle = unlocked
-      ? m.description
-      : `<em style="opacity:0.85;">${m.lockedMessage || 'Locked'}</em>`;
+    const subtitle = comingSoon
+      ? `<em style="opacity:0.85;">Grade 6 campaign coming soon</em>`
+      : (unlocked ? v.description : `<em style="opacity:0.85;">${v.lockedMessage || 'Locked'}</em>`);
 
-    const action = unlocked
-      ? (cleared === total ? '★ COMPLETED' : 'PLAY →')
-      : '🔒';
+    const action = comingSoon
+      ? '🔒 SOON'
+      : (unlocked ? (cleared === total ? '★ COMPLETED' : 'PLAY →') : '🔒');
 
-    const iconHtml = m.logoUrl
-      ? `<img class="mc-logo" src="${m.logoUrl}" alt="${m.domain}" loading="lazy" onerror="this.outerHTML = '<div class=&quot;mc-icon&quot;>${m.icon}</div>';">`
-      : `<div class="mc-icon">${m.icon}</div>`;
+    const iconHtml = v.logoUrl
+      ? `<img class="mc-logo" src="${v.logoUrl}" alt="${v.domain}" loading="lazy" onerror="this.outerHTML = '<div class=&quot;mc-icon&quot;>${v.icon}</div>';">`
+      : `<div class="mc-icon">${v.icon}</div>`;
 
     card.innerHTML = `
       <div class="mc-header">
         ${iconHtml}
-        <div class="mc-ccss">CCSS ${m.ccss}</div>
+        <div class="mc-ccss">CCSS ${v.ccss}</div>
       </div>
-      <div class="mc-title">${m.name}</div>
+      <div class="mc-title">${v.name}</div>
       <div class="mc-subtitle">${subtitle}</div>
       <div class="mc-progress">${dotsHtml}</div>
       <div class="mc-footer">
@@ -3450,8 +3571,9 @@ function openModule(moduleId) {
   currentModuleId = moduleId;
   const m = MODULES.find(x => x.id === moduleId);
   if (!m) return;
-  $('lvl-select-title').textContent = m.name;
-  $('lvl-select-subtitle').textContent = `${m.domain} · CCSS ${m.ccss} · grand goal: ${m.grandGoal}`;
+  const v = gradeView(m);
+  $('lvl-select-title').textContent = v.name;
+  $('lvl-select-subtitle').textContent = `${v.domain} · CCSS ${v.ccss} · grand goal: ${v.grandGoal}`;
   renderLevels();
   showScreen('levels');
 }
@@ -3459,12 +3581,13 @@ function openModule(moduleId) {
 function renderLevels() {
   const m = MODULES.find(x => x.id === currentModuleId);
   if (!m) return;
+  const v = gradeView(m);
   const ms = Save.state.modules[m.id];
   const grid = $('level-grid');
   grid.innerHTML = '';
 
-  for (let i = 0; i < m.levels.length; i++) {
-    const lvl = m.levels[i];
+  for (let i = 0; i < v.levels.length; i++) {
+    const lvl = v.levels[i];
     const unlocked = Save.isLevelUnlocked(m.id, i);
     const stars = ms.levelStars[i];
     const best  = ms.levelBest[i];
@@ -3524,7 +3647,8 @@ function playLevel(levelIndex) {
     return;
   }
 
-  $('host-title').textContent = `${m.name} — L${levelIndex + 1}: ${m.levels[levelIndex].name}`;
+  const gv = gradeView(m);
+  $('host-title').textContent = `${gv.name} — L${levelIndex + 1}: ${gv.levels[levelIndex].name}`;
   showScreen('module');
 
   const host = $('host-frame');
@@ -3676,6 +3800,16 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     { id: 5, name: 'Massive Air',   gen: 'divide',       maxDen: 8 },
     { id: 6, name: 'Final Send',    gen: 'mixed-all',    maxDen: 12 },
   ];
+  // Grade 6 (6.NS.1, dividing fractions). Same bike theme; selected only when
+  // ACTIVE_GRADE === 6. Grade-5 FR_LEVELS above is untouched.
+  const FR_LEVELS_6 = [
+    { id: 1, name: 'Reciprocal Drop-In', gen: 'ns-div-intro',  maxDen: 8 },
+    { id: 2, name: 'Invert & Send',      gen: 'ns-div-frac',   maxDen: 8 },
+    { id: 3, name: 'Mixed-Number Air',   gen: 'ns-div-mixed',  maxDen: 6 },
+    { id: 4, name: 'Combo Line',         gen: 'ns-div-multi',  maxDen: 6 },
+    { id: 5, name: 'Servings Gap',       gen: 'ns-div-word',   maxDen: 8 },
+    { id: 6, name: 'Final Send',         gen: 'ns-div-allmix', maxDen: 8 },
+  ];
   const FR_QPL = [15, 18, 18, 20, 20, 20];
 
   // Background trail-cam clips. iPad-compatible H.264 MP4s.
@@ -3825,12 +3959,15 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     } else d2 = ri(2, maxDen);
     const L = lcm(d1, d2);
     let n1 = ri(1, d1 - 1), n2 = ri(1, d2 - 1);
+    // Re-roll until the two fractions differ, then put the larger first, so the
+    // difference is strictly positive. Negative (or zero) results are off-CCSS for grade 5.
+    let guard = 16;
+    while (n1 * (L / d1) === n2 * (L / d2) && guard-- > 0) { n1 = ri(1, d1 - 1); n2 = ri(1, d2 - 1); }
     let v1 = n1 * (L / d1), v2 = n2 * (L / d2);
     if (v1 < v2) { [v1, v2] = [v2, v1]; [n1, n2] = [n2, n1]; [d1, d2] = [d2, d1]; }
-    if (v1 === v2) { n2 = Math.max(1, n2 - 1); }
-    const a = n1 * (L / d1);
-    const b = n2 * (L / d2);
-    const diffNum = a - b;
+    const a = v1;
+    const b = v2;
+    const diffNum = a - b;   // >= 0 always (0 only in the degenerate single-fraction case)
     const correctStr = fracToString(diffNum, L);
     return {
       topic: 'frac-sub-unlike',
@@ -3953,7 +4090,14 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       n1 = ri(1, d1 - 1); n2 = ri(1, d2 - 1);
       L = lcm(d1, d2);
     }
-    const cv1 = n1 * (L / d1), cv2 = n2 * (L / d2);
+    let cv1 = n1 * (L / d1), cv2 = n2 * (L / d2);
+    if (cv1 === cv2) {
+      // Re-roll exhausted (maxDen too small for two distinct fractions, e.g. maxDen=2
+      // only has 1/2): fall back to a guaranteed-distinct pair so the four buttons never
+      // collide into duplicates or two "correct" answers.
+      n1 = 1; d1 = 2; n2 = 1; d2 = 3; L = lcm(d1, d2);
+      cv1 = n1 * (L / d1); cv2 = n2 * (L / d2);
+    }
     const f1Str = fracToString(n1, d1), f2Str = fracToString(n2, d2);
     const correct = cv1 > cv2 ? f1Str : f2Str;
     const wrong   = cv1 > cv2 ? f2Str : f1Str;
@@ -4024,9 +4168,10 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   function genMixedSub(maxDen) {
     // Mixed-number subtraction with like denominators
     const d = ri(3, Math.min(maxDen, 8));
-    let w1 = ri(2, 5), w2 = ri(1, w1 - 1);
-    let n1 = ri(1, d - 1), n2 = ri(1, d - 1);
-    if (n1 < n2) { w1 += 1; const tmp = n1; n1 = n2 + tmp; }
+    const w1 = ri(2, 5), w2 = ri(1, w1 - 1);
+    const n1 = ri(1, d - 1), n2 = ri(1, d - 1);
+    // Fractions stay proper; w1 > w2 keeps the result positive even when n1 < n2,
+    // which gives a genuine "borrow" problem rather than a malformed display like "4 6/5".
     const totalNum = (w1 * d + n1) - (w2 * d + n2);
     const correctStr = fracToString(totalNum, d);
     return {
@@ -4051,12 +4196,15 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const k = pick([2, 3, 4]);
     const dNew = dBase * k;
     const nNew = nBase * k;
-    const wrong1 = nBase + k;
-    const wrong2 = nBase * k + 1;
-    const wrong3 = nBase + 1;
-    const opts = shuffle([
-      `${nNew}/${dNew}`, `${wrong1}/${dNew}`, `${wrong2}/${dNew}`, `${wrong3}/${dNew}`,
-    ]);
+    // Build 3 distinct wrong numerators (none equal to nNew) from a pool of plausible
+    // mistakes so the four options never collide into duplicate buttons.
+    const cand = [nBase + k, nBase * k + 1, nBase + 1, nBase, nBase * (k + 1), nBase * k - 1, nBase * k + k];
+    const wrongs = [];
+    for (const w of cand) {
+      if (w > 0 && w !== nNew && !wrongs.includes(w)) wrongs.push(w);
+      if (wrongs.length >= 3) break;
+    }
+    const opts = shuffle([nNew, ...wrongs].map(n => `${n}/${dNew}`));
     return {
       topic: 'frac-equiv',
       text: pick([
@@ -4101,8 +4249,307 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     };
   }
 
+  // ============================================================
+  // Grade 6 (6.NS.1) — DIVIDING FRACTIONS generators
+  // a/b ÷ c/d = (a·d)/(b·c), then reduce. Mixed numbers → improper first.
+  // Every generator sets `_customChoices` with EXACTLY 4 distinct,
+  // non-negative options (one correct). Distractors model real student
+  // errors: forgot to invert (multiplied straight across), inverted the
+  // WRONG fraction (the dividend), off-by-one numerator, did not simplify.
+  // ============================================================
+
+  // Shared choice builder. `cands` is a priority-ordered list of [num, den]
+  // distractor pairs. Colliding/invalid/negative candidates are skipped; any
+  // shortfall is filled by fracToString(ansNum + k, ansDen) for the next
+  // unused small k. Always returns exactly 4 options, one correct.
+  function frDivChoices(ansNum, ansDen, cands) {
+    const correctStr = fracToString(ansNum, ansDen);
+    const texts = new Set([correctStr]);
+    for (const [n, d] of cands) {
+      if (typeof n === 'number' && typeof d === 'number' && d > 0 && n >= 0) {
+        const t = fracToString(n, d);
+        if (t && !/[-−–]/.test(t) && t !== correctStr) texts.add(t);  // never negative / never the correct text
+      }
+      if (texts.size >= 4) break;
+    }
+    let k = 2;
+    while (texts.size < 4 && k < 120) {
+      const t = fracToString(ansNum + k, ansDen);
+      if (t && !/[-−–]/.test(t)) texts.add(t);
+      k++;
+    }
+    return shuffle(Array.from(texts)).slice(0, 4).map(t => ({ text: t, correct: t === correctStr }));
+  }
+
+  // L1 — whole ÷ unit fraction, OR proper fraction ÷ whole
+  function genNsDivIntro(maxDen) {
+    if (ri(0, 1) === 0) {
+      // whole ÷ unit fraction:  w ÷ 1/d  =  w·d
+      const d = ri(2, Math.min(maxDen, 8));
+      const w = ri(1, 6);
+      const a = w, b = 1, c = 1, e = d;            // dividend w/1, divisor 1/d
+      const ansNum = a * e, ansDen = b * c;        // (w·d)/1
+      const correctStr = fracToString(ansNum, ansDen);
+      return {
+        topic: 'ns-div-intro',
+        text: pick([
+          `Sur Ronster has ${w} whole energy bars and cuts each into 1/${d}-bar bites. How many bites?`,
+          `${w} full water bottles, each poured into 1/${d}-bottle sips. How many sips?`,
+          `${w} laps of trail, each broken into 1/${d}-lap gates. How many gates total?`,
+          `${w} whole pizzas sliced into 1/${d}-pizza pieces for the pit crew. Pieces total?`,
+        ]),
+        equation: `${w} <span class="op">÷</span> 1/${d} <span class="eq">=</span> ?`,
+        answer: { num: ansNum, den: ansDen },
+        visualize: [],
+        _customChoices: frDivChoices(ansNum, ansDen, [
+          [a * c, b * e],            // forgot to invert: w × 1/d straight across
+          [b * e, a * c],            // inverted the dividend instead of the divisor
+          [ansNum + 1, ansDen],      // off-by-one in the numerator
+          [a * e, b * c],            // unreduced (did not simplify)
+        ]),
+        explain: `Dividing by 1/${d} means multiplying by the reciprocal ${d}/1. So ${w} × ${d} = <strong>${correctStr}</strong>. Flip the divisor, then multiply.`,
+      };
+    }
+    // proper fraction ÷ whole:  (n/d) ÷ w  =  n/(d·w)
+    const d = ri(2, Math.min(maxDen, 8));
+    const n = ri(1, d - 1);
+    const w = ri(2, 6);
+    const a = n, b = d, c = w, e = 1;              // dividend n/d, divisor w/1
+    const ansNum = a * e, ansDen = b * c;          // n/(d·w)
+    const correctStr = fracToString(ansNum, ansDen);
+    return {
+      topic: 'ns-div-intro',
+      text: pick([
+        `${n}/${d} of a recovery shake is split evenly among ${w} riders. Each rider gets?`,
+        `${n}/${d} of a pizza shared equally by ${w} pit crew. Each share?`,
+        `${n}/${d} of an hour of trail time divided into ${w} equal sections. Time per section?`,
+        `${n}/${d} of a fuel can poured equally into ${w} bikes. Fuel per bike?`,
+      ]),
+      equation: `${n}/${d} <span class="op">÷</span> ${w} <span class="eq">=</span> ?`,
+      answer: { num: ansNum, den: ansDen },
+      visualize: [],
+      _customChoices: frDivChoices(ansNum, ansDen, [
+        [a * c, b * e],              // forgot to invert: n/d × w straight across
+        [b * e, a * c],              // inverted the dividend instead of the divisor
+        [ansNum + 1, ansDen],        // off-by-one in the numerator
+        [a * e, b * c],              // unreduced (did not simplify)
+      ]),
+      explain: `Dividing by ${w} means multiplying by 1/${w}. So ${n}/${d} × 1/${w} = ${n}/${d * w} = <strong>${correctStr}</strong>.`,
+    };
+  }
+
+  // L2 — proper fraction ÷ proper fraction
+  function genNsDivFrac(maxDen) {
+    const b = ri(2, Math.min(maxDen, 8)), a = ri(1, b - 1);   // dividend a/b proper
+    const d = ri(2, Math.min(maxDen, 8)), c = ri(1, d - 1);   // divisor  c/d proper
+    const ansNum = a * d, ansDen = b * c;
+    const correctStr = fracToString(ansNum, ansDen);
+    return {
+      topic: 'ns-div-frac',
+      text: pick([
+        `Sur Ronster has ${a}/${b} of a chocolate bar and eats it in ${c}/${d}-bar bites. How many bites?`,
+        `${a}/${b} of a trail is ridden in ${c}/${d}-trail sprints. How many sprints?`,
+        `${a}/${b} of a fuel can is burned at ${c}/${d}-can per stage. How many stages?`,
+        `How many ${c}/${d}-liter cups can be poured from ${a}/${b} of a liter?`,
+      ]),
+      equation: `${a}/${b} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ?`,
+      answer: { num: ansNum, den: ansDen },
+      visualize: [],
+      _customChoices: frDivChoices(ansNum, ansDen, [
+        [a * c, b * d],              // forgot to invert: multiplied straight across
+        [b * d, a * c],              // inverted the dividend (flipped a/b)
+        [ansNum + 1, ansDen],        // off-by-one in the numerator
+        [a * d, b * c],              // unreduced (did not simplify)
+      ]),
+      explain: `Keep ${a}/${b}, flip ${c}/${d} to ${d}/${c}, multiply: (${a}×${d})/(${b}×${c}) = ${a * d}/${b * c} = <strong>${correctStr}</strong>.`,
+    };
+  }
+
+  // L3 — mixed number ÷ fraction, OR mixed ÷ mixed (convert to improper first)
+  function genNsDivMixed(maxDen) {
+    const md = Math.min(maxDen, 6);
+    if (ri(0, 1) === 0) {
+      // mixed ÷ proper fraction
+      const W = ri(1, 4), b = ri(2, md), wn = ri(1, b - 1);   // dividend W wn/b
+      const d = ri(2, md), c = ri(1, d - 1);                  // divisor c/d proper
+      const a = W * b + wn;                                   // improper numerator over b
+      const ansNum = a * d, ansDen = b * c;
+      const correctStr = fracToString(ansNum, ansDen);
+      return {
+        topic: 'ns-div-mixed',
+        text: pick([
+          `Sur Ronster rode ${W} ${wn}/${b} miles in ${c}/${d}-mile intervals. How many intervals?`,
+          `${W} ${wn}/${b} liters of fuel used at ${c}/${d}-liter per run. How many runs?`,
+          `A ${W} ${wn}/${b}-hour session split into ${c}/${d}-hour drills. How many drills?`,
+        ]),
+        equation: `${W} ${wn}/${b} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ?`,
+        answer: { num: ansNum, den: ansDen },
+        visualize: [],
+        _customChoices: frDivChoices(ansNum, ansDen, [
+          [a * c, b * d],            // forgot to invert
+          [b * d, a * c],            // inverted the dividend
+          [ansNum + 1, ansDen],      // off-by-one in the numerator
+          [a * d, b * c],            // unreduced (did not simplify)
+        ]),
+        explain: `Make ${W} ${wn}/${b} improper: ${W}×${b}+${wn} = ${a}, so ${a}/${b}. Flip ${c}/${d}, multiply: (${a}×${d})/(${b}×${c}) = <strong>${correctStr}</strong>.`,
+      };
+    }
+    // mixed ÷ mixed
+    const W1 = ri(1, 4), b = ri(2, md), wn1 = ri(1, b - 1);   // dividend W1 wn1/b
+    const W2 = ri(1, 3), d = ri(2, md), wn2 = ri(1, d - 1);   // divisor  W2 wn2/d
+    const a = W1 * b + wn1;   // improper over b
+    const c = W2 * d + wn2;   // improper over d
+    const ansNum = a * d, ansDen = b * c;
+    const correctStr = fracToString(ansNum, ansDen);
+    return {
+      topic: 'ns-div-mixed',
+      text: pick([
+        `A ${W1} ${wn1}/${b}-km trail is ridden in ${W2} ${wn2}/${d}-km laps. How many laps?`,
+        `${W1} ${wn1}/${b} hours of riding split into ${W2} ${wn2}/${d}-hour stages. How many stages?`,
+        `${W1} ${wn1}/${b} liters of fuel burned at ${W2} ${wn2}/${d} liters per session. How many sessions?`,
+      ]),
+      equation: `${W1} ${wn1}/${b} <span class="op">÷</span> ${W2} ${wn2}/${d} <span class="eq">=</span> ?`,
+      answer: { num: ansNum, den: ansDen },
+      visualize: [],
+      _customChoices: frDivChoices(ansNum, ansDen, [
+        [a * c, b * d],              // forgot to invert
+        [b * d, a * c],              // inverted the dividend
+        [ansNum + 1, ansDen],        // off-by-one in the numerator
+        [a * d, b * c],              // unreduced (did not simplify)
+      ]),
+      explain: `Make both improper: ${a}/${b} and ${c}/${d}. Flip the divisor and multiply: (${a}×${d})/(${b}×${c}) = <strong>${correctStr}</strong>.`,
+    };
+  }
+
+  // L4 — two-step: divide then multiply, OR divide then simplify
+  function genNsDivMulti(maxDen) {
+    const md = Math.min(maxDen, 6);
+    if (ri(0, 1) === 0) {
+      // divide, then multiply by a whole number:  (a/b ÷ c/d) × m
+      const b = ri(2, md), a = ri(1, b - 1);
+      const d = ri(2, md), c = ri(1, d - 1);
+      const m = ri(2, 4);
+      const qNum = a * d, qDen = b * c;            // quotient a/b ÷ c/d
+      const ansNum = qNum * m, ansDen = qDen;      // × m
+      const correctStr = fracToString(ansNum, ansDen);
+      return {
+        topic: 'ns-div-multi',
+        text: pick([
+          `Find ${a}/${b} ÷ ${c}/${d}, then send it ${m}× bigger for the ${m}-lap combo. Result?`,
+          `Sur Ronster divides ${a}/${b} by ${c}/${d}, then multiplies by ${m} riders. Total?`,
+          `Two-step line: ${a}/${b} ÷ ${c}/${d}, then × ${m}. What's the answer?`,
+        ]),
+        equation: `(${a}/${b} <span class="op">÷</span> ${c}/${d}) <span class="op">×</span> ${m} <span class="eq">=</span> ?`,
+        answer: { num: ansNum, den: ansDen },
+        visualize: [],
+        _customChoices: frDivChoices(ansNum, ansDen, [
+          [a * c * m, b * d],        // forgot to invert in the divide step, then × m
+          [qNum, qDen],              // stopped after dividing (forgot to multiply by m)
+          [ansNum + 1, ansDen],      // off-by-one in the numerator
+          [b * d * m, a * c],        // inverted the dividend, then × m
+        ]),
+        explain: `Step 1: ${a}/${b} ÷ ${c}/${d} = (${a}×${d})/(${b}×${c}) = ${qNum}/${qDen}. Step 2: × ${m} = ${ansNum}/${ansDen} = <strong>${correctStr}</strong>.`,
+      };
+    }
+    // divide, then simplify (force a reducible raw answer)
+    let b, a, d, c, g, guard = 12;
+    do {
+      b = ri(2, md); a = ri(1, b - 1);
+      d = ri(2, md); c = ri(1, d - 1);
+      g = gcd(a * d, b * c);
+      guard--;
+    } while (g === 1 && guard > 0);
+    const ansNum = a * d, ansDen = b * c;
+    const correctStr = fracToString(ansNum, ansDen);
+    return {
+      topic: 'ns-div-multi',
+      text: pick([
+        `Solve ${a}/${b} ÷ ${c}/${d}, then write it in lowest terms. Simplest form?`,
+        `Sur Ronster divides ${a}/${b} by ${c}/${d}. Reduce the answer all the way. Result?`,
+        `Flip, multiply, then simplify: ${a}/${b} ÷ ${c}/${d}. Lowest-terms answer?`,
+      ]),
+      equation: `${a}/${b} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ? (lowest terms)`,
+      answer: { num: ansNum, den: ansDen },
+      visualize: [],
+      _customChoices: frDivChoices(ansNum, ansDen, [
+        [a * c, b * d],              // forgot to invert
+        [b * d, a * c],              // inverted the dividend
+        [ansNum + 1, ansDen],        // off-by-one in the numerator
+        [a * d, b * c],              // unreduced (did not simplify) — collapses, fallback fills
+      ]),
+      explain: `${a}/${b} ÷ ${c}/${d} = ${a * d}/${b * c}. Now simplify: gcd is ${g}, divide top and bottom by ${g}. Answer: <strong>${correctStr}</strong>.`,
+    };
+  }
+
+  // L5 — servings word problems (how many c/d-cup scoops in T cups, etc.)
+  function genNsDivWord(maxDen) {
+    const md = Math.min(maxDen, 8);
+    if (ri(0, 1) === 0) {
+      // whole ÷ proper fraction:  T ÷ (c/d)
+      const d = ri(2, md), c = ri(1, d - 1);
+      const T = ri(2, 6);
+      const a = T, b = 1;                          // dividend T/1
+      const ansNum = a * d, ansDen = b * c;        // (T·d)/c
+      const correctStr = fracToString(ansNum, ansDen);
+      return {
+        topic: 'ns-div-word',
+        text: pick([
+          `How many ${c}/${d}-cup scoops of trail mix fit in ${T} cups?`,
+          `A ${T}-liter jug fills ${c}/${d}-liter bottles. How many bottles?`,
+          `${T} whole pizzas are served in ${c}/${d}-pizza portions. How many portions?`,
+          `${T} hours of trail time split into ${c}/${d}-hour runs. How many runs?`,
+        ]),
+        equation: `${T} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ?`,
+        answer: { num: ansNum, den: ansDen },
+        visualize: [],
+        _customChoices: frDivChoices(ansNum, ansDen, [
+          [a * c, b * d],            // forgot to invert: T × c/d
+          [b * d, a * c],            // inverted the dividend
+          [ansNum + 1, ansDen],      // off-by-one in the numerator
+          [a * d, b * c],            // unreduced (did not simplify)
+        ]),
+        explain: `${T} ÷ ${c}/${d}: flip to ${d}/${c} and multiply. ${T} × ${d}/${c} = ${T * d}/${c} = <strong>${correctStr}</strong>.`,
+      };
+    }
+    // fraction ÷ fraction word problem
+    const b = ri(2, md), a = ri(1, b - 1);
+    const d = ri(2, md), c = ri(1, d - 1);
+    const ansNum = a * d, ansDen = b * c;
+    const correctStr = fracToString(ansNum, ansDen);
+    return {
+      topic: 'ns-div-word',
+      text: pick([
+        `A ${a}/${b}-liter bottle is poured into ${c}/${d}-liter cups. How many cups?`,
+        `${a}/${b} of a granola block is broken into ${c}/${d}-block bars. How many bars?`,
+        `${a}/${b} of a kilometer is ridden in ${c}/${d}-km bursts. How many bursts?`,
+      ]),
+      equation: `${a}/${b} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ?`,
+      answer: { num: ansNum, den: ansDen },
+      visualize: [],
+      _customChoices: frDivChoices(ansNum, ansDen, [
+        [a * c, b * d],              // forgot to invert
+        [b * d, a * c],              // inverted the dividend
+        [ansNum + 1, ansDen],        // off-by-one in the numerator
+        [a * d, b * c],              // unreduced (did not simplify)
+      ]),
+      explain: `${a}/${b} ÷ ${c}/${d} = (${a}×${d})/(${b}×${c}) = ${a * d}/${b * c} = <strong>${correctStr}</strong>.`,
+    };
+  }
+
+  // L6 — random pick of the five grade-6 division generators
+  function genNsDivAllMix(maxDen) {
+    return pick([genNsDivIntro, genNsDivFrac, genNsDivMixed, genNsDivMulti, genNsDivWord])(maxDen);
+  }
+
   function genForLevel(level) {
     const md = level.maxDen;
+    // Grade 6 (6.NS.1) division branches — checked first; grade-5 branches below unchanged.
+    if (level.gen === 'ns-div-intro')  return genNsDivIntro(md);
+    if (level.gen === 'ns-div-frac')   return genNsDivFrac(md);
+    if (level.gen === 'ns-div-mixed')  return genNsDivMixed(md);
+    if (level.gen === 'ns-div-multi')  return genNsDivMulti(md);
+    if (level.gen === 'ns-div-word')   return genNsDivWord(md);
+    if (level.gen === 'ns-div-allmix') return genNsDivAllMix(md);
     if (level.gen === 'like-denom')   return pick([genAddLike, genSubLike, genMixedAdd])(md);
     if (level.gen === 'unlike-easy')  return pick([() => genAdd(md, true), () => genSub(md, true), () => genMultWhole(md), () => genCompareFrac(md), () => genEquiv(md)])();
     if (level.gen === 'unlike-mixed') return pick([() => genAdd(md, false), () => genSub(md, false), () => genMultWhole(md), () => genCompareFrac(md), () => genEquiv(md), () => genSimplify(md)])();
@@ -4134,6 +4581,19 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const isDiv = eq.includes('÷');
     const candidates = [];
 
+    // Mixed-number problems: the operand regex below only sees the fraction parts (it drops
+    // the whole numbers), so its distractors come out implausibly tiny. Build distractors
+    // scaled to the (possibly improper) correct answer instead, and never negative.
+    if ((problem.topic || '').includes('mixed')) {
+      return [
+        fracToString(correct.num + correct.den, correct.den),               // one whole too many
+        fracToString(Math.max(1, correct.num - correct.den), correct.den),  // one whole too few
+        fracToString(correct.num + 1, correct.den),                         // off by one part
+        fracToString(Math.max(1, correct.num - 1), correct.den),
+        fracToString(correct.num + 2, correct.den),
+      ];
+    }
+
     // Parse operands from equation HTML (e.g., "1/2 <span...>+</span> 1/3...")
     const tokens = eq.replace(/<[^>]*>/g, ' ').match(/(\d+)\/(\d+)/g) || [];
     const ops = tokens.map(t => {
@@ -4147,8 +4607,8 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       candidates.push(fracToString(isAdd ? a.n + b.n : Math.max(0, a.n - b.n), a.d + b.d));
       // Mistake: forgot common denominator, just added/subtracted tops over the first denom
       candidates.push(fracToString(isAdd ? a.n + b.n : Math.max(0, a.n - b.n), a.d));
-      // Mistake: subtracted in wrong order (for sub only)
-      if (isSub) candidates.push(fracToString(b.n * a.d - a.n * b.d, a.d * b.d));
+      // Mistake: subtracted in wrong order (for sub only) — only if it stays non-negative
+      if (isSub) { const wo = b.n * a.d - a.n * b.d; if (wo > 0) candidates.push(fracToString(wo, a.d * b.d)); }
       // Off-by-one in numerator
       candidates.push(fracToString(correct.num + 1, correct.den));
       candidates.push(fracToString(Math.max(0, correct.num - 1), correct.den));
@@ -4190,13 +4650,19 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const candidates = pedFracMistakes(problem);
     const set = new Set([correctStr]);
     for (const c of candidates) {
-      if (c && c !== correctStr) set.add(c);
+      if (c && c !== correctStr && !/[-−]/.test(c)) set.add(c);  // never offer a negative-fraction distractor
       if (set.size >= 4) break;
     }
-    let safety = 30;
+    let safety = 40;
     while (set.size < 4 && safety-- > 0) {
-      set.add(fracToString(correct.num + ri(-3, 3), Math.max(1, correct.den + ri(-2, 2))));
+      const pn = Math.max(0, correct.num + ri(-3, 3));
+      const pd = Math.max(1, correct.den + ri(-2, 2));
+      const c = fracToString(pn, pd);
+      if (c && c !== correctStr && !/[-−–]/.test(c)) set.add(c);   // never a negative distractor
     }
+    // Guarantee four non-negative, distinct options even if the random pad stalls.
+    let bump = 1;
+    while (set.size < 4) { set.add(fracToString(correct.num + bump, Math.max(1, correct.den))); bump++; }
     const arr = shuffle(Array.from(set));
     return arr.slice(0, 4).map(t => ({ text: t, correct: t === correctStr }));
   }
@@ -4241,7 +4707,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   InlineModules['fraction-rider'] = {
     init(host, levelIndex, callbacks) {
-      const lvl = FR_LEVELS[levelIndex];
+      const lvl = (typeof ACTIVE_GRADE !== 'undefined' && ACTIVE_GRADE === 6 && typeof FR_LEVELS_6 !== 'undefined') ? FR_LEVELS_6[levelIndex] : FR_LEVELS[levelIndex];
       const totalQ = FR_QPL[levelIndex];
 
       const state = {
@@ -4576,7 +5042,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     'Bahrain':     'https://en.wikipedia.org/wiki/Special:FilePath/Bahrain_International_Circuit--Grand_Prix_Layout.svg',
     'Monaco':      'https://en.wikipedia.org/wiki/Special:FilePath/Circuit_Monaco.svg',
     'Silverstone': 'https://en.wikipedia.org/wiki/Special:FilePath/Circuit_Silverstone.svg',
-    'Suzuka':      'https://en.wikipedia.org/wiki/Special:FilePath/Circuit_Suzuka.svg',
+    'Suzuka':      'https://en.wikipedia.org/wiki/Special:FilePath/Suzuka_circuit_map--2005.svg',
   };
 
   // Detailed driver-specific helmet SVGs.
@@ -4775,6 +5241,18 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     { id: 6, name: 'Suzuka Title Decider', circuit: 'Suzuka',      gridSize: F1_GRID_SIZE, gen: 'mixed-all' },
   ];
 
+  // Grade 6 (6.NS decimal ops + division, 6.RP unit rate + percent, 6.SP stats).
+  // Same F1 theme; selected only when ACTIVE_GRADE === 6. Grade-5 F1_LEVELS above
+  // is untouched. QPL (15,18,18,20,20,20) is shared by both grades.
+  const F1_LEVELS_6 = [
+    { id: 1, name: 'Fuel Stint Division',  circuit: 'Bahrain',     gridSize: F1_GRID_SIZE, gen: 'g6-dec-divide' },
+    { id: 2, name: 'Sector Delta Ops',     circuit: 'Bahrain',     gridSize: F1_GRID_SIZE, gen: 'g6-dec-ops' },
+    { id: 3, name: 'Pace Unit Rates',      circuit: 'Monaco',      gridSize: F1_GRID_SIZE, gen: 'g6-unit-rate' },
+    { id: 4, name: 'Grip Percentages',     circuit: 'Silverstone', gridSize: F1_GRID_SIZE, gen: 'g6-percent' },
+    { id: 5, name: 'Lap-Time Telemetry',   circuit: 'Suzuka',      gridSize: F1_GRID_SIZE, gen: 'g6-stats' },
+    { id: 6, name: 'Data Title Decider',   circuit: 'Suzuka',      gridSize: F1_GRID_SIZE, gen: 'g6-allmix' },
+  ];
+
   const QPL = [15, 18, 18, 20, 20, 20];
 
   const ri = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
@@ -4960,18 +5438,26 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const target = pick(places);
     const base = ri(20, 35);
     const fracPart = ri(100, 999);
-    const num = base + fracPart / 1000;
+    // Round in exact integer thousandths to avoid binary-float underflow on '.??5' cases
+    // (e.g. 20.115 is stored as 20.11499999..., which Math.round drags down to 20.11).
+    const valTh = base * 1000 + fracPart;          // exact thousandths
+    const step = 1000 / target.mult;               // thousandths per output unit (tenth=100, hundredth=10)
+    const num = valTh / 1000;
     const lap = `1:${num.toFixed(3)}`;
-    const correctNum = Math.round(num * target.mult) / target.mult;
+    const floorTh = Math.floor(valTh / step) * step;
+    const roundedTh = Math.round(valTh / step) * step;
+    const correctNum = roundedTh / 1000;
     const correct = correctNum.toFixed(target.digits);
-    // Pedagogical mistakes: rounded the wrong way, truncated instead, kept extra digit
-    const truncated = (Math.floor(num * target.mult) / target.mult).toFixed(target.digits);
-    const oppositeRound = ((Math.round(num * target.mult) + (correctNum > num ? -1 : 1)) / target.mult).toFixed(target.digits);
+    // The digit just past the target place decides the rounding (integer math, never a float)
+    const nextDigit = target.digits === 1 ? Math.floor(fracPart / 10) % 10 : fracPart % 10;
+    // Pedagogical mistakes, all on the same integer basis so they stay consistent:
+    const truncated = (floorTh / 1000).toFixed(target.digits);                                 // truncated instead of rounded
+    const oppositeRound = ((roundedTh === floorTh ? floorTh + step : floorTh) / 1000).toFixed(target.digits); // rounded wrong direction
     const opts = pedDistractorsFloat(correctNum, target.digits, [
-      parseFloat(truncated),                                  // truncated instead of rounded
-      parseFloat(oppositeRound),                              // rounded wrong direction
+      parseFloat(truncated),
+      parseFloat(oppositeRound),
       Math.round(num),                                        // rounded to whole instead
-      Math.floor(num * target.mult * 10) / (target.mult * 10), // kept too many digits
+      Math.floor(valTh / (step / 10)) * (step / 10) / 1000,   // kept too many digits
     ]).map(n => n.toFixed(target.digits));
     const driver = pick(DRIVERS);
     return {
@@ -4982,9 +5468,9 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         `TV graphic shows <strong>${lap}</strong>. Display rounds to nearest ${target.name}. What's it show?`,
         `Engineer: <em>"Lap of <strong>${lap}</strong>. Trim to nearest ${target.name}."</em>`,
       ]),
-      answers: opts.map(o => `1:${(base + parseFloat(o) - base).toFixed(target.digits)}`),
+      answers: opts.map(o => `1:${o}`),
       correctIdx: opts.indexOf(correct),
-      explain: `Look at the digit just past the ${target.name}s. ${num.toFixed(3)} → digit after the ${target.name} is ${Math.floor(num * target.mult * 10) % 10}. ${Math.floor(num * target.mult * 10) % 10 >= 5 ? 'Round up' : 'Round down'}: <strong>1:${correct}</strong>.`,
+      explain: `Look at the digit just past the ${target.name}s. ${num.toFixed(3)} → that digit is ${nextDigit}. ${nextDigit >= 5 ? 'Round up' : 'Round down'}: <strong>1:${correct}</strong>.`,
     };
   }
 
@@ -4999,7 +5485,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const opts = pedDistractorsFloat(km, 3, [
           meters / 100,         // shifted only 2 places (off by ÷10)
           meters / 10000,       // over-shifted (4 places)
-          meters * 1000,        // multiplied instead of divided
+          meters,               // forgot to convert (kept the meter value) — plausible, not 10^6
           km + 1, km - 1,
         ]).map(n => +n.toFixed(3) + '');
         return {
@@ -5125,7 +5611,287 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     return pick(fns)();
   }
 
+  // ===== Grade 6 (6.NS decimal ops + division, 6.RP unit rate + percent, 6.SP stats) =====
+  // Grade-5 generators above are untouched; these run only for the F1_LEVELS_6 gen ids.
+
+  // Build EXACTLY 4 distinct, non-negative option strings with one correct.
+  // `correct` is the numeric answer, `decimals` the display precision, `mistakes`
+  // an ordered list of plausible wrong NUMBERS. Dedups on the rounded value; if
+  // short, pads with correct ± 0.1*k (then ± integers) so options never repeat
+  // and never go negative. Returns { answers:[4 strings], correctIdx }.
+  function g6Options(correct, decimals, mistakes) {
+    const p = Math.pow(10, decimals);
+    const round = (x) => Math.round((+x) * p) / p;
+    const clean = (x) => {
+      let s = round(x).toFixed(decimals);
+      if (s.indexOf('.') >= 0) s = s.replace(/0+$/, '').replace(/\.$/, '');
+      return s === '-0' ? '0' : s;
+    };
+    const correctV = round(correct);
+    const seen = new Set([correctV]);
+    const vals = [correctV];
+    for (const m of (mistakes || [])) {
+      if (vals.length >= 4) break;
+      if (typeof m !== 'number' || !isFinite(m) || m < 0) continue;
+      const v = round(m);
+      if (!seen.has(v)) { seen.add(v); vals.push(v); }
+    }
+    let k = 1;
+    while (vals.length < 4 && k <= 1000) {
+      const v = round(correctV + 0.1 * k);
+      if (v >= 0 && !seen.has(v)) { seen.add(v); vals.push(v); }
+      k++;
+    }
+    let pad = 1;
+    while (vals.length < 4) {
+      const v = correctV + pad;
+      if (!seen.has(v)) { seen.add(v); vals.push(v); }
+      pad++;
+    }
+    const correctStr = clean(correctV);
+    const order = shuffle(vals.slice(0, 4).map(clean));
+    return { answers: order, correctIdx: order.indexOf(correctStr) };
+  }
+
+  // L1: divide decimals (6.NS.3). a / b exact to 2 dp (built from a 2-dp quotient).
+  function genG6DecDivide() {
+    const b = ri(2, 9);
+    const q = +(ri(105, 925) / 100).toFixed(2);   // 1.05 to 9.25, two decimals
+    const a = +(q * b).toFixed(2);                 // exact 2-dp dividend
+    const driver = pick(DRIVERS);
+    const mistakes = [
+      q * 10,             // decimal point shifted one place right
+      q / 10,             // decimal point shifted one place left
+      a - b,              // subtracted instead of dividing
+      +(q + 0.1).toFixed(2),
+      +(q - 0.1).toFixed(2),
+      Math.round(q),      // dropped the decimal entirely
+    ];
+    const { answers, correctIdx } = g6Options(q, 2, mistakes);
+    return {
+      topic: 'g6-dec-divide',
+      prompt: pick([
+        `Engineer to ${driver.last}: <em>"We burned <strong>${a} kg</strong> of fuel over <strong>${b}</strong> equal stints. Fuel <strong>per stint</strong>?"</em>`,
+        `Pit wall: <em>"<strong>${a} L</strong> across <strong>${b}</strong> identical stints. How much per stint?"</em>`,
+        `Strategy: <strong>${a}</strong> shared evenly over <strong>${b}</strong> stints. One stint's value?`,
+        `Crofty: <em>"${driver.last} splits <strong>${a}</strong> by <strong>${b}</strong>. Per-stint figure (2 dp)?"</em>`,
+        `Telemetry feed: <strong>${a} ÷ ${b}</strong>. Answer to two decimal places?`,
+      ]),
+      answers,
+      correctIdx,
+      explain: `Divide: ${a} ÷ ${b} = <strong>${q}</strong>. Keep the decimal point in the quotient lined up over the dividend and divide as with whole numbers.`,
+      check: { op: 'div', operands: [a, b], answer: q },
+    };
+  }
+
+  // L2: add / subtract / multiply decimals (6.NS.3).
+  function genG6DecOps() {
+    const mode = pick(['add', 'sub', 'mul']);
+    const driver = pick(DRIVERS);
+    if (mode === 'mul') {
+      const dec = +(ri(15, 95) / 100).toFixed(2);  // 0.15 to 0.95 (hundredths)
+      const whole = ri(3, 12);
+      const ans = +(dec * whole).toFixed(2);        // (k/100)*int ⇒ exact ≤2 dp
+      const mistakes = [
+        dec + whole,                  // added instead of multiplying
+        ans * 10,                     // decimal misplaced (too far right)
+        ans / 10,                     // decimal misplaced (too far left)
+        +(dec * (whole - 1)).toFixed(2),
+        +(dec * (whole + 1)).toFixed(2),
+        Math.round(ans),
+      ];
+      const { answers, correctIdx } = g6Options(ans, 2, mistakes);
+      return {
+        topic: 'g6-dec-ops',
+        prompt: pick([
+          `Pirelli: <em>"Tires drop <strong>${dec} s</strong> of grip per lap. Over <strong>${whole}</strong> laps, total time lost?"</em>`,
+          `Engineer: <em>"Deg is <strong>${dec}</strong> s/lap for <strong>${whole}</strong> laps. Cumulative loss?"</em>`,
+          `Stint math: <strong>${dec}</strong> × <strong>${whole}</strong> laps. Total degradation?`,
+          `${driver.last}'s run: <strong>${dec} s</strong> bleed each lap, <strong>${whole}</strong> laps. Total?`,
+        ]),
+        answers,
+        correctIdx,
+        explain: `Multiply: ${dec} × ${whole} = <strong>${ans}</strong>. Multiply as whole numbers, then place the decimal so the product has the same number of decimal places as the factors.`,
+        check: { op: 'mul', operands: [dec, whole], answer: ans },
+      };
+    }
+    const x = +(ri(500, 1200) / 100).toFixed(2);   // 5.00 to 12.00
+    const y = +(ri(100, 499) / 100).toFixed(2);    // 1.00 to 4.99  (so x > y)
+    if (mode === 'add') {
+      const ans = +(x + y).toFixed(2);
+      const mistakes = [
+        x - y,                        // subtracted instead of adding
+        +(ans + 0.1).toFixed(2),
+        +(ans - 0.1).toFixed(2),
+        ans * 10,                     // misplaced decimal
+        Math.round(x) + Math.round(y),// rounded too early
+        +(ans + 1).toFixed(2),
+      ];
+      const { answers, correctIdx } = g6Options(ans, 2, mistakes);
+      return {
+        topic: 'g6-dec-ops',
+        prompt: pick([
+          `Pit wall: <em>"Pit-lane loss <strong>${x} s</strong> plus stop time <strong>${y} s</strong>. Total time lost?"</em>`,
+          `Engineer: <em>"Sector splits <strong>${x}</strong> and <strong>${y}</strong>. Add them for the combined time?"</em>`,
+          `${driver.last}'s gap grows by <strong>${x} s</strong> then <strong>${y} s</strong>. New total gap?`,
+          `Telemetry: <strong>${x} + ${y}</strong>. Sum to two decimals?`,
+        ]),
+        answers,
+        correctIdx,
+        explain: `Add: ${x} + ${y} = <strong>${ans}</strong>. Line up the decimal points and add column by column.`,
+        check: { op: 'add', operands: [x, y], answer: ans },
+      };
+    }
+    const ans = +(x - y).toFixed(2);                // x > y ⇒ positive
+    const mistakes = [
+      x + y,                          // added instead of subtracting
+      +(ans + 0.1).toFixed(2),
+      +(ans - 0.1).toFixed(2),
+      ans * 10,                       // misplaced decimal
+      Math.round(x) - Math.round(y),  // rounded too early
+      +(ans + 1).toFixed(2),
+    ];
+    const { answers, correctIdx } = g6Options(ans, 2, mistakes);
+    return {
+      topic: 'g6-dec-ops',
+      prompt: pick([
+        `Engineer: <em>"${driver.last} laps in <strong>${x} s</strong>; the tow was worth <strong>${y} s</strong>. Corrected lap is <strong>${x} − ${y}</strong>. Result?"</em>`,
+        `Pit wall: <em>"Lap was <strong>${x} s</strong>, target <strong>${y} s</strong> quicker. How far off is the difference ${x} − ${y}?"</em>`,
+        `Strategy: <strong>${x} s</strong> fuel-corrected, minus a <strong>${y} s</strong> tow. Net time?`,
+        `Telemetry: <strong>${x} − ${y}</strong>. Difference to two decimals?`,
+      ]),
+      answers,
+      correctIdx,
+      explain: `Subtract: ${x} − ${y} = <strong>${ans}</strong>. Line up the decimal points and subtract column by column, borrowing where needed.`,
+      check: { op: 'sub', operands: [x, y], answer: ans },
+    };
+  }
+
+  // L3: unit rate (6.RP.2 / 6.RP.3b): pace or speed = distance / time, exact.
+  function genG6UnitRate() {
+    const t = ri(2, 8);
+    const r = +(ri(150, 320) / 100).toFixed(2);    // 1.50 to 3.20 per unit
+    const d = +(r * t).toFixed(2);                  // exact 2-dp distance
+    const driver = pick(DRIVERS);
+    const unit = pick(['lap', 'minute']);
+    const mistakes = [
+      d - t,              // subtracted instead of dividing
+      r * 10,             // decimal shifted right
+      r / 10,             // decimal shifted left
+      +(r + 0.1).toFixed(2),
+      +(r - 0.1).toFixed(2),
+      d + t,              // added instead of dividing
+    ];
+    const { answers, correctIdx } = g6Options(r, 2, mistakes);
+    return {
+      topic: 'g6-unit-rate',
+      prompt: pick([
+        `Engineer: <em>"${driver.last} covered <strong>${d} km</strong> in <strong>${t}</strong> ${unit}s. <strong>Unit rate</strong> (km per ${unit})?"</em>`,
+        `Pit wall: <em>"<strong>${d} km</strong> over <strong>${t}</strong> ${unit}s. Distance per ${unit}?"</em>`,
+        `Strategy: ${d} km in ${t} ${unit}s. What is the km-per-${unit} pace?`,
+        `Telemetry: rate = <strong>${d} ÷ ${t}</strong> km/${unit}. Value (2 dp)?`,
+      ]),
+      answers,
+      correctIdx,
+      explain: `A unit rate is distance ÷ time: ${d} ÷ ${t} = <strong>${r}</strong> km per ${unit}. Dividing by the number of ${unit}s gives the amount for exactly one.`,
+      check: { op: 'div', operands: [d, t], answer: r },
+    };
+  }
+
+  // L4: percent of a quantity (6.RP.3c): rate% of base. answer = rate*base/100.
+  function genG6Percent() {
+    const rate = pick([10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 75, 80, 90]); // multiples of 5
+    const base = pick([20, 40, 60, 80, 120, 140, 160, 200, 240]);            // multiples of 20
+    const ans = rate * base / 100;   // (rate/5)*(base/20) ⇒ always a whole number
+    const driver = pick(DRIVERS);
+    const mistakes = [
+      rate,                 // reported the percent itself, not the amount
+      base - ans,           // computed the remaining part
+      rate * base / 10,     // decimal misplaced (10× too big)
+      rate * base / 1000,   // decimal misplaced (10× too small)
+      base,                 // used the whole base
+      ans + 1,
+      ans - 1,
+    ];
+    const { answers, correctIdx } = g6Options(ans, 2, mistakes);
+    return {
+      topic: 'g6-percent',
+      prompt: pick([
+        `Engineer: <em>"The tank holds <strong>${base} L</strong>. ${driver.last} has used <strong>${rate}%</strong>. Liters used?"</em>`,
+        `Strategy: <em>"<strong>${rate}%</strong> of the <strong>${base}</strong>-lap race is done. How many laps?"</em>`,
+        `Pit wall: what is <strong>${rate}%</strong> of <strong>${base}</strong>?`,
+        `Telemetry: tire life is <strong>${base}</strong> units; <strong>${rate}%</strong> is gone. Units gone?`,
+      ]),
+      answers,
+      correctIdx,
+      explain: `Percent of a quantity: ${rate}% of ${base} = ${rate}/100 × ${base} = <strong>${ans}</strong>. Convert the percent to a fraction (or decimal) and multiply by the whole.`,
+      check: { op: 'percent', operands: [rate, base], answer: ans },
+    };
+  }
+
+  // L5: statistics (6.SP.5): mean, median, or range of 5 lap times.
+  function genG6Stats() {
+    const op = pick(['mean', 'median', 'range']);
+    const driver = pick(DRIVERS);
+    const vt = [];                                  // lap times in tenths of a second
+    for (let i = 0; i < 4; i++) vt.push(ri(800, 950));
+    const partial = vt.reduce((a, b) => a + b, 0);
+    let fifth = ri(800, 950);
+    fifth += ((5 - ((partial + fifth) % 5)) % 5);   // force sum ≡ 0 (mod 5) ⇒ clean mean
+    if (fifth > 950) fifth -= 5;
+    vt.push(fifth);
+    const vals = vt.map(t => +(t / 10).toFixed(1));
+    const sorted = vals.slice().sort((a, b) => a - b);
+    const sum = +(vals.reduce((a, b) => a + b, 0)).toFixed(1);
+    const mean = +(sum / 5).toFixed(1);
+    const median = sorted[2];
+    const range = +(sorted[4] - sorted[0]).toFixed(1);
+    const list = vals.map(v => v.toFixed(1)).join(', ');
+    let ans, mistakes, label, how;
+    if (op === 'mean') {
+      ans = mean;
+      label = 'average (mean)';
+      how = `Mean = sum ÷ count = ${sum} ÷ 5 = <strong>${mean}</strong>.`;
+      mistakes = [median, sum, +(sum / 4).toFixed(1), range, +(mean + 0.1).toFixed(1), +(mean - 0.1).toFixed(1), sorted[4]];
+    } else if (op === 'median') {
+      ans = median;
+      label = 'middle (median)';
+      how = `Sort the five times, then take the middle one: <strong>${median}</strong>.`;
+      mistakes = [mean, sorted[0], sorted[4], range, vals[2], +(median + 0.1).toFixed(1), +(median - 0.1).toFixed(1)];
+    } else {
+      ans = range;
+      label = 'range (slowest − fastest)';
+      how = `Range = max − min = ${sorted[4]} − ${sorted[0]} = <strong>${range}</strong>.`;
+      mistakes = [sorted[4] + sorted[0], mean, median, sorted[4], +(range + 0.1).toFixed(1), +(range - 0.1).toFixed(1)];
+    }
+    const { answers, correctIdx } = g6Options(ans, 1, mistakes);
+    return {
+      topic: 'g6-stats',
+      prompt: pick([
+        `Engineer: <em>"${driver.last}'s last five laps: <strong>${list}</strong> s. Find the <strong>${label}</strong> lap time."</em>`,
+        `Timing tower shows ${driver.last}'s five laps: <strong>${list}</strong> s. What is the <strong>${label}</strong>?`,
+        `Pit wall data set <strong>${list}</strong> (seconds). Report the <strong>${label}</strong>.`,
+      ]),
+      answers,
+      correctIdx,
+      explain: how,
+      check: { op, operands: vals, answer: ans },
+    };
+  }
+
+  // L6: random pick of the five grade-6 generators.
+  function genG6AllMix() {
+    return pick([genG6DecDivide, genG6DecOps, genG6UnitRate, genG6Percent, genG6Stats])();
+  }
+
   const GEN_BY_TYPE = {
+    // Grade 6 (6.NS / 6.RP / 6.SP) keys checked first; grade-5 keys below unchanged.
+    'g6-dec-divide': genG6DecDivide,
+    'g6-dec-ops':    genG6DecOps,
+    'g6-unit-rate':  genG6UnitRate,
+    'g6-percent':    genG6Percent,
+    'g6-stats':      genG6Stats,
+    'g6-allmix':     genG6AllMix,
     'place-value':  () => { const r = Math.random(); return r < 0.4 ? genPlaceValue() : (r < 0.7 ? genWriteWord() : genExpand()); },
     'compare-order': () => Math.random() < 0.7 ? genCompareOrder() : genRound(),
     'add-sub':      genAddSub,
@@ -5194,7 +5960,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   InlineModules['f1-decimals'] = {
     init(host, levelIndex, callbacks) {
-      const lvl = F1_LEVELS[levelIndex];
+      const lvl = (typeof ACTIVE_GRADE !== 'undefined' && ACTIVE_GRADE === 6 && typeof F1_LEVELS_6 !== 'undefined') ? F1_LEVELS_6[levelIndex] : F1_LEVELS[levelIndex];
       const totalQ = QPL[levelIndex];
 
       const state = {
@@ -5513,6 +6279,17 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     { id: 4, name: 'Beskar Path',             gridMax: 5,  quadrants: 4, mix: 'path' },
     { id: 5, name: 'Imperial Mirror',         gridMax: 5,  quadrants: 4, mix: 'reflect' },
     { id: 6, name: 'Distance to Tatooine',    gridMax: 8,  quadrants: 1, mix: 'distance' },
+  ];
+  // Grade 6 (6.NS.6 / 6.NS.8 four-quadrant plane + 6.G.1 / 6.G.3 area on the grid).
+  // Same Mando/Grogu theme; selected only when ACTIVE_GRADE === 6. Grade-5 RC_LEVELS
+  // above is untouched. RC_QPL (15,18,18,20,20,20) is shared by both grades.
+  const RC_LEVELS_6 = [
+    { id: 1, name: 'Quadrant Lock',         gridMax: 6,  quadrants: 4, mix: 'g6-quadrant' },
+    { id: 2, name: 'Imperial Mirror Run',   gridMax: 6,  quadrants: 4, mix: 'g6-reflect' },
+    { id: 3, name: 'Hyperlane Distance',    gridMax: 8,  quadrants: 4, mix: 'g6-distance' },
+    { id: 4, name: 'Beskar Bay Survey',     gridMax: 8,  quadrants: 4, mix: 'g6-rect-area' },
+    { id: 5, name: 'Mythosaur Wedge',       gridMax: 10, quadrants: 4, mix: 'g6-tri-area' },
+    { id: 6, name: "Navigator's Gauntlet",  gridMax: 8,  quadrants: 4, mix: 'g6-allmix' },
   ];
   const RC_QPL = [15, 18, 18, 20, 20, 20];
 
@@ -5914,12 +6691,16 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const refX = axis === 'y-axis' ? -x : x;
     const refY = axis === 'x-axis' ? -y : y;
     const correct = `(${refX}, ${refY})`;
-    const opts = new Set([correct]);
-    opts.add(`(${-refX}, ${refY})`);
-    opts.add(`(${refX}, ${-refY})`);
-    opts.add(`(${x}, ${y})`);
-    const arr = shuffle(Array.from(opts).slice(0, 4));
-    while (arr.length < 4) arr.push(`(${ri(-gridMax, gridMax)}, ${ri(-gridMax, gridMax)})`);
+    // The four sign-combinations of (x, y) are always distinct when x,y != 0 and always
+    // include the correct reflection plus three meaningful mistakes (did-nothing,
+    // wrong-axis, reflected-through-origin). No collapse, no random pad that could duplicate
+    // the correct point.
+    const arr = shuffle([
+      `(${x}, ${y})`,
+      `(${-x}, ${y})`,
+      `(${x}, ${-y})`,
+      `(${-x}, ${-y})`,
+    ]);
     return {
       topic: 'coord-reflect',
       type: 'mc',
@@ -6171,10 +6952,224 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     };
   }
 
+  // ===== Grade 6 (6.NS.6 / 6.NS.8 four-quadrant plane + 6.G.1 / 6.G.3 area) =====
+  // Grade-5 generators above are untouched; these run only for the RC_LEVELS_6 gen ids.
+  // Each returns the standard MC shape PLUS a `check` verification field with a fixed
+  // contract, and always sets exactly 4 distinct answers with one correctIdx.
+
+  // L1. Name the quadrant of a point with NEGATIVE coords (6.NS.6).
+  function genG6Quadrant(gridMax) {
+    const x = ri(1, gridMax) * (Math.random() < 0.5 ? -1 : 1);
+    const y = ri(1, gridMax) * (Math.random() < 0.5 ? -1 : 1);
+    let rn;
+    if (x > 0 && y > 0) rn = 'I';
+    else if (x < 0 && y > 0) rn = 'II';
+    else if (x < 0 && y < 0) rn = 'III';
+    else rn = 'IV';
+    const answer = 'Quadrant ' + rn;
+    const answers = shuffle(['Quadrant I', 'Quadrant II', 'Quadrant III', 'Quadrant IV']);
+    return {
+      topic: 'g6-quadrant',
+      type: 'mc',
+      gridMax, quadrants: 4,
+      markers: [{ x, y, label: '?', color: '#ff8000' }],
+      prompt: pick([
+        `Imperial probe pings <strong>(${x}, ${y})</strong>. <strong>Which quadrant</strong> is it hiding in?`,
+        `Mando reads a contact at <strong>(${x}, ${y})</strong>. Name the <strong>quadrant</strong>.`,
+        `Grogu points to <strong>(${x}, ${y})</strong> on the navicomp. <strong>Quadrant</strong>?`,
+        `Beskar sensor flags <strong>(${x}, ${y})</strong>. Lock the <strong>quadrant</strong>.`,
+      ]),
+      answers,
+      correctIdx: answers.indexOf(answer),
+      explain: `x = ${x} is ${x > 0 ? 'positive (right)' : 'negative (left)'} and y = ${y} is ${y > 0 ? 'positive (up)' : 'negative (down)'}, so <strong>(${x}, ${y})</strong> sits in <strong>${answer}</strong>. (Quadrants run counter-clockwise from the top-right: I, II, III, IV.)`,
+      check: { op: 'quadrant', point: [x, y], answer },
+    };
+  }
+
+  // L2. Reflect a point across the x-axis or y-axis (6.NS.6).
+  function genG6Reflect(gridMax) {
+    const axis = pick(['x-axis', 'y-axis']);
+    const x = ri(1, gridMax) * (Math.random() < 0.5 ? -1 : 1);
+    const y = ri(1, gridMax) * (Math.random() < 0.5 ? -1 : 1);
+    const rx = axis === 'y-axis' ? -x : x;
+    const ry = axis === 'x-axis' ? -y : y;
+    const answer = `(${rx}, ${ry})`;
+    // The four sign-combinations of (x, y) are all distinct when x,y != 0 and always
+    // include the correct reflection plus three meaningful mistakes (did nothing,
+    // wrong axis, reflected through the origin).
+    const answers = shuffle([
+      `(${x}, ${y})`,
+      `(${-x}, ${y})`,
+      `(${x}, ${-y})`,
+      `(${-x}, ${-y})`,
+    ]);
+    return {
+      topic: 'g6-reflect',
+      type: 'mc',
+      gridMax, quadrants: 4,
+      markers: [{ x, y, label: '?', color: '#ff8000' }],
+      prompt: pick([
+        `Imperial mirror flips <strong>(${x}, ${y})</strong> across the <strong>${axis}</strong>. <strong>New point</strong>?`,
+        `Reflect <strong>(${x}, ${y})</strong> over the <strong>${axis}</strong>. Where does the Crest land?`,
+        `Hyperdrive ghost mirrors <strong>(${x}, ${y})</strong> across the <strong>${axis}</strong>. <strong>Coords</strong>?`,
+        `Mando's jump reflects <strong>(${x}, ${y})</strong> across the <strong>${axis}</strong>. <strong>New position</strong>?`,
+      ]),
+      answers,
+      correctIdx: answers.indexOf(answer),
+      explain: axis === 'y-axis'
+        ? `Reflecting across the y-axis flips the sign of x only: (${x}, ${y}) → <strong>(${rx}, ${ry})</strong>. The y-value stays put.`
+        : `Reflecting across the x-axis flips the sign of y only: (${x}, ${y}) → <strong>(${rx}, ${ry})</strong>. The x-value stays put.`,
+      check: { op: 'reflect', point: [x, y], axis, answer },
+    };
+  }
+
+  // L3. Distance between two points that share an x or a y (6.NS.8): |difference|.
+  function genG6Distance(gridMax) {
+    const horizontal = Math.random() < 0.5;
+    let ax, ay, bx, by;
+    if (horizontal) {
+      ay = by = ri(-gridMax, gridMax);
+      ax = ri(-gridMax, gridMax);
+      do { bx = ri(-gridMax, gridMax); } while (bx === ax);
+    } else {
+      ax = bx = ri(-gridMax, gridMax);
+      ay = ri(-gridMax, gridMax);
+      do { by = ri(-gridMax, gridMax); } while (by === ay);
+    }
+    const dist = horizontal ? Math.abs(bx - ax) : Math.abs(by - ay);
+    // Pedagogical mistakes: added instead of subtracted, treated both coords as
+    // positive (forgot a negative), off by one.
+    const arr = pedDistractors(dist, [
+      Math.abs(horizontal ? ax + bx : ay + by),                                          // added instead of subtracted
+      Math.abs(horizontal ? Math.abs(bx) - Math.abs(ax) : Math.abs(by) - Math.abs(ay)),  // forgot a negative
+      Math.max(0, dist - 1),
+      dist + 1,
+    ]);
+    const answers = arr.map(n => `${n}`);
+    return {
+      topic: 'g6-distance',
+      type: 'mc',
+      gridMax, quadrants: 4,
+      markers: [{ x: ax, y: ay, label: 'A', color: '#ff8000' }, { x: bx, y: by, label: 'B', color: '#00d9ff' }],
+      prompt: pick([
+        `Beacon A at <strong>(${ax}, ${ay})</strong>, beacon B at <strong>(${bx}, ${by})</strong>. <strong>How many units apart</strong>?`,
+        `Mando jumps from <strong>(${ax}, ${ay})</strong> to <strong>(${bx}, ${by})</strong>. <strong>Distance</strong> covered?`,
+        `Sensor pings A <strong>(${ax}, ${ay})</strong> and B <strong>(${bx}, ${by})</strong>. <strong>Gap</strong> between them?`,
+        `Cargo drop A <strong>(${ax}, ${ay})</strong>, pickup B <strong>(${bx}, ${by})</strong>. <strong>Distance</strong>?`,
+      ]),
+      answers,
+      correctIdx: arr.indexOf(dist),
+      explain: horizontal
+        ? `Both points share the same y-value (${ay}), so the hop is purely horizontal. Subtract the x's: |${bx} − ${ax}| = <strong>${dist}</strong>.`
+        : `Both points share the same x-value (${ax}), so the hop is purely vertical. Subtract the y's: |${by} − ${ay}| = <strong>${dist}</strong>.`,
+      check: { op: 'distance', operands: [ax, ay, bx, by], answer: dist },
+    };
+  }
+
+  // L4. Area of an axis-aligned rectangle from two opposite corners (6.G.1 / 6.G.3).
+  function genG6RectArea(gridMax) {
+    const x1 = ri(-gridMax, gridMax);
+    let x2; do { x2 = ri(-gridMax, gridMax); } while (x2 === x1);
+    const y1 = ri(-gridMax, gridMax);
+    let y2; do { y2 = ri(-gridMax, gridMax); } while (y2 === y1);
+    const w = Math.abs(x2 - x1);
+    const h = Math.abs(y2 - y1);
+    const area = w * h;
+    // Pedagogical mistakes: perimeter, added the sides, off-by-one on one side.
+    const arr = pedDistractors(area, [
+      2 * (w + h),          // perimeter instead of area
+      w + h,                // added the sides instead of multiplying
+      (w + 1) * h,          // miscounted one side
+      w * (h + 1),
+      area + 1,
+      Math.max(0, area - 1),
+    ]);
+    const answers = arr.map(n => `${n}`);
+    return {
+      topic: 'g6-rect-area',
+      type: 'mc',
+      gridMax, quadrants: 4,
+      markers: [
+        { x: x1, y: y1, label: 'A', color: '#ff8000' },
+        { x: x2, y: y1, label: 'B', color: '#00d9ff' },
+        { x: x2, y: y2, label: 'C', color: '#ff8000' },
+        { x: x1, y: y2, label: 'D', color: '#00d9ff' },
+      ],
+      prompt: pick([
+        `Mando maps a docking bay with opposite corners <strong>(${x1}, ${y1})</strong> and <strong>(${x2}, ${y2})</strong>. <strong>Area</strong> in square units?`,
+        `Beskar landing pad runs corner <strong>(${x1}, ${y1})</strong> to <strong>(${x2}, ${y2})</strong>. <strong>How many square units</strong>?`,
+        `A rectangular hangar has opposite corners <strong>(${x1}, ${y1})</strong> and <strong>(${x2}, ${y2})</strong>. <strong>Area</strong>?`,
+        `Grogu charts a rectangle from <strong>(${x1}, ${y1})</strong> to <strong>(${x2}, ${y2})</strong>. <strong>Area enclosed</strong>?`,
+      ]),
+      answers,
+      correctIdx: arr.indexOf(area),
+      explain: `Width = |${x2} − ${x1}| = ${w}, height = |${y2} − ${y1}| = ${h}. Area = width × height = ${w} × ${h} = <strong>${area}</strong> square units.`,
+      check: { op: 'rect-area', operands: [x1, y1, x2, y2], answer: area },
+    };
+  }
+
+  // L5. Area of a triangle = base × height ÷ 2 (6.G.1), base & height off the grid.
+  function genG6TriArea(gridMax) {
+    const b = ri(2, 12);
+    const h = ri(2, 10);
+    const area = b * h / 2;            // always a whole number or an x.5 value
+    const correctStr = `${area}`;
+    // Pedagogical mistakes: forgot to halve (b*h), added the legs, off by one/half.
+    const cand = [b * h, b + h, area + 1, area - 1, area + 0.5, area - 0.5, area * 2, b * h + 1];
+    const seen = new Set([correctStr]);
+    const answers = [correctStr];
+    for (const c of cand) {
+      if (answers.length >= 4) break;
+      if (typeof c !== 'number' || !isFinite(c) || c <= 0) continue;
+      const s = `${c}`;
+      if (!seen.has(s)) { seen.add(s); answers.push(s); }
+    }
+    let pad = 2;
+    while (answers.length < 4) {
+      const s = `${area + pad}`;
+      if (!seen.has(s)) { seen.add(s); answers.push(s); }
+      pad++;
+    }
+    shuffle(answers);
+    const g = Math.max(b, h);
+    return {
+      topic: 'g6-tri-area',
+      type: 'mc',
+      gridMax: g, quadrants: 1,
+      markers: [
+        { x: 0, y: 0, label: 'A', color: '#ff8000' },
+        { x: b, y: 0, label: 'B', color: '#00d9ff' },
+        { x: 0, y: h, label: 'C', color: '#27f4d2' },
+      ],
+      prompt: pick([
+        `A triangular beskar plate has base <strong>${b}</strong> and height <strong>${h}</strong>. <strong>Area</strong> in square units?`,
+        `Mando cuts a triangle with base <strong>${b}</strong> and height <strong>${h}</strong>. <strong>How many square units</strong>?`,
+        `Grogu's triangular shield: base <strong>${b}</strong>, height <strong>${h}</strong>. <strong>Area</strong>?`,
+        `A hull panel is a triangle, base <strong>${b}</strong> and height <strong>${h}</strong>. <strong>Area enclosed</strong>?`,
+      ]),
+      answers,
+      correctIdx: answers.indexOf(correctStr),
+      explain: `Area of a triangle = base × height ÷ 2 = ${b} × ${h} ÷ 2 = <strong>${area}</strong> square units. The ÷ 2 makes it half of the matching rectangle.`,
+      check: { op: 'tri-area', operands: [b, h], answer: area },
+    };
+  }
+
+  // L6. Random pick of the five grade-6 generators (always carries a `check`).
+  function genG6AllMix(gridMax) {
+    return pick([genG6Quadrant, genG6Reflect, genG6Distance, genG6RectArea, genG6TriArea])(gridMax);
+  }
+
   function genQuestion(level) {
     const m = level.mix;
     const g = level.gridMax;
     const fourQuad = level.quadrants === 4;
+    // Grade 6 (6.NS.6 / 6.NS.8 + 6.G.1 / 6.G.3) gen ids checked first; grade-5 branches below unchanged.
+    if (m === 'g6-quadrant')  return genG6Quadrant(g);
+    if (m === 'g6-reflect')   return genG6Reflect(g);
+    if (m === 'g6-distance')  return genG6Distance(g);
+    if (m === 'g6-rect-area') return genG6RectArea(g);
+    if (m === 'g6-tri-area')  return genG6TriArea(g);
+    if (m === 'g6-allmix')    return genG6AllMix(g);
     // One generator per level — every level is a different game type.
     if (m === 'quadrant')    return genQuadrantQ(g);
     if (m === 'identify-q1') return genIdentifyQ(g, 1);
@@ -6275,7 +7270,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   InlineModules['razor-crest'] = {
     init(host, levelIndex, callbacks) {
-      const lvl = RC_LEVELS[levelIndex];
+      const lvl = (typeof ACTIVE_GRADE !== 'undefined' && ACTIVE_GRADE === 6 && typeof RC_LEVELS_6 !== 'undefined') ? RC_LEVELS_6[levelIndex] : RC_LEVELS[levelIndex];
       const totalQ = RC_QPL[levelIndex];
 
       const state = {
@@ -6499,8 +7494,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   const LEGO_LOGO = 'https://en.wikipedia.org/wiki/Special:FilePath/LEGO_logo.svg';
   const LEGO_HERO = 'art/lego-emmet-lucy.jpg';
-  // Real Unikitty SVG from Wikimedia Commons (CC BY-SA, vectorized from Cartoon Network)
-  const UNIKITTY_SVG = 'https://upload.wikimedia.org/wikipedia/commons/8/86/Unikitty_Scratch_sprite.svg';
+  // (Unikitty renders via the inline minifigSvg path, like the other five builders.)
 
   const BUILDERS = [
     { id: 'EMM', name: 'Emmet',     icon: '⛑️', color: '#FE8A18', trim: '#FFD400', line: '"I got it, guys!"' },
@@ -6619,6 +7613,20 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     { id: 5, name: 'Apocalypseburg Tower',   gen: 'lwh-bh-mix',  scene: 'wasteland', palette: ['#A0A5A9','#FE8A18','#6b4226','#C91A09'] },
     { id: 6, name: "Benny's SPACESHIP!!",    gen: 'mb-mixed',    scene: 'space',     palette: ['#0055BF','#F4F4F4','#27f4d2','#C91A09','#F2CD37'] },
   ];
+
+  // ===== Grade 6 (CCSS 6.G: area, volume incl. fractional edge lengths, surface area) =====
+  // Same LEGO Movie theme (Emmet, Bricksburg, Benny's spaceship); selected only when
+  // ACTIVE_GRADE === 6. Grade-5 MB_LEVELS above is untouched. Question counts reuse
+  // MB_QPL (15/18/18/20/20/20), so no separate per-level count table is needed.
+  const MB_LEVELS_6 = [
+    { id: 1, name: "Emmet's Baseplate",        gen: 'g6-rect-area',    scene: 'meadow',    palette: ['#C91A09','#F2CD37','#0055BF','#237841','#F4F4F4'] },
+    { id: 2, name: 'Bricksburg Rooftops',      gen: 'g6-tri-area',     scene: 'street',    palette: ['#F4F4F4','#0055BF','#05131D','#F2CD37'] },
+    { id: 3, name: "MetalBeard's Hold",        gen: 'g6-volume',       scene: 'sea',       palette: ['#6b4226','#C91A09','#F4F4F4','#FE8A18'] },
+    { id: 4, name: 'Cloud Cuckoo Half-Studs',  gen: 'g6-volume-frac',  scene: 'cloud',     palette: ['#FFB6E1','#D4A8FF','#A8E6CF','#F2CD37'] },
+    { id: 5, name: 'Apocalypseburg Cladding',  gen: 'g6-surface-area', scene: 'wasteland', palette: ['#A0A5A9','#FE8A18','#6b4226','#C91A09'] },
+    { id: 6, name: "Benny's SPACESHIP Survey", gen: 'g6-allmix',       scene: 'space',     palette: ['#0055BF','#F4F4F4','#27f4d2','#C91A09','#F2CD37'] },
+  ];
+
   const MB_QPL = [15, 18, 18, 20, 20, 20];
 
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
@@ -6918,7 +7926,168 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     return pick([genLwh, genBaseHeight, genComposite, genMissingDim, genUnitCubeCount, genCompareVol, genHollow, genScale])(builderId);
   }
 
+  // ---- Grade 6 generators (CCSS 6.G: area, volume incl. fractional edge lengths,
+  // surface area). The grade-5 generators above are untouched; these run only for the
+  // MB_LEVELS_6 gen ids. Each returns PLAIN-number answer strings (units live in the
+  // prompt/explain, never in the option text) PLUS a `check` contract
+  // { op, operands, answer } whose operands appear in the prompt and whose answer is
+  // the exact numeric value, with answers[correctIdx] === fmtNum(answer).
+  function fmtNum(n) { return Number(n.toFixed(2)).toString(); }
+
+  // Build exactly 4 DISTINCT plain-number option strings: the correct value plus the
+  // supplied pedagogical mistakes, deduped (positive only) and padded with nearby
+  // offsets. Returns { answers, correctIdx } with answers[correctIdx] === fmtNum(correct).
+  function g6Opts(correct, mistakes) {
+    const correctStr = fmtNum(correct);
+    const seen = new Set([correctStr]);
+    const answers = [correctStr];
+    for (const m of mistakes) {
+      if (answers.length >= 4) break;
+      if (typeof m !== 'number' || !isFinite(m) || m <= 0) continue;
+      const s = fmtNum(m);
+      if (!seen.has(s)) { seen.add(s); answers.push(s); }
+    }
+    let pad = 1;
+    while (answers.length < 4) {
+      const cand = correct + pad;
+      const s = fmtNum(cand);
+      if (cand > 0 && !seen.has(s)) { seen.add(s); answers.push(s); }
+      pad++;
+    }
+    shuffle(answers);
+    return { answers, correctIdx: answers.indexOf(correctStr) };
+  }
+
+  // L1 — area of a rectangular baseplate (6.G.1). check{op:'mul', operands:[l,w]}.
+  function genG6RectArea(builderId) {
+    const l = ri(2, 20), w = ri(2, 20);
+    const area = l * w;
+    const { answers, correctIdx } = g6Opts(area, [
+      2 * (l + w),    // perimeter instead of area
+      l + w,          // added the two sides instead of multiplying
+      (l + 1) * w,    // miscounted one edge
+      l * (w + 1),
+      area + 1,
+      area - 1,
+    ]);
+    return {
+      topic: 'g6-rect-area',
+      prompt: quoteFor(builderId, `This baseplate is <strong>${l}</strong> studs long by <strong>${w}</strong> studs wide. <strong>Area in square studs</strong>?`),
+      answers,
+      correctIdx,
+      explain: `Area of a rectangle = length × width. ${l} × ${w} = <strong>${area} square studs</strong>. (Its perimeter, 2 × (${l} + ${w}) = ${2*(l+w)}, is a different measurement.)`,
+      check: { op: 'mul', operands: [l, w], answer: area },
+    };
+  }
+
+  // L2 — area of a triangular roof gable (6.G.1). check{op:'tri-area', operands:[b,h]}.
+  function genG6TriArea(builderId) {
+    const b = ri(2, 16), h = ri(2, 12);
+    const area = b * h / 2;          // whole number or an x.5 value
+    const { answers, correctIdx } = g6Opts(area, [
+      b * h,          // forgot to halve
+      b + h,          // added base and height
+      area + 1,
+      area - 1,
+      area + 0.5,
+      b * h + 1,
+    ]);
+    return {
+      topic: 'g6-tri-area',
+      prompt: quoteFor(builderId, `This gable brick is a triangle with base <strong>${b}</strong> studs and height <strong>${h}</strong> studs. <strong>Area in square studs</strong>?`),
+      answers,
+      correctIdx,
+      explain: `Area of a triangle = base × height ÷ 2 = ${b} × ${h} ÷ 2 = <strong>${fmtNum(area)} square studs</strong>. The ÷ 2 makes it half of the matching rectangle.`,
+      check: { op: 'tri-area', operands: [b, h], answer: area },
+    };
+  }
+
+  // L3 — volume of a rectangular prism (6.G.2). check{op:'mul3', operands:[l,w,h]}.
+  function genG6Volume(builderId) {
+    const l = ri(2, 10), w = ri(2, 10), h = ri(2, 10);
+    const vol = l * w * h;
+    const { answers, correctIdx } = g6Opts(vol, [
+      l * w,            // dropped the height (returned base area)
+      l * h,            // dropped the width (missing a factor)
+      w * h,            // dropped the length (missing a factor)
+      l + w + h,        // added instead of multiplied
+      l * w * (h - 1),  // off-by-one layer
+      vol + l * w,
+    ]);
+    return {
+      topic: 'g6-volume',
+      prompt: quoteFor(builderId, `This brick is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. <strong>Volume in cubic studs</strong>?`),
+      answers,
+      correctIdx,
+      explain: `Volume = length × width × height = ${l} × ${w} × ${h} = <strong>${vol} cubic studs</strong>. (Multiply ${l} × ${w} = ${l*w} first, then × ${h}.)`,
+      check: { op: 'mul3', operands: [l, w, h], answer: vol },
+    };
+  }
+
+  // L4 — volume with one fractional edge length (6.G.2). One edge is a unit fraction
+  // (1/2 or 1/4) shown as a decimal; both are exact in binary float, so the product
+  // terminates to <= 2 dp. check{op:'mul3', operands:[l,w,h]}.
+  function genG6VolumeFrac(builderId) {
+    const l = ri(2, 8), w = ri(2, 8);
+    const frac = pick([0.5, 0.25]);
+    const h = frac;
+    const vol = Math.round(l * w * h * 100) / 100;   // <= 2 dp, exact for 1/2 and 1/4
+    const fracLabel = frac === 0.5 ? '1/2' : '1/4';
+    const { answers, correctIdx } = g6Opts(vol, [
+      l * w,            // ignored the fractional edge (treated it as 1)
+      l + w + h,        // added instead of multiplied
+      l * w * h * 2,    // doubled the fractional edge
+      l * w + h,
+      vol + l * w,
+      vol + 1,
+    ]);
+    return {
+      topic: 'g6-volume-frac',
+      prompt: quoteFor(builderId, `This thin tile is <strong>${l}</strong> by <strong>${w}</strong> studs, but only <strong>${h}</strong> stud (a ${fracLabel} plate) tall. <strong>Volume in cubic studs</strong>?`),
+      answers,
+      correctIdx,
+      explain: `Fractional edge lengths multiply just like whole ones. ${l} × ${w} × ${h} = ${l*w} × ${h} = <strong>${fmtNum(vol)} cubic studs</strong>.`,
+      check: { op: 'mul3', operands: [l, w, h], answer: vol },
+    };
+  }
+
+  // L5 — surface area of a rectangular prism (6.G.4). Six faces in three matching
+  // pairs. check{op:'surface-area', operands:[l,w,h], answer:2*(lw+lh+wh)}.
+  function genG6SurfaceArea(builderId) {
+    const l = ri(2, 8), w = ri(2, 8), h = ri(2, 8);
+    const sa = 2 * (l * w + l * h + w * h);
+    const { answers, correctIdx } = g6Opts(sa, [
+      l * w * h,                 // used volume instead of surface area
+      l * w + l * h + w * h,     // summed only 3 faces (forgot the × 2)
+      2 * l * w * h,
+      l * w + l * h,             // missed a face pair
+      sa + 2,
+      sa - 2,
+    ]);
+    return {
+      topic: 'g6-surface-area',
+      prompt: quoteFor(builderId, `This crate is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. To sticker every outside face, what is the <strong>surface area in square studs</strong>?`),
+      answers,
+      correctIdx,
+      explain: `Surface area = 2 × (lw + lh + wh) = 2 × (${l*w} + ${l*h} + ${w*h}) = 2 × ${l*w + l*h + w*h} = <strong>${sa} square studs</strong>. (Six faces in three matching pairs, so double the three different ones.)`,
+      check: { op: 'surface-area', operands: [l, w, h], answer: sa },
+    };
+  }
+
+  // L6 — random pick of the five grade-6 builds (always carries a `check`).
+  function genG6AllMix(builderId) {
+    return pick([genG6RectArea, genG6TriArea, genG6Volume, genG6VolumeFrac, genG6SurfaceArea])(builderId);
+  }
+
   const MB_GEN = {
+    // Grade 6 (6.G area / volume incl. fractional edges / surface area) gen ids first;
+    // grade-5 entries below are unchanged.
+    'g6-rect-area':    genG6RectArea,
+    'g6-tri-area':     genG6TriArea,
+    'g6-volume':       genG6Volume,
+    'g6-volume-frac':  genG6VolumeFrac,
+    'g6-surface-area': genG6SurfaceArea,
+    'g6-allmix':       genG6AllMix,
     'lwh':         genLwh,
     'base-height': genBaseHeight,
     'composite':   genComposite,
@@ -6931,7 +8100,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   InlineModules['master-builder'] = {
     init(host, levelIndex, callbacks) {
-      const lvl = MB_LEVELS[levelIndex];
+      const lvl = (typeof ACTIVE_GRADE !== 'undefined' && ACTIVE_GRADE === 6 && typeof MB_LEVELS_6 !== 'undefined') ? MB_LEVELS_6[levelIndex] : MB_LEVELS[levelIndex];
       const totalQ = MB_QPL[levelIndex];
 
       const state = {
@@ -6965,7 +8134,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             <div class="mb-builder-grid">
               ${BUILDERS.map(b => `
                 <div class="mb-builder" data-id="${b.id}" style="--builder-color: ${b.color}; --builder-trim: ${b.trim};">
-                  <div class="mb-mini-svg">${b.id === 'UNI' ? `<img src="${UNIKITTY_SVG}" alt="Unikitty" onerror="this.outerHTML='${minifigSvg(b).replace(/'/g, '&apos;').replace(/\n/g, '')}';">` : minifigSvg(b)}</div>
+                  <div class="mb-mini-svg">${minifigSvg(b)}</div>
                   <div class="mb-builder-name">${b.name}</div>
                   <div class="mb-builder-line">${b.line}</div>
                 </div>
@@ -7163,6 +8332,19 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     { id: 6, name: 'The Long Trip Home',       gen: 'mixed',    crisis: 'last 11.9 light-years'},
   ];
   const RK_QPL = [15, 18, 18, 20, 20, 20];
+
+  // Grade-6 campaign (CCSS 6.RP): same Project Hail Mary theme, but the math
+  // becomes ratios, unit rates, ratio tables, and percent. Selected only when
+  // ACTIVE_GRADE === 6; the grade-5 RK_LEVELS above is untouched. RK_QPL
+  // (15,18,18,20,20,20) is shared by both grades.
+  const RK_LEVELS_6 = [
+    { id: 1, name: 'Hello, Unit Rate?',        gen: 'g6-unit-rate',   crisis: 'first contact'        },
+    { id: 2, name: 'Ratio Table Handshake',    gen: 'g6-ratio-table', crisis: 'building the table'    },
+    { id: 3, name: 'Scaling the Recipe',       gen: 'g6-equiv-ratio', crisis: 'rocky needs coolant'   },
+    { id: 4, name: 'Astrophage Percent',       gen: 'g6-percent',     crisis: 'sun is dying'          },
+    { id: 5, name: 'What Percent, Question?',  gen: 'g6-percent-find', crisis: 'speak fluent eridian' },
+    { id: 6, name: 'The Long Trip Home',       gen: 'g6-allmix',      crisis: 'last 11.9 light-years' },
+  ];
 
   // Eridian units (kid-friendly conversions; not strictly canonical to keep math clean)
   const ERIDIAN = {
@@ -7495,12 +8677,29 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   function unitOpts(set, gen) { return ensureFour(set, gen); }
 
+  // Conversion distractors that are all multiples of `factor` (same "kind of number"
+  // as the answer) plus one decimal-place slip, so a round answer can't be picked by
+  // its roundness. Returns 4 shuffled options including the correct ans = x * factor.
+  function scaledOpts(ans, factor) {
+    const x = Math.round(ans / factor);
+    const set = new Set([ans]);
+    const cand = [];
+    if (factor % 10 === 0) cand.push(x * factor * 10);   // ×10 decimal slip (still a multiple of factor)
+    cand.push((x + 1) * factor, (x + 2) * factor, (x + 3) * factor);
+    if (x - 1 >= 1) cand.push((x - 1) * factor);
+    if (x - 2 >= 1) cand.push((x - 2) * factor);
+    for (const c of cand) { if (c > 0 && c !== ans) set.add(c); if (set.size >= 4) break; }
+    let k = 4;
+    while (set.size < 4) { set.add((x + k) * factor); k++; }
+    return shuffle(Array.from(set).slice(0, 4));
+  }
+
   function genMetric() {
     const variants = [
       () => { // m to cm
         const m = ri(2, 12);
         const ans = m * 100;
-        const opts = ensureFour(new Set([ans]), () => Math.max(10, ans + ri(-300, 300)));
+        const opts = scaledOpts(ans, 100);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> The Hail Mary lab is <strong>${m} meters</strong> long. <em>How many <strong>centimeters</strong> is that?</em>`,
@@ -7513,7 +8712,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // kg to g
         const kg = ri(2, 10);
         const ans = kg * 1000;
-        const opts = ensureFour(new Set([ans]), () => Math.max(100, ans + ri(-2000, 2000)));
+        const opts = scaledOpts(ans, 1000);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage sample mass is <strong>${kg} kilograms</strong>. <em>In <strong>grams</strong>?</em>`,
@@ -7526,7 +8725,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // L to mL
         const L = ri(2, 8);
         const ans = L * 1000;
-        const opts = ensureFour(new Set([ans]), () => Math.max(100, ans + ri(-1500, 1500)));
+        const opts = scaledOpts(ans, 1000);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Coolant tank holds <strong>${L} liters</strong>. <em>How many <strong>milliliters</strong>?</em>`,
@@ -7539,7 +8738,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // km to m
         const km = ri(2, 9);
         const ans = km * 1000;
-        const opts = ensureFour(new Set([ans]), () => Math.max(500, ans + ri(-2500, 2500)));
+        const opts = scaledOpts(ans, 1000);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Tau Ceti beacon, <strong>${km} kilometers</strong> distance, question. <strong>Meters</strong>?"</em>`,
@@ -7591,7 +8790,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // m to mm
         const m = ri(2, 7);
         const ans = m * 1000;
-        const opts = ensureFour(new Set([ans]), () => Math.max(100, ans + ri(-2000, 2000)));
+        const opts = scaledOpts(ans, 1000);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Spin drive nozzle is <strong>${m} meters</strong> across. <em>How many <strong>millimeters</strong>?</em>`,
@@ -7610,7 +8809,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // lb to oz
         const lb = ri(2, 8);
         const ans = lb * 16;
-        const opts = ensureFour(new Set([ans]), () => Math.max(8, ans + ri(-32, 32)));
+        const opts = scaledOpts(ans, 16);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Food ration: <strong>${lb} pounds</strong>. <em>Convert to <strong>ounces</strong>.</em>`,
@@ -7623,7 +8822,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // ft to in
         const ft = ri(2, 10);
         const ans = ft * 12;
-        const opts = ensureFour(new Set([ans]), () => Math.max(8, ans + ri(-24, 24)));
+        const opts = scaledOpts(ans, 12);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Sample tube is <strong>${ft} feet</strong> long. <em>In <strong>inches</strong>?</em>`,
@@ -7636,7 +8835,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // gal to qt
         const gal = ri(2, 8);
         const ans = gal * 4;
-        const opts = ensureFour(new Set([ans]), () => Math.max(2, ans + ri(-6, 6)));
+        const opts = scaledOpts(ans, 4);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Water reserve <strong>${gal} gallons</strong>. <em>In <strong>quarts</strong>?</em>`,
@@ -7649,7 +8848,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // qt to pt
         const qt = ri(2, 9);
         const ans = qt * 2;
-        const opts = ensureFour(new Set([ans]), () => Math.max(2, ans + ri(-6, 6)));
+        const opts = scaledOpts(ans, 2);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Bouillon pouch <strong>${qt} quarts</strong>. <em>How many <strong>pints</strong>?</em>`,
@@ -7662,7 +8861,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // yd to ft
         const yd = ri(2, 9);
         const ans = yd * 3;
-        const opts = ensureFour(new Set([ans]), () => Math.max(3, ans + ri(-8, 8)));
+        const opts = scaledOpts(ans, 3);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Tunnel length <strong>${yd} yards</strong>, question. <strong>Feet</strong>?"</em>`,
@@ -7675,7 +8874,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // pt to c
         const pt = ri(2, 8);
         const ans = pt * 2;
-        const opts = ensureFour(new Set([ans]), () => Math.max(2, ans + ri(-5, 5)));
+        const opts = scaledOpts(ans, 2);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Soup pouch <strong>${pt} pints</strong>. <em>How many <strong>cups</strong>?</em>`,
@@ -7688,7 +8887,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // mi to yd
         const mi = ri(1, 4);
         const ans = mi * 1760;
-        const opts = ensureFour(new Set([ans]), () => Math.max(500, ans + ri(-1000, 1000)));
+        const opts = scaledOpts(ans, 1760);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Beacon <strong>${mi} mile${mi>1?'s':''}</strong> away. <em>In <strong>yards</strong>?</em>`,
@@ -7720,7 +8919,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // hr to min
         const hr = ri(2, 8);
         const ans = hr * 60;
-        const opts = ensureFour(new Set([ans]), () => Math.max(10, ans + ri(-60, 60)));
+        const opts = scaledOpts(ans, 60);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Cooling cycle <strong>${hr} hours</strong>, question. Convert to <strong>minutes</strong>?"</em>`,
@@ -7733,7 +8932,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // day to hr
         const d = ri(2, 7);
         const ans = d * 24;
-        const opts = ensureFour(new Set([ans]), () => Math.max(8, ans + ri(-12, 12)));
+        const opts = scaledOpts(ans, 24);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Trip take <strong>${d} days</strong>, question. <strong>Hours</strong>?"</em>`,
@@ -7746,7 +8945,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // min to sec
         const m = ri(2, 8);
         const ans = m * 60;
-        const opts = ensureFour(new Set([ans]), () => Math.max(10, ans + ri(-30, 30)));
+        const opts = scaledOpts(ans, 60);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Spin drive burn <strong>${m} minutes</strong>. <strong>Seconds</strong>?"</em>`,
@@ -7772,7 +8971,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // hr to min (alt phrasing)
         const hr = ri(2, 9);
         const ans = hr * 60;
-        const opts = ensureFour(new Set([ans]), () => Math.max(10, ans + ri(-60, 60)));
+        const opts = scaledOpts(ans, 60);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Sleep cycle ran <strong>${hr} hours</strong>. <em>How many <strong>minutes</strong>?</em>`,
@@ -7798,7 +8997,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // wk to days
         const wk = ri(2, 6);
         const ans = wk * 7;
-        const opts = ensureFour(new Set([ans]), () => Math.max(2, ans + ri(-6, 6)));
+        const opts = scaledOpts(ans, 7);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Coma duration was <strong>${wk} weeks</strong>. <em>How many <strong>days</strong>?</em>`,
@@ -7811,7 +9010,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // hr to sec (multistep but single ratio for variety)
         const hr = ri(2, 5);
         const ans = hr * 3600;
-        const opts = ensureFour(new Set([ans]), () => Math.max(1000, ans + ri(-3000, 3000)));
+        const opts = scaledOpts(ans, 3600);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Burn complete <strong>${hr} hours</strong>, friend. Express <strong>seconds</strong>, question?"</em>`,
@@ -7845,7 +9044,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const km = ri(3, 8);
         const ansM = km * 1000;
         const ansCm = ansM * 100;
-        const opts = ensureFour(new Set([ansCm]), () => Math.max(1000, ansCm + ri(-100000, 100000)));
+        const opts = scaledOpts(ansCm, 100000);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Beacon <strong>${km} kilometers</strong> away. Distance in <strong>centimeters</strong>?"</em>`,
@@ -7859,7 +9058,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const days = ri(3, 7);
         const ansHr = days * 24;
         const ansMin = ansHr * 60;
-        const opts = ensureFour(new Set([ansMin]), () => Math.max(60, ansMin + ri(-2000, 2000)));
+        const opts = scaledOpts(ansMin, 1440);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Repair takes <strong>${days} days</strong> straight. How many <strong>minutes</strong>?`,
@@ -7873,7 +9072,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const m = ri(2, 6);
         const ansCm = m * 100;
         const ansMm = ansCm * 10;
-        const opts = ensureFour(new Set([ansMm]), () => Math.max(100, ansMm + ri(-2000, 2000)));
+        const opts = scaledOpts(ansMm, 1000);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Tunnel <strong>${m} meters</strong>, question. Convert <strong>millimeters</strong>, friend."</em>`,
@@ -7886,7 +9085,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // gal → cups (gal × 4 qt × 2 pt × 2 c = ×16)
         const gal = ri(2, 5);
         const ans = gal * 16;
-        const opts = ensureFour(new Set([ans]), () => Math.max(4, ans + ri(-12, 12)));
+        const opts = scaledOpts(ans, 16);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Water reserve <strong>${gal} gallons</strong>. <em>In <strong>cups</strong>?</em>`,
@@ -7914,7 +9113,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       () => { // ft → in via simple (ft × 12)
         const ft = ri(2, 8);
         const ans = ft * 12;
-        const opts = ensureFour(new Set([ans]), () => Math.max(8, ans + ri(-24, 24)));
+        const opts = scaledOpts(ans, 12);
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, hatch is <strong>${ft} feet</strong> across. <strong>Inches</strong>?"</em>`,
@@ -7929,7 +9128,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const days = wk * 7;
         const hr = days * 24;
         const min = hr * 60;
-        const opts = ensureFour(new Set([min]), () => Math.max(60, min + ri(-5000, 5000)));
+        const opts = scaledOpts(min, 10080);
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Coma was <strong>${wk} week${wk>1?'s':''}</strong>. How many <strong>minutes</strong> total?`,
@@ -7971,7 +9170,194 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     return pick(fns)();
   }
 
+  // ============================================================
+  // GRADE 6 (CCSS 6.RP) generators — ratios, unit rates, ratio
+  // tables, and percent. Same Rocky/Grace "question?" voice; the
+  // grade-5 generators above are untouched. Each returns the
+  // standard { topic, prompt, answers:[4], correctIdx, explain, dict }
+  // shape PLUS a `check:{op,operands,answer}` contract used by the
+  // verification harness. Answer options are plain numbers (units
+  // live only in the prompt/explanation). These run only for the
+  // RK_LEVELS_6 gen ids.
+  // ============================================================
+
+  // L1 — Unit rate (6.RP.2 / 6.RP.3b): total ÷ quantity, exact.
+  function genG6UnitRate() {
+    const qty = ri(3, 8);
+    const rate = ri(2, 9);                 // whole per-unit rate
+    const total = rate * qty;              // exact total
+    const ans = total / qty;               // = rate, a whole number
+    const opts = pedDistractors(ans, [
+      total,                               // forgot to divide (used the total)
+      total * qty,                         // multiplied instead of divided
+      qty,                                 // used the quantity as the rate
+      rate * 10,                           // off by a factor of 10
+      qty + rate,                          // added instead of dividing
+      Math.max(1, rate - 1), rate + 1,
+    ]);
+    const correctIdx = opts.indexOf(ans);
+    const sc = pick([
+      { tag: 'grace', noun: 'grams of astrophage fuel', per: 'jiff',  ulabel: 'grams per jiff'  },
+      { tag: 'rocky', noun: 'meters of tunnel dug',     per: 'hour',  ulabel: 'meters per hour' },
+      { tag: 'grace', noun: 'liters of coolant pumped', per: 'cycle', ulabel: 'liters per cycle'},
+      { tag: 'rocky', noun: 'kels of cable spun',       per: 'jiff',  ulabel: 'kels per jiff'   },
+    ]);
+    const prompt = sc.tag === 'grace'
+      ? `<span class="rk-grace-tag">GRACE</span> The Hail Mary used <strong>${total} ${sc.noun}</strong> over <strong>${qty} ${sc.per}s</strong>. <em>Unit rate (${sc.ulabel})?</em>`
+      : `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, <strong>${total} ${sc.noun}</strong> across <strong>${qty} ${sc.per}s</strong>, question. Rate per ${sc.per}, question?"</em>`;
+    return {
+      topic: 'g6-unit-rate',
+      prompt,
+      answers: opts.map(o => '' + o),
+      correctIdx,
+      dict: { rocky: `${total} : ${qty}`, grace: `${ans} per ${sc.per}` },
+      explain: `A unit rate is total ÷ quantity: ${total} ÷ ${qty} = <strong>${ans}</strong> ${sc.ulabel}. Dividing by the number of ${sc.per}s gives the amount for exactly one.`,
+      check: { op: 'div', operands: [total, qty], answer: ans },
+    };
+  }
+
+  // L2 — Ratio table (6.RP.3a): a:b = c:x, x = b·c/a (whole).
+  function genG6RatioTable() {
+    const a = ri(2, 6);
+    const scale = ri(2, 6);
+    const c = a * scale;                   // c is a multiple of a ⇒ x is whole
+    const b = ri(2, 9);
+    const x = b * c / a;                   // = b·scale, whole
+    const opts = pedDistractors(x, [
+      b * c,                               // multiplied across, forgot to divide
+      c,                                   // used the scaled first quantity
+      b + (c - a),                         // additive error (kept the gap constant)
+      b * (scale + 1),                     // over-scaled by one step
+      Math.max(1, b * (scale - 1)),        // under-scaled by one step
+      x + scale,
+    ]);
+    const correctIdx = opts.indexOf(x);
+    const prompt = pick([
+      `<span class="rk-grace-tag">GRACE</span> Rocky's alloy is <strong>${a} mol xenonite</strong> to <strong>${b} mol ammonia</strong>. His table scales the xenonite to <strong>${c} mol</strong>. <em>How much ammonia keeps the ratio?</em>`,
+      `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, ratio table. <strong>${a} : ${b}</strong>, question. First column grows to <strong>${c}</strong>. Second column, question?"</em>`,
+      `<span class="rk-grace-tag">GRACE</span> The fuel mix is <strong>${a}</strong> parts astrophage to <strong>${b}</strong> parts water. Scaling astrophage to <strong>${c}</strong> parts, <em>how many parts water?</em>`,
+    ]);
+    return {
+      topic: 'g6-ratio-table',
+      prompt,
+      answers: opts.map(o => '' + o),
+      correctIdx,
+      dict: { rocky: `${a} : ${b}`, grace: `${c} : ${x}` },
+      explain: `Same ratio, scaled. ${a} grows to ${c} (×${scale}), so ${b} grows the same way: ${b} × ${scale} = <strong>${x}</strong>. Cross-check: ${b} × ${c} ÷ ${a} = ${x}.`,
+      check: { op: 'proportion', operands: [a, b, c], answer: x },
+    };
+  }
+
+  // L3 — Equivalent ratio (6.RP.3a): scale the ratio; same contract.
+  function genG6EquivRatio() {
+    const a = ri(2, 7);
+    const scale = ri(2, 6);
+    const c = a * scale;                   // c is a multiple of a ⇒ x is whole
+    const b = ri(2, 9);
+    const x = b * c / a;                   // = b·scale, whole
+    const opts = pedDistractors(x, [
+      b * c,                               // cross-multiplied, forgot to divide
+      c,                                   // used the new first term
+      b + (c - a),                         // additive error
+      b * (scale + 1),                     // over-scaled
+      Math.max(1, b * (scale - 1)),        // under-scaled
+      x + scale,
+    ]);
+    const correctIdx = opts.indexOf(x);
+    const prompt = pick([
+      `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, ratio <strong>${a} : ${b}</strong>, question. Scale first part to <strong>${c}</strong>. Second part, equal ratio, question?"</em>`,
+      `<span class="rk-grace-tag">GRACE</span> Make <strong>${a} : ${b}</strong> equivalent with a first term of <strong>${c}</strong>. <em>What is the new second term?</em>`,
+      `<span class="rk-grace-tag">GRACE</span> The Eridian signal repeats <strong>${a} : ${b}</strong>. Rocky stretches it so the first count is <strong>${c}</strong>. <em>Second count?</em>`,
+    ]);
+    return {
+      topic: 'g6-equiv-ratio',
+      prompt,
+      answers: opts.map(o => '' + o),
+      correctIdx,
+      dict: { rocky: `${a} : ${b}`, grace: `${c} : ${x}` },
+      explain: `Equivalent ratios scale by the same factor. ${a} → ${c} is ×${scale}, so ${b} → ${b} × ${scale} = <strong>${x}</strong>.`,
+      check: { op: 'proportion', operands: [a, b, c], answer: x },
+    };
+  }
+
+  // L4 — Percent of a quantity (6.RP.3c): rate% of base = rate·base/100.
+  function genG6Percent() {
+    const rate = pick([10, 15, 20, 25, 30, 40, 50, 60, 75, 80]); // multiples of 5
+    const base = pick([20, 40, 60, 80, 120, 140, 160, 200, 240]);// multiples of 20
+    const ans = rate * base / 100;         // always a whole number
+    const opts = pedDistractors(ans, [
+      rate,                                // reported the percent itself
+      base,                                // used the whole base
+      base - ans,                          // computed the remaining part
+      rate * base / 10,                    // off by a factor of 10 (too big)
+      rate * base / 1000,                  // off by a factor of 10 (too small)
+      ans + 1, Math.max(1, ans - 1),
+    ]);
+    const correctIdx = opts.indexOf(ans);
+    const prompt = pick([
+      `<span class="rk-grace-tag">GRACE</span> The fuel bay holds <strong>${base} kg</strong> of astrophage. Rocky burned <strong>${rate}%</strong>. <em>How many kg?</em>`,
+      `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, <strong>${rate}%</strong> of <strong>${base} mol</strong>, question. How many mol, question?"</em>`,
+      `<span class="rk-grace-tag">GRACE</span> <strong>${rate}%</strong> of the <strong>${base}</strong>-jiff cooling cycle is done. <em>How many jiffs?</em>`,
+    ]);
+    return {
+      topic: 'g6-percent',
+      prompt,
+      answers: opts.map(o => '' + o),
+      correctIdx,
+      dict: { rocky: `${rate}% of ${base}`, grace: `${ans}` },
+      explain: `Percent of a quantity: ${rate}% of ${base} = ${rate}/100 × ${base} = <strong>${ans}</strong>. Convert the percent to a fraction, then multiply by the whole.`,
+      check: { op: 'percent', operands: [rate, base], answer: ans },
+    };
+  }
+
+  // L5 — Find the percent (6.RP.3c): what percent is part of whole.
+  function genG6PercentFind() {
+    let whole, percent, part, guard = 100;
+    do {
+      whole = pick([20, 25, 40, 50, 80, 100, 120, 160, 200, 240]);
+      percent = pick([10, 20, 25, 40, 50, 60, 75, 80]);
+      part = whole * percent / 100;
+    } while (part % 1 !== 0 && guard-- > 0);
+    if (part % 1 !== 0) { whole = 100; percent = pick([10, 20, 25, 40, 50, 75]); part = percent; }
+    const ans = part * 100 / whole;        // = percent, a whole number
+    const opts = pedDistractors(ans, [
+      part,                                // used the part instead of the percent
+      100 - ans,                           // found the complement
+      ans * 10,                            // off by a factor of 10 (too big)
+      Math.max(1, Math.round(ans / 10)),   // off by a factor of 10 (too small)
+      whole - part,                        // used the leftover amount
+      ans + 5,
+    ]);
+    const correctIdx = opts.indexOf(ans);
+    const prompt = pick([
+      `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, <strong>${part}</strong> of <strong>${whole}</strong> spores are astrophage, question. What percent, question?"</em>`,
+      `<span class="rk-grace-tag">GRACE</span> Rocky translated <strong>${part}</strong> of <strong>${whole}</strong> words. <em>What percent of the dictionary is done?</em>`,
+      `<span class="rk-grace-tag">GRACE</span> <strong>${part} kg</strong> of the <strong>${whole} kg</strong> fuel is gone. <em>What percent?</em>`,
+    ]);
+    return {
+      topic: 'g6-percent-find',
+      prompt,
+      answers: opts.map(o => '' + o),
+      correctIdx,
+      dict: { rocky: `${part} / ${whole}`, grace: `${ans}%` },
+      explain: `What percent is ${part} of ${whole}? Part ÷ whole × 100 = ${part} × 100 ÷ ${whole} = <strong>${ans}%</strong>.`,
+      check: { op: 'div', operands: [part * 100, whole], answer: ans },
+    };
+  }
+
+  // L6 — Mixed: random pick of the five grade-6 generators (each carries a check).
+  function genG6AllMix() {
+    return pick([genG6UnitRate, genG6RatioTable, genG6EquivRatio, genG6Percent, genG6PercentFind])();
+  }
+
   const RK_GEN = {
+    // Grade-6 (6.RP) keys checked first; grade-5 keys below unchanged.
+    'g6-unit-rate':   genG6UnitRate,
+    'g6-ratio-table': genG6RatioTable,
+    'g6-equiv-ratio': genG6EquivRatio,
+    'g6-percent':     genG6Percent,
+    'g6-percent-find': genG6PercentFind,
+    'g6-allmix':      genG6AllMix,
     metric:    genMetric,
     customary: genCustomary,
     time:      genTime,
@@ -7984,7 +9370,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   InlineModules['rocky-translator'] = {
     init(host, levelIndex, callbacks) {
-      const lvl = RK_LEVELS[levelIndex];
+      const lvl = (typeof ACTIVE_GRADE !== 'undefined' && ACTIVE_GRADE === 6 && typeof RK_LEVELS_6 !== 'undefined') ? RK_LEVELS_6[levelIndex] : RK_LEVELS[levelIndex];
       const totalQ = RK_QPL[levelIndex];
 
       const state = {
@@ -8209,6 +9595,18 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   ];
   const FB_QPL = [15, 18, 18, 20, 20, 20];
 
+  // Same Winnie-the-Pooh flood theme; selected only when ACTIVE_GRADE === 6. The
+  // grade-5 FB_LEVELS above is untouched. FB_QPL (15,18,18,20,20,20) is shared by
+  // both grades. Gen ids resolve through the FB_GEN map below (grade-6 keys first).
+  const FB_LEVELS_6 = [
+    { id: 1, name: 'Powers of the Rain',      gen: 'g6-exponent',  chapter: 'In which the raindrops multiply themselves' },
+    { id: 2, name: "Pooh's Honey Count",      gen: 'g6-evaluate',  chapter: 'In which a jar-count depends on x' },
+    { id: 3, name: "Piglet's Missing Acorns", gen: 'g6-solve-add', chapter: 'In which Piglet undoes an addition' },
+    { id: 4, name: 'Rows on the Raft',        gen: 'g6-solve-mul', chapter: 'In which Owl undoes a multiplication' },
+    { id: 5, name: 'The Brain of Pooh',       gen: 'g6-evaluate2', chapter: 'In which Pooh groups before he multiplies' },
+    { id: 6, name: 'Storm of the Century',    gen: 'g6-allmix',    chapter: 'In which Captain C. Robin solves it all' },
+  ];
+
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
   const pick = (a) => a[Math.floor(Math.random() * a.length)];
   function shuffle(a) { for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
@@ -8421,16 +9819,17 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     // include negatives, and Math.abs would lie about what (a - b) equals).
     if (op1 === '-' && a < b) { const t = a; a = b; b = t; }
     const av = op1 === '+' ? a + b : a - b;
-    const op2 = pick(['*', '/']);
+    let op2 = pick(['*', '/']);
     let result, expr, divBy = c;
+    // ensure clean division: only divide when some divisor in 2..6 divides av exactly
+    const divisors = [];
+    for (let d = 2; d <= Math.min(av, 6); d++) if (av % d === 0) divisors.push(d);
+    if (op2 === '/' && divisors.length === 0) op2 = '*';   // no clean divisor: multiply instead of a pointless div-by-1
     if (op2 === '*') {
       result = av * c;
       expr = `(${a} ${op1} ${b}) × ${c}`;
     } else {
-      // ensure clean division — pick a divisor that actually divides av cleanly
-      const divisors = [];
-      for (let d = 2; d <= Math.min(av, 6); d++) if (av % d === 0) divisors.push(d);
-      divBy = divisors.length ? pick(divisors) : 1;
+      divBy = pick(divisors);
       result = av / divBy;
       expr = `(${a} ${op1} ${b}) ÷ ${divBy}`;
     }
@@ -8665,12 +10064,14 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         };
       },
       () => {
+        // Keep the inner subtraction positive (no negatives — off-CCSS for grade 5).
+        const big = Math.max(b, c) + 1;
+        const small = Math.min(b, c);
         const left = `${a} × (${b} + ${c})`;
-        const right = `${a} × (${b} - ${c % 4 === 0 ? c - 1 : c})`;
-        const c2 = c % 4 === 0 ? c - 1 : c;
+        const right = `${a} × (${big} - ${small})`;
         return {
           left, right,
-          leftVal: a * (b + c), rightVal: a * (b - c2),
+          leftVal: a * (b + c), rightVal: a * (big - small),
         };
       },
     ];
@@ -8700,8 +10101,16 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const seqA = [0,1,2,3,4].map(i => startA + stepA * i);
     const seqB = [0,1,2,3,4].map(i => startB + stepB * i);
     const askIdx = ri(2, 4);
-    const correct = `${seqB[askIdx]}`;
-    const opts = shuffle([correct, `${seqB[askIdx] + 1}`, `${seqA[askIdx] * 2}`, `${seqB[askIdx] - 2}`]);
+    const correctV = seqB[askIdx];
+    const correct = `${correctV}`;
+    // Distinct distractors, none equal to the correct value (seqA*2 can collide when startB = 2*startA)
+    const cand = [correctV + 1, correctV - 2, seqA[askIdx] * 2, correctV + stepB, Math.max(0, correctV - stepB), correctV + 2];
+    const wrongs = [];
+    for (const w of cand) {
+      if (w >= 0 && w !== correctV && !wrongs.includes(w)) wrongs.push(w);
+      if (wrongs.length >= 3) break;
+    }
+    const opts = shuffle([correct, ...wrongs.map(String)]);
     return {
       topic: 'pemdas-pattern',
       prompt: `Roo's pattern: <strong>${seqA.slice(0,4).join(', ')}, ...</strong> (start ${startA}, add ${stepA}). Tigger's pattern: <strong>${seqB.slice(0,4).join(', ')}, ...</strong> (start ${startB}, add ${stepB}). When Roo reaches term ${askIdx + 1} (= ${seqA[askIdx]}), what is Tigger's term ${askIdx + 1}?`,
@@ -8716,7 +10125,159 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     return pick(fns)();
   }
 
+  // ---- Grade 6 generators (CCSS 6.EE — exponents, evaluating expressions, one-step equations) ----
+  // Run only for the FB_LEVELS_6 gen ids (ACTIVE_GRADE === 6). The grade-5 generators above are
+  // untouched. Each returns the standard { topic, prompt, answers:[4], correctIdx, explain } shape
+  // PLUS a machine-checkable check:{op, operands, answer}. `answer` is an exact integer and
+  // answers[correctIdx] equals that integer as a plain number string. Options are built with the
+  // shared pedDistractors() helper, which guarantees exactly 4 distinct, non-negative strings with
+  // the correct value present; the listed mistakes model real algebra slips. Pooh/Piglet voice kept.
+
+  function genG6Exponent() {
+    // 6.EE.1 — evaluate numerical expressions involving whole-number exponents (base^exp).
+    let base = ri(2, 6), exp = ri(2, 4);
+    while (base ** exp > 1296) { base = ri(2, 6); exp = ri(2, 4); }
+    const answer = base ** exp;
+    // Slips: multiplied base by exponent, added them, off by a single factor of base.
+    const opts = pedDistractors(answer, [
+      base * exp,            // treated the exponent as a multiplier (base × exp)
+      base + exp,            // added base and exponent
+      base ** (exp - 1),     // one factor short
+      answer + base,         // one factor too many
+      answer - base,
+    ]);
+    return {
+      topic: 'g6-exponent',
+      prompt: pick([
+        `Pooh watched the rain fold over on itself: <em>"<strong>${base}<sup>${exp}</sup></strong> raindrops, oh bother. How many is that?"</em>`,
+        `Owl peered over his spectacles: <em>"${base} to the power of ${exp}; that is <strong>${base}<sup>${exp}</sup></strong>. Pray, what does it come to?"</em>`,
+        `Christopher Robin read aloud from his book: <em>"<strong>${base}<sup>${exp}</sup></strong> means ${base} multiplied by itself ${exp} times. What is it?"</em>`,
+      ]),
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(answer),
+      explain: `An exponent is repeated multiplication: ${base}<sup>${exp}</sup> = ${Array(exp).fill(base).join(' × ')} = <strong>${answer}</strong>. It is not ${base} × ${exp} = ${base * exp}.`,
+      check: { op: 'pow', operands: [base, exp], answer },
+    };
+  }
+
+  function genG6Evaluate() {
+    // 6.EE.2c — evaluate the expression a·x + b at a given value of x.
+    const a = ri(2, 9), x = ri(1, 9), b = ri(1, 20);
+    const answer = a * x + b;
+    // Slips: wrong order (added a then multiplied x·b), added all three, forgot the constant.
+    const opts = pedDistractors(answer, [
+      a + x * b,             // wrong order: a + (x × b)
+      a + x + b,             // added everything
+      a * x,                 // forgot to add b
+      (a + x) * b,           // grouped the wrong pair
+      answer + 1,
+    ]);
+    return {
+      topic: 'g6-evaluate',
+      prompt: pick([
+        `Christopher Robin set the puzzle: <em>"If <strong>x = ${x}</strong>, what is <strong>${a}x + ${b}</strong> honey jars?"</em>`,
+        `Pooh counted carefully on his paws: <em>"With <strong>x = ${x}</strong>, the expression <strong>${a}x + ${b}</strong> comes to...?"</em>`,
+        `Rabbit tallied the haycorns: <em>"Substitute <strong>x = ${x}</strong> into <strong>${a}x + ${b}</strong>. What is the total?"</em>`,
+      ]),
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(answer),
+      explain: `Substitute x = ${x}: ${a}·${x} + ${b} = ${a * x} + ${b} = <strong>${answer}</strong>. Multiply before you add (order of operations).`,
+      check: { op: 'linear', operands: [a, x, b], answer },
+    };
+  }
+
+  function genG6SolveAdd() {
+    // 6.EE.7 — solve the one-step equation x + a = b (b > a so x stays positive).
+    const a = ri(2, 15), x = ri(1, 15), b = a + x;
+    const answer = b - a;   // == x
+    // Slips: added instead of subtracting (wrong inverse), copied the total or the addend.
+    const opts = pedDistractors(answer, [
+      b + a,                 // wrong inverse: b + a instead of b − a
+      b,                     // copied the total
+      a,                     // copied the addend
+      answer + 1,
+      answer - 1,
+    ]);
+    return {
+      topic: 'g6-solve-add',
+      prompt: pick([
+        `Piglet's bottle began with <strong>x</strong> acorns. Pooh dropped in <strong>${a}</strong> more, and now there are <strong>${b}</strong>. <em>"How many at the start?"</em> &nbsp;(x + ${a} = ${b})`,
+        `Eeyore counted his thistles: <em>"I had x. Someone added <strong>${a}</strong>, making <strong>${b}</strong>. How many did I begin with?"</em> &nbsp;(x + ${a} = ${b})`,
+        `Solve for Pooh in the rising water: <em>"<strong>x + ${a} = ${b}</strong>. What is x?"</em>`,
+      ]),
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(answer),
+      explain: `Undo + ${a} by subtracting from both sides: x = ${b} − ${a} = <strong>${answer}</strong>. Subtraction is the inverse of addition; ${b} + ${a} would undo the wrong way.`,
+      check: { op: 'solve-add', operands: [a, b], answer },
+    };
+  }
+
+  function genG6SolveMul() {
+    // 6.EE.7 — solve the one-step equation a·x = b (b is a multiple of a so x is a whole number).
+    const a = ri(2, 9), x = ri(2, 12), b = a * x;
+    const answer = b / a;   // == x
+    // Slips: multiplied instead of dividing (wrong inverse), subtracted, or added.
+    const opts = pedDistractors(answer, [
+      a * b,                 // wrong inverse: a × b instead of b ÷ a
+      b - a,                 // subtracted instead of dividing
+      b + a,                 // added instead of dividing
+      answer + 1,
+      answer - 1,
+    ]);
+    return {
+      topic: 'g6-solve-mul',
+      prompt: pick([
+        `Owl stacked the rescued jars in <strong>${a}</strong> equal rows, <strong>${b}</strong> jars in all. <em>"How many in each row?"</em> &nbsp;(${a}x = ${b})`,
+        `Kanga shared <strong>${b}</strong> haycorns into <strong>${a}</strong> equal baskets. <em>"How many in each basket?"</em> &nbsp;(${a}x = ${b})`,
+        `Solve for Pooh aboard the floating jar: <em>"<strong>${a}x = ${b}</strong>. What is x?"</em>`,
+      ]),
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(answer),
+      explain: `Undo × ${a} by dividing both sides: x = ${b} ÷ ${a} = <strong>${answer}</strong>. Division is the inverse of multiplication; ${a} × ${b} would undo the wrong way.`,
+      check: { op: 'solve-mul', operands: [a, b], answer },
+    };
+  }
+
+  function genG6Evaluate2() {
+    // 6.EE.2c — evaluate the grouped expression a·(x + b). Exposed via op:'linear' with
+    // operands [a, x, a·b] so that a·x + (a·b) = a·(x + b) matches the check contract.
+    const a = ri(2, 6), x = ri(1, 9), b = ri(1, 8);
+    const c = a * b;                 // distributed constant term
+    const answer = a * x + c;        // == a·(x + b)
+    // Slips: only added b once (forgot to distribute), dropped the group, added everything.
+    const opts = pedDistractors(answer, [
+      a * x + b,             // multiplied x but added b only once (no distribution)
+      a * x,                 // dropped the + ${b} inside the group
+      a + x + b,             // added everything
+      a + x * b,             // wrong order inside
+      answer + a,
+    ]);
+    return {
+      topic: 'g6-evaluate2',
+      prompt: pick([
+        `The Brain of Pooh hummed a Thinking Hum: <em>"With <strong>x = ${x}</strong>, group first: <strong>${a}(x + ${b})</strong>. What is it?"</em>`,
+        `Piglet, very bravely: <em>"If <strong>x = ${x}</strong>, then <strong>${a} × (x + ${b})</strong> comes to...?"</em>`,
+        `Christopher Robin: <em>"Evaluate <strong>${a}(x + ${b})</strong> when <strong>x = ${x}</strong>."</em>`,
+      ]),
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(answer),
+      explain: `Do the parentheses first: x + ${b} = ${x} + ${b} = ${x + b}. Then × ${a} = <strong>${answer}</strong>. Distributing gives the same: ${a}·${x} + ${a}·${b} = ${a * x} + ${c} = ${answer}.`,
+      check: { op: 'linear', operands: [a, x, c], answer },
+    };
+  }
+
+  function genG6AllMix() {
+    return pick([genG6Exponent, genG6Evaluate, genG6SolveAdd, genG6SolveMul, genG6Evaluate2])();
+  }
+
   const FB_GEN = {
+    // Grade 6 (6.EE) keys checked first; the grade-5 keys below are unchanged.
+    'g6-exponent':   genG6Exponent,
+    'g6-evaluate':   genG6Evaluate,
+    'g6-solve-add':  genG6SolveAdd,
+    'g6-solve-mul':  genG6SolveMul,
+    'g6-evaluate2':  genG6Evaluate2,
+    'g6-allmix':     genG6AllMix,
     'simple-parens': genSimpleParens,
     'parens-multi':  () => Math.random() < 0.7 ? genParensMulti() : (Math.random() < 0.5 ? genWriteExpr() : genCorrespondingTerm()),
     'brackets':      genBrackets,
@@ -8729,7 +10290,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   InlineModules['floating-bear'] = {
     init(host, levelIndex, callbacks) {
-      const lvl = FB_LEVELS[levelIndex];
+      const lvl = (typeof ACTIVE_GRADE !== 'undefined' && ACTIVE_GRADE === 6 && typeof FB_LEVELS_6 !== 'undefined') ? FB_LEVELS_6[levelIndex] : FB_LEVELS[levelIndex];
       const totalQ = FB_QPL[levelIndex];
 
       const state = {
@@ -8906,6 +10467,14 @@ document.addEventListener('DOMContentLoaded', () => {
   $('btn-back-launcher').addEventListener('click', exitToLauncher);
   $('btn-back-levels').addEventListener('click', exitToLevels);
 
+  for (const g of [5, 6]) {
+    $('btn-grade-' + g).addEventListener('click', () => {
+      Save.switchGrade(g);
+      renderHeader();
+      renderLauncher();
+    });
+  }
+
   $('btn-preview').addEventListener('click', () => {
     const code = prompt('Enter unlock code to toggle Preview Mode:');
     if (code === null) return;
@@ -9021,6 +10590,7 @@ const TOPIC_LABELS = {
   'coord-translate': 'Translate point',
   'coord-identify': 'Read coords from marker',
   'coord-real-world': 'Real-world data graph',
+  'coord-path': 'Move along a path on the grid',
   // Master Builder
   'vol-lwh': 'Volume = L × W × H',
   'vol-base-height': 'Volume = base area × height',
@@ -9045,6 +10615,38 @@ const TOPIC_LABELS = {
   'pemdas-write-expr': 'Write an expression',
   'pemdas-compare': 'Compare two expressions',
   'pemdas-pattern': 'Corresponding terms in patterns',
+  // Grade 6 — Fraction Rider (6.NS.1 dividing fractions)
+  'ns-div-intro': 'Divide a whole by a fraction',
+  'ns-div-frac': 'Divide fraction by fraction',
+  'ns-div-mixed': 'Divide mixed numbers',
+  'ns-div-multi': 'Multi-step fraction division',
+  'ns-div-word': 'Fraction-division word problems',
+  // Grade 6 — F1 Decimals (6.NS / 6.RP / 6.SP)
+  'g6-dec-divide': 'Divide decimals',
+  'g6-dec-ops': 'Decimal operations',
+  'g6-unit-rate': 'Unit rate',
+  'g6-percent': 'Percent of a quantity',
+  'g6-stats': 'Mean, median, range',
+  // Grade 6 — Razor Crest (6.NS.6/8, 6.G)
+  'g6-quadrant': 'Name the quadrant',
+  'g6-reflect': 'Reflect across an axis',
+  'g6-distance': 'Distance on the coordinate plane',
+  'g6-rect-area': 'Area of a rectangle',
+  'g6-tri-area': 'Area of a triangle',
+  // Grade 6 — LEGO Master Builder (6.G)
+  'g6-volume': 'Volume (L × W × H)',
+  'g6-volume-frac': 'Volume with a fractional edge',
+  'g6-surface-area': 'Surface area of a prism',
+  // Grade 6 — Rocky (6.RP)
+  'g6-ratio-table': 'Ratio tables',
+  'g6-equiv-ratio': 'Equivalent ratios',
+  'g6-percent-find': 'Find the percent',
+  // Grade 6 — Floating Bear (6.EE)
+  'g6-exponent': 'Exponents',
+  'g6-evaluate': 'Evaluate an expression',
+  'g6-solve-add': 'Solve x + a = b',
+  'g6-solve-mul': 'Solve a · x = b',
+  'g6-evaluate2': 'Evaluate an expression (distributed)',
   // Coarse fallback labels (level-gen IDs used when a generator hasn't been tagged with a granular topic yet)
   'frac-like-denom': 'Fractions (same denominator)',
   'frac-unlike-easy': 'Fractions (unlike, easy)',
@@ -9215,6 +10817,38 @@ const COACH_TIPS = {
   'pemdas-brackets':     { tip: 'Brackets [ ] work like inner parens — work them out from the INSIDE out.', ex: '<b>2 × [3 + (4 − 1)]</b>: innermost parens first. 4−1 = 3. Then [3 + 3] = 6. Then 2 × 6 = <b>12</b>.' },
   'pemdas-write-expr':   { tip: 'Word → expression. "X plus Y times Z" means parens around X+Y if "plus" comes first phrasing-wise. Read carefully.', ex: '"3 plus 4 groups of 5" = <b>3 + 4 × 5</b> (because "groups of" is multiplication, done FIRST).' },
   'pemdas-pattern':      { tip: 'When two patterns share a starting position, you can compare term-by-term.', ex: 'Roo: 0,2,4,6 (add 2). Tigger: 0,4,8,12 (add 4). Tigger\'s nth term = 2 × Roo\'s nth term.' },
+  // Grade 6 — Fraction Rider (6.NS.1 dividing fractions)
+  'ns-div-intro':   { tip: 'Dividing by a fraction is the same as multiplying by its reciprocal (flip it over).', ex: '<b>6 ÷ 1/3</b> = 6 × 3 = <b>18</b>. <b>3/4 ÷ 2</b> = 3/4 × 1/2 = <b>3/8</b>.' },
+  'ns-div-frac':    { tip: 'Keep the first fraction, flip the second, then multiply.', ex: '<b>2/3 ÷ 4/5</b> = 2/3 × 5/4 = 10/12 = <b>5/6</b>.' },
+  'ns-div-mixed':   { tip: 'Turn mixed numbers into improper fractions FIRST, then flip-and-multiply.', ex: '<b>2 1/2 ÷ 3/4</b> = 5/2 × 4/3 = 20/6 = <b>3 1/3</b>.' },
+  'ns-div-multi':   { tip: 'Work one step at a time. Only flip the fraction you are dividing BY.', ex: 'Divide first, then multiply or simplify the result.' },
+  'ns-div-word':    { tip: '"How many ___-size pieces fit?" is division: total ÷ piece size.', ex: 'Scoops of 3/4 cup in 6 cups: <b>6 ÷ 3/4</b> = 6 × 4/3 = <b>8</b>.' },
+  // Grade 6 — F1 Decimals (6.NS / 6.RP / 6.SP)
+  'g6-dec-divide':  { tip: 'Divide decimals like whole numbers, then place the decimal point in the answer.', ex: '<b>39.24 ÷ 6</b> = <b>6.54</b>.' },
+  'g6-dec-ops':     { tip: 'Add/subtract: line up the decimal points. Multiply: count total decimal places.', ex: '<b>8.54 + 1.68</b> = <b>10.22</b>.' },
+  'g6-unit-rate':   { tip: 'A unit rate is the amount for ONE. Divide the total by the number of units.', ex: '<b>27 grams over 3</b> = 27 ÷ 3 = <b>9</b> per unit.' },
+  'g6-percent':     { tip: 'Percent OF a number: turn the percent into hundredths, then multiply.', ex: '<b>20% of 140</b> = 0.20 × 140 = <b>28</b>.' },
+  'g6-stats':       { tip: 'Mean = sum ÷ count. Median = middle of the sorted list. Range = max − min.', ex: 'Mean of five laps = (sum of the five) ÷ 5.' },
+  // Grade 6 — Razor Crest (6.NS.6/8, 6.G)
+  'g6-quadrant':    { tip: 'Quadrant I: x>0,y>0.  II: x<0,y>0.  III: x<0,y<0.  IV: x>0,y<0.', ex: '<b>(3, −4)</b>: x positive, y negative → <b>Quadrant IV</b>.' },
+  'g6-reflect':     { tip: 'Reflect across the x-axis: flip the sign of y. Across the y-axis: flip the sign of x.', ex: '<b>(3, 5)</b> across the x-axis = <b>(3, −5)</b>.' },
+  'g6-distance':    { tip: 'Same row or column? Distance = absolute difference of the coordinate that changes.', ex: '<b>(2, −1) to (2, 6)</b>: |6 − (−1)| = <b>7</b>.' },
+  'g6-rect-area':   { tip: 'Area of a rectangle = length × width. Read each side off the grid.', ex: '<b>2 × 16</b> = <b>32</b> square units.' },
+  'g6-tri-area':    { tip: 'Area of a triangle = (base × height) ÷ 2.', ex: 'base 8, height 6: 8 × 6 ÷ 2 = <b>24</b>.' },
+  // Grade 6 — LEGO Master Builder (6.G)
+  'g6-volume':      { tip: 'Volume of a box = length × width × height.', ex: '<b>3 × 4 × 5</b> = <b>60</b> cubic units.' },
+  'g6-volume-frac': { tip: 'A fractional edge still uses L × W × H. A 1/2 edge halves the result.', ex: '4 × 3 × 1/2 = <b>6</b> cubic units.' },
+  'g6-surface-area':{ tip: 'Surface area of a box = 2(LW + LH + WH). Add up the six faces.', ex: '2×3×4: 2(6 + 8 + 12) = <b>52</b> square units.' },
+  // Grade 6 — Rocky (6.RP)
+  'g6-ratio-table': { tip: 'Scale a ratio by multiplying (or dividing) BOTH numbers by the same factor.', ex: '<b>2 : 5</b> scaled by 3 = <b>6 : 15</b>.' },
+  'g6-equiv-ratio': { tip: 'Equivalent ratios reduce to the same pair. Multiply or divide both parts equally.', ex: '4 : 10 = 2 : 5.' },
+  'g6-percent-find':{ tip: 'What percent is the part of the whole? (part ÷ whole) × 100.', ex: '<b>12 of 200</b> = 12 ÷ 200 × 100 = <b>6%</b>.' },
+  // Grade 6 — Floating Bear (6.EE)
+  'g6-exponent':    { tip: 'An exponent means repeated MULTIPLICATION, not multiply by the exponent.', ex: '<b>6³</b> = 6 × 6 × 6 = <b>216</b> (not 6 × 3).' },
+  'g6-evaluate':    { tip: 'Substitute the value for the letter, then follow the order of operations.', ex: '<b>3x + 5 at x = 4</b>: 3 × 4 + 5 = <b>17</b>.' },
+  'g6-solve-add':   { tip: 'To undo "+ a", subtract a from BOTH sides.', ex: '<b>x + 7 = 12</b> → x = 12 − 7 = <b>5</b>.' },
+  'g6-solve-mul':   { tip: 'To undo "× a", divide BOTH sides by a.', ex: '<b>4x = 20</b> → x = 20 ÷ 4 = <b>5</b>.' },
+  'g6-evaluate2':   { tip: 'Substitute the value, then simplify inside the parentheses first.', ex: '<b>2(x + 3) at x = 4</b>: 2 × 7 = <b>14</b>.' },
   // Coarse fallback tips (when granular topic isn't tagged on the question)
   'frac-like-denom':     { tip: 'When the bottoms (denominators) match, only the tops change. Add or subtract the tops, keep the bottom.', ex: '<b>2/5 + 1/5</b>: 2+1=3. Keep 5. = <b>3/5</b>.' },
   'frac-unlike-easy':    { tip: 'Different bottoms? Find a common bottom first, convert both, THEN add or subtract.', ex: '<b>1/2 + 1/3</b>: common 6. 1/2 = 3/6, 1/3 = 2/6. = <b>5/6</b>.' },
