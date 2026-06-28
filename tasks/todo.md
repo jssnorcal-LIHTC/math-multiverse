@@ -47,7 +47,7 @@ extraction), fuzz.js (independent oracles + mutation self-test), smoke.js (headl
 - [ ] Per-module grade-6 content (g6 metadata + X_LEVELS_6 + generators + genForLevel branch), fuzz-verified:
   - [x] fraction-rider -> 6.NS (fraction division)  [see ## Verification: fraction-rider g6, below]
   - [x] f1-decimals -> 6.NS/6.RP/6.SP (decimal ops, division, unit rate, percent, lap-time stats)  [see ## Verification: f1-decimals g6, below]
-  - [ ] razor-crest -> 6.NS.6/8 + 6.G.3 (four-quadrant plane, rational coords, distance, polygons)
+  - [x] razor-crest -> 6.NS.6/8 + 6.G.1/6.G.3 (four-quadrant plane, rational coords, reflections, distance, area)  [see ## Verification: razor-crest g6, below]
   - [ ] master-builder -> 6.G (area, volume w/ fractional edges, surface area/nets)
   - [ ] rocky-translator -> 6.RP (ratios, unit rates, ratio tables, percent)
   - [ ] floating-bear -> 6.EE (exponents, expressions w/ variables, evaluate, one-step equations)
@@ -136,3 +136,51 @@ Exactly 4 distinct, one correct, non-negative (by construction of g6Options):
 - Distractor models are decimal/percent/stat mistakes (misplaced decimal ×10 / ÷10, off by 0.1, op swap,
   percent-as-rate, used-whole-base, mean-vs-median swap, forgot-to-divide-by-count sum, divided-by-4), never
   the correct value (deduped), never negative (filtered). F1 race voice kept in prompt/explain.
+
+## Verification: razor-crest g6 (6.NS.6 / 6.NS.8 + 6.G.1 / 6.G.3, added 2026-06-28)
+Additive edits only; grade-5 razor paths untouched. (Per task: no tests run; verified by static inspection.)
+
+Line ranges (post-edit):
+- MODULES `g6` block (razor-crest): lines 3016-3029 (sibling key after `grandGoal: 'This is the Way'`;
+  ccss '6.NS / 6.G', domain 'Coordinate Plane & Polygons', grandGoal 'Master of the Four Quadrants';
+  6 levels id 1..6, questions 15,18,18,20,20,20, gen ids g6-quadrant/reflect/distance/rect-area/tri-area/allmix).
+- `RC_LEVELS_6` (6 entries): lines 6241-6253 (immediately after `RC_LEVELS`, before `RC_QPL`). Each carries
+  `mix` = the gen id (razor's dispatch reads `level.mix`), plus gridMax + quadrants:4 (tri-area returns its own
+  quadrants:1 grid).
+- Generators (razor IIFE): genG6Quadrant 6919-6945, genG6Reflect 6948-6982, genG6Distance 6985-7025,
+  genG6RectArea 7028-7067, genG6TriArea 7070-7113, genG6AllMix 7116-7118.
+- `genQuestion` six new gen-id branches at TOP: lines 7124-7130 (grade-5 branches 7131-7138 unchanged).
+- razor init level-pick ternary: line 7231 (`ACTIVE_GRADE === 6 ? RC_LEVELS_6[i] : RC_LEVELS[i]`).
+
+Grade-5 untouched (confirmed):
+- `RC_LEVELS` (6219-6226), `RC_QPL` (6254), grade-5 generators (genPlotQ/genDistanceQ/genQuadrantQ/genReflectQ/
+  genShapeQ/genTranslateQ/genPathQ/genIdentifyQ/genRealWorldQ), grade-5 genQuestion branches
+  (quadrant/identify-q1/identify-4q/path/reflect/distance), renderGrid, the whole `init` body below the level-pick:
+  none modified. New branches sit ABOVE grade-5 branches and only fire on the new gen ids. init falls back to
+  `RC_LEVELS[levelIndex]` unless ACTIVE_GRADE===6. Shared RC_QPL gives both grades 15,18,18,20,20,20.
+
+`check` contract attached on every grade-6 return (exact, for automated verification):
+- quadrant 6943: `{op:'quadrant', point:[x,y], answer:'Quadrant '+RN}`. x,y nonzero (ri(1,gridMax)·±1, never 0);
+  RN = I(x>0,y>0)/II(x<0,y>0)/III(x<0,y<0)/IV(x>0,y<0). answers = the four fixed strings 'Quadrant I..IV' shuffled;
+  correctIdx = answers.indexOf('Quadrant '+RN) ⇒ answers[correctIdx] === check.answer.
+- reflect 6980: `{op:'reflect', point:[x,y], axis, answer:'('+rx+', '+ry+')'}`. x-axis ⇒ (x,-y); y-axis ⇒ (-x,y).
+  x,y nonzero. answers = the 4 sign-combos `(x, y)`/`(-x, y)`/`(x, -y)`/`(-x, -y)` (all distinct, includes the
+  reflection), format `(a, b)` one space after comma; correctIdx points to the reflection.
+- distance 7023: `{op:'distance', operands:[ax,ay,bx,by], answer:|differing coord|}`. Points share x OR y
+  (horizontal ⇒ ay==by, bx≠ax; vertical ⇒ ax==bx, by≠ay), coords from ri(-gridMax,gridMax) span ±. answers plain
+  number strings; distractors = added-instead-of-subtracted, forgot-a-negative (|b|-|a|), off-by-one.
+- rect-area 7065: `{op:'rect-area', operands:[x1,y1,x2,y2], answer:|x2-x1|*|y2-y1|}`. x1≠x2, y1≠y2. answers plain
+  numbers; distractors = perimeter 2(w+h), w+h, (w+1)·h / w·(h+1) off-by.
+- tri-area 7111: `{op:'tri-area', operands:[b,h], answer:b*h/2}`. b in 2..12, h in 2..10 (within 1..12 / 1..10);
+  area = b·h/2 is always whole or x.5; correctStr = `${area}` matches String(answer) exactly ('24' or '7.5').
+  distractors include b·h (forgot ÷2), b+h, ±1, ±0.5.
+- allmix 7116: delegates to one of the five (forwarding gridMax), so it always carries a `check`.
+
+Exactly 4 distinct answers + one correctIdx (by construction):
+- quadrant/reflect: 4 hard-coded distinct options (sign-combos distinct since x,y≠0); correctIdx = indexOf(answer).
+- distance/rect-area: pedDistractors (global, same helper grade-5 genDistanceQ uses) returns 4 distinct
+  non-negative integers, `correct` inserted first ⇒ always present; correctIdx = arr.indexOf(correct).
+- tri-area: Set seeded with correctStr, candidates added until length 4, padded with `${area+pad}` (strictly
+  increasing, guaranteed-new) if short; shuffle; correctIdx = indexOf(correctStr) (single occurrence).
+- answers[correctIdx] EQUALS check.answer as a string for all five (quadrant/reflect = exact strings;
+  distance/rect-area/tri-area = `${number}` === String(number)). Mando/Grogu/hyperspace voice kept in prompt/explain.
