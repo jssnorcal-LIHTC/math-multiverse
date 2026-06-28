@@ -2817,7 +2817,7 @@
       <div class="brand-mark">M·M</div>
       <div class="brand-text">
         <h1>Math Multiverse</h1>
-        <p>5th grade CCSS practice across six themed worlds</p>
+        <p id="grade-subtitle">5th grade CCSS practice across six themed worlds</p>
       </div>
     </div>
 
@@ -2826,6 +2826,10 @@
         <span class="player-name" id="player-name">Player</span>
         <span style="color: var(--text-muted);">·</span>
         <span class="stars-tally"><span id="total-stars">0</span> ★</span>
+      </div>
+      <div class="grade-toggle" id="grade-toggle" role="group" aria-label="Grade level">
+        <button class="icon-btn grade-btn" id="btn-grade-5" data-grade="5" title="Grade 5 campaign">Grade 5</button>
+        <button class="icon-btn grade-btn" id="btn-grade-6" data-grade="6" title="Grade 6 campaign">Grade 6</button>
       </div>
       <button class="icon-btn" id="btn-stats" title="View progress stats and which topics need more practice">Stats</button>
       <button class="icon-btn" id="btn-preview" title="Preview Mode: when ON, every section and every level is accessible (for browsing). When OFF, normal progression gating applies.">Preview: OFF</button>
@@ -3047,6 +3051,25 @@ const MODULES = [
   },
 ];
 
+// --- Grade selection (Grade 5 default; Grade 6 adds harder, on-grade content) ---
+let ACTIVE_GRADE = (() => {
+  try { return parseInt(localStorage.getItem('mathMultiverse.activeGrade'), 10) === 6 ? 6 : 5; }
+  catch (e) { return 5; }
+})();
+const GRADE_SUBTITLE = {
+  5: '5th grade CCSS practice across six themed worlds',
+  6: '6th grade CCSS practice across six themed worlds',
+};
+// Overlay a module's grade-6 fields (its `g6` block) when Grade 6 is active. Modules
+// without a g6 block are not yet available in Grade 6 (rendered as "coming soon").
+function gradeView(m) {
+  if (ACTIVE_GRADE === 6) {
+    return m.g6 ? Object.assign({}, m, m.g6, { _g6ready: true })
+                : Object.assign({}, m, { _g6ready: false });
+  }
+  return Object.assign({}, m, { _g6ready: true });
+}
+
 // Inline module registry. Each entry: { init(host, levelIndex, callbacks) -> cleanupFn }.
 const InlineModules = {};
 
@@ -3059,6 +3082,18 @@ const SAVE_VERSION = 1;
 
 const Save = {
   state: null,
+
+  // Grade 5 keeps the original key so existing progress is untouched; Grade 6 gets its own.
+  key() { return ACTIVE_GRADE === 6 ? SAVE_KEY.replace('.v1', '.g6.v1') : SAVE_KEY; },
+
+  switchGrade(g) {
+    g = (g === 6) ? 6 : 5;
+    if (g === ACTIVE_GRADE) return;
+    this.saveNow();                                                  // persist the grade we're leaving
+    ACTIVE_GRADE = g;
+    try { localStorage.setItem('mathMultiverse.activeGrade', String(g)); } catch (e) {}
+    this.load();                                                     // load the grade we're entering
+  },
 
   default() {
     const moduleStates = {};
@@ -3127,15 +3162,16 @@ const Save = {
   },
 
   load() {
+    const KEY = this.key();
     let raw = null;
-    try { raw = localStorage.getItem(SAVE_KEY); } catch (e) { this.state = this.default(); return; }
+    try { raw = localStorage.getItem(KEY); } catch (e) { this.state = this.default(); return; }
     if (!raw) { this.state = this.default(); this.saveNow(); return; }
     try {
       this.state = this.reconcile(JSON.parse(raw));
     } catch (e) {
       // Corrupt save: back up the raw text before resetting so it isn't silently destroyed.
-      try { localStorage.setItem(SAVE_KEY + '.bak', raw); } catch (e2) {}
-      console.warn('Save load failed; backed up to ' + SAVE_KEY + '.bak and reset:', e);
+      try { localStorage.setItem(KEY + '.bak', raw); } catch (e2) {}
+      console.warn('Save load failed; backed up to ' + KEY + '.bak and reset:', e);
       this.state = this.default();
     }
     this.saveNow();
@@ -3145,7 +3181,7 @@ const Save = {
     if (!this.state) return;
     this.state.lastSaved = Date.now();
     try {
-      localStorage.setItem(SAVE_KEY, JSON.stringify(this.state));
+      localStorage.setItem(this.key(), JSON.stringify(this.state));
     } catch (e) {
       console.warn('Save persist failed:', e);
     }
@@ -3375,6 +3411,17 @@ function renderHeader() {
     btn.style.color = Save.state.previewMode ? 'var(--theme-volume)' : 'var(--text-secondary)';
     btn.style.borderColor = Save.state.previewMode ? 'rgba(242,205,55,0.45)' : 'var(--border-subtle)';
   }
+  const sub = $('grade-subtitle');
+  if (sub) sub.textContent = GRADE_SUBTITLE[ACTIVE_GRADE];
+  for (const g of [5, 6]) {
+    const gb = $('btn-grade-' + g);
+    if (!gb) continue;
+    const on = ACTIVE_GRADE === g;
+    gb.style.background = on ? 'rgba(120,170,255,0.18)' : 'transparent';
+    gb.style.color = on ? '#fff' : 'var(--text-secondary)';
+    gb.style.borderColor = on ? 'rgba(120,170,255,0.55)' : 'var(--border-subtle)';
+    gb.style.fontWeight = on ? '700' : '400';
+  }
 }
 
 function renderLauncher() {
@@ -3382,10 +3429,12 @@ function renderLauncher() {
   grid.innerHTML = '';
   for (let i = 0; i < MODULES.length; i++) {
     const m = MODULES[i];
+    const v = gradeView(m);
+    const comingSoon = !v._g6ready;
     const ms = Save.state.modules[m.id];
-    const unlocked = Save.isModuleUnlocked(m.id);
+    const unlocked = !comingSoon && Save.isModuleUnlocked(m.id);
     const cleared = ms.levelsCleared;
-    const total = m.levels.length;
+    const total = v.levels.length;
     const stars = ms.levelStars.reduce((a, b) => a + b, 0);
     const maxStars = total * 3;
 
@@ -3393,31 +3442,31 @@ function renderLauncher() {
     card.className = 'module-card' + (unlocked ? '' : ' locked');
     card.style.setProperty('--card-color', m.color);
 
-    const dotsHtml = m.levels.map((_, idx) => {
+    const dotsHtml = v.levels.map((_, idx) => {
       let cls = 'lvl-dot';
-      if (idx < cleared) cls += ' cleared';
-      else if (idx === cleared && unlocked) cls += ' current';
+      if (!comingSoon && idx < cleared) cls += ' cleared';
+      else if (!comingSoon && idx === cleared && unlocked) cls += ' current';
       return `<span class="${cls}"></span>`;
     }).join('');
 
-    const subtitle = unlocked
-      ? m.description
-      : `<em style="opacity:0.85;">${m.lockedMessage || 'Locked'}</em>`;
+    const subtitle = comingSoon
+      ? `<em style="opacity:0.85;">Grade 6 campaign coming soon</em>`
+      : (unlocked ? v.description : `<em style="opacity:0.85;">${v.lockedMessage || 'Locked'}</em>`);
 
-    const action = unlocked
-      ? (cleared === total ? '★ COMPLETED' : 'PLAY →')
-      : '🔒';
+    const action = comingSoon
+      ? '🔒 SOON'
+      : (unlocked ? (cleared === total ? '★ COMPLETED' : 'PLAY →') : '🔒');
 
-    const iconHtml = m.logoUrl
-      ? `<img class="mc-logo" src="${m.logoUrl}" alt="${m.domain}" loading="lazy" onerror="this.outerHTML = '<div class=&quot;mc-icon&quot;>${m.icon}</div>';">`
-      : `<div class="mc-icon">${m.icon}</div>`;
+    const iconHtml = v.logoUrl
+      ? `<img class="mc-logo" src="${v.logoUrl}" alt="${v.domain}" loading="lazy" onerror="this.outerHTML = '<div class=&quot;mc-icon&quot;>${v.icon}</div>';">`
+      : `<div class="mc-icon">${v.icon}</div>`;
 
     card.innerHTML = `
       <div class="mc-header">
         ${iconHtml}
-        <div class="mc-ccss">CCSS ${m.ccss}</div>
+        <div class="mc-ccss">CCSS ${v.ccss}</div>
       </div>
-      <div class="mc-title">${m.name}</div>
+      <div class="mc-title">${v.name}</div>
       <div class="mc-subtitle">${subtitle}</div>
       <div class="mc-progress">${dotsHtml}</div>
       <div class="mc-footer">
@@ -3438,8 +3487,9 @@ function openModule(moduleId) {
   currentModuleId = moduleId;
   const m = MODULES.find(x => x.id === moduleId);
   if (!m) return;
-  $('lvl-select-title').textContent = m.name;
-  $('lvl-select-subtitle').textContent = `${m.domain} · CCSS ${m.ccss} · grand goal: ${m.grandGoal}`;
+  const v = gradeView(m);
+  $('lvl-select-title').textContent = v.name;
+  $('lvl-select-subtitle').textContent = `${v.domain} · CCSS ${v.ccss} · grand goal: ${v.grandGoal}`;
   renderLevels();
   showScreen('levels');
 }
@@ -3447,12 +3497,13 @@ function openModule(moduleId) {
 function renderLevels() {
   const m = MODULES.find(x => x.id === currentModuleId);
   if (!m) return;
+  const v = gradeView(m);
   const ms = Save.state.modules[m.id];
   const grid = $('level-grid');
   grid.innerHTML = '';
 
-  for (let i = 0; i < m.levels.length; i++) {
-    const lvl = m.levels[i];
+  for (let i = 0; i < v.levels.length; i++) {
+    const lvl = v.levels[i];
     const unlocked = Save.isLevelUnlocked(m.id, i);
     const stars = ms.levelStars[i];
     const best  = ms.levelBest[i];
@@ -3512,7 +3563,8 @@ function playLevel(levelIndex) {
     return;
   }
 
-  $('host-title').textContent = `${m.name} — L${levelIndex + 1}: ${m.levels[levelIndex].name}`;
+  const gv = gradeView(m);
+  $('host-title').textContent = `${gv.name} — L${levelIndex + 1}: ${gv.levels[levelIndex].name}`;
   showScreen('module');
 
   const host = $('host-frame');
@@ -8964,6 +9016,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('btn-back-launcher').addEventListener('click', exitToLauncher);
   $('btn-back-levels').addEventListener('click', exitToLevels);
+
+  for (const g of [5, 6]) {
+    $('btn-grade-' + g).addEventListener('click', () => {
+      Save.switchGrade(g);
+      renderHeader();
+      renderLauncher();
+    });
+  }
 
   $('btn-preview').addEventListener('click', () => {
     const code = prompt('Enter unlock code to toggle Preview Mode:');
