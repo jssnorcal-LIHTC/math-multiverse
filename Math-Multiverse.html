@@ -3002,6 +3002,20 @@ const MODULES = [
       { id: 6, name: 'Benny\'s SPACESHIP!!',    goal: 'SPAAACESHIP!!',             questions: 20 },
     ],
     grandGoal: 'Master Builder',
+    g6: {
+      ccss: '6.G',
+      domain: 'Area, Surface Area & Volume',
+      description: 'Build Bricksburg with grade-6 geometry: area of plates and gables, volume with half-stud plates, and surface area, all the way to Benny\'s SPACESHIP!',
+      grandGoal: 'Master Geometer',
+      levels: [
+        { id: 1, name: 'Emmet\'s Baseplate',        goal: 'Area of a rectangular plate',        questions: 15, type: 'g6-rect-area' },
+        { id: 2, name: 'Bricksburg Rooftops',       goal: 'Area of a triangular gable',         questions: 18, type: 'g6-tri-area' },
+        { id: 3, name: 'MetalBeard\'s Hold',        goal: 'Volume of a rectangular prism',      questions: 18, type: 'g6-volume' },
+        { id: 4, name: 'Cloud Cuckoo Half-Studs',   goal: 'Volume with a fractional edge',      questions: 20, type: 'g6-volume-frac' },
+        { id: 5, name: 'Apocalypseburg Cladding',   goal: 'Surface area of every face',         questions: 20, type: 'g6-surface-area' },
+        { id: 6, name: 'Benny\'s SPACESHIP Survey', goal: 'Mix every grade-6 build to SPAAACE', questions: 20, type: 'g6-allmix' },
+      ],
+    },
   },
   {
     id: 'rocky-translator',
@@ -6619,6 +6633,20 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     { id: 5, name: 'Apocalypseburg Tower',   gen: 'lwh-bh-mix',  scene: 'wasteland', palette: ['#A0A5A9','#FE8A18','#6b4226','#C91A09'] },
     { id: 6, name: "Benny's SPACESHIP!!",    gen: 'mb-mixed',    scene: 'space',     palette: ['#0055BF','#F4F4F4','#27f4d2','#C91A09','#F2CD37'] },
   ];
+
+  // ===== Grade 6 (CCSS 6.G: area, volume incl. fractional edge lengths, surface area) =====
+  // Same LEGO Movie theme (Emmet, Bricksburg, Benny's spaceship); selected only when
+  // ACTIVE_GRADE === 6. Grade-5 MB_LEVELS above is untouched. Question counts reuse
+  // MB_QPL (15/18/18/20/20/20), so no separate per-level count table is needed.
+  const MB_LEVELS_6 = [
+    { id: 1, name: "Emmet's Baseplate",        gen: 'g6-rect-area',    scene: 'meadow',    palette: ['#C91A09','#F2CD37','#0055BF','#237841','#F4F4F4'] },
+    { id: 2, name: 'Bricksburg Rooftops',      gen: 'g6-tri-area',     scene: 'street',    palette: ['#F4F4F4','#0055BF','#05131D','#F2CD37'] },
+    { id: 3, name: "MetalBeard's Hold",        gen: 'g6-volume',       scene: 'sea',       palette: ['#6b4226','#C91A09','#F4F4F4','#FE8A18'] },
+    { id: 4, name: 'Cloud Cuckoo Half-Studs',  gen: 'g6-volume-frac',  scene: 'cloud',     palette: ['#FFB6E1','#D4A8FF','#A8E6CF','#F2CD37'] },
+    { id: 5, name: 'Apocalypseburg Cladding',  gen: 'g6-surface-area', scene: 'wasteland', palette: ['#A0A5A9','#FE8A18','#6b4226','#C91A09'] },
+    { id: 6, name: "Benny's SPACESHIP Survey", gen: 'g6-allmix',       scene: 'space',     palette: ['#0055BF','#F4F4F4','#27f4d2','#C91A09','#F2CD37'] },
+  ];
+
   const MB_QPL = [15, 18, 18, 20, 20, 20];
 
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
@@ -6918,7 +6946,168 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     return pick([genLwh, genBaseHeight, genComposite, genMissingDim, genUnitCubeCount, genCompareVol, genHollow, genScale])(builderId);
   }
 
+  // ---- Grade 6 generators (CCSS 6.G: area, volume incl. fractional edge lengths,
+  // surface area). The grade-5 generators above are untouched; these run only for the
+  // MB_LEVELS_6 gen ids. Each returns PLAIN-number answer strings (units live in the
+  // prompt/explain, never in the option text) PLUS a `check` contract
+  // { op, operands, answer } whose operands appear in the prompt and whose answer is
+  // the exact numeric value, with answers[correctIdx] === fmtNum(answer).
+  function fmtNum(n) { return Number(n.toFixed(2)).toString(); }
+
+  // Build exactly 4 DISTINCT plain-number option strings: the correct value plus the
+  // supplied pedagogical mistakes, deduped (positive only) and padded with nearby
+  // offsets. Returns { answers, correctIdx } with answers[correctIdx] === fmtNum(correct).
+  function g6Opts(correct, mistakes) {
+    const correctStr = fmtNum(correct);
+    const seen = new Set([correctStr]);
+    const answers = [correctStr];
+    for (const m of mistakes) {
+      if (answers.length >= 4) break;
+      if (typeof m !== 'number' || !isFinite(m) || m <= 0) continue;
+      const s = fmtNum(m);
+      if (!seen.has(s)) { seen.add(s); answers.push(s); }
+    }
+    let pad = 1;
+    while (answers.length < 4) {
+      const cand = correct + pad;
+      const s = fmtNum(cand);
+      if (cand > 0 && !seen.has(s)) { seen.add(s); answers.push(s); }
+      pad++;
+    }
+    shuffle(answers);
+    return { answers, correctIdx: answers.indexOf(correctStr) };
+  }
+
+  // L1 — area of a rectangular baseplate (6.G.1). check{op:'mul', operands:[l,w]}.
+  function genG6RectArea(builderId) {
+    const l = ri(2, 20), w = ri(2, 20);
+    const area = l * w;
+    const { answers, correctIdx } = g6Opts(area, [
+      2 * (l + w),    // perimeter instead of area
+      l + w,          // added the two sides instead of multiplying
+      (l + 1) * w,    // miscounted one edge
+      l * (w + 1),
+      area + 1,
+      area - 1,
+    ]);
+    return {
+      topic: 'g6-rect-area',
+      prompt: quoteFor(builderId, `This baseplate is <strong>${l}</strong> studs long by <strong>${w}</strong> studs wide. <strong>Area in square studs</strong>?`),
+      answers,
+      correctIdx,
+      explain: `Area of a rectangle = length × width. ${l} × ${w} = <strong>${area} square studs</strong>. (Its perimeter, 2 × (${l} + ${w}) = ${2*(l+w)}, is a different measurement.)`,
+      check: { op: 'mul', operands: [l, w], answer: area },
+    };
+  }
+
+  // L2 — area of a triangular roof gable (6.G.1). check{op:'tri-area', operands:[b,h]}.
+  function genG6TriArea(builderId) {
+    const b = ri(2, 16), h = ri(2, 12);
+    const area = b * h / 2;          // whole number or an x.5 value
+    const { answers, correctIdx } = g6Opts(area, [
+      b * h,          // forgot to halve
+      b + h,          // added base and height
+      area + 1,
+      area - 1,
+      area + 0.5,
+      b * h + 1,
+    ]);
+    return {
+      topic: 'g6-tri-area',
+      prompt: quoteFor(builderId, `This gable brick is a triangle with base <strong>${b}</strong> studs and height <strong>${h}</strong> studs. <strong>Area in square studs</strong>?`),
+      answers,
+      correctIdx,
+      explain: `Area of a triangle = base × height ÷ 2 = ${b} × ${h} ÷ 2 = <strong>${fmtNum(area)} square studs</strong>. The ÷ 2 makes it half of the matching rectangle.`,
+      check: { op: 'tri-area', operands: [b, h], answer: area },
+    };
+  }
+
+  // L3 — volume of a rectangular prism (6.G.2). check{op:'mul3', operands:[l,w,h]}.
+  function genG6Volume(builderId) {
+    const l = ri(2, 10), w = ri(2, 10), h = ri(2, 10);
+    const vol = l * w * h;
+    const { answers, correctIdx } = g6Opts(vol, [
+      l * w,            // dropped the height (returned base area)
+      l * h,            // dropped the width (missing a factor)
+      w * h,            // dropped the length (missing a factor)
+      l + w + h,        // added instead of multiplied
+      l * w * (h - 1),  // off-by-one layer
+      vol + l * w,
+    ]);
+    return {
+      topic: 'g6-volume',
+      prompt: quoteFor(builderId, `This brick is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. <strong>Volume in cubic studs</strong>?`),
+      answers,
+      correctIdx,
+      explain: `Volume = length × width × height = ${l} × ${w} × ${h} = <strong>${vol} cubic studs</strong>. (Multiply ${l} × ${w} = ${l*w} first, then × ${h}.)`,
+      check: { op: 'mul3', operands: [l, w, h], answer: vol },
+    };
+  }
+
+  // L4 — volume with one fractional edge length (6.G.2). One edge is a unit fraction
+  // (1/2 or 1/4) shown as a decimal; both are exact in binary float, so the product
+  // terminates to <= 2 dp. check{op:'mul3', operands:[l,w,h]}.
+  function genG6VolumeFrac(builderId) {
+    const l = ri(2, 8), w = ri(2, 8);
+    const frac = pick([0.5, 0.25]);
+    const h = frac;
+    const vol = Math.round(l * w * h * 100) / 100;   // <= 2 dp, exact for 1/2 and 1/4
+    const fracLabel = frac === 0.5 ? '1/2' : '1/4';
+    const { answers, correctIdx } = g6Opts(vol, [
+      l * w,            // ignored the fractional edge (treated it as 1)
+      l + w + h,        // added instead of multiplied
+      l * w * h * 2,    // doubled the fractional edge
+      l * w + h,
+      vol + l * w,
+      vol + 1,
+    ]);
+    return {
+      topic: 'g6-volume-frac',
+      prompt: quoteFor(builderId, `This thin tile is <strong>${l}</strong> by <strong>${w}</strong> studs, but only <strong>${h}</strong> stud (a ${fracLabel} plate) tall. <strong>Volume in cubic studs</strong>?`),
+      answers,
+      correctIdx,
+      explain: `Fractional edge lengths multiply just like whole ones. ${l} × ${w} × ${h} = ${l*w} × ${h} = <strong>${fmtNum(vol)} cubic studs</strong>.`,
+      check: { op: 'mul3', operands: [l, w, h], answer: vol },
+    };
+  }
+
+  // L5 — surface area of a rectangular prism (6.G.4). Six faces in three matching
+  // pairs. check{op:'surface-area', operands:[l,w,h], answer:2*(lw+lh+wh)}.
+  function genG6SurfaceArea(builderId) {
+    const l = ri(2, 8), w = ri(2, 8), h = ri(2, 8);
+    const sa = 2 * (l * w + l * h + w * h);
+    const { answers, correctIdx } = g6Opts(sa, [
+      l * w * h,                 // used volume instead of surface area
+      l * w + l * h + w * h,     // summed only 3 faces (forgot the × 2)
+      2 * l * w * h,
+      l * w + l * h,             // missed a face pair
+      sa + 2,
+      sa - 2,
+    ]);
+    return {
+      topic: 'g6-surface-area',
+      prompt: quoteFor(builderId, `This crate is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. To sticker every outside face, what is the <strong>surface area in square studs</strong>?`),
+      answers,
+      correctIdx,
+      explain: `Surface area = 2 × (lw + lh + wh) = 2 × (${l*w} + ${l*h} + ${w*h}) = 2 × ${l*w + l*h + w*h} = <strong>${sa} square studs</strong>. (Six faces in three matching pairs, so double the three different ones.)`,
+      check: { op: 'surface-area', operands: [l, w, h], answer: sa },
+    };
+  }
+
+  // L6 — random pick of the five grade-6 builds (always carries a `check`).
+  function genG6AllMix(builderId) {
+    return pick([genG6RectArea, genG6TriArea, genG6Volume, genG6VolumeFrac, genG6SurfaceArea])(builderId);
+  }
+
   const MB_GEN = {
+    // Grade 6 (6.G area / volume incl. fractional edges / surface area) gen ids first;
+    // grade-5 entries below are unchanged.
+    'g6-rect-area':    genG6RectArea,
+    'g6-tri-area':     genG6TriArea,
+    'g6-volume':       genG6Volume,
+    'g6-volume-frac':  genG6VolumeFrac,
+    'g6-surface-area': genG6SurfaceArea,
+    'g6-allmix':       genG6AllMix,
     'lwh':         genLwh,
     'base-height': genBaseHeight,
     'composite':   genComposite,
@@ -6931,7 +7120,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   InlineModules['master-builder'] = {
     init(host, levelIndex, callbacks) {
-      const lvl = MB_LEVELS[levelIndex];
+      const lvl = (typeof ACTIVE_GRADE !== 'undefined' && ACTIVE_GRADE === 6 && typeof MB_LEVELS_6 !== 'undefined') ? MB_LEVELS_6[levelIndex] : MB_LEVELS[levelIndex];
       const totalQ = MB_QPL[levelIndex];
 
       const state = {
