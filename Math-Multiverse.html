@@ -3118,6 +3118,20 @@ const MODULES = [
       { id: 6, name: 'Storm of the Century',    goal: 'Captain C. Robin rescues',  questions: 20 },
     ],
     grandGoal: '1st Mate P. Bear',
+    g6: {
+      ccss: '6.EE',
+      domain: 'Expressions & Equations',
+      description: 'It still rained, and it rained. Save Pooh and Piglet with exponents, expressions, and one-step equations.',
+      grandGoal: 'Keeper of the Equation',
+      levels: [
+        { id: 1, name: 'Powers of the Rain',      goal: 'Evaluate whole-number exponents',       questions: 15, type: 'g6-exponent' },
+        { id: 2, name: "Pooh's Honey Count",      goal: 'Evaluate a·x + b at a given x',     questions: 18, type: 'g6-evaluate' },
+        { id: 3, name: "Piglet's Missing Acorns", goal: 'Solve x + a = b for x',                  questions: 18, type: 'g6-solve-add' },
+        { id: 4, name: 'Rows on the Raft',        goal: 'Solve a·x = b for x',               questions: 20, type: 'g6-solve-mul' },
+        { id: 5, name: 'The Brain of Pooh',       goal: 'Evaluate grouped a(x + b)',             questions: 20, type: 'g6-evaluate2' },
+        { id: 6, name: 'Storm of the Century',    goal: 'Mix every grade-6 skill to the rescue', questions: 20, type: 'g6-allmix' },
+      ],
+    },
   },
 ];
 
@@ -9581,6 +9595,18 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   ];
   const FB_QPL = [15, 18, 18, 20, 20, 20];
 
+  // Same Winnie-the-Pooh flood theme; selected only when ACTIVE_GRADE === 6. The
+  // grade-5 FB_LEVELS above is untouched. FB_QPL (15,18,18,20,20,20) is shared by
+  // both grades. Gen ids resolve through the FB_GEN map below (grade-6 keys first).
+  const FB_LEVELS_6 = [
+    { id: 1, name: 'Powers of the Rain',      gen: 'g6-exponent',  chapter: 'In which the raindrops multiply themselves' },
+    { id: 2, name: "Pooh's Honey Count",      gen: 'g6-evaluate',  chapter: 'In which a jar-count depends on x' },
+    { id: 3, name: "Piglet's Missing Acorns", gen: 'g6-solve-add', chapter: 'In which Piglet undoes an addition' },
+    { id: 4, name: 'Rows on the Raft',        gen: 'g6-solve-mul', chapter: 'In which Owl undoes a multiplication' },
+    { id: 5, name: 'The Brain of Pooh',       gen: 'g6-evaluate2', chapter: 'In which Pooh groups before he multiplies' },
+    { id: 6, name: 'Storm of the Century',    gen: 'g6-allmix',    chapter: 'In which Captain C. Robin solves it all' },
+  ];
+
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
   const pick = (a) => a[Math.floor(Math.random() * a.length)];
   function shuffle(a) { for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
@@ -10098,7 +10124,159 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     return pick(fns)();
   }
 
+  // ---- Grade 6 generators (CCSS 6.EE — exponents, evaluating expressions, one-step equations) ----
+  // Run only for the FB_LEVELS_6 gen ids (ACTIVE_GRADE === 6). The grade-5 generators above are
+  // untouched. Each returns the standard { topic, prompt, answers:[4], correctIdx, explain } shape
+  // PLUS a machine-checkable check:{op, operands, answer}. `answer` is an exact integer and
+  // answers[correctIdx] equals that integer as a plain number string. Options are built with the
+  // shared pedDistractors() helper, which guarantees exactly 4 distinct, non-negative strings with
+  // the correct value present; the listed mistakes model real algebra slips. Pooh/Piglet voice kept.
+
+  function genG6Exponent() {
+    // 6.EE.1 — evaluate numerical expressions involving whole-number exponents (base^exp).
+    let base = ri(2, 6), exp = ri(2, 4);
+    while (base ** exp > 1296) { base = ri(2, 6); exp = ri(2, 4); }
+    const answer = base ** exp;
+    // Slips: multiplied base by exponent, added them, off by a single factor of base.
+    const opts = pedDistractors(answer, [
+      base * exp,            // treated the exponent as a multiplier (base × exp)
+      base + exp,            // added base and exponent
+      base ** (exp - 1),     // one factor short
+      answer + base,         // one factor too many
+      answer - base,
+    ]);
+    return {
+      topic: 'g6-exponent',
+      prompt: pick([
+        `Pooh watched the rain fold over on itself: <em>"<strong>${base}<sup>${exp}</sup></strong> raindrops, oh bother. How many is that?"</em>`,
+        `Owl peered over his spectacles: <em>"${base} to the power of ${exp}; that is <strong>${base}<sup>${exp}</sup></strong>. Pray, what does it come to?"</em>`,
+        `Christopher Robin read aloud from his book: <em>"<strong>${base}<sup>${exp}</sup></strong> means ${base} multiplied by itself ${exp} times. What is it?"</em>`,
+      ]),
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(answer),
+      explain: `An exponent is repeated multiplication: ${base}<sup>${exp}</sup> = ${Array(exp).fill(base).join(' × ')} = <strong>${answer}</strong>. It is not ${base} × ${exp} = ${base * exp}.`,
+      check: { op: 'pow', operands: [base, exp], answer },
+    };
+  }
+
+  function genG6Evaluate() {
+    // 6.EE.2c — evaluate the expression a·x + b at a given value of x.
+    const a = ri(2, 9), x = ri(1, 9), b = ri(1, 20);
+    const answer = a * x + b;
+    // Slips: wrong order (added a then multiplied x·b), added all three, forgot the constant.
+    const opts = pedDistractors(answer, [
+      a + x * b,             // wrong order: a + (x × b)
+      a + x + b,             // added everything
+      a * x,                 // forgot to add b
+      (a + x) * b,           // grouped the wrong pair
+      answer + 1,
+    ]);
+    return {
+      topic: 'g6-evaluate',
+      prompt: pick([
+        `Christopher Robin set the puzzle: <em>"If <strong>x = ${x}</strong>, what is <strong>${a}x + ${b}</strong> honey jars?"</em>`,
+        `Pooh counted carefully on his paws: <em>"With <strong>x = ${x}</strong>, the expression <strong>${a}x + ${b}</strong> comes to...?"</em>`,
+        `Rabbit tallied the haycorns: <em>"Substitute <strong>x = ${x}</strong> into <strong>${a}x + ${b}</strong>. What is the total?"</em>`,
+      ]),
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(answer),
+      explain: `Substitute x = ${x}: ${a}·${x} + ${b} = ${a * x} + ${b} = <strong>${answer}</strong>. Multiply before you add (order of operations).`,
+      check: { op: 'linear', operands: [a, x, b], answer },
+    };
+  }
+
+  function genG6SolveAdd() {
+    // 6.EE.7 — solve the one-step equation x + a = b (b > a so x stays positive).
+    const a = ri(2, 15), x = ri(1, 15), b = a + x;
+    const answer = b - a;   // == x
+    // Slips: added instead of subtracting (wrong inverse), copied the total or the addend.
+    const opts = pedDistractors(answer, [
+      b + a,                 // wrong inverse: b + a instead of b − a
+      b,                     // copied the total
+      a,                     // copied the addend
+      answer + 1,
+      answer - 1,
+    ]);
+    return {
+      topic: 'g6-solve-add',
+      prompt: pick([
+        `Piglet's bottle began with <strong>x</strong> acorns. Pooh dropped in <strong>${a}</strong> more, and now there are <strong>${b}</strong>. <em>"How many at the start?"</em> &nbsp;(x + ${a} = ${b})`,
+        `Eeyore counted his thistles: <em>"I had x. Someone added <strong>${a}</strong>, making <strong>${b}</strong>. How many did I begin with?"</em> &nbsp;(x + ${a} = ${b})`,
+        `Solve for Pooh in the rising water: <em>"<strong>x + ${a} = ${b}</strong>. What is x?"</em>`,
+      ]),
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(answer),
+      explain: `Undo + ${a} by subtracting from both sides: x = ${b} − ${a} = <strong>${answer}</strong>. Subtraction is the inverse of addition; ${b} + ${a} would undo the wrong way.`,
+      check: { op: 'solve-add', operands: [a, b], answer },
+    };
+  }
+
+  function genG6SolveMul() {
+    // 6.EE.7 — solve the one-step equation a·x = b (b is a multiple of a so x is a whole number).
+    const a = ri(2, 9), x = ri(2, 12), b = a * x;
+    const answer = b / a;   // == x
+    // Slips: multiplied instead of dividing (wrong inverse), subtracted, or added.
+    const opts = pedDistractors(answer, [
+      a * b,                 // wrong inverse: a × b instead of b ÷ a
+      b - a,                 // subtracted instead of dividing
+      b + a,                 // added instead of dividing
+      answer + 1,
+      answer - 1,
+    ]);
+    return {
+      topic: 'g6-solve-mul',
+      prompt: pick([
+        `Owl stacked the rescued jars in <strong>${a}</strong> equal rows, <strong>${b}</strong> jars in all. <em>"How many in each row?"</em> &nbsp;(${a}x = ${b})`,
+        `Kanga shared <strong>${b}</strong> haycorns into <strong>${a}</strong> equal baskets. <em>"How many in each basket?"</em> &nbsp;(${a}x = ${b})`,
+        `Solve for Pooh aboard the floating jar: <em>"<strong>${a}x = ${b}</strong>. What is x?"</em>`,
+      ]),
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(answer),
+      explain: `Undo × ${a} by dividing both sides: x = ${b} ÷ ${a} = <strong>${answer}</strong>. Division is the inverse of multiplication; ${a} × ${b} would undo the wrong way.`,
+      check: { op: 'solve-mul', operands: [a, b], answer },
+    };
+  }
+
+  function genG6Evaluate2() {
+    // 6.EE.2c — evaluate the grouped expression a·(x + b). Exposed via op:'linear' with
+    // operands [a, x, a·b] so that a·x + (a·b) = a·(x + b) matches the check contract.
+    const a = ri(2, 6), x = ri(1, 9), b = ri(1, 8);
+    const c = a * b;                 // distributed constant term
+    const answer = a * x + c;        // == a·(x + b)
+    // Slips: only added b once (forgot to distribute), dropped the group, added everything.
+    const opts = pedDistractors(answer, [
+      a * x + b,             // multiplied x but added b only once (no distribution)
+      a * x,                 // dropped the + ${b} inside the group
+      a + x + b,             // added everything
+      a + x * b,             // wrong order inside
+      answer + a,
+    ]);
+    return {
+      topic: 'g6-evaluate2',
+      prompt: pick([
+        `The Brain of Pooh hummed a Thinking Hum: <em>"With <strong>x = ${x}</strong>, group first: <strong>${a}(x + ${b})</strong>. What is it?"</em>`,
+        `Piglet, very bravely: <em>"If <strong>x = ${x}</strong>, then <strong>${a} × (x + ${b})</strong> comes to...?"</em>`,
+        `Christopher Robin: <em>"Evaluate <strong>${a}(x + ${b})</strong> when <strong>x = ${x}</strong>."</em>`,
+      ]),
+      answers: opts.map(o => o + ''),
+      correctIdx: opts.indexOf(answer),
+      explain: `Do the parentheses first: x + ${b} = ${x} + ${b} = ${x + b}. Then × ${a} = <strong>${answer}</strong>. Distributing gives the same: ${a}·${x} + ${a}·${b} = ${a * x} + ${c} = ${answer}.`,
+      check: { op: 'linear', operands: [a, x, c], answer },
+    };
+  }
+
+  function genG6AllMix() {
+    return pick([genG6Exponent, genG6Evaluate, genG6SolveAdd, genG6SolveMul, genG6Evaluate2])();
+  }
+
   const FB_GEN = {
+    // Grade 6 (6.EE) keys checked first; the grade-5 keys below are unchanged.
+    'g6-exponent':   genG6Exponent,
+    'g6-evaluate':   genG6Evaluate,
+    'g6-solve-add':  genG6SolveAdd,
+    'g6-solve-mul':  genG6SolveMul,
+    'g6-evaluate2':  genG6Evaluate2,
+    'g6-allmix':     genG6AllMix,
     'simple-parens': genSimpleParens,
     'parens-multi':  () => Math.random() < 0.7 ? genParensMulti() : (Math.random() < 0.5 ? genWriteExpr() : genCorrespondingTerm()),
     'brackets':      genBrackets,
@@ -10111,7 +10289,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   InlineModules['floating-bear'] = {
     init(host, levelIndex, callbacks) {
-      const lvl = FB_LEVELS[levelIndex];
+      const lvl = (typeof ACTIVE_GRADE !== 'undefined' && ACTIVE_GRADE === 6 && typeof FB_LEVELS_6 !== 'undefined') ? FB_LEVELS_6[levelIndex] : FB_LEVELS[levelIndex];
       const totalQ = FB_QPL[levelIndex];
 
       const state = {
