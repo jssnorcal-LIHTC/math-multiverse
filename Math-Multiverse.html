@@ -2978,6 +2978,20 @@ const MODULES = [
       { id: 6, name: 'Suzuka Title Decider',    goal: 'Win the championship',     questions: 20, type: 'mixed-all' },
     ],
     grandGoal: 'World Champion',
+    g6: {
+      ccss: '6.NS / 6.RP',
+      domain: 'Decimals, Rates & Data',
+      description: 'Run the season on grade-6 math: divide decimals, compute unit rates and percents, and read lap-time data to gate every overtake.',
+      grandGoal: 'Data & Decimals Champion',
+      levels: [
+        { id: 1, name: 'Fuel Stint Division',  goal: 'Divide decimals for per-stint fuel',     questions: 15, type: 'g6-dec-divide' },
+        { id: 2, name: 'Sector Delta Ops',     goal: 'Add, subtract, multiply decimal splits', questions: 18, type: 'g6-dec-ops' },
+        { id: 3, name: 'Pace Unit Rates',      goal: 'Find km-per-lap unit rates',             questions: 18, type: 'g6-unit-rate' },
+        { id: 4, name: 'Grip Percentages',     goal: 'Take a percent of a quantity',           questions: 20, type: 'g6-percent' },
+        { id: 5, name: 'Lap-Time Telemetry',   goal: 'Mean, median and range of lap times',    questions: 20, type: 'g6-stats' },
+        { id: 6, name: 'Data Title Decider',   goal: 'Mix every grade-6 skill to the flag',    questions: 20, type: 'g6-allmix' },
+      ],
+    },
   },
   {
     id: 'razor-crest',
@@ -5171,6 +5185,18 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     { id: 6, name: 'Suzuka Title Decider', circuit: 'Suzuka',      gridSize: F1_GRID_SIZE, gen: 'mixed-all' },
   ];
 
+  // Grade 6 (6.NS decimal ops + division, 6.RP unit rate + percent, 6.SP stats).
+  // Same F1 theme; selected only when ACTIVE_GRADE === 6. Grade-5 F1_LEVELS above
+  // is untouched. QPL (15,18,18,20,20,20) is shared by both grades.
+  const F1_LEVELS_6 = [
+    { id: 1, name: 'Fuel Stint Division',  circuit: 'Bahrain',     gridSize: F1_GRID_SIZE, gen: 'g6-dec-divide' },
+    { id: 2, name: 'Sector Delta Ops',     circuit: 'Bahrain',     gridSize: F1_GRID_SIZE, gen: 'g6-dec-ops' },
+    { id: 3, name: 'Pace Unit Rates',      circuit: 'Monaco',      gridSize: F1_GRID_SIZE, gen: 'g6-unit-rate' },
+    { id: 4, name: 'Grip Percentages',     circuit: 'Silverstone', gridSize: F1_GRID_SIZE, gen: 'g6-percent' },
+    { id: 5, name: 'Lap-Time Telemetry',   circuit: 'Suzuka',      gridSize: F1_GRID_SIZE, gen: 'g6-stats' },
+    { id: 6, name: 'Data Title Decider',   circuit: 'Suzuka',      gridSize: F1_GRID_SIZE, gen: 'g6-allmix' },
+  ];
+
   const QPL = [15, 18, 18, 20, 20, 20];
 
   const ri = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
@@ -5529,7 +5555,287 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     return pick(fns)();
   }
 
+  // ===== Grade 6 (6.NS decimal ops + division, 6.RP unit rate + percent, 6.SP stats) =====
+  // Grade-5 generators above are untouched; these run only for the F1_LEVELS_6 gen ids.
+
+  // Build EXACTLY 4 distinct, non-negative option strings with one correct.
+  // `correct` is the numeric answer, `decimals` the display precision, `mistakes`
+  // an ordered list of plausible wrong NUMBERS. Dedups on the rounded value; if
+  // short, pads with correct ± 0.1*k (then ± integers) so options never repeat
+  // and never go negative. Returns { answers:[4 strings], correctIdx }.
+  function g6Options(correct, decimals, mistakes) {
+    const p = Math.pow(10, decimals);
+    const round = (x) => Math.round((+x) * p) / p;
+    const clean = (x) => {
+      let s = round(x).toFixed(decimals);
+      if (s.indexOf('.') >= 0) s = s.replace(/0+$/, '').replace(/\.$/, '');
+      return s === '-0' ? '0' : s;
+    };
+    const correctV = round(correct);
+    const seen = new Set([correctV]);
+    const vals = [correctV];
+    for (const m of (mistakes || [])) {
+      if (vals.length >= 4) break;
+      if (typeof m !== 'number' || !isFinite(m) || m < 0) continue;
+      const v = round(m);
+      if (!seen.has(v)) { seen.add(v); vals.push(v); }
+    }
+    let k = 1;
+    while (vals.length < 4 && k <= 1000) {
+      const v = round(correctV + 0.1 * k);
+      if (v >= 0 && !seen.has(v)) { seen.add(v); vals.push(v); }
+      k++;
+    }
+    let pad = 1;
+    while (vals.length < 4) {
+      const v = correctV + pad;
+      if (!seen.has(v)) { seen.add(v); vals.push(v); }
+      pad++;
+    }
+    const correctStr = clean(correctV);
+    const order = shuffle(vals.slice(0, 4).map(clean));
+    return { answers: order, correctIdx: order.indexOf(correctStr) };
+  }
+
+  // L1: divide decimals (6.NS.3). a / b exact to 2 dp (built from a 2-dp quotient).
+  function genG6DecDivide() {
+    const b = ri(2, 9);
+    const q = +(ri(105, 925) / 100).toFixed(2);   // 1.05 to 9.25, two decimals
+    const a = +(q * b).toFixed(2);                 // exact 2-dp dividend
+    const driver = pick(DRIVERS);
+    const mistakes = [
+      q * 10,             // decimal point shifted one place right
+      q / 10,             // decimal point shifted one place left
+      a - b,              // subtracted instead of dividing
+      +(q + 0.1).toFixed(2),
+      +(q - 0.1).toFixed(2),
+      Math.round(q),      // dropped the decimal entirely
+    ];
+    const { answers, correctIdx } = g6Options(q, 2, mistakes);
+    return {
+      topic: 'g6-dec-divide',
+      prompt: pick([
+        `Engineer to ${driver.last}: <em>"We burned <strong>${a} kg</strong> of fuel over <strong>${b}</strong> equal stints. Fuel <strong>per stint</strong>?"</em>`,
+        `Pit wall: <em>"<strong>${a} L</strong> across <strong>${b}</strong> identical stints. How much per stint?"</em>`,
+        `Strategy: <strong>${a}</strong> shared evenly over <strong>${b}</strong> stints. One stint's value?`,
+        `Crofty: <em>"${driver.last} splits <strong>${a}</strong> by <strong>${b}</strong>. Per-stint figure (2 dp)?"</em>`,
+        `Telemetry feed: <strong>${a} ÷ ${b}</strong>. Answer to two decimal places?`,
+      ]),
+      answers,
+      correctIdx,
+      explain: `Divide: ${a} ÷ ${b} = <strong>${q}</strong>. Keep the decimal point in the quotient lined up over the dividend and divide as with whole numbers.`,
+      check: { op: 'div', operands: [a, b], answer: q },
+    };
+  }
+
+  // L2: add / subtract / multiply decimals (6.NS.3).
+  function genG6DecOps() {
+    const mode = pick(['add', 'sub', 'mul']);
+    const driver = pick(DRIVERS);
+    if (mode === 'mul') {
+      const dec = +(ri(15, 95) / 100).toFixed(2);  // 0.15 to 0.95 (hundredths)
+      const whole = ri(3, 12);
+      const ans = +(dec * whole).toFixed(2);        // (k/100)*int ⇒ exact ≤2 dp
+      const mistakes = [
+        dec + whole,                  // added instead of multiplying
+        ans * 10,                     // decimal misplaced (too far right)
+        ans / 10,                     // decimal misplaced (too far left)
+        +(dec * (whole - 1)).toFixed(2),
+        +(dec * (whole + 1)).toFixed(2),
+        Math.round(ans),
+      ];
+      const { answers, correctIdx } = g6Options(ans, 2, mistakes);
+      return {
+        topic: 'g6-dec-ops',
+        prompt: pick([
+          `Pirelli: <em>"Tires drop <strong>${dec} s</strong> of grip per lap. Over <strong>${whole}</strong> laps, total time lost?"</em>`,
+          `Engineer: <em>"Deg is <strong>${dec}</strong> s/lap for <strong>${whole}</strong> laps. Cumulative loss?"</em>`,
+          `Stint math: <strong>${dec}</strong> × <strong>${whole}</strong> laps. Total degradation?`,
+          `${driver.last}'s run: <strong>${dec} s</strong> bleed each lap, <strong>${whole}</strong> laps. Total?`,
+        ]),
+        answers,
+        correctIdx,
+        explain: `Multiply: ${dec} × ${whole} = <strong>${ans}</strong>. Multiply as whole numbers, then place the decimal so the product has the same number of decimal places as the factors.`,
+        check: { op: 'mul', operands: [dec, whole], answer: ans },
+      };
+    }
+    const x = +(ri(500, 1200) / 100).toFixed(2);   // 5.00 to 12.00
+    const y = +(ri(100, 499) / 100).toFixed(2);    // 1.00 to 4.99  (so x > y)
+    if (mode === 'add') {
+      const ans = +(x + y).toFixed(2);
+      const mistakes = [
+        x - y,                        // subtracted instead of adding
+        +(ans + 0.1).toFixed(2),
+        +(ans - 0.1).toFixed(2),
+        ans * 10,                     // misplaced decimal
+        Math.round(x) + Math.round(y),// rounded too early
+        +(ans + 1).toFixed(2),
+      ];
+      const { answers, correctIdx } = g6Options(ans, 2, mistakes);
+      return {
+        topic: 'g6-dec-ops',
+        prompt: pick([
+          `Pit wall: <em>"Pit-lane loss <strong>${x} s</strong> plus stop time <strong>${y} s</strong>. Total time lost?"</em>`,
+          `Engineer: <em>"Sector splits <strong>${x}</strong> and <strong>${y}</strong>. Add them for the combined time?"</em>`,
+          `${driver.last}'s gap grows by <strong>${x} s</strong> then <strong>${y} s</strong>. New total gap?`,
+          `Telemetry: <strong>${x} + ${y}</strong>. Sum to two decimals?`,
+        ]),
+        answers,
+        correctIdx,
+        explain: `Add: ${x} + ${y} = <strong>${ans}</strong>. Line up the decimal points and add column by column.`,
+        check: { op: 'add', operands: [x, y], answer: ans },
+      };
+    }
+    const ans = +(x - y).toFixed(2);                // x > y ⇒ positive
+    const mistakes = [
+      x + y,                          // added instead of subtracting
+      +(ans + 0.1).toFixed(2),
+      +(ans - 0.1).toFixed(2),
+      ans * 10,                       // misplaced decimal
+      Math.round(x) - Math.round(y),  // rounded too early
+      +(ans + 1).toFixed(2),
+    ];
+    const { answers, correctIdx } = g6Options(ans, 2, mistakes);
+    return {
+      topic: 'g6-dec-ops',
+      prompt: pick([
+        `Engineer: <em>"${driver.last} laps in <strong>${x} s</strong>; the tow was worth <strong>${y} s</strong>. Corrected lap is <strong>${x} − ${y}</strong>. Result?"</em>`,
+        `Pit wall: <em>"Lap was <strong>${x} s</strong>, target <strong>${y} s</strong> quicker. How far off is the difference ${x} − ${y}?"</em>`,
+        `Strategy: <strong>${x} s</strong> fuel-corrected, minus a <strong>${y} s</strong> tow. Net time?`,
+        `Telemetry: <strong>${x} − ${y}</strong>. Difference to two decimals?`,
+      ]),
+      answers,
+      correctIdx,
+      explain: `Subtract: ${x} − ${y} = <strong>${ans}</strong>. Line up the decimal points and subtract column by column, borrowing where needed.`,
+      check: { op: 'sub', operands: [x, y], answer: ans },
+    };
+  }
+
+  // L3: unit rate (6.RP.2 / 6.RP.3b): pace or speed = distance / time, exact.
+  function genG6UnitRate() {
+    const t = ri(2, 8);
+    const r = +(ri(150, 320) / 100).toFixed(2);    // 1.50 to 3.20 per unit
+    const d = +(r * t).toFixed(2);                  // exact 2-dp distance
+    const driver = pick(DRIVERS);
+    const unit = pick(['lap', 'minute']);
+    const mistakes = [
+      d - t,              // subtracted instead of dividing
+      r * 10,             // decimal shifted right
+      r / 10,             // decimal shifted left
+      +(r + 0.1).toFixed(2),
+      +(r - 0.1).toFixed(2),
+      d + t,              // added instead of dividing
+    ];
+    const { answers, correctIdx } = g6Options(r, 2, mistakes);
+    return {
+      topic: 'g6-unit-rate',
+      prompt: pick([
+        `Engineer: <em>"${driver.last} covered <strong>${d} km</strong> in <strong>${t}</strong> ${unit}s. <strong>Unit rate</strong> (km per ${unit})?"</em>`,
+        `Pit wall: <em>"<strong>${d} km</strong> over <strong>${t}</strong> ${unit}s. Distance per ${unit}?"</em>`,
+        `Strategy: ${d} km in ${t} ${unit}s. What is the km-per-${unit} pace?`,
+        `Telemetry: rate = <strong>${d} ÷ ${t}</strong> km/${unit}. Value (2 dp)?`,
+      ]),
+      answers,
+      correctIdx,
+      explain: `A unit rate is distance ÷ time: ${d} ÷ ${t} = <strong>${r}</strong> km per ${unit}. Dividing by the number of ${unit}s gives the amount for exactly one.`,
+      check: { op: 'div', operands: [d, t], answer: r },
+    };
+  }
+
+  // L4: percent of a quantity (6.RP.3c): rate% of base. answer = rate*base/100.
+  function genG6Percent() {
+    const rate = pick([10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 75, 80, 90]); // multiples of 5
+    const base = pick([20, 40, 60, 80, 120, 140, 160, 200, 240]);            // multiples of 20
+    const ans = rate * base / 100;   // (rate/5)*(base/20) ⇒ always a whole number
+    const driver = pick(DRIVERS);
+    const mistakes = [
+      rate,                 // reported the percent itself, not the amount
+      base - ans,           // computed the remaining part
+      rate * base / 10,     // decimal misplaced (10× too big)
+      rate * base / 1000,   // decimal misplaced (10× too small)
+      base,                 // used the whole base
+      ans + 1,
+      ans - 1,
+    ];
+    const { answers, correctIdx } = g6Options(ans, 2, mistakes);
+    return {
+      topic: 'g6-percent',
+      prompt: pick([
+        `Engineer: <em>"The tank holds <strong>${base} L</strong>. ${driver.last} has used <strong>${rate}%</strong>. Liters used?"</em>`,
+        `Strategy: <em>"<strong>${rate}%</strong> of the <strong>${base}</strong>-lap race is done. How many laps?"</em>`,
+        `Pit wall: what is <strong>${rate}%</strong> of <strong>${base}</strong>?`,
+        `Telemetry: tire life is <strong>${base}</strong> units; <strong>${rate}%</strong> is gone. Units gone?`,
+      ]),
+      answers,
+      correctIdx,
+      explain: `Percent of a quantity: ${rate}% of ${base} = ${rate}/100 × ${base} = <strong>${ans}</strong>. Convert the percent to a fraction (or decimal) and multiply by the whole.`,
+      check: { op: 'percent', operands: [rate, base], answer: ans },
+    };
+  }
+
+  // L5: statistics (6.SP.5): mean, median, or range of 5 lap times.
+  function genG6Stats() {
+    const op = pick(['mean', 'median', 'range']);
+    const driver = pick(DRIVERS);
+    const vt = [];                                  // lap times in tenths of a second
+    for (let i = 0; i < 4; i++) vt.push(ri(800, 950));
+    const partial = vt.reduce((a, b) => a + b, 0);
+    let fifth = ri(800, 950);
+    fifth += ((5 - ((partial + fifth) % 5)) % 5);   // force sum ≡ 0 (mod 5) ⇒ clean mean
+    if (fifth > 950) fifth -= 5;
+    vt.push(fifth);
+    const vals = vt.map(t => +(t / 10).toFixed(1));
+    const sorted = vals.slice().sort((a, b) => a - b);
+    const sum = +(vals.reduce((a, b) => a + b, 0)).toFixed(1);
+    const mean = +(sum / 5).toFixed(1);
+    const median = sorted[2];
+    const range = +(sorted[4] - sorted[0]).toFixed(1);
+    const list = vals.map(v => v.toFixed(1)).join(', ');
+    let ans, mistakes, label, how;
+    if (op === 'mean') {
+      ans = mean;
+      label = 'average (mean)';
+      how = `Mean = sum ÷ count = ${sum} ÷ 5 = <strong>${mean}</strong>.`;
+      mistakes = [median, sum, +(sum / 4).toFixed(1), range, +(mean + 0.1).toFixed(1), +(mean - 0.1).toFixed(1), sorted[4]];
+    } else if (op === 'median') {
+      ans = median;
+      label = 'middle (median)';
+      how = `Sort the five times, then take the middle one: <strong>${median}</strong>.`;
+      mistakes = [mean, sorted[0], sorted[4], range, vals[2], +(median + 0.1).toFixed(1), +(median - 0.1).toFixed(1)];
+    } else {
+      ans = range;
+      label = 'range (slowest − fastest)';
+      how = `Range = max − min = ${sorted[4]} − ${sorted[0]} = <strong>${range}</strong>.`;
+      mistakes = [sorted[4] + sorted[0], mean, median, sorted[4], +(range + 0.1).toFixed(1), +(range - 0.1).toFixed(1)];
+    }
+    const { answers, correctIdx } = g6Options(ans, 1, mistakes);
+    return {
+      topic: 'g6-stats',
+      prompt: pick([
+        `Engineer: <em>"${driver.last}'s last five laps: <strong>${list}</strong> s. Find the <strong>${label}</strong> lap time."</em>`,
+        `Timing tower shows ${driver.last}'s five laps: <strong>${list}</strong> s. What is the <strong>${label}</strong>?`,
+        `Pit wall data set <strong>${list}</strong> (seconds). Report the <strong>${label}</strong>.`,
+      ]),
+      answers,
+      correctIdx,
+      explain: how,
+      check: { op, operands: vals, answer: ans },
+    };
+  }
+
+  // L6: random pick of the five grade-6 generators.
+  function genG6AllMix() {
+    return pick([genG6DecDivide, genG6DecOps, genG6UnitRate, genG6Percent, genG6Stats])();
+  }
+
   const GEN_BY_TYPE = {
+    // Grade 6 (6.NS / 6.RP / 6.SP) keys checked first; grade-5 keys below unchanged.
+    'g6-dec-divide': genG6DecDivide,
+    'g6-dec-ops':    genG6DecOps,
+    'g6-unit-rate':  genG6UnitRate,
+    'g6-percent':    genG6Percent,
+    'g6-stats':      genG6Stats,
+    'g6-allmix':     genG6AllMix,
     'place-value':  () => { const r = Math.random(); return r < 0.4 ? genPlaceValue() : (r < 0.7 ? genWriteWord() : genExpand()); },
     'compare-order': () => Math.random() < 0.7 ? genCompareOrder() : genRound(),
     'add-sub':      genAddSub,
@@ -5598,7 +5904,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   InlineModules['f1-decimals'] = {
     init(host, levelIndex, callbacks) {
-      const lvl = F1_LEVELS[levelIndex];
+      const lvl = (typeof ACTIVE_GRADE !== 'undefined' && ACTIVE_GRADE === 6 && typeof F1_LEVELS_6 !== 'undefined') ? F1_LEVELS_6[levelIndex] : F1_LEVELS[levelIndex];
       const totalQ = QPL[levelIndex];
 
       const state = {
