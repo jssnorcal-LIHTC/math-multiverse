@@ -3055,6 +3055,20 @@ const MODULES = [
       { id: 6, name: 'The Long Trip Home',      goal: 'Save Earth and Erid',       questions: 20 },
     ],
     grandGoal: 'Friend, question?',
+    g6: {
+      ccss: '6.RP',
+      domain: 'Ratios & Proportions',
+      description: 'Save Rocky with grade-6 ratios: unit rates, ratio tables, equivalent ratios, and percent keep the Hail Mary alive.',
+      grandGoal: 'Eridian Ratio Master',
+      levels: [
+        { id: 1, name: 'Hello, Unit Rate?',       goal: 'Find total-per-one unit rates',      questions: 15, type: 'g6-unit-rate' },
+        { id: 2, name: 'Ratio Table Handshake',   goal: 'Fill the ratio table',               questions: 18, type: 'g6-ratio-table' },
+        { id: 3, name: 'Scaling the Recipe',      goal: 'Build equivalent ratios',            questions: 18, type: 'g6-equiv-ratio' },
+        { id: 4, name: 'Astrophage Percent',      goal: 'Take a percent of a quantity',       questions: 20, type: 'g6-percent' },
+        { id: 5, name: 'What Percent, Question?', goal: 'Find what percent a part is',        questions: 20, type: 'g6-percent-find' },
+        { id: 6, name: 'The Long Trip Home',      goal: 'Mix every 6.RP skill to get home',   questions: 20, type: 'g6-allmix' },
+      ],
+    },
   },
   {
     id: 'floating-bear',
@@ -7877,6 +7891,19 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   ];
   const RK_QPL = [15, 18, 18, 20, 20, 20];
 
+  // Grade-6 campaign (CCSS 6.RP): same Project Hail Mary theme, but the math
+  // becomes ratios, unit rates, ratio tables, and percent. Selected only when
+  // ACTIVE_GRADE === 6; the grade-5 RK_LEVELS above is untouched. RK_QPL
+  // (15,18,18,20,20,20) is shared by both grades.
+  const RK_LEVELS_6 = [
+    { id: 1, name: 'Hello, Unit Rate?',        gen: 'g6-unit-rate',   crisis: 'first contact'        },
+    { id: 2, name: 'Ratio Table Handshake',    gen: 'g6-ratio-table', crisis: 'building the table'    },
+    { id: 3, name: 'Scaling the Recipe',       gen: 'g6-equiv-ratio', crisis: 'rocky needs coolant'   },
+    { id: 4, name: 'Astrophage Percent',       gen: 'g6-percent',     crisis: 'sun is dying'          },
+    { id: 5, name: 'What Percent, Question?',  gen: 'g6-percent-find', crisis: 'speak fluent eridian' },
+    { id: 6, name: 'The Long Trip Home',       gen: 'g6-allmix',      crisis: 'last 11.9 light-years' },
+  ];
+
   // Eridian units (kid-friendly conversions; not strictly canonical to keep math clean)
   const ERIDIAN = {
     kel: { factor: 7,    base: 'm',    name: 'kel',  forBase: 'meters',  domain: 'length' },
@@ -8701,7 +8728,194 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     return pick(fns)();
   }
 
+  // ============================================================
+  // GRADE 6 (CCSS 6.RP) generators — ratios, unit rates, ratio
+  // tables, and percent. Same Rocky/Grace "question?" voice; the
+  // grade-5 generators above are untouched. Each returns the
+  // standard { topic, prompt, answers:[4], correctIdx, explain, dict }
+  // shape PLUS a `check:{op,operands,answer}` contract used by the
+  // verification harness. Answer options are plain numbers (units
+  // live only in the prompt/explanation). These run only for the
+  // RK_LEVELS_6 gen ids.
+  // ============================================================
+
+  // L1 — Unit rate (6.RP.2 / 6.RP.3b): total ÷ quantity, exact.
+  function genG6UnitRate() {
+    const qty = ri(3, 8);
+    const rate = ri(2, 9);                 // whole per-unit rate
+    const total = rate * qty;              // exact total
+    const ans = total / qty;               // = rate, a whole number
+    const opts = pedDistractors(ans, [
+      total,                               // forgot to divide (used the total)
+      total * qty,                         // multiplied instead of divided
+      qty,                                 // used the quantity as the rate
+      rate * 10,                           // off by a factor of 10
+      qty + rate,                          // added instead of dividing
+      Math.max(1, rate - 1), rate + 1,
+    ]);
+    const correctIdx = opts.indexOf(ans);
+    const sc = pick([
+      { tag: 'grace', noun: 'grams of astrophage fuel', per: 'jiff',  ulabel: 'grams per jiff'  },
+      { tag: 'rocky', noun: 'meters of tunnel dug',     per: 'hour',  ulabel: 'meters per hour' },
+      { tag: 'grace', noun: 'liters of coolant pumped', per: 'cycle', ulabel: 'liters per cycle'},
+      { tag: 'rocky', noun: 'kels of cable spun',       per: 'jiff',  ulabel: 'kels per jiff'   },
+    ]);
+    const prompt = sc.tag === 'grace'
+      ? `<span class="rk-grace-tag">GRACE</span> The Hail Mary used <strong>${total} ${sc.noun}</strong> over <strong>${qty} ${sc.per}s</strong>. <em>Unit rate (${sc.ulabel})?</em>`
+      : `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, <strong>${total} ${sc.noun}</strong> across <strong>${qty} ${sc.per}s</strong>, question. Rate per ${sc.per}, question?"</em>`;
+    return {
+      topic: 'g6-unit-rate',
+      prompt,
+      answers: opts.map(o => '' + o),
+      correctIdx,
+      dict: { rocky: `${total} : ${qty}`, grace: `${ans} per ${sc.per}` },
+      explain: `A unit rate is total ÷ quantity: ${total} ÷ ${qty} = <strong>${ans}</strong> ${sc.ulabel}. Dividing by the number of ${sc.per}s gives the amount for exactly one.`,
+      check: { op: 'div', operands: [total, qty], answer: ans },
+    };
+  }
+
+  // L2 — Ratio table (6.RP.3a): a:b = c:x, x = b·c/a (whole).
+  function genG6RatioTable() {
+    const a = ri(2, 6);
+    const scale = ri(2, 6);
+    const c = a * scale;                   // c is a multiple of a ⇒ x is whole
+    const b = ri(2, 9);
+    const x = b * c / a;                   // = b·scale, whole
+    const opts = pedDistractors(x, [
+      b * c,                               // multiplied across, forgot to divide
+      c,                                   // used the scaled first quantity
+      b + (c - a),                         // additive error (kept the gap constant)
+      b * (scale + 1),                     // over-scaled by one step
+      Math.max(1, b * (scale - 1)),        // under-scaled by one step
+      x + scale,
+    ]);
+    const correctIdx = opts.indexOf(x);
+    const prompt = pick([
+      `<span class="rk-grace-tag">GRACE</span> Rocky's alloy is <strong>${a} mol xenonite</strong> to <strong>${b} mol ammonia</strong>. His table scales the xenonite to <strong>${c} mol</strong>. <em>How much ammonia keeps the ratio?</em>`,
+      `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, ratio table. <strong>${a} : ${b}</strong>, question. First column grows to <strong>${c}</strong>. Second column, question?"</em>`,
+      `<span class="rk-grace-tag">GRACE</span> The fuel mix is <strong>${a}</strong> parts astrophage to <strong>${b}</strong> parts water. Scaling astrophage to <strong>${c}</strong> parts, <em>how many parts water?</em>`,
+    ]);
+    return {
+      topic: 'g6-ratio-table',
+      prompt,
+      answers: opts.map(o => '' + o),
+      correctIdx,
+      dict: { rocky: `${a} : ${b}`, grace: `${c} : ${x}` },
+      explain: `Same ratio, scaled. ${a} grows to ${c} (×${scale}), so ${b} grows the same way: ${b} × ${scale} = <strong>${x}</strong>. Cross-check: ${b} × ${c} ÷ ${a} = ${x}.`,
+      check: { op: 'proportion', operands: [a, b, c], answer: x },
+    };
+  }
+
+  // L3 — Equivalent ratio (6.RP.3a): scale the ratio; same contract.
+  function genG6EquivRatio() {
+    const a = ri(2, 7);
+    const scale = ri(2, 6);
+    const c = a * scale;                   // c is a multiple of a ⇒ x is whole
+    const b = ri(2, 9);
+    const x = b * c / a;                   // = b·scale, whole
+    const opts = pedDistractors(x, [
+      b * c,                               // cross-multiplied, forgot to divide
+      c,                                   // used the new first term
+      b + (c - a),                         // additive error
+      b * (scale + 1),                     // over-scaled
+      Math.max(1, b * (scale - 1)),        // under-scaled
+      x + scale,
+    ]);
+    const correctIdx = opts.indexOf(x);
+    const prompt = pick([
+      `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, ratio <strong>${a} : ${b}</strong>, question. Scale first part to <strong>${c}</strong>. Second part, equal ratio, question?"</em>`,
+      `<span class="rk-grace-tag">GRACE</span> Make <strong>${a} : ${b}</strong> equivalent with a first term of <strong>${c}</strong>. <em>What is the new second term?</em>`,
+      `<span class="rk-grace-tag">GRACE</span> The Eridian signal repeats <strong>${a} : ${b}</strong>. Rocky stretches it so the first count is <strong>${c}</strong>. <em>Second count?</em>`,
+    ]);
+    return {
+      topic: 'g6-equiv-ratio',
+      prompt,
+      answers: opts.map(o => '' + o),
+      correctIdx,
+      dict: { rocky: `${a} : ${b}`, grace: `${c} : ${x}` },
+      explain: `Equivalent ratios scale by the same factor. ${a} → ${c} is ×${scale}, so ${b} → ${b} × ${scale} = <strong>${x}</strong>.`,
+      check: { op: 'proportion', operands: [a, b, c], answer: x },
+    };
+  }
+
+  // L4 — Percent of a quantity (6.RP.3c): rate% of base = rate·base/100.
+  function genG6Percent() {
+    const rate = pick([10, 15, 20, 25, 30, 40, 50, 60, 75, 80]); // multiples of 5
+    const base = pick([20, 40, 60, 80, 120, 140, 160, 200, 240]);// multiples of 20
+    const ans = rate * base / 100;         // always a whole number
+    const opts = pedDistractors(ans, [
+      rate,                                // reported the percent itself
+      base,                                // used the whole base
+      base - ans,                          // computed the remaining part
+      rate * base / 10,                    // off by a factor of 10 (too big)
+      rate * base / 1000,                  // off by a factor of 10 (too small)
+      ans + 1, Math.max(1, ans - 1),
+    ]);
+    const correctIdx = opts.indexOf(ans);
+    const prompt = pick([
+      `<span class="rk-grace-tag">GRACE</span> The fuel bay holds <strong>${base} kg</strong> of astrophage. Rocky burned <strong>${rate}%</strong>. <em>How many kg?</em>`,
+      `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, <strong>${rate}%</strong> of <strong>${base} mol</strong>, question. How many mol, question?"</em>`,
+      `<span class="rk-grace-tag">GRACE</span> <strong>${rate}%</strong> of the <strong>${base}</strong>-jiff cooling cycle is done. <em>How many jiffs?</em>`,
+    ]);
+    return {
+      topic: 'g6-percent',
+      prompt,
+      answers: opts.map(o => '' + o),
+      correctIdx,
+      dict: { rocky: `${rate}% of ${base}`, grace: `${ans}` },
+      explain: `Percent of a quantity: ${rate}% of ${base} = ${rate}/100 × ${base} = <strong>${ans}</strong>. Convert the percent to a fraction, then multiply by the whole.`,
+      check: { op: 'percent', operands: [rate, base], answer: ans },
+    };
+  }
+
+  // L5 — Find the percent (6.RP.3c): what percent is part of whole.
+  function genG6PercentFind() {
+    let whole, percent, part, guard = 100;
+    do {
+      whole = pick([20, 25, 40, 50, 80, 100, 120, 160, 200, 240]);
+      percent = pick([10, 20, 25, 40, 50, 60, 75, 80]);
+      part = whole * percent / 100;
+    } while (part % 1 !== 0 && guard-- > 0);
+    if (part % 1 !== 0) { whole = 100; percent = pick([10, 20, 25, 40, 50, 75]); part = percent; }
+    const ans = part * 100 / whole;        // = percent, a whole number
+    const opts = pedDistractors(ans, [
+      part,                                // used the part instead of the percent
+      100 - ans,                           // found the complement
+      ans * 10,                            // off by a factor of 10 (too big)
+      Math.max(1, Math.round(ans / 10)),   // off by a factor of 10 (too small)
+      whole - part,                        // used the leftover amount
+      ans + 5,
+    ]);
+    const correctIdx = opts.indexOf(ans);
+    const prompt = pick([
+      `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, <strong>${part}</strong> of <strong>${whole}</strong> spores are astrophage, question. What percent, question?"</em>`,
+      `<span class="rk-grace-tag">GRACE</span> Rocky translated <strong>${part}</strong> of <strong>${whole}</strong> words. <em>What percent of the dictionary is done?</em>`,
+      `<span class="rk-grace-tag">GRACE</span> <strong>${part} kg</strong> of the <strong>${whole} kg</strong> fuel is gone. <em>What percent?</em>`,
+    ]);
+    return {
+      topic: 'g6-percent-find',
+      prompt,
+      answers: opts.map(o => '' + o),
+      correctIdx,
+      dict: { rocky: `${part} / ${whole}`, grace: `${ans}%` },
+      explain: `What percent is ${part} of ${whole}? Part ÷ whole × 100 = ${part} × 100 ÷ ${whole} = <strong>${ans}%</strong>.`,
+      check: { op: 'div', operands: [part * 100, whole], answer: ans },
+    };
+  }
+
+  // L6 — Mixed: random pick of the five grade-6 generators (each carries a check).
+  function genG6AllMix() {
+    return pick([genG6UnitRate, genG6RatioTable, genG6EquivRatio, genG6Percent, genG6PercentFind])();
+  }
+
   const RK_GEN = {
+    // Grade-6 (6.RP) keys checked first; grade-5 keys below unchanged.
+    'g6-unit-rate':   genG6UnitRate,
+    'g6-ratio-table': genG6RatioTable,
+    'g6-equiv-ratio': genG6EquivRatio,
+    'g6-percent':     genG6Percent,
+    'g6-percent-find': genG6PercentFind,
+    'g6-allmix':      genG6AllMix,
     metric:    genMetric,
     customary: genCustomary,
     time:      genTime,
@@ -8714,7 +8928,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   InlineModules['rocky-translator'] = {
     init(host, levelIndex, callbacks) {
-      const lvl = RK_LEVELS[levelIndex];
+      const lvl = (typeof ACTIVE_GRADE !== 'undefined' && ACTIVE_GRADE === 6 && typeof RK_LEVELS_6 !== 'undefined') ? RK_LEVELS_6[levelIndex] : RK_LEVELS[levelIndex];
       const totalQ = RK_QPL[levelIndex];
 
       const state = {
