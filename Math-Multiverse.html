@@ -4024,9 +4024,10 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   function genMixedSub(maxDen) {
     // Mixed-number subtraction with like denominators
     const d = ri(3, Math.min(maxDen, 8));
-    let w1 = ri(2, 5), w2 = ri(1, w1 - 1);
-    let n1 = ri(1, d - 1), n2 = ri(1, d - 1);
-    if (n1 < n2) { w1 += 1; const tmp = n1; n1 = n2 + tmp; }
+    const w1 = ri(2, 5), w2 = ri(1, w1 - 1);
+    const n1 = ri(1, d - 1), n2 = ri(1, d - 1);
+    // Fractions stay proper; w1 > w2 keeps the result positive even when n1 < n2,
+    // which gives a genuine "borrow" problem rather than a malformed display like "4 6/5".
     const totalNum = (w1 * d + n1) - (w2 * d + n2);
     const correctStr = fracToString(totalNum, d);
     return {
@@ -4051,12 +4052,15 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const k = pick([2, 3, 4]);
     const dNew = dBase * k;
     const nNew = nBase * k;
-    const wrong1 = nBase + k;
-    const wrong2 = nBase * k + 1;
-    const wrong3 = nBase + 1;
-    const opts = shuffle([
-      `${nNew}/${dNew}`, `${wrong1}/${dNew}`, `${wrong2}/${dNew}`, `${wrong3}/${dNew}`,
-    ]);
+    // Build 3 distinct wrong numerators (none equal to nNew) from a pool of plausible
+    // mistakes so the four options never collide into duplicate buttons.
+    const cand = [nBase + k, nBase * k + 1, nBase + 1, nBase, nBase * (k + 1), nBase * k - 1, nBase * k + k];
+    const wrongs = [];
+    for (const w of cand) {
+      if (w > 0 && w !== nNew && !wrongs.includes(w)) wrongs.push(w);
+      if (wrongs.length >= 3) break;
+    }
+    const opts = shuffle([nNew, ...wrongs].map(n => `${n}/${dNew}`));
     return {
       topic: 'frac-equiv',
       text: pick([
@@ -4134,6 +4138,19 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const isDiv = eq.includes('÷');
     const candidates = [];
 
+    // Mixed-number problems: the operand regex below only sees the fraction parts (it drops
+    // the whole numbers), so its distractors come out implausibly tiny. Build distractors
+    // scaled to the (possibly improper) correct answer instead, and never negative.
+    if ((problem.topic || '').includes('mixed')) {
+      return [
+        fracToString(correct.num + correct.den, correct.den),               // one whole too many
+        fracToString(Math.max(1, correct.num - correct.den), correct.den),  // one whole too few
+        fracToString(correct.num + 1, correct.den),                         // off by one part
+        fracToString(Math.max(1, correct.num - 1), correct.den),
+        fracToString(correct.num + 2, correct.den),
+      ];
+    }
+
     // Parse operands from equation HTML (e.g., "1/2 <span...>+</span> 1/3...")
     const tokens = eq.replace(/<[^>]*>/g, ' ').match(/(\d+)\/(\d+)/g) || [];
     const ops = tokens.map(t => {
@@ -4147,8 +4164,8 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       candidates.push(fracToString(isAdd ? a.n + b.n : Math.max(0, a.n - b.n), a.d + b.d));
       // Mistake: forgot common denominator, just added/subtracted tops over the first denom
       candidates.push(fracToString(isAdd ? a.n + b.n : Math.max(0, a.n - b.n), a.d));
-      // Mistake: subtracted in wrong order (for sub only)
-      if (isSub) candidates.push(fracToString(b.n * a.d - a.n * b.d, a.d * b.d));
+      // Mistake: subtracted in wrong order (for sub only) — only if it stays non-negative
+      if (isSub) { const wo = b.n * a.d - a.n * b.d; if (wo > 0) candidates.push(fracToString(wo, a.d * b.d)); }
       // Off-by-one in numerator
       candidates.push(fracToString(correct.num + 1, correct.den));
       candidates.push(fracToString(Math.max(0, correct.num - 1), correct.den));
@@ -4190,7 +4207,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const candidates = pedFracMistakes(problem);
     const set = new Set([correctStr]);
     for (const c of candidates) {
-      if (c && c !== correctStr) set.add(c);
+      if (c && c !== correctStr && !/[-−]/.test(c)) set.add(c);  // never offer a negative-fraction distractor
       if (set.size >= 4) break;
     }
     let safety = 30;
@@ -4960,18 +4977,26 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const target = pick(places);
     const base = ri(20, 35);
     const fracPart = ri(100, 999);
-    const num = base + fracPart / 1000;
+    // Round in exact integer thousandths to avoid binary-float underflow on '.??5' cases
+    // (e.g. 20.115 is stored as 20.11499999..., which Math.round drags down to 20.11).
+    const valTh = base * 1000 + fracPart;          // exact thousandths
+    const step = 1000 / target.mult;               // thousandths per output unit (tenth=100, hundredth=10)
+    const num = valTh / 1000;
     const lap = `1:${num.toFixed(3)}`;
-    const correctNum = Math.round(num * target.mult) / target.mult;
+    const floorTh = Math.floor(valTh / step) * step;
+    const roundedTh = Math.round(valTh / step) * step;
+    const correctNum = roundedTh / 1000;
     const correct = correctNum.toFixed(target.digits);
-    // Pedagogical mistakes: rounded the wrong way, truncated instead, kept extra digit
-    const truncated = (Math.floor(num * target.mult) / target.mult).toFixed(target.digits);
-    const oppositeRound = ((Math.round(num * target.mult) + (correctNum > num ? -1 : 1)) / target.mult).toFixed(target.digits);
+    // The digit just past the target place decides the rounding (integer math, never a float)
+    const nextDigit = target.digits === 1 ? Math.floor(fracPart / 10) % 10 : fracPart % 10;
+    // Pedagogical mistakes, all on the same integer basis so they stay consistent:
+    const truncated = (floorTh / 1000).toFixed(target.digits);                                 // truncated instead of rounded
+    const oppositeRound = ((roundedTh === floorTh ? floorTh + step : floorTh) / 1000).toFixed(target.digits); // rounded wrong direction
     const opts = pedDistractorsFloat(correctNum, target.digits, [
-      parseFloat(truncated),                                  // truncated instead of rounded
-      parseFloat(oppositeRound),                              // rounded wrong direction
+      parseFloat(truncated),
+      parseFloat(oppositeRound),
       Math.round(num),                                        // rounded to whole instead
-      Math.floor(num * target.mult * 10) / (target.mult * 10), // kept too many digits
+      Math.floor(valTh / (step / 10)) * (step / 10) / 1000,   // kept too many digits
     ]).map(n => n.toFixed(target.digits));
     const driver = pick(DRIVERS);
     return {
@@ -4982,9 +5007,9 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         `TV graphic shows <strong>${lap}</strong>. Display rounds to nearest ${target.name}. What's it show?`,
         `Engineer: <em>"Lap of <strong>${lap}</strong>. Trim to nearest ${target.name}."</em>`,
       ]),
-      answers: opts.map(o => `1:${(base + parseFloat(o) - base).toFixed(target.digits)}`),
+      answers: opts.map(o => `1:${o}`),
       correctIdx: opts.indexOf(correct),
-      explain: `Look at the digit just past the ${target.name}s. ${num.toFixed(3)} → digit after the ${target.name} is ${Math.floor(num * target.mult * 10) % 10}. ${Math.floor(num * target.mult * 10) % 10 >= 5 ? 'Round up' : 'Round down'}: <strong>1:${correct}</strong>.`,
+      explain: `Look at the digit just past the ${target.name}s. ${num.toFixed(3)} → that digit is ${nextDigit}. ${nextDigit >= 5 ? 'Round up' : 'Round down'}: <strong>1:${correct}</strong>.`,
     };
   }
 
@@ -5914,12 +5939,16 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const refX = axis === 'y-axis' ? -x : x;
     const refY = axis === 'x-axis' ? -y : y;
     const correct = `(${refX}, ${refY})`;
-    const opts = new Set([correct]);
-    opts.add(`(${-refX}, ${refY})`);
-    opts.add(`(${refX}, ${-refY})`);
-    opts.add(`(${x}, ${y})`);
-    const arr = shuffle(Array.from(opts).slice(0, 4));
-    while (arr.length < 4) arr.push(`(${ri(-gridMax, gridMax)}, ${ri(-gridMax, gridMax)})`);
+    // The four sign-combinations of (x, y) are always distinct when x,y != 0 and always
+    // include the correct reflection plus three meaningful mistakes (did-nothing,
+    // wrong-axis, reflected-through-origin). No collapse, no random pad that could duplicate
+    // the correct point.
+    const arr = shuffle([
+      `(${x}, ${y})`,
+      `(${-x}, ${y})`,
+      `(${x}, ${-y})`,
+      `(${-x}, ${-y})`,
+    ]);
     return {
       topic: 'coord-reflect',
       type: 'mc',
@@ -6499,8 +6528,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   const LEGO_LOGO = 'https://en.wikipedia.org/wiki/Special:FilePath/LEGO_logo.svg';
   const LEGO_HERO = 'art/lego-emmet-lucy.jpg';
-  // Real Unikitty SVG from Wikimedia Commons (CC BY-SA, vectorized from Cartoon Network)
-  const UNIKITTY_SVG = 'https://upload.wikimedia.org/wikipedia/commons/8/86/Unikitty_Scratch_sprite.svg';
+  // (Unikitty renders via the inline minifigSvg path, like the other five builders.)
 
   const BUILDERS = [
     { id: 'EMM', name: 'Emmet',     icon: '⛑️', color: '#FE8A18', trim: '#FFD400', line: '"I got it, guys!"' },
@@ -6965,7 +6993,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             <div class="mb-builder-grid">
               ${BUILDERS.map(b => `
                 <div class="mb-builder" data-id="${b.id}" style="--builder-color: ${b.color}; --builder-trim: ${b.trim};">
-                  <div class="mb-mini-svg">${b.id === 'UNI' ? `<img src="${UNIKITTY_SVG}" alt="Unikitty" onerror="this.outerHTML='${minifigSvg(b).replace(/'/g, '&apos;').replace(/\n/g, '')}';">` : minifigSvg(b)}</div>
+                  <div class="mb-mini-svg">${minifigSvg(b)}</div>
                   <div class="mb-builder-name">${b.name}</div>
                   <div class="mb-builder-line">${b.line}</div>
                 </div>
@@ -8665,12 +8693,14 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         };
       },
       () => {
+        // Keep the inner subtraction positive (no negatives — off-CCSS for grade 5).
+        const big = Math.max(b, c) + 1;
+        const small = Math.min(b, c);
         const left = `${a} × (${b} + ${c})`;
-        const right = `${a} × (${b} - ${c % 4 === 0 ? c - 1 : c})`;
-        const c2 = c % 4 === 0 ? c - 1 : c;
+        const right = `${a} × (${big} - ${small})`;
         return {
           left, right,
-          leftVal: a * (b + c), rightVal: a * (b - c2),
+          leftVal: a * (b + c), rightVal: a * (big - small),
         };
       },
     ];
@@ -8700,8 +8730,16 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const seqA = [0,1,2,3,4].map(i => startA + stepA * i);
     const seqB = [0,1,2,3,4].map(i => startB + stepB * i);
     const askIdx = ri(2, 4);
-    const correct = `${seqB[askIdx]}`;
-    const opts = shuffle([correct, `${seqB[askIdx] + 1}`, `${seqA[askIdx] * 2}`, `${seqB[askIdx] - 2}`]);
+    const correctV = seqB[askIdx];
+    const correct = `${correctV}`;
+    // Distinct distractors, none equal to the correct value (seqA*2 can collide when startB = 2*startA)
+    const cand = [correctV + 1, correctV - 2, seqA[askIdx] * 2, correctV + stepB, Math.max(0, correctV - stepB), correctV + 2];
+    const wrongs = [];
+    for (const w of cand) {
+      if (w >= 0 && w !== correctV && !wrongs.includes(w)) wrongs.push(w);
+      if (wrongs.length >= 3) break;
+    }
+    const opts = shuffle([correct, ...wrongs.map(String)]);
     return {
       topic: 'pemdas-pattern',
       prompt: `Roo's pattern: <strong>${seqA.slice(0,4).join(', ')}, ...</strong> (start ${startA}, add ${stepA}). Tigger's pattern: <strong>${seqB.slice(0,4).join(', ')}, ...</strong> (start ${startB}, add ${stepB}). When Roo reaches term ${askIdx + 1} (= ${seqA[askIdx]}), what is Tigger's term ${askIdx + 1}?`,
