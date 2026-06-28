@@ -3092,54 +3092,53 @@ const Save = {
     };
   },
 
-  load() {
-    try {
-      const raw = localStorage.getItem(SAVE_KEY);
-      if (!raw) {
-        this.state = this.default();
-        this.saveNow();
-        return;
-      }
-      this.state = JSON.parse(raw);
-      // Older saves without the flag default to progression-locked play
-      if (this.state.previewMode === undefined) this.state.previewMode = false;
-      // Migrate older saves: ensure analytics scaffold exists
-      if (!this.state.analytics) {
-        this.state.analytics = {
-          totalSessions: 0, totalAttempted: 0, totalCorrect: 0, totalTimeMs: 0,
-          perModule: {}, perTopic: {}, recentMistakes: [], coachShown: {},
-        };
-      }
-      const a = this.state.analytics;
-      if (!a.perModule) a.perModule = {};
-      if (!a.perTopic)  a.perTopic  = {};
-      if (!a.recentMistakes) a.recentMistakes = [];
-      if (!a.coachShown) a.coachShown = {};
-      // Reconcile against current MODULES list
-      for (const m of MODULES) {
-        if (!this.state.modules[m.id]) {
-          this.state.modules[m.id] = {
-            unlocked: !!m.unlocked,
-            levelsCleared: 0,
-            levelStars: m.levels.map(() => 0),
-            levelBest:  m.levels.map(() => null),
-          };
-        } else {
-          const ms = this.state.modules[m.id];
-          while (ms.levelStars.length < m.levels.length) ms.levelStars.push(0);
-          while (ms.levelBest.length  < m.levels.length) ms.levelBest.push(null);
-          // Developer override: if MODULES marks a module unlocked-by-default,
-          // honor that on existing saves (otherwise old saves stay locked even
-          // after a metadata change).
-          if (m.unlocked && !ms.unlocked) ms.unlocked = true;
-        }
-      }
-      this.saveNow();
-    } catch (e) {
-      console.warn('Save load failed, resetting:', e);
-      this.state = this.default();
-      this.saveNow();
+  // Single source of truth for turning a parsed (possibly partial / older / imported)
+  // save object into a complete, valid state: deep-merge over a fresh default() so every
+  // field exists, and clamp/grow each module's level arrays to the current MODULES list.
+  reconcile(obj) {
+    const out = this.default();
+    if (!obj || typeof obj !== 'object') return out;
+    out.version = SAVE_VERSION;
+    if (obj.created) out.created = obj.created;
+    if (obj.profile && typeof obj.profile.name === 'string') out.profile.name = obj.profile.name;
+    if (typeof obj.previewMode === 'boolean') out.previewMode = obj.previewMode;
+    if (obj.stats && typeof obj.stats === 'object') Object.assign(out.stats, obj.stats);
+    if (obj.grandGoals && typeof obj.grandGoals === 'object') out.grandGoals = obj.grandGoals;
+    if (obj.analytics && typeof obj.analytics === 'object') {
+      const a = out.analytics, oa = obj.analytics;
+      for (const k of ['totalSessions', 'totalAttempted', 'totalCorrect', 'totalTimeMs']) if (typeof oa[k] === 'number') a[k] = oa[k];
+      if (oa.perModule && typeof oa.perModule === 'object') a.perModule = oa.perModule;
+      if (oa.perTopic && typeof oa.perTopic === 'object') a.perTopic = oa.perTopic;
+      if (Array.isArray(oa.recentMistakes)) a.recentMistakes = oa.recentMistakes;
+      if (oa.coachShown && typeof oa.coachShown === 'object') a.coachShown = oa.coachShown;
     }
+    for (const m of MODULES) {
+      const tgt = out.modules[m.id];                           // already a fresh default for this module
+      const src = obj.modules && obj.modules[m.id];
+      if (src && typeof src === 'object') {
+        if (typeof src.levelsCleared === 'number') tgt.levelsCleared = Math.max(0, Math.min(src.levelsCleared, m.levels.length));
+        if (Array.isArray(src.levelStars)) for (let i = 0; i < m.levels.length; i++) if (typeof src.levelStars[i] === 'number') tgt.levelStars[i] = src.levelStars[i];
+        if (Array.isArray(src.levelBest)) for (let i = 0; i < m.levels.length; i++) if (src.levelBest[i] != null) tgt.levelBest[i] = src.levelBest[i];
+        // honor a saved unlock, and force-unlock modules that are unlocked-by-default
+        tgt.unlocked = !!src.unlocked || !!m.unlocked;
+      }
+    }
+    return out;
+  },
+
+  load() {
+    let raw = null;
+    try { raw = localStorage.getItem(SAVE_KEY); } catch (e) { this.state = this.default(); return; }
+    if (!raw) { this.state = this.default(); this.saveNow(); return; }
+    try {
+      this.state = this.reconcile(JSON.parse(raw));
+    } catch (e) {
+      // Corrupt save: back up the raw text before resetting so it isn't silently destroyed.
+      try { localStorage.setItem(SAVE_KEY + '.bak', raw); } catch (e2) {}
+      console.warn('Save load failed; backed up to ' + SAVE_KEY + '.bak and reset:', e);
+      this.state = this.default();
+    }
+    this.saveNow();
   },
 
   saveNow() {
@@ -3227,18 +3226,7 @@ const Save = {
     try {
       const obj = JSON.parse(text);
       if (typeof obj !== 'object' || !obj || !obj.modules) throw new Error('Not a Math Multiverse save file.');
-      this.state = obj;
-      // reconcile after import
-      for (const m of MODULES) {
-        if (!this.state.modules[m.id]) {
-          this.state.modules[m.id] = {
-            unlocked: !!m.unlocked,
-            levelsCleared: 0,
-            levelStars: m.levels.map(() => 0),
-            levelBest:  m.levels.map(() => null),
-          };
-        }
-      }
+      this.state = this.reconcile(obj);
       this.saveNow();
       return true;
     } catch (e) {
