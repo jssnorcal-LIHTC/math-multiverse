@@ -136,3 +136,41 @@ Exactly 4 distinct, one correct, non-negative (by construction of g6Options):
 - Distractor models are decimal/percent/stat mistakes (misplaced decimal ×10 / ÷10, off by 0.1, op swap,
   percent-as-rate, used-whole-base, mean-vs-median swap, forgot-to-divide-by-count sum, divided-by-4), never
   the correct value (deduped), never negative (filtered). F1 race voice kept in prompt/explain.
+
+## Verification — floating-bear Grade 6 (6.EE), 2026-06-28
+
+Worktree fast-forwarded from base aaf8663 to 647bc44 (committed main) FIRST so the grade-selector
+scaffolding (`ACTIVE_GRADE`, `gradeView` overlay of the `g6` block) and the reference patterns
+(fraction-rider / f1-decimals Grade 6) are present; floating-bear Grade 6 then added on top. Main's
+WORKING tree (a concurrent rocky-creek edit) was deliberately NOT used.
+
+Wiring (line numbers post-change):
+- `FB_LEVELS_6` (6 entries) at 8956-8967, gen ids g6-exponent / g6-evaluate / g6-solve-add /
+  g6-solve-mul / g6-evaluate2 / g6-allmix; shares `FB_QPL` [15,18,18,20,20,20].
+- Generators 9485-9628: genG6Exponent, genG6Evaluate, genG6SolveAdd, genG6SolveMul, genG6Evaluate2,
+  genG6AllMix. Options built with the shared global `pedDistractors()` (Set-based, exactly 4 distinct
+  non-negative integers, correct present) — same helper the grade-5 FB generators use.
+- `FB_GEN` six g6 keys at TOP (9632-9637); grade-5 keys (simple-parens..all-mix) below, unchanged.
+- init level-pick ternary at 9650: `ACTIVE_GRADE === 6 && FB_LEVELS_6 ? FB_LEVELS_6[i] : FB_LEVELS[i]`.
+- `g6` block on the floating-bear MODULES entry 3079-3092 (ccss 6.EE, domain "Expressions & Equations",
+  grandGoal "Keeper of the Equation", 6 levels, questions 15,18,18,20,20,20).
+
+check:{op,operands,answer} contract (EXACT operand orders):
+- pow       [base, exp]  answer = base**exp   (base 2..6, exp 2..4, guarded <= 1296)
+- linear    [a, x, b]    answer = a*x + b      (evaluate; a 2..9, x 1..9, b 1..20)
+- solve-add [a, b]       answer = b - a        (x + a = b, b = a + x so x > 0)
+- solve-mul [a, b]       answer = b / a        (a*x = b, b = a*x so exact)
+- linear    [a, x, a*b]  answer = a*x + a*b    (evaluate2 = a*(x+b) distributed)
+- allmix delegates to one of the five, so it always carries a check.
+
+Harness (independent oracle, NOT a tautology) extracted the REAL generator source + REAL pedDistractors
+from the file and ran 60,000 iterations per generator (360,000 total):
+- exactly 4 distinct answer strings, all non-negative integers; correctIdx in 0..3;
+  answers[correctIdx] === String(check.answer) every time.
+- oracle recomputed answer from operands per op (pow/linear/solve-add/solve-mul) and matched check.answer
+  on every run; op matched expected per generator; pow bounds and solve-mul divisibility held.
+- ops seen: pow 71,872 · linear 144,022 (evaluate + evaluate2 + allmix share) · solve-add 71,975 ·
+  solve-mul 72,131. Total failures: 0.
+Inline-script syntax check (vm.Script over the whole file): 0 errors. Pooh/Piglet/Owl/Eeyore/Kanga
+rainstorm voice kept; user-facing prose has no em/en/double dashes (comment em-dashes mirror the
+existing fraction-rider grade-6 comment style). Grade-5 floating-bear paths untouched; no other module touched.
