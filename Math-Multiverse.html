@@ -2943,6 +2943,20 @@ const MODULES = [
       { id: 6, name: 'Final Send',      goal: 'Cross the Hardline finish',        questions: 20, type: 'mixed-all' },
     ],
     grandGoal: 'Hardline Champion',
+    g6: {
+      ccss: '6.NS',
+      domain: 'Fraction Division',
+      description: 'Divide fractions to keep Sur Ronster on the Hardline. Flip, multiply, simplify, send.',
+      grandGoal: 'Number System Champion',
+      levels: [
+        { id: 1, name: 'Reciprocal Drop-In', goal: 'Flip the divisor and roll in',       questions: 15, type: 'ns-div-intro' },
+        { id: 2, name: 'Invert & Send',      goal: 'Keep, flip, multiply through',       questions: 18, type: 'ns-div-frac' },
+        { id: 3, name: 'Mixed-Number Air',   goal: 'Go improper, then divide clean',     questions: 18, type: 'ns-div-mixed' },
+        { id: 4, name: 'Combo Line',         goal: 'Stack two steps, stick the landing', questions: 20, type: 'ns-div-multi' },
+        { id: 5, name: 'Servings Gap',       goal: 'Count the scoops across the gap',     questions: 20, type: 'ns-div-word' },
+        { id: 6, name: 'Final Send',         goal: 'Divide it all and cross the line',    questions: 20, type: 'ns-div-allmix' },
+      ],
+    },
   },
   {
     id: 'f1-decimals',
@@ -3716,6 +3730,16 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     { id: 5, name: 'Massive Air',   gen: 'divide',       maxDen: 8 },
     { id: 6, name: 'Final Send',    gen: 'mixed-all',    maxDen: 12 },
   ];
+  // Grade 6 (6.NS.1, dividing fractions). Same bike theme; selected only when
+  // ACTIVE_GRADE === 6. Grade-5 FR_LEVELS above is untouched.
+  const FR_LEVELS_6 = [
+    { id: 1, name: 'Reciprocal Drop-In', gen: 'ns-div-intro',  maxDen: 8 },
+    { id: 2, name: 'Invert & Send',      gen: 'ns-div-frac',   maxDen: 8 },
+    { id: 3, name: 'Mixed-Number Air',   gen: 'ns-div-mixed',  maxDen: 6 },
+    { id: 4, name: 'Combo Line',         gen: 'ns-div-multi',  maxDen: 6 },
+    { id: 5, name: 'Servings Gap',       gen: 'ns-div-word',   maxDen: 8 },
+    { id: 6, name: 'Final Send',         gen: 'ns-div-allmix', maxDen: 8 },
+  ];
   const FR_QPL = [15, 18, 18, 20, 20, 20];
 
   // Background trail-cam clips. iPad-compatible H.264 MP4s.
@@ -4155,8 +4179,307 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     };
   }
 
+  // ============================================================
+  // Grade 6 (6.NS.1) — DIVIDING FRACTIONS generators
+  // a/b ÷ c/d = (a·d)/(b·c), then reduce. Mixed numbers → improper first.
+  // Every generator sets `_customChoices` with EXACTLY 4 distinct,
+  // non-negative options (one correct). Distractors model real student
+  // errors: forgot to invert (multiplied straight across), inverted the
+  // WRONG fraction (the dividend), off-by-one numerator, did not simplify.
+  // ============================================================
+
+  // Shared choice builder. `cands` is a priority-ordered list of [num, den]
+  // distractor pairs. Colliding/invalid/negative candidates are skipped; any
+  // shortfall is filled by fracToString(ansNum + k, ansDen) for the next
+  // unused small k. Always returns exactly 4 options, one correct.
+  function frDivChoices(ansNum, ansDen, cands) {
+    const correctStr = fracToString(ansNum, ansDen);
+    const texts = new Set([correctStr]);
+    for (const [n, d] of cands) {
+      if (typeof n === 'number' && typeof d === 'number' && d > 0 && n >= 0) {
+        const t = fracToString(n, d);
+        if (t && !/[-−–]/.test(t) && t !== correctStr) texts.add(t);  // never negative / never the correct text
+      }
+      if (texts.size >= 4) break;
+    }
+    let k = 2;
+    while (texts.size < 4 && k < 120) {
+      const t = fracToString(ansNum + k, ansDen);
+      if (t && !/[-−–]/.test(t)) texts.add(t);
+      k++;
+    }
+    return shuffle(Array.from(texts)).slice(0, 4).map(t => ({ text: t, correct: t === correctStr }));
+  }
+
+  // L1 — whole ÷ unit fraction, OR proper fraction ÷ whole
+  function genNsDivIntro(maxDen) {
+    if (ri(0, 1) === 0) {
+      // whole ÷ unit fraction:  w ÷ 1/d  =  w·d
+      const d = ri(2, Math.min(maxDen, 8));
+      const w = ri(1, 6);
+      const a = w, b = 1, c = 1, e = d;            // dividend w/1, divisor 1/d
+      const ansNum = a * e, ansDen = b * c;        // (w·d)/1
+      const correctStr = fracToString(ansNum, ansDen);
+      return {
+        topic: 'ns-div-intro',
+        text: pick([
+          `Sur Ronster has ${w} whole energy bars and cuts each into 1/${d}-bar bites. How many bites?`,
+          `${w} full water bottles, each poured into 1/${d}-bottle sips. How many sips?`,
+          `${w} laps of trail, each broken into 1/${d}-lap gates. How many gates total?`,
+          `${w} whole pizzas sliced into 1/${d}-pizza pieces for the pit crew. Pieces total?`,
+        ]),
+        equation: `${w} <span class="op">÷</span> 1/${d} <span class="eq">=</span> ?`,
+        answer: { num: ansNum, den: ansDen },
+        visualize: [],
+        _customChoices: frDivChoices(ansNum, ansDen, [
+          [a * c, b * e],            // forgot to invert: w × 1/d straight across
+          [b * e, a * c],            // inverted the dividend instead of the divisor
+          [ansNum + 1, ansDen],      // off-by-one in the numerator
+          [a * e, b * c],            // unreduced (did not simplify)
+        ]),
+        explain: `Dividing by 1/${d} means multiplying by the reciprocal ${d}/1. So ${w} × ${d} = <strong>${correctStr}</strong>. Flip the divisor, then multiply.`,
+      };
+    }
+    // proper fraction ÷ whole:  (n/d) ÷ w  =  n/(d·w)
+    const d = ri(2, Math.min(maxDen, 8));
+    const n = ri(1, d - 1);
+    const w = ri(2, 6);
+    const a = n, b = d, c = w, e = 1;              // dividend n/d, divisor w/1
+    const ansNum = a * e, ansDen = b * c;          // n/(d·w)
+    const correctStr = fracToString(ansNum, ansDen);
+    return {
+      topic: 'ns-div-intro',
+      text: pick([
+        `${n}/${d} of a recovery shake is split evenly among ${w} riders. Each rider gets?`,
+        `${n}/${d} of a pizza shared equally by ${w} pit crew. Each share?`,
+        `${n}/${d} of an hour of trail time divided into ${w} equal sections. Time per section?`,
+        `${n}/${d} of a fuel can poured equally into ${w} bikes. Fuel per bike?`,
+      ]),
+      equation: `${n}/${d} <span class="op">÷</span> ${w} <span class="eq">=</span> ?`,
+      answer: { num: ansNum, den: ansDen },
+      visualize: [],
+      _customChoices: frDivChoices(ansNum, ansDen, [
+        [a * c, b * e],              // forgot to invert: n/d × w straight across
+        [b * e, a * c],              // inverted the dividend instead of the divisor
+        [ansNum + 1, ansDen],        // off-by-one in the numerator
+        [a * e, b * c],              // unreduced (did not simplify)
+      ]),
+      explain: `Dividing by ${w} means multiplying by 1/${w}. So ${n}/${d} × 1/${w} = ${n}/${d * w} = <strong>${correctStr}</strong>.`,
+    };
+  }
+
+  // L2 — proper fraction ÷ proper fraction
+  function genNsDivFrac(maxDen) {
+    const b = ri(2, Math.min(maxDen, 8)), a = ri(1, b - 1);   // dividend a/b proper
+    const d = ri(2, Math.min(maxDen, 8)), c = ri(1, d - 1);   // divisor  c/d proper
+    const ansNum = a * d, ansDen = b * c;
+    const correctStr = fracToString(ansNum, ansDen);
+    return {
+      topic: 'ns-div-frac',
+      text: pick([
+        `Sur Ronster has ${a}/${b} of a chocolate bar and eats it in ${c}/${d}-bar bites. How many bites?`,
+        `${a}/${b} of a trail is ridden in ${c}/${d}-trail sprints. How many sprints?`,
+        `${a}/${b} of a fuel can is burned at ${c}/${d}-can per stage. How many stages?`,
+        `How many ${c}/${d}-liter cups can be poured from ${a}/${b} of a liter?`,
+      ]),
+      equation: `${a}/${b} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ?`,
+      answer: { num: ansNum, den: ansDen },
+      visualize: [],
+      _customChoices: frDivChoices(ansNum, ansDen, [
+        [a * c, b * d],              // forgot to invert: multiplied straight across
+        [b * d, a * c],              // inverted the dividend (flipped a/b)
+        [ansNum + 1, ansDen],        // off-by-one in the numerator
+        [a * d, b * c],              // unreduced (did not simplify)
+      ]),
+      explain: `Keep ${a}/${b}, flip ${c}/${d} to ${d}/${c}, multiply: (${a}×${d})/(${b}×${c}) = ${a * d}/${b * c} = <strong>${correctStr}</strong>.`,
+    };
+  }
+
+  // L3 — mixed number ÷ fraction, OR mixed ÷ mixed (convert to improper first)
+  function genNsDivMixed(maxDen) {
+    const md = Math.min(maxDen, 6);
+    if (ri(0, 1) === 0) {
+      // mixed ÷ proper fraction
+      const W = ri(1, 4), b = ri(2, md), wn = ri(1, b - 1);   // dividend W wn/b
+      const d = ri(2, md), c = ri(1, d - 1);                  // divisor c/d proper
+      const a = W * b + wn;                                   // improper numerator over b
+      const ansNum = a * d, ansDen = b * c;
+      const correctStr = fracToString(ansNum, ansDen);
+      return {
+        topic: 'ns-div-mixed',
+        text: pick([
+          `Sur Ronster rode ${W} ${wn}/${b} miles in ${c}/${d}-mile intervals. How many intervals?`,
+          `${W} ${wn}/${b} liters of fuel used at ${c}/${d}-liter per run. How many runs?`,
+          `A ${W} ${wn}/${b}-hour session split into ${c}/${d}-hour drills. How many drills?`,
+        ]),
+        equation: `${W} ${wn}/${b} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ?`,
+        answer: { num: ansNum, den: ansDen },
+        visualize: [],
+        _customChoices: frDivChoices(ansNum, ansDen, [
+          [a * c, b * d],            // forgot to invert
+          [b * d, a * c],            // inverted the dividend
+          [ansNum + 1, ansDen],      // off-by-one in the numerator
+          [a * d, b * c],            // unreduced (did not simplify)
+        ]),
+        explain: `Make ${W} ${wn}/${b} improper: ${W}×${b}+${wn} = ${a}, so ${a}/${b}. Flip ${c}/${d}, multiply: (${a}×${d})/(${b}×${c}) = <strong>${correctStr}</strong>.`,
+      };
+    }
+    // mixed ÷ mixed
+    const W1 = ri(1, 4), b = ri(2, md), wn1 = ri(1, b - 1);   // dividend W1 wn1/b
+    const W2 = ri(1, 3), d = ri(2, md), wn2 = ri(1, d - 1);   // divisor  W2 wn2/d
+    const a = W1 * b + wn1;   // improper over b
+    const c = W2 * d + wn2;   // improper over d
+    const ansNum = a * d, ansDen = b * c;
+    const correctStr = fracToString(ansNum, ansDen);
+    return {
+      topic: 'ns-div-mixed',
+      text: pick([
+        `A ${W1} ${wn1}/${b}-km trail is ridden in ${W2} ${wn2}/${d}-km laps. How many laps?`,
+        `${W1} ${wn1}/${b} hours of riding split into ${W2} ${wn2}/${d}-hour stages. How many stages?`,
+        `${W1} ${wn1}/${b} liters of fuel burned at ${W2} ${wn2}/${d} liters per session. How many sessions?`,
+      ]),
+      equation: `${W1} ${wn1}/${b} <span class="op">÷</span> ${W2} ${wn2}/${d} <span class="eq">=</span> ?`,
+      answer: { num: ansNum, den: ansDen },
+      visualize: [],
+      _customChoices: frDivChoices(ansNum, ansDen, [
+        [a * c, b * d],              // forgot to invert
+        [b * d, a * c],              // inverted the dividend
+        [ansNum + 1, ansDen],        // off-by-one in the numerator
+        [a * d, b * c],              // unreduced (did not simplify)
+      ]),
+      explain: `Make both improper: ${a}/${b} and ${c}/${d}. Flip the divisor and multiply: (${a}×${d})/(${b}×${c}) = <strong>${correctStr}</strong>.`,
+    };
+  }
+
+  // L4 — two-step: divide then multiply, OR divide then simplify
+  function genNsDivMulti(maxDen) {
+    const md = Math.min(maxDen, 6);
+    if (ri(0, 1) === 0) {
+      // divide, then multiply by a whole number:  (a/b ÷ c/d) × m
+      const b = ri(2, md), a = ri(1, b - 1);
+      const d = ri(2, md), c = ri(1, d - 1);
+      const m = ri(2, 4);
+      const qNum = a * d, qDen = b * c;            // quotient a/b ÷ c/d
+      const ansNum = qNum * m, ansDen = qDen;      // × m
+      const correctStr = fracToString(ansNum, ansDen);
+      return {
+        topic: 'ns-div-multi',
+        text: pick([
+          `Find ${a}/${b} ÷ ${c}/${d}, then send it ${m}× bigger for the ${m}-lap combo. Result?`,
+          `Sur Ronster divides ${a}/${b} by ${c}/${d}, then multiplies by ${m} riders. Total?`,
+          `Two-step line: ${a}/${b} ÷ ${c}/${d}, then × ${m}. What's the answer?`,
+        ]),
+        equation: `(${a}/${b} <span class="op">÷</span> ${c}/${d}) <span class="op">×</span> ${m} <span class="eq">=</span> ?`,
+        answer: { num: ansNum, den: ansDen },
+        visualize: [],
+        _customChoices: frDivChoices(ansNum, ansDen, [
+          [a * c * m, b * d],        // forgot to invert in the divide step, then × m
+          [qNum, qDen],              // stopped after dividing (forgot to multiply by m)
+          [ansNum + 1, ansDen],      // off-by-one in the numerator
+          [b * d * m, a * c],        // inverted the dividend, then × m
+        ]),
+        explain: `Step 1: ${a}/${b} ÷ ${c}/${d} = (${a}×${d})/(${b}×${c}) = ${qNum}/${qDen}. Step 2: × ${m} = ${ansNum}/${ansDen} = <strong>${correctStr}</strong>.`,
+      };
+    }
+    // divide, then simplify (force a reducible raw answer)
+    let b, a, d, c, g, guard = 12;
+    do {
+      b = ri(2, md); a = ri(1, b - 1);
+      d = ri(2, md); c = ri(1, d - 1);
+      g = gcd(a * d, b * c);
+      guard--;
+    } while (g === 1 && guard > 0);
+    const ansNum = a * d, ansDen = b * c;
+    const correctStr = fracToString(ansNum, ansDen);
+    return {
+      topic: 'ns-div-multi',
+      text: pick([
+        `Solve ${a}/${b} ÷ ${c}/${d}, then write it in lowest terms. Simplest form?`,
+        `Sur Ronster divides ${a}/${b} by ${c}/${d}. Reduce the answer all the way. Result?`,
+        `Flip, multiply, then simplify: ${a}/${b} ÷ ${c}/${d}. Lowest-terms answer?`,
+      ]),
+      equation: `${a}/${b} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ? (lowest terms)`,
+      answer: { num: ansNum, den: ansDen },
+      visualize: [],
+      _customChoices: frDivChoices(ansNum, ansDen, [
+        [a * c, b * d],              // forgot to invert
+        [b * d, a * c],              // inverted the dividend
+        [ansNum + 1, ansDen],        // off-by-one in the numerator
+        [a * d, b * c],              // unreduced (did not simplify) — collapses, fallback fills
+      ]),
+      explain: `${a}/${b} ÷ ${c}/${d} = ${a * d}/${b * c}. Now simplify: gcd is ${g}, divide top and bottom by ${g}. Answer: <strong>${correctStr}</strong>.`,
+    };
+  }
+
+  // L5 — servings word problems (how many c/d-cup scoops in T cups, etc.)
+  function genNsDivWord(maxDen) {
+    const md = Math.min(maxDen, 8);
+    if (ri(0, 1) === 0) {
+      // whole ÷ proper fraction:  T ÷ (c/d)
+      const d = ri(2, md), c = ri(1, d - 1);
+      const T = ri(2, 6);
+      const a = T, b = 1;                          // dividend T/1
+      const ansNum = a * d, ansDen = b * c;        // (T·d)/c
+      const correctStr = fracToString(ansNum, ansDen);
+      return {
+        topic: 'ns-div-word',
+        text: pick([
+          `How many ${c}/${d}-cup scoops of trail mix fit in ${T} cups?`,
+          `A ${T}-liter jug fills ${c}/${d}-liter bottles. How many bottles?`,
+          `${T} whole pizzas are served in ${c}/${d}-pizza portions. How many portions?`,
+          `${T} hours of trail time split into ${c}/${d}-hour runs. How many runs?`,
+        ]),
+        equation: `${T} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ?`,
+        answer: { num: ansNum, den: ansDen },
+        visualize: [],
+        _customChoices: frDivChoices(ansNum, ansDen, [
+          [a * c, b * d],            // forgot to invert: T × c/d
+          [b * d, a * c],            // inverted the dividend
+          [ansNum + 1, ansDen],      // off-by-one in the numerator
+          [a * d, b * c],            // unreduced (did not simplify)
+        ]),
+        explain: `${T} ÷ ${c}/${d}: flip to ${d}/${c} and multiply. ${T} × ${d}/${c} = ${T * d}/${c} = <strong>${correctStr}</strong>.`,
+      };
+    }
+    // fraction ÷ fraction word problem
+    const b = ri(2, md), a = ri(1, b - 1);
+    const d = ri(2, md), c = ri(1, d - 1);
+    const ansNum = a * d, ansDen = b * c;
+    const correctStr = fracToString(ansNum, ansDen);
+    return {
+      topic: 'ns-div-word',
+      text: pick([
+        `A ${a}/${b}-liter bottle is poured into ${c}/${d}-liter cups. How many cups?`,
+        `${a}/${b} of a granola block is broken into ${c}/${d}-block bars. How many bars?`,
+        `${a}/${b} of a kilometer is ridden in ${c}/${d}-km bursts. How many bursts?`,
+      ]),
+      equation: `${a}/${b} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ?`,
+      answer: { num: ansNum, den: ansDen },
+      visualize: [],
+      _customChoices: frDivChoices(ansNum, ansDen, [
+        [a * c, b * d],              // forgot to invert
+        [b * d, a * c],              // inverted the dividend
+        [ansNum + 1, ansDen],        // off-by-one in the numerator
+        [a * d, b * c],              // unreduced (did not simplify)
+      ]),
+      explain: `${a}/${b} ÷ ${c}/${d} = (${a}×${d})/(${b}×${c}) = ${a * d}/${b * c} = <strong>${correctStr}</strong>.`,
+    };
+  }
+
+  // L6 — random pick of the five grade-6 division generators
+  function genNsDivAllMix(maxDen) {
+    return pick([genNsDivIntro, genNsDivFrac, genNsDivMixed, genNsDivMulti, genNsDivWord])(maxDen);
+  }
+
   function genForLevel(level) {
     const md = level.maxDen;
+    // Grade 6 (6.NS.1) division branches — checked first; grade-5 branches below unchanged.
+    if (level.gen === 'ns-div-intro')  return genNsDivIntro(md);
+    if (level.gen === 'ns-div-frac')   return genNsDivFrac(md);
+    if (level.gen === 'ns-div-mixed')  return genNsDivMixed(md);
+    if (level.gen === 'ns-div-multi')  return genNsDivMulti(md);
+    if (level.gen === 'ns-div-word')   return genNsDivWord(md);
+    if (level.gen === 'ns-div-allmix') return genNsDivAllMix(md);
     if (level.gen === 'like-denom')   return pick([genAddLike, genSubLike, genMixedAdd])(md);
     if (level.gen === 'unlike-easy')  return pick([() => genAdd(md, true), () => genSub(md, true), () => genMultWhole(md), () => genCompareFrac(md), () => genEquiv(md)])();
     if (level.gen === 'unlike-mixed') return pick([() => genAdd(md, false), () => genSub(md, false), () => genMultWhole(md), () => genCompareFrac(md), () => genEquiv(md), () => genSimplify(md)])();
@@ -4314,7 +4637,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   InlineModules['fraction-rider'] = {
     init(host, levelIndex, callbacks) {
-      const lvl = FR_LEVELS[levelIndex];
+      const lvl = (typeof ACTIVE_GRADE !== 'undefined' && ACTIVE_GRADE === 6 && typeof FR_LEVELS_6 !== 'undefined') ? FR_LEVELS_6[levelIndex] : FR_LEVELS[levelIndex];
       const totalQ = FR_QPL[levelIndex];
 
       const state = {
