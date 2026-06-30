@@ -1,0 +1,14 @@
+{
+  "name": "math-multiverse-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Independent-oracle fuzz + headless render smoke for Math-Multiverse.html (CI gate).",
+  "scripts": {
+    "fuzz": "node tests/fuzz.js",
+    "smoke": "node tests/smoke.js",
+    "test": "node tests/fuzz.js && node tests/smoke.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.1"
+  }
+}
