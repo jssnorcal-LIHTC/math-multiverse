@@ -96,8 +96,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--border-subtle);
   }
   .brand { display: flex; align-items: center; gap: 12px; }
@@ -124,15 +124,21 @@
   .profile-bar {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 7px;
     flex-wrap: wrap;
     justify-content: flex-end;
   }
+  /* Header controls compacted so the player pill + Grade 5/6 toggle + all
+     six icon buttons hold ONE row at the iPad's 1024px width. Previously
+     "Reset" wrapped to a second row, inflating the header and stealing
+     ~40px of vertical space from the play area below. Scoped to
+     .profile-bar so other .icon-btn uses (e.g. modal Close) are untouched. */
+  .profile-bar .icon-btn { padding: 8px 9px; }
   .player-stats {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 14px;
+    gap: 8px;
+    padding: 8px 11px;
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: 999px;
