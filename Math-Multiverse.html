@@ -87,7 +87,9 @@
     z-index: 1;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 16px 24px 40px;
+    /* Trimmed top/bottom padding (was 16 / 40) to hand vertical space to
+       the play area on the 768px-tall iPad without touching module logic. */
+    padding: 10px 24px 16px;
   }
 
   /* HEADER */
@@ -1712,11 +1714,14 @@
     justify-content: center;
   }
   .rc-mc-mini-grid #rc-gridhost {
-    width: min(300px, 34vh);
-    height: min(300px, 34vh);
+    /* Reference grid enlarged (was 300px / 34vh) to use the vertical space
+       reclaimed by the single-row header. Still capped by vh so the four
+       answer buttons stay above the fold on the iPad -- verified at 1024x768. */
+    width: min(330px, 40vh);
+    height: min(330px, 40vh);
     aspect-ratio: 1 / 1;
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 330px;
+    max-height: 330px;
   }
   .rc-ans {
     padding: 12px 14px;
