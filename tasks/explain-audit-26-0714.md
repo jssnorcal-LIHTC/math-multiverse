@@ -33,9 +33,9 @@ non-A grade:
 | Fraction Rider | 15 A / 3 B / 1 C (19 generators) | `genMixedSub` (line approx 4217) is the only C: the borrow generator shows no borrow step, just restates the problem and answer.  `genAdd`/`genSub`/`genMultFrac` B: unbridged simplification. |
 | F1 Apex Decimals | 7 A / 5 B / 2 C (14 generators) | `genDivide` C (verified): tells the kid to "move the decimal in dividend and divisor together" although its divisor is always a whole number, so the advice applies to zero questions it generates.  `genCompareOrder` C (verified): says "compare digits left to right" but never shows the deciding digit.  `genMultiply`/`genG6DecOps` B: "same total decimal places" never states the actual count. |
 | Razor Crest | Live generators mostly A; `genG6Distance` C, `genG6RectArea` B (partial report) | `genG6Distance` never names the modeled "forgot a negative" mistake and renders a confusing double-minus glyph (`|3 − -6|`).  Bigger structural find below (dead code). |
-| Master Builder | Counts lost to a transport drop; qualitative findings captured | `genCompareVol` is the one grade-5 generator that bypasses the shared misconception-distractor helper; its explain is the thinnest in the module. |
+| Master Builder | Counts confirmed unrecoverable (coordinator never received its subagents' outputs); qualitative findings captured | `genCompareVol` is the one grade-5 generator that bypasses the shared misconception-distractor helper; its explain is the thinnest in the module. |
 | Rocky's Dictionary | 7 A / 3 B / 0 C (10 generators) | `genMultistep` gal-to-cups variant asserts the 16x shortcut without deriving the chain; the percent generators code complement-error distractors (answered "what is left" instead of "the part") that the explains never address. |
-| Floating Bear | Counts lost to a transport drop; qualitative findings captured | `pemdas-multi` and `pemdas-full` explains say "step by step gives X" while showing zero steps (verified).  `genParensMulti`'s comment claims modeled misconceptions but its distractors are generic plus/minus noise. |
+| Floating Bear | Counts confirmed unrecoverable (coordinator never received its subagents' outputs); qualitative findings captured | `pemdas-multi` and `pemdas-full` explains say "step by step gives X" while showing zero steps (verified).  `genParensMulti`'s comment claims modeled misconceptions but its distractors are generic plus/minus noise. |
 
 ## Fixed this session (already committed, 8517e61)
 
@@ -51,6 +51,13 @@ non-A grade:
   so future topic/tip drift can no longer kill the coach.
 - Coverage re-audit after the fix: zero dead topics; TOPIC_LABELS already covered
   everything (99 keys).
+- **COACH_TIPS arithmetic hand-verified across every entry** (audit coordinator,
+  independent of the module subagents): none mathematically wrong.  Three
+  pedagogically weak entries found and fixed in the same pass: `ns-div-multi` and
+  `g6-stats` had example fields with no worked numbers (both now work a real example),
+  and `pemdas-write-expr` stated a parens rule its own example contradicted, teaching
+  the exact misconception the module targets (tip rewritten, example now shows the
+  evaluated result and the wrong reading side by side).
 
 ## Structural findings (not fixed, Justin's call)
 
