@@ -1,0 +1,32 @@
+name: validate
+
+# Boundary gate for Math-Multiverse.html: independent-oracle math fuzz + headless render smoke.
+# Runs on every PR and on pushes to main; required for merge via branch protection.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  fuzz-and-smoke:
+    name: fuzz + smoke
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Math fuzz (independent-oracle, ~360k questions, all modules G5+G6)
+        run: node tests/fuzz.js
+
+      - name: Install Chromium for smoke
+        run: npx playwright install --with-deps chromium
+
+      - name: Headless render smoke (launcher + all six modules, Grade 5 and Grade 6)
+        run: node tests/smoke.js

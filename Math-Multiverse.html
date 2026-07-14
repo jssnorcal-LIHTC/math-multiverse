@@ -87,7 +87,9 @@
     z-index: 1;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 16px 24px 40px;
+    /* Trimmed top/bottom padding (was 16 / 40) to hand vertical space to
+       the play area on the 768px-tall iPad without touching module logic. */
+    padding: 10px 24px 16px;
   }
 
   /* HEADER */
@@ -96,8 +98,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--border-subtle);
   }
   .brand { display: flex; align-items: center; gap: 12px; }
@@ -124,15 +126,21 @@
   .profile-bar {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 7px;
     flex-wrap: wrap;
     justify-content: flex-end;
   }
+  /* Header controls compacted so the player pill + Grade 5/6 toggle + all
+     six icon buttons hold ONE row at the iPad's 1024px width. Previously
+     "Reset" wrapped to a second row, inflating the header and stealing
+     ~40px of vertical space from the play area below. Scoped to
+     .profile-bar so other .icon-btn uses (e.g. modal Close) are untouched. */
+  .profile-bar .icon-btn { padding: 8px 9px; }
   .player-stats {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 14px;
+    gap: 8px;
+    padding: 8px 11px;
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: 999px;
@@ -262,6 +270,24 @@
     color: var(--text-primary);
   }
   .coach-example b, .coach-example strong { color: #ffaa50; }
+  .explain-next {
+    display: block;
+    margin: 12px auto 2px;
+    padding: 12px 34px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    animation: fadein 0.2s ease-out;
+  }
+  @media (hover: hover) {
+    .explain-next:hover { background: var(--bg-card); border-color: var(--text-muted); }
+  }
 
   /* SCREENS */
   .screen { display: none; animation: fadein 0.3s ease-out; }
@@ -1706,11 +1732,14 @@
     justify-content: center;
   }
   .rc-mc-mini-grid #rc-gridhost {
-    width: min(300px, 34vh);
-    height: min(300px, 34vh);
+    /* Reference grid enlarged (was 300px / 34vh) to use the vertical space
+       reclaimed by the single-row header. Still capped by vh so the four
+       answer buttons stay above the fold on the iPad -- verified at 1024x768. */
+    width: min(330px, 40vh);
+    height: min(330px, 40vh);
     aspect-ratio: 1 / 1;
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 330px;
+    max-height: 330px;
   }
   .rc-ans {
     padding: 12px 14px;
@@ -1830,7 +1859,7 @@
     width: 100%;
     max-width: 540px;
     margin: 0 auto 8px;
-    aspect-ratio: 16 / 5;
+    aspect-ratio: 16 / 6;
     border-radius: 8px;
     overflow: hidden;
     background: #1a1d24;
@@ -1838,7 +1867,7 @@
   }
   .mb-hero img {
     width: 100%; height: 100%; object-fit: cover;
-    object-position: center 40%;
+    object-position: center 22%;
     display: block;
   }
   .mb-hero::after {
@@ -4937,23 +4966,23 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           if (Save.shouldCoach(q.topic)) {
             later(1800, () => showCoach(q.topic));
           }
-          if (state.crashCount >= 3) {
-            // 3 wipeouts = retire. Pause to read the explanation, then crash overlay.
-            later(2800, () => triggerCrash());
-            return;
-          }
         }
 
-        const nextDelay = correct ? 1400 : 3600;
-        later(nextDelay, () => {
+        const goNext = () => {
+          if (state.crashCount >= 3) { triggerCrash(); return; }
           state.questionNum++;
-          if (state.crashCount >= 3 || state.questionNum >= totalQ) {
+          if (state.questionNum >= totalQ) {
             endLevel();
           } else {
             state.phase = 'racing';
             render();
           }
-        });
+        };
+        if (correct) {
+          later(1400, goNext);
+        } else if (!attachExplainNext(qEl && qEl.querySelector('.fr-explain'), goNext)) {
+          later(3600, goNext);
+        }
       }
 
       function triggerCrash() {
@@ -6210,7 +6239,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
 
-        later(correct ? 1500 : 3800, () => {
+        const goNext = () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -6218,7 +6247,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             state.phase = 'racing';
             renderRace();
           }
-        });
+        };
+        if (correct) {
+          later(1500, goNext);
+        } else if (!attachExplainNext(qEl && qEl.querySelector('.f1-explain'), goNext)) {
+          later(3800, goNext);
+        }
       }
 
       function endLevel() {
@@ -7444,7 +7478,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           sfxWrong();
           if (q && Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
-        later(correct ? 1500 : 3800, () => {
+        const goNext = () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -7452,7 +7486,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             state.phase = 'flying';
             renderFlight();
           }
-        });
+        };
+        if (correct) {
+          later(1500, goNext);
+        } else if (!attachExplainNext(qEl && qEl.querySelector('.rc-explain'), goNext)) {
+          later(3800, goNext);
+        }
       }
 
       function endLevel() {
@@ -8270,7 +8309,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
 
-        later(correct ? 1500 : 3800, () => {
+        const goNext = () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -8278,7 +8317,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             state.phase = 'building';
             renderBuild(correct);
           }
-        });
+        };
+        if (correct) {
+          later(1500, goNext);
+        } else if (!attachExplainNext(qEl && qEl.querySelector('.mb-explain'), goNext)) {
+          later(3800, goNext);
+        }
       }
 
       function endLevel() {
@@ -9542,7 +9586,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
 
-        later(correct ? 1500 : 3800, () => {
+        const goNext = () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -9550,7 +9594,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             state.phase = 'translating';
             renderRoom();
           }
-        });
+        };
+        if (correct) {
+          later(1500, goNext);
+        } else if (!attachExplainNext(qEl && qEl.querySelector('.rk-explain'), goNext)) {
+          later(3800, goNext);
+        }
       }
 
       function endLevel() {
@@ -9582,7 +9631,10 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 // ============================================================
 (function() {
 
-  const POOH_MAP = 'https://en.wikipedia.org/wiki/Special:FilePath/E._H._Shepard_-_Map_of_the_Hundred_Acre_Wood.jpg';
+  // Embedded locally (was an external Wikipedia hotlink that failed offline on
+  // the iPad, dropping to the crude SVG fallback). Genuine 1926 E. H. Shepard
+  // map, public domain. See art/pooh-hundred-acre-wood.jpg.
+  const POOH_MAP = 'art/pooh-hundred-acre-wood.jpg';
   const POOH_COVER = 'https://en.wikipedia.org/wiki/Special:FilePath/Winnie-the-Pooh_(book).png';
 
   const FB_LEVELS = [
@@ -9652,36 +9704,99 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   // ---- Shepard-style illustrations ----
 
-  function poohSvg(small) {
-    const s = small ? 80 : 160;
-    const k = small ? 0.5 : 1;
-    const t = (n) => (n * k).toFixed(1);
-    return `
-      <svg viewBox="0 0 ${s} ${s}" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#4A3526" stroke-width="${k * 1.5}" fill="none" stroke-linejoin="round">
-          <!-- body -->
-          <ellipse cx="${t(80)}" cy="${t(105)}" rx="${t(38)}" ry="${t(34)}" fill="#D4A878"/>
-          <!-- head -->
-          <circle cx="${t(80)}" cy="${t(55)}" r="${t(28)}" fill="#D4A878"/>
-          <!-- ears -->
-          <ellipse cx="${t(58)}" cy="${t(36)}" rx="${t(8)}" ry="${t(7)}" fill="#D4A878"/>
-          <ellipse cx="${t(102)}" cy="${t(36)}" rx="${t(8)}" ry="${t(7)}" fill="#D4A878"/>
-          <!-- eyes -->
-          <circle cx="${t(72)}" cy="${t(52)}" r="${t(2)}" fill="#4A3526" stroke="none"/>
-          <circle cx="${t(88)}" cy="${t(52)}" r="${t(2)}" fill="#4A3526" stroke="none"/>
-          <!-- nose -->
-          <ellipse cx="${t(80)}" cy="${t(64)}" rx="${t(4)}" ry="${t(3)}" fill="#4A3526" stroke="none"/>
-          <path d="M ${t(80)} ${t(67)} Q ${t(76)} ${t(72)} ${t(74)} ${t(70)}"/>
-          <path d="M ${t(80)} ${t(67)} Q ${t(84)} ${t(72)} ${t(86)} ${t(70)}"/>
-          <!-- arms -->
-          <ellipse cx="${t(50)}" cy="${t(95)}" rx="${t(10)}" ry="${t(18)}" fill="#D4A878"/>
-          <ellipse cx="${t(110)}" cy="${t(95)}" rx="${t(10)}" ry="${t(18)}" fill="#D4A878"/>
-          <!-- legs -->
-          <ellipse cx="${t(65)}" cy="${t(140)}" rx="${t(10)}" ry="${t(8)}" fill="#D4A878"/>
-          <ellipse cx="${t(95)}" cy="${t(140)}" rx="${t(10)}" ry="${t(8)}" fill="#D4A878"/>
-        </g>
-      </svg>
-    `;
+  // ---- Floating Bear pen-and-ink art (E. H. Shepard style, redrawn 26-0708).
+  //      All draw helpers namespaced fb*/FB_* to avoid any collision. ----
+  const FB_INK = '#3a2b1c', FB_SOFT = '#b0a184', FB_PAPER = '#f4ead1',
+        FB_PAPER2 = '#ede0c1', FB_HONEY = '#e7c47f', FB_WATER = '#d3ddd6';
+  function fbWob(i) { return (Math.sin(i * 12.9898) * 43758.5453) - Math.floor(Math.sin(i * 12.9898) * 43758.5453); }
+  function fbCloud(cx, cy, rx, ry, bumps, seed) {
+    seed = seed || 0; let d = ''; const N = bumps;
+    for (let i = 0; i <= N; i++) {
+      const a = (i / N) * Math.PI * 2 - Math.PI / 2;
+      const wobble = 0.80 + 0.22 * fbWob(i + seed * 7);
+      const x = cx + Math.cos(a) * rx * wobble, y = cy + Math.sin(a) * ry * wobble;
+      const a2 = ((i - 0.5) / N) * Math.PI * 2 - Math.PI / 2;
+      const bump = 1.15 + 0.13 * fbWob(i * 3 + seed);
+      const cxp = cx + Math.cos(a2) * rx * bump, cyp = cy + Math.sin(a2) * ry * bump;
+      d += i === 0 ? `M ${x.toFixed(1)} ${y.toFixed(1)} ` : `Q ${cxp.toFixed(1)} ${cyp.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)} `;
+    }
+    return d + 'Z';
+  }
+  function fbGrass(x0, x1, y, n, seed) {
+    seed = seed || 0; let s = '';
+    for (let i = 0; i < n; i++) {
+      const x = x0 + (x1 - x0) * (i / n) + fbWob(i + seed) * 4, hh = 4 + 3 * fbWob(i * 2 + seed);
+      s += `<path d="M ${x.toFixed(1)} ${y} q -1 ${(-hh * 0.8).toFixed(1)} -1.6 ${(-hh).toFixed(1)}"/><path d="M ${(x + 1.6).toFixed(1)} ${y} q 0 ${(-hh).toFixed(1)} 1.3 ${(-hh * 1.05).toFixed(1)}"/>`;
+    }
+    return `<g stroke="${FB_INK}" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.8">${s}</g>`;
+  }
+  function fbPoohFig(lookUp) {
+    const eyeY = lookUp ? 42 : 45, browY = lookUp ? 35 : 39;
+    return `<g stroke="${FB_INK}" fill="none" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M 82 80 q 22 5 21 26 q -1 12 -12 12" stroke-width="1.7" fill="${FB_PAPER2}"/>
+      <path d="M 60 66 Q 31 71 31 103 Q 31 137 62 139 Q 95 139 95 104 Q 95 73 70 66 Z" stroke-width="1.9" fill="${FB_PAPER2}"/>
+      <path d="M 36 95 Q 63 105 90 95" stroke-width="1.2"/>
+      <path d="M 45 137 q -6 9 3 12 q 8 2 11 -4" stroke-width="1.7" fill="${FB_PAPER2}"/>
+      <path d="M 73 138 q 6 9 -3 12 q -8 2 -11 -4" stroke-width="1.7" fill="${FB_PAPER2}"/>
+      <path d="M 41 82 q -14 6 -13 24 q 1 11 10 11 q 8 0 10 -8" stroke-width="1.7" fill="${FB_PAPER2}"/>
+      <circle cx="63" cy="46" r="29" stroke-width="1.9" fill="${FB_PAPER}"/>
+      <path d="M 41 29 q -8 -6 -3 -12 q 8 -3 13 6" stroke-width="1.7" fill="${FB_PAPER}"/>
+      <path d="M 85 29 q 8 -6 3 -12 q -8 -3 -13 6" stroke-width="1.7" fill="${FB_PAPER}"/>
+      <path d="M 51 52 Q 49 69 66 69 Q 81 68 79 54 Q 66 60 51 52 Z" stroke-width="1.4" fill="${FB_PAPER2}"/>
+      <ellipse cx="64" cy="57" rx="4.2" ry="3.1" fill="${FB_INK}" stroke="none"/>
+      <path d="M 64 60 Q 60 66 56 64 M 64 60 Q 68 66 72 64" stroke-width="1.1"/>
+      <circle cx="54" cy="${eyeY}" r="2" fill="${FB_INK}" stroke="none"/><circle cx="73" cy="${eyeY}" r="2" fill="${FB_INK}" stroke="none"/>
+      <path d="M 50 ${browY} q 4 -3 8 -1 M 69 ${browY} q 4 -2 8 1" stroke-width="0.9"/>
+      <g stroke-width="0.6" opacity="0.28"><path d="M 45 112 q 6 8 14 9"/><path d="M 43 104 q 8 10 18 11"/><path d="M 47 120 q 6 6 12 7"/><path d="M 78 98 q 5 8 4 16"/></g>
+    </g>`;
+  }
+  function poohSvg() { return `<svg viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg">${fbPoohFig(true)}</svg>`; }
+  function fbFloatPooh() {
+    return `<g stroke="${FB_INK}" fill="none" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse cx="2" cy="10" rx="40" ry="6" fill="${FB_INK}" opacity="0.07" stroke="none"/>
+      <g stroke-width="1" opacity="0.45"><path d="M -50 8 q 24 9 48 0"/><path d="M -66 14 q 33 11 66 0"/><path d="M 34 10 q 15 6 30 0"/></g>
+      <path d="M -32 4 Q -37 -20 -29 -34 L 29 -34 Q 37 -20 32 4 Z" fill="${FB_HONEY}" stroke-width="1.8"/>
+      <path d="M -36 -34 Q 0 -41 36 -34 Q 36 -27 0 -26 Q -36 -27 -36 -34 Z" fill="${FB_PAPER}" stroke-width="1.6"/>
+      <path d="M -30 4 Q 0 13 30 4" stroke-width="1.6"/>
+      <path d="M -27 8 Q 0 15 27 8" stroke-width="0.9" opacity="0.4"/>
+      <g stroke-width="0.6" opacity="0.32"><path d="M -25 -23 q 3 14 4 24"/><path d="M 27 -23 q -3 14 -4 24"/><path d="M -12 -22 q 2 14 2 24"/></g>
+      <g transform="translate(0,-33)">
+        <path d="M -13 -2 q -6 8 -3 15 q 2 5 7 4" stroke-width="1.5" fill="${FB_PAPER2}"/>
+        <path d="M 13 -2 q 6 8 3 15 q -2 5 -7 4" stroke-width="1.5" fill="${FB_PAPER2}"/>
+        <path d="M -15 -6 Q -21 -22 -13 -30 Q 0 -37 13 -30 Q 21 -22 15 -6 Q 0 1 -15 -6 Z" stroke-width="1.7" fill="${FB_PAPER2}"/>
+        <path d="M -14 -20 q -9 6 -6 15 q 2 6 9 4" stroke-width="1.4" fill="${FB_PAPER2}"/>
+        <path d="M 14 -20 q 9 6 6 15 q -2 6 -9 4" stroke-width="1.4" fill="${FB_PAPER2}"/>
+        <g stroke-width="0.5" opacity="0.24"><path d="M -8 -8 q 4 5 10 6"/><path d="M -9 -14 q 5 6 12 7"/></g>
+        <circle cx="0" cy="-40" r="15.5" stroke-width="1.7" fill="${FB_PAPER}"/>
+        <path d="M -11.5 -49 q -5 -4 -2 -8 q 5 -2 8 3" stroke-width="1.4" fill="${FB_PAPER}"/>
+        <path d="M 11.5 -49 q 5 -4 2 -8 q -5 -2 -8 3" stroke-width="1.4" fill="${FB_PAPER}"/>
+        <path d="M -8 -37 Q -9 -28 1 -28 Q 9 -29 8 -36 Q 0 -33 -8 -37 Z" stroke-width="1.2" fill="${FB_PAPER2}"/>
+        <ellipse cx="0.5" cy="-32" rx="2.3" ry="1.7" fill="${FB_INK}" stroke="none"/>
+        <circle cx="-6" cy="-43" r="1.3" fill="${FB_INK}" stroke="none"/><circle cx="6" cy="-43" r="1.3" fill="${FB_INK}" stroke="none"/>
+        <path d="M -9 -47 q 3 -2 6 -1 M 3 -48 q 3 -1 6 1" stroke-width="0.8"/>
+      </g>
+    </g>`;
+  }
+  function fbTree(tx, groundY, h) {
+    const topY = groundY - h, cx = tx, cy = topY + h * 0.20;
+    return `<g>
+      <path d="M ${tx - 10} ${groundY} Q ${tx - 13} ${groundY - h * 0.5} ${tx - 7} ${topY + h * 0.30} L ${tx + 8} ${topY + h * 0.30} Q ${tx + 13} ${groundY - h * 0.5} ${tx + 11} ${groundY} Z" fill="${FB_PAPER2}" stroke="${FB_INK}" stroke-width="1.8"/>
+      <path d="M ${tx - 10} ${groundY} q -8 -2 -15 3 M ${tx + 11} ${groundY} q 8 -1 14 4" fill="none" stroke="${FB_INK}" stroke-width="1.4" stroke-linecap="round"/>
+      <g stroke="${FB_INK}" stroke-width="0.6" fill="none" opacity="0.5" stroke-linecap="round">
+        <path d="M ${tx - 5} ${groundY - 14} q 3 -22 1 -42"/><path d="M ${tx + 3} ${groundY - 10} q -2 -26 0 -48"/>
+        <path d="M ${tx - 8} ${groundY - 34} q 4 3 7 1"/><path d="M ${tx - 2} ${groundY - 56} q 4 3 7 1"/></g>
+      <g stroke="${FB_INK}" stroke-width="0.5" fill="none" opacity="0.28" stroke-linecap="round">
+        ${Array.from({ length: 7 }, (_, i) => `<path d="M ${tx + 6} ${groundY - 16 - i * 7} q 3 3 5 0"/>`).join('')}</g>
+      <path d="M ${tx - 3} ${groundY - 42} q -6 2 -5 11 q 1 7 7 7 q 6 0 6 -8 q 0 -10 -8 -10 Z" fill="${FB_INK}" opacity="0.8"/>
+      <path d="${fbCloud(cx, cy, 60, 45, 22, 1)}" fill="${FB_PAPER}" stroke="${FB_INK}" stroke-width="1.8"/>
+      <path d="${fbCloud(tx - 33, topY + h * 0.31, 33, 27, 15, 3)}" fill="${FB_PAPER}" stroke="${FB_INK}" stroke-width="1.6"/>
+      <path d="${fbCloud(tx + 35, topY + h * 0.29, 35, 29, 15, 5)}" fill="${FB_PAPER}" stroke="${FB_INK}" stroke-width="1.6"/>
+      <g stroke="${FB_INK}" stroke-width="0.6" fill="none" opacity="0.3" stroke-linecap="round">
+        ${Array.from({ length: 16 }, (_, i) => { const t = i / 15, x = cx - 52 + t * 104, y = cy + 30 + Math.sin(t * Math.PI) * 10; return `<path d="M ${x.toFixed(1)} ${y.toFixed(1)} q 2 5 -1 8"/>`; }).join('')}
+      </g>
+      <g stroke="${FB_INK}" stroke-width="0.55" fill="none" opacity="0.28" stroke-linecap="round">
+        ${Array.from({ length: 22 }, (_, i) => { const a = fbWob(i) * 6.28, r = 14 + fbWob(i * 2) * 40, x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r * 0.62; return `<path d="M ${x.toFixed(1)} ${y.toFixed(1)} q 2 4 -1 6"/>`; }).join('')}
+      </g></g>`;
   }
 
   function pigletSvg(small) {
@@ -9712,98 +9827,59 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     `;
   }
 
-  function honeyJarSvg(label) {
-    return `
-      <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#4A3526" stroke-width="1.5" fill="none" stroke-linejoin="round">
-          <!-- jar body -->
-          <path d="M 12 28 L 12 70 Q 12 75 16 75 L 44 75 Q 48 75 48 70 L 48 28 Z" fill="#D4A24C"/>
-          <!-- lid -->
-          <rect x="10" y="22" width="40" height="8" fill="#8B5A2B" rx="1"/>
-          <!-- top inner shadow -->
-          <line x1="12" y1="32" x2="48" y2="32" stroke="#8B5A2B"/>
-          <!-- label -->
-          <rect x="18" y="42" width="24" height="18" fill="#F8F0DD" stroke-width="1"/>
-          <text x="30" y="55" font-size="9" font-family="Georgia, serif" font-style="italic" font-weight="700" fill="#4A3526" text-anchor="middle" stroke="none">${label || 'HUNNY'}</text>
-        </g>
-      </svg>
-    `;
+  function fbJar(label, showLabel) {
+    return `<g stroke="${FB_INK}" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M 14 31 Q 11 55 16 71 Q 18 76 30 76 Q 42 76 44 71 Q 49 55 46 31 Z" fill="${FB_HONEY}"/>
+      <path d="M 12 29 Q 30 24 48 29 Q 48 34 30 35 Q 12 34 12 29 Z" fill="${FB_PAPER}"/>
+      <path d="M 14 42 Q 30 46 46 42" stroke-width="0.9" opacity="0.45"/>
+      ${showLabel !== false ? `<rect x="19" y="46" width="22" height="16" rx="1.5" fill="${FB_PAPER}" stroke-width="1"/>
+      <text x="30" y="57.5" font-size="8" font-family="Georgia, serif" font-style="italic" font-weight="700" fill="${FB_INK}" text-anchor="middle" stroke="none">${label || 'HUNNY'}</text>` : ''}
+      <g stroke-width="0.6" opacity="0.32"><path d="M 16 40 q 2 20 3 30"/><path d="M 44 40 q -2 20 -3 30"/></g>
+    </g>`;
   }
+  function honeyJarSvg(label) { return `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">${fbJar(label)}</svg>`; }
 
   function sceneSvg(state, level) {
-    const waterLevel = 220 - state.questionNum * 6 - state.livesLost * 16; // rises with wrongs
-    const waterY = Math.max(110, Math.min(220, waterLevel));
-    const showCR = level.id >= 5 && state.questionNum > 6;
-    const showFloatingBear = level.id >= 3;
-    const showBottle = level.id >= 4 && state.questionNum > 4;
-
+    const q = state.questionNum || 0, lost = state.livesLost || 0;
+    const waterY = Math.max(150, Math.min(238, 244 - q * 4 - lost * 13)); // flood rises with wrongs
+    const flooded = waterY < 210;
+    const showFloating = (level.id >= 3) || flooded;
+    const jarsLeft = Math.max(0, 4 - Math.min(4, q));
+    const rainN = Math.min(52, 6 + q * 3 + lost * 7);
+    const rain = Array.from({ length: rainN }, (_, i) => { const x = (i * 61 + q * 13) % 600, y = (i * 41 + q * 7) % (waterY - 14); return `<line x1="${x}" y1="${y}" x2="${(x - 5)}" y2="${y + 13}"/>`; }).join('');
+    const distTrees = Array.from({ length: 5 }, (_, i) => { const x = 250 + i * 80 + fbWob(i) * 16, y = 150 + fbWob(i * 2) * 4, r = 9 + fbWob(i * 3) * 5; return `<path d="${fbCloud(x, y - r * 0.3, r, r * 0.85, 9, i)}" fill="${FB_PAPER}" stroke="${FB_SOFT}" stroke-width="0.9"/><line x1="${x}" y1="${(y + r * 0.5).toFixed(1)}" x2="${x}" y2="${(y + r * 0.5 + 6).toFixed(1)}" stroke="${FB_SOFT}" stroke-width="0.9"/>`; }).join('');
+    let ripples = '';
+    for (let yy = waterY + 14; yy < 280; yy += 16) { const amp = 1.6 + fbWob(yy) * 1.2; ripples += `<path d="M 0 ${yy} q 60 ${(-amp).toFixed(1)} 120 0 t 120 0 t 120 0 t 120 0 t 120 0" fill="none" stroke="${FB_INK}" stroke-width="0.9" opacity="0.2"/>`; }
+    const bankY = 214;
+    const branch = `<path d="M 128 110 Q 178 116 226 126 Q 250 130 262 120" fill="none" stroke="${FB_INK}" stroke-width="2"/>
+      <path d="${fbCloud(266, 116, 9, 7, 8, 9)}" fill="${FB_PAPER}" stroke="${FB_INK}" stroke-width="1.2"/>
+      <path d="${fbCloud(150, 104, 8, 6, 7, 4)}" fill="${FB_PAPER}" stroke="${FB_INK}" stroke-width="1"/>`;
+    const jars = Array.from({ length: jarsLeft }, (_, i) => { const bx = 170 + i * 24, by = 118 + i * 3; return `<line x1="${bx + 13}" y1="${by}" x2="${bx + 13}" y2="${by + 11}" stroke="${FB_INK}" stroke-width="1.1"/><g transform="translate(${bx}, ${by + 10}) scale(0.42)">${fbJar('HUNNY')}</g>`; }).join('');
     return `
       <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="fbSky" cx="0.5" cy="0.3">
-            <stop offset="0" stop-color="#F8E8C0"/>
-            <stop offset="1" stop-color="#D8B898"/>
-          </radialGradient>
-        </defs>
-        <!-- sky / paper -->
-        <rect width="600" height="280" fill="url(#fbSky)"/>
-        <!-- distant trees -->
-        <g stroke="#4A3526" stroke-width="1" fill="#A8B898" opacity="0.5">
-          <ellipse cx="80"  cy="160" rx="32" ry="36"/>
-          <ellipse cx="520" cy="160" rx="32" ry="36"/>
-          <ellipse cx="180" cy="155" rx="22" ry="28"/>
-          <ellipse cx="430" cy="155" rx="22" ry="28"/>
+        <defs><linearGradient id="fbPpr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8efd8"/><stop offset="1" stop-color="#efe3c6"/></linearGradient>
+        <filter id="fbRough" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="turbulence" baseFrequency="0.02 0.024" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter></defs>
+        <rect width="600" height="280" fill="url(#fbPpr)"/>
+        <g filter="url(#fbRough)">
+        <rect x="5" y="5" width="590" height="270" fill="none" stroke="${FB_INK}" stroke-width="1" opacity="0.3" rx="3"/>
+        <path d="M 0 156 Q 150 140 320 152 T 600 150 L 600 190 L 0 190 Z" fill="${FB_PAPER2}" stroke="${FB_SOFT}" stroke-width="0.9"/>
+        <g>${distTrees}</g>
+        <g stroke="${FB_INK}" stroke-width="0.7" opacity="0.36" stroke-linecap="round">${rain}</g>
+        <path d="M 0 ${waterY} Q 90 ${waterY - 4} 180 ${waterY} T 360 ${waterY} T 540 ${waterY} T 600 ${waterY} L 600 280 L 0 280 Z" fill="${FB_WATER}" opacity="0.42"/>
+        <path d="M 0 ${waterY} Q 90 ${waterY - 4} 180 ${waterY} T 360 ${waterY} T 540 ${waterY} T 600 ${waterY}" fill="none" stroke="${FB_INK}" stroke-width="1.3"/>
+        <g>${ripples}</g>
+        <path d="M 0 ${bankY} Q 80 ${bankY - 6} 150 ${bankY - 2} Q 220 ${bankY + 2} 252 ${bankY + 12} L 252 280 L 0 280 Z" fill="url(#fbPpr)" stroke="${FB_INK}" stroke-width="1.1"/>
+        <g stroke="${FB_INK}" stroke-width="0.6" opacity="0.4" stroke-linecap="round" fill="none"><path d="M 30 ${bankY + 7} q 20 -3 40 0"/><path d="M 95 ${bankY + 11} q 25 -3 55 2"/></g>
+        ${fbTree(120, bankY - 2, 150)}
+        ${branch}
+        ${jars}
+        <g stroke="${FB_INK}" stroke-width="0.8" fill="none" opacity="0.65"><path d="M 250 96 q 3 -3 6 0 M 262 88 q 3 -3 6 0 M 244 104 q 3 -3 6 0"/></g>
+        ${showFloating
+          ? `<g transform="translate(432, ${waterY + 2}) scale(1.3)">${fbFloatPooh()}</g>`
+          : `<g transform="translate(96, ${bankY}) scale(0.44)">${fbPoohFig(true)}</g>`}
+        ${!flooded ? fbGrass(20, 86, bankY, 7, 1) : ''}
+        ${!flooded ? fbGrass(158, 238, bankY + 7, 6, 4) : ''}
         </g>
-        <!-- big tree (Pooh's) -->
-        <g stroke="#4A3526" stroke-width="2" fill="none">
-          <path d="M 280 220 L 290 80 L 320 80 L 310 220 Z" fill="#8B5A2B"/>
-          <ellipse cx="300" cy="60" rx="50" ry="38" fill="#7A9A5A"/>
-          <ellipse cx="270" cy="50" rx="32" ry="26" fill="#8AAA6A"/>
-          <ellipse cx="335" cy="55" rx="34" ry="28" fill="#8AAA6A"/>
-        </g>
-        <!-- branch with Pooh -->
-        <line x1="300" y1="100" x2="380" y2="80" stroke="#5A4030" stroke-width="3"/>
-        <g transform="translate(360, 50) scale(0.6)">${poohSvg(false)}</g>
-        <!-- honey jars on branch -->
-        ${[0, 1, 2, 3].map(i => i < (4 - Math.min(4, state.questionNum)) ? `<g transform="translate(${340 + i * 24}, 70) scale(0.4)">${honeyJarSvg('HUNNY')}</g>` : '').join('')}
-        <!-- rain lines -->
-        ${state.questionNum > 0 ? Array.from({length: 30}, (_, i) => {
-          const x = (i * 23 + state.questionNum * 7) % 600;
-          const y = (i * 17 + state.questionNum * 11) % 200;
-          return `<line x1="${x}" y1="${y}" x2="${x - 4}" y2="${y + 12}" stroke="rgba(74, 100, 140, 0.45)" stroke-width="1"/>`;
-        }).join('') : ''}
-        <!-- water -->
-        <path d="M 0 ${waterY} Q 100 ${waterY - 4} 200 ${waterY} T 400 ${waterY} T 600 ${waterY} L 600 280 L 0 280 Z" fill="#5A7AA8" opacity="0.7"/>
-        <path d="M 0 ${waterY} Q 100 ${waterY - 4} 200 ${waterY} T 400 ${waterY} T 600 ${waterY}" stroke="#4A3526" stroke-width="1" fill="none"/>
-        <!-- Floating Bear (Pooh on jar) -->
-        ${showFloatingBear ? `
-          <g transform="translate(150, ${waterY - 50})">
-            <g transform="translate(0, 14) scale(0.7)">${honeyJarSvg('THE FLOATING BEAR')}</g>
-            <g transform="translate(8, -22) scale(0.4)">${poohSvg(false)}</g>
-          </g>
-        ` : ''}
-        <!-- Piglet's bottle -->
-        ${showBottle ? `
-          <g transform="translate(450, ${waterY - 14})">
-            <ellipse cx="0" cy="0" rx="14" ry="6" fill="#D8E8F8" stroke="#4A3526" stroke-width="1"/>
-            <rect x="-3" y="-12" width="6" height="8" fill="#D8E8F8" stroke="#4A3526" stroke-width="1"/>
-            <text x="0" y="3" text-anchor="middle" font-size="5" fill="#4A3526" font-family="Georgia" font-style="italic">HELP</text>
-          </g>
-        ` : ''}
-        <!-- Christopher Robin in umbrella -->
-        ${showCR ? `
-          <g transform="translate(280, ${waterY - 60})">
-            <!-- inverted umbrella as boat -->
-            <path d="M -36 0 Q 0 30 36 0 L 30 8 L 24 4 L 18 8 L 12 4 L 6 8 L 0 4 L -6 8 L -12 4 L -18 8 L -24 4 L -30 8 Z" fill="#A88858" stroke="#4A3526" stroke-width="1.5"/>
-            <line x1="0" y1="-30" x2="0" y2="0" stroke="#4A3526" stroke-width="1.5"/>
-            <!-- Christopher Robin silhouette -->
-            <circle cx="0" cy="-20" r="6" fill="#F0D8B8" stroke="#4A3526" stroke-width="1"/>
-            <rect x="-6" y="-15" width="12" height="14" fill="#9AB0C8" stroke="#4A3526" stroke-width="1"/>
-            <text x="0" y="-30" text-anchor="middle" font-size="6" fill="#4A3526" font-family="Georgia" font-style="italic">"Pooh!"</text>
-          </g>
-        ` : ''}
-        <!-- title vignette -->
-        <text x="300" y="30" text-anchor="middle" font-family="Georgia" font-size="14" font-style="italic" fill="#8B5A2B">${level.chapter}</text>
       </svg>
     `;
   }
@@ -10422,7 +10498,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
 
-        later(correct ? 1500 : 3800, () => {
+        const goNext = () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -10430,7 +10506,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             state.phase = 'reading';
             renderStory();
           }
-        });
+        };
+        if (correct) {
+          later(1500, goNext);
+        } else if (!attachExplainNext(qEl && qEl.querySelector('.fb-explain'), goNext)) {
+          later(3800, goNext);
+        }
       }
 
       function endLevel() {
@@ -10784,24 +10865,37 @@ function renderStatsModal() {
 // Each module module calls this after its answer-handler.
 const COACH_TIPS = {
   'frac-add-like':       { tip: 'When the bottoms (denominators) match, only the tops change. Add the tops, keep the bottom.', ex: '<b>2/5 + 1/5</b>: Add tops 2+1=3. Keep 5. = <b>3/5</b>.' },
+  'frac-sub-like':       { tip: 'When the bottoms match, subtract the tops and keep the bottom.', ex: '<b>4/7 − 2/7</b>: 4−2 = 2. Keep 7. = <b>2/7</b>.' },
   'frac-add-unlike':     { tip: 'Different bottoms? First find a common denominator, then convert both fractions before adding tops.', ex: '<b>1/2 + 1/3</b>: Common bottom 6. 1/2 = 3/6, 1/3 = 2/6. Add: 3/6 + 2/6 = <b>5/6</b>.' },
   'frac-sub-unlike':     { tip: 'Same trick as adding unlike fractions: common denominator first, THEN subtract tops.', ex: '<b>2/3 − 1/4</b>: Common bottom 12. 2/3 = 8/12, 1/4 = 3/12. Subtract: 8 − 3 = <b>5/12</b>.' },
   'frac-mult-frac':      { tip: 'Multiplying fractions: tops × tops, bottoms × bottoms. No common denominator needed.', ex: '<b>2/3 × 4/5</b>: 2×4 = 8. 3×5 = 15. = <b>8/15</b>.' },
   'frac-mult-whole':     { tip: 'A whole × a fraction: just multiply the whole into the top. Bottom stays.', ex: '<b>4 × 2/5</b>: 4×2 = 8. Keep 5. = <b>8/5</b> or <b>1 3/5</b>.' },
+  'frac-of-whole':       { tip: 'A fraction OF a number: divide by the bottom first, then multiply by the top.', ex: '<b>2/3 of 12</b>: 12 ÷ 3 = 4. Then 4 × 2 = <b>8</b>.' },
   'frac-div-whole-by-unit': { tip: 'Dividing by 1/n is the same as multiplying by n.', ex: '<b>3 ÷ 1/4</b>: Same as 3 × 4 = <b>12</b>.' },
   'frac-div-unit-by-whole': { tip: 'Dividing 1/n by a whole w means each share is 1/(n × w).', ex: '<b>1/4 ÷ 3</b>: 1/(4 × 3) = <b>1/12</b>.' },
   'frac-compare':        { tip: 'Convert to a common denominator, then compare the tops.', ex: '<b>2/3 vs 3/5</b>: Common 15. 2/3 = 10/15, 3/5 = 9/15. <b>2/3 is bigger</b>.' },
   'frac-equiv':          { tip: 'Equivalent fractions: multiply top and bottom by the SAME number.', ex: '<b>3/4 = ?/12</b>: 4 × 3 = 12, so multiply top by 3 too: <b>9/12</b>.' },
   'frac-simplify':       { tip: 'To simplify, divide top and bottom by the same number until you can\'t go any smaller.', ex: '<b>6/8</b>: divide both by 2 → <b>3/4</b>.' },
+  'frac-mixed-add':      { tip: 'Add the wholes, add the fractions. If the fraction part goes over 1, carry it into the wholes.', ex: '<b>2 3/5 + 1 4/5</b>: wholes 2+1 = 3; fractions 3/5+4/5 = 7/5 = 1 2/5. Total <b>4 2/5</b>.' },
+  'frac-mixed-sub':      { tip: 'Subtract wholes and fractions separately. If the top fraction is too small, borrow 1 whole as a fraction first.', ex: '<b>3 1/4 − 1 3/4</b>: borrow → 2 5/4 − 1 3/4 = <b>1 2/4 = 1 1/2</b>.' },
   'dec-place-value':     { tip: 'Decimal places after the point: tenths, hundredths, thousandths. Each digit\'s VALUE = digit × its place.', ex: 'In <b>3.247</b>: the 4 is in the hundredths, value = 4 × 1/100 = <b>0.04</b>.' },
   'dec-compare':         { tip: 'Compare digit by digit from the LEFT. First difference wins. Watch place values!', ex: '<b>1.45 vs 1.5</b>: Same 1. Tenths: 4 vs 5. So 1.5 is bigger.' },
   'dec-add-sub':         { tip: 'Line up the decimal points. Then add or subtract column by column.', ex: '<b>2.50 + 1.37</b>: line up dots. 0+7=7, 5+3=8, 2+1=3. = <b>3.87</b>.' },
   'dec-mult':            { tip: 'Multiply as if both were whole numbers. Then place the decimal so the answer has the same total decimal places as both inputs combined.', ex: '<b>0.4 × 0.3</b>: 4 × 3 = 12. Two decimal places total. = <b>0.12</b>.' },
+  'dec-div':             { tip: 'Divide like whole numbers, then put the decimal point in the answer straight above where it sits in the number you divided.', ex: '<b>187.5 ÷ 25</b>: 1875 ÷ 25 = 75. One decimal place → <b>7.5</b>.' },
   'dec-power-of-ten':    { tip: 'Multiplying by 10/100/1000 shifts the decimal RIGHT. Dividing shifts it LEFT.', ex: '<b>3.45 × 100</b>: shift 2 right = <b>345</b>. <b>27 ÷ 1000</b>: shift 3 left = <b>0.027</b>.' },
   'dec-round':           { tip: 'Look at the digit JUST AFTER the place you\'re rounding to. ≥5 round up; <5 round down.', ex: '<b>Round 1.234 to hundredths</b>: digit after hundredths is 4 (<5), round down → <b>1.23</b>.' },
+  'dec-write-word':      { tip: 'Read the decimal point as AND. Read the digits after it as one number named by the LAST place (tenths, hundredths, thousandths).', ex: '<b>3.24</b> = three AND 24 hundredths (the 4 lands in the hundredths place).' },
+  'dec-expand':          { tip: 'Expanded form gives each digit its own place value: ones, then tenths, hundredths, thousandths.', ex: '<b>3.247</b> = 3 + 0.2 + 0.04 + 0.007.' },
   'coord-plot':          { tip: 'Always read coordinates as (x, y). x first (horizontal), then y (vertical).', ex: '<b>(3, 5)</b>: from origin, RIGHT 3, then UP 5.' },
   'coord-distance':      { tip: 'On a grid, distance between two points with the same x or same y is just the difference of the other coord.', ex: '<b>(2, 4) to (7, 4)</b>: same y. Distance = |7 − 2| = <b>5</b>.' },
   'coord-quadrant':      { tip: 'Quadrant I: x>0, y>0. II: x<0, y>0. III: x<0, y<0. IV: x>0, y<0.', ex: '<b>(−3, 5)</b> has negative x and positive y → quadrant <b>II</b>.' },
+  'coord-identify':      { tip: 'Read x first: how far right or left of zero. Then y: how far up or down. Always (x, y).', ex: 'A marker 4 right and 2 up from the origin is <b>(4, 2)</b>.' },
+  'coord-reflect':       { tip: 'Reflect across the x-axis: flip the sign of y. Across the y-axis: flip the sign of x. The other coordinate stays put.', ex: '<b>(3, 5)</b> across the x-axis → <b>(3, −5)</b>.' },
+  'coord-translate':     { tip: 'Translating is sliding: ADD the x-move to x and the y-move to y. A minus move goes the other way.', ex: '<b>(2, −1)</b> moved +3 in x and −2 in y → <b>(5, −3)</b>.' },
+  'coord-path':          { tip: 'Take the moves ONE at a time: right/left changes x, up/down changes y. Track the point after every move.', ex: 'Start (1, 2): right 3 → (4, 2). Down 4 → <b>(4, −2)</b>.' },
+  'coord-shape':         { tip: 'Count the points, then compare side lengths: 4 equal sides = square; opposite sides equal = rectangle; 3 points with a square corner = right triangle.', ex: '(1,1), (5,1), (5,4), (1,4): sides 4 and 3 → <b>rectangle</b>.' },
+  'coord-real-world':    { tip: 'Find how much the value changes each step, then count steps from a point you know to the time they ask about.', ex: 'At t=1 it reads 5; at t=3 it reads 9. That is +2 per step, so t=2 reads <b>7</b>.' },
   'vol-lwh':             { tip: 'Volume of a rectangular box = length × width × height. Multiply all three.', ex: '<b>3 × 4 × 5</b> box: 3×4 = 12; 12×5 = <b>60 cubes</b>.' },
   'vol-base-height':     { tip: 'When the base AREA is given, you only multiply by height once.', ex: 'Base = 12 sq, height = 5 → 12 × 5 = <b>60 cubes</b>.' },
   'vol-composite':       { tip: 'Find each piece\'s volume separately, then ADD.', ex: 'Hull 2×3×4 = 24. Cabin 1×2×3 = 6. Total = <b>30</b>.' },
@@ -10809,26 +10903,32 @@ const COACH_TIPS = {
   'vol-unit-cubes':      { tip: 'Each layer = length × width cubes. Multiply by number of layers.', ex: '5×3 slab, 4 layers high → 15 × 4 = <b>60 cubes</b>.' },
   'vol-hollow':          { tip: 'Outer volume MINUS inner hollow volume = brick used.', ex: 'Outer 5×4×3 = 60. Hollow 2×2×2 = 8. Brick = <b>52</b>.' },
   'vol-scale':           { tip: 'Multiplying ONE dimension by k multiplies the whole volume by k. (Multiplying ALL three would be k³.)', ex: 'V = 24, double the length: new V = <b>48</b>.' },
+  'vol-compare':         { tip: 'Work out EACH volume with length × width × height, then compare the two totals.', ex: 'A: 3×4×2 = 24. B: 2×5×3 = 30. <b>B is bigger</b>.' },
   'unit-metric':         { tip: 'Metric: each step is × or ÷ 10, 100, or 1000.', ex: '<b>3 km → m</b>: × 1000 = <b>3000 m</b>. <b>2500 g → kg</b>: ÷ 1000 = <b>2.5 kg</b>.' },
   'unit-customary':      { tip: 'Customary needs memorized rates: 1 ft = 12 in. 1 lb = 16 oz. 1 gal = 4 qt = 8 pt = 16 cups.', ex: '<b>3 ft → in</b>: × 12 = <b>36 in</b>. <b>4 lb → oz</b>: × 16 = <b>64 oz</b>.' },
   'unit-time':           { tip: 'Time: 60 sec = 1 min. 60 min = 1 hr. 24 hr = 1 day. 7 days = 1 week.', ex: '<b>3 hr → min</b>: × 60 = <b>180 min</b>.' },
   'unit-multistep':      { tip: 'Two-step conversions: do them ONE AT A TIME. Don\'t try to combine.', ex: '<b>2 km → cm</b>: km → m × 1000 = 2000 m. m → cm × 100 = <b>200,000 cm</b>.' },
+  'unit-eridian':        { tip: 'Made-up units convert like real ones: multiply by the conversion factor to reach the smaller unit.', ex: 'If 1 zorp = 6 blips, then <b>4 zorps</b> = 4 × 6 = <b>24 blips</b>.' },
   'pemdas-simple':       { tip: 'PEMDAS: parens first, then × ÷, then + −. Always do parens before anything else.', ex: '<b>2 + 3 × 4</b>: × first. 3×4 = 12. Then 2 + 12 = <b>14</b>. NOT (2+3) × 4.' },
   'pemdas-brackets':     { tip: 'Brackets [ ] work like inner parens — work them out from the INSIDE out.', ex: '<b>2 × [3 + (4 − 1)]</b>: innermost parens first. 4−1 = 3. Then [3 + 3] = 6. Then 2 × 6 = <b>12</b>.' },
-  'pemdas-write-expr':   { tip: 'Word → expression. "X plus Y times Z" means parens around X+Y if "plus" comes first phrasing-wise. Read carefully.', ex: '"3 plus 4 groups of 5" = <b>3 + 4 × 5</b> (because "groups of" is multiplication, done FIRST).' },
+  'pemdas-multi':        { tip: 'Scan the whole expression first: parentheses, then × and ÷, then + and − from left to right.', ex: '<b>8 + (3 × 4) − 2</b>: parens 12. Then 8 + 12 − 2 = <b>18</b>.' },
+  'pemdas-nested':       { tip: 'Start at the INNERMOST parentheses and work outward one layer at a time.', ex: '<b>((8 + 4) ÷ 4) + 3</b>: inner 12. Then 12 ÷ 4 = 3. Then 3 + 3 = <b>6</b>.' },
+  'pemdas-full':         { tip: 'Braces { }, brackets [ ], and parens ( ) all group the same way: solve the innermost first, then work outward.', ex: '<b>{[12 ÷ 3] + 2} × 2</b>: 4 → 6 → <b>12</b>.' },
+  'pemdas-compare':      { tip: 'Evaluate each side with PEMDAS before comparing. Parentheses can make the same numbers give different values.', ex: '<b>(2 + 3) × 4</b> = 20 but <b>2 + 3 × 4</b> = 14, so the parenthesized one is bigger.' },
+  'pemdas-write-expr':   { tip: 'Turn the words into symbols first: "groups of" and "times" mean ×. Then PEMDAS: × happens before +, unless parentheses say otherwise.', ex: '"3 plus 4 groups of 5" = <b>3 + 4 × 5</b> = 3 + 20 = <b>23</b> (NOT (3+4) × 5 = 35).' },
   'pemdas-pattern':      { tip: 'When two patterns share a starting position, you can compare term-by-term.', ex: 'Roo: 0,2,4,6 (add 2). Tigger: 0,4,8,12 (add 4). Tigger\'s nth term = 2 × Roo\'s nth term.' },
   // Grade 6 — Fraction Rider (6.NS.1 dividing fractions)
   'ns-div-intro':   { tip: 'Dividing by a fraction is the same as multiplying by its reciprocal (flip it over).', ex: '<b>6 ÷ 1/3</b> = 6 × 3 = <b>18</b>. <b>3/4 ÷ 2</b> = 3/4 × 1/2 = <b>3/8</b>.' },
   'ns-div-frac':    { tip: 'Keep the first fraction, flip the second, then multiply.', ex: '<b>2/3 ÷ 4/5</b> = 2/3 × 5/4 = 10/12 = <b>5/6</b>.' },
   'ns-div-mixed':   { tip: 'Turn mixed numbers into improper fractions FIRST, then flip-and-multiply.', ex: '<b>2 1/2 ÷ 3/4</b> = 5/2 × 4/3 = 20/6 = <b>3 1/3</b>.' },
-  'ns-div-multi':   { tip: 'Work one step at a time. Only flip the fraction you are dividing BY.', ex: 'Divide first, then multiply or simplify the result.' },
+  'ns-div-multi':   { tip: 'Work one step at a time. Only flip the fraction you are dividing BY.', ex: '<b>1/2 ÷ 3/4 × 2</b>: divide first: 1/2 × 4/3 = 4/6 = 2/3. Then × 2 = <b>4/3</b>.' },
   'ns-div-word':    { tip: '"How many ___-size pieces fit?" is division: total ÷ piece size.', ex: 'Scoops of 3/4 cup in 6 cups: <b>6 ÷ 3/4</b> = 6 × 4/3 = <b>8</b>.' },
   // Grade 6 — F1 Decimals (6.NS / 6.RP / 6.SP)
   'g6-dec-divide':  { tip: 'Divide decimals like whole numbers, then place the decimal point in the answer.', ex: '<b>39.24 ÷ 6</b> = <b>6.54</b>.' },
   'g6-dec-ops':     { tip: 'Add/subtract: line up the decimal points. Multiply: count total decimal places.', ex: '<b>8.54 + 1.68</b> = <b>10.22</b>.' },
   'g6-unit-rate':   { tip: 'A unit rate is the amount for ONE. Divide the total by the number of units.', ex: '<b>27 grams over 3</b> = 27 ÷ 3 = <b>9</b> per unit.' },
   'g6-percent':     { tip: 'Percent OF a number: turn the percent into hundredths, then multiply.', ex: '<b>20% of 140</b> = 0.20 × 140 = <b>28</b>.' },
-  'g6-stats':       { tip: 'Mean = sum ÷ count. Median = middle of the sorted list. Range = max − min.', ex: 'Mean of five laps = (sum of the five) ÷ 5.' },
+  'g6-stats':       { tip: 'Mean = sum ÷ count. Median = middle of the sorted list. Range = max − min.', ex: 'Laps 4, 7, 5, 9, 5: mean = 30 ÷ 5 = <b>6</b>; sorted 4 5 5 7 9 → median <b>5</b>; range 9 − 4 = <b>5</b>.' },
   // Grade 6 — Razor Crest (6.NS.6/8, 6.G)
   'g6-quadrant':    { tip: 'Quadrant I: x>0,y>0.  II: x<0,y>0.  III: x<0,y<0.  IV: x>0,y<0.', ex: '<b>(3, −4)</b>: x positive, y negative → <b>Quadrant IV</b>.' },
   'g6-reflect':     { tip: 'Reflect across the x-axis: flip the sign of y. Across the y-axis: flip the sign of x.', ex: '<b>(3, 5)</b> across the x-axis = <b>(3, −5)</b>.' },
@@ -10873,8 +10973,44 @@ const COACH_TIPS = {
   'pemdas-all-mix':       { tip: 'Identify the operation type FIRST. PEMDAS order applies to all of them.', ex: 'Always: parens → exponents → ×÷ → +−' },
 };
 
+// Wrong-answer explanations wait for the reader: instead of a timed advance, the
+// module hands its advance closure here and the explain tile gains a NEXT button
+// that resumes play. Returns false if there is no tile to attach to, so the
+// caller can fall back to its timed advance.
+function attachExplainNext(tile, onNext) {
+  if (!tile) return false;
+  const btn = document.createElement('button');
+  btn.className = 'explain-next';
+  btn.textContent = 'NEXT ▸';
+  btn.addEventListener('click', () => { btn.disabled = true; onNext(); }, { once: true });
+  tile.appendChild(btn);
+  // Tight screens (Razor Crest) clip the tile below the fold inside their inner
+  // scroll container; bring the button into view so the kid can always see it.
+  later0(() => { if (btn.scrollIntoView) btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); });
+  return true;
+}
+
+// Let the tile lay out before measuring/scrolling.
+function later0(fn) { requestAnimationFrame(fn); }
+
+// Family fallbacks: a topic with no COACH_TIPS entry still coaches with its family's
+// coarse tip instead of silently skipping (topics and tips are authored in different
+// places and have drifted before).
+const COACH_FAMILY_FALLBACK = {
+  frac: 'frac-mixed-all', ns: 'frac-mixed-all',
+  dec: 'dec-mixed-all',
+  coord: 'coord-mixed',
+  vol: 'vol-mb-mixed',
+  unit: 'unit-mixed-all',
+  pemdas: 'pemdas-all-mix',
+};
+
 function showCoach(topic) {
-  const tip = COACH_TIPS[topic];
+  let tip = COACH_TIPS[topic];
+  if (!tip) {
+    const family = String(topic).replace(/^g6-/, '').split('-')[0];
+    tip = COACH_TIPS[COACH_FAMILY_FALLBACK[family]];
+  }
   if (!tip) return false;
   $('coach-title').textContent = "Hold up — let's slow down on " + topicLabel(topic);
   $('coach-body').innerHTML = `
