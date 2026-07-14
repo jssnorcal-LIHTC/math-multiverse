@@ -35,3 +35,7 @@ archive/sur-ronster-grid.jpg
 *.log
 *.tmp
 *.pid
+
+# Internal working docs kept local only (this repo is public via GitHub Pages)
+handoffs/
+email/

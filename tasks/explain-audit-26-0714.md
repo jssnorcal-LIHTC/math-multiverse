@@ -61,10 +61,11 @@ non-A grade:
 
 ## Structural findings (not fixed, Justin's call)
 
-1. **Razor Crest dead code.**  Four of nine grade-5 generators are unreachable via
-   any level mix: `genPlotQ` (also structurally broken, returns no answers array and
-   would crash the renderer if wired), `genShapeQ`, `genTranslateQ`, `genRealWorldQ`.
-   Either wire them into level mixes or delete them.
+1. **Razor Crest dead code.**  REMOVED 26-0714.  Four of nine grade-5 generators were
+   unreachable via any level mix: `genPlotQ` (also structurally broken, returned no
+   answers array and would have crashed the renderer if wired), `genShapeQ`,
+   `genTranslateQ`, `genRealWorldQ`.  Verified dead (zero callers, no `mix` naming them,
+   dispatch has no branch) and excised; render harness + fuzz + smoke stayed clean.
 2. **Grade-6 tag granularity.**  `g6-dec-ops` collapses add, subtract, and multiply
    into one coaching bucket (grade 5 separates them); `g6-stats` collapses mean,
    median, and range.  Grade-6 kids cannot get skill-specific coaching there.
