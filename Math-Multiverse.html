@@ -270,6 +270,24 @@
     color: var(--text-primary);
   }
   .coach-example b, .coach-example strong { color: #ffaa50; }
+  .explain-next {
+    display: block;
+    margin: 12px auto 2px;
+    padding: 12px 34px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    animation: fadein 0.2s ease-out;
+  }
+  @media (hover: hover) {
+    .explain-next:hover { background: var(--bg-card); border-color: var(--text-muted); }
+  }
 
   /* SCREENS */
   .screen { display: none; animation: fadein 0.3s ease-out; }
@@ -4948,23 +4966,23 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           if (Save.shouldCoach(q.topic)) {
             later(1800, () => showCoach(q.topic));
           }
-          if (state.crashCount >= 3) {
-            // 3 wipeouts = retire. Pause to read the explanation, then crash overlay.
-            later(2800, () => triggerCrash());
-            return;
-          }
         }
 
-        const nextDelay = correct ? 1400 : 3600;
-        later(nextDelay, () => {
+        const goNext = () => {
+          if (state.crashCount >= 3) { triggerCrash(); return; }
           state.questionNum++;
-          if (state.crashCount >= 3 || state.questionNum >= totalQ) {
+          if (state.questionNum >= totalQ) {
             endLevel();
           } else {
             state.phase = 'racing';
             render();
           }
-        });
+        };
+        if (correct) {
+          later(1400, goNext);
+        } else if (!attachExplainNext(qEl && qEl.querySelector('.fr-explain'), goNext)) {
+          later(3600, goNext);
+        }
       }
 
       function triggerCrash() {
@@ -6221,7 +6239,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
 
-        later(correct ? 1500 : 3800, () => {
+        const goNext = () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -6229,7 +6247,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             state.phase = 'racing';
             renderRace();
           }
-        });
+        };
+        if (correct) {
+          later(1500, goNext);
+        } else if (!attachExplainNext(qEl && qEl.querySelector('.f1-explain'), goNext)) {
+          later(3800, goNext);
+        }
       }
 
       function endLevel() {
@@ -7455,7 +7478,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           sfxWrong();
           if (q && Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
-        later(correct ? 1500 : 3800, () => {
+        const goNext = () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -7463,7 +7486,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             state.phase = 'flying';
             renderFlight();
           }
-        });
+        };
+        if (correct) {
+          later(1500, goNext);
+        } else if (!attachExplainNext(qEl && qEl.querySelector('.rc-explain'), goNext)) {
+          later(3800, goNext);
+        }
       }
 
       function endLevel() {
@@ -8281,7 +8309,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
 
-        later(correct ? 1500 : 3800, () => {
+        const goNext = () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -8289,7 +8317,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             state.phase = 'building';
             renderBuild(correct);
           }
-        });
+        };
+        if (correct) {
+          later(1500, goNext);
+        } else if (!attachExplainNext(qEl && qEl.querySelector('.mb-explain'), goNext)) {
+          later(3800, goNext);
+        }
       }
 
       function endLevel() {
@@ -9553,7 +9586,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
 
-        later(correct ? 1500 : 3800, () => {
+        const goNext = () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -9561,7 +9594,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             state.phase = 'translating';
             renderRoom();
           }
-        });
+        };
+        if (correct) {
+          later(1500, goNext);
+        } else if (!attachExplainNext(qEl && qEl.querySelector('.rk-explain'), goNext)) {
+          later(3800, goNext);
+        }
       }
 
       function endLevel() {
@@ -10460,7 +10498,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
           if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
         }
 
-        later(correct ? 1500 : 3800, () => {
+        const goNext = () => {
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -10468,7 +10506,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
             state.phase = 'reading';
             renderStory();
           }
-        });
+        };
+        if (correct) {
+          later(1500, goNext);
+        } else if (!attachExplainNext(qEl && qEl.querySelector('.fb-explain'), goNext)) {
+          later(3800, goNext);
+        }
       }
 
       function endLevel() {
@@ -10822,24 +10865,37 @@ function renderStatsModal() {
 // Each module module calls this after its answer-handler.
 const COACH_TIPS = {
   'frac-add-like':       { tip: 'When the bottoms (denominators) match, only the tops change. Add the tops, keep the bottom.', ex: '<b>2/5 + 1/5</b>: Add tops 2+1=3. Keep 5. = <b>3/5</b>.' },
+  'frac-sub-like':       { tip: 'When the bottoms match, subtract the tops and keep the bottom.', ex: '<b>4/7 − 2/7</b>: 4−2 = 2. Keep 7. = <b>2/7</b>.' },
   'frac-add-unlike':     { tip: 'Different bottoms? First find a common denominator, then convert both fractions before adding tops.', ex: '<b>1/2 + 1/3</b>: Common bottom 6. 1/2 = 3/6, 1/3 = 2/6. Add: 3/6 + 2/6 = <b>5/6</b>.' },
   'frac-sub-unlike':     { tip: 'Same trick as adding unlike fractions: common denominator first, THEN subtract tops.', ex: '<b>2/3 − 1/4</b>: Common bottom 12. 2/3 = 8/12, 1/4 = 3/12. Subtract: 8 − 3 = <b>5/12</b>.' },
   'frac-mult-frac':      { tip: 'Multiplying fractions: tops × tops, bottoms × bottoms. No common denominator needed.', ex: '<b>2/3 × 4/5</b>: 2×4 = 8. 3×5 = 15. = <b>8/15</b>.' },
   'frac-mult-whole':     { tip: 'A whole × a fraction: just multiply the whole into the top. Bottom stays.', ex: '<b>4 × 2/5</b>: 4×2 = 8. Keep 5. = <b>8/5</b> or <b>1 3/5</b>.' },
+  'frac-of-whole':       { tip: 'A fraction OF a number: divide by the bottom first, then multiply by the top.', ex: '<b>2/3 of 12</b>: 12 ÷ 3 = 4. Then 4 × 2 = <b>8</b>.' },
   'frac-div-whole-by-unit': { tip: 'Dividing by 1/n is the same as multiplying by n.', ex: '<b>3 ÷ 1/4</b>: Same as 3 × 4 = <b>12</b>.' },
   'frac-div-unit-by-whole': { tip: 'Dividing 1/n by a whole w means each share is 1/(n × w).', ex: '<b>1/4 ÷ 3</b>: 1/(4 × 3) = <b>1/12</b>.' },
   'frac-compare':        { tip: 'Convert to a common denominator, then compare the tops.', ex: '<b>2/3 vs 3/5</b>: Common 15. 2/3 = 10/15, 3/5 = 9/15. <b>2/3 is bigger</b>.' },
   'frac-equiv':          { tip: 'Equivalent fractions: multiply top and bottom by the SAME number.', ex: '<b>3/4 = ?/12</b>: 4 × 3 = 12, so multiply top by 3 too: <b>9/12</b>.' },
   'frac-simplify':       { tip: 'To simplify, divide top and bottom by the same number until you can\'t go any smaller.', ex: '<b>6/8</b>: divide both by 2 → <b>3/4</b>.' },
+  'frac-mixed-add':      { tip: 'Add the wholes, add the fractions. If the fraction part goes over 1, carry it into the wholes.', ex: '<b>2 3/5 + 1 4/5</b>: wholes 2+1 = 3; fractions 3/5+4/5 = 7/5 = 1 2/5. Total <b>4 2/5</b>.' },
+  'frac-mixed-sub':      { tip: 'Subtract wholes and fractions separately. If the top fraction is too small, borrow 1 whole as a fraction first.', ex: '<b>3 1/4 − 1 3/4</b>: borrow → 2 5/4 − 1 3/4 = <b>1 2/4 = 1 1/2</b>.' },
   'dec-place-value':     { tip: 'Decimal places after the point: tenths, hundredths, thousandths. Each digit\'s VALUE = digit × its place.', ex: 'In <b>3.247</b>: the 4 is in the hundredths, value = 4 × 1/100 = <b>0.04</b>.' },
   'dec-compare':         { tip: 'Compare digit by digit from the LEFT. First difference wins. Watch place values!', ex: '<b>1.45 vs 1.5</b>: Same 1. Tenths: 4 vs 5. So 1.5 is bigger.' },
   'dec-add-sub':         { tip: 'Line up the decimal points. Then add or subtract column by column.', ex: '<b>2.50 + 1.37</b>: line up dots. 0+7=7, 5+3=8, 2+1=3. = <b>3.87</b>.' },
   'dec-mult':            { tip: 'Multiply as if both were whole numbers. Then place the decimal so the answer has the same total decimal places as both inputs combined.', ex: '<b>0.4 × 0.3</b>: 4 × 3 = 12. Two decimal places total. = <b>0.12</b>.' },
+  'dec-div':             { tip: 'Divide like whole numbers, then put the decimal point in the answer straight above where it sits in the number you divided.', ex: '<b>187.5 ÷ 25</b>: 1875 ÷ 25 = 75. One decimal place → <b>7.5</b>.' },
   'dec-power-of-ten':    { tip: 'Multiplying by 10/100/1000 shifts the decimal RIGHT. Dividing shifts it LEFT.', ex: '<b>3.45 × 100</b>: shift 2 right = <b>345</b>. <b>27 ÷ 1000</b>: shift 3 left = <b>0.027</b>.' },
   'dec-round':           { tip: 'Look at the digit JUST AFTER the place you\'re rounding to. ≥5 round up; <5 round down.', ex: '<b>Round 1.234 to hundredths</b>: digit after hundredths is 4 (<5), round down → <b>1.23</b>.' },
+  'dec-write-word':      { tip: 'Read the decimal point as AND. Read the digits after it as one number named by the LAST place (tenths, hundredths, thousandths).', ex: '<b>3.24</b> = three AND 24 hundredths (the 4 lands in the hundredths place).' },
+  'dec-expand':          { tip: 'Expanded form gives each digit its own place value: ones, then tenths, hundredths, thousandths.', ex: '<b>3.247</b> = 3 + 0.2 + 0.04 + 0.007.' },
   'coord-plot':          { tip: 'Always read coordinates as (x, y). x first (horizontal), then y (vertical).', ex: '<b>(3, 5)</b>: from origin, RIGHT 3, then UP 5.' },
   'coord-distance':      { tip: 'On a grid, distance between two points with the same x or same y is just the difference of the other coord.', ex: '<b>(2, 4) to (7, 4)</b>: same y. Distance = |7 − 2| = <b>5</b>.' },
   'coord-quadrant':      { tip: 'Quadrant I: x>0, y>0. II: x<0, y>0. III: x<0, y<0. IV: x>0, y<0.', ex: '<b>(−3, 5)</b> has negative x and positive y → quadrant <b>II</b>.' },
+  'coord-identify':      { tip: 'Read x first: how far right or left of zero. Then y: how far up or down. Always (x, y).', ex: 'A marker 4 right and 2 up from the origin is <b>(4, 2)</b>.' },
+  'coord-reflect':       { tip: 'Reflect across the x-axis: flip the sign of y. Across the y-axis: flip the sign of x. The other coordinate stays put.', ex: '<b>(3, 5)</b> across the x-axis → <b>(3, −5)</b>.' },
+  'coord-translate':     { tip: 'Translating is sliding: ADD the x-move to x and the y-move to y. A minus move goes the other way.', ex: '<b>(2, −1)</b> moved +3 in x and −2 in y → <b>(5, −3)</b>.' },
+  'coord-path':          { tip: 'Take the moves ONE at a time: right/left changes x, up/down changes y. Track the point after every move.', ex: 'Start (1, 2): right 3 → (4, 2). Down 4 → <b>(4, −2)</b>.' },
+  'coord-shape':         { tip: 'Count the points, then compare side lengths: 4 equal sides = square; opposite sides equal = rectangle; 3 points with a square corner = right triangle.', ex: '(1,1), (5,1), (5,4), (1,4): sides 4 and 3 → <b>rectangle</b>.' },
+  'coord-real-world':    { tip: 'Find how much the value changes each step, then count steps from a point you know to the time they ask about.', ex: 'At t=1 it reads 5; at t=3 it reads 9. That is +2 per step, so t=2 reads <b>7</b>.' },
   'vol-lwh':             { tip: 'Volume of a rectangular box = length × width × height. Multiply all three.', ex: '<b>3 × 4 × 5</b> box: 3×4 = 12; 12×5 = <b>60 cubes</b>.' },
   'vol-base-height':     { tip: 'When the base AREA is given, you only multiply by height once.', ex: 'Base = 12 sq, height = 5 → 12 × 5 = <b>60 cubes</b>.' },
   'vol-composite':       { tip: 'Find each piece\'s volume separately, then ADD.', ex: 'Hull 2×3×4 = 24. Cabin 1×2×3 = 6. Total = <b>30</b>.' },
@@ -10847,12 +10903,18 @@ const COACH_TIPS = {
   'vol-unit-cubes':      { tip: 'Each layer = length × width cubes. Multiply by number of layers.', ex: '5×3 slab, 4 layers high → 15 × 4 = <b>60 cubes</b>.' },
   'vol-hollow':          { tip: 'Outer volume MINUS inner hollow volume = brick used.', ex: 'Outer 5×4×3 = 60. Hollow 2×2×2 = 8. Brick = <b>52</b>.' },
   'vol-scale':           { tip: 'Multiplying ONE dimension by k multiplies the whole volume by k. (Multiplying ALL three would be k³.)', ex: 'V = 24, double the length: new V = <b>48</b>.' },
+  'vol-compare':         { tip: 'Work out EACH volume with length × width × height, then compare the two totals.', ex: 'A: 3×4×2 = 24. B: 2×5×3 = 30. <b>B is bigger</b>.' },
   'unit-metric':         { tip: 'Metric: each step is × or ÷ 10, 100, or 1000.', ex: '<b>3 km → m</b>: × 1000 = <b>3000 m</b>. <b>2500 g → kg</b>: ÷ 1000 = <b>2.5 kg</b>.' },
   'unit-customary':      { tip: 'Customary needs memorized rates: 1 ft = 12 in. 1 lb = 16 oz. 1 gal = 4 qt = 8 pt = 16 cups.', ex: '<b>3 ft → in</b>: × 12 = <b>36 in</b>. <b>4 lb → oz</b>: × 16 = <b>64 oz</b>.' },
   'unit-time':           { tip: 'Time: 60 sec = 1 min. 60 min = 1 hr. 24 hr = 1 day. 7 days = 1 week.', ex: '<b>3 hr → min</b>: × 60 = <b>180 min</b>.' },
   'unit-multistep':      { tip: 'Two-step conversions: do them ONE AT A TIME. Don\'t try to combine.', ex: '<b>2 km → cm</b>: km → m × 1000 = 2000 m. m → cm × 100 = <b>200,000 cm</b>.' },
+  'unit-eridian':        { tip: 'Made-up units convert like real ones: multiply by the conversion factor to reach the smaller unit.', ex: 'If 1 zorp = 6 blips, then <b>4 zorps</b> = 4 × 6 = <b>24 blips</b>.' },
   'pemdas-simple':       { tip: 'PEMDAS: parens first, then × ÷, then + −. Always do parens before anything else.', ex: '<b>2 + 3 × 4</b>: × first. 3×4 = 12. Then 2 + 12 = <b>14</b>. NOT (2+3) × 4.' },
   'pemdas-brackets':     { tip: 'Brackets [ ] work like inner parens — work them out from the INSIDE out.', ex: '<b>2 × [3 + (4 − 1)]</b>: innermost parens first. 4−1 = 3. Then [3 + 3] = 6. Then 2 × 6 = <b>12</b>.' },
+  'pemdas-multi':        { tip: 'Scan the whole expression first: parentheses, then × and ÷, then + and − from left to right.', ex: '<b>8 + (3 × 4) − 2</b>: parens 12. Then 8 + 12 − 2 = <b>18</b>.' },
+  'pemdas-nested':       { tip: 'Start at the INNERMOST parentheses and work outward one layer at a time.', ex: '<b>((8 + 4) ÷ 4) + 3</b>: inner 12. Then 12 ÷ 4 = 3. Then 3 + 3 = <b>6</b>.' },
+  'pemdas-full':         { tip: 'Braces { }, brackets [ ], and parens ( ) all group the same way: solve the innermost first, then work outward.', ex: '<b>{[12 ÷ 3] + 2} × 2</b>: 4 → 6 → <b>12</b>.' },
+  'pemdas-compare':      { tip: 'Evaluate each side with PEMDAS before comparing. Parentheses can make the same numbers give different values.', ex: '<b>(2 + 3) × 4</b> = 20 but <b>2 + 3 × 4</b> = 14, so the parenthesized one is bigger.' },
   'pemdas-write-expr':   { tip: 'Word → expression. "X plus Y times Z" means parens around X+Y if "plus" comes first phrasing-wise. Read carefully.', ex: '"3 plus 4 groups of 5" = <b>3 + 4 × 5</b> (because "groups of" is multiplication, done FIRST).' },
   'pemdas-pattern':      { tip: 'When two patterns share a starting position, you can compare term-by-term.', ex: 'Roo: 0,2,4,6 (add 2). Tigger: 0,4,8,12 (add 4). Tigger\'s nth term = 2 × Roo\'s nth term.' },
   // Grade 6 — Fraction Rider (6.NS.1 dividing fractions)
@@ -10911,8 +10973,44 @@ const COACH_TIPS = {
   'pemdas-all-mix':       { tip: 'Identify the operation type FIRST. PEMDAS order applies to all of them.', ex: 'Always: parens → exponents → ×÷ → +−' },
 };
 
+// Wrong-answer explanations wait for the reader: instead of a timed advance, the
+// module hands its advance closure here and the explain tile gains a NEXT button
+// that resumes play. Returns false if there is no tile to attach to, so the
+// caller can fall back to its timed advance.
+function attachExplainNext(tile, onNext) {
+  if (!tile) return false;
+  const btn = document.createElement('button');
+  btn.className = 'explain-next';
+  btn.textContent = 'NEXT ▸';
+  btn.addEventListener('click', () => { btn.disabled = true; onNext(); }, { once: true });
+  tile.appendChild(btn);
+  // Tight screens (Razor Crest) clip the tile below the fold inside their inner
+  // scroll container; bring the button into view so the kid can always see it.
+  later0(() => { if (btn.scrollIntoView) btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); });
+  return true;
+}
+
+// Let the tile lay out before measuring/scrolling.
+function later0(fn) { requestAnimationFrame(fn); }
+
+// Family fallbacks: a topic with no COACH_TIPS entry still coaches with its family's
+// coarse tip instead of silently skipping (topics and tips are authored in different
+// places and have drifted before).
+const COACH_FAMILY_FALLBACK = {
+  frac: 'frac-mixed-all', ns: 'frac-mixed-all',
+  dec: 'dec-mixed-all',
+  coord: 'coord-mixed',
+  vol: 'vol-mb-mixed',
+  unit: 'unit-mixed-all',
+  pemdas: 'pemdas-all-mix',
+};
+
 function showCoach(topic) {
-  const tip = COACH_TIPS[topic];
+  let tip = COACH_TIPS[topic];
+  if (!tip) {
+    const family = String(topic).replace(/^g6-/, '').split('-')[0];
+    tip = COACH_TIPS[COACH_FAMILY_FALLBACK[family]];
+  }
   if (!tip) return false;
   $('coach-title').textContent = "Hold up — let's slow down on " + topicLabel(topic);
   $('coach-body').innerHTML = `
