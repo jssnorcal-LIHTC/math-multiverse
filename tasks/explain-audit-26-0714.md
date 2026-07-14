@@ -78,11 +78,31 @@ non-A grade:
    tile's header line by approx 18px when the tile scrolls into view (pre-existing;
    content and NEXT button fully legible).
 
-## Recommended rewrites if approved (all one-line template edits)
+## Rewrites IMPLEMENTED 26-0714 (12 generators)
 
-Priority order: F1 `genDivide` and `genCompareOrder` (actively misleading or empty),
-FR `genMixedSub` (hardest skill, no work shown), FB `pemdas-multi`/`pemdas-full`
-(claim steps, show none), F1 `genMultiply` decimal-count, Rocky percent complements,
-RC `genG6Distance` double-minus formatting plus misconception naming, FR
-`genAdd`/`genSub`/`genMultFrac` simplification bridge.  The subagent reports include
-drafted replacement strings for most of these.
+All priority rewrites shipped on branch `explain-quality-26-0714`:
+- F1 `genDivide`: dropped the inapplicable "move both decimals" rule (its divisor is
+  always a whole number); now teaches dividing then placing the decimal above.
+- F1 `genCompareOrder`: was empty on method; now names the first decimal place where
+  the two times differ (computed at generation time).
+- F1 `genMultiply`: now states the actual decimal-place count and shows the
+  whole-number multiply then the decimal slide.
+- FR `genMixedSub`: was a bare restatement; now shows the improper-fraction conversion
+  and the subtraction step by step.
+- FR `genAdd`/`genSub`/`genMultFrac`: added the simplification bridge (shows the raw
+  fraction, then "which simplifies to" the reduced answer, only when it actually
+  reduces).
+- FB `genParensMulti` (pemdas-multi) and `genFullPemdas` (pemdas-full): were "step by
+  step gives X" with no steps; each variant now carries a real `steps` string the
+  explain walks.
+- Rocky `genG6Percent`/`genG6PercentFind`: now name the complement mistake ("that's the
+  amount itself, not what's left over") that their own distractors model.
+- RC `genG6Distance`: parenthesized the negative subtrahend (killed the `|3 − -6|`
+  double-minus glyph) and named the "forgot a negative" mistake.
+
+Verification: a render harness drove all 72 level-drivers 4,000x each (288,000
+questions) with 0 empty / undefined / NaN / unresolved-template explains and every
+edited topic exercised; `npm test` (independent-oracle fuzz + both-grade smoke) clean.
+Not touched (acceptable B's, left as-is): F1 `genAddSub` (shows the real sum),
+Master Builder `genCompareVol`.  Structural findings (RC dead code, grade-6 tag
+granularity) remain open, tracked above.
