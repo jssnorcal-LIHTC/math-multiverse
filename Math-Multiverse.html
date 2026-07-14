@@ -3976,7 +3976,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       equation: `${n1}/${d1} <span class="op">+</span> ${n2}/${d2} <span class="eq">=</span> ?`,
       answer: { num: sumNum, den: L },
       visualize: [{ n: n1, d: d1, color: '#ee1d52' }, { n: n2, d: d2, color: '#ffcc00' }],
-      explain: `Common denominator is ${L}. Convert: ${n1}/${d1} = ${a}/${L}, ${n2}/${d2} = ${b}/${L}. Add tops: ${a} + ${b} = ${sumNum}. Answer: <strong>${correctStr}</strong>.`,
+      explain: `Common denominator is ${L}. Convert: ${n1}/${d1} = ${a}/${L}, ${n2}/${d2} = ${b}/${L}. Add tops: ${a} + ${b} = ${sumNum}.${(`${sumNum}/${L}`) === correctStr ? ` Answer: <strong>${correctStr}</strong>.` : ` That's ${sumNum}/${L}, which simplifies to <strong>${correctStr}</strong>.`}`,
     };
   }
 
@@ -4013,7 +4013,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       equation: `${n1}/${d1} <span class="op">−</span> ${n2}/${d2} <span class="eq">=</span> ?`,
       answer: { num: diffNum, den: L },
       visualize: [{ n: n1, d: d1, color: '#ee1d52' }, { n: n2, d: d2, color: '#6b7280' }],
-      explain: `Common denominator is ${L}. Convert: ${n1}/${d1} = ${a}/${L}, ${n2}/${d2} = ${b}/${L}. Subtract tops: ${a} − ${b} = ${diffNum}. Answer: <strong>${correctStr}</strong>.`,
+      explain: `Common denominator is ${L}. Convert: ${n1}/${d1} = ${a}/${L}, ${n2}/${d2} = ${b}/${L}. Subtract tops: ${a} − ${b} = ${diffNum}.${(`${diffNum}/${L}`) === correctStr ? ` Answer: <strong>${correctStr}</strong>.` : ` That's ${diffNum}/${L}, which simplifies to <strong>${correctStr}</strong>.`}`,
     };
   }
 
@@ -4037,7 +4037,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       equation: `${n1}/${d1} <span class="op">×</span> ${n2}/${d2} <span class="eq">=</span> ?`,
       answer: { num: n1 * n2, den: d1 * d2 },
       visualize: [{ n: n1, d: d1, color: '#ee1d52' }, { n: n2, d: d2, color: '#ffcc00' }],
-      explain: `Multiply tops, multiply bottoms: ${n1}×${n2} = ${n1*n2}, ${d1}×${d2} = ${d1*d2}. So ${n1*n2}/${d1*d2}. Simplified: <strong>${correctStr}</strong>.`,
+      explain: `Multiply tops, multiply bottoms: ${n1}×${n2} = ${n1*n2}, ${d1}×${d2} = ${d1*d2}.${(`${n1*n2}/${d1*d2}`) === correctStr ? ` So <strong>${correctStr}</strong>.` : ` That's ${n1*n2}/${d1*d2}, which simplifies to <strong>${correctStr}</strong>.`}`,
     };
   }
 
@@ -4214,7 +4214,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       equation: `${w1} ${n1}/${d} <span class="op">−</span> ${w2} ${n2}/${d} <span class="eq">=</span> ?`,
       answer: { num: totalNum, den: d },
       visualize: [],
-      explain: `Convert to improper or subtract wholes then fractions. ${w1} ${n1}/${d} − ${w2} ${n2}/${d} = <strong>${correctStr}</strong>.`,
+      explain: `Turn each into an improper fraction: ${w1} ${n1}/${d} = ${w1*d+n1}/${d}, ${w2} ${n2}/${d} = ${w2*d+n2}/${d}. Subtract tops: ${w1*d+n1} − ${w2*d+n2} = ${totalNum}.${(`${totalNum}/${d}`) === correctStr ? ` So <strong>${correctStr}</strong>.` : ` So ${totalNum}/${d} = <strong>${correctStr}</strong>.`}`,
     };
   }
 
@@ -5356,6 +5356,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     const correct = a < b ? d1.last : d2.last;
     const wrong   = a < b ? d2.last : d1.last;
     const opts = shuffle([correct, wrong, 'Same lap', 'Cannot tell']);
+    // The two times share the whole-number part, so name the first decimal place where
+    // they differ, that is the digit that decides which lap is faster.
+    const af = Math.round((a - base) * 1000), bf = Math.round((b - base) * 1000);
+    const placeNames = ['tenths', 'hundredths', 'thousandths'];
+    let decidePlace = 'thousandths';
+    for (let i = 0; i < 3; i++) { const dv = [100, 10, 1][i]; if ((Math.floor(af / dv) % 10) !== (Math.floor(bf / dv) % 10)) { decidePlace = placeNames[i]; break; } }
     return {
       topic: 'dec-compare',
       prompt: pick([
@@ -5367,7 +5373,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
-      explain: `Compare digits left to right. ${aStr} vs ${bStr} → ${a < b ? aStr : bStr} is the smaller (faster) lap. <strong>${correct}</strong> wins.`,
+      explain: `Line up the decimals and read left to right. ${aStr} and ${bStr} first differ in the ${decidePlace} place; the smaller digit there is the lower, faster time. <strong>${correct}</strong> wins.`,
     };
   }
 
@@ -5415,6 +5421,8 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       decR * (whole + 1),
     ]).map(n => +n);
     const optsStr = opts.map(n => n.toString());
+    const dpM = (String(decR).split('.')[1] || '').length;
+    const scaledM = Math.round(decR * Math.pow(10, dpM));
     return {
       topic: 'dec-mult',
       prompt: pick([
@@ -5426,7 +5434,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       ]),
       answers: optsStr,
       correctIdx: optsStr.indexOf(correct),
-      explain: `Multiply: ${decR} × ${whole} = <strong>${correct}</strong>. Multiply as if both were whole numbers, then place the decimal so the answer has the same total decimal places.`,
+      explain: `${decR} has ${dpM} decimal place${dpM === 1 ? '' : 's'}, so the answer needs ${dpM}. Multiply like whole numbers: ${scaledM} × ${whole} = ${scaledM * whole}, then slide the decimal ${dpM} place${dpM === 1 ? '' : 's'} left: <strong>${correct}</strong>.`,
     };
   }
 
@@ -5454,7 +5462,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       ]),
       answers: opts.map(o => o + ' km'),
       correctIdx: opts.indexOf(correct),
-      explain: `Total ÷ laps: ${totalKm.toFixed(1)} ÷ ${laps} = <strong>${correct} km</strong>. Move the decimal in dividend and divisor together so you can divide by a whole number.`,
+      explain: `${totalKm.toFixed(1)} km over ${laps} laps is ${totalKm.toFixed(1)} ÷ ${laps}. Divide as if it were a whole number, then put the decimal point in the answer directly above where it sits in ${totalKm.toFixed(1)}: <strong>${correct} km</strong>.`,
     };
   }
 
@@ -7094,8 +7102,8 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       answers,
       correctIdx: arr.indexOf(dist),
       explain: horizontal
-        ? `Both points share the same y-value (${ay}), so the hop is purely horizontal. Subtract the x's: |${bx} − ${ax}| = <strong>${dist}</strong>.`
-        : `Both points share the same x-value (${ax}), so the hop is purely vertical. Subtract the y's: |${by} − ${ay}| = <strong>${dist}</strong>.`,
+        ? `Both points share the same y (${ay}), so it's a horizontal hop: find the x-gap. |${bx} − ${ax < 0 ? '(' + ax + ')' : ax}| = <strong>${dist}</strong>. Mind the signs, subtracting a negative makes the gap wider than the digits look.`
+        : `Both points share the same x (${ax}), so it's a vertical hop: find the y-gap. |${by} − ${ay < 0 ? '(' + ay + ')' : ay}| = <strong>${dist}</strong>. Mind the signs, subtracting a negative makes the gap wider than the digits look.`,
       check: { op: 'distance', operands: [ax, ay, bx, by], answer: dist },
     };
   }
@@ -9349,7 +9357,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       answers: opts.map(o => '' + o),
       correctIdx,
       dict: { rocky: `${rate}% of ${base}`, grace: `${ans}` },
-      explain: `Percent of a quantity: ${rate}% of ${base} = ${rate}/100 × ${base} = <strong>${ans}</strong>. Convert the percent to a fraction, then multiply by the whole.`,
+      explain: `${rate}% of ${base} means ${rate}/100 of the whole: ${rate}/100 × ${base} = <strong>${ans}</strong>. That's the amount itself, not what's left over, so don't subtract from ${base}.`,
       check: { op: 'percent', operands: [rate, base], answer: ans },
     };
   }
@@ -9384,7 +9392,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       answers: opts.map(o => '' + o),
       correctIdx,
       dict: { rocky: `${part} / ${whole}`, grace: `${ans}%` },
-      explain: `What percent is ${part} of ${whole}? Part ÷ whole × 100 = ${part} × 100 ÷ ${whole} = <strong>${ans}%</strong>.`,
+      explain: `What percent is ${part} of ${whole}? Part ÷ whole × 100 = ${part} × 100 ÷ ${whole} = <strong>${ans}%</strong>. That's ${part}'s share, not the leftover, so it isn't 100 − ${ans}.`,
       check: { op: 'div', operands: [part * 100, whole], answer: ans },
     };
   }
@@ -9946,13 +9954,13 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const a = ri(2, 8), b = ri(2, 6), c = ri(2, 5), d = ri(2, 5);
         const expr = `${a} + (${b} × ${c}) - ${d}`;
         const result = a + (b * c) - d;
-        return { expr, result };
+        return { expr, result, steps: `${b} × ${c} = ${b * c}, then ${a} + ${b * c} − ${d} = ${result}` };
       },
       () => {
         const a = ri(2, 8), b = ri(2, 5), c = ri(2, 5);
         const expr = `(${a} + ${b}) × ${c}`;
         const result = (a + b) * c;
-        return { expr, result };
+        return { expr, result, steps: `${a} + ${b} = ${a + b}, then ${a + b} × ${c} = ${result}` };
       },
       () => {
         // Ensure a >= b*c so the result stays non-negative (5th grade CCSS).
@@ -9960,7 +9968,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const a = ri(b * c, 30);
         const expr = `${a} - (${b} × ${c})`;
         const result = a - (b * c);
-        return { expr, result };
+        return { expr, result, steps: `${b} × ${c} = ${b * c}, then ${a} − ${b * c} = ${result}` };
       },
     ];
     const v = pick(variants)();
@@ -9975,7 +9983,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       prompt: `Piglet wondered aloud: <em>"What does <strong>${v.expr}</strong> come to?"</em>`,
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(v.result),
-      explain: `PEMDAS: do parentheses and × ÷ before + −. Working through <strong>${v.expr}</strong> step by step gives <strong>${v.result}</strong>.`,
+      explain: `Do the parentheses first, then the rest: ${v.steps}. So <strong>${v.result}</strong>.`,
     };
   }
 
@@ -10030,7 +10038,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         if ((a) % b !== 0) return null;
         const expr = `{[${a} ÷ ${b}] + ${c}} × ${d}`;
         const result = (((a / b) + c) * d);
-        return { expr, result };
+        return { expr, result, steps: `${a} ÷ ${b} = ${a / b}, then ${a / b} + ${c} = ${a / b + c}, then × ${d} = ${result}` };
       },
       () => {
         const a = ri(2, 6), b = ri(2, 5), c = ri(2, 5), d = ri(2, 6);
@@ -10038,12 +10046,12 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         const inner = (a + b) * c;
         if (inner % d !== 0) return null;
         const result = inner / d;
-        return { expr, result };
+        return { expr, result, steps: `${a} + ${b} = ${a + b}, then × ${c} = ${inner}, then ÷ ${d} = ${result}` };
       },
     ];
     let v = null;
     for (let i = 0; i < 8 && !v; i++) v = pick(variants)();
-    if (!v) v = { expr: '(2 + 3) × 4', result: 20 };
+    if (!v) v = { expr: '(2 + 3) × 4', result: 20, steps: '2 + 3 = 5, then 5 × 4 = 20' };
     // Pedagogical: did wrong order, dropped brackets
     const opts = pedDistractors(v.result, [
       v.result + 1, v.result - 1,
@@ -10055,7 +10063,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       prompt: `Eeyore, gloomy: <em>"They say <strong>${v.expr}</strong>. I'll be surprised if it works out."</em>`,
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(v.result),
-      explain: `Work the innermost grouping first, then outward. <strong>${v.expr}</strong> evaluates to <strong>${v.result}</strong>.`,
+      explain: `Work the innermost grouping first, then outward: ${v.steps}. Answer <strong>${v.result}</strong>.`,
     };
   }
 
