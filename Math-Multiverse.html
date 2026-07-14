@@ -6643,30 +6643,6 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 
   // ---- Question generators ----
 
-  function genPlotQ(gridMax, quadrants) {
-    const lo = quadrants === 4 ? -gridMax : 0;
-    const hi = gridMax;
-    const x = ri(lo, hi);
-    const y = ri(lo, hi);
-    return {
-      topic: 'coord-plot',
-      type: 'plot',
-      gridMax, quadrants,
-      target: { x, y },
-      prompt: pick([
-        `Mando dictates: <em>"Plot the safe lane at <strong>(${x}, ${y})</strong>."</em>`,
-        `Grogu coos and points to the navicomputer. Plot waypoint <strong>(${x}, ${y})</strong>.`,
-        `Engineer: <em>"Lay in coordinates <strong>(${x}, ${y})</strong>, this is the way."</em>`,
-        `Hyperspace beacon at <strong>(${x}, ${y})</strong>. <strong>Plot it.</strong>`,
-        `IG-11 transmits target rendezvous: <strong>(${x}, ${y})</strong>. Plot now.`,
-        `Bo-Katan dispatch: <em>"Drop point is <strong>(${x}, ${y})</strong>. Mark it on the navicomp."</em>`,
-        `Cara Dune over comms: <em>"Get to <strong>(${x}, ${y})</strong>, fast."</em>`,
-        `Greef Karga beacon pulses at <strong>(${x}, ${y})</strong>. Lay in the jump.`,
-      ]),
-      explain: `From the origin, move <strong>${x}</strong> along the x-axis (${x >= 0 ? 'right' : 'left'}), then <strong>${y}</strong> along the y-axis (${y >= 0 ? 'up' : 'down'}). The cell you tap is at <strong>(${x}, ${y})</strong>.`,
-    };
-  }
-
   function genDistanceQ(gridMax) {
     const horizontal = Math.random() < 0.5;
     const x1 = ri(0, gridMax), y1 = ri(0, gridMax);
@@ -6760,83 +6736,6 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       explain: axis === 'y-axis'
         ? `Reflecting across the y-axis flips the sign of x only. (${x}, ${y}) → <strong>(${-x}, ${y})</strong>. The y stays put.`
         : `Reflecting across the x-axis flips the sign of y only. (${x}, ${y}) → <strong>(${x}, ${-y})</strong>. The x stays put.`,
-    };
-  }
-
-  function genShapeQ(gridMax) {
-    // CCSS 5.G.B.3 — classify 2D shapes from plotted points
-    const shapes = [
-      // square: 4 corners equal sides
-      () => {
-        const x = ri(1, gridMax - 4), y = ri(1, gridMax - 4), s = ri(2, 4);
-        return {
-          pts: [{x,y},{x:x+s,y},{x:x+s,y:y+s},{x,y:y+s}],
-          name: 'Square',
-          why: `All four sides equal length (${s}) and four right angles.`,
-        };
-      },
-      // rectangle: different width and height
-      () => {
-        const x = ri(1, gridMax - 5), y = ri(1, gridMax - 4), w = ri(3, 5), h = ri(2, 3);
-        if (w === h) return null;
-        return {
-          pts: [{x,y},{x:x+w,y},{x:x+w,y:y+h},{x,y:y+h}],
-          name: 'Rectangle',
-          why: `Opposite sides equal (${w} and ${h}) but adjacent sides differ.`,
-        };
-      },
-      // right triangle
-      () => {
-        const x = ri(1, gridMax - 4), y = ri(1, gridMax - 4), w = ri(2, 4), h = ri(2, 4);
-        return {
-          pts: [{x,y},{x:x+w,y},{x,y:y+h}],
-          name: 'Right Triangle',
-          why: `Three points; two sides meet at 90° at the right angle.`,
-        };
-      },
-    ];
-    let shape = null, safety = 5;
-    while (!shape && safety-- > 0) shape = pick(shapes)();
-    if (!shape) shape = shapes[0]();
-    const opts = shuffle(['Square', 'Rectangle', 'Right Triangle', 'Trapezoid']);
-    return {
-      topic: 'coord-shape',
-      type: 'mc',
-      gridMax, quadrants: 1,
-      markers: shape.pts.map((p, i) => ({ x: p.x, y: p.y, label: ['A','B','C','D'][i], color: '#ff8000' })),
-      prompt: pick([
-        `Imperial sensor flagged points: ${shape.pts.map(p => `(${p.x},${p.y})`).join(', ')}. <strong>What shape</strong> do they form?`,
-        `Mando sees ${shape.pts.length} markers on the navicomp. ${shape.pts.map((p, i) => `${['A','B','C','D'][i]}=(${p.x},${p.y})`).join(', ')}. Identify the shape.`,
-        `Sensor returns ${shape.pts.length} contacts at ${shape.pts.map(p => `(${p.x},${p.y})`).join(', ')}. <strong>Shape</strong> traced?`,
-      ]),
-      answers: opts,
-      correctIdx: opts.indexOf(shape.name),
-      explain: shape.why + ` <strong>${shape.name}</strong>.`,
-    };
-  }
-
-  function genTranslateQ(gridMax) {
-    const x = ri(-Math.floor(gridMax/2), Math.floor(gridMax/2));
-    const y = ri(-Math.floor(gridMax/2), Math.floor(gridMax/2));
-    const dx = ri(-3, 3) || 2;
-    const dy = ri(-3, 3) || -2;
-    const nx = x + dx, ny = y + dy;
-    const correct = `(${nx}, ${ny})`;
-    const opts = new Set([correct]);
-    opts.add(`(${x - dx}, ${y - dy})`);
-    opts.add(`(${x + dy}, ${y + dx})`);
-    opts.add(`(${nx + 1}, ${ny - 1})`);
-    const arr = shuffle(Array.from(opts).slice(0, 4));
-    while (arr.length < 4) arr.push(`(${ri(-gridMax, gridMax)}, ${ri(-gridMax, gridMax)})`);
-    return {
-      topic: 'coord-translate',
-      type: 'mc',
-      gridMax, quadrants: 4,
-      markers: [{x, y, label: 'Crest', color: '#ff8000'}],
-      prompt: `Razor Crest at <strong>(${x}, ${y})</strong>. Mando burns thrusters: <strong>${dx >= 0 ? '+' : ''}${dx}</strong> in x, <strong>${dy >= 0 ? '+' : ''}${dy}</strong> in y. <strong>New position</strong>?`,
-      answers: arr,
-      correctIdx: arr.indexOf(correct),
-      explain: `Add the deltas to the original. x: ${x} + (${dx}) = ${nx}. y: ${y} + (${dy}) = ${ny}. New position: <strong>(${nx}, ${ny})</strong>.`,
     };
   }
 
@@ -6958,39 +6857,6 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       answers: arr,
       correctIdx: arr.indexOf(correct),
       explain: `Read the x value first (horizontal): ${x}. Then read y (vertical): ${y}. Coordinates are <strong>(${x}, ${y})</strong> -- always (x, y).`,
-    };
-  }
-
-  function genRealWorldQ(gridMax) {
-    // Real-world data interpretation: hyperspace fuel over time, etc.
-    const t1 = ri(0, 3), v1 = ri(2, gridMax - 2);
-    const slope = pick([1, 2]);
-    const t2 = t1 + 2;
-    const v2 = v1 + slope * 2;
-    const askT = pick([t1 + 1, t1 + 3]);
-    const askV = v1 + slope * (askT - t1);
-    if (askV < 0 || askV > gridMax) return genRealWorldQ(gridMax);
-    const correct = `${askV}`;
-    // Pedagogical mistakes: read off the line wrong, used wrong slope, etc.
-    const wrongSlope1 = v1 + (askT - t1);          // assumed slope=1
-    const wrongSlope0 = v1;                          // assumed flat
-    const reverseSlope = v1 - slope * (askT - t1);   // wrong direction
-    const opts = new Set([correct, `${wrongSlope1}`, `${wrongSlope0}`, `${reverseSlope}`]);
-    while (opts.size < 4) opts.add(`${ri(1, gridMax)}`);
-    const arr = shuffle(Array.from(opts).slice(0, 4));
-    return {
-      topic: 'coord-real-world',
-      type: 'mc',
-      gridMax, quadrants: 1,
-      markers: [{ x: t1, y: v1, label: 'A', color: '#ff8000' }, { x: t2, y: v2, label: 'B', color: '#27f4d2' }],
-      prompt: pick([
-        `Hyperdrive temp at t=${t1}h is ${v1}°. At t=${t2}h is ${v2}°. Reading at <strong>t=${askT}h</strong>?`,
-        `Fuel cell graph: at minute ${t1}, charge ${v1}; minute ${t2}, charge ${v2}. <strong>Charge at minute ${askT}</strong>?`,
-        `Mando logs deflector strength: ${v1} at t=${t1}, ${v2} at t=${t2}. Strength at <strong>t=${askT}</strong>?`,
-      ]),
-      answers: arr.map(n => `${n} units`),
-      correctIdx: arr.indexOf(correct),
-      explain: `From (${t1}, ${v1}) to (${t2}, ${v2}), value rises by ${slope} per t. At t=${askT}: ${v1} + ${slope} × ${askT - t1} = <strong>${askV}</strong>.`,
     };
   }
 
