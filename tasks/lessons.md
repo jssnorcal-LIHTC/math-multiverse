@@ -85,3 +85,26 @@ looks broken in test too, which is the tell.
    and assert `img.naturalWidth > 0`, do not just eyeball it on the dev network.
 
 Related: [[feedback_visual_inspection_required]], [[feedback_verify_before_claiming]].
+
+## 2026-07-14 — The tile the user reports may not be the tile the code suggests
+
+**What happened:** Justin reported the repeated-error help tile "only appears for a few
+seconds."  The obvious candidate (the coach modal, which IS the repeated-error feature)
+persists until dismissed; code reading proved it, and a 14-second headless sample
+confirmed it.  The surface that actually vanishes is the INLINE explanation tile, wiped
+by each module's timed auto-advance (3.6-3.8s), which also kept running BEHIND an open
+coach modal, so the kid returned from the coach to a new question with the explanation
+gone.
+
+**Why it matters:** fixing the named feature (coach duration) would have changed nothing
+the user could see.  The report described a SYMPTOM; the code path that produces the
+symptom belonged to a different feature.
+
+**How to apply (durable):**
+1. Reproduce the reported lifetime empirically (headless timeline sampling of computed
+   styles) BEFORE editing either candidate surface; let the timeline name the culprit.
+2. When a fix makes a transient element load-bearing (the explain tile now carries the
+   NEXT button), re-verify visibility on the tightest screen; scrollHeight checks miss
+   clipping inside inner scroll containers (Razor Crest hid the button below the fold).
+3. Static audits that grep object literals must also catch assignment styles
+   (`topic: 'x'` AND `r.topic = 'x'`), or the audit silently under-counts.

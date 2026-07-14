@@ -14,13 +14,17 @@ Plan:
 - [x] Item 3 CONFIRMED: live site lacks marker min(330px,40vh) (0 hits) but has
       coach-modal (3 hits) -> live = pre-UI main build; ui/header-one-row (4 commits)
       never pushed; 26-0710 blocker = read-only PAT
-- [ ] REPRODUCE the few-seconds disappearance headless (GPU-safe flags) before editing;
-      code says the coach modal persists until "Got it" -> either something hides it
-      (find it) or the user's "tile" is the inline explain tile (fr-explain et al.,
-      wiped by next-question render at approx 3.6s)
-- [ ] Implement persistence fix for the real culprit surface
-- [ ] Audit explanations for robustness: COACH_TIPS entries AND per-question q.explain
-      strings AND topic-key coverage (old Phase-3 finding: coach topic keys mismatched,
-      4/8 dead in floating-bear; razor missing tips; re-verify against current code)
-- [ ] Run npm test (fuzz + smoke) after any edit; commit on ui/header-one-row
-- [ ] Update handoff + memory; report findings + deploy answer to Justin
+- [x] REPRODUCED headless: the coach modal PERSISTS until "Got it" (14s sample, live
+      code identical); the few-seconds tile is the INLINE explain tile, wiped by the
+      timed auto-advance (3.6-3.8s), which also ran BEHIND an open coach modal
+- [x] Implemented: wrong answers stop auto-advancing; explain tile gains a NEXT button
+      (attachExplainNext + .explain-next CSS + 6 module rewires); correct answers keep
+      fast auto-advance; FR 3rd-wipeout crash rides the NEXT tap; scrollIntoView keeps
+      NEXT on-screen (RC clipped it). Commit 8517e61 on ui/header-one-row.
+- [x] Topic coverage audited by script: 19 emitted topics had NO COACH_TIPS entry
+      (coach silently dead; 60 percent of F1 L1). Authored 19 tips + family fallback
+      in showCoach. Re-audit: 0 dead topics, labels all covered.
+- [x] Quality audit of q.explain strings fanned out to subagents; consolidated report
+      at tasks/explain-audit-26-0714.md (findings for Justin's call before rewrites)
+- [x] npm test (fuzz + smoke) ALL CLEAN; 6-module sweep 36 ok / 0 fail
+- [x] Update handoff + memory; report findings + deploy answer to Justin
