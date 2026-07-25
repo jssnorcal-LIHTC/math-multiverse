@@ -15,7 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execFile } = require('child_process');
+const { spawn } = require('child_process');
 const { loadPackFile } = require('./validate-pack');
 const { itemHash, blindQuestion, authoredKeyOf } = require('./verdicts');
 
@@ -27,20 +27,33 @@ function arg(flag, dflt) {
   return i > -1 && process.argv[i + 1] ? process.argv[i + 1] : dflt;
 }
 
+// VERIFIED 26-0725 against the installed CLI; do not "simplify" this back to execFile with a shell.
+// Two traps, both proven by probe rather than reasoned about:
+//   1. `shell: true` on Windows CONCATENATES argv rather than escaping it, so a multi-line prompt is
+//      torn apart at the newlines and the call fails outright. No shell.
+//   2. The CLI waits 3s for piped stdin it will never receive and prints a warning. Close stdin at once.
+// The CLI returns BARE JSON with no envelope, e.g. {"answer": "B", "confidence": "high"}, which is what
+// parseAnswer below is written against.
 function callClaude(prompt) {
   return new Promise((resolve, reject) => {
-    // The prompt goes in on stdin, never as an argv element. On win32 the child is spawned through
-    // a shell so that `claude` resolves to claude.exe, and a multi-line prompt containing quotes
-    // would not survive cmd.exe quoting. Only shell-safe flags are passed as arguments.
-    const args = ['-p', '--model', MODEL_LABEL];
-    const child = execFile('claude', args, { timeout: 120000, maxBuffer: 1 << 20, shell: process.platform === 'win32' }, (err, stdout, stderr) => {
-      if (err) return reject(new Error(`claude CLI failed: ${err.message} ${String(stderr).slice(0, 200)}`));
-      resolve(String(stdout));
+    const child = spawn('claude', ['-p', prompt, '--model', MODEL_LABEL], {
+      windowsHide: true,
+      stdio: ['pipe', 'pipe', 'pipe'],
     });
-    // A child killed by the timeout closes stdin early; the execFile callback already reports that,
-    // so swallow the EPIPE rather than letting it become an unhandled error event.
-    child.stdin.on('error', () => {});
-    child.stdin.end(prompt);
+    let out = '', errOut = '';
+    const timer = setTimeout(() => {
+      child.kill();
+      reject(new Error('claude CLI timed out after 120s'));
+    }, 120000);
+    child.stdout.on('data', (d) => { out += d; });
+    child.stderr.on('data', (d) => { errOut += d; });
+    child.on('error', (e) => { clearTimeout(timer); reject(new Error(`claude CLI failed to start: ${e.message}`)); });
+    child.on('close', (code) => {
+      clearTimeout(timer);
+      if (code !== 0) return reject(new Error(`claude CLI exited ${code}: ${errOut.slice(0, 200)}`));
+      resolve(out);
+    });
+    child.stdin.end();   // never leave it open; see trap 2 above
   });
 }
 
