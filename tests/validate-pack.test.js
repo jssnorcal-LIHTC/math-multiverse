@@ -286,6 +286,50 @@ check('two items sharing a stem are caught', () => {
   expectError(p, 'duplicate stem', 'dup stem');
 });
 
+check('a pack that tries to WIDEN its own readability band is caught', () => {
+  // Without the clamp the author sets the thresholds their own content is judged against, so the
+  // brief's own too-hard passage passes clean. The band may be tightened, never loosened.
+  const p = clone();
+  p.passages[0].text = 'Notwithstanding institutional prerogatives, the administrative determination necessitated comprehensive reevaluation of organizational infrastructure methodologies throughout subsequent implementation phases.';
+  p.meta.readability = { fkMin: 0, fkMax: 100, clMin: 0, clMax: 100 };
+  expectError(p, 'would widen the default band', 'self-widened band');
+});
+
+check('a pack may TIGHTEN its readability band, and a non-numeric override is caught', () => {
+  const tight = clone();
+  tight.meta.readability = { fkMin: 5.9, fkMax: 6.1 };     // p1 measures FK 5.95, so this still passes
+  assert.deepStrictEqual(validatePack(tight, { expectedId: 'pack-good' }).errors, [],
+    'tightening to a band the passage still satisfies must be allowed');
+  const junk = clone();
+  junk.meta.readability = { fkMax: 'loose' };
+  expectError(junk, 'must be a finite number', 'non-numeric override');
+});
+
+check('two EBSR items sharing the Part B boilerplate stem is NOT a duplicate', () => {
+  // partB.stem is template text describing the item type's mechanism and is expected to repeat
+  // across every EBSR in a pack. Counting it as a duplicate stem would reject a legitimate pack.
+  const p = clone();
+  const second = JSON.parse(JSON.stringify(p.items[1]));
+  second.id = 'i-ebsr-2';
+  second.partA.stem = 'Where does the second person erase the mark?';   // genuinely different question
+  // partB.stem deliberately left identical to the first item's boilerplate.
+  p.items.push(second);
+  p.levels[0].itemIds.push('i-ebsr-2');
+  const { errors } = validatePack(p, { expectedId: 'pack-good' });
+  assert.strictEqual(errors.some(e => /duplicate stem/.test(e)), false,
+    'shared Part B boilerplate must not collide: ' + JSON.stringify(errors.filter(e => /duplicate stem/.test(e))));
+});
+
+check('a numeral-dense explanation of twenty-plus words is accepted', () => {
+  // textStats counts only letter-led tokens because the readability formulas need that, so digits
+  // scored zero and this 24-word sentence was rejected as "19 words" before the floor got its own counter.
+  const p = clone();
+  p.items[0].explain = 'Distractor 3 confuses the 1st clue with the 2nd, and swaps 4 for 40 percent, missing why 5 of 7 signals fail the test.';
+  const { errors } = validatePack(p, { expectedId: 'pack-good' });
+  assert.strictEqual(errors.some(e => /explain/.test(e)), false,
+    'numeral-dense explanation must clear the floor: ' + JSON.stringify(errors.filter(e => /explain/.test(e))));
+});
+
 check('the good fixture still validates after the content checks land', () => {
   const { errors, warnings } = validatePack(clone(), { expectedId: 'pack-good' });
   assert.deepStrictEqual(errors, [], 'errors: ' + JSON.stringify(errors));
