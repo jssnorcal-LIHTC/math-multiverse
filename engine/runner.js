@@ -13,10 +13,10 @@
 //   - the explanation names the misconception he picked, which is why distractorRationale is
 //     rendered above the general explanation rather than instead of it
 (function (root, factory) {
-  const api = factory();
+  const api = factory(root);
   if (typeof module === 'object' && module.exports) module.exports = api;
   if (root) root.MVRunner = api;
-})(typeof self !== 'undefined' ? self : (typeof globalThis !== 'undefined' ? globalThis : null), function () {
+})(typeof self !== 'undefined' ? self : (typeof globalThis !== 'undefined' ? globalThis : null), function (root) {
 
   const CORRECT_ADVANCE_MS = 1400;
   const DEFAULT_LIVES = 3;
@@ -77,9 +77,21 @@
   }
 
   function makeRunner(pack, levelIndex, host, callbacks, deps) {
-    const Items = (deps && deps.Items) || (typeof MVItems !== 'undefined' ? MVItems : root.MVItems);
-    const Save = (deps && deps.Save) || root.MVPack.PackSave;
-    const coach = (deps && deps.showCoach) || (typeof root.showCoach === 'function' ? root.showCoach : null);
+    // root is null under Node, so every lookup through it must be guarded.  `typeof root.x` does NOT
+    // guard: typeof only suppresses the error for a bare identifier, not for a member access on an
+    // undefined base. That distinction is what broke this function in every environment.
+    const Items = (deps && deps.Items) || (typeof MVItems !== 'undefined' ? MVItems : (root && root.MVItems));
+    const Save = (deps && deps.Save) || (root && root.MVPack && root.MVPack.PackSave);
+    const coach = (deps && deps.showCoach) || (root && typeof root.showCoach === 'function' ? root.showCoach : null);
+    // Fail here, naming what is missing, rather than throwing deep inside the first grade.
+    if (!Items) throw new Error('MVRunner: no Items implementation (pass deps.Items or load engine/items.js first)');
+    if (!Save) throw new Error('MVRunner: no PackSave (pass deps.Save or load engine/pack.js first)');
+    // onComplete is called from inside a setTimeout at the end of a level. A missing one therefore throws
+    // where nothing can catch it: the browser logs an unhandled error and the level simply never finishes,
+    // after the child has answered every question. Check it here, where the failure is attributable.
+    if (!callbacks || typeof callbacks.onComplete !== 'function') {
+      throw new Error('MVRunner: callbacks.onComplete(score, stars) is required by the InlineModules contract');
+    }
 
     const level = pack.levels[levelIndex];
     const lives = Number.isInteger(level.lives) ? level.lives : DEFAULT_LIVES;
@@ -255,7 +267,8 @@
 
   // A pack registers under its own id, so the shell's InlineModules[m.id] lookup needs no change.
   function register(pack, registry) {
-    const reg = registry || root.InlineModules;
+    const reg = registry || (root && root.InlineModules);
+    if (!reg) throw new Error('MVRunner.register: no registry (pass one, or load the shell first)');
     reg[pack.meta.id] = {
       init(host, levelIndex, callbacks) { return makeRunner(pack, levelIndex, host, callbacks, null); },
     };

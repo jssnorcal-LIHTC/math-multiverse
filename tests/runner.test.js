@@ -85,5 +85,169 @@ check('register wires the pack under its own id, not a prefixed one', () => {
   assert.strictEqual(reg['pack:ela-g6-spy'], undefined);
 });
 
+// ---------- makeRunner: the DOM layer ----------
+// These exist because `makeRunner` was never called by any check, and it was broken in every environment:
+// the UMD factory referenced `root`, which lives in the wrapper's scope and not the factory's, so the first
+// line that reached for a global threw ReferenceError. Eleven green checks did not notice, because the only
+// one that touched a `root` line passed a registry and short-circuited before evaluating it. A function no
+// test ever calls is a function that can be entirely broken behind a green gate.
+
+const { installDomStub } = require('./dom-stub.js');
+const { makeEl } = installDomStub();
+
+// A correct answer advances on a timer. Run scheduled callbacks synchronously so a whole level can be
+// driven in one tick, and restore the real timer afterwards so nothing else in the suite is affected.
+function withSyncTimers(fn) {
+  const realSet = global.setTimeout, realClear = global.clearTimeout;
+  global.setTimeout = (f) => { f(); return 0; };
+  global.clearTimeout = () => {};
+  try { return fn(); } finally { global.setTimeout = realSet; global.clearTimeout = realClear; }
+}
+
+function probePack() {
+  const items = [0, 1, 2, 3].map((i) => ({
+    id: 'i' + i, type: 'mc', passageId: 'p1',
+    targets: ['c1-inf-1-key-details'], coachTopic: 'key-details', dok: 2,
+    stem: 'Question ' + i, choices: ['a', 'b', 'c', 'd'], key: 1,
+    explain: 'The answer is b because the passage says so, and this sentence is long enough to clear the floor.',
+    distractorRationale: { 0: 'took a detail for the idea', 2: 'reversed the relationship', 3: 'imported outside knowledge' },
+  }));
+  return {
+    meta: { id: 'probe', title: 'Probe' },
+    passages: [{ id: 'p1', genre: 'informational', title: 'P', text: 'Some passage text.' }],
+    items,
+    levels: [{ name: 'L1', questions: 4, itemIds: ['i0', 'i1', 'i2', 'i3'], targets: ['c1-inf-1-key-details'], lives: 4 }],
+  };
+}
+
+function spySave() {
+  const calls = { recordLevel: [], recordAnswer: [], markCoachShown: [], saveNow: 0 };
+  return {
+    calls,
+    recordLevel(...a) { calls.recordLevel.push(a); },
+    recordAnswer(...a) { calls.recordAnswer.push(a); },
+    markCoachShown(...a) { calls.markCoachShown.push(a); },
+    saveNow() { calls.saveNow++; },
+    stateFor: () => ({ levelStars: [0, 0, 0, 0], levelBest: [0, 0, 0, 0] }),
+    totalStars: () => 0,
+    isUnlocked: () => true,
+    state: { analytics: { perTopic: {}, recentMistakes: [] } },
+  };
+}
+
+// Drive a level by tapping the given choice index on each successive question.
+function play(picks) {
+  const Items = require('../engine/items.js');
+  const pack = probePack(), host = makeEl('div'), Save = spySave();
+  const seen = [];
+  R.makeRunner(pack, 0, host, { onComplete(score, stars) { seen.push({ score, stars }); }, onExit() {} },
+    { Items, Save, rng: () => 0.5 });
+  const steps = [];
+  for (const pick of picks) {
+    const box = host.querySelectorAll('.mv-item')[0];
+    if (!box) break;
+    const cs = host.querySelectorAll('.mv-choice');
+    if (!cs.length) break;
+    const step = { lockedBefore: box.dataset.locked };
+    cs[pick].onclick();
+    const ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    const after = host.querySelectorAll('.mv-item')[0];
+    step.lockedAfter = after ? after.dataset.locked : 'gone';
+    step.hasNext = host.querySelectorAll('.mv-next').length > 0;
+    steps.push(step);
+    const nx = host.querySelectorAll('.mv-next')[0];
+    if (nx && nx.onclick) nx.onclick();
+  }
+  return { host, Save, steps, completed: seen };
+}
+
+check('makeRunner constructs and renders a first question', () => {
+  withSyncTimers(() => {
+    const r = play([]);
+    assert.ok(r.host.querySelectorAll('.mv-item').length === 1, 'no item box was rendered');
+    assert.ok(r.host.querySelectorAll('.mv-choice').length === 4, 'the four choices were not rendered');
+  });
+});
+
+check('makeRunner locks the item box on grading, not before', () => {
+  withSyncTimers(() => {
+    const r = play([0]);
+    assert.strictEqual(r.steps[0].lockedBefore, '0', 'the box was locked before the child answered');
+    assert.strictEqual(r.steps[0].lockedAfter, '1', 'the box was not locked after grading');
+  });
+});
+
+check('a wrong answer holds the explanation instead of auto-advancing (26-0714)', () => {
+  withSyncTimers(() => {
+    const r = play([0]);
+    assert.ok(r.steps[0].hasNext, 'a wrong answer produced no NEXT button, so it auto-advanced');
+  });
+});
+
+check('a graded item records exactly one answer however many times it is tapped', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack(), host = makeEl('div'), Save = spySave();
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+    host.querySelectorAll('.mv-choice')[0].onclick();
+    const ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    const recorded = Save.calls.recordAnswer.length;
+    for (const b of host.querySelectorAll('.mv-choice')) if (!b.classList.contains('sel') && b.onclick) b.onclick();
+    const ck2 = host.querySelectorAll('.mv-check')[0];
+    if (ck2 && ck2.onclick) ck2.onclick();
+    assert.strictEqual(Save.calls.recordAnswer.length, recorded, 'a graded item accepted a second answer');
+  });
+});
+
+check('a completed level calls recordLevel exactly once, with the pack id and the ladder stars', () => {
+  withSyncTimers(() => {
+    const r = play([0, 1, 1, 1]);          // one wrong, three right
+    assert.strictEqual(r.Save.calls.recordLevel.length, 1, 'recordLevel was not called exactly once');
+    assert.strictEqual(r.Save.calls.recordAnswer.length, 4, 'one answer per item was not recorded');
+    const [packId, levelIndex, stars] = r.Save.calls.recordLevel[0];
+    assert.strictEqual(packId, 'probe');
+    assert.strictEqual(levelIndex, 0);
+    assert.strictEqual(stars, 2, 'one mistake in four should be 2 stars on the math ladder');
+  });
+});
+
+check('the factory can reach the globals the browser gives it', () => {
+  // The bug this replaces: the UMD factory referenced `root`, which is the WRAPPER's parameter, so it was
+  // out of scope inside the factory and every global lookup threw ReferenceError. The wrapper now passes
+  // root in. Under Node root is globalThis, and requiring engine/items.js sets globalThis.MVItems, so this
+  // exercises exactly the resolution path the browser takes when the script tags are in dependency order.
+  require('../engine/items.js');
+  assert.ok(typeof MVItems !== 'undefined', 'precondition: requiring items.js should publish MVItems');
+  withSyncTimers(() => {
+    const pack = probePack(), host = makeEl('div'), Save = spySave();
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Save, rng: () => 0.5 });   // no deps.Items
+    assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'the global MVItems was not used to render');
+  });
+});
+
+check('a missing dependency or callback is named, not a ReferenceError', () => {
+  const Items = require('../engine/items.js');
+  const pack = probePack();
+  const host = makeEl('div');
+  // No PackSave anywhere: neither injected nor published on the global by engine/pack.js.
+  const hadPack = typeof MVPack !== 'undefined' ? MVPack : undefined;
+  try {
+    if (hadPack !== undefined) delete global.MVPack;
+    assert.throws(() => R.makeRunner(pack, 0, host, { onComplete() {} }, { Items }), /no PackSave/);
+  } finally {
+    if (hadPack !== undefined) global.MVPack = hadPack;
+  }
+  assert.throws(() => R.makeRunner(pack, 0, host, {}, { Items, Save: spySave() }), /onComplete/);
+  assert.throws(() => R.register({ meta: { id: 'y' } }, null), /no registry/);
+});
+
+check('the runner never reaches a math save key or localStorage', () => {
+  const src = require('fs').readFileSync(require('path').join(__dirname, '../engine/runner.js'), 'utf8');
+  assert.ok(!/mathMultiverse/.test(src), 'runner.js names a mathMultiverse key');
+  assert.ok(!/localStorage/.test(src), 'runner.js touches localStorage directly');
+});
+
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
 process.exit(failures ? 1 : 0);
