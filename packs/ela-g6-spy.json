@@ -70,6 +70,1201 @@
       "text": "A rescue training association ran the same beacon test in three different tunnels last spring.  It published all three results side by side, which turns out to be far more useful than any one of them alone.\n\nThe first tunnel was cut through dry granite and ran almost straight for two hundred feet.  A beacon at the forty foot level held its signal for the full life of the battery.  The receiver at the entrance never lost it once.  The second tunnel was wet limestone with a sharp bend at twenty-five feet.  A beacon at the thirty foot level lost contact there after eight minutes.  That is close to what the training staff at Halloway recorded in their own log.  The third tunnel was dry limestone with a gentle curve.  The beacon there held for fifty-one minutes before the signal became unreliable.\n\nRead on its own, each of those results looks like a verdict on the equipment.  Read together, they say something different, which is that the beacon is not the thing that changed.  Three conditions differed between the three tunnels.  Every one of them is a property of the ground rather than of the device.\n\nWater is the first of them.  Wet rock absorbs radio energy far more effectively than dry rock does.  Water is extremely good at turning a signal into heat.  A damp limestone wall can cost a team more range than another ten feet of depth would.\n\nThe shape of the path is the second.  A signal traveling through rock does best when the beacon and the receiver sit close to a straight line.  A sharp bend forces the signal to cut the corner through solid material instead of following the open passage.  That extra rock does the same work that greater depth would do.\n\nDepth is the third, and it is the one everybody thinks of first.  It clearly matters, but the association's own numbers show that it is not the whole story.  A beacon at forty feet in the first tunnel outperformed a beacon at thirty feet in the second by more than an hour.\n\nThe practical conclusion is not that these beacons are good or that they are bad.  It is that a claim about beacon performance is close to meaningless unless it names the depth, the rock, and the shape of the passage.  A team deciding what to buy should ask for the conditions of a test before asking for the result.  A number offered without those conditions should be treated as a number that cannot be checked.  The association recommends that every department run one test in its own worst tunnel rather than trusting a figure measured somewhere else."
     }
   ],
-  "levels": [],
-  "items": []
+  "levels": [
+    {
+      "id": 1,
+      "name": "Tradecraft",
+      "goal": "Find the detail, then find the line that proves it.",
+      "targets": [
+        "c1-inf-1-key-details",
+        "c1-inf-2-central-ideas"
+      ],
+      "lives": 4,
+      "questions": 8,
+      "itemIds": [
+        "l1-ebsr-why-skip-the-meeting",
+        "l1-ebsr-central-idea-whole",
+        "l1-ebsr-window-move-purpose",
+        "l1-ebsr-counting-rule-point",
+        "l1-mc-change-of-level",
+        "l1-mc-best-summary",
+        "l1-mc-ordinary-passerby",
+        "l1-hot-three-moves",
+        "l1-hot-overall-point",
+        "l1-ms-what-a-follower-must-do",
+        "l1-cloze-summary",
+        "l1-match-move-to-effect"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Briefing",
+      "goal": "Read the shape of an article, and the words it defines as it goes.",
+      "targets": [
+        "c1-inf-6-text-structure",
+        "c1-inf-3-word-meanings"
+      ],
+      "lives": 4,
+      "questions": 8,
+      "itemIds": [
+        "l2-ebsr-structure-turn",
+        "l2-ebsr-redundant-meaning",
+        "l2-ebsr-last-paragraph-job",
+        "l2-ebsr-ambiguous-meaning",
+        "l2-mc-overall-structure",
+        "l2-mc-dead-air-meaning",
+        "l2-mc-why-costs-come-first",
+        "l2-hot-relay-definition",
+        "l2-hot-cost-not-cause",
+        "l2-ms-signal-two-senses",
+        "l2-cloze-academic-words",
+        "l2-order-article-parts"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Cover Story",
+      "goal": "Work out what a narrator knows, and separate it from what they guess.",
+      "targets": [
+        "c1-lit-1-key-details",
+        "c1-lit-4-reasoning",
+        "c1-lit-7-language-use"
+      ],
+      "lives": 4,
+      "questions": 8,
+      "itemIds": [
+        "l3-ebsr-why-not-abort",
+        "l3-ebsr-first-person-effect",
+        "l3-ebsr-only-solid-fact",
+        "l3-ebsr-offer-to-wait",
+        "l3-mc-true-time-on-the-log",
+        "l3-mc-whose-head-we-are-in",
+        "l3-mc-why-add-the-line",
+        "l3-hot-inside-the-head",
+        "l3-hot-left-off-the-sheet",
+        "l3-ms-why-the-offer-works",
+        "l3-cloze-narration-limits",
+        "l3-short-who-the-log-is-for"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "l1-ebsr-why-skip-the-meeting",
+      "type": "ebsr",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 3,
+      "partA": {
+        "stem": "A courier who spots a follower skips the meeting completely.  What reason does the article give for that?",
+        "choices": [
+          "A meeting that has been watched can never be made safe again.",
+          "A follower will lose interest once the courier simply goes home.",
+          "The courier needs the time to write the whole thing up properly.",
+          "Running or arguing would show the follower that the courier is trained."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "A meeting that is watched cannot be unwatched, and everyone who walks into it is finished.",
+          "Anyone who is genuinely going that direction simply keeps going and is never seen again.",
+          "The courier buys a carton of milk, goes home, and writes the whole thing up.",
+          "If the route turns up a follower, the courier does not run, does not confront anybody, and does not go anywhere near the meeting."
+        ],
+        "key": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "The article says an ordinary passer-by keeps going and is never seen again.  That is the person who is NOT following.  A follower is defined here by the fact that they do not just carry on.",
+        "2": "Writing it up is what the courier does next, not why the meeting gets skipped.  A step that comes after a decision cannot be the reason for it.",
+        "3": "That sentence tells you what the courier does not do.  You found a true detail and read it as the reason; the reason is one sentence further on and is about the meeting, not the courier."
+      },
+      "explain": "The article gives one reason, and it is about the meeting rather than about the courier.  A watched meeting burns everyone who walks into it, and nothing done afterwards can undo that.  The other options are all true details from the same paragraph, and a true detail is not automatically the reason you were asked for."
+    },
+    {
+      "id": "l1-ebsr-central-idea-whole",
+      "type": "ebsr",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-2-central-ideas"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 3,
+      "partA": {
+        "stem": "What is the central idea of the article as a whole?",
+        "choices": [
+          "The long route is worth the hours because the walk itself is how a courier finds out whether anyone is following.",
+          "A courier's most important skill is picking a suspicious face out of a crowd.",
+          "Doubling back is the single most reliable of the courier's moves.",
+          "Missing a meeting costs a team very little, so meetings should be rescheduled often."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "The point is to arrive knowing something about the street that you did not know when you left.",
+          "The courier is looking for the same face twice.",
+          "The first move is a doubling back.",
+          "A meeting that is missed can be arranged again the next day at a small cost in time."
+        ],
+        "key": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "The courier is looking for a repeat, not for a face that looks wrong.  The article says outright that faces are a poor guide, so this answer is the one the passage argues against.",
+        "2": "First is not the same as most important.  The article numbers three moves and never ranks them, so being listed first is the only thing this answer has behind it.",
+        "3": "That sentence is half of a comparison.  Read the next one and the point flips: it is there to show how cheap a missed meeting is next to a watched one, not to recommend rescheduling."
+      },
+      "explain": "Every step in the article serves one purpose, which is to turn the walk into a way of finding something out, and the last sentence says so outright.  A single move, a single face, or a single line about rescheduling is a piece of the article rather than the point of it."
+    },
+    {
+      "id": "l1-ebsr-window-move-purpose",
+      "type": "ebsr",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 3,
+      "partA": {
+        "stem": "Why does the courier stop in front of a shop window or a parked car?",
+        "choices": [
+          "To see the street behind without turning around.",
+          "To let a follower close in so the courier can get a look at them from the front.",
+          "To find the face in the crowd that looks most suspicious.",
+          "To make everyone nearby commit to a direction at the same moment."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "A shop window, a parked car, or a phone screen held at the right angle shows the street behind without a single turn of the head.",
+          "A follower who has been drifting comfortably forty feet back now has to close that gap or lose the courier completely, and both of those are visible from the front.",
+          "The courier is not looking for a suspicious face, because faces are a poor guide and everybody looks suspicious eventually.",
+          "Stairs, an escalator, a footbridge, or a train platform force everyone nearby to commit to a direction at the same moment."
+        ],
+        "key": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "Closing the gap belongs to the change of level, the third move, and it happens because stairs force it.  You matched a real effect to the wrong move.",
+        "2": "Read that sentence to the end.  It says the courier is NOT looking for a suspicious face.  A sentence that contains the words you are hunting for can still be saying the opposite.",
+        "3": "Stairs and platforms do that, and they are the third move.  Each move in this article gets its own paragraph, so check which paragraph the question is standing in."
+      },
+      "explain": "Each of the three moves has its own job.  The window move is about seeing behind you without turning, which is why a parked car and a phone screen are listed beside it.  Picking another move's job, or picking the thing the article says the courier is not doing, means the paragraph boundaries got lost."
+    },
+    {
+      "id": "l1-ebsr-counting-rule-point",
+      "type": "ebsr",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-2-central-ideas"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 3,
+      "partA": {
+        "stem": "What is the main point of the paragraph about the counting rule?",
+        "choices": [
+          "Three is the number because coincidence can explain one sighting or two, and almost never three.",
+          "A courier should write down every person they happen to see more than once.",
+          "The route works because a follower has to keep making choices that can go wrong.",
+          "The counting rule tells the courier how many moves to make on the route."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Three is the number because people really do end up on the same street twice by accident, and almost never three times across a mile of turns nobody could predict.",
+          "One sighting is nothing at all, two sightings in one afternoon are a coincidence worth writing down, and three sightings in three unrelated places mean the run is over.",
+          "A follower who is trying not to be seen has to keep making choices, and every choice is a chance to be wrong.",
+          "The third move is a change of level."
+        ],
+        "key": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "Two sightings are worth writing down; that is one rung of a ladder, not the paragraph's point.  The paragraph is answering why the number is three.",
+        "2": "True, and from the first paragraph.  Evidence taken from somewhere else in the article cannot settle a question about this paragraph.",
+        "3": "There are three moves and there are three sightings, and they are two different threes.  The counting rule counts sightings."
+      },
+      "explain": "The paragraph answers one question, which is why the number is three rather than one or two, and the answer is coincidence.  People really do cross the same street twice by accident, so two proves nothing, while three across unpredictable turns is almost impossible.  Evidence from another paragraph cannot settle a question about this one."
+    },
+    {
+      "id": "l1-mc-change-of-level",
+      "type": "mc",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "What does a change of level, such as stairs or a train platform, force a follower to do?",
+      "choices": [
+        "Decide at once whether to close the gap or lose the courier, where the choice can be seen from the front",
+        "Turn around inside about two seconds and walk back the way they came",
+        "Stop in front of a window and check the street behind them",
+        "Wait forty feet back until the courier reaches the meeting"
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "That two-second squeeze belongs to the doubling back, which is the first move.  You matched a real detail to the wrong move.",
+        "2": "The window is the second move, and it is what the COURIER does, not the follower.  Two things went sideways in one answer, so read the paragraph again and ask who is acting.",
+        "3": "Forty feet is where the follower was already drifting comfortably.  The whole point of the stairs is that they cannot stay there."
+      },
+      "explain": "Stairs and platforms strip away the follower's comfortable distance, because everybody nearby has to commit at the same moment.  The two-second squeeze and the shop window belong to the other two moves.  When an article numbers its moves, check which number the question is asking about before you answer."
+    },
+    {
+      "id": "l1-mc-best-summary",
+      "type": "mc",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-2-central-ideas"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 3,
+      "stem": "Which of these is the best summary of the article?",
+      "choices": [
+        "Couriers use shop windows, parked cars, and phone screens to watch the street behind them without turning their heads.",
+        "Following somebody through a city is difficult, and most followers are spotted within two seconds of the first turn.",
+        "Couriers walk a long, deliberately awkward route because the route is what makes a follower show themselves, and a courier who finds one calls the meeting off.",
+        "Couriers are trained never to hurry, because arriving late at a meeting matters less than arriving safely."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "True, and one paragraph long.  A summary has to cover the whole article, not the part that was easiest to picture.",
+        "1": "The article does say following is hard.  It never says most followers get caught, and the two seconds belong to one move rather than to the whole route.  You added a fact the text does not carry.",
+        "3": "Close, and it swaps the point.  The route is not slow so the courier stays safe; it is slow so the courier learns something about the street."
+      },
+      "explain": "A summary has to cover the whole article and keep its point intact.  The route is deliberately slow because slowness is what makes a follower visible, and a courier who finds one walks away.  One paragraph, one invented statistic, or one moral about patience each leave most of the article out."
+    },
+    {
+      "id": "l1-mc-ordinary-passerby",
+      "type": "mc",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "When the courier doubles back, what does the article say happens to an ordinary person who is not following anybody?",
+      "choices": [
+        "They keep walking the way they were already going and are never seen again.",
+        "They get about two seconds to decide whether to stop or walk straight past.",
+        "They turn into the side street and come back out the way they came.",
+        "They end up on the same street twice by accident, which is why the rule is three."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The two seconds belong to the follower.  This paragraph is built on a contrast between two people, and swapping them is the fastest way to lose it.",
+        "2": "That is the courier, not the passer-by.  Three people move through this paragraph and only one of them turns into the side street on purpose.",
+        "3": "That is the reason the counting rule needs three sightings, taken from a paragraph much further down and answered to a different question."
+      },
+      "explain": "The doubling back sorts two kinds of people apart.  An ordinary person keeps going and vanishes, while a follower has about two seconds to choose, and every choice looks strange.  Swapping the two around is the commonest way to lose a paragraph that is built on a contrast."
+    },
+    {
+      "id": "l1-hot-three-moves",
+      "type": "hottext",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "mode": "sentence",
+      "stem": "Tap the three sentences that each announce one of the courier's moves on the route.  Two of these sentences announce something that is not a move.",
+      "spans": [
+        "The first move is a doubling back.",
+        "The second move is a stop in front of something that reflects.",
+        "The third move is a change of level.",
+        "The last rule is the one new couriers find hardest to obey.",
+        "Training gives the counting rule as three."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "explain": "The article numbers three moves and then gives a rule and a counting rule, neither of which is a move at all.  A sentence that carries a number is not automatically a step, and the counting rule counts sightings rather than moves.  Check what each sentence is counting before you tap it."
+    },
+    {
+      "id": "l1-hot-overall-point",
+      "type": "hottext",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-2-central-ideas"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that state the article's overall point rather than one step in the routine.",
+      "spans": [
+        "Instead the courier walks a route that is designed to make a follower show themselves.",
+        "The point is to arrive knowing something about the street that you did not know when you left.",
+        "The courier turns into a side street, walks half a block, and comes back out the way they came.",
+        "A shop window, a parked car, or a phone screen held at the right angle shows the street behind without a single turn of the head.",
+        "The courier buys a carton of milk, goes home, and writes the whole thing up."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Two sentences state the purpose behind everything else, one near the start and one at the very end.  The rest describe procedure.  Procedure tells you what to do, and the point tells you why any of it is worth the hours it takes."
+    },
+    {
+      "id": "l1-ms-what-a-follower-must-do",
+      "type": "ms",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 3,
+      "stem": "The article names things a follower has to do that an ordinary person on the street does not.  Choose the three the article actually states.",
+      "choices": [
+        "Decide inside about two seconds whether to turn around, stop, or walk straight past",
+        "Close a forty-foot gap, or lose the courier, when the route changes level",
+        "Keep making choices, any one of which can be the wrong one",
+        "Walk faster than the courier for the whole of the route",
+        "Look suspicious enough for the courier to pick their face out of a crowd",
+        "Report back to somebody once the courier reaches the meeting"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "The article never asks the follower for speed.  Speed is the courier's temptation in this article, and the article talks them out of it.",
+        "4": "The article says the opposite.  Faces are a poor guide, and the courier is not hunting a suspicious one.  You picked what the word suspicious made you expect.",
+        "5": "Nothing here says what a follower does afterwards.  That comes from spy stories you already know rather than from this text."
+      },
+      "explain": "The article says a follower has to decide fast, has to close a gap that becomes visible from the front, and has to keep making choices that can go wrong.  Anything about walking faster, looking suspicious, or reporting back arrives from spy stories you already know rather than from this text."
+    },
+    {
+      "id": "l1-cloze-summary",
+      "type": "cloze",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-2-central-ideas"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 2,
+      "stem": "Finish the summary.  A courier takes the long route because {{0}}, and a courier whose route turns up a follower {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "a straight line is the fastest way to reach the meeting",
+            "the route itself is built to make a follower show themselves",
+            "a longer walk tires out anybody who is following"
+          ],
+          "key": 1
+        },
+        {
+          "choices": [
+            "walks to the meeting by an even longer route",
+            "waits on the street until the same face turns up three times",
+            "goes home and writes it up instead of going to the meeting"
+          ],
+          "key": 2
+        }
+      ],
+      "explain": "The summary has to carry both the article's reason and the article's response.  The route exists to make a follower show themselves, and a courier who finds one goes home and writes it up rather than risking a meeting that can never be unwatched."
+    },
+    {
+      "id": "l1-match-move-to-effect",
+      "type": "match",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "Match each move on the route to what the article says it does to a follower.",
+      "rowLabels": [
+        "Doubling back into a side street",
+        "Stopping in front of a shop window",
+        "Taking stairs or a footbridge"
+      ],
+      "colLabels": [
+        "Makes everyone nearby commit to a direction at the same moment",
+        "Shows the street behind without a single turn of the head",
+        "Gives about two seconds to make a choice that will look strange"
+      ],
+      "key": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "explain": "Each move does a different job to the follower, and the article gives each one its own paragraph.  Matching them by the order they appear on the page, rather than by what the article says each one does, is the mistake this table is built to catch."
+    },
+    {
+      "id": "l2-ebsr-structure-turn",
+      "type": "ebsr",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "partA": {
+        "stem": "The article spends its first two paragraphs on one thing and its last three on another.  What is that turn?",
+        "choices": [
+          "It turns from the problem the rock creates to the methods that work around it.",
+          "It turns from cheap equipment to expensive equipment.",
+          "It turns from what happens above ground to what happens below ground.",
+          "It turns from radios to schedules, dropping equipment altogether."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "The fix is not a more powerful radio, because power was never the problem that the rock created.",
+          "Every team that works underground runs into the same wall, and it has nothing to do with the price of their equipment.",
+          "A handheld set pushes a signal out through open air for a mile or more.",
+          "The last piece of the fix is a schedule."
+        ],
+        "key": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "Price is mentioned once, in the first sentence, and only to rule it out.  A word can appear in an article without being what the article is organised around.",
+        "2": "Above ground turns up in one sentence, as a comparison.  The article is below ground from its first line to its last.",
+        "3": "The schedule is the last piece of the fix, not the second half of the article.  You described one paragraph and called it the shape of the whole thing."
+      },
+      "explain": "The article is built as a problem and then the fixes that answer it, and one sentence marks the hinge by saying what the fix is not.  Price, open air, and the schedule all appear somewhere in the article, and none of them is the shape of the whole thing."
+    },
+    {
+      "id": "l2-ebsr-redundant-meaning",
+      "type": "ebsr",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-3-word-meanings"
+      ],
+      "coachTopic": "vocab-context",
+      "dok": 3,
+      "partA": {
+        "stem": "Planners call the hardwired line a redundant system.  What does redundant mean here?",
+        "choices": [
+          "Carried as a backup, and meant to sit unused.",
+          "No longer needed, so it can safely be left behind.",
+          "Strong enough to replace the relay completely.",
+          "Built from several parts chained together so a message gets handed along."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "A redundant system is one that a team hopes never to need and refuses to leave behind.",
+          "Planners call this a redundant system, and the word is not an insult in a tunnel.",
+          "A hardwired line taped along the wall is heavy, slow to lay, and completely reliable once everything electronic has quit.",
+          "A long tunnel uses several relays in a chain, each one handing the message to the next like runners passing a baton."
+        ],
+        "key": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "That is what redundant means outside a tunnel, and the article warns you about it in the same breath by saying the word is not an insult here.  A sentence that flags the everyday meaning is not agreeing with it.",
+        "2": "Completely reliable is not the same as a replacement.  The article keeps the wire as a second method precisely because it expects to use the relay first.",
+        "3": "That is the relay chain, one paragraph earlier.  Two ideas sit next to each other here and only one of them is what the word means."
+      },
+      "explain": "Redundant in everyday speech means no longer needed, and the article warns you about exactly that by saying the word is not an insult in a tunnel.  Here a redundant system is the one a team carries and hopes never to open.  The article defines it in the very next sentence."
+    },
+    {
+      "id": "l2-ebsr-last-paragraph-job",
+      "type": "ebsr",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "partA": {
+        "stem": "What job does the last paragraph do in the article?",
+        "choices": [
+          "It adds a third fix, one that works by making silence itself mean something.",
+          "It repeats the problem from the opening so the reader remembers it.",
+          "It explains why a relay is parked near the entrance of a tunnel.",
+          "It warns the reader that no fix in the article can really be relied on."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "That interval turns silence itself into information.",
+          "Worse than either of those, silence is ambiguous, because it can mean several different things at once.",
+          "A relay is a small transmitter parked where it can hear both sides at once, usually just inside the entrance where the tunnel is still shallow.",
+          "Relays fail, so a good team carries a second method that does not depend on them at all."
+        ],
+        "key": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "Silence turns up in both paragraphs, which is why this looks like a repeat.  The first time it is a problem and the last time it is a tool, so the article has moved rather than circled.",
+        "2": "That is the relay paragraph, two paragraphs earlier.  The question asks what the LAST paragraph does, so check where your evidence actually sits.",
+        "3": "Relays fail is the reason for the backup, not a verdict on the whole article.  A sentence that admits a limit is usually setting up the next idea."
+      },
+      "explain": "The last paragraph adds a third fix rather than repeating anything.  A schedule makes a missed call mean something, which turns silence from a puzzle into a message.  Answering with a fact from an earlier paragraph means the question about position never got answered at all."
+    },
+    {
+      "id": "l2-ebsr-ambiguous-meaning",
+      "type": "ebsr",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-3-word-meanings"
+      ],
+      "coachTopic": "vocab-context",
+      "dok": 3,
+      "partA": {
+        "stem": "The article says that silence is ambiguous.  What does ambiguous mean here?",
+        "choices": [
+          "It can mean more than one thing, so it does not tell you which.",
+          "It is dangerous and should be treated as an emergency.",
+          "It happens whenever a team goes deeper than a radio can reach.",
+          "It cannot be heard clearly through the rock."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "The surface crew has no way to tell whether the team below is busy, out of range, or in serious trouble.",
+          "The result is called dead air, and it is more dangerous than a quiet radio sounds.",
+          "The deeper a team goes the less of the signal survives, and the fall is far steeper than most people expect.",
+          "Stone and soil and concrete absorb that energy instead and turn it quietly into heat."
+        ],
+        "key": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "Dangerous is a word from the sentence next door.  Nearby is not the same as the same, and the article is careful to say that trouble is only one of the possibilities.",
+        "2": "That is what causes the silence.  A word is not defined by what makes it happen.",
+        "3": "You defined the word by the rock instead of by the silence.  Ambiguous is about meaning, not about volume."
+      },
+      "explain": "Ambiguous means open to more than one reading, and the article shows this rather than stating it: busy, out of range, and in serious trouble all sound exactly alike from the surface.  Dangerous, deep, and muffled are each true of the tunnel, and none of them is what the word means."
+    },
+    {
+      "id": "l2-mc-overall-structure",
+      "type": "mc",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 2,
+      "stem": "Which phrase best names the way the whole article is organised?",
+      "choices": [
+        "Events in the order they happened",
+        "A problem, and then the fixes that answer it",
+        "Two crews compared side by side",
+        "A claim, and then the objections to it"
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "Nothing in this article happens on a timeline.  The relay paragraph is not later in time than the rock paragraph; it is an answer to it.",
+        "2": "There are two crews here, one below and one above, and the article never sets them against each other.  It uses both to show what the silence costs.",
+        "3": "Nobody argues back in this article.  Every paragraph after the second is building the fix rather than disputing it."
+      },
+      "explain": "Two paragraphs build a problem and three build the answer to it, which is the shape usually called problem and solution.  Nothing in the article happens in time order, nobody argues back, and the two crews are never set against each other."
+    },
+    {
+      "id": "l2-mc-dead-air-meaning",
+      "type": "mc",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-3-word-meanings"
+      ],
+      "coachTopic": "vocab-context",
+      "dok": 2,
+      "stem": "The article gives the name dead air to one particular situation.  Which situation?",
+      "choices": [
+        "Air in a tunnel that has gone stale and is no longer safe to breathe",
+        "The moment a battery in a handheld set finally runs out",
+        "Radio silence underground, where the silence could mean any one of several things",
+        "The gap between two relays in a long chain"
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "That is what the phrase sounds like it should mean, and it is the one meaning the article never gives it.  The definition is in the sentence right after the phrase.",
+        "1": "The article never blames a battery.  It blames rock, which is the whole reason a stronger radio is not the fix.",
+        "3": "Relays belong to the fix, not to the problem.  Dead air is named two paragraphs before relays appear at all."
+      },
+      "explain": "Dead air is the article's name for radio silence underground, and the danger in it is that the silence carries several possible meanings at once.  The phrase sounds as though it should be about breathing, which is exactly why the article defines it in the sentence that follows."
+    },
+    {
+      "id": "l2-mc-why-costs-come-first",
+      "type": "mc",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "stem": "Why does the paragraph about what a silent radio costs come before the paragraph about relays?",
+      "choices": [
+        "A reader has to see why the silence matters before a fix will seem worth the trouble.",
+        "It is the order the two crews would meet the problem in real life.",
+        "Relays are the harder idea, so the article saves the hardest paragraph for last.",
+        "The article is listing its ideas from the cheapest to the most expensive."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The article is not telling a story in time order.  Nothing in it happens before or after anything else, so the paragraphs must be arranged by idea instead.",
+        "2": "Relays are not the last paragraph, and the article never ranks its ideas by difficulty.  Check where a paragraph actually sits before deciding what it is doing there.",
+        "3": "The very first sentence says price has nothing to do with the problem.  Cost is the one order the article goes out of its way to rule out."
+      },
+      "explain": "The costs paragraph comes first because a fix nobody needs is not worth reading about.  Once you know a silent radio can mean three different things, a relay stops being equipment and becomes an answer.  The article is ordered by idea rather than by time, difficulty, or price."
+    },
+    {
+      "id": "l2-hot-relay-definition",
+      "type": "hottext",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-3-word-meanings"
+      ],
+      "coachTopic": "vocab-context",
+      "dok": 2,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that together tell you what a relay is and what it does.",
+      "spans": [
+        "The fix is not a more powerful radio, because power was never the problem that the rock created.",
+        "A relay is a small transmitter parked where it can hear both sides at once, usually just inside the entrance where the tunnel is still shallow.",
+        "The team below reaches the relay, the relay reaches the surface, and no single transmission has to cross the whole distance by itself.",
+        "The two crews agree on a fixed interval, usually fifteen minutes, at which the team below stops work and checks in.",
+        "Radio does not travel through rock."
+      ],
+      "key": [
+        1,
+        2
+      ],
+      "explain": "One sentence says what a relay is and the next says what it does, and together they make the definition.  Announcing a thing is not defining it, and the sentences about the schedule and about rock belong to other parts of the article."
+    },
+    {
+      "id": "l2-hot-cost-not-cause",
+      "type": "hottext",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that state what a crew LOSES when the radio goes silent, rather than explaining why the silence happens.",
+      "spans": [
+        "Stone and soil and concrete absorb that energy instead and turn it quietly into heat.",
+        "A team below cannot report what it has found or ask for the one tool it forgot.",
+        "A crew above cannot pass down a warning about weather, a flooded passage, or a change in the plan.",
+        "Thirty feet of granite will swallow a signal that would have crossed an entire valley above ground.",
+        "The fix is a relay."
+      ],
+      "key": [
+        1,
+        2
+      ],
+      "explain": "Two sentences name what each crew loses when the radio goes quiet, one for the team below and one for the crew above.  The others explain why the silence happens in the first place.  A cause and a cost do different jobs, and this article keeps them in different sentences."
+    },
+    {
+      "id": "l2-ms-signal-two-senses",
+      "type": "ms",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-3-word-meanings"
+      ],
+      "coachTopic": "vocab-context",
+      "dok": 3,
+      "stem": "Choose the three statements that are true about how this article uses the word signal.",
+      "choices": [
+        "It means the radio energy that a handheld set pushes out",
+        "It means something rock can absorb and turn quietly into heat",
+        "By the last paragraph it also means a missed check-in that tells the surface crew something",
+        "It means the hand gestures a team uses once the radios have failed",
+        "It means the fifteen-minute schedule the two crews agree on",
+        "It means the wire of a hardwired line taped along the wall"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "The article never mentions hand signals.  That is a sensible guess about tunnels, and a guess you cannot point at a sentence for.",
+        "4": "The schedule is what CREATES the signal in the last paragraph.  The signal is the call that does not come.",
+        "5": "A hardwired line carries a signal; it is not one.  Watch the difference between a thing and what it travels along."
+      },
+      "explain": "The article uses signal for the radio energy that rock absorbs, and then in the last paragraph for a missed call that means something on its own.  Watching one word pick up a second meaning inside a single article is most of what an academic vocabulary question is asking for."
+    },
+    {
+      "id": "l2-cloze-academic-words",
+      "type": "cloze",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-3-word-meanings"
+      ],
+      "coachTopic": "vocab-context",
+      "dok": 2,
+      "stem": "Fill in the words this article uses.  Silence underground is {{0}}, because a quiet radio can mean several different things at once, so the two crews agree on a fixed {{1}} and treat a call that does not come as information.",
+      "blanks": [
+        {
+          "choices": [
+            "ambiguous",
+            "reliable",
+            "redundant"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "baton",
+            "interval",
+            "relay"
+          ],
+          "key": 1
+        }
+      ],
+      "explain": "Both words are defined by the article itself rather than left to a dictionary.  Silence is ambiguous because it carries several possible meanings at once, and the interval is the agreed gap between check-ins that lets a missed call become information."
+    },
+    {
+      "id": "l2-order-article-parts",
+      "type": "order",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 2,
+      "stem": "Put the parts of the article in the order they appear.",
+      "tiles": [
+        "Relays, and how a chain of them carries a message out",
+        "Why a radio cannot get through rock in the first place",
+        "A fixed check-in schedule that turns silence into information",
+        "What a silent radio costs both crews, and why silence is ambiguous",
+        "A hardwired line, as the backup for when relays fail"
+      ],
+      "key": [
+        1,
+        3,
+        0,
+        4,
+        2
+      ],
+      "explain": "The article moves from the cause to the cost and then through three fixes, each one less dependent on the last: a relay, then a wire that still works when the relay does not, then a schedule that works when nothing electronic does.  Ordering the paragraphs here means ordering the ideas."
+    },
+    {
+      "id": "l3-ebsr-why-not-abort",
+      "type": "ebsr",
+      "passageId": "p-relay-room",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "partA": {
+        "stem": "Why does the narrator decide not to call the exercise off at ten twenty-one?",
+        "choices": [
+          "Nothing the narrator can actually see says Jonah is in trouble, and the delay has an ordinary explanation.",
+          "The rule allows waiting until ten twenty-two before the call has to be made.",
+          "The narrator is afraid of having to defend the decision for the rest of the year.",
+          "The two clicks arrive on the radio and show that Jonah is fine."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Nothing I can see from here says that he is in trouble.",
+          "The rule is that he checks in at ten twenty, and if nothing has come through by ten twenty-two I call the whole exercise off.",
+          "What is true is that I was one second away from a decision I would have had to defend for the rest of the year.",
+          "At ten twenty-two and eleven seconds, which is late, the radio clicks twice."
+        ],
+        "key": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "The rule sets the deadline; it does not make the decision.  The narrator is one second from calling it and stops for a reason the rule says nothing about.",
+        "2": "That sentence is about the decision NOT made, looking back afterwards.  Fear is in the passage, and the narrator names it as a reason calling it off feels safe, which is the opposite of what stops them.",
+        "3": "Check the clock.  The clicks land at ten twenty-two and eleven seconds, after the moment the question asks about.  Evidence that arrives later cannot be the reason for an earlier decision."
+      },
+      "explain": "The decision turns on what the narrator can and cannot see.  Nothing visible says trouble, and a front desk explains the delay perfectly well.  The rule, the fear, and the two clicks are all real, and the clicks in particular arrive after the decision had already been made."
+    },
+    {
+      "id": "l3-ebsr-first-person-effect",
+      "type": "ebsr",
+      "passageId": "p-relay-room",
+      "targets": [
+        "c1-lit-7-language-use"
+      ],
+      "coachTopic": "viewpoint-narrator",
+      "dok": 3,
+      "partA": {
+        "stem": "What does telling this story from inside the van, in the narrator's own voice, let the reader know that an outside view could not?",
+        "choices": [
+          "How little the narrator can actually see, and how much of the tension comes from not knowing.",
+          "What is happening to Jonah inside the museum while the narrator waits.",
+          "That the narrator is the calmest person on the exercise.",
+          "What Marchetti thinks of the narrator's decision afterwards."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "I can see the front doors from where I am parked, and I can see roughly four feet past them, and that is the whole of my view.",
+          "Jonah went in at ten fourteen and the lobby has a front desk.",
+          "I would like to say that I was calm about all of it.",
+          "So I do the thing Marchetti drilled into the whole group back in September."
+        ],
+        "key": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "The narrator knows the lobby has a front desk and knows when Jonah went in.  Everything after that is worked out from a parked van, which is exactly what this narration cannot show you.",
+        "2": "Read the next sentence.  Would like to say is an admission, not a claim, and the passage immediately says what is true instead.",
+        "3": "Marchetti is in the passage as training the narrator remembers, not as a person whose thoughts we get.  A name appearing is not the same as a viewpoint appearing."
+      },
+      "explain": "Being stuck inside the narrator's head is the whole point.  The view is the front doors and roughly four feet past them, so every reassurance in the passage is worked out rather than seen.  A narrator who says they would like to have been calm is admitting the opposite in the same breath."
+    },
+    {
+      "id": "l3-ebsr-only-solid-fact",
+      "type": "ebsr",
+      "passageId": "p-relay-room",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 3,
+      "partA": {
+        "stem": "By ten twenty-one, what does the narrator call the one solid fact rather than a guess?",
+        "choices": [
+          "Nobody who has come out of those doors has been Jonah.",
+          "The radio set is working, because the hiss is still underneath.",
+          "Jonah is standing somewhere in the building talking to somebody.",
+          "A desk means a person, and a person means questions."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Nobody who goes through that door is Jonah coming back out, which is the only solid fact I actually have.",
+          "That hiss is the only comfort in this job, because silence with no hiss underneath it means the set is dead and I am learning nothing at all.",
+          "Everything I can see from here says that he is standing somewhere talking to somebody.",
+          "A desk means a person, a person means questions, and questions take time that our plan never allowed for."
+        ],
+        "key": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "The hiss is called the only comfort, not the only fact.  Two sentences can sound alike and still be doing different jobs.",
+        "2": "Everything I can see says is the narrator flagging a conclusion.  You took the best available guess and promoted it to a fact, which is the exact move the passage is about resisting.",
+        "3": "That is a chain of reasoning the narrator builds out loud, not something observed.  It is good reasoning, and reasoning is still not observation."
+      },
+      "explain": "The narrator separates what is seen from what is worked out, and says which is which.  The hiss, the guess about talking, and the chain from desk to questions are all reasoning.  Only the door counts as a fact, because it is the one thing actually being watched."
+    },
+    {
+      "id": "l3-ebsr-offer-to-wait",
+      "type": "ebsr",
+      "passageId": "p-cover-story",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "partA": {
+        "stem": "Jonah offers to wait in the lobby while Ferris phones the education office.  Why is that a safe thing for him to offer?",
+        "choices": [
+          "Checking it would cost Ferris more trouble than the question is worth to her.",
+          "He is certain the permission letter really was sent last week.",
+          "He has already given a real school name, so what he says next will be believed.",
+          "Sounding relaxed is what Marchetti said a cover story is for."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "He does know that the education office is on the third floor, that it does not open until half past ten, and that Ferris would have to leave her desk to find out.",
+          "So Jonah says the letter went to the education office last week, and that he is happy to wait in the lobby while she phones them.",
+          "She asks which school he is from, and he tells her without any trouble at all.",
+          "Marchetti wrote it out that morning and said a cover story should be boring enough that nobody asks a second question."
+        ],
+        "key": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "That is Jonah speaking, not the story telling you something is true.  What a character says out loud is a move they are making, and one sentence later we learn he has no idea.",
+        "2": "An answer that went smoothly does not buy credit for the next one.  Ferris asks the harder question straight afterwards, which is how you know it did not.",
+        "3": "That is the general rule about being boring, and the question asks about this particular offer.  A rule explains why he stays calm; it does not explain why the offer works."
+      },
+      "explain": "The offer is safe because checking it is expensive for Ferris and free for Jonah.  A shut office, a third floor, and a desk she would have to leave are the whole of it.  What a character says is not evidence that it is true, and an earlier smooth answer buys nothing for a later one."
+    },
+    {
+      "id": "l3-mc-true-time-on-the-log",
+      "type": "mc",
+      "passageId": "p-cover-story",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 2,
+      "stem": "Why does Jonah write the real time, ten fifteen, on the visitor log when the name he writes is false?",
+      "choices": [
+        "The visitor log gets checked against the clock at the front desk.",
+        "A lie is easier to keep straight later when part of it is genuinely true.",
+        "He wants Ferris to see that he arrived before the museum got busy.",
+        "Marchetti's card told him to write down the time of the number fourteen bus."
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "Nobody in the story checks the log against anything.  You gave the museum a system the text never mentions.",
+        "2": "The story never says the museum gets busy, or that Jonah cares when it does.  Watch for reasons that sound sensible and are not on the page.",
+        "3": "The card has the bus on it, not a time.  Read the eleven words the story actually gives you before deciding what they told him to do."
+      },
+      "explain": "A true detail inside a false story is one fewer thing to keep straight, which is why the real time sits underneath the fake name.  The other answers each add a system, a motive, or an instruction that the story never puts on the page."
+    },
+    {
+      "id": "l3-mc-whose-head-we-are-in",
+      "type": "mc",
+      "passageId": "p-the-log",
+      "targets": [
+        "c1-lit-7-language-use"
+      ],
+      "coachTopic": "viewpoint-narrator",
+      "dok": 3,
+      "stem": "This story is told about Jonah rather than by him.  What does that let the reader see?",
+      "choices": [
+        "What both Jonah and Ines are thinking, the whole way through",
+        "Only what somebody standing in the doorway of the room could see",
+        "What Marchetti makes of each sheet as he collects it",
+        "Jonah's thinking, while Ines's reasons stay hidden until Jonah reads them"
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "Ines's thinking never appears.  All we get of her is what she writes and what she says out loud, and Jonah has to read her sheet upside down to get even that much.",
+        "1": "Somebody in the doorway could not know that Jonah finds Ines mildly insulting, or that he has been planning to say it was easy since the stairs.  The story goes inside one head.",
+        "2": "Marchetti collects the sheets without reading a single one, and the story never opens his thoughts.  What he makes of it is exactly what Jonah, and the reader, cannot see."
+      },
+      "explain": "The story stays inside Jonah.  Ines is given no thoughts at all, which is why he has to read her sheet upside down to find out what she wrote, and Marchetti hands his back with no expression.  That limit is what makes the ending land."
+    },
+    {
+      "id": "l3-mc-why-add-the-line",
+      "type": "mc",
+      "passageId": "p-the-log",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "stem": "Jonah asks for his sheet back and adds one more line.  What has he worked out?",
+      "choices": [
+        "A log that leaves out the part he could not explain is no use to whoever reads it next.",
+        "He wants Marchetti to see that his sheet is longer than Ines's.",
+        "He has decided the thirty seconds on the landing were dangerous after all.",
+        "He is copying Ines, because hers was the sheet that got read."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Marchetti collects the sheets without reading a single one, and says so.  Length cannot be the point of something nobody marks.",
+        "2": "The line he writes says cause unknown and no action taken.  He still does not know what the sound was; what changed is that he wrote it down anyway.",
+        "3": "Nobody's sheet got read.  Ines shows him what a complete log looks like, which is not the same as him copying her to be noticed."
+      },
+      "explain": "Jonah adds the line because Marchetti has just said who a log is for.  It is not for the marker, because nobody marks it.  It is for the next person standing on a landing, and the least impressive sentence on the sheet is the only one that helps them."
+    },
+    {
+      "id": "l3-hot-inside-the-head",
+      "type": "hottext",
+      "passageId": "p-relay-room",
+      "targets": [
+        "c1-lit-7-language-use"
+      ],
+      "coachTopic": "viewpoint-narrator",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that report something happening inside the narrator's own head, rather than something anybody sitting in that van could have seen.",
+      "spans": [
+        "I watch those doors the way you watch a kettle that is refusing to boil.",
+        "It only feels safe because if I call it and I am wrong, the exercise dies quietly, everybody goes home early, and nothing bad ever happens to me.",
+        "A man in a green jacket goes in and does not come out.",
+        "Two women come out with a folded stroller between them.",
+        "I sit in a parked van with a radio, a stopwatch, and a paper map, and I write down times."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Two of these report something only the narrator could know: a comparison nobody else hears, and a motive nobody else could see.  The van, the man in the green jacket, and the women with the stroller would all have shown up on a camera."
+    },
+    {
+      "id": "l3-hot-left-off-the-sheet",
+      "type": "hottext",
+      "passageId": "p-the-log",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 2,
+      "mode": "word",
+      "stem": "Tap the three phrases that belong to the part Jonah did not write down at first.  The others were on his sheet from the start.",
+      "spans": [
+        "on the second floor landing",
+        "heard a door close",
+        "did absolutely nothing",
+        "contact with front desk staff",
+        "the folder located and photographed",
+        "exit at ten forty-one"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Everything on the first sheet is true, and the thirty seconds on the landing is what is missing from it.  A door, a rail, and half a minute of doing nothing are the whole omission, and Jonah only writes them down once Marchetti has explained who the log is for."
+    },
+    {
+      "id": "l3-ms-why-the-offer-works",
+      "type": "ms",
+      "passageId": "p-cover-story",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "stem": "Jonah's offer to wait works because of things he knows and Ferris does not.  Choose the three the story actually gives him.",
+      "choices": [
+        "The education office does not open until half past ten",
+        "Ferris would have to leave her desk to find out",
+        "What he offered can be checked, so it does not sound invented on the spot",
+        "Ferris has already telephoned his school once that morning",
+        "The permission letter really was sent to the office last week",
+        "There is nobody else at the front desk who could cover for her"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "Ferris never telephones anybody in this story.  Adding that makes the moment far safer than it was, and the risk that she might is the whole scene.",
+        "4": "Jonah has no idea whether that letter exists.  What a character says out loud is not automatically true, even when saying it works.",
+        "5": "The story never says whether anyone else works that desk.  It is a fair guess, and this question is asking for what is on the page instead."
+      },
+      "explain": "Three facts sit behind the offer and Jonah holds all three: the office is shut, it is two floors up, and checking it means abandoning the desk.  A guess about staffing and a hope about a letter are not the same kind of thing at all."
+    },
+    {
+      "id": "l3-cloze-narration-limits",
+      "type": "cloze",
+      "passageId": "p-the-log",
+      "targets": [
+        "c1-lit-7-language-use"
+      ],
+      "coachTopic": "viewpoint-narrator",
+      "dok": 2,
+      "stem": "Complete the sentence about how this story is told.  The reader is given Jonah's thoughts about the landing, but of Ines we get only {{0}}, which is why her reasoning has to be read {{1}} before Jonah understands what a complete log looks like.",
+      "blanks": [
+        {
+          "choices": [
+            "what he can see and hear",
+            "everything she is feeling",
+            "what Marchetti says about her"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "out loud to the whole room",
+            "upside down across the table",
+            "after the debrief has ended"
+          ],
+          "key": 1
+        }
+      ],
+      "explain": "The story gives Jonah's thoughts and gives Ines only what he can see and hear, which is why her reasoning arrives sideways, read upside down across a table.  A narrator's limits are part of what a story is doing rather than an accident of the telling."
+    },
+    {
+      "id": "l3-short-who-the-log-is-for",
+      "type": "shorttext",
+      "passageId": "p-the-log",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 2,
+      "stem": "Marchetti says a log is only ever for one person.  In four words or fewer, who is that?",
+      "accept": [
+        "the next person",
+        "next person",
+        "whoever comes next",
+        "whoever is next",
+        "the person after"
+      ],
+      "maxWords": 4,
+      "explain": "Marchetti says the logs are not marked and never have been, so a log is not written for him.  It is written for whoever is next on a landing, wondering whether a sound they just heard matters."
+    }
+  ]
 }
