@@ -9,7 +9,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Math Multiverse</title>
+<title>Multiverse</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ee1d52'/%3E%3Ctext x='16' y='22' font-family='system-ui' font-size='15' font-weight='800' fill='white' text-anchor='middle'%3EM%C2%B7M%3C/text%3E%3C/svg%3E">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -90,6 +90,15 @@
     /* Trimmed top/bottom padding (was 16 / 40) to hand vertical space to
        the play area on the 768px-tall iPad without touching module logic. */
     padding: 10px 24px 16px;
+    /* Exactly the viewport, not a minimum. This is what makes .host-frame's height definite further
+       down: a `min-height` here leaves #app content-sized, main's flex height circular, and the frame
+       falls back to auto -- measured, that ballooned the frame to 841px and pushed the page 212px
+       over, which is worse than the 13px it was meant to fix. box-sizing is border-box globally, so
+       the 26px of vertical padding is inside this height rather than added to it. */
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
   }
 
   /* HEADER */
@@ -101,6 +110,7 @@
     margin-bottom: 12px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border-subtle);
+    flex: 0 0 auto;   /* the header keeps its own height; only the play area flexes */
   }
   .brand { display: flex; align-items: center; gap: 12px; }
   .brand-mark {
@@ -290,8 +300,29 @@
   }
 
   /* SCREENS */
+  /* main and the module screen are the rest of the flex chain that gives .host-frame a definite
+     height. main scrolls internally because #app is now exactly the viewport: without this a launcher
+     taller than the screen would be unreachable rather than scrollable, which is a real regression on
+     a narrow window where the card grid collapses to one column. The scrollbar moves from the page to
+     main; the header stays put. */
+  #app > main {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
   .screen { display: none; animation: fadein 0.3s ease-out; }
   .screen.active { display: block; }
+  /* Only the module screen becomes a flex column. The launcher and levels screens stay display:block
+     so their layout is untouched. An id plus a class outranks .screen.active, so this wins without
+     !important. */
+  #screen-module.active {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
   @keyframes fadein {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -438,19 +469,21 @@
   .lvl-best { color: var(--text-secondary); font-size: 0.78rem; margin-top: 8px; font-weight: 600; }
   .lock-overlay { position: absolute; bottom: 10px; right: 14px; font-size: 13px; color: var(--text-muted); }
 
-  /* MODULE HOST */
-  #module-host {
-    width: 100%;
-    min-height: calc(100vh - 100px);
-    min-height: calc(100dvh - 100px);
-    position: relative;
-  }
+  /* MODULE HOST
+     The module screen is a flex column from #app down to .host-frame, so the frame is whatever
+     vertical space is actually left rather than a guess at the chrome around it. The guess it
+     replaces was `calc(100vh - 160px)`, and 160px was right in none of the three environments ever
+     measured: the chrome is 139px in Chrome on Windows, 173px in CI's Linux Chromium, and unknown in
+     Safari. A frame that fills the remaining space is correct in all three by construction.
+     `min-height: 0` appears on every item that has to shrink, because a flex item will not shrink
+     below its content without it, which is the usual reason this pattern still overflows. */
   .host-toolbar {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     margin-bottom: 16px;
     gap: 16px;
+    flex: 0 0 auto;
   }
   .host-title {
     text-align: center;
@@ -460,8 +493,10 @@
   }
   .host-frame {
     width: 100%;
-    height: calc(100vh - 160px);
-    height: calc(100dvh - 160px);
+    /* No height. The frame takes the space left after .host-toolbar; see the MODULE HOST note above.
+       overflow:hidden stays: it is what stops a module bleeding past its box. */
+    flex: 1 1 auto;
+    min-height: 0;
     border: 1px solid var(--border-subtle);
     border-radius: 14px;
     background: var(--bg-base);
@@ -2836,7 +2871,13 @@
     .host-toolbar { grid-template-columns: 1fr; }
     .host-title { text-align: left; }
   }
+
+  /* Duplicated deliberately from engine/engine.css. The launcher is the math game's front door and must
+     not depend on an engine asset arriving: with the stylesheet missing, this container falls back to
+     .module-grid's display:grid and confines each shelf to a third-width track, giving 96px cards. */
+  #module-grid { display: block; }
 </style>
+<link rel="stylesheet" href="engine/engine.css">
 </head>
 <body>
 
@@ -2845,7 +2886,7 @@
     <div class="brand">
       <div class="brand-mark">M·M</div>
       <div class="brand-text">
-        <h1>Math Multiverse</h1>
+        <h1>Multiverse</h1>
         <p id="grade-subtitle">5th grade CCSS practice across six themed worlds</p>
       </div>
     </div>
@@ -2942,6 +2983,9 @@
   </div>
 </div>
 
+<script src="engine/items.js"></script>
+<script src="engine/pack.js"></script>
+<script src="engine/runner.js"></script>
 <script>
 'use strict';
 
@@ -3170,8 +3214,8 @@ let ACTIVE_GRADE = (() => {
   catch (e) { return 5; }
 })();
 const GRADE_SUBTITLE = {
-  5: '5th grade CCSS practice across six themed worlds',
-  6: '6th grade CCSS practice across six themed worlds',
+  5: '5th grade CCSS practice across themed worlds',
+  6: '6th grade CCSS practice across themed worlds',
 };
 // Overlay a module's grade-6 fields (its `g6` block) when Grade 6 is active. Modules
 // without a g6 block are not yet available in Grade 6 (rendered as "coming soon").
@@ -3537,66 +3581,153 @@ function renderHeader() {
   }
 }
 
+// Shelves are built at boot: the math shelf from MODULES, one shelf per subject found in the pack
+// manifest. A subject with no packs yet is not rendered at all rather than shown as empty.
+let SHELVES = [{ subject: 'math', label: 'Math', packs: [] }];
+
+const SUBJECT_LABELS = { ela: 'English', sci: 'Science', hist: 'History' };
+// Math first, Justin's call 26-0725: the six worlds Niall already plays stay at the top of the launcher
+// where they have always been, and every new subject is an addition below them rather than something that
+// displaces his game. New subjects append here.
+const SUBJECT_ORDER = ['math', 'ela', 'sci', 'hist'];
+
+function buildShelves(manifest) {
+  const bySubject = {};
+  for (const p of (manifest && manifest.packs) || []) {
+    (bySubject[p.subject] || (bySubject[p.subject] = [])).push(p);
+  }
+  const out = [];
+  for (const subj of SUBJECT_ORDER) {
+    if (subj === 'math') { out.push({ subject: 'math', label: 'Math', packs: [] }); continue; }
+    if (bySubject[subj] && bySubject[subj].length) {
+      out.push({ subject: subj, label: SUBJECT_LABELS[subj] || subj, packs: bySubject[subj] });
+    }
+  }
+  SHELVES = out;
+  return out;
+}
+
+function mathCardNode(m) {
+  const v = gradeView(m);
+  const comingSoon = !v._g6ready;
+  const ms = Save.state.modules[m.id];
+  const unlocked = !comingSoon && Save.isModuleUnlocked(m.id);
+  const cleared = ms.levelsCleared;
+  const total = v.levels.length;
+  const stars = ms.levelStars.reduce((a, b) => a + b, 0);
+  const maxStars = total * 3;
+
+  const card = document.createElement('div');
+  card.className = 'module-card' + (unlocked ? '' : ' locked');
+  card.style.setProperty('--card-color', m.color);
+
+  const dotsHtml = v.levels.map((_, idx) => {
+    let cls = 'lvl-dot';
+    if (!comingSoon && idx < cleared) cls += ' cleared';
+    else if (!comingSoon && idx === cleared && unlocked) cls += ' current';
+    return `<span class="${cls}"></span>`;
+  }).join('');
+
+  const subtitle = comingSoon
+    ? `<em style="opacity:0.85;">Grade 6 campaign coming soon</em>`
+    : (unlocked ? v.description : `<em style="opacity:0.85;">${v.lockedMessage || 'Locked'}</em>`);
+
+  const action = comingSoon
+    ? '🔒 SOON'
+    : (unlocked ? (cleared === total ? '★ COMPLETED' : 'PLAY →') : '🔒');
+
+  const iconHtml = v.logoUrl
+    ? `<img class="mc-logo" src="${v.logoUrl}" alt="${v.domain}" loading="lazy" onerror="this.outerHTML = '<div class=&quot;mc-icon&quot;>${v.icon}</div>';">`
+    : `<div class="mc-icon">${v.icon}</div>`;
+
+  card.innerHTML = `
+    <div class="mc-header">
+      ${iconHtml}
+      <div class="mc-ccss">CCSS ${v.ccss}</div>
+    </div>
+    <div class="mc-title">${v.name}</div>
+    <div class="mc-subtitle">${subtitle}</div>
+    <div class="mc-progress">${dotsHtml}</div>
+    <div class="mc-footer">
+      <span class="mc-stars">${stars} / ${maxStars} ★</span>
+      <span class="mc-action">${action}</span>
+    </div>
+  `;
+
+  if (unlocked) card.addEventListener('click', () => openModule(m.id));
+  return card;
+}
+
+function packCardNode(entry) {
+  const PS = MVPack.PackSave;
+  const st = PS.stateFor(entry.id, entry.levels);
+  const unlocked = PS.isUnlocked(entry);
+  const cleared = st.levelsCleared;
+  const total = entry.levels;
+  const stars = st.levelStars.reduce((a, b) => a + (b | 0), 0);
+
+  const card = document.createElement('div');
+  card.className = 'module-card' + (unlocked ? '' : ' locked');
+  card.style.setProperty('--card-color', entry.color);
+
+  const dotsHtml = Array.from({ length: total }, (_, idx) => {
+    let cls = 'lvl-dot';
+    if (idx < cleared) cls += ' cleared';
+    else if (idx === cleared && unlocked) cls += ' current';
+    return `<span class="${cls}"></span>`;
+  }).join('');
+
+  card.innerHTML = `
+    <div class="mc-header">
+      <div class="mc-icon">${entry.icon}</div>
+      <div class="mc-ccss">${entry.standards || 'CCSS ' + entry.subject.toUpperCase() + ' ' + entry.grade}</div>
+    </div>
+    <div class="mc-title">${entry.title}</div>
+    <div class="mc-subtitle">${unlocked ? entry.description : `<em style="opacity:0.85;">${entry.lockedMessage || 'Locked'}</em>`}</div>
+    <div class="mc-progress">${dotsHtml}</div>
+    <div class="mc-footer">
+      <span class="mc-stars">${stars} / ${total * 3} ★</span>
+      <span class="mc-action">${unlocked ? (cleared === total ? '★ COMPLETED' : 'PLAY →') : '🔒'}</span>
+    </div>
+  `;
+
+  if (unlocked) card.addEventListener('click', () => openPack(entry.id));
+  return card;
+}
+
 function renderLauncher() {
   const grid = $('module-grid');
   grid.innerHTML = '';
-  for (let i = 0; i < MODULES.length; i++) {
-    const m = MODULES[i];
-    const v = gradeView(m);
-    const comingSoon = !v._g6ready;
-    const ms = Save.state.modules[m.id];
-    const unlocked = !comingSoon && Save.isModuleUnlocked(m.id);
-    const cleared = ms.levelsCleared;
-    const total = v.levels.length;
-    const stars = ms.levelStars.reduce((a, b) => a + b, 0);
-    const maxStars = total * 3;
+  for (const shelf of SHELVES) {
+    const wrap = document.createElement('div');
+    wrap.className = 'subject-shelf';
+    wrap.dataset.subject = shelf.subject;
+    const label = document.createElement('div');
+    label.className = 'shelf-label';
+    label.textContent = shelf.label;
+    wrap.appendChild(label);
 
-    const card = document.createElement('div');
-    card.className = 'module-card' + (unlocked ? '' : ' locked');
-    card.style.setProperty('--card-color', m.color);
-
-    const dotsHtml = v.levels.map((_, idx) => {
-      let cls = 'lvl-dot';
-      if (!comingSoon && idx < cleared) cls += ' cleared';
-      else if (!comingSoon && idx === cleared && unlocked) cls += ' current';
-      return `<span class="${cls}"></span>`;
-    }).join('');
-
-    const subtitle = comingSoon
-      ? `<em style="opacity:0.85;">Grade 6 campaign coming soon</em>`
-      : (unlocked ? v.description : `<em style="opacity:0.85;">${v.lockedMessage || 'Locked'}</em>`);
-
-    const action = comingSoon
-      ? '🔒 SOON'
-      : (unlocked ? (cleared === total ? '★ COMPLETED' : 'PLAY →') : '🔒');
-
-    const iconHtml = v.logoUrl
-      ? `<img class="mc-logo" src="${v.logoUrl}" alt="${v.domain}" loading="lazy" onerror="this.outerHTML = '<div class=&quot;mc-icon&quot;>${v.icon}</div>';">`
-      : `<div class="mc-icon">${v.icon}</div>`;
-
-    card.innerHTML = `
-      <div class="mc-header">
-        ${iconHtml}
-        <div class="mc-ccss">CCSS ${v.ccss}</div>
-      </div>
-      <div class="mc-title">${v.name}</div>
-      <div class="mc-subtitle">${subtitle}</div>
-      <div class="mc-progress">${dotsHtml}</div>
-      <div class="mc-footer">
-        <span class="mc-stars">${stars} / ${maxStars} ★</span>
-        <span class="mc-action">${action}</span>
-      </div>
-    `;
-
-    if (unlocked) {
-      card.addEventListener('click', () => openModule(m.id));
+    const inner = document.createElement('div');
+    inner.className = 'module-grid';
+    if (shelf.subject === 'math') {
+      for (const m of MODULES) inner.appendChild(mathCardNode(m));
+    } else {
+      // A pack belongs to one grade. SHELVES stays the complete registry, because openPack and
+      // exitToLevels look packs up in it and must still resolve one that is open when the grade flips;
+      // it is only the launcher that hides what does not belong to the campaign on screen. Filtering
+      // inside buildShelves instead would hide a grade-6 pack forever from anyone who booted on grade 5,
+      // because the grade toggle re-renders but never rebuilds the shelves.
+      const visible = (shelf.packs || []).filter(p => p.grade === ACTIVE_GRADE);
+      if (!visible.length) continue;          // an empty shelf is noise, not an empty state
+      for (const entry of visible) inner.appendChild(packCardNode(entry));
     }
-
-    grid.appendChild(card);
+    wrap.appendChild(inner);
+    grid.appendChild(wrap);
   }
 }
 
 function openModule(moduleId) {
+  currentPackId = null;
   currentModuleId = moduleId;
   const m = MODULES.find(x => x.id === moduleId);
   if (!m) return;
@@ -3604,6 +3735,85 @@ function openModule(moduleId) {
   $('lvl-select-title').textContent = v.name;
   $('lvl-select-subtitle').textContent = `${v.domain} · CCSS ${v.ccss} · grand goal: ${v.grandGoal}`;
   renderLevels();
+  showScreen('levels');
+}
+
+let currentPackId = null;
+
+// Opening a pack loads its body on first use, registers it under its own id so the existing
+// InlineModules dispatch finds it, then shows the level select.
+async function openPack(packId) {
+  const entry = (SHELVES.flatMap(s => s.packs || [])).find(p => p.id === packId);
+  if (!entry) return;
+  currentPackId = packId;
+  currentModuleId = null;
+  let pack;
+  try {
+    pack = await MVPack.loadPack(packId);
+  } catch (e) {
+    // The child may have tapped somewhere else while this was in flight. Painting an error over the
+    // screen they moved to is worse than saying nothing.
+    if (currentPackId !== packId) return;
+    // A failed fetch must say so on the screen the child is actually looking at. We just switched to
+    // 'levels', so the message belongs in #level-grid. #host-frame lives on the MODULE screen, so
+    // writing there would leave the levels screen showing the previous module's grid and put the error
+    // somewhere nobody is looking -- which is exactly the blank-screen failure this block exists to
+    // prevent. The title is set too, so the screen is not captioned with a stale module name.
+    showScreen('levels');
+    $('lvl-select-title').textContent = entry.title;
+    $('lvl-select-subtitle').textContent = '';
+    const grid = $('level-grid');
+    if (grid) grid.innerHTML = `<div class="host-placeholder">Could not load ${entry.title}.<br>${String(e.message || e)}</div>`;
+    return;
+  }
+  // Same check on the success path: this render calls showScreen and would yank the child out of
+  // whatever they started while the fetch was running.
+  if (currentPackId !== packId) return;
+  MVRunner.register(pack, InlineModules);
+  renderPackLevels(entry, pack);
+}
+
+function renderPackLevels(entry, pack) {
+  currentPackId = entry.id;
+  currentModuleId = null;
+  const PS = MVPack.PackSave;
+  const st = PS.stateFor(entry.id, pack.levels.length);
+  // The levels screen's real element ids, verified against the shell: the title is `lvl-select-title`,
+  // the subtitle `lvl-select-subtitle`, and the grid `level-grid` (singular). There is no `levels-title`
+  // and no `levels-grid`; writing to those would throw on a null before a single card rendered.
+  $('lvl-select-title').textContent = entry.title;
+  $('lvl-select-subtitle').textContent =
+    `${entry.subjectLabel} \u00b7 ${entry.standards} \u00b7 grand goal: ${entry.grandGoal}`;
+  const grid = $('level-grid');
+  grid.innerHTML = '';
+  pack.levels.forEach((lv, i) => {
+    const open = i <= st.levelsCleared;
+    const stars = st.levelStars[i];
+    const best = st.levelBest[i];
+    const card = document.createElement('div');
+    card.className = 'level-card' + (open ? '' : ' locked');
+    card.style.setProperty('--card-color', entry.color);
+    // Same class family and same node order as the math level cards at line 3628, because the shell's CSS
+    // styles `lvl-*`. An `lc-*` card grid would render three unstyled divs: `lc-num`, `lc-name` and
+    // `lc-goal` appear nowhere in the file, and `lc-stars`/`lc-star` are styled for the completion screen.
+    card.innerHTML = `
+      <div class="lvl-num">LEVEL ${lv.id}</div>
+      <div class="lvl-name">${lv.name}</div>
+      <div class="lvl-goal">${lv.goal}</div>
+      <div class="lvl-meta">
+        <div class="lvl-stars">
+          <span class="lvl-star ${stars >= 1 ? 'earned' : ''}">★</span>
+          <span class="lvl-star ${stars >= 2 ? 'earned' : ''}">★</span>
+          <span class="lvl-star ${stars >= 3 ? 'earned' : ''}">★</span>
+        </div>
+        <span class="lvl-q-count">${lv.questions} Q</span>
+      </div>
+      ${best != null ? `<div class="lvl-best">Best: ${best}</div>` : ''}
+      ${!open ? `<div class="lock-overlay">🔒 Beat L${i} first</div>` : ''}
+    `;
+    if (open) card.addEventListener('click', () => playLevel(i));
+    grid.appendChild(card);
+  });
   showScreen('levels');
 }
 
@@ -3659,6 +3869,27 @@ function disposeActiveModule() {
 }
 
 function playLevel(levelIndex) {
+  // Pack levels dispatch through the same InlineModules contract as the math modules.
+  if (currentPackId) {
+    const pack = MVPack.get(currentPackId);
+    const entry = (SHELVES.flatMap(s => s.packs || [])).find(p => p.id === currentPackId);
+    if (!pack || !entry) return;
+    disposeActiveModule();
+    const lv = pack.levels[levelIndex];
+    $('host-title').textContent = `${entry.title} — L${levelIndex + 1}: ${lv.name}`;
+    showScreen('module');
+    const host = $('host-frame');
+    host.innerHTML = '';
+    activeModuleCleanup = InlineModules[currentPackId].init(host, levelIndex, {
+      onComplete: (score, stars) => {
+        renderHeader();
+        showPackLevelComplete(entry, pack, levelIndex, score, stars);
+      },
+      onExit: () => { disposeActiveModule(); renderPackLevels(entry, pack); },
+    });
+    return;
+  }
+
   const m = MODULES.find(x => x.id === currentModuleId);
   if (!m) return;
 
@@ -3752,8 +3983,44 @@ function showGrandComplete(module) {
   $('lc-launcher').addEventListener('click', exitToLauncher);
 }
 
-function exitToLevels()   { disposeActiveModule(); showScreen('levels');   renderLevels(); }
-function exitToLauncher() { disposeActiveModule(); showScreen('launcher'); renderLauncher(); renderHeader(); }
+function showPackLevelComplete(entry, pack, levelIndex, score, stars) {
+  disposeActiveModule();
+  const host = $('host-frame');
+  const lv = pack.levels[levelIndex];
+  const isLast = levelIndex === pack.levels.length - 1;
+  const starsHtml = [1, 2, 3].map(n => `<span class="lc-star ${stars >= n ? 'earned' : ''}">★</span>`).join('');
+  host.innerHTML = `
+    <div class="level-complete" style="--card-color: ${entry.color};">
+      <div class="lc-headline">${stars > 0 ? 'LEVEL CLEARED' : 'NOT QUITE'}</div>
+      <div class="lc-level">L${lv.id} &middot; ${lv.name}</div>
+      <div class="lc-stars">${starsHtml}</div>
+      <div class="lc-score">Score: <strong>${score}</strong></div>
+      <div class="lc-actions">
+        <button class="btn btn-secondary" id="lc-back">&larr; Levels</button>
+        <button class="btn btn-secondary" id="lc-retry">Retry</button>
+        ${stars > 0 && !isLast ? `<button class="btn btn-primary" id="lc-next">Next Level &rarr;</button>` : ''}
+      </div>
+    </div>
+  `;
+  const back = $('lc-back');   if (back)  back.addEventListener('click', () => renderPackLevels(entry, pack));
+  const retry = $('lc-retry'); if (retry) retry.addEventListener('click', () => playLevel(levelIndex));
+  const next  = $('lc-next');  if (next)  next.addEventListener('click', () => playLevel(levelIndex + 1));
+}
+
+function exitToLevels() {
+  disposeActiveModule();
+  // A pack is not in MODULES, so renderLevels() would find nothing and return silently, leaving the
+  // previous module's grid on screen. Route by whichever context is open; openPack and openModule keep
+  // currentPackId and currentModuleId mutually exclusive.
+  if (currentPackId) {
+    const entry = (SHELVES.flatMap(sh => sh.packs || [])).find(p => p.id === currentPackId);
+    const pack = MVPack.get(currentPackId);
+    if (entry && pack) { renderPackLevels(entry, pack); return; }   // this calls showScreen itself
+  }
+  showScreen('levels');
+  renderLevels();
+}
+function exitToLauncher() { currentPackId = null; disposeActiveModule(); showScreen('launcher'); renderLauncher(); renderHeader(); }
 
 // ============================================================
 // EVENT WIRING
@@ -10416,8 +10683,6 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 document.addEventListener('DOMContentLoaded', () => {
   Save.load();
   Save.beginSession();
-  renderHeader();
-  renderLauncher();
 
   $('btn-back-launcher').addEventListener('click', exitToLauncher);
   $('btn-back-levels').addEventListener('click', exitToLevels);
@@ -10507,6 +10772,32 @@ document.addEventListener('DOMContentLoaded', () => {
   $('btn-coach-close').addEventListener('click', () => {
     $('coach-modal').style.display = 'none';
   });
+
+  // Render the math game before anything optional runs, and after every listener above is wired. The
+  // math save holds months of a real child's progress and this handler is what makes the page work at
+  // all; nothing below may be able to prevent it.
+  buildShelves(null);
+  renderLauncher();
+  renderHeader();
+
+  // The pack layer is optional and lives in separate files that may simply not be there: a copied HTML
+  // without its engine/ folder, a partial sync, one dropped request. localStorage can also throw outright
+  // (Safari, Block All Cookies), and probing `typeof localStorage` is itself what throws. So guard the
+  // whole thing, and let every failure degrade to the math game rather than to a blank page.
+  try {
+    if (typeof MVPack === 'undefined') throw new Error('engine scripts did not load');
+    MVPack.PackSave.load();
+    MVPack.loadManifest()
+      .then(m => { buildShelves(m); renderLauncher(); renderHeader(); })
+      .catch(e => {
+        console.warn('packs unavailable, math only:', e && e.message);
+        // renderLauncher clears the grid before it builds, so a throw inside the then above can leave it
+        // empty. Rebuild math-only rather than leaving whatever half-state it reached.
+        buildShelves(null); renderLauncher(); renderHeader();
+      });
+  } catch (e) {
+    console.warn('pack layer unavailable, math only:', e && e.message);
+  }
 });
 
 // Topic display labels for stats UI

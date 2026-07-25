@@ -1,0 +1,144 @@
+/* engine.css -- styles for the pack engine only. Every selector is namespaced .mv-* so it cannot
+   collide with the six math modules' .fr-/.f1-/.rc-/.mb-/.rk-/.fb- classes. Colours come from the
+   shell's existing custom properties so a pack inherits the app's look, with --mv-color set per
+   pack from its skin. */
+
+.mv-shell { display: flex; flex-direction: column; gap: 8px; height: 100%; min-height: 0; }
+
+.mv-bar { display: flex; align-items: center; justify-content: space-between; flex: 0 0 auto; }
+.mv-prog { font-size: 0.82rem; color: var(--text-secondary); letter-spacing: 0.04em; }
+.mv-hearts { display: flex; gap: 4px; }
+.mv-heart { color: var(--mv-color, #7aa8ff); font-size: 0.9rem; }
+.mv-heart.spent { color: var(--border-subtle); }
+
+/* The passage scrolls inside its own box so the item and the NEXT button never leave the screen on
+   a 1024x768 iPad. This is the layout rule that kept breaking in the math modules. */
+.mv-passage {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle);
+  border-radius: 8px; padding: 10px 12px;
+}
+.mv-passage-title { font-weight: 700; margin-bottom: 6px; color: var(--mv-color, #7aa8ff); }
+.mv-para { margin: 0 0 8px; line-height: 1.5; font-size: 0.95rem; }
+
+.mv-item { flex: 0 0 auto; }
+.mv-stem { font-weight: 600; margin: 6px 0 8px; line-height: 1.35; }
+.mv-hint { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px; }
+
+.mv-choices { display: flex; flex-direction: column; gap: 5px; }
+.mv-choice {
+  display: flex; gap: 8px; align-items: flex-start; text-align: left; width: 100%;
+  padding: 7px 10px; border-radius: 7px; cursor: pointer; font: inherit;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); color: inherit;
+}
+.mv-choice-letter { font-weight: 700; opacity: 0.65; min-width: 1.1em; flex: 0 0 auto; }
+/* flex:1 plus min-width:0 is load-bearing, not tidiness. A flex child will not shrink below its
+   content width by default, so without this a long option refuses to wrap and overflows the button.
+   EBSR Part B options are entire sentences lifted from the passage, so this is the common case, not
+   the edge case. Same reason for .mv-tile-text below. */
+.mv-choice-text { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.mv-choice.sel { border-color: var(--mv-color, #7aa8ff); background: rgba(120,170,255,0.14); }
+.mv-choice.correct { border-color: #3ddc84; background: rgba(61,220,132,0.16); }
+.mv-choice.wrong { border-color: #ff5c5c; background: rgba(255,92,92,0.14); }
+/* The third EBSR state: the child's evidence genuinely supported their own answer, which was itself
+   wrong. Amber, not red, because the reasoning was sound and the grader explicitly credits it. Painting
+   this red would contradict the note the child is reading at the same moment. */
+.mv-choice.consistent { border-color: #ff9d3c; background: rgba(255,157,60,0.16); }
+.mv-choice:disabled { cursor: default; }
+
+.mv-part { margin-bottom: 8px; }
+/* .mv-part-a and .mv-part-b carry no rules on purpose: they are targeting hooks for a later phase,
+   and .mv-part already supplies the spacing both need. Same for .mv-th-corner, which .mv-table th
+   already covers. */
+.mv-part-label {
+  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--mv-color, #7aa8ff); font-weight: 700;
+}
+
+.mv-hottext { line-height: 1.6; }
+.mv-span { cursor: pointer; border-radius: 4px; padding: 1px 2px; }
+.mv-span.sel { background: rgba(120,170,255,0.22); outline: 1px solid var(--mv-color, #7aa8ff); }
+.mv-span.correct { background: rgba(61,220,132,0.22); outline: 1px solid #3ddc84; }
+.mv-span.wrong { background: rgba(255,92,92,0.2); outline: 1px solid #ff5c5c; }
+
+.mv-table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+.mv-table th, .mv-table td { border: 1px solid var(--border-subtle); padding: 5px 7px; }
+.mv-th-row { text-align: left; font-weight: 500; }
+.mv-cell { cursor: pointer; text-align: center; min-width: 48px; }
+.mv-cell.sel::after { content: '\2713'; color: var(--mv-color, #7aa8ff); font-weight: 700; }
+.mv-cell.correct { background: rgba(61,220,132,0.16); }
+.mv-cell.correct::after { content: '\2713'; color: #3ddc84; font-weight: 700; }
+.mv-cell.wrong { background: rgba(255,92,92,0.14); }
+.mv-cell.wrong::after { content: '\2717'; color: #ff5c5c; font-weight: 700; }
+
+.mv-tiles { display: flex; flex-wrap: wrap; gap: 5px; margin: 4px 0; }
+.mv-line { min-height: 34px; padding: 3px; border: 1px dashed var(--border-subtle); border-radius: 7px; }
+/* The bank is where unplaced tiles wait. It needs to read as a different zone from the arrangement
+   line above it, or the kid cannot tell which tiles are already placed. */
+.mv-bank { padding: 3px; opacity: 0.92; }
+.mv-tile {
+  display: inline-flex; gap: 6px; align-items: center; padding: 5px 9px; border-radius: 6px;
+  font: inherit; cursor: pointer; color: inherit;
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle);
+}
+.mv-tile-num { font-weight: 700; opacity: 0.6; flex: 0 0 auto; }
+.mv-tile-text { min-width: 0; overflow-wrap: anywhere; }
+.mv-tile.correct { border-color: #3ddc84; background: rgba(61,220,132,0.16); }
+.mv-tile.wrong { border-color: #ff5c5c; background: rgba(255,92,92,0.14); }
+
+.mv-cloze { line-height: 2; font-size: 0.95rem; }
+.mv-blank {
+  font: inherit; padding: 2px 4px; border-radius: 5px; color: inherit;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--mv-color, #7aa8ff);
+}
+.mv-blank.correct { border-color: #3ddc84; }
+.mv-blank.wrong { border-color: #ff5c5c; }
+
+.mv-input {
+  font: inherit; width: 100%; max-width: 420px; padding: 7px 9px; border-radius: 7px; color: inherit;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle);
+}
+.mv-input.correct { border-color: #3ddc84; }
+.mv-input.wrong { border-color: #ff5c5c; }
+.mv-accepted { font-size: 0.82rem; color: var(--text-secondary); margin-top: 4px; }
+
+.mv-footer { flex: 0 0 auto; }
+.mv-check, .mv-next {
+  font: inherit; font-weight: 700; padding: 8px 18px; border-radius: 8px; cursor: pointer;
+  background: var(--mv-color, #7aa8ff); border: none; color: #06101f;
+}
+.mv-check:disabled { opacity: 0.4; cursor: default; }
+.mv-flash { font-weight: 700; padding: 6px 0; }
+.mv-flash.ok { color: #3ddc84; }
+
+.mv-explain {
+  border: 1px solid var(--border-subtle); border-left: 3px solid #ff9d3c;
+  border-radius: 8px; padding: 9px 11px; background: rgba(255,157,60,0.07);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.mv-explain-head { font-weight: 700; color: #ff9d3c; }
+.mv-explain-own { font-size: 0.9rem; }
+.mv-explain-note, .mv-explain-body { font-size: 0.88rem; line-height: 1.45; }
+.mv-next { align-self: flex-start; }
+
+/* Subject shelves on the launcher. */
+/* The shelf container is the same node as before (shell line 2902), and it still carries
+   class="module-grid", whose rule is display:grid with repeat(3, 1fr). Left as a grid it treats each
+   .subject-shelf as a single grid item confined to one 1/3-width track, and the shelf's own inner
+   .module-grid then subdivides that track again: measured 96px cards in the left third of a 961px
+   launcher. The id selector overrides only the container's display, so the shell's grid CSS is
+   untouched and the inner .module-grid in every shelf keeps repeat(3, 1fr) plus both media queries. */
+#module-grid { display: block; }
+.subject-shelf { margin-bottom: 14px; }
+.shelf-label {
+  font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-secondary); font-weight: 700; margin-bottom: 6px;
+}
+/* No .shelf-soon rule: renderLauncher does not render a shelf for a subject with no packs, so a
+   "coming soon" label has nothing to attach to. Removed rather than left as dead weight. If an empty
+   shelf is ever wanted, add the render first and the rule second. */
+
+@media (max-height: 780px) {
+  .mv-para { font-size: 0.9rem; margin-bottom: 6px; }
+  .mv-choice { padding: 6px 9px; }
+}
