@@ -42,7 +42,7 @@ function textStats(text) {
   const trimmed = t.trim();
   let sentences = 0;
   if (trimmed) {
-    const boundaries = trimmed.match(/[.!?]+(?=\s+["'“(]?[A-Z0-9])/g);
+    const boundaries = trimmed.match(/[.!?]+(?=\s+["'\u201c(]?[A-Z0-9])/g);
     sentences = (boundaries ? boundaries.length : 0) + 1;
   }
 
