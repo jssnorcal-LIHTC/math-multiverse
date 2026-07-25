@@ -566,8 +566,13 @@
       inp.disabled = true;
       inp.classList.add(result && result.correct ? 'correct' : 'wrong');
       if (!(result && result.correct)) {
-        const ans = el('div', 'mv-accepted', 'Accepted: ' + (item.accept || []).join(' / '));
-        if (inp.parentNode) inp.parentNode.appendChild(ans);
+        // reveal must be idempotent: it appends to the input's PARENT, not to a container it owns and
+        // clears, so a second call with no intervening render would leave the child reading two identical
+        // Accepted lines. Every other type paints in place and is naturally idempotent; this one is not.
+        const parent = inp.parentNode;
+        if (parent && !parent.querySelectorAll('.mv-accepted').length) {
+          parent.appendChild(el('div', 'mv-accepted', 'Accepted: ' + (item.accept || []).join(' / ')));
+        }
       }
     },
   };
@@ -592,10 +597,16 @@
     // must not silently append a second question beneath the first.
     render(item, host, ctx) {
       const t = typeOf(item);
-      const sameItem = host.dataset.itemId !== undefined && host.dataset.itemId === String(item.id || '');
+      // Only a REAL id can establish sameness. Two items without ids both stringify to '' and would
+      // otherwise look like the same item, so the lock set on the first would never reset and the second
+      // would render fully unanswerable. The validator requires unique non-empty ids pack-wide, so this
+      // cannot happen through a valid pack, but nothing else in this file depends on that guarantee and
+      // it should not start here.
+      const id = item && item.id != null ? String(item.id) : '';
+      const sameItem = id !== '' && host.dataset.itemId === id;
       host.innerHTML = '';
       delete host._mvState;
-      host.dataset.itemId = String(item.id || '');
+      host.dataset.itemId = id;
       if (!sameItem) host.dataset.locked = '0';
       return t.render(item, host, ctx);
     },

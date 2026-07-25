@@ -45,7 +45,7 @@ function makeEl(tag) {
     // items.js clears a container with innerHTML = ''; nothing reads it back.
     get innerHTML() { return ''; },
     set innerHTML(v) { if (v === '') node.children.length = 0; },
-    appendChild(c) { node.children.push(c); return c; },
+    appendChild(c) { node.children.push(c); if (c) c._parent = node; return c; },
     setAttribute() {},
     addEventListener(t, f) { node['on' + t] = f; },
     scrollIntoView() {},
@@ -61,7 +61,10 @@ function makeEl(tag) {
       })(node);
       return out;
     },
-    get parentNode() { return null; },
+    // A real parent link, because returning null unconditionally does not just lose information: it
+    // silently SKIPS any `if (node.parentNode)` branch, so the suite cannot see that code at all. That
+    // is how shorttext.reveal's duplicate-append defect stayed invisible to a probe written to catch it.
+    get parentNode() { return node._parent || null; },
   };
   return node;
 }

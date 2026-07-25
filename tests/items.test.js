@@ -371,5 +371,55 @@ check('reveal leaves evidence supporting neither claim marked wrong', () => {
   assert.ok(!bs[3].classList.contains('consistent'), 'a guess was credited as consistent reasoning');
 });
 
+// ---------- regressions from the task 10 and task 12 reviews ----------
+// All three shipped green. The first two hid behind a DOM stub whose parentNode always returned null,
+// which does not merely lose information: it SKIPS every `if (node.parentNode)` branch, so the suite
+// could not see the code at all.
+
+check('shorttext reveal is idempotent and does not stack Accepted lines', () => {
+  const item = { type: 'shorttext', id: 'st-idem', stem: 'Name the drop site.',
+    accept: ['the loose brick'], maxWords: 4,
+    explain: 'The brick is named twice and is the only site in the passage given a location.' };
+  const host = makeEl('div');
+  MVItems.render(item, host, { onAnswer() {}, onProgress() {} });
+  const r = 'wrong answer';
+  const res = MVItems.grade(item, r);
+  MVItems.reveal(item, host, r, res);
+  const one = host.querySelectorAll('.mv-accepted').length;
+  assert.strictEqual(one, 1, 'the Accepted line did not render at all; is parentNode wired in the stub?');
+  MVItems.reveal(item, host, r, res);
+  assert.strictEqual(host.querySelectorAll('.mv-accepted').length, 1,
+    'a second reveal stacked a duplicate Accepted line');
+});
+
+check('two items without ids do not share one lock', () => {
+  // The validator requires unique non-empty ids pack-wide, so a valid pack cannot reach this. Nothing
+  // else in items.js depends on that guarantee, and it should not start to.
+  const mk = (key) => ({ type: 'mc', stem: 'q', choices: ['a', 'b', 'c', 'd'], key });
+  const host = makeEl('div');
+  let a = -1, b = -1;
+  MVItems.render(mk(1), host, { onAnswer(i) { a = i; }, onProgress() {} });
+  host.querySelectorAll('.mv-choice')[1].onclick();
+  host.dataset.locked = '1';                                  // the runner grades and locks
+  MVItems.render(mk(2), host, { onAnswer(i) { b = i; }, onProgress() {} });   // next item, same host
+  assert.strictEqual(a, 1, 'control: the first item never recorded a pick');
+  assert.strictEqual(host.dataset.locked, '0', 'render did not reset the lock for a new item');
+  host.querySelectorAll('.mv-choice')[2].onclick();
+  assert.strictEqual(b, 2, 'the second id-less item was unanswerable');
+});
+
+check('a real id still suppresses the lock reset on a repaint', () => {
+  // The other half of the same rule: repainting the SAME item must not reopen a graded question.
+  const item = { type: 'mc', id: 'same-1', stem: 'q', choices: ['a', 'b', 'c', 'd'], key: 1 };
+  const host = makeEl('div');
+  let picked = -1;
+  MVItems.render(item, host, { onAnswer(i) { picked = i; }, onProgress() {} });
+  host.dataset.locked = '1';
+  MVItems.render(item, host, { onAnswer(i) { picked = i; }, onProgress() {} });
+  assert.strictEqual(host.dataset.locked, '1', 'a repaint of the same item reopened it');
+  host.querySelectorAll('.mv-choice')[0].onclick();
+  assert.strictEqual(picked, -1, 'a graded item accepted a pick after being repainted');
+});
+
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
 process.exit(failures ? 1 : 0);
