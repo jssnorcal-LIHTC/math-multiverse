@@ -86,6 +86,18 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
   try {
     await page.goto(base + '/Math-Multiverse.html', { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.waitForSelector('#module-grid .module-card', { timeout: 15000 });
+
+    // That selector resolves on the SYNCHRONOUS math-only render: boot calls buildShelves(null) and
+    // renderLauncher() before it ever fetches the manifest, and the pack shelf only appears when
+    // MVPack.loadManifest() resolves and re-renders. Sampling between those two points would find no
+    // English shelf and blame the grade filter for a race. Wait for the registry itself to be
+    // complete, which is grade-independent -- SHELVES is the full registry whatever campaign is on
+    // screen. `SHELVES` is a top-level `let`, so it is reachable as a bare identifier but is NOT a
+    // window property; `window.SHELVES` is undefined and would hang here.
+    await page.waitForFunction(
+      () => typeof SHELVES !== 'undefined' && SHELVES.some((s) => s.subject === 'ela'),
+      { timeout: 15000 },
+    ).catch(() => problems.push('boot: pack manifest never reached SHELVES (fetch failed or engine did not load)'));
     note('launcher booted');
 
     for (const grade of [5, 6]) {
@@ -126,7 +138,12 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
         const soon = await page.$$eval('#module-grid .module-card', (els) => els.filter((e) => /coming soon/i.test(e.textContent)).length);
         if (soon !== 0) problems.push(`grade 6: ${soon} module(s) still "coming soon"`);
       }
-      note(`grade ${grade}: shelves ${shelfCounts.map((s) => s.subject + '=' + s.cards).join(' ')}${grade === 6 ? ', 0 coming-soon' : ''}`);
+      // Report the campaign the page believes it is on, sampled at the same moment as the shelves.
+      // If a shelf assertion ever fails, this one value says whether the filter is wrong or the click
+      // simply did not take effect, which is otherwise indistinguishable from the outside.
+      const active = await page.evaluate(() => (typeof ACTIVE_GRADE !== 'undefined' ? ACTIVE_GRADE : 'unreachable'));
+      if (active !== grade) problems.push(`grade ${grade}: clicked grade ${grade} but ACTIVE_GRADE is ${active}`);
+      note(`grade ${grade}: ACTIVE_GRADE=${active}, shelves ${shelfCounts.map((s) => s.subject + '=' + s.cards).join(' ')}${grade === 6 ? ', 0 coming-soon' : ''}`);
 
       for (const [id, sel] of MODULES) {
         const b2 = errors.length;
