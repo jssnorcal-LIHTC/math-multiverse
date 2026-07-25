@@ -1,6 +1,9 @@
 'use strict';
 const assert = require('assert');
 const MVItems = require('../engine/items.js');
+const { installDomStub } = require('./dom-stub.js');
+const { makeEl } = installDomStub();
+const I = MVItems;
 
 let failures = 0;
 function check(name, fn) {
@@ -283,6 +286,89 @@ check('shorttext is incomplete on empty or whitespace input', () => {
   assert.strictEqual(MVItems.isComplete(ST, ''), false);
   assert.strictEqual(MVItems.isComplete(ST, '   '), false);
   assert.strictEqual(MVItems.isComplete(ST, 'x'), true);
+});
+
+// ---------- ebsr interaction layer (DOM stub) ----------
+// NOTE: this fixture is named EBSR_LOCK, not EBSR -- the ebsr grading block above already declares a
+// top-level `const EBSR`, and this file is one Node module scope, so reusing that name here would be a
+// SyntaxError (Identifier 'EBSR' has already been declared), not a passing or failing check.
+
+// A wrong Part A of 0 has partB.key["0"] === 1, so picking 1 is the evidence that genuinely supports
+// the student's own wrong claim. The canonical pairing is A=1 -> B=0. Choice 3 supports neither.
+const EBSR_LOCK = {
+  type: 'ebsr',
+  id: 'e-lock',
+  partA: { stem: 'Why does the handler call the drop site dull?', choices: ['cheap', 'unnoticed', 'quick', 'copied'], key: 1 },
+  partB: { stem: 'Which sentence best supports your answer?', choices: ['q0', 'q1', 'q2', 'q3'], key: { 0: 1, 1: 0, 2: 0, 3: 1 } },
+};
+
+function renderEbsr() {
+  const host = makeEl('div');
+  let clicks = 0;
+  I.render(EBSR_LOCK, host, { onAnswer() {}, onProgress() { clicks++; } });
+  host.querySelectorAll('.mv-choice')[0].onclick();     // commit Part A, which reveals Part B
+  return { host, partB: () => host.querySelectorAll('.mv-choice').slice(4), clicks: () => clicks };
+}
+
+// --- the lock, with its vacuity control -------------------------------------------------------------
+// Without the control the locked-case assertion passes even if no click ever registers.
+check('ebsr Part B registers a pick while the item is unlocked', () => {
+  const r = renderEbsr();
+  const before = r.clicks();
+  r.partB()[1].onclick();
+  assert.ok(r.clicks() > before, 'control failed: an unlocked Part B click did not register at all');
+});
+
+check('ebsr Part B refuses a pick once the runner locks the item', () => {
+  const r = renderEbsr();
+  r.host.dataset.locked = '1';
+  const before = r.clicks();
+  r.partB()[2].onclick();
+  assert.strictEqual(r.clicks(), before, 'a graded Part B accepted a new answer');
+});
+
+check('mc registers a pick while unlocked', () => {
+  const host = makeEl('div');
+  let picked = -1;
+  I.render({ type: 'mc', id: 'm1', stem: 'q', choices: ['a', 'b', 'c', 'd'], key: 2 }, host,
+    { onAnswer(i) { picked = i; }, onProgress() {} });
+  host.querySelectorAll('.mv-choice')[2].onclick();
+  assert.strictEqual(picked, 2);
+});
+
+check('mc still refuses a pick when locked, so the lockHost default holds', () => {
+  const host = makeEl('div');
+  let picked = -1;
+  I.render({ type: 'mc', id: 'm1', stem: 'q', choices: ['a', 'b', 'c', 'd'], key: 2 }, host,
+    { onAnswer(i) { picked = i; }, onProgress() {} });
+  host.dataset.locked = '1';
+  host.querySelectorAll('.mv-choice')[0].onclick();
+  assert.strictEqual(picked, -1, 'mc accepted a pick after being locked');
+});
+
+// --- the three reveal states ------------------------------------------------------------------------
+function revealWith(a, b) {
+  const r = renderEbsr();
+  I.reveal(EBSR_LOCK, r.host, { a, b }, I.grade(EBSR_LOCK, { a, b }));
+  return r.partB();
+}
+
+check('reveal marks the evidence for the correct claim as correct', () => {
+  const bs = revealWith(0, 1);
+  const canonical = EBSR_LOCK.partB.key[String(EBSR_LOCK.partA.key)];
+  assert.ok(bs[canonical].classList.contains('correct'));
+});
+
+check('reveal marks consistent evidence for a wrong claim consistent, not wrong', () => {
+  const bs = revealWith(0, 1);
+  assert.ok(bs[1].classList.contains('consistent'), 'the consistency credit was not shown');
+  assert.ok(!bs[1].classList.contains('wrong'), 'consistent evidence was painted as a plain error');
+});
+
+check('reveal leaves evidence supporting neither claim marked wrong', () => {
+  const bs = revealWith(0, 3);
+  assert.ok(bs[3].classList.contains('wrong'));
+  assert.ok(!bs[3].classList.contains('consistent'), 'a guess was credited as consistent reasoning');
 });
 
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
