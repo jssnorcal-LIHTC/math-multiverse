@@ -17,7 +17,7 @@ const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
 const { loadPackFile } = require('./validate-pack');
-const { itemHash, blindQuestion, authoredKeyOf } = require('./verdicts');
+const { itemHash, blindQuestion, authoredKeyOf, sameAnswer } = require('./verdicts');
 
 const PACK_DIR = path.join(__dirname, '..', 'packs');
 const MODEL_LABEL = process.env.BLIND_MODEL || 'claude-sonnet-5';
@@ -75,7 +75,14 @@ function parseAnswer(raw, optionCount) {
     if (!Number.isInteger(i) || i < 0 || i >= optionCount) throw new Error(`answer "${L}" is outside A to ${String.fromCharCode(64 + optionCount)}`);
     return i;
   };
-  const answer = Array.isArray(obj.answer) ? obj.answer.map(toIdx).sort((a, b) => a - b) : toIdx(obj.answer);
+  // DO NOT SORT. This will look like a tidy-up to the next reader; it is the opposite. The recorded
+  // blind answer is EVIDENCE of what the model actually said, and evidence must not be normalised on
+  // the way in. For order, cloze and match the position IS the answer, so sorting a correct reply of
+  // ["B","D","A","E","C"] into [0,1,2,3,4] rewrote it into the authored key, and the ledger then
+  // logged "agree" on an item that nothing had checked -- silently converting "not verified" into
+  // "verified and fine". A comparison that legitimately needs set semantics sorts at COMPARISON time
+  // and only for the types that are sets (see sameAnswer in verdicts.js), never at record time.
+  const answer = Array.isArray(obj.answer) ? obj.answer.map(toIdx) : toIdx(obj.answer);
   return { answer, confidence: obj.confidence || 'unknown' };
 }
 
@@ -93,7 +100,7 @@ async function pool(jobs, size) {
   return out;
 }
 
-(async () => {
+async function main() {
   const packId = process.argv[2];
   if (!packId || packId.startsWith('--')) {
     console.error('usage: node tests/blind-reanswer.js <packId> [--only id,id] [--concurrency N]');
@@ -168,8 +175,10 @@ async function pool(jobs, size) {
       return;
     }
     const authored = authoredKeyOf(item);
-    const same = JSON.stringify(Array.isArray(authored) ? authored.slice().sort() : authored)
-              === JSON.stringify(Array.isArray(r.answer) ? r.answer.slice().sort() : r.answer);
+    // Shares the one type-aware comparison with the CI validator rather than re-implementing it. The
+    // hand-rolled version here sorted both sides unconditionally, so this pass wrote status:"agree"
+    // for an order, cloze or match item whose blind answer did not match at all.
+    const same = sameAnswer(r.answer, authored, item.type);
     if (same) { agree++; console.log(`  agree  ${item.id}  (${r.confidence})`); }
     else { disagree++; console.log(`  DISAGREE ${item.id}: blind ${JSON.stringify(r.answer)} vs authored ${JSON.stringify(authored)}  (${r.confidence})`); }
     fresh.push({
@@ -190,4 +199,12 @@ async function pool(jobs, size) {
     console.log('reject the pack until then, which is the point.');
   }
   process.exit(failed ? 1 : 0);
-})().catch(e => { console.error('blind-reanswer crashed: ' + (e && e.stack || e)); process.exit(2); });
+}
+
+// Only run a pack when invoked directly. tests/verdicts.test.js requires this file to reach
+// parseAnswer, and a bare require must not start a run or call process.exit.
+if (require.main === module) {
+  main().catch(e => { console.error('blind-reanswer crashed: ' + (e && e.stack || e)); process.exit(2); });
+}
+
+module.exports = { parseAnswer };
