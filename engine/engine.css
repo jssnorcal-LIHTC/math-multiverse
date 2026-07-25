@@ -26,7 +26,15 @@
 .mv-hint { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px; }
 
 .mv-choices { display: flex; flex-direction: column; gap: 5px; }
+/* Apple's HIG puts the minimum comfortable touch target at 44px. Measured at 1024x768 these four came
+   in at 35, 28, 33 and 37, so a ten-year-old on an iPad was aiming at controls a third under the
+   guideline, and the max-height:780px query below fires at exactly the iPad's 768 and trims .mv-choice
+   padding further. min-height rather than more padding, so the text keeps its position and only the hit
+   area grows. .mv-span is deliberately NOT in this list: it is a sentence inline in the passage, and
+   forcing it to 44px would stretch the prose line spacing to match. */
 .mv-choice {
+  min-height: 44px;
+  box-sizing: border-box;
   display: flex; gap: 8px; align-items: flex-start; text-align: left; width: 100%;
   padding: 7px 10px; border-radius: 7px; cursor: pointer; font: inherit;
   background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); color: inherit;
@@ -77,6 +85,8 @@
    line above it, or the kid cannot tell which tiles are already placed. */
 .mv-bank { padding: 3px; opacity: 0.92; }
 .mv-tile {
+  min-height: 44px;
+  box-sizing: border-box;
   display: inline-flex; gap: 6px; align-items: center; padding: 5px 9px; border-radius: 6px;
   font: inherit; cursor: pointer; color: inherit;
   background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle);
@@ -88,6 +98,9 @@
 
 .mv-cloze { line-height: 2; font-size: 0.95rem; }
 .mv-blank {
+  min-height: 44px;
+  box-sizing: border-box;
+  vertical-align: middle;
   font: inherit; padding: 2px 4px; border-radius: 5px; color: inherit;
   background: rgba(255,255,255,0.06); border: 1px solid var(--mv-color, #7aa8ff);
 }
@@ -95,6 +108,8 @@
 .mv-blank.wrong { border-color: #ff5c5c; }
 
 .mv-input {
+  min-height: 44px;
+  box-sizing: border-box;
   font: inherit; width: 100%; max-width: 420px; padding: 7px 9px; border-radius: 7px; color: inherit;
   background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle);
 }
