@@ -17,6 +17,7 @@ const path = require('path');
 const { isTarget } = require('./targets');
 const { fleschKincaid, colemanLiau, textStats } = require('./readability');
 const { COACH_FAMILIES } = require('./targets');
+const { validateLedger, authoredKeyOf } = require('./verdicts');
 
 const PACK_DIR = path.join(__dirname, '..', 'packs');
 
@@ -347,6 +348,37 @@ function checkItemShape(item, passagesById, errors) {
 const READ_DEFAULTS = { fkMin: 5.5, fkMax: 8.0, clMin: 4.5, clMax: 9.5 };
 const EXPLAIN_MIN_WORDS = 20;
 
+// Plain word count, deliberately NOT textStats().words. That tokeniser matches only letter-led
+// tokens because the readability formulas need it that way, so it scores digits and symbols as zero.
+// Used as a content gate it rejected explanations a human counts as 24 words: "swaps 4 for 40 percent,
+// missing why 5 of 7 signals fail" scores 19. Readability keeps textStats; the floor uses this.
+function plainWordCount(s) {
+  return String(s == null ? '' : s).trim().split(/\s+/).filter(Boolean).length;
+}
+
+// A pack may TIGHTEN its own readability band and may never widen it. Without this clamp the pack
+// author sets the very thresholds their content is judged against, which is not a gate at all:
+// meta.readability = { fkMin: 0, fkMax: 100 } silently passes anything.
+function resolveBand(pack, errors) {
+  const band = Object.assign({}, READ_DEFAULTS);
+  const ov = (pack.meta && pack.meta.readability) || {};
+  for (const k of ['fkMin', 'fkMax', 'clMin', 'clMax']) {
+    if (!Object.prototype.hasOwnProperty.call(ov, k)) continue;
+    const v = ov[k];
+    if (typeof v !== 'number' || !Number.isFinite(v)) {
+      errors.push(`meta.readability.${k}: must be a finite number, got ${JSON.stringify(v)}`);
+      continue;
+    }
+    // Mins may only move up, maxes may only move down.
+    const tighter = k.endsWith('Min') ? Math.max(READ_DEFAULTS[k], v) : Math.min(READ_DEFAULTS[k], v);
+    if (tighter !== v) {
+      errors.push(`meta.readability.${k}: ${v} would widen the default band (${READ_DEFAULTS[k]}); a pack may only tighten it`);
+    }
+    band[k] = tighter;
+  }
+  return band;
+}
+
 // Whitespace-insensitive verbatim containment. Authors and editors introduce line wrapping and
 // double spaces; a quote that differs only in whitespace is still the same sentence. Anything
 // else (a changed word, a normalised hyphen, a smart quote) is a real defect and must fail.
@@ -376,16 +408,19 @@ function quotedSpans(item) {
   return out;
 }
 
+// Only the stem carrying the QUESTION participates in duplicate detection. An ebsr's partB.stem is
+// template text describing the item's mechanism ("Which sentence from the passage best supports your
+// answer?") and is EXPECTED to repeat across every ebsr in a pack, so including it rejects a
+// legitimate pack. Task 14 ships roughly 24 ebsr items that all share that line.
 function itemStems(item) {
   if (item.type === 'ebsr') {
-    const a = item.partA && item.partA.stem, b = item.partB && item.partB.stem;
-    return [a, b].filter(nonEmptyString);
+    return (item.partA && nonEmptyString(item.partA.stem)) ? [item.partA.stem] : [];
   }
   return nonEmptyString(item.stem) ? [item.stem] : [];
 }
 
 function contentChecks(pack, passagesById, itemsById, errors, warnings) {
-  const band = Object.assign({}, READ_DEFAULTS, (pack.meta && pack.meta.readability) || {});
+  const band = resolveBand(pack, errors);
 
   // ---- passages: readability band ----
   for (const p of passagesById.values()) {
@@ -424,7 +459,7 @@ function contentChecks(pack, passagesById, itemsById, errors, warnings) {
     }
 
     if (nonEmptyString(item.explain)) {
-      const n = textStats(item.explain).words;
+      const n = plainWordCount(item.explain);
       if (n < EXPLAIN_MIN_WORDS) {
         errors.push(`${w}.explain: only ${n} words; an explanation must name the misconception the student picked, not just restate the answer (minimum ${EXPLAIN_MIN_WORDS})`);
       }
@@ -522,6 +557,25 @@ function main(argv) {
     catch (e) { console.log(`\n${expectedId}\n  LOAD FAILED: ${e.message}`); totalErrors++; continue; }
 
     const { errors, warnings } = validatePack(pack, { expectedId });
+
+    // Blind re-answer ledger. A pack with comparable items must ship an adjudicated ledger.
+    const ledgerPath = abs.replace(/\.json$/, '.verdicts.json');
+    const needsLedger = Array.isArray(pack.items) && pack.items.some(it => authoredKeyOf(it) !== null);
+    if (needsLedger) {
+      if (!fs.existsSync(ledgerPath)) {
+        errors.push(`verdicts: ${path.basename(ledgerPath)} not found; run "node tests/blind-reanswer.js ${expectedId}" then adjudicate any disagreement`);
+      } else {
+        let ledger = null;
+        try { ledger = loadPackFile(ledgerPath); }
+        catch (e) { errors.push(`verdicts: ${e.message}`); }
+        if (ledger) {
+          const lv = validateLedger(pack, ledger);
+          lv.errors.forEach(e => errors.push(e));
+          lv.warnings.forEach(wn => warnings.push(wn));
+        }
+      }
+    }
+
     const nItems = Array.isArray(pack.items) ? pack.items.length : 0;
     console.log(`\n${expectedId}  (${nItems} item(s))`);
     errors.forEach(e => console.log('  ERROR   ' + e));
