@@ -146,6 +146,85 @@
         "l3-cloze-narration-limits",
         "l3-short-who-the-log-is-for"
       ]
+    },
+    {
+      "id": 4,
+      "name": "Source Check",
+      "goal": "Two sources disagree.  Find the one carrying a tell, and say what the tell costs it.",
+      "targets": [
+        "c4-3-analyze-sources",
+        "c1-inf-4-reasoning"
+      ],
+      "lives": 4,
+      "questions": 8,
+      "itemIds": [
+        "l4-ebsr-who-ran-the-test",
+        "l4-ebsr-claim-beyond-the-test",
+        "l4-mc-what-the-small-print-does",
+        "l4-mc-what-the-brief-leaves-out",
+        "l4-hot-asking-for-the-sale",
+        "l4-ms-reasons-to-check-source-a",
+        "l4-match-hole-to-consequence",
+        "l4-ebsr-how-the-times-were-taken",
+        "l4-ebsr-why-the-log-stops-short",
+        "l4-mc-which-source-for-halloway",
+        "l4-hot-facts-about-the-tunnel",
+        "l4-cloze-weighing-two-sources"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Cross-Reference",
+      "goal": "Put two sources side by side, then quote the line that carries your point.",
+      "targets": [
+        "c4-2-integrate",
+        "c4-4-use-evidence"
+      ],
+      "lives": 4,
+      "questions": 8,
+      "itemIds": [
+        "l5-ebsr-what-three-results-add-up-to",
+        "l5-ebsr-which-tunnel-halloway-sits-with",
+        "l5-ebsr-advice-the-article-supports",
+        "l5-mc-what-two-sources-agree-on",
+        "l5-mc-why-publish-all-three",
+        "l5-hot-ground-not-device",
+        "l5-ms-what-both-sources-back",
+        "l5-cloze-lining-up-two-sources",
+        "l5-order-how-the-case-is-built",
+        "l5-ebsr-the-line-that-locates-the-fault",
+        "l5-mc-the-line-that-covers-the-claim",
+        "l5-hot-measured-or-concluded"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Exfiltration",
+      "goal": "Everything at once: what a text is about, what its words are doing, how it is built, and whose voice you are in.",
+      "targets": [
+        "c1-lit-2-central-ideas",
+        "c1-lit-3-word-meanings",
+        "c1-lit-5-analysis",
+        "c1-lit-6-text-structure",
+        "c1-inf-5-analysis",
+        "c1-inf-7-language-use"
+      ],
+      "lives": 4,
+      "questions": 8,
+      "itemIds": [
+        "l6-ebsr-what-a-log-is-for",
+        "l6-mc-easy-in-two-stories",
+        "l6-mc-what-the-lobby-scene-is-about",
+        "l6-ebsr-a-clipboard-like-a-wall",
+        "l6-hot-where-the-cover-runs-out",
+        "l6-ebsr-why-her-log-runs-longer",
+        "l6-hot-plain-words-carrying-more",
+        "l6-cloze-where-the-aside-sits",
+        "l6-ebsr-what-the-brief-is-for",
+        "l6-short-who-the-entry-was-written-for",
+        "l6-mc-the-chain-under-dead-air",
+        "l6-ms-three-moves-one-system"
+      ]
     }
   ],
   "items": [
@@ -1265,6 +1344,1132 @@
       ],
       "maxWords": 4,
       "explain": "Marchetti says the logs are not marked and never have been, so a log is not written for him.  It is written for whoever is next on a landing, wondering whether a sound they just heard matters."
+    },
+    {
+      "id": "l4-ebsr-who-ran-the-test",
+      "type": "ebsr",
+      "passageId": "p-beacon-brief",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "partA": {
+        "stem": "The ninety-minute result in Source A comes with one detail that should make a reader slow down before believing it.  Which detail?",
+        "choices": [
+          "The beacon sends out a coded pulse instead of a plain one.",
+          "The company has only been making rescue gear for nineteen years.",
+          "The people who ran the test are the people who sell the beacon.",
+          "The beacon is light enough to clip onto a belt."
+        ],
+        "key": 2
+      },
+      "partB": {
+        "stem": "Which sentence from Source A best supports the answer you just gave?",
+        "choices": [
+          "Corvid Systems has been building rescue gear for nineteen years and stands behind this product completely.",
+          "Our own engineers ran that test in the Halloway service tunnel with the receiver at the surface entrance.",
+          "It clips to a belt or a pack strap and weighs eleven ounces.",
+          "It sends out a coded pulse on a very low frequency."
+        ],
+        "key": {
+          "0": 3,
+          "1": 0,
+          "2": 1,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "0": "A coded pulse is how the beacon works, not a reason to doubt the number.  You went looking for something technical when the problem is who did the measuring.",
+        "1": "Nineteen years is offered as a reason to trust the company, and you read it as a reason to doubt them.  Length of experience does not tell you who was holding the stopwatch.",
+        "3": "The weight is a fact about the object that anyone could check on a scale.  It has nothing to do with whether the ninety minutes is real."
+      },
+      "explain": "A test result is only as good as the tester is free to report a bad one.  Corvid designs, builds, and sells the Wren-7, and Corvid engineers ran this test, so the people checking the claim are the people making it.  That is the tell, and Source B is what an outside test of the same tunnel looks like."
+    },
+    {
+      "id": "l4-ebsr-claim-beyond-the-test",
+      "type": "ebsr",
+      "passageId": "p-beacon-brief",
+      "targets": [
+        "c1-inf-4-reasoning"
+      ],
+      "coachTopic": "inference-argument",
+      "dok": 3,
+      "partA": {
+        "stem": "Source A ran its test in one tunnel.  Which of its statements claims more than one tunnel could ever show?",
+        "choices": [
+          "That low frequencies get through rock better than ordinary radio frequencies do.",
+          "That what worked at Halloway will now work everywhere.",
+          "That the beacon is about the size of a deck of cards.",
+          "That the signal stayed strong enough for the receiver to report a position."
+        ],
+        "key": 1
+      },
+      "partB": {
+        "stem": "Which sentence from Source A best supports the answer you just gave?",
+        "choices": [
+          "The signal never once dropped below the level the receiver needs to report a position.",
+          "Low frequencies were chosen because they pass through solid rock far better than the frequencies ordinary radios use.",
+          "Any tunnel in the country can now be worked with confidence.",
+          "The Wren-7 is a beacon about the size of a deck of cards."
+        ],
+        "key": {
+          "0": 1,
+          "1": 2,
+          "2": 3,
+          "3": 0
+        }
+      },
+      "distractorRationale": {
+        "0": "That is a general fact about radio and the reason the beacon was designed this way.  It was true before this test and does not rest on it.",
+        "2": "A size is measured with a ruler, not in a tunnel.  It would read the same whether the test went well or badly.",
+        "3": "That sentence reports what happened during the test itself, which is exactly what a test is allowed to say.  A strong result is not the same thing as an overclaim."
+      },
+      "explain": "One test in one tunnel can tell you what happened in that tunnel.  The brief reports its run honestly and then takes a step it has not earned, from forty feet of Halloway stone to every tunnel in the country.  Source B tests the very same tunnel and gets nine minutes, which is how a reader finds out that the step was too big."
+    },
+    {
+      "id": "l4-ebsr-how-the-times-were-taken",
+      "type": "ebsr",
+      "passageId": "p-beacon-log",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "partA": {
+        "stem": "Source B reports that the signal lasted nine minutes.  Which detail tells a reader that the nine minutes itself was recorded carefully?",
+        "choices": [
+          "Two instructors signed the entry at the bottom.",
+          "The receiver battery was fresh for every run.",
+          "The entry will be looked at again after the summer exercises.",
+          "Two people timed the same run on their own and came out within three seconds of each other."
+        ],
+        "key": 3
+      },
+      "partB": {
+        "stem": "Which sentence from Source B best supports the answer you just gave?",
+        "choices": [
+          "Its battery was replaced before each run.",
+          "This entry will be reviewed again after the summer exercises.",
+          "It is dated the fourteenth of March and signed by two instructors, Marchetti and Osei.",
+          "Two observers wrote the times down separately, and their times differ by no more than three seconds."
+        ],
+        "key": {
+          "0": 2,
+          "1": 0,
+          "2": 1,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "0": "A signature tells you who wrote the entry, not how the time was taken.  Two names at the bottom are not two stopwatches.",
+        "1": "A fresh battery rules out one cause of a short signal, which is careful work on the equipment.  The question is about the number, and a battery cannot check a number.",
+        "2": "A promise to look again later says nothing about how the measurement was taken today.  Reviewing a figure in the summer cannot make it more carefully timed in March."
+      },
+      "explain": "Careful measuring means somebody could have caught you getting it wrong.  Two observers writing the time down separately and landing within three seconds is that check, because one stopwatch held by one person cannot be checked by anybody.  Everything else in this list is good practice around the number rather than a check on it."
+    },
+    {
+      "id": "l4-ebsr-why-the-log-stops-short",
+      "type": "ebsr",
+      "passageId": "p-beacon-log",
+      "targets": [
+        "c1-inf-4-reasoning"
+      ],
+      "coachTopic": "inference-argument",
+      "dok": 3,
+      "partA": {
+        "stem": "Source B measured nine minutes where Source A promised ninety.  Why does Source B still refuse to call the Wren-7 a bad beacon?",
+        "choices": [
+          "Two runs in one tunnel cannot settle how the beacon behaves anywhere else.",
+          "The bend and the damp walls prove the beacon itself was never the problem.",
+          "They are keeping the hardwired line, so the beacon does not matter to them.",
+          "The staff think nine minutes is long enough for the work they do."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from Source B best supports the answer you just gave?",
+        "choices": [
+          "The staff recommend that the site keep its hardwired line and treat the beacon as a second method rather than a replacement.",
+          "A tool that works for nine minutes is genuinely useful.",
+          "Two runs in one tunnel is nowhere near enough evidence for a statement that broad.",
+          "The staff note two local conditions that may explain the gap between these results and the maker's claim."
+        ],
+        "key": {
+          "0": 2,
+          "1": 3,
+          "2": 0,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "The staff say the bend and the damp may explain the gap.  Turning a possible explanation into a proof is the same move Source A makes, and Source B is careful not to make it.",
+        "2": "Keeping the line is what they recommend, not the reason behind it.  They also say to treat the beacon as a second method, which is a long way from saying it does not matter.",
+        "3": "The log does say nine minutes is useful, which is about what the tool is worth rather than about how far the evidence reaches.  You answered why they still like it instead of why they will not judge it."
+      },
+      "explain": "Source B holds itself to the rule Source A breaks.  It has two runs in one tunnel, so it reports what those two runs showed and refuses to turn them into a verdict on the beacon anywhere else.  Measuring a small number does not entitle you to a big claim any more than measuring a large one does."
+    },
+    {
+      "id": "l4-mc-what-the-small-print-does",
+      "type": "mc",
+      "passageId": "p-beacon-brief",
+      "targets": [
+        "c1-inf-4-reasoning"
+      ],
+      "coachTopic": "inference-argument",
+      "dok": 3,
+      "stem": "The small print at the bottom of Source A says test results depend on local conditions.  What does that line do to the brief's biggest claim?",
+      "choices": [
+        "It proves the brief is honest, so the ninety minutes can be trusted.",
+        "It means the beacon will not work anywhere except Halloway.",
+        "It quietly takes back the part of the claim the large print made loudest.",
+        "It applies only to the parts about water, dust, and impact."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "Printing a limit is better than hiding one, and it still does not make the number bigger.  Honest about a weakness and right about a result are two different things.",
+        "1": "It depends on conditions is not the same as it fails everywhere else.  You turned a limit on a claim into the opposite claim.",
+        "3": "The line says test results, and the ninety minutes is the test result.  Reading it as though it covered only the rugged bits is choosing whichever reading costs the brief the least."
+      },
+      "explain": "The headline says any tunnel in the country and the small print says results depend on local conditions, and both are on the same page in the same document.  The two cannot both be true, so the brief is arguing against itself before anyone else gets a turn.  Source B is simply the tunnel where that argument gets settled."
+    },
+    {
+      "id": "l4-mc-which-source-for-halloway",
+      "type": "mc",
+      "passageId": "p-beacon-log",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "stem": "A team is deciding what to carry into the Halloway tunnel next week.  The maker's brief promises ninety minutes and this log measured nine.  Which source should the team plan around?",
+      "choices": [
+        "The brief, because ninety minutes is the safer number to plan around.",
+        "The log, because it was measured in the tunnel the team is actually going into.",
+        "Neither, because two sources that disagree cancel each other out.",
+        "The brief, because it was written by the engineers who built the beacon."
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "Planning around the bigger number is the opposite of safe.  A team that expects ninety minutes and gets nine is stranded at exactly the moment the plan says everything is fine.",
+        "2": "Two sources that disagree are a reason to look at how each one was made, not a reason to give up.  One of these named its depth, its rock, and its date, and the other named none of them.",
+        "3": "The engineers who built it also sell it, and theirs is the test nobody outside the company watched.  Knowing how a thing was made does not make you the right person to judge it."
+      },
+      "explain": "Both sources tested the same tunnel, which is what makes this decidable rather than a matter of opinion.  The log names its depth, its rock, its date, and two independent timekeepers; the brief names none of those and sells the beacon.  For a team walking into Halloway, the log is not only more careful, it is about their tunnel."
+    },
+    {
+      "id": "l4-mc-what-the-brief-leaves-out",
+      "type": "mc",
+      "passageId": "p-beacon-brief",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 2,
+      "stem": "Which of these can a reader NOT check about the test in Source A?",
+      "choices": [
+        "How deep the beacon was.",
+        "Which tunnel it was run in.",
+        "Where the receiver was placed.",
+        "When the test was run."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "Forty feet of stone is right there in the sentence about the test.  A reader who decides nothing is checkable stops looking before finding the things that are.",
+        "1": "The brief names the Halloway service tunnel, and naming it is what let the training staff test the very same one.",
+        "2": "The brief says the receiver sat at the surface entrance.  That detail is what makes the log's note about the bend at twenty-five feet worth reading."
+      },
+      "explain": "Source A gives the depth, the tunnel, and the position of the receiver, and it never gives a date.  That one hole matters more than it looks, because a result with no date cannot be lined up against anything measured before or after it.  The brief carries a document number, so leaving the date off was a choice rather than an oversight."
+    },
+    {
+      "id": "l4-hot-asking-for-the-sale",
+      "type": "hottext",
+      "passageId": "p-beacon-brief",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 2,
+      "mode": "sentence",
+      "stem": "Tap the three sentences where Source A stops describing the beacon and starts asking for the sale.",
+      "spans": [
+        "We are confident that once your team has carried a Wren-7 they will not want to go back into a tunnel without one.",
+        "In testing, the Wren-7 held a clear signal through forty feet of stone for the full ninety minutes of its battery life.",
+        "Contact our sales office for volume pricing and to arrange a live test at your own site.",
+        "It switches on with one control that a gloved hand can find without looking.",
+        "No other beacon anywhere near this price comes close to that result.",
+        "Setup takes under a minute, and the receiver reads out a distance as well as a direction."
+      ],
+      "key": [
+        0,
+        2,
+        4
+      ],
+      "explain": "A document can describe a real product and still be an advertisement, so the useful split is not honest against dishonest.  Three of these describe the beacon and three ask you to buy it: one promises how your team will feel, one gives you the sales office, and one measures the beacon against every rival on the market.  A reader who notices the switch reads the numbers more slowly."
+    },
+    {
+      "id": "l4-hot-facts-about-the-tunnel",
+      "type": "hottext",
+      "passageId": "p-beacon-log",
+      "targets": [
+        "c1-inf-4-reasoning"
+      ],
+      "coachTopic": "inference-argument",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that describe the Halloway tunnel itself rather than the beacon or the test.",
+      "spans": [
+        "The surface receiver held the signal for nine minutes and then lost it.",
+        "That time the receiver lost the signal after seven minutes.",
+        "The Halloway tunnel bends sharply at the twenty-five foot level.",
+        "The receiver was the unit supplied with the beacons.",
+        "Both runs were timed with a stopwatch.",
+        "The tunnel is also cut through wet limestone rather than dry granite, and the walls are damp along most of their length."
+      ],
+      "key": [
+        2,
+        5
+      ],
+      "explain": "The staff keep two kinds of fact apart: what the beacon did, and what the ground around it was like.  A bend at twenty-five feet and wet limestone walls belong to the tunnel and would still be there with a different beacon in hand.  Naming them is what lets a reader ask whether nine minutes is a fact about the Wren-7 or a fact about Halloway."
+    },
+    {
+      "id": "l4-ms-reasons-to-check-source-a",
+      "type": "ms",
+      "passageId": "p-beacon-brief",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "stem": "Choose the three things about Source A that a careful reader would list as reasons to check its ninety-minute claim somewhere else.",
+      "choices": [
+        "The test was run by the same company that sells the beacon",
+        "The test lasted only ninety minutes, which is a short time to run a test",
+        "The brief gives a document number and no date at all",
+        "The beacon takes the standard battery cell a department already stocks",
+        "One tunnel was tested and every tunnel in the country was concluded about",
+        "The brief names the tunnel the test was run in"
+      ],
+      "key": [
+        0,
+        2,
+        4
+      ],
+      "distractorRationale": {
+        "1": "Ninety minutes is the whole life of the battery, so the test ran for as long as the beacon can run.  You read a limit of the device as a shortcut taken by the tester.",
+        "3": "A common battery is convenient and tells you nothing about whether the signal held.  This is a fact about the product where the question asks about the evidence.",
+        "5": "Naming the tunnel is the most checkable thing the brief does, and it is the reason the training staff could test the very same one.  You flagged the part that helps you."
+      },
+      "explain": "Three problems sit in Source A and all three are about the evidence rather than the equipment: who ran the test, when it was run, and how far the conclusion travels past it.  The specifications are not the issue at all, and naming the tunnel is the one move the brief makes that a checker can actually use."
+    },
+    {
+      "id": "l4-cloze-weighing-two-sources",
+      "type": "cloze",
+      "passageId": "p-beacon-log",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "stem": "Complete a reader's note on the two sources.  The maker's brief and this log tested {{0}}, which is what makes their disagreement something to settle rather than a matter of opinion, and the log is the better guide for a team going into Halloway because it {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "in the same month",
+            "the same tunnel",
+            "the same number of beacons"
+          ],
+          "key": 1
+        },
+        {
+          "choices": [
+            "reaches the more cautious conclusion",
+            "was written by people who work underground",
+            "names the conditions its numbers were measured in"
+          ],
+          "key": 2
+        }
+      ],
+      "explain": "The two sources are comparable because they tested the same tunnel, so one of them has to be wrong about it.  The log wins on method rather than on tone: it gives its depth, its rock, its date, and two timekeepers.  A cautious conclusion with no conditions behind it would be worth no more than a confident one."
+    },
+    {
+      "id": "l4-match-hole-to-consequence",
+      "type": "match",
+      "passageId": "p-beacon-brief",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "stem": "Match each hole in Source A to what that particular hole costs a reader.",
+      "rowLabels": [
+        "A document number with no date anywhere on the page",
+        "A test run by the maker's own engineers",
+        "One tunnel tested, every tunnel concluded about"
+      ],
+      "colLabels": [
+        "The people who checked the claim are the people selling it",
+        "The result cannot be lined up against anything else that was measured",
+        "The conclusion travels further than the evidence underneath it"
+      ],
+      "key": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "explain": "Three different holes with three different consequences, and they are not interchangeable.  A missing date stops you comparing, a maker running its own test removes the outside check, and a claim about every tunnel outruns a test in one.  Naming which hole you have found is how you decide what the source can still be used for."
+    },
+    {
+      "id": "l5-ebsr-what-three-results-add-up-to",
+      "type": "ebsr",
+      "passageId": "p-three-tunnels",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "partA": {
+        "stem": "Reading the three tunnel results together changes what any one of them means.  What do the three together show?",
+        "choices": [
+          "Dry granite is the only rock a beacon can be used in.",
+          "The beacon is unreliable, because two of the three tunnels went badly.",
+          "The ground the beacon sits in explains the differences, not the beacon.",
+          "Depth is what decides how long a signal lasts."
+        ],
+        "key": 2
+      },
+      "partB": {
+        "stem": "Which sentence from the article best supports the answer you just gave?",
+        "choices": [
+          "A beacon at the thirty foot level lost contact there after eight minutes.",
+          "The first tunnel was cut through dry granite and ran almost straight for two hundred feet.",
+          "Depth is the third, and it is the one everybody thinks of first.",
+          "Read together, they say something different, which is that the beacon is not the thing that changed."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 3,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "0": "Granite is where the best result happened, so it is easy to read it as the only rock that works.  The third tunnel was limestone and held for fifty-one minutes, which breaks that rule.",
+        "1": "Two poor results out of three feels like a verdict, and it is the reading the article warns against in its very next sentence.  Counting outcomes is not the same as comparing conditions.",
+        "3": "Depth is on the list, and the article puts it third and says outright that it is not the whole story.  Picking the cause everybody thinks of first is the habit this piece is written against."
+      },
+      "explain": "The same beacon behaved three different ways, so whatever changed was not the beacon.  Water, the shape of the path, and depth are all properties of the ground, and the article puts them in that order on purpose, because the cause everybody reaches for first turns out to be the weakest of the three."
+    },
+    {
+      "id": "l5-ebsr-which-tunnel-halloway-sits-with",
+      "type": "ebsr",
+      "passageId": "p-three-tunnels",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "partA": {
+        "stem": "The training staff at Halloway measured nine minutes at the thirty foot level.  Which of the three tunnels in this article does their result belong next to?",
+        "choices": [
+          "The third, because its rock is limestone too.",
+          "The second, because Halloway is wet limestone with a bend at much the same depth.",
+          "The first, because that is where the beacon was tested at forty feet, the depth the maker advertised.",
+          "None of them, because this article never mentions Halloway."
+        ],
+        "key": 1
+      },
+      "partB": {
+        "stem": "Which sentence from the article best supports the answer you just gave?",
+        "choices": [
+          "A beacon at the forty foot level held its signal for the full life of the battery.",
+          "That is close to what the training staff at Halloway recorded in their own log.",
+          "A rescue training association ran the same beacon test in three different tunnels last spring.",
+          "The third tunnel was dry limestone with a gentle curve."
+        ],
+        "key": {
+          "0": 3,
+          "1": 1,
+          "2": 0,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "0": "Limestone in both names is a word match, and the article's whole point is that wet and dry limestone behave nothing alike.  The third tunnel held for fifty-one minutes where Halloway held for nine.",
+        "2": "Forty feet is the number the maker chose to advertise, and the Halloway staff worked at thirty.  You matched the claim instead of matching the conditions.",
+        "3": "The article names Halloway directly, one sentence after the second tunnel's result.  Deciding a source is unrelated before finishing it costs you the single link it was written to make."
+      },
+      "explain": "Two sources line up when their conditions line up, not when their numbers do.  Halloway is wet limestone, bent at twenty-five feet, measured at thirty, and so is the second tunnel, which is why eight minutes and nine minutes are the same finding arrived at twice.  The article says so itself, in one sentence that is easy to read straight past."
+    },
+    {
+      "id": "l5-ebsr-advice-the-article-supports",
+      "type": "ebsr",
+      "passageId": "p-three-tunnels",
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 3,
+      "partA": {
+        "stem": "A team has to write one sentence of advice for buyers and back it with this article.  Which sentence can the article actually support?",
+        "choices": [
+          "Do not buy beacons at all, because two of the three tunnels went badly.",
+          "Buy the beacon that performed best in dry granite.",
+          "Run your test in your easiest tunnel so the beacon gets a fair chance.",
+          "Ask what the depth, the rock, and the shape of the passage were before believing a beacon's number."
+        ],
+        "key": 3
+      },
+      "partB": {
+        "stem": "Which sentence from the article would you quote to back the answer you just gave?",
+        "choices": [
+          "It is that a claim about beacon performance is close to meaningless unless it names the depth, the rock, and the shape of the passage.",
+          "The association recommends that every department run one test in its own worst tunnel rather than trusting a figure measured somewhere else.",
+          "The receiver at the entrance never lost it once.",
+          "Read on its own, each of those results looks like a verdict on the equipment."
+        ],
+        "key": {
+          "0": 3,
+          "1": 2,
+          "2": 1,
+          "3": 0
+        }
+      },
+      "distractorRationale": {
+        "0": "Two poor results is a count of outcomes, and the article says outright that the beacon is not the thing that changed.  The line you would be quoting is the one describing the misreading.",
+        "1": "That result is real and it belongs to the granite rather than to the beacon.  Turning the best condition into a shopping rule is the mistake the article spends three paragraphs undoing.",
+        "2": "The line you would be leaning on recommends the opposite: test in your own worst tunnel.  Reversing a recommendation and citing it anyway is the fastest way to be caught."
+      },
+      "explain": "Using evidence means the sentence you wrote has to be the sentence your source will hold up.  The article's own conclusion names depth, rock, and shape, so a buyer's rule built on those three is supported line for line.  A rule built on the best result quietly drops the conditions that produced it."
+    },
+    {
+      "id": "l5-ebsr-the-line-that-locates-the-fault",
+      "type": "ebsr",
+      "passageId": "p-beacon-log",
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 3,
+      "partA": {
+        "stem": "One moment in this log shows the signal loss was about where the beacon sat rather than about a beacon that had failed.  Which moment?",
+        "choices": [
+          "The signal came back within four seconds once the beacon was carried up ten feet.",
+          "The beacon was switched on at the marked bay, the same spot both times.",
+          "The same beacon lost the signal on the second run as well.",
+          "The team waited twenty minutes at thirty feet and nothing came back."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the log would you quote to back the answer you just gave?",
+        "choices": [
+          "On the first run a beacon was carried down to the thirty foot level and switched on at the marked bay.",
+          "The signal did not come back during the twenty minutes the team waited at that depth.",
+          "It returned within four seconds once the beacon was carried up to the twenty foot level.",
+          "On the second run the same beacon was carried to the same bay by a different instructor."
+        ],
+        "key": {
+          "0": 2,
+          "1": 0,
+          "2": 3,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "Using the same marked bay is what makes the two runs comparable, so it is a control on the test rather than a finding from it.  A fixed starting spot explains nothing about the loss.",
+        "2": "A second failure at the same spot shows the first was not a fluke, which is worth knowing and does not tell you why.  Repeating a result is not the same as locating its cause.",
+        "3": "Twenty minutes of nothing is the strongest evidence that the signal was truly gone.  It says how badly the signal failed, not what would bring it back."
+      },
+      "explain": "One detail in this log behaves like a switch: carry the beacon up ten feet and the signal is back in four seconds.  That is the difference between a beacon that has failed and a beacon that is in the wrong place, and it is the line that ties the log to the bend at twenty-five feet in the very next paragraph."
+    },
+    {
+      "id": "l5-mc-what-two-sources-agree-on",
+      "type": "mc",
+      "passageId": "p-three-tunnels",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "stem": "The Halloway training log and this article were written by different people who never worked together.  What do they agree on?",
+      "choices": [
+        "That a beacon's number means nothing until you know the rock, the depth, and the shape of the passage.",
+        "That every department should buy whichever beacon did best in granite.",
+        "That the Wren-7 is a poor beacon.",
+        "That wet limestone is the only condition that matters."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Granite is where one beacon did best, which is a fact about the ground.  Neither source turns a condition into shopping advice, and the article's advice runs the other way entirely.",
+        "2": "Neither source says it.  The log refuses to judge the beacon from two runs, and the article says outright that the beacon is not the thing that changed.",
+        "3": "Water is the first of three conditions the article lists, with the bend and the depth behind it.  Taking the first item on a list for the whole list is the quickest way to misread an article like this."
+      },
+      "explain": "Two sources that never met agree on a method rather than on a verdict.  The log records depth, rock, and time and then refuses to generalise; the article compares three sets of conditions and concludes that a number without conditions cannot be checked.  Agreement of that kind is worth more than either source alone, because neither one could have arranged it."
+    },
+    {
+      "id": "l5-mc-the-line-that-covers-the-claim",
+      "type": "mc",
+      "passageId": "p-beacon-log",
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 3,
+      "stem": "A report claims that the Halloway staff tested the beacon in the very tunnel the maker had already advertised.  Which line from the log covers the whole of that claim?",
+      "choices": [
+        "The staff make no claim about how this beacon works in other tunnels.",
+        "Two beacons of the Wren-7 model were tested over two days in the Halloway service tunnel.",
+        "That is the same tunnel named in the maker's brief.",
+        "The purpose was to decide whether this site should replace its hardwired line with beacons before the summer exercises."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "That line is the limit the staff put on their own result.  It is the sentence you would need for a completely different claim.",
+        "1": "That line proves they tested at Halloway and stops there.  The claim has two halves, and the half about the maker having already named the tunnel is missing.",
+        "3": "That is why they ran the test, not where.  A purpose and a place are different things, and only one of them appears in the claim."
+      },
+      "explain": "Evidence has to cover the whole claim rather than most of it.  This claim ties two facts together, the tunnel the staff used and the tunnel the maker advertised, and only one line in the log puts both of them in a single sentence.  A quotation that proves half a claim is how a report gets taken apart."
+    },
+    {
+      "id": "l5-mc-why-publish-all-three",
+      "type": "mc",
+      "passageId": "p-three-tunnels",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "stem": "The association published all three tunnel results side by side instead of reporting the best one.  Why does that make the results more useful?",
+      "choices": [
+        "It shows the association is not being paid by the beacon's maker.",
+        "The differences between them are what reveal that the ground, not the beacon, is doing the work.",
+        "Three numbers averaged together give a more accurate figure than one number does.",
+        "It gives a buyer three chances to find a result they like."
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "Publishing everything does suggest nobody is being protected, which is a fact about the association rather than about the results.  The question asks what the three together tell you.",
+        "2": "Averaging fifty-one minutes, eight minutes, and a full battery would hide the very thing the article found.  The spread is the finding, and an average is a way of throwing it away.",
+        "3": "That is what a buyer should not do with them, and the article says to ask for conditions before results.  Three numbers to choose between is the problem, not the point."
+      },
+      "explain": "One result reads as a verdict on the equipment and three read as an experiment.  The beacon is the constant across all three tunnels, so anything that changed has to be the ground, which is what lets the article name water, shape, and depth as the three things that did.  Side by side is not a courtesy; it is the method."
+    },
+    {
+      "id": "l5-hot-ground-not-device",
+      "type": "hottext",
+      "passageId": "p-three-tunnels",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 2,
+      "mode": "sentence",
+      "stem": "Tap the three sentences that explain how the ground itself acts on a signal.  The others are the article talking about its own report or about what you should do.",
+      "spans": [
+        "It published all three results side by side, which turns out to be far more useful than any one of them alone.",
+        "Wet rock absorbs radio energy far more effectively than dry rock does.",
+        "The beacon there held for fifty-one minutes before the signal became unreliable.",
+        "A sharp bend forces the signal to cut the corner through solid material instead of following the open passage.",
+        "A team deciding what to buy should ask for the conditions of a test before asking for the result.",
+        "A damp limestone wall can cost a team more range than another ten feet of depth would."
+      ],
+      "key": [
+        1,
+        3,
+        5
+      ],
+      "explain": "The article's central move is to separate the device from the ground it is used in, and these three sentences are where the ground does the explaining: wet rock turns signal into heat, a bend forces the signal through extra stone, and damp walls can cost more range than ten more feet of depth.  The other three are the article describing its own report and telling you what to do with it."
+    },
+    {
+      "id": "l5-hot-measured-or-concluded",
+      "type": "hottext",
+      "passageId": "p-beacon-log",
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 3,
+      "mode": "word",
+      "stem": "A report can quote a measurement as a fact and must quote a judgement as an opinion.  Tap the three phrases the staff measured.",
+      "spans": [
+        "held the signal for nine minutes",
+        "may explain the gap",
+        "lost the signal after seven minutes",
+        "nowhere near enough evidence",
+        "differ by no more than three seconds",
+        "treat the beacon as a second method"
+      ],
+      "key": [
+        0,
+        2,
+        4
+      ],
+      "explain": "Three of these came off a stopwatch and three came out of a discussion, and a report has to keep them apart.  Nine minutes, seven minutes, and a three-second spread between two observers can be quoted as facts about what happened.  May explain, nowhere near enough, and treat it as a second method are the staff reasoning, and quoting reasoning as though it were measurement is how a source gets misused."
+    },
+    {
+      "id": "l5-ms-what-both-sources-back",
+      "type": "ms",
+      "passageId": "p-three-tunnels",
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 3,
+      "stem": "Choose the three statements that both the Halloway training log and this article would back up.",
+      "choices": [
+        "The Wren-7 is the worst beacon on the market",
+        "Wet rock costs a beacon range",
+        "Depth is the only thing that decides how far a signal travels",
+        "A bend between the beacon and the receiver costs a beacon range",
+        "A department can trust a figure measured in another department's tunnel",
+        "A performance figure with no conditions attached cannot be checked"
+      ],
+      "key": [
+        1,
+        3,
+        5
+      ],
+      "distractorRationale": {
+        "0": "Neither source ranks the beacon against anything, and both tested one beacon rather than several.  There is nothing in either one to build a worst out of.",
+        "2": "Depth is on the article's list and it comes third, behind water and shape, and the article says outright that it is not the whole story.  Picking the cause you thought of first is the habit both sources are written against.",
+        "4": "Both say the opposite in almost the same words: the article tells departments to test their own worst tunnel, and the log refuses to speak about any tunnel except its own."
+      },
+      "explain": "Two sources agree on three things and all three are about conditions rather than about the product.  Water and bends cost range in both accounts, and both refuse a number that arrives without the depth, the rock, and the shape it was measured in.  Anything about how good or bad the beacon is comes from neither of them."
+    },
+    {
+      "id": "l5-cloze-lining-up-two-sources",
+      "type": "cloze",
+      "passageId": "p-three-tunnels",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "stem": "Complete the summary that puts both sources together.  Halloway measured nine minutes and the association's second tunnel measured eight, and those two results agree because both tunnels are {{0}}, which lets the gap with the maker's ninety-minute claim be explained by {{1}} rather than by the beacon.",
+      "blanks": [
+        {
+          "choices": [
+            "at the same depth below the surface",
+            "tested by the same two instructors",
+            "wet limestone with a sharp bend"
+          ],
+          "key": 2
+        },
+        {
+          "choices": [
+            "mistakes in the timing",
+            "properties of the ground",
+            "faults in the receiver"
+          ],
+          "key": 1
+        }
+      ],
+      "explain": "Putting two sources together means lining up their conditions before their numbers.  Halloway and the second tunnel share wet limestone and a sharp bend, so eight minutes and nine minutes are one finding rather than two, and the maker's ninety came out of dry granite in a straight run.  Nothing about the beacon has to change for all three numbers to be true at once."
+    },
+    {
+      "id": "l5-order-how-the-case-is-built",
+      "type": "order",
+      "passageId": "p-three-tunnels",
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 3,
+      "stem": "Put the steps of the article's case in the order it makes them.",
+      "tiles": [
+        "Name the three conditions that differed, every one a property of the ground",
+        "Report what the same beacon did in three different tunnels",
+        "Tell a buyer to ask for the conditions of a test before asking for its result",
+        "Point out that read together the results say the beacon is not what changed"
+      ],
+      "key": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "explain": "The article does not open with its advice, and that ordering is the argument.  Three results come first, then the observation that reading them together changes what they mean, then the three ground conditions that explain the spread, and only then the rule for a buyer.  Move the advice to the front and it is nothing but an opinion."
+    },
+    {
+      "id": "l6-ebsr-what-a-log-is-for",
+      "type": "ebsr",
+      "passageId": "p-the-log",
+      "targets": [
+        "c1-lit-2-central-ideas"
+      ],
+      "coachTopic": "central-theme",
+      "dok": 3,
+      "partA": {
+        "stem": "What is this story finally saying a log is for?",
+        "choices": [
+          "For recording the parts of a job that went to plan.",
+          "For proving to Marchetti that the exercise was done properly.",
+          "For the next person, who will be standing where you stood and needing what you knew.",
+          "For settling who was late and who was on time."
+        ],
+        "key": 2
+      },
+      "partB": {
+        "stem": "Which sentence from the story best supports the answer you just gave?",
+        "choices": [
+          "Marchetti hands out the log sheets face down, which is a small thing he does to stop people writing before they have thought.",
+          "That person will be standing on a landing somewhere with one hand on a rail, wondering whether the sound they just heard matters.",
+          "She has logged the eleven seconds she was late calling in, and the fact that she nearly aborted the exercise, and the reason she decided not to.",
+          "It records entry at ten fourteen, contact with front desk staff, two clicks at ten twenty-two, the folder located and photographed and put back, and exit at ten forty-one."
+        ],
+        "key": {
+          "0": 3,
+          "1": 0,
+          "2": 1,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "0": "Jonah's first sheet is exactly that, every step that went to plan and nothing else.  The story spends the rest of its length showing why that sheet is not finished.",
+        "1": "Marchetti runs the debrief and hands out the sheets, so it is a fair guess that he is the reader.  He collects them without reading a single one and says the logs are not marked and never have been.",
+        "3": "Ines does log the eleven seconds she was late, and in the same breath she logs the reason she decided not to abort.  She is recording a decision, not confessing a time."
+      },
+      "explain": "Marchetti gives the answer in one line and the story then proves it twice.  A log is not for the marker, because nobody marks it, and it is not for the writer either.  It is for whoever ends up on a landing with one hand on a rail, which is exactly why the part Jonah could not explain is the part that had to go in."
+    },
+    {
+      "id": "l6-mc-what-the-lobby-scene-is-about",
+      "type": "mc",
+      "passageId": "p-cover-story",
+      "targets": [
+        "c1-lit-2-central-ideas"
+      ],
+      "coachTopic": "central-theme",
+      "dok": 3,
+      "stem": "Which sentence best states what this whole scene is about?",
+      "choices": [
+        "Getting past a front desk is mostly a matter of not looking nervous.",
+        "A good cover story is one that answers every question before it is asked.",
+        "A museum is easy to enter if you know which bus goes there.",
+        "A cover story only has to last until you can offer something dull and checkable instead."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "His pulse is loud and his hands shake on the stairs, and he still gets upstairs.  The scene says nerves are not what decides it, and the boring checkable answer is.",
+        "1": "The card has eleven words on it and the second question is not one of them, which is the moment the scene is built around.  A cover that answered everything would have made the scene unnecessary.",
+        "2": "The bus does turn out to matter, and it matters because it was true and Ferris already knew it, not because it is a route to the museum.  You took the detail and left its reason behind."
+      },
+      "explain": "Marchetti's card runs out at the second question, and what saves Jonah is the rule underneath it: never invent, offer something boring that can be checked.  The bus works for the same reason the offer to wait does, because both are true and both would cost Ferris something to verify.  The scene is about what you do once the script has ended."
+    },
+    {
+      "id": "l6-ebsr-a-clipboard-like-a-wall",
+      "type": "ebsr",
+      "passageId": "p-cover-story",
+      "targets": [
+        "c1-lit-3-word-meanings"
+      ],
+      "coachTopic": "vocab-figurative",
+      "dok": 3,
+      "partA": {
+        "stem": "One object in the opening description of the front desk is compared to something else.  What does that comparison tell you about the woman holding it?",
+        "choices": [
+          "She is not really paying attention to whoever is in front of her.",
+          "She is suspicious of Jonah from the moment he walks in.",
+          "She has done this so many times that it bores her.",
+          "She uses it to hold people at a distance without having to say so."
+        ],
+        "key": 3
+      },
+      "partB": {
+        "stem": "Which sentence from the story best supports the answer you just gave?",
+        "choices": [
+          "Then she waves him toward the stairs and tells him not to touch anything in the model room, in the flat tone of somebody who has said that sentence four thousand times.",
+          "She asks him to sign the visitor log and does not look up while she says it.",
+          "The woman at the front desk has reading glasses pushed up into her hair and a clipboard she holds like a small wall.",
+          "Ferris looks at him for two entire seconds without blinking."
+        ],
+        "key": {
+          "0": 1,
+          "1": 3,
+          "2": 0,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "0": "She does not look up while she speaks, which is true and is a different idea.  A wall is about keeping something on the far side of it, not about failing to notice it.",
+        "1": "Two entire seconds without blinking is real suspicion, and it arrives after he offers to wait.  The clipboard is already up before she has any reason at all, which is what makes it a wall rather than a reaction.",
+        "2": "The four-thousand-times line comes later and it is about routine.  You carried a second image over to explain the first, and the two are doing different work."
+      },
+      "explain": "A wall is not a shield and it is not a mood; it is a thing that keeps other people on the far side of it.  Ferris holds the clipboard that way with every visitor, before Jonah has said a word, so the comparison tells you about her job rather than about him.  Figurative language is a question about what the comparison is for."
+    },
+    {
+      "id": "l6-hot-plain-words-carrying-more",
+      "type": "hottext",
+      "passageId": "p-relay-room",
+      "targets": [
+        "c1-lit-3-word-meanings"
+      ],
+      "coachTopic": "vocab-figurative",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the three sentences where the narrator's plain words carry far more than they say.  The other three mean exactly what they say and no more.",
+      "spans": [
+        "Jonah goes in at ten fourteen.",
+        "If I do not call it and I am wrong, that is a very different sort of afternoon.",
+        "I write the time down, and my hand is steadier than it was thirty seconds ago.",
+        "Two clicks means inside, moving, no help needed.",
+        "At ten twenty-one I put my thumb on the transmit key and then take it off again.",
+        "I have decided in advance to let him."
+      ],
+      "key": [
+        1,
+        2,
+        5
+      ],
+      "explain": "This narrator never names a feeling, so the meaning sits underneath the words.  A very different sort of afternoon means somebody gets hurt, a hand that is steadier now is a hand that was shaking a minute ago, and deciding in advance to let him means deciding not to say what the minute cost her.  The times and the radio code mean precisely what they say, which is what makes the other three stand out."
+    },
+    {
+      "id": "l6-ebsr-why-her-log-runs-longer",
+      "type": "ebsr",
+      "passageId": "p-relay-room",
+      "targets": [
+        "c1-lit-5-analysis"
+      ],
+      "coachTopic": "evidence-across-texts",
+      "dok": 4,
+      "partA": {
+        "stem": "In the debrief story Ines logs the reason she decided not to abort the exercise.  What does this story show that reason was?",
+        "choices": [
+          "She was waiting for Jonah to come out and tell her the whole thing was easy.",
+          "She said out loud what she actually knew, in order, and none of it said Jonah was in trouble.",
+          "She trusted that the least interesting job in the building could not matter much.",
+          "Calling it off felt safe from inside the van, so she went with the feeling."
+        ],
+        "key": 1
+      },
+      "partB": {
+        "stem": "Which sentence from this story best supports the answer you just gave?",
+        "choices": [
+          "I say out loud what I actually know, in order, like reading down a list.",
+          "My job on the Halloway exercise is the least interesting one in the building, which Marchetti says is how you can tell it matters.",
+          "Jonah will come out at ten forty-one and tell me the whole thing was easy.",
+          "Calling it off is not the safe choice, whatever it feels like from inside a van."
+        ],
+        "key": {
+          "0": 2,
+          "1": 0,
+          "2": 1,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "0": "Jonah saying it was easy happens at ten forty-one, once everything is over.  A story is allowed to look forward, and what it looks forward to cannot be a reason for something that has already happened.",
+        "2": "Marchetti's line is that the least interesting job is how you can tell it matters.  You stopped at the comma, and the sentence turns immediately after it.",
+        "3": "That is the sentence she is arguing against, not the one she followed.  Calling it off is not the safe choice, and reading the line as though it said the opposite reverses the whole paragraph."
+      },
+      "explain": "Both stories describe the same minute from opposite sides, and only this one shows the inside of it.  Ines does not decide by feel; she says out loud what she actually knows, in order, and the list ends with nothing that says Jonah is in trouble.  That reasoning is why her log runs to a second sheet while Jonah's outcomes fit on one."
+    },
+    {
+      "id": "l6-mc-easy-in-two-stories",
+      "type": "mc",
+      "passageId": "p-the-log",
+      "targets": [
+        "c1-lit-5-analysis"
+      ],
+      "coachTopic": "evidence-across-texts",
+      "dok": 4,
+      "stem": "In the van story Ines predicts Jonah will say the whole thing was easy, and decides in advance to let him.  Here he says it, and then does something else.  What has changed between the two moments?",
+      "choices": [
+        "He has learned who a log is for, so the easy version stops being enough for him.",
+        "He is telling the truth in one story and lying in the other.",
+        "He tells her about the landing because Marchetti made him add the line.",
+        "He has decided Ines was wrong to expect him to say it."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Easy is what he has been planning to say since the stairs, in both stories.  Neither one calls it a lie, and the interesting part is that he stops leaving it there.",
+        "2": "Marchetti hands the sheet back with no expression at all and asks for nothing.  Jonah is the one who asks for the sheet, which is what makes the line worth writing.",
+        "3": "Her prediction is right, and he says exactly what she expected, in the corridor.  What changes is what he does after saying it, not whether she read him correctly."
+      },
+      "explain": "Ines expects the easy version and is willing to let it stand, which is a kindness rather than a test.  Between the van and the corridor Jonah hears who a log is for, writes the least impressive sentence on his sheet, and then tells her the same thing out loud without being asked.  He says easy in both stories; in only one of them does he stop there."
+    },
+    {
+      "id": "l6-hot-where-the-cover-runs-out",
+      "type": "hottext",
+      "passageId": "p-cover-story",
+      "targets": [
+        "c1-lit-6-text-structure"
+      ],
+      "coachTopic": "structure-story-parts",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "One sentence is where the card in Jonah's pocket runs out, and one is the rule the story gives him instead.  Tap those two.",
+      "spans": [
+        "It says school project, local architecture, and the number fourteen bus from Halloway Road.",
+        "Then she asks whether his teacher sent a permission letter ahead, and the answer to that is nowhere on the card.",
+        "There is a long beat where Jonah can hear his own pulse doing something stupid and loud in his ears.",
+        "Jonah climbs the stairs at an ordinary pace and makes himself count them.",
+        "Marchetti's real rule surfaces half a second later, which is that when the cover runs out you never invent, you offer something boring that can be checked.",
+        "Halfway up he works out that the useful part was never the letter at all."
+      ],
+      "key": [
+        1,
+        4
+      ],
+      "explain": "A scene is built out of parts that each do a job, and two of these are the hinge the rest turns on.  One sentence is where the cover runs out, and the next thing the reader is given is the rule that replaces it.  The eleven words, the loud pulse, the counted stairs, and the realisation on the way up all sit on one side of that hinge or the other, which is how you can tell none of them is it."
+    },
+    {
+      "id": "l6-cloze-where-the-aside-sits",
+      "type": "cloze",
+      "passageId": "p-relay-room",
+      "targets": [
+        "c1-lit-6-text-structure"
+      ],
+      "coachTopic": "structure-story-parts",
+      "dok": 3,
+      "stem": "Complete the note on how this story is built.  The narrator stops the clock in the middle of the wait to explain that {{0}}, and that aside is placed where it is because it comes {{1}}, so the reader is holding the decision at the same moment she is.",
+      "blanks": [
+        {
+          "choices": [
+            "calling the exercise off is not the safe choice",
+            "the radio set has broken down",
+            "Jonah has already been caught"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "after Jonah comes back out",
+            "at the very start of the story",
+            "before the radio clicks twice"
+          ],
+          "key": 2
+        }
+      ],
+      "explain": "The aside is not a digression; it is positioned.  It arrives at ten twenty-one, one minute before the radio clicks, so the reader weighs the decision without yet knowing how it turns out.  Move the same paragraph to the end and it stops being a decision and becomes an excuse, because by then everybody knows nothing went wrong."
+    },
+    {
+      "id": "l6-ebsr-what-the-brief-is-for",
+      "type": "ebsr",
+      "passageId": "p-beacon-brief",
+      "targets": [
+        "c1-inf-7-language-use"
+      ],
+      "coachTopic": "viewpoint-purpose",
+      "dok": 3,
+      "partA": {
+        "stem": "Source A gives real facts about a real product.  What is the writer's purpose in giving them?",
+        "choices": [
+          "To move a reader from interest to a purchase.",
+          "To warn departments about the danger of dead air.",
+          "To prove that rock is no longer a barrier to radio contact.",
+          "To tell a department what the beacon is rated for and how it is carried."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from Source A best supports the answer you just gave?",
+        "choices": [
+          "The Wren-7 has proven that forty feet of rock is no longer a barrier to contact.",
+          "Departments that have been saving for hardwired line can spend that money where it will do more good.",
+          "Until now the only honest answer to dead air has been a length of wire and a great deal of hope.",
+          "The Wren-7 is rated for water, dust, and impact."
+        ],
+        "key": {
+          "0": 1,
+          "1": 2,
+          "2": 0,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "The brief does describe dead air, in one sentence, just before the beacon arrives to solve it.  A danger set up in a single line is the opening of a sales pitch rather than the point of the document.",
+        "2": "That is the brief's boldest claim, and a claim is what a document says rather than what it is for.  The very next line tells departments where to spend the money instead.",
+        "3": "Water, dust, and impact are what the beacon is rated for, and that paragraph is the product description.  A part of a document is not the purpose of the document."
+      },
+      "explain": "Purpose is not the same as content, and this document is full of real content.  Every part of it points one way: the danger gets one sentence, the test gets one paragraph, and the reader is then told where to move a budget and given a sales office to ring.  A document written to record a test would have carried a date."
+    },
+    {
+      "id": "l6-short-who-the-entry-was-written-for",
+      "type": "shorttext",
+      "passageId": "p-beacon-log",
+      "targets": [
+        "c1-inf-7-language-use"
+      ],
+      "coachTopic": "viewpoint-purpose",
+      "dok": 2,
+      "stem": "Source B was never published anywhere.  In three words or fewer, who was it written for?",
+      "accept": [
+        "the staff",
+        "staff",
+        "the staff themselves",
+        "staff themselves",
+        "the training staff",
+        "training staff",
+        "themselves",
+        "the instructors",
+        "instructors"
+      ],
+      "maxWords": 3,
+      "explain": "The entry says outright that it is written for the staff themselves and is not published anywhere, and everything else about it follows from that one fact.  Nobody is being persuaded, so the numbers arrive raw, the awkward local conditions get written down, and the limits of the evidence are stated rather than hidden."
+    },
+    {
+      "id": "l6-mc-the-chain-under-dead-air",
+      "type": "mc",
+      "passageId": "p-dead-air",
+      "targets": [
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "inference-relationships",
+      "dok": 3,
+      "stem": "The article says silence is ambiguous.  Which chain of causes does the article actually build around that idea?",
+      "choices": [
+        "Relays fail, so the signal dies, so silence becomes ambiguous.",
+        "Rock absorbs the signal, so a team needs a more powerful radio, and a powerful radio ends the silence.",
+        "Rock absorbs the signal, so a radio goes quiet, and a quiet radio could mean three different things, so the crews fix a time to check in.",
+        "A team below is in trouble, so the radio goes quiet, so the surface crew sends help."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "Relays are part of the fix, and the fix comes after the problem.  Putting the cure before the disease turns the second half of the article into the cause of the first.",
+        "1": "That is the chain the article names and then rejects in a single sentence, saying power was never the problem the rock created.  Rejected reasoning is still reasoning printed on the page, which is why it is easy to pick up by mistake.",
+        "3": "You have run it backwards.  Trouble is one of the three things silence might mean, and the whole difficulty is that the crew above cannot tell which, so silence cannot be what tells them to send help."
+      },
+      "explain": "Following an article means following what causes what.  Rock turns signal into heat, so radios go quiet; silence can mean busy, out of range, or in serious trouble, so it carries no usable information; a fixed check-in interval is what turns a missed minute back into a fact.  Every fix in the second half answers a specific problem named in the first."
+    },
+    {
+      "id": "l6-ms-three-moves-one-system",
+      "type": "ms",
+      "passageId": "p-long-way",
+      "targets": [
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "inference-relationships",
+      "dok": 3,
+      "stem": "The article gives three moves and one counting rule.  Choose the three statements that describe how those parts work together.",
+      "choices": [
+        "Each move forces a follower into a choice that could be the wrong one",
+        "The moves are listed in the order of how well each one works",
+        "Each move is designed for a different kind of street",
+        "The moves create sightings, and the counting rule says how many sightings mean anything",
+        "One move on its own proves nothing, which is why there are three of them",
+        "The counting rule replaces the moves once a courier is experienced"
+      ],
+      "key": [
+        0,
+        3,
+        4
+      ],
+      "distractorRationale": {
+        "1": "They are numbered first, second, third, and numbering is not ranking.  The article never says one move works better than another, and the change of level is never called the best.",
+        "2": "Stairs, windows, and side streets do suggest different streets, and the article never sorts them that way.  It sorts them by what each one does to a follower.",
+        "5": "The rule counts what the moves produce, so it cannot replace them.  With no moves there are no sightings to count."
+      },
+      "explain": "The three moves and the counting rule are one system rather than four separate tips.  Every move puts a follower somewhere that staying hidden requires a decision, every decision risks a sighting, and the rule of three is what turns a pile of sightings into a verdict.  One sighting is nothing at all, which is precisely why one move would be."
     }
   ]
 }
