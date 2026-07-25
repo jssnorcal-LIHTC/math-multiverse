@@ -289,17 +289,20 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
         note(`pack ela-g6-spy: answer path ok (item ${answered}: wrong -> explain -> NEXT)`);
       }
 
-      // Nothing may scroll the page body; the passage scrolls inside its own box. When this fails it
-      // names the geometry, because the cause is almost never the pack. .host-frame is sized
-      // `calc(100vh - 160px)`, which is a hardcoded assumption about the chrome above and below it:
-      // that chrome measures 139px in Chrome on Windows, so there is 21px of slack, and any font stack
-      // that makes it taller than 160px pushes the page over. The six math modules sit in the same
-      // frame and overflow by exactly the same number of pixels, measured, so a failure here is a
-      // shell-wide layout report and not a pack defect. frameTop + frameH + belowFrame is the whole
-      // page height; compare it against innerH to see where the pixels went.
+      // Nothing may scroll the page body; the passage scrolls inside its own box. The geometry is
+      // reported on every run, pass or fail, because the interesting number changed shape with the
+      // flex refactor. #app is now exactly the viewport and .host-frame takes the space left after
+      // the header and the toolbar, so page slack is 0 by construction rather than by margin, and
+      // asking "how much spare page is there" no longer means anything. What does mean something is
+      // frameH: how much room the module or the pack actually got. It was a fixed 608px under the old
+      // `calc(100vh - 160px)`, and it is now whatever the font stack leaves, which is what makes this
+      // correct on a browser nobody measured. Watch frameH across environments: the tightest module
+      // is razor-crest, which starts clipping when the frame drops to about 576px.
+      // A failure here is shell-wide and not a pack defect: the six math modules share this frame.
       const layout = await page.evaluate(() => {
         const f = document.querySelector('.host-frame');
         const b = f && f.getBoundingClientRect();
+        const main = document.querySelector('#app > main');
         return {
           overflowY: document.documentElement.scrollHeight - window.innerHeight,
           overflowX: document.documentElement.scrollWidth - window.innerWidth,
@@ -308,8 +311,10 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
           frameTop: b ? Math.round(b.top) : null,
           frameH: b ? Math.round(b.height) : null,
           belowFrame: b ? Math.round(document.body.scrollHeight - b.bottom) : null,
+          mainOverflow: main ? main.scrollHeight - main.clientHeight : null,
         };
       });
+      note(`pack layout: frame ${layout.frameH}px at y=${layout.frameTop}, page ${layout.bodyH}/${layout.innerH}, slack ${layout.innerH - layout.bodyH}px`);
       if (layout.overflowY > 2) {
         problems.push(`pack: page body scrolls by ${layout.overflowY}px at 1024x768 -- ${JSON.stringify(layout)}`);
       }
