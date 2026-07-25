@@ -2836,6 +2836,11 @@
     .host-toolbar { grid-template-columns: 1fr; }
     .host-title { text-align: left; }
   }
+
+  /* Duplicated deliberately from engine/engine.css. The launcher is the math game's front door and must
+     not depend on an engine asset arriving: with the stylesheet missing, this container falls back to
+     .module-grid's display:grid and confines each shelf to a third-width track, giving 96px cards. */
+  #module-grid { display: block; }
 </style>
 <link rel="stylesheet" href="engine/engine.css">
 </head>
@@ -3700,11 +3705,13 @@ async function openPack(packId) {
   if (!entry) return;
   currentPackId = packId;
   currentModuleId = null;
+  let pack;
   try {
-    const pack = await MVPack.loadPack(packId);
-    MVRunner.register(pack, InlineModules);
-    renderPackLevels(entry, pack);
+    pack = await MVPack.loadPack(packId);
   } catch (e) {
+    // The child may have tapped somewhere else while this was in flight. Painting an error over the
+    // screen they moved to is worse than saying nothing.
+    if (currentPackId !== packId) return;
     // A failed fetch must say so on the screen the child is actually looking at. We just switched to
     // 'levels', so the message belongs in #level-grid. #host-frame lives on the MODULE screen, so
     // writing there would leave the levels screen showing the previous module's grid and put the error
@@ -3715,7 +3722,13 @@ async function openPack(packId) {
     $('lvl-select-subtitle').textContent = '';
     const grid = $('level-grid');
     if (grid) grid.innerHTML = `<div class="host-placeholder">Could not load ${entry.title}.<br>${String(e.message || e)}</div>`;
+    return;
   }
+  // Same check on the success path: this render calls showScreen and would yank the child out of
+  // whatever they started while the fetch was running.
+  if (currentPackId !== packId) return;
+  MVRunner.register(pack, InlineModules);
+  renderPackLevels(entry, pack);
 }
 
 function renderPackLevels(entry, pack) {
@@ -10628,11 +10641,6 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
 document.addEventListener('DOMContentLoaded', () => {
   Save.load();
   Save.beginSession();
-  MVPack.PackSave.load();
-  MVPack.loadManifest()
-    .then(m => { buildShelves(m); })
-    .catch(e => { console.warn('packs unavailable, math only:', e && e.message); buildShelves(null); })
-    .then(() => { renderLauncher(); renderHeader(); });
 
   $('btn-back-launcher').addEventListener('click', exitToLauncher);
   $('btn-back-levels').addEventListener('click', exitToLevels);
@@ -10722,6 +10730,32 @@ document.addEventListener('DOMContentLoaded', () => {
   $('btn-coach-close').addEventListener('click', () => {
     $('coach-modal').style.display = 'none';
   });
+
+  // Render the math game before anything optional runs, and after every listener above is wired. The
+  // math save holds months of a real child's progress and this handler is what makes the page work at
+  // all; nothing below may be able to prevent it.
+  buildShelves(null);
+  renderLauncher();
+  renderHeader();
+
+  // The pack layer is optional and lives in separate files that may simply not be there: a copied HTML
+  // without its engine/ folder, a partial sync, one dropped request. localStorage can also throw outright
+  // (Safari, Block All Cookies), and probing `typeof localStorage` is itself what throws. So guard the
+  // whole thing, and let every failure degrade to the math game rather than to a blank page.
+  try {
+    if (typeof MVPack === 'undefined') throw new Error('engine scripts did not load');
+    MVPack.PackSave.load();
+    MVPack.loadManifest()
+      .then(m => { buildShelves(m); renderLauncher(); renderHeader(); })
+      .catch(e => {
+        console.warn('packs unavailable, math only:', e && e.message);
+        // renderLauncher clears the grid before it builds, so a throw inside the then above can leave it
+        // empty. Rebuild math-only rather than leaving whatever half-state it reached.
+        buildShelves(null); renderLauncher(); renderHeader();
+      });
+  } catch (e) {
+    console.warn('pack layer unavailable, math only:', e && e.message);
+  }
 });
 
 // Topic display labels for stats UI
