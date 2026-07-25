@@ -296,8 +296,11 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
       // asking "how much spare page is there" no longer means anything. What does mean something is
       // frameH: how much room the module or the pack actually got. It was a fixed 608px under the old
       // `calc(100vh - 160px)`, and it is now whatever the font stack leaves, which is what makes this
-      // correct on a browser nobody measured. Watch frameH across environments: the tightest module
-      // is razor-crest, which starts clipping when the frame drops to about 576px.
+      // correct on a browser nobody measured. Watch frameH across environments: the tightest module is
+      // razor-crest, which is clean at 570px and clips 7px at 560px at the default root font, while
+      // the other five are clean down to 520px. That floor rises as the font stack grows, because the
+      // module's own content grows with it. Windows Chrome gives 629px here and CI gives 595px, so the
+      // margin before anything clips is 69px and 35px respectively.
       // A failure here is shell-wide and not a pack defect: the six math modules share this frame.
       const layout = await page.evaluate(() => {
         const f = document.querySelector('.host-frame');
