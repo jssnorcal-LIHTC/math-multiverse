@@ -79,6 +79,24 @@ check('match, order and cloze now get a verdict instead of being silently exempt
   assert.strictEqual(authoredKeyOf({ type: 'shorttext', accept: ['x'], maxWords: 3 }), null);
 });
 
+check('authoredKeyOf returns null, not a garbage array, for a malformed cloze or match key', () => {
+  // A blank with no key (or key: null) previously produced [undefined] / [null] instead of null,
+  // inconsistent with match's own "incomplete key is a shape defect, return null" discipline stated
+  // two lines above it. checkItemShape already reports the real defect; comparing garbage here only
+  // hides it behind a verdict question that was never well formed to begin with.
+  assert.strictEqual(authoredKeyOf({ type: 'cloze', stem: 'a {{0}}', blanks: [{ choices: ['x', 'y'] }] }), null,
+    'a blank missing its key must return null, not [undefined]');
+  // A match key naming a row beyond rowLabels.length, or naming the same row twice, was silently
+  // dropped or resolved last-write-wins by the old Map/.map construction instead of surfacing as a
+  // defect.
+  assert.strictEqual(authoredKeyOf({ type: 'match', rowLabels: ['a', 'b'], colLabels: ['x', 'y'], key: [[0, 0], [5, 1]] }), null,
+    'a row index beyond rowLabels.length must return null');
+  assert.strictEqual(authoredKeyOf({ type: 'match', rowLabels: ['a', 'b'], colLabels: ['x', 'y'], key: [[0, 0], [0, 1]] }), null,
+    'the same row named twice must return null, not last-write-wins');
+  // Control: a genuinely valid match key must still flatten correctly, unaffected by the fix.
+  assert.deepStrictEqual(authoredKeyOf({ type: 'match', rowLabels: ['a', 'b', 'c'], colLabels: ['x', 'y'], key: [[2, 0], [0, 0], [1, 1]] }), [0, 1, 0]);
+});
+
 check('blindQuestion builds a non-leaking lettered prompt for match, order and cloze', () => {
   const p = clone();
   const passage = p.passages[0];
@@ -106,6 +124,22 @@ check('blindQuestion hides the key, the explanation and the rationales', () => {
   assert.strictEqual(/"key"|\bkey\s*[:=]/.test(prompt), false, 'prompt leaked the key field');
   assert.strictEqual(prompt.includes(p.text), true, 'prompt must carry the passage');
   assert.strictEqual(prompt.includes(it.choices[3]), true, 'prompt must carry every option');
+});
+
+check('ms states its answer count but hottext does not, matching what each renderer shows the student', () => {
+  // types.ms.render shows a literal "Choose N." hint, so the blind pass must see N too: fidelity,
+  // not a leak. types.hottext.render shows no count at all, so stating one there hands the blind
+  // pass an advantage the child never has and makes agreement artificially easy, the dangerous
+  // direction for a check whose whole job is to catch genuine ambiguity. Pinned here so the two
+  // cases are never "tidied" into agreement.
+  const p = clone();
+  const passage = p.passages[0];
+  const MS = { type: 'ms', stem: 'Pick two.', choices: ['a', 'b', 'c', 'd'], key: [1, 3] };
+  const HOTTEXT = { type: 'hottext', mode: 'sentence', stem: 'Tap them.', spans: ['s0', 's1', 's2'], key: [0, 2] };
+  const msPrompt = blindQuestion(MS, passage).prompt;
+  const htPrompt = blindQuestion(HOTTEXT, passage).prompt;
+  assert.strictEqual(/an array of the 2 letters/.test(msPrompt), true, 'ms must state the count, matching the "Choose 2." hint the student sees');
+  assert.strictEqual(/[0-9]+ letters/.test(htPrompt), false, 'hottext must not state a count; the renderer never shows the student one');
 });
 
 check('a complete agreeing ledger validates', () => {
