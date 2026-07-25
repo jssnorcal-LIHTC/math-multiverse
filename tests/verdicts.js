@@ -45,11 +45,28 @@ function authoredKeyOf(item) {
   if (item.type === 'hottext') return Array.isArray(item.key) ? item.key.slice() : null;
   if (item.type === 'ebsr') return (item.partA && Number.isInteger(item.partA.key)) ? item.partA.key : null;
   if (item.type === 'order') return Array.isArray(item.key) ? item.key.slice() : null;
-  if (item.type === 'cloze') return Array.isArray(item.blanks) ? item.blanks.map(function (b) { return b && b.key; }) : null;
+  if (item.type === 'cloze') {
+    if (!Array.isArray(item.blanks)) return null;
+    const out = item.blanks.map(function (b) { return (b && Number.isInteger(b.key)) ? b.key : null; });
+    // A blank with no key (or a non-integer key) is a SHAPE defect for checkItemShape to report,
+    // not a verdict question: comparing a blind answer against undefined or null tells us nothing.
+    return out.includes(null) ? null : out;
+  }
   if (item.type === 'match') {
     // One column per row, expressed in row order, so it compares as a plain array.
     if (!Array.isArray(item.key) || !Array.isArray(item.rowLabels)) return null;
-    const byRow = new Map(item.key.filter(Array.isArray).map(function (c) { return [Number(c[0]), Number(c[1])]; }));
+    const n = item.rowLabels.length;
+    const byRow = new Map();
+    for (const c of item.key) {
+      if (!Array.isArray(c)) continue;
+      const r = Number(c[0]), col = Number(c[1]);
+      // A row index beyond rowLabels, or the same row named twice, is a SHAPE defect for
+      // checkItemShape to report, not a verdict question. The old Map/.map construction silently
+      // dropped an out-of-range row and let a duplicate row resolve last-write-wins, which hid the
+      // defect instead of surfacing it; both now return null here instead.
+      if (!Number.isInteger(r) || r < 0 || r >= n || byRow.has(r)) return null;
+      byRow.set(r, col);
+    }
     const out = item.rowLabels.map(function (_, r) { return byRow.has(r) ? byRow.get(r) : -1; });
     // An incomplete key is a SHAPE defect for checkItemShape to report, not a verdict question.
     return out.includes(-1) ? null : out;
@@ -74,12 +91,19 @@ function blindSpecOf(item) {
                spec: '"answer": the single letter you choose',
                count: ((item.partA && item.partA.choices) || []).length };
     case 'ms':
+      // Keeps the answer count. types.ms.render shows the student a literal "Choose N." hint, so
+      // telling the blind pass N puts it in the same information state as the child: fidelity, not
+      // a leak. Do not "tidy" this into matching hottext below; the asymmetry is deliberate.
       return { stem: item.stem, body: lettered(item.choices || []),
                spec: '"answer": an array of the ' + (item.key || []).length + ' letters you choose',
                count: (item.choices || []).length };
     case 'hottext':
+      // Omits the answer count, unlike ms above. types.hottext.render shows the student no count at
+      // all, so stating one here would hand the blind pass an advantage the child never has, making
+      // agreement artificially easy and weakening this check's power to catch a genuinely ambiguous
+      // key. That is the dangerous direction, so this stays silent on purpose.
       return { stem: item.stem, body: lettered(item.spans || []),
-               spec: '"answer": an array of the ' + (item.key || []).length + ' letters you choose',
+               spec: '"answer": an array of the letters you choose',
                count: (item.spans || []).length };
     case 'order':
       return { stem: item.stem, body: lettered(item.tiles || []),
