@@ -331,6 +331,241 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
         if (window.__realRandom) { Math.random = window.__realRandom; delete window.__realRandom; }
       }).catch(() => {});
     }
+
+    // ---- per-type interaction gate: the five types nothing had ever clicked in a browser --------
+    // .mv-choice is the only control the playthrough above ever touches, and that covers mc, ms and
+    // ebsr -- 48 of the pack's 72 items. hottext, cloze, match, order and shorttext had their
+    // graders unit-tested and their render() called against tests/dom-stub.js, and that was all: no
+    // browser had ever tapped a span, opened a blank, chosen a cell, placed a tile or typed an
+    // answer. That is the other 24 items.
+    //
+    // Driven through the engine directly rather than through a level. The shuffle does not reach
+    // these types cheaply -- order appears only in levels 2 and 5, shorttext only in 3 and 6 -- and
+    // a seed pinned per type is a fixture that stops reaching its type, silently, the first time a
+    // level's pool is edited.
+    //
+    // The response is read from host._mvState.picked, which is not a private back door: runner.js
+    // reads that exact field in the Check handler and again in refreshCheck, and hands it to
+    // Items.isComplete and Items.grade. Reading it here is what the child's Check button does.
+    //
+    // Input is real Playwright input -- mouse clicks, selectOption, fill -- not el.click() inside
+    // evaluate. Dispatching straight at the listener would prove the wiring while saying nothing
+    // about whether the control can be hit at all, and these five have had neither half proved.
+    // It still does NOT prove touch: tap-target size, drag, and an on-screen keyboard over the
+    // input are not observable here and stay on the iPad checklist.
+    const typesBefore = errors.length;
+    try {
+      await page.evaluate(() => {
+        const o = document.createElement('div');
+        o.id = 'mv-probe';
+        // Fixed, so mounting a probe cannot move the document's scroll geometry that the layout
+        // assertion above measures; on top of everything, so nothing can intercept a click meant
+        // for a control and turn a real defect into a timeout.
+        o.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;overflow:auto;padding:14px;background:#0f1218;';
+        document.body.appendChild(o);
+      });
+
+      const CONTROL = { hottext: '.mv-span', cloze: '.mv-blank', match: '.mv-cell', order: '.mv-tile', shorttext: '.mv-input' };
+
+      // Mount one item of `type` on a FRESH host and report the pre-interaction state. Fresh
+      // matters: MVItems.render only resets dataset.locked when the item id changes, so reusing a
+      // host would carry state between the correct and the wrong drive.
+      const mount = (type) => page.evaluate(async (t) => {
+        const pack = await window.MVPack.loadPack('ela-g6-spy');
+        const item = pack.items.find((i) => i.type === t);
+        if (!item) return { err: `pack ela-g6-spy has no ${t} item` };
+        const o = document.querySelector('#mv-probe');
+        o.innerHTML = '';
+        const host = document.createElement('div');
+        host.className = 'mv-item mv-probe-host';
+        o.appendChild(host);
+        const p = (window.__probe = { item, host, progress: 0, answers: 0 });
+        window.MVItems.render(item, host, { onAnswer() { p.answers++; }, onProgress() { p.progress++; } });
+        // Expected control count comes from the ITEM, not a constant, so an authored change to the
+        // pack moves this gate with it instead of failing as a stale fixture.
+        const want = t === 'hottext' ? item.spans.length
+          : t === 'cloze' ? item.blanks.length
+            : t === 'match' ? item.rowLabels.length * item.colLabels.length
+              : t === 'order' ? item.tiles.length
+                : 1;
+        const sel = { hottext: '.mv-span', cloze: '.mv-blank', match: '.mv-cell', order: '.mv-tile', shorttext: '.mv-input' }[t];
+        const resp = (host._mvState || {}).picked;
+        return {
+          id: item.id, sel, want,
+          controls: host.querySelectorAll(sel).length,
+          resp: resp === undefined ? null : resp,
+          complete: window.MVItems.isComplete(item, resp),
+        };
+      }, type);
+
+      // Read the live response exactly as the Check button does, plus the signal that the CONTROL
+      // itself moved, and grade it.
+      const read = (type) => page.evaluate((t) => {
+        const p = window.__probe;
+        const st = p.host._mvState || {};
+        const q = (s) => [...document.querySelectorAll('#mv-probe ' + s)];
+        const typed = String((q('.mv-input')[0] || {}).value || '');
+        const signal = t === 'hottext' ? `${q('.mv-span.sel').length} sel`
+          : t === 'cloze' ? `values ${q('.mv-blank').map((s) => (s.value === '' ? '-' : s.value)).join(',')}`
+            : t === 'match' ? `${q('.mv-cell.sel').length} sel`
+              : t === 'order' ? `${q('.mv-line .mv-tile').length} placed, ${q('.mv-bank .mv-tile').length} in bank`
+                : `typed "${typed}"`;
+        // Each type declares its OWN evidence rather than sharing one rule. hottext, match and order
+        // mark the control with a class or move it into the line; cloze and shorttext carry no
+        // selected class at all -- .mv-blank is a <select> and .mv-input is a text box, so their
+        // state IS the control's value. A single .sel check would silently pass those two on nothing.
+        const live = t === 'hottext' ? q('.mv-span.sel').length > 0
+          : t === 'match' ? q('.mv-cell.sel').length > 0
+            : t === 'cloze' ? q('.mv-blank').length > 0 && q('.mv-blank').every((s) => s.value !== '')
+              : t === 'order' ? q('.mv-line .mv-tile').length > 0
+                : typed.length > 0;
+        let g = null, gerr = null;
+        try { g = window.MVItems.grade(p.item, st.picked); } catch (e) { gerr = String(e && e.message); }
+        return {
+          resp: st.picked === undefined ? null : st.picked,
+          complete: window.MVItems.isComplete(p.item, st.picked),
+          progress: p.progress, signal, live,
+          correct: g ? !!g.correct : null, partial: g ? g.partial : null, gerr,
+        };
+      }, type);
+
+      // Both drives are derived from the item's OWN authored key, so the gate follows the pack
+      // rather than a hardcoded answer. The wrong drive is a real alternative answer clicked through
+      // the same controls, never a response synthesized in JS.
+      const plan = (type) => page.evaluate((t) => {
+        const it = window.__probe.item;
+        if (t === 'hottext') {
+          const off = it.spans.map((_, i) => i).filter((i) => !it.key.includes(i));
+          return { right: it.key.slice(), wrong: off.length ? off : it.key.slice(0, -1) };
+        }
+        if (t === 'cloze') {
+          const right = it.blanks.map((b) => b.key);
+          const wrong = right.slice();
+          wrong[0] = (right[0] + 1) % it.blanks[0].choices.length;
+          return { right, wrong };
+        }
+        if (t === 'match') {
+          const right = it.key.map((c) => [Number(c[0]), Number(c[1])]);
+          const wrong = right.map((c, i) => (i === 0 ? [c[0], (c[1] + 1) % it.colLabels.length] : c));
+          return { right, wrong };
+        }
+        if (t === 'order') {
+          const right = it.key.slice();
+          const wrong = right.slice();
+          wrong[0] = right[1]; wrong[1] = right[0];
+          return { right, wrong };
+        }
+        // shorttext. The wrong drive has to fail on CONTENT, not on the word-count branch, or it
+        // would pass while proving nothing about the accept list, so both conditions are asserted
+        // and reported rather than assumed.
+        const wrong = 'nobody';
+        const norm = window.MVItems.normalizeText;
+        return {
+          right: it.accept[0], wrong,
+          wrongIsReallyWrong: !it.accept.some((a) => norm(a) === norm(wrong))
+            && wrong.trim().split(/\s+/).length <= it.maxWords,
+        };
+      }, type);
+
+      const T = { timeout: 8000 };
+      const drive = async (type, resp) => {
+        if (type === 'hottext') {
+          for (const i of resp) await page.click(`#mv-probe .mv-span[data-idx="${i}"]`, T);
+        } else if (type === 'cloze') {
+          for (let bi = 0; bi < resp.length; bi++) {
+            // DOM order is not blank order: a select sits wherever {{n}} falls in the stem, which an
+            // author is free to write out of sequence. Ask the engine which select is which.
+            const nth = await page.evaluate((b) => {
+              const st = document.querySelector('#mv-probe .mv-probe-host')._mvState;
+              return [...document.querySelectorAll('#mv-probe .mv-blank')].indexOf(st.selects[b]);
+            }, bi);
+            await page.selectOption(`#mv-probe .mv-blank >> nth=${nth}`, String(resp[bi]), T);
+          }
+        } else if (type === 'match') {
+          for (const [r, c] of resp) await page.click(`#mv-probe .mv-cell[data-r="${r}"][data-c="${c}"]`, T);
+        } else if (type === 'order') {
+          // Bank tiles carry no data-idx -- only placed tiles do -- and repaint() rebuilds both rows
+          // after every tap, so the bank position is recomputed per placement rather than
+          // snapshotted. A snapshot would go stale on the first click.
+          for (const tile of resp) {
+            const nth = await page.evaluate((want) => {
+              const st = document.querySelector('#mv-probe .mv-probe-host')._mvState;
+              let pos = 0;
+              for (let i = 0; i < want; i++) if (!st.picked.includes(i)) pos++;
+              return pos;
+            }, tile);
+            await page.click(`#mv-probe .mv-bank .mv-tile >> nth=${nth}`, T);
+          }
+        } else {
+          await page.fill('#mv-probe .mv-input', resp, T);
+        }
+      };
+
+      for (const type of ['hottext', 'cloze', 'match', 'order', 'shorttext']) {
+        const m = await mount(type);
+        if (m.err) { problems.push(`types ${type}: ${m.err}`); continue; }
+
+        // (1) the control rendered at all, counted against the item's own declared shape.
+        if (m.controls !== m.want) {
+          problems.push(`types ${type}: rendered ${m.controls} ${m.sel}, item ${m.id} declares ${m.want}`);
+        }
+
+        // The vacuity control, run on all five rather than the one type it was asked for, because it
+        // costs nothing: a gate that only ever reads the END state cannot tell "the interaction
+        // worked" from "it was already answered before anything was clicked".
+        const emptyBefore = m.resp == null
+          || (Array.isArray(m.resp) ? m.resp.every((v) => v == null) : m.resp === '');
+        if (!emptyBefore) problems.push(`types ${type}: response was ${JSON.stringify(m.resp)} BEFORE any interaction`);
+        if (m.complete) problems.push(`types ${type}: isComplete was already true before any interaction, so the grade below proves nothing`);
+
+        const p = await plan(type);
+        if (type === 'shorttext' && !p.wrongIsReallyWrong) {
+          problems.push(`types shorttext: the wrong drive "${p.wrong}" is accepted by item ${m.id} or exceeds its maxWords; pick another`);
+        }
+
+        // (2) interacting registers, and (3a) the authored key grades correct.
+        await drive(type, p.right);
+        const ok = await read(type);
+        if (ok.gerr) problems.push(`types ${type}: grade threw -- ${ok.gerr}`);
+        if (JSON.stringify(ok.resp) === JSON.stringify(m.resp)) {
+          problems.push(`types ${type}: response did not change after interaction (still ${JSON.stringify(ok.resp)})`);
+        }
+        if (!ok.live) problems.push(`types ${type}: control shows no sign of the interaction (${ok.signal})`);
+        if (!ok.progress) problems.push(`types ${type}: engine never called onProgress, so the Check button would stay dead`);
+        if (!ok.complete) problems.push(`types ${type}: response incomplete after driving the authored key (${JSON.stringify(ok.resp)})`);
+        if (ok.correct !== true) problems.push(`types ${type}: item ${m.id} graded correct=${ok.correct} on its OWN key (${JSON.stringify(ok.resp)})`);
+
+        // (3b) a wrong response does not. Re-mounted first, and the remount is itself checked for
+        // emptiness: if it were not clean, the wrong drive would land on top of the correct one and
+        // this half of the assertion would be measuring the wrong thing.
+        const m2 = await mount(type);
+        if (m2.complete || m2.controls !== m.want) {
+          problems.push(`types ${type}: remount for the wrong drive was not clean (${m2.controls} ${m.sel}, complete=${m2.complete})`);
+        }
+        await drive(type, p.wrong);
+        const bad = await read(type);
+        if (bad.correct !== false) {
+          problems.push(`types ${type}: a deliberately wrong response graded correct=${bad.correct} (${JSON.stringify(bad.resp)})`);
+        }
+
+        note(`type ${type}: ${m.controls}x ${m.sel} (want ${m.want}) | before ${JSON.stringify(m.resp)} incomplete `
+          + `| key ${JSON.stringify(ok.resp)} [${ok.signal}] -> correct=${ok.correct} `
+          + `| wrong ${JSON.stringify(bad.resp)} -> correct=${bad.correct} partial=${bad.partial}`);
+      }
+    } catch (e) {
+      problems.push('type gate failed: ' + (e && e.message));
+    } finally {
+      await page.evaluate(() => {
+        const o = document.querySelector('#mv-probe');
+        if (o) o.remove();
+        delete window.__probe;
+      }).catch(() => {});
+    }
+    // The gate must leave the page as it found it, so this is asserted rather than assumed.
+    const leftover = await page.evaluate(() => document.querySelectorAll('#mv-probe, .mv-probe-host').length).catch(() => -1);
+    if (leftover !== 0) problems.push(`types: probe not cleaned up (${leftover} node(s) left on the page)`);
+    const typeErr = errors.slice(typesBefore);
+    if (typeErr.length) problems.push(`types: ${typeErr.length} JS error(s): ${typeErr[0]}`);
   } catch (e) {
     problems.push('navigation/boot failed: ' + (e && e.stack || e));
   } finally {
