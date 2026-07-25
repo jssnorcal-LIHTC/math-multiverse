@@ -90,6 +90,15 @@
     /* Trimmed top/bottom padding (was 16 / 40) to hand vertical space to
        the play area on the 768px-tall iPad without touching module logic. */
     padding: 10px 24px 16px;
+    /* Exactly the viewport, not a minimum. This is what makes .host-frame's height definite further
+       down: a `min-height` here leaves #app content-sized, main's flex height circular, and the frame
+       falls back to auto -- measured, that ballooned the frame to 841px and pushed the page 212px
+       over, which is worse than the 13px it was meant to fix. box-sizing is border-box globally, so
+       the 26px of vertical padding is inside this height rather than added to it. */
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
   }
 
   /* HEADER */
@@ -101,6 +110,7 @@
     margin-bottom: 12px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border-subtle);
+    flex: 0 0 auto;   /* the header keeps its own height; only the play area flexes */
   }
   .brand { display: flex; align-items: center; gap: 12px; }
   .brand-mark {
@@ -290,8 +300,29 @@
   }
 
   /* SCREENS */
+  /* main and the module screen are the rest of the flex chain that gives .host-frame a definite
+     height. main scrolls internally because #app is now exactly the viewport: without this a launcher
+     taller than the screen would be unreachable rather than scrollable, which is a real regression on
+     a narrow window where the card grid collapses to one column. The scrollbar moves from the page to
+     main; the header stays put. */
+  #app > main {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
   .screen { display: none; animation: fadein 0.3s ease-out; }
   .screen.active { display: block; }
+  /* Only the module screen becomes a flex column. The launcher and levels screens stay display:block
+     so their layout is untouched. An id plus a class outranks .screen.active, so this wins without
+     !important. */
+  #screen-module.active {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
   @keyframes fadein {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -438,19 +469,21 @@
   .lvl-best { color: var(--text-secondary); font-size: 0.78rem; margin-top: 8px; font-weight: 600; }
   .lock-overlay { position: absolute; bottom: 10px; right: 14px; font-size: 13px; color: var(--text-muted); }
 
-  /* MODULE HOST */
-  #module-host {
-    width: 100%;
-    min-height: calc(100vh - 100px);
-    min-height: calc(100dvh - 100px);
-    position: relative;
-  }
+  /* MODULE HOST
+     The module screen is a flex column from #app down to .host-frame, so the frame is whatever
+     vertical space is actually left rather than a guess at the chrome around it. The guess it
+     replaces was `calc(100vh - 160px)`, and 160px was right in none of the three environments ever
+     measured: the chrome is 139px in Chrome on Windows, 173px in CI's Linux Chromium, and unknown in
+     Safari. A frame that fills the remaining space is correct in all three by construction.
+     `min-height: 0` appears on every item that has to shrink, because a flex item will not shrink
+     below its content without it, which is the usual reason this pattern still overflows. */
   .host-toolbar {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     margin-bottom: 16px;
     gap: 16px;
+    flex: 0 0 auto;
   }
   .host-title {
     text-align: center;
@@ -460,24 +493,10 @@
   }
   .host-frame {
     width: 100%;
-    /* The subtrahend is the chrome above and below this frame, and it must be an OVER-estimate, not a
-       measurement. It was 160px, which is what the chrome measures in Chrome on Windows plus 21px of
-       slack, and that is why the page body scrolled 13px on CI's Linux Chromium: a different font
-       stack renders the same header at 173px, and 173 + 608 > 768. The chrome is not a constant, it
-       is a function of the font stack, so it was measured across four root font sizes:
-
-         root font   16px   18px   20px   22px
-         chrome      139    188    192    200
-
-       200px covers all of them.  It cannot simply be raised further: .host-frame is overflow:hidden,
-       so an over-large subtrahend clips the module inside it, and at 220px razor-crest loses 19px of
-       its content.  200px is the measured maximum, and it leaves 61px of spare page on this machine
-       and 27px on CI.  The pack absorbs the 40px reduction in .mv-passage, which scrolls internally by
-       design; the item and the NEXT button keep their size and stay on screen.  Verified: all six math
-       modules and the pack clip nothing at 568px.
-       If this ever needs to grow past 200px, razor-crest is the module that breaks first. */
-    height: calc(100vh - 200px);
-    height: calc(100dvh - 200px);
+    /* No height. The frame takes the space left after .host-toolbar; see the MODULE HOST note above.
+       overflow:hidden stays: it is what stops a module bleeding past its box. */
+    flex: 1 1 auto;
+    min-height: 0;
     border: 1px solid var(--border-subtle);
     border-radius: 14px;
     background: var(--bg-base);
