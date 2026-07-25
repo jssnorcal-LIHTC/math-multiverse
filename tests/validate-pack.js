@@ -15,6 +15,8 @@
 const fs = require('fs');
 const path = require('path');
 const { isTarget } = require('./targets');
+const { fleschKincaid, colemanLiau, textStats } = require('./readability');
+const { COACH_FAMILIES } = require('./targets');
 
 const PACK_DIR = path.join(__dirname, '..', 'packs');
 
@@ -342,8 +344,142 @@ function checkItemShape(item, passagesById, errors) {
       break;
   }
 }
-// Task 6 replaces this with verbatim spans, readability, coach resolution and coverage.
-function contentChecks(pack, passagesById, itemsById, errors, warnings) { /* task 6 */ }
+const READ_DEFAULTS = { fkMin: 5.5, fkMax: 8.0, clMin: 4.5, clMax: 9.5 };
+const EXPLAIN_MIN_WORDS = 20;
+
+// Whitespace-insensitive verbatim containment. Authors and editors introduce line wrapping and
+// double spaces; a quote that differs only in whitespace is still the same sentence. Anything
+// else (a changed word, a normalised hyphen, a smart quote) is a real defect and must fail.
+function normWhitespace(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+function containsVerbatim(haystack, needle) {
+  return normWhitespace(haystack).includes(normWhitespace(needle));
+}
+
+// A coach topic ships if it matches a known family prefix. The engine resolves the exact topic to
+// a COACH_TIPS entry at play time and falls back to the family, mirroring COACH_FAMILY_FALLBACK in
+// Math-Multiverse.html. The 19-silently-dead-coach-topics bug of 26-0714 is what this prevents.
+function coachResolves(topic) {
+  const t = String(topic || '');
+  return COACH_FAMILIES.some(f => t === f || t.startsWith(f + '-'));
+}
+
+// Every string an item claims came out of the passage, with the field path for the error message.
+function quotedSpans(item) {
+  const out = [];
+  if (item.type === 'ebsr' && item.partB && Array.isArray(item.partB.choices)) {
+    item.partB.choices.forEach((c, i) => out.push([`partB.choices[${i}]`, c]));
+  }
+  if (item.type === 'hottext' && Array.isArray(item.spans)) {
+    item.spans.forEach((s, i) => out.push([`spans[${i}]`, s]));
+  }
+  if (nonEmptyString(item.quote)) out.push(['quote', item.quote]);
+  return out;
+}
+
+function itemStems(item) {
+  if (item.type === 'ebsr') {
+    const a = item.partA && item.partA.stem, b = item.partB && item.partB.stem;
+    return [a, b].filter(nonEmptyString);
+  }
+  return nonEmptyString(item.stem) ? [item.stem] : [];
+}
+
+function contentChecks(pack, passagesById, itemsById, errors, warnings) {
+  const band = Object.assign({}, READ_DEFAULTS, (pack.meta && pack.meta.readability) || {});
+
+  // ---- passages: readability band ----
+  for (const p of passagesById.values()) {
+    if (!nonEmptyString(p.text)) continue;
+    const fk = fleschKincaid(p.text);
+    const cl = colemanLiau(p.text);
+    const words = textStats(p.text).words;
+    if (fk < band.fkMin || fk > band.fkMax) {
+      errors.push(`passages(${p.id}): readability out of band, Flesch-Kincaid ${fk.toFixed(1)} is outside ${band.fkMin} to ${band.fkMax}`);
+    }
+    if (cl < band.clMin || cl > band.clMax) {
+      errors.push(`passages(${p.id}): readability out of band, Coleman-Liau ${cl.toFixed(1)} is outside ${band.clMin} to ${band.clMax}`);
+    }
+    if (words < 60)  warnings.push(`passages(${p.id}): only ${words} words, thin for a grade-6 stimulus`);
+    if (words > 900) warnings.push(`passages(${p.id}): ${words} words, long enough to crowd the iPad play area`);
+  }
+
+  // ---- items: quotes, explanations, rationales, coach topics ----
+  const stemIndex = new Map();
+  for (const item of itemsById.values()) {
+    const w = `items(${item.id})`;
+
+    // The highest-yield check in the suite.
+    const spans = quotedSpans(item);
+    if (spans.length) {
+      const p = passagesById.get(item.passageId);
+      if (!p) {
+        errors.push(`${w}: quotes text but has no resolvable passageId`);
+      } else {
+        for (const [field, span] of spans) {
+          if (!containsVerbatim(p.text, span)) {
+            errors.push(`${w}.${field}: not found verbatim in passage "${p.id}": ${JSON.stringify(String(span).slice(0, 70))}`);
+          }
+        }
+      }
+    }
+
+    if (nonEmptyString(item.explain)) {
+      const n = textStats(item.explain).words;
+      if (n < EXPLAIN_MIN_WORDS) {
+        errors.push(`${w}.explain: only ${n} words; an explanation must name the misconception the student picked, not just restate the answer (minimum ${EXPLAIN_MIN_WORDS})`);
+      }
+    } else {
+      errors.push(`${w}.explain: missing or empty`);
+    }
+
+    // Choice-based types owe a rationale per wrong option. Span-based and typed types have no
+    // discrete wrong-choice set and are exempt.
+    if (CHOICE_TYPES.includes(item.type) && item.type !== 'cloze') {
+      const choices = item.type === 'ebsr' ? (item.partA && item.partA.choices) : item.choices;
+      const key = item.type === 'ebsr' ? (item.partA && item.partA.key) : item.key;
+      if (Array.isArray(choices)) {
+        const correct = new Set(Array.isArray(key) ? key : [key]);
+        const dr = item.distractorRationale || {};
+        for (let i = 0; i < choices.length; i++) {
+          if (correct.has(i)) continue;
+          if (!nonEmptyString(dr[String(i)])) {
+            errors.push(`${w}.distractorRationale["${i}"]: missing; every wrong option must say what mistake picks it`);
+          }
+        }
+      }
+    }
+
+    if (!coachResolves(item.coachTopic)) {
+      errors.push(`${w}.coachTopic: "${item.coachTopic}" resolves to no coach family (legal families: ${COACH_FAMILIES.join(', ')})`);
+    }
+
+    for (const s of itemStems(item)) {
+      const norm = normWhitespace(s).toLowerCase();
+      if (stemIndex.has(norm)) {
+        errors.push(`${w}: duplicate stem, already used by items(${stemIndex.get(norm)}): ${JSON.stringify(norm.slice(0, 60))}`);
+      } else {
+        stemIndex.set(norm, item.id);
+      }
+    }
+  }
+
+  // ---- levels: every declared target is actually exercised ----
+  if (Array.isArray(pack.levels)) {
+    pack.levels.forEach((lv, i) => {
+      if (!lv || !Array.isArray(lv.targets) || !Array.isArray(lv.itemIds)) return;
+      const exercised = new Set();
+      for (const id of lv.itemIds) {
+        const it = itemsById.get(id);
+        if (it && Array.isArray(it.targets)) it.targets.forEach(t => exercised.add(t));
+      }
+      for (const t of lv.targets) {
+        if (!exercised.has(t)) {
+          errors.push(`levels[${i}](${lv.name}): declares target "${t}" but no item in the level carries it`);
+        }
+      }
+    });
+  }
+}
 
 function validatePack(pack, opts) {
   const errors = [], warnings = [];

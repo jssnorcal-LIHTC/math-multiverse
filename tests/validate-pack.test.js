@@ -94,7 +94,7 @@ check('an item that no level references is a warning, not an error', () => {
     id: 'i-orphan', type: 'mc', passageId: 'p1', targets: ['c1-inf-1-key-details'],
     coachTopic: 'central-idea', stem: 'Orphan?',
     choices: ['a', 'b', 'c', 'd'], key: 0,
-    explain: 'This item is deliberately unreferenced so the orphan warning can be exercised without tripping an error.',
+    explain: 'This item is deliberately unreferenced by any level so the orphan warning can be exercised, and it is written long enough to clear the twenty-word explanation floor the content checks impose in task 6.',
     distractorRationale: { '1': 'x', '2': 'y', '3': 'z' },
   });
   const { errors, warnings } = validatePack(p, { expectedId: 'pack-good' });
@@ -217,6 +217,79 @@ check('shorttext with an empty accept list is caught', () => {
 check('the good fixture still validates after the shape checks land', () => {
   const { errors } = validatePack(clone(), { expectedId: 'pack-good' });
   assert.deepStrictEqual(errors, []);
+});
+
+// ---------- task 6: content checks ----------
+
+check('an EBSR partB choice that is not verbatim in the passage is caught', () => {
+  const p = clone();
+  p.items[1].partB.choices[1] = 'A chalk mark on a lamppost is a common choice.';  // "lamppost" vs "lamp post"
+  expectError(p, 'not found verbatim', 'fabricated quote');
+});
+
+check('a hottext span that is not verbatim in the passage is caught', () => {
+  const p = clone();
+  p.items.push({
+    id: 'i-ht', type: 'hottext', mode: 'sentence', passageId: 'p1',
+    targets: ['c1-inf-1-key-details'], coachTopic: 'evidence-locate', stem: 'Tap the sentence.',
+    spans: ['A dead drop is a way to pass a package without two people ever meeting.',
+            'This sentence was never in the passage at all.'],
+    key: [0],
+    explain: 'This explanation exists only so the item clears the twenty-word floor, leaving the fabricated span below as the single defect this particular check is meant to catch.',
+  });
+  p.levels[0].itemIds.push('i-ht');
+  expectError(p, 'not found verbatim', 'fabricated span');
+});
+
+check('a passage above the grade band is caught', () => {
+  const p = clone();
+  p.passages[0].text = 'Notwithstanding institutional prerogatives, the administrative determination necessitated comprehensive reevaluation of organizational infrastructure methodologies throughout subsequent implementation phases.';
+  expectError(p, 'readability', 'too hard');
+});
+
+check('a passage below the grade band is caught', () => {
+  const p = clone();
+  p.passages[0].text = 'The dog ran. The cat sat. We had fun. It was good. He was glad. She ran too.';
+  // Part B quotes will also break; assert specifically on the readability error.
+  const { errors } = validatePack(p, { expectedId: 'pack-good' });
+  assert.strictEqual(errors.some(e => /readability/i.test(e)), true, 'expected a readability error, got ' + JSON.stringify(errors));
+});
+
+check('a missing distractor rationale on a choice item is caught', () => {
+  const p = clone();
+  delete p.items[0].distractorRationale['2'];
+  expectError(p, 'distractorRationale', 'missing rationale');
+});
+
+check('a too-short explanation is caught', () => {
+  const p = clone();
+  p.items[0].explain = 'Wrong.';
+  expectError(p, 'explain', 'stub explanation');
+});
+
+check('a coach topic outside the known families is caught', () => {
+  const p = clone();
+  p.items[0].coachTopic = 'telepathy-basics';
+  expectError(p, 'coachTopic', 'unresolvable coach topic');
+});
+
+check('a level target that no item exercises is caught', () => {
+  const p = clone();
+  p.levels[0].targets.push('c4-3-analyze-sources');
+  expectError(p, 'c4-3-analyze-sources', 'uncovered level target');
+});
+
+check('two items sharing a stem are caught', () => {
+  const p = clone();
+  p.items[1].partA.stem = p.items[0].stem;
+  p.items[1].partB.stem = p.items[0].stem;
+  expectError(p, 'duplicate stem', 'dup stem');
+});
+
+check('the good fixture still validates after the content checks land', () => {
+  const { errors, warnings } = validatePack(clone(), { expectedId: 'pack-good' });
+  assert.deepStrictEqual(errors, [], 'errors: ' + JSON.stringify(errors));
+  assert.deepStrictEqual(warnings, [], 'warnings: ' + JSON.stringify(warnings));
 });
 
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
