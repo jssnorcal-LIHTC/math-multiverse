@@ -49,7 +49,8 @@
   // Range-check against the option count. mc did this and ms did not, and an asymmetry between two
   // types that answer the same question is how the next type gets it wrong too.
   function allInRange(arr, n) {
-    return uniqSorted(arr).every((i) => i >= 0 && i < n);
+    const picks = uniqSorted(arr);
+    return picks.length > 0 && picks.every((i) => i >= 0 && i < n);
   }
 
   function sameSet(a, b) {
@@ -258,6 +259,299 @@
     },
   };
 
+  // Tap a sentence or a word inside the passage. The runner paints the passage and hands the
+  // spans here; span text is guaranteed verbatim by the pack validator, so plain string matching
+  // is safe.
+  types.hottext = {
+    needsCheck: true,
+    isComplete(item, r) { return Array.isArray(r) && uniqSorted(r).length > 0; },
+    grade(item, r) {
+      const correct = sameSet(r, item.key);
+      return {
+        correct,
+        partial: correct ? 1 : setPartial(r, item.key),
+        notes: correct ? [] : setNotes(r, item.key, 'sentence', 'sentences'),
+      };
+    },
+    render(item, host, ctx) {
+      const state = { picked: [] };
+      host._mvState = state;
+      host.appendChild(stemNode(item.stem));
+      const box = el('div', 'mv-hottext');
+      item.spans.forEach((text, i) => {
+        const s = el('span', 'mv-span', text);
+        s.dataset.idx = String(i);
+        s.addEventListener('click', function () {
+          if (host.dataset.locked === '1') return;
+          const set = new Set(state.picked);
+          if (set.has(i)) { set.delete(i); s.classList.remove('sel'); }
+          else { set.add(i); s.classList.add('sel'); }
+          state.picked = [...set].sort((a, b) => a - b);
+          ctx.onProgress();
+        });
+        box.appendChild(s);
+        box.appendChild(document.createTextNode(' '));
+      });
+      host.appendChild(box);
+      state.box = box;
+    },
+    reveal(item, host, r) {
+      const box = (host._mvState || {}).box;
+      if (!box) return;
+      const key = new Set(uniqSorted(item.key));
+      const chosen = new Set(uniqSorted(r));
+      for (const s of box.querySelectorAll('.mv-span')) {
+        const i = Number(s.dataset.idx);
+        s.classList.remove('sel');
+        if (key.has(i)) s.classList.add('correct');
+        else if (chosen.has(i)) s.classList.add('wrong');
+      }
+    },
+  };
+
+  function cellSig(c) { return Number(c[0]) + ',' + Number(c[1]); }
+
+  types.match = {
+    needsCheck: true,
+    // One cell per row is required, so an unanswered row blocks the check rather than scoring zero.
+    isComplete(item, r) {
+      if (!Array.isArray(r)) return false;
+      const rows = new Set(r.filter(c => Array.isArray(c)).map(c => Number(c[0])));
+      return rows.size === item.rowLabels.length;
+    },
+    grade(item, r) {
+      const want = new Set((item.key || []).map(cellSig));
+      const got = new Set((Array.isArray(r) ? r : []).filter(Array.isArray).map(cellSig));
+      let hits = 0, misses = 0;
+      for (const s of got) (want.has(s) ? hits++ : misses++);
+      const correct = hits === want.size && misses === 0;
+      const partial = correct ? 1 : Math.max(0, (hits - misses) / (want.size || 1));
+      const notes = correct ? [] : [`You placed ${hits} of ${want.size} correctly.`];
+      return { correct, partial, notes };
+    },
+    render(item, host, ctx) {
+      const state = { picked: [] };
+      host._mvState = state;
+      host.appendChild(stemNode(item.stem));
+      const table = el('table', 'mv-table');
+      const head = el('tr');
+      head.appendChild(el('th', 'mv-th-corner', ''));
+      item.colLabels.forEach(c => head.appendChild(el('th', null, c)));
+      table.appendChild(head);
+      item.rowLabels.forEach((rowLabel, ri) => {
+        const tr = el('tr');
+        tr.appendChild(el('th', 'mv-th-row', rowLabel));
+        item.colLabels.forEach((_, ci) => {
+          const td = el('td', 'mv-cell');
+          td.dataset.r = String(ri);
+          td.dataset.c = String(ci);
+          td.addEventListener('click', function () {
+            if (host.dataset.locked === '1') return;
+            // One choice per row: clear the row, then set this cell.
+            for (const other of tr.querySelectorAll('.mv-cell')) other.classList.remove('sel');
+            td.classList.add('sel');
+            state.picked = state.picked.filter(c => Number(c[0]) !== ri).concat([[ri, ci]]);
+            ctx.onProgress();
+          });
+          tr.appendChild(td);
+        });
+        table.appendChild(tr);
+      });
+      host.appendChild(table);
+      state.table = table;
+    },
+    reveal(item, host, r) {
+      const table = (host._mvState || {}).table;
+      if (!table) return;
+      const want = new Set((item.key || []).map(cellSig));
+      const got = new Set((Array.isArray(r) ? r : []).filter(Array.isArray).map(cellSig));
+      for (const td of table.querySelectorAll('.mv-cell')) {
+        const sig = td.dataset.r + ',' + td.dataset.c;
+        td.classList.remove('sel');
+        if (want.has(sig)) td.classList.add('correct');
+        else if (got.has(sig)) td.classList.add('wrong');
+      }
+    },
+  };
+
+  types.order = {
+    needsCheck: true,
+    // A valid arrangement is a full permutation. Tap-to-place can leave holes, so check for them.
+    isComplete(item, r) {
+      if (!Array.isArray(r) || r.length !== item.tiles.length) return false;
+      if (r.some(v => !Number.isInteger(v))) return false;
+      return new Set(r).size === item.tiles.length;
+    },
+    grade(item, r) {
+      const key = item.key || [];
+      const arr = Array.isArray(r) ? r : [];
+      let inPlace = 0;
+      for (let i = 0; i < key.length; i++) if (arr[i] === key[i]) inPlace++;
+      const correct = inPlace === key.length;
+      const partial = key.length ? inPlace / key.length : 0;
+      const notes = correct ? [] : [`${inPlace} of ${key.length} were in the right position. Find the step that has to come first, then work forward.`];
+      return { correct, partial, notes };
+    },
+    render(item, host, ctx) {
+      // Tap-to-append ordering: tapping a tile appends it to the arrangement, tapping a placed
+      // tile removes it. Drag is deliberately avoided; it is unreliable on an iPad in Safari.
+      const state = { picked: [] };
+      host._mvState = state;
+      host.appendChild(stemNode(item.stem));
+      const bank = el('div', 'mv-tiles mv-bank');
+      const line = el('div', 'mv-tiles mv-line');
+      host.appendChild(line);
+      host.appendChild(bank);
+
+      function repaint() {
+        bank.innerHTML = '';
+        line.innerHTML = '';
+        item.tiles.forEach((text, i) => {
+          if (state.picked.includes(i)) return;
+          const b = el('button', 'mv-tile', text);
+          b.type = 'button';
+          b.addEventListener('click', function () {
+            if (host.dataset.locked === '1') return;
+            state.picked.push(i);
+            repaint();
+            ctx.onProgress();
+          });
+          bank.appendChild(b);
+        });
+        state.picked.forEach((idx, pos) => {
+          const b = el('button', 'mv-tile placed');
+          b.type = 'button';
+          b.dataset.idx = String(idx);
+          b.appendChild(el('span', 'mv-tile-num', String(pos + 1)));
+          b.appendChild(el('span', 'mv-tile-text', item.tiles[idx]));
+          b.addEventListener('click', function () {
+            if (host.dataset.locked === '1') return;
+            state.picked.splice(pos, 1);
+            repaint();
+            ctx.onProgress();
+          });
+          line.appendChild(b);
+        });
+      }
+      repaint();
+      state.repaint = repaint;
+      state.line = line;
+    },
+    reveal(item, host, r) {
+      const line = (host._mvState || {}).line;
+      if (!line) return;
+      const key = item.key || [];
+      [...line.querySelectorAll('.mv-tile')].forEach((b, pos) => {
+        b.classList.add(Number(b.dataset.idx) === key[pos] ? 'correct' : 'wrong');
+        b.disabled = true;
+      });
+    },
+  };
+
+  types.cloze = {
+    needsCheck: true,
+    isComplete(item, r) {
+      return Array.isArray(r) && r.length === item.blanks.length && r.every(v => Number.isInteger(v));
+    },
+    grade(item, r) {
+      const arr = Array.isArray(r) ? r : [];
+      let hits = 0;
+      item.blanks.forEach((b, i) => { if (arr[i] === b.key) hits++; });
+      const correct = hits === item.blanks.length;
+      const partial = item.blanks.length ? hits / item.blanks.length : 0;
+      const notes = correct ? [] : [`${hits} of ${item.blanks.length} blank${item.blanks.length === 1 ? '' : 's'} correct. Read the whole sentence aloud with your choice in it; the wrong one usually sounds wrong.`];
+      return { correct, partial, notes };
+    },
+    render(item, host, ctx) {
+      const state = { picked: item.blanks.map(() => null) };
+      host._mvState = state;
+      const line = el('div', 'mv-cloze');
+      const parts = String(item.stem).split(/(\{\{\d+\}\})/);
+      state.selects = [];
+      for (const part of parts) {
+        const m = part.match(/^\{\{(\d+)\}\}$/);
+        if (!m) { line.appendChild(document.createTextNode(part)); continue; }
+        const bi = Number(m[1]);
+        const blank = item.blanks[bi];
+        if (!blank) { line.appendChild(document.createTextNode(part)); continue; }
+        const sel = el('select', 'mv-blank');
+        const ph = el('option', null, '\u2014');
+        ph.value = '';
+        sel.appendChild(ph);
+        blank.choices.forEach((c, ci) => {
+          const o = el('option', null, c);
+          o.value = String(ci);
+          sel.appendChild(o);
+        });
+        sel.addEventListener('change', function () {
+          if (host.dataset.locked === '1') return;
+          state.picked[bi] = sel.value === '' ? null : Number(sel.value);
+          ctx.onProgress();
+        });
+        state.selects[bi] = sel;
+        line.appendChild(sel);
+      }
+      host.appendChild(line);
+    },
+    reveal(item, host, r) {
+      const st = host._mvState || {};
+      (st.selects || []).forEach((sel, i) => {
+        if (!sel) return;
+        sel.disabled = true;
+        const got = Array.isArray(r) ? r[i] : null;
+        sel.classList.add(got === item.blanks[i].key ? 'correct' : 'wrong');
+      });
+    },
+  };
+
+  types.shorttext = {
+    needsCheck: true,
+    isComplete(item, r) { return typeof r === 'string' && r.trim().length > 0; },
+    grade(item, r) {
+      const words = String(r || '').trim().split(/\s+/).filter(Boolean).length;
+      if (words > item.maxWords) {
+        return {
+          correct: false, partial: 0,
+          notes: [`Keep it to ${item.maxWords} words or fewer. You used ${words}. A short answer is graded on the phrase itself, so cut everything that is not the answer.`],
+        };
+      }
+      const got = normalizeText(r);
+      const correct = (item.accept || []).some(a => normalizeText(a) === got);
+      return {
+        correct,
+        partial: correct ? 1 : 0,
+        notes: correct ? [] : [`Not one of the accepted phrasings. Answer in the passage's own words where you can.`],
+      };
+    },
+    render(item, host, ctx) {
+      const state = { picked: '' };
+      host._mvState = state;
+      host.appendChild(stemNode(item.stem));
+      const inp = el('input', 'mv-input');
+      inp.type = 'text';
+      inp.autocomplete = 'off';
+      inp.setAttribute('autocapitalize', 'none');
+      inp.placeholder = `${item.maxWords} words or fewer`;
+      inp.addEventListener('input', function () {
+        if (host.dataset.locked === '1') return;
+        state.picked = inp.value;
+        ctx.onProgress();
+      });
+      host.appendChild(inp);
+      state.input = inp;
+    },
+    reveal(item, host, r, result) {
+      const inp = (host._mvState || {}).input;
+      if (!inp) return;
+      inp.disabled = true;
+      inp.classList.add(result && result.correct ? 'correct' : 'wrong');
+      if (!(result && result.correct)) {
+        const ans = el('div', 'mv-accepted', 'Accepted: ' + (item.accept || []).join(' / '));
+        if (inp.parentNode) inp.parentNode.appendChild(ans);
+      }
+    },
+  };
+
   // ---------------- public surface ----------------
 
   function typeOf(item) {
@@ -278,9 +572,11 @@
     // must not silently append a second question beneath the first.
     render(item, host, ctx) {
       const t = typeOf(item);
+      const sameItem = host.dataset.itemId !== undefined && host.dataset.itemId === String(item.id || '');
       host.innerHTML = '';
-      host.dataset.locked = '0';
       delete host._mvState;
+      host.dataset.itemId = String(item.id || '');
+      if (!sameItem) host.dataset.locked = '0';
       return t.render(item, host, ctx);
     },
     reveal(item, host, response, result) { return typeOf(item).reveal(item, host, response, result); },

@@ -172,5 +172,118 @@ check('ebsr never reads partB.key as a scalar', () => {
   assert.throws(() => MVItems.grade(broken, { a: 1, b: 0 }), /partB\.key/i);
 });
 
+check('an all-garbage response is incomplete, not vacuously in range', () => {
+  // uniqSorted filters, so a range check over a fully-filtered array would be vacuously true. ms
+  // happens to test length first, but a later type reusing the helper must not inherit a silent pass.
+  assert.strictEqual(MVItems.isComplete(MS, [null, true, 'x']), false);
+  assert.strictEqual(MVItems.isComplete(MS, []), false);
+});
+
+// ---------- the registry is now complete ----------
+
+check('every phase-1 type is registered', () => {
+  const want = ['mc', 'ms', 'ebsr', 'hottext', 'match', 'order', 'cloze', 'shorttext'];
+  for (const t of want) assert.strictEqual(typeof MVItems.types[t], 'object', 'missing type ' + t);
+});
+
+// ---------- hottext ----------
+
+const HT = { type: 'hottext', mode: 'sentence', spans: ['s0', 's1', 's2', 's3'], key: [2] };
+
+check('hottext grades a single tapped span', () => {
+  assert.strictEqual(MVItems.grade(HT, [2]).correct, true);
+  assert.strictEqual(MVItems.grade(HT, [0]).correct, false);
+  assert.strictEqual(MVItems.isComplete(HT, []), false);
+  assert.strictEqual(MVItems.isComplete(HT, [1]), true);
+});
+
+check('hottext with two keys gives partial credit and penalises extras', () => {
+  const two = { type: 'hottext', mode: 'sentence', spans: ['a', 'b', 'c', 'd'], key: [1, 2] };
+  assert.strictEqual(MVItems.grade(two, [1, 2]).partial, 1);
+  assert.strictEqual(MVItems.grade(two, [1]).partial, 0.5);
+  assert.strictEqual(MVItems.grade(two, [1, 0]).partial, 0);
+  assert.strictEqual(MVItems.grade(two, [0, 1, 2, 3]).partial, 0);
+});
+
+// ---------- match ----------
+
+const MATCH = {
+  type: 'match', rowLabels: ['r0', 'r1', 'r2'], colLabels: ['c0', 'c1'],
+  key: [[0, 0], [1, 1], [2, 0]],
+};
+
+check('match grades an exact cell set correct in any order', () => {
+  assert.strictEqual(MVItems.grade(MATCH, [[2, 0], [0, 0], [1, 1]]).correct, true);
+});
+
+check('match gives per-cell partial credit and penalises wrong cells', () => {
+  assert.strictEqual(MVItems.grade(MATCH, [[0, 0], [1, 1]]).partial.toFixed(4), (2 / 3).toFixed(4));
+  assert.strictEqual(MVItems.grade(MATCH, [[0, 1], [1, 0], [2, 1]]).partial, 0);
+});
+
+check('match is incomplete until every row has a cell', () => {
+  assert.strictEqual(MVItems.isComplete(MATCH, [[0, 0], [1, 1]]), false, 'row 2 unanswered');
+  assert.strictEqual(MVItems.isComplete(MATCH, [[0, 0], [1, 1], [2, 1]]), true);
+});
+
+// ---------- order ----------
+
+const ORDER = { type: 'order', tiles: ['t0', 't1', 't2', 't3'], key: [2, 0, 3, 1] };
+
+check('order grades the exact arrangement', () => {
+  assert.strictEqual(MVItems.grade(ORDER, [2, 0, 3, 1]).correct, true);
+  assert.strictEqual(MVItems.grade(ORDER, [0, 1, 2, 3]).correct, false);
+});
+
+check('order gives partial credit per correctly placed tile', () => {
+  assert.strictEqual(MVItems.grade(ORDER, [2, 0, 1, 3]).partial, 0.5, 'two of four in place');
+});
+
+check('order is incomplete until every position is filled exactly once', () => {
+  assert.strictEqual(MVItems.isComplete(ORDER, [2, 0, 3]), false);
+  assert.strictEqual(MVItems.isComplete(ORDER, [2, 2, 3, 1]), false, 'a repeat is not a valid arrangement');
+  assert.strictEqual(MVItems.isComplete(ORDER, [2, 0, 3, 1]), true);
+});
+
+// ---------- cloze ----------
+
+const CLOZE = {
+  type: 'cloze', stem: 'She {{0}} the mark and {{1}} away.',
+  blanks: [{ choices: ['erase', 'erased'], key: 1 }, { choices: ['walk', 'walked'], key: 1 }],
+};
+
+check('cloze needs every blank right to be correct', () => {
+  assert.strictEqual(MVItems.grade(CLOZE, [1, 1]).correct, true);
+  assert.strictEqual(MVItems.grade(CLOZE, [1, 0]).correct, false);
+  assert.strictEqual(MVItems.grade(CLOZE, [1, 0]).partial, 0.5);
+});
+
+check('cloze is incomplete while any blank is unfilled', () => {
+  assert.strictEqual(MVItems.isComplete(CLOZE, [1, null]), false);
+  assert.strictEqual(MVItems.isComplete(CLOZE, [1, 0]), true);
+});
+
+// ---------- shorttext ----------
+
+const ST = { type: 'shorttext', stem: 'Name it.', accept: ['a dead drop', 'dead drop'], maxWords: 5 };
+
+check('shorttext accepts any listed answer after normalisation', () => {
+  assert.strictEqual(MVItems.grade(ST, 'Dead Drop').correct, true);
+  assert.strictEqual(MVItems.grade(ST, '  the dead-drop! ').correct, true);
+  assert.strictEqual(MVItems.grade(ST, 'a chalk mark').correct, false);
+});
+
+check('shorttext rejects an answer over maxWords and says why', () => {
+  const r = MVItems.grade(ST, 'it is basically a kind of dead drop technique');
+  assert.strictEqual(r.correct, false);
+  assert.strictEqual(r.notes.some(n => /words/i.test(n)), true, 'notes: ' + JSON.stringify(r.notes));
+});
+
+check('shorttext is incomplete on empty or whitespace input', () => {
+  assert.strictEqual(MVItems.isComplete(ST, ''), false);
+  assert.strictEqual(MVItems.isComplete(ST, '   '), false);
+  assert.strictEqual(MVItems.isComplete(ST, 'x'), true);
+});
+
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
 process.exit(failures ? 1 : 0);
