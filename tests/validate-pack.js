@@ -160,7 +160,9 @@ function checkItemShape(item, passagesById, errors) {
   const w = `items(${item.id})`;
   if (!ITEM_TYPES.includes(item.type)) return;   // already reported by the envelope check
 
-  // Every type except cloze needs a stem; cloze carries its prompt in the tokenised stem too.
+  // Every type except ebsr needs a top-level stem. ebsr carries its prompts in partA.stem and
+  // partB.stem, checked separately below; cloze DOES need the top-level stem, because that is
+  // where its {{n}} tokens live.
   if (!nonEmptyString(item.stem) && item.type !== 'ebsr') {
     errors.push(`${w}.stem: missing or empty`);
   }
@@ -237,6 +239,11 @@ function checkItemShape(item, passagesById, errors) {
       if (!item.key.every(i => isIntIn(i, 0, item.spans.length - 1))) {
         errors.push(`${w}.key: every index must fall inside spans (0 to ${item.spans.length - 1}), got ${JSON.stringify(item.key)}`);
       }
+      // Same guard ms carries. A repeated index inflates "how many spans to find" past the number
+      // of distinct correct spans, and the grader's set-dedup would silently disagree with the key.
+      if (new Set(item.key).size !== item.key.length) {
+        errors.push(`${w}.key: contains a duplicate span index, got ${JSON.stringify(item.key)}`);
+      }
       if (item.key.length === item.spans.length) errors.push(`${w}.key: every span cannot be correct`);
       break;
     }
@@ -259,6 +266,25 @@ function checkItemShape(item, passagesById, errors) {
         if (seen.has(sig)) errors.push(`${w}.key: cell [${r}, ${c}] listed twice`);
         seen.add(sig);
       });
+      // A match item is a row-to-column FUNCTION: every row needs EXACTLY one correct column.
+      // Without this, a row with no correct cell is unanswerable no matter what the student picks,
+      // and a row correct in two columns is self-contradictory; the runtime cannot resolve either
+      // without guessing. The per-cell dedup above does not catch it, because it keys on the whole
+      // (row, col) pair rather than on the row.
+      const perRow = new Map();
+      for (const cell of item.key) {
+        if (!Array.isArray(cell) || cell.length !== 2) continue;   // already reported above
+        const r = Number(cell[0]);
+        perRow.set(r, (perRow.get(r) || 0) + 1);
+      }
+      for (let r = 0; r < rows.length; r++) {
+        const n = perRow.get(r) || 0;
+        if (n === 0) {
+          errors.push(`${w}.key: row ${r} ("${rows[r]}") has no correct column; every row needs exactly one`);
+        } else if (n > 1) {
+          errors.push(`${w}.key: row ${r} ("${rows[r]}") is marked correct in ${n} columns; every row needs exactly one`);
+        }
+      }
       break;
     }
     case 'order': {

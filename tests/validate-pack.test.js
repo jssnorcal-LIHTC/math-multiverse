@@ -179,6 +179,26 @@ check('match with a key cell out of range is caught', () => {
     rowLabels: ['r1','r2'], colLabels: ['c1','c2'], key: [[0,0],[2,1]] }), 'key', 'match cell range');
 });
 
+check('match with a row that has no correct column is caught', () => {
+  // A row nobody can answer correctly. The per-cell dedup misses this because it keys on the pair.
+  expectError(withItem({ ...baseFields, type: 'match', stem: 'Sort them.',
+    rowLabels: ['r1','r2'], colLabels: ['c1','c2'], key: [[0,0]] }), 'no correct column', 'match row uncovered');
+});
+
+check('match with a row correct in two columns is caught', () => {
+  expectError(withItem({ ...baseFields, type: 'match', stem: 'Sort them.',
+    rowLabels: ['r1','r2'], colLabels: ['c1','c2'], key: [[0,0],[0,1],[1,1]] }), 'marked correct in 2 columns', 'match row ambiguous');
+});
+
+check('hottext with a duplicate span index is caught', () => {
+  // ms already guards this; hottext must too, or "find N spans" overstates the distinct answers.
+  expectError(withItem({ ...baseFields, type: 'hottext', mode: 'sentence', stem: 'Tap it.',
+    spans: ['A chalk mark on a lamp post is a common choice.',
+            'Handlers prefer this method in crowded places.',
+            'A dead drop is a way to pass a package without two people ever meeting.'],
+    key: [0, 0] }), 'duplicate span index', 'hottext dup key');
+});
+
 check('order whose key is not a full permutation is caught', () => {
   expectError(withItem({ ...baseFields, type: 'order', stem: 'Sequence them.',
     tiles: ['a','b','c'], key: [0,0,2] }), 'permutation', 'order permutation');
