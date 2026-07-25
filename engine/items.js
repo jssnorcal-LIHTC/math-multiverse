@@ -81,7 +81,13 @@
   }
 
   // Render a list of tappable choices. `mode` is 'single' or 'multi'.
-  function renderChoices(host, choices, mode, ctx, state) {
+  //
+  // `box` is where the buttons are appended; `lockHost` is where the locked flag lives, and defaults to
+  // `box` because for mc and ms they are the same element. ebsr is why the two are separable: it appends
+  // Part A and Part B into their own sub-boxes, so a guard reading box.dataset.locked would read an
+  // element nobody ever locks, and a child could change a graded Part B answer. Always pass the host.
+  function renderChoices(box, choices, mode, ctx, state, lockHost) {
+    const lock = lockHost || box;
     const wrap = el('div', 'mv-choices');
     choices.forEach((text, i) => {
       const b = el('button', 'mv-choice');
@@ -90,7 +96,7 @@
       b.appendChild(el('span', 'mv-choice-letter', String.fromCharCode(65 + i)));
       b.appendChild(el('span', 'mv-choice-text', text));
       b.addEventListener('click', function () {
-        if (host.dataset.locked === '1') return;
+        if (lock.dataset.locked === '1') return;
         if (mode === 'single') {
           state.picked = i;
           for (const other of wrap.querySelectorAll('.mv-choice')) other.classList.remove('sel');
@@ -106,7 +112,7 @@
       });
       wrap.appendChild(b);
     });
-    host.appendChild(wrap);
+    box.appendChild(wrap);
     return wrap;
   }
 
@@ -229,6 +235,7 @@
       // Part A is single-select, and committing it reveals Part B and locks A. Revealing B only
       // after A is what makes the consistency lesson possible.
       const aState = { picked: null };
+      // NOTE the trailing `host`: the lock lives there, not on aBox. Without it a graded Part B stays clickable.
       state.aWrap = renderChoices(aBox, item.partA.choices, 'single', {
         onAnswer(i) {
           state.picked.a = i;
@@ -239,23 +246,36 @@
             state.bWrap = renderChoices(bBox, item.partB.choices, 'single', {
               onAnswer(j) { state.picked.b = j; ctx.onProgress(); },
               onProgress() {},
-            }, bState);
+            }, bState, host);
             if (bBox.scrollIntoView) bBox.scrollIntoView({ block: 'nearest' });
           }
           ctx.onProgress();
         },
         onProgress() {},
-      }, aState);
+      }, aState, host);
     },
     reveal(item, host, r) {
       const st = host._mvState || {};
       revealChoices(st.aWrap, r && r.a, [item.partA.key]);
-      const expectedB = item.partB.key[String(r && r.a)];
-      // Show the evidence that supports the CORRECT answer, so the takeaway is the right pairing.
-      const showB = Number.isInteger(item.partB.key[String(item.partA.key)])
-        ? item.partB.key[String(item.partA.key)]
-        : expectedB;
-      revealChoices(st.bWrap, r && r.b, [showB]);
+
+      // Part B needs THREE states, not two, because grade() recognises three outcomes. Showing only
+      // right-versus-wrong contradicts the consistency credit: a child who picks a wrong claim but then
+      // finds the evidence that genuinely supports THAT claim is told "exactly the right habit", and would
+      // then watch their evidence painted red, indistinguishable from a guess. So:
+      //   green  the evidence for the CORRECT claim, which is the pairing to take away
+      //   amber  the child's own pick when it correctly supports their own (wrong) claim
+      //   red    a pick that supports neither
+      const canonicalB = item.partB.key[String(item.partA.key)];
+      const consistentB = item.partB.key[String(r && r.a)];
+      const chose = r && r.b;
+      revealChoices(st.bWrap, chose, [Number.isInteger(canonicalB) ? canonicalB : consistentB]);
+      // If their pick was consistent with their own answer but is not the canonical one, downgrade it from
+      // wrong to consistent so the styling can say "good reasoning, wrong premise".
+      if (st.bWrap && Number.isInteger(chose) && chose === consistentB && chose !== canonicalB) {
+        for (const b of st.bWrap.querySelectorAll('.mv-choice')) {
+          if (Number(b.dataset.idx) === chose) { b.classList.remove('wrong'); b.classList.add('consistent'); }
+        }
+      }
     },
   };
 
