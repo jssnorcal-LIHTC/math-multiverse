@@ -3546,7 +3546,10 @@ function renderHeader() {
 let SHELVES = [{ subject: 'math', label: 'Math', packs: [] }];
 
 const SUBJECT_LABELS = { ela: 'English', sci: 'Science', hist: 'History' };
-const SUBJECT_ORDER = ['ela', 'math', 'sci', 'hist'];
+// Math first, Justin's call 26-0725: the six worlds Niall already plays stay at the top of the launcher
+// where they have always been, and every new subject is an addition below them rather than something that
+// displaces his game. New subjects append here.
+const SUBJECT_ORDER = ['math', 'ela', 'sci', 'hist'];
 
 function buildShelves(manifest) {
   const bySubject = {};
