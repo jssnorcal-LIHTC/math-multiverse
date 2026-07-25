@@ -30,36 +30,85 @@ function itemHash(item) {
 // The authored answer a blind pass is compared against. Only the types with a single scalar or
 // array key participate; order, match, cloze and shorttext are checked structurally instead and
 // return null so they are skipped rather than falsely compared.
+// The authored answer a blind pass is compared against. EVERY auto-graded type with a discrete key
+// participates. match, order and cloze were exempt in an earlier draft on the grounds that they are
+// "checked structurally instead"; that was wrong. A structural check confirms a key is well FORMED
+// (every row has exactly one column, the order is a full permutation, each blank has one token) and
+// says nothing about whether it is UNAMBIGUOUS. Two definitions can both fit a row, two orderings can
+// both be defensible, and "left" and "leaves" can both be grammatical. That is precisely the semantic
+// risk this mechanism exists to catch. Only shorttext (free text, no lettered form), listen and write
+// remain exempt.
 function authoredKeyOf(item) {
   if (!item || typeof item !== 'object') return null;
   if (item.type === 'mc') return Number.isInteger(item.key) ? item.key : null;
   if (item.type === 'ms') return Array.isArray(item.key) ? item.key.slice() : null;
   if (item.type === 'hottext') return Array.isArray(item.key) ? item.key.slice() : null;
   if (item.type === 'ebsr') return (item.partA && Number.isInteger(item.partA.key)) ? item.partA.key : null;
+  if (item.type === 'order') return Array.isArray(item.key) ? item.key.slice() : null;
+  if (item.type === 'cloze') return Array.isArray(item.blanks) ? item.blanks.map(function (b) { return b && b.key; }) : null;
+  if (item.type === 'match') {
+    // One column per row, expressed in row order, so it compares as a plain array.
+    if (!Array.isArray(item.key) || !Array.isArray(item.rowLabels)) return null;
+    const byRow = new Map(item.key.filter(Array.isArray).map(function (c) { return [Number(c[0]), Number(c[1])]; }));
+    const out = item.rowLabels.map(function (_, r) { return byRow.has(r) ? byRow.get(r) : -1; });
+    // An incomplete key is a SHAPE defect for checkItemShape to report, not a verdict question.
+    return out.includes(-1) ? null : out;
+  }
   return null;
 }
 
-function blindOptionsOf(item) {
-  if (item.type === 'ebsr') return (item.partA && item.partA.choices) || [];
-  if (item.type === 'hottext') return item.spans || [];
-  return item.choices || [];
-}
+const LETTER = (i) => String.fromCharCode(65 + i);
 
-function blindStemOf(item) {
-  if (item.type === 'ebsr') return (item.partA && item.partA.stem) || '';
-  return item.stem || '';
+// Per-type blind presentation: the question, a lettered body the model can answer, the JSON answer
+// spec, and how many letters are in range. Built field by field rather than by serialising the item,
+// so a field added later cannot silently leak the key.
+function blindSpecOf(item) {
+  const lettered = (arr) => arr.map((o, i) => LETTER(i) + '. ' + o).join('\n');
+  switch (item.type) {
+    case 'mc':
+      return { stem: item.stem, body: lettered(item.choices || []),
+               spec: '"answer": the single letter you choose', count: (item.choices || []).length };
+    case 'ebsr':
+      return { stem: (item.partA && item.partA.stem) || '',
+               body: lettered((item.partA && item.partA.choices) || []),
+               spec: '"answer": the single letter you choose',
+               count: ((item.partA && item.partA.choices) || []).length };
+    case 'ms':
+      return { stem: item.stem, body: lettered(item.choices || []),
+               spec: '"answer": an array of the ' + (item.key || []).length + ' letters you choose',
+               count: (item.choices || []).length };
+    case 'hottext':
+      return { stem: item.stem, body: lettered(item.spans || []),
+               spec: '"answer": an array of the ' + (item.key || []).length + ' letters you choose',
+               count: (item.spans || []).length };
+    case 'order':
+      return { stem: item.stem, body: lettered(item.tiles || []),
+               spec: '"answer": an array of all ' + (item.tiles || []).length + ' letters, in the correct order',
+               count: (item.tiles || []).length };
+    case 'cloze':
+      return { stem: item.stem,
+               body: (item.blanks || []).map((b, bi) =>
+                 'Blank ' + bi + ':\n' + (b.choices || []).map((o, i) => '  ' + LETTER(i) + '. ' + o).join('\n')).join('\n'),
+               spec: '"answer": an array of ' + (item.blanks || []).length + ' letters, one per blank, in order',
+               count: Math.max.apply(null, [1].concat((item.blanks || []).map(b => (b.choices || []).length))) };
+    case 'match':
+      return { stem: item.stem,
+               body: 'COLUMNS:\n' + (item.colLabels || []).map((c, i) => '  ' + LETTER(i) + '. ' + c).join('\n') +
+                     '\n\nROWS, answer one column letter for each, in this order:\n' +
+                     (item.rowLabels || []).map((r, i) => '  ' + i + '. ' + r).join('\n'),
+               spec: '"answer": an array of ' + (item.rowLabels || []).length + ' column letters, one per row, in row order',
+               count: (item.colLabels || []).length };
+    default:
+      return null;
+  }
 }
 
 // Build the blind prompt. Everything that could leak the answer is excluded by construction:
 // this assembles the prompt from named fields rather than serialising the item, so a new field
 // added later cannot silently leak.
 function blindQuestion(item, passage) {
-  const options = blindOptionsOf(item);
-  const lettered = options.map((o, i) => `${String.fromCharCode(65 + i)}. ${o}`).join('\n');
-  const multi = item.type === 'ms' || item.type === 'hottext';
-  const answerSpec = multi
-    ? '"answer": an array of the letters you choose'
-    : '"answer": the single letter you choose';
+  const spec = blindSpecOf(item);
+  if (!spec) throw new Error('blindQuestion: type ' + JSON.stringify(item && item.type) + ' has no blind form');
 
   const prompt = [
     'You are answering one reading-comprehension question for a grade 6 student.',
@@ -69,15 +118,16 @@ function blindQuestion(item, passage) {
     passage.text,
     '',
     'QUESTION:',
-    blindStemOf(item),
+    spec.stem,
     '',
     'OPTIONS:',
-    lettered,
+    spec.body,
     '',
-    `Reply with ONE line of JSON and nothing else: {${answerSpec}, "confidence": "high" | "medium" | "low"}`,
+    'Reply with ONE line of JSON and nothing else: {' + spec.spec + ', "confidence": "high" | "medium" | "low"}',
+    'Emit exactly one JSON object.  Do not offer an alternative or restate a revised answer.',
   ].join('\n');
 
-  return { prompt, optionCount: options.length };
+  return { prompt, optionCount: spec.count };
 }
 
 function sameAnswer(a, b) {

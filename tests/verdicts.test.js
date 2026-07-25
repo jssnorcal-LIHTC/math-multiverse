@@ -13,10 +13,9 @@ function check(name, fn) {
   catch (e) { failures++; console.log('  FAIL ' + name + ': ' + e.message); }
 }
 
-// Rebuild every object with its keys inserted in reverse-sorted order, recursively, preserving all
-// content. Do NOT use the array form of JSON.stringify's replacer for this: that argument is a
-// recursive allowlist, so it silently drops nested maps such as distractorRationale, and the test
-// would then be asserting that deleting content leaves the hash unchanged.
+// Genuinely reorder every object's keys, recursively. NOT JSON.stringify with a replacer array:
+// that FILTERS keys rather than reordering them, and silently drops nested content, which made an
+// earlier version of the reorder test pass for the wrong reason.
 function reorderKeys(v) {
   if (Array.isArray(v)) return v.map(reorderKeys);
   if (v && typeof v === 'object') {
@@ -46,6 +45,8 @@ check('stableStringify is key-order independent', () => {
 check('itemHash is stable across key reordering but changes with content', () => {
   const it = clone().items[0];
   const reordered = reorderKeys(it);
+  // Prove the harness itself is meaningful BEFORE testing the thing under test: the helper must have
+  // actually reordered, and must not have altered content.
   assert.notDeepStrictEqual(Object.keys(it), Object.keys(reordered), 'the reorder helper did not reorder anything');
   assert.deepStrictEqual(reordered, it, 'the reorder helper must not change content, only key order');
   assert.strictEqual(itemHash(it), itemHash(reordered));
@@ -60,6 +61,39 @@ check('authoredKeyOf reads mc, ms and ebsr partA keys', () => {
   assert.strictEqual(authoredKeyOf(p.items[1]), 1);   // ebsr uses partA.key
   assert.deepStrictEqual(authoredKeyOf({ type: 'ms', key: [0, 2] }), [0, 2]);
   assert.strictEqual(authoredKeyOf({ type: 'order' }), null);
+});
+
+check('match, order and cloze now get a verdict instead of being silently exempt', () => {
+  // They were exempt on the grounds of being 'checked structurally instead'. Structural checks prove a
+  // key is well FORMED, not that it is UNAMBIGUOUS: two definitions can fit one row, two orderings can
+  // both be defensible, and 'left' versus 'leaves' is a real judgement. Same risk as mc, so same gate.
+  const MATCH = { type: 'match', stem: 'Sort them.', rowLabels: ['r0','r1','r2'], colLabels: ['c0','c1'], key: [[0,0],[1,1],[2,0]] };
+  const ORDER = { type: 'order', stem: 'Sequence them.', tiles: ['t0','t1','t2'], key: [2,0,1] };
+  const CLOZE = { type: 'cloze', stem: 'She {{0}} it and {{1}} away.', blanks: [{ choices: ['erase','erased'], key: 1 }, { choices: ['walk','walked'], key: 1 }] };
+  assert.deepStrictEqual(authoredKeyOf(MATCH), [0,1,0], 'match key must flatten to one column per row, in row order');
+  assert.deepStrictEqual(authoredKeyOf(ORDER), [2,0,1]);
+  assert.deepStrictEqual(authoredKeyOf(CLOZE), [1,1], 'cloze key must be one choice index per blank');
+  // An incomplete match key is a SHAPE defect for checkItemShape, not a verdict question.
+  assert.strictEqual(authoredKeyOf({ type: 'match', rowLabels: ['a','b'], colLabels: ['x','y'], key: [[0,0]] }), null);
+  // shorttext stays exempt: free text has no lettered form to blind-answer.
+  assert.strictEqual(authoredKeyOf({ type: 'shorttext', accept: ['x'], maxWords: 3 }), null);
+});
+
+check('blindQuestion builds a non-leaking lettered prompt for match, order and cloze', () => {
+  const p = clone();
+  const passage = p.passages[0];
+  const MATCH = { type: 'match', stem: 'Sort them.', rowLabels: ['r0','r1'], colLabels: ['c0','c1'], key: [[0,0],[1,1]] };
+  const CLOZE = { type: 'cloze', stem: 'She {{0}} it and {{1}} away.', blanks: [{ choices: ['erase','erased'], key: 1 }, { choices: ['walk','walked'], key: 1 }] };
+  const mq = blindQuestion(MATCH, passage);
+  assert.strictEqual(mq.prompt.includes('COLUMNS:'), true, 'match must letter its columns');
+  assert.strictEqual(/0\. r0/.test(mq.prompt), true, 'match must number its rows so the answer order is unambiguous');
+  assert.strictEqual(mq.optionCount, 2);
+  const cq = blindQuestion(CLOZE, passage);
+  assert.strictEqual(/Blank 0:/.test(cq.prompt) && /Blank 1:/.test(cq.prompt), true, 'cloze must letter each blank separately');
+  for (const q of [mq, cq]) {
+    assert.strictEqual(q.prompt.includes(passage.text), true, 'the passage must be present');
+    assert.strictEqual(/"key"/.test(q.prompt), false, 'the key field must never appear');
+  }
 });
 
 check('blindQuestion hides the key, the explanation and the rationales', () => {

@@ -59,8 +59,16 @@ function callClaude(prompt) {
 
 // The CLI returns prose around the JSON often enough that a bare JSON.parse is not safe.
 function parseAnswer(raw, optionCount) {
-  const m = String(raw).match(/\{[^{}]*"answer"[^{}]*\}/);
-  if (!m) throw new Error('no JSON object with an "answer" field in the reply: ' + String(raw).slice(0, 160));
+  // /g on purpose. Without it .match() returns only the FIRST hit, so a model that second-guesses
+  // itself mid-reply and emits two candidate objects has its abandoned answer used silently. That can
+  // manufacture a false "agree" that papers over a real ambiguity, which is the dangerous direction.
+  // Two objects is now a hard error rather than a guess.
+  const all = String(raw).match(/\{[^{}]*"answer"[^{}]*\}/g);
+  if (!all) throw new Error('no JSON object with an "answer" field in the reply: ' + String(raw).slice(0, 160));
+  if (all.length > 1) {
+    throw new Error('reply contained ' + all.length + ' JSON objects with an "answer" field; refusing to guess which was meant: ' + all.join(' | ').slice(0, 200));
+  }
+  const m = all;
   const obj = JSON.parse(m[0]);
   const toIdx = (L) => {
     const i = String(L).trim().toUpperCase().charCodeAt(0) - 65;
@@ -144,7 +152,21 @@ async function pool(jobs, size) {
   const fresh = [];
   results.forEach((r, i) => {
     const item = todo[i];
-    if (!r || r.error) { failed++; console.log(`  ERROR  ${item.id}: ${r && r.error}`); return; }
+    if (!r || r.error) {
+      failed++;
+      console.log('  ERROR  ' + item.id + ': ' + (r && r.error));
+      // Carry the PRIOR record forward untouched rather than dropping it. The ledger write below is
+      // unconditional, so without this a transient CLI timeout or a parse failure silently deletes a
+      // human adjudication, note and all, contradicting this file's own guarantee. The record is kept
+      // with its now-stale itemHash, so validate-pack still refuses the pack until it is re-run: nothing
+      // is lost AND nothing is falsely blessed.
+      const prev = prior.get(item.id);
+      if (prev) {
+        keep.push(prev);
+        console.log('         prior verdict preserved (stale hash, will still block the pack)');
+      }
+      return;
+    }
     const authored = authoredKeyOf(item);
     const same = JSON.stringify(Array.isArray(authored) ? authored.slice().sort() : authored)
               === JSON.stringify(Array.isArray(r.answer) ? r.answer.slice().sort() : r.answer);
