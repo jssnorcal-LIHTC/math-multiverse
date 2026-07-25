@@ -3677,7 +3677,14 @@ function renderLauncher() {
     if (shelf.subject === 'math') {
       for (const m of MODULES) inner.appendChild(mathCardNode(m));
     } else {
-      for (const entry of shelf.packs) inner.appendChild(packCardNode(entry));
+      // A pack belongs to one grade. SHELVES stays the complete registry, because openPack and
+      // exitToLevels look packs up in it and must still resolve one that is open when the grade flips;
+      // it is only the launcher that hides what does not belong to the campaign on screen. Filtering
+      // inside buildShelves instead would hide a grade-6 pack forever from anyone who booted on grade 5,
+      // because the grade toggle re-renders but never rebuilds the shelves.
+      const visible = (shelf.packs || []).filter(p => p.grade === ACTIVE_GRADE);
+      if (!visible.length) continue;          // an empty shelf is noise, not an empty state
+      for (const entry of visible) inner.appendChild(packCardNode(entry));
     }
     wrap.appendChild(inner);
     grid.appendChild(wrap);
