@@ -92,6 +92,28 @@ check('ms ignores a duplicate pick instead of counting it twice', () => {
 
 // ---------- normalizeText ----------
 
+check('a stray null, boolean or numeric string is NOT a pick', () => {
+  // Number(null) is 0 and Number(true) is 1, so coercing made garbage read as choosing option A and
+  // isComplete return true. Only a real integer counts.
+  assert.strictEqual(MVItems.isComplete(MS, [null]), false);
+  assert.strictEqual(MVItems.isComplete(MS, [true]), false);
+  assert.strictEqual(MVItems.isComplete(MS, ['2']), false);
+  assert.strictEqual(MVItems.isComplete(MS, [undefined]), false);
+  assert.strictEqual(MVItems.isComplete(MS, [NaN]), false);
+  // and a null mixed in with a real pick must not be counted as a second pick
+  assert.deepStrictEqual(MVItems.grade(MS, [null, 3]).partial, MVItems.grade(MS, [3]).partial);
+  assert.strictEqual(MVItems.isComplete(MS, [1, 3]), true, 'real picks must still work');
+});
+
+check('ms rejects an out-of-range pick as incomplete, matching mc', () => {
+  // mc range-checked and ms did not; an asymmetry between two types answering the same question is
+  // how the next type inherits the bug.
+  assert.strictEqual(MVItems.isComplete(MS, [99]), false);
+  assert.strictEqual(MVItems.isComplete(MS, [-1]), false);
+  assert.strictEqual(MVItems.isComplete(MS, [1, 99]), false);
+  assert.strictEqual(MVItems.isComplete(MS, [1, 4]), true, 'the last real index must still be valid');
+});
+
 check('normalizeText folds case, punctuation, articles and whitespace', () => {
   const n = MVItems.normalizeText;
   assert.strictEqual(n('  A  Dead   Drop! '), 'dead drop');
