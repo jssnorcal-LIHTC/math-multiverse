@@ -46,7 +46,7 @@ function authoredKeyOf(item) {
   if (item.type === 'ebsr') return (item.partA && Number.isInteger(item.partA.key)) ? item.partA.key : null;
   if (item.type === 'order') return Array.isArray(item.key) ? item.key.slice() : null;
   if (item.type === 'cloze') {
-    if (!Array.isArray(item.blanks)) return null;
+    if (!Array.isArray(item.blanks) || !item.blanks.length) return null;
     const out = item.blanks.map(function (b) { return (b && Number.isInteger(b.key)) ? b.key : null; });
     // A blank with no key (or a non-integer key) is a SHAPE defect for checkItemShape to report,
     // not a verdict question: comparing a blind answer against undefined or null tells us nothing.
