@@ -26,6 +26,9 @@
 
   // Answer normalisation for typed responses. Folds case, strips punctuation, drops a leading
   // article, and collapses whitespace, so "The chalk-mark!" matches "chalk mark".
+  // KNOWN COST, accepted: dropping the article makes "the mark" and "a mark" collide. That is the
+  // price of letting a child write "the dead drop" for an accept list of "dead drop", which is the far
+  // commoner case. An author who needs the two distinguished must not use shorttext for that item.
   function normalizeText(s) {
     return String(s == null ? '' : s)
       .toLowerCase()
@@ -36,8 +39,17 @@
       .replace(/^(?:the|a|an)\s+/, '');
   }
 
+  // FILTER, do not coerce. Number(null) is 0 and Number(true) is 1, so mapping first made a stray null
+  // read as a deliberate pick of option A and isComplete return true on garbage. Only a value that is
+  // already an integer counts, which is all the renderers ever produce.
   function uniqSorted(arr) {
-    return [...new Set((arr || []).map(Number))].filter(Number.isInteger).sort((a, b) => a - b);
+    return [...new Set((arr || []).filter(Number.isInteger))].sort((a, b) => a - b);
+  }
+
+  // Range-check against the option count. mc did this and ms did not, and an asymmetry between two
+  // types that answer the same question is how the next type gets it wrong too.
+  function allInRange(arr, n) {
+    return uniqSorted(arr).every((i) => i >= 0 && i < n);
   }
 
   function sameSet(a, b) {
@@ -139,7 +151,9 @@
 
   types.ms = {
     needsCheck: true,
-    isComplete(item, r) { return Array.isArray(r) && uniqSorted(r).length > 0; },
+    isComplete(item, r) {
+      return Array.isArray(r) && uniqSorted(r).length > 0 && allInRange(r, (item.choices || []).length);
+    },
     grade(item, r) {
       const correct = sameSet(r, item.key);
       return {
@@ -173,7 +187,17 @@
     needsCheck(item) { return !!typeOf(item).needsCheck; },
     isComplete(item, response) { return !!typeOf(item).isComplete(item, response); },
     grade(item, response) { return typeOf(item).grade(item, response); },
-    render(item, host, ctx) { return typeOf(item).render(item, host, ctx); },
+    // render OWNS the host. It clears it, establishes the locked flag the click guards read, and drops
+    // any state left by a previous item. Task 12's runner also clears the element, and that redundancy is
+    // deliberate: this file's guards must not be inert when called by anything else, and a type's render
+    // must not silently append a second question beneath the first.
+    render(item, host, ctx) {
+      const t = typeOf(item);
+      host.innerHTML = '';
+      host.dataset.locked = '0';
+      delete host._mvState;
+      return t.render(item, host, ctx);
+    },
     reveal(item, host, response, result) { return typeOf(item).reveal(item, host, response, result); },
     // exposed for the later type tasks and for the runner's own tests
     _helpers: { el, uniqSorted, sameSet, setPartial, setNotes, renderChoices, revealChoices, stemNode },
