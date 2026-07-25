@@ -250,16 +250,16 @@
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "A meeting that is watched cannot be unwatched, and everyone who walks into it is finished.",
-          "Anyone who is genuinely going that direction simply keeps going and is never seen again.",
           "The courier buys a carton of milk, goes home, and writes the whole thing up.",
-          "If the route turns up a follower, the courier does not run, does not confront anybody, and does not go anywhere near the meeting."
+          "A meeting that is watched cannot be unwatched, and everyone who walks into it is finished.",
+          "If the route turns up a follower, the courier does not run, does not confront anybody, and does not go anywhere near the meeting.",
+          "Anyone who is genuinely going that direction simply keeps going and is never seen again."
         ],
         "key": {
-          "0": 0,
-          "1": 1,
-          "2": 2,
-          "3": 3
+          "0": 1,
+          "1": 3,
+          "2": 0,
+          "3": 2
         }
       },
       "distractorRationale": {
@@ -291,16 +291,16 @@
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "The point is to arrive knowing something about the street that you did not know when you left.",
           "The courier is looking for the same face twice.",
-          "The first move is a doubling back.",
-          "A meeting that is missed can be arranged again the next day at a small cost in time."
+          "A meeting that is missed can be arranged again the next day at a small cost in time.",
+          "The point is to arrive knowing something about the street that you did not know when you left.",
+          "The first move is a doubling back."
         ],
         "key": {
-          "0": 0,
-          "1": 1,
-          "2": 2,
-          "3": 3
+          "0": 2,
+          "1": 0,
+          "2": 3,
+          "3": 1
         }
       },
       "distractorRationale": {
@@ -332,16 +332,16 @@
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "A shop window, a parked car, or a phone screen held at the right angle shows the street behind without a single turn of the head.",
-          "A follower who has been drifting comfortably forty feet back now has to close that gap or lose the courier completely, and both of those are visible from the front.",
+          "Stairs, an escalator, a footbridge, or a train platform force everyone nearby to commit to a direction at the same moment.",
           "The courier is not looking for a suspicious face, because faces are a poor guide and everybody looks suspicious eventually.",
-          "Stairs, an escalator, a footbridge, or a train platform force everyone nearby to commit to a direction at the same moment."
+          "A follower who has been drifting comfortably forty feet back now has to close that gap or lose the courier completely, and both of those are visible from the front.",
+          "A shop window, a parked car, or a phone screen held at the right angle shows the street behind without a single turn of the head."
         ],
         "key": {
-          "0": 0,
-          "1": 1,
-          "2": 2,
-          "3": 3
+          "0": 3,
+          "1": 2,
+          "2": 1,
+          "3": 0
         }
       },
       "distractorRationale": {
@@ -374,15 +374,15 @@
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "Three is the number because people really do end up on the same street twice by accident, and almost never three times across a mile of turns nobody could predict.",
+          "The third move is a change of level.",
           "One sighting is nothing at all, two sightings in one afternoon are a coincidence worth writing down, and three sightings in three unrelated places mean the run is over.",
-          "A follower who is trying not to be seen has to keep making choices, and every choice is a chance to be wrong.",
-          "The third move is a change of level."
+          "A follower who is trying not to be seen has to keep making choices, and every choice is a chance to be wrong."
         ],
         "key": {
           "0": 0,
-          "1": 1,
-          "2": 2,
-          "3": 3
+          "1": 2,
+          "2": 3,
+          "3": 1
         }
       },
       "distractorRationale": {
@@ -631,16 +631,16 @@
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "The fix is not a more powerful radio, because power was never the problem that the rock created.",
-          "Every team that works underground runs into the same wall, and it has nothing to do with the price of their equipment.",
           "A handheld set pushes a signal out through open air for a mile or more.",
-          "The last piece of the fix is a schedule."
+          "The fix is not a more powerful radio, because power was never the problem that the rock created.",
+          "The last piece of the fix is a schedule.",
+          "Every team that works underground runs into the same wall, and it has nothing to do with the price of their equipment."
         ],
         "key": {
-          "0": 0,
-          "1": 1,
-          "2": 2,
-          "3": 3
+          "0": 1,
+          "1": 3,
+          "2": 0,
+          "3": 2
         }
       },
       "distractorRationale": {
@@ -672,16 +672,16 @@
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "A redundant system is one that a team hopes never to need and refuses to leave behind.",
           "Planners call this a redundant system, and the word is not an insult in a tunnel.",
-          "A hardwired line taped along the wall is heavy, slow to lay, and completely reliable once everything electronic has quit.",
-          "A long tunnel uses several relays in a chain, each one handing the message to the next like runners passing a baton."
+          "A long tunnel uses several relays in a chain, each one handing the message to the next like runners passing a baton.",
+          "A redundant system is one that a team hopes never to need and refuses to leave behind.",
+          "A hardwired line taped along the wall is heavy, slow to lay, and completely reliable once everything electronic has quit."
         ],
         "key": {
-          "0": 0,
-          "1": 1,
-          "2": 2,
-          "3": 3
+          "0": 2,
+          "1": 0,
+          "2": 3,
+          "3": 1
         }
       },
       "distractorRationale": {
@@ -713,16 +713,16 @@
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "That interval turns silence itself into information.",
-          "Worse than either of those, silence is ambiguous, because it can mean several different things at once.",
+          "Relays fail, so a good team carries a second method that does not depend on them at all.",
           "A relay is a small transmitter parked where it can hear both sides at once, usually just inside the entrance where the tunnel is still shallow.",
-          "Relays fail, so a good team carries a second method that does not depend on them at all."
+          "Worse than either of those, silence is ambiguous, because it can mean several different things at once.",
+          "That interval turns silence itself into information."
         ],
         "key": {
-          "0": 0,
-          "1": 1,
-          "2": 2,
-          "3": 3
+          "0": 3,
+          "1": 2,
+          "2": 1,
+          "3": 0
         }
       },
       "distractorRationale": {
@@ -755,15 +755,15 @@
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "The surface crew has no way to tell whether the team below is busy, out of range, or in serious trouble.",
+          "Stone and soil and concrete absorb that energy instead and turn it quietly into heat.",
           "The result is called dead air, and it is more dangerous than a quiet radio sounds.",
-          "The deeper a team goes the less of the signal survives, and the fall is far steeper than most people expect.",
-          "Stone and soil and concrete absorb that energy instead and turn it quietly into heat."
+          "The deeper a team goes the less of the signal survives, and the fall is far steeper than most people expect."
         ],
         "key": {
           "0": 0,
-          "1": 1,
-          "2": 2,
-          "3": 3
+          "1": 2,
+          "2": 3,
+          "3": 1
         }
       },
       "distractorRationale": {
@@ -1001,16 +1001,16 @@
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "Nothing I can see from here says that he is in trouble.",
-          "The rule is that he checks in at ten twenty, and if nothing has come through by ten twenty-two I call the whole exercise off.",
           "What is true is that I was one second away from a decision I would have had to defend for the rest of the year.",
-          "At ten twenty-two and eleven seconds, which is late, the radio clicks twice."
+          "Nothing I can see from here says that he is in trouble.",
+          "At ten twenty-two and eleven seconds, which is late, the radio clicks twice.",
+          "The rule is that he checks in at ten twenty, and if nothing has come through by ten twenty-two I call the whole exercise off."
         ],
         "key": {
-          "0": 0,
-          "1": 1,
-          "2": 2,
-          "3": 3
+          "0": 1,
+          "1": 3,
+          "2": 0,
+          "3": 2
         }
       },
       "distractorRationale": {
@@ -1042,16 +1042,16 @@
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "I can see the front doors from where I am parked, and I can see roughly four feet past them, and that is the whole of my view.",
           "Jonah went in at ten fourteen and the lobby has a front desk.",
-          "I would like to say that I was calm about all of it.",
-          "So I do the thing Marchetti drilled into the whole group back in September."
+          "So I do the thing Marchetti drilled into the whole group back in September.",
+          "I can see the front doors from where I am parked, and I can see roughly four feet past them, and that is the whole of my view.",
+          "I would like to say that I was calm about all of it."
         ],
         "key": {
-          "0": 0,
-          "1": 1,
-          "2": 2,
-          "3": 3
+          "0": 2,
+          "1": 0,
+          "2": 3,
+          "3": 1
         }
       },
       "distractorRationale": {
@@ -1083,16 +1083,16 @@
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "Nobody who goes through that door is Jonah coming back out, which is the only solid fact I actually have.",
-          "That hiss is the only comfort in this job, because silence with no hiss underneath it means the set is dead and I am learning nothing at all.",
+          "A desk means a person, a person means questions, and questions take time that our plan never allowed for.",
           "Everything I can see from here says that he is standing somewhere talking to somebody.",
-          "A desk means a person, a person means questions, and questions take time that our plan never allowed for."
+          "That hiss is the only comfort in this job, because silence with no hiss underneath it means the set is dead and I am learning nothing at all.",
+          "Nobody who goes through that door is Jonah coming back out, which is the only solid fact I actually have."
         ],
         "key": {
-          "0": 0,
-          "1": 1,
-          "2": 2,
-          "3": 3
+          "0": 3,
+          "1": 2,
+          "2": 1,
+          "3": 0
         }
       },
       "distractorRationale": {
@@ -1125,15 +1125,15 @@
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "He does know that the education office is on the third floor, that it does not open until half past ten, and that Ferris would have to leave her desk to find out.",
+          "Marchetti wrote it out that morning and said a cover story should be boring enough that nobody asks a second question.",
           "So Jonah says the letter went to the education office last week, and that he is happy to wait in the lobby while she phones them.",
-          "She asks which school he is from, and he tells her without any trouble at all.",
-          "Marchetti wrote it out that morning and said a cover story should be boring enough that nobody asks a second question."
+          "She asks which school he is from, and he tells her without any trouble at all."
         ],
         "key": {
           "0": 0,
-          "1": 1,
-          "2": 2,
-          "3": 3
+          "1": 2,
+          "2": 3,
+          "3": 1
         }
       },
       "distractorRationale": {
