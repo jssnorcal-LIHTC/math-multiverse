@@ -173,6 +173,91 @@
     reveal(item, host, r) { revealChoices(host._mvState && host._mvState.wrap, r, item.key); },
   };
 
+  // The signature CAASPP type. partB.key is a MAP from the chosen Part A index to the Part B index
+  // that best supports it, never a scalar. Grading Part B against a fixed answer is the standard
+  // way a homemade EBSR is silently wrong, so a scalar key throws rather than grading.
+  types.ebsr = {
+    needsCheck: true,
+    isComplete(item, r) {
+      return !!r && Number.isInteger(r.a) && Number.isInteger(r.b)
+        && r.a >= 0 && r.a < item.partA.choices.length
+        && r.b >= 0 && r.b < item.partB.choices.length;
+    },
+    grade(item, r) {
+      const bKey = item.partB && item.partB.key;
+      if (!bKey || typeof bKey !== 'object' || Array.isArray(bKey)) {
+        throw new Error('ebsr partB.key must be an object mapping each partA index to a partB index');
+      }
+      const a = r && r.a, b = r && r.b;
+      const aRight = a === item.partA.key;
+      const expectedB = bKey[String(a)];
+      const consistent = Number.isInteger(expectedB) && b === expectedB;
+      const correct = aRight && consistent;
+
+      const notes = [];
+      let partial;
+      if (correct) {
+        partial = 1;
+      } else if (aRight && !consistent) {
+        partial = 0.5;
+        notes.push('Your answer was right, but the line you picked does not prove it. Evidence has to do work, not just sound related.');
+      } else if (!aRight && consistent) {
+        partial = 0.5;
+        notes.push('Your evidence matched your own answer, which is exactly the right habit. Keep that, and re-read the question, because the answer itself was wrong.');
+      } else {
+        partial = 0;
+        notes.push('Both parts are off. Answer the question first in your own words, then hunt for the line that says it.');
+      }
+      return { correct, partial, consistent, notes };
+    },
+    render(item, host, ctx) {
+      const state = { picked: { a: null, b: null } };
+      host._mvState = state;
+
+      const aBox = el('div', 'mv-part mv-part-a');
+      aBox.appendChild(el('div', 'mv-part-label', 'Part A'));
+      aBox.appendChild(stemNode(item.partA.stem));
+      host.appendChild(aBox);
+
+      const bBox = el('div', 'mv-part mv-part-b');
+      bBox.style.display = 'none';
+      bBox.appendChild(el('div', 'mv-part-label', 'Part B'));
+      bBox.appendChild(stemNode(item.partB.stem));
+      host.appendChild(bBox);
+
+      // Part A is single-select, and committing it reveals Part B and locks A. Revealing B only
+      // after A is what makes the consistency lesson possible.
+      const aState = { picked: null };
+      state.aWrap = renderChoices(aBox, item.partA.choices, 'single', {
+        onAnswer(i) {
+          state.picked.a = i;
+          for (const btn of state.aWrap.querySelectorAll('.mv-choice')) btn.disabled = true;
+          if (bBox.style.display === 'none') {
+            bBox.style.display = '';
+            const bState = { picked: null };
+            state.bWrap = renderChoices(bBox, item.partB.choices, 'single', {
+              onAnswer(j) { state.picked.b = j; ctx.onProgress(); },
+              onProgress() {},
+            }, bState);
+            if (bBox.scrollIntoView) bBox.scrollIntoView({ block: 'nearest' });
+          }
+          ctx.onProgress();
+        },
+        onProgress() {},
+      }, aState);
+    },
+    reveal(item, host, r) {
+      const st = host._mvState || {};
+      revealChoices(st.aWrap, r && r.a, [item.partA.key]);
+      const expectedB = item.partB.key[String(r && r.a)];
+      // Show the evidence that supports the CORRECT answer, so the takeaway is the right pairing.
+      const showB = Number.isInteger(item.partB.key[String(item.partA.key)])
+        ? item.partB.key[String(item.partA.key)]
+        : expectedB;
+      revealChoices(st.bWrap, r && r.b, [showB]);
+    },
+  };
+
   // ---------------- public surface ----------------
 
   function typeOf(item) {
