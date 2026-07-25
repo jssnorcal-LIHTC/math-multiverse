@@ -1,0 +1,20 @@
+{
+  "packId": "pack-good",
+  "model": "fixture-hand-authored",
+  "records": [
+    {
+      "itemId": "i-mc-1",
+      "itemHash": "21d2deefe7c7aaea",
+      "blind": 0,
+      "authored": 0,
+      "status": "agree"
+    },
+    {
+      "itemId": "i-ebsr-1",
+      "itemHash": "c51988962b419db1",
+      "blind": 1,
+      "authored": 1,
+      "status": "agree"
+    }
+  ]
+}

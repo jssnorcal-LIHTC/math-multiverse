@@ -6,7 +6,8 @@
   "scripts": {
     "fuzz": "node tests/fuzz.js",
     "smoke": "node tests/smoke.js",
-    "test": "node tests/fuzz.js && node tests/smoke.js"
+    "units": "node tests/readability.test.js && node tests/targets.test.js && node tests/validate-pack.test.js && node tests/verdicts.test.js && node tests/items.test.js && node tests/pack.test.js && node tests/runner.test.js",
+    "test": "npm run units && node tests/fuzz.js && node tests/smoke.js"
   },
   "devDependencies": {
     "playwright": "^1.49.1"

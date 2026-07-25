@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "packs": [
+    {
+      "id": "ela-g6-spy",
+      "subject": "ela",
+      "subjectLabel": "English",
+      "grade": 6,
+      "title": "Cold Signal",
+      "standards": "CCSS ELA 6",
+      "icon": "\ud83d\udd75\ufe0f",
+      "color": "#c8102e",
+      "description": "Read the briefings, check your sources, and prove what you claim. Six levels of grade-6 reading built like the real test.",
+      "levels": 6,
+      "grandGoal": "Signals Officer",
+      "unlocked": true
+    }
+  ]
+}
