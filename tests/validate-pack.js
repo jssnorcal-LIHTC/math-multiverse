@@ -522,6 +522,28 @@ function contentChecks(pack, passagesById, itemsById, errors, warnings) {
   }
 }
 
+// A child must not be able to score the evidence half of an ebsr item by POSITION instead of by reading.
+// The identity map is the likeliest instance of that but not the only one, so this rejects ANY single
+// mapping shape that repeats often enough to be learnable, not the identity specifically.
+function checkEbsrKeyShapes(pack, errors) {
+  const eb = (pack.items || []).filter(i => i && i.type === 'ebsr' && i.partB && i.partB.key);
+  if (eb.length < 4) return;                       // too few for a pattern to be learnable
+  const counts = {};
+  for (const it of eb) {
+    const shape = Object.keys(it.partB.key).map(Number).sort((a, b) => a - b)
+      .map(a => a + '>' + it.partB.key[a]).join(',');
+    (counts[shape] || (counts[shape] = [])).push(it.id);
+  }
+  for (const [shape, ids] of Object.entries(counts)) {
+    if (ids.length * 2 > eb.length) {
+      errors.push(`items: ${ids.length} of ${eb.length} ebsr items share the partB.key shape ${shape}; ` +
+        `a child can learn that position instead of reading for evidence. Permute partB.choices so the ` +
+        `mapping varies (the pairings stay the same, only the order of the quotes changes). ` +
+        `Offenders: ${JSON.stringify(ids.slice(0, 6))}${ids.length > 6 ? " ..." : ""}`);
+    }
+  }
+}
+
 function validatePack(pack, opts) {
   const errors = [], warnings = [];
   const expectedId = opts && opts.expectedId;
@@ -533,6 +555,7 @@ function validatePack(pack, opts) {
   checkLevels(pack, itemsById, errors, warnings);
   for (const it of itemsById.values()) checkItemShape(it, passagesById, errors);
   contentChecks(pack, passagesById, itemsById, errors, warnings);
+  checkEbsrKeyShapes(pack, errors);
 
   return { errors, warnings };
 }

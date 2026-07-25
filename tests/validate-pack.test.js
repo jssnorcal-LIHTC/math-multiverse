@@ -353,5 +353,102 @@ check('a clean level with no repeated itemIds does not trigger the duplicate che
     'the clean fixture must not trigger the duplicate-itemIds check: ' + JSON.stringify(errors.filter(e => /more than once/.test(e))));
 });
 
+// ---------- task 14 added pass: an ebsr partB.key shape must not be learnable by position ----------
+// The identity map ({"0":0,"1":1,"2":2,"3":3}) let a child score the evidence half of every ebsr item
+// by matching Part B's letter to Part A's, without reading the passage. The fix is not "reject the
+// identity" -- a single identity map is a perfectly ordinary way to write one item -- it is "reject any
+// single partB.key SHAPE that repeats often enough across the pack's ebsr items to be learnable."
+// "Shifted by one" is exactly as exploitable as the identity and must be caught too, or the rule could
+// have been written as an identity check and passed its own suite while missing the general case.
+
+// Build one ebsr item quoting the fixture's own p1 passage, so every item stays valid apart from the
+// partB.key shape under test. `shape` is a 4-element permutation array: shape[a] = the partB choice
+// index that is Part A option a's best evidence.
+function ebsrShapeItem(id, shape) {
+  const key = {};
+  shape.forEach((bIdx, aIdx) => { key[String(aIdx)] = bIdx; });
+  return {
+    id, type: 'ebsr', passageId: 'p1',
+    targets: ['c1-inf-1-key-details', 'c1-inf-4-reasoning'], coachTopic: 'evidence-support', dok: 3,
+    partA: {
+      stem: 'Why do handlers want a signal that looks dull? (' + id + ')',
+      choices: [
+        'So it is cheap to leave behind', 'So it does not attract attention',
+        'So it can be erased quickly', 'So other couriers can copy it',
+      ],
+      key: 1,
+    },
+    partB: {
+      stem: 'Which sentence from the passage best supports your answer?',
+      choices: [
+        'The signal is usually small and dull, because a signal that draws attention defeats the whole method.',
+        'A chalk mark on a lamp post is a common choice.',
+        'Handlers prefer this method in crowded places.',
+        'A busy square gives a courier dozens of ordinary reasons to stop walking.',
+      ],
+      key,
+    },
+    explain: 'This explanation is deliberately long enough to clear the twenty-word floor the content ' +
+      'checks impose, and it exists only so this synthetic item stays valid apart from the shape rule under test.',
+    distractorRationale: {
+      '0': 'cost is never mentioned in the passage; this is real-world reasoning substituted for the text',
+      '2': 'erasing appears in the passage but as a later step, not as the reason the signal is dull',
+      '3': 'confuses copying with concealment; nothing in the passage is about other couriers reading the mark',
+    },
+  };
+}
+
+// Assemble a pack (fixture meta/passages, fresh items/levels) from a list of partB.key shapes, one
+// ebsr item per shape, all referenced by a single level so nothing orphans.
+function packWithEbsrShapes(shapes) {
+  const p = clone();
+  p.items = shapes.map((shape, i) => ebsrShapeItem('i-shape-' + i, shape));
+  p.levels = [{
+    id: 1, name: 'Tradecraft', goal: 'Read what the briefing actually says',
+    questions: shapes.length,
+    targets: ['c1-inf-1-key-details', 'c1-inf-4-reasoning'],
+    itemIds: p.items.map(it => it.id),
+  }];
+  return p;
+}
+
+const IDENTITY  = [0, 1, 2, 3];
+const SHIFT_ONE = [1, 2, 3, 0];   // "always one to the right" -- as exploitable as the identity
+
+check('12 of 12 ebsr items sharing the identity partB.key shape is caught', () => {
+  const p = packWithEbsrShapes(Array(12).fill(IDENTITY));
+  expectError(p, '0>0,1>1,2>2,3>3', 'identity shape shared by all 12');
+});
+
+check('12 of 12 ebsr items sharing a shifted-by-one partB.key shape is caught (not an identity check)', () => {
+  const p = packWithEbsrShapes(Array(12).fill(SHIFT_ONE));
+  expectError(p, '0>1,1>2,2>3,3>0', 'shifted-by-one shape shared by all 12');
+});
+
+check('5 of 12 ebsr items sharing one shape is clean: a minority is not learnable', () => {
+  // One shape five times, seven other items each carrying its own distinct shape -- the most any
+  // single shape repeats is 5, and 5*2 = 10 does not exceed 12, so the rule must stay quiet.
+  const majority = [1, 3, 0, 2];
+  const singles = [
+    [2, 0, 3, 1], [3, 2, 1, 0], [0, 2, 3, 1], [0, 1, 2, 3],
+    [1, 0, 3, 2], [2, 3, 0, 1], [3, 1, 2, 0],
+  ];
+  const p = packWithEbsrShapes([...Array(5).fill(majority), ...singles]);
+  const { errors } = validatePack(p);
+  assert.strictEqual(errors.some(e => /share the partB\.key shape/.test(e)), false,
+    '5 of 12 sharing a shape must not be flagged as learnable: ' + JSON.stringify(errors.filter(e => /share the partB\.key shape/.test(e))));
+});
+
+check('a properly permuted 12-item pack (four shapes, three items each) is clean', () => {
+  // Mirrors the actual task-14 fix: four non-identity shapes, each used three times across twelve
+  // items -- the most any single shape repeats is 3, well under the learnable threshold.
+  const perms = [[1, 3, 0, 2], [2, 0, 3, 1], [3, 2, 1, 0], [0, 2, 3, 1]];
+  const shapes = Array.from({ length: 12 }, (_, i) => perms[i % perms.length]);
+  const p = packWithEbsrShapes(shapes);
+  const { errors, warnings } = validatePack(p);
+  assert.deepStrictEqual(errors, [], 'the permuted pack must validate clean: ' + JSON.stringify(errors));
+  assert.deepStrictEqual(warnings, [], 'the permuted pack must carry no warnings: ' + JSON.stringify(warnings));
+});
+
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
 process.exit(failures ? 1 : 0);
