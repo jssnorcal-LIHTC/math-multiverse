@@ -272,9 +272,30 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
         note(`pack ela-g6-spy: answer path ok (item ${answered}: wrong -> explain -> NEXT)`);
       }
 
-      // Nothing may scroll the page body; the passage scrolls inside its own box.
-      const bodyOverflow = await page.evaluate(() => document.documentElement.scrollHeight - window.innerHeight);
-      if (bodyOverflow > 2) problems.push(`pack: page body scrolls by ${bodyOverflow}px at 1024x768`);
+      // Nothing may scroll the page body; the passage scrolls inside its own box. When this fails it
+      // names the geometry, because the cause is almost never the pack. .host-frame is sized
+      // `calc(100vh - 160px)`, which is a hardcoded assumption about the chrome above and below it:
+      // that chrome measures 139px in Chrome on Windows, so there is 21px of slack, and any font stack
+      // that makes it taller than 160px pushes the page over. The six math modules sit in the same
+      // frame and overflow by exactly the same number of pixels, measured, so a failure here is a
+      // shell-wide layout report and not a pack defect. frameTop + frameH + belowFrame is the whole
+      // page height; compare it against innerH to see where the pixels went.
+      const layout = await page.evaluate(() => {
+        const f = document.querySelector('.host-frame');
+        const b = f && f.getBoundingClientRect();
+        return {
+          overflowY: document.documentElement.scrollHeight - window.innerHeight,
+          overflowX: document.documentElement.scrollWidth - window.innerWidth,
+          innerH: window.innerHeight, innerW: window.innerWidth,
+          bodyH: document.body.scrollHeight,
+          frameTop: b ? Math.round(b.top) : null,
+          frameH: b ? Math.round(b.height) : null,
+          belowFrame: b ? Math.round(document.body.scrollHeight - b.bottom) : null,
+        };
+      });
+      if (layout.overflowY > 2) {
+        problems.push(`pack: page body scrolls by ${layout.overflowY}px at 1024x768 -- ${JSON.stringify(layout)}`);
+      }
 
       const newErr = errors.slice(packBefore);
       if (newErr.length) problems.push(`pack: ${newErr.length} JS error(s): ${newErr[0]}`);
