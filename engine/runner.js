@@ -238,9 +238,24 @@
       // The rationale for the option he actually picked comes FIRST, because naming his own
       // misconception is what the 26-0714 audit found missing.
       const dr = item.distractorRationale || {};
-      const pickedIdx = (item.type === 'ebsr') ? (response && response.a) : response;
-      const own = (typeof pickedIdx === 'number') ? dr[String(pickedIdx)] : null;
-      if (own) tile.appendChild(el('div', 'mv-explain-own', 'What that answer assumes: ' + own));
+      // Only mc, ms and ebsr carry distractorRationale (validate-pack.js CHOICE_TYPES, minus cloze), and
+      // each names its picks differently: mc a bare index, ebsr its Part A index, ms an ARRAY of indices.
+      // Enumerate the types explicitly rather than testing Array.isArray, because cloze and hottext
+      // responses are also arrays whose numbers mean something else entirely -- indexing dr with a cloze
+      // blank choice would attach a rationale to the wrong thing.
+      const picked = item.type === 'mc' ? [response]
+        : item.type === 'ebsr' ? [response && response.a]
+          : item.type === 'ms' ? (Array.isArray(response) ? response : [])
+            : [];
+      // dr only has entries for WRONG options, so correct picks drop out on their own. ms can carry more
+      // than one wrong pick, and each is a separate misconception worth naming.
+      const owned = picked.filter(Number.isInteger).sort((a, b) => a - b).map(i => dr[String(i)]).filter(Boolean);
+      if (owned.length === 1) {
+        tile.appendChild(el('div', 'mv-explain-own', 'What that answer assumes: ' + owned[0]));
+      } else if (owned.length > 1) {
+        tile.appendChild(el('div', 'mv-explain-own', 'What those answers assume:'));
+        for (const own of owned) tile.appendChild(el('div', 'mv-explain-own', own));
+      }
 
       for (const n of (result.notes || [])) tile.appendChild(el('div', 'mv-explain-note', n));
       if (item.explain) tile.appendChild(el('div', 'mv-explain-body', item.explain));
