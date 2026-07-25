@@ -122,5 +122,55 @@ check('normalizeText folds case, punctuation, articles and whitespace', () => {
   assert.strictEqual(n(null), '');
 });
 
+// ---------- ebsr ----------
+
+const EBSR = {
+  type: 'ebsr',
+  partA: { stem: 'Why?', choices: ['cheap', 'unnoticed', 'quick', 'copyable'], key: 1 },
+  partB: { stem: 'Which line proves it?', choices: ['q0', 'q1', 'q2', 'q3'], key: { '0': 1, '1': 0, '2': 0, '3': 1 } },
+};
+
+check('ebsr needs a check and is incomplete until both parts are answered', () => {
+  assert.strictEqual(MVItems.needsCheck(EBSR), true);
+  assert.strictEqual(MVItems.isComplete(EBSR, { a: 1, b: null }), false);
+  assert.strictEqual(MVItems.isComplete(EBSR, { a: null, b: 0 }), false);
+  assert.strictEqual(MVItems.isComplete(EBSR, { a: 1, b: 0 }), true);
+});
+
+check('ebsr is correct only when Part A is right AND Part B matches the key for that A', () => {
+  const r = MVItems.grade(EBSR, { a: 1, b: 0 });   // partB.key["1"] === 0
+  assert.strictEqual(r.correct, true);
+  assert.strictEqual(r.partial, 1);
+});
+
+check('ebsr with the right A but the wrong evidence is not correct', () => {
+  const r = MVItems.grade(EBSR, { a: 1, b: 2 });
+  assert.strictEqual(r.correct, false);
+  assert.strictEqual(r.partial, 0.5, 'A right alone is worth half');
+  assert.strictEqual(r.consistent, false);
+});
+
+check('ebsr rewards evidence that matches the students own wrong claim', () => {
+  // A is wrong (0 instead of 1), but partB.key["0"] === 1, so picking 1 IS consistent reasoning.
+  const r = MVItems.grade(EBSR, { a: 0, b: 1 });
+  assert.strictEqual(r.correct, false);
+  assert.strictEqual(r.consistent, true);
+  assert.strictEqual(r.partial, 0.5, 'consistent evidence for a wrong claim earns the evidence half');
+  assert.strictEqual(r.notes.some(n => /matched your/i.test(n)), true, 'notes: ' + JSON.stringify(r.notes));
+});
+
+check('ebsr scores zero when the claim is wrong and the evidence does not fit it either', () => {
+  const r = MVItems.grade(EBSR, { a: 0, b: 3 });   // partB.key["0"] === 1, not 3
+  assert.strictEqual(r.correct, false);
+  assert.strictEqual(r.consistent, false);
+  assert.strictEqual(r.partial, 0);
+});
+
+check('ebsr never reads partB.key as a scalar', () => {
+  // A homemade EBSR with a fixed Part B key must not silently grade as if it were valid.
+  const broken = { type: 'ebsr', partA: EBSR.partA, partB: { stem: 'x', choices: ['q0', 'q1'], key: 0 } };
+  assert.throws(() => MVItems.grade(broken, { a: 1, b: 0 }), /partB\.key/i);
+});
+
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
 process.exit(failures ? 1 : 0);
