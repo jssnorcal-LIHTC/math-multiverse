@@ -154,8 +154,35 @@ function blindQuestion(item, passage) {
   return { prompt, optionCount: spec.count };
 }
 
-function sameAnswer(a, b) {
-  if (Array.isArray(a) && Array.isArray(b)) return stableStringify(a.slice().sort()) === stableStringify(b.slice().sort());
+// The types whose answer is genuinely a SET, where [2,0,1] and [0,1,2] are the same answer.
+// VERIFIED by grading real items through engine/items.js, not by reading it: ms and hottext both
+// grade through sameSet(), which compares uniqSorted arrays, so a reordered response still grades
+// correct.
+//
+// Every other comparable type is a SEQUENCE in the representation this ledger stores, where the
+// position carries meaning that sorting destroys:
+//   order  key[i] is the tile belonging in position i; grade() compares arr[i] === key[i].
+//   cloze  key[i] is blank i's choice;                 grade() compares arr[i] === blanks[i].key.
+//   match  authoredKeyOf flattens the key to one column per ROW, in row order, so the INDEX is the
+//          row. Note that match's engine-native response (an array of [row, col] cells) is itself
+//          order-insensitive: each cell names its own row and grade() compares a Set of "row,col"
+//          signatures, so reversing THAT still grades correct. It is the flattening done for this
+//          ledger that makes position load-bearing. Do not conclude match is a set by reversing a
+//          native response; reverse the flattened array and it grades false.
+const UNORDERED_TYPES = Object.freeze(new Set(['ms', 'hottext']));
+
+// Compare a blind answer against an authored key. `type` decides how arrays compare, and an
+// unrecognised type falls through to the STRICT element-by-element path on purpose. A new set-like
+// type will then fail loudly here and get added to UNORDERED_TYPES deliberately; defaulting the
+// other way would silently under-check it, which is precisely the defect this replaced -- sorting
+// both sides turned "never checked" into "checked and fine" without anyone noticing.
+function sameAnswer(a, b, type) {
+  if (Array.isArray(a) && Array.isArray(b)) {
+    if (UNORDERED_TYPES.has(type)) {
+      return stableStringify(a.slice().sort()) === stableStringify(b.slice().sort());
+    }
+    return stableStringify(a) === stableStringify(b);
+  }
   return a === b;
 }
 
@@ -199,7 +226,7 @@ function validateLedger(pack, ledger) {
       errors.push(`items(${item.id}): verdict status must be one of ${STATUSES.join(', ')}, got ${JSON.stringify(r.status)}`);
       continue;
     }
-    const agrees = sameAnswer(r.blind, r.authored);
+    const agrees = sameAnswer(r.blind, r.authored, item.type);
     if (r.status === 'agree' && !agrees) {
       errors.push(`items(${item.id}): verdict says "agree" but blind ${JSON.stringify(r.blind)} and authored ${JSON.stringify(r.authored)} disagree; adjudicate it or fix the item`);
     }
@@ -210,7 +237,7 @@ function validateLedger(pack, ledger) {
       if (!r.adjudicatedBy) errors.push(`items(${item.id}): an adjudicated verdict needs adjudicatedBy`);
       if (!r.adjudicatedAt) errors.push(`items(${item.id}): an adjudicated verdict needs adjudicatedAt`);
     }
-    if (!sameAnswer(r.authored, authoredKeyOf(item))) {
+    if (!sameAnswer(r.authored, authoredKeyOf(item), item.type)) {
       errors.push(`items(${item.id}): ledger records authored ${JSON.stringify(r.authored)} but the item's key is ${JSON.stringify(authoredKeyOf(item))}`);
     }
   }
@@ -222,4 +249,6 @@ function validateLedger(pack, ledger) {
   return { errors, warnings };
 }
 
-module.exports = { itemHash, stableStringify, blindQuestion, authoredKeyOf, validateLedger, STATUSES };
+// sameAnswer and UNORDERED_TYPES are exported because this comparison decides whether an item was
+// actually verified, so it must be directly testable rather than only reachable through validateLedger.
+module.exports = { itemHash, stableStringify, blindQuestion, authoredKeyOf, validateLedger, sameAnswer, UNORDERED_TYPES, STATUSES };

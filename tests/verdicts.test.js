@@ -1,8 +1,9 @@
 'use strict';
 const assert = require('assert');
 const path = require('path');
-const { itemHash, stableStringify, blindQuestion, authoredKeyOf, validateLedger } = require('./verdicts');
+const { itemHash, stableStringify, blindQuestion, authoredKeyOf, validateLedger, sameAnswer } = require('./verdicts');
 const { loadPackFile } = require('./validate-pack');
+const { parseAnswer } = require('./blind-reanswer');
 
 const GOOD = path.join(__dirname, 'fixtures', 'pack-good.json');
 const clone = () => JSON.parse(JSON.stringify(loadPackFile(GOOD)));
@@ -204,6 +205,92 @@ check('a record for an item that no longer exists is a warning, not an error', (
   const { errors, warnings } = validateLedger(p, l);
   assert.deepStrictEqual(errors, []);
   assert.strictEqual(warnings.some(w => w.includes('i-deleted')), true);
+});
+
+// ---------- set versus sequence: the comparison that decides whether an item was checked at all ----------
+
+// This block pins the fix for a defect where BOTH sides of the comparison were sorted. parseAnswer
+// sorted the model's reply on the way in, and sameAnswer sorted the authored key again on the way
+// out, so an order, cloze or match item compared equal no matter what the model actually answered.
+// The ledger logged "agree" on items nothing had verified: "not checked" presented as "checked and
+// fine", which is worse than an outright failure because it looks like coverage.
+
+check('sameAnswer treats ms and hottext as SETS, matching how engine/items.js grades them', () => {
+  // Verified by grading, not by reading: both types grade through sameSet(), which compares
+  // uniqSorted arrays, so a reordered response still grades correct. Order carries no information.
+  assert.strictEqual(sameAnswer([2, 0, 1], [0, 1, 2], 'ms'), true, 'ms is a set; a reordered answer is the same answer');
+  assert.strictEqual(sameAnswer([2, 0, 1], [0, 1, 2], 'hottext'), true, 'hottext is a set; a reordered answer is the same answer');
+  // Still discriminating: a set comparison must not bless a genuinely different set.
+  assert.strictEqual(sameAnswer([0, 1, 3], [0, 1, 2], 'ms'), false);
+  assert.strictEqual(sameAnswer([0, 1], [0, 1, 2], 'hottext'), false, 'a subset is not the same answer');
+});
+
+check('sameAnswer treats order, cloze and match as SEQUENCES, so a reordering is a real disagreement', () => {
+  // order: key[i] is the tile belonging in position i, and grade() compares arr[i] === key[i].
+  assert.strictEqual(sameAnswer([0, 1, 2, 3], [1, 3, 0, 2], 'order'), false,
+    'an order answer in the wrong sequence is NOT agreement; this is the exact false "agree" that shipped');
+  // cloze: key[i] is blank i's choice, and grade() compares arr[i] === blanks[i].key.
+  assert.strictEqual(sameAnswer([1, 2], [2, 1], 'cloze'), false,
+    'two blanks answered the other way round is NOT agreement');
+  // match: authoredKeyOf flattens to one column per ROW in row order, so the index IS the row.
+  assert.strictEqual(sameAnswer([0, 1, 2], [2, 1, 0], 'match'), false,
+    'rows matched to the wrong columns is NOT agreement');
+  // Control: the same sequence in the same order must still agree, or the test proves nothing.
+  assert.strictEqual(sameAnswer([1, 3, 0, 2], [1, 3, 0, 2], 'order'), true);
+  assert.strictEqual(sameAnswer([2, 1], [2, 1], 'cloze'), true);
+  assert.strictEqual(sameAnswer([2, 1, 0], [2, 1, 0], 'match'), true);
+});
+
+check('an unknown type defaults to the STRICT comparison, so a new type fails loudly rather than silently', () => {
+  // The safe default: a new type that is genuinely a set will fail here and be added to
+  // UNORDERED_TYPES deliberately. Defaulting to sorted would under-check it in silence, which is
+  // the failure mode being fixed.
+  assert.strictEqual(sameAnswer([2, 0, 1], [0, 1, 2], 'some-new-type'), false);
+  assert.strictEqual(sameAnswer([2, 0, 1], [0, 1, 2], undefined), false, 'a missing type must not fall into set semantics');
+  // Scalars are unaffected by any of this.
+  assert.strictEqual(sameAnswer(2, 2, 'mc'), true);
+  assert.strictEqual(sameAnswer(2, 0, 'mc'), false);
+  assert.strictEqual(sameAnswer(1, 1, 'ebsr'), true);
+});
+
+check('parseAnswer records the letters the model actually sent, in the order it sent them', () => {
+  // THE regression guard. ["B","D","A","E","C"] is a correct answer to l2-order-article-parts and
+  // maps to [1,3,0,4,2]. The old sort turned it into [0,1,2,3,4] -- the authored key -- so the
+  // ledger recorded agreement with an answer the model never gave. If someone re-adds a sort for
+  // tidiness, this fails.
+  const r = parseAnswer('{"answer": ["B","D","A","E","C"], "confidence": "high"}', 5);
+  assert.deepStrictEqual(r.answer, [1, 3, 0, 4, 2], 'the recorded answer is evidence and must not be normalised');
+  assert.notDeepStrictEqual(r.answer, [0, 1, 2, 3, 4], 'a sorted answer is the authored key, not the model reply');
+  assert.strictEqual(r.confidence, 'high');
+  // A genuinely wrong order must also survive intact, or a disagreement cannot be adjudicated.
+  assert.deepStrictEqual(parseAnswer('{"answer": ["A","B","C"]}', 3).answer, [0, 1, 2]);
+  // Scalar replies are unchanged.
+  assert.strictEqual(parseAnswer('{"answer": "C", "confidence": "low"}', 4).answer, 2);
+});
+
+check('validateLedger now catches an order item whose blind answer was merely a permutation', () => {
+  // End to end through the real gate, not just the comparison in isolation: before the fix this
+  // ledger validated clean, which is how five unverified items reached the pack.
+  const pack = {
+    meta: { id: 'p-seq' },
+    items: [
+      { id: 'i-order', type: 'order', stem: 'Sequence them.', tiles: ['t0', 't1', 't2', 't3'], key: [1, 3, 0, 2] },
+      { id: 'i-ms', type: 'ms', stem: 'Pick some.', choices: ['a', 'b', 'c', 'd'], key: [0, 1, 2] },
+    ],
+  };
+  const ledger = {
+    packId: 'p-seq',
+    model: 'test-model',
+    records: [
+      { itemId: 'i-order', itemHash: itemHash(pack.items[0]), blind: [0, 1, 2, 3], authored: [1, 3, 0, 2], status: 'agree' },
+      { itemId: 'i-ms', itemHash: itemHash(pack.items[1]), blind: [2, 0, 1], authored: [0, 1, 2], status: 'agree' },
+    ],
+  };
+  const { errors } = validateLedger(pack, ledger);
+  assert.strictEqual(errors.some(e => e.includes('i-order') && /disagree/i.test(e)), true,
+    'the permuted order answer must be reported as a disagreement: ' + JSON.stringify(errors));
+  assert.strictEqual(errors.some(e => e.includes('i-ms')), false,
+    'the reordered ms answer is genuinely the same set and must NOT be flagged: ' + JSON.stringify(errors));
 });
 
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
