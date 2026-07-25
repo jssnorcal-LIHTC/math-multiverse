@@ -126,6 +126,12 @@ function checkLevels(pack, itemsById, errors, warnings) {
       errors.push(`${where}.itemIds: must be a non-empty array`);
       return;
     }
+    // A repeated id here is an authoring slip that nothing downstream catches: pickItems draws from this
+    // list without deduping, so the child is simply asked the same question twice inside one level.
+    const dupes = lv.itemIds.filter((id, i) => lv.itemIds.indexOf(id) !== i);
+    if (dupes.length) {
+      errors.push(`${where}.itemIds: lists ${JSON.stringify([...new Set(dupes)])} more than once; a level may not ask the same item twice`);
+    }
     for (const id of lv.itemIds) {
       if (!itemsById.has(id)) errors.push(`${where}.itemIds: "${id}" does not resolve to any item`);
       else referenced.add(id);

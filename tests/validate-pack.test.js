@@ -336,5 +336,22 @@ check('the good fixture still validates after the content checks land', () => {
   assert.deepStrictEqual(warnings, [], 'warnings: ' + JSON.stringify(warnings));
 });
 
+// ---------- task 10 added pass: a level may not ask the same item twice ----------
+// pickItems draws from itemIds without deduping, so a repeat here queues the same question twice
+// inside one level. Verified exact message: levels[0].itemIds: lists ["i-mc-1"] more than once; a
+// level may not ask the same item twice.
+
+check('a level whose itemIds repeats an id is caught', () => {
+  const p = clone();
+  p.levels[0].itemIds = ['i-mc-1', 'i-mc-1', 'i-ebsr-1'];
+  expectError(p, 'more than once', 'duplicate itemIds');
+});
+
+check('a clean level with no repeated itemIds does not trigger the duplicate check', () => {
+  const { errors } = validatePack(clone(), { expectedId: 'pack-good' });
+  assert.strictEqual(errors.some(e => /more than once/.test(e)), false,
+    'the clean fixture must not trigger the duplicate-itemIds check: ' + JSON.stringify(errors.filter(e => /more than once/.test(e))));
+});
+
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
 process.exit(failures ? 1 : 0);
