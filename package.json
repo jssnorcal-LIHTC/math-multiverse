@@ -6,7 +6,7 @@
   "scripts": {
     "fuzz": "node tests/fuzz.js",
     "smoke": "node tests/smoke.js",
-    "units": "node tests/readability.test.js && node tests/targets.test.js",
+    "units": "node tests/readability.test.js && node tests/targets.test.js && node tests/validate-pack.test.js",
     "test": "npm run units && node tests/fuzz.js && node tests/smoke.js"
   },
   "devDependencies": {

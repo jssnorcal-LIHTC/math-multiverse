@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "id": "pack-good",
+    "subject": "ela",
+    "grade": 6,
+    "title": "Fixture Pack",
+    "standards": "CCSS ELA 6",
+    "version": 1
+  },
+  "skin": {
+    "color": "#c8102e",
+    "icon": "🕵️",
+    "grandGoal": "Fixture Master"
+  },
+  "passages": [
+    {
+      "id": "p1",
+      "title": "The Chalk Mark",
+      "genre": "informational",
+      "source": "original",
+      "text": "A dead drop is a way to pass a package without two people ever meeting. One person hides the item and leaves a signal nearby. The signal is usually small and dull, because a signal that draws attention defeats the whole method. A chalk mark on a lamp post is a common choice. The second person checks for the mark, collects the package later, and erases the mark on the way out. Handlers prefer this method in crowded places. A busy square gives a courier dozens of ordinary reasons to stop walking."
+    }
+  ],
+  "levels": [
+    {
+      "id": 1,
+      "name": "Tradecraft",
+      "goal": "Read what the briefing actually says",
+      "questions": 2,
+      "targets": ["c1-inf-1-key-details", "c1-inf-2-central-ideas"],
+      "itemIds": ["i-mc-1", "i-ebsr-1"]
+    }
+  ],
+  "items": [
+    {
+      "id": "i-mc-1",
+      "type": "mc",
+      "passageId": "p1",
+      "targets": ["c1-inf-2-central-ideas"],
+      "coachTopic": "central-idea",
+      "dok": 2,
+      "stem": "Which sentence best states the central idea of the passage?",
+      "choices": [
+        "A dead drop lets two people exchange something without meeting.",
+        "Chalk marks are the most common signal used by couriers.",
+        "Crowded squares are dangerous places to pass a package.",
+        "Handlers erase their signals so nobody can follow them."
+      ],
+      "key": 0,
+      "explain": "The central idea is the point the whole passage is built to make, not the most interesting detail in it. Every paragraph here returns to one thing: a dead drop moves a package without a meeting. The chalk mark, the crowded square and the erasing are all evidence for that point rather than the point itself.",
+      "distractorRationale": {
+        "1": "picks a true detail and mistakes it for the main point; the chalk mark is one example of a signal, not what the passage is about",
+        "2": "reverses the passage, which says a busy square helps the courier rather than endangering them",
+        "3": "narrows to the last step in the process and misses the reason the process exists"
+      }
+    },
+    {
+      "id": "i-ebsr-1",
+      "type": "ebsr",
+      "passageId": "p1",
+      "targets": ["c1-inf-1-key-details", "c1-inf-4-reasoning"],
+      "coachTopic": "evidence-support",
+      "dok": 3,
+      "partA": {
+        "stem": "Why do handlers want a signal that looks dull?",
+        "choices": [
+          "So it is cheap to leave behind",
+          "So it does not attract attention",
+          "So it can be erased quickly",
+          "So other couriers can copy it"
+        ],
+        "key": 1
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports your answer?",
+        "choices": [
+          "The signal is usually small and dull, because a signal that draws attention defeats the whole method.",
+          "A chalk mark on a lamp post is a common choice.",
+          "Handlers prefer this method in crowded places.",
+          "A busy square gives a courier dozens of ordinary reasons to stop walking."
+        ],
+        "key": { "0": 1, "1": 0, "2": 0, "3": 1 }
+      },
+      "explain": "Part A asks for the reason, and the passage gives it directly: a signal that draws attention defeats the method. Part B is not asking which sentence is most interesting, it is asking which sentence would convince someone your Part A answer is right. Matching your evidence to your own answer is the habit being trained here, so keep the two consistent even when you are unsure.",
+      "distractorRationale": {
+        "0": "cost is never mentioned in the passage; this is real-world reasoning substituted for the text",
+        "2": "erasing appears in the passage but as a later step, not as the reason the signal is dull",
+        "3": "confuses copying with concealment; nothing in the passage is about other couriers reading the mark"
+      }
+    }
+  ]
+}
