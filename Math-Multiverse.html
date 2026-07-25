@@ -460,8 +460,24 @@
   }
   .host-frame {
     width: 100%;
-    height: calc(100vh - 160px);
-    height: calc(100dvh - 160px);
+    /* The subtrahend is the chrome above and below this frame, and it must be an OVER-estimate, not a
+       measurement. It was 160px, which is what the chrome measures in Chrome on Windows plus 21px of
+       slack, and that is why the page body scrolled 13px on CI's Linux Chromium: a different font
+       stack renders the same header at 173px, and 173 + 608 > 768. The chrome is not a constant, it
+       is a function of the font stack, so it was measured across four root font sizes:
+
+         root font   16px   18px   20px   22px
+         chrome      139    188    192    200
+
+       200px covers all of them.  It cannot simply be raised further: .host-frame is overflow:hidden,
+       so an over-large subtrahend clips the module inside it, and at 220px razor-crest loses 19px of
+       its content.  200px is the measured maximum, and it leaves 61px of spare page on this machine
+       and 27px on CI.  The pack absorbs the 40px reduction in .mv-passage, which scrolls internally by
+       design; the item and the NEXT button keep their size and stay on screen.  Verified: all six math
+       modules and the pack clip nothing at 568px.
+       If this ever needs to grow past 200px, razor-crest is the module that breaks first. */
+    height: calc(100vh - 200px);
+    height: calc(100dvh - 200px);
     border: 1px solid var(--border-subtle);
     border-radius: 14px;
     background: var(--bg-base);
