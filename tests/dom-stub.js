@@ -12,7 +12,17 @@ function makeEl(tag) {
   const node = {
     tagName: tag,
     children: [],
-    style: {},
+    // A real style object carries the CSSOM methods, not just properties. engine/runner.js sets the
+    // per-pack accent with style.setProperty('--mv-color', ...), so a bare {} throws there.
+    style: (function () {
+      const props = Object.create(null);
+      return {
+        setProperty(k, v) { props[k] = String(v); },
+        getPropertyValue(k) { return props[k] === undefined ? '' : props[k]; },
+        removeProperty(k) { const v = props[k]; delete props[k]; return v === undefined ? '' : v; },
+        _props: props,
+      };
+    })(),
     dataset: {},
     disabled: false,
     _text: '',
