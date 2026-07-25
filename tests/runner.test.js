@@ -249,5 +249,95 @@ check('the runner never reaches a math save key or localStorage', () => {
   assert.ok(!/localStorage/.test(src), 'runner.js touches localStorage directly');
 });
 
+// ---------- the explain tile names the misconception, for every type that authors one ----------
+// validate-pack.js requires distractorRationale on mc, ms and ebsr. showExplain originally selected it
+// with `typeof pickedIdx === 'number'`, which is true for mc and for ebsr's Part A index but false for
+// ms, whose response is an array of indices. So every ms item shipped an authored rationale the child
+// never saw, falling back to the generic hit/miss note. Six items in the first pack, and the authored
+// content is the whole pedagogical point.
+
+function explainTextFor(item, response) {
+  const Items = require('../engine/items.js');
+  const host = makeEl('div');
+  const Save = spySave();
+  return withSyncTimers(() => {
+    R.makeRunner(pack1(item), 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+    const box = host.querySelectorAll('.mv-item')[0];
+    // Answer by driving the item's own handlers, then grade.
+    if (item.type === 'ms') {
+      const cs = host.querySelectorAll('.mv-choice');
+      for (const i of response) cs[i].onclick();
+    } else {
+      host.querySelectorAll('.mv-choice')[response].onclick();
+    }
+    const ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    return host.querySelectorAll('.mv-explain-own').map(n => n.textContent);
+  });
+}
+
+function pack1(item) {
+  return {
+    meta: { id: 'probe', title: 'Probe' },
+    passages: [{ id: 'p1', genre: 'informational', title: 'P', text: 'Some passage text.' }],
+    items: [item],
+    levels: [{ name: 'L1', questions: 1, itemIds: [item.id], targets: ['c1-inf-1-key-details'], lives: 4 }],
+  };
+}
+
+const MS_ITEM = {
+  id: 'ms1', type: 'ms', passageId: 'p1',
+  targets: ['c1-inf-1-key-details'], coachTopic: 'key-details', dok: 2,
+  stem: 'Choose every true statement.', choices: ['a', 'b', 'c', 'd'], key: [1, 2],
+  explain: 'Both b and c are supported by the passage, and this sentence is long enough to clear the floor.',
+  distractorRationale: { 0: 'stopped after the first step', 3: 'imported outside knowledge' },
+};
+
+check('ms shows the authored rationale for the wrong option picked', () => {
+  const lines = explainTextFor(MS_ITEM, [0, 1]);      // 0 is wrong, 1 is right
+  assert.ok(lines.some(t => /stopped after the first step/.test(t)),
+    'the ms rationale was never rendered; got ' + JSON.stringify(lines));
+});
+
+check('ms names each wrong option when the child picks more than one', () => {
+  const lines = explainTextFor(MS_ITEM, [0, 3]);      // both wrong
+  const joined = lines.join(' | ');
+  assert.ok(/stopped after the first step/.test(joined), 'first wrong pick unnamed: ' + joined);
+  assert.ok(/imported outside knowledge/.test(joined), 'second wrong pick unnamed: ' + joined);
+});
+
+check('ms shows no rationale when every pick was correct but one was missed', () => {
+  const lines = explainTextFor(MS_ITEM, [1]);         // right but incomplete: no wrong pick to name
+  assert.strictEqual(lines.length, 0,
+    'an under-selection was blamed on a misconception it did not make: ' + JSON.stringify(lines));
+});
+
+check('mc still names its single wrong pick', () => {
+  const MC = {
+    id: 'mc1', type: 'mc', passageId: 'p1',
+    targets: ['c1-inf-1-key-details'], coachTopic: 'key-details', dok: 2,
+    stem: 'Which one?', choices: ['a', 'b', 'c', 'd'], key: 1,
+    explain: 'b is the answer, and this sentence is long enough to clear the twenty word floor easily.',
+    distractorRationale: { 0: 'took a detail for the idea', 2: 'reversed it', 3: 'outside knowledge' },
+  };
+  const lines = explainTextFor(MC, 2);
+  assert.ok(lines.some(t => /reversed it/.test(t)), 'mc regressed: ' + JSON.stringify(lines));
+});
+
+// ---------- the two star ladders must not drift apart ----------
+// The brief states "if either changes, both change" as a hard invariant, but nothing enforced it:
+// pack.test.js checks STARS_FOR against literal numbers and runner.test.js never required pack.js, so a
+// future edit to one would pass every suite. That is the invisible-drift shape that produced task 9's
+// escaped defects.
+check('starsForMistakes and PackSave.STARS_FOR are the same ladder', () => {
+  const P = require('../engine/pack.js');
+  for (let m = 0; m <= 12; m++) {
+    assert.strictEqual(R.starsForMistakes(m), P.PackSave.STARS_FOR(m),
+      'ladders disagree at ' + m + ' mistakes: runner ' + R.starsForMistakes(m) + ' vs pack ' + P.PackSave.STARS_FOR(m));
+  }
+  assert.deepStrictEqual([0, 1, 2, 3].map(R.starsForMistakes), [3, 2, 1, 0],
+    'the ladder itself moved off the math modules 0/1/2/3+ -> 3/2/1/0');
+});
+
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
 process.exit(failures ? 1 : 0);
