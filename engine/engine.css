@@ -12,16 +12,38 @@
 .mv-heart.spent { color: var(--border-subtle); }
 
 /* The passage scrolls inside its own box so the item and the NEXT button never leave the screen on
-   a 1024x768 iPad. This is the layout rule that kept breaking in the math modules. */
+   a 1024x768 iPad. This is the layout rule that kept breaking in the math modules.
+
+   The min-height is load-bearing, not polish. `flex: 1 1 auto` next to an item that could not shrink
+   made the passage the only thing that could give, so a tall item squeezed it toward zero: measured
+   at 1024x768, all 24 EBSR items rendered their passage at 48 to 84px, a title plus one sliced line
+   of a forty-line article, against 216 to 503px for every other type. EBSR Part B asks which sentence
+   from the passage supports the answer just given, so that is an evidence question with the evidence
+   off screen. The floor is about a title plus seven lines; `min()` keeps it proportionate on a screen
+   too short to afford it rather than pushing the item off the bottom. tests/reading-surface.js
+   measures this in a real browser and fails under the floor.
+
+   The `0` basis is the other half of the fix and is not interchangeable with `auto`. Flex shrink is
+   weighted by basis, so with `flex: 1 1 auto` the passage's basis is the whole article, roughly 1000px
+   against a 90px item, and the two shrink in that ratio: a short item was squeezed to 45px and made to
+   scroll while the passage sat at 496px, which is the same bug pointing the other way. With a `0`
+   basis the passage contributes nothing to the shrink split, so the item keeps its content height
+   whenever it fits and the passage simply grows into whatever is left, floored. Only when the item
+   alone cannot fit does the passage clamp to the floor and the item start scrolling. */
 .mv-passage {
-  flex: 1 1 auto; min-height: 0; overflow-y: auto;
+  flex: 1 1 0; min-height: min(190px, 30vh); overflow-y: auto;
   background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle);
   border-radius: 8px; padding: 10px 12px;
 }
 .mv-passage-title { font-weight: 700; margin-bottom: 6px; color: var(--mv-color, #7aa8ff); }
 .mv-para { margin: 0 0 8px; line-height: 1.5; font-size: 0.95rem; }
 
-.mv-item { flex: 0 0 auto; }
+/* The item is now the side that gives. `flex: 0 1 auto` plus `min-height: 0` lets it shrink below its
+   content, and it scrolls what does not fit rather than evicting the passage. `min-height: 0` is
+   required: a flex item will not shrink below its content without it, which is the usual reason this
+   pattern still overflows. ebsr's render calls scrollIntoView on Part B when it appears, which scrolls
+   this box, so revealing Part B still brings it into view. */
+.mv-item { flex: 0 1 auto; min-height: 0; overflow-y: auto; }
 .mv-stem { font-weight: 600; margin: 6px 0 8px; line-height: 1.35; }
 .mv-hint { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px; }
 
@@ -63,11 +85,19 @@
   color: var(--mv-color, #7aa8ff); font-weight: 700;
 }
 
-.mv-hottext { line-height: 1.6; }
-.mv-span { cursor: pointer; border-radius: 4px; padding: 1px 2px; }
-.mv-span.sel { background: rgba(120,170,255,0.22); outline: 1px solid var(--mv-color, #7aa8ff); }
-.mv-span.correct { background: rgba(61,220,132,0.22); outline: 1px solid #3ddc84; }
-.mv-span.wrong { background: rgba(255,92,92,0.2); outline: 1px solid #ff5c5c; }
+/* Spans are separated by a single space in the DOM, so without a boundary of their own they run
+   together into one block of text. For sentence spans that merely reads as a paragraph; for the two
+   items whose spans are phrase FRAGMENTS (l3-hot-left-off-the-sheet, l5-hot-measured-or-concluded)
+   it rendered as "on the second floor landing heard a door close did absolutely nothing", with
+   nothing to show where one tappable phrase ended and the next began. The dashed border makes each
+   span a visible chip, which also answers the "what can I tap" question for the other ten items.
+   The selected and graded states swap the same border to solid rather than adding an outline, so
+   there is never a doubled ring. */
+.mv-hottext { line-height: 1.9; }
+.mv-span { cursor: pointer; border-radius: 4px; padding: 1px 4px; border: 1px dashed var(--border-subtle); }
+.mv-span.sel { background: rgba(120,170,255,0.22); border: 1px solid var(--mv-color, #7aa8ff); }
+.mv-span.correct { background: rgba(61,220,132,0.22); border: 1px solid #3ddc84; }
+.mv-span.wrong { background: rgba(255,92,92,0.2); border: 1px solid #ff5c5c; }
 
 .mv-table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
 .mv-table th, .mv-table td { border: 1px solid var(--border-subtle); padding: 5px 7px; }
