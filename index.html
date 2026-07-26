@@ -2,12 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=Math-Multiverse.html">
   <link rel="canonical" href="Math-Multiverse.html">
-  <title>Math Multiverse</title>
+  <title>Multiverse</title>
 </head>
 <body>
-  <script>location.replace('Math-Multiverse.html');</script>
-  <p>Loading <a href="Math-Multiverse.html">Math Multiverse</a>&hellip;</p>
+  <script>
+    // Carry the query string through. The old redirect dropped it, so the documented cache-bust
+    // (open the site with ?v=<sha> because the iPad holds on to the old build) silently did nothing:
+    // it landed on Math-Multiverse.html with no token and the device served whatever it already had.
+    // The meta refresh that used to sit in <head> is gone on purpose: it cannot forward a query
+    // string, and with both present the one that ignores ?v could win the race.
+    location.replace('Math-Multiverse.html' + (location.search || ''));
+  </script>
+  <noscript><p>Open <a href="Math-Multiverse.html">Multiverse</a>.</p></noscript>
+  <p>Loading Multiverse&hellip;</p>
 </body>
 </html>
