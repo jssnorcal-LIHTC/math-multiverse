@@ -468,6 +468,14 @@
   .lvl-q-count { color: var(--text-muted); font-weight: 600; }
   .lvl-best { color: var(--text-secondary); font-size: 0.78rem; margin-top: 8px; font-weight: 600; }
   .lock-overlay { position: absolute; bottom: 10px; right: 14px; font-size: 13px; color: var(--text-muted); }
+  /* The overlay is out of flow and pinned to the card's bottom right, while .lvl-meta ("N Q" plus the
+     stars) sits in normal flow at the bottom of the same card. Nothing reserved space for it, so
+     whenever the goal text pushed the meta row down the two painted on top of each other: a 12px
+     vertical overlap on 3 of 6 Cold Signal cards and 5 of 6 HARDLINE Fraction Rider cards, so this
+     predates the pack and Niall has been reading it on the math game. The overlay occupies the band
+     from 10px to about 27px above the card's bottom edge, so a locked card reserves that band as
+     padding. Only locked cards need it: .lvl-best never renders on a level nobody has played. */
+  .level-card.locked { padding-bottom: 32px; }
 
   /* MODULE HOST
      The module screen is a flex column from #app down to .host-frame, so the frame is whatever
