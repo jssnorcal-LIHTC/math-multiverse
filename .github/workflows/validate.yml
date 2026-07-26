@@ -1,7 +1,9 @@
 name: validate
 
-# Boundary gate for Math-Multiverse.html: independent-oracle math fuzz + headless render smoke.
-# Runs on every PR and on pushes to main; required for merge via branch protection.
+# Boundary gate for Math-Multiverse.html and the content packs: unit suites, pack validation,
+# independent-oracle math fuzz, and headless render smoke. Content is gated first, before anything
+# slower runs. Runs on every PR and on pushes to main; required for merge via branch protection.
+# The job id and its `name:` are what branch protection matches on -- do not rename them.
 
 on:
   pull_request:
@@ -22,6 +24,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Unit tests (readability, targets, validator, verdicts, items, pack, runner)
+        run: npm run units
+
+      - name: Validate content packs (structure, verbatim spans, readability, blind-verdict ledger)
+        run: node tests/validate-pack.js
+
       - name: Math fuzz (independent-oracle, ~360k questions, all modules G5+G6)
         run: node tests/fuzz.js
 
@@ -30,3 +38,6 @@ jobs:
 
       - name: Headless render smoke (launcher + all six modules, Grade 5 and Grade 6)
         run: node tests/smoke.js
+
+      - name: Reading surface (every pack item keeps a readable passage at 1024x768)
+        run: node tests/reading-surface.js
