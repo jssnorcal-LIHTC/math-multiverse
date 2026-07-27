@@ -96,7 +96,7 @@
     const level = pack.levels[levelIndex];
     const lives = Number.isInteger(level.lives) ? level.lives : DEFAULT_LIVES;
     const queue = pickItems(level, pack.items, deps && deps.rng);
-    const passages = new Map(pack.packPassages || pack.passages.map(p => [p.id, p]));
+    const passages = new Map(pack.passages.map(p => [p.id, p]));
 
     let timeouts = [];
     const later = (fn, ms) => { timeouts.push(setTimeout(fn, ms)); };
@@ -183,6 +183,24 @@
         });
         footer.appendChild(btn);
         host._mvCheck = btn;
+
+        // Return submits from a text input, because on the target device the Check button is not
+        // reachable while the keyboard is up. Measured live at 1024x768: the shorttext input renders
+        // at y=662-706 and Check at y=714-751, while an iPad landscape keyboard covers everything
+        // below about y=503. .mv-shell is height:100% and does not scroll, so there is nowhere for
+        // Safari to scroll the footer into view. Scoped to inputs on purpose: a keydown listener on
+        // the whole item box would also fire for .mv-choice buttons, where Enter already dispatches
+        // a click, and the child would submit the instant they selected a choice with the keyboard.
+        for (const inp of itemBox.querySelectorAll('.mv-input')) {
+          inp.addEventListener('keydown', (e) => {
+            if (e.key !== 'Enter') return;
+            if (itemBox.dataset.locked === '1') return;
+            const st = itemBox._mvState || {};
+            if (!Items.isComplete(item, st.picked)) return;
+            e.preventDefault();
+            submit(item, st.picked);
+          });
+        }
       } else {
         host._mvCheck = null;
       }
