@@ -551,6 +551,9 @@
       inp.type = 'text';
       inp.autocomplete = 'off';
       inp.setAttribute('autocapitalize', 'none');
+      // The runner submits on Return, because the Check button sits under the iPad's keyboard.
+      // enterkeyhint relabels the iOS return key so the child can see that, rather than guessing.
+      inp.setAttribute('enterkeyhint', 'done');
       inp.placeholder = `${item.maxWords} words or fewer`;
       inp.addEventListener('input', function () {
         if (host.dataset.locked === '1') return;
