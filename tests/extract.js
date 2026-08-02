@@ -109,8 +109,9 @@ function evalModule(body, id, prelude, opts) {
   if (!exp || Object.keys(exp).length === 0) {
     throw new Error(`extract: module ${id} captured nothing (extraction broken)`);
   }
-  // Hidden handle back to the raw sandbox so buildDrivers can expose it as driver.sandbox.
-  exp.__sandbox = sandbox;
+  // Hidden handle back to the raw sandbox so buildDrivers can expose it as driver.sandbox. Gated
+  // behind opts so a bare loadModules() return shape stays byte-identical to before this feature.
+  if (opts) exp.__sandbox = sandbox;
   return exp;
 }
 
@@ -127,22 +128,25 @@ function loadModules(opts) {
 // Build a uniform driver per module: a list of { grade, level, gen, make() } entries, where
 // make() invokes the REAL dispatch exactly as the game's init() does.
 function buildDrivers(mods, opts) {
-  // With extraGlobals requested, re-derive fresh modules so each module's sandbox merges them in
-  // BEFORE the prelude evaluates -- patching an already-evaluated sandbox after the fact would be
-  // too late for freshness code that reads injected globals (spy localStorage, seeded Math, ...)
-  // at module-load time. Without opts, behavior is identical to before: use mods as given.
-  const effectiveMods = opts ? loadModules(opts) : mods;
+  // Only extraGlobals actually requires a reload: it must merge into the vm context BEFORE the
+  // prelude evaluates, and the sandboxes behind an already-loaded mods are already fully evaluated
+  // by now. Any other/empty opts, and a bare buildDrivers(mods), reuse mods exactly as before.
+  const effectiveMods = (opts && opts.extraGlobals) ? loadModules(opts) : mods;
   const drivers = [];
 
   function add(moduleId, grade, levelsArr, makeFor) {
     if (!Array.isArray(levelsArr)) return;
     levelsArr.forEach((level, idx) => {
-      drivers.push({
+      const rec = {
         moduleId, grade, levelIndex: idx,
         gen: level && level.gen, levelName: level && level.name,
         make: () => makeFor(level),
-        sandbox: effectiveMods[moduleId] && effectiveMods[moduleId].__sandbox,
-      });
+      };
+      // Only attach when opts was passed -- a bare buildDrivers(mods) driver keeps the original
+      // six-key shape byte-identical: no leaked sandbox handle, still safely JSON-serializable
+      // (the vm sandbox is self-referential via sandbox.globalThis === sandbox).
+      if (opts) rec.sandbox = effectiveMods[moduleId] && effectiveMods[moduleId].__sandbox;
+      drivers.push(rec);
     });
   }
 
