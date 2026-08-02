@@ -24,7 +24,10 @@
 
   // ---------------- pure ----------------
 
-  function pickItems(level, allItems, rng) {
+  // repeatPolicy resolution: a level's own value wins; otherwise the pack-root value threaded
+  // in by makeRunner via level._packPolicy; otherwise 'rotate'.  See makeRunner below for how
+  // _packPolicy gets attached without mutating the parsed pack JSON's level object.
+  function pickItems(level, allItems, rng, levelKey) {
     const want = level.questions | 0;
     const ids = Array.isArray(level.itemIds) ? level.itemIds : [];
     if (want > ids.length) {
@@ -36,6 +39,24 @@
       throw new Error(`level "${level.name}": one or more itemIds did not resolve`);
     }
     const r = rng || Math.random;
+
+    // MVFresh is read AT CALL TIME, never captured at factory/parse time: engine scripts load
+    // before the inline script defines it (same bug class documented at makeRunner below for
+    // MVItems/MVPack). `typeof root.x` alone does not guard a member access on an undefined
+    // base, hence the `root &&` short-circuit.
+    const policy = level.repeatPolicy || level._packPolicy || 'rotate';
+    const F = (typeof MVFresh !== 'undefined' && MVFresh) || (root && root.MVFresh);
+    if (policy === 'rotate' && F && typeof F.orderPool === 'function') {
+      const ordered = F.orderPool(levelKey, ids).map(id => byId.get(id)).filter(Boolean);
+      const slice = ordered.slice(0, want);
+      for (let i = slice.length - 1; i > 0; i--) {
+        const j = Math.floor(r() * (i + 1));
+        const t = slice[i]; slice[i] = slice[j]; slice[j] = t;
+      }
+      return slice;
+    }
+
+    // No MVFresh, or repeatPolicy 'free': today's shuffle+slice, byte-identical.
     for (let i = pool.length - 1; i > 0; i--) {
       const j = Math.floor(r() * (i + 1));
       const t = pool[i]; pool[i] = pool[j]; pool[j] = t;
@@ -93,9 +114,21 @@
       throw new Error('MVRunner: callbacks.onComplete(score, stars) is required by the InlineModules contract');
     }
 
-    const level = pack.levels[levelIndex];
+    // Thread the pack-root repeatPolicy onto the level object pickItems reads, via a shallow
+    // clone: pack.levels[levelIndex] is the parsed pack JSON and must not be mutated, since the
+    // same pack object can be replayed across multiple makeRunner calls (retries, other levels).
+    const level = Object.assign({}, pack.levels[levelIndex], { _packPolicy: pack.repeatPolicy });
     const lives = Number.isInteger(level.lives) ? level.lives : DEFAULT_LIVES;
-    const queue = pickItems(level, pack.items, deps && deps.rng);
+    const levelKey = 'pack.' + pack.meta.id + '.i' + levelIndex;
+    const queue = pickItems(level, pack.items, deps && deps.rng, levelKey);
+    // Record what was actually served, so a future rotate-policy call can prefer what this one
+    // did not.  Best-effort and after selection only: a freshness-ledger failure must never
+    // block or alter the level that already started for the child.  Same call-time resolution
+    // as pickItems, kept independent because pickItems must stay pure (read-only).
+    try {
+      const F = (typeof MVFresh !== 'undefined' && MVFresh) || (root && root.MVFresh);
+      if (F && typeof F.markSeenIds === 'function') F.markSeenIds(levelKey, queue.map(i => i.id));
+    } catch (e) {}
     const passages = new Map(pack.passages.map(p => [p.id, p]));
 
     let timeouts = [];
@@ -308,5 +341,8 @@
     return reg[pack.meta.id];
   }
 
-  return { pickItems, scoreFor, summarize, starsForMistakes, register, makeRunner, DEFAULT_LIVES, CORRECT_ADVANCE_MS };
+  return {
+    pickItems, scoreFor, summarize, starsForMistakes, register, makeRunner, DEFAULT_LIVES, CORRECT_ADVANCE_MS,
+    _test: { pickItems },
+  };
 });

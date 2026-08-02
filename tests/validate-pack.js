@@ -106,6 +106,11 @@ function checkItemEnvelope(pack, passagesById, errors) {
 
 // ---------- envelope: levels ----------
 function checkLevels(pack, itemsById, errors, warnings) {
+  // Validated independent of pack.levels' own validity, so a broken levels array does not mask
+  // a broken pack-root repeatPolicy (or vice versa).
+  if (pack.repeatPolicy !== undefined && !['rotate', 'free'].includes(pack.repeatPolicy)) {
+    errors.push(`repeatPolicy: must be "rotate" or "free", got ${JSON.stringify(pack.repeatPolicy)}`);
+  }
   const list = pack.levels;
   if (!Array.isArray(list) || list.length === 0) { errors.push('levels: missing or empty'); return new Set(); }
   const referenced = new Set();
@@ -140,6 +145,9 @@ function checkLevels(pack, itemsById, errors, warnings) {
       errors.push(`${where}.questions: must be a positive integer`);
     } else if (lv.questions > lv.itemIds.length) {
       errors.push(`${where}.questions: asks for ${lv.questions} but the level only has ${lv.itemIds.length} item(s)`);
+    }
+    if (lv.repeatPolicy !== undefined && !['rotate', 'free'].includes(lv.repeatPolicy)) {
+      errors.push(`level "${lv.name}": repeatPolicy must be "rotate" or "free"`);
     }
   });
   for (const id of itemsById.keys()) {
