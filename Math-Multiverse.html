@@ -4231,7 +4231,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   const FR_LEVELS = [
     { id: 1, name: 'Drop In',       gen: 'like-denom',   maxDen: 4 },
-    { id: 2, name: 'First Section', gen: 'unlike-easy',  maxDen: 6 },
+    { id: 2, name: 'First Section', gen: 'unlike-easy',  maxDen: 8 },
     { id: 3, name: 'Wallride',      gen: 'unlike-mixed', maxDen: 8 },
     { id: 4, name: 'Step Down',     gen: 'multiply',     maxDen: 8 },
     { id: 5, name: 'Massive Air',   gen: 'divide',       maxDen: 8 },
@@ -4305,11 +4305,20 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     }
     return `${num}/${den}`;
   }
+  // Task 12: raw "num/den" formatter for check.answer -- deliberately NOT fracToString (which
+  // reduces and switches to mixed-number display for the kid-facing explain text). check.answer
+  // mirrors the exact raw num/den the question object already carries in `answer`, so
+  // tests/oracles.js's independent recompute has an unambiguous, un-reduced target to match.
+  function checkFrac(num, den) { return `${num}/${den}`; }
 
   // ---- Problem generators (ported from standalone) ----
 
   function genAddLike(maxDen) {
-    const d = ri(2, maxDen);
+    // Task 12 ENVELOPE EXCEPTION: like-denominator work stays 5.NF.A.1 regardless of the
+    // level's own maxDen (this is the degenerate case the CCSS envelope rule names), so this
+    // ignores the passed-in maxDen and always draws d up to 12. genMixedAdd, the other
+    // 'like-denom' mix member, is untouched (still receives the level's own maxDen).
+    const d = ri(2, 12);
     const n1 = ri(1, d - 1);
     const n2 = ri(1, d - 1);
     const correctStr = fracToString(n1 + n2, d);
@@ -4320,7 +4329,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Pit fuel: ${n1}/${d} pepperoni plus ${n2}/${d} more. How much pizza?`,
         `${n1}/${d} of a granola bar + ${n2}/${d} of the same bar. Total?`,
         `Sur Ronster drinks ${n1}/${d} of a sports drink, then ${n2}/${d} more. How much total?`,
-        `Trail mix: ${n1}/${d} of a bag eaten Day 1, ${n2}/${d} on Day 2. Combined?`,
+        `Trail mix: ${n1}/${d} of a bag eaten the first day, ${n2}/${d} more the next day. Combined?`,
         `${n1}/${d} of an energy gel before the drop, ${n2}/${d} after. How much eaten?`,
         `Photographer takes ${n1}/${d} of a battery, then ${n2}/${d} more. Battery used?`,
         `Mechanic uses ${n1}/${d} of a lubricant tube, then ${n2}/${d} on the chain. Total used?`,
@@ -4328,12 +4337,15 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       equation: `${n1}/${d} <span class="op">+</span> ${n2}/${d} <span class="eq">=</span> ?`,
       answer: { num: n1 + n2, den: d },
       visualize: [{ n: n1, d, color: '#ee1d52' }, { n: n2, d, color: '#ffcc00' }],
+      check: { op: 'frac-add-like', operands: [{ num: n1, den: d }, { num: n2, den: d }], answer: checkFrac(n1 + n2, d) },
       explain: `Same denominator (${d}), so just add the tops: ${n1} + ${n2} = ${n1 + n2}. Keep the ${d}. Answer: <strong>${correctStr}</strong>.`,
     };
   }
 
   function genSubLike(maxDen) {
-    const d = ri(3, maxDen);
+    // Task 12 ENVELOPE EXCEPTION (same rationale as genAddLike above): like-denominator work
+    // stays 5.NF.A.1 regardless of the level's own maxDen, so this always draws d up to 12.
+    const d = ri(3, 12);
     const n1 = ri(2, d - 1);
     const n2 = ri(1, n1 - 1);
     const correctStr = fracToString(n1 - n2, d);
@@ -4352,6 +4364,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       equation: `${n1}/${d} <span class="op">−</span> ${n2}/${d} <span class="eq">=</span> ?`,
       answer: { num: n1 - n2, den: d },
       visualize: [{ n: n1, d, color: '#ee1d52' }, { n: n2, d, color: '#6b7280' }],
+      check: { op: 'frac-sub-like', operands: [{ num: n1, den: d }, { num: n2, den: d }], answer: checkFrac(n1 - n2, d) },
       explain: `Same denominator (${d}): subtract the tops. ${n1} − ${n2} = ${n1 - n2}. Keep the ${d}. Answer: <strong>${correctStr}</strong>.`,
     };
   }
@@ -4376,7 +4389,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Trail fuel: ${fracToString(n1, d1)} veggie plus ${fracToString(n2, d2)} sausage. Total?`,
         `Pit order: ${fracToString(n1, d1)} of a Hawaiian + ${fracToString(n2, d2)} of a margherita. Total?`,
         `${fracToString(n1, d1)} of a recovery shake plus ${fracToString(n2, d2)} of a smoothie. Combined?`,
-        `Section 1 took ${fracToString(n1, d1)} of an hour, Section 2 took ${fracToString(n2, d2)} of an hour. Total time?`,
+        `The first section took ${fracToString(n1, d1)} of an hour, the next section took ${fracToString(n2, d2)} of an hour. Total time?`,
         `Rider adds ${fracToString(n1, d1)} cup of oats and ${fracToString(n2, d2)} cup of granola to a bowl. Total?`,
         `Helmet weighs ${fracToString(n1, d1)} kg, pads weigh ${fracToString(n2, d2)} kg. Combined?`,
         `Sur Ronster runs ${fracToString(n1, d1)} of a mile uphill, ${fracToString(n2, d2)} of a mile back. Total distance?`,
@@ -4473,8 +4486,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   }
 
   function genDivWholeByUnit(maxDen) {
-    const d = ri(2, Math.min(maxDen, 6));
-    const w = ri(1, 5);
+    // Task 12: widened to the module's md12 ceiling regardless of the dispatching level's own
+    // maxDen (same envelope treatment as genAddLike/genSubLike) -- d ri(2,12) x w ri(1,12) = 132
+    // distinct (d,w) pairs, clearing the divide-mix bucket's binding need with margin.
+    const d = ri(2, 12);
+    const w = ri(1, 12);
     return {
       topic: 'frac-div-whole-by-unit',
       text: pick([
@@ -4488,13 +4504,16 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       equation: `${w} <span class="op">÷</span> 1/${d} <span class="eq">=</span> ?`,
       answer: { num: w * d, den: 1 },
       visualize: [],
+      check: { op: 'frac-div-wu', operands: [{ num: w, den: 1 }, { num: 1, den: d }], answer: checkFrac(w * d, 1) },
       explain: `Dividing by 1/${d} means multiplying by ${d}. So ${w} × ${d} = <strong>${w*d}</strong>.`,
     };
   }
 
   function genDivUnitByWhole(maxDen) {
-    const d = ri(2, Math.min(maxDen, 6));
-    const w = ri(2, 5);
+    // Task 12: widened to the module's md12 ceiling (same treatment as genDivWholeByUnit) --
+    // d ri(2,12) x w ri(2,12) = 121 distinct (d,w) pairs.
+    const d = ri(2, 12);
+    const w = ri(2, 12);
     const correctStr = fracToString(1, d * w);
     return {
       topic: 'frac-div-unit-by-whole',
@@ -4509,6 +4528,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       equation: `1/${d} <span class="op">÷</span> ${w} <span class="eq">=</span> ?`,
       answer: { num: 1, den: d * w },
       visualize: [],
+      check: { op: 'frac-div-uw', operands: [{ num: 1, den: d }, { num: w, den: 1 }], answer: checkFrac(1, d * w) },
       explain: `Dividing by ${w} means multiplying by 1/${w}. So 1/${d} × 1/${w} = 1/${d*w} = <strong>${correctStr}</strong>.`,
     };
   }
@@ -4539,18 +4559,22 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     const correct = cv1 > cv2 ? f1Str : f2Str;
     const wrong   = cv1 > cv2 ? f2Str : f1Str;
     const opts = shuffle([correct, wrong, 'They are equal', 'Cannot tell']);
+    const winnerAnswer = { num: cv1 > cv2 ? n1 : n2, den: cv1 > cv2 ? d1 : d2 };
     return {
       topic: 'frac-compare',
       text: pick([
         `Sur Ronster ate ${f1Str} of a pizza, photographer ate ${f2Str} of an identical pizza. Who ate more?`,
         `Pit crew A drank ${f1Str} of a sports drink, crew B drank ${f2Str} of one. Which is more?`,
-        `Lap 1 took ${f1Str} of an hour, Lap 2 took ${f2Str}. Which lap was longer?`,
-        `Climb 1 covers ${f1Str} of the trail, Climb 2 covers ${f2Str}. Which climbs more?`,
+        `The first lap took ${f1Str} of an hour, the next lap took ${f2Str}. Which lap was longer?`,
+        `The first climb covers ${f1Str} of the trail, the second climb covers ${f2Str}. Which climbs more?`,
+        `Mechanic A used ${f1Str} of a grease tube, mechanic B used ${f2Str} of one. Who used more?`,
+        `Sur Ronster's front tire is ${f1Str} worn, the rear tire is ${f2Str} worn. Which tire is more worn?`,
       ]),
       equation: `${f1Str} <span class="op">vs</span> ${f2Str}`,
-      answer: { num: cv1 > cv2 ? n1 : n2, den: cv1 > cv2 ? d1 : d2 },
+      answer: winnerAnswer,
       visualize: [{ n: n1, d: d1, color: '#ee1d52' }, { n: n2, d: d2, color: '#ffcc00' }],
       _customChoices: opts.map(t => ({ text: t, correct: t === correct })),
+      check: { op: 'frac-compare', operands: [{ num: n1, den: d1 }, { num: n2, den: d2 }], answer: checkFrac(winnerAnswer.num, winnerAnswer.den) },
       explain: `Common denominator ${L}: ${f1Str} = ${cv1}/${L}, ${f2Str} = ${cv2}/${L}. ${cv1 > cv2 ? cv1 : cv2}/${L} > ${cv1 > cv2 ? cv2 : cv1}/${L}, so <strong>${correct}</strong> is bigger.`,
     };
   }
@@ -4628,9 +4652,15 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   function genEquiv(maxDen) {
     // Find an equivalent fraction with a target denominator. CCSS 5.NF.A.1
-    const dBase = ri(2, Math.min(maxDen, 6));
+    // Task 12: dBase widened 2..6 -> 2..10 (still respecting the dispatching level's own
+    // maxDen when that's smaller), k widened from 3 to 5 multiplier choices. The RESULT
+    // denominator dNew = dBase*k is a constructed target (the whole point of this exercise
+    // is generating a bigger equivalent form), not an independently-drawn difficulty knob, so
+    // it is not itself held to the module's md12 raw-draw ceiling -- multiplying top and
+    // bottom by k stays equally easy regardless of how large dNew ends up.
+    const dBase = ri(2, Math.min(maxDen, 10));
     const nBase = ri(1, dBase - 1);
-    const k = pick([2, 3, 4]);
+    const k = pick([2, 3, 4, 5, 6]);
     const dNew = dBase * k;
     const nNew = nBase * k;
     // Build 3 distinct wrong numerators (none equal to nNew) from a pool of plausible
@@ -4649,21 +4679,28 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Pit shop ranks fractions by denominator ${dNew}. ${nBase}/${dBase} = ?`,
         `Crew mixes fuel ${nBase}/${dBase} oil. Same ratio in ${dNew}ths?`,
         `${nBase}/${dBase} of a course. Which is equivalent in /${dNew}?`,
+        `Mechanic re-marks the gauge from ${dBase}ths to ${dNew}ths. ${nBase}/${dBase} becomes what?`,
+        `Trail map is redrawn in ${dNew}ths instead of ${dBase}ths. ${nBase}/${dBase} of the old map equals what fraction of the new one?`,
       ]),
       equation: `${nBase}/${dBase} <span class="op">=</span> ?/${dNew}`,
       answer: { num: nNew, den: dNew },
       visualize: [{ n: nBase, d: dBase, color: '#ee1d52' }],
       _customChoices: opts.map(t => ({ text: t, correct: t === `${nNew}/${dNew}` })),
+      check: { op: 'frac-equiv', operands: [{ num: nBase, den: dBase }, { num: dNew, den: 1 }], answer: checkFrac(nNew, dNew) },
       explain: `Multiply top and bottom by ${k}: ${nBase}×${k} = ${nNew}, ${dBase}×${k} = ${dNew}. Equivalent: <strong>${nNew}/${dNew}</strong>.`,
     };
   }
 
   function genSimplify(maxDen) {
     // Simplify a fraction to lowest terms. CCSS 5.NF.A.1
-    const dBase = ri(2, 5);
+    // Task 12: dBase widened 2..5 -> 2..9, k widened from 3 to 4 multiplier choices (maxDen was
+    // already unused before this task -- kept that way, matching genEquiv's target-denominator
+    // reasoning: the UNREDUCED num/den here is a constructed display value, not an
+    // independently-drawn difficulty knob).
+    const dBase = ri(2, 9);
     const nBase = ri(1, dBase - 1);
     if (gcd(nBase, dBase) !== 1) return genSimplify(maxDen);  // ensure already simplest
-    const k = pick([2, 3, 4]);
+    const k = pick([2, 3, 4, 5]);
     const num = nBase * k, den = dBase * k;
     const correct = `${nBase}/${dBase}`;
     const wrong1 = `${nBase}/${den}`;
@@ -4677,11 +4714,14 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Sur Ronster covers ${num}/${den} of the trail. Simplest form?`,
         `Pit log: ${num}/${den} bottle drained. Lowest-terms answer?`,
         `${num}/${den} of the points scored. Simplify.`,
+        `Crew mixed ${num}/${den} of a fuel batch. Write it in lowest terms.`,
+        `Photographer filled ${num}/${den} of a memory card. Simplest form?`,
       ]),
       equation: `${num}/${den} <span class="op">=</span> ? (lowest terms)`,
       answer: { num: nBase, den: dBase },
       visualize: [{ n: nBase, d: dBase, color: '#ee1d52' }],
       _customChoices: opts.map(t => ({ text: t, correct: t === correct })),
+      check: { op: 'frac-simplify', operands: [{ num, den }], answer: checkFrac(nBase, dBase) },
       explain: `gcd(${num}, ${den}) = ${k}. Divide both by ${k}: ${num}÷${k} = ${nBase}, ${den}÷${k} = ${dBase}. Simplest: <strong>${correct}</strong>.`,
     };
   }
@@ -4722,8 +4762,13 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   function genNsDivIntro(maxDen) {
     if (ri(0, 1) === 0) {
       // whole ÷ unit fraction:  w ÷ 1/d  =  w·d
+      // Task 12: w widened 1..6 -> 1..16 (this branch's own lib-gate bucket, newly split out
+      // by the branch-distinct check op below, was thin at 42 distinct; a first pass to 1..9
+      // (63 distinct) still missed the L1 driver's own weighted need -- gate-arbitrated, widened
+      // further along the same axis rather than touching d, which the level's own maxDen already
+      // fully occupies at this level).
       const d = ri(2, Math.min(maxDen, 8));
-      const w = ri(1, 6);
+      const w = ri(1, 16);
       const a = w, b = 1, c = 1, e = d;            // dividend w/1, divisor 1/d
       const ansNum = a * e, ansDen = b * c;        // (w·d)/1
       const correctStr = fracToString(ansNum, ansDen);
@@ -4734,6 +4779,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           `${w} full water bottles, each poured into 1/${d}-bottle sips. How many sips?`,
           `${w} laps of trail, each broken into 1/${d}-lap gates. How many gates total?`,
           `${w} whole pizzas sliced into 1/${d}-pizza pieces for the pit crew. Pieces total?`,
+          `${w} whole granola loaves, each cut into 1/${d}-loaf bars. Bars total?`,
+          `${w} whole fuel cans, each split into 1/${d}-can pours. Pours total?`,
         ]),
         equation: `${w} <span class="op">÷</span> 1/${d} <span class="eq">=</span> ?`,
         answer: { num: ansNum, den: ansDen },
@@ -4744,6 +4791,9 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           [ansNum + 1, ansDen],      // off-by-one in the numerator
           [a * e, b * c],            // unreduced (did not simplify)
         ]),
+        // Task 12 CARRY-NOTE: branch-distinct op ('ns-div-wu', whole-by-unit) so this branch's
+        // own bucket is visible to the analytic gate separately from branch B's ('ns-div-uw').
+        check: { op: 'ns-div-wu', operands: [w, d], answer: checkFrac(ansNum, ansDen) },
         explain: `Dividing by 1/${d} means multiplying by the reciprocal ${d}/1. So ${w} × ${d} = <strong>${correctStr}</strong>. Flip the divisor, then multiply.`,
       };
     }
@@ -4761,6 +4811,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `${n}/${d} of a pizza shared equally by ${w} pit crew. Each share?`,
         `${n}/${d} of an hour of trail time divided into ${w} equal sections. Time per section?`,
         `${n}/${d} of a fuel can poured equally into ${w} bikes. Fuel per bike?`,
+        `${n}/${d} of a battery charge is split evenly across ${w} lights. Charge per light?`,
       ]),
       equation: `${n}/${d} <span class="op">÷</span> ${w} <span class="eq">=</span> ?`,
       answer: { num: ansNum, den: ansDen },
@@ -4771,6 +4822,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         [ansNum + 1, ansDen],        // off-by-one in the numerator
         [a * e, b * c],              // unreduced (did not simplify)
       ]),
+      // Task 12 CARRY-NOTE: branch-distinct op ('ns-div-uw', unit-by-whole) -- see branch A above.
+      check: { op: 'ns-div-uw', operands: [n, d, w], answer: checkFrac(ansNum, ansDen) },
       explain: `Dividing by ${w} means multiplying by 1/${w}. So ${n}/${d} × 1/${w} = ${n}/${d * w} = <strong>${correctStr}</strong>.`,
     };
   }
@@ -4788,6 +4841,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `${a}/${b} of a trail is ridden in ${c}/${d}-trail sprints. How many sprints?`,
         `${a}/${b} of a fuel can is burned at ${c}/${d}-can per stage. How many stages?`,
         `How many ${c}/${d}-liter cups can be poured from ${a}/${b} of a liter?`,
+        `${a}/${b} of a battery is used in ${c}/${d}-battery bursts. How many bursts?`,
       ]),
       equation: `${a}/${b} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ?`,
       answer: { num: ansNum, den: ansDen },
@@ -4798,6 +4852,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         [ansNum + 1, ansDen],        // off-by-one in the numerator
         [a * d, b * c],              // unreduced (did not simplify)
       ]),
+      // Task 12 CARRY-NOTE: single-branch generator, one op ('ns-div-frac', matching the topic).
+      check: { op: 'ns-div-frac', operands: [a, b, c, d], answer: checkFrac(ansNum, ansDen) },
       explain: `Keep ${a}/${b}, flip ${c}/${d} to ${d}/${c}, multiply: (${a}×${d})/(${b}×${c}) = ${a * d}/${b * c} = <strong>${correctStr}</strong>.`,
     };
   }
@@ -4818,6 +4874,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           `Sur Ronster rode ${W} ${wn}/${b} miles in ${c}/${d}-mile intervals. How many intervals?`,
           `${W} ${wn}/${b} liters of fuel used at ${c}/${d}-liter per run. How many runs?`,
           `A ${W} ${wn}/${b}-hour session split into ${c}/${d}-hour drills. How many drills?`,
+          `${W} ${wn}/${b} pizzas divided into ${c}/${d}-pizza servings. How many servings?`,
+          `A ${W} ${wn}/${b}-lap course broken into ${c}/${d}-lap gates. How many gates?`,
         ]),
         equation: `${W} ${wn}/${b} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ?`,
         answer: { num: ansNum, den: ansDen },
@@ -4828,6 +4886,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           [ansNum + 1, ansDen],      // off-by-one in the numerator
           [a * d, b * c],            // unreduced (did not simplify)
         ]),
+        // Task 12 CARRY-NOTE: branch-distinct op ('ns-div-mixed-mf', mixed-by-fraction).
+        check: { op: 'ns-div-mixed-mf', operands: [W, b, wn, c, d], answer: checkFrac(ansNum, ansDen) },
         explain: `Make ${W} ${wn}/${b} improper: ${W}×${b}+${wn} = ${a}, so ${a}/${b}. Flip ${c}/${d}, multiply: (${a}×${d})/(${b}×${c}) = <strong>${correctStr}</strong>.`,
       };
     }
@@ -4844,6 +4904,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `A ${W1} ${wn1}/${b}-km trail is ridden in ${W2} ${wn2}/${d}-km laps. How many laps?`,
         `${W1} ${wn1}/${b} hours of riding split into ${W2} ${wn2}/${d}-hour stages. How many stages?`,
         `${W1} ${wn1}/${b} liters of fuel burned at ${W2} ${wn2}/${d} liters per session. How many sessions?`,
+        `${W1} ${wn1}/${b} pizzas divided into ${W2} ${wn2}/${d}-pizza servings. How many servings?`,
+        `A ${W1} ${wn1}/${b}-hour trail cam clip cut into ${W2} ${wn2}/${d}-hour segments. How many segments?`,
       ]),
       equation: `${W1} ${wn1}/${b} <span class="op">÷</span> ${W2} ${wn2}/${d} <span class="eq">=</span> ?`,
       answer: { num: ansNum, den: ansDen },
@@ -4854,6 +4916,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         [ansNum + 1, ansDen],        // off-by-one in the numerator
         [a * d, b * c],              // unreduced (did not simplify)
       ]),
+      // Task 12 CARRY-NOTE: branch-distinct op ('ns-div-mixed-mm', mixed-by-mixed).
+      check: { op: 'ns-div-mixed-mm', operands: [W1, b, wn1, W2, d, wn2], answer: checkFrac(ansNum, ansDen) },
       explain: `Make both improper: ${a}/${b} and ${c}/${d}. Flip the divisor and multiply: (${a}×${d})/(${b}×${c}) = <strong>${correctStr}</strong>.`,
     };
   }
@@ -4875,6 +4939,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           `Find ${a}/${b} ÷ ${c}/${d}, then send it ${m}× bigger for the ${m}-lap combo. Result?`,
           `Sur Ronster divides ${a}/${b} by ${c}/${d}, then multiplies by ${m} riders. Total?`,
           `Two-step line: ${a}/${b} ÷ ${c}/${d}, then × ${m}. What's the answer?`,
+          `Divide ${a}/${b} by ${c}/${d}, then scale the result by ${m}. Final answer?`,
+          `Pit crew computes ${a}/${b} ÷ ${c}/${d}, then doubles-and-more by ${m}. Result?`,
         ]),
         equation: `(${a}/${b} <span class="op">÷</span> ${c}/${d}) <span class="op">×</span> ${m} <span class="eq">=</span> ?`,
         answer: { num: ansNum, den: ansDen },
@@ -4885,6 +4951,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           [ansNum + 1, ansDen],      // off-by-one in the numerator
           [b * d * m, a * c],        // inverted the dividend, then × m
         ]),
+        // Task 12 CARRY-NOTE: branch-distinct op ('ns-div-multi-dm', divide-then-multiply).
+        check: { op: 'ns-div-multi-dm', operands: [a, b, c, d, m], answer: checkFrac(ansNum, ansDen) },
         explain: `Step 1: ${a}/${b} ÷ ${c}/${d} = (${a}×${d})/(${b}×${c}) = ${qNum}/${qDen}. Step 2: × ${m} = ${ansNum}/${ansDen} = <strong>${correctStr}</strong>.`,
       };
     }
@@ -4904,6 +4972,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Solve ${a}/${b} ÷ ${c}/${d}, then write it in lowest terms. Simplest form?`,
         `Sur Ronster divides ${a}/${b} by ${c}/${d}. Reduce the answer all the way. Result?`,
         `Flip, multiply, then simplify: ${a}/${b} ÷ ${c}/${d}. Lowest-terms answer?`,
+        `Divide ${a}/${b} by ${c}/${d}, then simplify the result. What's left?`,
+        `Pit crew works out ${a}/${b} ÷ ${c}/${d} and reduces it all the way. Simplest form?`,
       ]),
       equation: `${a}/${b} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ? (lowest terms)`,
       answer: { num: ansNum, den: ansDen },
@@ -4914,6 +4984,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         [ansNum + 1, ansDen],        // off-by-one in the numerator
         [a * d, b * c],              // unreduced (did not simplify) — collapses, fallback fills
       ]),
+      // Task 12 CARRY-NOTE: branch-distinct op ('ns-div-multi-ds', divide-then-simplify).
+      check: { op: 'ns-div-multi-ds', operands: [a, b, c, d], answer: checkFrac(ansNum, ansDen) },
       explain: `${a}/${b} ÷ ${c}/${d} = ${a * d}/${b * c}. Now simplify: gcd is ${g}, divide top and bottom by ${g}. Answer: <strong>${correctStr}</strong>.`,
     };
   }
@@ -4935,6 +5007,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           `A ${T}-liter jug fills ${c}/${d}-liter bottles. How many bottles?`,
           `${T} whole pizzas are served in ${c}/${d}-pizza portions. How many portions?`,
           `${T} hours of trail time split into ${c}/${d}-hour runs. How many runs?`,
+          `${T} energy bars are cut into ${c}/${d}-bar bites. How many bites?`,
         ]),
         equation: `${T} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ?`,
         answer: { num: ansNum, den: ansDen },
@@ -4945,6 +5018,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           [ansNum + 1, ansDen],      // off-by-one in the numerator
           [a * d, b * c],            // unreduced (did not simplify)
         ]),
+        // Task 12 CARRY-NOTE: branch-distinct op ('ns-div-word-wf', whole-by-fraction).
+        check: { op: 'ns-div-word-wf', operands: [T, c, d], answer: checkFrac(ansNum, ansDen) },
         explain: `${T} ÷ ${c}/${d}: flip to ${d}/${c} and multiply. ${T} × ${d}/${c} = ${T * d}/${c} = <strong>${correctStr}</strong>.`,
       };
     }
@@ -4959,6 +5034,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `A ${a}/${b}-liter bottle is poured into ${c}/${d}-liter cups. How many cups?`,
         `${a}/${b} of a granola block is broken into ${c}/${d}-block bars. How many bars?`,
         `${a}/${b} of a kilometer is ridden in ${c}/${d}-km bursts. How many bursts?`,
+        `${a}/${b} of a fuel tank is drained in ${c}/${d}-tank pours. How many pours?`,
+        `${a}/${b} of an hour of practice is split into ${c}/${d}-hour drills. How many drills?`,
       ]),
       equation: `${a}/${b} <span class="op">÷</span> ${c}/${d} <span class="eq">=</span> ?`,
       answer: { num: ansNum, den: ansDen },
@@ -4969,6 +5046,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         [ansNum + 1, ansDen],        // off-by-one in the numerator
         [a * d, b * c],              // unreduced (did not simplify)
       ]),
+      // Task 12 CARRY-NOTE: branch-distinct op ('ns-div-word-ff', fraction-by-fraction).
+      check: { op: 'ns-div-word-ff', operands: [a, b, c, d], answer: checkFrac(ansNum, ansDen) },
       explain: `${a}/${b} ÷ ${c}/${d} = (${a}×${d})/(${b}×${c}) = ${a * d}/${b * c} = <strong>${correctStr}</strong>.`,
     };
   }
@@ -4991,7 +5070,9 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     if (level.gen === 'unlike-easy')  return pick([() => genAdd(md, true), () => genSub(md, true), () => genMultWhole(md), () => genCompareFrac(md), () => genEquiv(md)])();
     if (level.gen === 'unlike-mixed') return pick([() => genAdd(md, false), () => genSub(md, false), () => genMultWhole(md), () => genCompareFrac(md), () => genEquiv(md), () => genSimplify(md)])();
     if (level.gen === 'multiply')     return pick([() => genMultFrac(md), () => genMultWhole(md), () => genFracOfWhole(md), () => genMixedAdd(md)])();
-    if (level.gen === 'divide')       return pick([() => genDivWholeByUnit(md), () => genDivUnitByWhole(md), () => genMultFrac(md), () => genSimplify(md)])();
+    // Task 12: genSimplify REMOVED from the divide mix -- it is not division; it remains
+    // reachable via 'mixed-all' below.
+    if (level.gen === 'divide')       return pick([() => genDivWholeByUnit(md), () => genDivUnitByWhole(md), () => genMultFrac(md)])();
     if (level.gen === 'mixed-all') {
       const all = [
         () => genAdd(md, false), () => genSub(md, false),
