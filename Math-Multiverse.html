@@ -9216,7 +9216,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         const opts = scaledOpts(ans, 16);
         shuffle(opts);
         return {
-          prompt: `<span class="rk-grace-tag">GRACE</span> Food ration: <strong>${lb} pounds</strong>. <em>Convert to <strong>ounces</strong>.</em>`,
+          prompt: `<span class="rk-grace-tag">GRACE</span> Food ration reserve: <strong>${lb} pounds</strong>. <em>Convert to <strong>ounces</strong>.</em>`,
           answers: opts.map(o => o + ' oz'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${lb} lb`, grace: `${ans} oz` },
@@ -9230,7 +9230,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         const opts = scaledOpts(ans, 12);
         shuffle(opts);
         return {
-          prompt: `<span class="rk-grace-tag">GRACE</span> Sample tube is <strong>${ft} feet</strong> long. <em>In <strong>inches</strong>?</em>`,
+          prompt: `<span class="rk-grace-tag">GRACE</span> The hull conduit run is <strong>${ft} feet</strong> long. <em>In <strong>inches</strong>?</em>`,
           answers: opts.map(o => o + ' in'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${ft} ft`, grace: `${ans} in` },
@@ -9258,7 +9258,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         const opts = scaledOpts(ans, 2);
         shuffle(opts);
         return {
-          prompt: `<span class="rk-grace-tag">GRACE</span> Bouillon pouch <strong>${qt} quarts</strong>. <em>How many <strong>pints</strong>?</em>`,
+          prompt: `<span class="rk-grace-tag">GRACE</span> Bouillon reserve tank: <strong>${qt} quarts</strong>. <em>How many <strong>pints</strong>?</em>`,
           answers: opts.map(o => o + ' pt'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${qt} qt`, grace: `${ans} pt` },
@@ -9286,7 +9286,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         const opts = scaledOpts(ans, 2);
         shuffle(opts);
         return {
-          prompt: `<span class="rk-grace-tag">GRACE</span> Soup pouch <strong>${pt} pints</strong>. <em>How many <strong>cups</strong>?</em>`,
+          prompt: `<span class="rk-grace-tag">GRACE</span> Soup reserve tank: <strong>${pt} pints</strong>. <em>How many <strong>cups</strong>?</em>`,
           answers: opts.map(o => o + ' c'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${pt} pt`, grace: `${ans} c` },
@@ -9323,7 +9323,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         };
       },
       () => { // in to ft (division): airlock hatch seal (Grace)
-        const ft = ri(2, 60);
+        const ft = ri(2, 30);
         const inch = ft * 12;
         const opts = ensureFour(new Set([ft]), () => Math.max(1, ft + ri(-8, 8)));
         shuffle(opts);
@@ -9484,7 +9484,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage <strong>halves every 3 hours</strong> in vacuum. Starting from <strong>${startCount} spores</strong>, after <strong>${3 * steps} hours</strong>, how many remain?`,
           answers: opts.map(o => o + ''),
           correctIdx: opts.indexOf(ans),
-          dict: { rocky: `${3 * steps} hr`, grace: `${ans}` },
+          dict: { rocky: `${startCount}÷2^${steps}`, grace: `${ans}` },
           explain: `${3 * steps} hours ÷ 3 = ${steps} halvings. ${startCount} → ${startCount / 2} → ... after ${steps} halvings, <strong>${ans}</strong> remain.`,
           check: chainDivCheck(startCount, Array(steps).fill(2), ans),
         };
