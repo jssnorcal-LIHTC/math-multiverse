@@ -114,7 +114,12 @@ async function main() {
   const passages = new Map((pack.passages || []).map(p => [p.id, p]));
   const only = arg('--only', null);
   const onlySet = only ? new Set(only.split(',').map(s => s.trim())) : null;
-  const concurrency = Math.max(1, parseInt(arg('--concurrency', '4'), 10));
+  // Default 2, not 4: at concurrency 4 the 26-0725 run lost 18 of 70 items to the 120s
+  // per-call timeout (the claude CLI queues under load rather than failing fast), which
+  // silently downgraded "checked" to "timed out, prior record carried forward". Concurrency
+  // 2 is the highest value that ran the full 70-item pack clean. Override with --concurrency
+  // if the CLI's own throughput ever changes, but re-prove it against the full pack first.
+  const concurrency = Math.max(1, parseInt(arg('--concurrency', '2'), 10));
 
   // Preserve prior records whose item is unchanged. Never discard a human adjudication silently.
   const prior = new Map();
