@@ -5170,7 +5170,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
 
       // Pre-generate questions for the level
-      for (let i = 0; i < totalQ; i++) state.questions.push(genForLevel(lvl));
+      state.questions = MVFresh.drawRun(function () { return genForLevel(lvl); },
+        'fraction-rider.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
 
       host.innerHTML = '<div class="mod-fr"></div>';
       const root = host.querySelector('.mod-fr');
@@ -6481,7 +6482,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         state.position = lvl.gridSize;
         state.questions = [];
         const gen = GEN_BY_TYPE[lvl.gen];
-        for (let i = 0; i < totalQ; i++) state.questions.push(gen());
+        state.questions = MVFresh.drawRun(function () { return gen(); },
+          'f1-decimals.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
 
         // Build the position tower from real form-based ranking. FULL_GRID is
         // ordered fastest → slowest based on 2025 season finishing positions.
@@ -7661,8 +7663,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         state.streak = 0;
         state.hullPct = 100;
         state.livesLost = 0;
-        state.questions = [];
-        for (let i = 0; i < totalQ; i++) state.questions.push(genQuestion(lvl));
+        state.questions = MVFresh.drawRun(function () { return genQuestion(lvl); },
+          'razor-crest.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
         state.phase = 'flying';
         sfxHyperspace();
         renderFlight();
@@ -8487,7 +8489,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         state.questions = [];
         state.bricks = [];
         const gen = MB_GEN[lvl.gen];
-        for (let i = 0; i < totalQ; i++) state.questions.push(gen(state.builder.id));
+        state.questions = MVFresh.drawRun(function () { return gen(state.builder.id); },
+          'master-builder.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
         state.phase = 'building';
         renderBuild(true);
       }
@@ -9754,7 +9757,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         state.crisisLevel = 0;
         state.questions = [];
         const gen = RK_GEN[lvl.gen];
-        for (let i = 0; i < totalQ; i++) state.questions.push(gen());
+        state.questions = MVFresh.drawRun(function () { return gen(); },
+          'rocky-translator.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
         state.phase = 'translating';
         sfxRockyChord();
         renderRoom();
@@ -10699,7 +10703,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         state.jarsSaved = 0;
         state.questions = [];
         const gen = FB_GEN[lvl.gen];
-        for (let i = 0; i < totalQ; i++) state.questions.push(gen());
+        state.questions = MVFresh.drawRun(function () { return gen(); },
+          'floating-bear.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
         state.phase = 'reading';
         renderStory();
       }
