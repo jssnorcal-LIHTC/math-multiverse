@@ -6141,7 +6141,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ];
       const { answers, correctIdx } = g6Options(ans, 2, mistakes);
       return {
-        topic: 'g6-dec-ops',
+        topic: 'g6-dec-' + mode,
         prompt: pick([
           `Pirelli: <em>"Tires drop <strong>${dec} s</strong> of grip per lap. Over <strong>${whole}</strong> laps, total time lost?"</em>`,
           `Engineer: <em>"Deg is <strong>${dec}</strong> s/lap for <strong>${whole}</strong> laps. Cumulative loss?"</em>`,
@@ -6168,7 +6168,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ];
       const { answers, correctIdx } = g6Options(ans, 2, mistakes);
       return {
-        topic: 'g6-dec-ops',
+        topic: 'g6-dec-' + mode,
         prompt: pick([
           `Pit wall: <em>"Pit-lane loss <strong>${x} s</strong> plus stop time <strong>${y} s</strong>. Total time lost?"</em>`,
           `Engineer: <em>"Sector splits <strong>${x}</strong> and <strong>${y}</strong>. Add them for the combined time?"</em>`,
@@ -6192,7 +6192,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     ];
     const { answers, correctIdx } = g6Options(ans, 2, mistakes);
     return {
-      topic: 'g6-dec-ops',
+      topic: 'g6-dec-' + mode,
       prompt: pick([
         `Engineer: <em>"${driver.last} laps in <strong>${x} s</strong>; the tow was worth <strong>${y} s</strong>. Corrected lap is <strong>${x} − ${y}</strong>. Result?"</em>`,
         `Pit wall: <em>"Lap was <strong>${x} s</strong>, target <strong>${y} s</strong> quicker. How far off is the difference ${x} − ${y}?"</em>`,
@@ -6223,7 +6223,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     ];
     const { answers, correctIdx } = g6Options(r, 2, mistakes);
     return {
-      topic: 'g6-unit-rate',
+      topic: 'g6-dec-unit-rate',
       prompt: pick([
         `Engineer: <em>"${driver.last} covered <strong>${d} km</strong> in <strong>${t}</strong> ${unit}s. <strong>Unit rate</strong> (km per ${unit})?"</em>`,
         `Pit wall: <em>"<strong>${d} km</strong> over <strong>${t}</strong> ${unit}s. Distance per ${unit}?"</em>`,
@@ -6254,7 +6254,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     ];
     const { answers, correctIdx } = g6Options(ans, 2, mistakes);
     return {
-      topic: 'g6-percent',
+      topic: 'g6-dec-percent',
       prompt: pick([
         `Engineer: <em>"The tank holds <strong>${base} L</strong>. ${driver.last} has used <strong>${rate}%</strong>. Liters used?"</em>`,
         `Strategy: <em>"<strong>${rate}%</strong> of the <strong>${base}</strong>-lap race is done. How many laps?"</em>`,
@@ -6305,7 +6305,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     }
     const { answers, correctIdx } = g6Options(ans, 1, mistakes);
     return {
-      topic: 'g6-stats',
+      topic: 'g6-stats-' + op,
       prompt: pick([
         `Engineer: <em>"${driver.last}'s last five laps: <strong>${list}</strong> s. Find the <strong>${label}</strong> lap time."</em>`,
         `Timing tower shows ${driver.last}'s five laps: <strong>${list}</strong> s. What is the <strong>${label}</strong>?`,
@@ -7396,7 +7396,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     ]);
     const answers = arr.map(n => `${n}`);
     return {
-      topic: 'g6-rect-area',
+      topic: 'g6-coord-rect-area',
       type: 'mc',
       gridMax, quadrants: 4,
       markers: [
@@ -7443,7 +7443,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     shuffle(answers);
     const g = Math.max(b, h);
     return {
-      topic: 'g6-tri-area',
+      topic: 'g6-coord-tri-area',
       type: 'mc',
       gridMax: g, quadrants: 1,
       markers: [
@@ -11001,16 +11001,22 @@ const TOPIC_LABELS = {
   'ns-div-word': 'Fraction-division word problems',
   // Grade 6 — F1 Decimals (6.NS / 6.RP / 6.SP)
   'g6-dec-divide': 'Divide decimals',
-  'g6-dec-ops': 'Decimal operations',
-  'g6-unit-rate': 'Unit rate',
-  'g6-percent': 'Percent of a quantity',
-  'g6-stats': 'Mean, median, range',
+  'g6-dec-add': 'Add decimals',
+  'g6-dec-sub': 'Subtract decimals',
+  'g6-dec-mul': 'Multiply decimals',
+  'g6-dec-unit-rate': 'Unit rate (decimal)',
+  'g6-dec-percent': 'Percent of a quantity (decimal)',
+  'g6-stats-mean': 'Mean of a data set',
+  'g6-stats-median': 'Median of a data set',
+  'g6-stats-range': 'Range of a data set',
   // Grade 6 — Razor Crest (6.NS.6/8, 6.G)
   'g6-quadrant': 'Name the quadrant',
   'g6-reflect': 'Reflect across an axis',
   'g6-distance': 'Distance on the coordinate plane',
   'g6-rect-area': 'Area of a rectangle',
   'g6-tri-area': 'Area of a triangle',
+  'g6-coord-rect-area': 'Area of a rectangle (grid corners)',
+  'g6-coord-tri-area': 'Area of a triangle (grid corners)',
   // Grade 6 — LEGO Master Builder (6.G)
   'g6-volume': 'Volume (L × W × H)',
   'g6-volume-frac': 'Volume with a fractional edge',
@@ -11222,16 +11228,24 @@ const COACH_TIPS = {
   'ns-div-word':    { tip: '"How many ___-size pieces fit?" is division: total ÷ piece size.', ex: 'Scoops of 3/4 cup in 6 cups: <b>6 ÷ 3/4</b> = 6 × 4/3 = <b>8</b>.' },
   // Grade 6 — F1 Decimals (6.NS / 6.RP / 6.SP)
   'g6-dec-divide':  { tip: 'Divide decimals like whole numbers, then place the decimal point in the answer.', ex: '<b>39.24 ÷ 6</b> = <b>6.54</b>.' },
-  'g6-dec-ops':     { tip: 'Add/subtract: line up the decimal points. Multiply: count total decimal places.', ex: '<b>8.54 + 1.68</b> = <b>10.22</b>.' },
+  'g6-dec-add':     { tip: 'Line up the decimal points, then add column by column, just like whole numbers.', ex: '<b>8.54 + 1.68</b> = <b>10.22</b>.' },
+  'g6-dec-sub':     { tip: 'Line up the decimal points, then subtract column by column. Borrow across the decimal point the same way you would with whole numbers.', ex: '<b>8.50 − 2.75</b> = <b>5.75</b>.' },
+  'g6-dec-mul':     { tip: 'Multiply as if there were no decimal points, then count the total decimal places in both factors and place the point that many spots from the right.', ex: '<b>0.35 × 6</b>: 35 × 6 = 210, one decimal place → <b>2.10</b>.' },
   'g6-unit-rate':   { tip: 'A unit rate is the amount for ONE. Divide the total by the number of units.', ex: '<b>27 grams over 3</b> = 27 ÷ 3 = <b>9</b> per unit.' },
   'g6-percent':     { tip: 'Percent OF a number: turn the percent into hundredths, then multiply.', ex: '<b>20% of 140</b> = 0.20 × 140 = <b>28</b>.' },
-  'g6-stats':       { tip: 'Mean = sum ÷ count. Median = middle of the sorted list. Range = max − min.', ex: 'Laps 4, 7, 5, 9, 5: mean = 30 ÷ 5 = <b>6</b>; sorted 4 5 5 7 9 → median <b>5</b>; range 9 − 4 = <b>5</b>.' },
+  'g6-dec-unit-rate': { tip: 'A unit rate is the amount for ONE: divide the total by the number of units. Here the rate comes out as a decimal, so keep the decimal point lined up when you divide.', ex: '<b>6.75 km over 3 laps</b>: 6.75 ÷ 3 = <b>2.25</b> km per lap.' },
+  'g6-dec-percent': { tip: 'Percent of a quantity: convert the percent to a decimal (divide by 100), then multiply by the base amount.', ex: '<b>30% of 80</b>: 0.30 × 80 = <b>24</b>.' },
+  'g6-stats-mean':   { tip: 'Mean (average) = add up every value, then divide by how many values there are.', ex: 'Laps 4, 7, 5, 9, 5: sum = 30. Mean = 30 ÷ 5 = <b>6</b>.' },
+  'g6-stats-median': { tip: 'Median = the middle value once the numbers are sorted least to greatest. With 5 values, that is the 3rd one.', ex: 'Laps 4, 7, 5, 9, 5: sorted 4, 5, 5, 7, 9 → the middle value is <b>5</b>.' },
+  'g6-stats-range':  { tip: 'Range = the biggest value minus the smallest value. It shows how spread out the data is.', ex: 'Laps 4, 7, 5, 9, 5: biggest 9, smallest 4. Range = 9 − 4 = <b>5</b>.' },
   // Grade 6 — Razor Crest (6.NS.6/8, 6.G)
   'g6-quadrant':    { tip: 'Quadrant I: x>0,y>0.  II: x<0,y>0.  III: x<0,y<0.  IV: x>0,y<0.', ex: '<b>(3, −4)</b>: x positive, y negative → <b>Quadrant IV</b>.' },
   'g6-reflect':     { tip: 'Reflect across the x-axis: flip the sign of y. Across the y-axis: flip the sign of x.', ex: '<b>(3, 5)</b> across the x-axis = <b>(3, −5)</b>.' },
   'g6-distance':    { tip: 'Same row or column? Distance = absolute difference of the coordinate that changes.', ex: '<b>(2, −1) to (2, 6)</b>: |6 − (−1)| = <b>7</b>.' },
-  'g6-rect-area':   { tip: 'Area of a rectangle = length × width. Read each side off the grid.', ex: '<b>2 × 16</b> = <b>32</b> square units.' },
+  'g6-rect-area':   { tip: 'Area of a rectangle = length × width. Multiply the two given side lengths.', ex: '<b>2 × 16</b> = <b>32</b> square units.' },
   'g6-tri-area':    { tip: 'Area of a triangle = (base × height) ÷ 2.', ex: 'base 8, height 6: 8 × 6 ÷ 2 = <b>24</b>.' },
+  'g6-coord-rect-area': { tip: 'Find the width and height from the two corner points first (subtract the x-values, then the y-values), then multiply.', ex: 'Corners (1, 2) and (5, 6): width = |5−1| = 4, height = |6−2| = 4. Area = 4 × 4 = <b>16</b>.' },
+  'g6-coord-tri-area':  { tip: 'Read the base and height off the grid, then use base × height ÷ 2 — same rule as any triangle.', ex: 'base 8, height 6: 8 × 6 ÷ 2 = <b>24</b>.' },
   // Grade 6 — LEGO Master Builder (6.G)
   'g6-volume':      { tip: 'Volume of a box = length × width × height.', ex: '<b>3 × 4 × 5</b> = <b>60</b> cubic units.' },
   'g6-volume-frac': { tip: 'A fractional edge still uses L × W × H. A 1/2 edge halves the result.', ex: '4 × 3 × 1/2 = <b>6</b> cubic units.' },
