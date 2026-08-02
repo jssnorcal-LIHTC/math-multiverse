@@ -4494,12 +4494,12 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     return {
       topic: 'frac-div-whole-by-unit',
       text: pick([
-        `${w} whole pizzas. Each gets cut into 1/${d} pieces. How many pieces total?`,
-        `${w} pizzas, sliced into 1/${d} chunks for spectators. Total chunks?`,
-        `${w} energy bars, each cut into 1/${d} bites. Total bites?`,
-        `${w} whole watermelons split into 1/${d}-melon servings. How many servings?`,
-        `${w} loaves of bread sliced into 1/${d}-loaf portions. Pieces total?`,
-        `${w} water bottles, each split into 1/${d}-bottle sips. Total sips?`,
+        `${w} whole pizza${w > 1 ? 's' : ''}. Each gets cut into 1/${d} pieces. How many pieces total?`,
+        `${w} pizza${w > 1 ? 's' : ''}, sliced into 1/${d} chunks for spectators. Total chunks?`,
+        `${w} energy bar${w > 1 ? 's' : ''}, each cut into 1/${d} bites. Total bites?`,
+        `${w} whole watermelon${w > 1 ? 's' : ''} split into 1/${d}-melon servings. How many servings?`,
+        `${w} ${w > 1 ? 'loaves' : 'loaf'} of bread sliced into 1/${d}-loaf portions. Pieces total?`,
+        `${w} water bottle${w > 1 ? 's' : ''}, each split into 1/${d}-bottle sips. Total sips?`,
       ]),
       equation: `${w} <span class="op">÷</span> 1/${d} <span class="eq">=</span> ?`,
       answer: { num: w * d, den: 1 },
@@ -4535,31 +4535,50 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   function genCompareFrac(maxDen) {
     // Compare two fractions. CCSS 5.NF.A
-    // Loop the random pick until we get two distinct values — a single
-    // decrement of n2 wasn't enough (e.g. 2/4 vs 1/2 still reduces equal
-    // after n2 -= 1, leaving the kid two identical buttons).
-    let d1 = ri(2, maxDen), d2 = ri(2, maxDen);
-    let n1 = ri(1, d1 - 1), n2 = ri(1, d2 - 1);
-    let L = lcm(d1, d2);
-    let safety = 12;
-    while (n1 * (L / d1) === n2 * (L / d2) && safety-- > 0) {
-      d1 = ri(2, maxDen); d2 = ri(2, maxDen);
-      n1 = ri(1, d1 - 1); n2 = ri(1, d2 - 1);
-      L = lcm(d1, d2);
+    // Mirrors the master-builder genCompareVol precedent (T5): ~15% of draws force an
+    // EQUIVALENT pair (e.g. 1/2 vs 2/4) so "They are equal" is a live, pedagogically real
+    // answer -- equivalent fractions are an ideal comparison case, not an edge case to avoid.
+    // "Cannot tell" is dropped: two fully-specified fractions always have a determinable
+    // answer, so it was never correct.
+    const canForceEqual = Math.floor(maxDen / 2) >= 2;
+    const equalDraw = canForceEqual && Math.random() < 0.15;
+    let d1, n1, d2, n2, f1Str, f2Str, isEqual;
+    if (equalDraw) {
+      d1 = ri(2, Math.floor(maxDen / 2));
+      n1 = ri(1, d1 - 1);
+      const k = ri(2, Math.floor(maxDen / d1));
+      d2 = d1 * k; n2 = n1 * k;
+      f1Str = fracToString(n1, d1);
+      // Deliberately NOT fracToString: n2/d2 shares a factor of (at least) k with n1/d1, so
+      // reducing it would collapse right back to f1Str (e.g. 2/4 -> "1/2", a duplicate
+      // option). The whole point is a differently-written equivalent -- same
+      // constructed-display-value precedent as genEquiv's dNew / genSimplify's unreduced num/den.
+      f2Str = `${n2}/${d2}`;
+      isEqual = true;
+    } else {
+      d1 = ri(2, maxDen); n1 = ri(1, d1 - 1);
+      d2 = ri(2, maxDen); n2 = ri(1, d2 - 1);
+      f1Str = fracToString(n1, d1); f2Str = fracToString(n2, d2);
+      // Guard against a COINCIDENTAL value-equal pair (independent draws landing on
+      // equivalent fractions, e.g. 1/2 and 3/6 both reduce to the same displayed string).
+      // The deliberate equal branch above already covers "equal" with a guaranteed-distinct
+      // display; an accidental collision here would produce two identical reduced strings,
+      // which the structural gate correctly rejects as duplicate options.
+      let guard = 10;
+      while (f1Str === f2Str && guard-- > 0) { d2 = ri(2, maxDen); n2 = ri(1, d2 - 1); f2Str = fracToString(n2, d2); }
+      if (f1Str === f2Str) {
+        // Exhausted (maxDen too small): fall back to a guaranteed-distinct, guaranteed-unequal
+        // pair -- the same escape valve the original code used.
+        n1 = 1; d1 = 2; n2 = 1; d2 = 3;
+        f1Str = fracToString(n1, d1); f2Str = fracToString(n2, d2);
+      }
+      isEqual = false;
     }
-    let cv1 = n1 * (L / d1), cv2 = n2 * (L / d2);
-    if (cv1 === cv2) {
-      // Re-roll exhausted (maxDen too small for two distinct fractions, e.g. maxDen=2
-      // only has 1/2): fall back to a guaranteed-distinct pair so the four buttons never
-      // collide into duplicates or two "correct" answers.
-      n1 = 1; d1 = 2; n2 = 1; d2 = 3; L = lcm(d1, d2);
-      cv1 = n1 * (L / d1); cv2 = n2 * (L / d2);
-    }
-    const f1Str = fracToString(n1, d1), f2Str = fracToString(n2, d2);
-    const correct = cv1 > cv2 ? f1Str : f2Str;
-    const wrong   = cv1 > cv2 ? f2Str : f1Str;
-    const opts = shuffle([correct, wrong, 'They are equal', 'Cannot tell']);
-    const winnerAnswer = { num: cv1 > cv2 ? n1 : n2, den: cv1 > cv2 ? d1 : d2 };
+    const L = lcm(d1, d2);
+    const cv1 = n1 * (L / d1), cv2 = n2 * (L / d2);
+    const correct = isEqual ? 'They are equal' : (cv1 > cv2 ? f1Str : f2Str);
+    const winnerAnswer = isEqual ? { num: n1, den: d1 } : { num: cv1 > cv2 ? n1 : n2, den: cv1 > cv2 ? d1 : d2 };
+    const opts = shuffle([f1Str, f2Str, 'They are equal']);
     return {
       topic: 'frac-compare',
       text: pick([
@@ -4574,8 +4593,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       answer: winnerAnswer,
       visualize: [{ n: n1, d: d1, color: '#ee1d52' }, { n: n2, d: d2, color: '#ffcc00' }],
       _customChoices: opts.map(t => ({ text: t, correct: t === correct })),
-      check: { op: 'frac-compare', operands: [{ num: n1, den: d1 }, { num: n2, den: d2 }], answer: checkFrac(winnerAnswer.num, winnerAnswer.den) },
-      explain: `Common denominator ${L}: ${f1Str} = ${cv1}/${L}, ${f2Str} = ${cv2}/${L}. ${cv1 > cv2 ? cv1 : cv2}/${L} > ${cv1 > cv2 ? cv2 : cv1}/${L}, so <strong>${correct}</strong> is bigger.`,
+      check: { op: 'frac-compare', operands: [{ num: n1, den: d1 }, { num: n2, den: d2 }], answer: isEqual ? 'equal' : checkFrac(winnerAnswer.num, winnerAnswer.den) },
+      explain: isEqual
+        ? `${f1Str} and ${f2Str} are the same value: multiply the top and bottom of ${f1Str} by ${d2 / d1} to get ${f2Str}. <strong>They are equal</strong>.`
+        : `Common denominator ${L}: ${f1Str} = ${cv1}/${L}, ${f2Str} = ${cv2}/${L}. ${cv1 > cv2 ? cv1 : cv2}/${L} > ${cv1 > cv2 ? cv2 : cv1}/${L}, so <strong>${correct}</strong> is bigger.`,
     };
   }
 
@@ -4775,12 +4796,12 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       return {
         topic: 'ns-div-intro',
         text: pick([
-          `Sur Ronster has ${w} whole energy bars and cuts each into 1/${d}-bar bites. How many bites?`,
-          `${w} full water bottles, each poured into 1/${d}-bottle sips. How many sips?`,
-          `${w} laps of trail, each broken into 1/${d}-lap gates. How many gates total?`,
-          `${w} whole pizzas sliced into 1/${d}-pizza pieces for the pit crew. Pieces total?`,
-          `${w} whole granola loaves, each cut into 1/${d}-loaf bars. Bars total?`,
-          `${w} whole fuel cans, each split into 1/${d}-can pours. Pours total?`,
+          `Sur Ronster has ${w} whole energy bar${w > 1 ? 's' : ''} and cuts each into 1/${d}-bar bites. How many bites?`,
+          `${w} full water bottle${w > 1 ? 's' : ''}, each poured into 1/${d}-bottle sips. How many sips?`,
+          `${w} lap${w > 1 ? 's' : ''} of trail, each broken into 1/${d}-lap gates. How many gates total?`,
+          `${w} whole pizza${w > 1 ? 's' : ''} sliced into 1/${d}-pizza pieces for the pit crew. Pieces total?`,
+          `${w} whole granola ${w > 1 ? 'loaves' : 'loaf'}, each cut into 1/${d}-loaf bars. Bars total?`,
+          `${w} whole fuel can${w > 1 ? 's' : ''}, each split into 1/${d}-can pours. Pours total?`,
         ]),
         equation: `${w} <span class="op">÷</span> 1/${d} <span class="eq">=</span> ?`,
         answer: { num: ansNum, den: ansDen },
@@ -5830,17 +5851,24 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   function genCompareOrder() {
     const base = ri(20, 32);
     const a = base + ri(0, 999) / 1000;
+    // Mirrors the master-builder genCompareVol precedent (T5): ~15% of draws force an EXACT
+    // tie (same lap time to the thousandth) so "Same lap" is a live, correct answer. Short of
+    // an exact tie, reject near-misses (0 < |a-b| < 0.005) -- visually indistinguishable at 3
+    // decimals but not actually equal is a bad case to show a kid. "Cannot tell" is dropped:
+    // every pair is either exactly tied or has a determinable faster time.
+    const equalDraw = Math.random() < 0.15;
     let b;
-    do { b = base + ri(0, 999) / 1000; } while (Math.abs(a - b) < 0.005);
+    if (equalDraw) { b = a; }
+    else { do { b = base + ri(0, 999) / 1000; } while (b !== a && Math.abs(a - b) < 0.005); }
     const aStr = `1:${a.toFixed(3)}`;
     const bStr = `1:${b.toFixed(3)}`;
     const d1 = pick(DRIVERS);
     let d2; do { d2 = pick(DRIVERS); } while (d2.id === d1.id);
-    const correct = a < b ? d1.last : d2.last;
-    const wrong   = a < b ? d2.last : d1.last;
-    const opts = shuffle([correct, wrong, 'Same lap', 'Cannot tell']);
+    const isSame = a === b;
+    const correct = isSame ? 'Same lap' : (a < b ? d1.last : d2.last);
+    const opts = shuffle([d1.last, d2.last, 'Same lap']);
     // The two times share the whole-number part, so name the first decimal place where
-    // they differ, that is the digit that decides which lap is faster.
+    // they differ, that is the digit that decides which lap is faster (ties never differ).
     const af = Math.round((a - base) * 1000), bf = Math.round((b - base) * 1000);
     const placeNames = ['tenths', 'hundredths', 'thousandths'];
     let decidePlace = 'thousandths';
@@ -5856,7 +5884,9 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
-      explain: `Line up the decimals and read left to right. ${aStr} and ${bStr} first differ in the ${decidePlace} place; the smaller digit there is the lower, faster time. <strong>${correct}</strong> wins.`,
+      explain: isSame
+        ? `Line up the decimals: ${aStr} and ${bStr} are identical all the way to the thousandths place. <strong>Same lap</strong> -- it's a tie.`
+        : `Line up the decimals and read left to right. ${aStr} and ${bStr} first differ in the ${decidePlace} place; the smaller digit there is the lower, faster time. <strong>${correct}</strong> wins.`,
     };
   }
 
@@ -6109,8 +6139,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     const fracStr = frac.toString().padStart(tgt.digits, '0');
     const dec = whole + frac / tgt.divisor;
     const decStr = `${whole}.${fracStr}`;
-    const correct = (whole > 0 ? `${NUM[whole]} and ` : '') + `${frac} ${tgt.name}`;
-    const wrong1 = `${frac} ${pick(PLACES.filter(p=>p!==tgt)).name}`;
+    // frac can draw exactly 1 (e.g. "0.1" = 1 tenth); singularize the place name so the
+    // word form never reads "1 tenths" (same conditional-plural pattern as the T9 shells).
+    const placeWord = (n, name) => `${n} ${n > 1 ? name : name.slice(0, -1)}`;
+    const correct = (whole > 0 ? `${NUM[whole]} and ` : '') + placeWord(frac, tgt.name);
+    const wrong1 = placeWord(frac, pick(PLACES.filter(p=>p!==tgt)).name);
     const wrong2 = `${frac+1} ${tgt.name}`;
     const wrong3 = (whole > 0 ? `${NUM[whole]} point ` : '') + `${frac}`;
     const opts = shuffle([correct, wrong1, wrong2, wrong3]);
@@ -6124,7 +6157,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
-      explain: `${decStr} = ${whole > 0 ? NUM[whole] + ' AND ' : ''}${frac} ${tgt.name}. The decimal point is read as "and"; the digits after it count down to ${tgt.name}.`,
+      explain: `${decStr} = ${whole > 0 ? NUM[whole] + ' AND ' : ''}${placeWord(frac, tgt.name)}. The decimal point is read as "and"; the digits after it count down to ${tgt.name}.`,
     };
   }
 
@@ -8264,10 +8297,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     ]);
     const frag = pick([
       `My next piece is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. <strong>Volume in stud cubes</strong>?`,
-      `This brick measures <strong>${l}</strong> studs long, <strong>${w}</strong> studs wide, and <strong>${h}</strong> studs tall. What's the <strong>volume</strong>?`,
+      `This brick measures <strong>${l}</strong> studs long, <strong>${w}</strong> studs wide, and <strong>${h}</strong> stud${h > 1 ? 's' : ''} tall. What's the <strong>volume</strong>?`,
       `Check the blueprint: length <strong>${l}</strong>, width <strong>${w}</strong>, height <strong>${h}</strong>, all in studs. <strong>Volume in stud cubes</strong>?`,
       `We need this piece exact -- <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. Give me the <strong>volume</strong>!`,
-      `Master builders measure twice: this one's <strong>${l}</strong> studs by <strong>${w}</strong> studs by <strong>${h}</strong> studs. <strong>Volume</strong>?`,
+      `Master builders measure twice: this one's <strong>${l}</strong> studs by <strong>${w}</strong> studs by <strong>${h}</strong> stud${h > 1 ? 's' : ''}. <strong>Volume</strong>?`,
       `Snap it together -- <strong>${l}</strong> long, <strong>${w}</strong> wide, <strong>${h}</strong> high, every measurement in studs. <strong>Volume in stud cubes</strong>?`,
     ]);
     return {
@@ -10976,7 +11009,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     if (v.leftVal > v.rightVal) correct = `${v.left}`;
     else if (v.rightVal > v.leftVal) correct = `${v.right}`;
     else correct = 'They are equal';
-    const opts = shuffle([v.left, v.right, 'They are equal', 'Cannot tell without evaluating']);
+    // 'Cannot tell without evaluating' dropped: it was never correct -- "They are equal" is
+    // already live via the distributive-property variant, so every draw has a determinable
+    // answer among the remaining 3 options (mirrors the T5 compareVol precedent).
+    const opts = shuffle([v.left, v.right, 'They are equal']);
     return {
       topic: 'pemdas-compare',
       prompt: pick([

@@ -255,9 +255,13 @@ const CHECK_OPS = {
   // Compare: cross-multiplication (f1.num*f2.den vs f2.num*f1.den) independently determines the
   // larger operand -- a different route than the generator's own common-denominator scaling --
   // and the RAW winning operand (not reduced) is what the generator's `answer` carries too.
+  // cmp === 0 is an exact cross-multiplication tie, independently proving value-equality
+  // (n1*d2 === n2*d1 iff n1/d1 === n2/d2); the generator's equal branch (T5/genCompareVol
+  // precedent) reports 'equal' in that case rather than defaulting to either operand.
   'frac-compare': ([f1, f2]) => {
     const cmp = f1.num * f2.den - f2.num * f1.den;
-    const winner = cmp >= 0 ? f1 : f2;
+    if (cmp === 0) return { expected: 'equal', str: true };
+    const winner = cmp > 0 ? f1 : f2;
     return { expected: `${winner.num}/${winner.den}`, str: true };
   },
   // ---- Task 12 (fraction-rider widening): grade-6 6.NS.1 dividing-fraction ops. Operands are
