@@ -68,6 +68,55 @@
       "genre": "informational",
       "source": "original",
       "text": "A rescue training association ran the same beacon test in three different tunnels last spring.  It published all three results side by side, which turns out to be far more useful than any one of them alone.\n\nThe first tunnel was cut through dry granite and ran almost straight for two hundred feet.  A beacon at the forty foot level held its signal for the full life of the battery.  The receiver at the entrance never lost it once.  The second tunnel was wet limestone with a sharp bend at twenty-five feet.  A beacon at the thirty foot level lost contact there after eight minutes.  That is close to what the training staff at Halloway recorded in their own log.  The third tunnel was dry limestone with a gentle curve.  The beacon there held for fifty-one minutes before the signal became unreliable.\n\nRead on its own, each of those results looks like a verdict on the equipment.  Read together, they say something different, which is that the beacon is not the thing that changed.  Three conditions differed between the three tunnels.  Every one of them is a property of the ground rather than of the device.\n\nWater is the first of them.  Wet rock absorbs radio energy far more effectively than dry rock does.  Water is extremely good at turning a signal into heat.  A damp limestone wall can cost a team more range than another ten feet of depth would.\n\nThe shape of the path is the second.  A signal traveling through rock does best when the beacon and the receiver sit close to a straight line.  A sharp bend forces the signal to cut the corner through solid material instead of following the open passage.  That extra rock does the same work that greater depth would do.\n\nDepth is the third, and it is the one everybody thinks of first.  It clearly matters, but the association's own numbers show that it is not the whole story.  A beacon at forty feet in the first tunnel outperformed a beacon at thirty feet in the second by more than an hour.\n\nThe practical conclusion is not that these beacons are good or that they are bad.  It is that a claim about beacon performance is close to meaningless unless it names the depth, the rock, and the shape of the passage.  A team deciding what to buy should ask for the conditions of a test before asking for the result.  A number offered without those conditions should be treated as a number that cannot be checked.  The association recommends that every department run one test in its own worst tunnel rather than trusting a figure measured somewhere else."
+    },
+    {
+      "id": "p-dead-drop",
+      "title": "The Dead Drop",
+      "genre": "informational",
+      "source": "original",
+      "text": "A dead drop solves one problem.  Two people who are never seen together cannot be tied together.  A meeting puts both people in one place at one time.  A place and a time are exactly what a follower needs to prove a connection.  A dead drop takes the second person out of the picture.  One person hides something.  Much later, with nobody watching either person at once, a second person collects it.\n\nThe container is the first decision.  It is never a container that looks like a container.  A hollow bolt can thread into a fence post, a magnetic box can hide under a mailbox lip, or a folded paper can wait behind a loose brick.  Each one is built for a stranger's hands.  Each one means nothing to anyone who was not told to look.  A drop that draws a second glance has already failed, whether or not anyone opens it.\n\nThe location matters as much as the container.  A good site is public enough that standing there for thirty seconds needs no excuse.  It is also dull enough that nobody remembers who stood there.  A park bench works.  A doorway that a hundred people pass every hour works better.  A place only one kind of person would visit never works.  That single reason is the first thing an investigator would ask about.\n\nLoading a drop and knowing it is loaded are two separate problems, and the second is where most training time goes.  The collector cannot walk past the site every day just to check, because repetition is its own kind of pattern.  Instead the two sides agree on a signal placed somewhere else: a chalk mark on a lamppost, a strip of tape on a stop sign, or a plant moved from one side of a window to the other.  The signal says one thing only, that the drop is ready, and it says so from a distance, to someone walking past on the way to somewhere else.\n\nThe last rule belongs to the collector, not to whoever loaded the drop.  Walking straight from the signal to the drop site creates the very problem the method exists to avoid, because now a follower only has to watch one person do both things back to back.  So the collector treats the pickup like a meeting that must be checked first: a slow route, a stop that shows what is behind, and a walk away with nothing retrieved if anything looks wrong.  Empty hands are never the failure.  Going back tomorrow costs nothing, and being seen costs everything.\n\nThat is the whole point of splitting a handoff into two halves separated by hours or days instead of by feet.  Nobody has to be caught in the same place at the same time as anybody else, and a connection nobody observed can never later be proven."
+    },
+    {
+      "id": "p-one-time-pad",
+      "title": "The One-Time Pad",
+      "genre": "informational",
+      "source": "original",
+      "text": "Every cipher that can be broken shares one weakness.  It has nothing to do with how clever the cipher looks.  A pattern repeats, and any system that scrambles the same way twice leaves a seam where the repeat shows.  A codebreaker goes looking for that seam first.  The harder question is not how to scramble a message.  It is how to scramble it so the pattern never repeats at all.\n\nThe one-time pad answers that question about as fully as a cipher can.  A pad is a long string of letters or numbers, chosen at random.  Both the sender and the receiver hold an identical copy before anything is sent.  To encode a message, the sender combines it with the pad one character at a time.  The rule for combining them is fixed, and anyone could learn it in a minute.  The result looks like nothing, because it is nothing.  Without the pad, every possible original message is equally likely to be hiding inside it.  This is not a strong cipher in the ordinary sense.  It is closer to a lock with no shape for a key to have ever fit.\n\nThe rule that makes this work also gives the method its name.  Every stretch of the pad is used exactly once, then destroyed, on both ends, the moment the message goes out.  Reuse is what breaks a one-time pad, and it breaks completely rather than a little.  Two messages scrambled with the same stretch of pad can be compared against each other.  Comparing them cancels the randomness out, and what is left is a pattern a trained reader can pick apart by hand.  The strength was never in the scrambling.  It was in the fact that no comparison was ever possible.\n\nHistorically, this single rule is the one real operators broke under pressure, not the math behind it.  A courier gets delayed, a message queue backs up, or fresh pages run short.  Any of these has tempted an operator to reach for a page already used, just once, just this one time.  Traffic from more than one real operation was eventually broken this way, years after it was sent, when an analyst noticed two messages that scrambled just a little too much alike.\n\nNone of this makes the method practical at real scale.  Every letter of every message needs its own fresh page of true randomness, and both sides need an identical, unguessable copy of that page before a single word can be sent.  Printing, distributing, and guarding enough pad for ordinary daily traffic takes more effort than most operations can sustain.  That is why the method survives today mostly for messages that are short, rare, and important enough to be worth the cost.  A cipher that cannot be broken is not the same thing as a cipher anyone can afford to use."
+    },
+    {
+      "id": "p-reading-room",
+      "title": "The Reading Room",
+      "genre": "literary",
+      "source": "original",
+      "text": "Ines has never liked reading rooms, and she is fairly sure the feeling is mutual.  Marchetti's brief for this one was short.  Get inside the county archive.  Find the box marked with last year's date.  Photograph whatever sits in the folder labeled Halloway.  No name to use, no story if anyone asks, because a reading room's whole reason for existing is that anybody can walk in and ask for a folder.  That is supposed to make this the easy exercise.  Ines has learned not to trust the word easy.\n\nThe archivist at the desk is younger than she expected.  He wears a lanyard that says TRAINEE, and a stack of request slips he clearly has not finished sorting.  He asks what she is researching, in the bored voice of someone who asks it forty times a day.  Ines tells him the truth turned sideways: a school project on local transportation.  It is the kind of answer nobody has ever wanted to hear more about.  He slides a slip across the counter, telling her the boxes take fifteen minutes to bring up from the stacks.\n\nFifteen minutes is longer than Ines wants to sit doing nothing.  So she does the thing Marchetti actually drilled into her, which is to use dead time instead of resenting it.  She reads the request slips still sitting in the tray, upside down, the way you read a newspaper on someone else's table.  Two names asked for boxes from the same shelf range as hers this month.  One of those names is not on any list she was given.  That means either the exercise has grown a second player nobody told her about, or something in this building is more interesting than a school project.\n\nWhen the archivist returns, he is not carrying one box.  He is carrying two, and he sets the second one down without being asked, saying it came from the same shelf and he thought she might want it too.  Ines has not asked for a second box.  She has not so much as looked at its label.  For one long second she runs the math Marchetti trained into her: a stranger offering more than you asked for is either kindness or a test, and the only way to tell them apart is to notice which one makes you careless.\n\nShe thanks him, takes both boxes to the table nearest the window, and opens the one she actually came for first.  The Halloway folder is exactly where the request slip said it would be.  Three photographs and a page of notes photograph cleanly in under a minute.  The second box she opens last, and slowly, turning each folder over before she reads it, the way you check a step before you put your weight on it.\n\nWalking out, she signs the log with a real signature this time.  A reading room keeps that record whether you lie or not, and a lie only helps you if somebody was watching for one.  Nobody was.  The unclaimed box sits back on its cart, unopened past the first folder.  Ines decides on the stairs that the second name on that shelf list is tomorrow's problem, not today's."
+    },
+    {
+      "id": "p-on-the-line",
+      "title": "On the Line",
+      "genre": "literary",
+      "source": "original",
+      "text": "My job for the Reading Room exercise is to sit in the archive parking lot with a phone, a notepad, and nothing to do until Ines calls.  Marchetti assigned it to me the day after my own exercise.  He said that was deliberate, because watching teaches you things that going in never does.  I did not believe him until about four minutes ago.\n\nInes went in at two-oh-one.  The plan says she checks in by two-twenty.  If I have heard nothing by two-twenty-five, I call Marchetti, and the exercise ends whether she likes it or not.  My phone sits face up on the dashboard so I do not have to pick it up to see the screen.  That is its own kind of admission about how this feels from out here.\n\nAt two-nineteen a man in a grey jacket walks in through the archive doors.  At two-twenty-one the same man walks back out, alone, checking his phone the way people do when they are actually checking their phone and not pretending to.  I write down the time anyway.  Marchetti's other rule is that you log what you saw, not what you decided it meant.  Deciding what a stranger in a jacket was doing is exactly the kind of decision that has burned people before me.\n\nTwo-twenty-five arrives with no text on the screen.  My thumb hovers over Marchetti's contact, and I do not press it.  Ines gave me the reason once herself, after her own turn watching a door.  A plan has a margin built into it on purpose, and using the margin is not the same as the plan failing.  Two-twenty-five is late.  Two-twenty-five is not the same as gone.\n\nAt two-twenty-seven the phone buzzes once.  That is the signal for out and clear, no need to call back.  I let out a breath I did not notice I was holding, and write the real time down next to the time the plan expected, because Marchetti reads both numbers, not just the one that makes the exercise look tidy.\n\nInes tells me on the walk back that the second box slowed her down, the one she never asked for and almost trusted just because somebody handed it to her.  I tell her about the man in the grey jacket, and how sure I was for two whole seconds that I had found something.  Neither one of us actually found anything today, and what we found instead was the two seconds where we almost stopped checking.  Marchetti has told us often enough that those two seconds are the whole reason this job has a watcher at all."
+    },
+    {
+      "id": "p-petrel-brief",
+      "title": "Source A: The Petrel-4 Brief",
+      "genre": "informational",
+      "source": "original",
+      "text": "The text below is a product brief for the Petrel-4 tracking tag.  It was written and published by Corvid Systems, the company that designs, builds, and sells the Petrel-4.  The brief carries a document number but no date anywhere on the page.\n\nEvery team that has ever lost a signal in the field wants the same thing.  They want a tracker that simply keeps working.  The Petrel-4 is a sealed tag the size of a matchbook.  It holds a GPS fix and reports it over a low-power link for as long as its single charge lasts.  Earlier tags on the market drained fast because they searched constantly for a signal, even when none was there.  The Petrel-4 solves that by learning the pattern of when a fix is likely and searching only then.\n\nIn testing, a fully charged Petrel-4 held a working fix for thirty days straight.  It reported its position on schedule every single time.  Our engineers ran that test at our own facility, cycling the unit through a normal daily routine of movement and stillness for the entire month.  Not once during the full thirty days did the tag miss a scheduled report.  No other tag in its size class has matched that number under comparable conditions.\n\nWhat this means for your team is simple.  A Petrel-4 clipped to a pack at the start of a long deployment will still be reporting a month later.  There is no battery swap, and no need to plan around a shorter window.  Teams that have been carrying spare batteries or backup trackers can leave that extra weight behind.\n\nThe Petrel-4 is rated for water, dust, and a two-meter drop onto concrete.  It charges from any standard cable in under two hours and pairs with a phone app in seconds.  The housing comes in three colors, though the electronics inside are identical across all three.  Corvid Systems has been building rescue and tracking gear for nineteen years and stands behind every unit that leaves the factory.\n\nContact our sales office to arrange a live demonstration at your own site, and ask about volume pricing for departments ordering more than ten units.  The brief closes with one line of small print beneath the order form.  It states that the thirty-day figure was measured at a constant seventy degrees, and that battery performance in other conditions may vary."
+    },
+    {
+      "id": "p-cold-weather-log",
+      "title": "Source B: Cold-Weather Trial Log",
+      "genre": "informational",
+      "source": "original",
+      "text": "The text below is an entry from the equipment log kept by the training staff at the Halloway site.  It is dated the second of January and signed by two trainers, Osei and Marchetti.  The log is written for the staff themselves.  It is not published anywhere.\n\nFour Petrel-4 tags went out on the January cold-weather trip, to test whether they could replace the site's older trackers for winter work.  The trip ran across three days.  Outdoor temperature held between fifteen and twenty-five degrees for most of each day.\n\nAll four tags began the trip at full charge.  By the end of day one, every tag had lost more charge than the maker's numbers would predict for one normal day.  By the end of day two, two of the four tags had gone silent, about sixty hours into what the brief calls a thirty-day battery life.  The other two tags lasted into day three before they also went silent.  The longest one stopped just past sixty-eight hours.\n\nEach tag was brought in and warmed up before staff checked it again, and all four came back to life within minutes.  That tells the staff the cold did not damage the tags, though something about the cold itself was draining the charge much faster than a warm day would.\n\nThe staff have two guesses.  A cold battery cannot give its full stored charge, and that is true of batteries in general, not just this tag.  The tag may also have searched harder for a signal in a test site with more tree cover than the maker used.  Neither guess was tested this time, so both stay questions for the next trial rather than settled facts.\n\nThe staff say Petrel-4 tags should not be trusted alone on any winter trip.  That holds true until someone measures a real cold-weather number, instead of assuming the summer number still applies.  A tag rated for thirty days that only lasts three in the cold is not broken.  It is a tag whose one published number describes one set of conditions, and a Halloway winter is not that set.  This entry will be checked again after a planned trial in February, at a colder site."
+    },
+    {
+      "id": "p-three-climates",
+      "title": "Three Climates, Three Runtimes",
+      "genre": "informational",
+      "source": "original",
+      "text": "An equipment review board tested the same tracking tag in three different climates last winter.  It shared all three results together.  That turns out to matter more than any single number would on its own.\n\nThe first test ran in a mild coastal climate, with temperatures in the fifties throughout.  A tag there ran for twenty-six days on one charge.  That is close to the maker's own thirty-day number, and a range a buyer could plan around.  The second test ran in a desert climate, with daytime heat above ninety degrees.  That tag lasted only nineteen days, as repeated hot stretches seemed to wear the battery down faster than a mild day would.  The third test ran in a freezing mountain climate.  A tag there lasted just under three days before it went silent, a runtime the board called far below every other test.\n\nRead alone, each number looks like a verdict on the tag itself.  A buyer who reads only the top line could easily call the tag bad, or great, depending on which single test they saw.  Read together, the three results say something more exact.  The tag did not change between tests.  The climate did.\n\nCold is the clearest of the three factors.  A battery loses much of its charge in freezing air, no matter which device it powers.  That is true of the chemistry inside the battery, not of any one tag, though heat works differently and still costs runtime.  It wears the battery down a different way, over repeated hot stretches, rather than draining it all at once.  Mild weather costs the least of the three, which is why a maker's own test, run at a comfortable room temperature, tends to show the best number the device can reach.\n\nNone of this means a buyer should doubt every runtime number a maker shares.  It means a number describes one climate, not every climate, and a buyer who needs the cold to work has to ask for the cold number rather than accept the warmest one on offer.  The board's advice is the same one a careful buyer would reach alone.  Ask what temperature a number was measured at before you compare it to any other number.  Two numbers measured in two different climates are not really being compared at all."
     }
   ],
   "levels": [
@@ -93,7 +142,19 @@
         "l1-hot-overall-point",
         "l1-ms-what-a-follower-must-do",
         "l1-cloze-summary",
-        "l1-match-move-to-effect"
+        "l1-match-move-to-effect",
+        "l1-ebsr-why-two-people",
+        "l1-ebsr-container-choice",
+        "l1-ebsr-signal-not-daily-check",
+        "l1-ebsr-collectors-own-rule",
+        "l1-ms-what-makes-a-good-site",
+        "l1-hot-real-examples",
+        "l1-hot-the-point-not-a-step",
+        "l1-cloze-summary-two-halves",
+        "l1-mc-second-glance",
+        "l1-mc-why-remove-the-second-person",
+        "l1-mc-only-one-kind-of-person",
+        "l1-match-part-to-risk"
       ]
     },
     {
@@ -118,7 +179,19 @@
         "l2-hot-cost-not-cause",
         "l2-ms-signal-two-senses",
         "l2-cloze-academic-words",
-        "l2-order-article-parts"
+        "l2-order-article-parts",
+        "l2-ebsr-seam-meaning",
+        "l2-ebsr-build-then-explain",
+        "l2-ebsr-practical-meaning",
+        "l2-ebsr-closing-paragraph-job",
+        "l2-ms-why-reuse-breaks-it",
+        "l2-hot-what-a-pad-is",
+        "l2-hot-paragraph-openers",
+        "l2-cloze-unbreakable-condition",
+        "l2-mc-lock-with-no-shape",
+        "l2-mc-definition-before-rule",
+        "l2-mc-page-already-used",
+        "l2-order-the-articles-ideas"
       ]
     },
     {
@@ -144,7 +217,19 @@
         "l3-hot-left-off-the-sheet",
         "l3-ms-why-the-offer-works",
         "l3-cloze-narration-limits",
-        "l3-short-who-the-log-is-for"
+        "l3-short-who-the-log-is-for",
+        "l3-ebsr-the-second-box-test",
+        "l3-ebsr-what-the-slips-reveal",
+        "l3-ebsr-why-two-seconds",
+        "l3-ebsr-first-person-watcher",
+        "l3-ms-signs-ines-notices",
+        "l3-hot-ines-being-careful",
+        "l3-hot-saw-versus-decided",
+        "l3-cloze-caution-and-honesty",
+        "l3-mc-name-on-the-slips",
+        "l3-mc-saw-not-decided",
+        "l3-mc-two-viewpoints-compared",
+        "l3-short-second-box-handling"
       ]
     },
     {
@@ -169,7 +254,19 @@
         "l4-ebsr-why-the-log-stops-short",
         "l4-mc-which-source-for-halloway",
         "l4-hot-facts-about-the-tunnel",
-        "l4-cloze-weighing-two-sources"
+        "l4-cloze-weighing-two-sources",
+        "l4-ebsr-whose-conditions-matter",
+        "l4-ebsr-what-the-cold-log-explains",
+        "l4-ebsr-two-guesses-not-facts",
+        "l4-ebsr-thirty-vs-three",
+        "l4-ms-reasons-to-slow-down-on-petrel",
+        "l4-hot-claims-needing-a-check",
+        "l4-hot-measured-versus-guessed",
+        "l4-cloze-which-source-to-trust",
+        "l4-mc-which-source-for-winter",
+        "l4-mc-why-call-it-a-guess",
+        "l4-mc-what-makes-the-log-careful",
+        "l4-match-weakness-to-cost"
       ]
     },
     {
@@ -194,7 +291,19 @@
         "l5-order-how-the-case-is-built",
         "l5-ebsr-the-line-that-locates-the-fault",
         "l5-mc-the-line-that-covers-the-claim",
-        "l5-hot-measured-or-concluded"
+        "l5-hot-measured-or-concluded",
+        "l5-ebsr-which-climate-halloway-sits-with",
+        "l5-ebsr-what-the-three-runtimes-prove",
+        "l5-ebsr-advice-this-article-supports",
+        "l5-ebsr-the-line-that-explains-petrel",
+        "l5-ms-what-both-sources-would-agree-on",
+        "l5-hot-lesson-not-one-test",
+        "l5-hot-advice-not-a-report",
+        "l5-cloze-reading-all-three",
+        "l5-mc-one-test-mistake",
+        "l5-mc-best-summary-of-advice",
+        "l5-mc-mountain-test-and-the-log",
+        "l5-order-the-articles-case"
       ]
     },
     {
@@ -223,7 +332,19 @@
         "l6-ebsr-what-the-brief-is-for",
         "l6-short-who-the-entry-was-written-for",
         "l6-mc-the-chain-under-dead-air",
-        "l6-ms-three-moves-one-system"
+        "l6-ms-three-moves-one-system",
+        "l6-ebsr-two-seconds-that-mattered",
+        "l6-mc-what-the-archive-scene-is-about",
+        "l6-ebsr-pulse-loud-in-his-ears",
+        "l6-hot-precise-not-vague",
+        "l6-ebsr-two-infiltrations-compared",
+        "l6-mc-two-watchers-compared",
+        "l6-hot-scene-that-turns",
+        "l6-cloze-where-the-tension-turns",
+        "l6-ebsr-why-a-brief-sells",
+        "l6-short-log-purpose",
+        "l6-mc-two-briefs-compared",
+        "l6-ms-two-studies-compared"
       ]
     }
   ],
@@ -2470,6 +2591,2224 @@
         "5": "The rule counts what the moves produce, so it cannot replace them.  With no moves there are no sightings to count."
       },
       "explain": "The three moves and the counting rule are one system rather than four separate tips.  Every move puts a follower somewhere that staying hidden requires a decision, every decision risks a sighting, and the rule of three is what turns a pile of sightings into a verdict.  One sighting is nothing at all, which is precisely why one move would be."
+    },
+    {
+      "id": "l1-ebsr-why-two-people",
+      "type": "ebsr",
+      "passageId": "p-dead-drop",
+      "targets": [
+        "c1-inf-2-central-ideas"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 3,
+      "partA": {
+        "stem": "What problem does a dead drop solve?",
+        "choices": [
+          "It lets two people exchange something without ever being seen together at one place and time.",
+          "It lets a courier avoid ever having to choose a hiding spot for the exchange.",
+          "It lets the person loading the drop skip the job of watching for followers.",
+          "It lets a signal be sent instead of holding a face-to-face conversation."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "The signal says one thing only, that the drop is ready, and it says so from a distance, to someone walking past on the way to somewhere else.",
+          "The last rule belongs to the collector, not to whoever loaded the drop.",
+          "Nobody has to be caught in the same place at the same time as anybody else, and a connection nobody observed can never later be proven.",
+          "The container is the first decision."
+        ],
+        "key": {
+          "0": 2,
+          "1": 3,
+          "2": 1,
+          "3": 0
+        }
+      },
+      "distractorRationale": {
+        "1": "The passage never says a courier can skip choosing a hiding spot; picking the right container is exactly the first decision it describes. You are recalling a real detail attached to the wrong question.",
+        "2": "The last rule is aimed at the collector, and it says the collector must still check for a follower before the pickup. Nobody in this method is exempted from watching.",
+        "3": "A signal is one small piece of the method, the part that says a drop is ready. Removing the moment two people would be seen together is the actual point; the signal is just how the two sides arrange that."
+      },
+      "explain": "A dead drop solves the problem a meeting creates, which is that two people standing together can be tied together. Taking the second person out of that moment, not the container or the signal, is what the whole method is built around."
+    },
+    {
+      "id": "l1-ebsr-container-choice",
+      "type": "ebsr",
+      "passageId": "p-dead-drop",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "partA": {
+        "stem": "Why is a dead drop container built to look ordinary, like a bolt or a loose brick?",
+        "choices": [
+          "So a stranger who notices it, on purpose or by accident, sees nothing worth a second look.",
+          "So it can be checked by walking past it every day without drawing attention.",
+          "So it can hold a message written in a code no stranger could read.",
+          "So the collector never has to travel to a public place to retrieve it."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "A good site is public enough that standing there for thirty seconds needs no excuse.",
+          "Each one means nothing to anyone who was not told to look.",
+          "A drop that draws a second glance has already failed, whether or not anyone opens it.",
+          "The collector cannot walk past the site every day just to check, because repetition is its own kind of pattern."
+        ],
+        "key": {
+          "0": 2,
+          "1": 3,
+          "2": 1,
+          "3": 0
+        }
+      },
+      "distractorRationale": {
+        "1": "Walking past the same spot every day is exactly the pattern the passage says a collector must avoid. An ordinary-looking container does not make daily visits safe.",
+        "2": "This passage never mentions codes or ciphers. Looking ordinary is about fooling a passerby's eyes, not about hiding writing from a reader.",
+        "3": "The passage says a good site is public enough to need no excuse for standing there. A hidden, non-public site is the opposite of what it recommends."
+      },
+      "explain": "A container is disguised so anyone who happens to notice it has no reason to look twice. That disguise has nothing to do with how often the site gets checked, what the container holds, or whether the site itself stays public."
+    },
+    {
+      "id": "l1-ebsr-signal-not-daily-check",
+      "type": "ebsr",
+      "passageId": "p-dead-drop",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "partA": {
+        "stem": "Why do the two sides use a signal placed somewhere else, instead of just checking the drop site itself?",
+        "choices": [
+          "Because checking the same site over and over is its own kind of pattern that can be noticed.",
+          "Because the signal is faster to read than opening the container.",
+          "Because a signal can carry more information than a loaded container can.",
+          "Because the collector is not allowed to visit the drop site at all."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "So the collector treats the pickup like a meeting that must be checked first: a slow route, a stop that shows what is behind, and a walk away with nothing retrieved if anything looks wrong.",
+          "The collector cannot walk past the site every day just to check, because repetition is its own kind of pattern.",
+          "The last rule belongs to the collector, not to whoever loaded the drop.",
+          "Instead the two sides agree on a signal placed somewhere else: a chalk mark on a lamppost, a strip of tape on a stop sign, or a plant moved from one side of a window to the other."
+        ],
+        "key": {
+          "0": 1,
+          "1": 3,
+          "2": 0,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "That sentence lists what a signal can look like, not a claim about reading speed; the passage never compares how fast a signal is to read against opening a container.",
+        "2": "The passage says the signal \"says one thing only,\" which is the opposite of carrying more information. A loaded container is never read through the signal at all.",
+        "3": "That sentence says the opposite of the answer: the last rule requires the collector to still visit, carefully, rather than forbidding the visit entirely."
+      },
+      "explain": "A signal exists because checking the drop site itself, over and over, would create a pattern a watcher could notice. Moving that repeated checking to a separate, everyday-looking spot is the entire reason the two-part system exists."
+    },
+    {
+      "id": "l1-ebsr-collectors-own-rule",
+      "type": "ebsr",
+      "passageId": "p-dead-drop",
+      "targets": [
+        "c1-inf-2-central-ideas"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 3,
+      "partA": {
+        "stem": "Why does the passage insist that the collector, not just the person who loaded the drop, must still take a slow, checked route to the pickup?",
+        "choices": [
+          "Because walking straight from the signal to the drop site would let a follower watch one person do both things back to back.",
+          "Because the collector is more likely to be followed than the person who loaded the drop.",
+          "Because the container might have been damaged since it was loaded.",
+          "Because the signal itself might be a fake left by an investigator."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "A drop that draws a second glance has already failed, whether or not anyone opens it.",
+          "Walking straight from the signal to the drop site creates the very problem the method exists to avoid, because now a follower only has to watch one person do both things back to back.",
+          "The container is the first decision.",
+          "A good site is public enough that standing there for thirty seconds needs no excuse."
+        ],
+        "key": {
+          "0": 1,
+          "1": 3,
+          "2": 0,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "Nothing in the passage says one role is watched more than the other; the risk it names is behavior, not identity, one person doing two connected things in a row.",
+        "2": "The passage never raises damage to the container as a reason for caution; that is a worry this article does not mention at all.",
+        "3": "The passage never suggests a signal could be faked by an outsider. Its concern is a follower watching a real signal and a real pickup happen together."
+      },
+      "explain": "The whole method exists to keep two actions from being watched as one. If the collector skipped their own caution and walked straight to the drop the instant the signal appeared, a follower would only need to watch a single person to prove the whole connection."
+    },
+    {
+      "id": "l1-ms-what-makes-a-good-site",
+      "type": "ms",
+      "passageId": "p-dead-drop",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 3,
+      "stem": "The article gives real qualities of a good dead-drop location. Choose the three the article actually states.",
+      "choices": [
+        "Public enough that standing there briefly needs no excuse",
+        "Dull enough that nobody remembers who stood there",
+        "A place only one kind of person would have a reason to visit",
+        "Close enough to the meeting that the walk takes only minutes",
+        "Guarded enough that a stranger could never reach it",
+        "Marked clearly enough that the collector cannot miss it"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "The article never talks about distance to a meeting; a dead drop replaces a meeting rather than sitting near one.",
+        "4": "A guarded location is the opposite of what the article recommends. A dead drop needs to look like nowhere in particular, not somewhere protected.",
+        "5": "A drop that is easy to spot is a drop that has already failed. The whole design depends on nobody but the two sides noticing it at all."
+      },
+      "explain": "A good site is defined by three qualities working together: it is ordinary enough to need no excuse, forgettable enough that nobody remembers standing there, and general enough that no single kind of visitor stands out. Distance, guards, and visibility are never part of the article's own definition."
+    },
+    {
+      "id": "l2-ebsr-seam-meaning",
+      "type": "ebsr",
+      "passageId": "p-one-time-pad",
+      "targets": [
+        "c1-inf-3-word-meanings"
+      ],
+      "coachTopic": "vocab-context",
+      "dok": 2,
+      "partA": {
+        "stem": "The article says a repeated scramble \"leaves a seam where the repeat shows.\" What does \"seam\" mean here?",
+        "choices": [
+          "A place where a pattern breaks through and becomes visible to someone looking for it.",
+          "A physical stitch sewn into the paper the pad is printed on.",
+          "A second, backup copy of the pad kept in case the first is lost.",
+          "The exact moment a message is sent from the sender to the receiver."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "A pad is a long string of letters or numbers, chosen at random.",
+          "A codebreaker goes looking for that seam first.",
+          "Both the sender and the receiver hold an identical copy before anything is sent.",
+          "To encode a message, the sender combines it with the pad one character at a time."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 2,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "The article never mentions paper or stitching. A \"seam\" here is used the way a crack in a wall is used, a figure of speech for a weak spot, not an actual sewn line.",
+        "2": "A backup copy is never discussed in this passage. The \"seam\" is a flaw in the scrambling itself, not a spare copy of anything.",
+        "3": "Sending a message is an event in time, while a seam is a place where a pattern shows through. The two ideas belong to different parts of the article."
+      },
+      "explain": "A codebreaker \"goes looking for that seam first,\" which only makes sense if a seam is something that can be found and examined: a spot where a repeated pattern becomes visible, not a physical object or a moment in time."
+    },
+    {
+      "id": "l2-ebsr-build-then-explain",
+      "type": "ebsr",
+      "passageId": "p-one-time-pad",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "partA": {
+        "stem": "The article explains the one-use rule in paragraph three before explaining, in paragraph four, how real operators broke it. Why build the article in that order?",
+        "choices": [
+          "So a reader understands exactly what the rule protects before seeing how tempting it is to break.",
+          "Because the article is arranged by date, and the rule was invented before any operator broke it.",
+          "Because paragraph four is less important, so it is placed after the more important paragraph three.",
+          "So the reader can skip paragraph three if they already know what a cipher is."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "A courier gets delayed, a message queue backs up, or fresh pages run short.",
+          "Reuse is what breaks a one-time pad, and it breaks completely rather than a little.",
+          "None of this makes the method practical at real scale.",
+          "It was in the fact that no comparison was ever possible."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 3,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "The article gives no dates anywhere and never claims to be arranged in the order things happened; it is arranged by idea, not by calendar.",
+        "2": "Placement in an article is not a ranking of importance, and paragraph four is not treated as a footnote; it is where the article's real-world warning lives.",
+        "3": "The paragraphs build on each other rather than standing alone; skipping the rule would leave a reader with no way to understand what paragraph four says was broken."
+      },
+      "explain": "Paragraph three states plainly that reuse breaks the method completely. Only after a reader understands what is at stake does paragraph four's account of real operators reaching for a used page land as a genuine warning rather than a random detail."
+    },
+    {
+      "id": "l2-ebsr-practical-meaning",
+      "type": "ebsr",
+      "passageId": "p-one-time-pad",
+      "targets": [
+        "c1-inf-3-word-meanings"
+      ],
+      "coachTopic": "vocab-context",
+      "dok": 3,
+      "partA": {
+        "stem": "The last paragraph says the method is not \"practical at real scale.\" What does that phrase mean as the article uses it?",
+        "choices": [
+          "The method works perfectly but is too much effort to use for ordinary, everyday traffic.",
+          "The method does not actually work once a message grows past a certain length.",
+          "The method was only ever tested on a small number of messages.",
+          "The method requires equipment too expensive for most operations to buy."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Printing, distributing, and guarding enough pad for ordinary daily traffic takes more effort than most operations can sustain.",
+          "A cipher that cannot be broken is not the same thing as a cipher anyone can afford to use.",
+          "Every letter of every message needs its own fresh page of true randomness, and both sides need an identical, unguessable copy of that page before a single word can be sent.",
+          "That is why the method survives today mostly for messages that are short, rare, and important enough to be worth the cost."
+        ],
+        "key": {
+          "0": 3,
+          "1": 0,
+          "2": 1,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "The article never says the cipher stops working at some length; its strength is described as complete, not limited by size.",
+        "2": "Testing and sample size are never mentioned. The article's worry is the ongoing cost of running the method every day, not how much it was tried before.",
+        "3": "Cost here means effort and logistics, printing, distributing, and guarding enough pad, not money for equipment, which the article never raises."
+      },
+      "explain": "The article never says the cipher fails; it says keeping it running is too much work for daily use. \"Practical at real scale\" is about whether an operation can sustain the effort, not about whether the method itself succeeds."
+    },
+    {
+      "id": "l2-ebsr-closing-paragraph-job",
+      "type": "ebsr",
+      "passageId": "p-one-time-pad",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "partA": {
+        "stem": "What job does the article's last paragraph do that the paragraphs before it do not?",
+        "choices": [
+          "It shifts from explaining why the cipher is strong to explaining why it is hard to actually use.",
+          "It repeats the definition of a one-time pad for a reader who skipped ahead.",
+          "It introduces the one-time pad for the first time.",
+          "It lists every historical operation where the method was ever broken."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "The one-time pad answers that question about as fully as a cipher can.",
+          "Traffic from more than one real operation was eventually broken this way, years after it was sent, when an analyst noticed two messages that scrambled just a little too much alike.",
+          "None of this makes the method practical at real scale.",
+          "A pad is a long string of letters or numbers, chosen at random."
+        ],
+        "key": {
+          "0": 2,
+          "1": 3,
+          "2": 0,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "The last paragraph does not restate the definition; it opens a new question about cost that the earlier paragraphs never raise.",
+        "2": "The pad is introduced in paragraph two, long before the last paragraph, so this cannot be the last paragraph's job.",
+        "3": "The article names one general pattern of failure, not a list of specific historical operations, and that pattern already appeared in paragraph four."
+      },
+      "explain": "Every earlier paragraph argues the cipher is unbeatable when used correctly. The last paragraph turns to a different question entirely, whether an operation can actually keep up the discipline the method demands, which is why it reads as a turn rather than a repeat."
+    },
+    {
+      "id": "l2-ms-why-reuse-breaks-it",
+      "type": "ms",
+      "passageId": "p-one-time-pad",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "stem": "The article explains what happens when a page of the pad is used twice. Choose the three true statements.",
+      "choices": [
+        "Two messages scrambled with the same pad stretch can be compared against each other",
+        "Comparing two such messages cancels out the randomness that protected them",
+        "A trained reader can pick the resulting pattern apart by hand",
+        "Reuse makes the cipher slightly weaker but still unbreakable",
+        "Reuse was mostly a danger for very short messages",
+        "A computer is required before reuse can ever be exploited"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "The article says reuse breaks the method completely, not a little; \"slightly weaker but unbreakable\" is the opposite of what it claims.",
+        "4": "Message length is never connected to the danger of reuse anywhere in the article; the danger comes from repeating the pad, not from how short a message is.",
+        "5": "The article's own example describes an analyst noticing the pattern by comparing messages, with no mention of a computer at all."
+      },
+      "explain": "Reuse is dangerous specifically because it lets two scrambled messages be lined up against each other, and that comparison is what cancels out the randomness and exposes a pattern a person can work through by hand, a complete failure rather than a partial one."
+    },
+    {
+      "id": "l3-ebsr-the-second-box-test",
+      "type": "ebsr",
+      "passageId": "p-reading-room",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "partA": {
+        "stem": "What does Ines actually decide about the second box the archivist brings her without being asked?",
+        "choices": [
+          "She decides that offering more than was asked for could be kindness or a test, so she should be careful rather than careless.",
+          "She decides the archivist must be trying to help the exercise a second player is secretly running.",
+          "She decides to refuse the second box outright and hand it back to the archivist.",
+          "She decides the second box must be empty, since nobody had requested it."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "One of those names is not on any list she was given.",
+          "For one long second she runs the math Marchetti trained into her: a stranger offering more than you asked for is either kindness or a test, and the only way to tell them apart is to notice which one makes you careless.",
+          "The unclaimed box sits back on its cart, unopened past the first folder.",
+          "The Halloway folder is exactly where the request slip said it would be."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 3,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "That detail is about the request slips she reads earlier, a separate observation from her reasoning about the box itself.",
+        "2": "Refusing the box outright is not what the passage shows; she takes both boxes and opens the second one last, carefully, rather than turning it away.",
+        "3": "The passage never says or implies the box is empty; it says she opens it slowly and last, which only makes sense if there is something in it to be cautious about."
+      },
+      "explain": "Ines does not panic or refuse the unexpected box. She applies a rule Marchetti trained into her: unearned generosity is either kindness or a trap, and the way to tell them apart is to watch for whichever one makes you careless, then acts on that rule by opening the second box last and slowly."
+    },
+    {
+      "id": "l3-ebsr-what-the-slips-reveal",
+      "type": "ebsr",
+      "passageId": "p-reading-room",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 2,
+      "partA": {
+        "stem": "What does Ines learn from reading the request slips left in the tray while she waits?",
+        "choices": [
+          "That someone not on her own list has requested boxes from the same shelf range this month.",
+          "That the archivist has been assigned to watch her specifically.",
+          "That the Halloway folder has already been checked out by somebody else.",
+          "That the archive closes earlier than the fifteen minutes she was told to wait."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "He asks what she is researching, in the bored voice of someone who asks it forty times a day.",
+          "One of those names is not on any list she was given.",
+          "He slides a slip across the counter, telling her the boxes take fifteen minutes to bring up from the stacks.",
+          "The Halloway folder is exactly where the request slip said it would be."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 3,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "That line describes the archivist's manner toward every visitor, not information Ines gathers about the case from the slips.",
+        "2": "That sentence says the folder turns up exactly where it was expected, which is the opposite of already checked out by somebody else.",
+        "3": "The fifteen minutes is stated as the normal wait time, not a closing time, and it is what gives her the chance to read the slips in the first place."
+      },
+      "explain": "Ines uses her waiting time to read the request slips upside down, and what she finds is a name on the same shelf range that was never on the list Marchetti gave her, a detail that raises a question the passage leaves open rather than answers."
+    },
+    {
+      "id": "l3-ebsr-why-two-seconds",
+      "type": "ebsr",
+      "passageId": "p-on-the-line",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "partA": {
+        "stem": "Why does the narrator hold off calling Marchetti at two-twenty-five, even though Ines is already late checking in?",
+        "choices": [
+          "Because the plan's margin exists on purpose, and being a little late is not the same as the plan failing.",
+          "Because the narrator cannot reach Marchetti's contact from inside the parked car.",
+          "Because Ines had already sent a text that the narrator simply had not noticed yet.",
+          "Because the rules only allow a call to be made after thirty minutes, not twenty-five."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "My phone sits face up on the dashboard so I do not have to pick it up to see the screen.",
+          "At two-twenty-seven the phone buzzes once.",
+          "A plan has a margin built into it on purpose, and using the margin is not the same as the plan failing.",
+          "I write down the time anyway."
+        ],
+        "key": {
+          "0": 3,
+          "1": 0,
+          "2": 2,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "The phone sitting face up is about how closely the narrator is watching the screen, not about whether a call is physically possible to make.",
+        "2": "The passage never suggests a missed text; the narrator has heard nothing at all by two-twenty-five, and that silence is exactly the problem being weighed.",
+        "3": "The plan's deadline is stated as two-twenty-five, not thirty minutes, and the two-minute gap the narrator waits inside is the margin, not a different rule."
+      },
+      "explain": "The narrator reasons from a rule Ines herself explained earlier: a plan's built-in margin exists so a few late minutes do not automatically mean disaster. Two-twenty-five is late by the plan's own clock, but the narrator treats late and gone as two different facts rather than collapsing them into one."
+    },
+    {
+      "id": "l3-ebsr-first-person-watcher",
+      "type": "ebsr",
+      "passageId": "p-on-the-line",
+      "targets": [
+        "c1-lit-7-language-use"
+      ],
+      "coachTopic": "viewpoint-narrator",
+      "dok": 3,
+      "partA": {
+        "stem": "This scene is told in first person, from the watcher's own point of view. What does that choice let the reader experience that a third-person account of the same events would not?",
+        "choices": [
+          "The narrator's own uncertainty in the moment, including a decision not made, rather than only the outcome of the wait.",
+          "A clear view into what is happening inside the archive at the same time.",
+          "A complete list of everyone who enters and exits the building during the wait.",
+          "Proof of exactly what Ines is thinking while she is inside."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "At two-twenty-one the same man walks back out, alone, checking his phone the way people do when they are actually checking their phone and not pretending to.",
+          "My thumb hovers over Marchetti's contact, and I do not press it.",
+          "Ines gave me the reason once herself, after her own turn watching a door.",
+          "At two-nineteen a man in a grey jacket walks in through the archive doors."
+        ],
+        "key": {
+          "0": 1,
+          "1": 3,
+          "2": 0,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "The narrator sees the doors from outside, but nothing here shows what is happening inside the archive; the viewpoint stays limited to the parking lot throughout.",
+        "2": "One man entering and leaving is a single observation, not a complete record of everyone who came and went; the passage never claims to track every visitor.",
+        "3": "This line explains a rule Ines shared at some earlier point, not a window into what she is thinking during this specific wait."
+      },
+      "explain": "A third-person, outside account could report only that the narrator waited and then received a signal. Writing it in first person instead lets the reader sit inside the narrator's own held breath and the thumb that hovers but does not press, an uncertainty a purely external account would have to leave out."
+    },
+    {
+      "id": "l3-ms-signs-ines-notices",
+      "type": "ms",
+      "passageId": "p-reading-room",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 3,
+      "stem": "The passage names specific things Ines actually notices during the exercise. Choose the three the passage actually states.",
+      "choices": [
+        "A lanyard on the archivist that says TRAINEE",
+        "A second name on the shelf request slips that was not on her own list",
+        "A second box the archivist brings her without being asked",
+        "A security camera pointed at the reading room table",
+        "A note left inside the Halloway folder addressed to her",
+        "An exit that the archivist tells her is reserved for staff only"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "No camera is ever mentioned in the passage; nothing in the scene describes how the room is watched.",
+        "4": "The Halloway folder contains photographs and a page of notes, not any note addressed to Ines personally.",
+        "5": "The passage never describes a staff-only exit or any instruction about how she is meant to leave."
+      },
+      "explain": "Three concrete details anchor this scene: the trainee lanyard, the unfamiliar name on the shelf slips, and the unrequested second box. Every other option invents a detail, a camera, a personal note, a restricted exit, that this passage never actually gives."
+    },
+    {
+      "id": "l4-ebsr-whose-conditions-matter",
+      "type": "ebsr",
+      "passageId": "p-petrel-brief",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "partA": {
+        "stem": "The brief's small print says the thirty-day figure was measured at a constant seventy degrees. Why should that detail make a reader slow down before trusting the number?",
+        "choices": [
+          "Because it means the headline number describes one comfortable condition, not every condition a buyer might use the tag in.",
+          "Because seventy degrees is an unusually high temperature for any lab to use.",
+          "Because it proves the thirty-day figure was invented rather than measured at all.",
+          "Because it means the tag cannot function at any other temperature."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the brief best supports the answer you just gave?",
+        "choices": [
+          "It states that the thirty-day figure was measured at a constant seventy degrees, and that battery performance in other conditions may vary.",
+          "The Petrel-4 is rated for water, dust, and a two-meter drop onto concrete.",
+          "Our engineers ran that test at our own facility, cycling the unit through a normal daily routine of movement and stillness for the entire month.",
+          "Contact our sales office to arrange a live demonstration at your own site, and ask about volume pricing for departments ordering more than ten units."
+        ],
+        "key": {
+          "0": 0,
+          "1": 3,
+          "2": 1,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "Seventy degrees is a comfortable, ordinary room temperature, not an unusually high one; the brief itself calls it constant rather than extreme.",
+        "2": "The brief does not say the number was invented; it says the number was measured under one specific condition, which is a different and much narrower claim.",
+        "3": "\"Performance may vary\" concedes the tag still works elsewhere, just not necessarily for as long; it does not claim the tag stops functioning outside seventy degrees."
+      },
+      "explain": "A number that holds true at one comfortable temperature is not automatically true everywhere else. The brief's own small print admits performance may vary, which is exactly the kind of detail a careful reader has to notice before assuming the headline claim applies to their own conditions."
+    },
+    {
+      "id": "l4-ebsr-what-the-cold-log-explains",
+      "type": "ebsr",
+      "passageId": "p-cold-weather-log",
+      "targets": [
+        "c1-inf-4-reasoning"
+      ],
+      "coachTopic": "inference-argument",
+      "dok": 3,
+      "partA": {
+        "stem": "According to the training log, what does bringing the dead tags back indoors and warming them up show?",
+        "choices": [
+          "That the cold did not damage the tags, since they all came back to life once warm.",
+          "That the tags were defective from the manufacturer before the exercise even began.",
+          "That the tree cover at the test site had no effect on the results.",
+          "That the maker's thirty-day figure was measured indoors rather than outdoors."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the log best supports the answer you just gave?",
+        "choices": [
+          "The staff have two guesses.",
+          "Each tag was brought in and warmed up before staff checked it again, and all four came back to life within minutes.",
+          "The tag may also have searched harder for a signal in a test site with more tree cover than the maker used.",
+          "This entry will be checked again after a planned trial in February, at a colder site."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 3,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "The staff having two guesses is about what caused the short battery life, a separate point from what the recovery test itself proved.",
+        "2": "Tree cover is offered as one of the staff's two guesses about the cause, not something the recovery test ruled in or out.",
+        "3": "The log never says where the maker's own test was run; it only reports where the Halloway trial took place."
+      },
+      "explain": "Warming the tags and watching all four come back within minutes tells the staff the cold had not broken anything permanently. That single result rules out damage as the explanation and points toward something about cold temperature itself draining the charge."
+    },
+    {
+      "id": "l4-ebsr-two-guesses-not-facts",
+      "type": "ebsr",
+      "passageId": "p-cold-weather-log",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "partA": {
+        "stem": "How does the training log itself signal that its explanation for the short battery life is not yet proven?",
+        "choices": [
+          "It calls its two explanations guesses and says neither was tested directly this trial.",
+          "It says the explanation was copied directly from the maker's own brief.",
+          "It says the instructors disagreed with each other about the cause.",
+          "It says the tags will never be tested again after this log entry."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the log best supports the answer you just gave?",
+        "choices": [
+          "Neither guess was tested this time, so both stay questions for the next trial rather than settled facts.",
+          "It is dated the second of January and signed by two trainers, Osei and Marchetti.",
+          "Four Petrel-4 tags went out on the January cold-weather trip, to test whether they could replace the site's older trackers for winter work.",
+          "This entry will be checked again after a planned trial in February, at a colder site."
+        ],
+        "key": {
+          "0": 0,
+          "1": 2,
+          "2": 3,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "Two names signing an entry shows who is responsible for it, not whether the entry itself claims certainty about its cause.",
+        "2": "The opening line about testing a possible replacement explains the trip's purpose, not how confident the staff are in their explanation.",
+        "3": "A planned February trial is the opposite of never testing again; the log explicitly leaves the question open for a future check."
+      },
+      "explain": "A source that calls its own explanation a guess and names it as untested is being honest about the limits of what it has shown. That single admission is what separates a careful field log from a source that overstates what one trial can actually prove."
+    },
+    {
+      "id": "l4-ebsr-thirty-vs-three",
+      "type": "ebsr",
+      "passageId": "p-cold-weather-log",
+      "targets": [
+        "c1-inf-4-reasoning"
+      ],
+      "coachTopic": "inference-argument",
+      "dok": 3,
+      "partA": {
+        "stem": "Why does the log say a tag rated for thirty days that only lasts three in the cold is \"not a faulty tag\"?",
+        "choices": [
+          "Because the published number describes one set of conditions, and a Halloway winter is a different set entirely.",
+          "Because three days is actually longer than the log expected the tag to last.",
+          "Because the tag was never designed to be used outdoors at all.",
+          "Because a faulty tag would not have come back to life once warmed."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the log best supports the answer you just gave?",
+        "choices": [
+          "That holds true until someone measures a real cold-weather number, instead of assuming the summer number still applies.",
+          "It is a tag whose one published number describes one set of conditions, and a Halloway winter is not that set.",
+          "The trip ran across three days.",
+          "Each tag was brought in and warmed up before staff checked it again, and all four came back to life within minutes."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 3,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "The log treats three days as a serious shortfall worth investigating, not as an outcome it expected or welcomed.",
+        "2": "Nothing in the log or the brief says the tag is indoor-only; the whole exercise is an outdoor cold-weather trial.",
+        "3": "The recovery detail supports a different point, that the cold did not damage the tags, which is related but answers a different question than whether the tag is faulty."
+      },
+      "explain": "A published number is a description of the conditions it was measured under, not a promise that holds everywhere. Calling the tag not faulty separates a real defect from a number that simply describes a different, warmer set of conditions than the one it was carried into."
+    },
+    {
+      "id": "l4-ms-reasons-to-slow-down-on-petrel",
+      "type": "ms",
+      "passageId": "p-petrel-brief",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "stem": "The brief gives a reader several real reasons to be cautious about its thirty-day claim. Choose the three the brief actually supports.",
+      "choices": [
+        "The engineers who ran the test work for the company that sells the tag",
+        "The brief carries no date, so a reader cannot tell how current the claim is",
+        "The small print admits performance may vary outside the tested condition",
+        "The brief admits the thirty-day figure was never actually reached in testing",
+        "The housing colors described in the brief do not match the photograph",
+        "The brief refuses to say how the battery is charged"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "The brief says the tag held a working fix for the full thirty days every time; it never admits the figure was missed.",
+        "4": "The brief mentions housing colors but describes no photograph at all, so there is nothing for a color to mismatch.",
+        "5": "The brief states plainly that the tag charges from any standard cable in under two hours; charging is not withheld information."
+      },
+      "explain": "A careful reader watches for exactly these three signals: who ran the test, whether the claim can be dated and checked against anything else, and whether the source itself admits a limit. The brief supplies all three, which is why its headline number deserves a second look rather than outright trust."
+    },
+    {
+      "id": "l5-ebsr-which-climate-halloway-sits-with",
+      "type": "ebsr",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "partA": {
+        "stem": "The Halloway training staff measured a Petrel-4 losing its signal after about sixty hours in freezing temperatures. Which of the three climates in this article does that result sit closest to?",
+        "choices": [
+          "The freezing mountain climate, where a tag also lasted only a few days before going silent.",
+          "The mild coastal climate, because both tests used the same brand of tag.",
+          "The desert climate, because both tests involved extreme weather.",
+          "None of them, since this article never mentions cold-weather testing at all."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the article best supports the answer you just gave?",
+        "choices": [
+          "The first test ran in a mild coastal climate, with temperatures in the fifties throughout.",
+          "A tag there lasted just under three days before it went silent, a runtime the board called far below every other test.",
+          "The second test ran in a desert climate, with daytime heat above ninety degrees.",
+          "Cold is the clearest of the three factors."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 3,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "Using the same brand of tag is not the reason two results belong together; the article groups results by matching conditions, not by matching product.",
+        "2": "Extreme heat and extreme cold are named as two separate, differently acting factors; sharing the word \"extreme\" does not make them the same condition.",
+        "3": "The article is precisely about cold-weather-style testing; it tests three climates, one of them freezing, so this option ignores content the passage clearly contains."
+      },
+      "explain": "Two results belong together when their conditions match, not when their numbers happen to be close by coincidence. Freezing temperature is the shared condition between the Halloway trial and the article's own mountain-climate test, which is why the two short runtimes are the same finding rather than two unrelated ones."
+    },
+    {
+      "id": "l5-ebsr-what-the-three-runtimes-prove",
+      "type": "ebsr",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 4,
+      "partA": {
+        "stem": "Read together rather than one at a time, what do the article's three test results actually prove about the tag?",
+        "choices": [
+          "That the tag itself did not change between tests; the climate it was tested in did.",
+          "That the tag is unreliable and should not be trusted in any climate.",
+          "That the desert test was performed incorrectly, since heat should not affect a battery.",
+          "That only the coastal result should be trusted, since it is closest to the maker's claim."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the article best supports the answer you just gave?",
+        "choices": [
+          "Read together, the three results say something more exact.",
+          "A buyer who reads only the top line could easily call the tag bad, or great, depending on which single test they saw.",
+          "The tag did not change between tests.  The climate did.",
+          "That is close to the maker's own thirty-day number, and a range a buyer could plan around."
+        ],
+        "key": {
+          "0": 2,
+          "1": 1,
+          "2": 0,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "The article argues against exactly this reading; calling the tag simply unreliable is the mistake a reader makes by trusting only one test in isolation.",
+        "2": "The article never questions whether the desert test was performed correctly; it treats heat as a real, expected factor in battery performance, not an error.",
+        "3": "Trusting only the closest-to-claim result is the same mistake in the opposite direction, cherry-picking one number instead of reading all three together."
+      },
+      "explain": "A single test result can look like a verdict on the device. Placing all three side by side changes the conclusion entirely: the one thing that stayed constant was the tag, and the one thing that changed each time was the climate around it."
+    },
+    {
+      "id": "l5-ebsr-advice-this-article-supports",
+      "type": "ebsr",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 3,
+      "partA": {
+        "stem": "Which piece of advice does this article's own evidence actually support?",
+        "choices": [
+          "Ask what temperature a runtime figure was measured at before comparing it to any other figure.",
+          "Always trust the highest runtime figure a maker publishes.",
+          "Avoid using any tracking tag in a climate other than a mild one.",
+          "Compare tags only by price, since climate affects every tag equally."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the article best supports the answer you just gave?",
+        "choices": [
+          "Two numbers measured in two different climates are not really being compared at all.",
+          "Mild weather costs the least of the three, which is why a maker's own test, run at a comfortable room temperature, tends to show the best number the device can reach.",
+          "That tag lasted only nineteen days, as repeated hot stretches seemed to wear the battery down faster than a mild day would.",
+          "A tag there lasted just under three days before it went silent, a runtime the board called far below every other test."
+        ],
+        "key": {
+          "0": 0,
+          "1": 2,
+          "2": 1,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "The article warns that a maker's own test tends to show the best possible number; trusting the highest figure by default is the habit it argues against.",
+        "2": "The article never tells a buyer to avoid non-mild climates altogether; it says to ask for the right number, not to avoid using the tag.",
+        "3": "Price never appears anywhere in the article; the whole argument concerns how climate, not price, affects a runtime figure."
+      },
+      "explain": "The article's central argument is that a runtime number only means something once its conditions are known. The advice that follows directly from that evidence is to ask what temperature a figure was measured at, not to trust a single number or avoid a climate outright."
+    },
+    {
+      "id": "l5-ebsr-the-line-that-explains-petrel",
+      "type": "ebsr",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 3,
+      "partA": {
+        "stem": "Which idea from this article explains why a buyer should be cautious about the Petrel-4 brief's single thirty-day number?",
+        "choices": [
+          "A maker's own test, run under its most favorable conditions, tends to produce the best possible number rather than a typical one.",
+          "A tag tested in a mild climate will always outperform a tag tested in a desert climate.",
+          "Every maker's brief exaggerates its numbers on purpose.",
+          "A buyer should never trust any number that comes from an indoor test."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the article best supports the answer you just gave?",
+        "choices": [
+          "None of this means a buyer should doubt every runtime number a maker shares.",
+          "Mild weather costs the least of the three, which is why a maker's own test, run at a comfortable room temperature, tends to show the best number the device can reach.",
+          "The first test ran in a mild coastal climate, with temperatures in the fifties throughout.",
+          "The second test ran in a desert climate, with daytime heat above ninety degrees."
+        ],
+        "key": {
+          "0": 1,
+          "1": 3,
+          "2": 0,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "The article reports what happened in these three specific tests; it never claims mild climates always beat desert climates as a general rule, only that conditions changed the result this time.",
+        "2": "The article says the opposite directly: it warns a reader not to doubt every number a maker shares, which is not the same as accusing every maker of exaggerating on purpose.",
+        "3": "The article's caution is about knowing the temperature a number was measured at, not about rejecting indoor testing altogether; a warm, comfortable indoor test is exactly the kind this article discusses without condemning it outright."
+      },
+      "explain": "The Petrel-4 brief's thirty-day figure came from the maker's own facility, run under comfortable conditions the maker chose. This article explains exactly why that kind of test tends to produce the best possible number rather than a typical one, which is the reasoning a cautious buyer needs before trusting it."
+    },
+    {
+      "id": "l5-ms-what-both-sources-would-agree-on",
+      "type": "ms",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "stem": "The Halloway cold-weather log and this article were written by people who never worked together. Choose the three statements both sources would agree with.",
+      "choices": [
+        "Cold temperature can cause a tracking tag to lose its charge much faster than normal",
+        "A single test in one set of conditions should not be treated as the whole truth about a device",
+        "The exact temperature or climate of a test matters to judging its result",
+        "A tag that fails in the cold is always a defective tag",
+        "Every department should stop using tracking tags entirely",
+        "A maker's brief should never be read at all"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "Both sources say the opposite. The log calls a cold-weather failure a property of conditions, not a defect, and the article makes the identical point about climate rather than the device.",
+        "4": "Neither source recommends abandoning tracking tags; the log plans a follow-up trial and the article advises asking better questions, not giving up on the tool.",
+        "5": "Neither source says a brief should be ignored outright; both treat it as one data point that needs its conditions checked, not as something to refuse to read."
+      },
+      "explain": "Two sources written independently agree here on a method rather than a specific verdict: cold genuinely costs charge, one test never tells the whole story, and the conditions behind a number decide whether it can be trusted. That kind of agreement, reached without either source knowing about the other, is stronger than either source alone."
+    },
+    {
+      "id": "l1-hot-real-examples",
+      "type": "hottext",
+      "passageId": "p-dead-drop",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that each give a real example, rather than stating a general rule.",
+      "spans": [
+        "A hollow bolt can thread into a fence post, a magnetic box can hide under a mailbox lip, or a folded paper can wait behind a loose brick.",
+        "Instead the two sides agree on a signal placed somewhere else: a chalk mark on a lamppost, a strip of tape on a stop sign, or a plant moved from one side of a window to the other.",
+        "The container is the first decision.",
+        "The collector cannot walk past the site every day just to check, because repetition is its own kind of pattern.",
+        "A drop that draws a second glance has already failed, whether or not anyone opens it."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Two sentences give concrete examples, specific hiding spots and specific signals. The rest state general rules the article wants a reader to remember, not particular instances of them."
+    },
+    {
+      "id": "l1-hot-the-point-not-a-step",
+      "type": "hottext",
+      "passageId": "p-dead-drop",
+      "targets": [
+        "c1-inf-2-central-ideas"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that state the article's overall point, rather than describing one single step in the method.",
+      "spans": [
+        "That is the whole point of splitting a handoff into two halves separated by hours or days instead of by feet.",
+        "Nobody has to be caught in the same place at the same time as anybody else, and a connection nobody observed can never later be proven.",
+        "The location matters as much as the container.",
+        "A park bench works.",
+        "Empty hands are never the failure."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "The article's two closing sentences state why the whole method exists: splitting a handoff so nobody is ever caught together. The other sentences describe one piece of how that gets done, not why it matters."
+    },
+    {
+      "id": "l1-cloze-summary-two-halves",
+      "type": "cloze",
+      "passageId": "p-dead-drop",
+      "targets": [
+        "c1-inf-2-central-ideas"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 2,
+      "stem": "Finish the summary.  A dead drop works because {{0}}, and the collector still moves carefully at pickup because {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "the two sides never have to be in the same place at the same time",
+            "the container is always heavier than a stranger could lift",
+            "the signal is broadcast on the radio for anyone to hear"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "walking straight to the drop the moment the signal appears would let a follower watch one person do both halves of the handoff",
+            "the container might not be waterproof",
+            "a chalk mark fades too quickly to be seen"
+          ],
+          "key": 0
+        }
+      ],
+      "explain": "The method works because it removes the moment when two people would be in the same place at once, and the collector's own caution exists because skipping it would recreate exactly that moment, letting a follower watch one person load and collect back to back."
+    },
+    {
+      "id": "l2-hot-what-a-pad-is",
+      "type": "hottext",
+      "passageId": "p-one-time-pad",
+      "targets": [
+        "c1-inf-3-word-meanings"
+      ],
+      "coachTopic": "vocab-context",
+      "dok": 2,
+      "mode": "sentence",
+      "stem": "Tap the sentence that defines what a one-time pad IS, and the sentence that explains what makes it unbreakable.  Two of these sentences do something else.",
+      "spans": [
+        "A pad is a long string of letters or numbers, chosen at random.",
+        "Without the pad, every possible original message is equally likely to be hiding inside it.",
+        "A codebreaker goes looking for that seam first.",
+        "Historically, this single rule is the one real operators broke under pressure, not the math behind it."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "One sentence defines what a pad physically is, a random string of characters, and the other explains the exact property that makes it unbreakable, that no possible original message is favored over any other. The rest describe codebreakers and history rather than defining anything."
+    },
+    {
+      "id": "l2-hot-paragraph-openers",
+      "type": "hottext",
+      "passageId": "p-one-time-pad",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that each open a new paragraph's main idea.  Two of these sentences come from inside a paragraph instead.",
+      "spans": [
+        "The one-time pad answers that question about as fully as a cipher can.",
+        "None of this makes the method practical at real scale.",
+        "The rule for combining them is fixed, and anyone could learn it in a minute.",
+        "Two messages scrambled with the same stretch of pad can be compared against each other."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Each paragraph in this article opens with a sentence that announces its own job. The two chosen here open the paragraph about what the pad is and the paragraph about why it is hard to use, while the other two are supporting detail from the middle of a paragraph."
+    },
+    {
+      "id": "l2-cloze-unbreakable-condition",
+      "type": "cloze",
+      "passageId": "p-one-time-pad",
+      "targets": [
+        "c1-inf-3-word-meanings"
+      ],
+      "coachTopic": "vocab-context",
+      "dok": 3,
+      "stem": "Finish the summary.  A one-time pad stays unbreakable only if {{0}}, because reusing a page lets two messages be {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "every page is used exactly once and then destroyed",
+            "the pad is printed on waterproof paper",
+            "the message is written entirely in numbers"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "compared against each other, which cancels the randomness out",
+            "sent over a faster radio frequency",
+            "translated into a foreign language first"
+          ],
+          "key": 0
+        }
+      ],
+      "explain": "The pad's strength depends entirely on the one-use rule, not on the material it is printed on or the frequency a message travels over. Reuse matters because it lets two scrambled messages be lined up against each other, and that comparison is what cancels out the randomness that was protecting them."
+    },
+    {
+      "id": "l3-hot-ines-being-careful",
+      "type": "hottext",
+      "passageId": "p-reading-room",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that show Ines being deliberately cautious, rather than simply going along with what happens.",
+      "spans": [
+        "For one long second she runs the math Marchetti trained into her: a stranger offering more than you asked for is either kindness or a test, and the only way to tell them apart is to notice which one makes you careless.",
+        "The second box she opens last, and slowly, turning each folder over before she reads it, the way you check a step before you put your weight on it.",
+        "She thanks him, takes both boxes to the table nearest the window, and opens the one she actually came for first.",
+        "He wears a lanyard that says TRAINEE, and a stack of request slips he clearly has not finished sorting."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Two moments show Ines actively deciding to be careful: reasoning through what the second box might mean, and physically opening it last and slowly. Taking the boxes to the table and describing the archivist's lanyard are ordinary narration, not choices Ines is making on purpose."
+    },
+    {
+      "id": "l3-hot-saw-versus-decided",
+      "type": "hottext",
+      "passageId": "p-on-the-line",
+      "targets": [
+        "c1-lit-7-language-use"
+      ],
+      "coachTopic": "viewpoint-narrator",
+      "dok": 2,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that show the narrator separating what was actually observed from what was only guessed.",
+      "spans": [
+        "Marchetti's other rule is that you log what you saw, not what you decided it meant.",
+        "Deciding what a stranger in a jacket was doing is exactly the kind of decision that has burned people before me.",
+        "At two-nineteen a man in a grey jacket walks in through the archive doors.",
+        "My phone sits face up on the dashboard so I do not have to pick it up to see the screen."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "The narrator states the rule directly, log what you saw, not what you decided it meant, and then explains why guessing at a stranger's reason is dangerous. The other two sentences are plain observations, not the narrator reflecting on the difference between seeing and assuming."
+    },
+    {
+      "id": "l3-cloze-caution-and-honesty",
+      "type": "cloze",
+      "passageId": "p-reading-room",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 2,
+      "stem": "Finish the summary.  Ines treats the unclaimed second box with caution because {{0}}, and she signs the log honestly at the end because {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "a stranger offering more than was asked for could be a trap as easily as kindness",
+            "the archivist told her the box was dangerous",
+            "Marchetti had warned her specifically about that shelf"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "a reading room keeps that record whether she lies or not",
+            "she forgot to bring a false name with her",
+            "the archivist was watching her sign it"
+          ],
+          "key": 0
+        }
+      ],
+      "explain": "Ines's caution comes from a rule, not a specific warning: an unearned offer could be a trap as easily as kindness. Her honest signature comes from the same clear-eyed reasoning, since a reading room keeps its record regardless of what name goes on it, so a lie buys nothing unless somebody happens to be checking."
+    },
+    {
+      "id": "l4-hot-claims-needing-a-check",
+      "type": "hottext",
+      "passageId": "p-petrel-brief",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences from the brief that a careful reader should treat as a claim needing a check, rather than a plain, checkable fact.",
+      "spans": [
+        "Not once during the full thirty days did the tag miss a scheduled report.",
+        "No other tag in its size class has matched that number under comparable conditions.",
+        "It charges from any standard cable in under two hours and pairs with a phone app in seconds.",
+        "The housing comes in three colors, though the electronics inside are identical across all three."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "A perfect thirty-day record and a claim of beating every competitor are both performance claims made by the seller, with no outside source to check them against. Charging time and housing colors are plain, easily verified specifications, not the kind of claim that needs a second opinion."
+    },
+    {
+      "id": "l4-hot-measured-versus-guessed",
+      "type": "hottext",
+      "passageId": "p-cold-weather-log",
+      "targets": [
+        "c1-inf-4-reasoning"
+      ],
+      "coachTopic": "inference-argument",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that report a measured result, rather than the staff's explanation for it.",
+      "spans": [
+        "By the end of day two, two of the four tags had gone silent, about sixty hours into what the brief calls a thirty-day battery life.",
+        "The longest one stopped just past sixty-eight hours.",
+        "A cold battery cannot give its full stored charge, and that is true of batteries in general, not just this tag.",
+        "The tag may also have searched harder for a signal in a test site with more tree cover than the maker used."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "The two chosen sentences report exact times the staff observed and wrote down. The other two are the staff's own guesses about what caused those times, explicitly labeled elsewhere in the log as untested explanations rather than measurements."
+    },
+    {
+      "id": "l4-cloze-which-source-to-trust",
+      "type": "cloze",
+      "passageId": "p-cold-weather-log",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "stem": "Finish the summary.  The Petrel-4 brief's thirty-day claim deserves caution because {{0}}, while the Halloway log's shorter number deserves more trust because {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "the engineers who ran the test work for the company that sells the tag",
+            "the tag is too small to hold a real battery",
+            "the brief never mentions a battery at all"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "it names its dates and conditions and admits its explanation is still just a guess",
+            "it was written by the same company that sells the tag",
+            "it promises a number bigger than the brief's own claim"
+          ],
+          "key": 0
+        }
+      ],
+      "explain": "The brief's number is worth a second look because the people who measured it are the people who sell the product. The log earns more trust for the opposite reason: it names exactly when and under what conditions it tested, and it is honest that its own explanation has not yet been proven."
+    },
+    {
+      "id": "l5-hot-lesson-not-one-test",
+      "type": "hottext",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that state the article's central lesson about reading a single test result.  Two of these sentences report one specific test instead.",
+      "spans": [
+        "Read alone, each number looks like a verdict on the tag itself.",
+        "The tag did not change between tests.",
+        "A tag there ran for twenty-six days on one charge.",
+        "That tag lasted only nineteen days, as repeated hot stretches seemed to wear the battery down faster than a mild day would."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "The article's lesson is that a single number can be mistaken for a verdict on the device, when really the tag never changed and only the climate did. The other two sentences report exactly the kind of single test result the lesson is warning a reader not to over-trust."
+    },
+    {
+      "id": "l5-hot-advice-not-a-report",
+      "type": "hottext",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 2,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that give practical advice to a buyer, rather than reporting what one test found.",
+      "spans": [
+        "Ask what temperature a number was measured at before you compare it to any other number.",
+        "It means a number describes one climate, not every climate, and a buyer who needs the cold to work has to ask for the cold number rather than accept the warmest one on offer.",
+        "The third test ran in a freezing mountain climate.",
+        "A tag there ran for twenty-six days on one charge."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Two sentences tell a buyer what to actually do: ask for the temperature behind a number, and demand the cold figure rather than settle for the warmest one offered. The other two simply report what happened in one specific test, without telling a reader what to do about it."
+    },
+    {
+      "id": "l5-cloze-reading-all-three",
+      "type": "cloze",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "stem": "Finish the summary.  Reading all three climate tests together shows that {{0}}, so a careful buyer should {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "the tag itself never changed between tests, only the climate around it did",
+            "the desert test must have used a broken tag",
+            "only the coastal number can ever be trusted"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "ask what temperature any runtime number was measured at before comparing it to another",
+            "buy only tags tested in mild coastal climates",
+            "ignore every number a maker publishes"
+          ],
+          "key": 0
+        }
+      ],
+      "explain": "Three results, read side by side, isolate the one thing that actually varied: the climate around a tag that itself never changed. The advice that follows is not to distrust every number or trust only one climate, but to ask what conditions any single number was measured under."
+    },
+    {
+      "id": "l1-mc-second-glance",
+      "type": "mc",
+      "passageId": "p-dead-drop",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "According to the article, what happens to a container that draws a second glance from a stranger?",
+      "choices": [
+        "It has already failed as a drop, whether or not the stranger opens it.",
+        "It is immediately reported to an investigator by the stranger.",
+        "It is replaced with a different container at the same site the next day.",
+        "It still succeeds as long as the stranger does not open it."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The article never claims a stranger reports anything; it only says the drop has already failed once it draws a second look.",
+        "2": "The article never describes replacing a container the next day; a failed drop is not given a second chance in the text.",
+        "3": "The article says failure happens the moment a second glance is drawn, regardless of whether the container is ever opened. Not opening it does not undo that failure."
+      },
+      "explain": "A drop's success depends entirely on going unnoticed. The instant it draws a second glance, the article calls it already failed, whether or not the stranger ever opens it, because being noticed is the actual danger, not being opened."
+    },
+    {
+      "id": "l1-mc-why-remove-the-second-person",
+      "type": "mc",
+      "passageId": "p-dead-drop",
+      "targets": [
+        "c1-inf-2-central-ideas"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 3,
+      "stem": "Which choice best states why the article says a dead drop takes the second person out of the picture?",
+      "choices": [
+        "Removing the moment two people would stand together removes the only proof a follower could use to connect them.",
+        "Only one person is ever trained to load and collect drops.",
+        "A second person would make the container too heavy to hide.",
+        "The collector always works completely alone, without any trainer."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The article never claims only one person is trained; it describes two roles, loading and collecting, without saying either is done by an untrained person.",
+        "2": "Container weight is never mentioned as a concern connected to a second person.",
+        "3": "The article never discusses training or how many people are involved in preparing someone for the job; it is about the moment of the exchange itself."
+      },
+      "explain": "A meeting proves a connection because a follower can see two people together at once. Removing the second person from that single moment removes the only proof a follower would have, which is the entire reason the method works."
+    },
+    {
+      "id": "l1-mc-only-one-kind-of-person",
+      "type": "mc",
+      "passageId": "p-dead-drop",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "Why does the article say a place only one kind of person would visit never works as a drop site?",
+      "choices": [
+        "That single reason for being there is the first thing an investigator would ask about.",
+        "Such a place is usually too small to hide a container.",
+        "Such a place is always too far from the meeting to be practical.",
+        "A follower could not reach such a place without being seen."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Size of the location is never discussed in the article as a reason a site fails.",
+        "2": "Distance from a meeting is irrelevant here; a dead drop replaces a meeting rather than sitting near one.",
+        "3": "The article's concern is what an investigator would ask about a visitor's reason for being there, not whether a follower could physically reach the spot."
+      },
+      "explain": "A site that only one kind of person visits gives an investigator a single, obvious question to ask about anyone seen there. A good site avoids that question entirely by being ordinary enough that nobody needs an excuse to be there."
+    },
+    {
+      "id": "l1-match-part-to-risk",
+      "type": "match",
+      "passageId": "p-dead-drop",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 3,
+      "stem": "Match each part of the method to the specific risk the article says it protects against.",
+      "rowLabels": [
+        "Building the container to look ordinary",
+        "Choosing a public, forgettable location",
+        "Placing the signal somewhere other than the drop site"
+      ],
+      "colLabels": [
+        "A stranger giving the container a second glance",
+        "An investigator having one obvious question to ask about a visitor",
+        "The collector creating a noticeable pattern by checking daily"
+      ],
+      "key": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "explain": "Each part of the method solves one specific risk. The container's disguise stops a stranger's glance, a forgettable public location stops an investigator's obvious question, and moving the check to a separate signal stops the collector from creating a visitable pattern."
+    },
+    {
+      "id": "l2-mc-lock-with-no-shape",
+      "type": "mc",
+      "passageId": "p-one-time-pad",
+      "targets": [
+        "c1-inf-3-word-meanings"
+      ],
+      "coachTopic": "vocab-context",
+      "dok": 3,
+      "stem": "What does the article mean by calling a properly used one-time pad \"closer to a lock with no shape for a key to have ever fit\"?",
+      "choices": [
+        "Without the pad, no possible original message can be favored over any other, so there is nothing for a codebreaker to unlock.",
+        "The one-time pad was invented by a locksmith rather than a mathematician.",
+        "A one-time pad physically resembles a padlock in its packaging.",
+        "The pad can be used to unlock a message once, but never a second time."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The article never discusses who invented the one-time pad or what profession they had.",
+        "2": "Nothing in the article compares the pad's physical appearance to a padlock; the comparison is about how unbreakable the cipher is, not what it looks like.",
+        "3": "The \"no shape for a key\" image describes the scrambled message itself being unopenable, not a limit on how many times the pad can be used."
+      },
+      "explain": "A lock with no shape for a key to fit cannot be picked, because there is nothing about it a key could match. The article uses that image to explain that a properly used one-time pad leaves no pattern at all for a codebreaker to work against."
+    },
+    {
+      "id": "l2-mc-definition-before-rule",
+      "type": "mc",
+      "passageId": "p-one-time-pad",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "stem": "Why does the article explain what a one-time pad is before explaining the rule that makes it work?",
+      "choices": [
+        "A reader needs to understand what is being combined with what before the one-use rule can make sense.",
+        "The one-use rule was discovered before the pad itself was invented.",
+        "The article is arranged from the least important idea to the most important idea.",
+        "The definition paragraph is shorter and easier to read first."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The article gives no dates and never claims the rule predates the invention; it presents ideas in a logical order, not a historical one.",
+        "2": "Paragraph order is not a ranking of importance in this article; each paragraph builds on the one before it.",
+        "3": "Paragraph length is never a stated reason for the article's order, and the definition paragraph is not obviously shorter than the others."
+      },
+      "explain": "Explaining that a pad combines with a message one character at a time gives a reader the mechanism they need before the next paragraph can explain why using each stretch only once matters. Skipping the definition would leave the rule floating without anything to attach to."
+    },
+    {
+      "id": "l2-mc-page-already-used",
+      "type": "mc",
+      "passageId": "p-one-time-pad",
+      "targets": [
+        "c1-inf-3-word-meanings"
+      ],
+      "coachTopic": "vocab-context",
+      "dok": 2,
+      "stem": "In the article, what does an operator \"reaching for a page already used\" mean?",
+      "choices": [
+        "Choosing to reuse a stretch of the pad that has already scrambled an earlier message.",
+        "Turning to an old, worn-out physical notebook instead of a new one.",
+        "Asking a different operator to send the same message a second time.",
+        "Writing a message in pencil instead of ink."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The article never distinguishes new notebooks from worn ones; its concern is whether a specific stretch of the pad has been used before, not the notebook's condition.",
+        "2": "The article describes one operator reusing pad material under pressure, not two operators sending duplicate messages.",
+        "3": "Pencil versus ink is never mentioned anywhere in the article; the danger is reusing random material, not the writing instrument."
+      },
+      "explain": "The article's whole warning centers on one specific mistake: using a stretch of the pad a second time instead of destroying it after one use. That reuse, not the age of a notebook or the tool used to write, is what breaks the cipher."
+    },
+    {
+      "id": "l2-order-the-articles-ideas",
+      "type": "order",
+      "passageId": "p-one-time-pad",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "stem": "Put the ideas of the article in the order they appear.",
+      "tiles": [
+        "Real operators who broke the one-use rule under pressure",
+        "What a one-time pad is and why it cannot be broken when used correctly",
+        "Why the method is too costly to use for ordinary daily traffic",
+        "Why any repeated scrambling pattern can eventually be broken",
+        "The one rule that makes the method work, and what breaks it"
+      ],
+      "key": [
+        3,
+        1,
+        4,
+        0,
+        2
+      ],
+      "explain": "The article moves from the general weakness every cipher risks, to what a one-time pad is, to the single rule that makes it unbreakable, to real operators who broke that rule, and finally to why keeping the rule is too costly for everyday use. Each idea sets up the one that follows it."
+    },
+    {
+      "id": "l3-mc-name-on-the-slips",
+      "type": "mc",
+      "passageId": "p-reading-room",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 2,
+      "stem": "What does Ines find when she reads the request slips left in the tray?",
+      "choices": [
+        "A name from this month's requests on the same shelf range that was not on her own list.",
+        "A note from Marchetti warning her about a second player.",
+        "A password needed to open the Halloway folder.",
+        "A different address for the county archive."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "No note from Marchetti appears anywhere in the passage; the second name is something Ines herself notices and has to interpret.",
+        "2": "The passage never mentions a password; the folder is retrieved normally through the archivist and photographed.",
+        "3": "No alternate address appears in the passage; Ines is already inside the correct archive."
+      },
+      "explain": "The request slips give Ines one specific, unexplained fact: a name on the same shelf range that Marchetti never gave her. The passage leaves what that name means unresolved, which is exactly what makes it worth noticing."
+    },
+    {
+      "id": "l3-mc-saw-not-decided",
+      "type": "mc",
+      "passageId": "p-on-the-line",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "stem": "What does the narrator do differently from simply reacting to whatever is seen through the windshield?",
+      "choices": [
+        "The narrator separates what was actually seen from what it might mean, and writes down only the former.",
+        "The narrator leaves the car to get a closer look at the man in the grey jacket.",
+        "The narrator calls Marchetti the instant something looks unusual.",
+        "The narrator ignores the two-twenty-five deadline entirely."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The passage never shows the narrator leaving the car; every observation happens from the parked vantage point.",
+        "2": "The narrator specifically does not call the moment something looks unusual, choosing instead to wait inside the plan's built-in margin.",
+        "3": "The deadline is not ignored; it is tracked precisely, down to the exact minute and second."
+      },
+      "explain": "Rather than acting on every passing impression, the narrator follows Marchetti's rule of logging what was seen and setting aside any guess about what it meant, which is what lets a stranger in a jacket pass by without triggering an early call."
+    },
+    {
+      "id": "l3-mc-two-viewpoints-compared",
+      "type": "mc",
+      "passageId": "p-on-the-line",
+      "targets": [
+        "c1-lit-7-language-use"
+      ],
+      "coachTopic": "viewpoint-narrator",
+      "dok": 3,
+      "stem": "The Reading Room and On the Line both follow a character making a careful decision under pressure. What is different about how each scene lets the reader experience that decision?",
+      "choices": [
+        "One is told from outside the decision-maker in third person, while the other is told from inside the decision-maker in first person.",
+        "One takes place during the day, and the other takes place entirely at night.",
+        "One character is nervous, and the other character feels no pressure at all.",
+        "One scene includes dialogue, and the other scene includes none at all."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Neither passage specifies day or night as a point of contrast; nothing in either text supports a claim about lighting or time.",
+        "2": "Both characters register pressure in their own way; the narrator of the watching scene notices a held breath, and Ines runs through careful reasoning of her own.",
+        "3": "The Reading Room includes brief dialogue with the archivist, and On the Line includes almost none, but that is not the deeper contrast the question is asking about."
+      },
+      "explain": "The Reading Room is told about Ines from outside, so the reader watches her actions and infers her reasoning. On the Line is narrated by the watcher directly, so the reader sits inside a held breath and a thumb that hovers but does not press, an intimacy that third person does not offer in the same way."
+    },
+    {
+      "id": "l3-short-second-box-handling",
+      "type": "shorttext",
+      "passageId": "p-reading-room",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 2,
+      "stem": "In four words or fewer, what does Ines do with the second box before she ever opens it?",
+      "accept": [
+        "opens it last",
+        "open it last",
+        "opens it slowly",
+        "open it slowly",
+        "checks it carefully",
+        "waits to open it"
+      ],
+      "maxWords": 4,
+      "explain": "Ines takes both boxes but treats them differently: the one she came for gets opened first, and the unexpected second box is opened last, slowly, the same caution she would use checking a step before trusting her weight to it."
+    },
+    {
+      "id": "l4-mc-which-source-for-winter",
+      "type": "mc",
+      "passageId": "p-cold-weather-log",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "stem": "A department is deciding whether to trust the Petrel-4 for a winter mission next month. The brief promises thirty days and the Halloway log measured about three in the cold. Which source should the department plan around?",
+      "choices": [
+        "The log, because it was measured under winter conditions like the ones the department will actually face.",
+        "The brief, because thirty days is the safer number to plan a mission around.",
+        "Neither, because two disagreeing sources cancel each other out.",
+        "The brief, because it was written by the engineers who designed the tag."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Planning around the bigger number is the riskier choice, not the safer one; a team expecting thirty days and losing power at three is stranded exactly when the plan says everything is fine.",
+        "2": "Two disagreeing sources are a reason to examine how each was measured, not a reason to abandon the question; one names its dates and conditions and the other does not.",
+        "3": "The engineers who designed the tag also sell it, which is precisely the detail that should make their own number less automatically trustworthy, not more."
+      },
+      "explain": "Both sources describe the same tag, but only one was measured under the winter conditions the department is actually planning for. That match between the log's test conditions and the department's real mission is what makes it the safer number to plan around, not who wrote it or which number is bigger."
+    },
+    {
+      "id": "l4-mc-why-call-it-a-guess",
+      "type": "mc",
+      "passageId": "p-cold-weather-log",
+      "targets": [
+        "c1-inf-4-reasoning"
+      ],
+      "coachTopic": "inference-argument",
+      "dok": 3,
+      "stem": "Why does the training log describe its own explanation for the short battery life as a \"guess\" rather than stating it as settled fact?",
+      "choices": [
+        "The log tested the tags' recovery, not the specific cause of the charge loss, so the cause remains unconfirmed.",
+        "The instructors could not agree on how to write the entry.",
+        "The brief already gave a different, more trustworthy explanation.",
+        "The tags were too damaged afterward to be examined again."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Both instructors sign the same entry together; nothing in the log suggests disagreement between them.",
+        "2": "The brief offers no cold-weather explanation at all; it only claims a thirty-day figure measured at seventy degrees.",
+        "3": "The tags are shown recovering fully once warmed, which is the opposite of being too damaged to examine."
+      },
+      "explain": "The staff tested whether the cold had permanently damaged the tags, and it had not, but that same test does not prove what actually caused the fast charge loss in the first place. Calling the explanation a guess is the log being precise about which question its evidence actually answers."
+    },
+    {
+      "id": "l4-mc-what-makes-the-log-careful",
+      "type": "mc",
+      "passageId": "p-cold-weather-log",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 2,
+      "stem": "What makes the Halloway log a more careful source than the Petrel-4 brief, based on the details each one includes?",
+      "choices": [
+        "The log names its exact dates, temperatures, and instructors, and admits what it has not yet proven.",
+        "The log is much longer than the brief, with more paragraphs of detail.",
+        "The log was reviewed by a lawyer before it was filed.",
+        "The log was written using a computer instead of by hand."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Length is not what the passage points to as a mark of care; a long document can still hide its testing conditions, and a short one can state them plainly.",
+        "2": "No legal review of either document is mentioned anywhere in either source.",
+        "3": "Neither source says how it was physically written; that detail plays no role in either passage."
+      },
+      "explain": "Care in a source shows up in what it is willing to name and what it refuses to claim. The log states its dates, its temperatures, its instructors, and flags its own explanation as unproven, while the brief offers one favorable number with far less about how it was produced."
+    },
+    {
+      "id": "l4-match-weakness-to-cost",
+      "type": "match",
+      "passageId": "p-petrel-brief",
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "stem": "Match each weakness in the Petrel-4 brief to what that weakness costs a reader.",
+      "rowLabels": [
+        "No date anywhere on the brief",
+        "The test was run by the company's own engineers",
+        "The thirty-day figure names only one temperature"
+      ],
+      "colLabels": [
+        "The number cannot be checked against how conditions might have changed over time",
+        "The people checking the claim are the same people selling the product",
+        "The claim may not hold once conditions differ from the one tested"
+      ],
+      "key": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "explain": "Three separate weaknesses cost a reader three separate things. A missing date blocks comparison over time, an in-house test removes the outside check a reader would want, and a single named temperature limits how far the headline number can honestly be trusted."
+    },
+    {
+      "id": "l5-mc-one-test-mistake",
+      "type": "mc",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "stem": "A buyer read only the desert-climate result from this article and concluded the tag was unreliable. What did the buyer's conclusion get wrong?",
+      "choices": [
+        "It treated one test's result as a verdict on the tag, when the article shows the climate, not the tag, is what changed.",
+        "It assumed heat could never affect a battery's performance at all.",
+        "It assumed the desert test used a different tag than the other two tests.",
+        "It assumed nineteen days was actually longer than the maker's own claim."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The buyer's mistake is not disbelieving that heat affects batteries; heat genuinely does affect this battery, exactly as the article explains.",
+        "2": "The article describes the same tag tested in three different climates, not three different tags.",
+        "3": "Nineteen days is shorter than the maker's thirty-day claim, not longer; that comparison is not where this buyer's error lies."
+      },
+      "explain": "A single result, read alone, looks like a verdict on the device itself. The article's whole argument is that the tag stayed constant across all three tests and only the surrounding climate changed, which is exactly the context a one-test reading throws away."
+    },
+    {
+      "id": "l5-mc-best-summary-of-advice",
+      "type": "mc",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 2,
+      "stem": "Which of these is the best summary of the article's advice to a buyer?",
+      "choices": [
+        "Ask what climate a runtime number was tested in before trusting it, rather than accepting the number alone.",
+        "Buy the tag with the highest published runtime number, since a bigger number is always more reliable.",
+        "Avoid every tracking tag, since none of them can be trusted in any climate.",
+        "Trust a maker's own test over an independent review board's test."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The article specifically warns that a maker's own test tends to produce the best possible number rather than a typical one, so treating the biggest number as automatically the most reliable is the mistake it argues against.",
+        "2": "The article never recommends avoiding tracking tags altogether; its advice is about how to read a number, not whether to use the product.",
+        "3": "The article gives no reason to prefer a maker's test over an independent one; if anything, its own review-board test is offered as the more trustworthy comparison."
+      },
+      "explain": "The article does not tell a buyer which tag to choose or which number is biggest. It tells a buyer to ask a question first, what climate was this number measured in, before deciding whether that number applies to their own situation."
+    },
+    {
+      "id": "l5-mc-mountain-test-and-the-log",
+      "type": "mc",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "stem": "How does the mountain-climate result in this article relate to the Halloway training log from the cold-weather trial?",
+      "choices": [
+        "Both describe a Petrel-4-style tag losing its charge within a few days under freezing conditions.",
+        "Both describe a tag that was later found to be physically defective.",
+        "Both were written by the same review board on the same day.",
+        "Both recommend replacing hardwired lines with tracking tags immediately."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Neither source calls the tag defective; both attribute the short runtime to cold conditions rather than to a fault in the device.",
+        "2": "The mountain-climate test belongs to an equipment review board, and the cold-weather log belongs to Halloway's own training staff, two different, independent sources.",
+        "3": "Neither source recommends replacing anything immediately; the log explicitly advises keeping the older system as a backup until more testing is done."
+      },
+      "explain": "Two sources, produced independently by different people, land on the same finding: a tag in freezing conditions loses its charge within days rather than weeks. That kind of agreement, reached without either source knowing about the other, is stronger evidence than either result alone."
+    },
+    {
+      "id": "l5-order-the-articles-case",
+      "type": "order",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 3,
+      "stem": "Put the steps of this article's argument in the order it makes them.",
+      "tiles": [
+        "Explain the three separate ways climate drains a battery",
+        "Report what the same tag did in three different climates",
+        "Tell a buyer to ask what temperature a number was measured at",
+        "Point out that read together, the results show the tag never changed"
+      ],
+      "key": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "explain": "The article does not open with its advice. It reports three test results first, draws out the lesson that the tag stayed constant while climate changed, explains the three physical reasons climate matters, and only then tells a buyer what to ask. Moving the advice to the front would turn it into an opinion with nothing underneath it."
+    },
+    {
+      "id": "l6-ebsr-two-seconds-that-mattered",
+      "type": "ebsr",
+      "passageId": "p-on-the-line",
+      "targets": [
+        "c1-lit-2-central-ideas"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 3,
+      "partA": {
+        "stem": "What is the central idea of the watching scene as a whole?",
+        "choices": [
+          "Noticing the moment you almost stop checking is more valuable than finding an actual threat.",
+          "A watcher's job is easy as long as nothing unusual happens.",
+          "The man in the grey jacket was secretly involved in the exercise.",
+          "Calling Marchetti immediately is always the safest choice."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "I did not believe him until about four minutes ago.",
+          "Neither one of us actually found anything today, and what we found instead was the two seconds where we almost stopped checking.",
+          "A plan has a margin built into it on purpose, and using the margin is not the same as the plan failing.",
+          "At two-nineteen a man in a grey jacket walks in through the archive doors."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 3,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "That line is about the narrator not believing something in advance, not about the job being easy; what follows shows the wait was genuinely tense.",
+        "2": "The passage never says the man was part of the exercise; he is logged as an observation, not identified as connected to anything.",
+        "3": "That sentence argues against calling immediately, since a plan's margin means late is not automatically a failure; it does not support urgency."
+      },
+      "explain": "The scene's real discovery is not a threat spotted outside the car; it is the narrator noticing, afterward, the exact two seconds where checking almost stopped. That moment of near-carelessness, not the man in the jacket, is what the scene is actually about."
+    },
+    {
+      "id": "l6-mc-what-the-archive-scene-is-about",
+      "type": "mc",
+      "passageId": "p-reading-room",
+      "targets": [
+        "c1-lit-2-central-ideas"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 3,
+      "stem": "What is The Reading Room, as a whole, really about?",
+      "choices": [
+        "Staying careful even when nothing has obviously gone wrong yet.",
+        "Learning the fastest way to search a county archive.",
+        "Proving that archivists cannot be trusted with sensitive folders.",
+        "Showing that Marchetti's cover stories never work as planned."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Speed is never the passage's concern; Ines uses the fifteen-minute wait productively rather than trying to shorten it.",
+        "2": "The archivist is never shown acting untrustworthy; the caution in the scene belongs entirely to Ines, not to any failure on his part.",
+        "3": "Ines's cover story works exactly as intended, and the passage never suggests otherwise; the tension comes from an unexpected box, not a failed cover."
+      },
+      "explain": "Nothing in the scene actually goes wrong. The tension comes entirely from Ines choosing to stay careful anyway, reading slips she did not have to read and opening a box slowly that she did not have to open at all."
+    },
+    {
+      "id": "l6-ebsr-pulse-loud-in-his-ears",
+      "type": "ebsr",
+      "passageId": "p-cover-story",
+      "targets": [
+        "c1-lit-3-word-meanings"
+      ],
+      "coachTopic": "vocab-figurative",
+      "dok": 3,
+      "partA": {
+        "stem": "What does the passage mean by saying Jonah can hear \"his own pulse doing something stupid and loud in his ears\"?",
+        "choices": [
+          "That his nervousness has become so intense it feels almost like noise he cannot ignore.",
+          "That a real, external noise is disturbing him from somewhere nearby.",
+          "That Jonah is annoyed at how loudly Ferris is speaking to him.",
+          "That Jonah is worried his own heartbeat might damage his hearing."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "The museum lobby smells like floor polish and cold coffee.",
+          "There is a long beat where Jonah can hear his own pulse doing something stupid and loud in his ears.",
+          "His hands are shaking slightly, which annoys him, because nothing has actually gone wrong.",
+          "She asks which school he is from, and he tells her without any trouble at all."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 3,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "That sentence describes smell, not sound, and nothing in the passage suggests an actual external noise is bothering Jonah.",
+        "2": "That sentence describes his hands shaking, a different physical detail entirely, and expresses annoyance at the shaking, not any worry about hearing.",
+        "3": "That sentence is about how easily he answers Ferris's question, not about her volume or tone; nothing describes her as loud."
+      },
+      "explain": "A racing pulse cannot literally be loud enough to hear from outside the body. Describing it as loud and stupid is the passage's way of putting the reader inside Jonah's own nervousness, where his heartbeat feels impossible to ignore, rather than reporting an actual external sound."
+    },
+    {
+      "id": "l6-hot-precise-not-vague",
+      "type": "hottext",
+      "passageId": "p-reading-room",
+      "targets": [
+        "c1-lit-3-word-meanings"
+      ],
+      "coachTopic": "vocab-figurative",
+      "dok": 2,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that use a precise comparison to make an ordinary action feel deliberate, rather than simply stating what happened.",
+      "spans": [
+        "She reads the request slips still sitting in the tray, upside down, the way you read a newspaper on someone else's table.",
+        "The second box she opens last, and slowly, turning each folder over before she reads it, the way you check a step before you put your weight on it.",
+        "She thanks him, takes both boxes to the table nearest the window, and opens the one she actually came for first.",
+        "The unclaimed box sits back on its cart, unopened past the first folder."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Two sentences borrow a familiar comparison, reading a newspaper on someone else's table, checking a step before trusting your weight to it, to make an ordinary action feel like a deliberate skill rather than an accident. The other two sentences simply report what Ines does, without that added comparison."
+    },
+    {
+      "id": "l6-ebsr-two-infiltrations-compared",
+      "type": "ebsr",
+      "passageId": "p-reading-room",
+      "targets": [
+        "c1-lit-5-analysis"
+      ],
+      "coachTopic": "inference-relationships",
+      "dok": 4,
+      "partA": {
+        "stem": "Both Jonah's museum visit and Ines's archive visit involve a gatekeeper asking an unexpected question. What is the key difference in how each trainee responds?",
+        "choices": [
+          "Jonah improvises a boring, checkable answer on the spot, while Ines has already decided in advance how to treat an unearned offer.",
+          "Jonah refuses to answer Ferris's question at all, while Ines answers every question immediately.",
+          "Jonah is caught and sent away, while Ines is allowed to leave with nothing.",
+          "Both trainees respond by inventing a detailed story on the spot."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from The Reading Room best supports the answer you just gave?",
+        "choices": [
+          "He asks what she is researching, in the bored voice of someone who asks it forty times a day.",
+          "For one long second she runs the math Marchetti trained into her: a stranger offering more than you asked for is either kindness or a test, and the only way to tell them apart is to notice which one makes you careless.",
+          "The unclaimed box sits back on its cart, unopened past the first folder.",
+          "Ines tells him the truth turned sideways: a school project on local transportation."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 3,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "That line is about the archivist's routine manner, not about Ines refusing to answer; she answers his question about her research without any resistance.",
+        "2": "That detail describes what happens to the unclaimed box afterward, not whether Ines was caught; nothing in the passage shows her being stopped or questioned further.",
+        "3": "Ines does have a cover answer ready, but it is a short, ordinary line rather than an elaborate story invented in the moment, which is a real difference from Jonah's improvised letter explanation."
+      },
+      "explain": "Jonah's cover story runs out and he has to invent a plausible-sounding, checkable excuse in real time. Ines never runs out of anything, because she has already decided in advance, before any test arrives, exactly how she will treat an unearned offer. The difference is preparation versus improvisation."
+    },
+    {
+      "id": "l6-mc-two-watchers-compared",
+      "type": "mc",
+      "passageId": "p-on-the-line",
+      "targets": [
+        "c1-lit-5-analysis"
+      ],
+      "coachTopic": "inference-relationships",
+      "dok": 3,
+      "stem": "Both On the Line and The Van on Halloway Road follow someone waiting in a car for a signal. What do the two watchers have in common in how they handle the wait?",
+      "choices": [
+        "Both narrators talk themselves through what they actually know, in order, rather than reacting to their first guess.",
+        "Both narrators call for help before the agreed deadline arrives.",
+        "Both narrators leave the vehicle to get a closer look at what is happening.",
+        "Both narrators are told over the radio exactly what to expect."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Neither narrator calls early; both specifically wait until their deadline, trusting the plan's built-in margin instead of acting on a first guess.",
+        "2": "Neither narrator leaves the vehicle at any point; both watchers stay parked and observe from where they are.",
+        "3": "Neither passage describes an ongoing radio briefing; each narrator works from a plan agreed on beforehand and a signal that arrives only once."
+      },
+      "explain": "Both watchers face the same temptation, a fast reaction to an ambiguous sign, and both resist it the same way, by naming exactly what they know rather than what they are guessing. That shared discipline, not the specific details of either scene, is what connects the two."
+    },
+    {
+      "id": "l6-hot-scene-that-turns",
+      "type": "hottext",
+      "passageId": "p-reading-room",
+      "targets": [
+        "c1-lit-6-text-structure"
+      ],
+      "coachTopic": "structure-story-parts",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that mark the moment the scene's tension shifts, from a routine wait to something requiring a decision.",
+      "spans": [
+        "When the archivist returns, he is not carrying one box.",
+        "Ines has not asked for a second box.",
+        "The archivist at the desk is younger than she expected.",
+        "He slides a slip across the counter, telling her the boxes take fifteen minutes to bring up from the stacks."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Everything before the archivist returns with two boxes is ordinary setup, a desk, a wait, some slips to read. The scene turns the instant a second box appears that nobody asked for, and the two sentences marking that arrival are what separate routine from decision."
+    },
+    {
+      "id": "l6-cloze-where-the-tension-turns",
+      "type": "cloze",
+      "passageId": "p-on-the-line",
+      "targets": [
+        "c1-lit-6-text-structure"
+      ],
+      "coachTopic": "structure-story-parts",
+      "dok": 3,
+      "stem": "Finish the summary.  The scene's tension rises sharply at {{0}}, and it resolves the moment {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "two-twenty-five, when the deadline passes with no word from Ines",
+            "two-oh-one, when Ines first goes into the archive",
+            "four minutes into the wait, before anything has happened yet"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "the phone buzzes once at two-twenty-seven",
+            "the man in the grey jacket first appears",
+            "Marchetti assigns the narrator to the parking lot"
+          ],
+          "key": 0
+        }
+      ],
+      "explain": "The scene is built around a single deadline. Tension climbs as two-twenty-five arrives with silence, and it breaks the instant a single buzz answers it two minutes later, a shape the passage follows exactly in the order it happened."
+    },
+    {
+      "id": "l6-ebsr-why-a-brief-sells",
+      "type": "ebsr",
+      "passageId": "p-petrel-brief",
+      "targets": [
+        "c1-inf-7-language-use"
+      ],
+      "coachTopic": "viewpoint-purpose",
+      "dok": 3,
+      "partA": {
+        "stem": "What is the purpose of the Petrel-4 brief's small print, which admits the thirty-day figure was measured at a constant temperature?",
+        "choices": [
+          "It protects the company from a false claim while the rest of the brief still emphasizes the most impressive possible number.",
+          "It is required by law to appear on every product brief.",
+          "It proves the company does not actually believe its own thirty-day figure.",
+          "It exists to help a buyer choose a colder test location for their own trial."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the brief best supports the answer you just gave?",
+        "choices": [
+          "The brief carries a document number but no date anywhere on the page.",
+          "It states that the thirty-day figure was measured at a constant seventy degrees, and that battery performance in other conditions may vary.",
+          "Contact our sales office to arrange a live demonstration at your own site, and ask about volume pricing for departments ordering more than ten units.",
+          "Not once during the full thirty days did the tag miss a scheduled report."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 3,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "A document number with no date is a separate detail about the brief's format, and nothing in the passage claims small print is legally required.",
+        "2": "That sentence is a sales pitch inviting a demonstration and bulk orders, not advice about testing conditions.",
+        "3": "The rest of the brief states the thirty-day claim with full confidence, including a perfect record of scheduled reports, which is the opposite of not believing it."
+      },
+      "explain": "A single admitting sentence, tucked beneath the order form, lets the company say the number is technically true while every other sentence in the brief pushes the most favorable version of it. That combination, headline confidence plus a narrow qualifier, is what a persuasive document does when it wants to stay accurate and still sound impressive."
+    },
+    {
+      "id": "l6-short-log-purpose",
+      "type": "shorttext",
+      "passageId": "p-cold-weather-log",
+      "targets": [
+        "c1-inf-7-language-use"
+      ],
+      "coachTopic": "viewpoint-purpose",
+      "dok": 2,
+      "stem": "In four words or fewer, who is the Halloway cold-weather log actually written for?",
+      "accept": [
+        "the staff themselves",
+        "training staff",
+        "the staff",
+        "site staff",
+        "themselves",
+        "staff themselves"
+      ],
+      "maxWords": 4,
+      "explain": "The log states its own audience directly: it is written for the staff themselves, not published anywhere, which is a different purpose entirely from a brief meant to sell a product to an outside buyer."
+    },
+    {
+      "id": "l6-mc-two-briefs-compared",
+      "type": "mc",
+      "passageId": "p-petrel-brief",
+      "targets": [
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "evidence-across-texts",
+      "dok": 4,
+      "stem": "Both the Wren-7 brief and the Petrel-4 brief are written by Corvid Systems to sell a product. What do the two briefs have in common in how they handle a weakness in their own claim?",
+      "choices": [
+        "Both state their best-case number with full confidence and place the limiting condition in a single line near the end.",
+        "Both admit early in the brief that their product does not work as advertised.",
+        "Both refuse to mention any test result at all.",
+        "Both recommend a competitor's product as a backup option."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Neither brief admits a failure early; each opens with confident claims and saves its one qualifying detail for a single line much later in the document.",
+        "2": "Both briefs lead with a specific test result, the Wren-7's forty feet of stone and the Petrel-4's thirty days, stated as a central selling point.",
+        "3": "Neither brief recommends any other company's product; both are focused entirely on selling their own."
+      },
+      "explain": "Two briefs, written by the same company for two different products, follow the identical pattern: an impressive headline number stated with total confidence, and one honest qualifier tucked into the small print where a skimming reader is least likely to find it."
+    },
+    {
+      "id": "l6-ms-two-studies-compared",
+      "type": "ms",
+      "passageId": "p-three-climates",
+      "targets": [
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "evidence-across-texts",
+      "dok": 4,
+      "stem": "Three Climates, Three Runtimes and Three Tunnels, Three Answers both test the same kind of device across three different conditions. Choose the three ways the two articles are genuinely alike.",
+      "choices": [
+        "Both report three separate results before drawing any general conclusion from them",
+        "Both conclude that the device itself, not the surrounding conditions, is what varied",
+        "Both end with practical advice about what a buyer or team should ask for",
+        "Both were written by the same organization that manufactures the device",
+        "Both name a specific physical property of the environment as the real explanation",
+        "Both recommend abandoning the device entirely"
+      ],
+      "key": [
+        0,
+        2,
+        4
+      ],
+      "distractorRationale": {
+        "1": "Both articles conclude the opposite: the device stayed constant across every test, and the environment around it is what actually changed.",
+        "3": "Neither article is written by a manufacturer; one comes from an equipment review board and the other from a rescue training association, both independent of any company that sells the device.",
+        "5": "Neither article recommends giving up on the device; each treats it as genuinely useful once its real limits are understood and planned around."
+      },
+      "explain": "Both articles follow the same shape: report several results side by side, name the specific ground or climate condition that explains the spread, and close with practical advice rather than a verdict on the device. That shared structure, seen in two unrelated articles about two different tools, is a genuine pattern, not a coincidence."
     }
   ]
 }
