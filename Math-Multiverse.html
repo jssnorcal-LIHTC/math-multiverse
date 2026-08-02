@@ -6849,7 +6849,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     { id: 2, name: 'Imperial Mirror Run',   gridMax: 6,  quadrants: 4, mix: 'g6-reflect' },
     { id: 3, name: 'Hyperlane Distance',    gridMax: 8,  quadrants: 4, mix: 'g6-distance' },
     { id: 4, name: 'Beskar Bay Survey',     gridMax: 8,  quadrants: 4, mix: 'g6-rect-area' },
-    { id: 5, name: 'Mythosaur Wedge',       gridMax: 17, quadrants: 4, mix: 'g6-tri-area' },
+    { id: 5, name: 'Mythosaur Wedge',       gridMax: 19, quadrants: 4, mix: 'g6-tri-area' },
     { id: 6, name: "Navigator's Gauntlet",  gridMax: 8,  quadrants: 4, mix: 'g6-allmix' },
   ];
   const RC_QPL = [15, 18, 18, 20, 20, 20];
@@ -7568,6 +7568,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     // entirely and hardcoded ri(2,12)/ri(2,10). b = ri(2,gridMax+2), h = ri(2,gridMax)
     // reproduces those exact legacy ranges at gridMax=10 (this level's pre-widening
     // value), so raising RC_LEVELS_6's cap is now genuinely live config, not dead.
+    // Task 14 rider: gridMax 17->19 (this generator's own binding margin was a narrow
+    // 1.2x, thin enough that a seeded sim run could occasionally collide -- raised
+    // through the same table-driven cap, no new mechanism, b stays <= 21 (under the
+    // 24-cap 6.G envelope ceiling), 288->360 distinct (b,h) pairs, 1.5x margin).
     const b = ri(2, gridMax + 2);
     const h = ri(2, gridMax);
     const area = b * h / 2;            // always a whole number or an x.5 value
