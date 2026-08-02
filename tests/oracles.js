@@ -280,19 +280,17 @@ const CHECK_OPS = {
     if (product !== expectedProduct) throw new Error(`pow-expand: re-multiplied product ${product} != base^exp ${expectedProduct}`);
     return { expected: ans, str: true };   // parsed + numerically re-verified above; echoed back
   },
-  // pow-compare: independently computes BOTH powers via repeated multiplication (same technique
-  // as the 'pow' op, applied twice with the operand roles swapped) and asserts the winning label
-  // matches whichever is actually larger -- never trusting the generator's own va>vb branch.
-  // Also re-asserts the two structural invariants the generator is supposed to have already
-  // enforced (a!==b, and the pair is not the {2,4} tie) so a broken exclusion guard fails loudly
-  // here instead of silently shipping an unanswerable "which is bigger" question.
-  'pow-compare': ([a, b], ctx) => {
-    if (a === b) throw new Error('pow-compare: a === b (trivial tie should have been excluded)');
-    if ((a === 2 && b === 4) || (a === 4 && b === 2)) throw new Error('pow-compare: (2,4)/(4,2) tie should have been excluded');
+  // pow-compare: Task 13 fix round 1 -- operands are now the FLAT 4-tuple [a,b,c,d] from TWO
+  // independently-drawn power expressions (a^b and c^d), each capped at 4096 by the generator's
+  // own drawG6PowPair (not re-checked here; this oracle's job is the comparison, not the cap).
+  // Independently computes BOTH powers via repeated multiplication and returns whichever label
+  // is actually larger, OR 'They are equal' when the values genuinely match -- equal-value
+  // outcomes are now an EXPECTED, correct branch (not an excluded invariant), since the
+  // generator deliberately engineers them via a curated tie table.
+  'pow-compare': ([a, b, c, d]) => {
     let pa = 1; for (let i = 0; i < b; i++) pa *= a;   // a^b via repeated multiplication
-    let pb = 1; for (let i = 0; i < a; i++) pb *= b;   // b^a via repeated multiplication
-    if (pa === pb) throw new Error(`pow-compare: ${a}^${b} === ${b}^${a} (unexpected nontrivial tie)`);
-    const expected = pa > pb ? `${a}^${b}` : `${b}^${a}`;
+    let pc = 1; for (let i = 0; i < d; i++) pc *= c;   // c^d via repeated multiplication
+    const expected = pa === pc ? 'They are equal' : (pa > pc ? `${a}^${b}` : `${c}^${d}`);
     return { expected, str: true };
   },
   // nested-div-add (genNested, g5): ((a+b)/b)+c. Re-derives the quotient from the raw operands
