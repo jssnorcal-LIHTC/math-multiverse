@@ -5702,13 +5702,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     }
     return arr;
   }
-  function ensureFour(set, gen) {
-    let safety = 200;
-    while (set.size < 4 && safety-- > 0) set.add(gen());
-    while (set.size < 4) set.add(`${ri(1,99)}.${ri(0,99).toString().padStart(2,'0')}`);
-    return Array.from(set).slice(0, 4);
-  }
-
   // -------- Problem generators (CCSS 5.NBT, decimal-themed) --------
 
   function genPlaceValue() {
@@ -6480,7 +6473,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         state.streak = 0;
         state.livesLost = 0;
         state.position = lvl.gridSize;
-        state.questions = [];
         const gen = GEN_BY_TYPE[lvl.gen];
         state.questions = MVFresh.drawRun(function () { return gen(); },
           'f1-decimals.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
@@ -7955,7 +7947,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
   const pick = (a) => a[Math.floor(Math.random() * a.length)];
   function shuffle(a) { for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-  function ensureFour(set, gen) { let s=200; while (set.size<4 && s-- > 0) set.add(gen()); return Array.from(set).slice(0,4); }
 
   // ---- Audio ----
   let actx_ = null;
@@ -8175,20 +8166,19 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   function genCompareVol(builderId) {
     // CCSS 5.MD.C.5.b — compare volumes of two figures
     const a = { l: ri(2,6), w: ri(2,5), h: ri(1,4) };
-    const b = { l: ri(2,6), w: ri(2,5), h: ri(1,4) };
+    const b = (Math.random() < 0.15) ? { l: a.l, w: a.w, h: a.h } : { l: ri(2,6), w: ri(2,5), h: ri(1,4) };
     const va = a.l * a.w * a.h;
     const vb = b.l * b.w * b.h;
-    if (va === vb) b.h++; // force non-equal
-    const vaF = a.l * a.w * a.h;
-    const vbF = b.l * b.w * b.h;
-    const correct = vaF > vbF ? 'A' : 'B';
-    const opts = shuffle(['A is bigger', 'B is bigger', 'Equal volume', 'Cannot tell']);
+    const correct = va === vb ? 'Equal volume' : (va > vb ? 'A is bigger' : 'B is bigger');
+    const opts = shuffle(['A is bigger', 'B is bigger', 'Equal volume']);
     return {
       topic: 'vol-compare',
       prompt: quoteFor(builderId, `Build A is <strong>${a.l}×${a.w}×${a.h}</strong>. Build B is <strong>${b.l}×${b.w}×${b.h}</strong>. <strong>Which has the larger volume</strong>?`),
       answers: opts,
-      correctIdx: opts.indexOf(correct + ' is bigger'),
-      explain: `A: ${a.l}×${a.w}×${a.h} = ${vaF}. B: ${b.l}×${b.w}×${b.h} = ${vbF}. <strong>${correct}</strong> wins (${vaF > vbF ? vaF : vbF} > ${vaF > vbF ? vbF : vaF}).`,
+      correctIdx: opts.indexOf(correct),
+      explain: va === vb
+        ? `A: ${a.l}×${a.w}×${a.h} = ${va}. B: ${b.l}×${b.w}×${b.h} = ${vb}. Same volume: <strong>Equal</strong>.`
+        : `A: ${a.l}×${a.w}×${a.h} = ${va}. B: ${b.l}×${b.w}×${b.h} = ${vb}. <strong>${va > vb ? 'A' : 'B'}</strong> wins (${Math.max(va,vb)} > ${Math.min(va,vb)}).`,
     };
   }
 
@@ -8217,26 +8207,26 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   }
 
   function genScale(builderId) {
-    // CCSS 5.MD.C — what happens to volume when one dimension doubles
-    const l = ri(2, 5), w = ri(2, 4), h = ri(2, 4);
-    const v1 = l * w * h;
+    // CCSS 5.MD.C — scale one named dimension of a rectangular prism by a whole factor
+    const shape = { l: ri(2, 5), w: ri(2, 4), h: ri(2, 4) };
     const factor = pick([2, 3]);
     const dim = pick(['length', 'width', 'height']);
+    const v1 = dim === 'length' ? shape.l : dim === 'width' ? shape.w : shape.h;
     const v2 = v1 * factor;
     const opts = distractors(v2, [
-      v1,                  // forgot to scale (returned A's volume)
-      v1 + factor,         // added the factor instead of multiplying
-      v1 * factor * factor,// over-scaled (squared the factor)
-      l * w * h * (factor - 1), // off-by-one factor
+      v1,                   // forgot to scale (returned the original value)
+      v1 + factor,          // added the factor instead of multiplying
+      v1 * factor * factor, // over-scaled (squared the factor)
+      v1 * (factor - 1),    // off-by-one factor
       v2 + 1,
       v2 - 1,
     ]);
     return {
       topic: 'vol-scale',
-      prompt: quoteFor(builderId, `Build A is <strong>${l}×${w}×${h}</strong>. Build B has the same shape but the <strong>${dim}</strong> is <strong>${factor}× larger</strong>. <strong>Volume of B</strong>?`),
-      answers: opts.map(o => o + ' studs³'),
+      prompt: quoteFor(builderId, `Build A is <strong>${shape.l}×${shape.w}×${shape.h}</strong>. Build B has the same shape but the <strong>${dim}</strong> is <strong>${factor}× larger</strong>. <strong>New ${dim}</strong>?`),
+      answers: opts.map(o => o + ' studs'),
       correctIdx: opts.indexOf(v2),
-      explain: `Volume of A = ${l}×${w}×${h} = ${v1}. Multiplying one dimension by ${factor} multiplies volume by ${factor}. ${v1} × ${factor} = <strong>${v2} studs³</strong>.`,
+      explain: `Original ${dim} = ${v1} studs. Scaled by ${factor}: ${v1} × ${factor} = <strong>${v2} studs</strong>.`,
     };
   }
 
@@ -8486,7 +8476,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         state.score = 0;
         state.streak = 0;
         state.livesLost = 0;
-        state.questions = [];
         state.bricks = [];
         const gen = MB_GEN[lvl.gen];
         state.questions = MVFresh.drawRun(function () { return gen(state.builder.id); },
@@ -9755,7 +9744,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         state.livesLost = 0;
         state.dict = [];
         state.crisisLevel = 0;
-        state.questions = [];
         const gen = RK_GEN[lvl.gen];
         state.questions = MVFresh.drawRun(function () { return gen(); },
           'rocky-translator.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
@@ -9948,7 +9936,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
   const pick = (a) => a[Math.floor(Math.random() * a.length)];
   function shuffle(a) { for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-  function ensureFour(set, gen) { let s=200; while (set.size<4 && s-- > 0) set.add(gen()); return Array.from(set).slice(0,4); }
 
   // ---- Audio ----
   let actx_ = null;
@@ -10701,7 +10688,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         state.streak = 0;
         state.livesLost = 0;
         state.jarsSaved = 0;
-        state.questions = [];
         const gen = FB_GEN[lvl.gen];
         state.questions = MVFresh.drawRun(function () { return gen(); },
           'floating-bear.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
