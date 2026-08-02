@@ -34,6 +34,23 @@ function parseOperand(tok) {
   return null;
 }
 
+// ---------- canonical unit-conversion constants (Task 9, rocky-translator widening) ----------
+// Independent of any generator's own embedded factor: the whole point of a lookup table here is
+// that a generator bug which computes (or mislabels) a conversion factor gets caught, rather than
+// the oracle just trusting whatever number the generator put in check.operands. Keyed by canonical
+// "coarse-fine" pair name; a direction ('mul'/'div') on the check object says which way any given
+// question converts, so ONE entry per real-world relationship covers both directions.
+const UNIT_CONV_FACTORS = {
+  // metric (rocky-translator genMetric)
+  'km-m': 1000, 'm-cm': 100, 'cm-mm': 10, 'm-mm': 1000, 'kg-g': 1000, 'L-mL': 1000,
+  // customary (genCustomary)
+  'mi-yd': 1760, 'yd-ft': 3, 'ft-in': 12, 'lb-oz': 16, 'gal-qt': 4, 'qt-pt': 2, 'pt-c': 2,
+  // time (genTime)
+  'day-hr': 24, 'hr-min': 60, 'min-sec': 60, 'wk-day': 7, 'hr-sec': 3600,
+  // eridian (genEridian; factors match the ERIDIAN table in Module 5 exactly)
+  'kel-m': 7, 'jiff-sec': 5, 'mol-kg': 4, 'pip-L': 3, 'fip-C': 2,
+};
+
 // ========== ORACLE 1: check-contract (covers all Grade-6 + f1 check-bearing gens) ==========
 // Each entry recomputes `expected` independently and (where natural) supplies an inverse-relation
 // check `rel(answer)` using the OPPOSITE operation. operands come from check.operands or check.point.
@@ -71,6 +88,67 @@ const CHECK_OPS = {
     const rx = axis === 'y-axis' ? -x : x;
     const ry = axis === 'x-axis' ? -y : y;
     return { expected: `(${rx}, ${ry})`, str: true };
+  },
+  // ---- Task 9 (rocky-translator widening): unit-conversion ops, all independently re-derived
+  // from UNIT_CONV_FACTORS above, never from the generator's own operands[1] alone. ----
+  'unit-conv': ([value, factor], ctx) => {
+    const pair = ctx && ctx.pair;
+    const canon = UNIT_CONV_FACTORS[pair];
+    if (canon == null) throw new Error(`unit-conv: unknown pair "${pair}"`);
+    if (factor !== canon) throw new Error(`unit-conv: operand factor ${factor} != canonical ${canon} for pair "${pair}"`);
+    const dir = ctx && ctx.dir;
+    if (dir !== 'mul' && dir !== 'div') throw new Error(`unit-conv: bad dir "${dir}"`);
+    const expected = dir === 'mul' ? value * canon : value / canon;
+    return { expected, rel: (ans) => (dir === 'mul' ? approxEq(ans / canon, value) : approxEq(ans * canon, value)) };
+  },
+  // A chain of conversions applied in sequence to `start`. When `chain` (an array of canonical
+  // pair names, one per factor) is present, every operand factor is cross-checked against its
+  // looked-up canonical constant AND `expected` is computed from the canonical factors, not the
+  // generator's operands -- catching a wrong OR mislabeled factor. When `chain` is absent (the
+  // doubling variant, a pure repeated-x2 fact rather than a looked-up conversion), it just
+  // recomputes the product directly from operands.
+  'chain-mul': (operands, ctx) => {
+    const [start, ...factors] = operands;
+    const chain = ctx && ctx.chain;
+    if (chain) {
+      if (!Array.isArray(chain) || chain.length !== factors.length) throw new Error('chain-mul: chain tag missing or length mismatch');
+      const canonFactors = chain.map((pair) => {
+        const f = UNIT_CONV_FACTORS[pair];
+        if (f == null) throw new Error(`chain-mul: unknown pair "${pair}"`);
+        return f;
+      });
+      canonFactors.forEach((f, i) => { if (f !== factors[i]) throw new Error(`chain-mul: operand factor ${factors[i]} != canonical ${f} for pair "${chain[i]}"`); });
+      const expected = canonFactors.reduce((acc, f) => acc * f, start);
+      return { expected, rel: (ans) => approxEq(ans, expected) };
+    }
+    const expected = factors.reduce((acc, f) => acc * f, start);
+    return { expected, rel: (ans) => approxEq(ans, expected) };
+  },
+  // Repeated division (the halving variant): pure math, no looked-up constant to cross-check.
+  'chain-div': (operands) => {
+    const [start, ...divisors] = operands;
+    const expected = divisors.reduce((acc, f) => acc / f, start);
+    return { expected, rel: (ans) => approxEq(ans, expected) };
+  },
+  // A leading multiplier times a repeated-doubling power (the doubling variant): also pure math
+  // (2 is a fact of the story, "doubles every 5 hours," not a looked-up conversion constant) --
+  // kept as its OWN op rather than folded into chain-mul so the doubling variant's small pool
+  // doesn't dilute the unit-conversion chains' own bucket weight/depth ratio.
+  'pow-scaled': ([start, base, exp]) => {
+    let p = 1; for (let i = 0; i < exp; i++) p *= base;
+    const expected = start * p;
+    return { expected, rel: (ans) => (p !== 0 ? approxEq(ans / p, start) : true) };
+  },
+  // count of the coarser unit, plus a remainder already in the finer unit -> total in the finer
+  // unit (e.g. 3 days + 5 hours -> total hours). `perUnit` is cross-checked against the canonical
+  // factor for `pair`, same independence guarantee as unit-conv/chain-mul.
+  'chain-mul-add': ([count, perUnit, remainder], ctx) => {
+    const pair = ctx && ctx.pair;
+    const canon = UNIT_CONV_FACTORS[pair];
+    if (canon == null) throw new Error(`chain-mul-add: unknown pair "${pair}"`);
+    if (perUnit !== canon) throw new Error(`chain-mul-add: operand perUnit ${perUnit} != canonical ${canon} for pair "${pair}"`);
+    const expected = count * canon + remainder;
+    return { expected, rel: (ans) => approxEq((ans - remainder) / canon, count) };
   },
 };
 
@@ -295,5 +373,5 @@ function validateChoiceList(choices, kind) {
 module.exports = {
   approxEq, igcd, ratEq, ratCmp, ratIsReduced, parseOperand, stripTags,
   checkOracle, fractionOracle, structuralOracle, validateChoiceList,
-  CHECK_OPS, FRAC_BINOPS,
+  CHECK_OPS, FRAC_BINOPS, UNIT_CONV_FACTORS,
 };
