@@ -1,8 +1,1 @@
-[
-  { "driver": "f1-decimals.g6.i3", "gate": "lib", "reason": "binding 117.0 < 12N=240 at bucket 'g6-dec-percent|percent' (distinct 117, weight 1.0000, N=20); T14 (widen f1-decimals) target" },
-
-  { "driver": "f1-decimals.g6.i3", "gate": "sim", "reason": "10-run level-scope repeats at seeds 11/22/33 (dup counts 84,83,83 of 10x20=200 draws); T14 target" },
-
-  { "driver": "f1-decimals.genCompareOrder", "gate": "shells", "reason": "flavor digits ('Q3' qualifying-session jargon, 1 of 5 phrasing variants); edit in T14 widening PR" },
-  { "driver": "f1-decimals.genAddSub", "gate": "shells", "reason": "flavor digits ('S1'/'S2'/'S3' sector labels, 'Sky F1' brand name, 3 of 5 phrasing variants); edit in T14 widening PR" }
-]
+[]

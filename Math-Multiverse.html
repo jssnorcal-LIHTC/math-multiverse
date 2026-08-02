@@ -5852,7 +5852,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Crofty: <em>"It's a head-to-head! ${d1.last} <strong>${aStr}</strong> versus ${d2.last} <strong>${bStr}</strong>. Whose lap was quicker?"</em>`,
         `Live timing: ${d1.last} <strong>${aStr}</strong>, ${d2.last} <strong>${bStr}</strong>. Who set the better time?`,
         `Comparing sector times: ${d1.last} <strong>${aStr}</strong> vs ${d2.last} <strong>${bStr}</strong>. <strong>Faster lap</strong>?`,
-        `Q3 board shows ${d1.last} <strong>${aStr}</strong> and ${d2.last} <strong>${bStr}</strong>. Who's on provisional pole?`,
+        `Final qualifying board shows ${d1.last} <strong>${aStr}</strong> and ${d2.last} <strong>${bStr}</strong>. Who's on provisional pole?`,
       ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
@@ -5877,11 +5877,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     return {
       topic: 'dec-add-sub',
       prompt: pick([
-        `Engineer: <em>"S1 ${a.toFixed(3)}, S2 ${b.toFixed(3)}, S3 ${c.toFixed(3)}. <strong>Lap time</strong>?"</em>`,
+        `Engineer: <em>"Sector one ${a.toFixed(3)}, sector two ${b.toFixed(3)}, sector three ${c.toFixed(3)}. <strong>Lap time</strong>?"</em>`,
         `Pit wall radio: <em>"Sector splits: ${a.toFixed(3)}, ${b.toFixed(3)}, ${c.toFixed(3)}. Total lap?"</em>`,
         `Crofty: <em>"Add up those three sectors: ${a.toFixed(3)} + ${b.toFixed(3)} + ${c.toFixed(3)}. What's the lap?"</em>`,
-        `Tower data: S1 <strong>${a.toFixed(3)}</strong>, S2 <strong>${b.toFixed(3)}</strong>, S3 <strong>${c.toFixed(3)}</strong>. Sum to lap time.`,
-        `Sky F1 graphic flashes ${a.toFixed(3)} / ${b.toFixed(3)} / ${c.toFixed(3)}. Lap total?`,
+        `Tower data: sector one <strong>${a.toFixed(3)}</strong>, sector two <strong>${b.toFixed(3)}</strong>, sector three <strong>${c.toFixed(3)}</strong>. Sum to lap time.`,
+        `Sky Sports graphic flashes ${a.toFixed(3)} / ${b.toFixed(3)} / ${c.toFixed(3)}. Lap total?`,
       ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
@@ -5994,6 +5994,18 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     };
   }
 
+  // Task 14: shared check-contract shape for all three genPowerOfTen variants below.
+  // Operands are [value, multiplier, conversionFactor] -- the raw quantity the sentence names,
+  // the "count" factor the sentence names (laps, a repeat multiplier, or 1 for a pure unit
+  // conversion), and any ADDITIONAL real-world unit-conversion factor layered on top (km<->m, or
+  // 1 when the displayed unit never changes). `variant` tags which sub-generator produced the
+  // question -- belt-and-suspenders alongside the fact the three value ranges never overlap, so
+  // MVFresh.sigOf (which hashes the check object wholesale once one is present, not `topic`) can
+  // never conflate a m→km draw with a sec×mult draw even if some future edit narrowed the ranges.
+  function pow10Check(value, multiplier, conversionFactor, variant, answer) {
+    return { op: 'pow10', operands: [value, multiplier, conversionFactor], variant: variant, answer: answer };
+  }
+
   function genPowerOfTen() {
     // CCSS 5.NBT.A.2 — × or ÷ by 10/100/1000 shifts the decimal
     const variants = [
@@ -6018,29 +6030,42 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           answers: opts.map(o => o + ' km'),
           correctIdx: opts.indexOf(correct),
           explain: `Dividing by 1000 shifts the decimal 3 places left. ${meters} → <strong>${correct} km</strong>.`,
+          check: pow10Check(meters, 1, 0.001, 'm-km', km),
         };
       },
-      () => { // km × 10 laps → m total
-        const km = (ri(40, 70) / 10);
-        const laps = pick([10, 100]);
-        const totalM = +(km * laps * 1000).toFixed(0);
-        const correct = totalM.toString();
-        const opts = pedDistractors(totalM, [
-          km * laps,            // forgot to convert km → m
-          totalM / 10,          // shifted decimal wrong way (one fewer place)
-          totalM * 10,          // shifted decimal wrong way (one more place)
-          km + laps,            // added instead of multiplied
-          totalM + 1000,
+      () => { // km × laps → total distance. Task 14: laps widened to include 1000; that case
+              // stays denominated in km (skips the extra km→m conversion) so the displayed total
+              // stays a sensible number instead of running into the millions -- laps 10/100 keep
+              // the original km→m behavior unchanged.
+        const km = (ri(20, 90) / 10);
+        const laps = pick([10, 100, 1000]);
+        const toMeters = laps !== 1000;
+        const conv = toMeters ? 1000 : 1;
+        const total = +(km * laps * conv).toFixed(0);
+        const unit = toMeters ? 'm' : 'km';
+        const correct = total.toString();
+        const opts = pedDistractors(total, [
+          km * laps,             // forgot the km → m conversion (a no-op when the unit is already km)
+          total / 10,            // shifted decimal wrong way (one fewer place)
+          total * 10,            // shifted decimal wrong way (one more place)
+          km + laps,             // added instead of multiplied
+          total + 1000,
         ]).map(n => n.toString());
         return {
           topic: 'dec-power-of-ten',
           prompt: pick([
-            `${laps} laps × <strong>${km} km</strong> per lap. Total race distance in <strong>meters</strong>?`,
-            `Engineer: <em>"<strong>${laps}</strong> laps at <strong>${km} km</strong> each. Distance covered in m?"</em>`,
+            `${laps} laps × <strong>${km} km</strong> per lap. Total race distance in <strong>${unit}</strong>?`,
+            `Engineer: <em>"<strong>${laps}</strong> laps at <strong>${km} km</strong> each. Distance covered, in ${unit}?"</em>`,
+            `Brundle: <em>"That's <strong>${laps}</strong> laps of this <strong>${km} km</strong> circuit. Running total, in <strong>${unit}</strong>?"</em>`,
+            `Race control: circuit length <strong>${km} km</strong>, scheduled for <strong>${laps}</strong> laps. Full distance in <strong>${unit}</strong>?`,
+            `Strategy desk: <strong>${km} km</strong> per lap, <strong>${laps}</strong> laps on the card. Total distance, <strong>${unit}</strong>?`,
           ]),
-          answers: opts.map(o => o + ' m'),
+          answers: opts.map(o => o + ' ' + unit),
           correctIdx: opts.indexOf(correct),
-          explain: `${km} km × ${laps} = ${km * laps} km. × 1000 (km → m) = <strong>${totalM} m</strong>.`,
+          explain: toMeters
+            ? `${km} km × ${laps} = ${km * laps} km. × 1000 (km → m) = <strong>${total} m</strong>.`
+            : `${km} km × ${laps} shifts the decimal 3 places right: <strong>${total} km</strong>. (Already a big enough number without converting to meters too.)`,
+          check: pow10Check(km, laps, conv, 'km-laps', total),
         };
       },
       () => { // sec × 10 = total split
@@ -6063,6 +6088,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           answers: opts.map(o => o + ' s'),
           correctIdx: opts.indexOf(correct),
           explain: `Multiplying by ${mult} shifts the decimal ${mult === 10 ? 1 : 2} place${mult === 10 ? '' : 's'} right. ${sec.toFixed(3)} → <strong>${correct}</strong>.`,
+          check: pow10Check(sec, mult, 1, 'sec-mult', total),
         };
       },
     ];
@@ -6320,8 +6346,12 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   // L4: percent of a quantity (6.RP.3c): rate% of base. answer = rate*base/100.
   function genG6Percent() {
-    const rate = pick([10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 75, 80, 90]); // multiples of 5
-    const base = pick([20, 40, 60, 80, 120, 140, 160, 200, 240]);            // multiples of 20
+    // Task 14: rate widened 13→19 values (5..95 step 5) and base widened 9→17 values (every
+    // multiple of 20 from 20 to 340). Every rate here is a multiple of 5 and every base a
+    // multiple of 20, so rate*base/100 = (rate/5)*(base/20) is a whole number for EVERY
+    // combination (19x17=323 distinct pairs), no integral-filter/retry needed.
+    const rate = pick([5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95]);
+    const base = pick([20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340]);
     const ans = rate * base / 100;   // (rate/5)*(base/20) ⇒ always a whole number
     const driver = pick(DRIVERS);
     const mistakes = [
@@ -6341,6 +6371,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Strategy: <em>"<strong>${rate}%</strong> of the <strong>${base}</strong>-lap race is done. How many laps?"</em>`,
         `Pit wall: what is <strong>${rate}%</strong> of <strong>${base}</strong>?`,
         `Telemetry: tire life is <strong>${base}</strong> units; <strong>${rate}%</strong> is gone. Units gone?`,
+        `Brundle: <em>"${driver.last} has covered <strong>${rate}%</strong> of the <strong>${base} km</strong> circuit. Distance covered, in km?"</em>`,
       ]),
       answers,
       correctIdx,
