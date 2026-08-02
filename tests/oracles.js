@@ -89,6 +89,13 @@ const CHECK_OPS = {
     const ry = axis === 'x-axis' ? -y : y;
     return { expected: `(${rx}, ${ry})`, str: true };
   },
+  // ---- Task 11 (razor-crest widening): read-the-marker op. Independently reformats the
+  // point as an ordered pair string and compares it (and the displayed correctIdx option,
+  // via checkOracle's own step (b)) against check.answer -- catching a wiring bug in the
+  // distractor/shuffle pipeline (wrong correctIdx, a transposed or off-by-one "correct"
+  // string) rather than a math error, since there is no alternate math route to a point
+  // the question already displays on the grid.
+  identify: (pt) => ({ expected: `(${pt[0]}, ${pt[1]})`, str: true }),
   // ---- Task 9 (rocky-translator widening): unit-conversion ops, all independently re-derived
   // from UNIT_CONV_FACTORS above, never from the generator's own operands[1] alone. ----
   'unit-conv': ([value, factor], ctx) => {
