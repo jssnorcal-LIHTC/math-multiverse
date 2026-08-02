@@ -8169,11 +8169,21 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     // whole-number-quotient fluency, not the 5.MD product-ceiling this module's L1 sets.
     const l = ri(2, 9), w = ri(2, 9), h = ri(2, 9);
     const v = l * w * h;
+    // Fix round 1 (review): the original 3rd/4th mistakes were not height-scale
+    // plausible. `v - l*w` is algebraically identical to `l*w*(h-1)`, which at these
+    // ranges (l,w up to 9) averages ~25x the correct single-digit height and can reach
+    // 648 vs. a correct answer as small as 2 -- an obvious-by-magnitude giveaway, not a
+    // believable "subtracted instead of divided" mistake. Its size also meant it always
+    // filled the 4th distinct slot before the loop ever reached the `v/(l+w)` candidate,
+    // making that branch dead code in practice. Both replaced with off-by-two offsets,
+    // clamped into the same {2..9} band `h` itself draws from, so every option sits in
+    // the correct height's own order of magnitude (verified for all h in 2..9: every
+    // case yields exactly 4 distinct, tight-band options; see task-10-report.md).
     const opts = distractors(h, [
-      h + 1,               // off-by-one
-      h - 1,
-      Math.max(2, v - l * w), // common error: subtract instead of divide
-      Math.max(2, Math.round(v / (l + w))), // divided by sum instead of product
+      h + 1,               // off-by-one (up)
+      h - 1,               // off-by-one (down)
+      Math.min(9, h + 2),  // off-by-two (up), clamped to h's own draw range
+      Math.max(2, h - 2),  // off-by-two (down), clamped to h's own draw range
     ]);
     const frag = pick([
       `This piece has <strong>volume ${v} stud cubes</strong> and a base of <strong>${l}×${w}</strong>. <strong>Height</strong>?`,
