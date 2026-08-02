@@ -150,6 +150,34 @@ const CHECK_OPS = {
     const expected = count * canon + remainder;
     return { expected, rel: (ans) => approxEq((ans - remainder) / canon, count) };
   },
+  // ---- Task 10 (master-builder widening): volume ops, each an INDEPENDENT re-derivation
+  // (never the generator's own l*w*h math copy-pasted) ----
+  // Backward volume->missing-dimension: operands are [length, width, GIVEN volume]; the
+  // generator's answer is the height, recomputed here as volume / (l*w). Division must land
+  // on an exact integer -- by construction volume = l*w*h in the generator, so a non-integral
+  // quotient here means the generator itself is broken, not a rounding nuance to tolerate.
+  'missing-dim': ([l, w, volume]) => {
+    const base = l * w;
+    if (base === 0) throw new Error('missing-dim: zero base area (l*w)');
+    const expected = volume / base;
+    if (!Number.isInteger(expected)) throw new Error(`missing-dim: volume ${volume} / base ${base} = ${expected} is not integral`);
+    return { expected, rel: (ans) => approxEq(ans * base, volume) };
+  },
+  // Composite volume: two independent rectangular-prism volumes (hull a1*a2*a3, cabin
+  // b1*b2*b3) added. All six dimensions are operands -- capturing only the two sub-volumes
+  // would let two draws with different dimensions but coincidentally equal sub-volumes
+  // collapse onto one signature, exactly the "missing operand" collapse the widening brief
+  // warns about.
+  'composite-vol': ([a1, a2, a3, b1, b2, b3]) => ({ expected: a1 * a2 * a3 + b1 * b2 * b3 }),
+  // Scale-volume: build A's l/w/h times a scale factor applied to one (unspecified-here)
+  // dimension -- volume scales by the same factor regardless of which dimension it is, so
+  // `dim` (which of length/width/height) is correctly NOT an operand: it never changes the
+  // numeric answer, so it plays a shell-equivalent role, not a "varying quantity" one.
+  'scale-vol': ([l, w, h, factor]) => {
+    const v1 = l * w * h;
+    const expected = v1 * factor;
+    return { expected, rel: (ans) => (v1 !== 0 ? approxEq(ans / factor, v1) : true) };
+  },
 };
 
 // Verify one question that carries a `check` contract. Returns
