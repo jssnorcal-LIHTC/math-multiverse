@@ -4091,6 +4091,139 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   return arr;
 }
 
+// ---- MVFresh: cross-run question freshness ----------------------------------
+// Persisted seen-signature ledgers per level; rejection is against the whole
+// module+grade union so an allmix level cannot re-serve a sibling level's item.
+// Storage failure degrades to within-run dedupe; nothing here may ever throw
+// into the caller or touch any mathMultiverse.* key.
+var MVFresh = (function () {
+  var KEY = 'multiverse.seen.v1';
+  var CAP = 600;      // per-level ring cap, enforced on write
+  var RETRIES = 14;   // per-slot rejection budget
+  var memory = null;  // cache; also the fallback store when localStorage is unusable
+  var storageDead = false;
+  function storageOk() {
+    if (storageDead) return false;
+    try {
+      if (typeof localStorage === 'undefined') { storageDead = true; return false; }
+      localStorage.setItem('multiverse.seen.probe', '1');
+      localStorage.removeItem('multiverse.seen.probe');
+      return true;
+    } catch (e) { storageDead = true; return false; }
+  }
+  function blank() { return { v: 1, profile: 'p1', levels: {} }; }
+  function load() {
+    if (memory) return memory;
+    if (!storageOk()) { memory = blank(); return memory; }
+    try {
+      var d = JSON.parse(localStorage.getItem(KEY) || 'null');
+      memory = (d && d.v === 1 && d.levels && typeof d.levels === 'object') ? d : blank();
+    } catch (e) { memory = blank(); }
+    return memory;
+  }
+  function save() {
+    if (!storageOk()) return;
+    try { localStorage.setItem(KEY, JSON.stringify(memory)); }
+    catch (e) {
+      try {
+        var lv = memory.levels, half = Math.floor(CAP / 2);
+        for (var k in lv) if (lv[k].length > half) lv[k] = lv[k].slice(-half);
+        localStorage.setItem(KEY, JSON.stringify(memory));
+      } catch (e2) { storageDead = true; }
+    }
+  }
+  function fnv(s) {
+    var h = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return h.toString(36);
+  }
+  function stripHtml(s) { return String(s).replace(/<[^>]*>/g, ' '); }
+  function serializeCheck(c) {
+    var keys = [];
+    for (var k in c) if (Object.prototype.hasOwnProperty.call(c, k)) keys.push(k);
+    keys.sort();
+    var out = [];
+    for (var i = 0; i < keys.length; i++) out.push(keys[i] + '=' + JSON.stringify(c[keys[i]]));
+    return out.join('&');
+  }
+  function sigOf(q) {
+    if (q && q.check && typeof q.check === 'object') return 'c:' + serializeCheck(q.check);
+    var text = '';
+    if (q) {
+      if (q.text) text += stripHtml(q.text) + ' ';
+      if (q.equation) text += stripHtml(q.equation) + ' ';
+      if (q.prompt) text += stripHtml(q.prompt) + ' ';
+    }
+    var nums = text.match(/-?\d+(?:\.\d+)?(?:\/\d+)?/g) || [];
+    var seen = {}, uniq = [];
+    for (var i = 0; i < nums.length; i++) if (!seen[nums[i]]) { seen[nums[i]] = 1; uniq.push(nums[i]); }
+    uniq.sort();
+    var ans = '';
+    if (q) {
+      if (q.answer && typeof q.answer === 'object' && 'num' in q.answer) ans = q.answer.num + '/' + q.answer.den;
+      else if (Array.isArray(q.answers) && typeof q.correctIdx === 'number') ans = stripHtml(String(q.answers[q.correctIdx]));
+      else ans = String(q.answer);
+    }
+    return 'p:' + ((q && q.topic) || '') + '#' + uniq.join(',') + '||' + ans;
+  }
+  function unionFor(levelKey) {
+    var prefix = levelKey.replace(/i\d+$/, '');   // "<module>.g<grade>." or "pack.<id>."
+    var d = load(), set = {};
+    for (var k in d.levels) {
+      if (k.indexOf(prefix) !== 0) continue;
+      var arr = d.levels[k];
+      for (var i = 0; i < arr.length; i++) set[arr[i]] = 1;
+    }
+    return set;
+  }
+  function drawRun(genFn, levelKey, count) {
+    var d = load();
+    if (!d.levels[levelKey]) d.levels[levelKey] = [];
+    var hist = d.levels[levelKey];
+    var union = unionFor(levelKey);
+    var runSeen = {}, out = [];
+    for (var slot = 0; slot < count; slot++) {
+      var q = genFn(), h = fnv(sigOf(q));
+      for (var t = 0; t < RETRIES && (runSeen[h] || union[h]); t++) {
+        q = genFn(); h = fnv(sigOf(q));
+      }
+      if (runSeen[h] || union[h]) {
+        var drop = hist.splice(0, count);          // forget ONE run's worth, oldest first
+        for (var i = 0; i < drop.length; i++) delete union[drop[i]];
+      }
+      runSeen[h] = 1; union[h] = 1;
+      hist.push(h);
+      if (hist.length > CAP) hist.splice(0, hist.length - CAP);
+      out.push(q);
+    }
+    save();
+    return out;
+  }
+  function orderPool(levelKey, ids) {
+    var d = load(), hist = d.levels[levelKey] || [];
+    var lastPos = {};
+    for (var i = 0; i < hist.length; i++) lastPos[hist[i]] = i;
+    return ids.slice().sort(function (a, b) {
+      var pa = lastPos['id:' + a], pb = lastPos['id:' + b];
+      return (pa === undefined ? -1 : pa) - (pb === undefined ? -1 : pb);
+    });
+  }
+  function markSeenIds(levelKey, ids) {
+    var d = load();
+    if (!d.levels[levelKey]) d.levels[levelKey] = [];
+    var hist = d.levels[levelKey];
+    for (var i = 0; i < ids.length; i++) {
+      hist.push('id:' + ids[i]);
+      if (hist.length > CAP) hist.shift();
+    }
+    save();
+  }
+  function _resetForTest() { memory = null; storageDead = false; }
+  return { drawRun: drawRun, orderPool: orderPool, markSeenIds: markSeenIds, sigOf: sigOf, _resetForTest: _resetForTest };
+})();
+if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e) {} }
+// ---- end MVFresh ------------------------------------------------------------
+
 // ============================================================
 // MODULE 1: HARDLINE FRACTION RIDER (inline port)
 // ============================================================
