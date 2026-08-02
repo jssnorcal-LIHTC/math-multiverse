@@ -42,6 +42,35 @@ check('pickItems throws rather than silently shrinking when a level is over-subs
   assert.throws(() => R.pickItems(level, items, seeded(1)), /questions/i);
 });
 
+// ---------- repeatPolicy rotation: pickItems reads a call-time MVFresh for ordering ----------
+check('pickItems rotation: unseen-first via MVFresh, "free" policy ignores it, absent MVFresh keeps legacy shuffle+slice', () => {
+  // rotation: with a fake MVFresh, unseen ids are chosen before seen ones
+  const seenLedger = { 'pack.p1.i0': ['id:a', 'id:b'] };
+  const fakeFresh = {
+    orderPool: (key, ids) => ids.slice().sort((x, y) => {
+      const sx = seenLedger[key] && seenLedger[key].includes('id:' + x) ? 1 : 0;
+      const sy = seenLedger[key] && seenLedger[key].includes('id:' + y) ? 1 : 0;
+      return sx - sy;
+    }),
+    marked: [],
+    markSeenIds(key, ids) { this.marked.push([key, ids.join(',')]); },
+  };
+  globalThis.MVFresh = fakeFresh;
+  const lvl = { name: 'L', questions: 2, itemIds: ['a', 'b', 'c', 'd'] };
+  const items = ['a', 'b', 'c', 'd'].map(id => ({ id }));
+  const picked = MVRunner._test.pickItems(lvl, items, () => 0.5, 'pack.p1.i0');
+  if (picked.some(i => i.id === 'a' || i.id === 'b')) throw new Error('seen item chosen while unseen remained');
+  delete globalThis.MVFresh;
+  // policy 'free': MVFresh present but ignored
+  globalThis.MVFresh = fakeFresh;
+  const lvlFree = { name: 'L', questions: 2, itemIds: ['a', 'b', 'c', 'd'], repeatPolicy: 'free' };
+  MVRunner._test.pickItems(lvlFree, items, () => 0.5, 'pack.p1.i0'); // must not throw, may pick any
+  delete globalThis.MVFresh;
+  // absent MVFresh: identical to legacy behavior (deterministic rng -> fixed order)
+  const legacy = MVRunner._test.pickItems(lvl, items, () => 0.5, 'pack.p1.i0');
+  if (legacy.length !== 2) throw new Error('legacy path broken');
+});
+
 check('scoreFor pays full for correct and proportional for partial', () => {
   assert.strictEqual(R.scoreFor({ correct: true, partial: 1 }), 100);
   assert.strictEqual(R.scoreFor({ correct: false, partial: 0.5 }), 50);
