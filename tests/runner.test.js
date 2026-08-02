@@ -42,6 +42,35 @@ check('pickItems throws rather than silently shrinking when a level is over-subs
   assert.throws(() => R.pickItems(level, items, seeded(1)), /questions/i);
 });
 
+// ---------- repeatPolicy rotation: pickItems reads a call-time MVFresh for ordering ----------
+check('pickItems rotation: unseen-first via MVFresh, "free" policy ignores it, absent MVFresh keeps legacy shuffle+slice', () => {
+  // rotation: with a fake MVFresh, unseen ids are chosen before seen ones
+  const seenLedger = { 'pack.p1.i0': ['id:a', 'id:b'] };
+  const fakeFresh = {
+    orderPool: (key, ids) => ids.slice().sort((x, y) => {
+      const sx = seenLedger[key] && seenLedger[key].includes('id:' + x) ? 1 : 0;
+      const sy = seenLedger[key] && seenLedger[key].includes('id:' + y) ? 1 : 0;
+      return sx - sy;
+    }),
+    marked: [],
+    markSeenIds(key, ids) { this.marked.push([key, ids.join(',')]); },
+  };
+  globalThis.MVFresh = fakeFresh;
+  const lvl = { name: 'L', questions: 2, itemIds: ['a', 'b', 'c', 'd'] };
+  const items = ['a', 'b', 'c', 'd'].map(id => ({ id }));
+  const picked = MVRunner._test.pickItems(lvl, items, () => 0.5, 'pack.p1.i0');
+  if (picked.some(i => i.id === 'a' || i.id === 'b')) throw new Error('seen item chosen while unseen remained');
+  delete globalThis.MVFresh;
+  // policy 'free': MVFresh present but ignored
+  globalThis.MVFresh = fakeFresh;
+  const lvlFree = { name: 'L', questions: 2, itemIds: ['a', 'b', 'c', 'd'], repeatPolicy: 'free' };
+  MVRunner._test.pickItems(lvlFree, items, () => 0.5, 'pack.p1.i0'); // must not throw, may pick any
+  delete globalThis.MVFresh;
+  // absent MVFresh: identical to legacy behavior (deterministic rng -> fixed order)
+  const legacy = MVRunner._test.pickItems(lvl, items, () => 0.5, 'pack.p1.i0');
+  if (legacy.length !== 2) throw new Error('legacy path broken');
+});
+
 check('scoreFor pays full for correct and proportional for partial', () => {
   assert.strictEqual(R.scoreFor({ correct: true, partial: 1 }), 100);
   assert.strictEqual(R.scoreFor({ correct: false, partial: 0.5 }), 50);
@@ -211,6 +240,54 @@ check('a completed level calls recordLevel exactly once, with the pack id and th
     assert.strictEqual(levelIndex, 0);
     assert.strictEqual(stars, 2, 'one mistake in four should be 2 stars on the math ladder');
   });
+});
+
+// ---------- makeRunner write side: levelKey construction + MVFresh.markSeenIds ----------
+// Review finding on the first pass of this feature: the rotation check above drives pickItems
+// directly and never makeRunner, so the levelKey format, the second call-time MVFresh
+// resolution, the markSeenIds call, and the try/catch that must suppress a throwing ledger
+// were covered only by uncommitted ad-hoc checks. These two close that gap.
+
+check('makeRunner marks the served items seen via a call-time MVFresh, keyed by pack id + level index', () => {
+  const calls = [];
+  global.MVFresh = {
+    orderPool: (key, ids) => ids,               // identity order: isolates this check from orderPool's own logic
+    markSeenIds(key, ids) { calls.push([key, ids]); },
+  };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack(), host = makeEl('div'), Save = spySave();
+      R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+      assert.strictEqual(calls.length, 1, 'markSeenIds must fire exactly once per makeRunner call');
+      const [levelKey, ids] = calls[0];
+      assert.strictEqual(levelKey, 'pack.probe.i0', 'levelKey must be pack.<meta.id>.i<levelIndex>, 0-based');
+      // probePack's one level asks for all 4 of its items (questions === itemIds.length), so the marked
+      // ids must be exactly that set, in the order pickItems actually queued them: deterministic here
+      // because both rng and orderPool are fixed above (identity order, then Fisher-Yates at 0.5).
+      assert.deepStrictEqual(ids, ['i0', 'i3', 'i1', 'i2'], 'marked ids did not match the queue makeRunner actually served');
+    });
+  } finally {
+    delete global.MVFresh;
+  }
+});
+
+check('makeRunner survives a throwing MVFresh.markSeenIds and still renders the level', () => {
+  global.MVFresh = {
+    orderPool: (key, ids) => ids,
+    markSeenIds() { throw new Error('ledger boom'); },
+  };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack(), host = makeEl('div'), Save = spySave();
+      R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+      assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'a throwing markSeenIds must not stop the level from rendering');
+      assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'a throwing markSeenIds must not stop the item from rendering fully');
+    });
+  } finally {
+    delete global.MVFresh;
+  }
 });
 
 check('the factory can reach the globals the browser gives it', () => {

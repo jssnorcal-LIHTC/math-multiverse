@@ -30,6 +30,18 @@ jobs:
       - name: Validate content packs (structure, verbatim spans, readability, blind-verdict ledger)
         run: node tests/validate-pack.js
 
+      - name: Freshness unit gate (MVFresh service, module-grade union rejection)
+        run: node tests/freshness.js
+
+      - name: Shell literal-digit scan (static + sigOf shell-invariance behavioral check)
+        run: node tests/shells.js
+
+      - name: Freshness binding gate (per-driver content-pool depth estimate)
+        run: node tests/freshness-lib.js
+
+      - name: Freshness seeded sim gate (10-run + campaign replay, real drawRun path)
+        run: node tests/freshness-sim.js
+
       - name: Math fuzz (independent-oracle, ~360k questions, all modules G5+G6)
         run: node tests/fuzz.js
 

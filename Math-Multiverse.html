@@ -4091,6 +4091,139 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   return arr;
 }
 
+// ---- MVFresh: cross-run question freshness ----------------------------------
+// Persisted seen-signature ledgers per level; rejection is against the whole
+// module+grade union so an allmix level cannot re-serve a sibling level's item.
+// Storage failure degrades to within-run dedupe; nothing here may ever throw
+// into the caller or touch any mathMultiverse.* key.
+var MVFresh = (function () {
+  var KEY = 'multiverse.seen.v1';
+  var CAP = 600;      // per-level ring cap, enforced on write
+  var RETRIES = 14;   // per-slot rejection budget
+  var memory = null;  // cache; also the fallback store when localStorage is unusable
+  var storageDead = false;
+  function storageOk() {
+    if (storageDead) return false;
+    try {
+      if (typeof localStorage === 'undefined') { storageDead = true; return false; }
+      localStorage.setItem('multiverse.seen.probe', '1');
+      localStorage.removeItem('multiverse.seen.probe');
+      return true;
+    } catch (e) { storageDead = true; return false; }
+  }
+  function blank() { return { v: 1, profile: 'p1', levels: {} }; }
+  function load() {
+    if (memory) return memory;
+    if (!storageOk()) { memory = blank(); return memory; }
+    try {
+      var d = JSON.parse(localStorage.getItem(KEY) || 'null');
+      memory = (d && d.v === 1 && d.levels && typeof d.levels === 'object') ? d : blank();
+    } catch (e) { memory = blank(); }
+    return memory;
+  }
+  function save() {
+    if (!storageOk()) return;
+    try { localStorage.setItem(KEY, JSON.stringify(memory)); }
+    catch (e) {
+      try {
+        var lv = memory.levels, half = Math.floor(CAP / 2);
+        for (var k in lv) if (lv[k].length > half) lv[k] = lv[k].slice(-half);
+        localStorage.setItem(KEY, JSON.stringify(memory));
+      } catch (e2) { storageDead = true; }
+    }
+  }
+  function fnv(s) {
+    var h = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return h.toString(36);
+  }
+  function stripHtml(s) { return String(s).replace(/<[^>]*>/g, ' '); }
+  function serializeCheck(c) {
+    var keys = [];
+    for (var k in c) if (Object.prototype.hasOwnProperty.call(c, k)) keys.push(k);
+    keys.sort();
+    var out = [];
+    for (var i = 0; i < keys.length; i++) out.push(keys[i] + '=' + JSON.stringify(c[keys[i]]));
+    return out.join('&');
+  }
+  function sigOf(q) {
+    if (q && q.check && typeof q.check === 'object') return 'c:' + serializeCheck(q.check);
+    var text = '';
+    if (q) {
+      if (q.text) text += stripHtml(q.text) + ' ';
+      if (q.equation) text += stripHtml(q.equation) + ' ';
+      if (q.prompt) text += stripHtml(q.prompt) + ' ';
+    }
+    var nums = text.match(/-?\d+(?:\.\d+)?(?:\/\d+)?/g) || [];
+    var seen = {}, uniq = [];
+    for (var i = 0; i < nums.length; i++) if (!seen[nums[i]]) { seen[nums[i]] = 1; uniq.push(nums[i]); }
+    uniq.sort();
+    var ans = '';
+    if (q) {
+      if (q.answer && typeof q.answer === 'object' && 'num' in q.answer) ans = q.answer.num + '/' + q.answer.den;
+      else if (Array.isArray(q.answers) && typeof q.correctIdx === 'number') ans = stripHtml(String(q.answers[q.correctIdx]));
+      else ans = String(q.answer);
+    }
+    return 'p:' + ((q && q.topic) || '') + '#' + uniq.join(',') + '||' + ans;
+  }
+  function unionFor(levelKey) {
+    var prefix = levelKey.replace(/i\d+$/, '');   // "<module>.g<grade>." or "pack.<id>."
+    var d = load(), set = {};
+    for (var k in d.levels) {
+      if (k.indexOf(prefix) !== 0) continue;
+      var arr = d.levels[k];
+      for (var i = 0; i < arr.length; i++) set[arr[i]] = 1;
+    }
+    return set;
+  }
+  function drawRun(genFn, levelKey, count) {
+    var d = load();
+    if (!d.levels[levelKey]) d.levels[levelKey] = [];
+    var hist = d.levels[levelKey];
+    var union = unionFor(levelKey);
+    var runSeen = {}, out = [];
+    for (var slot = 0; slot < count; slot++) {
+      var q = genFn(), h = fnv(sigOf(q));
+      for (var t = 0; t < RETRIES && (runSeen[h] || union[h]); t++) {
+        q = genFn(); h = fnv(sigOf(q));
+      }
+      if (runSeen[h] || union[h]) {
+        var drop = hist.splice(0, count);          // forget ONE run's worth, oldest first
+        for (var i = 0; i < drop.length; i++) delete union[drop[i]];
+      }
+      runSeen[h] = 1; union[h] = 1;
+      hist.push(h);
+      if (hist.length > CAP) hist.splice(0, hist.length - CAP);
+      out.push(q);
+    }
+    save();
+    return out;
+  }
+  function orderPool(levelKey, ids) {
+    var d = load(), hist = d.levels[levelKey] || [];
+    var lastPos = {};
+    for (var i = 0; i < hist.length; i++) lastPos[hist[i]] = i;
+    return ids.slice().sort(function (a, b) {
+      var pa = lastPos['id:' + a], pb = lastPos['id:' + b];
+      return (pa === undefined ? -1 : pa) - (pb === undefined ? -1 : pb);
+    });
+  }
+  function markSeenIds(levelKey, ids) {
+    var d = load();
+    if (!d.levels[levelKey]) d.levels[levelKey] = [];
+    var hist = d.levels[levelKey];
+    for (var i = 0; i < ids.length; i++) {
+      hist.push('id:' + ids[i]);
+      if (hist.length > CAP) hist.shift();
+    }
+    save();
+  }
+  function _resetForTest() { memory = null; storageDead = false; }
+  return { drawRun: drawRun, orderPool: orderPool, markSeenIds: markSeenIds, sigOf: sigOf, _resetForTest: _resetForTest };
+})();
+if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e) {} }
+// ---- end MVFresh ------------------------------------------------------------
+
 // ============================================================
 // MODULE 1: HARDLINE FRACTION RIDER (inline port)
 // ============================================================
@@ -5037,7 +5170,8 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
 
       // Pre-generate questions for the level
-      for (let i = 0; i < totalQ; i++) state.questions.push(genForLevel(lvl));
+      state.questions = MVFresh.drawRun(function () { return genForLevel(lvl); },
+        'fraction-rider.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
 
       host.innerHTML = '<div class="mod-fr"></div>';
       const root = host.querySelector('.mod-fr');
@@ -5568,13 +5702,6 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     }
     return arr;
   }
-  function ensureFour(set, gen) {
-    let safety = 200;
-    while (set.size < 4 && safety-- > 0) set.add(gen());
-    while (set.size < 4) set.add(`${ri(1,99)}.${ri(0,99).toString().padStart(2,'0')}`);
-    return Array.from(set).slice(0, 4);
-  }
-
   // -------- Problem generators (CCSS 5.NBT, decimal-themed) --------
 
   function genPlaceValue() {
@@ -6014,7 +6141,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       ];
       const { answers, correctIdx } = g6Options(ans, 2, mistakes);
       return {
-        topic: 'g6-dec-ops',
+        topic: 'g6-dec-' + mode,
         prompt: pick([
           `Pirelli: <em>"Tires drop <strong>${dec} s</strong> of grip per lap. Over <strong>${whole}</strong> laps, total time lost?"</em>`,
           `Engineer: <em>"Deg is <strong>${dec}</strong> s/lap for <strong>${whole}</strong> laps. Cumulative loss?"</em>`,
@@ -6041,7 +6168,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
       ];
       const { answers, correctIdx } = g6Options(ans, 2, mistakes);
       return {
-        topic: 'g6-dec-ops',
+        topic: 'g6-dec-' + mode,
         prompt: pick([
           `Pit wall: <em>"Pit-lane loss <strong>${x} s</strong> plus stop time <strong>${y} s</strong>. Total time lost?"</em>`,
           `Engineer: <em>"Sector splits <strong>${x}</strong> and <strong>${y}</strong>. Add them for the combined time?"</em>`,
@@ -6065,7 +6192,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     ];
     const { answers, correctIdx } = g6Options(ans, 2, mistakes);
     return {
-      topic: 'g6-dec-ops',
+      topic: 'g6-dec-' + mode,
       prompt: pick([
         `Engineer: <em>"${driver.last} laps in <strong>${x} s</strong>; the tow was worth <strong>${y} s</strong>. Corrected lap is <strong>${x} − ${y}</strong>. Result?"</em>`,
         `Pit wall: <em>"Lap was <strong>${x} s</strong>, target <strong>${y} s</strong> quicker. How far off is the difference ${x} − ${y}?"</em>`,
@@ -6096,7 +6223,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     ];
     const { answers, correctIdx } = g6Options(r, 2, mistakes);
     return {
-      topic: 'g6-unit-rate',
+      topic: 'g6-dec-unit-rate',
       prompt: pick([
         `Engineer: <em>"${driver.last} covered <strong>${d} km</strong> in <strong>${t}</strong> ${unit}s. <strong>Unit rate</strong> (km per ${unit})?"</em>`,
         `Pit wall: <em>"<strong>${d} km</strong> over <strong>${t}</strong> ${unit}s. Distance per ${unit}?"</em>`,
@@ -6127,7 +6254,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     ];
     const { answers, correctIdx } = g6Options(ans, 2, mistakes);
     return {
-      topic: 'g6-percent',
+      topic: 'g6-dec-percent',
       prompt: pick([
         `Engineer: <em>"The tank holds <strong>${base} L</strong>. ${driver.last} has used <strong>${rate}%</strong>. Liters used?"</em>`,
         `Strategy: <em>"<strong>${rate}%</strong> of the <strong>${base}</strong>-lap race is done. How many laps?"</em>`,
@@ -6178,7 +6305,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     }
     const { answers, correctIdx } = g6Options(ans, 1, mistakes);
     return {
-      topic: 'g6-stats',
+      topic: 'g6-stats-' + op,
       prompt: pick([
         `Engineer: <em>"${driver.last}'s last five laps: <strong>${list}</strong> s. Find the <strong>${label}</strong> lap time."</em>`,
         `Timing tower shows ${driver.last}'s five laps: <strong>${list}</strong> s. What is the <strong>${label}</strong>?`,
@@ -6346,9 +6473,9 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         state.streak = 0;
         state.livesLost = 0;
         state.position = lvl.gridSize;
-        state.questions = [];
         const gen = GEN_BY_TYPE[lvl.gen];
-        for (let i = 0; i < totalQ; i++) state.questions.push(gen());
+        state.questions = MVFresh.drawRun(function () { return gen(); },
+          'f1-decimals.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
 
         // Build the position tower from real form-based ranking. FULL_GRID is
         // ordered fastest → slowest based on 2025 season finishing positions.
@@ -7269,7 +7396,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     ]);
     const answers = arr.map(n => `${n}`);
     return {
-      topic: 'g6-rect-area',
+      topic: 'g6-coord-rect-area',
       type: 'mc',
       gridMax, quadrants: 4,
       markers: [
@@ -7316,7 +7443,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
     shuffle(answers);
     const g = Math.max(b, h);
     return {
-      topic: 'g6-tri-area',
+      topic: 'g6-coord-tri-area',
       type: 'mc',
       gridMax: g, quadrants: 1,
       markers: [
@@ -7528,8 +7655,8 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         state.streak = 0;
         state.hullPct = 100;
         state.livesLost = 0;
-        state.questions = [];
-        for (let i = 0; i < totalQ; i++) state.questions.push(genQuestion(lvl));
+        state.questions = MVFresh.drawRun(function () { return genQuestion(lvl); },
+          'razor-crest.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
         state.phase = 'flying';
         sfxHyperspace();
         renderFlight();
@@ -7820,7 +7947,6 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
   const pick = (a) => a[Math.floor(Math.random() * a.length)];
   function shuffle(a) { for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-  function ensureFour(set, gen) { let s=200; while (set.size<4 && s-- > 0) set.add(gen()); return Array.from(set).slice(0,4); }
 
   // ---- Audio ----
   let actx_ = null;
@@ -8040,20 +8166,19 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   function genCompareVol(builderId) {
     // CCSS 5.MD.C.5.b — compare volumes of two figures
     const a = { l: ri(2,6), w: ri(2,5), h: ri(1,4) };
-    const b = { l: ri(2,6), w: ri(2,5), h: ri(1,4) };
+    const b = (Math.random() < 0.15) ? { l: a.l, w: a.w, h: a.h } : { l: ri(2,6), w: ri(2,5), h: ri(1,4) };
     const va = a.l * a.w * a.h;
     const vb = b.l * b.w * b.h;
-    if (va === vb) b.h++; // force non-equal
-    const vaF = a.l * a.w * a.h;
-    const vbF = b.l * b.w * b.h;
-    const correct = vaF > vbF ? 'A' : 'B';
-    const opts = shuffle(['A is bigger', 'B is bigger', 'Equal volume', 'Cannot tell']);
+    const correct = va === vb ? 'Equal volume' : (va > vb ? 'A is bigger' : 'B is bigger');
+    const opts = shuffle(['A is bigger', 'B is bigger', 'Equal volume']);
     return {
       topic: 'vol-compare',
       prompt: quoteFor(builderId, `Build A is <strong>${a.l}×${a.w}×${a.h}</strong>. Build B is <strong>${b.l}×${b.w}×${b.h}</strong>. <strong>Which has the larger volume</strong>?`),
       answers: opts,
-      correctIdx: opts.indexOf(correct + ' is bigger'),
-      explain: `A: ${a.l}×${a.w}×${a.h} = ${vaF}. B: ${b.l}×${b.w}×${b.h} = ${vbF}. <strong>${correct}</strong> wins (${vaF > vbF ? vaF : vbF} > ${vaF > vbF ? vbF : vaF}).`,
+      correctIdx: opts.indexOf(correct),
+      explain: va === vb
+        ? `A: ${a.l}×${a.w}×${a.h} = ${va}. B: ${b.l}×${b.w}×${b.h} = ${vb}. Same volume: <strong>Equal</strong>.`
+        : `A: ${a.l}×${a.w}×${a.h} = ${va}. B: ${b.l}×${b.w}×${b.h} = ${vb}. <strong>${va > vb ? 'A' : 'B'}</strong> wins (${Math.max(va,vb)} > ${Math.min(va,vb)}).`,
     };
   }
 
@@ -8351,10 +8476,10 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         state.score = 0;
         state.streak = 0;
         state.livesLost = 0;
-        state.questions = [];
         state.bricks = [];
         const gen = MB_GEN[lvl.gen];
-        for (let i = 0; i < totalQ; i++) state.questions.push(gen(state.builder.id));
+        state.questions = MVFresh.drawRun(function () { return gen(state.builder.id); },
+          'master-builder.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
         state.phase = 'building';
         renderBuild(true);
       }
@@ -9619,9 +9744,9 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         state.livesLost = 0;
         state.dict = [];
         state.crisisLevel = 0;
-        state.questions = [];
         const gen = RK_GEN[lvl.gen];
-        for (let i = 0; i < totalQ; i++) state.questions.push(gen());
+        state.questions = MVFresh.drawRun(function () { return gen(); },
+          'rocky-translator.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
         state.phase = 'translating';
         sfxRockyChord();
         renderRoom();
@@ -9811,7 +9936,6 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
   const pick = (a) => a[Math.floor(Math.random() * a.length)];
   function shuffle(a) { for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-  function ensureFour(set, gen) { let s=200; while (set.size<4 && s-- > 0) set.add(gen()); return Array.from(set).slice(0,4); }
 
   // ---- Audio ----
   let actx_ = null;
@@ -10564,9 +10688,9 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         state.streak = 0;
         state.livesLost = 0;
         state.jarsSaved = 0;
-        state.questions = [];
         const gen = FB_GEN[lvl.gen];
-        for (let i = 0; i < totalQ; i++) state.questions.push(gen());
+        state.questions = MVFresh.drawRun(function () { return gen(); },
+          'floating-bear.g' + ACTIVE_GRADE + '.i' + levelIndex, totalQ);
         state.phase = 'reading';
         renderStory();
       }
@@ -10877,23 +11001,31 @@ const TOPIC_LABELS = {
   'ns-div-word': 'Fraction-division word problems',
   // Grade 6 — F1 Decimals (6.NS / 6.RP / 6.SP)
   'g6-dec-divide': 'Divide decimals',
-  'g6-dec-ops': 'Decimal operations',
-  'g6-unit-rate': 'Unit rate',
-  'g6-percent': 'Percent of a quantity',
-  'g6-stats': 'Mean, median, range',
+  'g6-dec-add': 'Add decimals',
+  'g6-dec-sub': 'Subtract decimals',
+  'g6-dec-mul': 'Multiply decimals',
+  'g6-dec-unit-rate': 'Unit rate (decimal)',
+  'g6-dec-percent': 'Percent of a quantity (decimal)',
+  'g6-stats-mean': 'Mean of a data set',
+  'g6-stats-median': 'Median of a data set',
+  'g6-stats-range': 'Range of a data set',
   // Grade 6 — Razor Crest (6.NS.6/8, 6.G)
   'g6-quadrant': 'Name the quadrant',
   'g6-reflect': 'Reflect across an axis',
   'g6-distance': 'Distance on the coordinate plane',
   'g6-rect-area': 'Area of a rectangle',
   'g6-tri-area': 'Area of a triangle',
+  'g6-coord-rect-area': 'Area of a rectangle (grid corners)',
+  'g6-coord-tri-area': 'Area of a triangle (grid corners)',
   // Grade 6 — LEGO Master Builder (6.G)
   'g6-volume': 'Volume (L × W × H)',
   'g6-volume-frac': 'Volume with a fractional edge',
   'g6-surface-area': 'Surface area of a prism',
   // Grade 6 — Rocky (6.RP)
+  'g6-unit-rate': 'Unit rate',
   'g6-ratio-table': 'Ratio tables',
   'g6-equiv-ratio': 'Equivalent ratios',
+  'g6-percent': 'Percent of a quantity',
   'g6-percent-find': 'Find the percent',
   // Grade 6 — Floating Bear (6.EE)
   'g6-exponent': 'Exponents',
@@ -11098,16 +11230,24 @@ const COACH_TIPS = {
   'ns-div-word':    { tip: '"How many ___-size pieces fit?" is division: total ÷ piece size.', ex: 'Scoops of 3/4 cup in 6 cups: <b>6 ÷ 3/4</b> = 6 × 4/3 = <b>8</b>.' },
   // Grade 6 — F1 Decimals (6.NS / 6.RP / 6.SP)
   'g6-dec-divide':  { tip: 'Divide decimals like whole numbers, then place the decimal point in the answer.', ex: '<b>39.24 ÷ 6</b> = <b>6.54</b>.' },
-  'g6-dec-ops':     { tip: 'Add/subtract: line up the decimal points. Multiply: count total decimal places.', ex: '<b>8.54 + 1.68</b> = <b>10.22</b>.' },
+  'g6-dec-add':     { tip: 'Line up the decimal points, then add column by column, just like whole numbers.', ex: '<b>8.54 + 1.68</b> = <b>10.22</b>.' },
+  'g6-dec-sub':     { tip: 'Line up the decimal points, then subtract column by column. Borrow across the decimal point the same way you would with whole numbers.', ex: '<b>8.50 − 2.75</b> = <b>5.75</b>.' },
+  'g6-dec-mul':     { tip: 'Multiply as if there were no decimal points, then count the total decimal places in both factors and place the point that many spots from the right.', ex: '<b>0.35 × 6</b>: 35 × 6 = 210, one decimal place → <b>2.10</b>.' },
   'g6-unit-rate':   { tip: 'A unit rate is the amount for ONE. Divide the total by the number of units.', ex: '<b>27 grams over 3</b> = 27 ÷ 3 = <b>9</b> per unit.' },
   'g6-percent':     { tip: 'Percent OF a number: turn the percent into hundredths, then multiply.', ex: '<b>20% of 140</b> = 0.20 × 140 = <b>28</b>.' },
-  'g6-stats':       { tip: 'Mean = sum ÷ count. Median = middle of the sorted list. Range = max − min.', ex: 'Laps 4, 7, 5, 9, 5: mean = 30 ÷ 5 = <b>6</b>; sorted 4 5 5 7 9 → median <b>5</b>; range 9 − 4 = <b>5</b>.' },
+  'g6-dec-unit-rate': { tip: 'A unit rate is the amount for ONE: divide the total by the number of units. Here the rate comes out as a decimal, so keep the decimal point lined up when you divide.', ex: '<b>6.75 km over 3 laps</b>: 6.75 ÷ 3 = <b>2.25</b> km per lap.' },
+  'g6-dec-percent': { tip: 'Percent of a quantity: convert the percent to a decimal (divide by 100), then multiply by the base amount.', ex: '<b>30% of 80</b>: 0.30 × 80 = <b>24</b>.' },
+  'g6-stats-mean':  { tip: 'Mean (average) = add up every value, then divide by how many values there are.', ex: 'Laps 4, 7, 5, 9, 5: sum = 30. Mean = 30 ÷ 5 = <b>6</b>.' },
+  'g6-stats-median':{ tip: 'Median = the middle value once the numbers are sorted least to greatest. With 5 values, that is the 3rd one.', ex: 'Laps 4, 7, 5, 9, 5: sorted 4, 5, 5, 7, 9 → the middle value is <b>5</b>.' },
+  'g6-stats-range': { tip: 'Range = the biggest value minus the smallest value. It shows how spread out the data is.', ex: 'Laps 4, 7, 5, 9, 5: biggest 9, smallest 4. Range = 9 − 4 = <b>5</b>.' },
   // Grade 6 — Razor Crest (6.NS.6/8, 6.G)
   'g6-quadrant':    { tip: 'Quadrant I: x>0,y>0.  II: x<0,y>0.  III: x<0,y<0.  IV: x>0,y<0.', ex: '<b>(3, −4)</b>: x positive, y negative → <b>Quadrant IV</b>.' },
   'g6-reflect':     { tip: 'Reflect across the x-axis: flip the sign of y. Across the y-axis: flip the sign of x.', ex: '<b>(3, 5)</b> across the x-axis = <b>(3, −5)</b>.' },
   'g6-distance':    { tip: 'Same row or column? Distance = absolute difference of the coordinate that changes.', ex: '<b>(2, −1) to (2, 6)</b>: |6 − (−1)| = <b>7</b>.' },
-  'g6-rect-area':   { tip: 'Area of a rectangle = length × width. Read each side off the grid.', ex: '<b>2 × 16</b> = <b>32</b> square units.' },
+  'g6-rect-area':   { tip: 'Area of a rectangle = length × width. Multiply the two given side lengths.', ex: '<b>2 × 16</b> = <b>32</b> square units.' },
   'g6-tri-area':    { tip: 'Area of a triangle = (base × height) ÷ 2.', ex: 'base 8, height 6: 8 × 6 ÷ 2 = <b>24</b>.' },
+  'g6-coord-rect-area': { tip: 'Find the width and height from the two corner points first (subtract the x-values, then the y-values), then multiply.', ex: 'Corners (1, 2) and (5, 6): width = |5−1| = 4, height = |6−2| = 4. Area = 4 × 4 = <b>16</b>.' },
+  'g6-coord-tri-area': { tip: 'Read the base and height off the grid, then use base × height ÷ 2 — same rule as any triangle.', ex: 'base 10, height 4: 10 × 4 ÷ 2 = <b>20</b>.' },
   // Grade 6 — LEGO Master Builder (6.G)
   'g6-volume':      { tip: 'Volume of a box = length × width × height.', ex: '<b>3 × 4 × 5</b> = <b>60</b> cubic units.' },
   'g6-volume-frac': { tip: 'A fractional edge still uses L × W × H. A 1/2 edge halves the result.', ex: '4 × 3 × 1/2 = <b>6</b> cubic units.' },
