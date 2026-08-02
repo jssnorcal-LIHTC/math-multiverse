@@ -258,6 +258,53 @@ const CHECK_OPS = {
   'ns-div-multi-ds': ([a, b, c, d]) => ({ expected: `${a * d}/${b * c}`, str: true }), // a/b ÷ c/d (then simplified for display only)
   'ns-div-word-wf': ([T, c, d]) => ({ expected: `${T * d}/${c}`, str: true }),       // whole T/1 ÷ proper c/d
   'ns-div-word-ff': ([a, b, c, d]) => ({ expected: `${a * d}/${b * c}`, str: true }), // proper a/b ÷ proper c/d
+  // ---- Task 13 (floating-bear widening): grade-6 exponent-family ops + a grade-5 nested op. ----
+  // pow-expand: PARSES the displayed expansion and re-multiplies it -- a different route than
+  // the generator's own Array(exp).fill(base).join, and one that structurally validates every
+  // factor equals `base` and the factor COUNT equals `exp` (not just that some product happens
+  // to match), catching a wrong count or a wrong factor even if their product coincidentally
+  // equals base^exp.
+  'pow-expand': ([base, exp], ctx) => {
+    const ans = ctx && ctx.answer;
+    if (typeof ans !== 'string') throw new Error('pow-expand: check.answer must be a string');
+    const parts = ans.split('×').map((s) => s.trim());
+    if (parts.length !== exp) throw new Error(`pow-expand: expected ${exp} factors, found ${parts.length} in "${ans}"`);
+    let product = 1;
+    for (const p of parts) {
+      const n = Number(p);
+      if (!Number.isFinite(n)) throw new Error(`pow-expand: non-numeric factor "${p}" in "${ans}"`);
+      if (n !== base) throw new Error(`pow-expand: factor ${n} != base ${base} in "${ans}"`);
+      product *= n;
+    }
+    let expectedProduct = 1; for (let i = 0; i < exp; i++) expectedProduct *= base;
+    if (product !== expectedProduct) throw new Error(`pow-expand: re-multiplied product ${product} != base^exp ${expectedProduct}`);
+    return { expected: ans, str: true };   // parsed + numerically re-verified above; echoed back
+  },
+  // pow-compare: independently computes BOTH powers via repeated multiplication (same technique
+  // as the 'pow' op, applied twice with the operand roles swapped) and asserts the winning label
+  // matches whichever is actually larger -- never trusting the generator's own va>vb branch.
+  // Also re-asserts the two structural invariants the generator is supposed to have already
+  // enforced (a!==b, and the pair is not the {2,4} tie) so a broken exclusion guard fails loudly
+  // here instead of silently shipping an unanswerable "which is bigger" question.
+  'pow-compare': ([a, b], ctx) => {
+    if (a === b) throw new Error('pow-compare: a === b (trivial tie should have been excluded)');
+    if ((a === 2 && b === 4) || (a === 4 && b === 2)) throw new Error('pow-compare: (2,4)/(4,2) tie should have been excluded');
+    let pa = 1; for (let i = 0; i < b; i++) pa *= a;   // a^b via repeated multiplication
+    let pb = 1; for (let i = 0; i < a; i++) pb *= b;   // b^a via repeated multiplication
+    if (pa === pb) throw new Error(`pow-compare: ${a}^${b} === ${b}^${a} (unexpected nontrivial tie)`);
+    const expected = pa > pb ? `${a}^${b}` : `${b}^${a}`;
+    return { expected, str: true };
+  },
+  // nested-div-add (genNested, g5): ((a+b)/b)+c. Re-derives the quotient from the raw operands
+  // and re-checks the divisibility invariant here rather than trusting the generator's own
+  // retry/constructive-fallback path kept it true.
+  'nested-div-add': ([a, b, c]) => {
+    const sum = a + b;
+    if (sum % b !== 0) throw new Error(`nested-div-add: (${a}+${b}) not divisible by ${b}`);
+    const q = sum / b;
+    const expected = q + c;
+    return { expected, rel: (ans) => approxEq(ans - c, q) };
+  },
 };
 
 // Verify one question that carries a `check` contract. Returns
