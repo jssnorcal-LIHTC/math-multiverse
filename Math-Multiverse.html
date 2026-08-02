@@ -7566,13 +7566,26 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   function genG6TriArea(gridMax) {
     // Task 11: wired to the level's gridMax -- this previously ignored the parameter
     // entirely and hardcoded ri(2,12)/ri(2,10). b = ri(2,gridMax+2), h = ri(2,gridMax)
-    // reproduces those exact legacy ranges at gridMax=10 (this level's pre-widening
-    // value), so raising RC_LEVELS_6's cap is now genuinely live config, not dead.
-    // Task 14 rider: gridMax 17->19 (this generator's own binding margin was a narrow
-    // 1.2x, thin enough that a seeded sim run could occasionally collide -- raised
-    // through the same table-driven cap, no new mechanism, b stays <= 21 (under the
-    // 24-cap 6.G envelope ceiling), 288->360 distinct (b,h) pairs, 1.5x margin).
-    const b = ri(2, gridMax + 2);
+    // reproduced those exact legacy ranges at gridMax=10 (this level's pre-widening
+    // value), so raising RC_LEVELS_6's cap became genuinely live config, not dead. T11's
+    // brief set razor-crest's own governing envelope here as "b,h <= approx. 20" (6.G.1,
+    // base/height read off the prompt text, not the grid).
+    // Task 14 rider, round 1 (superseded by round 2 below): gridMax 17->19 with the same
+    // b=ri(2,gridMax+2)/h=ri(2,gridMax) formula raised b to 21 -- 288->360 distinct pairs,
+    // 1.5x margin, but review caught that this pushes b past T11's own ~20 envelope, and a
+    // forced-worst-case measurement (b=21) came back 11.64x11.64 real CSS px per grid cell,
+    // under the 15px floor.
+    // Task 14 rider, round 2 (shipped): dropped the b/h asymmetry entirely -- b now draws
+    // from the SAME ri(2,gridMax) range as h, both capped at 19. 18x18 = 324 distinct
+    // pairs, 1.35x margin (sim-clean at all 3 seeds under per-driver derived seeding, a
+    // frozen, permanent fact of that fixed seed, not a probability that erodes). Re-measured
+    // at the new worst case (b=h=19, span 20): 12.80px, still under the hard 15px floor --
+    // this generator is ILLUSTRATIVE-class, not READ-class (see the policy note above
+    // renderGrid), so the soft floor applies here: shape stays legible (the triangle spans
+    // many cells regardless of span) and axis labels stay legible (verified by screenshot at
+    // this exact worst case, pre-existing labelStep thinning already active). 1.35x is
+    // therefore the accepted design point, not a shortfall.
+    const b = ri(2, gridMax);
     const h = ri(2, gridMax);
     const area = b * h / 2;            // always a whole number or an x.5 value
     const correctStr = `${area}`;
@@ -7643,6 +7656,27 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   }
 
   // ---- Grid renderer ----
+  // LEGIBILITY POLICY (Task 14 rider, established after a forced-worst-case measurement caught
+  // genG6TriArea sub-floor): every grid this function renders falls into one of two classes, and
+  // the 15px-per-cell floor (T11's own reference: span<=17 measures ~15.06px in this SVG's exact
+  // geometry -- viewBox 120 with a 16-unit axis-label gutter, so real cell px = (100/span) x
+  // (host_px/120), NOT host_px/span) binds differently for each:
+  //   READ-class (genQuadrantQ, genIdentifyQ, genReflectQ, genG6Quadrant/Reflect/Distance/RectArea):
+  //     the kid reads coordinates OFF the grid to answer -- the HARD floor applies, and every one
+  //     of these generators' level tables is kept at span<=17 by design (verified in T11's report).
+  //   ILLUSTRATIVE-class (genG6TriArea, the only member today): base/height are stated in the
+  //     PROMPT TEXT, not read off the grid -- the grid only corroborates the shape. This carries a
+  //     SOFT floor: the triangle's shape must stay legible (it spans many cells regardless of span)
+  //     and axis labels must stay legible (thinned via the existing labelStep mechanism below,
+  //     already gridMax>=8 -> every 2 units -- verified sufficient by direct screenshot at TriArea's
+  //     own worst case, span 20-22, labels non-overlapping; no renderer change was needed).
+  // Forced-worst-case measurement (pin Math.random to a constant just under 1.0 immediately before
+  // the level boots, since razor-crest's own init() calls startFlight() synchronously with no
+  // pick-screen click to intercept first) is now the reference protocol for any future span check
+  // here, not a small-sample spot draw -- TriArea was ALREADY sub-floor at T11's own gridMax=17 cap
+  // (worst case b=19, span 20, 12.80px measured, once actually forced -- T11's own report sampled
+  // only a small b=h=6 draw and explicitly called TriArea's legibility best-effort/non-critical, so
+  // this was pre-existing, unmeasured debt, not something Task 14 introduced).
 
   function renderGrid(qBlock, q, onPick) {
     const gridMax = q.gridMax;
