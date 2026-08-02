@@ -6716,23 +6716,28 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   //   L4 Beskar Path      — sequence of moves from a start point, pick end
   //   L5 Imperial Mirror  — reflect across x or y axis, pick the new point
   //   L6 Distance         — two points on grid, pick distance between them
+  // Task 11 (freshness widening): gridMax caps raised on five of the twelve levels below
+  // (both grades' L1/L2-or-L3 as applicable) to clear the binding-constraint library gate;
+  // three levels converge on gridMax:8 four-quadrant (span 17 columns on the reference grid,
+  // the same rendering geometry verified legible by this task's L2/L3 screenshots) for a
+  // consistent ~1.3-1.4x margin over each one's own 12xN threshold. See task-11-report.md.
   const RC_LEVELS = [
-    { id: 1, name: 'Quadrant Trials',         gridMax: 5,  quadrants: 4, mix: 'quadrant' },
-    { id: 2, name: 'Mos Eisley Coordinates',  gridMax: 8,  quadrants: 1, mix: 'identify-q1' },
-    { id: 3, name: 'Hyperspace Lanes',        gridMax: 5,  quadrants: 4, mix: 'identify-4q' },
+    { id: 1, name: 'Quadrant Trials',         gridMax: 8,  quadrants: 4, mix: 'quadrant' },
+    { id: 2, name: 'Mos Eisley Coordinates',  gridMax: 16, quadrants: 1, mix: 'identify-q1' },
+    { id: 3, name: 'Hyperspace Lanes',        gridMax: 8,  quadrants: 4, mix: 'identify-4q' },
     { id: 4, name: 'Beskar Path',             gridMax: 5,  quadrants: 4, mix: 'path' },
-    { id: 5, name: 'Imperial Mirror',         gridMax: 5,  quadrants: 4, mix: 'reflect' },
+    { id: 5, name: 'Imperial Mirror',         gridMax: 8,  quadrants: 4, mix: 'reflect' },
     { id: 6, name: 'Distance to Tatooine',    gridMax: 8,  quadrants: 1, mix: 'distance' },
   ];
   // Grade 6 (6.NS.6 / 6.NS.8 four-quadrant plane + 6.G.1 / 6.G.3 area on the grid).
   // Same Mando/Grogu theme; selected only when ACTIVE_GRADE === 6. Grade-5 RC_LEVELS
   // above is untouched. RC_QPL (15,18,18,20,20,20) is shared by both grades.
   const RC_LEVELS_6 = [
-    { id: 1, name: 'Quadrant Lock',         gridMax: 6,  quadrants: 4, mix: 'g6-quadrant' },
+    { id: 1, name: 'Quadrant Lock',         gridMax: 8,  quadrants: 4, mix: 'g6-quadrant' },
     { id: 2, name: 'Imperial Mirror Run',   gridMax: 6,  quadrants: 4, mix: 'g6-reflect' },
     { id: 3, name: 'Hyperlane Distance',    gridMax: 8,  quadrants: 4, mix: 'g6-distance' },
     { id: 4, name: 'Beskar Bay Survey',     gridMax: 8,  quadrants: 4, mix: 'g6-rect-area' },
-    { id: 5, name: 'Mythosaur Wedge',       gridMax: 10, quadrants: 4, mix: 'g6-tri-area' },
+    { id: 5, name: 'Mythosaur Wedge',       gridMax: 17, quadrants: 4, mix: 'g6-tri-area' },
     { id: 6, name: "Navigator's Gauntlet",  gridMax: 8,  quadrants: 4, mix: 'g6-allmix' },
   ];
   const RC_QPL = [15, 18, 18, 20, 20, 20];
@@ -7080,27 +7085,49 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       explain: horizontal
         ? `Same y-coordinate (${y1}). Subtract the x's: |${x2} − ${x1}| = <strong>${dist}</strong>.`
         : `Same x-coordinate (${x1}). Subtract the y's: |${y2} − ${y1}| = <strong>${dist}</strong>.`,
+      // Task 11 (gate-driven, not in the original table -- "NO CHANGE unless the gate says
+      // otherwise" and the seeded sim gate did, after the other L1/L2/L3/L5 fixes shifted
+      // this shared PRNG's call sequence): the prose signature was silently collapsing this
+      // driver's true 1,296-tuple raw space down to 272 measured-distinct (a sorted-unique-
+      // digit-set collision, the identical root cause Task 10 found in genComposite/genScale
+      // -- x1,y1,x2,y2 all drawn from the same small 0..gridMax range collide on digit-SETS
+      // even when the tuple differs). A check contract, reusing the existing 'distance' op
+      // genG6Distance already established (zero new oracle code), recovers the full space.
+      check: { op: 'distance', operands: [x1, y1, x2, y2], answer: dist },
     };
   }
 
   function genQuadrantQ(gridMax) {
-    const x = ri(-gridMax, gridMax) || ri(1, gridMax);
-    const y = ri(-gridMax, gridMax) || ri(1, gridMax);
+    // Uniform over the nonzero lattice: pick sign and magnitude independently (same
+    // rejection-free construction genG6Quadrant already uses below) -- the prior
+    // `ri(-gridMax,gridMax) || ri(1,gridMax)` fallback collapsed every zero draw onto a
+    // POSITIVE value only, silently over-weighting quadrants I/IV over II/III.
+    const x = ri(1, gridMax) * (Math.random() < 0.5 ? -1 : 1);
+    const y = ri(1, gridMax) * (Math.random() < 0.5 ? -1 : 1);
     let q;
     if (x > 0 && y > 0) q = 'I';
     else if (x < 0 && y > 0) q = 'II';
     else if (x < 0 && y < 0) q = 'III';
     else q = 'IV';
     const opts = shuffle(['I', 'II', 'III', 'IV']);
+    const answer = 'Quadrant ' + q;
     return {
       topic: 'coord-quadrant',
       type: 'mc',
       gridMax, quadrants: 4,
       markers: [{x, y, label: '?', color: '#ff8000'}],
-      prompt: `Imperial probe detected at <strong>(${x}, ${y})</strong>. <strong>Which quadrant</strong>?`,
+      prompt: pick([
+        `Imperial probe detected at <strong>(${x}, ${y})</strong>. <strong>Which quadrant</strong>?`,
+        `Razor Crest's scanner flags a contact at <strong>(${x}, ${y})</strong>. <strong>Which quadrant</strong> is it in?`,
+        `Mando marks a signal at <strong>(${x}, ${y})</strong> on the navicomp. <strong>Name the quadrant</strong>.`,
+        `Grogu spots something blinking at <strong>(${x}, ${y})</strong>. <strong>Which quadrant</strong>?`,
+        `A TIE fighter pings the scope at <strong>(${x}, ${y})</strong>. <strong>Quadrant</strong>?`,
+        `Hyperspace beacon reads <strong>(${x}, ${y})</strong>. <strong>Which quadrant</strong> holds it?`,
+      ]),
       answers: opts.map(o => 'Quadrant ' + o),
       correctIdx: opts.indexOf(q),
       explain: `x = ${x} (${x > 0 ? 'positive' : 'negative'}), y = ${y} (${y > 0 ? 'positive' : 'negative'}). That puts (${x}, ${y}) in <strong>Quadrant ${q}</strong>. (Quadrants spiral counter-clockwise from upper-right: I, II, III, IV.)`,
+      check: { op: 'quadrant', point: [x, y], answer },
     };
   }
 
@@ -7138,6 +7165,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       explain: axis === 'y-axis'
         ? `Reflecting across the y-axis flips the sign of x only. (${x}, ${y}) → <strong>(${-x}, ${y})</strong>. The y stays put.`
         : `Reflecting across the x-axis flips the sign of y only. (${x}, ${y}) → <strong>(${x}, ${-y})</strong>. The x stays put.`,
+      check: { op: 'reflect', point: [x, y], axis, answer: correct },
     };
   }
 
@@ -7255,10 +7283,14 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Grogu points to the navicomp marker. <strong>Coordinates</strong>?`,
         `Sensor flags a target. Read its <strong>(x, y)</strong>.`,
         `IG-11 marks a contact on the grid. <strong>Identify the coordinates</strong>.`,
+        `Bo-Katan calls out the marker's position. <strong>What's the ordered pair</strong>?`,
+        `The navicomp beeps at a fixed marker. <strong>Read its coordinates</strong>.`,
+        `Beskar sensor holds a lock on the grid marker. <strong>What ordered pair</strong> is it?`,
       ]),
       answers: arr,
       correctIdx: arr.indexOf(correct),
       explain: `Read the x value first (horizontal): ${x}. Then read y (vertical): ${y}. Coordinates are <strong>(${x}, ${y})</strong> -- always (x, y).`,
+      check: { op: 'identify', point: [x, y], answer: correct },
     };
   }
 
@@ -7420,8 +7452,12 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   // L5. Area of a triangle = base × height ÷ 2 (6.G.1), base & height off the grid.
   function genG6TriArea(gridMax) {
-    const b = ri(2, 12);
-    const h = ri(2, 10);
+    // Task 11: wired to the level's gridMax -- this previously ignored the parameter
+    // entirely and hardcoded ri(2,12)/ri(2,10). b = ri(2,gridMax+2), h = ri(2,gridMax)
+    // reproduces those exact legacy ranges at gridMax=10 (this level's pre-widening
+    // value), so raising RC_LEVELS_6's cap is now genuinely live config, not dead.
+    const b = ri(2, gridMax + 2);
+    const h = ri(2, gridMax);
     const area = b * h / 2;            // always a whole number or an x.5 value
     const correctStr = `${area}`;
     // Pedagogical mistakes: forgot to halve (b*h), added the legs, off by one/half.

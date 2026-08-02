@@ -13,11 +13,19 @@
 //   CAMPAIGN (gate:"sim-campaign", id "<module>.g<grade>"): per module-grade (12 groups), per
 //   seed: two sequential "campaigns" (all 6 levels of that grade, in order, via drawRun, SHARED
 //   ledger across both campaigns -- i.e. simulating a kid playing the whole grade, then playing
-//   it again). Within-campaign repeats must be 0 for UNLISTED module-grades. Cross-campaign
-//   repeat RATE (campaign-2 items whose signature already appeared in campaign-1) is printed
-//   always, and only turns into a hard <=1% assertion once the sim-campaign-scoped allowlist is
-//   empty (arms itself; see the `if (simCampaignAllowlistEmpty) assert(...)` below) -- report-only
-//   until then.
+//   it again). TWO conditions per module-grade: within-campaign repeats (must be 0) and
+//   cross-campaign repeat RATE (campaign-2 items whose signature already appeared in
+//   campaign-1; must be <= 1%). Arming is PER MODULE-GRADE, not file-wide: a module-grade with
+//   NO allowlist entry is armed on BOTH conditions immediately (a within-campaign repeat, or a
+//   >1% cross rate, is an unlisted failure the moment it appears). A LISTED module-grade's
+//   entry covers the COMPOSITE condition -- EXPECTED-FAIL while EITHER condition still fails,
+//   STALE ("delete it") only once BOTH clear. (Task 11 fix: the original design armed
+//   cross-campaign globally, for all 12 module-grades at once, the instant the WHOLE
+//   sim-campaign namespace went empty -- the exact file-wide cliff that ambushed
+//   master-builder's own cross-campaign rate in Task 10 and floating-bear's in Task 11,
+//   purely because an UNRELATED module's entry happened to retire last. Per-module-grade
+//   arming means each module's debt arms the moment ITS OWN entry retires, never sooner and
+//   never because of an unrelated module's progress.)
 //
 // Runs the REAL MVFresh.drawRun path (not a direct driver.make() sample, that's freshness-lib.js's
 // job) under a SEEDED Math, so results are deterministic and reproducible in CI.
@@ -28,10 +36,11 @@
 // any of that logic is trusted to judge real content. See runNegativeControl() below for exactly
 // why its two arms are structured the way they are (this was verified empirically, not assumed).
 //
-// Ratchet semantics (identical to freshness-lib.js, applied independently per gate namespace):
-// unlisted failure -> GATE FAILURE; listed entry that now PASSES -> GATE FAILURE (stale, delete
-// it); listed entry that fails -> OK, EXPECTED-FAIL; empty allowlist -> full enforcement. Zero
-// drivers found -> FAIL LOUDLY.
+// Ratchet semantics for LEVEL SCOPE and every other gate (lib/shells/this file's own level-scope
+// "sim"): unlisted failure -> GATE FAILURE; listed entry that now PASSES -> GATE FAILURE (stale,
+// delete it); listed entry that fails -> OK, EXPECTED-FAIL; empty allowlist -> full enforcement.
+// CAMPAIGN's ratchet is the composite variant described above (per module-grade, OR of two
+// conditions). Zero drivers found -> FAIL LOUDLY.
 
 const fs = require('fs');
 const path = require('path');
@@ -233,8 +242,12 @@ const seenCampaignAllowlistIds = new Set();
 const campaignResultsBySeed = SEEDS.map(runCampaigns);
 const gids = Array.from(campaignResultsBySeed[0].keys()).sort();
 
+// Composite, PER-MODULE-GRADE ratchet (Task 11 fix -- see the header note above for why this
+// replaced a file-wide empty-check). `ratchet()` above can't express this: it only compares one
+// boolean against one allowlist entry, but a campaign entry covers an OR of two independent
+// conditions and only counts as stale once BOTH clear, so this gets its own bespoke pass rather
+// than reusing that helper.
 console.log(padR('module-grade', 22) + padR('within-dup (11,22,33)', 26) + padR('cross-rate (11,22,33)', 30) + 'verdict');
-const simCampaignAllowlistEmpty = campaignAllowlist.length === 0;
 for (const gid of gids) {
   const perSeed = campaignResultsBySeed.map((m) => m.get(gid));
   const withinPass = perSeed.every((r) => r.withinDup1 === 0 && r.withinDup2 === 0);
@@ -242,24 +255,34 @@ for (const gid of gids) {
   const rates = perSeed.map((r) => r.crossDup / r.crossTotal);
   const ratesStr = rates.map((r) => (r * 100).toFixed(2) + '%').join(',');
   const worstRate = Math.max(...rates);
+  const crossPass = worstRate <= CROSS_CAMPAIGN_MAX_RATE;
+  const bothPass = withinPass && crossPass;
 
   const gidMatch = /^(.*)\.g(\d+)$/.exec(gid);
   if (!gidMatch) throw new Error('malformed module-grade id: ' + gid);
   const id = campaignId(gidMatch[1], gidMatch[2]);
-  const { verdict: withinVerdict, isFailure } = ratchet(id, withinPass, campaignAllowlistByDriver, seenCampaignAllowlistIds);
-  if (isFailure) gateFail = true;
 
-  let crossNote = '';
-  if (simCampaignAllowlistEmpty) {
-    if (worstRate > CROSS_CAMPAIGN_MAX_RATE) {
-      crossNote = ' | CROSS-CAMPAIGN FAIL (' + (worstRate * 100).toFixed(2) + '% > 1%, armed: sim-campaign allowlist is empty)';
+  const entry = campaignAllowlistByDriver.get(id);
+  let verdict;
+  if (entry) {
+    seenCampaignAllowlistIds.add(id);
+    if (bothPass) {
+      verdict = 'FAIL (stale allowlist entry -- both within-campaign and cross-campaign now clear, delete it)';
       gateFail = true;
+    } else {
+      verdict = 'EXPECTED-FAIL (' + entry.reason + ')';
     }
+  } else if (bothPass) {
+    verdict = 'ok';
   } else {
-    crossNote = ' | cross-campaign report-only (arms at empty sim-campaign allowlist)';
+    const reasons = [];
+    if (!withinPass) reasons.push('within-campaign repeats');
+    if (!crossPass) reasons.push('cross-campaign rate ' + (worstRate * 100).toFixed(2) + '% > ' + (CROSS_CAMPAIGN_MAX_RATE * 100).toFixed(0) + '%');
+    verdict = 'FAIL (unlisted: ' + reasons.join(' + ') + ')';
+    gateFail = true;
   }
 
-  console.log(padR(gid, 22) + padR(withinDupsStr, 26) + padR(ratesStr, 30) + withinVerdict + crossNote);
+  console.log(padR(gid, 22) + padR(withinDupsStr, 26) + padR(ratesStr, 30) + verdict);
 }
 
 // Allowlist entries that never matched anything (typo'd id, stale after a rename) are themselves
