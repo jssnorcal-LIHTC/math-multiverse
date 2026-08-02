@@ -236,6 +236,10 @@ for (const mod of MODULES) {
       break;
     }
     const record = { id: mod.id + '.' + fn.name, module: mod.id, fn: fn.name, line, key: sh.key, offenders };
+    // Per spec 4.3 (shells) / controller ruling: a check-carrying generator is structurally
+    // immune to this ban's failure mode, since sigOf's check-object branch never reads text or
+    // prompt at all, so info-only here is not a weaker rule, it is the rule applied exactly where
+    // it has a mechanism to bite.
     if (isCheckCarrying(body, fn)) infoOnly.push(record);
     else enforced.push(record);
   }
