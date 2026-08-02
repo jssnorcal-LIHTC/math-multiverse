@@ -10716,9 +10716,38 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   }
 
   function genNested() {
-    const a = ri(4, 12), b = ri(2, 4), c = ri(2, 5);
-    const sum = a + b;
-    if (sum % b !== 0) return genBrackets();
+    // Task 13: RETRY (up to 20 attempts) instead of delegating to genBrackets on a failed
+    // divisibility draw -- the old `return genBrackets()` fallback fired on 59% of draws
+    // (measured pre-fix), silently donating most of this mix member's weight to a sibling
+    // generator's topic (a dishonest L4 blend). Widened a ri(4,20), b ri(2,6) per the widening
+    // table (was 4..12/2..4); c widened further to ri(2,10) (table proposed 2..7) -- the (a,b)
+    // axis alone yields only 26 valid divisible pairs x the table's 6 c-values = 156 distinct,
+    // which the gate measured short of its 70%-weight need (156 vs ~169); c does not interact
+    // with the divisibility filter at all, so widening it is the most direct lever, verified by
+    // direct enumeration to reach 26 x 9 = 234 distinct with a healthy margin. If all 20 retries
+    // miss -- measured at 0.0664% of draws over 2,000,000 simulated trials, see
+    // task-13-report.md -- a CONSTRUCTIVE fallback derives a guaranteed-divisible triple
+    // directly (pick b, pick a quotient q, derive a = b*(q-1) so (a+b) = b*q) rather than ever
+    // silently handing off to another generator; the quotient range is chosen so the derived a
+    // always lands back in the SAME 4..20 band the retry path draws from. Both paths fall
+    // through to ONE shared return below, so the check contract (added this task -- the prior
+    // check-less prose signature collided on this generator's 3-number digit SET, e.g.
+    // (a=5,b=3,c=3) and (a=3,b=3,c=5) both reduce to the set {3,5}) has an identical shape
+    // regardless of which path produced a/b/c.
+    let a, b, c, sum, tries = 0;
+    do {
+      a = ri(4, 20); b = ri(2, 6); c = ri(2, 10);
+      sum = a + b;
+      tries++;
+    } while (sum % b !== 0 && tries < 20);
+    if (sum % b !== 0) {
+      b = ri(2, 6);
+      const qLo = Math.ceil(4 / b) + 1, qHi = Math.floor(20 / b) + 1;
+      const q = ri(qLo, Math.max(qLo, qHi));
+      a = b * (q - 1);
+      c = ri(2, 10);
+      sum = a + b;
+    }
     const expr = `((${a} + ${b}) ÷ ${b}) + ${c}`;
     const result = (sum / b) + c;
     // Pedagogical: ignored parens, wrong nesting
@@ -10731,10 +10760,17 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     ]);
     return {
       topic: 'pemdas-nested',
-      prompt: `Christopher Robin reads: <em>"Nested in the brackets: <strong>${expr}</strong>."</em>`,
+      prompt: pick([
+        `Christopher Robin reads: <em>"Nested in the brackets: <strong>${expr}</strong>."</em>`,
+        `Owl taps the page, very deliberate: <em>"Work from the inside out: <strong>${expr}</strong>."</em>`,
+        `Piglet holds the soggy page up: <em>"It says <strong>${expr}</strong> -- but what does it equal?"</em>`,
+        `Pooh hums over the puzzle: <em>"<strong>${expr}</strong>... oh bother, where do I even begin?"</em>`,
+        `Rabbit, brisk about it: <em>"Solve the nested groups first: <strong>${expr}</strong>. Go on."</em>`,
+      ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
       explain: `Inside-out. Inner parens: ${a} + ${b} = ${sum}. Then ÷ ${b} = ${sum/b}. Then + ${c} = <strong>${result}</strong>.`,
+      check: { op: 'nested-div-add', operands: [a, b, c], answer: result },
     };
   }
 
@@ -10919,22 +10955,48 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   // ---- Grade 6 generators (CCSS 6.EE — exponents, evaluating expressions, one-step equations) ----
   // Run only for the FB_LEVELS_6 gen ids (ACTIVE_GRADE === 6). The grade-5 generators above are
   // untouched. Each returns the standard { topic, prompt, answers:[4], correctIdx, explain } shape
-  // PLUS a machine-checkable check:{op, operands, answer}. `answer` is an exact integer and
-  // answers[correctIdx] equals that integer as a plain number string. Options are built with the
-  // shared pedDistractors() helper, which guarantees exactly 4 distinct, non-negative strings with
-  // the correct value present; the listed mistakes model real algebra slips. Pooh/Piglet voice kept.
+  // PLUS a machine-checkable check:{op, operands, answer}. `answer` is usually an exact integer
+  // (three Task 13 exponent sub-ops carry a STRING answer instead -- pow-expand's expansion,
+  // pow-compare's winning label -- always mirrored exactly by answers[correctIdx]). Options are
+  // built with the shared pedDistractors() helper (numeric ops) or a local dedup Set (string ops),
+  // both guaranteeing 4 distinct non-blank strings with the correct value present; the listed
+  // mistakes model real algebra slips. Pooh/Piglet voice kept.
+
+  // Task 13 (floating-bear widening): shared (base, exp) draw for the pow/pow-expand sub-ops
+  // below. Rejection sampling (redraw BOTH on cap violation) keeps the accepted distribution
+  // uniform over whichever (base, exp) pairs survive -- no separate per-exponent reweighting
+  // needed. base widened 2..6 -> 2..55 (exp stays 2..5): the cap was DEAD at the old range
+  // (6**4 = 1296 never approached the guard's own 1296 ceiling) and is now load-bearing, since
+  // base alone would blow past 4096 at exp>=4 long before reaching 55. Exactly 80 distinct
+  // (base, exp) pairs survive base<=55/exp<=5 under cap 4096 (54 at exp=2, 15 at exp=3, 7 at
+  // exp=4, 4 at exp=5) -- verified by direct enumeration, not estimated.
+  function drawG6PowPair() {
+    let base = ri(2, 55), exp = ri(2, 5);
+    while (Math.pow(base, exp) > 4096) { base = ri(2, 55); exp = ri(2, 5); }
+    return { base, exp };
+  }
+  // Renders n repeated `count` times, joined by sep (default '×') -- the shared-multiplication
+  // expansion string genG6ExponentExpand's answer/options are built from.
+  function expandStr(n, count, sep) { return Array(Math.max(count, 0)).fill(n).join(sep || ' × '); }
 
   function genG6Exponent() {
-    // 6.EE.1 — evaluate numerical expressions involving whole-number exponents (base^exp).
-    let base = ri(2, 6), exp = ri(2, 4);
-    while (base ** exp > 1296) { base = ri(2, 6); exp = ri(2, 4); }
-    const answer = base ** exp;
+    // Task 13: THREE weighted sub-ops (uniform 1/3 each, one pick() over the three functions)
+    // under the SAME topic 'g6-exponent' -- branch-distinct check.op values let the
+    // freshness-lib gate see each sub-pool's own depth via its topic|op composite bucket key,
+    // without fragmenting the topic used for coaching/UI grouping.
+    return pick([genG6ExponentPow, genG6ExponentExpand, genG6ExponentCompare])();
+  }
+
+  function genG6ExponentPow() {
+    // (a) 6.EE.1 — evaluate base^exp. Widened base/exp domain; see drawG6PowPair above.
+    const { base, exp } = drawG6PowPair();
+    const answer = Math.pow(base, exp);
     // Slips: multiplied base by exponent, added them, off by a single factor of base.
     const opts = pedDistractors(answer, [
-      base * exp,            // treated the exponent as a multiplier (base × exp)
-      base + exp,            // added base and exponent
-      base ** (exp - 1),     // one factor short
-      answer + base,         // one factor too many
+      base * exp,              // treated the exponent as a multiplier (base × exp)
+      base + exp,               // added base and exponent
+      Math.pow(base, exp - 1),  // one factor short
+      answer + base,            // one factor too many
       answer - base,
     ]);
     return {
@@ -10943,11 +11005,79 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Pooh watched the rain fold over on itself: <em>"<strong>${base}<sup>${exp}</sup></strong> raindrops, oh bother. How many is that?"</em>`,
         `Owl peered over his spectacles: <em>"${base} to the power of ${exp}; that is <strong>${base}<sup>${exp}</sup></strong>. Pray, what does it come to?"</em>`,
         `Christopher Robin read aloud from his book: <em>"<strong>${base}<sup>${exp}</sup></strong> means ${base} multiplied by itself ${exp} times. What is it?"</em>`,
+        `Piglet watched the honey jars stack themselves taller and taller: <em>"<strong>${base}<sup>${exp}</sup></strong> jars in all -- however many can that be?"</em>`,
+        `Rabbit, very organized about the flood count: <em>"${base} raised to the ${exp}, written <strong>${base}<sup>${exp}</sup></strong>. Work it out."</em>`,
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
       explain: `An exponent is repeated multiplication: ${base}<sup>${exp}</sup> = ${Array(exp).fill(base).join(' × ')} = <strong>${answer}</strong>. It is not ${base} × ${exp} = ${base * exp}.`,
       check: { op: 'pow', operands: [base, exp], answer },
+    };
+  }
+
+  function genG6ExponentExpand() {
+    // (b) NEW variant: write base^exp AS its repeated-multiplication expansion (the answer IS
+    // the expansion string, not the numeric value) -- same domain/cap as genG6ExponentPow via
+    // the shared drawG6PowPair, so this sub-op's own bucket clears with the same margin.
+    // Distractor pool exhaustively verified (script, not eyeballed) to yield >=4 distinct
+    // non-blank strings for all 80 valid (base, exp) pairs, including the tightest case
+    // base=exp=2 where several candidates collide with the correct answer or each other.
+    const { base, exp } = drawG6PowPair();
+    const correct = expandStr(base, exp, ' × ');
+    const candidates = [
+      `${base} × ${exp}`,                            // treated the exponent as a multiplier
+      expandStr(exp, base, ' × '),                    // swapped base and exponent roles
+      expandStr(base, exp, ' + '),                    // used addition instead of multiplication
+      expandStr(base, exp + 1, ' × '),                 // one factor too many
+      expandStr(base, Math.max(1, exp - 1), ' × '),    // one factor too few
+      `${exp} × ${base}`,                              // order-swapped simple product
+      expandStr(base + 1, exp, ' × '),                  // wrong base
+    ];
+    const pool = new Set([correct]);
+    for (const c of candidates) { if (pool.size >= 4) break; if (c && !pool.has(c)) pool.add(c); }
+    const opts = shuffle(Array.from(pool));
+    return {
+      topic: 'g6-exponent',
+      prompt: pick([
+        `Owl unrolls a scroll and taps it: <em>"Write <strong>${base}<sup>${exp}</sup></strong> as repeated multiplication. Which is it?"</em>`,
+        `Christopher Robin's book is open to the right page: <em>"<strong>${base}<sup>${exp}</sup></strong> means ${base} multiplied by itself how many times? Choose the expansion."</em>`,
+        `Pooh tries to picture the honey jars, one stack at a time: <em>"Show <strong>${base}<sup>${exp}</sup></strong> the long way -- all the multiplying, written out."</em>`,
+        `Piglet copies it out very carefully: <em>"Which is the same as <strong>${base}<sup>${exp}</sup></strong>, but written as repeated multiplying?"</em>`,
+        `Rabbit demands the expanded form: <em>"Don't just tell me the total -- write <strong>${base}<sup>${exp}</sup></strong> out as a multiplication string."</em>`,
+      ]),
+      answers: opts,
+      correctIdx: opts.indexOf(correct),
+      explain: `${base}<sup>${exp}</sup> means ${base} multiplied by itself ${exp} times: <strong>${correct}</strong>. It is not ${base} × ${exp} -- that treats the exponent as one extra factor instead of a repeat count.`,
+      check: { op: 'pow-expand', operands: [base, exp], answer: correct },
+    };
+  }
+
+  function genG6ExponentCompare() {
+    // (c) NEW variant: which is larger, a^b or b^a? Draws a, b INDEPENDENTLY (not sorted) so
+    // "a^b vs b^a" and "b^a vs a^b" stay two distinct draws/signatures even though they share
+    // the same underlying fact (Task 13 note 2). Excludes the trivial a===b tie and the ONLY
+    // nontrivial integer tie 2^4 === 4^2 === 16, both orderings -- exhaustively verified (script)
+    // that no other integer pair in [2,11] ties. 88 distinct ordered pairs survive.
+    let a = ri(2, 11), b = ri(2, 11);
+    while (a === b || (a === 2 && b === 4) || (a === 4 && b === 2)) { a = ri(2, 11); b = ri(2, 11); }
+    const va = Math.pow(a, b), vb = Math.pow(b, a);
+    const leftDisp = `${a}<sup>${b}</sup>`, rightDisp = `${b}<sup>${a}</sup>`;
+    const leftExpr = `${a}^${b}`, rightExpr = `${b}^${a}`;   // plain-text form: options + check.answer
+    const bigger = va > vb ? leftExpr : rightExpr;
+    const opts = shuffle([leftExpr, rightExpr, 'They are equal', 'Cannot tell without computing']);
+    return {
+      topic: 'g6-exponent',
+      prompt: pick([
+        `Owl squints between two towers of numbers: <em>"Which is greater, <strong>${leftDisp}</strong> or <strong>${rightDisp}</strong>?"</em>`,
+        `Pooh scratches his head over the honey math: <em>"Is <strong>${leftDisp}</strong> more, or <strong>${rightDisp}</strong>?"</em>`,
+        `Christopher Robin poses a riddle from his book: <em>"Between <strong>${leftDisp}</strong> and <strong>${rightDisp}</strong>, which comes out larger?"</em>`,
+        `Rabbit compares two piles grown by the same rule, swapped: <em>"<strong>${leftDisp}</strong> versus <strong>${rightDisp}</strong> -- which pile wins?"</em>`,
+        `Piglet, a little nervous about it: <em>"They want to know whether <strong>${leftDisp}</strong> or <strong>${rightDisp}</strong> is the bigger one..."</em>`,
+      ]),
+      answers: opts,
+      correctIdx: opts.indexOf(bigger),
+      explain: `${leftDisp} = ${va}. ${rightDisp} = ${vb}. <strong>${bigger === leftExpr ? leftDisp : rightDisp}</strong> is bigger. (Swapping which number is the base and which is the exponent almost always changes the value.)`,
+      check: { op: 'pow-compare', operands: [a, b], answer: bigger },
     };
   }
 
@@ -10978,8 +11108,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   }
 
   function genG6SolveAdd() {
-    // 6.EE.7 — solve the one-step equation x + a = b (b > a so x stays positive).
-    const a = ri(2, 15), x = ri(1, 15), b = a + x;
+    // 6.EE.7 — solve the one-step equation x + a = b (b > a so x stays positive). Task 13:
+    // a widened 2..15 -> 2..18 (x stays 1..15) -- 210 -> 255 distinct (a,b) pairs, clearing
+    // the L3 binding gate (measured 210 vs a need of 216 at N=18 pre-widening).
+    const a = ri(2, 18), x = ri(1, 15), b = a + x;
     const answer = b - a;   // == x
     // Slips: added instead of subtracting (wrong inverse), copied the total or the addend.
     const opts = pedDistractors(answer, [
@@ -10995,6 +11127,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Piglet's bottle began with <strong>x</strong> acorns. Pooh dropped in <strong>${a}</strong> more, and now there are <strong>${b}</strong>. <em>"How many at the start?"</em> &nbsp;(x + ${a} = ${b})`,
         `Eeyore counted his thistles: <em>"I had x. Someone added <strong>${a}</strong>, making <strong>${b}</strong>. How many did I begin with?"</em> &nbsp;(x + ${a} = ${b})`,
         `Solve for Pooh in the rising water: <em>"<strong>x + ${a} = ${b}</strong>. What is x?"</em>`,
+        `Owl squints at the flooded ledger: <em>"x acorns, plus <strong>${a}</strong> more, comes to <strong>${b}</strong>. Recover x."</em> &nbsp;(x + ${a} = ${b})`,
+        `Kanga tallies the rescue basket: <em>"It held x, then <strong>${a}</strong> more went in, for <strong>${b}</strong> total. What was x?"</em> &nbsp;(x + ${a} = ${b})`,
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
@@ -11004,8 +11138,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   }
 
   function genG6SolveMul() {
-    // 6.EE.7 — solve the one-step equation a·x = b (b is a multiple of a so x is a whole number).
-    const a = ri(2, 9), x = ri(2, 12), b = a * x;
+    // 6.EE.7 — solve the one-step equation a·x = b (b is a multiple of a so x is a whole
+    // number). Task 13: a widened 2..9 -> 2..15, x widened 2..12 -> 2..20 -- 88 -> 266
+    // distinct (a,x) pairs, clearing the L4 binding gate (need 240 at N=20).
+    const a = ri(2, 15), x = ri(2, 20), b = a * x;
     const answer = b / a;   // == x
     // Slips: multiplied instead of dividing (wrong inverse), subtracted, or added.
     const opts = pedDistractors(answer, [
@@ -11021,6 +11157,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Owl stacked the rescued jars in <strong>${a}</strong> equal rows, <strong>${b}</strong> jars in all. <em>"How many in each row?"</em> &nbsp;(${a}x = ${b})`,
         `Kanga shared <strong>${b}</strong> haycorns into <strong>${a}</strong> equal baskets. <em>"How many in each basket?"</em> &nbsp;(${a}x = ${b})`,
         `Solve for Pooh aboard the floating jar: <em>"<strong>${a}x = ${b}</strong>. What is x?"</em>`,
+        `Rabbit organizes the flood supplies: <em>"<strong>${b}</strong> tins, packed <strong>${a}</strong> to a crate. How many crates?"</em> &nbsp;(${a}x = ${b})`,
+        `Piglet counts very carefully: <em>"<strong>${b}</strong> raindrops fell in <strong>${a}</strong> equal bursts. Raindrops per burst?"</em> &nbsp;(${a}x = ${b})`,
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
