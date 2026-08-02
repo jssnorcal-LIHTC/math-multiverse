@@ -11,8 +11,8 @@
 //    in the surrounding prose is a constant baked into what is supposed to be a purely-cosmetic
 //    phrasing template.
 //
-//    ENFORCEMENT IS SCOPED TO CHECK-LESS GENERATORS ONLY (controller ruling on this task). The
-//    ban's entire purpose is signature hygiene: for check-less/prose-signature topics,
+//    ENFORCEMENT IS SCOPED TO CHECK-LESS GENERATORS ONLY. The ban's entire purpose is signature
+//    hygiene: for check-less/prose-signature topics,
 //    MVFresh.sigOf's fallback path extracts every digit out of text/prompt into the dedup
 //    signature's number-set, so a hardcoded digit is a real (if narrow) false-collision-risk
 //    surface. But sigOf NEVER reads text/prompt for a check-carrying item (it hashes the check
@@ -27,8 +27,8 @@
 //    Each shell array's enclosing generator function is found via a small brace-matching scanner
 //    (codeOnly/findMatchingBrace/findFunctionSpans below), and classified check-carrying iff its
 //    own function body contains a `check: {` object-literal key. Verified directly against source
-//    for every one of the 11 shell arrays this scanner currently flags (see task-7-report.md):
-//    9 are check-less (enforced), 2 are check-carrying (info-only) -- f1-decimals's
+//    for every one of the 11 shell arrays this scanner currently flags: 9 are check-less
+//    (enforced), 2 are check-carrying (info-only) -- f1-decimals's
 //    genG6DecDivide and genG6UnitRate, both of which hardcode "(2 dp)" in a shell that sigOf never
 //    reads because both carry a `check: { op: 'div', ... }` object.
 //
@@ -50,6 +50,7 @@
 const fs = require('fs');
 const path = require('path');
 const { loadModules, buildDrivers, MODULES, HTML_PATH } = require('./extract.js');
+const { padR } = require('./gate-common.js');
 
 const ALLOWLIST_PATH = path.join(__dirname, 'freshness-allowlist.json');
 
@@ -210,8 +211,6 @@ function scanShells(body) {
   return results;
 }
 
-function padR(s, n) { s = String(s); return s.length >= n ? s : s + ' '.repeat(n - s.length); }
-
 // ---- 1. static scan, classified by enclosing generator ----
 const src = fs.readFileSync(HTML_PATH, 'utf8');
 let totalArrays = 0, totalFunctions = 0;
@@ -236,10 +235,9 @@ for (const mod of MODULES) {
       break;
     }
     const record = { id: mod.id + '.' + fn.name, module: mod.id, fn: fn.name, line, key: sh.key, offenders };
-    // Per spec 4.3 (shells) / controller ruling: a check-carrying generator is structurally
-    // immune to this ban's failure mode, since sigOf's check-object branch never reads text or
-    // prompt at all, so info-only here is not a weaker rule, it is the rule applied exactly where
-    // it has a mechanism to bite.
+    // A check-carrying generator is structurally immune to this ban's failure mode, since
+    // sigOf's check-object branch never reads text or prompt at all, so info-only here is not a
+    // weaker rule, it is the rule applied exactly where it has a mechanism to bite.
     if (isCheckCarrying(body, fn)) infoOnly.push(record);
     else enforced.push(record);
   }
