@@ -24,6 +24,17 @@ function seededMath(seed) {
   return m;
 }
 
+// fnv: FNV-1a hash, same algorithm as Math-Multiverse.html's internal fnv() (used there to compact
+// MVFresh signatures into storage keys, which returns a base-36 STRING for that purpose). This copy
+// returns the raw unsigned 32-bit NUMBER instead, since its purpose here is different: deriving a
+// per-driver / per-module-grade seed as `seed ^ fnv(id)` (Task 14 rider -- per-driver seeding, see
+// the header notes in freshness-sim.js and freshness-lib.js). XOR needs a number, not a string.
+function fnv(s) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  return h >>> 0;
+}
+
 // The canonical driver-id format: "<moduleId>.g<grade>.i<levelIndex>", 0-based level index. This
 // exact shape is what MVFresh's own levelKey convention uses at runtime and what every allowlist
 // entry under gate:"lib" or gate:"sim" is keyed by.
@@ -32,4 +43,4 @@ function driverId(d) { return d.moduleId + '.g' + d.grade + '.i' + d.levelIndex;
 function padR(s, n) { s = String(s); return s.length >= n ? s : s + ' '.repeat(n - s.length); }
 function padL(s, n) { s = String(s); return s.length >= n ? s : ' '.repeat(n - s.length) + s; }
 
-module.exports = { mulberry32, seededMath, driverId, padR, padL };
+module.exports = { mulberry32, seededMath, fnv, driverId, padR, padL };
