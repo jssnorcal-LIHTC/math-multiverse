@@ -7,7 +7,8 @@
     "fuzz": "node tests/fuzz.js",
     "smoke": "node tests/smoke.js",
     "reading": "node tests/reading-surface.js",
-    "units": "node tests/readability.test.js && node tests/targets.test.js && node tests/validate-pack.test.js && node tests/verdicts.test.js && node tests/items.test.js && node tests/pack.test.js && node tests/runner.test.js",
+    "freshness": "node tests/freshness.js",
+    "units": "node tests/readability.test.js && node tests/targets.test.js && node tests/validate-pack.test.js && node tests/verdicts.test.js && node tests/items.test.js && node tests/pack.test.js && node tests/runner.test.js && node tests/extract.test.js",
     "test": "npm run units && node tests/fuzz.js && node tests/smoke.js && node tests/reading-surface.js"
   },
   "devDependencies": {
