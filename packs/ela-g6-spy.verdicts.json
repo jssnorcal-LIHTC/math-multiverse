@@ -677,6 +677,22 @@
       "status": "agree"
     },
     {
+      "itemId": "l6-hot-plain-words-carrying-more",
+      "itemHash": "14721b12b4d73ca4",
+      "blind": [
+        1,
+        2,
+        5
+      ],
+      "authored": [
+        1,
+        2,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-ebsr-why-her-log-runs-longer",
       "itemHash": "c7027591f349712e",
       "blind": 1,
@@ -748,22 +764,6 @@
         0,
         3,
         4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-hot-plain-words-carrying-more",
-      "itemHash": "14721b12b4d73ca4",
-      "blind": [
-        1,
-        2,
-        5
-      ],
-      "authored": [
-        1,
-        2,
-        5
       ],
       "confidence": "high",
       "status": "agree"
