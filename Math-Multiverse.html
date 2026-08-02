@@ -8207,26 +8207,26 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   }
 
   function genScale(builderId) {
-    // CCSS 5.MD.C — scale one named dimension of a rectangular prism by a whole factor
-    const shape = { l: ri(2, 5), w: ri(2, 4), h: ri(2, 4) };
+    // CCSS 5.MD.C — what happens to volume when one dimension doubles
+    const l = ri(2, 5), w = ri(2, 4), h = ri(2, 4);
+    const v1 = l * w * h;
     const factor = pick([2, 3]);
     const dim = pick(['length', 'width', 'height']);
-    const v1 = dim === 'length' ? shape.l : dim === 'width' ? shape.w : shape.h;
     const v2 = v1 * factor;
     const opts = distractors(v2, [
-      v1,                   // forgot to scale (returned the original value)
-      v1 + factor,          // added the factor instead of multiplying
-      v1 * factor * factor, // over-scaled (squared the factor)
-      v1 * (factor - 1),    // off-by-one factor
+      v1,                  // forgot to scale (returned A's volume)
+      v1 + factor,         // added the factor instead of multiplying
+      v1 * factor * factor,// over-scaled (squared the factor)
+      l * w * h * (factor - 1), // off-by-one factor
       v2 + 1,
       v2 - 1,
     ]);
     return {
       topic: 'vol-scale',
-      prompt: quoteFor(builderId, `Build A is <strong>${shape.l}×${shape.w}×${shape.h}</strong>. Build B has the same shape but the <strong>${dim}</strong> is <strong>${factor}× larger</strong>. <strong>New ${dim}</strong>?`),
-      answers: opts.map(o => o + ' studs'),
+      prompt: quoteFor(builderId, `Build A is <strong>${l}×${w}×${h}</strong>. Build B has the same shape but the <strong>${dim}</strong> is <strong>${factor}× larger</strong>. <strong>Volume of B</strong>?`),
+      answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(v2),
-      explain: `Original ${dim} = ${v1} studs. Scaled by ${factor}: ${v1} × ${factor} = <strong>${v2} studs</strong>.`,
+      explain: `Volume of A = ${l}×${w}×${h} = ${v1}. Multiplying one dimension by ${factor} multiplies volume by ${factor}. ${v1} × ${factor} = <strong>${v2} studs³</strong>.`,
     };
   }
 
