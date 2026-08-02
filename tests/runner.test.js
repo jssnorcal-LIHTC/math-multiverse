@@ -242,6 +242,54 @@ check('a completed level calls recordLevel exactly once, with the pack id and th
   });
 });
 
+// ---------- makeRunner write side: levelKey construction + MVFresh.markSeenIds ----------
+// Review finding on the first pass of this feature: the rotation check above drives pickItems
+// directly and never makeRunner, so the levelKey format, the second call-time MVFresh
+// resolution, the markSeenIds call, and the try/catch that must suppress a throwing ledger
+// were covered only by uncommitted ad-hoc checks. These two close that gap.
+
+check('makeRunner marks the served items seen via a call-time MVFresh, keyed by pack id + level index', () => {
+  const calls = [];
+  global.MVFresh = {
+    orderPool: (key, ids) => ids,               // identity order: isolates this check from orderPool's own logic
+    markSeenIds(key, ids) { calls.push([key, ids]); },
+  };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack(), host = makeEl('div'), Save = spySave();
+      R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+      assert.strictEqual(calls.length, 1, 'markSeenIds must fire exactly once per makeRunner call');
+      const [levelKey, ids] = calls[0];
+      assert.strictEqual(levelKey, 'pack.probe.i0', 'levelKey must be pack.<meta.id>.i<levelIndex>, 0-based');
+      // probePack's one level asks for all 4 of its items (questions === itemIds.length), so the marked
+      // ids must be exactly that set, in the order pickItems actually queued them: deterministic here
+      // because both rng and orderPool are fixed above (identity order, then Fisher-Yates at 0.5).
+      assert.deepStrictEqual(ids, ['i0', 'i3', 'i1', 'i2'], 'marked ids did not match the queue makeRunner actually served');
+    });
+  } finally {
+    delete global.MVFresh;
+  }
+});
+
+check('makeRunner survives a throwing MVFresh.markSeenIds and still renders the level', () => {
+  global.MVFresh = {
+    orderPool: (key, ids) => ids,
+    markSeenIds() { throw new Error('ledger boom'); },
+  };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack(), host = makeEl('div'), Save = spySave();
+      R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+      assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'a throwing markSeenIds must not stop the level from rendering');
+      assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'a throwing markSeenIds must not stop the item from rendering fully');
+    });
+  } finally {
+    delete global.MVFresh;
+  }
+});
+
 check('the factory can reach the globals the browser gives it', () => {
   // The bug this replaces: the UMD factory referenced `root`, which is the WRAPPER's parameter, so it was
   // out of scope inside the factory and every global lookup threw ReferenceError. The wrapper now passes
