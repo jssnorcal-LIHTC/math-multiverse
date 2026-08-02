@@ -15,23 +15,23 @@
 // `[15, 18, 18, 20, 20, 20]` in Math-Multiverse.html, confirmed by direct grep), so it's safe to
 // hardcode once here rather than extract it from each module's sandbox at runtime.
 //
-// Bucket key: topic + '|' + (check.op || '') -- a COMPOSITE of both axes, per controller
-// correction to refinement #1. `check.op || topic` (the original refinement) has a real leniency
-// bug: post-Task-6, `topic` uniquely identifies the leaf generator everywhere except the three
-// sanctioned phrasing-branch families, but `check.op` on its own COLLIDES across distinct leaves
-// in multiple places -- e.g. rocky-translator's genG6RatioTable and genG6EquivRatio both emit
-// op:'proportion'; rocky-translator's genG6UnitRate and genG6PercentFind both emit op:'div';
-// master-builder's genG6Volume and genG6VolumeFrac both emit op:'mul3'. Bucketing by op alone
-// MERGES those distinct leaves into one bucket and averages away real thinness in either one. The
-// composite key is never coarser than either axis alone: topic separates leaves that op cannot,
-// and op sub-splits a topic's internal branches once a later task (e.g. T12) gives them
-// branch-distinct ops. The three sanctioned phrasing-branch families (ns-div-*, dec-power-of-ten,
-// coord-identify) carry no check field at all, so their composite key degenerates to `topic + '|'`
-// and stays topic-coarse. That is EXPECTED, not a gap in this gate: those three are exactly the
-// case the seeded SIM gate (freshness-sim.js) exists to police behaviorally (it runs the real
-// drawRun/union-rejection path at real per-level draw counts); this LIB gate is only an analytic
-// estimate of per-bucket pool depth, and is coarse wherever the content itself gives it nothing
-// finer to key on.
+// Bucket key: topic + '|' + (check.op || '') -- a COMPOSITE of both axes. Neither axis alone is
+// safe to bucket on by itself. `topic` alone: post-Task-6, `topic` uniquely identifies the leaf
+// generator everywhere except the three sanctioned phrasing-branch families noted below, so topic
+// alone is usually fine but degenerates on those three. `check.op` alone is worse: it COLLIDES
+// across distinct leaves in multiple places -- e.g. rocky-translator's genG6RatioTable and
+// genG6EquivRatio both emit op:'proportion'; rocky-translator's genG6UnitRate and genG6PercentFind
+// both emit op:'div'; master-builder's genG6Volume and genG6VolumeFrac both emit op:'mul3'.
+// Bucketing by op alone MERGES those distinct leaves into one bucket and averages away real
+// thinness in either one. The composite key is never coarser than either axis alone: topic
+// separates leaves that op cannot, and op sub-splits a topic's internal branches once a later task
+// (e.g. T12) gives them branch-distinct ops. The three sanctioned phrasing-branch families
+// (ns-div-*, dec-power-of-ten, coord-identify) carry no check field at all, so their composite key
+// degenerates to `topic + '|'` and stays topic-coarse. That is EXPECTED, not a gap in this gate:
+// those three are exactly the case the seeded SIM gate (freshness-sim.js) exists to police
+// behaviorally (it runs the real drawRun/union-rejection path at real per-level draw counts); this
+// LIB gate is only an analytic estimate of per-bucket pool depth, and is coarse wherever the
+// content itself gives it nothing finer to key on.
 //
 // binding = min over buckets t of (distinct_t / weight_t), weight_t = draws_t / total draws.
 // PASS iff binding >= 12 * N.
@@ -47,14 +47,13 @@
 const fs = require('fs');
 const path = require('path');
 const { loadModules, buildDrivers } = require('./extract.js');
+const { seededMath, driverId, padR, padL } = require('./gate-common.js');
 
 const ALLOWLIST_PATH = path.join(__dirname, 'freshness-allowlist.json');
 const QPL = [15, 18, 18, 20, 20, 20];
 const DRAWS_PER_N = 500;
 const SEED = 11; // fixed, deterministic; shared value with freshness-sim.js's first seed
-
-function mulberry32(a) { return function () { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
-function seededMath(seed) { const m = Object.create(Math); m.random = mulberry32(seed); return m; }
+const THIN_BUCKET_SAFETY = 3; // see the thin-bucket guard below
 
 function loadAllowlistFor(gateName) {
   const raw = JSON.parse(fs.readFileSync(ALLOWLIST_PATH, 'utf8'));
@@ -69,14 +68,24 @@ function bucketKeyOf(q) {
   return topic + '|' + op;
 }
 
-function driverId(d) { return d.moduleId + '.g' + d.grade + '.i' + d.levelIndex; }
-function padR(s, n) { s = String(s); return s.length >= n ? s : s + ' '.repeat(n - s.length); }
-function padL(s, n) { s = String(s); return s.length >= n ? s : ' '.repeat(n - s.length) + s; }
-
 // NOTE: no seeded-Math/Math.imul self-check in this file. This gate never calls MVFresh.drawRun
 // (only the pure .sigOf() and driver.make()), and Math.imul is only ever exercised by drawRun's
-// internal fnv hash -- so there is nothing here for such a check to actually exercise. The
-// controller's self-check requirement is scoped to freshness-sim.js, which does call drawRun.
+// internal fnv hash -- so there is nothing here for such a check to actually exercise. That
+// self-check lives in freshness-sim.js, which does call drawRun.
+
+// THIN-BUCKET GUARD: a bucket that is drawn only rarely can report a misleadingly high binding
+// ratio purely from having too few samples to collide, not from actually being deep. Extreme
+// case: a bucket drawn exactly once has distinct=1, so ratio = 1/weight = total draws -- always
+// enormous, always "passing," regardless of whether the underlying pool for that bucket is deep
+// or shallow, because one draw carries no information about repeat risk at all. A bucket needs
+// distinct >= 12*N*weight to pass at its own weight; observing that many distinct values (or
+// confidently NOT observing them) needs a sample noticeably larger than that minimum, not just
+// equal to it. A bucket whose own draw count is below THIN_BUCKET_SAFETY times that minimum is
+// UNMEASURED: its ratio is not trusted either way, it is reported as such, and it is always
+// treated as a failure for ratchet purposes (allowlistable like any other failure, never silently
+// passed). With today's content this guard changes no verdict -- every bucket that actually gets
+// drawn is drawn often enough to clear it -- but it exists so a future rarely-reached content
+// branch cannot pass on sampling noise instead of real depth.
 
 // ---- main ----
 const allowlist = loadAllowlistFor('lib');
@@ -116,38 +125,56 @@ for (const d of drivers) {
     if (!bucketSigs.has(key)) bucketSigs.set(key, new Set());
     bucketSigs.get(key).add(F.sigOf(q));
   }
-  let binding = Infinity, worstKey = null, worstDistinct = 0, worstWeight = 0;
+  const threshold = 12 * N;
+  // Worst MEASURED bucket (ordinary binding search, unmeasured buckets excluded so an inflated,
+  // untrustworthy ratio can never win the min-search) and the worst UNMEASURED bucket (tracked
+  // separately, ranked by how far short of its own required sample size it falls).
+  let worstMeasured = { binding: Infinity, key: null, distinct: 0, weight: 0 };
+  let worstUnmeasured = null;
   for (const [key, count] of bucketCounts) {
     const distinct = bucketSigs.get(key).size;
     const weight = count / total;
     const ratio = distinct / weight;
-    if (ratio < binding) { binding = ratio; worstKey = key; worstDistinct = distinct; worstWeight = weight; }
+    const required = THIN_BUCKET_SAFETY * Math.ceil(12 * N * weight);
+    if (count < required) {
+      if (!worstUnmeasured || (required - count) > (worstUnmeasured.required - worstUnmeasured.count)) {
+        worstUnmeasured = { key, distinct, weight, binding: ratio, count, required };
+      }
+      continue;
+    }
+    if (ratio < worstMeasured.binding) worstMeasured = { binding: ratio, key, distinct, weight };
   }
-  const threshold = 12 * N;
-  const pass = binding >= threshold;
+  const measuredPass = worstMeasured.key !== null && worstMeasured.binding >= threshold;
+  const pass = !worstUnmeasured && measuredPass;
+  // Report the unmeasured bucket when one exists (the more actionable finding); otherwise the
+  // normal worst-measured-bucket numbers, exactly as before this guard existed.
+  const display = worstUnmeasured || worstMeasured;
+  const unmeasuredNote = worstUnmeasured
+    ? 'UNMEASURED: bucket \'' + worstUnmeasured.key + '\' only drawn ' + worstUnmeasured.count + 'x, needs >= ' + worstUnmeasured.required + ' draws to trust its ratio'
+    : null;
 
   const entry = allowlistByDriver.get(id);
   let verdict;
   if (entry) {
     seenAllowlistDrivers.add(id);
     if (pass) { verdict = 'FAIL (stale allowlist entry -- passes now, delete it)'; gateFail = true; bumpRollup(d.moduleId, 'fail'); }
-    else { verdict = 'EXPECTED-FAIL (' + entry.reason + ')'; bumpRollup(d.moduleId, 'expectedFail'); }
+    else { verdict = 'EXPECTED-FAIL (' + (unmeasuredNote ? unmeasuredNote + '; ' : '') + entry.reason + ')'; bumpRollup(d.moduleId, 'expectedFail'); }
   } else if (pass) {
     verdict = 'ok';
     bumpRollup(d.moduleId, 'ok');
   } else {
-    verdict = 'FAIL (unlisted)';
+    verdict = 'FAIL (unlisted' + (unmeasuredNote ? ': ' + unmeasuredNote : '') + ')';
     gateFail = true;
     bumpRollup(d.moduleId, 'fail');
   }
 
   console.log(
-    padR(id, 30) + padL(N, 4) + '  ' + padR(worstKey, 40) + padL(worstDistinct, 9) +
-    padL(worstWeight.toFixed(4), 9) + padL(binding.toFixed(1), 10) + padL(threshold, 7) + '  ' + verdict
+    padR(id, 30) + padL(N, 4) + '  ' + padR(display.key, 40) + padL(display.distinct, 9) +
+    padL(display.weight.toFixed(4), 9) + padL(display.binding.toFixed(1), 10) + padL(threshold, 7) + '  ' + verdict
   );
 
-  if (worstOverall === null || binding / threshold < worstOverall.ratio) {
-    worstOverall = { id, ratio: binding / threshold };
+  if (worstOverall === null || display.binding / threshold < worstOverall.ratio) {
+    worstOverall = { id, ratio: display.binding / threshold };
   }
 }
 

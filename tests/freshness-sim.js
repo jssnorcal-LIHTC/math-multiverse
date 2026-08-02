@@ -17,7 +17,7 @@
 //   repeat RATE (campaign-2 items whose signature already appeared in campaign-1) is printed
 //   always, and only turns into a hard <=1% assertion once the sim-campaign-scoped allowlist is
 //   empty (arms itself; see the `if (simCampaignAllowlistEmpty) assert(...)` below) -- report-only
-//   until then, per controller refinement #4.
+//   until then.
 //
 // Runs the REAL MVFresh.drawRun path (not a direct driver.make() sample, that's freshness-lib.js's
 // job) under a SEEDED Math, so results are deterministic and reproducible in CI.
@@ -26,8 +26,7 @@
 // proves this file's OWN duplicate-detection logic actually works -- that it reports zero on a
 // genuinely protected draw sequence and reports nonzero on a genuinely unprotected one -- before
 // any of that logic is trusted to judge real content. See runNegativeControl() below for exactly
-// why its two arms are structured the way they are (this was verified empirically, not assumed;
-// see task-7-report.md).
+// why its two arms are structured the way they are (this was verified empirically, not assumed).
 //
 // Ratchet semantics (identical to freshness-lib.js, applied independently per gate namespace):
 // unlisted failure -> GATE FAILURE; listed entry that now PASSES -> GATE FAILURE (stale, delete
@@ -37,6 +36,7 @@
 const fs = require('fs');
 const path = require('path');
 const { loadModules, buildDrivers } = require('./extract.js');
+const { seededMath, driverId, padR, padL } = require('./gate-common.js');
 
 const ALLOWLIST_PATH = path.join(__dirname, 'freshness-allowlist.json');
 const QPL = [15, 18, 18, 20, 20, 20];
@@ -44,19 +44,13 @@ const SEEDS = [11, 22, 33];
 const RUNS = 10;
 const CROSS_CAMPAIGN_MAX_RATE = 0.01;
 
-function mulberry32(a) { return function () { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
-function seededMath(seed) { const m = Object.create(Math); m.random = mulberry32(seed); return m; }
-
 function loadAllowlistFor(gateName) {
   const raw = JSON.parse(fs.readFileSync(ALLOWLIST_PATH, 'utf8'));
   if (!Array.isArray(raw)) throw new Error('freshness-allowlist.json must be a JSON array');
   return raw.filter((e) => e.gate === gateName);
 }
 
-function driverId(d) { return d.moduleId + '.g' + d.grade + '.i' + d.levelIndex; }
 function campaignId(moduleId, grade) { return moduleId + '.g' + grade; }
-function padR(s, n) { s = String(s); return s.length >= n ? s : s + ' '.repeat(n - s.length); }
-function padL(s, n) { s = String(s); return s.length >= n ? s : ' '.repeat(n - s.length) + s; }
 
 // Apply the shared ratchet rule to one (id, pass) result. Mutates `seen` and returns
 // { verdict, isFailure }.
@@ -86,7 +80,7 @@ function verifySeededMathPreservesImul() {
 }
 
 // ---- synthetic negative control (content-independent; must run every invocation) ----
-// Design, verified empirically (see task-7-report.md): with a 30-item pool, 10 runs x 10 draws
+// Design, verified empirically: with a 30-item pool, 10 runs x 10 draws
 // SHARED across one ledger (100 total demand > 30-item pool) is pigeonhole-impossible to keep
 // clean -- MVFresh's own exhaustion/eviction path is forced to accept genuine repeats once the
 // pool is exhausted, same as it would for any real thin content. That's a feature of MVFresh, not
