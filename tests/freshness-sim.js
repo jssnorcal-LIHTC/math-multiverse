@@ -1,23 +1,26 @@
 'use strict';
-// freshness-sim.js -- Task 7 seeded 10-run SIM gate (gate:"sim" in freshness-allowlist.json).
+// freshness-sim.js -- Task 7 seeded 10-run SIM gate. TWO independent check types, ratcheted
+// against SEPARATE gate namespaces in the same tests/freshness-allowlist.json file, so a level
+// entry and a campaign entry for the same module-grade can never collide on id:
+//
+//   LEVEL SCOPE (gate:"sim", id "<module>.g<grade>.i<level>"): per driver, per seed in
+//   [11,22,33]: reset the ledger, run drawRun 10 times in a row at the driver's real N
+//   (shared/persisted ledger across those 10 runs, exactly like a kid replaying one level 10
+//   times), and assert zero repeated signatures across all 10xN draws combined. A driver must be
+//   clean under ALL 3 seeds to PASS; a repeat under ANY seed is a FAIL for that driver (a real
+//   content-thinness signal is not something a lucky seed should hide).
+//
+//   CAMPAIGN (gate:"sim-campaign", id "<module>.g<grade>"): per module-grade (12 groups), per
+//   seed: two sequential "campaigns" (all 6 levels of that grade, in order, via drawRun, SHARED
+//   ledger across both campaigns -- i.e. simulating a kid playing the whole grade, then playing
+//   it again). Within-campaign repeats must be 0 for UNLISTED module-grades. Cross-campaign
+//   repeat RATE (campaign-2 items whose signature already appeared in campaign-1) is printed
+//   always, and only turns into a hard <=1% assertion once the sim-campaign-scoped allowlist is
+//   empty (arms itself; see the `if (simCampaignAllowlistEmpty) assert(...)` below) -- report-only
+//   until then, per controller refinement #4.
 //
 // Runs the REAL MVFresh.drawRun path (not a direct driver.make() sample, that's freshness-lib.js's
-// job) under a SEEDED Math, so results are deterministic and reproducible in CI. Two independent
-// check types, both ratcheted against the same allowlist file (see loadAllowlistFor('sim')):
-//
-//   LEVEL SCOPE: per driver, per seed in [11,22,33]: reset the ledger, run drawRun 10 times in a
-//   row at the driver's real N (shared/persisted ledger across those 10 runs, exactly like a kid
-//   replaying one level 10 times), and assert zero repeated signatures across all 10xN draws
-//   combined. A driver must be clean under ALL 3 seeds to PASS; a repeat under ANY seed is a FAIL
-//   for that driver (a real content-thinness signal is not something a lucky seed should hide).
-//
-//   CAMPAIGN: per module-grade (12 groups), per seed: two sequential "campaigns" (all 6 levels of
-//   that grade, in order, via drawRun, SHARED ledger across both campaigns -- i.e. simulating a
-//   kid playing the whole grade, then playing it again). Within-campaign repeats must be 0 for
-//   UNLISTED module-grades. Cross-campaign repeat RATE (campaign-2 items whose signature already
-//   appeared in campaign-1) is printed always, and only turns into a hard <=1% assertion once the
-//   sim-scoped allowlist is empty (arms itself; see the `if (simAllowlistEmpty) assert(...)` below)
-//   -- report-only until then, per controller refinement #4.
+// job) under a SEEDED Math, so results are deterministic and reproducible in CI.
 //
 // SYNTHETIC NEGATIVE CONTROL (content-independent, runs before anything else, every invocation):
 // proves this file's OWN duplicate-detection logic actually works -- that it reports zero on a
@@ -26,9 +29,10 @@
 // why its two arms are structured the way they are (this was verified empirically, not assumed;
 // see task-7-report.md).
 //
-// Ratchet semantics (identical to freshness-lib.js): unlisted failure -> GATE FAILURE; listed
-// entry that now PASSES -> GATE FAILURE (stale, delete it); listed entry that fails -> OK,
-// EXPECTED-FAIL; empty allowlist -> full enforcement. Zero drivers found -> FAIL LOUDLY.
+// Ratchet semantics (identical to freshness-lib.js, applied independently per gate namespace):
+// unlisted failure -> GATE FAILURE; listed entry that now PASSES -> GATE FAILURE (stale, delete
+// it); listed entry that fails -> OK, EXPECTED-FAIL; empty allowlist -> full enforcement. Zero
+// drivers found -> FAIL LOUDLY.
 
 const fs = require('fs');
 const path = require('path');
@@ -50,7 +54,7 @@ function loadAllowlistFor(gateName) {
 }
 
 function driverId(d) { return d.moduleId + '.g' + d.grade + '.i' + d.levelIndex; }
-function campaignId(moduleId, grade) { return moduleId + '.g' + grade + '.campaign'; }
+function campaignId(moduleId, grade) { return moduleId + '.g' + grade; }
 function padR(s, n) { s = String(s); return s.length >= n ? s : s + ' '.repeat(n - s.length); }
 function padL(s, n) { s = String(s); return s.length >= n ? s : ' '.repeat(n - s.length) + s; }
 
@@ -226,13 +230,17 @@ for (const [moduleId, r] of levelRollup) {
   console.log(padR(moduleId, 18) + padL(r.ok, 5) + padL(r.expectedFail, 15) + padL(r.fail, 15));
 }
 
-// ---- campaign, 3 seeds ----
+// ---- campaign, 3 seeds (own gate namespace: "sim-campaign", separate from level scope's "sim") ----
 console.log('=== freshness-sim: campaign (2x full-grade playthrough, seeds ' + SEEDS.join(',') + ') ===');
+const campaignAllowlist = loadAllowlistFor('sim-campaign');
+const campaignAllowlistByDriver = new Map(campaignAllowlist.map((e) => [e.driver, e]));
+const seenCampaignAllowlistIds = new Set();
+
 const campaignResultsBySeed = SEEDS.map(runCampaigns);
 const gids = Array.from(campaignResultsBySeed[0].keys()).sort();
 
 console.log(padR('module-grade', 22) + padR('within-dup (11,22,33)', 26) + padR('cross-rate (11,22,33)', 30) + 'verdict');
-const simAllowlistEmpty = allowlist.length === 0;
+const simCampaignAllowlistEmpty = campaignAllowlist.length === 0;
 for (const gid of gids) {
   const perSeed = campaignResultsBySeed.map((m) => m.get(gid));
   const withinPass = perSeed.every((r) => r.withinDup1 === 0 && r.withinDup2 === 0);
@@ -244,30 +252,37 @@ for (const gid of gids) {
   const gidMatch = /^(.*)\.g(\d+)$/.exec(gid);
   if (!gidMatch) throw new Error('malformed module-grade id: ' + gid);
   const id = campaignId(gidMatch[1], gidMatch[2]);
-  const { verdict: withinVerdict, isFailure } = ratchet(id, withinPass, allowlistByDriver, seenAllowlistDrivers);
+  const { verdict: withinVerdict, isFailure } = ratchet(id, withinPass, campaignAllowlistByDriver, seenCampaignAllowlistIds);
   if (isFailure) gateFail = true;
 
   let crossNote = '';
-  if (simAllowlistEmpty) {
+  if (simCampaignAllowlistEmpty) {
     if (worstRate > CROSS_CAMPAIGN_MAX_RATE) {
-      crossNote = ' | CROSS-CAMPAIGN FAIL (' + (worstRate * 100).toFixed(2) + '% > 1%, armed: sim allowlist is empty)';
+      crossNote = ' | CROSS-CAMPAIGN FAIL (' + (worstRate * 100).toFixed(2) + '% > 1%, armed: sim-campaign allowlist is empty)';
       gateFail = true;
     }
   } else {
-    crossNote = ' | cross-campaign report-only (arms at empty sim allowlist)';
+    crossNote = ' | cross-campaign report-only (arms at empty sim-campaign allowlist)';
   }
 
   console.log(padR(gid, 22) + padR(withinDupsStr, 26) + padR(ratesStr, 30) + withinVerdict + crossNote);
 }
 
 // Allowlist entries that never matched anything (typo'd id, stale after a rename) are themselves
-// a gate failure -- a silently-stale entry defeats the ratchet's whole purpose.
+// a gate failure -- a silently-stale entry defeats the ratchet's whole purpose. Checked per gate
+// namespace since level-scope ("sim") and campaign ("sim-campaign") are now separate allowlists.
 for (const e of allowlist) {
   if (!seenAllowlistDrivers.has(e.driver)) {
-    console.log('FAIL: allowlist entry for unknown id "' + e.driver + '" (gate:sim) never matched any driver or module-grade -- typo or stale entry');
+    console.log('FAIL: allowlist entry for unknown id "' + e.driver + '" (gate:sim) never matched any driver -- typo or stale entry');
+    gateFail = true;
+  }
+}
+for (const e of campaignAllowlist) {
+  if (!seenCampaignAllowlistIds.has(e.driver)) {
+    console.log('FAIL: allowlist entry for unknown id "' + e.driver + '" (gate:sim-campaign) never matched any module-grade -- typo or stale entry');
     gateFail = true;
   }
 }
 
 if (gateFail) { console.log('RESULT: FAIL'); process.exit(1); }
-console.log('RESULT: ALL CLEAN (' + firstDrivers.length + ' drivers x ' + SEEDS.length + ' seeds level-scope, ' + gids.length + ' module-grades x ' + SEEDS.length + ' seeds campaign, ' + allowlist.length + ' allowlisted)');
+console.log('RESULT: ALL CLEAN (' + firstDrivers.length + ' drivers x ' + SEEDS.length + ' seeds level-scope, ' + allowlist.length + ' allowlisted; ' + gids.length + ' module-grades x ' + SEEDS.length + ' seeds campaign, ' + campaignAllowlist.length + ' allowlisted)');

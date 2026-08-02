@@ -15,13 +15,23 @@
 // `[15, 18, 18, 20, 20, 20]` in Math-Multiverse.html, confirmed by direct grep), so it's safe to
 // hardcode once here rather than extract it from each module's sandbox at runtime.
 //
-// Bucket key: check.op || topic -- finer than topic alone wherever a check object exists (per
-// controller refinement #1). The three sanctioned phrasing-branch families from Task 6 (ns-div-*,
-// dec-power-of-ten, coord-identify) carry no check field at all, so they stay topic-coarse under
-// this key. That is EXPECTED, not a gap in this gate: those three are exactly the case the seeded
-// SIM gate (freshness-sim.js) exists to police behaviorally (it runs the real drawRun/union-
-// rejection path at real per-level draw counts); this LIB gate is only an analytic estimate of
-// per-bucket pool depth, and is coarse wherever the content itself gives it nothing finer to key on.
+// Bucket key: topic + '|' + (check.op || '') -- a COMPOSITE of both axes, per controller
+// correction to refinement #1. `check.op || topic` (the original refinement) has a real leniency
+// bug: post-Task-6, `topic` uniquely identifies the leaf generator everywhere except the three
+// sanctioned phrasing-branch families, but `check.op` on its own COLLIDES across distinct leaves
+// in multiple places -- e.g. rocky-translator's genG6RatioTable and genG6EquivRatio both emit
+// op:'proportion'; rocky-translator's genG6UnitRate and genG6PercentFind both emit op:'div';
+// master-builder's genG6Volume and genG6VolumeFrac both emit op:'mul3'. Bucketing by op alone
+// MERGES those distinct leaves into one bucket and averages away real thinness in either one. The
+// composite key is never coarser than either axis alone: topic separates leaves that op cannot,
+// and op sub-splits a topic's internal branches once a later task (e.g. T12) gives them
+// branch-distinct ops. The three sanctioned phrasing-branch families (ns-div-*, dec-power-of-ten,
+// coord-identify) carry no check field at all, so their composite key degenerates to `topic + '|'`
+// and stays topic-coarse. That is EXPECTED, not a gap in this gate: those three are exactly the
+// case the seeded SIM gate (freshness-sim.js) exists to police behaviorally (it runs the real
+// drawRun/union-rejection path at real per-level draw counts); this LIB gate is only an analytic
+// estimate of per-bucket pool depth, and is coarse wherever the content itself gives it nothing
+// finer to key on.
 //
 // binding = min over buckets t of (distinct_t / weight_t), weight_t = draws_t / total draws.
 // PASS iff binding >= 12 * N.
@@ -52,10 +62,11 @@ function loadAllowlistFor(gateName) {
   return raw.filter((e) => e.gate === gateName);
 }
 
-// check.op || topic -- see header note on why this is deliberately coarse for three topics.
+// topic + '|' + (check.op || '') -- see header note for why the composite beats either axis alone.
 function bucketKeyOf(q) {
-  if (q && q.check && typeof q.check === 'object' && q.check.op) return String(q.check.op);
-  return (q && q.topic) || '(no-topic)';
+  const topic = (q && q.topic) || '(no-topic)';
+  const op = (q && q.check && typeof q.check === 'object' && q.check.op) ? String(q.check.op) : '';
+  return topic + '|' + op;
 }
 
 function driverId(d) { return d.moduleId + '.g' + d.grade + '.i' + d.levelIndex; }
@@ -80,7 +91,7 @@ if (!drivers.length) {
 
 console.log('=== freshness-lib: binding-constraint gate (seed ' + SEED + ', ' + DRAWS_PER_N + ' x N draws/driver) ===');
 console.log(
-  padR('driver', 30) + padL('N', 4) + '  ' + padR('worst-bucket', 24) + padL('distinct', 9) +
+  padR('driver', 30) + padL('N', 4) + '  ' + padR('worst-bucket', 40) + padL('distinct', 9) +
   padL('weight', 9) + padL('binding', 10) + padL('12N', 7) + '  verdict'
 );
 
@@ -131,7 +142,7 @@ for (const d of drivers) {
   }
 
   console.log(
-    padR(id, 30) + padL(N, 4) + '  ' + padR(worstKey, 24) + padL(worstDistinct, 9) +
+    padR(id, 30) + padL(N, 4) + '  ' + padR(worstKey, 40) + padL(worstDistinct, 9) +
     padL(worstWeight.toFixed(4), 9) + padL(binding.toFixed(1), 10) + padL(threshold, 7) + '  ' + verdict
   );
 
