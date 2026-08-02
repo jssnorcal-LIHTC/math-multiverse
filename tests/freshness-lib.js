@@ -15,6 +15,15 @@
 // `[15, 18, 18, 20, 20, 20]` in Math-Multiverse.html, confirmed by direct grep), so it's safe to
 // hardcode once here rather than extract it from each module's sandbox at runtime.
 //
+// PER-DRIVER SEEDING (Task 14 rider, pulled forward from the T16 structural-fix carry-note): each
+// driver's 500xN measurement runs under its own mulberry32(SEED ^ fnv(driverId)), reassigned onto
+// driver.sandbox.Math right before that driver's loop -- not the one Math instance every driver used
+// to share. Distinct/binding counts over a 10,000-draw sample are effectively seed-insensitive (they
+// converge on the pool's true size regardless of which specific stream produced the sample), so this
+// changes no PASS/FAIL verdict on its own; it exists so this gate's per-driver measurement can never
+// be perturbed by an unrelated module's content edit shifting a shared stream, matching
+// freshness-sim.js's identical fix. See that file's header for the full mechanism note.
+//
 // Bucket key: topic + '|' + (check.op || '') -- a COMPOSITE of both axes. Neither axis alone is
 // safe to bucket on by itself. `topic` alone: post-Task-6, `topic` uniquely identifies the leaf
 // generator everywhere except the three sanctioned phrasing-branch families noted below, so topic
@@ -47,7 +56,7 @@
 const fs = require('fs');
 const path = require('path');
 const { loadModules, buildDrivers } = require('./extract.js');
-const { seededMath, driverId, padR, padL } = require('./gate-common.js');
+const { seededMath, fnv, driverId, padR, padL } = require('./gate-common.js');
 
 const ALLOWLIST_PATH = path.join(__dirname, 'freshness-allowlist.json');
 const QPL = [15, 18, 18, 20, 20, 20];
@@ -92,7 +101,7 @@ const allowlist = loadAllowlistFor('lib');
 const allowlistByDriver = new Map(allowlist.map((e) => [e.driver, e]));
 const seenAllowlistDrivers = new Set();
 
-const drivers = buildDrivers(loadModules(), { extraGlobals: { Math: seededMath(SEED) } });
+const drivers = buildDrivers(loadModules(), { extraGlobals: {} });
 if (!drivers.length) {
   console.log('FAIL: zero drivers found (extraction broken -- refusing to report a clean gate on nothing)');
   process.exit(1);
@@ -115,6 +124,7 @@ for (const d of drivers) {
   const id = driverId(d);
   const N = QPL[d.levelIndex];
   const total = DRAWS_PER_N * N;
+  d.sandbox.Math = seededMath(SEED ^ fnv(id));
   const F = d.sandbox.MVFresh;
   const bucketSigs = new Map();   // key -> Set(sig)
   const bucketCounts = new Map(); // key -> draw count
