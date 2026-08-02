@@ -1,8 +1,4 @@
 [
-  { "driver": "fraction-rider.g5.i0", "gate": "lib", "reason": "binding 11.8 < 12N=180 at bucket 'frac-sub-like|' (distinct 4, weight 0.3384, N=15) -- like-denom dispatch's genSubLike subpool is tiny; T12 (widen fraction-rider) target" },
-  { "driver": "fraction-rider.g5.i1", "gate": "lib", "reason": "binding 187.8 < 12N=216 at bucket 'frac-sub-unlike|' (distinct 37, weight 0.1970, N=18); T12 target" },
-  { "driver": "fraction-rider.g5.i2", "gate": "lib", "reason": "binding 155.6 < 12N=216 at bucket 'frac-simplify|' (distinct 27, weight 0.1736, N=18); T12 target" },
-  { "driver": "fraction-rider.g5.i4", "gate": "lib", "reason": "binding 78.9 < 12N=240 at bucket 'frac-div-unit-by-whole|' (distinct 20, weight 0.2535, N=20) -- divide-mix subpool thin; T12 target" },
   { "driver": "f1-decimals.g6.i3", "gate": "lib", "reason": "binding 117.0 < 12N=240 at bucket 'g6-dec-percent|percent' (distinct 117, weight 1.0000, N=20); T14 (widen f1-decimals) target" },
   { "driver": "floating-bear.g5.i3", "gate": "lib", "reason": "binding 154.4 < 12N=240 at bucket 'pemdas-nested|' (distinct 44, weight 0.2850, N=20); T13 (widen floating-bear) target" },
   { "driver": "floating-bear.g6.i0", "gate": "lib", "reason": "binding 15.0 < 12N=180 at bucket 'g6-exponent|pow' (distinct 15, weight 1.0000, N=15); T13 target" },
@@ -10,21 +6,12 @@
   { "driver": "floating-bear.g6.i3", "gate": "lib", "reason": "binding 88.0 < 12N=240 at bucket 'g6-solve-mul|solve-mul' (distinct 88, weight 1.0000, N=20); T13 target" },
   { "driver": "floating-bear.g6.i5", "gate": "lib", "reason": "binding 76.6 < 12N=240 at bucket 'g6-exponent|pow' (distinct 15, weight 0.1958, N=20); T13 target" },
 
-  { "driver": "fraction-rider.g5.i0", "gate": "sim", "reason": "10-run level-scope repeats at seeds 11/22/33 (dup counts 56,51,57 of 10x15=150 draws) -- like-denom, tiny genSubLike subpool; sanity-check member (fraction-rider g5 L1); T12 target" },
-  { "driver": "fraction-rider.g5.i4", "gate": "sim", "reason": "10-run level-scope repeats at seeds 11/22/33 (dup counts 51,51,54 of 10x20=200 draws) -- divide mix; sanity-check member (fraction-rider g5 L5); T12 target" },
-  { "driver": "fraction-rider.g6.i0", "gate": "sim", "reason": "10-run level-scope repeats at seeds 11/22/33 (dup counts 4,12,10 of 10x15=150 draws); T12 target" },
   { "driver": "f1-decimals.g6.i3", "gate": "sim", "reason": "10-run level-scope repeats at seeds 11/22/33 (dup counts 84,83,83 of 10x20=200 draws); T14 target" },
   { "driver": "floating-bear.g6.i0", "gate": "sim", "reason": "10-run level-scope repeats at seeds 11/22/33 (dup counts 135,135,135 of 10x15=150 draws); T13 target" },
   { "driver": "floating-bear.g6.i2", "gate": "sim", "reason": "10-run level-scope repeats at seeds 11/22/33 (dup counts 2,8,10 of 10x18=180 draws); T13 target" },
   { "driver": "floating-bear.g6.i3", "gate": "sim", "reason": "10-run level-scope repeats at seeds 11/22/33 (dup counts 112,112,112 of 10x20=200 draws); T13 target" },
 
   { "driver": "floating-bear.g6", "gate": "sim-campaign", "reason": "COMPOSITE entry (Task 11 per-module-grade ratchet): within-campaign currently measures 0/0,0/0,0/0 at seeds 11/22/33, but only by RNG-alignment coincidence (A/B-proven via git-stash against clean main during T11: floating-bear is measured last of six modules under one shared seeded-Math instance per freshness-sim.js's runCampaigns, and T11's razor-crest bias-fix shifted the call sequence everyone downstream inherits -- not floating-bear content improving). The GENUINE, unresolved half is cross-campaign rate 13.51%,13.51%,13.51% (>> the 1% bar) -- floating-bear g6's allmix/mixed L6 catch-all is still thin against a 2x full-grade replay. Retires when T13 (widen floating-bear) makes the cross-campaign half genuinely clear too, not before; do not delete on the within-half alone." },
-  { "driver": "fraction-rider.genAddLike", "gate": "shells", "reason": "flavor digits ('Day 1'/'Day 2' ordinal labels, 1 of 8 phrasing variants); edit in T12 widening PR" },
-  { "driver": "fraction-rider.genAdd", "gate": "shells", "reason": "flavor digits ('Section 1'/'Section 2' ordinal labels, 1 of 8 phrasing variants); edit in T12 widening PR" },
-  { "driver": "fraction-rider.genDivWholeByUnit", "gate": "shells", "reason": "math-literal in template ('1/${d}' unit-fraction numerator is content, not flavor -- the numerator is always 1 for this generator); retires when T12 adds the check contract" },
-  { "driver": "fraction-rider.genDivUnitByWhole", "gate": "shells", "reason": "math-literal in template ('1/${d}' unit-fraction numerator is content, not flavor); retires when T12 adds the check contract" },
-  { "driver": "fraction-rider.genCompareFrac", "gate": "shells", "reason": "flavor digits ('Lap 1'/'Lap 2', 'Climb 1'/'Climb 2' ordinal labels, 2 of 4 phrasing variants); edit in T12 widening PR" },
-  { "driver": "fraction-rider.genNsDivIntro", "gate": "shells", "reason": "math-literal in template ('1/${d}' unit-fraction numerator is content, not flavor); retires when T12 adds the check contract" },
   { "driver": "f1-decimals.genCompareOrder", "gate": "shells", "reason": "flavor digits ('Q3' qualifying-session jargon, 1 of 5 phrasing variants); edit in T14 widening PR" },
   { "driver": "f1-decimals.genAddSub", "gate": "shells", "reason": "flavor digits ('S1'/'S2'/'S3' sector labels, 'Sky F1' brand name, 3 of 5 phrasing variants); edit in T14 widening PR" }
 ]

@@ -185,6 +185,79 @@ const CHECK_OPS = {
     const expected = v1 * factor;
     return { expected, rel: (ans) => (v1 !== 0 ? approxEq(ans / factor, v1) : true) };
   },
+  // ---- Task 12 (fraction-rider widening): grade-5 fraction ops, operands are {num,den} pairs.
+  // Every entry recomputes the RAW (unreduced, except frac-simplify) num/den via a generic
+  // cross-multiplication route -- never the generator's own same-denominator/reciprocal shortcut
+  // -- and compares as an EXACT "num/den" string (str:true), mirroring the raw num/den the
+  // question's own `answer` object already carries (sigOf's prior check-less fallback formatted
+  // it identically); this makes the check exact rather than floating-point-approximate, and
+  // catches both a wrong VALUE and a wrong (denominator-dropping) representation.
+  // "-like" means same-denominator by construction (asserted, not assumed) -- add/subtract the
+  // numerators directly over the shared denominator, exactly the textbook same-denominator rule.
+  // A full a/b+c/d cross-multiply formula would still be VALUE-correct but would inflate the
+  // denominator to d*d, no longer matching the raw (unreduced) representation the generator's
+  // own same-denominator shortcut produces, which check.answer mirrors exactly.
+  'frac-add-like': ([f1, f2]) => {
+    if (f1.den !== f2.den) throw new Error(`frac-add-like: denominators differ (${f1.den} vs ${f2.den}) -- not a like-denominator pair`);
+    return { expected: `${f1.num + f2.num}/${f1.den}`, str: true };
+  },
+  'frac-sub-like': ([f1, f2]) => {
+    if (f1.den !== f2.den) throw new Error(`frac-sub-like: denominators differ (${f1.den} vs ${f2.den}) -- not a like-denominator pair`);
+    return { expected: `${f1.num - f2.num}/${f1.den}`, str: true };
+  },
+  // Generic a/b ÷ c/d = (a*d)/(b*c); whole numbers are just num/1. Same formula backs both
+  // div-wu (whole ÷ unit fraction) and div-uw (unit fraction ÷ whole) -- the operand ORDER is
+  // what distinguishes them, not the arithmetic.
+  'frac-div-wu': ([f1, f2]) => ({ expected: `${f1.num * f2.den}/${f1.den * f2.num}`, str: true }),
+  'frac-div-uw': ([f1, f2]) => ({ expected: `${f1.num * f2.den}/${f1.den * f2.num}`, str: true }),
+  // Equivalent fraction: fTarget is the target denominator as a {num:dNew,den:1} pair. k is
+  // independently re-derived from fTarget/fBase (and asserted to be a whole number -- a
+  // structural invariant of how this generator constructs its target denominator, not a general
+  // fraction-math necessity), then the new numerator is rebuilt from fBase alone, never from the
+  // generator's own nNew.
+  'frac-equiv': ([fBase, fTarget]) => {
+    if (fTarget.num % fBase.den !== 0) throw new Error(`frac-equiv: target denominator ${fTarget.num} is not a whole multiple of base denominator ${fBase.den}`);
+    const k = fTarget.num / fBase.den;
+    return { expected: `${fBase.num * k}/${fTarget.num}`, str: true };
+  },
+  // Simplify: the one op here where reduction is the point. igcd is this file's own from-scratch
+  // Euclidean-algorithm helper (never the generator's own gcd/simplify functions in the HTML).
+  'frac-simplify': ([f]) => {
+    const g = igcd(f.num, f.den) || 1;
+    return { expected: `${f.num / g}/${f.den / g}`, str: true };
+  },
+  // Compare: cross-multiplication (f1.num*f2.den vs f2.num*f1.den) independently determines the
+  // larger operand -- a different route than the generator's own common-denominator scaling --
+  // and the RAW winning operand (not reduced) is what the generator's `answer` carries too.
+  'frac-compare': ([f1, f2]) => {
+    const cmp = f1.num * f2.den - f2.num * f1.den;
+    const winner = cmp >= 0 ? f1 : f2;
+    return { expected: `${winner.num}/${winner.den}`, str: true };
+  },
+  // ---- Task 12 (fraction-rider widening): grade-6 6.NS.1 dividing-fraction ops. Operands are
+  // FLAT number tuples -- every raw draw the generator made (wholes, numerators, denominators),
+  // never the generator's own combined a/b/c/e labeling -- and each formula is the generic a/b ÷
+  // c/d = (a*d)/(b*c) invert-and-multiply rule applied fresh to the raw draws. Six generators,
+  // BRANCH-DISTINCT op strings per internal ri(0,1) fork (genNsDivFrac has no fork, one op) so
+  // the freshness-lib gate's topic|op bucket key can see each branch's own depth separately.
+  'ns-div-wu': ([w, d]) => ({ expected: `${w * d}/${1 * 1}`, str: true }),           // whole w/1 ÷ unit 1/d
+  'ns-div-uw': ([n, d, w]) => ({ expected: `${n * 1}/${d * w}`, str: true }),        // proper n/d ÷ whole w/1
+  'ns-div-frac': ([a, b, c, d]) => ({ expected: `${a * d}/${b * c}`, str: true }),   // proper a/b ÷ proper c/d
+  'ns-div-mixed-mf': ([W, b, wn, c, d]) => {
+    const a = W * b + wn;                                                          // mixed W wn/b -> improper a/b
+    return { expected: `${a * d}/${b * c}`, str: true };
+  },
+  'ns-div-mixed-mm': ([W1, b, wn1, W2, d, wn2]) => {
+    const a = W1 * b + wn1, c = W2 * d + wn2;                                      // both mixed -> improper
+    return { expected: `${a * d}/${b * c}`, str: true };
+  },
+  'ns-div-multi-dm': ([a, b, c, d, m]) => {
+    const qNum = a * d, qDen = b * c;                                              // a/b ÷ c/d, then × m
+    return { expected: `${qNum * m}/${qDen}`, str: true };
+  },
+  'ns-div-multi-ds': ([a, b, c, d]) => ({ expected: `${a * d}/${b * c}`, str: true }), // a/b ÷ c/d (then simplified for display only)
+  'ns-div-word-wf': ([T, c, d]) => ({ expected: `${T * d}/${c}`, str: true }),       // whole T/1 ÷ proper c/d
+  'ns-div-word-ff': ([a, b, c, d]) => ({ expected: `${a * d}/${b * c}`, str: true }), // proper a/b ÷ proper c/d
 };
 
 // Verify one question that carries a `check` contract. Returns
