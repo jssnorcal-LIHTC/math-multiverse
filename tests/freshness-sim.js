@@ -30,6 +30,22 @@
 // Runs the REAL MVFresh.drawRun path (not a direct driver.make() sample, that's freshness-lib.js's
 // job) under a SEEDED Math, so results are deterministic and reproducible in CI.
 //
+// PER-DRIVER SEEDING (Task 14 rider, pulled forward from the T16 structural-fix carry-note): every
+// level-scope driver's 10-run trial runs under its OWN derived Math, mulberry32(seed ^ fnv(driverId))
+// -- never the one Math instance shared across all 72 drivers that every gate used through Task 13.
+// Campaign rows derive per MODULE-GRADE the same way (mulberry32(seed ^ fnv(moduleGrade))), since
+// all 6 levels of one module-grade share one module sandbox and are meant to share one ledger across
+// their own two campaigns, just not with any other module or the other grade. Mechanism: buildDrivers
+// is called ONCE per seed (as before) with a throwaway extraGlobals so every driver.sandbox is
+// reachable, then `driver.sandbox.Math` is REASSIGNED to a fresh derived-seed instance right before
+// that driver's (or that module-grade's) trial runs -- verified empirically that this is a clean,
+// repeatable override (re-running the same derived seed after other drivers have run reproduces the
+// exact same draw sequence) and that MVFresh's own Math.imul-based hashing keeps working across the
+// swap. The property this buys: a driver's or module-grade's verdict is now a pure function of ITS
+// OWN content and ITS OWN derived seed -- no other driver's widening, narrowing, or processing order
+// can ever re-roll its luck. (This is what falsified the Task 9-13 assumption that a content fix for
+// one module could never affect another's sim verdict: it could, silently, via the shared stream.)
+//
 // SYNTHETIC NEGATIVE CONTROL (content-independent, runs before anything else, every invocation):
 // proves this file's OWN duplicate-detection logic actually works -- that it reports zero on a
 // genuinely protected draw sequence and reports nonzero on a genuinely unprotected one -- before
@@ -45,7 +61,7 @@
 const fs = require('fs');
 const path = require('path');
 const { loadModules, buildDrivers } = require('./extract.js');
-const { seededMath, driverId, padR, padL } = require('./gate-common.js');
+const { seededMath, fnv, driverId, padR, padL } = require('./gate-common.js');
 
 const ALLOWLIST_PATH = path.join(__dirname, 'freshness-allowlist.json');
 const QPL = [15, 18, 18, 20, 20, 20];
@@ -139,12 +155,17 @@ function runNegativeControl() {
 }
 
 // ---- level scope: per driver, per seed, 10 runs of drawRun at real N, shared ledger ----
+// Per-driver derived seed (Task 14 rider): buildDrivers is called ONCE with a throwaway extraGlobals
+// (truthy, nothing injected -- the shells.js idiom -- just to make .sandbox reachable), then EACH
+// driver's sandbox.Math is reassigned to its own mulberry32(seed ^ fnv(driverId)) right before that
+// driver's 10-run trial. No other driver's content can shift this driver's draws.
 function runLevelScope(seed) {
-  const drivers = buildDrivers(loadModules(), { extraGlobals: { Math: seededMath(seed) } });
+  const drivers = buildDrivers(loadModules(), { extraGlobals: {} });
   const results = new Map(); // driverId -> { N, dupCount, totalDraws }
   for (const d of drivers) {
     const id = driverId(d);
     const N = QPL[d.levelIndex];
+    d.sandbox.Math = seededMath(seed ^ fnv(id));
     const F = d.sandbox.MVFresh;
     F._resetForTest();
     let allSigs = [];
@@ -158,8 +179,13 @@ function runLevelScope(seed) {
 }
 
 // ---- campaign: per module-grade, per seed, 2 sequential campaigns, shared ledger ----
+// Per-module-grade derived seed (Task 14 rider): all 6 levels of one module-grade already share one
+// module sandbox (and are meant to share one ledger across their own two campaigns), so the seed is
+// derived once per group as mulberry32(seed ^ fnv(gid)) -- independent of every OTHER module-grade,
+// including the other grade of the SAME module (g5 and g6 no longer draw from one continuous stream
+// either).
 function runCampaigns(seed) {
-  const drivers = buildDrivers(loadModules(), { extraGlobals: { Math: seededMath(seed) } });
+  const drivers = buildDrivers(loadModules(), { extraGlobals: {} });
   const groups = new Map(); // "<moduleId>.g<grade>" -> [driver x 6]
   for (const d of drivers) {
     const gid = d.moduleId + '.g' + d.grade;
@@ -169,6 +195,7 @@ function runCampaigns(seed) {
   const results = new Map(); // gid -> { withinDup1, withinDup2, crossDup, crossTotal }
   for (const [gid, levelDrivers] of groups) {
     levelDrivers.sort((a, b) => a.levelIndex - b.levelIndex);
+    levelDrivers[0].sandbox.Math = seededMath(seed ^ fnv(gid));
     const F = levelDrivers[0].sandbox.MVFresh; // shared instance across all 6 (same module sandbox)
     F._resetForTest();
     function playCampaign() {

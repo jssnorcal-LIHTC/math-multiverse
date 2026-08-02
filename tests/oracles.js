@@ -12,6 +12,32 @@ function approxEq(a, b) {
   return Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(a), Math.abs(b));
 }
 function igcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { [a, b] = [b, a % b]; } return a; }
+// ---- Task 14 (f1-decimals widening): digit-shift helpers for the 'pow10' op ----
+// pow10Places: a factor must be a clean power of ten (10^k, k any integer -- 0.001, 1, 10, 1000,
+// ...); Math.round guards against transcendental log10 noise (e.g. 2.9999999999999996), and the
+// Math.pow round-trip assertion catches a factor that was never a power of ten at all, rather than
+// silently rounding it to the nearest one.
+function pow10Places(factor) {
+  const places = Math.round(Math.log10(factor));
+  if (!approxEq(Math.pow(10, places), factor)) throw new Error(`pow10: factor ${factor} is not a clean power of ten`);
+  return places;
+}
+// shiftDecimalString: moves `value`'s decimal point by `places` (positive = right/bigger,
+// negative = left/smaller) via direct string manipulation of its digit representation -- this is
+// the actual "digit shift" the generator is teaching, not a stand-in for it. Deliberately never
+// uses `*`/`/` against a power-of-ten factor, which would just re-run the same multiplication the
+// generator already performed and verify nothing independent.
+function shiftDecimalString(value, places) {
+  const neg = value < 0;
+  const parts = Math.abs(value).toString().split('.');
+  const intPart = parts[0], fracPart = parts[1] || '';
+  let digits = intPart + fracPart;
+  let pointIdx = intPart.length + places;
+  while (pointIdx > digits.length) digits += '0';
+  while (pointIdx < 0) { digits = '0' + digits; pointIdx++; }
+  const result = parseFloat(digits.slice(0, pointIdx) + '.' + digits.slice(pointIdx));
+  return neg ? -result : result;
+}
 
 // ---------- rational helpers (exact, integer num/den) ----------
 function ratEq(a, b) { return a.num * b.den === b.num * a.den; }       // a/b == c/d  <=>  a*d == c*b
@@ -302,6 +328,17 @@ const CHECK_OPS = {
     const q = sum / b;
     const expected = q + c;
     return { expected, rel: (ans) => approxEq(ans - c, q) };
+  },
+  // ---- Task 14 (f1-decimals widening): genPowerOfTen (g5), all three variants share this op.
+  // Operands [value, multiplier, conversionFactor]: recomputes by SHIFTING value's decimal point
+  // (shiftDecimalString), never by multiplying value by the factors -- the shift IS the 5.NBT.A.2
+  // skill being tested, so it is also the independent verification method. `rel` reverses the
+  // shift on the contract answer and asserts it recovers `value`, an inverse-relation check in the
+  // same style as div/mul above.
+  'pow10': ([value, multiplier, conversionFactor]) => {
+    const places = pow10Places(multiplier) + pow10Places(conversionFactor == null ? 1 : conversionFactor);
+    const expected = shiftDecimalString(value, places);
+    return { expected, rel: (ans) => approxEq(shiftDecimalString(ans, -places), value) };
   },
 };
 
