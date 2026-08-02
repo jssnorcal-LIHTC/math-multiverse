@@ -8665,12 +8665,15 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   ];
 
   // Eridian units (kid-friendly conversions; not strictly canonical to keep math clean)
+  // `pair` is the canonical lookup key tests/oracles.js's UNIT_CONV_FACTORS uses to independently
+  // re-verify every eridian check contract's factor (Task 9 widening) -- never plain 'kel'/'jiff'/
+  // etc., since the oracle's `unit-conv` op is shared verbatim with genMetric/genCustomary/genTime.
   const ERIDIAN = {
-    kel: { factor: 7,    base: 'm',    name: 'kel',  forBase: 'meters',  domain: 'length' },
-    jiff:{ factor: 5,    base: 'sec',  name: 'jiff', forBase: 'seconds', domain: 'time'   },
-    mol: { factor: 4,    base: 'kg',   name: 'mol',  forBase: 'kg',      domain: 'mass'   },
-    pip: { factor: 3,    base: 'L',    name: 'pip',  forBase: 'L',       domain: 'cap'    },
-    fip: { factor: 2,    base: '°C',   name: 'fip',  forBase: '°C',      domain: 'temp'   },
+    kel: { factor: 7,    base: 'm',    name: 'kel',  forBase: 'meters',  domain: 'length', pair: 'kel-m'    },
+    jiff:{ factor: 5,    base: 'sec',  name: 'jiff', forBase: 'seconds', domain: 'time',   pair: 'jiff-sec' },
+    mol: { factor: 4,    base: 'kg',   name: 'mol',  forBase: 'kg',      domain: 'mass',   pair: 'mol-kg'   },
+    pip: { factor: 3,    base: 'L',    name: 'pip',  forBase: 'L',       domain: 'cap',    pair: 'pip-L'    },
+    fip: { factor: 2,    base: '°C',   name: 'fip',  forBase: '°C',      domain: 'temp',   pair: 'fip-C'    },
   };
 
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
@@ -9012,49 +9015,71 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     return shuffle(Array.from(set).slice(0, 4));
   }
 
+  // ---- check-contract helpers (Task 9 widening) ----
+  // MVFresh.sigOf hashes q.check WHOLESALE the moment it is present (serializeCheck walks every
+  // own key, sorted), so it replaces the prose-based signature entirely rather than adding to it.
+  // That means every field the independent oracle (tests/oracles.js) needs to tell two questions
+  // apart -- which specific unit pair, which direction -- has to live IN the check object, not
+  // just in the prompt text. These three helpers are the single place that shape is assembled, so
+  // every call site spells the field names identically (a typo'd `pair` string would make the
+  // oracle throw "unknown pair", not silently under-verify).
+  //   convCheck:       one linear conversion. dir 'mul' = value is in the pair's coarser unit
+  //                    (left of the hyphen, e.g. 'km' in 'km-m'), multiply by factor; dir 'div' =
+  //                    value is in the finer unit (right side), divide by factor.
+  //   chainMulCheck:   a chain of `factors.length` conversions applied in sequence to `start`.
+  //   chainDivCheck:   a chain of divisions (used only by the halving variant; no unit `chain`
+  //                    tag because dividing by 2 repeatedly is a pure-math fact, not a looked-up
+  //                    conversion constant).
+  //   chainMulAddCheck: a "count of the bigger unit, plus a remainder in the smaller unit" total,
+  //                    e.g. 3 days + 5 hours -> total hours.
+  function convCheck(pair, dir, value, factor, answer) {
+    return { op: 'unit-conv', operands: [value, factor], dir: dir, pair: pair, answer: answer };
+  }
+  function chainMulCheck(chain, factors, start, answer) {
+    return { op: 'chain-mul', operands: [start].concat(factors), chain: chain, answer: answer };
+  }
+  function chainDivCheck(start, divisors, answer) {
+    return { op: 'chain-div', operands: [start].concat(divisors), answer: answer };
+  }
+  function chainMulAddCheck(pair, count, perUnit, remainder, answer) {
+    return { op: 'chain-mul-add', operands: [count, perUnit, remainder], pair: pair, answer: answer };
+  }
+  function powScaledCheck(start, base, exp, answer) {
+    return { op: 'pow-scaled', operands: [start, base, exp], answer: answer };
+  }
+
   function genMetric() {
     const variants = [
-      () => { // m to cm
-        const m = ri(2, 12);
+      () => { // m -> cm: connecting tunnel (Grace)
+        const m = ri(2, 80);
         const ans = m * 100;
         const opts = scaledOpts(ans, 100);
         shuffle(opts);
         return {
-          prompt: `<span class="rk-grace-tag">GRACE</span> The Hail Mary lab is <strong>${m} meters</strong> long. <em>How many <strong>centimeters</strong> is that?</em>`,
+          prompt: `<span class="rk-grace-tag">GRACE</span> The Hail Mary's connecting tunnel is <strong>${m} meters</strong> long. <em>How many <strong>centimeters</strong> is that?</em>`,
           answers: opts.map(o => o + ' cm'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${m} m`, grace: `${ans} cm` },
           explain: `1 m = 100 cm. So ${m} × 100 = <strong>${ans} cm</strong>.`,
+          check: convCheck('m-cm', 'mul', m, 100, ans),
         };
       },
-      () => { // kg to g
-        const kg = ri(2, 10);
-        const ans = kg * 1000;
-        const opts = scaledOpts(ans, 1000);
+      () => { // m -> cm: cargo bay (Rocky)
+        const m = ri(2, 60);
+        const ans = m * 100;
+        const opts = scaledOpts(ans, 100);
         shuffle(opts);
         return {
-          prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage sample mass is <strong>${kg} kilograms</strong>. <em>In <strong>grams</strong>?</em>`,
-          answers: opts.map(o => o + ' g'),
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Cargo bay <strong>${m} meters</strong> long, question. <strong>Centimeters</strong>?"</em>`,
+          answers: opts.map(o => o + ' cm'),
           correctIdx: opts.indexOf(ans),
-          dict: { rocky: `${kg} kg`, grace: `${ans} g` },
-          explain: `1 kg = 1000 g. So ${kg} × 1000 = <strong>${ans} g</strong>.`,
+          dict: { rocky: `${m} m`, grace: `${ans} cm` },
+          explain: `1 m = 100 cm. So ${m} × 100 = <strong>${ans} cm</strong>.`,
+          check: convCheck('m-cm', 'mul', m, 100, ans),
         };
       },
-      () => { // L to mL
-        const L = ri(2, 8);
-        const ans = L * 1000;
-        const opts = scaledOpts(ans, 1000);
-        shuffle(opts);
-        return {
-          prompt: `<span class="rk-grace-tag">GRACE</span> Coolant tank holds <strong>${L} liters</strong>. <em>How many <strong>milliliters</strong>?</em>`,
-          answers: opts.map(o => o + ' mL'),
-          correctIdx: opts.indexOf(ans),
-          dict: { rocky: `${L} L`, grace: `${ans} mL` },
-          explain: `1 L = 1000 mL. So ${L} × 1000 = <strong>${ans} mL</strong>.`,
-        };
-      },
-      () => { // km to m
-        const km = ri(2, 9);
+      () => { // km -> m: Tau Ceti beacon (Rocky)
+        const km = ri(2, 70);
         const ans = km * 1000;
         const opts = scaledOpts(ans, 1000);
         shuffle(opts);
@@ -9064,25 +9089,83 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${km} km`, grace: `${ans} m` },
           explain: `1 km = 1000 m. So ${km} × 1000 = <strong>${ans} m</strong>.`,
+          check: convCheck('km-m', 'mul', km, 1000, ans),
         };
       },
-      () => { // mm to cm (division by 10)
-        const cm = ri(3, 12);
-        const mm = cm * 10;
-        const opts = ensureFour(new Set([cm]), () => Math.max(1, cm + ri(-6, 6)));
+      () => { // km -> m: relay station (Grace)
+        const km = ri(2, 50);
+        const ans = km * 1000;
+        const opts = scaledOpts(ans, 1000);
         shuffle(opts);
         return {
-          prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage cell wall is <strong>${mm} millimeters</strong>. <em>In <strong>centimeters</strong>?</em>`,
+          prompt: `<span class="rk-grace-tag">GRACE</span> The relay station is <strong>${km} kilometers</strong> out. <em>How many <strong>meters</strong> is that?</em>`,
+          answers: opts.map(o => o + ' m'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${km} km`, grace: `${ans} m` },
+          explain: `1 km = 1000 m. So ${km} × 1000 = <strong>${ans} m</strong>.`,
+          check: convCheck('km-m', 'mul', km, 1000, ans),
+        };
+      },
+      () => { // m -> mm: docking tether (Grace)
+        const m = ri(2, 25);
+        const ans = m * 1000;
+        const opts = scaledOpts(ans, 1000);
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> The docking tether reels out <strong>${m} meters</strong>. <em>How many <strong>millimeters</strong>?</em>`,
+          answers: opts.map(o => o + ' mm'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${m} m`, grace: `${ans} mm` },
+          explain: `1 m = 1000 mm. So ${m} × 1000 = <strong>${ans} mm</strong>.`,
+          check: convCheck('m-mm', 'mul', m, 1000, ans),
+        };
+      },
+      () => { // cm -> mm: sample tube segment (Grace)
+        const cm = ri(2, 70);
+        const ans = cm * 10;
+        const opts = scaledOpts(ans, 10);
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> This sample tube segment measures <strong>${cm} centimeters</strong>. <em>How many <strong>millimeters</strong>?</em>`,
+          answers: opts.map(o => o + ' mm'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${cm} cm`, grace: `${ans} mm` },
+          explain: `1 cm = 10 mm. So ${cm} × 10 = <strong>${ans} mm</strong>.`,
+          check: convCheck('cm-mm', 'mul', cm, 10, ans),
+        };
+      },
+      () => { // mm to cm (division by 10): sensor probe diameter (Rocky)
+        const cm = ri(2, 60);
+        const mm = cm * 10;
+        const opts = ensureFour(new Set([cm]), () => Math.max(1, cm + ri(-8, 8)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Sensor probe diameter <strong>${mm} millimeters</strong>, question. <strong>Centimeters</strong>?"</em>`,
           answers: opts.map(o => o + ' cm'),
           correctIdx: opts.indexOf(cm),
           dict: { rocky: `${mm} mm`, grace: `${cm} cm` },
           explain: `10 mm = 1 cm. So ${mm} ÷ 10 = <strong>${cm} cm</strong>.`,
+          check: convCheck('cm-mm', 'div', mm, 10, cm),
         };
       },
-      () => { // g to kg
-        const kg = ri(2, 9);
+      () => { // kg to g: astrophage sample mass (Grace)
+        const kg = ri(2, 60);
+        const ans = kg * 1000;
+        const opts = scaledOpts(ans, 1000);
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage sample mass is <strong>${kg} kilograms</strong>. <em>In <strong>grams</strong>?</em>`,
+          answers: opts.map(o => o + ' g'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${kg} kg`, grace: `${ans} g` },
+          explain: `1 kg = 1000 g. So ${kg} × 1000 = <strong>${ans} g</strong>.`,
+          check: convCheck('kg-g', 'mul', kg, 1000, ans),
+        };
+      },
+      () => { // g to kg: Eridian gift cube (Grace, division)
+        const kg = ri(2, 60);
         const g = kg * 1000;
-        const opts = ensureFour(new Set([kg]), () => Math.max(1, kg + ri(-5, 5)));
+        const opts = ensureFour(new Set([kg]), () => Math.max(1, kg + ri(-8, 8)));
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Eridian gift cube weighs <strong>${g} grams</strong>. <em>How many <strong>kilograms</strong>?</em>`,
@@ -9090,12 +9173,27 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(kg),
           dict: { rocky: `${g} g`, grace: `${kg} kg` },
           explain: `1000 g = 1 kg. So ${g} ÷ 1000 = <strong>${kg} kg</strong>.`,
+          check: convCheck('kg-g', 'div', g, 1000, kg),
         };
       },
-      () => { // mL to L
-        const L = ri(3, 8);
+      () => { // L to mL: coolant tank (Grace)
+        const L = ri(2, 60);
+        const ans = L * 1000;
+        const opts = scaledOpts(ans, 1000);
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Coolant tank holds <strong>${L} liters</strong>. <em>How many <strong>milliliters</strong>?</em>`,
+          answers: opts.map(o => o + ' mL'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${L} L`, grace: `${ans} mL` },
+          explain: `1 L = 1000 mL. So ${L} × 1000 = <strong>${ans} mL</strong>.`,
+          check: convCheck('L-mL', 'mul', L, 1000, ans),
+        };
+      },
+      () => { // mL to L: coolant remaining (Rocky, division)
+        const L = ri(2, 50);
         const mL = L * 1000;
-        const opts = ensureFour(new Set([L]), () => Math.max(1, L + ri(-4, 4)));
+        const opts = ensureFour(new Set([L]), () => Math.max(1, L + ri(-8, 8)));
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, coolant <strong>${mL} milliliters</strong> remaining. Express in <strong>liters</strong>, question?"</em>`,
@@ -9103,19 +9201,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(L),
           dict: { rocky: `${mL} mL`, grace: `${L} L` },
           explain: `1000 mL = 1 L. So ${mL} ÷ 1000 = <strong>${L} L</strong>.`,
-        };
-      },
-      () => { // m to mm
-        const m = ri(2, 7);
-        const ans = m * 1000;
-        const opts = scaledOpts(ans, 1000);
-        shuffle(opts);
-        return {
-          prompt: `<span class="rk-grace-tag">GRACE</span> Spin drive nozzle is <strong>${m} meters</strong> across. <em>How many <strong>millimeters</strong>?</em>`,
-          answers: opts.map(o => o + ' mm'),
-          correctIdx: opts.indexOf(ans),
-          dict: { rocky: `${m} m`, grace: `${ans} mm` },
-          explain: `1 m = 1000 mm. So ${m} × 1000 = <strong>${ans} mm</strong>.`,
+          check: convCheck('L-mL', 'div', mL, 1000, L),
         };
       },
     ];
@@ -9125,7 +9211,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   function genCustomary() {
     const variants = [
       () => { // lb to oz
-        const lb = ri(2, 8);
+        const lb = ri(2, 90);
         const ans = lb * 16;
         const opts = scaledOpts(ans, 16);
         shuffle(opts);
@@ -9135,10 +9221,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${lb} lb`, grace: `${ans} oz` },
           explain: `1 lb = 16 oz. So ${lb} × 16 = <strong>${ans} oz</strong>.`,
+          check: convCheck('lb-oz', 'mul', lb, 16, ans),
         };
       },
       () => { // ft to in
-        const ft = ri(2, 10);
+        const ft = ri(2, 90);
         const ans = ft * 12;
         const opts = scaledOpts(ans, 12);
         shuffle(opts);
@@ -9148,10 +9235,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${ft} ft`, grace: `${ans} in` },
           explain: `1 ft = 12 in. So ${ft} × 12 = <strong>${ans} in</strong>.`,
+          check: convCheck('ft-in', 'mul', ft, 12, ans),
         };
       },
       () => { // gal to qt
-        const gal = ri(2, 8);
+        const gal = ri(2, 70);
         const ans = gal * 4;
         const opts = scaledOpts(ans, 4);
         shuffle(opts);
@@ -9161,10 +9249,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${gal} gal`, grace: `${ans} qt` },
           explain: `1 gal = 4 qt. So ${gal} × 4 = <strong>${ans} qt</strong>.`,
+          check: convCheck('gal-qt', 'mul', gal, 4, ans),
         };
       },
       () => { // qt to pt
-        const qt = ri(2, 9);
+        const qt = ri(2, 50);
         const ans = qt * 2;
         const opts = scaledOpts(ans, 2);
         shuffle(opts);
@@ -9174,10 +9263,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${qt} qt`, grace: `${ans} pt` },
           explain: `1 qt = 2 pt. So ${qt} × 2 = <strong>${ans} pt</strong>.`,
+          check: convCheck('qt-pt', 'mul', qt, 2, ans),
         };
       },
       () => { // yd to ft
-        const yd = ri(2, 9);
+        const yd = ri(2, 70);
         const ans = yd * 3;
         const opts = scaledOpts(ans, 3);
         shuffle(opts);
@@ -9187,10 +9277,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${yd} yd`, grace: `${ans} ft` },
           explain: `1 yd = 3 ft. So ${yd} × 3 = <strong>${ans} ft</strong>.`,
+          check: convCheck('yd-ft', 'mul', yd, 3, ans),
         };
       },
       () => { // pt to c
-        const pt = ri(2, 8);
+        const pt = ri(2, 50);
         const ans = pt * 2;
         const opts = scaledOpts(ans, 2);
         shuffle(opts);
@@ -9200,10 +9291,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${pt} pt`, grace: `${ans} c` },
           explain: `1 pt = 2 c. So ${pt} × 2 = <strong>${ans} c</strong>.`,
+          check: convCheck('pt-c', 'mul', pt, 2, ans),
         };
       },
       () => { // mi to yd
-        const mi = ri(1, 4);
+        const mi = ri(1, 10);
         const ans = mi * 1760;
         const opts = scaledOpts(ans, 1760);
         shuffle(opts);
@@ -9213,12 +9305,13 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${mi} mi`, grace: `${ans} yd` },
           explain: `1 mile = 1760 yd. So ${mi} × 1760 = <strong>${ans} yd</strong>.`,
+          check: convCheck('mi-yd', 'mul', mi, 1760, ans),
         };
       },
       () => { // oz to lb (division)
-        const lb = ri(2, 8);
+        const lb = ri(2, 90);
         const oz = lb * 16;
-        const opts = ensureFour(new Set([lb]), () => Math.max(1, lb + ri(-4, 4)));
+        const opts = ensureFour(new Set([lb]), () => Math.max(1, lb + ri(-8, 8)));
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Specimen <strong>${oz} ounces</strong>, friend. Convert <strong>pounds</strong>, question?"</em>`,
@@ -9226,6 +9319,21 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(lb),
           dict: { rocky: `${oz} oz`, grace: `${lb} lb` },
           explain: `16 oz = 1 lb. So ${oz} ÷ 16 = <strong>${lb} lb</strong>.`,
+          check: convCheck('lb-oz', 'div', oz, 16, lb),
+        };
+      },
+      () => { // in to ft (division): airlock hatch seal (Grace)
+        const ft = ri(2, 60);
+        const inch = ft * 12;
+        const opts = ensureFour(new Set([ft]), () => Math.max(1, ft + ri(-8, 8)));
+        shuffle(opts);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> The airlock seal track measures <strong>${inch} inches</strong>. <em>How many <strong>feet</strong> is that?</em>`,
+          answers: opts.map(o => o + ' ft'),
+          correctIdx: opts.indexOf(ft),
+          dict: { rocky: `${inch} in`, grace: `${ft} ft` },
+          explain: `12 in = 1 ft. So ${inch} ÷ 12 = <strong>${ft} ft</strong>.`,
+          check: convCheck('ft-in', 'div', inch, 12, ft),
         };
       },
     ];
@@ -9235,7 +9343,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   function genTime() {
     const variants = [
       () => { // hr to min
-        const hr = ri(2, 8);
+        const hr = ri(2, 110);
         const ans = hr * 60;
         const opts = scaledOpts(ans, 60);
         shuffle(opts);
@@ -9245,10 +9353,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${hr} hr`, grace: `${ans} min` },
           explain: `1 hour = 60 minutes. So ${hr} × 60 = <strong>${ans} min</strong>.`,
+          check: convCheck('hr-min', 'mul', hr, 60, ans),
         };
       },
       () => { // day to hr
-        const d = ri(2, 7);
+        const d = ri(2, 90);
         const ans = d * 24;
         const opts = scaledOpts(ans, 24);
         shuffle(opts);
@@ -9258,10 +9367,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${d} days`, grace: `${ans} hr` },
           explain: `1 day = 24 hours. So ${d} × 24 = <strong>${ans} hr</strong>.`,
+          check: convCheck('day-hr', 'mul', d, 24, ans),
         };
       },
       () => { // min to sec
-        const m = ri(2, 8);
+        const m = ri(2, 110);
         const ans = m * 60;
         const opts = scaledOpts(ans, 60);
         shuffle(opts);
@@ -9271,12 +9381,13 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${m} min`, grace: `${ans} s` },
           explain: `1 minute = 60 seconds. So ${m} × 60 = <strong>${ans} s</strong>.`,
+          check: convCheck('min-sec', 'mul', m, 60, ans),
         };
       },
       () => { // sec to min (division)
-        const m = ri(2, 8);
+        const m = ri(2, 90);
         const sec = m * 60;
-        const opts = ensureFour(new Set([m]), () => Math.max(1, m + ri(-4, 4)));
+        const opts = ensureFour(new Set([m]), () => Math.max(1, m + ri(-8, 8)));
         shuffle(opts);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage doubling cycle <strong>${sec} seconds</strong>. <em>How many <strong>minutes</strong>?</em>`,
@@ -9284,10 +9395,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(m),
           dict: { rocky: `${sec} s`, grace: `${m} min` },
           explain: `60 sec = 1 min. So ${sec} ÷ 60 = <strong>${m} min</strong>.`,
+          check: convCheck('min-sec', 'div', sec, 60, m),
         };
       },
       () => { // hr to min (alt phrasing)
-        const hr = ri(2, 9);
+        const hr = ri(2, 100);
         const ans = hr * 60;
         const opts = scaledOpts(ans, 60);
         shuffle(opts);
@@ -9297,12 +9409,13 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${hr} hr`, grace: `${ans} min` },
           explain: `1 hour = 60 minutes. So ${hr} × 60 = <strong>${ans} min</strong>.`,
+          check: convCheck('hr-min', 'mul', hr, 60, ans),
         };
       },
       () => { // min to hr (division)
-        const hr = ri(2, 8);
+        const hr = ri(2, 80);
         const min = hr * 60;
-        const opts = ensureFour(new Set([hr]), () => Math.max(1, hr + ri(-3, 3)));
+        const opts = ensureFour(new Set([hr]), () => Math.max(1, hr + ri(-8, 8)));
         shuffle(opts);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Cooling cycle elapsed <strong>${min} minutes</strong>, question. <strong>Hours</strong>?"</em>`,
@@ -9310,10 +9423,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(hr),
           dict: { rocky: `${min} min`, grace: `${hr} hr` },
           explain: `60 min = 1 hour. So ${min} ÷ 60 = <strong>${hr} hr</strong>.`,
+          check: convCheck('hr-min', 'div', min, 60, hr),
         };
       },
       () => { // wk to days
-        const wk = ri(2, 6);
+        const wk = ri(2, 50);
         const ans = wk * 7;
         const opts = scaledOpts(ans, 7);
         shuffle(opts);
@@ -9323,10 +9437,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${wk} wk`, grace: `${ans} d` },
           explain: `1 week = 7 days. So ${wk} × 7 = <strong>${ans} d</strong>.`,
+          check: convCheck('wk-day', 'mul', wk, 7, ans),
         };
       },
       () => { // hr to sec (multistep but single ratio for variety)
-        const hr = ri(2, 5);
+        const hr = ri(2, 16);
         const ans = hr * 3600;
         const opts = scaledOpts(ans, 3600);
         shuffle(opts);
@@ -9336,6 +9451,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${hr} hr`, grace: `${ans} s` },
           explain: `1 hour = 3600 seconds. So ${hr} × 3600 = <strong>${ans} s</strong>.`,
+          check: convCheck('hr-sec', 'mul', hr, 3600, ans),
         };
       },
     ];
@@ -9344,116 +9460,173 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   function genMultistep() {
     const variants = [
-      () => { // doubling
-        const cycles = pick([3, 4, 5]);
-        const start = 1;
-        const ans = start << cycles; // 2^cycles
-        const opts = ensureFour(new Set([ans]), () => Math.max(2, ans + ri(-12, 12)));
-        shuffle(opts);
+      () => { // doubling: astrophage growth (2-draw: starting count x doublings)
+        const start = ri(1, 4);
+        const cycles = ri(2, 10);
+        const ans = start * (1 << cycles); // start x 2^cycles
+        const opts = pedDistractors(ans, [start + cycles, start * cycles, ans * 2, Math.floor(ans / 2), ans + start]);
         return {
-          prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage <strong>doubles every 5 hours</strong>. After <strong>${5*cycles} hours</strong>, how many from <strong>1</strong> spore?`,
+          prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage <strong>doubles every 5 hours</strong>. Starting from <strong>${start} spore${start > 1 ? 's' : ''}</strong>, after <strong>${5 * cycles} hours</strong>, how many are there?`,
           answers: opts.map(o => o + ''),
           correctIdx: opts.indexOf(ans),
-          dict: { rocky: `${5*cycles} hr`, grace: `${ans}×` },
-          explain: `${5*cycles} hours ÷ 5 = ${cycles} doublings. Each doubling: 1 → 2 → 4 → ... After ${cycles} doublings, you have 2^${cycles} = <strong>${ans}</strong>.`,
+          dict: { rocky: `${start}×2^${cycles}`, grace: `${ans}` },
+          explain: `${5 * cycles} hours ÷ 5 = ${cycles} doublings. ${start} → ${start * 2} → ${start * 4} → ... After ${cycles} doublings, ${start} × 2^${cycles} = <strong>${ans}</strong>.`,
+          check: powScaledCheck(start, 2, cycles, ans),
         };
       },
-      () => { // multi-conv
-        const km = ri(3, 8);
+      () => { // halving: astrophage decay (2-draw: total halvings possible x how many hours in)
+        const totalSteps = ri(3, 10);
+        const steps = ri(1, totalSteps);
+        const startCount = 1 << totalSteps; // 2^totalSteps, always whole
+        const ans = startCount / (1 << steps); // = 2^(totalSteps - steps); steps <= totalSteps keeps this whole
+        const opts = pedDistractors(ans, [ans * 2, Math.floor(ans / 2), startCount, Math.max(0, startCount - ans)]);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage <strong>halves every 3 hours</strong> in vacuum. Starting from <strong>${startCount} spores</strong>, after <strong>${3 * steps} hours</strong>, how many remain?`,
+          answers: opts.map(o => o + ''),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${3 * steps} hr`, grace: `${ans}` },
+          explain: `${3 * steps} hours ÷ 3 = ${steps} halvings. ${startCount} → ${startCount / 2} → ... after ${steps} halvings, <strong>${ans}</strong> remain.`,
+          check: chainDivCheck(startCount, Array(steps).fill(2), ans),
+        };
+      },
+      () => { // multi-conv: km -> cm via m
+        const km = ri(2, 35);
         const ansM = km * 1000;
         const ansCm = ansM * 100;
-        const opts = scaledOpts(ansCm, 100000);
-        shuffle(opts);
+        const opts = pedDistractors(ansCm, [km * 1000, km * 100, ansM + ansCm, ansCm + 1, ansCm - 1]);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Beacon <strong>${km} kilometers</strong> away. Distance in <strong>centimeters</strong>?"</em>`,
           answers: opts.map(o => o + ' cm'),
           correctIdx: opts.indexOf(ansCm),
           dict: { rocky: `${km} km`, grace: `${ansCm} cm` },
           explain: `Two steps. ${km} km × 1000 = ${ansM} m. Then ${ansM} m × 100 = <strong>${ansCm} cm</strong>.`,
+          check: chainMulCheck(['km-m', 'm-cm'], [1000, 100], km, ansCm),
         };
       },
-      () => { // hour-day chain
-        const days = ri(3, 7);
+      () => { // hour-day chain: days -> minutes via hours
+        const days = ri(2, 25);
         const ansHr = days * 24;
         const ansMin = ansHr * 60;
-        const opts = scaledOpts(ansMin, 1440);
-        shuffle(opts);
+        const opts = pedDistractors(ansMin, [days * 24, days * 60, ansHr + ansMin, ansMin + 1, ansMin - 1]);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Repair takes <strong>${days} days</strong> straight. How many <strong>minutes</strong>?`,
           answers: opts.map(o => o + ' min'),
           correctIdx: opts.indexOf(ansMin),
           dict: { rocky: `${days} days`, grace: `${ansMin} min` },
           explain: `Two steps. ${days} days × 24 = ${ansHr} hours. Then ${ansHr} × 60 = <strong>${ansMin} min</strong>.`,
+          check: chainMulCheck(['day-hr', 'hr-min'], [24, 60], days, ansMin),
         };
       },
-      () => { // m → mm via cm (3-step in 5.MD scope)
-        const m = ri(2, 6);
+      () => { // m -> mm via cm
+        const m = ri(2, 35);
         const ansCm = m * 100;
         const ansMm = ansCm * 10;
-        const opts = scaledOpts(ansMm, 1000);
-        shuffle(opts);
+        const opts = pedDistractors(ansMm, [m * 100, m * 10, ansCm + ansMm, ansMm + 10, ansMm - 10]);
         return {
           prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Tunnel <strong>${m} meters</strong>, question. Convert <strong>millimeters</strong>, friend."</em>`,
           answers: opts.map(o => o + ' mm'),
           correctIdx: opts.indexOf(ansMm),
           dict: { rocky: `${m} m`, grace: `${ansMm} mm` },
           explain: `Two steps. ${m} m × 100 = ${ansCm} cm. Then ${ansCm} × 10 = <strong>${ansMm} mm</strong>.`,
+          check: chainMulCheck(['m-cm', 'cm-mm'], [100, 10], m, ansMm),
         };
       },
-      () => { // gal → cups (gal × 4 qt × 2 pt × 2 c = ×16)
-        const gal = ri(2, 5);
+      () => { // gal -> cups (gal x 4 qt x 2 pt x 2 c = x16)
+        const gal = ri(2, 25);
         const ans = gal * 16;
-        const opts = scaledOpts(ans, 16);
-        shuffle(opts);
+        const opts = pedDistractors(ans, [gal * 4, gal * 8, gal + 16, ans + 16, ans - 16]);
         return {
           prompt: `<span class="rk-grace-tag">GRACE</span> Water reserve <strong>${gal} gallons</strong>. <em>In <strong>cups</strong>?</em>`,
           answers: opts.map(o => o + ' c'),
           correctIdx: opts.indexOf(ans),
           dict: { rocky: `${gal} gal`, grace: `${ans} c` },
           explain: `1 gal = 4 qt = 8 pt = 16 c. So ${gal} × 16 = <strong>${ans} c</strong>.`,
+          check: chainMulCheck(['gal-qt', 'qt-pt', 'pt-c'], [4, 2, 2], gal, ans),
         };
       },
-      () => { // halving cycle (decay reverse of doubling)
-        const cycles = pick([3, 4, 5]);
-        const start = 1 << cycles;
-        const ans = 1;
-        const opts = ensureFour(new Set([ans]), () => Math.max(0, ri(0, 8)));
-        if (!opts.includes(ans)) opts[0] = ans;
-        shuffle(opts);
+      () => { // yd -> in via ft
+        const yd = ri(2, 25);
+        const ansFt = yd * 3;
+        const ansIn = ansFt * 12;
+        const opts = pedDistractors(ansIn, [yd * 3, yd * 12, ansFt + ansIn, ansIn + 12, ansIn - 12]);
         return {
-          prompt: `<span class="rk-grace-tag">GRACE</span> Astrophage <strong>halves every 3 hours</strong> in vacuum. After <strong>${3*cycles} hours</strong>, ${start} spores reduce to how many?`,
-          answers: opts.map(o => o + ''),
-          correctIdx: opts.indexOf(ans),
-          dict: { rocky: `${3*cycles} hr`, grace: `${ans}×` },
-          explain: `${3*cycles} hours ÷ 3 = ${cycles} halvings. ${start} → ${start/2} → ${start/4} → ... After ${cycles} halvings, you have <strong>${ans}</strong>.`,
-        };
-      },
-      () => { // ft → in via simple (ft × 12)
-        const ft = ri(2, 8);
-        const ans = ft * 12;
-        const opts = scaledOpts(ans, 12);
-        shuffle(opts);
-        return {
-          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, hatch is <strong>${ft} feet</strong> across. <strong>Inches</strong>?"</em>`,
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Cable spool <strong>${yd} yards</strong>, question. Convert <strong>inches</strong>, friend."</em>`,
           answers: opts.map(o => o + ' in'),
-          correctIdx: opts.indexOf(ans),
-          dict: { rocky: `${ft} ft`, grace: `${ans} in` },
-          explain: `1 ft = 12 in. So ${ft} × 12 = <strong>${ans} in</strong>.`,
+          correctIdx: opts.indexOf(ansIn),
+          dict: { rocky: `${yd} yd`, grace: `${ansIn} in` },
+          explain: `Two steps. ${yd} yd × 3 = ${ansFt} ft. Then ${ansFt} × 12 = <strong>${ansIn} in</strong>.`,
+          check: chainMulCheck(['yd-ft', 'ft-in'], [3, 12], yd, ansIn),
         };
       },
-      () => { // weeks → minutes (3-step chain)
-        const wk = ri(1, 3);
+      () => { // weeks -> minutes (3-step chain)
+        const wk = ri(1, 9);
         const days = wk * 7;
         const hr = days * 24;
         const min = hr * 60;
-        const opts = scaledOpts(min, 10080);
-        shuffle(opts);
+        const opts = pedDistractors(min, [wk * 7, wk * 24, wk * 60, min + 60, min - 60]);
         return {
-          prompt: `<span class="rk-grace-tag">GRACE</span> Coma was <strong>${wk} week${wk>1?'s':''}</strong>. How many <strong>minutes</strong> total?`,
+          prompt: `<span class="rk-grace-tag">GRACE</span> Coma was <strong>${wk} week${wk > 1 ? 's' : ''}</strong>. How many <strong>minutes</strong> total?`,
           answers: opts.map(o => o + ' min'),
           correctIdx: opts.indexOf(min),
           dict: { rocky: `${wk} wk`, grace: `${min} min` },
           explain: `Three steps. ${wk} wk × 7 = ${days} days. ${days} × 24 = ${hr} hr. ${hr} × 60 = <strong>${min} min</strong>.`,
+          check: chainMulCheck(['wk-day', 'day-hr', 'hr-min'], [7, 24, 60], wk, min),
+        };
+      },
+      () => { // count + remainder: days and hours -> total hours
+        const count = ri(1, 8);
+        const remainder = ri(1, 20);
+        const ans = count * 24 + remainder;
+        const opts = pedDistractors(ans, [count * 24, count + remainder, remainder * 24 + count, (count + 1) * 24 + remainder, (count - 1) * 24 + remainder]);
+        return {
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Crew slept <strong>${count} day${count > 1 ? 's' : ''}</strong> and <strong>${remainder} hour${remainder > 1 ? 's' : ''}</strong>, question. Total <strong>hours</strong>, friend?"</em>`,
+          answers: opts.map(o => o + ' hr'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${count}d ${remainder}hr`, grace: `${ans} hr` },
+          explain: `Do the inside first: ${count} days × 24 = ${count * 24} hr. Then add the leftover ${remainder} hr: ${count * 24} + ${remainder} = <strong>${ans} hr</strong>.`,
+          check: chainMulAddCheck('day-hr', count, 24, remainder, ans),
+        };
+      },
+      () => { // count + remainder: hours and minutes -> total minutes
+        const count = ri(1, 6);
+        const remainder = ri(1, 45);
+        const ans = count * 60 + remainder;
+        const opts = pedDistractors(ans, [count * 60, count + remainder, remainder * 60 + count, (count + 1) * 60 + remainder, (count - 1) * 60 + remainder]);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> The burn ran <strong>${count} hour${count > 1 ? 's' : ''}</strong> and <strong>${remainder} minute${remainder > 1 ? 's' : ''}</strong>. <em>Total <strong>minutes</strong>?</em>`,
+          answers: opts.map(o => o + ' min'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${count}hr ${remainder}min`, grace: `${ans} min` },
+          explain: `Do the inside first: ${count} hr × 60 = ${count * 60} min. Then add the leftover ${remainder} min: ${count * 60} + ${remainder} = <strong>${ans} min</strong>.`,
+          check: chainMulAddCheck('hr-min', count, 60, remainder, ans),
+        };
+      },
+      () => { // count + remainder: gallons and quarts -> total quarts
+        const count = ri(1, 6);
+        const remainder = ri(1, 3);
+        const ans = count * 4 + remainder;
+        const opts = pedDistractors(ans, [count * 4, count + remainder, remainder * 4 + count, (count + 1) * 4 + remainder, (count - 1) * 4 + remainder]);
+        return {
+          prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Water reserve <strong>${count} gallon${count > 1 ? 's' : ''}</strong> and <strong>${remainder} quart${remainder > 1 ? 's' : ''}</strong>, question. Total <strong>quarts</strong>, friend?"</em>`,
+          answers: opts.map(o => o + ' qt'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${count}gal ${remainder}qt`, grace: `${ans} qt` },
+          explain: `Do the inside first: ${count} gal × 4 = ${count * 4} qt. Then add the leftover ${remainder} qt: ${count * 4} + ${remainder} = <strong>${ans} qt</strong>.`,
+          check: chainMulAddCheck('gal-qt', count, 4, remainder, ans),
+        };
+      },
+      () => { // count + remainder: feet and inches -> total inches
+        const count = ri(1, 10);
+        const remainder = ri(1, 11);
+        const ans = count * 12 + remainder;
+        const opts = pedDistractors(ans, [count * 12, count + remainder, remainder * 12 + count, (count + 1) * 12 + remainder, (count - 1) * 12 + remainder]);
+        return {
+          prompt: `<span class="rk-grace-tag">GRACE</span> The support strut measures <strong>${count} ${count > 1 ? 'feet' : 'foot'}</strong> and <strong>${remainder} inch${remainder > 1 ? 'es' : ''}</strong>. <em>Total <strong>inches</strong>?</em>`,
+          answers: opts.map(o => o + ' in'),
+          correctIdx: opts.indexOf(ans),
+          dict: { rocky: `${count}ft ${remainder}in`, grace: `${ans} in` },
+          explain: `Do the inside first: ${count} ft × 12 = ${count * 12} in. Then add the leftover ${remainder} in: ${count * 12} + ${remainder} = <strong>${ans} in</strong>.`,
+          check: chainMulAddCheck('ft-in', count, 12, remainder, ans),
         };
       },
     ];
@@ -9463,23 +9636,41 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   function genEridian() {
     const unitKey = pick(Object.keys(ERIDIAN));
     const u = ERIDIAN[unitKey];
-    const n = ri(2, 9);
-    const ans = n * u.factor;
-    // Pedagogical mistakes: divided instead of multiplied, used n instead of n×factor
-    const opts = pedDistractors(ans, [
-      n + u.factor,                  // added instead of multiplied
-      n,                              // forgot to multiply
-      n * (u.factor + 1),             // wrong factor
-      Math.max(1, n * (u.factor - 1)),
-      ans + 1, ans - 1,
+    const dir = pick(['mul', 'div']); // mul: eridian -> base; div: base -> eridian (both directions, all 5 units)
+    // n is always the ERIDIAN-unit count, drawn first either way. On the 'div' side the displayed
+    // base-unit value is then CONSTRUCTED as n x factor (never drawn independently), which is what
+    // guarantees the base -> eridian direction always divides back out to a whole number -- drawing
+    // the base value on its own would land on a non-multiple of `factor` most of the time.
+    const n = ri(2, 40);
+    if (dir === 'mul') {
+      const ans = n * u.factor;
+      // Pedagogical mistakes: added instead of multiplied, forgot to multiply, wrong factor
+      const opts = pedDistractors(ans, [
+        n + u.factor, n, n * (u.factor + 1), Math.max(1, n * (u.factor - 1)), ans + 1, ans - 1,
+      ]);
+      return {
+        topic: 'unit-eridian',
+        prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, question? <strong>1 ${u.name} = ${u.factor} ${u.base}</strong>. <strong>${n} ${u.name}s</strong> = how many ${u.forBase}, question?"</em>`,
+        answers: opts.map(o => `${o} ${u.base}`),
+        correctIdx: opts.indexOf(ans),
+        dict: { rocky: `${n} ${u.name}`, grace: `${ans} ${u.base}` },
+        explain: `1 ${u.name} = ${u.factor} ${u.base}. So ${n} ${u.name}s × ${u.factor} = <strong>${ans} ${u.base}</strong>.`,
+        check: convCheck(u.pair, 'mul', n, u.factor, ans),
+      };
+    }
+    const baseVal = n * u.factor;
+    // Pedagogical mistakes: reported the base value itself, subtracted instead of divided, wrong factor
+    const opts = pedDistractors(n, [
+      baseVal, Math.max(1, n - u.factor), Math.max(1, Math.round(baseVal / (u.factor + 1))), n + 1, n - 1,
     ]);
     return {
       topic: 'unit-eridian',
-      prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, question? <strong>1 ${u.name} = ${u.factor} ${u.base}</strong>. <strong>${n} ${u.name}s</strong> = how many ${u.forBase}, question?"</em>`,
-      answers: opts.map(o => `${o} ${u.base}`),
-      correctIdx: opts.indexOf(ans),
-      dict: { rocky: `${n} ${u.name}`, grace: `${ans} ${u.base}` },
-      explain: `1 ${u.name} = ${u.factor} ${u.base}. So ${n} ${u.name}s × ${u.factor} = <strong>${ans} ${u.base}</strong>.`,
+      prompt: `<span class="rk-rocky-tag">ROCKY</span> <em>"Friend, question? <strong>1 ${u.name} = ${u.factor} ${u.base}</strong>. <strong>${baseVal} ${u.base}</strong> = how many ${u.name}s, question?"</em>`,
+      answers: opts.map(o => `${o} ${u.name}s`),
+      correctIdx: opts.indexOf(n),
+      dict: { rocky: `${baseVal} ${u.base}`, grace: `${n} ${u.name}` },
+      explain: `1 ${u.name} = ${u.factor} ${u.base}. So ${baseVal} ${u.base} ÷ ${u.factor} = <strong>${n} ${u.name}s</strong>.`,
+      check: convCheck(u.pair, 'div', baseVal, u.factor, n),
     };
   }
 
@@ -9501,8 +9692,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   // L1 — Unit rate (6.RP.2 / 6.RP.3b): total ÷ quantity, exact.
   function genG6UnitRate() {
-    const qty = ri(3, 8);
-    const rate = ri(2, 9);                 // whole per-unit rate
+    const qty = ri(2, 15);
+    const rate = ri(2, 19);                // whole per-unit rate
     const total = rate * qty;              // exact total
     const ans = total / qty;               // = rate, a whole number
     const opts = pedDistractors(ans, [
@@ -9536,10 +9727,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   // L2 — Ratio table (6.RP.3a): a:b = c:x, x = b·c/a (whole).
   function genG6RatioTable() {
-    const a = ri(2, 6);
-    const scale = ri(2, 6);
+    const a = ri(2, 9);
+    const scale = ri(2, 8);
     const c = a * scale;                   // c is a multiple of a ⇒ x is whole
-    const b = ri(2, 9);
+    const b = ri(2, 12);
     const x = b * c / a;                   // = b·scale, whole
     const opts = pedDistractors(x, [
       b * c,                               // multiplied across, forgot to divide
@@ -9568,10 +9759,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   // L3 — Equivalent ratio (6.RP.3a): scale the ratio; same contract.
   function genG6EquivRatio() {
-    const a = ri(2, 7);
-    const scale = ri(2, 6);
+    const a = ri(2, 10);
+    const scale = ri(2, 8);
     const c = a * scale;                   // c is a multiple of a ⇒ x is whole
-    const b = ri(2, 9);
+    const b = ri(2, 12);
     const x = b * c / a;                   // = b·scale, whole
     const opts = pedDistractors(x, [
       b * c,                               // cross-multiplied, forgot to divide
@@ -9600,8 +9791,12 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   // L4 — Percent of a quantity (6.RP.3c): rate% of base = rate·base/100.
   function genG6Percent() {
-    const rate = pick([10, 15, 20, 25, 30, 40, 50, 60, 75, 80]); // multiples of 5
-    const base = pick([20, 40, 60, 80, 120, 140, 160, 200, 240]);// multiples of 20
+    // rate x base: 5..95 step 5 (19 values) x every multiple of 20 from 20 to 340 (17 values).
+    // Every rate here is a multiple of 5 and every base a multiple of 20, so rate*base/100 =
+    // (rate/5)*(base/20) is a whole number for EVERY combination, no exceptions -- widening never
+    // has to reach for the guard/retry machinery genG6PercentFind below actually exercises.
+    const rate = pick([5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95]);
+    const base = pick([20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340]);
     const ans = rate * base / 100;         // always a whole number
     const opts = pedDistractors(ans, [
       rate,                                // reported the percent itself
@@ -9632,8 +9827,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   function genG6PercentFind() {
     let whole, percent, part, guard = 100;
     do {
-      whole = pick([20, 25, 40, 50, 80, 100, 120, 160, 200, 240]);
-      percent = pick([10, 20, 25, 40, 50, 60, 75, 80]);
+      whole = pick([20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360]);
+      percent = pick([5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80]);
       part = whole * percent / 100;
     } while (part % 1 !== 0 && guard-- > 0);
     if (part % 1 !== 0) { whole = 100; percent = pick([10, 20, 25, 40, 50, 75]); part = percent; }
