@@ -8061,7 +8061,12 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   }
 
   function genLwh(builderId) {
-    const l = ri(2, 8), w = ri(2, 6), h = ri(1, 4);
+    // Task 10 widening (envelope-first): l ri(2,10), w ri(2,7), h ri(1,5) = 270 combos,
+    // max product 350 -- the 5.MD level-1 kid-multiplicable ceiling reference. The plan's
+    // larger ri(2,12)/ri(2,9)/ri(1,6) proposal (594 combos, max 648) overshot that ceiling
+    // and is intentionally NOT used here; this narrower range already clears 12xN with a
+    // 1.5x margin (see PR body / task-10-report.md for the measured binding).
+    const l = ri(2, 10), w = ri(2, 7), h = ri(1, 5);
     const v = l * w * h;
     const opts = distractors(v, [
       l + w + h,           // added all three instead of multiplying
@@ -8071,18 +8076,27 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       v + h,               // off-by-one-layer (one extra unit cube layer)
       v - h,               // missed a layer
     ]);
+    const frag = pick([
+      `My next piece is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. <strong>Volume in stud cubes</strong>?`,
+      `This brick measures <strong>${l}</strong> studs long, <strong>${w}</strong> studs wide, and <strong>${h}</strong> studs tall. What's the <strong>volume</strong>?`,
+      `Check the blueprint: length <strong>${l}</strong>, width <strong>${w}</strong>, height <strong>${h}</strong>, all in studs. <strong>Volume in stud cubes</strong>?`,
+      `We need this piece exact -- <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. Give me the <strong>volume</strong>!`,
+      `Master builders measure twice: this one's <strong>${l}</strong> studs by <strong>${w}</strong> studs by <strong>${h}</strong> studs. <strong>Volume</strong>?`,
+      `Snap it together -- <strong>${l}</strong> long, <strong>${w}</strong> wide, <strong>${h}</strong> high, every measurement in studs. <strong>Volume in stud cubes</strong>?`,
+    ]);
     return {
       topic: 'vol-lwh',
-      prompt: quoteFor(builderId, `My next piece is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. <strong>Volume in stud cubes</strong>?`),
+      prompt: quoteFor(builderId, frag),
       answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(v),
       explain: `Volume = length × width × height. ${l} × ${w} × ${h} = <strong>${v} studs³</strong>. (Multiply ${l} × ${w} = ${l*w} first, then × ${h}.)`,
+      check: { op: 'mul3', operands: [l, w, h], answer: v },
     };
   }
 
   function genBaseHeight(builderId) {
-    const base = ri(8, 30);
-    const h = ri(2, 6);
+    const base = ri(6, 40);
+    const h = ri(2, 9);
     const v = base * h;
     const opts = distractors(v, [
       base + h,            // added instead of multiplied
@@ -8091,16 +8105,32 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       (base - 1) * h,      // off-by-one in base (down)
       (base + 1) * h,      // off-by-one in base (up)
     ]);
+    const frag = pick([
+      `Base area is <strong>${base}</strong> stud-squares and the height is <strong>${h}</strong> studs. <strong>Volume</strong>?`,
+      `This wall's footprint covers <strong>${base}</strong> stud-squares, stacked <strong>${h}</strong> studs tall. <strong>Volume</strong>?`,
+      `The cruiser's base plate is <strong>${base}</strong> stud-squares, and we're building it <strong>${h}</strong> studs high. <strong>Volume</strong>?`,
+      `Floor plan: <strong>${base}</strong> stud-squares. Height: <strong>${h}</strong> studs. What's the <strong>volume</strong>?`,
+      `Every good build starts with the base -- this one covers <strong>${base}</strong> stud-squares and rises <strong>${h}</strong> studs. <strong>Volume</strong>?`,
+      `Patrol cruisers need a solid frame: <strong>${base}</strong> stud-squares of base, <strong>${h}</strong> studs of height. <strong>Volume</strong>?`,
+    ]);
     return {
       topic: 'vol-base-height',
-      prompt: quoteFor(builderId, `Base area is <strong>${base}</strong> stud-squares and the height is <strong>${h}</strong> studs. <strong>Volume</strong>?`),
+      prompt: quoteFor(builderId, frag),
       answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(v),
       explain: `Volume = base area × height. ${base} × ${h} = <strong>${v} studs³</strong>.`,
+      check: { op: 'mul', operands: [base, h], answer: v },
     };
   }
 
   function genComposite(builderId) {
+    // Task 10: ranges UNCHANGED (table says "NO CHANGE") -- but this generator's own
+    // dedicated level (i2) measured binding 163 < 12N=216 pre-task, purely because with no
+    // check contract, MVFresh.sigOf's prose fallback dedupes the six embedded digits as a
+    // SET, collapsing many distinct (a1,a2,a3,b1,b2,b3) draws that share overlapping small
+    // values. A `check` contract fixes the root cause (exact operand-order signature, no
+    // dedup) without touching the difficulty envelope, recovering close to the full 432-combo
+    // raw space -- see task-10-report.md for the measured before/after.
     const a1 = ri(2, 5), a2 = ri(2, 4), a3 = ri(1, 3);
     const b1 = ri(2, 4), b2 = ri(2, 3), b3 = ri(1, 2);
     const va = a1 * a2 * a3;
@@ -8114,38 +8144,75 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       a1 + a2 + a3 + b1 + b2 + b3,  // added all dimensions
       va + vb + 1,         // off-by-one
     ]);
+    const frag = pick([
+      `Hull is <strong>${a1}×${a2}×${a3}</strong>, cabin on top is <strong>${b1}×${b2}×${b3}</strong>. <strong>Total volume</strong>?`,
+      `The Sea Cow's hull measures <strong>${a1}×${a2}×${a3}</strong> studs, plus a cabin piece <strong>${b1}×${b2}×${b3}</strong> studs on top. <strong>Total volume</strong>?`,
+      `Two pieces, one build: hull <strong>${a1}×${a2}×${a3}</strong>, cabin <strong>${b1}×${b2}×${b3}</strong>. What's the <strong>combined volume</strong>?`,
+      `MetalBeard would be proud -- a hull block <strong>${a1}×${a2}×${a3}</strong> studs, topped with a cabin block <strong>${b1}×${b2}×${b3}</strong> studs. <strong>Total volume</strong>?`,
+      `Stack the pieces: <strong>${a1}×${a2}×${a3}</strong> studs below, <strong>${b1}×${b2}×${b3}</strong> studs above. <strong>Total volume</strong>?`,
+    ]);
     return {
       topic: 'vol-composite',
-      prompt: quoteFor(builderId, `Hull is <strong>${a1}×${a2}×${a3}</strong>, cabin on top is <strong>${b1}×${b2}×${b3}</strong>. <strong>Total volume</strong>?`),
+      prompt: quoteFor(builderId, frag),
       answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(total),
       explain: `Find each volume, then add. Hull: ${a1}×${a2}×${a3} = ${va}. Cabin: ${b1}×${b2}×${b3} = ${vb}. Total: ${va} + ${vb} = <strong>${total} studs³</strong>.`,
+      check: { op: 'composite-vol', operands: [a1, a2, a3, b1, b2, b3], answer: total },
     };
   }
 
   function genMissingDim(builderId) {
-    const l = ri(2, 6), w = ri(2, 5), h = ri(2, 5);
+    // Task 10: l,w,h all widened ri(2,6)/ri(2,5) -> ri(2,9); h is drawn directly (it's the
+    // answer) so the answer set grows from {2..5} (4 values) to {2..9} (8 values). The
+    // resulting `volume` shown to the kid is a GIVEN number (up to 9x9x9=729) to DIVIDE by
+    // the base, not a product they must compute from scratch -- squarely within 5.NBT.B.6
+    // whole-number-quotient fluency, not the 5.MD product-ceiling this module's L1 sets.
+    const l = ri(2, 9), w = ri(2, 9), h = ri(2, 9);
     const v = l * w * h;
+    // Fix round 1 (review): the original 3rd/4th mistakes were not height-scale
+    // plausible. `v - l*w` is algebraically identical to `l*w*(h-1)`, which at these
+    // ranges (l,w up to 9) averages ~25x the correct single-digit height and can reach
+    // 648 vs. a correct answer as small as 2 -- an obvious-by-magnitude giveaway, not a
+    // believable "subtracted instead of divided" mistake. Its size also meant it always
+    // filled the 4th distinct slot before the loop ever reached the `v/(l+w)` candidate,
+    // making that branch dead code in practice. Both replaced with off-by-two offsets,
+    // clamped into the same {2..9} band `h` itself draws from, so every option sits in
+    // the correct height's own order of magnitude (verified for all h in 2..9: every
+    // case yields exactly 4 distinct, tight-band options; see task-10-report.md).
     const opts = distractors(h, [
-      h + 1,               // off-by-one
-      h - 1,
-      Math.max(2, v - l * w), // common error: subtract instead of divide
-      Math.max(2, Math.round(v / (l + w))), // divided by sum instead of product
+      h + 1,               // off-by-one (up)
+      h - 1,               // off-by-one (down)
+      Math.min(9, h + 2),  // off-by-two (up), clamped to h's own draw range
+      Math.max(2, h - 2),  // off-by-two (down), clamped to h's own draw range
+    ]);
+    const frag = pick([
+      `This piece has <strong>volume ${v} stud cubes</strong> and a base of <strong>${l}×${w}</strong>. <strong>Height</strong>?`,
+      `We know the volume: <strong>${v} stud cubes</strong>, sitting on a <strong>${l}×${w}</strong> base. What's the <strong>height</strong>?`,
+      `The carousel piece holds <strong>${v} stud cubes</strong> total, base <strong>${l}×${w}</strong> studs. Find the <strong>height</strong>!`,
+      `Backward build: <strong>${v} stud cubes</strong> of volume, base already set at <strong>${l}×${w}</strong>. What <strong>height</strong> gets us there?`,
+      `Vitruvius says trust the numbers -- <strong>${v} stud cubes</strong> total, <strong>${l}×${w}</strong> base. <strong>Height</strong>?`,
+      `Figure out the missing piece: <strong>${v} stud cubes</strong> of volume on a <strong>${l}×${w}</strong> base. <strong>Height</strong>?`,
     ]);
     return {
       topic: 'vol-missing-dim',
-      prompt: quoteFor(builderId, `This piece has <strong>volume ${v} stud cubes</strong> and a base of <strong>${l}×${w}</strong>. <strong>Height</strong>?`),
+      prompt: quoteFor(builderId, frag),
       answers: opts.map(o => o + ' studs'),
       correctIdx: opts.indexOf(h),
       explain: `Volume = length × width × height, so height = volume ÷ (length × width). ${v} ÷ (${l} × ${w}) = ${v} ÷ ${l*w} = <strong>${h} studs</strong>.`,
+      check: { op: 'missing-dim', operands: [l, w, v], answer: h },
     };
   }
 
   function genUnitCubeCount(builderId) {
-    // CCSS 5.MD.C.4 — count unit cubes packed without gaps
-    const layers = ri(2, 4);
-    const lw = ri(2, 5);
-    const wd = ri(2, 4);
+    // CCSS 5.MD.C.4 — count unit cubes packed without gaps. Task 10: all three dims widened
+    // ri(2,4)/ri(2,5)/ri(2,4) -> ri(2,6) (125 combos, clears this bucket's ~30-need weighted
+    // 4x at its worst dilution). A `check` contract (reusing 'mul3' -- this is the same
+    // three-factor-product shape as genLwh, just a different topic, so the composite bucket
+    // key keeps the two buckets separate) also ends the prose-signature's digit-SET collapse
+    // that made the pre-task pool measure only 16 distinct out of 36 raw combos.
+    const layers = ri(2, 6);
+    const lw = ri(2, 6);
+    const wd = ri(2, 6);
     const v = layers * lw * wd;
     const opts = distractors(v, [
       lw * wd,             // counted just one layer
@@ -8154,12 +8221,21 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       lw * wd * (layers + 1), // counted an extra layer
       v + lw,              // off by one row
     ]);
+    const frag = pick([
+      `Count the unit cubes: a <strong>${lw}</strong>-wide × <strong>${wd}</strong>-deep slab, stacked <strong>${layers}</strong> layers high. <strong>Total cubes</strong>?`,
+      `Stack it up: each layer is <strong>${lw}</strong> by <strong>${wd}</strong> unit cubes, and there are <strong>${layers}</strong> layers. <strong>Total cubes</strong>?`,
+      `Emmet's counting bricks one at a time -- help him out. Slab is <strong>${lw}</strong> wide, <strong>${wd}</strong> deep, <strong>${layers}</strong> layers tall. <strong>Total unit cubes</strong>?`,
+      `No gaps, no overlaps: a <strong>${lw}</strong> by <strong>${wd}</strong> layer, repeated <strong>${layers}</strong> times. How many <strong>unit cubes</strong> total?`,
+      `Every layer packs <strong>${lw}</strong> by <strong>${wd}</strong> unit cubes; this build goes <strong>${layers}</strong> layers deep. <strong>Total cubes</strong>?`,
+      `Awesome stacking job -- <strong>${lw}</strong>-by-<strong>${wd}</strong> layers, <strong>${layers}</strong> of them. <strong>Total unit cubes</strong>?`,
+    ]);
     return {
       topic: 'vol-unit-cubes',
-      prompt: quoteFor(builderId, `Count the unit cubes: a ${lw}-wide × ${wd}-deep slab, stacked <strong>${layers}</strong> layers high. <strong>Total cubes</strong>?`),
+      prompt: quoteFor(builderId, frag),
       answers: opts.map(o => o + ' cubes'),
       correctIdx: opts.indexOf(v),
       explain: `Each layer has ${lw} × ${wd} = ${lw*wd} cubes. Stacked ${layers} high: ${lw*wd} × ${layers} = <strong>${v} cubes</strong>.`,
+      check: { op: 'mul3', operands: [lw, wd, layers], answer: v },
     };
   }
 
@@ -8207,7 +8283,19 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   }
 
   function genScale(builderId) {
-    // CCSS 5.MD.C — what happens to volume when one dimension doubles
+    // CCSS 5.MD.C — what happens to volume when one dimension doubles. Task 10 LEDGERED
+    // CORRECTION: dimension semantics stay untouched (spec Addendum A1) -- l/w/h/factor
+    // ranges are UNCHANGED. This generator's dedicated bucket nonetheless measured thin
+    // inside mb-mixed (ratio ~194 < the 240 need) because with no `check` contract,
+    // MVFresh.sigOf's prose fallback dedupes the four embedded digits as a SET: l/w/h and
+    // factor draw from heavily overlapping small ranges (2-5, 2-4, 2-4, {2,3}), so distinct
+    // (l,w,h,factor) quadruples routinely collapse onto the same digit-set. A `check`
+    // contract (operands capture l,w,h,factor in generation order; `dim` stays OUT of
+    // operands since it never changes the numeric answer -- it's a shell-equivalent word
+    // choice) recovers the full 4x3x3x2=72-combo raw space with NO range change, which
+    // clears the diluted ~30-need with room to spare; see task-10-report.md for the
+    // measured before/after. `dim` itself also moves into the sentence-variant pick(),
+    // same floor every touched generator gets.
     const l = ri(2, 5), w = ri(2, 4), h = ri(2, 4);
     const v1 = l * w * h;
     const factor = pick([2, 3]);
@@ -8221,12 +8309,20 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       v2 + 1,
       v2 - 1,
     ]);
+    const frag = pick([
+      `Build A is <strong>${l}×${w}×${h}</strong>. Build B has the same shape but the <strong>${dim}</strong> is <strong>${factor}× larger</strong>. <strong>Volume of B</strong>?`,
+      `Same shape, bigger build: A is <strong>${l}×${w}×${h}</strong>, and B stretches the <strong>${dim}</strong> by <strong>${factor}×</strong>. <strong>Volume of B</strong>?`,
+      `Vitruvius asks: if A is <strong>${l}×${w}×${h}</strong> and B scales the <strong>${dim}</strong> by <strong>${factor}×</strong>, what's <strong>B's volume</strong>?`,
+      `We're upsizing the build -- A measures <strong>${l}×${w}×${h}</strong>; B keeps the shape but the <strong>${dim}</strong> grows <strong>${factor}×</strong>. <strong>Volume of B</strong>?`,
+      `Everything scales together, except one side. A is <strong>${l}×${w}×${h}</strong>, and B's <strong>${dim}</strong> is <strong>${factor}×</strong> bigger. <strong>Volume of B</strong>?`,
+    ]);
     return {
       topic: 'vol-scale',
-      prompt: quoteFor(builderId, `Build A is <strong>${l}×${w}×${h}</strong>. Build B has the same shape but the <strong>${dim}</strong> is <strong>${factor}× larger</strong>. <strong>Volume of B</strong>?`),
+      prompt: quoteFor(builderId, frag),
       answers: opts.map(o => o + ' studs³'),
       correctIdx: opts.indexOf(v2),
       explain: `Volume of A = ${l}×${w}×${h} = ${v1}. Multiplying one dimension by ${factor} multiplies volume by ${factor}. ${v1} × ${factor} = <strong>${v2} studs³</strong>.`,
+      check: { op: 'scale-vol', operands: [l, w, h, factor], answer: v2 },
     };
   }
 
@@ -8295,7 +8391,9 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   // L2 — area of a triangular roof gable (6.G.1). check{op:'tri-area', operands:[b,h]}.
   function genG6TriArea(builderId) {
-    const b = ri(2, 16), h = ri(2, 12);
+    // Task 10: b/h widened ri(2,16)/ri(2,12) -> ri(2,24)/ri(2,16) (345 combos); check shape
+    // (op 'tri-area', operands [b,h]) is UNCHANGED per "do not change grade-6 check shapes".
+    const b = ri(2, 24), h = ri(2, 16);
     const area = b * h / 2;          // whole number or an x.5 value
     const { answers, correctIdx } = g6Opts(area, [
       b * h,          // forgot to halve
@@ -8305,9 +8403,17 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       area + 0.5,
       b * h + 1,
     ]);
+    const frag = pick([
+      `This gable brick is a triangle with base <strong>${b}</strong> studs and height <strong>${h}</strong> studs. <strong>Area in square studs</strong>?`,
+      `The rooftop triangle spans <strong>${b}</strong> studs at the base and rises <strong>${h}</strong> studs tall. <strong>Area in square studs</strong>?`,
+      `Bricksburg roofline check: triangular gable, base <strong>${b}</strong> studs, height <strong>${h}</strong> studs. <strong>Area</strong>?`,
+      `This peaked piece has a base of <strong>${b}</strong> studs and a height of <strong>${h}</strong> studs. <strong>Area in square studs</strong>?`,
+      `Batman likes sharp angles -- this gable's base is <strong>${b}</strong> studs, height <strong>${h}</strong> studs. <strong>Area</strong>?`,
+      `Measure the roof triangle: base <strong>${b}</strong> studs, height <strong>${h}</strong> studs. <strong>Area in square studs</strong>?`,
+    ]);
     return {
       topic: 'g6-tri-area',
-      prompt: quoteFor(builderId, `This gable brick is a triangle with base <strong>${b}</strong> studs and height <strong>${h}</strong> studs. <strong>Area in square studs</strong>?`),
+      prompt: quoteFor(builderId, frag),
       answers,
       correctIdx,
       explain: `Area of a triangle = base × height ÷ 2 = ${b} × ${h} ÷ 2 = <strong>${fmtNum(area)} square studs</strong>. The ÷ 2 makes it half of the matching rectangle.`,
@@ -8341,11 +8447,16 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   // (1/2 or 1/4) shown as a decimal; both are exact in binary float, so the product
   // terminates to <= 2 dp. check{op:'mul3', operands:[l,w,h]}.
   function genG6VolumeFrac(builderId) {
-    const l = ri(2, 8), w = ri(2, 8);
-    const frac = pick([0.5, 0.25]);
+    // Task 10: l/w widened ri(2,8) -> ri(2,12); frac list grows [0.5,0.25] -> [0.5,0.25,0.75]
+    // (363 combos). 0.75 = 3/4 keeps the same "exact to <= 2dp" property as 1/2 and 1/4 (any
+    // integer times a quarter terminates at 2 decimal places). Check shape (op 'mul3',
+    // operands [l,w,h]) is UNCHANGED per "do not change grade-6 check shapes".
+    const l = ri(2, 12), w = ri(2, 12);
+    const FRAC_LABELS = { 0.5: '1/2', 0.25: '1/4', 0.75: '3/4' };
+    const frac = pick([0.5, 0.25, 0.75]);
     const h = frac;
-    const vol = Math.round(l * w * h * 100) / 100;   // <= 2 dp, exact for 1/2 and 1/4
-    const fracLabel = frac === 0.5 ? '1/2' : '1/4';
+    const vol = Math.round(l * w * h * 100) / 100;   // <= 2 dp, exact for 1/2, 1/4, 3/4
+    const fracLabel = FRAC_LABELS[frac];
     const { answers, correctIdx } = g6Opts(vol, [
       l * w,            // ignored the fractional edge (treated it as 1)
       l + w + h,        // added instead of multiplied
@@ -8354,9 +8465,16 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       vol + l * w,
       vol + 1,
     ]);
+    const frag = pick([
+      `This thin tile is <strong>${l}</strong> by <strong>${w}</strong> studs, but only <strong>${h}</strong> stud (a ${fracLabel} plate) tall. <strong>Volume in cubic studs</strong>?`,
+      `Half-stud plates still count: <strong>${l}</strong> by <strong>${w}</strong> studs, height <strong>${h}</strong> stud (${fracLabel} plate). <strong>Volume</strong>?`,
+      `Cloud Cuckoo Land uses thin plates too -- this one's <strong>${l}</strong> by <strong>${w}</strong> studs, only <strong>${h}</strong> stud tall (${fracLabel} plate). <strong>Volume in cubic studs</strong>?`,
+      `Don't skip the thin pieces: <strong>${l}</strong> by <strong>${w}</strong> studs, height <strong>${h}</strong> stud (a ${fracLabel} plate). <strong>Volume</strong>?`,
+      `Unikitty wants precision: <strong>${l}</strong> by <strong>${w}</strong> studs footprint, <strong>${h}</strong> stud tall (${fracLabel} plate). <strong>Volume in cubic studs</strong>?`,
+    ]);
     return {
       topic: 'g6-volume-frac',
-      prompt: quoteFor(builderId, `This thin tile is <strong>${l}</strong> by <strong>${w}</strong> studs, but only <strong>${h}</strong> stud (a ${fracLabel} plate) tall. <strong>Volume in cubic studs</strong>?`),
+      prompt: quoteFor(builderId, frag),
       answers,
       correctIdx,
       explain: `Fractional edge lengths multiply just like whole ones. ${l} × ${w} × ${h} = ${l*w} × ${h} = <strong>${fmtNum(vol)} cubic studs</strong>.`,
@@ -8367,7 +8485,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   // L5 — surface area of a rectangular prism (6.G.4). Six faces in three matching
   // pairs. check{op:'surface-area', operands:[l,w,h], answer:2*(lw+lh+wh)}.
   function genG6SurfaceArea(builderId) {
-    const l = ri(2, 8), w = ri(2, 8), h = ri(2, 8);
+    // Task 10: l/w/h widened ri(2,8) -> ri(2,12) (1331 ordered combos); check shape
+    // (op 'surface-area', operands [l,w,h]) is UNCHANGED per "do not change grade-6 check
+    // shapes". This bucket already cleared 12N pre-task (343 > 240); widened anyway per the
+    // table's explicit proposal for headroom/consistency with its siblings in this level.
+    const l = ri(2, 12), w = ri(2, 12), h = ri(2, 12);
     const sa = 2 * (l * w + l * h + w * h);
     const { answers, correctIdx } = g6Opts(sa, [
       l * w * h,                 // used volume instead of surface area
@@ -8377,9 +8499,17 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       sa + 2,
       sa - 2,
     ]);
+    const frag = pick([
+      `This crate is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. To sticker every outside face, what is the <strong>surface area in square studs</strong>?`,
+      `We're wrapping this crate in stickers: <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. <strong>Surface area</strong>?`,
+      `Every face needs cladding -- crate dimensions <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. <strong>Surface area in square studs</strong>?`,
+      `Apocalypseburg salvage crate, <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. Cover every face -- what's the <strong>surface area</strong>?`,
+      `Count every outside face: a crate <strong>${l}</strong> studs long, <strong>${w}</strong> studs wide, <strong>${h}</strong> studs tall. <strong>Surface area in square studs</strong>?`,
+      `Time to sticker the whole thing: <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. <strong>Surface area</strong>?`,
+    ]);
     return {
       topic: 'g6-surface-area',
-      prompt: quoteFor(builderId, `This crate is <strong>${l}</strong> by <strong>${w}</strong> by <strong>${h}</strong> studs. To sticker every outside face, what is the <strong>surface area in square studs</strong>?`),
+      prompt: quoteFor(builderId, frag),
       answers,
       correctIdx,
       explain: `Surface area = 2 × (lw + lh + wh) = 2 × (${l*w} + ${l*h} + ${w*h}) = 2 × ${l*w + l*h + w*h} = <strong>${sa} square studs</strong>. (Six faces in three matching pairs, so double the three different ones.)`,
