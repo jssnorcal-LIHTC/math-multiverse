@@ -54,5 +54,5 @@ jobs:
       - name: Reading surface (every pack item keeps a readable passage at 1024x768)
         run: node tests/reading-surface.js
 
-      - name: Tile overlap (occlusion-corrected: explain tile never paints over sibling chrome)
+      - name: Tile overlap (occlusion-corrected, explain tile never paints over sibling chrome)
         run: node tests/tile-overlap.js
