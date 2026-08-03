@@ -1501,11 +1501,19 @@
     width: 100%; min-height: 100%; height: 100%;
     display: grid;
     grid-template-columns: minmax(220px, 28%) 1fr;
-    grid-template-rows: auto auto 1fr auto;
+    /* main was `auto` next to an empty `1fr` spacer row: an `auto` row sizes to the ITEM'S
+       max-content height regardless of the space actually left over, and align-items:start
+       (needed below so .rc-ship keeps its own aspect-ratio instead of stretching full height)
+       meant .rc-question was never stretched to its track box either -- so nothing ever
+       clipped it, and tall content (prompt + grid + 4 answers, plus an appended explain tile)
+       spilled straight through the spacer track into .rc-foot. Folding the spacer's space into
+       main via minmax(0,1fr) gives the question cell the room the spacer was wasting, and
+       .rc-question's own align-self:stretch + overflow-y:auto (below) makes it a real
+       scroll container for the rare case that still doesn't fit. */
+    grid-template-rows: auto minmax(0, 1fr) auto;
     grid-template-areas:
       "ship  header"
       "ship  main"
-      "ship  spacer"
       "ship  foot";
     gap: 8px;
     padding: 8px 10px;
@@ -1632,7 +1640,15 @@
     border: 1px solid var(--border-subtle);
     border-radius: 10px;
     padding: 14px 16px;
-    overflow: hidden;
+    /* The grid container sets align-items:start for .rc-ship's benefit, which also stops this
+       cell from stretching to its row's box -- without align-self:stretch, .rc-question sizes
+       to its own content instead, so its box always "fits" and overflow has nothing to clip.
+       Stretching it to the real track height, together with min-height:0 (lets it shrink below
+       its content's intrinsic size) and overflow-y:auto (scrolls instead of clipping/spilling),
+       is what actually contains a tall question + explain tile within the main cell. */
+    align-self: stretch;
+    overflow-y: auto;
+    overflow-x: hidden;
     min-height: 0;
     display: flex;
     flex-direction: column;
