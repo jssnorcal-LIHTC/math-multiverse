@@ -1,6 +1,8 @@
 'use strict';
-// Regression test for extract.js's extraGlobals injection + MVFresh capture readiness
-// (freshness plan Task 1: see .superpowers/sdd/PLAN-multiverse-freshness-v1-26-0802/task-1-brief.md).
+// Regression test for extract.js's extraGlobals injection + MVFresh capture readiness:
+// extraGlobals must reach the sandboxed module context, MVFresh must be a captured global
+// (required for the freshness unit gate), and the opts-taking buildDrivers must stay
+// byte-identical to its pre-opts, no-arg call shape.
 const { loadModules, buildDrivers } = require('./extract.js');
 const mods = loadModules();
 // extraGlobals reach the context

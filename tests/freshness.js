@@ -79,6 +79,55 @@ check('storage-throw degrades to in-memory, never throws out', () => {
   let i = 0; const run = F.drawRun(() => ({ topic: 's', text: 'n ' + (i++), answer: i }), 'syn.g5.i0', 8);
   if (run.length !== 8) throw new Error('degraded path broke the game');
 });
+// The bomb above throws in getItem too, so storageOk()'s own probe fails first and save()
+// early-returns -- it never reaches save()'s internal try/catch/retry. The two checks below
+// drive that specific catch path (the one the quota-freshness spec assumes ships): a spy whose
+// setItem throws only for the real payload key exercises the halve-then-retry contract; the
+// probe key always succeeds so storageOk() passes and save()'s own try block actually runs.
+// The catch is broader than QuotaExceededError by design (any setItem failure), so both
+// checks throw a generic Error rather than a named QuotaExceededError.
+check('save-catch: setItem throws once (quota) then succeeds -- halves history and keeps playing', () => {
+  let attempts = 0;
+  const quotaStore = {
+    map: new Map(),
+    getItem(k) { return quotaStore.map.has(k) ? quotaStore.map.get(k) : null; },
+    setItem(k, v) {
+      if (k === 'multiverse.seen.v1') { attempts++; if (attempts === 1) throw new Error('QuotaExceededError'); }
+      quotaStore.map.set(k, String(v));
+    },
+    removeItem(k) { quotaStore.map.delete(k); },
+  };
+  const d = buildDrivers(loadModules(), { extraGlobals: { localStorage: quotaStore } })[0];
+  const F = d.sandbox.MVFresh; F._resetForTest();
+  let i = 0;
+  const big = 320; // > CAP/2 = 300, so save()'s halving branch actually engages
+  const run = F.drawRun(() => ({ topic: 'quota1', text: 'n ' + (i++), answer: i }), 'quota.g5.i0', big);
+  if (run.length !== big) throw new Error('game flow interrupted: got ' + run.length + ' questions, wanted ' + big);
+  if (attempts !== 2) throw new Error('expected 2 setItem attempts on the real key (1 throw + 1 retry), got ' + attempts);
+  const raw = quotaStore.map.get('multiverse.seen.v1');
+  if (!raw) throw new Error('retry never persisted -- second save did not succeed');
+  const hist = JSON.parse(raw).levels['quota.g5.i0'];
+  if (!hist || hist.length !== 300) throw new Error('history not halved to CAP/2=300: length ' + (hist && hist.length));
+});
+check('save-catch: setItem always throws on the real key -- degrades silently, never throws out', () => {
+  const permStore = {
+    map: new Map(),
+    getItem(k) { return permStore.map.has(k) ? permStore.map.get(k) : null; },
+    setItem(k, v) {
+      if (k === 'multiverse.seen.v1') throw new Error('QuotaExceededError'); // always fails, even after halving
+      permStore.map.set(k, String(v)); // the storageOk() probe key always succeeds
+    },
+    removeItem(k) { permStore.map.delete(k); },
+  };
+  const d = buildDrivers(loadModules(), { extraGlobals: { localStorage: permStore } })[0];
+  const F = d.sandbox.MVFresh; F._resetForTest();
+  let i = 0;
+  const run1 = F.drawRun(() => ({ topic: 'quota2', text: 'n ' + (i++), answer: i }), 'quota2.g5.i0', 12);
+  if (run1.length !== 12) throw new Error('first run degraded the game: got ' + run1.length);
+  const run2 = F.drawRun(() => ({ topic: 'quota2', text: 'n ' + (i++), answer: i }), 'quota2.g5.i0', 12);
+  if (run2.length !== 12) throw new Error('second run degraded the game: got ' + run2.length);
+  if (permStore.map.has('multiverse.seen.v1')) throw new Error('the real key should never have persisted');
+});
 check('orderPool: unseen first, then stalest', () => {
   const { F } = fresh();
   F.markSeenIds('pack.p.i0', ['a']);  // a oldest
