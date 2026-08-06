@@ -3206,13 +3206,17 @@ const MODULES = [
     description: 'It rained, and it rained, and it rained. Save Pooh and Piglet from the flood with parentheses and brackets.',
     unlocked: false,
     lockedMessage: 'Beat Rocky\'s Dictionary to unlock.',
+    // Task 2 (arc re-theme): mirrors FB_BEATS' book-causal order (hand-kept in
+    // sync -- this literal array loads long before the FB module IIFE runs, so
+    // it cannot reference FB_BEATS directly). Levels 3/4 swapped themes so
+    // Piglet's Bottle precedes The Floating Bear launching, per the beat table.
     levels: [
-      { id: 1, name: 'Light Drizzle',           goal: 'Keep the jars dry',         questions: 15 },
-      { id: 2, name: 'Steady Rain',             goal: 'Pooh sits tight',           questions: 18 },
-      { id: 3, name: 'The Floating Bear',       goal: 'Sail on the jar',           questions: 18 },
-      { id: 4, name: 'Piglet\'s Bottle',        goal: 'Find the missage',          questions: 20 },
-      { id: 5, name: 'The Brain of Pooh',       goal: 'Inverted umbrella afloat',  questions: 20 },
-      { id: 6, name: 'Storm of the Century',    goal: 'Captain C. Robin rescues',  questions: 20 },
+      { id: 1, name: 'Light Drizzle',           goal: 'Keep the jars dry',              questions: 15 },
+      { id: 2, name: 'Steady Rain',              goal: 'Move the honey to the branch',   questions: 18 },
+      { id: 3, name: 'Piglet\'s Bottle',        goal: 'Find the missage',               questions: 18 },
+      { id: 4, name: 'The Floating Bear',       goal: 'Sail on the jar',                questions: 20 },
+      { id: 5, name: 'The Brain of Pooh',       goal: 'Inverted umbrella afloat',       questions: 20 },
+      { id: 6, name: 'Storm of the Century',    goal: 'Captain C. Robin rescues',       questions: 20 },
     ],
     grandGoal: '1st Mate P. Bear',
     g6: {
@@ -10471,41 +10475,110 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   const POOH_MAP = 'art/pooh-hundred-acre-wood.jpg';
   const POOH_COVER = 'https://en.wikipedia.org/wiki/Special:FilePath/Winnie-the-Pooh_(book).png';
 
+  // Task 2 (arc re-theme): the six story beats in the book's own causal order
+  // (Ch. IX, "In Which Piglet Is Entirely Surrounded by Water"), plate refs
+  // cross-verified 13/13 against the 1926 Methuen first edition. FB_LEVELS /
+  // FB_LEVELS_6 below derive their name/chapter text from this table; the
+  // MODULES registry goal/levels strings (Math-Multiverse.html ~3198) are
+  // hand-kept in sync with it (that literal array is defined long before this
+  // IIFE runs, so it cannot reference FB_BEATS directly). Level INDEX and the
+  // gen:/type: generator mapping never move -- only the name/chapter/goal
+  // framing shown at each index. "Missage" (beat 3) verified verbatim against
+  // Standard Ebooks' text of chapter 9 ("It's a Missage," he said to himself
+  // ... "a very important Missage to me") -- Pooh's own diction, not a
+  // codebase typo -- kept as-is. plate fields are art/shepard-1926-p<N>.png
+  // references for Task 3 to mount; those files do not exist yet, and nothing
+  // in this module renders them.
+  const FB_BEATS = [
+    { // 1: rain begins
+      key: 'rain-begins', title5: 'A Light Drizzle', chapter: 'In which a cloud appears',
+      chapter6: 'In which the raindrops multiply themselves',
+      goal: 'Keep the jars dry',
+      plate: null, // plate 146 unconfirmed against the 1926 plates -- may have none
+    },
+    { // 2: honey to the branch
+      key: 'honey-branch', title5: 'A Steady Rain', chapter: 'In which Pooh moves his honey to the branch',
+      chapter6: 'In which a jar-count depends on x',
+      goal: 'Move the honey to the branch',
+      plate: 'art/shepard-1926-p150.png',
+    },
+    { // 3: Piglet's bottle -- written and thrown, then (four days later) retrieved by Pooh
+      key: 'piglet-bottle', title5: "Piglet's Bottle", chapter: 'In which Piglet sends a message',
+      chapter6: "In which Piglet's acorns go out with the bottle",
+      goal: 'Find the missage',
+      plate: 'art/shepard-1926-p148.png', plateRetrieval: 'art/shepard-1926-p151.png',
+    },
+    { // 4: The Floating Bear launches
+      key: 'floating-launch', title5: 'The Floating Bear', chapter: 'In which Pooh sails on a jar',
+      chapter6: 'In which the honey jar becomes a raft',
+      goal: 'Sail on the jar',
+      plate: 'art/shepard-1926-p152-1.png', plateAlt: ['art/shepard-1926-p152-2.png', 'art/shepard-1926-p153-1.png'],
+    },
+    { // 5: The Brain of Pooh -- Christopher Robin's umbrella-boat
+      key: 'brain-of-pooh', title5: 'The Brain of Pooh', chapter: 'In which an umbrella becomes a boat',
+      chapter6: 'In which Pooh groups before he multiplies',
+      goal: 'Inverted umbrella afloat',
+      plate: 'art/shepard-1926-p158.png', plateMotif: 'art/shepard-1926-p153-2.png', // C.R.'s daily flood marker-stick, rising-water motif
+    },
+    { // 6: the rescue
+      key: 'rescue', title5: 'Storm of the Century', chapter: 'In which Captain C. Robin rescues all',
+      chapter6: 'In which Captain C. Robin solves it all',
+      goal: 'Captain C. Robin rescues',
+      plate: 'art/shepard-1926-p160-2.png', plateSetup: 'art/shepard-1926-p160-1.png', // Owl on Piglet's tree, one leaf before
+    },
+  ];
+  // Boat-beats: Pooh is drawn floating once The Floating Bear has actually
+  // launched (beat 4) through the rescue (beat 6), not before. Consumed by
+  // sceneSvg() in place of the old `level.id >= 3` cutoff.
+  const FB_BOAT_BEAT_KEYS = new Set(['floating-launch', 'brain-of-pooh', 'rescue']);
+
   const FB_LEVELS = [
-    { id: 1, name: 'A Light Drizzle',         gen: 'simple-parens', chapter: 'In which a cloud appears' },
-    { id: 2, name: 'A Steady Rain',           gen: 'parens-multi',  chapter: 'In which Pooh saves his honey' },
-    { id: 3, name: 'The Floating Bear',       gen: 'brackets',      chapter: 'In which Pooh sails on a jar' },
-    { id: 4, name: "Piglet's Bottle",         gen: 'nested',        chapter: 'In which Piglet sends a message' },
-    { id: 5, name: 'The Brain of Pooh',       gen: 'full-pemdas',   chapter: 'In which an umbrella becomes a boat' },
-    { id: 6, name: 'Storm of the Century',    gen: 'all-mix',       chapter: 'In which Captain C. Robin rescues all' },
+    { id: 1, name: FB_BEATS[0].title5, gen: 'simple-parens', chapter: FB_BEATS[0].chapter },
+    { id: 2, name: FB_BEATS[1].title5, gen: 'parens-multi',  chapter: FB_BEATS[1].chapter },
+    { id: 3, name: FB_BEATS[2].title5, gen: 'brackets',      chapter: FB_BEATS[2].chapter },
+    { id: 4, name: FB_BEATS[3].title5, gen: 'nested',        chapter: FB_BEATS[3].chapter },
+    { id: 5, name: FB_BEATS[4].title5, gen: 'full-pemdas',   chapter: FB_BEATS[4].chapter },
+    { id: 6, name: FB_BEATS[5].title5, gen: 'all-mix',       chapter: FB_BEATS[5].chapter },
   ];
   const FB_QPL = [15, 18, 18, 20, 20, 20];
 
+  // Task 2 step 2 ("state the object"): shown at the pick screen and at the
+  // start of every level except the finale (level 6), which shows the ship's
+  // log line instead -- verbatim from Ch. IX: "...the good ship, The Brain of
+  // Pooh (Captain, C. Robin; 1st Mate, P. Bear) coming over the sea to rescue
+  // him." That quote is the moment the rescue-track boat actually arrives, so
+  // it doubles as level 6's object line.
+  const FB_OBJECT_LINES = [
+    'Reach Piglet before the water does.',
+    'The water is rising. Piglet is waiting.',
+    'Get to Piglet before the flood does.',
+  ];
+  const FB_FINISH_LINE = 'The Brain of Pooh (Captain, C. Robin; 1st Mate, P. Bear)';
+
   // Task 1 (shell variety): per-question story-screen footer caption, one pick-pool per
-  // levelIndex (0-5), matching FB_QPL's own indexing. Was a single fixed line shown on every
-  // question of every level and both grades; now varies with the flood's progress through the
-  // chapter. Indexed by levelIndex for now -- a later task re-keys this by narrative beat.
-  // Pool 0 keeps the original universal line as one option among several, per spec.
+  // levelIndex (0-5), matching FB_QPL's own indexing. Re-keyed for Task 2's beat re-order --
+  // pools 2 and 3 swapped (Piglet's Bottle <-> The Floating Bear) to follow FB_BEATS; 0/1/4/5
+  // already matched their beat and are unchanged.
   const FB_BEAT_CAPTIONS = [
     [ // 0: A Light Drizzle / Powers of the Rain -- a cloud appears
       `<em>"It rained, and it rained, and it rained."</em>`,
       `A single cloud drifted over the Hundred Acre Wood, and nobody thought much of it.`,
       `Pooh looked up. <em>"Just a spot of weather,"</em> he said, and went back to his honey.`,
     ],
-    [ // 1: A Steady Rain / Pooh's Honey Count -- Pooh saves his honey
+    [ // 1: A Steady Rain / Pooh's Honey Count -- Pooh moves his honey to the branch
       `The rain had settled in for the day, steady on the roof of Pooh's house.`,
       `Pooh counted his honey jars twice, just to be sure none had floated off yet.`,
       `Outside, the puddles were beginning to join hands.`,
     ],
-    [ // 2: The Floating Bear / Piglet's Missing Acorns -- Pooh sails on a jar
-      `The water had crept up past the doorstep, and Pooh's jar bobbed gently on it.`,
-      `Owl watched from his porch as the flood turned the valley into a very large puddle indeed.`,
-      `Pooh, quite comfortable aboard his honey jar, called it his boat.`,
-    ],
-    [ // 3: Piglet's Bottle / Rows on the Raft -- Piglet sends a message
+    [ // 2: Piglet's Bottle / Piglet's Missing Acorns -- Piglet sends a message
       `Piglet's message bobbed away in its bottle, out across the new, wide water.`,
       `The Wood had become mostly water, with a few brave treetops poking through.`,
       `Somewhere out there, Piglet hoped, someone was reading his note.`,
+    ],
+    [ // 3: The Floating Bear / Rows on the Raft -- Pooh sails on a jar
+      `The water had crept up past the doorstep, and Pooh's jar bobbed gently on it.`,
+      `Owl watched from his porch as the flood turned the valley into a very large puddle indeed.`,
+      `Pooh, quite comfortable aboard his honey jar, called it his boat.`,
     ],
     [ // 4: The Brain of Pooh -- an umbrella becomes a boat / grouping before multiplying
       `Christopher Robin's umbrella, upside down, made rather a fine little boat.`,
@@ -10523,12 +10596,12 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   // grade-5 FB_LEVELS above is untouched. FB_QPL (15,18,18,20,20,20) is shared by
   // both grades. Gen ids resolve through the FB_GEN map below (grade-6 keys first).
   const FB_LEVELS_6 = [
-    { id: 1, name: 'Powers of the Rain',      gen: 'g6-exponent',  chapter: 'In which the raindrops multiply themselves' },
-    { id: 2, name: "Pooh's Honey Count",      gen: 'g6-evaluate',  chapter: 'In which a jar-count depends on x' },
-    { id: 3, name: "Piglet's Missing Acorns", gen: 'g6-solve-add', chapter: 'In which Piglet undoes an addition' },
-    { id: 4, name: 'Rows on the Raft',        gen: 'g6-solve-mul', chapter: 'In which Owl undoes a multiplication' },
-    { id: 5, name: 'The Brain of Pooh',       gen: 'g6-evaluate2', chapter: 'In which Pooh groups before he multiplies' },
-    { id: 6, name: 'Storm of the Century',    gen: 'g6-allmix',    chapter: 'In which Captain C. Robin solves it all' },
+    { id: 1, name: 'Powers of the Rain',      gen: 'g6-exponent',  chapter: FB_BEATS[0].chapter6 },
+    { id: 2, name: "Pooh's Honey Count",      gen: 'g6-evaluate',  chapter: FB_BEATS[1].chapter6 },
+    { id: 3, name: "Piglet's Missing Acorns", gen: 'g6-solve-add', chapter: FB_BEATS[2].chapter6 },
+    { id: 4, name: 'Rows on the Raft',        gen: 'g6-solve-mul', chapter: FB_BEATS[3].chapter6 },
+    { id: 5, name: 'The Brain of Pooh',       gen: 'g6-evaluate2', chapter: FB_BEATS[4].chapter6 },
+    { id: 6, name: 'Storm of the Century',    gen: 'g6-allmix',    chapter: FB_BEATS[5].chapter6 },
   ];
 
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
@@ -10712,11 +10785,26 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   function sceneSvg(state, level) {
     const q = state.questionNum || 0, lost = state.livesLost || 0;
-    const waterY = Math.max(150, Math.min(238, 244 - q * 4 - lost * 13)); // flood rises with wrongs
+    // Task 2 step 3: water = threat only -- mere progress (q) no longer raises
+    // the flood, only mistakes do. flooded stays <210, now first crossed at
+    // the second mistake (lost=2: 238-44=194); DNF's flooded-max (lost=3:
+    // 238-66=172) reads as the water reaching Piglet with no further code.
+    const waterY = Math.max(150, 238 - lost * 22);
     const flooded = waterY < 210;
-    const showFloating = (level.id >= 3) || flooded;
+    const beat = FB_BEATS[level.id - 1] || FB_BEATS[FB_BEATS.length - 1];
+    const showFloating = FB_BOAT_BEAT_KEYS.has(beat.key) || flooded;
     const jarsLeft = Math.max(0, 4 - Math.min(4, q));
-    const rainN = Math.min(52, 6 + q * 3 + lost * 7);
+    // Rain density re-keys off beat (level.id) + mistakes, not raw question count.
+    const rainN = Math.min(52, 10 + level.id * 4 + lost * 8);
+    // Task 2 step 4: progress = rescue. The boat drifts from its launch point
+    // near the honey-jar branch toward Piglet's window as correctCount grows
+    // -- derived from this function's own geometry (jars sit around x 170-242
+    // just under the branch; 432 was the art's original tuned floating-Pooh x,
+    // kept here as the rescue's arrival point rather than invented anew).
+    const totalQ = FB_QPL[level.id - 1] || 20;
+    const progress = Math.max(0, Math.min(1, (state.correctCount || 0) / totalQ));
+    const boatLaunchX = 220, boatRescueX = 432;
+    const boatX = boatLaunchX + progress * (boatRescueX - boatLaunchX);
     const rain = Array.from({ length: rainN }, (_, i) => { const x = (i * 61 + q * 13) % 600, y = (i * 41 + q * 7) % (waterY - 14); return `<line x1="${x}" y1="${y}" x2="${(x - 5)}" y2="${y + 13}"/>`; }).join('');
     const distTrees = Array.from({ length: 5 }, (_, i) => { const x = 250 + i * 80 + fbWob(i) * 16, y = 150 + fbWob(i * 2) * 4, r = 9 + fbWob(i * 3) * 5; return `<path d="${fbCloud(x, y - r * 0.3, r, r * 0.85, 9, i)}" fill="${FB_PAPER}" stroke="${FB_SOFT}" stroke-width="0.9"/><line x1="${x}" y1="${(y + r * 0.5).toFixed(1)}" x2="${x}" y2="${(y + r * 0.5 + 6).toFixed(1)}" stroke="${FB_SOFT}" stroke-width="0.9"/>`; }).join('');
     let ripples = '';
@@ -10746,7 +10834,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         ${jars}
         <g stroke="${FB_INK}" stroke-width="0.8" fill="none" opacity="0.65"><path d="M 250 96 q 3 -3 6 0 M 262 88 q 3 -3 6 0 M 244 104 q 3 -3 6 0"/></g>
         ${showFloating
-          ? `<g transform="translate(432, ${waterY + 2}) scale(1.3)">${fbFloatPooh()}</g>`
+          ? `<g transform="translate(${boatX.toFixed(1)}, ${waterY + 2}) scale(1.3)">${fbFloatPooh()}</g>`
           : `<g transform="translate(96, ${bankY}) scale(0.44)">${fbPoohFig(true)}</g>`}
         ${!flooded ? fbGrass(20, 86, bankY, 7, 1) : ''}
         ${!flooded ? fbGrass(158, 238, bankY + 7, 6, 4) : ''}
@@ -11593,6 +11681,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
               <h2>The Floating Bear</h2>
               <div class="fb-subtitle">Chapter ${lvl.id} &middot; ${lvl.name}</div>
               <div class="fb-chapter">"${lvl.chapter}"</div>
+              <div class="fb-chapter">${lvl.id === 6 ? FB_FINISH_LINE : pick(FB_OBJECT_LINES)}</div>
             </div>
             <div class="lvl-badge">${totalQ} expressions to solve</div>
             <div class="fb-illustration" id="fb-illust-host">
@@ -11650,7 +11739,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         if (!qEl) return;
         const q = state.questions[state.questionNum];
         if (!q) { endLevel(); return; }
+        // Task 2 step 2: "state the object" at level start (verse 1) only.
+        const objectLine = state.questionNum === 0 ? (lvl.id === 6 ? FB_FINISH_LINE : pick(FB_OBJECT_LINES)) : '';
         qEl.innerHTML = `
+          ${objectLine ? `<div class="fb-q-meta" style="justify-content:center; font-weight:700;">${objectLine}</div>` : ''}
           <div class="fb-q-meta">
             <span>Verse ${state.questionNum + 1}</span>
             <span>${lvl.gen.replace(/-/g, ' ')}</span>
