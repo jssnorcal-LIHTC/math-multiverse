@@ -10481,6 +10481,44 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   ];
   const FB_QPL = [15, 18, 18, 20, 20, 20];
 
+  // Task 1 (shell variety): per-question story-screen footer caption, one pick-pool per
+  // levelIndex (0-5), matching FB_QPL's own indexing. Was a single fixed line shown on every
+  // question of every level and both grades; now varies with the flood's progress through the
+  // chapter. Indexed by levelIndex for now -- a later task re-keys this by narrative beat.
+  // Pool 0 keeps the original universal line as one option among several, per spec.
+  const FB_BEAT_CAPTIONS = [
+    [ // 0: A Light Drizzle / Powers of the Rain -- a cloud appears
+      `<em>"It rained, and it rained, and it rained."</em>`,
+      `A single cloud drifted over the Hundred Acre Wood, and nobody thought much of it.`,
+      `Pooh looked up. <em>"Just a spot of weather,"</em> he said, and went back to his honey.`,
+    ],
+    [ // 1: A Steady Rain / Pooh's Honey Count -- Pooh saves his honey
+      `The rain had settled in for the day, steady on the roof of Pooh's house.`,
+      `Pooh counted his honey jars twice, just to be sure none had floated off yet.`,
+      `Outside, the puddles were beginning to join hands.`,
+    ],
+    [ // 2: The Floating Bear / Piglet's Missing Acorns -- Pooh sails on a jar
+      `The water had crept up past the doorstep, and Pooh's jar bobbed gently on it.`,
+      `Owl watched from his porch as the flood turned the valley into a very large puddle indeed.`,
+      `Pooh, quite comfortable aboard his honey jar, called it his boat.`,
+    ],
+    [ // 3: Piglet's Bottle / Rows on the Raft -- Piglet sends a message
+      `Piglet's message bobbed away in its bottle, out across the new, wide water.`,
+      `The Wood had become mostly water, with a few brave treetops poking through.`,
+      `Somewhere out there, Piglet hoped, someone was reading his note.`,
+    ],
+    [ // 4: The Brain of Pooh -- an umbrella becomes a boat / grouping before multiplying
+      `Christopher Robin's umbrella, upside down, made rather a fine little boat.`,
+      `Pooh thought Very Hard, which was not something he did lightly, especially in a flood.`,
+      `Everyone agreed a Clever Plan was needed, and everyone looked at Pooh.`,
+    ],
+    [ // 5: Storm of the Century -- Captain C. Robin rescues all
+      `Captain Christopher Robin steered his fleet of umbrellas and honey jars through the last of the storm.`,
+      `The whole Wood was afloat now, and everyone was very glad of a good captain.`,
+      `One by one, friends were pulled from the water, safe and only a little bit damp.`,
+    ],
+  ];
+
   // Same Winnie-the-Pooh flood theme; selected only when ACTIVE_GRADE === 6. The
   // grade-5 FB_LEVELS above is untouched. FB_QPL (15,18,18,20,20,20) is shared by
   // both grades. Gen ids resolve through the FB_GEN map below (grade-6 keys first).
@@ -10758,6 +10796,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       av * 2,                   // doubled instead of using c
       result + 1, result - 1,
     ]);
+    const op2Sym = op2 === '*' ? '×' : '÷';
+    const op2Val = op2 === '*' ? c : divBy;
     return {
       topic: 'pemdas-simple',
       prompt: pick([
@@ -10769,7 +10809,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
-      explain: `Parentheses first: ${a} ${op1} ${b} = ${av}. Then ${av} ${op2 === '*' ? '×' : '÷'} ${op2 === '*' ? c : divBy} = <strong>${result}</strong>.`,
+      explain: pick([
+        `Parentheses first: ${a} ${op1} ${b} = ${av}. Then ${av} ${op2Sym} ${op2Val} = <strong>${result}</strong>.`,
+        `Work the inside of the parentheses before anything else: ${a} ${op1} ${b} = ${av}. That leaves ${av} ${op2Sym} ${op2Val}, which comes to <strong>${result}</strong>.`,
+        `Parentheses win the race every time. ${a} ${op1} ${b} = ${av} first, then ${op2Sym} ${op2Val} last: <strong>${result}</strong>.`,
+      ]),
     };
   }
 
@@ -10805,10 +10849,20 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     ]);
     return {
       topic: 'pemdas-multi',
-      prompt: `Piglet wondered aloud: <em>"What does <strong>${v.expr}</strong> come to?"</em>`,
+      prompt: pick([
+        `Piglet wondered aloud: <em>"What does <strong>${v.expr}</strong> come to?"</em>`,
+        `The rain had soaked through Piglet's notebook, but this much still showed: <strong>${v.expr}</strong>.`,
+        `Christopher Robin tapped his pencil on the page: <em>"Work out <strong>${v.expr}</strong> for me."</em>`,
+        `Owl cleared his throat: <em>"The expression before us, if you please, is <strong>${v.expr}</strong>."</em>`,
+        `"Parentheses first, remember," Rabbit called across the yard. <em>"Now, what is <strong>${v.expr}</strong>?"</em>`,
+      ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(v.result),
-      explain: `Do the parentheses first, then the rest: ${v.steps}. So <strong>${v.result}</strong>.`,
+      explain: pick([
+        `Do the parentheses first, then the rest: ${v.steps}. So <strong>${v.result}</strong>.`,
+        `Parentheses before anything else: ${v.steps}. That gives <strong>${v.result}</strong>.`,
+        `Start inside the grouping, then finish outward: ${v.steps} -- landing on <strong>${v.result}</strong>.`,
+      ]),
     };
   }
 
@@ -10826,10 +10880,20 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     ]);
     return {
       topic: 'pemdas-brackets',
-      prompt: `Owl from his porch: <em>"By my calculation, <strong>${expr}</strong> equals?"</em>`,
+      prompt: pick([
+        `Owl from his porch: <em>"By my calculation, <strong>${expr}</strong> equals?"</em>`,
+        `The rain drummed on the brackets as Pooh read them again: <strong>${expr}</strong>.`,
+        `Christopher Robin's pencil underlined the inner group first: <strong>${expr}</strong>.`,
+        `"Inside brackets before anything outside," Rabbit insisted. <em>Solve <strong>${expr}</strong>.</em>`,
+        `A soggy page of Owl's ledger showed only this: <strong>${expr}</strong>. What does it come to?`,
+      ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
-      explain: `Innermost first: ${a} + ${b} = ${a+b}. Then × ${c} = ${(a+b)*c}. Then − ${d} = <strong>${result}</strong>.`,
+      explain: pick([
+        `Innermost first: ${a} + ${b} = ${a+b}. Then × ${c} = ${(a+b)*c}. Then − ${d} = <strong>${result}</strong>.`,
+        `Work from the inside out. Parentheses: ${a} + ${b} = ${a+b}. Bracket: × ${c} = ${(a+b)*c}. Then subtract ${d}: <strong>${result}</strong>.`,
+        `The innermost group goes first, always: ${a} + ${b} = ${a+b}, times ${c} = ${(a+b)*c}, minus ${d} = <strong>${result}</strong>.`,
+      ]),
     };
   }
 
@@ -10887,7 +10951,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
-      explain: `Inside-out. Inner parens: ${a} + ${b} = ${sum}. Then ÷ ${b} = ${sum/b}. Then + ${c} = <strong>${result}</strong>.`,
+      explain: pick([
+        `Inside-out. Inner parens: ${a} + ${b} = ${sum}. Then ÷ ${b} = ${sum/b}. Then + ${c} = <strong>${result}</strong>.`,
+        `Peel it from the middle out: ${a} + ${b} = ${sum} first, ÷ ${b} = ${sum/b} next, then + ${c} lands on <strong>${result}</strong>.`,
+        `The deepest parentheses go first: ${a} + ${b} = ${sum}. Divide by ${b}: ${sum/b}. Add ${c}: <strong>${result}</strong>.`,
+      ]),
       check: { op: 'nested-div-add', operands: [a, b, c], answer: result },
     };
   }
@@ -10921,10 +10989,20 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     ]);
     return {
       topic: 'pemdas-full',
-      prompt: `Eeyore, gloomy: <em>"They say <strong>${v.expr}</strong>. I'll be surprised if it works out."</em>`,
+      prompt: pick([
+        `Eeyore, gloomy: <em>"They say <strong>${v.expr}</strong>. I'll be surprised if it works out."</em>`,
+        `The last dry page of Owl's book held one final puzzle: <strong>${v.expr}</strong>.`,
+        `Christopher Robin, very serious about it: <em>"This is the big one. Solve <strong>${v.expr}</strong>."</em>`,
+        `Rabbit squared his shoulders: <em>"Every bracket, every group, all at once: <strong>${v.expr}</strong>. Go."</em>`,
+        `Piglet took a deep breath before reading it aloud: <em>"<strong>${v.expr}</strong>... oh, here goes."</em>`,
+      ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(v.result),
-      explain: `Work the innermost grouping first, then outward: ${v.steps}. Answer <strong>${v.result}</strong>.`,
+      explain: pick([
+        `Work the innermost grouping first, then outward: ${v.steps}. Answer <strong>${v.result}</strong>.`,
+        `Peel the groupings from the inside out, one layer at a time: ${v.steps}. That lands on <strong>${v.result}</strong>.`,
+        `Innermost group first, then the next one out, in order: ${v.steps} -- <strong>${v.result}</strong>.`,
+      ]),
     };
   }
 
@@ -10976,6 +11054,39 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           opts, correct,
         };
       },
+      () => {
+        const a = ri(2, 6), b = ri(3, 9), c = ri(2, 5);
+        const correct = `${a} × (${b} + ${c})`;
+        const opts = shuffle([
+          correct,
+          `${a} × ${b} + ${c}`,
+          `${a} + ${b} × ${c}`,
+          `(${a} × ${b}) + ${c}`,
+        ]);
+        return {
+          word: `Kanga packs <strong>${a}</strong> baskets. Each one gets <strong>${b}</strong> carrots, plus <strong>${c}</strong> more tucked in at the last minute.`,
+          ask: `Which expression gives the total carrots across every basket?`,
+          opts, correct,
+        };
+      },
+      () => {
+        const c = ri(2, 5), units = ri(2, 6);
+        const total = c * units;
+        const a = ri(2, total - 2);
+        const b = total - a;
+        const correct = `(${a} + ${b}) ÷ ${c}`;
+        const opts = shuffle([
+          correct,
+          `${a} + ${b} ÷ ${c}`,
+          `${a} ÷ ${c} + ${b}`,
+          `${a} ÷ (${b} + ${c})`,
+        ]);
+        return {
+          word: `Owl gathers <strong>${a}</strong> dry acorns and <strong>${b}</strong> more, then shares them evenly among <strong>${c}</strong> friends.`,
+          ask: `Which expression gives each friend's share?`,
+          opts, correct,
+        };
+      },
     ];
     const v = pick(variants)();
     return {
@@ -10983,7 +11094,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       prompt: `<em>${v.word}</em> ${v.ask}`,
       answers: v.opts,
       correctIdx: v.opts.indexOf(v.correct),
-      explain: `Translate the words to operations. The correct expression is <strong>${v.correct}</strong>. (Don't evaluate — just match the structure.)`,
+      explain: pick([
+        `Translate the words to operations. The correct expression is <strong>${v.correct}</strong>. (Don't evaluate -- just match the structure.)`,
+        `Match the story to its structure, not its total. The words describe <strong>${v.correct}</strong>.`,
+        `Read the words as a recipe for the expression: they build <strong>${v.correct}</strong>. (No need to compute the value.)`,
+      ]),
     };
   }
 
@@ -11035,10 +11150,22 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Pooh: <em>"<strong>${v.left}</strong> versus <strong>${v.right}</strong>. Which is bigger?"</em>`,
         `Eeyore stares at <strong>${v.left}</strong> and <strong>${v.right}</strong>. Which expression has the larger value?`,
         `Compare without computing the whole thing if you can: <strong>${v.left}</strong> vs <strong>${v.right}</strong>.`,
+        `Owl squints at two lines in his soggy ledger: <strong>${v.left}</strong> and <strong>${v.right}</strong>. Which is greater?`,
+        `Christopher Robin sets them side by side: <em>"<strong>${v.left}</strong>, or <strong>${v.right}</strong>? Which one wins?"</em>`,
       ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
-      explain: `${v.left} = ${v.leftVal}. ${v.right} = ${v.rightVal}. ${v.leftVal === v.rightVal ? 'Both equal — distributive property.' : `Bigger: <strong>${correct}</strong>.`}`,
+      explain: v.leftVal === v.rightVal
+        ? pick([
+            `${v.left} = ${v.leftVal}. ${v.right} = ${v.rightVal}. Both equal -- distributive property.`,
+            `${v.left} and ${v.right} both come to ${v.leftVal}. Multiplying across the parentheses does not change the total -- that is the distributive property.`,
+            `Check both: ${v.left} = ${v.leftVal}, ${v.right} = ${v.rightVal}. They match -- distributing the multiplication over the addition never changes the value.`,
+          ])
+        : pick([
+            `${v.left} = ${v.leftVal}. ${v.right} = ${v.rightVal}. Bigger: <strong>${correct}</strong>.`,
+            `Working each side out: ${v.left} = ${v.leftVal}, ${v.right} = ${v.rightVal}. <strong>${correct}</strong> is the larger one.`,
+            `${v.left} comes to ${v.leftVal}; ${v.right} comes to ${v.rightVal}. The bigger value belongs to <strong>${correct}</strong>.`,
+          ]),
     };
   }
 
@@ -11061,10 +11188,20 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     const opts = shuffle([correct, ...wrongs.map(String)]);
     return {
       topic: 'pemdas-pattern',
-      prompt: `Roo's pattern: <strong>${seqA.slice(0,4).join(', ')}, ...</strong> (start ${startA}, add ${stepA}). Tigger's pattern: <strong>${seqB.slice(0,4).join(', ')}, ...</strong> (start ${startB}, add ${stepB}). When Roo reaches term ${askIdx + 1} (= ${seqA[askIdx]}), what is Tigger's term ${askIdx + 1}?`,
+      prompt: pick([
+        `Roo's pattern climbs: <strong>${seqA.slice(0,4).join(', ')}, ...</strong> (start ${startA}, add ${stepA} each time). Tigger's pattern climbs faster: <strong>${seqB.slice(0,4).join(', ')}, ...</strong> (start ${startB}, add ${stepB}). When Roo reaches term ${askIdx + 1} (= ${seqA[askIdx]}), what is Tigger's term ${askIdx + 1}?`,
+        `Owl unrolls two soggy charts: <em>"Roo's numbers run <strong>${seqA.slice(0,4).join(', ')}, ...</strong>, starting at ${startA} and adding ${stepA}. Tigger's run <strong>${seqB.slice(0,4).join(', ')}, ...</strong>, starting at ${startB} and adding ${stepB}. At Roo's term ${askIdx + 1}, which is ${seqA[askIdx]}, what is Tigger's term ${askIdx + 1}?"</em>`,
+        `Rabbit, very organized, holds up two lists: <em>"Roo: <strong>${seqA.slice(0,4).join(', ')}, ...</strong> -- starts at ${startA}, adds ${stepA}. Tigger: <strong>${seqB.slice(0,4).join(', ')}, ...</strong> -- starts at ${startB}, adds ${stepB}. Roo's term ${askIdx + 1} is ${seqA[askIdx]}. What's Tigger's term ${askIdx + 1}?"</em>`,
+        `Piglet copies both patterns onto one soggy page: Roo's <strong>${seqA.slice(0,4).join(', ')}, ...</strong> (start ${startA}, add ${stepA}) beside Tigger's <strong>${seqB.slice(0,4).join(', ')}, ...</strong> (start ${startB}, add ${stepB}). Roo's term ${askIdx + 1} is ${seqA[askIdx]} -- what is Tigger's term ${askIdx + 1}?`,
+        `Christopher Robin reads from his book: <em>"Two patterns, side by side. Roo: <strong>${seqA.slice(0,4).join(', ')}, ...</strong> (start ${startA}, add ${stepA}). Tigger: <strong>${seqB.slice(0,4).join(', ')}, ...</strong> (start ${startB}, add ${stepB}). When Roo's term ${askIdx + 1} equals ${seqA[askIdx]}, what does Tigger's term ${askIdx + 1} equal?"</em>`,
+      ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
-      explain: `Roo's term ${askIdx + 1} = ${startA} + ${stepA} × ${askIdx} = ${seqA[askIdx]}. Tigger's term ${askIdx + 1} = ${startB} + ${stepB} × ${askIdx} = <strong>${seqB[askIdx]}</strong>. Notice Tigger's pattern grows ${stepB / stepA}× as fast.`,
+      explain: pick([
+        `Roo's term ${askIdx + 1} = ${startA} + ${stepA} × ${askIdx} = ${seqA[askIdx]}. Tigger's term ${askIdx + 1} = ${startB} + ${stepB} × ${askIdx} = <strong>${seqB[askIdx]}</strong>. Notice Tigger's pattern grows ${stepB / stepA}× as fast.`,
+        `Count forward by the add-amount: Roo needs ${askIdx} more steps of ${stepA} past ${startA}, landing on ${seqA[askIdx]}. Tigger needs ${askIdx} more steps of ${stepB} past ${startB}, landing on <strong>${seqB[askIdx]}</strong> -- ${stepB / stepA}× the growth per step.`,
+        `Each pattern is start-plus-steps: Roo = ${startA} + (${stepA} × ${askIdx}) = ${seqA[askIdx]}. Tigger = ${startB} + (${stepB} × ${askIdx}) = <strong>${seqB[askIdx]}</strong>. Tigger climbs ${stepB / stepA}× faster than Roo.`,
+      ]),
     };
   }
 
@@ -11152,7 +11289,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
-      explain: `An exponent is repeated multiplication: ${base}<sup>${exp}</sup> = ${Array(exp).fill(base).join(' × ')} = <strong>${answer}</strong>. It is not ${base} × ${exp} = ${base * exp}.`,
+      explain: pick([
+        `An exponent is repeated multiplication: ${base}<sup>${exp}</sup> = ${Array(exp).fill(base).join(' × ')} = <strong>${answer}</strong>. It is not ${base} × ${exp} = ${base * exp}.`,
+        `${base}<sup>${exp}</sup> means ${base} multiplied by itself ${exp} times: ${Array(exp).fill(base).join(' × ')} = <strong>${answer}</strong>. Multiplying ${base} by ${exp} instead gives only ${base * exp} -- a very different number.`,
+        `Write it out the long way: ${Array(exp).fill(base).join(' × ')} = <strong>${answer}</strong>. The exponent counts factors of ${base}, not a multiplier -- ${base} × ${exp} = ${base * exp} is a common but wrong shortcut.`,
+      ]),
       check: { op: 'pow', operands: [base, exp], answer },
     };
   }
@@ -11189,7 +11330,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
-      explain: `${base}<sup>${exp}</sup> means ${base} multiplied by itself ${exp} times: <strong>${correct}</strong>. It is not ${base} × ${exp} -- that treats the exponent as one extra factor instead of a repeat count.`,
+      explain: pick([
+        `${base}<sup>${exp}</sup> means ${base} multiplied by itself ${exp} times: <strong>${correct}</strong>. It is not ${base} × ${exp} -- that treats the exponent as one extra factor instead of a repeat count.`,
+        `The exponent ${exp} tells you how many times ${base} appears as a factor: <strong>${correct}</strong>. ${base} × ${exp} would only be true if the exponent meant "multiply once by ${exp}," which is not what it means.`,
+        `Expand it factor by factor: <strong>${correct}</strong>. That is ${exp} copies of ${base} multiplied together -- not ${base} × ${exp}, which mixes up repetition with a simple product.`,
+      ]),
       check: { op: 'pow-expand', operands: [base, exp], answer: correct },
     };
   }
@@ -11245,8 +11390,16 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       answers: opts,
       correctIdx: opts.indexOf(correct),
       explain: isEqual
-        ? `${leftDisp} = ${va}. ${rightDisp} = ${vb}. Same value -- <strong>they are equal</strong>.`
-        : `${leftDisp} = ${va}. ${rightDisp} = ${vb}. <strong>${va > vb ? leftDisp : rightDisp}</strong> is bigger.`,
+        ? pick([
+            `${leftDisp} = ${va}. ${rightDisp} = ${vb}. Same value -- <strong>they are equal</strong>.`,
+            `Work both out: ${leftDisp} = ${va}, ${rightDisp} = ${vb}. Two different-looking expressions, one value -- <strong>they are equal</strong>.`,
+            `${leftDisp} and ${rightDisp} both come to ${va}. Different bases and exponents can still land on <strong>the same value</strong>.`,
+          ])
+        : pick([
+            `${leftDisp} = ${va}. ${rightDisp} = ${vb}. <strong>${va > vb ? leftDisp : rightDisp}</strong> is bigger.`,
+            `Work both out fully: ${leftDisp} = ${va}, ${rightDisp} = ${vb}. The larger value belongs to <strong>${va > vb ? leftDisp : rightDisp}</strong>.`,
+            `${leftDisp} comes to ${va}; ${rightDisp} comes to ${vb}. <strong>${va > vb ? leftDisp : rightDisp}</strong> wins.`,
+          ]),
       check: { op: 'pow-compare', operands: [p1.base, p1.exp, p2.base, p2.exp], answer: correct },
     };
   }
@@ -11269,10 +11422,16 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Christopher Robin set the puzzle: <em>"If <strong>x = ${x}</strong>, what is <strong>${a}x + ${b}</strong> honey jars?"</em>`,
         `Pooh counted carefully on his paws: <em>"With <strong>x = ${x}</strong>, the expression <strong>${a}x + ${b}</strong> comes to...?"</em>`,
         `Rabbit tallied the haycorns: <em>"Substitute <strong>x = ${x}</strong> into <strong>${a}x + ${b}</strong>. What is the total?"</em>`,
+        `Owl copies the formula onto a dry corner of the page: <em>"<strong>${a}x + ${b}</strong>, with <strong>x = ${x}</strong>. Work it through."</em>`,
+        `Piglet, determined: <em>"They say <strong>x = ${x}</strong>. What does <strong>${a}x + ${b}</strong> come to then?"</em>`,
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
-      explain: `Substitute x = ${x}: ${a}·${x} + ${b} = ${a * x} + ${b} = <strong>${answer}</strong>. Multiply before you add (order of operations).`,
+      explain: pick([
+        `Substitute x = ${x}: ${a}·${x} + ${b} = ${a * x} + ${b} = <strong>${answer}</strong>. Multiply before you add (order of operations).`,
+        `Plug in x = ${x} first: ${a} times ${x} is ${a * x}, then add ${b}: <strong>${answer}</strong>. Multiplication comes before addition.`,
+        `With x = ${x}, the multiplication happens first: ${a}·${x} = ${a * x}. Adding ${b} gives <strong>${answer}</strong>.`,
+      ]),
       check: { op: 'linear', operands: [a, x, b], answer },
     };
   }
@@ -11302,7 +11461,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
-      explain: `Undo + ${a} by subtracting from both sides: x = ${b} − ${a} = <strong>${answer}</strong>. Subtraction is the inverse of addition; ${b} + ${a} would undo the wrong way.`,
+      explain: pick([
+        `Undo + ${a} by subtracting from both sides: x = ${b} − ${a} = <strong>${answer}</strong>. Subtraction is the inverse of addition; ${b} + ${a} would undo the wrong way.`,
+        `Addition and subtraction reverse each other: since x + ${a} = ${b}, x = ${b} − ${a} = <strong>${answer}</strong>.`,
+        `To isolate x, subtract ${a} from both sides: ${b} − ${a} = <strong>${answer}</strong>. Adding ${a} again would move the wrong direction.`,
+      ]),
       check: { op: 'solve-add', operands: [a, b], answer },
     };
   }
@@ -11336,7 +11499,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
-      explain: `Undo × ${a} by dividing both sides: x = ${b} ÷ ${a} = <strong>${answer}</strong>. Division is the inverse of multiplication; ${a} × ${b} would undo the wrong way.`,
+      explain: pick([
+        `Undo × ${a} by dividing both sides: x = ${b} ÷ ${a} = <strong>${answer}</strong>. Division is the inverse of multiplication; ${a} × ${b} would undo the wrong way.`,
+        `Multiplication and division reverse each other: since ${a}x = ${b}, x = ${b} ÷ ${a} = <strong>${answer}</strong>.`,
+        `To isolate x, divide both sides by ${a}: ${b} ÷ ${a} = <strong>${answer}</strong>. Multiplying by ${a} again would move the wrong direction.`,
+      ]),
       check: { op: 'solve-mul', operands: [a, b], answer },
     };
   }
@@ -11361,10 +11528,16 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `The Brain of Pooh hummed a Thinking Hum: <em>"With <strong>x = ${x}</strong>, group first: <strong>${a}(x + ${b})</strong>. What is it?"</em>`,
         `Piglet, very bravely: <em>"If <strong>x = ${x}</strong>, then <strong>${a} × (x + ${b})</strong> comes to...?"</em>`,
         `Christopher Robin: <em>"Evaluate <strong>${a}(x + ${b})</strong> when <strong>x = ${x}</strong>."</em>`,
+        `Owl taps the parentheses with his pencil: <em>"Group before you multiply: <strong>${a}(x + ${b})</strong>, with <strong>x = ${x}</strong>. What does it come to?"</em>`,
+        `Rabbit, brisk: <em>"<strong>${a}(x + ${b})</strong> -- and <strong>x = ${x}</strong>. Work it out, properly, from the inside."</em>`,
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
-      explain: `Do the parentheses first: x + ${b} = ${x} + ${b} = ${x + b}. Then × ${a} = <strong>${answer}</strong>. Distributing gives the same: ${a}·${x} + ${a}·${b} = ${a * x} + ${c} = ${answer}.`,
+      explain: pick([
+        `Do the parentheses first: x + ${b} = ${x} + ${b} = ${x + b}. Then × ${a} = <strong>${answer}</strong>. Distributing gives the same: ${a}·${x} + ${a}·${b} = ${a * x} + ${c} = ${answer}.`,
+        `Group first, then multiply: x + ${b} = ${x + b}, times ${a} = <strong>${answer}</strong>. Distributing instead -- ${a}·${x} + ${a}·${b} = ${a * x} + ${c} -- lands on the same total.`,
+        `The parentheses come first: ${x} + ${b} = ${x + b}. Multiply by ${a}: <strong>${answer}</strong>. (Check by distributing: ${a}·${x} + ${a}·${b} = ${a * x} + ${c}, same answer.)`,
+      ]),
       check: { op: 'linear', operands: [a, x, c], answer },
     };
   }
@@ -11381,9 +11554,9 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     'g6-solve-mul':  genG6SolveMul,
     'g6-evaluate2':  genG6Evaluate2,
     'g6-allmix':     genG6AllMix,
-    'simple-parens': genSimpleParens,
+    'simple-parens': () => Math.random() < 0.7 ? genSimpleParens() : (Math.random() < 0.5 ? genWriteExpr() : genCompareExpr()),
     'parens-multi':  () => Math.random() < 0.7 ? genParensMulti() : (Math.random() < 0.5 ? genWriteExpr() : genCorrespondingTerm()),
-    'brackets':      genBrackets,
+    'brackets':      () => Math.random() < 0.7 ? genBrackets() : (Math.random() < 0.5 ? genWriteExpr() : genCorrespondingTerm()),
     'nested':        () => Math.random() < 0.7 ? genNested() : (Math.random() < 0.5 ? genWriteExpr() : genCompareExpr()),
     'full-pemdas':   () => Math.random() < 0.85 ? genFullPemdas() : genCompareExpr(),
     'all-mix':       genAllMix,
@@ -11451,6 +11624,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
       function renderStory() {
         const jarsHtml = [0,1,2].map(i => `<span class="fb-jar ${i < state.livesLost ? 'lost' : ''}"></span>`).join('');
+        const beatCaption = pick(FB_BEAT_CAPTIONS[levelIndex] || FB_BEAT_CAPTIONS[0]);
         root.innerHTML = `
           <div class="fb-story">
             <div class="fb-stage">${sceneSvg(state, lvl)}</div>
@@ -11463,7 +11637,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
             </div>
             <div class="fb-question" id="fb-question"></div>
             <div class="fb-foot">
-              <em>"It rained, and it rained, and it rained."</em>
+              ${beatCaption}
               <div>Jars dry: ${jarsHtml}</div>
             </div>
           </div>
@@ -11504,8 +11678,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           const ex = document.createElement('div');
           ex.className = 'fb-explain ' + (correct ? 'right' : 'wrong');
           ex.innerHTML = correct
-            ? `<div class="fb-explain-head">✓ Just so</div><div>${q.explain || ''}</div>`
-            : `<div class="fb-explain-head">✗ Not quite, said Pooh</div><div>${q.explain || ''}</div>`;
+            ? `<div class="fb-explain-head">✓ ${pick(['Just so', 'Quite right', 'Well reasoned, that'])}</div><div>${q.explain || ''}</div>`
+            : `<div class="fb-explain-head">✗ ${pick(['Not quite, said Pooh', 'Oh, bother -- not quite', 'Try again, said Owl'])}</div><div>${q.explain || ''}</div>`;
           qEl.appendChild(ex);
         }
 
