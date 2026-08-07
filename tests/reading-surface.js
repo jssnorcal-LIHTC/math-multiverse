@@ -14,6 +14,14 @@
 // It asserts on MEASURED GEOMETRY in a real browser at the target device size, never on the CSS
 // source, so it cannot be satisfied by a rule that is written but overridden.
 //
+// Packs are ENUMERATED FROM THE MANIFEST, not hardcoded to one pack id: originally this gate only
+// ever fetched packs/ela-g6-spy.json, so registering a second pack (Vault of Ages) left it reporting
+// "ALL CLEAN" while never once measuring the new pack's items -- passing for the wrong reason, which
+// is worse than failing. The manifest is only the roster here; the oracle (MIN_PASSAGE_PX, SLIT_PX,
+// the footer/scroll checks) is unchanged and applies identically to every pack found. Zero packs
+// discovered in the manifest is a FAIL, never a silent pass, same house rule as
+// tests/validate-pack.js: a harness that silently finds nothing must never report clean.
+//
 //   node tests/reading-surface.js
 //   PLAYWRIGHT_EXECUTABLE_PATH="C:\\...\\chrome.exe" node tests/reading-surface.js
 //
@@ -74,83 +82,106 @@ function startServer() {
 
   await page.goto(`http://127.0.0.1:${port}/Math-Multiverse.html`, { waitUntil: 'networkidle' });
 
-  // The pack is grade-6 only, so the shelf is hidden until the campaign flips.
-  await page.evaluate(() => {
-    const b = [...document.querySelectorAll('button')].find((x) => /Grade 6/i.test(x.textContent));
-    if (!b) throw new Error('no Grade 6 button');
-    b.click();
-  });
-  await page.waitForTimeout(300);
-  await page.evaluate(() => {
-    const c = [...document.querySelectorAll('.module-card')].find((x) => /Cold Signal/.test(x.textContent));
-    if (!c) throw new Error('no Cold Signal card on the grade 6 launcher');
-    c.click();
-  });
-  await page.waitForTimeout(1500);
-  await page.evaluate(() => {
-    const l = document.querySelector('.level-card');
-    if (!l) throw new Error('no level card');
-    l.click();
-  });
-  await page.waitForTimeout(900);
-
-  const items = await page.evaluate(async () => {
-    window.__pack = await (await fetch('packs/ela-g6-spy.json')).json();
-    if (!window.__pack.items || !window.__pack.items.length) throw new Error('pack has no items');
-    return window.__pack.items.map((i) => ({ id: i.id, type: i.type }));
-  });
+  const manifest = await page.evaluate(async () => (await (await fetch('packs/manifest.json')).json()));
+  const manifestPacks = (manifest && Array.isArray(manifest.packs)) ? manifest.packs : [];
+  if (!manifestPacks.length) {
+    console.error('reading-surface: manifest declares zero packs -- refusing to report clean on nothing');
+    await browser.close();
+    server.close();
+    process.exit(1);
+  }
 
   const rows = [];
-  for (const meta of items) {
-    const m = await page.evaluate((itemId) => {
-      const pack = window.__pack;
-      const item = pack.items.find((i) => i.id === itemId);
-      const passage = pack.passages.find((p) => p.id === item.passageId);
-      const box = document.querySelector('.mv-passage');
-      const host = document.querySelector('.mv-item');
-      if (!box || !host) throw new Error('level shell missing .mv-passage or .mv-item');
+  const perPackCounts = [];
 
-      box.innerHTML = '';
-      const t = document.createElement('div');
-      t.className = 'mv-passage-title';
-      t.textContent = passage.title;
-      box.appendChild(t);
-      for (const para of String(passage.text).split(/\n\s*\n/)) {
-        const p = document.createElement('p');
-        p.className = 'mv-para';
-        p.textContent = para.trim();
-        box.appendChild(p);
-      }
+  for (const entry of manifestPacks) {
+    // Return to the launcher and select this pack's own grade before looking for its card: a prior
+    // iteration may have left the page mid-level on a different grade entirely.
+    await page.evaluate(() => { if (typeof exitToLauncher === 'function') exitToLauncher(); });
+    await page.waitForTimeout(150);
+    await page.evaluate((grade) => {
+      const b = [...document.querySelectorAll('button')].find((x) => new RegExp(`Grade ${grade}\\b`, 'i').test(x.textContent));
+      if (!b) throw new Error(`no Grade ${grade} button`);
+      b.click();
+    }, entry.grade);
+    await page.waitForTimeout(300);
 
-      MVItems.render(item, host, { onAnswer() {}, onProgress() {} });
-      // EBSR hides Part B until Part A is committed.  Measure the state the child is actually in
-      // when they are asked to find the supporting sentence, which is the tall one.
-      if (item.type === 'ebsr') {
-        host._mvState.aWrap.querySelector(`.mv-choice[data-idx="${item.partA.key}"]`).click();
-      }
+    await page.evaluate(({ title, grade }) => {
+      const t = [...document.querySelectorAll('.module-card .mc-title')].find((x) => x.textContent.trim() === title);
+      if (!t) throw new Error(`no "${title}" card on the grade ${grade} launcher`);
+      t.closest('.module-card').click();
+    }, { title: entry.title, grade: entry.grade });
+    await page.waitForSelector('.level-card', { timeout: 8000 });
+    await page.waitForTimeout(1200);
 
-      const frame = document.querySelector('.host-frame') || document.querySelector('#app');
-      const fr = frame.getBoundingClientRect();
-      const footer = document.querySelector('.mv-footer');
-      const passStyle = getComputedStyle(box);
-      return {
-        passagePx: Math.round(box.getBoundingClientRect().height),
-        // The passage is allowed to scroll, but only if it is tall enough to read in the first place.
-        itemPx: Math.round(host.getBoundingClientRect().height),
-        // The item is allowed to scroll ONLY when the passage has already given everything it can.
-        // Without this the fix inverts: a passage with an `auto` basis wins the shrink split and
-        // squeezes a short item into a scrollbar while sitting at three times its own floor.
-        itemScrolls: host.scrollHeight > host.clientHeight + 1,
-        passageAtFloor: Math.round(box.getBoundingClientRect().height) <= Math.ceil(parseFloat(passStyle.minHeight)) + 2,
-        footerBelowFrame: footer ? Math.round(footer.getBoundingClientRect().bottom - fr.bottom) : 0,
-      };
-    }, meta.id);
-    rows.push({ ...meta, ...m });
+    await page.evaluate(() => {
+      const l = document.querySelector('.level-card:not(.locked)');
+      if (!l) throw new Error('no open level card');
+      l.click();
+    });
+    await page.waitForSelector('.mv-passage, .mv-item', { timeout: 8000 });
+    await page.waitForTimeout(700);
+
+    const items = await page.evaluate(async (packId) => {
+      window.__pack = await (await fetch(`packs/${packId}.json`)).json();
+      if (!window.__pack.items || !window.__pack.items.length) throw new Error(`pack ${packId} has no items`);
+      return window.__pack.items.map((i) => ({ id: i.id, type: i.type }));
+    }, entry.id);
+    perPackCounts.push({ id: entry.id, title: entry.title, n: items.length });
+
+    for (const meta of items) {
+      const m = await page.evaluate((itemId) => {
+        const pack = window.__pack;
+        const item = pack.items.find((i) => i.id === itemId);
+        const passage = pack.passages.find((p) => p.id === item.passageId);
+        const box = document.querySelector('.mv-passage');
+        const host = document.querySelector('.mv-item');
+        if (!box || !host) throw new Error('level shell missing .mv-passage or .mv-item');
+
+        box.innerHTML = '';
+        const t = document.createElement('div');
+        t.className = 'mv-passage-title';
+        t.textContent = passage.title;
+        box.appendChild(t);
+        for (const para of String(passage.text).split(/\n\s*\n/)) {
+          const p = document.createElement('p');
+          p.className = 'mv-para';
+          p.textContent = para.trim();
+          box.appendChild(p);
+        }
+
+        MVItems.render(item, host, { onAnswer() {}, onProgress() {} });
+        // EBSR hides Part B until Part A is committed.  Measure the state the child is actually in
+        // when they are asked to find the supporting sentence, which is the tall one.
+        if (item.type === 'ebsr') {
+          host._mvState.aWrap.querySelector(`.mv-choice[data-idx="${item.partA.key}"]`).click();
+        }
+
+        const frame = document.querySelector('.host-frame') || document.querySelector('#app');
+        const fr = frame.getBoundingClientRect();
+        const footer = document.querySelector('.mv-footer');
+        const passStyle = getComputedStyle(box);
+        return {
+          passagePx: Math.round(box.getBoundingClientRect().height),
+          // The passage is allowed to scroll, but only if it is tall enough to read in the first place.
+          itemPx: Math.round(host.getBoundingClientRect().height),
+          // The item is allowed to scroll ONLY when the passage has already given everything it can.
+          // Without this the fix inverts: a passage with an `auto` basis wins the shrink split and
+          // squeezes a short item into a scrollbar while sitting at three times its own floor.
+          itemScrolls: host.scrollHeight > host.clientHeight + 1,
+          passageAtFloor: Math.round(box.getBoundingClientRect().height) <= Math.ceil(parseFloat(passStyle.minHeight)) + 2,
+          footerBelowFrame: footer ? Math.round(footer.getBoundingClientRect().bottom - fr.bottom) : 0,
+        };
+      }, meta.id);
+      rows.push({ packId: entry.id, ...meta, ...m });
+    }
   }
 
   const byType = {};
   for (const r of rows) (byType[r.type] = byType[r.type] || []).push(r.passagePx);
-  console.log(`reading surface at ${VIEWPORT.width}x${VIEWPORT.height}, ${rows.length} items\n`);
+  console.log(`reading surface at ${VIEWPORT.width}x${VIEWPORT.height}, ${rows.length} items across ${manifestPacks.length} pack(s)\n`);
+  for (const c of perPackCounts) console.log(`  pack ${c.id} ("${c.title}"): ${c.n} items`);
+  console.log('');
   for (const [t, hs] of Object.entries(byType).sort()) {
     hs.sort((a, b) => a - b);
     console.log(`  ${t.padEnd(10)} n=${String(hs.length).padStart(2)}  min=${String(hs[0]).padStart(4)}px  median=${String(hs[Math.floor(hs.length / 2)]).padStart(4)}px  max=${String(hs[hs.length - 1]).padStart(4)}px`);
@@ -158,10 +189,11 @@ function startServer() {
 
   const problems = [];
   for (const r of rows) {
-    if (r.passagePx < SLIT_PX) problems.push(`${r.id} [${r.type}]: passage is a ${r.passagePx}px SLIT, not a readable box (item is ${r.itemPx}px)`);
-    else if (r.passagePx < MIN_PASSAGE_PX) problems.push(`${r.id} [${r.type}]: passage ${r.passagePx}px is under the ${MIN_PASSAGE_PX}px floor (item is ${r.itemPx}px)`);
-    if (r.footerBelowFrame > 1) problems.push(`${r.id} [${r.type}]: the Check button is ${r.footerBelowFrame}px below the frame, off screen`);
-    if (r.itemScrolls && !r.passageAtFloor) problems.push(`${r.id} [${r.type}]: the item is scrolling while the passage sits at ${r.passagePx}px, well above its floor. The passage should give first.`);
+    const tag = `${r.packId}/${r.id} [${r.type}]`;
+    if (r.passagePx < SLIT_PX) problems.push(`${tag}: passage is a ${r.passagePx}px SLIT, not a readable box (item is ${r.itemPx}px)`);
+    else if (r.passagePx < MIN_PASSAGE_PX) problems.push(`${tag}: passage ${r.passagePx}px is under the ${MIN_PASSAGE_PX}px floor (item is ${r.itemPx}px)`);
+    if (r.footerBelowFrame > 1) problems.push(`${tag}: the Check button is ${r.footerBelowFrame}px below the frame, off screen`);
+    if (r.itemScrolls && !r.passageAtFloor) problems.push(`${tag}: the item is scrolling while the passage sits at ${r.passagePx}px, well above its floor. The passage should give first.`);
   }
 
   console.log(`\n=== reading-surface: ${rows.length} items, ${problems.length} problem(s), ${jsErrors.length} JS error(s) ===`);
