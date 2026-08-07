@@ -28,11 +28,15 @@ function reorderKeys(v) {
 }
 
 function ledgerFor(pack, overrides) {
+  // PASSAGE-AWARE (N4 fix): stored hashes must be computed the same way validateLedger() computes
+  // its comparison hash, itemHash(item, passage), or every fixture item with a passageId reads as
+  // stale before any of these tests get to exercise what they actually target.
+  const passagesById = new Map((pack.passages || []).map(p => [p.id, p]));
   return {
     packId: pack.meta.id,
     model: 'test-model',
     records: pack.items.map(it => Object.assign({
-      itemId: it.id, itemHash: itemHash(it),
+      itemId: it.id, itemHash: itemHash(it, it.passageId ? passagesById.get(it.passageId) : null),
       blind: authoredKeyOf(it), authored: authoredKeyOf(it), status: 'agree',
     }, (overrides && overrides[it.id]) || {})),
   };
@@ -54,6 +58,65 @@ check('itemHash is stable across key reordering but changes with content', () =>
   const edited = JSON.parse(JSON.stringify(it));
   edited.choices[1] = 'a different distractor entirely';
   assert.notStrictEqual(itemHash(it), itemHash(edited));
+});
+
+check('itemHash(item) alone is byte-identical to itemHash(item) before the N4 passage-aware fix', () => {
+  // Backward compatibility for any caller that has not been updated to pass a passage: the single-
+  // argument form must never change, or every existing ledger record for every item without a
+  // resolvable passage silently goes stale the moment this file is edited.
+  const it = clone().items[0];
+  const withoutPassage = itemHash(it);
+  const withNullPassage = itemHash(it, null);
+  const withUndefinedPassage = itemHash(it, undefined);
+  assert.strictEqual(withoutPassage, withNullPassage, 'passing null must match omitting the argument');
+  assert.strictEqual(withoutPassage, withUndefinedPassage, 'passing undefined must match omitting the argument');
+});
+
+check('itemHash changes when the PASSAGE changes, even if the item itself does not (N4 fix)', () => {
+  // This is the actual defect: an item whose own text never moved kept a "verified" hash even after
+  // the passage it quotes was rewritten underneath it. Pin the fix directly, independent of any pack
+  // fixture, so a future change to itemHash cannot silently regress this without failing here first.
+  const item = { id: 'i-x', type: 'mc', passageId: 'p-x', stem: 's', choices: ['a','b'], key: 0 };
+  const passageV1 = { id: 'p-x', text: 'Original passage text.' };
+  const passageV2 = { id: 'p-x', text: 'Rewritten passage text, same item untouched.' };
+  const h1 = itemHash(item, passageV1);
+  const h2 = itemHash(item, passageV2);
+  assert.notStrictEqual(h1, h2, 'the same item against two different passages must hash differently');
+  // Control: the SAME passage object hashed twice must be stable, or this is noise, not a real check.
+  assert.strictEqual(itemHash(item, passageV1), itemHash(item, { id: 'p-x', text: passageV1.text }));
+});
+
+check('blind-reanswer.js resolvedItemHash matches the real N4 passage-aware itemHash (26-0807 fix-round pin)', () => {
+  // This is the pin the escape needed. The committed tests/blind-reanswer.js shipped in fae21e7
+  // still calling the LEGACY itemHash(item) at both its call sites, even though verdicts.js itself
+  // had the N4 fix and every OTHER caller (validateLedger, the workspace build copy) had been
+  // updated. It escaped review because this file's own N4 tests above construct their ledger
+  // fixtures by hand-computing itemHash(item, passage) directly (see ledgerFor()), which proves
+  // itemHash() is correct but never actually calls INTO blind-reanswer.js, so a stale call site
+  // there was invisible to every test in this file. Import the REAL exported function under test,
+  // not a re-implementation of "resolve the passage, then hash" written fresh in this fixture --
+  // a reimplementation here would just be the same bypass with extra steps.
+  const { resolvedItemHash } = require('./blind-reanswer');
+  const p = clone();
+  const passages = new Map(p.passages.map((pg) => [pg.id, pg]));
+  const item = p.items.find((it) => it.passageId); // any item with a resolvable passage
+  assert.ok(item, 'fixture must contain at least one passage-linked item for this pin to mean anything');
+
+  const want = itemHash(item, passages.get(item.passageId));
+  assert.strictEqual(resolvedItemHash(item, passages), want,
+    'blind-reanswer.js must resolve and pass the passage, exactly like validateLedger() does');
+
+  // Negative control, both directions, or this pin proves nothing:
+  //   1) it must NOT just happen to match itemHash(item) with no passage at all (that is exactly the
+  //      stale, pre-fix call the escape shipped).
+  assert.notStrictEqual(resolvedItemHash(item, passages), itemHash(item),
+    'a match against the no-passage form would mean this call site regressed to the legacy hash');
+  //   2) rewriting the passage text underneath the SAME unchanged item must move the resolved hash,
+  //      proving the passage argument is genuinely threaded through rather than a coincidental match.
+  const rewritten = new Map(passages);
+  rewritten.set(item.passageId, Object.assign({}, passages.get(item.passageId), { text: 'a rewritten passage, same item untouched' }));
+  assert.notStrictEqual(resolvedItemHash(item, rewritten), want,
+    'resolvedItemHash must move when the passage moves, or this pin is not testing passage-awareness at all');
 });
 
 check('authoredKeyOf reads mc, ms and ebsr partA keys', () => {
