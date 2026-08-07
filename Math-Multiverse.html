@@ -2715,7 +2715,29 @@
     box-shadow: 0 2px 8px rgba(74, 53, 38, 0.1);
     min-height: 0;
   }
-  .fb-stage svg { width: 100%; height: 100%; display: block; }
+  .fb-stage svg { width: 100%; height: 100%; display: block; position: relative; z-index: 1; }
+  /* Task 3: the beat plate anchors the stage behind the procedural SVG (which
+     paints its own paper rect at reduced opacity, see sceneSvg, so the plate
+     reads through); the secondary inset sits above both, in the corner, echoing
+     how Shepard's own plates pair small vignettes on one printed page. */
+  .fb-stage-plate {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: sepia(0.15) contrast(1.03);
+    z-index: 0;
+  }
+  .fb-stage-inset {
+    position: absolute; right: 6px; bottom: 6px;
+    width: 30%; max-width: 110px;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border: 1px solid rgba(74, 53, 38, 0.45);
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(74, 53, 38, 0.35);
+    filter: sepia(0.15) contrast(1.03);
+    z-index: 2;
+  }
 
   .fb-status {
     grid-area: status;
@@ -3201,18 +3223,27 @@ const MODULES = [
     domain: 'Order of Operations',
     ccss: '5.OA',
     icon: '🐻',
-    logoUrl: 'https://www.gutenberg.org/files/67098/67098-h/images/cover.jpg',
+    // Task 3: local plate, was an external gutenberg.org hotlink. p153-1 (Pooh
+    // astride the jar-boat) is the module's namesake image -- the Floating Bear
+    // pose itself -- and the sharper of the two PASS candidates at this crop
+    // (155KB vs p152-2's 111KB but a cleaner read at card size); see
+    // art/PROVENANCE-shepard-1926.md.
+    logoUrl: 'art/shepard-1926-p153-1.png',
     color: '#d4a24c',
     description: 'It rained, and it rained, and it rained. Save Pooh and Piglet from the flood with parentheses and brackets.',
     unlocked: false,
     lockedMessage: 'Beat Rocky\'s Dictionary to unlock.',
+    // Task 2 (arc re-theme): mirrors FB_BEATS' book-causal order (hand-kept in
+    // sync -- this literal array loads long before the FB module IIFE runs, so
+    // it cannot reference FB_BEATS directly). Levels 3/4 swapped themes so
+    // Piglet's Bottle precedes The Floating Bear launching, per the beat table.
     levels: [
-      { id: 1, name: 'Light Drizzle',           goal: 'Keep the jars dry',         questions: 15 },
-      { id: 2, name: 'Steady Rain',             goal: 'Pooh sits tight',           questions: 18 },
-      { id: 3, name: 'The Floating Bear',       goal: 'Sail on the jar',           questions: 18 },
-      { id: 4, name: 'Piglet\'s Bottle',        goal: 'Find the missage',          questions: 20 },
-      { id: 5, name: 'The Brain of Pooh',       goal: 'Inverted umbrella afloat',  questions: 20 },
-      { id: 6, name: 'Storm of the Century',    goal: 'Captain C. Robin rescues',  questions: 20 },
+      { id: 1, name: 'Light Drizzle',           goal: 'Keep the jars dry',              questions: 15 },
+      { id: 2, name: 'Steady Rain',              goal: 'Move the honey to the branch',   questions: 18 },
+      { id: 3, name: 'Piglet\'s Bottle',        goal: 'Find the missage',               questions: 18 },
+      { id: 4, name: 'The Floating Bear',       goal: 'Sail on the jar',                questions: 20 },
+      { id: 5, name: 'The Brain of Pooh',       goal: 'Inverted umbrella afloat',       questions: 20 },
+      { id: 6, name: 'Storm of the Century',    goal: 'Captain C. Robin rescues',       questions: 20 },
     ],
     grandGoal: '1st Mate P. Bear',
     g6: {
@@ -10469,28 +10500,254 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   // the iPad, dropping to the crude SVG fallback). Genuine 1926 E. H. Shepard
   // map, public domain. See art/pooh-hundred-acre-wood.jpg.
   const POOH_MAP = 'art/pooh-hundred-acre-wood.jpg';
-  const POOH_COVER = 'https://en.wikipedia.org/wiki/Special:FilePath/Winnie-the-Pooh_(book).png';
+
+  // Task 2 (arc re-theme): the six story beats in the book's own causal order
+  // (Ch. IX, "In Which Piglet Is Entirely Surrounded by Water"), plate refs
+  // cross-verified 13/13 against the 1926 Methuen first edition. FB_LEVELS /
+  // FB_LEVELS_6 below derive their name/chapter text from this table; the
+  // MODULES registry goal/levels strings (Math-Multiverse.html ~3198) are
+  // hand-kept in sync with it (that literal array is defined long before this
+  // IIFE runs, so it cannot reference FB_BEATS directly). Level INDEX and the
+  // gen:/type: generator mapping never move -- only the name/chapter/goal
+  // framing shown at each index. "Missage" (beat 3) verified verbatim against
+  // Standard Ebooks' text of chapter 9 ("It's a Missage," he said to himself
+  // ... "a very important Missage to me") -- Pooh's own diction, not a
+  // codebase typo -- kept as-is. plate fields are art/shepard-1926-p<N>.png
+  // references, mounted by Task 3 (see FB_PLATES and the pick/story render
+  // functions below); secondary fields (plateRetrieval/plateAlt/plateMotif/
+  // plateSetup) are mounted as either a progress-gated swap or a fixed
+  // corner-inset alongside the primary plate, per beat -- see
+  // fbStagePlates().
+  const FB_BEATS = [
+    { // 1: rain begins
+      key: 'rain-begins', title5: 'A Light Drizzle', chapter: 'In which a cloud appears',
+      chapter6: 'In which the raindrops multiply themselves',
+      goal: 'Keep the jars dry',
+      // Task 3: cross-verified MATCH against winniepooh0000aami leaf 137 (see
+      // art/PROVENANCE-shepard-1926.md); this is the chapter's own opening
+      // establishing plate, so it ships as beat 1's anchor rather than
+      // staying procedural-only.
+      plate: 'art/shepard-1926-p146.png',
+    },
+    { // 2: honey to the branch
+      key: 'honey-branch', title5: 'A Steady Rain', chapter: 'In which Pooh moves his honey to the branch',
+      chapter6: 'In which a jar-count depends on x',
+      goal: 'Move the honey to the branch',
+      plate: 'art/shepard-1926-p150.png',
+    },
+    { // 3: Piglet's bottle -- written and thrown, then (four days later) retrieved by Pooh
+      key: 'piglet-bottle', title5: "Piglet's Bottle", chapter: 'In which Piglet sends a message',
+      chapter6: "In which Piglet's acorns go out with the bottle",
+      goal: 'Find the missage',
+      // Fix round 1 addendum: plateRetrieval points at a CROP of p151.png, not
+      // the plate itself. p151's bottle occupies a small fraction of a mostly
+      // blank 1077x573 frame; at the story-stage anchor's actual size (55%
+      // paper-rect opacity, under the procedural rain/tree layer) the full
+      // plate read as illegible. shepard-1926-p151-crop.png is a pixel crop of
+      // this byte-identical, already cross-verified file (see
+      // art/PROVENANCE-shepard-1926.md), not a new source needing its own
+      // verification.
+      plate: 'art/shepard-1926-p148.png', plateRetrieval: 'art/shepard-1926-p151-crop.png',
+    },
+    { // 4: The Floating Bear launches
+      key: 'floating-launch', title5: 'The Floating Bear', chapter: 'In which Pooh sails on a jar',
+      chapter6: 'In which the honey jar becomes a raft',
+      goal: 'Sail on the jar',
+      // plateAlt holds only p152-2 (fbStagePlates() reads plateAlt[0] as the
+      // story-stage inset); p153-1, the other PASS candidate from this pairing,
+      // ships as the MODULES registry logoUrl instead (Math-Multiverse.html
+      // ~3226), not a second array entry nothing ever read.
+      plate: 'art/shepard-1926-p152-1.png', plateAlt: ['art/shepard-1926-p152-2.png'],
+    },
+    { // 5: The Brain of Pooh -- Christopher Robin's umbrella-boat
+      key: 'brain-of-pooh', title5: 'The Brain of Pooh', chapter: 'In which an umbrella becomes a boat',
+      chapter6: 'In which Pooh groups before he multiplies',
+      goal: 'Inverted umbrella afloat',
+      plate: 'art/shepard-1926-p158.png', plateMotif: 'art/shepard-1926-p153-2.png', // C.R.'s daily flood marker-stick, rising-water motif
+    },
+    { // 6: the rescue
+      key: 'rescue', title5: 'Storm of the Century', chapter: 'In which Captain C. Robin rescues all',
+      chapter6: 'In which Captain C. Robin solves it all',
+      goal: 'Captain C. Robin rescues',
+      plate: 'art/shepard-1926-p160-2.png', plateSetup: 'art/shepard-1926-p160-1.png', // Owl on Piglet's tree, one leaf before
+    },
+  ];
+  // Boat-beats: Pooh is drawn floating once The Floating Bear has actually
+  // launched (beat 4) through the rescue (beat 6), not before. Consumed by
+  // sceneSvg() in place of the old `level.id >= 3` cutoff.
+  const FB_BOAT_BEAT_KEYS = new Set(['floating-launch', 'brain-of-pooh', 'rescue']);
+
+  // Task 3: beatKey -> primary shipped plate, derived from FB_BEATS itself
+  // (never hand-duplicated) so the two structures cannot drift.
+  const FB_PLATES = {};
+  FB_BEATS.forEach((b) => { if (b.plate) FB_PLATES[b.key] = b.plate; });
+
+  // Task 3: resolves which plate(s) a beat mounts, given how far the level
+  // has progressed (0..1, correctCount/totalQ -- mirrors sceneSvg's own
+  // `progress`). Two treatments, both derived from the fields Task 2 already
+  // put on FB_BEATS, neither inventing new data:
+  //  - plateRetrieval / plateSetup: a TEMPORAL pair -- the beat's plate
+  //    swaps once the level is nearly finished, echoing the book's own
+  //    "written, then four days later retrieved" (beat 3) and "Owl's setup
+  //    panel, one leaf before the rescue plate" (beat 6) sequencing.
+  //  - plateMotif / plateAlt[0]: a SIMULTANEOUS secondary vignette shown
+  //    alongside the primary plate, echoing how Shepard's own plates often
+  //    pair two small vignettes on one printed page (as 155/156 do).
+  // FB_PLATE_SWAP_AT is < 1, not 1: renderStory() (the only place the story
+  // stage renders) is never called once questionNum reaches totalQ -- that
+  // branch goes to endLevel() instead -- so `progress` (correctCount/totalQ)
+  // can never actually equal 1 in any render, and a >= 1 gate would be dead
+  // code. 0.85 lands the swap in the level's final stretch, which a render
+  // still reaches on any run with at most a couple of wrong answers.
+  const FB_PLATE_SWAP_AT = 0.85;
+  function fbStagePlates(beat, progress) {
+    if (beat.plateRetrieval) return { anchor: progress >= FB_PLATE_SWAP_AT ? beat.plateRetrieval : beat.plate, inset: null };
+    if (beat.plateSetup) return { anchor: progress >= FB_PLATE_SWAP_AT ? beat.plate : beat.plateSetup, inset: null };
+    if (beat.plateMotif) return { anchor: beat.plate, inset: beat.plateMotif };
+    if (beat.plateAlt && beat.plateAlt.length) return { anchor: beat.plate, inset: beat.plateAlt[0] };
+    return { anchor: beat.plate || null, inset: null };
+  }
+
+  // Task 3: alt text for the three plates the sourcing workflow flagged
+  // SUSPECT and later resolved (see art/PROVENANCE-shepard-1926.md) -- their
+  // TRUE scenes, not the original scene guess. Every other plate gets a
+  // generic per-level alt string.
+  const FB_PLATE_ALT = {
+    'art/shepard-1926-p151-crop.png': "Pooh retrieving Piglet's corked bottle from the water",
+    'art/shepard-1926-p153-2.png': "Christopher Robin marking the rising water with his flood-stick",
+    'art/shepard-1926-p160-1.png': "Owl perched on Piglet's tree, one leaf before the rescue",
+  };
+  function fbPlateAlt(path, lvlName) {
+    return (path && FB_PLATE_ALT[path]) || `E. H. Shepard, 1926: ${lvlName}`;
+  }
+
+  // Task 3 fix round 1: p146 is the sole PORTRAIT plate among the 11 shipped
+  // (993x1200, ratio 0.83; the other 10 are 1.27-1.88 landscape), mounted via
+  // object-fit:cover into landscape boxes (.fb-illustration 3:2, .fb-stage-plate
+  // 2.1:1 at 1024x768). Center object-position (the default) shows only the
+  // image's middle 39-55% of height, which cropped out both the trunk's base
+  // (the water pooling that titles the beat) and clipped the TRESPASSERS W
+  // sign, keeping only the window. Judged live against rendered screenshots
+  // (.superpowers/sdd/PLAN-multiverse-floating-bear-v1-26-0806/screens/): a
+  // bottom-biased crop at "center 75%" keeps the window, the full sign, and
+  // the waterline scribble at the trunk's base in the wider pick-screen box,
+  // and reads legibly in the narrower stage box too. Keyed by plate path (a
+  // property of the file's own geometry), not the beat, so it travels with
+  // the image if it is ever remounted elsewhere.
+  const FB_PLATE_CROP = {
+    'art/shepard-1926-p146.png': 'center 75%',
+  };
+  function fbPlateCropAttr(path) {
+    const pos = path && FB_PLATE_CROP[path];
+    return pos ? ` style="object-position: ${pos};"` : '';
+  }
 
   const FB_LEVELS = [
-    { id: 1, name: 'A Light Drizzle',         gen: 'simple-parens', chapter: 'In which a cloud appears' },
-    { id: 2, name: 'A Steady Rain',           gen: 'parens-multi',  chapter: 'In which Pooh saves his honey' },
-    { id: 3, name: 'The Floating Bear',       gen: 'brackets',      chapter: 'In which Pooh sails on a jar' },
-    { id: 4, name: "Piglet's Bottle",         gen: 'nested',        chapter: 'In which Piglet sends a message' },
-    { id: 5, name: 'The Brain of Pooh',       gen: 'full-pemdas',   chapter: 'In which an umbrella becomes a boat' },
-    { id: 6, name: 'Storm of the Century',    gen: 'all-mix',       chapter: 'In which Captain C. Robin rescues all' },
+    { id: 1, name: FB_BEATS[0].title5, gen: 'simple-parens', chapter: FB_BEATS[0].chapter },
+    { id: 2, name: FB_BEATS[1].title5, gen: 'parens-multi',  chapter: FB_BEATS[1].chapter },
+    { id: 3, name: FB_BEATS[2].title5, gen: 'brackets',      chapter: FB_BEATS[2].chapter },
+    { id: 4, name: FB_BEATS[3].title5, gen: 'nested',        chapter: FB_BEATS[3].chapter },
+    { id: 5, name: FB_BEATS[4].title5, gen: 'full-pemdas',   chapter: FB_BEATS[4].chapter },
+    { id: 6, name: FB_BEATS[5].title5, gen: 'all-mix',       chapter: FB_BEATS[5].chapter },
   ];
   const FB_QPL = [15, 18, 18, 20, 20, 20];
+
+  // Task 2 step 2 ("state the object"): shown at the pick screen and at the
+  // start of every level except the finale (level 6), which shows the ship's
+  // log line instead -- verbatim from Ch. IX: "...the good ship, The Brain of
+  // Pooh (Captain, C. Robin; 1st Mate, P. Bear) coming over the sea to rescue
+  // him." That quote is the moment the rescue-track boat actually arrives, so
+  // it doubles as level 6's object line.
+  const FB_OBJECT_LINES = [
+    'Reach Piglet before the water does.',
+    'The water is rising. Piglet is waiting.',
+    'Get to Piglet before the flood does.',
+  ];
+  const FB_FINISH_LINE = 'The Brain of Pooh (Captain, C. Robin; 1st Mate, P. Bear)';
+
+  // Task 1 (shell variety): per-question story-screen footer caption, one pick-pool per
+  // levelIndex (0-5), matching FB_QPL's own indexing. Re-keyed for Task 2's beat re-order --
+  // pools 2 and 3 swapped (Piglet's Bottle <-> The Floating Bear) to follow FB_BEATS; 0/1/4/5
+  // already matched their beat and are unchanged.
+  const FB_BEAT_CAPTIONS = [
+    [ // 0: A Light Drizzle / Powers of the Rain -- a cloud appears
+      `<em>"It rained, and it rained, and it rained."</em>`,
+      `A single cloud drifted over the Hundred Acre Wood, and nobody thought much of it.`,
+      `Pooh looked up. <em>"Just a spot of weather,"</em> he said, and went back to his honey.`,
+    ],
+    [ // 1: A Steady Rain / Pooh's Honey Count -- Pooh moves his honey to the branch
+      `The rain had settled in for the day, steady on the roof of Pooh's house.`,
+      `Pooh counted his honey jars twice, just to be sure none had floated off yet.`,
+      `Outside, the puddles were beginning to join hands.`,
+    ],
+    [ // 2: Piglet's Bottle / Piglet's Missing Acorns -- Piglet sends a message
+      `Piglet's message bobbed away in its bottle, out across the new, wide water.`,
+      `The Wood had become mostly water, with a few brave treetops poking through.`,
+      `Somewhere out there, Piglet hoped, someone was reading his note.`,
+    ],
+    [ // 3: The Floating Bear / Rows on the Raft -- Pooh sails on a jar
+      `The water had crept up past the doorstep, and Pooh's jar bobbed gently on it.`,
+      `Owl watched from his porch as the flood turned the valley into a very large puddle indeed.`,
+      `Pooh, quite comfortable aboard his honey jar, called it his boat.`,
+    ],
+    [ // 4: The Brain of Pooh -- an umbrella becomes a boat / grouping before multiplying
+      `Christopher Robin's umbrella, upside down, made rather a fine little boat.`,
+      `Pooh thought Very Hard, which was not something he did lightly, especially in a flood.`,
+      `Everyone agreed a Clever Plan was needed, and everyone looked at Pooh.`,
+    ],
+    [ // 5: Storm of the Century -- Captain C. Robin rescues all
+      // Task 4: rewritten to fit the PRE-swap plateSetup scene (p160-1, Owl
+      // perched on Piglet's tree, one leaf before the rescue) -- the prior
+      // default pool described the rescue as already under way, which read
+      // against a plate showing Owl alone, calm, no boat or captain yet. See
+      // FB_BEAT_CAPTIONS_SWAPPED['rescue'] for the post-swap (p160-2) pool.
+      `Owl perched at the top of Piglet's tree, keeping a very owlish watch on the water.`,
+      `The flood had not dropped an inch, and there was nothing to do but wait, which Owl found tiresome.`,
+      `Piglet watched the grey water from his window, and hoped help was not too far off.`,
+    ],
+  ];
+
+  // Fix round 1 addendum: p151 (the beat-3 post-swap plate, Pooh retrieving
+  // Piglet's bottle) reads plausibly as an ear to a player without foreknowledge
+  // (the provenance DRAFT's own warning); FB_BEAT_CAPTIONS[2]'s default pool all
+  // describes the bottle being SENT, which actively misleads once the RETRIEVAL
+  // plate is on screen. Keyed by beat key (not levelIndex) and consumed by
+  // renderStory only once fbStagePlates' own progress gate has swapped the
+  // plate, so caption and art can never disagree. Only beats whose default
+  // captions would otherwise contradict the swapped-in plate need an entry
+  // here.
+  //
+  // Task 4: 'rescue' added -- beat 6's original default pool described the
+  // rescue as already under way, which read against the PRE-swap plateSetup
+  // plate (p160-1, Owl alone on Piglet's tree, no boat or captain in sight).
+  // FB_BEAT_CAPTIONS[5] above was rewritten to fit that calm setup scene; this
+  // entry supplies the rescue-in-progress captions for the POST-swap plate
+  // (p160-2) instead, echoing the ship's-log line already established at level
+  // start (FB_FINISH_LINE, "The Brain of Pooh (Captain, C. Robin; 1st Mate,
+  // P. Bear)") without repeating it verbatim.
+  const FB_BEAT_CAPTIONS_SWAPPED = {
+    'piglet-bottle': [
+      `Pooh fished the bottle from the water and read the Missage at last.`,
+      `<em>"Ah,"</em> said Pooh, turning the bottle over in his paws, <em>"here is Piglet's very important Missage."</em>`,
+      `At last the bottle was safe in Pooh's paws, message and all.`,
+    ],
+    'rescue': [
+      `The good ship, The Brain of Pooh, came at last across the water, with Captain C. Robin at the helm.`,
+      `<em>"Here we are,"</em> said Christopher Robin, bringing his fleet of umbrellas and jars alongside at last.`,
+      `Piglet was lifted safely aboard, and even Owl agreed the rescue had gone rather well.`,
+    ],
+  };
 
   // Same Winnie-the-Pooh flood theme; selected only when ACTIVE_GRADE === 6. The
   // grade-5 FB_LEVELS above is untouched. FB_QPL (15,18,18,20,20,20) is shared by
   // both grades. Gen ids resolve through the FB_GEN map below (grade-6 keys first).
   const FB_LEVELS_6 = [
-    { id: 1, name: 'Powers of the Rain',      gen: 'g6-exponent',  chapter: 'In which the raindrops multiply themselves' },
-    { id: 2, name: "Pooh's Honey Count",      gen: 'g6-evaluate',  chapter: 'In which a jar-count depends on x' },
-    { id: 3, name: "Piglet's Missing Acorns", gen: 'g6-solve-add', chapter: 'In which Piglet undoes an addition' },
-    { id: 4, name: 'Rows on the Raft',        gen: 'g6-solve-mul', chapter: 'In which Owl undoes a multiplication' },
-    { id: 5, name: 'The Brain of Pooh',       gen: 'g6-evaluate2', chapter: 'In which Pooh groups before he multiplies' },
-    { id: 6, name: 'Storm of the Century',    gen: 'g6-allmix',    chapter: 'In which Captain C. Robin solves it all' },
+    { id: 1, name: 'Powers of the Rain',      gen: 'g6-exponent',  chapter: FB_BEATS[0].chapter6 },
+    { id: 2, name: "Pooh's Honey Count",      gen: 'g6-evaluate',  chapter: FB_BEATS[1].chapter6 },
+    { id: 3, name: "Piglet's Missing Acorns", gen: 'g6-solve-add', chapter: FB_BEATS[2].chapter6 },
+    { id: 4, name: 'Rows on the Raft',        gen: 'g6-solve-mul', chapter: FB_BEATS[3].chapter6 },
+    { id: 5, name: 'The Brain of Pooh',       gen: 'g6-evaluate2', chapter: FB_BEATS[4].chapter6 },
+    { id: 6, name: 'Storm of the Century',    gen: 'g6-allmix',    chapter: FB_BEATS[5].chapter6 },
   ];
 
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
@@ -10583,7 +10840,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       <g stroke-width="0.6" opacity="0.28"><path d="M 45 112 q 6 8 14 9"/><path d="M 43 104 q 8 10 18 11"/><path d="M 47 120 q 6 6 12 7"/><path d="M 78 98 q 5 8 4 16"/></g>
     </g>`;
   }
-  function poohSvg() { return `<svg viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg">${fbPoohFig(true)}</svg>`; }
   function fbFloatPooh() {
     return `<g stroke="${FB_INK}" fill="none" stroke-linejoin="round" stroke-linecap="round">
       <ellipse cx="2" cy="10" rx="40" ry="6" fill="${FB_INK}" opacity="0.07" stroke="none"/>
@@ -10632,34 +10888,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       </g></g>`;
   }
 
-  function pigletSvg(small) {
-    const s = small ? 60 : 120;
-    const k = small ? 0.5 : 1;
-    const t = (n) => (n * k).toFixed(1);
-    return `
-      <svg viewBox="0 0 ${s} ${s}" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#4A3526" stroke-width="${k * 1.2}" fill="none">
-          <!-- body (with stripe waistcoat) -->
-          <ellipse cx="${t(60)}" cy="${t(80)}" rx="${t(22)}" ry="${t(26)}" fill="#E5BFC4"/>
-          <line x1="${t(40)}" y1="${t(75)}" x2="${t(80)}" y2="${t(75)}" stroke="#5A8A5A"/>
-          <line x1="${t(40)}" y1="${t(85)}" x2="${t(80)}" y2="${t(85)}" stroke="#5A8A5A"/>
-          <!-- head -->
-          <circle cx="${t(60)}" cy="${t(40)}" r="${t(20)}" fill="#E5BFC4"/>
-          <!-- ears -->
-          <path d="M ${t(45)} ${t(28)} L ${t(43)} ${t(20)} L ${t(50)} ${t(26)} Z" fill="#E5BFC4"/>
-          <path d="M ${t(75)} ${t(28)} L ${t(77)} ${t(20)} L ${t(70)} ${t(26)} Z" fill="#E5BFC4"/>
-          <!-- snout -->
-          <ellipse cx="${t(60)}" cy="${t(48)}" rx="${t(6)}" ry="${t(4)}" fill="#E5BFC4"/>
-          <circle cx="${t(58)}" cy="${t(48)}" r="${t(1)}" fill="#4A3526" stroke="none"/>
-          <circle cx="${t(62)}" cy="${t(48)}" r="${t(1)}" fill="#4A3526" stroke="none"/>
-          <!-- eyes -->
-          <circle cx="${t(54)}" cy="${t(38)}" r="${t(1.2)}" fill="#4A3526" stroke="none"/>
-          <circle cx="${t(66)}" cy="${t(38)}" r="${t(1.2)}" fill="#4A3526" stroke="none"/>
-        </g>
-      </svg>
-    `;
-  }
-
   function fbJar(label, showLabel) {
     return `<g stroke="${FB_INK}" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round">
       <path d="M 14 31 Q 11 55 16 71 Q 18 76 30 76 Q 42 76 44 71 Q 49 55 46 31 Z" fill="${FB_HONEY}"/>
@@ -10670,15 +10898,28 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       <g stroke-width="0.6" opacity="0.32"><path d="M 16 40 q 2 20 3 30"/><path d="M 44 40 q -2 20 -3 30"/></g>
     </g>`;
   }
-  function honeyJarSvg(label) { return `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">${fbJar(label)}</svg>`; }
-
   function sceneSvg(state, level) {
     const q = state.questionNum || 0, lost = state.livesLost || 0;
-    const waterY = Math.max(150, Math.min(238, 244 - q * 4 - lost * 13)); // flood rises with wrongs
+    // Task 2 step 3: water = threat only -- mere progress (q) no longer raises
+    // the flood, only mistakes do. flooded stays <210, now first crossed at
+    // the second mistake (lost=2: 238-44=194); DNF's flooded-max (lost=3:
+    // 238-66=172) reads as the water reaching Piglet with no further code.
+    const waterY = Math.max(150, 238 - lost * 22);
     const flooded = waterY < 210;
-    const showFloating = (level.id >= 3) || flooded;
+    const beat = FB_BEATS[level.id - 1] || FB_BEATS[FB_BEATS.length - 1];
+    const showFloating = FB_BOAT_BEAT_KEYS.has(beat.key) || flooded;
     const jarsLeft = Math.max(0, 4 - Math.min(4, q));
-    const rainN = Math.min(52, 6 + q * 3 + lost * 7);
+    // Rain density re-keys off beat (level.id) + mistakes, not raw question count.
+    const rainN = Math.min(52, 10 + level.id * 4 + lost * 8);
+    // Task 2 step 4: progress = rescue. The boat drifts from its launch point
+    // near the honey-jar branch toward Piglet's window as correctCount grows
+    // -- derived from this function's own geometry (jars sit around x 170-242
+    // just under the branch; 432 was the art's original tuned floating-Pooh x,
+    // kept here as the rescue's arrival point rather than invented anew).
+    const totalQ = FB_QPL[level.id - 1] || 20;
+    const progress = Math.max(0, Math.min(1, (state.correctCount || 0) / totalQ));
+    const boatLaunchX = 220, boatRescueX = 432;
+    const boatX = boatLaunchX + progress * (boatRescueX - boatLaunchX);
     const rain = Array.from({ length: rainN }, (_, i) => { const x = (i * 61 + q * 13) % 600, y = (i * 41 + q * 7) % (waterY - 14); return `<line x1="${x}" y1="${y}" x2="${(x - 5)}" y2="${y + 13}"/>`; }).join('');
     const distTrees = Array.from({ length: 5 }, (_, i) => { const x = 250 + i * 80 + fbWob(i) * 16, y = 150 + fbWob(i * 2) * 4, r = 9 + fbWob(i * 3) * 5; return `<path d="${fbCloud(x, y - r * 0.3, r, r * 0.85, 9, i)}" fill="${FB_PAPER}" stroke="${FB_SOFT}" stroke-width="0.9"/><line x1="${x}" y1="${(y + r * 0.5).toFixed(1)}" x2="${x}" y2="${(y + r * 0.5 + 6).toFixed(1)}" stroke="${FB_SOFT}" stroke-width="0.9"/>`; }).join('');
     let ripples = '';
@@ -10692,7 +10933,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="fbPpr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8efd8"/><stop offset="1" stop-color="#efe3c6"/></linearGradient>
         <filter id="fbRough" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="turbulence" baseFrequency="0.02 0.024" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter></defs>
-        <rect width="600" height="280" fill="url(#fbPpr)"/>
+        <rect width="600" height="280" fill="url(#fbPpr)" opacity="0.55"/>
         <g filter="url(#fbRough)">
         <rect x="5" y="5" width="590" height="270" fill="none" stroke="${FB_INK}" stroke-width="1" opacity="0.3" rx="3"/>
         <path d="M 0 156 Q 150 140 320 152 T 600 150 L 600 190 L 0 190 Z" fill="${FB_PAPER2}" stroke="${FB_SOFT}" stroke-width="0.9"/>
@@ -10708,7 +10949,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         ${jars}
         <g stroke="${FB_INK}" stroke-width="0.8" fill="none" opacity="0.65"><path d="M 250 96 q 3 -3 6 0 M 262 88 q 3 -3 6 0 M 244 104 q 3 -3 6 0"/></g>
         ${showFloating
-          ? `<g transform="translate(432, ${waterY + 2}) scale(1.3)">${fbFloatPooh()}</g>`
+          ? `<g transform="translate(${boatX.toFixed(1)}, ${waterY + 2}) scale(1.3)">${fbFloatPooh()}</g>`
           : `<g transform="translate(96, ${bankY}) scale(0.44)">${fbPoohFig(true)}</g>`}
         ${!flooded ? fbGrass(20, 86, bankY, 7, 1) : ''}
         ${!flooded ? fbGrass(158, 238, bankY + 7, 6, 4) : ''}
@@ -10758,6 +10999,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       av * 2,                   // doubled instead of using c
       result + 1, result - 1,
     ]);
+    const op2Sym = op2 === '*' ? '×' : '÷';
+    const op2Val = op2 === '*' ? c : divBy;
     return {
       topic: 'pemdas-simple',
       prompt: pick([
@@ -10769,7 +11012,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
-      explain: `Parentheses first: ${a} ${op1} ${b} = ${av}. Then ${av} ${op2 === '*' ? '×' : '÷'} ${op2 === '*' ? c : divBy} = <strong>${result}</strong>.`,
+      explain: pick([
+        `Parentheses first: ${a} ${op1} ${b} = ${av}. Then ${av} ${op2Sym} ${op2Val} = <strong>${result}</strong>.`,
+        `Work the inside of the parentheses before anything else: ${a} ${op1} ${b} = ${av}. That leaves ${av} ${op2Sym} ${op2Val}, which comes to <strong>${result}</strong>.`,
+        `Parentheses win the race every time. ${a} ${op1} ${b} = ${av} first, then ${op2Sym} ${op2Val} last: <strong>${result}</strong>.`,
+      ]),
     };
   }
 
@@ -10805,10 +11052,20 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     ]);
     return {
       topic: 'pemdas-multi',
-      prompt: `Piglet wondered aloud: <em>"What does <strong>${v.expr}</strong> come to?"</em>`,
+      prompt: pick([
+        `Piglet wondered aloud: <em>"What does <strong>${v.expr}</strong> come to?"</em>`,
+        `The rain had soaked through Piglet's notebook, but this much still showed: <strong>${v.expr}</strong>.`,
+        `Christopher Robin tapped his pencil on the page: <em>"Work out <strong>${v.expr}</strong> for me."</em>`,
+        `Owl cleared his throat: <em>"The expression before us, if you please, is <strong>${v.expr}</strong>."</em>`,
+        `"Parentheses first, remember," Rabbit called across the yard. <em>"Now, what is <strong>${v.expr}</strong>?"</em>`,
+      ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(v.result),
-      explain: `Do the parentheses first, then the rest: ${v.steps}. So <strong>${v.result}</strong>.`,
+      explain: pick([
+        `Do the parentheses first, then the rest: ${v.steps}. So <strong>${v.result}</strong>.`,
+        `Parentheses before anything else: ${v.steps}. That gives <strong>${v.result}</strong>.`,
+        `Start inside the grouping, then finish outward: ${v.steps} -- landing on <strong>${v.result}</strong>.`,
+      ]),
     };
   }
 
@@ -10826,10 +11083,20 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     ]);
     return {
       topic: 'pemdas-brackets',
-      prompt: `Owl from his porch: <em>"By my calculation, <strong>${expr}</strong> equals?"</em>`,
+      prompt: pick([
+        `Owl from his porch: <em>"By my calculation, <strong>${expr}</strong> equals?"</em>`,
+        `The rain drummed on the brackets as Pooh read them again: <strong>${expr}</strong>.`,
+        `Christopher Robin's pencil underlined the inner group first: <strong>${expr}</strong>.`,
+        `"Inside brackets before anything outside," Rabbit insisted. <em>Solve <strong>${expr}</strong>.</em>`,
+        `A soggy page of Owl's ledger showed only this: <strong>${expr}</strong>. What does it come to?`,
+      ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
-      explain: `Innermost first: ${a} + ${b} = ${a+b}. Then × ${c} = ${(a+b)*c}. Then − ${d} = <strong>${result}</strong>.`,
+      explain: pick([
+        `Innermost first: ${a} + ${b} = ${a+b}. Then × ${c} = ${(a+b)*c}. Then − ${d} = <strong>${result}</strong>.`,
+        `Work from the inside out. Parentheses: ${a} + ${b} = ${a+b}. Bracket: × ${c} = ${(a+b)*c}. Then subtract ${d}: <strong>${result}</strong>.`,
+        `The innermost group goes first, always: ${a} + ${b} = ${a+b}, times ${c} = ${(a+b)*c}, minus ${d} = <strong>${result}</strong>.`,
+      ]),
     };
   }
 
@@ -10887,7 +11154,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(result),
-      explain: `Inside-out. Inner parens: ${a} + ${b} = ${sum}. Then ÷ ${b} = ${sum/b}. Then + ${c} = <strong>${result}</strong>.`,
+      explain: pick([
+        `Inside-out. Inner parens: ${a} + ${b} = ${sum}. Then ÷ ${b} = ${sum/b}. Then + ${c} = <strong>${result}</strong>.`,
+        `Peel it from the middle out: ${a} + ${b} = ${sum} first, ÷ ${b} = ${sum/b} next, then + ${c} lands on <strong>${result}</strong>.`,
+        `The deepest parentheses go first: ${a} + ${b} = ${sum}. Divide by ${b}: ${sum/b}. Add ${c}: <strong>${result}</strong>.`,
+      ]),
       check: { op: 'nested-div-add', operands: [a, b, c], answer: result },
     };
   }
@@ -10921,10 +11192,20 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     ]);
     return {
       topic: 'pemdas-full',
-      prompt: `Eeyore, gloomy: <em>"They say <strong>${v.expr}</strong>. I'll be surprised if it works out."</em>`,
+      prompt: pick([
+        `Eeyore, gloomy: <em>"They say <strong>${v.expr}</strong>. I'll be surprised if it works out."</em>`,
+        `The last dry page of Owl's book held one final puzzle: <strong>${v.expr}</strong>.`,
+        `Christopher Robin, very serious about it: <em>"This is the big one. Solve <strong>${v.expr}</strong>."</em>`,
+        `Rabbit squared his shoulders: <em>"Every bracket, every group, all at once: <strong>${v.expr}</strong>. Go."</em>`,
+        `Piglet took a deep breath before reading it aloud: <em>"<strong>${v.expr}</strong>... oh, here goes."</em>`,
+      ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(v.result),
-      explain: `Work the innermost grouping first, then outward: ${v.steps}. Answer <strong>${v.result}</strong>.`,
+      explain: pick([
+        `Work the innermost grouping first, then outward: ${v.steps}. Answer <strong>${v.result}</strong>.`,
+        `Peel the groupings from the inside out, one layer at a time: ${v.steps}. That lands on <strong>${v.result}</strong>.`,
+        `Innermost group first, then the next one out, in order: ${v.steps} -- <strong>${v.result}</strong>.`,
+      ]),
     };
   }
 
@@ -10976,6 +11257,39 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           opts, correct,
         };
       },
+      () => {
+        const a = ri(2, 6), b = ri(3, 9), c = ri(2, 5);
+        const correct = `${a} × (${b} + ${c})`;
+        const opts = shuffle([
+          correct,
+          `${a} × ${b} + ${c}`,
+          `${a} + ${b} × ${c}`,
+          `(${a} × ${b}) + ${c}`,
+        ]);
+        return {
+          word: `Kanga packs <strong>${a}</strong> baskets. Each one gets <strong>${b}</strong> carrots, plus <strong>${c}</strong> more tucked in at the last minute.`,
+          ask: `Which expression gives the total carrots across every basket?`,
+          opts, correct,
+        };
+      },
+      () => {
+        const c = ri(2, 5), units = ri(2, 6);
+        const total = c * units;
+        const a = ri(2, total - 2);
+        const b = total - a;
+        const correct = `(${a} + ${b}) ÷ ${c}`;
+        const opts = shuffle([
+          correct,
+          `${a} + ${b} ÷ ${c}`,
+          `${a} ÷ ${c} + ${b}`,
+          `${a} ÷ (${b} + ${c})`,
+        ]);
+        return {
+          word: `Owl gathers <strong>${a}</strong> dry acorns and <strong>${b}</strong> more, then shares them evenly among <strong>${c}</strong> friends.`,
+          ask: `Which expression gives each friend's share?`,
+          opts, correct,
+        };
+      },
     ];
     const v = pick(variants)();
     return {
@@ -10983,7 +11297,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       prompt: `<em>${v.word}</em> ${v.ask}`,
       answers: v.opts,
       correctIdx: v.opts.indexOf(v.correct),
-      explain: `Translate the words to operations. The correct expression is <strong>${v.correct}</strong>. (Don't evaluate — just match the structure.)`,
+      explain: pick([
+        `Translate the words to operations. The correct expression is <strong>${v.correct}</strong>. (Don't evaluate -- just match the structure.)`,
+        `Match the story to its structure, not its total. The words describe <strong>${v.correct}</strong>.`,
+        `Read the words as a recipe for the expression: they build <strong>${v.correct}</strong>. (No need to compute the value.)`,
+      ]),
     };
   }
 
@@ -11035,10 +11353,22 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Pooh: <em>"<strong>${v.left}</strong> versus <strong>${v.right}</strong>. Which is bigger?"</em>`,
         `Eeyore stares at <strong>${v.left}</strong> and <strong>${v.right}</strong>. Which expression has the larger value?`,
         `Compare without computing the whole thing if you can: <strong>${v.left}</strong> vs <strong>${v.right}</strong>.`,
+        `Owl squints at two lines in his soggy ledger: <strong>${v.left}</strong> and <strong>${v.right}</strong>. Which is greater?`,
+        `Christopher Robin sets them side by side: <em>"<strong>${v.left}</strong>, or <strong>${v.right}</strong>? Which one wins?"</em>`,
       ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
-      explain: `${v.left} = ${v.leftVal}. ${v.right} = ${v.rightVal}. ${v.leftVal === v.rightVal ? 'Both equal — distributive property.' : `Bigger: <strong>${correct}</strong>.`}`,
+      explain: v.leftVal === v.rightVal
+        ? pick([
+            `${v.left} = ${v.leftVal}. ${v.right} = ${v.rightVal}. Both equal -- distributive property.`,
+            `${v.left} and ${v.right} both come to ${v.leftVal}. Multiplying across the parentheses does not change the total -- that is the distributive property.`,
+            `Check both: ${v.left} = ${v.leftVal}, ${v.right} = ${v.rightVal}. They match -- distributing the multiplication over the addition never changes the value.`,
+          ])
+        : pick([
+            `${v.left} = ${v.leftVal}. ${v.right} = ${v.rightVal}. Bigger: <strong>${correct}</strong>.`,
+            `Working each side out: ${v.left} = ${v.leftVal}, ${v.right} = ${v.rightVal}. <strong>${correct}</strong> is the larger one.`,
+            `${v.left} comes to ${v.leftVal}; ${v.right} comes to ${v.rightVal}. The bigger value belongs to <strong>${correct}</strong>.`,
+          ]),
     };
   }
 
@@ -11061,10 +11391,20 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     const opts = shuffle([correct, ...wrongs.map(String)]);
     return {
       topic: 'pemdas-pattern',
-      prompt: `Roo's pattern: <strong>${seqA.slice(0,4).join(', ')}, ...</strong> (start ${startA}, add ${stepA}). Tigger's pattern: <strong>${seqB.slice(0,4).join(', ')}, ...</strong> (start ${startB}, add ${stepB}). When Roo reaches term ${askIdx + 1} (= ${seqA[askIdx]}), what is Tigger's term ${askIdx + 1}?`,
+      prompt: pick([
+        `Roo's pattern climbs: <strong>${seqA.slice(0,4).join(', ')}, ...</strong> (start ${startA}, add ${stepA} each time). Tigger's pattern climbs faster: <strong>${seqB.slice(0,4).join(', ')}, ...</strong> (start ${startB}, add ${stepB}). When Roo reaches term ${askIdx + 1} (= ${seqA[askIdx]}), what is Tigger's term ${askIdx + 1}?`,
+        `Owl unrolls two soggy charts: <em>"Roo's numbers run <strong>${seqA.slice(0,4).join(', ')}, ...</strong>, starting at ${startA} and adding ${stepA}. Tigger's run <strong>${seqB.slice(0,4).join(', ')}, ...</strong>, starting at ${startB} and adding ${stepB}. At Roo's term ${askIdx + 1}, which is ${seqA[askIdx]}, what is Tigger's term ${askIdx + 1}?"</em>`,
+        `Rabbit, very organized, holds up two lists: <em>"Roo: <strong>${seqA.slice(0,4).join(', ')}, ...</strong> -- starts at ${startA}, adds ${stepA}. Tigger: <strong>${seqB.slice(0,4).join(', ')}, ...</strong> -- starts at ${startB}, adds ${stepB}. Roo's term ${askIdx + 1} is ${seqA[askIdx]}. What's Tigger's term ${askIdx + 1}?"</em>`,
+        `Piglet copies both patterns onto one soggy page: Roo's <strong>${seqA.slice(0,4).join(', ')}, ...</strong> (start ${startA}, add ${stepA}) beside Tigger's <strong>${seqB.slice(0,4).join(', ')}, ...</strong> (start ${startB}, add ${stepB}). Roo's term ${askIdx + 1} is ${seqA[askIdx]} -- what is Tigger's term ${askIdx + 1}?`,
+        `Christopher Robin reads from his book: <em>"Two patterns, side by side. Roo: <strong>${seqA.slice(0,4).join(', ')}, ...</strong> (start ${startA}, add ${stepA}). Tigger: <strong>${seqB.slice(0,4).join(', ')}, ...</strong> (start ${startB}, add ${stepB}). When Roo's term ${askIdx + 1} equals ${seqA[askIdx]}, what does Tigger's term ${askIdx + 1} equal?"</em>`,
+      ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
-      explain: `Roo's term ${askIdx + 1} = ${startA} + ${stepA} × ${askIdx} = ${seqA[askIdx]}. Tigger's term ${askIdx + 1} = ${startB} + ${stepB} × ${askIdx} = <strong>${seqB[askIdx]}</strong>. Notice Tigger's pattern grows ${stepB / stepA}× as fast.`,
+      explain: pick([
+        `Roo's term ${askIdx + 1} = ${startA} + ${stepA} × ${askIdx} = ${seqA[askIdx]}. Tigger's term ${askIdx + 1} = ${startB} + ${stepB} × ${askIdx} = <strong>${seqB[askIdx]}</strong>. Notice Tigger's pattern grows ${stepB / stepA}× as fast.`,
+        `Count forward by the add-amount: Roo needs ${askIdx} more steps of ${stepA} past ${startA}, landing on ${seqA[askIdx]}. Tigger needs ${askIdx} more steps of ${stepB} past ${startB}, landing on <strong>${seqB[askIdx]}</strong> -- ${stepB / stepA}× the growth per step.`,
+        `Each pattern is start-plus-steps: Roo = ${startA} + (${stepA} × ${askIdx}) = ${seqA[askIdx]}. Tigger = ${startB} + (${stepB} × ${askIdx}) = <strong>${seqB[askIdx]}</strong>. Tigger climbs ${stepB / stepA}× faster than Roo.`,
+      ]),
     };
   }
 
@@ -11152,7 +11492,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
-      explain: `An exponent is repeated multiplication: ${base}<sup>${exp}</sup> = ${Array(exp).fill(base).join(' × ')} = <strong>${answer}</strong>. It is not ${base} × ${exp} = ${base * exp}.`,
+      explain: pick([
+        `An exponent is repeated multiplication: ${base}<sup>${exp}</sup> = ${Array(exp).fill(base).join(' × ')} = <strong>${answer}</strong>. It is not ${base} × ${exp} = ${base * exp}.`,
+        `${base}<sup>${exp}</sup> means ${base} multiplied by itself ${exp} times: ${Array(exp).fill(base).join(' × ')} = <strong>${answer}</strong>. Multiplying ${base} by ${exp} instead gives only ${base * exp} -- a very different number.`,
+        `Write it out the long way: ${Array(exp).fill(base).join(' × ')} = <strong>${answer}</strong>. The exponent counts factors of ${base}, not a multiplier -- ${base} × ${exp} = ${base * exp} is a common but wrong shortcut.`,
+      ]),
       check: { op: 'pow', operands: [base, exp], answer },
     };
   }
@@ -11189,7 +11533,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts,
       correctIdx: opts.indexOf(correct),
-      explain: `${base}<sup>${exp}</sup> means ${base} multiplied by itself ${exp} times: <strong>${correct}</strong>. It is not ${base} × ${exp} -- that treats the exponent as one extra factor instead of a repeat count.`,
+      explain: pick([
+        `${base}<sup>${exp}</sup> means ${base} multiplied by itself ${exp} times: <strong>${correct}</strong>. It is not ${base} × ${exp} -- that treats the exponent as one extra factor instead of a repeat count.`,
+        `The exponent ${exp} tells you how many times ${base} appears as a factor: <strong>${correct}</strong>. ${base} × ${exp} would only be true if the exponent meant "multiply once by ${exp}," which is not what it means.`,
+        `Expand it factor by factor: <strong>${correct}</strong>. That is ${exp} copies of ${base} multiplied together -- not ${base} × ${exp}, which mixes up repetition with a simple product.`,
+      ]),
       check: { op: 'pow-expand', operands: [base, exp], answer: correct },
     };
   }
@@ -11245,8 +11593,16 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       answers: opts,
       correctIdx: opts.indexOf(correct),
       explain: isEqual
-        ? `${leftDisp} = ${va}. ${rightDisp} = ${vb}. Same value -- <strong>they are equal</strong>.`
-        : `${leftDisp} = ${va}. ${rightDisp} = ${vb}. <strong>${va > vb ? leftDisp : rightDisp}</strong> is bigger.`,
+        ? pick([
+            `${leftDisp} = ${va}. ${rightDisp} = ${vb}. Same value -- <strong>they are equal</strong>.`,
+            `Work both out: ${leftDisp} = ${va}, ${rightDisp} = ${vb}. Two different-looking expressions, one value -- <strong>they are equal</strong>.`,
+            `${leftDisp} and ${rightDisp} both come to ${va}. Different bases and exponents can still land on <strong>the same value</strong>.`,
+          ])
+        : pick([
+            `${leftDisp} = ${va}. ${rightDisp} = ${vb}. <strong>${va > vb ? leftDisp : rightDisp}</strong> is bigger.`,
+            `Work both out fully: ${leftDisp} = ${va}, ${rightDisp} = ${vb}. The larger value belongs to <strong>${va > vb ? leftDisp : rightDisp}</strong>.`,
+            `${leftDisp} comes to ${va}; ${rightDisp} comes to ${vb}. <strong>${va > vb ? leftDisp : rightDisp}</strong> wins.`,
+          ]),
       check: { op: 'pow-compare', operands: [p1.base, p1.exp, p2.base, p2.exp], answer: correct },
     };
   }
@@ -11269,10 +11625,16 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `Christopher Robin set the puzzle: <em>"If <strong>x = ${x}</strong>, what is <strong>${a}x + ${b}</strong> honey jars?"</em>`,
         `Pooh counted carefully on his paws: <em>"With <strong>x = ${x}</strong>, the expression <strong>${a}x + ${b}</strong> comes to...?"</em>`,
         `Rabbit tallied the haycorns: <em>"Substitute <strong>x = ${x}</strong> into <strong>${a}x + ${b}</strong>. What is the total?"</em>`,
+        `A soggy page in Owl's ledger reads only this: <strong>${a}x + ${b}</strong>, with <strong>x = ${x}</strong> penciled in the margin.`,
+        `The flood had settled at <strong>x = ${x}</strong>, and the last dry sum on the raft was <strong>${a}x + ${b}</strong>.`,
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
-      explain: `Substitute x = ${x}: ${a}·${x} + ${b} = ${a * x} + ${b} = <strong>${answer}</strong>. Multiply before you add (order of operations).`,
+      explain: pick([
+        `Substitute x = ${x}: ${a}·${x} + ${b} = ${a * x} + ${b} = <strong>${answer}</strong>. Multiply before you add (order of operations).`,
+        `Plug in x = ${x} first: ${a} times ${x} is ${a * x}, then add ${b}: <strong>${answer}</strong>. Multiplication comes before addition.`,
+        `With x = ${x}, the multiplication happens first: ${a}·${x} = ${a * x}. Adding ${b} gives <strong>${answer}</strong>.`,
+      ]),
       check: { op: 'linear', operands: [a, x, b], answer },
     };
   }
@@ -11302,7 +11664,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
-      explain: `Undo + ${a} by subtracting from both sides: x = ${b} − ${a} = <strong>${answer}</strong>. Subtraction is the inverse of addition; ${b} + ${a} would undo the wrong way.`,
+      explain: pick([
+        `Undo + ${a} by subtracting from both sides: x = ${b} − ${a} = <strong>${answer}</strong>. Subtraction is the inverse of addition; ${b} + ${a} would undo the wrong way.`,
+        `Addition and subtraction reverse each other: since x + ${a} = ${b}, x = ${b} − ${a} = <strong>${answer}</strong>. Adding ${a} again, instead of subtracting it, would undo the wrong way.`,
+        `To isolate x, subtract ${a} from both sides: ${b} − ${a} = <strong>${answer}</strong>. Adding ${a} again would move the wrong direction.`,
+      ]),
       check: { op: 'solve-add', operands: [a, b], answer },
     };
   }
@@ -11336,7 +11702,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
-      explain: `Undo × ${a} by dividing both sides: x = ${b} ÷ ${a} = <strong>${answer}</strong>. Division is the inverse of multiplication; ${a} × ${b} would undo the wrong way.`,
+      explain: pick([
+        `Undo × ${a} by dividing both sides: x = ${b} ÷ ${a} = <strong>${answer}</strong>. Division is the inverse of multiplication; ${a} × ${b} would undo the wrong way.`,
+        `Multiplication and division reverse each other: since ${a}x = ${b}, x = ${b} ÷ ${a} = <strong>${answer}</strong>. Multiplying by ${a} again, instead of dividing by it, would undo the wrong way.`,
+        `To isolate x, divide both sides by ${a}: ${b} ÷ ${a} = <strong>${answer}</strong>. Multiplying by ${a} again would move the wrong direction.`,
+      ]),
       check: { op: 'solve-mul', operands: [a, b], answer },
     };
   }
@@ -11361,10 +11731,16 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         `The Brain of Pooh hummed a Thinking Hum: <em>"With <strong>x = ${x}</strong>, group first: <strong>${a}(x + ${b})</strong>. What is it?"</em>`,
         `Piglet, very bravely: <em>"If <strong>x = ${x}</strong>, then <strong>${a} × (x + ${b})</strong> comes to...?"</em>`,
         `Christopher Robin: <em>"Evaluate <strong>${a}(x + ${b})</strong> when <strong>x = ${x}</strong>."</em>`,
+        `The Brain of Pooh worked in silence for once, staring at <strong>${a}(x + ${b})</strong>, with <strong>x = ${x}</strong>, waiting to be grouped.`,
+        `Christopher Robin's book lay open to one line: <strong>${a}(x + ${b})</strong>, and in the margin, <strong>x = ${x}</strong>.`,
       ]),
       answers: opts.map(o => o + ''),
       correctIdx: opts.indexOf(answer),
-      explain: `Do the parentheses first: x + ${b} = ${x} + ${b} = ${x + b}. Then × ${a} = <strong>${answer}</strong>. Distributing gives the same: ${a}·${x} + ${a}·${b} = ${a * x} + ${c} = ${answer}.`,
+      explain: pick([
+        `Do the parentheses first: x + ${b} = ${x} + ${b} = ${x + b}. Then × ${a} = <strong>${answer}</strong>. Distributing gives the same: ${a}·${x} + ${a}·${b} = ${a * x} + ${c} = ${answer}.`,
+        `Group first, then multiply: x + ${b} = ${x + b}, times ${a} = <strong>${answer}</strong>. Distributing instead -- ${a}·${x} + ${a}·${b} = ${a * x} + ${c} -- lands on the same total.`,
+        `The parentheses come first: ${x} + ${b} = ${x + b}. Multiply by ${a}: <strong>${answer}</strong>. (Check by distributing: ${a}·${x} + ${a}·${b} = ${a * x} + ${c}, same answer.)`,
+      ]),
       check: { op: 'linear', operands: [a, x, c], answer },
     };
   }
@@ -11381,9 +11757,9 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     'g6-solve-mul':  genG6SolveMul,
     'g6-evaluate2':  genG6Evaluate2,
     'g6-allmix':     genG6AllMix,
-    'simple-parens': genSimpleParens,
+    'simple-parens': () => Math.random() < 0.7 ? genSimpleParens() : (Math.random() < 0.5 ? genWriteExpr() : genCompareExpr()),
     'parens-multi':  () => Math.random() < 0.7 ? genParensMulti() : (Math.random() < 0.5 ? genWriteExpr() : genCorrespondingTerm()),
-    'brackets':      genBrackets,
+    'brackets':      () => Math.random() < 0.7 ? genBrackets() : (Math.random() < 0.5 ? genWriteExpr() : genCorrespondingTerm()),
     'nested':        () => Math.random() < 0.7 ? genNested() : (Math.random() < 0.5 ? genWriteExpr() : genCompareExpr()),
     'full-pemdas':   () => Math.random() < 0.85 ? genFullPemdas() : genCompareExpr(),
     'all-mix':       genAllMix,
@@ -11414,16 +11790,25 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
       function renderPick() {
         state.phase = 'pick';
+        // Task 3 step 3: the beat plate for this level is the primary pick-screen
+        // illustration; POOH_MAP is now the fallback (was the primary), and the
+        // procedural SVG stays the fallback of the fallback -- same onerror idiom,
+        // one extra rung. progress is always 0 here (the level hasn't started).
+        const pickBeat = FB_BEATS[lvl.id - 1] || FB_BEATS[FB_BEATS.length - 1];
+        const pickPlate = fbStagePlates(pickBeat, 0).anchor;
+        const pickImgSrc = pickPlate || POOH_MAP;
+        const pickImgFallback = pickPlate ? POOH_MAP : '';
         root.innerHTML = `
           <div class="fb-pick">
             <div class="fb-title-stack">
               <h2>The Floating Bear</h2>
               <div class="fb-subtitle">Chapter ${lvl.id} &middot; ${lvl.name}</div>
               <div class="fb-chapter">"${lvl.chapter}"</div>
+              <div class="fb-chapter">${lvl.id === 6 ? FB_FINISH_LINE : pick(FB_OBJECT_LINES)}</div>
             </div>
             <div class="lvl-badge">${totalQ} expressions to solve</div>
             <div class="fb-illustration" id="fb-illust-host">
-              <img class="fb-map-img" src="${POOH_MAP}" alt="The Hundred Acre Wood, drawn by E. H. Shepard, 1926" onerror="this.style.display='none'; document.getElementById('fb-illust-svg').style.display='block';">
+              <img class="fb-map-img" src="${pickImgSrc}" data-fallback="${pickImgFallback}" alt="${fbPlateAlt(pickPlate, lvl.name)}"${fbPlateCropAttr(pickPlate)} onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.dataset.fallback='';this.style.objectPosition='';}else{this.style.display='none'; document.getElementById('fb-illust-svg').style.display='block';}">
               <div id="fb-illust-svg" style="display:none; width:100%; height:100%;">${sceneSvg({questionNum: 0, livesLost: 0}, lvl)}</div>
             </div>
             <div class="fb-pick-actions">
@@ -11451,9 +11836,30 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
       function renderStory() {
         const jarsHtml = [0,1,2].map(i => `<span class="fb-jar ${i < state.livesLost ? 'lost' : ''}"></span>`).join('');
+        // Task 3 step 3: the beat plate anchors the stage behind the procedural
+        // water/rain/boat SVG (drawn with a translucent paper rect, see sceneSvg,
+        // so the plate reads through); a second beat sits as a small corner inset
+        // where fbStagePlates() finds one. Onerror just hides the plate -- the
+        // procedural SVG is always present underneath, so hiding IS the fallback.
+        const storyBeat = FB_BEATS[lvl.id - 1] || FB_BEATS[FB_BEATS.length - 1];
+        const storyProgress = Math.max(0, Math.min(1, (state.correctCount || 0) / totalQ));
+        const storyPlates = fbStagePlates(storyBeat, storyProgress);
+        // Fix round 1 addendum: caption pool follows the SAME swap gate as the
+        // plate (storyProgress >= FB_PLATE_SWAP_AT on a beat with a temporal
+        // plate pair), so the caption never describes a scene the art has
+        // already moved past.
+        const swapped = (storyBeat.plateRetrieval || storyBeat.plateSetup) && storyProgress >= FB_PLATE_SWAP_AT;
+        const captionPool = (swapped && FB_BEAT_CAPTIONS_SWAPPED[storyBeat.key]) || FB_BEAT_CAPTIONS[levelIndex] || FB_BEAT_CAPTIONS[0];
+        const beatCaption = pick(captionPool);
+        const stageAnchorImg = storyPlates.anchor
+          ? `<img class="fb-stage-plate" src="${storyPlates.anchor}" alt="${fbPlateAlt(storyPlates.anchor, lvl.name)}"${fbPlateCropAttr(storyPlates.anchor)} onerror="this.style.display='none';">`
+          : '';
+        const stageInsetImg = storyPlates.inset
+          ? `<img class="fb-stage-inset" src="${storyPlates.inset}" alt="${fbPlateAlt(storyPlates.inset, lvl.name)}"${fbPlateCropAttr(storyPlates.inset)} onerror="this.style.display='none';">`
+          : '';
         root.innerHTML = `
           <div class="fb-story">
-            <div class="fb-stage">${sceneSvg(state, lvl)}</div>
+            <div class="fb-stage">${stageAnchorImg}${stageInsetImg}${sceneSvg(state, lvl)}</div>
             <div class="fb-status">
               <div class="fb-stat"><span class="fb-stat-label">chapter</span><span class="fb-stat-value">${lvl.id}</span></div>
               <div class="fb-stat"><span class="fb-stat-label">verse</span><span class="fb-stat-value">${state.questionNum + 1} of ${totalQ}</span></div>
@@ -11463,7 +11869,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
             </div>
             <div class="fb-question" id="fb-question"></div>
             <div class="fb-foot">
-              <em>"It rained, and it rained, and it rained."</em>
+              ${beatCaption}
               <div>Jars dry: ${jarsHtml}</div>
             </div>
           </div>
@@ -11476,7 +11882,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         if (!qEl) return;
         const q = state.questions[state.questionNum];
         if (!q) { endLevel(); return; }
+        // Task 2 step 2: "state the object" at level start (verse 1) only.
+        const objectLine = state.questionNum === 0 ? (lvl.id === 6 ? FB_FINISH_LINE : pick(FB_OBJECT_LINES)) : '';
         qEl.innerHTML = `
+          ${objectLine ? `<div class="fb-q-meta" style="justify-content:center; font-weight:700;">${objectLine}</div>` : ''}
           <div class="fb-q-meta">
             <span>Verse ${state.questionNum + 1}</span>
             <span>${lvl.gen.replace(/-/g, ' ')}</span>
@@ -11504,8 +11913,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           const ex = document.createElement('div');
           ex.className = 'fb-explain ' + (correct ? 'right' : 'wrong');
           ex.innerHTML = correct
-            ? `<div class="fb-explain-head">✓ Just so</div><div>${q.explain || ''}</div>`
-            : `<div class="fb-explain-head">✗ Not quite, said Pooh</div><div>${q.explain || ''}</div>`;
+            ? `<div class="fb-explain-head">✓ ${pick(['Just so', 'Quite right', 'Well reasoned, that'])}</div><div>${q.explain || ''}</div>`
+            : `<div class="fb-explain-head">✗ ${pick(['Not quite, said Pooh', 'Oh, bother -- not quite', 'Try again, said Owl'])}</div><div>${q.explain || ''}</div>`;
           qEl.appendChild(ex);
         }
 
