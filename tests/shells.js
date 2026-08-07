@@ -211,6 +211,53 @@ function scanShells(body) {
   return results;
 }
 
+// Walk one module body for plain-template `word:`/`ask:` fields -- a single template literal
+// assigned directly to the key, NOT wrapped in pick([...]). genWriteExpr's per-variant `word:`/
+// `ask:` fields are this shape: each variant function returns exactly one phrasing (nothing to
+// pick between), later stitched into the item's actual `prompt:` field
+// (`prompt: \`${v.word} ${v.ask}\``, Math-Multiverse.html ~11298) -- so a hardcoded digit here
+// reaches the shown prompt exactly the way a `text: pick([...])` digit would, just without the
+// pick(). Generic key set (word/ask), not a genWriteExpr special case: any generator assigning a
+// direct template/string literal to one of these two keys is covered, same digit-outside-
+// interpolation rule as scanShells. word/ask are unique to genWriteExpr as of this writing
+// (grepped directly), so this adds coverage there without touching any other generator's scan
+// results. Returns the same [{ key, start, elements }] shape scanShells does (one element per
+// hit) so it can be concatenated straight into the same classification/reporting pipeline.
+function scanPlainTemplateFields(body) {
+  const fieldRe = /\b(word|ask)\s*:\s*([`'"])/g;
+  const results = [];
+  let m;
+  while ((m = fieldRe.exec(body))) {
+    const key = m[1];
+    const quote = m[2];
+    let i = m.index + m[0].length; // just past the opening quote
+    const cur = { raw: '', hasDigitOutsideInterp: false };
+    let interpDepth = 0;
+    while (i < body.length) {
+      const c = body[i];
+      if (quote === '`') {
+        if (interpDepth === 0) {
+          if (c === '\\') { cur.raw += c + (body[i + 1] || ''); i += 2; continue; }
+          if (c === '`') { i++; break; }
+          if (c === '$' && body[i + 1] === '{') { interpDepth = 1; cur.raw += '${'; i += 2; continue; }
+          if (/[0-9]/.test(c)) cur.hasDigitOutsideInterp = true;
+          cur.raw += c; i++; continue;
+        }
+        if (c === '{') { interpDepth++; cur.raw += c; i++; continue; }
+        if (c === '}') { interpDepth--; cur.raw += c; i++; continue; }
+        cur.raw += c; i++; continue; // digits inside ${...} are allowed
+      } else {
+        if (c === '\\') { cur.raw += c + (body[i + 1] || ''); i += 2; continue; }
+        if (c === quote) { i++; break; }
+        if (/[0-9]/.test(c)) cur.hasDigitOutsideInterp = true;
+        cur.raw += c; i++; continue;
+      }
+    }
+    results.push({ key, start: m.index, elements: [cur] });
+  }
+  return results;
+}
+
 // ---- 1. static scan, classified by enclosing generator ----
 const src = fs.readFileSync(HTML_PATH, 'utf8');
 let totalArrays = 0, totalFunctions = 0;
@@ -220,7 +267,7 @@ for (const mod of MODULES) {
   const { body, bodyStart } = sliceBody(src, mod.marker);
   const spans = findFunctionSpans(body);
   totalFunctions += spans.length;
-  const shells = scanShells(body);
+  const shells = scanShells(body).concat(scanPlainTemplateFields(body));
   totalArrays += shells.length;
   for (const sh of shells) {
     const offenders = sh.elements.filter((el) => el.hasDigitOutsideInterp).map((el) => el.raw);
