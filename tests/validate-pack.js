@@ -104,15 +104,21 @@ function checkItemEnvelope(pack, passagesById, errors) {
   return byId;
 }
 
-// ---------- envelope: items cite only their own subject's targets ----------
+// ---------- envelope: items and levels cite only their own subject's targets ----------
 // Both subjects share one target id namespace (tests/targets.js), so isTarget's membership check
 // alone cannot catch an ELA pack citing a science target or vice versa -- the id is legal, just
 // borrowed from the wrong subject. ELA target entries carry no explicit `subject` field (they
 // predate the science namespace), so an absent field defaults to 'ela' here, matching every
 // existing pack's meta.subject and leaving the ELA entries themselves untouched.
+//
+// isTarget itself is checked against BOTH item.targets (checkItemEnvelope) and level.targets
+// (checkLevels), so this honesty check follows the same two surfaces -- a level citing a
+// cross-subject target is exactly as real a leak as an item doing it, and checking only items
+// would let it sneak through the one place isTarget's own coverage says it must not.
 function checkTargetSubjects(pack, itemsById, errors) {
   const packSubject = pack.meta && pack.meta.subject;
   if (!nonEmptyString(packSubject)) return;   // meta.subject itself already reported by checkMeta
+
   for (const it of itemsById.values()) {
     if (!Array.isArray(it.targets)) continue;
     for (const t of it.targets) {
@@ -122,6 +128,19 @@ function checkTargetSubjects(pack, itemsById, errors) {
         errors.push(`items(${it.id}).targets: "${t}" belongs to subject "${targetSubject}", but this pack's subject is "${packSubject}"`);
       }
     }
+  }
+
+  if (Array.isArray(pack.levels)) {
+    pack.levels.forEach((lv, i) => {
+      if (!lv || !Array.isArray(lv.targets)) return;
+      for (const t of lv.targets) {
+        if (!isTarget(t)) continue;           // invented id already reported by checkLevels
+        const targetSubject = TARGETS[t].subject || 'ela';
+        if (targetSubject !== packSubject) {
+          errors.push(`levels[${i}](${lv.name || '?'}).targets: "${t}" belongs to subject "${targetSubject}", but this pack's subject is "${packSubject}"`);
+        }
+      }
+    });
   }
 }
 
