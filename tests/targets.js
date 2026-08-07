@@ -3,7 +3,7 @@
 // what stops target drift as packs accumulate: an invented target id is a hard validator failure,
 // not a silent new category.
 //
-// Two subjects share this one namespace:
+// Three subjects share this one namespace:
 //   ELA (grade 6, Smarter Balanced, mapped to CCSS): fields claim, label, ccss. Claim 1 Reading
 //   carries targets 1-7 twice, once for literary text and once for informational; Claim 2 Writing,
 //   Claim 3 Listening and Claim 4 Research follow the published target numbering. No `subject`
@@ -12,6 +12,10 @@
 //   subject: 'sci', pe, confidence. `pe` is empty for thematic on-ramp targets that cite no code.
 //   `confidence` mirrors the spec's own confidence tiers (verified / inherited-plausible /
 //   inferred / thematic) so an item can never overstate how firmly its content is grounded.
+//   History-Social Science (grade 6, Ancient Civilizations, mapped to CA HSS standards): fields
+//   label, subject: 'hist', hss, confidence. `hss` holds standard codes (6.1 through 6.7) in place
+//   of `pe`. All six targets carry `confidence: 'verified'`; the standards text was confirmed
+//   verbatim against the published CA HSS framework, so no lower tier applies here.
 
 const TARGETS = Object.freeze({
   // ---- Claim 1: Reading, literary ----
@@ -61,6 +65,15 @@ const TARGETS = Object.freeze({
   'sci-t4-climate-patterns':   { label: 'Comparing climate patterns across outposts',        subject: 'sci', pe: ['MS-ESS2-6'], confidence: 'inherited-plausible' },
   'sci-t5-warming-adaptation': { label: 'Warming limits and species adaptation',              subject: 'sci', pe: ['MS-ESS3-3', 'MS-ESS3-5', 'MS-LS1-4', 'MS-LS1-5'], confidence: 'verified' },
   'sci-t6-design-evaluate':    { label: 'Evaluate a design against stated constraints',       subject: 'sci', pe: ['MS-ETS1-1', 'MS-ETS1-2'], confidence: 'verified' },
+
+  // ---- History-Social Science: Ancient Civilizations (grade 6, CA HSS standards) ----
+  // hss codes and confidence verbatim-confirmed against the published CA HSS framework.
+  'hist-t1-first-entry': { label: 'Early humans and the first civilizations: Mesopotamia, Egypt, and Kush', subject: 'hist', hss: ['6.1', '6.2'], confidence: 'verified' },
+  'hist-t2-hebrews':     { label: 'The Ancient Hebrews: religious, social, and political structures',       subject: 'hist', hss: ['6.3'], confidence: 'verified' },
+  'hist-t3-greece':      { label: 'Ancient Greece: geography, government, and society',                     subject: 'hist', hss: ['6.4'], confidence: 'verified' },
+  'hist-t4-india':       { label: 'Ancient India: geography, religion, and social structures',               subject: 'hist', hss: ['6.5'], confidence: 'verified' },
+  'hist-t5-china':       { label: 'Ancient China: geography, government, and society',                       subject: 'hist', hss: ['6.6'], confidence: 'verified' },
+  'hist-t6-rome':        { label: 'Ancient Rome: geography, government, and society',                        subject: 'hist', hss: ['6.7'], confidence: 'verified' },
 });
 
 function isTarget(id) {
