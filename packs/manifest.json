@@ -28,6 +28,20 @@
       "levels": 6,
       "grandGoal": "Vault Keeper",
       "unlocked": true
+    },
+    {
+      "id": "outpost-protocol-g6",
+      "subject": "sci",
+      "subjectLabel": "Science",
+      "grade": 6,
+      "title": "Outpost Protocol",
+      "standards": "NGSS-CA Integrated 6",
+      "icon": "🛰️",
+      "color": "#1a8f5e",
+      "description": "Read the field logs, trace every signal to its real cause, and catch what the network gets wrong. Six levels of grade-6 science built like the real test.",
+      "levels": 6,
+      "grandGoal": "Field Director",
+      "unlocked": true
     }
   ]
 }

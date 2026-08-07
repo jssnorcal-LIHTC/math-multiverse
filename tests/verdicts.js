@@ -10,6 +10,26 @@
 // Per-item hashing is deliberate. A whole-pack hash would invalidate every verdict on any edit,
 // which trains people to regenerate the ledger blindly. Per-item means editing one item
 // re-opens exactly one verdict.
+//
+// PASSAGE-AWARE (26-0807, N4 fix): itemHash originally hashed the item object alone, so an item
+// whose own fields never changed kept its "verified" status even after the PASSAGE it quotes,
+// paraphrases, or otherwise depends on was rewritten underneath it. That is exactly how two items
+// survived a controlled-unfreeze passage rewrite unexamined during the outpost-protocol-g6 fix
+// round: their own text was untouched, so their hash never moved, so validate-pack never asked
+// anyone to look at them again, even though the science they were built to test had changed.
+//
+// Fix: itemHash now takes an OPTIONAL second argument, the resolved passage object. When a caller
+// passes one, its text folds into the hash, so a passage edit changes the hash of every item that
+// references it, exactly like an item edit changes that item's own hash. When the second argument
+// is omitted, itemHash(item) returns BYTE-IDENTICAL output to the pre-fix function, so any caller
+// (in this codebase or a plugin never audited for this) that has not been updated to pass a
+// passage keeps working exactly as before rather than silently going stale on every item in every
+// pack the moment this file changes. Both real callers (validateLedger below, and
+// build/blind-reanswer.js) now resolve and pass the item's own passage; see PASSAGE-AWARE BLAST
+// RADIUS in this repo's memory / the fix report for the one-time consequence of that: every
+// existing pack's ledger records for passage-linked items will show as stale on their next
+// validate-pack run, since the hash they were computed against no longer matches. That is the
+// correct, intended behavior of closing this gap, not a bug in the fix.
 
 const crypto = require('crypto');
 
@@ -23,8 +43,12 @@ function stableStringify(value) {
   return '{' + keys.map(k => JSON.stringify(k) + ':' + stableStringify(value[k])).join(',') + '}';
 }
 
-function itemHash(item) {
-  return crypto.createHash('sha256').update(stableStringify(item), 'utf8').digest('hex').slice(0, 16);
+function itemHash(item, passage) {
+  if (!passage) {
+    return crypto.createHash('sha256').update(stableStringify(item), 'utf8').digest('hex').slice(0, 16);
+  }
+  const payload = stableStringify(item) + '|passageText:' + stableStringify(passage.text || '');
+  return crypto.createHash('sha256').update(payload, 'utf8').digest('hex').slice(0, 16);
 }
 
 // The authored answer a blind pass is compared against. Only the types with a single scalar or
@@ -207,6 +231,9 @@ function validateLedger(pack, ledger) {
 
   const items = Array.isArray(pack.items) ? pack.items : [];
   const itemIds = new Set(items.map(i => i.id));
+  // PASSAGE-AWARE (N4 fix): resolved once per pack, passed into itemHash below so a passage edit
+  // dirties every item that references it, not just items whose own fields changed.
+  const passagesById = new Map((Array.isArray(pack.passages) ? pack.passages : []).map(p => [p.id, p]));
 
   for (const item of items) {
     // Only the comparable types need a verdict; the rest are gated structurally.
@@ -217,7 +244,8 @@ function validateLedger(pack, ledger) {
       errors.push(`items(${item.id}): no blind verdict on record; run "node tests/blind-reanswer.js ${packId}" and adjudicate before shipping`);
       continue;
     }
-    const want = itemHash(item);
+    const passage = item.passageId ? passagesById.get(item.passageId) : null;
+    const want = itemHash(item, passage);
     if (r.itemHash !== want) {
       errors.push(`items(${item.id}): stale blind verdict, the item changed since it was checked (ledger ${r.itemHash}, item ${want}); re-run the blind pass for this item`);
       continue;
