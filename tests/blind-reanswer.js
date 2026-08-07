@@ -27,6 +27,19 @@ function arg(flag, dflt) {
   return i > -1 && process.argv[i + 1] ? process.argv[i + 1] : dflt;
 }
 
+// PASSAGE-AWARE (N4 fix, 26-0807): the single seam both call sites below go through, so there is
+// exactly one place that could regress back to the legacy no-passage hash, not two. Resolves the
+// item's own passage by passageId and folds it into itemHash exactly like validateLedger() does in
+// tests/verdicts.js -- an item whose passage was rewritten underneath it must dirty here too, or a
+// stale answer can survive a passage edit unexamined (the defect N4 exists to catch). Exported so
+// tests/verdicts.test.js can pin this against the REAL function, not a hand-reimplementation of the
+// resolve-then-hash logic in the test fixture, which is how the pre-fix legacy calls at these two
+// sites escaped review in the first place: the fixture computed hashes manually and never exercised
+// this file's own resolution path.
+function resolvedItemHash(item, passages) {
+  return itemHash(item, passages.get(item.passageId));
+}
+
 // VERIFIED 26-0725 against the installed CLI; do not "simplify" this back to execFile with a shell.
 // Two traps, both proven by probe rather than reasoned about:
 //   1. `shell: true` on Windows CONCATENATES argv rather than escaping it, so a multi-line prompt is
@@ -132,7 +145,7 @@ async function main() {
   const keep = [];
   for (const item of pack.items || []) {
     if (authoredKeyOf(item) === null) continue;
-    const h = itemHash(item);
+    const h = resolvedItemHash(item, passages);
     const p = prior.get(item.id);
     if (onlySet && !onlySet.has(item.id)) {
       if (p) keep.push(p);
@@ -187,7 +200,7 @@ async function main() {
     if (same) { agree++; console.log(`  agree  ${item.id}  (${r.confidence})`); }
     else { disagree++; console.log(`  DISAGREE ${item.id}: blind ${JSON.stringify(r.answer)} vs authored ${JSON.stringify(authored)}  (${r.confidence})`); }
     fresh.push({
-      itemId: item.id, itemHash: itemHash(item),
+      itemId: item.id, itemHash: resolvedItemHash(item, passages),
       blind: r.answer, authored, confidence: r.confidence,
       status: same ? 'agree' : 'needs-adjudication',
     });
@@ -212,4 +225,4 @@ if (require.main === module) {
   main().catch(e => { console.error('blind-reanswer crashed: ' + (e && e.stack || e)); process.exit(2); });
 }
 
-module.exports = { parseAnswer };
+module.exports = { parseAnswer, resolvedItemHash };
