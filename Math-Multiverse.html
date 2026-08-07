@@ -3994,8 +3994,9 @@ function playLevel(levelIndex) {
 function showLevelComplete(module, levelIndex, score, stars) {
   disposeActiveModule();
   const host = $('host-frame');
-  const lvl = module.levels[levelIndex];
-  const isLastLevel = levelIndex === module.levels.length - 1;
+  const v = gradeView(module);
+  const lvl = v.levels[levelIndex];
+  const isLastLevel = levelIndex === v.levels.length - 1;
   const headline = stars > 0 ? 'LEVEL CLEARED' : 'NOT QUITE';
 
   const starsHtml = [1, 2, 3].map(n =>
@@ -4003,7 +4004,7 @@ function showLevelComplete(module, levelIndex, score, stars) {
   ).join('');
 
   host.innerHTML = `
-    <div class="level-complete" style="--card-color: ${module.color};">
+    <div class="level-complete" style="--card-color: ${v.color};">
       <div class="lc-headline">${headline}</div>
       <div class="lc-level">L${lvl.id} &middot; ${lvl.name}</div>
       <div class="lc-stars">${starsHtml}</div>
@@ -4012,7 +4013,7 @@ function showLevelComplete(module, levelIndex, score, stars) {
         <button class="btn btn-secondary" id="lc-back">&larr; Levels</button>
         <button class="btn btn-secondary" id="lc-retry">Retry</button>
         ${stars > 0 && !isLastLevel ? `<button class="btn btn-primary" id="lc-next">Next Level &rarr;</button>` : ''}
-        ${stars > 0 && isLastLevel ? `<button class="btn btn-primary" id="lc-grand">Claim ${module.grandGoal} ★</button>` : ''}
+        ${stars > 0 && isLastLevel ? `<button class="btn btn-primary" id="lc-grand">Claim ${v.grandGoal} ★</button>` : ''}
       </div>
     </div>
   `;
@@ -4020,7 +4021,7 @@ function showLevelComplete(module, levelIndex, score, stars) {
   const back = $('lc-back');   if (back)  back.addEventListener('click', exitToLevels);
   const retry = $('lc-retry'); if (retry) retry.addEventListener('click', () => playLevel(levelIndex));
   const next  = $('lc-next');  if (next)  next.addEventListener('click', () => playLevel(levelIndex + 1));
-  const grand = $('lc-grand'); if (grand) grand.addEventListener('click', () => showGrandComplete(module));
+  const grand = $('lc-grand'); if (grand) grand.addEventListener('click', () => showGrandComplete(v));
 }
 
 function showGrandComplete(module) {
