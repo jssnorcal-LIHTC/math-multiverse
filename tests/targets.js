@@ -1,10 +1,17 @@
 'use strict';
-// targets.js -- the frozen Smarter Balanced target vocabulary for grade 6 ELA, mapped to CCSS.
-// A pack may only cite ids that appear here. This is what stops target drift as packs
-// accumulate: an invented target id is a hard validator failure, not a silent new category.
+// targets.js -- the frozen target vocabulary. A pack may only cite ids that appear here. This is
+// what stops target drift as packs accumulate: an invented target id is a hard validator failure,
+// not a silent new category.
 //
-// Claim 1 Reading carries targets 1-7 twice, once for literary text and once for informational.
-// Claim 2 Writing, Claim 3 Listening and Claim 4 Research follow the published target numbering.
+// Two subjects share this one namespace:
+//   ELA (grade 6, Smarter Balanced, mapped to CCSS): fields claim, label, ccss. Claim 1 Reading
+//   carries targets 1-7 twice, once for literary text and once for informational; Claim 2 Writing,
+//   Claim 3 Listening and Claim 4 Research follow the published target numbering. No `subject`
+//   field is stamped on these entries; callers that need one default it to 'ela'.
+//   Science (grade 6, Outpost Protocol, mapped to NGSS performance expectations): fields label,
+//   subject: 'sci', pe, confidence. `pe` is empty for thematic on-ramp targets that cite no code.
+//   `confidence` mirrors the spec's own confidence tiers (verified / inherited-plausible /
+//   inferred / thematic) so an item can never overstate how firmly its content is grounded.
 
 const TARGETS = Object.freeze({
   // ---- Claim 1: Reading, literary ----
@@ -42,6 +49,18 @@ const TARGETS = Object.freeze({
   'c4-2-integrate':           { claim: 4, label: 'Interpret and integrate sources',   ccss: ['W.6.7', 'RI.6.7'] },
   'c4-3-analyze-sources':     { claim: 4, label: 'Judge whether a source is sound',   ccss: ['W.6.8'] },
   'c4-4-use-evidence':        { claim: 4, label: 'Use evidence from sources',         ccss: ['W.6.9', 'W.6.8'] },
+
+  // ---- Science: Outpost Protocol (grade 6, NGSS performance expectations) ----
+  // Confidence tiers are the spec's own (SPEC-multiverse-outpost-protocol-v1-26-0806.md section 3):
+  // tiles 5-6 verified, tiles 3-4 inherited-plausible (segment-anchored, suffix is this project's
+  // own reasonable match), tile 2 inferred (item content stays within the segment's systems theme
+  // rather than leaning on the code), tile 1 thematic on-ramp material citing no code at all.
+  'sci-t1-systems-vocab':      { label: 'Systems vocabulary and scale ordering',            subject: 'sci', pe: [], confidence: 'thematic' },
+  'sci-t2-systems-subsystems': { label: 'Life-support subsystems: air, water, food',         subject: 'sci', pe: ['MS-LS1-3'], confidence: 'inferred' },
+  'sci-t3-weather-evidence':   { label: 'Reading weather-log data as evidence',              subject: 'sci', pe: ['MS-ESS2-5'], confidence: 'inherited-plausible' },
+  'sci-t4-climate-patterns':   { label: 'Comparing climate patterns across outposts',        subject: 'sci', pe: ['MS-ESS2-6'], confidence: 'inherited-plausible' },
+  'sci-t5-warming-adaptation': { label: 'Warming limits and species adaptation',              subject: 'sci', pe: ['MS-ESS3-3', 'MS-ESS3-5', 'MS-LS1-4', 'MS-LS1-5'], confidence: 'verified' },
+  'sci-t6-design-evaluate':    { label: 'Evaluate a design against stated constraints',       subject: 'sci', pe: ['MS-ETS1-1', 'MS-ETS1-2'], confidence: 'verified' },
 });
 
 function isTarget(id) {
