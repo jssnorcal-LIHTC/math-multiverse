@@ -10539,7 +10539,15 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       key: 'piglet-bottle', title5: "Piglet's Bottle", chapter: 'In which Piglet sends a message',
       chapter6: "In which Piglet's acorns go out with the bottle",
       goal: 'Find the missage',
-      plate: 'art/shepard-1926-p148.png', plateRetrieval: 'art/shepard-1926-p151.png',
+      // Fix round 1 addendum: plateRetrieval points at a CROP of p151.png, not
+      // the plate itself. p151's bottle occupies a small fraction of a mostly
+      // blank 1077x573 frame; at the story-stage anchor's actual size (55%
+      // paper-rect opacity, under the procedural rain/tree layer) the full
+      // plate read as illegible. shepard-1926-p151-crop.png is a pixel crop of
+      // this byte-identical, already cross-verified file (see
+      // art/PROVENANCE-shepard-1926.md), not a new source needing its own
+      // verification.
+      plate: 'art/shepard-1926-p148.png', plateRetrieval: 'art/shepard-1926-p151-crop.png',
     },
     { // 4: The Floating Bear launches
       key: 'floating-launch', title5: 'The Floating Bear', chapter: 'In which Pooh sails on a jar',
@@ -10605,7 +10613,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   // TRUE scenes, not the original scene guess. Every other plate gets a
   // generic per-level alt string.
   const FB_PLATE_ALT = {
-    'art/shepard-1926-p151.png': "Pooh retrieving Piglet's corked bottle from the water",
+    'art/shepard-1926-p151-crop.png': "Pooh retrieving Piglet's corked bottle from the water",
     'art/shepard-1926-p153-2.png': "Christopher Robin marking the rising water with his flood-stick",
     'art/shepard-1926-p160-1.png': "Owl perched on Piglet's tree, one leaf before the rescue",
   };
@@ -10693,6 +10701,24 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       `One by one, friends were pulled from the water, safe and only a little bit damp.`,
     ],
   ];
+
+  // Fix round 1 addendum: p151 (the beat-3 post-swap plate, Pooh retrieving
+  // Piglet's bottle) reads plausibly as an ear to a player without foreknowledge
+  // (the provenance DRAFT's own warning); FB_BEAT_CAPTIONS[2]'s default pool all
+  // describes the bottle being SENT, which actively misleads once the RETRIEVAL
+  // plate is on screen. Keyed by beat key (not levelIndex) and consumed by
+  // renderStory only once fbStagePlates' own progress gate has swapped the
+  // plate, so caption and art can never disagree. Only beats whose default
+  // captions would otherwise contradict the swapped-in plate need an entry
+  // here; beat 6's default pool already reads as generic storm-in-progress
+  // flavor and was judged compatible with both its setup and rescue plates.
+  const FB_BEAT_CAPTIONS_SWAPPED = {
+    'piglet-bottle': [
+      `Pooh fished the bottle from the water and read the Missage at last.`,
+      `<em>"Ah,"</em> said Pooh, turning the bottle over in his paws, <em>"here is Piglet's very important Missage."</em>`,
+      `At last the bottle was safe in Pooh's paws, message and all.`,
+    ],
+  };
 
   // Same Winnie-the-Pooh flood theme; selected only when ACTIVE_GRADE === 6. The
   // grade-5 FB_LEVELS above is untouched. FB_QPL (15,18,18,20,20,20) is shared by
@@ -11792,7 +11818,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
       function renderStory() {
         const jarsHtml = [0,1,2].map(i => `<span class="fb-jar ${i < state.livesLost ? 'lost' : ''}"></span>`).join('');
-        const beatCaption = pick(FB_BEAT_CAPTIONS[levelIndex] || FB_BEAT_CAPTIONS[0]);
         // Task 3 step 3: the beat plate anchors the stage behind the procedural
         // water/rain/boat SVG (drawn with a translucent paper rect, see sceneSvg,
         // so the plate reads through); a second beat sits as a small corner inset
@@ -11801,6 +11826,13 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         const storyBeat = FB_BEATS[lvl.id - 1] || FB_BEATS[FB_BEATS.length - 1];
         const storyProgress = Math.max(0, Math.min(1, (state.correctCount || 0) / totalQ));
         const storyPlates = fbStagePlates(storyBeat, storyProgress);
+        // Fix round 1 addendum: caption pool follows the SAME swap gate as the
+        // plate (storyProgress >= FB_PLATE_SWAP_AT on a beat with a temporal
+        // plate pair), so the caption never describes a scene the art has
+        // already moved past.
+        const swapped = (storyBeat.plateRetrieval || storyBeat.plateSetup) && storyProgress >= FB_PLATE_SWAP_AT;
+        const captionPool = (swapped && FB_BEAT_CAPTIONS_SWAPPED[storyBeat.key]) || FB_BEAT_CAPTIONS[levelIndex] || FB_BEAT_CAPTIONS[0];
+        const beatCaption = pick(captionPool);
         const stageAnchorImg = storyPlates.anchor
           ? `<img class="fb-stage-plate" src="${storyPlates.anchor}" alt="${fbPlateAlt(storyPlates.anchor, lvl.name)}"${fbPlateCropAttr(storyPlates.anchor)} onerror="this.style.display='none';">`
           : '';
