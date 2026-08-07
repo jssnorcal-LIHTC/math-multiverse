@@ -10696,9 +10696,14 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       `Everyone agreed a Clever Plan was needed, and everyone looked at Pooh.`,
     ],
     [ // 5: Storm of the Century -- Captain C. Robin rescues all
-      `Captain Christopher Robin steered his fleet of umbrellas and honey jars through the last of the storm.`,
-      `The whole Wood was afloat now, and everyone was very glad of a good captain.`,
-      `One by one, friends were pulled from the water, safe and only a little bit damp.`,
+      // Task 4: rewritten to fit the PRE-swap plateSetup scene (p160-1, Owl
+      // perched on Piglet's tree, one leaf before the rescue) -- the prior
+      // default pool described the rescue as already under way, which read
+      // against a plate showing Owl alone, calm, no boat or captain yet. See
+      // FB_BEAT_CAPTIONS_SWAPPED['rescue'] for the post-swap (p160-2) pool.
+      `Owl perched at the top of Piglet's tree, keeping a very owlish watch on the water.`,
+      `The flood had not dropped an inch, and there was nothing to do but wait, which Owl found tiresome.`,
+      `Piglet watched the grey water from his window, and hoped help was not too far off.`,
     ],
   ];
 
@@ -10710,13 +10715,26 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   // renderStory only once fbStagePlates' own progress gate has swapped the
   // plate, so caption and art can never disagree. Only beats whose default
   // captions would otherwise contradict the swapped-in plate need an entry
-  // here; beat 6's default pool already reads as generic storm-in-progress
-  // flavor and was judged compatible with both its setup and rescue plates.
+  // here.
+  //
+  // Task 4: 'rescue' added -- beat 6's original default pool described the
+  // rescue as already under way, which read against the PRE-swap plateSetup
+  // plate (p160-1, Owl alone on Piglet's tree, no boat or captain in sight).
+  // FB_BEAT_CAPTIONS[5] above was rewritten to fit that calm setup scene; this
+  // entry supplies the rescue-in-progress captions for the POST-swap plate
+  // (p160-2) instead, echoing the ship's-log line already established at level
+  // start (FB_FINISH_LINE, "The Brain of Pooh (Captain, C. Robin; 1st Mate,
+  // P. Bear)") without repeating it verbatim.
   const FB_BEAT_CAPTIONS_SWAPPED = {
     'piglet-bottle': [
       `Pooh fished the bottle from the water and read the Missage at last.`,
       `<em>"Ah,"</em> said Pooh, turning the bottle over in his paws, <em>"here is Piglet's very important Missage."</em>`,
       `At last the bottle was safe in Pooh's paws, message and all.`,
+    ],
+    'rescue': [
+      `The good ship, The Brain of Pooh, came at last across the water, with Captain C. Robin at the helm.`,
+      `<em>"Here we are,"</em> said Christopher Robin, bringing his fleet of umbrellas and jars alongside at last.`,
+      `Piglet was lifted safely aboard, and even Owl agreed the rescue had gone rather well.`,
     ],
   };
 
