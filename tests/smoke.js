@@ -95,9 +95,9 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
     // screen. `SHELVES` is a top-level `let`, so it is reachable as a bare identifier but is NOT a
     // window property; `window.SHELVES` is undefined and would hang here.
     await page.waitForFunction(
-      () => typeof SHELVES !== 'undefined' && SHELVES.some((s) => s.subject === 'ela') && SHELVES.some((s) => s.subject === 'sci'),
+      () => typeof SHELVES !== 'undefined' && SHELVES.some((s) => s.subject === 'ela') && SHELVES.some((s) => s.subject === 'sci') && SHELVES.some((s) => s.subject === 'hist'),
       { timeout: 15000 },
-    ).catch(() => problems.push('boot: pack manifest never reached SHELVES with both ela and sci (fetch failed or engine did not load)'));
+    ).catch(() => problems.push('boot: pack manifest never reached SHELVES with ela, sci and hist (fetch failed or engine did not load)'));
     note('launcher booted');
 
     for (const grade of [5, 6]) {
@@ -121,8 +121,8 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
 
       // Assert what the cards ARE, not only how many, so a pack landing on the wrong shelf is caught by
       // name rather than by arithmetic. Checked per subject shelf, keyed off PACK_SHELVES below rather
-      // than a single English-only list, so a third pack (or a fourth subject) fails loudly here instead
-      // of silently passing on card COUNT alone. All three packs in the manifest declare grade 6, so
+      // than a single English-only list, so the next new pack (or subject) fails loudly here instead
+      // of silently passing on card COUNT alone. All four packs in the manifest declare grade 6, so
       // every shelf is expected to carry its full manifest-order list (buildShelves groups manifest.packs
       // by subject and preserves array order; packCardNode then renders `visible` in that same order --
       // confirmed live by this gate before this list was written: an unfixed run reports the cards in
@@ -133,6 +133,7 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
       const PACK_SHELVES = {
         ela: ['Cold Signal', 'Vault of Ages'],
         sci: ['Outpost Protocol'],
+        hist: ['Firsthand'],
       };
       const ALL_PACK_TITLES = Object.values(PACK_SHELVES).flat();
       for (const [subject, shelfTitles] of Object.entries(PACK_SHELVES)) {
