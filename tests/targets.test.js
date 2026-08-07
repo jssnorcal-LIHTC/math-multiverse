@@ -8,11 +8,13 @@ function check(name, fn) {
   catch (e) { failures++; console.log('  FAIL ' + name + ': ' + e.message); }
 }
 
-// The vocabulary now spans two subjects sharing one id namespace. ELA ids never carry the 'sci-'
-// prefix and science ids always do (see tests/targets.js), so the prefix is a stable, non-circular
-// way to scope an assertion to its subject without relying on the very field the assertion checks.
+// The vocabulary now spans three subjects sharing one id namespace. ELA ids never carry the
+// 'sci-' or 'hist-' prefix, science ids always carry 'sci-', and history ids always carry
+// 'hist-' (see tests/targets.js), so the prefix is a stable, non-circular way to scope an
+// assertion to its subject without relying on the very field the assertion checks.
 const SCI_IDS = Object.keys(TARGETS).filter(id => id.startsWith('sci-'));
-const ELA_IDS = Object.keys(TARGETS).filter(id => !id.startsWith('sci-'));
+const HIST_IDS = Object.keys(TARGETS).filter(id => id.startsWith('hist-'));
+const ELA_IDS = Object.keys(TARGETS).filter(id => !id.startsWith('sci-') && !id.startsWith('hist-'));
 
 check('every Smarter Balanced claim is represented (ELA subset)', () => {
   const claims = new Set(ELA_IDS.map(id => TARGETS[id].claim));
@@ -50,6 +52,22 @@ check('every science target carries a valid PE-code array and a legal confidence
   }
 });
 
+check('every history target declares subject "hist"', () => {
+  for (const id of HIST_IDS) {
+    assert.strictEqual(TARGETS[id].subject, 'hist', id + ' must declare subject "hist"');
+  }
+});
+
+check('every history target carries a valid HSS-code array and a legal confidence tier', () => {
+  const CONFIDENCE_TIERS = ['verified', 'inherited-plausible', 'inferred', 'thematic'];
+  for (const id of HIST_IDS) {
+    const t = TARGETS[id];
+    assert.strictEqual(Array.isArray(t.hss) && t.hss.length > 0, true, id + ' hss must be a non-empty array');
+    assert.strictEqual(t.hss.every(h => /^6\.[1-7]$/.test(h)), true, id + ' has a malformed HSS code: ' + JSON.stringify(t.hss));
+    assert.strictEqual(CONFIDENCE_TIERS.includes(t.confidence), true, id + ' has an invalid confidence tier: ' + JSON.stringify(t.confidence));
+  }
+});
+
 check('every target carries a human label', () => {
   for (const [id, t] of Object.entries(TARGETS)) {
     assert.strictEqual(typeof t.label === 'string' && t.label.length > 3, true, id + ' has no label');
@@ -59,8 +77,10 @@ check('every target carries a human label', () => {
 check('isTarget accepts known ids and rejects invented ones', () => {
   assert.strictEqual(isTarget('c1-lit-2-central-ideas'), true);
   assert.strictEqual(isTarget('sci-t5-warming-adaptation'), true);
+  assert.strictEqual(isTarget('hist-t2-hebrews'), true);
   assert.strictEqual(isTarget('c1-made-up'), false);
   assert.strictEqual(isTarget('sci-made-up'), false);
+  assert.strictEqual(isTarget('hist-made-up'), false);
   assert.strictEqual(isTarget(''), false);
   assert.strictEqual(isTarget(undefined), false);
 });
