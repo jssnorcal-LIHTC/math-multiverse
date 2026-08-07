@@ -28,11 +28,15 @@ function reorderKeys(v) {
 }
 
 function ledgerFor(pack, overrides) {
+  // PASSAGE-AWARE (N4 fix): stored hashes must be computed the same way validateLedger() computes
+  // its comparison hash, itemHash(item, passage), or every fixture item with a passageId reads as
+  // stale before any of these tests get to exercise what they actually target.
+  const passagesById = new Map((pack.passages || []).map(p => [p.id, p]));
   return {
     packId: pack.meta.id,
     model: 'test-model',
     records: pack.items.map(it => Object.assign({
-      itemId: it.id, itemHash: itemHash(it),
+      itemId: it.id, itemHash: itemHash(it, it.passageId ? passagesById.get(it.passageId) : null),
       blind: authoredKeyOf(it), authored: authoredKeyOf(it), status: 'agree',
     }, (overrides && overrides[it.id]) || {})),
   };
@@ -54,6 +58,32 @@ check('itemHash is stable across key reordering but changes with content', () =>
   const edited = JSON.parse(JSON.stringify(it));
   edited.choices[1] = 'a different distractor entirely';
   assert.notStrictEqual(itemHash(it), itemHash(edited));
+});
+
+check('itemHash(item) alone is byte-identical to itemHash(item) before the N4 passage-aware fix', () => {
+  // Backward compatibility for any caller that has not been updated to pass a passage: the single-
+  // argument form must never change, or every existing ledger record for every item without a
+  // resolvable passage silently goes stale the moment this file is edited.
+  const it = clone().items[0];
+  const withoutPassage = itemHash(it);
+  const withNullPassage = itemHash(it, null);
+  const withUndefinedPassage = itemHash(it, undefined);
+  assert.strictEqual(withoutPassage, withNullPassage, 'passing null must match omitting the argument');
+  assert.strictEqual(withoutPassage, withUndefinedPassage, 'passing undefined must match omitting the argument');
+});
+
+check('itemHash changes when the PASSAGE changes, even if the item itself does not (N4 fix)', () => {
+  // This is the actual defect: an item whose own text never moved kept a "verified" hash even after
+  // the passage it quotes was rewritten underneath it. Pin the fix directly, independent of any pack
+  // fixture, so a future change to itemHash cannot silently regress this without failing here first.
+  const item = { id: 'i-x', type: 'mc', passageId: 'p-x', stem: 's', choices: ['a','b'], key: 0 };
+  const passageV1 = { id: 'p-x', text: 'Original passage text.' };
+  const passageV2 = { id: 'p-x', text: 'Rewritten passage text, same item untouched.' };
+  const h1 = itemHash(item, passageV1);
+  const h2 = itemHash(item, passageV2);
+  assert.notStrictEqual(h1, h2, 'the same item against two different passages must hash differently');
+  // Control: the SAME passage object hashed twice must be stable, or this is noise, not a real check.
+  assert.strictEqual(itemHash(item, passageV1), itemHash(item, { id: 'p-x', text: passageV1.text }));
 });
 
 check('authoredKeyOf reads mc, ms and ebsr partA keys', () => {
