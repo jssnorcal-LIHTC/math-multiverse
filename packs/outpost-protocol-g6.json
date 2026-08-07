@@ -1,0 +1,2451 @@
+{
+  "meta": {
+    "id": "outpost-protocol-g6",
+    "subject": "sci",
+    "grade": 6,
+    "title": "Outpost Protocol",
+    "standards": "NGSS-CA Integrated 6",
+    "version": 1
+  },
+  "skin": {
+    "color": "#1a8f5e",
+    "icon": "🛰️",
+    "grandGoal": "Field Director"
+  },
+  "passages": [
+    {
+      "id": "p-field-manual-systems",
+      "title": "Field Manual: Reading a System",
+      "genre": "informational",
+      "source": "original",
+      "text": "Every operative in the Outpost Network learns four words first, because every station on the network runs on them.  A system is a set of parts that work together toward one job.  A subsystem is a smaller system that sits inside a bigger one.  It handles one piece of the larger job.  A component is a single part inside a subsystem.  It is the smallest piece that still does its own work.  An interaction is what happens when one part changes, and a connected part changes with it.\n\nUse the station's own life-support system as the example, since every operative lives inside it from the first night.  Life support is the big system, and its one job is keeping the crew breathing, hydrated, and fed.  Three subsystems sit underneath it.  The air subsystem pulls in stale air, strips out carbon dioxide, and sends oxygen back through the station's vents.  The water subsystem catches the moisture the crew breathes out, filters it, and pipes clean water back to the taps.  The food subsystem grows fast crops under grow lights.  Something is always close to ready.\n\nComponents sit one level further down, and they are the parts a technician actually repairs.  The air subsystem's scrubber cartridge is a component.  So is the water subsystem's filter membrane, and so is the food subsystem's light panel.  A technician never repairs \"life support\" as a whole.  A technician repairs one cartridge, or one membrane, or one panel, because that single piece is the one that actually failed.\n\nInteraction ties the whole idea together, and new operatives forget this word first.  A station's systems never sit apart from each other.  Dim light panels slow crop growth, so the crew eats less of what the station grows and more of what gets shipped in.  A clogged air scrubber lets carbon dioxide climb, so the crew works slower and sleeps worse, and fewer repairs get made anywhere else on the station.  One failing component can ripple through its own subsystem, and one failing subsystem can ripple through the whole system.  Reading a station means reading those ripples.  It means more than naming the part that broke first.\n\nScale works the same way outside a single station.  A cell is smaller than an organ, and an organ is smaller than an organism, such as one operative.  An organism is smaller than a station, and a station is smaller than the planet holding every station at once.  Each level is its own system, built from smaller systems and nested inside a bigger one.  An operative who can trace one ripple through one station is already halfway there, since the same kind of ripple crosses an entire planet, and tracing it is the real job waiting at the end of training."
+    },
+    {
+      "id": "p-meridian-status-log",
+      "title": "Status Log: Meridian Dome, Days Ninety to One Hundred Eighteen",
+      "genre": "informational",
+      "source": "original",
+      "text": "Meridian Dome has run as a sealed system for one hundred eighteen days, its longest run.  Nothing enters and nothing leaves, though sunlight gets in and data goes out each morning.  Dr. Renata Kessler is the dome's systems lead.  She files this status log every four weeks.  Network Command can track the numbers without a crisis.\n\nOn day ninety, the dome's air held steady, and carbon dioxide read four hundred ten parts per million, or ppm.  Oxygen sat near twenty and a half percent.  Both numbers matched every reading since the seal closed, and the water subsystem was saving ninety-six percent of all the crew used.  The food modules were producing enough to cover every meal, with a small surplus.\n\nBy day one hundred four, the numbers had shifted.  Carbon dioxide had climbed to four hundred thirty ppm.  Oxygen had slipped to twenty percent even.  Neither shift was large enough to worry the crew, and Dr. Kessler's log calls it \"within normal drift.\"  Her notes say systems wander before they settle.\n\nBy day one hundred eighteen, the drift had not settled.  Carbon dioxide now reads four hundred fifty-two ppm.  Oxygen has fallen to nineteen and a half percent.  Water reclamation has held steady near ninety-five percent.  The food modules are still meeting every meal.  Neither of those subsystems appears to be the source.  One subsystem keeps drawing her attention: the algae bioreactor tucked beneath the food modules, the dome's main source of extra oxygen.  Its daily readings have gone low, though nothing about its gear has failed.\n\nDr. Kessler's log closes with one line, asking Network Command to send an operative to walk the dome.  Sensor readings show a number falling, but they cannot say why.  Four straight weeks of drift have passed, and why is the question the dome needs answered."
+    },
+    {
+      "id": "p-meridian-dimming-panels",
+      "title": "Field Report: The Dimming Panels",
+      "genre": "informational",
+      "source": "original",
+      "text": "The walk-through took four hours, and the answer was sitting in plain sight the entire time.\n\nThe algae bioreactor is its own subsystem, tucked beneath the food modules, with its own daily readings and its own share of the dome's oxygen balance.  Its clear roof panel is the actual component, the smallest piece a technician can wipe clean and repair.  The bioreactor's job is simple.  Sunlight reaches a shallow tank of green algae through the dome's clear roof panels, the algae uses that light to grow, and growing algae releases oxygen and pulls in carbon dioxide, the same way the dome's food crops do, only faster per square foot of tank.\n\nThe roof panels above the bioreactor were not broken.  They were coated in a fine layer of dust, thin enough that a glance from across the room missed it completely.  A hand run across the panel came away visibly gray.  The dust had been settling since the dome sealed, one hundred eighteen days ago, a little more collecting every week, blown in through the same vents that keep the dome's air mixed.\n\nLess light through the panel means less light reaching the algae, and less light means slower growth.  Slower-growing algae releases less oxygen and pulls in less carbon dioxide than a fast-growing tank does.  That is a small change, day to day, and it would take a sharp eye to catch one day's drop alone.  Twenty-eight straight days of buildup added up to the reading Dr. Kessler had been tracking: oxygen sliding down a fraction of a percent at a time.\n\nNothing else in the dome needed to fail for this to happen.  The water subsystem kept reclaiming at ninety-five percent the entire time, and the food crops kept the crew fed, because dust on one component does not touch either of those.  It only touched the one component whose whole job depends on light getting through a clear surface.  Wipe the panel down, and the readings should recover within days.  The dome's maintenance log records no scheduled cleaning since the seal, an oversight the next log entry will need to fix."
+    },
+    {
+      "id": "p-halyard-weather-log",
+      "title": "Weather Log: Halyard Point Relay",
+      "genre": "informational",
+      "source": "original",
+      "text": "Halyard Point Relay sits on a headland.  The coast juts out into open water there.  That makes it the Network's best post for storm warnings.  Relay Officer Dez Amaro logs four readings every morning.  He tracks air pressure, temperature, humidity, and wind.\n\nOn the first day, the barometer read thirty and one tenth inches.  The temperature reached seventy-four degrees, and humidity sat at fifty-two percent.  The wind came light out of the southwest.  The sky stayed clear through the afternoon.\n\nOn the second day, the barometer slipped to thirty inches even.  The temperature climbed to seventy-six degrees, and humidity rose to fifty-eight percent.  The wind came from the southwest, a little stronger than the day before.  A haze had moved in by evening.\n\nOn the third day, the barometer fell further.  It read twenty-nine and eight tenths inches.  The temperature dropped to seventy-one degrees, and humidity climbed to sixty-seven percent.  The wind shifted to blow out of the west.  Low clouds were building along the horizon by midday.\n\nOn the fourth day, the barometer read twenty-nine and six tenths inches.  That was its lowest reading of the week.  Temperature fell again, to sixty-five degrees, and humidity reached seventy-nine percent.  The wind swung to the northwest and picked up to twenty-two miles per hour.  The relay logged its first rain of the week.  That happened by early afternoon.\n\nOn the fifth day, the barometer bottomed out.  It read twenty-nine and five tenths inches.  Temperature had dropped to fifty-eight degrees.  Humidity reached eighty-eight percent.  The wind now blew hard from the north.  It reached thirty-one miles per hour.  Rain fell through the day without a break.\n\nOfficer Amaro's log adds one more line every week.  It logs the colony no matter the weather.  The brindle tern colony below the relay held at two hundred fourteen active nests.  That count matched last week's.  The note is routine, filed every week.  It sits at the bottom of the page.  Five days of falling pressure and rising wind sit above it."
+    },
+    {
+      "id": "p-halyard-reading-the-front",
+      "title": "Field Manual: Reading an Approaching Front",
+      "genre": "informational",
+      "source": "original",
+      "text": "A change in weather almost always starts the same way.  Two air masses meet, and one of them wins.\n\nAn air mass is a huge body of air that has sat over one kind of ground or ocean long enough to take on that region's temperature and moisture.  Air that has sat over cold land turns cold and often stays fairly dry.  Air that has sat over warm ocean water turns warm and picks up moisture as it travels.  Air masses do not stay in one place forever.  Wind pushes them along, and where two different air masses meet, that meeting point is called a front.\n\nCold air is denser than warm air, which means it packs more mass into the same amount of space.  When a mass of cold air pushes into a mass of warmer air, the cold air does not mix in evenly.  It slides in low, the way water spreads under a lighter oil, and shoves the warmer air up and out of its way.  Warm air forced upward cools quickly as it rises, and cooling air cannot hold as much moisture as warm air can, so the moisture condenses into clouds.  Enough moisture condensing fast enough falls back down as rain.\n\nThat single mechanism explains almost everything a weather log records before a front arrives.  Falling air pressure is the first sign.  A low-pressure system is approaching, and the warm, less dense air still sitting over the station presses down less than the colder, denser air still on its way.  Rising humidity comes next, as the warm air is forced upward and its moisture starts condensing into clouds along the horizon.  A shift in wind direction follows close behind, since wind blows toward lower pressure and the front's own advance drags the wind toward it.  Falling temperature and rising wind speed arrive last, right as the front itself reaches the station and the cold air mass takes over completely.\n\nA relay that tracks all four numbers together can call a front's arrival early, a full day or more before the sky gives any warning.  That is exactly why Halyard Point logs every one of them, every single morning."
+    },
+    {
+      "id": "p-two-posts-one-latitude",
+      "title": "Field Report: Two Posts, One Latitude",
+      "genre": "informational",
+      "source": "original",
+      "text": "Sable Flats Post and Cairn Bay Post sit at almost the exact same latitude.  The sun reaches both at nearly the same angle all year.  By the logic of latitude alone, the two posts should report similar climates.  They do not, and the gap between them is large enough that operatives transferring between the two posts are warned to repack their gear completely.  What worked at one post does not work at the other.\n\nSable Flats sits well inland, a long way from open water.  It sits on flat ground, with nothing between it and the dry continental air overhead.  Cairn Bay sits directly on the coast.  Open ocean stretches away to its west.  That single difference in position changes almost everything else about the two posts' year.\n\nUnequal heating across the planet drives global wind belts.  These are broad rivers of moving air.  They circle the planet in roughly the same bands every year.  The wind belt crossing this latitude blows from the west, off the ocean, before it reaches Sable Flats.  At Cairn Bay, that wind arrives straight off the water.  It still carries the moisture it picked up crossing the ocean.  By the time the same wind belt reaches Sable Flats, it has already crossed hundreds of miles of dry land.  It has dropped most of its moisture along the way.  It arrives far drier than it left the coast.\n\nOcean currents add a second layer to the difference.  A current moving along Cairn Bay's coastline keeps the water near the post within a narrow temperature range all year.  Water changes temperature far more slowly than land does.  Air sitting over that current picks up the same steadiness.  Cairn Bay's temperatures swing less between summer and winter than a place with no ocean nearby.  Sable Flats has no current to moderate it.  Its land surface heats fast under summer sun.  It cools fast once winter sun angles drop.  Its temperature swings far wider across the year than Cairn Bay's does.\n\nNone of this is about today's weather at either post.  A single storm or a single clear week can happen at either station.  These long-term patterns do not change because of one storm.  Halyard Point can log five unusual days without its climate actually changing, the same way.  Climate is the pattern averaged over years.  Weather is what is happening outside the window this morning.  The two posts prove that a shared latitude guarantees neither one."
+    },
+    {
+      "id": "p-sable-cairn-decade",
+      "title": "Ten-Year Averages: Sable Flats and Cairn Bay",
+      "genre": "informational",
+      "source": "original",
+      "text": "Network Command keeps a running ten-year average for every post.  It updates the average each year.  A single year can lie about a place.  A full decade cannot.\n\nSable Flats Post has averaged nine inches of rainfall a year.  That average covers the last ten years.  Its average summer high has run ninety-six degrees.  Its average winter low has run twenty-eight degrees.  That is a swing of sixty-eight degrees between the two seasons.  Individual years have varied.  One drought year reached barely five inches of rain.  One unusually wet year reached fourteen.  The ten-year average has still held close to nine every time Network Command has recalculated it.\n\nCairn Bay Post has averaged forty-two inches of rainfall a year.  That is nearly five times what Sable Flats records.  The two posts sit at the same latitude.  Cairn Bay's average summer high has run seventy-four degrees.  Its average winter low has run forty-one degrees.  That is a swing of only thirty-three degrees between seasons.  That is roughly half the swing Sable Flats posts.  Cairn Bay's own wettest year on record reached fifty-one inches.  Its driest year still reached thirty-four.  That range is far narrower than Sable Flats shows between its own extremes.\n\nReading the two tables side by side answers a question new operatives ask often.  Which table shows the post's \"real\" climate?  Neither table describes a single storm or a single cold snap.  Neither one changes because of what one particular year happened to do.  Both tables describe what a post's weather adds up to.  Enough years get averaged together first.  That is the actual definition Network training uses for climate.  A visitor might land at Sable Flats during its one wet year of fourteen inches.  Judging the whole post by that single year would be a mistake.  That visitor would carry home a wrong idea of most years there.  The ten-year average exists precisely so nobody has to make that mistake."
+    },
+    {
+      "id": "p-halyard-nesting-record",
+      "title": "Halyard Point Relay: Thirty-Year Nesting Record",
+      "genre": "informational",
+      "source": "original",
+      "text": "The brindle tern colony below Halyard Point Relay gets logged every spring, and the relay has tracked it from the start.  The record now runs thirty full nesting seasons, and two numbers matter most here.  One is the date the colony's first eggs appear each year, and the other is the percent of chicks that survive long enough to fly.\n\nIn the first logged season, the colony's first eggs came on April seventh.  Seventy-six percent of the chicks that hatched went on to fledge.  By the tenth season, first eggs had moved up to March twenty-seventh.  That is eleven days earlier than the first year.  The fledge rate had slipped to sixty-four percent.  By the twentieth season, first eggs came on March eighteenth.  That is twenty days earlier than the record began.  The fledge rate had dropped to fifty-two percent.  In the thirtieth season, first eggs came on March tenth.  That is twenty-eight days earlier than the colony's first logged year.  Only thirty-nine percent of hatched chicks lived to fly.\n\nThe colony is not nesting earlier by chance, since terns time their first eggs to the spring air and water.  Their bodies respond once conditions cross a warm mark, and thirty years of warming have pulled that mark earlier.\n\nSpring herring feed the colony's chicks once they hatch, not from the moment an egg is laid.  Tern eggs take about twenty-two days to hatch.  A chick's own hungriest stretch begins roughly three weeks after its egg first appears, not the day the egg is laid.  That small fish times its own arrival by ocean temperature at sea.  That clock runs slower than the coastal air the terns respond to.  The herring's arrival date has held near April twenty-first every season.  It has drifted only three days either way.  In the colony's first logged season, eggs hatched around April twenty-ninth, more than a week after the herring had already arrived and settled in.  By the thirtieth season, eggs were hatching around April first, about three weeks before the herring showed up.  The colony's chicks now hatch weeks before their food source even arrives.\n\nThe gap between the two dates is what the fledge-rate column has been tracking.  It was never the nesting date by itself."
+    },
+    {
+      "id": "p-network-synthesis",
+      "title": "Network Synthesis: The One Pattern",
+      "genre": "informational",
+      "source": "original",
+      "text": "Every posting in this network has filed its own local mystery this year.  Halyard Point's spring keeps arriving earlier than its colony's food supply can follow.  Sable Flats has logged its driest three years back to back.  Read alone, each report looks like its own separate problem.  Each one seems to have its own separate cause.  Ten years of Network-wide data changes that.  Read together, the reports stop looking separate at all.\n\nEvery station on the network logs its local temperature.  Network Command also tracks each station's reading.  It compares that reading against the station's thirty-year baseline.  A warm year at Cairn Bay never gets compared against a cold year at Sable Flats.  That mistake does not happen.  Averaged across every station, the network's combined temperature reading has climbed nearly every year.  That climb covers the past decade.  It has not climbed by the same amount each year.  Some years rose sharply.  One year barely rose at all.  That kind of up-and-down bounce is normal.  Ordinary weather causes it.  Any single year runs warmer or cooler than the years around it.\n\nTwo other numbers do not bounce the same way.  Every station's air-sampling equipment also logs atmospheric carbon dioxide.  Carbon dioxide is a greenhouse gas: it lets sunlight in but traps some of the heat that would otherwise escape back to space, so more of it in the air points to a warmer planet on average, a real physical mechanism, not just two numbers that happen to be rising together.  That number has climbed in the same direction every year.  It has climbed by nearly the same amount each time.  Not one of the past ten years has dropped back.  Network Command also tracks a fuel-use index.  That index tracks the fuel every station and supply run burns, the same kind of burning happening everywhere else on the planet, so it stands in for a global number no single network could ever measure directly.  The index has climbed on almost the same line as carbon dioxide.  That climb has stayed steady, year after year.\n\nA signal that bounces up and down, like the temperature line, usually points to short-term natural causes.  Those causes layer on top of whatever else is happening, including the temperature line's own overall climb, so a bouncy year-to-year path and a real warming trend can both be true at once.  A signal that climbs the same steady amount every year points somewhere else.  It never reverses.  The carbon dioxide line and the fuel-use line climb together that way.  That pattern points to a steady cause rather than a random one.  Natural swings do not usually march in one direction for ten straight years.  They do not march in step with a number the network makes itself.\n\nThat steady climb is the one pattern.  It sits underneath every local mystery this year has produced.  It is why Halyard Point's spring keeps arriving earlier.  The colony's food supply cannot keep up.  It is why Sable Flats keeps recording drier years than its ten-year average expects.  One station cannot see a planetary pattern.  It cannot see past its own single report.  The network can see it.  This season's reports, read side by side, are the pattern showing itself."
+    },
+    {
+      "id": "p-final-deployment-proposals",
+      "title": "Final Deployment: Three Proposals for Halyard Point",
+      "genre": "informational",
+      "source": "original",
+      "text": "Network Command has approved one field response at Halyard Point.  It targets a gap.  The tern colony's nesting date and the herring's arrival keep drifting apart.  The operative filing the final report must recommend one of three proposals.\n\nCommand set three constraints first.  The response must show a real effect on chick survival.  That effect must appear within one nesting season.  Command will not commit a second season of field budget to a plan.  That plan must show an early result.  Second, the response must cost less than this year's field budget for Halyard Point.  No emergency funding request is allowed.  Third, the response must use only authority the Network already holds.  That authority covers its posts and the land around them.  The Network cannot regulate fishing seasons.  It cannot regulate ocean conditions outside its boundary either.\n\nProposal A calls for a temporary feeding station near the nest sites.  Chicks hatch three weeks before the herring arrive.  The station would stock fish through that exact window.  Setup takes under two weeks.  The cost fits well inside this year's field budget.  The Network runs feeding stations at two other posts.  The authority to run one is not in question.  The effect would end the moment the feeding station stopped.  It treats the survival gap each season rather than closing it.\n\nProposal B calls for fencing around the colony's nest sites.  It would keep ground predators away from eggs and chicks.  The fencing is inexpensive.  It can go up within days.  That fits well inside the time limit Command set.  It fits the cost limit too.  It would likely raise survival among hatched chicks.  Predators are not what this record has shown killing chicks, though.  The record shows chicks starving during the gap.  That gap sits before the herring arrive.  Fencing does nothing to touch that problem.\n\nProposal C calls for the Network to petition the fishery authority.  The petition would ask to delay the herring season's opening.  The delay would run three weeks.  That would time the fish run to arrive when the chicks need it.  If it worked, it would close the mismatch at its root.  It would stop covering for the mismatch every season instead.  The fishery authority does not answer to the Network, though.  No petition has ever been decided in under four months.  That is well past the one-season window Command set.  The outcome does not lie inside the Network's authority.\n\nThe operative's recommendation is due before the next nesting season begins."
+    }
+  ],
+  "levels": [
+    {
+      "id": 1,
+      "name": "New Posting",
+      "goal": "Learn to read a system: parts, subsystems, and the ripples between them.",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "lives": 4,
+      "questions": 8,
+      "itemIds": [
+        "t1-ebsr-what-is-a-subsystem",
+        "t1-ebsr-the-bigger-job",
+        "t1-ebsr-dim-light-panels",
+        "t1-ebsr-why-this-example",
+        "t1-ms-life-support-organized",
+        "t1-hot-four-definitions",
+        "t1-hot-ripple-examples",
+        "t1-cloze-interaction-def",
+        "t1-mc-smallest-piece",
+        "t1-mc-two-events-connected",
+        "t1-mc-nested-correctly",
+        "t1-order-scale-of-systems"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Sealed Station",
+      "goal": "Diagnose why Meridian Dome's air is drifting before supplies run out.",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "lives": 4,
+      "questions": 8,
+      "itemIds": [
+        "t2-ebsr-what-is-ruled-out",
+        "t2-ebsr-real-cause-of-slip",
+        "t2-ebsr-why-send-an-operative",
+        "t2-ebsr-why-nothing-else-failed",
+        "t2-ms-why-oxygen-slipped",
+        "t2-hot-latest-drift-readings",
+        "t2-hot-dust-stayed-contained",
+        "t2-cloze-component-def",
+        "t2-mc-oxygen-change",
+        "t2-mc-normal-drift-phrase",
+        "t2-mc-dust-on-a-different-part",
+        "t2-match-subsystem-status"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Storm Front",
+      "goal": "Read the incoming data fast enough to warn the coast before the front arrives.",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "lives": 4,
+      "questions": 8,
+      "itemIds": [
+        "t3-ebsr-what-happens-next",
+        "t3-ebsr-why-rain-forms",
+        "t3-ebsr-earliest-warning-sign",
+        "t3-ebsr-why-track-all-four",
+        "t3-ms-signs-of-a-front",
+        "t3-hot-storm-signals-not-colony",
+        "t3-hot-cold-air-mechanism",
+        "t3-cloze-air-mass-def",
+        "t3-mc-what-is-a-front",
+        "t3-mc-strongest-signal-day",
+        "t3-mc-rising-pressure-transfer",
+        "t3-order-front-stages"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "The Long Pattern",
+      "goal": "Explain why two outposts at the same latitude report very different climates.",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "lives": 4,
+      "questions": 8,
+      "itemIds": [
+        "t4-ebsr-why-different-climates",
+        "t4-ebsr-why-cairn-bay-swings-less",
+        "t4-ebsr-why-trust-the-average",
+        "t4-ebsr-which-post-swings-more",
+        "t4-ms-why-cairn-bay-is-wetter",
+        "t4-hot-weather-vs-climate-def",
+        "t4-hot-wind-and-current-mechanisms",
+        "t4-cloze-unequal-heating",
+        "t4-mc-steady-crop-post",
+        "t4-mc-weather-word",
+        "t4-mc-third-post-transfer",
+        "t4-match-pattern-to-cause"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Breaking Point",
+      "goal": "Trace every local mystery back to the one planetary pattern underneath it.",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "lives": 4,
+      "questions": 8,
+      "itemIds": [
+        "t5-ebsr-real-cause-of-drop",
+        "t5-ebsr-two-different-clocks",
+        "t5-ebsr-steady-vs-bouncy",
+        "t5-ebsr-one-planetary-pattern",
+        "t5-ms-the-adaptation-limit",
+        "t5-hot-gap-not-date",
+        "t5-hot-bouncing-vs-steady",
+        "t5-cloze-herring-clock",
+        "t5-mc-herring-vs-nesting-shift",
+        "t5-mc-bouncing-instrument-transfer",
+        "t5-mc-why-one-station-cannot-see-it",
+        "t5-short-what-is-widening"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Final Deployment",
+      "goal": "Design and defend the Network's official response plan, the final field review.",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "lives": 4,
+      "questions": 12,
+      "itemIds": [
+        "t6-ebsr-which-proposal-lacks-authority",
+        "t6-ebsr-why-proposal-b-still-fails",
+        "t6-ebsr-one-week-is-not-climate",
+        "t6-ebsr-one-year-is-not-proof",
+        "t6-ms-proposals-against-constraints",
+        "t6-hot-three-constraints",
+        "t6-hot-proposal-flaws",
+        "t6-cloze-third-constraint",
+        "t6-mc-first-constraint",
+        "t6-mc-fishery-regulation-transfer",
+        "t6-mc-fish-timing-interaction",
+        "t6-short-best-proposal"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "t1-ebsr-what-is-a-subsystem",
+      "type": "ebsr",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 2,
+      "partA": {
+        "stem": "Which sentence best explains what a subsystem is?",
+        "choices": [
+          "A subsystem is a smaller system that sits inside a bigger one and handles one piece of the larger job.",
+          "A subsystem is the smallest piece inside a system that a technician actually repairs.",
+          "A subsystem is what happens when one part of a station changes and a connected part changes too.",
+          "A subsystem is the station's entire life-support system, covering air, water, and food together."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "A component is a single part inside a subsystem.",
+          "Life support is the big system, and its one job is keeping the crew breathing, hydrated, and fed.",
+          "A subsystem is a smaller system that sits inside a bigger one.",
+          "An interaction is what happens when one part changes, and a connected part changes with it."
+        ],
+        "key": {
+          "0": 2,
+          "1": 0,
+          "2": 3,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "This describes a COMPONENT, the smallest repairable part inside a subsystem, not the subsystem itself.",
+        "2": "This describes an INTERACTION, what happens when one part changes and a connected part changes too, not what a subsystem is.",
+        "3": "This describes the whole SYSTEM (life support), not one of the smaller subsystems nested inside it."
+      },
+      "explain": "The passage defines a subsystem directly as a smaller system that sits inside a bigger one and handles one piece of the larger job.  Each wrong choice borrows the passage's real definition of a different vocabulary word, component, interaction, or system, instead."
+    },
+    {
+      "id": "t1-ebsr-the-bigger-job",
+      "type": "ebsr",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 3,
+      "partA": {
+        "stem": "The passage says an operative who can trace one ripple through a station is already halfway toward a bigger job.  What is that bigger job?",
+        "choices": [
+          "Tracing that same kind of ripple across an entire planet.",
+          "Repairing every component in every subsystem on the station.",
+          "Naming the part that broke first every time something fails.",
+          "Listing every system from smallest to largest in order."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "It means more than naming the part that broke first.",
+          "An operative who can trace one ripple through one station is already halfway there, since the same kind of ripple crosses an entire planet, and tracing it is the real job waiting at the end of training.",
+          "A cell is smaller than an organ, and an organ is smaller than an organism, such as one operative.",
+          "Components sit one level further down, and they are the parts a technician actually repairs."
+        ],
+        "key": {
+          "0": 1,
+          "1": 3,
+          "2": 0,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "This describes what a technician does with COMPONENTS, the smallest repairable pieces, not the bigger job the passage names.",
+        "2": "This is close but backwards: the passage says reading a station means MORE than naming the part that broke first, not that naming it is the goal.",
+        "3": "This quote gives the scale ORDER, cell to organ to organism, but the passage's actual claim is about tracing a ripple across that scale, not just listing the levels."
+      },
+      "explain": "The passage's last sentence says an operative who can trace a ripple through one station is already halfway to tracing that same kind of ripple across an entire planet, and names that as the real job waiting at the end of training.  The other options each grab a true detail from elsewhere in the passage that does not answer what the bigger job actually is."
+    },
+    {
+      "id": "t1-ebsr-dim-light-panels",
+      "type": "ebsr",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 3,
+      "partA": {
+        "stem": "According to the passage, what happens when the food subsystem's light panels dim?",
+        "choices": [
+          "The crops grow slower, and the crew eats less of what the station grows.",
+          "Carbon dioxide climbs, and the crew works slower and sleeps worse.",
+          "The station's water taps stop working completely.",
+          "One failing component ripples through the whole system at once."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "A clogged air scrubber lets carbon dioxide climb, so the crew works slower and sleeps worse, and fewer repairs get made anywhere else on the station.",
+          "One failing component can ripple through its own subsystem, and one failing subsystem can ripple through the whole system.",
+          "Dim light panels slow crop growth, so the crew eats less of what the station grows and more of what gets shipped in.",
+          "The water subsystem catches the moisture the crew breathes out, filters it, and pipes clean water back to the taps."
+        ],
+        "key": {
+          "0": 2,
+          "1": 0,
+          "2": 3,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "This describes the AIR subsystem's clogged scrubber, a different failure with a different cause.  The question asks about dim light panels, which affect crops, not carbon dioxide.",
+        "2": "This sentence describes the water subsystem working normally, not failing.  Nothing in the passage says dim light panels affect the water subsystem at all.",
+        "3": "This is the passage's general rule about ripples, true but too broad.  It does not say what specifically happens when the light panels themselves dim."
+      },
+      "explain": "The passage says directly that dim light panels slow crop growth, which means the crew eats less of what the station itself grows and has to rely more on food shipped in from outside.  The other choices either describe a different subsystem's failure or restate the general ripple rule without answering what dimming panels specifically cause."
+    },
+    {
+      "id": "t1-ebsr-why-this-example",
+      "type": "ebsr",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 2,
+      "partA": {
+        "stem": "Why does the passage use the station's own life-support system as its worked example for systems and subsystems?",
+        "choices": [
+          "Every operative lives inside that system from their first night, so it is a relatable starting example.",
+          "It is the only system that exists anywhere on the station.",
+          "It is the smallest system an operative will ever study.",
+          "It is the system that connects a station to the entire planet."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "A component is a single part inside a subsystem.",
+          "Use the station's own life-support system as the example, since every operative lives inside it from the first night.",
+          "Three subsystems sit underneath it.",
+          "An organism is smaller than a station, and a station is smaller than the planet holding every station at once."
+        ],
+        "key": {
+          "0": 1,
+          "1": 2,
+          "2": 0,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence says life support has three subsystems underneath it, which is the opposite of it being the only system on the station.",
+        "2": "This describes a COMPONENT, the smallest repairable part, not the life-support system itself, which the passage treats as the big example system.",
+        "3": "This sentence is about scale in general, comparing a station to the planet.  It never says the life-support system itself is what makes that connection."
+      },
+      "explain": "The passage gives its actual reason directly: it uses life support as the example because every operative lives inside it starting on their first night, which makes it something every reader can already picture.  The other options each borrow a true detail from a different part of the passage that does not explain that specific choice."
+    },
+    {
+      "id": "t1-ms-life-support-organized",
+      "type": "ms",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 2,
+      "stem": "Choose the three details that correctly describe how the station's life-support system is organized.",
+      "choices": [
+        "Life support is the big system, with three subsystems underneath it.",
+        "The water subsystem catches, filters, and pipes back the crew's moisture.",
+        "The food subsystem's light panels are repaired by the water subsystem's technician.",
+        "A clogged air scrubber can make the crew work slower and sleep worse.",
+        "The station's life-support system is the smallest component on the station.",
+        "One failing subsystem can only affect that same subsystem, never the rest of the station."
+      ],
+      "key": [
+        0,
+        1,
+        3
+      ],
+      "distractorRationale": {
+        "2": "The passage says a technician repairs one cartridge, one membrane, or one panel, each belonging to its own subsystem.  It never assigns the food subsystem's light panel to the water subsystem's technician.",
+        "4": "This inverts the passage's own scale.  Life support is named as the big system with three subsystems underneath it, not the smallest component on the station.",
+        "5": "The passage says the opposite directly: one failing subsystem can ripple through the whole system, not stay contained to itself."
+      },
+      "explain": "The three correct details all come straight from the passage's description of life support: it is the big system built from three subsystems, the water subsystem's own job, and the ripple effect a clogged air scrubber causes.  The three wrong choices each invert or mix up a detail the passage states in the opposite direction."
+    },
+    {
+      "id": "t1-hot-four-definitions",
+      "type": "hottext",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 2,
+      "mode": "sentence",
+      "stem": "Tap the four sentences that each give the definition of one of the network's core vocabulary words: system, subsystem, component, and interaction.",
+      "spans": [
+        "A system is a set of parts that work together toward one job.",
+        "A subsystem is a smaller system that sits inside a bigger one.",
+        "A component is a single part inside a subsystem.",
+        "An interaction is what happens when one part changes, and a connected part changes with it.",
+        "It handles one piece of the larger job.",
+        "It is the smallest piece that still does its own work."
+      ],
+      "key": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explain": "Each of the four vocabulary words gets its own one-sentence definition early in the field manual, and those are the four sentences tapped here.  The other two sentences add a follow-up detail about a subsystem's job and a component's size, but a follow-up detail is not the same thing as the definition sentence it follows."
+    },
+    {
+      "id": "t1-hot-ripple-examples",
+      "type": "hottext",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that each describe a specific ripple: one part's change causing a different part to change too.",
+      "spans": [
+        "Dim light panels slow crop growth, so the crew eats less of what the station grows and more of what gets shipped in.",
+        "A clogged air scrubber lets carbon dioxide climb, so the crew works slower and sleeps worse, and fewer repairs get made anywhere else on the station.",
+        "Interaction ties the whole idea together, and new operatives forget this word first.",
+        "A station's systems never sit apart from each other.",
+        "Reading a station means reading those ripples."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Both correct sentences trace one specific change causing a second, different change: dim panels causing the crew to eat less of what the station grows, and a clogged scrubber causing the crew to work slower and sleep worse.  The other sentences state the general idea of interaction and ripples without naming one specific example of a ripple in action."
+    },
+    {
+      "id": "t1-cloze-interaction-def",
+      "type": "cloze",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 2,
+      "stem": "An {{0}} is what happens when one part changes, and a connected part changes with it.",
+      "blanks": [
+        {
+          "choices": [
+            "system",
+            "interaction",
+            "subsystem"
+          ],
+          "key": 1,
+          "distractorRationale": {
+            "0": "A system is the whole set of parts working together toward one job, not a single event triggered by one part's change.",
+            "2": "A subsystem is a smaller system nested inside a bigger one, a physical part of the station, not an event that happens when something changes."
+          }
+        }
+      ],
+      "quote": "An interaction is what happens when one part changes, and a connected part changes with it.",
+      "explain": "The passage defines an interaction directly as what happens when one part changes and a connected part changes with it, the one vocabulary word built around cause and effect rather than around a physical part.  System and subsystem both name a set of parts, not the event of one part affecting another."
+    },
+    {
+      "id": "t1-mc-smallest-piece",
+      "type": "mc",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 2,
+      "stem": "Which vocabulary word matches this clue: the smallest piece inside a subsystem, small enough that a technician can repair it on its own?",
+      "choices": [
+        "component",
+        "system",
+        "interaction",
+        "subsystem"
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "A system is the whole set of parts working together toward one job, the biggest level named, not the smallest piece a technician repairs.",
+        "2": "An interaction is an event, what happens when one part changes and a connected part changes too, not a physical part at all.",
+        "3": "A subsystem sits one level above a component, itself built from several components, so it is not the smallest piece."
+      },
+      "explain": "The field manual defines a component directly as the smallest piece that still does its own work, small enough for a technician to repair on its own, unlike a system, a subsystem, or an interaction, which name a bigger whole or an event rather than one small physical part."
+    },
+    {
+      "id": "t1-mc-two-events-connected",
+      "type": "mc",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 3,
+      "stem": "A station's water subsystem starts reclaiming less water than usual, and a few days later its food subsystem also starts falling behind on crop growth.  Which vocabulary word best names the connection between these two events?",
+      "choices": [
+        "component",
+        "interaction",
+        "system",
+        "subsystem"
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "A component names one single small part, not a connection between two separate events happening in two different subsystems.",
+        "2": "System names the big overall whole, life support itself, not the specific connection between one subsystem's change and another's.",
+        "3": "Subsystem names one of the smaller systems on its own, water or food, not the ripple connecting a change in one to a change in the other."
+      },
+      "explain": "The field manual defines an interaction as what happens when one part changes and a connected part changes with it, exactly the kind of ripple described here between the water subsystem's drop and the food subsystem's later slowdown, so interaction is the word that names the connection itself, not either subsystem alone."
+    },
+    {
+      "id": "t1-mc-nested-correctly",
+      "type": "mc",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 3,
+      "stem": "According to the field manual, which pair correctly shows a smaller system nested inside a bigger one?",
+      "choices": [
+        "A planet nested inside a station",
+        "An interaction nested inside a component",
+        "An organ nested inside an organism",
+        "A system nested inside a subsystem"
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "This reverses the scale.  The manual names a station as nested inside the planet, not the planet inside one station.",
+        "1": "Interaction is not a physical level of scale at all; it is an event, so it cannot be nested inside a component the way one system nests inside another.",
+        "3": "This also reverses the scale.  The manual describes a subsystem as nested inside the bigger system, not a system inside one of its own subsystems."
+      },
+      "explain": "The field manual's own scale passage places an organ as smaller than an organism, one level nested inside the next, the same pattern as cell inside organ inside organism inside station inside planet.  Each wrong choice either reverses which level is bigger or names something, like interaction, that is not a scale level at all."
+    },
+    {
+      "id": "t1-order-scale-of-systems",
+      "type": "order",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 2,
+      "stem": "The field manual says scale works the same way outside a single station: cell, organ, organism, station, planet.  Put these five levels in order from smallest to largest.",
+      "tiles": [
+        "A station, one operative's whole world",
+        "A cell, the smallest level the manual names",
+        "An organ, built from many cells",
+        "The planet, holding every station at once",
+        "An organism, such as one operative, built from many organs"
+      ],
+      "key": [
+        1,
+        2,
+        4,
+        0,
+        3
+      ],
+      "explain": "The manual states the scale directly: a cell is smaller than an organ, an organ is smaller than an organism such as one operative, an organism is smaller than a station, and a station is smaller than the planet holding every station at once, the same nested-system idea the manual applies to the station's own life-support subsystems."
+    },
+    {
+      "id": "t2-ebsr-what-is-ruled-out",
+      "type": "ebsr",
+      "passageId": "p-meridian-status-log",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 3,
+      "partA": {
+        "stem": "By day one hundred eighteen, which subsystem does the log rule out as the source of the drift?",
+        "choices": [
+          "The water subsystem, since it was still reclaiming at ninety-five percent.",
+          "The algae bioreactor, since its readings had started coming in low.",
+          "The algae bioreactor, since it was producing more oxygen than usual.",
+          "Dr. Kessler, since her notes call the drift \"within normal drift.\""
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Neither shift was large enough to worry the crew, and Dr. Kessler's log calls it \"within normal drift.\"",
+          "Its daily readings have gone low, though nothing about its gear has failed.",
+          "Water reclamation has held steady near ninety-five percent.",
+          "One subsystem keeps drawing her attention: the algae bioreactor tucked beneath the food modules, the dome's main source of extra oxygen."
+        ],
+        "key": {
+          "0": 2,
+          "1": 1,
+          "2": 3,
+          "3": 0
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence is about the bioreactor's own falling readings, the subsystem the log is actually suspicious of, not one it rules out.",
+        "2": "This quote names the bioreactor as the one still drawing her attention, not one that is ruled out, and it never says its oxygen output rose.",
+        "3": "This quote is from the earlier day-one-hundred-four entry, which called an earlier, smaller shift normal drift.  It is not the day-one-hundred-eighteen ruling-out sentence."
+      },
+      "explain": "By the final entry, the log states plainly that water reclamation held steady near ninety-five percent, which rules the water subsystem out directly as the source of the drift.  The other choices each point to the bioreactor, the actual suspect, or an earlier, unrelated note instead."
+    },
+    {
+      "id": "t2-ebsr-real-cause-of-slip",
+      "type": "ebsr",
+      "passageId": "p-meridian-dimming-panels",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 3,
+      "partA": {
+        "stem": "What is the real reason the dome's oxygen kept slipping, according to the field report?",
+        "choices": [
+          "Dust on the bioreactor's roof panels blocked light the algae needed to grow quickly.",
+          "The bioreactor's equipment had broken down after one hundred eighteen days.",
+          "The food crops began pulling in more carbon dioxide than usual.",
+          "The water subsystem's filter membrane had clogged and needed cleaning."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "The water subsystem kept reclaiming at ninety-five percent the entire time, and the food crops kept the crew fed, because dust on one component does not touch either of those.",
+          "Less light through the panel means less light reaching the algae, and less light means slower growth.",
+          "Sunlight reaches a shallow tank of green algae through the dome's clear roof panels, the algae uses that light to grow, and growing algae releases oxygen and pulls in carbon dioxide, the same way the dome's food crops do, only faster per square foot of tank.",
+          "The roof panels above the bioreactor were not broken."
+        ],
+        "key": {
+          "0": 1,
+          "1": 3,
+          "2": 2,
+          "3": 0
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence says the opposite: the roof panels were not broken.  The problem was a layer of dust, not broken equipment.",
+        "2": "This sentence explains that algae grows faster than food crops per square foot, not that the food crops themselves started pulling in more carbon dioxide.",
+        "3": "This sentence names the water subsystem as one of the two systems dust did not touch, which rules it out rather than naming it as the cause."
+      },
+      "explain": "The report traces the cause step by step: dust on the roof panels blocked light, less light meant slower algae growth, and slower-growing algae released less oxygen and pulled in less carbon dioxide, which matches exactly what the status log had been tracking.  Each wrong choice either denies part of that chain or names a different subsystem the report explicitly clears."
+    },
+    {
+      "id": "t2-ebsr-why-send-an-operative",
+      "type": "ebsr",
+      "passageId": "p-meridian-status-log",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 2,
+      "partA": {
+        "stem": "Why does Dr. Kessler's log ask Network Command to send an operative in person?",
+        "choices": [
+          "Instrument readings can show that a number is falling but cannot explain why it is falling.",
+          "The dome's instruments had stopped sending any readings at all.",
+          "The crew on board the dome had asked to be replaced.",
+          "Network Command ordered a routine inspection every four weeks."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Four straight weeks of drift have passed, and why is the question the dome needs answered.",
+          "She files this status log every four weeks.",
+          "Sensor readings show a number falling, but they cannot say why.",
+          "Neither shift was large enough to worry the crew, and Dr. Kessler's log calls it \"within normal drift.\""
+        ],
+        "key": {
+          "0": 2,
+          "1": 0,
+          "2": 3,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence says four weeks of drift have passed, meaning the sensors kept reading the whole time.  It does not say the instruments stopped working.",
+        "2": "This sentence is about an earlier, smaller shift the crew was not worried about, not about why an operative gets sent now.",
+        "3": "This sentence describes how often Dr. Kessler files her regular log, a routine schedule, not the specific reason she is now asking for an operative."
+      },
+      "explain": "Dr. Kessler's log gives the reason directly: sensor readings can show a number falling but cannot explain why, and after four weeks of the same unexplained drift, that is exactly the question an operative walking the dome in person can answer.  The other choices mix up unrelated details from earlier in the log."
+    },
+    {
+      "id": "t2-ebsr-why-nothing-else-failed",
+      "type": "ebsr",
+      "passageId": "p-meridian-dimming-panels",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 3,
+      "partA": {
+        "stem": "Why did the food crops and water subsystem stay fine even while the bioreactor's oxygen output dropped?",
+        "choices": [
+          "Dust settled only on the bioreactor's roof panels, a problem that does not touch the other components.",
+          "The food crops and water subsystem do not depend on sunlight at all.",
+          "Dr. Kessler repaired the water subsystem before the dust could spread to it.",
+          "The dome's vents stopped circulating air to every subsystem except the bioreactor."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Wipe the panel down, and the readings should recover within days.",
+          "The dust had been settling since the dome sealed, one hundred eighteen days ago, a little more collecting every week, blown in through the same vents that keep the dome's air mixed.",
+          "Sunlight reaches a shallow tank of green algae through the dome's clear roof panels, the algae uses that light to grow, and growing algae releases oxygen and pulls in carbon dioxide, the same way the dome's food crops do, only faster per square foot of tank.",
+          "It only touched the one component whose whole job depends on light getting through a clear surface."
+        ],
+        "key": {
+          "0": 3,
+          "1": 2,
+          "2": 0,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence actually says the food crops use sunlight too, the same way the algae does.  The passage never claims the food crops or water subsystem skip sunlight.",
+        "2": "This sentence describes what wiping the panel down would do to fix it, a future step, not something Dr. Kessler had already done to the water subsystem.",
+        "3": "This sentence says dust blew in through the same vents that mix the whole dome's air, not that the vents singled out the bioreactor and stopped elsewhere."
+      },
+      "explain": "The report explains that dust only touched the one component whose job depends on light passing through a clear surface, the bioreactor's roof panel, so the water subsystem and food crops, which do not depend on that same clear surface, were never affected.  Each wrong choice invents a cause the passage does not support or misreads a detail about how the dome's systems actually work."
+    },
+    {
+      "id": "t2-ms-why-oxygen-slipped",
+      "type": "ms",
+      "passageId": "p-meridian-dimming-panels",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 3,
+      "stem": "Choose the three details that explain why the dome's oxygen kept slipping.",
+      "choices": [
+        "Dust collected on the bioreactor's roof panels a little more every week.",
+        "The bioreactor's pump had stopped circulating water through its tank.",
+        "Less light reaching the algae meant the algae grew more slowly.",
+        "Carbon dioxide climbed because the crew had stopped exercising.",
+        "Slower-growing algae released less oxygen than a fast-growing tank.",
+        "The water subsystem's filter had also begun collecting dust."
+      ],
+      "key": [
+        0,
+        2,
+        4
+      ],
+      "distractorRationale": {
+        "1": "The report never mentions a pump failure.  The actual problem was dust blocking light, not a broken pump.",
+        "3": "The report never mentions the crew's exercise habits.  The actual cause was less light reaching the algae, not anything about the crew.",
+        "5": "The report says dust only touched the one component whose job depends on light through a clear surface.  The water subsystem was explicitly untouched."
+      },
+      "explain": "The three correct details trace the report's actual cause and effect in order: dust collected weekly on the roof panels, that dust blocked light so the algae grew more slowly, and slower-growing algae released less oxygen.  The three wrong choices each invent a cause or a spreading effect the report never describes."
+    },
+    {
+      "id": "t2-hot-latest-drift-readings",
+      "type": "hottext",
+      "passageId": "p-meridian-status-log",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 2,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that report the day-one-hundred-eighteen entry's own carbon dioxide and oxygen readings, the log's newest and lowest numbers.",
+      "spans": [
+        "Carbon dioxide now reads four hundred fifty-two ppm.",
+        "Oxygen has fallen to nineteen and a half percent.",
+        "Carbon dioxide had climbed to four hundred thirty ppm.",
+        "Oxygen had slipped to twenty percent even.",
+        "Water reclamation has held steady near ninety-five percent."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "The day-one-hundred-eighteen entry reports carbon dioxide at four hundred fifty-two ppm and oxygen down to nineteen and a half percent, the log's newest and lowest numbers.  The other carbon dioxide and oxygen readings come from the earlier day-one-hundred-four entry, and the water-reclamation sentence reports a different subsystem's number entirely."
+    },
+    {
+      "id": "t2-hot-dust-stayed-contained",
+      "type": "hottext",
+      "passageId": "p-meridian-dimming-panels",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that show the dust problem never spread beyond the one component it actually reached.",
+      "spans": [
+        "The water subsystem kept reclaiming at ninety-five percent the entire time, and the food crops kept the crew fed, because dust on one component does not touch either of those.",
+        "It only touched the one component whose whole job depends on light getting through a clear surface.",
+        "The dust had been settling since the dome sealed, one hundred eighteen days ago, a little more collecting every week, blown in through the same vents that keep the dome's air mixed.",
+        "Twenty-eight straight days of buildup added up to the reading Dr. Kessler had been tracking: oxygen sliding down a fraction of a percent at a time."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Both correct sentences state directly that the dust problem stayed confined to the one component whose job depends on light passing through a clear surface, sparing the water subsystem and food crops entirely.  The other two sentences describe how the dust arrived and what its slow buildup looked like on the readings, not which subsystems it did or did not reach."
+    },
+    {
+      "id": "t2-cloze-component-def",
+      "type": "cloze",
+      "passageId": "p-meridian-dimming-panels",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 2,
+      "stem": "Its clear roof panel is the actual {{0}}, the smallest piece a technician can wipe clean and repair.",
+      "blanks": [
+        {
+          "choices": [
+            "component",
+            "subsystem",
+            "interaction"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "A subsystem is a smaller system nested inside a bigger one, like the bioreactor itself; the roof panel is smaller still, the single repairable piece inside that subsystem.",
+            "2": "An interaction is an event, what happens when one part changes and a connected part changes too, not a physical part like the roof panel itself."
+          }
+        }
+      ],
+      "quote": "Its clear roof panel is the actual component, the smallest piece a technician can wipe clean and repair.",
+      "explain": "The report names the roof panel itself as the component, the smallest piece a technician can actually wipe down and repair, while the bioreactor around it counts as its own subsystem, one level up.  Subsystem names the bigger nested system the panel sits inside, and interaction names an event, not a physical part."
+    },
+    {
+      "id": "t2-mc-oxygen-change",
+      "type": "mc",
+      "passageId": "p-meridian-status-log",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 2,
+      "stem": "Between the day-ninety and day-one-hundred-eighteen entries, how did the dome's oxygen reading change?",
+      "choices": [
+        "It rose from about twenty and a half percent to twenty-one percent.",
+        "It stayed exactly the same across all three entries.",
+        "It fell from about twenty and a half percent all the way down to twelve percent.",
+        "It fell from about twenty and a half percent to nineteen and a half percent."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "The log records the opposite direction: oxygen fell across the three entries, it never climbed.",
+        "1": "The log records three different oxygen readings, twenty and a half, twenty, and nineteen and a half percent, so the number did not hold steady.",
+        "2": "Nineteen and a half percent is the log's actual final reading; twelve percent is far lower than anything the log reports."
+      },
+      "explain": "The status log's own three entries show oxygen sliding from about twenty and a half percent on day ninety to nineteen and a half percent by day one hundred eighteen, a slow but steady drop, not a rise, a flat line, or a much larger drop than the numbers actually show."
+    },
+    {
+      "id": "t2-mc-normal-drift-phrase",
+      "type": "mc",
+      "passageId": "p-meridian-status-log",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 2,
+      "stem": "What phrase does Dr. Kessler's log use to describe the smaller shift she saw on day one hundred four, before four more weeks of drift changed her mind?",
+      "choices": [
+        "within normal drift",
+        "an emergency requiring an operative",
+        "a sealed-system failure",
+        "a scheduled maintenance note"
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "That is the log's day-one-hundred-eighteen conclusion, after four straight weeks of drift, not her day-one-hundred-four description of the smaller, earlier shift.",
+        "2": "The log never uses this phrase.  It treats the early shift as ordinary wandering, not a failure of the sealed system itself.",
+        "3": "The log's day-one-hundred-four entry is about an unexpected numeric shift, not a routine maintenance note."
+      },
+      "explain": "Dr. Kessler's own log calls the smaller day-one-hundred-four shift \"within normal drift,\" reflecting her early belief that systems wander before they settle, a belief that only changed once four more weeks of continued drift made the pattern impossible to dismiss."
+    },
+    {
+      "id": "t2-mc-dust-on-a-different-part",
+      "type": "mc",
+      "passageId": "p-meridian-dimming-panels",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 3,
+      "stem": "Suppose the same kind of dust that coated the bioreactor's roof panels had instead settled on the water subsystem's filter membrane.  Based on the report's actual mechanism, what would most likely happen?",
+      "choices": [
+        "The water subsystem would also start producing less oxygen.",
+        "It would not lose oxygen output the way the bioreactor did, since the water subsystem's job does not depend on light passing through a clear surface.",
+        "The water subsystem would immediately stop reclaiming water completely.",
+        "The water subsystem would need a broken pump repaired, the same way a technician fixes any dusty component."
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "Producing oxygen is the bioreactor's own job, tied to sunlight and algae growth.  The water subsystem's job is reclaiming water, not producing oxygen.",
+        "2": "The report's mechanism is a slow buildup that gradually blocks light, not a switch that instantly shuts a subsystem down.",
+        "3": "The report never says the bioreactor's problem was a broken pump; the cause was dust blocking light, a different kind of failure than a mechanical breakdown."
+      },
+      "explain": "The report traces the bioreactor's whole problem to one specific mechanism, dust blocking sunlight from reaching algae that need light to grow, and states plainly that this same dust never touched the water subsystem or food crops because their jobs do not depend on light through a clear surface, so a dusty filter membrane would not follow the same mechanism at all."
+    },
+    {
+      "id": "t2-match-subsystem-status",
+      "type": "match",
+      "passageId": "p-meridian-dimming-panels",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 3,
+      "stem": "Match each part of Meridian Dome to what the two reports say happened to it.",
+      "rowLabels": [
+        "The water subsystem",
+        "The food crops",
+        "The bioreactor's roof panels"
+      ],
+      "colLabels": [
+        "Coated in a fine layer of dust that slowly blocked light from reaching the algae underneath",
+        "Kept the crew fed the whole time, since dust on one component never touched it",
+        "Kept reclaiming water near ninety-five percent, ruled out early as the drift's cause"
+      ],
+      "key": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "explain": "Each part of the dome gets a different fate in the two reports: the water subsystem holds steady and gets ruled out first, the food crops stay fed because dust never reaches them, and the roof panels are the one part the dust actually coats, the true source of the drift.  Matching them by which report mentions them first, rather than by what actually happened to each, is the mistake this table is built to catch."
+    },
+    {
+      "id": "t3-ebsr-what-happens-next",
+      "type": "ebsr",
+      "passageId": "p-halyard-weather-log",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 3,
+      "partA": {
+        "stem": "Based on the five days of readings, what is most likely to happen next at Halyard Point?",
+        "choices": [
+          "The front will likely arrive soon, since pressure kept falling and wind kept strengthening all week.",
+          "The weather will likely turn calm and clear, since the barometer bottomed out on day five.",
+          "The brindle tern colony will likely lose nests, since the count already dropped this week.",
+          "Temperatures will likely rise back toward the seventies, since day two was the warmest day."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "The temperature climbed to seventy-six degrees, and humidity rose to fifty-eight percent.",
+          "On the fifth day, the barometer bottomed out.",
+          "It reached thirty-one miles per hour.",
+          "That count matched last week's."
+        ],
+        "key": {
+          "0": 2,
+          "1": 1,
+          "2": 3,
+          "3": 0
+        }
+      },
+      "distractorRationale": {
+        "1": "Bottoming out means the barometer reached its lowest reading yet, not that the weather is about to turn calm.  A low, still-falling pressure points toward a front, not away from one.",
+        "2": "The log says the nest count matched last week's exactly, which means the colony did not lose nests this week.",
+        "3": "Day two was the warmest day logged, but temperature fell every day after that, from seventy-one down to fifty-eight, so a rise back to the seventies does not match the trend."
+      },
+      "explain": "Across all five days, pressure kept falling, humidity kept climbing, and wind kept getting stronger, reaching thirty-one miles per hour by day five, which are exactly the signs of an approaching front rather than a settling one.  Each wrong choice either misreads what a falling barometer means or picks a detail that contradicts the week's actual trend."
+    },
+    {
+      "id": "t3-ebsr-why-rain-forms",
+      "type": "ebsr",
+      "passageId": "p-halyard-reading-the-front",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 3,
+      "partA": {
+        "stem": "According to the field manual, why does warm air end up as rain when a cold front arrives?",
+        "choices": [
+          "Cold, dense air shoves warm air upward, and rising air cools until its moisture turns to clouds and falls as rain.",
+          "Warm air sinks below the cold air and gets squeezed until moisture is forced out.",
+          "The wind blows the rain in from somewhere else once the front passes.",
+          "Cold air holds more moisture than warm air, so it releases rain as it advances."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Cold air is denser than warm air, which means it packs more mass into the same amount of space.",
+          "Air that has sat over warm ocean water turns warm and picks up moisture as it travels.",
+          "Warm air forced upward cools quickly as it rises, and cooling air cannot hold as much moisture as warm air can, so the moisture condenses into clouds.",
+          "That is exactly why Halyard Point logs every one of them, every single morning."
+        ],
+        "key": {
+          "0": 2,
+          "1": 0,
+          "2": 3,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence says cold air is denser, which is why it slides in low and pushes warm air up, the opposite of warm air sinking below it.",
+        "2": "This sentence is about why the relay logs its readings every morning, not about the actual cause of rain.",
+        "3": "This sentence says warm air, not cold air, is the one that picks up moisture.  Cold air is described as fairly dry, not moisture-holding."
+      },
+      "explain": "The manual explains the chain directly: cold, denser air shoves the warmer air upward, rising air cools quickly, and cooling air cannot hold as much moisture as warm air can, so that moisture condenses into clouds and eventually falls as rain.  Each wrong choice reverses part of that chain or points to an unrelated sentence."
+    },
+    {
+      "id": "t3-ebsr-earliest-warning-sign",
+      "type": "ebsr",
+      "passageId": "p-halyard-weather-log",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 3,
+      "partA": {
+        "stem": "Which single reading gave the earliest warning that conditions were changing at Halyard Point?",
+        "choices": [
+          "Air pressure, since the barometer had already begun slipping by the second day.",
+          "Wind speed, since it was the first number to change noticeably.",
+          "The nest count, since it changed before any of the weather readings did.",
+          "Temperature, since it fell every single day of the log."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "That count matched last week's.",
+          "On the second day, the barometer slipped to thirty inches even.",
+          "The temperature climbed to seventy-six degrees, and humidity rose to fifty-eight percent.",
+          "The wind swung to the northwest and picked up to twenty-two miles per hour."
+        ],
+        "key": {
+          "0": 1,
+          "1": 3,
+          "2": 0,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "Wind speed does not pick up noticeably until the fourth day, well after the barometer had already begun falling on day two.",
+        "2": "The nest count matched the count from the week before, which means it did not change at all during this log.",
+        "3": "Temperature actually rose on the second day, to seventy-six degrees, before it started falling later in the week, so it did not fall every single day."
+      },
+      "explain": "The log's own numbers show the barometer was already slipping by the second day, from thirty and one tenth inches down to thirty inches even, while temperature was still rising and the other readings had not moved yet, making pressure the earliest signal of the change ahead.  The other choices each misread when a reading actually started moving."
+    },
+    {
+      "id": "t3-ebsr-why-track-all-four",
+      "type": "ebsr",
+      "passageId": "p-halyard-reading-the-front",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 2,
+      "partA": {
+        "stem": "Why does the field manual say a relay should track pressure, temperature, humidity, and wind together rather than just one of them?",
+        "choices": [
+          "Tracking all four together can name a front's arrival a full day or more before the sky shows any sign.",
+          "Each number only changes once a year, so together they give a full annual picture.",
+          "Wind direction alone is always enough to prove a front has arrived.",
+          "The four numbers always change in the exact same order, so any one predicts the rest."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Falling temperature and rising wind speed arrive last, right as the front itself reaches the station and the cold air mass takes over completely.",
+          "A shift in wind direction follows close behind, since wind blows toward lower pressure and the front's own advance drags the wind toward it.",
+          "A relay that tracks all four numbers together can call a front's arrival early, a full day or more before the sky gives any warning.",
+          "That is exactly why Halyard Point logs every one of them, every single morning."
+        ],
+        "key": {
+          "0": 2,
+          "1": 3,
+          "2": 1,
+          "3": 0
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence says the relay logs every reading every single morning, a daily habit, not something that happens only once a year.",
+        "2": "This sentence places wind direction as just one sign that follows pressure, not something that proves a front alone.",
+        "3": "This sentence shows temperature and wind speed arrive last in the sequence, after pressure and humidity have already changed, so the four numbers do not all move in lockstep as one single predictor."
+      },
+      "explain": "The manual gives its own stated reason: tracking pressure, temperature, humidity, and wind together lets a relay call a front's arrival a full day or more before the sky itself gives any warning, which no single reading alone can do as reliably.  Each wrong choice invents a claim about the numbers that the passage does not make."
+    },
+    {
+      "id": "t3-ms-signs-of-a-front",
+      "type": "ms",
+      "passageId": "p-halyard-reading-the-front",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 3,
+      "stem": "Choose the three signs that, taken together, mean a front is approaching.",
+      "choices": [
+        "The barometer's reading climbs steadily higher each day.",
+        "Air pressure keeps falling day after day.",
+        "Temperature and wind speed change first, before pressure moves at all.",
+        "Humidity keeps climbing as the days pass.",
+        "The sky stays completely clear the entire time a front approaches.",
+        "Wind direction shifts as the front gets closer."
+      ],
+      "key": [
+        1,
+        3,
+        5
+      ],
+      "distractorRationale": {
+        "0": "The manual says falling pressure, not climbing pressure, is the front's earliest sign.  A barometer climbing higher points away from an approaching front.",
+        "2": "The manual places falling temperature and rising wind speed last in the sequence, arriving only once the front itself reaches the station, not before pressure moves.",
+        "4": "The log shows clouds building and rain starting well before the front fully arrives, so the sky does not stay clear the whole time."
+      },
+      "explain": "The three correct signs, falling pressure, rising humidity, and a shift in wind direction, are the exact signs the field manual names as the front's approach, each explained by the same cold-air-pushing-warm-air-up mechanism.  The three wrong choices each reverse a detail or invent a claim the manual does not support."
+    },
+    {
+      "id": "t3-hot-storm-signals-not-colony",
+      "type": "hottext",
+      "passageId": "p-halyard-weather-log",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the three sentences that report a weather reading signaling the front's closest approach.  Do not tap a sentence about the tern colony, which the relay logs on a separate, routine schedule.",
+      "spans": [
+        "On the fifth day, the barometer bottomed out.",
+        "Humidity reached eighty-eight percent.",
+        "It reached thirty-one miles per hour.",
+        "The brindle tern colony below the relay held at two hundred fourteen active nests.",
+        "That count matched last week's."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "explain": "The barometer bottoming out, humidity climbing to eighty-eight percent, and wind reaching thirty-one miles per hour are the day-five readings that together signal the front's closest approach.  The tern colony's nest count is a separate, routine note that the relay logs every week regardless of the weather, not a weather reading itself."
+    },
+    {
+      "id": "t3-hot-cold-air-mechanism",
+      "type": "hottext",
+      "passageId": "p-halyard-reading-the-front",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that describe what physically happens when cold, dense air pushes into a mass of warmer air.",
+      "spans": [
+        "It slides in low, the way water spreads under a lighter oil, and shoves the warmer air up and out of its way.",
+        "Warm air forced upward cools quickly as it rises, and cooling air cannot hold as much moisture as warm air can, so the moisture condenses into clouds.",
+        "Air masses do not stay in one place forever.",
+        "That single mechanism explains almost everything a weather log records before a front arrives."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Both correct sentences describe the physical chain step by step: the denser cold air slides in low and shoves the warmer air upward, and that rising warm air cools until its moisture condenses into clouds.  The other two sentences make a general claim about air masses moving or about the mechanism's explanatory power, without describing the actual physical steps."
+    },
+    {
+      "id": "t3-cloze-air-mass-def",
+      "type": "cloze",
+      "passageId": "p-halyard-reading-the-front",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 2,
+      "stem": "An {{0}} is a huge body of air that has sat over one kind of ground or ocean long enough to take on that region's temperature and moisture.",
+      "blanks": [
+        {
+          "choices": [
+            "front",
+            "interaction",
+            "air mass"
+          ],
+          "key": 2,
+          "distractorRationale": {
+            "0": "A front is the meeting point where two different air masses collide, not the huge body of air itself.",
+            "1": "An interaction, in the network's own vocabulary, is what happens when one part changes and a connected part changes with it, not a body of air with its own temperature and moisture."
+          }
+        }
+      ],
+      "quote": "An air mass is a huge body of air that has sat over one kind of ground or ocean long enough to take on that region's temperature and moisture.",
+      "explain": "The field manual defines an air mass directly as a huge body of air that has sat in place long enough to take on its region's own temperature and moisture, the starting point for the entire front mechanism the passage explains.  A front is where two air masses meet, and an interaction is a different vocabulary word entirely, for a change ripple between two connected parts."
+    },
+    {
+      "id": "t3-mc-what-is-a-front",
+      "type": "mc",
+      "passageId": "p-halyard-reading-the-front",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 2,
+      "stem": "What is a front, according to the field manual?",
+      "choices": [
+        "A huge body of air that has sat in place long enough to take on a region's own temperature and moisture.",
+        "The lowest barometer reading logged in a single week.",
+        "The meeting point where two different air masses collide.",
+        "The count of active nests the relay logs every week."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "That description defines an air mass, not a front.  A front is where two air masses meet, not one body of air on its own.",
+        "1": "A low barometer reading is one sign a front is near, not the manual's actual definition of the word front.",
+        "3": "The nest count is a separate, routine wildlife note the relay logs regardless of the weather, unrelated to the definition of a front."
+      },
+      "explain": "The field manual defines a front directly as the meeting point where two different air masses collide, with one air mass typically winning out over the other.  Each wrong choice either defines a different term, air mass, or names an unrelated reading from the weather log."
+    },
+    {
+      "id": "t3-mc-strongest-signal-day",
+      "type": "mc",
+      "passageId": "p-halyard-weather-log",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 3,
+      "stem": "Which day's readings, taken together, most strongly signal that the front is about to arrive?",
+      "choices": [
+        "Day one, since the sky stayed clear and the wind was light out of the southwest.",
+        "Day two, since the temperature reached its highest point of the week.",
+        "Day three, since low clouds started building along the horizon.",
+        "Day five, since pressure bottomed out, humidity reached eighty-eight percent, and wind reached thirty-one miles per hour, all at once."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "Clear skies and light wind are the log's calmest readings, the opposite of signs a front is about to arrive.",
+        "1": "A rising temperature on day two came before pressure had fallen very far; by itself it is not the week's strongest combined signal of an arriving front.",
+        "2": "Clouds building on day three is a real early sign, but day five's combination of bottomed-out pressure, high humidity, and strong wind is a stronger, later-stage signal."
+      },
+      "explain": "By day five, every one of the four tracked readings had moved together to its most extreme point of the week: the barometer bottomed out, humidity reached eighty-eight percent, and wind reached thirty-one miles per hour, exactly the combination the field manual says signals a front's closest approach, stronger than any single earlier day's readings."
+    },
+    {
+      "id": "t3-mc-rising-pressure-transfer",
+      "type": "mc",
+      "passageId": "p-halyard-reading-the-front",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 4,
+      "stem": "A different relay reports rising humidity and a shift in wind direction, but its air pressure has been climbing, not falling, all week.  Based on the field manual's own mechanism, is a front likely approaching that relay?",
+      "choices": [
+        "Probably not, since falling pressure is the front's earliest and most basic sign, and this relay's pressure is doing the opposite.",
+        "Yes, since any two matching signs are always enough to prove a front is close, no matter what pressure is doing.",
+        "Yes, since wind direction alone is always enough to prove a front has arrived.",
+        "There is no way to tell anything from this relay's readings."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The manual explains falling pressure as the mechanism's first and most basic sign, tied to an approaching low-pressure system and the warm, less dense air still sitting over the station.  Rising pressure works against that whole mechanism, not just one missing detail among several equal signs.",
+        "2": "The manual never claims wind direction alone is proof.  It explains four readings working together, and this relay's own rising pressure directly contradicts the mechanism a front depends on.",
+        "3": "The mechanism itself gives a clear answer: rising pressure is the opposite of what an approaching low-pressure system produces, so the readings do say something meaningful, just not that a front is likely."
+      },
+      "explain": "The field manual explains falling pressure as the direct result of an approaching low-pressure system, with the warm, less dense air still sitting over the station pressing down less than the colder, denser air on its way, the mechanism's very first step.  A relay whose pressure is rising, not falling, is showing the opposite of that mechanism, so the other two matching signs are not enough on their own to signal a front is close."
+    },
+    {
+      "id": "t3-order-front-stages",
+      "type": "order",
+      "passageId": "p-halyard-reading-the-front",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 3,
+      "stem": "The field manual names the order these four signals appear as a front approaches.  Put them in the order they actually happen.",
+      "tiles": [
+        "Falling temperature and rising wind speed arrive as the front itself reaches the station",
+        "Falling air pressure gives the very first sign that a front is on its way",
+        "A shift in wind direction follows as the front's advance drags the wind toward it",
+        "Rising humidity comes next as the forced-up warm air starts condensing into clouds"
+      ],
+      "key": [
+        1,
+        3,
+        2,
+        0
+      ],
+      "explain": "The manual lays out the sequence directly: falling pressure is the first sign, rising humidity comes next as warm air is forced upward and its moisture condenses, a shift in wind direction follows close behind, and falling temperature with rising wind speed arrive last, right as the front itself reaches the station and the cold air mass takes over."
+    },
+    {
+      "id": "t4-ebsr-why-different-climates",
+      "type": "ebsr",
+      "passageId": "p-two-posts-one-latitude",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 3,
+      "partA": {
+        "stem": "Why do Sable Flats and Cairn Bay have such different climates despite sharing a latitude?",
+        "choices": [
+          "Cairn Bay sits on the coast where wind and currents bring moisture and steady temperatures, while Sable Flats sits far inland without them.",
+          "The sun reaches Cairn Bay at a much steeper angle than it reaches Sable Flats.",
+          "Sable Flats is located at a completely different latitude than Cairn Bay.",
+          "Cairn Bay receives more rainfall because it sits at a higher elevation than Sable Flats."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Sable Flats Post and Cairn Bay Post sit at almost the exact same latitude.",
+          "Open ocean stretches away to its west.",
+          "The sun reaches both at nearly the same angle all year.",
+          "Cairn Bay sits directly on the coast."
+        ],
+        "key": {
+          "0": 3,
+          "1": 2,
+          "2": 0,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence says the sun reaches both posts at nearly the same angle, the opposite of a steep-angle difference explaining the gap.",
+        "2": "This sentence says the two posts sit at almost the exact same latitude, directly contradicting the claim that they are at different latitudes.",
+        "3": "The passage explains the gap through wind, currents, and distance from the ocean.  It never mentions elevation at either post."
+      },
+      "explain": "The passage's own explanation is position relative to the ocean: Cairn Bay sits on the coast, where wind belts and an ocean current bring in moisture and steady temperatures, while Sable Flats sits far inland without either, even though both posts share nearly the same latitude and sun angle.  Each wrong choice either contradicts the shared-latitude setup or invents a cause the passage never gives."
+    },
+    {
+      "id": "t4-ebsr-why-cairn-bay-swings-less",
+      "type": "ebsr",
+      "passageId": "p-two-posts-one-latitude",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 3,
+      "partA": {
+        "stem": "Why does Cairn Bay's temperature swing less across the year than Sable Flats' does?",
+        "choices": [
+          "An ocean current keeps the coastal water in a narrow temperature range, and water changes temperature more slowly than land.",
+          "Cairn Bay has cooler summers because it never receives direct sunlight.",
+          "Sable Flats has a current running along its coast that cools it faster than Cairn Bay.",
+          "Cairn Bay's wind belt blows only in the winter months."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "The sun reaches both at nearly the same angle all year.",
+          "Water changes temperature far more slowly than land does.",
+          "They circle the planet in roughly the same bands every year.",
+          "Sable Flats has no current to moderate it."
+        ],
+        "key": {
+          "0": 1,
+          "1": 0,
+          "2": 3,
+          "3": 2
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence says the sun reaches both posts at nearly the same angle all year, which rules out Cairn Bay simply missing direct sunlight.",
+        "2": "This sentence says Sable Flats has no current at all to moderate it, the opposite of having one that cools it.",
+        "3": "This sentence describes wind belts circling the planet in the same bands all year, not something that only blows during winter."
+      },
+      "explain": "The passage names the mechanism directly: a current keeps the water near Cairn Bay within a narrow temperature range, and because water changes temperature far more slowly than land does, the air above that steady water swings less between seasons than Sable Flats' land-heated air does.  Each wrong choice misassigns the current, the sunlight, or the wind belt's timing."
+    },
+    {
+      "id": "t4-ebsr-why-trust-the-average",
+      "type": "ebsr",
+      "passageId": "p-sable-cairn-decade",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 3,
+      "partA": {
+        "stem": "Why does Network Command trust the ten-year average over a single wet or dry year at Sable Flats?",
+        "choices": [
+          "A single year, like the wet year of fourteen inches, can give a visitor a wrong idea of what most years there are actually like.",
+          "A single year always reports the exact same rainfall as the ten-year average.",
+          "Ten-year averages are recalculated only once, so they never need checking again.",
+          "Sable Flats has never had a drought year worth recording."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "One drought year reached barely five inches of rain.",
+          "One unusually wet year reached fourteen.",
+          "Judging the whole post by that single year would be a mistake.",
+          "The ten-year average has still held close to nine every time Network Command has recalculated it."
+        ],
+        "key": {
+          "0": 2,
+          "1": 1,
+          "2": 3,
+          "3": 0
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence names one unusually wet year at fourteen inches, far above the nine-inch average, which shows a single year can differ sharply rather than always match it.",
+        "2": "This sentence says the average gets recalculated every time Network Command checks it, which means it is checked repeatedly, not just once.",
+        "3": "This sentence names a drought year that reached barely five inches, which is itself a recorded drought year."
+      },
+      "explain": "The passage gives the reason directly: a visitor who landed during the one wet year of fourteen inches and judged the whole post by that single year would carry home a wrong idea of what most years are actually like, which is exactly why the ten-year average exists.  Each wrong choice misreads a detail about how often or how consistently the numbers are recorded."
+    },
+    {
+      "id": "t4-ebsr-which-post-swings-more",
+      "type": "ebsr",
+      "passageId": "p-sable-cairn-decade",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 3,
+      "partA": {
+        "stem": "Which post's temperatures swing more between summer and winter, and by how much do the two posts differ?",
+        "choices": [
+          "Sable Flats swings more, by about thirty-five degrees more than Cairn Bay's swing.",
+          "Cairn Bay swings more, since its summer high of seventy-four degrees is warmer than Sable Flats' winter low.",
+          "Both posts swing by the exact same amount each year.",
+          "Sable Flats swings less, since its winter low of twenty-eight degrees is close to freezing."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Its average winter low has run forty-one degrees.",
+          "Its average summer high has run ninety-six degrees.",
+          "That is a swing of only thirty-three degrees between seasons.",
+          "That is a swing of sixty-eight degrees between the two seasons."
+        ],
+        "key": {
+          "0": 3,
+          "1": 0,
+          "2": 2,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "Comparing a summer high to a winter low from two different posts does not measure either post's own seasonal swing.  Cairn Bay's own swing is only thirty-three degrees.",
+        "2": "The two posts report very different swings, sixty-eight degrees at Sable Flats against thirty-three at Cairn Bay, not the same amount.",
+        "3": "A winter low near freezing does not by itself measure the size of a swing.  Sable Flats' summer high of ninety-six degrees against that same winter low is what makes its sixty-eight-degree swing the larger one."
+      },
+      "explain": "The tables report a sixty-eight-degree swing at Sable Flats against a thirty-three-degree swing at Cairn Bay, meaning Sable Flats swings roughly thirty-five degrees more across the year than Cairn Bay does.  Each wrong choice either compares mismatched numbers or misreads which post actually swings more."
+    },
+    {
+      "id": "t4-ms-why-cairn-bay-is-wetter",
+      "type": "ms",
+      "passageId": "p-two-posts-one-latitude",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 3,
+      "stem": "Choose the three facts that explain why Cairn Bay's climate is wetter and steadier than Sable Flats'.",
+      "choices": [
+        "Cairn Bay sits directly on the coast, with open ocean to its west.",
+        "Wind reaching Cairn Bay still carries the moisture it picked up crossing the ocean.",
+        "Cairn Bay sits at a much lower latitude than Sable Flats.",
+        "Sable Flats receives the exact same ocean current as Cairn Bay.",
+        "An ocean current keeps the water near Cairn Bay within a narrow temperature range.",
+        "Sable Flats' distance from the ocean has no effect on its rainfall."
+      ],
+      "key": [
+        0,
+        1,
+        4
+      ],
+      "distractorRationale": {
+        "2": "The passage says the two posts sit at almost the exact same latitude, not that Cairn Bay is at a much lower one.",
+        "3": "The passage says Sable Flats has no current at all to moderate it, the opposite of sharing Cairn Bay's current.",
+        "5": "The passage explains that the wind belt drops most of its moisture crossing the hundreds of miles of dry land before reaching Sable Flats, which is exactly an effect of its distance from the ocean."
+      },
+      "explain": "The three correct facts, coastal position, ocean-carried moisture, and a moderating current, are the passage's own stated reasons Cairn Bay stays wetter and steadier than an inland post at the same latitude.  The three wrong choices each contradict a detail the passage states in the opposite direction."
+    },
+    {
+      "id": "t4-hot-weather-vs-climate-def",
+      "type": "hottext",
+      "passageId": "p-two-posts-one-latitude",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 2,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that state the passage's own definitions of weather and climate.",
+      "spans": [
+        "Climate is the pattern averaged over years.",
+        "Weather is what is happening outside the window this morning.",
+        "These long-term patterns do not change because of one storm.",
+        "A single storm or a single clear week can happen at either station."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "The passage gives its own working definitions directly: climate is the pattern averaged over years, and weather is what is happening outside the window this morning.  The other two sentences apply that distinction to an example, a single storm not changing the long-term pattern, but neither one is itself the definition."
+    },
+    {
+      "id": "t4-hot-wind-and-current-mechanisms",
+      "type": "hottext",
+      "passageId": "p-two-posts-one-latitude",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that each name a specific mechanism behind the two posts' different climates, one about wind and one about ocean current.",
+      "spans": [
+        "The wind belt crossing this latitude blows from the west, off the ocean, before it reaches Sable Flats.",
+        "A current moving along Cairn Bay's coastline keeps the water near the post within a narrow temperature range all year.",
+        "Unequal heating across the planet drives global wind belts.",
+        "Ocean currents add a second layer to the difference."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "The two correct sentences each name a specific, concrete mechanism at work: the same wind belt drying out over hundreds of miles of land before it reaches Sable Flats, and a coastal current keeping Cairn Bay's water in a narrow temperature range.  The other two sentences introduce wind belts and currents as general topics without stating the specific mechanism that makes the two posts differ."
+    },
+    {
+      "id": "t4-cloze-unequal-heating",
+      "type": "cloze",
+      "passageId": "p-two-posts-one-latitude",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 2,
+      "stem": "{{0}} across the planet drives global wind belts.",
+      "blanks": [
+        {
+          "choices": [
+            "Ocean currents",
+            "Unequal heating",
+            "Regional climate"
+          ],
+          "key": 1,
+          "distractorRationale": {
+            "0": "Ocean currents are named as a second, separate layer that adds to the difference between the two posts, not the cause of the wind belts themselves.",
+            "2": "Regional climate is the overall pattern the passage is trying to explain, the effect of these mechanisms, not the cause of the wind belts."
+          }
+        }
+      ],
+      "quote": "Unequal heating across the planet drives global wind belts.",
+      "explain": "The passage names unequal heating across the planet as the direct cause of the global wind belts that carry moisture toward Cairn Bay and dry out crossing the land toward Sable Flats.  Ocean currents are introduced afterward as a separate mechanism, and regional climate is the overall pattern these mechanisms together produce."
+    },
+    {
+      "id": "t4-mc-steady-crop-post",
+      "type": "mc",
+      "passageId": "p-sable-cairn-decade",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 3,
+      "stem": "Based on the ten-year averages, which post would most likely support crops that need a steady, narrow range of temperatures year-round?",
+      "choices": [
+        "Sable Flats, since its winter low of twenty-eight degrees is close to freezing.",
+        "Cairn Bay, since its ocean current keeps its temperature swings much smaller than Sable Flats' swings.",
+        "Sable Flats, since it receives less rainfall and therefore steadier weather overall.",
+        "Neither post shows any meaningful difference in temperature swing."
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "A cold winter low by itself does not describe a narrow, steady range.  Sable Flats posts the wider sixty-eight-degree swing between its seasons, not the steadier one.",
+        "2": "The tables show rainfall and temperature swing as two separate measurements.  Less rain does not translate into a steadier temperature range; Sable Flats posts the wider swing of the two posts.",
+        "3": "The tables report a real, sizable difference, a sixty-eight-degree swing at Sable Flats against a thirty-three-degree swing at Cairn Bay, roughly double."
+      },
+      "explain": "Cairn Bay's ten-year table posts a thirty-three-degree swing between summer and winter, roughly half of Sable Flats' sixty-eight-degree swing, and the passage ties that steadiness directly to an ocean current that keeps the coastal water within a narrow temperature range all year, making Cairn Bay the better fit for crops that need steady conditions."
+    },
+    {
+      "id": "t4-mc-weather-word",
+      "type": "mc",
+      "passageId": "p-two-posts-one-latitude",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 2,
+      "stem": "Which term names \"what is happening outside the window this morning,\" as opposed to a pattern averaged over years?",
+      "choices": [
+        "climate",
+        "front",
+        "weather",
+        "air mass"
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "Climate is the passage's own term for the pattern averaged over years, the opposite of what is happening outside the window on one particular morning.",
+        "1": "A front is the meeting point of two air masses, a cause of a single weather event, not the general word for today's conditions outside the window.",
+        "3": "An air mass is a huge body of air with its own temperature and moisture, one piece of the weather mechanism, not the general term for today's conditions."
+      },
+      "explain": "The passage defines weather directly as what is happening outside the window this morning, in deliberate contrast to climate, the pattern averaged over years, the same distinction Tile 3's field manual sets up with front and air mass, two different vocabulary words for two different pieces of the mechanism."
+    },
+    {
+      "id": "t4-mc-third-post-transfer",
+      "type": "mc",
+      "passageId": "p-two-posts-one-latitude",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 4,
+      "stem": "A third post sits at the same latitude as Sable Flats and Cairn Bay, but far inland with no coastal current anywhere nearby.  Based on the passage's own explanation, would this new post most likely resemble Sable Flats or Cairn Bay?",
+      "choices": [
+        "Cairn Bay, since every post at the same latitude eventually reports a similar climate.",
+        "Cairn Bay, since inland posts always receive more ocean-carried moisture than coastal posts.",
+        "Neither post, since latitude is the only factor the passage says matters.",
+        "Sable Flats, since being far from the ocean means no current and no ocean-carried moisture to moderate its temperature or add rainfall."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "The passage's whole point is that shared latitude guarantees neither post a similar climate; Sable Flats and Cairn Bay share a latitude and still report very different conditions.",
+        "1": "The passage explains the opposite: wind loses its ocean-picked-up moisture the farther it travels over dry land, so an inland post receives less of that moisture, not more.",
+        "2": "The passage names position relative to the ocean, wind belts, and ocean currents as the real mechanisms behind the difference, explicitly stating that latitude alone does not decide a post's climate."
+      },
+      "explain": "The passage explains Sable Flats' climate through its distance from open water: no ocean current to moderate its temperature swings and a wind belt that has already dropped most of its moisture crossing hundreds of miles of dry land before arriving.  A third inland post with no nearby current would share that same lack of moderating mechanisms, making it resemble Sable Flats rather than the coastal Cairn Bay."
+    },
+    {
+      "id": "t4-match-pattern-to-cause",
+      "type": "match",
+      "passageId": "p-two-posts-one-latitude",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 3,
+      "stem": "Match each climate pattern to the mechanism the passages say causes it.",
+      "rowLabels": [
+        "Cairn Bay's temperature swings only thirty-three degrees across the year",
+        "Sable Flats' temperature swings sixty-eight degrees across the year",
+        "Cairn Bay averages forty-two inches of rain a year",
+        "Sable Flats averages only nine inches of rain a year"
+      ],
+      "colLabels": [
+        "A current keeps the coastal water in a narrow temperature range all year",
+        "No current moderates the post, so its land surface heats and cools fast",
+        "The wind still carries its ocean-picked-up moisture when it reaches the coast",
+        "The wind has already dropped most of its moisture crossing hundreds of miles of dry land"
+      ],
+      "key": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "explain": "Each pattern traces back to a specific, named mechanism: an ocean current moderates Cairn Bay's temperature, Sable Flats has no such current to moderate its own land-heated swings, and the same wind belt arrives moist at the coast but dry at Sable Flats after crossing hundreds of miles of land.  Matching a pattern to the wrong post's mechanism is exactly the confusion this table is built to catch."
+    },
+    {
+      "id": "t5-ebsr-real-cause-of-drop",
+      "type": "ebsr",
+      "passageId": "p-halyard-nesting-record",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 3,
+      "partA": {
+        "stem": "What is the real cause of the colony's dropping chick survival rate, according to the record?",
+        "choices": [
+          "The chicks now hatch weeks before the herring, their one food source, arrive.",
+          "The colony has been laying fewer eggs every year.",
+          "The herring have stopped arriving at Halyard Point entirely.",
+          "The nesting date itself, no matter when it falls, causes lower survival."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "In the first logged season, the colony's first eggs came on April seventh.",
+          "The herring's arrival date has held near April twenty-first every season.",
+          "The colony's chicks now hatch weeks before their food source even arrives.",
+          "It was never the nesting date by itself."
+        ],
+        "key": {
+          "0": 2,
+          "1": 0,
+          "2": 1,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence is about when the eggs appear, not how many eggs the colony lays.  The record never reports a falling egg count.",
+        "2": "This sentence says the herring's arrival date has held steady near April twenty-first, which means they still arrive every season, just on their own schedule.",
+        "3": "The record states the opposite directly: it was never the nesting date by itself that mattered."
+      },
+      "explain": "The record's own closing description names the real cause: the colony's chicks now hatch weeks before the herring, their one food source, even arrive, a reversal from the colony's early seasons, when the herring were already there and settled in.  Each wrong choice either invents a detail the record does not report or contradicts its own stated conclusion."
+    },
+    {
+      "id": "t5-ebsr-two-different-clocks",
+      "type": "ebsr",
+      "passageId": "p-halyard-nesting-record",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 3,
+      "partA": {
+        "stem": "Why has the colony's nesting date drifted earlier while the herring's arrival date has stayed almost the same?",
+        "choices": [
+          "Terns respond to warming spring air and water, while herring respond to a slower-changing ocean-temperature clock far out at sea.",
+          "Terns and herring both respond to the exact same signal, so both dates should have shifted together.",
+          "The herring have simply chosen to arrive later every year on purpose.",
+          "The terns' nesting date is fixed by the calendar and cannot actually change."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "That is twenty-eight days earlier than the colony's first logged year.",
+          "Their bodies respond once conditions cross a warm mark, and thirty years of warming have pulled that mark earlier.",
+          "The herring's arrival date has held near April twenty-first every season.",
+          "That clock runs slower than the coastal air the terns respond to."
+        ],
+        "key": {
+          "0": 1,
+          "1": 3,
+          "2": 2,
+          "3": 0
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence describes the terns' own signal, the spring air and water warming past a threshold, which is a different, faster-changing cue than the herring's ocean-temperature clock.",
+        "2": "The record says the herring's arrival date has held near the same date every season, which is the opposite of choosing to arrive later.",
+        "3": "This sentence reports the nesting date moving twenty-eight days earlier over thirty seasons, which directly shows the date can and did change."
+      },
+      "explain": "The passage names two separate clocks: terns respond to spring air and water warming past a threshold, a fast-moving signal, while herring time their arrival by ocean temperature far out at sea, a clock that runs slower than the coastal air the terns respond to, so the two dates have drifted apart instead of moving together.  Each wrong choice either merges the two clocks or misreads which date actually shifted."
+    },
+    {
+      "id": "t5-ebsr-steady-vs-bouncy",
+      "type": "ebsr",
+      "passageId": "p-network-synthesis",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 4,
+      "partA": {
+        "stem": "Why does Network Command treat the carbon dioxide and fuel-use trends as signs of a steady, human-linked cause rather than normal weather bouncing around?",
+        "choices": [
+          "Both numbers climbed by close to the same amount every single year for ten years without ever dropping back.",
+          "The temperature line also climbed by the exact same amount every year, just like the other two.",
+          "Carbon dioxide and fuel use are measured at only one station, so they cannot be compared to anything.",
+          "The carbon dioxide line dropped back to normal levels several times over the ten years."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Every station on the network logs its local temperature.",
+          "Some years rose sharply.",
+          "Not one of the past ten years has dropped back.",
+          "That climb has stayed steady, year after year."
+        ],
+        "key": {
+          "0": 2,
+          "1": 3,
+          "2": 0,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence is actually about the temperature line, described elsewhere as bouncing, some years rising sharply and one year barely rising at all, not climbing by the same amount every year.",
+        "2": "The passage describes carbon dioxide and fuel-use data gathered network-wide, across every station, not from just one location.",
+        "3": "The passage says the opposite: that climb has stayed steady, year after year, without a single year dropping back."
+      },
+      "explain": "Network Command draws the distinction directly: a signal that bounces up and down, like the temperature line, points to short-term natural causes, while a signal that climbs the same steady amount every year without ever reversing, like the carbon dioxide and fuel-use lines together, points to a steady, ongoing cause instead.  Each wrong choice either misassigns the bouncing pattern or denies the steady climb the report describes."
+    },
+    {
+      "id": "t5-ebsr-one-planetary-pattern",
+      "type": "ebsr",
+      "passageId": "p-network-synthesis",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 4,
+      "partA": {
+        "stem": "How does the network-wide warming pattern explain Halyard Point's own local mystery?",
+        "choices": [
+          "A warmer average is why Halyard Point's spring keeps arriving earlier than the colony's food supply can follow.",
+          "The warming pattern has nothing to do with Halyard Point, since its mystery is only about its colony's food source, not the climate.",
+          "Halyard Point's mystery is caused by a problem unique to that one relay's own equipment.",
+          "The warming pattern explains Sable Flats, but Halyard Point's mystery remains unexplained."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "The colony's food supply cannot keep up.",
+          "That steady climb is the one pattern.",
+          "One station cannot see a planetary pattern.",
+          "It is why Halyard Point's spring keeps arriving earlier."
+        ],
+        "key": {
+          "0": 3,
+          "1": 0,
+          "2": 2,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "This quote, on its own, only names the food-supply symptom.  The sentence right before it in the report is what ties that symptom to the warmer average, so the report connects the two directly even though this one line does not mention climate by itself.",
+        "2": "This sentence is about a single station's limited view of the wider pattern, not about any equipment problem at Halyard Point.",
+        "3": "The report calls the steady climb the one pattern underneath every local mystery this year has produced, which explicitly includes Halyard Point's, not just Sable Flats'."
+      },
+      "explain": "The synthesis draws the connection directly: a warmer average is why Halyard Point's spring keeps arriving earlier than the colony's food supply can follow, tying its local mystery to the same network-wide pattern explaining Sable Flats' dry years.  Each wrong choice tries to separate Halyard Point's mystery from that shared cause."
+    },
+    {
+      "id": "t5-ms-the-adaptation-limit",
+      "type": "ms",
+      "passageId": "p-halyard-nesting-record",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 3,
+      "stem": "Choose the three facts that together explain the colony's adaptation limit.",
+      "choices": [
+        "The colony has stopped laying eggs earlier than April at all.",
+        "The colony's first-egg date has moved twenty-eight days earlier over thirty seasons.",
+        "The herring's arrival date has held close to the same date every season.",
+        "The fledge rate has climbed as the nesting date moved earlier.",
+        "The herring's arrival date has also moved twenty-eight days earlier, matching the terns.",
+        "The gap between nesting and the herring's arrival has grown wider each season."
+      ],
+      "key": [
+        1,
+        2,
+        5
+      ],
+      "distractorRationale": {
+        "0": "The thirtieth season's first eggs came on March tenth, before April even began, so the colony has not stopped laying eggs earlier than April.",
+        "3": "The fledge rate dropped from seventy-six percent in the first season to thirty-nine percent in the thirtieth, the opposite of climbing.",
+        "4": "The herring's arrival date has drifted by only about three days in either direction, nowhere close to the twenty-eight-day shift in the nesting date."
+      },
+      "explain": "The three correct facts trace the colony's actual adaptation limit: its nesting date shifted twenty-eight days earlier while the herring's own arrival date barely moved, so the gap between the two grew wider every season, which is exactly the mismatch the record's fledge-rate column tracks.  The three wrong choices each invert a number the record reports in the opposite direction."
+    },
+    {
+      "id": "t5-hot-gap-not-date",
+      "type": "hottext",
+      "passageId": "p-halyard-nesting-record",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that state what the fledge-rate column has actually been tracking all along.",
+      "spans": [
+        "The gap between the two dates is what the fledge-rate column has been tracking.",
+        "It was never the nesting date by itself.",
+        "The colony is not nesting earlier by chance, since terns time their first eggs to the spring air and water.",
+        "The colony's chicks now hatch weeks before their food source even arrives."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Both correct sentences state the record's own conclusion directly: the fledge-rate column tracks the growing gap between the two dates, not the nesting date on its own.  The other two sentences explain why the nesting date shifted and describe the consequence for the chicks, real details, but neither one is the record's own naming of what the column tracks."
+    },
+    {
+      "id": "t5-hot-bouncing-vs-steady",
+      "type": "hottext",
+      "passageId": "p-network-synthesis",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the two sentences that describe a signal bouncing up and down rather than climbing steadily.",
+      "spans": [
+        "Some years rose sharply.",
+        "One year barely rose at all.",
+        "Not one of the past ten years has dropped back.",
+        "That climb has stayed steady, year after year."
+      ],
+      "key": [
+        0,
+        1
+      ],
+      "explain": "Both correct sentences describe the temperature line's up-and-down bounce, some years rising sharply and other years barely rising at all, the pattern the report ties to short-term natural causes.  The other two sentences describe the carbon dioxide and fuel-use lines instead, which never drop back and climb by a steady amount every year."
+    },
+    {
+      "id": "t5-cloze-herring-clock",
+      "type": "cloze",
+      "passageId": "p-halyard-nesting-record",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 3,
+      "stem": "That {{0}} runs slower than the coastal air the terns respond to.",
+      "blanks": [
+        {
+          "choices": [
+            "clock",
+            "gap",
+            "mark"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "The gap is the growing difference between the nesting date and the herring's arrival date, not the herring's own internal timing mechanism.",
+            "2": "The warm mark is the temperature threshold the terns respond to, a different animal's cue, not the herring's own ocean-temperature timing."
+          }
+        }
+      ],
+      "quote": "That clock runs slower than the coastal air the terns respond to.",
+      "explain": "The record names the herring's own ocean-temperature timing mechanism a clock, and states it runs slower than the coastal air signal the terns respond to, which is exactly why the two species' schedules have drifted apart.  Gap and mark each name a different piece of the record's own vocabulary, not the herring's timing mechanism itself."
+    },
+    {
+      "id": "t5-mc-herring-vs-nesting-shift",
+      "type": "mc",
+      "passageId": "p-halyard-nesting-record",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 3,
+      "stem": "Over the thirty logged seasons, how did the herring's arrival date compare to the tern colony's nesting date?",
+      "choices": [
+        "The herring's arrival date barely moved while the nesting date shifted twenty-eight days earlier.",
+        "Both dates shifted by almost exactly the same amount, staying in step with each other.",
+        "The herring's arrival date shifted earlier by even more than the nesting date did.",
+        "Neither date changed at all across the thirty seasons."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The record reports a twenty-eight-day shift in the nesting date against only about a three-day drift in the herring's arrival date, far from matching each other.",
+        "2": "The record states the herring's arrival date has held near April twenty-first every season, drifting only about three days, nowhere close to the nesting date's twenty-eight-day shift.",
+        "3": "The nesting date moved from April seventh in the first season to March tenth in the thirtieth, a real and recorded twenty-eight-day change."
+      },
+      "explain": "The thirty-season record shows two very different clocks: the tern colony's first-egg date moved twenty-eight days earlier over thirty seasons, responding to warming spring air and water, while the herring's own ocean-temperature-driven arrival date held close to the same date, drifting only about three days either way, which is exactly why the gap between the two kept widening."
+    },
+    {
+      "id": "t5-mc-bouncing-instrument-transfer",
+      "type": "mc",
+      "passageId": "p-network-synthesis",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 4,
+      "stem": "A new instrument at a different station logs a number that rises sharply one year, drops the next, then rises again the year after.  Based on the synthesis report's own reasoning, what does this pattern most likely point to?",
+      "choices": [
+        "A steady, human-linked cause, since any change at all over three years counts as the same kind of signal.",
+        "A short-term natural cause, since the number is bouncing up and down rather than climbing steadily.",
+        "An instrument malfunction, since real data should never rise and fall from year to year.",
+        "Nothing can be concluded from only three years of a new instrument's data."
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "The report specifically distinguishes a bouncing signal from a steady one; a number that rises, drops, then rises again is bouncing, not climbing the same amount every year the way carbon dioxide and fuel use do.",
+        "2": "The report treats the temperature line's own up-and-down bounce as normal and expected, caused by ordinary short-term factors, not as evidence of broken equipment.",
+        "3": "The report does draw a conclusion from a bouncing pattern like this one: it treats that up-and-down shape itself as the signature of short-term natural causes, distinct from a steady climbing trend."
+      },
+      "explain": "Network Command's own rule distinguishes the two shapes directly: a signal that bounces up and down, some years rising sharply and other years barely moving, points to short-term natural causes, while only a signal that climbs by close to the same steady amount every year, without ever reversing, points to the network's ongoing, human-linked pattern.  A rise-drop-rise instrument reading matches the bouncing shape, not the steady one."
+    },
+    {
+      "id": "t5-mc-why-one-station-cannot-see-it",
+      "type": "mc",
+      "passageId": "p-network-synthesis",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 2,
+      "stem": "According to the synthesis report, why can a single field station not see the network's full warming pattern on its own?",
+      "choices": [
+        "A single station's instruments are never accurate enough to be trusted.",
+        "Network Command deliberately hides the combined data from individual stations.",
+        "A lone station can only see its own local report, not the pattern across every station and year together.",
+        "Each station's local mystery has nothing to do with any of the others."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "The report never questions any single station's instrument accuracy.  Its point is about scope, one report versus every station's reports together, not about accuracy.",
+        "1": "The report never describes Command withholding data.  It explains that the pattern only becomes visible once every station's separate reports are read side by side.",
+        "3": "The report's entire point is the opposite: every local mystery, Halyard Point's and Sable Flats', turns out to share the same underlying planetary cause once read together."
+      },
+      "explain": "The synthesis report states plainly that one station cannot see a planetary pattern and cannot see past its own single report, which is exactly why the pattern only becomes visible once the network reads every station's local mystery side by side, rather than any one relay's readings being unreliable or hidden."
+    },
+    {
+      "id": "t5-short-what-is-widening",
+      "type": "shorttext",
+      "passageId": "p-halyard-nesting-record",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 3,
+      "stem": "In eight words or fewer, name what the record shows chicks now do relative to their food source, the real cause behind the falling fledge rate.",
+      "accept": [
+        "hatch before the herring arrive",
+        "hatch weeks before the herring",
+        "they hatch before the herring arrives",
+        "the chicks hatch before the herring",
+        "hatch before their food source arrives",
+        "hatch before the herring shows up"
+      ],
+      "maxWords": 8,
+      "explain": "The record's own closing description names the real cause directly: the colony's chicks now hatch weeks before the herring, their one food source, even arrive, a reversal from the colony's early seasons, when the herring were already there and settled in.  It was never simply the nesting date by itself that mattered."
+    },
+    {
+      "id": "t6-ebsr-which-proposal-lacks-authority",
+      "type": "ebsr",
+      "passageId": "p-final-deployment-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 4,
+      "partA": {
+        "stem": "Which proposal fails Command's constraint that the response must use only authority the Network already holds?",
+        "choices": [
+          "Proposal C, since it depends on a fishery authority that does not answer to the Network.",
+          "Proposal A, since the Network has never run a feeding station before.",
+          "Proposal B, since fencing requires authority the Network does not have over its own land.",
+          "All three proposals fail this constraint equally."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "That authority covers its posts and the land around them.",
+          "The Network runs feeding stations at two other posts.",
+          "The fishery authority does not answer to the Network, though.",
+          "The authority to run one is not in question."
+        ],
+        "key": {
+          "0": 2,
+          "1": 1,
+          "2": 0,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence says the Network already runs feeding stations at two other posts, which means it has done this before, not never.",
+        "2": "This sentence says the Network's own authority covers its posts and the land around them, exactly where fencing would go, so fencing does not require authority it lacks.",
+        "3": "This sentence says the authority question for Proposal A is not even in question, meaning it clearly passes, so the three proposals do not all fail equally."
+      },
+      "explain": "The report states plainly that the fishery authority does not answer to the Network, which means Proposal C would need cooperation from outside the Network's own authority, exactly the kind of authority Command's third constraint rules out.  The other choices each misread which proposal actually has that authority problem."
+    },
+    {
+      "id": "t6-ebsr-why-proposal-b-still-fails",
+      "type": "ebsr",
+      "passageId": "p-final-deployment-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 4,
+      "partA": {
+        "stem": "Proposal B fits Command's time and cost limits easily.  Why might it still fail to solve the colony's actual problem?",
+        "choices": [
+          "The record shows chicks are starving during the food gap, a problem fencing against predators does not touch.",
+          "The fencing would cost far more than the field budget allows.",
+          "Fencing cannot be built within the one-season time limit Command set.",
+          "The Network lacks the authority to build fencing on its own land."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "That authority covers its posts and the land around them.",
+          "It can go up within days.",
+          "Fencing does nothing to touch that problem.",
+          "The fencing is inexpensive."
+        ],
+        "key": {
+          "0": 2,
+          "1": 3,
+          "2": 1,
+          "3": 0
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence says the fencing is inexpensive, the opposite of costing far more than the budget allows.",
+        "2": "This sentence says fencing can go up within days, well within any one-season time limit.",
+        "3": "This sentence says the Network's own authority covers its posts and the land around them, exactly where fencing would go."
+      },
+      "explain": "The report names the real weakness directly: the record shows chicks starving during the gap before the herring arrive, and fencing, which only keeps predators away from eggs and chicks, does nothing to touch that specific problem, even though it easily satisfies every one of Command's other constraints.  Each wrong choice invents a time, cost, or authority problem the report explicitly rules out."
+    },
+    {
+      "id": "t6-ebsr-one-week-is-not-climate",
+      "type": "ebsr",
+      "passageId": "p-two-posts-one-latitude",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 3,
+      "partA": {
+        "stem": "An operative back at Sable Flats logs one unusually wet week and radios that the post's climate has changed.  What is the flaw in that call?",
+        "choices": [
+          "One week of weather is not the same as a change in the long-term climate pattern averaged over years.",
+          "Sable Flats never receives rain of any kind, so the report must be a mistake.",
+          "Climate and weather mean exactly the same thing, so the call is correct.",
+          "The operative should have checked whether the wind belt shifted before saying anything."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Weather is what is happening outside the window this morning.",
+          "A single storm or a single clear week can happen at either station.",
+          "Climate is the pattern averaged over years.",
+          "These long-term patterns do not change because of one storm."
+        ],
+        "key": {
+          "0": 2,
+          "1": 3,
+          "2": 0,
+          "3": 1
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence says the opposite: long-term patterns do not change because of one storm, so a single storm cannot prove the climate itself has changed.",
+        "2": "This sentence defines weather narrowly, as what is happening outside the window this morning, a single moment, which the passage treats as different from climate, the pattern averaged over years.",
+        "3": "This sentence is about a single storm or clear week happening at a station, not about checking wind belts specifically, which the passage never suggests as a required step here."
+      },
+      "explain": "The passage draws the distinction directly: climate is the pattern averaged over years, while a single storm or a single clear week, exactly like the wet week the operative logged, can happen at either station without its long-term climate actually changing.  Each wrong choice either denies that distinction or invents a step the passage never asks for."
+    },
+    {
+      "id": "t6-ebsr-one-year-is-not-proof",
+      "type": "ebsr",
+      "passageId": "p-network-synthesis",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 4,
+      "partA": {
+        "stem": "A new operative argues that this year's especially warm reading at one station is, by itself, solid proof of the network's warming pattern.  What is the flaw in that argument?",
+        "choices": [
+          "A single year's temperature reading bounces naturally, so only the longer, steady trend across many stations and years actually counts as evidence.",
+          "Temperature readings are never reliable at any single station.",
+          "The warming pattern can only be proven using carbon dioxide data, never temperature.",
+          "One especially warm year always matches the carbon dioxide trend exactly."
+        ],
+        "key": 0
+      },
+      "partB": {
+        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "choices": [
+          "Every station on the network logs its local temperature.",
+          "Every station's air-sampling equipment also logs atmospheric carbon dioxide.",
+          "A signal that bounces up and down, like the temperature line, usually points to short-term natural causes.",
+          "Some years rose sharply."
+        ],
+        "key": {
+          "0": 2,
+          "1": 0,
+          "2": 1,
+          "3": 3
+        }
+      },
+      "distractorRationale": {
+        "1": "This sentence says every station logs its own local temperature as a matter of course, which the network clearly treats as usable data, not something unreliable.",
+        "2": "This sentence says carbon dioxide is another number the network tracks, alongside temperature, not the only signal that can count as evidence.",
+        "3": "This sentence says some years rose sharply while others barely rose at all, which is exactly the bounce that does not match carbon dioxide's steady, unbroken climb."
+      },
+      "explain": "The synthesis explains why a single warm year is not solid proof: a signal that bounces up and down, like the temperature line, usually points to short-term natural causes, and only a steady climb across many years and every station, the way carbon dioxide and fuel use behave together, points to the network's real warming pattern.  Each wrong choice either dismisses temperature entirely or claims a match the passage does not support."
+    },
+    {
+      "id": "t6-ms-proposals-against-constraints",
+      "type": "ms",
+      "passageId": "p-final-deployment-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 4,
+      "stem": "Choose the three true facts about how the three proposals measure up against Command's constraints.",
+      "choices": [
+        "Proposal A treats the survival gap each season instead of closing it for good.",
+        "Proposal A requires authority the Network does not currently have.",
+        "Proposal B is too expensive to fit inside this year's field budget.",
+        "Proposal B satisfies the time and cost limits but does not fix the actual food gap.",
+        "Proposal C could take longer than Command's one-season window to even be decided.",
+        "Proposal C is guaranteed to arrive before the chicks' hungriest stretch next season."
+      ],
+      "key": [
+        0,
+        3,
+        4
+      ],
+      "distractorRationale": {
+        "1": "The report says the authority to run a feeding station is not even in question, since the Network already runs two elsewhere.",
+        "2": "The report says the fencing itself is inexpensive, well inside the cost limit Command set.",
+        "5": "The report says no petition has ever been decided in under four months, well past the one-season window, so Proposal C is not guaranteed to arrive in time at all."
+      },
+      "explain": "The three correct facts summarize each proposal's real trade-off: Proposal A only treats the symptom each season, Proposal B is cheap and fast but does not fix the food gap, and Proposal C could take longer to decide than Command's own window allows.  The three wrong choices each invert a specific constraint the report states about a different proposal."
+    },
+    {
+      "id": "t6-hot-three-constraints",
+      "type": "hottext",
+      "passageId": "p-final-deployment-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 3,
+      "mode": "sentence",
+      "stem": "Tap the three sentences that each state one of Command's named constraints on the response.",
+      "spans": [
+        "That effect must appear within one nesting season.",
+        "Second, the response must cost less than this year's field budget for Halyard Point.",
+        "Third, the response must use only authority the Network already holds.",
+        "No emergency funding request is allowed.",
+        "The operative filing the final report must recommend one of three proposals."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "explain": "The three correct sentences each state one of Command's three named constraints directly: a one-season time limit, a cost limit tied to this year's budget, and a limit to authority the Network already holds.  The other two sentences add a supporting detail about emergency funding and describe the operative's overall task, neither one a constraint statement itself."
+    },
+    {
+      "id": "t6-hot-proposal-flaws",
+      "type": "hottext",
+      "passageId": "p-final-deployment-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 4,
+      "mode": "sentence",
+      "stem": "Tap the three sentences, one for each proposal, that each name the specific reason that proposal falls short.",
+      "spans": [
+        "It treats the survival gap each season rather than closing it.",
+        "Fencing does nothing to touch that problem.",
+        "The outcome does not lie inside the Network's authority.",
+        "Setup takes under two weeks.",
+        "It can go up within days."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "explain": "Each correct sentence names the specific reason one proposal falls short: Proposal A only treats the gap each season instead of closing it, Proposal B's fencing never touches the actual food-gap problem, and Proposal C's outcome sits outside the Network's own authority.  The other two sentences each describe a strength, fast setup, for a different proposal, not a flaw."
+    },
+    {
+      "id": "t6-cloze-third-constraint",
+      "type": "cloze",
+      "passageId": "p-final-deployment-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 3,
+      "stem": "Third, the response must use only {{0}} the Network already holds.",
+      "blanks": [
+        {
+          "choices": [
+            "time",
+            "budget",
+            "authority"
+          ],
+          "key": 2,
+          "distractorRationale": {
+            "0": "Time is the limit named in Command's first constraint, the one-season window, not the third constraint about what the Network is allowed to do.",
+            "1": "Budget is the limit named in Command's second constraint, the cost limit, not the third constraint about authority."
+          }
+        }
+      ],
+      "quote": "Third, the response must use only authority the Network already holds.",
+      "explain": "Command's third constraint names authority specifically, limiting the response to power the Network already holds rather than anything requiring an outside agency's cooperation.  Time and budget each name one of the other two constraints, the one-season window and the cost limit, not this third one."
+    },
+    {
+      "id": "t6-mc-first-constraint",
+      "type": "mc",
+      "passageId": "p-final-deployment-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 2,
+      "stem": "What is Command's FIRST constraint on the response, the one it states before cost or authority?",
+      "choices": [
+        "The response must cost less than this year's field budget for Halyard Point.",
+        "The response must use only authority the Network already holds.",
+        "The response must be approved by the fishery authority before it can begin.",
+        "The response must show a real effect on chick survival within one nesting season."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "Command lists this as its second constraint, the cost limit, not the first one it names.",
+        "1": "Command lists this as its third constraint, the authority limit, not the first one it names.",
+        "2": "This is not one of Command's three named constraints at all; it is the specific obstacle facing Proposal C alone, not a general requirement Command set for every proposal."
+      },
+      "explain": "Command sets its constraints in a stated order, and the report names the time limit first: the response must show a real effect on chick survival within one nesting season, before it goes on to state the cost limit second and the authority limit third."
+    },
+    {
+      "id": "t6-mc-fishery-regulation-transfer",
+      "type": "mc",
+      "passageId": "p-final-deployment-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 4,
+      "stem": "Suppose a fourth proposal called for the Network to seek new region-wide fishery regulation that would move the herring season's start date permanently.  Based on the report's own reasoning about Proposal C, would this new idea likely satisfy Command's authority constraint?",
+      "choices": [
+        "No, since it would still depend on a fishery authority that does not answer to the Network, the same problem Proposal C already has.",
+        "Yes, since a permanent regulation change is always more powerful than a one-time petition.",
+        "Yes, since region-wide regulation falls outside any single fishery authority's control.",
+        "There is no way to know without more information about the fishery authority."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The permanence of the change does not touch the actual constraint.  The report's problem with Proposal C is which authority controls the decision, not how long the decision would last.",
+        "2": "The report describes the fishery authority as the body that decides herring-season timing.  A region-wide version of that same request would still need that same authority's approval, not less of it.",
+        "3": "The report already gives the needed information: the fishery authority does not answer to the Network and no petition has ever been decided in under four months, both of which apply just as directly to a bigger, region-wide version of the same request."
+      },
+      "explain": "The report's actual objection to Proposal C is that the fishery authority does not answer to the Network and could take months longer than Command's one-season window to decide, a problem tied to WHO controls the decision, not to the size or permanence of what is being asked for, so a bigger regional version of the same request would run into the identical authority and timing problem."
+    },
+    {
+      "id": "t6-mc-fish-timing-interaction",
+      "type": "mc",
+      "passageId": "p-field-manual-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 3,
+      "stem": "The colony's survival problem began as a shift in the terns' own nesting timing, driven by warming spring air, and it eventually showed up as a falling fledge rate in the chicks.  Using the field manual's own vocabulary, which word best names the way a change in one part led to a change in a different, connected part?",
+      "choices": [
+        "component",
+        "interaction",
+        "system",
+        "subsystem"
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "Component names one small physical part, not the connection between a timing shift in one species and a survival change in another.",
+        "2": "System names a whole set of parts working toward one job, not the specific ripple connecting one change to another.",
+        "3": "Subsystem names one smaller system nested inside a bigger one, not the event of one part's change causing a connected part to change too."
+      },
+      "explain": "The field manual defines an interaction as what happens when one part changes and a connected part changes with it, exactly the shape of the colony's own mystery: the terns' own nesting timing shifted twenty-eight days earlier, driven by warming spring air, and that shift rippled into the chicks' widening food gap and falling fledge rate, the same vocabulary word tile one introduces on a station's own life-support system."
+    },
+    {
+      "id": "t6-short-best-proposal",
+      "type": "shorttext",
+      "passageId": "p-final-deployment-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 4,
+      "stem": "In eight words or fewer, name the one proposal that both fits every one of Command's constraints and actually treats the chicks' food gap.",
+      "accept": [
+        "proposal a",
+        "proposal a, the feeding station",
+        "proposal a, the temporary feeding station",
+        "the temporary feeding station",
+        "the feeding station",
+        "proposal a's feeding station"
+      ],
+      "maxWords": 8,
+      "explain": "Proposal A fits inside Command's time and cost limits and needs no new authority, and unlike Proposal B, it directly targets the chicks' actual problem, the food gap the nesting record identified, by stocking fish through the exact three-week window before the herring arrive, even though it must be repeated each season rather than closing the gap for good."
+    }
+  ]
+}
