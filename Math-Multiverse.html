@@ -2715,7 +2715,29 @@
     box-shadow: 0 2px 8px rgba(74, 53, 38, 0.1);
     min-height: 0;
   }
-  .fb-stage svg { width: 100%; height: 100%; display: block; }
+  .fb-stage svg { width: 100%; height: 100%; display: block; position: relative; z-index: 1; }
+  /* Task 3: the beat plate anchors the stage behind the procedural SVG (which
+     paints its own paper rect at reduced opacity, see sceneSvg, so the plate
+     reads through); the secondary inset sits above both, in the corner, echoing
+     how Shepard's own plates pair small vignettes on one printed page. */
+  .fb-stage-plate {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: sepia(0.15) contrast(1.03);
+    z-index: 0;
+  }
+  .fb-stage-inset {
+    position: absolute; right: 6px; bottom: 6px;
+    width: 30%; max-width: 110px;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border: 1px solid rgba(74, 53, 38, 0.45);
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(74, 53, 38, 0.35);
+    filter: sepia(0.15) contrast(1.03);
+    z-index: 2;
+  }
 
   .fb-status {
     grid-area: status;
@@ -3201,7 +3223,12 @@ const MODULES = [
     domain: 'Order of Operations',
     ccss: '5.OA',
     icon: '🐻',
-    logoUrl: 'https://www.gutenberg.org/files/67098/67098-h/images/cover.jpg',
+    // Task 3: local plate, was an external gutenberg.org hotlink. p153-1 (Pooh
+    // astride the jar-boat) is the module's namesake image -- the Floating Bear
+    // pose itself -- and the sharper of the two PASS candidates at this crop
+    // (155KB vs p152-2's 111KB but a cleaner read at card size); see
+    // art/PROVENANCE-shepard-1926.md.
+    logoUrl: 'art/shepard-1926-p153-1.png',
     color: '#d4a24c',
     description: 'It rained, and it rained, and it rained. Save Pooh and Piglet from the flood with parentheses and brackets.',
     unlocked: false,
@@ -10473,7 +10500,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   // the iPad, dropping to the crude SVG fallback). Genuine 1926 E. H. Shepard
   // map, public domain. See art/pooh-hundred-acre-wood.jpg.
   const POOH_MAP = 'art/pooh-hundred-acre-wood.jpg';
-  const POOH_COVER = 'https://en.wikipedia.org/wiki/Special:FilePath/Winnie-the-Pooh_(book).png';
 
   // Task 2 (arc re-theme): the six story beats in the book's own causal order
   // (Ch. IX, "In Which Piglet Is Entirely Surrounded by Water"), plate refs
@@ -10487,14 +10513,21 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   // Standard Ebooks' text of chapter 9 ("It's a Missage," he said to himself
   // ... "a very important Missage to me") -- Pooh's own diction, not a
   // codebase typo -- kept as-is. plate fields are art/shepard-1926-p<N>.png
-  // references for Task 3 to mount; those files do not exist yet, and nothing
-  // in this module renders them.
+  // references, mounted by Task 3 (see FB_PLATES and the pick/story render
+  // functions below); secondary fields (plateRetrieval/plateAlt/plateMotif/
+  // plateSetup) are mounted as either a progress-gated swap or a fixed
+  // corner-inset alongside the primary plate, per beat -- see
+  // fbStagePlates().
   const FB_BEATS = [
     { // 1: rain begins
       key: 'rain-begins', title5: 'A Light Drizzle', chapter: 'In which a cloud appears',
       chapter6: 'In which the raindrops multiply themselves',
       goal: 'Keep the jars dry',
-      plate: null, // plate 146 unconfirmed against the 1926 plates -- may have none
+      // Task 3: cross-verified MATCH against winniepooh0000aami leaf 137 (see
+      // art/PROVENANCE-shepard-1926.md); this is the chapter's own opening
+      // establishing plate, so it ships as beat 1's anchor rather than
+      // staying procedural-only.
+      plate: 'art/shepard-1926-p146.png',
     },
     { // 2: honey to the branch
       key: 'honey-branch', title5: 'A Steady Rain', chapter: 'In which Pooh moves his honey to the branch',
@@ -10531,6 +10564,50 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   // launched (beat 4) through the rescue (beat 6), not before. Consumed by
   // sceneSvg() in place of the old `level.id >= 3` cutoff.
   const FB_BOAT_BEAT_KEYS = new Set(['floating-launch', 'brain-of-pooh', 'rescue']);
+
+  // Task 3: beatKey -> primary shipped plate, derived from FB_BEATS itself
+  // (never hand-duplicated) so the two structures cannot drift.
+  const FB_PLATES = {};
+  FB_BEATS.forEach((b) => { if (b.plate) FB_PLATES[b.key] = b.plate; });
+
+  // Task 3: resolves which plate(s) a beat mounts, given how far the level
+  // has progressed (0..1, correctCount/totalQ -- mirrors sceneSvg's own
+  // `progress`). Two treatments, both derived from the fields Task 2 already
+  // put on FB_BEATS, neither inventing new data:
+  //  - plateRetrieval / plateSetup: a TEMPORAL pair -- the beat's plate
+  //    swaps once the level is nearly finished, echoing the book's own
+  //    "written, then four days later retrieved" (beat 3) and "Owl's setup
+  //    panel, one leaf before the rescue plate" (beat 6) sequencing.
+  //  - plateMotif / plateAlt[0]: a SIMULTANEOUS secondary vignette shown
+  //    alongside the primary plate, echoing how Shepard's own plates often
+  //    pair two small vignettes on one printed page (as 155/156 do).
+  // FB_PLATE_SWAP_AT is < 1, not 1: renderStory() (the only place the story
+  // stage renders) is never called once questionNum reaches totalQ -- that
+  // branch goes to endLevel() instead -- so `progress` (correctCount/totalQ)
+  // can never actually equal 1 in any render, and a >= 1 gate would be dead
+  // code. 0.85 lands the swap in the level's final stretch, which a render
+  // still reaches on any run with at most a couple of wrong answers.
+  const FB_PLATE_SWAP_AT = 0.85;
+  function fbStagePlates(beat, progress) {
+    if (beat.plateRetrieval) return { anchor: progress >= FB_PLATE_SWAP_AT ? beat.plateRetrieval : beat.plate, inset: null };
+    if (beat.plateSetup) return { anchor: progress >= FB_PLATE_SWAP_AT ? beat.plate : beat.plateSetup, inset: null };
+    if (beat.plateMotif) return { anchor: beat.plate, inset: beat.plateMotif };
+    if (beat.plateAlt && beat.plateAlt.length) return { anchor: beat.plate, inset: beat.plateAlt[0] };
+    return { anchor: beat.plate || null, inset: null };
+  }
+
+  // Task 3: alt text for the three plates the sourcing workflow flagged
+  // SUSPECT and later resolved (see art/PROVENANCE-shepard-1926.md) -- their
+  // TRUE scenes, not the original scene guess. Every other plate gets a
+  // generic per-level alt string.
+  const FB_PLATE_ALT = {
+    'art/shepard-1926-p151.png': "Pooh retrieving Piglet's corked bottle from the water",
+    'art/shepard-1926-p153-2.png': "Christopher Robin marking the rising water with his flood-stick",
+    'art/shepard-1926-p160-1.png': "Owl perched on Piglet's tree, one leaf before the rescue",
+  };
+  function fbPlateAlt(path, lvlName) {
+    return (path && FB_PLATE_ALT[path]) || `E. H. Shepard, 1926: ${lvlName}`;
+  }
 
   const FB_LEVELS = [
     { id: 1, name: FB_BEATS[0].title5, gen: 'simple-parens', chapter: FB_BEATS[0].chapter },
@@ -10694,7 +10771,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       <g stroke-width="0.6" opacity="0.28"><path d="M 45 112 q 6 8 14 9"/><path d="M 43 104 q 8 10 18 11"/><path d="M 47 120 q 6 6 12 7"/><path d="M 78 98 q 5 8 4 16"/></g>
     </g>`;
   }
-  function poohSvg() { return `<svg viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg">${fbPoohFig(true)}</svg>`; }
   function fbFloatPooh() {
     return `<g stroke="${FB_INK}" fill="none" stroke-linejoin="round" stroke-linecap="round">
       <ellipse cx="2" cy="10" rx="40" ry="6" fill="${FB_INK}" opacity="0.07" stroke="none"/>
@@ -10743,34 +10819,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       </g></g>`;
   }
 
-  function pigletSvg(small) {
-    const s = small ? 60 : 120;
-    const k = small ? 0.5 : 1;
-    const t = (n) => (n * k).toFixed(1);
-    return `
-      <svg viewBox="0 0 ${s} ${s}" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#4A3526" stroke-width="${k * 1.2}" fill="none">
-          <!-- body (with stripe waistcoat) -->
-          <ellipse cx="${t(60)}" cy="${t(80)}" rx="${t(22)}" ry="${t(26)}" fill="#E5BFC4"/>
-          <line x1="${t(40)}" y1="${t(75)}" x2="${t(80)}" y2="${t(75)}" stroke="#5A8A5A"/>
-          <line x1="${t(40)}" y1="${t(85)}" x2="${t(80)}" y2="${t(85)}" stroke="#5A8A5A"/>
-          <!-- head -->
-          <circle cx="${t(60)}" cy="${t(40)}" r="${t(20)}" fill="#E5BFC4"/>
-          <!-- ears -->
-          <path d="M ${t(45)} ${t(28)} L ${t(43)} ${t(20)} L ${t(50)} ${t(26)} Z" fill="#E5BFC4"/>
-          <path d="M ${t(75)} ${t(28)} L ${t(77)} ${t(20)} L ${t(70)} ${t(26)} Z" fill="#E5BFC4"/>
-          <!-- snout -->
-          <ellipse cx="${t(60)}" cy="${t(48)}" rx="${t(6)}" ry="${t(4)}" fill="#E5BFC4"/>
-          <circle cx="${t(58)}" cy="${t(48)}" r="${t(1)}" fill="#4A3526" stroke="none"/>
-          <circle cx="${t(62)}" cy="${t(48)}" r="${t(1)}" fill="#4A3526" stroke="none"/>
-          <!-- eyes -->
-          <circle cx="${t(54)}" cy="${t(38)}" r="${t(1.2)}" fill="#4A3526" stroke="none"/>
-          <circle cx="${t(66)}" cy="${t(38)}" r="${t(1.2)}" fill="#4A3526" stroke="none"/>
-        </g>
-      </svg>
-    `;
-  }
-
   function fbJar(label, showLabel) {
     return `<g stroke="${FB_INK}" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round">
       <path d="M 14 31 Q 11 55 16 71 Q 18 76 30 76 Q 42 76 44 71 Q 49 55 46 31 Z" fill="${FB_HONEY}"/>
@@ -10781,8 +10829,6 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       <g stroke-width="0.6" opacity="0.32"><path d="M 16 40 q 2 20 3 30"/><path d="M 44 40 q -2 20 -3 30"/></g>
     </g>`;
   }
-  function honeyJarSvg(label) { return `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">${fbJar(label)}</svg>`; }
-
   function sceneSvg(state, level) {
     const q = state.questionNum || 0, lost = state.livesLost || 0;
     // Task 2 step 3: water = threat only -- mere progress (q) no longer raises
@@ -10818,7 +10864,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="fbPpr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8efd8"/><stop offset="1" stop-color="#efe3c6"/></linearGradient>
         <filter id="fbRough" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="turbulence" baseFrequency="0.02 0.024" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter></defs>
-        <rect width="600" height="280" fill="url(#fbPpr)"/>
+        <rect width="600" height="280" fill="url(#fbPpr)" opacity="0.55"/>
         <g filter="url(#fbRough)">
         <rect x="5" y="5" width="590" height="270" fill="none" stroke="${FB_INK}" stroke-width="1" opacity="0.3" rx="3"/>
         <path d="M 0 156 Q 150 140 320 152 T 600 150 L 600 190 L 0 190 Z" fill="${FB_PAPER2}" stroke="${FB_SOFT}" stroke-width="0.9"/>
@@ -11675,6 +11721,14 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
       function renderPick() {
         state.phase = 'pick';
+        // Task 3 step 3: the beat plate for this level is the primary pick-screen
+        // illustration; POOH_MAP is now the fallback (was the primary), and the
+        // procedural SVG stays the fallback of the fallback -- same onerror idiom,
+        // one extra rung. progress is always 0 here (the level hasn't started).
+        const pickBeat = FB_BEATS[lvl.id - 1] || FB_BEATS[FB_BEATS.length - 1];
+        const pickPlate = fbStagePlates(pickBeat, 0).anchor;
+        const pickImgSrc = pickPlate || POOH_MAP;
+        const pickImgFallback = pickPlate ? POOH_MAP : '';
         root.innerHTML = `
           <div class="fb-pick">
             <div class="fb-title-stack">
@@ -11685,7 +11739,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
             </div>
             <div class="lvl-badge">${totalQ} expressions to solve</div>
             <div class="fb-illustration" id="fb-illust-host">
-              <img class="fb-map-img" src="${POOH_MAP}" alt="The Hundred Acre Wood, drawn by E. H. Shepard, 1926" onerror="this.style.display='none'; document.getElementById('fb-illust-svg').style.display='block';">
+              <img class="fb-map-img" src="${pickImgSrc}" data-fallback="${pickImgFallback}" alt="${fbPlateAlt(pickPlate, lvl.name)}" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.dataset.fallback='';}else{this.style.display='none'; document.getElementById('fb-illust-svg').style.display='block';}">
               <div id="fb-illust-svg" style="display:none; width:100%; height:100%;">${sceneSvg({questionNum: 0, livesLost: 0}, lvl)}</div>
             </div>
             <div class="fb-pick-actions">
@@ -11714,9 +11768,23 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       function renderStory() {
         const jarsHtml = [0,1,2].map(i => `<span class="fb-jar ${i < state.livesLost ? 'lost' : ''}"></span>`).join('');
         const beatCaption = pick(FB_BEAT_CAPTIONS[levelIndex] || FB_BEAT_CAPTIONS[0]);
+        // Task 3 step 3: the beat plate anchors the stage behind the procedural
+        // water/rain/boat SVG (drawn with a translucent paper rect, see sceneSvg,
+        // so the plate reads through); a second beat sits as a small corner inset
+        // where fbStagePlates() finds one. Onerror just hides the plate -- the
+        // procedural SVG is always present underneath, so hiding IS the fallback.
+        const storyBeat = FB_BEATS[lvl.id - 1] || FB_BEATS[FB_BEATS.length - 1];
+        const storyProgress = Math.max(0, Math.min(1, (state.correctCount || 0) / totalQ));
+        const storyPlates = fbStagePlates(storyBeat, storyProgress);
+        const stageAnchorImg = storyPlates.anchor
+          ? `<img class="fb-stage-plate" src="${storyPlates.anchor}" alt="${fbPlateAlt(storyPlates.anchor, lvl.name)}" onerror="this.style.display='none';">`
+          : '';
+        const stageInsetImg = storyPlates.inset
+          ? `<img class="fb-stage-inset" src="${storyPlates.inset}" alt="${fbPlateAlt(storyPlates.inset, lvl.name)}" onerror="this.style.display='none';">`
+          : '';
         root.innerHTML = `
           <div class="fb-story">
-            <div class="fb-stage">${sceneSvg(state, lvl)}</div>
+            <div class="fb-stage">${stageAnchorImg}${stageInsetImg}${sceneSvg(state, lvl)}</div>
             <div class="fb-status">
               <div class="fb-stat"><span class="fb-stat-label">chapter</span><span class="fb-stat-value">${lvl.id}</span></div>
               <div class="fb-stat"><span class="fb-stat-label">verse</span><span class="fb-stat-value">${state.questionNum + 1} of ${totalQ}</span></div>
