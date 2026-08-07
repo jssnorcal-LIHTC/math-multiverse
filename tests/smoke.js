@@ -120,18 +120,21 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
       else if (mathShelf.cards !== 6) problems.push(`grade ${grade}: math shelf expected 6 cards, got ${mathShelf.cards}`);
 
       // Assert what the cards ARE, not only how many, so a pack landing on the wrong shelf is caught by
-      // name rather than by arithmetic. The one pack in the manifest declares grade 6, so the English
-      // shelf is expected on grade 6 and expected to be absent on grade 5. When a grade-5 pack ships,
-      // this list is what changes, and it fails loudly rather than silently blessing the wrong grade.
+      // name rather than by arithmetic. Both packs in the manifest declare grade 6, so the English shelf
+      // is expected to carry both, in manifest order (buildShelves groups manifest.packs by subject and
+      // preserves array order; packCardNode then renders `visible` in that same order -- confirmed live
+      // by this gate before this list was written: an unfixed run reports the cards in exactly this
+      // order), and expected to be absent on grade 5. When a grade-5 pack ships, this list is what
+      // changes, and it fails loudly rather than silently blessing the wrong grade.
       const titlesOn = (subject) => page.$$eval(
         `.subject-shelf[data-subject="${subject}"] .mc-title`, (els) => els.map((e) => e.textContent.trim()));
       const elaTitles = await titlesOn('ela');
-      const wantEla = grade === 6 ? ['Cold Signal'] : [];
+      const wantEla = grade === 6 ? ['Cold Signal', 'Vault of Ages'] : [];
       if (elaTitles.join(' | ') !== wantEla.join(' | ')) {
         problems.push(`grade ${grade}: english shelf cards [${elaTitles.join(', ')}], expected [${wantEla.join(', ')}]`);
       }
       const mathTitles = await titlesOn('math');
-      const strays = mathTitles.filter((t) => t === 'Cold Signal');
+      const strays = mathTitles.filter((t) => t === 'Cold Signal' || t === 'Vault of Ages');
       if (strays.length) problems.push(`grade ${grade}: pack card(s) [${strays.join(', ')}] sitting on the math shelf`);
 
       if (grade === 6) {

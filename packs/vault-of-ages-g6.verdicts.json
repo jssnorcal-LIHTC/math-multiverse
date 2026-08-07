@@ -1,0 +1,1516 @@
+{
+  "packId": "vault-of-ages-g6",
+  "model": "claude-sonnet-5",
+  "records": [
+    {
+      "itemId": "l1-ebsr-why-throw-away",
+      "itemHash": "e2c28d2dc42e5067",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-athenaeum-not-empty",
+      "itemHash": "e0f6a5fd19e0666f",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-first-real-decision",
+      "itemHash": "bb8f065f76e51230",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-finch-tests-noticing",
+      "itemHash": "85478efa43291026",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ms-building-not-abandoned",
+      "itemHash": "71345c03f0a8933b",
+      "blind": [
+        0,
+        1,
+        3
+      ],
+      "authored": [
+        0,
+        1,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-what-happened-to-threadglass",
+      "itemHash": "8e91702d2c1b4f3d",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-mila-counts-chairs",
+      "itemHash": "a9b2bed8743a209c",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-why-no-lawyers",
+      "itemHash": "aea2264d23a38c59",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-dash-interrupts",
+      "itemHash": "b537198bb5eb159e",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ms-finch-shows-not-tells",
+      "itemHash": "1efdc098b33351eb",
+      "blind": [
+        0,
+        1,
+        3
+      ],
+      "authored": [
+        0,
+        1,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-hot-finch-tests-by-asking",
+      "itemHash": "d906ff0bdecd2bcf",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-hot-mila-private-judgment",
+      "itemHash": "7b2204d60d24f394",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-hot-note-description",
+      "itemHash": "910d316e4adf4cfc",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-hot-because-clauses-inner-state",
+      "itemHash": "aff0e2e86436a5bc",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-cloze-why-theo-goes-anyway",
+      "itemHash": "8b98919520d2f239",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-cloze-mila-narration-effect",
+      "itemHash": "e41b05b20394ac15",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-floorboard-sound",
+      "itemHash": "84714873d50d3352",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-theo-never-wondered",
+      "itemHash": "36e7e8c03ad757f9",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-mila-seat-choice",
+      "itemHash": "3882373750380055",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-trust-each-other",
+      "itemHash": "956ea85d15af351a",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-repeat-theft-pattern",
+      "itemHash": "8626078918cb6591",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-theo-answer-better",
+      "itemHash": "88ab69fb3f5fe76b",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-match-detail-to-meaning",
+      "itemHash": "360b906bbd1e38b1",
+      "blind": [
+        2,
+        0,
+        1
+      ],
+      "authored": [
+        2,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-match-crew-first-detail",
+      "itemHash": "84f5fa936f2da774",
+      "blind": [
+        1,
+        0,
+        2
+      ],
+      "authored": [
+        1,
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-documented-history-purpose",
+      "itemHash": "81599f18195eb6cc",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-why-disappearance-suspicious",
+      "itemHash": "7854fbe68e97ab56",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-why-a-tribute",
+      "itemHash": "980fa689dbf42ea9",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-wyrdstone-unusual-theft",
+      "itemHash": "ce1ac976c69e37f3",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-wyrdstone-central-idea",
+      "itemHash": "c0ccb919095b44fa",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-current-status-last",
+      "itemHash": "cc2abbdf24b77a18",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ms-wyrdstone-loan-facts",
+      "itemHash": "dc87ca054cf86f08",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-three-realms-shared-point",
+      "itemHash": "aa3352f413e81e49",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-egyptian-paragraph-idea",
+      "itemHash": "b3e3e271a7b769e6",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ms-three-realms-differences",
+      "itemHash": "b4356a63f65b4384",
+      "blind": [
+        0,
+        1,
+        3
+      ],
+      "authored": [
+        0,
+        1,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-hot-description-vs-history",
+      "itemHash": "3f30aeb4f104fc6f",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-hot-gap-is-suspicious",
+      "itemHash": "226647e22ea2251a",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-hot-origin-central-claim",
+      "itemHash": "e59806ca512d8a36",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-hot-topic-sentences-three-realms",
+      "itemHash": "02006c12244c2aa0",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-cloze-loan-looked-ordinary",
+      "itemHash": "5c7a8d4a572c8014",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-cloze-shared-border-point",
+      "itemHash": "3c6df1972ec7d810",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-spiral-cant-be-measured",
+      "itemHash": "551eb6e4200e6d72",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-threadglass-old-legend",
+      "itemHash": "8364868127fd6232",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-origin-section-purpose",
+      "itemHash": "c24dfe452e5be635",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-wyrdstone-inscription",
+      "itemHash": "7b877df59cedc3d9",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-greek-coin-custom",
+      "itemHash": "43a1d4efcb7e8504",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-central-idea-wyrdstone-entry",
+      "itemHash": "907653d1b3f07e15",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-order-threadglass-entry-sections",
+      "itemHash": "6a28b54d812b684b",
+      "blind": [
+        3,
+        1,
+        0,
+        2
+      ],
+      "authored": [
+        3,
+        1,
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-order-three-realms-sequence",
+      "itemHash": "6ef08d26521516c4",
+      "blind": [
+        2,
+        1,
+        3,
+        0
+      ],
+      "authored": [
+        2,
+        1,
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ebsr-what-the-line-means",
+      "itemHash": "198692224a634df3",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ebsr-theo-builds-on-truth",
+      "itemHash": "ffa3141961707d89",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ebsr-confidence-or-trap",
+      "itemHash": "105f3c5883c139ad",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ms-theo-gathers-intel",
+      "itemHash": "68aa583697695bb6",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ebsr-log-not-guess",
+      "itemHash": "ce869353d8e818eb",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ebsr-why-stop-worrying",
+      "itemHash": "e53d0e5858a16500",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ebsr-strangers-by-design",
+      "itemHash": "0976c06d47117f40",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ebsr-accurate-not-complete",
+      "itemHash": "8dc6ee1ae2fd6bbc",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ebsr-dash-versus-theo-logs",
+      "itemHash": "c56c43c94a2641c2",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ms-finchs-method",
+      "itemHash": "545bf019a2660ad5",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-hot-theo-gathers-security",
+      "itemHash": "04f44b1333d023c4",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-hot-honest-bait-rule",
+      "itemHash": "79a11a50896dec23",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-hot-dash-fact-vs-fear",
+      "itemHash": "5f1e571104b8e476",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-hot-dash-vs-theo-choices",
+      "itemHash": "9b168619b9da018b",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-cloze-theo-instant-answer",
+      "itemHash": "1879204ef832a755",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-cloze-dash-vs-theo-logs",
+      "itemHash": "3caef382a1e404c5",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-mc-why-memorize-floorplan",
+      "itemHash": "c68cf13202a2c8bf",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-mc-delivery-as-cover",
+      "itemHash": "32a8e8d1316a8705",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-mc-kade-decides-not-worth-it",
+      "itemHash": "cb2f9475a00d5588",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-mc-why-read-logs-aloud",
+      "itemHash": "30761cd500447f22",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-mc-finchs-exact-instruction",
+      "itemHash": "abb64b12479ad242",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-mc-theo-consistent-blind-spot",
+      "itemHash": "866d5ea1f68a8da8",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "medium",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-same-institution-guards-and-writes",
+      "itemHash": "5d7b766df2651bf6",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-faith-not-proof",
+      "itemHash": "6bfe79bb26437ccc",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-ledger-challenges-claim",
+      "itemHash": "cf4535cd0708833c",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "medium",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-tool-marks-evidence",
+      "itemHash": "2494d1c37e779231",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-why-not-remove-seal",
+      "itemHash": "b6c5381c3730d0f5",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-reckoners-actual-purpose",
+      "itemHash": "07d82256007d30ef",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ms-checkable-details",
+      "itemHash": "00a2925c07fee24c",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-evidence-easier-to-weigh",
+      "itemHash": "d090d0b73d09c284",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-why-no-conclusion",
+      "itemHash": "0501d616ba94d4d0",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ms-reasons-to-doubt-each-source",
+      "itemHash": "0cd57ee066f0d720",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-hot-chronicle-unverifiable",
+      "itemHash": "36e8c096e5357598",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-hot-ledger-checkable-evidence",
+      "itemHash": "c0e230e06d0e0eb4",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-hot-archive-even-handed",
+      "itemHash": "cd240337bdf5ce71",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-hot-two-weaknesses-named",
+      "itemHash": "8872f0f05823f71e",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-cloze-chronicle-weak-point",
+      "itemHash": "a0791f067f101cde",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-cloze-reckoner-strategic-choice",
+      "itemHash": "0dd5eb08aebc341b",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-ledger-seal-moved-before",
+      "itemHash": "08cb9f7661934e46",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-common-not-rare-problem",
+      "itemHash": "cf26d89b15a56c7a",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-progress-without-settling",
+      "itemHash": "3f8b2c685dd9d344",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-osiris-isis-set-basic-facts",
+      "itemHash": "c51add753373cb26",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-two-sources-same-room",
+      "itemHash": "cfe19499c0eb24cc",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-archive-doesnt-favor-convincing",
+      "itemHash": "8076452598be6e40",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-match-source-to-weakness",
+      "itemHash": "8d66fd289cd5f9cf",
+      "blind": [
+        1,
+        2,
+        0
+      ],
+      "authored": [
+        1,
+        2,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-match-detail-to-source",
+      "itemHash": "a908abfc1dfd0e59",
+      "blind": [
+        2,
+        0,
+        1
+      ],
+      "authored": [
+        2,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-cold-invited",
+      "itemHash": "97a6d2d61b1120c9",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-narrowing-tunnel",
+      "itemHash": "e86056ae1e6814f1",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-door-exhale-turning-point",
+      "itemHash": "5cf2c0dd09559369",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-glacier-comparison",
+      "itemHash": "4de3a2f50bd3287b",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-missed-stair",
+      "itemHash": "883e1f0f22ce5df8",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-radio-click-resolution",
+      "itemHash": "4d0b82c8d1c08db8",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ms-shift-moments",
+      "itemHash": "6e38c6f742677374",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-guess-in-records-clothing",
+      "itemHash": "6e9b57d6790bf794",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-parable-connects-to-scene",
+      "itemHash": "2977eab8b0f690e7",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-hot-held-breath-figurative",
+      "itemHash": "3cf4a4b4f675f49e",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-hot-crossing-the-threshold",
+      "itemHash": "fff73213c5f83c29",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-hot-glacier-and-stair",
+      "itemHash": "27a2b321d70ffb29",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-hot-parable-vs-lesson",
+      "itemHash": "e34bdb7d281db7ee",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-cloze-cold-and-tunnel-effect",
+      "itemHash": "3ce9c7549854aacd",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-cloze-parable-then-lesson",
+      "itemHash": "46129ff64ad20e02",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-sensing-the-dark-wall",
+      "itemHash": "369511e5a5fc01e4",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-gray-absence-of-color",
+      "itemHash": "9acb4bbac0ba0731",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-fear-argues-personification",
+      "itemHash": "dc4e2f74c470a630",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-saying-so-in-rock",
+      "itemHash": "a1e8ac6bf55fd5c4",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-frostbank-dimming-lights-structure",
+      "itemHash": "ced804d5574fcd93",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-three-part-scene-structure",
+      "itemHash": "9be431410db8be6d",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-order-frostbank-scene-beats",
+      "itemHash": "fed13aaad0e7cea4",
+      "blind": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "authored": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-order-weight-of-thread-scene",
+      "itemHash": "5fb96afb2fac3dcd",
+      "blind": [
+        1,
+        0,
+        2,
+        3
+      ],
+      "authored": [
+        1,
+        0,
+        2,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-central-theme-noticing",
+      "itemHash": "1cdfaf9b5fce4a29",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-warning-and-compliment",
+      "itemHash": "8abb5f6f7dcccbca",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-callback-to-first-lesson",
+      "itemHash": "85a7e094afbab105",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ms-earlier-skills-pay-off",
+      "itemHash": "0f80f8c41c1ac808",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-unverifiable-meaning",
+      "itemHash": "113d6114a2ae01b0",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-chronicle-own-argument",
+      "itemHash": "4880a34575630f2e",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-tool-marks-as-response",
+      "itemHash": "848e2c80bd6db8de",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-isis-search-purpose",
+      "itemHash": "242af8dde978a21a",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-catalog-purpose-vs-chronicle",
+      "itemHash": "65946eaee6fcf4e2",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ms-archive-analysis-method",
+      "itemHash": "ca023c6ecb3d3e38",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-hot-earlier-skills-solve-door",
+      "itemHash": "e4f60728619dfe26",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-hot-not-gold-or-gods",
+      "itemHash": "0bcdc61a8a18f0c8",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-hot-kade-failure-precise",
+      "itemHash": "f486b1edb2ee7d06",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-hot-checkable-vs-not",
+      "itemHash": "046de398c5378f66",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-cloze-relics-are-keys",
+      "itemHash": "ac1f33e73631683a",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-cloze-catalog-purpose-again",
+      "itemHash": "80ba04ecd0a91347",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-theo-arc-noticing",
+      "itemHash": "d3c5da0de85968a5",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-mila-instinct-summary",
+      "itemHash": "a37ab507fd811900",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-log-discipline-echoes",
+      "itemHash": "aa3d4164be47ad73",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-figurative-echo-held-breath",
+      "itemHash": "be970a8637b01ff3",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-tool-marks-vs-faith-standard",
+      "itemHash": "18f7307de17d0d4a",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-archive-catalog-vs-chronicle-purpose",
+      "itemHash": "0b88d303e0aba5a4",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "medium",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ms-figurative-sensations",
+      "itemHash": "5b9096faaba5a447",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    }
+  ]
+}
