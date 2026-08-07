@@ -54,10 +54,17 @@ function callClaude(prompt) {
       stdio: ['pipe', 'pipe', 'pipe'],
     });
     let out = '', errOut = '';
+    // Raised 120s -> 300s (26-0807, fix round 2, ledger item 4): the timing distribution straddled
+    // the old cutoff (one ms item completed at 96.7s, two runs of the SAME item exceeded 120s), so
+    // the cutoff itself was the defect, not any particular call. 300s comfortably clears that
+    // straddle without masking a genuine hang; the existing 120000ms callers are gone, this constant
+    // is the only definition. (26-0807, fix round 2 of THIS task: the science-gate ruling verified
+    // "300s cutoff in code" against the workspace build copy only; this committed file still carried
+    // 120s, same workspace-vs-committed divergence class as the itemHash fix above, one constant.)
     const timer = setTimeout(() => {
       child.kill();
-      reject(new Error('claude CLI timed out after 120s'));
-    }, 120000);
+      reject(new Error('claude CLI timed out after 300s'));
+    }, 300000);
     child.stdout.on('data', (d) => { out += d; });
     child.stderr.on('data', (d) => { errOut += d; });
     child.on('error', (e) => { clearTimeout(timer); reject(new Error(`claude CLI failed to start: ${e.message}`)); });
