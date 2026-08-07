@@ -10545,7 +10545,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       key: 'floating-launch', title5: 'The Floating Bear', chapter: 'In which Pooh sails on a jar',
       chapter6: 'In which the honey jar becomes a raft',
       goal: 'Sail on the jar',
-      plate: 'art/shepard-1926-p152-1.png', plateAlt: ['art/shepard-1926-p152-2.png', 'art/shepard-1926-p153-1.png'],
+      // plateAlt holds only p152-2 (fbStagePlates() reads plateAlt[0] as the
+      // story-stage inset); p153-1, the other PASS candidate from this pairing,
+      // ships as the MODULES registry logoUrl instead (Math-Multiverse.html
+      // ~3226), not a second array entry nothing ever read.
+      plate: 'art/shepard-1926-p152-1.png', plateAlt: ['art/shepard-1926-p152-2.png'],
     },
     { // 5: The Brain of Pooh -- Christopher Robin's umbrella-boat
       key: 'brain-of-pooh', title5: 'The Brain of Pooh', chapter: 'In which an umbrella becomes a boat',
@@ -10607,6 +10611,27 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   };
   function fbPlateAlt(path, lvlName) {
     return (path && FB_PLATE_ALT[path]) || `E. H. Shepard, 1926: ${lvlName}`;
+  }
+
+  // Task 3 fix round 1: p146 is the sole PORTRAIT plate among the 11 shipped
+  // (993x1200, ratio 0.83; the other 10 are 1.27-1.88 landscape), mounted via
+  // object-fit:cover into landscape boxes (.fb-illustration 3:2, .fb-stage-plate
+  // 2.1:1 at 1024x768). Center object-position (the default) shows only the
+  // image's middle 39-55% of height, which cropped out both the trunk's base
+  // (the water pooling that titles the beat) and clipped the TRESPASSERS W
+  // sign, keeping only the window. Judged live against rendered screenshots
+  // (.superpowers/sdd/PLAN-multiverse-floating-bear-v1-26-0806/screens/): a
+  // bottom-biased crop at "center 75%" keeps the window, the full sign, and
+  // the waterline scribble at the trunk's base in the wider pick-screen box,
+  // and reads legibly in the narrower stage box too. Keyed by plate path (a
+  // property of the file's own geometry), not the beat, so it travels with
+  // the image if it is ever remounted elsewhere.
+  const FB_PLATE_CROP = {
+    'art/shepard-1926-p146.png': 'center 75%',
+  };
+  function fbPlateCropAttr(path) {
+    const pos = path && FB_PLATE_CROP[path];
+    return pos ? ` style="object-position: ${pos};"` : '';
   }
 
   const FB_LEVELS = [
@@ -11739,7 +11764,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
             </div>
             <div class="lvl-badge">${totalQ} expressions to solve</div>
             <div class="fb-illustration" id="fb-illust-host">
-              <img class="fb-map-img" src="${pickImgSrc}" data-fallback="${pickImgFallback}" alt="${fbPlateAlt(pickPlate, lvl.name)}" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.dataset.fallback='';}else{this.style.display='none'; document.getElementById('fb-illust-svg').style.display='block';}">
+              <img class="fb-map-img" src="${pickImgSrc}" data-fallback="${pickImgFallback}" alt="${fbPlateAlt(pickPlate, lvl.name)}"${fbPlateCropAttr(pickPlate)} onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.dataset.fallback='';this.style.objectPosition='';}else{this.style.display='none'; document.getElementById('fb-illust-svg').style.display='block';}">
               <div id="fb-illust-svg" style="display:none; width:100%; height:100%;">${sceneSvg({questionNum: 0, livesLost: 0}, lvl)}</div>
             </div>
             <div class="fb-pick-actions">
@@ -11777,10 +11802,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         const storyProgress = Math.max(0, Math.min(1, (state.correctCount || 0) / totalQ));
         const storyPlates = fbStagePlates(storyBeat, storyProgress);
         const stageAnchorImg = storyPlates.anchor
-          ? `<img class="fb-stage-plate" src="${storyPlates.anchor}" alt="${fbPlateAlt(storyPlates.anchor, lvl.name)}" onerror="this.style.display='none';">`
+          ? `<img class="fb-stage-plate" src="${storyPlates.anchor}" alt="${fbPlateAlt(storyPlates.anchor, lvl.name)}"${fbPlateCropAttr(storyPlates.anchor)} onerror="this.style.display='none';">`
           : '';
         const stageInsetImg = storyPlates.inset
-          ? `<img class="fb-stage-inset" src="${storyPlates.inset}" alt="${fbPlateAlt(storyPlates.inset, lvl.name)}" onerror="this.style.display='none';">`
+          ? `<img class="fb-stage-inset" src="${storyPlates.inset}" alt="${fbPlateAlt(storyPlates.inset, lvl.name)}"${fbPlateCropAttr(storyPlates.inset)} onerror="this.style.display='none';">`
           : '';
         root.innerHTML = `
           <div class="fb-story">
