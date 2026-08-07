@@ -5318,6 +5318,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       state.videoSrc = state.videoQueue[0];
       let timeouts = [];
       const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
+      let coachTimer = null;
 
       // Pre-generate questions for the level
       state.questions = MVFresh.drawRun(function () { return genForLevel(lvl); },
@@ -5523,11 +5524,12 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           sfxWrong();
           // Adaptive coach: if this topic is a recurring miss, surface the worked-example modal
           if (Save.shouldCoach(q.topic)) {
-            later(1800, () => showCoach(q.topic));
+            coachTimer = later(1800, () => { coachTimer = null; showCoach(q.topic); });
           }
         }
 
         const goNext = () => {
+          if (coachTimer) { clearTimeout(coachTimer); coachTimer = null; }
           if (state.crashCount >= 3) { triggerCrash(); return; }
           state.questionNum++;
           if (state.questionNum >= totalQ) {
@@ -6610,6 +6612,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
       let timeouts = [];
       const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
+      let coachTimer = null;
 
       host.innerHTML = '<div class="mod-f1"></div>';
       const root = host.querySelector('.mod-f1');
@@ -6839,10 +6842,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           state.livesLost = Math.min(3, state.livesLost + 1);
           movePlayerTo(Math.min(lvl.gridSize, state.position + 1));
           sfxWrong();
-          if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
+          if (Save.shouldCoach(q.topic)) coachTimer = later(1800, () => { coachTimer = null; showCoach(q.topic); });
         }
 
         const goNext = () => {
+          if (coachTimer) { clearTimeout(coachTimer); coachTimer = null; }
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -7864,6 +7868,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
       let timeouts = [];
       const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
+      let coachTimer = null;
 
       host.innerHTML = '<div class="mod-rc"></div>';
       const root = host.querySelector('.mod-rc');
@@ -8019,9 +8024,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           state.livesLost = Math.min(3, state.livesLost + 1);
           state.hullPct = Math.max(0, state.hullPct - 33);
           sfxWrong();
-          if (q && Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
+          if (q && Save.shouldCoach(q.topic)) coachTimer = later(1800, () => { coachTimer = null; showCoach(q.topic); });
         }
         const goNext = () => {
+          if (coachTimer) { clearTimeout(coachTimer); coachTimer = null; }
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -8826,6 +8832,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       };
       let timeouts = [];
       const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
+      let coachTimer = null;
 
       host.innerHTML = '<div class="mod-mb"></div>';
       const root = host.querySelector('.mod-mb');
@@ -8977,10 +8984,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           state.streak = 0;
           state.livesLost = Math.min(3, state.livesLost + 1);
           sfxRattle();
-          if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
+          if (Save.shouldCoach(q.topic)) coachTimer = later(1800, () => { coachTimer = null; showCoach(q.topic); });
         }
 
         const goNext = () => {
+          if (coachTimer) { clearTimeout(coachTimer); coachTimer = null; }
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -10296,6 +10304,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       };
       let timeouts = [];
       const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
+      let coachTimer = null;
 
       host.innerHTML = '<div class="mod-rk"></div>';
       const root = host.querySelector('.mod-rk');
@@ -10449,10 +10458,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           state.livesLost = Math.min(3, state.livesLost + 1);
           state.crisisLevel = Math.min(1, state.crisisLevel + 0.18);
           sfxWrong();
-          if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
+          if (Save.shouldCoach(q.topic)) coachTimer = later(1800, () => { coachTimer = null; showCoach(q.topic); });
         }
 
         const goNext = () => {
+          if (coachTimer) { clearTimeout(coachTimer); coachTimer = null; }
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
@@ -11785,6 +11795,7 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       };
       let timeouts = [];
       const later = (ms, fn) => { const t = setTimeout(fn, ms); timeouts.push(t); return t; };
+      let coachTimer = null;
 
       host.innerHTML = '<div class="mod-fb"></div>';
       const root = host.querySelector('.mod-fb');
@@ -11932,10 +11943,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
           state.streak = 0;
           state.livesLost = Math.min(3, state.livesLost + 1);
           sfxWrong();
-          if (Save.shouldCoach(q.topic)) later(1800, () => showCoach(q.topic));
+          if (Save.shouldCoach(q.topic)) coachTimer = later(1800, () => { coachTimer = null; showCoach(q.topic); });
         }
 
         const goNext = () => {
+          if (coachTimer) { clearTimeout(coachTimer); coachTimer = null; }
           state.questionNum++;
           if (state.livesLost >= 3 || state.questionNum >= totalQ) {
             endLevel();
