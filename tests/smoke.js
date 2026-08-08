@@ -189,18 +189,18 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
 
       // Pin the shuffle. MVRunner.pickItems draws a level's questions with Math.random, and the shell
       // registers a pack through MVRunner.register, which passes deps=null -- so there is no rng
-      // injection point and an unseeded run plays a different first item every time. Level 1's pool is
-      // 4 ebsr, 3 mc, 2 hottext, 1 ms, 1 cloze and 1 match, and only mc, ms and ebsr expose .mv-choice,
-      // so an unpinned gate would go red two runs in three for a reason that has nothing to do with the
+      // injection point and an unseeded run plays a different first item every time. Only mc, ms and
+      // ebsr expose .mv-choice, and every level's served slice now mixes all six item types (the
+      // validate-pack first-slice rule fixes each level's front since the 26-0807 interleave
+      // retrofit), so an unpinned gate would go red for a reason that has nothing to do with the
       // code under test. Pinned, a failure here is reproducible. Restored in the finally below.
       //
-      // This seed draws l1-ebsr-why-skip-the-meeting first, deliberately: ebsr is the richest path
-      // (committing Part A locks it and reveals Part B) and it is the type whose Part B lock defect the
-      // reclick probe below was written to guard. Its Part A key is choice 0 and the evidence that
-      // supports choice 0 is Part B choice 1, so the "first live choice in each group" policy below
-      // answers Part A right and Part B wrong, which is what puts the explain tile on screen. Changing
-      // this pack's level 1 can change which item is drawn; the note below prints the stem so a
-      // maintainer can see what actually ran.
+      // This seed currently draws an ebsr first, which is deliberately kept: ebsr is the richest
+      // path (committing Part A locks it and reveals Part B) and it is the type whose Part B lock
+      // defect the reclick probe below was written to guard. The "first live choice in each group"
+      // policy below grades it wrong, which is what puts the explain tile on screen. Reordering or
+      // changing this pack's level 1 itemIds changes which item is drawn; the note below prints the
+      // stem so a maintainer can see what actually ran.
       await page.evaluate(() => {
         window.__realRandom = Math.random;
         let s = 20;
