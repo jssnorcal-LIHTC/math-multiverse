@@ -450,5 +450,64 @@ check('a properly permuted 12-item pack (four shapes, three items each) is clean
   assert.deepStrictEqual(warnings, [], 'the permuted pack must carry no warnings: ' + JSON.stringify(warnings));
 });
 
+// ---------- interleave retrofit added pass: a fresh profile's first run must mix item types ----------
+// MVFresh.orderPool is a stable sort with every unseen id tied, and pickItems shuffles presentation
+// order only, so a fresh profile is served itemIds[0..questions-1] verbatim. A type-blocked front
+// (four ebsr in a row) hides whole item types until replays. Under the effective rotate policy the
+// first `questions` ids must cover min(questions, distinct types in the pool) item types.
+
+// A second valid mc item so a level can carry a type-blocked front: [mc, mc, ebsr].
+function secondMcItem() {
+  return {
+    id: 'i-mc-2', type: 'mc', passageId: 'p1', targets: ['c1-inf-1-key-details'],
+    coachTopic: 'central-idea', stem: 'Second mc item so the front of the list can block?',
+    choices: ['a', 'b', 'c', 'd'], key: 0,
+    explain: 'This item exists so the interleave tests can put two same-type items ahead of a third type, and it is written long enough to clear the twenty-word explanation floor the content checks impose.',
+    distractorRationale: { '1': 'x', '2': 'y', '3': 'z' },
+  };
+}
+function blockedFrontPack() {
+  const p = clone();
+  p.items.push(secondMcItem());
+  p.levels[0].itemIds = ['i-mc-1', 'i-mc-2', 'i-ebsr-1'];
+  p.levels[0].questions = 2;      // first 2 served = mc, mc; the pool carries ebsr too
+  return p;
+}
+
+check('a type-blocked first slice under rotate policy is caught', () => {
+  expectError(blockedFrontPack(), 'item types', 'blocked front');
+});
+
+check('an interleaved first slice passes', () => {
+  const p = blockedFrontPack();
+  p.levels[0].itemIds = ['i-mc-1', 'i-ebsr-1', 'i-mc-2'];
+  const { errors } = validatePack(p, { expectedId: 'pack-good' });
+  assert.strictEqual(errors.some(e => /item types/.test(e)), false,
+    'an interleaved front must not be flagged: ' + JSON.stringify(errors.filter(e => /item types/.test(e))));
+});
+
+check('questions below the type count only needs that many distinct types', () => {
+  const p = blockedFrontPack();
+  p.levels[0].questions = 1;      // min(1, 2 types) = 1; a single mc up front is fine
+  const { errors } = validatePack(p, { expectedId: 'pack-good' });
+  assert.strictEqual(errors.some(e => /item types/.test(e)), false,
+    'a first slice shorter than the type count must be capped at questions: ' + JSON.stringify(errors.filter(e => /item types/.test(e))));
+});
+
+check('a free-policy level is exempt from the first-slice rule', () => {
+  const p = blockedFrontPack();
+  p.levels[0].repeatPolicy = 'free';
+  const { errors } = validatePack(p, { expectedId: 'pack-good' });
+  assert.strictEqual(errors.some(e => /item types/.test(e)), false,
+    'free policy serves by rng, not list order; the rule must stay quiet: ' + JSON.stringify(errors.filter(e => /item types/.test(e))));
+});
+
+check('a rotate level under a free pack root is still caught (level policy wins)', () => {
+  const p = blockedFrontPack();
+  p.repeatPolicy = 'free';
+  p.levels[0].repeatPolicy = 'rotate';
+  expectError(p, 'item types', 'level rotate under pack free');
+});
+
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
 process.exit(failures ? 1 : 0);

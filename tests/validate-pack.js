@@ -189,6 +189,24 @@ function checkLevels(pack, itemsById, errors, warnings) {
     if (lv.repeatPolicy !== undefined && !['rotate', 'free'].includes(lv.repeatPolicy)) {
       errors.push(`level "${lv.name}": repeatPolicy must be "rotate" or "free"`);
     }
+    // Fresh-profile first runs are the authored list verbatim: MVFresh.orderPool stable-sorts with
+    // every unseen id tied, and pickItems shuffles presentation order only, so a new profile is
+    // served itemIds[0..questions-1] exactly. Under the effective rotate policy the front of the
+    // list must therefore cover every item type the level carries (capped at questions), or whole
+    // item types stay hidden until replays.
+    const effectivePolicy = lv.repeatPolicy !== undefined ? lv.repeatPolicy
+      : (pack.repeatPolicy !== undefined ? pack.repeatPolicy : 'rotate');
+    if (effectivePolicy === 'rotate'
+        && Number.isInteger(lv.questions) && lv.questions >= 1 && lv.questions <= lv.itemIds.length
+        && lv.itemIds.every(id => itemsById.has(id))) {
+      const poolTypes = new Set(lv.itemIds.map(id => itemsById.get(id).type));
+      const served = new Set(lv.itemIds.slice(0, lv.questions).map(id => itemsById.get(id).type));
+      const need = Math.min(lv.questions, poolTypes.size);
+      if (served.size < need) {
+        const missing = [...poolTypes].filter(t => !served.has(t));
+        errors.push(`${where}.itemIds: the first ${lv.questions} ids cover ${served.size} of ${poolTypes.size} item types (missing: ${missing.join(', ')}); a fresh profile is served this slice verbatim, so interleave the list until the first ${lv.questions} cover every type the level carries`);
+      }
+    }
   });
   for (const id of itemsById.keys()) {
     if (!referenced.has(id)) warnings.push(`items(${id}): not referenced by any level (orphan)`);
