@@ -363,20 +363,6 @@
       "status": "agree"
     },
     {
-      "itemId": "t3-hot-source-b-argues-its-case",
-      "itemHash": "ab7d924a14659b70",
-      "blind": [
-        2,
-        3
-      ],
-      "authored": [
-        2,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t3-ebsr-sparta-claims-turning-points",
       "itemHash": "605185312ed8dd3f",
       "blind": 0,
@@ -665,6 +651,22 @@
       "status": "agree"
     },
     {
+      "itemId": "t6-ms-closing-facts",
+      "itemHash": "429b905c0a5b2db8",
+      "blind": [
+        1,
+        2,
+        3
+      ],
+      "authored": [
+        1,
+        2,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "t6-ebsr-republic-to-empire",
       "itemHash": "3920aa3ad10178f2",
       "blind": 0,
@@ -719,6 +721,14 @@
       "itemHash": "f6af90ec5ae2753e",
       "blind": 0,
       "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-mc-reachback-zhang-qian-silk-road",
+      "itemHash": "3e4c5ee6c45208a1",
+      "blind": 1,
+      "authored": 1,
       "confidence": "high",
       "status": "agree"
     },
@@ -1227,14 +1237,6 @@
       "status": "agree"
     },
     {
-      "itemId": "t5-ebsr-what-legalism-taught",
-      "itemHash": "c6e7891631df2001",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t5-ebsr-the-credit-for-paper",
       "itemHash": "24d89c829b4d7f0f",
       "blind": 1,
@@ -1459,34 +1461,32 @@
       "status": "agree"
     },
     {
-      "itemId": "t6-mc-how-far-it-had-spread",
-      "itemHash": "4acfcec99e826f12",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ms-closing-facts",
-      "itemHash": "429b905c0a5b2db8",
+      "itemId": "t3-hot-source-b-argues-its-case",
+      "itemHash": "9bc8c219aaa53fd8",
       "blind": [
-        1,
-        2,
-        3
+        3,
+        4
       ],
       "authored": [
-        1,
-        2,
-        3
+        3,
+        4
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "t6-mc-reachback-zhang-qian-silk-road",
-      "itemHash": "3e4c5ee6c45208a1",
-      "blind": 1,
-      "authored": 1,
+      "itemId": "t5-ebsr-what-legalism-taught",
+      "itemHash": "8a30910490635057",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-mc-how-far-it-had-spread",
+      "itemHash": "954e7d0e5b50c2eb",
+      "blind": 3,
+      "authored": 3,
       "confidence": "high",
       "status": "agree"
     }
