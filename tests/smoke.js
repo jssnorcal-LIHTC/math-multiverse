@@ -347,10 +347,10 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
 
     // ---- per-type interaction gate: the five types nothing had ever clicked in a browser --------
     // .mv-choice is the only control the playthrough above ever touches, and that covers mc, ms and
-    // ebsr -- 48 of the pack's 72 items. hottext, cloze, match, order and shorttext had their
-    // graders unit-tested and their render() called against tests/dom-stub.js, and that was all: no
-    // browser had ever tapped a span, opened a blank, chosen a cell, placed a tile or typed an
-    // answer. That is the other 24 items.
+    // ebsr -- two thirds of an authored pack's items. hottext, cloze, match, order and shorttext had
+    // their graders unit-tested and their render() called against tests/dom-stub.js, and that was
+    // all: no browser had ever tapped a span, opened a blank, chosen a cell, placed a tile or typed
+    // an answer. That is the other third.
     //
     // Driven through the engine directly rather than through a level. The shuffle does not reach
     // these types cheaply -- order appears only in levels 2 and 5, shorttext only in 3 and 6 -- and
