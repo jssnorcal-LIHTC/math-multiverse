@@ -10580,7 +10580,17 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       key: 'rescue', title5: 'Storm of the Century', chapter: 'In which Captain C. Robin rescues all',
       chapter6: 'In which Captain C. Robin solves it all',
       goal: 'Captain C. Robin rescues',
-      plate: 'art/shepard-1926-p160-2.png', plateSetup: 'art/shepard-1926-p160-1.png', // Owl on Piglet's tree, one leaf before
+      // The setup plate was p160-1 (Owl on Piglet's tree, one leaf before the
+      // rescue) until 26-0807. That plate is now the source of the scene's own
+      // tree crop, so mounting it here put the same tree and the same Owl in one
+      // frame twice at two scales, which reads as a rendering fault rather than
+      // as art. p153-2 replaces it: Christopher Robin crouched under his umbrella
+      // planting the daily flood-marker stick, which suits the level's storm mood
+      // and shares no subject with anything the scene draws over it. It is also
+      // beat 5's simultaneous inset, but the two never appear in the same frame
+      // (a story stage renders exactly one beat), so this is sequential reuse,
+      // not duplication.
+      plate: 'art/shepard-1926-p160-2.png', plateSetup: 'art/shepard-1926-p153-2.png',
     },
   ];
   // Boat-beats: Pooh is drawn floating once The Floating Bear has actually
@@ -10594,8 +10604,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   // put on FB_BEATS, neither inventing new data:
   //  - plateRetrieval / plateSetup: a TEMPORAL pair -- the beat's plate
   //    swaps once the level is nearly finished, echoing the book's own
-  //    "written, then four days later retrieved" (beat 3) and "Owl's setup
-  //    panel, one leaf before the rescue plate" (beat 6) sequencing.
+  //    "written, then four days later retrieved" (beat 3) and, for beat 6,
+  //    "the flood still being measured, then the rescue arriving" (26-0807:
+  //    beat 6's setup panel was Owl on Piglet's tree until that plate became
+  //    the scene's own tree crop, see FB_BEATS).
   //  - plateMotif / plateAlt[0]: a SIMULTANEOUS secondary vignette shown
   //    alongside the primary plate, echoing how Shepard's own plates often
   //    pair two small vignettes on one printed page (as 155/156 do).
@@ -10702,11 +10714,17 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       `Everyone agreed a Clever Plan was needed, and everyone looked at Pooh.`,
     ],
     [ // 5: Storm of the Century -- Captain C. Robin rescues all
-      // Task 4: rewritten to fit the PRE-swap plateSetup scene (p160-1, Owl
-      // perched on Piglet's tree, one leaf before the rescue) -- the prior
+      // Task 4: rewritten to fit the PRE-swap plateSetup scene -- the prior
       // default pool described the rescue as already under way, which read
-      // against a plate showing Owl alone, calm, no boat or captain yet. See
+      // against a setup plate showing no boat and no captain yet. See
       // FB_BEAT_CAPTIONS_SWAPPED['rescue'] for the post-swap (p160-2) pool.
+      // 26-0807: the setup plate moved from p160-1 to p153-2 (C.R. planting the
+      // flood-marker stick) and this pool still holds, because what it names is
+      // still on screen. Owl did not leave the frame with p160-1; he came
+      // forward into it -- he is perched on the branch of the scene's own tree
+      // crop, which is cut from that same plate. The waiting and the undropped
+      // flood now sit against a plate about measuring the water, which is if
+      // anything a closer fit than before.
       `Owl perched at the top of Piglet's tree, keeping a very owlish watch on the water.`,
       `The flood had not dropped an inch, and there was nothing to do but wait, which Owl found tiresome.`,
       `Piglet watched the grey water from his window, and hoped help was not too far off.`,
@@ -10725,7 +10743,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   //
   // Task 4: 'rescue' added -- beat 6's original default pool described the
   // rescue as already under way, which read against the PRE-swap plateSetup
-  // plate (p160-1, Owl alone on Piglet's tree, no boat or captain in sight).
+  // plate (then p160-1, Owl alone on Piglet's tree; p153-2 since 26-0807,
+  // C.R. planting the flood-marker stick -- either way no boat, no captain).
   // FB_BEAT_CAPTIONS[5] above was rewritten to fit that calm setup scene; this
   // entry supplies the rescue-in-progress captions for the POST-swap plate
   // (p160-2) instead, echoing the ship's-log line already established at level
