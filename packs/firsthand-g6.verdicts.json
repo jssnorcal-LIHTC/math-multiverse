@@ -20,14 +20,14 @@
     },
     {
       "itemId": "t1-hot-opening-promise",
-      "itemHash": "449717bd9fa0ec0d",
+      "itemHash": "c8ea30763f7ac13a",
       "blind": [
-        0,
-        1
+        1,
+        2
       ],
       "authored": [
-        0,
-        1
+        1,
+        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -58,18 +58,18 @@
     },
     {
       "itemId": "t1-match-rivers-to-civilizations",
-      "itemHash": "8ee57fc474fc46e4",
+      "itemHash": "701a4b732bac631f",
       "blind": [
+        2,
         0,
-        1,
-        2
+        1
       ],
       "authored": [
+        2,
         0,
-        1,
-        2
+        1
       ],
-      "confidence": "low",
+      "confidence": "medium",
       "status": "agree"
     },
     {
@@ -102,14 +102,14 @@
     },
     {
       "itemId": "t1-hot-egypt-kush-balance-flips",
-      "itemHash": "62a1f797cb0d5d8a",
+      "itemHash": "5912c8bffe233509",
       "blind": [
-        0,
-        1
+        2,
+        3
       ],
       "authored": [
-        0,
-        1
+        2,
+        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -132,7 +132,7 @@
     },
     {
       "itemId": "t2-ebsr-abrahams-covenant",
-      "itemHash": "7205b1490ddc86e1",
+      "itemHash": "f03175ceee538e22",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -148,14 +148,14 @@
     },
     {
       "itemId": "t2-hot-something-different-taking-root",
-      "itemHash": "d7cf5d170c109d94",
+      "itemHash": "721d601133e9c226",
       "blind": [
-        0,
-        1
+        1,
+        2
       ],
       "authored": [
-        0,
-        1
+        1,
+        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -280,14 +280,14 @@
     },
     {
       "itemId": "t3-hot-source-a-argues-its-case",
-      "itemHash": "a5db54934928b28b",
+      "itemHash": "f64e0f586812a0fa",
       "blind": [
-        0,
-        1
+        2,
+        3
       ],
       "authored": [
-        0,
-        1
+        2,
+        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -364,14 +364,14 @@
     },
     {
       "itemId": "t3-hot-source-b-argues-its-case",
-      "itemHash": "ca8dc60fe2e63c97",
+      "itemHash": "5a7bf5d49f04ec11",
       "blind": [
-        0,
-        1
+        1,
+        2
       ],
       "authored": [
-        0,
-        1
+        1,
+        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -410,14 +410,14 @@
     },
     {
       "itemId": "t4-hot-locked-behind-unread-script",
-      "itemHash": "ec0289b0c71c0cc7",
+      "itemHash": "be07f93ccc1808f6",
       "blind": [
-        0,
-        1
+        3,
+        4
       ],
       "authored": [
-        0,
-        1
+        3,
+        4
       ],
       "confidence": "high",
       "status": "agree"
@@ -476,16 +476,16 @@
     },
     {
       "itemId": "t4-hot-ashokas-carved-proof",
-      "itemHash": "49ad608c24c13c40",
+      "itemHash": "3b015d001e16bcc7",
       "blind": [
-        0,
-        1
+        1,
+        2
       ],
       "authored": [
-        0,
-        1
+        1,
+        2
       ],
-      "confidence": "low",
+      "confidence": "high",
       "status": "agree"
     },
     {
@@ -505,6 +505,14 @@
       "status": "agree"
     },
     {
+      "itemId": "t5-ebsr-confucius-vs-laozi",
+      "itemHash": "bce79e7812f38813",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "t5-mc-mandate-of-heaven-meaning",
       "itemHash": "dcfd06e07cbd1817",
       "blind": 0,
@@ -514,14 +522,14 @@
     },
     {
       "itemId": "t5-hot-han-scholar-officials",
-      "itemHash": "7ecd2c355ee7e1bd",
+      "itemHash": "d8d4846b0d52c1e4",
       "blind": [
-        0,
-        1
+        1,
+        2
       ],
       "authored": [
-        0,
-        1
+        1,
+        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -552,17 +560,17 @@
     },
     {
       "itemId": "t5-match-ideas-to-school",
-      "itemHash": "41cc73a7835ba88d",
+      "itemHash": "9f6e8626123043a7",
       "blind": [
         0,
-        0,
         1,
+        0,
         1
       ],
       "authored": [
         0,
-        0,
         1,
+        0,
         1
       ],
       "confidence": "high",
@@ -598,14 +606,14 @@
     },
     {
       "itemId": "t5-hot-burned-and-put-to-death",
-      "itemHash": "f08e60ec399a0a62",
+      "itemHash": "2711841b8638c4ec",
       "blind": [
-        0,
-        1
+        3,
+        4
       ],
       "authored": [
-        0,
-        1
+        3,
+        4
       ],
       "confidence": "high",
       "status": "agree"
@@ -628,7 +636,7 @@
     },
     {
       "itemId": "t6-ebsr-twelve-tables-vs-hammurabi",
-      "itemHash": "fa5273db6de453a8",
+      "itemHash": "6ca6917f2d54defb",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -636,7 +644,7 @@
     },
     {
       "itemId": "t6-mc-kingdom-to-republic",
-      "itemHash": "1d7cf37fde56315a",
+      "itemHash": "5c221ac30ff735e2",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -644,21 +652,37 @@
     },
     {
       "itemId": "t6-hot-rome-absorbs-greece",
-      "itemHash": "2dbcdcc48d1b7f0a",
+      "itemHash": "d9db0ca26b316469",
       "blind": [
-        0,
-        1
+        3,
+        4
       ],
       "authored": [
-        0,
-        1
+        3,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ms-closing-facts",
+      "itemHash": "454ad5225723bb50",
+      "blind": [
+        1,
+        2,
+        3
+      ],
+      "authored": [
+        1,
+        2,
+        3
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t6-ebsr-republic-to-empire",
-      "itemHash": "e80526391e85e412",
+      "itemHash": "4cdc23364121c6e3",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -674,7 +698,7 @@
     },
     {
       "itemId": "t6-cloze-patrician",
-      "itemHash": "88bdb5d8799543f4",
+      "itemHash": "74bd50a93631d3ae",
       "blind": [
         0
       ],
@@ -694,14 +718,14 @@
     },
     {
       "itemId": "t6-hot-plebeians-fight-for-a-share",
-      "itemHash": "8876d22b55b8b7f1",
+      "itemHash": "ab1a0d96381ae521",
       "blind": [
-        0,
-        1
+        2,
+        3
       ],
       "authored": [
-        0,
-        1
+        2,
+        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -723,23 +747,743 @@
       "status": "agree"
     },
     {
-      "itemId": "t5-ebsr-confucius-vs-laozi",
-      "itemHash": "bce79e7812f38813",
+      "itemId": "t1-ebsr-why-the-clay-record-survived",
+      "itemHash": "7f2aabf0aae2d911",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "t6-ms-closing-facts",
-      "itemHash": "e71c74489cd14bbc",
+      "itemId": "t1-ebsr-what-the-earliest-tablets-hold",
+      "itemHash": "2e6b274429cdd2ab",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-ebsr-sargon-and-the-first-empire",
+      "itemHash": "ecc5930a90329729",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-ebsr-farming-and-settling-down",
+      "itemHash": "91c1d3608bfb8718",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-ms-what-the-clay-kept",
+      "itemHash": "8dde6195b9c39204",
+      "blind": [
+        0,
+        2,
+        5
+      ],
+      "authored": [
+        0,
+        2,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-hot-fire-and-the-clay",
+      "itemHash": "0334fc801cb6dd19",
+      "blind": [
+        3,
+        4
+      ],
+      "authored": [
+        3,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-hot-what-the-tablets-hold",
+      "itemHash": "b26bd80d385d19da",
       "blind": [
         1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-cloze-ziggurat",
+      "itemHash": "689267c8a3e28d29",
+      "blind": [
+        1
+      ],
+      "authored": [
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-mc-why-burned-palaces-helped",
+      "itemHash": "fe3dcf4c34f307e9",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-mc-verified-but-unresolved",
+      "itemHash": "f4dd41d4ec0f2b74",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-mc-the-offices-one-promise",
+      "itemHash": "61433bfdea1b366b",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-match-tools-to-makers",
+      "itemHash": "4b481452634f3e40",
+      "blind": [
+        2,
+        0,
+        1
+      ],
+      "authored": [
+        2,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-ebsr-why-the-outside-stones-count",
+      "itemHash": "f44db4992b2497d3",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-ebsr-what-happened-to-the-north",
+      "itemHash": "afcc0914a20ab44b",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-ebsr-whose-reasoning-is-it",
+      "itemHash": "4555e99456fe5338",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-ebsr-what-should-have-happened",
+      "itemHash": "07719844e46c2714",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-ms-the-kingdom-that-split",
+      "itemHash": "d6476e90456ee6d2",
+      "blind": [
+        1,
+        3,
+        5
+      ],
+      "authored": [
+        1,
+        3,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-hot-why-enemy-stones-count",
+      "itemHash": "5374c6c9dbdb5356",
+      "blind": [
         2,
         3
       ],
       "authored": [
+        2,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-cloze-samaria",
+      "itemHash": "c427755ab459a460",
+      "blind": [
+        1
+      ],
+      "authored": [
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-mc-who-the-obelisk-names",
+      "itemHash": "81cde54c1a1d9e0b",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-mc-before-the-kings",
+      "itemHash": "299d3ed3e41f9911",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-mc-who-allowed-the-return",
+      "itemHash": "580bd995814fc26c",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-order-divided-monarchy-stages",
+      "itemHash": "abcb26f8e8b9ea2d",
+      "blind": [
+        2,
+        0,
+        4,
         1,
+        3
+      ],
+      "authored": [
+        2,
+        0,
+        4,
+        1,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ebsr-no-single-greek-religion",
+      "itemHash": "df00f799c5bbd070",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ebsr-why-calendars-are-good-evidence",
+      "itemHash": "248fe72f36d69685",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ebsr-how-the-long-war-ended",
+      "itemHash": "710623735969c97f",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ebsr-the-wars-warning-label",
+      "itemHash": "f2e38a1daadb1ce0",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ms-worship-in-daily-life",
+      "itemHash": "549e5a9ebce68699",
+      "blind": [
+        0,
+        1,
+        4
+      ],
+      "authored": [
+        0,
+        1,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-hot-the-offices-own-limit",
+      "itemHash": "1f689219ddaa4f4f",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-hot-one-witness-disclosed",
+      "itemHash": "50d1f8e59f98f973",
+      "blind": [
+        3,
+        4
+      ],
+      "authored": [
+        3,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-cloze-pythia",
+      "itemHash": "07a22e311c2163ce",
+      "blind": [
+        2
+      ],
+      "authored": [
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-mc-olympia-as-worship",
+      "itemHash": "2e01caa35c202fbd",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-mc-what-freed-spartans-to-train",
+      "itemHash": "85cf477095e41163",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-mc-how-the-sickness-is-filed",
+      "itemHash": "68799ec72e95d2b2",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-ebsr-why-the-visitor-counts",
+      "itemHash": "77a8a36bdcfc857e",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-ebsr-where-the-numerals-began",
+      "itemHash": "cb7d860255af9d67",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-ebsr-what-aryabhata-argued",
+      "itemHash": "b902e5812f82e93f",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-ebsr-what-karma-means",
+      "itemHash": "5327d894c5abbc8e",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-ms-visitor-and-number",
+      "itemHash": "0dafe03c36fe2078",
+      "blind": [
+        2,
+        3,
+        5
+      ],
+      "authored": [
+        2,
+        3,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-hot-built-then-carried",
+      "itemHash": "e4702e07031728a7",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-hot-a-witness-with-no-stake",
+      "itemHash": "b2b60d39e791d5f7",
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-cloze-gupta",
+      "itemHash": "5be0cba55cb7f917",
+      "blind": [
+        2
+      ],
+      "authored": [
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-mc-what-the-monk-came-for",
+      "itemHash": "260fa52bd11570f3",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-mc-what-made-the-cities-advanced",
+      "itemHash": "fd9c061e0c07a799",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-mc-what-the-title-means",
+      "itemHash": "a1609ee80bf467e4",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-ebsr-what-legalism-taught",
+      "itemHash": "81be606f5fe5fa4d",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-ebsr-the-credit-for-paper",
+      "itemHash": "30ac42d3c6fef426",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-ebsr-legalist-habits-outlast-the-qin",
+      "itemHash": "a66a92c30ffd29e8",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-ebsr-what-the-credit-leaves-out",
+      "itemHash": "22911a60785c295c",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-ms-third-school-and-paper",
+      "itemHash": "9d076f3c43c7c77e",
+      "blind": [
+        0,
+        4,
+        5
+      ],
+      "authored": [
+        0,
+        4,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-hot-what-legalism-held",
+      "itemHash": "d921a12d7400c33e",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-hot-why-cheap-paper-matters",
+      "itemHash": "0d8b82abf4e0e8c9",
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-cloze-legalism",
+      "itemHash": "72807172ac9a04ce",
+      "blind": [
+        1
+      ],
+      "authored": [
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-mc-who-carried-legalism-in",
+      "itemHash": "746fd70f6ecdd5ae",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-mc-what-han-officials-studied",
+      "itemHash": "4f4ac3c4b1aca930",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-mc-what-the-first-emperor-standardized",
+      "itemHash": "c829d0c1d4c647a1",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-match-turns-to-dynasties",
+      "itemHash": "b638a6dd4b649f41",
+      "blind": [
+        1,
+        2,
+        0
+      ],
+      "authored": [
+        1,
+        2,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-what-the-office-can-file",
+      "itemHash": "64b0fe9e881a5f5a",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-reachback-one-witness",
+      "itemHash": "1a9b7324d536b160",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-reachback-the-messenger",
+      "itemHash": "9bdced60fdd06995",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-reachback-what-survives",
+      "itemHash": "48fdb2c041853ce6",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ms-the-long-ending",
+      "itemHash": "7793e7376ba6e059",
+      "blind": [
+        1,
+        2,
+        5
+      ],
+      "authored": [
+        1,
+        2,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-hot-the-rule-and-what-it-files",
+      "itemHash": "61669fc4d7257fca",
+      "blind": [
+        0,
+        3
+      ],
+      "authored": [
+        0,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-cloze-earliest-writings",
+      "itemHash": "59c0f686b4d154e7",
+      "blind": [
+        2
+      ],
+      "authored": [
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-mc-reachback-what-both-scripts-did",
+      "itemHash": "f6ad339dd13d68d3",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-mc-reachback-what-outlasting-proved",
+      "itemHash": "b0db56fd3edc1d92",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-mc-how-far-it-had-spread",
+      "itemHash": "8c504d509d1fe5be",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-hot-whose-reasoning-is-it",
+      "itemHash": "d8dfe78b9ad563d2",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-order-the-long-war-stages",
+      "itemHash": "338f01d14e13782a",
+      "blind": [
+        1,
+        3,
+        2,
+        0,
+        4
+      ],
+      "authored": [
+        1,
+        3,
+        2,
+        0,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-hot-when-it-became-the-empires-religion",
+      "itemHash": "fc4a94587c32bbe8",
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
         2,
         3
       ],
