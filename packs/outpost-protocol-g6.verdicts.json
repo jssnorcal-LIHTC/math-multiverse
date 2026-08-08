@@ -1001,22 +1001,6 @@
       "status": "agree"
     },
     {
-      "itemId": "t2-match-order-status",
-      "itemHash": "2835bc8a90014ac4",
-      "blind": [
-        1,
-        2,
-        0
-      ],
-      "authored": [
-        1,
-        2,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t3-ebsr-air-behind-the-front",
       "itemHash": "15bc5a1428e3c369",
       "blind": 0,
@@ -1049,18 +1033,24 @@
       "status": "agree"
     },
     {
-      "itemId": "t3-ebsr-one-reading-is-not-a-warning",
-      "itemHash": "d1fb7d90012d27f7",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t3-ebsr-judged-on-the-log",
       "itemHash": "cc4f734f95e1ceb0",
       "blind": 3,
       "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-hot-warning-before-the-weather",
+      "itemHash": "d6b25321e20cfc31",
+      "blind": [
+        1,
+        4
+      ],
+      "authored": [
+        1,
+        4
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -1087,22 +1077,6 @@
       "authored": [
         1
       ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-mc-why-not-the-first-morning",
-      "itemHash": "a8e3f52e1d9238a0",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-mc-one-sharp-fall",
-      "itemHash": "5985ebd38dd4b250",
-      "blind": 1,
-      "authored": 1,
       "confidence": "high",
       "status": "agree"
     },
@@ -1487,16 +1461,42 @@
       "status": "agree"
     },
     {
-      "itemId": "t3-hot-warning-before-the-weather",
-      "itemHash": "d6b25321e20cfc31",
+      "itemId": "t2-match-order-status",
+      "itemHash": "380e9aeccac23dbe",
       "blind": [
         1,
-        4
+        2,
+        0
       ],
       "authored": [
         1,
-        4
+        2,
+        0
       ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ebsr-one-reading-is-not-a-warning",
+      "itemHash": "10b05cc9601410af",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-mc-why-not-the-first-morning",
+      "itemHash": "37660d6b5b6e2fb6",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-mc-one-sharp-fall",
+      "itemHash": "7a975111b07cad03",
+      "blind": 1,
+      "authored": 1,
       "confidence": "high",
       "status": "agree"
     }

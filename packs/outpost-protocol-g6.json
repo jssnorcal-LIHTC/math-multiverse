@@ -3316,7 +3316,7 @@
           0
         ]
       ],
-      "explain": "The order separates three different things a maintenance document has to carry: the work itself, the evidence that will close it, and the schedule that stops the problem recurring.  Reading the verification row as the cleaning is the usual slip, since both describe the panel, but a clean panel is effort while a recovered oxygen reading is the proof the effort worked."
+      "explain": "The order separates three different things a maintenance document has to carry: the work itself, the evidence that will close it, and the schedule that stops the problem recurring.  Reading the verification row as the cleaning is the usual slip, since both belong to the same repair, but a clean panel is effort while a recovered oxygen reading is the proof the effort worked."
     },
     {
       "id": "t3-ebsr-air-behind-the-front",
@@ -3469,7 +3469,7 @@
         "1": "The procedure keeps the colony line out of the warning decision entirely.  It is never used as a check on anything.",
         "3": "The twelve hours run the other way.  The warning must go out at least twelve hours BEFORE the front is expected, so that boats can still act on it."
       },
-      "explain": "A single reading can move and move back, which is ordinary weather rather than a signal, so the procedure requires at least two of the four readings to move together across two straight mornings.  The rule is about how many independent readings agree, not about which instrument is trusted."
+      "explain": "A single reading can move and move back, which is ordinary weather rather than a signal, so the procedure requires at least two of the four readings to move together from one morning to the next.  The rule is about how many independent readings agree, not about which instrument is trusted."
     },
     {
       "id": "t3-ebsr-judged-on-the-log",
@@ -3601,7 +3601,7 @@
         "The barometer had not yet reached its lowest point.",
         "The colony count had not been filed for the week yet.",
         "The wind had not yet swung round to the north.",
-        "Nothing had moved yet, and one morning cannot satisfy a two-morning rule."
+        "Nothing had moved yet, and a first morning has no morning before it to compare against."
       ],
       "key": 3,
       "distractorRationale": {
@@ -3609,7 +3609,7 @@
         "1": "The colony line stays out of the warning decision entirely, whichever morning it happens to be filed on.",
         "2": "The wind reaches north on the fifth morning, after the front has passed.  Waiting for it would put the warning several days late."
       },
-      "explain": "On the first morning the barometer read thirty and two tenths, humidity sat at forty-four percent, and the sky stayed clear, so nothing had moved in any direction.  The standing procedure needs at least two of the four readings moving together across two straight mornings, and a first morning cannot be two mornings however good its readings look."
+      "explain": "On the first morning the barometer read thirty and two tenths, humidity sat at forty-four percent, and the sky stayed clear, so nothing had moved in any direction.  The standing procedure needs at least two of the four readings moving together from one morning to the next, and a first morning has nothing behind it to compare against however good its readings look."
     },
     {
       "id": "t3-mc-one-sharp-fall",
@@ -3633,7 +3633,7 @@
         "2": "Filing the readings is required for every call, but it is what makes a call reviewable rather than what makes it justified.  The rule still has to be met first.",
         "3": "Twelve hours is a minimum lead time, not a window that forbids anything earlier.  The procedure leans toward calling it early on purpose."
       },
-      "explain": "The two-reading rule exists because a single instrument can move and move back, which is ordinary weather rather than a signal.  Two of the four readings moving together across two straight mornings is what separates a front from noise, and no amount of sharpness in one reading substitutes for a second reading agreeing with it."
+      "explain": "The two-reading rule exists because a single instrument can move and move back, which is ordinary weather rather than a signal.  Two of the four readings moving together from one morning to the next is what separates a front from noise, and no amount of sharpness in one reading substitutes for a second reading agreeing with it."
     },
     {
       "id": "t3-mc-cost-of-the-two-mistakes",
