@@ -131,7 +131,7 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
       const titlesOn = (subject) => page.$$eval(
         `.subject-shelf[data-subject="${subject}"] .mc-title`, (els) => els.map((e) => e.textContent.trim()));
       const PACK_SHELVES = {
-        ela: ['Cold Signal', 'Vault of Ages'],
+        ela: ['Cold Signal', 'Vault of Ages', 'Night Rounds'],
         sci: ['Outpost Protocol'],
         hist: ['Firsthand'],
       };
