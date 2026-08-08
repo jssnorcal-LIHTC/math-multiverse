@@ -96,17 +96,17 @@
       "questions": 8,
       "itemIds": [
         "t1-ebsr-what-is-a-subsystem",
-        "t1-ebsr-the-bigger-job",
-        "t1-ebsr-dim-light-panels",
-        "t1-ebsr-why-this-example",
-        "t1-ms-life-support-organized",
-        "t1-hot-four-definitions",
-        "t1-hot-ripple-examples",
-        "t1-cloze-interaction-def",
         "t1-mc-smallest-piece",
+        "t1-hot-four-definitions",
+        "t1-ms-life-support-organized",
+        "t1-cloze-interaction-def",
+        "t1-order-scale-of-systems",
+        "t1-ebsr-the-bigger-job",
         "t1-mc-two-events-connected",
+        "t1-hot-ripple-examples",
+        "t1-ebsr-dim-light-panels",
         "t1-mc-nested-correctly",
-        "t1-order-scale-of-systems"
+        "t1-ebsr-why-this-example"
       ]
     },
     {
@@ -120,17 +120,17 @@
       "questions": 8,
       "itemIds": [
         "t2-ebsr-what-is-ruled-out",
-        "t2-ebsr-real-cause-of-slip",
-        "t2-ebsr-why-send-an-operative",
-        "t2-ebsr-why-nothing-else-failed",
-        "t2-ms-why-oxygen-slipped",
-        "t2-hot-latest-drift-readings",
-        "t2-hot-dust-stayed-contained",
-        "t2-cloze-component-def",
         "t2-mc-oxygen-change",
+        "t2-hot-latest-drift-readings",
+        "t2-ms-why-oxygen-slipped",
+        "t2-cloze-component-def",
+        "t2-match-subsystem-status",
+        "t2-ebsr-real-cause-of-slip",
         "t2-mc-normal-drift-phrase",
+        "t2-hot-dust-stayed-contained",
+        "t2-ebsr-why-send-an-operative",
         "t2-mc-dust-on-a-different-part",
-        "t2-match-subsystem-status"
+        "t2-ebsr-why-nothing-else-failed"
       ]
     },
     {
@@ -144,17 +144,17 @@
       "questions": 8,
       "itemIds": [
         "t3-ebsr-what-happens-next",
-        "t3-ebsr-why-rain-forms",
-        "t3-ebsr-earliest-warning-sign",
-        "t3-ebsr-why-track-all-four",
-        "t3-ms-signs-of-a-front",
-        "t3-hot-storm-signals-not-colony",
-        "t3-hot-cold-air-mechanism",
-        "t3-cloze-air-mass-def",
         "t3-mc-what-is-a-front",
+        "t3-hot-storm-signals-not-colony",
+        "t3-ms-signs-of-a-front",
+        "t3-cloze-air-mass-def",
+        "t3-order-front-stages",
+        "t3-ebsr-why-rain-forms",
         "t3-mc-strongest-signal-day",
+        "t3-hot-cold-air-mechanism",
+        "t3-ebsr-earliest-warning-sign",
         "t3-mc-rising-pressure-transfer",
-        "t3-order-front-stages"
+        "t3-ebsr-why-track-all-four"
       ]
     },
     {
@@ -168,17 +168,17 @@
       "questions": 8,
       "itemIds": [
         "t4-ebsr-why-different-climates",
-        "t4-ebsr-why-cairn-bay-swings-less",
-        "t4-ebsr-why-trust-the-average",
-        "t4-ebsr-which-post-swings-more",
-        "t4-ms-why-cairn-bay-is-wetter",
-        "t4-hot-weather-vs-climate-def",
-        "t4-hot-wind-and-current-mechanisms",
-        "t4-cloze-unequal-heating",
         "t4-mc-steady-crop-post",
+        "t4-hot-weather-vs-climate-def",
+        "t4-ms-why-cairn-bay-is-wetter",
+        "t4-cloze-unequal-heating",
+        "t4-match-pattern-to-cause",
+        "t4-ebsr-why-cairn-bay-swings-less",
         "t4-mc-weather-word",
+        "t4-hot-wind-and-current-mechanisms",
+        "t4-ebsr-why-trust-the-average",
         "t4-mc-third-post-transfer",
-        "t4-match-pattern-to-cause"
+        "t4-ebsr-which-post-swings-more"
       ]
     },
     {
@@ -192,17 +192,17 @@
       "questions": 8,
       "itemIds": [
         "t5-ebsr-real-cause-of-drop",
-        "t5-ebsr-two-different-clocks",
-        "t5-ebsr-steady-vs-bouncy",
-        "t5-ebsr-one-planetary-pattern",
-        "t5-ms-the-adaptation-limit",
-        "t5-hot-gap-not-date",
-        "t5-hot-bouncing-vs-steady",
-        "t5-cloze-herring-clock",
         "t5-mc-herring-vs-nesting-shift",
+        "t5-hot-gap-not-date",
+        "t5-ms-the-adaptation-limit",
+        "t5-cloze-herring-clock",
+        "t5-short-what-is-widening",
+        "t5-ebsr-two-different-clocks",
         "t5-mc-bouncing-instrument-transfer",
+        "t5-hot-bouncing-vs-steady",
+        "t5-ebsr-steady-vs-bouncy",
         "t5-mc-why-one-station-cannot-see-it",
-        "t5-short-what-is-widening"
+        "t5-ebsr-one-planetary-pattern"
       ]
     },
     {
