@@ -3,30 +3,6 @@
   "model": "claude-sonnet-5",
   "records": [
     {
-      "itemId": "l1-ebsr-why-record-two",
-      "itemHash": "ab64422c0fefc7b8",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-ebsr-rana-detail",
-      "itemHash": "d2b079c17159494b",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-ebsr-central-idea-record",
-      "itemHash": "cf85f35c7b5cd3d3",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l1-ebsr-ferris-instruction",
       "itemHash": "c3bbcc6da317839a",
       "blind": 2,
@@ -99,20 +75,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-hot-whitlock-rule",
-      "itemHash": "9b61f1848d4fc4ee",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l1-hot-where-each-tortoise-was",
       "itemHash": "394d86b6e6843446",
       "blind": [
@@ -159,20 +121,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-cloze-why-she-wrote-two",
-      "itemHash": "b98723ba2cf4c834",
-      "blind": [
-        1,
-        0
-      ],
-      "authored": [
-        1,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l1-cloze-count-stays-open",
       "itemHash": "afaafc549bf19993",
       "blind": [
@@ -187,34 +135,10 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-mc-what-the-rule-asks",
-      "itemHash": "f5cabbf7800f4f7a",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-mc-owls-first",
-      "itemHash": "7a98c35dee5dad3f",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l1-mc-what-ferris-does-not-do",
       "itemHash": "42c1e969b798e70b",
       "blind": 2,
       "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-mc-why-not-dig",
-      "itemHash": "bb930d798c63a188",
-      "blind": 3,
-      "authored": 3,
       "confidence": "high",
       "status": "agree"
     },
@@ -231,62 +155,6 @@
       "itemHash": "dd579460076dff84",
       "blind": 1,
       "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-match-detail-to-what-it-shows",
-      "itemHash": "6c7f80eff1b7a390",
-      "blind": [
-        2,
-        0,
-        1
-      ],
-      "authored": [
-        2,
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-match-who-says-what",
-      "itemHash": "87bb2ff13751f429",
-      "blind": [
-        1,
-        2,
-        0
-      ],
-      "authored": [
-        1,
-        2,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-ebsr-supplement-column",
-      "itemHash": "fdc0255adc03875e",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-ebsr-two-initials-purpose",
-      "itemHash": "9d3991c89669d23b",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-ebsr-white-tag-meaning",
-      "itemHash": "f1ab209100b6a6da",
-      "blind": 2,
-      "authored": 2,
       "confidence": "high",
       "status": "agree"
     },
@@ -315,38 +183,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-ebsr-clearance-lot",
-      "itemHash": "867ac59911e69d9f",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-ebsr-paper-cannot-diagnose",
-      "itemHash": "eede1bb701e47669",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-ms-diet-card-facts",
-      "itemHash": "e4d80470e229b8b2",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l2-ms-thiamine-chain",
       "itemHash": "1825dfe46508cd2f",
       "blind": [
@@ -358,20 +194,6 @@
         0,
         1,
         3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-hot-card-requires",
-      "itemHash": "d171a0ac5584553a",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
       ],
       "confidence": "high",
       "status": "agree"
@@ -393,34 +215,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-hot-what-the-paper-shows",
-      "itemHash": "314b99cf38acc659",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-hot-local-rule-versus-fact",
-      "itemHash": "0d5cd3429eba1f0e",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l2-cloze-thiamine-chain",
       "itemHash": "48f0b2d3e52e9ce0",
       "blind": [
@@ -435,82 +229,10 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-cloze-what-paper-proves",
-      "itemHash": "2732da64daf41776",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-mc-narrow-column",
-      "itemHash": "ee66e484a42762c3",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-mc-front-freezer-rule",
-      "itemHash": "17c803d38babdb6c",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l2-mc-why-supplement-exists",
       "itemHash": "0169e26204b0194d",
       "blind": 0,
       "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-mc-what-cooking-would-do",
-      "itemHash": "e67680222b4cd228",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-mc-clearance-word",
-      "itemHash": "5ceadc0f6861baff",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-mc-what-the-narrator-refuses",
-      "itemHash": "e966ece53a362e38",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-order-how-the-case-assembles",
-      "itemHash": "a8b5261dfe84f37a",
-      "blind": [
-        1,
-        3,
-        0,
-        2
-      ],
-      "authored": [
-        1,
-        3,
-        0,
-        2
-      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -739,14 +461,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l3-mc-what-timing-rules-out",
-      "itemHash": "7c65671cb8c76724",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l3-mc-why-bill-up",
       "itemHash": "d3beb3e3d63609e9",
       "blind": 0,
@@ -787,78 +501,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l4-ebsr-advisory-vs-warning",
-      "itemHash": "55641a26f89a8695",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ebsr-bulletin-three-parts",
-      "itemHash": "46f02e5a8bc24122",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ebsr-whose-numbers",
-      "itemHash": "ea59fea97c8e9df5",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ebsr-clipping-error-inspection",
-      "itemHash": "99e13a51b680bf37",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ebsr-clipping-sourcing",
-      "itemHash": "758a3a0ecef4a26a",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ms-article-accurate",
-      "itemHash": "408a25a7bdccda09",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ms-bulletin-contents",
-      "itemHash": "40a1f326c761b4b9",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l4-hot-inspections-walked",
       "itemHash": "cf977295a820614a",
       "blind": [
@@ -868,62 +510,6 @@
       "authored": [
         0,
         1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-hot-whose-words",
-      "itemHash": "f0cf39b916a539c7",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-hot-the-two-false-claims",
-      "itemHash": "d0e121f30ab44a93",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-hot-what-the-reporter-skipped",
-      "itemHash": "93af144de9736e10",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-cloze-two-errors",
-      "itemHash": "b8b50b835bf67151",
-      "blind": [
-        1,
-        0
-      ],
-      "authored": [
-        1,
-        0
       ],
       "confidence": "high",
       "status": "agree"
@@ -955,54 +541,6 @@
       "itemHash": "961a472b3d7580ef",
       "blind": 3,
       "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-mc-advisory-window",
-      "itemHash": "3595e47dcd3590a7",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-mc-bulletin-last-line",
-      "itemHash": "685bec4d630ec3b3",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-mc-what-the-article-rests-on",
-      "itemHash": "f296cc68f166fedd",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-mc-what-checking-means",
-      "itemHash": "eb780c579a8f585a",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-match-claim-to-backing",
-      "itemHash": "a973debcd80cd297",
-      "blind": [
-        1,
-        2,
-        0
-      ],
-      "authored": [
-        1,
-        2,
-        0
-      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -1055,22 +593,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-ebsr-why-not-wade-out",
-      "itemHash": "2397b2bf9b124977",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ebsr-alva-questions",
-      "itemHash": "01620e795a1105f2",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l5-ebsr-why-no-name",
       "itemHash": "5c38b4a21218e512",
       "blind": 1,
@@ -1083,22 +605,6 @@
       "itemHash": "c1464049d2919531",
       "blind": 1,
       "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ms-what-she-did-not-do",
-      "itemHash": "dcb4594a8ed0c482",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -1149,20 +655,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-hot-the-rule",
-      "itemHash": "f97ab45d4bffcc8b",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l5-hot-two-reasons-no-name",
       "itemHash": "aa7c520539d27962",
       "blind": [
@@ -1191,20 +683,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-cloze-not-our-animal",
-      "itemHash": "4906cbf8ef7110be",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l5-mc-what-she-knows-the-route-by",
       "itemHash": "cefb0d773067d825",
       "blind": 0,
@@ -1221,52 +699,10 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-mc-alvas-instruction",
-      "itemHash": "7685a37772bc3b0b",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-how-alva-works",
-      "itemHash": "3137ac9e733b668d",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l5-mc-what-a-name-anchors",
       "itemHash": "43c6986e6bb536cc",
       "blind": 0,
       "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-what-she-does-not-know",
-      "itemHash": "df29c47e1a694445",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-order-the-heron-night",
-      "itemHash": "4d9b981b1004ce01",
-      "blind": [
-        1,
-        2,
-        3,
-        0
-      ],
-      "authored": [
-        1,
-        2,
-        3,
-        0
-      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -1313,64 +749,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-ebsr-two-records-agree",
-      "itemHash": "f40f688538061032",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-report-second-step",
-      "itemHash": "f140d6cff87b1a0f",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-defense-claim",
-      "itemHash": "e28ae0bd4db86454",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-correction-letter",
-      "itemHash": "3d95054177f5ad43",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-bulletin-check-requirement",
-      "itemHash": "5c0ff6a16fd356b7",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-ms-five-records",
       "itemHash": "4f731bf50b2abf02",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ms-three-changes",
-      "itemHash": "b00d399f1df39fef",
       "blind": [
         0,
         1,
@@ -1415,36 +795,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-hot-first-two-steps",
-      "itemHash": "f5898944c8e1a6fb",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-hot-three-changes",
-      "itemHash": "1abf6a24b31f316e",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-cloze-settled-and-open",
       "itemHash": "5f1aa767c80f0941",
       "blind": [
@@ -1454,20 +804,6 @@
       "authored": [
         1,
         0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-cloze-the-defence",
-      "itemHash": "8f681b698f49473b",
-      "blind": [
-        0,
-        2
-      ],
-      "authored": [
-        0,
-        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -1497,8 +833,672 @@
       "status": "agree"
     },
     {
+      "itemId": "l1-ebsr-why-record-two",
+      "itemHash": "3d87a7fa3a87e9e8",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-rana-detail",
+      "itemHash": "6b97a6da5d6392aa",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-central-idea-record",
+      "itemHash": "21e65b8494dbce7a",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-hot-whitlock-rule",
+      "itemHash": "5268deb15c82611b",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-cloze-why-she-wrote-two",
+      "itemHash": "c3f93721cec845f0",
+      "blind": [
+        1,
+        0
+      ],
+      "authored": [
+        1,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-what-the-rule-asks",
+      "itemHash": "0718cea0726a4030",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-owls-first",
+      "itemHash": "b8c4db7c776399ce",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-why-not-dig",
+      "itemHash": "4258a5c79adcefb6",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-match-detail-to-what-it-shows",
+      "itemHash": "982fa6428b397d8f",
+      "blind": [
+        2,
+        0,
+        1
+      ],
+      "authored": [
+        2,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-match-who-says-what",
+      "itemHash": "23afe86e09734e7e",
+      "blind": [
+        1,
+        2,
+        0
+      ],
+      "authored": [
+        1,
+        2,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-supplement-column",
+      "itemHash": "8f835e6f26d2016b",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-two-initials-purpose",
+      "itemHash": "8cd74676f1a7810b",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-white-tag-meaning",
+      "itemHash": "00e1296220f09d43",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-clearance-lot",
+      "itemHash": "70ef7db609de84ce",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ebsr-paper-cannot-diagnose",
+      "itemHash": "8924c9c33e04810f",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ms-diet-card-facts",
+      "itemHash": "05694f388171b213",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-hot-card-requires",
+      "itemHash": "ec3e31cf25f49f63",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-hot-what-the-paper-shows",
+      "itemHash": "77c4619132c3bfe2",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-hot-local-rule-versus-fact",
+      "itemHash": "93128dfe1ecaca1b",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-cloze-what-paper-proves",
+      "itemHash": "8eba095ab14fef6c",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-narrow-column",
+      "itemHash": "0c7432738804f790",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-front-freezer-rule",
+      "itemHash": "ade7123301d54bce",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-what-cooking-would-do",
+      "itemHash": "47a5f965fb8e1ee8",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-clearance-word",
+      "itemHash": "e30d2479c499102a",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-what-the-narrator-refuses",
+      "itemHash": "46ac6d734cbfa65e",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-order-how-the-case-assembles",
+      "itemHash": "f994392fc5367cfa",
+      "blind": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "authored": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-mc-what-timing-rules-out",
+      "itemHash": "cbbc552c081389c5",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-advisory-vs-warning",
+      "itemHash": "06ce2daaebfec40c",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-bulletin-three-parts",
+      "itemHash": "cd4cda736bc1d35c",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-whose-numbers",
+      "itemHash": "f3011f9766adc583",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-clipping-error-inspection",
+      "itemHash": "4ac69d44087fbf57",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-clipping-sourcing",
+      "itemHash": "55c8fdbee8c1a737",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ms-article-accurate",
+      "itemHash": "ee03d429860b8436",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ms-bulletin-contents",
+      "itemHash": "0a2d29f5836320c5",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-hot-whose-words",
+      "itemHash": "ac770406a5672149",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-hot-the-two-false-claims",
+      "itemHash": "7e2e4d3b42188999",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-hot-what-the-reporter-skipped",
+      "itemHash": "c9f75b67597871bf",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-cloze-two-errors",
+      "itemHash": "a5eaaa99532d3eb9",
+      "blind": [
+        1,
+        0
+      ],
+      "authored": [
+        1,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-advisory-window",
+      "itemHash": "33f3c27177264ad8",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-bulletin-last-line",
+      "itemHash": "d5ac111beebf15ad",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-what-the-article-rests-on",
+      "itemHash": "f991c4fbb27206f7",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-what-checking-means",
+      "itemHash": "d64c2833a7e8e5e4",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-match-claim-to-backing",
+      "itemHash": "6432d8264db1a33c",
+      "blind": [
+        1,
+        2,
+        0
+      ],
+      "authored": [
+        1,
+        2,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-why-not-wade-out",
+      "itemHash": "122192aa6932c72f",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-alva-questions",
+      "itemHash": "7bc4886a7358b575",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ms-what-she-did-not-do",
+      "itemHash": "f9c3fa7d72e97eb7",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-hot-the-rule",
+      "itemHash": "cd9a026d1234d7f2",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-cloze-not-our-animal",
+      "itemHash": "74a62fe6016ee0c5",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-alvas-instruction",
+      "itemHash": "fbc693c6eb225be0",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-how-alva-works",
+      "itemHash": "2383a4b3c6ae79f4",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-what-she-does-not-know",
+      "itemHash": "756ed4d0ea236213",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-order-the-heron-night",
+      "itemHash": "c57875c33e759436",
+      "blind": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "authored": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-two-records-agree",
+      "itemHash": "8e122861aef216f7",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-report-second-step",
+      "itemHash": "7a72c96954b495fc",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-defense-claim",
+      "itemHash": "1960b60ab7963044",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-correction-letter",
+      "itemHash": "a2bfcf4950eee6a9",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-bulletin-check-requirement",
+      "itemHash": "a9351c9b6d9ea6e4",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ms-three-changes",
+      "itemHash": "ac6ad46bd7e14e5f",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-hot-first-two-steps",
+      "itemHash": "7650c5abac921818",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-hot-three-changes",
+      "itemHash": "8d502630688956a4",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-cloze-the-defence",
+      "itemHash": "11c41556f20402d7",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-mc-what-report-refuses",
-      "itemHash": "ff0ed8a3c5650d98",
+      "itemHash": "145e86fe84799b17",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1506,7 +1506,7 @@
     },
     {
       "itemId": "l6-mc-why-second-column",
-      "itemHash": "a23b329fe1317129",
+      "itemHash": "3d71a1e1590e3734",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -1514,7 +1514,7 @@
     },
     {
       "itemId": "l6-mc-final-line",
-      "itemHash": "565f3f1c01a77305",
+      "itemHash": "2ebc133a041de2a4",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
