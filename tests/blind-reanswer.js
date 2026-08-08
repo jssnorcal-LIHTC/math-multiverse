@@ -218,17 +218,70 @@ async function main() {
 
   console.log(`\n=== blind-reanswer: ${agree} agree, ${disagree} disagree, ${failed} failed ===`);
   console.log(`ledger written: ${ledgerPath}`);
+
+  // ROSTER COVERAGE. Every comparable item must end up with a record, and the run must say so out
+  // loud rather than leaving the count to be noticed downstream.
+  //
+  // The gap this closes: when a job fails, the code above carries the PRIOR record forward so a
+  // human adjudication is never destroyed. An item that is NEW has no prior record to carry, so it
+  // leaves the ledger one short. The run does already signal that (an ERROR line, a failed count, and
+  // a non-zero exit), and validate-pack independently refuses the pack, so nothing was ever silently
+  // blessed. What was missing is an assertion that names WHICH items are absent, at the moment the
+  // ledger is written, instead of a reader having to derive it from two counts.
+  const rosterIds = (pack.items || []).filter(i => authoredKeyOf(i) !== null).map(i => i.id);
+  const writtenIds = new Set(out.records.map(r => r.itemId));
+  const missingIds = rosterIds.filter(id => !writtenIds.has(id));
+  console.log(`roster coverage: ${writtenIds.size} record(s) written for ${rosterIds.length} comparable item(s)` +
+    ` (${(pack.items || []).length - rosterIds.length} blind-exempt)`);
+  if (missingIds.length) {
+    console.log(`\nROSTER SHORTFALL: ${missingIds.length} comparable item(s) have NO record:`);
+    missingIds.forEach(id => console.log(`  MISSING  ${id}`));
+    console.log('Re-run those ids with --only before the pack can ship.');
+  }
+
   if (disagree) {
     console.log('\nEvery "needs-adjudication" record must become "adjudicated" with a note, an');
     console.log('adjudicatedBy and an adjudicatedAt, or the item must be fixed. validate-pack will');
     console.log('reject the pack until then, which is the point.');
   }
-  process.exit(failed ? 1 : 0);
+  process.exit((failed || missingIds.length) ? 1 : 0);
+}
+
+// The roster-coverage rule, exported so it can be exercised without an API run. A check that has
+// never been watched fail is an assumption; `node tests/blind-reanswer.js --self-test-roster` runs it
+// against a synthetic ledger that is missing one roster id and requires it to fire.
+function rosterShortfall(items, records) {
+  const roster = (items || []).filter(i => authoredKeyOf(i) !== null).map(i => i.id);
+  const written = new Set((records || []).map(r => r.itemId));
+  return roster.filter(id => !written.has(id));
+}
+
+function selfTestRoster() {
+  const items = [
+    { id: 'a', type: 'mc', key: 0 },
+    { id: 'b', type: 'order', key: [1, 0] },
+    { id: 'c', type: 'shorttext', accept: ['x'], maxWords: 3 },
+  ];
+  const full = [{ itemId: 'a' }, { itemId: 'b' }];
+  const short = [{ itemId: 'a' }];
+  const controls = [
+    ['a complete ledger reports no shortfall', rosterShortfall(items, full).length === 0],
+    ['a ledger missing one roster id FIRES, naming it', JSON.stringify(rosterShortfall(items, short)) === '["b"]'],
+    ['the blind-exempt shorttext is never counted into the roster', !rosterShortfall(items, []).includes('c')],
+    ['an empty ledger fires for every comparable id', rosterShortfall(items, []).length === 2],
+  ];
+  let bad = 0;
+  console.log('blind-reanswer: roster-coverage self test');
+  for (const [label, ok] of controls) { console.log(`  ${ok ? 'CONTROL FIRED ' : 'CONTROL MISSED'}  ${label}`); if (!ok) bad++; }
+  console.log(`  ${controls.length - bad} of ${controls.length} controls fired`);
+  process.exit(bad ? 1 : 0);
 }
 
 // Only run a pack when invoked directly. tests/verdicts.test.js requires this file to reach
 // parseAnswer, and a bare require must not start a run or call process.exit.
-if (require.main === module) {
+if (require.main === module && process.argv.includes('--self-test-roster')) {
+  selfTestRoster();
+} else if (require.main === module) {
   main().catch(e => { console.error('blind-reanswer crashed: ' + (e && e.stack || e)); process.exit(2); });
 }
 
