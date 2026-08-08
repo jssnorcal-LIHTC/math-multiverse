@@ -10580,7 +10580,17 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       key: 'rescue', title5: 'Storm of the Century', chapter: 'In which Captain C. Robin rescues all',
       chapter6: 'In which Captain C. Robin solves it all',
       goal: 'Captain C. Robin rescues',
-      plate: 'art/shepard-1926-p160-2.png', plateSetup: 'art/shepard-1926-p160-1.png', // Owl on Piglet's tree, one leaf before
+      // The setup plate was p160-1 (Owl on Piglet's tree, one leaf before the
+      // rescue) until 26-0807. That plate is now the source of the scene's own
+      // tree crop, so mounting it here put the same tree and the same Owl in one
+      // frame twice at two scales, which reads as a rendering fault rather than
+      // as art. p153-2 replaces it: Christopher Robin crouched under his umbrella
+      // planting the daily flood-marker stick, which suits the level's storm mood
+      // and shares no subject with anything the scene draws over it. It is also
+      // beat 5's simultaneous inset, but the two never appear in the same frame
+      // (a story stage renders exactly one beat), so this is sequential reuse,
+      // not duplication.
+      plate: 'art/shepard-1926-p160-2.png', plateSetup: 'art/shepard-1926-p153-2.png',
     },
   ];
   // Boat-beats: Pooh is drawn floating once The Floating Bear has actually
@@ -10594,8 +10604,10 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   // put on FB_BEATS, neither inventing new data:
   //  - plateRetrieval / plateSetup: a TEMPORAL pair -- the beat's plate
   //    swaps once the level is nearly finished, echoing the book's own
-  //    "written, then four days later retrieved" (beat 3) and "Owl's setup
-  //    panel, one leaf before the rescue plate" (beat 6) sequencing.
+  //    "written, then four days later retrieved" (beat 3) and, for beat 6,
+  //    "the flood still being measured, then the rescue arriving" (26-0807:
+  //    beat 6's setup panel was Owl on Piglet's tree until that plate became
+  //    the scene's own tree crop, see FB_BEATS).
   //  - plateMotif / plateAlt[0]: a SIMULTANEOUS secondary vignette shown
   //    alongside the primary plate, echoing how Shepard's own plates often
   //    pair two small vignettes on one printed page (as 155/156 do).
@@ -10702,11 +10714,17 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
       `Everyone agreed a Clever Plan was needed, and everyone looked at Pooh.`,
     ],
     [ // 5: Storm of the Century -- Captain C. Robin rescues all
-      // Task 4: rewritten to fit the PRE-swap plateSetup scene (p160-1, Owl
-      // perched on Piglet's tree, one leaf before the rescue) -- the prior
+      // Task 4: rewritten to fit the PRE-swap plateSetup scene -- the prior
       // default pool described the rescue as already under way, which read
-      // against a plate showing Owl alone, calm, no boat or captain yet. See
+      // against a setup plate showing no boat and no captain yet. See
       // FB_BEAT_CAPTIONS_SWAPPED['rescue'] for the post-swap (p160-2) pool.
+      // 26-0807: the setup plate moved from p160-1 to p153-2 (C.R. planting the
+      // flood-marker stick) and this pool still holds, because what it names is
+      // still on screen. Owl did not leave the frame with p160-1; he came
+      // forward into it -- he is perched on the branch of the scene's own tree
+      // crop, which is cut from that same plate. The waiting and the undropped
+      // flood now sit against a plate about measuring the water, which is if
+      // anything a closer fit than before.
       `Owl perched at the top of Piglet's tree, keeping a very owlish watch on the water.`,
       `The flood had not dropped an inch, and there was nothing to do but wait, which Owl found tiresome.`,
       `Piglet watched the grey water from his window, and hoped help was not too far off.`,
@@ -10725,7 +10743,8 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   //
   // Task 4: 'rescue' added -- beat 6's original default pool described the
   // rescue as already under way, which read against the PRE-swap plateSetup
-  // plate (p160-1, Owl alone on Piglet's tree, no boat or captain in sight).
+  // plate (then p160-1, Owl alone on Piglet's tree; p153-2 since 26-0807,
+  // C.R. planting the flood-marker stick -- either way no boat, no captain).
   // FB_BEAT_CAPTIONS[5] above was rewritten to fit that calm setup scene; this
   // entry supplies the rescue-in-progress captions for the POST-swap plate
   // (p160-2) instead, echoing the ship's-log line already established at level
@@ -10800,10 +10819,12 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
 
   // ---- Shepard-style illustrations ----
 
-  // ---- Floating Bear pen-and-ink art (E. H. Shepard style, redrawn 26-0708).
-  //      All draw helpers namespaced fb*/FB_* to avoid any collision. ----
+  // ---- Floating Bear pen-and-ink art. The scenery below (weather, water, bank,
+  //      distant wood) is drawn in Shepard's style; the figures in it are Shepard's
+  //      own 1926 plates, see FB_SCENE_ART further down. All helpers namespaced
+  //      fb*/FB_* to avoid any collision. ----
   const FB_INK = '#3a2b1c', FB_SOFT = '#b0a184', FB_PAPER = '#f4ead1',
-        FB_PAPER2 = '#ede0c1', FB_HONEY = '#e7c47f', FB_WATER = '#d3ddd6';
+        FB_PAPER2 = '#ede0c1', FB_WATER = '#d3ddd6';
   function fbWob(i) { return (Math.sin(i * 12.9898) * 43758.5453) - Math.floor(Math.sin(i * 12.9898) * 43758.5453); }
   function fbCloud(cx, cy, rx, ry, bumps, seed) {
     seed = seed || 0; let d = ''; const N = bumps;
@@ -10826,84 +10847,59 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     }
     return `<g stroke="${FB_INK}" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.8">${s}</g>`;
   }
-  function fbPoohFig(lookUp) {
-    const eyeY = lookUp ? 42 : 45, browY = lookUp ? 35 : 39;
-    return `<g stroke="${FB_INK}" fill="none" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M 82 80 q 22 5 21 26 q -1 12 -12 12" stroke-width="1.7" fill="${FB_PAPER2}"/>
-      <path d="M 60 66 Q 31 71 31 103 Q 31 137 62 139 Q 95 139 95 104 Q 95 73 70 66 Z" stroke-width="1.9" fill="${FB_PAPER2}"/>
-      <path d="M 36 95 Q 63 105 90 95" stroke-width="1.2"/>
-      <path d="M 45 137 q -6 9 3 12 q 8 2 11 -4" stroke-width="1.7" fill="${FB_PAPER2}"/>
-      <path d="M 73 138 q 6 9 -3 12 q -8 2 -11 -4" stroke-width="1.7" fill="${FB_PAPER2}"/>
-      <path d="M 41 82 q -14 6 -13 24 q 1 11 10 11 q 8 0 10 -8" stroke-width="1.7" fill="${FB_PAPER2}"/>
-      <circle cx="63" cy="46" r="29" stroke-width="1.9" fill="${FB_PAPER}"/>
-      <path d="M 41 29 q -8 -6 -3 -12 q 8 -3 13 6" stroke-width="1.7" fill="${FB_PAPER}"/>
-      <path d="M 85 29 q 8 -6 3 -12 q -8 -3 -13 6" stroke-width="1.7" fill="${FB_PAPER}"/>
-      <path d="M 51 52 Q 49 69 66 69 Q 81 68 79 54 Q 66 60 51 52 Z" stroke-width="1.4" fill="${FB_PAPER2}"/>
-      <ellipse cx="64" cy="57" rx="4.2" ry="3.1" fill="${FB_INK}" stroke="none"/>
-      <path d="M 64 60 Q 60 66 56 64 M 64 60 Q 68 66 72 64" stroke-width="1.1"/>
-      <circle cx="54" cy="${eyeY}" r="2" fill="${FB_INK}" stroke="none"/><circle cx="73" cy="${eyeY}" r="2" fill="${FB_INK}" stroke="none"/>
-      <path d="M 50 ${browY} q 4 -3 8 -1 M 69 ${browY} q 4 -2 8 1" stroke-width="0.9"/>
-      <g stroke-width="0.6" opacity="0.28"><path d="M 45 112 q 6 8 14 9"/><path d="M 43 104 q 8 10 18 11"/><path d="M 47 120 q 6 6 12 7"/><path d="M 78 98 q 5 8 4 16"/></g>
-    </g>`;
-  }
-  function fbFloatPooh() {
-    return `<g stroke="${FB_INK}" fill="none" stroke-linejoin="round" stroke-linecap="round">
-      <ellipse cx="2" cy="10" rx="40" ry="6" fill="${FB_INK}" opacity="0.07" stroke="none"/>
-      <g stroke-width="1" opacity="0.45"><path d="M -50 8 q 24 9 48 0"/><path d="M -66 14 q 33 11 66 0"/><path d="M 34 10 q 15 6 30 0"/></g>
-      <path d="M -32 4 Q -37 -20 -29 -34 L 29 -34 Q 37 -20 32 4 Z" fill="${FB_HONEY}" stroke-width="1.8"/>
-      <path d="M -36 -34 Q 0 -41 36 -34 Q 36 -27 0 -26 Q -36 -27 -36 -34 Z" fill="${FB_PAPER}" stroke-width="1.6"/>
-      <path d="M -30 4 Q 0 13 30 4" stroke-width="1.6"/>
-      <path d="M -27 8 Q 0 15 27 8" stroke-width="0.9" opacity="0.4"/>
-      <g stroke-width="0.6" opacity="0.32"><path d="M -25 -23 q 3 14 4 24"/><path d="M 27 -23 q -3 14 -4 24"/><path d="M -12 -22 q 2 14 2 24"/></g>
-      <g transform="translate(0,-33)">
-        <path d="M -13 -2 q -6 8 -3 15 q 2 5 7 4" stroke-width="1.5" fill="${FB_PAPER2}"/>
-        <path d="M 13 -2 q 6 8 3 15 q -2 5 -7 4" stroke-width="1.5" fill="${FB_PAPER2}"/>
-        <path d="M -15 -6 Q -21 -22 -13 -30 Q 0 -37 13 -30 Q 21 -22 15 -6 Q 0 1 -15 -6 Z" stroke-width="1.7" fill="${FB_PAPER2}"/>
-        <path d="M -14 -20 q -9 6 -6 15 q 2 6 9 4" stroke-width="1.4" fill="${FB_PAPER2}"/>
-        <path d="M 14 -20 q 9 6 6 15 q -2 6 -9 4" stroke-width="1.4" fill="${FB_PAPER2}"/>
-        <g stroke-width="0.5" opacity="0.24"><path d="M -8 -8 q 4 5 10 6"/><path d="M -9 -14 q 5 6 12 7"/></g>
-        <circle cx="0" cy="-40" r="15.5" stroke-width="1.7" fill="${FB_PAPER}"/>
-        <path d="M -11.5 -49 q -5 -4 -2 -8 q 5 -2 8 3" stroke-width="1.4" fill="${FB_PAPER}"/>
-        <path d="M 11.5 -49 q 5 -4 2 -8 q -5 -2 -8 3" stroke-width="1.4" fill="${FB_PAPER}"/>
-        <path d="M -8 -37 Q -9 -28 1 -28 Q 9 -29 8 -36 Q 0 -33 -8 -37 Z" stroke-width="1.2" fill="${FB_PAPER2}"/>
-        <ellipse cx="0.5" cy="-32" rx="2.3" ry="1.7" fill="${FB_INK}" stroke="none"/>
-        <circle cx="-6" cy="-43" r="1.3" fill="${FB_INK}" stroke="none"/><circle cx="6" cy="-43" r="1.3" fill="${FB_INK}" stroke="none"/>
-        <path d="M -9 -47 q 3 -2 6 -1 M 3 -48 q 3 -1 6 1" stroke-width="0.8"/>
-      </g>
-    </g>`;
-  }
-  function fbTree(tx, groundY, h) {
-    const topY = groundY - h, cx = tx, cy = topY + h * 0.20;
-    return `<g>
-      <path d="M ${tx - 10} ${groundY} Q ${tx - 13} ${groundY - h * 0.5} ${tx - 7} ${topY + h * 0.30} L ${tx + 8} ${topY + h * 0.30} Q ${tx + 13} ${groundY - h * 0.5} ${tx + 11} ${groundY} Z" fill="${FB_PAPER2}" stroke="${FB_INK}" stroke-width="1.8"/>
-      <path d="M ${tx - 10} ${groundY} q -8 -2 -15 3 M ${tx + 11} ${groundY} q 8 -1 14 4" fill="none" stroke="${FB_INK}" stroke-width="1.4" stroke-linecap="round"/>
-      <g stroke="${FB_INK}" stroke-width="0.6" fill="none" opacity="0.5" stroke-linecap="round">
-        <path d="M ${tx - 5} ${groundY - 14} q 3 -22 1 -42"/><path d="M ${tx + 3} ${groundY - 10} q -2 -26 0 -48"/>
-        <path d="M ${tx - 8} ${groundY - 34} q 4 3 7 1"/><path d="M ${tx - 2} ${groundY - 56} q 4 3 7 1"/></g>
-      <g stroke="${FB_INK}" stroke-width="0.5" fill="none" opacity="0.28" stroke-linecap="round">
-        ${Array.from({ length: 7 }, (_, i) => `<path d="M ${tx + 6} ${groundY - 16 - i * 7} q 3 3 5 0"/>`).join('')}</g>
-      <path d="M ${tx - 3} ${groundY - 42} q -6 2 -5 11 q 1 7 7 7 q 6 0 6 -8 q 0 -10 -8 -10 Z" fill="${FB_INK}" opacity="0.8"/>
-      <path d="${fbCloud(cx, cy, 60, 45, 22, 1)}" fill="${FB_PAPER}" stroke="${FB_INK}" stroke-width="1.8"/>
-      <path d="${fbCloud(tx - 33, topY + h * 0.31, 33, 27, 15, 3)}" fill="${FB_PAPER}" stroke="${FB_INK}" stroke-width="1.6"/>
-      <path d="${fbCloud(tx + 35, topY + h * 0.29, 35, 29, 15, 5)}" fill="${FB_PAPER}" stroke="${FB_INK}" stroke-width="1.6"/>
-      <g stroke="${FB_INK}" stroke-width="0.6" fill="none" opacity="0.3" stroke-linecap="round">
-        ${Array.from({ length: 16 }, (_, i) => { const t = i / 15, x = cx - 52 + t * 104, y = cy + 30 + Math.sin(t * Math.PI) * 10; return `<path d="M ${x.toFixed(1)} ${y.toFixed(1)} q 2 5 -1 8"/>`; }).join('')}
-      </g>
-      <g stroke="${FB_INK}" stroke-width="0.55" fill="none" opacity="0.28" stroke-linecap="round">
-        ${Array.from({ length: 22 }, (_, i) => { const a = fbWob(i) * 6.28, r = 14 + fbWob(i * 2) * 40, x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r * 0.62; return `<path d="M ${x.toFixed(1)} ${y.toFixed(1)} q 2 4 -1 6"/>`; }).join('')}
-      </g></g>`;
+  // ---- Scene figures: E. H. Shepard's own 1926 linework, not redrawn ----
+  //
+  // The bear, the jar-boat, the tree and the honey pots used to be procedural SVG paths.
+  // They are now crops lifted straight out of the shipped plates by
+  // art/tools/fb-scene-crops.py; every crop box, and the tonal levels applied to it, is
+  // recorded in art/PROVENANCE-shepard-1926.md. Each crop's paper is knocked out to
+  // transparency and its ink tinted to FB_INK, so plate line and drawn line read as one
+  // hand and the scene's own paper shows through underneath.
+  //
+  // Two consequences for how they are mounted:
+  //  - The fbRough displacement filter is NOT applied to them. It exists to rough up
+  //    machine-perfect vector paths; run over real pen strokes it only smears them.
+  //  - Boxes are keyed by asset path, not by call site, so the box travels with the
+  //    image if it is ever remounted -- the FB_PLATE_CROP idiom. w/h are scene units in
+  //    the 600x280 viewBox and hold each file's own aspect ratio; preserveAspectRatio
+  //    "meet" makes a mismatch letterbox rather than stretch, but the ratios below are
+  //    computed from the files and checked against the rendered pixels, since a
+  //    correctly sized box will happily hold a badly cropped image.
+  const FB_SCENE_ART = {
+    'art/fb-scene-tree.png':      { w: 250, h: 207.6 },  // 760x631
+    'art/fb-scene-pooh-bank.png': { w: 50,  h: 79.0 },   // 300x474
+    'art/fb-scene-pooh-boat.png': { w: 168, h: 73.7 },   // 620x272
+    'art/fb-scene-jar-1.png':     { w: 21,  h: 40.5 },   // 110x212
+    'art/fb-scene-jar-2.png':     { w: 21,  h: 33.8 },   // 110x177
+    'art/fb-scene-jar-3.png':     { w: 21,  h: 29.0 },   // 110x152
+    'art/fb-scene-jar-4.png':     { w: 21,  h: 30.0 },   // 110x157
+  };
+  function fbSceneImg(path, cx, y) {
+    const a = FB_SCENE_ART[path];
+    if (!a) return '';
+    return `<image href="${path}" x="${(cx - a.w / 2).toFixed(1)}" y="${y.toFixed(1)}" width="${a.w}" height="${a.h}" preserveAspectRatio="xMidYMid meet"/>`;
   }
 
-  function fbJar(label, showLabel) {
-    return `<g stroke="${FB_INK}" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M 14 31 Q 11 55 16 71 Q 18 76 30 76 Q 42 76 44 71 Q 49 55 46 31 Z" fill="${FB_HONEY}"/>
-      <path d="M 12 29 Q 30 24 48 29 Q 48 34 30 35 Q 12 34 12 29 Z" fill="${FB_PAPER}"/>
-      <path d="M 14 42 Q 30 46 46 42" stroke-width="0.9" opacity="0.45"/>
-      ${showLabel !== false ? `<rect x="19" y="46" width="22" height="16" rx="1.5" fill="${FB_PAPER}" stroke-width="1"/>
-      <text x="30" y="57.5" font-size="8" font-family="Georgia, serif" font-style="italic" font-weight="700" fill="${FB_INK}" text-anchor="middle" stroke="none">${label || 'HUNNY'}</text>` : ''}
-      <g stroke-width="0.6" opacity="0.32"><path d="M 16 40 q 2 20 3 30"/><path d="M 44 40 q -2 20 -3 30"/></g>
-    </g>`;
-  }
+  // The tree's mount box. Everything else on the left half of the scene is positioned
+  // off it, so it is named once rather than repeated: the trunk's root swell lands just
+  // under the bank line, and the branch sweeps right to about x 254, which is where the
+  // old drawn branch ended.
+  const FB_TREE_BOX = { x: 4, y: 22, w: 250, h: 207.6 };
+
+  // The four honey pots, one lost per question. x is the hanger string (the pot hangs
+  // centred on it); y is the branch's own underside at that x, measured off the rendered
+  // fb-scene-tree.png at the box above, so each string starts in the bark rather than in
+  // mid-air. Owl is perched on top of the branch (x 222-247) and the pots hang beneath
+  // it, so the two never fight for the same pixels. The string is long enough to drop
+  // each pot's body clear of the fringe of twigs on the branch's underside, where it
+  // would otherwise read as one more smudge of hatching.
+  const FB_JAR_STRING = 8;
+  const FB_SCENE_JARS = [
+    { art: 'art/fb-scene-jar-1.png', x: 168, y: 137 },
+    { art: 'art/fb-scene-jar-2.png', x: 194, y: 144 },
+    { art: 'art/fb-scene-jar-3.png', x: 220, y: 150 },
+    { art: 'art/fb-scene-jar-4.png', x: 244, y: 153 },
+  ];
   function sceneSvg(state, level) {
     const q = state.questionNum || 0, lost = state.livesLost || 0;
     // Task 2 step 3: water = threat only -- mere progress (q) no longer raises
@@ -10919,22 +10915,31 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
     const rainN = Math.min(52, 10 + level.id * 4 + lost * 8);
     // Task 2 step 4: progress = rescue. The boat drifts from its launch point
     // near the honey-jar branch toward Piglet's window as correctCount grows
-    // -- derived from this function's own geometry (jars sit around x 170-242
+    // -- derived from this function's own geometry (jars sit around x 168-244
     // just under the branch; 432 was the art's original tuned floating-Pooh x,
     // kept here as the rescue's arrival point rather than invented anew).
+    // The launch moved right of its original 220 when the drawn tree became the
+    // plate one: the jar-boat crop is 168 wide and centred on boatX, so at 220
+    // its left tail lay across the trunk's hatching instead of on open water.
     const totalQ = FB_QPL[level.id - 1] || 20;
     const progress = Math.max(0, Math.min(1, (state.correctCount || 0) / totalQ));
-    const boatLaunchX = 220, boatRescueX = 432;
+    const boatLaunchX = 250, boatRescueX = 432;
     const boatX = boatLaunchX + progress * (boatRescueX - boatLaunchX);
     const rain = Array.from({ length: rainN }, (_, i) => { const x = (i * 61 + q * 13) % 600, y = (i * 41 + q * 7) % (waterY - 14); return `<line x1="${x}" y1="${y}" x2="${(x - 5)}" y2="${y + 13}"/>`; }).join('');
     const distTrees = Array.from({ length: 5 }, (_, i) => { const x = 250 + i * 80 + fbWob(i) * 16, y = 150 + fbWob(i * 2) * 4, r = 9 + fbWob(i * 3) * 5; return `<path d="${fbCloud(x, y - r * 0.3, r, r * 0.85, 9, i)}" fill="${FB_PAPER}" stroke="${FB_SOFT}" stroke-width="0.9"/><line x1="${x}" y1="${(y + r * 0.5).toFixed(1)}" x2="${x}" y2="${(y + r * 0.5 + 6).toFixed(1)}" stroke="${FB_SOFT}" stroke-width="0.9"/>`; }).join('');
     let ripples = '';
     for (let yy = waterY + 14; yy < 280; yy += 16) { const amp = 1.6 + fbWob(yy) * 1.2; ripples += `<path d="M 0 ${yy} q 60 ${(-amp).toFixed(1)} 120 0 t 120 0 t 120 0 t 120 0 t 120 0" fill="none" stroke="${FB_INK}" stroke-width="0.9" opacity="0.2"/>`; }
     const bankY = 214;
-    const branch = `<path d="M 128 110 Q 178 116 226 126 Q 250 130 262 120" fill="none" stroke="${FB_INK}" stroke-width="2"/>
-      <path d="${fbCloud(266, 116, 9, 7, 8, 9)}" fill="${FB_PAPER}" stroke="${FB_INK}" stroke-width="1.2"/>
-      <path d="${fbCloud(150, 104, 8, 6, 7, 4)}" fill="${FB_PAPER}" stroke="${FB_INK}" stroke-width="1"/>`;
-    const jars = Array.from({ length: jarsLeft }, (_, i) => { const bx = 170 + i * 24, by = 118 + i * 3; return `<line x1="${bx + 13}" y1="${by}" x2="${bx + 13}" y2="${by + 11}" stroke="${FB_INK}" stroke-width="1.1"/><g transform="translate(${bx}, ${by + 10}) scale(0.42)">${fbJar('HUNNY')}</g>`; }).join('');
+    const tree = `<image href="art/fb-scene-tree.png" x="${FB_TREE_BOX.x}" y="${FB_TREE_BOX.y}" width="${FB_TREE_BOX.w}" height="${FB_TREE_BOX.h}" preserveAspectRatio="xMidYMid meet"/>`;
+    const jars = FB_SCENE_JARS.slice(0, jarsLeft).map((j) =>
+      `<line x1="${j.x}" y1="${j.y}" x2="${j.x}" y2="${j.y + FB_JAR_STRING}" stroke="${FB_INK}" stroke-width="1"/>${fbSceneImg(j.art, j.x, j.y + FB_JAR_STRING)}`).join('');
+    // The plate's own waterline sits 80% of the way down its box, so the crop is hung
+    // that far above the scene's water surface and the wake strokes below it land in
+    // the water rather than on top of it.
+    const boat = fbSceneImg('art/fb-scene-pooh-boat.png', boatX, waterY - FB_SCENE_ART['art/fb-scene-pooh-boat.png'].h * 0.80);
+    // The bank bear sits on the open bank between the trunk and the water's edge, where
+    // the drawn one stood, clear of the lowest hanging pot above him.
+    const bankPooh = fbSceneImg('art/fb-scene-pooh-bank.png', 170, 277 - FB_SCENE_ART['art/fb-scene-pooh-bank.png'].h);
     return `
       <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="fbPpr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8efd8"/><stop offset="1" stop-color="#efe3c6"/></linearGradient>
@@ -10950,13 +10955,11 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
         <g>${ripples}</g>
         <path d="M 0 ${bankY} Q 80 ${bankY - 6} 150 ${bankY - 2} Q 220 ${bankY + 2} 252 ${bankY + 12} L 252 280 L 0 280 Z" fill="url(#fbPpr)" stroke="${FB_INK}" stroke-width="1.1"/>
         <g stroke="${FB_INK}" stroke-width="0.6" opacity="0.4" stroke-linecap="round" fill="none"><path d="M 30 ${bankY + 7} q 20 -3 40 0"/><path d="M 95 ${bankY + 11} q 25 -3 55 2"/></g>
-        ${fbTree(120, bankY - 2, 150)}
-        ${branch}
+        </g>
+        ${tree}
         ${jars}
-        <g stroke="${FB_INK}" stroke-width="0.8" fill="none" opacity="0.65"><path d="M 250 96 q 3 -3 6 0 M 262 88 q 3 -3 6 0 M 244 104 q 3 -3 6 0"/></g>
-        ${showFloating
-          ? `<g transform="translate(${boatX.toFixed(1)}, ${waterY + 2}) scale(1.3)">${fbFloatPooh()}</g>`
-          : `<g transform="translate(96, ${bankY}) scale(0.44)">${fbPoohFig(true)}</g>`}
+        ${showFloating ? boat : bankPooh}
+        <g filter="url(#fbRough)">
         ${!flooded ? fbGrass(20, 86, bankY, 7, 1) : ''}
         ${!flooded ? fbGrass(158, 238, bankY + 7, 6, 4) : ''}
         </g>
