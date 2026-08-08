@@ -268,7 +268,7 @@
     },
     {
       "itemId": "t3-ebsr-what-happens-next",
-      "itemHash": "9b5c4db5aa4094a7",
+      "itemHash": "7e084b390f61ce4e",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -366,14 +366,11 @@
     },
     {
       "itemId": "t3-mc-strongest-signal-day",
-      "itemHash": "78a20a6eb015a664",
-      "blind": 2,
+      "itemHash": "b22f9f84f41145f7",
+      "blind": 3,
       "authored": 3,
       "confidence": "high",
-      "status": "adjudicated",
-      "note": "Key confirmed, not a defect. This is the exact T3-3 finding from the original science review (Minor, explicitly 'No action required; noted for the record'): day five's four readings reaching their combined extreme is objectively the strongest signal 'taken together,' which is what the stem asks; the blind model's day-three pick reflects only the stem's loose 'about to arrive' phrasing against a front that has essentially already begun arriving by day five, not a science error or an ambiguous key. Reviewer's own words: both keys remain by far the best available choice and every distractor is clearly worse.",
-      "adjudicatedBy": "impl-op1",
-      "adjudicatedAt": "2026-08-07"
+      "status": "agree"
     },
     {
       "itemId": "t3-mc-rising-pressure-transfer",
@@ -515,18 +512,18 @@
     },
     {
       "itemId": "t4-match-pattern-to-cause",
-      "itemHash": "81d503e98adc998e",
+      "itemHash": "e1e4f8409f98ca16",
       "blind": [
-        0,
         1,
-        2,
-        3
+        3,
+        0,
+        2
       ],
       "authored": [
-        0,
         1,
-        2,
-        3
+        3,
+        0,
+        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -565,7 +562,7 @@
     },
     {
       "itemId": "t5-ms-the-adaptation-limit",
-      "itemHash": "90c301ae48943469",
+      "itemHash": "26c9329095633def",
       "blind": [
         1,
         2,
@@ -616,6 +613,14 @@
       "authored": [
         0
       ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-mc-herring-vs-nesting-shift",
+      "itemHash": "7405cc5ad9ec02a1",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -745,17 +750,753 @@
     },
     {
       "itemId": "t6-mc-fish-timing-interaction",
-      "itemHash": "bf2e74b73c359f3d",
+      "itemHash": "4e8a503fbc7652e4",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "t5-mc-herring-vs-nesting-shift",
-      "itemHash": "57a3ebcd7ea4293c",
+      "itemId": "t1-ebsr-what-a-boundary-is",
+      "itemHash": "f21f7b9697b045b4",
       "blind": 0,
       "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-ebsr-why-the-same-air-changes-names",
+      "itemHash": "44d81767bae7f395",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-ebsr-what-makes-a-handoff-an-interaction",
+      "itemHash": "744f117d53133f64",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-ebsr-sealed-boundary-what-crosses",
+      "itemHash": "cac9173da4402e90",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-ms-boundary-inputs-outputs",
+      "itemHash": "a39b6efd906c9c1c",
+      "blind": [
+        0,
+        2,
+        5
+      ],
+      "authored": [
+        0,
+        2,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-hot-same-air-two-boundaries",
+      "itemHash": "ee91f56b5b661b00",
+      "blind": [
+        1,
+        4
+      ],
+      "authored": [
+        1,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-hot-sealed-boundary-crossings",
+      "itemHash": "9a704199b3969ab7",
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-cloze-input-def",
+      "itemHash": "15ec7014b435c7c1",
+      "blind": [
+        1
+      ],
+      "authored": [
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-mc-move-the-line",
+      "itemHash": "7b9fc34540893cc2",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-mc-what-a-seal-stops",
+      "itemHash": "1e7b7a13bd3f14ec",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-mc-name-the-boundary-first",
+      "itemHash": "b5e287e2d563594a",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t1-order-water-path",
+      "itemHash": "af85a7b02e65d55f",
+      "blind": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "authored": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-ebsr-why-the-order-skips-water",
+      "itemHash": "5c36bd7c5070b1fc",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-ebsr-what-closes-the-order",
+      "itemHash": "d2974cb0f9e3beaa",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-ebsr-the-failure-that-had-no-sensor",
+      "itemHash": "233e1940f84c9ba6",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-ebsr-why-a-standing-schedule",
+      "itemHash": "ead81ce56858e925",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-ms-what-the-order-states",
+      "itemHash": "f5367a599ddd54d3",
+      "blind": [
+        1,
+        2,
+        4
+      ],
+      "authored": [
+        1,
+        2,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-hot-closes-on-evidence",
+      "itemHash": "30d451844f454134",
+      "blind": [
+        1,
+        3,
+        4
+      ],
+      "authored": [
+        1,
+        3,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-cloze-effort-versus-evidence",
+      "itemHash": "0b5f88d9c51448b7",
+      "blind": [
+        2
+      ],
+      "authored": [
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-mc-two-week-schedule",
+      "itemHash": "7debaac1a9b2a475",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-mc-panel-clean-no-recovery",
+      "itemHash": "d33cd841995b58b8",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-mc-what-the-sensors-missed",
+      "itemHash": "4cd80d7b35a28eb4",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-match-order-status",
+      "itemHash": "d1ee02f7f2767083",
+      "blind": [
+        1,
+        2,
+        0
+      ],
+      "authored": [
+        1,
+        2,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ebsr-air-behind-the-front",
+      "itemHash": "d65f5f8b00811904",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ebsr-veer-consistency",
+      "itemHash": "16bc61faff7fdcf2",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ms-after-the-front-passed",
+      "itemHash": "443dfeb3530cfc7b",
+      "blind": [
+        0,
+        2,
+        3
+      ],
+      "authored": [
+        0,
+        2,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ebsr-one-reading-is-not-a-warning",
+      "itemHash": "2a9c5a1a723d849a",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ebsr-judged-on-the-log",
+      "itemHash": "30aeaa48b353798d",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-hot-warning-before-the-weather",
+      "itemHash": "1772dafaa4b64878",
+      "blind": [
+        1,
+        4
+      ],
+      "authored": [
+        1,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-hot-rule-not-example",
+      "itemHash": "07404af50364eee1",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-cloze-source-region",
+      "itemHash": "cd30307c918e065c",
+      "blind": [
+        1
+      ],
+      "authored": [
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-mc-why-not-the-first-morning",
+      "itemHash": "25f55c1975e0dfdf",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-mc-one-sharp-fall",
+      "itemHash": "819a968bc4be815e",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-mc-cost-of-the-two-mistakes",
+      "itemHash": "80ef7323f772ee45",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-order-week-eleven-stages",
+      "itemHash": "3ad7991332d9acb3",
+      "blind": [
+        0,
+        2,
+        3,
+        1
+      ],
+      "authored": [
+        0,
+        2,
+        3,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-ebsr-match-cause-to-column",
+      "itemHash": "384b02152144b838",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-ebsr-what-a-baseline-is",
+      "itemHash": "fa36d4aa5e9cf837",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-ms-reading-the-table",
+      "itemHash": "2c291c42351c711e",
+      "blind": [
+        1,
+        3,
+        4
+      ],
+      "authored": [
+        1,
+        3,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-ebsr-why-two-kits",
+      "itemHash": "c0aface96c6d3dc7",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-ebsr-arrival-week-trap",
+      "itemHash": "9708d8f7d9623762",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-hot-cause-to-column",
+      "itemHash": "ad32c42e1fd8dcd2",
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-hot-cause-not-consequence",
+      "itemHash": "d488f3915e7d83a2",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-cloze-baseline-def",
+      "itemHash": "401fcf96c80ea28a",
+      "blind": [
+        0
+      ],
+      "authored": [
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-mc-swapped-cause-report",
+      "itemHash": "b6657eda920c62d8",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-mc-same-average-different-range",
+      "itemHash": "a779126cd2773740",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-mc-what-the-gear-list-follows",
+      "itemHash": "e564f90d36a40841",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-match-table-vocabulary",
+      "itemHash": "728e0f3db93705d3",
+      "blind": [
+        2,
+        0,
+        1
+      ],
+      "authored": [
+        2,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-ebsr-why-hatch-not-laying",
+      "itemHash": "e19e445072e3fb10",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-ebsr-two-clocks-speeds",
+      "itemHash": "9a99991abe463c18",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-ebsr-what-an-adaptation-limit-is",
+      "itemHash": "900d58c4d94366c7",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-ebsr-what-recovery-looks-like",
+      "itemHash": "18436653e633c2c0",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-ms-hatch-column",
+      "itemHash": "90b1a73faf618240",
+      "blind": [
+        2,
+        3,
+        5
+      ],
+      "authored": [
+        2,
+        3,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-hot-which-date-matters",
+      "itemHash": "db12d0a72d9d3770",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-hot-two-cues",
+      "itemHash": "58275362c5c3791d",
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-cloze-cue-limit",
+      "itemHash": "cc2318624dc648d0",
+      "blind": [
+        2
+      ],
+      "authored": [
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-mc-twentieth-season-hatch",
+      "itemHash": "282c6108011ae92d",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-mc-recovery-standard",
+      "itemHash": "c0a482ee81dfa104",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-mc-day-length-transfer",
+      "itemHash": "e05caebcb062f754",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-why-proposal-d-fails",
+      "itemHash": "71b4cc7c610f2599",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-gates-not-scores",
+      "itemHash": "41f396eae40d9b7f",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-asking-for-an-easier-constraint",
+      "itemHash": "379f09769fa27133",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ms-board-method",
+      "itemHash": "db7cb05a95326edf",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-warning-rule-as-design",
+      "itemHash": "f3e5b61207bec6ee",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-hot-failing-one-gate",
+      "itemHash": "a08051c4b59ebafc",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-hot-combining-collects",
+      "itemHash": "fe984d9a141c206b",
+      "blind": [
+        0,
+        1,
+        3
+      ],
+      "authored": [
+        0,
+        1,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-cloze-constraint-def",
+      "itemHash": "d8c129da8407af91",
+      "blind": [
+        0
+      ],
+      "authored": [
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-mc-proposal-d-outcome",
+      "itemHash": "78a66fc6ef6c3e6b",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-mc-two-more-proposals",
+      "itemHash": "89720bb3e4a6fb22",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-mc-what-the-board-is-for",
+      "itemHash": "420b9464f74eb024",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-hot-evidence-not-conclusion",
+      "itemHash": "77b7d1ca0684b9a8",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     }
