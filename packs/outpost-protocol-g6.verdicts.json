@@ -267,14 +267,6 @@
       "status": "agree"
     },
     {
-      "itemId": "t3-ebsr-what-happens-next",
-      "itemHash": "ab2b5386f696273b",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t3-ebsr-why-rain-forms",
       "itemHash": "037b2e8f9d7d48dd",
       "blind": 0,
@@ -1001,10 +993,18 @@
       "status": "agree"
     },
     {
-      "itemId": "t3-ebsr-air-behind-the-front",
-      "itemHash": "15bc5a1428e3c369",
-      "blind": 0,
-      "authored": 0,
+      "itemId": "t2-match-order-status",
+      "itemHash": "380e9aeccac23dbe",
+      "blind": [
+        1,
+        2,
+        0
+      ],
+      "authored": [
+        1,
+        2,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -1029,6 +1029,14 @@
         2,
         3
       ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ebsr-one-reading-is-not-a-warning",
+      "itemHash": "10b05cc9601410af",
+      "blind": 2,
+      "authored": 2,
       "confidence": "high",
       "status": "agree"
     },
@@ -1077,6 +1085,22 @@
       "authored": [
         1
       ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-mc-why-not-the-first-morning",
+      "itemHash": "37660d6b5b6e2fb6",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-mc-one-sharp-fall",
+      "itemHash": "7a975111b07cad03",
+      "blind": 1,
+      "authored": 1,
       "confidence": "high",
       "status": "agree"
     },
@@ -1371,22 +1395,6 @@
       "status": "agree"
     },
     {
-      "itemId": "t6-ms-board-method",
-      "itemHash": "f490baaf4081c3c1",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t6-ebsr-warning-rule-as-design",
       "itemHash": "9f5df3478ce7ade8",
       "blind": 3,
@@ -1461,42 +1469,34 @@
       "status": "agree"
     },
     {
-      "itemId": "t2-match-order-status",
-      "itemHash": "380e9aeccac23dbe",
+      "itemId": "t3-ebsr-what-happens-next",
+      "itemHash": "b3acb1dae7f53713",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ebsr-air-behind-the-front",
+      "itemHash": "d8230fbf2312e8a3",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ms-board-method",
+      "itemHash": "0260f86db856c5b9",
       "blind": [
+        0,
         1,
-        2,
-        0
+        2
       ],
       "authored": [
+        0,
         1,
-        2,
-        0
+        2
       ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-ebsr-one-reading-is-not-a-warning",
-      "itemHash": "10b05cc9601410af",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-mc-why-not-the-first-morning",
-      "itemHash": "37660d6b5b6e2fb6",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-mc-one-sharp-fall",
-      "itemHash": "7a975111b07cad03",
-      "blind": 1,
-      "authored": 1,
       "confidence": "high",
       "status": "agree"
     }
