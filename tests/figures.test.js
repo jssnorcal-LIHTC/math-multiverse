@@ -1,6 +1,8 @@
 'use strict';
 const assert = require('assert');
 const MVFigures = require('../engine/figures.js');
+// LOAD-BEARING: this capture must happen BEFORE installDomStub; if someone moves installDomStub above the require, the no-DOM check must go red.
+const HAD_DOC_AT_LOAD = (typeof document !== 'undefined');
 const { installDomStub } = require('./dom-stub.js');
 installDomStub();
 
@@ -25,8 +27,14 @@ check('enums are locked', () => {
   assert.deepStrictEqual(MVFigures.FIG_KINDS, ['photo','plate','map','diagram','chart']);
   assert.strictEqual(MVFigures.DOC_KINDS.length, 11);
 });
-check('loading the module touched no DOM', () => {
+check('loading the module touched no DOM (required before dom-stub install)', () => {
+  assert.strictEqual(HAD_DOC_AT_LOAD, false);
   assert.strictEqual(typeof MVFigures.renderStrip, 'function');
+  assert.strictEqual(typeof MVFigures.renderItemFigure, 'function');
+  assert.strictEqual(typeof MVFigures.openLightbox, 'function');
+  assert.strictEqual(typeof MVFigures.closeLightbox, 'function');
+  assert.strictEqual(typeof MVFigures.attachReveal, 'function');
+  assert.strictEqual(typeof MVFigures.renderRevealCard, 'function');
 });
 
 console.log(failures ? `figures.test: ${failures} FAILURE(S)` : 'figures.test: all clean');
