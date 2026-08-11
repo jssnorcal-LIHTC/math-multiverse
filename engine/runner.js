@@ -197,6 +197,19 @@
       if (disposed) return;
       if (qi >= queue.length) return finish();
 
+      // Dryness-fix round 2, minor: a lightbox opened for the PREVIOUS question survives the
+      // correct-answer auto-advance and the wrong-answer NEXT button alike (both paths call
+      // renderQuestion), so without this it sits over the new question showing the old one's
+      // figure. Same call-time-resolution and try/catch stance as every other optional-layer
+      // hook in this file: a missing or throwing MVFigures must never cost the child the level.
+      // A separate block (not a shared `const FG`) because this file already declares `FG` twice
+      // more below, each scoped to its own `if` block; a bare `const FG` here at renderQuestion's
+      // top level would collide with the second of those two declarations.
+      {
+        const FG = (deps && deps.Figures) || (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
+        if (FG) { try { FG.closeLightbox(); } catch (e) {} }
+      }
+
       const item = queue[qi];
       paintBar();
       footer.innerHTML = '';
@@ -212,26 +225,34 @@
           passageBox.dataset.pid = passage.id;
           passageBox.innerHTML = '';
           passageBox.appendChild(el('div', 'mv-passage-title', passage.title));
-          for (const para of String(passage.text).split(/\n\s*\n/)) {
-            passageBox.appendChild(el('p', 'mv-para', para.trim()));
-          }
           // Written only when a kind exists, and removed otherwise, so a text-only passage
           // never carries a stale or empty-string dockind attribute for Task 5's CSS to trip on.
           if (passage.docKind) passageBox.dataset.dockind = passage.docKind;
           else delete passageBox.dataset.dockind;
-          // Optional layer, same call-time-resolution and try/catch stance as MVFresh above: a
-          // figure bug must never cost the child the level, and a missing figures.js must
-          // degrade to today's text-only passage rendering.  A thrown error is still warned
+          // Dryness-fix round 2: the strip renders HERE, immediately after the title and before
+          // the paragraph loop, so renderStrip's own appendChild lands it as the passage box's
+          // SECOND child (title first, strip second) -- never after every paragraph. At real
+          // passage length (the shipped packs run 1446-3206 chars; the fixture that exposed
+          // every earlier pass to this defect ran 604) appending the strip last put it entirely
+          // below the fold: SPEC section 3 item 1 promises the strip "inside .mv-passage under
+          // the title", and a strip a full scroll away has no on-screen presence at all, which
+          // is the exact failure the dryness pass measured (0 of 98 strip pixels visible on
+          // arrival). Optional layer, same call-time-resolution and try/catch stance as MVFresh
+          // above: a figure bug must never cost the child the level, and a missing figures.js
+          // must degrade to today's text-only passage rendering. A thrown error is still warned
           // once, not swallowed silently, so a malformed figure does not vanish with no
-          // diagnostic anywhere.  The warn itself is wrapped in its OWN try/catch: a throw
-          // raised inside a catch block is not caught by its own try, so a console lacking a
-          // callable warn must not be able to escape this guard and kill the level it protects.
+          // diagnostic anywhere. The warn itself is wrapped in its OWN try/catch: a throw raised
+          // inside a catch block is not caught by its own try, so a console lacking a callable
+          // warn must not be able to escape this guard and kill the level it protects.
           const FG = (deps && deps.Figures) || (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
           if (FG && Array.isArray(passage.figureIds)) {
             try { FG.renderStrip(pack, passage.figureIds, passageBox); }
             catch (e) {
               try { if (root && root.console && typeof root.console.warn === 'function') root.console.warn('figures: renderStrip failed', e); } catch (_) {}
             }
+          }
+          for (const para of String(passage.text).split(/\n\s*\n/)) {
+            passageBox.appendChild(el('p', 'mv-para', para.trim()));
           }
         }
         passageBox.style.display = '';

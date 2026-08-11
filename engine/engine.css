@@ -497,9 +497,12 @@
    `content` is already keyed to ties the two effects to one condition instead of two, so they
    can no longer drift apart.  tests/validate-pack.js's DOC_KINDS enum is the source of truth
    this list mirrors; tests/figures.test.js reads this file as text and asserts exactly one
-   [data-dockind="<kind>"]::before rule per DOC_KINDS entry and none for a kind outside it, so a
-   V2/V4 kind added there and not mirrored here now fails a test instead of silently rendering
-   with no band and no top padding. */
+   [data-dockind="<kind>"]::before rule per DOC_KINDS entry and none for a kind outside it, AND
+   (dryness-fix round 2: the first version of this comment claimed this while only the ::before
+   list was actually pinned) separately asserts this padding-top:0 list itself carries exactly
+   one [data-dockind="<kind>"] entry per DOC_KINDS entry, so a V2/V4 kind added there and not
+   mirrored to EITHER list now fails a test instead of silently rendering with no band, or with a
+   band but no top padding. */
 .mv-passage[data-dockind="case-file"],
 .mv-passage[data-dockind="recovered-entry"],
 .mv-passage[data-dockind="source-desk"],

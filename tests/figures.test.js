@@ -56,11 +56,46 @@ check('validate-pack enum twins match engine enums', () => {
 // the two twins above and validate a real pack, then render with no band and no top padding.
 // Read as plain text, no browser required: the ::before rules are static CSS, not
 // computed-style output.
-check('engine.css has exactly one [data-dockind]::before rule per DOC_KINDS entry, and none extra', () => {
-  const css = require('fs').readFileSync(require('path').join(__dirname, '../engine/engine.css'), 'utf8');
-  const found = Array.from(css.matchAll(/\[data-dockind="([a-z-]+)"\]::before/g)).map(m => m[1]);
+//
+// Dryness-fix round 2, minors: two gate-hygiene defects in this test's own first version.
+// (1) It scanned the RAW file text INCLUDING comments, so a comment merely NAMING a concrete
+//     [data-dockind="<kind>"]::before selector (this very block's own hand-sync comment, just
+//     above the CSS it documents, does exactly that) double-counted that kind and could red a
+//     clean file -- a gate that can red on clean input is the flakiness class this branch has
+//     already fixed twice. Comments are stripped before scanning now; the check below proves a
+//     comment mentioning a selector does not move the count.
+// (2) It pinned only the ::before band rules, while its own comment ALSO claimed padding-top:0
+//     "now fails a test" -- untrue, since nothing counted that second, eleven-selector list at
+//     all. Extended rather than narrowed, per the review's own preference.
+function stripCssComments(css) { return css.replace(/\/\*[\s\S]*?\*\//g, ''); }
+
+function beforeRuleCounts(css) {
+  const found = Array.from(stripCssComments(css).matchAll(/\[data-dockind="([a-z-]+)"\]::before/g)).map((m) => m[1]);
   const counts = {};
   for (const k of found) counts[k] = (counts[k] || 0) + 1;
+  return counts;
+}
+
+// The padding-top:0 rule is ONE rule with an eleven-selector comma list, e.g.
+//   .mv-passage[data-dockind="case-file"],
+//   ...
+//   .mv-passage[data-dockind="minutes"] { padding-top: 0; }
+// so counting its entries means isolating that selector-list text, not just grepping every
+// `[data-dockind="<kind>"]` substring in the file (which would also match every ::before rule's
+// own selector, double-counting across the two lists).
+function paddingTopListCounts(css) {
+  const clean = stripCssComments(css);
+  const m = clean.match(/((?:\.mv-passage\[data-dockind="[a-z-]+"\]\s*,\s*)*\.mv-passage\[data-dockind="[a-z-]+"\])\s*\{\s*padding-top:\s*0;?\s*\}/);
+  const counts = {};
+  if (!m) return counts;
+  const found = Array.from(m[1].matchAll(/\[data-dockind="([a-z-]+)"\]/g)).map((x) => x[1]);
+  for (const k of found) counts[k] = (counts[k] || 0) + 1;
+  return counts;
+}
+
+check('engine.css has exactly one [data-dockind]::before rule per DOC_KINDS entry, and none extra', () => {
+  const css = require('fs').readFileSync(require('path').join(__dirname, '../engine/engine.css'), 'utf8');
+  const counts = beforeRuleCounts(css);
   for (const k of MVFigures.DOC_KINDS) {
     assert.strictEqual(counts[k] || 0, 1,
       `engine.css must have exactly one [data-dockind="${k}"]::before rule, found ${counts[k] || 0}`);
@@ -68,6 +103,30 @@ check('engine.css has exactly one [data-dockind]::before rule per DOC_KINDS entr
   for (const k of Object.keys(counts)) {
     assert.ok(MVFigures.DOC_KINDS.includes(k),
       `engine.css has a [data-dockind="${k}"]::before rule for a kind not in DOC_KINDS`);
+  }
+});
+
+check('a CSS comment merely naming a [data-dockind]::before selector does not double-count it (comments are stripped before scanning)', () => {
+  const fixture = `
+/* a hand-written note that happens to mention .mv-passage[data-dockind="case-file"]::before by name */
+.mv-passage[data-dockind="case-file"]::before { content: 'X'; }
+`;
+  const counts = beforeRuleCounts(fixture);
+  assert.strictEqual(counts['case-file'], 1,
+    'a comment mentioning the selector must not add a second count to the real rule');
+});
+
+check('engine.css\'s padding-top:0 selector list carries exactly one [data-dockind="<kind>"] entry per DOC_KINDS entry, and none extra', () => {
+  const css = require('fs').readFileSync(require('path').join(__dirname, '../engine/engine.css'), 'utf8');
+  const counts = paddingTopListCounts(css);
+  assert.ok(Object.keys(counts).length > 0, 'the padding-top:0 selector list was not found at all; this check would otherwise pass vacuously');
+  for (const k of MVFigures.DOC_KINDS) {
+    assert.strictEqual(counts[k] || 0, 1,
+      `engine.css's padding-top:0 selector list must carry exactly one [data-dockind="${k}"] entry, found ${counts[k] || 0}`);
+  }
+  for (const k of Object.keys(counts)) {
+    assert.ok(MVFigures.DOC_KINDS.includes(k),
+      `engine.css's padding-top:0 selector list carries a [data-dockind="${k}"] entry for a kind not in DOC_KINDS`);
   }
 });
 

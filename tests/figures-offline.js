@@ -215,6 +215,121 @@ async function assertFigureStrip(page, scopeSel, figures, problems, note, label)
   }
 }
 
+// Reward-screen geometry (dryness-fix round 2, item 1). The whole-branch review deferred this to V2,
+// reasoning the fixture's launcher-call path yields vacuous 0x0 geometry -- FALSE. Math-Multiverse.html
+// hides every screen but the active one (`.screen { display: none }` / `.screen.active { display:
+// block }`), so `.host-frame` (nested inside #screen-module) measures 0x0 whenever the module screen is
+// not the active one, which it never was on the launcher-call path this file used before. Calling the
+// shell's own showScreen('module') first makes the geometry real. Swept at the two real device heights
+// this project targets (654, 694) plus the harness's own 768 default; the original viewport is restored
+// in a `finally` so nothing downstream inherits a short one.
+async function assertRewardGeometry(page, pack, problems, note) {
+  const original = page.viewportSize() || VIEWPORT;
+  const heights = [654, 694, 768];
+  try {
+    for (const h of heights) {
+      const before = problems.length;
+      await page.setViewportSize({ width: original.width, height: h });
+      await page.evaluate((pk) => {
+        if (typeof showScreen === 'function') showScreen('module');
+        window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 0, 2, 3);
+      }, pack);
+
+      // Load-bearing trap: an undecoded .mv-rv-img has naturalWidth 0, which makes the
+      // shrink-wrapped frame 0 wide too, so a box-only geometry check would pass vacuously (grid
+      // and image "agree" at 0x0). Hit exactly this on the first in-gate run ("reward 0x131")
+      // before this wait was added. Wait for the REAL decode before measuring anything.
+      const decoded = await page.waitForFunction(() => {
+        const img = document.querySelector('#lc-reveal .mv-rv-img');
+        return !!(img && img.complete && img.naturalWidth > 0);
+      }, { timeout: 5000 }).then(() => true).catch(() => false);
+      if (!decoded) { problems.push(`reward geometry at 1024x${h}: .mv-rv-img never decoded (naturalWidth stayed 0)`); continue; }
+
+      const geo = await page.evaluate(() => {
+        // Painted rect from naturalWidth/naturalHeight + object-fit, NOT the element's own box: a
+        // box-only version passes an un-shrink-wrapped mutation (a fixed-width frame with
+        // object-fit:contain) that letterboxes the real image well inside its own element box.
+        // .mv-rv-img currently declares no object-fit at all (the default, 'fill'), which is a
+        // no-op here because the box's own width:auto sizing already resolves from the image's
+        // natural ratio before object-fit is even consulted -- but this function must catch a
+        // FUTURE regression that reintroduces a fixed box with a real object-fit value, not just
+        // describe today's declaration.
+        function paintedRect(img) {
+          const r = img.getBoundingClientRect();
+          const nw = img.naturalWidth, nh = img.naturalHeight;
+          if (!nw || !nh) return { left: r.left, top: r.top, width: 0, height: 0 };
+          const fit = getComputedStyle(img).objectFit || 'fill';
+          const boxRatio = r.width / r.height, natRatio = nw / nh;
+          let w, h;
+          if (fit === 'contain' || fit === 'scale-down') {
+            if (natRatio > boxRatio) { w = r.width; h = r.width / natRatio; } else { h = r.height; w = r.height * natRatio; }
+            if (fit === 'scale-down' && (w > nw || h > nh)) { w = nw; h = nh; }
+          } else if (fit === 'cover') {
+            if (natRatio > boxRatio) { h = r.height; w = r.height * natRatio; } else { w = r.width; h = r.width / natRatio; }
+          } else if (fit === 'none') {
+            w = Math.min(nw, r.width); h = Math.min(nh, r.height);
+          } else {
+            // 'fill', the only value this codebase declares: stretches to the box.
+            w = r.width; h = r.height;
+          }
+          return { left: r.left + (r.width - w) / 2, top: r.top + (r.height - h) / 2, width: w, height: h };
+        }
+        const frame = document.querySelector('.host-frame');
+        const img = document.querySelector('#lc-reveal .mv-rv-img');
+        const grid = document.querySelector('#lc-reveal .mv-rv-grid');
+        const headline = document.querySelector('.lc-headline');
+        const level = document.querySelector('.lc-level');
+        const stars = document.querySelector('.lc-stars');
+        const score = document.querySelector('.lc-score');
+        const card = document.querySelector('.mv-rv-card');
+        const buttons = Array.from(document.querySelectorAll('.lc-actions button'));
+        if (!frame || !img || !grid || !headline || !level || !stars || !score || !card) return null;
+        const rect = (n) => { const r = n.getBoundingClientRect(); return { left: r.left, top: r.top, right: r.right, bottom: r.bottom, width: r.width, height: r.height }; };
+        return {
+          frame: rect(frame), paintedImg: paintedRect(img), grid: rect(grid),
+          headline: rect(headline), level: rect(level), stars: rect(stars), score: rect(score), card: rect(card),
+          buttons: buttons.map(rect),
+          pageOverflow: document.documentElement.scrollHeight - document.documentElement.clientHeight,
+        };
+      });
+      if (!geo) {
+        problems.push(`reward geometry at 1024x${h}: one or more expected nodes (.host-frame, #lc-reveal .mv-rv-img/.mv-rv-grid, .lc-headline/.lc-level/.lc-stars/.lc-score, .mv-rv-card) did not render`);
+        continue;
+      }
+
+      const within = (r, outer, label) => {
+        if (r.left < outer.left - 0.5 || r.top < outer.top - 0.5 || r.right > outer.right + 0.5 || r.bottom > outer.bottom + 0.5) {
+          problems.push(`reward geometry at 1024x${h}: ${label} (${Math.round(r.left)}..${Math.round(r.right)}, ${Math.round(r.top)}..${Math.round(r.bottom)}) falls outside .host-frame (${Math.round(outer.left)}..${Math.round(outer.right)}, ${Math.round(outer.top)}..${Math.round(outer.bottom)})`);
+        }
+      };
+      within(geo.headline, geo.frame, 'headline');
+      within(geo.level, geo.frame, 'level name');
+      within(geo.stars, geo.frame, 'stars row');
+      within(geo.score, geo.frame, 'score');
+      within(geo.card, geo.frame, 'reveal card');
+      geo.buttons.forEach((b, i) => within(b, geo.frame, `action button ${i}`));
+
+      if (geo.paintedImg.width <= 0 || geo.paintedImg.height <= 0) {
+        problems.push(`reward geometry at 1024x${h}: reward image painted rect is ${Math.round(geo.paintedImg.width)}x${Math.round(geo.paintedImg.height)} (zero), not a real reward`);
+      } else if (geo.paintedImg.height < 120) {
+        problems.push(`reward geometry at 1024x${h}: reward image is ${Math.round(geo.paintedImg.width)}x${Math.round(geo.paintedImg.height)}, under the 120px floor`);
+      }
+      if (Math.abs(geo.grid.width - geo.paintedImg.width) > 2 || Math.abs(geo.grid.height - geo.paintedImg.height) > 2) {
+        problems.push(`reward geometry at 1024x${h}: tile grid ${Math.round(geo.grid.width)}x${Math.round(geo.grid.height)} does not cover the drawn image ${Math.round(geo.paintedImg.width)}x${Math.round(geo.paintedImg.height)}`);
+      }
+      if (geo.pageOverflow > 1) {
+        problems.push(`reward geometry at 1024x${h}: the page has ${geo.pageOverflow}px of overflow (expected 0; .host-frame is overflow:hidden with no page scroll)`);
+      }
+
+      if (problems.length === before) {
+        note(`reward geometry at 1024x${h}: reward ${Math.round(geo.paintedImg.width)}x${Math.round(geo.paintedImg.height)}, grid ${Math.round(geo.grid.width)}x${Math.round(geo.grid.height)}, headline/card/actions inside .host-frame, page overflow ${geo.pageOverflow}px`);
+      }
+    }
+  } finally {
+    await page.setViewportSize(original);
+  }
+}
+
 // Shared rail oracle (the .mv-item-fig surface an item.figureId route renders): --mv-fig-h is
 // re-scoped to 72px there (engine/engine.css), so the composed height is 74 (72 + 1px border top/
 // bottom) and the image box is 128x72, distinct constants from the strip's 98/128x96 on purpose.
@@ -659,6 +774,10 @@ async function fixturePositiveControl(page, problems, note) {
   if (none.hostPresent) problems.push('positive control: showPackLevelComplete on a reveal-less level (level 1) still emitted an #lc-reveal host');
 
   if (problems.length === revealBefore) note(`positive control: showPackLevelComplete reveal card: 3 stars -> ${hi.cards} card/${hi.tiles} tiles (correct figure), 0 stars -> ${lo.cards} card, reveal-less level -> no host`);
+
+  // ---- reward-screen geometry, at real device heights, via the shell's own showScreen('module')
+  //      (dryness-fix round 2, item 1) ----
+  await assertRewardGeometry(page, pack, problems, note);
 }
 
 async function fixtureNegativeControl(page, problems, note) {
