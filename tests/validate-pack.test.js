@@ -910,6 +910,22 @@ check('a dangling item.figureId is caught', () => {
   expectError(p, 'does not resolve to any figure', 'dangling item figureId');
 });
 
+// Fix wave (final review): the spec caps a passage's strip at 1-3 thumbs; 0 is expressed by
+// omitting figureIds entirely, not by an empty array, which is why the fixture below reuses all
+// four of figurePack()'s figures rather than testing a 0-length array as the violation.
+check('a passage.figureIds array over the 1-3 thumb cap is caught', () => {
+  const p = figurePack();
+  p.passages[0].figureIds = ['fig-photo', 'fig-chart', 'fig-diagram', 'fig-plate'];
+  expectError(p, 'at most 3 entries', 'figureIds over the thumb cap');
+});
+
+check('a passage.figureIds array at exactly the 1-3 thumb cap is not caught', () => {
+  const p = figurePack();
+  p.passages[0].figureIds = ['fig-photo', 'fig-chart', 'fig-diagram'];
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.deepStrictEqual(errors, [], 'errors: ' + JSON.stringify(errors));
+});
+
 // ---- rule 5: passage.docKind ----
 
 check('an unknown passage.docKind is caught', () => {

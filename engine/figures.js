@@ -44,6 +44,17 @@
   // which is quieter than the missing-label failure this map exists to surface.
   const BADGE = { photo: 'PHOTO', plate: 'PLATE', map: 'MAP', diagram: 'DIAGRAM', chart: 'CHART' };
 
+  // Fix wave (final review): attachReveal's theme used to be a bare ternary,
+  // `subject === 'hist' ? 'rv-hist' : 'rv-sci'`, so every non-history subject -- sci correctly,
+  // but also ela, math, or none -- fell through to sci's green. engine/runner.js's STAMP_THEME
+  // (a different mechanic on a different theming axis, so not shared with this map) already
+  // solved this exact class for the correct-answer stamp with an explicit map plus a neutral
+  // fallback; this is that same shape for the reveal strip. REVEAL_THEME_NEUTRAL gets its own
+  // CSS rule beside .rv-hist/.rv-sci in engine.css, in a hue neither subject uses, so an ELA
+  // pack's reveal cells still visibly mark "found" without borrowing either subject's color.
+  const REVEAL_THEME = { hist: 'rv-hist', sci: 'rv-sci' };
+  const REVEAL_THEME_NEUTRAL = 'rv-neutral';
+
   // Capped horizontal strip of figure thumbnails, appended to hostEl (the passage panel).  A
   // click opens the lightbox via api.openLightbox, resolved at call time so this keeps working
   // once that stub is replaced by its own task without renderStrip needing to change.
@@ -119,6 +130,14 @@
   function openLightbox(pack, figureId) {
     const f = resolve(pack, figureId);
     if (!f) return;
+    // Fix wave (final review): a malformed plate (kind:'plate' with no views) reached
+    // `f.views.forEach` below unguarded and threw, unlike renderStrip/renderItemFigure/
+    // renderRevealCard, which all fall back to f.src for the same shape. There is no single
+    // f.src fallback here that would also produce a sensible tab-less viewer (the tab rail and
+    // paint() both index into f.views), so this is a no-op tap -- closeLightbox() is not called
+    // either, matching the `if (!f) return;` guard immediately above, which leaves a previously
+    // open lightbox exactly as it was rather than closing it on a bad tap.
+    if (f.kind === 'plate' && !(Array.isArray(f.views) && f.views.length)) return;
     closeLightbox();
     const d = doc();
     const box = el('div', 'mv-lightbox');
@@ -202,7 +221,7 @@
     if (!barEl || !level || !level.reveal) return null;
     const f = resolve(pack, level.reveal.figureId);
     if (!f) return null;
-    const theme = (pack.meta && pack.meta.subject) === 'hist' ? 'rv-hist' : 'rv-sci';
+    const theme = (REVEAL_THEME[pack.meta && pack.meta.subject]) || REVEAL_THEME_NEUTRAL;
     const strip = el('span', 'mv-reveal-strip ' + theme);
     const cells = [];
     for (let i = 0; i < total; i++) {

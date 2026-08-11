@@ -641,9 +641,16 @@ async function fixturePositiveControl(page, problems, note) {
 
   const lo = await page.evaluate((pk) => {
     window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 0, 2, 0);
-    return { cards: document.querySelectorAll('#lc-reveal .mv-rv-card').length };
+    return {
+      cards: document.querySelectorAll('#lc-reveal .mv-rv-card').length,
+      hostPresent: !!document.querySelector('#lc-reveal'),
+    };
   }, pack);
   if (lo.cards !== 0) problems.push(`positive control: showPackLevelComplete at 0 stars rendered ${lo.cards} .mv-rv-card, expected 0 (the reveal must not show on a level not cleared)`);
+  // Fix wave (final review): the host div's own gate used to be `lv.reveal` alone, so a reveal
+  // level cleared at 0 stars still emitted an empty #lc-reveal host and paid its 18px flex gap
+  // even though no card would ever fill it. The host's condition must match the render's.
+  if (lo.hostPresent) problems.push('positive control: showPackLevelComplete at 0 stars still emitted an #lc-reveal host with nothing to fill it (host gate must match the render gate)');
 
   const none = await page.evaluate((pk) => {
     window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 1, 2, 3);

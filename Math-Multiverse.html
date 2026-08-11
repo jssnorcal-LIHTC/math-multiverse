@@ -4069,7 +4069,12 @@ function showPackLevelComplete(entry, pack, levelIndex, score, stars) {
   // reveal. An unconditional empty <div id="lc-reveal"> still counts as a flex item of
   // .level-complete's own gap:18px, costing 18px above AND below it on every one of the five
   // shipped packs that never sets `reveal` at all, for a host nothing will ever fill.
-  const revealHtml = lv.reveal ? `<div id="lc-reveal"></div>` : '';
+  // Fix wave (final review): gated on `lv.reveal` alone, this still emitted the same empty,
+  // gap-costing host at 0 stars, because the render below gates on `stars > 0 && lv.reveal`,
+  // not `lv.reveal` alone -- a level cleared at 0 stars paid the 18px gap for a host nothing
+  // was ever going to fill. The two gates must be the SAME condition, so this now matches the
+  // render check immediately below instead of only checking half of it.
+  const revealHtml = (stars > 0 && lv.reveal) ? `<div id="lc-reveal"></div>` : '';
   host.innerHTML = `
     <div class="level-complete" style="--card-color: ${entry.color};">
       <div class="lc-headline">${stars > 0 ? 'LEVEL CLEARED' : 'NOT QUITE'}</div>
