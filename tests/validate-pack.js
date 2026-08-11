@@ -19,12 +19,20 @@ const { fleschKincaid, colemanLiau, textStats } = require('./readability');
 const { COACH_FAMILIES } = require('./targets');
 const { validateLedger, authoredKeyOf } = require('./verdicts');
 
-const PACK_DIR = path.join(__dirname, '..', 'packs');
+const PACK_DIR  = path.join(__dirname, '..', 'packs');
+const REPO_ROOT = path.join(__dirname, '..');
 
 const ITEM_TYPES   = Object.freeze(['mc', 'ms', 'ebsr', 'hottext', 'match', 'order', 'cloze', 'shorttext', 'listen', 'write']);
 const AUTO_TYPES   = Object.freeze(['mc', 'ms', 'ebsr', 'hottext', 'match', 'order', 'cloze', 'shorttext']);
 const CHOICE_TYPES = Object.freeze(['mc', 'ms', 'ebsr', 'cloze']);
 const GENRES       = Object.freeze(['literary', 'informational']);
+
+// Copied by VALUE from engine/figures.js -- validate-pack must not require engine files (it runs
+// under plain node, with no DOM and no runner). The twin cross-check test in tests/figures.test.js
+// imports both copies and asserts deepStrictEqual, so this pair cannot drift apart silently.
+const FIG_KINDS = Object.freeze(['photo', 'plate', 'map', 'diagram', 'chart']);
+const DOC_KINDS = Object.freeze(['case-file', 'recovered-entry', 'source-desk', 'addendum',
+  'field-manual', 'status-log', 'weather-log', 'field-report', 'procedure', 'memo', 'minutes']);
 
 function loadPackFile(absPath) {
   const raw = fs.readFileSync(absPath, 'utf8');
@@ -33,6 +41,11 @@ function loadPackFile(absPath) {
 }
 
 function nonEmptyString(v) { return typeof v === 'string' && v.trim().length > 0; }
+
+// The "is this a plain, non-null, non-array object" test recurs everywhere a JSON field is
+// supposed to be a map/record rather than a list or a scalar (a chart's dataTable, an assessed
+// figure's dataTable). Named once so every site reads the same intent instead of re-deriving it.
+function isPlainObject(v) { return !!v && typeof v === 'object' && !Array.isArray(v); }
 
 // ---------- envelope: meta ----------
 function checkMeta(pack, errors, expectedId) {
@@ -214,6 +227,265 @@ function checkLevels(pack, itemsById, errors, warnings) {
   return referenced;
 }
 
+// ---------- envelope: figures ----------
+// A brand-new optional envelope (no shipped pack declares one yet): a strip of illustrative or
+// assessed media a passage, level reveal, or item can point at. Validated the same way as
+// passages/items above -- structural rules here, independent of who references what; resolution
+// of the references themselves is checkFigureReferences below.
+
+// Shared by both a figure's own `src` and a plate figure's per-view `src`/`overlaySrc`. `packId`
+// is resolved once by the caller (checkFigures) and is null only when neither source was
+// available; requirePrefix && packId therefore already skips the prefix half safely in that case
+// (checkFigures pushes its own explicit error for the missing-packId condition itself, once, so
+// this does not need to repeat it per src). `assetBase` defaults to 'art' (the real, public,
+// GitHub-Pages-served tree); tests point it at tests/fixtures so the existsSync/prefix/case checks
+// below run against real fixture files that live outside that public tree. main() never overrides
+// it, so every real pack stays gated on art/<packId>/ exactly as shipped.
+function checkArtSrc(src, w, packId, requirePrefix, errors, assetBase) {
+  if (!nonEmptyString(src)) { errors.push(`${w}: missing or empty`); return; }
+  // Rejected outright, before any prefix or existence check: a ".." segment can make a string
+  // that STARTS WITH the required prefix resolve somewhere else entirely (art/pack-x/../pack-y/foo
+  // satisfies startsWith("art/pack-x/") while actually pointing at pack-y), and a backslash is
+  // never a valid path separator in a src that ships to a browser over a URL.
+  if (src.includes('..') || src.includes('\\')) {
+    errors.push(`${w}: "${src}" must not contain ".." or backslashes (got "${src}")`);
+    return;
+  }
+  // An absolute src makes the prefix half (path.resolve, which honours an absolute path and
+  // discards REPO_ROOT entirely once it sees one) and the existence half (path.join, which never
+  // does -- it just concatenates) disagree about which file is even being examined, so the two
+  // halves of this same function can report factually inconsistent diagnoses for one input.
+  // Rejected outright rather than diagnosed twice, inconsistently.
+  if (path.isAbsolute(src) || src.startsWith('/')) {
+    errors.push(`${w}: "${src}" must be a repo-relative path, not an absolute one`);
+    return;
+  }
+  // A trailing separator validates clean today only because path.relative (used by the on-disk
+  // walk below) strips it before splitting into segments, but POSIX pathname resolution requires
+  // a trailing slash to resolve to a DIRECTORY -- so this src would 404 on the case-sensitive,
+  // POSIX-serving host even where the file itself genuinely exists.
+  if (src.endsWith('/')) {
+    errors.push(`${w}: "${src}" must not end with a trailing slash`);
+    return;
+  }
+  if (requirePrefix && packId) {
+    const prefix = `${assetBase}/${packId}/`;
+    // Resolved-path comparison, not a raw string prefix: robust to redundant slashes and the like,
+    // and (with the traversal reject above already closing the sharpest edge) a second, independent
+    // check that what the src ACTUALLY resolves to is inside the pack's own directory.
+    const absSrc = path.resolve(REPO_ROOT, src);
+    const absPrefixDir = path.resolve(REPO_ROOT, assetBase, packId);
+    if (absSrc !== absPrefixDir && absSrc.indexOf(absPrefixDir + path.sep) !== 0) {
+      errors.push(`${w}: "${src}" must live under "${prefix}"`);
+    }
+  }
+  const abs = path.join(REPO_ROOT, src);
+  const verifiedAbs = checkOnDiskCase(abs, src, w, errors);
+  if (verifiedAbs === null) return;   // not found, wrong case, or an unreadable dir; already reported
+
+  // "The asset exists" must mean a FILE. fs.existsSync (and the listing walk above) both return
+  // true for a directory, so a src naming a directory -- e.g. the pack's own art folder -- would
+  // otherwise satisfy every check above and validate clean.
+  let isFile = true;
+  try { isFile = fs.statSync(verifiedAbs).isFile(); } catch (e) { /* just verified by the walk above; treat as fine */ }
+  if (!isFile) {
+    errors.push(`${w}: "${src}" resolves to a directory, not a file`);
+  }
+}
+
+// fs.existsSync is case-INSENSITIVE on this authoring machine's filesystem (and on macOS default),
+// but GitHub Pages -- which serves this repo -- is case-SENSITIVE, so a src whose case does not
+// match the file on disk can validate clean here and 404 in production. existsSync is therefore
+// never the primary oracle below: fs.readdirSync always reports each entry's real on-disk spelling
+// regardless of the OS's own case-folding rules (Windows preserves case even though its lookups
+// ignore it), so walking every path segment against its parent's real listing gives ONE answer on
+// Windows, macOS and Linux alike. A mis-cased DIRECTORY segment is exactly as real a 404 as a
+// mis-cased filename, so every segment is walked, not just the last one.
+//
+// Returns the fully verified absolute path on success. Returns null once an error has already
+// been pushed (not found, wrong case) or the read-failure fallback below has run; the caller must
+// not do anything further with the path in that case.
+function checkOnDiskCase(abs, src, w, errors) {
+  const rel = path.relative(REPO_ROOT, abs);
+  const segments = rel.split(path.sep).filter(Boolean);
+  let dir = REPO_ROOT;
+  for (const seg of segments) {
+    let entries;
+    try { entries = fs.readdirSync(dir); }
+    catch (e) {
+      // The parent directory itself could not be read (missing, permissions...). A missing parent
+      // must not throw out of the validator; fall back to a plain existence check on the full path.
+      // Case cannot be verified in this branch, so no "different case" message is possible here.
+      if (!fs.existsSync(abs)) errors.push(`${w}: file not found at "${src}" (resolved from repo root)`);
+      return null;
+    }
+    if (entries.includes(seg)) { dir = path.join(dir, seg); continue; }
+    const ciHit = entries.some(e => e.toLowerCase() === seg.toLowerCase());
+    if (ciHit) {
+      errors.push(`${w}: "${src}" exists on disk, but the "${seg}" segment has a different case there; this authoring machine's filesystem may resolve it anyway, but GitHub Pages, which serves this repo, is case-sensitive, so this would 404 in production`);
+    } else {
+      errors.push(`${w}: file not found at "${src}" (resolved from repo root)`);
+    }
+    return null;
+  }
+  return dir;
+}
+
+function checkFigures(pack, errors, opts) {
+  const list = pack.figures;
+  if (list === undefined) return new Map();
+  if (!Array.isArray(list)) { errors.push(`figures: present but not an array, got ${JSON.stringify(list)}`); return new Map(); }
+  if (list.length === 0) {
+    errors.push('figures: declared as an empty array; omit the field entirely instead of declaring one with no figures');
+    return new Map();
+  }
+
+  const assetBase = (opts && nonEmptyString(opts.assetBase)) ? opts.assetBase : 'art';
+  // The validator's own expectedId (the filename, authoritative when the CLI supplies it) wins
+  // over the pack's self-reported meta.id; meta.id is only a fallback for callers with no filename
+  // at all (in-memory packs). When neither is available the prefix rule is unverifiable, and that
+  // is reported once, explicitly, rather than every src silently skipping its prefix check.
+  const expectedId = opts && opts.expectedId;
+  const packId = nonEmptyString(expectedId) ? expectedId
+    : ((pack.meta && nonEmptyString(pack.meta.id)) ? pack.meta.id : null);
+  if (!packId) {
+    errors.push(`figures: no pack id available (neither the validator's expectedId nor meta.id) to build the "${assetBase}/<packId>/" prefix check; every figure src's location rule is unverifiable until one is supplied`);
+  }
+
+  const byId = new Map();
+  list.forEach((fig, i) => {
+    const where = `figures[${i}]`;
+    if (!fig || typeof fig !== 'object') { errors.push(`${where}: not an object`); return; }
+    if (!nonEmptyString(fig.id)) { errors.push(`${where}.id: missing or empty`); return; }
+    const w = `figures(${fig.id})`;
+    if (byId.has(fig.id)) errors.push(`${where}: duplicate figure id "${fig.id}"`);
+    else byId.set(fig.id, fig);
+
+    if (!FIG_KINDS.includes(fig.kind)) {
+      errors.push(`${w}.kind: must be one of ${FIG_KINDS.join(', ')}, got ${JSON.stringify(fig.kind)}`);
+    }
+    for (const k of ['caption', 'credit', 'alt']) {
+      if (!nonEmptyString(fig[k])) errors.push(`${w}.${k}: missing or empty`);
+    }
+
+    if (fig.kind === 'plate') {
+      if (!Array.isArray(fig.views) || fig.views.length < 2) {
+        errors.push(`${w}.views: plate figures need at least two views, got ${JSON.stringify(fig.views)}`);
+      } else {
+        fig.views.forEach((v, vi) => {
+          const vw = `${w}.views[${vi}]`;
+          if (!v || typeof v !== 'object') { errors.push(`${vw}: not an object`); return; }
+          if (!nonEmptyString(v.label)) errors.push(`${vw}.label: missing or empty`);
+          checkArtSrc(v.src, `${vw}.src`, packId, true, errors, assetBase);
+          // overlaySrc obeys the SAME art/<packId>/ prefix as src: it ships to the same public
+          // tree under the same per-pack provenance discipline, so it gets no exemption.
+          if (v.overlaySrc !== undefined) checkArtSrc(v.overlaySrc, `${vw}.overlaySrc`, packId, true, errors, assetBase);
+        });
+      }
+    } else {
+      // Every non-plate kind (including an already-invalid kind) still owes a real src; the kind
+      // check above already reported the invalid kind, so this does not mask it, it adds to it.
+      checkArtSrc(fig.src, `${w}.src`, packId, true, errors, assetBase);
+    }
+
+    if (fig.kind === 'chart') {
+      const dt = fig.dataTable;
+      if (!isPlainObject(dt)) {
+        errors.push(`${w}.dataTable: chart figures require a dataTable object, got ${JSON.stringify(dt)}`);
+      }
+    }
+
+    // Task 9 fix round 1, item 11: `gen` is opt-in and, before this check, unvalidated -- a chart
+    // carrying a dataTable but no `gen` flag (or a mistyped one, e.g. the string "true") silently
+    // escaped tests/figure-derive.js entirely while its own NOT-ARMED banner asserted that nothing
+    // needed guarding. This only enforces the TYPE here; whether an assessed chart is REQUIRED to
+    // carry `gen: true` is enforced below in checkFigureReferences, where the assessed set (item
+    // .figureId) is already in hand.
+    if (fig.gen !== undefined && typeof fig.gen !== 'boolean') {
+      errors.push(`${w}.gen: must be a boolean when present, got ${JSON.stringify(fig.gen)}`);
+    }
+  });
+  return byId;
+}
+
+// ---------- figures: cross-references ----------
+// Everything about how the REST of the pack points at a figure: passage strips, a level's reveal
+// card, and an assessed item. Kept separate from checkFigures because it needs passagesById and
+// itemsById already built, exactly like checkTargetSubjects sits apart from checkLevels above.
+function checkFigureReferences(pack, figuresById, passagesById, itemsById, errors) {
+  for (const p of passagesById.values()) {
+    if (p.figureIds === undefined) continue;
+    if (!Array.isArray(p.figureIds)) { errors.push(`passages(${p.id}).figureIds: must be an array, got ${JSON.stringify(p.figureIds)}`); continue; }
+    // Fix wave (final review): the spec caps a passage's strip at 1-3 thumbs (0 is expressed by
+    // omitting the field entirely, not by an empty array). Nothing enforced the upper bound --
+    // executed with 8 figureIds on one passage, all 8 rendered, the strip's own composed height
+    // held at 98px, but scrollWidth (1096) exceeded the visible 1000px and most thumbs sat
+    // off-screen behind a horizontal scroll the child has no affordance to discover.
+    if (p.figureIds.length > 3) {
+      errors.push(`passages(${p.id}).figureIds: must have at most 3 entries (the strip caps at 1-3 thumbs), got ${p.figureIds.length}`);
+    }
+    p.figureIds.forEach((fid, i) => {
+      if (!figuresById.has(fid)) errors.push(`passages(${p.id}).figureIds[${i}]: "${fid}" does not resolve to any figure`);
+    });
+  }
+
+  if (Array.isArray(pack.levels)) {
+    pack.levels.forEach((lv, i) => {
+      if (!lv || typeof lv !== 'object') return;   // already reported by checkLevels
+      const reveal = lv.reveal;
+      if (!reveal || typeof reveal !== 'object' || reveal.figureId === undefined) return;
+      if (!figuresById.has(reveal.figureId)) {
+        errors.push(`levels[${i}].reveal.figureId: "${reveal.figureId}" does not resolve to any figure`);
+      }
+    });
+  }
+
+  for (const it of itemsById.values()) {
+    if (it.figureId === undefined) continue;
+    const w = `items(${it.id}).figureId`;
+    const fig = figuresById.get(it.figureId);
+    if (!fig) { errors.push(`${w}: "${it.figureId}" does not resolve to any figure`); continue; }
+    if (fig.kind === 'photo') {
+      errors.push(`${w}: figure "${fig.id}" is a photograph; photographs are never assessed`);
+      continue;
+    }
+    if (!isPlainObject(fig.dataTable)) {
+      errors.push(`${w}: figure "${fig.id}" is assessed by this item and requires a dataTable`);
+      continue;
+    }
+    // Task 9 fix round 1, item 11: a chart figure carrying a dataTable AND assessed by an item is
+    // exactly the shape tests/figure-derive.js exists to guard (the picture is graded against this
+    // dataTable). `gen` is opt-in everywhere else in this schema, but here it is not optional --
+    // `gen !== true` (missing, false, or a truthy-but-mistyped value already caught by the
+    // boolean-type check in checkFigures) means the derive gate silently never re-derives this
+    // figure, while its own NOT-ARMED banner would keep asserting nothing needs guarding.
+    if (fig.kind === 'chart' && fig.gen !== true) {
+      errors.push(`${w}: figure "${fig.id}" is a chart assessed by this item and must declare gen: true so tests/figure-derive.js re-derives it from its dataTable, got ${JSON.stringify(fig.gen)}`);
+    }
+  }
+}
+
+// ---------- envelope: passage docKind ----------
+function checkDocKinds(passagesById, errors) {
+  for (const p of passagesById.values()) {
+    if (p.docKind !== undefined && !DOC_KINDS.includes(p.docKind)) {
+      errors.push(`passages(${p.id}).docKind: must be one of ${DOC_KINDS.join(', ')}, got ${JSON.stringify(p.docKind)}`);
+    }
+  }
+}
+
+// ---------- whole-pack: no live links ----------
+// Scans the raw JSON TEXT, not the parsed object, so a URL cannot hide in a field no schema check
+// happens to walk. rawText is the real file bytes when the CLI supplies opts.rawText; validatePack
+// falls back to JSON.stringify(pack) so in-memory test fixtures (which never touch disk) get the
+// same scan over the same string content.
+function checkNoRawUrls(rawText, errors) {
+  const m = /https?:\/\/[^"'\\\s]*/.exec(rawText);
+  if (m) {
+    errors.push(`pack: raw JSON text contains a live URL (${JSON.stringify(m[0].slice(0, 80))}); figures and text may not embed http(s) links`);
+  }
+}
+
 // ---------- hooks filled by later tasks ----------
 function isIntIn(v, lo, hi) { return Number.isInteger(v) && v >= lo && v <= hi; }
 
@@ -282,7 +554,7 @@ function checkItemShape(item, passagesById, errors) {
       // The signature EBSR rule: the correct evidence depends on which Part A the student chose,
       // so partB.key is a map from every Part A index to a Part B index. A fixed scalar key here
       // is the most common way a homemade EBSR is silently wrong.
-      if (!B.key || typeof B.key !== 'object' || Array.isArray(B.key)) {
+      if (!isPlainObject(B.key)) {
         errors.push(`${w}.partB.key: must be an object mapping each partA index to a partB index`);
         break;
       }
@@ -620,6 +892,25 @@ function validatePack(pack, opts) {
   const itemsById = checkItemEnvelope(pack, passagesById, errors);
   checkTargetSubjects(pack, itemsById, errors);
   checkLevels(pack, itemsById, errors, warnings);
+  const figuresById = checkFigures(pack, errors, opts);
+  checkFigureReferences(pack, figuresById, passagesById, itemsById, errors);
+  checkDocKinds(passagesById, errors);
+  // Scans the UNION of whatever real file bytes the CLI supplied (or JSON.stringify(pack) when a
+  // caller has none, e.g. an in-memory test fixture) AND JSON.stringify(pack) itself, so neither
+  // surface's blind spot can hide a link: raw bytes miss a URL a duplicate JSON key discarded at
+  // parse time (present in the bytes, absent from the parsed object), while the parsed object
+  // misses nothing the raw bytes had UNLESS the raw bytes themselves are the only place it showed
+  // up -- scanning both closes both gaps at once.
+  //
+  // The rawText term is normalized (\/ -> /) before scanning, and ONLY the rawText term: real JSON
+  // permits an escaped forward slash, so a shipped file can contain "https:\/\/host" verbatim,
+  // which JSON.parse silently turns into a live "https://host" link at runtime while the regex
+  // below (which requires a literal "://") cannot see through the escape in the raw bytes. The
+  // JSON.stringify(pack) term keeps its current meaning (it is already the POST-parse, already
+  // unescaped representation, and re-normalizing it would be a no-op at best and could mask an
+  // unrelated defect at worst).
+  const rawText = (opts && typeof opts.rawText === 'string') ? opts.rawText : JSON.stringify(pack);
+  checkNoRawUrls(rawText.replace(/\\\//g, '/') + '\n' + JSON.stringify(pack), errors);
   for (const it of itemsById.values()) checkItemShape(it, passagesById, errors);
   contentChecks(pack, passagesById, itemsById, errors, warnings);
   checkEbsrKeyShapes(pack, errors);
@@ -652,7 +943,11 @@ function main(argv) {
     try { pack = loadPackFile(abs); }
     catch (e) { console.log(`\n${expectedId}\n  LOAD FAILED: ${e.message}`); totalErrors++; continue; }
 
-    const { errors, warnings } = validatePack(pack, { expectedId });
+    // Real file bytes, not a re-stringify of the parsed object, so checkNoRawUrls scans exactly
+    // what shipped -- including anything JSON.parse/stringify would round-trip identically anyway,
+    // but without relying on that being true.
+    const rawText = fs.readFileSync(abs, 'utf8');
+    const { errors, warnings } = validatePack(pack, { expectedId, rawText });
 
     // Blind re-answer ledger. A pack with comparable items must ship an adjudicated ledger.
     const ledgerPath = abs.replace(/\.json$/, '.verdicts.json');
@@ -687,6 +982,6 @@ function main(argv) {
   return 0;
 }
 
-module.exports = { validatePack, loadPackFile, ITEM_TYPES, AUTO_TYPES, CHOICE_TYPES, GENRES };
+module.exports = { validatePack, loadPackFile, ITEM_TYPES, AUTO_TYPES, CHOICE_TYPES, GENRES, FIG_KINDS, DOC_KINDS };
 
 if (require.main === module) process.exit(main(process.argv));

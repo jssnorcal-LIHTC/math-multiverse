@@ -30,6 +30,9 @@ jobs:
       - name: Validate content packs (structure, verbatim spans, readability, blind-verdict ledger)
         run: node tests/validate-pack.js
 
+      - name: Figure-derive gate (regenerated chart SVGs byte-match their committed src; fixture controls)
+        run: node tests/figure-derive.js
+
       - name: Freshness unit gate (MVFresh service, module-grade union rejection)
         run: node tests/freshness.js
 
@@ -50,6 +53,9 @@ jobs:
 
       - name: Headless render smoke (launcher + all six modules, Grade 5 and Grade 6)
         run: node tests/smoke.js
+
+      - name: Figures offline (every figure/badge asset decodes with no network; fixture controls)
+        run: node tests/figures-offline.js
 
       - name: Reading surface (every pack item keeps a readable passage at 1024x768)
         run: node tests/reading-surface.js

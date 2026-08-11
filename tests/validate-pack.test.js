@@ -1,6 +1,7 @@
 'use strict';
 const assert = require('assert');
 const path = require('path');
+const fs = require('fs');   // only used by the POSIX-semantics simulation check below (fix round 2, item 1b)
 const { validatePack, loadPackFile, ITEM_TYPES, GENRES } = require('./validate-pack');
 
 const GOOD = path.join(__dirname, 'fixtures', 'pack-good.json');
@@ -12,8 +13,11 @@ function check(name, fn) {
   catch (e) { failures++; console.log('  FAIL ' + name + ': ' + e.message); }
 }
 // Assert the fixture fails for a specific reason, so a check cannot pass by accident.
+// assetBase: 'tests/fixtures' is inert for every non-figure fixture in this file (checkFigures
+// returns before ever reading it when pack.figures is absent) and lets every figure-rule test
+// below resolve its prefix check against tests/fixtures/pack-good/ instead of the public art/ tree.
 function expectError(pack, fragment, label) {
-  const { errors } = validatePack(pack, { expectedId: 'pack-good' });
+  const { errors } = validatePack(pack, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
   const hit = errors.some(e => e.toLowerCase().includes(fragment.toLowerCase()));
   assert.strictEqual(hit, true, `${label}: expected an error containing "${fragment}", got ${JSON.stringify(errors)}`);
 }
@@ -507,6 +511,509 @@ check('a rotate level under a free pack root is still caught (level policy wins)
   p.repeatPolicy = 'free';
   p.levels[0].repeatPolicy = 'rotate';
   expectError(p, 'item types', 'level rotate under pack free');
+});
+
+// ---------- task 2: figure rules ----------
+// pack.figures is a brand-new envelope: none of the 5 shipped packs declares one yet (verified
+// before this change landed), so every fixture here is built fresh off figurePack() rather than
+// mutating pack-good's existing items/passages/levels. Figures point at real files under
+// tests/fixtures/pack-good/ (fixture-a.svg, fixture-b.svg): real fixtures on the real filesystem,
+// not a mock, but kept out of the public art/ tree (GitHub Pages serves the repo root, and that
+// tree is under its own per-pack provenance discipline -- fix round 1, item C). expectError above
+// and every direct validatePack() call below pass assetBase: 'tests/fixtures' so the prefix check
+// resolves against that fixture location; main() never sets assetBase, so real packs stay gated on
+// art/<packId>/ exactly as shipped (verified by rerunning the CLI after this change).
+
+function figurePack() {
+  const p = clone();
+  p.figures = [
+    {
+      id: 'fig-photo', kind: 'photo', src: 'tests/fixtures/pack-good/fixture-a.svg',
+      caption: 'A courier crosses the square at dusk.', credit: 'Field photography unit',
+      alt: 'A person walking alone across an open plaza.',
+    },
+    {
+      id: 'fig-chart', kind: 'chart', src: 'tests/fixtures/pack-good/fixture-b.svg',
+      caption: 'Reported signals by district, one month.', credit: 'Case file archive',
+      alt: 'Bar chart of signal counts across four districts.',
+      dataTable: { columns: ['District', 'Signals'], rows: [['North', 4], ['South', 7], ['East', 2], ['West', 5]] },
+    },
+    {
+      id: 'fig-diagram', kind: 'diagram', src: 'tests/fixtures/pack-good/fixture-a.svg',
+      caption: 'How a dead drop passes without a meeting.', credit: 'Training desk',
+      alt: 'Diagram of two couriers using a signal and a hidden package.',
+      dataTable: { columns: ['Step', 'Actor'], rows: [['Hide', 'Courier A'], ['Signal', 'Courier A'], ['Collect', 'Courier B']] },
+    },
+    {
+      id: 'fig-plate', kind: 'plate',
+      caption: 'The lamp post signal, two views.', credit: 'Field photography unit',
+      alt: 'Two photographs of the same lamp post from different angles.',
+      views: [
+        { label: 'Street level', src: 'tests/fixtures/pack-good/fixture-a.svg' },
+        { label: 'Overhead', src: 'tests/fixtures/pack-good/fixture-b.svg', overlaySrc: 'tests/fixtures/pack-good/fixture-a.svg' },
+      ],
+    },
+  ];
+  p.passages[0].docKind = 'case-file';
+  p.passages[0].figureIds = ['fig-photo'];
+  p.levels[0].reveal = { figureId: 'fig-chart' };
+  p.items[0].figureId = 'fig-diagram';   // i-mc-1; diagram kind, non-photo, carries a dataTable
+  return p;
+}
+
+check('a fully valid figure-bearing pack produces zero errors', () => {
+  const { errors } = validatePack(figurePack(), { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.deepStrictEqual(errors, [], 'errors: ' + JSON.stringify(errors));
+});
+
+// ---- rule 1: figures array shape and per-figure fields ----
+
+check('figures present but not an array is caught', () => {
+  const p = figurePack(); p.figures = 'nope';
+  expectError(p, 'present but not an array', 'figures not array');
+});
+
+check('a figure missing alt is caught', () => {
+  const p = figurePack(); delete p.figures[0].alt;
+  expectError(p, 'alt: missing or empty', 'missing alt');
+});
+
+check('a figure missing caption is caught', () => {
+  const p = figurePack(); delete p.figures[0].caption;
+  expectError(p, 'caption: missing or empty', 'missing caption');
+});
+
+check('a figure missing credit is caught', () => {
+  const p = figurePack(); delete p.figures[0].credit;
+  expectError(p, 'credit: missing or empty', 'missing credit');
+});
+
+check('a figure with an unknown kind is caught', () => {
+  // Fragment fully qualified: an unqualified 'kind: must be one of' is a substring of
+  // "...dockind: must be one of..." under expectError's case-insensitive match, and figurePack()
+  // itself populates passages[0].docKind, so a bare fragment could pass for the wrong reason.
+  const p = figurePack(); p.figures[0].kind = 'painting';
+  expectError(p, 'figures(fig-photo).kind: must be one of', 'bad kind');
+});
+
+check('a duplicate figure id is caught', () => {
+  const p = figurePack(); p.figures.push(JSON.parse(JSON.stringify(p.figures[0])));
+  expectError(p, 'duplicate figure id', 'dup figure');
+});
+
+check('a null entry in the figures array is caught, not thrown', () => {
+  // Fragment fully qualified with the index: a bare 'not an object' is also produced by
+  // passages[i], items[i], levels[i], and plate views[i] on their own malformed entries, so an
+  // unqualified fragment could pass even if THIS specific guard were the one removed.
+  const p = figurePack(); p.figures[0] = null;
+  expectError(p, 'figures[0]: not an object', 'null figure entry');
+});
+
+check('a figure missing its id is caught', () => {
+  // Fragment fully qualified: an unqualified 'id: missing or empty' is also a substring of
+  // "meta.id: missing or empty", so a bare fragment could pass for the wrong reason.
+  const p = figurePack(); delete p.figures[0].id;
+  expectError(p, 'figures[0].id: missing or empty', 'figure missing id');
+});
+
+// ---- rule 2: src / views -- existence, prefix, traversal, and on-disk case ----
+
+check('a non-plate figure with no src at all is caught', () => {
+  // Fragment fully qualified with the figure id: an unqualified 'src: missing or empty' is also
+  // a substring of a hypothetical "...overlaySrc: missing or empty" message (lower-cased,
+  // "overlaysrc" ends in "src"), so a bare fragment could pass for the wrong reason.
+  const p = figurePack(); delete p.figures[0].src;
+  expectError(p, 'figures(fig-photo).src: missing or empty', 'missing src field');
+});
+
+check('a src outside the pack prefix is caught', () => {
+  // Points at a path that need not exist on disk: the assertion is only on the location rule, so
+  // renaming or removing an unrelated shipped asset later cannot change what this test proves.
+  const p = figurePack(); p.figures[0].src = 'somewhere-else/pack-good/whatever.svg';
+  expectError(p, 'must live under', 'src outside prefix');
+});
+
+check('a src that does not exist on disk is caught', () => {
+  const p = figurePack(); p.figures[0].src = 'tests/fixtures/pack-good/does-not-exist.svg';
+  expectError(p, 'file not found', 'missing file');
+});
+
+check('a ".." traversal segment is rejected even though it string-prefix-matches the pack directory', () => {
+  const p = figurePack();
+  p.figures[0].src = 'tests/fixtures/pack-good/../fixture-a.svg';
+  expectError(p, 'must not contain', 'traversal src');
+});
+
+check('a backslash in a src is rejected', () => {
+  const p = figurePack();
+  p.figures[0].src = 'tests\\fixtures\\pack-good\\fixture-a.svg';
+  expectError(p, 'must not contain', 'backslash src');
+});
+
+check('an absolute (leading-slash) src is rejected rather than letting the prefix and existence checks disagree', () => {
+  // Before this check, path.resolve (prefix half) and path.join (existence half) treat an
+  // absolute src differently -- resolve discards REPO_ROOT once it sees one; join never does --
+  // so the two halves of checkArtSrc could report factually inconsistent diagnoses for one input.
+  const p = figurePack();
+  p.figures[0].src = '/tests/fixtures/pack-good/fixture-a.svg';
+  expectError(p, 'must be a repo-relative path', 'absolute src');
+});
+
+check('a trailing separator on a src is rejected', () => {
+  // Validated clean before this check: path.relative (used by the on-disk segment walk) strips a
+  // trailing slash before splitting into segments, but POSIX pathname resolution requires one to
+  // resolve to a DIRECTORY, so this would 404 on the case-sensitive, POSIX-serving host even
+  // though the file itself genuinely exists.
+  const p = figurePack();
+  p.figures[0].src = 'tests/fixtures/pack-good/fixture-a.svg/';
+  expectError(p, 'must not end with a trailing slash', 'trailing slash src');
+});
+
+check('a src that exists on disk only under a different case is caught (case-sensitive Pages check)', () => {
+  // fs.existsSync is case-insensitive on this authoring machine; GitHub Pages, which serves this
+  // repo, is not. The real file is fixture-a.svg (lowercase).
+  const p = figurePack();
+  p.figures[0].src = 'tests/fixtures/pack-good/Fixture-A.svg';
+  expectError(p, 'different case', 'case-mismatched src');
+});
+
+check('a mis-cased DIRECTORY segment in a src is caught, not just a mis-cased filename', () => {
+  // Same defect class as the filename case above, walked one level up: checkOnDiskCase walks
+  // EVERY path segment against its parent's real listing, not just the final basename, so a
+  // directory spelled with the wrong case is exactly as real a 404 on Pages as a wrong-case file.
+  const p = figurePack();
+  p.figures[0].src = 'tests/fixtures/Pack-Good/fixture-a.svg';
+  expectError(p, 'different case', 'case-mismatched directory segment');
+});
+
+check('POSIX-semantics simulation: a mis-cased src is still caught under case-SENSITIVE existence lookups', () => {
+  // fix round 2, item 1b. This authoring machine's filesystem is case-insensitive (Windows), and
+  // there is no WSL and no Linux runtime here, so a real ubuntu-latest run is impossible locally.
+  // "checkOnDiskCase no longer consults fs.existsSync for this decision" is reasoning, not
+  // evidence -- so fs.existsSync is temporarily replaced with a case-SENSITIVE stand-in (resolve
+  // the parent directory, read it, and return true only when the EXACT basename is present,
+  // matching real POSIX lookup semantics) for the duration of this one check, and restored in a
+  // finally so no later check inherits the patch. Paired with the real-filesystem check above:
+  // the SAME mis-cased input produces the SAME "different case" message under case-insensitive
+  // (this machine) and case-sensitive (simulated Linux/CI) existence semantics, which is the
+  // actual invariance claim.
+  const realExistsSync = fs.existsSync;
+  fs.existsSync = function (p) {
+    try { return fs.readdirSync(path.dirname(p)).includes(path.basename(p)); }
+    catch (e) { return false; }
+  };
+  try {
+    const p = figurePack();
+    p.figures[0].src = 'tests/fixtures/pack-good/Fixture-A.svg';
+    const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+    assert.strictEqual(errors.some(e => e.includes('different case')), true,
+      'expected "different case" under simulated case-sensitive existsSync too: ' + JSON.stringify(errors));
+  } finally {
+    fs.existsSync = realExistsSync;
+  }
+});
+
+check('POSIX-semantics simulation, mis-cased directory segment: same invariance claim, one level up', () => {
+  const realExistsSync = fs.existsSync;
+  fs.existsSync = function (p) {
+    try { return fs.readdirSync(path.dirname(p)).includes(path.basename(p)); }
+    catch (e) { return false; }
+  };
+  try {
+    const p = figurePack();
+    p.figures[0].src = 'tests/fixtures/Pack-Good/fixture-a.svg';
+    const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+    assert.strictEqual(errors.some(e => e.includes('different case')), true,
+      'expected "different case" for a mis-cased directory segment under simulated case-sensitive existsSync too: ' + JSON.stringify(errors));
+  } finally {
+    fs.existsSync = realExistsSync;
+  }
+});
+
+check('a src resolving to a directory, not a file, is caught', () => {
+  // "The asset exists" must mean a FILE. The pack's own fixture directory genuinely exists on
+  // disk and satisfies the prefix rule trivially (a directory is "under" itself), so without this
+  // check it would validate clean.
+  const p = figurePack();
+  p.figures[0].src = 'tests/fixtures/pack-good';
+  expectError(p, 'resolves to a directory, not a file', 'src is a directory');
+});
+
+check('the default assetBase (art, the only value that ever ships) is exercised directly, not just vacuously by the figureless CLI run', () => {
+  // figurePack()'s figures live under tests/fixtures/pack-good/ (real files); with NO assetBase
+  // key at all, checkArtSrc must fall back to its real default, 'art', and therefore reject every
+  // one of them. Calls validatePack directly rather than through expectError, which always
+  // injects assetBase: 'tests/fixtures'. This test exists to fail the instant that default changes.
+  const { errors } = validatePack(figurePack(), { expectedId: 'pack-good' });   // no assetBase key
+  assert.strictEqual(errors.some(e => e.includes('must live under "art/pack-good/"')), true,
+    'expected the default assetBase ("art") to reject a src under tests/fixtures/: ' + JSON.stringify(errors));
+});
+
+check('rule 2 packId: expectedId wins over a present, DIFFERENT meta.id (src under expectedId is clean)', () => {
+  const p = figurePack();
+  p.meta.id = 'some-other-pack';   // present, but deliberately different from expectedId
+  // figures[0].src already lives under tests/fixtures/pack-good/ -- i.e. under expectedId's
+  // directory, not meta.id's -- so this would start failing with a spurious "must live under" if
+  // packId ever preferred meta.id again.
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.strictEqual(errors.some(e => /must live under/.test(e)), false,
+    'expected zero prefix errors when src matches expectedId even though meta.id differs: ' + JSON.stringify(errors));
+});
+
+check('rule 2 packId: a src matching only the (different, present) meta.id, not expectedId, is still rejected', () => {
+  const p = figurePack();
+  p.meta.id = 'some-other-pack';
+  p.figures[0].src = 'tests/fixtures/some-other-pack/fixture-a.svg';   // matches meta.id's dir, not expectedId's
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.strictEqual(errors.some(e => e.includes('must live under "tests/fixtures/pack-good/"')), true,
+    'expected the location error against expectedId\'s directory, since expectedId wins over meta.id: ' + JSON.stringify(errors));
+});
+
+check('a plate figure with only one view is caught', () => {
+  const p = figurePack();
+  const plate = p.figures.find(f => f.id === 'fig-plate');
+  plate.views = [plate.views[0]];
+  expectError(p, 'need at least two views', 'plate one view');
+});
+
+check('a plate view missing its label is caught', () => {
+  const p = figurePack();
+  p.figures.find(f => f.id === 'fig-plate').views[0].label = '';
+  expectError(p, 'label: missing or empty', 'plate view no label');
+});
+
+check('a plate view src outside the pack prefix is caught', () => {
+  const p = figurePack();
+  p.figures.find(f => f.id === 'fig-plate').views[0].src = 'somewhere-else/pack-good/whatever.svg';
+  expectError(p, 'must live under', 'plate view src outside prefix');
+});
+
+check('a plate view overlaySrc that does not exist is caught', () => {
+  const p = figurePack();
+  p.figures.find(f => f.id === 'fig-plate').views[1].overlaySrc = 'tests/fixtures/pack-good/nope.svg';
+  expectError(p, 'file not found', 'plate overlay missing file');
+});
+
+check('a plate view overlaySrc outside the pack prefix is caught: overlaySrc obeys the same prefix as src', () => {
+  const p = figurePack();
+  p.figures.find(f => f.id === 'fig-plate').views[1].overlaySrc = 'somewhere-else/pack-good/whatever.svg';
+  expectError(p, 'must live under', 'plate overlay outside prefix');
+});
+
+// ---- rule 2, packId source: prefer expectedId, fall back to meta.id, error if neither exists ----
+
+check('an empty meta.id still resolves a usable packId from expectedId', () => {
+  const p = figurePack();
+  p.meta.id = '';
+  p.figures[0].src = 'somewhere-else/pack-good/whatever.svg';
+  expectError(p, 'must live under', 'empty meta.id falls back to expectedId');
+});
+
+check('neither expectedId nor meta.id available pushes an explicit error instead of silently skipping the prefix check', () => {
+  const p = figurePack();
+  p.meta.id = '';
+  const { errors } = validatePack(p, { assetBase: 'tests/fixtures' });   // no expectedId supplied
+  assert.strictEqual(errors.some(e => /no pack id available/.test(e)), true,
+    'expected an explicit "no pack id available" error: ' + JSON.stringify(errors));
+});
+
+// ---- rule 3: chart dataTable, and any assessed figure needs one (photos banned outright) ----
+
+check('a chart figure with no dataTable is caught', () => {
+  const p = figurePack();
+  delete p.figures.find(f => f.id === 'fig-chart').dataTable;
+  expectError(p, 'require a dataTable object', 'chart no dataTable');
+});
+
+check('an item.figureId pointing at a photo is caught: photographs are never assessed', () => {
+  const p = figurePack();
+  p.items[0].figureId = 'fig-photo';
+  expectError(p, 'photographs are never assessed', 'assessed photo');
+});
+
+check('an item.figureId pointing at a non-chart figure with no dataTable is caught', () => {
+  const p = figurePack();
+  delete p.figures.find(f => f.id === 'fig-diagram').dataTable;   // item i-mc-1 points here
+  expectError(p, 'requires a dataTable', 'assessed diagram no dataTable');
+});
+
+// ---- rule 3b (task 9 fix round 1, item 11): gen is type-checked, and required true on any
+// chart figure a real ITEM assesses (the derive gate's actual target set) ----
+
+check('a non-boolean gen on any figure is caught', () => {
+  const p = figurePack();
+  p.figures.find(f => f.id === 'fig-chart').gen = 'true';   // the classic string-not-boolean slip
+  expectError(p, 'gen: must be a boolean', 'gen wrong type');
+});
+
+check('gen: false on a figure (not assessed) is legal -- gen stays opt-in everywhere but the assessed set', () => {
+  const p = figurePack();
+  p.figures.find(f => f.id === 'fig-chart').gen = false;   // fig-chart here is reveal-referenced, not item-assessed
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.deepStrictEqual(errors, [], 'errors: ' + JSON.stringify(errors));
+});
+
+check('an item-assessed chart figure with no gen flag at all is caught', () => {
+  const p = figurePack();
+  const chart = JSON.parse(JSON.stringify(p.figures.find(f => f.id === 'fig-chart')));
+  chart.id = 'fig-chart-assessed';
+  p.figures.push(chart);
+  p.items[0].figureId = 'fig-chart-assessed';   // i-mc-1: now assesses a CHART, not the diagram
+  expectError(p, 'must declare gen: true', 'assessed chart missing gen');
+});
+
+check('an item-assessed chart figure with gen: false is caught', () => {
+  const p = figurePack();
+  const chart = JSON.parse(JSON.stringify(p.figures.find(f => f.id === 'fig-chart')));
+  chart.id = 'fig-chart-assessed';
+  chart.gen = false;
+  p.figures.push(chart);
+  p.items[0].figureId = 'fig-chart-assessed';
+  expectError(p, 'must declare gen: true', 'assessed chart gen false');
+});
+
+check('an item-assessed chart figure with gen: true passes clean', () => {
+  const p = figurePack();
+  const chart = JSON.parse(JSON.stringify(p.figures.find(f => f.id === 'fig-chart')));
+  chart.id = 'fig-chart-assessed';
+  chart.gen = true;
+  p.figures.push(chart);
+  p.items[0].figureId = 'fig-chart-assessed';
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.deepStrictEqual(errors, [], 'errors: ' + JSON.stringify(errors));
+});
+
+check('a level.reveal-only chart (not item-assessed) needs no gen flag at all', () => {
+  // figurePack()'s own fig-chart is reveal-referenced (p.levels[0].reveal), never item-assessed,
+  // and carries no gen field at all -- this is the baseline "a fully valid figure-bearing pack
+  // produces zero errors" fixture, re-asserted here specifically for the gen rule's scope.
+  const p = figurePack();
+  assert.strictEqual(p.figures.find(f => f.id === 'fig-chart').gen, undefined);
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.deepStrictEqual(errors, [], 'errors: ' + JSON.stringify(errors));
+});
+
+// ---- rule 4: passage.figureIds / level.reveal.figureId / item.figureId all resolve ----
+
+check('a dangling passage.figureIds entry is caught', () => {
+  const p = figurePack(); p.passages[0].figureIds = ['fig-nope'];
+  expectError(p, 'does not resolve to any figure', 'dangling passage figureId');
+});
+
+check('a dangling level.reveal.figureId is caught', () => {
+  const p = figurePack(); p.levels[0].reveal.figureId = 'fig-nope';
+  expectError(p, 'does not resolve to any figure', 'dangling reveal figureId');
+});
+
+check('a dangling item.figureId is caught', () => {
+  const p = figurePack(); p.items[0].figureId = 'fig-nope';
+  expectError(p, 'does not resolve to any figure', 'dangling item figureId');
+});
+
+// Fix wave (final review): the spec caps a passage's strip at 1-3 thumbs; 0 is expressed by
+// omitting figureIds entirely, not by an empty array, which is why the fixture below reuses all
+// four of figurePack()'s figures rather than testing a 0-length array as the violation.
+check('a passage.figureIds array over the 1-3 thumb cap is caught', () => {
+  const p = figurePack();
+  p.passages[0].figureIds = ['fig-photo', 'fig-chart', 'fig-diagram', 'fig-plate'];
+  expectError(p, 'at most 3 entries', 'figureIds over the thumb cap');
+});
+
+check('a passage.figureIds array at exactly the 1-3 thumb cap is not caught', () => {
+  const p = figurePack();
+  p.passages[0].figureIds = ['fig-photo', 'fig-chart', 'fig-diagram'];
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.deepStrictEqual(errors, [], 'errors: ' + JSON.stringify(errors));
+});
+
+// ---- rule 5: passage.docKind ----
+
+check('an unknown passage.docKind is caught', () => {
+  const p = figurePack(); p.passages[0].docKind = 'diary';
+  expectError(p, 'docKind: must be one of', 'bad docKind');
+});
+
+// ---- rule 6: no raw http(s) URL anywhere in the pack text (UNION of rawText and JSON.stringify) ----
+
+check('an embedded https:// anywhere in the pack is caught', () => {
+  const p = figurePack();
+  p.figures[0].credit = 'Source: https://example.com/photo';
+  expectError(p, 'https://', 'embedded url');
+});
+
+check('validatePack scans opts.rawText when supplied: a URL present ONLY in the raw bytes, with a CLEAN parsed object, is still caught', () => {
+  // fix round 1's original test, restored in fix round 3 (item 1): round 2 replaced this with a
+  // check whose URL sits on the PARSED object instead, which the JSON.stringify(pack) term alone
+  // can satisfy -- making it a behavioral duplicate of the "still scans JSON.stringify" check
+  // below and leaving NO surviving test that fails when the rawText term is dropped from the
+  // union. This is that discriminating test: `p` carries no URL anywhere in its own fields, so
+  // only the rawText term can produce this specific error. Simulates the real defect the raw-text
+  // scan exists for: a JSON duplicate key earlier in the authored file carried a URL, and
+  // JSON.parse silently kept only the later, clean value.
+  const p = figurePack();
+  const rawText = 'simulates real file bytes where an earlier duplicate JSON key carried ' +
+    'https://shadow-example.com before JSON.parse kept only the later, clean value';
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures', rawText });
+  assert.strictEqual(errors.some(e => e.includes('https://shadow-example.com')), true,
+    'expected the rawText-only URL to be caught: ' + JSON.stringify(errors));
+});
+
+check('validatePack scans opts.rawText: a URL escaped in the raw bytes (https:\\/\\/example.com), with a DIRTY parsed object, is caught', () => {
+  // Kept from fix round 2 (item 7). Built with a dirty parsed object, so this cannot by itself
+  // discriminate whether the escape is actually handled (see the CLEAN-object version below,
+  // which is fix round 3's real regression test for that); after fix round 3's normalization this
+  // scenario is also caught via the rawText term directly, not only via JSON.stringify(pack).
+  const p = figurePack();
+  p.figures[0].credit = 'Source: https://example.com';                           // what JSON.parse produces
+  const rawText = '{"figures":[{"credit":"Source: https:\\/\\/example.com"}]}';   // what actually shipped
+
+  // Prove the escaping claim inline rather than only asserting it in a comment.
+  assert.strictEqual(/https?:\/\//.test(rawText), false,
+    'sanity check: the escaped raw bytes must not themselves contain a literal "://", or this test proves nothing');
+
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures', rawText });
+  assert.strictEqual(errors.some(e => e.includes('https://example.com')), true,
+    'expected the escaped-in-raw-bytes URL to be caught: ' + JSON.stringify(errors));
+});
+
+check('validatePack scans opts.rawText: a URL escaped in the raw bytes, with a CLEAN parsed object, is caught (fix round 3, item 2 -- this is the real regression test)', () => {
+  // This is the case that SLIPPED THROUGH before this round's fix: with a clean parsed object,
+  // only the rawText term can catch anything, and the pre-fix regex requires a literal "://",
+  // which an escaped "\/\/ " in the raw bytes does not contain. Built with String.fromCharCode(92)
+  // rather than a quoted "\\/" literal, because a JS string literal (or a shell heredoc, per the
+  // controller's own earlier miss) can collapse "\\/" down to a plain "/" before this code ever
+  // runs, which would silently turn this into a test of the plain, already-working case instead
+  // of the escaped one it is meant to prove.
+  const BACKSLASH = String.fromCharCode(92);   // '\', constructed so no source-text layer can collapse it
+  const p = figurePack();   // clean: no URL anywhere in p's own fields
+  const rawText = 'credit: "See https:' + BACKSLASH + '/' + BACKSLASH + '/escaped-only-example.com for the source"';
+
+  // Prove the escaping claim on the ACTUAL bytes under test, not a comment's claim about them.
+  assert.strictEqual(/https?:\/\//.test(rawText), false,
+    'sanity check: the escaped raw bytes must not themselves contain a literal "://", or this test proves nothing');
+
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures', rawText });
+  assert.strictEqual(errors.some(e => e.includes('https://escaped-only-example.com')), true,
+    'expected the escaped-only, clean-object URL to be caught after \\/ normalization: ' + JSON.stringify(errors));
+});
+
+check('validatePack still scans JSON.stringify(pack) even when opts.rawText is supplied and is itself clean', () => {
+  // The regression the union guards against: before this fix, supplying opts.rawText made the
+  // validator use ONLY rawText, so a URL that exists solely in the parsed object's own fields
+  // would have shipped undetected on the real CLI path.
+  const p = figurePack();
+  p.figures[0].credit = 'Source: https://hidden-in-object.example.com';
+  const rawText = 'this stands in for real file bytes and is completely clean of any url';
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures', rawText });
+  assert.strictEqual(errors.some(e => e.includes('https://hidden-in-object.example.com')), true,
+    'expected the parsed-object-only URL to be caught even with a clean opts.rawText supplied: ' + JSON.stringify(errors));
+});
+
+// ---- rule 7: a declared-but-empty figures array is an error ----
+
+check('an empty figures array is caught', () => {
+  const p = figurePack(); p.figures = [];
+  expectError(p, 'declared as an empty array', 'empty figures array');
 });
 
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');

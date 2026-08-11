@@ -1,0 +1,378 @@
+'use strict';
+// figure-gen.js -- deterministic SVG chart generator for `gen: true` chart figures (Task 9,
+// fix round 1). genSvg(dataTable, accentColor) is a PURE function of its two arguments: no Date,
+// no Math.random, no locale-dependent number formatting (toFixed, never toLocaleString), no
+// object-key iteration that could vary, and every computed coordinate is rounded to 2 decimals
+// via n2() before it is written into the string. Same inputs -> byte-identical output, every run,
+// every platform, forever.
+//
+// FIX ROUND 1 framing (task-9-fix-round-1.md): the derive gate proves REPRODUCIBILITY, not
+// TRUTHFULNESS -- both sides of its byte-compare come from this same generator, so a bug IN this
+// file reproduces perfectly and the gate stays green while the picture disagrees with its own
+// dataTable. This file is the load-bearing one for that guarantee: every function below exists to
+// make what genSvg DRAWS provably match what dataTable SAYS, not just to match itself twice.
+//
+// Layout is centralized in layout(dataTable): it is the ONE place margins, domains, ticks, and
+// scales are computed, called by genSvg to draw and exported so tests/figure-derive.js can assert
+// geometry (e.g. "every bar's box lies inside the plot rect") against the SAME numbers the
+// generator actually used, never a second, independently-guessed copy that could drift.
+//
+// FONT SIZING -- the 15px floor is a RENDERED floor, not an authored one. A static SVG loaded via
+// <img> scales UNIFORMLY with its CSS box. At the strip (.mv-fig-img, 128x96, object-fit: contain
+// against an 800x450 native chart) and the item rail (.mv-item-fig, 128x72, same aspect) the scale
+// is 128/800 = 0.16x regardless of authored size -- no font size survives there, matching how
+// every other figure kind's readable text (caption, credit) already lives outside the image. The
+// lightbox (.mv-lb-img, max-width:94vw/max-height:74vh, no explicit width/height) is the one
+// context this generator sizes text for: at the project's reference viewport (1024x768) the chart
+// renders at its full native 1.0x; at the iPad 6's PORTRAIT viewport (768 CSS px) 94vw=721.92px is
+// narrower than the native 800px width, so it renders at 721.92/800 = 0.9024x. Every font size
+// below clears 15/0.9024 = 16.62px with margin (18-22px authored).
+
+const fs = require('fs');
+const path = require('path');
+
+const REPO_ROOT = path.join(__dirname, '..');
+
+// ---- fixed geometry ----
+const VB_W = 800, VB_H = 450;
+const TOP = 48, RIGHT = 48;          // the brief's literal 48px margin: nothing competes here
+const MIN_LEFT = 48;                 // floor matching the brief's literal margin for short labels
+const BASE_BOTTOM = 74;              // x tick-label row + x axis-title row
+const NOTE_ROW = 24;                 // one row of bottom margin per authored footer note
+const MAX_NOTES = 4;                 // fix round 1, item 10: clamp so the bottom band cannot grow
+                                      // without limit and invert the plot; extra notes are dropped
+const MIN_PLOT_H = 120;              // stated invariant; unreachable given MAX_NOTES (worst case
+                                      // bottom band = 74 + 4*24 = 170, plot height = 450-48-170 =
+                                      // 232), kept and asserted rather than left implicit
+const TICKS_TARGET = 5;              // even divisions, both axes (nice-rounded, see niceTicks)
+const GLYPH_W = 0.6;                 // width-per-character estimate at font-size 1 (the brief's own
+                                      // "glyph count times about 0.6 times the font" heuristic);
+                                      // shared by the left-margin sizing below AND the text-bbox
+                                      // assertion in tests/figure-derive.js, so the two can never
+                                      // disagree about how wide a label is estimated to be
+const LABEL_AXIS_GAP = 10;           // gap between a right-anchored tick label and the axis line
+const MARKER_R = 4;
+
+const BG = '#0f1218';
+const INK = '#e8eef7';                    // MVFigures.TOKENS.ink -- twin-checked in tests
+const GRID = 'rgba(255,255,255,0.12)';    // MVFigures.TOKENS.grid -- CHROME ONLY (axis border);
+                                           // twin-checked in tests
+// Fix round 1, item 9: the value-bearing gridlines measured at ~1.1-1.4:1 contrast against BG
+// (imperceptible). PLOT_GRID is a NEW, higher-contrast value (~4.7:1, see task-9-report.md for the
+// computed WCAG relative-luminance ratio) used only for gridlines that align to a specific
+// readable tick value; TOKENS.grid stays reserved for structural chrome (the axis border), per the
+// brief's own "keeping TOKENS.grid for chrome" instruction.
+const PLOT_GRID = 'rgba(232,238,247,0.5)';
+const DEFAULT_ACCENT = '#7aa8ff';
+
+const LABEL_FONT = 22, TICK_FONT = 20, NOTE_FONT = 18;
+const TICK_Y_OFF = 24, TITLE_Y_OFF = 50, NOTES_Y_START = 74;
+const Y_LABEL_ROW = 28;
+
+function n2(x) {
+  // Fixed 2-decimal formatting with trailing zeros stripped. toFixed is spec-defined (not
+  // locale-dependent, unlike toLocaleString), so this is the same string on every platform for
+  // the same float. Used for BOTH pixel coordinates and tick/category value labels.
+  let s = (Math.round(x * 100) / 100).toFixed(2);
+  if (s.indexOf('.') !== -1) s = s.replace(/0+$/, '').replace(/\.$/, '');
+  return s === '' || s === '-0' ? '0' : s;
+}
+
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function hp(v) {
+  // Half-pixel snap for STROKED GRIDLINE coordinates only (fix round 1, item 9): a 1px stroke
+  // centered on an integer coordinate straddles two device pixel rows and blurs; offsetting by
+  // 0.5 lands it on exactly one row. Never applied to plotted DATA geometry (polyline points, bar
+  // boxes, markers), which must stay exactly proportional to the data, not pixel-snapped.
+  return Math.round(v) + 0.5;
+}
+
+function refuse(reason) {
+  // Fix round 1, item 8: genSvg REFUSES shapes it cannot draw truthfully rather than drawing
+  // something off-canvas or silently misleading. The figure id is added by renderFigure() below,
+  // which is the layer that actually has one; genSvg's own interface (dataTable, accentColor) does
+  // not carry a figure id and is not changed here, per the locked test interface.
+  throw new Error(reason);
+}
+
+function paddedExtent(values) {
+  let lo = Infinity, hi = -Infinity;
+  values.forEach((v) => { if (v < lo) lo = v; if (v > hi) hi = v; });
+  if (!Number.isFinite(lo) || !Number.isFinite(hi)) return [0, 1];
+  if (lo === hi) { lo -= 1; hi += 1; }   // flat data: still a real, non-zero range to scale against
+  const pad = (hi - lo) * 0.08;
+  return [lo - pad, hi + pad];
+}
+
+function scaleFn(domainLo, domainHi, rangeLo, rangeHi) {
+  const span = (domainHi - domainLo) || 1;
+  return (v) => rangeLo + ((v - domainLo) / span) * (rangeHi - rangeLo);
+}
+
+// Fix round 1, item 9: "nice" tick steps (1, 2 or 5 times a power of ten) so ticks land on round,
+// readable values instead of the raw 8%-padded extremes. integerOnly forces a whole-number step
+// (>= 1), used for line-chart x ticks when every input x value is itself an integer.
+function niceStep(range, targetCount, integerOnly) {
+  const rawStep = range / Math.max(targetCount, 1);
+  let mag = Math.pow(10, Math.floor(Math.log10(rawStep || 1)));
+  if (integerOnly) mag = Math.max(1, mag);
+  const norm = rawStep / mag;
+  const niceNorm = norm <= 1 ? 1 : norm <= 2 ? 2 : norm <= 5 ? 5 : 10;
+  return niceNorm * mag;
+}
+
+function niceTicks(lo, hi, targetCount, integerOnly) {
+  if (lo === hi) { lo -= 1; hi += 1; }
+  const step = niceStep(hi - lo, targetCount, integerOnly);
+  const niceLo = Math.floor(lo / step) * step;
+  const niceHi = Math.ceil(hi / step) * step;
+  const n = Math.max(1, Math.round((niceHi - niceLo) / step));
+  const ticks = [];
+  for (let i = 0; i <= n; i++) ticks.push(niceLo + i * step);
+  return { ticks, lo: niceLo, hi: niceHi };
+}
+
+function estimateTextWidth(text, fontSize) {
+  return String(text).length * GLYPH_W * fontSize;
+}
+
+// Fix round 1, item 4: sized from the ACTUAL widest tick label rather than a fixed guess. The
+// original fixed-72px margin clipped any label wider than ~5 glyphs off the left edge of the
+// canvas, which is a data-truth defect (the chart then DISPLAYS a value differing from the
+// dataTable), not a cosmetic one.
+function leftMarginFor(tickLabels) {
+  const widest = tickLabels.reduce((m, s) => Math.max(m, estimateTextWidth(s, TICK_FONT)), 0);
+  return Math.max(MIN_LEFT, Math.ceil(widest) + LABEL_AXIS_GAP + LABEL_AXIS_GAP);
+}
+
+// ---- refusals (fix round 1, items 5 and 8): genSvg REFUSES what it cannot draw truthfully ----
+function validateTable(dt, type) {
+  const series = Array.isArray(dt.series) ? dt.series : [];
+  if (series.length === 0) refuse('dataTable has no series to plot');
+
+  if (series.length > 1) {
+    if (type === 'bar') {
+      const counts = series.map((s) => (Array.isArray(s.points) ? s.points.length : 0));
+      if (!counts.every((c) => c === counts[0])) {
+        refuse(`bar chart series have unequal point counts (${counts.join(', ')}); no multi-series convention exists yet`);
+      }
+    }
+    refuse(`chart declares ${series.length} series; multi-series charts are refused for now (every series would paint in the same accent with no legend, and series[].label is never rendered, so the picture could not state which series is which)`);
+  }
+
+  const points = Array.isArray(series[0].points) ? series[0].points : [];
+  if (points.length === 0) refuse('series has no points to plot');
+
+  points.forEach((p, i) => {
+    const x = p && p[0], y = p && p[1];
+    if (typeof x !== 'number' || !Number.isFinite(x)) refuse(`series point ${i} has a non-finite x value (${JSON.stringify(x)}); refusing rather than fabricating a domain around it`);
+    if (typeof y !== 'number' || !Number.isFinite(y)) refuse(`series point ${i} has a non-finite y value (${JSON.stringify(y)}); refusing rather than fabricating a domain around it`);
+  });
+
+  return points;
+}
+
+// Computes every layout decision genSvg needs to draw, and the ONLY place that math lives:
+// tests/figure-derive.js calls this directly to assert geometry (bar boxes inside the plot rect,
+// etc.) against the SAME numbers genSvg used, so the two can never independently drift. Throws
+// (via refuse()) exactly when genSvg itself would refuse to draw the table.
+function layout(dataTable) {
+  const dt = dataTable || {};
+  const type = dt.type === 'bar' ? 'bar' : 'line';
+  const points = validateTable(dt, type);
+
+  const notes = (Array.isArray(dt.notes) ? dt.notes : []).slice(0, MAX_NOTES);
+  const plotT = TOP;
+  const plotB = VB_H - (BASE_BOTTOM + notes.length * NOTE_ROW);
+  if (plotB - plotT < MIN_PLOT_H) {
+    refuse(`too many footer notes; the plot area would collapse to ${n2(plotB - plotT)}px, below the ${MIN_PLOT_H}px minimum`);
+  }
+
+  const allY = points.map((p) => p[1]);
+  const yDomainRaw = type === 'bar'
+    ? paddedExtent([Math.min(0, ...allY), Math.max(0, ...allY)])   // item 2: bar spans zero
+    : paddedExtent(allY);
+  const yNice = niceTicks(yDomainRaw[0], yDomainRaw[1], TICKS_TARGET, false);
+  const yTickLabels = yNice.ticks.map((v) => n2(v));
+  const plotL = leftMarginFor(yTickLabels);
+  const plotR = VB_W - RIGHT;
+  const yScale = scaleFn(yNice.lo, yNice.hi, plotB, plotT);
+
+  let xScale = null, xTicks = null, categories = null;
+  if (type === 'line') {
+    const allX = points.map((p) => p[0]);
+    const xIsInt = allX.every((v) => Number.isInteger(v));
+    const xDomainRaw = paddedExtent(allX);
+    const xNice = niceTicks(xDomainRaw[0], xDomainRaw[1], TICKS_TARGET, xIsInt);
+    xTicks = xNice.ticks;
+    xScale = scaleFn(xNice.lo, xNice.hi, plotL, plotR);
+  } else {
+    categories = points.map((p) => p[0]);
+  }
+
+  return { type, points, notes, plotL, plotR, plotT, plotB, yTicks: yNice.ticks, yTickLabels, yScale, xScale, xTicks, categories };
+}
+
+// genSvg(dataTable, accentColor) -> string. See file header for the determinism and font-floor
+// guarantees. Throws (does not return) for any shape layout()/validateTable() refuses.
+function genSvg(dataTable, accentColor) {
+  const dt = dataTable || {};
+  const g = layout(dt);
+  const accent = accentColor || DEFAULT_ACCENT;
+  const { type, points, notes, plotL, plotR, plotT, plotB, yTicks, yTickLabels, yScale, xScale, xTicks, categories } = g;
+
+  const out = [];
+  out.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${VB_W}" height="${VB_H}" viewBox="0 0 ${VB_W} ${VB_H}" role="img">`);
+  out.push(`<rect x="0" y="0" width="${VB_W}" height="${VB_H}" fill="${BG}" />`);
+  // Left axis border only (CHROME: TOKENS.grid). The bottom border is NOT drawn separately: the
+  // lowest y tick maps exactly onto plotB by construction (niceTicks' own lo IS the scale's
+  // domain floor), so the tick loop below already emits a gridline at that exact position -- a
+  // second explicit line there would be a byte-for-byte duplicate, not a visual difference.
+  out.push(`<line x1="${hp(plotL)}" y1="${plotT}" x2="${hp(plotL)}" y2="${n2(plotB)}" stroke="${GRID}" stroke-width="1" />`);
+
+  yTicks.forEach((v, i) => {
+    // Fix round 1, item 2: for a bar chart, whichever tick is (numerically) zero IS the explicit
+    // zero-baseline -- niceTicks' own construction guarantees 0 is always exactly one of the
+    // generated ticks whenever the domain spans zero, so this recolors that one tick's gridline
+    // to full ink contrast rather than drawing a second, overlapping line at the same position.
+    const isZeroBaseline = type === 'bar' && Math.abs(v) < 1e-9;
+    const stroke = isZeroBaseline ? INK : PLOT_GRID;
+    const py = hp(yScale(v));
+    out.push(`<line x1="${plotL}" y1="${py}" x2="${plotR}" y2="${py}" stroke="${stroke}" stroke-width="${isZeroBaseline ? 1.5 : 1}" />`);
+    out.push(`<text x="${n2(plotL - LABEL_AXIS_GAP)}" y="${n2(yScale(v))}" font-size="${TICK_FONT}" fill="${INK}" text-anchor="end" dominant-baseline="middle">${esc(yTickLabels[i])}</text>`);
+  });
+
+  if (type === 'line') {
+    xTicks.forEach((v) => {
+      out.push(`<text x="${n2(xScale(v))}" y="${n2(plotB + TICK_Y_OFF)}" font-size="${TICK_FONT}" fill="${INK}" text-anchor="middle">${esc(n2(v))}</text>`);
+    });
+    const pts = points.map((p) => `${n2(xScale(p[0]))},${n2(yScale(p[1]))}`).join(' ');
+    out.push(`<polyline points="${pts}" fill="none" stroke="${accent}" stroke-width="3" />`);
+    // Fix round 1, item 9: a marker at every data point. Deterministic, byte-stable, and it is
+    // also what makes a single-point series visible without a refusal (see validateTable).
+    points.forEach((p) => {
+      out.push(`<circle cx="${n2(xScale(p[0]))}" cy="${n2(yScale(p[1]))}" r="${MARKER_R}" fill="${accent}" />`);
+    });
+  } else {
+    const n = categories.length;
+    const groupW = n ? (plotR - plotL) / n : 0;
+    const gap = groupW * 0.18;
+    const barW = groupW - gap * 2;
+    const zeroY = yScale(0);
+    points.forEach((p, i) => {
+      const x = plotL + i * groupW + gap;
+      const valY = yScale(p[1]);
+      const top = Math.min(zeroY, valY);
+      const h = Math.abs(valY - zeroY);
+      out.push(`<rect x="${n2(x)}" y="${n2(top)}" width="${n2(barW)}" height="${n2(h)}" fill="${accent}" />`);
+    });
+    categories.forEach((c, i) => {
+      const cx = plotL + (i + 0.5) * groupW;
+      out.push(`<text x="${n2(cx)}" y="${n2(plotB + TICK_Y_OFF)}" font-size="${TICK_FONT}" fill="${INK}" text-anchor="middle">${esc(n2(c))}</text>`);
+    });
+  }
+
+  if (dt.yLabel) {
+    out.push(`<text x="${plotL}" y="${Y_LABEL_ROW}" font-size="${LABEL_FONT}" fill="${INK}">${esc(dt.yLabel)}</text>`);
+  }
+  if (dt.xLabel) {
+    const cx = n2((plotL + plotR) / 2);
+    out.push(`<text x="${cx}" y="${n2(plotB + TITLE_Y_OFF)}" font-size="${LABEL_FONT}" fill="${INK}" text-anchor="middle">${esc(dt.xLabel)}</text>`);
+  }
+  notes.forEach((noteText, i) => {
+    const ny = n2(plotB + NOTES_Y_START + i * NOTE_ROW);
+    out.push(`<text x="${plotL}" y="${ny}" font-size="${NOTE_FONT}" fill="${INK}" fill-opacity="0.82">${esc(String(noteText))}</text>`);
+  });
+
+  out.push('</svg>');
+  return out.join('\n') + '\n';
+}
+
+// Fix round 1, item 8: the layer that actually has a figure id. genSvg's own interface stays
+// (dataTable, accentColor) per the locked test contract; every real call site (the CLI and the
+// derive gate) goes through this wrapper instead, so a refusal is ALWAYS reported with both the
+// figure id and the reason, never just the bare reason.
+function renderFigure(fig, accentColor) {
+  try { return genSvg(fig.dataTable, accentColor); }
+  catch (e) { throw new Error(`figure "${fig && fig.id}": ${e.message}`); }
+}
+
+// Resolves accentColor for a pack from a sibling manifest.json (same directory as the pack file),
+// matched by meta.id. Shared by the CLI below AND tests/figure-derive.js, so the two can never
+// disagree about which color a given pack's charts should use.
+function resolveAccent(packDir, pack) {
+  const manifestPath = path.join(packDir, 'manifest.json');
+  if (!fs.existsSync(manifestPath)) return DEFAULT_ACCENT;
+  try {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    const id = pack.meta && pack.meta.id;
+    const entry = (manifest.packs || []).find((p) => p && p.id === id);
+    return (entry && entry.color) || DEFAULT_ACCENT;
+  } catch (e) { return DEFAULT_ACCENT; }
+}
+
+function chartTargets(pack) {
+  return (pack.figures || []).filter((f) => f && f.kind === 'chart' && f.gen === true);
+}
+
+// Fix round 1, item 6: writes to the figure's OWN DECLARED src, resolved against the repo root --
+// i.e. the exact file tests/figure-derive.js compares against -- by default. The original
+// behavior (always writing <outdir>/<figureId>.svg) produced an ORPHAN file whenever a figure's id
+// did not match its src's basename (true of every real and fixture figure so far: "fig-chart" vs
+// "f-chart.svg"), leaving the actually-compared file stale. `opts.outdir`, when given, is an
+// explicit DRY-RUN override: it writes `<outdir>/<basename of src>.svg` instead, without touching
+// the real committed file.
+//
+// Returns { written: [{id, path, accent}], refused: [{id, reason}] } -- a REFUSED figure does not
+// abort the batch; every other gen:true figure in the pack still gets its chance.
+function regenerate(pack, packDir, opts) {
+  const accent = resolveAccent(packDir, pack);
+  const written = [], refused = [];
+  for (const fig of chartTargets(pack)) {
+    try {
+      const svg = renderFigure(fig, accent);
+      const target = (opts && opts.outdir)
+        ? path.join(opts.outdir, path.basename(fig.src))
+        : path.join(REPO_ROOT, fig.src);
+      fs.mkdirSync(path.dirname(target), { recursive: true });
+      fs.writeFileSync(target, svg, 'utf8');
+      written.push({ id: fig.id, path: target, accent });
+    } catch (e) {
+      refused.push({ id: fig.id, reason: e.message });
+    }
+  }
+  return { written, refused };
+}
+
+function main(argv) {
+  const args = argv.slice(2);
+  const packPath = args[0];
+  const outIdx = args.indexOf('--outdir');
+  const outdir = outIdx !== -1 ? args[outIdx + 1] : null;
+  if (!packPath || (outIdx !== -1 && !outdir)) {
+    console.error('usage: node build/figure-gen.js <pack.json> [--outdir <dir>]');
+    return 2;
+  }
+  const absPack = path.isAbsolute(packPath) ? packPath : path.join(process.cwd(), packPath);
+  if (!fs.existsSync(absPack)) { console.error(`figure-gen: pack not found: ${absPack}`); return 2; }
+  let pack;
+  try { pack = JSON.parse(fs.readFileSync(absPack, 'utf8')); }
+  catch (e) { console.error(`figure-gen: invalid JSON in ${absPack}: ${e.message}`); return 2; }
+
+  const packDir = path.dirname(absPack);
+  const { written, refused } = regenerate(pack, packDir, { outdir });
+  refused.forEach((r) => console.error(`figure-gen: figure "${r.id}" refused: ${r.reason}`));
+  written.forEach((w) => console.log(`figure-gen: wrote ${w.path} (figure "${w.id}", accent ${w.accent})`));
+  if (!written.length && !refused.length) console.log('figure-gen: no gen:true chart figures in this pack; nothing to do');
+  return refused.length ? 1 : 0;
+}
+
+module.exports = {
+  genSvg, renderFigure, resolveAccent, chartTargets, regenerate, layout,
+  INK, GRID, PLOT_GRID, DEFAULT_ACCENT, GLYPH_W, VB_W, VB_H, MAX_NOTES, MIN_PLOT_H,
+};
+
+if (require.main === module) process.exit(main(process.argv));

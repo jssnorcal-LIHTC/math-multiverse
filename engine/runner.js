@@ -4,7 +4,11 @@
 // Implements the SAME contract the six math IIFEs implement:
 //   InlineModules[id].init(host, levelIndex, { onComplete(score, stars), onExit() }) -> cleanupFn
 // so the shell dispatches a pack level through the identical code path, and nothing about the math
-// modules has to change.
+// modules has to change. Owner ruling (26-0811, partial reveal) adds a THIRD, pack-only argument
+// on top of that shared contract: onComplete(score, stars, foundRatio) -- fraction of this
+// attempt's reveal cells actually found, read only by Math-Multiverse.html's showPackLevelComplete
+// for a level that declares `reveal`. The math IIFEs' own onComplete(score, stars) calls are
+// unaffected; a 2-arg callback simply never reads the 3rd argument this file now also passes.
 //
 // Learning-UX rules carried forward from 26-0714 and NOT to be relaxed:
 //   - a WRONG answer never auto-advances; the explanation stays until he taps NEXT
@@ -21,6 +25,19 @@
   const CORRECT_ADVANCE_MS = 1400;
   const DEFAULT_LIVES = 3;
   const COACH_WRONG_THRESHOLD = 2;   // wrongs on one topic inside a level before the coach fires
+
+  // Fix round 1 (controller review): pack.meta.subject -> themed correct-answer stamp, named
+  // once here instead of an inline ternary chain repeating the 'hist'/'sci' literals. Kept LOCAL
+  // to this file, not borrowed from MVFigures's reveal theming (engine/figures.js's attachReveal
+  // uses the same two subjects for a different purpose): the stamp must render identically with
+  // or without figures.js loaded, since it is not part of that file's optional-layer contract,
+  // so it may not read anything off FG. tests/runner.test.js pins these two keys against the
+  // shell's real SUBJECT_ORDER (Math-Multiverse.html), so a future subject renamed away from
+  // 'hist'/'sci' (e.g. authored as 'history') fails a test instead of silently losing its stamp.
+  const STAMP_THEME = {
+    hist: { label: 'VERIFIED', cls: 'stamp-verified' },
+    sci: { label: 'CONFIRMED', cls: 'stamp-confirmed' },
+  };
 
   // ---------------- pure ----------------
 
@@ -146,6 +163,16 @@
     const hearts = el('div', 'mv-hearts');
     bar.appendChild(prog);
     bar.appendChild(hearts);
+    // Optional layer, same call-time-resolution and try/catch stance as MVFresh and the passage
+    // hook below, now threaded through deps.Figures first (Task 6 unifies all three FG
+    // resolutions in this file onto this same three-term form). Built once per level, here in
+    // the chrome build rather than inside renderQuestion: the strip's `found` cells must persist
+    // and accumulate across every question in the level, not be rebuilt each time one renders.
+    const FGReveal = (deps && deps.Figures) || (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
+    const reveal = FGReveal ? (function () {
+      try { return FGReveal.attachReveal(bar, pack, level, queue.length); }
+      catch (e) { return null; }
+    })() : null;
     const passageBox = el('div', 'mv-passage');
     const itemBox = el('div', 'mv-item');
     const footer = el('div', 'mv-footer');
@@ -167,12 +194,38 @@
     function finish() {
       const s = summarize(results, lives);
       Save.recordLevel(pack.meta.id, levelIndex, s.stars, s.score);
-      callbacks.onComplete(s.score, s.stars);
+      // Owner ruling (26-0811, partial reveal): the completion card must render whenever ANY
+      // cell was found, not only when stars > 0 -- a level's lives can run out after several
+      // correct answers, and those earned cells must not vanish. foundRatio (cells found / total
+      // questions this attempt served) is the one extra value threaded to the shell's
+      // showPackLevelComplete, derived from the SAME `reveal` handle attachReveal returned above
+      // rather than recomputed from `results` independently, so the two can never drift. Guarded
+      // like every other optional-layer call in this file: a reveal handle from an older or
+      // minimal Figures stub with no foundCount() must not crash a level that otherwise finished
+      // cleanly, and nothing here is persisted -- the ratio lives only for this one callback.
+      let foundRatio = 0;
+      if (reveal && typeof reveal.foundCount === 'function' && queue.length) {
+        try { foundRatio = reveal.foundCount() / queue.length; } catch (e) { foundRatio = 0; }
+      }
+      callbacks.onComplete(s.score, s.stars, foundRatio);
     }
 
     function renderQuestion() {
       if (disposed) return;
       if (qi >= queue.length) return finish();
+
+      // Dryness-fix round 2, minor: a lightbox opened for the PREVIOUS question survives the
+      // correct-answer auto-advance and the wrong-answer NEXT button alike (both paths call
+      // renderQuestion), so without this it sits over the new question showing the old one's
+      // figure. Same call-time-resolution and try/catch stance as every other optional-layer
+      // hook in this file: a missing or throwing MVFigures must never cost the child the level.
+      // A separate block (not a shared `const FG`) because this file already declares `FG` twice
+      // more below, each scoped to its own `if` block; a bare `const FG` here at renderQuestion's
+      // top level would collide with the second of those two declarations.
+      {
+        const FG = (deps && deps.Figures) || (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
+        if (FG) { try { FG.closeLightbox(); } catch (e) {} }
+      }
 
       const item = queue[qi];
       paintBar();
@@ -189,6 +242,32 @@
           passageBox.dataset.pid = passage.id;
           passageBox.innerHTML = '';
           passageBox.appendChild(el('div', 'mv-passage-title', passage.title));
+          // Written only when a kind exists, and removed otherwise, so a text-only passage
+          // never carries a stale or empty-string dockind attribute for Task 5's CSS to trip on.
+          if (passage.docKind) passageBox.dataset.dockind = passage.docKind;
+          else delete passageBox.dataset.dockind;
+          // Dryness-fix round 2: the strip renders HERE, immediately after the title and before
+          // the paragraph loop, so renderStrip's own appendChild lands it as the passage box's
+          // SECOND child (title first, strip second) -- never after every paragraph. At real
+          // passage length (the shipped packs run 1446-3206 chars; the fixture that exposed
+          // every earlier pass to this defect ran 604) appending the strip last put it entirely
+          // below the fold: SPEC section 3 item 1 promises the strip "inside .mv-passage under
+          // the title", and a strip a full scroll away has no on-screen presence at all, which
+          // is the exact failure the dryness pass measured (0 of 98 strip pixels visible on
+          // arrival). Optional layer, same call-time-resolution and try/catch stance as MVFresh
+          // above: a figure bug must never cost the child the level, and a missing figures.js
+          // must degrade to today's text-only passage rendering. A thrown error is still warned
+          // once, not swallowed silently, so a malformed figure does not vanish with no
+          // diagnostic anywhere. The warn itself is wrapped in its OWN try/catch: a throw raised
+          // inside a catch block is not caught by its own try, so a console lacking a callable
+          // warn must not be able to escape this guard and kill the level it protects.
+          const FG = (deps && deps.Figures) || (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
+          if (FG && Array.isArray(passage.figureIds)) {
+            try { FG.renderStrip(pack, passage.figureIds, passageBox); }
+            catch (e) {
+              try { if (root && root.console && typeof root.console.warn === 'function') root.console.warn('figures: renderStrip failed', e); } catch (_) {}
+            }
+          }
           for (const para of String(passage.text).split(/\n\s*\n/)) {
             passageBox.appendChild(el('p', 'mv-para', para.trim()));
           }
@@ -205,6 +284,13 @@
         onProgress() { refreshCheck(item); },
       };
       Items.render(item, itemBox, ctx);
+
+      // Optional layer, same call-time-resolution and try/catch stance as the passage hook and
+      // attachReveal above (three-term form, unified per the pre-flight's consistency
+      // requirement): a figure bug must never cost the child the level, and a missing
+      // figures.js must degrade to today's figure-less item rendering.
+      const FG = (deps && deps.Figures) || (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
+      if (FG && item.figureId) { try { FG.renderItemFigure(pack, item.figureId, itemBox); } catch (e) {} }
 
       if (Items.needsCheck(item)) {
         const btn = el('button', 'mv-check', 'Check');
@@ -264,8 +350,18 @@
       paintBar();
 
       if (result.correct) {
+        // Never on the wrong branch below: the reveal is not punitive, so nothing here may run
+        // outside this one guard on result.correct.
+        if (reveal) { try { reveal.onCorrect(qi); } catch (e) {} }
         footer.innerHTML = '';
-        footer.appendChild(el('div', 'mv-flash ok', 'Correct'));
+        // Themed correct-answer stamp via STAMP_THEME above: hist reads VERIFIED (case-file
+        // register), sci reads CONFIRMED (lab register); any other subject (or none) keeps the
+        // plain "Correct" flash unchanged.
+        const subj = pack.meta && pack.meta.subject;
+        const theme = STAMP_THEME[subj];
+        const label = theme ? theme.label : 'Correct';
+        const stampCls = theme ? ' ' + theme.cls : '';
+        footer.appendChild(el('div', 'mv-flash ok' + stampCls, label));
         later(() => { qi++; renderQuestion(); }, CORRECT_ADVANCE_MS);
         return;
       }
@@ -328,6 +424,13 @@
       timeouts.forEach(clearTimeout);
       timeouts = [];
       Save.saveNow();
+      // Same call-time resolution and try/catch stance as the passage hook above: an open
+      // lightbox must not survive past the level that opened it, and a broken or absent
+      // MVFigures must never stop cleanup from running the rest of its work. Three-term form
+      // (deps.Figures first), unifying this fourth call site onto the same resolution pattern
+      // as the passage hook, attachReveal, and the item-figure hook above (Task 7).
+      const FG = (deps && deps.Figures) || (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
+      if (FG) { try { FG.closeLightbox(); } catch (e) {} }
     };
   }
 
@@ -343,6 +446,7 @@
 
   return {
     pickItems, scoreFor, summarize, starsForMistakes, register, makeRunner, DEFAULT_LIVES, CORRECT_ADVANCE_MS,
+    STAMP_THEME,
     _test: { pickItems },
   };
 });

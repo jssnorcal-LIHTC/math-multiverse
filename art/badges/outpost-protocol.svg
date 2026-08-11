@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Outpost Protocol badge">
+  <!-- Rendered-pixel accounting (this is a card-header shelf badge, not a full-size plate):
+       .mc-logo is `height: 26px; width: auto` (Math-Multiverse.html:375-376) against this
+       120x120 viewBox, a 26/120 = 0.2167 scale factor.  A 15px viewBox floor, correct for a
+       full-size figure per MVFigures.TOKENS.minFont, renders at 15 * 0.2167 = 3.25px here,
+       illegible at any DPR (DPR only adds physical pixels per CSS pixel; it does not change
+       this CSS-pixel scale factor).  So this badge carries NO text at all: the pack title
+       already sits next to it in the card, and every stroke below is sized so its RENDERED
+       width clears about 2 CSS px, not just its viewBox width. -->
+
+  <!-- Seal backing: a solid dark disc (an area fill, so it survives any downscale) plus a
+       THICK accent-ring stroke rather than a thin one: stroke-width 10 here renders at
+       10 * 0.2167 = 2.17px, comfortably above the ~1px hairline-vanishing floor. A stroke this
+       wide reads as a filled band, not a hairline, which is the point. -->
+  <circle cx="60" cy="60" r="56" fill="#0b1424"/>
+  <circle cx="60" cy="60" r="47" fill="none" stroke="#1a8f5e" stroke-width="10"/>
+
+  <!-- Glyph: a beacon (filled dot, ink-colored so it pops against the dark disc interior) under
+       two concentric signal arcs, all held at radius < 42 from center so nothing crosses into
+       the ring band above (42-52). Every stroke here is width 10 (2.17px rendered), matching
+       the ring, so the whole mark reads as one consistent weight at 26px rather than a mix of
+       bold and vanishing-thin lines. -->
+  <g stroke="#1a8f5e" stroke-width="10" fill="none" stroke-linecap="round">
+    <path d="M 40 70 A 20 20 0 0 1 80 70"/>
+    <path d="M 28 70 A 32 32 0 0 1 92 70"/>
+  </g>
+  <circle cx="60" cy="70" r="10" fill="#e8eef7"/>
+</svg>
