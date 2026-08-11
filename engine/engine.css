@@ -258,3 +258,65 @@
   .mv-para { font-size: 0.9rem; margin-bottom: 6px; }
   .mv-choice { padding: 6px 9px; }
 }
+
+/* Document skins.  A passage carrying a docKind (engine/runner.js sets data-dockind ONLY when
+   passage.docKind exists, and deletes the attribute otherwise) gets chrome around the prose: a
+   header band via ::before naming the register, a tint, and a border accent.  Prose itself --
+   .mv-para's font-size/line-height/margin and .mv-passage-title's font-size -- is untouched by
+   every rule below; only .mv-passage (background/border/padding-top) and its ::before pseudo
+   change.  The `:not([data-dockind=""])` guard is redundant with the runner's own delete-when-
+   absent contract but kept anyway: it costs nothing and means this file does not silently start
+   matching an empty attribute if that contract ever changes upstream.
+
+   The shared rule below deliberately does NOT set `content`.  A first draft did (`content: ''`),
+   which looked harmless but silently won the cascade over every per-kind ::before rule below it:
+   :not() carries the specificity of its argument, so `:not([data-dockind=""])` adds a full
+   attribute-selector's worth of specificity, making the shared selector (0,3,1) against each
+   per-kind selector's (0,2,1).  The shared, EMPTIER content always outranked the specific one
+   regardless of source order, so every band rendered as a zero-height, label-less strip -- caught
+   only by reading getComputedStyle(box, '::before').content in a real browser (it read `""` for
+   every kind) and by the band being visibly absent from every kind's screenshot; a DOM-stub unit
+   test cannot compute a CSS cascade and would have reported this line clean. Leaving `content`
+   unset here means ::before generates no box at all for any docKind lacking its own content rule
+   (impossible today: validate-pack.js's DOC_KINDS enum covers exactly the 11 kinds below and each
+   has one), which is the correct fallback rather than a mis-cascaded empty band. */
+.mv-passage[data-dockind]:not([data-dockind=""]) { padding-top: 0; }
+.mv-passage[data-dockind]:not([data-dockind=""])::before {
+  display: block; margin: 0 -12px 8px; padding: 5px 12px;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  border-bottom: 1px solid var(--border-subtle);
+  /* Checked every live pack skin colour (#c8102e, #7c5cff, #1a8f5e, #8b5e34, #b45309) against
+     every tinted band background below: the raw accent measured as low as 2.88:1, and 0.68rem
+     bold is far under the ~18.7px-bold floor WCAG exempts as "large text", so 4.5:1 is the real
+     floor here, not 3:1.  Mixed 40% toward white so every current accent clears 4.5:1 (worst
+     case measured 5.43:1) while the band still reads as that pack's colour rather than falling
+     back to one fixed hue for all packs.  See task-5-report.md for the full ratio table. */
+  color: color-mix(in oklab, var(--mv-color, #7aa8ff) 60%, white);
+}
+/* Every middle-dot separator below is `\00b7` followed by TWO spaces, not one. A CSS hex escape
+   with fewer than 6 digits consumes exactly one trailing whitespace character as its own
+   terminator, so a single space after `\00b7` is eaten and never reaches the rendered string: it
+   read as "OFFICE ·CASE" (dot glued to the next word) until a live screenshot showed the
+   gap missing on one side only. The second space is the literal one that survives; verified via
+   getComputedStyle(...).content ("A · B" with two source spaces vs "A ·B" with one). */
+.mv-passage[data-dockind="case-file"]::before { content: 'PROVENANCE OFFICE \00b7  CASE FILE'; }
+.mv-passage[data-dockind="case-file"] { background: rgba(139,94,52,0.07); }
+.mv-passage[data-dockind="recovered-entry"]::before { content: 'RECOVERED ENTRY'; }
+.mv-passage[data-dockind="recovered-entry"] { background: rgba(200,170,110,0.08);
+  border-style: dashed; }
+.mv-passage[data-dockind="source-desk"]::before { content: 'FILED SOURCE \00b7  COMPARE ACCOUNTS'; }
+.mv-passage[data-dockind="source-desk"] { border-left: 3px solid var(--mv-color, #7aa8ff); }
+.mv-passage[data-dockind="addendum"]::before { content: 'CASE FILE \00b7  ADDENDUM'; }
+.mv-passage[data-dockind="field-manual"]::before { content: 'OUTPOST NETWORK \00b7  FIELD MANUAL'; }
+.mv-passage[data-dockind="field-manual"] { background:
+  linear-gradient(rgba(26,143,94,0.05), rgba(26,143,94,0.05)); }
+.mv-passage[data-dockind="status-log"]::before { content: 'STATUS LOG \00b7  FILED TO NETWORK COMMAND'; }
+.mv-passage[data-dockind="status-log"] .mv-passage-title,
+.mv-passage[data-dockind="weather-log"] .mv-passage-title { font-family: ui-monospace,
+  Menlo, Consolas, monospace; letter-spacing: 0.02em; }
+.mv-passage[data-dockind="weather-log"]::before { content: 'WEATHER LOG \00b7  RAW READINGS'; }
+.mv-passage[data-dockind="field-report"]::before { content: 'FIELD REPORT'; }
+.mv-passage[data-dockind="procedure"]::before { content: 'STANDING PROCEDURE \00b7  FOLLOW IN ORDER'; }
+.mv-passage[data-dockind="procedure"] { border-left: 3px solid #ff9d3c; }
+.mv-passage[data-dockind="memo"]::before { content: 'ANALYST MEMO'; }
+.mv-passage[data-dockind="minutes"]::before { content: 'REVIEW BOARD \00b7  MINUTES'; }
