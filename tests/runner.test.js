@@ -810,6 +810,29 @@ check('deps.Figures.renderItemFigure takes precedence over a global MVFigures wh
   }
 });
 
+// Fix round 1 (controller review): every check above drives the hook through the DOM (asserting
+// itemBox.children[0].className), which only pins the hook's RESULT, not that it runs after
+// Items.render. Moving the call above Items.render in renderQuestion would still leave every one
+// of those checks green (the figure would simply become itemBox's only child a moment before
+// Items.render populates the rest, ending in the same final DOM shape). This check pins ORDER
+// directly via a call log shared by both spies, so hoisting the hook fails this loudly.
+check('the item-figure hook runs strictly AFTER Items.render, never before (call-order pin)', () => {
+  withSyncTimers(() => {
+    const order = [];
+    const Items = {
+      render(item, box) { order.push('items.render'); box.appendChild(makeEl('div')); },
+      needsCheck() { return false; },
+    };
+    const pack = probePack();
+    pack.items[0].figureId = 'f1';
+    const host = makeEl('div'), Save = spySave();
+    const Figures = { renderItemFigure() { order.push('figures.renderItemFigure'); } };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.deepStrictEqual(order, ['items.render', 'figures.renderItemFigure'],
+      'the item-figure hook must run strictly after Items.render, not before');
+  });
+});
+
 // ---------- Task 7: cleanup's closeLightbox resolution unified onto the three-term form ----------
 // The pre-flight's consistency requirement named the passage hook, attachReveal, and this
 // task's new item-figure hook as the three sites to unify; Task 6's report flagged the cleanup
@@ -871,6 +894,26 @@ check('a correct answer stamps CONFIRMED for a sci pack, VERIFIED for a hist pac
   assert.strictEqual(ela.classList.contains('stamp-verified'), false, 'a pack with no subject must not get a themed stamp');
   assert.strictEqual(ela.classList.contains('stamp-confirmed'), false);
   assert.strictEqual(ela.textContent, 'Correct');
+});
+
+// Fix round 1 (controller review): 'hist' and 'sci' were bare literals with nothing pinning them
+// to the repo's actual subject universe (validate-pack.js constrains meta.subject only to
+// /^[a-z]+$/, so a pack authored with 'history' instead of 'hist' would silently get no stamp,
+// with no diagnostic anywhere). STAMP_THEME (engine/runner.js) names that universe once; this
+// pins its keys against the shell's own SUBJECT_ORDER (Math-Multiverse.html), read from source
+// the same way the file's own "no math save key or localStorage" check already reads runner.js
+// -- not required to equal SUBJECT_ORDER (STAMP_THEME rightly omits 'math' and 'ela', which get
+// no themed stamp), only required to be a SUBSET of it, so every themed subject is real.
+check("STAMP_THEME's subjects ('hist', 'sci') are members of the shell's real subject universe (SUBJECT_ORDER)", () => {
+  const html = require('fs').readFileSync(require('path').join(__dirname, '../Math-Multiverse.html'), 'utf8');
+  const m = html.match(/SUBJECT_ORDER\s*=\s*(\[[^\]]*\])/);
+  assert.ok(m, 'could not find SUBJECT_ORDER in Math-Multiverse.html; this check would otherwise pass vacuously');
+  const order = JSON.parse(m[1].replace(/'/g, '"'));
+  const themed = Object.keys(R.STAMP_THEME);
+  assert.deepStrictEqual(themed.sort(), ['hist', 'sci'], 'STAMP_THEME no longer has the two subjects this test was written to pin');
+  for (const s of themed) {
+    assert.ok(order.includes(s), `STAMP_THEME stamps subject "${s}", which is not in the shell's SUBJECT_ORDER (${order.join(', ')})`);
+  }
 });
 
 // ---------- the two star ladders must not drift apart ----------

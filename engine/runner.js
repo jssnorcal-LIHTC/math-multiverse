@@ -22,6 +22,19 @@
   const DEFAULT_LIVES = 3;
   const COACH_WRONG_THRESHOLD = 2;   // wrongs on one topic inside a level before the coach fires
 
+  // Fix round 1 (controller review): pack.meta.subject -> themed correct-answer stamp, named
+  // once here instead of an inline ternary chain repeating the 'hist'/'sci' literals. Kept LOCAL
+  // to this file, not borrowed from MVFigures's reveal theming (engine/figures.js's attachReveal
+  // uses the same two subjects for a different purpose): the stamp must render identically with
+  // or without figures.js loaded, since it is not part of that file's optional-layer contract,
+  // so it may not read anything off FG. tests/runner.test.js pins these two keys against the
+  // shell's real SUBJECT_ORDER (Math-Multiverse.html), so a future subject renamed away from
+  // 'hist'/'sci' (e.g. authored as 'history') fails a test instead of silently losing its stamp.
+  const STAMP_THEME = {
+    hist: { label: 'VERIFIED', cls: 'stamp-verified' },
+    sci: { label: 'CONFIRMED', cls: 'stamp-confirmed' },
+  };
+
   // ---------------- pure ----------------
 
   // repeatPolicy resolution: a level's own value wins; otherwise the pack-root value threaded
@@ -303,11 +316,13 @@
         // outside this one guard on result.correct.
         if (reveal) { try { reveal.onCorrect(qi); } catch (e) {} }
         footer.innerHTML = '';
-        // Themed correct-answer stamp: hist reads VERIFIED (case-file register), sci reads
-        // CONFIRMED (lab register), everything else keeps the plain "Correct" flash unchanged.
+        // Themed correct-answer stamp via STAMP_THEME above: hist reads VERIFIED (case-file
+        // register), sci reads CONFIRMED (lab register); any other subject (or none) keeps the
+        // plain "Correct" flash unchanged.
         const subj = pack.meta && pack.meta.subject;
-        const label = subj === 'hist' ? 'VERIFIED' : subj === 'sci' ? 'CONFIRMED' : 'Correct';
-        const stampCls = subj === 'hist' ? ' stamp-verified' : subj === 'sci' ? ' stamp-confirmed' : '';
+        const theme = STAMP_THEME[subj];
+        const label = theme ? theme.label : 'Correct';
+        const stampCls = theme ? ' ' + theme.cls : '';
         footer.appendChild(el('div', 'mv-flash ok' + stampCls, label));
         later(() => { qi++; renderQuestion(); }, CORRECT_ADVANCE_MS);
         return;
@@ -393,6 +408,7 @@
 
   return {
     pickItems, scoreFor, summarize, starsForMistakes, register, makeRunner, DEFAULT_LIVES, CORRECT_ADVANCE_MS,
+    STAMP_THEME,
     _test: { pickItems },
   };
 });

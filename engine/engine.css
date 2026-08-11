@@ -115,8 +115,16 @@
    footer for the same 1024x768 budget.  Only the height is overridden here -- .mv-fig-img's own
    width:128px and object-fit:contain are untouched, so a chart or map's axis labels still never
    crop, just at a shorter box. */
-.mv-item-fig { margin: 0 0 8px; }
-.mv-item-fig .mv-fig-img { height: 72px; }
+/* --mv-fig-h, not a height override on .mv-fig-img directly: .mv-fig-img's own rule already
+   reads `height: var(--mv-fig-h, 96px)`, and .mv-fig's `max-height: calc(var(--mv-fig-h) + 8px)`
+   needs the SAME token set to resolve to a valid cap (80px) instead of computing to `none`
+   (an undefined custom property with no fallback is invalid at computed-value time, so the
+   whole declaration falls back to its initial value) -- confirmed live, not just reasoned:
+   .mv-fig-img rendered at exactly 72px through this token, and .mv-fig's own box (130x74)
+   stays comfortably under the resulting 80px cap. Setting the height directly on .mv-fig-img
+   instead of through the token, as a first draft of this rule did, gets the same pixel result
+   by accident but leaves the cap silently disarmed for this one figure context. */
+.mv-item-fig { margin: 0 0 8px; --mv-fig-h: 72px; }
 
 .mv-lb-cap { font-size: 0.92rem; text-align: center; max-width: 80ch; }
 .mv-lb-credit { font-size: 0.78rem; color: var(--text-secondary); }
@@ -373,14 +381,33 @@
    prefers-reduced-motion block above (`.mv-flash`), which collapses to each rule's own static
    transform: verified's `rotate(-3deg)`, confirmed's unset (upright) -- both readable end states,
    never the animation's zero-opacity start frame. */
+/* Fix round 1 (controller review): both stamps were clipped by #host-frame's overflow:hidden
+   (Math-Multiverse.html, load-bearing, "stops a module bleeding past its box", not touched here).
+   .mv-footer sits flush against the bottom of that clip box by the shell's own flex layout, and
+   the stamp's `padding: 2px 10px` (replacing .mv-flash's plain `padding: 6px 0`) left it flush
+   against BOTH the bottom and left clip edges with zero slack -- measured live, VERIFIED sat
+   2.8px below and 0.69px left of the clip box at REST, before any transform even ran. Mid-
+   animation was far worse: the old `scale(1.5)` on a default-centred inline-block grows outward
+   in all four directions from its own centre, measured at up to 30px past the left clip edge and
+   11px past the bottom in the opening frames -- the stamp's entire left border and part of its
+   bottom border simply were not painted. Fixed three ways together, not one: `margin` reserves
+   real slack on the two edges that were flush (5px also restores roughly the vertical rhythm the
+   tighter padding took away); `transform-origin: left center` anchors the scale so it can no
+   longer grow LEFTWARD at all, only right and vertically; and cutting the peak scale from 1.5 to
+   1.12 shrinks the remaining (vertical, symmetric-about-centre) growth to about 4.4px on a 74px-
+   tall button, comfortably inside the new 5px margin -- the SAME change also removes the
+   overshoot most likely to rasterize blurry on a WebKit compositor, per the review. Verified by
+   comparing the stamp's own getBoundingClientRect() against #host-frame's padding box at rest,
+   mid-animation and under reduced motion, not by re-reading this CSS; see task-7-report.md. */
 .mv-flash.stamp-verified, .mv-flash.stamp-confirmed { display: inline-block;
-  border: 2px solid currentColor; border-radius: 6px; padding: 2px 10px; letter-spacing: 0.12em; }
+  border: 2px solid currentColor; border-radius: 6px; padding: 2px 10px; letter-spacing: 0.12em;
+  margin: 5px 0 5px 5px; transform-origin: left center; }
 .mv-flash.stamp-verified { transform: rotate(-3deg); animation: mv-stamp-tilt 0.28s ease-out; }
 .mv-flash.stamp-confirmed { font-family: ui-monospace, Consolas, monospace;
   animation: mv-stamp-flat 0.28s ease-out; }
-@keyframes mv-stamp-tilt { from { transform: scale(1.5) rotate(-3deg); opacity: 0; }
+@keyframes mv-stamp-tilt { from { transform: scale(1.12) rotate(-3deg); opacity: 0; }
   to { transform: scale(1) rotate(-3deg); opacity: 1; } }
-@keyframes mv-stamp-flat { from { transform: scale(1.5); opacity: 0; }
+@keyframes mv-stamp-flat { from { transform: scale(1.12); opacity: 0; }
   to { transform: scale(1); opacity: 1; } }
 
 .mv-explain {
