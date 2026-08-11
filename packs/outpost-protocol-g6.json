@@ -28,6 +28,7 @@
       "genre": "informational",
       "docKind": "status-log",
       "source": "original",
+      "figureIds": ["fig-dome-drift"],
       "text": "Meridian Dome has run as a sealed system for one hundred eighteen days, its longest run.  Nothing enters and nothing leaves, though sunlight gets in and data goes out each morning.  Dr. Renata Kessler is the dome's systems lead.  She files this status log every four weeks.  Network Command can track the numbers without a crisis.\n\nOn day ninety, the dome's air held steady, and carbon dioxide read four hundred ten parts per million, or ppm.  Oxygen sat near twenty and a half percent.  Both numbers matched every reading since the seal closed, and the water subsystem was saving ninety-six percent of all the crew used.  The food modules were producing enough to cover every meal, with a small surplus.\n\nBy day one hundred four, the numbers had shifted.  Carbon dioxide had climbed to four hundred thirty ppm.  Oxygen had slipped to twenty percent even.  Neither shift was large enough to worry the crew, and Dr. Kessler's log calls it \"within normal drift.\"  Her notes say systems wander before they settle.\n\nBy day one hundred eighteen, the drift had not settled.  Carbon dioxide now reads four hundred fifty-two ppm.  Oxygen has fallen to nineteen and a half percent.  Water reclamation has held steady near ninety-five percent.  The food modules are still meeting every meal.  Neither of those subsystems appears to be the source.  One subsystem keeps drawing her attention: the algae bioreactor tucked beneath the food modules, the dome's main source of extra oxygen.  Its daily readings have gone low, though nothing about its gear has failed.\n\nDr. Kessler's log closes with one line, asking Network Command to send an operative to walk the dome.  Sensor readings show a number falling, but they cannot say why.  Four straight weeks of drift have passed, and why is the question the dome needs answered."
     },
     {
@@ -70,6 +71,7 @@
       "genre": "informational",
       "docKind": "field-report",
       "source": "original",
+      "figureIds": ["fig-climographs"],
       "text": "Network Command keeps a running ten-year average for every post.  It updates the average each year.  A single year can lie about a place.  A full decade cannot.\n\nSable Flats Post has averaged nine inches of rainfall a year.  That average covers the last ten years.  Its average summer high has run ninety-six degrees.  Its average winter low has run twenty-eight degrees.  That is a swing of sixty-eight degrees between the two seasons.  Individual years have varied.  One drought year reached barely five inches of rain.  One unusually wet year reached fourteen.  The ten-year average has still held close to nine every time Network Command has recalculated it.\n\nCairn Bay Post has averaged forty-two inches of rainfall a year.  That is nearly five times what Sable Flats records.  The two posts sit at the same latitude.  Cairn Bay's average summer high has run seventy-four degrees.  Its average winter low has run forty-one degrees.  That is a swing of only thirty-three degrees between seasons.  That is roughly half the swing Sable Flats posts.  Cairn Bay's own wettest year on record reached fifty-one inches.  Its driest year still reached thirty-four.  That range is far narrower than Sable Flats shows between its own extremes.\n\nReading the two tables side by side answers a question new operatives ask often.  Which table shows the post's \"real\" climate?  Neither table describes a single storm or a single cold snap.  Neither one changes because of what one particular year happened to do.  Both tables describe what a post's weather adds up to.  Enough years get averaged together first.  That is the actual definition Network training uses for climate.  A visitor might land at Sable Flats during its one wet year of fourteen inches.  Judging the whole post by that single year would be a mistake.  That visitor would carry home a wrong idea of most years there.  The ten-year average exists precisely so nobody has to make that mistake."
     },
     {
@@ -150,6 +152,7 @@
       "genre": "informational",
       "docKind": "memo",
       "source": "original",
+      "figureIds": ["fig-warming-curves"],
       "text": "From Chief Analyst Mireille Toussaint to Network Command.  Subject: what the Halyard Point record actually shows.\n\nWhy the colony nests earlier is settled, and the record answers it plainly.  The question worth Command's time is a different one.  Why did nesting earlier stop helping the chicks?\n\nStart with the date that matters, which is not the day the first eggs appear.  Tern eggs take about twenty-two days to hatch, and a chick eats nothing at all before it hatches.  The useful column is the hatch date, and the record lets us build that column ourselves.  First eggs came on April seventh in the first logged season, so the eggs hatched around April twenty-ninth.  By the tenth season first eggs came on March twenty-seventh, so hatching fell around April eighteenth.  The twentieth season's March eighteenth puts hatching around April ninth.  The thirtieth season's March tenth puts it around April first.\n\nNow set the herring beside that column.  The herring arrival has held near April twenty-first every season, and it has drifted only about three days either way.  In the first logged season the chicks hatched eight days after the herring had already arrived.  By the tenth season the chicks were hatching before the herring got there.  By the thirtieth season they were hatching about three weeks before.\n\nTwo clocks are running here, and they run at different speeds.  The terns read the coastal air, which has warmed quickly over thirty seasons.  The herring read ocean temperature out at sea, and the sea warms slowly.  The mismatch did not start with the fish.  It started with the birds, and the birds are not doing anything wrong.\n\nThat is what an adaptation limit is, and it is worth stating with care.  An animal can shift its timing only as far and as fast as its own cue shifts.  These terns respond just as they are built to respond.  Their cue used to predict the food, and now it does not.  A cue is useful only while the thing it predicts keeps moving with it.\n\nThe fledge column is the receipt.  Seventy-six percent in the first season, sixty-four by the tenth, fifty-two by the twentieth, thirty-nine by the thirtieth.\n\nCommand has asked what recovery would look like.  It would look like the fledge column climbing across several seasons in a row.  One good season is weather rather than recovery, and Command should not be sold one."
     },
     {
@@ -4889,6 +4892,65 @@
       "credit": "NASA, VIIRS/Suomi NPP, 'Black Marble' (2016 composite), public domain",
       "alt": "A view of Earth at night shows bright webs of city lights tracing the coastlines and highways of the United States, Mexico, and Brazil, glowing against the dark continents and black ocean.",
       "src": "art/outpost-protocol-g6/fig-earth-night.jpg"
+    },
+    {
+      "id": "fig-dome-drift",
+      "kind": "chart",
+      "gen": true,
+      "caption": "Meridian Dome's sealed air, day 90 to day 118: carbon dioxide climbing while oxygen falls, plotted on two separate scales.",
+      "credit": "Outpost Network records (this pack's own data)",
+      "alt": "Two stacked line charts share the x-axis \"day.\" The top chart plots carbon dioxide in parts per million, climbing from 410 on day 90, to 430 on day 104, to 452 on day 118. The bottom chart plots oxygen in percent, falling from 20.5 on day 90, to 20.0 on day 104, to 19.5 on day 118.",
+      "src": "art/outpost-protocol-g6/fig-dome-drift.svg",
+      "dataTable": {
+        "panels": [
+          { "type": "line", "yLabel": "CO2 (ppm)", "series": [{ "label": "CO2", "points": [[90, 410], [104, 430], [118, 452]] }] },
+          { "type": "line", "yLabel": "O2 (percent)", "series": [{ "label": "O2", "points": [[90, 20.5], [104, 20.0], [118, 19.5]] }] }
+        ],
+        "xLabel": "day",
+        "notes": ["Water reclamation held steady near 95 to 96 percent across the same days."]
+      }
+    },
+    {
+      "id": "fig-climographs",
+      "kind": "chart",
+      "gen": true,
+      "caption": "Two posts at the same latitude, ten-year averages: Cairn Bay gets nearly five times Sable Flats' rainfall and only half its seasonal temperature swing.",
+      "credit": "Outpost Network records (this pack's own data)",
+      "alt": "Two stacked bar charts compare Sable Flats and Cairn Bay. The top chart shows ten-year average rainfall in inches per year: 9 for Sable Flats, 42 for Cairn Bay. The bottom chart shows the seasonal temperature swing in degrees between the average summer high and average winter low: 68 for Sable Flats, 33 for Cairn Bay.",
+      "src": "art/outpost-protocol-g6/fig-climographs.svg",
+      "dataTable": {
+        "panels": [
+          { "type": "bar", "yLabel": "rainfall (in/yr)", "series": [{ "label": "rainfall", "points": [[0, 9], [1, 42]] }] },
+          { "type": "bar", "yLabel": "seasonal swing (degrees)", "series": [{ "label": "swing", "points": [[0, 68], [1, 33]] }] }
+        ],
+        "categoryLabels": ["Sable Flats", "Cairn Bay"],
+        "notes": [
+          "Summer high: Sable Flats 96 degrees, Cairn Bay 74 degrees.",
+          "Winter low: Sable Flats 28 degrees, Cairn Bay 41 degrees.",
+          "Driest year on record: Sable Flats 5 in, Cairn Bay 34 in.",
+          "Wettest year on record: Sable Flats 14 in, Cairn Bay 51 in."
+        ]
+      }
+    },
+    {
+      "id": "fig-warming-curves",
+      "kind": "chart",
+      "gen": true,
+      "caption": "Halyard Point's brindle terns: the fledge rate that measures chick survival falls from 76 percent to 39 percent across thirty nesting seasons.",
+      "credit": "Outpost Network records (this pack's own data)",
+      "alt": "A line chart plots fledge rate in percent against nesting season. The line falls from 76 percent in season 1, to 64 percent in season 10, to 52 percent in season 20, to 39 percent in season 30.",
+      "src": "art/outpost-protocol-g6/fig-warming-curves.svg",
+      "dataTable": {
+        "type": "line",
+        "xLabel": "season",
+        "yLabel": "fledge rate (percent)",
+        "series": [{ "label": "fledge rate", "points": [[1, 76], [10, 64], [20, 52], [30, 39]] }],
+        "notes": [
+          "Season 1: chicks hatched about 8 days after the herring arrived.",
+          "Season 30: chicks hatched about 3 weeks before the herring arrived.",
+          "Herring arrival holds near April 21 every season, drifting about 3 days either way."
+        ]
+      }
     }
   ]
 }
