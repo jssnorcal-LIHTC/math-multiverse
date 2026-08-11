@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="1900" viewBox="0 0 900 1900">
   <path d="M 680.0 405.0 C 677.6 410.3, 669.4 423.3, 665.5 437.0 C 661.6 450.7, 663.2 469.0, 656.5 487.0 C 649.8 505.0, 624.4 526.3, 625.5 545.0 C 626.6 563.7, 655.5 581.0, 663.0 599.0 C 670.5 617.0, 665.8 635.0, 670.5 653.0 C 675.2 671.0, 684.0 689.0, 691.5 707.0 C 699.0 725.0, 708.5 743.0, 715.5 761.0 C 722.5 779.0, 727.9 797.0, 733.5 815.0 C 739.1 833.0, 746.2 851.0, 749.0 869.0 C 751.8 887.0, 746.6 905.0, 750.2 923.0 C 753.9 941.0, 763.2 959.0, 771.0 977.0 C 778.8 995.0, 790.2 1016.8, 797.0 1031.0 C 803.8 1045.2, 809.5 1056.8, 812.0 1062.0"
-        fill="none" stroke="#1a8f5e" stroke-width="14" stroke-linecap="round" stroke-dasharray="152 608">
-    <animate attributeName="stroke-dashoffset" from="760" to="0" dur="2.8s" repeatCount="indefinite"/>
+        fill="none" stroke="#1a8f5e" stroke-width="14" stroke-linecap="round" stroke-dasharray="152 559">
+    <animate attributeName="stroke-dashoffset" from="0" to="711" dur="2.8s" repeatCount="indefinite"/>
   </path>
 </svg>
