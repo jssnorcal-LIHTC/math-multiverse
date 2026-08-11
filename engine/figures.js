@@ -71,9 +71,92 @@
     return strip;
   }
 
+  // ---- lightbox + plate viewer ----
+  // One dialog at a time: _lb is the currently-open node (or null), tracked here rather than
+  // discovered by querying document.body, so a second open can unconditionally close the first.
+  let _lb = null;
+  function closeLightbox() {
+    if (_lb && _lb.parentNode) _lb.parentNode.removeChild(_lb);
+    _lb = null;
+  }
+
+  function openLightbox(pack, figureId) {
+    const f = resolve(pack, figureId);
+    if (!f) return;
+    closeLightbox();
+    const d = doc();
+    const box = el('div', 'mv-lightbox');
+    const frame = el('div', 'mv-lb-frame');
+    // The zoom target is this wrapper, not the image: the overlay is absolutely positioned
+    // over it (see paint()), so scaling the wrapper scales the plate and its overlay as one
+    // unit instead of leaving the overlay behind at frame size.
+    const zoom = el('div', 'mv-lb-zoom');
+    const img = el('img', 'mv-lb-img');
+    img.setAttribute('alt', f.alt || '');
+
+    const isPlate = f.kind === 'plate';
+    let viewIdx = 0;
+    // Held directly rather than discovered by querying the DOM: the tab rail is a sibling of
+    // frame under box, not a descendant of frame, so a query scoped to frame would always
+    // return empty and .active would never move.
+    const tabNodes = [];
+    // Same reasoning for the overlay: tracked here and swapped directly on view change,
+    // rather than looked up by class each time.
+    let overlayNode = null;
+
+    function paint() {
+      const v = isPlate ? f.views[viewIdx] : f;
+      img.setAttribute('src', v.src);
+      if (overlayNode) {
+        if (overlayNode.parentNode) overlayNode.parentNode.removeChild(overlayNode);
+        overlayNode = null;
+      }
+      if (isPlate && v.overlaySrc) {
+        overlayNode = el('img', 'mv-lb-overlay');
+        overlayNode.setAttribute('src', v.overlaySrc);
+        overlayNode.setAttribute('alt', '');
+        zoom.appendChild(overlayNode);
+      }
+      for (let i = 0; i < tabNodes.length; i++) tabNodes[i].classList.toggle('active', i === viewIdx);
+    }
+
+    if (isPlate) {
+      const rail = el('div', 'mv-plate-tabs');
+      f.views.forEach((v, i) => {
+        const t = el('button', 'mv-plate-tab', v.label);
+        t.type = 'button';
+        t.addEventListener('click', (e) => { e.stopPropagation(); viewIdx = i; paint(); });
+        tabNodes.push(t);
+        rail.appendChild(t);
+      });
+      box.appendChild(rail);
+    }
+
+    zoom.appendChild(img);
+    frame.appendChild(zoom);
+    box.appendChild(frame);
+    box.appendChild(el('div', 'mv-lb-cap', f.caption));
+    box.appendChild(el('div', 'mv-lb-credit', f.credit));
+
+    // Double-tap toggles zoom; a single tap on the image must not also close the lightbox, so
+    // it stops propagation the same as a tab tap does.
+    let lastTap = 0;
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const now = Date.now();
+      if (now - lastTap < 350) zoom.classList.toggle('zoomed');
+      lastTap = now;
+    });
+    box.addEventListener('click', closeLightbox);
+
+    d.body.appendChild(box);
+    _lb = box;
+    paint();
+  }
+
   const api = { setEnv, resolve, el, FIG_KINDS, DOC_KINDS, TOKENS,
     renderStrip, renderItemFigure: function () {},
-    openLightbox: function () {}, closeLightbox: function () {},
+    openLightbox, closeLightbox,
     attachReveal: function () { return null; }, renderRevealCard: function () { return false; } };
   return api;
 });
