@@ -11,6 +11,18 @@
 .mv-heart { color: var(--mv-color, #7aa8ff); font-size: 0.9rem; }
 .mv-heart.spent { color: var(--border-subtle); }
 
+/* Per-question reveal strip (engine/figures.js attachReveal): only present when the level
+   declares `reveal`, so most packs' .mv-bar has just prog + hearts and this rule is dormant.
+   Inserted between them (`insertBefore(strip, bar.children[1])`) rather than after hearts, so
+   .mv-bar's justify-content: space-between spreads all three evenly. Not a tap target -- these
+   cells are decorative progress, never touched directly -- so the 44px minimum touch-target
+   rule does not apply to them. */
+.mv-reveal-strip { display: inline-flex; gap: 3px; align-items: center; }
+.mv-rv-cell { width: 18px; height: 22px; border-radius: 3px; border: 1px solid var(--border-subtle);
+  background: rgba(255,255,255,0.07); transition: background 0.35s ease, transform 0.35s ease; }
+.rv-hist .mv-rv-cell.found { background: #8b5e34; transform: scale(1.06); }
+.rv-sci  .mv-rv-cell.found { background: #1a8f5e; transform: scale(1.06); }
+
 /* The passage scrolls inside its own box so the item and the NEXT button never leave the screen on
    a 1024x768 iPad. This is the layout rule that kept breaking in the math modules.
 
@@ -102,9 +114,39 @@
   background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle); }
 .mv-plate-tab.active { border-color: var(--mv-color, #7aa8ff);
   background: rgba(120,170,255,0.14); }
-/* .mv-rv-cell, .mv-rv-tile and .mv-flash.stamp-* are forward references: Tasks 6 and 7 add
-   those classes later on this same branch.  Listed here now so reduced-motion coverage does
-   not depend on remembering to extend this rule when they land. */
+
+/* Completion-screen reveal card (engine/figures.js renderRevealCard), appended into the shell's
+   #lc-reveal host on a level clear that earned at least one star (Math-Multiverse.html
+   showPackLevelComplete). The 12-tile grid covers the figure and lifts away tile by tile. */
+.mv-rv-card { display: flex; flex-direction: column; gap: 8px; align-items: center; margin-top: 10px; }
+/* .mv-rv-frame carries a real HEIGHT, not just a max-width, and .mv-rv-img is object-fit:
+   contain rather than width:100%/height:auto. `.level-complete` (Math-Multiverse.html) is a
+   height:100%, justify-content:center flex column with no scroll of its own: a frame sized off
+   a tall portrait image's own aspect ratio (measured live against a 560px-wide portrait plate:
+   677px tall) made the WHOLE completion card taller than the 1024x768 host frame, and centering
+   overflow pushed the headline and part of the score line off the TOP of the screen -- caught
+   only by rendering a real figure and looking at the screenshot, not by any DOM-stub test. A
+   fixed, budget-aware height keeps every kind of source image (portrait, landscape, square)
+   inside the same box, `object-fit: contain` keeps the whole figure visible with no crop (a
+   study image that gets cropped defeats the point of revealing it), and the faint background
+   fills any letterbox gap so it reads as intentional rather than a rendering gap. */
+.mv-rv-frame { position: relative; width: min(560px, 86vw); height: min(230px, 28vh);
+  border-radius: 10px; overflow: hidden; background: rgba(255,255,255,0.04); }
+.mv-rv-img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.mv-rv-grid { position: absolute; inset: 0; display: grid;
+  grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); }
+.mv-rv-tile { background: #0b1424; border: 1px solid rgba(255,255,255,0.08);
+  transition: opacity 0.5s ease, transform 0.5s ease; }
+.mv-rv-tile.away { opacity: 0; transform: scale(0.92); }
+.mv-rv-cap { font-weight: 600; text-align: center; max-width: 60ch; }
+
+/* .mv-rv-cell and .mv-rv-tile are real as of Task 6 (both defined above); listed here for real
+   reduced-motion coverage, not just future-proofing. .mv-flash.stamp-* remains a forward
+   reference -- Task 7 adds those classes later on this same branch -- kept here so that rule
+   does not depend on remembering to extend this one when they land. Collapsing `transition` to
+   none does not strand either mechanic mid-cover: the JS still adds `.found`/`.away` on its own
+   schedule, so with no transition to animate, each state simply applies instantly, landing on
+   the same fully-revealed end state as the animated path, just without the motion. */
 @media (prefers-reduced-motion: reduce) {
   .mv-lb-zoom, .mv-lb-overlay, .mv-rv-cell, .mv-rv-tile, .mv-flash { transition: none !important; animation: none !important; }
 }

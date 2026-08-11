@@ -154,9 +154,79 @@
     paint();
   }
 
+  // ---- reveal: per-question bar cells + completion-screen cover reveal ----
+
+  // Called once per level, from the chrome build (not per question): the strip must persist
+  // and accumulate `found` cells across every question in the level, not be rebuilt each time.
+  // `level.reveal` alone deciding null vs. a strip -- not the caller -- is deliberate: the
+  // runner calls this unconditionally whenever MVFigures resolves, exactly like renderStrip and
+  // closeLightbox, so a reveal-less level's call is a normal no-op rather than a branch the
+  // runner has to know about.
+  function attachReveal(barEl, pack, level, total) {
+    if (!barEl || !level || !level.reveal) return null;
+    const f = resolve(pack, level.reveal.figureId);
+    if (!f) return null;
+    const theme = (pack.meta && pack.meta.subject) === 'hist' ? 'rv-hist' : 'rv-sci';
+    const strip = el('span', 'mv-reveal-strip ' + theme);
+    const cells = [];
+    for (let i = 0; i < total; i++) {
+      const c = el('span', 'mv-rv-cell');
+      cells.push(c);
+      strip.appendChild(c);
+    }
+    // Between prog and hearts, not after both: .mv-bar is justify-content: space-between, so
+    // three children spread evenly instead of the strip crowding against the hearts.
+    barEl.insertBefore(strip, barEl.children[1] || null);
+    // A wrong answer must never call this: no branch here removes or dims a `found` cell, and
+    // the ONLY caller (engine/runner.js submit(), the result.correct branch) enforces that a
+    // miss never reaches onCorrect at all. The reveal is not punitive; a retry after three wrong
+    // answers can still earn every cell.
+    return { onCorrect(i) { if (cells[i]) cells[i].classList.add('found'); } };
+  }
+
+  // Renders the completion-screen cover reveal: the figure under a 12-tile grid that lifts away.
+  // Returns false (and appends nothing) for a reveal-less level, an unresolvable figureId, or a
+  // missing host, matching the boolean contract Task 1's stub already established for this
+  // function -- callers (Math-Multiverse.html's showPackLevelComplete) branch on the return
+  // value the same way renderStrip's callers branch on null.
+  function renderRevealCard(pack, levelIndex, hostEl) {
+    const level = pack && pack.levels && pack.levels[levelIndex];
+    if (!level || !level.reveal || !hostEl) return false;
+    const f = resolve(pack, level.reveal.figureId);
+    if (!f) return false;
+    const card = el('div', 'mv-rv-card');
+    const frame = el('div', 'mv-rv-frame');
+    const img = el('img', 'mv-rv-img');
+    img.setAttribute('src', f.kind === 'plate' ? f.views[0].src : f.src);
+    // Default matches the strip/lightbox convention: a figure missing alt renders alt="",
+    // never the literal string "undefined".
+    img.setAttribute('alt', f.alt || '');
+    frame.appendChild(img);
+    const grid = el('div', 'mv-rv-grid');
+    for (let i = 0; i < 12; i++) grid.appendChild(el('span', 'mv-rv-tile'));
+    frame.appendChild(grid);
+    card.appendChild(frame);
+    card.appendChild(el('div', 'mv-rv-cap', f.caption));
+    card.appendChild(el('div', 'mv-lb-credit', f.credit));
+    hostEl.appendChild(card);
+    // These twelve timers are deliberately NOT collected or cancelled. A child can tap
+    // Retry/Levels mid-animation, which replaces hostEl's innerHTML (Math-Multiverse.html's
+    // completion-card branch) and detaches grid's tiles while these still fire; adding a class
+    // to a detached node is harmless, so nothing breaks. Unlike engine/runner.js, which collects
+    // its own timeouts (runner.js:134-136) because it must clear() a still-mounted level on
+    // cleanup, this card has no cleanup hook to run a disposer from and no caller ever holds a
+    // reference to cancel one, so a disposer here would be dead code the harness cannot exercise
+    // honestly.
+    const tiles = grid.children;
+    for (let i = 0; i < tiles.length; i++) {
+      (function (t, i) { setTimeout(() => t.classList.add('away'), 120 + i * 90); })(tiles[i], i);
+    }
+    return true;
+  }
+
   const api = { setEnv, resolve, el, FIG_KINDS, DOC_KINDS, TOKENS,
     renderStrip, renderItemFigure: function () {},
     openLightbox, closeLightbox,
-    attachReveal: function () { return null; }, renderRevealCard: function () { return false; } };
+    attachReveal, renderRevealCard };
   return api;
 });

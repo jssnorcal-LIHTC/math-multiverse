@@ -146,6 +146,16 @@
     const hearts = el('div', 'mv-hearts');
     bar.appendChild(prog);
     bar.appendChild(hearts);
+    // Optional layer, same call-time-resolution and try/catch stance as MVFresh and the passage
+    // hook below, now threaded through deps.Figures first (Task 6 unifies all three FG
+    // resolutions in this file onto this same three-term form). Built once per level, here in
+    // the chrome build rather than inside renderQuestion: the strip's `found` cells must persist
+    // and accumulate across every question in the level, not be rebuilt each time one renders.
+    const FGReveal = (deps && deps.Figures) || (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
+    const reveal = FGReveal ? (function () {
+      try { return FGReveal.attachReveal(bar, pack, level, queue.length); }
+      catch (e) { return null; }
+    })() : null;
     const passageBox = el('div', 'mv-passage');
     const itemBox = el('div', 'mv-item');
     const footer = el('div', 'mv-footer');
@@ -203,7 +213,7 @@
           // diagnostic anywhere.  The warn itself is wrapped in its OWN try/catch: a throw
           // raised inside a catch block is not caught by its own try, so a console lacking a
           // callable warn must not be able to escape this guard and kill the level it protects.
-          const FG = (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
+          const FG = (deps && deps.Figures) || (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
           if (FG && Array.isArray(passage.figureIds)) {
             try { FG.renderStrip(pack, passage.figureIds, passageBox); }
             catch (e) {
@@ -282,6 +292,9 @@
       paintBar();
 
       if (result.correct) {
+        // Never on the wrong branch below: the reveal is not punitive, so nothing here may run
+        // outside this one guard on result.correct.
+        if (reveal) { try { reveal.onCorrect(qi); } catch (e) {} }
         footer.innerHTML = '';
         footer.appendChild(el('div', 'mv-flash ok', 'Correct'));
         later(() => { qi++; renderQuestion(); }, CORRECT_ADVANCE_MS);
