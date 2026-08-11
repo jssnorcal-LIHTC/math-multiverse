@@ -4817,14 +4817,13 @@
     {
       "id": "fig-body-systems",
       "kind": "plate",
-      "caption": "The human machine: three of the body's systems.  Every operative runs on subsystems too.",
-      "credit": "Nervous: Gray's Anatomy of the Human Body, 20th ed. (1918), public domain. Skeletal and Muscular: original diagrams for this pack.",
-      "alt": "Full-body views of three systems: an original skeletal diagram, an original muscular diagram, and a public-domain 1918 nervous-system plate",
+      "caption": "The nervous system, front and back: nerves branching from the spine to reach every part of the body.  Every operative runs on systems like this one.",
+      "credit": "Gray's Anatomy of the Human Body, 20th ed. (1918), public domain",
+      "alt": "Full-body views of the nervous system's nerve distribution, from the front (ventral) and the back (dorsal)",
       "views": [
-        { "label": "Skeletal", "src": "art/outpost-protocol-g6/outpost-skeleton-diagram.svg" },
-        { "label": "Muscular", "src": "art/outpost-protocol-g6/outpost-muscle-diagram.svg" },
-        { "label": "Nervous", "src": "art/outpost-protocol-g6/gray-nervous.png",
-          "overlaySrc": "art/outpost-protocol-g6/gray-nervous-overlay.svg" }
+        { "label": "Ventral", "src": "art/outpost-protocol-g6/gray-nervous-ventral.png",
+          "overlaySrc": "art/outpost-protocol-g6/gray-nervous-overlay.svg" },
+        { "label": "Dorsal", "src": "art/outpost-protocol-g6/gray-nervous-dorsal.png" }
       ]
     }
   ]
