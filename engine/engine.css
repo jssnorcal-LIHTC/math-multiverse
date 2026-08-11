@@ -73,7 +73,16 @@
 .mv-lb-frame { position: relative; max-width: 96vw; max-height: 78vh; overflow: auto;
   touch-action: manipulation; }
 .mv-lb-zoom { position: relative; display: inline-block; transition: transform 0.2s ease; }
-.mv-lb-zoom.zoomed { transform: scale(2); transform-origin: center; }
+/* transform-origin is top-left, not center.  .mv-lb-frame is overflow:auto and shrink-to-fit
+   (sized to the UNZOOMED content), and CSS scrollable-overflow for a transformed descendant is
+   reachable only in the forward (right/down) direction from scrollLeft/scrollTop 0 -- there is
+   no negative scroll position.  A center origin grows the content symmetrically in both
+   directions, and the whole "before center" half becomes impossible to scroll to: verified live
+   in a real browser, scrollWidth/scrollHeight grew by only the forward half of the zoomed size,
+   and the top-left quadrant (where a plate's overlay markers can legitimately sit) stayed
+   permanently off-screen no matter how far the frame was scrolled.  Anchoring growth at the
+   top-left keeps the frame's existing scroll range able to reach every part of the zoomed image. */
+.mv-lb-zoom.zoomed { transform: scale(2); transform-origin: 0 0; }
 .mv-lb-img { display: block; max-width: 94vw; max-height: 74vh; margin: 0 auto;
   touch-action: manipulation; }
 .mv-lb-overlay { position: absolute; inset: 0; width: 100%; height: 100%;

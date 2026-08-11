@@ -346,6 +346,11 @@
       timeouts.forEach(clearTimeout);
       timeouts = [];
       Save.saveNow();
+      // Same call-time resolution and try/catch stance as the passage hook above: an open
+      // lightbox must not survive past the level that opened it, and a broken or absent
+      // MVFigures must never stop cleanup from running the rest of its work.
+      const FG = (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
+      if (FG) { try { FG.closeLightbox(); } catch (e) {} }
     };
   }
 

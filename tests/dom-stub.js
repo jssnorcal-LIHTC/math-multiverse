@@ -73,14 +73,6 @@ function makeEl(tag) {
       })(node);
       return out;
     },
-    // Singular form Task 4 needs for its own overlay lookup; NOT used by the shipped
-    // openLightbox (which tracks the overlay in a closure instead, per the pre-flight), but
-    // kept here because a stub extension only gets exercised if something asserts on it, and
-    // dropping it would leave engine code with no singular selector to fall back to.
-    querySelector(sel) {
-      const hits = node.querySelectorAll(sel);
-      return hits.length ? hits[0] : null;
-    },
     // Splices `c` out of `children` and clears its parent link, mirroring real DOM removal
     // closely enough that `if (node.parentNode)` guards keep meaning what they say after a
     // remove: a removed node's parentNode must go back to null, not linger stale.

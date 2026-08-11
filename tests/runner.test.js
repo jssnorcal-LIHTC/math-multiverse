@@ -399,6 +399,52 @@ check('makeRunner survives a throwing MVFigures.renderStrip and still renders th
   }
 });
 
+// ---------- Task 4: cleanup calls FG.closeLightbox() ----------
+check('cleanup calls a call-time-resolved MVFigures.closeLightbox exactly once', () => {
+  const had = global.MVFigures;
+  const calls = [];
+  global.MVFigures = { closeLightbox() { calls.push(1); } };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack(), host = makeEl('div'), Save = spySave();
+      const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+      assert.strictEqual(calls.length, 0, 'closeLightbox fired before cleanup ran');
+      cleanup();
+      assert.strictEqual(calls.length, 1, 'cleanup did not call closeLightbox exactly once');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+check('cleanup survives a throwing MVFigures.closeLightbox and still saves', () => {
+  const had = global.MVFigures;
+  global.MVFigures = { closeLightbox() { throw new Error('lightbox boom'); } };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack(), host = makeEl('div'), Save = spySave();
+      const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+      assert.doesNotThrow(() => cleanup(), 'cleanup must not throw when closeLightbox throws');
+      assert.strictEqual(Save.calls.saveNow, 1, 'a throwing closeLightbox must not stop cleanup from saving');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+check('cleanup with NO MVFigures loaded does not throw (degrade path)', () => {
+  assert.strictEqual(typeof MVFigures, 'undefined',
+    'precondition: this process must have NO MVFigures, or this check is not testing the degrade path');
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack(), host = makeEl('div'), Save = spySave();
+    const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+    assert.doesNotThrow(() => cleanup());
+  });
+});
+
 check('the factory can reach the globals the browser gives it', () => {
   // The bug this replaces: the UMD factory referenced `root`, which is the WRAPPER's parameter, so it was
   // out of scope inside the factory and every global lookup threw ReferenceError. The wrapper now passes
