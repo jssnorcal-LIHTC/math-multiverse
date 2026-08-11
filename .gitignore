@@ -13,10 +13,16 @@ $RECYCLE.BIN/
 *.bak
 *~
 
-# Build artifacts (none yet, reserved)
+# Build artifacts
 node_modules/
 dist/
-build/
+# build/ itself is NOT ignored: Task 9 (vis/v1-engine) put hand-written, committed source tooling
+# there (build/figure-gen.js, the deterministic chart generator), not generated output. The line
+# that used to blanket-ignore it ("none yet, reserved") was reserved for a future dist-style
+# artifact directory that never arrived; a real committed script arrived instead, and a gitignore
+# rule silently dropping a brief-required source file from every future `git add` is exactly the
+# omission ACCEPTANCE-file-lists.md exists to catch. If generated build output ever lands here,
+# ignore its specific subpath, not the whole directory.
 
 # Local-only scratch
 scratch/

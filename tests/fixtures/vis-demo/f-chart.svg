@@ -1,12 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img">
-  <title>Fixture chart: CO2 by day</title>
-  <rect x="0" y="0" width="800" height="450" fill="#0f1218" />
-  <line x1="48" y1="48" x2="48" y2="402" stroke="rgba(255,255,255,0.35)" stroke-width="1" />
-  <line x1="48" y1="402" x2="752" y2="402" stroke="rgba(255,255,255,0.35)" stroke-width="1" />
-  <text x="24" y="225" font-size="16" fill="#e8eef7" transform="rotate(-90 24 225)">CO2 (ppm)</text>
-  <text x="400" y="432" font-size="16" fill="#e8eef7" text-anchor="middle">day</text>
-  <polyline points="90,380 300,340 510,300" fill="none" stroke="#7aa8ff" stroke-width="3" />
-  <text x="90" y="370" font-size="15" fill="#e8eef7">410</text>
-  <text x="300" y="330" font-size="15" fill="#e8eef7">430</text>
-  <text x="510" y="290" font-size="15" fill="#e8eef7">452</text>
+<rect x="0" y="0" width="800" height="450" fill="#0f1218" />
+<line x1="72" y1="48" x2="72" y2="352" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+<line x1="72" y1="352" x2="752" y2="352" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+<text x="62" y="352" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">406.6</text>
+<line x1="72" y1="276" x2="752" y2="276" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+<text x="62" y="276" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">418.8</text>
+<line x1="72" y1="200" x2="752" y2="200" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+<text x="62" y="200" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">431</text>
+<line x1="72" y1="124" x2="752" y2="124" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+<text x="62" y="124" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">443.2</text>
+<line x1="72" y1="48" x2="752" y2="48" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+<text x="62" y="48" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">455.4</text>
+<text x="72" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">0.8</text>
+<text x="242" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">1.4</text>
+<text x="412" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">2</text>
+<text x="582" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">2.6</text>
+<text x="752" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">3.2</text>
+<polyline points="118.9,331.03 412,206.24 705.1,68.97" fill="none" stroke="#7aa8ff" stroke-width="3" />
+<text x="72" y="28" font-size="22" fill="#e8eef7">CO2 (ppm)</text>
+<text x="412" y="402" font-size="22" fill="#e8eef7" text-anchor="middle">day</text>
+<text x="72" y="426" font-size="18" fill="#e8eef7" fill-opacity="0.82">Fixture data; not a real measurement.</text>
 </svg>
