@@ -127,9 +127,19 @@ function paddedExtent(values) {
   let lo = Infinity, hi = -Infinity;
   values.forEach((v) => { if (v < lo) lo = v; if (v > hi) hi = v; });
   if (!Number.isFinite(lo) || !Number.isFinite(hi)) return [0, 1];
+  const rawLo = lo;   // the ACTUAL data minimum, captured before the flat-data widening below ever
+                       // touches lo, since the zero-floor rule below must judge the real values, not
+                       // an artificially widened stand-in
   if (lo === hi) { lo -= 1; hi += 1; }   // flat data: still a real, non-zero range to scale against
   const pad = (hi - lo) * 0.08;
-  return [lo - pad, hi + pad];
+  const paddedLo = lo - pad;
+  // Team-lead fix round: a quantity whose real data never goes negative (rainfall, a temperature
+  // swing, a season number) must never be OFFERED a negative axis floor just because the 8% pad
+  // pushed under zero. Clamp the floor to zero whenever the series' own minimum was already >= 0;
+  // a genuinely negative series (e.g. the bar-goes-below-zero test fixture) is untouched, since its
+  // rawLo is itself negative and the clamp condition never fires for it.
+  const clampedLo = rawLo >= 0 ? Math.max(0, paddedLo) : paddedLo;
+  return [clampedLo, hi + pad];
 }
 
 function scaleFn(domainLo, domainHi, rangeLo, rangeHi) {
