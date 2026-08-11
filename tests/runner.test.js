@@ -714,6 +714,152 @@ check('deps.Figures takes precedence over a global MVFigures when both are prese
   }
 });
 
+// ---------- Task 7: item-figure rail (deps.Figures.renderItemFigure) ----------
+
+check('makeRunner calls deps.Figures.renderItemFigure once per item carrying a figureId, with the .mv-item host, inserted before the stem', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack();
+    pack.items[0].figureId = 'f1';   // i0 only; i1-i3 carry none
+    const host = makeEl('div'), Save = spySave();
+    const calls = [];
+    const Figures = {
+      renderItemFigure(pk, figureId, itemBox) {
+        calls.push({ packId: pk.meta.id, figureId, hostClassName: itemBox.className });
+        const wrap = makeEl('div'); wrap.className = 'mv-item-fig';
+        itemBox.insertBefore(wrap, itemBox.firstChild || null);
+      },
+    };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(calls.length, 1, 'renderItemFigure was not called for an item with a figureId');
+    assert.strictEqual(calls[0].packId, 'probe');
+    assert.strictEqual(calls[0].figureId, 'f1');
+    assert.strictEqual(calls[0].hostClassName, 'mv-item', 'renderItemFigure did not receive the .mv-item host');
+    const itemBox = host.querySelectorAll('.mv-item')[0];
+    assert.strictEqual(itemBox.children[0].className, 'mv-item-fig', 'the figure was not inserted before the stem');
+
+    // Advance to the next question (i0's key is 1 on every probePack item: correct). Whichever
+    // item is served next may or may not carry a figureId depending on pickItems' shuffle, so
+    // pin the call count against the pack's OWN itemIds rather than assuming order: exactly one
+    // of the four probePack items (i0) was given a figureId above.
+    host.querySelectorAll('.mv-choice')[1].onclick();
+    const ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    assert.strictEqual(calls.length, 1, 'renderItemFigure fired for an item with no figureId');
+  });
+});
+
+check('makeRunner survives a throwing deps.Figures.renderItemFigure and still renders the item fully', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack();
+    pack.items[0].figureId = 'f1';
+    const host = makeEl('div'), Save = spySave();
+    const Figures = { renderItemFigure() { throw new Error('item-figure boom'); } };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'a throwing renderItemFigure must not stop the item box from rendering');
+    assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'a throwing renderItemFigure must not stop choices from rendering fully');
+    assert.strictEqual(host.querySelectorAll('.mv-item-fig').length, 0, 'a throwing renderItemFigure must not leave a partial rail');
+  });
+});
+
+check('runner renders an item with a figureId with NO MVFigures loaded (degrade path)', () => {
+  assert.strictEqual(typeof MVFigures, 'undefined',
+    'precondition: this process must have NO MVFigures, or this check is not testing the degrade path');
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack();
+    pack.items[0].figureId = 'f1';
+    const host = makeEl('div'), Save = spySave();
+    const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+    assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'item box did not render');
+    assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'item choices did not render fully');
+    cleanup();
+  });
+});
+
+check('deps.Figures.renderItemFigure takes precedence over a global MVFigures when both are present', () => {
+  const had = global.MVFigures;
+  global.MVFigures = { renderItemFigure() { throw new Error('the GLOBAL renderItemFigure must not be reached when deps.Figures is supplied'); } };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack();
+      pack.items[0].figureId = 'f1';
+      const host = makeEl('div'), Save = spySave();
+      const calls = [];
+      const Figures = { renderItemFigure() { calls.push(1); } };
+      R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+      assert.strictEqual(calls.length, 1, 'deps.Figures.renderItemFigure was not used ahead of the global');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+// ---------- Task 7: cleanup's closeLightbox resolution unified onto the three-term form ----------
+// The pre-flight's consistency requirement named the passage hook, attachReveal, and this
+// task's new item-figure hook as the three sites to unify; Task 6's report flagged the cleanup
+// site as a pre-existing fourth two-term holdout. Unified here since Task 7 touches this file
+// anyway; this pins that deps.Figures now also short-circuits the global at the cleanup site.
+
+check('cleanup honors deps.Figures.closeLightbox ahead of a global MVFigures', () => {
+  const had = global.MVFigures;
+  global.MVFigures = { closeLightbox() { throw new Error('the GLOBAL closeLightbox must not be reached when deps.Figures is supplied'); } };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack(), host = makeEl('div'), Save = spySave();
+      const calls = [];
+      const Figures = { closeLightbox() { calls.push(1); } };
+      const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+      cleanup();
+      assert.strictEqual(calls.length, 1, 'deps.Figures.closeLightbox was not used ahead of the global at cleanup');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+// ---------- Task 7: themed correct-answer stamps ----------
+// Run WITHOUT withSyncTimers on purpose: submit()'s later() schedules a REAL 1400ms timer here,
+// which never fires before this synchronous check finishes reading the footer, so the flash can
+// be inspected directly instead of via the Save.recordAnswer workaround the sync-timer checks
+// above must use (their own synchronous advance clears the flash before the assertion runs).
+
+check('a correct answer stamps CONFIRMED for a sci pack, VERIFIED for a hist pack, and the plain Correct flash otherwise', () => {
+  const Items = require('../engine/items.js');
+  function correctFlashFor(subject) {
+    const pack = probePack();
+    if (subject) pack.meta.subject = subject;
+    const host = makeEl('div'), Save = spySave();
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+    host.querySelectorAll('.mv-choice')[1].onclick();   // key is 1 on every probePack item
+    const ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    return host.querySelectorAll('.mv-flash')[0];
+  }
+
+  const sci = correctFlashFor('sci');
+  assert.ok(sci, 'no flash rendered for a sci pack');
+  assert.strictEqual(sci.classList.contains('ok'), true);
+  assert.strictEqual(sci.classList.contains('stamp-confirmed'), true, 'sci pack did not get stamp-confirmed');
+  assert.strictEqual(sci.classList.contains('stamp-verified'), false);
+  assert.strictEqual(sci.textContent, 'CONFIRMED');
+
+  const hist = correctFlashFor('hist');
+  assert.strictEqual(hist.classList.contains('ok'), true);
+  assert.strictEqual(hist.classList.contains('stamp-verified'), true, 'hist pack did not get stamp-verified');
+  assert.strictEqual(hist.classList.contains('stamp-confirmed'), false);
+  assert.strictEqual(hist.textContent, 'VERIFIED');
+
+  const ela = correctFlashFor(undefined);
+  assert.strictEqual(ela.classList.contains('ok'), true);
+  assert.strictEqual(ela.classList.contains('stamp-verified'), false, 'a pack with no subject must not get a themed stamp');
+  assert.strictEqual(ela.classList.contains('stamp-confirmed'), false);
+  assert.strictEqual(ela.textContent, 'Correct');
+});
+
 // ---------- the two star ladders must not drift apart ----------
 // The brief states "if either changes, both change" as a hard invariant, but nothing enforced it:
 // pack.test.js checks STARS_FOR against literal numbers and runner.test.js never required pack.js, so a

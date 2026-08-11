@@ -71,6 +71,32 @@
     return strip;
   }
 
+  // Single figure rail above an item's stem. Unlike renderStrip's multi-figure horizontal strip,
+  // an item carries at most one figureId (validate-pack's items(id).figureId cross-reference), so
+  // there is one thumb and no kind badge. insertBefore-firstChild puts it visually first without
+  // assuming how Items.render builds the stem/choices beneath it -- same reasoning as the
+  // runner's own call-site comment. Click reaches api.openLightbox, resolved at call time, same
+  // as renderStrip's thumb, so this keeps working once a later task replaces that stub.
+  function renderItemFigure(pack, figureId, itemBox) {
+    const f = resolve(pack, figureId);
+    if (!f || !itemBox) return;
+    const wrap = el('div', 'mv-item-fig');
+    const b = el('button', 'mv-fig');
+    b.type = 'button';
+    if (f.caption) b.setAttribute('aria-label', f.caption);
+    const img = el('img', 'mv-fig-img');
+    // Default matches the strip/lightbox/reveal-card convention: a figure missing alt renders
+    // alt="", never the literal string "undefined".
+    img.setAttribute('alt', f.alt || '');
+    // Same malformed-plate fallback as renderStrip: a plate with no views falls back to f.src
+    // rather than throwing and dropping the whole rail.
+    img.setAttribute('src', f.kind === 'plate' ? ((f.views && f.views[0]) ? f.views[0].src : f.src) : f.src);
+    b.appendChild(img);
+    b.addEventListener('click', () => api.openLightbox(pack, f.id));
+    wrap.appendChild(b);
+    itemBox.insertBefore(wrap, itemBox.firstChild || null);
+  }
+
   // ---- lightbox + plate viewer ----
   // One dialog at a time: _lb is the currently-open node (or null), tracked here rather than
   // discovered by querying document.body, so a second open can unconditionally close the first.
@@ -225,7 +251,7 @@
   }
 
   const api = { setEnv, resolve, el, FIG_KINDS, DOC_KINDS, TOKENS,
-    renderStrip, renderItemFigure: function () {},
+    renderStrip, renderItemFigure,
     openLightbox, closeLightbox,
     attachReveal, renderRevealCard };
   return api;

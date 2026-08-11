@@ -106,6 +106,18 @@
   touch-action: manipulation; }
 .mv-lb-overlay { position: absolute; inset: 0; width: 100%; height: 100%;
   pointer-events: none; }
+/* Item-figure rail (engine/figures.js renderItemFigure): one thumb, no kind badge (an item
+   carries at most one figureId, unlike a passage's multi-figure strip), inserted before
+   whatever Items.render already built so it reads above the stem rather than after it.  72px,
+   not the strip's 96px: the strip sits inside the scrolling passage panel, where a few dozen
+   extra px cost little; this rail sits inside .mv-item, which is the side that gives (see the
+   min-height:0/flex:0 1 auto comment below) and competes directly with the stem, choices and
+   footer for the same 1024x768 budget.  Only the height is overridden here -- .mv-fig-img's own
+   width:128px and object-fit:contain are untouched, so a chart or map's axis labels still never
+   crop, just at a shorter box. */
+.mv-item-fig { margin: 0 0 8px; }
+.mv-item-fig .mv-fig-img { height: 72px; }
+
 .mv-lb-cap { font-size: 0.92rem; text-align: center; max-width: 80ch; }
 .mv-lb-credit { font-size: 0.78rem; color: var(--text-secondary); }
 .mv-plate-tabs { display: flex; gap: 6px; }
@@ -268,6 +280,26 @@
 .mv-check:disabled { opacity: 0.4; cursor: default; }
 .mv-flash { font-weight: 700; padding: 6px 0; }
 .mv-flash.ok { color: #3ddc84; }
+/* Themed correct-answer stamps (engine/runner.js submit(), the result.correct branch): hist
+   reads VERIFIED in a tilted case-stamp register, sci reads CONFIRMED in an upright monospace
+   lab-log register.  Each carries its OWN keyframes rather than sharing one: a shared `mv-stamp`
+   animation ending at `rotate(-3deg)` next to a static `stamp-confirmed { transform: none }`
+   override made the confirmed stamp animate in rotated and then visibly snap upright the instant
+   the animation finished, because the keyframe wins during playback and the static declaration
+   only takes over once it ends.  Splitting the keyframes means each stamp's animated path and
+   its resting state agree throughout, with nothing to snap.  Both are covered by the
+   prefers-reduced-motion block above (`.mv-flash`), which collapses to each rule's own static
+   transform: verified's `rotate(-3deg)`, confirmed's unset (upright) -- both readable end states,
+   never the animation's zero-opacity start frame. */
+.mv-flash.stamp-verified, .mv-flash.stamp-confirmed { display: inline-block;
+  border: 2px solid currentColor; border-radius: 6px; padding: 2px 10px; letter-spacing: 0.12em; }
+.mv-flash.stamp-verified { transform: rotate(-3deg); animation: mv-stamp-tilt 0.28s ease-out; }
+.mv-flash.stamp-confirmed { font-family: ui-monospace, Consolas, monospace;
+  animation: mv-stamp-flat 0.28s ease-out; }
+@keyframes mv-stamp-tilt { from { transform: scale(1.5) rotate(-3deg); opacity: 0; }
+  to { transform: scale(1) rotate(-3deg); opacity: 1; } }
+@keyframes mv-stamp-flat { from { transform: scale(1.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; } }
 
 .mv-explain {
   border: 1px solid var(--border-subtle); border-left: 3px solid #ff9d3c;

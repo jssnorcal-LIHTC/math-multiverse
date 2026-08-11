@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Provenance Office badge">
+  <!-- Rendered-pixel accounting (this is a card-header shelf badge, not a full-size plate):
+       .mc-logo is `height: 26px; width: auto` (Math-Multiverse.html:375-376) against this
+       120x120 viewBox, a 26/120 = 0.2167 scale factor.  A 15px viewBox floor, correct for a
+       full-size figure per MVFigures.TOKENS.minFont, renders at 15 * 0.2167 = 3.25px here,
+       illegible at any DPR (DPR only adds physical pixels per CSS pixel; it does not change
+       this CSS-pixel scale factor).  So this badge carries NO text at all: the pack title
+       already sits next to it in the card, and every stroke below is sized so its RENDERED
+       width clears about 2 CSS px, not just its viewBox width. -->
+
+  <!-- Seal backing: a solid dark disc (an area fill, so it survives any downscale) plus a
+       THICK accent-ring stroke rather than a thin one: stroke-width 10 here renders at
+       10 * 0.2167 = 2.17px, comfortably above the ~1px hairline-vanishing floor. -->
+  <circle cx="60" cy="60" r="56" fill="#0b1424"/>
+  <circle cx="60" cy="60" r="47" fill="none" stroke="#8b5e34" stroke-width="10"/>
+
+  <!-- Glyph: a bold magnifying glass (investigate-the-record mark), the one shape in this pair
+       that reads clearly even as a small silhouette. Lens ring and handle both held at radius
+       < 42 from center so nothing crosses into the ring band above (42-52); stroke widths 10
+       (lens) and 11 (handle) render at 2.17-2.38px, matching the ring's weight. -->
+  <circle cx="55" cy="55" r="16" fill="none" stroke="#e8eef7" stroke-width="10"/>
+  <line x1="66" y1="66" x2="78" y2="78" stroke="#8b5e34" stroke-width="11" stroke-linecap="round"/>
+</svg>

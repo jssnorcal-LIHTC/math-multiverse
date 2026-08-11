@@ -234,6 +234,13 @@
       };
       Items.render(item, itemBox, ctx);
 
+      // Optional layer, same call-time-resolution and try/catch stance as the passage hook and
+      // attachReveal above (three-term form, unified per the pre-flight's consistency
+      // requirement): a figure bug must never cost the child the level, and a missing
+      // figures.js must degrade to today's figure-less item rendering.
+      const FG = (deps && deps.Figures) || (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
+      if (FG && item.figureId) { try { FG.renderItemFigure(pack, item.figureId, itemBox); } catch (e) {} }
+
       if (Items.needsCheck(item)) {
         const btn = el('button', 'mv-check', 'Check');
         btn.type = 'button';
@@ -296,7 +303,12 @@
         // outside this one guard on result.correct.
         if (reveal) { try { reveal.onCorrect(qi); } catch (e) {} }
         footer.innerHTML = '';
-        footer.appendChild(el('div', 'mv-flash ok', 'Correct'));
+        // Themed correct-answer stamp: hist reads VERIFIED (case-file register), sci reads
+        // CONFIRMED (lab register), everything else keeps the plain "Correct" flash unchanged.
+        const subj = pack.meta && pack.meta.subject;
+        const label = subj === 'hist' ? 'VERIFIED' : subj === 'sci' ? 'CONFIRMED' : 'Correct';
+        const stampCls = subj === 'hist' ? ' stamp-verified' : subj === 'sci' ? ' stamp-confirmed' : '';
+        footer.appendChild(el('div', 'mv-flash ok' + stampCls, label));
         later(() => { qi++; renderQuestion(); }, CORRECT_ADVANCE_MS);
         return;
       }
@@ -361,8 +373,10 @@
       Save.saveNow();
       // Same call-time resolution and try/catch stance as the passage hook above: an open
       // lightbox must not survive past the level that opened it, and a broken or absent
-      // MVFigures must never stop cleanup from running the rest of its work.
-      const FG = (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
+      // MVFigures must never stop cleanup from running the rest of its work. Three-term form
+      // (deps.Figures first), unifying this fourth call site onto the same resolution pattern
+      // as the passage hook, attachReveal, and the item-figure hook above (Task 7).
+      const FG = (deps && deps.Figures) || (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
       if (FG) { try { FG.closeLightbox(); } catch (e) {} }
     };
   }
