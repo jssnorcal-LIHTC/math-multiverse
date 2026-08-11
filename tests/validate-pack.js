@@ -263,22 +263,55 @@ function checkArtSrc(src, w, packId, requirePrefix, errors, assetBase) {
     }
   }
   const abs = path.join(REPO_ROOT, src);
-  if (!fs.existsSync(abs)) {
-    errors.push(`${w}: file not found at "${src}" (resolved from repo root)`);
-    return;
+  const verifiedAbs = checkOnDiskCase(abs, src, w, errors);
+  if (verifiedAbs === null) return;   // not found, wrong case, or an unreadable dir; already reported
+
+  // "The asset exists" must mean a FILE. fs.existsSync (and the listing walk above) both return
+  // true for a directory, so a src naming a directory -- e.g. the pack's own art folder -- would
+  // otherwise satisfy every check above and validate clean.
+  let isFile = true;
+  try { isFile = fs.statSync(verifiedAbs).isFile(); } catch (e) { /* just verified by the walk above; treat as fine */ }
+  if (!isFile) {
+    errors.push(`${w}: "${src}" resolves to a directory, not a file`);
   }
-  // fs.existsSync is case-insensitive on this authoring machine's filesystem (and on macOS
-  // default), but GitHub Pages -- which serves this repo -- is case-sensitive, so a src whose case
-  // does not match the file on disk validates clean here and 404s in production. Confirmed against
-  // the real directory listing, which reports the on-disk case regardless of the OS's own lookup
-  // rules.
-  const dir = path.dirname(abs);
-  const base = path.basename(abs);
-  let entries;
-  try { entries = fs.readdirSync(dir); } catch (e) { entries = null; }
-  if (entries && !entries.includes(base)) {
-    errors.push(`${w}: "${src}" exists on disk under a different case; this authoring machine's filesystem is case-insensitive but GitHub Pages is case-sensitive, so this would 404 in production`);
+}
+
+// fs.existsSync is case-INSENSITIVE on this authoring machine's filesystem (and on macOS default),
+// but GitHub Pages -- which serves this repo -- is case-SENSITIVE, so a src whose case does not
+// match the file on disk can validate clean here and 404 in production. existsSync is therefore
+// never the primary oracle below: fs.readdirSync always reports each entry's real on-disk spelling
+// regardless of the OS's own case-folding rules (Windows preserves case even though its lookups
+// ignore it), so walking every path segment against its parent's real listing gives ONE answer on
+// Windows, macOS and Linux alike. A mis-cased DIRECTORY segment is exactly as real a 404 as a
+// mis-cased filename, so every segment is walked, not just the last one.
+//
+// Returns the fully verified absolute path on success. Returns null once an error has already
+// been pushed (not found, wrong case) or the read-failure fallback below has run; the caller must
+// not do anything further with the path in that case.
+function checkOnDiskCase(abs, src, w, errors) {
+  const rel = path.relative(REPO_ROOT, abs);
+  const segments = rel.split(path.sep).filter(Boolean);
+  let dir = REPO_ROOT;
+  for (const seg of segments) {
+    let entries;
+    try { entries = fs.readdirSync(dir); }
+    catch (e) {
+      // The parent directory itself could not be read (missing, permissions...). A missing parent
+      // must not throw out of the validator; fall back to a plain existence check on the full path.
+      // Case cannot be verified in this branch, so no "different case" message is possible here.
+      if (!fs.existsSync(abs)) errors.push(`${w}: file not found at "${src}" (resolved from repo root)`);
+      return null;
+    }
+    if (entries.includes(seg)) { dir = path.join(dir, seg); continue; }
+    const ciHit = entries.some(e => e.toLowerCase() === seg.toLowerCase());
+    if (ciHit) {
+      errors.push(`${w}: "${src}" exists on disk, but the "${seg}" segment has a different case there; this authoring machine's filesystem may resolve it anyway, but GitHub Pages, which serves this repo, is case-sensitive, so this would 404 in production`);
+    } else {
+      errors.push(`${w}: file not found at "${src}" (resolved from repo root)`);
+    }
+    return null;
   }
+  return dir;
 }
 
 function checkFigures(pack, errors, opts) {
@@ -476,7 +509,7 @@ function checkItemShape(item, passagesById, errors) {
       // The signature EBSR rule: the correct evidence depends on which Part A the student chose,
       // so partB.key is a map from every Part A index to a Part B index. A fixed scalar key here
       // is the most common way a homemade EBSR is silently wrong.
-      if (!B.key || typeof B.key !== 'object' || Array.isArray(B.key)) {
+      if (!isPlainObject(B.key)) {
         errors.push(`${w}.partB.key: must be an object mapping each partA index to a partB index`);
         break;
       }

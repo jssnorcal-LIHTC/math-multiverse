@@ -24,11 +24,6 @@
     return n;
   }
 
-  // The "is this a plain, non-null, non-array object" test: named once so a map-shaped field (like
-  // ebsr's partB.key) reads the same intent everywhere it is checked, rather than re-deriving the
-  // three-clause expression at each site.
-  function isPlainObject(v) { return !!v && typeof v === 'object' && !Array.isArray(v); }
-
   // Answer normalisation for typed responses. Folds case, strips punctuation, drops a leading
   // article, and collapses whitespace, so "The chalk-mark!" matches "chalk mark".
   // KNOWN COST, accepted: dropping the article makes "the mark" and "a mark" collide. That is the
@@ -197,7 +192,7 @@
     },
     grade(item, r) {
       const bKey = item.partB && item.partB.key;
-      if (!isPlainObject(bKey)) {
+      if (!bKey || typeof bKey !== 'object' || Array.isArray(bKey)) {
         throw new Error('ebsr partB.key must be an object mapping each partA index to a partB index');
       }
       const a = r && r.a, b = r && r.b;
