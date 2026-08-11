@@ -30,6 +30,9 @@ jobs:
       - name: Validate content packs (structure, verbatim spans, readability, blind-verdict ledger)
         run: node tests/validate-pack.js
 
+      - name: Figure-derive gate (regenerated chart SVGs byte-match their committed src; fixture controls)
+        run: node tests/figure-derive.js
+
       - name: Freshness unit gate (MVFresh service, module-grade union rejection)
         run: node tests/freshness.js
 
