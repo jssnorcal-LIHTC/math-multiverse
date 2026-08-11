@@ -1,6 +1,7 @@
 'use strict';
 const assert = require('assert');
 const path = require('path');
+const fs = require('fs');   // only used by the POSIX-semantics simulation check below (fix round 2, item 1b)
 const { validatePack, loadPackFile, ITEM_TYPES, GENRES } = require('./validate-pack');
 
 const GOOD = path.join(__dirname, 'fixtures', 'pack-good.json');
@@ -598,20 +599,28 @@ check('a duplicate figure id is caught', () => {
 });
 
 check('a null entry in the figures array is caught, not thrown', () => {
+  // Fragment fully qualified with the index: a bare 'not an object' is also produced by
+  // passages[i], items[i], levels[i], and plate views[i] on their own malformed entries, so an
+  // unqualified fragment could pass even if THIS specific guard were the one removed.
   const p = figurePack(); p.figures[0] = null;
-  expectError(p, 'not an object', 'null figure entry');
+  expectError(p, 'figures[0]: not an object', 'null figure entry');
 });
 
 check('a figure missing its id is caught', () => {
+  // Fragment fully qualified: an unqualified 'id: missing or empty' is also a substring of
+  // "meta.id: missing or empty", so a bare fragment could pass for the wrong reason.
   const p = figurePack(); delete p.figures[0].id;
-  expectError(p, 'id: missing or empty', 'figure missing id');
+  expectError(p, 'figures[0].id: missing or empty', 'figure missing id');
 });
 
 // ---- rule 2: src / views -- existence, prefix, traversal, and on-disk case ----
 
 check('a non-plate figure with no src at all is caught', () => {
+  // Fragment fully qualified with the figure id: an unqualified 'src: missing or empty' is also
+  // a substring of a hypothetical "...overlaySrc: missing or empty" message (lower-cased,
+  // "overlaysrc" ends in "src"), so a bare fragment could pass for the wrong reason.
   const p = figurePack(); delete p.figures[0].src;
-  expectError(p, 'src: missing or empty', 'missing src field');
+  expectError(p, 'figures(fig-photo).src: missing or empty', 'missing src field');
 });
 
 check('a src outside the pack prefix is caught', () => {
@@ -644,6 +653,98 @@ check('a src that exists on disk only under a different case is caught (case-sen
   const p = figurePack();
   p.figures[0].src = 'tests/fixtures/pack-good/Fixture-A.svg';
   expectError(p, 'different case', 'case-mismatched src');
+});
+
+check('a mis-cased DIRECTORY segment in a src is caught, not just a mis-cased filename', () => {
+  // Same defect class as the filename case above, walked one level up: checkOnDiskCase walks
+  // EVERY path segment against its parent's real listing, not just the final basename, so a
+  // directory spelled with the wrong case is exactly as real a 404 on Pages as a wrong-case file.
+  const p = figurePack();
+  p.figures[0].src = 'tests/fixtures/Pack-Good/fixture-a.svg';
+  expectError(p, 'different case', 'case-mismatched directory segment');
+});
+
+check('POSIX-semantics simulation: a mis-cased src is still caught under case-SENSITIVE existence lookups', () => {
+  // fix round 2, item 1b. This authoring machine's filesystem is case-insensitive (Windows), and
+  // there is no WSL and no Linux runtime here, so a real ubuntu-latest run is impossible locally.
+  // "checkOnDiskCase no longer consults fs.existsSync for this decision" is reasoning, not
+  // evidence -- so fs.existsSync is temporarily replaced with a case-SENSITIVE stand-in (resolve
+  // the parent directory, read it, and return true only when the EXACT basename is present,
+  // matching real POSIX lookup semantics) for the duration of this one check, and restored in a
+  // finally so no later check inherits the patch. Paired with the real-filesystem check above:
+  // the SAME mis-cased input produces the SAME "different case" message under case-insensitive
+  // (this machine) and case-sensitive (simulated Linux/CI) existence semantics, which is the
+  // actual invariance claim.
+  const realExistsSync = fs.existsSync;
+  fs.existsSync = function (p) {
+    try { return fs.readdirSync(path.dirname(p)).includes(path.basename(p)); }
+    catch (e) { return false; }
+  };
+  try {
+    const p = figurePack();
+    p.figures[0].src = 'tests/fixtures/pack-good/Fixture-A.svg';
+    const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+    assert.strictEqual(errors.some(e => e.includes('different case')), true,
+      'expected "different case" under simulated case-sensitive existsSync too: ' + JSON.stringify(errors));
+  } finally {
+    fs.existsSync = realExistsSync;
+  }
+});
+
+check('POSIX-semantics simulation, mis-cased directory segment: same invariance claim, one level up', () => {
+  const realExistsSync = fs.existsSync;
+  fs.existsSync = function (p) {
+    try { return fs.readdirSync(path.dirname(p)).includes(path.basename(p)); }
+    catch (e) { return false; }
+  };
+  try {
+    const p = figurePack();
+    p.figures[0].src = 'tests/fixtures/Pack-Good/fixture-a.svg';
+    const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+    assert.strictEqual(errors.some(e => e.includes('different case')), true,
+      'expected "different case" for a mis-cased directory segment under simulated case-sensitive existsSync too: ' + JSON.stringify(errors));
+  } finally {
+    fs.existsSync = realExistsSync;
+  }
+});
+
+check('a src resolving to a directory, not a file, is caught', () => {
+  // "The asset exists" must mean a FILE. The pack's own fixture directory genuinely exists on
+  // disk and satisfies the prefix rule trivially (a directory is "under" itself), so without this
+  // check it would validate clean.
+  const p = figurePack();
+  p.figures[0].src = 'tests/fixtures/pack-good';
+  expectError(p, 'resolves to a directory, not a file', 'src is a directory');
+});
+
+check('the default assetBase (art, the only value that ever ships) is exercised directly, not just vacuously by the figureless CLI run', () => {
+  // figurePack()'s figures live under tests/fixtures/pack-good/ (real files); with NO assetBase
+  // key at all, checkArtSrc must fall back to its real default, 'art', and therefore reject every
+  // one of them. Calls validatePack directly rather than through expectError, which always
+  // injects assetBase: 'tests/fixtures'. This test exists to fail the instant that default changes.
+  const { errors } = validatePack(figurePack(), { expectedId: 'pack-good' });   // no assetBase key
+  assert.strictEqual(errors.some(e => e.includes('must live under "art/pack-good/"')), true,
+    'expected the default assetBase ("art") to reject a src under tests/fixtures/: ' + JSON.stringify(errors));
+});
+
+check('rule 2 packId: expectedId wins over a present, DIFFERENT meta.id (src under expectedId is clean)', () => {
+  const p = figurePack();
+  p.meta.id = 'some-other-pack';   // present, but deliberately different from expectedId
+  // figures[0].src already lives under tests/fixtures/pack-good/ -- i.e. under expectedId's
+  // directory, not meta.id's -- so this would start failing with a spurious "must live under" if
+  // packId ever preferred meta.id again.
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.strictEqual(errors.some(e => /must live under/.test(e)), false,
+    'expected zero prefix errors when src matches expectedId even though meta.id differs: ' + JSON.stringify(errors));
+});
+
+check('rule 2 packId: a src matching only the (different, present) meta.id, not expectedId, is still rejected', () => {
+  const p = figurePack();
+  p.meta.id = 'some-other-pack';
+  p.figures[0].src = 'tests/fixtures/some-other-pack/fixture-a.svg';   // matches meta.id's dir, not expectedId's
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.strictEqual(errors.some(e => e.includes('must live under "tests/fixtures/pack-good/"')), true,
+    'expected the location error against expectedId\'s directory, since expectedId wins over meta.id: ' + JSON.stringify(errors));
 });
 
 check('a plate figure with only one view is caught', () => {
@@ -746,16 +847,23 @@ check('an embedded https:// anywhere in the pack is caught', () => {
   expectError(p, 'https://', 'embedded url');
 });
 
-check('validatePack scans opts.rawText when supplied: a URL present only in the raw bytes is still caught', () => {
-  // Simulates the real defect the raw-bytes scan exists for: a JSON duplicate key earlier in the
-  // authored file carried a URL, and JSON.parse silently kept only the later, clean value -- so the
-  // PARSED pack (p, below) is completely clean, and only the raw file text still carries the link.
+check('validatePack scans opts.rawText: a URL escaped in the raw bytes (https:\\/\\/example.com) is still caught via the parsed-object half of the union', () => {
+  // Delivered as originally specified (fix round 2, item 7): raw JSON permits \/ as an escaped
+  // forward slash. A regex scanning the RAW BYTES for a literal "://" therefore MISSES this: the
+  // two characters right after "https:" are \ and /, not / and /. JSON.parse already turns that
+  // escape back into a plain "/" by the time any caller has a `pack` object at all, which is
+  // exactly what the union's JSON.stringify(pack) half re-exposes to the scan.
   const p = figurePack();
-  const rawText = 'simulates real file bytes where an earlier duplicate JSON key carried ' +
-    'https://shadow-example.com before JSON.parse kept only the later, clean value';
+  p.figures[0].credit = 'Source: https://example.com';                           // what JSON.parse produces
+  const rawText = '{"figures":[{"credit":"Source: https:\\/\\/example.com"}]}';   // what actually shipped
+
+  // Prove the escaping claim inline rather than only asserting it in a comment.
+  assert.strictEqual(/https?:\/\//.test(rawText), false,
+    'sanity check: the escaped raw bytes must not themselves contain a literal "://", or this test proves nothing');
+
   const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures', rawText });
-  assert.strictEqual(errors.some(e => e.includes('https://shadow-example.com')), true,
-    'expected the rawText-only URL to be caught: ' + JSON.stringify(errors));
+  assert.strictEqual(errors.some(e => e.includes('https://example.com')), true,
+    'expected the escaped-in-raw-bytes URL to be caught via JSON.stringify(pack) in the union: ' + JSON.stringify(errors));
 });
 
 check('validatePack still scans JSON.stringify(pack) even when opts.rawText is supplied and is itself clean', () => {
