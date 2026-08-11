@@ -182,6 +182,40 @@ check('dom-stub removeChild only clears the parent link on an ACTUAL removal', (
     'parentNode was cleared even though child was never removed from its real parent');
 });
 
+check("dom-stub insertBefore splices at the ref node's index, appends for null or a non-child ref", () => {
+  const parent = MVFigures.el('div');
+  const a = MVFigures.el('span'), b = MVFigures.el('span'), c = MVFigures.el('span');
+  parent.appendChild(a); parent.appendChild(b);
+  parent.insertBefore(c, b);                        // insert c between a and b
+  assert.strictEqual(parent.children.length, 3);
+  assert.strictEqual(parent.children[0], a);
+  assert.strictEqual(parent.children[1], c, "insertBefore did not splice at the ref node's index");
+  assert.strictEqual(parent.children[2], b);
+  assert.strictEqual(c.parentNode, parent, "insertBefore did not set the new node's parent link");
+
+  const d = MVFigures.el('span');
+  parent.insertBefore(d, null);                     // refNode null: append
+  assert.strictEqual(parent.children.length, 4);
+  assert.strictEqual(parent.children[3], d, 'insertBefore(node, null) did not append');
+
+  const stranger = MVFigures.el('div');
+  const e = MVFigures.el('span');
+  parent.insertBefore(e, stranger);                 // stranger is not parent's child: append, not corrupt
+  assert.strictEqual(parent.children.length, 5,
+    "insertBefore with a refNode that is not this node's child must append safely, not splice at a bogus index");
+  assert.strictEqual(parent.children[4], e);
+  assert.strictEqual(parent.children[0], a, 'earlier children must be undisturbed');
+});
+
+check('dom-stub firstChild returns children[0], or null on an empty node', () => {
+  const empty = MVFigures.el('div');
+  assert.strictEqual(empty.firstChild, null);
+  const parent = MVFigures.el('div');
+  const a = MVFigures.el('span'), b = MVFigures.el('span');
+  parent.appendChild(a); parent.appendChild(b);
+  assert.strictEqual(parent.firstChild, a);
+});
+
 check('tapping the backdrop closes the lightbox', () => {
   MVFigures.openLightbox(PLATE_PACK, 'pl');
   const box = lbs()[0];
@@ -218,6 +252,123 @@ check('double-tap zooms a wrapper holding both image and overlay, so they scale 
   assert.strictEqual(wrap.classList.contains('zoomed'), true);
   assert.strictEqual(img.classList.contains('zoomed'), false,
     '.zoomed must live on the wrapper, not the image, or the overlay would not scale with it');
+});
+
+// ---------- Task 6: attachReveal / renderRevealCard ----------
+const REVEAL_PACK = { meta: { id: 'demo-reveal', subject: 'sci' },
+  figures: [{ id: 'rf1', kind: 'photo', src: 'art/demo/r1.jpg', caption: 'cap', credit: 'cred', alt: 'a' }],
+  levels: [
+    { id: 1, name: 'L1', reveal: { figureId: 'rf1' } },     // resolvable
+    { id: 2, name: 'L2', reveal: { figureId: 'missing' } }, // unresolvable figureId
+    { id: 3, name: 'L3' },                                  // no reveal field at all
+  ] };
+const REVEAL_PACK_HIST = { meta: { id: 'demo-reveal-hist', subject: 'hist' }, figures: REVEAL_PACK.figures,
+  levels: [{ id: 1, name: 'L1', reveal: { figureId: 'rf1' } }] };
+const REVEAL_PLATE_PACK = { meta: { id: 'demo-reveal-plate', subject: 'sci' },
+  figures: [{ id: 'pf1', kind: 'plate', caption: 'pcap', credit: 'pcred', alt: 'pa',
+    views: [{ src: 'art/demo/p1.jpg', label: 'v1' }] }],
+  levels: [{ id: 1, name: 'L1', reveal: { figureId: 'pf1' } }] };
+
+function barWithTwoChildren() {
+  const bar = MVFigures.el('div', 'mv-bar');
+  bar.appendChild(MVFigures.el('div', 'mv-prog'));
+  bar.appendChild(MVFigures.el('div', 'mv-hearts'));
+  return bar;
+}
+
+check('attachReveal inserts a themed strip of `total` cells between prog and hearts', () => {
+  const bar = barWithTwoChildren();
+  const reveal = MVFigures.attachReveal(bar, REVEAL_PACK, REVEAL_PACK.levels[0], 5);
+  assert.ok(reveal && typeof reveal.onCorrect === 'function', 'attachReveal did not return an onCorrect handle');
+  assert.strictEqual(bar.children.length, 3, 'strip was not inserted into the bar');
+  const strip = bar.children[1];
+  assert.strictEqual(bar.children[0].className, 'mv-prog', 'strip did not land between prog and hearts');
+  assert.strictEqual(bar.children[2].className, 'mv-hearts', 'strip did not land between prog and hearts');
+  const classes = String(strip.className).split(' ');
+  assert.ok(classes.includes('mv-reveal-strip'), 'strip is missing its own class');
+  assert.ok(classes.includes('rv-sci'), 'a sci pack did not get the rv-sci theme');
+  assert.strictEqual(strip.children.length, 5, 'cell count did not match `total`');
+  for (const c of strip.children) assert.strictEqual(c.className, 'mv-rv-cell');
+});
+
+check('attachReveal themes a hist pack rv-hist', () => {
+  const bar = barWithTwoChildren();
+  const reveal = MVFigures.attachReveal(bar, REVEAL_PACK_HIST, REVEAL_PACK_HIST.levels[0], 3);
+  assert.ok(reveal);
+  const classes = String(bar.children[1].className).split(' ');
+  assert.ok(classes.includes('rv-hist'), 'a hist pack did not get the rv-hist theme');
+});
+
+check('attachReveal.onCorrect marks the right cell found, and is idempotent', () => {
+  const bar = barWithTwoChildren();
+  const reveal = MVFigures.attachReveal(bar, REVEAL_PACK, REVEAL_PACK.levels[0], 4);
+  const strip = bar.children[1];
+  reveal.onCorrect(2);
+  assert.strictEqual(strip.children[2].classList.contains('found'), true, 'onCorrect(2) did not mark cell 2');
+  assert.strictEqual(strip.children[0].classList.contains('found'), false, 'onCorrect(2) marked a cell it should not have');
+  reveal.onCorrect(2);   // idempotent
+  assert.strictEqual(strip.children[2].classList.contains('found'), true);
+  assert.doesNotThrow(() => reveal.onCorrect(99), 'an out-of-range index must not throw');
+});
+
+check('attachReveal returns null and touches the bar not at all for a reveal-less or unresolvable level', () => {
+  const bar1 = barWithTwoChildren();
+  assert.strictEqual(MVFigures.attachReveal(bar1, REVEAL_PACK, REVEAL_PACK.levels[2], 4), null,
+    'a level with no reveal field must return null');
+  assert.strictEqual(bar1.children.length, 2, 'a reveal-less level must not insert anything into the bar');
+
+  const bar2 = barWithTwoChildren();
+  assert.strictEqual(MVFigures.attachReveal(bar2, REVEAL_PACK, REVEAL_PACK.levels[1], 4), null,
+    'an unresolvable figureId must return null');
+  assert.strictEqual(bar2.children.length, 2, 'an unresolvable figureId must not insert anything into the bar');
+});
+
+check("renderRevealCard builds a card with the figure image, a 12-tile cover grid, caption and credit", () => {
+  const host = MVFigures.el('div');
+  const ok = MVFigures.renderRevealCard(REVEAL_PACK, 0, host);
+  assert.strictEqual(ok, true);
+  assert.strictEqual(host.children.length, 1, 'renderRevealCard did not append the card to hostEl');
+  const card = host.children[0];
+  assert.strictEqual(card.className, 'mv-rv-card');
+  const frame = card.children[0];
+  assert.strictEqual(frame.className, 'mv-rv-frame');
+  const img = frame.children[0];
+  assert.strictEqual(img.getAttribute('src'), 'art/demo/r1.jpg');
+  assert.strictEqual(img.getAttribute('alt'), 'a');
+  const grid = frame.children[1];
+  assert.strictEqual(grid.className, 'mv-rv-grid');
+  assert.strictEqual(grid.children.length, 12, 'the cover grid must be exactly 12 tiles');
+  for (const t of grid.children) assert.strictEqual(t.className, 'mv-rv-tile');
+  assert.strictEqual(card.children[1].className, 'mv-rv-cap');
+  assert.strictEqual(card.children[1].textContent, 'cap');
+  assert.strictEqual(card.children[2].className, 'mv-lb-credit');
+  assert.strictEqual(card.children[2].textContent, 'cred');
+});
+
+check("renderRevealCard uses a plate figure's first view src", () => {
+  const host = MVFigures.el('div');
+  assert.strictEqual(MVFigures.renderRevealCard(REVEAL_PLATE_PACK, 0, host), true);
+  const img = host.children[0].children[0].children[0];
+  assert.strictEqual(img.getAttribute('src'), 'art/demo/p1.jpg');
+  assert.strictEqual(img.getAttribute('alt'), 'pa');
+});
+
+check('renderRevealCard renders alt="" for a figure with no alt, never alt="undefined" (matches the strip/lightbox convention)', () => {
+  const noAltPack = { meta: { id: 'demo-reveal-noalt', subject: 'sci' },
+    figures: [{ id: 'na1', kind: 'photo', src: 'art/demo/na.jpg', caption: 'c', credit: 'cr' }],
+    levels: [{ id: 1, name: 'L1', reveal: { figureId: 'na1' } }] };
+  const host = MVFigures.el('div');
+  MVFigures.renderRevealCard(noAltPack, 0, host);
+  const img = host.children[0].children[0].children[0];
+  assert.strictEqual(img.getAttribute('alt'), '');
+});
+
+check('renderRevealCard returns false and appends nothing for a reveal-less level, an unresolvable one, or a missing host', () => {
+  const host = MVFigures.el('div');
+  assert.strictEqual(MVFigures.renderRevealCard(REVEAL_PACK, 2, host), false, 'reveal-less level must return false');
+  assert.strictEqual(MVFigures.renderRevealCard(REVEAL_PACK, 1, host), false, 'unresolvable figureId must return false');
+  assert.strictEqual(MVFigures.renderRevealCard(REVEAL_PACK, 0, null), false, 'a missing host must return false');
+  assert.strictEqual(host.children.length, 0, 'a false-returning call must not append anything');
 });
 
 console.log(failures ? `figures.test: ${failures} FAILURE(S)` : 'figures.test: all clean');

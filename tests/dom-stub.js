@@ -85,6 +85,24 @@ function makeEl(tag) {
     // silently SKIPS any `if (node.parentNode)` branch, so the suite cannot see that code at all. That
     // is how shorttext.reveal's duplicate-append defect stayed invisible to a probe written to catch it.
     get parentNode() { return node._parent || null; },
+    // engine/figures.js's attachReveal inserts the reveal strip between an existing prog/hearts
+    // pair: `barEl.insertBefore(strip, barEl.children[1] || null)`. Splices at refNode's index
+    // when refNode is a real child of this node; appends for a null/absent refNode (the common
+    // case here) AND for a refNode that is not actually this node's child, rather than letting
+    // `indexOf` return -1 flow into `splice(-1, 0, ...)`, which would silently insert before the
+    // LAST child instead of at the end -- the exact class of corruption removeChild's own fix
+    // above exists to prevent, just on the insert side instead of the remove side.
+    insertBefore(newNode, refNode) {
+      const i = refNode ? node.children.indexOf(refNode) : -1;
+      if (i === -1) node.children.push(newNode);
+      else node.children.splice(i, 0, newNode);
+      if (newNode) newNode._parent = node;
+      return newNode;
+    },
+    // engine/figures.js's renderItemFigure (Task 7) reads `itemBox.firstChild` to insert a figure
+    // before the stem rather than after it; without this, `insertBefore(wrap, undefined)` would
+    // silently degrade to an append, changing where the figure renders with no test noticing.
+    get firstChild() { return node.children[0] || null; },
   };
   return node;
 }

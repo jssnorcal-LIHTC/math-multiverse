@@ -4052,6 +4052,7 @@ function showPackLevelComplete(entry, pack, levelIndex, score, stars) {
       <div class="lc-level">L${lv.id} &middot; ${lv.name}</div>
       <div class="lc-stars">${starsHtml}</div>
       <div class="lc-score">Score: <strong>${score}</strong></div>
+      <div id="lc-reveal"></div>
       <div class="lc-actions">
         <button class="btn btn-secondary" id="lc-back">&larr; Levels</button>
         <button class="btn btn-secondary" id="lc-retry">Retry</button>
@@ -4062,6 +4063,14 @@ function showPackLevelComplete(entry, pack, levelIndex, score, stars) {
   const back = $('lc-back');   if (back)  back.addEventListener('click', () => renderPackLevels(entry, pack));
   const retry = $('lc-retry'); if (retry) retry.addEventListener('click', () => playLevel(levelIndex));
   const next  = $('lc-next');  if (next)  next.addEventListener('click', () => playLevel(levelIndex + 1));
+  // `pack` and `levelIndex` are already this function's own parameters, so read the reveal
+  // straight off them rather than re-fetching through the module-level currentPackId: a stale
+  // or null currentPackId at completion-screen time would make MVPack.get return undefined and
+  // the reveal silently not render, with nothing to say why. stars > 0 gates this so a failed
+  // level (0 stars) does not hand out the artifact; a retry that clears it does.
+  if (typeof MVFigures !== 'undefined' && stars > 0) {
+    try { MVFigures.renderRevealCard(pack, levelIndex, $('lc-reveal')); } catch (e) {}
+  }
 }
 
 function exitToLevels() {
