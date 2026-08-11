@@ -44,5 +44,22 @@ check('validate-pack enum twins match engine enums', () => {
   assert.deepStrictEqual(vp.DOC_KINDS, MVFigures.DOC_KINDS);
 });
 
+check('renderStrip appends a capped strip with one button per resolvable id', () => {
+  const host = MVFigures.el('div');
+  const strip = MVFigures.renderStrip(PACK, ['f1', 'missing'], host);
+  assert.ok(strip && strip.className === 'mv-figs');
+  const buttons = strip.children.filter ? strip.children.filter(c => c.className === 'mv-fig')
+    : Array.from(strip.children).filter(c => c.className === 'mv-fig');
+  assert.strictEqual(buttons.length, 1);
+  const img = buttons[0].children[0];
+  assert.strictEqual(img.getAttribute('alt'), 'a');
+  assert.strictEqual(img.getAttribute('loading'), 'lazy');
+});
+check('renderStrip with zero resolvable ids appends nothing and returns null', () => {
+  const host = MVFigures.el('div');
+  assert.strictEqual(MVFigures.renderStrip(PACK, ['missing'], host), null);
+  assert.strictEqual(host.children.length, 0);
+});
+
 console.log(failures ? `figures.test: ${failures} FAILURE(S)` : 'figures.test: all clean');
 process.exit(failures ? 1 : 0);

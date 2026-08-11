@@ -290,6 +290,20 @@ check('makeRunner survives a throwing MVFresh.markSeenIds and still renders the 
   }
 });
 
+check('runner renders a passage item with NO MVFigures loaded (degrade path)', () => {
+  // dom-stub environment never requires engine/figures.js, so there is no MVFigures global; a
+  // figure-bearing passage must still render text-only rather than throw (optional-layer law).
+  const Items = require('../engine/items.js');
+  const pack = probePack();
+  pack.passages[0].figureIds = ['f1'];
+  pack.passages[0].docKind = 'case-file';
+  const host = makeEl('div');
+  const Save = spySave();
+  const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+  assert.strictEqual(host.querySelectorAll('.mv-passage').length, 1, 'passage did not render');
+  cleanup();
+});
+
 check('the factory can reach the globals the browser gives it', () => {
   // The bug this replaces: the UMD factory referenced `root`, which is the WRAPPER's parameter, so it was
   // out of scope inside the factory and every global lookup threw ReferenceError. The wrapper now passes

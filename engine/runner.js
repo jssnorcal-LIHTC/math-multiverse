@@ -192,6 +192,14 @@
           for (const para of String(passage.text).split(/\n\s*\n/)) {
             passageBox.appendChild(el('p', 'mv-para', para.trim()));
           }
+          passageBox.dataset.dockind = passage.docKind || '';
+          // Optional layer, same call-time-resolution and try/catch stance as MVFresh above: a
+          // figure bug must never cost the child the level, and a missing figures.js must
+          // degrade to today's text-only passage rendering.
+          const FG = (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
+          if (FG && Array.isArray(passage.figureIds)) {
+            try { FG.renderStrip(pack, passage.figureIds, passageBox); } catch (e) {}
+          }
         }
         passageBox.style.display = '';
       } else {

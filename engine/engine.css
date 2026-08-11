@@ -38,6 +38,16 @@
 .mv-passage-title { font-weight: 700; margin-bottom: 6px; color: var(--mv-color, #7aa8ff); }
 .mv-para { margin: 0 0 8px; line-height: 1.5; font-size: 0.95rem; }
 
+/* Figure strip: capped so prose stays dominant; it scrolls WITH the passage, so the
+   reading-surface floor is untouched.  The 104px cap is gated (figures-offline). */
+.mv-figs { display: flex; gap: 8px; margin: 4px 0 8px; max-height: 104px; }
+.mv-fig { position: relative; border: 1px solid var(--border-subtle); border-radius: 7px;
+  padding: 0; background: none; cursor: pointer; overflow: hidden; max-height: 104px; }
+.mv-fig-img { display: block; height: 96px; width: auto; max-width: 240px; object-fit: cover; }
+.mv-fig-badge { position: absolute; left: 4px; bottom: 4px; font-size: 0.62rem;
+  letter-spacing: 0.08em; font-weight: 700; padding: 1px 5px; border-radius: 4px;
+  background: rgba(0,0,0,0.62); color: var(--mv-color, #7aa8ff); }
+
 /* The item is now the side that gives. `flex: 0 1 auto` plus `min-height: 0` lets it shrink below its
    content, and it scrolls what does not fit rather than evicting the passage. `min-height: 0` is
    required: a flex item will not shrink below its content without it, which is the usual reason this
