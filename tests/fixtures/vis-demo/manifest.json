@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "packs": [
+    {
+      "id": "vis-demo",
+      "subject": "ela",
+      "subjectLabel": "English",
+      "grade": 6,
+      "title": "Vis Demo Fixture",
+      "standards": "fixture-only, not a real pack",
+      "icon": "🧪",
+      "color": "#7aa8ff",
+      "badgeUrl": "tests/fixtures/vis-demo/f-chart.svg",
+      "description": "Fixture pack for tests/figures-offline.js. Never registered in the real packs/manifest.json.",
+      "levels": 2,
+      "grandGoal": "Fixture Complete",
+      "unlocked": true
+    }
+  ]
+}

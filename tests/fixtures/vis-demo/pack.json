@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "id": "vis-demo",
+    "subject": "ela",
+    "title": "Vis Demo Fixture",
+    "grade": 6,
+    "version": 1
+  },
+  "repeatPolicy": "rotate",
+  "passages": [
+    {
+      "id": "p1",
+      "title": "Outpost Delta Weather Log",
+      "source": "original",
+      "genre": "informational",
+      "docKind": "weather-log",
+      "figureIds": ["fig-photo", "fig-chart", "fig-plate"],
+      "text": "Outpost Delta keeps a weather log every morning. A tech reads the sensor feed and checks it against the backup gauge, then writes both numbers in the same entry. Some mornings the two readings do not match, and when that happens the tech flags the entry rather than picking one number and moving on.\n\nLast week the backup gauge read colder than the sensor for four days straight, and a newer tech guessed the sensor had failed and trusted the backup gauge instead. The senior recorder checked the repair log first. She found the backup gauge had just been serviced with a part that reads low in cold air."
+    },
+    {
+      "id": "p2",
+      "title": "The Logbook Behind the Shelf",
+      "source": "original",
+      "genre": "literary",
+      "docKind": "recovered-entry",
+      "text": "Mara found the old logbook wedged behind a shelf in the supply room, its cover soft with damp. She almost left it there. Something about the handwriting on the first page made her sit down on an overturned crate and start reading instead.\n\nThe entries were written by a keeper long before Mara's own shift began. Each one described a small repair, a strange noise, an animal seen near the fence at night. Mara read three entries before she noticed the same signature appeared twice with two different dates written days apart, as if someone had gone back and touched the page again later."
+    }
+  ],
+  "figures": [
+    {
+      "id": "fig-photo",
+      "kind": "photo",
+      "caption": "Outpost Delta exterior camera, fixture image only.",
+      "credit": "Original artwork for this fixture, 2026.",
+      "alt": "A small weather station under a grey sky.",
+      "src": "tests/fixtures/vis-demo/f-photo.png"
+    },
+    {
+      "id": "fig-chart",
+      "kind": "chart",
+      "caption": "CO2 readings across three sampling days at Outpost Delta, fixture data only.",
+      "credit": "Original artwork for this fixture, 2026.",
+      "alt": "A line chart of CO2 parts per million rising across three days.",
+      "src": "tests/fixtures/vis-demo/f-chart.svg",
+      "gen": true,
+      "dataTable": {
+        "type": "line",
+        "xLabel": "day",
+        "yLabel": "CO2 (ppm)",
+        "series": [
+          { "label": "CO2", "points": [[1, 410], [2, 430], [3, 452]] }
+        ],
+        "notes": ["Fixture data; not a real measurement."]
+      }
+    },
+    {
+      "id": "fig-plate",
+      "kind": "plate",
+      "caption": "Two views of the same fixture plate, one with an evidence overlay.",
+      "credit": "Original artwork for this fixture, 2026.",
+      "alt": "A two-view illustrated plate used to test the lightbox.",
+      "views": [
+        { "label": "View A", "src": "tests/fixtures/vis-demo/plate-a.png" },
+        { "label": "View B", "src": "tests/fixtures/vis-demo/plate-b.png", "overlaySrc": "tests/fixtures/vis-demo/plate-b-overlay.svg" }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "type": "mc",
+      "passageId": "p1",
+      "targets": ["c1-inf-1-key-details"],
+      "coachTopic": "evidence-cross-check",
+      "dok": 2,
+      "stem": "According to the log entry, what did the senior recorder check before trusting either reading?",
+      "choices": [
+        "The repair log",
+        "The weather forecast",
+        "The technician's schedule",
+        "The outpost's power supply"
+      ],
+      "key": 0,
+      "explain": "The senior recorder checked the repair log first and found the backup gauge had just been serviced, which explained the cold reading without needing to guess.",
+      "distractorRationale": {
+        "1": "Confuses this log with a forecast; the passage never mentions predicting future weather.",
+        "2": "Mixes up checking equipment history with checking a person's work hours.",
+        "3": "Introduces a system, outpost power, that the passage never discusses at all."
+      }
+    },
+    {
+      "id": "i2",
+      "type": "mc",
+      "passageId": "p2",
+      "targets": ["c1-lit-1-key-details"],
+      "coachTopic": "inference-character",
+      "dok": 2,
+      "stem": "What made Mara decide to keep reading the logbook instead of putting it back?",
+      "choices": [
+        "The handwriting on the first page caught her attention",
+        "A coworker told her to read it",
+        "She recognized the keeper's name right away",
+        "The logbook was due back at a desk"
+      ],
+      "key": 0,
+      "explain": "The passage says something about the handwriting on the first page made her sit down and start reading, which is the detail that changed her mind about leaving it.",
+      "distractorRationale": {
+        "1": "Invents a coworker; no other character appears in this passage at all.",
+        "2": "The passage says the keeper wrote before Mara's shift, not that Mara recognized the name.",
+        "3": "Invents a due-back rule the passage never states."
+      }
+    },
+    {
+      "id": "i3",
+      "type": "mc",
+      "passageId": "p1",
+      "targets": ["c1-inf-6-text-structure"],
+      "coachTopic": "structure-chart-read",
+      "dok": 2,
+      "figureId": "fig-chart",
+      "stem": "The CO2 chart attached to the log shows three sampling days. What does the trend across those three days show?",
+      "choices": [
+        "A steady rise in CO2 across the three days",
+        "A steady drop in CO2 across the three days",
+        "No change in CO2 across the three days",
+        "A single day with no reading recorded at all"
+      ],
+      "key": 0,
+      "explain": "The chart's three points climb from 410 to 430 to 452 in order, which is a steady rise rather than a drop or a flat line across the sampled days.",
+      "distractorRationale": {
+        "1": "Reverses the direction of the trend; the values increase, they do not decrease.",
+        "2": "Ignores the plotted change entirely; the three values are not equal to each other.",
+        "3": "Invents a missing reading; all three sampled days carry a plotted value on the chart."
+      }
+    },
+    {
+      "id": "i4",
+      "type": "mc",
+      "passageId": "p2",
+      "targets": ["c1-lit-4-reasoning"],
+      "coachTopic": "inference-signature-detail",
+      "dok": 3,
+      "stem": "What detail makes Mara suspect someone went back and altered the logbook after it was first written?",
+      "choices": [
+        "The same signature appears twice with different dates written days apart",
+        "The ink color changes partway through one entry",
+        "A page is torn out near the end of the book",
+        "The keeper's name is spelled two different ways"
+      ],
+      "key": 0,
+      "explain": "The passage states the same signature appeared twice with two different dates written days apart, which suggests someone returned to the page later rather than writing it all at once.",
+      "distractorRationale": {
+        "1": "Invents an ink-color detail the passage never mentions.",
+        "2": "Invents a torn page; the passage says nothing about missing pages.",
+        "3": "Invents a spelling inconsistency; the passage never varies how the name is written."
+      }
+    }
+  ],
+  "levels": [
+    {
+      "id": 0,
+      "name": "Reading the Log",
+      "goal": "Read the weather log and its attached chart for key details and structure.",
+      "targets": ["c1-inf-1-key-details", "c1-inf-6-text-structure"],
+      "itemIds": ["i1", "i3"],
+      "questions": 2,
+      "reveal": { "figureId": "fig-photo" }
+    },
+    {
+      "id": 1,
+      "name": "Reading the Logbook",
+      "goal": "Read the recovered logbook entries for key details and reasoned inference.",
+      "targets": ["c1-lit-1-key-details", "c1-lit-4-reasoning"],
+      "itemIds": ["i2", "i4"],
+      "questions": 2
+    }
+  ]
+}
