@@ -93,6 +93,13 @@ const DEFAULT_ACCENT = '#7aa8ff';
 const LABEL_FONT = 22, TICK_FONT = 20, NOTE_FONT = 18;
 const TICK_Y_OFF = 24, TITLE_Y_OFF = 50, NOTES_Y_START = 74;
 const Y_LABEL_ROW = 28;
+const TICK_LABEL_H = TICK_FONT * 1.1; // vertical extent of a horizontally-set tick label's own
+                                       // box at TICK_FONT -- 22px at TICK_FONT=20, confirmed with
+                                       // a real browser's getBBox() against this generator's own
+                                       // committed SVG output, not a guess. A full-height chart's
+                                       // plot easily clears MIN_PLOT_H/TICKS_TARGET against this;
+                                       // a panels-mode panel, at roughly a third the height, does
+                                       // not -- see niceTicksFit below, used only by layoutPanels().
 
 function n2(x) {
   // Fixed 2-decimal formatting with trailing zeros stripped. toFixed is spec-defined (not
@@ -168,6 +175,25 @@ function niceTicks(lo, hi, targetCount, integerOnly) {
   const ticks = [];
   for (let i = 0; i <= n; i++) ticks.push(niceLo + i * step);
   return { ticks, lo: niceLo, hi: niceHi };
+}
+
+// Panel tick density fix: a height-aware wrapper around niceTicks(), used only where the available
+// plot height is short enough that the flat TICKS_TARGET can produce labels too dense to avoid
+// overlapping each other (panels mode -- see layoutPanels). maxDivisions is the most divisions
+// TICK_LABEL_H-tall labels can occupy in a plot of the caller's own height with zero label-to-
+// label overlap (panelH / TICK_LABEL_H). targetCount is capped to it going in, but niceStep's own
+// ceil/floor widening of [lo,hi] out to a round number can still add a division beyond whatever
+// target was asked for -- dome-drift's own CO2 panel does exactly this today, asking for 5 and
+// getting 6 -- so the actual result is verified after the fact and backed off further only if it
+// still does not fit, rather than trusting the target as a hard cap.
+function niceTicksFit(lo, hi, targetCount, integerOnly, maxDivisions) {
+  let target = Math.min(targetCount, maxDivisions);
+  let nice = niceTicks(lo, hi, target, integerOnly);
+  while (nice.ticks.length - 1 > maxDivisions && target > 1) {
+    target -= 1;
+    nice = niceTicks(lo, hi, target, integerOnly);
+  }
+  return nice;
 }
 
 function estimateTextWidth(text, fontSize) {
@@ -309,6 +335,15 @@ function layoutPanels(dataTable) {
     refuse(`too many footer notes; each panel would collapse to ${n2(panelH)}px, below the ${MIN_PANEL_H}px minimum`);
   }
 
+  // Panel tick density fix: cap divisions to what panelH can actually hold at TICK_LABEL_H before
+  // computing each panel's own ticks, rather than handing every panel the same flat TICKS_TARGET a
+  // full-height chart uses. A panels-mode panel is roughly a third the height of a full plot, so
+  // the flat target can (and, pre-fix, did -- fig-climographs' rainfall panel) ask for more labels
+  // than the panel's own height can hold without their boxes overlapping. maxTickDivisions only
+  // ever REDUCES from TICKS_TARGET, never grows past it, so a panel tall enough to clear the flat
+  // default (dome-drift's panels, both comfortably under this cap) renders byte-identical to before.
+  const maxTickDivisions = Math.max(1, Math.floor(panelH / TICK_LABEL_H));
+
   // Per-panel y-domain/ticks first, THEN a single shared left margin sized from the widest tick
   // label across BOTH panels, so the two plots' left edges line up vertically.
   const panelYNice = pointsPerPanel.map((points) => {
@@ -316,7 +351,7 @@ function layoutPanels(dataTable) {
     const yDomainRaw = type === 'bar'
       ? paddedExtent([Math.min(0, ...allY), Math.max(0, ...allY)])
       : paddedExtent(allY);
-    return niceTicks(yDomainRaw[0], yDomainRaw[1], TICKS_TARGET, false);
+    return niceTicksFit(yDomainRaw[0], yDomainRaw[1], TICKS_TARGET, false, maxTickDivisions);
   });
   const plotL = panelYNice.reduce((m, yNice) => Math.max(m, leftMarginFor(yNice.ticks.map((v) => n2(v)))), MIN_LEFT);
   const plotR = VB_W - RIGHT;
@@ -592,7 +627,7 @@ module.exports = {
   genSvg, renderFigure, resolveAccent, chartTargets, regenerate, layout,
   layoutPanels, genSvgPanels,
   INK, GRID, PLOT_GRID, DEFAULT_ACCENT, GLYPH_W, VB_W, VB_H, MAX_NOTES, MIN_PLOT_H,
-  PANEL_GAP, MIN_PANEL_H,
+  PANEL_GAP, MIN_PANEL_H, TICK_LABEL_H,
 };
 
 if (require.main === module) process.exit(main(process.argv));
