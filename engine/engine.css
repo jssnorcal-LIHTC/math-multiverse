@@ -209,6 +209,31 @@
 .mv-rv-card .mv-lb-credit { max-width: min(560px, 86vw); white-space: nowrap; overflow: hidden;
   text-overflow: ellipsis; flex-shrink: 0; }
 
+/* Fix round 3: on short viewports the FIGURE wins and the card's duplicated caption/credit
+   yield, by controller ruling. The completion card's caption/credit are a convenience copy
+   (the full caption and credit both still render in the lightbox this figure's own strip/rail
+   thumb opens, untouched by this rule -- see .mv-lb-cap/.mv-lb-credit above, which this
+   selector does not touch), and a convenience does not get to shrink the reward it is sitting
+   next to down to a postage stamp.
+
+   716px is not a round number chosen for looks; it is the measured crossing point. Swept
+   viewport heights in 4px steps with this exact fixture (a two-line caption, a long
+   single-line credit, `flex-shrink: 0` already applied) and read .mv-rv-img's own
+   getBoundingClientRect height at each: 716px -> 119px tall, 720px -> 123px tall. Below 716px
+   the reward, with both text rows still reserving their own fixed-height chrome, cannot clear
+   roughly 120px no matter how it is arranged; at and above 720px the CURRENT layout already
+   clears that bar on its own, so nothing needs to give there. `max-height: 716px` is therefore
+   the exact height at which hiding the text stops being necessary, not a margin picked around
+   it. Below the breakpoint, removing .mv-rv-cap/.mv-rv-card .mv-lb-credit from the flex layout
+   hands their reserved space to .mv-rv-frame automatically (ordinary flexbox: one fewer sibling
+   competing for the same column), no extra sizing rule required. Re-measured with the fix
+   applied at the two real device heights this project targets: 654px -> 108x131 (was 47x57),
+   694px -> 142x171 (was 80x97); both now clear the 120px bar the breakpoint itself protects,
+   where neither did before. */
+@media (max-height: 716px) {
+  .mv-rv-cap, .mv-rv-card .mv-lb-credit { display: none; }
+}
+
 /* .mv-rv-cell and .mv-rv-tile are real as of Task 6 (both defined above); listed here for real
    reduced-motion coverage, not just future-proofing. .mv-flash.stamp-* remains a forward
    reference -- Task 7 adds those classes later on this same branch -- kept here so that rule
