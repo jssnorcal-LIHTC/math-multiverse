@@ -29,7 +29,7 @@ const fs = require('fs');
 const path = require('path');
 const {
   genSvg, renderFigure, resolveAccent, chartTargets, regenerate, layout,
-  INK, GRID, GLYPH_W,
+  layoutPanels, INK, GRID, GLYPH_W, PANEL_GAP, MIN_PANEL_H,
 } = require('../build/figure-gen.js');
 
 const REPO_ROOT = path.join(__dirname, '..');
@@ -322,6 +322,205 @@ check('excess footer notes are clamped: plot height never collapses, no negative
     if (el.width !== undefined) assertTrue(Number(el.width) >= 0, `negative width: ${JSON.stringify(el)}`);
     if (el.height !== undefined) assertTrue(Number(el.height) >= 0, `negative height: ${JSON.stringify(el)}`);
   });
+});
+
+// ---- panels mode (Task 4, V2): the SAME truthfulness scrutiny given the original single-series
+// path above, so a self-consistent-but-wrong genSvgPanels bug cannot hide behind a clean byte
+// compare the way the original fix-round-1 defect did before item 3 closed that gap. ----
+
+const SAMPLE_PANELS_LINE = {
+  panels: [
+    { type: 'line', yLabel: 'ppm-like unit', series: [{ points: [[1, 400], [2, 420], [3, 450]] }] },
+    { type: 'line', yLabel: 'percent-like unit', series: [{ points: [[1, 20], [2, 19], [3, 18]] }] },
+  ],
+  xLabel: 'day',
+  notes: ['Sample data for the panels unit check.'],
+};
+const SAMPLE_PANELS_BAR = {
+  panels: [
+    { type: 'bar', yLabel: 'metric A', series: [{ points: [[0, 9], [1, 42]] }] },
+    { type: 'bar', yLabel: 'metric B', series: [{ points: [[0, 68], [1, 33]] }] },
+  ],
+  categoryLabels: ['Sable Flats', 'Cairn Bay'],
+};
+
+check('panels: genSvg is deterministic for both line and bar panels', () => {
+  assertTrue(genSvg(SAMPLE_PANELS_LINE, ACCENT) === genSvg(SAMPLE_PANELS_LINE, ACCENT), 'line panels: two calls differed');
+  assertTrue(genSvg(SAMPLE_PANELS_BAR, ACCENT) === genSvg(SAMPLE_PANELS_BAR, ACCENT), 'bar panels: two calls differed');
+});
+
+check('panels: output has an <svg root and both panel yLabels appear', () => {
+  const svg = genSvg(SAMPLE_PANELS_LINE, ACCENT);
+  assertTrue(svg.startsWith('<svg'), 'output does not start with <svg');
+  assertTrue(svg.includes('ppm-like unit'), 'panel 0 yLabel missing');
+  assertTrue(svg.includes('percent-like unit'), 'panel 1 yLabel missing');
+});
+
+check('panels: every text element computes font-size >= 15 (line and bar)', () => {
+  const sizes = allFontSizes(genSvg(SAMPLE_PANELS_LINE, ACCENT)).concat(allFontSizes(genSvg(SAMPLE_PANELS_BAR, ACCENT)));
+  assertTrue(sizes.length > 0, 'no text elements found at all');
+  const under = sizes.filter((n) => n < 15);
+  assertTrue(under.length === 0, `found font-size(s) under 15: ${JSON.stringify(under)}`);
+});
+
+check('panels: accent color appears in both panel types', () => {
+  assertTrue(genSvg(SAMPLE_PANELS_LINE, ACCENT).includes(ACCENT), 'accent missing from line-panels output');
+  assertTrue(genSvg(SAMPLE_PANELS_BAR, ACCENT).includes(ACCENT), 'accent missing from bar-panels output');
+});
+
+check('panels: mutating EITHER panel changes the output (each panel\'s data actually reaches the picture)', () => {
+  const before = genSvg(SAMPLE_PANELS_LINE, ACCENT);
+  const mutateP0 = JSON.parse(JSON.stringify(SAMPLE_PANELS_LINE));
+  mutateP0.panels[0].series[0].points[0][1] += 37;
+  assertTrue(genSvg(mutateP0, ACCENT) !== before, 'mutating panel 0 did not change output -- panel 0 data may not reach the picture');
+  const mutateP1 = JSON.parse(JSON.stringify(SAMPLE_PANELS_LINE));
+  mutateP1.panels[1].series[0].points[0][1] += 37;
+  assertTrue(genSvg(mutateP1, ACCENT) !== before, 'mutating panel 1 did not change output -- panel 1 data may not reach the picture (e.g. panel 0 rendered twice)');
+});
+
+check('panels (line): exactly one polyline PER PANEL, each with one vertex per its own series point, x non-decreasing', () => {
+  const svg = genSvg(SAMPLE_PANELS_LINE, ACCENT);
+  const polylines = parseTagAttrs(svg, 'polyline');
+  assertTrue(polylines.length === 2, `expected 2 polylines (one per panel), got ${polylines.length}`);
+  polylines.forEach((pl, i) => {
+    const verts = pl.points.trim().split(/\s+/).map((s) => s.split(',').map(Number));
+    const expected = SAMPLE_PANELS_LINE.panels[i].series[0].points.length;
+    assertTrue(verts.length === expected, `panel ${i}: expected ${expected} vertices, got ${verts.length}`);
+    for (let j = 1; j < verts.length; j++) {
+      assertTrue(verts[j][0] >= verts[j - 1][0], `panel ${i}: x-coordinates not non-decreasing: ${JSON.stringify(verts.map((v) => v[0]))}`);
+    }
+  });
+});
+
+check('panels (bar): one accent rect PER POINT PER PANEL, each rect\'s box inside ITS OWN panel\'s plot rect', () => {
+  const svg = genSvg(SAMPLE_PANELS_BAR, ACCENT);
+  const g = layoutPanels(SAMPLE_PANELS_BAR);
+  const rects = parseTagAttrs(svg, 'rect').filter((r) => r.fill === ACCENT);
+  const expectedTotal = SAMPLE_PANELS_BAR.panels.reduce((s, p) => s + p.series[0].points.length, 0);
+  assertTrue(rects.length === expectedTotal, `expected ${expectedTotal} bar rects total, got ${rects.length}`);
+  // Panel 0's rects come first in draw order (panels are drawn top to bottom, in order).
+  const perPanel = SAMPLE_PANELS_BAR.panels.map((p) => p.series[0].points.length);
+  let idx = 0;
+  g.panelLayouts.forEach((panel, pi) => {
+    for (let k = 0; k < perPanel[pi]; k++, idx++) {
+      const r = rects[idx];
+      const x0 = Number(r.x), y0 = Number(r.y), x1 = x0 + Number(r.width), y1 = y0 + Number(r.height);
+      assertTrue(x0 >= g.plotL - 0.5 && x1 <= g.plotR + 0.5, `panel ${pi} rect ${k}: x-range [${x0},${x1}] escapes [${g.plotL},${g.plotR}]`);
+      assertTrue(y0 >= panel.plotT - 0.5 && y1 <= panel.plotB + 0.5, `panel ${pi} rect ${k}: y-range [${y0},${y1}] escapes ITS OWN panel plot [${panel.plotT},${panel.plotB}], not just the canvas -- this is exactly the check that would catch a panel drawing into the wrong vertical band`);
+    }
+  });
+});
+
+check('panels (bar): category axis renders the STRING labels verbatim, not the numeric n2() fallback', () => {
+  const svg = genSvg(SAMPLE_PANELS_BAR, ACCENT);
+  const g = layoutPanels(SAMPLE_PANELS_BAR);
+  const lastPlotB = g.panelLayouts[g.panelLayouts.length - 1].plotB;
+  // Identify the CATEGORY-axis text elements specifically (anchor=middle, below the plot: this
+  // sample carries no xLabel, so the only middle-anchored text down there is the category row)
+  // rather than scanning the whole SVG, since a bar chart's own y-tick labels legitimately include
+  // "0" (the zero baseline) and a blanket string search would false-positive on that.
+  const categoryTexts = parseTexts(svg).filter((t) => t.anchor === 'middle' && t.y > lastPlotB);
+  assertTrue(categoryTexts.length === 2, `expected 2 category-axis text elements, got ${categoryTexts.length}`);
+  const texts = categoryTexts.map((t) => t.text);
+  assertTrue(texts.includes('Sable Flats'), `category label "Sable Flats" not found verbatim among ${JSON.stringify(texts)}`);
+  assertTrue(texts.includes('Cairn Bay'), `category label "Cairn Bay" not found verbatim among ${JSON.stringify(texts)}`);
+});
+
+check('panels: renderFigure names the figure id and the reason on a panels refusal', () => {
+  const fig = { id: 'poison-panels-count', dataTable: { panels: [{ type: 'line', series: [{ points: [[1, 1]] }] }] } };
+  let threw = false, msg = '';
+  try { renderFigure(fig, ACCENT); } catch (e) { threw = true; msg = e.message; }
+  assertTrue(threw, 'renderFigure did not throw for a 1-panel table');
+  assertTrue(msg.includes('poison-panels-count'), `message missing figure id: ${msg}`);
+  assertTrue(/exactly 2 panels/.test(msg), `message missing the reason: ${msg}`);
+});
+
+check('panels: text boxes for both sample tables (and a long category-label case) lie inside the 800x450 canvas', () => {
+  const longLabels = { panels: SAMPLE_PANELS_BAR.panels, categoryLabels: ['A Post With A Genuinely Long Name', 'Cairn Bay'] };
+  [SAMPLE_PANELS_LINE, SAMPLE_PANELS_BAR, longLabels].forEach((t) => {
+    const svg = genSvg(t, ACCENT);
+    parseTexts(svg).forEach((el) => {
+      const b = textBBox(el);
+      assertTrue(b.left >= -1 && b.right <= 801, `text "${el.text}" escapes canvas horizontally: [${b.left.toFixed(1)},${b.right.toFixed(1)}]`);
+      assertTrue(b.top >= -1 && b.bottom <= 451, `text "${el.text}" escapes canvas vertically: [${b.top.toFixed(1)},${b.bottom.toFixed(1)}]`);
+    });
+  });
+});
+
+check('panels: refuses non-finite point values inside either panel, naming that panel', () => {
+  const t = {
+    panels: [
+      { type: 'line', series: [{ points: [[1, 10], [2, NaN]] }] },
+      { type: 'line', series: [{ points: [[1, 10], [2, 20]] }] },
+    ],
+  };
+  let threw = false, msg = '';
+  try { genSvg(t, ACCENT); } catch (e) { threw = true; msg = e.message; }
+  assertTrue(threw, 'did not throw for a non-finite point inside panel 0');
+  assertTrue(msg.startsWith('panels[0]:'), `message did not name the panel: ${msg}`);
+});
+
+check('panels: refuses a panel count other than 2', () => {
+  [1, 3].forEach((n) => {
+    const t = { panels: Array.from({ length: n }, () => ({ type: 'line', series: [{ points: [[1, 1], [2, 2]] }] })) };
+    let threw = false, msg = '';
+    try { genSvg(t, ACCENT); } catch (e) { threw = true; msg = e.message; }
+    assertTrue(threw, `did not throw for ${n} panel(s)`);
+    assertTrue(/exactly 2 panels/.test(msg), `message did not name the reason for ${n} panel(s): ${msg}`);
+  });
+});
+
+check('panels: refuses mixed panel types', () => {
+  const t = { panels: [{ type: 'line', series: [{ points: [[1, 1], [2, 2]] }] }, { type: 'bar', series: [{ points: [[1, 1]] }] }] };
+  let threw = false, msg = '';
+  try { genSvg(t, ACCENT); } catch (e) { threw = true; msg = e.message; }
+  assertTrue(threw, 'did not throw for mixed panel types');
+  assertTrue(/mixed-type panels/.test(msg), `message did not name mixed-type as the reason: ${msg}`);
+});
+
+check('panels (line): refuses when panels\' x-values do not match (a shared x-axis requires alignment)', () => {
+  const t = { panels: [{ type: 'line', series: [{ points: [[1, 1], [2, 2]] }] }, { type: 'line', series: [{ points: [[1, 1], [3, 2]] }] }] };
+  let threw = false, msg = '';
+  try { genSvg(t, ACCENT); } catch (e) { threw = true; msg = e.message; }
+  assertTrue(threw, 'did not throw for mismatched x-values across line panels');
+  assertTrue(/do not match/.test(msg), `message did not name the mismatch: ${msg}`);
+});
+
+check('panels (bar): refuses without categoryLabels, and refuses on a length mismatch', () => {
+  const noLabels = { panels: [{ type: 'bar', series: [{ points: [[0, 1], [1, 2]] }] }, { type: 'bar', series: [{ points: [[0, 1], [1, 2]] }] }] };
+  let threw1 = false, msg1 = '';
+  try { genSvg(noLabels, ACCENT); } catch (e) { threw1 = true; msg1 = e.message; }
+  assertTrue(threw1, 'did not throw for bar panels with no categoryLabels');
+  assertTrue(/categoryLabels/.test(msg1), `message did not name categoryLabels: ${msg1}`);
+
+  const shortLabels = { panels: [{ type: 'bar', series: [{ points: [[0, 1], [1, 2]] }] }, { type: 'bar', series: [{ points: [[0, 1], [1, 2]] }] }], categoryLabels: ['Only One'] };
+  let threw2 = false, msg2 = '';
+  try { genSvg(shortLabels, ACCENT); } catch (e) { threw2 = true; msg2 = e.message; }
+  assertTrue(threw2, 'did not throw for a categoryLabels length mismatch');
+  assertTrue(/categoryLabels/.test(msg2), `message did not name categoryLabels: ${msg2}`);
+});
+
+check('panels: excess footer notes stay clamped to 4, each panel stays above MIN_PANEL_H, no negative dimensions', () => {
+  const manyNotes = Array.from({ length: 12 }, (_, i) => `Note number ${i}`);
+  const t = { ...SAMPLE_PANELS_LINE, notes: manyNotes };
+  const svg = genSvg(t, ACCENT);
+  const g = layoutPanels(t);
+  assertTrue(g.notes.length <= 4, `expected notes clamped to <= 4, kept ${g.notes.length}`);
+  g.panelLayouts.forEach((panel, i) => {
+    assertTrue(panel.plotB - panel.plotT >= MIN_PANEL_H - 0.01, `panel ${i} height collapsed to ${panel.plotB - panel.plotT}px, below MIN_PANEL_H=${MIN_PANEL_H}`);
+  });
+  parseTagAttrs(svg, 'rect').concat(parseTagAttrs(svg, 'circle')).forEach((el) => {
+    if (el.width !== undefined) assertTrue(Number(el.width) >= 0, `negative width: ${JSON.stringify(el)}`);
+    if (el.height !== undefined) assertTrue(Number(el.height) >= 0, `negative height: ${JSON.stringify(el)}`);
+  });
+});
+
+check('panels: both panels share one left margin (vertical alignment) and never overlap vertically', () => {
+  const g = layoutPanels(SAMPLE_PANELS_LINE);
+  assertTrue(typeof g.plotL === 'number' && g.plotL > 0, `plotL not computed: ${g.plotL}`);
+  const [p0, p1] = g.panelLayouts;
+  assertTrue(p1.plotT - p0.plotB === PANEL_GAP, `expected the gap between panels to be exactly PANEL_GAP=${PANEL_GAP}, got ${p1.plotT - p0.plotB}`);
+  assertTrue(p0.plotB <= p1.plotT, `panels overlap: panel 0 bottom ${p0.plotB} is below panel 1 top ${p1.plotT}`);
 });
 
 // =====================================================================================================

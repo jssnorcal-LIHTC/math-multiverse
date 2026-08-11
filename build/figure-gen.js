@@ -27,6 +27,23 @@
 // renders at its full native 1.0x; at the iPad 6's PORTRAIT viewport (768 CSS px) 94vw=721.92px is
 // narrower than the native 800px width, so it renders at 721.92/800 = 0.9024x. Every font size
 // below clears 15/0.9024 = 16.62px with margin (18-22px authored).
+//
+// PANELS MODE (Task 4, V2): `dataTable.panels` is an additive, opt-in second shape -- a chart with
+// two data series whose UNITS differ (ppm vs percent) or whose comparison is naturally two
+// side-by-side sub-charts (rainfall vs temperature swing, both by post) must never share one
+// y-scale, per the standing figure-truth rule, and the single-series refusal a few lines below is
+// deliberately NOT relaxed for that case: a shared scale would flatten one series onto the floor,
+// which is worse than refusing. Panels mode draws exactly TWO vertically-stacked mini-charts
+// (`layoutPanels`/`genSvgPanels`), each with its OWN y-axis and y-scale, sharing left/right margins
+// (so the two plots line up) and a single shared x-axis at the bottom. Every panel is individually
+// validated by the SAME `validateTable()` a normal single-series chart uses, so a panel can never
+// smuggle in a second series or a non-finite point -- this is genuinely two independent charts
+// stacked in one canvas, not a new multi-series drawing primitive. `genSvg()` dispatches to it when
+// `dataTable.panels` is present; the ORIGINAL `dataTable.type`/`.series` path below is completely
+// untouched, so every existing chart and every existing test keeps its original behavior byte for
+// byte. Bar-type panels additionally support `dataTable.categoryLabels` (an array of strings) so an
+// axis comparing named things ("Sable Flats" vs "Cairn Bay") is not forced to fall back to the
+// numeric `n2()` formatting the plain bar path uses for its category axis.
 
 const fs = require('fs');
 const path = require('path');
@@ -44,6 +61,14 @@ const MAX_NOTES = 4;                 // fix round 1, item 10: clamp so the botto
 const MIN_PLOT_H = 120;              // stated invariant; unreachable given MAX_NOTES (worst case
                                       // bottom band = 74 + 4*24 = 170, plot height = 450-48-170 =
                                       // 232), kept and asserted rather than left implicit
+const PANEL_GAP = 40;                // vertical gap between the two stacked panels in panels mode;
+                                      // sized so a panel's own yLabel (drawn just above its plot,
+                                      // LABEL_FONT=22, ascent ~18px) never overlaps the panel ABOVE
+                                      // it: the label sits at (panelTop - 12), 10px+ clear of the
+                                      // previous panel's plotBottom even at the tightest notes case
+const MIN_PANEL_H = 90;              // floor for EACH panel's own plot height (roughly half of
+                                      // MIN_PLOT_H, since two panels split one canvas); worst case
+                                      // with 4 notes: (450-48-(74+96)-40)/2 = 96, still above floor
 const TICKS_TARGET = 5;              // even divisions, both axes (nice-rounded, see niceTicks)
 const GLYPH_W = 0.6;                 // width-per-character estimate at font-size 1 (the brief's own
                                       // "glyph count times about 0.6 times the font" heuristic);
@@ -216,10 +241,193 @@ function layout(dataTable) {
   return { type, points, notes, plotL, plotR, plotT, plotB, yTicks: yNice.ticks, yTickLabels, yScale, xScale, xTicks, categories };
 }
 
+// ---- panels mode (see file header): two independently-scaled mini-charts stacked in one canvas ----
+
+// Validates the panels shape, refusing anything genSvgPanels could not draw truthfully. Each panel
+// is checked by the EXACT SAME validateTable() a normal chart uses, so a panel-level multi-series
+// or non-finite-point slip is refused with the identical, already-tested message.
+function validatePanelsTable(dt) {
+  const panels = Array.isArray(dt.panels) ? dt.panels : null;
+  if (!panels) refuse('dataTable has no panels array');
+  if (panels.length !== 2) refuse(`panels: exactly 2 panels are supported, got ${panels.length}`);
+
+  const type = (panels[0] && panels[0].type === 'bar') ? 'bar' : 'line';
+  panels.forEach((p, i) => {
+    const pt = (p && p.type === 'bar') ? 'bar' : 'line';
+    if (pt !== type) refuse(`panels[${i}].type ("${pt}") does not match panels[0].type ("${type}"); mixed-type panels are refused`);
+  });
+
+  const pointsPerPanel = panels.map((p, i) => {
+    try { return validateTable(p, type); }
+    catch (e) { refuse(`panels[${i}]: ${e.message}`); }
+  });
+
+  if (type === 'bar') {
+    const labels = Array.isArray(dt.categoryLabels) ? dt.categoryLabels : null;
+    if (!labels || !labels.length) refuse('panels: bar-type panels require dataTable.categoryLabels');
+    pointsPerPanel.forEach((pts, i) => {
+      if (pts.length !== labels.length) refuse(`panels[${i}]: has ${pts.length} point(s) but categoryLabels has ${labels.length} entr(y/ies)`);
+    });
+  } else {
+    // A SHARED x-axis only means something if every panel plots the same x values; refuse rather
+    // than silently drawing two panels whose day-90/104/118 columns do not actually line up.
+    const xs0 = pointsPerPanel[0].map((p) => p[0]);
+    pointsPerPanel.forEach((pts, i) => {
+      const xs = pts.map((p) => p[0]);
+      const mismatch = xs.length !== xs0.length || xs.some((v, j) => v !== xs0[j]);
+      if (mismatch) refuse(`panels[${i}]: x-values (${JSON.stringify(xs)}) do not match panels[0]'s (${JSON.stringify(xs0)}); a shared x-axis requires identical x values across panels`);
+    });
+  }
+
+  return { type, pointsPerPanel };
+}
+
+// Mirrors layout(): the ONE place panels-mode margins, per-panel y-domains, and the shared x-domain
+// are computed, exported so tests/figure-derive.js can assert panel geometry against these same
+// numbers. Throws exactly when genSvgPanels would refuse.
+function layoutPanels(dataTable) {
+  const dt = dataTable || {};
+  const { type, pointsPerPanel } = validatePanelsTable(dt);
+  const panels = dt.panels;
+
+  const notes = (Array.isArray(dt.notes) ? dt.notes : []).slice(0, MAX_NOTES);
+  const outerT = TOP;
+  const outerB = VB_H - (BASE_BOTTOM + notes.length * NOTE_ROW);
+  const availH = outerB - outerT - PANEL_GAP;
+  const panelH = availH / 2;
+  if (panelH < MIN_PANEL_H) {
+    refuse(`too many footer notes; each panel would collapse to ${n2(panelH)}px, below the ${MIN_PANEL_H}px minimum`);
+  }
+
+  // Per-panel y-domain/ticks first, THEN a single shared left margin sized from the widest tick
+  // label across BOTH panels, so the two plots' left edges line up vertically.
+  const panelYNice = pointsPerPanel.map((points) => {
+    const allY = points.map((p) => p[1]);
+    const yDomainRaw = type === 'bar'
+      ? paddedExtent([Math.min(0, ...allY), Math.max(0, ...allY)])
+      : paddedExtent(allY);
+    return niceTicks(yDomainRaw[0], yDomainRaw[1], TICKS_TARGET, false);
+  });
+  const plotL = panelYNice.reduce((m, yNice) => Math.max(m, leftMarginFor(yNice.ticks.map((v) => n2(v)))), MIN_LEFT);
+  const plotR = VB_W - RIGHT;
+
+  const plotTs = [outerT, outerT + panelH + PANEL_GAP];
+  const plotBs = [outerT + panelH, outerB];
+
+  const panelLayouts = panels.map((p, i) => {
+    const yNice = panelYNice[i];
+    const yScale = scaleFn(yNice.lo, yNice.hi, plotBs[i], plotTs[i]);
+    return {
+      points: pointsPerPanel[i],
+      yTicks: yNice.ticks,
+      yTickLabels: yNice.ticks.map((v) => n2(v)),
+      yScale,
+      plotT: plotTs[i],
+      plotB: plotBs[i],
+      yLabel: p.yLabel,
+    };
+  });
+
+  let xScale = null, xTicks = null, categories = null;
+  if (type === 'line') {
+    const allX = pointsPerPanel[0].map((p) => p[0]);
+    const xIsInt = allX.every((v) => Number.isInteger(v));
+    const xDomainRaw = paddedExtent(allX);
+    const xNice = niceTicks(xDomainRaw[0], xDomainRaw[1], TICKS_TARGET, xIsInt);
+    xTicks = xNice.ticks;
+    xScale = scaleFn(xNice.lo, xNice.hi, plotL, plotR);
+  } else {
+    categories = pointsPerPanel[0].map((p) => p[0]);
+  }
+
+  return { type, notes, plotL, plotR, panelLayouts, xScale, xTicks, categories };
+}
+
+// genSvgPanels(dataTable, accentColor) -> string. Same determinism/font-floor guarantees as
+// genSvg(); draws the two panels top to bottom, then one shared x-axis/xLabel/notes band at the
+// very bottom, using the LAST panel's plotB exactly the way the single-chart path uses its own.
+function genSvgPanels(dataTable, accentColor) {
+  const dt = dataTable || {};
+  const g = layoutPanels(dt);
+  const accent = accentColor || DEFAULT_ACCENT;
+  const { type, notes, plotL, plotR, panelLayouts, xScale, xTicks, categories } = g;
+  const lastPlotB = panelLayouts[panelLayouts.length - 1].plotB;
+
+  const out = [];
+  out.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${VB_W}" height="${VB_H}" viewBox="0 0 ${VB_W} ${VB_H}" role="img">`);
+  out.push(`<rect x="0" y="0" width="${VB_W}" height="${VB_H}" fill="${BG}" />`);
+
+  let groupW = 0, gap = 0, barW = 0;
+  if (type === 'bar') {
+    const n = categories.length;
+    groupW = n ? (plotR - plotL) / n : 0;
+    gap = groupW * 0.18;
+    barW = groupW - gap * 2;
+  }
+
+  panelLayouts.forEach((panel) => {
+    out.push(`<line x1="${hp(plotL)}" y1="${panel.plotT}" x2="${hp(plotL)}" y2="${n2(panel.plotB)}" stroke="${GRID}" stroke-width="1" />`);
+
+    panel.yTicks.forEach((v, i) => {
+      const isZeroBaseline = type === 'bar' && Math.abs(v) < 1e-9;
+      const stroke = isZeroBaseline ? INK : PLOT_GRID;
+      const py = hp(panel.yScale(v));
+      out.push(`<line x1="${plotL}" y1="${py}" x2="${plotR}" y2="${py}" stroke="${stroke}" stroke-width="${isZeroBaseline ? 1.5 : 1}" />`);
+      out.push(`<text x="${n2(plotL - LABEL_AXIS_GAP)}" y="${n2(panel.yScale(v))}" font-size="${TICK_FONT}" fill="${INK}" text-anchor="end" dominant-baseline="middle">${esc(panel.yTickLabels[i])}</text>`);
+    });
+
+    if (panel.yLabel) {
+      out.push(`<text x="${plotL}" y="${n2(panel.plotT - 12)}" font-size="${LABEL_FONT}" fill="${INK}">${esc(panel.yLabel)}</text>`);
+    }
+
+    if (type === 'line') {
+      const pts = panel.points.map((p) => `${n2(xScale(p[0]))},${n2(panel.yScale(p[1]))}`).join(' ');
+      out.push(`<polyline points="${pts}" fill="none" stroke="${accent}" stroke-width="3" />`);
+      panel.points.forEach((p) => {
+        out.push(`<circle cx="${n2(xScale(p[0]))}" cy="${n2(panel.yScale(p[1]))}" r="${MARKER_R}" fill="${accent}" />`);
+      });
+    } else {
+      const zeroY = panel.yScale(0);
+      panel.points.forEach((p, i) => {
+        const x = plotL + i * groupW + gap;
+        const valY = panel.yScale(p[1]);
+        const top = Math.min(zeroY, valY);
+        const h = Math.abs(valY - zeroY);
+        out.push(`<rect x="${n2(x)}" y="${n2(top)}" width="${n2(barW)}" height="${n2(h)}" fill="${accent}" />`);
+      });
+    }
+  });
+
+  if (type === 'line') {
+    xTicks.forEach((v) => {
+      out.push(`<text x="${n2(xScale(v))}" y="${n2(lastPlotB + TICK_Y_OFF)}" font-size="${TICK_FONT}" fill="${INK}" text-anchor="middle">${esc(n2(v))}</text>`);
+    });
+  } else {
+    categories.forEach((c, i) => {
+      const cx = plotL + (i + 0.5) * groupW;
+      const label = (Array.isArray(dt.categoryLabels) && dt.categoryLabels[i] !== undefined) ? dt.categoryLabels[i] : n2(c);
+      out.push(`<text x="${n2(cx)}" y="${n2(lastPlotB + TICK_Y_OFF)}" font-size="${TICK_FONT}" fill="${INK}" text-anchor="middle">${esc(label)}</text>`);
+    });
+  }
+
+  if (dt.xLabel) {
+    const cx = n2((plotL + plotR) / 2);
+    out.push(`<text x="${cx}" y="${n2(lastPlotB + TITLE_Y_OFF)}" font-size="${LABEL_FONT}" fill="${INK}" text-anchor="middle">${esc(dt.xLabel)}</text>`);
+  }
+  notes.forEach((noteText, i) => {
+    const ny = n2(lastPlotB + NOTES_Y_START + i * NOTE_ROW);
+    out.push(`<text x="${plotL}" y="${ny}" font-size="${NOTE_FONT}" fill="${INK}" fill-opacity="0.82">${esc(String(noteText))}</text>`);
+  });
+
+  out.push('</svg>');
+  return out.join('\n') + '\n';
+}
+
 // genSvg(dataTable, accentColor) -> string. See file header for the determinism and font-floor
 // guarantees. Throws (does not return) for any shape layout()/validateTable() refuses.
 function genSvg(dataTable, accentColor) {
   const dt = dataTable || {};
+  if (Array.isArray(dt.panels)) return genSvgPanels(dt, accentColor);
   const g = layout(dt);
   const accent = accentColor || DEFAULT_ACCENT;
   const { type, points, notes, plotL, plotR, plotT, plotB, yTicks, yTickLabels, yScale, xScale, xTicks, categories } = g;
@@ -372,7 +580,9 @@ function main(argv) {
 
 module.exports = {
   genSvg, renderFigure, resolveAccent, chartTargets, regenerate, layout,
+  layoutPanels, genSvgPanels,
   INK, GRID, PLOT_GRID, DEFAULT_ACCENT, GLYPH_W, VB_W, VB_H, MAX_NOTES, MIN_PLOT_H,
+  PANEL_GAP, MIN_PANEL_H,
 };
 
 if (require.main === module) process.exit(main(process.argv));
