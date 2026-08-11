@@ -19,12 +19,20 @@ const { fleschKincaid, colemanLiau, textStats } = require('./readability');
 const { COACH_FAMILIES } = require('./targets');
 const { validateLedger, authoredKeyOf } = require('./verdicts');
 
-const PACK_DIR = path.join(__dirname, '..', 'packs');
+const PACK_DIR  = path.join(__dirname, '..', 'packs');
+const REPO_ROOT = path.join(__dirname, '..');
 
 const ITEM_TYPES   = Object.freeze(['mc', 'ms', 'ebsr', 'hottext', 'match', 'order', 'cloze', 'shorttext', 'listen', 'write']);
 const AUTO_TYPES   = Object.freeze(['mc', 'ms', 'ebsr', 'hottext', 'match', 'order', 'cloze', 'shorttext']);
 const CHOICE_TYPES = Object.freeze(['mc', 'ms', 'ebsr', 'cloze']);
 const GENRES       = Object.freeze(['literary', 'informational']);
+
+// Copied by VALUE from engine/figures.js -- validate-pack must not require engine files (it runs
+// under plain node, with no DOM and no runner). The twin cross-check test in tests/figures.test.js
+// imports both copies and asserts deepStrictEqual, so this pair cannot drift apart silently.
+const FIG_KINDS = Object.freeze(['photo', 'plate', 'map', 'diagram', 'chart']);
+const DOC_KINDS = Object.freeze(['case-file', 'recovered-entry', 'source-desk', 'addendum',
+  'field-manual', 'status-log', 'weather-log', 'field-report', 'procedure', 'memo', 'minutes']);
 
 function loadPackFile(absPath) {
   const raw = fs.readFileSync(absPath, 'utf8');
@@ -212,6 +220,141 @@ function checkLevels(pack, itemsById, errors, warnings) {
     if (!referenced.has(id)) warnings.push(`items(${id}): not referenced by any level (orphan)`);
   }
   return referenced;
+}
+
+// ---------- envelope: figures ----------
+// A brand-new optional envelope (no shipped pack declares one yet): a strip of illustrative or
+// assessed media a passage, level reveal, or item can point at. Validated the same way as
+// passages/items above -- structural rules here, independent of who references what; resolution
+// of the references themselves is checkFigureReferences below.
+
+// Shared by both a figure's own `src` and a plate figure's per-view `src`/`overlaySrc`. `packId` is
+// null when meta.id itself is missing or empty (already reported by checkMeta), in which case the
+// prefix half of the rule is skipped rather than compared against "art/null/" or "art/undefined/".
+function checkArtSrc(src, w, packId, requirePrefix, errors) {
+  if (!nonEmptyString(src)) { errors.push(`${w}: missing or empty`); return; }
+  if (requirePrefix && packId) {
+    const prefix = `art/${packId}/`;
+    if (!src.startsWith(prefix)) errors.push(`${w}: "${src}" must live under "${prefix}"`);
+  }
+  if (!fs.existsSync(path.join(REPO_ROOT, src))) {
+    errors.push(`${w}: file not found at "${src}" (resolved from repo root)`);
+  }
+}
+
+function checkFigures(pack, errors) {
+  const list = pack.figures;
+  if (list === undefined) return new Map();
+  if (!Array.isArray(list)) { errors.push(`figures: present but not an array, got ${JSON.stringify(list)}`); return new Map(); }
+  if (list.length === 0) {
+    errors.push('figures: declared as an empty array; omit the field entirely instead of declaring one with no figures');
+    return new Map();
+  }
+
+  const packId = (pack.meta && nonEmptyString(pack.meta.id)) ? pack.meta.id : null;
+  const byId = new Map();
+  list.forEach((fig, i) => {
+    const where = `figures[${i}]`;
+    if (!fig || typeof fig !== 'object') { errors.push(`${where}: not an object`); return; }
+    if (!nonEmptyString(fig.id)) { errors.push(`${where}.id: missing or empty`); return; }
+    const w = `figures(${fig.id})`;
+    if (byId.has(fig.id)) errors.push(`${where}: duplicate figure id "${fig.id}"`);
+    else byId.set(fig.id, fig);
+
+    if (!FIG_KINDS.includes(fig.kind)) {
+      errors.push(`${w}.kind: must be one of ${FIG_KINDS.join(', ')}, got ${JSON.stringify(fig.kind)}`);
+    }
+    for (const k of ['caption', 'credit', 'alt']) {
+      if (!nonEmptyString(fig[k])) errors.push(`${w}.${k}: missing or empty`);
+    }
+
+    if (fig.kind === 'plate') {
+      if (!Array.isArray(fig.views) || fig.views.length < 2) {
+        errors.push(`${w}.views: plate figures need at least two views, got ${JSON.stringify(fig.views)}`);
+      } else {
+        fig.views.forEach((v, vi) => {
+          const vw = `${w}.views[${vi}]`;
+          if (!v || typeof v !== 'object') { errors.push(`${vw}: not an object`); return; }
+          if (!nonEmptyString(v.label)) errors.push(`${vw}.label: missing or empty`);
+          checkArtSrc(v.src, `${vw}.src`, packId, true, errors);
+          if (v.overlaySrc !== undefined) checkArtSrc(v.overlaySrc, `${vw}.overlaySrc`, packId, false, errors);
+        });
+      }
+    } else {
+      // Every non-plate kind (including an already-invalid kind) still owes a real src; the kind
+      // check above already reported the invalid kind, so this does not mask it, it adds to it.
+      checkArtSrc(fig.src, `${w}.src`, packId, true, errors);
+    }
+
+    if (fig.kind === 'chart') {
+      const dt = fig.dataTable;
+      if (!dt || typeof dt !== 'object' || Array.isArray(dt)) {
+        errors.push(`${w}.dataTable: chart figures require a dataTable object, got ${JSON.stringify(dt)}`);
+      }
+    }
+  });
+  return byId;
+}
+
+// ---------- figures: cross-references ----------
+// Everything about how the REST of the pack points at a figure: passage strips, a level's reveal
+// card, and an assessed item. Kept separate from checkFigures because it needs passagesById and
+// itemsById already built, exactly like checkTargetSubjects sits apart from checkLevels above.
+function checkFigureReferences(pack, figuresById, passagesById, itemsById, errors) {
+  for (const p of passagesById.values()) {
+    if (p.figureIds === undefined) continue;
+    if (!Array.isArray(p.figureIds)) { errors.push(`passages(${p.id}).figureIds: must be an array, got ${JSON.stringify(p.figureIds)}`); continue; }
+    p.figureIds.forEach((fid, i) => {
+      if (!figuresById.has(fid)) errors.push(`passages(${p.id}).figureIds[${i}]: "${fid}" does not resolve to any figure`);
+    });
+  }
+
+  if (Array.isArray(pack.levels)) {
+    pack.levels.forEach((lv, i) => {
+      if (!lv || typeof lv !== 'object') return;   // already reported by checkLevels
+      const reveal = lv.reveal;
+      if (!reveal || typeof reveal !== 'object' || reveal.figureId === undefined) return;
+      if (!figuresById.has(reveal.figureId)) {
+        errors.push(`levels[${i}].reveal.figureId: "${reveal.figureId}" does not resolve to any figure`);
+      }
+    });
+  }
+
+  for (const it of itemsById.values()) {
+    if (it.figureId === undefined) continue;
+    const w = `items(${it.id}).figureId`;
+    const fig = figuresById.get(it.figureId);
+    if (!fig) { errors.push(`${w}: "${it.figureId}" does not resolve to any figure`); continue; }
+    if (fig.kind === 'photo') {
+      errors.push(`${w}: figure "${fig.id}" is a photograph; photographs are never assessed`);
+      continue;
+    }
+    const dt = fig.dataTable;
+    if (!dt || typeof dt !== 'object' || Array.isArray(dt)) {
+      errors.push(`${w}: figure "${fig.id}" is assessed by this item and requires a dataTable`);
+    }
+  }
+}
+
+// ---------- envelope: passage docKind ----------
+function checkDocKinds(passagesById, errors) {
+  for (const p of passagesById.values()) {
+    if (p.docKind !== undefined && !DOC_KINDS.includes(p.docKind)) {
+      errors.push(`passages(${p.id}).docKind: must be one of ${DOC_KINDS.join(', ')}, got ${JSON.stringify(p.docKind)}`);
+    }
+  }
+}
+
+// ---------- whole-pack: no live links ----------
+// Scans the raw JSON TEXT, not the parsed object, so a URL cannot hide in a field no schema check
+// happens to walk. rawText is the real file bytes when the CLI supplies opts.rawText; validatePack
+// falls back to JSON.stringify(pack) so in-memory test fixtures (which never touch disk) get the
+// same scan over the same string content.
+function checkNoRawUrls(rawText, errors) {
+  const m = /https?:\/\/[^"'\\\s]*/.exec(rawText);
+  if (m) {
+    errors.push(`pack: raw JSON text contains a live URL (${JSON.stringify(m[0].slice(0, 80))}); figures and text may not embed http(s) links`);
+  }
 }
 
 // ---------- hooks filled by later tasks ----------
@@ -620,6 +763,11 @@ function validatePack(pack, opts) {
   const itemsById = checkItemEnvelope(pack, passagesById, errors);
   checkTargetSubjects(pack, itemsById, errors);
   checkLevels(pack, itemsById, errors, warnings);
+  const figuresById = checkFigures(pack, errors);
+  checkFigureReferences(pack, figuresById, passagesById, itemsById, errors);
+  checkDocKinds(passagesById, errors);
+  const rawText = (opts && typeof opts.rawText === 'string') ? opts.rawText : JSON.stringify(pack);
+  checkNoRawUrls(rawText, errors);
   for (const it of itemsById.values()) checkItemShape(it, passagesById, errors);
   contentChecks(pack, passagesById, itemsById, errors, warnings);
   checkEbsrKeyShapes(pack, errors);
@@ -652,7 +800,11 @@ function main(argv) {
     try { pack = loadPackFile(abs); }
     catch (e) { console.log(`\n${expectedId}\n  LOAD FAILED: ${e.message}`); totalErrors++; continue; }
 
-    const { errors, warnings } = validatePack(pack, { expectedId });
+    // Real file bytes, not a re-stringify of the parsed object, so checkNoRawUrls scans exactly
+    // what shipped -- including anything JSON.parse/stringify would round-trip identically anyway,
+    // but without relying on that being true.
+    const rawText = fs.readFileSync(abs, 'utf8');
+    const { errors, warnings } = validatePack(pack, { expectedId, rawText });
 
     // Blind re-answer ledger. A pack with comparable items must ship an adjudicated ledger.
     const ledgerPath = abs.replace(/\.json$/, '.verdicts.json');
@@ -687,6 +839,6 @@ function main(argv) {
   return 0;
 }
 
-module.exports = { validatePack, loadPackFile, ITEM_TYPES, AUTO_TYPES, CHOICE_TYPES, GENRES };
+module.exports = { validatePack, loadPackFile, ITEM_TYPES, AUTO_TYPES, CHOICE_TYPES, GENRES, FIG_KINDS, DOC_KINDS };
 
 if (require.main === module) process.exit(main(process.argv));
