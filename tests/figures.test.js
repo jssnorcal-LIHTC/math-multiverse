@@ -25,7 +25,8 @@ check('resolve returns null for unknown id and figureless pack', () => {
 });
 check('enums are locked', () => {
   assert.deepStrictEqual(MVFigures.FIG_KINDS, ['photo','plate','map','diagram','chart']);
-  assert.strictEqual(MVFigures.DOC_KINDS.length, 11);
+  assert.deepStrictEqual(MVFigures.DOC_KINDS, ['case-file','recovered-entry','source-desk','addendum',
+    'field-manual','status-log','weather-log','field-report','procedure','memo','minutes']);
 });
 check('loading the module touched no DOM (required before dom-stub install)', () => {
   assert.strictEqual(HAD_DOC_AT_LOAD, false);

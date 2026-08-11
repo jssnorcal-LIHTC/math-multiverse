@@ -42,6 +42,11 @@ function loadPackFile(absPath) {
 
 function nonEmptyString(v) { return typeof v === 'string' && v.trim().length > 0; }
 
+// The "is this a plain, non-null, non-array object" test recurs everywhere a JSON field is
+// supposed to be a map/record rather than a list or a scalar (a chart's dataTable, an assessed
+// figure's dataTable). Named once so every site reads the same intent instead of re-deriving it.
+function isPlainObject(v) { return !!v && typeof v === 'object' && !Array.isArray(v); }
+
 // ---------- envelope: meta ----------
 function checkMeta(pack, errors, expectedId) {
   const m = pack.meta;
@@ -228,21 +233,55 @@ function checkLevels(pack, itemsById, errors, warnings) {
 // passages/items above -- structural rules here, independent of who references what; resolution
 // of the references themselves is checkFigureReferences below.
 
-// Shared by both a figure's own `src` and a plate figure's per-view `src`/`overlaySrc`. `packId` is
-// null when meta.id itself is missing or empty (already reported by checkMeta), in which case the
-// prefix half of the rule is skipped rather than compared against "art/null/" or "art/undefined/".
-function checkArtSrc(src, w, packId, requirePrefix, errors) {
+// Shared by both a figure's own `src` and a plate figure's per-view `src`/`overlaySrc`. `packId`
+// is resolved once by the caller (checkFigures) and is null only when neither source was
+// available; requirePrefix && packId therefore already skips the prefix half safely in that case
+// (checkFigures pushes its own explicit error for the missing-packId condition itself, once, so
+// this does not need to repeat it per src). `assetBase` defaults to 'art' (the real, public,
+// GitHub-Pages-served tree); tests point it at tests/fixtures so the existsSync/prefix/case checks
+// below run against real fixture files that live outside that public tree. main() never overrides
+// it, so every real pack stays gated on art/<packId>/ exactly as shipped.
+function checkArtSrc(src, w, packId, requirePrefix, errors, assetBase) {
   if (!nonEmptyString(src)) { errors.push(`${w}: missing or empty`); return; }
-  if (requirePrefix && packId) {
-    const prefix = `art/${packId}/`;
-    if (!src.startsWith(prefix)) errors.push(`${w}: "${src}" must live under "${prefix}"`);
+  // Rejected outright, before any prefix or existence check: a ".." segment can make a string
+  // that STARTS WITH the required prefix resolve somewhere else entirely (art/pack-x/../pack-y/foo
+  // satisfies startsWith("art/pack-x/") while actually pointing at pack-y), and a backslash is
+  // never a valid path separator in a src that ships to a browser over a URL.
+  if (src.includes('..') || src.includes('\\')) {
+    errors.push(`${w}: "${src}" must not contain ".." or backslashes (got "${src}")`);
+    return;
   }
-  if (!fs.existsSync(path.join(REPO_ROOT, src))) {
+  if (requirePrefix && packId) {
+    const prefix = `${assetBase}/${packId}/`;
+    // Resolved-path comparison, not a raw string prefix: robust to redundant slashes and the like,
+    // and (with the traversal reject above already closing the sharpest edge) a second, independent
+    // check that what the src ACTUALLY resolves to is inside the pack's own directory.
+    const absSrc = path.resolve(REPO_ROOT, src);
+    const absPrefixDir = path.resolve(REPO_ROOT, assetBase, packId);
+    if (absSrc !== absPrefixDir && absSrc.indexOf(absPrefixDir + path.sep) !== 0) {
+      errors.push(`${w}: "${src}" must live under "${prefix}"`);
+    }
+  }
+  const abs = path.join(REPO_ROOT, src);
+  if (!fs.existsSync(abs)) {
     errors.push(`${w}: file not found at "${src}" (resolved from repo root)`);
+    return;
+  }
+  // fs.existsSync is case-insensitive on this authoring machine's filesystem (and on macOS
+  // default), but GitHub Pages -- which serves this repo -- is case-sensitive, so a src whose case
+  // does not match the file on disk validates clean here and 404s in production. Confirmed against
+  // the real directory listing, which reports the on-disk case regardless of the OS's own lookup
+  // rules.
+  const dir = path.dirname(abs);
+  const base = path.basename(abs);
+  let entries;
+  try { entries = fs.readdirSync(dir); } catch (e) { entries = null; }
+  if (entries && !entries.includes(base)) {
+    errors.push(`${w}: "${src}" exists on disk under a different case; this authoring machine's filesystem is case-insensitive but GitHub Pages is case-sensitive, so this would 404 in production`);
   }
 }
 
-function checkFigures(pack, errors) {
+function checkFigures(pack, errors, opts) {
   const list = pack.figures;
   if (list === undefined) return new Map();
   if (!Array.isArray(list)) { errors.push(`figures: present but not an array, got ${JSON.stringify(list)}`); return new Map(); }
@@ -251,7 +290,18 @@ function checkFigures(pack, errors) {
     return new Map();
   }
 
-  const packId = (pack.meta && nonEmptyString(pack.meta.id)) ? pack.meta.id : null;
+  const assetBase = (opts && nonEmptyString(opts.assetBase)) ? opts.assetBase : 'art';
+  // The validator's own expectedId (the filename, authoritative when the CLI supplies it) wins
+  // over the pack's self-reported meta.id; meta.id is only a fallback for callers with no filename
+  // at all (in-memory packs). When neither is available the prefix rule is unverifiable, and that
+  // is reported once, explicitly, rather than every src silently skipping its prefix check.
+  const expectedId = opts && opts.expectedId;
+  const packId = nonEmptyString(expectedId) ? expectedId
+    : ((pack.meta && nonEmptyString(pack.meta.id)) ? pack.meta.id : null);
+  if (!packId) {
+    errors.push(`figures: no pack id available (neither the validator's expectedId nor meta.id) to build the "${assetBase}/<packId>/" prefix check; every figure src's location rule is unverifiable until one is supplied`);
+  }
+
   const byId = new Map();
   list.forEach((fig, i) => {
     const where = `figures[${i}]`;
@@ -276,19 +326,21 @@ function checkFigures(pack, errors) {
           const vw = `${w}.views[${vi}]`;
           if (!v || typeof v !== 'object') { errors.push(`${vw}: not an object`); return; }
           if (!nonEmptyString(v.label)) errors.push(`${vw}.label: missing or empty`);
-          checkArtSrc(v.src, `${vw}.src`, packId, true, errors);
-          if (v.overlaySrc !== undefined) checkArtSrc(v.overlaySrc, `${vw}.overlaySrc`, packId, false, errors);
+          checkArtSrc(v.src, `${vw}.src`, packId, true, errors, assetBase);
+          // overlaySrc obeys the SAME art/<packId>/ prefix as src: it ships to the same public
+          // tree under the same per-pack provenance discipline, so it gets no exemption.
+          if (v.overlaySrc !== undefined) checkArtSrc(v.overlaySrc, `${vw}.overlaySrc`, packId, true, errors, assetBase);
         });
       }
     } else {
       // Every non-plate kind (including an already-invalid kind) still owes a real src; the kind
       // check above already reported the invalid kind, so this does not mask it, it adds to it.
-      checkArtSrc(fig.src, `${w}.src`, packId, true, errors);
+      checkArtSrc(fig.src, `${w}.src`, packId, true, errors, assetBase);
     }
 
     if (fig.kind === 'chart') {
       const dt = fig.dataTable;
-      if (!dt || typeof dt !== 'object' || Array.isArray(dt)) {
+      if (!isPlainObject(dt)) {
         errors.push(`${w}.dataTable: chart figures require a dataTable object, got ${JSON.stringify(dt)}`);
       }
     }
@@ -329,8 +381,7 @@ function checkFigureReferences(pack, figuresById, passagesById, itemsById, error
       errors.push(`${w}: figure "${fig.id}" is a photograph; photographs are never assessed`);
       continue;
     }
-    const dt = fig.dataTable;
-    if (!dt || typeof dt !== 'object' || Array.isArray(dt)) {
+    if (!isPlainObject(fig.dataTable)) {
       errors.push(`${w}: figure "${fig.id}" is assessed by this item and requires a dataTable`);
     }
   }
@@ -763,11 +814,17 @@ function validatePack(pack, opts) {
   const itemsById = checkItemEnvelope(pack, passagesById, errors);
   checkTargetSubjects(pack, itemsById, errors);
   checkLevels(pack, itemsById, errors, warnings);
-  const figuresById = checkFigures(pack, errors);
+  const figuresById = checkFigures(pack, errors, opts);
   checkFigureReferences(pack, figuresById, passagesById, itemsById, errors);
   checkDocKinds(passagesById, errors);
+  // Scans the UNION of whatever real file bytes the CLI supplied (or JSON.stringify(pack) when a
+  // caller has none, e.g. an in-memory test fixture) AND JSON.stringify(pack) itself, so neither
+  // surface's blind spot can hide a link: raw bytes miss a URL a duplicate JSON key discarded at
+  // parse time (present in the bytes, absent from the parsed object), while the parsed object
+  // misses nothing the raw bytes had UNLESS the raw bytes themselves are the only place it showed
+  // up -- scanning both closes both gaps at once.
   const rawText = (opts && typeof opts.rawText === 'string') ? opts.rawText : JSON.stringify(pack);
-  checkNoRawUrls(rawText, errors);
+  checkNoRawUrls(rawText + '\n' + JSON.stringify(pack), errors);
   for (const it of itemsById.values()) checkItemShape(it, passagesById, errors);
   contentChecks(pack, passagesById, itemsById, errors, warnings);
   checkEbsrKeyShapes(pack, errors);
