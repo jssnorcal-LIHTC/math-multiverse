@@ -837,6 +837,62 @@ check('an item.figureId pointing at a non-chart figure with no dataTable is caug
   expectError(p, 'requires a dataTable', 'assessed diagram no dataTable');
 });
 
+// ---- rule 3b (task 9 fix round 1, item 11): gen is type-checked, and required true on any
+// chart figure a real ITEM assesses (the derive gate's actual target set) ----
+
+check('a non-boolean gen on any figure is caught', () => {
+  const p = figurePack();
+  p.figures.find(f => f.id === 'fig-chart').gen = 'true';   // the classic string-not-boolean slip
+  expectError(p, 'gen: must be a boolean', 'gen wrong type');
+});
+
+check('gen: false on a figure (not assessed) is legal -- gen stays opt-in everywhere but the assessed set', () => {
+  const p = figurePack();
+  p.figures.find(f => f.id === 'fig-chart').gen = false;   // fig-chart here is reveal-referenced, not item-assessed
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.deepStrictEqual(errors, [], 'errors: ' + JSON.stringify(errors));
+});
+
+check('an item-assessed chart figure with no gen flag at all is caught', () => {
+  const p = figurePack();
+  const chart = JSON.parse(JSON.stringify(p.figures.find(f => f.id === 'fig-chart')));
+  chart.id = 'fig-chart-assessed';
+  p.figures.push(chart);
+  p.items[0].figureId = 'fig-chart-assessed';   // i-mc-1: now assesses a CHART, not the diagram
+  expectError(p, 'must declare gen: true', 'assessed chart missing gen');
+});
+
+check('an item-assessed chart figure with gen: false is caught', () => {
+  const p = figurePack();
+  const chart = JSON.parse(JSON.stringify(p.figures.find(f => f.id === 'fig-chart')));
+  chart.id = 'fig-chart-assessed';
+  chart.gen = false;
+  p.figures.push(chart);
+  p.items[0].figureId = 'fig-chart-assessed';
+  expectError(p, 'must declare gen: true', 'assessed chart gen false');
+});
+
+check('an item-assessed chart figure with gen: true passes clean', () => {
+  const p = figurePack();
+  const chart = JSON.parse(JSON.stringify(p.figures.find(f => f.id === 'fig-chart')));
+  chart.id = 'fig-chart-assessed';
+  chart.gen = true;
+  p.figures.push(chart);
+  p.items[0].figureId = 'fig-chart-assessed';
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.deepStrictEqual(errors, [], 'errors: ' + JSON.stringify(errors));
+});
+
+check('a level.reveal-only chart (not item-assessed) needs no gen flag at all', () => {
+  // figurePack()'s own fig-chart is reveal-referenced (p.levels[0].reveal), never item-assessed,
+  // and carries no gen field at all -- this is the baseline "a fully valid figure-bearing pack
+  // produces zero errors" fixture, re-asserted here specifically for the gen rule's scope.
+  const p = figurePack();
+  assert.strictEqual(p.figures.find(f => f.id === 'fig-chart').gen, undefined);
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures' });
+  assert.deepStrictEqual(errors, [], 'errors: ' + JSON.stringify(errors));
+});
+
 // ---- rule 4: passage.figureIds / level.reveal.figureId / item.figureId all resolve ----
 
 check('a dangling passage.figureIds entry is caught', () => {

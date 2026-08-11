@@ -1,23 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img">
 <rect x="0" y="0" width="800" height="450" fill="#0f1218" />
-<line x1="72" y1="48" x2="72" y2="352" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-<line x1="72" y1="352" x2="752" y2="352" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-<text x="62" y="352" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">406.6</text>
-<line x1="72" y1="276" x2="752" y2="276" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-<text x="62" y="276" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">418.8</text>
-<line x1="72" y1="200" x2="752" y2="200" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-<text x="62" y="200" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">431</text>
-<line x1="72" y1="124" x2="752" y2="124" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-<text x="62" y="124" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">443.2</text>
-<line x1="72" y1="48" x2="752" y2="48" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-<text x="62" y="48" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">455.4</text>
-<text x="72" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">0.8</text>
-<text x="242" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">1.4</text>
-<text x="412" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">2</text>
-<text x="582" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">2.6</text>
-<text x="752" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">3.2</text>
-<polyline points="118.9,331.03 412,206.24 705.1,68.97" fill="none" stroke="#7aa8ff" stroke-width="3" />
-<text x="72" y="28" font-size="22" fill="#e8eef7">CO2 (ppm)</text>
-<text x="412" y="402" font-size="22" fill="#e8eef7" text-anchor="middle">day</text>
-<text x="72" y="426" font-size="18" fill="#e8eef7" fill-opacity="0.82">Fixture data; not a real measurement.</text>
+<line x1="56.5" y1="48" x2="56.5" y2="352" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+<line x1="56" y1="352.5" x2="752" y2="352.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="46" y="352" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">400</text>
+<line x1="56" y1="301.5" x2="752" y2="301.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="46" y="301.33" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">410</text>
+<line x1="56" y1="251.5" x2="752" y2="251.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="46" y="250.67" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">420</text>
+<line x1="56" y1="200.5" x2="752" y2="200.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="46" y="200" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">430</text>
+<line x1="56" y1="149.5" x2="752" y2="149.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="46" y="149.33" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">440</text>
+<line x1="56" y1="99.5" x2="752" y2="99.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="46" y="98.67" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">450</text>
+<line x1="56" y1="48.5" x2="752" y2="48.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="46" y="48" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">460</text>
+<text x="56" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">0</text>
+<text x="230" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">1</text>
+<text x="404" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">2</text>
+<text x="578" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">3</text>
+<text x="752" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">4</text>
+<polyline points="230,301.33 404,200 578,88.53" fill="none" stroke="#7aa8ff" stroke-width="3" />
+<circle cx="230" cy="301.33" r="4" fill="#7aa8ff" />
+<circle cx="404" cy="200" r="4" fill="#7aa8ff" />
+<circle cx="578" cy="88.53" r="4" fill="#7aa8ff" />
+<text x="56" y="28" font-size="22" fill="#e8eef7">CO2 (ppm)</text>
+<text x="404" y="402" font-size="22" fill="#e8eef7" text-anchor="middle">day</text>
+<text x="56" y="426" font-size="18" fill="#e8eef7" fill-opacity="0.82">Fixture data; not a real measurement.</text>
 </svg>
