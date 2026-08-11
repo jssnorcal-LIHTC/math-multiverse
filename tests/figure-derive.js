@@ -324,6 +324,46 @@ check('excess footer notes are clamped: plot height never collapses, no negative
   });
 });
 
+// ---- fix round 2 (team-lead finding, Task 4): an axis for a quantity that cannot be negative must
+// never OFFER a negative value just because the 8% pad pushed under zero. Applies to paddedExtent
+// itself, so it covers every call site (single-chart x, single-chart y, bar's zero-inclusive y, and
+// both of those again inside panels) with one guard rather than four repeated ones. ----
+
+check('line x-axis: an all-non-negative series never gets a negative tick (was: season -10)', () => {
+  const t = { type: 'line', xLabel: 'season', yLabel: 'y', series: [{ points: [[1, 76], [10, 64], [20, 52], [30, 39]] }] };
+  const g = layout(t);
+  assertTrue(g.xTicks[0] >= 0, `expected no negative x tick for an all-non-negative series, got ${JSON.stringify(g.xTicks)}`);
+});
+
+check('bar y-axis: an all-non-negative series never gets a negative tick (was: rainfall -10, swing -20)', () => {
+  const t = { type: 'bar', xLabel: 'x', yLabel: 'y', series: [{ points: [[0, 9], [1, 42]] }] };
+  const g = layout(t);
+  assertTrue(g.yTicks[0] >= 0, `expected no negative y tick for an all-non-negative bar series, got ${JSON.stringify(g.yTicks)}`);
+});
+
+check('line y-axis: an all-non-negative series never gets a negative tick', () => {
+  const t = { type: 'line', xLabel: 'x', yLabel: 'y', series: [{ points: [[1, 5], [2, 8], [3, 6]] }] };
+  const g = layout(t);
+  assertTrue(g.yTicks[0] >= 0, `expected no negative y tick for an all-non-negative line series, got ${JSON.stringify(g.yTicks)}`);
+});
+
+check('a GENUINELY negative-valued series is NOT clamped: its floor stays negative (regression guard)', () => {
+  const t = { type: 'bar', xLabel: 'x', yLabel: 'y', series: [{ points: [[1, -50], [2, 50]] }] };
+  const g = layout(t);
+  assertTrue(g.yTicks[0] < 0, `expected a negative floor to survive for a series that actually goes negative, got ${JSON.stringify(g.yTicks)}`);
+});
+
+check('panels: shared line x-axis never gets a negative tick when both panels are all-non-negative', () => {
+  const t = {
+    panels: [
+      { type: 'line', yLabel: 'a', series: [{ points: [[1, 76], [10, 64]] }] },
+      { type: 'line', yLabel: 'b', series: [{ points: [[1, 20], [10, 19]] }] },
+    ],
+  };
+  const g = layoutPanels(t);
+  assertTrue(g.xTicks[0] >= 0, `expected no negative shared x tick, got ${JSON.stringify(g.xTicks)}`);
+});
+
 // ---- panels mode (Task 4, V2): the SAME truthfulness scrutiny given the original single-series
 // path above, so a self-consistent-but-wrong genSvgPanels bug cannot hide behind a clean byte
 // compare the way the original fix-round-1 defect did before item 3 closed that gap. ----
@@ -343,6 +383,27 @@ const SAMPLE_PANELS_BAR = {
   ],
   categoryLabels: ['Sable Flats', 'Cairn Bay'],
 };
+
+// ---- fix round 2 (team-lead finding, Task 4), panels variants: same zero-floor guarantee applies
+// through layoutPanels(), since it calls the SAME paddedExtent() the single-chart path does. ----
+
+check('panels: bar y-axes never get a negative tick when both panels are all-non-negative', () => {
+  const g = layoutPanels(SAMPLE_PANELS_BAR);
+  g.panelLayouts.forEach((panel, i) => {
+    assertTrue(panel.yTicks[0] >= 0, `panel ${i}: expected no negative y tick, got ${JSON.stringify(panel.yTicks)}`);
+  });
+});
+
+check('the CO2/O2 dome-drift shape is unaffected: its own far-from-zero axes were never clamped', () => {
+  const before = genSvg(SAMPLE_PANELS_LINE, ACCENT);
+  const g = layoutPanels(SAMPLE_PANELS_LINE);
+  // Neither panel's data comes near zero, so the clamp is a structural no-op here: assert the
+  // floors sit close to the data's own minimum (well above 0), not pinned AT 0 the way a
+  // genuinely-near-zero series now would be.
+  assertTrue(g.panelLayouts[0].yTicks[0] > 100, `panel 0 floor moved unexpectedly close to zero: ${JSON.stringify(g.panelLayouts[0].yTicks)}`);
+  assertTrue(g.panelLayouts[1].yTicks[0] > 5, `panel 1 floor moved unexpectedly close to zero: ${JSON.stringify(g.panelLayouts[1].yTicks)}`);
+  assertTrue(genSvg(SAMPLE_PANELS_LINE, ACCENT) === before, 'determinism holds under the fix');
+});
 
 check('panels: genSvg is deterministic for both line and bar panels', () => {
   assertTrue(genSvg(SAMPLE_PANELS_LINE, ACCENT) === genSvg(SAMPLE_PANELS_LINE, ACCENT), 'line panels: two calls differed');
