@@ -171,16 +171,43 @@
    case for a Gray's-plate-style figure, not a rare one. Three-plus wrapped lines of unclamped
    caption push the headline and buttons out the same way the frame height did. -webkit-box +
    -webkit-line-clamp is the one cross-browser-enough way to clamp multi-line text with an
-   ellipsis (Safari, the actual target, supports it); the full caption still lives in the
-   lightbox this figure's own strip/rail thumb opens, so nothing authored is lost, only the
-   completion card's copy of it is capped. */
-.mv-rv-cap { font-weight: 600; text-align: center; max-width: 60ch;
-  max-height: 2.8em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+   ellipsis (Safari, the actual target, and Chromium both support it); the full caption still
+   lives in the lightbox this figure's own strip/rail thumb opens, so nothing authored is lost,
+   only the completion card's copy of it is capped.
+
+   Fix round 2, first pass: dropped `max-height: 2.8em`, which fix round 1 paired with the
+   clamp. The two fight rather than agree: `-webkit-line-clamp` truncates at a LINE-BOX boundary
+   and appends its own ellipsis, while `max-height` clips at a raw length with no idea where a
+   line box ends, and 2.8em is not an exact multiple of the resolved line-height. That was a
+   real, distinct bug, but removing it alone did NOT fix the reported slice: re-rendered and
+   measured (not just re-read), `.mv-rv-cap`'s box was still only 17px tall against a 16px
+   font-size, less than ONE line, let alone two -- so the visible "second line" in the original
+   report was already a SINGLE line's own descenders being cut off, not really a second line.
+
+   Fix round 2, second pass, the actual cause: `.mv-rv-cap` and `.mv-rv-card .mv-lb-credit` are
+   flex ITEMS of `.mv-rv-card` (a column flex container), and both carry `overflow: hidden`
+   (required for the clamp and the ellipsis respectively). Per the flexbox spec, a flex item's
+   automatic minimum size -- the floor that normally stops `min-height: auto` letting an item
+   shrink below its own content -- computes to ZERO rather than content-based specifically when
+   the item's own overflow is not `visible`. So round 1's CRITICAL fix (`.mv-rv-card` and
+   `.mv-rv-frame` getting `min-height: 0` so the FRAME could shrink to fit) was ALSO, as an
+   unintended side effect, letting the caption and credit shrink to zero right alongside it,
+   because their own `overflow: hidden` already handed them that same zero floor for free, with
+   no `min-height: 0` needed to unlock it. `flex-shrink: 0` on both fixes this the same way the
+   headline/stars/score/action row at the `.level-complete` level are already implicitly
+   protected (their overflow stays `visible`, so their auto min-height floor holds on its own):
+   the caption and credit are reserved-size chrome, not part of "the figure" that gives, and only
+   `.mv-rv-frame` should be the thing item 1's fix actually shrinks. Re-verified live at 654px
+   after this second pass: both lines render at their full, unclipped height. */
+.mv-rv-cap { font-weight: 600; text-align: center; max-width: 60ch; flex-shrink: 0;
+  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 /* Credit stays one line for the same reason: unlike the caption there is no clamp fallback
    worth adding for a single line, so a plain ellipsis truncation is enough, scoped to the
    reveal card specifically (`.mv-lb-credit` is shared with the lightbox, where a longer credit
-   wrapping is fine and untouched). */
-.mv-rv-card .mv-lb-credit { max-width: min(560px, 86vw); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+   wrapping is fine and untouched). `flex-shrink: 0`: see the caption's comment above -- this
+   line's own `overflow: hidden` needs the same protection for the same reason. */
+.mv-rv-card .mv-lb-credit { max-width: min(560px, 86vw); white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; flex-shrink: 0; }
 
 /* .mv-rv-cell and .mv-rv-tile are real as of Task 6 (both defined above); listed here for real
    reduced-motion coverage, not just future-proofing. .mv-flash.stamp-* remains a forward
