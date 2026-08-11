@@ -616,6 +616,18 @@
   }
   .lc-score { font-size: 1.05rem; color: var(--text-primary); }
   .lc-grand-msg { font-size: 0.95rem; color: var(--text-secondary); max-width: 460px; }
+  /* Fix round 1, CRITICAL item: .level-complete is height:100%, justify-content:center, with NO
+     scroll, sitting inside .host-frame which is overflow:hidden with no page scroll either. On
+     a real iPad 6 Safari (inner height roughly 654-694px with browser chrome subtracted, not the
+     1024x768 the first pass tested at) a reward figure sized off a raw vh fraction left the
+     headline and this row's own buttons pushed outside .host-frame with no way to reach them.
+     The fix is NOT another vh guess: #lc-reveal, .mv-rv-card and .mv-rv-frame (engine/engine.css)
+     all get flex:0 1 auto; min-height:0, so the CARD is the flex item that actually shrinks
+     below its own content height when the real, measured remaining space is tight, while this
+     row and the headline/level/stars/score above keep their default min-height:auto floor and
+     so are never the ones that give. display:flex + justify-content:center centers the card
+     (which may render narrower than 100% once shrunk) within the row's own full width. */
+  #lc-reveal { display: flex; justify-content: center; flex: 0 1 auto; min-height: 0; width: 100%; }
   .lc-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
 
   /* ============================================================
@@ -3031,6 +3043,7 @@
 
 <script src="engine/items.js"></script>
 <script src="engine/pack.js"></script>
+<script src="engine/figures.js"></script>
 <script src="engine/runner.js"></script>
 <script>
 'use strict';
@@ -3732,9 +3745,16 @@ function packCardNode(entry) {
     return `<span class="${cls}"></span>`;
   }).join('');
 
+  // Mirrors mathCardNode's logoUrl/icon pattern (:3695-3697): a badgeUrl that fails to load
+  // (missing file, bad path) falls back to the same emoji mc-icon every pack already renders
+  // today, so a shelf badge is additive and never a hard dependency on an asset existing.
+  const iconHtml = entry.badgeUrl
+    ? `<img class="mc-logo" src="${entry.badgeUrl}" alt="${entry.title}" loading="lazy" onerror="this.outerHTML = '<div class=&quot;mc-icon&quot;>${entry.icon}</div>';">`
+    : `<div class="mc-icon">${entry.icon}</div>`;
+
   card.innerHTML = `
     <div class="mc-header">
-      <div class="mc-icon">${entry.icon}</div>
+      ${iconHtml}
       <div class="mc-ccss">${entry.standards || 'CCSS ' + entry.subject.toUpperCase() + ' ' + entry.grade}</div>
     </div>
     <div class="mc-title">${entry.title}</div>
@@ -3936,9 +3956,9 @@ function playLevel(levelIndex) {
     const host = $('host-frame');
     host.innerHTML = '';
     activeModuleCleanup = InlineModules[currentPackId].init(host, levelIndex, {
-      onComplete: (score, stars) => {
+      onComplete: (score, stars, foundRatio) => {
         renderHeader();
-        showPackLevelComplete(entry, pack, levelIndex, score, stars);
+        showPackLevelComplete(entry, pack, levelIndex, score, stars, foundRatio);
       },
       onExit: () => { disposeActiveModule(); renderPackLevels(entry, pack); },
     });
@@ -4039,18 +4059,31 @@ function showGrandComplete(module) {
   $('lc-launcher').addEventListener('click', exitToLauncher);
 }
 
-function showPackLevelComplete(entry, pack, levelIndex, score, stars) {
+function showPackLevelComplete(entry, pack, levelIndex, score, stars, foundRatio) {
   disposeActiveModule();
   const host = $('host-frame');
   const lv = pack.levels[levelIndex];
   const isLast = levelIndex === pack.levels.length - 1;
   const starsHtml = [1, 2, 3].map(n => `<span class="lc-star ${stars >= n ? 'earned' : ''}">★</span>`).join('');
+  // Owner ruling (26-0811, partial reveal): a level's lives can run out at 0 stars after several
+  // correct answers, and the cells those answers earned must not simply vanish -- the earlier
+  // gate here was `stars > 0`, which is exactly the defect this ruling fixes. `anyFound` is the
+  // single source of truth for BOTH the host-div gate below and the render-call gate further
+  // down; they must stay the SAME condition (a previous fix round already had to correct exactly
+  // this pair drifting apart), so both read this one local instead of repeating the check.
+  const anyFound = (foundRatio || 0) > 0;
+  // Fix round 1, item 7: the host div is emitted only when the level actually declares a
+  // reveal. An unconditional empty <div id="lc-reveal"> still counts as a flex item of
+  // .level-complete's own gap:18px, costing 18px above AND below it on every one of the five
+  // shipped packs that never sets `reveal` at all, for a host nothing will ever fill.
+  const revealHtml = (anyFound && lv.reveal) ? `<div id="lc-reveal"></div>` : '';
   host.innerHTML = `
     <div class="level-complete" style="--card-color: ${entry.color};">
       <div class="lc-headline">${stars > 0 ? 'LEVEL CLEARED' : 'NOT QUITE'}</div>
       <div class="lc-level">L${lv.id} &middot; ${lv.name}</div>
       <div class="lc-stars">${starsHtml}</div>
       <div class="lc-score">Score: <strong>${score}</strong></div>
+      ${revealHtml}
       <div class="lc-actions">
         <button class="btn btn-secondary" id="lc-back">&larr; Levels</button>
         <button class="btn btn-secondary" id="lc-retry">Retry</button>
@@ -4061,6 +4094,18 @@ function showPackLevelComplete(entry, pack, levelIndex, score, stars) {
   const back = $('lc-back');   if (back)  back.addEventListener('click', () => renderPackLevels(entry, pack));
   const retry = $('lc-retry'); if (retry) retry.addEventListener('click', () => playLevel(levelIndex));
   const next  = $('lc-next');  if (next)  next.addEventListener('click', () => playLevel(levelIndex + 1));
+  // `pack` and `levelIndex` are already this function's own parameters, so read the reveal
+  // straight off them rather than re-fetching through the module-level currentPackId: a stale
+  // or null currentPackId at completion-screen time would make MVPack.get return undefined and
+  // the reveal silently not render, with nothing to say why. `anyFound` gates this so a level
+  // that earned nothing at all does not hand out any artifact; `lv.reveal` is checked again
+  // here (not just at template-build time above) so a reveal-less level never even attempts the
+  // $('lc-reveal') lookup, which would return null since the host was never emitted. foundRatio
+  // (not just the boolean) is forwarded to renderRevealCard so it can lift only the tiles this
+  // attempt actually earned rather than the whole grid.
+  if (typeof MVFigures !== 'undefined' && anyFound && lv.reveal) {
+    try { MVFigures.renderRevealCard(pack, levelIndex, $('lc-reveal'), foundRatio); } catch (e) {}
+  }
 }
 
 function exitToLevels() {

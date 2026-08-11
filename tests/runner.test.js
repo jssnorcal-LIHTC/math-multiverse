@@ -44,7 +44,10 @@ check('pickItems throws rather than silently shrinking when a level is over-subs
 
 // ---------- repeatPolicy rotation: pickItems reads a call-time MVFresh for ordering ----------
 check('pickItems rotation: unseen-first via MVFresh, "free" policy ignores it, absent MVFresh keeps legacy shuffle+slice', () => {
-  // rotation: with a fake MVFresh, unseen ids are chosen before seen ones
+  // Fix round 1, item 7: the two globalThis.MVFresh installs below used to sit next to a bare
+  // `delete globalThis.MVFresh` with no try/finally between them. A failure in the throwing
+  // assertion partway through (or in pickItems itself) would skip that delete and leak a fake
+  // MVFresh into every check that runs later in this file, none of which expect one.
   const seenLedger = { 'pack.p1.i0': ['id:a', 'id:b'] };
   const fakeFresh = {
     orderPool: (key, ids) => ids.slice().sort((x, y) => {
@@ -55,17 +58,27 @@ check('pickItems rotation: unseen-first via MVFresh, "free" policy ignores it, a
     marked: [],
     markSeenIds(key, ids) { this.marked.push([key, ids.join(',')]); },
   };
-  globalThis.MVFresh = fakeFresh;
   const lvl = { name: 'L', questions: 2, itemIds: ['a', 'b', 'c', 'd'] };
   const items = ['a', 'b', 'c', 'd'].map(id => ({ id }));
-  const picked = MVRunner._test.pickItems(lvl, items, () => 0.5, 'pack.p1.i0');
-  if (picked.some(i => i.id === 'a' || i.id === 'b')) throw new Error('seen item chosen while unseen remained');
-  delete globalThis.MVFresh;
+
+  // rotation: with a fake MVFresh, unseen ids are chosen before seen ones
+  globalThis.MVFresh = fakeFresh;
+  try {
+    const picked = MVRunner._test.pickItems(lvl, items, () => 0.5, 'pack.p1.i0');
+    if (picked.some(i => i.id === 'a' || i.id === 'b')) throw new Error('seen item chosen while unseen remained');
+  } finally {
+    delete globalThis.MVFresh;
+  }
+
   // policy 'free': MVFresh present but ignored
   globalThis.MVFresh = fakeFresh;
-  const lvlFree = { name: 'L', questions: 2, itemIds: ['a', 'b', 'c', 'd'], repeatPolicy: 'free' };
-  MVRunner._test.pickItems(lvlFree, items, () => 0.5, 'pack.p1.i0'); // must not throw, may pick any
-  delete globalThis.MVFresh;
+  try {
+    const lvlFree = { name: 'L', questions: 2, itemIds: ['a', 'b', 'c', 'd'], repeatPolicy: 'free' };
+    MVRunner._test.pickItems(lvlFree, items, () => 0.5, 'pack.p1.i0'); // must not throw, may pick any
+  } finally {
+    delete globalThis.MVFresh;
+  }
+
   // absent MVFresh: identical to legacy behavior (deterministic rng -> fixed order)
   const legacy = MVRunner._test.pickItems(lvl, items, () => 0.5, 'pack.p1.i0');
   if (legacy.length !== 2) throw new Error('legacy path broken');
@@ -290,6 +303,199 @@ check('makeRunner survives a throwing MVFresh.markSeenIds and still renders the 
   }
 });
 
+check('runner renders a passage item with NO MVFigures loaded (degrade path)', () => {
+  // Pin the precondition itself, matching the discipline already used below for MVItems: a
+  // future task that adds a require('../engine/figures.js') to this file would publish
+  // globalThis.MVFigures before this check runs, and the check would keep reporting "ok"
+  // while no longer testing the degrade path at all, under a name asserting the opposite.
+  assert.strictEqual(typeof MVFigures, 'undefined',
+    'precondition: this process must have NO MVFigures, or this check is not testing the degrade path');
+  // dom-stub environment never requires engine/figures.js, so there is no MVFigures global; a
+  // figure-bearing passage must still render text-only rather than throw (optional-layer law).
+  const Items = require('../engine/items.js');
+  const pack = probePack();
+  pack.passages[0].figureIds = ['f1'];
+  pack.passages[0].docKind = 'case-file';
+  const host = makeEl('div');
+  const Save = spySave();
+  const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+  assert.strictEqual(host.querySelectorAll('.mv-passage').length, 1, 'passage panel missing');
+  assert.strictEqual(host.querySelectorAll('.mv-para').length, 1, 'passage body did not render');
+  assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'item box did not render');
+  assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'item choices did not render fully');
+  cleanup();
+});
+
+check('makeRunner calls FG.renderStrip exactly once per passage, across two questions, with the passage figureIds and the .mv-passage host', () => {
+  // Capture-and-restore, not delete, matching the file's own idiom at the hadPack check below:
+  // delete is wrong if anything ever pre-populates the global.
+  const had = global.MVFigures;
+  const calls = [];
+  global.MVFigures = {
+    renderStrip(pack, figureIds, hostEl) {
+      calls.push({ ids: figureIds.slice(), hostClassName: hostEl.className });
+      const strip = makeEl('div');
+      strip.className = 'mv-figs';
+      hostEl.appendChild(strip);
+      return strip;
+    },
+  };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack();
+      pack.passages[0].figureIds = ['f1', 'f2'];
+      const host = makeEl('div'), Save = spySave();
+      R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+      assert.strictEqual(calls.length, 1, 'renderStrip was not called on the first question');
+      const progBefore = host.querySelectorAll('.mv-prog')[0].textContent;
+      // Answer correctly (key is 1 on every probePack item) so it auto-advances to the next
+      // question, which sits on the SAME passage; renderStrip must not fire a second time.
+      host.querySelectorAll('.mv-choice')[1].onclick();
+      const ck = host.querySelectorAll('.mv-check')[0];
+      if (ck && ck.onclick) ck.onclick();
+      const progAfter = host.querySelectorAll('.mv-prog')[0].textContent;
+      // Pin the premise itself: a second question was actually reached, so this check would
+      // fail if the click did nothing rather than passing vacuously.
+      assert.notStrictEqual(progAfter, progBefore, 'the level did not advance to a second question');
+      assert.strictEqual(progAfter, '2 / 4', 'the level did not advance to the second question');
+      assert.strictEqual(calls.length, 1, 'renderStrip fired again for a second question on the same passage');
+      assert.deepStrictEqual(calls[0].ids, ['f1', 'f2'], 'renderStrip did not receive the passage figureIds');
+      assert.strictEqual(calls[0].hostClassName, 'mv-passage', 'renderStrip did not receive the .mv-passage host');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+// Dryness-fix round 2, item 2: at real passage length the strip used to be entirely below the
+// fold, because renderQuestion called FG.renderStrip only after appending every paragraph, which
+// made the strip the passage box's LAST child. Fixed by calling it right after the title and
+// before the paragraph loop. This pins the resulting DOM order directly, using a spy that mimics
+// the REAL renderStrip's append-only behavior (engine/figures.js), so a future regression that
+// moves the call back below the paragraph loop reds here instead of only showing up on a real
+// passage long enough to scroll.
+check("the figure strip lands as the passage box's SECOND child (title first, strip second), ahead of every paragraph", () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack();
+    pack.passages[0].figureIds = ['f1', 'f2'];
+    // Three paragraphs, not one, so this also pins that the strip lands ahead of EVERY
+    // paragraph, not just the first.
+    pack.passages[0].text = 'Paragraph one text here.\n\nParagraph two text here.\n\nParagraph three text here.';
+    const host = makeEl('div'), Save = spySave();
+    const Figures = {
+      renderStrip(pk, figureIds, hostEl) {
+        const strip = makeEl('div');
+        strip.className = 'mv-figs';
+        hostEl.appendChild(strip);   // matches the real renderStrip's append-only behavior
+        return strip;
+      },
+    };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    const passageBox = host.querySelectorAll('.mv-passage')[0];
+    assert.strictEqual(passageBox.children[0].className, 'mv-passage-title', 'the title is not the first child');
+    assert.strictEqual(passageBox.children[1].className, 'mv-figs', "the strip did not land as the passage box's SECOND child, immediately after the title");
+    assert.strictEqual(passageBox.children.length, 5, 'expected title + strip + 3 paragraphs');
+    for (let i = 2; i < passageBox.children.length; i++) {
+      assert.strictEqual(passageBox.children[i].className, 'mv-para', `child ${i} is not a paragraph -- the strip landed after prose, not before it`);
+    }
+  });
+});
+
+check('makeRunner survives a throwing MVFigures.renderStrip and still renders the level', () => {
+  const had = global.MVFigures;
+  // Captured and restored in the SAME finally as global.MVFigures, on every path including a
+  // mid-check assertion failure, and scoped to this one check only: a global console.warn
+  // silenced for the whole file would swallow a genuine warning from a later test.  Capturing
+  // it also turns the round-1 diagnostic's console noise into its only test coverage; nothing
+  // else in the suite ever asserted the warn fires at all.
+  const hadWarn = global.console.warn;
+  const warnCalls = [];
+  global.console.warn = (...args) => { warnCalls.push(args); };
+  // The fake builds on a DETACHED node (never appended to hostEl) before throwing, so the
+  // zero-strip assertion below actually pins the append-last, detached-build property the real
+  // renderStrip relies on, rather than passing merely because the fake never did any work.
+  global.MVFigures = {
+    renderStrip() {
+      const strip = makeEl('div');
+      strip.className = 'mv-figs';
+      strip.appendChild(makeEl('button'));
+      throw new Error('figures boom');
+    },
+  };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack();
+      pack.passages[0].figureIds = ['f1'];
+      const host = makeEl('div'), Save = spySave();
+      R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+      assert.strictEqual(host.querySelectorAll('.mv-passage').length, 1, 'a throwing renderStrip must not stop the passage from rendering');
+      assert.strictEqual(host.querySelectorAll('.mv-para').length, 1, 'a throwing renderStrip must not stop the paragraph from rendering');
+      assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'a throwing renderStrip must not stop the item from rendering');
+      assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'a throwing renderStrip must not stop the item from rendering fully');
+      assert.strictEqual(host.querySelectorAll('.mv-figs').length, 0, 'a throwing renderStrip must not leave a partial strip');
+      assert.strictEqual(warnCalls.length, 1, 'the guard did not warn exactly once for the throwing renderStrip');
+      assert.ok(/figures.*renderStrip failed/i.test(String(warnCalls[0][0])), 'the warn did not name the failure');
+      assert.ok(warnCalls[0][1] instanceof Error && warnCalls[0][1].message === 'figures boom',
+        'the warn did not pass along the thrown Error');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+    global.console.warn = hadWarn;
+  }
+});
+
+// ---------- Task 4: cleanup calls FG.closeLightbox() ----------
+check('cleanup calls a call-time-resolved MVFigures.closeLightbox exactly once (on top of the render-time calls)', () => {
+  const had = global.MVFigures;
+  const calls = [];
+  global.MVFigures = { closeLightbox() { calls.push(1); } };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack(), host = makeEl('div'), Save = spySave();
+      const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+      // Dryness-fix round 2: makeRunner's own first renderQuestion() call now ALSO closes the
+      // lightbox (the stale-lightbox fix), so the count after construction is 1, not 0.
+      // cleanup() must still add exactly one more of its own, not zero and not more than one.
+      assert.strictEqual(calls.length, 1, 'construction did not close the lightbox exactly once via its own first render');
+      cleanup();
+      assert.strictEqual(calls.length, 2, 'cleanup did not call closeLightbox exactly once on top of the render-time call');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+check('cleanup survives a throwing MVFigures.closeLightbox and still saves', () => {
+  const had = global.MVFigures;
+  global.MVFigures = { closeLightbox() { throw new Error('lightbox boom'); } };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack(), host = makeEl('div'), Save = spySave();
+      const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+      assert.doesNotThrow(() => cleanup(), 'cleanup must not throw when closeLightbox throws');
+      assert.strictEqual(Save.calls.saveNow, 1, 'a throwing closeLightbox must not stop cleanup from saving');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+check('cleanup with NO MVFigures loaded does not throw (degrade path)', () => {
+  assert.strictEqual(typeof MVFigures, 'undefined',
+    'precondition: this process must have NO MVFigures, or this check is not testing the degrade path');
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack(), host = makeEl('div'), Save = spySave();
+    const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+    assert.doesNotThrow(() => cleanup());
+  });
+});
+
 check('the factory can reach the globals the browser gives it', () => {
   // The bug this replaces: the UMD factory referenced `root`, which is the WRAPPER's parameter, so it was
   // out of scope inside the factory and every global lookup threw ReferenceError. The wrapper now passes
@@ -399,6 +605,529 @@ check('mc still names its single wrong pick', () => {
   };
   const lines = explainTextFor(MC, 2);
   assert.ok(lines.some(t => /reversed it/.test(t)), 'mc regressed: ' + JSON.stringify(lines));
+});
+
+// ---------- Task 6: reveal mechanic (deps.Figures.attachReveal + onCorrect) ----------
+// Injected via deps.Figures rather than a captured global, per the pre-flight's consistency
+// requirement: Task 6 introduces deps.Figures as the threading pattern this file's Items/Save
+// already use, and unifies the passage hook onto the same three-term resolution rather than
+// leaving two different patterns for one optional layer.
+
+function revealPack() {
+  const pack = probePack();
+  pack.figures = [{ id: 'rf1', kind: 'photo', src: 'x.jpg', caption: 'c', credit: 'cr', alt: 'a' }];
+  pack.levels[0].reveal = { figureId: 'rf1' };
+  return pack;
+}
+
+check('makeRunner calls deps.Figures.attachReveal exactly once per level, with the .mv-bar host and the served queue length', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = revealPack();
+    const host = makeEl('div'), Save = spySave();
+    const attachCalls = [];
+    const Figures = {
+      attachReveal(barEl, pk, lvl, total) {
+        attachCalls.push({ barClassName: barEl.className, packId: pk.meta.id, total, hasReveal: !!(lvl && lvl.reveal) });
+        return { onCorrect() {} };
+      },
+    };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(attachCalls.length, 1, 'attachReveal was not called exactly once for the level');
+    assert.strictEqual(attachCalls[0].barClassName, 'mv-bar', 'attachReveal was not called with the .mv-bar host');
+    assert.strictEqual(attachCalls[0].packId, 'probe');
+    assert.strictEqual(attachCalls[0].total, 4, 'attachReveal did not receive the served queue length');
+    assert.strictEqual(attachCalls[0].hasReveal, true, 'attachReveal did not receive the level carrying .reveal');
+  });
+});
+
+check('reveal.onCorrect fires with the just-answered question index on a correct submit, and never on a wrong one (the reveal is never punitive)', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = revealPack();
+    const host = makeEl('div'), Save = spySave();
+    const onCorrectCalls = [];
+    const Figures = { attachReveal() { return { onCorrect(i) { onCorrectCalls.push(i); } }; } };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(onCorrectCalls.length, 0, 'onCorrect fired before any answer was submitted');
+
+    host.querySelectorAll('.mv-choice')[1].onclick();   // key is 1 on every probePack item: correct
+    let ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    assert.deepStrictEqual(onCorrectCalls, [0], 'onCorrect did not fire exactly once with question index 0');
+
+    host.querySelectorAll('.mv-choice')[0].onclick();   // next question, key is 1: index 0 is wrong
+    ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    assert.deepStrictEqual(onCorrectCalls, [0],
+      'onCorrect fired on a wrong answer -- a miss must never touch the reveal, earned or otherwise');
+  });
+});
+
+check('makeRunner tolerates FG.attachReveal returning null (the ordinary no-reveal case) with no crash and a normal correct flash', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack();       // no .reveal on this level
+    const host = makeEl('div'), Save = spySave();
+    let attachCalls = 0;
+    const Figures = { attachReveal() { attachCalls++; return null; } };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(attachCalls, 1, 'attachReveal must still be called; it alone decides reveal vs no-reveal');
+    host.querySelectorAll('.mv-choice')[1].onclick();
+    const ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    // Under withSyncTimers, submit()'s own later() advance runs synchronously and clears the
+    // flash before this line, so grading must be read off Save.recordAnswer rather than the
+    // (already-cleared) .mv-flash node -- the same reason no earlier check in this file asserts
+    // on .mv-flash.ok after a synchronous-advance click.
+    assert.strictEqual(Save.calls.recordAnswer.length, 1, 'no answer was recorded');
+    assert.strictEqual(Save.calls.recordAnswer[0][0].correct, true, 'a correct answer must still grade correctly with no reveal attached');
+  });
+});
+
+check('makeRunner survives a throwing deps.Figures.attachReveal and still renders the level', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = revealPack();
+    const host = makeEl('div'), Save = spySave();
+    const Figures = { attachReveal() { throw new Error('reveal boom'); } };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'a throwing attachReveal must not stop the item from rendering');
+    assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'a throwing attachReveal must not stop choices from rendering');
+  });
+});
+
+check('makeRunner survives a throwing reveal.onCorrect and still advances on a correct answer', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = revealPack();
+    const host = makeEl('div'), Save = spySave();
+    const Figures = { attachReveal() { return { onCorrect() { throw new Error('onCorrect boom'); } }; } };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    host.querySelectorAll('.mv-choice')[1].onclick();
+    const ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    // See the sync-timer note in the check above: grading is read off Save.recordAnswer, not
+    // .mv-flash, which the synchronous advance has already cleared by this point.
+    assert.strictEqual(Save.calls.recordAnswer.length, 1, 'no answer was recorded');
+    assert.strictEqual(Save.calls.recordAnswer[0][0].correct, true, 'a throwing onCorrect must not stop the item from grading correct');
+  });
+});
+
+// ---------- Owner ruling (26-0811): partial reveal -- foundRatio threaded through onComplete ----------
+// finish() derives a THIRD onComplete argument (cells found / total questions this attempt
+// served) from the SAME reveal handle attachReveal returned, so the shell can render a completion
+// card even at 0 stars when a level's lives ran out after earning some cells. Driven through the
+// REAL engine/figures.js here (not a mock), since the whole point is that this number comes from
+// the actual attachReveal/onCorrect wiring those checks above already pin, not a second parallel
+// count that could drift from it.
+
+check("a completed level threads foundRatio (cells found / total questions) through onComplete, via the REAL attachReveal handle", () => {
+  // require('../engine/figures.js') publishes a permanent global.MVFigures as a side effect of
+  // its own UMD wrapper (root.MVFigures = api, where root is globalThis under Node) -- the two
+  // "no MVFigures loaded (degrade path)" precondition checks later in this file need that global
+  // to stay absent, so it must be saved and restored here exactly like every other check in this
+  // file that touches global.MVFigures, even though this check only ever READS the module.
+  const had = global.MVFigures;
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const Figures = require('../engine/figures.js');
+      const pack = revealPack();   // 4 questions, lives 4, level.reveal set
+      const host = makeEl('div'), Save = spySave();
+      const seen = [];
+      R.makeRunner(pack, 0, host,
+        { onComplete(score, stars, foundRatio) { seen.push({ score, stars, foundRatio }); }, onExit() {} },
+        { Items, Save, Figures, rng: () => 0.5 });
+      // key is 1 on every probePack item: right, right, wrong, right -- 3 of 4 correct.
+      for (const pick of [1, 1, 0, 1]) {
+        const cs = host.querySelectorAll('.mv-choice');
+        cs[pick].onclick();
+        const ck = host.querySelectorAll('.mv-check')[0];
+        if (ck && ck.onclick) ck.onclick();
+        const next = host.querySelectorAll('.mv-next')[0];
+        if (next && next.onclick) next.onclick();
+      }
+      assert.strictEqual(seen.length, 1, 'onComplete did not fire exactly once');
+      assert.strictEqual(seen[0].stars, 2, 'precondition: one mistake on 4 lives should clear at 2 stars on the math ladder, got stars=' + seen[0].stars);
+      assert.strictEqual(seen[0].foundRatio, 0.75, 'foundRatio did not reflect 3 correct of 4 questions');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+check('a level that clears zero stars (lives exhausted) after earning some cells still reports a nonzero foundRatio -- the exact case the owner ruling fixes', () => {
+  const had = global.MVFigures;   // see the comment on the check above
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const Figures = require('../engine/figures.js');
+      const pack = revealPack();
+      pack.levels[0].lives = 2;   // two mistakes now exhausts lives, forcing 0 stars
+      const host = makeEl('div'), Save = spySave();
+      const seen = [];
+      R.makeRunner(pack, 0, host,
+        { onComplete(score, stars, foundRatio) { seen.push({ stars, foundRatio }); }, onExit() {} },
+        { Items, Save, Figures, rng: () => 0.5 });
+      // right, wrong, wrong, wrong -- 1 of 4 correct, 3 mistakes >= 2 lives: dnf, 0 stars, but a
+      // cell WAS earned on question 1 and must still be reported.
+      for (const pick of [1, 0, 0, 0]) {
+        const cs = host.querySelectorAll('.mv-choice');
+        cs[pick].onclick();
+        const ck = host.querySelectorAll('.mv-check')[0];
+        if (ck && ck.onclick) ck.onclick();
+        const next = host.querySelectorAll('.mv-next')[0];
+        if (next && next.onclick) next.onclick();
+      }
+      assert.strictEqual(seen.length, 1, 'onComplete did not fire exactly once');
+      assert.strictEqual(seen[0].stars, 0, 'precondition: this attempt must clear zero stars, or this check is not testing the broken case');
+      assert.strictEqual(seen[0].foundRatio, 0.25, 'a level cleared at 0 stars must still report the cell it earned (1 of 4), not silently drop to 0');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+check('a completed level with a reveal handle that has no foundCount() still finishes without throwing; foundRatio defaults to 0', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = revealPack();
+    const host = makeEl('div'), Save = spySave();
+    const Figures = { attachReveal() { return { onCorrect() {} }; } };   // no foundCount at all
+    const seen = [];
+    R.makeRunner(pack, 0, host,
+      { onComplete(score, stars, foundRatio) { seen.push(foundRatio); }, onExit() {} },
+      { Items, Save, Figures, rng: () => 0.5 });
+    for (const pick of [1, 1, 1, 1]) {
+      const cs = host.querySelectorAll('.mv-choice');
+      cs[pick].onclick();
+      const ck = host.querySelectorAll('.mv-check')[0];
+      if (ck && ck.onclick) ck.onclick();
+    }
+    assert.strictEqual(seen.length, 1, 'onComplete did not fire');
+    assert.strictEqual(seen[0], 0, 'foundRatio must default to 0, never throw, when the reveal handle has no foundCount()');
+  });
+});
+
+check('a reveal-less level (attachReveal returns null) reports foundRatio 0, never throws', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack();   // no .reveal on this level
+    const host = makeEl('div'), Save = spySave();
+    const seen = [];
+    R.makeRunner(pack, 0, host,
+      { onComplete(score, stars, foundRatio) { seen.push(foundRatio); }, onExit() {} },
+      { Items, Save, rng: () => 0.5 });
+    for (const pick of [1, 1, 1, 1]) {
+      const cs = host.querySelectorAll('.mv-choice');
+      cs[pick].onclick();
+      const ck = host.querySelectorAll('.mv-check')[0];
+      if (ck && ck.onclick) ck.onclick();
+    }
+    assert.strictEqual(seen.length, 1, 'onComplete did not fire');
+    assert.strictEqual(seen[0], 0, 'a reveal-less level must report foundRatio 0');
+  });
+});
+
+// ---------- Task 6 consistency requirement: the passage hook now honors deps.Figures too ----------
+// Task 3 shipped the passage hook on the two-term (no deps.Figures) resolution; Task 6 unifies it
+// onto the same three-term form attachReveal uses. The EXISTING global-MVFigures passage-hook
+// tests above are left untouched (they deliberately pin the browser's real resolution path);
+// these are new checks for the newly-added injection path.
+
+check('the passage hook honors deps.Figures ahead of the global (three-term resolution, Task 6 unification)', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack();
+    pack.passages[0].figureIds = ['f1'];
+    const host = makeEl('div'), Save = spySave();
+    const calls = [];
+    const Figures = {
+      renderStrip(pk, ids, hostEl) {
+        calls.push(ids.slice());
+        const s = makeEl('div'); s.className = 'mv-figs'; hostEl.appendChild(s); return s;
+      },
+      attachReveal() { return null; },
+    };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(calls.length, 1, 'deps.Figures.renderStrip was not called via the passage hook');
+    assert.deepStrictEqual(calls[0], ['f1']);
+  });
+});
+
+check('deps.Figures takes precedence over a global MVFigures when both are present', () => {
+  const had = global.MVFigures;
+  global.MVFigures = { renderStrip() { throw new Error('the GLOBAL renderStrip must not be reached when deps.Figures is supplied'); } };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack();
+      pack.passages[0].figureIds = ['f1'];
+      const host = makeEl('div'), Save = spySave();
+      const calls = [];
+      const Figures = {
+        renderStrip(pk, ids, hostEl) {
+          calls.push(1);
+          const s = makeEl('div'); s.className = 'mv-figs'; hostEl.appendChild(s);
+        },
+        attachReveal() { return null; },
+      };
+      R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+      assert.strictEqual(calls.length, 1, 'deps.Figures.renderStrip was not used ahead of the global');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+// ---------- Task 7: item-figure rail (deps.Figures.renderItemFigure) ----------
+
+check('makeRunner calls deps.Figures.renderItemFigure once per item carrying a figureId, with the .mv-item host, inserted before the stem', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack();
+    pack.items[0].figureId = 'f1';   // i0 only; i1-i3 carry none
+    const host = makeEl('div'), Save = spySave();
+    const calls = [];
+    const Figures = {
+      renderItemFigure(pk, figureId, itemBox) {
+        calls.push({ packId: pk.meta.id, figureId, hostClassName: itemBox.className });
+        const wrap = makeEl('div'); wrap.className = 'mv-item-fig';
+        itemBox.insertBefore(wrap, itemBox.firstChild || null);
+      },
+    };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(calls.length, 1, 'renderItemFigure was not called for an item with a figureId');
+    assert.strictEqual(calls[0].packId, 'probe');
+    assert.strictEqual(calls[0].figureId, 'f1');
+    assert.strictEqual(calls[0].hostClassName, 'mv-item', 'renderItemFigure did not receive the .mv-item host');
+    const itemBox = host.querySelectorAll('.mv-item')[0];
+    assert.strictEqual(itemBox.children[0].className, 'mv-item-fig', 'the figure was not inserted before the stem');
+
+    // Advance to the next question (i0's key is 1 on every probePack item: correct). Whichever
+    // item is served next may or may not carry a figureId depending on pickItems' shuffle, so
+    // pin the call count against the pack's OWN itemIds rather than assuming order: exactly one
+    // of the four probePack items (i0) was given a figureId above.
+    host.querySelectorAll('.mv-choice')[1].onclick();
+    const ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    assert.strictEqual(calls.length, 1, 'renderItemFigure fired for an item with no figureId');
+  });
+});
+
+check('makeRunner survives a throwing deps.Figures.renderItemFigure and still renders the item fully', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack();
+    pack.items[0].figureId = 'f1';
+    const host = makeEl('div'), Save = spySave();
+    const Figures = { renderItemFigure() { throw new Error('item-figure boom'); } };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'a throwing renderItemFigure must not stop the item box from rendering');
+    assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'a throwing renderItemFigure must not stop choices from rendering fully');
+    assert.strictEqual(host.querySelectorAll('.mv-item-fig').length, 0, 'a throwing renderItemFigure must not leave a partial rail');
+  });
+});
+
+check('runner renders an item with a figureId with NO MVFigures loaded (degrade path)', () => {
+  assert.strictEqual(typeof MVFigures, 'undefined',
+    'precondition: this process must have NO MVFigures, or this check is not testing the degrade path');
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack();
+    pack.items[0].figureId = 'f1';
+    const host = makeEl('div'), Save = spySave();
+    const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+    assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'item box did not render');
+    assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'item choices did not render fully');
+    cleanup();
+  });
+});
+
+check('deps.Figures.renderItemFigure takes precedence over a global MVFigures when both are present', () => {
+  const had = global.MVFigures;
+  global.MVFigures = { renderItemFigure() { throw new Error('the GLOBAL renderItemFigure must not be reached when deps.Figures is supplied'); } };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack();
+      pack.items[0].figureId = 'f1';
+      const host = makeEl('div'), Save = spySave();
+      const calls = [];
+      const Figures = { renderItemFigure() { calls.push(1); } };
+      R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+      assert.strictEqual(calls.length, 1, 'deps.Figures.renderItemFigure was not used ahead of the global');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+// Fix round 1 (controller review): every check above drives the hook through the DOM (asserting
+// itemBox.children[0].className), which only pins the hook's RESULT, not that it runs after
+// Items.render. Moving the call above Items.render in renderQuestion would still leave every one
+// of those checks green (the figure would simply become itemBox's only child a moment before
+// Items.render populates the rest, ending in the same final DOM shape). This check pins ORDER
+// directly via a call log shared by both spies, so hoisting the hook fails this loudly.
+check('the item-figure hook runs strictly AFTER Items.render, never before (call-order pin)', () => {
+  withSyncTimers(() => {
+    const order = [];
+    const Items = {
+      render(item, box) { order.push('items.render'); box.appendChild(makeEl('div')); },
+      needsCheck() { return false; },
+    };
+    const pack = probePack();
+    pack.items[0].figureId = 'f1';
+    const host = makeEl('div'), Save = spySave();
+    const Figures = { renderItemFigure() { order.push('figures.renderItemFigure'); } };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.deepStrictEqual(order, ['items.render', 'figures.renderItemFigure'],
+      'the item-figure hook must run strictly after Items.render, not before');
+  });
+});
+
+// ---------- Task 7: cleanup's closeLightbox resolution unified onto the three-term form ----------
+// The pre-flight's consistency requirement named the passage hook, attachReveal, and this
+// task's new item-figure hook as the three sites to unify; Task 6's report flagged the cleanup
+// site as a pre-existing fourth two-term holdout. Unified here since Task 7 touches this file
+// anyway; this pins that deps.Figures now also short-circuits the global at the cleanup site.
+
+check('cleanup honors deps.Figures.closeLightbox ahead of a global MVFigures', () => {
+  const had = global.MVFigures;
+  global.MVFigures = { closeLightbox() { throw new Error('the GLOBAL closeLightbox must not be reached when deps.Figures is supplied'); } };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack(), host = makeEl('div'), Save = spySave();
+      const calls = [];
+      const Figures = { closeLightbox() { calls.push(1); } };
+      const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+      cleanup();
+      // Dryness-fix round 2: 2, not 1, since makeRunner's own first renderQuestion() call now
+      // also closes the lightbox (the stale-lightbox fix below), on top of cleanup's own call.
+      // The real proof this test exists for is unchanged: the global's closeLightbox above
+      // THROWS unconditionally, so if either call site reached it instead of deps.Figures, this
+      // whole withSyncTimers block would throw rather than any count merely being off.
+      assert.strictEqual(calls.length, 2, 'deps.Figures.closeLightbox was not used ahead of the global at both the initial render and cleanup');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+// ---------- Dryness-fix round 2, minor: a stale lightbox must not survive into the next question ----------
+// Before this fix, an open lightbox survived the correct-answer auto-advance (and the
+// wrong-answer NEXT button) and ended up sitting over the NEW question, showing the OLD
+// question's figure. cleanup() already called FG.closeLightbox() when the level ends; this pins
+// the same call at the top of every renderQuestion(), which is what actually reaches both the
+// auto-advance path and the manual NEXT path, since both call renderQuestion().
+
+check('renderQuestion closes a call-time-resolved MVFigures lightbox on every render, including the correct-answer auto-advance and the wrong-answer NEXT button', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack(), host = makeEl('div'), Save = spySave();
+    const calls = [];
+    const Figures = { closeLightbox() { calls.push(1); } };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(calls.length, 1, 'renderQuestion did not close the lightbox on its own first render');
+
+    // Correct answer (key is 1 on every probePack item): auto-advances to question 2, which must
+    // close the lightbox again for the new question, not leave a prior one showing over it.
+    host.querySelectorAll('.mv-choice')[1].onclick();
+    let ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    assert.strictEqual(calls.length, 2, 'the correct-answer auto-advance did not close the lightbox for the new question');
+
+    // Wrong answer on question 2, then NEXT: must close the lightbox a third time.
+    host.querySelectorAll('.mv-choice')[0].onclick();
+    ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    const next = host.querySelectorAll('.mv-next')[0];
+    assert.ok(next, 'a wrong answer produced no NEXT button, so the NEXT path could not be exercised');
+    next.onclick();
+    assert.strictEqual(calls.length, 3, 'the wrong-answer NEXT button did not close the lightbox for the new question');
+  });
+});
+
+check('renderQuestion survives a throwing MVFigures.closeLightbox and still renders the question', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack(), host = makeEl('div'), Save = spySave();
+    const Figures = { closeLightbox() { throw new Error('lightbox boom'); } };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'a throwing closeLightbox must not stop the question from rendering');
+    assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'a throwing closeLightbox must not stop the choices from rendering fully');
+  });
+});
+
+check('renderQuestion with NO MVFigures loaded does not throw (degrade path)', () => {
+  assert.strictEqual(typeof MVFigures, 'undefined',
+    'precondition: this process must have NO MVFigures, or this check is not testing the degrade path');
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack(), host = makeEl('div'), Save = spySave();
+    assert.doesNotThrow(() => R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 }));
+  });
+});
+
+// ---------- Task 7: themed correct-answer stamps ----------
+// Run WITHOUT withSyncTimers on purpose: submit()'s later() schedules a REAL 1400ms timer here,
+// which never fires before this synchronous check finishes reading the footer, so the flash can
+// be inspected directly instead of via the Save.recordAnswer workaround the sync-timer checks
+// above must use (their own synchronous advance clears the flash before the assertion runs).
+
+check('a correct answer stamps CONFIRMED for a sci pack, VERIFIED for a hist pack, and the plain Correct flash otherwise', () => {
+  const Items = require('../engine/items.js');
+  function correctFlashFor(subject) {
+    const pack = probePack();
+    if (subject) pack.meta.subject = subject;
+    const host = makeEl('div'), Save = spySave();
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+    host.querySelectorAll('.mv-choice')[1].onclick();   // key is 1 on every probePack item
+    const ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    return host.querySelectorAll('.mv-flash')[0];
+  }
+
+  const sci = correctFlashFor('sci');
+  assert.ok(sci, 'no flash rendered for a sci pack');
+  assert.strictEqual(sci.classList.contains('ok'), true);
+  assert.strictEqual(sci.classList.contains('stamp-confirmed'), true, 'sci pack did not get stamp-confirmed');
+  assert.strictEqual(sci.classList.contains('stamp-verified'), false);
+  assert.strictEqual(sci.textContent, 'CONFIRMED');
+
+  const hist = correctFlashFor('hist');
+  assert.strictEqual(hist.classList.contains('ok'), true);
+  assert.strictEqual(hist.classList.contains('stamp-verified'), true, 'hist pack did not get stamp-verified');
+  assert.strictEqual(hist.classList.contains('stamp-confirmed'), false);
+  assert.strictEqual(hist.textContent, 'VERIFIED');
+
+  const ela = correctFlashFor(undefined);
+  assert.strictEqual(ela.classList.contains('ok'), true);
+  assert.strictEqual(ela.classList.contains('stamp-verified'), false, 'a pack with no subject must not get a themed stamp');
+  assert.strictEqual(ela.classList.contains('stamp-confirmed'), false);
+  assert.strictEqual(ela.textContent, 'Correct');
+});
+
+// Fix round 1 (controller review): 'hist' and 'sci' were bare literals with nothing pinning them
+// to the repo's actual subject universe (validate-pack.js constrains meta.subject only to
+// /^[a-z]+$/, so a pack authored with 'history' instead of 'hist' would silently get no stamp,
+// with no diagnostic anywhere). STAMP_THEME (engine/runner.js) names that universe once; this
+// pins its keys against the shell's own SUBJECT_ORDER (Math-Multiverse.html), read from source
+// the same way the file's own "no math save key or localStorage" check already reads runner.js
+// -- not required to equal SUBJECT_ORDER (STAMP_THEME rightly omits 'math' and 'ela', which get
+// no themed stamp), only required to be a SUBSET of it, so every themed subject is real.
+check("STAMP_THEME's subjects ('hist', 'sci') are members of the shell's real subject universe (SUBJECT_ORDER)", () => {
+  const html = require('fs').readFileSync(require('path').join(__dirname, '../Math-Multiverse.html'), 'utf8');
+  const m = html.match(/SUBJECT_ORDER\s*=\s*(\[[^\]]*\])/);
+  assert.ok(m, 'could not find SUBJECT_ORDER in Math-Multiverse.html; this check would otherwise pass vacuously');
+  const order = JSON.parse(m[1].replace(/'/g, '"'));
+  const themed = Object.keys(R.STAMP_THEME);
+  assert.deepStrictEqual(themed.sort(), ['hist', 'sci'], 'STAMP_THEME no longer has the two subjects this test was written to pin');
+  for (const s of themed) {
+    assert.ok(order.includes(s), `STAMP_THEME stamps subject "${s}", which is not in the shell's SUBJECT_ORDER (${order.join(', ')})`);
+  }
 });
 
 // ---------- the two star ladders must not drift apart ----------

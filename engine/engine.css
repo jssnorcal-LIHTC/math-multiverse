@@ -11,6 +11,23 @@
 .mv-heart { color: var(--mv-color, #7aa8ff); font-size: 0.9rem; }
 .mv-heart.spent { color: var(--border-subtle); }
 
+/* Per-question reveal strip (engine/figures.js attachReveal): only present when the level
+   declares `reveal`, so most packs' .mv-bar has just prog + hearts and this rule is dormant.
+   Inserted between them (`insertBefore(strip, bar.children[1])`) rather than after hearts, so
+   .mv-bar's justify-content: space-between spreads all three evenly. Not a tap target -- these
+   cells are decorative progress, never touched directly -- so the 44px minimum touch-target
+   rule does not apply to them. */
+.mv-reveal-strip { display: inline-flex; gap: 3px; align-items: center; }
+.mv-rv-cell { width: 18px; height: 22px; border-radius: 3px; border: 1px solid var(--border-subtle);
+  background: rgba(255,255,255,0.07); transition: background 0.35s ease, transform 0.35s ease; }
+.rv-hist .mv-rv-cell.found { background: #8b5e34; transform: scale(1.06); }
+.rv-sci  .mv-rv-cell.found { background: #1a8f5e; transform: scale(1.06); }
+/* Fix wave (final review): the fallback theme for any subject that is neither hist nor sci
+   (ela, math, or none), so a found cell still visibly changes state without borrowing hist's
+   brown or sci's green for a pack that is neither. Matches the app's own default accent
+   (--mv-color's fallback, used unthemed on .mv-heart above) rather than inventing a third hue. */
+.rv-neutral .mv-rv-cell.found { background: #7aa8ff; transform: scale(1.06); }
+
 /* The passage scrolls inside its own box so the item and the NEXT button never leave the screen on
    a 1024x768 iPad. This is the layout rule that kept breaking in the math modules.
 
@@ -37,6 +54,222 @@
 }
 .mv-passage-title { font-weight: 700; margin-bottom: 6px; color: var(--mv-color, #7aa8ff); }
 .mv-para { margin: 0 0 8px; line-height: 1.5; font-size: 0.95rem; }
+
+/* Figure strip: capped so prose stays dominant; it scrolls WITH the passage, so the
+   reading-surface floor is untouched.  The cap is expressed once via --mv-fig-h and enforced
+   by max-height rather than left advisory, and it is gated by tests/figures-offline.js,
+   Task 8.  The thumb is a fixed 128x96 box: `contain`, not `cover`, because a cropped chart or
+   map silently loses the axis labels and scale bar at its edges, which is a data-truth defect,
+   not a cosmetic one, letterboxing a photo costs nothing by comparison.  `flex: 0 0 auto` on
+   the thumb is load-bearing for the SAME data-truth reason: without it, min-width:44px is the
+   only thing that lets a thumb shrink below its 128px box, and .mv-fig's own overflow:hidden
+   would then clip the image on both sides, cropping a chart's axis labels by a second route.
+   The strip scrolls horizontally instead (overflow-x:auto) rather than compressing thumbs. */
+/* overflow-y: hidden is a Task 3 carry-over (found while working Task 4, same file): per the
+   CSS overflow spec, one axis set non-visible forces the other's computed value away from
+   visible, so a bare overflow-x:auto here left overflow-y computing to auto.  On a
+   classic-scrollbar platform (Windows Chrome/Firefox, not iPad Safari's overlay scrollbars) a
+   horizontal scrollbar rendered inside this 104px-capped box can eat its bottom few pixels and
+   overlap .mv-fig-badge, which sits at bottom:4px.  Pinned explicitly rather than left to the
+   spec's fallback. */
+.mv-figs { --mv-fig-h: 96px; display: flex; gap: 8px; margin: 4px 0 8px;
+  max-height: calc(var(--mv-fig-h) + 8px); overflow-x: auto; overflow-y: hidden; }
+.mv-fig { position: relative; flex: 0 0 auto; min-width: 44px; display: flex;
+  align-items: center; justify-content: center; border: 1px solid var(--border-subtle);
+  border-radius: 7px; padding: 0; background: none; cursor: pointer; overflow: hidden;
+  max-height: calc(var(--mv-fig-h) + 8px); }
+.mv-fig-img { display: block; width: 128px; height: var(--mv-fig-h, 96px); object-fit: contain; }
+.mv-fig-badge { position: absolute; left: 4px; bottom: 4px; font-size: 0.72rem;
+  letter-spacing: 0.08em; font-weight: 700; padding: 1px 5px; border-radius: 4px;
+  background: rgba(0,0,0,0.78); color: #e8eef7; }
+
+/* Lightbox + plate viewer, opened from a strip thumb (engine/figures.js openLightbox).
+   .mv-lb-zoom, not .mv-lb-img, is the zoom target: .mv-lb-overlay is absolutely positioned
+   INSIDE .mv-lb-zoom, not .mv-lb-frame, so scaling the zoom wrapper scales the plate and its
+   overlay together.  Scaling .mv-lb-img alone would grow the plate while the overlay stayed
+   at its unscaled size, drifting off the anatomy it traces -- exactly V2's flagship case
+   (Gray's 1918 nervous plate).  touch-action: manipulation on the frame and the image opts
+   out of Safari's native double-tap-to-zoom on the target iPad 6, which otherwise fights the
+   double-tap-to-zoom gesture this file implements itself. */
+.mv-lightbox { position: fixed; inset: 0; z-index: 60; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px; padding: 18px;
+  background: rgba(4,8,16,0.93); }
+.mv-lb-frame { position: relative; max-width: 96vw; max-height: 78vh; overflow: auto;
+  touch-action: manipulation; }
+.mv-lb-zoom { position: relative; display: inline-block; transition: transform 0.2s ease; }
+/* transform-origin is top-left, not center.  .mv-lb-frame is overflow:auto and shrink-to-fit
+   (sized to the UNZOOMED content), and CSS scrollable-overflow for a transformed descendant is
+   reachable only in the forward (right/down) direction from scrollLeft/scrollTop 0 -- there is
+   no negative scroll position.  A center origin grows the content symmetrically in both
+   directions, and the whole "before center" half becomes impossible to scroll to: verified live
+   in a real browser, scrollWidth/scrollHeight grew by only the forward half of the zoomed size,
+   and the top-left quadrant (where a plate's overlay markers can legitimately sit) stayed
+   permanently off-screen no matter how far the frame was scrolled.  Anchoring growth at the
+   top-left keeps the frame's existing scroll range able to reach every part of the zoomed image. */
+.mv-lb-zoom.zoomed { transform: scale(2); transform-origin: 0 0; }
+.mv-lb-img { display: block; max-width: 94vw; max-height: 74vh; margin: 0 auto;
+  touch-action: manipulation; }
+.mv-lb-overlay { position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; }
+/* Item-figure rail (engine/figures.js renderItemFigure): one thumb, carrying the same
+   .mv-fig-badge kind pill renderStrip's multi-figure strip does (Task 7 fix round 1 added it
+   here too, after this comment was written), inserted before whatever Items.render already
+   built so it reads above the stem rather than after it.  72px,
+   not the strip's 96px: the strip sits inside the scrolling passage panel, where a few dozen
+   extra px cost little; this rail sits inside .mv-item, which is the side that gives (see the
+   min-height:0/flex:0 1 auto comment below) and competes directly with the stem, choices and
+   footer for the same 1024x768 budget.  Only the height is overridden here -- .mv-fig-img's own
+   width:128px and object-fit:contain are untouched, so a chart or map's axis labels still never
+   crop, just at a shorter box. */
+/* --mv-fig-h, not a height override on .mv-fig-img directly: .mv-fig-img's own rule already
+   reads `height: var(--mv-fig-h, 96px)`, and .mv-fig's `max-height: calc(var(--mv-fig-h) + 8px)`
+   needs the SAME token set to resolve to a valid cap (80px) instead of computing to `none`
+   (an undefined custom property with no fallback is invalid at computed-value time, so the
+   whole declaration falls back to its initial value) -- confirmed live, not just reasoned:
+   .mv-fig-img rendered at exactly 72px through this token, and .mv-fig's own box (130x74)
+   stays comfortably under the resulting 80px cap. Setting the height directly on .mv-fig-img
+   instead of through the token, as a first draft of this rule did, gets the same pixel result
+   by accident but leaves the cap silently disarmed for this one figure context. */
+.mv-item-fig { margin: 0 0 8px; --mv-fig-h: 72px; }
+
+.mv-lb-cap { font-size: 0.92rem; text-align: center; max-width: 80ch; }
+.mv-lb-credit { font-size: 0.78rem; color: var(--text-secondary); }
+.mv-plate-tabs { display: flex; gap: 6px; }
+.mv-plate-tab { min-height: 44px; font: inherit; font-weight: 700; padding: 8px 14px;
+  border-radius: 8px; cursor: pointer; color: inherit;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle); }
+.mv-plate-tab.active { border-color: var(--mv-color, #7aa8ff);
+  background: rgba(120,170,255,0.14); }
+
+/* Completion-screen reveal card (engine/figures.js renderRevealCard), appended into the shell's
+   #lc-reveal host on a level clear that earned at least one star (Math-Multiverse.html
+   showPackLevelComplete). The 12-tile grid covers the figure and lifts away tile by tile. */
+/* Fix round 1 rewrite of this whole block (two related findings, fixed together per the
+   review's own instruction, since both trace to the frame sizing itself rigidly):
+
+   1. CRITICAL: sizing the frame off a raw vh fraction (the original `min(230px, 28vh)`) had no
+      idea how much of the viewport the header/toolbar and .level-complete's OWN headline, stars,
+      score and action row already spend. On a real device viewport (iPad 6 Safari: roughly
+      654-694px tall, not the 1024x768 the first pass verified at) that left the reveal card too
+      tall for what actually remained, pushing the headline and the Levels/Retry/Next row outside
+      .host-frame (overflow:hidden, no page scroll) with nothing to scroll it back into view.
+      Fixed by making `flex: 0 1 auto; min-height: 0` on .mv-rv-card and this rule the thing that
+      ACTUALLY shrinks: with `min-height: 0` lifting the default `min-height: auto` floor that
+      normally stops a flex item shrinking below its content size, the card compresses to
+      whatever room .level-complete's flex layout measures as genuinely left over, live, rather
+      than a number computed in advance against the wrong denominator. #lc-reveal
+      (Math-Multiverse.html) carries the matching flex:0 1 auto;min-height:0 one level up.
+
+   2. IMPORTANT: the grid used to cover the FRAME (a fixed-width box with the image letterboxed
+      inside it via object-fit:contain), not the drawn image. Measured against a 993x1200
+      portrait figure in the old 560px-wide frame: only 31.8% of the covered area was the actual
+      figure, so eight of twelve tiles lifted away from blank card background and the reward
+      rendered as a ~178px postage stamp -- exactly the case V2's flagship portrait plate hits
+      every time, not an edge case. Fixed by keeping the height as the fixed budget but letting
+      WIDTH follow the image's own aspect ratio (`width: auto` with `max-width` as an outer cap,
+      not a fixed value), and giving .mv-rv-img `height: 100%; width: auto` so it fills exactly
+      that box with no crop and no letterbox gap -- the frame IS the image's bounding box now,
+      so the grid (position:absolute; inset:0) lands on the figure, not around it. */
+.mv-rv-card { display: flex; flex-direction: column; gap: 8px; align-items: center; margin-top: 10px;
+  flex: 0 1 auto; min-height: 0; width: 100%; }
+.mv-rv-frame { position: relative; width: auto; max-width: min(560px, 86vw); height: 230px;
+  flex: 0 1 auto; min-height: 0; border-radius: 10px; overflow: hidden; }
+.mv-rv-img { display: block; height: 100%; width: auto; }
+/* Owner ruling (26-0811, enlargeable reward): engine/figures.js's renderRevealCard wraps
+   .mv-rv-img in this button ONLY once every tile has lifted (see that function's own comment for
+   why a partial reveal stays inert). Reset to a zero-cost box so the button contributes nothing
+   beyond the image's own geometry -- .mv-rv-frame's width is `auto`, following its content, and
+   the reward-geometry fix a few paragraphs above depends on that content being exactly the
+   image's own painted box, never a button's padded one. height:100%/width:auto mirrors
+   .mv-rv-img's own rule so the chain (frame -> button -> img) resolves to the identical pixels a
+   bare frame -> img chain would. The tap target is the image itself, which the reward-geometry
+   assertion already floors at 120px tall -- comfortably past the 44px minimum with no extra
+   padding needed to reach it. */
+.mv-rv-img-btn { display: block; height: 100%; width: auto; padding: 0; margin: 0; border: 0;
+  background: none; cursor: pointer; }
+.mv-rv-grid { position: absolute; inset: 0; display: grid;
+  grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); }
+.mv-rv-tile { background: #0b1424; border: 1px solid rgba(255,255,255,0.08);
+  transition: opacity 0.5s ease, transform 0.5s ease; }
+.mv-rv-tile.away { opacity: 0; transform: scale(0.92); }
+/* IMPORTANT (fix round 1): no length rule exists anywhere on figure.caption/credit
+   (validate-pack.js), and a museum-style caption of a few hundred characters is the ORDINARY
+   case for a Gray's-plate-style figure, not a rare one. Three-plus wrapped lines of unclamped
+   caption push the headline and buttons out the same way the frame height did. -webkit-box +
+   -webkit-line-clamp is the one cross-browser-enough way to clamp multi-line text with an
+   ellipsis (Safari, the actual target, and Chromium both support it); the full caption still
+   lives in the lightbox this figure's own strip/rail thumb opens, so nothing authored is lost,
+   only the completion card's copy of it is capped.
+
+   Fix round 2, first pass: dropped `max-height: 2.8em`, which fix round 1 paired with the
+   clamp. The two fight rather than agree: `-webkit-line-clamp` truncates at a LINE-BOX boundary
+   and appends its own ellipsis, while `max-height` clips at a raw length with no idea where a
+   line box ends, and 2.8em is not an exact multiple of the resolved line-height. That was a
+   real, distinct bug, but removing it alone did NOT fix the reported slice: re-rendered and
+   measured (not just re-read), `.mv-rv-cap`'s box was still only 17px tall against a 16px
+   font-size, less than ONE line, let alone two -- so the visible "second line" in the original
+   report was already a SINGLE line's own descenders being cut off, not really a second line.
+
+   Fix round 2, second pass, the actual cause: `.mv-rv-cap` and `.mv-rv-card .mv-lb-credit` are
+   flex ITEMS of `.mv-rv-card` (a column flex container), and both carry `overflow: hidden`
+   (required for the clamp and the ellipsis respectively). Per the flexbox spec, a flex item's
+   automatic minimum size -- the floor that normally stops `min-height: auto` letting an item
+   shrink below its own content -- computes to ZERO rather than content-based specifically when
+   the item's own overflow is not `visible`. So round 1's CRITICAL fix (`.mv-rv-card` and
+   `.mv-rv-frame` getting `min-height: 0` so the FRAME could shrink to fit) was ALSO, as an
+   unintended side effect, letting the caption and credit shrink to zero right alongside it,
+   because their own `overflow: hidden` already handed them that same zero floor for free, with
+   no `min-height: 0` needed to unlock it. `flex-shrink: 0` on both fixes this the same way the
+   headline/stars/score/action row at the `.level-complete` level are already implicitly
+   protected (their overflow stays `visible`, so their auto min-height floor holds on its own):
+   the caption and credit are reserved-size chrome, not part of "the figure" that gives, and only
+   `.mv-rv-frame` should be the thing item 1's fix actually shrinks. Re-verified live at 654px
+   after this second pass: both lines render at their full, unclipped height. */
+.mv-rv-cap { font-weight: 600; text-align: center; max-width: 60ch; flex-shrink: 0;
+  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+/* Credit stays one line for the same reason: unlike the caption there is no clamp fallback
+   worth adding for a single line, so a plain ellipsis truncation is enough, scoped to the
+   reveal card specifically (`.mv-lb-credit` is shared with the lightbox, where a longer credit
+   wrapping is fine and untouched). `flex-shrink: 0`: see the caption's comment above -- this
+   line's own `overflow: hidden` needs the same protection for the same reason. */
+.mv-rv-card .mv-lb-credit { max-width: min(560px, 86vw); white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; flex-shrink: 0; }
+
+/* Fix round 3: on short viewports the FIGURE wins and the card's duplicated caption/credit
+   yield, by controller ruling. The completion card's caption/credit are a convenience copy
+   (the full caption and credit both still render in the lightbox this figure's own strip/rail
+   thumb opens, untouched by this rule -- see .mv-lb-cap/.mv-lb-credit above, which this
+   selector does not touch), and a convenience does not get to shrink the reward it is sitting
+   next to down to a postage stamp.
+
+   716px is not a round number chosen for looks; it is the measured crossing point. Swept
+   viewport heights in 4px steps with this exact fixture (a two-line caption, a long
+   single-line credit, `flex-shrink: 0` already applied) and read .mv-rv-img's own
+   getBoundingClientRect height at each: 716px -> 119px tall, 720px -> 123px tall. Below 716px
+   the reward, with both text rows still reserving their own fixed-height chrome, cannot clear
+   roughly 120px no matter how it is arranged; at and above 720px the CURRENT layout already
+   clears that bar on its own, so nothing needs to give there. `max-height: 716px` is therefore
+   the exact height at which hiding the text stops being necessary, not a margin picked around
+   it. Below the breakpoint, removing .mv-rv-cap/.mv-rv-card .mv-lb-credit from the flex layout
+   hands their reserved space to .mv-rv-frame automatically (ordinary flexbox: one fewer sibling
+   competing for the same column), no extra sizing rule required. Re-measured with the fix
+   applied at the two real device heights this project targets: 654px -> 108x131 (was 47x57),
+   694px -> 142x171 (was 80x97); both now clear the 120px bar the breakpoint itself protects,
+   where neither did before. */
+@media (max-height: 716px) {
+  .mv-rv-cap, .mv-rv-card .mv-lb-credit { display: none; }
+}
+
+/* .mv-rv-cell and .mv-rv-tile are real as of Task 6 (both defined above); listed here for real
+   reduced-motion coverage, not just future-proofing. .mv-flash.stamp-* remains a forward
+   reference -- Task 7 adds those classes later on this same branch -- kept here so that rule
+   does not depend on remembering to extend this one when they land. Collapsing `transition` to
+   none does not strand either mechanic mid-cover: the JS still adds `.found`/`.away` on its own
+   schedule, so with no transition to animate, each state simply applies instantly, landing on
+   the same fully-revealed end state as the animated path, just without the motion. */
+@media (prefers-reduced-motion: reduce) {
+  .mv-lb-zoom, .mv-lb-overlay, .mv-rv-cell, .mv-rv-tile, .mv-flash { transition: none !important; animation: none !important; }
+}
 
 /* The item is now the side that gives. `flex: 0 1 auto` plus `min-height: 0` lets it shrink below its
    content, and it scrolls what does not fit rather than evicting the passage. `min-height: 0` is
@@ -155,6 +388,45 @@
 .mv-check:disabled { opacity: 0.4; cursor: default; }
 .mv-flash { font-weight: 700; padding: 6px 0; }
 .mv-flash.ok { color: #3ddc84; }
+/* Themed correct-answer stamps (engine/runner.js submit(), the result.correct branch): hist
+   reads VERIFIED in a tilted case-stamp register, sci reads CONFIRMED in an upright monospace
+   lab-log register.  Each carries its OWN keyframes rather than sharing one: a shared `mv-stamp`
+   animation ending at `rotate(-3deg)` next to a static `stamp-confirmed { transform: none }`
+   override made the confirmed stamp animate in rotated and then visibly snap upright the instant
+   the animation finished, because the keyframe wins during playback and the static declaration
+   only takes over once it ends.  Splitting the keyframes means each stamp's animated path and
+   its resting state agree throughout, with nothing to snap.  Both are covered by the
+   prefers-reduced-motion block above (`.mv-flash`), which collapses to each rule's own static
+   transform: verified's `rotate(-3deg)`, confirmed's unset (upright) -- both readable end states,
+   never the animation's zero-opacity start frame. */
+/* Fix round 1 (controller review): both stamps were clipped by #host-frame's overflow:hidden
+   (Math-Multiverse.html, load-bearing, "stops a module bleeding past its box", not touched here).
+   .mv-footer sits flush against the bottom of that clip box by the shell's own flex layout, and
+   the stamp's `padding: 2px 10px` (replacing .mv-flash's plain `padding: 6px 0`) left it flush
+   against BOTH the bottom and left clip edges with zero slack -- measured live, VERIFIED sat
+   2.8px below and 0.69px left of the clip box at REST, before any transform even ran. Mid-
+   animation was far worse: the old `scale(1.5)` on a default-centred inline-block grows outward
+   in all four directions from its own centre, measured at up to 30px past the left clip edge and
+   11px past the bottom in the opening frames -- the stamp's entire left border and part of its
+   bottom border simply were not painted. Fixed three ways together, not one: `margin` reserves
+   real slack on the two edges that were flush (5px also restores roughly the vertical rhythm the
+   tighter padding took away); `transform-origin: left center` anchors the scale so it can no
+   longer grow LEFTWARD at all, only right and vertically; and cutting the peak scale from 1.5 to
+   1.12 shrinks the remaining (vertical, symmetric-about-centre) growth to about 4.4px on a 74px-
+   tall button, comfortably inside the new 5px margin -- the SAME change also removes the
+   overshoot most likely to rasterize blurry on a WebKit compositor, per the review. Verified by
+   comparing the stamp's own getBoundingClientRect() against #host-frame's padding box at rest,
+   mid-animation and under reduced motion, not by re-reading this CSS; see task-7-report.md. */
+.mv-flash.stamp-verified, .mv-flash.stamp-confirmed { display: inline-block;
+  border: 2px solid currentColor; border-radius: 6px; padding: 2px 10px; letter-spacing: 0.12em;
+  margin: 5px 0 5px 5px; transform-origin: left center; }
+.mv-flash.stamp-verified { transform: rotate(-3deg); animation: mv-stamp-tilt 0.28s ease-out; }
+.mv-flash.stamp-confirmed { font-family: ui-monospace, Consolas, monospace;
+  animation: mv-stamp-flat 0.28s ease-out; }
+@keyframes mv-stamp-tilt { from { transform: scale(1.12) rotate(-3deg); opacity: 0; }
+  to { transform: scale(1) rotate(-3deg); opacity: 1; } }
+@keyframes mv-stamp-flat { from { transform: scale(1.12); opacity: 0; }
+  to { transform: scale(1); opacity: 1; } }
 
 .mv-explain {
   border: 1px solid var(--border-subtle); border-left: 3px solid #ff9d3c;
@@ -187,3 +459,125 @@
   .mv-para { font-size: 0.9rem; margin-bottom: 6px; }
   .mv-choice { padding: 6px 9px; }
 }
+
+/* Document skins.  A passage carrying a docKind (engine/runner.js sets data-dockind ONLY when
+   passage.docKind exists, and deletes the attribute otherwise) gets chrome around the prose: a
+   header band via ::before naming the register, a tint, and a border accent.  Prose itself --
+   .mv-para's font-size/line-height/margin and .mv-passage-title's font-size -- is untouched by
+   every rule below; only .mv-passage (background/border) and its ::before pseudo change.
+
+   Fix round 1: no `:not([data-dockind=""])` guard here any more.  That guard is what made the
+   shared ::before rule's specificity (0,3,1) against every per-kind rule's (0,2,1), which is
+   exactly what let the shared rule's `content: ''` silently outrank every per-kind `content`
+   the first time this file shipped (fix round 0's finding).  engine/runner.js deletes the
+   attribute entirely when there is no docKind and never leaves it empty
+   (engine/runner.js:197-198), so the guard was defending against a state that cannot occur, at
+   the cost of a specificity trap the NEXT per-kind override of any shared-rule property would
+   fall into just as silently as `content` did.  Dropped rather than documented: with both
+   selectors now at (0,2,x), source order decides, and every per-kind rule below is declared
+   after this one, so it wins naturally.  V2/V4 authors adding new kinds inherit a cascade with
+   no trap in it, rather than a comment warning them one exists. */
+.mv-passage[data-dockind]::before {
+  display: block; margin: 0 -12px 8px; padding: 5px 12px;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  border-bottom: 1px solid var(--border-subtle);
+  /* Sticky (fix round 1): .mv-passage is overflow-y:auto, and the band used to scroll away with
+     the very first paragraph, so a passage scrolled even one line lost every trace of its skin
+     -- precisely the wall-of-text state this phase exists to fix, at the exact moment a child
+     needs the register cue most.  top:0 pins the band to .mv-passage's own padding-box top (the
+     nearest scrolling ancestor), not the viewport.  The opaque background-color below is
+     required, not decorative: a sticky element with no opaque fill of its own lets the prose
+     scrolling underneath show straight through it. */
+  position: sticky; top: 0; z-index: 1;
+  background-color: var(--bg-card, #15181f);
+  /* Measured live in Chromium (fix round 1 re-measurement): canvas-resolved computed ::before
+     text colour, composited over the real .host-frame app background, WCAG contrast formula --
+     see task-5-report.md for the script and the full per-kind/per-accent table.  Checked every
+     live pack skin colour (#c8102e, #7c5cff, #1a8f5e, #8b5e34, #b45309) against every tinted
+     band background below.  The raw accent measured as low as 2.88:1, and 0.68rem bold is far
+     under the ~18.7px-bold floor WCAG exempts as "large text", so 4.5:1 is the real floor, not
+     3:1.  Mixed 40% toward white so every current accent clears 4.5:1 (worst measured 6.45:1,
+     ela-g6-spy's #c8102e against the recovered-entry tint) while the band still reads as that
+     pack's colour rather than falling back to one fixed hue for every pack. */
+  color: color-mix(in oklab, var(--mv-color, #7aa8ff) 60%, white);
+}
+/* padding-top:0 lives on this explicit 11-value list, not on a generic [data-dockind] presence
+   check (fix round 1, item 6): with the generic form, an unmapped docKind value would still
+   zero the passage's own top padding even though it generates no ::before box (content stays
+   unset, so no band ever exists to fill the gap), leaving the title flush against the border
+   with none of the spacing an unskinned passage gets.  Keying padding-top to the same 11 values
+   `content` is already keyed to ties the two effects to one condition instead of two, so they
+   can no longer drift apart.  tests/validate-pack.js's DOC_KINDS enum is the source of truth
+   this list mirrors; tests/figures.test.js reads this file as text and asserts exactly one
+   [data-dockind="<kind>"]::before rule per DOC_KINDS entry and none for a kind outside it, AND
+   (dryness-fix round 2: the first version of this comment claimed this while only the ::before
+   list was actually pinned) separately asserts this padding-top:0 list itself carries exactly
+   one [data-dockind="<kind>"] entry per DOC_KINDS entry, so a V2/V4 kind added there and not
+   mirrored to EITHER list now fails a test instead of silently rendering with no band, or with a
+   band but no top padding. */
+.mv-passage[data-dockind="case-file"],
+.mv-passage[data-dockind="recovered-entry"],
+.mv-passage[data-dockind="source-desk"],
+.mv-passage[data-dockind="addendum"],
+.mv-passage[data-dockind="field-manual"],
+.mv-passage[data-dockind="status-log"],
+.mv-passage[data-dockind="weather-log"],
+.mv-passage[data-dockind="field-report"],
+.mv-passage[data-dockind="procedure"],
+.mv-passage[data-dockind="memo"],
+.mv-passage[data-dockind="minutes"] { padding-top: 0; }
+/* Every middle-dot separator below is `\00b7` followed by TWO spaces, not one. A CSS hex escape
+   with fewer than 6 digits consumes exactly one trailing whitespace character as its own
+   terminator, so a single space after `\00b7` is eaten and never reaches the rendered string: it
+   read as "OFFICE ·CASE" (dot glued to the next word) until a live screenshot showed the
+   gap missing on one side only. The second space is the literal one that survives; verified via
+   getComputedStyle(...).content ("A · B" with two source spaces vs "A ·B" with one). */
+.mv-passage[data-dockind="case-file"]::before { content: 'PROVENANCE OFFICE \00b7  CASE FILE'; }
+/* Tint fix round 1: was `background: rgba(139,94,52,0.07)`.  The `background` SHORTHAND resets
+   every constituent it does not mention, including background-color, so it replaced (not
+   composited with) .mv-passage's own base rgba(255,255,255,0.03) wash -- measured perceptually
+   inert either way at that alpha (no delta a child would notice on this dark theme).  Now a
+   `background-image` longhand only: background-color is left undeclared here so the cascade
+   falls through to .mv-passage's own rule (the only declarant left), and the gradient paints
+   as a second layer ON TOP of that wash instead of instead of it.  0.21 (3x the original 0.07)
+   was chosen by measuring the composited-over-app-background luminance delta directly rather
+   than guessing: 1.207:1 against the untinted box, inside the ~1.15-1.25:1 perceptible-on-this-
+   theme target; see task-5-report.md for the before/after numbers for all three tinted kinds. */
+.mv-passage[data-dockind="case-file"] { background-image: linear-gradient(rgba(139,94,52,0.21), rgba(139,94,52,0.21)); }
+.mv-passage[data-dockind="recovered-entry"]::before { content: 'RECOVERED ENTRY'; }
+/* Tint fix round 1: same shorthand-replaces-the-wash defect as case-file, fixed the same way.
+   0.11 (about 1.4x the original 0.08, not 3-4x) is enough here because this tint's lighter tan
+   moves composited luminance more per unit alpha than case-file's browner hue does; matched to
+   the same 1.15-1.25:1 target rather than to a uniform multiplier: measured 1.206:1. */
+.mv-passage[data-dockind="recovered-entry"] {
+  background-image: linear-gradient(rgba(200,170,110,0.11), rgba(200,170,110,0.11));
+  border-style: dashed;
+}
+.mv-passage[data-dockind="source-desk"]::before { content: 'FILED SOURCE \00b7  COMPARE ACCOUNTS'; }
+.mv-passage[data-dockind="source-desk"] { border-left: 3px solid var(--mv-color, #7aa8ff); }
+.mv-passage[data-dockind="addendum"]::before { content: 'CASE FILE \00b7  ADDENDUM'; }
+.mv-passage[data-dockind="field-manual"]::before { content: 'OUTPOST NETWORK \00b7  FIELD MANUAL'; }
+/* Tint fix round 1: this one was the worst case -- it already used a gradient, but through the
+   `background` SHORTHAND, so the shorthand still zeroed background-color to transparent and the
+   "green tint" measured NET DARKER than an unskinned passage (no wash left to lighten it at
+   all).  Switched to the `background-image` longhand alone, same reasoning as case-file above.
+   0.175 (3.5x the original 0.05) measured 1.216:1 against the untinted box. */
+.mv-passage[data-dockind="field-manual"] { background-image:
+  linear-gradient(rgba(26,143,94,0.175), rgba(26,143,94,0.175)); }
+.mv-passage[data-dockind="status-log"]::before { content: 'STATUS LOG \00b7  FILED TO NETWORK COMMAND'; }
+.mv-passage[data-dockind="status-log"] .mv-passage-title,
+.mv-passage[data-dockind="weather-log"] .mv-passage-title { font-family: ui-monospace,
+  Menlo, Consolas, monospace; letter-spacing: 0.02em; }
+.mv-passage[data-dockind="weather-log"]::before { content: 'WEATHER LOG \00b7  RAW READINGS'; }
+.mv-passage[data-dockind="field-report"]::before { content: 'FIELD REPORT'; }
+.mv-passage[data-dockind="procedure"]::before { content: 'STANDING PROCEDURE \00b7  FOLLOW IN ORDER'; }
+/* Fix round 1: was a hard-coded `#ff9d3c` left border, which is the exact chrome .mv-explain
+   already uses (border-left AND border-color both) to mean "this is an answer explanation".
+   Two identical-looking signals meaning two different things is worse than one; switched to
+   var(--mv-color) so this kind reads as pack-branded, matching source-desk's own left-border
+   treatment, rather than inventing a new hue that would need its own collision check against
+   #3ddc84 (correct), #ff5c5c (wrong), #ff9d3c (explanation), and #fbbf24 (the shell's warning
+   token) for no benefit over reusing the accent every other bordered kind already uses. */
+.mv-passage[data-dockind="procedure"] { border-left: 3px solid var(--mv-color, #7aa8ff); }
+.mv-passage[data-dockind="memo"]::before { content: 'ANALYST MEMO'; }
+.mv-passage[data-dockind="minutes"]::before { content: 'REVIEW BOARD \00b7  MINUTES'; }
