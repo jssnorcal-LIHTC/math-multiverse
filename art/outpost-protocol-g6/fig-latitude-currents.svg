@@ -14,18 +14,17 @@
 
 <text x="530" y="255" font-size="16" fill="#e8eef7" text-anchor="middle">LAND: dry, continental air</text>
 
-<circle cx="300" cy="210" r="8" fill="#1a8f5e" stroke="#e8eef7" stroke-width="2" />
-<text x="300" y="190" font-size="18" fill="#e8eef7" text-anchor="middle" font-weight="700">Cairn Bay</text>
-<text x="300" y="232" font-size="15" fill="#e8eef7" fill-opacity="0.8" text-anchor="middle">on the coast</text>
+<circle cx="350" cy="210" r="8" fill="#1a8f5e" stroke="#e8eef7" stroke-width="2" />
+<text x="350" y="190" font-size="18" fill="#e8eef7" text-anchor="middle" font-weight="700">Cairn Bay</text>
+<text x="350" y="232" font-size="15" fill="#e8eef7" fill-opacity="0.8" text-anchor="middle">on the coast</text>
 
 <circle cx="700" cy="210" r="8" fill="#e8eef7" stroke="#1a8f5e" stroke-width="2" />
 <text x="700" y="190" font-size="18" fill="#e8eef7" text-anchor="middle" font-weight="700">Sable Flats</text>
 <text x="700" y="232" font-size="15" fill="#e8eef7" fill-opacity="0.8" text-anchor="middle">well inland</text>
 
-<path d="M330,180 Q345,220 330,258" fill="none" stroke="#1a8f5e" stroke-width="3" />
-<polygon points="330,258 322,242 338,244" fill="#1a8f5e" />
-<text x="345" y="200" font-size="15" fill="#1a8f5e" font-weight="700">current: keeps</text>
-<text x="345" y="218" font-size="15" fill="#1a8f5e" font-weight="700">coastal water steady</text>
+<path d="M270,172 Q258,215 270,258" fill="none" stroke="#1a8f5e" stroke-width="3" />
+<polygon points="270,258 262,242 278,244" fill="#1a8f5e" />
+<text x="270" y="105" font-size="15" fill="#1a8f5e" font-weight="700" text-anchor="middle">current</text>
 
 <polygon points="80,286 80,314 690,304 690,296" fill="rgba(232,238,247,0.22)" stroke="#e8eef7" stroke-width="1" />
 <polygon points="690,290 690,310 745,300" fill="#e8eef7" />
