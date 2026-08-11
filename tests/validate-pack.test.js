@@ -589,8 +589,11 @@ check('a figure missing credit is caught', () => {
 });
 
 check('a figure with an unknown kind is caught', () => {
+  // Fragment fully qualified: an unqualified 'kind: must be one of' is a substring of
+  // "...dockind: must be one of..." under expectError's case-insensitive match, and figurePack()
+  // itself populates passages[0].docKind, so a bare fragment could pass for the wrong reason.
   const p = figurePack(); p.figures[0].kind = 'painting';
-  expectError(p, 'kind: must be one of', 'bad kind');
+  expectError(p, 'figures(fig-photo).kind: must be one of', 'bad kind');
 });
 
 check('a duplicate figure id is caught', () => {
@@ -645,6 +648,25 @@ check('a backslash in a src is rejected', () => {
   const p = figurePack();
   p.figures[0].src = 'tests\\fixtures\\pack-good\\fixture-a.svg';
   expectError(p, 'must not contain', 'backslash src');
+});
+
+check('an absolute (leading-slash) src is rejected rather than letting the prefix and existence checks disagree', () => {
+  // Before this check, path.resolve (prefix half) and path.join (existence half) treat an
+  // absolute src differently -- resolve discards REPO_ROOT once it sees one; join never does --
+  // so the two halves of checkArtSrc could report factually inconsistent diagnoses for one input.
+  const p = figurePack();
+  p.figures[0].src = '/tests/fixtures/pack-good/fixture-a.svg';
+  expectError(p, 'must be a repo-relative path', 'absolute src');
+});
+
+check('a trailing separator on a src is rejected', () => {
+  // Validated clean before this check: path.relative (used by the on-disk segment walk) strips a
+  // trailing slash before splitting into segments, but POSIX pathname resolution requires one to
+  // resolve to a DIRECTORY, so this would 404 on the case-sensitive, POSIX-serving host even
+  // though the file itself genuinely exists.
+  const p = figurePack();
+  p.figures[0].src = 'tests/fixtures/pack-good/fixture-a.svg/';
+  expectError(p, 'must not end with a trailing slash', 'trailing slash src');
 });
 
 check('a src that exists on disk only under a different case is caught (case-sensitive Pages check)', () => {
@@ -847,12 +869,28 @@ check('an embedded https:// anywhere in the pack is caught', () => {
   expectError(p, 'https://', 'embedded url');
 });
 
-check('validatePack scans opts.rawText: a URL escaped in the raw bytes (https:\\/\\/example.com) is still caught via the parsed-object half of the union', () => {
-  // Delivered as originally specified (fix round 2, item 7): raw JSON permits \/ as an escaped
-  // forward slash. A regex scanning the RAW BYTES for a literal "://" therefore MISSES this: the
-  // two characters right after "https:" are \ and /, not / and /. JSON.parse already turns that
-  // escape back into a plain "/" by the time any caller has a `pack` object at all, which is
-  // exactly what the union's JSON.stringify(pack) half re-exposes to the scan.
+check('validatePack scans opts.rawText when supplied: a URL present ONLY in the raw bytes, with a CLEAN parsed object, is still caught', () => {
+  // fix round 1's original test, restored in fix round 3 (item 1): round 2 replaced this with a
+  // check whose URL sits on the PARSED object instead, which the JSON.stringify(pack) term alone
+  // can satisfy -- making it a behavioral duplicate of the "still scans JSON.stringify" check
+  // below and leaving NO surviving test that fails when the rawText term is dropped from the
+  // union. This is that discriminating test: `p` carries no URL anywhere in its own fields, so
+  // only the rawText term can produce this specific error. Simulates the real defect the raw-text
+  // scan exists for: a JSON duplicate key earlier in the authored file carried a URL, and
+  // JSON.parse silently kept only the later, clean value.
+  const p = figurePack();
+  const rawText = 'simulates real file bytes where an earlier duplicate JSON key carried ' +
+    'https://shadow-example.com before JSON.parse kept only the later, clean value';
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures', rawText });
+  assert.strictEqual(errors.some(e => e.includes('https://shadow-example.com')), true,
+    'expected the rawText-only URL to be caught: ' + JSON.stringify(errors));
+});
+
+check('validatePack scans opts.rawText: a URL escaped in the raw bytes (https:\\/\\/example.com), with a DIRTY parsed object, is caught', () => {
+  // Kept from fix round 2 (item 7). Built with a dirty parsed object, so this cannot by itself
+  // discriminate whether the escape is actually handled (see the CLEAN-object version below,
+  // which is fix round 3's real regression test for that); after fix round 3's normalization this
+  // scenario is also caught via the rawText term directly, not only via JSON.stringify(pack).
   const p = figurePack();
   p.figures[0].credit = 'Source: https://example.com';                           // what JSON.parse produces
   const rawText = '{"figures":[{"credit":"Source: https:\\/\\/example.com"}]}';   // what actually shipped
@@ -863,7 +901,28 @@ check('validatePack scans opts.rawText: a URL escaped in the raw bytes (https:\\
 
   const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures', rawText });
   assert.strictEqual(errors.some(e => e.includes('https://example.com')), true,
-    'expected the escaped-in-raw-bytes URL to be caught via JSON.stringify(pack) in the union: ' + JSON.stringify(errors));
+    'expected the escaped-in-raw-bytes URL to be caught: ' + JSON.stringify(errors));
+});
+
+check('validatePack scans opts.rawText: a URL escaped in the raw bytes, with a CLEAN parsed object, is caught (fix round 3, item 2 -- this is the real regression test)', () => {
+  // This is the case that SLIPPED THROUGH before this round's fix: with a clean parsed object,
+  // only the rawText term can catch anything, and the pre-fix regex requires a literal "://",
+  // which an escaped "\/\/ " in the raw bytes does not contain. Built with String.fromCharCode(92)
+  // rather than a quoted "\\/" literal, because a JS string literal (or a shell heredoc, per the
+  // controller's own earlier miss) can collapse "\\/" down to a plain "/" before this code ever
+  // runs, which would silently turn this into a test of the plain, already-working case instead
+  // of the escaped one it is meant to prove.
+  const BACKSLASH = String.fromCharCode(92);   // '\', constructed so no source-text layer can collapse it
+  const p = figurePack();   // clean: no URL anywhere in p's own fields
+  const rawText = 'credit: "See https:' + BACKSLASH + '/' + BACKSLASH + '/escaped-only-example.com for the source"';
+
+  // Prove the escaping claim on the ACTUAL bytes under test, not a comment's claim about them.
+  assert.strictEqual(/https?:\/\//.test(rawText), false,
+    'sanity check: the escaped raw bytes must not themselves contain a literal "://", or this test proves nothing');
+
+  const { errors } = validatePack(p, { expectedId: 'pack-good', assetBase: 'tests/fixtures', rawText });
+  assert.strictEqual(errors.some(e => e.includes('https://escaped-only-example.com')), true,
+    'expected the escaped-only, clean-object URL to be caught after \\/ normalization: ' + JSON.stringify(errors));
 });
 
 check('validatePack still scans JSON.stringify(pack) even when opts.rawText is supplied and is itself clean', () => {
