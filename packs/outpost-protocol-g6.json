@@ -44,6 +44,7 @@
       "genre": "informational",
       "docKind": "weather-log",
       "source": "original",
+      "figureIds": ["fig-front-goes"],
       "text": "Halyard Point Relay sits on a headland.  The coast juts out into open water there.  That makes it the Network's best post for storm warnings.  Relay Officer Dez Amaro logs four readings every morning.  He tracks air pressure, temperature, humidity, and wind.\n\nOn the first day, the barometer read thirty and one tenth inches.  The temperature reached seventy-four degrees, and humidity sat at fifty-two percent.  The wind came light out of the southwest.  The sky stayed clear through the afternoon.\n\nOn the second day, the barometer slipped to thirty inches even.  The temperature climbed to seventy-six degrees, and humidity rose to fifty-eight percent.  The wind came from the southwest, a little stronger than the day before.  A haze had moved in by evening.\n\nOn the third day, the barometer fell further.  It read twenty-nine and eight tenths inches.  The temperature dropped to seventy-one degrees, and humidity climbed to sixty-seven percent.  The wind shifted to blow out of the west.  Low clouds were building along the horizon by midday.\n\nOn the fourth day, the barometer read twenty-nine and six tenths inches.  That was its lowest reading of the week.  Temperature fell again, to sixty-five degrees, and humidity reached seventy-nine percent.  The wind swung to the northwest and picked up to twenty-two miles per hour.  The relay logged its first rain of the week.  That happened by early afternoon.\n\nOn the fifth day, the barometer bottomed out.  It read twenty-nine and five tenths inches.  Temperature had dropped to fifty-eight degrees.  Humidity reached eighty-eight percent.  The wind now blew hard from the north.  It reached thirty-one miles per hour.  Rain fell through the day without a break.\n\nOfficer Amaro's log adds one more line every week.  It logs the colony no matter the weather.  The brindle tern colony below the relay held at two hundred fourteen active nests.  That count matched last week's.  The note is routine, filed every week.  It sits at the bottom of the page.  Five days of falling pressure and rising wind sit above it."
     },
     {
@@ -52,6 +53,7 @@
       "genre": "informational",
       "docKind": "field-manual",
       "source": "original",
+      "figureIds": ["fig-surface-chart"],
       "text": "A change in weather almost always starts the same way.  Two air masses meet, and one of them wins.\n\nAn air mass is a huge body of air that has sat over one kind of ground or ocean long enough to take on that region's temperature and moisture.  Air that has sat over cold land turns cold and often stays fairly dry.  Air that has sat over warm ocean water turns warm and picks up moisture as it travels.  Air masses do not stay in one place forever.  Wind pushes them along, and where two different air masses meet, that meeting point is called a front.\n\nCold air is denser than warm air, which means it packs more mass into the same amount of space.  When a mass of cold air pushes into a mass of warmer air, the cold air does not mix in evenly.  It slides in low, the way water spreads under a lighter oil, and shoves the warmer air up and out of its way.  Warm air forced upward cools quickly as it rises, and cooling air cannot hold as much moisture as warm air can, so the moisture condenses into clouds.  Enough moisture condensing fast enough falls back down as rain.\n\nThat single mechanism explains almost everything a weather log records before a front arrives.  Falling air pressure is the first sign.  A low-pressure system is approaching, and the warm, less dense air still sitting over the station presses down less than the colder, denser air still on its way.  Rising humidity comes next, as the warm air is forced upward and its moisture starts condensing into clouds along the horizon.  A shift in wind direction follows close behind, since wind blows toward lower pressure and the front's own advance drags the wind toward it.  Falling temperature and rising wind speed arrive last, right as the front itself reaches the station and the cold air mass takes over completely.\n\nA relay that tracks all four numbers together can call a front's arrival early, a full day or more before the sky gives any warning.  That is exactly why Halyard Point logs every one of them, every single morning."
     },
     {
@@ -169,6 +171,7 @@
       ],
       "lives": 4,
       "questions": 8,
+      "reveal": { "figureId": "fig-station-photo" },
       "itemIds": [
         "t1-ebsr-what-is-a-subsystem",
         "t1-mc-smallest-piece",
@@ -205,6 +208,7 @@
       ],
       "lives": 4,
       "questions": 8,
+      "reveal": { "figureId": "fig-habitat-photo" },
       "itemIds": [
         "t2-ebsr-what-is-ruled-out",
         "t2-mc-oxygen-change",
@@ -241,6 +245,7 @@
       ],
       "lives": 4,
       "questions": 8,
+      "reveal": { "figureId": "fig-front-goes" },
       "itemIds": [
         "t3-ebsr-what-happens-next",
         "t3-mc-what-is-a-front",
@@ -277,6 +282,7 @@
       ],
       "lives": 4,
       "questions": 8,
+      "reveal": { "figureId": "fig-coastal-goes" },
       "itemIds": [
         "t4-ebsr-why-different-climates",
         "t4-mc-steady-crop-post",
@@ -313,6 +319,7 @@
       ],
       "lives": 4,
       "questions": 8,
+      "reveal": { "figureId": "fig-blue-marble" },
       "itemIds": [
         "t5-ebsr-real-cause-of-drop",
         "t5-mc-herring-vs-nesting-shift",
@@ -349,6 +356,7 @@
       ],
       "lives": 4,
       "questions": 12,
+      "reveal": { "figureId": "fig-earth-night" },
       "itemIds": [
         "t6-ebsr-which-proposal-lacks-authority",
         "t6-ms-proposals-against-constraints",
@@ -4825,6 +4833,62 @@
           "overlaySrc": "art/outpost-protocol-g6/gray-nervous-overlay.svg" },
         { "label": "Dorsal", "src": "art/outpost-protocol-g6/gray-nervous-dorsal.png" }
       ]
+    },
+    {
+      "id": "fig-station-photo",
+      "kind": "photo",
+      "caption": "The International Space Station's Cupola module, seen from outside during a spacewalk, with a cargo ship docked nearby and Earth's cloud-covered horizon glowing below.",
+      "credit": "NASA, Johnson Space Center, Expedition 28 / STS-135 (2011), public domain",
+      "alt": "A round module covered in windows sits on the outside of the space station, with one hinged cover open above it, a docked cargo ship to the right, and Earth's blue, cloud-streaked horizon curving below.",
+      "src": "art/outpost-protocol-g6/fig-station-photo.jpg"
+    },
+    {
+      "id": "fig-habitat-photo",
+      "kind": "photo",
+      "caption": "A crew member climbs a ladder into NASA's HERA habitat, a sealed research module used to test how astronauts live during a long, isolated mission.",
+      "credit": "NASA, Johnson Space Center, Human Exploration Research Analog (HERA), public domain",
+      "alt": "A smiling person climbs a ladder up through a round hatch ringed by metal handrails, heading into the upper level of a habitat module.",
+      "src": "art/outpost-protocol-g6/fig-habitat-photo.jpg"
+    },
+    {
+      "id": "fig-surface-chart",
+      "kind": "map",
+      "caption": "A real NOAA surface weather map from August 10, 2023, showing fronts, pressure centers, and station readings across the United States.",
+      "credit": "NOAA/NWS Weather Prediction Center, Daily Weather Map, public domain",
+      "alt": "A national weather map covered in station readings, with a cold front drawn as a line of filled triangles, a warm front drawn as a line of filled half-circles, and several H and L letters marking high- and low-pressure centers.",
+      "src": "art/outpost-protocol-g6/fig-surface-chart.jpg"
+    },
+    {
+      "id": "fig-front-goes",
+      "kind": "photo",
+      "caption": "A satellite view of the same kind of storm Halyard Point's log would have tracked: a huge system swirling off the East Coast on January 4, 2018.",
+      "credit": "NASA Worldview (GIBS), MODIS Terra true-color snapshot, 2018-01-04, public domain",
+      "alt": "A huge, comma-shaped swirl of white clouds curls into a tight spiral at its center, with snow-covered land visible in the upper left corner and scattered puffy clouds filling the lower right over open, dark ocean.",
+      "src": "art/outpost-protocol-g6/fig-front-goes.jpg"
+    },
+    {
+      "id": "fig-coastal-goes",
+      "kind": "photo",
+      "caption": "A satellite view of a Pacific storm system swirling toward the California coast.",
+      "credit": "NASA/NOAA GOES Project, GOES-West satellite, 2017-02-17, public domain",
+      "alt": "A large, spinning storm of white clouds churns over the Pacific Ocean, with streams of cloud reaching toward the Baja California peninsula and the Southern California coastline.",
+      "src": "art/outpost-protocol-g6/fig-coastal-goes.jpg"
+    },
+    {
+      "id": "fig-blue-marble",
+      "kind": "photo",
+      "caption": "A true-color satellite view of Earth, centered over the Middle East and Asia, known as NASA's 'Blue Marble.'",
+      "credit": "NASA, MODIS/Terra, 'The Blue Marble' (2002), public domain",
+      "alt": "A full view of Earth from space shows tan desert landmasses across the Middle East and Asia, wrapped in white swirling clouds, against the blue of the ocean and the black of space.",
+      "src": "art/outpost-protocol-g6/fig-blue-marble.jpg"
+    },
+    {
+      "id": "fig-earth-night",
+      "kind": "photo",
+      "caption": "Earth at night over the Americas, its cities glowing against the dark land and ocean.",
+      "credit": "NASA, VIIRS/Suomi NPP, 'Black Marble' (2016 composite), public domain",
+      "alt": "A view of Earth at night shows bright webs of city lights tracing the coastlines and highways of the United States, Mexico, and Brazil, glowing against the dark continents and black ocean.",
+      "src": "art/outpost-protocol-g6/fig-earth-night.jpg"
     }
   ]
 }
