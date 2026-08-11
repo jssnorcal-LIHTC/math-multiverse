@@ -192,13 +192,19 @@
           for (const para of String(passage.text).split(/\n\s*\n/)) {
             passageBox.appendChild(el('p', 'mv-para', para.trim()));
           }
-          passageBox.dataset.dockind = passage.docKind || '';
+          // Written only when a kind exists, and removed otherwise, so a text-only passage
+          // never carries a stale or empty-string dockind attribute for Task 5's CSS to trip on.
+          if (passage.docKind) passageBox.dataset.dockind = passage.docKind;
+          else delete passageBox.dataset.dockind;
           // Optional layer, same call-time-resolution and try/catch stance as MVFresh above: a
           // figure bug must never cost the child the level, and a missing figures.js must
-          // degrade to today's text-only passage rendering.
+          // degrade to today's text-only passage rendering.  A thrown error is still warned
+          // once, not swallowed silently, so a malformed figure does not vanish with no
+          // diagnostic anywhere.
           const FG = (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
           if (FG && Array.isArray(passage.figureIds)) {
-            try { FG.renderStrip(pack, passage.figureIds, passageBox); } catch (e) {}
+            try { FG.renderStrip(pack, passage.figureIds, passageBox); }
+            catch (e) { if (root && root.console) root.console.warn('figures: renderStrip failed', e); }
           }
         }
         passageBox.style.display = '';

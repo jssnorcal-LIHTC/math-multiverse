@@ -36,6 +36,11 @@
     return n;
   }
 
+  // Explicit, not a ternary-with-a-fallback: a kind missing from this map renders its badge
+  // text as the literal string "undefined" rather than a guessed, uppercased identifier, so a
+  // sixth FIG_KINDS entry surfaces as a visibly broken badge instead of a silently plausible one.
+  const BADGE = { photo: 'PHOTO', plate: 'PLATE', map: 'MAP', diagram: 'DIAGRAM', chart: 'CHART' };
+
   // Capped horizontal strip of figure thumbnails, appended to hostEl (the passage panel).  A
   // click opens the lightbox via api.openLightbox, resolved at call time so this keeps working
   // once that stub is replaced by its own task without renderStrip needing to change.
@@ -46,13 +51,16 @@
     for (const f of figs) {
       const b = el('button', 'mv-fig');
       b.type = 'button';
+      if (f.caption) b.setAttribute('aria-label', f.caption);
       const img = el('img', 'mv-fig-img');
-      img.setAttribute('alt', f.alt);
+      img.setAttribute('alt', f.alt || '');
       img.setAttribute('loading', 'lazy');
-      img.setAttribute('src', (f.kind === 'plate' ? f.views[0].src : f.src));
+      // A malformed plate (no views) falls back to f.src rather than throwing and dropping the
+      // whole strip, matching the optional-layer stance the runner takes around this call.
+      const src = f.kind === 'plate' ? ((f.views && f.views[0]) ? f.views[0].src : f.src) : f.src;
+      img.setAttribute('src', src);
       b.appendChild(img);
-      b.appendChild(el('span', 'mv-fig-badge', f.kind === 'photo' ? 'PHOTO'
-        : f.kind === 'plate' ? 'PLATE' : f.kind.toUpperCase()));
+      b.appendChild(el('span', 'mv-fig-badge', BADGE[f.kind]));
       b.addEventListener('click', () => api.openLightbox(pack, f.id));
       strip.appendChild(b);
     }
