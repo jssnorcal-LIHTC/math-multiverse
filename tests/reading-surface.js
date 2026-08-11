@@ -215,9 +215,10 @@ function startServer() {
   // CLEAN and truncates the chain script before tile-overlap ever runs -- reproduced live by
   // injecting a timed stray rejection here. Every problem path above (missing playwright at
   // :40, zero packs at :91, problems.length || jsErrors.length at :208, and the outer .catch at
-  // :211 for any thrown harness error) already calls process.exit(1) or exit(2) before reaching
-  // this line, so this exit(0) cannot mask a real failure -- it only closes the window where a
-  // late, unrelated rejection could overwrite a result this gate already decided.
+  // the end of the file, `})().catch((e) => {...})`, for any thrown harness error) already calls
+  // process.exit(1) or exit(2) before reaching this line, so this exit(0) cannot mask a real
+  // failure -- it only closes the window where a late, unrelated rejection could overwrite a
+  // result this gate already decided.
   process.exit(0);
 })().catch((e) => {
   console.error('reading-surface: harness error:', e && e.stack || e);
