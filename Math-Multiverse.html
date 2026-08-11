@@ -3956,9 +3956,9 @@ function playLevel(levelIndex) {
     const host = $('host-frame');
     host.innerHTML = '';
     activeModuleCleanup = InlineModules[currentPackId].init(host, levelIndex, {
-      onComplete: (score, stars) => {
+      onComplete: (score, stars, foundRatio) => {
         renderHeader();
-        showPackLevelComplete(entry, pack, levelIndex, score, stars);
+        showPackLevelComplete(entry, pack, levelIndex, score, stars, foundRatio);
       },
       onExit: () => { disposeActiveModule(); renderPackLevels(entry, pack); },
     });
@@ -4059,22 +4059,24 @@ function showGrandComplete(module) {
   $('lc-launcher').addEventListener('click', exitToLauncher);
 }
 
-function showPackLevelComplete(entry, pack, levelIndex, score, stars) {
+function showPackLevelComplete(entry, pack, levelIndex, score, stars, foundRatio) {
   disposeActiveModule();
   const host = $('host-frame');
   const lv = pack.levels[levelIndex];
   const isLast = levelIndex === pack.levels.length - 1;
   const starsHtml = [1, 2, 3].map(n => `<span class="lc-star ${stars >= n ? 'earned' : ''}">★</span>`).join('');
+  // Owner ruling (26-0811, partial reveal): a level's lives can run out at 0 stars after several
+  // correct answers, and the cells those answers earned must not simply vanish -- the earlier
+  // gate here was `stars > 0`, which is exactly the defect this ruling fixes. `anyFound` is the
+  // single source of truth for BOTH the host-div gate below and the render-call gate further
+  // down; they must stay the SAME condition (a previous fix round already had to correct exactly
+  // this pair drifting apart), so both read this one local instead of repeating the check.
+  const anyFound = (foundRatio || 0) > 0;
   // Fix round 1, item 7: the host div is emitted only when the level actually declares a
   // reveal. An unconditional empty <div id="lc-reveal"> still counts as a flex item of
   // .level-complete's own gap:18px, costing 18px above AND below it on every one of the five
   // shipped packs that never sets `reveal` at all, for a host nothing will ever fill.
-  // Fix wave (final review): gated on `lv.reveal` alone, this still emitted the same empty,
-  // gap-costing host at 0 stars, because the render below gates on `stars > 0 && lv.reveal`,
-  // not `lv.reveal` alone -- a level cleared at 0 stars paid the 18px gap for a host nothing
-  // was ever going to fill. The two gates must be the SAME condition, so this now matches the
-  // render check immediately below instead of only checking half of it.
-  const revealHtml = (stars > 0 && lv.reveal) ? `<div id="lc-reveal"></div>` : '';
+  const revealHtml = (anyFound && lv.reveal) ? `<div id="lc-reveal"></div>` : '';
   host.innerHTML = `
     <div class="level-complete" style="--card-color: ${entry.color};">
       <div class="lc-headline">${stars > 0 ? 'LEVEL CLEARED' : 'NOT QUITE'}</div>
@@ -4095,13 +4097,14 @@ function showPackLevelComplete(entry, pack, levelIndex, score, stars) {
   // `pack` and `levelIndex` are already this function's own parameters, so read the reveal
   // straight off them rather than re-fetching through the module-level currentPackId: a stale
   // or null currentPackId at completion-screen time would make MVPack.get return undefined and
-  // the reveal silently not render, with nothing to say why. stars > 0 gates this so a failed
-  // level (0 stars) does not hand out the artifact; a retry that clears it does. `lv.reveal`
-  // is checked again here (not just at template-build time above) so a reveal-less level never
-  // even attempts the $('lc-reveal') lookup, which would return null since the host was never
-  // emitted.
-  if (typeof MVFigures !== 'undefined' && stars > 0 && lv.reveal) {
-    try { MVFigures.renderRevealCard(pack, levelIndex, $('lc-reveal')); } catch (e) {}
+  // the reveal silently not render, with nothing to say why. `anyFound` gates this so a level
+  // that earned nothing at all does not hand out any artifact; `lv.reveal` is checked again
+  // here (not just at template-build time above) so a reveal-less level never even attempts the
+  // $('lc-reveal') lookup, which would return null since the host was never emitted. foundRatio
+  // (not just the boolean) is forwarded to renderRevealCard so it can lift only the tiles this
+  // attempt actually earned rather than the whole grid.
+  if (typeof MVFigures !== 'undefined' && anyFound && lv.reveal) {
+    try { MVFigures.renderRevealCard(pack, levelIndex, $('lc-reveal'), foundRatio); } catch (e) {}
   }
 }
 

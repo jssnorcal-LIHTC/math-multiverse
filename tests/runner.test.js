@@ -714,6 +714,122 @@ check('makeRunner survives a throwing reveal.onCorrect and still advances on a c
   });
 });
 
+// ---------- Owner ruling (26-0811): partial reveal -- foundRatio threaded through onComplete ----------
+// finish() derives a THIRD onComplete argument (cells found / total questions this attempt
+// served) from the SAME reveal handle attachReveal returned, so the shell can render a completion
+// card even at 0 stars when a level's lives ran out after earning some cells. Driven through the
+// REAL engine/figures.js here (not a mock), since the whole point is that this number comes from
+// the actual attachReveal/onCorrect wiring those checks above already pin, not a second parallel
+// count that could drift from it.
+
+check("a completed level threads foundRatio (cells found / total questions) through onComplete, via the REAL attachReveal handle", () => {
+  // require('../engine/figures.js') publishes a permanent global.MVFigures as a side effect of
+  // its own UMD wrapper (root.MVFigures = api, where root is globalThis under Node) -- the two
+  // "no MVFigures loaded (degrade path)" precondition checks later in this file need that global
+  // to stay absent, so it must be saved and restored here exactly like every other check in this
+  // file that touches global.MVFigures, even though this check only ever READS the module.
+  const had = global.MVFigures;
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const Figures = require('../engine/figures.js');
+      const pack = revealPack();   // 4 questions, lives 4, level.reveal set
+      const host = makeEl('div'), Save = spySave();
+      const seen = [];
+      R.makeRunner(pack, 0, host,
+        { onComplete(score, stars, foundRatio) { seen.push({ score, stars, foundRatio }); }, onExit() {} },
+        { Items, Save, Figures, rng: () => 0.5 });
+      // key is 1 on every probePack item: right, right, wrong, right -- 3 of 4 correct.
+      for (const pick of [1, 1, 0, 1]) {
+        const cs = host.querySelectorAll('.mv-choice');
+        cs[pick].onclick();
+        const ck = host.querySelectorAll('.mv-check')[0];
+        if (ck && ck.onclick) ck.onclick();
+        const next = host.querySelectorAll('.mv-next')[0];
+        if (next && next.onclick) next.onclick();
+      }
+      assert.strictEqual(seen.length, 1, 'onComplete did not fire exactly once');
+      assert.strictEqual(seen[0].stars, 2, 'precondition: one mistake on 4 lives should clear at 2 stars on the math ladder, got stars=' + seen[0].stars);
+      assert.strictEqual(seen[0].foundRatio, 0.75, 'foundRatio did not reflect 3 correct of 4 questions');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+check('a level that clears zero stars (lives exhausted) after earning some cells still reports a nonzero foundRatio -- the exact case the owner ruling fixes', () => {
+  const had = global.MVFigures;   // see the comment on the check above
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const Figures = require('../engine/figures.js');
+      const pack = revealPack();
+      pack.levels[0].lives = 2;   // two mistakes now exhausts lives, forcing 0 stars
+      const host = makeEl('div'), Save = spySave();
+      const seen = [];
+      R.makeRunner(pack, 0, host,
+        { onComplete(score, stars, foundRatio) { seen.push({ stars, foundRatio }); }, onExit() {} },
+        { Items, Save, Figures, rng: () => 0.5 });
+      // right, wrong, wrong, wrong -- 1 of 4 correct, 3 mistakes >= 2 lives: dnf, 0 stars, but a
+      // cell WAS earned on question 1 and must still be reported.
+      for (const pick of [1, 0, 0, 0]) {
+        const cs = host.querySelectorAll('.mv-choice');
+        cs[pick].onclick();
+        const ck = host.querySelectorAll('.mv-check')[0];
+        if (ck && ck.onclick) ck.onclick();
+        const next = host.querySelectorAll('.mv-next')[0];
+        if (next && next.onclick) next.onclick();
+      }
+      assert.strictEqual(seen.length, 1, 'onComplete did not fire exactly once');
+      assert.strictEqual(seen[0].stars, 0, 'precondition: this attempt must clear zero stars, or this check is not testing the broken case');
+      assert.strictEqual(seen[0].foundRatio, 0.25, 'a level cleared at 0 stars must still report the cell it earned (1 of 4), not silently drop to 0');
+    });
+  } finally {
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+  }
+});
+
+check('a completed level with a reveal handle that has no foundCount() still finishes without throwing; foundRatio defaults to 0', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = revealPack();
+    const host = makeEl('div'), Save = spySave();
+    const Figures = { attachReveal() { return { onCorrect() {} }; } };   // no foundCount at all
+    const seen = [];
+    R.makeRunner(pack, 0, host,
+      { onComplete(score, stars, foundRatio) { seen.push(foundRatio); }, onExit() {} },
+      { Items, Save, Figures, rng: () => 0.5 });
+    for (const pick of [1, 1, 1, 1]) {
+      const cs = host.querySelectorAll('.mv-choice');
+      cs[pick].onclick();
+      const ck = host.querySelectorAll('.mv-check')[0];
+      if (ck && ck.onclick) ck.onclick();
+    }
+    assert.strictEqual(seen.length, 1, 'onComplete did not fire');
+    assert.strictEqual(seen[0], 0, 'foundRatio must default to 0, never throw, when the reveal handle has no foundCount()');
+  });
+});
+
+check('a reveal-less level (attachReveal returns null) reports foundRatio 0, never throws', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack();   // no .reveal on this level
+    const host = makeEl('div'), Save = spySave();
+    const seen = [];
+    R.makeRunner(pack, 0, host,
+      { onComplete(score, stars, foundRatio) { seen.push(foundRatio); }, onExit() {} },
+      { Items, Save, rng: () => 0.5 });
+    for (const pick of [1, 1, 1, 1]) {
+      const cs = host.querySelectorAll('.mv-choice');
+      cs[pick].onclick();
+      const ck = host.querySelectorAll('.mv-check')[0];
+      if (ck && ck.onclick) ck.onclick();
+    }
+    assert.strictEqual(seen.length, 1, 'onComplete did not fire');
+    assert.strictEqual(seen[0], 0, 'a reveal-less level must report foundRatio 0');
+  });
+});
+
 // ---------- Task 6 consistency requirement: the passage hook now honors deps.Figures too ----------
 // Task 3 shipped the passage hook on the two-term (no deps.Figures) resolution; Task 6 unifies it
 // onto the same three-term form attachReveal uses. The EXISTING global-MVFigures passage-hook

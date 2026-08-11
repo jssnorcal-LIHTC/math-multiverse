@@ -232,23 +232,51 @@
     // Between prog and hearts, not after both: .mv-bar is justify-content: space-between, so
     // three children spread evenly instead of the strip crowding against the hearts.
     barEl.insertBefore(strip, barEl.children[1] || null);
-    // A wrong answer must never call this: no branch here removes or dims a `found` cell, and
-    // the ONLY caller (engine/runner.js submit(), the result.correct branch) enforces that a
-    // miss never reaches onCorrect at all. The reveal is not punitive; a retry after three wrong
-    // answers can still earn every cell.
-    return { onCorrect(i) { if (cells[i]) cells[i].classList.add('found'); } };
+    // Owner ruling (26-0811, partial reveal): `found` is a count, not just a class, because the
+    // completion card needs to know HOW MUCH of the artifact this attempt earned, not merely
+    // whether it earned anything. Tracked here rather than recomputed by a caller counting
+    // `.found` cells after the fact, since this closure already owns `cells` and is the single
+    // place a cell ever becomes found. The classList check makes both the DOM state and the
+    // counter idempotent together: calling onCorrect(i) twice for the same i (should never
+    // happen -- the runner grades each question index once -- but is cheap to guard) neither
+    // re-adds the class nor double-counts it.
+    let found = 0;
+    return {
+      // A wrong answer must never call this: no branch here removes or dims a `found` cell, and
+      // the ONLY caller (engine/runner.js submit(), the result.correct branch) enforces that a
+      // miss never reaches onCorrect at all. The reveal is not punitive; a retry after three
+      // wrong answers can still earn every cell.
+      onCorrect(i) {
+        if (cells[i] && !cells[i].classList.contains('found')) { cells[i].classList.add('found'); found++; }
+      },
+      foundCount() { return found; },
+    };
   }
 
   // Renders the completion-screen cover reveal: the figure under a 12-tile grid that lifts away.
-  // Returns false (and appends nothing) for a reveal-less level, an unresolvable figureId, or a
-  // missing host, matching the boolean contract Task 1's stub already established for this
-  // function -- callers (Math-Multiverse.html's showPackLevelComplete) branch on the return
-  // value the same way renderStrip's callers branch on null.
-  function renderRevealCard(pack, levelIndex, hostEl) {
+  // Returns false (and appends nothing) for a reveal-less level, an unresolvable figureId, a
+  // missing host, or (owner ruling, 26-0811) a foundRatio of exactly 0, matching the boolean
+  // contract Task 1's stub already established for this function -- callers
+  // (Math-Multiverse.html's showPackLevelComplete) branch on the return value the same way
+  // renderStrip's callers branch on null.
+  //
+  // Owner ruling (26-0811, partial reveal): a level can clear zero stars (lives ran out) after
+  // still earning some cells, and those earned cells must not simply vanish -- the old behaviour
+  // gated this whole card on `stars > 0`, which is the defect being fixed. `foundRatio` is how
+  // much of THIS attempt's reveal was actually earned (cells found / total questions, computed
+  // by the caller from the same reveal handle attachReveal returned -- see engine/runner.js
+  // finish()), not persisted anywhere and not re-derived from save state.
+  function renderRevealCard(pack, levelIndex, hostEl, foundRatio) {
     const level = pack && pack.levels && pack.levels[levelIndex];
     if (!level || !level.reveal || !hostEl) return false;
     const f = resolve(pack, level.reveal.figureId);
     if (!f) return false;
+    // Defaults to 1 ("all") when omitted, matching every call site written before this ruling
+    // (this file's own unit tests included) so they keep today's full-lift behaviour with no
+    // change on their part -- the seam is additive, not a breaking change to the function's
+    // existing contract.
+    const ratio = (foundRatio === undefined || foundRatio === null) ? 1 : Math.max(0, Math.min(1, foundRatio));
+    if (ratio <= 0) return false;   // nothing earned: no artifact, no card -- never premature
     const card = el('div', 'mv-rv-card');
     const frame = el('div', 'mv-rv-frame');
     const img = el('img', 'mv-rv-img');
@@ -261,7 +289,35 @@
     // Default matches the strip/lightbox convention: a figure missing alt renders alt="",
     // never the literal string "undefined".
     img.setAttribute('alt', f.alt || '');
-    frame.appendChild(img);
+
+    // Stable and deterministic, not random: lifting the FIRST N tiles in grid order means a
+    // child who retries sees the SAME region already open rather than a reshuffled cover, which
+    // matches the reveal bar's own additive, never-punitive cells (attachReveal above). A ratio
+    // that rounds down to zero (a tiny nonzero fraction on a long level) still lifts one tile --
+    // "any cell found" must never look identical to "none found" once the caller has already
+    // decided this card renders at all.
+    const tilesToLift = ratio >= 1 ? 12 : Math.max(1, Math.round(ratio * 12));
+    const fullyRevealed = tilesToLift >= 12;
+
+    // Owner ruling (26-0811, enlargeable reward): tap-to-enlarge is wired ONLY once every tile
+    // has lifted. openLightbox shows the whole, uncovered figure with no cover grid of its own --
+    // wiring the tap while tiles still cover part of the card would let a single tap skip past
+    // the "earn the rest on retry" incentive this whole mechanic exists for, before the child has
+    // actually earned it. A partial card's image stays a plain, inert <img>, same as before this
+    // ruling landed.
+    if (fullyRevealed) {
+      const btn = el('button', 'mv-rv-img-btn');
+      btn.type = 'button';
+      btn.setAttribute('aria-label', 'Enlarge ' + (f.caption || 'the revealed figure'));
+      btn.appendChild(img);
+      // Resolved at call time via api, same as renderStrip's and renderItemFigure's thumb click:
+      // keeps working once openLightbox is replaced again, with no capture-time coupling.
+      btn.addEventListener('click', () => api.openLightbox(pack, f.id));
+      frame.appendChild(btn);
+    } else {
+      frame.appendChild(img);
+    }
+
     const grid = el('div', 'mv-rv-grid');
     for (let i = 0; i < 12; i++) grid.appendChild(el('span', 'mv-rv-tile'));
     frame.appendChild(grid);
@@ -269,16 +325,20 @@
     card.appendChild(el('div', 'mv-rv-cap', f.caption));
     card.appendChild(el('div', 'mv-lb-credit', f.credit));
     hostEl.appendChild(card);
-    // These twelve timers are deliberately NOT collected or cancelled. A child can tap
-    // Retry/Levels mid-animation, which replaces hostEl's innerHTML (Math-Multiverse.html's
-    // completion-card branch) and detaches grid's tiles while these still fire; adding a class
-    // to a detached node is harmless, so nothing breaks. Unlike engine/runner.js, which collects
-    // its own timeouts (runner.js:134-136) because it must clear() a still-mounted level on
-    // cleanup, this card has no cleanup hook to run a disposer from and no caller ever holds a
-    // reference to cancel one, so a disposer here would be dead code the harness cannot exercise
-    // honestly.
+    // These timers are deliberately NOT collected or cancelled. A child can tap Retry/Levels
+    // mid-animation, which replaces hostEl's innerHTML (Math-Multiverse.html's completion-card
+    // branch) and detaches grid's tiles while these still fire; adding a class to a detached node
+    // is harmless, so nothing breaks. Unlike engine/runner.js, which collects its own timeouts
+    // (runner.js:134-136) because it must clear() a still-mounted level on cleanup, this card has
+    // no cleanup hook to run a disposer from and no caller ever holds a reference to cancel one,
+    // so a disposer here would be dead code the harness cannot exercise honestly.
+    //
+    // Only the first `tilesToLift` tiles ever get a timer at all -- a tile beyond that count is
+    // simply never touched, so it stays covering the artifact rather than being lifted and never
+    // un-lifted (there is no "punitive" branch to write here; the never-earned tiles just never
+    // enter the loop).
     const tiles = grid.children;
-    for (let i = 0; i < tiles.length; i++) {
+    for (let i = 0; i < tilesToLift; i++) {
       (function (t, i) { setTimeout(() => t.classList.add('away'), 120 + i * 90); })(tiles[i], i);
     }
     return true;
