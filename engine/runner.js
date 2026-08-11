@@ -200,11 +200,15 @@
           // figure bug must never cost the child the level, and a missing figures.js must
           // degrade to today's text-only passage rendering.  A thrown error is still warned
           // once, not swallowed silently, so a malformed figure does not vanish with no
-          // diagnostic anywhere.
+          // diagnostic anywhere.  The warn itself is wrapped in its OWN try/catch: a throw
+          // raised inside a catch block is not caught by its own try, so a console lacking a
+          // callable warn must not be able to escape this guard and kill the level it protects.
           const FG = (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
           if (FG && Array.isArray(passage.figureIds)) {
             try { FG.renderStrip(pack, passage.figureIds, passageBox); }
-            catch (e) { if (root && root.console) root.console.warn('figures: renderStrip failed', e); }
+            catch (e) {
+              try { if (root && root.console && typeof root.console.warn === 'function') root.console.warn('figures: renderStrip failed', e); } catch (_) {}
+            }
           }
         }
         passageBox.style.display = '';

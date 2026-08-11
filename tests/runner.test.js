@@ -306,14 +306,17 @@ check('runner renders a passage item with NO MVFigures loaded (degrade path)', (
   const host = makeEl('div');
   const Save = spySave();
   const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
-  assert.strictEqual(host.querySelectorAll('.mv-passage').length, 1, 'passage did not render');
-  assert.strictEqual(host.querySelectorAll('.mv-para').length, 1, 'passage paragraph did not render');
+  assert.strictEqual(host.querySelectorAll('.mv-passage').length, 1, 'passage panel missing');
+  assert.strictEqual(host.querySelectorAll('.mv-para').length, 1, 'passage body did not render');
   assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'item box did not render');
   assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'item choices did not render fully');
   cleanup();
 });
 
 check('makeRunner calls FG.renderStrip exactly once per passage, across two questions, with the passage figureIds and the .mv-passage host', () => {
+  // Capture-and-restore, not delete, matching the file's own idiom at the hadPack check below:
+  // delete is wrong if anything ever pre-populates the global.
+  const had = global.MVFigures;
   const calls = [];
   global.MVFigures = {
     renderStrip(pack, figureIds, hostEl) {
@@ -332,22 +335,39 @@ check('makeRunner calls FG.renderStrip exactly once per passage, across two ques
       const host = makeEl('div'), Save = spySave();
       R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
       assert.strictEqual(calls.length, 1, 'renderStrip was not called on the first question');
+      const progBefore = host.querySelectorAll('.mv-prog')[0].textContent;
       // Answer correctly (key is 1 on every probePack item) so it auto-advances to the next
       // question, which sits on the SAME passage; renderStrip must not fire a second time.
       host.querySelectorAll('.mv-choice')[1].onclick();
       const ck = host.querySelectorAll('.mv-check')[0];
       if (ck && ck.onclick) ck.onclick();
+      const progAfter = host.querySelectorAll('.mv-prog')[0].textContent;
+      // Pin the premise itself: a second question was actually reached, so this check would
+      // fail if the click did nothing rather than passing vacuously.
+      assert.notStrictEqual(progAfter, progBefore, 'the level did not advance to a second question');
+      assert.strictEqual(progAfter, '2 / 4', 'the level did not advance to the second question');
       assert.strictEqual(calls.length, 1, 'renderStrip fired again for a second question on the same passage');
       assert.deepStrictEqual(calls[0].ids, ['f1', 'f2'], 'renderStrip did not receive the passage figureIds');
       assert.strictEqual(calls[0].hostClassName, 'mv-passage', 'renderStrip did not receive the .mv-passage host');
     });
   } finally {
-    delete global.MVFigures;
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
   }
 });
 
 check('makeRunner survives a throwing MVFigures.renderStrip and still renders the level', () => {
-  global.MVFigures = { renderStrip() { throw new Error('figures boom'); } };
+  const had = global.MVFigures;
+  // The fake builds on a DETACHED node (never appended to hostEl) before throwing, so the
+  // zero-strip assertion below actually pins the append-last, detached-build property the real
+  // renderStrip relies on, rather than passing merely because the fake never did any work.
+  global.MVFigures = {
+    renderStrip() {
+      const strip = makeEl('div');
+      strip.className = 'mv-figs';
+      strip.appendChild(makeEl('button'));
+      throw new Error('figures boom');
+    },
+  };
   try {
     withSyncTimers(() => {
       const Items = require('../engine/items.js');
@@ -362,7 +382,7 @@ check('makeRunner survives a throwing MVFigures.renderStrip and still renders th
       assert.strictEqual(host.querySelectorAll('.mv-figs').length, 0, 'a throwing renderStrip must not leave a partial strip');
     });
   } finally {
-    delete global.MVFigures;
+    if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
   }
 });
 
