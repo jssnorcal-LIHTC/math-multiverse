@@ -12,11 +12,23 @@
 // zero), which is what would have caught the reviewer's demonstrated one-line off-by-one that
 // dropped a point while every byte-compare still passed.
 //
-// NOT-ARMED CONTRACT: no real pack declares a `gen: true` chart figure yet, so the real-pack
-// sweep below finds zero targets every time this runs today. Finding zero targets and reporting
-// clean anyway is the silent-clean failure this project bans hardest, so this gate refuses that
-// shape structurally: zero real targets prints the NOT-ARMED banner and runs BOTH fixture
-// controls against tests/fixtures/vis-demo/ (never registered in the real packs/manifest.json).
+// NOT-ARMED CONTRACT: a real pack may or may not declare a `gen: true` chart figure on any given
+// run (Task 9 armed the sweep against the real pack). Finding zero targets and reporting clean
+// anyway is the silent-clean failure this project bans hardest, so this gate refuses that shape
+// structurally: zero real targets additionally prints the NOT-ARMED banner. It changes nothing
+// about which controls run -- see FIX ROUND 2 below.
+//
+// FIX ROUND 2 (this file; mirrors tests/figures-offline.js's own fix round 1 -- read that file's
+// header before touching either): the first version of this gate put all three fixture checks --
+// the positive control, the negative control, and the round-trip check -- INSIDE the
+// `realTargets === 0` guard. The moment the real-pack sweep armed (realTargets > 0), the guard
+// stopped opening at all: the negative control (the gate's ONLY proof its own byte-compare
+// detector can still return a mismatch), the round-trip check (the ONLY proof "regenerate to fix a
+// red gate" is actually true), and all coverage of tests/fixtures/vis-demo/f-chart.svg went dark
+// with it, silently, the moment arming looked like an upgrade. That is a coverage DOWNGRADE
+// disguised as an upgrade, and it is exactly the silent-clean shape this project bans. All three
+// fixture checks now run on EVERY invocation, armed or not; only the NOT-ARMED banner is
+// conditional.
 //
 //   node tests/figure-derive.js
 //
@@ -724,13 +736,22 @@ try {
 
 if (!harnessError && realTargets === 0) {
   console.log('\n' + NOT_ARMED_BANNER + '\n');
-  try {
-    const positiveOk = fixturePositiveControl();
-    fixtureNegativeControl(positiveOk);
-    roundTripCheck();
-  } catch (e) {
-    harnessError = e;
-  }
+}
+
+// All three fixture checks run on EVERY invocation, armed or not (see FIX ROUND 2 in the header
+// comment). The negative control is the gate's only proof its own byte-compare detector can still
+// fire, and the round-trip check is the only proof "regenerate to fix a red gate" is actually
+// true -- arming the real-pack sweep above must not retire either proof, or tests/fixtures/vis-
+// demo/f-chart.svg rots undetected exactly the way it did before this fix. The round-trip check's
+// write to that file is a verified no-op regardless of arming: genSvg is deterministic and the
+// fixture is never registered in the real packs/manifest.json, so regenerating it writes back the
+// same bytes already committed no matter what the real-pack sweep found.
+try {
+  const positiveOk = fixturePositiveControl();
+  fixtureNegativeControl(positiveOk);
+  roundTripCheck();
+} catch (e) {
+  if (!harnessError) harnessError = e;
 }
 
 console.log(`\n=== figure-derive: ${problems.length} problem(s) ===`);
