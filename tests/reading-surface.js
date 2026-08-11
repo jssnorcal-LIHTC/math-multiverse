@@ -208,6 +208,17 @@ function startServer() {
     process.exit(1);
   }
   console.log('\nRESULT: ALL CLEAN');
+  // Fix wave (final review): every OTHER browser-driving gate (figures-offline, figure-derive,
+  // smoke, tile-overlap) exits explicitly on its clean path; this one fell off the end of its
+  // async IIFE instead. Under Node 24 a stray promise rejection settling AFTER this line is
+  // fatal to the still-running process, which sets exit 1 on a run that already printed ALL
+  // CLEAN and truncates the chain script before tile-overlap ever runs -- reproduced live by
+  // injecting a timed stray rejection here. Every problem path above (missing playwright at
+  // :40, zero packs at :91, problems.length || jsErrors.length at :208, and the outer .catch at
+  // :211 for any thrown harness error) already calls process.exit(1) or exit(2) before reaching
+  // this line, so this exit(0) cannot mask a real failure -- it only closes the window where a
+  // late, unrelated rejection could overwrite a result this gate already decided.
+  process.exit(0);
 })().catch((e) => {
   console.error('reading-surface: harness error:', e && e.stack || e);
   process.exit(2);

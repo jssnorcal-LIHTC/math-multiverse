@@ -22,6 +22,11 @@
   background: rgba(255,255,255,0.07); transition: background 0.35s ease, transform 0.35s ease; }
 .rv-hist .mv-rv-cell.found { background: #8b5e34; transform: scale(1.06); }
 .rv-sci  .mv-rv-cell.found { background: #1a8f5e; transform: scale(1.06); }
+/* Fix wave (final review): the fallback theme for any subject that is neither hist nor sci
+   (ela, math, or none), so a found cell still visibly changes state without borrowing hist's
+   brown or sci's green for a pack that is neither. Matches the app's own default accent
+   (--mv-color's fallback, used unthemed on .mv-heart above) rather than inventing a third hue. */
+.rv-neutral .mv-rv-cell.found { background: #7aa8ff; transform: scale(1.06); }
 
 /* The passage scrolls inside its own box so the item and the NEXT button never leave the screen on
    a 1024x768 iPad. This is the layout rule that kept breaking in the math modules.
@@ -106,9 +111,10 @@
   touch-action: manipulation; }
 .mv-lb-overlay { position: absolute; inset: 0; width: 100%; height: 100%;
   pointer-events: none; }
-/* Item-figure rail (engine/figures.js renderItemFigure): one thumb, no kind badge (an item
-   carries at most one figureId, unlike a passage's multi-figure strip), inserted before
-   whatever Items.render already built so it reads above the stem rather than after it.  72px,
+/* Item-figure rail (engine/figures.js renderItemFigure): one thumb, carrying the same
+   .mv-fig-badge kind pill renderStrip's multi-figure strip does (Task 7 fix round 1 added it
+   here too, after this comment was written), inserted before whatever Items.render already
+   built so it reads above the stem rather than after it.  72px,
    not the strip's 96px: the strip sits inside the scrolling passage panel, where a few dozen
    extra px cost little; this rail sits inside .mv-item, which is the side that gives (see the
    min-height:0/flex:0 1 auto comment below) and competes directly with the stem, choices and
@@ -490,8 +496,10 @@
    with none of the spacing an unskinned passage gets.  Keying padding-top to the same 11 values
    `content` is already keyed to ties the two effects to one condition instead of two, so they
    can no longer drift apart.  tests/validate-pack.js's DOC_KINDS enum is the source of truth
-   this list mirrors;
-   a V2/V4 kind added there needs adding here too. */
+   this list mirrors; tests/figures.test.js reads this file as text and asserts exactly one
+   [data-dockind="<kind>"]::before rule per DOC_KINDS entry and none for a kind outside it, so a
+   V2/V4 kind added there and not mirrored here now fails a test instead of silently rendering
+   with no band and no top padding. */
 .mv-passage[data-dockind="case-file"],
 .mv-passage[data-dockind="recovered-entry"],
 .mv-passage[data-dockind="source-desk"],

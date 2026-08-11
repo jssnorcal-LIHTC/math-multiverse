@@ -50,6 +50,27 @@ check('validate-pack enum twins match engine enums', () => {
   assert.deepStrictEqual(vp.DOC_KINDS, MVFigures.DOC_KINDS);
 });
 
+// Fix wave (final review): DOC_KINDS has a THIRD copy, in engine/engine.css -- one
+// [data-dockind="<kind>"]::before rule per kind (the hand-sync comment above that CSS list
+// names DOC_KINDS as its source of truth but nothing enforced it). A twelfth kind would pass
+// the two twins above and validate a real pack, then render with no band and no top padding.
+// Read as plain text, no browser required: the ::before rules are static CSS, not
+// computed-style output.
+check('engine.css has exactly one [data-dockind]::before rule per DOC_KINDS entry, and none extra', () => {
+  const css = require('fs').readFileSync(require('path').join(__dirname, '../engine/engine.css'), 'utf8');
+  const found = Array.from(css.matchAll(/\[data-dockind="([a-z-]+)"\]::before/g)).map(m => m[1]);
+  const counts = {};
+  for (const k of found) counts[k] = (counts[k] || 0) + 1;
+  for (const k of MVFigures.DOC_KINDS) {
+    assert.strictEqual(counts[k] || 0, 1,
+      `engine.css must have exactly one [data-dockind="${k}"]::before rule, found ${counts[k] || 0}`);
+  }
+  for (const k of Object.keys(counts)) {
+    assert.ok(MVFigures.DOC_KINDS.includes(k),
+      `engine.css has a [data-dockind="${k}"]::before rule for a kind not in DOC_KINDS`);
+  }
+});
+
 check('renderStrip appends a capped strip with one button per resolvable id', () => {
   const host = MVFigures.el('div');
   const strip = MVFigures.renderStrip(PACK, ['f1', 'f2', 'f3', 'missing'], host);
@@ -229,6 +250,23 @@ check('a figure missing alt renders alt="", never alt="undefined" (matches the s
   assert.strictEqual(find(box, 'mv-lb-img')[0].getAttribute('alt'), '');
 });
 
+// Fix wave (final review): openLightbox was the one sibling of renderStrip/renderItemFigure/
+// renderRevealCard that did NOT guard a malformed plate (kind:'plate' with no views). Those
+// three fall back to f.src and still render something; the thumb they render stays tappable,
+// but the tap reached `f.views.forEach` here unguarded and threw, opening zero lightboxes with
+// no diagnostic. There is no single-image fallback that also produces a sensible tab-less
+// viewer, so this must be a no-op tap, not a throw and not a degraded dialog.
+const PLATE_NOVIEWS_PACK = { meta: { id: 'demo-plate-noviews', subject: 'sci' }, figures: [
+  { id: 'pl2', kind: 'plate', src: 'art/demo/fallback.jpg', caption: 'c', credit: 'cr', alt: 'a' } ] };
+check('openLightbox on a malformed plate (no views) is a no-op, not a throw', () => {
+  // Known-clean starting state: the previous check left a dialog open (openLightbox replaces a
+  // prior dialog on SUCCESS, but never closes one on this early-return path), so this closes it
+  // first rather than asserting against whatever state an earlier check happened to leave.
+  MVFigures.closeLightbox();
+  assert.doesNotThrow(() => MVFigures.openLightbox(PLATE_NOVIEWS_PACK, 'pl2'));
+  assert.strictEqual(lbs().length, 0, 'a malformed plate must open no lightbox, not a broken one');
+});
+
 check('a non-plate figure renders no tab rail and no overlay', () => {
   MVFigures.openLightbox(NOALT_PACK, 'p2');
   const box = lbs()[0];
@@ -297,6 +335,22 @@ check('attachReveal themes a hist pack rv-hist', () => {
   assert.ok(reveal);
   const classes = String(bar.children[1].className).split(' ');
   assert.ok(classes.includes('rv-hist'), 'a hist pack did not get the rv-hist theme');
+});
+
+// Fix wave (final review): the theme used to be a bare ternary that gave every non-'hist'
+// subject -- including the three shipped ELA packs -- sci's green rv-sci, purely by omission.
+// Pins the explicit REVEAL_THEME map's fallback the same way the hist/sci checks above pin its
+// mapped entries.
+const REVEAL_PACK_ELA = { meta: { id: 'demo-reveal-ela', subject: 'ela' }, figures: REVEAL_PACK.figures,
+  levels: [{ id: 1, name: 'L1', reveal: { figureId: 'rf1' } }] };
+check('attachReveal themes an ela (or any unmapped subject) pack rv-neutral, never rv-sci', () => {
+  const bar = barWithTwoChildren();
+  const reveal = MVFigures.attachReveal(bar, REVEAL_PACK_ELA, REVEAL_PACK_ELA.levels[0], 3);
+  assert.ok(reveal);
+  const classes = String(bar.children[1].className).split(' ');
+  assert.ok(classes.includes('rv-neutral'), 'an ela pack did not get the rv-neutral fallback theme');
+  assert.strictEqual(classes.includes('rv-sci'), false, 'an ela pack must not inherit sci\'s theme');
+  assert.strictEqual(classes.includes('rv-hist'), false, 'an ela pack must not inherit hist\'s theme');
 });
 
 check('attachReveal.onCorrect marks the right cell found, and is idempotent', () => {

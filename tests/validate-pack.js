@@ -416,6 +416,14 @@ function checkFigureReferences(pack, figuresById, passagesById, itemsById, error
   for (const p of passagesById.values()) {
     if (p.figureIds === undefined) continue;
     if (!Array.isArray(p.figureIds)) { errors.push(`passages(${p.id}).figureIds: must be an array, got ${JSON.stringify(p.figureIds)}`); continue; }
+    // Fix wave (final review): the spec caps a passage's strip at 1-3 thumbs (0 is expressed by
+    // omitting the field entirely, not by an empty array). Nothing enforced the upper bound --
+    // executed with 8 figureIds on one passage, all 8 rendered, the strip's own composed height
+    // held at 98px, but scrollWidth (1096) exceeded the visible 1000px and most thumbs sat
+    // off-screen behind a horizontal scroll the child has no affordance to discover.
+    if (p.figureIds.length > 3) {
+      errors.push(`passages(${p.id}).figureIds: must have at most 3 entries (the strip caps at 1-3 thumbs), got ${p.figureIds.length}`);
+    }
     p.figureIds.forEach((fid, i) => {
       if (!figuresById.has(fid)) errors.push(`passages(${p.id}).figureIds[${i}]: "${fid}" does not resolve to any figure`);
     });
