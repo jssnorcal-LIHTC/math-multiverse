@@ -48,8 +48,15 @@
    only thing that lets a thumb shrink below its 128px box, and .mv-fig's own overflow:hidden
    would then clip the image on both sides, cropping a chart's axis labels by a second route.
    The strip scrolls horizontally instead (overflow-x:auto) rather than compressing thumbs. */
+/* overflow-y: hidden is a Task 3 carry-over (found while working Task 4, same file): per the
+   CSS overflow spec, one axis set non-visible forces the other's computed value away from
+   visible, so a bare overflow-x:auto here left overflow-y computing to auto.  On a
+   classic-scrollbar platform (Windows Chrome/Firefox, not iPad Safari's overlay scrollbars) a
+   horizontal scrollbar rendered inside this 104px-capped box can eat its bottom few pixels and
+   overlap .mv-fig-badge, which sits at bottom:4px.  Pinned explicitly rather than left to the
+   spec's fallback. */
 .mv-figs { --mv-fig-h: 96px; display: flex; gap: 8px; margin: 4px 0 8px;
-  max-height: calc(var(--mv-fig-h) + 8px); overflow-x: auto; }
+  max-height: calc(var(--mv-fig-h) + 8px); overflow-x: auto; overflow-y: hidden; }
 .mv-fig { position: relative; flex: 0 0 auto; min-width: 44px; display: flex;
   align-items: center; justify-content: center; border: 1px solid var(--border-subtle);
   border-radius: 7px; padding: 0; background: none; cursor: pointer; overflow: hidden;
