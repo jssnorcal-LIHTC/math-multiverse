@@ -37,5 +37,11 @@ check('loading the module touched no DOM (required before dom-stub install)', ()
   assert.strictEqual(typeof MVFigures.renderRevealCard, 'function');
 });
 
+check('validate-pack enum twins match engine enums', () => {
+  const vp = require('./validate-pack.js');
+  assert.deepStrictEqual(vp.FIG_KINDS, MVFigures.FIG_KINDS);
+  assert.deepStrictEqual(vp.DOC_KINDS, MVFigures.DOC_KINDS);
+});
+
 console.log(failures ? `figures.test: ${failures} FAILURE(S)` : 'figures.test: all clean');
 process.exit(failures ? 1 : 0);

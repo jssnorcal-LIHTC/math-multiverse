@@ -509,5 +509,172 @@ check('a rotate level under a free pack root is still caught (level policy wins)
   expectError(p, 'item types', 'level rotate under pack free');
 });
 
+// ---------- task 2: figure rules ----------
+// pack.figures is a brand-new envelope: none of the 5 shipped packs declares one yet (verified
+// before this change landed), so every fixture here is built fresh off figurePack() rather than
+// mutating pack-good's existing items/passages/levels. Figures point at real files under
+// art/pack-good/ (fixture-a.svg, fixture-b.svg) so the src/existsSync checks run against the real
+// filesystem instead of a mock -- this validator gates real files for real packs, so the test for
+// it should too.
+
+function figurePack() {
+  const p = clone();
+  p.figures = [
+    {
+      id: 'fig-photo', kind: 'photo', src: 'art/pack-good/fixture-a.svg',
+      caption: 'A courier crosses the square at dusk.', credit: 'Field photography unit',
+      alt: 'A person walking alone across an open plaza.',
+    },
+    {
+      id: 'fig-chart', kind: 'chart', src: 'art/pack-good/fixture-b.svg',
+      caption: 'Reported signals by district, one month.', credit: 'Case file archive',
+      alt: 'Bar chart of signal counts across four districts.',
+      dataTable: { columns: ['District', 'Signals'], rows: [['North', 4], ['South', 7], ['East', 2], ['West', 5]] },
+    },
+    {
+      id: 'fig-diagram', kind: 'diagram', src: 'art/pack-good/fixture-a.svg',
+      caption: 'How a dead drop passes without a meeting.', credit: 'Training desk',
+      alt: 'Diagram of two couriers using a signal and a hidden package.',
+      dataTable: { columns: ['Step', 'Actor'], rows: [['Hide', 'Courier A'], ['Signal', 'Courier A'], ['Collect', 'Courier B']] },
+    },
+    {
+      id: 'fig-plate', kind: 'plate',
+      caption: 'The lamp post signal, two views.', credit: 'Field photography unit',
+      alt: 'Two photographs of the same lamp post from different angles.',
+      views: [
+        { label: 'Street level', src: 'art/pack-good/fixture-a.svg' },
+        { label: 'Overhead', src: 'art/pack-good/fixture-b.svg', overlaySrc: 'art/pack-good/fixture-a.svg' },
+      ],
+    },
+  ];
+  p.passages[0].docKind = 'case-file';
+  p.passages[0].figureIds = ['fig-photo'];
+  p.levels[0].reveal = { figureId: 'fig-chart' };
+  p.items[0].figureId = 'fig-diagram';   // i-mc-1; diagram kind, non-photo, carries a dataTable
+  return p;
+}
+
+check('a fully valid figure-bearing pack produces zero errors', () => {
+  const { errors } = validatePack(figurePack(), { expectedId: 'pack-good' });
+  assert.deepStrictEqual(errors, [], 'errors: ' + JSON.stringify(errors));
+});
+
+// ---- rule 1: figures array shape and per-figure fields ----
+
+check('figures present but not an array is caught', () => {
+  const p = figurePack(); p.figures = 'nope';
+  expectError(p, 'not an array', 'figures not array');
+});
+
+check('a figure missing alt is caught', () => {
+  const p = figurePack(); delete p.figures[0].alt;
+  expectError(p, 'alt', 'missing alt');
+});
+
+check('a figure with an unknown kind is caught', () => {
+  const p = figurePack(); p.figures[0].kind = 'painting';
+  expectError(p, 'kind', 'bad kind');
+});
+
+check('a duplicate figure id is caught', () => {
+  const p = figurePack(); p.figures.push(JSON.parse(JSON.stringify(p.figures[0])));
+  expectError(p, 'duplicate figure id', 'dup figure');
+});
+
+// ---- rule 2: src / views existence and prefix ----
+
+check('a non-plate figure with no src at all is caught', () => {
+  const p = figurePack(); delete p.figures[0].src;
+  expectError(p, 'missing or empty', 'missing src field');
+});
+
+check('a src outside art/<packId>/ is caught', () => {
+  const p = figurePack(); p.figures[0].src = 'art/mando.png';   // real file, wrong pack prefix
+  expectError(p, 'must live under', 'src outside prefix');
+});
+
+check('a src that does not exist on disk is caught', () => {
+  const p = figurePack(); p.figures[0].src = 'art/pack-good/does-not-exist.svg';
+  expectError(p, 'file not found', 'missing file');
+});
+
+check('a plate figure with only one view is caught', () => {
+  const p = figurePack();
+  const plate = p.figures.find(f => f.id === 'fig-plate');
+  plate.views = [plate.views[0]];
+  expectError(p, 'at least two views', 'plate one view');
+});
+
+check('a plate view missing its label is caught', () => {
+  const p = figurePack();
+  p.figures.find(f => f.id === 'fig-plate').views[0].label = '';
+  expectError(p, 'label', 'plate view no label');
+});
+
+check('a plate view overlaySrc that does not exist is caught', () => {
+  const p = figurePack();
+  p.figures.find(f => f.id === 'fig-plate').views[1].overlaySrc = 'art/pack-good/nope.svg';
+  expectError(p, 'overlaySrc', 'plate overlay missing file');
+});
+
+// ---- rule 3: chart dataTable, and any assessed figure needs one (photos banned outright) ----
+
+check('a chart figure with no dataTable is caught', () => {
+  const p = figurePack();
+  delete p.figures.find(f => f.id === 'fig-chart').dataTable;
+  expectError(p, 'dataTable', 'chart no dataTable');
+});
+
+check('an item.figureId pointing at a photo is caught: photographs are never assessed', () => {
+  const p = figurePack();
+  p.items[0].figureId = 'fig-photo';
+  expectError(p, 'never assessed', 'assessed photo');
+});
+
+check('an item.figureId pointing at a non-chart figure with no dataTable is caught', () => {
+  const p = figurePack();
+  delete p.figures.find(f => f.id === 'fig-diagram').dataTable;   // item i-mc-1 points here
+  expectError(p, 'dataTable', 'assessed diagram no dataTable');
+});
+
+// ---- rule 4: passage.figureIds / level.reveal.figureId / item.figureId all resolve ----
+
+check('a dangling passage.figureIds entry is caught', () => {
+  const p = figurePack(); p.passages[0].figureIds = ['fig-nope'];
+  expectError(p, 'figureIds', 'dangling passage figureId');
+});
+
+check('a dangling level.reveal.figureId is caught', () => {
+  const p = figurePack(); p.levels[0].reveal.figureId = 'fig-nope';
+  expectError(p, 'reveal.figureId', 'dangling reveal figureId');
+});
+
+check('a dangling item.figureId is caught', () => {
+  const p = figurePack(); p.items[0].figureId = 'fig-nope';
+  expectError(p, 'figureId', 'dangling item figureId');
+});
+
+// ---- rule 5: passage.docKind ----
+
+check('an unknown passage.docKind is caught', () => {
+  const p = figurePack(); p.passages[0].docKind = 'diary';
+  expectError(p, 'docKind', 'bad docKind');
+});
+
+// ---- rule 6: no raw http(s) URL anywhere in the pack text ----
+
+check('an embedded https:// anywhere in the pack is caught', () => {
+  const p = figurePack();
+  p.figures[0].credit = 'Source: https://example.com/photo';
+  expectError(p, 'https://', 'embedded url');
+});
+
+// ---- rule 7: a declared-but-empty figures array is an error ----
+
+check('an empty figures array is caught', () => {
+  const p = figurePack(); p.figures = [];
+  expectError(p, 'empty', 'empty figures array');
+});
+
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
 process.exit(failures ? 1 : 0);
