@@ -92,7 +92,19 @@ function makeEl(tag) {
     // `indexOf` return -1 flow into `splice(-1, 0, ...)`, which would silently insert before the
     // LAST child instead of at the end -- the exact class of corruption removeChild's own fix
     // above exists to prevent, just on the insert side instead of the remove side.
+    //
+    // Fix round 1: also detaches `newNode` from any PREVIOUS parent first. The real DOM moves a
+    // node that already has a parent rather than duplicating it; the first version of this stub
+    // method skipped that step, so a node already appended somewhere else would end up listed in
+    // TWO children arrays at once (the old parent's and this one's) while `_parent` pointed at
+    // only the new one -- the same "state lies about itself" shape removeChild's own fix exists
+    // to prevent, just reachable from the insert side instead of the remove side.
     insertBefore(newNode, refNode) {
+      if (newNode && newNode._parent && newNode._parent !== node) {
+        const oldParent = newNode._parent;
+        const oi = oldParent.children.indexOf(newNode);
+        if (oi !== -1) oldParent.children.splice(oi, 1);
+      }
       const i = refNode ? node.children.indexOf(refNode) : -1;
       if (i === -1) node.children.push(newNode);
       else node.children.splice(i, 0, newNode);

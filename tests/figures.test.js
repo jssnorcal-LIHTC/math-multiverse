@@ -311,6 +311,24 @@ check('attachReveal.onCorrect marks the right cell found, and is idempotent', ()
   assert.doesNotThrow(() => reveal.onCorrect(99), 'an out-of-range index must not throw');
 });
 
+check('attachReveal.onCorrect never un-finds an earlier found cell when a later question is answered correctly', () => {
+  // Fix round 1, item 5: this is the task's headline invariant (never punitive) and, before
+  // this check, only the RUNNER side pinned it (a wrong answer never calls onCorrect). Nothing
+  // pinned that onCorrect itself is additive: a handle that un-found a previous cell on every
+  // new call would still pass every other check in this file.
+  const bar = barWithTwoChildren();
+  const reveal = MVFigures.attachReveal(bar, REVEAL_PACK, REVEAL_PACK.levels[0], 4);
+  const strip = bar.children[1];
+  reveal.onCorrect(0);
+  reveal.onCorrect(2);
+  assert.strictEqual(strip.children[0].classList.contains('found'), true,
+    'an earlier found cell must never be un-found by a later correct answer');
+  assert.strictEqual(strip.children[2].classList.contains('found'), true,
+    'the later correct answer did not mark its own cell found');
+  assert.strictEqual(strip.children[1].classList.contains('found'), false, 'an unanswered cell must not read found');
+  assert.strictEqual(strip.children[3].classList.contains('found'), false, 'an unanswered cell must not read found');
+});
+
 check('attachReveal returns null and touches the bar not at all for a reveal-less or unresolvable level', () => {
   const bar1 = barWithTwoChildren();
   assert.strictEqual(MVFigures.attachReveal(bar1, REVEAL_PACK, REVEAL_PACK.levels[2], 4), null,
@@ -369,6 +387,62 @@ check('renderRevealCard returns false and appends nothing for a reveal-less leve
   assert.strictEqual(MVFigures.renderRevealCard(REVEAL_PACK, 1, host), false, 'unresolvable figureId must return false');
   assert.strictEqual(MVFigures.renderRevealCard(REVEAL_PACK, 0, null), false, 'a missing host must return false');
   assert.strictEqual(host.children.length, 0, 'a false-returning call must not append anything');
+});
+
+const REVEAL_PLATE_NOVIEWS_PACK = { meta: { id: 'demo-reveal-plate-noviews', subject: 'sci' },
+  // Deliberately missing `views`, which validate-pack.js's plate rule would reject on a real
+  // pack; kept anyway as defense-in-depth, matching the identical guard already proven for
+  // renderStrip and renderItemFigure against the same malformed shape.
+  figures: [{ id: 'pf2', kind: 'plate', src: 'art/demo/fallback.jpg', caption: 'c', credit: 'cr', alt: 'a' }],
+  levels: [{ id: 1, name: 'L1', reveal: { figureId: 'pf2' } }] };
+
+check("renderRevealCard falls back to f.src for a malformed plate with no views, matching renderStrip/renderItemFigure's guard", () => {
+  // Fix round 1, item 7: renderRevealCard dereferenced f.views[0].src with no guard, unlike its
+  // two siblings, which would throw on exactly this shape instead of degrading gracefully.
+  const host = MVFigures.el('div');
+  assert.doesNotThrow(() => MVFigures.renderRevealCard(REVEAL_PLATE_NOVIEWS_PACK, 0, host));
+  const img = host.children[0].children[0].children[0];
+  assert.strictEqual(img.getAttribute('src'), 'art/demo/fallback.jpg');
+});
+
+check('renderRevealCard eventually marks all twelve tiles .away (the tile-lift loop actually runs, for every tile)', () => {
+  // Fix round 1, item 4: before this check, the entire twelve-setTimeout loop that reveals the
+  // figure was pinned by NO test. A future task collecting or cancelling those timers (the
+  // pre-flight floated a disposer, and Task 6's own report invited revisiting it) could leave
+  // every tile covering the artifact forever and every existing suite would stay green.
+  const realSetTimeout = global.setTimeout;
+  global.setTimeout = (fn) => { fn(); return 0; };
+  try {
+    const host = MVFigures.el('div');
+    MVFigures.renderRevealCard(REVEAL_PACK, 0, host);
+    const frame = host.children[0].children[0];
+    const grid = frame.children[1];
+    assert.strictEqual(grid.className, 'mv-rv-grid', 'grid was not frame.children[1] as expected');
+    assert.strictEqual(grid.children.length, 12);
+    for (let i = 0; i < grid.children.length; i++) {
+      assert.strictEqual(grid.children[i].classList.contains('away'), true,
+        `tile ${i} never received .away -- the lift loop did not run for it`);
+    }
+  } finally {
+    global.setTimeout = realSetTimeout;
+  }
+});
+
+check("dom-stub insertBefore detaches the moved node from its PREVIOUS parent, not just the new one", () => {
+  // Fix round 1, item 7: the same "state lies about itself" corruption removeChild's fix
+  // already guards against, reachable from the insert side. Without the detach, `mover` would
+  // be listed in BOTH oldParent.children and newParent.children at once.
+  const oldParent = MVFigures.el('div');
+  const newParent = MVFigures.el('div');
+  const mover = MVFigures.el('span');
+  oldParent.appendChild(mover);
+  assert.strictEqual(oldParent.children.length, 1);
+  newParent.insertBefore(mover, null);
+  assert.strictEqual(oldParent.children.length, 0,
+    "the moved node is still listed in its old parent's children -- duplicated across two parents");
+  assert.strictEqual(newParent.children.length, 1);
+  assert.strictEqual(newParent.children[0], mover);
+  assert.strictEqual(mover.parentNode, newParent, "parentNode did not move to the new parent");
 });
 
 // ---------- Task 7: renderItemFigure ----------

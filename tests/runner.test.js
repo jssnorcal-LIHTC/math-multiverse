@@ -44,7 +44,10 @@ check('pickItems throws rather than silently shrinking when a level is over-subs
 
 // ---------- repeatPolicy rotation: pickItems reads a call-time MVFresh for ordering ----------
 check('pickItems rotation: unseen-first via MVFresh, "free" policy ignores it, absent MVFresh keeps legacy shuffle+slice', () => {
-  // rotation: with a fake MVFresh, unseen ids are chosen before seen ones
+  // Fix round 1, item 7: the two globalThis.MVFresh installs below used to sit next to a bare
+  // `delete globalThis.MVFresh` with no try/finally between them. A failure in the throwing
+  // assertion partway through (or in pickItems itself) would skip that delete and leak a fake
+  // MVFresh into every check that runs later in this file, none of which expect one.
   const seenLedger = { 'pack.p1.i0': ['id:a', 'id:b'] };
   const fakeFresh = {
     orderPool: (key, ids) => ids.slice().sort((x, y) => {
@@ -55,17 +58,27 @@ check('pickItems rotation: unseen-first via MVFresh, "free" policy ignores it, a
     marked: [],
     markSeenIds(key, ids) { this.marked.push([key, ids.join(',')]); },
   };
-  globalThis.MVFresh = fakeFresh;
   const lvl = { name: 'L', questions: 2, itemIds: ['a', 'b', 'c', 'd'] };
   const items = ['a', 'b', 'c', 'd'].map(id => ({ id }));
-  const picked = MVRunner._test.pickItems(lvl, items, () => 0.5, 'pack.p1.i0');
-  if (picked.some(i => i.id === 'a' || i.id === 'b')) throw new Error('seen item chosen while unseen remained');
-  delete globalThis.MVFresh;
+
+  // rotation: with a fake MVFresh, unseen ids are chosen before seen ones
+  globalThis.MVFresh = fakeFresh;
+  try {
+    const picked = MVRunner._test.pickItems(lvl, items, () => 0.5, 'pack.p1.i0');
+    if (picked.some(i => i.id === 'a' || i.id === 'b')) throw new Error('seen item chosen while unseen remained');
+  } finally {
+    delete globalThis.MVFresh;
+  }
+
   // policy 'free': MVFresh present but ignored
   globalThis.MVFresh = fakeFresh;
-  const lvlFree = { name: 'L', questions: 2, itemIds: ['a', 'b', 'c', 'd'], repeatPolicy: 'free' };
-  MVRunner._test.pickItems(lvlFree, items, () => 0.5, 'pack.p1.i0'); // must not throw, may pick any
-  delete globalThis.MVFresh;
+  try {
+    const lvlFree = { name: 'L', questions: 2, itemIds: ['a', 'b', 'c', 'd'], repeatPolicy: 'free' };
+    MVRunner._test.pickItems(lvlFree, items, () => 0.5, 'pack.p1.i0'); // must not throw, may pick any
+  } finally {
+    delete globalThis.MVFresh;
+  }
+
   // absent MVFresh: identical to legacy behavior (deterministic rng -> fixed order)
   const legacy = MVRunner._test.pickItems(lvl, items, () => 0.5, 'pack.p1.i0');
   if (legacy.length !== 2) throw new Error('legacy path broken');
