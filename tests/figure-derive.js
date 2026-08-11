@@ -16,9 +16,10 @@
 // run (Task 9 armed the sweep against the real pack). Finding zero targets and reporting clean
 // anyway is the silent-clean failure this project bans hardest, so this gate refuses that shape
 // structurally: zero real targets additionally prints the NOT-ARMED banner. It changes nothing
-// about which controls run -- see FIX ROUND 2 below.
+// about which controls run -- see FIX ROUND 3 below. (Fix round 2 is the team-lead zero-floor
+// finding, Task 4, further down in this file -- unrelated to the fixture controls.)
 //
-// FIX ROUND 2 (this file; mirrors tests/figures-offline.js's own fix round 1 -- read that file's
+// FIX ROUND 3 (this file; mirrors tests/figures-offline.js's own fix round 1 -- read that file's
 // header before touching either): the first version of this gate put all three fixture checks --
 // the positive control, the negative control, and the round-trip check -- INSIDE the
 // `realTargets === 0` guard. The moment the real-pack sweep armed (realTargets > 0), the guard
@@ -29,6 +30,14 @@
 // disguised as an upgrade, and it is exactly the silent-clean shape this project bans. All three
 // fixture checks now run on EVERY invocation, armed or not; only the NOT-ARMED banner is
 // conditional.
+//
+// FIX ROUND 4 (this file, panels section below): paired mutation against the original single-
+// series path proved the panels code path inherited its COUNT/CONTAINMENT checks (one polyline/one
+// rect per point, inside the canvas) but never its VALUE-TRUTH checks -- the ones asserting a
+// mark's SIZE or POSITION actually corresponds to its datum. See the comment at the panels
+// value-truth block for the full finding; it is the panels-mode analogue of this file's own Part 1
+// framing above (a self-consistent-but-wrong generator can pass every count check while drawing
+// the wrong picture).
 //
 //   node tests/figure-derive.js
 //
@@ -81,7 +90,11 @@ function parseTagAttrs(svg, tag) {
   let m;
   while ((m = re.exec(svg))) {
     const obj = {};
-    const attrRe = /([a-zA-Z-]+)="([^"]*)"/g;
+    // Fix round 4: the attribute-name class was letters-and-hyphen only, which silently drops any
+    // digit-suffixed name -- x1/y1/x2/y2 on <line>, exactly the attrs a <line> element's own
+    // endpoints are named. No check before this file's panels value-truth work ever read a line's
+    // x1/y1/x2/y2 (only .stroke), so this parser bug had no failing check to expose it.
+    const attrRe = /([a-zA-Z0-9-]+)="([^"]*)"/g;
     let am;
     while ((am = attrRe.exec(m[1]))) obj[am[1]] = am[2];
     out.push(obj);
@@ -395,6 +408,25 @@ const SAMPLE_PANELS_BAR = {
   ],
   categoryLabels: ['Sable Flats', 'Cairn Bay'],
 };
+// Fix round 4: clean, distinct-per-panel ratios (panel 0 doubles, panel 1 triples) so a bug that
+// shares one scale across both panels, or measures height from the wrong zero, cannot coincidentally
+// produce the right ratio in one panel while being wrong in the other.
+const PROPORTIONAL_PANELS_BAR = {
+  panels: [
+    { type: 'bar', yLabel: 'metric A', series: [{ points: [[0, 100], [1, 200]] }] },
+    { type: 'bar', yLabel: 'metric B', series: [{ points: [[0, 50], [1, 150]] }] },
+  ],
+  categoryLabels: ['Sable Flats', 'Cairn Bay'],
+};
+// Fix round 4: panel 0 goes negative (proves downward-from-zero per panel); panel 1's first point
+// is exactly zero (proves a zero value draws no visible bar per panel).
+const NEG_ZERO_PANELS_BAR = {
+  panels: [
+    { type: 'bar', yLabel: 'metric A', series: [{ points: [[0, -50], [1, 50]] }] },
+    { type: 'bar', yLabel: 'metric B', series: [{ points: [[0, 0], [1, 10]] }] },
+  ],
+  categoryLabels: ['Sable Flats', 'Cairn Bay'],
+};
 
 // ---- fix round 2 (team-lead finding, Task 4), panels variants: same zero-floor guarantee applies
 // through layoutPanels(), since it calls the SAME paddedExtent() the single-chart path does. ----
@@ -588,9 +620,93 @@ check('panels: excess footer notes stay clamped to 4, each panel stays above MIN
   });
 });
 
-check('panels: both panels share one left margin (vertical alignment) and never overlap vertically', () => {
+// ---- fix round 4 (team-lead finding): the panels path inherited the original single-series
+// path's COUNT and CONTAINMENT checks (one polyline/one rect per point, inside the canvas) but
+// never its VALUE-TRUTH checks -- the ones that assert a mark's SIZE or POSITION actually
+// corresponds to its datum, not merely that a mark exists somewhere legal. Paired mutation against
+// the original path proved the gap: drawing bar height from the wrong zero fails 3 checks on the
+// original path and 0 here; suppressing point markers fails 2 checks there and 0 here; and worst
+// of all, drawing BOTH panels' line data through panel 0's own y-scale -- so panel 1's data paints
+// inside panel 0's band -- fails NOTHING here, because the only line-panel geometry check above
+// (vertex count / x monotonicity) never looks at y. fig-dome-drift, the real figure the panels
+// feature exists for, is exactly this shape (a line panel), so this is not academic. The checks
+// below mirror the original path's own value-truth checks one for one, per panel; every one of
+// them was proven able to fail by mutating build/figure-gen.js in a scratch copy outside the repo
+// (see the fix report), not merely written to spec. ----
+
+check('panels (line): every vertex of a panel\'s polyline lies within THAT PANEL\'s own plot rect (catches data painted into the wrong band)', () => {
+  const svg = genSvg(SAMPLE_PANELS_LINE, ACCENT);
   const g = layoutPanels(SAMPLE_PANELS_LINE);
-  assertTrue(typeof g.plotL === 'number' && g.plotL > 0, `plotL not computed: ${g.plotL}`);
+  const polylines = parseTagAttrs(svg, 'polyline');
+  assertTrue(polylines.length === 2, `expected 2 polylines, got ${polylines.length}`);
+  polylines.forEach((pl, i) => {
+    const panel = g.panelLayouts[i];
+    const verts = pl.points.trim().split(/\s+/).map((s) => s.split(',').map(Number));
+    verts.forEach(([, y], j) => {
+      assertTrue(y >= panel.plotT - 0.5 && y <= panel.plotB + 0.5, `panel ${i} vertex ${j}: y=${y} escapes ITS OWN panel plot [${panel.plotT},${panel.plotB}] -- exactly the check that would catch panel 1's data painting into panel 0's band`);
+    });
+  });
+});
+
+check('panels (line): a data point marker exists at every plotted point, in every panel', () => {
+  const svg = genSvg(SAMPLE_PANELS_LINE, ACCENT);
+  const circles = parseTagAttrs(svg, 'circle');
+  const expectedTotal = SAMPLE_PANELS_LINE.panels.reduce((s, p) => s + p.series[0].points.length, 0);
+  assertTrue(circles.length === expectedTotal, `expected ${expectedTotal} marker(s) total (one per point per panel), got ${circles.length}`);
+});
+
+check('panels: nice-number y ticks per panel -- each panel\'s OWN tick ladder is evenly stepped (a mis-stepped ladder in either panel fails, not just a shared one)', () => {
+  const g = layoutPanels(SAMPLE_PANELS_LINE);
+  g.panelLayouts.forEach((panel, i) => {
+    const step = panel.yTicks.length > 1 ? panel.yTicks[1] - panel.yTicks[0] : 0;
+    panel.yTicks.forEach((v, j) => {
+      if (j === 0) return;
+      assertTrue(Math.abs((v - panel.yTicks[0]) - j * step) < 1e-6, `panel ${i} tick ${v} is not evenly stepped from ${panel.yTicks[0]} by ${step}`);
+    });
+  });
+});
+
+check('panels (bar): each panel\'s bar height is proportional to VALUE, measured from THAT PANEL\'s own zero (not a shared scale)', () => {
+  const svg = genSvg(PROPORTIONAL_PANELS_BAR, ACCENT);
+  const rects = parseTagAttrs(svg, 'rect').filter((r) => r.fill === ACCENT);
+  assertTrue(rects.length === 4, `expected 4 bar rects total, got ${rects.length}`);
+  const [r0a, r0b, r1a, r1b] = rects;
+  const ratio0 = Number(r0b.height) / Number(r0a.height);
+  const ratio1 = Number(r1b.height) / Number(r1a.height);
+  assertTrue(Math.abs(ratio0 - 2) < 0.03, `panel 0: expected the 200-bar to be ~2x the 100-bar (measured from panel 0's own zero), got ratio ${ratio0}`);
+  assertTrue(Math.abs(ratio1 - 3) < 0.03, `panel 1: expected the 150-bar to be ~3x the 50-bar (measured from panel 1's own zero), got ratio ${ratio1}`);
+});
+
+check('panels (bar): a negative value draws downward from THAT PANEL\'s own zero line, not indistinguishable from positive', () => {
+  const svg = genSvg(NEG_ZERO_PANELS_BAR, ACCENT);
+  const g = layoutPanels(NEG_ZERO_PANELS_BAR);
+  const rects = parseTagAttrs(svg, 'rect').filter((r) => r.fill === ACCENT);
+  const panel0 = g.panelLayouts[0];
+  const zeroY0 = panel0.yScale(0);
+  const [r0neg, r0pos] = rects;
+  assertTrue(Number(r0neg.y) >= zeroY0 - 0.6, `panel 0 negative-value bar box (y=${r0neg.y}) does not start at/below its own zero line (${zeroY0})`);
+  assertTrue(Number(r0pos.y) + Number(r0pos.height) <= zeroY0 + 0.6, `panel 0 positive-value bar extends below its own zero line`);
+});
+
+check('panels (bar): a value of exactly zero draws no visible bar, in either panel', () => {
+  const svg = genSvg(NEG_ZERO_PANELS_BAR, ACCENT);
+  const rects = parseTagAttrs(svg, 'rect').filter((r) => r.fill === ACCENT);
+  const r1zero = rects[2];   // panel 1's first point (value 0); panel 0's 2 rects come first in draw order
+  assertTrue(Number(r1zero.height) < 0.5, `expected ~0 height for panel 1's zero value, got ${r1zero.height}`);
+});
+
+// Fix round 4, continued: this check's ORIGINAL body only asserted `plotL > 0`, which cannot fail
+// -- plotL is floored at MIN_LEFT=48 by construction, so the assertion is a tautology dressed as a
+// check. Fixed to assert what its name actually claims: both panels' own y-axis border lines (the
+// only elements drawn with the GRID chrome token) land at the identical x, proving the SVG itself,
+// not just the layout numbers, uses one shared margin rather than two independently-computed ones.
+check('panels: both panels share one left margin (vertical alignment) and never overlap vertically', () => {
+  const svg = genSvg(SAMPLE_PANELS_LINE, ACCENT);
+  const axisLines = parseTagAttrs(svg, 'line').filter((l) => l.stroke === GRID);
+  assertTrue(axisLines.length === 2, `expected 2 panel y-axis border lines (one per panel), got ${axisLines.length}`);
+  assertTrue(Number(axisLines[0].x1) === Number(axisLines[1].x1), `panel y-axis lines are drawn at different x (${axisLines[0].x1} vs ${axisLines[1].x1}) -- the panels do not actually share one left margin`);
+
+  const g = layoutPanels(SAMPLE_PANELS_LINE);
   const [p0, p1] = g.panelLayouts;
   assertTrue(p1.plotT - p0.plotB === PANEL_GAP, `expected the gap between panels to be exactly PANEL_GAP=${PANEL_GAP}, got ${p1.plotT - p0.plotB}`);
   assertTrue(p0.plotB <= p1.plotT, `panels overlap: panel 0 bottom ${p0.plotB} is below panel 1 top ${p1.plotT}`);
@@ -738,7 +854,7 @@ if (!harnessError && realTargets === 0) {
   console.log('\n' + NOT_ARMED_BANNER + '\n');
 }
 
-// All three fixture checks run on EVERY invocation, armed or not (see FIX ROUND 2 in the header
+// All three fixture checks run on EVERY invocation, armed or not (see FIX ROUND 3 in the header
 // comment). The negative control is the gate's only proof its own byte-compare detector can still
 // fire, and the round-trip check is the only proof "regenerate to fix a red gate" is actually
 // true -- arming the real-pack sweep above must not retire either proof, or tests/fixtures/vis-
