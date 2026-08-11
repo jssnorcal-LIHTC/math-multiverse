@@ -78,8 +78,7 @@ function makeEl(tag) {
     // remove: a removed node's parentNode must go back to null, not linger stale.
     removeChild(c) {
       const i = node.children.indexOf(c);
-      if (i !== -1) node.children.splice(i, 1);
-      if (c) c._parent = null;
+      if (i !== -1) { node.children.splice(i, 1); c._parent = null; }
       return c;
     },
     // A real parent link, because returning null unconditionally does not just lose information: it

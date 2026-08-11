@@ -165,6 +165,23 @@ check('closeLightbox removes the dialog and is safe to call twice, and when noth
   assert.strictEqual(lbs().length, 0, 'closeLightbox with nothing open must be a no-op, not a throw');
 });
 
+check('dom-stub removeChild only clears the parent link on an ACTUAL removal', () => {
+  // A regression guard for shared test infrastructure (nine suites use this stub): removeChild
+  // must behave like the real DOM's NotFoundError case for a node that is not the caller's
+  // child, not silently corrupt the link. closeLightbox itself is guarded by
+  // `if (_lb.parentNode)`, so a parentNode that lies here is exactly the masking failure the
+  // stub's own comment above parentNode was written to prevent.
+  const parent = MVFigures.el('div');
+  const stranger = MVFigures.el('div');
+  const child = MVFigures.el('span');
+  parent.appendChild(child);
+  stranger.removeChild(child);
+  assert.strictEqual(parent.children.indexOf(child) !== -1, true,
+    'child was spliced out of its REAL parent by an unrelated removeChild call');
+  assert.strictEqual(child.parentNode, parent,
+    'parentNode was cleared even though child was never removed from its real parent');
+});
+
 check('tapping the backdrop closes the lightbox', () => {
   MVFigures.openLightbox(PLATE_PACK, 'pl');
   const box = lbs()[0];
