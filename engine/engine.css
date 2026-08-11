@@ -305,36 +305,63 @@
    passage.docKind exists, and deletes the attribute otherwise) gets chrome around the prose: a
    header band via ::before naming the register, a tint, and a border accent.  Prose itself --
    .mv-para's font-size/line-height/margin and .mv-passage-title's font-size -- is untouched by
-   every rule below; only .mv-passage (background/border/padding-top) and its ::before pseudo
-   change.  The `:not([data-dockind=""])` guard is redundant with the runner's own delete-when-
-   absent contract but kept anyway: it costs nothing and means this file does not silently start
-   matching an empty attribute if that contract ever changes upstream.
+   every rule below; only .mv-passage (background/border) and its ::before pseudo change.
 
-   The shared rule below deliberately does NOT set `content`.  A first draft did (`content: ''`),
-   which looked harmless but silently won the cascade over every per-kind ::before rule below it:
-   :not() carries the specificity of its argument, so `:not([data-dockind=""])` adds a full
-   attribute-selector's worth of specificity, making the shared selector (0,3,1) against each
-   per-kind selector's (0,2,1).  The shared, EMPTIER content always outranked the specific one
-   regardless of source order, so every band rendered as a zero-height, label-less strip -- caught
-   only by reading getComputedStyle(box, '::before').content in a real browser (it read `""` for
-   every kind) and by the band being visibly absent from every kind's screenshot; a DOM-stub unit
-   test cannot compute a CSS cascade and would have reported this line clean. Leaving `content`
-   unset here means ::before generates no box at all for any docKind lacking its own content rule
-   (impossible today: validate-pack.js's DOC_KINDS enum covers exactly the 11 kinds below and each
-   has one), which is the correct fallback rather than a mis-cascaded empty band. */
-.mv-passage[data-dockind]:not([data-dockind=""]) { padding-top: 0; }
-.mv-passage[data-dockind]:not([data-dockind=""])::before {
+   Fix round 1: no `:not([data-dockind=""])` guard here any more.  That guard is what made the
+   shared ::before rule's specificity (0,3,1) against every per-kind rule's (0,2,1), which is
+   exactly what let the shared rule's `content: ''` silently outrank every per-kind `content`
+   the first time this file shipped (fix round 0's finding).  engine/runner.js deletes the
+   attribute entirely when there is no docKind and never leaves it empty
+   (engine/runner.js:197-198), so the guard was defending against a state that cannot occur, at
+   the cost of a specificity trap the NEXT per-kind override of any shared-rule property would
+   fall into just as silently as `content` did.  Dropped rather than documented: with both
+   selectors now at (0,2,x), source order decides, and every per-kind rule below is declared
+   after this one, so it wins naturally.  V2/V4 authors adding new kinds inherit a cascade with
+   no trap in it, rather than a comment warning them one exists. */
+.mv-passage[data-dockind]::before {
   display: block; margin: 0 -12px 8px; padding: 5px 12px;
   font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
   border-bottom: 1px solid var(--border-subtle);
-  /* Checked every live pack skin colour (#c8102e, #7c5cff, #1a8f5e, #8b5e34, #b45309) against
-     every tinted band background below: the raw accent measured as low as 2.88:1, and 0.68rem
-     bold is far under the ~18.7px-bold floor WCAG exempts as "large text", so 4.5:1 is the real
-     floor here, not 3:1.  Mixed 40% toward white so every current accent clears 4.5:1 (worst
-     case measured 5.43:1) while the band still reads as that pack's colour rather than falling
-     back to one fixed hue for all packs.  See task-5-report.md for the full ratio table. */
+  /* Sticky (fix round 1): .mv-passage is overflow-y:auto, and the band used to scroll away with
+     the very first paragraph, so a passage scrolled even one line lost every trace of its skin
+     -- precisely the wall-of-text state this phase exists to fix, at the exact moment a child
+     needs the register cue most.  top:0 pins the band to .mv-passage's own padding-box top (the
+     nearest scrolling ancestor), not the viewport.  The opaque background-color below is
+     required, not decorative: a sticky element with no opaque fill of its own lets the prose
+     scrolling underneath show straight through it. */
+  position: sticky; top: 0; z-index: 1;
+  background-color: var(--bg-card, #15181f);
+  /* Measured live in Chromium (fix round 1 re-measurement): canvas-resolved computed ::before
+     text colour, composited over the real .host-frame app background, WCAG contrast formula --
+     see task-5-report.md for the script and the full per-kind/per-accent table.  Checked every
+     live pack skin colour (#c8102e, #7c5cff, #1a8f5e, #8b5e34, #b45309) against every tinted
+     band background below.  The raw accent measured as low as 2.88:1, and 0.68rem bold is far
+     under the ~18.7px-bold floor WCAG exempts as "large text", so 4.5:1 is the real floor, not
+     3:1.  Mixed 40% toward white so every current accent clears 4.5:1 (worst measured 6.45:1,
+     ela-g6-spy's #c8102e against the recovered-entry tint) while the band still reads as that
+     pack's colour rather than falling back to one fixed hue for every pack. */
   color: color-mix(in oklab, var(--mv-color, #7aa8ff) 60%, white);
 }
+/* padding-top:0 lives on this explicit 11-value list, not on a generic [data-dockind] presence
+   check (fix round 1, item 6): with the generic form, an unmapped docKind value would still
+   zero the passage's own top padding even though it generates no ::before box (content stays
+   unset, so no band ever exists to fill the gap), leaving the title flush against the border
+   with none of the spacing an unskinned passage gets.  Keying padding-top to the same 11 values
+   `content` is already keyed to ties the two effects to one condition instead of two, so they
+   can no longer drift apart.  tests/validate-pack.js's DOC_KINDS enum is the source of truth
+   this list mirrors;
+   a V2/V4 kind added there needs adding here too. */
+.mv-passage[data-dockind="case-file"],
+.mv-passage[data-dockind="recovered-entry"],
+.mv-passage[data-dockind="source-desk"],
+.mv-passage[data-dockind="addendum"],
+.mv-passage[data-dockind="field-manual"],
+.mv-passage[data-dockind="status-log"],
+.mv-passage[data-dockind="weather-log"],
+.mv-passage[data-dockind="field-report"],
+.mv-passage[data-dockind="procedure"],
+.mv-passage[data-dockind="memo"],
+.mv-passage[data-dockind="minutes"] { padding-top: 0; }
 /* Every middle-dot separator below is `\00b7` followed by TWO spaces, not one. A CSS hex escape
    with fewer than 6 digits consumes exactly one trailing whitespace character as its own
    terminator, so a single space after `\00b7` is eaten and never reaches the rendered string: it
@@ -342,16 +369,37 @@
    gap missing on one side only. The second space is the literal one that survives; verified via
    getComputedStyle(...).content ("A · B" with two source spaces vs "A ·B" with one). */
 .mv-passage[data-dockind="case-file"]::before { content: 'PROVENANCE OFFICE \00b7  CASE FILE'; }
-.mv-passage[data-dockind="case-file"] { background: rgba(139,94,52,0.07); }
+/* Tint fix round 1: was `background: rgba(139,94,52,0.07)`.  The `background` SHORTHAND resets
+   every constituent it does not mention, including background-color, so it replaced (not
+   composited with) .mv-passage's own base rgba(255,255,255,0.03) wash -- measured perceptually
+   inert either way at that alpha (no delta a child would notice on this dark theme).  Now a
+   `background-image` longhand only: background-color is left undeclared here so the cascade
+   falls through to .mv-passage's own rule (the only declarant left), and the gradient paints
+   as a second layer ON TOP of that wash instead of instead of it.  0.21 (3x the original 0.07)
+   was chosen by measuring the composited-over-app-background luminance delta directly rather
+   than guessing: 1.207:1 against the untinted box, inside the ~1.15-1.25:1 perceptible-on-this-
+   theme target; see task-5-report.md for the before/after numbers for all three tinted kinds. */
+.mv-passage[data-dockind="case-file"] { background-image: linear-gradient(rgba(139,94,52,0.21), rgba(139,94,52,0.21)); }
 .mv-passage[data-dockind="recovered-entry"]::before { content: 'RECOVERED ENTRY'; }
-.mv-passage[data-dockind="recovered-entry"] { background: rgba(200,170,110,0.08);
-  border-style: dashed; }
+/* Tint fix round 1: same shorthand-replaces-the-wash defect as case-file, fixed the same way.
+   0.11 (about 1.4x the original 0.08, not 3-4x) is enough here because this tint's lighter tan
+   moves composited luminance more per unit alpha than case-file's browner hue does; matched to
+   the same 1.15-1.25:1 target rather than to a uniform multiplier: measured 1.206:1. */
+.mv-passage[data-dockind="recovered-entry"] {
+  background-image: linear-gradient(rgba(200,170,110,0.11), rgba(200,170,110,0.11));
+  border-style: dashed;
+}
 .mv-passage[data-dockind="source-desk"]::before { content: 'FILED SOURCE \00b7  COMPARE ACCOUNTS'; }
 .mv-passage[data-dockind="source-desk"] { border-left: 3px solid var(--mv-color, #7aa8ff); }
 .mv-passage[data-dockind="addendum"]::before { content: 'CASE FILE \00b7  ADDENDUM'; }
 .mv-passage[data-dockind="field-manual"]::before { content: 'OUTPOST NETWORK \00b7  FIELD MANUAL'; }
-.mv-passage[data-dockind="field-manual"] { background:
-  linear-gradient(rgba(26,143,94,0.05), rgba(26,143,94,0.05)); }
+/* Tint fix round 1: this one was the worst case -- it already used a gradient, but through the
+   `background` SHORTHAND, so the shorthand still zeroed background-color to transparent and the
+   "green tint" measured NET DARKER than an unskinned passage (no wash left to lighten it at
+   all).  Switched to the `background-image` longhand alone, same reasoning as case-file above.
+   0.175 (3.5x the original 0.05) measured 1.216:1 against the untinted box. */
+.mv-passage[data-dockind="field-manual"] { background-image:
+  linear-gradient(rgba(26,143,94,0.175), rgba(26,143,94,0.175)); }
 .mv-passage[data-dockind="status-log"]::before { content: 'STATUS LOG \00b7  FILED TO NETWORK COMMAND'; }
 .mv-passage[data-dockind="status-log"] .mv-passage-title,
 .mv-passage[data-dockind="weather-log"] .mv-passage-title { font-family: ui-monospace,
@@ -359,6 +407,13 @@
 .mv-passage[data-dockind="weather-log"]::before { content: 'WEATHER LOG \00b7  RAW READINGS'; }
 .mv-passage[data-dockind="field-report"]::before { content: 'FIELD REPORT'; }
 .mv-passage[data-dockind="procedure"]::before { content: 'STANDING PROCEDURE \00b7  FOLLOW IN ORDER'; }
-.mv-passage[data-dockind="procedure"] { border-left: 3px solid #ff9d3c; }
+/* Fix round 1: was a hard-coded `#ff9d3c` left border, which is the exact chrome .mv-explain
+   already uses (border-left AND border-color both) to mean "this is an answer explanation".
+   Two identical-looking signals meaning two different things is worse than one; switched to
+   var(--mv-color) so this kind reads as pack-branded, matching source-desk's own left-border
+   treatment, rather than inventing a new hue that would need its own collision check against
+   #3ddc84 (correct), #ff5c5c (wrong), #ff9d3c (explanation), and #fbbf24 (the shell's warning
+   token) for no benefit over reusing the accent every other bordered kind already uses. */
+.mv-passage[data-dockind="procedure"] { border-left: 3px solid var(--mv-color, #7aa8ff); }
 .mv-passage[data-dockind="memo"]::before { content: 'ANALYST MEMO'; }
 .mv-passage[data-dockind="minutes"]::before { content: 'REVIEW BOARD \00b7  MINUTES'; }
