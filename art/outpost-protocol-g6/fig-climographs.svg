@@ -3,19 +3,15 @@
 <line x1="48.5" y1="48" x2="48.5" y2="144" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
 <line x1="48" y1="144.5" x2="752" y2="144.5" stroke="#e8eef7" stroke-width="1.5" />
 <text x="38" y="144" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">0</text>
-<line x1="48" y1="125.5" x2="752" y2="125.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<text x="38" y="124.8" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">10</text>
-<line x1="48" y1="106.5" x2="752" y2="106.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<text x="38" y="105.6" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">20</text>
-<line x1="48" y1="86.5" x2="752" y2="86.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<text x="38" y="86.4" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">30</text>
-<line x1="48" y1="67.5" x2="752" y2="67.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<text x="38" y="67.2" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="48" y1="112.5" x2="752" y2="112.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="38" y="112" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="48" y1="80.5" x2="752" y2="80.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="38" y="80" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">40</text>
 <line x1="48" y1="48.5" x2="752" y2="48.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<text x="38" y="48" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">50</text>
+<text x="38" y="48" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">60</text>
 <text x="48" y="36" font-size="22" fill="#e8eef7">rainfall (in/yr)</text>
-<rect x="111.36" y="126.72" width="225.28" height="17.28" fill="#1a8f5e" />
-<rect x="463.36" y="63.36" width="225.28" height="80.64" fill="#1a8f5e" />
+<rect x="111.36" y="129.6" width="225.28" height="14.4" fill="#1a8f5e" />
+<rect x="463.36" y="76.8" width="225.28" height="67.2" fill="#1a8f5e" />
 <line x1="48.5" y1="184" x2="48.5" y2="280" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
 <line x1="48" y1="280.5" x2="752" y2="280.5" stroke="#e8eef7" stroke-width="1.5" />
 <text x="38" y="280" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">0</text>
