@@ -130,27 +130,57 @@
 /* Completion-screen reveal card (engine/figures.js renderRevealCard), appended into the shell's
    #lc-reveal host on a level clear that earned at least one star (Math-Multiverse.html
    showPackLevelComplete). The 12-tile grid covers the figure and lifts away tile by tile. */
-.mv-rv-card { display: flex; flex-direction: column; gap: 8px; align-items: center; margin-top: 10px; }
-/* .mv-rv-frame carries a real HEIGHT, not just a max-width, and .mv-rv-img is object-fit:
-   contain rather than width:100%/height:auto. `.level-complete` (Math-Multiverse.html) is a
-   height:100%, justify-content:center flex column with no scroll of its own: a frame sized off
-   a tall portrait image's own aspect ratio (measured live against a 560px-wide portrait plate:
-   677px tall) made the WHOLE completion card taller than the 1024x768 host frame, and centering
-   overflow pushed the headline and part of the score line off the TOP of the screen -- caught
-   only by rendering a real figure and looking at the screenshot, not by any DOM-stub test. A
-   fixed, budget-aware height keeps every kind of source image (portrait, landscape, square)
-   inside the same box, `object-fit: contain` keeps the whole figure visible with no crop (a
-   study image that gets cropped defeats the point of revealing it), and the faint background
-   fills any letterbox gap so it reads as intentional rather than a rendering gap. */
-.mv-rv-frame { position: relative; width: min(560px, 86vw); height: min(230px, 28vh);
-  border-radius: 10px; overflow: hidden; background: rgba(255,255,255,0.04); }
-.mv-rv-img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* Fix round 1 rewrite of this whole block (two related findings, fixed together per the
+   review's own instruction, since both trace to the frame sizing itself rigidly):
+
+   1. CRITICAL: sizing the frame off a raw vh fraction (the original `min(230px, 28vh)`) had no
+      idea how much of the viewport the header/toolbar and .level-complete's OWN headline, stars,
+      score and action row already spend. On a real device viewport (iPad 6 Safari: roughly
+      654-694px tall, not the 1024x768 the first pass verified at) that left the reveal card too
+      tall for what actually remained, pushing the headline and the Levels/Retry/Next row outside
+      .host-frame (overflow:hidden, no page scroll) with nothing to scroll it back into view.
+      Fixed by making `flex: 0 1 auto; min-height: 0` on .mv-rv-card and this rule the thing that
+      ACTUALLY shrinks: with `min-height: 0` lifting the default `min-height: auto` floor that
+      normally stops a flex item shrinking below its content size, the card compresses to
+      whatever room .level-complete's flex layout measures as genuinely left over, live, rather
+      than a number computed in advance against the wrong denominator. #lc-reveal
+      (Math-Multiverse.html) carries the matching flex:0 1 auto;min-height:0 one level up.
+
+   2. IMPORTANT: the grid used to cover the FRAME (a fixed-width box with the image letterboxed
+      inside it via object-fit:contain), not the drawn image. Measured against a 993x1200
+      portrait figure in the old 560px-wide frame: only 31.8% of the covered area was the actual
+      figure, so eight of twelve tiles lifted away from blank card background and the reward
+      rendered as a ~178px postage stamp -- exactly the case V2's flagship portrait plate hits
+      every time, not an edge case. Fixed by keeping the height as the fixed budget but letting
+      WIDTH follow the image's own aspect ratio (`width: auto` with `max-width` as an outer cap,
+      not a fixed value), and giving .mv-rv-img `height: 100%; width: auto` so it fills exactly
+      that box with no crop and no letterbox gap -- the frame IS the image's bounding box now,
+      so the grid (position:absolute; inset:0) lands on the figure, not around it. */
+.mv-rv-card { display: flex; flex-direction: column; gap: 8px; align-items: center; margin-top: 10px;
+  flex: 0 1 auto; min-height: 0; width: 100%; }
+.mv-rv-frame { position: relative; width: auto; max-width: min(560px, 86vw); height: 230px;
+  flex: 0 1 auto; min-height: 0; border-radius: 10px; overflow: hidden; }
+.mv-rv-img { display: block; height: 100%; width: auto; }
 .mv-rv-grid { position: absolute; inset: 0; display: grid;
   grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); }
 .mv-rv-tile { background: #0b1424; border: 1px solid rgba(255,255,255,0.08);
   transition: opacity 0.5s ease, transform 0.5s ease; }
 .mv-rv-tile.away { opacity: 0; transform: scale(0.92); }
-.mv-rv-cap { font-weight: 600; text-align: center; max-width: 60ch; }
+/* IMPORTANT (fix round 1): no length rule exists anywhere on figure.caption/credit
+   (validate-pack.js), and a museum-style caption of a few hundred characters is the ORDINARY
+   case for a Gray's-plate-style figure, not a rare one. Three-plus wrapped lines of unclamped
+   caption push the headline and buttons out the same way the frame height did. -webkit-box +
+   -webkit-line-clamp is the one cross-browser-enough way to clamp multi-line text with an
+   ellipsis (Safari, the actual target, supports it); the full caption still lives in the
+   lightbox this figure's own strip/rail thumb opens, so nothing authored is lost, only the
+   completion card's copy of it is capped. */
+.mv-rv-cap { font-weight: 600; text-align: center; max-width: 60ch;
+  max-height: 2.8em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+/* Credit stays one line for the same reason: unlike the caption there is no clamp fallback
+   worth adding for a single line, so a plain ellipsis truncation is enough, scoped to the
+   reveal card specifically (`.mv-lb-credit` is shared with the lightbox, where a longer credit
+   wrapping is fine and untouched). */
+.mv-rv-card .mv-lb-credit { max-width: min(560px, 86vw); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* .mv-rv-cell and .mv-rv-tile are real as of Task 6 (both defined above); listed here for real
    reduced-motion coverage, not just future-proofing. .mv-flash.stamp-* remains a forward

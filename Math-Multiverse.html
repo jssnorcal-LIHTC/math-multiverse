@@ -616,6 +616,18 @@
   }
   .lc-score { font-size: 1.05rem; color: var(--text-primary); }
   .lc-grand-msg { font-size: 0.95rem; color: var(--text-secondary); max-width: 460px; }
+  /* Fix round 1, CRITICAL item: .level-complete is height:100%, justify-content:center, with NO
+     scroll, sitting inside .host-frame which is overflow:hidden with no page scroll either. On
+     a real iPad 6 Safari (inner height roughly 654-694px with browser chrome subtracted, not the
+     1024x768 the first pass tested at) a reward figure sized off a raw vh fraction left the
+     headline and this row's own buttons pushed outside .host-frame with no way to reach them.
+     The fix is NOT another vh guess: #lc-reveal, .mv-rv-card and .mv-rv-frame (engine/engine.css)
+     all get flex:0 1 auto; min-height:0, so the CARD is the flex item that actually shrinks
+     below its own content height when the real, measured remaining space is tight, while this
+     row and the headline/level/stars/score above keep their default min-height:auto floor and
+     so are never the ones that give. display:flex + justify-content:center centers the card
+     (which may render narrower than 100% once shrunk) within the row's own full width. */
+  #lc-reveal { display: flex; justify-content: center; flex: 0 1 auto; min-height: 0; width: 100%; }
   .lc-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
 
   /* ============================================================
@@ -4053,13 +4065,18 @@ function showPackLevelComplete(entry, pack, levelIndex, score, stars) {
   const lv = pack.levels[levelIndex];
   const isLast = levelIndex === pack.levels.length - 1;
   const starsHtml = [1, 2, 3].map(n => `<span class="lc-star ${stars >= n ? 'earned' : ''}">★</span>`).join('');
+  // Fix round 1, item 7: the host div is emitted only when the level actually declares a
+  // reveal. An unconditional empty <div id="lc-reveal"> still counts as a flex item of
+  // .level-complete's own gap:18px, costing 18px above AND below it on every one of the five
+  // shipped packs that never sets `reveal` at all, for a host nothing will ever fill.
+  const revealHtml = lv.reveal ? `<div id="lc-reveal"></div>` : '';
   host.innerHTML = `
     <div class="level-complete" style="--card-color: ${entry.color};">
       <div class="lc-headline">${stars > 0 ? 'LEVEL CLEARED' : 'NOT QUITE'}</div>
       <div class="lc-level">L${lv.id} &middot; ${lv.name}</div>
       <div class="lc-stars">${starsHtml}</div>
       <div class="lc-score">Score: <strong>${score}</strong></div>
-      <div id="lc-reveal"></div>
+      ${revealHtml}
       <div class="lc-actions">
         <button class="btn btn-secondary" id="lc-back">&larr; Levels</button>
         <button class="btn btn-secondary" id="lc-retry">Retry</button>
@@ -4074,8 +4091,11 @@ function showPackLevelComplete(entry, pack, levelIndex, score, stars) {
   // straight off them rather than re-fetching through the module-level currentPackId: a stale
   // or null currentPackId at completion-screen time would make MVPack.get return undefined and
   // the reveal silently not render, with nothing to say why. stars > 0 gates this so a failed
-  // level (0 stars) does not hand out the artifact; a retry that clears it does.
-  if (typeof MVFigures !== 'undefined' && stars > 0) {
+  // level (0 stars) does not hand out the artifact; a retry that clears it does. `lv.reveal`
+  // is checked again here (not just at template-build time above) so a reveal-less level never
+  // even attempts the $('lc-reveal') lookup, which would return null since the host was never
+  // emitted.
+  if (typeof MVFigures !== 'undefined' && stars > 0 && lv.reveal) {
     try { MVFigures.renderRevealCard(pack, levelIndex, $('lc-reveal')); } catch (e) {}
   }
 }

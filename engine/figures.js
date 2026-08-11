@@ -223,7 +223,12 @@
     const card = el('div', 'mv-rv-card');
     const frame = el('div', 'mv-rv-frame');
     const img = el('img', 'mv-rv-img');
-    img.setAttribute('src', f.kind === 'plate' ? f.views[0].src : f.src);
+    // Fix round 1, item 7: matches renderStrip's and renderItemFigure's identical guard. A
+    // malformed plate (no views) falls back to f.src rather than dereferencing `f.views[0]`
+    // unguarded and throwing before the guard function around this call even gets a chance to
+    // catch it (renderRevealCard is called directly from Math-Multiverse.html, not through the
+    // runner's own try/catch wrapper).
+    img.setAttribute('src', f.kind === 'plate' ? ((f.views && f.views[0]) ? f.views[0].src : f.src) : f.src);
     // Default matches the strip/lightbox convention: a figure missing alt renders alt="",
     // never the literal string "undefined".
     img.setAttribute('alt', f.alt || '');
