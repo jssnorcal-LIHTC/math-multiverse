@@ -59,6 +59,40 @@
   letter-spacing: 0.08em; font-weight: 700; padding: 1px 5px; border-radius: 4px;
   background: rgba(0,0,0,0.78); color: #e8eef7; }
 
+/* Lightbox + plate viewer, opened from a strip thumb (engine/figures.js openLightbox).
+   .mv-lb-zoom, not .mv-lb-img, is the zoom target: .mv-lb-overlay is absolutely positioned
+   INSIDE .mv-lb-zoom, not .mv-lb-frame, so scaling the zoom wrapper scales the plate and its
+   overlay together.  Scaling .mv-lb-img alone would grow the plate while the overlay stayed
+   at its unscaled size, drifting off the anatomy it traces -- exactly V2's flagship case
+   (Gray's 1918 nervous plate).  touch-action: manipulation on the frame and the image opts
+   out of Safari's native double-tap-to-zoom on the target iPad 6, which otherwise fights the
+   double-tap-to-zoom gesture this file implements itself. */
+.mv-lightbox { position: fixed; inset: 0; z-index: 60; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px; padding: 18px;
+  background: rgba(4,8,16,0.93); }
+.mv-lb-frame { position: relative; max-width: 96vw; max-height: 78vh; overflow: auto;
+  touch-action: manipulation; }
+.mv-lb-zoom { position: relative; display: inline-block; transition: transform 0.2s ease; }
+.mv-lb-zoom.zoomed { transform: scale(2); transform-origin: center; }
+.mv-lb-img { display: block; max-width: 94vw; max-height: 74vh; margin: 0 auto;
+  touch-action: manipulation; }
+.mv-lb-overlay { position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; }
+.mv-lb-cap { font-size: 0.92rem; text-align: center; max-width: 80ch; }
+.mv-lb-credit { font-size: 0.78rem; color: var(--text-secondary); }
+.mv-plate-tabs { display: flex; gap: 6px; }
+.mv-plate-tab { min-height: 44px; font: inherit; font-weight: 700; padding: 8px 14px;
+  border-radius: 8px; cursor: pointer; color: inherit;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle); }
+.mv-plate-tab.active { border-color: var(--mv-color, #7aa8ff);
+  background: rgba(120,170,255,0.14); }
+/* .mv-rv-cell, .mv-rv-tile and .mv-flash.stamp-* are forward references: Tasks 6 and 7 add
+   those classes later on this same branch.  Listed here now so reduced-motion coverage does
+   not depend on remembering to extend this rule when they land. */
+@media (prefers-reduced-motion: reduce) {
+  .mv-lb-zoom, .mv-lb-overlay, .mv-rv-cell, .mv-rv-tile, .mv-flash { transition: none !important; animation: none !important; }
+}
+
 /* The item is now the side that gives. `flex: 0 1 auto` plus `min-height: 0` lets it shrink below its
    content, and it scrolls what does not fit rather than evicting the passage. `min-height: 0` is
    required: a flex item will not shrink below its content without it, which is the usual reason this

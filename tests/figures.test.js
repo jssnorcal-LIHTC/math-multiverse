@@ -103,5 +103,105 @@ check('renderStrip renders a visibly-wrong badge for a kind absent from BADGE, n
     'an unmapped kind must render a visibly-wrong badge, not an empty pill or a silent uppercase guess');
 });
 
+// ---------- Task 4: openLightbox / closeLightbox ----------
+// lbs()/find() below are the brief's helpers, adapted to this stub's real API: no
+// dispatchEvent (fire handlers via node.onclick(...) instead) and document.body is a real
+// node the stub now provides.
+const PLATE_PACK = { meta: { id: 'demo', subject: 'sci' }, figures: [
+  { id: 'pl', kind: 'plate', caption: 'c', credit: 'cr', alt: 'a', views: [
+    { label: 'Skeletal', src: 'art/demo/a.png' },
+    { label: 'Nervous', src: 'art/demo/b.png', overlaySrc: 'art/demo/b-ov.svg' } ] } ] };
+const NOALT_PACK = { meta: { id: 'demo2', subject: 'sci' }, figures: [
+  { id: 'p2', kind: 'photo', src: 'art/demo/x.jpg', caption: 'c2', credit: 'cr2' } ] };
+
+function lbs() {
+  return Array.from(document.body.children).filter(c => c.className === 'mv-lightbox');
+}
+function find(node, cls, out) {
+  out = out || [];
+  for (const c of Array.from(node.children || [])) {
+    if (String(c.className).split(' ').indexOf(cls) !== -1) out.push(c);
+    find(c, cls, out);
+  }
+  return out;
+}
+function tap(node) { node.onclick({ stopPropagation() {} }); }
+
+check('openLightbox builds one dialog; a second open replaces the first', () => {
+  MVFigures.openLightbox(PLATE_PACK, 'pl');
+  MVFigures.openLightbox(PLATE_PACK, 'pl');
+  assert.strictEqual(lbs().length, 1);
+});
+
+check('plate renders a tab per view; switching swaps src and overlay presence', () => {
+  MVFigures.openLightbox(PLATE_PACK, 'pl');
+  const box = lbs()[0];
+  const tabs = find(box, 'mv-plate-tab');
+  assert.strictEqual(tabs.length, 2);
+  tap(tabs[1]);
+  assert.strictEqual(find(box, 'mv-lb-img')[0].getAttribute('src'), 'art/demo/b.png');
+  assert.strictEqual(find(box, 'mv-lb-overlay').length, 1);
+  tap(tabs[0]);
+  assert.strictEqual(find(box, 'mv-lb-overlay').length, 0);
+});
+
+check('tab .active moves with the selected view, via closure not a frame query', () => {
+  MVFigures.openLightbox(PLATE_PACK, 'pl');
+  const box = lbs()[0];
+  const tabs = find(box, 'mv-plate-tab');
+  assert.strictEqual(tabs[0].classList.contains('active'), true, 'first tab is not active on open');
+  assert.strictEqual(tabs[1].classList.contains('active'), false);
+  tap(tabs[1]);
+  assert.strictEqual(tabs[0].classList.contains('active'), false, 'active did not leave the first tab');
+  assert.strictEqual(tabs[1].classList.contains('active'), true, 'active did not move to the second tab');
+});
+
+check('closeLightbox removes the dialog and is safe to call twice, and when nothing is open', () => {
+  MVFigures.openLightbox(PLATE_PACK, 'pl');
+  MVFigures.closeLightbox();
+  MVFigures.closeLightbox();
+  assert.strictEqual(lbs().length, 0);
+  MVFigures.closeLightbox();
+  assert.strictEqual(lbs().length, 0, 'closeLightbox with nothing open must be a no-op, not a throw');
+});
+
+check('tapping the backdrop closes the lightbox', () => {
+  MVFigures.openLightbox(PLATE_PACK, 'pl');
+  const box = lbs()[0];
+  tap(box);
+  assert.strictEqual(lbs().length, 0);
+});
+
+check('a figure missing alt renders alt="", never alt="undefined" (matches the strip convention)', () => {
+  MVFigures.openLightbox(NOALT_PACK, 'p2');
+  const box = lbs()[0];
+  assert.strictEqual(find(box, 'mv-lb-img')[0].getAttribute('alt'), '');
+});
+
+check('a non-plate figure renders no tab rail and no overlay', () => {
+  MVFigures.openLightbox(NOALT_PACK, 'p2');
+  const box = lbs()[0];
+  assert.strictEqual(find(box, 'mv-plate-tab').length, 0);
+  assert.strictEqual(find(box, 'mv-lb-overlay').length, 0);
+  assert.strictEqual(find(box, 'mv-lb-img')[0].getAttribute('src'), 'art/demo/x.jpg');
+});
+
+check('double-tap zooms a wrapper holding both image and overlay, so they scale together', () => {
+  MVFigures.openLightbox(PLATE_PACK, 'pl');
+  const box = lbs()[0];
+  tap(find(box, 'mv-plate-tab')[1]);              // select the view with an overlay
+  const img = find(box, 'mv-lb-img')[0];
+  const overlay = find(box, 'mv-lb-overlay')[0];
+  const wrap = img.parentNode;
+  assert.strictEqual(wrap.className, 'mv-lb-zoom', 'the image does not sit in a dedicated zoom wrapper');
+  assert.strictEqual(overlay.parentNode, wrap, 'the overlay is not inside the same wrapper as the image');
+  tap(img);                                        // first tap: outside the double-tap window, no zoom
+  assert.strictEqual(wrap.classList.contains('zoomed'), false);
+  tap(img);                                        // second tap: inside the window, zoom toggles on
+  assert.strictEqual(wrap.classList.contains('zoomed'), true);
+  assert.strictEqual(img.classList.contains('zoomed'), false,
+    '.zoomed must live on the wrapper, not the image, or the overlay would not scale with it');
+});
+
 console.log(failures ? `figures.test: ${failures} FAILURE(S)` : 'figures.test: all clean');
 process.exit(failures ? 1 : 0);

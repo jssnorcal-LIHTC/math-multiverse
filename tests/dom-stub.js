@@ -42,6 +42,14 @@ function makeEl(tag) {
       add: (...c) => c.forEach((x) => classes.add(x)),
       remove: (...c) => c.forEach((x) => classes.delete(x)),
       contains: (c) => classes.has(c),
+      // Task 4 needs the two-argument form (`toggle('active', i === viewIdx)`): `force`
+      // decides membership directly rather than flipping current state, so repeated calls
+      // with the same force are idempotent, matching the real DOM's classList.toggle.
+      toggle(c, force) {
+        const on = force === undefined ? !classes.has(c) : !!force;
+        if (on) classes.add(c); else classes.delete(c);
+        return on;
+      },
     },
     get textContent() { return node._text; },
     set textContent(v) { node._text = String(v); },
@@ -65,6 +73,23 @@ function makeEl(tag) {
       })(node);
       return out;
     },
+    // Singular form Task 4 needs for its own overlay lookup; NOT used by the shipped
+    // openLightbox (which tracks the overlay in a closure instead, per the pre-flight), but
+    // kept here because a stub extension only gets exercised if something asserts on it, and
+    // dropping it would leave engine code with no singular selector to fall back to.
+    querySelector(sel) {
+      const hits = node.querySelectorAll(sel);
+      return hits.length ? hits[0] : null;
+    },
+    // Splices `c` out of `children` and clears its parent link, mirroring real DOM removal
+    // closely enough that `if (node.parentNode)` guards keep meaning what they say after a
+    // remove: a removed node's parentNode must go back to null, not linger stale.
+    removeChild(c) {
+      const i = node.children.indexOf(c);
+      if (i !== -1) node.children.splice(i, 1);
+      if (c) c._parent = null;
+      return c;
+    },
     // A real parent link, because returning null unconditionally does not just lose information: it
     // silently SKIPS any `if (node.parentNode)` branch, so the suite cannot see that code at all. That
     // is how shorttext.reveal's duplicate-append defect stayed invisible to a probe written to catch it.
@@ -75,9 +100,13 @@ function makeEl(tag) {
 
 // Installs the stub on the global object and returns the element factory. Idempotent.
 function installDomStub() {
+  // One body per install, not per makeEl call, so a test can read document.body.children and
+  // see everything appended across the whole run rather than a fresh empty node each time.
+  const body = makeEl('body');
   global.document = {
     createElement: makeEl,
     createTextNode: () => makeEl('#text'),
+    body,
   };
   return { makeEl };
 }
