@@ -17,6 +17,9 @@ const PACK = { meta: { id: 'demo', subject: 'sci' }, figures: [
   { id: 'f2', kind: 'map', src: 'art/demo/f2.jpg', caption: 'c2', credit: 'cr2', alt: 'b' },
   { id: 'f3', kind: 'plate', caption: 'c3', credit: 'cr3', alt: 'c',
     views: [{ src: 'art/demo/f3-1.jpg', label: 'v1' }, { src: 'art/demo/f3-2.jpg', label: 'v2' }] },
+  // Deliberately NOT a FIG_KINDS entry: exercises the BADGE fallback for a kind that never
+  // should reach here through a validated pack, but must still render visibly, not silently.
+  { id: 'f4', kind: 'sketch', src: 'art/demo/f4.jpg', caption: 'c4', credit: 'cr4', alt: 'd' },
 ] };
 
 check('resolve finds a figure by id', () => {
@@ -91,6 +94,13 @@ check('renderStrip thumb click reaches the LIVE openLightbox, not a captured stu
   } finally {
     MVFigures.openLightbox = orig;
   }
+});
+check('renderStrip renders a visibly-wrong badge for a kind absent from BADGE, not a silent empty pill', () => {
+  const host = MVFigures.el('div');
+  const strip = MVFigures.renderStrip(PACK, ['f4'], host);
+  const badge = strip.children[0].children[1];
+  assert.strictEqual(badge.textContent, '?sketch',
+    'an unmapped kind must render a visibly-wrong badge, not an empty pill or a silent uppercase guess');
 });
 
 console.log(failures ? `figures.test: ${failures} FAILURE(S)` : 'figures.test: all clean');

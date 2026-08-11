@@ -36,9 +36,12 @@
     return n;
   }
 
-  // Explicit, not a ternary-with-a-fallback: a kind missing from this map renders its badge
-  // text as the literal string "undefined" rather than a guessed, uppercased identifier, so a
-  // sixth FIG_KINDS entry surfaces as a visibly broken badge instead of a silently plausible one.
+  // Explicit, not a ternary-with-a-fallback: every FIG_KINDS entry gets its correct label, and
+  // a kind missing from this map renders a visibly-wrong "?kind" pill rather than silently
+  // uppercasing a guessed identifier.  It must NOT rely on el() alone for that visibility: el()
+  // sets textContent only when the text is neither undefined nor null, so an unguarded
+  // `BADGE[f.kind]` lookup on an unmapped kind would render an EMPTY pill with no text at all,
+  // which is quieter than the missing-label failure this map exists to surface.
   const BADGE = { photo: 'PHOTO', plate: 'PLATE', map: 'MAP', diagram: 'DIAGRAM', chart: 'CHART' };
 
   // Capped horizontal strip of figure thumbnails, appended to hostEl (the passage panel).  A
@@ -60,7 +63,7 @@
       const src = f.kind === 'plate' ? ((f.views && f.views[0]) ? f.views[0].src : f.src) : f.src;
       img.setAttribute('src', src);
       b.appendChild(img);
-      b.appendChild(el('span', 'mv-fig-badge', BADGE[f.kind]));
+      b.appendChild(el('span', 'mv-fig-badge', BADGE[f.kind] || ('?' + String(f.kind))));
       b.addEventListener('click', () => api.openLightbox(pack, f.id));
       strip.appendChild(b);
     }

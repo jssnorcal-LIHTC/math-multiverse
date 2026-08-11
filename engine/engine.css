@@ -40,18 +40,21 @@
 
 /* Figure strip: capped so prose stays dominant; it scrolls WITH the passage, so the
    reading-surface floor is untouched.  The cap is expressed once via --mv-fig-h and enforced
-   by overflow:hidden rather than left advisory, and it is gated by tests/figures-offline.js,
+   by max-height rather than left advisory, and it is gated by tests/figures-offline.js,
    Task 8.  The thumb is a fixed 128x96 box: `contain`, not `cover`, because a cropped chart or
    map silently loses the axis labels and scale bar at its edges, which is a data-truth defect,
-   not a cosmetic one, letterboxing a photo costs nothing by comparison.  min-width:44px keeps a
-   portrait figure (a full-page plate, narrower than it is tall) at the touch-target floor. */
+   not a cosmetic one, letterboxing a photo costs nothing by comparison.  `flex: 0 0 auto` on
+   the thumb is load-bearing for the SAME data-truth reason: without it, min-width:44px is the
+   only thing that lets a thumb shrink below its 128px box, and .mv-fig's own overflow:hidden
+   would then clip the image on both sides, cropping a chart's axis labels by a second route.
+   The strip scrolls horizontally instead (overflow-x:auto) rather than compressing thumbs. */
 .mv-figs { --mv-fig-h: 96px; display: flex; gap: 8px; margin: 4px 0 8px;
-  max-height: calc(var(--mv-fig-h) + 8px); overflow: hidden; }
-.mv-fig { position: relative; min-width: 44px; display: flex; align-items: center;
-  justify-content: center; border: 1px solid var(--border-subtle); border-radius: 7px;
-  padding: 0; background: none; cursor: pointer; overflow: hidden;
+  max-height: calc(var(--mv-fig-h) + 8px); overflow-x: auto; }
+.mv-fig { position: relative; flex: 0 0 auto; min-width: 44px; display: flex;
+  align-items: center; justify-content: center; border: 1px solid var(--border-subtle);
+  border-radius: 7px; padding: 0; background: none; cursor: pointer; overflow: hidden;
   max-height: calc(var(--mv-fig-h) + 8px); }
-.mv-fig-img { display: block; width: 128px; height: var(--mv-fig-h); object-fit: contain; }
+.mv-fig-img { display: block; width: 128px; height: var(--mv-fig-h, 96px); object-fit: contain; }
 .mv-fig-badge { position: absolute; left: 4px; bottom: 4px; font-size: 0.72rem;
   letter-spacing: 0.08em; font-weight: 700; padding: 1px 5px; border-radius: 4px;
   background: rgba(0,0,0,0.78); color: #e8eef7; }
