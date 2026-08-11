@@ -368,6 +368,41 @@ check('makeRunner calls FG.renderStrip exactly once per passage, across two ques
   }
 });
 
+// Dryness-fix round 2, item 2: at real passage length the strip used to be entirely below the
+// fold, because renderQuestion called FG.renderStrip only after appending every paragraph, which
+// made the strip the passage box's LAST child. Fixed by calling it right after the title and
+// before the paragraph loop. This pins the resulting DOM order directly, using a spy that mimics
+// the REAL renderStrip's append-only behavior (engine/figures.js), so a future regression that
+// moves the call back below the paragraph loop reds here instead of only showing up on a real
+// passage long enough to scroll.
+check("the figure strip lands as the passage box's SECOND child (title first, strip second), ahead of every paragraph", () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack();
+    pack.passages[0].figureIds = ['f1', 'f2'];
+    // Three paragraphs, not one, so this also pins that the strip lands ahead of EVERY
+    // paragraph, not just the first.
+    pack.passages[0].text = 'Paragraph one text here.\n\nParagraph two text here.\n\nParagraph three text here.';
+    const host = makeEl('div'), Save = spySave();
+    const Figures = {
+      renderStrip(pk, figureIds, hostEl) {
+        const strip = makeEl('div');
+        strip.className = 'mv-figs';
+        hostEl.appendChild(strip);   // matches the real renderStrip's append-only behavior
+        return strip;
+      },
+    };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    const passageBox = host.querySelectorAll('.mv-passage')[0];
+    assert.strictEqual(passageBox.children[0].className, 'mv-passage-title', 'the title is not the first child');
+    assert.strictEqual(passageBox.children[1].className, 'mv-figs', "the strip did not land as the passage box's SECOND child, immediately after the title");
+    assert.strictEqual(passageBox.children.length, 5, 'expected title + strip + 3 paragraphs');
+    for (let i = 2; i < passageBox.children.length; i++) {
+      assert.strictEqual(passageBox.children[i].className, 'mv-para', `child ${i} is not a paragraph -- the strip landed after prose, not before it`);
+    }
+  });
+});
+
 check('makeRunner survives a throwing MVFigures.renderStrip and still renders the level', () => {
   const had = global.MVFigures;
   // Captured and restored in the SAME finally as global.MVFigures, on every path including a
@@ -413,7 +448,7 @@ check('makeRunner survives a throwing MVFigures.renderStrip and still renders th
 });
 
 // ---------- Task 4: cleanup calls FG.closeLightbox() ----------
-check('cleanup calls a call-time-resolved MVFigures.closeLightbox exactly once', () => {
+check('cleanup calls a call-time-resolved MVFigures.closeLightbox exactly once (on top of the render-time calls)', () => {
   const had = global.MVFigures;
   const calls = [];
   global.MVFigures = { closeLightbox() { calls.push(1); } };
@@ -422,9 +457,12 @@ check('cleanup calls a call-time-resolved MVFigures.closeLightbox exactly once',
       const Items = require('../engine/items.js');
       const pack = probePack(), host = makeEl('div'), Save = spySave();
       const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
-      assert.strictEqual(calls.length, 0, 'closeLightbox fired before cleanup ran');
+      // Dryness-fix round 2: makeRunner's own first renderQuestion() call now ALSO closes the
+      // lightbox (the stale-lightbox fix), so the count after construction is 1, not 0.
+      // cleanup() must still add exactly one more of its own, not zero and not more than one.
+      assert.strictEqual(calls.length, 1, 'construction did not close the lightbox exactly once via its own first render');
       cleanup();
-      assert.strictEqual(calls.length, 1, 'cleanup did not call closeLightbox exactly once');
+      assert.strictEqual(calls.length, 2, 'cleanup did not call closeLightbox exactly once on top of the render-time call');
     });
   } finally {
     if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
@@ -850,11 +888,71 @@ check('cleanup honors deps.Figures.closeLightbox ahead of a global MVFigures', (
       const Figures = { closeLightbox() { calls.push(1); } };
       const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
       cleanup();
-      assert.strictEqual(calls.length, 1, 'deps.Figures.closeLightbox was not used ahead of the global at cleanup');
+      // Dryness-fix round 2: 2, not 1, since makeRunner's own first renderQuestion() call now
+      // also closes the lightbox (the stale-lightbox fix below), on top of cleanup's own call.
+      // The real proof this test exists for is unchanged: the global's closeLightbox above
+      // THROWS unconditionally, so if either call site reached it instead of deps.Figures, this
+      // whole withSyncTimers block would throw rather than any count merely being off.
+      assert.strictEqual(calls.length, 2, 'deps.Figures.closeLightbox was not used ahead of the global at both the initial render and cleanup');
     });
   } finally {
     if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
   }
+});
+
+// ---------- Dryness-fix round 2, minor: a stale lightbox must not survive into the next question ----------
+// Before this fix, an open lightbox survived the correct-answer auto-advance (and the
+// wrong-answer NEXT button) and ended up sitting over the NEW question, showing the OLD
+// question's figure. cleanup() already called FG.closeLightbox() when the level ends; this pins
+// the same call at the top of every renderQuestion(), which is what actually reaches both the
+// auto-advance path and the manual NEXT path, since both call renderQuestion().
+
+check('renderQuestion closes a call-time-resolved MVFigures lightbox on every render, including the correct-answer auto-advance and the wrong-answer NEXT button', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack(), host = makeEl('div'), Save = spySave();
+    const calls = [];
+    const Figures = { closeLightbox() { calls.push(1); } };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(calls.length, 1, 'renderQuestion did not close the lightbox on its own first render');
+
+    // Correct answer (key is 1 on every probePack item): auto-advances to question 2, which must
+    // close the lightbox again for the new question, not leave a prior one showing over it.
+    host.querySelectorAll('.mv-choice')[1].onclick();
+    let ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    assert.strictEqual(calls.length, 2, 'the correct-answer auto-advance did not close the lightbox for the new question');
+
+    // Wrong answer on question 2, then NEXT: must close the lightbox a third time.
+    host.querySelectorAll('.mv-choice')[0].onclick();
+    ck = host.querySelectorAll('.mv-check')[0];
+    if (ck && ck.onclick) ck.onclick();
+    const next = host.querySelectorAll('.mv-next')[0];
+    assert.ok(next, 'a wrong answer produced no NEXT button, so the NEXT path could not be exercised');
+    next.onclick();
+    assert.strictEqual(calls.length, 3, 'the wrong-answer NEXT button did not close the lightbox for the new question');
+  });
+});
+
+check('renderQuestion survives a throwing MVFigures.closeLightbox and still renders the question', () => {
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack(), host = makeEl('div'), Save = spySave();
+    const Figures = { closeLightbox() { throw new Error('lightbox boom'); } };
+    R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, Figures, rng: () => 0.5 });
+    assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'a throwing closeLightbox must not stop the question from rendering');
+    assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'a throwing closeLightbox must not stop the choices from rendering fully');
+  });
+});
+
+check('renderQuestion with NO MVFigures loaded does not throw (degrade path)', () => {
+  assert.strictEqual(typeof MVFigures, 'undefined',
+    'precondition: this process must have NO MVFigures, or this check is not testing the degrade path');
+  withSyncTimers(() => {
+    const Items = require('../engine/items.js');
+    const pack = probePack(), host = makeEl('div'), Save = spySave();
+    assert.doesNotThrow(() => R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 }));
+  });
 });
 
 // ---------- Task 7: themed correct-answer stamps ----------
