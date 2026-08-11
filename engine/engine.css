@@ -39,14 +39,22 @@
 .mv-para { margin: 0 0 8px; line-height: 1.5; font-size: 0.95rem; }
 
 /* Figure strip: capped so prose stays dominant; it scrolls WITH the passage, so the
-   reading-surface floor is untouched.  The 104px cap is gated (figures-offline). */
-.mv-figs { display: flex; gap: 8px; margin: 4px 0 8px; max-height: 104px; }
-.mv-fig { position: relative; border: 1px solid var(--border-subtle); border-radius: 7px;
-  padding: 0; background: none; cursor: pointer; overflow: hidden; max-height: 104px; }
-.mv-fig-img { display: block; height: 96px; width: auto; max-width: 240px; object-fit: cover; }
-.mv-fig-badge { position: absolute; left: 4px; bottom: 4px; font-size: 0.62rem;
+   reading-surface floor is untouched.  The cap is expressed once via --mv-fig-h and enforced
+   by overflow:hidden rather than left advisory, and it is gated by tests/figures-offline.js,
+   Task 8.  The thumb is a fixed 128x96 box: `contain`, not `cover`, because a cropped chart or
+   map silently loses the axis labels and scale bar at its edges, which is a data-truth defect,
+   not a cosmetic one, letterboxing a photo costs nothing by comparison.  min-width:44px keeps a
+   portrait figure (a full-page plate, narrower than it is tall) at the touch-target floor. */
+.mv-figs { --mv-fig-h: 96px; display: flex; gap: 8px; margin: 4px 0 8px;
+  max-height: calc(var(--mv-fig-h) + 8px); overflow: hidden; }
+.mv-fig { position: relative; min-width: 44px; display: flex; align-items: center;
+  justify-content: center; border: 1px solid var(--border-subtle); border-radius: 7px;
+  padding: 0; background: none; cursor: pointer; overflow: hidden;
+  max-height: calc(var(--mv-fig-h) + 8px); }
+.mv-fig-img { display: block; width: 128px; height: var(--mv-fig-h); object-fit: contain; }
+.mv-fig-badge { position: absolute; left: 4px; bottom: 4px; font-size: 0.72rem;
   letter-spacing: 0.08em; font-weight: 700; padding: 1px 5px; border-radius: 4px;
-  background: rgba(0,0,0,0.62); color: var(--mv-color, #7aa8ff); }
+  background: rgba(0,0,0,0.78); color: #e8eef7; }
 
 /* The item is now the side that gives. `flex: 0 1 auto` plus `min-height: 0` lets it shrink below its
    content, and it scrolls what does not fit rather than evicting the passage. `min-height: 0` is

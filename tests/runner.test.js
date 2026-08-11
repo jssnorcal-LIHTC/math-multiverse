@@ -291,6 +291,12 @@ check('makeRunner survives a throwing MVFresh.markSeenIds and still renders the 
 });
 
 check('runner renders a passage item with NO MVFigures loaded (degrade path)', () => {
+  // Pin the precondition itself, matching the discipline already used below for MVItems: a
+  // future task that adds a require('../engine/figures.js') to this file would publish
+  // globalThis.MVFigures before this check runs, and the check would keep reporting "ok"
+  // while no longer testing the degrade path at all, under a name asserting the opposite.
+  assert.strictEqual(typeof MVFigures, 'undefined',
+    'precondition: this process must have NO MVFigures, or this check is not testing the degrade path');
   // dom-stub environment never requires engine/figures.js, so there is no MVFigures global; a
   // figure-bearing passage must still render text-only rather than throw (optional-layer law).
   const Items = require('../engine/items.js');
@@ -301,7 +307,63 @@ check('runner renders a passage item with NO MVFigures loaded (degrade path)', (
   const Save = spySave();
   const cleanup = R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
   assert.strictEqual(host.querySelectorAll('.mv-passage').length, 1, 'passage did not render');
+  assert.strictEqual(host.querySelectorAll('.mv-para').length, 1, 'passage paragraph did not render');
+  assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'item box did not render');
+  assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'item choices did not render fully');
   cleanup();
+});
+
+check('makeRunner calls FG.renderStrip exactly once per passage, across two questions, with the passage figureIds and the .mv-passage host', () => {
+  const calls = [];
+  global.MVFigures = {
+    renderStrip(pack, figureIds, hostEl) {
+      calls.push({ ids: figureIds.slice(), hostClassName: hostEl.className });
+      const strip = makeEl('div');
+      strip.className = 'mv-figs';
+      hostEl.appendChild(strip);
+      return strip;
+    },
+  };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack();
+      pack.passages[0].figureIds = ['f1', 'f2'];
+      const host = makeEl('div'), Save = spySave();
+      R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+      assert.strictEqual(calls.length, 1, 'renderStrip was not called on the first question');
+      // Answer correctly (key is 1 on every probePack item) so it auto-advances to the next
+      // question, which sits on the SAME passage; renderStrip must not fire a second time.
+      host.querySelectorAll('.mv-choice')[1].onclick();
+      const ck = host.querySelectorAll('.mv-check')[0];
+      if (ck && ck.onclick) ck.onclick();
+      assert.strictEqual(calls.length, 1, 'renderStrip fired again for a second question on the same passage');
+      assert.deepStrictEqual(calls[0].ids, ['f1', 'f2'], 'renderStrip did not receive the passage figureIds');
+      assert.strictEqual(calls[0].hostClassName, 'mv-passage', 'renderStrip did not receive the .mv-passage host');
+    });
+  } finally {
+    delete global.MVFigures;
+  }
+});
+
+check('makeRunner survives a throwing MVFigures.renderStrip and still renders the level', () => {
+  global.MVFigures = { renderStrip() { throw new Error('figures boom'); } };
+  try {
+    withSyncTimers(() => {
+      const Items = require('../engine/items.js');
+      const pack = probePack();
+      pack.passages[0].figureIds = ['f1'];
+      const host = makeEl('div'), Save = spySave();
+      R.makeRunner(pack, 0, host, { onComplete() {}, onExit() {} }, { Items, Save, rng: () => 0.5 });
+      assert.strictEqual(host.querySelectorAll('.mv-passage').length, 1, 'a throwing renderStrip must not stop the passage from rendering');
+      assert.strictEqual(host.querySelectorAll('.mv-para').length, 1, 'a throwing renderStrip must not stop the paragraph from rendering');
+      assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'a throwing renderStrip must not stop the item from rendering');
+      assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'a throwing renderStrip must not stop the item from rendering fully');
+      assert.strictEqual(host.querySelectorAll('.mv-figs').length, 0, 'a throwing renderStrip must not leave a partial strip');
+    });
+  } finally {
+    delete global.MVFigures;
+  }
 });
 
 check('the factory can reach the globals the browser gives it', () => {
