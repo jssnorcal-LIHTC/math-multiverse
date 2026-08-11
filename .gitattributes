@@ -1,0 +1,11 @@
+# Pin the CHECKOUT FORM of these text types to LF, independent of any clone's own core.autocrlf.
+# Without this, a machine with core.autocrlf=true (the SYSTEM default on this machine) checks
+# text files out with CRLF on a fresh clone, even though every blob in this repo is already
+# LF-only (autocrlf normalizes on commit, not on checkout). tests/figure-derive.js byte-compares
+# a generator's LF output against the checked-out fixture SVG; a CRLF checkout makes that compare
+# fail for a reason that has nothing to do with what the gate exists to guard, and the failure
+# message is actively misleading (it reads as genSvg nondeterminism). This fixes the checkout
+# form, not the comparison -- normalizing bytes inside a verifier would hide real corruption
+# along with this one.
+*.svg text eol=lf
+*.json text eol=lf

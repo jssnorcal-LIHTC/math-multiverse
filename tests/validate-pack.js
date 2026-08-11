@@ -394,6 +394,16 @@ function checkFigures(pack, errors, opts) {
         errors.push(`${w}.dataTable: chart figures require a dataTable object, got ${JSON.stringify(dt)}`);
       }
     }
+
+    // Task 9 fix round 1, item 11: `gen` is opt-in and, before this check, unvalidated -- a chart
+    // carrying a dataTable but no `gen` flag (or a mistyped one, e.g. the string "true") silently
+    // escaped tests/figure-derive.js entirely while its own NOT-ARMED banner asserted that nothing
+    // needed guarding. This only enforces the TYPE here; whether an assessed chart is REQUIRED to
+    // carry `gen: true` is enforced below in checkFigureReferences, where the assessed set (item
+    // .figureId) is already in hand.
+    if (fig.gen !== undefined && typeof fig.gen !== 'boolean') {
+      errors.push(`${w}.gen: must be a boolean when present, got ${JSON.stringify(fig.gen)}`);
+    }
   });
   return byId;
 }
@@ -433,6 +443,16 @@ function checkFigureReferences(pack, figuresById, passagesById, itemsById, error
     }
     if (!isPlainObject(fig.dataTable)) {
       errors.push(`${w}: figure "${fig.id}" is assessed by this item and requires a dataTable`);
+      continue;
+    }
+    // Task 9 fix round 1, item 11: a chart figure carrying a dataTable AND assessed by an item is
+    // exactly the shape tests/figure-derive.js exists to guard (the picture is graded against this
+    // dataTable). `gen` is opt-in everywhere else in this schema, but here it is not optional --
+    // `gen !== true` (missing, false, or a truthy-but-mistyped value already caught by the
+    // boolean-type check in checkFigures) means the derive gate silently never re-derives this
+    // figure, while its own NOT-ARMED banner would keep asserting nothing needs guarding.
+    if (fig.kind === 'chart' && fig.gen !== true) {
+      errors.push(`${w}: figure "${fig.id}" is a chart assessed by this item and must declare gen: true so tests/figure-derive.js re-derives it from its dataTable, got ${JSON.stringify(fig.gen)}`);
     }
   }
 }
