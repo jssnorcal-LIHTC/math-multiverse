@@ -36,8 +36,33 @@
     return n;
   }
 
-  return { setEnv, resolve, el, FIG_KINDS, DOC_KINDS, TOKENS,
-    renderStrip: function () {}, renderItemFigure: function () {},
+  // Capped horizontal strip of figure thumbnails, appended to hostEl (the passage panel).  A
+  // click opens the lightbox via api.openLightbox, resolved at call time so this keeps working
+  // once that stub is replaced by its own task without renderStrip needing to change.
+  function renderStrip(pack, figureIds, hostEl) {
+    const figs = (figureIds || []).map(id => resolve(pack, id)).filter(Boolean);
+    if (!figs.length || !hostEl) return null;
+    const strip = el('div', 'mv-figs');
+    for (const f of figs) {
+      const b = el('button', 'mv-fig');
+      b.type = 'button';
+      const img = el('img', 'mv-fig-img');
+      img.setAttribute('alt', f.alt);
+      img.setAttribute('loading', 'lazy');
+      img.setAttribute('src', (f.kind === 'plate' ? f.views[0].src : f.src));
+      b.appendChild(img);
+      b.appendChild(el('span', 'mv-fig-badge', f.kind === 'photo' ? 'PHOTO'
+        : f.kind === 'plate' ? 'PLATE' : f.kind.toUpperCase()));
+      b.addEventListener('click', () => api.openLightbox(pack, f.id));
+      strip.appendChild(b);
+    }
+    hostEl.appendChild(strip);
+    return strip;
+  }
+
+  const api = { setEnv, resolve, el, FIG_KINDS, DOC_KINDS, TOKENS,
+    renderStrip, renderItemFigure: function () {},
     openLightbox: function () {}, closeLightbox: function () {},
     attachReveal: function () { return null; }, renderRevealCard: function () { return false; } };
+  return api;
 });

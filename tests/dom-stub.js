@@ -9,6 +9,9 @@
 
 function makeEl(tag) {
   const classes = new Set();
+  // A real attrs store, plain map only, nothing mirrored onto properties. engine/figures.js sets
+  // alt/loading/src via setAttribute and a test reads them back via getAttribute.
+  const attrs = Object.create(null);
   const node = {
     tagName: tag,
     children: [],
@@ -46,7 +49,8 @@ function makeEl(tag) {
     get innerHTML() { return ''; },
     set innerHTML(v) { if (v === '') node.children.length = 0; },
     appendChild(c) { node.children.push(c); if (c) c._parent = node; return c; },
-    setAttribute() {},
+    setAttribute(k, v) { attrs[k] = String(v); },
+    getAttribute(k) { return Object.prototype.hasOwnProperty.call(attrs, k) ? attrs[k] : null; },
     addEventListener(t, f) { node['on' + t] = f; },
     scrollIntoView() {},
     // Single-class selectors only, which is all items.js uses. Depth-first, document order.
