@@ -19,6 +19,7 @@
       "genre": "informational",
       "docKind": "field-manual",
       "source": "original",
+      "figureIds": ["fig-body-systems"],
       "text": "Every operative in the Outpost Network learns four words first, because every station on the network runs on them.  A system is a set of parts that work together toward one job.  A subsystem is a smaller system that sits inside a bigger one.  It handles one piece of the larger job.  A component is a single part inside a subsystem.  It is the smallest piece that still does its own work.  An interaction is what happens when one part changes, and a connected part changes with it.\n\nUse the station's own life-support system as the example, since every operative lives inside it from the first night.  Life support is the big system, and its one job is keeping the crew breathing, hydrated, and fed.  Three subsystems sit underneath it.  The air subsystem pulls in stale air, strips out carbon dioxide, and sends oxygen back through the station's vents.  The water subsystem catches the moisture the crew breathes out, filters it, and pipes clean water back to the taps.  The food subsystem grows fast crops under grow lights.  Something is always close to ready.\n\nComponents sit one level further down, and they are the parts a technician actually repairs.  The air subsystem's scrubber cartridge is a component.  So is the water subsystem's filter membrane, and so is the food subsystem's light panel.  A technician never repairs \"life support\" as a whole.  A technician repairs one cartridge, or one membrane, or one panel, because that single piece is the one that actually failed.\n\nInteraction ties the whole idea together, and new operatives forget this word first.  A station's systems never sit apart from each other.  Dim light panels slow crop growth, so the crew eats less of what the station grows and more of what gets shipped in.  A clogged air scrubber lets carbon dioxide climb, so the crew works slower and sleeps worse, and fewer repairs get made anywhere else on the station.  One failing component can ripple through its own subsystem, and one failing subsystem can ripple through the whole system.  Reading a station means reading those ripples.  It means more than naming the part that broke first.\n\nScale works the same way outside a single station.  A cell is smaller than an organ, and an organ is smaller than an organism, such as one operative.  An organism is smaller than a station, and a station is smaller than the planet holding every station at once.  Each level is its own system, built from smaller systems and nested inside a bigger one.  An operative who can trace one ripple through one station is already halfway there, since the same kind of ripple crosses an entire planet, and tracing it is the real job waiting at the end of training."
     },
     {
@@ -4810,6 +4811,21 @@
       ],
       "maxWords": 5,
       "explain": "The chair asks for one word to go into the minutes word for word: the three constraints are gates rather than scores.  A gate is passed or failed, so a proposal failing any one of them is out however strong it looks on the other two, and only the proposals clearing all three are ever compared against each other."
+    }
+  ],
+  "figures": [
+    {
+      "id": "fig-body-systems",
+      "kind": "plate",
+      "caption": "The human machine: three of the body's systems.  Every operative runs on subsystems too.",
+      "credit": "Nervous: Gray's Anatomy of the Human Body, 20th ed. (1918), public domain. Skeletal and Muscular: original diagrams for this pack.",
+      "alt": "Full-body views of three systems: an original skeletal diagram, an original muscular diagram, and a public-domain 1918 nervous-system plate",
+      "views": [
+        { "label": "Skeletal", "src": "art/outpost-protocol-g6/outpost-skeleton-diagram.svg" },
+        { "label": "Muscular", "src": "art/outpost-protocol-g6/outpost-muscle-diagram.svg" },
+        { "label": "Nervous", "src": "art/outpost-protocol-g6/gray-nervous.png",
+          "overlaySrc": "art/outpost-protocol-g6/gray-nervous-overlay.svg" }
+      ]
     }
   ]
 }
