@@ -72,11 +72,19 @@
   }
 
   // Single figure rail above an item's stem. Unlike renderStrip's multi-figure horizontal strip,
-  // an item carries at most one figureId (validate-pack's items(id).figureId cross-reference), so
-  // there is one thumb and no kind badge. insertBefore-firstChild puts it visually first without
-  // assuming how Items.render builds the stem/choices beneath it -- same reasoning as the
-  // runner's own call-site comment. Click reaches api.openLightbox, resolved at call time, same
-  // as renderStrip's thumb, so this keeps working once a later task replaces that stub.
+  // an item carries at most one figureId, but that one figure is never decorative: validate-pack
+  // rejects a photo here and requires a dataTable (checkFigureReferences), so every item figure
+  // IS an assessed data figure the child must read, not just look at. Fix round 1 (controller
+  // review): the rail was rendering that figure with no kind signal at all; it now carries the
+  // SAME .mv-fig-badge pill renderStrip does (already styled, already tested there), so a chart
+  // reads as CHART rather than as an unlabeled image. insertBefore-firstChild puts the whole rail
+  // visually first without assuming how Items.render builds the stem/choices beneath it -- same
+  // reasoning as the runner's own call-site comment. Click reaches api.openLightbox, resolved at
+  // call time, same as renderStrip's thumb, so this keeps working once a later task replaces
+  // that stub. loading="lazy" matches renderStrip's thumb too (fix round 1: the first version of
+  // this function omitted it with no comment explaining why, which read as an oversight rather
+  // than a choice -- there is no reason for this one thumb to fetch eagerly ahead of the item's
+  // own text, so it is set explicitly rather than left an unstated divergence).
   function renderItemFigure(pack, figureId, itemBox) {
     const f = resolve(pack, figureId);
     if (!f || !itemBox) return;
@@ -88,10 +96,12 @@
     // Default matches the strip/lightbox/reveal-card convention: a figure missing alt renders
     // alt="", never the literal string "undefined".
     img.setAttribute('alt', f.alt || '');
+    img.setAttribute('loading', 'lazy');
     // Same malformed-plate fallback as renderStrip: a plate with no views falls back to f.src
     // rather than throwing and dropping the whole rail.
     img.setAttribute('src', f.kind === 'plate' ? ((f.views && f.views[0]) ? f.views[0].src : f.src) : f.src);
     b.appendChild(img);
+    b.appendChild(el('span', 'mv-fig-badge', BADGE[f.kind] || ('?' + String(f.kind))));
     b.addEventListener('click', () => api.openLightbox(pack, f.id));
     wrap.appendChild(b);
     itemBox.insertBefore(wrap, itemBox.firstChild || null);

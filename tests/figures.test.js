@@ -519,5 +519,43 @@ check('renderItemFigure thumb click reaches the LIVE openLightbox, not a capture
   }
 });
 
+// ---------- Task 7 fix round 1: kind badge + loading="lazy" on the item-figure rail ----------
+// Restores the signal a bare 128x72 image gave no clue about: validate-pack guarantees an item
+// figure is an assessed data figure (never a photo, always carrying a dataTable), so the child
+// needs the same kind pill renderStrip already shows, not just a picture with no label.
+
+check('renderItemFigure appends the SAME kind badge renderStrip uses, after the image, in the same button', () => {
+  const itemBox = MVFigures.el('div', 'mv-item');
+  MVFigures.renderItemFigure(PACK, 'f1', itemBox);   // f1 is kind 'photo' in this fixture
+  const btn = itemBox.children[0].children[0];
+  assert.strictEqual(btn.children.length, 2, 'the button must carry exactly the image and one badge span');
+  assert.strictEqual(btn.children[0].tagName, 'img', 'the image must stay first, before the badge');
+  const badge = btn.children[1];
+  assert.strictEqual(badge.className, 'mv-fig-badge');
+  assert.strictEqual(badge.textContent, 'PHOTO');
+});
+
+check('renderItemFigure badges a plate rail PLATE, matching its resolved kind', () => {
+  const itemBox = MVFigures.el('div', 'mv-item');
+  MVFigures.renderItemFigure(PACK, 'f3', itemBox);
+  const badge = itemBox.children[0].children[0].children[1];
+  assert.strictEqual(badge.textContent, 'PLATE');
+});
+
+check('renderItemFigure renders a visibly-wrong badge for a kind absent from BADGE, matching renderStrip, not a silent empty pill', () => {
+  const itemBox = MVFigures.el('div', 'mv-item');
+  MVFigures.renderItemFigure(PACK, 'f4', itemBox);   // f4 is kind 'sketch', deliberately unmapped
+  const badge = itemBox.children[0].children[0].children[1];
+  assert.strictEqual(badge.textContent, '?sketch',
+    'an unmapped kind must render a visibly-wrong badge, not an empty pill or a silent uppercase guess');
+});
+
+check('renderItemFigure sets loading="lazy" on its thumb image, matching renderStrip\'s convention', () => {
+  const itemBox = MVFigures.el('div', 'mv-item');
+  MVFigures.renderItemFigure(PACK, 'f1', itemBox);
+  const img = itemBox.children[0].children[0].children[0];
+  assert.strictEqual(img.getAttribute('loading'), 'lazy');
+});
+
 console.log(failures ? `figures.test: ${failures} FAILURE(S)` : 'figures.test: all clean');
 process.exit(failures ? 1 : 0);
