@@ -175,6 +175,18 @@
 .mv-rv-frame { position: relative; width: auto; max-width: min(560px, 86vw); height: 230px;
   flex: 0 1 auto; min-height: 0; border-radius: 10px; overflow: hidden; }
 .mv-rv-img { display: block; height: 100%; width: auto; }
+/* Owner ruling (26-0811, enlargeable reward): engine/figures.js's renderRevealCard wraps
+   .mv-rv-img in this button ONLY once every tile has lifted (see that function's own comment for
+   why a partial reveal stays inert). Reset to a zero-cost box so the button contributes nothing
+   beyond the image's own geometry -- .mv-rv-frame's width is `auto`, following its content, and
+   the reward-geometry fix a few paragraphs above depends on that content being exactly the
+   image's own painted box, never a button's padded one. height:100%/width:auto mirrors
+   .mv-rv-img's own rule so the chain (frame -> button -> img) resolves to the identical pixels a
+   bare frame -> img chain would. The tap target is the image itself, which the reward-geometry
+   assertion already floors at 120px tall -- comfortably past the 44px minimum with no extra
+   padding needed to reach it. */
+.mv-rv-img-btn { display: block; height: 100%; width: auto; padding: 0; margin: 0; border: 0;
+  background: none; cursor: pointer; }
 .mv-rv-grid { position: absolute; inset: 0; display: grid;
   grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); }
 .mv-rv-tile { background: #0b1424; border: 1px solid rgba(255,255,255,0.08);

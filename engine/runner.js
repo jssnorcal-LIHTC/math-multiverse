@@ -4,7 +4,11 @@
 // Implements the SAME contract the six math IIFEs implement:
 //   InlineModules[id].init(host, levelIndex, { onComplete(score, stars), onExit() }) -> cleanupFn
 // so the shell dispatches a pack level through the identical code path, and nothing about the math
-// modules has to change.
+// modules has to change. Owner ruling (26-0811, partial reveal) adds a THIRD, pack-only argument
+// on top of that shared contract: onComplete(score, stars, foundRatio) -- fraction of this
+// attempt's reveal cells actually found, read only by Math-Multiverse.html's showPackLevelComplete
+// for a level that declares `reveal`. The math IIFEs' own onComplete(score, stars) calls are
+// unaffected; a 2-arg callback simply never reads the 3rd argument this file now also passes.
 //
 // Learning-UX rules carried forward from 26-0714 and NOT to be relaxed:
 //   - a WRONG answer never auto-advances; the explanation stays until he taps NEXT
@@ -190,7 +194,20 @@
     function finish() {
       const s = summarize(results, lives);
       Save.recordLevel(pack.meta.id, levelIndex, s.stars, s.score);
-      callbacks.onComplete(s.score, s.stars);
+      // Owner ruling (26-0811, partial reveal): the completion card must render whenever ANY
+      // cell was found, not only when stars > 0 -- a level's lives can run out after several
+      // correct answers, and those earned cells must not vanish. foundRatio (cells found / total
+      // questions this attempt served) is the one extra value threaded to the shell's
+      // showPackLevelComplete, derived from the SAME `reveal` handle attachReveal returned above
+      // rather than recomputed from `results` independently, so the two can never drift. Guarded
+      // like every other optional-layer call in this file: a reveal handle from an older or
+      // minimal Figures stub with no foundCount() must not crash a level that otherwise finished
+      // cleanly, and nothing here is persisted -- the ratio lives only for this one callback.
+      let foundRatio = 0;
+      if (reveal && typeof reveal.foundCount === 'function' && queue.length) {
+        try { foundRatio = reveal.foundCount() / queue.length; } catch (e) { foundRatio = 0; }
+      }
+      callbacks.onComplete(s.score, s.stars, foundRatio);
     }
 
     function renderQuestion() {

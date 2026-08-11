@@ -454,6 +454,10 @@ check('attachReveal returns null and touches the bar not at all for a reveal-les
   assert.strictEqual(bar2.children.length, 2, 'an unresolvable figureId must not insert anything into the bar');
 });
 
+// Owner ruling (26-0811, enlargeable reward): a fully-revealed card (the default ratio, "all",
+// when foundRatio is omitted -- see below) wraps .mv-rv-img in a .mv-rv-img-btn button reaching
+// openLightbox, so frame.children[0] is now that button, not the bare image, for every one of
+// these pre-existing checks. Reads through btn.children[0] for the image itself.
 check("renderRevealCard builds a card with the figure image, a 12-tile cover grid, caption and credit", () => {
   const host = MVFigures.el('div');
   const ok = MVFigures.renderRevealCard(REVEAL_PACK, 0, host);
@@ -463,7 +467,9 @@ check("renderRevealCard builds a card with the figure image, a 12-tile cover gri
   assert.strictEqual(card.className, 'mv-rv-card');
   const frame = card.children[0];
   assert.strictEqual(frame.className, 'mv-rv-frame');
-  const img = frame.children[0];
+  const btn = frame.children[0];
+  assert.strictEqual(btn.className, 'mv-rv-img-btn', 'a fully-revealed card must wrap the image in the enlarge button');
+  const img = btn.children[0];
   assert.strictEqual(img.getAttribute('src'), 'art/demo/r1.jpg');
   assert.strictEqual(img.getAttribute('alt'), 'a');
   const grid = frame.children[1];
@@ -479,7 +485,7 @@ check("renderRevealCard builds a card with the figure image, a 12-tile cover gri
 check("renderRevealCard uses a plate figure's first view src", () => {
   const host = MVFigures.el('div');
   assert.strictEqual(MVFigures.renderRevealCard(REVEAL_PLATE_PACK, 0, host), true);
-  const img = host.children[0].children[0].children[0];
+  const img = host.children[0].children[0].children[0].children[0];
   assert.strictEqual(img.getAttribute('src'), 'art/demo/p1.jpg');
   assert.strictEqual(img.getAttribute('alt'), 'pa');
 });
@@ -490,7 +496,7 @@ check('renderRevealCard renders alt="" for a figure with no alt, never alt="unde
     levels: [{ id: 1, name: 'L1', reveal: { figureId: 'na1' } }] };
   const host = MVFigures.el('div');
   MVFigures.renderRevealCard(noAltPack, 0, host);
-  const img = host.children[0].children[0].children[0];
+  const img = host.children[0].children[0].children[0].children[0];
   assert.strictEqual(img.getAttribute('alt'), '');
 });
 
@@ -514,7 +520,7 @@ check("renderRevealCard falls back to f.src for a malformed plate with no views,
   // two siblings, which would throw on exactly this shape instead of degrading gracefully.
   const host = MVFigures.el('div');
   assert.doesNotThrow(() => MVFigures.renderRevealCard(REVEAL_PLATE_NOVIEWS_PACK, 0, host));
-  const img = host.children[0].children[0].children[0];
+  const img = host.children[0].children[0].children[0].children[0];
   assert.strictEqual(img.getAttribute('src'), 'art/demo/fallback.jpg');
 });
 
@@ -539,6 +545,99 @@ check('renderRevealCard eventually marks all twelve tiles .away (the tile-lift l
   } finally {
     global.setTimeout = realSetTimeout;
   }
+});
+
+// ---------- Owner ruling (26-0811): partial reveal + enlargeable reward ----------
+// The completion card now renders whenever ANY cell was found (not only stars > 0, which lived
+// in Math-Multiverse.html and is exercised end-to-end in tests/figures-offline.js instead), and
+// lifts only the tiles this attempt actually earned. These four checks pin renderRevealCard's own
+// new foundRatio argument directly: a found-count of zero renders no card at all; a partial ratio
+// lifts exactly the tiles that ratio implies and leaves the rest covering; a full ratio (and the
+// omitted-argument default, pinned above) lifts all twelve; and the reward is tap-to-enlarge only
+// once every tile has lifted.
+
+function withImmediateTimers(fn) {
+  const real = global.setTimeout;
+  global.setTimeout = (f) => { f(); return 0; };
+  try { return fn(); } finally { global.setTimeout = real; }
+}
+
+check('renderRevealCard with foundRatio 0 renders no card and appends nothing, even for an otherwise-valid reveal level', () => {
+  const host = MVFigures.el('div');
+  assert.strictEqual(MVFigures.renderRevealCard(REVEAL_PACK, 0, host, 0), false,
+    'a found-count of zero must render no card, matching every other early-exit in this function');
+  assert.strictEqual(host.children.length, 0, 'a false-returning call must not append anything');
+});
+
+check('renderRevealCard with a partial ratio lifts exactly the tiles that ratio implies, and leaves the rest covering', () => {
+  withImmediateTimers(() => {
+    const host = MVFigures.el('div');
+    // 1/3 of 12 is an exact 4 -- matches the owner's own mockup ("4 of 12 tiles lifted").
+    const ok = MVFigures.renderRevealCard(REVEAL_PACK, 0, host, 1 / 3);
+    assert.strictEqual(ok, true, 'a nonzero foundRatio must still render a card');
+    const frame = host.children[0].children[0];
+    const grid = frame.children[1];
+    assert.strictEqual(grid.className, 'mv-rv-grid');
+    const lifted = Array.from(grid.children).filter((t) => t.classList.contains('away'));
+    assert.strictEqual(lifted.length, 4, `expected exactly 4 of 12 tiles lifted for ratio 1/3, got ${lifted.length}`);
+    // The FIRST four, in grid order -- stable and deterministic, not a random subset -- so a
+    // retry sees its own earlier progress rather than a reshuffled cover.
+    for (let i = 0; i < 4; i++) assert.strictEqual(grid.children[i].classList.contains('away'), true, `tile ${i} should be lifted`);
+    for (let i = 4; i < 12; i++) assert.strictEqual(grid.children[i].classList.contains('away'), false, `tile ${i} should still be covering`);
+  });
+});
+
+check('renderRevealCard with a tiny nonzero ratio still lifts at least one tile, never zero', () => {
+  // A rounded-down sliver on a long level (e.g. 1 of 40 found) must not look identical to "found
+  // nothing" once the caller has already decided a card renders at all.
+  withImmediateTimers(() => {
+    const host = MVFigures.el('div');
+    MVFigures.renderRevealCard(REVEAL_PACK, 0, host, 0.01);
+    const grid = host.children[0].children[0].children[1];
+    const lifted = Array.from(grid.children).filter((t) => t.classList.contains('away'));
+    assert.strictEqual(lifted.length, 1, 'a tiny nonzero ratio must lift exactly one tile, not zero');
+  });
+});
+
+check('renderRevealCard with foundRatio 1 lifts all twelve, same as the omitted-argument default', () => {
+  withImmediateTimers(() => {
+    const host = MVFigures.el('div');
+    MVFigures.renderRevealCard(REVEAL_PACK, 0, host, 1);
+    const grid = host.children[0].children[0].children[1];
+    const lifted = Array.from(grid.children).filter((t) => t.classList.contains('away'));
+    assert.strictEqual(lifted.length, 12, 'foundRatio 1 must lift all twelve tiles');
+  });
+});
+
+check('a fully-revealed card wraps the image in a button that reaches the LIVE openLightbox', () => {
+  const host = MVFigures.el('div');
+  MVFigures.renderRevealCard(REVEAL_PACK, 0, host, 1);
+  const frame = host.children[0].children[0];
+  const btn = frame.children[0];
+  assert.strictEqual(btn.className, 'mv-rv-img-btn');
+  const orig = MVFigures.openLightbox;
+  const calls = [];
+  MVFigures.openLightbox = (packArg, figId) => { calls.push([packArg, figId]); };
+  try {
+    btn.onclick();
+    assert.strictEqual(calls.length, 1, 'the reward button did not reach openLightbox');
+    assert.strictEqual(calls[0][0], REVEAL_PACK);
+    assert.strictEqual(calls[0][1], 'rf1');
+  } finally {
+    MVFigures.openLightbox = orig;
+  }
+});
+
+check('a partially-revealed card renders a plain, inert image -- no button, no way to reach openLightbox', () => {
+  // Owner ruling: openLightbox shows the whole, uncovered figure with no cover grid of its own,
+  // so wiring the tap while tiles still cover part of the card would let a single tap skip past
+  // the "earn the rest on retry" incentive this whole mechanic exists for.
+  const host = MVFigures.el('div');
+  MVFigures.renderRevealCard(REVEAL_PACK, 0, host, 0.5);
+  const frame = host.children[0].children[0];
+  const img = frame.children[0];
+  assert.strictEqual(img.tagName, 'img', 'a partial reveal must render a bare <img>, not a button wrapper');
+  assert.strictEqual(typeof img.onclick, 'undefined', 'a partial reveal must have no click handler at all');
 });
 
 check("dom-stub insertBefore detaches the moved node from its PREVIOUS parent, not just the new one", () => {

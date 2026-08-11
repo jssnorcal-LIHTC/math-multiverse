@@ -232,7 +232,12 @@ async function assertRewardGeometry(page, pack, problems, note) {
       await page.setViewportSize({ width: original.width, height: h });
       await page.evaluate((pk) => {
         if (typeof showScreen === 'function') showScreen('module');
-        window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 0, 2, 3);
+        // foundRatio 1 (full clear): the geometry this sweep pins (painted-image size, grid
+        // coverage, headline/stars/score/actions inside .host-frame) is driven entirely by the
+        // figure's own aspect ratio, never by how many tiles are lifted, so a single ratio value
+        // is enough here -- the reveal LOGIC itself (partial vs. zero) is covered separately in
+        // fixturePositiveControl below, where it belongs.
+        window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 0, 2, 3, 1);
       }, pack);
 
       // Load-bearing trap: an undecoded .mv-rv-img has naturalWidth 0, which makes the
@@ -730,50 +735,98 @@ async function fixturePositiveControl(page, problems, note) {
     }).catch(() => {});
   }
 
-  // ---- showPackLevelComplete, called directly: reveal card at 3 stars (with the RIGHT figure),
-  //      none at 0 stars, and no #lc-reveal host at all on a reveal-less level ----
-  // Hand-off (Task 6): the `stars > 0 && lv.reveal` gate and the conditional #lc-reveal host div
-  // had zero repo-resident coverage; this is that coverage's home. Fix round 1: a card/tile COUNT
-  // match alone cannot tell a right figure from a wrong one, so the rendered image src is checked
-  // against level 0's actual reveal.figureId too, and a third call proves a reveal-less level
+  // ---- showPackLevelComplete, called directly: reveal card at a full clear (with the RIGHT
+  //      figure, and a tap-to-enlarge reaching the real lightbox), NONE when nothing was found,
+  //      a PARTIAL card when some cells were found despite 0 stars (owner ruling, 26-0811 --
+  //      this is the exact "cleared 4 of 8, then ran out of hearts" case the ruling fixes, which
+  //      the OLD `stars > 0` gate rendered as no card at all), and no #lc-reveal host at all on a
+  //      reveal-less level ----
+  // Hand-off (Task 6): the host-div gate and the conditional #lc-reveal host div had zero
+  // repo-resident coverage; this is that coverage's home. Fix round 1: a card/tile COUNT match
+  // alone cannot tell a right figure from a wrong one, so the rendered image src is checked
+  // against level 0's actual reveal.figureId too, and a fourth call proves a reveal-less level
   // (level 1 in this fixture) never even builds the host div.
   const revealFig = figuresById.get(pack.levels[0].reveal.figureId);
   const wantRevealSuffix = (revealFig.kind === 'plate' ? revealFig.views[0].src : revealFig.src).split('/').pop();
   const revealBefore = problems.length;
 
-  const hi = await page.evaluate((pk) => {
-    window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 0, 2, 3);
+  // The tile-lift is animated via setTimeout (engine/figures.js renderRevealCard: 120 + i*90ms
+  // per tile), deliberately uncollected -- see that function's own comment. 1200ms clears even
+  // the 12th tile's own delay (120 + 11*90 = 1110ms) with margin, so `.away` reads the settled
+  // end state rather than a race against an in-flight animation.
+  await page.evaluate((pk) => { window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 0, 2, 3, 1); }, pack);   // full clear, foundRatio 1
+  await page.waitForTimeout(1200);
+  const hi = await page.evaluate(() => {
     const img = document.querySelector('#lc-reveal .mv-rv-img');
+    const btn = document.querySelector('#lc-reveal .mv-rv-img-btn');
     return {
       cards: document.querySelectorAll('#lc-reveal .mv-rv-card').length,
       tiles: document.querySelectorAll('#lc-reveal .mv-rv-tile').length,
+      lifted: document.querySelectorAll('#lc-reveal .mv-rv-tile.away').length,
       imgSrc: img ? img.src : null,
+      hasEnlargeButton: !!btn,
     };
-  }, pack);
-  if (hi.cards !== 1) problems.push(`positive control: showPackLevelComplete at 3 stars rendered ${hi.cards} .mv-rv-card, expected 1`);
-  if (hi.tiles !== 12) problems.push(`positive control: showPackLevelComplete at 3 stars rendered ${hi.tiles} .mv-rv-tile, expected 12`);
+  });
+  if (hi.cards !== 1) problems.push(`positive control: showPackLevelComplete at foundRatio 1 rendered ${hi.cards} .mv-rv-card, expected 1`);
+  if (hi.tiles !== 12) problems.push(`positive control: showPackLevelComplete at foundRatio 1 rendered ${hi.tiles} .mv-rv-tile, expected 12`);
+  if (hi.lifted !== 12) problems.push(`positive control: showPackLevelComplete at foundRatio 1 lifted ${hi.lifted} of 12 tiles, expected all 12`);
   if (!hi.imgSrc || !hi.imgSrc.endsWith(wantRevealSuffix)) problems.push(`positive control: reveal card image src "${hi.imgSrc}" does not match level 0's reveal figure (expected to end with "${wantRevealSuffix}")`);
+  if (!hi.hasEnlargeButton) problems.push('positive control: a fully-revealed card did not wrap its image in .mv-rv-img-btn (the enlarge tap target)');
 
-  const lo = await page.evaluate((pk) => {
-    window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 0, 2, 0);
+  // Owner ruling (enlargeable reward): the fully-revealed reward is tap-to-enlarge, reaching the
+  // SAME lightbox the strip/rail thumbs use. Real click, real lightbox -- not a captured stub.
+  if (hi.hasEnlargeButton) {
+    const lbInfo = await page.evaluate(() => {
+      document.querySelector('#lc-reveal .mv-rv-img-btn').click();
+      const lb = document.querySelector('.mv-lightbox');
+      const img = lb && lb.querySelector('.mv-lb-img');
+      return { present: !!lb, src: img ? img.src : null };
+    });
+    if (!lbInfo.present) problems.push('positive control: tapping the fully-revealed reward did not open .mv-lightbox');
+    else if (!lbInfo.src || !lbInfo.src.endsWith(wantRevealSuffix)) {
+      problems.push(`positive control: the reward's lightbox opened "${lbInfo.src}", expected it to end with "${wantRevealSuffix}"`);
+    } else {
+      note('positive control: tapping the fully-revealed reward opened the real lightbox with the correct figure');
+    }
+    await page.evaluate(() => { const b = document.querySelector('.mv-lightbox'); if (b) b.click(); });
+  }
+
+  // The exact case the owner ruling fixes: 0 stars (lives ran out) but SOME cells were found.
+  // The OLD `stars > 0` gate rendered nothing at all here -- earned cells simply vanished.
+  await page.evaluate((pk) => { window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 0, 2, 0, 0.5); }, pack);   // 0 stars, foundRatio 0.5
+  await page.waitForTimeout(1200);   // see the timing comment above hi's own wait
+  const partial = await page.evaluate(() => ({
+    cards: document.querySelectorAll('#lc-reveal .mv-rv-card').length,
+    lifted: document.querySelectorAll('#lc-reveal .mv-rv-tile.away').length,
+    hasEnlargeButton: !!document.querySelector('#lc-reveal .mv-rv-img-btn'),
+  }));
+  if (partial.cards !== 1) problems.push(`positive control (partial reveal, 0 stars): rendered ${partial.cards} .mv-rv-card, expected 1 -- earned cells must render a card even when the level was not cleared`);
+  if (partial.lifted !== 6) problems.push(`positive control (partial reveal, 0 stars): lifted ${partial.lifted} of 12 tiles, expected exactly 6 for foundRatio 0.5`);
+  if (partial.hasEnlargeButton) problems.push('positive control (partial reveal, 0 stars): a partially-covered card must not be tap-to-enlarge (it would let a tap skip past what has not been earned yet)');
+  if (partial.cards === 1 && partial.lifted === 6 && !partial.hasEnlargeButton) {
+    note('positive control: showPackLevelComplete at 0 stars with foundRatio 0.5 rendered a card with exactly 6 of 12 tiles lifted, no enlarge button -- the exact case the owner ruling fixes');
+  }
+
+  const zero = await page.evaluate((pk) => {
+    window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 0, 2, 0, 0);   // 0 stars, nothing found at all
     return {
       cards: document.querySelectorAll('#lc-reveal .mv-rv-card').length,
       hostPresent: !!document.querySelector('#lc-reveal'),
     };
   }, pack);
-  if (lo.cards !== 0) problems.push(`positive control: showPackLevelComplete at 0 stars rendered ${lo.cards} .mv-rv-card, expected 0 (the reveal must not show on a level not cleared)`);
+  if (zero.cards !== 0) problems.push(`positive control: showPackLevelComplete at foundRatio 0 rendered ${zero.cards} .mv-rv-card, expected 0 (nothing earned means no artifact)`);
   // Fix wave (final review): the host div's own gate used to be `lv.reveal` alone, so a reveal
-  // level cleared at 0 stars still emitted an empty #lc-reveal host and paid its 18px flex gap
+  // level with nothing found still emitted an empty #lc-reveal host and paid its 18px flex gap
   // even though no card would ever fill it. The host's condition must match the render's.
-  if (lo.hostPresent) problems.push('positive control: showPackLevelComplete at 0 stars still emitted an #lc-reveal host with nothing to fill it (host gate must match the render gate)');
+  if (zero.hostPresent) problems.push('positive control: showPackLevelComplete at foundRatio 0 still emitted an #lc-reveal host with nothing to fill it (host gate must match the render gate)');
 
   const none = await page.evaluate((pk) => {
-    window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 1, 2, 3);
+    window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 1, 2, 3, 1);
     return { hostPresent: !!document.querySelector('#lc-reveal') };
   }, pack);
   if (none.hostPresent) problems.push('positive control: showPackLevelComplete on a reveal-less level (level 1) still emitted an #lc-reveal host');
 
-  if (problems.length === revealBefore) note(`positive control: showPackLevelComplete reveal card: 3 stars -> ${hi.cards} card/${hi.tiles} tiles (correct figure), 0 stars -> ${lo.cards} card, reveal-less level -> no host`);
+  if (problems.length === revealBefore) note(`positive control: showPackLevelComplete reveal card: foundRatio 1 -> ${hi.cards} card/${hi.tiles} tiles all lifted (correct figure, enlargeable), foundRatio 0.5 at 0 stars -> ${partial.cards} card/${partial.lifted} tiles lifted (not enlargeable), foundRatio 0 -> ${zero.cards} card, reveal-less level -> no host`);
 
   // ---- reward-screen geometry, at real device heights, via the shell's own showScreen('module')
   //      (dryness-fix round 2, item 1) ----
