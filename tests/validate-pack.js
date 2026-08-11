@@ -251,6 +251,23 @@ function checkArtSrc(src, w, packId, requirePrefix, errors, assetBase) {
     errors.push(`${w}: "${src}" must not contain ".." or backslashes (got "${src}")`);
     return;
   }
+  // An absolute src makes the prefix half (path.resolve, which honours an absolute path and
+  // discards REPO_ROOT entirely once it sees one) and the existence half (path.join, which never
+  // does -- it just concatenates) disagree about which file is even being examined, so the two
+  // halves of this same function can report factually inconsistent diagnoses for one input.
+  // Rejected outright rather than diagnosed twice, inconsistently.
+  if (path.isAbsolute(src) || src.startsWith('/')) {
+    errors.push(`${w}: "${src}" must be a repo-relative path, not an absolute one`);
+    return;
+  }
+  // A trailing separator validates clean today only because path.relative (used by the on-disk
+  // walk below) strips it before splitting into segments, but POSIX pathname resolution requires
+  // a trailing slash to resolve to a DIRECTORY -- so this src would 404 on the case-sensitive,
+  // POSIX-serving host even where the file itself genuinely exists.
+  if (src.endsWith('/')) {
+    errors.push(`${w}: "${src}" must not end with a trailing slash`);
+    return;
+  }
   if (requirePrefix && packId) {
     const prefix = `${assetBase}/${packId}/`;
     // Resolved-path comparison, not a raw string prefix: robust to redundant slashes and the like,
@@ -856,8 +873,16 @@ function validatePack(pack, opts) {
   // parse time (present in the bytes, absent from the parsed object), while the parsed object
   // misses nothing the raw bytes had UNLESS the raw bytes themselves are the only place it showed
   // up -- scanning both closes both gaps at once.
+  //
+  // The rawText term is normalized (\/ -> /) before scanning, and ONLY the rawText term: real JSON
+  // permits an escaped forward slash, so a shipped file can contain "https:\/\/host" verbatim,
+  // which JSON.parse silently turns into a live "https://host" link at runtime while the regex
+  // below (which requires a literal "://") cannot see through the escape in the raw bytes. The
+  // JSON.stringify(pack) term keeps its current meaning (it is already the POST-parse, already
+  // unescaped representation, and re-normalizing it would be a no-op at best and could mask an
+  // unrelated defect at worst).
   const rawText = (opts && typeof opts.rawText === 'string') ? opts.rawText : JSON.stringify(pack);
-  checkNoRawUrls(rawText + '\n' + JSON.stringify(pack), errors);
+  checkNoRawUrls(rawText.replace(/\\\//g, '/') + '\n' + JSON.stringify(pack), errors);
   for (const it of itemsById.values()) checkItemShape(it, passagesById, errors);
   contentChecks(pack, passagesById, itemsById, errors, warnings);
   checkEbsrKeyShapes(pack, errors);
