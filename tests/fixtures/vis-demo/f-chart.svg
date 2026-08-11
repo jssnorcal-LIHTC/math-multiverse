@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img">
+  <title>Fixture chart: CO2 by day</title>
+  <rect x="0" y="0" width="800" height="450" fill="#0f1218" />
+  <line x1="48" y1="48" x2="48" y2="402" stroke="rgba(255,255,255,0.35)" stroke-width="1" />
+  <line x1="48" y1="402" x2="752" y2="402" stroke="rgba(255,255,255,0.35)" stroke-width="1" />
+  <text x="24" y="225" font-size="16" fill="#e8eef7" transform="rotate(-90 24 225)">CO2 (ppm)</text>
+  <text x="400" y="432" font-size="16" fill="#e8eef7" text-anchor="middle">day</text>
+  <polyline points="90,380 300,340 510,300" fill="none" stroke="#7aa8ff" stroke-width="3" />
+  <text x="90" y="370" font-size="15" fill="#e8eef7">410</text>
+  <text x="300" y="330" font-size="15" fill="#e8eef7">430</text>
+  <text x="510" y="290" font-size="15" fill="#e8eef7">452</text>
+</svg>
