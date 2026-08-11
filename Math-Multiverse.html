@@ -3733,9 +3733,16 @@ function packCardNode(entry) {
     return `<span class="${cls}"></span>`;
   }).join('');
 
+  // Mirrors mathCardNode's logoUrl/icon pattern (:3695-3697): a badgeUrl that fails to load
+  // (missing file, bad path) falls back to the same emoji mc-icon every pack already renders
+  // today, so a shelf badge is additive and never a hard dependency on an asset existing.
+  const iconHtml = entry.badgeUrl
+    ? `<img class="mc-logo" src="${entry.badgeUrl}" alt="${entry.title}" loading="lazy" onerror="this.outerHTML = '<div class=&quot;mc-icon&quot;>${entry.icon}</div>';">`
+    : `<div class="mc-icon">${entry.icon}</div>`;
+
   card.innerHTML = `
     <div class="mc-header">
-      <div class="mc-icon">${entry.icon}</div>
+      ${iconHtml}
       <div class="mc-ccss">${entry.standards || 'CCSS ' + entry.subject.toUpperCase() + ' ' + entry.grade}</div>
     </div>
     <div class="mc-title">${entry.title}</div>

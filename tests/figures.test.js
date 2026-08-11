@@ -371,5 +371,79 @@ check('renderRevealCard returns false and appends nothing for a reveal-less leve
   assert.strictEqual(host.children.length, 0, 'a false-returning call must not append anything');
 });
 
+// ---------- Task 7: renderItemFigure ----------
+// One figure rail per item (item.figureId, cross-referenced by validate-pack.js), inserted
+// BEFORE whatever Items.render already built in itemBox, unlike renderStrip's multi-figure
+// horizontal strip which only ever appends into an empty passage host.
+
+check('renderItemFigure inserts a .mv-item-fig as itemBox.firstChild, before existing content', () => {
+  const itemBox = MVFigures.el('div', 'mv-item');
+  const stem = MVFigures.el('div', 'mv-stem', 'Question text');
+  itemBox.appendChild(stem);   // simulate Items.render already having built the stem
+  MVFigures.renderItemFigure(PACK, 'f1', itemBox);
+  assert.strictEqual(itemBox.children.length, 2, 'renderItemFigure did not insert into itemBox');
+  assert.strictEqual(itemBox.children[0].className, 'mv-item-fig', 'the figure did not land as firstChild');
+  assert.strictEqual(itemBox.children[1], stem, 'the figure did not land BEFORE the existing stem');
+  const wrap = itemBox.children[0];
+  const btn = wrap.children[0];
+  assert.strictEqual(btn.className, 'mv-fig');
+  const img = btn.children[0];
+  assert.strictEqual(img.getAttribute('alt'), 'a');
+  assert.strictEqual(img.getAttribute('src'), 'art/demo/f1.jpg');
+});
+
+check('renderItemFigure on an EMPTY itemBox still inserts as the only child', () => {
+  const itemBox = MVFigures.el('div', 'mv-item');
+  MVFigures.renderItemFigure(PACK, 'f1', itemBox);
+  assert.strictEqual(itemBox.children.length, 1);
+  assert.strictEqual(itemBox.children[0].className, 'mv-item-fig');
+});
+
+check('renderItemFigure uses a plate figure\'s first view src', () => {
+  const itemBox = MVFigures.el('div', 'mv-item');
+  MVFigures.renderItemFigure(PACK, 'f3', itemBox);
+  const img = itemBox.children[0].children[0].children[0];
+  assert.strictEqual(img.getAttribute('src'), 'art/demo/f3-1.jpg', "plate rail did not use its first view's src");
+});
+
+check('renderItemFigure renders alt="" for a figure with no alt, never alt="undefined"', () => {
+  const noAltPack = { meta: { id: 'demo3', subject: 'sci' },
+    figures: [{ id: 'na1', kind: 'photo', src: 'art/demo/na.jpg', caption: 'c', credit: 'cr' }] };
+  const itemBox = MVFigures.el('div', 'mv-item');
+  MVFigures.renderItemFigure(noAltPack, 'na1', itemBox);
+  const img = itemBox.children[0].children[0].children[0];
+  assert.strictEqual(img.getAttribute('alt'), '');
+});
+
+check('renderItemFigure with an unknown figureId inserts nothing and does not throw', () => {
+  const itemBox = MVFigures.el('div', 'mv-item');
+  const stem = MVFigures.el('div', 'mv-stem', 'Question text');
+  itemBox.appendChild(stem);
+  assert.doesNotThrow(() => MVFigures.renderItemFigure(PACK, 'missing', itemBox));
+  assert.strictEqual(itemBox.children.length, 1, 'an unresolvable figureId must not insert anything');
+  assert.strictEqual(itemBox.children[0], stem);
+});
+
+check('renderItemFigure with no itemBox does not throw', () => {
+  assert.doesNotThrow(() => MVFigures.renderItemFigure(PACK, 'f1', null));
+});
+
+check('renderItemFigure thumb click reaches the LIVE openLightbox, not a captured stub', () => {
+  const itemBox = MVFigures.el('div', 'mv-item');
+  MVFigures.renderItemFigure(PACK, 'f1', itemBox);
+  const button = itemBox.children[0].children[0];
+  const orig = MVFigures.openLightbox;
+  const calls = [];
+  MVFigures.openLightbox = (packArg, figId) => { calls.push([packArg, figId]); };
+  try {
+    button.onclick({ stopPropagation() {} });
+    assert.strictEqual(calls.length, 1, 'thumb click did not reach openLightbox');
+    assert.strictEqual(calls[0][0], PACK);
+    assert.strictEqual(calls[0][1], 'f1');
+  } finally {
+    MVFigures.openLightbox = orig;
+  }
+});
+
 console.log(failures ? `figures.test: ${failures} FAILURE(S)` : 'figures.test: all clean');
 process.exit(failures ? 1 : 0);
