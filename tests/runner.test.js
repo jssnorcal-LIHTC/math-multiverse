@@ -357,6 +357,14 @@ check('makeRunner calls FG.renderStrip exactly once per passage, across two ques
 
 check('makeRunner survives a throwing MVFigures.renderStrip and still renders the level', () => {
   const had = global.MVFigures;
+  // Captured and restored in the SAME finally as global.MVFigures, on every path including a
+  // mid-check assertion failure, and scoped to this one check only: a global console.warn
+  // silenced for the whole file would swallow a genuine warning from a later test.  Capturing
+  // it also turns the round-1 diagnostic's console noise into its only test coverage; nothing
+  // else in the suite ever asserted the warn fires at all.
+  const hadWarn = global.console.warn;
+  const warnCalls = [];
+  global.console.warn = (...args) => { warnCalls.push(args); };
   // The fake builds on a DETACHED node (never appended to hostEl) before throwing, so the
   // zero-strip assertion below actually pins the append-last, detached-build property the real
   // renderStrip relies on, rather than passing merely because the fake never did any work.
@@ -380,9 +388,14 @@ check('makeRunner survives a throwing MVFigures.renderStrip and still renders th
       assert.strictEqual(host.querySelectorAll('.mv-item').length, 1, 'a throwing renderStrip must not stop the item from rendering');
       assert.strictEqual(host.querySelectorAll('.mv-choice').length, 4, 'a throwing renderStrip must not stop the item from rendering fully');
       assert.strictEqual(host.querySelectorAll('.mv-figs').length, 0, 'a throwing renderStrip must not leave a partial strip');
+      assert.strictEqual(warnCalls.length, 1, 'the guard did not warn exactly once for the throwing renderStrip');
+      assert.ok(/figures.*renderStrip failed/i.test(String(warnCalls[0][0])), 'the warn did not name the failure');
+      assert.ok(warnCalls[0][1] instanceof Error && warnCalls[0][1].message === 'figures boom',
+        'the warn did not pass along the thrown Error');
     });
   } finally {
     if (had === undefined) delete global.MVFigures; else global.MVFigures = had;
+    global.console.warn = hadWarn;
   }
 });
 
