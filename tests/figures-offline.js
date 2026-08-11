@@ -1,31 +1,28 @@
 'use strict';
-// figures-offline.js -- the figures-offline gate (Task 8).
+// figures-offline.js -- the figures-offline gate (Task 8, fix round 1).
 //
-// Every figure-bearing asset the game references -- a passage's figure strip, a plate's per-view
-// image and overlay, a manifest shelf badge -- must actually decode with NO real network available.
-// A `fetch()` can succeed on bytes it never parses (this is exactly how the two badge SVGs shipped
-// in Task 7 briefly carried an invalid XML comment with no console error and no throw: Chromium's
-// <img> decoder silently gave up), so the oracle here is `new Image()` + `naturalWidth > 0`, run
-// inside a real Chromium with every non-localhost request aborted at the network layer. That last
-// part is what makes "offline" a guarantee rather than an assertion: the browser is handed nothing
-// but the local static server below, so a defect that only a real decoder would catch cannot hide
-// behind a network fetch that happened to succeed against someone else's CDN.
+// Every figure-bearing asset the game references -- a passage's figure strip, an item's figure
+// rail, a plate's per-view image and overlay, a manifest shelf badge, a level's completion-screen
+// reveal -- must actually decode and render with NO real network available. A `fetch()` can succeed
+// on bytes it never parses (this is exactly how the two badge SVGs shipped in Task 7 briefly carried
+// an invalid XML comment with no console error and no throw: Chromium's <img> decoder silently gave
+// up), so the oracle here is `new Image()` + `naturalWidth > 0`, run inside a real Chromium with
+// every non-localhost request aborted at the network layer and proven aborted, not merely assumed.
 //
-// NOT-ARMED CONTRACT: no real pack declares `figures` yet (Task 8 through the current phase), so the
-// real-pack sweep below finds zero targets every time this runs today. A gate that discovers zero
-// targets and reports clean anyway is the silent-clean failure this project bans hardest, so this
-// gate refuses that shape structurally: finding zero real figure-bearing packs prints the NOT-ARMED
-// banner and then runs BOTH fixture controls (tests/fixtures/vis-demo/, never registered in the real
-// packs/manifest.json) -- a positive control (every fixture asset loads offline and the real
-// MVFigures.renderStrip/openLightbox/showPackLevelComplete render it) and a negative control (one
-// fixture src pointed at a file that does not exist, and the gate asserts THAT failure fires). Both
-// controls failing is exit 1 even while NOT ARMED; only "both controls green" earns exit 0 on the
-// NOT-ARMED path. The moment a real pack ships `figures`, the sweep below picks it up automatically
-// and the sampled-render integration exercises the real pack instead of the fixture.
+// FIX ROUND 1 (this file): the first version of this gate put BOTH fixture controls inside the
+// NOT-ARMED `else` branch. The moment a real pack shipped `figures`, the banner would stop printing
+// (reading as progress) while the negative control -- the gate's ONLY proof its own decode oracle
+// can still report `ok: false` -- and the composed-geometry oracle went dark with it. That is a
+// coverage DOWNGRADE disguised as an upgrade, and it is exactly the silent-clean shape this project
+// bans. Both controls now run on EVERY invocation; only the banner is conditional. The armed path
+// additionally exercises the real pack, with the SAME firable oracles the controls use (composed
+// height equality, not the cap that CSS makes structurally unfirable), and is now proven to work end
+// to end against scratch armed packs (see task-8-report.md for every mutation re-run and its exit
+// code), not merely written to spec.
 //
-// Manifest shelf badges (`badgeUrl`) are checked unconditionally, independent of the ARMED/NOT-ARMED
-// figures state above: they are declared on `packs/manifest.json` entries, not inside a pack's own
-// `figures` array, so validate-pack's figure rules never see them and this is their only gate.
+// NOT-ARMED CONTRACT: no real pack declares `figures` yet, so the real-pack sweep below finds zero
+// targets most days. A gate that discovers zero targets and reports clean anyway is banned, so the
+// banner fires whenever no real pack is figure-bearing. It changes nothing about which controls run.
 //
 //   node tests/figures-offline.js
 //   PLAYWRIGHT_EXECUTABLE_PATH="C:\\...\\chrome.exe" node tests/figures-offline.js
@@ -49,6 +46,15 @@ catch (e1) {
 const ROOT = path.join(__dirname, '..');
 const VIEWPORT = { width: 1024, height: 768 };
 const NOT_ARMED_BANNER = 'figures-offline: NOT ARMED (no real pack declares figures); fixture controls ran';
+
+// outpost-protocol-g6 and firsthand-g6 as of this writing. A count BELOW this is a regression (a
+// badge silently dropped from the manifest); raise it deliberately, in the same commit that ships a
+// third badge, never as a side effect of an unrelated change.
+const EXPECTED_MIN_REAL_BADGES = 2;
+
+// RFC 2606 reserved TLD: guaranteed never to resolve, so this proves the route handler's abort, not
+// an incidental DNS failure that would have happened with no block in place at all.
+const OFFLINE_PROOF_SRC = 'https://example.invalid/figures-offline-proof.png';
 
 // Prove-the-prover lever (see task-8-report.md): this is the src the negative control expects to
 // FAIL to load. During implementation this constant was temporarily pointed at a real fixture file
@@ -108,28 +114,172 @@ function figureAssets(figures) {
   return out;
 }
 
+// The three reference routes validate-pack's checkFigureReferences permits: a passage's figureIds
+// (renders as the passage strip, .mv-figs), an item's own figureId (renders as the item rail,
+// .mv-item-fig), and a level's reveal.figureId (renders as the .mv-reveal-strip cell / completion
+// card). Returns which route (the first one found) claims each figure id, and the list of figure
+// ids claimed by NONE of the three -- an orphan figure declared in `figures` but wired to nothing a
+// player could ever see, which validate-pack's own rules do not catch (it only checks that a
+// reference resolves TO a figure, never that every figure has a reference).
+function figureRoutes(pack) {
+  const passagesById = new Map((pack.passages || []).map((p) => [p.id, p]));
+  const itemsById = new Map((pack.items || []).map((i) => [i.id, i]));
+  const routeOf = new Map();
+  for (const p of passagesById.values()) {
+    for (const fid of (p.figureIds || [])) if (!routeOf.has(fid)) routeOf.set(fid, 'strip');
+  }
+  for (const it of itemsById.values()) {
+    if (it.figureId && !routeOf.has(it.figureId)) routeOf.set(it.figureId, 'rail');
+  }
+  for (const lv of (pack.levels || [])) {
+    if (lv.reveal && lv.reveal.figureId && !routeOf.has(lv.reveal.figureId)) routeOf.set(lv.reveal.figureId, 'reveal');
+  }
+  const orphans = (pack.figures || []).map((f) => f.id).filter((fid) => !routeOf.has(fid));
+  return { routeOf, orphans, passagesById, itemsById };
+}
+
+// Shared strip oracle: asserts the COMPOSED geometry (98px strip height, 128x96 image box -- never
+// the 104px cap, which CSS makes structurally unable to fail), the lightbox, and -- for a plate --
+// every declared tab's own view src and overlay, selected by KIND rather than a hardcoded index.
+// Used by BOTH the fixture positive control and the armed sampled-render integration, so "the armed
+// path gets the same firable oracle" is one function, not two numbers that happen to agree today.
+async function assertFigureStrip(page, scopeSel, figures, problems, note, label) {
+  const before = problems.length;
+  const geo = await page.evaluate((sel) => {
+    const box = document.querySelector(sel + ' .mv-figs');
+    if (!box) return null;
+    const r = box.getBoundingClientRect();
+    const img = box.querySelector('.mv-fig-img');
+    const ir = img ? img.getBoundingClientRect() : null;
+    return { h: r.height, imgW: ir && ir.width, imgH: ir && ir.height, count: box.querySelectorAll('.mv-fig').length };
+  }, scopeSel);
+  if (!geo) { problems.push(`${label}: no .mv-figs strip rendered under "${scopeSel}"`); return; }
+  if (geo.count !== figures.length) problems.push(`${label}: strip rendered ${geo.count} .mv-fig, expected ${figures.length}`);
+  // Composed, not the declared cap: 96px image height + 1px border top/bottom = 98. An assertion
+  // against the 104px cap alone cannot fail when the composed height grows past what the cap was
+  // meant to bound, which is exactly the shape of defect this check exists to catch.
+  if (Math.round(geo.h) !== 98) problems.push(`${label}: .mv-figs composed height is ${Math.round(geo.h)}px, expected 98px (96px image + 1px border top/bottom)`);
+  if (Math.round(geo.imgW) !== 128 || Math.round(geo.imgH) !== 96) problems.push(`${label}: .mv-fig-img box is ${Math.round(geo.imgW)}x${Math.round(geo.imgH)}, expected 128x96`);
+  if (problems.length === before) note(`${label}: strip rendered ${geo.count} thumb(s), composed height ${Math.round(geo.h)}px, image box ${Math.round(geo.imgW)}x${Math.round(geo.imgH)}`);
+
+  const photoIdx = figures.findIndex((f) => f.kind !== 'plate');
+  const plateIdx = figures.findIndex((f) => f.kind === 'plate');
+
+  if (photoIdx !== -1) {
+    await page.evaluate(([sel, i]) => document.querySelectorAll(sel + ' .mv-fig')[i].click(), [scopeSel, photoIdx]);
+    const lbInfo = await page.evaluate(() => {
+      const lb = document.querySelector('.mv-lightbox');
+      const img = lb && lb.querySelector('.mv-lb-img');
+      return { present: !!lb, src: img ? img.src : null };
+    });
+    const f0 = figures[photoIdx];
+    const wantSuffix = (f0.kind === 'plate' ? f0.views[0].src : f0.src).split('/').pop();
+    if (!lbInfo.present) problems.push(`${label}: tapping thumb ${photoIdx} (kind "${f0.kind}") did not open .mv-lightbox`);
+    else if (!lbInfo.src || !lbInfo.src.endsWith(wantSuffix)) problems.push(`${label}: lightbox opened "${lbInfo.src}" for thumb ${photoIdx}, expected it to end with "${wantSuffix}"`);
+    await page.evaluate(() => { const b = document.querySelector('.mv-lightbox'); if (b) b.click(); });
+    const closed = await page.evaluate(() => !document.querySelector('.mv-lightbox'));
+    if (!closed) problems.push(`${label}: clicking the lightbox background did not close it`);
+  }
+
+  if (plateIdx !== -1) {
+    const plateFig = figures[plateIdx];
+    await page.evaluate(([sel, i]) => document.querySelectorAll(sel + ' .mv-fig')[i].click(), [scopeSel, plateIdx]);
+    const tabCount = await page.evaluate(() => document.querySelectorAll('.mv-plate-tab').length);
+    if (tabCount < 2) {
+      problems.push(`${label}: plate "${plateFig.id}" lightbox shows ${tabCount} tab(s), expected at least 2`);
+    } else if (tabCount !== plateFig.views.length) {
+      problems.push(`${label}: plate "${plateFig.id}" lightbox shows ${tabCount} tab(s), expected exactly ${plateFig.views.length} (one per declared view)`);
+    } else {
+      const beforeTabs = problems.length;
+      for (let i = 0; i < plateFig.views.length; i++) {
+        await page.evaluate((idx) => document.querySelectorAll('.mv-plate-tab')[idx].click(), i);
+        const st = await page.evaluate(() => ({
+          src: document.querySelector('.mv-lb-img').src,
+          overlaySrc: (document.querySelector('.mv-lb-overlay') || {}).src || null,
+          activeIdx: [...document.querySelectorAll('.mv-plate-tab')].findIndex((t) => t.classList.contains('active')),
+        }));
+        const view = plateFig.views[i];
+        const wantV = view.src.split('/').pop();
+        if (!st.src.endsWith(wantV)) problems.push(`${label}: plate "${plateFig.id}" tab ${i} shows "${st.src}", expected to end with "${wantV}"`);
+        if (view.overlaySrc) {
+          const wantO = view.overlaySrc.split('/').pop();
+          if (!st.overlaySrc || !st.overlaySrc.endsWith(wantO)) problems.push(`${label}: plate "${plateFig.id}" tab ${i} overlay missing/wrong, expected to end with "${wantO}", got "${st.overlaySrc}"`);
+        } else if (st.overlaySrc) {
+          problems.push(`${label}: plate "${plateFig.id}" tab ${i} declares no overlaySrc but .mv-lb-overlay is present ("${st.overlaySrc}")`);
+        }
+        if (st.activeIdx !== i) problems.push(`${label}: plate "${plateFig.id}" after clicking tab ${i}, .active landed on tab ${st.activeIdx}`);
+      }
+      if (problems.length === beforeTabs) note(`${label}: plate "${plateFig.id}" all ${plateFig.views.length} tab(s) verified (src + overlay + active class)`);
+    }
+    await page.evaluate(() => { const b = document.querySelector('.mv-lightbox'); if (b) b.click(); });
+  }
+}
+
+// Shared rail oracle (the .mv-item-fig surface an item.figureId route renders): --mv-fig-h is
+// re-scoped to 72px there (engine/engine.css), so the composed height is 74 (72 + 1px border top/
+// bottom) and the image box is 128x72, distinct constants from the strip's 98/128x96 on purpose.
+async function assertItemFigureRail(page, scopeSel, figure, problems, note, label) {
+  const before = problems.length;
+  const geo = await page.evaluate((sel) => {
+    const rail = document.querySelector(sel + ' .mv-item-fig');
+    if (!rail) return null;
+    const figEl = rail.querySelector('.mv-fig');
+    const img = rail.querySelector('.mv-fig-img');
+    const r = figEl ? figEl.getBoundingClientRect() : null;
+    const ir = img ? img.getBoundingClientRect() : null;
+    return { h: r && r.height, imgW: ir && ir.width, imgH: ir && ir.height, src: img ? img.src : null };
+  }, scopeSel);
+  if (!geo) { problems.push(`${label}: no .mv-item-fig rail rendered under "${scopeSel}"`); return; }
+  if (Math.round(geo.h) !== 74) problems.push(`${label}: .mv-item-fig composed height is ${Math.round(geo.h)}px, expected 74px (72px image + 1px border top/bottom)`);
+  if (Math.round(geo.imgW) !== 128 || Math.round(geo.imgH) !== 72) problems.push(`${label}: rail image box is ${Math.round(geo.imgW)}x${Math.round(geo.imgH)}, expected 128x72`);
+  const wantSuffix = (figure.kind === 'plate' ? figure.views[0].src : figure.src).split('/').pop();
+  if (!geo.src || !geo.src.endsWith(wantSuffix)) problems.push(`${label}: rail image src "${geo.src}" does not end with expected "${wantSuffix}"`);
+  if (problems.length === before) note(`${label}: rail rendered, composed height ${Math.round(geo.h)}px, image box ${Math.round(geo.imgW)}x${Math.round(geo.imgH)}`);
+}
+
 (async () => {
+  const problems = [];
+  const note = (m) => console.log('  ' + m);
+
+  // ---------------------------------------------------------------------------------------------
+  // Step 1's own requirement: the fixture must PASS validate-pack rules when validated standalone.
+  // Pure Node, no browser needed -- run it first.
+  // ---------------------------------------------------------------------------------------------
+  {
+    const abs = path.join(ROOT, 'tests', 'fixtures', 'vis-demo', 'pack.json');
+    try {
+      const raw = fs.readFileSync(abs, 'utf8');
+      const fixtureForValidation = JSON.parse(raw);
+      const { validatePack } = require('./validate-pack');
+      const { errors } = validatePack(fixtureForValidation, { expectedId: 'vis-demo', assetBase: 'tests/fixtures', rawText: raw });
+      if (errors.length) problems.push(`fixture: tests/fixtures/vis-demo/pack.json failed validate-pack standalone (${errors.length} error(s)), first: ${errors[0]}`);
+      else note('fixture: tests/fixtures/vis-demo/pack.json validates clean standalone (expectedId=vis-demo, assetBase=tests/fixtures)');
+    } catch (e) {
+      problems.push(`fixture: tests/fixtures/vis-demo/pack.json failed to read/parse for standalone validation: ${e && e.message}`);
+    }
+  }
+
   const { server, port } = await startServer();
   const base = `http://127.0.0.1:${port}`;
   const launchOpts = { headless: true, args: ['--disable-gpu', '--disable-gpu-compositing'] };
+  // PLAYWRIGHT_EXECUTABLE_PATH only -- no hardcoded fallback to whatever Chrome happens to be
+  // installed on this machine. All four browser-driving gates (smoke, reading-surface, tile-overlap,
+  // this one) now resolve the browser the same way: Playwright's own pinned/installed engine, or the
+  // env override. A machine-local auto-updating Chrome is not the engine CI runs.
   if (process.env.PLAYWRIGHT_EXECUTABLE_PATH) launchOpts.executablePath = process.env.PLAYWRIGHT_EXECUTABLE_PATH;
-  else if (fs.existsSync('C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe')) {
-    launchOpts.executablePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-  }
 
   const browser = await chromium.launch(launchOpts);
   // One context for the whole run: every page born from it inherits this route, so "offline" is an
-  // enforced guarantee (the request is actually aborted) rather than an assumption nothing here
-  // happens to violate.
+  // enforced guarantee (the request is actually aborted, counted below) rather than an assumption
+  // nothing here happens to violate.
   const context = await browser.newContext({ viewport: VIEWPORT });
+  let externalAborts = 0;
   await context.route('**/*', (route) => {
     const u = route.request().url();
     if (u.startsWith(base) || u.startsWith('data:')) return route.continue();
+    externalAborts++;
     return route.abort();
   });
-
-  const problems = [];
-  const note = (m) => console.log('  ' + m);
 
   const page = await context.newPage();
   const jsErrors = [];
@@ -147,9 +297,29 @@ function figureAssets(figures) {
     note('boot: launcher up, SHELVES populated');
 
     // ---------------------------------------------------------------------------------------------
+    // Offline-abort proof: the header prose promises "the browser is handed nothing but the local
+    // static server," and nothing verified that promise until now. Requires BOTH the decode to fail
+    // AND the route handler's own counter to move, so a lucky/incidental failure (e.g. a resolver
+    // quirk) cannot be mistaken for proof the block fired.
+    // ---------------------------------------------------------------------------------------------
+    {
+      const abortsBefore = externalAborts;
+      const proof = await checkImage(page, OFFLINE_PROOF_SRC);
+      if (proof.ok) {
+        problems.push(`offline proof: external src "${OFFLINE_PROOF_SRC}" unexpectedly decoded; the network block is not in force`);
+      } else if (externalAborts <= abortsBefore) {
+        problems.push(`offline proof: external src "${OFFLINE_PROOF_SRC}" failed to decode, but the route handler recorded no abort; the failure may be incidental rather than proof the block fired`);
+      } else {
+        note(`offline proof: external request was intercepted and aborted (${externalAborts - abortsBefore} abort(s) recorded); the network block is genuinely in force`);
+      }
+    }
+
+    // ---------------------------------------------------------------------------------------------
     // Section A: manifest badgeUrl sweep. Always runs, independent of the figures ARMED state below
     // -- badges live on the manifest entry, not inside a pack's own `figures` array, so nothing else
-    // in this suite ever loads them.
+    // in this suite ever loads them. An expected-count floor catches a badge silently dropped from
+    // the manifest, which a bare "found zero, note it" would otherwise wave through as "no badges to
+    // check" rather than "a badge went missing."
     // ---------------------------------------------------------------------------------------------
     const manifest = await page.evaluate(async () => (await (await fetch('packs/manifest.json')).json()));
     const manifestPacks = (manifest && Array.isArray(manifest.packs)) ? manifest.packs : [];
@@ -159,16 +329,31 @@ function figureAssets(figures) {
       if (!r.ok) problems.push(`badges: pack "${p.id}" badgeUrl "${p.badgeUrl}" failed to decode offline`);
       else note(`badges: pack "${p.id}" badgeUrl ok (${r.w}x${r.h})`);
     }
-    if (!badgeEntries.length) note('badges: no manifest pack declares a badgeUrl');
+    if (badgeEntries.length < EXPECTED_MIN_REAL_BADGES) {
+      problems.push(`badges: manifest declares ${badgeEntries.length} badgeUrl(s), expected at least ${EXPECTED_MIN_REAL_BADGES}; a badge silently dropped from the manifest is exactly the regression this floor exists to catch`);
+    }
 
     // ---------------------------------------------------------------------------------------------
     // Section B: real-pack figures sweep. Every manifest pack's own JSON is fetched and checked for
     // a `figures` array; every declared src (and every plate view/overlaySrc) across EVERY such pack
-    // is offline-load-checked, not just the first. Zero found is what triggers NOT-ARMED below.
+    // is offline-load-checked, not just the first, and every figure referenced by NONE of the three
+    // routes validate-pack permits (passage.figureIds, item.figureId, level.reveal.figureId) is a
+    // hard failure -- validate-pack checks a reference resolves TO a figure, never that every figure
+    // HAS a reference, so an orphan figure has no other gate.
     // ---------------------------------------------------------------------------------------------
     const figureBearingPacks = [];
     for (const entry of manifestPacks) {
-      const pack = await page.evaluate(async (id) => (await (await fetch(`packs/${id}.json`)).json()), entry.id);
+      let pack;
+      try {
+        pack = await page.evaluate(async (id) => {
+          const res = await fetch(`packs/${id}.json`);
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return await res.json();
+        }, entry.id);
+      } catch (e) {
+        problems.push(`figures: pack "${entry.id}" JSON failed to fetch or parse: ${e && e.message}`);
+        continue;
+      }
       if (Array.isArray(pack.figures) && pack.figures.length) figureBearingPacks.push({ entry, pack });
     }
     for (const { entry, pack } of figureBearingPacks) {
@@ -176,27 +361,38 @@ function figureAssets(figures) {
         const r = await checkImage(page, asset.src);
         if (!r.ok) problems.push(`figures: pack "${entry.id}" figure "${asset.figureId}" (${asset.field}) failed to decode offline: ${asset.src}`);
       }
+      const { orphans } = figureRoutes(pack);
+      for (const fid of orphans) {
+        problems.push(`figures: pack "${entry.id}" figure "${fid}" is referenced by no route (no passage.figureIds, item.figureId, or level.reveal.figureId) and cannot be render-exercised`);
+      }
     }
 
-    if (figureBearingPacks.length) {
-      // -------------------------------------------------------------------------------------------
-      // ARMED: sampled render integration against the FIRST figure-bearing real pack. Unreachable
-      // today (no shipped pack declares figures) and therefore unexecuted by this run; written to
-      // spec so the moment a pack ships figures this exercises the real code path with no further
-      // changes here. See task-8-report.md for the explicit "unverified live" caveat.
-      // -------------------------------------------------------------------------------------------
+    const armed = figureBearingPacks.length > 0;
+    if (!armed) {
+      console.log('\n' + NOT_ARMED_BANNER + '\n');
+    } else {
+      note(`figures: ${figureBearingPacks.length} real pack(s) declare figures (${figureBearingPacks.map((x) => x.entry.id).join(', ')}) -- ARMED; fixture controls still run as the permanent regression floor, plus the real-pack integration below`);
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // BOTH fixture controls run on EVERY invocation, armed or not. This is the fix for the
+    // coverage-downgrade finding: the negative control is the gate's only proof its own decode
+    // oracle can still return ok:false, and the composed-geometry oracle is what actually catches a
+    // shrunk strip -- neither may go dark just because a real pack shipped figures.
+    // ---------------------------------------------------------------------------------------------
+    await fixturePositiveControl(page, problems, note);
+    await fixtureNegativeControl(page, problems, note);
+
+    // ---------------------------------------------------------------------------------------------
+    // ARMED addition: sampled render integration against the FIRST figure-bearing real pack, using
+    // the SAME firable oracles (assertFigureStrip / assertItemFigureRail) the fixture controls use.
+    // ---------------------------------------------------------------------------------------------
+    if (armed) {
       try {
         await sampledRenderIntegration(page, figureBearingPacks[0], problems, note);
       } catch (e) {
-        problems.push('armed sampled-render integration threw: ' + (e && e.message));
+        problems.push('armed sampled-render integration threw: ' + (e && e.stack || e));
       }
-    } else {
-      // -------------------------------------------------------------------------------------------
-      // NOT-ARMED: banner, then both fixture controls. Controls failing is exit 1 even here.
-      // -------------------------------------------------------------------------------------------
-      console.log('\n' + NOT_ARMED_BANNER + '\n');
-      await fixturePositiveControl(page, problems, note);
-      await fixtureNegativeControl(page, problems, note);
     }
 
     await page.evaluate(() => { if (typeof exitToLauncher === 'function') exitToLauncher(); }).catch(() => {});
@@ -220,39 +416,40 @@ function figureAssets(figures) {
 });
 
 // ===================================================================================================
-// ARMED path (Step 2.3 of the brief): boot is already done by the caller. Opens the first
-// figure-bearing pack through the real `window.openPack`/`window.playLevel` globals (the same
-// call-through-window convention tests/smoke.js already uses for its own pack playthrough), finds a
-// level whose passage declares figures, and asserts the strip geometry, the lightbox, the plate tab
-// swap, and (when that level declares a reveal) that answering an mc item correctly turns a
-// `.mv-reveal-strip` cell `found`.
+// ARMED path (Step 2.3 of the brief, fix round 1): boot is already done by the caller. Opens the
+// first figure-bearing pack through the real `window.openPack`/`window.playLevel` globals (the same
+// call-through-window convention tests/smoke.js already uses). Recognises all three reference routes
+// validate-pack permits, asserts whichever surface belongs to whichever route the drawn item/passage
+// actually exercises, and reads the on-screen `.mv-passage` dataset.pid before requiring a strip --
+// a valid pack whose pinned draw lands on a passage with no figures is not a defect, so that draw is
+// rerolled rather than failed.
 // ===================================================================================================
 async function sampledRenderIntegration(page, armedEntry, problems, note) {
   const { entry, pack } = armedEntry;
-  const passagesById = new Map((pack.passages || []).map((p) => [p.id, p]));
-  const itemsById = new Map((pack.items || []).map((i) => [i.id, i]));
+  const { routeOf, passagesById, itemsById } = figureRoutes(pack);
+  const figuresById = new Map((pack.figures || []).map((f) => [f.id, f]));
 
-  let targetLevelIdx = -1;
+  let targetLevelIdx = -1, needStrip = false, needRail = false, needReveal = false;
   (pack.levels || []).forEach((lv, i) => {
     if (targetLevelIdx !== -1) return;
-    const hasFigPassage = (lv.itemIds || []).some((id) => {
-      const it = itemsById.get(id);
-      const ps = it && passagesById.get(it.passageId);
-      return ps && Array.isArray(ps.figureIds) && ps.figureIds.length;
-    });
-    if (hasFigPassage) targetLevelIdx = i;
+    const itemsInLevel = (lv.itemIds || []).map((id) => itemsById.get(id)).filter(Boolean);
+    const s = itemsInLevel.some((it) => { const ps = passagesById.get(it.passageId); return ps && Array.isArray(ps.figureIds) && ps.figureIds.length; });
+    const r = itemsInLevel.some((it) => !!it.figureId);
+    const v = !!(lv.reveal && lv.reveal.figureId);
+    if (s || r || v) { targetLevelIdx = i; needStrip = s; needRail = r; needReveal = v; }
   });
   if (targetLevelIdx === -1) {
-    problems.push(`armed: pack "${entry.id}" declares figures but no level's passage references any figureIds`);
+    problems.push(`armed: pack "${entry.id}" declares figures but no level exercises any of the three reference routes (passage.figureIds, item.figureId, level.reveal.figureId)`);
     return;
   }
+  note(`armed: pack "${entry.id}" level ${targetLevelIdx} selected (routes needed: ${[needStrip && 'strip', needRail && 'rail', needReveal && 'reveal'].filter(Boolean).join(', ') || 'none'})`);
 
   await page.evaluate((id) => window.openPack(id), entry.id);
   await page.waitForSelector('#level-grid .level-card', { timeout: 8000 });
 
   // Pinned so a level whose pool mixes item types draws reproducibly, same discipline tests/smoke.js
-  // uses for its own pack playthrough (and for the same reason: an unpinned draw fails for a reason
-  // that has nothing to do with the code under test).
+  // uses for its own pack playthrough. State advances across calls, so re-rolling below (calling
+  // playLevel again) genuinely produces a different draw each time, not the same one repeated.
   await page.evaluate(() => {
     window.__realRandom = Math.random;
     let s = 7;
@@ -263,36 +460,47 @@ async function sampledRenderIntegration(page, armedEntry, problems, note) {
     await page.evaluate((idx) => window.playLevel(idx), targetLevelIdx);
     await page.waitForSelector('.mv-passage, .mv-item', { timeout: 8000 });
 
-    const figs = await page.evaluate(() => {
-      const box = document.querySelector('.mv-figs');
-      if (!box) return null;
-      const r = box.getBoundingClientRect();
-      const img = box.querySelector('.mv-fig-img');
-      const ir = img ? img.getBoundingClientRect() : null;
-      return { h: r.height, imgW: ir && ir.width, imgH: ir && ir.height, count: box.querySelectorAll('.mv-fig').length };
-    });
-    if (!figs) {
-      problems.push(`armed: pack "${entry.id}" level ${targetLevelIdx} rendered with no .mv-figs strip despite its passage declaring figureIds`);
-    } else {
-      if (figs.h > 104) problems.push(`armed: pack "${entry.id}" .mv-figs rendered ${Math.round(figs.h)}px, over the 104px cap`);
-      note(`armed: pack "${entry.id}" .mv-figs rendered ${Math.round(figs.h)}px, ${figs.count} thumb(s), first thumb ${Math.round(figs.imgW)}x${Math.round(figs.imgH)}`);
+    // ---- Phase 1: strip / rail, by whichever route the CURRENT draw actually exercises ----
+    let stripDone = !needStrip, railDone = !needRail;
+    for (let guard = 0; guard < 24 && (!stripDone || !railDone); guard++) {
+      const onScreen = await page.evaluate(() => {
+        const passageEl = document.querySelector('.mv-passage');
+        const item = document.querySelector('.mv-shell .mv-item');
+        const s = item && item.querySelector('.mv-stem');
+        return {
+          pid: passageEl ? passageEl.dataset.pid : null,
+          text: ((s ? s.textContent : (item ? item.textContent : '')) || '').trim(),
+        };
+      });
+      const matched = [...itemsById.values()].find((it) => {
+        const stem = it.type === 'ebsr' ? (it.partA && it.partA.stem) : it.stem;
+        return stem && onScreen.text && onScreen.text.startsWith(stem.trim().slice(0, 30));
+      });
+      const ps = onScreen.pid ? passagesById.get(onScreen.pid) : null;
+      const drawHasStrip = ps && Array.isArray(ps.figureIds) && ps.figureIds.length > 0;
+      const drawHasRail = matched && !!matched.figureId;
 
-      await page.evaluate(() => document.querySelectorAll('.mv-fig')[0].click());
-      const lb = await page.evaluate(() => !!document.querySelector('.mv-lightbox'));
-      if (!lb) problems.push(`armed: pack "${entry.id}" tapping a figure thumb did not open .mv-lightbox`);
-
-      const tabCount = await page.evaluate(() => document.querySelectorAll('.mv-plate-tab').length);
-      if (tabCount > 1) {
-        const before = await page.evaluate(() => document.querySelector('.mv-lb-img').src);
-        await page.evaluate(() => document.querySelectorAll('.mv-plate-tab')[1].click());
-        const after = await page.evaluate(() => document.querySelector('.mv-lb-img').src);
-        if (before === after) problems.push(`armed: pack "${entry.id}" switching plate tabs did not change .mv-lb-img src`);
+      if (needStrip && !stripDone && drawHasStrip) {
+        const stripFigs = ps.figureIds.map((fid) => figuresById.get(fid)).filter(Boolean);
+        await assertFigureStrip(page, '.mv-passage', stripFigs, problems, note, `armed: pack "${entry.id}" passage "${ps.id}"`);
+        stripDone = true;
       }
-      await page.evaluate(() => { const b = document.querySelector('.mv-lightbox'); if (b) b.click(); });
+      if (needRail && !railDone && drawHasRail) {
+        const fig = figuresById.get(matched.figureId);
+        if (fig) await assertItemFigureRail(page, '.mv-item', fig, problems, note, `armed: pack "${entry.id}" item "${matched.id}"`);
+        railDone = true;
+      }
+      if (!stripDone || !railDone) {
+        // This draw did not satisfy an outstanding route. Not a defect -- advance rather than fail.
+        await page.evaluate((idx) => window.playLevel(idx), targetLevelIdx);
+        await page.waitForSelector('.mv-passage, .mv-item', { timeout: 8000 });
+      }
     }
+    if (needStrip && !stripDone) note(`armed: pack "${entry.id}" level ${targetLevelIdx} never drew an item whose passage carries figureIds within the guard; strip assertion skipped this run (sampling, not a defect)`);
+    if (needRail && !railDone) note(`armed: pack "${entry.id}" level ${targetLevelIdx} never drew an item with its own figureId within the guard; rail assertion skipped this run (sampling, not a defect)`);
 
-    const lv = pack.levels[targetLevelIdx];
-    if (lv.reveal) {
+    // ---- Phase 2: reveal-strip cell flip, only if this level's reveal route selected it ----
+    if (needReveal) {
       const before = await page.evaluate(() => document.querySelectorAll('.mv-reveal-strip .mv-rv-cell.found').length);
       let answered = false;
       for (let guard = 0; guard < 10 && !answered; guard++) {
@@ -313,11 +521,19 @@ async function sampledRenderIntegration(page, armedEntry, problems, note) {
           if (matched.type === 'ebsr') {
             await page.waitForTimeout(80);
             const bIdx = matched.partB.key[String(matched.partA.key)];
-            await page.evaluate((kk) => { const b = document.querySelectorAll('.mv-choice')[kk]; if (b) b.click(); }, bIdx);
+            // Scoped to .mv-part-b: Part A and Part B each number their OWN buttons data-idx="0",
+            // "1", ... independently, so an unscoped query at this point (both parts' buttons now
+            // exist in the DOM) matches Part A's already-disabled button whenever bIdx falls inside
+            // Part A's own choice count, leaving Part B unanswered and the Check button permanently
+            // disabled.
+            await page.evaluate((kk) => { const b = document.querySelector(`.mv-part-b .mv-choice[data-idx="${kk}"]`); if (b) b.click(); }, bIdx);
           }
           await page.waitForTimeout(60);
-          const check = await page.$('.mv-check');
-          if (check) await check.click().catch(() => {});
+          // Raw DOM click via evaluate, not Playwright's actionability-checked ElementHandle.click():
+          // the latter waits (up to its full default timeout) for the target to become enabled,
+          // which never happens if the answer above did not actually land, turning a genuine defect
+          // into a 30-second hang instead of a fast, named failure. Read `.disabled` first instead.
+          await page.evaluate(() => { const btn = document.querySelector('.mv-check'); if (btn && !btn.disabled) btn.click(); });
           answered = true;
         } else {
           // Not a choice-based type this probe can key directly; re-roll the level's draw.
@@ -337,9 +553,9 @@ async function sampledRenderIntegration(page, armedEntry, problems, note) {
 }
 
 // ===================================================================================================
-// NOT-ARMED fixture controls (Step 2.4). Both are asserted against tests/fixtures/vis-demo/, served
-// from disk by the same local server as everything else -- never added to the real
-// packs/manifest.json.
+// NOT-ARMED fixture controls (Step 2.4, fix round 1). Both run on EVERY invocation now (see the fix
+// note at the top of this file). Asserted against tests/fixtures/vis-demo/, served from disk by the
+// same local server as everything else -- never added to the real packs/manifest.json.
 // ===================================================================================================
 
 async function loadFixture(page) {
@@ -351,6 +567,7 @@ async function loadFixture(page) {
 
 async function fixturePositiveControl(page, problems, note) {
   const { pack, manifest } = await loadFixture(page);
+  const figuresById = new Map((pack.figures || []).map((f) => [f.id, f]));
   const badgeUrl = manifest.packs[0].badgeUrl;
 
   // ---- every figure src + the manifest badgeUrl loads offline ----
@@ -361,88 +578,66 @@ async function fixturePositiveControl(page, problems, note) {
     else note(`positive control: ${a.figureId}/${a.field} ok (${r.w}x${r.h}) -- ${a.src}`);
   }
 
-  // ---- MVFigures.renderStrip, called directly, renders the real strip geometry ----
+  // ---- MVFigures.renderStrip + renderItemFigure, called directly, render the real geometry ----
   await page.evaluate(() => {
     const o = document.createElement('div');
     o.id = 'fo-probe';
     o.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;overflow:auto;padding:14px;background:#0f1218;';
     document.body.appendChild(o);
+    const o2 = document.createElement('div');
+    o2.id = 'fo-probe-rail';
+    o2.className = 'mv-item';
+    o2.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;overflow:visible;opacity:0;pointer-events:none;';
+    document.body.appendChild(o2);
   });
   try {
     const strip = await page.evaluate((pk) => {
       const host = document.querySelector('#fo-probe');
       const el = window.MVFigures.renderStrip(pk, ['fig-photo', 'fig-chart', 'fig-plate'], host);
-      if (!el) return null;
-      const figsEl = host.querySelector('.mv-figs');
-      const r = figsEl.getBoundingClientRect();
-      const img0 = figsEl.querySelectorAll('.mv-fig-img')[0].getBoundingClientRect();
-      return { figsH: r.height, figCount: figsEl.querySelectorAll('.mv-fig').length, imgW: img0.width, imgH: img0.height };
+      return !!el;
     }, pack);
     if (!strip) {
       problems.push('positive control: MVFigures.renderStrip returned null/no element for the fixture pack');
     } else {
-      if (strip.figCount !== 3) problems.push(`positive control: strip rendered ${strip.figCount} .mv-fig, expected 3`);
-      // Asserted as the COMPOSED height (96px image + 1px border top/bottom = 98), not the
-      // declared cap (104): a cap-only assertion cannot fail when the composed height quietly
-      // grows past what the cap was meant to bound, which is exactly the shape of defect this
-      // check exists to catch.
-      if (Math.round(strip.figsH) !== 98) problems.push(`positive control: .mv-figs composed height is ${Math.round(strip.figsH)}px, expected 98px (96px image + 1px border top/bottom)`);
-      if (strip.figsH > 104) problems.push(`positive control: .mv-figs rendered ${Math.round(strip.figsH)}px, over its own declared 104px cap`);
-      if (Math.round(strip.imgW) !== 128 || Math.round(strip.imgH) !== 96) problems.push(`positive control: .mv-fig-img box is ${Math.round(strip.imgW)}x${Math.round(strip.imgH)}, expected 128x96`);
-      note(`positive control: strip rendered ${strip.figCount} thumb(s), composed height ${Math.round(strip.figsH)}px, image box ${Math.round(strip.imgW)}x${Math.round(strip.imgH)}`);
-
-      // ---- lightbox opens from a photo thumb ----
-      await page.evaluate(() => document.querySelectorAll('#fo-probe .mv-fig')[0].click());
-      const photoLb = await page.evaluate(() => {
-        const lb = document.querySelector('.mv-lightbox');
-        const img = lb && lb.querySelector('.mv-lb-img');
-        return { present: !!lb, src: img ? img.src : null };
-      });
-      if (!photoLb.present) problems.push('positive control: tapping the photo thumb did not open .mv-lightbox');
-      else if (!/f-photo\.png$/.test(photoLb.src)) problems.push(`positive control: lightbox opened the wrong image for the photo thumb: ${photoLb.src}`);
-      await page.evaluate(() => { const b = document.querySelector('.mv-lightbox'); if (b) b.click(); });
-      const closed = await page.evaluate(() => !document.querySelector('.mv-lightbox'));
-      if (!closed) problems.push('positive control: clicking the lightbox background did not close it');
-
-      // ---- plate thumb: two tabs, tab switch swaps the image and shows the overlay ----
-      await page.evaluate(() => document.querySelectorAll('#fo-probe .mv-fig')[2].click());
-      const plateBefore = await page.evaluate(() => ({
-        tabs: document.querySelectorAll('.mv-plate-tab').length,
-        src: document.querySelector('.mv-lb-img').src,
-        overlay: !!document.querySelector('.mv-lb-overlay'),
-      }));
-      if (plateBefore.tabs !== 2) problems.push(`positive control: plate lightbox shows ${plateBefore.tabs} tab(s), expected 2`);
-      if (!/plate-a\.png$/.test(plateBefore.src)) problems.push(`positive control: plate lightbox opened on the wrong view: ${plateBefore.src}`);
-      if (plateBefore.overlay) problems.push('positive control: view A should carry no overlay, but .mv-lb-overlay is present');
-
-      await page.evaluate(() => document.querySelectorAll('.mv-plate-tab')[1].click());
-      const plateAfter = await page.evaluate(() => ({
-        src: document.querySelector('.mv-lb-img').src,
-        overlaySrc: (document.querySelector('.mv-lb-overlay') || {}).src,
-        activeIdx: [...document.querySelectorAll('.mv-plate-tab')].findIndex((t) => t.classList.contains('active')),
-      }));
-      if (!/plate-b\.png$/.test(plateAfter.src)) problems.push(`positive control: tab switch did not swap .mv-lb-img to view B: ${plateAfter.src}`);
-      if (!plateAfter.overlaySrc || !/plate-b-overlay\.svg$/.test(plateAfter.overlaySrc)) problems.push(`positive control: view B's overlay did not appear after the tab switch (got "${plateAfter.overlaySrc}")`);
-      if (plateAfter.activeIdx !== 1) problems.push(`positive control: .active landed on tab index ${plateAfter.activeIdx}, expected 1`);
-      note(`positive control: plate tab switch ok (view A -> view B, overlay appeared, active class on tab 1)`);
-      await page.evaluate(() => { const b = document.querySelector('.mv-lightbox'); if (b) b.click(); });
+      await assertFigureStrip(page, '#fo-probe', [figuresById.get('fig-photo'), figuresById.get('fig-chart'), figuresById.get('fig-plate')], problems, note, 'positive control');
     }
+
+    const railOk = await page.evaluate((pk) => {
+      const host = document.querySelector('#fo-probe-rail');
+      window.MVFigures.renderItemFigure(pk, 'fig-chart', host);
+      return true;
+    }, pack);
+    if (railOk) await assertItemFigureRail(page, '#fo-probe-rail', figuresById.get('fig-chart'), problems, note, 'positive control');
   } finally {
-    await page.evaluate(() => { const o = document.querySelector('#fo-probe'); if (o) o.remove(); }).catch(() => {});
+    await page.evaluate(() => {
+      const o = document.querySelector('#fo-probe'); if (o) o.remove();
+      const o2 = document.querySelector('#fo-probe-rail'); if (o2) o2.remove();
+    }).catch(() => {});
   }
 
-  // ---- showPackLevelComplete, called directly: reveal card at 3 stars, none at 0 stars ----
+  // ---- showPackLevelComplete, called directly: reveal card at 3 stars (with the RIGHT figure),
+  //      none at 0 stars, and no #lc-reveal host at all on a reveal-less level ----
   // Hand-off (Task 6): the `stars > 0 && lv.reveal` gate and the conditional #lc-reveal host div
-  // had zero repo-resident coverage; this is that coverage's home.
+  // had zero repo-resident coverage; this is that coverage's home. Fix round 1: a card/tile COUNT
+  // match alone cannot tell a right figure from a wrong one, so the rendered image src is checked
+  // against level 0's actual reveal.figureId too, and a third call proves a reveal-less level
+  // (level 1 in this fixture) never even builds the host div.
+  const revealFig = figuresById.get(pack.levels[0].reveal.figureId);
+  const wantRevealSuffix = (revealFig.kind === 'plate' ? revealFig.views[0].src : revealFig.src).split('/').pop();
+  const revealBefore = problems.length;
+
   const hi = await page.evaluate((pk) => {
     window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 0, 2, 3);
+    const img = document.querySelector('#lc-reveal .mv-rv-img');
     return {
       cards: document.querySelectorAll('#lc-reveal .mv-rv-card').length,
       tiles: document.querySelectorAll('#lc-reveal .mv-rv-tile').length,
+      imgSrc: img ? img.src : null,
     };
   }, pack);
   if (hi.cards !== 1) problems.push(`positive control: showPackLevelComplete at 3 stars rendered ${hi.cards} .mv-rv-card, expected 1`);
   if (hi.tiles !== 12) problems.push(`positive control: showPackLevelComplete at 3 stars rendered ${hi.tiles} .mv-rv-tile, expected 12`);
+  if (!hi.imgSrc || !hi.imgSrc.endsWith(wantRevealSuffix)) problems.push(`positive control: reveal card image src "${hi.imgSrc}" does not match level 0's reveal figure (expected to end with "${wantRevealSuffix}")`);
 
   const lo = await page.evaluate((pk) => {
     window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 0, 2, 0);
@@ -450,7 +645,13 @@ async function fixturePositiveControl(page, problems, note) {
   }, pack);
   if (lo.cards !== 0) problems.push(`positive control: showPackLevelComplete at 0 stars rendered ${lo.cards} .mv-rv-card, expected 0 (the reveal must not show on a level not cleared)`);
 
-  note(`positive control: showPackLevelComplete reveal card: 3 stars -> ${hi.cards} card/${hi.tiles} tiles, 0 stars -> ${lo.cards} card`);
+  const none = await page.evaluate((pk) => {
+    window.showPackLevelComplete({ color: '#7aa8ff' }, pk, 1, 2, 3);
+    return { hostPresent: !!document.querySelector('#lc-reveal') };
+  }, pack);
+  if (none.hostPresent) problems.push('positive control: showPackLevelComplete on a reveal-less level (level 1) still emitted an #lc-reveal host');
+
+  if (problems.length === revealBefore) note(`positive control: showPackLevelComplete reveal card: 3 stars -> ${hi.cards} card/${hi.tiles} tiles (correct figure), 0 stars -> ${lo.cards} card, reveal-less level -> no host`);
 }
 
 async function fixtureNegativeControl(page, problems, note) {
