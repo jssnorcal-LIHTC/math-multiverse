@@ -15,6 +15,14 @@
   "repeatPolicy": "rotate",
   "figures": [
     {
+      "id": "fig-rivers-map",
+      "kind": "map",
+      "caption": "The two river systems Case File Zero turns on: the Tigris and Euphrates in Mesopotamia, and the Nile to the west.",
+      "credit": "Built for this pack; coastlines and rivers traced from Natural Earth (public domain)",
+      "alt": "A map of the eastern Mediterranean and the Persian Gulf. Two blue rivers, the Tigris and the Euphrates, run southeast across Mesopotamia. A third, the Nile, runs north through Egypt with desert on both sides. A note reads that the Tigris and Euphrates flooded every year but were hard to predict, coming early some years and late in others, while the Nile flooded on a far steadier yearly schedule.",
+      "src": "art/firsthand-g6/fig-rivers-map.svg"
+    },
+    {
       "id": "fig-cylinder-seal",
       "kind": "photo",
       "caption": "A Sumerian cylinder seal beside the modern impression rolled from it.  The stone is about the size of a thumb; the long picture is what it prints.",
@@ -85,6 +93,7 @@
       "title": "Case File Zero: Before the First City",
       "genre": "informational",
       "docKind": "case-file",
+      "figureIds": ["fig-rivers-map", "fig-cylinder-seal"],
       "source": "original",
       "text": "The Provenance Office keeps one promise.  Nothing gets filed as fact until the evidence proves it.  Old claims drift as time passes.  Conquerors rewrite the past to look better.  Rivals erase what came before them.  Forgers invent whole records from nothing.  A new field Recorder's first job is simple.  Open the oldest case in the whole record, and find where solid ground begins.\n\nFor most of human history, people moved with the seasons, living in small bands and hunting and gathering wild food.  No single place could feed a group for long, so nobody built anything meant to last.  Then, in a few river valleys, people learned a new trick.  They planted seeds on purpose and waited for a harvest.  Farming grew more food than hunting ever had, and extra food let some people stop searching for their next meal.  They settled down instead, and villages grew into towns.  Some towns grew large enough to become the first cities.\n\nTwo rivers explain why the first cities rose where they did.  In Mesopotamia, the Tigris and the Euphrates flooded every year, spreading fresh soil across the land nearby.  That soil grew far more food than dry ground could.  The floods were hard to predict, though, coming early some years and late in others.  Managing that water took real teamwork, canals, walls, and shared rules.  Farther west, the Nile flooded on a far steadier yearly schedule, so Egyptian farmers could plan around it.  Deserts on both sides of the Nile kept most invaders away, and a steadier, safer valley let Egypt unite sooner.\n\nBoth rivers prove the same rule the Office repeats to every new Recorder.  Geography decided where a civilization could begin.  What people built next is where the record gets interesting."
     },
