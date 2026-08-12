@@ -65,6 +65,24 @@ const { DOC_KINDS: DOC_KINDS_FOR_CONTRAST } = require('./validate-pack.js');
 // records for itself in engine.css.
 const TITLE_CONTRAST_FLOOR = 4.5;
 
+// Ticket 1.1.  The respond panel must read as a DIFFERENT MATERIAL from the reading panel, on
+// every skin, in the same direction on every skin.  The existing per-item assertions below
+// (itemBg is painted at all, itemBg !== passageBg, the 2px accent edge) are all satisfied by a
+// one-percent difference, and that is exactly what shipped: measured, the console sat 1.106:1
+// above the untinted sheet and 1.09 to 1.10:1 BELOW the three tinted ones, so on 37 of the 85
+// dressed passages the raised console was the darker surface.
+//
+// 1.15 is not a fresh invention.  It is the bottom of the 1.15 to 1.25:1 band the docKind tints
+// themselves were tuned against by measuring composited luminance (engine.css records those
+// numbers per kind).  A separation that has to survive a dimmed iPad at arm's length does not get
+// a weaker bar than a background tint.
+//
+// DIRECTION IS PART OF THE ASSERTION, not just magnitude.  A ratio is symmetric, so a check on
+// magnitude alone would accept the console being darker than the document on some skins and
+// lighter on others, which is worse than a small step: the surface that means "you operate this"
+// would change its relationship to the page from passage to passage.
+const GROUND_SEPARATION_FLOOR = 1.15;
+
 function startServer() {
   return new Promise((resolve) => {
     const server = http.createServer((req, res) => {
@@ -190,25 +208,60 @@ function startServer() {
 
       const box = document.querySelector('.mv-passage');
       const title = document.querySelector('.mv-passage-title');
+      const item = document.querySelector('.mv-item');
       const frame = document.querySelector('.host-frame') || document.querySelector('#app') || document.body;
       if (!box || !title) return null;
       const frameBg = parse(getComputedStyle(frame).backgroundColor) || { r: 8, g: 9, b: 11, a: 1 };
+      const lumOf = (c) => lum(c);
+      const groundFor = () => {
+        const cs = getComputedStyle(box);
+        return over(parse(cs.backgroundImage), over(parse(cs.backgroundColor), frameBg));
+      };
       const prev = box.dataset.dockind;
       const out = [];
-      for (const k of kinds) {
-        box.dataset.dockind = k;
-        const cs = getComputedStyle(box);
-        const wash = parse(cs.backgroundColor);
-        const tint = parse(cs.backgroundImage);      // the skin's flat linear-gradient
-        const ground = over(tint, over(wash, frameBg));
-        const fg = resolve(getComputedStyle(title).color);
-        if (!fg || !ground) { out.push({ kind: k, ratio: null, unresolved: true }); continue; }
-        out.push({ kind: k, ratio: +ratio(fg, ground).toFixed(2) });
+      // Ticket 1.1: the respond panel's own composited ground, measured once. `null` in this list
+      // is the no-docKind case, which is the ground 8 of the 11 kinds fall back to and is not
+      // covered by sweeping the kinds alone.
+      const itemGround = item ? over(parse(getComputedStyle(item).backgroundColor), frameBg) : null;
+      const separation = [];
+      for (const k of [null, ...kinds]) {
+        if (k === null) delete box.dataset.dockind; else box.dataset.dockind = k;
+        const ground = groundFor();
+        if (k !== null) {
+          const fg = resolve(getComputedStyle(title).color);
+          if (!fg || !ground) out.push({ kind: k, ratio: null, unresolved: true });
+          else out.push({ kind: k, ratio: +ratio(fg, ground).toFixed(2) });
+        }
+        if (itemGround && ground) {
+          separation.push({
+            kind: k || '(no docKind)',
+            ratio: +ratio(itemGround, ground).toFixed(3),
+            itemIsLighter: lumOf(itemGround) > lumOf(ground),
+            passageRgb: `rgb(${Math.round(ground.r)},${Math.round(ground.g)},${Math.round(ground.b)})`,
+          });
+        }
       }
       if (prev === undefined) delete box.dataset.dockind; else box.dataset.dockind = prev;
-      return out;
+
+      // NEGATIVE CONTROL, run in the same pass on the same box: paint the respond panel with the
+      // passage's own untinted ground and re-measure. It must come back at or near 1.00, which is
+      // what proves this sweep can still report a failure rather than being satisfied by whatever
+      // it finds. Restored immediately; every geometry read above has already happened.
+      let control = null;
+      if (item && itemGround) {
+        const prevInline = item.style.backgroundColor;
+        delete box.dataset.dockind;
+        const flat = groundFor();
+        item.style.backgroundColor = `rgb(${Math.round(flat.r)},${Math.round(flat.g)},${Math.round(flat.b)})`;
+        const forced = over(parse(getComputedStyle(item).backgroundColor), frameBg);
+        control = { ratio: +ratio(forced, flat).toFixed(3) };
+        item.style.backgroundColor = prevInline;
+        if (prev === undefined) delete box.dataset.dockind; else box.dataset.dockind = prev;
+      }
+
+      return { titles: out, itemRgb: itemGround ? `rgb(${Math.round(itemGround.r)},${Math.round(itemGround.g)},${Math.round(itemGround.b)})` : null, separation, control };
     }, DOC_KINDS_FOR_CONTRAST);
-    titleContrasts.push({ pack: entry.id, rows: titleContrast });
+    titleContrasts.push({ pack: entry.id, rows: titleContrast && titleContrast.titles, surfaces: titleContrast });
 
     const items = await page.evaluate(async (packId) => {
       window.__pack = await (await fetch(`packs/${packId}.json`)).json();
@@ -400,6 +453,38 @@ function startServer() {
       if (r.ratio < TITLE_CONTRAST_FLOOR) {
         problems.push(`${t.pack}: .mv-passage-title is ${r.ratio}:1 against the ${r.kind} ground, under the ${TITLE_CONTRAST_FLOOR}:1 floor`);
       }
+    }
+  }
+
+  // ---- ticket 1.1: the ground separation between the reading sheet and the respond console ----
+  console.log('\nrespond-panel ground against each passage ground (floor ' + GROUND_SEPARATION_FLOOR + ':1, console must be the LIGHTER surface):');
+  for (const t of titleContrasts) {
+    const s = t.surfaces;
+    if (!s || !Array.isArray(s.separation) || !s.separation.length) {
+      problems.push(`${t.pack}: the ground separation was never measured -- this sweep reported nothing, which is a failure and not a clean run`);
+      continue;
+    }
+    // Completeness, asserted rather than assumed, exactly as the title sweep does: the 11 kinds
+    // plus the no-docKind ground the other eight fall back to.
+    if (s.separation.length !== DOC_KINDS_FOR_CONTRAST.length + 1) {
+      problems.push(`${t.pack}: ground separation measured ${s.separation.length} of ${DOC_KINDS_FOR_CONTRAST.length + 1} grounds -- the sweep is incomplete, so a skin exists whose separation nothing checked`);
+    }
+    const worst = s.separation.reduce((m, r) => (r.ratio < m.ratio ? r : m), s.separation[0]);
+    console.log(`  ${t.pack.padEnd(22)} console ${s.itemRgb}  worst ${String(worst.ratio).padStart(6)}:1 on ${worst.kind} ${worst.passageRgb}  (${s.separation.length} grounds)`);
+    for (const r of s.separation) {
+      if (!r.itemIsLighter) {
+        problems.push(`${t.pack}: on the ${r.kind} ground the PASSAGE ${r.passageRgb} is lighter than the respond panel ${s.itemRgb} -- the raised console reads as the recessed surface on this skin`);
+      } else if (r.ratio < GROUND_SEPARATION_FLOOR) {
+        problems.push(`${t.pack}: the respond panel is ${r.ratio}:1 against the ${r.kind} ground, under the ${GROUND_SEPARATION_FLOOR}:1 floor -- the two surfaces read as one material`);
+      }
+    }
+    // The negative control has to fail, or the sweep above proves nothing.
+    if (!s.control) {
+      problems.push(`${t.pack}: the ground-separation NEGATIVE CONTROL did not run, so nothing shows this sweep can still fail`);
+    } else if (s.control.ratio >= GROUND_SEPARATION_FLOOR) {
+      problems.push(`${t.pack}: the ground-separation NEGATIVE CONTROL measured ${s.control.ratio}:1 with the respond panel painted the passage's OWN ground -- it should be at or near 1.00, so this measurement cannot see two surfaces that match and every number above it is void`);
+    } else {
+      console.log(`  ${' '.repeat(22)} negative control: respond panel forced to the passage's own ground -> ${s.control.ratio}:1, correctly under the floor`);
     }
   }
 
