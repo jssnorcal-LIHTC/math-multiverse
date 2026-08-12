@@ -246,6 +246,56 @@ check('genSvg keeps the legitimate lo === hi widening (flat data is not refused)
   assertTrue(svg.includes('<polyline'), 'flat data should still render, not refuse');
 });
 
+// ---- gate item 13 (owner ruling 26-0811): the explicit y domain ----
+//
+// fig-warming-curves plots a percentage running 39 to 76, and the inferred axis is 30 to 80. That
+// axis spans half the natural range, so every vertical distance DOUBLES: the fall paints from 92%
+// of the plot height to 18%, which reads as a fall to a fifth where the data says a fall to a half.
+// These checks pin the fix and, more importantly, pin the three ways it can be got wrong silently.
+
+const DOMAIN_BASE = {
+  type: 'line', xLabel: 'season', yLabel: 'fledge rate (percent)',
+  series: [{ label: 'fledge rate', points: [[1, 76], [10, 64], [20, 52], [30, 39]] }],
+};
+const heightFrac = (L, v) => (L.plotB - L.yScale(v)) / (L.plotB - L.plotT);
+
+check('an explicit yDomain replaces the inferred axis and makes the painted ratio truthful', () => {
+  const withDomain = layout({ ...DOMAIN_BASE, yDomain: [0, 100] });
+  assert.deepStrictEqual(withDomain.yTicks, [0, 20, 40, 60, 80, 100], 'ticks did not follow the pinned domain');
+  // The load-bearing assertion is not the tick list, it is what a child's eye reads off the shape.
+  const painted = heightFrac(withDomain, 39) / heightFrac(withDomain, 76);
+  assertTrue(Math.abs(painted - 39 / 76) < 1e-9,
+    `the painted last/first ratio is ${painted.toFixed(4)}, but the data's own ratio is ${(39 / 76).toFixed(4)}`);
+});
+
+check('NEGATIVE CONTROL: without the domain the same table still paints the exaggerated axis', () => {
+  // Proves the check above is measuring the domain and not something that was always true. If this
+  // ever goes green alongside a truthful ratio, the generator changed underneath these checks.
+  const inferred = layout(DOMAIN_BASE);
+  assert.deepStrictEqual(inferred.yTicks, [30, 40, 50, 60, 70, 80]);
+  const painted = heightFrac(inferred, 39) / heightFrac(inferred, 76);
+  assertTrue(painted < 0.25,
+    `the inferred axis should still read as roughly a fifth; measured ${painted.toFixed(4)}`);
+});
+
+check('genSvg refuses a yDomain that is malformed, reversed, clipping, or not tick-aligned', () => {
+  const bad = [
+    { label: 'malformed pair', yDomain: [0] },
+    { label: 'non-numeric', yDomain: [0, '100'] },
+    { label: 'reversed', yDomain: [100, 0] },
+    { label: 'clips the data', yDomain: [0, 50] },       // would draw marks outside the plot
+    { label: 'not tick-aligned', yDomain: [0, 95] },     // would silently draw a 0-100 axis instead
+  ];
+  bad.forEach((b) => {
+    let threw = false;
+    try { genSvg({ ...DOMAIN_BASE, yDomain: b.yDomain }, ACCENT); } catch (e) { threw = true; }
+    assertTrue(threw, `a ${b.label} yDomain was accepted instead of refused`);
+  });
+});
+
+// The panels-mode half of gate item 13 lives with the other panels checks below, since it needs
+// SAMPLE_PANELS_LINE as its control fixture.
+
 // ---- item 8: refuse what cannot be drawn truthfully ----
 
 check('genSvg refuses a bar chart with unequal series point counts, naming the reason', () => {
@@ -418,6 +468,27 @@ const SAMPLE_PANELS_BAR = {
   ],
   categoryLabels: ['Sable Flats', 'Cairn Bay'],
 };
+
+// Gate item 13, panels half. Each panel scales independently, which is the whole point of panels
+// mode, so a single y domain has no meaning here and a per-panel one is deliberately not built.
+// The field must therefore REFUSE rather than be ignored: a future author who sets it, gets the
+// inferred axis anyway and sees no error has no way to learn the field did nothing. This is the
+// same class as the V1 finding where arming a gate silently removed its own controls.
+check('panels mode REFUSES a yDomain rather than ignoring it', () => {
+  // Positive control first. Without it, both refusals below could be firing for some unrelated
+  // reason in the fixture and would still read as a pass.
+  assertTrue(genSvg(SAMPLE_PANELS_LINE, ACCENT).startsWith('<svg'),
+    'the control panels table did not render, so the refusals below prove nothing about yDomain');
+  let topLevel = false, perPanel = false;
+  try { genSvg({ ...SAMPLE_PANELS_LINE, yDomain: [0, 100] }, ACCENT); } catch (e) { topLevel = true; }
+  try {
+    genSvg({ ...SAMPLE_PANELS_LINE,
+      panels: [{ ...SAMPLE_PANELS_LINE.panels[0], yDomain: [0, 500] }, SAMPLE_PANELS_LINE.panels[1]] },
+    ACCENT);
+  } catch (e) { perPanel = true; }
+  assertTrue(topLevel, 'a top-level yDomain was silently ignored in panels mode');
+  assertTrue(perPanel, 'a per-panel yDomain was silently ignored in panels mode');
+});
 // Fix round 4: clean, distinct-per-panel ratios (panel 0 doubles, panel 1 triples) so a bug that
 // shares one scale across both panels, or measures height from the wrong zero, cannot coincidentally
 // produce the right ratio in one panel while being wrong in the other.

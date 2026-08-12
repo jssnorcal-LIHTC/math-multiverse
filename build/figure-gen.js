@@ -186,6 +186,47 @@ function niceTicks(lo, hi, targetCount, integerOnly) {
   return { ticks, lo: niceLo, hi: niceHi };
 }
 
+// V2 gate item 13 (owner ruling, 26-0811): a dataTable may PIN its own y domain, which
+// paddedExtent cannot infer from the numbers alone. The case that forced it: fig-warming-curves
+// plots a PERCENTAGE whose data runs 39 to 76, so the 8% pad plus nice-rounding hands it a 30-to-80
+// axis. That axis spans half the natural range, so every vertical distance on the chart is exactly
+// DOUBLED: the fall from 76 to 39 paints from 92% of the plot height down to 18%, and a child
+// reading the shape (which is what a child reads first) sees a fall to about a fifth where the data
+// says a fall to about a half.
+//
+// Why this is a per-figure field and not a generator-wide rule. Neither available rule is safe.
+// fig-dome-drift plots CO2 at 410-452 ppm and oxygen at 19.5-20.5 PERCENT, so a blanket zero floor
+// flattens its CO2 drift to 9% of a panel, and a "yLabel says percent, therefore 0 to 100" rule
+// flattens its oxygen panel to a 1% band -- in both cases destroying the very trend the figure
+// exists to show. The domain is knowledge about ONE quantity's natural full scale, so it belongs to
+// the figure that has it.
+//
+// Refuses rather than silently adjusting, in each of the three ways this can be got wrong:
+//   - a malformed pair, so a typo cannot fall through to the inferred domain unnoticed;
+//   - a domain that does not contain the data, which would draw marks outside the plot;
+//   - a domain that nice-rounding would MOVE, since honouring a requested [0, 95] as a drawn
+//     0-to-100 would put a different axis on screen than the pack asked for and the caption may
+//     describe.
+function explicitYDomain(dt, allY) {
+  const d = dt && dt.yDomain;
+  if (d === undefined || d === null) return null;
+  if (!Array.isArray(d) || d.length !== 2
+      || !d.every((v) => typeof v === 'number' && Number.isFinite(v))) {
+    refuse(`yDomain must be a pair of finite numbers, got ${JSON.stringify(d)}`);
+  }
+  const [lo, hi] = d;
+  if (!(lo < hi)) refuse(`yDomain must run low to high, got [${lo}, ${hi}]`);
+  const dataLo = Math.min(...allY), dataHi = Math.max(...allY);
+  if (lo > dataLo || hi < dataHi) {
+    refuse(`yDomain [${lo}, ${hi}] does not contain the series' own range [${n2(dataLo)}, ${n2(dataHi)}]; refusing rather than drawing marks outside the plot`);
+  }
+  const nice = niceTicks(lo, hi, TICKS_TARGET, false);
+  if (nice.lo !== lo || nice.hi !== hi) {
+    refuse(`yDomain [${lo}, ${hi}] is not tick-aligned; nice rounding would move the drawn axis to [${nice.lo}, ${nice.hi}]. Pick a domain the tick step divides evenly.`);
+  }
+  return [lo, hi];
+}
+
 // Panel tick density fix, headroom pass (team-lead finding, round 3): when divisions are scarce (a
 // short panel), niceStep()'s standard {1,2,5,10}-per-decade family can only reach past the data's
 // own max by jumping to the NEXT family member up -- fig-climographs' swing panel (data max 68,
@@ -304,9 +345,13 @@ function layout(dataTable) {
   }
 
   const allY = points.map((p) => p[1]);
-  const yDomainRaw = type === 'bar'
+  // Gate item 13: an explicit yDomain, where the dataTable declares one, replaces the inferred
+  // extent entirely. explicitYDomain has already proved the pair contains the data and survives
+  // nice-rounding unmoved, so the niceTicks call below returns exactly the requested bounds.
+  const yExplicit = explicitYDomain(dt, allY);
+  const yDomainRaw = yExplicit || (type === 'bar'
     ? paddedExtent([Math.min(0, ...allY), Math.max(0, ...allY)])   // item 2: bar spans zero
-    : paddedExtent(allY);
+    : paddedExtent(allY));
   const yNice = niceTicks(yDomainRaw[0], yDomainRaw[1], TICKS_TARGET, false);
   const yTickLabels = yNice.ticks.map((v) => n2(v));
   const plotL = leftMarginFor(yTickLabels);
@@ -376,6 +421,20 @@ function layoutPanels(dataTable) {
   const dt = dataTable || {};
   const { type, pointsPerPanel } = validatePanelsTable(dt);
   const panels = dt.panels;
+
+  // Gate item 13: yDomain is a FULL-HEIGHT-chart field. Each panel here carries its own
+  // independent scale (that independence is the whole reason panels mode exists), so a single
+  // top-level domain has no meaning, and a per-panel one is deliberately not implemented. Refuse
+  // rather than ignore: a future author who sets it and silently gets the inferred axis anyway
+  // would have no way to tell the field did nothing.
+  if (dt.yDomain !== undefined) {
+    refuse('yDomain is not supported in panels mode; each panel scales independently');
+  }
+  panels.forEach((p, i) => {
+    if (p && p.yDomain !== undefined) {
+      refuse(`panel ${i} declares yDomain, which is not supported in panels mode; each panel scales independently`);
+    }
+  });
 
   const notes = (Array.isArray(dt.notes) ? dt.notes : []).slice(0, MAX_NOTES);
   const outerT = TOP;
