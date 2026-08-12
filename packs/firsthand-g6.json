@@ -13,11 +13,146 @@
     "grandGoal": "Senior Recorder"
   },
   "repeatPolicy": "rotate",
+  "figures": [
+    {
+      "id": "fig-rome-plate",
+      "kind": "plate",
+      "caption": "Piranesi's view of the Roman Forum, etched about 1775, when it was pasture and known as the Campo Vaccino.  The second view is a Roman portrait bust from the same file.",
+      "credit": "Giovanni Battista Piranesi, etching, ca. 1775; The Metropolitan Museum of Art (accession 37.17.13), Open Access, public domain.  Second view: Met accession 14.37.",
+      "alt": "An eighteenth-century etching looking across the Roman Forum from the Capitol. The Arch of Septimius Severus stands at the lower left, tall columns of the Temple of Vespasian rise at the right, broken column drums and carved capitals lie in the foreground, and the Colosseum sits on the skyline in the distance. A numbered key and the title Veduta di Campo Vaccino are printed along the bottom edge.",
+      "views": [
+        { "label": "The Forum (etching)", "src": "art/firsthand-g6/fig-rome-plate.jpg" },
+        { "label": "Portrait (photo)", "src": "art/firsthand-g6/fig-roman-bust.jpg" }
+      ]
+    },
+    {
+      "id": "fig-exile-map",
+      "kind": "map",
+      "caption": "Two kingdoms where one had stood: Israel with its capital at Samaria, Judah with the Temple in Jerusalem, and the direction Assyria moved the defeated people.",
+      "credit": "Built for this pack; coastlines and rivers traced from Natural Earth (public domain)",
+      "alt": "A map of the eastern Mediterranean and Mesopotamia. Samaria and Jerusalem are marked in the Levant, labelled Israel and Judah. A dashed arrow curves north-east from Samaria to Assyria. A note says Assyrian records do not fully agree about which king finished the siege, and that this file keeps that disagreement.",
+      "src": "art/firsthand-g6/fig-exile-map.svg"
+    },
+    {
+      "id": "fig-temple-timeline",
+      "kind": "diagram",
+      "caption": "The order of events this file states, from the First Temple to a school at Yavneh.  The passage gives no years, so none are shown.",
+      "credit": "Built for this pack",
+      "alt": "A vertical timeline of five steps with no dates: the Babylonian army conquers Judah and destroys the First Temple; many Israelites are forced into exile, the diaspora; Persian rulers let the exiles return and build a Second Temple on the same site; the Second Temple stands for centuries and a Roman army destroys it during a revolt; Yohanan ben Zakkai opens a school at Yavneh and teaches with no Temple at all.",
+      "src": "art/firsthand-g6/fig-temple-timeline.svg"
+    },
+    {
+      "id": "fig-persia-maps",
+      "kind": "map",
+      "caption": "The three places this account turns on: Thermopylae, Plataea, and Salamis, which it treats differently from the other two.",
+      "credit": "Built for this pack; coastlines and rivers traced from Natural Earth (public domain)",
+      "alt": "A map of central Greece. Thermopylae is marked and labelled a narrow mountain pass; Plataea is marked and labelled open ground; Salamis is drawn as an open dashed circle. A note explains that Salamis is drawn open because this account treats that sea battle differently.",
+      "src": "art/firsthand-g6/fig-persia-maps.svg"
+    },
+    {
+      "id": "fig-indus-map",
+      "kind": "map",
+      "caption": "The Indus and its two grid-planned cities, Harappa and Mohenjo-daro.",
+      "credit": "Built for this pack; coastlines and rivers traced from Natural Earth (public domain)",
+      "alt": "A map of the Indus valley. The river runs south to the sea. Harappa and Mohenjo-daro are marked. Notes say both cities sat on careful grids with baked-brick homes linked to covered drains, that their script was cut into thousands of small stone seals, and that no scholar has ever managed to read it.",
+      "src": "art/firsthand-g6/fig-indus-map.svg"
+    },
+    {
+      "id": "fig-silkroad-map",
+      "kind": "map",
+      "caption": "The web of routes later writers called the Silk Road: silk carried west, horses and glass and other goods brought back, and Buddhism travelling the same road from India.",
+      "credit": "Built for this pack; coastlines and rivers traced from Natural Earth (public domain)",
+      "alt": "A map of Asia with three curved arrows. One runs west from Han China, labelled silk carried west. A dashed arrow runs back east, labelled horses, glass, and goods from far regions. A third dotted arrow runs from India north-east into China, labelled Buddhism from India. A note says Zhang Qian is often credited with opening these links, though trade along parts of the route likely came before his trip.",
+      "src": "art/firsthand-g6/fig-silkroad-map.svg"
+    },
+    {
+      "id": "fig-rome-map",
+      "kind": "map",
+      "caption": "Rome and Constantinople, the two capitals behind the empire’s division into a western and an eastern half.",
+      "credit": "Built for this pack; coastlines and rivers traced from Natural Earth (public domain)",
+      "alt": "A map of the Mediterranean. Rome and Constantinople are marked, with the western and eastern halves labelled on either side. No border is drawn between them. Notes say the empire was divided in three hundred ninety-five CE, that the west thinned out, that Rome was sacked twice, and that its last emperor was removed in four hundred seventy-six.",
+      "src": "art/firsthand-g6/fig-rome-map.svg"
+    },
+    {
+      "id": "fig-rivers-map",
+      "kind": "map",
+      "caption": "The two river systems Case File Zero turns on: the Tigris and Euphrates in Mesopotamia, and the Nile to the west.",
+      "credit": "Built for this pack; coastlines and rivers traced from Natural Earth (public domain)",
+      "alt": "A map of the eastern Mediterranean and the Persian Gulf. Two blue rivers, the Tigris and the Euphrates, run southeast across Mesopotamia. A third, the Nile, runs north through Egypt with desert on both sides. A note reads that the Tigris and Euphrates flooded every year but were hard to predict, coming early some years and late in others, while the Nile flooded on a far steadier yearly schedule.",
+      "src": "art/firsthand-g6/fig-rivers-map.svg"
+    },
+    {
+      "id": "fig-cylinder-seal",
+      "kind": "photo",
+      "caption": "A Sumerian cylinder seal beside the modern impression rolled from it.  The stone is about the size of a thumb; the long picture is what it prints.",
+      "credit": "The Metropolitan Museum of Art, Ancient West Asian Art (accession 1984.383.7), Open Access, public domain",
+      "alt": "At left a small carved stone cylinder.  At right a long clay impression rolled from it, showing a row of standing figures.",
+      "src": "art/firsthand-g6/fig-cylinder-seal.jpg"
+    },
+    {
+      "id": "fig-cuneiform-tablet",
+      "kind": "photo",
+      "caption": "A clay tablet from southern Mesopotamia, pressed with early signs and seal marks.  It is an account of goods, not a poem and not a law.",
+      "credit": "The Metropolitan Museum of Art, Ancient West Asian Art (accession 1988.433.1), Open Access, public domain",
+      "alt": "A small squarish clay tablet, light brown, covered in rows of shallow impressed marks and round punched holes, with a seal impression across part of the surface.",
+      "src": "art/firsthand-g6/fig-cuneiform-tablet.jpg"
+    },
+    {
+      "id": "fig-egypt-scribe",
+      "kind": "photo",
+      "caption": "A limestone statue of Nikare, an Egyptian official, seated cross-legged in the pose Egyptian sculpture kept for scribes.",
+      "credit": "The Metropolitan Museum of Art, Egyptian Art (accession 48.67), Open Access, public domain",
+      "alt": "A weathered limestone statue of a man seated cross-legged, hands resting on his lap, wearing a shoulder-length wig.",
+      "src": "art/firsthand-g6/fig-egypt-scribe.jpg"
+    },
+    {
+      "id": "fig-hoplite-amphora",
+      "kind": "photo",
+      "caption": "An Athenian jar painted about 460 BCE with a single armed warrior: crested helmet, round shield, spear.",
+      "credit": "The Metropolitan Museum of Art, Greek and Roman Art (accession 41.162.131), Open Access, public domain",
+      "alt": "A tall black two-handled jar.  On its body an orange-red figure of a warrior in a crested helmet strides to the right, carrying a large round shield and a spear.",
+      "src": "art/firsthand-g6/fig-hoplite-amphora.jpg"
+    },
+    {
+      "id": "fig-owl-coin",
+      "kind": "photo",
+      "caption": "The reverse of an Athenian silver tetradrachm: the owl of Athena, an olive sprig, and the first three letters of the city's name.",
+      "credit": "The Metropolitan Museum of Art, Greek and Roman Art (accession 2021.40.80), Open Access, public domain",
+      "alt": "A worn silver coin showing an owl facing forward, with a crescent and an olive sprig above its shoulder and three Greek letters at the right edge.",
+      "src": "art/firsthand-g6/fig-owl-coin.jpg"
+    },
+    {
+      "id": "fig-han-bronze",
+      "kind": "photo",
+      "caption": "A gilded bronze belt plaque made in north China during the Han dynasty, cast as a curled winged animal.",
+      "credit": "The Metropolitan Museum of Art, Asian Art (accession 24.174.6), Open Access, public domain",
+      "alt": "A small bronze plaque shaped like a curled winged creature, its raised outlines gilded gold against a dark ground.",
+      "src": "art/firsthand-g6/fig-han-bronze.jpg"
+    },
+    {
+      "id": "fig-roman-bust",
+      "kind": "photo",
+      "caption": "A Roman marble portrait bust of the emperor Gaius, better known as Caligula, carved during his own short reign.",
+      "credit": "The Metropolitan Museum of Art, Greek and Roman Art (accession 14.37), Open Access, public domain",
+      "alt": "A white marble bust of a young man with short cropped hair, his head turned slightly to his right, on a dark base.",
+      "src": "art/firsthand-g6/fig-roman-bust.jpg"
+    },
+    {
+      "id": "fig-indus-seal",
+      "kind": "photo",
+      "caption": "An Indus stamp seal and the modern impression taken from it.  The animal is clear; the row of signs above it is the script no scholar has ever managed to read.",
+      "credit": "The Metropolitan Museum of Art, Ancient West Asian Art (accession 49.40.1), Open Access, public domain",
+      "alt": "A small square seal at left and its pale clay impression at right, each showing a horned animal in profile above a short line of angular signs.",
+      "src": "art/firsthand-g6/fig-indus-seal.jpg"
+    }
+  ],
   "passages": [
     {
       "id": "p-t1-first-entry-briefing",
       "title": "Case File Zero: Before the First City",
       "genre": "informational",
+      "docKind": "case-file",
+      "figureIds": ["fig-rivers-map", "fig-cylinder-seal"],
       "source": "original",
       "text": "The Provenance Office keeps one promise.  Nothing gets filed as fact until the evidence proves it.  Old claims drift as time passes.  Conquerors rewrite the past to look better.  Rivals erase what came before them.  Forgers invent whole records from nothing.  A new field Recorder's first job is simple.  Open the oldest case in the whole record, and find where solid ground begins.\n\nFor most of human history, people moved with the seasons, living in small bands and hunting and gathering wild food.  No single place could feed a group for long, so nobody built anything meant to last.  Then, in a few river valleys, people learned a new trick.  They planted seeds on purpose and waited for a harvest.  Farming grew more food than hunting ever had, and extra food let some people stop searching for their next meal.  They settled down instead, and villages grew into towns.  Some towns grew large enough to become the first cities.\n\nTwo rivers explain why the first cities rose where they did.  In Mesopotamia, the Tigris and the Euphrates flooded every year, spreading fresh soil across the land nearby.  That soil grew far more food than dry ground could.  The floods were hard to predict, though, coming early some years and late in others.  Managing that water took real teamwork, canals, walls, and shared rules.  Farther west, the Nile flooded on a far steadier yearly schedule, so Egyptian farmers could plan around it.  Deserts on both sides of the Nile kept most invaders away, and a steadier, safer valley let Egypt unite sooner.\n\nBoth rivers prove the same rule the Office repeats to every new Recorder.  Geography decided where a civilization could begin.  What people built next is where the record gets interesting."
     },
@@ -25,6 +160,7 @@
       "id": "p-t1-hammurabi-recovered-entry",
       "title": "Recovered Entry: The Code of Hammurabi",
       "genre": "informational",
+      "docKind": "recovered-entry",
       "source": "original",
       "text": "This entry gathers the Provenance Office's own working translation.  It covers several clauses from the law code of Hammurabi.  Hammurabi was a king of Babylon in ancient Mesopotamia.  The stone the code was carved on still exists.  Nothing here is a forgery.  The dispute is not whether the code is real.  The dispute is what the code actually did for the people living under it.\n\nThe code's own opening lines state its purpose plainly.  Its laws exist so that a strong man cannot crush a weak one.  They exist so that a widow or an orphan can get a fair hearing.  Read alone, that sounds like protection for the whole kingdom equally.\n\nThe clauses that follow tell a more complicated story.  One clause covers a man of high standing who destroys another man's eye.  If the victim holds the same high standing, the attacker's own eye is destroyed in return.  A second clause covers that very same injury done to a man of common standing.  It orders a payment of silver instead of a matching injury.  A third clause covers that same injury done to an enslaved person.  It sets the payment lower still, at half the enslaved person's own value, paid to that person's owner.  The punishment changes with the victim's standing.  The injury itself never changes at all.\n\nOther surviving clauses cover house builders, merchants, and farmers.  Most of them share this same pattern.  A careless builder whose work kills a house owner is put to death.  That same builder's careless work, if it only kills the owner's enslaved worker, costs him a replacement instead.\n\nThe Provenance Office files this entry as verified but unresolved.  The code's opening promise and its actual clauses do not fully agree.  Did Hammurabi mean to protect ordinary people?  Or did he mainly mean to keep each rank of society fixed in its place?  That is the real question every Recorder assigned to this case has to weigh."
     },
@@ -32,6 +168,8 @@
       "id": "p-t1-nile-two-kingdoms",
       "title": "Case File: Two Kingdoms of the Nile",
       "genre": "informational",
+      "docKind": "case-file",
+      "figureIds": ["fig-egypt-scribe"],
       "source": "original",
       "text": "Egyptians believed their king, the pharaoh, was not an ordinary ruler.  They believed he held a kind of divine power.  His main job was keeping the whole world in balance, a balance Egyptians called ma'at.  Two pharaohs left a large mark on the record.  Hatshepsut ruled Egypt in her own right as a full pharaoh, not merely as a king's wife.  She sent a famous trading trip south along the coast.  Years later, Ramses the Second reigned for decades and built huge monuments.  He later signed one of the oldest peace deals in the whole record.\n\nReligion shaped how Egyptians treated their own dead.  Egyptians believed a spirit needed a preserved body to survive into the next life, so skilled workers made mummies to stop a body from decaying.  Wealthier Egyptians built large tombs and filled them with goods the dead were thought to need on the trip ahead.  That belief is the real reason the pyramids exist at all.\n\nSouth of Egypt, along the same river, sat the kingdom of Kush.  Egypt and Kush traded gold, ivory, and other goods for centuries, but their bond was never simply friendly.  Egypt's own armies took over Kush during Egypt's strongest era.  Years later, that balance flipped.  Kushite kings conquered Egypt itself and ruled it as pharaohs in their own right, keeping many Egyptian customs alongside their own.\n\nThe two peoples even wrote their history in different ways.  Mesopotamian scribes pressed wedge-shaped cuneiform marks into wet clay, using a cut reed, one tablet at a time.  Egyptian scribes instead drew or carved hieroglyphs onto papyrus and stone, a system built from hundreds of small pictures.  Both systems did the same basic job.  They let a record live on long after its maker was gone."
     },
@@ -39,6 +177,7 @@
       "id": "p-t2-covenant-and-kingdom",
       "title": "Case File: A Covenant Without a Kingdom Yet",
       "genre": "informational",
+      "docKind": "case-file",
       "source": "original",
       "text": "Most peoples in the old Near East worshipped many gods at once.  The Hebrew Bible describes something different taking root among a group later known as the Israelites.  It describes Abraham as the first to promise loyalty to one God alone.  In exchange, that account describes a covenant, a solemn promise of land and heirs.  That one choice is the seed of monotheism, the belief in exactly one God.  This whole file keeps coming back to that belief.\n\nThe Hebrew Bible next tells of years spent in Egypt.  Abraham's heirs became slaves there, under an Egyptian king.  It tells of Moses leading them out of that slavery.  That event is remembered as the Exodus.  At Mount Sinai, tradition holds that Moses got a code of law for his people to live by.  It renewed the same covenant Abraham had made years before.\n\nAfter reaching the land of Canaan, judges first led the Israelites, called on only when trouble struck.  Later, the Israelites chose kings instead.  Saul became the first.  David, the second, united the tribes more firmly and made Jerusalem his capital.  David's son Solomon built the First Temple there, one central place for the tradition's most sacred rites.\n\nFor years after Solomon, three things stood as one.  A king ruled.  A Temple centered worship.  A covenant explained why both stood at all.  The Office's next entry tests exactly how strong that link really was.  Outside armies later tore two of those three things away."
     },
@@ -46,6 +185,8 @@
       "id": "p-t2-surviving-without-temple",
       "title": "Case File: The Shortest File Outlasts Its Own Temple",
       "genre": "informational",
+      "docKind": "case-file",
+      "figureIds": ["fig-temple-timeline"],
       "source": "original",
       "text": "This case file is the shortest one in the whole Office archive.  That is exactly what makes it worth checking closely.  A tradition without a king, a Temple, or a homeland of its own should have simply faded away.  It should have faded into the peoples around it.  The record shows it did not.\n\nThe first blow came when the Babylonian army conquered the kingdom of Judah.  The army destroyed the First Temple in Jerusalem and forced many Israelites into exile, far from their own land.  That exile is remembered as the diaspora.  It grew as more people scattered even further from home over later years.  Years later, Persian rulers let the exiles return and build a Second Temple on that same site.\n\nThe Second Temple stood for centuries.  Then a Roman army destroyed it too, during a revolt long after Israel's old kings had reigned.  This second loss should have finished the tradition for good.  Rome had already crushed the state.  Now the Temple, the tradition's central home, was gone too.\n\nThe record credits a teacher named Yohanan ben Zakkai with the turn that followed.  Tradition holds that he escaped the besieged city.  He got permission from Roman rulers to open a small school in a town called Yavneh.  Teaching there, without any Temple at all, he changed the tradition's whole center of gravity.  Priests had once made offerings in one sacred building.  Now study, prayer, and law took that place, and any group could carry those things with it, anywhere.\n\nThat shift is the real claim behind this file's short length, now fully checked.  The tradition outlived its own state and its own Temple.  It did not rebuild either one.  It proved instead that it had never truly leaned on them alone."
     },
@@ -53,6 +194,8 @@
       "id": "p-t3-source-a-athenian",
       "title": "Source A: The Athenian Account, Filed by the Aegean Desk",
       "genre": "informational",
+      "docKind": "source-desk",
+      "figureIds": ["fig-owl-coin"],
       "source": "original",
       "text": "Greece's own land decided its shape long before any war began.  Mountains cut the land into small, separate pockets, and the sea reached almost every one of them.  No single valley could feed a kingdom big enough to rule the whole region.  Instead, dozens of separate city-states grew up.  Each one ran its own government.  Each one guarded its own coast.\n\nAthens took its own government further than most cities dared.  Its assembly let adult male citizens vote directly on the city's laws.  This system is remembered as democracy, rule by the people themselves.  Enslaved people, foreigners, and women could not vote.  The system's real reach was smaller than the word alone suggests.  Still, within that limited group, Athens gave plain citizens a truly direct voice.  A culture built on open debate grew up alongside it.  A thinker named Socrates walked the city asking sharp questions.  His questions made easy ideas fall apart in public.\n\nThe Persian Empire invaded Greece twice.  Athens filed its own account of what really won the war.  Athenian soldiers stood almost alone at Marathon.  They turned back the first Persian invasion outright.  Years later, an even bigger force arrived.  Athens poured newly found silver into a huge navy.  The leader Themistocles pushed hard for this plan.  At Salamis, that navy trapped the Persian fleet in a narrow strait.  It wrecked the fleet outright.  The invasion's push broke for good.  The Persian king pulled back with most of his army.\n\nThis account does not deny that other cities fought bravely too.  It simply argues that ships, not soldiers, won the war.  A closing note from the Aegean Desk adds one more point.  Greek ways did not stay locked inside these city-states forever.  A Macedonian king named Alexander later carried them across a much wider empire."
     },
@@ -60,6 +203,8 @@
       "id": "p-t3-source-b-spartan",
       "title": "Source B: The Spartan-Leaning Account, Filed by the Peloponnese Desk",
       "genre": "informational",
+      "docKind": "source-desk",
+      "figureIds": ["fig-persia-maps"],
       "source": "original",
       "text": "Sparta's own account of the Persian Wars starts with its government.  That government looked nothing like Athens.  Two kings ruled Sparta at once, checking each other's power.  A council of elders helped run the city.  A small board of overseers, called ephors, ran its daily business.  Plain citizens still met in an assembly.  Real power sat with a much smaller, older group than Athens ever let near its own choices.\n\nSpartan life itself was built around one goal.  Every Spartan boy entered a harsh army training system at a young age.  He stayed a soldier his whole adult life.  A large group of unfree workers, called helots, farmed the land instead.  This let Spartan citizens stay in training at all times.  Sparta's government existed to keep that one army ready.  This account argues that readiness is exactly what saved Greece when Persia invaded.\n\nThe second Persian invasion arrived, and this file credits Sparta with the war's real turning points.  King Leonidas led a small, Spartan-led force.  His force held a narrow mountain pass at Thermopylae.  The Persian army there was many times its size.  The stand ended in defeat, but it bought Greece precious time.  It became a lasting sign of resistance.  The next year, an allied Greek army met the last Persian force on open ground at Plataea.  A Spartan leader led that army.  It beat the Persians outright.  The invasion was finally driven out of Greece for good.\n\nThis account treats the earlier sea battle at Salamis in a different way.  It calls Salamis one useful step among several, not the single moment that decided everything.  Two files, filed by two different desks, tell of the very same war.  The Office keeps both.  It refuses to force one account to lose."
     },
@@ -67,6 +212,8 @@
       "id": "p-t4-quiet-record-indus",
       "title": "Case File: The Quiet Record of the Indus",
       "genre": "informational",
+      "docKind": "case-file",
+      "figureIds": ["fig-indus-map", "fig-indus-seal"],
       "source": "original",
       "text": "Some files in the Office archive are quiet for a reason.  Nothing bad happened; the people involved simply cannot speak for themselves yet.  The Indus Valley civilization built some of the best-planned cities anywhere in the old world.  Mohenjo-daro and Harappa sat on careful grids.  Baked-brick homes linked to covered drains, an advanced setup for its time.\n\nThe Indus people also left behind a written script.  It was cut into thousands of small stone seals.  No scholar has ever managed to read it.  Every other early society in this record can be read straight, in its own words.  Court records, temple writings, and trader letters survive elsewhere.  The Indus people left none of that.  Whatever its people believed, ruled, or argued about stays locked behind an unread script.  This file treats that gap honestly instead of guessing past it.\n\nIts fall is easier to weigh, though still not fully settled.  The clearest evidence involves shifting rivers.  One major stream that once fed Indus farms seems to have dried up or changed path.  Evidence also points to a weaker monsoon.  That means longer, harsher dry spells across the region.  Farming likely grew far harder to keep up.  Many of the biggest cities emptied out slowly, not all at once.  Scholars still argue over how much of the fall came from nature alone.\n\nSometime after the Indus cities faded, new migrants arrived from the northwest.  Many scholars think these Indo-Aryan migrants brought an early form of Sanskrit with them.  They brought a new set of faith practices too.  Those practices were set down in hymns called the Vedas.  The Vedas became the base the next file builds right on top of."
     },
@@ -74,6 +221,7 @@
       "id": "p-t4-dharma-buddha-ashoka",
       "title": "Case File: Dharma, the Buddha, and an Emperor's Change of Heart",
       "genre": "informational",
+      "docKind": "case-file",
       "source": "original",
       "text": "Many scholars think Vedic hymns arrived with the Indo-Aryan migrants.  Over time, they grew into a much larger faith, the one now known as Hinduism.  Hindus came to believe in dharma, a person's proper duty in life.  They also came to believe in karma, the belief that every act carries results that follow a person forward.  Vedic life also split into four broad groups, called varnas.  Birth decided which varna a person belonged to.  This setup shaped daily life for years afterward.\n\nYears into this faith, a prince named Siddhartha Gautama gave up his easy life.  He had seen how much plain suffering filled the world.  He taught that suffering grows from craving, wanting things to be other than they are.  He taught that a strict path could end that craving for good.  His followers called him the Buddha, meaning the awakened one.  His teaching grew into a path open to anyone, no matter which varna a person had been born into.\n\nYears later, an emperor named Ashoka ruled the Maurya Empire.  By then, it was the biggest state the Indian subcontinent had ever seen.  Early in his reign, Ashoka waged a brutal war against the kingdom of Kalinga.  His own carved words tell of a huge number of dead and captured.  They tell of his own horror at what the war had cost.  After Kalinga, Ashoka took up Buddhist ways.  He turned his huge state toward a strikingly new goal.  He had edicts cut into pillars and rock faces across his empire, pushing nonviolence, tolerance of other faiths, and the good of plain people, not more war.\n\nFew rulers in the old record changed course that plainly.  Fewer still left the proof cut in stone for a Recorder to find, more than two thousand years later."
     },
@@ -81,6 +229,7 @@
       "id": "p-t5-two-schools-one-emperor",
       "title": "Case File: Two Schools of Thought, One Unifying Emperor",
       "genre": "informational",
+      "docKind": "case-file",
       "source": "original",
       "text": "The Huang He, known in English as the Yellow River, flooded often and hard.  Later writers gave it the name China's Sorrow.  Its floodwaters also carried rich soil that made the river valley worth the risk.  Early Chinese life grew up right along its banks.\n\nChina's earliest well-known dynasty was the Shang, which gave way to the Zhou dynasty.  The Zhou brought in an idea called the Mandate of Heaven.  Heaven gave a ruler the right to rule only while that ruler ruled fairly.  Heaven could pull that right back from a ruler who did not.  Zhou power weakened over the years.  China broke apart into rival states that fought nearly nonstop, in a time later called the Warring States era.\n\nTwo very different schools of thought tried to answer that long disorder.  Confucius taught that harmony grows from everyone filling their role well.  A ruler should act fairly, a child should honor a parent, and a friend should treat a friend with respect.  Order, in his teaching, comes from virtue lived by everyone at once.  A different path is tied to a teacher known as Laozi.  His teaching pointed closer to the other side.  It held that people should follow the Dao, the natural way of the world, without forcing events against their own natural course.\n\nNeither school ended the fighting.  A ruler named Ying Zheng did.  He beat every rival state and named himself Qin Shi Huangdi, China's first emperor.  He set one standard for the empire's writing, money, and weights.  One system replaced the many different ones lands had used before.  He also moved right against ideas that threatened his new power.  Records written later say he ordered rival texts burned, with Confucian works a main target.  A number of scholars who defied the order were put to death too.  This is the record this file's own title borrows its warning from."
     },
@@ -88,6 +237,8 @@
       "id": "p-t5-han-and-the-road",
       "title": "Case File: The Han Restoration and the Long Road West",
       "genre": "informational",
+      "docKind": "case-file",
+      "figureIds": ["fig-silkroad-map", "fig-han-bronze"],
       "source": "original",
       "text": "The Qin dynasty fell apart only a few years after its first emperor died.  Harsh rule and open revolt wore it down fast.  The Han dynasty that came next ruled far longer.  It made a choice the Qin never had.  Han rulers stopped treating Confucian teaching as a threat and put it back at the very center of government instead.\n\nHan officials had to study the Confucian classics, the same texts the Qin had once tried to burn.  A person's grasp of those texts more and more shaped who could serve the state.  That change built a government of trained scholar-officials.  Birth alone no longer decided who ran the country, a lasting shift in how China chose its leaders.\n\nHan China also reached much farther than its own borders.  A long web of trade routes linked Han cities to Central Asia and beyond.  Later writers called this web the Silk Road.  Caravans carried Chinese silk west and brought back horses, glass, and goods from far regions in return.  A Han official named Zhang Qian is often credited with opening these links.  He traveled west on a state trip, though trade along parts of the route likely came before his trip.  Goods were never the only thing moving along that road.  Ideas and faiths traveled with the traders who carried them.\n\nBuddhism reached China this way, coming slowly from India along the same routes the silk traders used.  Buddhism took root beside Confucianism and Daoism rather than replacing either one.  Chinese thought, from that point on, kept following the very same road."
     },
@@ -95,6 +246,8 @@
       "id": "p-t6-closing-the-file",
       "title": "Case File: Closing the File on Rome",
       "genre": "informational",
+      "docKind": "case-file",
+      "figureIds": ["fig-rome-plate", "fig-roman-bust"],
       "source": "original",
       "text": "This is the last entry in the whole case file.  It closes in a different way than every entry before it.  Rome does not open a new puzzle.  It answers back into every puzzle this file has already opened.\n\nRome began as a kingdom, then threw out its own king and became a republic instead.  Two elected consuls led it, along with a council called the Senate.  For years afterward, rich patrician families held nearly all the real power.  Plain plebeian citizens fought for a bigger share of it.  That fight in time produced the Twelve Tables, Rome's first written law code.  The code was posted in public so that every citizen, patrician or plebeian, could actually see the same laws applied to all, even though rank still shaped much of Roman life.  Compare that to Hammurabi's own code, filed at the very start of this record.  Its finished laws still punished the same crime in different ways, depending on who the victim was.\n\nRome's spot on a sea-facing peninsula pushed it steadily outward.  Rome fought the rival city of Carthage across three long wars and won.  Rome then held most of the Mediterranean coast.  A road web linked it all, moving troops and officials fast across huge distances.\n\nThe republic itself could not survive its own success.  A general named Julius Caesar seized power by force.  Senators feared he wished to rule as a king, and they killed him.  More years of civil war came next.  His adopted heir, Octavian, rose as Rome's first emperor, taking the name Augustus.  A republic without a king had lasted nearly five hundred years before an empire took its place.\n\nRome gave out citizenship widely across its conquered lands, a reach that went far past Athens and its own narrow assembly.  Athens had let its citizens vote right on the city's own laws, years earlier.  Rome also matched many of its own gods to Greek ones, treating each pair as one god under two names.  Rome took in Greek philosophy too.  The file that opened with a river and a code of law now closes with an empire, one built from nearly every civilization this record has ever checked."
     },
@@ -102,6 +255,8 @@
       "id": "p-t1-clay-and-the-first-empires",
       "title": "Recovered Entry: What the Clay Kept",
       "genre": "informational",
+      "docKind": "recovered-entry",
+      "figureIds": ["fig-cuneiform-tablet"],
       "source": "original",
       "text": "This entry answers a question every new Recorder asks.  Why does so much of the oldest record come from one flat, muddy plain?  The answer is clay.  Southern Mesopotamia had almost no stone and very little timber, but it had river mud without limit.  Scribes there wrote on wet clay tablets, and clay is stubborn.  A tablet dropped in a ruin simply waits.\n\nThe first cities on that plain were Sumerian.  Uruk and Ur each ran its own government, guarded its own walls, and honored its own patron god.  A stepped temple platform called a ziggurat stood at the center of many of them.  Villages had grown into cities, and cities needed records.  The earliest tablets are not poems or laws at all.  They are receipts, counting sacks of grain, jars of oil, and heads of livestock.  Others are school exercises, copied out by students learning the script, with the mistakes still sitting on them.\n\nThe tablets also show who stood where.  Kings and priests sat at the top, and merchants, artisans, and farmers came next.  Enslaved people sat at the bottom, many of them captives taken in war.\n\nThose same centuries produced tools the whole world later borrowed.  Potters shaped clay on a turning wheel, and heavy carts rolled on wheels too.  Farmers cut furrows with a plow instead of a digging stick, and sailors caught the wind with a sail.  Metalworkers mixed copper with tin to make bronze, which held an edge far better than either metal alone.\n\nNo city on that plain stayed free forever.  A ruler named Sargon conquered the Sumerian cities and ruled them from Akkad, his own capital, and many historians call what he built the first empire in the record.  Babylon rose later, under the king whose law code this file already holds, and Assyria rose to dominate the region later still.\n\nHere is the part the Office likes best.  Fire destroys most records, but fire bakes clay harder.  Palaces on that plain burned more than once, and the tablets stored inside came out of the ashes tougher than they went in.  The record survives partly because somebody's city was sacked."
     },
@@ -109,6 +264,8 @@
       "id": "p-t2-kingdom-divided",
       "title": "Case File: The Kingdom That Split in Two",
       "genre": "informational",
+      "docKind": "case-file",
+      "figureIds": ["fig-exile-map"],
       "source": "original",
       "text": "The Office keeps one rule for sacred texts.  Read them for what they claim.  Then look for anything outside them that touches the same claim.  This entry is the best case in the archive for that rule.\n\nThe Hebrew Bible describes Solomon's kingdom breaking apart soon after he died, around nine hundred thirty BCE.  The northern tribes pulled away and formed a kingdom called Israel.  The northern kingdom's capital came to be a city named Samaria.  In that account, the southern tribes kept the line of David and the Temple in Jerusalem, in a smaller kingdom called Judah.  In that account, two kingdoms now stood where one had stood before.\n\nThen the outside evidence arrives, and it is unusually good.  A carved stone known as the Mesha Stele was raised by a king of Moab.  It names Omri, a king of Israel, as an enemy who had pressed hard on Moab.  An Assyrian monument known as the Black Obelisk lists tribute paid to an Assyrian king.  It names Jehu, a later king of Israel, among those who paid.  Neither stone was cut to prove the Hebrew Bible right.  Each was cut to praise its own king, which is exactly why the Office weighs it.\n\nThe northern kingdom fell to Assyria.  Assyrian armies took Samaria around seven hundred twenty-two BCE, and Assyrian royal records report the capture in their own words.  Those records do not fully agree about which king finished the siege, and the Office files that disagreement rather than smoothing it away.  Assyria then moved many of the defeated people to other parts of its empire.  Newcomers were settled in their place.\n\nThe account preserved in the Hebrew Bible explains the fall in its own terms.  It describes the defeat as a punishment for abandoning the covenant.  That reasoning belongs to the account, and the Office records it as the account's own.\n\nMuch later, stories grew up about ten lost tribes still wandering somewhere.  The Office files those stories as legend.  Judah lasted longer than its northern neighbor did.  What finally happened to Judah is filed under the exile that followed."
     },
@@ -116,6 +273,7 @@
       "id": "p-t3-gods-of-the-everyday",
       "title": "Case File: The Gods of the Everyday",
       "genre": "informational",
+      "docKind": "case-file",
       "source": "original",
       "text": "This file is often misread, so the Office states its limits first.  There was no single Greek religion with one book and one creed.  Many Greek cities honored the same gods under the same names.  What each city actually did about it varied from place to place.\n\nEvery city had a god it counted as its own.  Athens honored Athena, and her festival, the Panathenaia, filled the city's streets.  A long procession climbed to the temples above the city and carried a newly woven robe for the goddess's statue.  Another Athenian festival honored Dionysus with days of plays, performed in the open air before large crowds.  Greek drama begins inside a religious festival, not beside one.\n\nThe games at Olympia worked the same way.  Athletes competed there in honor of Zeus, on ground that held his temple.  A truce was announced so that competitors and spectators could travel safely.  Modern readers file the Olympics under sport.  The people who founded them filed them under worship.\n\nCities also kept calendars of offerings, listing which animal was owed to which god on which day.  Some of those calendars were carved into stone, and pieces of them survive.  That is the Office's favorite kind of evidence: a working document nobody wrote for posterity.\n\nPractice reached inside the house too.  Many households kept a hearth fire in the home and made small offerings there.  Stone pillars topped with a carved head stood at doorways and street corners in Athens, and people passing by honored them in small ways.\n\nThe most famous oracle of all was Delphi, a shrine to Apollo.  A priestess there, called the Pythia, answered questions put to her by whole cities and by ordinary people.  Worshippers believed she spoke for the god.  Her answers were often hard to read, and more than one city read one the way it already wanted to.  The Office records what people did at Delphi, and what they believed while they did it.  It files no verdict on the rest."
     },
@@ -123,6 +281,7 @@
       "id": "p-t3-one-witness-long-war",
       "title": "Case File: One Witness, One Long War",
       "genre": "informational",
+      "docKind": "case-file",
       "source": "original",
       "text": "The Office files this war under a warning label.  Much of what is known about it traces back to one man.  His part in the story comes at the end of this entry, where a Recorder can weigh it properly.\n\nAthens and Sparta fought for twenty-seven years, from four hundred thirty-one to four hundred four BCE.  Each led a group of allied cities.  Athens had the stronger navy and an empire of tribute-paying allies.  Sparta had the stronger army.  Neither could easily reach the other's strength, which is one reason the war ran so long.\n\nA sickness struck crowded, walled-in Athens beginning in four hundred thirty BCE, and it returned more than once over the next few years.  It killed the Athenian leader Pericles in four hundred twenty-nine BCE.  Ancient writers described the symptoms in detail.  Modern scholars still argue about what the disease actually was, so the Office files it as unidentified.\n\nA truce called the Peace of Nicias, signed in four hundred twenty-one BCE, was supposed to end the fighting.  It held poorly and broke down.  Athens then sent a large fleet and army against the city of Syracuse, on the island of Sicily, between four hundred fifteen and four hundred thirteen BCE.  Almost none of that force came home.\n\nPersia then paid for a Spartan fleet, and Spartan ships became a match for Athenian ones at last.  At Aegospotami in four hundred five BCE, Sparta destroyed the Athenian navy in a single action.  Athens surrendered the next year.  Its long defensive walls were pulled down, and a group of thirty men was installed to rule the city.\n\nSparta's turn on top did not last.  A Theban army beat a Spartan one at Leuctra in three hundred seventy-one BCE, and Spartan dominance ended there.\n\nNow the warning label.  The fullest account of this war was written by an Athenian general who served in it, lost a command, and spent his exile writing.  He is a first-rate witness with a stake in the story.  His account also stops years before the war ends, so the last stretch comes from other writers.  The Office files the war as record and the telling as evidence with an interest attached."
     },
@@ -130,6 +289,7 @@
       "id": "p-t4-visitor-and-the-traveling-number",
       "title": "Case File: A Visitor's Notes and a Number That Traveled",
       "genre": "informational",
+      "docKind": "case-file",
       "source": "original",
       "text": "Two pieces of evidence anchor this entry.  One is a traveler's notebook.  The other is a number.\n\nRulers of the Gupta family united much of northern India starting around three hundred twenty CE.  Later writers often call the centuries that followed a golden age.  The Office prefers a plainer description.  Courts paid for scholars, and the work those scholars did still turns up in daily life around the world.\n\nA scholar named Aryabhata, born in four hundred seventy-six CE, wrote a short book on astronomy and mathematics.  He worked out a value for the ratio between a circle's rim and the line straight across it, close enough to stay useful for centuries.  He also argued that the earth turns on its own axis, which is why the stars appear to move across the sky.  Other scholars in the same tradition wrote on medicine and on the paths of the planets.\n\nThe number system matters more than any single scholar.  Indian mathematicians wrote with ten symbols and gave each one a value based on where it sat.  A symbol for zero held the empty place.  Arabic-speaking scholars took up the system and carried it west.  Europe learned it from them and called the symbols Arabic numerals, which is why much of the world still calls them that.  The name credits the messenger and skips the sender.  The Office files the correction and moves on.\n\nNow the notebook.  A Chinese Buddhist monk named Faxian walked overland to India around four hundred CE, stayed for years, and wrote down what he saw.  He was not writing to flatter an Indian king, because he did not serve one.  He came for Buddhist texts and described everything else along the way.  An outside witness with no stake in a ruler's reputation is rare in this record, and the Office weighs him accordingly.\n\nTwo long poems, the Mahabharata and the Ramayana, were also being copied and recited through these centuries.  Tradition names an author for each.  Both poems grew over so many centuries that the Office files those names as tradition rather than as record."
     },
@@ -137,6 +297,7 @@
       "id": "p-t5-third-school-and-the-paper",
       "title": "Recovered Entry: The Third School, and the Paper That Followed",
       "genre": "informational",
+      "docKind": "recovered-entry",
       "source": "original",
       "text": "The Office's earlier entry on China sets two schools of thought side by side.  Neither of them is the one the Qin state actually ran on.  This entry files the third.\n\nThe school the Qin ran on is called Legalism.  It taught that people behave well only when rules are clear, rewards are certain, and punishments are heavy.  Virtue, in its view, was too slow and too rare to hold a state together.  It held that law should fall on everyone the same way, whatever a person's rank.  A thinker named Han Fei set the argument out most fully.  Qin had run on these ideas long before him.  A minister named Shang Yang rebuilt the state around them, generations before the first emperor.  Another minister, Li Si, later carried them into the unified empire.  The Qin's harsh reputation follows from those choices.  What the Qin then did to rival texts is already filed, on the strength of records written later.\n\nThe Han dynasty that came next put Confucian teaching at the center.  Legalist habits did not leave with the Qin, though.  Han law kept much of the same machinery, and later dynasties kept it too.\n\nHan workshops also solved a problem the Office cares about more than most.  Before paper, Chinese writers used strips of bamboo tied into bundles, which were heavy.  They also used silk, which was costly.  A court official named Cai Lun was credited in one hundred five CE with a better method, using bark, rag, and worn-out fishing net beaten into pulp.  Scraps of older paper have turned up since, so the craft was already in use before he improved it.  Cheap writing material changes what gets written down and what gets copied.  Everything after this point in the Chinese record is thicker because of it.\n\nOther Han work survives in the same practical spirit.  Han histories credit an official named Zhang Heng with an instrument built in one hundred thirty-two CE.  Those histories say it registered a distant earth tremor and showed which direction it came from.  Han doctors wrote medical texts that were still being studied centuries later.\n\nThe dynasty itself came apart around two hundred twenty CE, worn down by revolts, court struggles, and generals who stopped listening.  China broke into rival states again."
     },
@@ -144,6 +305,7 @@
       "id": "p-t6-earliest-letters",
       "title": "Recovered Entry: The Earliest Letters in the File",
       "genre": "informational",
+      "docKind": "recovered-entry",
       "source": "original",
       "text": "The Office files this entry under its strictest rule.  A Recorder records what people believed, never a belief as a fact.\n\nRome ruled the province of Judea through officials it sent.  The record holds that a teacher named Jesus, from Galilee, was put to death there.  The method was crucifixion, a Roman way of killing.  The governor was a Roman named Pontius Pilate.  The year was near thirty CE.  A Roman writer named Tacitus reports the same death under that governor.  He wrote generations later, from outside the movement.  That is why the Office files the death as record.\n\nHis followers taught that he was the Messiah, a deliverer they found promised in their scriptures.  They came to believe he rose from the dead after the execution.  They believed his life carried those promises out.  The Office cannot check that.  What it files is that people held these beliefs, and held them early.\n\nThe earliest Christian writings in the record are letters, not stories about Jesus.  A man named Paul wrote them in the fifties CE.  They went mostly to small groups in cities around the eastern Mediterranean.  Scholars accept seven of them as surely his own.  A later book called Acts describes Paul traveling from city to city.  Acts and Paul's own letters do not always agree on where he went, or when.  So the Office files those routes as described, never as settled.\n\nRoman officials moved against the movement at times, but not steadily, and rarely everywhere.  Nero punished believers in the city of Rome after a fire there, in sixty-four CE.  Decius ordered everyone in the empire to offer sacrifice to the Roman gods in two hundred fifty CE.  No earlier order like it had reached the whole empire.  A longer stretch of pressure ran from three hundred three to three hundred eleven CE.\n\nIn three hundred thirteen CE, Constantine and a fellow emperor granted freedom of worship to every religion, not to one.  That order did not make Christianity the empire's religion, whatever later accounts say.  Theodosius did that in three hundred eighty CE.\n\nThe movement spread along Rome's roads and sea lanes.  A shared Greek language helped.  So did communities already living in cities across the empire.  Growth was steady rather than sudden.  Maybe one person in ten in the empire had joined by three hundred CE, maybe far fewer.  The Office has filed one arc like this before.  The entries on Buddhism's spread followed trade routes and an emperor's backing.  The Office ranks neither."
     },
@@ -151,6 +313,8 @@
       "id": "p-t6-long-ending",
       "title": "Case File Addendum: The Long Ending",
       "genre": "informational",
+      "docKind": "addendum",
+      "figureIds": ["fig-rome-map"],
       "source": "original",
       "text": "The closing entry on Rome is filed and sealed.  This addendum sits behind it for one reason.  The file closed on an empire that had not finished happening yet.\n\nThe two centuries after Augustus ran quieter inside the borders than the years before them had.  Later writers gave that stretch its name, the Pax Romana, the Roman peace.  Goods moved along paved roads and safe sea lanes.  Roman coins worked across a huge stretch of ground.  Engineers built aqueducts that carried water for miles, and they used concrete to raise vaults and domes that still stand today.\n\nThe quiet did not hold, and in the two hundreds CE the empire nearly came apart.  Armies made and unmade emperors at speed.  Borders came under pressure from groups pushing in from outside.  Coins carried less and less silver, and prices climbed.\n\nLater emperors held the thing together by changing its shape, and Diocletian split the work of ruling among several men.  Constantine moved the capital east, to a Greek city he rebuilt and renamed for himself.  In three hundred ninety-five CE the empire was divided into a western half and an eastern half, each with its own ruler.\n\nThe western half thinned out over the next hundred years.  Rome itself was sacked, in four hundred ten and again in four hundred fifty-five CE.  In four hundred seventy-six CE a commander removed the last emperor the west still had, and put no one in his place.\n\nThe eastern half did not fall then.  Ruled from Constantinople, it lasted nearly another thousand years.  Its own people called themselves Romans, in Greek, and rarely used any other name for their state.  Much later, European scholars began calling that empire Byzantine, a name its own people never used for their empire.\n\nThat is this record's closing warning, and it fits every file in the drawer.  A phrase like the fall of Rome sounds like a single event.  What the evidence shows is a government ending in one half, a government carrying on in the other, and roads, law, and language living on past both.  Names get applied by whoever writes last, and checking who applied a name, and when, is the whole job."
     }
@@ -159,6 +323,7 @@
     {
       "id": 1,
       "name": "First Entry",
+      "reveal": { "figureId": "fig-cylinder-seal" },
       "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
       "targets": [
         "hist-t1-first-entry"
@@ -195,6 +360,7 @@
     {
       "id": 2,
       "name": "Shortest File",
+      "reveal": { "figureId": "fig-temple-timeline" },
       "goal": "Verify how a tradition survived losing its own Temple and its own state.",
       "targets": [
         "hist-t2-hebrews"
@@ -231,6 +397,7 @@
     {
       "id": 3,
       "name": "Two Accounts",
+      "reveal": { "figureId": "fig-hoplite-amphora" },
       "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
       "targets": [
         "hist-t3-greece"
@@ -267,6 +434,7 @@
     {
       "id": 4,
       "name": "The Quiet Record",
+      "reveal": { "figureId": "fig-indus-seal" },
       "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
       "targets": [
         "hist-t4-india"
@@ -303,6 +471,7 @@
     {
       "id": 5,
       "name": "What Was Burned",
+      "reveal": { "figureId": "fig-han-bronze" },
       "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
       "targets": [
         "hist-t5-china"
@@ -339,6 +508,7 @@
     {
       "id": 6,
       "name": "Closing the File",
+      "reveal": { "figureId": "fig-rome-plate" },
       "goal": "Close the whole case by cross-referencing every civilization the record has verified.",
       "targets": [
         "hist-t6-rome"
