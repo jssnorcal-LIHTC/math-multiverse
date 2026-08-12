@@ -186,21 +186,63 @@ function niceTicks(lo, hi, targetCount, integerOnly) {
   return { ticks, lo: niceLo, hi: niceHi };
 }
 
-// Panel tick density fix: a height-aware wrapper around niceTicks(), used only where the available
-// plot height is short enough that the flat TICKS_TARGET can produce labels too dense to avoid
-// overlapping each other (panels mode -- see layoutPanels). maxDivisions is the most divisions
-// TICK_LABEL_H-tall labels can occupy in a plot of the caller's own height with zero label-to-
-// label overlap (panelH / TICK_LABEL_H). targetCount is capped to it going in, but niceStep's own
-// ceil/floor widening of [lo,hi] out to a round number can still add a division beyond whatever
-// target was asked for -- dome-drift's own CO2 panel does exactly this today, asking for 5 and
-// getting 6 -- so the actual result is verified after the fact and backed off further only if it
-// still does not fit, rather than trusting the target as a hard cap.
+// Panel tick density fix, headroom pass (team-lead finding, round 3): when divisions are scarce (a
+// short panel), niceStep()'s standard {1,2,5,10}-per-decade family can only reach past the data's
+// own max by jumping to the NEXT family member up -- fig-climographs' swing panel (data max 68,
+// range ~73) at 3 divisions needs a step of ~24.5 and the standard family rounds that all the way
+// up to 50, landing a ceiling of 100 and wasting roughly a third of the panel as dead headroom on
+// the very comparison the figure exists for. niceStepTight adds 2.5-per-decade as an extra
+// candidate (itself a familiar, "nice" step -- a quarter/half relationship to the surrounding 5s
+// and 10s) and picks the SMALLEST sufficient candidate rather than niceStep's own thresholded
+// rounding: mathematically identical to niceStep wherever a norm value does not fall in the newly
+// split (2, 2.5] gap, and DELIBERATELY SCOPED to this fit path only (niceTicksFit's only caller is
+// layoutPanels' per-panel y-tick computation) rather than changing the shared niceStep/niceTicks
+// used by every full-height chart's own ticks and by a panel's shared x-axis -- an unrelated
+// figure's norm landing in that same gap must not have its ticks silently move underneath it.
+// Verified against every real panel in this pack: fig-climographs' rainfall panel and both of
+// fig-dome-drift's panels have norm values outside the new gap at their own chosen targets and are
+// byte-unaffected; the swing panel's norm (~2.448) is the one value in the pack that actually
+// lands in it.
+function niceStepTight(range, targetCount, integerOnly) {
+  const rawStep = range / Math.max(targetCount, 1);
+  let mag = Math.pow(10, Math.floor(Math.log10(rawStep || 1)));
+  if (integerOnly) mag = Math.max(1, mag);
+  const norm = rawStep / mag;
+  // 2.5 x mag is only ever a whole number when mag >= 10 (2.5 x 1 = 2.5 is not); niceTicksFit's
+  // only call site below always passes integerOnly=false today, so this branch is not currently
+  // exercised, but it keeps the function honestly correct for its full signature rather than
+  // relying on that staying true.
+  const FAMILY = (!integerOnly || mag >= 10) ? [1, 2, 2.5, 5, 10] : [1, 2, 5, 10];
+  const niceNorm = FAMILY.find((c) => c >= norm) || 10;
+  return niceNorm * mag;
+}
+
+function niceTicksTight(lo, hi, targetCount, integerOnly) {
+  if (lo === hi) { lo -= 1; hi += 1; }
+  const step = niceStepTight(hi - lo, targetCount, integerOnly);
+  const niceLo = Math.floor(lo / step) * step;
+  const niceHi = Math.ceil(hi / step) * step;
+  const n = Math.max(1, Math.round((niceHi - niceLo) / step));
+  const ticks = [];
+  for (let i = 0; i <= n; i++) ticks.push(niceLo + i * step);
+  return { ticks, lo: niceLo, hi: niceHi };
+}
+
+// Panel tick density fix: a height-aware wrapper around niceTicksTight(), used only where the
+// available plot height is short enough that the flat TICKS_TARGET can produce labels too dense to
+// avoid overlapping each other (panels mode -- see layoutPanels). maxDivisions is the most
+// divisions TICK_LABEL_H-tall labels (plus MIN_TICK_GAP of clear space) can occupy in a plot of the
+// caller's own height. targetCount is capped to it going in, but the tight step's own ceil/floor
+// widening of [lo,hi] out to a round number can still add a division beyond whatever target was
+// asked for -- dome-drift's own CO2 panel does exactly this today, asking for 5 and getting 6 --
+// so the actual result is verified after the fact and backed off further only if it still does not
+// fit, rather than trusting the target as a hard cap.
 function niceTicksFit(lo, hi, targetCount, integerOnly, maxDivisions) {
   let target = Math.min(targetCount, maxDivisions);
-  let nice = niceTicks(lo, hi, target, integerOnly);
+  let nice = niceTicksTight(lo, hi, target, integerOnly);
   while (nice.ticks.length - 1 > maxDivisions && target > 1) {
     target -= 1;
-    nice = niceTicks(lo, hi, target, integerOnly);
+    nice = niceTicksTight(lo, hi, target, integerOnly);
   }
   return nice;
 }
