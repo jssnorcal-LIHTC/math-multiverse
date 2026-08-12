@@ -74,6 +74,35 @@ PLAYWRIGHT_EXECUTABLE_PATH="C:\\Users\\...\\ms-playwright\\chromium-1223\\chrome
 
 In CI the browser is installed with `npx playwright install --with-deps chromium`.
 
+## How the tile-overlap gate works, in both directions (`tests/tile-overlap.js`)
+
+The original scan asks "does a point inside a sibling resolve to the tile", which catches the
+explain tile painting **over** chrome.  The 26-0714 Razor Crest report was the opposite sentence:
+"the flight-screen status pill overlaps the explain tile's header line by approx 18px".  Both
+readings were true at once.  `.rc-explain` carries `animation: fadein 0.2s`, and while that
+animation runs the tile has an opacity below 1 plus a transform, which gives it a stacking context
+and paints it **above** its in-flow siblings;  once the animation ends, the later sibling
+`.rc-foot` paints above the tile.  Same boxes, two paint orders, 200ms apart.  The forward scan's
+red on the unfixed build depended on sampling inside that window, and the direction a human
+actually saw was never asserted at all.
+
+A settled reverse scan now covers it:  after the fadein finishes, 25 points inside the tile's own
+**visible** box must all resolve to the tile or one of its descendants.  Visible is the whole
+difficulty:  since `59c95cb` the tile lives in a bounded scroll container, so its box can
+legitimately extend past what is painted, and sampling those pixels would report the container as
+an occluder on a healthy build.  Every sample is intersected with the client box of every clipping
+ancestor first.
+
+Each reverse scan carries its own **positive control** in the same pass: a box is painted over the
+tile's visible area and the scan must find it, then it is removed.  Without that, "nothing is over
+the tile" is indistinguishable from "this scan cannot see anything over the tile", which is exactly
+the hole the forward scan had for this ticket.
+
+Verified against the build the ticket was filed on.  With `96e05c5`'s shell in the tree, the
+reverse scan reports `.rc-foot`, `.rc-radio` and `.rc-hull-pips` painting over the tile at 5 of 25
+points on the wrong path and 15 of 25 on the correct one, at both grades;  on `main` it reports
+zero across all twelve module-grade pairs with the control caught every time.
+
 ## How the touch-target gate works (`tests/touch-targets.js`)
 
 Constraint 6 puts the minimum touch target at 44px.  This gate measures the header controls with

@@ -182,6 +182,111 @@ function occlusionScanInPage(px) {
   return { tileFound: true, tileClass, candidatesChecked: checked, blocked };
 }
 
+// Runs INSIDE the page. THE OTHER DIRECTION, and the one the 26-0714 ticket was actually filed in.
+//
+// The scan above asks "does a point inside a sibling resolve to the tile", which catches the tile
+// painting OVER chrome. The Razor Crest report was the opposite sentence: "the flight-screen status
+// pill overlaps the explain tile's header line by approx 18px". Re-measured on the ticket-date
+// build (96e05c5), .rc-foot ran 586 to 620 and .rc-explain-head 600 to 617, so the foot covered the
+// header line entirely, and the scan above reported ZERO blocked at that moment. Both readings were
+// true: .rc-explain carries `animation: fadein 0.2s`, and while that animation runs the tile has an
+// opacity below 1 plus a transform, which gives it a stacking context and paints it ABOVE its
+// in-flow siblings; once the animation ends, the later sibling .rc-foot paints above the tile. Same
+// boxes, two paint orders, 200ms apart. So the forward scan's red on the unfixed build depended on
+// sampling inside the fadein window, and the direction a human actually saw was never asserted at
+// all. This function asserts it, and the caller runs it AFTER the animation has settled.
+//
+// CLIPPING IS THE WHOLE DIFFICULTY. Since 59c95cb the tile lives in a bounded scroll container, so
+// its box can legitimately extend past what is painted. Sampling those pixels would report the
+// container as an "occluder" on a perfectly healthy build. Every sample point is therefore
+// intersected with the client box of every clipping ancestor first, and a tile with no visible area
+// left is reported as such rather than as clean.
+function overTileScanInPage(px) {
+  const root = document.querySelector('.mod-' + px);
+  if (!root) return { tileFound: false, reason: 'no module root .mod-' + px };
+  const tile = root.querySelector('.' + px + '-explain');
+  if (!tile) return { tileFound: false };
+
+  function describe(el) {
+    const parts = [];
+    let cur = el, depth = 0;
+    while (cur && cur !== document.body && depth < 5) {
+      let s = cur.tagName.toLowerCase();
+      if (typeof cur.className === 'string' && cur.className.trim()) s += '.' + cur.className.trim().split(/\s+/).join('.');
+      parts.unshift(s);
+      cur = cur.parentElement;
+      depth++;
+    }
+    return parts.join(' > ');
+  }
+
+  function visibleBox(el) {
+    const r = el.getBoundingClientRect();
+    let box = { left: Math.max(0, r.left), top: Math.max(0, r.top), right: Math.min(window.innerWidth, r.right), bottom: Math.min(window.innerHeight, r.bottom) };
+    let cur = el.parentElement;
+    while (cur && cur !== document.documentElement) {
+      const cs = getComputedStyle(cur);
+      if (/auto|scroll|hidden|clip/.test(cs.overflowX) || /auto|scroll|hidden|clip/.test(cs.overflowY)) {
+        const c = cur.getBoundingClientRect();
+        box = { left: Math.max(box.left, c.left), top: Math.max(box.top, c.top), right: Math.min(box.right, c.right), bottom: Math.min(box.bottom, c.bottom) };
+      }
+      cur = cur.parentElement;
+    }
+    return box;
+  }
+
+  function scan() {
+    const b = visibleBox(tile);
+    const w = b.right - b.left, h = b.bottom - b.top;
+    if (w <= 2 || h <= 2) return { visible: { w: Math.round(w), h: Math.round(h) }, sampled: 0, over: [] };
+    const over = [];
+    let sampled = 0;
+    // A 5 x 5 grid inset 2px from the visible edges, so no sample sits on a border pixel where
+    // the answer is a rounding question rather than an occlusion one.
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < 5; j++) {
+        const x = b.left + 2 + (w - 4) * (i / 4);
+        const y = b.top + 2 + (h - 4) * (j / 4);
+        sampled++;
+        const hit = document.elementFromPoint(x, y);
+        if (!hit || hit === tile || tile.contains(hit)) continue;
+        // An ancestor coming back means the tile simply is not painted at that point, which is a
+        // different (and here, unexpected) condition from something being drawn on top of it.
+        const kind = hit.contains(tile) ? 'tile-not-painted' : 'occluder';
+        over.push({ kind, selector: describe(hit), text: (hit.textContent || '').trim().slice(0, 70), at: { x: Math.round(x), y: Math.round(y) } });
+      }
+    }
+    return { visible: { w: Math.round(w), h: Math.round(h) }, sampled, over };
+  }
+
+  const real = scan();
+
+  // POSITIVE CONTROL, in the same pass on the same tile: paint a box over the tile's own visible
+  // area and require the scan to find it. Without this, "nothing is over the tile" is
+  // indistinguishable from "this scan cannot see anything over the tile", which is precisely the
+  // hole the forward scan had for this ticket. Removed immediately; the real scan above already ran.
+  const b = visibleBox(tile);
+  const probe = document.createElement('div');
+  probe.setAttribute('style', `position:fixed; left:${b.left}px; top:${b.top}px; width:${Math.max(4, b.right - b.left)}px; height:${Math.max(4, b.bottom - b.top)}px; z-index:2147483000; background:rgba(255,0,0,0.01);`);
+  probe.className = 'tile-overlap-control';
+  document.body.appendChild(probe);
+  const controlled = scan();
+  probe.remove();
+
+  return {
+    tileFound: true,
+    visible: real.visible,
+    sampled: real.sampled,
+    over: real.over,
+    // A tile with no visible area cannot be sampled, so the control cannot be caught either. That
+    // is a DIFFERENT condition from a control that was missed while there was something to catch,
+    // and conflating the two reports "the scan is broken" for what is really "the child cannot see
+    // this tile". Separated so each says what it means.
+    noVisibleArea: real.sampled === 0,
+    controlCaught: controlled.over.some((o) => /tile-overlap-control/.test(o.selector)),
+  };
+}
+
 (async () => {
   const { server, port } = await startServer();
   const base = `http://127.0.0.1:${port}`;
@@ -250,7 +355,19 @@ function occlusionScanInPage(px) {
     const btn = all[pickIdx % all.length];
     await btn.click();
     await page.waitForSelector(`#${px}-question .${px}-explain`, { timeout: 6000 });
-    return page.evaluate(occlusionScanInPage, px);
+    const forward = await page.evaluate(occlusionScanInPage, px);
+    // The reverse scan runs SETTLED, after .*-explain's 0.2s fadein has finished, because that
+    // animation is what decides the paint order between the tile and its later siblings: while it
+    // runs, the tile's own opacity-plus-transform stacking context puts it on top; once it ends,
+    // a later sibling paints above it. The forward scan above is deliberately left where it was,
+    // measuring immediately, so both moments are covered rather than trading one for the other.
+    // 420ms clears the 200ms animation with margin and stays well inside the correct path's
+    // ~1.5s auto-advance.
+    await page.waitForTimeout(420);
+    const reverse = await page.$(`#${px}-question .${px}-explain`)
+      ? await page.evaluate(overTileScanInPage, px)
+      : { tileFound: false, reason: 'the tile was gone before the settled scan (auto-advance)' };
+    return { ...forward, reverse };
   }
 
   // Advances past the just-measured tile: clicks the injected NEXT button on the wrong path,
@@ -310,6 +427,31 @@ function occlusionScanInPage(px) {
       if (cap.blocked.length) {
         problems.push(`${modId} g${grade} [${label} tile]: ${cap.blocked.length} element(s) occluded by the explain tile (checked ${cap.candidatesChecked} candidates):`);
         for (const b of cap.blocked) problems.push(`    ${b.selector} "${b.text}" -- covered at (${b.at.x},${b.at.y}), box ${b.rect.w}x${b.rect.h} at (${b.rect.x},${b.rect.y})`);
+      }
+
+      // ---- the reverse direction, the one the 26-0714 ticket was filed in ----
+      const rev = cap.reverse;
+      if (!rev || !rev.tileFound) {
+        // The correct path auto-advances, so a settled scan legitimately finds no tile there.
+        // Reported rather than swallowed: a run in which the reverse direction never got measured
+        // on EITHER path must not read as a run in which it was measured and came back clean.
+        note(`${modId} g${grade} [${label} tile]: settled reverse scan skipped -- ${(rev && rev.reason) || 'tile absent'}`);
+      } else {
+        const occluders = rev.over.filter((o) => o.kind === 'occluder');
+        const unpainted = rev.over.filter((o) => o.kind === 'tile-not-painted');
+        if (occluders.length) {
+          problems.push(`${modId} g${grade} [${label} tile]: ${occluders.length} of ${rev.sampled} points inside the tile's own VISIBLE box are painted over by something else -- this is the direction the 26-0714 Razor Crest report was written in:`);
+          for (const o of occluders) problems.push(`    ${o.selector} "${o.text}" -- painted over the tile at (${o.at.x},${o.at.y})`);
+        }
+        if (unpainted.length) {
+          problems.push(`${modId} g${grade} [${label} tile]: ${unpainted.length} of ${rev.sampled} points inside the tile's visible box resolve to an ANCESTOR, so the tile is not painting where its own box says it is`);
+        }
+        if (rev.noVisibleArea) {
+          problems.push(`${modId} g${grade} [${label} tile]: the explain tile has NO VISIBLE AREA (${rev.visible.w}x${rev.visible.h} after clipping) -- it exists, but every pixel of it is outside its own scroll container, so the child is being shown an explanation they cannot see. Nothing could be sampled here, so occlusion was not measured either.`);
+        } else if (!rev.controlCaught) {
+          problems.push(`${modId} g${grade} [${label} tile]: the reverse scan's POSITIVE CONTROL was not caught -- a box deliberately painted over the tile went unnoticed, so "nothing is over the tile" above means nothing`);
+        }
+        note(`${modId} g${grade} [${label} tile]: settled reverse scan ${rev.sampled} point(s) over a ${rev.visible.w}x${rev.visible.h} visible tile, ${occluders.length} occluder(s), control ${rev.controlCaught ? 'CAUGHT' : 'MISSED'}`);
       }
     }
     note(`${modId} g${grade}: wrong tile checked ${wrongCap.candidatesChecked} candidates (${wrongCap.blocked.length} blocked), correct tile checked ${correctCap.candidatesChecked} candidates (${correctCap.blocked.length} blocked)`);
