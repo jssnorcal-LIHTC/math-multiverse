@@ -1,0 +1,7 @@
+Throwaway probe branch. Not for merge.
+
+Exists to answer one question with evidence: main scored the reward image at
+1024x654 as exactly 160x120 in CI at 09:55Z, which is exactly ON the gate floor
+with zero margin. A later branch scored 157x118 there. This branch is main plus
+this file and nothing else, so its CI run says whether the 2px belongs to that
+branch or to the runner environment.
