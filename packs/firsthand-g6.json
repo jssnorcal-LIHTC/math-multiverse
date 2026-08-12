@@ -13,6 +13,72 @@
     "grandGoal": "Senior Recorder"
   },
   "repeatPolicy": "rotate",
+  "figures": [
+    {
+      "id": "fig-cylinder-seal",
+      "kind": "photo",
+      "caption": "A Sumerian cylinder seal beside the modern impression rolled from it.  The stone is about the size of a thumb; the long picture is what it prints.",
+      "credit": "The Metropolitan Museum of Art, Ancient West Asian Art (accession 1984.383.7), Open Access, public domain",
+      "alt": "At left a small carved stone cylinder.  At right a long clay impression rolled from it, showing a row of standing figures.",
+      "src": "art/firsthand-g6/fig-cylinder-seal.jpg"
+    },
+    {
+      "id": "fig-cuneiform-tablet",
+      "kind": "photo",
+      "caption": "A clay tablet from southern Mesopotamia, pressed with early signs and seal marks.  It is an account of goods, not a poem and not a law.",
+      "credit": "The Metropolitan Museum of Art, Ancient West Asian Art (accession 1988.433.1), Open Access, public domain",
+      "alt": "A small squarish clay tablet, light brown, covered in rows of shallow impressed marks and round punched holes, with a seal impression across part of the surface.",
+      "src": "art/firsthand-g6/fig-cuneiform-tablet.jpg"
+    },
+    {
+      "id": "fig-egypt-scribe",
+      "kind": "photo",
+      "caption": "A limestone statue of Nikare, an Egyptian official, seated cross-legged in the pose Egyptian sculpture kept for scribes.",
+      "credit": "The Metropolitan Museum of Art, Egyptian Art (accession 48.67), Open Access, public domain",
+      "alt": "A weathered limestone statue of a man seated cross-legged, hands resting on his lap, wearing a shoulder-length wig.",
+      "src": "art/firsthand-g6/fig-egypt-scribe.jpg"
+    },
+    {
+      "id": "fig-hoplite-amphora",
+      "kind": "photo",
+      "caption": "An Athenian jar painted about 460 BCE with a single armed warrior: crested helmet, round shield, spear.",
+      "credit": "The Metropolitan Museum of Art, Greek and Roman Art (accession 41.162.131), Open Access, public domain",
+      "alt": "A tall black two-handled jar.  On its body an orange-red figure of a warrior in a crested helmet strides to the right, carrying a large round shield and a spear.",
+      "src": "art/firsthand-g6/fig-hoplite-amphora.jpg"
+    },
+    {
+      "id": "fig-owl-coin",
+      "kind": "photo",
+      "caption": "The reverse of an Athenian silver tetradrachm: the owl of Athena, an olive sprig, and the first three letters of the city's name.",
+      "credit": "The Metropolitan Museum of Art, Greek and Roman Art (accession 2021.40.80), Open Access, public domain",
+      "alt": "A worn silver coin showing an owl facing forward, with a crescent and an olive sprig above its shoulder and three Greek letters at the right edge.",
+      "src": "art/firsthand-g6/fig-owl-coin.jpg"
+    },
+    {
+      "id": "fig-han-bronze",
+      "kind": "photo",
+      "caption": "A gilded bronze belt plaque made in north China during the Han dynasty, cast as a curled winged animal.",
+      "credit": "The Metropolitan Museum of Art, Asian Art (accession 24.174.6), Open Access, public domain",
+      "alt": "A small bronze plaque shaped like a curled winged creature, its raised outlines gilded gold against a dark ground.",
+      "src": "art/firsthand-g6/fig-han-bronze.jpg"
+    },
+    {
+      "id": "fig-roman-bust",
+      "kind": "photo",
+      "caption": "A Roman marble portrait bust of the emperor Gaius, better known as Caligula, carved during his own short reign.",
+      "credit": "The Metropolitan Museum of Art, Greek and Roman Art (accession 14.37), Open Access, public domain",
+      "alt": "A white marble bust of a young man with short cropped hair, his head turned slightly to his right, on a dark base.",
+      "src": "art/firsthand-g6/fig-roman-bust.jpg"
+    },
+    {
+      "id": "fig-indus-seal",
+      "kind": "photo",
+      "caption": "An Indus stamp seal and the modern impression taken from it.  The animal is clear; the row of signs above it is the script no scholar has ever managed to read.",
+      "credit": "The Metropolitan Museum of Art, Ancient West Asian Art (accession 49.40.1), Open Access, public domain",
+      "alt": "A small square seal at left and its pale clay impression at right, each showing a horned animal in profile above a short line of angular signs.",
+      "src": "art/firsthand-g6/fig-indus-seal.jpg"
+    }
+  ],
   "passages": [
     {
       "id": "p-t1-first-entry-briefing",
@@ -35,6 +101,7 @@
       "title": "Case File: Two Kingdoms of the Nile",
       "genre": "informational",
       "docKind": "case-file",
+      "figureIds": ["fig-egypt-scribe"],
       "source": "original",
       "text": "Egyptians believed their king, the pharaoh, was not an ordinary ruler.  They believed he held a kind of divine power.  His main job was keeping the whole world in balance, a balance Egyptians called ma'at.  Two pharaohs left a large mark on the record.  Hatshepsut ruled Egypt in her own right as a full pharaoh, not merely as a king's wife.  She sent a famous trading trip south along the coast.  Years later, Ramses the Second reigned for decades and built huge monuments.  He later signed one of the oldest peace deals in the whole record.\n\nReligion shaped how Egyptians treated their own dead.  Egyptians believed a spirit needed a preserved body to survive into the next life, so skilled workers made mummies to stop a body from decaying.  Wealthier Egyptians built large tombs and filled them with goods the dead were thought to need on the trip ahead.  That belief is the real reason the pyramids exist at all.\n\nSouth of Egypt, along the same river, sat the kingdom of Kush.  Egypt and Kush traded gold, ivory, and other goods for centuries, but their bond was never simply friendly.  Egypt's own armies took over Kush during Egypt's strongest era.  Years later, that balance flipped.  Kushite kings conquered Egypt itself and ruled it as pharaohs in their own right, keeping many Egyptian customs alongside their own.\n\nThe two peoples even wrote their history in different ways.  Mesopotamian scribes pressed wedge-shaped cuneiform marks into wet clay, using a cut reed, one tablet at a time.  Egyptian scribes instead drew or carved hieroglyphs onto papyrus and stone, a system built from hundreds of small pictures.  Both systems did the same basic job.  They let a record live on long after its maker was gone."
     },
@@ -59,6 +126,7 @@
       "title": "Source A: The Athenian Account, Filed by the Aegean Desk",
       "genre": "informational",
       "docKind": "source-desk",
+      "figureIds": ["fig-owl-coin"],
       "source": "original",
       "text": "Greece's own land decided its shape long before any war began.  Mountains cut the land into small, separate pockets, and the sea reached almost every one of them.  No single valley could feed a kingdom big enough to rule the whole region.  Instead, dozens of separate city-states grew up.  Each one ran its own government.  Each one guarded its own coast.\n\nAthens took its own government further than most cities dared.  Its assembly let adult male citizens vote directly on the city's laws.  This system is remembered as democracy, rule by the people themselves.  Enslaved people, foreigners, and women could not vote.  The system's real reach was smaller than the word alone suggests.  Still, within that limited group, Athens gave plain citizens a truly direct voice.  A culture built on open debate grew up alongside it.  A thinker named Socrates walked the city asking sharp questions.  His questions made easy ideas fall apart in public.\n\nThe Persian Empire invaded Greece twice.  Athens filed its own account of what really won the war.  Athenian soldiers stood almost alone at Marathon.  They turned back the first Persian invasion outright.  Years later, an even bigger force arrived.  Athens poured newly found silver into a huge navy.  The leader Themistocles pushed hard for this plan.  At Salamis, that navy trapped the Persian fleet in a narrow strait.  It wrecked the fleet outright.  The invasion's push broke for good.  The Persian king pulled back with most of his army.\n\nThis account does not deny that other cities fought bravely too.  It simply argues that ships, not soldiers, won the war.  A closing note from the Aegean Desk adds one more point.  Greek ways did not stay locked inside these city-states forever.  A Macedonian king named Alexander later carried them across a much wider empire."
     },
@@ -99,6 +167,7 @@
       "title": "Case File: The Han Restoration and the Long Road West",
       "genre": "informational",
       "docKind": "case-file",
+      "figureIds": ["fig-han-bronze"],
       "source": "original",
       "text": "The Qin dynasty fell apart only a few years after its first emperor died.  Harsh rule and open revolt wore it down fast.  The Han dynasty that came next ruled far longer.  It made a choice the Qin never had.  Han rulers stopped treating Confucian teaching as a threat and put it back at the very center of government instead.\n\nHan officials had to study the Confucian classics, the same texts the Qin had once tried to burn.  A person's grasp of those texts more and more shaped who could serve the state.  That change built a government of trained scholar-officials.  Birth alone no longer decided who ran the country, a lasting shift in how China chose its leaders.\n\nHan China also reached much farther than its own borders.  A long web of trade routes linked Han cities to Central Asia and beyond.  Later writers called this web the Silk Road.  Caravans carried Chinese silk west and brought back horses, glass, and goods from far regions in return.  A Han official named Zhang Qian is often credited with opening these links.  He traveled west on a state trip, though trade along parts of the route likely came before his trip.  Goods were never the only thing moving along that road.  Ideas and faiths traveled with the traders who carried them.\n\nBuddhism reached China this way, coming slowly from India along the same routes the silk traders used.  Buddhism took root beside Confucianism and Daoism rather than replacing either one.  Chinese thought, from that point on, kept following the very same road."
     },
@@ -107,6 +176,7 @@
       "title": "Case File: Closing the File on Rome",
       "genre": "informational",
       "docKind": "case-file",
+      "figureIds": ["fig-roman-bust"],
       "source": "original",
       "text": "This is the last entry in the whole case file.  It closes in a different way than every entry before it.  Rome does not open a new puzzle.  It answers back into every puzzle this file has already opened.\n\nRome began as a kingdom, then threw out its own king and became a republic instead.  Two elected consuls led it, along with a council called the Senate.  For years afterward, rich patrician families held nearly all the real power.  Plain plebeian citizens fought for a bigger share of it.  That fight in time produced the Twelve Tables, Rome's first written law code.  The code was posted in public so that every citizen, patrician or plebeian, could actually see the same laws applied to all, even though rank still shaped much of Roman life.  Compare that to Hammurabi's own code, filed at the very start of this record.  Its finished laws still punished the same crime in different ways, depending on who the victim was.\n\nRome's spot on a sea-facing peninsula pushed it steadily outward.  Rome fought the rival city of Carthage across three long wars and won.  Rome then held most of the Mediterranean coast.  A road web linked it all, moving troops and officials fast across huge distances.\n\nThe republic itself could not survive its own success.  A general named Julius Caesar seized power by force.  Senators feared he wished to rule as a king, and they killed him.  More years of civil war came next.  His adopted heir, Octavian, rose as Rome's first emperor, taking the name Augustus.  A republic without a king had lasted nearly five hundred years before an empire took its place.\n\nRome gave out citizenship widely across its conquered lands, a reach that went far past Athens and its own narrow assembly.  Athens had let its citizens vote right on the city's own laws, years earlier.  Rome also matched many of its own gods to Greek ones, treating each pair as one god under two names.  Rome took in Greek philosophy too.  The file that opened with a river and a code of law now closes with an empire, one built from nearly every civilization this record has ever checked."
     },
@@ -115,6 +185,7 @@
       "title": "Recovered Entry: What the Clay Kept",
       "genre": "informational",
       "docKind": "recovered-entry",
+      "figureIds": ["fig-cuneiform-tablet"],
       "source": "original",
       "text": "This entry answers a question every new Recorder asks.  Why does so much of the oldest record come from one flat, muddy plain?  The answer is clay.  Southern Mesopotamia had almost no stone and very little timber, but it had river mud without limit.  Scribes there wrote on wet clay tablets, and clay is stubborn.  A tablet dropped in a ruin simply waits.\n\nThe first cities on that plain were Sumerian.  Uruk and Ur each ran its own government, guarded its own walls, and honored its own patron god.  A stepped temple platform called a ziggurat stood at the center of many of them.  Villages had grown into cities, and cities needed records.  The earliest tablets are not poems or laws at all.  They are receipts, counting sacks of grain, jars of oil, and heads of livestock.  Others are school exercises, copied out by students learning the script, with the mistakes still sitting on them.\n\nThe tablets also show who stood where.  Kings and priests sat at the top, and merchants, artisans, and farmers came next.  Enslaved people sat at the bottom, many of them captives taken in war.\n\nThose same centuries produced tools the whole world later borrowed.  Potters shaped clay on a turning wheel, and heavy carts rolled on wheels too.  Farmers cut furrows with a plow instead of a digging stick, and sailors caught the wind with a sail.  Metalworkers mixed copper with tin to make bronze, which held an edge far better than either metal alone.\n\nNo city on that plain stayed free forever.  A ruler named Sargon conquered the Sumerian cities and ruled them from Akkad, his own capital, and many historians call what he built the first empire in the record.  Babylon rose later, under the king whose law code this file already holds, and Assyria rose to dominate the region later still.\n\nHere is the part the Office likes best.  Fire destroys most records, but fire bakes clay harder.  Palaces on that plain burned more than once, and the tablets stored inside came out of the ashes tougher than they went in.  The record survives partly because somebody's city was sacked."
     },
@@ -179,6 +250,7 @@
     {
       "id": 1,
       "name": "First Entry",
+      "reveal": { "figureId": "fig-cylinder-seal" },
       "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
       "targets": [
         "hist-t1-first-entry"
@@ -251,6 +323,7 @@
     {
       "id": 3,
       "name": "Two Accounts",
+      "reveal": { "figureId": "fig-hoplite-amphora" },
       "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
       "targets": [
         "hist-t3-greece"
@@ -287,6 +360,7 @@
     {
       "id": 4,
       "name": "The Quiet Record",
+      "reveal": { "figureId": "fig-indus-seal" },
       "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
       "targets": [
         "hist-t4-india"
