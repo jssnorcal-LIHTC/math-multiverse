@@ -114,6 +114,48 @@
     return n;
   }
 
+  // Phase R, task 2.  The passage scrolls, and its clip edge was invisible: at real passage
+  // length the last visible line is sliced mid-sentence with no rule, no fade and no gap before
+  // the question begins.  A child scanning down cannot tell whether the article ended, whether
+  // the app broke, or whether there is more below, and in the shot that was taken to check
+  // Niall's report the clipped half-line was the single most broken-looking thing on screen.
+  //
+  // `data-clipped` is written ONLY while the box genuinely overflows AND is not scrolled to its
+  // end, so a passage that fits, and a passage the child has read to the bottom, both paint
+  // nothing.  A permanent fade would dim the last line of every short passage for no reason,
+  // which trades one wrong signal for another.
+  //
+  // Done in JS rather than with the background-attachment:local shadow trick because
+  // .mv-passage's background-image layer is already owned by the docKind tint, and composing
+  // scroll shadows into it would mean editing all eleven skin rules to keep one affordance.
+  //
+  // Every property read here is guarded: the unit suite renders through a DOM stub that has no
+  // layout, so scrollHeight/clientHeight are absent there, and a passage must never be able to
+  // cost the child the level over a decoration.
+  function markPassageClipped(box) {
+    if (!box) return;
+    const update = () => {
+      try {
+        const sh = box.scrollHeight, ch = box.clientHeight, st = box.scrollTop;
+        if (typeof sh !== 'number' || typeof ch !== 'number' || typeof st !== 'number') return;
+        // 2px tolerance: sub-pixel line rounding reports a 1px overflow on boxes that fit.
+        const more = sh - ch - st > 2;
+        if (more) box.dataset.clipped = '1';
+        else delete box.dataset.clipped;
+      } catch (_) {}
+    };
+    try {
+      if (!box._mvClipBound) {
+        box._mvClipBound = true;
+        if (typeof box.addEventListener === 'function') box.addEventListener('scroll', update);
+      }
+      update();
+      // Re-check once after layout settles: at render time a figure strip's images may not have
+      // been measured yet, and the passage's own height is what this depends on.
+      if (typeof setTimeout === 'function') setTimeout(update, 0);
+    } catch (_) {}
+  }
+
   function makeRunner(pack, levelIndex, host, callbacks, deps) {
     // root is null under Node, so every lookup through it must be guarded.  `typeof root.x` does NOT
     // guard: typeof only suppresses the error for a bare identifier, not for a member access on an
@@ -246,6 +288,12 @@
           // never carries a stale or empty-string dockind attribute for Task 5's CSS to trip on.
           if (passage.docKind) passageBox.dataset.dockind = passage.docKind;
           else delete passageBox.dataset.dockind;
+          // Phase R: the band's LABEL, separate from the skin that paints it.  Written on the
+          // same only-when-present terms as dockind above, so a passage that drops its register
+          // falls back to its kind's own literal rather than carrying an empty attribute that
+          // CSS's attr() would render as a blank band.
+          if (passage.register) passageBox.dataset.register = passage.register;
+          else delete passageBox.dataset.register;
           // Dryness-fix round 2: the strip renders HERE, immediately after the title and before
           // the paragraph loop, so renderStrip's own appendChild lands it as the passage box's
           // SECOND child (title first, strip second) -- never after every paragraph. At real
@@ -273,6 +321,7 @@
           }
         }
         passageBox.style.display = '';
+        markPassageClipped(passageBox);
       } else {
         passageBox.style.display = 'none';
         passageBox.dataset.pid = '';
@@ -445,7 +494,11 @@
   }
 
   return {
-    pickItems, scoreFor, summarize, starsForMistakes, register, makeRunner, DEFAULT_LIVES, CORRECT_ADVANCE_MS,
+    // markPassageClipped is exported so tests/reading-surface.js can drive the REAL marker
+    // against a real, overflowing passage in a real browser, rather than reimplementing the
+    // overflow arithmetic in the gate and proving only that the gate agrees with itself.
+    pickItems, scoreFor, summarize, starsForMistakes, register, makeRunner, markPassageClipped,
+    DEFAULT_LIVES, CORRECT_ADVANCE_MS,
     STAMP_THEME,
     _test: { pickItems },
   };

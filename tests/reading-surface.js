@@ -57,6 +57,14 @@ const SLIT_PX = 100;
 
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json' };
 
+// Phase R, task 5.  Imported from the validator rather than re-listed, so a kind added there and
+// not here cannot leave a skin whose title contrast was never measured.
+const { DOC_KINDS: DOC_KINDS_FOR_CONTRAST } = require('./validate-pack.js');
+// .mv-passage-title is 700 weight at roughly 16px, which is under WCAG's 18.66px-bold "large
+// text" exemption, so the floor is 4.5:1 and not 3:1.  Same reasoning the band's own rule
+// records for itself in engine.css.
+const TITLE_CONTRAST_FLOOR = 4.5;
+
 function startServer() {
   return new Promise((resolve) => {
     const server = http.createServer((req, res) => {
@@ -93,6 +101,7 @@ function startServer() {
 
   const rows = [];
   const perPackCounts = [];
+  const titleContrasts = [];
 
   for (const entry of manifestPacks) {
     // Return to the launcher and select this pack's own grade before looking for its card: a prior
@@ -121,6 +130,85 @@ function startServer() {
     });
     await page.waitForSelector('.mv-passage, .mv-item', { timeout: 8000 });
     await page.waitForTimeout(700);
+
+    // ---- phase R, task 5: passage-title contrast, swept ONCE per pack over every skin ----
+    // Pre-existing and carried into this phase because it is literally the title of the surface
+    // being restyled, and leaving a known defect as a separate ticket while rewriting its own
+    // neighbourhood is how it survives the rewrite.
+    //
+    // The band above it was already fixed in V1 by mixing the accent toward white; the title was
+    // not, and still paints the raw accent. Now the passage grounds are TINTED, which is a
+    // different and harder background set than the one it failed against, so the number is
+    // re-measured here rather than ported.
+    //
+    // Composited the same way V1's band measurement was: the app frame's own colour, then the
+    // passage's background-color wash, then the docKind tint carried in background-image. Both
+    // layers are read from computed style, so a token change moves this measurement with it.
+    //
+    // WHAT THIS MEASUREMENT CANNOT SEE, found by mutating it rather than by reasoning: if the
+    // title's colour becomes invalid at computed-value time (a var() with no fallback, a token
+    // deleted), `color` is an inherited property, so it falls back to the inherited near-white
+    // and this sweep reports a comfortable 13.26:1 and passes. The gate proves the title is
+    // READABLE. It does not prove the title still carries its pack's accent, and no contrast
+    // measurement can, because losing a hue toward white improves the very number being checked.
+    const titleContrast = await page.evaluate((kinds) => {
+      // Canvas-resolved, not regex-parsed. A computed `color-mix(in oklab, ...)` does NOT come
+      // back as rgb() in Chromium, so a /rgba?\(/ parse returns null and the whole measurement
+      // silently loses its foreground -- which is exactly how this probe failed first time.
+      // Painting the colour and reading the pixel resolves ANY css colour, including color-mix,
+      // color(srgb ...) and named colours, which is the same technique V1's band measurement used.
+      const cvs = document.createElement('canvas');
+      cvs.width = cvs.height = 1;
+      const ctx = cvs.getContext('2d', { willReadFrequently: true });
+      ctx.globalCompositeOperation = 'copy';
+      const resolve = (css) => {
+        if (!css) return null;
+        ctx.fillStyle = '#000';
+        ctx.fillStyle = css;              // invalid input leaves the previous value, caught below
+        if (ctx.fillStyle === '#000000' && !/^(#000000|black|rgba?\(0,\s*0,\s*0)/i.test(css)) return null;
+        ctx.fillRect(0, 0, 1, 1);
+        const d = ctx.getImageData(0, 0, 1, 1).data;
+        return { r: d[0], g: d[1], b: d[2], a: d[3] / 255 };
+      };
+      // A skin tint arrives as `linear-gradient(rgba(...), rgba(...))`; take its first stop, which
+      // is flat by construction (both stops are the same colour).
+      const parse = (s) => {
+        if (!s || s === 'none') return null;
+        const m = /rgba?\([^)]+\)/.exec(s);
+        return resolve(m ? m[0] : s);
+      };
+      const over = (fg, bg) => fg ? {
+        r: fg.a * fg.r + (1 - fg.a) * bg.r,
+        g: fg.a * fg.g + (1 - fg.a) * bg.g,
+        b: fg.a * fg.b + (1 - fg.a) * bg.b, a: 1,
+      } : bg;
+      const lum = (c) => {
+        const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+        return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b);
+      };
+      const ratio = (a, b) => { const x = lum(a), y = lum(b); const hi = Math.max(x, y), lo = Math.min(x, y); return (hi + 0.05) / (lo + 0.05); };
+
+      const box = document.querySelector('.mv-passage');
+      const title = document.querySelector('.mv-passage-title');
+      const frame = document.querySelector('.host-frame') || document.querySelector('#app') || document.body;
+      if (!box || !title) return null;
+      const frameBg = parse(getComputedStyle(frame).backgroundColor) || { r: 8, g: 9, b: 11, a: 1 };
+      const prev = box.dataset.dockind;
+      const out = [];
+      for (const k of kinds) {
+        box.dataset.dockind = k;
+        const cs = getComputedStyle(box);
+        const wash = parse(cs.backgroundColor);
+        const tint = parse(cs.backgroundImage);      // the skin's flat linear-gradient
+        const ground = over(tint, over(wash, frameBg));
+        const fg = resolve(getComputedStyle(title).color);
+        if (!fg || !ground) { out.push({ kind: k, ratio: null, unresolved: true }); continue; }
+        out.push({ kind: k, ratio: +ratio(fg, ground).toFixed(2) });
+      }
+      if (prev === undefined) delete box.dataset.dockind; else box.dataset.dockind = prev;
+      return out;
+    }, DOC_KINDS_FOR_CONTRAST);
+    titleContrasts.push({ pack: entry.id, rows: titleContrast });
 
     const items = await page.evaluate(async (packId) => {
       window.__pack = await (await fetch(`packs/${packId}.json`)).json();
@@ -171,6 +259,57 @@ function startServer() {
           itemScrolls: host.scrollHeight > host.clientHeight + 1,
           passageAtFloor: Math.round(box.getBoundingClientRect().height) <= Math.ceil(parseFloat(passStyle.minHeight)) + 2,
           footerBelowFrame: footer ? Math.round(footer.getBoundingClientRect().bottom - fr.bottom) : 0,
+
+          // ---- phase R: the read/respond separation, measured in painted pixels ----
+          // Niall's report was that the text he reads and the responses were not separated.
+          // The defect was literal: .mv-item painted rgba(0,0,0,0), so the answer region had no
+          // material of its own and the passage's 3% wash sat one percent from .mv-choice's 4%.
+          // Asserting the PAINTED values, not the stylesheet, is the point: a rule that is
+          // overridden, or a token that changes underneath, has to fail here.
+          separation: (() => {
+            const ps = getComputedStyle(box), hs = getComputedStyle(host);
+            return { passageBg: ps.backgroundColor, itemBg: hs.backgroundColor,
+                     itemBorderTop: hs.borderTopWidth };
+          })(),
+
+          // ---- phase R: the clip affordance, with its own negative control ----
+          // Driven through the REAL marker exported from MVRunner rather than reimplemented
+          // here, so this measures the shipped behaviour and not the gate's opinion of it.
+          // Three states: overflowing and unscrolled (must mark), scrolled to the end (must
+          // clear), and the paint rule itself (shadow present only while marked).
+          clip: (() => {
+            if (!window.MVRunner || typeof MVRunner.markPassageClipped !== 'function') return null;
+            const overflowing = box.scrollHeight > box.clientHeight + 2;
+            box.scrollTop = 0;
+            MVRunner.markPassageClipped(box);
+            const markedAtTop = box.dataset.clipped === '1';
+            const shadowMarked = getComputedStyle(box).boxShadow;
+            box.scrollTop = box.scrollHeight;   // read to the end
+            MVRunner.markPassageClipped(box);
+            const markedAtEnd = box.dataset.clipped === '1';
+            const shadowCleared = getComputedStyle(box).boxShadow;
+            box.scrollTop = 0;
+            MVRunner.markPassageClipped(box);
+            return { overflowing, markedAtTop, markedAtEnd, shadowMarked, shadowCleared };
+          })(),
+
+          // ---- phase R: the register override, measured as PAINTED band text ----
+          // docKind is the styling key and `register` is the label.  The override rule and the
+          // eleven skin literals differ only in specificity, so this reads what the browser
+          // actually paints rather than trusting that argument.  Positive and negative control
+          // in one pass: the same box, same kind, with and without a register.  Attributes are
+          // restored, and this runs after every geometry read above so it cannot disturb them.
+          band: (() => {
+            const prevKind = box.dataset.dockind, prevReg = box.dataset.register;
+            box.dataset.dockind = 'case-file';
+            delete box.dataset.register;
+            const literal = getComputedStyle(box, '::before').content;
+            box.dataset.register = 'PHASE R PROBE';
+            const overridden = getComputedStyle(box, '::before').content;
+            if (prevKind === undefined) delete box.dataset.dockind; else box.dataset.dockind = prevKind;
+            if (prevReg === undefined) delete box.dataset.register; else box.dataset.register = prevReg;
+            return { literal, overridden };
+          })(),
         };
       }, meta.id);
       rows.push({ packId: entry.id, ...meta, ...m });
@@ -194,6 +333,74 @@ function startServer() {
     else if (r.passagePx < MIN_PASSAGE_PX) problems.push(`${tag}: passage ${r.passagePx}px is under the ${MIN_PASSAGE_PX}px floor (item is ${r.itemPx}px)`);
     if (r.footerBelowFrame > 1) problems.push(`${tag}: the Check button is ${r.footerBelowFrame}px below the frame, off screen`);
     if (r.itemScrolls && !r.passageAtFloor) problems.push(`${tag}: the item is scrolling while the passage sits at ${r.passagePx}px, well above its floor. The passage should give first.`);
+
+    // ---- phase R assertions ----
+    const s = r.separation;
+    if (!s) problems.push(`${tag}: separation not measured`);
+    else {
+      const transparent = (c) => !c || c === 'transparent' || /rgba\([^)]*,\s*0\s*\)$/.test(c);
+      if (transparent(s.itemBg)) {
+        problems.push(`${tag}: the respond zone paints ${s.itemBg} -- it has no material of its own, which is the defect Niall reported`);
+      }
+      if (s.itemBg === s.passageBg) {
+        problems.push(`${tag}: the reading surface and the respond zone both paint ${s.itemBg} -- they are the same material`);
+      }
+      if (parseFloat(s.itemBorderTop) < 2) {
+        problems.push(`${tag}: the respond zone's accent edge is ${s.itemBorderTop}, under the 2px colour cue`);
+      }
+    }
+
+    const c = r.clip;
+    if (!c) problems.push(`${tag}: clip affordance not measured (MVRunner.markPassageClipped missing)`);
+    else if (c.overflowing) {
+      // Positive: an overflowing, unscrolled passage must mark AND paint.
+      if (!c.markedAtTop) problems.push(`${tag}: passage overflows but was not marked clipped, so its cut line reads as breakage`);
+      if (c.shadowMarked === 'none') problems.push(`${tag}: passage is marked clipped but paints no edge (box-shadow: none)`);
+      // Negative control: read to the end and the affordance must go away. Without this the
+      // check would pass just as happily on a rule that paints the edge unconditionally.
+      if (c.markedAtEnd) problems.push(`${tag}: passage stayed marked clipped after being scrolled to its end`);
+      if (c.shadowCleared !== 'none') problems.push(`${tag}: passage still paints a clip edge after being read to the end (${c.shadowCleared})`);
+    } else {
+      // A passage that fits must never paint a "more below" cue.
+      if (c.markedAtTop) problems.push(`${tag}: passage fits but was marked clipped, dimming its last line for no reason`);
+    }
+
+    const b = r.band;
+    if (!b) problems.push(`${tag}: band text not measured`);
+    else {
+      // Negative control: with a kind and no register, the skin's own literal must paint.
+      if (!/CASE FILE/i.test(b.literal)) {
+        problems.push(`${tag}: a docKind with no register painted ${b.literal}, not its own skin literal`);
+      }
+      // Positive: a register must override that literal in the painted result.
+      if (!/PHASE R PROBE/.test(b.overridden)) {
+        problems.push(`${tag}: register did not override the band; it painted ${b.overridden}. The override rule is losing to a skin literal.`);
+      }
+    }
+  }
+
+  // ---- phase R, task 5: report and gate the swept title contrast ----
+  console.log('\npassage-title contrast against each skin ground (floor ' + TITLE_CONTRAST_FLOOR + ':1):');
+  for (const t of titleContrasts) {
+    if (!t.rows) { problems.push(`${t.pack}: title contrast could not be measured`); continue; }
+    // COMPLETENESS, asserted rather than assumed. A sweep that silently measures fewer
+    // combinations than there are skins reports clean on nothing, which this program bans
+    // outright (constraint 12). This is a live assertion and not a dead defensive branch: it
+    // compares against validate-pack's own DOC_KINDS, so dropping a kind from either side fails.
+    const unresolved = t.rows.filter((r) => r.ratio === null);
+    for (const r of unresolved) problems.push(`${t.pack}: title contrast unresolved for the ${r.kind} ground -- that combination was never measured`);
+    const measured = t.rows.filter((r) => r.ratio !== null);
+    if (measured.length !== DOC_KINDS_FOR_CONTRAST.length) {
+      problems.push(`${t.pack}: title contrast measured ${measured.length} of ${DOC_KINDS_FOR_CONTRAST.length} skins -- the sweep is incomplete, so a skin exists whose contrast nothing checked`);
+    }
+    if (!measured.length) { problems.push(`${t.pack}: no title-contrast combination resolved at all`); continue; }
+    const worst = measured.reduce((m, r) => (r.ratio < m.ratio ? r : m), measured[0]);
+    console.log(`  ${t.pack.padEnd(22)} worst ${String(worst.ratio).padStart(5)}:1 on ${worst.kind}  (${measured.length}/${t.rows.length} skins measured)`);
+    for (const r of measured) {
+      if (r.ratio < TITLE_CONTRAST_FLOOR) {
+        problems.push(`${t.pack}: .mv-passage-title is ${r.ratio}:1 against the ${r.kind} ground, under the ${TITLE_CONTRAST_FLOOR}:1 floor`);
+      }
+    }
   }
 
   console.log(`\n=== reading-surface: ${rows.length} items, ${problems.length} problem(s), ${jsErrors.length} JS error(s) ===`);
