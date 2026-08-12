@@ -4833,7 +4833,7 @@
       "kind": "plate",
       "caption": "The body's skin nerves, front and back: nerves branching from the spine to reach every part of the body.  Every operative runs on systems like this one.",
       "credit": "Gray's Anatomy of the Human Body, 20th ed. (1918), public domain",
-      "alt": "Full-body views of the nervous system's nerve distribution, from the front (ventral) and the back (dorsal)",
+      "alt": "Full-body views of the body's skin nerves, from the front (ventral) and the back (dorsal)",
       "views": [
         { "label": "Ventral", "src": "art/outpost-protocol-g6/gray-nervous-ventral.png",
           "overlaySrc": "art/outpost-protocol-g6/gray-nervous-overlay.svg" },
@@ -4990,9 +4990,9 @@
     {
       "id": "fig-network-map",
       "kind": "map",
-      "caption": "Every station on the network reports temperature, carbon dioxide, and a fuel-use index to Network Command, the only place able to see the pattern underneath every station's own local mystery.",
+      "caption": "Every station on the network logs temperature and carbon dioxide; Network Command also tracks a fuel-use index across stations and supply runs, the only way to see the pattern underneath each station's own local mystery.",
       "credit": "Outpost Network records (this pack's own map)",
-      "alt": "A hub-and-spoke network map. Named stations Halyard Point, Sable Flats, and Cairn Bay, plus other unnamed stations, all send arrows into a central hub labeled Network Command. Text below explains that every station logs temperature, carbon dioxide, and a fuel-use index; temperature bounces year to year, but carbon dioxide and fuel-use climb the same amount every year and never reverse.",
+      "alt": "A hub-and-spoke network map.  Named stations Halyard Point, Sable Flats, and Cairn Bay, plus other unnamed stations, all send arrows into a central hub labeled Network Command.  Text below explains that every station logs temperature and carbon dioxide, and that Command also tracks a fuel-use index across stations and supply runs.  Temperature climbs overall, even while bouncing year to year, and carbon dioxide and fuel-use climb on almost the same line and never reverse.",
       "src": "art/outpost-protocol-g6/fig-network-map.svg"
     }
   ]
