@@ -224,10 +224,24 @@ function occlusionScanInPage(px) {
 
   // Answers the CURRENT question with choice index 0 and returns the occlusion-scan result
   // once the explain tile has rendered.
-  async function answerAndMeasure(px) {
+  // FLAKE FIX (26-0812). This always clicked data-idx="0", so it only ever captured a "correct"
+  // explain tile when the generator happened to place the key at index 0. A level ends after three
+  // wrong answers, so an attempt yields about three questions, and six attempts could genuinely
+  // run out without the key ever landing there. It failed twice in one session, on f1-decimals g6
+  // and then on floating-bear g5, which is the same defect and not a module-specific one; a gate
+  // that reddens a PR for no reason costs more than the coverage it provides.
+  //
+  // Cycling the clicked index covers all four positions instead of betting on one. The counter is
+  // held by the CALLER across attempts, not reset per attempt, so a module whose key never lands
+  // at a given index still gets every other index tried.
+  //
+  // Reading the key from the DOM instead is not available: the module marks the correct button
+  // with `.correct` only inside its own answer handler, after the click that ends the question.
+  async function answerAndMeasure(px, pickIdx) {
     await hideModals();
-    const btn = await page.$(`#${px}-question .${px}-ans[data-idx="0"]`) || (await page.$$(`#${px}-question .${px}-ans`))[0];
-    if (!btn) throw new Error(`${px}: no answer buttons to click`);
+    const all = await page.$$(`#${px}-question .${px}-ans`);
+    if (!all.length) throw new Error(`${px}: no answer buttons to click`);
+    const btn = all[pickIdx % all.length];
     await btn.click();
     await page.waitForSelector(`#${px}-question .${px}-explain`, { timeout: 6000 });
     return page.evaluate(occlusionScanInPage, px);
@@ -248,6 +262,8 @@ function occlusionScanInPage(px) {
 
   async function testModuleGrade(modId, px, grade) {
     let wrongCap = null, correctCap = null;
+    // Rotates across every question of every attempt, so all four choice positions get tried.
+    let pick = 0;
 
     for (let attempt = 0; attempt < MAX_ATTEMPTS && !(wrongCap && correctCap); attempt++) {
       try {
@@ -260,7 +276,7 @@ function occlusionScanInPage(px) {
       for (let q = 0; q < MAX_QUESTIONS && !(wrongCap && correctCap); q++) {
         let result;
         try {
-          result = await answerAndMeasure(px);
+          result = await answerAndMeasure(px, pick++);
         } catch (e) {
           problems.push(`${modId} g${grade}: answering question ${q + 1} failed (attempt ${attempt + 1}) -- ${e.message}`);
           break;
