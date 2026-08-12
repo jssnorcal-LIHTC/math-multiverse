@@ -52,7 +52,27 @@
   background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle);
   border-radius: 8px; padding: 10px 12px;
 }
-.mv-passage-title { font-weight: 700; margin-bottom: 6px; color: var(--mv-color, #7aa8ff); }
+/* Phase R, task 2: the clip edge.  engine/runner.js writes data-clipped only while the box
+   genuinely overflows AND is not scrolled to its end, so a passage that fits, and one the child
+   has read to the bottom, paint nothing at all.
+   An INSET box-shadow rather than a gradient pseudo-element for two reasons: .mv-passage's
+   background-image layer already belongs to the docKind tint, so a gradient here would mean
+   composing every one of the eleven skin rules to keep one affordance; and an inset shadow is
+   painted on the border box, so it stays put while the content scrolls underneath, which an
+   absolutely positioned child of a scroll container does not. */
+.mv-passage[data-clipped] { box-shadow: inset 0 -20px 15px -15px rgba(0,0,0,0.92); }
+/* Phase R, task 5.  The raw accent fails WCAG AA as a passage title against every skin ground:
+   measured 2.50:1 to 3.59:1 across all 55 pack-accent x docKind combinations, against a 4.5:1
+   floor (700 weight at roughly 16px is under WCAG's 18.66px-bold "large text" exemption, so 3:1
+   does not apply).  Pre-existing, and carried into this phase rather than left as its own ticket
+   because this is the title of the surface phase R restyles, and the tinted grounds are a harder
+   background set than the one it was already failing against.
+   Same remedy V1 gave the register band directly above it: mix the accent toward white far
+   enough to clear the floor while the title still reads as that pack's colour rather than
+   collapsing to one hue for every pack.  tests/reading-surface.js sweeps all 55 combinations and
+   fails under 4.5:1, so this number cannot drift as skins or accents change. */
+.mv-passage-title { font-weight: 700; margin-bottom: 6px;
+  color: color-mix(in oklab, var(--mv-color, #7aa8ff) 55%, white); }
 .mv-para { margin: 0 0 8px; line-height: 1.5; font-size: 0.95rem; }
 
 /* Figure strip: capped so prose stays dominant; it scrolls WITH the passage, so the
@@ -299,8 +319,41 @@
    required: a flex item will not shrink below its content without it, which is the usual reason this
    pattern still overflows. ebsr's render calls scrollIntoView on Part B when it appears, which scrolls
    this box, so revealing Part B still brings it into view. */
-.mv-item { flex: 0 1 auto; min-height: 0; overflow-y: auto; }
-.mv-stem { font-weight: 600; margin: 6px 0 8px; line-height: 1.35; }
+/* Phase R, task 1 (Niall, 26-0812): "no separation between the text that the user reads and the
+   responses."  Measured before changing anything, at 1024x768 on the running app: .mv-passage
+   painted rgba(255,255,255,0.03), .mv-choice painted rgba(255,255,255,0.04), both carrying the
+   same --border-subtle, and .mv-item painted rgba(0,0,0,0) with no border and no padding.  The
+   reading surface and the answer surface were the same material, one percent of white alpha
+   apart, and the region holding the question was not painted at all.
+
+   The two surfaces now read as two materials, which is the distinction the page was missing:
+   the passage is a recessed sheet (a document, tinted by its docKind), and this is the raised
+   console you operate.  --bg-elevated against the passage's near-transparent wash carries the
+   tonal step, and the accent top edge carries the COLOUR cue Niall actually asked for, tied to
+   the pack's own identity the same way the register band is.
+
+   Colour is deliberately not doing this alone (roadmap risk, phase R): the ground step, the
+   stronger border and the padding all still separate the two surfaces for a reader who does not
+   distinguish the two hues.  Kill the accent line and the separation survives.
+
+   Vertical cost is real and constraint 6 is hard (1024x768, no page scroll, passage floor
+   min(190px,30vh)).  Padding here comes out of the same 768px, and .mv-passage's `flex: 1 1 0`
+   is what absorbs it: the passage grows into whatever is left and clamps at its floor.
+   tests/reading-surface.js measures the rendered result across all 720 items and is the gate
+   that catches this if the budget is overspent. */
+.mv-item {
+  flex: 0 1 auto; min-height: 0; overflow-y: auto;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-top: 2px solid var(--mv-color, #7aa8ff);
+  border-radius: 8px;
+  padding: 8px 11px 9px;
+}
+/* The stem is the question, not more prose.  It was bold body text at body size on a
+   transparent ground, which is why it read as a continuation of the passage rather than as a
+   change of task. */
+.mv-stem { font-weight: 700; font-size: 1.02rem; color: var(--text-primary);
+  margin: 2px 0 8px; line-height: 1.35; }
 .mv-hint { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px; }
 
 .mv-choices { display: flex; flex-direction: column; gap: 5px; }
@@ -604,3 +657,23 @@
 .mv-passage[data-dockind="procedure"] { border-left: 3px solid var(--mv-color, #7aa8ff); }
 .mv-passage[data-dockind="memo"]::before { content: 'ANALYST MEMO'; }
 .mv-passage[data-dockind="minutes"]::before { content: 'REVIEW BOARD \00b7  MINUTES'; }
+
+/* Phase R, task 3: the band's LABEL, decoupled from the skin that paints it.
+   Every literal above is welded to one kind, so `case-file` always reads "PROVENANCE OFFICE /
+   CASE FILE" -- a label written for one pack's fiction on a skin that four other packs need.
+   A passage may now carry its own `register` string, and this renders it instead.  docKind
+   stays the styling key (tint, padding, and the list both gates assert against), so a new pack
+   costs zero CSS rather than a new kind, a new DOC_KINDS entry, and a matching skin block.
+
+   WHY TWO ATTRIBUTES AND NOT ONE.  `.mv-passage[data-register]` would be one class plus one
+   attribute, exactly the specificity of every literal above, leaving SOURCE ORDER as the only
+   thing deciding which wins -- and a later-added skin rule, or a reordering, would silently
+   send every register in every pack back to its kind's literal with nothing failing.  Matching
+   both attributes makes this (0,3,1) against their (0,2,1), so it wins on specificity and does
+   not depend on where it sits in the file.  tests/reading-surface.js asserts the PAINTED band
+   text regardless, because a specificity argument is not a measurement.
+
+   Scoped to [data-dockind] as well, matching validate-pack's rule that a register without a kind
+   is refused: the band's box, padding and colour all come from the skin, so a register alone
+   would paint a label with no band under it. */
+.mv-passage[data-dockind][data-register]::before { content: attr(data-register); }
