@@ -19,7 +19,10 @@
       "genre": "informational",
       "docKind": "field-manual",
       "source": "original",
-      "figureIds": ["fig-body-systems", "fig-station-systems"],
+      "figureIds": [
+        "fig-body-systems",
+        "fig-station-systems"
+      ],
       "text": "Every operative in the Outpost Network learns four words first, because every station on the network runs on them.  A system is a set of parts that work together toward one job.  A subsystem is a smaller system that sits inside a bigger one.  It handles one piece of the larger job.  A component is a single part inside a subsystem.  It is the smallest piece that still does its own work.  An interaction is what happens when one part changes, and a connected part changes with it.\n\nUse the station's own life-support system as the example, since every operative lives inside it from the first night.  Life support is the big system, and its one job is keeping the crew breathing, hydrated, and fed.  Three subsystems sit underneath it.  The air subsystem pulls in stale air, strips out carbon dioxide, and sends oxygen back through the station's vents.  The water subsystem catches the moisture the crew breathes out, filters it, and pipes clean water back to the taps.  The food subsystem grows fast crops under grow lights.  Something is always close to ready.\n\nComponents sit one level further down, and they are the parts a technician actually repairs.  The air subsystem's scrubber cartridge is a component.  So is the water subsystem's filter membrane, and so is the food subsystem's light panel.  A technician never repairs \"life support\" as a whole.  A technician repairs one cartridge, or one membrane, or one panel, because that single piece is the one that actually failed.\n\nInteraction ties the whole idea together, and new operatives forget this word first.  A station's systems never sit apart from each other.  Dim light panels slow crop growth, so the crew eats less of what the station grows and more of what gets shipped in.  A clogged air scrubber lets carbon dioxide climb, so the crew works slower and sleeps worse, and fewer repairs get made anywhere else on the station.  One failing component can ripple through its own subsystem, and one failing subsystem can ripple through the whole system.  Reading a station means reading those ripples.  It means more than naming the part that broke first.\n\nScale works the same way outside a single station.  A cell is smaller than an organ, and an organ is smaller than an organism, such as one operative.  An organism is smaller than a station, and a station is smaller than the planet holding every station at once.  Each level is its own system, built from smaller systems and nested inside a bigger one.  An operative who can trace one ripple through one station is already halfway there, since the same kind of ripple crosses an entire planet, and tracing it is the real job waiting at the end of training."
     },
     {
@@ -28,7 +31,9 @@
       "genre": "informational",
       "docKind": "status-log",
       "source": "original",
-      "figureIds": ["fig-dome-drift"],
+      "figureIds": [
+        "fig-dome-drift"
+      ],
       "text": "Meridian Dome has run as a sealed system for one hundred eighteen days, its longest run.  Nothing enters and nothing leaves, though sunlight gets in and data goes out each morning.  Dr. Renata Kessler is the dome's systems lead.  She files this status log every four weeks.  Network Command can track the numbers without a crisis.\n\nOn day ninety, the dome's air held steady, and carbon dioxide read four hundred ten parts per million, or ppm.  Oxygen sat near twenty and a half percent.  Both numbers matched every reading since the seal closed, and the water subsystem was saving ninety-six percent of all the crew used.  The food modules were producing enough to cover every meal, with a small surplus.\n\nBy day one hundred four, the numbers had shifted.  Carbon dioxide had climbed to four hundred thirty ppm.  Oxygen had slipped to twenty percent even.  Neither shift was large enough to worry the crew, and Dr. Kessler's log calls it \"within normal drift.\"  Her notes say systems wander before they settle.\n\nBy day one hundred eighteen, the drift had not settled.  Carbon dioxide now reads four hundred fifty-two ppm.  Oxygen has fallen to nineteen and a half percent.  Water reclamation has held steady near ninety-five percent.  The food modules are still meeting every meal.  Neither of those subsystems appears to be the source.  One subsystem keeps drawing her attention: the algae bioreactor tucked beneath the food modules, the dome's main source of extra oxygen.  Its daily readings have gone low, though nothing about its gear has failed.\n\nDr. Kessler's log closes with one line, asking Network Command to send an operative to walk the dome.  Sensor readings show a number falling, but they cannot say why.  Four straight weeks of drift have passed, and why is the question the dome needs answered."
     },
     {
@@ -45,7 +50,9 @@
       "genre": "informational",
       "docKind": "weather-log",
       "source": "original",
-      "figureIds": ["fig-front-goes"],
+      "figureIds": [
+        "fig-front-goes"
+      ],
       "text": "Halyard Point Relay sits on a headland.  The coast juts out into open water there.  That makes it the Network's best post for storm warnings.  Relay Officer Dez Amaro logs four readings every morning.  He tracks air pressure, temperature, humidity, and wind.\n\nOn the first day, the barometer read thirty and one tenth inches.  The temperature reached seventy-four degrees, and humidity sat at fifty-two percent.  The wind came light out of the southwest.  The sky stayed clear through the afternoon.\n\nOn the second day, the barometer slipped to thirty inches even.  The temperature climbed to seventy-six degrees, and humidity rose to fifty-eight percent.  The wind came from the southwest, a little stronger than the day before.  A haze had moved in by evening.\n\nOn the third day, the barometer fell further.  It read twenty-nine and eight tenths inches.  The temperature dropped to seventy-one degrees, and humidity climbed to sixty-seven percent.  The wind shifted to blow out of the west.  Low clouds were building along the horizon by midday.\n\nOn the fourth day, the barometer read twenty-nine and six tenths inches.  That was its lowest reading of the week.  Temperature fell again, to sixty-five degrees, and humidity reached seventy-nine percent.  The wind swung to the northwest and picked up to twenty-two miles per hour.  The relay logged its first rain of the week.  That happened by early afternoon.\n\nOn the fifth day, the barometer bottomed out.  It read twenty-nine and five tenths inches.  Temperature had dropped to fifty-eight degrees.  Humidity reached eighty-eight percent.  The wind now blew hard from the north.  It reached thirty-one miles per hour.  Rain fell through the day without a break.\n\nOfficer Amaro's log adds one more line every week.  It logs the colony no matter the weather.  The brindle tern colony below the relay held at two hundred fourteen active nests.  That count matched last week's.  The note is routine, filed every week.  It sits at the bottom of the page.  Five days of falling pressure and rising wind sit above it."
     },
     {
@@ -54,7 +61,10 @@
       "genre": "informational",
       "docKind": "field-manual",
       "source": "original",
-      "figureIds": ["fig-surface-chart", "fig-front-section"],
+      "figureIds": [
+        "fig-surface-chart",
+        "fig-front-section"
+      ],
       "text": "A change in weather almost always starts the same way.  Two air masses meet, and one of them wins.\n\nAn air mass is a huge body of air that has sat over one kind of ground or ocean long enough to take on that region's temperature and moisture.  Air that has sat over cold land turns cold and often stays fairly dry.  Air that has sat over warm ocean water turns warm and picks up moisture as it travels.  Air masses do not stay in one place forever.  Wind pushes them along, and where two different air masses meet, that meeting point is called a front.\n\nCold air is denser than warm air, which means it packs more mass into the same amount of space.  When a mass of cold air pushes into a mass of warmer air, the cold air does not mix in evenly.  It slides in low, the way water spreads under a lighter oil, and shoves the warmer air up and out of its way.  Warm air forced upward cools quickly as it rises, and cooling air cannot hold as much moisture as warm air can, so the moisture condenses into clouds.  Enough moisture condensing fast enough falls back down as rain.\n\nThat single mechanism explains almost everything a weather log records before a front arrives.  Falling air pressure is the first sign.  A low-pressure system is approaching, and the warm, less dense air still sitting over the station presses down less than the colder, denser air still on its way.  Rising humidity comes next, as the warm air is forced upward and its moisture starts condensing into clouds along the horizon.  A shift in wind direction follows close behind, since wind blows toward lower pressure and the front's own advance drags the wind toward it.  Falling temperature and rising wind speed arrive last, right as the front itself reaches the station and the cold air mass takes over completely.\n\nA relay that tracks all four numbers together can call a front's arrival early, a full day or more before the sky gives any warning.  That is exactly why Halyard Point logs every one of them, every single morning."
     },
     {
@@ -63,7 +73,9 @@
       "genre": "informational",
       "docKind": "field-report",
       "source": "original",
-      "figureIds": ["fig-latitude-currents"],
+      "figureIds": [
+        "fig-latitude-currents"
+      ],
       "text": "Sable Flats Post and Cairn Bay Post sit at almost the exact same latitude.  The sun reaches both at nearly the same angle all year.  By the logic of latitude alone, the two posts should report similar climates.  They do not, and the gap between them is large enough that operatives transferring between the two posts are warned to repack their gear completely.  What worked at one post does not work at the other.\n\nSable Flats sits well inland, a long way from open water.  It sits on flat ground, with nothing between it and the dry continental air overhead.  Cairn Bay sits directly on the coast.  Open ocean stretches away to its west.  That single difference in position changes almost everything else about the two posts' year.\n\nUnequal heating across the planet drives global wind belts.  These are broad rivers of moving air.  They circle the planet in roughly the same bands every year.  The wind belt crossing this latitude blows from the west, off the ocean, before it reaches Sable Flats.  At Cairn Bay, that wind arrives straight off the water.  It still carries the moisture it picked up crossing the ocean.  By the time the same wind belt reaches Sable Flats, it has already crossed hundreds of miles of dry land.  It has dropped most of its moisture along the way.  It arrives far drier than it left the coast.\n\nOcean currents add a second layer to the difference.  A current moving along Cairn Bay's coastline keeps the water near the post within a narrow temperature range all year.  Water changes temperature far more slowly than land does.  Air sitting over that current picks up the same steadiness.  Cairn Bay's temperatures swing less between summer and winter than a place with no ocean nearby.  Sable Flats has no current to moderate it.  Its land surface heats fast under summer sun.  It cools fast once winter sun angles drop.  Its temperature swings far wider across the year than Cairn Bay's does.\n\nNone of this is about today's weather at either post.  A single storm or a single clear week can happen at either station.  These long-term patterns do not change because of one storm.  Halyard Point can log five unusual days without its climate actually changing, the same way.  Climate is the pattern averaged over years.  Weather is what is happening outside the window this morning.  The two posts prove that a shared latitude guarantees neither one."
     },
     {
@@ -72,7 +84,9 @@
       "genre": "informational",
       "docKind": "field-report",
       "source": "original",
-      "figureIds": ["fig-climographs"],
+      "figureIds": [
+        "fig-climographs"
+      ],
       "text": "Network Command keeps a running ten-year average for every post.  It updates the average each year.  A single year can lie about a place.  A full decade cannot.\n\nSable Flats Post has averaged nine inches of rainfall a year.  That average covers the last ten years.  Its average summer high has run ninety-six degrees.  Its average winter low has run twenty-eight degrees.  That is a swing of sixty-eight degrees between the two seasons.  Individual years have varied.  One drought year reached barely five inches of rain.  One unusually wet year reached fourteen.  The ten-year average has still held close to nine every time Network Command has recalculated it.\n\nCairn Bay Post has averaged forty-two inches of rainfall a year.  That is nearly five times what Sable Flats records.  The two posts sit at the same latitude.  Cairn Bay's average summer high has run seventy-four degrees.  Its average winter low has run forty-one degrees.  That is a swing of only thirty-three degrees between seasons.  That is roughly half the swing Sable Flats posts.  Cairn Bay's own wettest year on record reached fifty-one inches.  Its driest year still reached thirty-four.  That range is far narrower than Sable Flats shows between its own extremes.\n\nReading the two tables side by side answers a question new operatives ask often.  Which table shows the post's \"real\" climate?  Neither table describes a single storm or a single cold snap.  Neither one changes because of what one particular year happened to do.  Both tables describe what a post's weather adds up to.  Enough years get averaged together first.  That is the actual definition Network training uses for climate.  A visitor might land at Sable Flats during its one wet year of fourteen inches.  Judging the whole post by that single year would be a mistake.  That visitor would carry home a wrong idea of most years there.  The ten-year average exists precisely so nobody has to make that mistake."
     },
     {
@@ -89,7 +103,9 @@
       "genre": "informational",
       "docKind": "memo",
       "source": "original",
-      "figureIds": ["fig-network-map"],
+      "figureIds": [
+        "fig-network-map"
+      ],
       "text": "Every posting in this network has filed its own local mystery this year.  Halyard Point's spring keeps arriving earlier than its colony's food supply can follow.  Sable Flats has logged its driest three years back to back.  Read alone, each report looks like its own separate problem.  Each one seems to have its own separate cause.  Ten years of Network-wide data changes that.  Read together, the reports stop looking separate at all.\n\nEvery station on the network logs its local temperature.  Network Command also tracks each station's reading.  It compares that reading against the station's thirty-year baseline.  A warm year at Cairn Bay never gets compared against a cold year at Sable Flats.  That mistake does not happen.  Averaged across every station, the network's combined temperature reading has climbed nearly every year.  That climb covers the past decade.  It has not climbed by the same amount each year.  Some years rose sharply.  One year barely rose at all.  That kind of up-and-down bounce is normal.  Ordinary weather causes it.  Any single year runs warmer or cooler than the years around it.\n\nTwo other numbers do not bounce the same way.  Every station's air-sampling equipment also logs atmospheric carbon dioxide.  Carbon dioxide is a greenhouse gas: it lets sunlight in but traps some of the heat that would otherwise escape back to space, so more of it in the air points to a warmer planet on average, a real physical mechanism, not just two numbers that happen to be rising together.  That number has climbed in the same direction every year.  It has climbed by nearly the same amount each time.  Not one of the past ten years has dropped back.  Network Command also tracks a fuel-use index.  That index tracks the fuel every station and supply run burns, the same kind of burning happening everywhere else on the planet, so it stands in for a global number no single network could ever measure directly.  The index has climbed on almost the same line as carbon dioxide.  That climb has stayed steady, year after year.\n\nA signal that bounces up and down, like the temperature line, usually points to short-term natural causes.  Those causes layer on top of whatever else is happening, including the temperature line's own overall climb, so a bouncy year-to-year path and a real warming trend can both be true at once.  A signal that climbs the same steady amount every year points somewhere else.  It never reverses.  The carbon dioxide line and the fuel-use line climb together that way.  That pattern points to a steady cause rather than a random one.  Natural swings do not usually march in one direction for ten straight years.  They do not march in step with a number the network makes itself.\n\nThat steady climb is the one pattern.  It sits underneath every local mystery this year has produced.  It is why Halyard Point's spring keeps arriving earlier.  The colony's food supply cannot keep up.  It is why Sable Flats keeps recording drier years than its ten-year average expects.  One station cannot see a planetary pattern.  It cannot see past its own single report.  The network can see it.  This season's reports, read side by side, are the pattern showing itself."
     },
     {
@@ -98,7 +114,9 @@
       "genre": "informational",
       "docKind": "memo",
       "source": "original",
-      "figureIds": ["fig-proposals"],
+      "figureIds": [
+        "fig-proposals"
+      ],
       "text": "Network Command has approved one field response at Halyard Point.  It targets a gap.  The tern colony's nesting date and the herring's arrival keep drifting apart.  The operative filing the final report must recommend one of three proposals.\n\nCommand set three constraints first.  The response must show a real effect on chick survival.  That effect must appear within one nesting season.  Command will not commit a second season of field budget to a plan.  That plan must show an early result.  Second, the response must cost less than this year's field budget for Halyard Point.  No emergency funding request is allowed.  Third, the response must use only authority the Network already holds.  That authority covers its posts and the land around them.  The Network cannot regulate fishing seasons.  It cannot regulate ocean conditions outside its boundary either.\n\nProposal A calls for a temporary feeding station near the nest sites.  Chicks hatch three weeks before the herring arrive.  The station would stock fish through that exact window.  Setup takes under two weeks.  The cost fits well inside this year's field budget.  The Network runs feeding stations at two other posts.  The authority to run one is not in question.  The effect would end the moment the feeding station stopped.  It treats the survival gap each season rather than closing it.\n\nProposal B calls for fencing around the colony's nest sites.  It would keep ground predators away from eggs and chicks.  The fencing is inexpensive.  It can go up within days.  That fits well inside the time limit Command set.  It fits the cost limit too.  It would likely raise survival among hatched chicks.  Predators are not what this record has shown killing chicks, though.  The record shows chicks starving during the gap.  That gap sits before the herring arrive.  Fencing does nothing to touch that problem.\n\nProposal C calls for the Network to petition the fishery authority.  The petition would ask to delay the herring season's opening.  The delay would run three weeks.  That would time the fish run to arrive when the chicks need it.  If it worked, it would close the mismatch at its root.  It would stop covering for the mismatch every season instead.  The fishery authority does not answer to the Network, though.  No petition has ever been decided in under four months.  That is well past the one-season window Command set.  The outcome does not lie inside the Network's authority.\n\nThe operative's recommendation is due before the next nesting season begins."
     },
     {
@@ -155,7 +173,9 @@
       "genre": "informational",
       "docKind": "memo",
       "source": "original",
-      "figureIds": ["fig-warming-curves"],
+      "figureIds": [
+        "fig-warming-curves"
+      ],
       "text": "From Chief Analyst Mireille Toussaint to Network Command.  Subject: what the Halyard Point record actually shows.\n\nWhy the colony nests earlier is settled, and the record answers it plainly.  The question worth Command's time is a different one.  Why did nesting earlier stop helping the chicks?\n\nStart with the date that matters, which is not the day the first eggs appear.  Tern eggs take about twenty-two days to hatch, and a chick eats nothing at all before it hatches.  The useful column is the hatch date, and the record lets us build that column ourselves.  First eggs came on April seventh in the first logged season, so the eggs hatched around April twenty-ninth.  By the tenth season first eggs came on March twenty-seventh, so hatching fell around April eighteenth.  The twentieth season's March eighteenth puts hatching around April ninth.  The thirtieth season's March tenth puts it around April first.\n\nNow set the herring beside that column.  The herring arrival has held near April twenty-first every season, and it has drifted only about three days either way.  In the first logged season the chicks hatched eight days after the herring had already arrived.  By the tenth season the chicks were hatching before the herring got there.  By the thirtieth season they were hatching about three weeks before.\n\nTwo clocks are running here, and they run at different speeds.  The terns read the coastal air, which has warmed quickly over thirty seasons.  The herring read ocean temperature out at sea, and the sea warms slowly.  The mismatch did not start with the fish.  It started with the birds, and the birds are not doing anything wrong.\n\nThat is what an adaptation limit is, and it is worth stating with care.  An animal can shift its timing only as far and as fast as its own cue shifts.  These terns respond just as they are built to respond.  Their cue used to predict the food, and now it does not.  A cue is useful only while the thing it predicts keeps moving with it.\n\nThe fledge column is the receipt.  Seventy-six percent in the first season, sixty-four by the tenth, fifty-two by the twentieth, thirty-nine by the thirtieth.\n\nCommand has asked what recovery would look like.  It would look like the fledge column climbing across several seasons in a row.  One good season is weather rather than recovery, and Command should not be sold one."
     },
     {
@@ -177,7 +197,9 @@
       ],
       "lives": 4,
       "questions": 8,
-      "reveal": { "figureId": "fig-station-photo" },
+      "reveal": {
+        "figureId": "fig-station-photo"
+      },
       "itemIds": [
         "t1-ebsr-what-is-a-subsystem",
         "t1-mc-smallest-piece",
@@ -202,7 +224,11 @@
         "t1-ebsr-why-the-same-air-changes-names",
         "t1-mc-name-the-boundary-first",
         "t1-ebsr-what-makes-a-handoff-an-interaction",
-        "t1-ebsr-sealed-boundary-what-crosses"
+        "t1-ebsr-sealed-boundary-what-crosses",
+        "l1-vis-trace-direction",
+        "l1-vis-plate-shows",
+        "l1-vis-which-is-component",
+        "l1-vis-nesting-order"
       ]
     },
     {
@@ -214,7 +240,9 @@
       ],
       "lives": 4,
       "questions": 8,
-      "reveal": { "figureId": "fig-habitat-photo" },
+      "reveal": {
+        "figureId": "fig-habitat-photo"
+      },
       "itemIds": [
         "t2-ebsr-what-is-ruled-out",
         "t2-mc-oxygen-change",
@@ -239,7 +267,11 @@
         "t2-ebsr-what-closes-the-order",
         "t2-mc-what-the-sensors-missed",
         "t2-ebsr-the-failure-that-had-no-sensor",
-        "t2-ebsr-why-a-standing-schedule"
+        "t2-ebsr-why-a-standing-schedule",
+        "l2-vis-which-climbs",
+        "l2-vis-read-the-values",
+        "l2-vis-two-scales",
+        "l2-vis-where-the-cartridge-sits"
       ]
     },
     {
@@ -251,7 +283,9 @@
       ],
       "lives": 4,
       "questions": 8,
-      "reveal": { "figureId": "fig-front-goes" },
+      "reveal": {
+        "figureId": "fig-front-goes"
+      },
       "itemIds": [
         "t3-ebsr-what-happens-next",
         "t3-mc-what-is-a-front",
@@ -276,7 +310,11 @@
         "t3-ebsr-veer-consistency",
         "t3-mc-cost-of-the-two-mistakes",
         "t3-ebsr-one-reading-is-not-a-warning",
-        "t3-ebsr-judged-on-the-log"
+        "t3-ebsr-judged-on-the-log",
+        "l3-vis-what-happens-to-warm-air",
+        "l3-vis-cold-air-slides",
+        "l3-vis-front-symbols",
+        "l3-vis-map-shows"
       ]
     },
     {
@@ -288,7 +326,9 @@
       ],
       "lives": 4,
       "questions": 8,
-      "reveal": { "figureId": "fig-coastal-goes" },
+      "reveal": {
+        "figureId": "fig-coastal-goes"
+      },
       "itemIds": [
         "t4-ebsr-why-different-climates",
         "t4-mc-steady-crop-post",
@@ -325,7 +365,9 @@
       ],
       "lives": 4,
       "questions": 8,
-      "reveal": { "figureId": "fig-blue-marble" },
+      "reveal": {
+        "figureId": "fig-blue-marble"
+      },
       "itemIds": [
         "t5-ebsr-real-cause-of-drop",
         "t5-mc-herring-vs-nesting-shift",
@@ -362,7 +404,9 @@
       ],
       "lives": 4,
       "questions": 12,
-      "reveal": { "figureId": "fig-earth-night" },
+      "reveal": {
+        "figureId": "fig-earth-night"
+      },
       "itemIds": [
         "t6-ebsr-which-proposal-lacks-authority",
         "t6-ms-proposals-against-constraints",
@@ -4825,6 +4869,364 @@
       ],
       "maxWords": 5,
       "explain": "The chair asks for one word to go into the minutes word for word: the three constraints are gates rather than scores.  A gate is passed or failed, so a proposal failing any one of them is out however strong it looks on the other two, and only the proposals clearing all three are ever compared against each other."
+    },
+    {
+      "id": "l1-vis-trace-direction",
+      "type": "mc",
+      "passageId": "p-field-manual-systems",
+      "figureId": "fig-body-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 2,
+      "stem": "Watch the moving trace on the plate. Which way does the signal travel, and why does that direction fit what the plate maps?",
+      "explain": "The plate's own printed caption names these as the skin's nerves, and skin nerves carry feeling from the body back to the spine. The trace runs that way. If it ran outward, it would be teaching the opposite of what the picture is a map of.",
+      "choices": [
+        "Away from the spine, because the brain sends every signal outward to the skin.",
+        "Toward the spine, because the plate maps the nerves that move the arm.",
+        "Both ways at once, because the front and back plates run in opposite directions.",
+        "Toward the spine, because the plate maps the skin's nerves, which carry feeling inward."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "This describes a command travelling out to a muscle. The plate maps the SKIN's nerves, and the trace runs the other way, toward the spine.",
+        "1": "The direction is right, but the reason is not. The plate's own printed caption names these as the skin's nerves, not the ones that move a limb.",
+        "2": "The two tabs are two views of the same body, front and back. Only one trace runs, and it runs one way."
+      }
+    },
+    {
+      "id": "l1-vis-plate-shows",
+      "type": "ms",
+      "passageId": "p-field-manual-systems",
+      "figureId": "fig-body-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 2,
+      "stem": "Choose the three statements that the plate itself actually shows.",
+      "choices": [
+        "There are two views on tabs, one of the front and one of the back.",
+        "Each view is a whole standing figure, not a close-up of one limb.",
+        "A trace runs along the arm and travels toward the spine.",
+        "The plate labels each muscle the arm uses to lift a load.",
+        "A cutaway shows the brain and the spinal cord inside the body."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "No muscle is labelled anywhere on either view. The plate maps nerve territories in the skin.",
+        "4": "Neither view opens the body up. Both are outside views of a whole standing figure."
+      },
+      "explain": "Three things are on the plate and two are not. Two tabs give a front and a back view, each of a whole standing figure, and a trace runs along the arm toward the spine. No muscles are labelled and nothing is cut away to show the brain or spinal cord."
+    },
+    {
+      "id": "l1-vis-which-is-component",
+      "type": "mc",
+      "passageId": "p-field-manual-systems",
+      "figureId": "fig-station-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 2,
+      "stem": "On the life-support diagram, which box is labelled as a component?",
+      "explain": "The diagram puts its labels right on the boxes. The bottom row holds the scrubber cartridge, the filter membrane and the light panel, and each carries the label component. Air, Water and Food are one row up, labelled subsystem, and Life Support at the top is the system.",
+      "choices": [
+        "Scrubber cartridge",
+        "Air",
+        "Life Support",
+        "Water"
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Air sits on the middle row and the diagram labels it a subsystem, not a component.",
+        "2": "Life Support is the top box, and the diagram labels it the system. It is the largest level shown, not the smallest.",
+        "3": "Water is on the same row as Air and Food, and the diagram labels all three subsystems."
+      }
+    },
+    {
+      "id": "l1-vis-nesting-order",
+      "type": "order",
+      "passageId": "p-field-manual-systems",
+      "figureId": "fig-station-systems",
+      "targets": [
+        "sci-t1-systems-vocab"
+      ],
+      "coachTopic": "evidence-systems-vocab",
+      "dok": 2,
+      "stem": "The diagram nests its boxes one way only. Put these three levels in order from the smallest thing shown to the largest.",
+      "tiles": [
+        "Air, a subsystem",
+        "Filter membrane, a component",
+        "Life Support, the system"
+      ],
+      "key": [
+        1,
+        0,
+        2
+      ],
+      "explain": "Read the diagram from the bottom up. A component such as the filter membrane sits inside a subsystem such as Air, and every subsystem sits inside the one system, Life Support. The nesting runs one way, so the order never reverses."
+    },
+    {
+      "id": "l2-vis-which-climbs",
+      "type": "mc",
+      "passageId": "p-meridian-status-log",
+      "figureId": "fig-dome-drift",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 2,
+      "stem": "Across the days the chart covers, what happens to the two lines?",
+      "explain": "The chart has two panels. The top one takes carbon dioxide from 410 to 430 to 452 parts per million, climbing the whole way. The bottom one takes oxygen from 20.5 to 20.0 to 19.5 percent, falling the whole way. One goes up, one goes down, and neither turns around.",
+      "choices": [
+        "Both lines climb, one faster than the other.",
+        "Carbon dioxide climbs the whole way while oxygen falls the whole way.",
+        "Carbon dioxide climbs at first and then levels off near the end.",
+        "Oxygen falls at first and then recovers by the last day."
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "Only one climbs. The oxygen panel starts at 20.5 percent and ends at 19.5, so that line falls.",
+        "2": "It does not level off. The three points read 410, then 430, then 452, so the rise from the middle to the end is the larger one.",
+        "3": "There is no recovery. Oxygen reads 20.5, then 20.0, then 19.5, falling by the same half point each time."
+      }
+    },
+    {
+      "id": "l2-vis-read-the-values",
+      "type": "cloze",
+      "passageId": "p-meridian-status-log",
+      "figureId": "fig-dome-drift",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 2,
+      "stem": "Read the two panels. Carbon dioxide starts at {{0}} parts per million and ends at {{1}}, while oxygen ends at {{2}} percent.",
+      "blanks": [
+        {
+          "choices": [
+            "410",
+            "430",
+            "452"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "430 is the middle reading, taken on the day between the first and the last, not the starting one.",
+            "2": "452 is where carbon dioxide ends up, not where it begins."
+          }
+        },
+        {
+          "choices": [
+            "410",
+            "430",
+            "452"
+          ],
+          "key": 2,
+          "distractorRationale": {
+            "0": "410 is the first reading on the chart, not the last.",
+            "1": "430 is the middle reading. The line keeps climbing past it."
+          }
+        },
+        {
+          "choices": [
+            "19.5",
+            "20.0",
+            "20.5"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "20.0 is the middle oxygen reading, not the final one.",
+            "2": "20.5 is where oxygen starts. It falls from there."
+          }
+        }
+      ],
+      "explain": "Both panels give three readings each. Carbon dioxide runs 410, 430, 452 parts per million, so it starts at 410 and ends at 452. Oxygen runs 20.5, 20.0, 19.5 percent, so it ends at 19.5."
+    },
+    {
+      "id": "l2-vis-two-scales",
+      "type": "mc",
+      "passageId": "p-meridian-status-log",
+      "figureId": "fig-dome-drift",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 3,
+      "stem": "The two panels are drawn on two separate scales. Why does that matter when you read them?",
+      "explain": "One panel counts parts per million and the other counts percent, so the same amount of ink means different things in each. That makes a comparison inside one panel fair, and a comparison of steepness across the two meaningless. The caption says so too.",
+      "choices": [
+        "Because it means one panel's readings are more accurate than the other's.",
+        "Because the two quantities are actually measured in the same unit underneath.",
+        "Because a line's steepness can only be compared inside its own panel, not across the two.",
+        "Because it means the two lines must cross somewhere between the days shown."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "Separate scales say nothing about accuracy. Both panels report real readings; they just measure different quantities in different units.",
+        "1": "They are not. One panel is parts per million and the other is a percent, which is exactly why they cannot share a scale.",
+        "3": "Lines on separate scales cannot be expected to cross at all. Where each sits on the page depends on its own panel's scale."
+      }
+    },
+    {
+      "id": "l2-vis-where-the-cartridge-sits",
+      "type": "match",
+      "passageId": "p-field-manual-systems",
+      "figureId": "fig-station-systems",
+      "targets": [
+        "sci-t2-systems-subsystems"
+      ],
+      "coachTopic": "evidence-sealed-station",
+      "dok": 2,
+      "stem": "The diagram puts each box on a row and labels that row. Match each box to the level the diagram gives it.",
+      "rowLabels": [
+        "Life Support",
+        "Air",
+        "Scrubber cartridge"
+      ],
+      "colLabels": [
+        "The system",
+        "A subsystem",
+        "A component"
+      ],
+      "key": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "explain": "This diagram uses position to mean something. Life Support sits alone at the top and is labelled the system. Air sits on the middle row with Water and Food, all labelled subsystems. The scrubber cartridge sits on the bottom row, labelled a component, with nothing drawn beneath it."
+    },
+    {
+      "id": "l3-vis-what-happens-to-warm-air",
+      "type": "mc",
+      "passageId": "p-halyard-reading-the-front",
+      "figureId": "fig-front-section",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 2,
+      "stem": "In the cross-section, what happens to the warm air where the front is drawn?",
+      "explain": "The cross-section shows cold air sliding in low and shoving the warm air up above it. Air that rises cools, its moisture condenses into cloud, and the rain falls from there. That is the whole chain the picture draws.",
+      "choices": [
+        "It slides in low, underneath the cold air.",
+        "It is held in place by the cold air and stops moving.",
+        "It sinks and dries out as the cold air passes over the top of it.",
+        "It is forced upward, and its moisture condenses into clouds that drop rain."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "That is what the cold air does. The diagram draws the cold air wedging in below and the warm air going up.",
+        "1": "Nothing in the diagram is still. The warm air is pushed up, which is what makes the clouds.",
+        "2": "The diagram has the cold air below, not above, and the warm air rising rather than sinking."
+      }
+    },
+    {
+      "id": "l3-vis-cold-air-slides",
+      "type": "cloze",
+      "passageId": "p-halyard-reading-the-front",
+      "figureId": "fig-front-section",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 2,
+      "stem": "In the diagram, the cold air slides in {{0}} the warm air, and the moisture in the rising warm air condenses into {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "beneath",
+            "above",
+            "away from"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "The diagram draws the cold air low and the warm air pushed up over it, not the other way round.",
+            "2": "The two do not separate. The whole picture is about what happens where they meet."
+          }
+        },
+        {
+          "choices": [
+            "clouds",
+            "a wind shift",
+            "falling pressure"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "A wind shift is one of the early warning signs listed in the note, not what the moisture turns into.",
+            "2": "Falling pressure is another of the listed warning signs, and it is a reading, not something moisture becomes."
+          }
+        }
+      ],
+      "explain": "The diagram is a side view of the two air masses meeting. Cold air comes in beneath, the warm air is forced up, and the moisture it carries condenses into clouds. The wind shift and falling pressure sit in the note as early signs, not as what the moisture becomes."
+    },
+    {
+      "id": "l3-vis-front-symbols",
+      "type": "mc",
+      "passageId": "p-halyard-reading-the-front",
+      "figureId": "fig-surface-chart",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 2,
+      "stem": "On the surface map, one line carries filled triangles along it. Which kind of front is that?",
+      "explain": "The map draws its fronts with symbols rather than words. Triangles alone mark a cold front, semicircles alone mark a warm front, and a line carrying both alternating on opposite sides marks a stationary front.",
+      "choices": [
+        "A cold front",
+        "A warm front",
+        "A stationary front",
+        "An isobar"
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "A warm front is drawn with filled semicircles, not triangles.",
+        "2": "A stationary front carries both symbols, triangles and semicircles alternating on opposite sides of the line.",
+        "3": "An isobar is not a front at all. On this map isobars are plain lines labelled with pressure values from 993 to 1016."
+      }
+    },
+    {
+      "id": "l3-vis-map-shows",
+      "type": "ms",
+      "passageId": "p-halyard-reading-the-front",
+      "figureId": "fig-surface-chart",
+      "targets": [
+        "sci-t3-weather-evidence"
+      ],
+      "coachTopic": "evidence-storm-front",
+      "dok": 2,
+      "stem": "Choose the three things this surface map actually puts on the page.",
+      "choices": [
+        "Fronts drawn as lines carrying triangles or semicircles.",
+        "Pressure centres marked with the letters H and L.",
+        "Isobars labelled with pressure values between 993 and 1016.",
+        "A forecast of what the weather will do over the next three days.",
+        "A photograph of the storm taken from a satellite."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "The map is a record of one morning, not a forecast. Nothing on it says what happens next.",
+        "4": "There is no photograph on this map. It is a drawn chart of symbols, letters and labelled lines."
+      },
+      "explain": "This is a surface analysis for a single morning. It carries front symbols, H and L pressure centres, and isobars labelled from 993 to 1016. It is not a forecast, and it holds no satellite picture."
     }
   ],
   "figures": [
@@ -4835,18 +5237,24 @@
       "credit": "Gray's Anatomy of the Human Body, 20th ed. (1918), public domain",
       "alt": "Full-body views of the body's skin nerves, from the front (ventral) and the back (dorsal)",
       "views": [
-        { "label": "Ventral", "src": "art/outpost-protocol-g6/gray-nervous-ventral.png",
-          "overlaySrc": "art/outpost-protocol-g6/gray-nervous-overlay.svg" },
-        { "label": "Dorsal", "src": "art/outpost-protocol-g6/gray-nervous-dorsal.png" }
+        {
+          "label": "Ventral",
+          "src": "art/outpost-protocol-g6/gray-nervous-ventral.png",
+          "overlaySrc": "art/outpost-protocol-g6/gray-nervous-overlay.svg"
+        },
+        {
+          "label": "Dorsal",
+          "src": "art/outpost-protocol-g6/gray-nervous-dorsal.png"
+        }
       ],
       "dataTable": {
-            "type": "features",
-            "items": [
-                  "A pair of printed anatomical plates, one ventral (front) and one dorsal (back), shown on tabs.",
-                  "Each plate is a full standing human figure with the skin’s nerve territories mapped across it.",
-                  "The plates carry their own printed captions naming them as distributions of cutaneous nerves.",
-                  "An animated trace runs along the arm’s cutaneous nerve corridor, travelling toward the spine, which is the direction a sensory signal actually travels."
-            ]
+        "type": "features",
+        "items": [
+          "A pair of printed anatomical plates, one ventral (front) and one dorsal (back), shown on tabs.",
+          "Each plate is a full standing human figure with the skin’s nerve territories mapped across it.",
+          "The plates carry their own printed captions naming them as distributions of cutaneous nerves.",
+          "An animated trace runs along the arm’s cutaneous nerve corridor, travelling toward the spine, which is the direction a sensory signal actually travels."
+        ]
       }
     },
     {
@@ -4873,15 +5281,15 @@
       "alt": "A national weather map covered in station readings, with a cold front drawn as a line of filled triangles, a warm front drawn as a line of filled half-circles, and several H and L letters marking high- and low-pressure centers.",
       "src": "art/outpost-protocol-g6/fig-surface-chart.jpg",
       "dataTable": {
-            "type": "features",
-            "items": [
-                  "A national surface weather map for one morning, titled \"Surface Weather Map and Station Weather\".",
-                  "Cold fronts are drawn as lines with filled triangles.",
-                  "Warm fronts are drawn as lines with filled semicircles.",
-                  "A stationary front is drawn with triangles and semicircles alternating on opposite sides.",
-                  "Pressure centres are marked H and L.",
-                  "Isobars are labelled with pressure values, ranging from 993 to 1016."
-            ]
+        "type": "features",
+        "items": [
+          "A national surface weather map for one morning, titled \"Surface Weather Map and Station Weather\".",
+          "Cold fronts are drawn as lines with filled triangles.",
+          "Warm fronts are drawn as lines with filled semicircles.",
+          "A stationary front is drawn with triangles and semicircles alternating on opposite sides.",
+          "Pressure centres are marked H and L.",
+          "Isobars are labelled with pressure values, ranging from 993 to 1016."
+        ]
       }
     },
     {
@@ -4926,11 +5334,57 @@
       "src": "art/outpost-protocol-g6/fig-dome-drift.svg",
       "dataTable": {
         "panels": [
-          { "type": "line", "yLabel": "CO2 (ppm)", "series": [{ "label": "CO2", "points": [[90, 410], [104, 430], [118, 452]] }] },
-          { "type": "line", "yLabel": "O2 (percent)", "series": [{ "label": "O2", "points": [[90, 20.5], [104, 20.0], [118, 19.5]] }] }
+          {
+            "type": "line",
+            "yLabel": "CO2 (ppm)",
+            "series": [
+              {
+                "label": "CO2",
+                "points": [
+                  [
+                    90,
+                    410
+                  ],
+                  [
+                    104,
+                    430
+                  ],
+                  [
+                    118,
+                    452
+                  ]
+                ]
+              }
+            ]
+          },
+          {
+            "type": "line",
+            "yLabel": "O2 (percent)",
+            "series": [
+              {
+                "label": "O2",
+                "points": [
+                  [
+                    90,
+                    20.5
+                  ],
+                  [
+                    104,
+                    20.0
+                  ],
+                  [
+                    118,
+                    19.5
+                  ]
+                ]
+              }
+            ]
+          }
         ],
         "xLabel": "day",
-        "notes": ["Water reclamation held steady near 95 to 96 percent across the same days."]
+        "notes": [
+          "Water reclamation held steady near 95 to 96 percent across the same days."
+        ]
       }
     },
     {
@@ -4943,10 +5397,49 @@
       "src": "art/outpost-protocol-g6/fig-climographs.svg",
       "dataTable": {
         "panels": [
-          { "type": "bar", "yLabel": "rainfall (in/yr)", "series": [{ "label": "rainfall", "points": [[0, 9], [1, 42]] }] },
-          { "type": "bar", "yLabel": "seasonal swing (degrees)", "series": [{ "label": "swing", "points": [[0, 68], [1, 33]] }] }
+          {
+            "type": "bar",
+            "yLabel": "rainfall (in/yr)",
+            "series": [
+              {
+                "label": "rainfall",
+                "points": [
+                  [
+                    0,
+                    9
+                  ],
+                  [
+                    1,
+                    42
+                  ]
+                ]
+              }
+            ]
+          },
+          {
+            "type": "bar",
+            "yLabel": "seasonal swing (degrees)",
+            "series": [
+              {
+                "label": "swing",
+                "points": [
+                  [
+                    0,
+                    68
+                  ],
+                  [
+                    1,
+                    33
+                  ]
+                ]
+              }
+            ]
+          }
         ],
-        "categoryLabels": ["Sable Flats", "Cairn Bay"],
+        "categoryLabels": [
+          "Sable Flats",
+          "Cairn Bay"
+        ],
         "notes": [
           "Summer high: Sable Flats 96 degrees, Cairn Bay 74 degrees.",
           "Winter low: Sable Flats 28 degrees, Cairn Bay 41 degrees.",
@@ -4967,8 +5460,33 @@
         "type": "line",
         "xLabel": "season",
         "yLabel": "fledge rate (percent)",
-        "yDomain": [0, 100],
-        "series": [{ "label": "fledge rate", "points": [[1, 76], [10, 64], [20, 52], [30, 39]] }],
+        "yDomain": [
+          0,
+          100
+        ],
+        "series": [
+          {
+            "label": "fledge rate",
+            "points": [
+              [
+                1,
+                76
+              ],
+              [
+                10,
+                64
+              ],
+              [
+                20,
+                52
+              ],
+              [
+                30,
+                39
+              ]
+            ]
+          }
+        ],
         "notes": [
           "Season 1: chicks hatched about 8 days after the herring arrived.",
           "Season 30: chicks hatched about 3 weeks before the herring arrived.",
@@ -4984,14 +5502,14 @@
       "alt": "A tree diagram. At the top, a box labeled Life Support (system). Below it, three boxes labeled Air, Water, and Food (subsystem). Below each subsystem sits one component box: Scrubber cartridge under Air, Filter membrane under Water, Light panel under Food. Two notes below explain interaction: a clogged scrubber cartridge lets carbon dioxide climb, so the crew works slower and sleeps worse; dim light panels slow crop growth, so the crew eats more of what gets shipped in.",
       "src": "art/outpost-protocol-g6/fig-station-systems.svg",
       "dataTable": {
-            "type": "features",
-            "items": [
-                  "A tree diagram titled \"Life support: system, subsystem, component\".",
-                  "The top box is Life Support, labelled (system).",
-                  "Three boxes below it are Air, Water and Food, each labelled (subsystem).",
-                  "Below those sit Scrubber cartridge, Filter membrane and Light panel, each labelled (component).",
-                  "The nesting runs one way only: components sit inside subsystems, which sit inside the system."
-            ]
+        "type": "features",
+        "items": [
+          "A tree diagram titled \"Life support: system, subsystem, component\".",
+          "The top box is Life Support, labelled (system).",
+          "Three boxes below it are Air, Water and Food, each labelled (subsystem).",
+          "Below those sit Scrubber cartridge, Filter membrane and Light panel, each labelled (component).",
+          "The nesting runs one way only: components sit inside subsystems, which sit inside the system."
+        ]
       }
     },
     {
@@ -5002,15 +5520,15 @@
       "alt": "A cross section along the ground. On the left, a wedge of cold air slides forward along the ground, labeled cold air slides in low. Where it meets the warm air, a green line marks the front. To the right, an arrow labeled warm air forced upward curves up into a cluster of clouds labeled moisture condenses into clouds, with rain falling from the clouds. A note below explains that falling pressure, rising humidity, a wind shift, then falling temperature and rising wind speed can flag a front a full day early.",
       "src": "art/outpost-protocol-g6/fig-front-section.svg",
       "dataTable": {
-            "type": "features",
-            "items": [
-                  "A cross-section titled \"Cold air meets warm air: how a front forms\".",
-                  "A boundary line is labelled front.",
-                  "Cold air slides in low, beneath the warm air.",
-                  "Warm air is forced upward above the cold air.",
-                  "Moisture condenses into clouds where the warm air rises, and rain falls from them.",
-                  "A note reads that falling pressure, rising humidity, a wind shift, then falling temperature and rising wind speed can flag a front a full day early."
-            ]
+        "type": "features",
+        "items": [
+          "A cross-section titled \"Cold air meets warm air: how a front forms\".",
+          "A boundary line is labelled front.",
+          "Cold air slides in low, beneath the warm air.",
+          "Warm air is forced upward above the cold air.",
+          "Moisture condenses into clouds where the warm air rises, and rain falls from them.",
+          "A note reads that falling pressure, rising humidity, a wind shift, then falling temperature and rising wind speed can flag a front a full day early."
+        ]
       }
     },
     {
@@ -5021,15 +5539,15 @@
       "alt": "A map showing two posts at the same latitude, marked by a dashed line. On the left, Cairn Bay sits on the coast next to open ocean, with a current arrow along its coastline. On the right, Sable Flats sits well inland, over dry, continental land. A wide arrow labeled wind belt: blows off the ocean tapers as it crosses the land, labeled arrives far drier, drops its moisture along the way. Two boxes below summarize: Cairn Bay's coast and nearby current give it a smaller seasonal swing; Sable Flats' inland position with no current gives it a wider seasonal swing.",
       "src": "art/outpost-protocol-g6/fig-latitude-currents.svg",
       "dataTable": {
-            "type": "features",
-            "items": [
-                  "A comparison titled \"Same latitude, different climate\".",
-                  "Both posts sit at the same latitude and receive the same sun angle all year.",
-                  "Cairn Bay is on the coast, with an ocean current nearby.",
-                  "Sable Flats is well inland, in dry continental air.",
-                  "A wind belt blows off the ocean and arrives far drier inland, having dropped its moisture along the way.",
-                  "Cairn Bay, on the coast with a current nearby, has the smaller seasonal swing."
-            ]
+        "type": "features",
+        "items": [
+          "A comparison titled \"Same latitude, different climate\".",
+          "Both posts sit at the same latitude and receive the same sun angle all year.",
+          "Cairn Bay is on the coast, with an ocean current nearby.",
+          "Sable Flats is well inland, in dry continental air.",
+          "A wind belt blows off the ocean and arrives far drier inland, having dropped its moisture along the way.",
+          "Cairn Bay, on the coast with a current nearby, has the smaller seasonal swing."
+        ]
       }
     },
     {
@@ -5040,14 +5558,14 @@
       "alt": "Three side-by-side cards. Proposal A, a feeding station, passes all three tests but ends when the station stops. Proposal B, fencing, is within budget and quick to build but does not fix starving chicks, since predators are not the cause. Proposal C, a petition to delay the herring season, would close the mismatch at its root but takes over four months, past the one-season window, and lies outside the Network's own authority.",
       "src": "art/outpost-protocol-g6/fig-proposals.svg",
       "dataTable": {
-            "type": "features",
-            "items": [
-                  "A three-column comparison titled \"Three proposals for Halyard Point\".",
-                  "Every proposal is checked against the same three tests: effect within one season, cost within budget, and the Network’s own authority.",
-                  "Proposal A is a feeding station: within budget, within authority, and it has a real effect while it runs, but the effect ends when the station stops.",
-                  "Proposal B is fencing: within budget, and its authority row is not stated on the card.",
-                  "Proposal C is the only one whose column is filled for every test."
-            ]
+        "type": "features",
+        "items": [
+          "A three-column comparison titled \"Three proposals for Halyard Point\".",
+          "Every proposal is checked against the same three tests: effect within one season, cost within budget, and the Network’s own authority.",
+          "Proposal A is a feeding station: within budget, within authority, and it has a real effect while it runs, but the effect ends when the station stops.",
+          "Proposal B is fencing: within budget, and its authority row is not stated on the card.",
+          "Proposal C is the only one whose column is filled for every test."
+        ]
       }
     },
     {
@@ -5058,15 +5576,15 @@
       "alt": "A hub-and-spoke network map.  Named stations Halyard Point, Sable Flats, and Cairn Bay, plus other unnamed stations, all send arrows into a central hub labeled Network Command.  Text below explains that every station logs temperature and carbon dioxide, and that Command also tracks a fuel-use index across stations and supply runs.  Temperature climbs overall, even while bouncing year to year, and carbon dioxide and fuel-use climb on almost the same line and never reverse.",
       "src": "art/outpost-protocol-g6/fig-network-map.svg",
       "dataTable": {
-            "type": "features",
-            "items": [
-                  "A network diagram titled \"Network Synthesis: one station cannot see the pattern alone\".",
-                  "Three stations are drawn, Halyard Point, Sable Flats and Cairn Bay, each reporting to Network Command.",
-                  "Every station logs temperature and carbon dioxide.",
-                  "Command also tracks a fuel-use index for stations and supply runs.",
-                  "Temperature climbs overall, even while bouncing year to year.",
-                  "Carbon dioxide and fuel-use climb on almost the same line and never reverse."
-            ]
+        "type": "features",
+        "items": [
+          "A network diagram titled \"Network Synthesis: one station cannot see the pattern alone\".",
+          "Three stations are drawn, Halyard Point, Sable Flats and Cairn Bay, each reporting to Network Command.",
+          "Every station logs temperature and carbon dioxide.",
+          "Command also tracks a fuel-use index for stations and supply runs.",
+          "Temperature climbs overall, even while bouncing year to year.",
+          "Carbon dioxide and fuel-use climb on almost the same line and never reverse."
+        ]
       }
     }
   ]
