@@ -63,7 +63,7 @@ In CI the browser is installed with `npx playwright install --with-deps chromium
 ## How the level driver works (`tests/play-level.js`)
 
 ```
-node tests/play-level.js [--base <url>] [--pack <id>] [--level <n>] [--wrong <n>] [--json]
+node tests/play-level.js [--base <url>] [--pack <id>] [--level <n>] [--wrong <n>] [--unlock] [--json]
 ```
 
 Plays a pack level **to its end** through the real app and asserts the completion-screen reward
@@ -89,6 +89,13 @@ Three rules it encodes, each of them a lesson this repo paid for:
   stray process green when it answered 200 with a 73-byte PNG for every path.
 - **Advancing waits on a CHANGED artifact**, the progress counter reading `n+1 / total`, not on
   ".mv-item exists", which is already true of the item still on screen.
+
+`--unlock` is **setup, not an assertion shortcut**.  A pack level card is open only when
+`i <= levelsCleared`, and pack levels do *not* honour Preview Mode, which lives in a different save
+store.  Without it the driver could only ever reach level 1 of any pack, so the 12-question L6
+levels and the `shorttext` items that first appear at L3 would be permanently untestable.  It
+seeds `multiverse.packs.v1` through `addInitScript` so the value lands before `PackSave.load()`
+reads it;  nothing about the reward card is seeded, only which door is unlocked.
 
 `--wrong <n>` answers the first n items incorrectly on purpose, which is what makes the magnifier
 assertion two-sided:  the enlarge chip must appear **only** once every tile has lifted.  Three
