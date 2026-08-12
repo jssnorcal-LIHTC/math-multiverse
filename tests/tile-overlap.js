@@ -77,8 +77,18 @@ const PICKER = {
   fb: { cardSel: null, goSel: '#fb-go' },
 };
 
-const MAX_ATTEMPTS = 6;   // fresh-level restarts per module x grade
-const MAX_QUESTIONS = 4;  // questions driven within one attempt before giving up and restarting
+// FLAKE BUDGET (26-0812, second pass).  These are sized from the arithmetic, not from taste.
+// answerAndMeasure cannot know which choice is correct, so capturing a "correct" explain tile is a
+// 1-in-4 draw on EVERY question -- and it is a fresh draw each time, because each question places
+// its own key independently. At the previous 6 x 4, a level ending after three wrong answers gave
+// roughly 18 real questions, so P(a module-grade never draws the key) = 0.75^18 = 0.56%, and across
+// twelve module-grade pairs P(some pair fails) = 6.6% per run. That is what reddened this gate three
+// times in one session.
+// At 12 x 6 the same arithmetic gives well under 0.1% across all twelve pairs. The extra budget is
+// only ever spent when a correct sample has not been found yet, since the loops exit the moment both
+// samples are captured, so the common case costs nothing.
+const MAX_ATTEMPTS = 12;  // fresh-level restarts per module x grade
+const MAX_QUESTIONS = 6;  // questions driven within one attempt before giving up and restarting
 
 const MIME = {
   '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
@@ -224,16 +234,12 @@ function occlusionScanInPage(px) {
 
   // Answers the CURRENT question with choice index 0 and returns the occlusion-scan result
   // once the explain tile has rendered.
-  // FLAKE FIX (26-0812). This always clicked data-idx="0", so it only ever captured a "correct"
-  // explain tile when the generator happened to place the key at index 0. A level ends after three
-  // wrong answers, so an attempt yields about three questions, and six attempts could genuinely
-  // run out without the key ever landing there. It failed twice in one session, on f1-decimals g6
-  // and then on floating-bear g5, which is the same defect and not a module-specific one; a gate
-  // that reddens a PR for no reason costs more than the coverage it provides.
-  //
-  // Cycling the clicked index covers all four positions instead of betting on one. The counter is
-  // held by the CALLER across attempts, not reset per attempt, so a module whose key never lands
-  // at a given index still gets every other index tried.
+  // This always clicked data-idx="0". Rotating the index instead, as a first pass at the flake,
+  // was WRONG and is kept only because it costs nothing: each question places its key
+  // independently, so which index you click does not change the 1-in-4 odds of drawing a correct
+  // answer on any given question. Rotation would only help if the key position were fixed across
+  // questions, and it is not. The flake is fixed by the question BUDGET above, sized from that
+  // arithmetic; see the comment on MAX_ATTEMPTS.
   //
   // Reading the key from the DOM instead is not available: the module marks the correct button
   // with `.correct` only inside its own answer handler, after the click that ends the question.
