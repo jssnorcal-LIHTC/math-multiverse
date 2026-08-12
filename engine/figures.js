@@ -321,6 +321,26 @@
     const grid = el('div', 'mv-rv-grid');
     for (let i = 0; i < 12; i++) grid.appendChild(el('span', 'mv-rv-tile'));
     frame.appendChild(grid);
+
+    // Owner ruling (26-0811, gate item 3): confirming the fully-revealed gate above surfaced the
+    // defect it was hiding -- the enlarge affordance was INVISIBLE on the target device. The button
+    // paints no border, no background and no icon, and its only cue was `cursor: pointer`, which an
+    // iPad has no way to show, so a sighted child met a fully revealed card that looked exactly like
+    // an inert partial one. (The strip thumbs read as tappable because they carry a frame and a
+    // PLATE/DIAGRAM badge; this card carried neither.) This chip is that missing cue.
+    //
+    // Appended AFTER the grid on purpose, so the grid stays frame.children[1], which
+    // figures.test.js asserts in three places. It is absolutely positioned, so it contributes
+    // nothing to .mv-rv-frame's own width -- the reward-geometry sweep pins that width to the
+    // image's painted box and would fail if a sibling widened it. pointer-events:none keeps the tap
+    // reaching the button underneath, and aria-hidden stops it double-announcing a control whose
+    // own aria-label already says "Enlarge ...".
+    if (fullyRevealed) {
+      const zoom = el('span', 'mv-rv-zoom');
+      zoom.setAttribute('aria-hidden', 'true');
+      frame.appendChild(zoom);
+    }
+
     card.appendChild(frame);
     card.appendChild(el('div', 'mv-rv-cap', f.caption));
     card.appendChild(el('div', 'mv-lb-credit', f.credit));

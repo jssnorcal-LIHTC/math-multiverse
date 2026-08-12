@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img">
+<rect x="0" y="0" width="800" height="450" fill="#0f1218" />
+<line x1="68.5" y1="48" x2="68.5" y2="180" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+<line x1="68" y1="180.5" x2="752" y2="180.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="58" y="180" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">400</text>
+<line x1="68" y1="136.5" x2="752" y2="136.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="58" y="136" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">420</text>
+<line x1="68" y1="92.5" x2="752" y2="92.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="58" y="92" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">440</text>
+<line x1="68" y1="48.5" x2="752" y2="48.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="58" y="48" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">460</text>
+<text x="68" y="36" font-size="22" fill="#e8eef7">CO2 (ppm)</text>
+<polyline points="204.8,158 396.32,114 587.84,65.6" fill="none" stroke="#1a8f5e" stroke-width="3" />
+<circle cx="204.8" cy="158" r="4" fill="#1a8f5e" />
+<circle cx="396.32" cy="114" r="4" fill="#1a8f5e" />
+<circle cx="587.84" cy="65.6" r="4" fill="#1a8f5e" />
+<line x1="68.5" y1="220" x2="68.5" y2="352" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+<line x1="68" y1="352.5" x2="752" y2="352.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="58" y="352" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">19</text>
+<line x1="68" y1="319.5" x2="752" y2="319.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="58" y="319" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">19.5</text>
+<line x1="68" y1="286.5" x2="752" y2="286.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="58" y="286" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="68" y1="253.5" x2="752" y2="253.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="58" y="253" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">20.5</text>
+<line x1="68" y1="220.5" x2="752" y2="220.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="58" y="220" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">21</text>
+<text x="68" y="208" font-size="22" fill="#e8eef7">O2 (percent)</text>
+<polyline points="204.8,253 396.32,286 587.84,319" fill="none" stroke="#1a8f5e" stroke-width="3" />
+<circle cx="204.8" cy="253" r="4" fill="#1a8f5e" />
+<circle cx="396.32" cy="286" r="4" fill="#1a8f5e" />
+<circle cx="587.84" cy="319" r="4" fill="#1a8f5e" />
+<text x="68" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">80</text>
+<text x="204.8" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">90</text>
+<text x="341.6" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">100</text>
+<text x="478.4" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">110</text>
+<text x="615.2" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">120</text>
+<text x="752" y="376" font-size="20" fill="#e8eef7" text-anchor="middle">130</text>
+<text x="410" y="402" font-size="22" fill="#e8eef7" text-anchor="middle">day</text>
+<text x="68" y="426" font-size="18" fill="#e8eef7" fill-opacity="0.82">Water reclamation held steady near 95 to 96 percent across the same days.</text>
+</svg>

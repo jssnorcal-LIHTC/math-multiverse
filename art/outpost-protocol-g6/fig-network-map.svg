@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520" role="img">
+<defs>
+  <marker id="netArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="rgba(232,238,247,0.7)" />
+  </marker>
+</defs>
+<rect x="0" y="0" width="800" height="520" fill="#0f1218" />
+<text x="400" y="30" font-size="20" fill="#e8eef7" text-anchor="middle" font-weight="700">Network Synthesis: one station cannot see the pattern alone</text>
+
+<line x1="400" y1="126" x2="400" y2="190" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
+<line x1="642.6" y1="174.7" x2="448.3" y2="227" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
+<line x1="634.9" y1="303.2" x2="448.3" y2="253" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
+<line x1="400" y1="362" x2="400" y2="290" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
+<line x1="165.1" y1="303.2" x2="351.7" y2="253" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
+<line x1="157.4" y1="174.7" x2="351.7" y2="227" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
+
+<circle cx="400" cy="100" r="26" fill="#12281f" stroke="#1a8f5e" stroke-width="3" />
+<text x="400" y="66" font-size="16" fill="#e8eef7" text-anchor="middle" font-weight="700">Halyard Point</text>
+
+<circle cx="660" cy="310" r="26" fill="#12281f" stroke="#1a8f5e" stroke-width="3" />
+<text x="660" y="352" font-size="16" fill="#e8eef7" text-anchor="middle" font-weight="700">Sable Flats</text>
+
+<circle cx="140" cy="310" r="26" fill="#12281f" stroke="#1a8f5e" stroke-width="3" />
+<text x="140" y="352" font-size="16" fill="#e8eef7" text-anchor="middle" font-weight="700">Cairn Bay</text>
+
+<circle cx="660" cy="170" r="18" fill="none" stroke="#e8eef7" stroke-width="2" />
+<text x="660" y="145" font-size="15" fill="#e8eef7" fill-opacity="0.8" text-anchor="middle">station</text>
+
+<circle cx="400" cy="380" r="18" fill="none" stroke="#e8eef7" stroke-width="2" />
+<text x="400" y="414" font-size="15" fill="#e8eef7" fill-opacity="0.8" text-anchor="middle">station</text>
+
+<circle cx="140" cy="170" r="18" fill="none" stroke="#e8eef7" stroke-width="2" />
+<text x="140" y="145" font-size="15" fill="#e8eef7" fill-opacity="0.8" text-anchor="middle">station</text>
+
+<circle cx="400" cy="240" r="45" fill="#1a8f5e" stroke="#e8eef7" stroke-width="2" />
+<text x="400" y="235" font-size="15" fill="#0f1218" text-anchor="middle" font-weight="700">Network</text>
+<text x="400" y="253" font-size="15" fill="#0f1218" text-anchor="middle" font-weight="700">Command</text>
+
+<text x="400" y="440" font-size="15" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">Every station logs temperature and carbon dioxide.</text>
+<text x="400" y="460" font-size="15" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">Command also tracks a fuel-use index for stations and supply runs.</text>
+<text x="400" y="482" font-size="15" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">Temperature climbs overall, even while bouncing year to year.</text>
+<text x="400" y="502" font-size="15" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">Carbon dioxide and fuel-use climb on almost the same line and never reverse.</text>
+</svg>

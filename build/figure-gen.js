@@ -27,6 +27,23 @@
 // renders at its full native 1.0x; at the iPad 6's PORTRAIT viewport (768 CSS px) 94vw=721.92px is
 // narrower than the native 800px width, so it renders at 721.92/800 = 0.9024x. Every font size
 // below clears 15/0.9024 = 16.62px with margin (18-22px authored).
+//
+// PANELS MODE (Task 4, V2): `dataTable.panels` is an additive, opt-in second shape -- a chart with
+// two data series whose UNITS differ (ppm vs percent) or whose comparison is naturally two
+// side-by-side sub-charts (rainfall vs temperature swing, both by post) must never share one
+// y-scale, per the standing figure-truth rule, and the single-series refusal a few lines below is
+// deliberately NOT relaxed for that case: a shared scale would flatten one series onto the floor,
+// which is worse than refusing. Panels mode draws exactly TWO vertically-stacked mini-charts
+// (`layoutPanels`/`genSvgPanels`), each with its OWN y-axis and y-scale, sharing left/right margins
+// (so the two plots line up) and a single shared x-axis at the bottom. Every panel is individually
+// validated by the SAME `validateTable()` a normal single-series chart uses, so a panel can never
+// smuggle in a second series or a non-finite point -- this is genuinely two independent charts
+// stacked in one canvas, not a new multi-series drawing primitive. `genSvg()` dispatches to it when
+// `dataTable.panels` is present; the ORIGINAL `dataTable.type`/`.series` path below is completely
+// untouched, so every existing chart and every existing test keeps its original behavior byte for
+// byte. Bar-type panels additionally support `dataTable.categoryLabels` (an array of strings) so an
+// axis comparing named things ("Sable Flats" vs "Cairn Bay") is not forced to fall back to the
+// numeric `n2()` formatting the plain bar path uses for its category axis.
 
 const fs = require('fs');
 const path = require('path');
@@ -44,6 +61,14 @@ const MAX_NOTES = 4;                 // fix round 1, item 10: clamp so the botto
 const MIN_PLOT_H = 120;              // stated invariant; unreachable given MAX_NOTES (worst case
                                       // bottom band = 74 + 4*24 = 170, plot height = 450-48-170 =
                                       // 232), kept and asserted rather than left implicit
+const PANEL_GAP = 40;                // vertical gap between the two stacked panels in panels mode;
+                                      // sized so a panel's own yLabel (drawn just above its plot,
+                                      // LABEL_FONT=22, ascent ~18px) never overlaps the panel ABOVE
+                                      // it: the label sits at (panelTop - 12), 10px+ clear of the
+                                      // previous panel's plotBottom even at the tightest notes case
+const MIN_PANEL_H = 90;              // floor for EACH panel's own plot height (roughly half of
+                                      // MIN_PLOT_H, since two panels split one canvas); worst case
+                                      // with 4 notes: (450-48-(74+96)-40)/2 = 96, still above floor
 const TICKS_TARGET = 5;              // even divisions, both axes (nice-rounded, see niceTicks)
 const GLYPH_W = 0.6;                 // width-per-character estimate at font-size 1 (the brief's own
                                       // "glyph count times about 0.6 times the font" heuristic);
@@ -68,6 +93,22 @@ const DEFAULT_ACCENT = '#7aa8ff';
 const LABEL_FONT = 22, TICK_FONT = 20, NOTE_FONT = 18;
 const TICK_Y_OFF = 24, TITLE_Y_OFF = 50, NOTES_Y_START = 74;
 const Y_LABEL_ROW = 28;
+const TICK_LABEL_H = TICK_FONT * 1.1; // vertical extent of a horizontally-set tick label's own
+                                       // box at TICK_FONT -- 22px at TICK_FONT=20, confirmed with
+                                       // a real browser's getBBox() against this generator's own
+                                       // committed SVG output, not a guess. A full-height chart's
+                                       // plot easily clears MIN_PLOT_H/TICKS_TARGET against this;
+                                       // a panels-mode panel, at roughly a third the height, does
+                                       // not -- see niceTicksFit below, used only by layoutPanels().
+const MIN_TICK_GAP = 6;               // required CLEAR space between two adjacent tick labels'
+                                       // boxes, on top of TICK_LABEL_H itself -- team-lead finding:
+                                       // capping divisions at panelH/TICK_LABEL_H alone reserves
+                                       // nothing BETWEEN labels, so it permits exact-touching (0px
+                                       // clear), which dome-drift's CO2 panel landed on precisely.
+                                       // Zero clear gap measures clean in one engine (Chromium) but
+                                       // the delivery target is iPad Safari, whose font metrics will
+                                       // not be pixel-identical; this buffer is the margin against
+                                       // that variance, not an aesthetic preference.
 
 function n2(x) {
   // Fixed 2-decimal formatting with trailing zeros stripped. toFixed is spec-defined (not
@@ -102,9 +143,19 @@ function paddedExtent(values) {
   let lo = Infinity, hi = -Infinity;
   values.forEach((v) => { if (v < lo) lo = v; if (v > hi) hi = v; });
   if (!Number.isFinite(lo) || !Number.isFinite(hi)) return [0, 1];
+  const rawLo = lo;   // the ACTUAL data minimum, captured before the flat-data widening below ever
+                       // touches lo, since the zero-floor rule below must judge the real values, not
+                       // an artificially widened stand-in
   if (lo === hi) { lo -= 1; hi += 1; }   // flat data: still a real, non-zero range to scale against
   const pad = (hi - lo) * 0.08;
-  return [lo - pad, hi + pad];
+  const paddedLo = lo - pad;
+  // Team-lead fix round: a quantity whose real data never goes negative (rainfall, a temperature
+  // swing, a season number) must never be OFFERED a negative axis floor just because the 8% pad
+  // pushed under zero. Clamp the floor to zero whenever the series' own minimum was already >= 0;
+  // a genuinely negative series (e.g. the bar-goes-below-zero test fixture) is untouched, since its
+  // rawLo is itself negative and the clamp condition never fires for it.
+  const clampedLo = rawLo >= 0 ? Math.max(0, paddedLo) : paddedLo;
+  return [clampedLo, hi + pad];
 }
 
 function scaleFn(domainLo, domainHi, rangeLo, rangeHi) {
@@ -133,6 +184,108 @@ function niceTicks(lo, hi, targetCount, integerOnly) {
   const ticks = [];
   for (let i = 0; i <= n; i++) ticks.push(niceLo + i * step);
   return { ticks, lo: niceLo, hi: niceHi };
+}
+
+// V2 gate item 13 (owner ruling, 26-0811): a dataTable may PIN its own y domain, which
+// paddedExtent cannot infer from the numbers alone. The case that forced it: fig-warming-curves
+// plots a PERCENTAGE whose data runs 39 to 76, so the 8% pad plus nice-rounding hands it a 30-to-80
+// axis. That axis spans half the natural range, so every vertical distance on the chart is exactly
+// DOUBLED: the fall from 76 to 39 paints from 92% of the plot height down to 18%, and a child
+// reading the shape (which is what a child reads first) sees a fall to about a fifth where the data
+// says a fall to about a half.
+//
+// Why this is a per-figure field and not a generator-wide rule. Neither available rule is safe.
+// fig-dome-drift plots CO2 at 410-452 ppm and oxygen at 19.5-20.5 PERCENT, so a blanket zero floor
+// flattens its CO2 drift to 9% of a panel, and a "yLabel says percent, therefore 0 to 100" rule
+// flattens its oxygen panel to a 1% band -- in both cases destroying the very trend the figure
+// exists to show. The domain is knowledge about ONE quantity's natural full scale, so it belongs to
+// the figure that has it.
+//
+// Refuses rather than silently adjusting, in each of the three ways this can be got wrong:
+//   - a malformed pair, so a typo cannot fall through to the inferred domain unnoticed;
+//   - a domain that does not contain the data, which would draw marks outside the plot;
+//   - a domain that nice-rounding would MOVE, since honouring a requested [0, 95] as a drawn
+//     0-to-100 would put a different axis on screen than the pack asked for and the caption may
+//     describe.
+function explicitYDomain(dt, allY) {
+  const d = dt && dt.yDomain;
+  if (d === undefined || d === null) return null;
+  if (!Array.isArray(d) || d.length !== 2
+      || !d.every((v) => typeof v === 'number' && Number.isFinite(v))) {
+    refuse(`yDomain must be a pair of finite numbers, got ${JSON.stringify(d)}`);
+  }
+  const [lo, hi] = d;
+  if (!(lo < hi)) refuse(`yDomain must run low to high, got [${lo}, ${hi}]`);
+  const dataLo = Math.min(...allY), dataHi = Math.max(...allY);
+  if (lo > dataLo || hi < dataHi) {
+    refuse(`yDomain [${lo}, ${hi}] does not contain the series' own range [${n2(dataLo)}, ${n2(dataHi)}]; refusing rather than drawing marks outside the plot`);
+  }
+  const nice = niceTicks(lo, hi, TICKS_TARGET, false);
+  if (nice.lo !== lo || nice.hi !== hi) {
+    refuse(`yDomain [${lo}, ${hi}] is not tick-aligned; nice rounding would move the drawn axis to [${nice.lo}, ${nice.hi}]. Pick a domain the tick step divides evenly.`);
+  }
+  return [lo, hi];
+}
+
+// Panel tick density fix, headroom pass (team-lead finding, round 3): when divisions are scarce (a
+// short panel), niceStep()'s standard {1,2,5,10}-per-decade family can only reach past the data's
+// own max by jumping to the NEXT family member up -- fig-climographs' swing panel (data max 68,
+// range ~73) at 3 divisions needs a step of ~24.5 and the standard family rounds that all the way
+// up to 50, landing a ceiling of 100 and wasting roughly a third of the panel as dead headroom on
+// the very comparison the figure exists for. niceStepTight adds 2.5-per-decade as an extra
+// candidate (itself a familiar, "nice" step -- a quarter/half relationship to the surrounding 5s
+// and 10s) and picks the SMALLEST sufficient candidate rather than niceStep's own thresholded
+// rounding: mathematically identical to niceStep wherever a norm value does not fall in the newly
+// split (2, 2.5] gap, and DELIBERATELY SCOPED to this fit path only (niceTicksFit's only caller is
+// layoutPanels' per-panel y-tick computation) rather than changing the shared niceStep/niceTicks
+// used by every full-height chart's own ticks and by a panel's shared x-axis -- an unrelated
+// figure's norm landing in that same gap must not have its ticks silently move underneath it.
+// Verified against every real panel in this pack: fig-climographs' rainfall panel and both of
+// fig-dome-drift's panels have norm values outside the new gap at their own chosen targets and are
+// byte-unaffected; the swing panel's norm (~2.448) is the one value in the pack that actually
+// lands in it.
+function niceStepTight(range, targetCount, integerOnly) {
+  const rawStep = range / Math.max(targetCount, 1);
+  let mag = Math.pow(10, Math.floor(Math.log10(rawStep || 1)));
+  if (integerOnly) mag = Math.max(1, mag);
+  const norm = rawStep / mag;
+  // 2.5 x mag is only ever a whole number when mag >= 10 (2.5 x 1 = 2.5 is not); niceTicksFit's
+  // only call site below always passes integerOnly=false today, so this branch is not currently
+  // exercised, but it keeps the function honestly correct for its full signature rather than
+  // relying on that staying true.
+  const FAMILY = (!integerOnly || mag >= 10) ? [1, 2, 2.5, 5, 10] : [1, 2, 5, 10];
+  const niceNorm = FAMILY.find((c) => c >= norm) || 10;
+  return niceNorm * mag;
+}
+
+function niceTicksTight(lo, hi, targetCount, integerOnly) {
+  if (lo === hi) { lo -= 1; hi += 1; }
+  const step = niceStepTight(hi - lo, targetCount, integerOnly);
+  const niceLo = Math.floor(lo / step) * step;
+  const niceHi = Math.ceil(hi / step) * step;
+  const n = Math.max(1, Math.round((niceHi - niceLo) / step));
+  const ticks = [];
+  for (let i = 0; i <= n; i++) ticks.push(niceLo + i * step);
+  return { ticks, lo: niceLo, hi: niceHi };
+}
+
+// Panel tick density fix: a height-aware wrapper around niceTicksTight(), used only where the
+// available plot height is short enough that the flat TICKS_TARGET can produce labels too dense to
+// avoid overlapping each other (panels mode -- see layoutPanels). maxDivisions is the most
+// divisions TICK_LABEL_H-tall labels (plus MIN_TICK_GAP of clear space) can occupy in a plot of the
+// caller's own height. targetCount is capped to it going in, but the tight step's own ceil/floor
+// widening of [lo,hi] out to a round number can still add a division beyond whatever target was
+// asked for -- dome-drift's own CO2 panel does exactly this today, asking for 5 and getting 6 --
+// so the actual result is verified after the fact and backed off further only if it still does not
+// fit, rather than trusting the target as a hard cap.
+function niceTicksFit(lo, hi, targetCount, integerOnly, maxDivisions) {
+  let target = Math.min(targetCount, maxDivisions);
+  let nice = niceTicksTight(lo, hi, target, integerOnly);
+  while (nice.ticks.length - 1 > maxDivisions && target > 1) {
+    target -= 1;
+    nice = niceTicksTight(lo, hi, target, integerOnly);
+  }
+  return nice;
 }
 
 function estimateTextWidth(text, fontSize) {
@@ -192,9 +345,13 @@ function layout(dataTable) {
   }
 
   const allY = points.map((p) => p[1]);
-  const yDomainRaw = type === 'bar'
+  // Gate item 13: an explicit yDomain, where the dataTable declares one, replaces the inferred
+  // extent entirely. explicitYDomain has already proved the pair contains the data and survives
+  // nice-rounding unmoved, so the niceTicks call below returns exactly the requested bounds.
+  const yExplicit = explicitYDomain(dt, allY);
+  const yDomainRaw = yExplicit || (type === 'bar'
     ? paddedExtent([Math.min(0, ...allY), Math.max(0, ...allY)])   // item 2: bar spans zero
-    : paddedExtent(allY);
+    : paddedExtent(allY));
   const yNice = niceTicks(yDomainRaw[0], yDomainRaw[1], TICKS_TARGET, false);
   const yTickLabels = yNice.ticks.map((v) => n2(v));
   const plotL = leftMarginFor(yTickLabels);
@@ -216,10 +373,219 @@ function layout(dataTable) {
   return { type, points, notes, plotL, plotR, plotT, plotB, yTicks: yNice.ticks, yTickLabels, yScale, xScale, xTicks, categories };
 }
 
+// ---- panels mode (see file header): two independently-scaled mini-charts stacked in one canvas ----
+
+// Validates the panels shape, refusing anything genSvgPanels could not draw truthfully. Each panel
+// is checked by the EXACT SAME validateTable() a normal chart uses, so a panel-level multi-series
+// or non-finite-point slip is refused with the identical, already-tested message.
+function validatePanelsTable(dt) {
+  const panels = Array.isArray(dt.panels) ? dt.panels : null;
+  if (!panels) refuse('dataTable has no panels array');
+  if (panels.length !== 2) refuse(`panels: exactly 2 panels are supported, got ${panels.length}`);
+
+  const type = (panels[0] && panels[0].type === 'bar') ? 'bar' : 'line';
+  panels.forEach((p, i) => {
+    const pt = (p && p.type === 'bar') ? 'bar' : 'line';
+    if (pt !== type) refuse(`panels[${i}].type ("${pt}") does not match panels[0].type ("${type}"); mixed-type panels are refused`);
+  });
+
+  const pointsPerPanel = panels.map((p, i) => {
+    try { return validateTable(p, type); }
+    catch (e) { refuse(`panels[${i}]: ${e.message}`); }
+  });
+
+  if (type === 'bar') {
+    const labels = Array.isArray(dt.categoryLabels) ? dt.categoryLabels : null;
+    if (!labels || !labels.length) refuse('panels: bar-type panels require dataTable.categoryLabels');
+    pointsPerPanel.forEach((pts, i) => {
+      if (pts.length !== labels.length) refuse(`panels[${i}]: has ${pts.length} point(s) but categoryLabels has ${labels.length} entr(y/ies)`);
+    });
+  } else {
+    // A SHARED x-axis only means something if every panel plots the same x values; refuse rather
+    // than silently drawing two panels whose day-90/104/118 columns do not actually line up.
+    const xs0 = pointsPerPanel[0].map((p) => p[0]);
+    pointsPerPanel.forEach((pts, i) => {
+      const xs = pts.map((p) => p[0]);
+      const mismatch = xs.length !== xs0.length || xs.some((v, j) => v !== xs0[j]);
+      if (mismatch) refuse(`panels[${i}]: x-values (${JSON.stringify(xs)}) do not match panels[0]'s (${JSON.stringify(xs0)}); a shared x-axis requires identical x values across panels`);
+    });
+  }
+
+  return { type, pointsPerPanel };
+}
+
+// Mirrors layout(): the ONE place panels-mode margins, per-panel y-domains, and the shared x-domain
+// are computed, exported so tests/figure-derive.js can assert panel geometry against these same
+// numbers. Throws exactly when genSvgPanels would refuse.
+function layoutPanels(dataTable) {
+  const dt = dataTable || {};
+  const { type, pointsPerPanel } = validatePanelsTable(dt);
+  const panels = dt.panels;
+
+  // Gate item 13: yDomain is a FULL-HEIGHT-chart field. Each panel here carries its own
+  // independent scale (that independence is the whole reason panels mode exists), so a single
+  // top-level domain has no meaning, and a per-panel one is deliberately not implemented. Refuse
+  // rather than ignore: a future author who sets it and silently gets the inferred axis anyway
+  // would have no way to tell the field did nothing.
+  if (dt.yDomain !== undefined) {
+    refuse('yDomain is not supported in panels mode; each panel scales independently');
+  }
+  panels.forEach((p, i) => {
+    if (p && p.yDomain !== undefined) {
+      refuse(`panel ${i} declares yDomain, which is not supported in panels mode; each panel scales independently`);
+    }
+  });
+
+  const notes = (Array.isArray(dt.notes) ? dt.notes : []).slice(0, MAX_NOTES);
+  const outerT = TOP;
+  const outerB = VB_H - (BASE_BOTTOM + notes.length * NOTE_ROW);
+  const availH = outerB - outerT - PANEL_GAP;
+  const panelH = availH / 2;
+  if (panelH < MIN_PANEL_H) {
+    refuse(`too many footer notes; each panel would collapse to ${n2(panelH)}px, below the ${MIN_PANEL_H}px minimum`);
+  }
+
+  // Panel tick density fix: cap divisions to what panelH can actually hold at TICK_LABEL_H PLUS a
+  // required MIN_TICK_GAP clear space before computing each panel's own ticks, rather than handing
+  // every panel the same flat TICKS_TARGET a full-height chart uses. A panels-mode panel is roughly
+  // a third the height of a full plot, so the flat target can (and, pre-fix, did -- fig-climographs'
+  // rainfall panel) ask for more labels than the panel's own height can hold without their boxes
+  // overlapping. Dividing by TICK_LABEL_H alone would reserve nothing BETWEEN labels and permit
+  // exact-touching (dome-drift's CO2 panel landed on precisely that, 0px clear, before this second
+  // pass); the +MIN_TICK_GAP margin exists for that reason. maxTickDivisions only ever REDUCES from
+  // TICKS_TARGET, never grows past it, so a panel tall enough to clear the flat default at the
+  // required gap renders byte-identical to before.
+  const maxTickDivisions = Math.max(1, Math.floor(panelH / (TICK_LABEL_H + MIN_TICK_GAP)));
+
+  // Per-panel y-domain/ticks first, THEN a single shared left margin sized from the widest tick
+  // label across BOTH panels, so the two plots' left edges line up vertically.
+  const panelYNice = pointsPerPanel.map((points) => {
+    const allY = points.map((p) => p[1]);
+    const yDomainRaw = type === 'bar'
+      ? paddedExtent([Math.min(0, ...allY), Math.max(0, ...allY)])
+      : paddedExtent(allY);
+    return niceTicksFit(yDomainRaw[0], yDomainRaw[1], TICKS_TARGET, false, maxTickDivisions);
+  });
+  const plotL = panelYNice.reduce((m, yNice) => Math.max(m, leftMarginFor(yNice.ticks.map((v) => n2(v)))), MIN_LEFT);
+  const plotR = VB_W - RIGHT;
+
+  const plotTs = [outerT, outerT + panelH + PANEL_GAP];
+  const plotBs = [outerT + panelH, outerB];
+
+  const panelLayouts = panels.map((p, i) => {
+    const yNice = panelYNice[i];
+    const yScale = scaleFn(yNice.lo, yNice.hi, plotBs[i], plotTs[i]);
+    return {
+      points: pointsPerPanel[i],
+      yTicks: yNice.ticks,
+      yTickLabels: yNice.ticks.map((v) => n2(v)),
+      yScale,
+      plotT: plotTs[i],
+      plotB: plotBs[i],
+      yLabel: p.yLabel,
+    };
+  });
+
+  let xScale = null, xTicks = null, categories = null;
+  if (type === 'line') {
+    const allX = pointsPerPanel[0].map((p) => p[0]);
+    const xIsInt = allX.every((v) => Number.isInteger(v));
+    const xDomainRaw = paddedExtent(allX);
+    const xNice = niceTicks(xDomainRaw[0], xDomainRaw[1], TICKS_TARGET, xIsInt);
+    xTicks = xNice.ticks;
+    xScale = scaleFn(xNice.lo, xNice.hi, plotL, plotR);
+  } else {
+    categories = pointsPerPanel[0].map((p) => p[0]);
+  }
+
+  return { type, notes, plotL, plotR, panelLayouts, xScale, xTicks, categories };
+}
+
+// genSvgPanels(dataTable, accentColor) -> string. Same determinism/font-floor guarantees as
+// genSvg(); draws the two panels top to bottom, then one shared x-axis/xLabel/notes band at the
+// very bottom, using the LAST panel's plotB exactly the way the single-chart path uses its own.
+function genSvgPanels(dataTable, accentColor) {
+  const dt = dataTable || {};
+  const g = layoutPanels(dt);
+  const accent = accentColor || DEFAULT_ACCENT;
+  const { type, notes, plotL, plotR, panelLayouts, xScale, xTicks, categories } = g;
+  const lastPlotB = panelLayouts[panelLayouts.length - 1].plotB;
+
+  const out = [];
+  out.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${VB_W}" height="${VB_H}" viewBox="0 0 ${VB_W} ${VB_H}" role="img">`);
+  out.push(`<rect x="0" y="0" width="${VB_W}" height="${VB_H}" fill="${BG}" />`);
+
+  let groupW = 0, gap = 0, barW = 0;
+  if (type === 'bar') {
+    const n = categories.length;
+    groupW = n ? (plotR - plotL) / n : 0;
+    gap = groupW * 0.18;
+    barW = groupW - gap * 2;
+  }
+
+  panelLayouts.forEach((panel) => {
+    out.push(`<line x1="${hp(plotL)}" y1="${panel.plotT}" x2="${hp(plotL)}" y2="${n2(panel.plotB)}" stroke="${GRID}" stroke-width="1" />`);
+
+    panel.yTicks.forEach((v, i) => {
+      const isZeroBaseline = type === 'bar' && Math.abs(v) < 1e-9;
+      const stroke = isZeroBaseline ? INK : PLOT_GRID;
+      const py = hp(panel.yScale(v));
+      out.push(`<line x1="${plotL}" y1="${py}" x2="${plotR}" y2="${py}" stroke="${stroke}" stroke-width="${isZeroBaseline ? 1.5 : 1}" />`);
+      out.push(`<text x="${n2(plotL - LABEL_AXIS_GAP)}" y="${n2(panel.yScale(v))}" font-size="${TICK_FONT}" fill="${INK}" text-anchor="end" dominant-baseline="middle">${esc(panel.yTickLabels[i])}</text>`);
+    });
+
+    if (panel.yLabel) {
+      out.push(`<text x="${plotL}" y="${n2(panel.plotT - 12)}" font-size="${LABEL_FONT}" fill="${INK}">${esc(panel.yLabel)}</text>`);
+    }
+
+    if (type === 'line') {
+      const pts = panel.points.map((p) => `${n2(xScale(p[0]))},${n2(panel.yScale(p[1]))}`).join(' ');
+      out.push(`<polyline points="${pts}" fill="none" stroke="${accent}" stroke-width="3" />`);
+      panel.points.forEach((p) => {
+        out.push(`<circle cx="${n2(xScale(p[0]))}" cy="${n2(panel.yScale(p[1]))}" r="${MARKER_R}" fill="${accent}" />`);
+      });
+    } else {
+      const zeroY = panel.yScale(0);
+      panel.points.forEach((p, i) => {
+        const x = plotL + i * groupW + gap;
+        const valY = panel.yScale(p[1]);
+        const top = Math.min(zeroY, valY);
+        const h = Math.abs(valY - zeroY);
+        out.push(`<rect x="${n2(x)}" y="${n2(top)}" width="${n2(barW)}" height="${n2(h)}" fill="${accent}" />`);
+      });
+    }
+  });
+
+  if (type === 'line') {
+    xTicks.forEach((v) => {
+      out.push(`<text x="${n2(xScale(v))}" y="${n2(lastPlotB + TICK_Y_OFF)}" font-size="${TICK_FONT}" fill="${INK}" text-anchor="middle">${esc(n2(v))}</text>`);
+    });
+  } else {
+    categories.forEach((c, i) => {
+      const cx = plotL + (i + 0.5) * groupW;
+      const label = (Array.isArray(dt.categoryLabels) && dt.categoryLabels[i] !== undefined) ? dt.categoryLabels[i] : n2(c);
+      out.push(`<text x="${n2(cx)}" y="${n2(lastPlotB + TICK_Y_OFF)}" font-size="${TICK_FONT}" fill="${INK}" text-anchor="middle">${esc(label)}</text>`);
+    });
+  }
+
+  if (dt.xLabel) {
+    const cx = n2((plotL + plotR) / 2);
+    out.push(`<text x="${cx}" y="${n2(lastPlotB + TITLE_Y_OFF)}" font-size="${LABEL_FONT}" fill="${INK}" text-anchor="middle">${esc(dt.xLabel)}</text>`);
+  }
+  notes.forEach((noteText, i) => {
+    const ny = n2(lastPlotB + NOTES_Y_START + i * NOTE_ROW);
+    out.push(`<text x="${plotL}" y="${ny}" font-size="${NOTE_FONT}" fill="${INK}" fill-opacity="0.82">${esc(String(noteText))}</text>`);
+  });
+
+  out.push('</svg>');
+  return out.join('\n') + '\n';
+}
+
 // genSvg(dataTable, accentColor) -> string. See file header for the determinism and font-floor
 // guarantees. Throws (does not return) for any shape layout()/validateTable() refuses.
 function genSvg(dataTable, accentColor) {
   const dt = dataTable || {};
+  if (Array.isArray(dt.panels)) return genSvgPanels(dt, accentColor);
   const g = layout(dt);
   const accent = accentColor || DEFAULT_ACCENT;
   const { type, points, notes, plotL, plotR, plotT, plotB, yTicks, yTickLabels, yScale, xScale, xTicks, categories } = g;
@@ -372,7 +738,9 @@ function main(argv) {
 
 module.exports = {
   genSvg, renderFigure, resolveAccent, chartTargets, regenerate, layout,
+  layoutPanels, genSvgPanels,
   INK, GRID, PLOT_GRID, DEFAULT_ACCENT, GLYPH_W, VB_W, VB_H, MAX_NOTES, MIN_PLOT_H,
+  PANEL_GAP, MIN_PANEL_H, TICK_LABEL_H, MIN_TICK_GAP,
 };
 
 if (require.main === module) process.exit(main(process.argv));
