@@ -102,3 +102,9 @@ assertion two-sided:  the enlarge chip must appear **only** once every tile has 
 states are covered and each is asserted separately:  all correct (12 tiles lifted, magnifier
 present, image wrapped in the enlarge button), partial (fewer tiles, no magnifier, bare image),
 and zero earned (no card and no `#lc-reveal` host at all).
+
+A **fourth** contract covers levels that declare no `reveal` at all, which is the majority case:
+the three ELA packs carry no figures, so their completion screens must show no card and no host.
+That absence is asserted, never skipped, and the closing banner names which of the four contracts
+was actually checked, so a reveal-less run can never read as if the twelve-tile card had been
+verified.
