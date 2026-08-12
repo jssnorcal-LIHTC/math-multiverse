@@ -465,6 +465,53 @@ function checkFigureReferences(pack, figuresById, passagesById, itemsById, error
   }
 }
 
+// ---------- envelope: every figure carries a provenance row ----------
+// Each art directory's PROVENANCE.md states the rule in its own words: "a figure entering
+// packs/<pack>.json without a row here first is itself the defect, not a formatting gap to fix
+// later."  That rule was prose only, and prose does not hold: a targeted string replace during V4
+// matched the WRONG table (the 3-column rejected-candidates marker is a prefix of the 4-column
+// built-assets one), so fig-rivers-map's row silently never landed while the commit that added the
+// figure said it had.  Nothing failed, because nothing was checking.
+//
+// This checks presence and pairing only. It cannot judge whether a row's licence reasoning is
+// sound, and it is not trying to: it closes the gap between "a row exists" and "a row was
+// believed to exist", which is the gap that actually opened.
+function checkProvenance(pack, figures, errors, opts) {
+  if (!figures.length) return;
+  // Scoped to art/, which is where the rule lives: the spec requires every shipped asset under
+  // `art/<packId>/`, and it is that directory's own PROVENANCE.md that states the rule. Test
+  // fixtures under tests/fixtures/ carry throwaway src paths and no licence question to answer,
+  // so demanding a provenance file from them would be ceremony rather than a check.
+  const inArt = (s) => typeof s === 'string' && s.replace(/\\/g, '/').startsWith('art/');
+  const dirs = new Set();
+  for (const f of figures) {
+    // Null and non-object entries are checkFigures' business, and an existing gate asserts they
+    // are CAUGHT rather than thrown; this must not be the thing that throws on them.
+    if (!f || typeof f !== 'object') continue;
+    const srcs = [f.src].concat((Array.isArray(f.views) ? f.views : []).map((v) => v && (v.overlaySrc || v.src)));
+    for (const s of srcs) if (inArt(s) && s.includes('/')) dirs.add(path.dirname(s));
+  }
+  const root = (opts && opts.repoRoot) || path.join(__dirname, '..');
+  for (const dir of dirs) {
+    const file = path.join(root, dir, 'PROVENANCE.md');
+    if (!fs.existsSync(file)) {
+      errors.push(`provenance: ${dir} holds figure assets but has no PROVENANCE.md`);
+      continue;
+    }
+    const text = fs.readFileSync(file, 'utf8');
+    for (const f of figures) {
+      if (!f || typeof f !== 'object' || typeof f.id !== 'string') continue;
+      const inDir = [f.src].concat((Array.isArray(f.views) ? f.views : []).map((v) => v && v.src))
+        .some((s) => typeof s === 'string' && path.dirname(s) === dir);
+      if (!inDir) continue;
+      // A markdown row for this figure: its id as the first cell.
+      if (!new RegExp(`^\\|\\s*${f.id.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}\\s*[|(]`, 'm').test(text)) {
+        errors.push(`provenance: figure "${f.id}" has no row in ${dir}/PROVENANCE.md, which that file's own rule forbids`);
+      }
+    }
+  }
+}
+
 // ---------- envelope: passage docKind and register ----------
 // Phase R.  `docKind` stays the STYLING key: it picks the tint, the padding and the gate's own
 // list.  `register` is the optional LABEL, overriding the band text the skin would otherwise
@@ -915,6 +962,7 @@ function validatePack(pack, opts) {
   const figuresById = checkFigures(pack, errors, opts);
   checkFigureReferences(pack, figuresById, passagesById, itemsById, errors);
   checkDocKinds(passagesById, errors);
+  checkProvenance(pack, Array.isArray(pack.figures) ? pack.figures : [], errors, opts);
   // Scans the UNION of whatever real file bytes the CLI supplied (or JSON.stringify(pack) when a
   // caller has none, e.g. an in-memory test fixture) AND JSON.stringify(pack) itself, so neither
   // surface's blind spot can hide a link: raw bytes miss a URL a duplicate JSON key discarded at

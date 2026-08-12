@@ -77,8 +77,18 @@ const PICKER = {
   fb: { cardSel: null, goSel: '#fb-go' },
 };
 
-const MAX_ATTEMPTS = 6;   // fresh-level restarts per module x grade
-const MAX_QUESTIONS = 4;  // questions driven within one attempt before giving up and restarting
+// FLAKE BUDGET (26-0812, second pass).  These are sized from the arithmetic, not from taste.
+// answerAndMeasure cannot know which choice is correct, so capturing a "correct" explain tile is a
+// 1-in-4 draw on EVERY question -- and it is a fresh draw each time, because each question places
+// its own key independently. At the previous 6 x 4, a level ending after three wrong answers gave
+// roughly 18 real questions, so P(a module-grade never draws the key) = 0.75^18 = 0.56%, and across
+// twelve module-grade pairs P(some pair fails) = 6.6% per run. That is what reddened this gate three
+// times in one session.
+// At 12 x 6 the same arithmetic gives well under 0.1% across all twelve pairs. The extra budget is
+// only ever spent when a correct sample has not been found yet, since the loops exit the moment both
+// samples are captured, so the common case costs nothing.
+const MAX_ATTEMPTS = 12;  // fresh-level restarts per module x grade
+const MAX_QUESTIONS = 6;  // questions driven within one attempt before giving up and restarting
 
 const MIME = {
   '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
@@ -224,10 +234,20 @@ function occlusionScanInPage(px) {
 
   // Answers the CURRENT question with choice index 0 and returns the occlusion-scan result
   // once the explain tile has rendered.
-  async function answerAndMeasure(px) {
+  // This always clicked data-idx="0". Rotating the index instead, as a first pass at the flake,
+  // was WRONG and is kept only because it costs nothing: each question places its key
+  // independently, so which index you click does not change the 1-in-4 odds of drawing a correct
+  // answer on any given question. Rotation would only help if the key position were fixed across
+  // questions, and it is not. The flake is fixed by the question BUDGET above, sized from that
+  // arithmetic; see the comment on MAX_ATTEMPTS.
+  //
+  // Reading the key from the DOM instead is not available: the module marks the correct button
+  // with `.correct` only inside its own answer handler, after the click that ends the question.
+  async function answerAndMeasure(px, pickIdx) {
     await hideModals();
-    const btn = await page.$(`#${px}-question .${px}-ans[data-idx="0"]`) || (await page.$$(`#${px}-question .${px}-ans`))[0];
-    if (!btn) throw new Error(`${px}: no answer buttons to click`);
+    const all = await page.$$(`#${px}-question .${px}-ans`);
+    if (!all.length) throw new Error(`${px}: no answer buttons to click`);
+    const btn = all[pickIdx % all.length];
     await btn.click();
     await page.waitForSelector(`#${px}-question .${px}-explain`, { timeout: 6000 });
     return page.evaluate(occlusionScanInPage, px);
@@ -248,6 +268,8 @@ function occlusionScanInPage(px) {
 
   async function testModuleGrade(modId, px, grade) {
     let wrongCap = null, correctCap = null;
+    // Rotates across every question of every attempt, so all four choice positions get tried.
+    let pick = 0;
 
     for (let attempt = 0; attempt < MAX_ATTEMPTS && !(wrongCap && correctCap); attempt++) {
       try {
@@ -260,7 +282,7 @@ function occlusionScanInPage(px) {
       for (let q = 0; q < MAX_QUESTIONS && !(wrongCap && correctCap); q++) {
         let result;
         try {
-          result = await answerAndMeasure(px);
+          result = await answerAndMeasure(px, pick++);
         } catch (e) {
           problems.push(`${modId} g${grade}: answering question ${q + 1} failed (attempt ${attempt + 1}) -- ${e.message}`);
           break;
