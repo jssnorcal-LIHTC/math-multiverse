@@ -137,15 +137,6 @@
     display: flex;
     align-items: center;
     gap: 7px;
-    /* row-gap only, and only because the 44px hit-area extension below is 9px taller than the
-       35px control it sits on. This bar holds one row at the iPad's 1024px and wraps at narrower
-       widths (flex-wrap has always been on this rule, so wrapping is not confined to the 720px
-       query further down). Two wrapped rows 7px apart put their centres 42px apart, so two 44px
-       hit boxes would overlap by 2px and a tap in that band would reach whichever control painted
-       last rather than the one under the finger. 35 + 9 = 44 makes the boxes abut exactly and
-       never overlap. It costs nothing on the device that matters: with a single row there is no
-       row gap to spend. */
-    row-gap: 9px;
     flex-wrap: wrap;
     justify-content: flex-end;
   }
@@ -169,7 +160,21 @@
      `position: relative` above is what this is positioned against; without it the box would resolve
      against the nearest positioned ancestor and land somewhere else entirely.
      tests/touch-targets.js measures this with document.elementFromPoint, never with
-     getBoundingClientRect, because a geometry probe would read this fix as unapplied. */
+     getBoundingClientRect, because a geometry probe would read this fix as unapplied.
+
+     ONE CASE THIS DOES NOT FULLY REACH, measured rather than assumed. This bar holds one row at
+     1024px on the device's font stack, which is what the 26-0708 compaction bought, and a single
+     row has the whole header band to itself. It does NOT hold one row on every font stack: on the
+     ubuntu CI runner, whose fallback face is wider, the controls paint 33px and Reset wraps to a
+     second row, leaving a 40px pitch. Two rows 40px apart cannot both carry a 44px target, because
+     44px of target needs 44px of pitch and the 4px has to come out of one of them. A first version
+     of this fix bought the pitch with `row-gap: 9px` on .profile-bar, and that was the wrong trade
+     twice over: it cost 2px of header in every wrapped configuration, which comes straight out of
+     the play area (it tipped figures-offline's reward-geometry floor from 120px to 118px on the
+     runner, proven by bisecting it there against an environment control), and on a 33px control
+     9px still would not reach 44. So the pitch is not bought. Where the bar wraps, each control
+     keeps its full row pitch and the gate PRINTS the shortfall instead of tolerating it quietly;
+     where it does not wrap, which is the device, every control gets its 44px. */
   .profile-bar .icon-btn::after {
     content: '';
     position: absolute;
