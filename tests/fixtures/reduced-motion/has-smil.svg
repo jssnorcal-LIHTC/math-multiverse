@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
+  <!-- NEGATIVE CONTROL for tests/reduced-motion.js's static scan. This file exists to be FOUND.
+       A scanner that reports "no SMIL anywhere" has to be shown failing on a file that does carry
+       SMIL, or "none found" is indistinguishable from "not looking". Never referenced by a pack. -->
+  <path d="M 10 20 L 110 20" fill="none" stroke="#1a8f5e" stroke-width="8" stroke-dasharray="20 40">
+    <animate attributeName="stroke-dashoffset" from="0" to="60" dur="1s" repeatCount="indefinite"/>
+  </path>
+</svg>

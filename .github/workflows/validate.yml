@@ -62,3 +62,6 @@ jobs:
 
       - name: Tile overlap (occlusion-corrected, explain tile never paints over sibling chrome)
         run: node tests/tile-overlap.js
+
+      - name: Reduced motion (no SMIL in art; every animated asset stops under reduce)
+        run: node tests/reduced-motion.js

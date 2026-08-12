@@ -1,6 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="1900" viewBox="0 0 900 1900">
-  <path d="M 680.0 405.0 C 677.6 410.3, 669.4 423.3, 665.5 437.0 C 661.6 450.7, 663.2 469.0, 656.5 487.0 C 649.8 505.0, 624.4 526.3, 625.5 545.0 C 626.6 563.7, 655.5 581.0, 663.0 599.0 C 670.5 617.0, 665.8 635.0, 670.5 653.0 C 675.2 671.0, 684.0 689.0, 691.5 707.0 C 699.0 725.0, 708.5 743.0, 715.5 761.0 C 722.5 779.0, 727.9 797.0, 733.5 815.0 C 739.1 833.0, 746.2 851.0, 749.0 869.0 C 751.8 887.0, 746.6 905.0, 750.2 923.0 C 753.9 941.0, 763.2 959.0, 771.0 977.0 C 778.8 995.0, 790.2 1016.8, 797.0 1031.0 C 803.8 1045.2, 809.5 1056.8, 812.0 1062.0"
-        fill="none" stroke="#1a8f5e" stroke-width="14" stroke-linecap="round" stroke-dasharray="152 559">
-    <animate attributeName="stroke-dashoffset" from="0" to="711" dur="2.8s" repeatCount="indefinite"/>
-  </path>
+  <!-- The impulse trace over Gray's 1918 cutaneous-nerve plate: a dash marching along the arm's
+       nerve corridor toward the spine, which is the direction a sensory signal actually travels.
+
+       WHY THIS IS A CSS ANIMATION AND NOT SMIL.  It was a SMIL <animate> until 26-0812.  This file
+       is referenced as the `src` of an <img> (engine/figures.js renderPlate builds .mv-lb-overlay),
+       and NOTHING in the parent document can reach inside an <img>-referenced SVG:  engine.css's
+       prefers-reduced-motion block lists .mv-lb-overlay and applies `animation: none !important` to
+       it, and that rule is INERT against the contents of the image.  Measured, not assumed:  a
+       probe rendered four variants of this same path in <img> tags at both browser-level motion
+       preferences and screenshotted each twice 800ms apart.  SMIL moved in all four cells, with or
+       without the parent's !important rule (11,400 differing pixels either way).  SMIL is not
+       governed by prefers-reduced-motion at all;  no CSS anywhere stops it.
+
+       A CSS animation declared in the SVG's OWN <style> does run when the SVG is loaded via <img>,
+       and a @media (prefers-reduced-motion: reduce) block inside that same <style> IS honoured:
+       the image document evaluates the query against the browser/OS preference.  So the promise in
+       constraint 7 is kept from inside the asset rather than from a stylesheet that cannot see it.
+
+       ONE THING THAT PROBE COULD NOT MEASURE:  it ran on Chromium 149 only.  WebKit, which is what
+       the target iPad runs, was not measured from here.  If WebKit ignores the media query inside
+       an image document, this file behaves exactly as it did before the change, so the change is
+       never worse than what it replaces on any engine.
+
+       WHAT REDUCE COLLAPSES TO.  Constraint 7 says reduced motion collapses to END STATES.  Here
+       the dash pattern's period (152 + 559) equals the animation's full 711 travel, so the "end
+       state" of the loop is pixel-identical to its start: one 152-unit dash near the wrist, which
+       communicates neither the corridor nor its direction.  Reduce therefore drops the dash pattern
+       entirely and paints the whole traced corridor.  The evidence the overlay exists to show is
+       kept in full;  only the motion is dropped, and the direction it carried is stated in the
+       figure's own caption and dataTable.
+
+       The dasharray lives in the CSS rather than on a presentation attribute so the reduce rule can
+       unset it.  A renderer that applies no <style> at all draws the corridor solid and still,
+       which is the safe fallback rather than the animated one. -->
+  <style>
+    .impulse {
+      stroke-dasharray: 152 559;
+      animation: mv-impulse 2.8s linear infinite;
+    }
+    @keyframes mv-impulse {
+      from { stroke-dashoffset: 0; }
+      to   { stroke-dashoffset: 711; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .impulse { animation: none; stroke-dasharray: none; }
+    }
+  </style>
+  <path class="impulse"
+        d="M 680.0 405.0 C 677.6 410.3, 669.4 423.3, 665.5 437.0 C 661.6 450.7, 663.2 469.0, 656.5 487.0 C 649.8 505.0, 624.4 526.3, 625.5 545.0 C 626.6 563.7, 655.5 581.0, 663.0 599.0 C 670.5 617.0, 665.8 635.0, 670.5 653.0 C 675.2 671.0, 684.0 689.0, 691.5 707.0 C 699.0 725.0, 708.5 743.0, 715.5 761.0 C 722.5 779.0, 727.9 797.0, 733.5 815.0 C 739.1 833.0, 746.2 851.0, 749.0 869.0 C 751.8 887.0, 746.6 905.0, 750.2 923.0 C 753.9 941.0, 763.2 959.0, 771.0 977.0 C 778.8 995.0, 790.2 1016.8, 797.0 1031.0 C 803.8 1045.2, 809.5 1056.8, 812.0 1062.0"
+        fill="none" stroke="#1a8f5e" stroke-width="14" stroke-linecap="round"/>
 </svg>
