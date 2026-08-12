@@ -46,6 +46,18 @@ wrong, so the gate can never silently pass on a broken or unexercised generator.
 `tests/extract.js` slices each module's IIFE out of the HTML **by marker** (never hard-coded line
 numbers) and evaluates it in a Node `vm` sandbox, so there is no browser and no build step.
 
+The same pass also gates **coaching coverage**: every distinct `topic` any generator actually emits
+must reach a tip, either its own `COACH_TIPS` entry or its family's coarse fallback, resolved
+exactly the way `showCoach` resolves it.  The emitted set comes from the fuzz run rather than from a
+static scan, because topics are built at runtime (`'g6-dec-' + mode`, `'g6-stats-' + op`) and a scan
+for string literals would miss precisely those.  `COACH_TIPS` and `COACH_FAMILY_FALLBACK` are parsed
+out of the shell as text, so the parse is checked rather than trusted: too few keys, a fallback
+pointing at a key that does not exist, or a negative-control topic that resolves, all fail here.
+
+It reports own-entry against fallback-only, because that is the quantity ticket 2.2 was about: a
+silent slide from a precise tip to a coarse family tip is a regression no count of "uncoached"
+would ever show.  Currently 83 emitted topics, 83 with their own tip, none relying on a fallback.
+
 ## How the smoke works (the render gate)
 
 `tests/smoke.js` serves the repo over http and boots a real headless Chromium (always
