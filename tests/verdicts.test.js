@@ -386,25 +386,39 @@ check('figure-bearing item hash pins the dataTable', () => {
 check('every committed ledger record still verifies -- no existing hash moved', () => {
   const fs = require('fs');
   const packsDir = path.join(__dirname, '..', 'packs');
-  let checked = 0, ledgers = 0;
+  let checked = 0, ledgers = 0, pinned = 0;
   for (const f of fs.readdirSync(packsDir)) {
     if (!f.endsWith('.verdicts.json')) continue;
     const pack = JSON.parse(fs.readFileSync(path.join(packsDir, f.replace('.verdicts', '')), 'utf8'));
     const led = JSON.parse(fs.readFileSync(path.join(packsDir, f), 'utf8'));
     const passages = new Map(pack.passages.map((p) => [p.id, p]));
+    const figures = new Map((pack.figures || []).map((g) => [g.id, g]));
     const items = new Map(pack.items.map((i) => [i.id, i]));
     ledgers++;
     for (const r of led.records || []) {
       const it = items.get(r.itemId);
       assert.ok(it, `${f}: ledger names missing item ${r.itemId}`);
-      assert.strictEqual(itemHash(it, passages.get(it.passageId)), r.itemHash,
+      // Resolved exactly the way validateLedger resolves it: passage always, figure only when the
+      // item declares one. Hashing figure-bearing items WITHOUT the figure is what this check did
+      // first, and it failed the moment real figure-bearing items entered a ledger -- the test's
+      // own assumption breaking, not a hash moving.
+      const fig = it.figureId ? figures.get(it.figureId) : null;
+      assert.strictEqual(itemHash(it, passages.get(it.passageId), fig), r.itemHash,
         `${f}: hash moved for ${r.itemId}`);
+      if (!it.figureId) {
+        // THE REGRESSION PIN, which is the point of this check: an item with no figureId must hash
+        // byte-identically to the pre-V3 two-argument form, so five committed ledgers stay valid.
+        assert.strictEqual(itemHash(it, passages.get(it.passageId)), r.itemHash,
+          `${f}: a figure-less item's hash moved for ${r.itemId}`);
+        pinned++;
+      }
       checked++;
     }
   }
   // A check that silently finds nothing is the failure mode this program bans outright.
   assert.ok(ledgers >= 5, `expected at least 5 committed ledgers, saw ${ledgers}`);
   assert.ok(checked >= 500, `expected 500+ ledger records to verify, saw ${checked}`);
+  assert.ok(pinned >= 500, `expected 500+ figure-less records to be regression-pinned, saw ${pinned}`);
 });
 
 check('blindQuestion shows the figure data for a figure-bearing item, and nothing extra otherwise', () => {
