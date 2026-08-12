@@ -28,6 +28,14 @@
     --bg-card: #15181f;
     --bg-elevated: #1d2129;
     --bg-hover: #252934;
+    /* The pack engine's respond panel (.mv-item), and nothing else.  Its own token rather than
+       --bg-elevated, which six shell rules also use: phase R made the respond zone a raised
+       console against the passage's recessed sheet, and that step has to be measured against the
+       passage's TINTED grounds, which no other surface in this app sits beside.  Raising
+       --bg-elevated to clear those would have moved module cards, the stats card and the f1
+       driver chips along with it, none of which have the problem.  The number is not a taste
+       call;  see engine.css's .mv-item rule and the sweep in tests/reading-surface.js. */
+    --mv-respond: #2f3542;
 
     --border-subtle: rgba(255,255,255,0.06);
     --border-strong: rgba(255,255,255,0.14);
@@ -145,7 +153,44 @@
      "Reset" wrapped to a second row, inflating the header and stealing
      ~40px of vertical space from the play area below. Scoped to
      .profile-bar so other .icon-btn uses (e.g. modal Close) are untouched. */
-  .profile-bar .icon-btn { padding: 8px 9px; }
+  .profile-bar .icon-btn { padding: 8px 9px; position: relative; }
+  /* Constraint 6 puts the minimum touch target at 44px, and every control in this bar has painted
+     35px tall since that compaction: measured at 1024x768, btn-grade-5 68x35, btn-grade-6 66x35,
+     btn-stats 48x35, btn-preview 94x35, btn-rename 55x35, btn-export 57x35, btn-import 59x35,
+     btn-reset 51x35. The obvious remedy, min-height:44px, buys the target with 9px of play area on
+     the one device that matters -- which is exactly the trade this ticket was going to be ruled on.
+     It does not have to be paid. Only the HEIGHT was ever short (every control here is already
+     48px or wider), and a touch target is a HIT-TESTING REGION, not a painted box: this
+     pseudo-element is 44px tall, centred on the button, absolutely positioned so it contributes no
+     layout at all, and paints nothing, so the bar keeps its 35px look and its 35px height while the
+     finger gets its 44px. A pointer event landing on a pseudo-element resolves to the element that
+     generated it, so the button is still the event target and no handler changes.
+     `position: relative` above is what this is positioned against; without it the box would resolve
+     against the nearest positioned ancestor and land somewhere else entirely.
+     tests/touch-targets.js measures this with document.elementFromPoint, never with
+     getBoundingClientRect, because a geometry probe would read this fix as unapplied.
+
+     ONE CASE THIS DOES NOT FULLY REACH, measured rather than assumed. This bar holds one row at
+     1024px on the device's font stack, which is what the 26-0708 compaction bought, and a single
+     row has the whole header band to itself. It does NOT hold one row on every font stack: on the
+     ubuntu CI runner, whose fallback face is wider, the controls paint 33px and Reset wraps to a
+     second row, leaving a 40px pitch. Two rows 40px apart cannot both carry a 44px target, because
+     44px of target needs 44px of pitch and the 4px has to come out of one of them. A first version
+     of this fix bought the pitch with `row-gap: 9px` on .profile-bar, and that was the wrong trade
+     twice over: it cost 2px of header in every wrapped configuration, which comes straight out of
+     the play area (it tipped figures-offline's reward-geometry floor from 120px to 118px on the
+     runner, proven by bisecting it there against an environment control), and on a 33px control
+     9px still would not reach 44. So the pitch is not bought. Where the bar wraps, each control
+     keeps its full row pitch and the gate PRINTS the shortfall instead of tolerating it quietly;
+     where it does not wrap, which is the device, every control gets its 44px. */
+  .profile-bar .icon-btn::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: 50%;
+    height: 44px;
+    transform: translateY(-50%);
+  }
   .player-stats {
     display: flex;
     align-items: center;
