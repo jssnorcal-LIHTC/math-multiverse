@@ -363,6 +363,20 @@
       "status": "agree"
     },
     {
+      "itemId": "t3-hot-source-b-argues-its-case",
+      "itemHash": "9bc8c219aaa53fd8",
+      "blind": [
+        3,
+        4
+      ],
+      "authored": [
+        3,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "t3-ebsr-sparta-claims-turning-points",
       "itemHash": "605185312ed8dd3f",
       "blind": 0,
@@ -1237,6 +1251,14 @@
       "status": "agree"
     },
     {
+      "itemId": "t5-ebsr-what-legalism-taught",
+      "itemHash": "8a30910490635057",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "t5-ebsr-the-credit-for-paper",
       "itemHash": "24d89c829b4d7f0f",
       "blind": 1,
@@ -1461,32 +1483,296 @@
       "status": "agree"
     },
     {
-      "itemId": "t3-hot-source-b-argues-its-case",
-      "itemHash": "9bc8c219aaa53fd8",
+      "itemId": "t6-mc-how-far-it-had-spread",
+      "itemHash": "954e7d0e5b50c2eb",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-vis-two-rivers-contrast",
+      "itemHash": "8f0901dac296155c",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-vis-rivers-map-shows",
+      "itemHash": "511b859f0950f606",
       "blind": [
-        3,
-        4
+        0,
+        1,
+        2
       ],
       "authored": [
-        3,
-        4
+        0,
+        1,
+        2
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "t5-ebsr-what-legalism-taught",
-      "itemHash": "8a30910490635057",
+      "itemId": "l1-vis-match-river-region",
+      "itemHash": "672339b87920693f",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-vis-flood-timing",
+      "itemHash": "9d09687b986c8bc7",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-vis-timeline-no-years",
+      "itemHash": "708c692b26694cc8",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-vis-where-they-were-moved",
+      "itemHash": "a8d4672ae69d40f4",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "t6-mc-how-far-it-had-spread",
-      "itemHash": "954e7d0e5b50c2eb",
+      "itemId": "l2-vis-exile-map-shows",
+      "itemHash": "525b750e82e3e290",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-vis-how-salamis-is-drawn",
+      "itemHash": "a8e967eb07cda205",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-vis-two-turning-points",
+      "itemHash": "53c0d298cc42ce3a",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-vis-persia-notes",
+      "itemHash": "ea3b8938e7b3a4b9",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-vis-geography-callback",
+      "itemHash": "4806cf2fdedc8119",
       "blind": 3,
       "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-vis-two-cities",
+      "itemHash": "4e73301caffdaa08",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-vis-indus-map-shows",
+      "itemHash": "a2eea2271cedbb6b",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-vis-indus-notes",
+      "itemHash": "0d99acf98d55eb8c",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-vis-road-preview",
+      "itemHash": "2cf3ac0be9e6a116",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-vis-what-went-which-way",
+      "itemHash": "2eeff9f46c18b9c9",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-vis-match-the-arrow",
+      "itemHash": "487aed3c05328144",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-vis-the-hedge",
+      "itemHash": "d63d4801acc848e1",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-vis-cross-era-sequence",
+      "itemHash": "94f68adfd64df60e",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-vis-rome-map-reads",
+      "itemHash": "30b15ee57c5aa527",
+      "blind": [
+        0,
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-vis-temple-order",
+      "itemHash": "6831fa1f26004080",
+      "blind": [
+        1,
+        0,
+        3,
+        2
+      ],
+      "authored": [
+        1,
+        0,
+        3,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-vis-order-the-endings",
+      "itemHash": "e97cdc9395fe8785",
+      "blind": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "authored": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-vis-what-the-plate-shows",
+      "itemHash": "9a9d44cf22f46811",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-vis-plate-features",
+      "itemHash": "1b350f8b607975a0",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     }
