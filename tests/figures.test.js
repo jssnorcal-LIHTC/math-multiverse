@@ -640,6 +640,33 @@ check('a partially-revealed card renders a plain, inert image -- no button, no w
   assert.strictEqual(typeof img.onclick, 'undefined', 'a partial reveal must have no click handler at all');
 });
 
+// Owner ruling (26-0811, gate item 3). Confirming the fully-revealed gate exposed the defect it was
+// hiding: the enlarge button paints no border, no background and no icon, and `cursor: pointer` says
+// nothing on a touch device, so the affordance was invisible on the very device this ships to. The
+// chip is the visible cue. It must track the gate exactly -- present when the card can be enlarged,
+// absent when it cannot -- or it becomes a promise the card does not keep.
+check('a fully-revealed card carries the visible enlarge chip, and the grid keeps its index', () => {
+  const host = MVFigures.el('div');
+  MVFigures.renderRevealCard(REVEAL_PACK, 0, host, 1);
+  const frame = host.children[0].children[0];
+  assert.strictEqual(frame.children[1].className, 'mv-rv-grid',
+    'the chip must be appended AFTER the grid: three other checks read the grid as frame.children[1]');
+  const zoom = frame.children[2];
+  assert.ok(zoom, 'a fully-revealed card renders no enlarge chip, so the affordance is invisible on an iPad');
+  assert.strictEqual(zoom.className, 'mv-rv-zoom');
+  assert.strictEqual(zoom.getAttribute('aria-hidden'), 'true',
+    'the chip must not double-announce the button whose aria-label already says "Enlarge ..."');
+});
+
+check('a partially-revealed card carries NO enlarge chip, since it cannot be enlarged', () => {
+  const host = MVFigures.el('div');
+  MVFigures.renderRevealCard(REVEAL_PACK, 0, host, 0.5);
+  const frame = host.children[0].children[0];
+  const chips = Array.from(frame.children).filter((c) => c.className === 'mv-rv-zoom');
+  assert.strictEqual(chips.length, 0,
+    'a partial card advertises an enlarge that its own inert image cannot deliver');
+});
+
 check("dom-stub insertBefore detaches the moved node from its PREVIOUS parent, not just the new one", () => {
   // Fix round 1, item 7: the same "state lies about itself" corruption removeChild's fix
   // already guards against, reachable from the insert side. Without the detach, `mover` would
