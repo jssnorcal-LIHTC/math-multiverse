@@ -4947,6 +4947,7 @@
         "type": "line",
         "xLabel": "season",
         "yLabel": "fledge rate (percent)",
+        "yDomain": [0, 100],
         "series": [{ "label": "fledge rate", "points": [[1, 76], [10, 64], [20, 52], [30, 39]] }],
         "notes": [
           "Season 1: chicks hatched about 8 days after the herring arrived.",
