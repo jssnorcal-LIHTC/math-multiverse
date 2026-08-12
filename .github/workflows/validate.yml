@@ -54,6 +54,9 @@ jobs:
       - name: Headless render smoke (launcher + all six modules, Grade 5 and Grade 6)
         run: node tests/smoke.js
 
+      - name: Touch targets (PROBE, moved early to log CI geometry)
+        run: node tests/touch-targets.js || true
+
       - name: Figures offline (every figure/badge asset decodes with no network; fixture controls)
         run: node tests/figures-offline.js
 
