@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
+  <!-- NEGATIVE CONTROL for the rendered half: nothing here animates by any mechanism, so it must
+       measure STILL at both motion preferences. If it ever measures MOVED, the movement detector
+       is reporting noise and every STILL in the same run is worthless. -->
+  <path d="M 10 20 L 110 20" fill="none" stroke="#1a8f5e" stroke-width="8"/>
+</svg>
