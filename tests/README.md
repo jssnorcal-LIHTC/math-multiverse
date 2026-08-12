@@ -1,7 +1,8 @@
 # Math Multiverse test harness
 
-Two committed gates that protect `Math-Multiverse.html`.  Both run in CI
-(`.github/workflows/validate.yml`) and block merges to `main`.
+The committed gates that protect `Math-Multiverse.html`.  `npm test` runs the ten unit suites
+followed by eleven gate scripts;  the same job runs in CI (`.github/workflows/validate.yml`,
+job name `fuzz + smoke`, which is the required check) and blocks merges to `main`.
 
 ## What runs
 
@@ -9,7 +10,12 @@ Two committed gates that protect `Math-Multiverse.html`.  Both run in CI
 |---|---|
 | `npm run fuzz` | Every generated question, both grades, all levels, is mathematically correct. |
 | `npm run smoke` | The launcher and all six modules boot at Grade 5 and Grade 6 with zero JS errors. |
-| `npm test` | fuzz then smoke. |
+| `npm run reading` | The read/respond surfaces are measured as PAINTED, not as authored. |
+| `npm test` | units, then validate-pack, figure-derive, freshness x3, shells, fuzz, smoke, figures-offline, reading-surface, tile-overlap. |
+
+Two tools are committed but deliberately **not** in `npm test`, because each needs a network
+origin and neither belongs in a hermetic gate:  `build/verify-deploy.js` (byte-compare what
+Pages serves against `git show <sha>:<path>`) and `tests/play-level.js` (below).
 
 ## How the fuzz works (the math-correctness gate)
 
@@ -53,3 +59,46 @@ PLAYWRIGHT_EXECUTABLE_PATH="C:\\Users\\...\\ms-playwright\\chromium-1223\\chrome
 ```
 
 In CI the browser is installed with `npx playwright install --with-deps chromium`.
+
+## How the level driver works (`tests/play-level.js`)
+
+```
+node tests/play-level.js [--base <url>] [--pack <id>] [--level <n>] [--wrong <n>] [--unlock] [--json]
+```
+
+Plays a pack level **to its end** through the real app and asserts the completion-screen reward
+card.  With no `--base` it serves the repo on an ephemeral port;  with `--base` it drives a
+remote origin, which is how the deploy gets checked.
+
+It exists because finishing a level means operating *every* item type that level serves, and the
+ad-hoc drivers written during the visual-engagement program could not operate `match` or `order`,
+so they stalled mid-level and the reward card's twelve-tile claim rested on a unit gate plus
+byte-identity rather than on a playthrough.  All eight types are driven here through the same
+affordances a child has:  real clicks, and a real `<select>` change for cloze.  `match` is a
+rowLabels x colLabels **table**, one tap per row, not the tap-source-then-tap-target interaction
+an earlier driver assumed;  `order` is tap-to-append from a bank whose tiles carry no `data-idx`,
+so a tile is addressed by its exact text.
+
+Three rules it encodes, each of them a lesson this repo paid for:
+
+- **The answer key comes from the pack the app fetched**, never from the local working tree.
+  Driving a deployed origin while answering from the checkout would silently produce a nonsense
+  run the moment the two differ.
+- **The origin is proven with a negative control first.**  A path that cannot exist must not
+  answer 200, *and* the app must answer 200 as `text/html`.  A positive-only check once called a
+  stray process green when it answered 200 with a 73-byte PNG for every path.
+- **Advancing waits on a CHANGED artifact**, the progress counter reading `n+1 / total`, not on
+  ".mv-item exists", which is already true of the item still on screen.
+
+`--unlock` is **setup, not an assertion shortcut**.  A pack level card is open only when
+`i <= levelsCleared`, and pack levels do *not* honour Preview Mode, which lives in a different save
+store.  Without it the driver could only ever reach level 1 of any pack, so the 12-question L6
+levels and the `shorttext` items that first appear at L3 would be permanently untestable.  It
+seeds `multiverse.packs.v1` through `addInitScript` so the value lands before `PackSave.load()`
+reads it;  nothing about the reward card is seeded, only which door is unlocked.
+
+`--wrong <n>` answers the first n items incorrectly on purpose, which is what makes the magnifier
+assertion two-sided:  the enlarge chip must appear **only** once every tile has lifted.  Three
+states are covered and each is asserted separately:  all correct (12 tiles lifted, magnifier
+present, image wrapped in the enlarge button), partial (fewer tiles, no magnifier, bare image),
+and zero earned (no card and no `#lc-reveal` host at all).
