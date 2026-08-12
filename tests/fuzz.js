@@ -30,6 +30,10 @@ const failSamples = [];
 const covCheck = {};   // op -> count
 const covFrac = {};    // kind -> count
 let covStruct = 0, covFracApplicable = 0, covCheckFired = 0;
+// Every distinct `topic` any generator actually emits. The coaching gate at the bottom of this
+// file needs the emitted set, not the authored one: topics are built at runtime ('g6-dec-' + mode,
+// 'g6-stats-' + op), so no static scan of the source can enumerate them honestly.
+const emittedTopics = new Set();
 
 function fail(scope, d, reason) {
   fails++;
@@ -44,6 +48,7 @@ for (const d of drivers) {
     try { q = d.make(); }
     catch (e) { fail('gen', d, 'THREW ' + (e && e.message)); total++; continue; }
     total++;
+    if (q && typeof q.topic === 'string' && q.topic) emittedTopics.add(q.topic);
 
     // structural (always)
     const s = structuralOracle(q, d.moduleId === 'fraction-rider' ? fracMakeChoices : undefined);
@@ -141,6 +146,77 @@ console.log('  ' + JSON.stringify(covCheck));
 console.log(`fraction applicable: ${covFracApplicable}  | coverage by kind:`);
 console.log('  ' + JSON.stringify(covFrac));
 console.log(`mutation self-test: M1(answer)=${mut.m1.caught}/${mut.m1.run}  M2(correctIdx)=${mut.m2.caught}/${mut.m2.run}  M3(frac)=${mut.m3.caught}/${mut.m3.run}`);
+
+// ---- coaching coverage: every topic a generator emits must reach a tip ----
+//
+// Ticket 2.2 asked for finer coaching buckets, and commit 138f4da (26-0802) already delivered them:
+// `g6-dec-ops` and `g6-stats` survive only as level-config and dispatch identifiers, while the
+// emitted topics are `g6-dec-add/sub/mul/divide` and `g6-stats-mean/median/range`, each with its own
+// COACH_TIPS entry. What was never gated is that they STAY reached, and the shell's own comment on
+// COACH_FAMILY_FALLBACK says why that matters: "topics and tips are authored in different places and
+// have drifted before".
+//
+// The emitted set comes from this fuzz pass rather than from a static scan, because topics are built
+// at runtime ('g6-dec-' + mode) and a scan for string literals would silently miss exactly the ones
+// this ticket is about. Resolution mirrors showCoach: the topic's own entry, else its family's
+// coarse fallback after stripping a `g6-` prefix and taking the first hyphen segment.
+//
+// COACH_TIPS and COACH_FAMILY_FALLBACK are read out of the shell as text. That is a parse, so it is
+// checked rather than trusted: too few keys, or a fallback map that does not resolve, fails here
+// instead of quietly making every topic look covered.
+{
+  const fs = require('fs');
+  const { HTML_PATH } = require('./extract');
+  const html = fs.readFileSync(HTML_PATH, 'utf8');
+  const block = (name) => {
+    const i = html.indexOf(`const ${name} = {`);
+    if (i < 0) return null;
+    const end = html.indexOf('\n};', i);
+    return end < 0 ? null : html.slice(i, end);
+  };
+  const keysOf = (src) => new Set([...src.matchAll(/^\s*'([^']+)'\s*:/gm)].map((m) => m[1]));
+  const tipsSrc = block('COACH_TIPS');
+  const famSrc = block('COACH_FAMILY_FALLBACK');
+  if (!tipsSrc || !famSrc) {
+    problems.push('coaching: COACH_TIPS or COACH_FAMILY_FALLBACK could not be located in the shell, so coaching coverage was not measured at all');
+  } else {
+    const tips = keysOf(tipsSrc);
+    const fam = new Map([...famSrc.matchAll(/(\w+)\s*:\s*'([^']+)'/g)].map((m) => [m[1], m[2]]));
+    // The parse has to be shown working before its results mean anything.
+    if (tips.size < 40) problems.push(`coaching: only ${tips.size} COACH_TIPS keys parsed out of the shell, which is too few to be a real read of that object`);
+    if (!fam.size) problems.push('coaching: COACH_FAMILY_FALLBACK parsed to zero entries, so every unmatched topic would look uncoachable');
+    for (const [, target] of fam) {
+      if (!tips.has(target)) problems.push(`coaching: the family fallback points at "${target}", which is not a COACH_TIPS key -- that family coaches nothing`);
+    }
+
+    // showCoach's own fallback: strip a `g6-` prefix, take the first hyphen segment, look that
+    // family up. Mirrored here rather than reimplemented differently, so this measures the
+    // shipped behaviour and not the gate's opinion of it.
+    const familyTip = (topic) => fam.get(String(topic).replace(/^g6-/, '').split('-')[0]);
+    const resolves = (topic) => tips.has(topic) || tips.has(familyTip(topic));
+    if (!emittedTopics.size) {
+      problems.push('coaching: zero topics were emitted across the whole fuzz pass, so this check measured nothing');
+    }
+    const uncoached = [...emittedTopics].filter((t) => !resolves(t)).sort();
+    for (const t of uncoached) {
+      problems.push(`coaching: topic "${t}" is emitted by a generator but resolves to no tip, so the coach fires on it with nothing to say`);
+    }
+    // Reported, not failed. A topic reaching only its family's coarse tip is coached, just less
+    // precisely than one with its own entry, and the fallback exists deliberately. It is printed
+    // because THAT is the quantity ticket 2.2 was about: a silent slide from own-entry to
+    // family-fallback is a precision regression that no count of "uncoached" would ever show.
+    const fallbackOnly = [...emittedTopics].filter((t) => !tips.has(t) && tips.has(familyTip(t))).sort();
+    // NEGATIVE CONTROL: a topic that cannot exist must NOT resolve. Without it, a resolver that
+    // returned true for everything would report full coverage and no test would notice.
+    if (resolves('zz-not-a-real-topic')) {
+      problems.push('coaching: the NEGATIVE CONTROL topic resolved to a tip -- this resolver accepts anything, so the coverage result above is void');
+    }
+    console.log(`\ncoaching coverage: ${emittedTopics.size} distinct topic(s) emitted, ${tips.size} COACH_TIPS keys, ${fam.size} family fallback(s), ${uncoached.length} uncoached`);
+    console.log(`  own tip: ${emittedTopics.size - fallbackOnly.length}   family fallback only: ${fallbackOnly.length}${fallbackOnly.length ? ' (' + fallbackOnly.join(', ') + ')' : ''}`);
+    console.log(`  ticket 2.2 granularity, as emitted: ${[...emittedTopics].filter((t) => /^g6-dec-|^g6-stats-/.test(t)).sort().join(', ')}`);
+    console.log('  negative control: "zz-not-a-real-topic" correctly resolves to nothing');
+  }
+}
 
 if (fails) {
   console.log(`\n=== ${fails} FAILURES (first ${Math.min(60, failSamples.length)}) ===`);
