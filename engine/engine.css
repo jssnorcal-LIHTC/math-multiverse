@@ -189,6 +189,29 @@
   background: none; cursor: pointer; }
 .mv-rv-grid { position: absolute; inset: 0; display: grid;
   grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); }
+/* Owner ruling (26-0811, gate item 3): the VISIBLE half of the enlarge affordance. The cue cannot
+   live on .mv-rv-img-btn itself, because that button is deliberately a zero-cost box (see its rule
+   above: the reward-geometry sweep pins .mv-rv-frame's width to the image's own painted box, and a
+   padded or bordered button would move it). It is therefore a separate, absolutely positioned chip
+   that contributes no layout at all. Drawn in CSS rather than shipped as an asset because every
+   figure surface here must decode with the network blocked (tests/figures-offline.js), and a
+   magnifier made of two borders cannot 404.
+   The base state is OPAQUE and the keyframe only fades it in, timed to land after the last tile
+   finishes lifting (start 120ms + 11 * 90ms stagger + 500ms transition = 1.61s), so that when the
+   reduced-motion block below kills the animation the chip is simply present from the first paint
+   rather than stuck at the keyframe's zero-opacity start frame. */
+.mv-rv-zoom { position: absolute; right: 8px; bottom: 8px; width: 30px; height: 30px;
+  border-radius: 8px; background: rgba(6, 10, 18, 0.62); border: 1px solid rgba(255, 255, 255, 0.55);
+  pointer-events: none; opacity: 1; animation: mv-rv-zoom-in 0.35s ease 1.6s both; }
+/* box-sizing is set explicitly on the lens because this stylesheet declares no global border-box
+   reset, and a content-box circle would render 4px wider than its stated size and sit off-centre.
+   The handle rotates -45deg, NOT +45: CSS rotation is clockwise in a y-down coordinate space, so a
+   bar pointing down goes to down-LEFT at +45 and the glyph reads as a lowercase q. */
+.mv-rv-zoom::before { content: ''; position: absolute; box-sizing: border-box;
+  left: 6px; top: 6px; width: 13px; height: 13px; border: 2px solid #fff; border-radius: 50%; }
+.mv-rv-zoom::after { content: ''; position: absolute; left: 16.5px; top: 17px; width: 2px; height: 8px;
+  background: #fff; border-radius: 1px; transform: rotate(-45deg); transform-origin: top center; }
+@keyframes mv-rv-zoom-in { from { opacity: 0; } to { opacity: 1; } }
 .mv-rv-tile { background: #0b1424; border: 1px solid rgba(255,255,255,0.08);
   transition: opacity 0.5s ease, transform 0.5s ease; }
 .mv-rv-tile.away { opacity: 0; transform: scale(0.92); }
@@ -268,7 +291,7 @@
    schedule, so with no transition to animate, each state simply applies instantly, landing on
    the same fully-revealed end state as the animated path, just without the motion. */
 @media (prefers-reduced-motion: reduce) {
-  .mv-lb-zoom, .mv-lb-overlay, .mv-rv-cell, .mv-rv-tile, .mv-flash { transition: none !important; animation: none !important; }
+  .mv-lb-zoom, .mv-lb-overlay, .mv-rv-cell, .mv-rv-tile, .mv-rv-zoom, .mv-flash { transition: none !important; animation: none !important; }
 }
 
 /* The item is now the side that gives. `flex: 0 1 auto` plus `min-height: 0` lets it shrink below its

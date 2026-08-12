@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480" role="img">
+<rect x="0" y="0" width="800" height="480" fill="#0f1218" />
+<text x="400" y="30" font-size="22" fill="#e8eef7" text-anchor="middle" font-weight="700">Life support: system, subsystem, component</text>
+
+<line x1="400" y1="105" x2="180" y2="150" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<line x1="400" y1="105" x2="400" y2="150" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<line x1="400" y1="105" x2="620" y2="150" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+
+<line x1="180" y1="200" x2="180" y2="245" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<line x1="400" y1="200" x2="400" y2="245" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<line x1="620" y1="200" x2="620" y2="245" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+
+<rect x="300" y="55" width="200" height="50" rx="10" fill="#12281f" stroke="#1a8f5e" stroke-width="3" />
+<text x="400" y="76" font-size="20" fill="#e8eef7" text-anchor="middle" font-weight="700">Life Support</text>
+<text x="400" y="96" font-size="15" fill="#e8eef7" fill-opacity="0.75" text-anchor="middle">(system)</text>
+
+<rect x="90" y="150" width="180" height="50" rx="10" fill="none" stroke="#e8eef7" stroke-width="2" />
+<text x="180" y="171" font-size="18" fill="#e8eef7" text-anchor="middle" font-weight="700">Air</text>
+<text x="180" y="191" font-size="15" fill="#e8eef7" fill-opacity="0.75" text-anchor="middle">(subsystem)</text>
+
+<rect x="310" y="150" width="180" height="50" rx="10" fill="none" stroke="#e8eef7" stroke-width="2" />
+<text x="400" y="171" font-size="18" fill="#e8eef7" text-anchor="middle" font-weight="700">Water</text>
+<text x="400" y="191" font-size="15" fill="#e8eef7" fill-opacity="0.75" text-anchor="middle">(subsystem)</text>
+
+<rect x="530" y="150" width="180" height="50" rx="10" fill="none" stroke="#e8eef7" stroke-width="2" />
+<text x="620" y="171" font-size="18" fill="#e8eef7" text-anchor="middle" font-weight="700">Food</text>
+<text x="620" y="191" font-size="15" fill="#e8eef7" fill-opacity="0.75" text-anchor="middle">(subsystem)</text>
+
+<rect x="75" y="245" width="210" height="70" rx="10" fill="none" stroke="#e8eef7" stroke-width="2" />
+<text x="180" y="272" font-size="16" fill="#e8eef7" text-anchor="middle" font-weight="700">Scrubber cartridge</text>
+<text x="180" y="296" font-size="15" fill="#e8eef7" fill-opacity="0.75" text-anchor="middle">(component)</text>
+
+<rect x="295" y="245" width="210" height="70" rx="10" fill="none" stroke="#e8eef7" stroke-width="2" />
+<text x="400" y="272" font-size="16" fill="#e8eef7" text-anchor="middle" font-weight="700">Filter membrane</text>
+<text x="400" y="296" font-size="15" fill="#e8eef7" fill-opacity="0.75" text-anchor="middle">(component)</text>
+
+<rect x="515" y="245" width="210" height="70" rx="10" fill="none" stroke="#e8eef7" stroke-width="2" />
+<text x="620" y="272" font-size="16" fill="#e8eef7" text-anchor="middle" font-weight="700">Light panel</text>
+<text x="620" y="296" font-size="15" fill="#e8eef7" fill-opacity="0.75" text-anchor="middle">(component)</text>
+
+<text x="400" y="360" font-size="17" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">Interaction: a clogged scrubber cartridge lets carbon dioxide climb,</text>
+<text x="400" y="384" font-size="17" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">so the crew works slower and sleeps worse.</text>
+<text x="400" y="416" font-size="17" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">Interaction: dim light panels slow crop growth,</text>
+<text x="400" y="440" font-size="17" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">so the crew eats more of what gets shipped in.</text>
+</svg>
