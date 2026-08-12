@@ -15,6 +15,54 @@
   "repeatPolicy": "rotate",
   "figures": [
     {
+      "id": "fig-exile-map",
+      "kind": "map",
+      "caption": "Two kingdoms where one had stood: Israel with its capital at Samaria, Judah with the Temple in Jerusalem, and the direction Assyria moved the defeated people.",
+      "credit": "Built for this pack; coastlines and rivers traced from Natural Earth (public domain)",
+      "alt": "A map of the eastern Mediterranean and Mesopotamia. Samaria and Jerusalem are marked in the Levant, labelled Israel and Judah. A dashed arrow curves north-east from Samaria to Assyria. A note says Assyrian records do not fully agree about which king finished the siege, and that this file keeps that disagreement.",
+      "src": "art/firsthand-g6/fig-exile-map.svg"
+    },
+    {
+      "id": "fig-temple-timeline",
+      "kind": "diagram",
+      "caption": "The order of events this file states, from the First Temple to a school at Yavneh.  The passage gives no years, so none are shown.",
+      "credit": "Built for this pack",
+      "alt": "A vertical timeline of five steps with no dates: the Babylonian army conquers Judah and destroys the First Temple; many Israelites are forced into exile, the diaspora; Persian rulers let the exiles return and build a Second Temple on the same site; the Second Temple stands for centuries and a Roman army destroys it during a revolt; Yohanan ben Zakkai opens a school at Yavneh and teaches with no Temple at all.",
+      "src": "art/firsthand-g6/fig-temple-timeline.svg"
+    },
+    {
+      "id": "fig-persia-maps",
+      "kind": "map",
+      "caption": "The three places this account turns on: Thermopylae, Plataea, and Salamis, which it treats differently from the other two.",
+      "credit": "Built for this pack; coastlines and rivers traced from Natural Earth (public domain)",
+      "alt": "A map of central Greece. Thermopylae is marked and labelled a narrow mountain pass; Plataea is marked and labelled open ground; Salamis is drawn as an open dashed circle. A note explains that Salamis is drawn open because this account treats that sea battle differently.",
+      "src": "art/firsthand-g6/fig-persia-maps.svg"
+    },
+    {
+      "id": "fig-indus-map",
+      "kind": "map",
+      "caption": "The Indus and its two grid-planned cities, Harappa and Mohenjo-daro.",
+      "credit": "Built for this pack; coastlines and rivers traced from Natural Earth (public domain)",
+      "alt": "A map of the Indus valley. The river runs south to the sea. Harappa and Mohenjo-daro are marked. Notes say both cities sat on careful grids with baked-brick homes linked to covered drains, that their script was cut into thousands of small stone seals, and that no scholar has ever managed to read it.",
+      "src": "art/firsthand-g6/fig-indus-map.svg"
+    },
+    {
+      "id": "fig-silkroad-map",
+      "kind": "map",
+      "caption": "The web of routes later writers called the Silk Road: silk carried west, horses and glass and other goods brought back, and Buddhism travelling the same road from India.",
+      "credit": "Built for this pack; coastlines and rivers traced from Natural Earth (public domain)",
+      "alt": "A map of Asia with three curved arrows. One runs west from Han China, labelled silk carried west. A dashed arrow runs back east, labelled horses, glass, and goods from far regions. A third dotted arrow runs from India north-east into China, labelled Buddhism from India. A note says Zhang Qian is often credited with opening these links, though trade along parts of the route likely came before his trip.",
+      "src": "art/firsthand-g6/fig-silkroad-map.svg"
+    },
+    {
+      "id": "fig-rome-map",
+      "kind": "map",
+      "caption": "Rome and Constantinople, the two capitals behind the empire’s division into a western and an eastern half.",
+      "credit": "Built for this pack; coastlines and rivers traced from Natural Earth (public domain)",
+      "alt": "A map of the Mediterranean. Rome and Constantinople are marked, with the western and eastern halves labelled on either side. No border is drawn between them. Notes say the empire was divided in three hundred ninety-five CE, that the west thinned out, that Rome was sacked twice, and that its last emperor was removed in four hundred seventy-six.",
+      "src": "art/firsthand-g6/fig-rome-map.svg"
+    },
+    {
       "id": "fig-rivers-map",
       "kind": "map",
       "caption": "The two river systems Case File Zero turns on: the Tigris and Euphrates in Mesopotamia, and the Nile to the west.",
@@ -127,6 +175,7 @@
       "title": "Case File: The Shortest File Outlasts Its Own Temple",
       "genre": "informational",
       "docKind": "case-file",
+      "figureIds": ["fig-temple-timeline"],
       "source": "original",
       "text": "This case file is the shortest one in the whole Office archive.  That is exactly what makes it worth checking closely.  A tradition without a king, a Temple, or a homeland of its own should have simply faded away.  It should have faded into the peoples around it.  The record shows it did not.\n\nThe first blow came when the Babylonian army conquered the kingdom of Judah.  The army destroyed the First Temple in Jerusalem and forced many Israelites into exile, far from their own land.  That exile is remembered as the diaspora.  It grew as more people scattered even further from home over later years.  Years later, Persian rulers let the exiles return and build a Second Temple on that same site.\n\nThe Second Temple stood for centuries.  Then a Roman army destroyed it too, during a revolt long after Israel's old kings had reigned.  This second loss should have finished the tradition for good.  Rome had already crushed the state.  Now the Temple, the tradition's central home, was gone too.\n\nThe record credits a teacher named Yohanan ben Zakkai with the turn that followed.  Tradition holds that he escaped the besieged city.  He got permission from Roman rulers to open a small school in a town called Yavneh.  Teaching there, without any Temple at all, he changed the tradition's whole center of gravity.  Priests had once made offerings in one sacred building.  Now study, prayer, and law took that place, and any group could carry those things with it, anywhere.\n\nThat shift is the real claim behind this file's short length, now fully checked.  The tradition outlived its own state and its own Temple.  It did not rebuild either one.  It proved instead that it had never truly leaned on them alone."
     },
@@ -144,6 +193,7 @@
       "title": "Source B: The Spartan-Leaning Account, Filed by the Peloponnese Desk",
       "genre": "informational",
       "docKind": "source-desk",
+      "figureIds": ["fig-persia-maps"],
       "source": "original",
       "text": "Sparta's own account of the Persian Wars starts with its government.  That government looked nothing like Athens.  Two kings ruled Sparta at once, checking each other's power.  A council of elders helped run the city.  A small board of overseers, called ephors, ran its daily business.  Plain citizens still met in an assembly.  Real power sat with a much smaller, older group than Athens ever let near its own choices.\n\nSpartan life itself was built around one goal.  Every Spartan boy entered a harsh army training system at a young age.  He stayed a soldier his whole adult life.  A large group of unfree workers, called helots, farmed the land instead.  This let Spartan citizens stay in training at all times.  Sparta's government existed to keep that one army ready.  This account argues that readiness is exactly what saved Greece when Persia invaded.\n\nThe second Persian invasion arrived, and this file credits Sparta with the war's real turning points.  King Leonidas led a small, Spartan-led force.  His force held a narrow mountain pass at Thermopylae.  The Persian army there was many times its size.  The stand ended in defeat, but it bought Greece precious time.  It became a lasting sign of resistance.  The next year, an allied Greek army met the last Persian force on open ground at Plataea.  A Spartan leader led that army.  It beat the Persians outright.  The invasion was finally driven out of Greece for good.\n\nThis account treats the earlier sea battle at Salamis in a different way.  It calls Salamis one useful step among several, not the single moment that decided everything.  Two files, filed by two different desks, tell of the very same war.  The Office keeps both.  It refuses to force one account to lose."
     },
@@ -152,6 +202,7 @@
       "title": "Case File: The Quiet Record of the Indus",
       "genre": "informational",
       "docKind": "case-file",
+      "figureIds": ["fig-indus-map", "fig-indus-seal"],
       "source": "original",
       "text": "Some files in the Office archive are quiet for a reason.  Nothing bad happened; the people involved simply cannot speak for themselves yet.  The Indus Valley civilization built some of the best-planned cities anywhere in the old world.  Mohenjo-daro and Harappa sat on careful grids.  Baked-brick homes linked to covered drains, an advanced setup for its time.\n\nThe Indus people also left behind a written script.  It was cut into thousands of small stone seals.  No scholar has ever managed to read it.  Every other early society in this record can be read straight, in its own words.  Court records, temple writings, and trader letters survive elsewhere.  The Indus people left none of that.  Whatever its people believed, ruled, or argued about stays locked behind an unread script.  This file treats that gap honestly instead of guessing past it.\n\nIts fall is easier to weigh, though still not fully settled.  The clearest evidence involves shifting rivers.  One major stream that once fed Indus farms seems to have dried up or changed path.  Evidence also points to a weaker monsoon.  That means longer, harsher dry spells across the region.  Farming likely grew far harder to keep up.  Many of the biggest cities emptied out slowly, not all at once.  Scholars still argue over how much of the fall came from nature alone.\n\nSometime after the Indus cities faded, new migrants arrived from the northwest.  Many scholars think these Indo-Aryan migrants brought an early form of Sanskrit with them.  They brought a new set of faith practices too.  Those practices were set down in hymns called the Vedas.  The Vedas became the base the next file builds right on top of."
     },
@@ -176,7 +227,7 @@
       "title": "Case File: The Han Restoration and the Long Road West",
       "genre": "informational",
       "docKind": "case-file",
-      "figureIds": ["fig-han-bronze"],
+      "figureIds": ["fig-silkroad-map", "fig-han-bronze"],
       "source": "original",
       "text": "The Qin dynasty fell apart only a few years after its first emperor died.  Harsh rule and open revolt wore it down fast.  The Han dynasty that came next ruled far longer.  It made a choice the Qin never had.  Han rulers stopped treating Confucian teaching as a threat and put it back at the very center of government instead.\n\nHan officials had to study the Confucian classics, the same texts the Qin had once tried to burn.  A person's grasp of those texts more and more shaped who could serve the state.  That change built a government of trained scholar-officials.  Birth alone no longer decided who ran the country, a lasting shift in how China chose its leaders.\n\nHan China also reached much farther than its own borders.  A long web of trade routes linked Han cities to Central Asia and beyond.  Later writers called this web the Silk Road.  Caravans carried Chinese silk west and brought back horses, glass, and goods from far regions in return.  A Han official named Zhang Qian is often credited with opening these links.  He traveled west on a state trip, though trade along parts of the route likely came before his trip.  Goods were never the only thing moving along that road.  Ideas and faiths traveled with the traders who carried them.\n\nBuddhism reached China this way, coming slowly from India along the same routes the silk traders used.  Buddhism took root beside Confucianism and Daoism rather than replacing either one.  Chinese thought, from that point on, kept following the very same road."
     },
@@ -203,6 +254,7 @@
       "title": "Case File: The Kingdom That Split in Two",
       "genre": "informational",
       "docKind": "case-file",
+      "figureIds": ["fig-exile-map"],
       "source": "original",
       "text": "The Office keeps one rule for sacred texts.  Read them for what they claim.  Then look for anything outside them that touches the same claim.  This entry is the best case in the archive for that rule.\n\nThe Hebrew Bible describes Solomon's kingdom breaking apart soon after he died, around nine hundred thirty BCE.  The northern tribes pulled away and formed a kingdom called Israel.  The northern kingdom's capital came to be a city named Samaria.  In that account, the southern tribes kept the line of David and the Temple in Jerusalem, in a smaller kingdom called Judah.  In that account, two kingdoms now stood where one had stood before.\n\nThen the outside evidence arrives, and it is unusually good.  A carved stone known as the Mesha Stele was raised by a king of Moab.  It names Omri, a king of Israel, as an enemy who had pressed hard on Moab.  An Assyrian monument known as the Black Obelisk lists tribute paid to an Assyrian king.  It names Jehu, a later king of Israel, among those who paid.  Neither stone was cut to prove the Hebrew Bible right.  Each was cut to praise its own king, which is exactly why the Office weighs it.\n\nThe northern kingdom fell to Assyria.  Assyrian armies took Samaria around seven hundred twenty-two BCE, and Assyrian royal records report the capture in their own words.  Those records do not fully agree about which king finished the siege, and the Office files that disagreement rather than smoothing it away.  Assyria then moved many of the defeated people to other parts of its empire.  Newcomers were settled in their place.\n\nThe account preserved in the Hebrew Bible explains the fall in its own terms.  It describes the defeat as a punishment for abandoning the covenant.  That reasoning belongs to the account, and the Office records it as the account's own.\n\nMuch later, stories grew up about ten lost tribes still wandering somewhere.  The Office files those stories as legend.  Judah lasted longer than its northern neighbor did.  What finally happened to Judah is filed under the exile that followed."
     },
@@ -251,6 +303,7 @@
       "title": "Case File Addendum: The Long Ending",
       "genre": "informational",
       "docKind": "addendum",
+      "figureIds": ["fig-rome-map"],
       "source": "original",
       "text": "The closing entry on Rome is filed and sealed.  This addendum sits behind it for one reason.  The file closed on an empire that had not finished happening yet.\n\nThe two centuries after Augustus ran quieter inside the borders than the years before them had.  Later writers gave that stretch its name, the Pax Romana, the Roman peace.  Goods moved along paved roads and safe sea lanes.  Roman coins worked across a huge stretch of ground.  Engineers built aqueducts that carried water for miles, and they used concrete to raise vaults and domes that still stand today.\n\nThe quiet did not hold, and in the two hundreds CE the empire nearly came apart.  Armies made and unmade emperors at speed.  Borders came under pressure from groups pushing in from outside.  Coins carried less and less silver, and prices climbed.\n\nLater emperors held the thing together by changing its shape, and Diocletian split the work of ruling among several men.  Constantine moved the capital east, to a Greek city he rebuilt and renamed for himself.  In three hundred ninety-five CE the empire was divided into a western half and an eastern half, each with its own ruler.\n\nThe western half thinned out over the next hundred years.  Rome itself was sacked, in four hundred ten and again in four hundred fifty-five CE.  In four hundred seventy-six CE a commander removed the last emperor the west still had, and put no one in his place.\n\nThe eastern half did not fall then.  Ruled from Constantinople, it lasted nearly another thousand years.  Its own people called themselves Romans, in Greek, and rarely used any other name for their state.  Much later, European scholars began calling that empire Byzantine, a name its own people never used for their empire.\n\nThat is this record's closing warning, and it fits every file in the drawer.  A phrase like the fall of Rome sounds like a single event.  What the evidence shows is a government ending in one half, a government carrying on in the other, and roads, law, and language living on past both.  Names get applied by whoever writes last, and checking who applied a name, and when, is the whole job."
     }
@@ -296,6 +349,7 @@
     {
       "id": 2,
       "name": "Shortest File",
+      "reveal": { "figureId": "fig-temple-timeline" },
       "goal": "Verify how a tradition survived losing its own Temple and its own state.",
       "targets": [
         "hist-t2-hebrews"
