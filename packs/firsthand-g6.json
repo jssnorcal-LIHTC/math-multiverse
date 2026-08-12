@@ -483,7 +483,11 @@
         "t1-hot-what-the-tablets-hold",
         "t1-ebsr-why-mummification",
         "t1-mc-the-offices-one-promise",
-        "t1-ebsr-farming-and-settling-down"
+        "t1-ebsr-farming-and-settling-down",
+        "l1-vis-two-rivers-contrast",
+        "l1-vis-rivers-map-shows",
+        "l1-vis-match-river-region",
+        "l1-vis-flood-timing"
       ]
     },
     {
@@ -522,7 +526,11 @@
         "t2-hot-whose-reasoning-is-it",
         "t2-ebsr-yavneh-shift",
         "t2-mc-who-allowed-the-return",
-        "t2-ebsr-what-should-have-happened"
+        "t2-ebsr-what-should-have-happened",
+        "l2-vis-temple-order",
+        "l2-vis-timeline-no-years",
+        "l2-vis-where-they-were-moved",
+        "l2-vis-exile-map-shows"
       ]
     },
     {
@@ -561,7 +569,11 @@
         "t3-hot-one-witness-disclosed",
         "t3-ebsr-sparta-claims-turning-points",
         "t3-mc-how-the-sickness-is-filed",
-        "t3-ebsr-the-wars-warning-label"
+        "t3-ebsr-the-wars-warning-label",
+        "l3-vis-how-salamis-is-drawn",
+        "l3-vis-two-turning-points",
+        "l3-vis-persia-notes",
+        "l3-vis-geography-callback"
       ]
     },
     {
@@ -600,7 +612,11 @@
         "t4-hot-a-witness-with-no-stake",
         "t4-ebsr-ashokas-change",
         "t4-mc-what-the-title-means",
-        "t4-ebsr-what-karma-means"
+        "t4-ebsr-what-karma-means",
+        "l4-vis-two-cities",
+        "l4-vis-indus-map-shows",
+        "l4-vis-indus-notes",
+        "l4-vis-road-preview"
       ]
     },
     {
@@ -639,7 +655,11 @@
         "t5-hot-why-cheap-paper-matters",
         "t5-ebsr-buddhism-reaches-china",
         "t5-mc-what-the-first-emperor-standardized",
-        "t5-ebsr-what-the-credit-leaves-out"
+        "t5-ebsr-what-the-credit-leaves-out",
+        "l5-vis-what-went-which-way",
+        "l5-vis-match-the-arrow",
+        "l5-vis-the-hedge",
+        "l5-vis-cross-era-sequence"
       ]
     },
     {
@@ -666,7 +686,7 @@
         "t6-ebsr-republic-to-empire",
         "t6-hot-the-rule-and-what-it-files",
         "t6-ebsr-reachback-one-witness",
-        "t6-mc-reachback-saul-first-king",
+        "l6-vis-order-the-endings",
         "t6-ms-the-long-ending",
         "t6-ebsr-reachback-hammurabi-dispute",
         "t6-cloze-earliest-writings",
@@ -678,7 +698,11 @@
         "t6-hot-when-it-became-the-empires-religion",
         "t6-ebsr-reachback-athenian-reach",
         "t6-mc-how-far-it-had-spread",
-        "t6-ebsr-reachback-what-survives"
+        "t6-ebsr-reachback-what-survives",
+        "l6-vis-rome-map-reads",
+        "l6-vis-what-the-plate-shows",
+        "l6-vis-plate-features",
+        "t6-mc-reachback-saul-first-king"
       ]
     }
   ],
@@ -5105,6 +5129,714 @@
       ],
       "maxWords": 8,
       "explain": "The addendum closes the whole record on a name applied by whoever wrote last: the eastern empire's own people called themselves Romans, in Greek, and much later European scholars began calling that empire Byzantine, a name its own people never used for their empire.  Any short phrasing naming that later label earns credit here."
+    },
+    {
+      "id": "l1-vis-two-rivers-contrast",
+      "type": "mc",
+      "passageId": "p-t1-first-entry-briefing",
+      "figureId": "fig-rivers-map",
+      "targets": [
+        "hist-t1-first-entry"
+      ],
+      "coachTopic": "evidence-first-entry",
+      "dok": 2,
+      "stem": "The map puts two river systems side by side. What does it say is different about how they flooded?",
+      "explain": "The map carries one note per system. The Tigris and Euphrates flooded every year, but the timing was hard to predict, coming early some years and late in others. The Nile flooded on a far steadier yearly schedule. Both flooded; only one could be planned around.",
+      "choices": [
+        "The Tigris and Euphrates flooded on a steady schedule, while the Nile was hard to predict.",
+        "The Nile flooded every year and the Tigris and Euphrates did not flood at all.",
+        "The Tigris and Euphrates flooded every year but were hard to predict, while the Nile flooded on a far steadier schedule.",
+        "Both rivers flooded at exactly the same time each year."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "That is the two notes swapped. The map gives the unpredictable flooding to the Tigris and Euphrates and the steady schedule to the Nile.",
+        "1": "Both notes describe yearly flooding. The difference the map draws is how predictable it was, not whether it happened.",
+        "3": "Then there would be nothing to compare. The map's whole point is that one system's timing could be planned around and the other's could not."
+      }
+    },
+    {
+      "id": "l1-vis-rivers-map-shows",
+      "type": "ms",
+      "passageId": "p-t1-first-entry-briefing",
+      "figureId": "fig-rivers-map",
+      "targets": [
+        "hist-t1-first-entry"
+      ],
+      "coachTopic": "evidence-first-entry",
+      "dok": 2,
+      "stem": "Choose the three things this map actually puts on the page.",
+      "choices": [
+        "Three rivers, labelled Tigris, Euphrates and Nile.",
+        "Two regions, labelled Mesopotamia and Egypt.",
+        "The word desert, on each side of the Nile.",
+        "The first cities of each region, marked with dots.",
+        "Arrows showing which way each river's floodwater ran."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "No city is marked anywhere on this map. The briefing names none, so the map marks none.",
+        "4": "There are no arrows on this map. The flood behaviour is written in the notes, not drawn."
+      },
+      "explain": "Three things are on the map and two are not. It labels three rivers, two regions, and the desert on each side of the Nile. It marks no cities at all, and it draws no arrows."
+    },
+    {
+      "id": "l1-vis-match-river-region",
+      "type": "match",
+      "passageId": "p-t1-first-entry-briefing",
+      "figureId": "fig-rivers-map",
+      "targets": [
+        "hist-t1-first-entry"
+      ],
+      "coachTopic": "evidence-first-entry",
+      "dok": 2,
+      "stem": "Match each label on the map to what it names.",
+      "rowLabels": [
+        "Tigris",
+        "Nile",
+        "Mesopotamia"
+      ],
+      "colLabels": [
+        "A river in the region labelled Mesopotamia",
+        "A river with desert labelled on both sides",
+        "A region label, not a river"
+      ],
+      "key": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "explain": "The map labels three rivers and two regions. The Tigris is one of the two rivers inside Mesopotamia. The Nile is the river with the word desert on each side of it. Mesopotamia is a region label rather than a river."
+    },
+    {
+      "id": "l1-vis-flood-timing",
+      "type": "cloze",
+      "passageId": "p-t1-first-entry-briefing",
+      "figureId": "fig-rivers-map",
+      "targets": [
+        "hist-t1-first-entry"
+      ],
+      "coachTopic": "evidence-first-entry",
+      "dok": 2,
+      "stem": "The map's notes say the Tigris and Euphrates flooded {{0}}, and that the Nile's flooding was {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "every year, but hard to predict",
+            "only once a decade",
+            "steadily, on the same day"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "The note says every year, not once a decade.",
+            "2": "That is closer to what the map says about the Nile, and even there the note says a steadier schedule rather than the same day."
+          }
+        },
+        {
+          "choices": [
+            "far steadier",
+            "even harder to predict",
+            "unrecorded"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "The map draws a contrast, not a match. The unpredictable system is the Tigris and Euphrates.",
+            "2": "The Nile's flooding is described on the map, so it is not unrecorded."
+          }
+        }
+      ],
+      "explain": "Two notes sit under the map. One gives the Tigris and Euphrates yearly floods that were hard to predict, coming early some years and late in others. The other gives the Nile a far steadier yearly schedule."
+    },
+    {
+      "id": "l2-vis-temple-order",
+      "type": "order",
+      "passageId": "p-t2-surviving-without-temple",
+      "figureId": "fig-temple-timeline",
+      "targets": [
+        "hist-t2-hebrews"
+      ],
+      "coachTopic": "evidence-shortest-file",
+      "dok": 2,
+      "stem": "The timeline gives five steps in order. Put these four back into that order.",
+      "tiles": [
+        "Persian rulers let the exiles return and a Second Temple is built",
+        "The Babylonian army destroys the First Temple",
+        "Yohanan ben Zakkai opens a school at Yavneh",
+        "A Roman army destroys the Second Temple during a revolt"
+      ],
+      "key": [
+        1,
+        0,
+        3,
+        2
+      ],
+      "explain": "The timeline runs in five steps. The Babylonian army destroys the First Temple, and the exile follows. Persian rulers then let the exiles return, and a Second Temple is built on the same site. A Roman army destroys that one during a revolt. Last, Yohanan ben Zakkai opens a school at Yavneh and teaches with no Temple at all."
+    },
+    {
+      "id": "l2-vis-timeline-no-years",
+      "type": "mc",
+      "passageId": "p-t2-surviving-without-temple",
+      "figureId": "fig-temple-timeline",
+      "targets": [
+        "hist-t2-hebrews"
+      ],
+      "coachTopic": "evidence-shortest-file",
+      "dok": 3,
+      "stem": "This timeline carries no dates at all, and says so on its face. What does that tell you about the file it comes from?",
+      "explain": "The line under the heading says it outright: the passage gives no years, so none are shown. A figure can only carry what its source carries, and putting dates on this one would make it look better sourced than the file behind it.",
+      "choices": [
+        "The events are so recent that dating them is unnecessary.",
+        "The order of the events is disputed, so dates would be misleading.",
+        "The dates were left out to keep the figure short.",
+        "The file gives the order of these events but never gives a year for any of them."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "Nothing on the timeline says that, and a Babylonian army and a Roman army are not recent by any reading.",
+        "1": "The timeline states the order plainly as five numbered steps. It is the years that are missing, not the sequence.",
+        "2": "The figure says why in its own words: the passage gives no years, so none are shown. That is a sourcing rule rather than a space saving."
+      }
+    },
+    {
+      "id": "l2-vis-where-they-were-moved",
+      "type": "mc",
+      "passageId": "p-t2-kingdom-divided",
+      "figureId": "fig-exile-map",
+      "targets": [
+        "hist-t2-hebrews"
+      ],
+      "coachTopic": "evidence-shortest-file",
+      "dok": 2,
+      "stem": "The map draws a dashed arrow leaving Samaria. Where does it run, and what does the note say it stands for?",
+      "explain": "One dashed arrow runs from Samaria north-east to Assyria. The note under the map says Assyria took Samaria around seven hundred twenty-two BCE and then moved many of the defeated people to other parts of its empire. The arrow is that movement.",
+      "choices": [
+        "North-east to Assyria, standing for the defeated people Assyria moved to other parts of its empire.",
+        "South to Jerusalem, standing for refugees fleeing into Judah.",
+        "North-east to Assyria, standing for the route the Assyrian army took to reach Samaria.",
+        "West to the sea, standing for trade leaving the kingdom."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The arrow does not run to Jerusalem. It runs the other way, north-east, and the note beside it is about Assyria moving people into its empire.",
+        "2": "The direction is right and the meaning is not. The note attached to it is about people being moved away after the city fell.",
+        "3": "There is no arrow to the sea and no note about trade anywhere on this map."
+      }
+    },
+    {
+      "id": "l2-vis-exile-map-shows",
+      "type": "ms",
+      "passageId": "p-t2-kingdom-divided",
+      "figureId": "fig-exile-map",
+      "targets": [
+        "hist-t2-hebrews"
+      ],
+      "coachTopic": "evidence-shortest-file",
+      "dok": 3,
+      "stem": "Choose the three statements this map supports.",
+      "choices": [
+        "Two cities are marked: Samaria and Jerusalem.",
+        "Samaria sits in the region labelled Israel and Jerusalem in the one labelled Judah.",
+        "The map keeps a disagreement in the Assyrian records rather than settling it.",
+        "The map names the Assyrian king who finished the siege of Samaria.",
+        "The map shows the border between Israel and Judah as a solid line."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "The map does the opposite. Its note says Assyrian records do not fully agree about which king finished the siege, and it keeps that disagreement.",
+        "4": "No border is drawn on this map. The two regions carry labels, not a line between them."
+      },
+      "explain": "The map marks Samaria and Jerusalem, labels Israel around one and Judah around the other, and carries a note saying the Assyrian records do not agree about which king finished the siege. It names no king, and it draws no border."
+    },
+    {
+      "id": "l3-vis-how-salamis-is-drawn",
+      "type": "mc",
+      "passageId": "p-t3-source-b-spartan",
+      "figureId": "fig-persia-maps",
+      "targets": [
+        "hist-t3-greece"
+      ],
+      "coachTopic": "evidence-two-accounts",
+      "dok": 3,
+      "stem": "Two places on this map are marked with filled dots and one with an open dashed circle. Why is Salamis drawn differently?",
+      "explain": "The map says why in its own note: Salamis is drawn open because this account treats that sea battle differently. The two filled dots are the places this account credits with the war's real turning points, Thermopylae and Plataea.",
+      "choices": [
+        "Because nobody knows where Salamis was.",
+        "Because this account treats that sea battle differently from the two it credits as turning points.",
+        "Because Salamis was a land battle and the other two were at sea.",
+        "Because Salamis happened long after the other two."
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "Its position is marked on the map like the others. What differs is how this account weighs it, not where it sits.",
+        "2": "The map has that backwards. Salamis is the sea battle; Thermopylae is a mountain pass and Plataea is open ground.",
+        "3": "The map says nothing about when Salamis happened relative to the others, and its note is about how this account treats it."
+      }
+    },
+    {
+      "id": "l3-vis-two-turning-points",
+      "type": "mc",
+      "passageId": "p-t3-source-b-spartan",
+      "figureId": "fig-persia-maps",
+      "targets": [
+        "hist-t3-greece"
+      ],
+      "coachTopic": "evidence-two-accounts",
+      "dok": 2,
+      "stem": "The map labels the ground at two of its three places. Which pairing is right?",
+      "explain": "The map labels Thermopylae a narrow mountain pass and Plataea open ground. Its notes match: the stand at the pass ended in defeat but bought Greece time, and on open ground at Plataea an allied Greek army beat the Persians outright.",
+      "choices": [
+        "Thermopylae is open ground; Plataea is a narrow mountain pass.",
+        "Both are labelled open ground, which is why the map pairs them.",
+        "Thermopylae is a narrow mountain pass; Plataea is open ground.",
+        "Salamis is labelled a narrow mountain pass."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "That is the two labels swapped. The map puts the narrow pass at Thermopylae.",
+        "1": "They carry different labels, and the difference in ground is part of what each note describes.",
+        "3": "Salamis carries no ground label at all on this map. It is the open dashed circle."
+      }
+    },
+    {
+      "id": "l3-vis-persia-notes",
+      "type": "cloze",
+      "passageId": "p-t3-source-b-spartan",
+      "figureId": "fig-persia-maps",
+      "targets": [
+        "hist-t3-greece"
+      ],
+      "coachTopic": "evidence-two-accounts",
+      "dok": 2,
+      "stem": "The map's notes say the stand at Thermopylae {{0}}, and that at Plataea an allied Greek army {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "ended in defeat, but bought Greece precious time",
+            "drove the Persians out for good",
+            "was never fought at all"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "That is what the note says about Plataea, not Thermopylae.",
+            "2": "The note describes a stand that was fought and lost, not one that never happened."
+          }
+        },
+        {
+          "choices": [
+            "beat the Persians outright",
+            "held a narrow pass",
+            "lost but bought time"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "Holding a narrow pass is Thermopylae. Plataea's label is open ground.",
+            "2": "That is the Thermopylae note again. Plataea's note is an outright win."
+          }
+        }
+      ],
+      "explain": "Two notes sit under the map. Thermopylae: the stand ended in defeat, but it bought Greece precious time. Plataea: an allied Greek army beat the Persians outright."
+    },
+    {
+      "id": "l3-vis-geography-callback",
+      "type": "mc",
+      "passageId": "p-t1-first-entry-briefing",
+      "figureId": "fig-rivers-map",
+      "targets": [
+        "hist-t3-greece"
+      ],
+      "coachTopic": "evidence-two-accounts",
+      "dok": 3,
+      "stem": "Case File Zero's map argued that geography decided where a civilization could begin. Looking at that map again, what kind of feature was doing the deciding?",
+      "explain": "The rivers map labels three rivers, two regions and the desert on either side of the Nile. That is the whole vocabulary it uses: water and the land beside it. No city, no road and no port appears on it.",
+      "choices": [
+        "Mountain passes and the ground armies had to cross.",
+        "Cities and the roads between them.",
+        "Coastlines and the ports along them.",
+        "Rivers and the land beside them, with deserts flanking one of the valleys."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "That is the Greece map, not this one. The rivers map marks no passes and no battles.",
+        "1": "No city is marked anywhere on the rivers map, and no roads are drawn.",
+        "2": "The map traces coastlines because they are geography, but nothing on it is labelled a port and no port is named."
+      }
+    },
+    {
+      "id": "l4-vis-two-cities",
+      "type": "mc",
+      "passageId": "p-t4-quiet-record-indus",
+      "figureId": "fig-indus-map",
+      "targets": [
+        "hist-t4-india"
+      ],
+      "coachTopic": "evidence-quiet-record",
+      "dok": 2,
+      "stem": "Which two cities does this map mark, and what does its note say they had in common?",
+      "explain": "The map marks two cities, Harappa and Mohenjo-daro, and its note says both sat on careful grids, with baked-brick homes linked to covered drains. That planning is the thing the file can still read even though the writing cannot be read.",
+      "choices": [
+        "Harappa and Mohenjo-daro, both built without any drains at all.",
+        "Harappa and Nineveh, both on the Indus.",
+        "Harappa and Mohenjo-daro, both laid out on careful grids with baked-brick homes linked to covered drains.",
+        "Mohenjo-daro alone, since Harappa is only named in the note."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "The cities are right and the note is reversed. It says baked-brick homes linked to covered drains, which is the opposite of no drains.",
+        "1": "Nineveh is not on this map. The two marked cities are Harappa and Mohenjo-daro.",
+        "3": "Both are marked with dots on the map itself, not only mentioned."
+      }
+    },
+    {
+      "id": "l4-vis-indus-map-shows",
+      "type": "ms",
+      "passageId": "p-t4-quiet-record-indus",
+      "figureId": "fig-indus-map",
+      "targets": [
+        "hist-t4-india"
+      ],
+      "coachTopic": "evidence-quiet-record",
+      "dok": 2,
+      "stem": "Choose the three things this map and its notes tell you.",
+      "choices": [
+        "The river running to the sea is labelled Indus.",
+        "Both marked cities were laid out on careful grids.",
+        "The script from these cities has never been read by any scholar.",
+        "The map gives the year each city was founded.",
+        "The map translates one line of the Indus script."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "No year appears anywhere on this map. It marks places and carries three notes.",
+        "4": "Nothing on the map is translated. Its last note says the script has never been read, which is why."
+      },
+      "explain": "Three things are here: the labelled river, the careful grids, and the note that no scholar has ever managed to read the script. No date is given and nothing is translated, which is the point of calling this a quiet record."
+    },
+    {
+      "id": "l4-vis-indus-notes",
+      "type": "cloze",
+      "passageId": "p-t4-quiet-record-indus",
+      "figureId": "fig-indus-map",
+      "targets": [
+        "hist-t4-india"
+      ],
+      "coachTopic": "evidence-quiet-record",
+      "dok": 2,
+      "stem": "The map's notes say the script was cut into thousands of small stone {{0}}, and that {{1}} has ever managed to read it.",
+      "blanks": [
+        {
+          "choices": [
+            "seals",
+            "tablets",
+            "walls"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "Tablets belong to Mesopotamia's clay record, not to this note.",
+            "2": "The note says small stone seals, not walls."
+          }
+        },
+        {
+          "choices": [
+            "no scholar",
+            "only one scholar",
+            "every scholar"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "The note allows no exception. It says no scholar has managed it.",
+            "2": "That reverses the note entirely."
+          }
+        }
+      ],
+      "explain": "Two of the map's three notes carry this: the script was cut into thousands of small stone seals, and no scholar has ever managed to read it."
+    },
+    {
+      "id": "l4-vis-road-preview",
+      "type": "mc",
+      "passageId": "p-t5-han-and-the-road",
+      "figureId": "fig-silkroad-map",
+      "targets": [
+        "hist-t4-india"
+      ],
+      "coachTopic": "evidence-quiet-record",
+      "dok": 2,
+      "stem": "Look ahead to the trade-routes map. One of its three arrows starts in India. What does that arrow carry?",
+      "explain": "The map draws three arrows and labels each one. Silk goes west from China, horses and glass and other goods come back, and a third arrow runs from India into China carrying Buddhism.",
+      "choices": [
+        "Silk, travelling from India to the west.",
+        "Buddhism, travelling from India into China.",
+        "Horses and glass, travelling from India into China.",
+        "Traders returning home to India with Chinese goods."
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "The silk arrow starts in eastern China and runs west. The arrow from India is labelled Buddhism.",
+        "2": "Horses and glass are on the dashed return arrow from Central Asia, not on the one from India.",
+        "3": "The map labels that arrow Buddhism, from India. Nothing on it is about a return journey."
+      }
+    },
+    {
+      "id": "l5-vis-what-went-which-way",
+      "type": "mc",
+      "passageId": "p-t5-han-and-the-road",
+      "figureId": "fig-silkroad-map",
+      "targets": [
+        "hist-t5-china"
+      ],
+      "coachTopic": "evidence-what-was-burned",
+      "dok": 2,
+      "stem": "Read the two trade arrows. Which direction did silk travel, and what came back the other way?",
+      "explain": "Two arrows run between the same ends. The solid one is labelled silk, carried west. The dashed one running back is labelled horses, glass, and goods from far regions, brought back.",
+      "choices": [
+        "Silk was brought east into China, and horses were carried west.",
+        "Silk went west and nothing came back along the same routes.",
+        "Silk and horses both travelled west together.",
+        "Silk was carried west, and horses, glass and goods from far regions were brought back."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "That is both arrows reversed. The map labels the westbound arrow silk and the returning one horses, glass and goods.",
+        "1": "A second, dashed arrow runs the other way, labelled with what was brought back.",
+        "2": "The horses are on the return arrow. They are what came back, not what went out."
+      }
+    },
+    {
+      "id": "l5-vis-match-the-arrow",
+      "type": "match",
+      "passageId": "p-t5-han-and-the-road",
+      "figureId": "fig-silkroad-map",
+      "targets": [
+        "hist-t5-china"
+      ],
+      "coachTopic": "evidence-what-was-burned",
+      "dok": 2,
+      "stem": "Match each arrow on the map to what its label says it carries.",
+      "rowLabels": [
+        "The arrow running west from China",
+        "The dashed arrow running back east",
+        "The arrow running from India"
+      ],
+      "colLabels": [
+        "Silk",
+        "Horses, glass and goods from far regions",
+        "Buddhism"
+      ],
+      "key": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "explain": "Every arrow on this map carries its own label. West from China: silk. Back east: horses, glass and goods from far regions. From India: Buddhism."
+    },
+    {
+      "id": "l5-vis-the-hedge",
+      "type": "mc",
+      "passageId": "p-t5-han-and-the-road",
+      "figureId": "fig-silkroad-map",
+      "targets": [
+        "hist-t5-china"
+      ],
+      "coachTopic": "evidence-what-was-burned",
+      "dok": 3,
+      "stem": "The map credits Zhang Qian with opening these links, then adds a qualification. What is it, and why does it matter?",
+      "explain": "The note reads that Zhang Qian is often credited with opening these links, though trade along parts of the route likely came before his trip. A file that keeps that qualification is telling you the credit is real and the beginning is older than the credit.",
+      "choices": [
+        "That trade along parts of the route likely came before his trip, so opening is not the same as starting.",
+        "That Zhang Qian never actually made the trip.",
+        "That the routes closed again soon after his trip.",
+        "That no city on the route can be named."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The map says he is often credited with opening the links and does not doubt the journey. What it qualifies is whether trade began with him.",
+        "2": "Nothing on the map says the routes closed. The qualification is about what came before, not after.",
+        "3": "The map names no city, but that is a separate fact and not the qualification attached to Zhang Qian."
+      }
+    },
+    {
+      "id": "l5-vis-cross-era-sequence",
+      "type": "mc",
+      "passageId": "p-t2-surviving-without-temple",
+      "figureId": "fig-temple-timeline",
+      "targets": [
+        "hist-t5-china"
+      ],
+      "coachTopic": "evidence-what-was-burned",
+      "dok": 3,
+      "stem": "The temple timeline shows a tradition surviving the loss of its centre. Which step on it is the one that shows the survival rather than the loss?",
+      "explain": "Four of the five steps are losses or returns tied to a building. The last step is different: a school opens at Yavneh and teaches with no Temple at all, which is the tradition carrying on without the thing it kept losing.",
+      "choices": [
+        "The Babylonian army destroying the First Temple.",
+        "A Roman army destroying the Second Temple during a revolt.",
+        "Yohanan ben Zakkai opening a school at Yavneh and teaching with no Temple at all.",
+        "Persian rulers letting the exiles return."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "That is the first loss on the timeline, the thing survived rather than the surviving.",
+        "1": "That is the second loss. The step after it is the one that shows what continued.",
+        "3": "That step rebuilds the centre rather than doing without it. The survival step is the one that needs no Temple."
+      }
+    },
+    {
+      "id": "l6-vis-rome-map-reads",
+      "type": "cloze",
+      "passageId": "p-t6-long-ending",
+      "figureId": "fig-rome-map",
+      "targets": [
+        "hist-t6-rome"
+      ],
+      "coachTopic": "evidence-closing-the-file",
+      "dok": 2,
+      "stem": "The map marks two cities, {{0}} in the western half and {{1}} in the eastern, and draws {{2}} between the two halves.",
+      "blanks": [
+        {
+          "choices": [
+            "Rome",
+            "Constantinople",
+            "Samaria"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "Constantinople is the eastern one on this map.",
+            "2": "Samaria belongs to the exile map, not this one."
+          }
+        },
+        {
+          "choices": [
+            "Constantinople",
+            "Rome",
+            "Jerusalem"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "Rome is the western one.",
+            "2": "Jerusalem is not marked on this map at all."
+          }
+        },
+        {
+          "choices": [
+            "no border at all",
+            "a solid line",
+            "a dashed line"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "No line of any kind divides the halves on this map.",
+            "2": "There is no dashed divider either. The halves carry labels and nothing between them."
+          }
+        }
+      ],
+      "explain": "Rome sits in the half labelled WESTERN and Constantinople in the half labelled EASTERN. No border is drawn between them, because the file says the empire was divided and never says where the line ran."
+    },
+    {
+      "id": "l6-vis-order-the-endings",
+      "type": "order",
+      "passageId": "p-t6-long-ending",
+      "figureId": "fig-rome-map",
+      "targets": [
+        "hist-t6-rome"
+      ],
+      "coachTopic": "evidence-closing-the-file",
+      "dok": 2,
+      "stem": "The map's notes give four moments with years attached. Put them in the order the notes give.",
+      "tiles": [
+        "Rome is sacked for the second time, in four hundred fifty-five",
+        "The empire is divided into a western and an eastern half, in three hundred ninety-five",
+        "The west's last emperor is removed, in four hundred seventy-six",
+        "Rome is sacked, in four hundred ten"
+      ],
+      "key": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "explain": "The notes run in order. The empire is divided in three hundred ninety-five. Rome is sacked in four hundred ten, and sacked again in four hundred fifty-five. The west’s last emperor is removed in four hundred seventy-six."
+    },
+    {
+      "id": "l6-vis-what-the-plate-shows",
+      "type": "mc",
+      "passageId": "p-t6-closing-the-file",
+      "figureId": "fig-rome-plate",
+      "targets": [
+        "hist-t6-rome"
+      ],
+      "coachTopic": "evidence-closing-the-file",
+      "dok": 2,
+      "stem": "The etching's first tab looks across the Roman Forum. Which building sits on the skyline in the distance?",
+      "explain": "The etching looks across the Forum from the Capitol. The Arch of Septimius Severus stands at the lower left. The Temple of Vespasian’s columns rise at the right, and broken column drums lie in the foreground. The Colosseum sits far off on the skyline.",
+      "choices": [
+        "The Arch of Septimius Severus",
+        "The Colosseum",
+        "The Temple of Vespasian",
+        "Constantinople's walls"
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "The arch is in the foreground, at the lower left of the etching, not on the distant skyline.",
+        "2": "Its tall columns rise at the right of the etching, in the middle ground rather than the distance.",
+        "3": "Constantinople is a thousand miles away and appears on the map, not in this etching of Rome."
+      }
+    },
+    {
+      "id": "l6-vis-plate-features",
+      "type": "ms",
+      "passageId": "p-t6-closing-the-file",
+      "figureId": "fig-rome-plate",
+      "targets": [
+        "hist-t6-rome"
+      ],
+      "coachTopic": "evidence-closing-the-file",
+      "dok": 3,
+      "stem": "Choose the three things this plate actually carries.",
+      "choices": [
+        "Broken column drums and carved capitals lying in the foreground.",
+        "A numbered key and a printed title along the bottom edge.",
+        "A second tab showing a Roman marble portrait bust.",
+        "A photograph of the Forum as it looks today.",
+        "A drawn reconstruction of the Forum as it looked when new."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "The first tab is an eighteenth-century etching, not a modern photograph. The second tab is a photograph, but of a bust rather than the Forum.",
+        "4": "Nothing here is reconstructed. The etching draws the Forum as ruins and pasture, which is why it was called the Campo Vaccino."
+      },
+      "explain": "Three of these are on the plate. The broken drums and capitals lie in the foreground, and a numbered key and printed title run along the bottom edge. A second tab holds a marble portrait bust. There is no modern photograph of the Forum, and no reconstruction of it when new."
     }
   ]
 }
