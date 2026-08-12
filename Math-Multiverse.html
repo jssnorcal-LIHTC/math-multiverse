@@ -12076,9 +12076,45 @@ if (typeof window !== 'undefined') { try { window.MVFresh = MVFresh; } catch (e)
   };
 })();
 
+// Every module builds its own explain tile inside its own closure, and only the WRONG path routes
+// through attachExplainNext, which is the one place that ever scrolled a tile into view. On the
+// CORRECT path the tile lives for about 1.5s and nothing scrolls it, and inside Razor Crest's tight
+// inner scroll container it can sit entirely below the fold for that whole time: measured on the CI
+// runner's font metrics, the correct-answer tile's visible height came out at MINUS 9px, and at
+// 1024x768 here it was 17px of a 47px tile. A child answering CORRECTLY never saw
+// "HYPERSPACE LOCKED" or the explanation under it.
+//
+// Fixed in the shell and generically, for two reasons: the six math IIFEs are never edited
+// (constraint 2), and all six modules build their tile the same way, so a per-module fix would be
+// five copies of this waiting to drift. `block: 'nearest'` scrolls only when the tile is not
+// already fully in view, so a tile that fits moves nothing -- which is why this is safe to run for
+// every module and for the pack engine's .mv-explain as well.
+//
+// tests/tile-overlap.js measures the result: the settled reverse scan reports each tile's VISIBLE
+// height, and a tile with no visible area fails rather than reporting clean on nothing.
+function watchExplainTiles() {
+  const host = document.getElementById('host-frame');
+  if (!host || !window.MutationObserver) return;
+  new MutationObserver((records) => {
+    for (const rec of records) {
+      for (const node of rec.addedNodes) {
+        if (node.nodeType !== 1) continue;
+        const tile = (typeof node.className === 'string' && /(^|\s)[a-z]+-explain(\s|$)/.test(node.className))
+          ? node
+          : (node.querySelector && node.querySelector('[class$="-explain"], [class*="-explain "]'));
+        if (!tile || !tile.scrollIntoView) continue;
+        // One frame, so the tile has laid out before it is measured against the fold. Same
+        // reasoning as attachExplainNext's later0.
+        requestAnimationFrame(() => tile.scrollIntoView({ behavior: 'smooth', block: 'nearest' }));
+      }
+    }
+  }).observe(host, { childList: true, subtree: true });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   Save.load();
   Save.beginSession();
+  watchExplainTiles();
 
   $('btn-back-launcher').addEventListener('click', exitToLauncher);
   $('btn-back-levels').addEventListener('click', exitToLevels);
