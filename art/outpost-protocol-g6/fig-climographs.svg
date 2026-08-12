@@ -1,35 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img">
 <rect x="0" y="0" width="800" height="450" fill="#0f1218" />
-<line x1="48.5" y1="48" x2="48.5" y2="144" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-<line x1="48" y1="144.5" x2="752" y2="144.5" stroke="#e8eef7" stroke-width="1.5" />
-<text x="38" y="144" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">0</text>
-<line x1="48" y1="112.5" x2="752" y2="112.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<text x="38" y="112" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">20</text>
-<line x1="48" y1="80.5" x2="752" y2="80.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<text x="38" y="80" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">40</text>
-<line x1="48" y1="48.5" x2="752" y2="48.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<text x="38" y="48" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">60</text>
-<text x="48" y="36" font-size="22" fill="#e8eef7">rainfall (in/yr)</text>
-<rect x="111.36" y="129.6" width="225.28" height="14.4" fill="#1a8f5e" />
-<rect x="463.36" y="76.8" width="225.28" height="67.2" fill="#1a8f5e" />
-<line x1="48.5" y1="184" x2="48.5" y2="280" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-<line x1="48" y1="280.5" x2="752" y2="280.5" stroke="#e8eef7" stroke-width="1.5" />
-<text x="38" y="280" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">0</text>
-<line x1="48" y1="256.5" x2="752" y2="256.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<text x="38" y="256" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">20</text>
-<line x1="48" y1="232.5" x2="752" y2="232.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<text x="38" y="232" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">40</text>
-<line x1="48" y1="208.5" x2="752" y2="208.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<text x="38" y="208" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">60</text>
-<line x1="48" y1="184.5" x2="752" y2="184.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<text x="38" y="184" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">80</text>
-<text x="48" y="172" font-size="22" fill="#e8eef7">seasonal swing (degrees)</text>
-<rect x="111.36" y="198.4" width="225.28" height="81.6" fill="#1a8f5e" />
-<rect x="463.36" y="240.4" width="225.28" height="39.6" fill="#1a8f5e" />
-<text x="224" y="304" font-size="20" fill="#e8eef7" text-anchor="middle">Sable Flats</text>
-<text x="576" y="304" font-size="20" fill="#e8eef7" text-anchor="middle">Cairn Bay</text>
-<text x="48" y="354" font-size="18" fill="#e8eef7" fill-opacity="0.82">Summer high: Sable Flats 96 degrees, Cairn Bay 74 degrees.</text>
-<text x="48" y="378" font-size="18" fill="#e8eef7" fill-opacity="0.82">Winter low: Sable Flats 28 degrees, Cairn Bay 41 degrees.</text>
-<text x="48" y="402" font-size="18" fill="#e8eef7" fill-opacity="0.82">Driest year on record: Sable Flats 5 in, Cairn Bay 34 in.</text>
-<text x="48" y="426" font-size="18" fill="#e8eef7" fill-opacity="0.82">Wettest year on record: Sable Flats 14 in, Cairn Bay 51 in.</text>
+<line x1="56.5" y1="48" x2="56.5" y2="144" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+<line x1="56" y1="144.5" x2="752" y2="144.5" stroke="#e8eef7" stroke-width="1.5" />
+<text x="46" y="144" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="56" y1="112.5" x2="752" y2="112.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="46" y="112" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">20</text>
+<line x1="56" y1="80.5" x2="752" y2="80.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="46" y="80" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">40</text>
+<line x1="56" y1="48.5" x2="752" y2="48.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="46" y="48" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">60</text>
+<text x="56" y="36" font-size="22" fill="#e8eef7">rainfall (in/yr)</text>
+<rect x="118.64" y="129.6" width="222.72" height="14.4" fill="#1a8f5e" />
+<rect x="466.64" y="76.8" width="222.72" height="67.2" fill="#1a8f5e" />
+<line x1="56.5" y1="184" x2="56.5" y2="280" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+<line x1="56" y1="280.5" x2="752" y2="280.5" stroke="#e8eef7" stroke-width="1.5" />
+<text x="46" y="280" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="56" y1="232.5" x2="752" y2="232.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="46" y="232" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">50</text>
+<line x1="56" y1="184.5" x2="752" y2="184.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
+<text x="46" y="184" font-size="20" fill="#e8eef7" text-anchor="end" dominant-baseline="middle">100</text>
+<text x="56" y="172" font-size="22" fill="#e8eef7">seasonal swing (degrees)</text>
+<rect x="118.64" y="214.72" width="222.72" height="65.28" fill="#1a8f5e" />
+<rect x="466.64" y="248.32" width="222.72" height="31.68" fill="#1a8f5e" />
+<text x="230" y="304" font-size="20" fill="#e8eef7" text-anchor="middle">Sable Flats</text>
+<text x="578" y="304" font-size="20" fill="#e8eef7" text-anchor="middle">Cairn Bay</text>
+<text x="56" y="354" font-size="18" fill="#e8eef7" fill-opacity="0.82">Summer high: Sable Flats 96 degrees, Cairn Bay 74 degrees.</text>
+<text x="56" y="378" font-size="18" fill="#e8eef7" fill-opacity="0.82">Winter low: Sable Flats 28 degrees, Cairn Bay 41 degrees.</text>
+<text x="56" y="402" font-size="18" fill="#e8eef7" fill-opacity="0.82">Driest year on record: Sable Flats 5 in, Cairn Bay 34 in.</text>
+<text x="56" y="426" font-size="18" fill="#e8eef7" fill-opacity="0.82">Wettest year on record: Sable Flats 14 in, Cairn Bay 51 in.</text>
 </svg>
