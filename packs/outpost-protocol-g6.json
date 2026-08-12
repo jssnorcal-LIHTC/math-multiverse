@@ -4838,7 +4838,16 @@
         { "label": "Ventral", "src": "art/outpost-protocol-g6/gray-nervous-ventral.png",
           "overlaySrc": "art/outpost-protocol-g6/gray-nervous-overlay.svg" },
         { "label": "Dorsal", "src": "art/outpost-protocol-g6/gray-nervous-dorsal.png" }
-      ]
+      ],
+      "dataTable": {
+            "type": "features",
+            "items": [
+                  "A pair of printed anatomical plates, one ventral (front) and one dorsal (back), shown on tabs.",
+                  "Each plate is a full standing human figure with the skin’s nerve territories mapped across it.",
+                  "The plates carry their own printed captions naming them as distributions of cutaneous nerves.",
+                  "An animated trace runs along the arm’s cutaneous nerve corridor, travelling toward the spine, which is the direction a sensory signal actually travels."
+            ]
+      }
     },
     {
       "id": "fig-station-photo",
@@ -4862,7 +4871,18 @@
       "caption": "A real NOAA surface weather map from August 10, 2023, showing fronts, pressure centers, and station readings across the United States.",
       "credit": "NOAA/NWS Weather Prediction Center, Daily Weather Map, public domain",
       "alt": "A national weather map covered in station readings, with a cold front drawn as a line of filled triangles, a warm front drawn as a line of filled half-circles, and several H and L letters marking high- and low-pressure centers.",
-      "src": "art/outpost-protocol-g6/fig-surface-chart.jpg"
+      "src": "art/outpost-protocol-g6/fig-surface-chart.jpg",
+      "dataTable": {
+            "type": "features",
+            "items": [
+                  "A national surface weather map for one morning, titled \"Surface Weather Map and Station Weather\".",
+                  "Cold fronts are drawn as lines with filled triangles.",
+                  "Warm fronts are drawn as lines with filled semicircles.",
+                  "A stationary front is drawn with triangles and semicircles alternating on opposite sides.",
+                  "Pressure centres are marked H and L.",
+                  "Isobars are labelled with pressure values, ranging from 993 to 1016."
+            ]
+      }
     },
     {
       "id": "fig-front-goes",
@@ -4962,7 +4982,17 @@
       "caption": "The field manual's own example: life support as one system, split into three subsystems, each built from its own components.",
       "credit": "Outpost Network field manual (this pack's own diagram)",
       "alt": "A tree diagram. At the top, a box labeled Life Support (system). Below it, three boxes labeled Air, Water, and Food (subsystem). Below each subsystem sits one component box: Scrubber cartridge under Air, Filter membrane under Water, Light panel under Food. Two notes below explain interaction: a clogged scrubber cartridge lets carbon dioxide climb, so the crew works slower and sleeps worse; dim light panels slow crop growth, so the crew eats more of what gets shipped in.",
-      "src": "art/outpost-protocol-g6/fig-station-systems.svg"
+      "src": "art/outpost-protocol-g6/fig-station-systems.svg",
+      "dataTable": {
+            "type": "features",
+            "items": [
+                  "A tree diagram titled \"Life support: system, subsystem, component\".",
+                  "The top box is Life Support, labelled (system).",
+                  "Three boxes below it are Air, Water and Food, each labelled (subsystem).",
+                  "Below those sit Scrubber cartridge, Filter membrane and Light panel, each labelled (component).",
+                  "The nesting runs one way only: components sit inside subsystems, which sit inside the system."
+            ]
+      }
     },
     {
       "id": "fig-front-section",
@@ -4970,7 +5000,18 @@
       "caption": "A cold front in cross section: cold air slides in low and shoves warmer air up, where it cools and its moisture falls back down as rain.",
       "credit": "Outpost Network field manual (this pack's own diagram)",
       "alt": "A cross section along the ground. On the left, a wedge of cold air slides forward along the ground, labeled cold air slides in low. Where it meets the warm air, a green line marks the front. To the right, an arrow labeled warm air forced upward curves up into a cluster of clouds labeled moisture condenses into clouds, with rain falling from the clouds. A note below explains that falling pressure, rising humidity, a wind shift, then falling temperature and rising wind speed can flag a front a full day early.",
-      "src": "art/outpost-protocol-g6/fig-front-section.svg"
+      "src": "art/outpost-protocol-g6/fig-front-section.svg",
+      "dataTable": {
+            "type": "features",
+            "items": [
+                  "A cross-section titled \"Cold air meets warm air: how a front forms\".",
+                  "A boundary line is labelled front.",
+                  "Cold air slides in low, beneath the warm air.",
+                  "Warm air is forced upward above the cold air.",
+                  "Moisture condenses into clouds where the warm air rises, and rain falls from them.",
+                  "A note reads that falling pressure, rising humidity, a wind shift, then falling temperature and rising wind speed can flag a front a full day early."
+            ]
+      }
     },
     {
       "id": "fig-latitude-currents",
@@ -4978,7 +5019,18 @@
       "caption": "Sable Flats and Cairn Bay share almost the same latitude, but a coast, an ocean current, and a wind belt that dries out over land give them very different climates.",
       "credit": "Outpost Network field report (this pack's own map)",
       "alt": "A map showing two posts at the same latitude, marked by a dashed line. On the left, Cairn Bay sits on the coast next to open ocean, with a current arrow along its coastline. On the right, Sable Flats sits well inland, over dry, continental land. A wide arrow labeled wind belt: blows off the ocean tapers as it crosses the land, labeled arrives far drier, drops its moisture along the way. Two boxes below summarize: Cairn Bay's coast and nearby current give it a smaller seasonal swing; Sable Flats' inland position with no current gives it a wider seasonal swing.",
-      "src": "art/outpost-protocol-g6/fig-latitude-currents.svg"
+      "src": "art/outpost-protocol-g6/fig-latitude-currents.svg",
+      "dataTable": {
+            "type": "features",
+            "items": [
+                  "A comparison titled \"Same latitude, different climate\".",
+                  "Both posts sit at the same latitude and receive the same sun angle all year.",
+                  "Cairn Bay is on the coast, with an ocean current nearby.",
+                  "Sable Flats is well inland, in dry continental air.",
+                  "A wind belt blows off the ocean and arrives far drier inland, having dropped its moisture along the way.",
+                  "Cairn Bay, on the coast with a current nearby, has the smaller seasonal swing."
+            ]
+      }
     },
     {
       "id": "fig-proposals",
@@ -4986,7 +5038,17 @@
       "caption": "Three proposals for Halyard Point, checked against Command's three tests: an effect within one season, cost within budget, and only the Network's own authority.",
       "credit": "Outpost Network field report (this pack's own diagram)",
       "alt": "Three side-by-side cards. Proposal A, a feeding station, passes all three tests but ends when the station stops. Proposal B, fencing, is within budget and quick to build but does not fix starving chicks, since predators are not the cause. Proposal C, a petition to delay the herring season, would close the mismatch at its root but takes over four months, past the one-season window, and lies outside the Network's own authority.",
-      "src": "art/outpost-protocol-g6/fig-proposals.svg"
+      "src": "art/outpost-protocol-g6/fig-proposals.svg",
+      "dataTable": {
+            "type": "features",
+            "items": [
+                  "A three-column comparison titled \"Three proposals for Halyard Point\".",
+                  "Every proposal is checked against the same three tests: effect within one season, cost within budget, and the Network’s own authority.",
+                  "Proposal A is a feeding station: within budget, within authority, and it has a real effect while it runs, but the effect ends when the station stops.",
+                  "Proposal B is fencing: within budget, and its authority row is not stated on the card.",
+                  "Proposal C is the only one whose column is filled for every test."
+            ]
+      }
     },
     {
       "id": "fig-network-map",
@@ -4994,7 +5056,18 @@
       "caption": "Every station on the network logs temperature and carbon dioxide; Network Command also tracks a fuel-use index across stations and supply runs, the only way to see the pattern underneath each station's own local mystery.",
       "credit": "Outpost Network records (this pack's own map)",
       "alt": "A hub-and-spoke network map.  Named stations Halyard Point, Sable Flats, and Cairn Bay, plus other unnamed stations, all send arrows into a central hub labeled Network Command.  Text below explains that every station logs temperature and carbon dioxide, and that Command also tracks a fuel-use index across stations and supply runs.  Temperature climbs overall, even while bouncing year to year, and carbon dioxide and fuel-use climb on almost the same line and never reverse.",
-      "src": "art/outpost-protocol-g6/fig-network-map.svg"
+      "src": "art/outpost-protocol-g6/fig-network-map.svg",
+      "dataTable": {
+            "type": "features",
+            "items": [
+                  "A network diagram titled \"Network Synthesis: one station cannot see the pattern alone\".",
+                  "Three stations are drawn, Halyard Point, Sable Flats and Cairn Bay, each reporting to Network Command.",
+                  "Every station logs temperature and carbon dioxide.",
+                  "Command also tracks a fuel-use index for stations and supply runs.",
+                  "Temperature climbs overall, even while bouncing year to year.",
+                  "Carbon dioxide and fuel-use climb on almost the same line and never reverse."
+            ]
+      }
     }
   ]
 }
