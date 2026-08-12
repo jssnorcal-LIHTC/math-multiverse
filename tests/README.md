@@ -1,8 +1,8 @@
 # Math Multiverse test harness
 
-The committed gates that protect `Math-Multiverse.html`.  `npm test` runs the unit suites
-followed by twelve gate scripts;  the same job runs in CI (`.github/workflows/validate.yml`,
-job name `fuzz + smoke`) and blocks merges to `main`.
+The committed gates that protect `Math-Multiverse.html`.  `npm test` runs the ten unit suites
+followed by eleven gate scripts;  the same job runs in CI (`.github/workflows/validate.yml`,
+job name `fuzz + smoke`, which is the required check) and blocks merges to `main`.
 
 ## What runs
 
