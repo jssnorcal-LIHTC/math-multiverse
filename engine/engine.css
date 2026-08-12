@@ -646,3 +646,23 @@
 .mv-passage[data-dockind="procedure"] { border-left: 3px solid var(--mv-color, #7aa8ff); }
 .mv-passage[data-dockind="memo"]::before { content: 'ANALYST MEMO'; }
 .mv-passage[data-dockind="minutes"]::before { content: 'REVIEW BOARD \00b7  MINUTES'; }
+
+/* Phase R, task 3: the band's LABEL, decoupled from the skin that paints it.
+   Every literal above is welded to one kind, so `case-file` always reads "PROVENANCE OFFICE /
+   CASE FILE" -- a label written for one pack's fiction on a skin that four other packs need.
+   A passage may now carry its own `register` string, and this renders it instead.  docKind
+   stays the styling key (tint, padding, and the list both gates assert against), so a new pack
+   costs zero CSS rather than a new kind, a new DOC_KINDS entry, and a matching skin block.
+
+   WHY TWO ATTRIBUTES AND NOT ONE.  `.mv-passage[data-register]` would be one class plus one
+   attribute, exactly the specificity of every literal above, leaving SOURCE ORDER as the only
+   thing deciding which wins -- and a later-added skin rule, or a reordering, would silently
+   send every register in every pack back to its kind's literal with nothing failing.  Matching
+   both attributes makes this (0,3,1) against their (0,2,1), so it wins on specificity and does
+   not depend on where it sits in the file.  tests/reading-surface.js asserts the PAINTED band
+   text regardless, because a specificity argument is not a measurement.
+
+   Scoped to [data-dockind] as well, matching validate-pack's rule that a register without a kind
+   is refused: the band's box, padding and colour all come from the skin, so a register alone
+   would paint a label with no band under it. */
+.mv-passage[data-dockind][data-register]::before { content: attr(data-register); }

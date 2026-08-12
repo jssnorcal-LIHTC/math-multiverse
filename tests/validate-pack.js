@@ -465,11 +465,31 @@ function checkFigureReferences(pack, figuresById, passagesById, itemsById, error
   }
 }
 
-// ---------- envelope: passage docKind ----------
+// ---------- envelope: passage docKind and register ----------
+// Phase R.  `docKind` stays the STYLING key: it picks the tint, the padding and the gate's own
+// list.  `register` is the optional LABEL, overriding the band text the skin would otherwise
+// hard-code.  The two were conflated before, which is why `case-file` always reads "PROVENANCE
+// OFFICE / CASE FILE": a label written for one pack's fiction, welded to a skin four other packs
+// need.  Splitting them means a new pack costs zero CSS.
+const REGISTER_MAX = 44;   // measured: the band is one line at 0.62rem/0.14em in a 1024px column,
+                           // and past roughly this length it wraps and doubles the band's height,
+                           // which shifts every passage's first line down.
 function checkDocKinds(passagesById, errors) {
   for (const p of passagesById.values()) {
     if (p.docKind !== undefined && !DOC_KINDS.includes(p.docKind)) {
       errors.push(`passages(${p.id}).docKind: must be one of ${DOC_KINDS.join(', ')}, got ${JSON.stringify(p.docKind)}`);
+    }
+    if (p.register !== undefined) {
+      if (typeof p.register !== 'string' || !p.register.trim()) {
+        errors.push(`passages(${p.id}).register: must be a non-empty string, got ${JSON.stringify(p.register)}`);
+      } else if (p.register.length > REGISTER_MAX) {
+        errors.push(`passages(${p.id}).register: ${p.register.length} chars exceeds the ${REGISTER_MAX}-char band, which would wrap to a second line and push every passage's first line down`);
+      }
+      // A register with no docKind is a band label with no band: the ::before that paints it is
+      // scoped to [data-dockind], so the string would be authored, validated, and never render.
+      if (p.docKind === undefined) {
+        errors.push(`passages(${p.id}).register: set without a docKind, so no band exists to carry it and the label would never render`);
+      }
     }
   }
 }

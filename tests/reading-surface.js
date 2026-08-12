@@ -204,6 +204,24 @@ function startServer() {
             MVRunner.markPassageClipped(box);
             return { overflowing, markedAtTop, markedAtEnd, shadowMarked, shadowCleared };
           })(),
+
+          // ---- phase R: the register override, measured as PAINTED band text ----
+          // docKind is the styling key and `register` is the label.  The override rule and the
+          // eleven skin literals differ only in specificity, so this reads what the browser
+          // actually paints rather than trusting that argument.  Positive and negative control
+          // in one pass: the same box, same kind, with and without a register.  Attributes are
+          // restored, and this runs after every geometry read above so it cannot disturb them.
+          band: (() => {
+            const prevKind = box.dataset.dockind, prevReg = box.dataset.register;
+            box.dataset.dockind = 'case-file';
+            delete box.dataset.register;
+            const literal = getComputedStyle(box, '::before').content;
+            box.dataset.register = 'PHASE R PROBE';
+            const overridden = getComputedStyle(box, '::before').content;
+            if (prevKind === undefined) delete box.dataset.dockind; else box.dataset.dockind = prevKind;
+            if (prevReg === undefined) delete box.dataset.register; else box.dataset.register = prevReg;
+            return { literal, overridden };
+          })(),
         };
       }, meta.id);
       rows.push({ packId: entry.id, ...meta, ...m });
@@ -257,6 +275,19 @@ function startServer() {
     } else {
       // A passage that fits must never paint a "more below" cue.
       if (c.markedAtTop) problems.push(`${tag}: passage fits but was marked clipped, dimming its last line for no reason`);
+    }
+
+    const b = r.band;
+    if (!b) problems.push(`${tag}: band text not measured`);
+    else {
+      // Negative control: with a kind and no register, the skin's own literal must paint.
+      if (!/CASE FILE/i.test(b.literal)) {
+        problems.push(`${tag}: a docKind with no register painted ${b.literal}, not its own skin literal`);
+      }
+      // Positive: a register must override that literal in the painted result.
+      if (!/PHASE R PROBE/.test(b.overridden)) {
+        problems.push(`${tag}: register did not override the band; it painted ${b.overridden}. The override rule is losing to a skin literal.`);
+      }
     }
   }
 

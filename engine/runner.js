@@ -288,6 +288,12 @@
           // never carries a stale or empty-string dockind attribute for Task 5's CSS to trip on.
           if (passage.docKind) passageBox.dataset.dockind = passage.docKind;
           else delete passageBox.dataset.dockind;
+          // Phase R: the band's LABEL, separate from the skin that paints it.  Written on the
+          // same only-when-present terms as dockind above, so a passage that drops its register
+          // falls back to its kind's own literal rather than carrying an empty attribute that
+          // CSS's attr() would render as a blank band.
+          if (passage.register) passageBox.dataset.register = passage.register;
+          else delete passageBox.dataset.register;
           // Dryness-fix round 2: the strip renders HERE, immediately after the title and before
           // the paragraph loop, so renderStrip's own appendChild lands it as the passage box's
           // SECOND child (title first, strip second) -- never after every paragraph. At real
