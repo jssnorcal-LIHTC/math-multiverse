@@ -1,7 +1,7 @@
 # Math Multiverse test harness
 
 The committed gates that protect `Math-Multiverse.html`.  `npm test` runs the ten unit suites
-followed by twelve gate scripts;  the same job runs in CI (`.github/workflows/validate.yml`,
+followed by thirteen gate scripts;  the same job runs in CI (`.github/workflows/validate.yml`,
 job name `fuzz + smoke`, which is the required check) and blocks merges to `main`.
 
 ## What runs
@@ -12,7 +12,8 @@ job name `fuzz + smoke`, which is the required check) and blocks merges to `main
 | `npm run smoke` | The launcher and all six modules boot at Grade 5 and Grade 6 with zero JS errors. |
 | `npm run reading` | The read/respond surfaces are measured as PAINTED, not as authored. |
 | `npm run touch-targets` | Every header control is reachable by a 44px finger, measured by HIT-TESTING rather than by geometry. |
-| `npm test` | units, then validate-pack, figure-derive, freshness x3, shells, fuzz, smoke, figures-offline, reading-surface, tile-overlap, touch-targets. |
+| `npm run reduced-motion` | No SVG under `art/` uses SMIL, and every animated asset actually stops under `prefers-reduced-motion`. |
+| `npm test` | units, then validate-pack, figure-derive, freshness x3, shells, fuzz, smoke, figures-offline, reading-surface, tile-overlap, touch-targets, reduced-motion. |
 
 Two tools are committed but deliberately **not** in `npm test`, because each needs a network
 origin and neither belongs in a hermetic gate:  `build/verify-deploy.js` (byte-compare what
@@ -125,6 +126,40 @@ to the full 44px.
 `node tests/touch-targets.js --width 480` puts the bar into two rows on any machine, which is how
 the wrapped case is read locally.  The gate itself always runs at the device size;  the flags exist
 so a limitation nobody can re-run does not become a limitation nobody can check.
+## How the reduced-motion gate works (`tests/reduced-motion.js`)
+
+Constraint 7 promises that `prefers-reduced-motion` collapses motion to end states.  `engine.css`
+has carried a `@media (prefers-reduced-motion: reduce)` block since V1 and it lists
+`.mv-lb-overlay`, and **that rule could never do what it said**.  `.mv-lb-overlay` is an `<img>`
+whose `src` is an SVG, and no rule in the parent document reaches inside an `<img>`-referenced SVG.
+
+Measured before the fix, four variants of the same stroked path in `<img>` tags, screenshotted
+twice 800ms apart at both browser-level motion preferences:
+
+| variant | under `reduce` | under `no-preference` |
+|---|---|---|
+| SMIL `<animate>` | MOVED | MOVED |
+| SMIL plus the parent's `animation: none !important` | MOVED | MOVED |
+| CSS `@keyframes` inside the SVG's own `<style>` | MOVED | MOVED |
+| the same, gated by `@media reduce` inside the SVG | **STILL** | MOVED |
+
+SMIL is therefore not governed by `prefers-reduced-motion` by any route, and the only mechanism
+that works is a media query inside the asset.  The gate holds both halves:  no SVG under `art/` may use SMIL
+(static scan, with a fixture that carries SMIL as the scanner's own negative control), and every
+animated asset must MOVE with motion allowed and be STILL under `reduce`, plus a fixture that never
+animates and one that animates ungated.
+
+**The trap it exists to remember:** Playwright's `newContext({ reducedMotion })` does not reach an
+image document.  The parent page reports what was asked for while the SVG inside the `<img>` keeps
+reporting the real browser value, so on a machine whose OS has reduced motion ON, a probe using the
+context option measures `reduce` in both of its two "conditions" and a gated animation reads STILL
+in both, which looks like a pass and proves nothing.  The preference is forced with Chromium's own
+`--force-prefers-reduced-motion` / `--force-prefers-no-reduced-motion` switches instead.
+
+It also separates a genuine end state from a frozen frame:  a stopped animation and a collapsed one
+both read STILL, so the reduced rendering must differ from the animated one's first frame.  The
+overlay's dash period equals its full travel, so freezing it would leave one 152-unit dash at the
+wrist;  under `reduce` it drops the dash pattern and paints the whole traced corridor instead.
 
 ## How the level driver works (`tests/play-level.js`)
 
