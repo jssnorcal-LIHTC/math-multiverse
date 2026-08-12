@@ -15,6 +15,17 @@
   "repeatPolicy": "rotate",
   "figures": [
     {
+      "id": "fig-rome-plate",
+      "kind": "plate",
+      "caption": "Piranesi's view of the Roman Forum, etched about 1775, when it was pasture and known as the Campo Vaccino.  The second view is a Roman portrait bust from the same file.",
+      "credit": "Giovanni Battista Piranesi, etching, ca. 1775; The Metropolitan Museum of Art (accession 37.17.13), Open Access, public domain.  Second view: Met accession 14.37.",
+      "alt": "An eighteenth-century etching looking across the Roman Forum from the Capitol. The Arch of Septimius Severus stands at the lower left, tall columns of the Temple of Vespasian rise at the right, broken column drums and carved capitals lie in the foreground, and the Colosseum sits on the skyline in the distance. A numbered key and the title Veduta di Campo Vaccino are printed along the bottom edge.",
+      "views": [
+        { "label": "The Forum (etching)", "src": "art/firsthand-g6/fig-rome-plate.jpg" },
+        { "label": "Portrait (photo)", "src": "art/firsthand-g6/fig-roman-bust.jpg" }
+      ]
+    },
+    {
       "id": "fig-exile-map",
       "kind": "map",
       "caption": "Two kingdoms where one had stood: Israel with its capital at Samaria, Judah with the Temple in Jerusalem, and the direction Assyria moved the defeated people.",
@@ -236,7 +247,7 @@
       "title": "Case File: Closing the File on Rome",
       "genre": "informational",
       "docKind": "case-file",
-      "figureIds": ["fig-roman-bust"],
+      "figureIds": ["fig-rome-plate", "fig-roman-bust"],
       "source": "original",
       "text": "This is the last entry in the whole case file.  It closes in a different way than every entry before it.  Rome does not open a new puzzle.  It answers back into every puzzle this file has already opened.\n\nRome began as a kingdom, then threw out its own king and became a republic instead.  Two elected consuls led it, along with a council called the Senate.  For years afterward, rich patrician families held nearly all the real power.  Plain plebeian citizens fought for a bigger share of it.  That fight in time produced the Twelve Tables, Rome's first written law code.  The code was posted in public so that every citizen, patrician or plebeian, could actually see the same laws applied to all, even though rank still shaped much of Roman life.  Compare that to Hammurabi's own code, filed at the very start of this record.  Its finished laws still punished the same crime in different ways, depending on who the victim was.\n\nRome's spot on a sea-facing peninsula pushed it steadily outward.  Rome fought the rival city of Carthage across three long wars and won.  Rome then held most of the Mediterranean coast.  A road web linked it all, moving troops and officials fast across huge distances.\n\nThe republic itself could not survive its own success.  A general named Julius Caesar seized power by force.  Senators feared he wished to rule as a king, and they killed him.  More years of civil war came next.  His adopted heir, Octavian, rose as Rome's first emperor, taking the name Augustus.  A republic without a king had lasted nearly five hundred years before an empire took its place.\n\nRome gave out citizenship widely across its conquered lands, a reach that went far past Athens and its own narrow assembly.  Athens had let its citizens vote right on the city's own laws, years earlier.  Rome also matched many of its own gods to Greek ones, treating each pair as one god under two names.  Rome took in Greek philosophy too.  The file that opened with a river and a code of law now closes with an empire, one built from nearly every civilization this record has ever checked."
     },
@@ -460,6 +471,7 @@
     {
       "id": 5,
       "name": "What Was Burned",
+      "reveal": { "figureId": "fig-han-bronze" },
       "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
       "targets": [
         "hist-t5-china"
@@ -496,6 +508,7 @@
     {
       "id": 6,
       "name": "Closing the File",
+      "reveal": { "figureId": "fig-rome-plate" },
       "goal": "Close the whole case by cross-referencing every civilization the record has verified.",
       "targets": [
         "hist-t6-rome"
