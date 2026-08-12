@@ -309,7 +309,19 @@
    does not depend on remembering to extend this one when they land. Collapsing `transition` to
    none does not strand either mechanic mid-cover: the JS still adds `.found`/`.away` on its own
    schedule, so with no transition to animate, each state simply applies instantly, landing on
-   the same fully-revealed end state as the animated path, just without the motion. */
+   the same fully-revealed end state as the animated path, just without the motion.
+
+   WHAT `.mv-lb-overlay` IN THIS LIST DOES AND DOES NOT DO (corrected 26-0812, ticket 2.1).  It
+   governs the <img> ELEMENT -- any transition or animation this stylesheet puts on the img box
+   itself -- and it reaches NOTHING inside the image.  An <img>-referenced SVG is a separate
+   document;  no rule here crosses that boundary, and the SMIL animation the overlay used to carry
+   kept running under `reduce` with this exact rule applied (measured: identical differing-pixel
+   counts with and without it).  The impulse is now a CSS animation gated by a media query inside
+   art/outpost-protocol-g6/gray-nervous-overlay.svg's own <style>, which is the only mechanism that
+   works, and tests/reduced-motion.js measures it in painted pixels at both browser-level
+   preferences.  The selector stays because it is correct for what it actually covers: if anything
+   here ever animates the overlay's own box, this collapses it.  It was never the thing keeping
+   constraint 7's promise for that asset, and the comment used to imply it was. */
 @media (prefers-reduced-motion: reduce) {
   .mv-lb-zoom, .mv-lb-overlay, .mv-rv-cell, .mv-rv-tile, .mv-rv-zoom, .mv-flash { transition: none !important; animation: none !important; }
 }
