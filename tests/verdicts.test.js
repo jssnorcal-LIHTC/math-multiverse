@@ -356,5 +356,107 @@ check('validateLedger now catches an order item whose blind answer was merely a 
     'the reordered ms answer is genuinely the same set and must NOT be flagged: ' + JSON.stringify(errors));
 });
 
+
+// ---- V3 task 0: the figure-data blind surface and its hash pin ----
+//
+// A figure-bearing item's stimulus is the FIGURE, so the blind pass has to see the figure's data
+// or it is answering a different question from the one the child answers.  Two consequences, and
+// the second is the load-bearing one: the blind prompt gains a FIGURE DATA block, and the item's
+// certification hash has to pin that data, or a chart could be regenerated from different numbers
+// while its certified item kept a hash that says nothing changed.
+//
+// The regression pin comes first.  Every item shipped so far has no figureId, and their hashes are
+// recorded in five committed ledgers; if this change moves any of them, every ledger goes stale at
+// once and the packs stop validating.
+check('hash without figureId is unchanged by the third argument', () => {
+  const item = { id: 'i', type: 'mc', key: 1 }, pass = { text: 't' };
+  assert.strictEqual(itemHash(item, pass), itemHash(item, pass, null));
+  assert.strictEqual(itemHash(item, pass), itemHash(item, pass, { dataTable: { a: 1 } }));
+});
+
+check('figure-bearing item hash pins the dataTable', () => {
+  const item = { id: 'i', type: 'mc', key: 1, figureId: 'f' }, pass = { text: 't' };
+  const f1 = { dataTable: { type: 'line', series: [] } };
+  const f2 = { dataTable: { type: 'line', series: [{ label: 'x', points: [[1, 2]] }] } };
+  assert.notStrictEqual(itemHash(item, pass, f1), itemHash(item, pass, f2));
+  // and it must actually differ from the unpinned form, or the pin is decorative
+  assert.notStrictEqual(itemHash(item, pass, f1), itemHash(item, pass));
+});
+
+check('every committed ledger record still verifies -- no existing hash moved', () => {
+  const fs = require('fs');
+  const packsDir = path.join(__dirname, '..', 'packs');
+  let checked = 0, ledgers = 0;
+  for (const f of fs.readdirSync(packsDir)) {
+    if (!f.endsWith('.verdicts.json')) continue;
+    const pack = JSON.parse(fs.readFileSync(path.join(packsDir, f.replace('.verdicts', '')), 'utf8'));
+    const led = JSON.parse(fs.readFileSync(path.join(packsDir, f), 'utf8'));
+    const passages = new Map(pack.passages.map((p) => [p.id, p]));
+    const items = new Map(pack.items.map((i) => [i.id, i]));
+    ledgers++;
+    for (const r of led.records || []) {
+      const it = items.get(r.itemId);
+      assert.ok(it, `${f}: ledger names missing item ${r.itemId}`);
+      assert.strictEqual(itemHash(it, passages.get(it.passageId)), r.itemHash,
+        `${f}: hash moved for ${r.itemId}`);
+      checked++;
+    }
+  }
+  // A check that silently finds nothing is the failure mode this program bans outright.
+  assert.ok(ledgers >= 5, `expected at least 5 committed ledgers, saw ${ledgers}`);
+  assert.ok(checked >= 500, `expected 500+ ledger records to verify, saw ${checked}`);
+});
+
+check('blindQuestion shows the figure data for a figure-bearing item, and nothing extra otherwise', () => {
+  const passage = { text: 'Some passage text.' };
+  const item = { id: 'i', type: 'mc', stem: 'Which?', choices: ['a', 'b', 'c', 'd'], key: 1 };
+  const plain = blindQuestion(item, passage).prompt;
+  assert.ok(!/FIGURE DATA/.test(plain), 'a figure-less item must not carry a FIGURE DATA block');
+
+  const fig = { id: 'f', kind: 'chart', caption: 'A caption.', dataTable: { type: 'line', series: [{ label: 'x', points: [[1, 2]] }] } };
+  const withFig = blindQuestion({ ...item, figureId: 'f' }, passage, fig).prompt;
+  assert.ok(/FIGURE \(chart\): A caption\./.test(withFig), 'the figure caption is missing from the prompt');
+  assert.ok(/FIGURE DATA/.test(withFig), 'the FIGURE DATA block is missing');
+  assert.ok(withFig.includes('"points"'), 'the dataTable itself is not in the prompt');
+  // The blind pass must never be handed the answer.
+  assert.ok(!/"key"/.test(withFig), 'the prompt leaks the key');
+});
+
+check('blindQuestion REFUSES a figure-bearing item whose figure has no dataTable', () => {
+  // Silently answering from the passage alone would produce a verdict about a different question
+  // than the child sees, and it would look exactly like a clean agreement.
+  const passage = { text: 't' };
+  const item = { id: 'i9', type: 'mc', stem: 's', choices: ['a', 'b', 'c', 'd'], key: 0, figureId: 'f' };
+  let threw = null;
+  try { blindQuestion(item, passage, { id: 'f', kind: 'photo' }); } catch (e) { threw = e; }
+  assert.ok(threw, 'a dataTable-less figure was accepted');
+  assert.ok(/i9/.test(String(threw.message)), 'the refusal does not name the offending item');
+});
+
+check('validateLedger and the blind pass hash a figure-bearing item THE SAME WAY', () => {
+  // The two paths are siblings: blind-reanswer writes the record's hash, validateLedger checks it.
+  // If only one is figure-aware they disagree by construction, every figure-bearing record reads
+  // as stale the instant it is written, and the failure looks like an authoring problem rather
+  // than a harness one.  This pins them together rather than trusting that both got the port.
+  const { resolvedItemHash } = require('./blind-reanswer');
+  const fig = { id: 'f1', kind: 'chart', caption: 'c', dataTable: { type: 'line', series: [{ label: 'a', points: [[1, 2]] }] } };
+  const passage = { id: 'p1', text: 'text' };
+  const item = { id: 'i1', type: 'mc', stem: 's', choices: ['a', 'b', 'c', 'd'], key: 2, passageId: 'p1', figureId: 'f1' };
+  const pack = { meta: { id: 'demo' }, passages: [passage], figures: [fig], items: [item] };
+
+  const writeSide = resolvedItemHash(item, new Map([[passage.id, passage]]), new Map([[fig.id, fig]]));
+  const ledger = { packId: 'demo', records: [{ itemId: 'i1', itemHash: writeSide, status: 'agree', blindAnswer: 2 }] };
+  const { errors } = validateLedger(pack, ledger);
+  const stale = errors.filter((e) => /stale blind verdict/.test(e));
+  assert.deepStrictEqual(stale, [],
+    'the check side hashes a figure-bearing item differently from the write side');
+
+  // Negative control: change the figure's data and the SAME record must now read as stale, or the
+  // agreement above proves only that both sides ignore the figure.
+  const moved = { ...pack, figures: [{ ...fig, dataTable: { type: 'line', series: [{ label: 'a', points: [[1, 99]] }] } }] };
+  const after = validateLedger(moved, ledger).errors.filter((e) => /stale blind verdict/.test(e));
+  assert.strictEqual(after.length, 1, 'editing the figure data did not stale the record');
+});
+
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
 process.exit(failures ? 1 : 0);
