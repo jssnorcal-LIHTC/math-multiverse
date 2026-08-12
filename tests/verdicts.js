@@ -43,11 +43,29 @@ function stableStringify(value) {
   return '{' + keys.map(k => JSON.stringify(k) + ':' + stableStringify(value[k])).join(',') + '}';
 }
 
-function itemHash(item, passage) {
+// V3: the third parameter pins a figure-bearing item's FIGURE DATA into its certification hash.
+//
+// Why it is needed at all: for these items the stimulus is the chart, not only the passage. A
+// chart is generated from its dataTable, so the numbers could be edited and the figure
+// regenerated while the item's hash said nothing had changed -- a certified item silently
+// asking a different question. The passage-text pin already closed that hole for prose; this
+// closes it for data.
+//
+// Why the signature is additive rather than required: every item shipped so far carries no
+// figureId, and their hashes are recorded across five committed ledgers. The segment is appended
+// ONLY when the item actually declares a figureId and that figure actually has a dataTable, so
+// every existing hash is byte-identical to before. tests/verdicts.test.js pins that both ways:
+// once on the argument being ignored, and once by re-verifying every record in every committed
+// ledger.
+function itemHash(item, passage, figure) {
+  const figureSeg = (item && item.figureId && figure && figure.dataTable)
+    ? '|figureData:' + stableStringify(figure.dataTable)
+    : '';
   if (!passage) {
-    return crypto.createHash('sha256').update(stableStringify(item), 'utf8').digest('hex').slice(0, 16);
+    return crypto.createHash('sha256')
+      .update(stableStringify(item) + figureSeg, 'utf8').digest('hex').slice(0, 16);
   }
-  const payload = stableStringify(item) + '|passageText:' + stableStringify(passage.text || '');
+  const payload = stableStringify(item) + '|passageText:' + stableStringify(passage.text || '') + figureSeg;
   return crypto.createHash('sha256').update(payload, 'utf8').digest('hex').slice(0, 16);
 }
 
@@ -154,9 +172,31 @@ function blindSpecOf(item) {
 // Build the blind prompt. Everything that could leak the answer is excluded by construction:
 // this assembles the prompt from named fields rather than serialising the item, so a new field
 // added later cannot silently leak.
-function blindQuestion(item, passage) {
+// V3: `figure` is required when the item declares a figureId, because for those items the chart
+// IS the stimulus. Answering from the passage alone would produce a verdict about a different
+// question than the child is asked, and it would look exactly like a clean agreement -- the worst
+// available failure for a certification pass.
+function blindQuestion(item, passage, figure) {
   const spec = blindSpecOf(item);
   if (!spec) throw new Error('blindQuestion: type ' + JSON.stringify(item && item.type) + ' has no blind form');
+
+  // Refuse rather than degrade. A photograph is never assessed (validate-pack enforces that from
+  // V1), so a figure-bearing item whose figure has no dataTable is an authoring error, not a case
+  // to handle gracefully.
+  let figureBlock = [];
+  if (item && item.figureId) {
+    if (!figure || !figure.dataTable) {
+      throw new Error('blindQuestion: item ' + JSON.stringify(item.id)
+        + ' declares figureId ' + JSON.stringify(item.figureId)
+        + ' but no dataTable was supplied; the blind pass would answer a different question than the child sees');
+    }
+    figureBlock = [
+      'FIGURE (' + (figure.kind || 'figure') + '): ' + (figure.caption || ''),
+      'FIGURE DATA (the numbers/features the figure displays):',
+      JSON.stringify(figure.dataTable, null, 2),
+      '',
+    ];
+  }
 
   const prompt = [
     'You are answering one reading-comprehension question for a grade 6 student.',
@@ -165,6 +205,7 @@ function blindQuestion(item, passage) {
     'PASSAGE:',
     passage.text,
     '',
+    ...figureBlock,
     'QUESTION:',
     spec.stem,
     '',
@@ -234,6 +275,12 @@ function validateLedger(pack, ledger) {
   // PASSAGE-AWARE (N4 fix): resolved once per pack, passed into itemHash below so a passage edit
   // dirties every item that references it, not just items whose own fields changed.
   const passagesById = new Map((Array.isArray(pack.passages) ? pack.passages : []).map(p => [p.id, p]));
+  // FIGURE-AWARE (V3), and this is a PORT of the passage fix above rather than a new idea: the
+  // blind pass now hashes a figure-bearing item WITH its figure's dataTable, so this path has to
+  // as well or the two disagree by construction and every figure-bearing record reads as stale
+  // the instant it is written.  Threading it into one sibling and not the other is precisely the
+  // defect V1 found in figure-derive and V2 found again in its round-trip check.
+  const figuresById = new Map((Array.isArray(pack.figures) ? pack.figures : []).map(f => [f.id, f]));
 
   for (const item of items) {
     // Only the comparable types need a verdict; the rest are gated structurally.
@@ -245,7 +292,7 @@ function validateLedger(pack, ledger) {
       continue;
     }
     const passage = item.passageId ? passagesById.get(item.passageId) : null;
-    const want = itemHash(item, passage);
+    const want = itemHash(item, passage, item.figureId ? figuresById.get(item.figureId) : null);
     if (r.itemHash !== want) {
       errors.push(`items(${item.id}): stale blind verdict, the item changed since it was checked (ledger ${r.itemHash}, item ${want}); re-run the blind pass for this item`);
       continue;
