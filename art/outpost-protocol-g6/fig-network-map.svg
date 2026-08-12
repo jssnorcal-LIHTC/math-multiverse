@@ -7,27 +7,27 @@
 <rect x="0" y="0" width="800" height="520" fill="#0f1218" />
 <text x="400" y="30" font-size="20" fill="#e8eef7" text-anchor="middle" font-weight="700">Network Synthesis: one station cannot see the pattern alone</text>
 
-<line x1="400" y1="100" x2="400" y2="190" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
-<line x1="660" y1="170" x2="448.3" y2="227" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
-<line x1="660" y1="310" x2="448.3" y2="253" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
-<line x1="400" y1="380" x2="400" y2="290" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
-<line x1="140" y1="310" x2="351.7" y2="253" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
-<line x1="140" y1="170" x2="351.7" y2="227" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
+<line x1="400" y1="126" x2="400" y2="190" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
+<line x1="642.6" y1="174.7" x2="448.3" y2="227" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
+<line x1="634.9" y1="303.2" x2="448.3" y2="253" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
+<line x1="400" y1="362" x2="400" y2="290" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
+<line x1="165.1" y1="303.2" x2="351.7" y2="253" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
+<line x1="157.4" y1="174.7" x2="351.7" y2="227" stroke="rgba(232,238,247,0.6)" stroke-width="2" marker-end="url(#netArrow)" />
 
 <circle cx="400" cy="100" r="26" fill="#12281f" stroke="#1a8f5e" stroke-width="3" />
-<text x="400" y="70" font-size="16" fill="#e8eef7" text-anchor="middle" font-weight="700">Halyard Point</text>
+<text x="400" y="66" font-size="16" fill="#e8eef7" text-anchor="middle" font-weight="700">Halyard Point</text>
 
 <circle cx="660" cy="310" r="26" fill="#12281f" stroke="#1a8f5e" stroke-width="3" />
-<text x="660" y="345" font-size="16" fill="#e8eef7" text-anchor="middle" font-weight="700">Sable Flats</text>
+<text x="660" y="352" font-size="16" fill="#e8eef7" text-anchor="middle" font-weight="700">Sable Flats</text>
 
 <circle cx="140" cy="310" r="26" fill="#12281f" stroke="#1a8f5e" stroke-width="3" />
-<text x="140" y="345" font-size="16" fill="#e8eef7" text-anchor="middle" font-weight="700">Cairn Bay</text>
+<text x="140" y="352" font-size="16" fill="#e8eef7" text-anchor="middle" font-weight="700">Cairn Bay</text>
 
 <circle cx="660" cy="170" r="18" fill="none" stroke="#e8eef7" stroke-width="2" />
 <text x="660" y="145" font-size="15" fill="#e8eef7" fill-opacity="0.8" text-anchor="middle">station</text>
 
 <circle cx="400" cy="380" r="18" fill="none" stroke="#e8eef7" stroke-width="2" />
-<text x="400" y="410" font-size="15" fill="#e8eef7" fill-opacity="0.8" text-anchor="middle">station</text>
+<text x="400" y="414" font-size="15" fill="#e8eef7" fill-opacity="0.8" text-anchor="middle">station</text>
 
 <circle cx="140" cy="170" r="18" fill="none" stroke="#e8eef7" stroke-width="2" />
 <text x="140" y="145" font-size="15" fill="#e8eef7" fill-opacity="0.8" text-anchor="middle">station</text>
