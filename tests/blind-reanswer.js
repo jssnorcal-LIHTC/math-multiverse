@@ -36,8 +36,11 @@ function arg(flag, dflt) {
 // resolve-then-hash logic in the test fixture, which is how the pre-fix legacy calls at these two
 // sites escaped review in the first place: the fixture computed hashes manually and never exercised
 // this file's own resolution path.
-function resolvedItemHash(item, passages) {
-  return itemHash(item, passages.get(item.passageId));
+// V3: threads the item's FIGURE as well as its passage, because a figure-bearing item's hash pins
+// the figure's dataTable.  Same seam reasoning as the passage fix above: both call sites go
+// through here, so neither can drift into hashing without the figure.
+function resolvedItemHash(item, passages, figures) {
+  return itemHash(item, passages.get(item.passageId), figures && figures.get(item.figureId));
 }
 
 // VERIFIED 26-0725 against the installed CLI; do not "simplify" this back to execFile with a shell.
@@ -132,6 +135,8 @@ async function main() {
 
   const pack = loadPackFile(packPath);
   const passages = new Map((pack.passages || []).map(p => [p.id, p]));
+  // V3: figures by id, so a figure-bearing item's chart data reaches both the hash and the prompt.
+  const figures = new Map((pack.figures || []).map(f => [f.id, f]));
   const only = arg('--only', null);
   const onlySet = only ? new Set(only.split(',').map(s => s.trim())) : null;
   // Default 2, not 4: at concurrency 4 the 26-0725 run lost 18 of 70 items to the 120s
@@ -152,7 +157,7 @@ async function main() {
   const keep = [];
   for (const item of pack.items || []) {
     if (authoredKeyOf(item) === null) continue;
-    const h = resolvedItemHash(item, passages);
+    const h = resolvedItemHash(item, passages, figures);
     const p = prior.get(item.id);
     if (onlySet && !onlySet.has(item.id)) {
       if (p) keep.push(p);
@@ -172,7 +177,7 @@ async function main() {
   const jobs = todo.map(item => async () => {
     const passage = passages.get(item.passageId);
     if (!passage) throw new Error(`item ${item.id} has no resolvable passage`);
-    const { prompt, optionCount } = blindQuestion(item, passage);
+    const { prompt, optionCount } = blindQuestion(item, passage, figures.get(item.figureId));
     const raw = await callClaude(prompt);
     const { answer, confidence } = parseAnswer(raw, optionCount);
     return { item, answer, confidence };
@@ -207,7 +212,7 @@ async function main() {
     if (same) { agree++; console.log(`  agree  ${item.id}  (${r.confidence})`); }
     else { disagree++; console.log(`  DISAGREE ${item.id}: blind ${JSON.stringify(r.answer)} vs authored ${JSON.stringify(authored)}  (${r.confidence})`); }
     fresh.push({
-      itemId: item.id, itemHash: resolvedItemHash(item, passages),
+      itemId: item.id, itemHash: resolvedItemHash(item, passages, figures),
       blind: r.answer, authored, confidence: r.confidence,
       status: same ? 'agree' : 'needs-adjudication',
     });
