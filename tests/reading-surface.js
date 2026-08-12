@@ -171,6 +171,39 @@ function startServer() {
           itemScrolls: host.scrollHeight > host.clientHeight + 1,
           passageAtFloor: Math.round(box.getBoundingClientRect().height) <= Math.ceil(parseFloat(passStyle.minHeight)) + 2,
           footerBelowFrame: footer ? Math.round(footer.getBoundingClientRect().bottom - fr.bottom) : 0,
+
+          // ---- phase R: the read/respond separation, measured in painted pixels ----
+          // Niall's report was that the text he reads and the responses were not separated.
+          // The defect was literal: .mv-item painted rgba(0,0,0,0), so the answer region had no
+          // material of its own and the passage's 3% wash sat one percent from .mv-choice's 4%.
+          // Asserting the PAINTED values, not the stylesheet, is the point: a rule that is
+          // overridden, or a token that changes underneath, has to fail here.
+          separation: (() => {
+            const ps = getComputedStyle(box), hs = getComputedStyle(host);
+            return { passageBg: ps.backgroundColor, itemBg: hs.backgroundColor,
+                     itemBorderTop: hs.borderTopWidth };
+          })(),
+
+          // ---- phase R: the clip affordance, with its own negative control ----
+          // Driven through the REAL marker exported from MVRunner rather than reimplemented
+          // here, so this measures the shipped behaviour and not the gate's opinion of it.
+          // Three states: overflowing and unscrolled (must mark), scrolled to the end (must
+          // clear), and the paint rule itself (shadow present only while marked).
+          clip: (() => {
+            if (!window.MVRunner || typeof MVRunner.markPassageClipped !== 'function') return null;
+            const overflowing = box.scrollHeight > box.clientHeight + 2;
+            box.scrollTop = 0;
+            MVRunner.markPassageClipped(box);
+            const markedAtTop = box.dataset.clipped === '1';
+            const shadowMarked = getComputedStyle(box).boxShadow;
+            box.scrollTop = box.scrollHeight;   // read to the end
+            MVRunner.markPassageClipped(box);
+            const markedAtEnd = box.dataset.clipped === '1';
+            const shadowCleared = getComputedStyle(box).boxShadow;
+            box.scrollTop = 0;
+            MVRunner.markPassageClipped(box);
+            return { overflowing, markedAtTop, markedAtEnd, shadowMarked, shadowCleared };
+          })(),
         };
       }, meta.id);
       rows.push({ packId: entry.id, ...meta, ...m });
@@ -194,6 +227,37 @@ function startServer() {
     else if (r.passagePx < MIN_PASSAGE_PX) problems.push(`${tag}: passage ${r.passagePx}px is under the ${MIN_PASSAGE_PX}px floor (item is ${r.itemPx}px)`);
     if (r.footerBelowFrame > 1) problems.push(`${tag}: the Check button is ${r.footerBelowFrame}px below the frame, off screen`);
     if (r.itemScrolls && !r.passageAtFloor) problems.push(`${tag}: the item is scrolling while the passage sits at ${r.passagePx}px, well above its floor. The passage should give first.`);
+
+    // ---- phase R assertions ----
+    const s = r.separation;
+    if (!s) problems.push(`${tag}: separation not measured`);
+    else {
+      const transparent = (c) => !c || c === 'transparent' || /rgba\([^)]*,\s*0\s*\)$/.test(c);
+      if (transparent(s.itemBg)) {
+        problems.push(`${tag}: the respond zone paints ${s.itemBg} -- it has no material of its own, which is the defect Niall reported`);
+      }
+      if (s.itemBg === s.passageBg) {
+        problems.push(`${tag}: the reading surface and the respond zone both paint ${s.itemBg} -- they are the same material`);
+      }
+      if (parseFloat(s.itemBorderTop) < 2) {
+        problems.push(`${tag}: the respond zone's accent edge is ${s.itemBorderTop}, under the 2px colour cue`);
+      }
+    }
+
+    const c = r.clip;
+    if (!c) problems.push(`${tag}: clip affordance not measured (MVRunner.markPassageClipped missing)`);
+    else if (c.overflowing) {
+      // Positive: an overflowing, unscrolled passage must mark AND paint.
+      if (!c.markedAtTop) problems.push(`${tag}: passage overflows but was not marked clipped, so its cut line reads as breakage`);
+      if (c.shadowMarked === 'none') problems.push(`${tag}: passage is marked clipped but paints no edge (box-shadow: none)`);
+      // Negative control: read to the end and the affordance must go away. Without this the
+      // check would pass just as happily on a rule that paints the edge unconditionally.
+      if (c.markedAtEnd) problems.push(`${tag}: passage stayed marked clipped after being scrolled to its end`);
+      if (c.shadowCleared !== 'none') problems.push(`${tag}: passage still paints a clip edge after being read to the end (${c.shadowCleared})`);
+    } else {
+      // A passage that fits must never paint a "more below" cue.
+      if (c.markedAtTop) problems.push(`${tag}: passage fits but was marked clipped, dimming its last line for no reason`);
+    }
   }
 
   console.log(`\n=== reading-surface: ${rows.length} items, ${problems.length} problem(s), ${jsErrors.length} JS error(s) ===`);
