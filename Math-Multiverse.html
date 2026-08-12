@@ -137,6 +137,15 @@
     display: flex;
     align-items: center;
     gap: 7px;
+    /* row-gap only, and only because the 44px hit-area extension below is 9px taller than the
+       35px control it sits on. This bar holds one row at the iPad's 1024px and wraps at narrower
+       widths (flex-wrap has always been on this rule, so wrapping is not confined to the 720px
+       query further down). Two wrapped rows 7px apart put their centres 42px apart, so two 44px
+       hit boxes would overlap by 2px and a tap in that band would reach whichever control painted
+       last rather than the one under the finger. 35 + 9 = 44 makes the boxes abut exactly and
+       never overlap. It costs nothing on the device that matters: with a single row there is no
+       row gap to spend. */
+    row-gap: 9px;
     flex-wrap: wrap;
     justify-content: flex-end;
   }
@@ -145,7 +154,30 @@
      "Reset" wrapped to a second row, inflating the header and stealing
      ~40px of vertical space from the play area below. Scoped to
      .profile-bar so other .icon-btn uses (e.g. modal Close) are untouched. */
-  .profile-bar .icon-btn { padding: 8px 9px; }
+  .profile-bar .icon-btn { padding: 8px 9px; position: relative; }
+  /* Constraint 6 puts the minimum touch target at 44px, and every control in this bar has painted
+     35px tall since that compaction: measured at 1024x768, btn-grade-5 68x35, btn-grade-6 66x35,
+     btn-stats 48x35, btn-preview 94x35, btn-rename 55x35, btn-export 57x35, btn-import 59x35,
+     btn-reset 51x35. The obvious remedy, min-height:44px, buys the target with 9px of play area on
+     the one device that matters -- which is exactly the trade this ticket was going to be ruled on.
+     It does not have to be paid. Only the HEIGHT was ever short (every control here is already
+     48px or wider), and a touch target is a HIT-TESTING REGION, not a painted box: this
+     pseudo-element is 44px tall, centred on the button, absolutely positioned so it contributes no
+     layout at all, and paints nothing, so the bar keeps its 35px look and its 35px height while the
+     finger gets its 44px. A pointer event landing on a pseudo-element resolves to the element that
+     generated it, so the button is still the event target and no handler changes.
+     `position: relative` above is what this is positioned against; without it the box would resolve
+     against the nearest positioned ancestor and land somewhere else entirely.
+     tests/touch-targets.js measures this with document.elementFromPoint, never with
+     getBoundingClientRect, because a geometry probe would read this fix as unapplied. */
+  .profile-bar .icon-btn::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: 50%;
+    height: 44px;
+    transform: translateY(-50%);
+  }
   .player-stats {
     display: flex;
     align-items: center;

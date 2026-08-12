@@ -1,7 +1,7 @@
 # Math Multiverse test harness
 
 The committed gates that protect `Math-Multiverse.html`.  `npm test` runs the ten unit suites
-followed by eleven gate scripts;  the same job runs in CI (`.github/workflows/validate.yml`,
+followed by twelve gate scripts;  the same job runs in CI (`.github/workflows/validate.yml`,
 job name `fuzz + smoke`, which is the required check) and blocks merges to `main`.
 
 ## What runs
@@ -11,7 +11,8 @@ job name `fuzz + smoke`, which is the required check) and blocks merges to `main
 | `npm run fuzz` | Every generated question, both grades, all levels, is mathematically correct. |
 | `npm run smoke` | The launcher and all six modules boot at Grade 5 and Grade 6 with zero JS errors. |
 | `npm run reading` | The read/respond surfaces are measured as PAINTED, not as authored. |
-| `npm test` | units, then validate-pack, figure-derive, freshness x3, shells, fuzz, smoke, figures-offline, reading-surface, tile-overlap. |
+| `npm run touch-targets` | Every header control is reachable by a 44px finger, measured by HIT-TESTING rather than by geometry. |
+| `npm test` | units, then validate-pack, figure-derive, freshness x3, shells, fuzz, smoke, figures-offline, reading-surface, tile-overlap, touch-targets. |
 
 Two tools are committed but deliberately **not** in `npm test`, because each needs a network
 origin and neither belongs in a hermetic gate:  `build/verify-deploy.js` (byte-compare what
@@ -59,6 +60,28 @@ PLAYWRIGHT_EXECUTABLE_PATH="C:\\Users\\...\\ms-playwright\\chromium-1223\\chrome
 ```
 
 In CI the browser is installed with `npx playwright install --with-deps chromium`.
+
+## How the touch-target gate works (`tests/touch-targets.js`)
+
+Constraint 6 puts the minimum touch target at 44px.  This gate measures the header controls with
+`document.elementFromPoint`, **never** with `getBoundingClientRect`, because a tap target is the
+region in which a tap reaches the control and not the box the control paints.  The two are only
+the same when nothing extends the hit region, and the fix this gate holds in place does exactly
+that:  a 44px-tall pseudo-element that contributes no layout and paints nothing, so the bar keeps
+the 35px height the 26-0708 one-row compaction bought and the play area pays nothing for the
+target.  A geometry probe would read that fix as unapplied;  a stylesheet probe would read it as
+applied whether or not the browser agreed.
+
+It probes a 5x5 grid over the required 44x44 box centred on each control, inset half a pixel so no
+probe sits on a boundary, and requires the control itself to be what comes back.  That one
+formulation catches all three failures at once:  too short, too narrow, and two expanded targets
+overlapping so a tap near an edge reaches the neighbour.
+
+Every run injects **both** fixture controls, per constraint 12.  A 35px button with no extension
+must FAIL the check (if it passes, the measurement cannot see a short target and the run is void)
+and a 60px button must PASS it (if it fails, the probe is not reaching the DOM).  Discovering zero
+controls is a failure, never a clean run.  The roster comes from a selector, not an id list, so a
+control added to that bar is covered the day it lands.
 
 ## How the level driver works (`tests/play-level.js`)
 
