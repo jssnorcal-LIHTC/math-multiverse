@@ -63,5 +63,8 @@ jobs:
       - name: Tile overlap (occlusion-corrected, explain tile never paints over sibling chrome)
         run: node tests/tile-overlap.js
 
+      - name: Touch targets (every header control reachable by a 44px finger, hit-tested)
+        run: node tests/touch-targets.js
+
       - name: Reduced motion (no SMIL in art; every animated asset stops under reduce)
         run: node tests/reduced-motion.js
