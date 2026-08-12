@@ -353,7 +353,11 @@
         "t4-ebsr-what-a-baseline-is",
         "t4-mc-what-the-gear-list-follows",
         "t4-ebsr-why-two-kits",
-        "t4-ebsr-arrival-week-trap"
+        "t4-ebsr-arrival-week-trap",
+        "l4-vis-which-post-is-wetter",
+        "l4-vis-read-both-panels",
+        "l4-vis-match-the-post",
+        "l4-vis-why-the-coast-is-steadier"
       ]
     },
     {
@@ -392,7 +396,11 @@
         "t5-ebsr-two-clocks-speeds",
         "t5-mc-day-length-transfer",
         "t5-ebsr-what-an-adaptation-limit-is",
-        "t5-ebsr-what-recovery-looks-like"
+        "t5-ebsr-what-recovery-looks-like",
+        "l5-vis-what-the-line-does",
+        "l5-vis-fledge-values",
+        "l5-vis-chart-shows",
+        "l5-vis-one-station-alone"
       ]
     },
     {
@@ -419,7 +427,7 @@
         "t6-hot-proposal-flaws",
         "t6-cloze-constraint-def",
         "t6-mc-fishery-regulation-transfer",
-        "t6-short-constraints-act-as",
+        "l6-vis-order-the-tests",
         "t6-ebsr-one-week-is-not-climate",
         "t6-hot-failing-one-gate",
         "t6-mc-fish-timing-interaction",
@@ -431,7 +439,11 @@
         "t6-ebsr-gates-not-scores",
         "t6-mc-what-the-board-is-for",
         "t6-ebsr-asking-for-an-easier-constraint",
-        "t6-ebsr-warning-rule-as-design"
+        "t6-ebsr-warning-rule-as-design",
+        "l6-vis-which-proposal-passes",
+        "l6-vis-panel-shows",
+        "l6-vis-two-figures-together",
+        "t6-short-constraints-act-as"
       ]
     }
   ],
@@ -5227,6 +5239,375 @@
         "4": "There is no photograph on this map. It is a drawn chart of symbols, letters and labelled lines."
       },
       "explain": "This is a surface analysis for a single morning. It carries front symbols, H and L pressure centres, and isobars labelled from 993 to 1016. It is not a forecast, and it holds no satellite picture."
+    },
+    {
+      "id": "l4-vis-which-post-is-wetter",
+      "type": "mc",
+      "passageId": "p-sable-cairn-decade",
+      "figureId": "fig-climographs",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 2,
+      "stem": "Read the rainfall panel. Which post gets more rain in an average year, and roughly how much more?",
+      "explain": "The rainfall panel gives one bar per post: Sable Flats at 9 inches a year, Cairn Bay at 42. Dividing 42 by 9 gives a little under five, so Cairn Bay gets close to five times the rain. The 68 and 33 belong to the other panel and are degrees of seasonal swing.",
+      "choices": [
+        "Cairn Bay, at 42 inches against Sable Flats' 9, so getting about twice as much.",
+        "Cairn Bay, at 42 inches against Sable Flats' 9, so getting close to five times as much.",
+        "Sable Flats, at 68 inches against Cairn Bay's 33.",
+        "Neither, because the two bars in the rainfall panel are the same height."
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "The post is right but the size is not. 42 against 9 is nearer five times than two.",
+        "2": "Those are the two seasonal swings, read off the other panel, and they are degrees rather than inches.",
+        "3": "They are far apart. The rainfall panel puts Sable Flats at 9 inches and Cairn Bay at 42."
+      }
+    },
+    {
+      "id": "l4-vis-read-both-panels",
+      "type": "cloze",
+      "passageId": "p-sable-cairn-decade",
+      "figureId": "fig-climographs",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 2,
+      "stem": "Sable Flats gets {{0}} inches of rain a year and swings {{1}} degrees between its seasons, while Cairn Bay swings only {{2}} degrees.",
+      "blanks": [
+        {
+          "choices": [
+            "9",
+            "42",
+            "68"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "42 inches is Cairn Bay's rainfall, the other bar in that panel.",
+            "2": "68 is a number of degrees from the swing panel, not a rainfall in inches."
+          }
+        },
+        {
+          "choices": [
+            "33",
+            "68",
+            "96"
+          ],
+          "key": 1,
+          "distractorRationale": {
+            "0": "33 degrees is Cairn Bay's swing, not Sable Flats'.",
+            "2": "96 degrees is Sable Flats' summer high from the notes, not the size of its swing."
+          }
+        },
+        {
+          "choices": [
+            "33",
+            "68",
+            "41"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "68 degrees is Sable Flats' swing. Cairn Bay's is the smaller of the two.",
+            "2": "41 degrees is Cairn Bay's winter low from the notes, not its swing."
+          }
+        }
+      ],
+      "explain": "Each panel holds one bar per post. Rainfall gives Sable Flats 9 inches and Cairn Bay 42. Seasonal swing gives Sable Flats 68 degrees and Cairn Bay 33. The 96 and 41 come from the notes underneath and are a summer high and a winter low, not swings."
+    },
+    {
+      "id": "l4-vis-match-the-post",
+      "type": "match",
+      "passageId": "p-sable-cairn-decade",
+      "figureId": "fig-climographs",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 3,
+      "stem": "Match each reading to the post the chart gives it to.",
+      "rowLabels": [
+        "9 inches of rain in an average year",
+        "A 33 degree swing between seasons",
+        "A driest year on record of 5 inches"
+      ],
+      "colLabels": [
+        "Sable Flats",
+        "Cairn Bay"
+      ],
+      "key": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "explain": "Two of these belong to the dry inland post and one to the coast. Sable Flats takes the 9 inches of average rain and the 5 inch driest year; Cairn Bay takes the 33 degree swing, the smaller of the two swings on the chart."
+    },
+    {
+      "id": "l4-vis-why-the-coast-is-steadier",
+      "type": "mc",
+      "passageId": "p-two-posts-one-latitude",
+      "figureId": "fig-latitude-currents",
+      "targets": [
+        "sci-t4-climate-patterns"
+      ],
+      "coachTopic": "evidence-long-pattern",
+      "dok": 3,
+      "stem": "Both posts sit at the same latitude and get the same sun angle. What does the diagram give as the reason their climates differ?",
+      "explain": "The diagram holds latitude constant on purpose, then shows what is left: Cairn Bay on the coast with a current nearby, Sable Flats well inland in dry continental air, and a wind belt that comes off the ocean and drops its moisture before it gets inland. Position relative to the ocean is the whole answer.",
+      "choices": [
+        "One is much further north, so it gets a lower sun angle all year.",
+        "One sits at a much higher elevation than the other.",
+        "One sits on the coast with a current nearby, and the other sits well inland in dry continental air.",
+        "The wind belt blows off the ocean and reaches both posts equally wet."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "The diagram says the opposite in as many words: same latitude, same sun angle all year. Latitude is the thing held equal here.",
+        "1": "Elevation is never drawn or labelled anywhere on this diagram.",
+        "3": "The diagram says the wind arrives far drier inland, having dropped its moisture along the way."
+      }
+    },
+    {
+      "id": "l5-vis-what-the-line-does",
+      "type": "mc",
+      "passageId": "p-toussaint-adaptation-memo",
+      "figureId": "fig-warming-curves",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 2,
+      "stem": "Read the fledge-rate line across the thirty seasons. What does it do?",
+      "explain": "The line gives four readings: 76 percent at season 1, then 64, then 52, then 39. Every step is lower than the one before, and the last is about half the first rather than close to nothing.",
+      "choices": [
+        "It falls, then recovers a little by season 30.",
+        "It holds steady until about season 20, then drops sharply.",
+        "It drops almost to zero by season 30.",
+        "It falls at every step, from 76 percent down to 39."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "There is no recovery. The four readings run 76, 64, 52, 39, each lower than the one before.",
+        "1": "It is already down to 64 by season 10 and 52 by season 20. The fall starts immediately.",
+        "2": "It ends at 39 percent, which is a serious fall but nowhere near zero. The axis runs to 100, so the height is easy to read honestly."
+      }
+    },
+    {
+      "id": "l5-vis-fledge-values",
+      "type": "cloze",
+      "passageId": "p-toussaint-adaptation-memo",
+      "figureId": "fig-warming-curves",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 2,
+      "stem": "The fledge rate starts at {{0}} percent in season 1 and ends at {{1}} percent in season 30, which is roughly {{2}} of where it began.",
+      "blanks": [
+        {
+          "choices": [
+            "64",
+            "76",
+            "52"
+          ],
+          "key": 1,
+          "distractorRationale": {
+            "0": "64 percent is the season 10 reading, one step in.",
+            "2": "52 percent is the season 20 reading, two steps in."
+          }
+        },
+        {
+          "choices": [
+            "39",
+            "52",
+            "30"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "52 percent is the season 20 reading. The line keeps falling after it.",
+            "2": "30 is the last season number on the bottom axis, not a fledge rate."
+          }
+        },
+        {
+          "choices": [
+            "half",
+            "a fifth",
+            "a tenth"
+          ],
+          "key": 0,
+          "distractorRationale": {
+            "1": "A fifth is what the fall looks like if the axis is read as though it started at 30 rather than 0. Against the real 0 to 100 axis, 39 is about half of 76.",
+            "2": "A tenth of 76 would be under 8 percent. The line ends at 39."
+          }
+        }
+      ],
+      "explain": "The line runs 76, 64, 52, 39. Dividing 39 by 76 gives just over one half, so the colony's fledge rate ends at roughly half of where it started. The axis runs from 0 to 100, so the shape on the page matches that arithmetic instead of exaggerating it."
+    },
+    {
+      "id": "l5-vis-chart-shows",
+      "type": "ms",
+      "passageId": "p-toussaint-adaptation-memo",
+      "figureId": "fig-warming-curves",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 3,
+      "stem": "Choose the three things this chart and its notes actually tell you.",
+      "choices": [
+        "The fledge rate is lower at every reading than at the one before.",
+        "In season 1 the chicks hatched about eight days after the herring arrived.",
+        "By season 30 the chicks hatched about three weeks before the herring arrived.",
+        "The herring now arrive about a month later than they used to.",
+        "The colony will die out within the next ten seasons."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "The notes say the opposite about the herring: their arrival holds near April 21 every season, drifting only about three days either way. It is the chicks whose timing moved.",
+        "4": "The chart stops at season 30 and predicts nothing. A falling line is not a forecast of when it reaches zero."
+      },
+      "explain": "Three of these are on the chart or in its notes: the fall at every step, the eight days after in season 1, and the three weeks before by season 30. The herring did not move, which is the whole point, and nothing here forecasts an end date."
+    },
+    {
+      "id": "l5-vis-one-station-alone",
+      "type": "mc",
+      "passageId": "p-network-synthesis",
+      "figureId": "fig-network-map",
+      "targets": [
+        "sci-t5-warming-adaptation"
+      ],
+      "coachTopic": "evidence-breaking-point",
+      "dok": 3,
+      "stem": "The diagram is titled so that one station cannot see the pattern alone. Which detail on it explains why?",
+      "explain": "The diagram separates two behaviours. Temperature climbs overall but bounces year to year, so a short local record can show a fall that is not the pattern. Carbon dioxide and fuel-use climb together and never reverse. Putting three stations side by side is what makes the bouncing average out.",
+      "choices": [
+        "Temperature climbs overall while still bouncing year to year, so a single station's run of years can point either way.",
+        "Only Network Command records temperature, and the stations record nothing.",
+        "The three stations are too far apart to compare with one another.",
+        "Carbon dioxide reverses direction often, so no station can trust its own readings."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The diagram says every station logs temperature and carbon dioxide. Command adds a fuel-use index on top of that.",
+        "2": "Distance is never given on the diagram, and the whole point is that their records are compared.",
+        "3": "The diagram says carbon dioxide and fuel-use climb on almost the same line and never reverse. It is temperature that bounces."
+      }
+    },
+    {
+      "id": "l6-vis-which-proposal-passes",
+      "type": "mc",
+      "passageId": "p-final-deployment-proposals",
+      "figureId": "fig-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 3,
+      "stem": "Read down the three cards. Which proposal carries a YES on all three tests?",
+      "explain": "Only Proposal A carries YES on all three tests: within budget, within authority, and a real effect while it runs. That is not the same as being the best plan, and the card says so itself: the effect ends when the station stops. B is aimed at the wrong cause, and C is the right fix with the wrong timeline and reach.",
+      "choices": [
+        "Proposal C, the petition to delay the herring season",
+        "Proposal A, the feeding station",
+        "Proposal B, the fencing",
+        "None of them, because every card carries at least one NO"
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "C carries two NOs: it takes over four months, which runs past one season, and it sits outside the Network’s own authority. Its own card calls it the right fix with the wrong timeline and reach.",
+        "2": "B carries a NO of its own: the chicks are starving rather than being taken by predators, so fencing is fast and cheap but aimed at the wrong cause.",
+        "3": "One card has no NO on it. Proposal A is YES on budget, YES on authority and YES on effect while it runs."
+      }
+    },
+    {
+      "id": "l6-vis-panel-shows",
+      "type": "ms",
+      "passageId": "p-final-deployment-proposals",
+      "figureId": "fig-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 3,
+      "stem": "Choose the three statements that describe how this comparison panel is built.",
+      "choices": [
+        "Every proposal is checked against the same three tests.",
+        "One of the three tests is whether the plan has an effect within one season.",
+        "Card B shows no verdict at all for the authority test.",
+        "Each proposal is checked against whichever tests suit it best.",
+        "Every card carries a YES on at least two of the three tests."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "That would defeat the point of a comparison panel. The header names three tests and every card is read down the same three.",
+        "4": "Card C carries only one YES, against two NOs, so this is not true of every card."
+      },
+      "explain": "The header names the three tests and every card is read down the same three, one of which is whether the plan has an effect within one season. Card B simply has no authority verdict on it, which the panel leaves empty rather than inventing. And card C carries only one YES, so no rule about \"at least two\" holds across all three."
+    },
+    {
+      "id": "l6-vis-order-the-tests",
+      "type": "order",
+      "passageId": "p-final-deployment-proposals",
+      "figureId": "fig-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 2,
+      "stem": "The panel's header lists the three tests in a fixed order. Put them in the order the header gives.",
+      "tiles": [
+        "Cost within budget",
+        "Effect within one season",
+        "The Network's own authority"
+      ],
+      "key": [
+        1,
+        0,
+        2
+      ],
+      "explain": "The header reads: effect within one season, cost within budget, the Network's own authority. Every card is then read down that same order, which is what lets three proposals be compared at all."
+    },
+    {
+      "id": "l6-vis-two-figures-together",
+      "type": "mc",
+      "passageId": "p-final-deployment-proposals",
+      "figureId": "fig-proposals",
+      "targets": [
+        "sci-t6-design-evaluate"
+      ],
+      "coachTopic": "evidence-final-deployment",
+      "dok": 3,
+      "stem": "The proposals panel tests each plan for an effect within one season. The fledge-rate chart shows a decline measured across thirty seasons. What does putting those two together tell you about Proposal A, the feeding station?",
+      "explain": "Read the two together and the mismatch is in the timescales. The panel measures each proposal by what it does within one season, and records that A's effect ends when the station stops. The chart measures a fall across thirty seasons. A can help while it runs and still leave the long decline untouched.",
+      "choices": [
+        "It solves the decline, because the chart's fall is only about half and a feeding station covers that.",
+        "It fails the budget test, which is why the chart keeps falling.",
+        "It can help while it runs, but a one-season effect does not answer a thirty-season decline.",
+        "The two cannot be compared, because one is a chart and the other is a panel."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "The panel itself records that A's effect ends when the station stops. Something that stops is not a match for a trend measured across thirty seasons.",
+        "1": "The panel puts A within budget. The chart's fall has nothing to do with what a proposal costs.",
+        "3": "They are measured in the same unit that matters here, time. One tests an effect over a season; the other measures a change over thirty."
+      }
     }
   ],
   "figures": [
@@ -5560,11 +5941,12 @@
       "dataTable": {
         "type": "features",
         "items": [
-          "A three-column comparison titled \"Three proposals for Halyard Point\".",
-          "Every proposal is checked against the same three tests: effect within one season, cost within budget, and the Network’s own authority.",
-          "Proposal A is a feeding station: within budget, within authority, and it has a real effect while it runs, but the effect ends when the station stops.",
-          "Proposal B is fencing: within budget, and its authority row is not stated on the card.",
-          "Proposal C is the only one whose column is filled for every test."
+          "A three-card comparison titled \"Three proposals for Halyard Point\".",
+          "The header states that every proposal is checked against three tests: effect within one season, cost within budget, and the Network’s own authority.",
+          "Proposal A, a feeding station, carries YES on all three: within budget, within authority, and a real effect while it runs. Its card adds that the effect ends when the station stops.",
+          "Proposal B, fencing, carries YES within budget and YES ready in days, and a NO reading \"starving chicks, not predators\". Its card sums it up as fast and cheap, wrong cause.",
+          "Proposal C, a petition to delay the herring season, carries YES it closes the mismatch at its root, NO it takes over four months and so runs past one season, and NO it is outside the Network’s own authority. Its card sums it up as the right fix, wrong timeline and reach.",
+          "Card B shows no verdict for the authority test at all."
         ]
       }
     },
