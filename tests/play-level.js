@@ -51,7 +51,7 @@ const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css
 // ---------------------------------------------------------------- args
 
 function parseArgs(argv) {
-  const out = { base: null, pack: 'firsthand-g6', level: 0, wrong: 0, json: false };
+  const out = { base: null, pack: 'firsthand-g6', level: 0, wrong: 0, json: false, unlock: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--base') out.base = String(argv[++i] || '').replace(/\/+$/, '');
@@ -59,6 +59,7 @@ function parseArgs(argv) {
     else if (a === '--level') out.level = Number(argv[++i]);
     else if (a === '--wrong') out.wrong = Number(argv[++i]);
     else if (a === '--json') out.json = true;
+    else if (a === '--unlock') out.unlock = true;
     else if (a === '--help' || a === '-h') { usage(0); }
     else { console.error('play-level: unknown argument ' + a); usage(2); }
   }
@@ -68,7 +69,7 @@ function parseArgs(argv) {
 }
 
 function usage(code) {
-  console.error('usage: node tests/play-level.js [--base <url>] [--pack <id>] [--level <n>] [--wrong <n>] [--json]');
+  console.error('usage: node tests/play-level.js [--base <url>] [--pack <id>] [--level <n>] [--wrong <n>] [--unlock] [--json]');
   process.exit(code);
 }
 
@@ -412,6 +413,27 @@ const READ_CARD = () => {
     const page = await browser.newPage({ viewport: VIEWPORT });
     const jsErrors = [];
     page.on('pageerror', (e) => jsErrors.push(String(e.message)));
+
+    // --unlock is SETUP, never an assertion shortcut:  a pack level card is open only when
+    // `i <= levelsCleared` (Math-Multiverse.html's renderPackLevels), and pack levels do NOT
+    // honour Preview Mode, which lives in a different save store entirely.  Without this the
+    // driver could only ever reach level 1 of any pack, so the 12-question L6 levels and the
+    // shorttext items that appear only from L3 up would be permanently untestable.  Seeded via
+    // addInitScript so it lands before PackSave.load() reads the key;  nothing about the reward
+    // card is seeded, only which door is unlocked.
+    if (args.unlock && args.level > 0) {
+      await page.addInitScript(([packId, cleared]) => {
+        try {
+          localStorage.setItem('multiverse.packs.v1', JSON.stringify({
+            version: 1,
+            packs: { [packId]: { levelsCleared: cleared, levelStars: [], levelBest: [] } },
+            analytics: { perTopic: {}, recentMistakes: [], coachShown: {}, totalAttempted: 0, totalCorrect: 0 },
+            lastSaved: 0,
+          }));
+        } catch (e) { /* private mode: the level will simply read as locked and the run fails loudly */ }
+      }, [args.pack, args.level]);
+      note(`setup: seeded levelsCleared=${args.level} for ${args.pack} so level ${args.level + 1} is reachable`);
+    }
 
     await page.goto(`${base}/Math-Multiverse.html`, { waitUntil: 'networkidle' });
 
