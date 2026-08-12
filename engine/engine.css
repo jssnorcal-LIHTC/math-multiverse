@@ -61,7 +61,18 @@
    painted on the border box, so it stays put while the content scrolls underneath, which an
    absolutely positioned child of a scroll container does not. */
 .mv-passage[data-clipped] { box-shadow: inset 0 -20px 15px -15px rgba(0,0,0,0.92); }
-.mv-passage-title { font-weight: 700; margin-bottom: 6px; color: var(--mv-color, #7aa8ff); }
+/* Phase R, task 5.  The raw accent fails WCAG AA as a passage title against every skin ground:
+   measured 2.50:1 to 3.59:1 across all 55 pack-accent x docKind combinations, against a 4.5:1
+   floor (700 weight at roughly 16px is under WCAG's 18.66px-bold "large text" exemption, so 3:1
+   does not apply).  Pre-existing, and carried into this phase rather than left as its own ticket
+   because this is the title of the surface phase R restyles, and the tinted grounds are a harder
+   background set than the one it was already failing against.
+   Same remedy V1 gave the register band directly above it: mix the accent toward white far
+   enough to clear the floor while the title still reads as that pack's colour rather than
+   collapsing to one hue for every pack.  tests/reading-surface.js sweeps all 55 combinations and
+   fails under 4.5:1, so this number cannot drift as skins or accents change. */
+.mv-passage-title { font-weight: 700; margin-bottom: 6px;
+  color: color-mix(in oklab, var(--mv-color, #7aa8ff) 55%, white); }
 .mv-para { margin: 0 0 8px; line-height: 1.5; font-size: 0.95rem; }
 
 /* Figure strip: capped so prose stays dominant; it scrolls WITH the passage, so the

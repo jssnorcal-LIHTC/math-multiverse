@@ -57,6 +57,14 @@ const SLIT_PX = 100;
 
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json' };
 
+// Phase R, task 5.  Imported from the validator rather than re-listed, so a kind added there and
+// not here cannot leave a skin whose title contrast was never measured.
+const { DOC_KINDS: DOC_KINDS_FOR_CONTRAST } = require('./validate-pack.js');
+// .mv-passage-title is 700 weight at roughly 16px, which is under WCAG's 18.66px-bold "large
+// text" exemption, so the floor is 4.5:1 and not 3:1.  Same reasoning the band's own rule
+// records for itself in engine.css.
+const TITLE_CONTRAST_FLOOR = 4.5;
+
 function startServer() {
   return new Promise((resolve) => {
     const server = http.createServer((req, res) => {
@@ -93,6 +101,7 @@ function startServer() {
 
   const rows = [];
   const perPackCounts = [];
+  const titleContrasts = [];
 
   for (const entry of manifestPacks) {
     // Return to the launcher and select this pack's own grade before looking for its card: a prior
@@ -121,6 +130,85 @@ function startServer() {
     });
     await page.waitForSelector('.mv-passage, .mv-item', { timeout: 8000 });
     await page.waitForTimeout(700);
+
+    // ---- phase R, task 5: passage-title contrast, swept ONCE per pack over every skin ----
+    // Pre-existing and carried into this phase because it is literally the title of the surface
+    // being restyled, and leaving a known defect as a separate ticket while rewriting its own
+    // neighbourhood is how it survives the rewrite.
+    //
+    // The band above it was already fixed in V1 by mixing the accent toward white; the title was
+    // not, and still paints the raw accent. Now the passage grounds are TINTED, which is a
+    // different and harder background set than the one it failed against, so the number is
+    // re-measured here rather than ported.
+    //
+    // Composited the same way V1's band measurement was: the app frame's own colour, then the
+    // passage's background-color wash, then the docKind tint carried in background-image. Both
+    // layers are read from computed style, so a token change moves this measurement with it.
+    //
+    // WHAT THIS MEASUREMENT CANNOT SEE, found by mutating it rather than by reasoning: if the
+    // title's colour becomes invalid at computed-value time (a var() with no fallback, a token
+    // deleted), `color` is an inherited property, so it falls back to the inherited near-white
+    // and this sweep reports a comfortable 13.26:1 and passes. The gate proves the title is
+    // READABLE. It does not prove the title still carries its pack's accent, and no contrast
+    // measurement can, because losing a hue toward white improves the very number being checked.
+    const titleContrast = await page.evaluate((kinds) => {
+      // Canvas-resolved, not regex-parsed. A computed `color-mix(in oklab, ...)` does NOT come
+      // back as rgb() in Chromium, so a /rgba?\(/ parse returns null and the whole measurement
+      // silently loses its foreground -- which is exactly how this probe failed first time.
+      // Painting the colour and reading the pixel resolves ANY css colour, including color-mix,
+      // color(srgb ...) and named colours, which is the same technique V1's band measurement used.
+      const cvs = document.createElement('canvas');
+      cvs.width = cvs.height = 1;
+      const ctx = cvs.getContext('2d', { willReadFrequently: true });
+      ctx.globalCompositeOperation = 'copy';
+      const resolve = (css) => {
+        if (!css) return null;
+        ctx.fillStyle = '#000';
+        ctx.fillStyle = css;              // invalid input leaves the previous value, caught below
+        if (ctx.fillStyle === '#000000' && !/^(#000000|black|rgba?\(0,\s*0,\s*0)/i.test(css)) return null;
+        ctx.fillRect(0, 0, 1, 1);
+        const d = ctx.getImageData(0, 0, 1, 1).data;
+        return { r: d[0], g: d[1], b: d[2], a: d[3] / 255 };
+      };
+      // A skin tint arrives as `linear-gradient(rgba(...), rgba(...))`; take its first stop, which
+      // is flat by construction (both stops are the same colour).
+      const parse = (s) => {
+        if (!s || s === 'none') return null;
+        const m = /rgba?\([^)]+\)/.exec(s);
+        return resolve(m ? m[0] : s);
+      };
+      const over = (fg, bg) => fg ? {
+        r: fg.a * fg.r + (1 - fg.a) * bg.r,
+        g: fg.a * fg.g + (1 - fg.a) * bg.g,
+        b: fg.a * fg.b + (1 - fg.a) * bg.b, a: 1,
+      } : bg;
+      const lum = (c) => {
+        const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+        return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b);
+      };
+      const ratio = (a, b) => { const x = lum(a), y = lum(b); const hi = Math.max(x, y), lo = Math.min(x, y); return (hi + 0.05) / (lo + 0.05); };
+
+      const box = document.querySelector('.mv-passage');
+      const title = document.querySelector('.mv-passage-title');
+      const frame = document.querySelector('.host-frame') || document.querySelector('#app') || document.body;
+      if (!box || !title) return null;
+      const frameBg = parse(getComputedStyle(frame).backgroundColor) || { r: 8, g: 9, b: 11, a: 1 };
+      const prev = box.dataset.dockind;
+      const out = [];
+      for (const k of kinds) {
+        box.dataset.dockind = k;
+        const cs = getComputedStyle(box);
+        const wash = parse(cs.backgroundColor);
+        const tint = parse(cs.backgroundImage);      // the skin's flat linear-gradient
+        const ground = over(tint, over(wash, frameBg));
+        const fg = resolve(getComputedStyle(title).color);
+        if (!fg || !ground) { out.push({ kind: k, ratio: null, unresolved: true }); continue; }
+        out.push({ kind: k, ratio: +ratio(fg, ground).toFixed(2) });
+      }
+      if (prev === undefined) delete box.dataset.dockind; else box.dataset.dockind = prev;
+      return out;
+    }, DOC_KINDS_FOR_CONTRAST);
+    titleContrasts.push({ pack: entry.id, rows: titleContrast });
 
     const items = await page.evaluate(async (packId) => {
       window.__pack = await (await fetch(`packs/${packId}.json`)).json();
@@ -287,6 +375,30 @@ function startServer() {
       // Positive: a register must override that literal in the painted result.
       if (!/PHASE R PROBE/.test(b.overridden)) {
         problems.push(`${tag}: register did not override the band; it painted ${b.overridden}. The override rule is losing to a skin literal.`);
+      }
+    }
+  }
+
+  // ---- phase R, task 5: report and gate the swept title contrast ----
+  console.log('\npassage-title contrast against each skin ground (floor ' + TITLE_CONTRAST_FLOOR + ':1):');
+  for (const t of titleContrasts) {
+    if (!t.rows) { problems.push(`${t.pack}: title contrast could not be measured`); continue; }
+    // COMPLETENESS, asserted rather than assumed. A sweep that silently measures fewer
+    // combinations than there are skins reports clean on nothing, which this program bans
+    // outright (constraint 12). This is a live assertion and not a dead defensive branch: it
+    // compares against validate-pack's own DOC_KINDS, so dropping a kind from either side fails.
+    const unresolved = t.rows.filter((r) => r.ratio === null);
+    for (const r of unresolved) problems.push(`${t.pack}: title contrast unresolved for the ${r.kind} ground -- that combination was never measured`);
+    const measured = t.rows.filter((r) => r.ratio !== null);
+    if (measured.length !== DOC_KINDS_FOR_CONTRAST.length) {
+      problems.push(`${t.pack}: title contrast measured ${measured.length} of ${DOC_KINDS_FOR_CONTRAST.length} skins -- the sweep is incomplete, so a skin exists whose contrast nothing checked`);
+    }
+    if (!measured.length) { problems.push(`${t.pack}: no title-contrast combination resolved at all`); continue; }
+    const worst = measured.reduce((m, r) => (r.ratio < m.ratio ? r : m), measured[0]);
+    console.log(`  ${t.pack.padEnd(22)} worst ${String(worst.ratio).padStart(5)}:1 on ${worst.kind}  (${measured.length}/${t.rows.length} skins measured)`);
+    for (const r of measured) {
+      if (r.ratio < TITLE_CONTRAST_FLOOR) {
+        problems.push(`${t.pack}: .mv-passage-title is ${r.ratio}:1 against the ${r.kind} ground, under the ${TITLE_CONTRAST_FLOOR}:1 floor`);
       }
     }
   }
