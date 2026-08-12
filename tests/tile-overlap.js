@@ -278,6 +278,11 @@ function overTileScanInPage(px) {
     visible: real.visible,
     sampled: real.sampled,
     over: real.over,
+    // A tile with no visible area cannot be sampled, so the control cannot be caught either. That
+    // is a DIFFERENT condition from a control that was missed while there was something to catch,
+    // and conflating the two reports "the scan is broken" for what is really "the child cannot see
+    // this tile". Separated so each says what it means.
+    noVisibleArea: real.sampled === 0,
     controlCaught: controlled.over.some((o) => /tile-overlap-control/.test(o.selector)),
   };
 }
@@ -441,7 +446,9 @@ function overTileScanInPage(px) {
         if (unpainted.length) {
           problems.push(`${modId} g${grade} [${label} tile]: ${unpainted.length} of ${rev.sampled} points inside the tile's visible box resolve to an ANCESTOR, so the tile is not painting where its own box says it is`);
         }
-        if (!rev.controlCaught) {
+        if (rev.noVisibleArea) {
+          problems.push(`${modId} g${grade} [${label} tile]: the explain tile has NO VISIBLE AREA (${rev.visible.w}x${rev.visible.h} after clipping) -- it exists, but every pixel of it is outside its own scroll container, so the child is being shown an explanation they cannot see. Nothing could be sampled here, so occlusion was not measured either.`);
+        } else if (!rev.controlCaught) {
           problems.push(`${modId} g${grade} [${label} tile]: the reverse scan's POSITIVE CONTROL was not caught -- a box deliberately painted over the tile went unnoticed, so "nothing is over the tile" above means nothing`);
         }
         note(`${modId} g${grade} [${label} tile]: settled reverse scan ${rev.sampled} point(s) over a ${rev.visible.w}x${rev.visible.h} visible tile, ${occluders.length} occluder(s), control ${rev.controlCaught ? 'CAUGHT' : 'MISSED'}`);
