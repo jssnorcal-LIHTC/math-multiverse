@@ -28,6 +28,14 @@
     --bg-card: #15181f;
     --bg-elevated: #1d2129;
     --bg-hover: #252934;
+    /* The pack engine's respond panel (.mv-item), and nothing else.  Its own token rather than
+       --bg-elevated, which six shell rules also use: phase R made the respond zone a raised
+       console against the passage's recessed sheet, and that step has to be measured against the
+       passage's TINTED grounds, which no other surface in this app sits beside.  Raising
+       --bg-elevated to clear those would have moved module cards, the stats card and the f1
+       driver chips along with it, none of which have the problem.  The number is not a taste
+       call;  see engine.css's .mv-item rule and the sweep in tests/reading-surface.js. */
+    --mv-respond: #2f3542;
 
     --border-subtle: rgba(255,255,255,0.06);
     --border-strong: rgba(255,255,255,0.14);

@@ -341,9 +341,44 @@
    is what absorbs it: the passage grows into whatever is left and clamps at its floor.
    tests/reading-surface.js measures the rendered result across all 720 items and is the gate
    that catches this if the budget is overspent. */
+/* Phase R follow-up (ticket 1.1, 26-0812): the tonal step above was measured and it was not
+   there.  Phase R compared .mv-item's --bg-elevated against the passage's UNTINTED wash and got a
+   step;  what it never measured was the same comparison against the three docKind grounds that
+   carry a tint.  Composited and measured in a real browser at 1024x768, against the app frame's
+   own rgb(14,16,21):
+
+     passage, no tint / 8 of the 11 kinds   rgb(22,23,28)   L 0.00884
+     passage, recovered-entry               rgb(41,40,37)   L 0.02121
+     passage, case-file                     rgb(46,38,33)   L 0.02107
+     passage, field-manual                  rgb(23,44,40)   L 0.02166
+     .mv-item, --bg-elevated                rgb(29,33,41)   L 0.01509
+
+   So the console was 1.106:1 above the untinted sheet and 1.09 to 1.10:1 BELOW all three tinted
+   ones.  On 37 of the 85 dressed passages the raised console was the darker surface of the two,
+   which is the intended relationship pointing backwards, and every one of those ratios is inside
+   the range a dark theme reads as "the same material".  Niall's original report was that the text
+   he reads and the responses were not separated;  the ground step answering it was worth about
+   one percent of luminance.
+
+   The floor is 1.15:1 in the SAME direction on every skin, and it is this repo's own number: the
+   docKind tints were tuned by measuring composited luminance against a 1.15 to 1.25:1
+   perceptible-on-this-theme target (see the tint comments below).  A separation that has to
+   survive a dimmed iPad at arm's length does not get a weaker bar than a background tint did.
+   --mv-respond lands the worst case at 1.192:1 (field-manual, the lightest ground) and the best
+   at 1.459:1, lighter than every skin with no inversion left anywhere.
+
+   Cool, not neutral: the warm-against-cool cue between a warm document tint and a cool console is
+   half of what carries this for a reader who cannot separate the two by lightness, so the token
+   keeps --bg-elevated's hue family and only raises its lightness.  The other cues are unchanged
+   and still load-bearing on their own: the 2px accent top edge, the 1px --border-strong edge, the
+   8px gap and the padding.  Kill any one of them and the separation survives.
+
+   Colour is measured, not asserted: tests/reading-surface.js sweeps all 12 grounds against the
+   painted item ground on every pack and fails under the floor, with a negative control that
+   proves the sweep can still fail. */
 .mv-item {
   flex: 0 1 auto; min-height: 0; overflow-y: auto;
-  background: var(--bg-elevated);
+  background: var(--mv-respond);
   border: 1px solid var(--border-strong);
   border-top: 2px solid var(--mv-color, #7aa8ff);
   border-radius: 8px;
