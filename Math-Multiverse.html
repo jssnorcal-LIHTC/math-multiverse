@@ -12105,7 +12105,14 @@ function watchExplainTiles() {
         if (!tile || !tile.scrollIntoView) continue;
         // One frame, so the tile has laid out before it is measured against the fold. Same
         // reasoning as attachExplainNext's later0.
-        requestAnimationFrame(() => tile.scrollIntoView({ behavior: 'smooth', block: 'nearest' }));
+        //
+        // `auto`, not `smooth`, and the difference matters here in a way it does not there. On the
+        // correct path this tile lives about 1.5s before the level auto-advances, and a smooth
+        // scroll spends a quarter of that moving rather than being read. It also leaves the tile in
+        // motion for a few hundred milliseconds, which any measurement taken during that window
+        // reads as a tile that is not where its own box says it is -- a flake this change caused in
+        // tests/tile-overlap.js before the scroll was made instant.
+        requestAnimationFrame(() => tile.scrollIntoView({ behavior: 'auto', block: 'nearest' }));
       }
     }
   }).observe(host, { childList: true, subtree: true });
