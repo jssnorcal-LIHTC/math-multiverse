@@ -524,11 +524,19 @@ const READ_CARD = () => {
     }
 
     // ---- assertions ----
-    // A run that earns NOTHING must produce no artifact at all:  renderRevealCard returns false
-    // at foundRatio 0 and showPackLevelComplete does not even emit the #lc-reveal host, because
-    // handing out a reward for a level nobody answered would make the reveal meaningless.  This
-    // is a third expected state, not a failure, so --wrong <every question> asserts the absence.
-    if (ratio <= 0) {
+    // A level that declares NO reveal must produce no card and no host.  Three of the five
+    // shipped packs carry no figures at all, so this is the majority case, not an edge one, and
+    // the first cut of this file got it wrong:  it reported "no .mv-rv-card" as a problem on a
+    // level that had played perfectly, which is a defect in the PROBE reported as a defect in
+    // the app.  The absence is asserted rather than skipped, because a driver that quietly
+    // checks nothing and prints CLEAN is the "validator that finds no packs must fail" hazard
+    // this repo already encodes elsewhere.
+    const declaresReveal = !!(level && level.reveal);
+    if (!declaresReveal) {
+      if (c.present) problems.push('a reward card rendered on a level that declares no reveal');
+      if (c.hostPresent) problems.push('#lc-reveal host was emitted on a level that declares no reveal');
+      if (!args.json) console.log(`level declares NO reveal, so absence is the contract: card=${c.present}, host=${c.hostPresent}`);
+    } else if (ratio <= 0) {
       if (c.present) problems.push('a reward card rendered on a run that earned zero cells');
       if (c.hostPresent) problems.push('#lc-reveal host was emitted on a run that earned zero cells');
       if (!args.json) console.log(`reward card correctly ABSENT at foundRatio 0 (host emitted: ${c.hostPresent})`);
@@ -556,9 +564,14 @@ const READ_CARD = () => {
 
     const typesPlayed = [...new Set(served.map((s) => s.type))].sort();
     console.log(`=== play-level: ${args.pack} L${args.level + 1} played ${served.length}/${total} to the end;  types operated: ${typesPlayed.join(', ')} ===`);
+    // Name WHICH contract was checked.  A reveal-less level printing "reward card CLEAN" would
+    // read as if the twelve-tile card had been verified when nothing of the sort happened.
+    const contract = !declaresReveal ? 'no-reveal contract (card and host both absent)'
+      : ratio <= 0 ? 'zero-earned contract (card and host both absent)'
+        : `reward card (${expectTiles}/12 tiles, magnifier ${expectFull})`;
     console.log(problems.length
       ? `=== play-level: ${problems.length} problem(s) ===\n  ${problems.join('\n  ')}`
-      : '=== play-level: reward card CLEAN ===');
+      : `=== play-level: ${contract} CLEAN ===`);
     exitCode = problems.length ? 1 : 0;
   } catch (e) {
     console.error('play-level: ' + (e && e.message ? e.message : String(e)));
