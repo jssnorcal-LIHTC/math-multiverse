@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
+  <!-- POSITIVE CONTROL for the rendered half: a CSS animation with NO reduced-motion gate, so it
+       must measure MOVED at both preferences. It is what proves a STILL reading means the gate
+       inside the asset fired, rather than the probe failing to capture anything. -->
+  <style>
+    .m { stroke-dasharray: 20 40; animation: go 1s linear infinite; }
+    @keyframes go { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 60; } }
+  </style>
+  <path class="m" d="M 10 20 L 110 20" fill="none" stroke="#1a8f5e" stroke-width="8"/>
+</svg>
