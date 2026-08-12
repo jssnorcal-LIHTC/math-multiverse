@@ -36,8 +36,8 @@
 <text x="400" y="235" font-size="15" fill="#0f1218" text-anchor="middle" font-weight="700">Network</text>
 <text x="400" y="253" font-size="15" fill="#0f1218" text-anchor="middle" font-weight="700">Command</text>
 
-<text x="400" y="440" font-size="15" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">Every station logs temperature, carbon dioxide,</text>
-<text x="400" y="460" font-size="15" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">and a fuel-use index, to Network Command.</text>
-<text x="400" y="482" font-size="15" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">Temperature bounces year to year, but carbon dioxide</text>
-<text x="400" y="502" font-size="15" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">and fuel-use climb the same amount and never reverse.</text>
+<text x="400" y="440" font-size="15" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">Every station logs temperature and carbon dioxide.</text>
+<text x="400" y="460" font-size="15" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">Command also tracks a fuel-use index for stations and supply runs.</text>
+<text x="400" y="482" font-size="15" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">Temperature climbs overall, even while bouncing year to year.</text>
+<text x="400" y="502" font-size="15" fill="#e8eef7" fill-opacity="0.85" text-anchor="middle">Carbon dioxide and fuel-use climb on almost the same line and never reverse.</text>
 </svg>
