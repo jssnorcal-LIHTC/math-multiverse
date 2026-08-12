@@ -227,8 +227,18 @@ function overTileScanInPage(px) {
     while (cur && cur !== document.documentElement) {
       const cs = getComputedStyle(cur);
       if (/auto|scroll|hidden|clip/.test(cs.overflowX) || /auto|scroll|hidden|clip/.test(cs.overflowY)) {
+        // The CLIENT box, not the bounding rect. Overflow clips at the padding box, so an
+        // ancestor's own border (and its scrollbar gutter, on a classic-scrollbar platform) sits
+        // INSIDE its bounding rect while painting none of the descendant. Using the bounding rect
+        // put the last row of the sample grid a border-width outside the clip on f1-decimals'
+        // short correct-answer tile, where it read as "an ancestor is painting here" about one run
+        // in five. That was this measurement's error, not the app's.
         const c = cur.getBoundingClientRect();
-        box = { left: Math.max(box.left, c.left), top: Math.max(box.top, c.top), right: Math.min(box.right, c.right), bottom: Math.min(box.bottom, c.bottom) };
+        const l = c.left + cur.clientLeft, t = c.top + cur.clientTop;
+        box = {
+          left: Math.max(box.left, l), top: Math.max(box.top, t),
+          right: Math.min(box.right, l + cur.clientWidth), bottom: Math.min(box.bottom, t + cur.clientHeight),
+        };
       }
       cur = cur.parentElement;
     }
@@ -364,8 +374,31 @@ function overTileScanInPage(px) {
     // 420ms clears the 200ms animation with margin and stays well inside the correct path's
     // ~1.5s auto-advance.
     await page.waitForTimeout(420);
+    // SETTLED means settled, and a fixed delay does not prove it. attachExplainNext scrolls the
+    // NEXT button into view with `behavior: 'smooth'`, so on the wrong path the tile can still be
+    // in motion when the delay expires, and a point computed from a rect one frame old then lands
+    // outside the tile and reads as "an ancestor is painting here". That is a moving target, not an
+    // occlusion, and it flaked exactly that way once on main before this wait existed. So the rect
+    // has to stop changing before anything is sampled.
+    const settled = await page.$(`#${px}-question .${px}-explain`)
+      ? await page.evaluate((sel) => new Promise((resolve) => {
+        const el = document.querySelector(sel);
+        if (!el) return resolve({ settled: false, reason: 'tile gone' });
+        let last = null, stable = 0, frames = 0;
+        const tick = () => {
+          const r = el.getBoundingClientRect();
+          const key = `${r.top}|${r.left}|${r.width}|${r.height}`;
+          stable = key === last ? stable + 1 : 0;
+          last = key;
+          if (stable >= 3) return resolve({ settled: true, frames });
+          if (++frames > 60) return resolve({ settled: false, reason: 'still moving after 60 frames' });
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }), `#${px}-question .${px}-explain`)
+      : { settled: false, reason: 'tile gone' };
     const reverse = await page.$(`#${px}-question .${px}-explain`)
-      ? await page.evaluate(overTileScanInPage, px)
+      ? { ...(await page.evaluate(overTileScanInPage, px)), settled }
       : { tileFound: false, reason: 'the tile was gone before the settled scan (auto-advance)' };
     return { ...forward, reverse };
   }
@@ -444,7 +477,12 @@ function overTileScanInPage(px) {
           for (const o of occluders) problems.push(`    ${o.selector} "${o.text}" -- painted over the tile at (${o.at.x},${o.at.y})`);
         }
         if (unpainted.length) {
-          problems.push(`${modId} g${grade} [${label} tile]: ${unpainted.length} of ${rev.sampled} points inside the tile's visible box resolve to an ANCESTOR, so the tile is not painting where its own box says it is`);
+          const moving = rev.settled && rev.settled.settled === false;
+          const u = unpainted[0];
+          problems.push(`${modId} g${grade} [${label} tile]: ${unpainted.length} of ${rev.sampled} points inside the tile's ${rev.visible.w}x${rev.visible.h} visible box resolve to an ANCESTOR, so the tile is not painting where its own box says it is -- first at (${u.at.x},${u.at.y}), which reaches ${u.selector}${moving ? `;  its rect also never stopped moving (${rev.settled.reason}), so measure again once it has` : ''}`);
+        }
+        if (rev.settled && rev.settled.settled === false) {
+          problems.push(`${modId} g${grade} [${label} tile]: the tile's rect never stopped moving before the scan (${rev.settled.reason}), so nothing measured on it is a settled reading`);
         }
         if (rev.noVisibleArea) {
           problems.push(`${modId} g${grade} [${label} tile]: the explain tile has NO VISIBLE AREA (${rev.visible.w}x${rev.visible.h} after clipping) -- it exists, but every pixel of it is outside its own scroll container, so the child is being shown an explanation they cannot see. Nothing could be sampled here, so occlusion was not measured either.`);
