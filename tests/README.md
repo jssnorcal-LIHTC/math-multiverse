@@ -83,6 +83,20 @@ and a 60px button must PASS it (if it fails, the probe is not reaching the DOM).
 controls is a failure, never a clean run.  The roster comes from a selector, not an id list, so a
 control added to that bar is covered the day it lands.
 
+**Pitch, and the one case this does not fully reach.**  The bar holds ONE row at 1024px on the
+device's font stack, which is what the 26-0708 compaction bought, and a single row has the whole
+header band to itself.  It does not hold one row on every font stack: on the ubuntu CI runner the
+controls paint 33px and Reset wraps to a second row, leaving a 40px pitch, and 44px of target needs
+44px of pitch.  Buying the difference with `row-gap` costs header height, which comes straight out
+of the play area on the one device that matters, and on a 33px control it would still not reach 44,
+so the pitch is not bought.  Where the bar wraps, each control is held to its full row pitch and
+the shortfall is PRINTED, never tolerated silently;  where it does not wrap, every control is held
+to the full 44px.
+
+`node tests/touch-targets.js --width 480` puts the bar into two rows on any machine, which is how
+the wrapped case is read locally.  The gate itself always runs at the device size;  the flags exist
+so a limitation nobody can re-run does not become a limitation nobody can check.
+
 ## How the level driver works (`tests/play-level.js`)
 
 ```
