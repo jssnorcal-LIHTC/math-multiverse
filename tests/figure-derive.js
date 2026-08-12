@@ -50,7 +50,7 @@ const fs = require('fs');
 const path = require('path');
 const {
   genSvg, renderFigure, resolveAccent, chartTargets, regenerate, layout,
-  layoutPanels, INK, GRID, GLYPH_W, PANEL_GAP, MIN_PANEL_H, TICK_LABEL_H,
+  layoutPanels, INK, GRID, GLYPH_W, PANEL_GAP, MIN_PANEL_H, TICK_LABEL_H, MIN_TICK_GAP,
 } = require('../build/figure-gen.js');
 
 const REPO_ROOT = path.join(__dirname, '..');
@@ -712,20 +712,27 @@ check('panels: both panels share one left margin (vertical alignment) and never 
   assertTrue(p0.plotB <= p1.plotT, `panels overlap: panel 0 bottom ${p0.plotB} is below panel 1 top ${p1.plotT}`);
 });
 
-// Panel tick density fix (team-lead finding): fig-climographs' rainfall panel packed 6 y-tick
-// labels (0/10/20/30/40/50) into a plot band short enough that consecutive labels' own boxes
-// physically overlapped by up to 2.8px -- a flat TICKS_TARGET applied to every panel regardless of
-// how little vertical room a panels-mode panel actually has. DENSE_PANELS_BAR mirrors that exact
-// figure's own shape -- same data points (panel 0: [9, 42]; panel 1: [68, 33]) AND its same 4
-// footer notes, which is what actually squeezes panelH down to the 96px band that six labels could
-// not fit; SAMPLE_PANELS_BAR carries the same points but no notes, so its panelH is comfortably
-// tall and never triggers the defect either, pre- or post-fix -- it stays in this check's table
-// list as a "the fix must not touch a panel that already fits" control, not as the reproduction.
-// TICK_LABEL_H (1.1x TICK_FONT) is the same real, browser-measured (getBBox) label height
-// layoutPanels()'s own fix is built against, so the -0.01 slack below tolerates float rounding
-// only, not a genuine gap smaller than what a label needs -- dome-drift's CO2 panel sits at
-// pitch === TICK_LABEL_H exactly (labels touching, not overlapping) and must keep passing at that
-// boundary.
+// Panel tick density fix (team-lead finding, round 1): fig-climographs' rainfall panel packed 6
+// y-tick labels (0/10/20/30/40/50) into a plot band short enough that consecutive labels' own
+// boxes physically overlapped by up to 2.8px -- a flat TICKS_TARGET applied to every panel
+// regardless of how little vertical room a panels-mode panel actually has. DENSE_PANELS_BAR
+// mirrors that exact figure's own shape -- same data points (panel 0: [9, 42]; panel 1: [68, 33])
+// AND its same 4 footer notes, which is what actually squeezes panelH down to the 96px band that
+// six labels could not fit; SAMPLE_PANELS_BAR carries the same points but no notes, so its panelH
+// is comfortably tall and never triggers the defect either, pre- or post-fix -- it stays in this
+// check's table list as a "the fix must not touch a panel that already fits" control, not as a
+// reproduction.
+//
+// Round 2 (team-lead finding): the round-1 fix capped divisions at panelH/TICK_LABEL_H alone,
+// which reserves nothing BETWEEN labels and permits exact-touching -- 0px clear gap, which
+// dome-drift's own CO2 panel landed on precisely (measured 0.00px in a real browser). Zero overlap
+// in one rendering engine is not the same guarantee at 0px of margin across engines (the delivery
+// target is iPad Safari, not the Chromium this repo measures with), so the check below now asserts
+// a MINIMUM CLEAR GAP (TICK_LABEL_H + MIN_TICK_GAP), not mere non-overlap; a check that only
+// forbids negative clearance is satisfied by exactly the touching state that was just found unsafe.
+// DENSE_PANELS_LINE mirrors dome-drift's own shape (same CO2/O2 points and its 1 footer note, which
+// sets its real panelH=132) for the same reason DENSE_PANELS_BAR mirrors climographs: a synthetic
+// sample missing the notes that actually shrink panelH cannot reproduce either defect.
 const DENSE_PANELS_BAR = {
   panels: [
     { type: 'bar', yLabel: 'rainfall (in/yr)', series: [{ label: 'rainfall', points: [[0, 9], [1, 42]] }] },
@@ -739,14 +746,23 @@ const DENSE_PANELS_BAR = {
     'Wettest year on record: Sable Flats 14 in, Cairn Bay 51 in.',
   ],
 };
-check('panels: no two y-tick labels in a panel overlap vertically (labels must fit the panel, not overlap in it)', () => {
-  [SAMPLE_PANELS_LINE, SAMPLE_PANELS_BAR, DENSE_PANELS_BAR].forEach((t) => {
+const DENSE_PANELS_LINE = {
+  panels: [
+    { type: 'line', yLabel: 'CO2 (ppm)', series: [{ label: 'CO2', points: [[90, 410], [104, 430], [118, 452]] }] },
+    { type: 'line', yLabel: 'O2 (percent)', series: [{ label: 'O2', points: [[90, 20.5], [104, 20.0], [118, 19.5]] }] },
+  ],
+  xLabel: 'day',
+  notes: ['Water reclamation held steady near 95 to 96 percent across the same days.'],
+};
+check('panels: every pair of adjacent y-tick labels in a panel keeps at least MIN_TICK_GAP of CLEAR space (not merely non-overlapping)', () => {
+  [SAMPLE_PANELS_LINE, SAMPLE_PANELS_BAR, DENSE_PANELS_BAR, DENSE_PANELS_LINE].forEach((t) => {
     const g = layoutPanels(t);
     g.panelLayouts.forEach((panel, pi) => {
       const ys = panel.yTicks.map((v) => panel.yScale(v)).sort((a, b) => a - b);
       for (let i = 1; i < ys.length; i++) {
         const pitch = ys[i] - ys[i - 1];
-        assertTrue(pitch >= TICK_LABEL_H - 0.01, `panel ${pi}: consecutive y-tick labels at pixel y=${ys[i - 1].toFixed(2)} and y=${ys[i].toFixed(2)} are only ${pitch.toFixed(2)}px apart, closer than the ${TICK_LABEL_H}px a TICK_FONT label needs to avoid overlapping its neighbor`);
+        const clearGap = pitch - TICK_LABEL_H;
+        assertTrue(clearGap >= MIN_TICK_GAP - 0.01, `panel ${pi}: consecutive y-tick labels at pixel y=${ys[i - 1].toFixed(2)} and y=${ys[i].toFixed(2)} have only ${clearGap.toFixed(2)}px of clear space, short of the required ${MIN_TICK_GAP}px (pitch ${pitch.toFixed(2)}px, label height ${TICK_LABEL_H}px)`);
       }
     });
   });

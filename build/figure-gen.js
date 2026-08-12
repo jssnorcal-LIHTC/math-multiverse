@@ -100,6 +100,15 @@ const TICK_LABEL_H = TICK_FONT * 1.1; // vertical extent of a horizontally-set t
                                        // plot easily clears MIN_PLOT_H/TICKS_TARGET against this;
                                        // a panels-mode panel, at roughly a third the height, does
                                        // not -- see niceTicksFit below, used only by layoutPanels().
+const MIN_TICK_GAP = 6;               // required CLEAR space between two adjacent tick labels'
+                                       // boxes, on top of TICK_LABEL_H itself -- team-lead finding:
+                                       // capping divisions at panelH/TICK_LABEL_H alone reserves
+                                       // nothing BETWEEN labels, so it permits exact-touching (0px
+                                       // clear), which dome-drift's CO2 panel landed on precisely.
+                                       // Zero clear gap measures clean in one engine (Chromium) but
+                                       // the delivery target is iPad Safari, whose font metrics will
+                                       // not be pixel-identical; this buffer is the margin against
+                                       // that variance, not an aesthetic preference.
 
 function n2(x) {
   // Fixed 2-decimal formatting with trailing zeros stripped. toFixed is spec-defined (not
@@ -335,14 +344,17 @@ function layoutPanels(dataTable) {
     refuse(`too many footer notes; each panel would collapse to ${n2(panelH)}px, below the ${MIN_PANEL_H}px minimum`);
   }
 
-  // Panel tick density fix: cap divisions to what panelH can actually hold at TICK_LABEL_H before
-  // computing each panel's own ticks, rather than handing every panel the same flat TICKS_TARGET a
-  // full-height chart uses. A panels-mode panel is roughly a third the height of a full plot, so
-  // the flat target can (and, pre-fix, did -- fig-climographs' rainfall panel) ask for more labels
-  // than the panel's own height can hold without their boxes overlapping. maxTickDivisions only
-  // ever REDUCES from TICKS_TARGET, never grows past it, so a panel tall enough to clear the flat
-  // default (dome-drift's panels, both comfortably under this cap) renders byte-identical to before.
-  const maxTickDivisions = Math.max(1, Math.floor(panelH / TICK_LABEL_H));
+  // Panel tick density fix: cap divisions to what panelH can actually hold at TICK_LABEL_H PLUS a
+  // required MIN_TICK_GAP clear space before computing each panel's own ticks, rather than handing
+  // every panel the same flat TICKS_TARGET a full-height chart uses. A panels-mode panel is roughly
+  // a third the height of a full plot, so the flat target can (and, pre-fix, did -- fig-climographs'
+  // rainfall panel) ask for more labels than the panel's own height can hold without their boxes
+  // overlapping. Dividing by TICK_LABEL_H alone would reserve nothing BETWEEN labels and permit
+  // exact-touching (dome-drift's CO2 panel landed on precisely that, 0px clear, before this second
+  // pass); the +MIN_TICK_GAP margin exists for that reason. maxTickDivisions only ever REDUCES from
+  // TICKS_TARGET, never grows past it, so a panel tall enough to clear the flat default at the
+  // required gap renders byte-identical to before.
+  const maxTickDivisions = Math.max(1, Math.floor(panelH / (TICK_LABEL_H + MIN_TICK_GAP)));
 
   // Per-panel y-domain/ticks first, THEN a single shared left margin sized from the widest tick
   // label across BOTH panels, so the two plots' left edges line up vertically.
@@ -627,7 +639,7 @@ module.exports = {
   genSvg, renderFigure, resolveAccent, chartTargets, regenerate, layout,
   layoutPanels, genSvgPanels,
   INK, GRID, PLOT_GRID, DEFAULT_ACCENT, GLYPH_W, VB_W, VB_H, MAX_NOTES, MIN_PLOT_H,
-  PANEL_GAP, MIN_PANEL_H, TICK_LABEL_H,
+  PANEL_GAP, MIN_PANEL_H, TICK_LABEL_H, MIN_TICK_GAP,
 };
 
 if (require.main === module) process.exit(main(process.argv));
