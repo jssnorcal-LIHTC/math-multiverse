@@ -21,6 +21,10 @@
 //   PART 1, static and hermetic. No SVG under art/ may use SMIL, because SMIL cannot be gated.
 //   PART 2, rendered. Every animated asset must MOVE when motion is allowed and be STILL when it
 //           is not, measured by screenshotting the same <img> twice and comparing raw PNG buffers.
+//   PART 3, the app's own code. attachExplainNext() scrolls the NEXT button into view with an
+//           explicit behavior argument, which is an animation NO stylesheet reaches -- not the
+//           @media block, not CSS scroll-behavior, because the argument overrides it. The behavior
+//           it actually passes is read back under both preferences.
 //
 // THE TRAP THIS FILE EXISTS TO REMEMBER: Playwright's newContext({ reducedMotion }) DOES NOT REACH
 // AN IMAGE DOCUMENT. The parent page reports what was asked for while the SVG inside the <img>
@@ -28,7 +32,16 @@
 // probe using the context option measures 'reduce' in BOTH of its two "conditions" and a gated
 // animation reads STILL in both -- which looks like a pass and proves nothing. The preference is
 // therefore forced with Chromium's own launch switches, --force-prefers-reduced-motion and
-// --force-prefers-no-reduced-motion, and the context option is never used.
+// --force-prefers-no-reduced-motion, for PARTS 1 AND 2.
+//
+// PART 3 INVERTS THAT, and the inversion is the same fact seen from the other side. Playwright's
+// context sets the PAGE's motion preference and that setting overrides the launch switch, while
+// never crossing into an <img>'s SVG. So the switch is the only thing that reaches an image, and
+// the context option is the only thing that reaches the page. Measured, not assumed: with
+// --force-prefers-reduced-motion and a navigated page, matchMedia('(prefers-reduced-motion:
+// reduce)').matches came back FALSE. PART 3 measures the page's own JS, so it uses the context
+// option, and it asserts that its two conditions really do differ inside the page -- which is the
+// check that would have caught the switch not landing.
 //
 //   node tests/reduced-motion.js
 //
@@ -192,7 +205,7 @@ async function measure(port, assets, forceFlag) {
 
   const allowed = await measure(port, roster, '--force-prefers-no-reduced-motion');
   const reduced = await measure(port, roster, '--force-prefers-reduced-motion');
-  server.close();
+  // The server stays up for PART 3 below, which loads the shell itself rather than an asset.
 
   console.log(`Chromium ${allowed.version}\n`);
   console.log('  asset                                              motion allowed   reduced');
@@ -232,6 +245,102 @@ async function measure(port, assets, forceFlag) {
       problems.push(`${roster[i]}: the reduced rendering is byte-identical to the animated one's first frame, so the animation is merely frozen rather than collapsed to its end state.`);
     }
   }
+
+  // ---------------- PART 3: the one motion no stylesheet can reach ----------------
+  // Parts 1 and 2 measure ASSETS. This measures the app's own code, because there is a motion in it
+  // that no stylesheet governs: attachExplainNext() brings the NEXT button into view by calling
+  // scrollIntoView with an explicit behavior argument. engine.css's @media (prefers-reduced-motion:
+  // reduce) block does not reach scrolling, and CSS scroll-behavior is overridden by that argument,
+  // so constraint 7 can only be kept for it by reading the preference in JS. A rule kept in JS needs
+  // a gate in JS, or it is documentation.
+  //
+  // TWO THINGS HERE CONTRADICT PART 2 ON PURPOSE, and both were measured before being relied on.
+  //
+  // FIRST, this half uses newContext({ reducedMotion }) -- the option the header above bans. The ban
+  // is real and it is about IMAGE documents: Playwright's emulation does not cross into an <img>'s
+  // SVG, so PART 2 must use the launch switch. The reverse is true here. Playwright's context
+  // defaults prefers-reduced-motion to no-preference for the PAGE, and that default OVERRIDES the
+  // launch switch, so a page-level matchMedia reads no-preference in both conditions no matter which
+  // switch is passed. Measured: with --force-prefers-reduced-motion and a navigated page,
+  // matchMedia('(prefers-reduced-motion: reduce)').matches came back false. The parent page is
+  // exactly where the context option is the right tool, and the assertion below fails if the two
+  // conditions ever stop differing, so this cannot rot into measuring one condition twice.
+  //
+  // SECOND, this does not watch the scroll move. Headless Chromium does not animate scrollIntoView:
+  // measured across both motion switches and both compositing modes, behavior 'smooth' and behavior
+  // 'auto' each land in ONE step, 1060px, indistinguishable. A glide-versus-jump probe cannot arm in
+  // this environment, and a gate that cannot arm is worse than no gate. So what is measured is the
+  // DECISION the app makes: scrollIntoView is wrapped, attachExplainNext is called for real, and the
+  // argument it actually passed is read back. Reverting the guard flips that argument and fails
+  // here, which is the property a gate has to have.
+  const scrollDecision = async (mode) => {
+    const ctx = await browser2.newContext({ viewport: { width: 1024, height: 768 }, reducedMotion: mode });
+    try {
+      const pg = await ctx.newPage();
+      await pg.goto(`http://127.0.0.1:${port}/Math-Multiverse.html`, { waitUntil: 'domcontentloaded' });
+      await pg.waitForFunction(() => typeof window.attachExplainNext === 'function', null, { timeout: 8000 });
+      return await pg.evaluate(() => new Promise((resolve) => {
+        const seen = [];
+        const real = Element.prototype.scrollIntoView;
+        Element.prototype.scrollIntoView = function patched(arg) {
+          seen.push(arg && typeof arg === 'object' ? arg.behavior : String(arg));
+          return real.apply(this, arguments);
+        };
+        const host = document.createElement('div');
+        host.setAttribute('style', 'position:fixed;left:0;top:0;width:400px;height:200px;overflow:auto;z-index:2147483000;background:#000');
+        const spacer = document.createElement('div');
+        spacer.setAttribute('style', 'height:1200px');
+        const tile = document.createElement('div');
+        tile.setAttribute('style', 'height:60px');
+        host.appendChild(spacer); host.appendChild(tile);
+        document.body.appendChild(host);
+        const attached = window.attachExplainNext(tile, () => {});
+        // attachExplainNext defers its scroll by one frame (later0); two frames is one clear of it.
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const scrolled = Math.round(host.scrollTop);
+          Element.prototype.scrollIntoView = real;
+          host.remove();
+          resolve({
+            attached, scrolled, behaviors: seen,
+            prefersReduce: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+          });
+        }));
+      }));
+    } finally { await ctx.close(); }
+  };
+
+  const browser2 = await chromium.launch(
+    process.env.PLAYWRIGHT_EXECUTABLE_PATH
+      ? { args: ['--disable-gpu', '--no-sandbox'], executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH }
+      : { args: ['--disable-gpu', '--no-sandbox'] });
+  let sAllowed, sReduced;
+  try {
+    sAllowed = await scrollDecision('no-preference');
+    sReduced = await scrollDecision('reduce');
+  } finally { await browser2.close(); }
+
+  console.log('\nNEXT-button scroll (attachExplainNext), behavior argument as actually passed:');
+  console.log(`  motion allowed: ${JSON.stringify(sAllowed.behaviors)}  (scrolled ${sAllowed.scrolled}px, matchMedia reduce = ${sAllowed.prefersReduce})`);
+  console.log(`  reduced motion: ${JSON.stringify(sReduced.behaviors)}  (scrolled ${sReduced.scrolled}px, matchMedia reduce = ${sReduced.prefersReduce})`);
+
+  // The two conditions have to actually differ, or both readings are of the same one.
+  if (sAllowed.prefersReduce !== false || sReduced.prefersReduce !== true) {
+    problems.push(`the two motion conditions did not differ inside the page (allowed reported prefersReduce=${sAllowed.prefersReduce}, reduced reported ${sReduced.prefersReduce}), so both scroll readings are of the same condition and neither means anything`);
+  }
+  for (const [label, s] of [['motion allowed', sAllowed], ['reduced motion', sReduced]]) {
+    if (!s.attached) problems.push(`attachExplainNext returned false under ${label}, so it never reached its scroll and the reading below is of nothing`);
+    if (s.behaviors.length !== 1) problems.push(`under ${label} attachExplainNext called scrollIntoView ${s.behaviors.length} time(s) (${JSON.stringify(s.behaviors)}); this gate reads a single call and cannot interpret that`);
+    if (!(s.scrolled > 0)) problems.push(`under ${label} the container never scrolled at all, so the recorded behavior belongs to a scroll that did nothing`);
+  }
+  // NEGATIVE half first: if the app does not ask for a glide when motion is allowed, then "it asks
+  // for a jump under reduce" is true of an app that always jumps, and proves nothing about the guard.
+  if (sAllowed.behaviors[0] !== 'smooth') {
+    problems.push(`with motion ALLOWED attachExplainNext passed behavior ${JSON.stringify(sAllowed.behaviors[0])} rather than "smooth", so this gate cannot tell a guarded scroll from one that never glides, and the reduced reading below proves nothing`);
+  }
+  if (sReduced.behaviors[0] !== 'auto') {
+    problems.push(`under prefers-reduced-motion attachExplainNext passed behavior ${JSON.stringify(sReduced.behaviors[0])} rather than "auto", so the NEXT button still glides into view. Constraint 7 is not kept: no stylesheet can collapse a JS scroll, so attachExplainNext has to read the preference itself.`);
+  }
+  server.close();
 
   console.log(`\n=== reduced-motion: ${svgs.length} SVG(s) scanned, ${roster.length} rendered, ${problems.length} problem(s) ===`);
   for (const p of problems) console.log('  ' + p);
