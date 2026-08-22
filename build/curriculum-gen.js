@@ -320,11 +320,19 @@ const BLOCKS = [
     lessons: ['6.2.3'],
     targets: ['math-r4-perimeter', 'math-ee-write-expression'],
     moduleTopics: [],
-    verdict: 'GAP',
-    why: 'Perimeter is emitted nowhere as a question, and is present only as the DISTRACTOR inside '
-       + 'area items, where the explain text names it to rule it out. Tonight\'s homework asks for '
-       + 'it as the answer, so the app currently miscues the concept it is being asked for.',
-    gaps: ['perimeter of a labelled polygon', 'perimeter written as an expression'],
+    // WP2 level 1 landed 26-0822: 22 items over 15 labelled-polygon figures in
+    // packs/cpm-cc1-g6.json. No MODULE emits perimeter, and none ever will under constraint 2, but
+    // a pack item now serves it, so this block moves GAP to PARTIAL and the gap count falls. That
+    // fall is the whole point of the meter.
+    packItemTargets: ['math-r4-perimeter'],
+    verdict: 'PARTIAL',
+    why: 'No module emits perimeter as a question, and in the six worlds it appears only as the '
+       + 'DISTRACTOR inside area items, where the explain text names it to rule it out. '
+       + 'packs/cpm-cc1-g6.json level 1 now serves it directly: 22 items over 15 labelled '
+       + 'polygons, rectangle through L-shape, including two that run the relationship backwards '
+       + 'from a given perimeter. Writing a perimeter as an EXPRESSION, the algebra-tile half of '
+       + 'this block, is still absent.',
+    gaps: ['perimeter written as an expression'],
   },
   {
     id: 'pg-6.2.4', page: 57, chapter: 6, title: 'Combining Like Terms',
@@ -595,7 +603,7 @@ const lessons = lessonIds.map((lesson) => {
       ccss: uniq(rows.flatMap((b) => b.targets).flatMap((t) => TARGET_CCSS[t] || [])),
       targets: uniq(rows.flatMap((b) => b.targets)),
       moduleTopics: uniq(rows.flatMap((b) => b.moduleTopics)),
-      packItemTargets: [],
+      packItemTargets: uniq(rows.flatMap((b) => b.packItemTargets || [])),
       gaps: uniq(rows.flatMap((b) => b.gaps)),
       confidence,
     };
@@ -655,7 +663,7 @@ const out = {
     chapter: b.chapter, title: b.title, page: b.page || null, lessons: b.lessons,
     crossRef: b.crossRef || null,
     verdict: b.verdict, rank: RANK.get(b.id) || null, why: b.why,
-    targets: b.targets, moduleTopics: b.moduleTopics, gaps: b.gaps,
+    targets: b.targets, moduleTopics: b.moduleTopics, packItemTargets: b.packItemTargets || [], gaps: b.gaps,
   })),
   lessons,
 };

@@ -37,6 +37,9 @@ const MAX_SENTENCE = {
   // Pinned at 28 by WP-P on 26-0822, down from 51. This is the pack the report was about, and 28
   // is a real editorial standard rather than a record of where it happened to land.
   'outpost-protocol-g6': 28,
+  // The math pack is authored to the same standard from its first line, so it is pinned there too
+  // rather than recorded wherever it happened to land.
+  'cpm-cc1-g6': 28,
   // The other four are recorded where they already are. Nobody has reported them as hard to read,
   // and rewriting four shipped, blind-certified packs to hit a number nobody asked for would be
   // scope this gate has no business taking.

@@ -142,8 +142,14 @@ function isTarget(id) {
 // Legal coach-topic family prefixes for ELA content. A pack coach topic must either match a
 // COACH_TIPS key exactly or begin with one of these families, mirroring the math
 // COACH_FAMILY_FALLBACK mechanism in Math-Multiverse.html.
+// The first eight are ELA.  The math families below were added 26-0822 for packs/cpm-cc1-g6.json:
+// a math pack's coach topic has to resolve here or validate-pack rejects the item, and it has to
+// reach a COACH_TIPS entry in the shell or showCoach fires with nothing to say.  Both halves are
+// required, and tests/fuzz.js gates the second for module topics while validate-pack gates the
+// first for pack topics.
 const COACH_FAMILIES = Object.freeze([
   'evidence', 'central', 'vocab', 'structure', 'viewpoint', 'inference', 'grammar', 'research',
+  'perimeter', 'shape', 'display', 'decword', 'growpattern',
 ]);
 
 module.exports = { TARGETS, isTarget, COACH_FAMILIES };

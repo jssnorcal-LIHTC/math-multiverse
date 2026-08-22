@@ -8,7 +8,7 @@
       "grade": 6,
       "title": "Cold Signal",
       "standards": "CCSS ELA 6",
-      "icon": "\ud83d\udd75\ufe0f",
+      "icon": "🕵️",
       "color": "#c8102e",
       "description": "Read the briefings, check your sources, and prove what you claim. Six levels of grade-6 reading built like the real test.",
       "levels": 6,
@@ -71,6 +71,20 @@
       "description": "Walk the evening rounds, read the sanctuary's own paperwork, and let the records settle what the stories cannot. Six levels of grade-6 reading built like the real test.",
       "levels": 6,
       "grandGoal": "Head Keeper",
+      "unlocked": true
+    },
+    {
+      "id": "cpm-cc1-g6",
+      "subject": "math",
+      "subjectLabel": "Math",
+      "grade": 6,
+      "title": "Field Notes",
+      "standards": "CCSS Math 6 (CPM CC1)",
+      "icon": "📐",
+      "color": "#e0692b",
+      "description": "The concepts CPM Core Connections Course 1 asks for that the six worlds do not teach yet.  Perimeter first, then the rest, level by level.",
+      "levels": 1,
+      "grandGoal": "Chief Surveyor",
       "unlocked": true
     }
   ]
