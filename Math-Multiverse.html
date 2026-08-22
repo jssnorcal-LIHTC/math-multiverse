@@ -419,6 +419,13 @@
   .mission-note { font-size: 0.74rem; color: var(--text-muted); margin-top: 6px; line-height: 1.45; }
   .mission-auto { font-size: 0.72rem; color: var(--text-muted); display: inline-flex; align-items: center; gap: 5px; min-height: 44px; }
 
+  /* A level the child stepped away from mid-run, kept alive and resumable. */
+  .lvl-resume {
+    color: var(--theme-volume, #f2cd37);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
   /* SECTION HEADINGS */
   .section-heading { margin-bottom: 12px; }
   .section-heading h2 { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
@@ -4711,8 +4718,9 @@ function renderPackLevels(entry, pack) {
     // Same class family and same node order as the math level cards at line 3628, because the shell's CSS
     // styles `lvl-*`. An `lc-*` card grid would render three unstyled divs: `lc-num`, `lc-name` and
     // `lc-goal` appear nowhere in the file, and `lc-stars`/`lc-star` are styled for the completion screen.
+    const parked = isParked(ACTIVE_GRADE, null, entry.id, i);
     card.innerHTML = `
-      <div class="lvl-num">LEVEL ${lv.id}</div>
+      <div class="lvl-num">LEVEL ${lv.id}${parked ? ' &middot; <span class="lvl-resume">IN PROGRESS</span>' : ''}</div>
       <div class="lvl-name">${lv.name}</div>
       <div class="lvl-goal">${lv.goal}</div>
       <div class="lvl-meta">
@@ -4721,7 +4729,7 @@ function renderPackLevels(entry, pack) {
           <span class="lvl-star ${stars >= 2 ? 'earned' : ''}">★</span>
           <span class="lvl-star ${stars >= 3 ? 'earned' : ''}">★</span>
         </div>
-        <span class="lvl-q-count">${lv.questions} Q</span>
+        <span class="lvl-q-count">${parked ? 'RESUME &rarr;' : lv.questions + ' Q'}</span>
       </div>
       ${best != null ? `<div class="lvl-best">Best: ${best}</div>` : ''}
       ${!open ? `<div class="lock-overlay">🔒 Beat L${i} first</div>` : ''}
@@ -4750,8 +4758,12 @@ function renderLevels() {
     card.className = 'level-card' + (unlocked ? '' : ' locked');
     card.style.setProperty('--card-color', m.color);
 
+    // A parked run says so on its own card, so resuming is something he chooses rather than
+    // something that happens to him.
+    const parked = isParked(ACTIVE_GRADE, m.id, null, i);
+
     card.innerHTML = `
-      <div class="lvl-num">LEVEL ${lvl.id}</div>
+      <div class="lvl-num">LEVEL ${lvl.id}${parked ? ' &middot; <span class="lvl-resume">IN PROGRESS</span>' : ''}</div>
       <div class="lvl-name">${lvl.name}</div>
       <div class="lvl-goal">${lvl.goal}</div>
       <div class="lvl-meta">
@@ -4760,7 +4772,7 @@ function renderLevels() {
           <span class="lvl-star ${stars >= 2 ? 'earned' : ''}">★</span>
           <span class="lvl-star ${stars >= 3 ? 'earned' : ''}">★</span>
         </div>
-        <span class="lvl-q-count">${lvl.questions} Q</span>
+        <span class="lvl-q-count">${parked ? 'RESUME &rarr;' : lvl.questions + ' Q'}</span>
       </div>
       ${best != null ? `<div class="lvl-best">Best: ${best}</div>` : ''}
       ${!unlocked ? `<div class="lock-overlay">🔒 Beat L${i} first</div>` : ''}
@@ -4775,6 +4787,40 @@ function renderLevels() {
 
 let activeModuleCleanup = null;
 
+// ---- RESUMING A LEVEL FROM WHERE HE LEFT OFF (Justin, 26-0822) ------------------------------
+//
+// Leaving a level and coming back used to restart it from question one. It now picks up exactly
+// where he left it: same question, same score, same streak.
+//
+// WHAT IT DOES AND DOES NOT COVER, stated plainly because the limit is structural. Each of the six
+// math modules holds its whole run in closure variables inside its IIFE -- the question index, the
+// score, the lives, the streak -- and init(host, levelIndex, {onComplete, onExit}) exposes no hook
+// to read or restore any of it. Constraint 2 forbids editing those IIFEs, so there is no way to
+// WRITE "question 7 of 18, score 340" to storage and rebuild it later. What the shell can do
+// instead is simply not tear the run down: parking keeps the live module object, its listeners and
+// its DOM exactly as they were, and re-entry puts them back. That covers exit-and-return inside one
+// session, which is the case Justin named. A full page reload still restarts the level, because
+// nothing outside the closure ever knew where it was.
+//
+// The DOM has to MOVE, not just hide: #host-frame is one shared element and playing any other level
+// clears it. Parking lifts the run's nodes into a detached holder and re-entry appends them back.
+// Listeners live on the nodes, so they survive the move. The modules run no intervals -- only short
+// setTimeout SFX and advance timers, all tracked and cleared by their own cleanup -- so a parked run
+// has nothing ticking that could penalise him while he is away.
+let parkedRun = null;          // { key, moduleId, packId, levelIndex, cleanup, holder, parkedAt }
+let currentLevelIndex = null;  // which level the live run belongs to
+let currentRunFinished = false; // a completed run is disposed, never parked
+
+function runKey(grade, moduleId, packId, levelIndex) {
+  return `g${grade}|${moduleId || packId}|L${levelIndex}`;
+}
+
+function currentRunKey() {
+  if (currentLevelIndex == null) return null;
+  if (!currentModuleId && !currentPackId) return null;
+  return runKey(ACTIVE_GRADE, currentModuleId, currentPackId, currentLevelIndex);
+}
+
 function disposeActiveModule() {
   if (activeModuleCleanup) {
     try { activeModuleCleanup(); }
@@ -4783,24 +4829,78 @@ function disposeActiveModule() {
   }
 }
 
+function discardParkedRun() {
+  if (!parkedRun) return;
+  try { parkedRun.cleanup(); }
+  catch (e) { console.warn('Parked run cleanup failed:', e); }
+  parkedRun = null;
+}
+
+// Park the live run instead of disposing it. A finished run, or one with nothing to keep, disposes
+// as before: there is no point resuming a level he already completed.
+function parkActiveModule() {
+  const key = currentRunKey();
+  if (!activeModuleCleanup || !key || currentRunFinished) { disposeActiveModule(); return; }
+  discardParkedRun();                       // only one parked run at a time
+  const host = $('host-frame');
+  const holder = document.createElement('div');
+  while (host.firstChild) holder.appendChild(host.firstChild);
+  parkedRun = {
+    key, moduleId: currentModuleId, packId: currentPackId,
+    levelIndex: currentLevelIndex, cleanup: activeModuleCleanup,
+    holder, parkedAt: Date.now(),
+  };
+  activeModuleCleanup = null;
+}
+
+function resumeParkedRun() {
+  if (!parkedRun) return false;
+  const host = $('host-frame');
+  host.innerHTML = '';
+  while (parkedRun.holder.firstChild) host.appendChild(parkedRun.holder.firstChild);
+  activeModuleCleanup = parkedRun.cleanup;
+  currentModuleId = parkedRun.moduleId;
+  currentPackId = parkedRun.packId;
+  currentLevelIndex = parkedRun.levelIndex;
+  currentRunFinished = false;
+  parkedRun = null;
+  return true;
+}
+
+function isParked(grade, moduleId, packId, levelIndex) {
+  return !!(parkedRun && parkedRun.key === runKey(grade, moduleId, packId, levelIndex));
+}
+
 function playLevel(levelIndex) {
   // Pack levels dispatch through the same InlineModules contract as the math modules.
   if (currentPackId) {
     const pack = MVPack.get(currentPackId);
     const entry = (SHELVES.flatMap(s => s.packs || [])).find(p => p.id === currentPackId);
     if (!pack || !entry) return;
+    const lv0 = pack.levels[levelIndex];
+    // Resume rather than restart, when this is the level he stepped away from.
+    if (isParked(ACTIVE_GRADE, null, currentPackId, levelIndex)) {
+      $('host-title').textContent = `${entry.title} — L${levelIndex + 1}: ${lv0.name}`;
+      showScreen('module');
+      resumeParkedRun();
+      return;
+    }
+    discardParkedRun();
     disposeActiveModule();
-    const lv = pack.levels[levelIndex];
+    currentLevelIndex = levelIndex;
+    currentRunFinished = false;
+    const lv = lv0;
     $('host-title').textContent = `${entry.title} — L${levelIndex + 1}: ${lv.name}`;
     showScreen('module');
     const host = $('host-frame');
     host.innerHTML = '';
     activeModuleCleanup = InlineModules[currentPackId].init(host, levelIndex, {
       onComplete: (score, stars, foundRatio) => {
+        currentRunFinished = true;          // a finished run is disposed, never parked
         renderHeader();
         showPackLevelComplete(entry, pack, levelIndex, score, stars, foundRatio);
       },
-      onExit: () => { disposeActiveModule(); renderPackLevels(entry, pack); },
+      onExit: () => { parkActiveModule(); renderPackLevels(entry, pack); },
     });
     return;
   }
@@ -4808,7 +4908,18 @@ function playLevel(levelIndex) {
   const m = MODULES.find(x => x.id === currentModuleId);
   if (!m) return;
 
+  // Resume rather than restart, when this is the level he stepped away from.
+  if (isParked(ACTIVE_GRADE, currentModuleId, null, levelIndex)) {
+    const gv0 = gradeView(m);
+    $('host-title').textContent = `${gv0.name} — L${levelIndex + 1}: ${gv0.levels[levelIndex].name}`;
+    showScreen('module');
+    resumeParkedRun();
+    return;
+  }
+  discardParkedRun();
   disposeActiveModule();
+  currentLevelIndex = levelIndex;
+  currentRunFinished = false;
 
   if (m.portMode === 'standalone-link' && m.standaloneFile) {
     const ok = confirm(
@@ -4832,12 +4943,13 @@ function playLevel(levelIndex) {
   if (InlineModules[m.id]) {
     activeModuleCleanup = InlineModules[m.id].init(host, levelIndex, {
       onComplete: (score, stars) => {
+        currentRunFinished = true;          // a finished run is disposed, never parked
         Save.recordLevel(m.id, levelIndex, stars, score);
         renderHeader();
         showLevelComplete(m, levelIndex, score, stars);
       },
       onExit: () => {
-        disposeActiveModule();
+        parkActiveModule();
         exitToLevels();
       },
     });
@@ -4949,7 +5061,7 @@ function showPackLevelComplete(entry, pack, levelIndex, score, stars, foundRatio
 }
 
 function exitToLevels() {
-  disposeActiveModule();
+  parkActiveModule();
   // A pack is not in MODULES, so renderLevels() would find nothing and return silently, leaving the
   // previous module's grid on screen. Route by whichever context is open; openPack and openModule keep
   // currentPackId and currentModuleId mutually exclusive.
@@ -4961,7 +5073,16 @@ function exitToLevels() {
   showScreen('levels');
   renderLevels();
 }
-function exitToLauncher() { currentPackId = null; disposeActiveModule(); showScreen('launcher'); renderLauncher(); renderHeader(); }
+function exitToLauncher() {
+  // Park before clearing currentPackId: parkActiveModule keys the run off the context that is still
+  // open, and zeroing it first would make the key unresolvable and silently dispose the run.
+  parkActiveModule();
+  currentPackId = null;
+  showScreen('launcher');
+  renderLauncher();
+  renderHeader();
+  renderMissionCard();
+}
 
 // ============================================================
 // EVENT WIRING
