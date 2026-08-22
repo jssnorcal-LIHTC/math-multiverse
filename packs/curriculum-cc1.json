@@ -1,0 +1,3694 @@
+{
+ "version": 1,
+ "book": "cc1",
+ "bookTitle": "CPM Core Connections, Course 1",
+ "generatedBy": "build/curriculum-gen.js",
+ "sources": [
+  {
+   "id": "parent-guide",
+   "what": "topic block titles and their lesson ranges, from the table of contents on pages 5 and 6",
+   "url": "https://pdfs.cpm.org/CoreConnections/ParentGuide/cc1/CC1_PG.pdf",
+   "read": "2026-08-22",
+   "note": "free publisher-hosted guide; index and topic names only, no problem text"
+  },
+  {
+   "id": "homework-index",
+   "what": "lesson-to-problem-number index, 80 lessons and 462 Review and Preview problem numbers",
+   "url": "https://homework.cpm.org/category/CC/textbook/cc1/chapter/1",
+   "read": "2026-08-22",
+   "note": "problem NUMBERS only; the problems are copyrighted and no problem text is stored"
+  }
+ ],
+ "chapters": [
+  {
+   "chapter": 1,
+   "label": "Patterns, data displays and types of numbers",
+   "labelSource": "derived-from-parent-guide-blocks"
+  },
+  {
+   "chapter": 2,
+   "label": "Data displays, generic rectangles and the distributive property",
+   "labelSource": "derived-from-parent-guide-blocks"
+  },
+  {
+   "chapter": 3,
+   "label": "Portions, integers and the coordinate plane",
+   "labelSource": "derived-from-parent-guide-blocks"
+  },
+  {
+   "chapter": 4,
+   "label": "Variables, generalising and scale factor",
+   "labelSource": "derived-from-parent-guide-blocks"
+  },
+  {
+   "chapter": 5,
+   "label": "Multiplying fractions and decimals, and area",
+   "labelSource": "derived-from-parent-guide-blocks"
+  },
+  {
+   "chapter": 6,
+   "label": "Dividing fractions, order of operations and algebra tiles",
+   "labelSource": "derived-from-parent-guide-blocks"
+  },
+  {
+   "chapter": 7,
+   "label": "Rates, decimal operations and inequalities",
+   "labelSource": "derived-from-parent-guide-blocks"
+  },
+  {
+   "chapter": 8,
+   "label": "Statistics, equations in context, and distance-rate-time",
+   "labelSource": "derived-from-parent-guide-blocks"
+  },
+  {
+   "chapter": 9,
+   "label": "Volume, surface area and percents",
+   "labelSource": "derived-from-parent-guide-blocks"
+  }
+ ],
+ "blocks": [
+  {
+   "id": "pg-1.1.3",
+   "source": "parent-guide-toc",
+   "chapter": 1,
+   "title": "Describing and Extending Patterns",
+   "page": 1,
+   "lessons": [
+    "1.1.3"
+   ],
+   "crossRef": null,
+   "verdict": "PARTIAL",
+   "rank": 4,
+   "why": "pemdas-pattern is emitted, but only out of The Floating Bear Grade 5 levels 2, 3 and 6 and at most 15% of any of their draws. It also hands over both rules and asks for a comparison; it never shows a figure and asks the student to build the rule or predict the 100th term.",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "moduleTopics": [
+    "pemdas-pattern"
+   ],
+   "gaps": [
+    "a drawn growing pattern the student extends",
+    "find the rule from the figures",
+    "predict a far-out term such as the 100th"
+   ]
+  },
+  {
+   "id": "pg-1.1.4",
+   "source": "parent-guide-toc",
+   "chapter": 1,
+   "title": "Graphical Representations of Data: Histograms and Bar Graphs",
+   "page": 3,
+   "lessons": [
+    "1.1.4"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 3,
+   "why": "No math generator emits a chart-reading topic. g6-stats-* read a comma-separated list of numbers, never a display. Real chart reading exists only under Science (Outpost Protocol level 2) and it is a line chart, not a categorical bar graph or a histogram.",
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "read a value off a bar graph",
+    "compare two bars",
+    "read a histogram bin"
+   ]
+  },
+  {
+   "id": "pg-1.2.3",
+   "source": "parent-guide-toc",
+   "chapter": 1,
+   "title": "Types of Numbers",
+   "page": 7,
+   "lessons": [
+    "1.2.3",
+    "1.2.4"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 13,
+   "why": "Zero emitted topics touch primes, composites, factors, multiples, GCF or LCM.",
+   "targets": [
+    "math-ns-factors-multiples"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "primes and composites",
+    "factor pairs",
+    "multiples, GCF and LCM"
+   ]
+  },
+  {
+   "id": "pg-2.1.2",
+   "source": "parent-guide-toc",
+   "chapter": 2,
+   "title": "Graphical Representations of Data: Stem-and-Leaf Plots",
+   "page": 8,
+   "lessons": [
+    "2.1.2"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 9,
+   "why": "No emitted topic reads any plot. Same root cause as 1.1.4.",
+   "targets": [
+    "math-sp-displays"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "read a stem-and-leaf plot",
+    "build one from a data set"
+   ]
+  },
+  {
+   "id": "pg-2.3.1",
+   "source": "parent-guide-toc",
+   "chapter": 2,
+   "title": "Multiplication with Generic Rectangles",
+   "page": 9,
+   "lessons": [
+    "2.3.1",
+    "2.3.2",
+    "2.3.3",
+    "2.3.4"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 16,
+   "why": "The area model itself is absent. g6-rect-area computes one rectangle's area from two given sides; it never decomposes a product into partial products.",
+   "targets": [
+    "math-ee-equivalent",
+    "math-g-area-polygons"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "partial products in a generic rectangle",
+    "read the whole product off the model"
+   ]
+  },
+  {
+   "id": "pg-2.3.3",
+   "source": "parent-guide-toc",
+   "chapter": 2,
+   "title": "Distributive Property",
+   "page": 11,
+   "lessons": [
+    "2.3.3",
+    "2.3.4"
+   ],
+   "crossRef": null,
+   "verdict": "PARTIAL",
+   "rank": 15,
+   "why": "g6-evaluate2 is emitted at 100% of The Floating Bear Grade 6 level 5, but it EVALUATES a(x + b) at a given x. Generating the equivalent expression, which is what 6.EE.A.3 asks and what the block teaches, is never asked.",
+   "targets": [
+    "math-ee-equivalent"
+   ],
+   "moduleTopics": [
+    "g6-evaluate2"
+   ],
+   "gaps": [
+    "expand a(b + c) to an equivalent expression",
+    "factor a common factor back out"
+   ]
+  },
+  {
+   "id": "pg-3.1.1",
+   "source": "parent-guide-toc",
+   "chapter": 3,
+   "title": "Equivalent Fractions",
+   "page": 14,
+   "lessons": [
+    "3.1.1"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "frac-equiv is emitted from Fraction Rider Grade 5 levels 2, 3 and 6; frac-simplify from levels 3 and 6. Grade 5 track.",
+   "targets": [
+    "math-r5-fraction-add-sub"
+   ],
+   "moduleTopics": [
+    "frac-equiv",
+    "frac-simplify"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-3.1.2",
+   "source": "parent-guide-toc",
+   "chapter": 3,
+   "title": "Fraction-Decimal-Percent Equivalents",
+   "page": 15,
+   "lessons": [
+    "3.1.2",
+    "3.1.3",
+    "3.1.4",
+    "3.1.5"
+   ],
+   "crossRef": null,
+   "verdict": "PARTIAL",
+   "rank": 11,
+   "why": "All three forms are emitted, each in its own world. No emitted topic CONVERTS between them, which is the whole content of the block.",
+   "targets": [
+    "math-rp-percent",
+    "math-r5-decimal-place-value"
+   ],
+   "moduleTopics": [
+    "frac-equiv",
+    "dec-place-value",
+    "g6-percent"
+   ],
+   "gaps": [
+    "fraction to decimal",
+    "decimal to percent",
+    "the three-way equivalence in one item"
+   ]
+  },
+  {
+   "id": "pg-3.1.2-note",
+   "source": "parent-guide-toc",
+   "chapter": 3,
+   "title": "Operations with Fractions: Addition and Subtraction",
+   "page": 18,
+   "lessons": [
+    "3.1.2"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "All four are emitted from Fraction Rider Grade 5 levels 1, 2, 3 and 6.",
+   "targets": [
+    "math-r5-fraction-add-sub"
+   ],
+   "moduleTopics": [
+    "frac-add-like",
+    "frac-sub-like",
+    "frac-add-unlike",
+    "frac-sub-unlike"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-3.1.6",
+   "source": "parent-guide-toc",
+   "chapter": 3,
+   "title": "Ratios",
+   "page": 20,
+   "lessons": [
+    "3.1.6"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "Both emitted at 100% of Rocky Grade 6 levels 2 and 3.",
+   "targets": [
+    "math-rp-ratio-concept"
+   ],
+   "moduleTopics": [
+    "g6-ratio-table",
+    "g6-equiv-ratio"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-3.2.1",
+   "source": "parent-guide-toc",
+   "chapter": 3,
+   "title": "Operations with Integers",
+   "page": 21,
+   "lessons": [
+    "3.2.1",
+    "3.2.2"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 7,
+   "why": "No emitted topic does integer arithmetic. Razor Crest reaches negative numbers only as coordinates, and its answers are points and distances rather than signed sums.",
+   "targets": [
+    "math-ns-integers"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "add and subtract integers",
+    "the meaning of the opposite of a number"
+   ]
+  },
+  {
+   "id": "pg-3.2.3-abs",
+   "source": "parent-guide-toc",
+   "chapter": 3,
+   "title": "Absolute Value",
+   "page": 24,
+   "lessons": [
+    "3.2.3"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 8,
+   "why": "Absolute value is used INSIDE g6-distance to compute a distance, and is never itself the question. No emitted topic names it.",
+   "targets": [
+    "math-ns-order-abs"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "absolute value as distance from zero",
+    "order rational numbers on a number line"
+   ]
+  },
+  {
+   "id": "pg-3.2.3-quad",
+   "source": "parent-guide-toc",
+   "chapter": 3,
+   "title": "Four-Quadrant Graphing",
+   "page": 26,
+   "lessons": [
+    "3.2.3",
+    "3.2.4"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "All three emitted at 100% of Razor Crest Grade 6 levels 1, 2 and 3.",
+   "targets": [
+    "math-ns-coordinate-plane"
+   ],
+   "moduleTopics": [
+    "g6-quadrant",
+    "g6-reflect",
+    "g6-distance"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-4.1.1-var",
+   "source": "parent-guide-toc",
+   "chapter": 4,
+   "title": "Variable Expressions",
+   "page": 28,
+   "lessons": [
+    "4.1.1",
+    "4.1.2",
+    "4.1.3"
+   ],
+   "crossRef": null,
+   "verdict": "PARTIAL",
+   "rank": 12,
+   "why": "CORRECTION to the preliminary census, which called this COVERED. g6-evaluate substitutes into an expression that is handed over. pemdas-write-expr does write an expression from words, but its expressions are ALL NUMERIC: reading the generator confirms every option is digits and operators. Writing an expression in which a LETTER stands for a number, which is 6.EE.A.2.a and the point of the block, is emitted nowhere.",
+   "targets": [
+    "math-ee-write-expression"
+   ],
+   "moduleTopics": [
+    "g6-evaluate",
+    "pemdas-write-expr"
+   ],
+   "gaps": [
+    "write an expression using a letter",
+    "name the parts: term, factor, coefficient"
+   ]
+  },
+  {
+   "id": "pg-4.1.1-gen",
+   "source": "parent-guide-toc",
+   "chapter": 4,
+   "title": "Using Variables to Generalize",
+   "page": 30,
+   "lessons": [
+    "4.1.1",
+    "4.1.2",
+    "4.1.3"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 6,
+   "why": "Nothing emitted generalises a pattern into a rule. This is the same shortfall 1.1.3 names, one chapter later and with the variable made explicit.",
+   "targets": [
+    "math-ee-generalize"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "write the rule for figure n",
+    "use the rule to reach a far term"
+   ]
+  },
+  {
+   "id": "pg-4.1.3-note",
+   "source": "parent-guide-toc",
+   "chapter": 4,
+   "title": "Operations with Fractions: Mixed Numbers",
+   "page": 32,
+   "lessons": [
+    "4.1.3"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "Both emitted from Fraction Rider Grade 5; frac-mixed-add from levels 1, 4 and 6, frac-mixed-sub from level 6.",
+   "targets": [
+    "math-r5-fraction-add-sub"
+   ],
+   "moduleTopics": [
+    "frac-mixed-add",
+    "frac-mixed-sub"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-4.1.3-sub",
+   "source": "parent-guide-toc",
+   "chapter": 4,
+   "title": "Substitution and Evaluation of Expressions",
+   "page": 34,
+   "lessons": [
+    "4.1.3"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "All three emitted at 100% of The Floating Bear Grade 6 levels 1, 2 and 5.",
+   "targets": [
+    "math-ee-evaluate"
+   ],
+   "moduleTopics": [
+    "g6-evaluate",
+    "g6-evaluate2",
+    "g6-exponent"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-4.2.1",
+   "source": "parent-guide-toc",
+   "chapter": 4,
+   "title": "Scaling Figures and Scale Factor",
+   "page": 36,
+   "lessons": [
+    "4.2.1",
+    "4.2.2",
+    "4.2.3"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 17,
+   "why": "vol-scale is adjacent and does not serve it: it is emitted at 12% of LEGO Master Builder Grade 5 level 6 and scales ONE dimension of a solid. Scaling a two-dimensional figure and reading the scale factor back off it is emitted nowhere.",
+   "targets": [
+    "math-rp-ratio-concept"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "scale a figure by a factor",
+    "find the scale factor between two figures"
+   ]
+  },
+  {
+   "id": "pg-4.2.3-xref",
+   "source": "parent-guide-toc",
+   "chapter": 4,
+   "title": "Ratios (cross-reference from Lesson 3.1.6)",
+   "page": 20,
+   "lessons": [
+    "4.2.4"
+   ],
+   "crossRef": "pg-3.1.6",
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "The Parent Guide's Ratios entry at Lesson 3.1.6 points forward to Lessons 4.2.3 and 4.2.4 rather than restating itself, so the coverage is that section's. 4.2.3 is already inside the Scaling Figures range; 4.2.4 is reached only through this pointer.",
+   "targets": [
+    "math-rp-ratio-concept"
+   ],
+   "moduleTopics": [
+    "g6-ratio-table",
+    "g6-equiv-ratio"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-5.1.1",
+   "source": "parent-guide-toc",
+   "chapter": 5,
+   "title": "Multiplying Fractions with an Area Model",
+   "page": 38,
+   "lessons": [
+    "5.1.1",
+    "5.1.4",
+    "5.2.2"
+   ],
+   "crossRef": null,
+   "verdict": "PARTIAL",
+   "rank": 18,
+   "why": "The arithmetic is emitted from Fraction Rider Grade 5 levels 2, 4, 5 and 6. The AREA MODEL, which is what the block is named for and how CC1 teaches it, is absent.",
+   "targets": [
+    "math-r5-fraction-multiply"
+   ],
+   "moduleTopics": [
+    "frac-mult-frac",
+    "frac-mult-whole",
+    "frac-of-whole"
+   ],
+   "gaps": [
+    "read a product off a fraction area model"
+   ]
+  },
+  {
+   "id": "pg-5.2.1",
+   "source": "parent-guide-toc",
+   "chapter": 5,
+   "title": "Operations with Decimals: Multiplication of Decimals and Percents",
+   "page": 40,
+   "lessons": [
+    "5.2.1"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "dec-mult at 70% of F1 Grade 5 level 4; g6-dec-mul from Grade 6 level 2; both percent topics at 100% of their own levels.",
+   "targets": [
+    "math-ns-multi-digit-ops",
+    "math-rp-percent"
+   ],
+   "moduleTopics": [
+    "dec-mult",
+    "g6-dec-mul",
+    "g6-percent",
+    "g6-dec-percent"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-5.3.1",
+   "source": "parent-guide-toc",
+   "chapter": 5,
+   "title": "Area of Polygons and Complex Figures",
+   "page": 42,
+   "lessons": [
+    "5.3.1",
+    "5.3.2",
+    "5.3.3",
+    "5.3.4"
+   ],
+   "crossRef": null,
+   "verdict": "PARTIAL",
+   "rank": 14,
+   "why": "Rectangle and triangle only, each at 100% of its own LEGO Master Builder or Razor Crest Grade 6 level. The parallelogram, the trapezoid and any complex figure decomposed into parts, which are three of the block's four sections, are emitted nowhere.",
+   "targets": [
+    "math-g-area-polygons",
+    "math-g-coordinate-polygons"
+   ],
+   "moduleTopics": [
+    "g6-rect-area",
+    "g6-tri-area",
+    "g6-coord-rect-area",
+    "g6-coord-tri-area"
+   ],
+   "gaps": [
+    "area of a parallelogram",
+    "area of a trapezoid",
+    "decompose a complex figure"
+   ]
+  },
+  {
+   "id": "pg-6.1.1",
+   "source": "parent-guide-toc",
+   "chapter": 6,
+   "title": "Division by Fractions",
+   "page": 49,
+   "lessons": [
+    "6.1.1",
+    "6.1.2",
+    "6.1.3",
+    "6.1.4"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "The whole Grade 6 Fraction Rider campaign: all five emitted at 100% of their own levels.",
+   "targets": [
+    "math-ns-divide-fractions"
+   ],
+   "moduleTopics": [
+    "ns-div-intro",
+    "ns-div-frac",
+    "ns-div-mixed",
+    "ns-div-multi",
+    "ns-div-word"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-6.2.1",
+   "source": "parent-guide-toc",
+   "chapter": 6,
+   "title": "Order of Operations",
+   "page": 52,
+   "lessons": [
+    "6.2.1",
+    "6.2.2",
+    "6.2.5"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "Six emitted topics across all six Floating Bear Grade 5 levels. Grade 5 track.",
+   "targets": [
+    "math-ee-evaluate",
+    "math-ee-exponents"
+   ],
+   "moduleTopics": [
+    "pemdas-simple",
+    "pemdas-multi",
+    "pemdas-brackets",
+    "pemdas-nested",
+    "pemdas-full",
+    "pemdas-compare"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-6.2.3",
+   "source": "parent-guide-toc",
+   "chapter": 6,
+   "title": "Algebra Tiles and Perimeter",
+   "page": 55,
+   "lessons": [
+    "6.2.3"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 1,
+   "why": "Perimeter is emitted nowhere as a question, and is present only as the DISTRACTOR inside area items, where the explain text names it to rule it out. Tonight's homework asks for it as the answer, so the app currently miscues the concept it is being asked for.",
+   "targets": [
+    "math-r4-perimeter",
+    "math-ee-write-expression"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "perimeter of a labelled polygon",
+    "perimeter written as an expression"
+   ]
+  },
+  {
+   "id": "pg-6.2.4",
+   "source": "parent-guide-toc",
+   "chapter": 6,
+   "title": "Combining Like Terms",
+   "page": 57,
+   "lessons": [
+    "6.2.4"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 19,
+   "why": "No emitted topic simplifies an expression by collecting terms.",
+   "targets": [
+    "math-ee-equivalent"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "combine like terms",
+    "recognise unlike terms"
+   ]
+  },
+  {
+   "id": "pg-7.1.1",
+   "source": "parent-guide-toc",
+   "chapter": 7,
+   "title": "Rates and Unit Rates",
+   "page": 59,
+   "lessons": [
+    "7.1.1",
+    "7.1.2",
+    "7.1.3"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "Both rate topics at 100% of their own Grade 6 levels, plus the whole Grade 5 Rocky conversion campaign for 6.RP.A.3.d.",
+   "targets": [
+    "math-rp-unit-rate",
+    "math-rp-unit-conversion"
+   ],
+   "moduleTopics": [
+    "g6-unit-rate",
+    "g6-dec-unit-rate",
+    "unit-metric",
+    "unit-customary",
+    "unit-time",
+    "unit-multistep"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-7.2.1-xref",
+   "source": "parent-guide-toc",
+   "chapter": 7,
+   "title": "Division by Fractions (cross-reference to 6.1.1 to 6.1.4)",
+   "page": 49,
+   "lessons": [
+    "7.2.1",
+    "7.2.2"
+   ],
+   "crossRef": "pg-6.1.1",
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "The Parent Guide points this range back at its own chapter-6 section rather than restating it, so the coverage is that section's.",
+   "targets": [
+    "math-ns-divide-fractions"
+   ],
+   "moduleTopics": [
+    "ns-div-intro",
+    "ns-div-frac",
+    "ns-div-mixed",
+    "ns-div-multi",
+    "ns-div-word"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-7.2.3",
+   "source": "parent-guide-toc",
+   "chapter": 7,
+   "title": "Operations with Decimals",
+   "page": 61,
+   "lessons": [
+    "7.2.3",
+    "7.2.4"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "All four Grade 6 decimal operations emitted from F1 Grade 6 levels 1, 2 and 6, plus the Grade 5 decimal campaign.",
+   "targets": [
+    "math-ns-multi-digit-ops",
+    "math-r5-decimal-ops"
+   ],
+   "moduleTopics": [
+    "g6-dec-add",
+    "g6-dec-sub",
+    "g6-dec-mul",
+    "g6-dec-divide",
+    "dec-add-sub",
+    "dec-div",
+    "dec-round"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-7.3.4",
+   "source": "parent-guide-toc",
+   "chapter": 7,
+   "title": "Graphing and Solving Inequalities",
+   "page": 64,
+   "lessons": [
+    "7.3.4"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 20,
+   "why": "No emitted topic writes, graphs or solves an inequality. frac-compare and pemdas-compare compare two fixed values; neither states a constraint on an unknown.",
+   "targets": [
+    "math-ee-inequalities"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "write x > c from a condition",
+    "graph the solution on a number line"
+   ]
+  },
+  {
+   "id": "pg-8.1.1",
+   "source": "parent-guide-toc",
+   "chapter": 8,
+   "title": "Measures of Central Tendency",
+   "page": 67,
+   "lessons": [
+    "8.1.1",
+    "8.1.2",
+    "8.1.3"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "All three emitted from F1 Grade 6 level 5 at about a third of its draws each, and again from level 6.",
+   "targets": [
+    "math-sp-center-spread",
+    "math-sp-statistical-question"
+   ],
+   "moduleTopics": [
+    "g6-stats-mean",
+    "g6-stats-median",
+    "g6-stats-range"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-8.1.4",
+   "source": "parent-guide-toc",
+   "chapter": 8,
+   "title": "Graphical Representations of Data: Box Plots",
+   "page": 70,
+   "lessons": [
+    "8.1.4",
+    "8.1.5"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 10,
+   "why": "No emitted topic reads any plot. Third instance of the same root cause as 1.1.4 and 2.1.2.",
+   "targets": [
+    "math-sp-displays"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "read a box plot",
+    "read the median and the quartiles off one"
+   ]
+  },
+  {
+   "id": "pg-8.3.1",
+   "source": "parent-guide-toc",
+   "chapter": 8,
+   "title": "Solving Equations in Context",
+   "page": 73,
+   "lessons": [
+    "8.3.1"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "Both emitted at 100% of The Floating Bear Grade 6 levels 3 and 4.",
+   "targets": [
+    "math-ee-solve-equations"
+   ],
+   "moduleTopics": [
+    "g6-solve-add",
+    "g6-solve-mul"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-8.3.2",
+   "source": "parent-guide-toc",
+   "chapter": 8,
+   "title": "Distance, Rate, and Time",
+   "page": 76,
+   "lessons": [
+    "8.3.2",
+    "8.3.3"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 21,
+   "why": "No emitted topic relates distance, rate and time. g6-unit-rate finds a rate and stops; the Grade 5 unit-time topic converts time units and never multiplies by a rate.",
+   "targets": [
+    "math-rp-unit-rate",
+    "math-ee-generalize"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "d = r x t in either direction",
+    "a two-leg trip"
+   ]
+  },
+  {
+   "id": "pg-9.1.1",
+   "source": "parent-guide-toc",
+   "chapter": 9,
+   "title": "Prisms: Volume and Surface Area",
+   "page": 78,
+   "lessons": [
+    "9.1.1",
+    "9.1.2"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "Three Grade 6 topics at 100% of their own levels, plus the seven-topic Grade 5 LEGO Master Builder campaign underneath them.",
+   "targets": [
+    "math-g-volume-prisms",
+    "math-g-surface-area",
+    "math-r5-volume"
+   ],
+   "moduleTopics": [
+    "g6-volume",
+    "g6-volume-frac",
+    "g6-surface-area",
+    "vol-lwh",
+    "vol-base-height",
+    "vol-composite",
+    "vol-missing-dim",
+    "vol-unit-cubes",
+    "vol-hollow",
+    "vol-compare"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "pg-9.2.1",
+   "source": "parent-guide-toc",
+   "chapter": 9,
+   "title": "Calculating and Using Percents",
+   "page": 82,
+   "lessons": [
+    "9.2.1",
+    "9.2.2",
+    "9.2.3",
+    "9.2.4"
+   ],
+   "crossRef": null,
+   "verdict": "COVERED",
+   "rank": null,
+   "why": "All three emitted at 100% of Rocky Grade 6 levels 4 and 5 and F1 Grade 6 level 4.",
+   "targets": [
+    "math-rp-percent"
+   ],
+   "moduleTopics": [
+    "g6-percent",
+    "g6-percent-find",
+    "g6-dec-percent"
+   ],
+   "gaps": []
+  },
+  {
+   "id": "sa-classify-figures",
+   "source": "homework-set",
+   "chapter": 1,
+   "title": "Classifying triangles and quadrilaterals",
+   "page": null,
+   "lessons": [
+    "1.1.3"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 2,
+   "why": "Problem 1-22 asks for it and the app has zero content for it: no emitted topic names a shape, and a full-text scan of the six modules finds no occurrence of scalene, isosceles, rhombus, trapezoid or obtuse. The two shell topics that LOOK like coverage, coord-shape and coord-real-world, carry a label and a coach tip and are emitted by nothing; WP1 deletes them.",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "classify a triangle by its sides",
+    "classify a triangle by its angles",
+    "the quadrilateral hierarchy"
+   ]
+  },
+  {
+   "id": "sa-decimal-word-reverse",
+   "source": "homework-set",
+   "chapter": 1,
+   "title": "Decimal word form, words back into digits",
+   "page": null,
+   "lessons": [
+    "1.1.3"
+   ],
+   "crossRef": null,
+   "verdict": "GAP",
+   "rank": 5,
+   "why": "dec-write-word runs ONE direction. It is emitted at 29% of F1 Apex Decimals Grade 5 level 1 and every one of its four options is a word form, so the reverse direction that problem 1-20b asks for cannot be drawn at all.",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "moduleTopics": [],
+   "gaps": [
+    "read a word form and pick the decimal"
+   ]
+  }
+ ],
+ "lessons": [
+  {
+   "lesson": "1.1.1",
+   "chapter": 1,
+   "problems": [
+    "1-3",
+    "1-4"
+   ],
+   "title": "Patterns, data displays and types of numbers",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "6.SP.A.1",
+    "6.SP.A.2"
+   ],
+   "targets": [
+    "math-sp-statistical-question"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "open the course: collect and organise data"
+   ],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "1.1.2",
+   "chapter": 1,
+   "problems": [
+    "1-10",
+    "1-11",
+    "1-12",
+    "1-13",
+    "1-14"
+   ],
+   "title": "Patterns, data displays and types of numbers",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "6.SP.A.1",
+    "6.SP.A.2"
+   ],
+   "targets": [
+    "math-sp-statistical-question"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "describe a data set in words"
+   ],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "1.1.3",
+   "chapter": 1,
+   "problems": [
+    "1-19",
+    "1-20",
+    "1-21",
+    "1-22",
+    "1-23"
+   ],
+   "title": "Describing and Extending Patterns",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-1.1.3",
+    "sa-classify-figures",
+    "sa-decimal-word-reverse"
+   ],
+   "ccss": [
+    "5.OA.B.3",
+    "6.EE.C.9",
+    "5.G.B.3",
+    "5.G.B.4",
+    "5.NBT.A.3.a",
+    "5.NBT.A.3.b"
+   ],
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize",
+    "math-r5-classify-figures",
+    "math-r5-decimal-place-value"
+   ],
+   "moduleTopics": [
+    "pemdas-pattern"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "a drawn growing pattern the student extends",
+    "find the rule from the figures",
+    "predict a far-out term such as the 100th",
+    "classify a triangle by its sides",
+    "classify a triangle by its angles",
+    "the quadrilateral hierarchy",
+    "read a word form and pick the decimal"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "1.1.4",
+   "chapter": 1,
+   "problems": [
+    "1-28",
+    "1-29",
+    "1-30",
+    "1-31",
+    "1-32"
+   ],
+   "title": "Graphical Representations of Data: Histograms and Bar Graphs",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-1.1.4"
+   ],
+   "ccss": [
+    "3.MD.B.3",
+    "6.SP.B.4"
+   ],
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "read a value off a bar graph",
+    "compare two bars",
+    "read a histogram bin"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "1.1.5",
+   "chapter": 1,
+   "problems": [
+    "1-36",
+    "1-37",
+    "1-38",
+    "1-39",
+    "1-40"
+   ],
+   "title": "Patterns, data displays and types of numbers",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "3.MD.B.3",
+    "6.SP.B.4"
+   ],
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "choose and read a data display"
+   ],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "1.2.1",
+   "chapter": 1,
+   "problems": [
+    "1-46",
+    "1-47",
+    "1-48",
+    "1-49",
+    "1-50"
+   ],
+   "title": "Patterns, data displays and types of numbers",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "6.NS.B.4"
+   ],
+   "targets": [
+    "math-ns-factors-multiples"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "arrays and factor pairs"
+   ],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "1.2.2",
+   "chapter": 1,
+   "problems": [
+    "1-57",
+    "1-58",
+    "1-59",
+    "1-60",
+    "1-61"
+   ],
+   "title": "Patterns, data displays and types of numbers",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "6.NS.B.4"
+   ],
+   "targets": [
+    "math-ns-factors-multiples"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "multiples and common multiples"
+   ],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "1.2.3",
+   "chapter": 1,
+   "problems": [
+    "1-68",
+    "1-69",
+    "1-70",
+    "1-71",
+    "1-72"
+   ],
+   "title": "Types of Numbers",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-1.2.3"
+   ],
+   "ccss": [
+    "6.NS.B.4"
+   ],
+   "targets": [
+    "math-ns-factors-multiples"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "primes and composites",
+    "factor pairs",
+    "multiples, GCF and LCM"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "1.2.4",
+   "chapter": 1,
+   "problems": [
+    "1-85",
+    "1-86",
+    "1-87",
+    "1-88",
+    "1-89",
+    "1-90",
+    "1-91",
+    "1-92",
+    "1-93",
+    "1-94"
+   ],
+   "title": "Types of Numbers",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-1.2.3"
+   ],
+   "ccss": [
+    "6.NS.B.4"
+   ],
+   "targets": [
+    "math-ns-factors-multiples"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "primes and composites",
+    "factor pairs",
+    "multiples, GCF and LCM"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "2.1.1",
+   "chapter": 2,
+   "problems": [
+    "2-6",
+    "2-7",
+    "2-8",
+    "2-9",
+    "2-10"
+   ],
+   "title": "Data displays, generic rectangles and the distributive property",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "6.SP.B.4"
+   ],
+   "targets": [
+    "math-sp-displays"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "organise a data set before plotting it"
+   ],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "2.1.2",
+   "chapter": 2,
+   "problems": [
+    "2-15",
+    "2-16",
+    "2-17",
+    "2-18",
+    "2-19"
+   ],
+   "title": "Graphical Representations of Data: Stem-and-Leaf Plots",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-2.1.2"
+   ],
+   "ccss": [
+    "6.SP.B.4"
+   ],
+   "targets": [
+    "math-sp-displays"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "read a stem-and-leaf plot",
+    "build one from a data set"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "2.2.1",
+   "chapter": 2,
+   "problems": [
+    "2-24",
+    "2-25",
+    "2-26",
+    "2-27",
+    "2-28"
+   ],
+   "title": "Data displays, generic rectangles and the distributive property",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "5.NBT.A.3.a",
+    "5.NBT.A.3.b"
+   ],
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "moduleTopics": [
+    "dec-place-value",
+    "dec-compare"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "2.2.2",
+   "chapter": 2,
+   "problems": [
+    "2-34",
+    "2-35",
+    "2-36",
+    "2-37",
+    "2-38"
+   ],
+   "title": "Data displays, generic rectangles and the distributive property",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "5.NBT.A.4",
+    "5.NBT.B.7"
+   ],
+   "targets": [
+    "math-r5-decimal-ops"
+   ],
+   "moduleTopics": [
+    "dec-add-sub"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "2.2.3",
+   "chapter": 2,
+   "problems": [
+    "2-46",
+    "2-47",
+    "2-48",
+    "2-49",
+    "2-50"
+   ],
+   "title": "Data displays, generic rectangles and the distributive property",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "5.NBT.A.4",
+    "5.NBT.B.7"
+   ],
+   "targets": [
+    "math-r5-decimal-ops"
+   ],
+   "moduleTopics": [
+    "dec-add-sub",
+    "dec-round"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "2.3.1",
+   "chapter": 2,
+   "problems": [
+    "2-55",
+    "2-56",
+    "2-57",
+    "2-58",
+    "2-59"
+   ],
+   "title": "Multiplication with Generic Rectangles",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-2.3.1"
+   ],
+   "ccss": [
+    "6.EE.A.3",
+    "6.EE.A.4",
+    "6.G.A.1"
+   ],
+   "targets": [
+    "math-ee-equivalent",
+    "math-g-area-polygons"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "partial products in a generic rectangle",
+    "read the whole product off the model"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "2.3.2",
+   "chapter": 2,
+   "problems": [
+    "2-65",
+    "2-66",
+    "2-67",
+    "2-68",
+    "2-69"
+   ],
+   "title": "Multiplication with Generic Rectangles",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-2.3.1"
+   ],
+   "ccss": [
+    "6.EE.A.3",
+    "6.EE.A.4",
+    "6.G.A.1"
+   ],
+   "targets": [
+    "math-ee-equivalent",
+    "math-g-area-polygons"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "partial products in a generic rectangle",
+    "read the whole product off the model"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "2.3.3",
+   "chapter": 2,
+   "problems": [
+    "2-75",
+    "2-76",
+    "2-77",
+    "2-78",
+    "2-79"
+   ],
+   "title": "Multiplication with Generic Rectangles + Distributive Property",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-2.3.1",
+    "pg-2.3.3"
+   ],
+   "ccss": [
+    "6.EE.A.3",
+    "6.EE.A.4",
+    "6.G.A.1"
+   ],
+   "targets": [
+    "math-ee-equivalent",
+    "math-g-area-polygons"
+   ],
+   "moduleTopics": [
+    "g6-evaluate2"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "partial products in a generic rectangle",
+    "read the whole product off the model",
+    "expand a(b + c) to an equivalent expression",
+    "factor a common factor back out"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "2.3.4",
+   "chapter": 2,
+   "problems": [
+    "2-86",
+    "2-87",
+    "2-88",
+    "2-89",
+    "2-90"
+   ],
+   "title": "Multiplication with Generic Rectangles + Distributive Property",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-2.3.1",
+    "pg-2.3.3"
+   ],
+   "ccss": [
+    "6.EE.A.3",
+    "6.EE.A.4",
+    "6.G.A.1"
+   ],
+   "targets": [
+    "math-ee-equivalent",
+    "math-g-area-polygons"
+   ],
+   "moduleTopics": [
+    "g6-evaluate2"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "partial products in a generic rectangle",
+    "read the whole product off the model",
+    "expand a(b + c) to an equivalent expression",
+    "factor a common factor back out"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "3.1.1",
+   "chapter": 3,
+   "problems": [
+    "3-12",
+    "3-13",
+    "3-14",
+    "3-15",
+    "3-16",
+    "3-17",
+    "3-18",
+    "3-19",
+    "3-20",
+    "3-21"
+   ],
+   "title": "Equivalent Fractions",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-3.1.1"
+   ],
+   "ccss": [
+    "5.NF.A.1",
+    "5.NF.A.2"
+   ],
+   "targets": [
+    "math-r5-fraction-add-sub"
+   ],
+   "moduleTopics": [
+    "frac-equiv",
+    "frac-simplify"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "3.1.2",
+   "chapter": 3,
+   "problems": [
+    "3-31",
+    "3-32",
+    "3-33",
+    "3-34",
+    "3-35"
+   ],
+   "title": "Fraction-Decimal-Percent Equivalents + Operations with Fractions: Addition and Subtraction",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-3.1.2",
+    "pg-3.1.2-note"
+   ],
+   "ccss": [
+    "6.RP.A.3.c",
+    "5.NBT.A.3.a",
+    "5.NBT.A.3.b",
+    "5.NF.A.1",
+    "5.NF.A.2"
+   ],
+   "targets": [
+    "math-rp-percent",
+    "math-r5-decimal-place-value",
+    "math-r5-fraction-add-sub"
+   ],
+   "moduleTopics": [
+    "frac-equiv",
+    "dec-place-value",
+    "g6-percent",
+    "frac-add-like",
+    "frac-sub-like",
+    "frac-add-unlike",
+    "frac-sub-unlike"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "fraction to decimal",
+    "decimal to percent",
+    "the three-way equivalence in one item"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "3.1.3",
+   "chapter": 3,
+   "problems": [
+    "3-45",
+    "3-46",
+    "3-47",
+    "3-48",
+    "3-49",
+    "3-50",
+    "3-51",
+    "3-52",
+    "3-53",
+    "3-54"
+   ],
+   "title": "Fraction-Decimal-Percent Equivalents",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-3.1.2"
+   ],
+   "ccss": [
+    "6.RP.A.3.c",
+    "5.NBT.A.3.a",
+    "5.NBT.A.3.b"
+   ],
+   "targets": [
+    "math-rp-percent",
+    "math-r5-decimal-place-value"
+   ],
+   "moduleTopics": [
+    "frac-equiv",
+    "dec-place-value",
+    "g6-percent"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "fraction to decimal",
+    "decimal to percent",
+    "the three-way equivalence in one item"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "3.1.4",
+   "chapter": 3,
+   "problems": [
+    "3-62",
+    "3-63",
+    "3-64",
+    "3-65",
+    "3-66"
+   ],
+   "title": "Fraction-Decimal-Percent Equivalents",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-3.1.2"
+   ],
+   "ccss": [
+    "6.RP.A.3.c",
+    "5.NBT.A.3.a",
+    "5.NBT.A.3.b"
+   ],
+   "targets": [
+    "math-rp-percent",
+    "math-r5-decimal-place-value"
+   ],
+   "moduleTopics": [
+    "frac-equiv",
+    "dec-place-value",
+    "g6-percent"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "fraction to decimal",
+    "decimal to percent",
+    "the three-way equivalence in one item"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "3.1.5",
+   "chapter": 3,
+   "problems": [
+    "3-73",
+    "3-74",
+    "3-75",
+    "3-76",
+    "3-77"
+   ],
+   "title": "Fraction-Decimal-Percent Equivalents",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-3.1.2"
+   ],
+   "ccss": [
+    "6.RP.A.3.c",
+    "5.NBT.A.3.a",
+    "5.NBT.A.3.b"
+   ],
+   "targets": [
+    "math-rp-percent",
+    "math-r5-decimal-place-value"
+   ],
+   "moduleTopics": [
+    "frac-equiv",
+    "dec-place-value",
+    "g6-percent"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "fraction to decimal",
+    "decimal to percent",
+    "the three-way equivalence in one item"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "3.1.6",
+   "chapter": 3,
+   "problems": [
+    "3-84",
+    "3-85",
+    "3-86",
+    "3-87",
+    "3-88"
+   ],
+   "title": "Ratios",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-3.1.6"
+   ],
+   "ccss": [
+    "6.RP.A.1",
+    "6.RP.A.3.a"
+   ],
+   "targets": [
+    "math-rp-ratio-concept"
+   ],
+   "moduleTopics": [
+    "g6-ratio-table",
+    "g6-equiv-ratio"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "3.2.1",
+   "chapter": 3,
+   "problems": [
+    "3-94",
+    "3-95",
+    "3-96",
+    "3-97",
+    "3-98"
+   ],
+   "title": "Operations with Integers",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-3.2.1"
+   ],
+   "ccss": [
+    "6.NS.C.5",
+    "6.NS.C.6.a"
+   ],
+   "targets": [
+    "math-ns-integers"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "add and subtract integers",
+    "the meaning of the opposite of a number"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "3.2.2",
+   "chapter": 3,
+   "problems": [
+    "3-106",
+    "3-107",
+    "3-108",
+    "3-109",
+    "3-110"
+   ],
+   "title": "Operations with Integers",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-3.2.1"
+   ],
+   "ccss": [
+    "6.NS.C.5",
+    "6.NS.C.6.a"
+   ],
+   "targets": [
+    "math-ns-integers"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "add and subtract integers",
+    "the meaning of the opposite of a number"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "3.2.3",
+   "chapter": 3,
+   "problems": [
+    "3-118",
+    "3-119",
+    "3-120",
+    "3-121",
+    "3-122"
+   ],
+   "title": "Absolute Value + Four-Quadrant Graphing",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-3.2.3-abs",
+    "pg-3.2.3-quad"
+   ],
+   "ccss": [
+    "6.NS.C.7.a",
+    "6.NS.C.7.c",
+    "6.NS.C.6.b",
+    "6.NS.C.6.c",
+    "6.NS.C.8"
+   ],
+   "targets": [
+    "math-ns-order-abs",
+    "math-ns-coordinate-plane"
+   ],
+   "moduleTopics": [
+    "g6-quadrant",
+    "g6-reflect",
+    "g6-distance"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "absolute value as distance from zero",
+    "order rational numbers on a number line"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "3.2.4",
+   "chapter": 3,
+   "problems": [
+    "3-128",
+    "3-129",
+    "3-130",
+    "3-131",
+    "3-132"
+   ],
+   "title": "Four-Quadrant Graphing",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-3.2.3-quad"
+   ],
+   "ccss": [
+    "6.NS.C.6.b",
+    "6.NS.C.6.c",
+    "6.NS.C.8"
+   ],
+   "targets": [
+    "math-ns-coordinate-plane"
+   ],
+   "moduleTopics": [
+    "g6-quadrant",
+    "g6-reflect",
+    "g6-distance"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "4.1.1",
+   "chapter": 4,
+   "problems": [
+    "4-7",
+    "4-8",
+    "4-9",
+    "4-10",
+    "4-11"
+   ],
+   "title": "Variable Expressions + Using Variables to Generalize",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-4.1.1-var",
+    "pg-4.1.1-gen"
+   ],
+   "ccss": [
+    "6.EE.A.2.a",
+    "6.EE.A.2.b",
+    "6.EE.C.9"
+   ],
+   "targets": [
+    "math-ee-write-expression",
+    "math-ee-generalize"
+   ],
+   "moduleTopics": [
+    "g6-evaluate",
+    "pemdas-write-expr"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "write an expression using a letter",
+    "name the parts: term, factor, coefficient",
+    "write the rule for figure n",
+    "use the rule to reach a far term"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "4.1.2",
+   "chapter": 4,
+   "problems": [
+    "4-16",
+    "4-17",
+    "4-18",
+    "4-19",
+    "4-20"
+   ],
+   "title": "Variable Expressions + Using Variables to Generalize",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-4.1.1-var",
+    "pg-4.1.1-gen"
+   ],
+   "ccss": [
+    "6.EE.A.2.a",
+    "6.EE.A.2.b",
+    "6.EE.C.9"
+   ],
+   "targets": [
+    "math-ee-write-expression",
+    "math-ee-generalize"
+   ],
+   "moduleTopics": [
+    "g6-evaluate",
+    "pemdas-write-expr"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "write an expression using a letter",
+    "name the parts: term, factor, coefficient",
+    "write the rule for figure n",
+    "use the rule to reach a far term"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "4.1.3",
+   "chapter": 4,
+   "problems": [
+    "4-34",
+    "4-35",
+    "4-36",
+    "4-37",
+    "4-38",
+    "4-39",
+    "4-40",
+    "4-41",
+    "4-42",
+    "4-43"
+   ],
+   "title": "Variable Expressions + Using Variables to Generalize + Operations with Fractions: Mixed Numbers + Substitution and Evaluation of Expressions",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-4.1.1-var",
+    "pg-4.1.1-gen",
+    "pg-4.1.3-note",
+    "pg-4.1.3-sub"
+   ],
+   "ccss": [
+    "6.EE.A.2.a",
+    "6.EE.A.2.b",
+    "6.EE.C.9",
+    "5.NF.A.1",
+    "5.NF.A.2",
+    "6.EE.A.2.c"
+   ],
+   "targets": [
+    "math-ee-write-expression",
+    "math-ee-generalize",
+    "math-r5-fraction-add-sub",
+    "math-ee-evaluate"
+   ],
+   "moduleTopics": [
+    "g6-evaluate",
+    "pemdas-write-expr",
+    "frac-mixed-add",
+    "frac-mixed-sub",
+    "g6-evaluate2",
+    "g6-exponent"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "write an expression using a letter",
+    "name the parts: term, factor, coefficient",
+    "write the rule for figure n",
+    "use the rule to reach a far term"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "4.2.1",
+   "chapter": 4,
+   "problems": [
+    "4-47",
+    "4-48",
+    "4-49",
+    "4-50",
+    "4-51"
+   ],
+   "title": "Scaling Figures and Scale Factor",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-4.2.1"
+   ],
+   "ccss": [
+    "6.RP.A.1",
+    "6.RP.A.3.a"
+   ],
+   "targets": [
+    "math-rp-ratio-concept"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "scale a figure by a factor",
+    "find the scale factor between two figures"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "4.2.2",
+   "chapter": 4,
+   "problems": [
+    "4-58",
+    "4-59",
+    "4-60",
+    "4-61",
+    "4-62"
+   ],
+   "title": "Scaling Figures and Scale Factor",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-4.2.1"
+   ],
+   "ccss": [
+    "6.RP.A.1",
+    "6.RP.A.3.a"
+   ],
+   "targets": [
+    "math-rp-ratio-concept"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "scale a figure by a factor",
+    "find the scale factor between two figures"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "4.2.3",
+   "chapter": 4,
+   "problems": [
+    "4-70",
+    "4-71",
+    "4-72",
+    "4-73",
+    "4-74"
+   ],
+   "title": "Scaling Figures and Scale Factor",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-4.2.1"
+   ],
+   "ccss": [
+    "6.RP.A.1",
+    "6.RP.A.3.a"
+   ],
+   "targets": [
+    "math-rp-ratio-concept"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "scale a figure by a factor",
+    "find the scale factor between two figures"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "4.2.4",
+   "chapter": 4,
+   "problems": [
+    "4-80",
+    "4-81",
+    "4-82",
+    "4-83",
+    "4-84"
+   ],
+   "title": "Ratios (cross-reference from Lesson 3.1.6)",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-4.2.3-xref"
+   ],
+   "ccss": [
+    "6.RP.A.1",
+    "6.RP.A.3.a"
+   ],
+   "targets": [
+    "math-rp-ratio-concept"
+   ],
+   "moduleTopics": [
+    "g6-ratio-table",
+    "g6-equiv-ratio"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "5.1.1",
+   "chapter": 5,
+   "problems": [
+    "5-4",
+    "5-5",
+    "5-6",
+    "5-7",
+    "5-8"
+   ],
+   "title": "Multiplying Fractions with an Area Model",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-5.1.1"
+   ],
+   "ccss": [
+    "5.NF.B.4"
+   ],
+   "targets": [
+    "math-r5-fraction-multiply"
+   ],
+   "moduleTopics": [
+    "frac-mult-frac",
+    "frac-mult-whole",
+    "frac-of-whole"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "read a product off a fraction area model"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "5.1.2",
+   "chapter": 5,
+   "problems": [
+    "5-13",
+    "5-14",
+    "5-15",
+    "5-16",
+    "5-17"
+   ],
+   "title": "Multiplying fractions and decimals, and area",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "5.NF.B.4"
+   ],
+   "targets": [
+    "math-r5-fraction-multiply"
+   ],
+   "moduleTopics": [
+    "frac-mult-frac"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "the area model itself"
+   ],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "5.1.3",
+   "chapter": 5,
+   "problems": [
+    "5-24",
+    "5-25",
+    "5-26",
+    "5-27",
+    "5-28"
+   ],
+   "title": "Multiplying fractions and decimals, and area",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "5.NF.B.4"
+   ],
+   "targets": [
+    "math-r5-fraction-multiply"
+   ],
+   "moduleTopics": [
+    "frac-mult-whole",
+    "frac-of-whole"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "5.1.4",
+   "chapter": 5,
+   "problems": [
+    "5-34",
+    "5-35",
+    "5-36",
+    "5-37",
+    "5-38"
+   ],
+   "title": "Multiplying Fractions with an Area Model",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-5.1.1"
+   ],
+   "ccss": [
+    "5.NF.B.4"
+   ],
+   "targets": [
+    "math-r5-fraction-multiply"
+   ],
+   "moduleTopics": [
+    "frac-mult-frac",
+    "frac-mult-whole",
+    "frac-of-whole"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "read a product off a fraction area model"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "5.2.1",
+   "chapter": 5,
+   "problems": [
+    "5-48",
+    "5-49",
+    "5-50",
+    "5-51",
+    "5-52"
+   ],
+   "title": "Operations with Decimals: Multiplication of Decimals and Percents",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-5.2.1"
+   ],
+   "ccss": [
+    "6.NS.B.2",
+    "6.NS.B.3",
+    "6.RP.A.3.c"
+   ],
+   "targets": [
+    "math-ns-multi-digit-ops",
+    "math-rp-percent"
+   ],
+   "moduleTopics": [
+    "dec-mult",
+    "g6-dec-mul",
+    "g6-percent",
+    "g6-dec-percent"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "5.2.2",
+   "chapter": 5,
+   "problems": [
+    "5-61",
+    "5-62",
+    "5-63",
+    "5-64",
+    "5-65"
+   ],
+   "title": "Multiplying Fractions with an Area Model",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-5.1.1"
+   ],
+   "ccss": [
+    "5.NF.B.4"
+   ],
+   "targets": [
+    "math-r5-fraction-multiply"
+   ],
+   "moduleTopics": [
+    "frac-mult-frac",
+    "frac-mult-whole",
+    "frac-of-whole"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "read a product off a fraction area model"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "5.3.1",
+   "chapter": 5,
+   "problems": [
+    "5-71",
+    "5-72",
+    "5-73",
+    "5-74",
+    "5-75"
+   ],
+   "title": "Area of Polygons and Complex Figures",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-5.3.1"
+   ],
+   "ccss": [
+    "6.G.A.1",
+    "6.G.A.3"
+   ],
+   "targets": [
+    "math-g-area-polygons",
+    "math-g-coordinate-polygons"
+   ],
+   "moduleTopics": [
+    "g6-rect-area",
+    "g6-tri-area",
+    "g6-coord-rect-area",
+    "g6-coord-tri-area"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "area of a parallelogram",
+    "area of a trapezoid",
+    "decompose a complex figure"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "5.3.2",
+   "chapter": 5,
+   "problems": [
+    "5-80",
+    "5-81",
+    "5-82",
+    "5-83",
+    "5-84"
+   ],
+   "title": "Area of Polygons and Complex Figures",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-5.3.1"
+   ],
+   "ccss": [
+    "6.G.A.1",
+    "6.G.A.3"
+   ],
+   "targets": [
+    "math-g-area-polygons",
+    "math-g-coordinate-polygons"
+   ],
+   "moduleTopics": [
+    "g6-rect-area",
+    "g6-tri-area",
+    "g6-coord-rect-area",
+    "g6-coord-tri-area"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "area of a parallelogram",
+    "area of a trapezoid",
+    "decompose a complex figure"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "5.3.3",
+   "chapter": 5,
+   "problems": [
+    "5-91",
+    "5-92",
+    "5-93",
+    "5-94",
+    "5-95"
+   ],
+   "title": "Area of Polygons and Complex Figures",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-5.3.1"
+   ],
+   "ccss": [
+    "6.G.A.1",
+    "6.G.A.3"
+   ],
+   "targets": [
+    "math-g-area-polygons",
+    "math-g-coordinate-polygons"
+   ],
+   "moduleTopics": [
+    "g6-rect-area",
+    "g6-tri-area",
+    "g6-coord-rect-area",
+    "g6-coord-tri-area"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "area of a parallelogram",
+    "area of a trapezoid",
+    "decompose a complex figure"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "5.3.4",
+   "chapter": 5,
+   "problems": [
+    "5-101",
+    "5-102",
+    "5-103",
+    "5-104",
+    "5-105"
+   ],
+   "title": "Area of Polygons and Complex Figures",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-5.3.1"
+   ],
+   "ccss": [
+    "6.G.A.1",
+    "6.G.A.3"
+   ],
+   "targets": [
+    "math-g-area-polygons",
+    "math-g-coordinate-polygons"
+   ],
+   "moduleTopics": [
+    "g6-rect-area",
+    "g6-tri-area",
+    "g6-coord-rect-area",
+    "g6-coord-tri-area"
+   ],
+   "packItemTargets": [],
+   "gaps": [
+    "area of a parallelogram",
+    "area of a trapezoid",
+    "decompose a complex figure"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "6.1.1",
+   "chapter": 6,
+   "problems": [
+    "6-5",
+    "6-6",
+    "6-7",
+    "6-8",
+    "6-9",
+    "6-10",
+    "6-11",
+    "6-12",
+    "6-13",
+    "6-14"
+   ],
+   "title": "Division by Fractions",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-6.1.1"
+   ],
+   "ccss": [
+    "6.NS.A.1"
+   ],
+   "targets": [
+    "math-ns-divide-fractions"
+   ],
+   "moduleTopics": [
+    "ns-div-intro",
+    "ns-div-frac",
+    "ns-div-mixed",
+    "ns-div-multi",
+    "ns-div-word"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "6.1.2",
+   "chapter": 6,
+   "problems": [
+    "6-21",
+    "6-22",
+    "6-23",
+    "6-24",
+    "6-25"
+   ],
+   "title": "Division by Fractions",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-6.1.1"
+   ],
+   "ccss": [
+    "6.NS.A.1"
+   ],
+   "targets": [
+    "math-ns-divide-fractions"
+   ],
+   "moduleTopics": [
+    "ns-div-intro",
+    "ns-div-frac",
+    "ns-div-mixed",
+    "ns-div-multi",
+    "ns-div-word"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "6.1.3",
+   "chapter": 6,
+   "problems": [
+    "6-33",
+    "6-34",
+    "6-35",
+    "6-36",
+    "6-37",
+    "6-38",
+    "6-39",
+    "6-40",
+    "6-41",
+    "6-42"
+   ],
+   "title": "Division by Fractions",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-6.1.1"
+   ],
+   "ccss": [
+    "6.NS.A.1"
+   ],
+   "targets": [
+    "math-ns-divide-fractions"
+   ],
+   "moduleTopics": [
+    "ns-div-intro",
+    "ns-div-frac",
+    "ns-div-mixed",
+    "ns-div-multi",
+    "ns-div-word"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "6.1.4",
+   "chapter": 6,
+   "problems": [
+    "6-51",
+    "6-52",
+    "6-53",
+    "6-54",
+    "6-55",
+    "6-56",
+    "6-57",
+    "6-58",
+    "6-59",
+    "6-60"
+   ],
+   "title": "Division by Fractions",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-6.1.1"
+   ],
+   "ccss": [
+    "6.NS.A.1"
+   ],
+   "targets": [
+    "math-ns-divide-fractions"
+   ],
+   "moduleTopics": [
+    "ns-div-intro",
+    "ns-div-frac",
+    "ns-div-mixed",
+    "ns-div-multi",
+    "ns-div-word"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "6.2.1",
+   "chapter": 6,
+   "problems": [
+    "6-69",
+    "6-70",
+    "6-71",
+    "6-72",
+    "6-73",
+    "6-74",
+    "6-75",
+    "6-76",
+    "6-77",
+    "6-78"
+   ],
+   "title": "Order of Operations",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-6.2.1"
+   ],
+   "ccss": [
+    "6.EE.A.2.c",
+    "6.EE.A.1"
+   ],
+   "targets": [
+    "math-ee-evaluate",
+    "math-ee-exponents"
+   ],
+   "moduleTopics": [
+    "pemdas-simple",
+    "pemdas-multi",
+    "pemdas-brackets",
+    "pemdas-nested",
+    "pemdas-full",
+    "pemdas-compare"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "6.2.2",
+   "chapter": 6,
+   "problems": [
+    "6-86",
+    "6-87",
+    "6-88",
+    "6-89",
+    "6-90"
+   ],
+   "title": "Order of Operations",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-6.2.1"
+   ],
+   "ccss": [
+    "6.EE.A.2.c",
+    "6.EE.A.1"
+   ],
+   "targets": [
+    "math-ee-evaluate",
+    "math-ee-exponents"
+   ],
+   "moduleTopics": [
+    "pemdas-simple",
+    "pemdas-multi",
+    "pemdas-brackets",
+    "pemdas-nested",
+    "pemdas-full",
+    "pemdas-compare"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "6.2.3",
+   "chapter": 6,
+   "problems": [
+    "6-96",
+    "6-97",
+    "6-98",
+    "6-99",
+    "6-100"
+   ],
+   "title": "Algebra Tiles and Perimeter",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-6.2.3"
+   ],
+   "ccss": [
+    "4.MD.A.3",
+    "6.EE.A.2.a",
+    "6.EE.A.2.b"
+   ],
+   "targets": [
+    "math-r4-perimeter",
+    "math-ee-write-expression"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "perimeter of a labelled polygon",
+    "perimeter written as an expression"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "6.2.4",
+   "chapter": 6,
+   "problems": [
+    "6-106",
+    "6-107",
+    "6-108",
+    "6-109",
+    "6-110"
+   ],
+   "title": "Combining Like Terms",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-6.2.4"
+   ],
+   "ccss": [
+    "6.EE.A.3",
+    "6.EE.A.4"
+   ],
+   "targets": [
+    "math-ee-equivalent"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "combine like terms",
+    "recognise unlike terms"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "6.2.5",
+   "chapter": 6,
+   "problems": [
+    "6-115",
+    "6-116",
+    "6-117",
+    "6-118",
+    "6-119"
+   ],
+   "title": "Order of Operations",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-6.2.1"
+   ],
+   "ccss": [
+    "6.EE.A.2.c",
+    "6.EE.A.1"
+   ],
+   "targets": [
+    "math-ee-evaluate",
+    "math-ee-exponents"
+   ],
+   "moduleTopics": [
+    "pemdas-simple",
+    "pemdas-multi",
+    "pemdas-brackets",
+    "pemdas-nested",
+    "pemdas-full",
+    "pemdas-compare"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "7.1.1",
+   "chapter": 7,
+   "problems": [
+    "7-9",
+    "7-10",
+    "7-11",
+    "7-12",
+    "7-13"
+   ],
+   "title": "Rates and Unit Rates",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-7.1.1"
+   ],
+   "ccss": [
+    "6.RP.A.2",
+    "6.RP.A.3.b",
+    "6.RP.A.3.d"
+   ],
+   "targets": [
+    "math-rp-unit-rate",
+    "math-rp-unit-conversion"
+   ],
+   "moduleTopics": [
+    "g6-unit-rate",
+    "g6-dec-unit-rate",
+    "unit-metric",
+    "unit-customary",
+    "unit-time",
+    "unit-multistep"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "7.1.2",
+   "chapter": 7,
+   "problems": [
+    "7-19",
+    "7-20",
+    "7-21",
+    "7-22",
+    "7-23"
+   ],
+   "title": "Rates and Unit Rates",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-7.1.1"
+   ],
+   "ccss": [
+    "6.RP.A.2",
+    "6.RP.A.3.b",
+    "6.RP.A.3.d"
+   ],
+   "targets": [
+    "math-rp-unit-rate",
+    "math-rp-unit-conversion"
+   ],
+   "moduleTopics": [
+    "g6-unit-rate",
+    "g6-dec-unit-rate",
+    "unit-metric",
+    "unit-customary",
+    "unit-time",
+    "unit-multistep"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "7.1.3",
+   "chapter": 7,
+   "problems": [
+    "7-30",
+    "7-31",
+    "7-32",
+    "7-33",
+    "7-34"
+   ],
+   "title": "Rates and Unit Rates",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-7.1.1"
+   ],
+   "ccss": [
+    "6.RP.A.2",
+    "6.RP.A.3.b",
+    "6.RP.A.3.d"
+   ],
+   "targets": [
+    "math-rp-unit-rate",
+    "math-rp-unit-conversion"
+   ],
+   "moduleTopics": [
+    "g6-unit-rate",
+    "g6-dec-unit-rate",
+    "unit-metric",
+    "unit-customary",
+    "unit-time",
+    "unit-multistep"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "7.2.1",
+   "chapter": 7,
+   "problems": [
+    "7-44",
+    "7-45",
+    "7-46",
+    "7-47",
+    "7-48"
+   ],
+   "title": "Division by Fractions (cross-reference to 6.1.1 to 6.1.4)",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-7.2.1-xref"
+   ],
+   "ccss": [
+    "6.NS.A.1"
+   ],
+   "targets": [
+    "math-ns-divide-fractions"
+   ],
+   "moduleTopics": [
+    "ns-div-intro",
+    "ns-div-frac",
+    "ns-div-mixed",
+    "ns-div-multi",
+    "ns-div-word"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "7.2.2",
+   "chapter": 7,
+   "problems": [
+    "7-52",
+    "7-53",
+    "7-54",
+    "7-55",
+    "7-56"
+   ],
+   "title": "Division by Fractions (cross-reference to 6.1.1 to 6.1.4)",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-7.2.1-xref"
+   ],
+   "ccss": [
+    "6.NS.A.1"
+   ],
+   "targets": [
+    "math-ns-divide-fractions"
+   ],
+   "moduleTopics": [
+    "ns-div-intro",
+    "ns-div-frac",
+    "ns-div-mixed",
+    "ns-div-multi",
+    "ns-div-word"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "7.2.3",
+   "chapter": 7,
+   "problems": [
+    "7-64",
+    "7-65",
+    "7-66",
+    "7-67",
+    "7-68"
+   ],
+   "title": "Operations with Decimals",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-7.2.3"
+   ],
+   "ccss": [
+    "6.NS.B.2",
+    "6.NS.B.3",
+    "5.NBT.A.4",
+    "5.NBT.B.7"
+   ],
+   "targets": [
+    "math-ns-multi-digit-ops",
+    "math-r5-decimal-ops"
+   ],
+   "moduleTopics": [
+    "g6-dec-add",
+    "g6-dec-sub",
+    "g6-dec-mul",
+    "g6-dec-divide",
+    "dec-add-sub",
+    "dec-div",
+    "dec-round"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "7.2.4",
+   "chapter": 7,
+   "problems": [
+    "7-74",
+    "7-75",
+    "7-76",
+    "7-77",
+    "7-78"
+   ],
+   "title": "Operations with Decimals",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-7.2.3"
+   ],
+   "ccss": [
+    "6.NS.B.2",
+    "6.NS.B.3",
+    "5.NBT.A.4",
+    "5.NBT.B.7"
+   ],
+   "targets": [
+    "math-ns-multi-digit-ops",
+    "math-r5-decimal-ops"
+   ],
+   "moduleTopics": [
+    "g6-dec-add",
+    "g6-dec-sub",
+    "g6-dec-mul",
+    "g6-dec-divide",
+    "dec-add-sub",
+    "dec-div",
+    "dec-round"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "7.3.1",
+   "chapter": 7,
+   "problems": [
+    "7-86",
+    "7-87",
+    "7-88",
+    "7-89",
+    "7-90"
+   ],
+   "title": "Rates, decimal operations and inequalities",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "6.EE.B.5",
+    "6.EE.B.6",
+    "6.EE.B.7"
+   ],
+   "targets": [
+    "math-ee-solve-equations"
+   ],
+   "moduleTopics": [
+    "g6-solve-add"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "7.3.2",
+   "chapter": 7,
+   "problems": [
+    "7-96",
+    "7-97",
+    "7-98",
+    "7-99",
+    "7-100"
+   ],
+   "title": "Rates, decimal operations and inequalities",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "6.EE.B.5",
+    "6.EE.B.6",
+    "6.EE.B.7"
+   ],
+   "targets": [
+    "math-ee-solve-equations"
+   ],
+   "moduleTopics": [
+    "g6-solve-mul"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "7.3.3",
+   "chapter": 7,
+   "problems": [
+    "7-107",
+    "7-108",
+    "7-109",
+    "7-110",
+    "7-111"
+   ],
+   "title": "Rates, decimal operations and inequalities",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "6.EE.B.8"
+   ],
+   "targets": [
+    "math-ee-inequalities"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "compare with an inequality symbol"
+   ],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "7.3.4",
+   "chapter": 7,
+   "problems": [
+    "7-121",
+    "7-122",
+    "7-123",
+    "7-124",
+    "7-125",
+    "7-126",
+    "7-127",
+    "7-128",
+    "7-129",
+    "7-130"
+   ],
+   "title": "Graphing and Solving Inequalities",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-7.3.4"
+   ],
+   "ccss": [
+    "6.EE.B.8"
+   ],
+   "targets": [
+    "math-ee-inequalities"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "write x > c from a condition",
+    "graph the solution on a number line"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "8.1.1",
+   "chapter": 8,
+   "problems": [
+    "8-7",
+    "8-8",
+    "8-9",
+    "8-10",
+    "8-11"
+   ],
+   "title": "Measures of Central Tendency",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-8.1.1"
+   ],
+   "ccss": [
+    "6.SP.A.3",
+    "6.SP.B.5.c",
+    "6.SP.A.1",
+    "6.SP.A.2"
+   ],
+   "targets": [
+    "math-sp-center-spread",
+    "math-sp-statistical-question"
+   ],
+   "moduleTopics": [
+    "g6-stats-mean",
+    "g6-stats-median",
+    "g6-stats-range"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "8.1.2",
+   "chapter": 8,
+   "problems": [
+    "8-20",
+    "8-21",
+    "8-22",
+    "8-23",
+    "8-24",
+    "8-25",
+    "8-26",
+    "8-27",
+    "8-28",
+    "8-29"
+   ],
+   "title": "Measures of Central Tendency",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-8.1.1"
+   ],
+   "ccss": [
+    "6.SP.A.3",
+    "6.SP.B.5.c",
+    "6.SP.A.1",
+    "6.SP.A.2"
+   ],
+   "targets": [
+    "math-sp-center-spread",
+    "math-sp-statistical-question"
+   ],
+   "moduleTopics": [
+    "g6-stats-mean",
+    "g6-stats-median",
+    "g6-stats-range"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "8.1.3",
+   "chapter": 8,
+   "problems": [
+    "8-39",
+    "8-40",
+    "8-41",
+    "8-42",
+    "8-43"
+   ],
+   "title": "Measures of Central Tendency",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-8.1.1"
+   ],
+   "ccss": [
+    "6.SP.A.3",
+    "6.SP.B.5.c",
+    "6.SP.A.1",
+    "6.SP.A.2"
+   ],
+   "targets": [
+    "math-sp-center-spread",
+    "math-sp-statistical-question"
+   ],
+   "moduleTopics": [
+    "g6-stats-mean",
+    "g6-stats-median",
+    "g6-stats-range"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "8.1.4",
+   "chapter": 8,
+   "problems": [
+    "8-51",
+    "8-52",
+    "8-53",
+    "8-54",
+    "8-55",
+    "8-56",
+    "8-57",
+    "8-58",
+    "8-59",
+    "8-60"
+   ],
+   "title": "Graphical Representations of Data: Box Plots",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-8.1.4"
+   ],
+   "ccss": [
+    "6.SP.B.4"
+   ],
+   "targets": [
+    "math-sp-displays"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "read a box plot",
+    "read the median and the quartiles off one"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "8.1.5",
+   "chapter": 8,
+   "problems": [
+    "8-66",
+    "8-67",
+    "8-68",
+    "8-69",
+    "8-70"
+   ],
+   "title": "Graphical Representations of Data: Box Plots",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-8.1.4"
+   ],
+   "ccss": [
+    "6.SP.B.4"
+   ],
+   "targets": [
+    "math-sp-displays"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "read a box plot",
+    "read the median and the quartiles off one"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "8.2.1",
+   "chapter": 8,
+   "problems": [
+    "8-74",
+    "8-75",
+    "8-76",
+    "8-77",
+    "8-78",
+    "8-79",
+    "8-80",
+    "8-81",
+    "8-82",
+    "8-83"
+   ],
+   "title": "Statistics, equations in context, and distance-rate-time",
+   "titleSource": "chapter-correlation",
+   "blocks": [],
+   "ccss": [
+    "6.SP.A.3",
+    "6.SP.B.5.c"
+   ],
+   "targets": [
+    "math-sp-center-spread"
+   ],
+   "moduleTopics": [
+    "g6-stats-mean",
+    "g6-stats-median"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inferred"
+  },
+  {
+   "lesson": "8.3.1",
+   "chapter": 8,
+   "problems": [
+    "8-90",
+    "8-91",
+    "8-92",
+    "8-93",
+    "8-94"
+   ],
+   "title": "Solving Equations in Context",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-8.3.1"
+   ],
+   "ccss": [
+    "6.EE.B.5",
+    "6.EE.B.6",
+    "6.EE.B.7"
+   ],
+   "targets": [
+    "math-ee-solve-equations"
+   ],
+   "moduleTopics": [
+    "g6-solve-add",
+    "g6-solve-mul"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "8.3.2",
+   "chapter": 8,
+   "problems": [
+    "8-101",
+    "8-102",
+    "8-103",
+    "8-104",
+    "8-105"
+   ],
+   "title": "Distance, Rate, and Time",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-8.3.2"
+   ],
+   "ccss": [
+    "6.RP.A.2",
+    "6.RP.A.3.b",
+    "6.EE.C.9"
+   ],
+   "targets": [
+    "math-rp-unit-rate",
+    "math-ee-generalize"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "d = r x t in either direction",
+    "a two-leg trip"
+   ],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "8.3.3",
+   "chapter": 8,
+   "problems": [
+    "8-116",
+    "8-117",
+    "8-118",
+    "8-119",
+    "8-120"
+   ],
+   "title": "Distance, Rate, and Time",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-8.3.2"
+   ],
+   "ccss": [
+    "6.RP.A.2",
+    "6.RP.A.3.b",
+    "6.EE.C.9"
+   ],
+   "targets": [
+    "math-rp-unit-rate",
+    "math-ee-generalize"
+   ],
+   "moduleTopics": [],
+   "packItemTargets": [],
+   "gaps": [
+    "d = r x t in either direction",
+    "a two-leg trip"
+   ],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "9.1.1",
+   "chapter": 9,
+   "problems": [
+    "9-10",
+    "9-11",
+    "9-12",
+    "9-13",
+    "9-14"
+   ],
+   "title": "Prisms: Volume and Surface Area",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-9.1.1"
+   ],
+   "ccss": [
+    "6.G.A.2",
+    "6.G.A.4",
+    "5.MD.C.5"
+   ],
+   "targets": [
+    "math-g-volume-prisms",
+    "math-g-surface-area",
+    "math-r5-volume"
+   ],
+   "moduleTopics": [
+    "g6-volume",
+    "g6-volume-frac",
+    "g6-surface-area",
+    "vol-lwh",
+    "vol-base-height",
+    "vol-composite",
+    "vol-missing-dim",
+    "vol-unit-cubes",
+    "vol-hollow",
+    "vol-compare"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "9.1.2",
+   "chapter": 9,
+   "problems": [
+    "9-24",
+    "9-25",
+    "9-26",
+    "9-27",
+    "9-28"
+   ],
+   "title": "Prisms: Volume and Surface Area",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-9.1.1"
+   ],
+   "ccss": [
+    "6.G.A.2",
+    "6.G.A.4",
+    "5.MD.C.5"
+   ],
+   "targets": [
+    "math-g-volume-prisms",
+    "math-g-surface-area",
+    "math-r5-volume"
+   ],
+   "moduleTopics": [
+    "g6-volume",
+    "g6-volume-frac",
+    "g6-surface-area",
+    "vol-lwh",
+    "vol-base-height",
+    "vol-composite",
+    "vol-missing-dim",
+    "vol-unit-cubes",
+    "vol-hollow",
+    "vol-compare"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "9.2.1",
+   "chapter": 9,
+   "problems": [
+    "9-35",
+    "9-36",
+    "9-37",
+    "9-38",
+    "9-39"
+   ],
+   "title": "Calculating and Using Percents",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-9.2.1"
+   ],
+   "ccss": [
+    "6.RP.A.3.c"
+   ],
+   "targets": [
+    "math-rp-percent"
+   ],
+   "moduleTopics": [
+    "g6-percent",
+    "g6-percent-find",
+    "g6-dec-percent"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "verified"
+  },
+  {
+   "lesson": "9.2.2",
+   "chapter": 9,
+   "problems": [
+    "9-44",
+    "9-45",
+    "9-46",
+    "9-47",
+    "9-48"
+   ],
+   "title": "Calculating and Using Percents",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-9.2.1"
+   ],
+   "ccss": [
+    "6.RP.A.3.c"
+   ],
+   "targets": [
+    "math-rp-percent"
+   ],
+   "moduleTopics": [
+    "g6-percent",
+    "g6-percent-find",
+    "g6-dec-percent"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "9.2.3",
+   "chapter": 9,
+   "problems": [
+    "9-60",
+    "9-61",
+    "9-62",
+    "9-63",
+    "9-64",
+    "9-65",
+    "9-66",
+    "9-67",
+    "9-68",
+    "9-69"
+   ],
+   "title": "Calculating and Using Percents",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-9.2.1"
+   ],
+   "ccss": [
+    "6.RP.A.3.c"
+   ],
+   "targets": [
+    "math-rp-percent"
+   ],
+   "moduleTopics": [
+    "g6-percent",
+    "g6-percent-find",
+    "g6-dec-percent"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  },
+  {
+   "lesson": "9.2.4",
+   "chapter": 9,
+   "problems": [
+    "9-75",
+    "9-76",
+    "9-77",
+    "9-78",
+    "9-79"
+   ],
+   "title": "Calculating and Using Percents",
+   "titleSource": "parent-guide",
+   "blocks": [
+    "pg-9.2.1"
+   ],
+   "ccss": [
+    "6.RP.A.3.c"
+   ],
+   "targets": [
+    "math-rp-percent"
+   ],
+   "moduleTopics": [
+    "g6-percent",
+    "g6-percent-find",
+    "g6-dec-percent"
+   ],
+   "packItemTargets": [],
+   "gaps": [],
+   "confidence": "inherited-plausible"
+  }
+ ]
+}

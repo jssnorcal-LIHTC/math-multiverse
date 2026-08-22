@@ -30,6 +30,9 @@ jobs:
       - name: Validate content packs (structure, verbatim spans, readability, blind-verdict ledger)
         run: node tests/validate-pack.js
 
+      - name: Curriculum crosswalk gate (CC1 lesson map; emitted-topic check, gap count, 5 controls)
+        run: node tests/validate-curriculum.js
+
       - name: Figure-derive gate (regenerated chart SVGs byte-match their committed src; fixture controls)
         run: node tests/figure-derive.js
 

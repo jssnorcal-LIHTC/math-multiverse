@@ -986,21 +986,76 @@ function validatePack(pack, opts) {
   return { errors, warnings };
 }
 
+// Files under packs/ that are deliberately NOT content packs, with the reason each one is there.
+// Discovery below validates exactly what packs/manifest.json registers and hard-fails on anything
+// else, so a new file lands as an explicit decision rather than as a pack that happens to fail
+// every shape check, or worse, as one that quietly passes because it happens to look close enough.
+const NON_PACK_FILES = {
+  'manifest.json': 'the pack registry itself',
+  'curriculum-cc1.json': 'the CPM Core Connections Course 1 crosswalk: a lesson-to-topic map with '
+    + 'no items, passages or levels, gated by tests/validate-curriculum.js instead',
+};
+
 // ---------- CLI ----------
 function main(argv) {
   let files = argv.slice(2);
+  const discoveryErrors = [];
   if (files.length === 0) {
     if (!fs.existsSync(PACK_DIR)) {
       console.error(`validate-pack: pack directory not found: ${PACK_DIR}`);
       return 2;
     }
-    files = fs.readdirSync(PACK_DIR)
-      .filter(f => f.endsWith('.json') && !f.endsWith('.verdicts.json') && f !== 'manifest.json')
-      .map(f => path.join(PACK_DIR, f));
+    const onDisk = fs.readdirSync(PACK_DIR)
+      .filter(f => f.endsWith('.json') && !f.endsWith('.verdicts.json'));
+
+    let manifest = null;
+    try { manifest = loadPackFile(path.join(PACK_DIR, 'manifest.json')); }
+    catch (e) {
+      console.error(`validate-pack: packs/manifest.json could not be read (${e.message}). Discovery `
+        + 'keys off the manifest, so nothing below could be trusted.');
+      return 2;
+    }
+    const registered = ((manifest && manifest.packs) || []).map(p => p && p.id).filter(Boolean);
+    if (!registered.length) {
+      console.error('validate-pack: packs/manifest.json registers zero packs. A validator that '
+        + 'validates nothing must not report clean.');
+      return 2;
+    }
+
+    // Every registered pack must exist, and every file must be registered or declared a non-pack.
+    for (const id of registered) {
+      if (!onDisk.includes(id + '.json')) {
+        discoveryErrors.push(`manifest registers "${id}" but packs/${id}.json is not on disk`);
+      }
+    }
+    for (const f of onDisk) {
+      const id = f.replace(/\.json$/, '');
+      if (registered.includes(id)) continue;
+      if (Object.prototype.hasOwnProperty.call(NON_PACK_FILES, f)) continue;
+      discoveryErrors.push(`packs/${f} is neither registered in manifest.json nor listed in `
+        + 'NON_PACK_FILES. Register it so it ships, or declare why it is not a pack.');
+    }
+    for (const f of Object.keys(NON_PACK_FILES)) {
+      if (!onDisk.includes(f)) {
+        discoveryErrors.push(`NON_PACK_FILES lists packs/${f}, which is not on disk. Remove the `
+          + 'entry so the exemption cannot outlive the file it exempts.');
+      }
+    }
+
+    files = registered.map(id => path.join(PACK_DIR, id + '.json'));
+    const skipped = Object.keys(NON_PACK_FILES).filter(f => f !== 'manifest.json');
+    if (skipped.length) {
+      console.log(`validate-pack: ${registered.length} registered pack(s); not packs, skipped: `
+        + skipped.map(f => `${f} (${NON_PACK_FILES[f]})`).join('; '));
+    }
   }
   if (files.length === 0) {
     console.error('validate-pack: no packs found. A validator that validates nothing must not report clean.');
     return 2;
+  }
+  if (discoveryErrors.length) {
+    console.log('\n=== validate-pack discovery ===');
+    discoveryErrors.forEach(e => console.log('  ERROR   ' + e));
   }
 
   let totalErrors = 0, totalWarnings = 0;
@@ -1044,6 +1099,7 @@ function main(argv) {
     totalWarnings += warnings.length;
   }
 
+  totalErrors += discoveryErrors.length;
   console.log(`\n=== validate-pack: ${files.length} pack(s), ${totalErrors} error(s), ${totalWarnings} warning(s) ===`);
   if (totalErrors) { console.log('RESULT: FAIL'); return 1; }
   console.log('RESULT: ALL CLEAN');
