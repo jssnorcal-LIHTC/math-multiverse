@@ -459,14 +459,16 @@ const STANDALONE = [
     lessons: ['1.1.3'],
     targets: ['math-r5-classify-figures'],
     moduleTopics: [],
-    verdict: 'GAP',
+    // WP2 level 2 landed 26-0822: 20 items over 11 figures, triangles named by side and by angle
+    // and the quadrilateral hierarchy, in packs/cpm-cc1-g6.json.
+    packItemTargets: ['math-r5-classify-figures'],
+    verdict: 'PARTIAL',
     why: 'Problem 1-22 asks for it and the app has zero content for it: no emitted topic names a '
        + 'shape, and a full-text scan of the six modules finds no occurrence of scalene, isosceles, '
        + 'rhombus, trapezoid or obtuse. The two shell topics that LOOK like coverage, coord-shape '
        + 'and coord-real-world, carry a label and a coach tip and are emitted by nothing; WP1 '
        + 'deletes them.',
-    gaps: ['classify a triangle by its sides', 'classify a triangle by its angles',
-           'the quadrilateral hierarchy'],
+    gaps: [],
   },
   {
     id: 'sa-decimal-word', chapter: 1, title: 'Decimal word form, both directions',

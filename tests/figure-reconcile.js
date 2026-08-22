@@ -10,7 +10,8 @@
 // charts by parsing the emitted markup against the source data; this extends the same idea to
 // polygons, and adds the half charts never needed: reconciling the figure against the ITEM.
 //
-// FOUR CHECKS, and the third is the one that does not exist anywhere else.
+// FIVE CHECKS. The third and the fifth exist nowhere else, and the fifth was added after blind
+// certification caught a content error the first four could not see.
 //
 //   1. REPRODUCIBILITY.  Every committed SVG regenerates byte-identically from its own dataTable.
 //   2. INTERNAL CONSISTENCY.  Every side's LABEL agrees with the shape actually drawn: the drawn
@@ -22,10 +23,18 @@
 //      that produced both, and must equal it.
 //   4. NO DISTRACTOR IS SECRETLY CORRECT.  A wrong option that also equals the true perimeter is
 //      an unanswerable item.
+//   5. A SHAPE'S NAME AGREES WITH ITS GEOMETRY.  A triangle called acute must actually be acute.
+//      Blind certification caught a 12-9-7 triangle labelled acute whose largest angle is 96.4
+//      degrees, and would have marked the right answer wrong;  a second, quieter one labelled
+//      7-7-9.9 "right" is obtuse by a hundredth and looks identical to a right angle. Same defect
+//      class as a side label that disagrees with its edge, arriving through the NAME instead.
 //
 // HARD RULES (constraint 12). A run that finds zero polygon figures FAILS rather than reporting
-// clean. Each check carries a fixture control: a positive fixture that must pass, and a negative
-// fixture with a deliberately wrong label that must be caught by check 2 and by check 3.
+// clean, and so does one that reconciles zero perimeter items or zero shape names. That last
+// counter earned its place immediately: check 5 was first appended AFTER checks 3 and 4, where it
+// silently never ran, and only the arming counter said so. A check that never runs is worse than no
+// check, because it reads as coverage. Each check also carries fixture controls, including a
+// deliberately falsified side label and the exact 12-9-7 triangle the blind pass rejected.
 
 if (process.stdout && process.stdout.setEncoding) process.stdout.setEncoding('utf8');
 
@@ -39,7 +48,17 @@ const ACCENT_BY_PACK = { 'cpm-cc1-g6': '#e0692b' };
 
 const problems = [];
 const notes = [];
-let figuresChecked = 0, itemsChecked = 0, packsWithPolygons = 0;
+let figuresChecked = 0, itemsChecked = 0, packsWithPolygons = 0, nameChecks = 0;
+
+// A triangle's true classification, from its side lengths alone. The largest side against the
+// other two decides the angle; the count of distinct lengths decides the sides.
+function trueTriangleNames(lens) {
+  const [a, b, c] = lens.slice().sort((x, y) => x - y);
+  const lhs = c * c, rhs = a * a + b * b;
+  const byAngle = Math.abs(lhs - rhs) < 1e-9 ? 'right' : (lhs > rhs ? 'obtuse' : 'acute');
+  const u = new Set(lens).size;
+  return { byAngle, bySide: u === 1 ? 'equilateral' : u === 2 ? 'isosceles' : 'scalene' };
+}
 
 // The perimeter an ITEM claims, read out of its own keyed choice. Deliberately parsed from the
 // shipped choice string rather than taken from any build-time variable: this has to be able to
@@ -108,6 +127,37 @@ for (const f of fs.readdirSync(PACK_DIR).filter((x) => x.endsWith('.json') && !x
       problems.push(`${where}: the drawing disagrees with its own labels, which is a lie a child can SEE: ${offenders.join('; ')}`);
     }
 
+    // ---- 5. a shape's NAME against its geometry ----
+    // Placed before checks 3 and 4 rather than after them, deliberately: appended after that loop
+    // it silently never ran, and a check that never runs is worse than no check at all. Its own
+    // ARMING counter is what surfaced that.
+    if (dt.shape === 'triangle') {
+      const truth = trueTriangleNames(dt.sides.map((x) => x.len));
+      const drawnRight = Array.isArray(dt.rightAngles) && dt.rightAngles.length > 0;
+      if (drawnRight !== (truth.byAngle === 'right')) {
+        problems.push(`${where}: the figure ${drawnRight ? 'draws a right-angle mark' : 'draws no right-angle mark'} `
+          + `but its sides (${dt.sides.map((x) => x.len).join(', ')}) make it ${truth.byAngle}`);
+      }
+      for (const nameItem of itemsByFig.get(fig.id) || []) {
+        if (!Array.isArray(nameItem.choices) || typeof nameItem.key !== 'number') continue;
+        const claim = String(nameItem.choices[nameItem.key]).trim().toLowerCase();
+        const stem = String(nameItem.stem || '');
+        if (/angle/i.test(stem) && ['acute', 'right', 'obtuse'].includes(claim)) {
+          nameChecks++;
+          if (claim !== truth.byAngle) {
+            problems.push(`${packId}/${nameItem.id}: keyed to "${claim}", but sides ${dt.sides.map((x) => x.len).join(', ')} `
+              + `make this triangle ${truth.byAngle}. The item would mark the right answer wrong.`);
+          }
+        } else if (/side/i.test(stem) && ['scalene', 'isosceles', 'equilateral'].includes(claim)) {
+          nameChecks++;
+          if (claim !== truth.bySide) {
+            problems.push(`${packId}/${nameItem.id}: keyed to "${claim}", but sides ${dt.sides.map((x) => x.len).join(', ')} `
+              + `make this triangle ${truth.bySide}.`);
+          }
+        }
+      }
+    }
+
     // ---- 3 and 4. the items agree with the figure ----
     for (const it of itemsByFig.get(fig.id) || []) {
       const asksPerimeter = /perimeter/i.test(String(it.stem || '')) && !/which calculation|missing/i.test(String(it.stem || ''));
@@ -130,6 +180,7 @@ for (const f of fs.readdirSync(PACK_DIR).filter((x) => x.endsWith('.json') && !x
         }
       }
     }
+
   }
 }
 
@@ -141,6 +192,10 @@ if (!figuresChecked) {
 if (!itemsChecked) {
   problems.push('ARMING: zero perimeter items were reconciled against a figure, so check 3, the only one '
     + 'no other gate performs, ran on nothing.');
+}
+if (!nameChecks) {
+  problems.push('ARMING: zero shape-name claims were re-derived from a figure, so check 5 ran on nothing. '
+    + 'That is the check that caught a triangle labelled acute at 96.4 degrees.');
 }
 
 // ---- CONTROLS ----
@@ -183,6 +238,21 @@ const controls = [];
   });
 
   // And the number parser must actually parse, or check 3 passes vacuously on everything.
+  // The classifier must be able to call the real error the blind pass caught.
+  controls.push({
+    name: 'NEGATIVE: a 12-9-7 triangle is correctly read as obtuse, not acute',
+    ok: trueTriangleNames([12, 9, 7]).byAngle === 'obtuse',
+    detail: 'the exact spec blind certification rejected; its largest angle is 96.4 degrees',
+  });
+  controls.push({
+    name: 'CONTROL: the classifier separates all three angle names and all three side names',
+    ok: trueTriangleNames([6, 8, 10]).byAngle === 'right'
+      && trueTriangleNames([7, 8, 9]).byAngle === 'acute'
+      && trueTriangleNames([8, 8, 8]).bySide === 'equilateral'
+      && trueTriangleNames([4, 9, 9]).bySide === 'isosceles'
+      && trueTriangleNames([7, 8, 9]).bySide === 'scalene',
+    detail: 'right, acute, equilateral, isosceles and scalene each read back correctly',
+  });
   controls.push({
     name: 'CONTROL: the keyed-answer parser reads a real choice string',
     ok: keyedNumber({ type: 'mc', choices: ['26 cm'], key: 0 }) === 26 && keyedNumber({ type: 'mc', choices: ['not a number'], key: 0 }) === null,
@@ -194,7 +264,7 @@ for (const c of controls) if (!c.ok) problems.push(`CONTROL "${c.name}" failed${
 // ---- report ----
 console.log('\n=== figure reconcile: the drawing, its labels, and the item ===');
 console.log(`${packsWithPolygons} pack(s) with polygon figures, ${figuresChecked} figure(s) regenerated and checked, `
-  + `${itemsChecked} perimeter item(s) reconciled against their own figure`);
+  + `${itemsChecked} perimeter item(s) and ${nameChecks} shape-name claim(s) reconciled against their own figure`);
 for (const n of notes) console.log('  ' + n);
 console.log('controls:');
 for (const c of controls) console.log(`  ${c.ok ? 'ok  ' : 'FAIL'} ${c.name}${c.detail ? '  (' + c.detail + ')' : ''}`);

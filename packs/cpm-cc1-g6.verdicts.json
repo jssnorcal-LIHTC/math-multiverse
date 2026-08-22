@@ -43,10 +43,42 @@
       "status": "agree"
     },
     {
+      "itemId": "l1-perim-par-9-6",
+      "itemHash": "d058809b220079eb",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-trap-10-4-6-5",
+      "itemHash": "4d3378a1bc90cb87",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-tri-scalene-7-9-12",
+      "itemHash": "f0183669c932e830",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l1-perim-tri-right-6-8-10",
       "itemHash": "1384a6611a7381fa",
       "blind": 2,
       "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-tri-isosceles-9-9-4",
+      "itemHash": "8b10eeda64d3c883",
+      "blind": 3,
+      "authored": 3,
       "confidence": "high",
       "status": "agree"
     },
@@ -83,62 +115,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-perim-oct-regular-3",
-      "itemHash": "b8abe7b97b3a2cc7",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-perim-rule-oct-regular-3",
-      "itemHash": "7147f0632edba8b1",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-missing-rect-8-5",
-      "itemHash": "eaa2d6adb3922caf",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-perim-par-9-6",
-      "itemHash": "d058809b220079eb",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-perim-trap-10-4-6-5",
-      "itemHash": "4d3378a1bc90cb87",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-perim-tri-scalene-7-9-12",
-      "itemHash": "f0183669c932e830",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-perim-tri-isosceles-9-9-4",
-      "itemHash": "8b10eeda64d3c883",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l1-perim-trap-right-12-5-7-4",
       "itemHash": "053bcf40019b3bea",
       "blind": 2,
@@ -151,6 +127,22 @@
       "itemHash": "6f96296b8c962a70",
       "blind": 3,
       "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-oct-regular-3",
+      "itemHash": "b8abe7b97b3a2cc7",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-rule-oct-regular-3",
+      "itemHash": "7147f0632edba8b1",
+      "blind": 1,
+      "authored": 1,
       "confidence": "high",
       "status": "agree"
     },
@@ -171,8 +163,176 @@
       "status": "agree"
     },
     {
+      "itemId": "l1-missing-rect-8-5",
+      "itemHash": "eaa2d6adb3922caf",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l1-missing-lshape-1",
       "itemHash": "954b48d95d832a46",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-side-tri-name-isosceles",
+      "itemHash": "07d99a54ab45f47d",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-angle-tri-name-isosceles",
+      "itemHash": "8494d9034c60f4ab",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-side-tri-name-equilateral",
+      "itemHash": "a7434f835f0c5661",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-angle-tri-name-equilateral",
+      "itemHash": "e20543cd5cb40e4f",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-side-tri-name-right",
+      "itemHash": "6e935a02faa46235",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-angle-tri-name-right",
+      "itemHash": "da4df8066073d22c",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-side-tri-name-obtuse",
+      "itemHash": "4c3ddefe68918f56",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-angle-tri-name-obtuse",
+      "itemHash": "ca9bb90972c2f31f",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-quad-quad-square",
+      "itemHash": "c3594836408fbaa3",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-quad-quad-rectangle",
+      "itemHash": "aa2f576a93782b01",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-quad-quad-rhombus",
+      "itemHash": "3401fe15658aad8a",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-quad-quad-parallelogram",
+      "itemHash": "957ccc5f3a40f641",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-quad-quad-trapezoid",
+      "itemHash": "0fb463c702eefa6e",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-hier-square-is-rectangle",
+      "itemHash": "45a93dc8ae17205c",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-hier-rectangle-is-square",
+      "itemHash": "3ec19476dfd73011",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-hier-square-is-rhombus",
+      "itemHash": "1abd5b4326e9f026",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-side-tri-name-scalene",
+      "itemHash": "738aec0c559172bc",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-angle-tri-name-scalene",
+      "itemHash": "6d4f2c92b283f895",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-side-tri-name-isos-obtuse",
+      "itemHash": "3812a4d1bdc95aa8",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-angle-tri-name-isos-obtuse",
+      "itemHash": "1825b25b79efa88b",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
