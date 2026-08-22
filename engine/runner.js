@@ -473,7 +473,48 @@
       if (tile.scrollIntoView) tile.scrollIntoView({ block: 'nearest' });
     }
 
-    renderQuestion();
+    // ---- LEVEL BRIEFING (WP-P, 26-0822) ----------------------------------------------------
+    // Justin's report was that the science module gave a child no context: he opens level 1 and
+    // reads a field manual addressed to "every operative in the Outpost Network" with no idea what
+    // either of those is. A level may now carry `briefing`, and when it does it is shown once,
+    // before the first question, with one tap to begin.
+    //
+    // Fully additive and fully optional: a level with no briefing renders exactly as it always
+    // did, which is every level of the other four packs. Guarded like the figures hook, because a
+    // malformed briefing must never cost the child the level.
+    function showBriefingThen(go) {
+      let b = null;
+      try { b = level && level.briefing; } catch (e) { b = null; }
+      const lines = b && Array.isArray(b.lines) ? b.lines.filter((x) => typeof x === 'string' && x.trim()) : [];
+      if (!lines.length) return go();
+      try {
+        const wrap = el('div', 'mv-briefing');
+        wrap.appendChild(el('div', 'mv-briefing-kicker', 'Briefing'));
+        if (typeof b.title === 'string' && b.title.trim()) {
+          wrap.appendChild(el('div', 'mv-briefing-title', b.title));
+        }
+        for (const line of lines) wrap.appendChild(el('p', 'mv-briefing-line', line));
+        const begin = el('button', 'mv-briefing-begin', 'Begin →');
+        begin.type = 'button';
+        begin.addEventListener('click', () => { wrap.remove(); go(); }, { once: true });
+        wrap.appendChild(begin);
+        shell.insertBefore(wrap, passageBox);
+        // The passage and the question belong to the level, not to the briefing; keep them out of
+        // the way until he taps Begin rather than layering the briefing over them.
+        passageBox.style.display = 'none';
+        itemBox.style.display = 'none';
+        return;
+      } catch (e) {
+        try { if (root && root.console && typeof root.console.warn === 'function') root.console.warn('briefing failed to render', e); } catch (_) {}
+        return go();
+      }
+    }
+
+    showBriefingThen(() => {
+      passageBox.style.display = '';
+      itemBox.style.display = '';
+      renderQuestion();
+    });
 
     return function cleanup() {
       disposed = true;

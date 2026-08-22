@@ -18,6 +18,19 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
+// A level may open on a BRIEFING (WP-P, 26-0822): a panel shown once before the first question,
+// with the passage and the item held back until Begin is tapped. Every gate that opens a pack level
+// has to go through it, exactly as a child does. Deliberately NOT a back door around the briefing:
+// a gate that skipped it would stop measuring the path anybody actually takes.
+async function dismissBriefing(page) {
+  const begin = await page.$('.mv-briefing-begin');
+  if (!begin) return false;
+  await begin.click();
+  await page.waitForTimeout(150);
+  return true;
+}
+
+
 let chromium;
 try { chromium = require('playwright').chromium; }
 catch (e1) {
