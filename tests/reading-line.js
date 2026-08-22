@@ -196,6 +196,71 @@ function check(name, ok, detail) {
     check('the words sit ABOVE the band, so a highlight never dims its own line',
       Number(lit.paraZ) > Number(lit.zIndex), `para z=${lit.paraZ}, band z=${lit.zIndex}`);
 
+    // ---- the words on the lit line are still readable ----
+    // The band is the one change that can wash the passage out, and neither the reading-surface
+    // sweep (passage ground against the respond panel) nor anything else measures TEXT on BAND.
+    // Composited exactly: the band's resolved colour and alpha over the passage's own ground, then
+    // WCAG contrast against the paragraph's text colour. The floor is 4.5:1, WCAG AA for body text.
+    const contrast = await page.evaluate(() => {
+      // Composited through a CANVAS rather than parsed by hand: color-mix() resolves to whatever
+      // colour syntax the engine prefers (oklab, color(srgb ...)), and a regex for rgba() reads
+      // null on all of them. Painting ground then band into one pixel and reading it back gives
+      // the true composite in sRGB whatever the source syntax was.
+      const cv = document.createElement('canvas');
+      cv.width = cv.height = 1;
+      const ctx = cv.getContext('2d', { willReadFrequently: true });
+      const px = (fills) => {
+        ctx.clearRect(0, 0, 1, 1);
+        for (const f of fills) { ctx.fillStyle = f; ctx.fillRect(0, 0, 1, 1); }
+        const d = ctx.getImageData(0, 0, 1, 1).data;
+        return { r: d[0], g: d[1], b: d[2] };
+      };
+      const lum = (c) => {
+        const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+        return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b);
+      };
+      const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+
+      const box = document.querySelector('.mv-passage');
+      const para = box.querySelector('.mv-para');
+      const el = box.querySelector('.mv-readline');
+      // Every painted ground from the page down to the passage, in order, so the composite is the
+      // real one rather than the passage's own translucent layer over nothing.
+      const stack = [];
+      for (let n = box; n && n !== document.documentElement; n = n.parentElement) {
+        stack.unshift(getComputedStyle(n).backgroundColor);
+      }
+      stack.unshift(getComputedStyle(document.documentElement).backgroundColor || '#000');
+      stack.unshift('#000');            // the browser's own ground, so nothing composites over nothing
+      const ground = px(stack);
+      const litGround = px(stack.concat([getComputedStyle(el).backgroundColor]));
+      const text = px(['#000', getComputedStyle(para).color]);
+      const bandAlpha = (() => {
+        // How much the band actually moved the ground, in sRGB distance. A visible band moves it.
+        const d = Math.abs(litGround.r - ground.r) + Math.abs(litGround.g - ground.g) + Math.abs(litGround.b - ground.b);
+        return d;
+      })();
+      return {
+        unlit: +ratio(text, ground).toFixed(2),
+        lit: +ratio(text, litGround).toFixed(2),
+        ground, litGround, text,
+        shift: bandAlpha,
+        edge: getComputedStyle(el).borderLeftWidth,
+      };
+    });
+    check('the words on the lit line still clear WCAG AA for body text',
+      contrast.lit >= 4.5, `lit ${contrast.lit}:1 (unlit ${contrast.unlit}:1)`);
+    check('and the band costs less than a quarter of the unlit contrast',
+      contrast.lit >= contrast.unlit * 0.75,
+      `lit ${contrast.lit}:1 vs unlit ${contrast.unlit}:1`);
+    // A tracking aid nobody can see is not one. The first pass shipped a band that only moved the
+    // ground by a few sRGB steps and was invisible in a live screenshot of the deployed page; this
+    // is the assertion that would have caught it.
+    check('the band is actually visible, not a decorative whisper',
+      parseFloat(contrast.edge) >= 3 && contrast.shift >= 30,
+      `edge ${contrast.edge}, the band moves the ground by ${contrast.shift} sRGB steps `
+      + `(ground ${JSON.stringify(contrast.ground)} -> ${JSON.stringify(contrast.litGround)})`);
+
     // ---- the passage text itself is untouched ----
     const untouched = await page.evaluate(() => {
       const box = document.querySelector('.mv-passage');
