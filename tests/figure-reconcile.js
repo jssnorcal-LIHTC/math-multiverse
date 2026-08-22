@@ -19,10 +19,15 @@
 //      edge lengths, scaled by one common factor, match the labelled lengths. That catches a
 //      figure that says 6 cm on an edge drawn the length of its 4 cm neighbour, which is a lie a
 //      child can SEE and no arithmetic check would ever notice.
-//   3. THE ITEM AGREES WITH ITS FIGURE.  For every item whose stem asks for a perimeter, the
-//      keyed answer is re-derived from the committed dataTable, independently of the generator
-//      that produced both, and must equal it.
-//   4. NO DISTRACTOR IS SECRETLY CORRECT.  A wrong option that also equals the true perimeter is
+//   3. THE ITEM AGREES WITH ITS FIGURE.  For every perimeter-family item, the keyed answer is
+//      re-derived from the committed dataTable, independently of the generator that produced both,
+//      and must equal what PERIMETER_CLAIM says that item type's answer is.  Selected by coachTopic
+//      rather than by finding the word "perimeter" in the stem:  the stem regex this replaced
+//      demanded that any item mentioning perimeter be keyed to the perimeter ITSELF, which is wrong
+//      for a review item that gives the perimeter and asks for something derived from it, and it
+//      could be unhooked silently by a reword.  A perimeter topic missing from the table is a hard
+//      failure, so a new item type cannot arrive unchecked.
+//   4. NO DISTRACTOR IS SECRETLY CORRECT.  A wrong option that also equals the true answer is
 //      an unanswerable item.
 //   5. A SHAPE'S NAME AGREES WITH ITS GEOMETRY.  A triangle called acute must actually be acute.
 //      Blind certification caught a 12-9-7 triangle labelled acute whose largest angle is 96.4
@@ -82,6 +87,19 @@ function keyedNumber(item) {
   const m = c.match(/^\s*(-?\d+(?:\.\d+)?)\s*(?:[a-z]+)?\s*$/i);
   return m ? Number(m[1]) : null;
 }
+
+// What each PERIMETER-family coachTopic's keyed answer must equal, as a function of the perimeter
+// the figure's own labels add up to. A topic mapped to null is one this gate cannot check, and it
+// has to be listed anyway: an unlisted perimeter topic is a hard failure rather than a quiet skip,
+// so a new item type cannot appear and go unchecked without somebody saying so in this table.
+const PERIMETER_CLAIM = {
+  'perimeter-labelled-polygon': { want: (P) => P, says: 'the perimeter' },
+  'perimeter-missing-side': null,        // gives the perimeter, asks for one unlabelled side
+  'perimeter-rectangle-rule': null,      // asks which CALCULATION is right, not for a number
+  'perimeter-regular-polygon': null,     // asks about the side count and the rule behind it
+  'perimeter-same-square': { want: (P) => P / 4, says: 'the side of a square with the same perimeter' },
+  'perimeter-compare-pentagon': null,    // compares against a shape described in words, not drawn
+};
 
 // What each chart coachTopic's answer must equal, derived from the values that draw the bars. Module
 // level so the control below exercises this exact table rather than a restatement of it.
@@ -202,23 +220,37 @@ for (const f of fs.readdirSync(PACK_DIR).filter((x) => x.endsWith('.json') && !x
 
     // ---- 3 and 4. the items agree with the figure ----
     for (const it of itemsByFig.get(fig.id) || []) {
-      const asksPerimeter = /perimeter/i.test(String(it.stem || '')) && !/which calculation|missing/i.test(String(it.stem || ''));
-      if (!asksPerimeter) continue;
-      itemsChecked++;
-      const claimed = keyedNumber(it);
-      if (claimed == null) {
-        problems.push(`${packId}/${it.id}: asks for a perimeter but its keyed choice is not a number, so nothing can be reconciled`);
+      // Selected by coachTopic, not by looking for the word "perimeter" in the stem. The stem regex
+      // this replaced picked up any item that said "perimeter" and then required its answer to EQUAL
+      // the figure's perimeter, so a review item that gives the perimeter and asks for something
+      // derived from it -- the side of a square with the same perimeter -- read as a wrong answer.
+      // Rewording an item could also unhook it from the check silently, which is the failure mode
+      // the chart half below was already built to avoid.
+      // Only the perimeter family is this check's business; a shape-naming item on the same figure
+      // is check 5's.
+      if (!/^perimeter/.test(String(it.coachTopic || ''))) continue;
+      const claim = PERIMETER_CLAIM[it.coachTopic];
+      if (claim === undefined) {
+        problems.push(`${packId}/${it.id}: coachTopic ${JSON.stringify(it.coachTopic)} is in the perimeter family but PERIMETER_CLAIM does not list it, so nothing says whether its answer should follow from the figure. Add it, with null if this gate cannot check it.`);
         continue;
       }
-      if (claimed !== labelled) {
-        problems.push(`${packId}/${it.id}: the keyed answer is ${claimed}, but the figure's own labels add to ${labelled}. `
+      if (claim === null) continue;
+      itemsChecked++;
+      const want = claim.want(labelled);
+      const claimed = keyedNumber(it);
+      if (claimed == null) {
+        problems.push(`${packId}/${it.id}: ${claim.says}, but its keyed choice is not a number, so nothing can be reconciled`);
+        continue;
+      }
+      if (claimed !== want) {
+        problems.push(`${packId}/${it.id}: the keyed answer is ${claimed}, but the figure's own labels add to ${labelled}, so ${claim.says} is ${want}. `
           + 'The picture and the answer disagree, and no other gate can see it.');
       }
       for (let i = 0; i < it.choices.length; i++) {
         if (i === it.key) continue;
         const n = keyedNumber({ type: 'mc', choices: it.choices, key: i });
-        if (n === labelled) {
-          problems.push(`${packId}/${it.id}: distractor ${i} (${JSON.stringify(it.choices[i])}) also equals the true perimeter ${labelled}, so the item has two correct answers`);
+        if (n === want) {
+          problems.push(`${packId}/${it.id}: distractor ${i} (${JSON.stringify(it.choices[i])}) also equals the true answer ${want}, so the item has two correct answers`);
         }
       }
     }
@@ -476,6 +508,19 @@ const controls = [];
       && CHART_CLAIM['display-compare-bars'].want([4, 9, 13, 6]) === 9
       && CHART_CLAIM['display-total'].want([4, 9, 13, 6]) === 32,
     detail: 'tallest 13, tallest minus shortest 9, total 32',
+  });
+  controls.push({
+    name: 'CONTROL: the perimeter claims re-derive correctly from a known perimeter',
+    ok: PERIMETER_CLAIM['perimeter-labelled-polygon'].want(26) === 26
+      && PERIMETER_CLAIM['perimeter-same-square'].want(26) === 6.5,
+    detail: 'a 26 cm perimeter is 26, and the square matching it has 6.5 cm sides',
+  });
+  controls.push({
+    name: 'NEGATIVE: a perimeter topic missing from the table reads as unlisted, not as skipped',
+    ok: PERIMETER_CLAIM['perimeter-not-a-real-topic'] === undefined
+      && PERIMETER_CLAIM['perimeter-missing-side'] === null,
+    detail: 'an unknown topic returns undefined (which check 3 turns into a failure) while a '
+      + 'deliberately unchecked one returns null',
   });
   controls.push({
     name: 'CONTROL: the keyed-answer parser reads a real choice string',

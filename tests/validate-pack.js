@@ -1035,6 +1035,26 @@ function main(argv) {
       discoveryErrors.push(`packs/${f} is neither registered in manifest.json nor listed in `
         + 'NON_PACK_FILES. Register it so it ships, or declare why it is not a pack.');
     }
+    // The manifest's own level count against the pack's. The launcher card reads this number, so a
+    // stale one understates a pack to the child looking at it: cpm-cc1-g6 shipped six levels while
+    // its entry still said one, left over from when it had one, and nothing noticed. Every other
+    // pack's count was accurate, which is what makes the field load-bearing rather than decorative.
+    for (const entry of (manifest && manifest.packs) || []) {
+      if (!entry || !entry.id || !onDisk.includes(entry.id + '.json')) continue;
+      if (typeof entry.levels !== 'number') {
+        discoveryErrors.push(`manifest entry "${entry.id}" declares no level count, so the launcher `
+          + 'card has nothing to show and nothing here can check it');
+        continue;
+      }
+      let actual = null;
+      try { actual = (loadPackFile(path.join(PACK_DIR, entry.id + '.json')).levels || []).length; }
+      catch (e) { continue; }   // an unreadable pack is already reported by its own pass below
+      if (actual !== entry.levels) {
+        discoveryErrors.push(`manifest says "${entry.id}" has ${entry.levels} level(s) and the pack `
+          + `has ${actual}. The launcher card shows the manifest's number, so it would tell a child `
+          + 'the wrong thing about what is in there.');
+      }
+    }
     for (const f of Object.keys(NON_PACK_FILES)) {
       if (!onDisk.includes(f)) {
         discoveryErrors.push(`NON_PACK_FILES lists packs/${f}, which is not on disk. Remove the `

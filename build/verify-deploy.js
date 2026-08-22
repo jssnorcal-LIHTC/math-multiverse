@@ -26,6 +26,9 @@ const DEFAULT_FILES = [
   'Math-Multiverse.html',
   'engine/engine.css', 'engine/figures.js', 'engine/runner.js', 'engine/items.js', 'engine/pack.js',
   'packs/manifest.json',
+  // The shell fetches this at boot for the lesson pointer. It is not a content pack, so the
+  // manifest sweep below never reaches it and nothing else checked it on the deploy.
+  'packs/curriculum-cc1.json',
 ];
 
 function get(url) {
@@ -57,6 +60,17 @@ async function main(argv) {
   try {
     const manifest = JSON.parse(execFileSync('git', ['show', `${sha}:packs/manifest.json`], { encoding: 'utf8', maxBuffer: 1 << 28 }));
     packs = (manifest.packs || []).map((p) => `packs/${p.id}.json`);
+    // ...AND every figure those packs reference. A stale deploy serves a stale figure beside a
+    // fresh item, which is a drawing that disagrees with the question next to it: the exact defect
+    // tests/figure-reconcile.js exists to prevent locally, arriving through the deploy instead.
+    // Read from the pack at the verified SHA, so the list cannot be taken from a dirty checkout.
+    // Iterate a SNAPSHOT: pushing figures into the same array a for...of is walking would feed the
+    // SVGs back through JSON.parse on the next turn of the loop.
+    const packFiles = packs.slice();
+    for (const rel of packFiles) {
+      const pack = JSON.parse(execFileSync('git', ['show', `${sha}:${rel}`], { encoding: 'utf8', maxBuffer: 1 << 28 }));
+      for (const f of pack.figures || []) if (f.src) packs.push(f.src);
+    }
   } catch (e) {
     console.error(`verify-deploy: could not read packs/manifest.json at ${sha}: ${e.message}`);
     return 2;

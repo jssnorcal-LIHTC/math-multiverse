@@ -558,6 +558,153 @@
       "status": "agree"
     },
     {
+      "itemId": "l5-next-p3n",
+      "itemHash": "a846ae4836e4df91",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-rule-p3n",
+      "itemHash": "864dfece39668778",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-far-p3n",
+      "itemHash": "90f1b979945f9ec1",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-next-p2n1",
+      "itemHash": "cc00eb1aa7fc7af1",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-rule-p2n1",
+      "itemHash": "b55c7843bacb7259",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-far-p2n1",
+      "itemHash": "d2606948ed977281",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-next-p4n2",
+      "itemHash": "c254e78ebb4cc9df",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-rule-p4n2",
+      "itemHash": "5ccd6da1c0a9fe52",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-far-p4n2",
+      "itemHash": "5ab377c8de41d28b",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-next-p5n",
+      "itemHash": "1f79dce52cbb01b8",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-rule-p5n",
+      "itemHash": "856f28a4510b6e88",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-far-p5n",
+      "itemHash": "b05734b7349cd203",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-next-p3n2",
+      "itemHash": "049297734dcea046",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-rule-p3n2",
+      "itemHash": "68ef55defef9007d",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-far-p3n2",
+      "itemHash": "01d065df79189ea9",
+      "blind": 1,
+      "authored": 2,
+      "confidence": "high",
+      "status": "adjudicated",
+      "note": "The authored key stands.  The rule that draws the dots is 3 x n + 2, so figure 20 holds 3 x 20 + 2 = 62.  The blind read chose 59, which is that same rule evaluated at figure 19:  a plain off-by-one, and the option exists to catch it (\"This lands on figure 19\").  The blind pass was given both the caption naming figures 1, 2 and 3 and the rule itself, so nothing was ambiguous.  Recorded because this same item AGREED on the previous run of the identical content;  the disagreement is sampling noise in the blind model, which is the reason disagreements are adjudicated rather than applied.",
+      "adjudicatedBy": "Justin Solomon (via Claude Code, 26-0822 WP2 L5 re-run)",
+      "adjudicatedAt": "2026-08-22"
+    },
+    {
+      "itemId": "l5-next-p2n",
+      "itemHash": "5aa37ae38ffb99ed",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-rule-p2n",
+      "itemHash": "1418d91cdfa742ce",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-far-p2n",
+      "itemHash": "a342f08478bb233d",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l3-read-pets",
       "itemHash": "4e1480d8d39c2c40",
       "blind": 0,
@@ -705,147 +852,160 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-next-p3n",
-      "itemHash": "a846ae4836e4df91",
+      "itemId": "l6-square-rect-8-5",
+      "itemHash": "06999e1d50be7f98",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l5-rule-p3n",
-      "itemHash": "864dfece39668778",
+      "itemId": "l6-square-par-wide-14-5",
+      "itemHash": "0462f14510e50c64",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l5-far-p3n",
-      "itemHash": "90f1b979945f9ec1",
+      "itemId": "l6-square-tri-right-6-8-10",
+      "itemHash": "1ff679ef37415d86",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l5-next-p2n1",
-      "itemHash": "cc00eb1aa7fc7af1",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-rule-p2n1",
-      "itemHash": "b55c7843bacb7259",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-far-p2n1",
-      "itemHash": "d2606948ed977281",
+      "itemId": "l6-square-trap-10-4-6-5",
+      "itemHash": "b96714493343424b",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l5-next-p4n2",
-      "itemHash": "c254e78ebb4cc9df",
+      "itemId": "l6-compare-square-7",
+      "itemHash": "51e95548debe61f8",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-compare-rect-12-3",
+      "itemHash": "01a34c9775b43eb2",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l5-rule-p4n2",
-      "itemHash": "5ccd6da1c0a9fe52",
+      "itemId": "l6-compare-tri-isosceles-9-9-4",
+      "itemHash": "d68532e85266f5e0",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l5-far-p4n2",
-      "itemHash": "5ab377c8de41d28b",
+      "itemId": "l6-compare-lshape-1",
+      "itemHash": "9f61176f99b87cc3",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l5-next-p5n",
-      "itemHash": "1f79dce52cbb01b8",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-rule-p5n",
-      "itemHash": "856f28a4510b6e88",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-far-p5n",
-      "itemHash": "b05734b7349cd203",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-next-p3n2",
-      "itemHash": "049297734dcea046",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-rule-p3n2",
-      "itemHash": "68ef55defef9007d",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-far-p3n2",
-      "itemHash": "01d065df79189ea9",
-      "blind": 1,
-      "authored": 2,
-      "confidence": "high",
-      "status": "adjudicated",
-      "note": "The authored key stands.  The rule that draws the dots is 3 x n + 2, so figure 20 holds 3 x 20 + 2 = 62.  The blind read chose 59, which is that same rule evaluated at figure 19:  a plain off-by-one, and the option exists to catch it (\"This lands on figure 19\").  The blind pass was given both the caption naming figures 1, 2 and 3 and the rule itself, so nothing was ambiguous.  Recorded because this same item AGREED on the previous run of the identical content;  the disagreement is sampling noise in the blind model, which is the reason disagreements are adjudicated rather than applied.",
-      "adjudicatedBy": "Justin Solomon (via Claude Code, 26-0822 WP2 L5 re-run)",
-      "adjudicatedAt": "2026-08-22"
-    },
-    {
-      "itemId": "l5-next-p2n",
-      "itemHash": "5aa37ae38ffb99ed",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-rule-p2n",
-      "itemHash": "1418d91cdfa742ce",
+      "itemId": "l6-inverse-p3n",
+      "itemHash": "f7cff96e1cb7494a",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l5-far-p2n",
-      "itemHash": "a342f08478bb233d",
+      "itemId": "l6-inverse-p2n1",
+      "itemHash": "687f28e8d26516c3",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-inverse-p4n2",
+      "itemHash": "183b60e091fb0793",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-inverse-p3n2",
+      "itemHash": "06e89ded069fdd9b",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-largest-1",
+      "itemHash": "4633db155c5646ff",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-largest-2",
+      "itemHash": "e77778f064e55ae0",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-largest-3",
+      "itemHash": "5ae1056459364987",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-largest-4",
+      "itemHash": "9f33f88a2c7b165d",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-choose-1",
+      "itemHash": "1122a3b615d7491b",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-choose-2",
+      "itemHash": "89b662c934241b7d",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-choose-3",
+      "itemHash": "69f9ca89c3db5dd9",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-choose-4",
+      "itemHash": "f730ccc6a125031f",
       "blind": 3,
       "authored": 3,
       "confidence": "high",

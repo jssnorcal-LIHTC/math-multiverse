@@ -1188,6 +1188,262 @@ function buildLevel3() {
 }
 
 // ---------------------------------------------------------------------------
+// LEVEL 6: Review and Preview.
+//
+// CC1 ends every lesson with a "Review & Preview" set: a handful of problems that come back to
+// earlier lessons rather than drilling the one just finished, plus one that previews what is next.
+// That spacing is the part of the book a single-skill level cannot reproduce, so this level is
+// built in its shape. Every family asks a question the earlier level never asked, of a figure the
+// earlier level already used, and each item points back at the passage of the lesson it revisits.
+//
+// Five families, four items each:
+//
+//   A. SAME PERIMETER, DIFFERENT SHAPE.  Level 1 asked for a perimeter. This gives the perimeter
+//      and asks for the side of a square that matches it, so the answer runs perimeter -> division
+//      and lands on a decimal, which is level 3's skill arriving inside level 1's question.
+//   B. TWO PERIMETERS COMPARED.  A second shape is described in words rather than drawn, so the
+//      figure has to be read and the described one built before they can be subtracted.
+//   C. WHICH FIGURE HAS N DOTS.  Level 5 ran the rule forwards. This runs it backwards.
+//   D. WHICH DECIMAL IS LARGEST.  Level 4 read place value out of words. This uses it to order
+//      numbers, which is where "more digits means bigger" gets caught.
+//   E. WHICH DISPLAY ANSWERS THE QUESTION.  The preview step: not reading a display but choosing
+//      one, which is the question chapter 6 opens with.
+//
+// NO NEW GENERATOR and no new figure: every number here is computed from a committed dataTable by
+// the same functions that drew it, so nothing in this level can disagree with the picture it uses.
+// ---------------------------------------------------------------------------
+
+// A. Same perimeter, different shape. Chosen so P/4 terminates within two decimal places.
+const L6_SQUARE = [
+  { fig: 'fig-l1-rect-8-5', name: 'rectangle' },
+  { fig: 'fig-l1-par-wide-14-5', name: 'parallelogram' },
+  { fig: 'fig-l1-tri-right-6-8-10', name: 'triangle' },
+  { fig: 'fig-l1-trap-10-4-6-5', name: 'trapezoid' },
+];
+
+// B. Two perimeters compared. `side` is the regular pentagon described in the stem; every pair is
+// chosen so the pentagon is the longer of the two and the difference is a whole number.
+const L6_COMPARE = [
+  { fig: 'fig-l1-square-7', name: 'square', side: 10 },
+  { fig: 'fig-l1-rect-12-3', name: 'rectangle', side: 8 },
+  { fig: 'fig-l1-tri-isosceles-9-9-4', name: 'triangle', side: 6 },
+  { fig: 'fig-l1-lshape-1', name: 'L-shape', side: 9 },
+];
+
+// C. Which figure has N dots. `n` is the figure asked about; the dot count is computed from the
+// rule, never written down here.
+const L6_INVERSE = [
+  { fig: 'fig-l5-p3n', n: 9 },
+  { fig: 'fig-l5-p2n1', n: 12 },
+  { fig: 'fig-l5-p4n2', n: 9 },
+  { fig: 'fig-l5-p3n2', n: 10 },
+];
+
+// D. Which decimal is largest. Each set is built around one misconception: that a longer decimal is
+// a bigger one, or that a leading zero after the point can be ignored.
+const L6_LARGEST = [
+  { vals: ['0.7', '0.68', '0.09', '0.5'], key: '0.7',
+    context: 'Four seedlings grew this many centimetres', ask: 'TALLEST',
+    trap: 'more digits looks bigger, and 0.68 has more digits than 0.7' },
+  { vals: ['0.45', '0.5', '0.405', '0.049'], key: '0.5',
+    context: 'Four parcels weigh this many kilograms', ask: 'HEAVIEST',
+    trap: '0.405 is the longest of the four and the smallest but one' },
+  { vals: ['1.2', '1.09', '1.15', '1.099'], key: '1.2',
+    context: 'Four runners took this many seconds', ask: 'SLOWEST',
+    trap: '1.099 has the most digits after the point and is the smallest of the four' },
+  { vals: ['0.3', '0.301', '0.29', '0.13'], key: '0.301',
+    context: 'Four days recorded this much rain in centimetres', ask: 'WETTEST',
+    trap: 'here the longest one IS the largest, so length is never the reason either way' },
+];
+
+// E. Which display answers the question. The preview step.
+const L6_CHOOSE = [
+  { ask: 'how many students read for between 20 and 29 minutes',
+    key: 'a histogram of how many minutes each student read',
+    wrongs: [
+      { v: 'a bar graph of which pet each child keeps', why: 'This sorts children by pet.  It never mentions minutes, so no bar on it can answer a question about reading time.' },
+      { v: 'a bar graph of how each student travels to school', why: 'This sorts students by how they travel.  It counts students, but not by how long they read.' },
+      { v: 'a histogram of how tall each seedling is', why: 'This is the right KIND of display and the wrong data.  Grouping into intervals only helps if the intervals are made of the thing you asked about.' },
+    ] },
+  { ask: 'whether more children keep a dog or a cat',
+    key: 'a bar graph of which pet each child keeps',
+    wrongs: [
+      { v: 'a histogram of how many minutes each student read', why: 'A histogram groups numbers into intervals.  Dog and cat are names, not numbers, so they cannot be put in order along a number line.' },
+      { v: 'a bar graph of how each student travels to school', why: 'This is the right KIND of display and the wrong data.  It has named groups, but none of them is a pet.' },
+      { v: 'a histogram of how tall each seedling is', why: 'This groups heights into intervals.  It is measuring plants, not counting pets.' },
+    ] },
+  { ask: 'how many seedlings are shorter than 5 cm',
+    key: 'a histogram of how tall each seedling is',
+    wrongs: [
+      { v: 'a bar graph of which pet each child keeps', why: 'This counts children by pet.  Nothing on it is measured in centimetres.' },
+      { v: 'a histogram of how many minutes each student read', why: 'This is the right KIND of display and the wrong data.  Its intervals are minutes, and the question asks about centimetres.' },
+      { v: 'a bar graph of how each student travels to school', why: 'This sorts students into named groups.  Heights are numbers and belong in intervals, not names.' },
+    ] },
+  { ask: 'which way of getting to school the fewest students use',
+    key: 'a bar graph of how each student travels to school',
+    wrongs: [
+      { v: 'a histogram of how many minutes each student read', why: 'This groups minutes into intervals.  Walking and cycling are names, not numbers, so they do not sit on a number line.' },
+      { v: 'a bar graph of which pet each child keeps', why: 'This is the right KIND of display and the wrong data.  Its named groups are pets, not journeys.' },
+      { v: 'a histogram of how tall each seedling is', why: 'This measures plants in intervals, and the question is about students.' },
+    ] },
+];
+
+function buildLevel6(figuresById) {
+  const items = [];
+  const figOf = (id) => {
+    const f = figuresById.get(id);
+    if (!f) throw new Error(`cc1-pack-gen: L6 references ${id}, which this pack does not contain`);
+    return f;
+  };
+  // A number as it should read in a choice: 6.5 not 6.50, 6 not 6.0.
+  const num = (x) => String(Math.round(x * 100) / 100);
+
+  // ---- A: the square with the same perimeter ----
+  L6_SQUARE.forEach((row, idx) => {
+    const f = figOf(row.fig);
+    const P = labelledPerimeter(f.dataTable);
+    const side = P / 4;
+    if (Math.round(side * 100) / 100 !== side) throw new Error(`cc1-pack-gen: L6 square side for ${row.fig} is ${side}, which does not terminate in two decimal places`);
+    const wrongs = [
+      { v: num(P / 2), why: `This halves the perimeter instead of quartering it.  A square has FOUR equal sides, so the perimeter is shared out four ways, not two.` },
+      { v: num(P), why: `This is the perimeter itself, which is the distance all the way round rather than the length of one side.` },
+      { v: num(side + 1), why: `Close, and one centimetre too long.  Check it:  four sides of that length would add up to more than ${num(P)} cm.` },
+    ];
+    for (const w of wrongs) {
+      if (w.v === num(side)) throw new Error(`cc1-pack-gen: L6 square row ${row.fig} has a distractor equal to its key (${w.v})`);
+    }
+    const { opts, keyAt } = shuffleTo({ v: num(side) }, wrongs, idx);
+    const dr = {};
+    opts.forEach((o, i) => { if (i !== keyAt) dr[String(i)] = o.why; });
+    items.push({
+      id: `l6-square-${row.fig.replace(/^fig-l1-/, '')}`, type: 'mc', figureId: row.fig,
+      passageId: 'p-how-to-read-a-figure',
+      targets: ['math-r4-perimeter', 'math-r5-decimal-place-value'],
+      coachTopic: 'perimeter-same-square', dok: 3,
+      stem: `The ${row.name} in the figure has a perimeter of ${num(P)} cm.  A SQUARE with that same perimeter has sides of what length?`,
+      choices: opts.map((o) => `${o.v} cm`), key: keyAt, distractorRationale: dr,
+      explain: `Add the labelled sides and the ${row.name}'s perimeter is ${num(P)} cm.  A square's four sides are all equal, so one side is ${num(P)} divided by 4, which is ${num(side)} cm.  `
+        + `Checking it backwards is quicker than the division:  four sides of ${num(side)} cm come to ${num(P)} cm.`,
+    });
+  });
+
+  // ---- B: two perimeters compared ----
+  L6_COMPARE.forEach((row, idx) => {
+    const f = figOf(row.fig);
+    const P = labelledPerimeter(f.dataTable);
+    const pent = row.side * 5;
+    const diff = pent - P;
+    if (diff <= 0 || Math.round(diff) !== diff) throw new Error(`cc1-pack-gen: L6 compare row ${row.fig} gives a difference of ${diff}`);
+    const wrongs = [
+      { v: num(pent + P), why: `This adds the two perimeters.  "How much longer" is a subtraction:  it asks for the gap between them, not the total.` },
+      { v: num(pent), why: `This is the pentagon's whole perimeter, not the amount by which it beats the ${row.name}.` },
+      { v: num(row.side), why: `This is the length of ONE pentagon side.  Five of them make the pentagon's perimeter, and only then can the two shapes be compared.` },
+    ];
+    for (const w of wrongs) {
+      if (w.v === num(diff)) throw new Error(`cc1-pack-gen: L6 compare row ${row.fig} has a distractor equal to its key (${w.v}); change the pentagon side`);
+    }
+    const { opts, keyAt } = shuffleTo({ v: num(diff) }, wrongs, idx + 1);
+    const dr = {};
+    opts.forEach((o, i) => { if (i !== keyAt) dr[String(i)] = o.why; });
+    items.push({
+      id: `l6-compare-${row.fig.replace(/^fig-l1-/, '')}`, type: 'mc', figureId: row.fig,
+      passageId: 'p-how-to-read-a-figure',
+      targets: ['math-r4-perimeter'],
+      coachTopic: 'perimeter-compare-pentagon', dok: 3,
+      stem: `A regular pentagon has five sides of ${row.side} cm each.  How much LONGER is the pentagon's perimeter than the ${row.name}'s in the figure?`,
+      choices: opts.map((o) => `${o.v} cm`), key: keyAt, distractorRationale: dr,
+      explain: `The pentagon first:  five sides of ${row.side} cm give ${row.side} x 5 = ${num(pent)} cm.  `
+        + `The ${row.name}'s labelled sides add to ${num(P)} cm.  The pentagon is longer by ${num(pent)} - ${num(P)} = ${num(diff)} cm.  `
+        + `Both shapes have to be turned into one number each before they can be compared, which is the whole reason perimeter is worth having.`,
+    });
+  });
+
+  // ---- C: which figure has N dots ----
+  L6_INVERSE.forEach((row, idx) => {
+    const f = figOf(row.fig);
+    const dt = f.dataTable;
+    const total = dotsAt(dt, row.n);
+    // The forgot-the-b distractor only exists when there IS a b: for a rule like 3 x n, dividing by
+    // 3 and forgetting nothing IS the right answer, so offering it would give the item two correct
+    // options. The dot-count distractor works either way and catches the commonest slip of all,
+    // which is answering with the number the question just handed you.
+    const wrongs = [];
+    if (dt.rule.b) {
+      wrongs.push({ v: String(Math.round(total / dt.rule.a)), why: `This divides by ${dt.rule.a} and forgets the ${dt.rule.b} that sits in every figure.  Take that group off FIRST, then divide.` });
+    }
+    wrongs.push(
+      { v: String(row.n + 1), why: `One figure too far.  Put this number into the rule and it gives more than ${total} dots.` },
+      { v: String(row.n - 1), why: `One figure short.  Put this number into the rule and it gives fewer than ${total} dots.` },
+      { v: String(total), why: `This is the number of DOTS, which the question gave you.  What it asks for is the FIGURE NUMBER that holds them.` },
+    );
+    const clean = [];
+    const seen = new Set([String(row.n)]);
+    for (const w of wrongs) { if (!seen.has(w.v)) { seen.add(w.v); clean.push(w); } }
+    if (clean.length < 3) throw new Error(`cc1-pack-gen: L6 inverse row ${row.fig} produced only ${clean.length} distractors`);
+    const { opts, keyAt } = shuffleTo({ v: String(row.n) }, clean, idx + 2);
+    const dr = {};
+    opts.forEach((o, i) => { if (i !== keyAt) dr[String(i)] = o.why; });
+    const rule = `${dt.rule.a} x n${dt.rule.b ? ' + ' + dt.rule.b : ''}`;
+    items.push({
+      id: `l6-inverse-${row.fig.replace(/^fig-l5-/, '')}`, type: 'mc', figureId: row.fig,
+      passageId: 'p-finding-the-rule',
+      targets: ['math-r5-numerical-patterns', 'math-ee-generalize'],
+      coachTopic: 'growpattern-which-figure', dok: 3,
+      stem: `This pattern keeps going.  Which figure has exactly ${total} dots?`,
+      choices: opts.map((o) => `figure ${o.v}`), key: keyAt, distractorRationale: dr,
+      explain: `The rule is ${rule}.  ` + (dt.rule.b
+        ? `Take off the ${dt.rule.b} that is in every figure:  ${total} - ${dt.rule.b} = ${total - dt.rule.b}.  Then divide by ${dt.rule.a}:  ${total - dt.rule.b} / ${dt.rule.a} = ${row.n}.  `
+        : `Divide by ${dt.rule.a}:  ${total} / ${dt.rule.a} = ${row.n}.  `)
+        + `So figure ${row.n} holds ${total} dots.  Running a rule backwards undoes its steps in the opposite order.`,
+    });
+  });
+
+  // ---- D: which decimal is largest ----
+  L6_LARGEST.forEach((row, idx) => {
+    const key = row.key;
+    const wrongs = row.vals.filter((v) => v !== key).map((v) => ({
+      v,
+      why: `${v} is smaller than ${key}.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does.`,
+    }));
+    if (wrongs.length !== 3) throw new Error(`cc1-pack-gen: L6 largest row ${idx} has ${wrongs.length} wrong values, expected 3`);
+    const { opts, keyAt } = shuffleTo({ v: key }, wrongs, idx + 3);
+    const dr = {};
+    opts.forEach((o, i) => { if (i !== keyAt) dr[String(i)] = o.why; });
+    items.push({
+      id: `l6-largest-${idx + 1}`, type: 'mc',
+      passageId: 'p-reading-decimals',
+      targets: ['math-r5-decimal-place-value'],
+      coachTopic: 'decword-compare', dok: 2,
+      // The context is not decoration: four items that all read "which is the largest" would be one
+      // stem repeated four times, which validate-pack rejects and a reader could not tell apart.
+      stem: `${row.context}.  Which number is the ${row.ask}?`,
+      choices: opts.map((o) => o.v), key: keyAt, distractorRationale: dr,
+      explain: `Compare place by place from the left, starting at the tenths, and the first place where the numbers differ settles it.  That gives ${key}.  `
+        + `Watch the trap in this set:  ${row.trap}.  A longer decimal is not a bigger one.`,
+    });
+  });
+
+  // ---- E: which display answers the question ----
+  L6_CHOOSE.forEach((row, idx) => {
+    const { opts, keyAt } = shuffleTo({ v: row.key }, row.wrongs, idx);
+    const dr = {};
+    opts.forEach((o, i) => { if (i !== keyAt) dr[String(i)] = o.why; });
+    items.push({
+      id: `l6-choose-${idx + 1}`, type: 'mc',
+      passageId: 'p-reading-a-display',
+      targets: ['math-sp-displays', 'math-r3-scaled-graphs'],
+      coachTopic: 'display-choose-the-kind', dok: 3,
+      stem: `You want to know ${row.ask}.  Which display answers that?`,
+      choices: opts.map((o) => o.v), key: keyAt, distractorRationale: dr,
+      explain: `Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  `
+        + `That leaves ${row.key}.`,
+    });
+  });
+
+  return { items, figures: [] };
+}
+
+// ---------------------------------------------------------------------------
 // Assemble.
 // ---------------------------------------------------------------------------
 const l1 = buildLevel1();
@@ -1195,6 +1451,9 @@ const l2 = buildLevel2();
 const l4 = buildLevel4();
 const l5 = buildLevel5();
 const l3 = buildLevel3();
+const figuresById = new Map(
+  l1.figures.concat(l2.figures, l4.figures, l5.figures, l3.figures).map((f) => [f.id, f]));
+const l6 = buildLevel6(figuresById);
 
 const pack = {
   meta: { id: 'cpm-cc1-g6', subject: 'math', grade: 6, title: 'Field Notes', standards: 'CCSS Math 6 (CPM CC1)', version: 1 },
@@ -1400,8 +1659,27 @@ const pack = {
       },
       itemIds: l3.items.map((i) => i.id),
     },
+    {
+      id: 6,
+      name: 'Review and Preview',
+      goal: 'Come back to every skill in the pack, each one asked a way it was not asked before.',
+      targets: ['math-r4-perimeter', 'math-r5-decimal-place-value', 'math-r5-numerical-patterns',
+        'math-ee-generalize', 'math-sp-displays'],
+      lives: 4,
+      questions: 8,
+      briefing: {
+        title: 'Everything so far, asked backwards',
+        lines: [
+          'This level mixes all five earlier ones, and none of the questions are the ones you have already answered.',
+          'A perimeter arrives already worked out, and what is wanted is the square that matches it.  A pattern gives you the dot count and asks which figure it belongs to.',
+          'Decimals get lined up against each other, which is where the longest number turns out not to be the biggest.',
+          'The last kind is new:  not reading a display, but choosing which display could answer a question at all.',
+        ],
+      },
+      itemIds: l6.items.map((i) => i.id),
+    },
   ],
-  items: l1.items.concat(l2.items, l4.items, l5.items, l3.items),
+  items: l1.items.concat(l2.items, l4.items, l5.items, l3.items, l6.items),
   figures: l1.figures.concat(l2.figures, l4.figures, l5.figures, l3.figures),
 };
 
