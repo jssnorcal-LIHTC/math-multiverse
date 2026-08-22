@@ -373,6 +373,52 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  /* TODAY'S MISSION (launcher, above free play)
+     SPEC-multiverse-platform-v1-26-0724 decision 5: the mission is a featured card ABOVE free
+     play, never a replacement for it.  The lesson-pointer control lives here rather than in the
+     header bar: the v4 roadmap records CI measuring that bar at 33px against 35 locally with it
+     wrapping to a second row, which leaves the reward-geometry floor at exactly zero margin, and
+     a control added there spends margin the repo has already measured as absent. */
+  .mission-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+  }
+  .mission-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .mission-title { font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); font-weight: 700; }
+  .mission-lesson {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    font-size: 0.78rem; color: var(--text-secondary);
+  }
+  .mission-lesson-name { color: var(--text-primary); font-weight: 600; }
+  /* 44px minimum on every touch target, constraint 6.  The visible chip is smaller than the
+     finger, so the height comes from padding rather than from a taller-looking control. */
+  .mission-btn {
+    min-height: 44px; min-width: 44px;
+    padding: 4px 12px;
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font: inherit; font-size: 0.78rem;
+    cursor: pointer;
+  }
+  .mission-btn:hover { color: var(--text-primary); border-color: rgba(120,170,255,0.55); }
+  .mission-select {
+    min-height: 44px;
+    padding: 4px 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font: inherit; font-size: 0.78rem;
+    max-width: 320px;
+  }
+  .mission-note { font-size: 0.74rem; color: var(--text-muted); margin-top: 6px; line-height: 1.45; }
+  .mission-auto { font-size: 0.72rem; color: var(--text-muted); display: inline-flex; align-items: center; gap: 5px; min-height: 44px; }
+
   /* SECTION HEADINGS */
   .section-heading { margin-bottom: 12px; }
   .section-heading h2 { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
@@ -3038,6 +3084,7 @@
   <main>
     <!-- Screen: Launcher -->
     <section class="screen active" id="screen-launcher">
+      <div class="mission-card" id="mission-card" hidden></div>
       <div class="section-heading">
         <h2>Pick a section</h2>
         <p>Each section is a campaign of six levels. Beat each level to unlock the next. Complete all six to claim the section's grand goal.</p>
@@ -3350,6 +3397,68 @@ const InlineModules = {};
 const SAVE_KEY = 'mathMultiverse.save.v1';
 const SAVE_VERSION = 1;
 
+// ---- CURRICULUM POINTER -------------------------------------------------------------------
+// Which lesson the class is on. Justin supplies this one input; everything else about the
+// curriculum is a lookup against packs/curriculum-cc1.json, built once from public publisher
+// sources.
+//
+// It lives under its OWN localStorage key rather than inside the per-grade save, because the
+// key Save.key() returns changes with ACTIVE_GRADE and the class is on one lesson whichever
+// campaign is on screen. CC1 chapter 1 sits on grade-5 standards inside a grade-6 course, so a
+// pointer that reset on a grade flip would be wrong in exactly the case that matters most. It is
+// still mirrored into Save.state.curriculum and still travels through reconcile(), so an export,
+// an import and an older save with no curriculum key all behave.
+const CURRICULUM_KEY = 'mathMultiverse.curriculum.v1';
+
+const Curriculum = {
+  data: null,          // the parsed crosswalk, or null if it never loaded
+  error: null,         // why it did not load, so the UI can say so instead of going quiet
+  byLesson: null,      // Map lesson -> row
+  order: [],           // lesson ids in book order
+
+  load() {
+    return fetch('packs/curriculum-cc1.json', { cache: 'no-cache' })
+      .then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then((d) => {
+        if (!d || !Array.isArray(d.lessons) || !d.lessons.length) throw new Error('no lessons[]');
+        this.data = d;
+        this.order = d.lessons.map((l) => l.lesson);
+        this.byLesson = new Map(d.lessons.map((l) => [l.lesson, l]));
+        this.error = null;
+        return d;
+      })
+      .catch((e) => {
+        // Optional layer, same stance as the pack layer: a missing crosswalk degrades to the app
+        // as it was, never to a blank screen. The reason is kept rather than swallowed so the
+        // mission card can say "curriculum unavailable" instead of silently showing nothing.
+        this.error = (e && e.message) || String(e);
+        console.warn('curriculum unavailable:', this.error);
+        return null;
+      });
+  },
+
+  row(lesson) { return (this.byLesson && this.byLesson.get(lesson)) || null; },
+  has(lesson) { return !!(this.byLesson && this.byLesson.has(lesson)); },
+  ready() { return !!(this.data && this.order.length); },
+};
+
+// Whole weekdays strictly after `from`'s local date, up to and including `now`'s local date.
+// Mon-Fri only: the class does not advance a lesson on a Saturday. Bounded so a corrupt or
+// far-past `setAt` cannot spin: 400 weekday steps is well past the 80-lesson book.
+function weekdaysSince(fromMs, nowMs) {
+  if (!fromMs || !isFinite(fromMs)) return 0;
+  const d = new Date(fromMs); d.setHours(0, 0, 0, 0);
+  const end = new Date(nowMs == null ? Date.now() : nowMs); end.setHours(0, 0, 0, 0);
+  let n = 0, guard = 0;
+  while (d < end && guard++ < 4000) {
+    d.setDate(d.getDate() + 1);
+    const dow = d.getDay();
+    if (dow !== 0 && dow !== 6) n++;
+    if (n >= 400) break;
+  }
+  return n;
+}
+
 const Save = {
   state: null,
 
@@ -3382,6 +3491,9 @@ const Save = {
       modules: moduleStates,
       grandGoals: {},
       previewMode: false,
+      // `lesson: null` means Justin has not set the pointer yet, which the mission card says out
+      // loud rather than guessing a lesson and quietly being wrong about it.
+      curriculum: { book: 'cc1', lesson: null, setAt: null, autoAdvance: true },
       created: Date.now(),
       lastSaved: Date.now(),
       analytics: {
@@ -3409,6 +3521,16 @@ const Save = {
     if (typeof obj.previewMode === 'boolean') out.previewMode = obj.previewMode;
     if (obj.stats && typeof obj.stats === 'object') Object.assign(out.stats, obj.stats);
     if (obj.grandGoals && typeof obj.grandGoals === 'object') out.grandGoals = obj.grandGoals;
+    // Additive and field-by-field, like every other block here: a save written before the
+    // curriculum pointer existed has no `curriculum` key at all and must load with nothing lost,
+    // and a save carrying a malformed one must not be able to poison the default.
+    if (obj.curriculum && typeof obj.curriculum === 'object') {
+      const c = obj.curriculum, t = out.curriculum;
+      if (typeof c.book === 'string' && c.book) t.book = c.book;
+      if (typeof c.lesson === 'string' && /^\d\.\d\.\d$/.test(c.lesson)) t.lesson = c.lesson;
+      if (typeof c.setAt === 'number' && isFinite(c.setAt)) t.setAt = c.setAt;
+      if (typeof c.autoAdvance === 'boolean') t.autoAdvance = c.autoAdvance;
+    }
     if (obj.analytics && typeof obj.analytics === 'object') {
       const a = out.analytics, oa = obj.analytics;
       for (const k of ['totalSessions', 'totalAttempted', 'totalCorrect', 'totalTimeMs']) if (typeof oa[k] === 'number') a[k] = oa[k];
@@ -3434,8 +3556,8 @@ const Save = {
   load() {
     const KEY = this.key();
     let raw = null;
-    try { raw = localStorage.getItem(KEY); } catch (e) { this.state = this.default(); return; }
-    if (!raw) { this.state = this.default(); this.saveNow(); return; }
+    try { raw = localStorage.getItem(KEY); } catch (e) { this.state = this.default(); this.loadCurriculum(); return; }
+    if (!raw) { this.state = this.default(); this.loadCurriculum(); this.saveNow(); return; }
     try {
       this.state = this.reconcile(JSON.parse(raw));
     } catch (e) {
@@ -3444,7 +3566,60 @@ const Save = {
       console.warn('Save load failed; backed up to ' + KEY + '.bak and reset:', e);
       this.state = this.default();
     }
+    this.loadCurriculum();
     this.saveNow();
+  },
+
+  // The shared cross-grade key wins over whatever the per-grade save happened to carry. Called
+  // AFTER reconcile so an import still populates state.curriculum, and so a grade flip (which
+  // calls load() again against the other key) lands on the same lesson it left.
+  loadCurriculum() {
+    let raw = null;
+    try { raw = localStorage.getItem(CURRICULUM_KEY); } catch (e) { return; }
+    if (!raw) return;
+    try {
+      const c = JSON.parse(raw);
+      if (!c || typeof c !== 'object') return;
+      const t = this.state.curriculum;
+      if (typeof c.book === 'string' && c.book) t.book = c.book;
+      if (typeof c.lesson === 'string' && /^\d\.\d\.\d$/.test(c.lesson)) t.lesson = c.lesson;
+      else if (c.lesson === null) t.lesson = null;
+      if (typeof c.setAt === 'number' && isFinite(c.setAt)) t.setAt = c.setAt;
+      if (typeof c.autoAdvance === 'boolean') t.autoAdvance = c.autoAdvance;
+    } catch (e) {
+      console.warn('curriculum pointer unreadable, keeping the save\'s own copy:', e && e.message);
+    }
+  },
+
+  // Set the pointer. A MANUAL set always wins over the auto-advance, which is what re-stamping
+  // setAt does: the advance is counted from the last time a human said where the class is.
+  setCurriculum(patch) {
+    const t = this.state.curriculum;
+    if (patch && typeof patch === 'object') {
+      if (typeof patch.book === 'string' && patch.book) t.book = patch.book;
+      if (patch.lesson === null || (typeof patch.lesson === 'string' && /^\d\.\d\.\d$/.test(patch.lesson))) {
+        t.lesson = patch.lesson;
+        t.setAt = Date.now();
+      }
+      if (typeof patch.autoAdvance === 'boolean') t.autoAdvance = patch.autoAdvance;
+    }
+    try { localStorage.setItem(CURRICULUM_KEY, JSON.stringify(t)); } catch (e) {}
+    this.saveNow();
+    return t;
+  },
+
+  // Where the class is TODAY: the set lesson, plus one lesson per weekday since it was set,
+  // clamped to the last lesson of the book. Returns null when no pointer is set, and returns the
+  // stored lesson unadvanced when the crosswalk has not loaded -- never a guess.
+  effectiveLesson(nowMs) {
+    const c = this.state && this.state.curriculum;
+    if (!c || !c.lesson) return null;
+    if (!Curriculum.ready()) return c.lesson;
+    const order = Curriculum.order;
+    const i = order.indexOf(c.lesson);
+    if (i < 0) return c.lesson;                 // a lesson this book does not have: say it back, do not invent
+    if (!c.autoAdvance || !c.setAt) return c.lesson;
+    return order[Math.min(order.length - 1, i + weekdaysSince(c.setAt, nowMs))];
   },
 
   saveNow() {
@@ -3722,6 +3897,80 @@ function buildShelves(manifest) {
   }
   SHELVES = out;
   return out;
+}
+
+// ---- TODAY'S MISSION CARD ------------------------------------------------------------------
+// WP4 renders the lesson pointer. WP5 fills the body below it with the assembled mission.
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function lessonOptionLabel(row) {
+  const t = row.title || '';
+  return `${row.lesson}  ${t.length > 58 ? t.slice(0, 57) + '…' : t}`;
+}
+
+function renderMissionCard() {
+  const card = $('mission-card');
+  if (!card) return;
+
+  // The crosswalk is optional. Without it the card says so rather than rendering an empty
+  // control that looks broken, and free play below is untouched either way.
+  if (!Curriculum.ready()) {
+    card.hidden = false;
+    card.innerHTML = `
+      <div class="mission-head"><div class="mission-title">Today's Mission</div></div>
+      <div class="mission-note">Curriculum tracking is unavailable${Curriculum.error ? ' (' + esc(Curriculum.error) + ')' : ''}.
+        Everything below still works exactly as it did.</div>`;
+    return;
+  }
+
+  const c = Save.state.curriculum;
+  const eff = Save.effectiveLesson();
+  const row = eff ? Curriculum.row(eff) : null;
+  const advanced = eff && c.lesson && eff !== c.lesson;
+
+  const options = Curriculum.data.lessons.map((l) => (
+    `<option value="${esc(l.lesson)}"${l.lesson === eff ? ' selected' : ''}>${esc(lessonOptionLabel(l))}</option>`
+  )).join('');
+
+  card.hidden = false;
+  card.innerHTML = `
+    <div class="mission-head">
+      <div class="mission-title">Today's Mission</div>
+      <div class="mission-lesson">
+        <label for="mission-lesson-select">${esc(Curriculum.data.bookTitle || 'Curriculum')} lesson</label>
+        <select class="mission-select" id="mission-lesson-select">
+          <option value=""${eff ? '' : ' selected'}>Not set yet</option>
+          ${options}
+        </select>
+        <label class="mission-auto"><input type="checkbox" id="mission-auto" ${c.autoAdvance ? 'checked' : ''}> advance on weekdays</label>
+      </div>
+    </div>
+    <div id="mission-body"></div>
+    <div class="mission-note" id="mission-pointer-note">${
+      !eff
+        ? 'Set the lesson the class is on and the mission will follow it. Until then it works from what he gets wrong.'
+        : `On <span class="mission-lesson-name">${esc(eff)} &middot; ${esc(row ? row.title : '')}</span>` +
+          (advanced ? ` (advanced from ${esc(c.lesson)} automatically)` : '') +
+          (row && row.problems && row.problems.length ? ` &middot; Review and Preview ${esc(row.problems[0])} to ${esc(row.problems[row.problems.length - 1])}` : '') +
+          '.'
+    }</div>
+  `;
+
+  const sel = $('mission-lesson-select');
+  if (sel) sel.addEventListener('change', () => {
+    Save.setCurriculum({ lesson: sel.value || null });
+    renderMissionCard();
+  });
+  const auto = $('mission-auto');
+  if (auto) auto.addEventListener('change', () => {
+    // Re-stamp setAt so re-enabling the advance counts from today rather than replaying every
+    // weekday since the pointer was first set.
+    Save.setCurriculum({ autoAdvance: auto.checked, lesson: Save.effectiveLesson() });
+    renderMissionCard();
+  });
 }
 
 function mathCardNode(m) {
@@ -12140,6 +12389,9 @@ document.addEventListener('DOMContentLoaded', () => {
       Save.switchGrade(g);
       renderHeader();
       renderLauncher();
+      // The pointer is shared across grades, but the mission it drives is not: TOPIC_INDEX spans
+      // both tracks and the analytics behind the weakness half live under the active grade's key.
+      renderMissionCard();
     });
   }
 
@@ -12227,6 +12479,17 @@ document.addEventListener('DOMContentLoaded', () => {
   buildShelves(null);
   renderLauncher();
   renderHeader();
+
+  // The curriculum crosswalk is an optional layer, exactly like the pack layer below it: it is an
+  // external JSON that may simply not be there, and every failure must degrade to the math game
+  // rather than to a blank page. renderMissionCard() is called first so the card says
+  // "unavailable" during the fetch instead of appearing out of nowhere afterwards.
+  try {
+    renderMissionCard();
+    Curriculum.load().then(() => { renderMissionCard(); });
+  } catch (e) {
+    console.warn('curriculum layer unavailable:', e && e.message);
+  }
 
   // The pack layer is optional and lives in separate files that may simply not be there: a copied HTML
   // without its engine/ folder, a partial sync, one dropped request. localStorage can also throw outright
