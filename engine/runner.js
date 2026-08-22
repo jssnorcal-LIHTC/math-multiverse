@@ -282,6 +282,9 @@
       if (passage) {
         if (passageBox.dataset.pid !== passage.id) {
           passageBox.dataset.pid = passage.id;
+          // A new passage is new words, so the lit line's character offset no longer points at
+          // anything the child chose. It goes out rather than lighting whatever now sits there.
+          rlClear(passageBox);
           passageBox.innerHTML = '';
           passageBox.appendChild(el('div', 'mv-passage-title', passage.title));
           // Written only when a kind exists, and removed otherwise, so a text-only passage
@@ -322,6 +325,10 @@
         }
         passageBox.style.display = '';
         markPassageClipped(passageBox);
+        // The reading-line tracker is per passage box and attaches once. Its teardown is held on
+        // the box so cleanup() below can detach it: a resize listener that outlives its level is
+        // exactly the kind of leak that only shows up after an hour of play.
+        if (!passageBox._mvReadlineOff) passageBox._mvReadlineOff = attachReadingLine(passageBox);
       } else {
         passageBox.style.display = 'none';
         passageBox.dataset.pid = '';
@@ -473,6 +480,11 @@
       timeouts.forEach(clearTimeout);
       timeouts = [];
       Save.saveNow();
+      // Detach the reading-line tracker with the level that owns it. Guarded the same way as the
+      // figures hook below: a tracker fault must never stop the rest of cleanup from running.
+      try {
+        if (passageBox && passageBox._mvReadlineOff) { passageBox._mvReadlineOff(); passageBox._mvReadlineOff = null; }
+      } catch (e) {}
       // Same call-time resolution and try/catch stance as the passage hook above: an open
       // lightbox must not survive past the level that opened it, and a broken or absent
       // MVFigures must never stop cleanup from running the rest of its work. Three-term form
@@ -480,6 +492,328 @@
       // as the passage hook, attachReveal, and the item-figure hook above (Task 7).
       const FG = (deps && deps.Figures) || (typeof MVFigures !== 'undefined' && MVFigures) || (root && root.MVFigures);
       if (FG) { try { FG.closeLightbox(); } catch (e) {} }
+    };
+  }
+
+  // ---- READING-LINE TRACKER (Justin, 26-0822) ----------------------------------------------
+  //
+  // "He wants to be able to track his reading progress when he is answering questions ... allow
+  //  the user to select a line of the text that they're reading and have it be highlighted. That
+  //  allows him then to look at the answer down below and track where he's reading from."
+  //
+  // Tap a line of the passage and that line stays lit. Look down at the choices, look back up, and
+  // the place he was is still marked. Arrow keys walk it a line at a time; Escape, or tapping the
+  // lit line again, clears it.
+  //
+  // A RENDERED VISUAL LINE, not a sentence and not a paragraph, because that is what he asked for
+  // and it is what a reading ruler marks. HTML has no element for a visual line, so the line is
+  // found geometrically: the tap gives a character, and the line is the maximal run of characters
+  // around it whose client rects share that character's top edge. Tops increase monotonically with
+  // offset inside a block, so each edge is a binary search rather than a scan.
+  //
+  // AN OVERLAY, NEVER DOM SURGERY on the passage text. Constraint 4 keeps certified passage text
+  // byte-untouched, and tests/reading-surface.js measures this exact surface; wrapping words in
+  // <mark> would mutate the text nodes the ledger hashes and move the very geometry that gate
+  // sweeps. The overlay is a sibling div positioned over the line, so the text under it is
+  // untouched, still selectable, and still measured the same way.
+  //
+  // The anchor is stored as a CHARACTER OFFSET, not a pixel row, so a resize, an orientation flip
+  // or a font swap re-finds the same words rather than lighting whatever now happens to sit at
+  // that height. Recomputed on resize and on scroll.
+  const READING_LINE = {
+    // { blockIndex, offset } into the passage's own blocks, or null when nothing is lit.
+    anchor: null,
+    passageId: null,
+  };
+
+  // Every text node under a block, in document order, and the flat character length across them.
+  // A block is one .mv-para or the passage title: bold spans and the like mean a block is usually
+  // several text nodes, and a flat offset over all of them is what makes a line boundary
+  // expressible as one number.
+  function rlTextNodes(block) {
+    const out = [];
+    const walk = document.createTreeWalker(block, NodeFilter.SHOW_TEXT, null);
+    let n;
+    while ((n = walk.nextNode())) { if (n.nodeValue && n.nodeValue.length) out.push(n); }
+    return out;
+  }
+
+  function rlFlatLength(nodes) {
+    let n = 0;
+    for (const t of nodes) n += t.nodeValue.length;
+    return n;
+  }
+
+  // Flat offset -> {node, offset}. Clamped, so an offset past the end lands on the last character
+  // rather than throwing inside a Range.
+  function rlPos(nodes, flat) {
+    let left = Math.max(0, flat);
+    for (const t of nodes) {
+      if (left <= t.nodeValue.length) return { node: t, offset: Math.min(left, t.nodeValue.length) };
+      left -= t.nodeValue.length;
+    }
+    const last = nodes[nodes.length - 1];
+    return last ? { node: last, offset: last.nodeValue.length } : null;
+  }
+
+  // The client rect of the single character at a flat offset.
+  function rlCharRect(nodes, flat, total) {
+    if (!nodes.length || flat < 0 || flat >= total) return null;
+    const a = rlPos(nodes, flat);
+    const b = rlPos(nodes, flat + 1);
+    if (!a || !b) return null;
+    let r;
+    try {
+      r = document.createRange();
+      r.setStart(a.node, a.offset);
+      r.setEnd(b.node, b.offset);
+    } catch (e) { return null; }
+    const rects = r.getClientRects();
+    return rects.length ? rects[0] : null;
+  }
+
+  // The blocks a reader can point at: the paragraphs and the title. The figure strip is not text
+  // and is skipped, so a tap on a chart cannot light a "line" that has no words in it.
+  function rlBlocks(passageBox) {
+    if (!passageBox || typeof passageBox.querySelectorAll !== 'function') return [];
+    return [...passageBox.querySelectorAll('.mv-para, .mv-passage-title')];
+  }
+
+  // Widen a flat offset to the whole visual line containing it. Tops rise monotonically with
+  // offset inside a block, so both edges are binary searches. Tolerance is half a line, because
+  // rect tops within one line differ slightly across mixed font sizes and superscripts.
+  function rlLineRange(nodes, total, hit) {
+    const seed = rlCharRect(nodes, hit, total);
+    if (!seed) return null;
+    const tol = Math.max(4, seed.height * 0.5);
+    const sameLine = (flat) => {
+      const r = rlCharRect(nodes, flat, total);
+      return !!r && Math.abs(r.top - seed.top) <= tol;
+    };
+    // First offset on this line: the smallest i in [0, hit] with sameLine(i).
+    let lo = 0, hi = hit;
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1;
+      if (sameLine(mid)) hi = mid; else lo = mid + 1;
+    }
+    const start = lo;
+    // Last offset on this line: the largest i in [hit, total-1] with sameLine(i).
+    lo = hit; hi = total - 1;
+    while (lo < hi) {
+      const mid = (lo + hi + 1) >> 1;
+      if (sameLine(mid)) lo = mid; else hi = mid - 1;
+    }
+    return { start, end: lo };
+  }
+
+  // Union of the client rects for a flat range, in the passage box's own scrolled coordinates.
+  function rlRangeRect(passageBox, nodes, start, end) {
+    const a = rlPos(nodes, start);
+    const b = rlPos(nodes, end + 1);
+    if (!a || !b) return null;
+    let r;
+    try {
+      r = document.createRange();
+      r.setStart(a.node, a.offset);
+      r.setEnd(b.node, b.offset);
+    } catch (e) { return null; }
+    const rects = [...r.getClientRects()].filter((x) => x.width > 0 || x.height > 0);
+    if (!rects.length) return null;
+    const box = passageBox.getBoundingClientRect();
+    const top = Math.min(...rects.map((x) => x.top));
+    const bottom = Math.max(...rects.map((x) => x.bottom));
+    const left = Math.min(...rects.map((x) => x.left));
+    const right = Math.max(...rects.map((x) => x.right));
+    return {
+      top: top - box.top + passageBox.scrollTop,
+      left: left - box.left + passageBox.scrollLeft,
+      width: right - left,
+      height: bottom - top,
+    };
+  }
+
+  // The tracker is a browser-only affordance and an OPTIONAL layer, the same stance this file
+  // takes for MVFigures. tests/runner.test.js drives makeRunner against tests/dom-stub.js, a
+  // minimal DOM that has no querySelector and no TreeWalker; the tracker must be a clean no-op
+  // there rather than taking the whole runner down with it. Measured: without this guard, 40
+  // runner unit tests fail on `passageBox.querySelector is not a function`.
+  function rlSupported(passageBox) {
+    return !!(passageBox
+      && typeof passageBox.querySelector === 'function'
+      && typeof document !== 'undefined'
+      && typeof document.createTreeWalker === 'function'
+      && typeof document.createRange === 'function');
+  }
+
+  function rlOverlay(passageBox) {
+    let el = passageBox.querySelector(':scope > .mv-readline');
+    if (!el) {
+      el = document.createElement('div');
+      el.className = 'mv-readline';
+      el.setAttribute('aria-hidden', 'true');
+      passageBox.appendChild(el);
+    }
+    return el;
+  }
+
+  function rlClear(passageBox) {
+    READING_LINE.anchor = null;
+    if (!rlSupported(passageBox)) return;
+    const el = passageBox.querySelector(':scope > .mv-readline');
+    if (el) el.style.display = 'none';
+    if (passageBox) passageBox.removeAttribute('data-readline');
+  }
+
+  // Paint the stored anchor. Called on tap, on arrow keys, on resize and on scroll, so the line
+  // is always recomputed from the offset rather than trusted from the last paint.
+  function rlPaint(passageBox) {
+    const a = READING_LINE.anchor;
+    if (!a || !rlSupported(passageBox)) return false;
+    const blocks = rlBlocks(passageBox);
+    const block = blocks[a.blockIndex];
+    if (!block) { rlClear(passageBox); return false; }
+    const nodes = rlTextNodes(block);
+    const total = rlFlatLength(nodes);
+    if (!total) { rlClear(passageBox); return false; }
+    const range = rlLineRange(nodes, total, Math.min(a.offset, total - 1));
+    if (!range) { rlClear(passageBox); return false; }
+    const rect = rlRangeRect(passageBox, nodes, range.start, range.end);
+    if (!rect) { rlClear(passageBox); return false; }
+    const el = rlOverlay(passageBox);
+    // A couple of pixels of bleed each side so the band reads as a line rather than as a box
+    // clipped to the glyphs.
+    el.style.display = 'block';
+    // Horizontal bleed only. Vertical bleed would push the band into the neighbouring line box,
+    // and "this line and no other" is the whole promise the tracker makes.
+    el.style.top = rect.top + 'px';
+    el.style.left = (rect.left - 4) + 'px';
+    el.style.width = (rect.width + 8) + 'px';
+    el.style.height = rect.height + 'px';
+    passageBox.setAttribute('data-readline', '');
+    a.lineStart = range.start;
+    a.lineEnd = range.end;
+    return true;
+  }
+
+  // Move the lit line by one, across block boundaries. Returns false at either end of the passage,
+  // so the caller can leave the line where it is rather than clearing it.
+  function rlStep(passageBox, dir) {
+    const a = READING_LINE.anchor;
+    if (!a || !rlSupported(passageBox)) return false;
+    const blocks = rlBlocks(passageBox);
+    let bi = a.blockIndex;
+    let block = blocks[bi];
+    if (!block) return false;
+    let nodes = rlTextNodes(block);
+    let total = rlFlatLength(nodes);
+    const range = rlLineRange(nodes, total, Math.min(a.offset, total - 1));
+    if (!range) return false;
+
+    let next = dir > 0 ? range.end + 1 : range.start - 1;
+    while (next < 0 || next >= total) {
+      bi += dir;
+      block = blocks[bi];
+      if (!block) return false;                 // start or end of the passage: stay put
+      nodes = rlTextNodes(block);
+      total = rlFlatLength(nodes);
+      if (!total) continue;
+      next = dir > 0 ? 0 : total - 1;
+    }
+    READING_LINE.anchor = { blockIndex: bi, offset: next };
+    const painted = rlPaint(passageBox);
+    if (painted) {
+      const el = passageBox.querySelector(':scope > .mv-readline');
+      // Keep the lit line on screen when the arrows walk it past the fold.
+      if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+    }
+    return painted;
+  }
+
+  // Flat offset of a point, via the browser's own caret hit-testing. Two spellings because the
+  // standard one and the widely-shipped one disagree; neither is universal.
+  function rlOffsetFromPoint(block, nodes, x, y) {
+    let node = null, offset = 0;
+    if (document.caretRangeFromPoint) {
+      const r = document.caretRangeFromPoint(x, y);
+      if (r) { node = r.startContainer; offset = r.startOffset; }
+    } else if (document.caretPositionFromPoint) {
+      const p = document.caretPositionFromPoint(x, y);
+      if (p) { node = p.offsetNode; offset = p.offset; }
+    }
+    if (!node) return null;
+    if (node.nodeType !== 3) {
+      // A hit on the element rather than a text node: fall back to the nearest text node's start.
+      const t = nodes.find((n) => node.contains(n));
+      if (!t) return null;
+      node = t; offset = 0;
+    }
+    let flat = 0;
+    for (const t of nodes) {
+      if (t === node) return flat + Math.min(offset, t.nodeValue.length);
+      flat += t.nodeValue.length;
+    }
+    return null;
+  }
+
+  // Wire the tracker onto one passage box. Returns a teardown so the runner's own cleanup can
+  // detach it: an orphaned resize listener outlives the level it belongs to.
+  function attachReadingLine(passageBox) {
+    if (!rlSupported(passageBox) || typeof passageBox.addEventListener !== 'function') return function () {};
+    let downAt = null;
+
+    const onDown = (e) => { downAt = { x: e.clientX, y: e.clientY, t: Date.now() }; };
+    const onUp = (e) => {
+      const from = downAt; downAt = null;
+      // A scroll drag, a long press or a text selection is not a tap, and must not move the line.
+      if (!from) return;
+      if (Math.abs(e.clientX - from.x) > 8 || Math.abs(e.clientY - from.y) > 8) return;
+      const sel = root.getSelection && root.getSelection();
+      if (sel && !sel.isCollapsed) return;
+      // A tap on the figure strip is not a tap on a line of prose.
+      const block = e.target && e.target.closest && e.target.closest('.mv-para, .mv-passage-title');
+      if (!block || !passageBox.contains(block)) return;
+      const blocks = rlBlocks(passageBox);
+      const bi = blocks.indexOf(block);
+      if (bi < 0) return;
+      const nodes = rlTextNodes(block);
+      const total = rlFlatLength(nodes);
+      if (!total) return;
+      const flat = rlOffsetFromPoint(block, nodes, e.clientX, e.clientY);
+      if (flat == null) return;
+      const a = READING_LINE.anchor;
+      // Tapping the lit line again puts it out, so there is always a way to turn it off by hand.
+      if (a && a.blockIndex === bi && a.lineStart != null && flat >= a.lineStart && flat <= a.lineEnd) {
+        rlClear(passageBox);
+        return;
+      }
+      READING_LINE.anchor = { blockIndex: bi, offset: flat };
+      rlPaint(passageBox);
+    };
+
+    const onKey = (e) => {
+      if (!READING_LINE.anchor) return;
+      if (e.key === 'Escape') { rlClear(passageBox); return; }
+      if (e.key === 'ArrowDown') { if (rlStep(passageBox, 1)) e.preventDefault(); return; }
+      if (e.key === 'ArrowUp') { if (rlStep(passageBox, -1)) e.preventDefault(); return; }
+    };
+
+    // Reflow moves the words; the anchor is a character, so re-finding the line is the whole point
+    // of storing it that way.
+    const onReflow = () => { if (READING_LINE.anchor) rlPaint(passageBox); };
+
+    passageBox.addEventListener('pointerdown', onDown);
+    passageBox.addEventListener('pointerup', onUp);
+    document.addEventListener('keydown', onKey);
+    root.addEventListener('resize', onReflow);
+    passageBox.addEventListener('scroll', onReflow);
+
+    return function detachReadingLine() {
+      passageBox.removeEventListener('pointerdown', onDown);
+      passageBox.removeEventListener('pointerup', onUp);
+      document.removeEventListener('keydown', onKey);
+      root.removeEventListener('resize', onReflow);
+      passageBox.removeEventListener('scroll', onReflow);
+      rlClear(passageBox);
     };
   }
 
@@ -500,6 +834,21 @@
     pickItems, scoreFor, summarize, starsForMistakes, register, makeRunner, markPassageClipped,
     DEFAULT_LIVES, CORRECT_ADVANCE_MS,
     STAMP_THEME,
+    // The reading-line tracker is exported for the same reason markPassageClipped is:
+    // tests/reading-line.js drives the REAL widener and the REAL anchor against real rendered
+    // text in a real browser, rather than reimplementing the line geometry in the gate and
+    // proving only that the gate agrees with itself.
+    readingLine: {
+      state: READING_LINE,
+      attach: attachReadingLine,
+      paint: rlPaint,
+      clear: rlClear,
+      step: rlStep,
+      lineRange: rlLineRange,
+      blocks: rlBlocks,
+      textNodes: rlTextNodes,
+      flatLength: rlFlatLength,
+    },
     _test: { pickItems },
   };
 });
