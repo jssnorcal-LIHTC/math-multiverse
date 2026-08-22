@@ -20,6 +20,14 @@
    "genre": "informational",
    "source": "original",
    "text": "Every figure in these notes is already labelled, and each side carries its own length printed beside it.  Those printed labels are the only numbers to work from.  Never measure a drawing with a ruler.  A figure is drawn to be clear, not to scale, so a side marked twelve may look shorter than a side marked five.\n\nPerimeter is the distance all the way around the outside of a shape.  Start at any corner, travel along every edge once, and finish at the corner you started from.  Add the labels together as you go.  The most common mistake is getting back to the start and carrying on, which counts one edge twice.\n\nTwo marks turn up again and again, and both are worth learning now.  A small square drawn inside a corner means that corner is a right angle, exactly ninety degrees.  Short ticks drawn across two sides mean those sides are equal to each other, which is how a figure tells you about a side it never labelled.\n\nPerimeter measures the boundary.  Area measures the space shut inside that boundary.  They answer different questions, and multiplying two side lengths gives you area, never perimeter."
+  },
+  {
+   "id": "p-naming-shapes",
+   "title": "Naming a shape",
+   "docKind": "field-manual",
+   "genre": "informational",
+   "source": "original",
+   "text": "A triangle takes two names at once, and they answer different questions.  The first name describes its sides.  Scalene means no two sides match.  Isosceles means exactly two match.  Equilateral means all three match.  Ticks drawn across two sides are how a figure tells you they are equal without printing the same number twice.\n\nThe second name describes its corners.  Acute means every corner is smaller than a square corner.  Right means one corner is exactly square, and a figure marks that with a small square.  Obtuse means one corner opens wider than square.  A triangle can only ever have one corner that is right or obtuse, so those names are never shared.\n\nQuadrilateral names work differently, because they nest inside one another.  A rectangle is any four-sided shape with four right angles and equal opposite sides.  A rhombus is any four-sided shape with four equal sides.  A square meets both of those, so a square is a rectangle and a rhombus at the same time.\n\nThat nesting runs in one direction only.  Every square is a rectangle, but most rectangles are certainly not squares.  When a question asks for the most exact name available, a wider name that happens to be true still counts as the wrong answer."
   }
  ],
  "levels": [
@@ -63,6 +71,46 @@
     "l1-perim-lshape-1",
     "l1-missing-rect-8-5",
     "l1-missing-lshape-1"
+   ]
+  },
+  {
+   "id": 2,
+   "name": "Name the Shape",
+   "goal": "Name a triangle by its sides and by its angles, and give a quadrilateral its most exact name.",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "lives": 4,
+   "questions": 8,
+   "briefing": {
+    "title": "Two names, not one",
+    "lines": [
+     "A triangle gets TWO names, and they answer different questions.  One describes its sides.  Scalene means no two match, isosceles means exactly two match, equilateral means all three match.",
+     "The other describes its corners.  Acute means every corner is smaller than a square corner.  Right means one corner is exactly square.  Obtuse means one corner opens wider than square.",
+     "Quadrilaterals work differently.  Their names nest inside each other, so a square is also a rectangle and also a rhombus.  When a question asks for the most exact name, a wider name that is still true is the wrong answer."
+    ]
+   },
+   "itemIds": [
+    "l2-side-tri-name-scalene",
+    "l2-angle-tri-name-scalene",
+    "l2-side-tri-name-isosceles",
+    "l2-angle-tri-name-isosceles",
+    "l2-side-tri-name-equilateral",
+    "l2-angle-tri-name-equilateral",
+    "l2-side-tri-name-right",
+    "l2-angle-tri-name-right",
+    "l2-side-tri-name-obtuse",
+    "l2-angle-tri-name-obtuse",
+    "l2-side-tri-name-isos-obtuse",
+    "l2-angle-tri-name-isos-obtuse",
+    "l2-quad-quad-square",
+    "l2-quad-quad-rectangle",
+    "l2-quad-quad-rhombus",
+    "l2-quad-quad-parallelogram",
+    "l2-quad-quad-trapezoid",
+    "l2-hier-square-is-rectangle",
+    "l2-hier-rectangle-is-square",
+    "l2-hier-square-is-rhombus"
    ]
   }
  ],
@@ -616,6 +664,503 @@
     "3": "This is the longest side on the figure, not the missing one.  The missing side is whatever is left of the perimeter once every labelled side is taken off."
    },
    "explain": "The perimeter counts every side once, so the known sides plus the missing one make 38 cm.  Add the known sides: 10 + 4 + 5 + 4 + 9 = 32.  Take that off the perimeter: 38 - 32 = 6 cm."
+  },
+  {
+   "id": "l2-side-tri-name-scalene",
+   "type": "mc",
+   "figureId": "fig-l2-tri-name-scalene",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-triangle-by-side",
+   "dok": 2,
+   "stem": "Classify this triangle by its SIDES.  Its sides measure 7 cm, 8 cm, 9 cm.",
+   "choices": [
+    "scalene",
+    "isosceles",
+    "equilateral",
+    "right"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "A isosceles triangle needs exactly two sides equal, and this figure does not have that.",
+    "2": "A equilateral triangle needs all three sides equal, and this figure does not have that.",
+    "3": "Right names an ANGLE, not a set of side lengths.  This question asks about the sides."
+   },
+   "explain": "No two sides are the same length, which is what scalene means.  Sides and angles are two separate classifications, and a triangle carries one name from each list."
+  },
+  {
+   "id": "l2-angle-tri-name-scalene",
+   "type": "mc",
+   "figureId": "fig-l2-tri-name-scalene",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-triangle-by-angle",
+   "dok": 2,
+   "stem": "Now classify that same triangle, the one with sides 7, 8, 9 cm, by its ANGLES.",
+   "choices": [
+    "acute",
+    "right",
+    "obtuse",
+    "equilateral"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "An right triangle needs one corner exactly square, which the figure would mark, and this figure does not have that.",
+    "2": "An obtuse triangle needs one corner wider than a square corner, and this figure does not have that.",
+    "3": "Equilateral names the SIDES, not an angle.  This question asks about the corners."
+   },
+   "explain": "Every corner is smaller than a square corner, which makes it acute.  A triangle takes one name from the side list and one from the angle list, and the two are independent: this one is scalene and acute."
+  },
+  {
+   "id": "l2-side-tri-name-isosceles",
+   "type": "mc",
+   "figureId": "fig-l2-tri-name-isosceles",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-triangle-by-side",
+   "dok": 2,
+   "stem": "Classify this triangle by its SIDES.  Its sides measure 4 cm, 9 cm, 9 cm.",
+   "choices": [
+    "scalene",
+    "isosceles",
+    "equilateral",
+    "right"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "A scalene triangle needs no two sides equal, and this figure does not have that.",
+    "2": "A equilateral triangle needs all three sides equal, and this figure does not have that.",
+    "3": "Right names an ANGLE, not a set of side lengths.  This question asks about the sides."
+   },
+   "explain": "Exactly two sides are the same length, which is what isosceles means, and the ticks are how the figure says so.  Sides and angles are two separate classifications, and a triangle carries one name from each list."
+  },
+  {
+   "id": "l2-angle-tri-name-isosceles",
+   "type": "mc",
+   "figureId": "fig-l2-tri-name-isosceles",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-triangle-by-angle",
+   "dok": 2,
+   "stem": "Now classify that same triangle, the one with sides 4, 9, 9 cm, by its ANGLES.",
+   "choices": [
+    "acute",
+    "right",
+    "obtuse",
+    "equilateral"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "An right triangle needs one corner exactly square, which the figure would mark, and this figure does not have that.",
+    "2": "An obtuse triangle needs one corner wider than a square corner, and this figure does not have that.",
+    "3": "Equilateral names the SIDES, not an angle.  This question asks about the corners."
+   },
+   "explain": "Every corner is smaller than a square corner, which makes it acute.  A triangle takes one name from the side list and one from the angle list, and the two are independent: this one is isosceles and acute."
+  },
+  {
+   "id": "l2-side-tri-name-equilateral",
+   "type": "mc",
+   "figureId": "fig-l2-tri-name-equilateral",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-triangle-by-side",
+   "dok": 2,
+   "stem": "Classify this triangle by its SIDES.  Its sides measure 8 cm, 8 cm, 8 cm.",
+   "choices": [
+    "scalene",
+    "isosceles",
+    "equilateral",
+    "right"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "A scalene triangle needs no two sides equal, and this figure does not have that.",
+    "1": "A isosceles triangle needs exactly two sides equal, and this figure does not have that.",
+    "3": "Right names an ANGLE, not a set of side lengths.  This question asks about the sides."
+   },
+   "explain": "All three sides are the same length, which is what equilateral means.  Sides and angles are two separate classifications, and a triangle carries one name from each list."
+  },
+  {
+   "id": "l2-angle-tri-name-equilateral",
+   "type": "mc",
+   "figureId": "fig-l2-tri-name-equilateral",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-triangle-by-angle",
+   "dok": 2,
+   "stem": "Now classify that same triangle, the one with sides 8, 8, 8 cm, by its ANGLES.",
+   "choices": [
+    "acute",
+    "right",
+    "obtuse",
+    "equilateral"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "An right triangle needs one corner exactly square, which the figure would mark, and this figure does not have that.",
+    "2": "An obtuse triangle needs one corner wider than a square corner, and this figure does not have that.",
+    "3": "Equilateral names the SIDES, not an angle.  This question asks about the corners."
+   },
+   "explain": "Every corner is smaller than a square corner, which makes it acute.  A triangle takes one name from the side list and one from the angle list, and the two are independent: this one is equilateral and acute."
+  },
+  {
+   "id": "l2-side-tri-name-right",
+   "type": "mc",
+   "figureId": "fig-l2-tri-name-right",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-triangle-by-side",
+   "dok": 2,
+   "stem": "Classify this triangle by its SIDES.  Its sides measure 6 cm, 10 cm, 8 cm.",
+   "choices": [
+    "scalene",
+    "isosceles",
+    "equilateral",
+    "right"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "A isosceles triangle needs exactly two sides equal, and this figure does not have that.",
+    "2": "A equilateral triangle needs all three sides equal, and this figure does not have that.",
+    "3": "Right names an ANGLE, not a set of side lengths.  This question asks about the sides."
+   },
+   "explain": "No two sides are the same length, which is what scalene means.  Sides and angles are two separate classifications, and a triangle carries one name from each list."
+  },
+  {
+   "id": "l2-angle-tri-name-right",
+   "type": "mc",
+   "figureId": "fig-l2-tri-name-right",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-triangle-by-angle",
+   "dok": 2,
+   "stem": "Now classify that same triangle, the one with sides 6, 10, 8 cm, by its ANGLES.",
+   "choices": [
+    "acute",
+    "right",
+    "obtuse",
+    "equilateral"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "An acute triangle needs every corner smaller than a square corner, and this figure does not have that.",
+    "2": "An obtuse triangle needs one corner wider than a square corner, and this figure does not have that.",
+    "3": "Equilateral names the SIDES, not an angle.  This question asks about the corners."
+   },
+   "explain": "One corner is exactly a square corner, marked with the small square, which makes it a right triangle.  A triangle takes one name from the side list and one from the angle list, and the two are independent: this one is scalene and right."
+  },
+  {
+   "id": "l2-side-tri-name-obtuse",
+   "type": "mc",
+   "figureId": "fig-l2-tri-name-obtuse",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-triangle-by-side",
+   "dok": 2,
+   "stem": "Classify this triangle by its SIDES.  Its sides measure 13 cm, 6 cm, 8 cm.",
+   "choices": [
+    "scalene",
+    "isosceles",
+    "equilateral",
+    "right"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "A isosceles triangle needs exactly two sides equal, and this figure does not have that.",
+    "2": "A equilateral triangle needs all three sides equal, and this figure does not have that.",
+    "3": "Right names an ANGLE, not a set of side lengths.  This question asks about the sides."
+   },
+   "explain": "No two sides are the same length, which is what scalene means.  Sides and angles are two separate classifications, and a triangle carries one name from each list."
+  },
+  {
+   "id": "l2-angle-tri-name-obtuse",
+   "type": "mc",
+   "figureId": "fig-l2-tri-name-obtuse",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-triangle-by-angle",
+   "dok": 2,
+   "stem": "Now classify that same triangle, the one with sides 13, 6, 8 cm, by its ANGLES.",
+   "choices": [
+    "acute",
+    "right",
+    "obtuse",
+    "equilateral"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "An acute triangle needs every corner smaller than a square corner, and this figure does not have that.",
+    "1": "An right triangle needs one corner exactly square, which the figure would mark, and this figure does not have that.",
+    "3": "Equilateral names the SIDES, not an angle.  This question asks about the corners."
+   },
+   "explain": "One corner opens wider than a square corner, which makes it obtuse.  A triangle takes one name from the side list and one from the angle list, and the two are independent: this one is scalene and obtuse."
+  },
+  {
+   "id": "l2-side-tri-name-isos-obtuse",
+   "type": "mc",
+   "figureId": "fig-l2-tri-name-isos-obtuse",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-triangle-by-side",
+   "dok": 2,
+   "stem": "Classify this triangle by its SIDES.  Its sides measure 5 cm, 5 cm, 9 cm.",
+   "choices": [
+    "scalene",
+    "isosceles",
+    "equilateral",
+    "right"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "A scalene triangle needs no two sides equal, and this figure does not have that.",
+    "2": "A equilateral triangle needs all three sides equal, and this figure does not have that.",
+    "3": "Right names an ANGLE, not a set of side lengths.  This question asks about the sides."
+   },
+   "explain": "Exactly two sides are the same length, which is what isosceles means, and the ticks are how the figure says so.  Sides and angles are two separate classifications, and a triangle carries one name from each list."
+  },
+  {
+   "id": "l2-angle-tri-name-isos-obtuse",
+   "type": "mc",
+   "figureId": "fig-l2-tri-name-isos-obtuse",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-triangle-by-angle",
+   "dok": 2,
+   "stem": "Now classify that same triangle, the one with sides 5, 5, 9 cm, by its ANGLES.",
+   "choices": [
+    "acute",
+    "right",
+    "obtuse",
+    "equilateral"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "An acute triangle needs every corner smaller than a square corner, and this figure does not have that.",
+    "1": "An right triangle needs one corner exactly square, which the figure would mark, and this figure does not have that.",
+    "3": "Equilateral names the SIDES, not an angle.  This question asks about the corners."
+   },
+   "explain": "One corner opens wider than a square corner, which makes it obtuse.  A triangle takes one name from the side list and one from the angle list, and the two are independent: this one is isosceles and obtuse."
+  },
+  {
+   "id": "l2-quad-quad-square",
+   "type": "mc",
+   "figureId": "fig-l2-quad-square",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-quadrilateral",
+   "dok": 2,
+   "stem": "What is the most exact name for this quadrilateral, whose sides are 6, 6, 6, 6 cm?  Read the ticks and the corner marks first.",
+   "choices": [
+    "square",
+    "rectangle",
+    "rhombus",
+    "parallelogram"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "Four right angles, with opposite sides equal but not all four the same.  This figure does not meet that.",
+    "2": "Four equal sides, but the corners are not square, so it is a rhombus rather than a square.  This figure does not meet that.",
+    "3": "Two pairs of equal opposite sides, no right angles, and no set of four equal sides.  This figure does not meet that."
+   },
+   "explain": "Four equal sides AND four right angles.  A square is the one name that needs both.  The question asks for the MOST EXACT name, so a wider name that is also true is still the wrong answer here."
+  },
+  {
+   "id": "l2-quad-quad-rectangle",
+   "type": "mc",
+   "figureId": "fig-l2-quad-rectangle",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-quadrilateral",
+   "dok": 2,
+   "stem": "What is the most exact name for this quadrilateral, whose sides are 9, 5, 9, 5 cm?  Read the ticks and the corner marks first.",
+   "choices": [
+    "square",
+    "rectangle",
+    "rhombus",
+    "parallelogram"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "Four equal sides AND four right angles.  A square is the one name that needs both.  This figure does not meet that.",
+    "2": "Four equal sides, but the corners are not square, so it is a rhombus rather than a square.  This figure does not meet that.",
+    "3": "Two pairs of equal opposite sides, no right angles, and no set of four equal sides.  This figure does not meet that."
+   },
+   "explain": "Four right angles, with opposite sides equal but not all four the same.  The question asks for the MOST EXACT name, so a wider name that is also true is still the wrong answer here."
+  },
+  {
+   "id": "l2-quad-quad-rhombus",
+   "type": "mc",
+   "figureId": "fig-l2-quad-rhombus",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-quadrilateral",
+   "dok": 2,
+   "stem": "What is the most exact name for this quadrilateral, whose sides are 7, 7, 7, 7 cm?  Read the ticks and the corner marks first.",
+   "choices": [
+    "square",
+    "rectangle",
+    "rhombus",
+    "parallelogram"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "Four equal sides AND four right angles.  A square is the one name that needs both.  This figure does not meet that.",
+    "1": "Four right angles, with opposite sides equal but not all four the same.  This figure does not meet that.",
+    "3": "Two pairs of equal opposite sides, no right angles, and no set of four equal sides.  This figure does not meet that."
+   },
+   "explain": "Four equal sides, but the corners are not square, so it is a rhombus rather than a square.  The question asks for the MOST EXACT name, so a wider name that is also true is still the wrong answer here."
+  },
+  {
+   "id": "l2-quad-quad-parallelogram",
+   "type": "mc",
+   "figureId": "fig-l2-quad-parallelogram",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-quadrilateral",
+   "dok": 2,
+   "stem": "What is the most exact name for this quadrilateral, whose sides are 10, 6, 10, 6 cm?  Read the ticks and the corner marks first.",
+   "choices": [
+    "square",
+    "rectangle",
+    "rhombus",
+    "parallelogram"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "Four equal sides AND four right angles.  A square is the one name that needs both.  This figure does not meet that.",
+    "1": "Four right angles, with opposite sides equal but not all four the same.  This figure does not meet that.",
+    "2": "Four equal sides, but the corners are not square, so it is a rhombus rather than a square.  This figure does not meet that."
+   },
+   "explain": "Two pairs of equal opposite sides, no right angles, and no set of four equal sides.  The question asks for the MOST EXACT name, so a wider name that is also true is still the wrong answer here."
+  },
+  {
+   "id": "l2-quad-quad-trapezoid",
+   "type": "mc",
+   "figureId": "fig-l2-quad-trapezoid",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-quadrilateral",
+   "dok": 2,
+   "stem": "What is the most exact name for this quadrilateral, whose sides are 11, 6, 5, 5 cm?  Read the ticks and the corner marks first.",
+   "choices": [
+    "trapezoid",
+    "square",
+    "rectangle",
+    "rhombus"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "Four equal sides AND four right angles.  A square is the one name that needs both.  This figure does not meet that.",
+    "2": "Four right angles, with opposite sides equal but not all four the same.  This figure does not meet that.",
+    "3": "Four equal sides, but the corners are not square, so it is a rhombus rather than a square.  This figure does not meet that."
+   },
+   "explain": "Exactly one pair of parallel sides.  The other two sides go their own way.  The question asks for the MOST EXACT name, so a wider name that is also true is still the wrong answer here."
+  },
+  {
+   "id": "l2-hier-square-is-rectangle",
+   "type": "mc",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-hierarchy",
+   "dok": 3,
+   "stem": "Is every square also a rectangle?",
+   "choices": [
+    "Yes, because a square has four right angles, which is what a rectangle needs.",
+    "No, because a rectangle must have two long sides and two short ones.",
+    "Only when the square is drawn tilted.",
+    "No, because a square already has its own name."
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "A rectangle needs four right angles and equal opposite sides.  It never requires the long pair to differ from the short pair, so a square qualifies.",
+    "2": "Turning a shape does not change what it is.  A tilted square is still a square, and still a rectangle.",
+    "3": "Having a more exact name of its own does not remove a shape from the wider group.  A square is a rectangle with something extra."
+   },
+   "explain": "A rectangle is any quadrilateral with four right angles and equal opposite sides.  A square has all of that AND four equal sides, so every square is a rectangle with something extra.  The reverse fails, because most rectangles are not squares."
+  },
+  {
+   "id": "l2-hier-rectangle-is-square",
+   "type": "mc",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-hierarchy",
+   "dok": 3,
+   "stem": "Is every rectangle also a square?",
+   "choices": [
+    "Yes, since both have four right angles.",
+    "No, because a square also needs all four sides equal.",
+    "Yes, if you measure carefully enough.",
+    "No, because a rectangle has no right angles."
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "Four right angles is what makes a rectangle, and a square needs that AND four equal sides.  That extra requirement is what makes this direction fail.",
+    "2": "Measuring cannot turn a 9 by 5 rectangle into a square.  Its sides are genuinely different lengths.",
+    "3": "A rectangle has four right angles by definition.  That part is exactly what the two shapes share."
+   },
+   "explain": "The relationship runs one way only.  Every square is a rectangle, because a square meets every rectangle requirement and adds one more.  A rectangle with two long sides and two short ones meets no such extra requirement, so it is not a square."
+  },
+  {
+   "id": "l2-hier-square-is-rhombus",
+   "type": "mc",
+   "passageId": "p-naming-shapes",
+   "targets": [
+    "math-r5-classify-figures"
+   ],
+   "coachTopic": "shape-hierarchy",
+   "dok": 3,
+   "stem": "A rhombus is a quadrilateral with four equal sides.  Is every square also a rhombus?",
+   "choices": [
+    "No, a rhombus has to lean.",
+    "Yes, because a square has four equal sides.",
+    "No, a rhombus is not allowed right angles.",
+    "Only squares smaller than the rhombus."
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "Leaning is what a rhombus is usually DRAWN doing, not what the name requires.  The requirement is four equal sides.",
+    "2": "A rhombus is not forbidden right angles;  it simply does not require them.  A square is the rhombus that happens to have them.",
+    "3": "Size never decides a shape name.  The same shape drawn twice as large carries exactly the same name."
+   },
+   "explain": "A rhombus needs four equal sides and nothing else.  A square has four equal sides, so every square is a rhombus, and it is a rectangle as well.  A square is the shape that sits in both groups at once."
   }
  ],
  "figures": [
@@ -1501,6 +2046,543 @@
      3,
      4,
      5
+    ]
+   }
+  },
+  {
+   "id": "fig-l2-tri-name-scalene",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Naming practice: a triangle with sides 7, 8, 9 cm.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A triangle with three different side lengths, 7 cm, 8 cm and 9 cm.  No sides carry congruence ticks, and no corner carries a right-angle mark.",
+   "src": "art/cpm-cc1-g6/fig-l2-tri-name-scalene.svg",
+   "dataTable": {
+    "shape": "triangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      7.6665
+     ],
+     [
+      7,
+      7.6665
+     ],
+     [
+      4.7143,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "7 cm",
+      "len": 7
+     },
+     {
+      "label": "8 cm",
+      "len": 8
+     },
+     {
+      "label": "9 cm",
+      "len": 9
+     }
+    ]
+   }
+  },
+  {
+   "id": "fig-l2-tri-name-isosceles",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Naming practice: a triangle with sides 4, 9, 9 cm.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A tall triangle with two equal sides of 9 cm, each carrying a single tick, and a short 4 cm side across the bottom.",
+   "src": "art/cpm-cc1-g6/fig-l2-tri-name-isosceles.svg",
+   "dataTable": {
+    "shape": "triangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      8.775
+     ],
+     [
+      4,
+      8.775
+     ],
+     [
+      2,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "4 cm",
+      "len": 4
+     },
+     {
+      "label": "9 cm",
+      "len": 9
+     },
+     {
+      "label": "9 cm",
+      "len": 9
+     }
+    ],
+    "ticks": {
+     "1": 1,
+     "2": 1
+    }
+   }
+  },
+  {
+   "id": "fig-l2-tri-name-equilateral",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Naming practice: a triangle with sides 8, 8, 8 cm.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A triangle with all three sides equal at 8 cm, each carrying a single tick.",
+   "src": "art/cpm-cc1-g6/fig-l2-tri-name-equilateral.svg",
+   "dataTable": {
+    "shape": "triangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      6.9282
+     ],
+     [
+      8,
+      6.9282
+     ],
+     [
+      4,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "8 cm",
+      "len": 8
+     },
+     {
+      "label": "8 cm",
+      "len": 8
+     },
+     {
+      "label": "8 cm",
+      "len": 8
+     }
+    ],
+    "ticks": {
+     "0": 1,
+     "1": 1,
+     "2": 1
+    }
+   }
+  },
+  {
+   "id": "fig-l2-tri-name-right",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Naming practice: a triangle with sides 6, 10, 8 cm.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A triangle with sides 6 cm, 10 cm and 8 cm.  The corner between the 6 cm and 8 cm sides carries a right-angle mark.",
+   "src": "art/cpm-cc1-g6/fig-l2-tri-name-right.svg",
+   "dataTable": {
+    "shape": "triangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      8
+     ],
+     [
+      6,
+      8
+     ],
+     [
+      0,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "10 cm",
+      "len": 10
+     },
+     {
+      "label": "8 cm",
+      "len": 8
+     }
+    ],
+    "rightAngles": [
+     0
+    ]
+   }
+  },
+  {
+   "id": "fig-l2-tri-name-obtuse",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Naming practice: a triangle with sides 13, 6, 8 cm.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A wide, flat triangle with sides 13 cm, 6 cm and 8 cm.  Its widest corner opens well past a square corner.",
+   "src": "art/cpm-cc1-g6/fig-l2-tri-name-obtuse.svg",
+   "dataTable": {
+    "shape": "triangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      2.5671
+     ],
+     [
+      13,
+      2.5671
+     ],
+     [
+      7.5769,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "13 cm",
+      "len": 13
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "8 cm",
+      "len": 8
+     }
+    ]
+   }
+  },
+  {
+   "id": "fig-l2-tri-name-isos-obtuse",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Naming practice: a triangle with sides 5, 5, 9 cm.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A wide, flat triangle with two equal sides of 5 cm, each carrying a tick, and a long 9 cm side.  The corner between the two equal sides opens well past square.",
+   "src": "art/cpm-cc1-g6/fig-l2-tri-name-isos-obtuse.svg",
+   "dataTable": {
+    "shape": "triangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      3.923
+     ],
+     [
+      5,
+      3.923
+     ],
+     [
+      8.1,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "5 cm",
+      "len": 5
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     },
+     {
+      "label": "9 cm",
+      "len": 9
+     }
+    ],
+    "ticks": {
+     "0": 1,
+     "1": 1
+    }
+   }
+  },
+  {
+   "id": "fig-l2-quad-square",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Naming practice: a quadrilateral with sides 6, 6, 6, 6 cm.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A quadrilateral with four equal sides of 6 cm, each carrying a tick, and a right-angle mark in every corner.",
+   "src": "art/cpm-cc1-g6/fig-l2-quad-square.svg",
+   "dataTable": {
+    "shape": "rectangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      0
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      0,
+      6
+     ]
+    ],
+    "sides": [
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     }
+    ],
+    "ticks": {
+     "0": 1,
+     "1": 1,
+     "2": 1,
+     "3": 1
+    },
+    "rightAngles": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "fig-l2-quad-rectangle",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Naming practice: a quadrilateral with sides 9, 5, 9, 5 cm.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A quadrilateral with opposite sides equal, 9 cm and 5 cm, and a right-angle mark in every corner.",
+   "src": "art/cpm-cc1-g6/fig-l2-quad-rectangle.svg",
+   "dataTable": {
+    "shape": "rectangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      0
+     ],
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      5
+     ],
+     [
+      0,
+      5
+     ]
+    ],
+    "sides": [
+     {
+      "label": "9 cm",
+      "len": 9
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     },
+     {
+      "label": "9 cm",
+      "len": 9
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     }
+    ],
+    "rightAngles": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "fig-l2-quad-rhombus",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Naming practice: a quadrilateral with sides 7, 7, 7, 7 cm.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A leaning quadrilateral with four equal sides of 7 cm, each carrying a tick, and no right-angle marks.",
+   "src": "art/cpm-cc1-g6/fig-l2-quad-rhombus.svg",
+   "dataTable": {
+    "shape": "parallelogram",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      5.9363
+     ],
+     [
+      7,
+      5.9363
+     ],
+     [
+      10.7094,
+      0
+     ],
+     [
+      3.7094,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "7 cm",
+      "len": 7
+     },
+     {
+      "label": "7 cm",
+      "len": 7
+     },
+     {
+      "label": "7 cm",
+      "len": 7
+     },
+     {
+      "label": "7 cm",
+      "len": 7
+     }
+    ],
+    "ticks": {
+     "0": 1,
+     "1": 1,
+     "2": 1,
+     "3": 1
+    }
+   }
+  },
+  {
+   "id": "fig-l2-quad-parallelogram",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Naming practice: a quadrilateral with sides 10, 6, 10, 6 cm.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A leaning quadrilateral with opposite sides equal, 10 cm and 6 cm, marked with one tick and two ticks, and no right-angle marks.",
+   "src": "art/cpm-cc1-g6/fig-l2-quad-parallelogram.svg",
+   "dataTable": {
+    "shape": "parallelogram",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      5.2977
+     ],
+     [
+      10,
+      5.2977
+     ],
+     [
+      12.8168,
+      0
+     ],
+     [
+      2.8168,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "10 cm",
+      "len": 10
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "10 cm",
+      "len": 10
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     }
+    ],
+    "ticks": {
+     "0": 1,
+     "1": 2,
+     "2": 1,
+     "3": 2
+    }
+   }
+  },
+  {
+   "id": "fig-l2-quad-trapezoid",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Naming practice: a quadrilateral with sides 11, 6, 5, 5 cm.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A quadrilateral with one pair of parallel sides, 11 cm along the bottom and 5 cm along the top, and two slanted sides of 6 cm and 5 cm.",
+   "src": "art/cpm-cc1-g6/fig-l2-quad-trapezoid.svg",
+   "dataTable": {
+    "shape": "trapezoid",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      4.5453
+     ],
+     [
+      11,
+      4.5453
+     ],
+     [
+      7.0833,
+      0
+     ],
+     [
+      2.0833,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "11 cm",
+      "len": 11
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     }
     ]
    }
   }

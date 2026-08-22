@@ -1017,19 +1017,17 @@
     "1.1.3"
    ],
    "crossRef": null,
-   "verdict": "GAP",
+   "verdict": "PARTIAL",
    "rank": 2,
    "why": "Problem 1-22 asks for it and the app has zero content for it: no emitted topic names a shape, and a full-text scan of the six modules finds no occurrence of scalene, isosceles, rhombus, trapezoid or obtuse. The two shell topics that LOOK like coverage, coord-shape and coord-real-world, carry a label and a coach tip and are emitted by nothing; WP1 deletes them.",
    "targets": [
     "math-r5-classify-figures"
    ],
    "moduleTopics": [],
-   "packItemTargets": [],
-   "gaps": [
-    "classify a triangle by its sides",
-    "classify a triangle by its angles",
-    "the quadrilateral hierarchy"
-   ]
+   "packItemTargets": [
+    "math-r5-classify-figures"
+   ],
+   "gaps": []
   },
   {
    "id": "sa-decimal-word",
@@ -1143,14 +1141,13 @@
     "pemdas-pattern",
     "dec-write-word"
    ],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-r5-classify-figures"
+   ],
    "gaps": [
     "a drawn growing pattern the student extends",
     "find the rule from the figures",
     "predict a far-out term such as the 100th",
-    "classify a triangle by its sides",
-    "classify a triangle by its angles",
-    "the quadrilateral hierarchy",
     "read a word form and pick the decimal"
    ],
    "confidence": "verified"
