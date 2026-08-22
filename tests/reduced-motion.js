@@ -295,16 +295,34 @@ async function measure(port, assets, forceFlag) {
         host.appendChild(spacer); host.appendChild(tile);
         document.body.appendChild(host);
         const attached = window.attachExplainNext(tile, () => {});
-        // attachExplainNext defers its scroll by one frame (later0); two frames is one clear of it.
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          const scrolled = Math.round(host.scrollTop);
-          Element.prototype.scrollIntoView = real;
-          host.remove();
-          resolve({
-            attached, scrolled, behaviors: seen,
-            prefersReduce: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-          });
-        }));
+        // WAIT FOR THE SCROLL TO SETTLE, do not assume it lands in a fixed number of frames. This
+        // originally waited two frames, which is correct only where a smooth scroll does not
+        // animate. It does not animate on this Windows machine and it DOES on CI's Linux Chromium,
+        // where two frames caught the glide at 0px and read as "the scroll did nothing". So the
+        // sampler runs until the position stops changing, and the positions it passed through are
+        // carried out as well: an environment that animates can then also be asked whether the
+        // reduce path jumped, and one that does not can say so instead of pretending.
+        const positions = [];
+        let stable = 0, frames = 0, lastPos = null;
+        const tick = () => {
+          const now = Math.round(host.scrollTop);
+          positions.push(now);
+          stable = (now === lastPos) ? stable + 1 : 0;
+          lastPos = now;
+          // Three still frames after a scroll has been requested, or a hard stop well past the
+          // ~300ms a smooth scroll takes at 60fps.
+          if ((stable >= 3 && seen.length) || ++frames > 90) {
+            Element.prototype.scrollIntoView = real;
+            host.remove();
+            return resolve({
+              attached, scrolled: now, behaviors: seen, frames,
+              distinct: Array.from(new Set(positions)).length,
+              prefersReduce: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+            });
+          }
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
       }));
     } finally { await ctx.close(); }
   };
@@ -320,8 +338,8 @@ async function measure(port, assets, forceFlag) {
   } finally { await browser2.close(); }
 
   console.log('\nNEXT-button scroll (attachExplainNext), behavior argument as actually passed:');
-  console.log(`  motion allowed: ${JSON.stringify(sAllowed.behaviors)}  (scrolled ${sAllowed.scrolled}px, matchMedia reduce = ${sAllowed.prefersReduce})`);
-  console.log(`  reduced motion: ${JSON.stringify(sReduced.behaviors)}  (scrolled ${sReduced.scrolled}px, matchMedia reduce = ${sReduced.prefersReduce})`);
+  console.log(`  motion allowed: ${JSON.stringify(sAllowed.behaviors)}  (settled at ${sAllowed.scrolled}px through ${sAllowed.distinct} position(s), matchMedia reduce = ${sAllowed.prefersReduce})`);
+  console.log(`  reduced motion: ${JSON.stringify(sReduced.behaviors)}  (settled at ${sReduced.scrolled}px through ${sReduced.distinct} position(s), matchMedia reduce = ${sReduced.prefersReduce})`);
 
   // The two conditions have to actually differ, or both readings are of the same one.
   if (sAllowed.prefersReduce !== false || sReduced.prefersReduce !== true) {
@@ -339,6 +357,22 @@ async function measure(port, assets, forceFlag) {
   }
   if (sReduced.behaviors[0] !== 'auto') {
     problems.push(`under prefers-reduced-motion attachExplainNext passed behavior ${JSON.stringify(sReduced.behaviors[0])} rather than "auto", so the NEXT button still glides into view. Constraint 7 is not kept: no stylesheet can collapse a JS scroll, so attachExplainNext has to read the preference itself.`);
+  }
+
+  // SUPPLEMENTARY, and it arms itself. Whether a smooth scroll actually ANIMATES is a property of
+  // the environment, not of the app: it does not animate under headless Chromium on Windows and it
+  // does under CI's Linux Chromium, measured both ways. So the painted half of this claim is only
+  // asserted where the environment can express it, and where it cannot, it says so rather than
+  // reporting a pass it did not earn. The behavior-argument checks above are the ones that always
+  // run, and they are what actually holds constraint 7 here.
+  if (sAllowed.distinct > 1) {
+    console.log(`  glide check ARMED: this environment animates scrollIntoView (${sAllowed.distinct} positions with motion allowed)`);
+    if (sReduced.distinct > 1) {
+      problems.push(`under prefers-reduced-motion the NEXT-button scroll still passed through ${sReduced.distinct} distinct positions, so it is gliding rather than jumping to its end state, even though the behavior argument read "auto"`);
+    }
+  } else {
+    console.log('  glide check NOT ARMED: this environment does not animate scrollIntoView '
+      + `(motion allowed settled through ${sAllowed.distinct} position(s)), so only the behavior argument was measured`);
   }
   server.close();
 
