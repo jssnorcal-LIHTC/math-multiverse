@@ -39,7 +39,7 @@ const MAX_SENTENCE = {
   'outpost-protocol-g6': 28,
   // The math pack is authored to the same standard from its first line, so it is pinned there too
   // rather than recorded wherever it happened to land.
-  'cpm-cc1-g6': 28,
+  'cpm-cc1-g6': 27,
   // The other four are recorded where they already are. Nobody has reported them as hard to read,
   // and rewriting four shipped, blind-certified packs to hit a number nobody asked for would be
   // scope this gate has no business taking.

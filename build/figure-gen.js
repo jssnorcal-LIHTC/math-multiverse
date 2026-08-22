@@ -306,6 +306,16 @@ function validateTable(dt, type) {
   const series = Array.isArray(dt.series) ? dt.series : [];
   if (series.length === 0) refuse('dataTable has no series to plot');
 
+  // A label list shorter than the bars would mislabel the chart from the short end onward and print
+  // a bare index in the remaining slots, which is exactly the defect this pack is gated against.
+  if (Array.isArray(dt.categoryLabels)) {
+    if (type !== 'bar') refuse('categoryLabels is only meaningful on a bar-type dataTable');
+    const nPts = Array.isArray(series[0].points) ? series[0].points.length : 0;
+    if (dt.categoryLabels.length !== nPts) {
+      refuse(`categoryLabels has ${dt.categoryLabels.length} entr(y/ies) but the series has ${nPts} point(s)`);
+    }
+  }
+
   if (series.length > 1) {
     if (type === 'bar') {
       const counts = series.map((s) => (Array.isArray(s.points) ? s.points.length : 0));
@@ -515,11 +525,18 @@ function genSvgPanels(dataTable, accentColor) {
   out.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${VB_W}" height="${VB_H}" viewBox="0 0 ${VB_W} ${VB_H}" role="img">`);
   out.push(`<rect x="0" y="0" width="${VB_W}" height="${VB_H}" fill="${BG}" />`);
 
+  // BAR SPACING. The 0.18 gap is what a categorical bar graph wants: the gaps say the categories do
+  // not run into one another. A HISTOGRAM wants the opposite, because its horizontal axis is a
+  // number line and one interval runs straight into the next, so its bars must touch. That is not
+  // decoration: packs/cpm-cc1-g6.json level 5 teaches the touching as the visible difference between
+  // the two displays, and a histogram drawn with gaps would have contradicted its own item.
+  // Opt-in via dataTable.barGap === 0, so every chart that does not ask keeps its exact geometry and
+  // renders byte-identically to before.
   let groupW = 0, gap = 0, barW = 0;
   if (type === 'bar') {
     const n = categories.length;
     groupW = n ? (plotR - plotL) / n : 0;
-    gap = groupW * 0.18;
+    gap = (dt.barGap === 0) ? 0 : groupW * 0.18;
     barW = groupW - gap * 2;
   }
 
@@ -625,7 +642,8 @@ function genSvg(dataTable, accentColor) {
   } else {
     const n = categories.length;
     const groupW = n ? (plotR - plotL) / n : 0;
-    const gap = groupW * 0.18;
+    // Same opt-in as the panels renderer above; see the note there.
+    const gap = (dt.barGap === 0) ? 0 : groupW * 0.18;
     const barW = groupW - gap * 2;
     const zeroY = yScale(0);
     points.forEach((p, i) => {
@@ -637,7 +655,12 @@ function genSvg(dataTable, accentColor) {
     });
     categories.forEach((c, i) => {
       const cx = plotL + (i + 0.5) * groupW;
-      out.push(`<text x="${n2(cx)}" y="${n2(plotB + TICK_Y_OFF)}" font-size="${TICK_FONT}" fill="${INK}" text-anchor="middle">${esc(n2(c))}</text>`);
+      // categoryLabels used to be honoured on the panels path ONLY, so a single-panel bar chart
+      // silently fell back to printing its x index: a histogram of reading minutes labelled its
+      // intervals 0, 1, 2, 3 instead of 0-9, 10-19, and could not be answered as written. Caught by
+      // rendering the chart and looking at it, which is the only thing that would have caught it.
+      const label = (Array.isArray(dt.categoryLabels) && dt.categoryLabels[i] !== undefined) ? dt.categoryLabels[i] : n2(c);
+      out.push(`<text x="${n2(cx)}" y="${n2(plotB + TICK_Y_OFF)}" font-size="${TICK_FONT}" fill="${INK}" text-anchor="middle">${esc(label)}</text>`);
     });
   }
 

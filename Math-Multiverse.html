@@ -13532,7 +13532,15 @@ function attachExplainNext(tile, onNext) {
   tile.appendChild(btn);
   // Tight screens (Razor Crest) clip the tile below the fold inside their inner
   // scroll container; bring the button into view so the kid can always see it.
-  later0(() => { if (btn.scrollIntoView) btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); });
+  // Constraint 7 ("prefers-reduced-motion collapses motion to end states") reaches this line and
+  // nothing else can. A JS scroll with an explicit behavior is an animation NO stylesheet governs:
+  // engine.css's @media (prefers-reduced-motion: reduce) block cannot touch it, and neither can CSS
+  // scroll-behavior, because the argument passed here overrides the property. So the preference is
+  // read in JS and the scroll jumps to its end state instead of gliding to it. tests/tile-overlap.js
+  // separately blames this same scroll for a flake of exactly the shape its settle loop exists to
+  // absorb, so the still path is also the measurable one.
+  const stillPlease = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  later0(() => { if (btn.scrollIntoView) btn.scrollIntoView({ behavior: stillPlease ? 'auto' : 'smooth', block: 'nearest' }); });
   return true;
 }
 

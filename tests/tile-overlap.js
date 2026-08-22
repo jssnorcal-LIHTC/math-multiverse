@@ -276,7 +276,51 @@ function overTileScanInPage(px) {
         // An ancestor coming back means the tile simply is not painted at that point, which is a
         // different (and here, unexpected) condition from something being drawn on top of it.
         const kind = hit.contains(tile) ? 'tile-not-painted' : 'occluder';
-        over.push({ kind, selector: describe(hit), text: (hit.textContent || '').trim().slice(0, 70), at: { x: Math.round(x), y: Math.round(y) } });
+        // GEOMETRY ON FAILURE. This condition fired about one run in nine with nothing but a point
+        // and a selector to go on, which is not enough to tell a rounded corner from a clipping
+        // error from a live animation. Carrying the measurement out with the failure means the next
+        // occurrence is diagnosed from evidence rather than from a theory about it.
+        let diag = null;
+        if (kind === 'tile-not-painted') {
+          const tr = tile.getBoundingClientRect();
+          const hr = hit.getBoundingClientRect();
+          const cs = getComputedStyle(tile);
+          diag = {
+            point: { x: Number(x.toFixed(2)), y: Number(y.toFixed(2)) },
+            tileRect: { l: Number(tr.left.toFixed(2)), t: Number(tr.top.toFixed(2)), w: Number(tr.width.toFixed(2)), h: Number(tr.height.toFixed(2)) },
+            visibleBox: { l: Number(b.left.toFixed(2)), t: Number(b.top.toFixed(2)), r: Number(b.right.toFixed(2)), bo: Number(b.bottom.toFixed(2)) },
+            hitRect: { l: Number(hr.left.toFixed(2)), t: Number(hr.top.toFixed(2)), w: Number(hr.width.toFixed(2)), h: Number(hr.height.toFixed(2)) },
+            borderRadius: cs.borderRadius,
+            opacity: cs.opacity,
+            transform: cs.transform,
+            insetFromTile: {
+              left: Number((x - tr.left).toFixed(2)), right: Number((tr.right - x).toFixed(2)),
+              top: Number((y - tr.top).toFixed(2)), bottom: Number((tr.bottom - y).toFixed(2)),
+            },
+            // Every overflow ancestor's clip box, since clientWidth/clientHeight are ROUNDED
+            // integers laid over a fractional origin and that mixture is a known source of error
+            // here (see the note in visibleBox).
+            clips: (() => {
+              const out = [];
+              let cur = tile.parentElement;
+              while (cur && cur !== document.documentElement) {
+                const s = getComputedStyle(cur);
+                if (/auto|scroll|hidden|clip/.test(s.overflowX) || /auto|scroll|hidden|clip/.test(s.overflowY)) {
+                  const c = cur.getBoundingClientRect();
+                  out.push({
+                    sel: describe(cur),
+                    rect: { l: Number(c.left.toFixed(2)), t: Number(c.top.toFixed(2)), w: Number(c.width.toFixed(2)), h: Number(c.height.toFixed(2)) },
+                    client: { l: cur.clientLeft, t: cur.clientTop, w: cur.clientWidth, h: cur.clientHeight },
+                    scroll: { t: cur.scrollTop, l: cur.scrollLeft },
+                  });
+                }
+                cur = cur.parentElement;
+              }
+              return out;
+            })(),
+          };
+        }
+        over.push({ kind, selector: describe(hit), text: (hit.textContent || '').trim().slice(0, 70), at: { x: Math.round(x), y: Math.round(y) }, diag });
       }
     }
     return { visible: { w: Math.round(w), h: Math.round(h) }, sampled, over };
@@ -492,7 +536,7 @@ function overTileScanInPage(px) {
         if (unpainted.length) {
           const moving = rev.settled && rev.settled.settled === false;
           const u = unpainted[0];
-          problems.push(`${modId} g${grade} [${label} tile]: ${unpainted.length} of ${rev.sampled} points inside the tile's ${rev.visible.w}x${rev.visible.h} visible box resolve to an ANCESTOR, so the tile is not painting where its own box says it is -- first at (${u.at.x},${u.at.y}), which reaches ${u.selector}${moving ? `;  its rect also never stopped moving (${rev.settled.reason}), so measure again once it has` : ''}`);
+          problems.push(`${modId} g${grade} [${label} tile]: ${unpainted.length} of ${rev.sampled} points inside the tile's ${rev.visible.w}x${rev.visible.h} visible box resolve to an ANCESTOR, so the tile is not painting where its own box says it is -- first at (${u.at.x},${u.at.y}), which reaches ${u.selector}${moving ? `;  its rect also never stopped moving (${rev.settled.reason}), so measure again once it has` : ''}${u.diag ? '  GEOMETRY: ' + JSON.stringify(u.diag) : ''}`);
         }
         if (rev.settled && rev.settled.settled === false) {
           problems.push(`${modId} g${grade} [${label} tile]: the tile's rect never stopped moving before the scan (${rev.settled.reason}), so nothing measured on it is a settled reading`);

@@ -28,6 +28,30 @@
    "genre": "informational",
    "source": "original",
    "text": "A triangle takes two names at once, and they answer different questions.  The first name describes its sides.  Scalene means no two sides match.  Isosceles means exactly two match.  Equilateral means all three match.  Ticks drawn across two sides are how a figure tells you they are equal without printing the same number twice.\n\nThe second name describes its corners.  Acute means every corner is smaller than a square corner.  Right means one corner is exactly square, and a figure marks that with a small square.  Obtuse means one corner opens wider than square.  A triangle can only ever have one corner that is right or obtuse, so those names are never shared.\n\nQuadrilateral names work differently, because they nest inside one another.  A rectangle is any four-sided shape with four right angles and equal opposite sides.  A rhombus is any four-sided shape with four equal sides.  A square meets both of those, so a square is a rectangle and a rhombus at the same time.\n\nThat nesting runs in one direction only.  Every square is a rectangle, but most rectangles are certainly not squares.  When a question asks for the most exact name available, a wider name that happens to be true still counts as the wrong answer."
+  },
+  {
+   "id": "p-reading-decimals",
+   "title": "Reading a decimal out loud",
+   "docKind": "field-manual",
+   "genre": "informational",
+   "source": "original",
+   "text": "A decimal is read in three parts.  Say the whole number first, then say the word AND for the point itself, then read every digit after the point as a single whole number.  Finish by naming the place the LAST digit lands in.  So 3.24 is read three AND twenty-four hundredths, because the 4 sits in the hundredths place.\n\nThe place names run in order.  One digit after the point is tenths.  Two digits is hundredths.  Three digits is thousandths.  Counting the digits is therefore the whole trick, and it works in both directions.\n\nGoing backwards is the harder direction and the one worth practising.  Given the words, the place name at the end tells you exactly how many digits belong after the point.  Thousandths means three, so eight thousandths is written 0.008 rather than 0.8, and those two zeros are doing real work.\n\nA zero straight after the point is never decoration.  It holds a place, and removing it shifts every digit behind it into a different place and changes the value of the number."
+  },
+  {
+   "id": "p-finding-the-rule",
+   "title": "Finding the rule",
+   "docKind": "field-manual",
+   "genre": "informational",
+   "source": "original",
+   "text": "A growing pattern is a set of figures where each one is built from the one before it by adding the same amount.  The figures are numbered, and figure 1 is where the counting starts.  Three figures is enough to see what is happening, which is why three is what you are usually given.\n\nWork out the growth first.  Count the dots in each figure, then find the difference between figure 1 and figure 2, and between figure 2 and figure 3.  Those two differences are equal in every pattern here, and that shared number is how much the pattern grows each step.\n\nThe rule multiplies the figure number by that growth.  If a pattern grows by 3 each step, the rule starts as 3 times n, where n stands for the figure number.  Then check it against figure 1.  If the rule gives fewer dots than figure 1 actually has, the difference is a fixed group.  It sits in every figure, and it gets added on the end.\n\nA rule earns its keep on the figures nobody would draw.  Figure 100 takes one line of arithmetic with a rule and an entire evening without one.  That is the whole reason for writing the rule down instead of counting on."
+  },
+  {
+   "id": "p-reading-a-display",
+   "title": "Reading a display",
+   "docKind": "field-manual",
+   "genre": "informational",
+   "source": "original",
+   "text": "A display turns a pile of numbers into a picture, and reading one starts with a single bar.  Follow the top of the bar straight across to the scale up the side, and read the line it lands on.  Comparing bars, or adding them up, is built on getting that one reading right.\n\nThe same two questions come up again and again.  How many MORE is always one bar taken away from another, and never a sum.  The TOTAL is every bar added together, including the short ones that are easy to skip.\n\nA bar graph and a histogram look alike, and they are not the same thing.  A bar graph sorts data into named groups, such as dog, cat and fish, and its bars are drawn with gaps.  Those names do not run into each other, so the bars do not either.  A histogram sorts numbers into intervals instead, such as 0 to 9 and 10 to 19.  Its bars touch, because one interval runs straight into the next along a number line.\n\nThat gap between the bars is information rather than decoration.  Sorting numbers into groups costs you something as well.  A histogram may show 13 students in the 20 to 29 interval, but it cannot tell you how long any one of them read for."
   }
  ],
  "levels": [
@@ -111,6 +135,132 @@
     "l2-hier-square-is-rectangle",
     "l2-hier-rectangle-is-square",
     "l2-hier-square-is-rhombus"
+   ]
+  },
+  {
+   "id": 3,
+   "name": "Say the Number",
+   "goal": "Read a decimal into words, and read the words back into a decimal.",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "lives": 4,
+   "questions": 8,
+   "briefing": {
+    "title": "Both directions",
+    "lines": [
+     "Reading a decimal has a rule.  Say the whole number, say AND for the point, read the digits after it as one whole number, then name the place the last digit sits in.",
+     "So 3.24 is three AND twenty-four hundredths.  Two digits after the point means hundredths.  Count the digits and the place names itself.",
+     "The harder direction is going back.  Given the words, the place name tells you how many digits belong after the point.  Eight thousandths is 0.008, and those zeros are doing real work."
+    ]
+   },
+   "itemIds": [
+    "l4-towords-3-24",
+    "l4-todigits-3-24",
+    "l4-towords-0-7",
+    "l4-todigits-0-7",
+    "l4-todigits-12-05",
+    "l4-towords-5-416",
+    "l4-todigits-5-416",
+    "l4-towords-40-9",
+    "l4-todigits-40-9",
+    "l4-todigits-0-083",
+    "l4-towords-7-5",
+    "l4-todigits-7-5",
+    "l4-towords-106-2",
+    "l4-todigits-106-2",
+    "l4-todigits-9-007",
+    "l4-towords-0-35",
+    "l4-todigits-0-35",
+    "l4-towords-21-6",
+    "l4-todigits-21-6",
+    "l4-todigits-0-409",
+    "l4-towords-8-13",
+    "l4-todigits-8-13",
+    "l4-towords-60-04",
+    "l4-todigits-60-04",
+    "l4-todigits-2-008",
+    "l4-towords-15-75",
+    "l4-todigits-15-75"
+   ]
+  },
+  {
+   "id": 4,
+   "name": "Find the Rule",
+   "goal": "Read a growing pattern, write the rule behind it, and use the rule to reach figure 100.",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "lives": 4,
+   "questions": 8,
+   "briefing": {
+    "title": "Three figures, one rule",
+    "lines": [
+     "A growing pattern adds the same number of dots every step.  You get figures 1, 2 and 3, and your job is to work out what is being added and where it starts.",
+     "Count the dots, then find the jump from figure 1 to figure 2, and from 2 to 3.  Those jumps are equal.  That number is what n gets multiplied by.",
+     "Then test your rule on figure 1.  If it comes up short, the difference is a fixed group sitting in every figure, and it is added on the end.",
+     "The point of a rule is figure 100.  Drawing it would take all evening.  The rule answers it in one line."
+    ]
+   },
+   "itemIds": [
+    "l5-next-p3n",
+    "l5-rule-p3n",
+    "l5-far-p3n",
+    "l5-next-p2n1",
+    "l5-rule-p2n1",
+    "l5-far-p2n1",
+    "l5-next-p4n2",
+    "l5-rule-p4n2",
+    "l5-far-p4n2",
+    "l5-next-p5n",
+    "l5-rule-p5n",
+    "l5-far-p5n",
+    "l5-next-p3n2",
+    "l5-rule-p3n2",
+    "l5-far-p3n2",
+    "l5-next-p2n",
+    "l5-rule-p2n",
+    "l5-far-p2n"
+   ]
+  },
+  {
+   "id": 5,
+   "name": "Read the Chart",
+   "goal": "Read a bar graph and a histogram, compare their bars, and tell the two kinds apart.",
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "lives": 4,
+   "questions": 8,
+   "briefing": {
+    "title": "Bars and what they mean",
+    "lines": [
+     "Reading a display starts with one bar.  Follow its top straight across to the scale up the side and read the line it lands on.  Comparing and totalling come after that.",
+     "How many MORE is always a subtraction between two bars.  The TOTAL is every bar added up, including the short ones.",
+     "A bar graph and a histogram look alike.  A bar graph sorts named categories and leaves gaps between its bars.  A histogram groups numbers into intervals, and its bars touch, because one interval runs straight into the next."
+    ]
+   },
+   "itemIds": [
+    "l3-read-pets",
+    "l3-compare-pets",
+    "l3-total-pets",
+    "l3-read-walk",
+    "l3-compare-walk",
+    "l3-total-walk",
+    "l3-read-fruit",
+    "l3-compare-fruit",
+    "l3-total-fruit",
+    "l3-read-minutes",
+    "l3-compare-minutes",
+    "l3-total-minutes",
+    "l3-read-heights",
+    "l3-compare-heights",
+    "l3-total-heights",
+    "l3-kind-which-is-histogram",
+    "l3-kind-why-bars-touch",
+    "l3-kind-what-a-display-cannot-say"
    ]
   }
  ],
@@ -1161,6 +1311,1573 @@
     "3": "Size never decides a shape name.  The same shape drawn twice as large carries exactly the same name."
    },
    "explain": "A rhombus needs four equal sides and nothing else.  A square has four equal sides, so every square is a rhombus, and it is a rectangle as well.  A square is the shape that sits in both groups at once."
+  },
+  {
+   "id": "l4-towords-3-24",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-words",
+   "dok": 2,
+   "stem": "Write 3.24 in words.",
+   "choices": [
+    "three and twenty-four hundredths",
+    "three and twenty-four tenths",
+    "three point two four",
+    "twenty-four and three hundredths"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "The digits after the point are read correctly here, but named by the wrong place.  Count the digits after the point: 2 means hundredths.",
+    "2": "This reads the digits one at a time, the way you read a phone number.  A decimal is read as one whole number named by its last place.",
+    "3": "This swaps the two halves.  The number before AND is the whole number, and the number after it is the part past the point."
+   },
+   "explain": "Read the point as AND, then read the digits after it as one whole number named by the LAST place.  3.24 has 2 digits after the point, so that place is hundredths, and the answer is three and twenty-four hundredths."
+  },
+  {
+   "id": "l4-todigits-3-24",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"three and twenty-four hundredths\"?",
+   "choices": [
+    "3.024",
+    "3.24",
+    "24.3",
+    "27"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This writes the digits one place too far right, which makes 3 digits after the point instead of 2.  \"hundredths\" is what fixes how many there should be.",
+    "2": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number.",
+    "3": "This adds the two halves together into one whole number.  A decimal point separates them;  it never joins them."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  hundredths means 2.  \"twenty-four\" written with 2 digits is 24, so the number is 3.24.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-towords-0-7",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-words",
+   "dok": 2,
+   "stem": "Write 0.7 in words.",
+   "choices": [
+    "seven hundredths",
+    "seven tenths",
+    "seven",
+    "seven and zero tenths"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "The digits after the point are read correctly here, but named by the wrong place.  Count the digits after the point: 1 means tenths.",
+    "2": "This reads the digits one at a time, the way you read a phone number.  A decimal is read as one whole number named by its last place.",
+    "3": "This swaps the two halves.  The number before AND is the whole number, and the number after it is the part past the point."
+   },
+   "explain": "Read the point as AND, then read the digits after it as one whole number named by the LAST place.  0.7 has 1 digit after the point, so that place is tenths, and the answer is seven tenths."
+  },
+  {
+   "id": "l4-todigits-0-7",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"seven tenths\"?",
+   "choices": [
+    "0.07",
+    "7.0",
+    "0.7",
+    "7"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This writes the digits one place too far right, which makes 2 digits after the point instead of 1.  \"tenths\" is what fixes how many there should be.",
+    "1": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number.",
+    "3": "This adds the two halves together into one whole number.  A decimal point separates them;  it never joins them."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  tenths means 1.  \"seven\" written with 1 digit is 7, so the number is 0.7.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-todigits-12-05",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"twelve and five hundredths\"?",
+   "choices": [
+    "12.005",
+    "12.5",
+    "5.12",
+    "12.05"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This writes the digits one place too far right, which makes 3 digits after the point instead of 2.  \"hundredths\" is what fixes how many there should be.",
+    "1": "This drops a zero that was holding a place.  A zero straight after the point changes which place every later digit sits in.",
+    "2": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  hundredths means 2.  \"five\" written with 2 digits is 05, so the number is 12.05.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-towords-5-416",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-words",
+   "dok": 2,
+   "stem": "Write 5.416 in words.",
+   "choices": [
+    "five and four hundred sixteen hundredths",
+    "five point four one six",
+    "four hundred sixteen and five thousandths",
+    "five and four hundred sixteen thousandths"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "The digits after the point are read correctly here, but named by the wrong place.  Count the digits after the point: 3 means thousandths.",
+    "1": "This reads the digits one at a time, the way you read a phone number.  A decimal is read as one whole number named by its last place.",
+    "2": "This swaps the two halves.  The number before AND is the whole number, and the number after it is the part past the point."
+   },
+   "explain": "Read the point as AND, then read the digits after it as one whole number named by the LAST place.  5.416 has 3 digits after the point, so that place is thousandths, and the answer is five and four hundred sixteen thousandths."
+  },
+  {
+   "id": "l4-todigits-5-416",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"five and four hundred sixteen thousandths\"?",
+   "choices": [
+    "5.416",
+    "5.0416",
+    "416.5",
+    "421"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This writes the digits one place too far right, which makes 4 digits after the point instead of 3.  \"thousandths\" is what fixes how many there should be.",
+    "2": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number.",
+    "3": "This adds the two halves together into one whole number.  A decimal point separates them;  it never joins them."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  thousandths means 3.  \"four hundred sixteen\" written with 3 digits is 416, so the number is 5.416.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-towords-40-9",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-words",
+   "dok": 2,
+   "stem": "Write 40.9 in words.",
+   "choices": [
+    "forty and nine tenths",
+    "forty and nine hundredths",
+    "forty point nine",
+    "nine and forty tenths"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "The digits after the point are read correctly here, but named by the wrong place.  Count the digits after the point: 1 means tenths.",
+    "2": "This reads the digits one at a time, the way you read a phone number.  A decimal is read as one whole number named by its last place.",
+    "3": "This swaps the two halves.  The number before AND is the whole number, and the number after it is the part past the point."
+   },
+   "explain": "Read the point as AND, then read the digits after it as one whole number named by the LAST place.  40.9 has 1 digit after the point, so that place is tenths, and the answer is forty and nine tenths."
+  },
+  {
+   "id": "l4-todigits-40-9",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"forty and nine tenths\"?",
+   "choices": [
+    "40.09",
+    "40.9",
+    "9.40",
+    "49"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This writes the digits one place too far right, which makes 2 digits after the point instead of 1.  \"tenths\" is what fixes how many there should be.",
+    "2": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number.",
+    "3": "This adds the two halves together into one whole number.  A decimal point separates them;  it never joins them."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  tenths means 1.  \"nine\" written with 1 digit is 9, so the number is 40.9.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-todigits-0-083",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"eighty-three thousandths\"?",
+   "choices": [
+    "0.0083",
+    "0.83",
+    "0.083",
+    "83.0"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This writes the digits one place too far right, which makes 4 digits after the point instead of 3.  \"thousandths\" is what fixes how many there should be.",
+    "1": "This drops a zero that was holding a place.  A zero straight after the point changes which place every later digit sits in.",
+    "3": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  thousandths means 3.  \"eighty-three\" written with 3 digits is 083, so the number is 0.083.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-towords-7-5",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-words",
+   "dok": 2,
+   "stem": "Write 7.5 in words.",
+   "choices": [
+    "seven and five hundredths",
+    "seven point five",
+    "seven and five tenths",
+    "five and seven tenths"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "The digits after the point are read correctly here, but named by the wrong place.  Count the digits after the point: 1 means tenths.",
+    "1": "This reads the digits one at a time, the way you read a phone number.  A decimal is read as one whole number named by its last place.",
+    "3": "This swaps the two halves.  The number before AND is the whole number, and the number after it is the part past the point."
+   },
+   "explain": "Read the point as AND, then read the digits after it as one whole number named by the LAST place.  7.5 has 1 digit after the point, so that place is tenths, and the answer is seven and five tenths."
+  },
+  {
+   "id": "l4-todigits-7-5",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"seven and five tenths\"?",
+   "choices": [
+    "7.05",
+    "5.7",
+    "12",
+    "7.5"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This writes the digits one place too far right, which makes 2 digits after the point instead of 1.  \"tenths\" is what fixes how many there should be.",
+    "1": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number.",
+    "2": "This adds the two halves together into one whole number.  A decimal point separates them;  it never joins them."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  tenths means 1.  \"five\" written with 1 digit is 5, so the number is 7.5.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-towords-106-2",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-words",
+   "dok": 2,
+   "stem": "Write 106.2 in words.",
+   "choices": [
+    "one hundred six and two hundredths",
+    "one hundred six point two",
+    "two and one hundred six tenths",
+    "one hundred six and two tenths"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "The digits after the point are read correctly here, but named by the wrong place.  Count the digits after the point: 1 means tenths.",
+    "1": "This reads the digits one at a time, the way you read a phone number.  A decimal is read as one whole number named by its last place.",
+    "2": "This swaps the two halves.  The number before AND is the whole number, and the number after it is the part past the point."
+   },
+   "explain": "Read the point as AND, then read the digits after it as one whole number named by the LAST place.  106.2 has 1 digit after the point, so that place is tenths, and the answer is one hundred six and two tenths."
+  },
+  {
+   "id": "l4-todigits-106-2",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"one hundred six and two tenths\"?",
+   "choices": [
+    "106.2",
+    "106.02",
+    "2.106",
+    "108"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This writes the digits one place too far right, which makes 2 digits after the point instead of 1.  \"tenths\" is what fixes how many there should be.",
+    "2": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number.",
+    "3": "This adds the two halves together into one whole number.  A decimal point separates them;  it never joins them."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  tenths means 1.  \"two\" written with 1 digit is 2, so the number is 106.2.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-todigits-9-007",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"nine and seven thousandths\"?",
+   "choices": [
+    "9.0007",
+    "9.007",
+    "9.7",
+    "7.9"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This writes the digits one place too far right, which makes 4 digits after the point instead of 3.  \"thousandths\" is what fixes how many there should be.",
+    "2": "This drops a zero that was holding a place.  A zero straight after the point changes which place every later digit sits in.",
+    "3": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  thousandths means 3.  \"seven\" written with 3 digits is 007, so the number is 9.007.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-towords-0-35",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-words",
+   "dok": 2,
+   "stem": "Write 0.35 in words.",
+   "choices": [
+    "thirty-five tenths",
+    "thirty-five hundredths",
+    "three five",
+    "thirty-five and zero hundredths"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "The digits after the point are read correctly here, but named by the wrong place.  Count the digits after the point: 2 means hundredths.",
+    "2": "This reads the digits one at a time, the way you read a phone number.  A decimal is read as one whole number named by its last place.",
+    "3": "This swaps the two halves.  The number before AND is the whole number, and the number after it is the part past the point."
+   },
+   "explain": "Read the point as AND, then read the digits after it as one whole number named by the LAST place.  0.35 has 2 digits after the point, so that place is hundredths, and the answer is thirty-five hundredths."
+  },
+  {
+   "id": "l4-todigits-0-35",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"thirty-five hundredths\"?",
+   "choices": [
+    "0.035",
+    "35.0",
+    "0.35",
+    "35"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This writes the digits one place too far right, which makes 3 digits after the point instead of 2.  \"hundredths\" is what fixes how many there should be.",
+    "1": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number.",
+    "3": "This adds the two halves together into one whole number.  A decimal point separates them;  it never joins them."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  hundredths means 2.  \"thirty-five\" written with 2 digits is 35, so the number is 0.35.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-towords-21-6",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-words",
+   "dok": 2,
+   "stem": "Write 21.6 in words.",
+   "choices": [
+    "twenty-one and six hundredths",
+    "twenty-one point six",
+    "twenty-one and six tenths",
+    "six and twenty-one tenths"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "The digits after the point are read correctly here, but named by the wrong place.  Count the digits after the point: 1 means tenths.",
+    "1": "This reads the digits one at a time, the way you read a phone number.  A decimal is read as one whole number named by its last place.",
+    "3": "This swaps the two halves.  The number before AND is the whole number, and the number after it is the part past the point."
+   },
+   "explain": "Read the point as AND, then read the digits after it as one whole number named by the LAST place.  21.6 has 1 digit after the point, so that place is tenths, and the answer is twenty-one and six tenths."
+  },
+  {
+   "id": "l4-todigits-21-6",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"twenty-one and six tenths\"?",
+   "choices": [
+    "21.06",
+    "6.21",
+    "27",
+    "21.6"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This writes the digits one place too far right, which makes 2 digits after the point instead of 1.  \"tenths\" is what fixes how many there should be.",
+    "1": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number.",
+    "2": "This adds the two halves together into one whole number.  A decimal point separates them;  it never joins them."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  tenths means 1.  \"six\" written with 1 digit is 6, so the number is 21.6.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-todigits-0-409",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"four hundred nine thousandths\"?",
+   "choices": [
+    "0.409",
+    "0.0409",
+    "409.0",
+    "409"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This writes the digits one place too far right, which makes 4 digits after the point instead of 3.  \"thousandths\" is what fixes how many there should be.",
+    "2": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number.",
+    "3": "This adds the two halves together into one whole number.  A decimal point separates them;  it never joins them."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  thousandths means 3.  \"four hundred nine\" written with 3 digits is 409, so the number is 0.409.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-towords-8-13",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-words",
+   "dok": 2,
+   "stem": "Write 8.13 in words.",
+   "choices": [
+    "eight and thirteen hundredths",
+    "eight and thirteen tenths",
+    "eight point one three",
+    "thirteen and eight hundredths"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "The digits after the point are read correctly here, but named by the wrong place.  Count the digits after the point: 2 means hundredths.",
+    "2": "This reads the digits one at a time, the way you read a phone number.  A decimal is read as one whole number named by its last place.",
+    "3": "This swaps the two halves.  The number before AND is the whole number, and the number after it is the part past the point."
+   },
+   "explain": "Read the point as AND, then read the digits after it as one whole number named by the LAST place.  8.13 has 2 digits after the point, so that place is hundredths, and the answer is eight and thirteen hundredths."
+  },
+  {
+   "id": "l4-todigits-8-13",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"eight and thirteen hundredths\"?",
+   "choices": [
+    "8.013",
+    "8.13",
+    "13.8",
+    "21"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This writes the digits one place too far right, which makes 3 digits after the point instead of 2.  \"hundredths\" is what fixes how many there should be.",
+    "2": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number.",
+    "3": "This adds the two halves together into one whole number.  A decimal point separates them;  it never joins them."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  hundredths means 2.  \"thirteen\" written with 2 digits is 13, so the number is 8.13.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-towords-60-04",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-words",
+   "dok": 2,
+   "stem": "Write 60.04 in words.",
+   "choices": [
+    "sixty and four tenths",
+    "sixty and four hundredths",
+    "sixty point zero four",
+    "four and sixty hundredths"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "The digits after the point are read correctly here, but named by the wrong place.  Count the digits after the point: 2 means hundredths.",
+    "2": "This reads the digits one at a time, the way you read a phone number.  A decimal is read as one whole number named by its last place.",
+    "3": "This swaps the two halves.  The number before AND is the whole number, and the number after it is the part past the point."
+   },
+   "explain": "Read the point as AND, then read the digits after it as one whole number named by the LAST place.  60.04 has 2 digits after the point, so that place is hundredths, and the answer is sixty and four hundredths."
+  },
+  {
+   "id": "l4-todigits-60-04",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"sixty and four hundredths\"?",
+   "choices": [
+    "60.004",
+    "60.4",
+    "60.04",
+    "4.60"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This writes the digits one place too far right, which makes 3 digits after the point instead of 2.  \"hundredths\" is what fixes how many there should be.",
+    "1": "This drops a zero that was holding a place.  A zero straight after the point changes which place every later digit sits in.",
+    "3": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  hundredths means 2.  \"four\" written with 2 digits is 04, so the number is 60.04.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-todigits-2-008",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"two and eight thousandths\"?",
+   "choices": [
+    "2.0008",
+    "2.8",
+    "8.2",
+    "2.008"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This writes the digits one place too far right, which makes 4 digits after the point instead of 3.  \"thousandths\" is what fixes how many there should be.",
+    "1": "This drops a zero that was holding a place.  A zero straight after the point changes which place every later digit sits in.",
+    "2": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  thousandths means 3.  \"eight\" written with 3 digits is 008, so the number is 2.008.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l4-towords-15-75",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-words",
+   "dok": 2,
+   "stem": "Write 15.75 in words.",
+   "choices": [
+    "fifteen and seventy-five tenths",
+    "fifteen point seven five",
+    "seventy-five and fifteen hundredths",
+    "fifteen and seventy-five hundredths"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "The digits after the point are read correctly here, but named by the wrong place.  Count the digits after the point: 2 means hundredths.",
+    "1": "This reads the digits one at a time, the way you read a phone number.  A decimal is read as one whole number named by its last place.",
+    "2": "This swaps the two halves.  The number before AND is the whole number, and the number after it is the part past the point."
+   },
+   "explain": "Read the point as AND, then read the digits after it as one whole number named by the LAST place.  15.75 has 2 digits after the point, so that place is hundredths, and the answer is fifteen and seventy-five hundredths."
+  },
+  {
+   "id": "l4-todigits-15-75",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-to-digits",
+   "dok": 2,
+   "stem": "Which number is \"fifteen and seventy-five hundredths\"?",
+   "choices": [
+    "15.75",
+    "15.075",
+    "75.15",
+    "90"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This writes the digits one place too far right, which makes 3 digits after the point instead of 2.  \"hundredths\" is what fixes how many there should be.",
+    "2": "This swaps the whole-number part and the decimal part.  The words before AND are the whole number.",
+    "3": "This adds the two halves together into one whole number.  A decimal point separates them;  it never joins them."
+   },
+   "explain": "The place name at the end tells you how many digits go after the point:  hundredths means 2.  \"seventy-five\" written with 2 digits is 75, so the number is 15.75.  This is the direction the six worlds cannot ask:  their decimal-in-words generator only ever runs the other way."
+  },
+  {
+   "id": "l5-next-p3n",
+   "type": "mc",
+   "figureId": "fig-l5-p3n",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns"
+   ],
+   "coachTopic": "growpattern-next-figure",
+   "dok": 2,
+   "stem": "Figures 1, 2 and 3 hold 3, 6, 9 dots.  How many dots would figure 4 have?",
+   "choices": [
+    "12",
+    "10",
+    "18",
+    "15"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This adds one more dot than figure 3.  Look at how much the pattern grows between figures 1 and 2, and again between 2 and 3;  it is the same jump every time, and it is not one.",
+    "2": "This doubles figure 3.  The pattern ADDS the same amount each time rather than doubling, which is why the jumps between figures are all equal.",
+    "3": "This takes one jump too many and lands on figure 5.  Count carefully: figure 4 is one step past figure 3."
+   },
+   "explain": "The pattern grows by the same amount every step:  6 - 3 = 3, and 9 - 6 = 3.  So figure 4 has 9 + 3 = 12 dots."
+  },
+  {
+   "id": "l5-rule-p3n",
+   "type": "mc",
+   "figureId": "fig-l5-p3n",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-rule",
+   "dok": 3,
+   "stem": "This pattern runs 3, 6, 9 dots across figures 1, 2 and 3.  Which rule gives the number of dots in figure n?",
+   "choices": [
+    "4 x n",
+    "3 x n",
+    "n + 3",
+    "3 x n + 1"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This grows by 4 each step.  Check it against figure 1:  the rule has to give 3 when n is 1.",
+    "2": "This adds where the pattern multiplies.  A rule that only adds grows by one dot per figure, and this pattern grows by more than that.",
+    "3": "This gets the growth right and the starting point wrong.  Test it on figure 1:  it should give 3."
+   },
+   "explain": "The pattern grows by 3 each step, so the rule multiplies n by 3.  Figure 1 has 3 dots and 3 x 1 = 3, so nothing is added on:  the rule is 3 x n.  Every rule can be tested the same way, by putting n = 1 into it and checking against the first figure."
+  },
+  {
+   "id": "l5-far-p3n",
+   "type": "mc",
+   "figureId": "fig-l5-p3n",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-far-term",
+   "dok": 3,
+   "stem": "The pattern that runs 3, 6, 9 dots keeps going.  How many dots are in figure 100?  Use the rule rather than drawing it.",
+   "choices": [
+    "297",
+    "303",
+    "300",
+    "103"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This lands on figure 99.  The rule takes the figure number itself, so put 100 into it.",
+    "1": "This lands on figure 101, one step too far.",
+    "3": "This adds the numbers in the rule to the figure number.  The rule MULTIPLIES the figure number, which is why the pattern grows the way it does."
+   },
+   "explain": "The rule is 3 x n, so figure 100 has 3 x 100 = 300 dots.  This is what a rule is FOR:  drawing figure 100 would take all evening, and the rule answers it in one line."
+  },
+  {
+   "id": "l5-next-p2n1",
+   "type": "mc",
+   "figureId": "fig-l5-p2n1",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns"
+   ],
+   "coachTopic": "growpattern-next-figure",
+   "dok": 2,
+   "stem": "Figures 1, 2 and 3 hold 3, 5, 7 dots.  How many dots would figure 4 have?",
+   "choices": [
+    "8",
+    "9",
+    "14",
+    "11"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This adds one more dot than figure 3.  Look at how much the pattern grows between figures 1 and 2, and again between 2 and 3;  it is the same jump every time, and it is not one.",
+    "2": "This doubles figure 3.  The pattern ADDS the same amount each time rather than doubling, which is why the jumps between figures are all equal.",
+    "3": "This takes one jump too many and lands on figure 5.  Count carefully: figure 4 is one step past figure 3."
+   },
+   "explain": "The pattern grows by the same amount every step:  5 - 3 = 2, and 7 - 5 = 2.  So figure 4 has 7 + 2 = 9 dots."
+  },
+  {
+   "id": "l5-rule-p2n1",
+   "type": "mc",
+   "figureId": "fig-l5-p2n1",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-rule",
+   "dok": 3,
+   "stem": "This pattern runs 3, 5, 7 dots across figures 1, 2 and 3.  Which rule gives the number of dots in figure n?",
+   "choices": [
+    "3 x n + 1",
+    "n + 3",
+    "2 x n + 1",
+    "2 x n"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This grows by 3 each step.  Check it against figure 1:  the rule has to give 3 when n is 1.",
+    "1": "This adds where the pattern multiplies.  A rule that only adds grows by one dot per figure, and this pattern grows by more than that.",
+    "3": "This gets the growth right and the starting point wrong.  Test it on figure 1:  it should give 3."
+   },
+   "explain": "The pattern grows by 2 each step, so the rule multiplies n by 2.  That alone would give 2 for figure 1, but figure 1 has 3, so 1 more are always there:  the rule is 2 x n + 1.  Every rule can be tested the same way, by putting n = 1 into it and checking against the first figure."
+  },
+  {
+   "id": "l5-far-p2n1",
+   "type": "mc",
+   "figureId": "fig-l5-p2n1",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-far-term",
+   "dok": 3,
+   "stem": "The pattern that runs 3, 5, 7 dots keeps going.  How many dots are in figure 100?  Use the rule rather than drawing it.",
+   "choices": [
+    "300",
+    "199",
+    "203",
+    "201"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This adds the 1 once per figure instead of once altogether.  Look at the figures:  that group of 1 is the SAME 1 dots every time, not a new 1 each step.",
+    "1": "This lands on figure 99.  The rule takes the figure number itself, so put 100 into it.",
+    "2": "This lands on figure 101, one step too far."
+   },
+   "explain": "The rule is 2 x n + 1, so figure 100 has 2 x 100 + 1 = 201 dots.  This is what a rule is FOR:  drawing figure 100 would take all evening, and the rule answers it in one line."
+  },
+  {
+   "id": "l5-next-p4n2",
+   "type": "mc",
+   "figureId": "fig-l5-p4n2",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns"
+   ],
+   "coachTopic": "growpattern-next-figure",
+   "dok": 2,
+   "stem": "Figures 1, 2 and 3 hold 6, 10, 14 dots.  How many dots would figure 4 have?",
+   "choices": [
+    "15",
+    "28",
+    "18",
+    "22"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This adds one more dot than figure 3.  Look at how much the pattern grows between figures 1 and 2, and again between 2 and 3;  it is the same jump every time, and it is not one.",
+    "1": "This doubles figure 3.  The pattern ADDS the same amount each time rather than doubling, which is why the jumps between figures are all equal.",
+    "3": "This takes one jump too many and lands on figure 5.  Count carefully: figure 4 is one step past figure 3."
+   },
+   "explain": "The pattern grows by the same amount every step:  10 - 6 = 4, and 14 - 10 = 4.  So figure 4 has 14 + 4 = 18 dots."
+  },
+  {
+   "id": "l5-rule-p4n2",
+   "type": "mc",
+   "figureId": "fig-l5-p4n2",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-rule",
+   "dok": 3,
+   "stem": "This pattern runs 6, 10, 14 dots across figures 1, 2 and 3.  Which rule gives the number of dots in figure n?",
+   "choices": [
+    "5 x n + 2",
+    "n + 6",
+    "4 x n",
+    "4 x n + 2"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This grows by 5 each step.  Check it against figure 1:  the rule has to give 6 when n is 1.",
+    "1": "This adds where the pattern multiplies.  A rule that only adds grows by one dot per figure, and this pattern grows by more than that.",
+    "2": "This gets the growth right and the starting point wrong.  Test it on figure 1:  it should give 6."
+   },
+   "explain": "The pattern grows by 4 each step, so the rule multiplies n by 4.  That alone would give 4 for figure 1, but figure 1 has 6, so 2 more are always there:  the rule is 4 x n + 2.  Every rule can be tested the same way, by putting n = 1 into it and checking against the first figure."
+  },
+  {
+   "id": "l5-far-p4n2",
+   "type": "mc",
+   "figureId": "fig-l5-p4n2",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-far-term",
+   "dok": 3,
+   "stem": "The pattern that runs 6, 10, 14 dots keeps going.  How many dots are in figure 50?  Use the rule rather than drawing it.",
+   "choices": [
+    "202",
+    "300",
+    "198",
+    "206"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This adds the 2 once per figure instead of once altogether.  Look at the figures:  that group of 2 is the SAME 2 dots every time, not a new 2 each step.",
+    "2": "This lands on figure 49.  The rule takes the figure number itself, so put 50 into it.",
+    "3": "This lands on figure 51, one step too far."
+   },
+   "explain": "The rule is 4 x n + 2, so figure 50 has 4 x 50 + 2 = 202 dots.  This is what a rule is FOR:  drawing figure 50 would take all evening, and the rule answers it in one line."
+  },
+  {
+   "id": "l5-next-p5n",
+   "type": "mc",
+   "figureId": "fig-l5-p5n",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns"
+   ],
+   "coachTopic": "growpattern-next-figure",
+   "dok": 2,
+   "stem": "Figures 1, 2 and 3 hold 5, 10, 15 dots.  How many dots would figure 4 have?",
+   "choices": [
+    "16",
+    "30",
+    "25",
+    "20"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This adds one more dot than figure 3.  Look at how much the pattern grows between figures 1 and 2, and again between 2 and 3;  it is the same jump every time, and it is not one.",
+    "1": "This doubles figure 3.  The pattern ADDS the same amount each time rather than doubling, which is why the jumps between figures are all equal.",
+    "2": "This takes one jump too many and lands on figure 5.  Count carefully: figure 4 is one step past figure 3."
+   },
+   "explain": "The pattern grows by the same amount every step:  10 - 5 = 5, and 15 - 10 = 5.  So figure 4 has 15 + 5 = 20 dots."
+  },
+  {
+   "id": "l5-rule-p5n",
+   "type": "mc",
+   "figureId": "fig-l5-p5n",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-rule",
+   "dok": 3,
+   "stem": "This pattern runs 5, 10, 15 dots across figures 1, 2 and 3.  Which rule gives the number of dots in figure n?",
+   "choices": [
+    "5 x n",
+    "6 x n",
+    "n + 5",
+    "5 x n + 1"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This grows by 6 each step.  Check it against figure 1:  the rule has to give 5 when n is 1.",
+    "2": "This adds where the pattern multiplies.  A rule that only adds grows by one dot per figure, and this pattern grows by more than that.",
+    "3": "This gets the growth right and the starting point wrong.  Test it on figure 1:  it should give 5."
+   },
+   "explain": "The pattern grows by 5 each step, so the rule multiplies n by 5.  Figure 1 has 5 dots and 5 x 1 = 5, so nothing is added on:  the rule is 5 x n.  Every rule can be tested the same way, by putting n = 1 into it and checking against the first figure."
+  },
+  {
+   "id": "l5-far-p5n",
+   "type": "mc",
+   "figureId": "fig-l5-p5n",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-far-term",
+   "dok": 3,
+   "stem": "The pattern that runs 5, 10, 15 dots keeps going.  How many dots are in figure 100?  Use the rule rather than drawing it.",
+   "choices": [
+    "495",
+    "500",
+    "505",
+    "105"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This lands on figure 99.  The rule takes the figure number itself, so put 100 into it.",
+    "2": "This lands on figure 101, one step too far.",
+    "3": "This adds the numbers in the rule to the figure number.  The rule MULTIPLIES the figure number, which is why the pattern grows the way it does."
+   },
+   "explain": "The rule is 5 x n, so figure 100 has 5 x 100 = 500 dots.  This is what a rule is FOR:  drawing figure 100 would take all evening, and the rule answers it in one line."
+  },
+  {
+   "id": "l5-next-p3n2",
+   "type": "mc",
+   "figureId": "fig-l5-p3n2",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns"
+   ],
+   "coachTopic": "growpattern-next-figure",
+   "dok": 2,
+   "stem": "Figures 1, 2 and 3 hold 5, 8, 11 dots.  How many dots would figure 4 have?",
+   "choices": [
+    "14",
+    "12",
+    "22",
+    "17"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This adds one more dot than figure 3.  Look at how much the pattern grows between figures 1 and 2, and again between 2 and 3;  it is the same jump every time, and it is not one.",
+    "2": "This doubles figure 3.  The pattern ADDS the same amount each time rather than doubling, which is why the jumps between figures are all equal.",
+    "3": "This takes one jump too many and lands on figure 5.  Count carefully: figure 4 is one step past figure 3."
+   },
+   "explain": "The pattern grows by the same amount every step:  8 - 5 = 3, and 11 - 8 = 3.  So figure 4 has 11 + 3 = 14 dots."
+  },
+  {
+   "id": "l5-rule-p3n2",
+   "type": "mc",
+   "figureId": "fig-l5-p3n2",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-rule",
+   "dok": 3,
+   "stem": "This pattern runs 5, 8, 11 dots across figures 1, 2 and 3.  Which rule gives the number of dots in figure n?",
+   "choices": [
+    "4 x n + 2",
+    "3 x n + 2",
+    "n + 5",
+    "3 x n"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This grows by 4 each step.  Check it against figure 1:  the rule has to give 5 when n is 1.",
+    "2": "This adds where the pattern multiplies.  A rule that only adds grows by one dot per figure, and this pattern grows by more than that.",
+    "3": "This gets the growth right and the starting point wrong.  Test it on figure 1:  it should give 5."
+   },
+   "explain": "The pattern grows by 3 each step, so the rule multiplies n by 3.  That alone would give 3 for figure 1, but figure 1 has 5, so 2 more are always there:  the rule is 3 x n + 2.  Every rule can be tested the same way, by putting n = 1 into it and checking against the first figure."
+  },
+  {
+   "id": "l5-far-p3n2",
+   "type": "mc",
+   "figureId": "fig-l5-p3n2",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-far-term",
+   "dok": 3,
+   "stem": "The pattern that runs 5, 8, 11 dots keeps going.  How many dots are in figure 20?  Use the rule rather than drawing it.",
+   "choices": [
+    "100",
+    "59",
+    "62",
+    "65"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This adds the 2 once per figure instead of once altogether.  Look at the figures:  that group of 2 is the SAME 2 dots every time, not a new 2 each step.",
+    "1": "This lands on figure 19.  The rule takes the figure number itself, so put 20 into it.",
+    "3": "This lands on figure 21, one step too far."
+   },
+   "explain": "The rule is 3 x n + 2, so figure 20 has 3 x 20 + 2 = 62 dots.  This is what a rule is FOR:  drawing figure 20 would take all evening, and the rule answers it in one line."
+  },
+  {
+   "id": "l5-next-p2n",
+   "type": "mc",
+   "figureId": "fig-l5-p2n",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns"
+   ],
+   "coachTopic": "growpattern-next-figure",
+   "dok": 2,
+   "stem": "Figures 1, 2 and 3 hold 2, 4, 6 dots.  How many dots would figure 4 have?",
+   "choices": [
+    "7",
+    "8",
+    "12",
+    "10"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This adds one more dot than figure 3.  Look at how much the pattern grows between figures 1 and 2, and again between 2 and 3;  it is the same jump every time, and it is not one.",
+    "2": "This doubles figure 3.  The pattern ADDS the same amount each time rather than doubling, which is why the jumps between figures are all equal.",
+    "3": "This takes one jump too many and lands on figure 5.  Count carefully: figure 4 is one step past figure 3."
+   },
+   "explain": "The pattern grows by the same amount every step:  4 - 2 = 2, and 6 - 4 = 2.  So figure 4 has 6 + 2 = 8 dots."
+  },
+  {
+   "id": "l5-rule-p2n",
+   "type": "mc",
+   "figureId": "fig-l5-p2n",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-rule",
+   "dok": 3,
+   "stem": "This pattern runs 2, 4, 6 dots across figures 1, 2 and 3.  Which rule gives the number of dots in figure n?",
+   "choices": [
+    "3 x n",
+    "n + 2",
+    "2 x n",
+    "2 x n + 1"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This grows by 3 each step.  Check it against figure 1:  the rule has to give 2 when n is 1.",
+    "1": "This adds where the pattern multiplies.  A rule that only adds grows by one dot per figure, and this pattern grows by more than that.",
+    "3": "This gets the growth right and the starting point wrong.  Test it on figure 1:  it should give 2."
+   },
+   "explain": "The pattern grows by 2 each step, so the rule multiplies n by 2.  Figure 1 has 2 dots and 2 x 1 = 2, so nothing is added on:  the rule is 2 x n.  Every rule can be tested the same way, by putting n = 1 into it and checking against the first figure."
+  },
+  {
+   "id": "l5-far-p2n",
+   "type": "mc",
+   "figureId": "fig-l5-p2n",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-far-term",
+   "dok": 3,
+   "stem": "The pattern that runs 2, 4, 6 dots keeps going.  How many dots are in figure 100?  Use the rule rather than drawing it.",
+   "choices": [
+    "198",
+    "202",
+    "102",
+    "200"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This lands on figure 99.  The rule takes the figure number itself, so put 100 into it.",
+    "1": "This lands on figure 101, one step too far.",
+    "2": "This adds the numbers in the rule to the figure number.  The rule MULTIPLIES the figure number, which is why the pattern grows the way it does."
+   },
+   "explain": "The rule is 2 x n, so figure 100 has 2 x 100 = 200 dots.  This is what a rule is FOR:  drawing figure 100 would take all evening, and the rule answers it in one line."
+  },
+  {
+   "id": "l3-read-pets",
+   "type": "mc",
+   "figureId": "fig-l3-pets",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-read-a-value",
+   "dok": 2,
+   "stem": "Read the bar graph.  How many children does the TALLEST bar stand for?",
+   "choices": [
+    "12",
+    "3",
+    "13",
+    "4"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "That is the smallest bar, not the tallest one.  Read the question again:  it asks which is the most.",
+    "2": "This is one off.  Follow the top of the bar straight across to the scale on the left and read the line it lands on.",
+    "3": "This counts the BARS rather than reading one.  There are 4 bars, but the question asks how many children the tallest one stands for."
+   },
+   "explain": "The tallest bar is dog, and following its top across to the scale gives 12 children.  Reading a display starts with reading one bar accurately;  everything else is built on that."
+  },
+  {
+   "id": "l3-compare-pets",
+   "type": "mc",
+   "figureId": "fig-l3-pets",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs"
+   ],
+   "coachTopic": "display-compare-bars",
+   "dok": 2,
+   "stem": "Look again at the display of the pets in Class 6B.  How many more children does the tallest bar stand for than the shortest one?",
+   "choices": [
+    "15",
+    "9",
+    "12",
+    "3"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This ADDS the two bars.  \"How many more\" asks for the gap between them, which is a subtraction.",
+    "2": "This is the tallest bar on its own.  The question asks how much taller it is than the shortest, not how tall it is.",
+    "3": "This counts how far apart the two bars sit along the bottom.  The question is about their HEIGHTS, which is the scale up the side."
+   },
+   "explain": "The tallest bar is dog at 12 and the shortest is bird at 3, so the gap is 12 - 3 = 9 children.  \"How many more\" is always a subtraction, whatever the display."
+  },
+  {
+   "id": "l3-total-pets",
+   "type": "mc",
+   "figureId": "fig-l3-pets",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-total",
+   "dok": 2,
+   "stem": "Still on the display of the pets in Class 6B, how many children does the whole set add up to?",
+   "choices": [
+    "12",
+    "26",
+    "29",
+    "4"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This is the tallest bar alone.  A total needs every bar added together.",
+    "1": "This misses the shortest bar.  Every bar counts towards the total, however short it is.",
+    "3": "This counts the bars.  There are 4 of them, but they stand for 29 children altogether."
+   },
+   "explain": "Add every bar:  12 + 9 + 5 + 3 = 29 children.  A display shows the whole set at once, which is exactly what it is for."
+  },
+  {
+   "id": "l3-read-walk",
+   "type": "mc",
+   "figureId": "fig-l3-walk",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-read-a-value",
+   "dok": 2,
+   "stem": "Read the bar graph.  How many students does the TALLEST bar stand for?",
+   "choices": [
+    "4",
+    "14",
+    "15",
+    "35"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "That is the smallest bar, not the tallest one.  Read the question again:  it asks which is the most.",
+    "2": "This is one off.  Follow the top of the bar straight across to the scale on the left and read the line it lands on.",
+    "3": "This is the total across every bar.  The question asks about one bar on its own."
+   },
+   "explain": "The tallest bar is walk, and following its top across to the scale gives 14 students.  Reading a display starts with reading one bar accurately;  everything else is built on that."
+  },
+  {
+   "id": "l3-compare-walk",
+   "type": "mc",
+   "figureId": "fig-l3-walk",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs"
+   ],
+   "coachTopic": "display-compare-bars",
+   "dok": 2,
+   "stem": "Look again at the display of how the class travels to school.  How many more students does the tallest bar stand for than the shortest one?",
+   "choices": [
+    "18",
+    "14",
+    "10",
+    "3"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This ADDS the two bars.  \"How many more\" asks for the gap between them, which is a subtraction.",
+    "1": "This is the tallest bar on its own.  The question asks how much taller it is than the shortest, not how tall it is.",
+    "3": "This counts how far apart the two bars sit along the bottom.  The question is about their HEIGHTS, which is the scale up the side."
+   },
+   "explain": "The tallest bar is walk at 14 and the shortest is bike at 4, so the gap is 14 - 4 = 10 students.  \"How many more\" is always a subtraction, whatever the display."
+  },
+  {
+   "id": "l3-total-walk",
+   "type": "mc",
+   "figureId": "fig-l3-walk",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-total",
+   "dok": 2,
+   "stem": "Still on the display of how the class travels to school, how many students does the whole set add up to?",
+   "choices": [
+    "14",
+    "31",
+    "4",
+    "35"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This is the tallest bar alone.  A total needs every bar added together.",
+    "1": "This misses the shortest bar.  Every bar counts towards the total, however short it is.",
+    "2": "This counts the bars.  There are 4 of them, but they stand for 35 students altogether."
+   },
+   "explain": "Add every bar:  14 + 11 + 6 + 4 = 35 students.  A display shows the whole set at once, which is exactly what it is for."
+  },
+  {
+   "id": "l3-read-fruit",
+   "type": "mc",
+   "figureId": "fig-l3-fruit",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-read-a-value",
+   "dok": 2,
+   "stem": "Read the bar graph.  How many pieces does the TALLEST bar stand for?",
+   "choices": [
+    "12",
+    "31",
+    "30",
+    "4"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "That is the smallest bar, not the tallest one.  Read the question again:  it asks which is the most.",
+    "1": "This is one off.  Follow the top of the bar straight across to the scale on the left and read the line it lands on.",
+    "3": "This counts the BARS rather than reading one.  There are 4 bars, but the question asks how many pieces the tallest one stands for."
+   },
+   "explain": "The tallest bar is banana, and following its top across to the scale gives 30 pieces.  Reading a display starts with reading one bar accurately;  everything else is built on that."
+  },
+  {
+   "id": "l3-compare-fruit",
+   "type": "mc",
+   "figureId": "fig-l3-fruit",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs"
+   ],
+   "coachTopic": "display-compare-bars",
+   "dok": 2,
+   "stem": "Look again at the display of the fruit sold.  How many more pieces does the tallest bar stand for than the shortest one?",
+   "choices": [
+    "42",
+    "30",
+    "1",
+    "18"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This ADDS the two bars.  \"How many more\" asks for the gap between them, which is a subtraction.",
+    "1": "This is the tallest bar on its own.  The question asks how much taller it is than the shortest, not how tall it is.",
+    "2": "This counts how far apart the two bars sit along the bottom.  The question is about their HEIGHTS, which is the scale up the side."
+   },
+   "explain": "The tallest bar is banana at 30 and the shortest is pear at 12, so the gap is 30 - 12 = 18 pieces.  \"How many more\" is always a subtraction, whatever the display."
+  },
+  {
+   "id": "l3-total-fruit",
+   "type": "mc",
+   "figureId": "fig-l3-fruit",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-total",
+   "dok": 2,
+   "stem": "Still on the display of the fruit sold, how many pieces does the whole set add up to?",
+   "choices": [
+    "84",
+    "30",
+    "72",
+    "4"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This is the tallest bar alone.  A total needs every bar added together.",
+    "2": "This misses the shortest bar.  Every bar counts towards the total, however short it is.",
+    "3": "This counts the bars.  There are 4 of them, but they stand for 84 pieces altogether."
+   },
+   "explain": "Add every bar:  24 + 30 + 12 + 18 = 84 pieces.  A display shows the whole set at once, which is exactly what it is for."
+  },
+  {
+   "id": "l3-read-minutes",
+   "type": "mc",
+   "figureId": "fig-l3-minutes",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-read-a-value",
+   "dok": 2,
+   "stem": "Read the histogram.  How many students does the TALLEST bar stand for?",
+   "choices": [
+    "4",
+    "14",
+    "32",
+    "13"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "That is the shortest bar, not the tallest one.  Read the question again:  it asks which is the most.",
+    "1": "This is one off.  Follow the top of the bar straight across to the scale on the left and read the line it lands on.",
+    "2": "This is the total across every bar.  The question asks about one bar on its own."
+   },
+   "explain": "The tallest bar is 20-29, and following its top across to the scale gives 13 students.  Reading a display starts with reading one bar accurately;  everything else is built on that."
+  },
+  {
+   "id": "l3-compare-minutes",
+   "type": "mc",
+   "figureId": "fig-l3-minutes",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs"
+   ],
+   "coachTopic": "display-compare-bars",
+   "dok": 2,
+   "stem": "Look again at the display of minutes spent reading.  How many more students does the tallest bar stand for than the shortest one?",
+   "choices": [
+    "9",
+    "17",
+    "13",
+    "2"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This ADDS the two bars.  \"How many more\" asks for the gap between them, which is a subtraction.",
+    "2": "This is the tallest bar on its own.  The question asks how much taller it is than the shortest, not how tall it is.",
+    "3": "This counts how far apart the two bars sit along the bottom.  The question is about their HEIGHTS, which is the scale up the side."
+   },
+   "explain": "The tallest bar is 20-29 at 13 and the shortest is 0-9 at 4, so the gap is 13 - 4 = 9 students.  \"How many more\" is always a subtraction, whatever the display."
+  },
+  {
+   "id": "l3-total-minutes",
+   "type": "mc",
+   "figureId": "fig-l3-minutes",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-total",
+   "dok": 2,
+   "stem": "Still on the display of minutes spent reading, how many students does the whole set add up to?",
+   "choices": [
+    "13",
+    "32",
+    "28",
+    "4"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This is the tallest bar alone.  A total needs every bar added together.",
+    "2": "This misses the shortest bar.  Every bar counts towards the total, however short it is.",
+    "3": "This counts the bars.  There are 4 of them, but they stand for 32 students altogether."
+   },
+   "explain": "Add every bar:  4 + 9 + 13 + 6 = 32 students.  A display shows the whole set at once, which is exactly what it is for."
+  },
+  {
+   "id": "l3-read-heights",
+   "type": "mc",
+   "figureId": "fig-l3-heights",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-read-a-value",
+   "dok": 2,
+   "stem": "Read the histogram.  How many plants does the TALLEST bar stand for?",
+   "choices": [
+    "11",
+    "2",
+    "12",
+    "4"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "That is the shortest bar, not the tallest one.  Read the question again:  it asks which is the most.",
+    "2": "This is one off.  Follow the top of the bar straight across to the scale on the left and read the line it lands on.",
+    "3": "This counts the BARS rather than reading one.  There are 4 bars, but the question asks how many plants the tallest one stands for."
+   },
+   "explain": "The tallest bar is 10-14, and following its top across to the scale gives 11 plants.  Reading a display starts with reading one bar accurately;  everything else is built on that."
+  },
+  {
+   "id": "l3-compare-heights",
+   "type": "mc",
+   "figureId": "fig-l3-heights",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs"
+   ],
+   "coachTopic": "display-compare-bars",
+   "dok": 2,
+   "stem": "Look again at the display of seedling heights.  How many more plants does the tallest bar stand for than the shortest one?",
+   "choices": [
+    "13",
+    "9",
+    "11",
+    "1"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This ADDS the two bars.  \"How many more\" asks for the gap between them, which is a subtraction.",
+    "2": "This is the tallest bar on its own.  The question asks how much taller it is than the shortest, not how tall it is.",
+    "3": "This counts how far apart the two bars sit along the bottom.  The question is about their HEIGHTS, which is the scale up the side."
+   },
+   "explain": "The tallest bar is 10-14 at 11 and the shortest is 15-19 at 2, so the gap is 11 - 2 = 9 plants.  \"How many more\" is always a subtraction, whatever the display."
+  },
+  {
+   "id": "l3-total-heights",
+   "type": "mc",
+   "figureId": "fig-l3-heights",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-total",
+   "dok": 2,
+   "stem": "Still on the display of seedling heights, how many plants does the whole set add up to?",
+   "choices": [
+    "11",
+    "22",
+    "24",
+    "4"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This is the tallest bar alone.  A total needs every bar added together.",
+    "1": "This misses the shortest bar.  Every bar counts towards the total, however short it is.",
+    "3": "This counts the bars.  There are 4 of them, but they stand for 24 plants altogether."
+   },
+   "explain": "Add every bar:  3 + 8 + 11 + 2 = 24 plants.  A display shows the whole set at once, which is exactly what it is for."
+  },
+  {
+   "id": "l3-kind-which-is-histogram",
+   "type": "mc",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-which-kind",
+   "dok": 3,
+   "stem": "One display groups its data into number intervals like 0 to 9 and 10 to 19, and its bars touch.  What is that display called?",
+   "choices": [
+    "a histogram",
+    "a bar graph",
+    "a dot plot",
+    "a stem-and-leaf plot"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "A bar graph sorts data into named categories such as dog or bus, and its bars are drawn with gaps between them because the categories do not join.",
+    "2": "A dot plot marks one dot per value along a number line.  It shows every single value, not counts inside intervals.",
+    "3": "A stem-and-leaf plot splits each number into a stem and a leaf, so the original values can still be read back.  A histogram cannot be read back that way."
+   },
+   "explain": "A histogram groups numbers into intervals and counts how many fall in each one, so its bars touch:  the intervals join with no gap between them.  That touching is the visible difference, and it is there because the horizontal axis is a number line rather than a list of names."
+  },
+  {
+   "id": "l3-kind-why-bars-touch",
+   "type": "mc",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-which-kind",
+   "dok": 3,
+   "stem": "Why are the bars of a histogram drawn touching, while the bars of a bar graph have gaps between them?",
+   "choices": [
+    "Because a histogram usually holds more data.",
+    "Because a histogram's intervals join up along a number line, and a bar graph's categories do not.",
+    "Because histograms are always drawn taller.",
+    "Because a bar graph is allowed only four bars."
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "The amount of data makes no difference.  A histogram of ten values still touches, and a bar graph of a thousand still has gaps.",
+    "2": "Height comes from the counts, not the type of display.  Either kind can be tall or short.",
+    "3": "A bar graph can have any number of categories.  The number of bars is not what separates the two."
+   },
+   "explain": "The gap is information.  A histogram's bottom axis is a number line, so 0 to 9 runs straight into 10 to 19 with nothing missing between them, and the bars touch to show it.  A bar graph's bottom axis is a list of separate names, and the gaps say those categories do not run into each other."
+  },
+  {
+   "id": "l3-kind-what-a-display-cannot-say",
+   "type": "mc",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-sp-displays"
+   ],
+   "coachTopic": "display-which-kind",
+   "dok": 3,
+   "stem": "A histogram shows that 13 students read for 20 to 29 minutes.  What can it NOT tell you?",
+   "choices": [
+    "How many students read for 20 to 29 minutes.",
+    "Which interval holds the most students.",
+    "Exactly how long any one of those 13 students read for.",
+    "How many intervals the data was grouped into."
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "It can:  that is the height of that bar, and the question itself quotes it.",
+    "1": "It can:  the tallest bar names that interval directly.",
+    "3": "It can:  counting the bars gives the number of intervals."
+   },
+   "explain": "Grouping is what a histogram does, and grouping loses the individual values.  Those 13 students each read somewhere between 20 and 29 minutes, and the display cannot say which.  A stem-and-leaf plot keeps that detail;  a histogram trades it away for a clearer shape."
   }
  ],
  "figures": [
@@ -2582,6 +4299,355 @@
      {
       "label": "5 cm",
       "len": 5
+     }
+    ]
+   }
+  },
+  {
+   "id": "fig-l5-p3n",
+   "kind": "diagram",
+   "genKind": "dots",
+   "caption": "A growing dot pattern: figures 1, 2 and 3 hold 3, 6, 9 dots.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "Three dot figures in a row.  Figure 1 has 3 dots in a single row of three, figure 2 has 6 dots in two rows of three, and figure 3 has 9 dots in three rows of three.",
+   "src": "art/cpm-cc1-g6/fig-l5-p3n.svg",
+   "dataTable": {
+    "rule": {
+     "a": 3,
+     "b": 0
+    },
+    "shown": [
+     1,
+     2,
+     3
+    ],
+    "layout": "stack",
+    "dotUnit": "dot"
+   }
+  },
+  {
+   "id": "fig-l5-p2n1",
+   "kind": "diagram",
+   "genKind": "dots",
+   "caption": "A growing dot pattern: figures 1, 2 and 3 hold 3, 5, 7 dots.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "Three dot figures.  Figure 1 has 3 dots, figure 2 has 5 dots and figure 3 has 7 dots.  Each figure keeps one dot on top and adds another row of two below.",
+   "src": "art/cpm-cc1-g6/fig-l5-p2n1.svg",
+   "dataTable": {
+    "rule": {
+     "a": 2,
+     "b": 1
+    },
+    "shown": [
+     1,
+     2,
+     3
+    ],
+    "layout": "stack",
+    "dotUnit": "dot"
+   }
+  },
+  {
+   "id": "fig-l5-p4n2",
+   "kind": "diagram",
+   "genKind": "dots",
+   "caption": "A growing dot pattern: figures 1, 2 and 3 hold 6, 10, 14 dots.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "Three dot figures.  Figure 1 has 6 dots, figure 2 has 10 dots and figure 3 has 14 dots.  Two dots sit on top of every figure and rows of four build up beneath.",
+   "src": "art/cpm-cc1-g6/fig-l5-p4n2.svg",
+   "dataTable": {
+    "rule": {
+     "a": 4,
+     "b": 2
+    },
+    "shown": [
+     1,
+     2,
+     3
+    ],
+    "layout": "stack",
+    "dotUnit": "dot"
+   }
+  },
+  {
+   "id": "fig-l5-p5n",
+   "kind": "diagram",
+   "genKind": "dots",
+   "caption": "A growing dot pattern: figures 1, 2 and 3 hold 5, 10, 15 dots.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "Three dot figures.  Figure 1 has 5 dots in one row, figure 2 has 10 dots in two rows and figure 3 has 15 dots in three rows.",
+   "src": "art/cpm-cc1-g6/fig-l5-p5n.svg",
+   "dataTable": {
+    "rule": {
+     "a": 5,
+     "b": 0
+    },
+    "shown": [
+     1,
+     2,
+     3
+    ],
+    "layout": "stack",
+    "dotUnit": "dot"
+   }
+  },
+  {
+   "id": "fig-l5-p3n2",
+   "kind": "diagram",
+   "genKind": "dots",
+   "caption": "A growing dot pattern: figures 1, 2 and 3 hold 5, 8, 11 dots.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "Three dot figures.  Figure 1 has 5 dots, figure 2 has 8 dots and figure 3 has 11 dots.  Two dots sit on top and rows of three build up beneath.",
+   "src": "art/cpm-cc1-g6/fig-l5-p3n2.svg",
+   "dataTable": {
+    "rule": {
+     "a": 3,
+     "b": 2
+    },
+    "shown": [
+     1,
+     2,
+     3
+    ],
+    "layout": "stack",
+    "dotUnit": "dot"
+   }
+  },
+  {
+   "id": "fig-l5-p2n",
+   "kind": "diagram",
+   "genKind": "dots",
+   "caption": "A growing dot pattern: figures 1, 2 and 3 hold 2, 4, 6 dots.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "Three dot figures.  Figure 1 has 2 dots, figure 2 has 4 dots and figure 3 has 6 dots, each arranged in two rows.",
+   "src": "art/cpm-cc1-g6/fig-l5-p2n.svg",
+   "dataTable": {
+    "rule": {
+     "a": 2,
+     "b": 0
+    },
+    "shown": [
+     1,
+     2,
+     3
+    ],
+    "layout": "row",
+    "dotUnit": "dot"
+   }
+  },
+  {
+   "id": "fig-l3-pets",
+   "kind": "chart",
+   "gen": true,
+   "caption": "A bar graph of children in Class 6B and the pet each one keeps.",
+   "credit": "Built for this pack in the V1 design tokens (original work); the data is this pack's own.",
+   "alt": "A bar graph titled by pet type.  Dog stands at 12 children, cat at 9, fish at 5 and bird at 3.",
+   "src": "art/cpm-cc1-g6/fig-l3-pets.svg",
+   "dataTable": {
+    "type": "bar",
+    "yLabel": "children",
+    "xLabel": "category",
+    "categoryLabels": [
+     "dog",
+     "cat",
+     "fish",
+     "bird"
+    ],
+    "series": [
+     {
+      "label": "children",
+      "points": [
+       [
+        0,
+        12
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        3
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "fig-l3-walk",
+   "kind": "chart",
+   "gen": true,
+   "caption": "A bar graph of how the 35 students in one class travel to school.",
+   "credit": "Built for this pack in the V1 design tokens (original work); the data is this pack's own.",
+   "alt": "A bar graph of travel to school.  Walking stands at 14 students, bus at 11, car at 6 and bike at 4.",
+   "src": "art/cpm-cc1-g6/fig-l3-walk.svg",
+   "dataTable": {
+    "type": "bar",
+    "yLabel": "students",
+    "xLabel": "category",
+    "categoryLabels": [
+     "walk",
+     "bus",
+     "car",
+     "bike"
+    ],
+    "series": [
+     {
+      "label": "students",
+      "points": [
+       [
+        0,
+        14
+       ],
+       [
+        1,
+        11
+       ],
+       [
+        2,
+        6
+       ],
+       [
+        3,
+        4
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "fig-l3-fruit",
+   "kind": "chart",
+   "gen": true,
+   "caption": "A bar graph of pieces of fruit the school shop sold on Monday.",
+   "credit": "Built for this pack in the V1 design tokens (original work); the data is this pack's own.",
+   "alt": "A bar graph of fruit sold.  Apple stands at 24 pieces, banana at 30, pear at 12 and plum at 18.",
+   "src": "art/cpm-cc1-g6/fig-l3-fruit.svg",
+   "dataTable": {
+    "type": "bar",
+    "yLabel": "pieces sold",
+    "xLabel": "category",
+    "categoryLabels": [
+     "apple",
+     "banana",
+     "pear",
+     "plum"
+    ],
+    "series": [
+     {
+      "label": "pieces sold",
+      "points": [
+       [
+        0,
+        24
+       ],
+       [
+        1,
+        30
+       ],
+       [
+        2,
+        12
+       ],
+       [
+        3,
+        18
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "fig-l3-minutes",
+   "kind": "chart",
+   "gen": true,
+   "caption": "A histogram of how many minutes each student spent reading last night, grouped into intervals.",
+   "credit": "Built for this pack in the V1 design tokens (original work); the data is this pack's own.",
+   "alt": "A histogram of reading minutes in four intervals.  The 0 to 9 bar stands at 4 students, 10 to 19 at 9, 20 to 29 at 13 and 30 to 39 at 6.  The bars sit side by side with no gaps, because the intervals join.",
+   "src": "art/cpm-cc1-g6/fig-l3-minutes.svg",
+   "dataTable": {
+    "type": "bar",
+    "yLabel": "students",
+    "xLabel": "interval",
+    "categoryLabels": [
+     "0-9",
+     "10-19",
+     "20-29",
+     "30-39"
+    ],
+    "barGap": 0,
+    "series": [
+     {
+      "label": "students",
+      "points": [
+       [
+        0,
+        4
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        13
+       ],
+       [
+        3,
+        6
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "fig-l3-heights",
+   "kind": "chart",
+   "gen": true,
+   "caption": "A histogram of the height in centimetres of each seedling in a tray, grouped into intervals.",
+   "credit": "Built for this pack in the V1 design tokens (original work); the data is this pack's own.",
+   "alt": "A histogram of seedling heights in four intervals.  The 0 to 4 bar stands at 3 plants, 5 to 9 at 8, 10 to 14 at 11 and 15 to 19 at 2.",
+   "src": "art/cpm-cc1-g6/fig-l3-heights.svg",
+   "dataTable": {
+    "type": "bar",
+    "yLabel": "plants",
+    "xLabel": "interval",
+    "categoryLabels": [
+     "0-4",
+     "5-9",
+     "10-14",
+     "15-19"
+    ],
+    "barGap": 0,
+    "series": [
+     {
+      "label": "plants",
+      "points": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        11
+       ],
+       [
+        3,
+        2
+       ]
+      ]
      }
     ]
    }
