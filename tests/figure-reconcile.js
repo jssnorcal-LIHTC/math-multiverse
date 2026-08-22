@@ -10,8 +10,9 @@
 // charts by parsing the emitted markup against the source data; this extends the same idea to
 // polygons, and adds the half charts never needed: reconciling the figure against the ITEM.
 //
-// FIVE CHECKS. The third and the fifth exist nowhere else, and the fifth was added after blind
-// certification caught a content error the first four could not see.
+// EIGHT CHECKS. The third, the fifth and the seventh exist nowhere else. The fifth was added after
+// blind certification caught a content error the first four could not see, and checks 6 to 8 after
+// a rendered histogram was found labelling its intervals 0, 1, 2, 3.
 //
 //   1. REPRODUCIBILITY.  Every committed SVG regenerates byte-identically from its own dataTable.
 //   2. INTERNAL CONSISTENCY.  Every side's LABEL agrees with the shape actually drawn: the drawn
@@ -28,6 +29,15 @@
 //      degrees, and would have marked the right answer wrong;  a second, quieter one labelled
 //      7-7-9.9 "right" is obtuse by a hundredth and looks identical to a right angle. Same defect
 //      class as a side label that disagrees with its edge, arriving through the NAME instead.
+//   6. A CHART PRINTS THE CATEGORIES IT DECLARES.  Every name in categoryLabels appears as a text
+//      element in the committed SVG. Byte-comparison cannot see this defect, because a chart whose
+//      RENDERER drops the labels still regenerates byte-identically from its own data: the file and
+//      the generator agree, and both are wrong. Only reading the committed markup catches it.
+//   7. THE BAR SPACING CARRIES THE MEANING.  A histogram's bars must be drawn touching and a bar
+//      graph's must not, because these items teach that gap as the visible difference between the
+//      two displays. A claim the prose makes about the picture, checked against the picture.
+//   8. THE CHART ITEM AGREES WITH ITS BARS.  Tallest, tallest-minus-shortest and total re-derived
+//      from the values that draw the bars, keyed off coachTopic so rewording cannot unhook them.
 //
 // HARD RULES (constraint 12). A run that finds zero polygon figures FAILS rather than reporting
 // clean, and so does one that reconciles zero perimeter items or zero shape names. That last
@@ -41,6 +51,7 @@ if (process.stdout && process.stdout.setEncoding) process.stdout.setEncoding('ut
 const fs = require('fs');
 const path = require('path');
 const { genPolygon, labelledPerimeter, drawnPerimeter } = require('../build/polygon-gen');
+const { genDots, dotsAt, cellsFor } = require('../build/dots-gen');
 
 const ROOT = path.join(__dirname, '..');
 const PACK_DIR = path.join(ROOT, 'packs');
@@ -48,7 +59,8 @@ const ACCENT_BY_PACK = { 'cpm-cc1-g6': '#e0692b' };
 
 const problems = [];
 const notes = [];
-let figuresChecked = 0, itemsChecked = 0, packsWithPolygons = 0, nameChecks = 0;
+let figuresChecked = 0, itemsChecked = 0, packsWithPolygons = 0, nameChecks = 0, dotChecks = 0;
+let chartChecks = 0, chartLabelChecks = 0, chartGapChecks = 0;
 
 // A triangle's true classification, from its side lengths alone. The largest side against the
 // other two decides the angle; the count of distinct lengths decides the sides.
@@ -71,13 +83,43 @@ function keyedNumber(item) {
   return m ? Number(m[1]) : null;
 }
 
+// What each chart coachTopic's answer must equal, derived from the values that draw the bars. Module
+// level so the control below exercises this exact table rather than a restatement of it.
+const CHART_CLAIM = {
+  'display-read-a-value': { want: (v) => Math.max(...v), says: 'the tallest bar' },
+  'display-compare-bars': { want: (v) => Math.max(...v) - Math.min(...v), says: 'tallest minus shortest' },
+  'display-total': { want: (v) => v.reduce((a, b) => a + b, 0), says: 'every bar added up' },
+};
+
+// The clear space between each pair of neighbouring bars, in user units, read out of the committed
+// markup. Module-level so the controls below measure with the SAME code the checks use: a control
+// that re-implements the thing it is testing proves only that the copy agrees with itself, which is
+// how WP3's first control came to pass against a reverted build.
+function barGapsIn(svg) {
+  const rects = [];
+  const rectRe = /<rect x="([-\d.]+)"[^>]*width="([-\d.]+)"/g;
+  let m;
+  while ((m = rectRe.exec(svg)) !== null) rects.push({ x: Number(m[1]), w: Number(m[2]) });
+  // The full-bleed background rect is the chart's own width; a bar never is.
+  const bars = rects.filter((r) => r.w > 0 && r.w < 200).sort((a, b) => a.x - b.x);
+  const gaps = [];
+  for (let i = 1; i < bars.length; i++) gaps.push(bars[i].x - (bars[i - 1].x + bars[i - 1].w));
+  return gaps;
+}
+// Half a user unit of slack: below what renders as a seam, far below the 0.18-of-a-band gap a bar
+// graph draws.
+function barsTouch(gaps) { return gaps.length > 0 && gaps.every((g) => Math.abs(g) < 0.51); }
+
 for (const f of fs.readdirSync(PACK_DIR).filter((x) => x.endsWith('.json') && !x.endsWith('.verdicts.json') && x !== 'manifest.json' && x !== 'curriculum-cc1.json')) {
   const packId = f.replace(/\.json$/, '');
   let pack;
   try { pack = JSON.parse(fs.readFileSync(path.join(PACK_DIR, f), 'utf8')); }
   catch (e) { problems.push(`${packId}: unreadable (${e.message})`); continue; }
   const polys = (pack.figures || []).filter((x) => x && x.genKind === 'polygon');
-  if (!polys.length) continue;
+  const dots = (pack.figures || []).filter((x) => x && x.genKind === 'dots');
+  const charts = (pack.figures || []).filter((x) => x && x.gen === true && x.dataTable
+    && x.dataTable.type === 'bar' && Array.isArray(x.dataTable.categoryLabels));
+  if (!polys.length && !dots.length && !charts.length) continue;
   packsWithPolygons++;
   const accent = ACCENT_BY_PACK[packId];
   if (!accent) {
@@ -182,6 +224,120 @@ for (const f of fs.readdirSync(PACK_DIR).filter((x) => x.endsWith('.json') && !x
     }
 
   }
+
+  // ---- growing-dot figures: same two questions, asked of a pattern instead of a polygon ----
+  // Does the committed SVG still match its own dataTable, and does every item's answer still
+  // follow from the rule that draws the dots? A pattern whose figures show a count the rule does
+  // not produce is the same lie as a side labelled 6 and drawn 4.
+  for (const fig of dots) {
+    figuresChecked++;
+    const where = `${packId}/${fig.id}`;
+    const dt = fig.dataTable;
+    if (!dt) { problems.push(`${where}: genKind "dots" with no dataTable`); continue; }
+    const file = path.join(ROOT, fig.src);
+    if (!fs.existsSync(file)) { problems.push(`${where}: src ${fig.src} is not on disk`); continue; }
+    let fresh;
+    try { fresh = genDots(dt, accent); }
+    catch (e) { problems.push(`${where}: regenerating threw (${e.message})`); continue; }
+    if (fs.readFileSync(file, 'utf8').split(String.fromCharCode(13, 10)).join(String.fromCharCode(10)) !== fresh) {
+      problems.push(`${where}: the committed SVG does not match a fresh render of its own dataTable. Run: node build/cc1-pack-gen.js`);
+    }
+    // The DRAWN dot count for each shown figure must equal what the rule says. cellsFor already
+    // refuses a mismatch, so this proves the refusal is reachable rather than assuming it.
+    for (const n of dt.shown) {
+      const drawn = cellsFor(n, dt.rule, dt.layout).length;
+      if (drawn !== dotsAt(dt, n)) {
+        problems.push(`${where}: figure ${n} draws ${drawn} dots but the rule gives ${dotsAt(dt, n)}`);
+      }
+    }
+    // Every item's keyed number against the rule, re-derived from the committed dataTable.
+    for (const it of itemsByFig.get(fig.id) || []) {
+      const claimed = keyedNumber(it);
+      if (claimed == null) continue;
+      const stem = String(it.stem || '');
+      const m = stem.match(/figure (\d+)/i);
+      if (!m) continue;
+      dotChecks++;
+      const want = dotsAt(dt, Number(m[1]));
+      if (claimed !== want) {
+        problems.push(`${packId}/${it.id}: asks about figure ${m[1]} and is keyed to ${claimed}, but the rule `
+          + `${dt.rule.a} x n${dt.rule.b ? ' + ' + dt.rule.b : ''} gives ${want}.`);
+      }
+    }
+  }
+
+  // ---- bar-chart figures: the labels, the geometry, and the item's number ----
+  // Three questions, in the order they bit.
+  //
+  // FIRST, does the chart actually print the category names it declares? categoryLabels was honoured
+  // on figure-gen's PANELS path only, so a single-panel histogram silently labelled its intervals
+  // 0, 1, 2, 3 instead of 0-9, 10-19, and no gate noticed: the SVG still byte-matched its own
+  // generator, because the generator was the thing that was wrong. A byte-compare cannot catch a
+  // defect that lives in the renderer, which is why this check reads the committed text elements.
+  //
+  // SECOND, does the drawing carry the distinction the prose teaches? These items tell the child
+  // that a histogram's bars TOUCH because its axis is a number line, and a bar graph's have gaps
+  // because its categories are separate names. That is a claim about the picture, so it is checked
+  // against the picture rather than trusted.
+  //
+  // THIRD, does each item's keyed answer follow from the same values that draw the bars? Keyed off
+  // coachTopic rather than parsed out of the stem, so rewording an item cannot quietly unhook it.
+  for (const fig of charts) {
+    figuresChecked++;
+    const where = `${packId}/${fig.id}`;
+    const dt = fig.dataTable;
+    const file = path.join(ROOT, fig.src);
+    if (!fs.existsSync(file)) { problems.push(`${where}: src ${fig.src} is not on disk`); continue; }
+    const svg = fs.readFileSync(file, 'utf8');
+
+    // 1. every declared category name is really printed on the chart
+    for (const lab of dt.categoryLabels) {
+      chartLabelChecks++;
+      if (svg.indexOf('>' + String(lab) + '<') === -1) {
+        problems.push(`${where}: declares category "${lab}" but the committed SVG never prints it, so the `
+          + 'chart cannot be read as its items are written. Run: node build/cc1-pack-gen.js');
+      }
+    }
+
+    // 2. the bars touch, or do not, as the kind requires
+    const gaps = barGapsIn(svg);
+    if (gaps.length) {
+      chartGapChecks++;
+      const touching = barsTouch(gaps);
+      const isHist = dt.barGap === 0;
+      if (isHist && !touching) {
+        problems.push(`${where}: is a histogram (barGap 0) but its bars are drawn with gaps of `
+          + `${gaps.map((g) => g.toFixed(2)).join(', ')}. The items teach the touching as the visible `
+          + 'difference between a histogram and a bar graph, so the drawing contradicts them.');
+      }
+      if (!isHist && touching) {
+        problems.push(`${where}: is a bar graph but its bars are drawn touching, which is what the items `
+          + 'tell the child means a histogram.');
+      }
+    }
+
+    // 3. every item's keyed number, re-derived from the values that draw the bars
+    const vals = (dt.series[0].points || []).map((p) => p[1]);
+    for (const it of itemsByFig.get(fig.id) || []) {
+      const claim = CHART_CLAIM[it.coachTopic];
+      if (!claim) continue;
+      const claimed = keyedNumber(it);
+      if (claimed == null) continue;
+      chartChecks++;
+      const want = claim.want(vals);
+      if (claimed !== want) {
+        problems.push(`${packId}/${it.id}: asks for ${claim.says} and is keyed to ${claimed}, but the bars `
+          + `drawn from [${vals.join(', ')}] give ${want}.`);
+      }
+      for (let i = 0; i < (it.choices || []).length; i++) {
+        if (i === it.key) continue;
+        if (keyedNumber({ type: 'mc', choices: it.choices, key: i }) === want) {
+          problems.push(`${packId}/${it.id}: distractor ${i} (${JSON.stringify(it.choices[i])}) also equals `
+            + `the true answer ${want}, so the item has two correct answers`);
+        }
+      }
+    }
+  }
 }
 
 // ---- ARMING ----
@@ -193,9 +349,25 @@ if (!itemsChecked) {
   problems.push('ARMING: zero perimeter items were reconciled against a figure, so check 3, the only one '
     + 'no other gate performs, ran on nothing.');
 }
+if (!dotChecks) {
+  problems.push('ARMING: zero growing-pattern items were reconciled against their rule, so the dots half '
+    + 'of this gate ran on nothing.');
+}
 if (!nameChecks) {
   problems.push('ARMING: zero shape-name claims were re-derived from a figure, so check 5 ran on nothing. '
     + 'That is the check that caught a triangle labelled acute at 96.4 degrees.');
+}
+if (!chartLabelChecks) {
+  problems.push('ARMING: zero chart category labels were read back out of a committed SVG, so the check '
+    + 'that caught a histogram labelling its intervals 0, 1, 2, 3 ran on nothing.');
+}
+if (!chartGapChecks) {
+  problems.push('ARMING: zero charts had their bar spacing measured, so the touching-versus-gapped claim '
+    + 'the items make is currently ungated.');
+}
+if (!chartChecks) {
+  problems.push('ARMING: zero chart items were reconciled against the values that draw their bars, so the '
+    + 'chart half of this gate ran on nothing. If the coachTopic names have drifted, CHART_CLAIM has too.');
 }
 
 // ---- CONTROLS ----
@@ -253,6 +425,58 @@ const controls = [];
       && trueTriangleNames([7, 8, 9]).bySide === 'scalene',
     detail: 'right, acute, equilateral, isosceles and scalene each read back correctly',
   });
+  // The dot layout has to be able to refuse a count it cannot place, or check 6 is decorative.
+  let dotRefused = false;
+  try { cellsFor(3, { a: 2, b: 1 }, 'not-a-layout'); }
+  catch (e) { dotRefused = true; }
+  controls.push({
+    name: 'NEGATIVE: the dot layout refuses a layout it does not know rather than drawing something',
+    ok: dotRefused,
+    detail: 'an unknown layout name throws instead of silently placing dots',
+  });
+  controls.push({
+    name: 'CONTROL: the pattern rule reads back correctly at a far term',
+    ok: dotsAt({ rule: { a: 3, b: 2 }, shown: [1, 2, 3], layout: 'stack' }, 100) === 302,
+    detail: '3n + 2 at n = 100 is 302',
+  });
+  // ---- the chart half's own controls ----
+  // Real generator output, measured by the same two functions the checks above use.
+  const { genSvg } = require('../build/figure-gen');
+  const chartDT = {
+    type: 'bar', yLabel: 'students', xLabel: 'interval',
+    categoryLabels: ['0-9', '10-19', '20-29', '30-39'],
+    series: [{ label: 'students', points: [[0, 4], [1, 9], [2, 13], [3, 6]] }],
+  };
+  const gapped = genSvg(chartDT, '#e0692b');
+  const touched = genSvg(Object.assign({}, chartDT, { barGap: 0 }), '#e0692b');
+  controls.push({
+    name: 'POSITIVE: a histogram built with barGap 0 really does draw its bars touching',
+    ok: barsTouch(barGapsIn(touched)),
+    detail: `measured clear space between bars: ${barGapsIn(touched).map((g) => g.toFixed(2)).join(', ')}`,
+  });
+  controls.push({
+    name: 'NEGATIVE: the same chart WITHOUT barGap is measured as gapped, so the check can tell them apart',
+    ok: !barsTouch(barGapsIn(gapped)) && barGapsIn(gapped).length === 3,
+    detail: `measured clear space between bars: ${barGapsIn(gapped).map((g) => g.toFixed(2)).join(', ')}`,
+  });
+  controls.push({
+    name: 'NEGATIVE: a category label the chart declares but never prints is caught',
+    ok: touched.indexOf('>10-19<') !== -1 && touched.indexOf('>40-49<') === -1,
+    detail: 'a declared interval appears in the markup; one that was never drawn does not',
+  });
+  controls.push({
+    name: 'NEGATIVE: the renderer refuses to fall back to a bare index when labels are supplied',
+    ok: touched.indexOf('>0-9<') !== -1 && !/>0<\/text>/.test(touched.split('</text>').slice(4).join('</text>')),
+    detail: 'the histogram prints 0-9, not the 0 that shipped before figure-gen honoured categoryLabels '
+      + 'on the single-panel path',
+  });
+  controls.push({
+    name: 'CONTROL: the chart claims re-derive correctly from a known set of bars',
+    ok: CHART_CLAIM['display-read-a-value'].want([4, 9, 13, 6]) === 13
+      && CHART_CLAIM['display-compare-bars'].want([4, 9, 13, 6]) === 9
+      && CHART_CLAIM['display-total'].want([4, 9, 13, 6]) === 32,
+    detail: 'tallest 13, tallest minus shortest 9, total 32',
+  });
   controls.push({
     name: 'CONTROL: the keyed-answer parser reads a real choice string',
     ok: keyedNumber({ type: 'mc', choices: ['26 cm'], key: 0 }) === 26 && keyedNumber({ type: 'mc', choices: ['not a number'], key: 0 }) === null,
@@ -264,7 +488,9 @@ for (const c of controls) if (!c.ok) problems.push(`CONTROL "${c.name}" failed${
 // ---- report ----
 console.log('\n=== figure reconcile: the drawing, its labels, and the item ===');
 console.log(`${packsWithPolygons} pack(s) with polygon figures, ${figuresChecked} figure(s) regenerated and checked, `
-  + `${itemsChecked} perimeter item(s) and ${nameChecks} shape-name claim(s) reconciled against their own figure`);
+  + `${itemsChecked} perimeter item(s), ${nameChecks} shape-name claim(s) and ${dotChecks} pattern item(s) `
+  + `${chartLabelChecks} chart label(s), ${chartGapChecks} chart(s) measured for bar spacing and `
+  + `${chartChecks} chart item(s) reconciled against their own figure`);
 for (const n of notes) console.log('  ' + n);
 console.log('controls:');
 for (const c of controls) console.log(`  ${c.ok ? 'ok  ' : 'FAIL'} ${c.name}${c.detail ? '  (' + c.detail + ')' : ''}`);

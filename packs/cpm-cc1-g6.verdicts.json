@@ -179,6 +179,22 @@
       "status": "agree"
     },
     {
+      "itemId": "l2-side-tri-name-scalene",
+      "itemHash": "738aec0c559172bc",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-angle-tri-name-scalene",
+      "itemHash": "6d4f2c92b283f895",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l2-side-tri-name-isosceles",
       "itemHash": "07d99a54ab45f47d",
       "blind": 1,
@@ -237,6 +253,22 @@
     {
       "itemId": "l2-angle-tri-name-obtuse",
       "itemHash": "ca9bb90972c2f31f",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-side-tri-name-isos-obtuse",
+      "itemHash": "3812a4d1bdc95aa8",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-angle-tri-name-isos-obtuse",
+      "itemHash": "1825b25b79efa88b",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -307,34 +339,515 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-side-tri-name-scalene",
-      "itemHash": "738aec0c559172bc",
+      "itemId": "l4-towords-3-24",
+      "itemHash": "0835691e3c71d1cb",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l2-angle-tri-name-scalene",
-      "itemHash": "6d4f2c92b283f895",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-side-tri-name-isos-obtuse",
-      "itemHash": "3812a4d1bdc95aa8",
+      "itemId": "l4-todigits-3-24",
+      "itemHash": "c7ff0d198230927c",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l2-angle-tri-name-isos-obtuse",
-      "itemHash": "1825b25b79efa88b",
+      "itemId": "l4-towords-0-7",
+      "itemHash": "14be72b139f11cbd",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-0-7",
+      "itemHash": "b8104a5c42f564fa",
       "blind": 2,
       "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-12-05",
+      "itemHash": "fc901a355028b4e2",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-towords-5-416",
+      "itemHash": "4a595f163e10e54f",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-5-416",
+      "itemHash": "5d3dace7289bf377",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-towords-40-9",
+      "itemHash": "0eca445e49e2e7f0",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-40-9",
+      "itemHash": "23acc72483d46ab0",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-0-083",
+      "itemHash": "1005cdf9e0795b51",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-towords-7-5",
+      "itemHash": "fd62a01aa8289238",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-7-5",
+      "itemHash": "8e4a6a4200acdc6d",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-towords-106-2",
+      "itemHash": "9cc5a10801970738",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-106-2",
+      "itemHash": "935e8d9552d80709",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-9-007",
+      "itemHash": "139938cc8f0e2619",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-towords-0-35",
+      "itemHash": "597d332afabb0c4d",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-0-35",
+      "itemHash": "05620ebbfbde14cd",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-towords-21-6",
+      "itemHash": "e58b213597c55a12",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-21-6",
+      "itemHash": "8cb4816a755ab18c",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-0-409",
+      "itemHash": "686f24c879a2a4f7",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-towords-8-13",
+      "itemHash": "97dacfaa48fff9fc",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-8-13",
+      "itemHash": "3ef298b77c4f1ca8",
+      "blind": 0,
+      "authored": 1,
+      "confidence": "high",
+      "status": "adjudicated",
+      "note": "The authored key stands.  \"Eight and thirteen HUNDREDTHS\" puts thirteen in the hundredths place, which is two digits after the point, so the number is 8.13.  The blind read chose 8.013, which is eight and thirteen THOUSANDTHS and is what that option exists to catch:  it is the exact place-name error this item is built around, and the distractor rationale on it says so.  The place name at the end of the words is the only thing that fixes how many digits belong after the point, and reading it as thousandths is the misconception, not an alternative reading.",
+      "adjudicatedBy": "Justin Solomon (via Claude Code, 26-0822 WP2 L4)",
+      "adjudicatedAt": "2026-08-22"
+    },
+    {
+      "itemId": "l4-towords-60-04",
+      "itemHash": "d29891c45b8b1106",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-60-04",
+      "itemHash": "43930c83b3b00dc6",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-2-008",
+      "itemHash": "3282021d5efff2d9",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-towords-15-75",
+      "itemHash": "fe318be0e5c89f26",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-todigits-15-75",
+      "itemHash": "17255e5ef03282cd",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-read-pets",
+      "itemHash": "4e1480d8d39c2c40",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-compare-pets",
+      "itemHash": "e3f5abafbee83599",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-total-pets",
+      "itemHash": "ceb3d7b306af8d01",
+      "blind": 1,
+      "authored": 2,
+      "confidence": "high",
+      "status": "adjudicated",
+      "note": "The authored key stands, and it is arithmetic rather than interpretation:  the four bars stand at 12, 9, 5, 3, and 12 + 9 + 5 + 3 = 29.  The blind read chose 26, which is the same sum with the shortest bar left out (12 + 9 + 5 = 26).  That is exactly what this distractor exists to catch, its rationale says so, and the passage warns about it in as many words:  \"The TOTAL is every bar added together, including the short ones that are easy to skip.\"  The figure data handed to the blind pass listed all four values, so nothing about the item was ambiguous;  the short bar was dropped, which is the misconception the item is built around and not a second defensible reading.",
+      "adjudicatedBy": "Justin Solomon (via Claude Code, 26-0822 WP2 L3)",
+      "adjudicatedAt": "2026-08-22"
+    },
+    {
+      "itemId": "l3-read-walk",
+      "itemHash": "26ecf12e5cd9321b",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-compare-walk",
+      "itemHash": "05547d674ce765f1",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-total-walk",
+      "itemHash": "b1d75e39a9248d0c",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-read-fruit",
+      "itemHash": "7ac288bc121dc438",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-compare-fruit",
+      "itemHash": "3a0ba9bebd15fda5",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-total-fruit",
+      "itemHash": "d5bcb97c34f8e4cd",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-read-minutes",
+      "itemHash": "34742ccb1bcc7194",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-compare-minutes",
+      "itemHash": "2c788d9e1f806ce1",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-total-minutes",
+      "itemHash": "187ee2ac3e809075",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-read-heights",
+      "itemHash": "c75ab9890537ef83",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-compare-heights",
+      "itemHash": "3c2231dff38980f9",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-total-heights",
+      "itemHash": "5849e3efb0645a16",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-kind-which-is-histogram",
+      "itemHash": "60e6251fc392b9c4",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-kind-why-bars-touch",
+      "itemHash": "c06aa377f5f977c6",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-kind-what-a-display-cannot-say",
+      "itemHash": "7f74033e0c18037e",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-next-p3n",
+      "itemHash": "a846ae4836e4df91",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-rule-p3n",
+      "itemHash": "864dfece39668778",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-far-p3n",
+      "itemHash": "90f1b979945f9ec1",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-next-p2n1",
+      "itemHash": "cc00eb1aa7fc7af1",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-rule-p2n1",
+      "itemHash": "b55c7843bacb7259",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-far-p2n1",
+      "itemHash": "d2606948ed977281",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-next-p4n2",
+      "itemHash": "c254e78ebb4cc9df",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-rule-p4n2",
+      "itemHash": "5ccd6da1c0a9fe52",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-far-p4n2",
+      "itemHash": "5ab377c8de41d28b",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-next-p5n",
+      "itemHash": "1f79dce52cbb01b8",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-rule-p5n",
+      "itemHash": "856f28a4510b6e88",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-far-p5n",
+      "itemHash": "b05734b7349cd203",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-next-p3n2",
+      "itemHash": "049297734dcea046",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-rule-p3n2",
+      "itemHash": "68ef55defef9007d",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-far-p3n2",
+      "itemHash": "01d065df79189ea9",
+      "blind": 1,
+      "authored": 2,
+      "confidence": "high",
+      "status": "adjudicated",
+      "note": "The authored key stands.  The rule that draws the dots is 3 x n + 2, so figure 20 holds 3 x 20 + 2 = 62.  The blind read chose 59, which is that same rule evaluated at figure 19:  a plain off-by-one, and the option exists to catch it (\"This lands on figure 19\").  The blind pass was given both the caption naming figures 1, 2 and 3 and the rule itself, so nothing was ambiguous.  Recorded because this same item AGREED on the previous run of the identical content;  the disagreement is sampling noise in the blind model, which is the reason disagreements are adjudicated rather than applied.",
+      "adjudicatedBy": "Justin Solomon (via Claude Code, 26-0822 WP2 L5 re-run)",
+      "adjudicatedAt": "2026-08-22"
+    },
+    {
+      "itemId": "l5-next-p2n",
+      "itemHash": "5aa37ae38ffb99ed",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-rule-p2n",
+      "itemHash": "1418d91cdfa742ce",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-far-p2n",
+      "itemHash": "a342f08478bb233d",
+      "blind": 3,
+      "authored": 3,
       "confidence": "high",
       "status": "agree"
     }
