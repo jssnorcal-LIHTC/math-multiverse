@@ -74,3 +74,6 @@ jobs:
 
       - name: Curriculum pointer (grade flip, reload, weekday advance, legacy save; 5 controls)
         run: node tests/curriculum-pointer.js
+
+      - name: Today's Mission (60/40 blend, pointer shift, cross-grade, TOPIC_INDEX freshness; 6 controls)
+        run: node tests/mission.js

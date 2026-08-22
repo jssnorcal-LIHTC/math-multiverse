@@ -461,17 +461,25 @@ const STANDALONE = [
            'the quadrilateral hierarchy'],
   },
   {
-    id: 'sa-decimal-word-reverse', chapter: 1, title: 'Decimal word form, words back into digits',
+    id: 'sa-decimal-word', chapter: 1, title: 'Decimal word form, both directions',
     lessons: ['1.1.3'],
     targets: ['math-r5-decimal-place-value'],
-    moduleTopics: [],
-    verdict: 'GAP',
-    why: 'dec-write-word runs ONE direction. It is emitted at 29% of F1 Apex Decimals Grade 5 level '
-       + '1 and every one of its four options is a word form, so the reverse direction that problem '
-       + '1-20b asks for cannot be drawn at all.',
+    moduleTopics: ['dec-write-word'],
+    verdict: 'PARTIAL',
+    why: 'One direction of two. Problem 1-20a is decimals INTO words and dec-write-word serves it '
+       + 'exactly, emitted at about 29% of F1 Apex Decimals Grade 5 level 1. Problem 1-20b is words '
+       + 'back into decimals, and every one of that generator\'s four options is a word form, so the '
+       + 'reverse direction cannot be drawn at all.',
     gaps: ['read a word form and pick the decimal'],
   },
 ];
+
+// A note on why STANDALONE has exactly two rows and not more. Review and Preview is spiral by
+// design, so many lessons' sets almost certainly reach past the topic block the Parent Guide names
+// for them. Knowing WHICH would mean reading the problems, and the sourcing rule for this whole
+// crosswalk is index and topic names only. Lesson 1.1.3 is the one set whose content is known
+// independently, because Justin photographed that homework on 26-0819; the plan records all five
+// of its concepts. Every other lesson is tagged from its block, which is what `confidence` says.
 
 // The ranked build list, worst first: what WP2 fills and in what order. Ordered by whether the
 // row blocks the homework already on the table, then by whether it is a hard gap rather than a
@@ -481,7 +489,7 @@ const BUILD_ORDER = [
   'sa-classify-figures', // problem 1-22, zero content anywhere in the app
   'pg-1.1.4',            // problem 1-23, and the lesson the class reaches next
   'pg-1.1.3',            // problem 1-19, partial and in the wrong grade
-  'sa-decimal-word-reverse', // problem 1-20b, the direction that does not exist
+  'sa-decimal-word',     // problem 1-20b, the reverse direction that does not exist
   'pg-4.1.1-gen',        // the same generalising shortfall as 1.1.3, made explicit
   'pg-3.2.1',
   'pg-3.2.3-abs',

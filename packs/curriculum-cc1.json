@@ -994,22 +994,24 @@
    ]
   },
   {
-   "id": "sa-decimal-word-reverse",
+   "id": "sa-decimal-word",
    "source": "homework-set",
    "chapter": 1,
-   "title": "Decimal word form, words back into digits",
+   "title": "Decimal word form, both directions",
    "page": null,
    "lessons": [
     "1.1.3"
    ],
    "crossRef": null,
-   "verdict": "GAP",
+   "verdict": "PARTIAL",
    "rank": 5,
-   "why": "dec-write-word runs ONE direction. It is emitted at 29% of F1 Apex Decimals Grade 5 level 1 and every one of its four options is a word form, so the reverse direction that problem 1-20b asks for cannot be drawn at all.",
+   "why": "One direction of two. Problem 1-20a is decimals INTO words and dec-write-word serves it exactly, emitted at about 29% of F1 Apex Decimals Grade 5 level 1. Problem 1-20b is words back into decimals, and every one of that generator's four options is a word form, so the reverse direction cannot be drawn at all.",
    "targets": [
     "math-r5-decimal-place-value"
    ],
-   "moduleTopics": [],
+   "moduleTopics": [
+    "dec-write-word"
+   ],
    "gaps": [
     "read a word form and pick the decimal"
    ]
@@ -1082,7 +1084,7 @@
    "blocks": [
     "pg-1.1.3",
     "sa-classify-figures",
-    "sa-decimal-word-reverse"
+    "sa-decimal-word"
    ],
    "ccss": [
     "5.OA.B.3",
@@ -1099,7 +1101,8 @@
     "math-r5-decimal-place-value"
    ],
    "moduleTopics": [
-    "pemdas-pattern"
+    "pemdas-pattern",
+    "dec-write-word"
    ],
    "packItemTargets": [],
    "gaps": [
