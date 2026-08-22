@@ -71,3 +71,6 @@ jobs:
 
       - name: Reduced motion (no SMIL in art; every animated asset stops under reduce)
         run: node tests/reduced-motion.js
+
+      - name: Curriculum pointer (grade flip, reload, weekday advance, legacy save; 5 controls)
+        run: node tests/curriculum-pointer.js
