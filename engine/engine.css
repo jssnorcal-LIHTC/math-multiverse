@@ -75,6 +75,40 @@
   color: color-mix(in oklab, var(--mv-color, #7aa8ff) 55%, white); }
 .mv-para { margin: 0 0 8px; line-height: 1.5; font-size: 0.95rem; }
 
+/* Reading-line tracker (26-0822).  Tap a line and it stays lit, so the trip down to the answers
+   and back lands on the same line.  See engine/runner.js for why this is an overlay rather than
+   markup around the words.
+
+   THE FILL IS DELIBERATELY FAINT.  tests/reading-surface.js sweeps every passage ground against
+   the respond panel with a 1.15:1 floor, and that floor is about text remaining readable on its
+   ground.  A solid highlight would sit between the two and change the effective ground under the
+   glyphs; at 0.10 alpha the ground moves by a fraction of a step while the band is still plainly
+   visible.  The bright LEFT EDGE is what actually carries the signal, which is how a physical
+   reading ruler works: the eye tracks the edge, not the wash.
+
+   z-index 0 with the text unpositioned would paint the band OVER the glyphs.  It is pushed behind
+   instead, so the words are never dimmed by their own highlight. */
+.mv-readline {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;              /* never steals a tap from the text it marks */
+  border-radius: 4px;
+  background: color-mix(in oklab, var(--mv-color, #7aa8ff) 10%, transparent);
+  border-left: 3px solid color-mix(in oklab, var(--mv-color, #7aa8ff) 70%, white);
+  transition: top 0.12s var(--ease-out, ease-out), height 0.12s var(--ease-out, ease-out);
+}
+/* The passage box is the positioning context for that overlay, and it is also the scroll
+   container, so the band scrolls with the words rather than hovering over them. */
+.mv-passage { position: relative; }
+/* The paragraphs sit above the band. */
+.mv-passage .mv-para, .mv-passage .mv-passage-title { position: relative; z-index: 1; }
+
+/* Constraint 7: motion collapses to end states under reduce.  The band still moves between lines,
+   it simply arrives rather than slides. */
+@media (prefers-reduced-motion: reduce) {
+  .mv-readline { transition: none; }
+}
+
 /* Figure strip: capped so prose stays dominant; it scrolls WITH the passage, so the
    reading-surface floor is untouched.  The cap is expressed once via --mv-fig-h and enforced
    by max-height rather than left advisory, and it is gated by tests/figures-offline.js,

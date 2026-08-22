@@ -9,20 +9,21 @@
     "figures-offline": "node tests/figures-offline.js",
     "figure-derive": "node tests/figure-derive.js",
     "curriculum": "node tests/validate-curriculum.js",
-    "pointer": "node tests/curriculum-pointer.js && node tests/mission.js && node tests/resume-level.js",
-    "mission": "node tests/mission.js && node tests/resume-level.js",
-    "resume": "node tests/resume-level.js",
+    "pointer": "node tests/curriculum-pointer.js && node tests/mission.js && node tests/resume-level.js && node tests/reading-line.js",
+    "mission": "node tests/mission.js && node tests/resume-level.js && node tests/reading-line.js",
+    "resume": "node tests/resume-level.js && node tests/reading-line.js",
+    "readline": "node tests/reading-line.js",
     "topic-index": "node build/topic-index-gen.js --check",
     "reading": "node tests/reading-surface.js",
     "tile-overlap": "node tests/tile-overlap.js",
-    "reduced-motion": "node tests/reduced-motion.js && node tests/curriculum-pointer.js && node tests/mission.js && node tests/resume-level.js",
+    "reduced-motion": "node tests/reduced-motion.js && node tests/curriculum-pointer.js && node tests/mission.js && node tests/resume-level.js && node tests/reading-line.js",
     "touch-targets": "node tests/touch-targets.js",
     "freshness": "node tests/freshness.js",
     "shells": "node tests/shells.js",
     "freshness-lib": "node tests/freshness-lib.js",
     "freshness-sim": "node tests/freshness-sim.js",
     "units": "node tests/readability.test.js && node tests/targets.test.js && node tests/validate-pack.test.js && node tests/verdicts.test.js && node tests/shuffle-mc.test.js && node tests/items.test.js && node tests/pack.test.js && node tests/runner.test.js && node tests/figures.test.js && node tests/extract.test.js",
-    "test": "npm run units && node tests/validate-pack.js && node tests/validate-curriculum.js && node tests/figure-derive.js && node tests/freshness.js && node tests/shells.js && node tests/freshness-lib.js && node tests/freshness-sim.js && node tests/fuzz.js && node tests/smoke.js && node tests/figures-offline.js && node tests/reading-surface.js && node tests/tile-overlap.js && node tests/touch-targets.js && node tests/reduced-motion.js && node tests/curriculum-pointer.js && node tests/mission.js && node tests/resume-level.js"
+    "test": "npm run units && node tests/validate-pack.js && node tests/validate-curriculum.js && node tests/figure-derive.js && node tests/freshness.js && node tests/shells.js && node tests/freshness-lib.js && node tests/freshness-sim.js && node tests/fuzz.js && node tests/smoke.js && node tests/figures-offline.js && node tests/reading-surface.js && node tests/tile-overlap.js && node tests/touch-targets.js && node tests/reduced-motion.js && node tests/curriculum-pointer.js && node tests/mission.js && node tests/resume-level.js && node tests/reading-line.js"
   },
   "devDependencies": {
     "playwright": "^1.49.1"

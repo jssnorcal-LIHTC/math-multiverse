@@ -130,6 +130,17 @@ function readCommitted(html) {
   return html.slice(i, j + END.length);
 }
 
+// Line endings are NOT part of what this gate measures. .gitattributes normalises this file, so a
+// fresh checkout on Windows hands back CRLF while build() always joins with LF: comparing the two
+// raw reported STALE on a block that was byte-identical line for line. Measured 26-0822, after a
+// checkout of main, with a zero-line diff and a failing --check. Both sides are normalised for the
+// comparison, and a rewrite matches whatever the file already uses so this file's endings stay
+// uniform.
+const CRLF = '\r\n';
+const LF = '\n';
+const norm = (t) => String(t).split(CRLF).join(LF);
+const matchEol = (block, html) => (html.indexOf(CRLF) >= 0 ? block.split(LF).join(CRLF) : block);
+
 const { block, stats } = build();
 const html = fs.readFileSync(HTML, 'utf8');
 const committed = readCommitted(html);
@@ -137,7 +148,7 @@ const checkOnly = process.argv.includes('--check');
 
 if (checkOnly) {
   if (committed == null) { console.error('topic-index-gen --check: no TOPIC_INDEX block found in the shell'); process.exit(1); }
-  if (committed !== block) {
+  if (norm(committed) !== norm(block)) {
     console.error('topic-index-gen --check: the committed TOPIC_INDEX block is STALE.');
     console.error('  Run: node build/topic-index-gen.js');
     process.exit(1);
@@ -150,6 +161,6 @@ if (committed == null) {
   console.error('topic-index-gen: no TOPIC_INDEX markers in the shell. Add:\n  ' + BEGIN + '\n  const TOPIC_INDEX = {};\n  ' + END);
   process.exit(1);
 }
-fs.writeFileSync(HTML, html.replace(committed, block));
+fs.writeFileSync(HTML, html.replace(committed, matchEol(block, html)));
 console.log(`wrote TOPIC_INDEX into Math-Multiverse.html`);
 console.log(`  ${stats.total} topics: ${stats.exact} exact (a level emitting only that topic), ${stats.mixed} on a mixed level`);

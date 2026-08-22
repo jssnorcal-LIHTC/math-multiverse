@@ -80,3 +80,6 @@ jobs:
 
       - name: Resume a level (exit mid-run and return continues it; 3 controls)
         run: node tests/resume-level.js
+
+      - name: Reading-line tracker (tap a line, it stays lit; line geometry, reflow; 6 controls)
+        run: node tests/reading-line.js
