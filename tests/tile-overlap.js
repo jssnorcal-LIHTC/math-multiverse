@@ -262,14 +262,27 @@ function overTileScanInPage(px) {
     const b = visibleBox(tile);
     const w = b.right - b.left, h = b.bottom - b.top;
     if (w <= 2 || h <= 2) return { visible: { w: Math.round(w), h: Math.round(h) }, sampled: 0, over: [] };
+    const tileRadius = Math.ceil(parseFloat(getComputedStyle(tile).borderRadius) || 0);
     const over = [];
     let sampled = 0;
-    // A 5 x 5 grid inset 2px from the visible edges, so no sample sits on a border pixel where
-    // the answer is a rounding question rather than an occlusion one.
+    // A 5 x 5 grid inset from the visible edges, so no sample sits where the answer is a rounding
+    // question rather than an occlusion one.
+    //
+    // THE INSET IS THE BORDER RADIUS, not a flat 2px. A flat 2px was sized for a BORDER and the
+    // tile has a rounded CORNER: a point 2px in from the right edge and 2px up from the bottom of
+    // a 6px radius sits about 0.35px outside the corner arc, so whether it lands on painted pixels
+    // comes down to the tile's fractional height that run. That is what failed about one run in
+    // nine on f1-decimals' short correct-answer tile, and it was diagnosed from the geometry the
+    // failure now carries out with it: point (966, 588.48), tile right 968 bottom 590.49, inset
+    // {right: 2, bottom: 2}, borderRadius 6px. Measured, not guessed at.
+    //
+    // The corners give up a few px of coverage; every real occluder this gate exists for covers far
+    // more than a corner, and the positive control below still paints over the whole visible box.
+    const inset = Math.max(2, Math.min(tileRadius, Math.floor(Math.min(w, h) / 4)));
     for (let i = 0; i < 5; i++) {
       for (let j = 0; j < 5; j++) {
-        const x = b.left + 2 + (w - 4) * (i / 4);
-        const y = b.top + 2 + (h - 4) * (j / 4);
+        const x = b.left + inset + (w - inset * 2) * (i / 4);
+        const y = b.top + inset + (h - inset * 2) * (j / 4);
         sampled++;
         const hit = document.elementFromPoint(x, y);
         if (!hit || hit === tile || tile.contains(hit)) continue;

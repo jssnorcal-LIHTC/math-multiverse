@@ -152,6 +152,30 @@ function envWith(files) {
     assert.strictEqual(st.levelStars[4], 0);
   });
 
+  check('stateFor NEVER shrinks: a wrong level count cannot delete progress', () => {
+    // packCardNode calls stateFor on every launcher render with the count out of
+    // packs/manifest.json. cpm-cc1-g6's entry still said one level after the pack had grown to six,
+    // and stateFor used to shrink the arrays and clamp levelsCleared to whatever it was handed: a
+    // child five levels in came back as levelsCleared 1 with a single star, and correcting the
+    // manifest afterwards restored neither. A number that is wrong somewhere else must not be able
+    // to delete what a child has already done.
+    envWith({});
+    const S = MVPack.PackSave; S.load();
+    for (let i = 0; i < 5; i++) S.recordLevel('p-six', i, 3, 400 + i);
+    const full = S.stateFor('p-six', 6);
+    assert.strictEqual(full.levelsCleared, 5, 'setup: five levels cleared');
+    assert.strictEqual(full.levelStars.length, 6);
+
+    const stale = S.stateFor('p-six', 1);          // the launcher, with a stale manifest count
+    assert.strictEqual(stale.levelsCleared, 5, 'a stale count of 1 must not clamp cleared progress');
+    assert.strictEqual(stale.levelStars.length, 6, 'a stale count of 1 must not truncate the stars');
+    assert.strictEqual(stale.levelStars[4], 3, 'the fifth level keeps its stars');
+
+    const back = S.stateFor('p-six', 6);           // and nothing was lost on the way
+    assert.strictEqual(back.levelsCleared, 5);
+    assert.deepStrictEqual(back.levelStars, [3, 3, 3, 3, 3, 0]);
+  });
+
   check('recordAnswer accumulates per-topic accuracy', () => {
     envWith({});
     const S = MVPack.PackSave; S.load();

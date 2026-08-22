@@ -87,12 +87,11 @@
    "moduleTopics": [
     "pemdas-pattern"
    ],
-   "packItemTargets": [],
-   "gaps": [
-    "a drawn growing pattern the student extends",
-    "find the rule from the figures",
-    "predict a far-out term such as the 100th"
-   ]
+   "packItemTargets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "gaps": []
   },
   {
    "id": "pg-1.1.4",
@@ -112,12 +111,11 @@
     "math-sp-displays"
    ],
    "moduleTopics": [],
-   "packItemTargets": [],
-   "gaps": [
-    "read a value off a bar graph",
-    "compare two bars",
-    "read a histogram bin"
-   ]
+   "packItemTargets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
+   ],
+   "gaps": []
   },
   {
    "id": "pg-1.2.3",
@@ -161,7 +159,9 @@
     "math-sp-displays"
    ],
    "moduleTopics": [],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-sp-displays"
+   ],
    "gaps": [
     "read a stem-and-leaf plot",
     "build one from a data set"
@@ -268,7 +268,9 @@
     "dec-place-value",
     "g6-percent"
    ],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-r5-decimal-place-value"
+   ],
    "gaps": [
     "fraction to decimal",
     "decimal to percent",
@@ -442,11 +444,10 @@
     "math-ee-generalize"
    ],
    "moduleTopics": [],
-   "packItemTargets": [],
-   "gaps": [
-    "write the rule for figure n",
-    "use the rule to reach a far term"
-   ]
+   "packItemTargets": [
+    "math-ee-generalize"
+   ],
+   "gaps": []
   },
   {
    "id": "pg-4.1.3-note",
@@ -892,7 +893,9 @@
     "math-sp-displays"
    ],
    "moduleTopics": [],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-sp-displays"
+   ],
    "gaps": [
     "read a box plot",
     "read the median and the quartiles off one"
@@ -940,7 +943,9 @@
     "math-ee-generalize"
    ],
    "moduleTopics": [],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-ee-generalize"
+   ],
    "gaps": [
     "d = r x t in either direction",
     "a two-leg trip"
@@ -1048,10 +1053,10 @@
    "moduleTopics": [
     "dec-write-word"
    ],
-   "packItemTargets": [],
-   "gaps": [
-    "read a word form and pick the decimal"
-   ]
+   "packItemTargets": [
+    "math-r5-decimal-place-value"
+   ],
+   "gaps": []
   }
  ],
  "lessons": [
@@ -1142,14 +1147,12 @@
     "dec-write-word"
    ],
    "packItemTargets": [
-    "math-r5-classify-figures"
+    "math-r5-numerical-patterns",
+    "math-ee-generalize",
+    "math-r5-classify-figures",
+    "math-r5-decimal-place-value"
    ],
-   "gaps": [
-    "a drawn growing pattern the student extends",
-    "find the rule from the figures",
-    "predict a far-out term such as the 100th",
-    "read a word form and pick the decimal"
-   ],
+   "gaps": [],
    "confidence": "verified"
   },
   {
@@ -1176,12 +1179,11 @@
     "math-sp-displays"
    ],
    "moduleTopics": [],
-   "packItemTargets": [],
-   "gaps": [
-    "read a value off a bar graph",
-    "compare two bars",
-    "read a histogram bin"
+   "packItemTargets": [
+    "math-r3-scaled-graphs",
+    "math-sp-displays"
    ],
+   "gaps": [],
    "confidence": "verified"
   },
   {
@@ -1377,7 +1379,9 @@
     "math-sp-displays"
    ],
    "moduleTopics": [],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-sp-displays"
+   ],
    "gaps": [
     "read a stem-and-leaf plot",
     "build one from a data set"
@@ -1677,7 +1681,9 @@
     "frac-add-unlike",
     "frac-sub-unlike"
    ],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-r5-decimal-place-value"
+   ],
    "gaps": [
     "fraction to decimal",
     "decimal to percent",
@@ -1719,7 +1725,9 @@
     "dec-place-value",
     "g6-percent"
    ],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-r5-decimal-place-value"
+   ],
    "gaps": [
     "fraction to decimal",
     "decimal to percent",
@@ -1756,7 +1764,9 @@
     "dec-place-value",
     "g6-percent"
    ],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-r5-decimal-place-value"
+   ],
    "gaps": [
     "fraction to decimal",
     "decimal to percent",
@@ -1793,7 +1803,9 @@
     "dec-place-value",
     "g6-percent"
    ],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-r5-decimal-place-value"
+   ],
    "gaps": [
     "fraction to decimal",
     "decimal to percent",
@@ -1991,12 +2003,12 @@
     "g6-evaluate",
     "pemdas-write-expr"
    ],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-ee-generalize"
+   ],
    "gaps": [
     "write an expression using a letter",
-    "name the parts: term, factor, coefficient",
-    "write the rule for figure n",
-    "use the rule to reach a far term"
+    "name the parts: term, factor, coefficient"
    ],
    "confidence": "verified"
   },
@@ -2029,12 +2041,12 @@
     "g6-evaluate",
     "pemdas-write-expr"
    ],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-ee-generalize"
+   ],
    "gaps": [
     "write an expression using a letter",
-    "name the parts: term, factor, coefficient",
-    "write the rule for figure n",
-    "use the rule to reach a far term"
+    "name the parts: term, factor, coefficient"
    ],
    "confidence": "inherited-plausible"
   },
@@ -2083,12 +2095,12 @@
     "g6-evaluate2",
     "g6-exponent"
    ],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-ee-generalize"
+   ],
    "gaps": [
     "write an expression using a letter",
-    "name the parts: term, factor, coefficient",
-    "write the rule for figure n",
-    "use the rule to reach a far term"
+    "name the parts: term, factor, coefficient"
    ],
    "confidence": "verified"
   },
@@ -3359,7 +3371,9 @@
     "math-sp-displays"
    ],
    "moduleTopics": [],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-sp-displays"
+   ],
    "gaps": [
     "read a box plot",
     "read the median and the quartiles off one"
@@ -3388,7 +3402,9 @@
     "math-sp-displays"
    ],
    "moduleTopics": [],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-sp-displays"
+   ],
    "gaps": [
     "read a box plot",
     "read the median and the quartiles off one"
@@ -3484,7 +3500,9 @@
     "math-ee-generalize"
    ],
    "moduleTopics": [],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-ee-generalize"
+   ],
    "gaps": [
     "d = r x t in either direction",
     "a two-leg trip"
@@ -3516,7 +3534,9 @@
     "math-ee-generalize"
    ],
    "moduleTopics": [],
-   "packItemTargets": [],
+   "packItemTargets": [
+    "math-ee-generalize"
+   ],
    "gaps": [
     "d = r x t in either direction",
     "a two-leg trip"

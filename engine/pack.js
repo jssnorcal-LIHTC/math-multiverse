@@ -162,11 +162,15 @@
       if (!Array.isArray(st.levelBest)) st.levelBest = [];
       while (st.levelStars.length < n) st.levelStars.push(0);
       while (st.levelBest.length < n) st.levelBest.push(null);
-      if (n) {
-        st.levelStars.length = n;
-        st.levelBest.length = n;
-      }
-      st.levelsCleared = Math.max(0, Math.min(st.levelsCleared | 0, n));
+      // GROW ONLY. This used to also SHRINK to n and clamp levelsCleared to n, which made the level
+      // count a caller passes in able to destroy saved progress. packCardNode calls this on every
+      // launcher render with the count out of packs/manifest.json, and cpm-cc1-g6's entry still said
+      // one level after the pack had grown to six: measured through the real save layer, a child
+      // five levels in came back as levelsCleared 1 with a single star left, and correcting the
+      // manifest afterwards restored neither -- the stars came back as zeros. A wrong number
+      // somewhere else must not be able to delete what a child has already done, so the arrays are
+      // only ever extended and levelsCleared is clamped to what is actually stored.
+      st.levelsCleared = Math.max(0, Math.min(st.levelsCleared | 0, st.levelStars.length));
       return st;
     },
 
