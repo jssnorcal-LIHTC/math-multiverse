@@ -75,6 +75,39 @@
   color: color-mix(in oklab, var(--mv-color, #7aa8ff) 55%, white); }
 .mv-para { margin: 0 0 8px; line-height: 1.5; font-size: 0.95rem; }
 
+/* LEVEL BRIEFING (WP-P, 26-0822).  Shown once before the first question, to answer the questions a
+   child otherwise has to guess at: where am I, who am I, and what do these words mean.  It occupies
+   the space the passage and the item will use, so it inherits the same 1024x768 no-page-scroll
+   contract they do: `flex: 1 1 0` with its own overflow, never a fixed height that could push the
+   Begin button off a short screen. */
+.mv-briefing {
+  flex: 1 1 0; min-height: 0; overflow-y: auto;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex; flex-direction: column;
+}
+.mv-briefing-kicker {
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700;
+  color: color-mix(in oklab, var(--mv-color, #7aa8ff) 55%, white);
+  margin-bottom: 4px;
+}
+.mv-briefing-title { font-weight: 700; font-size: 1.02rem; margin-bottom: 8px; }
+.mv-briefing-line { margin: 0 0 10px; line-height: 1.55; font-size: 0.95rem; max-width: 62ch; }
+.mv-briefing-begin {
+  align-self: flex-start; margin-top: auto;
+  min-height: 44px;                      /* constraint 6: 44px touch floor */
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in oklab, var(--mv-color, #7aa8ff) 55%, transparent);
+  background: color-mix(in oklab, var(--mv-color, #7aa8ff) 18%, transparent);
+  color: var(--text-primary, #fff);
+  font: inherit; font-weight: 700;
+  cursor: pointer;
+}
+.mv-briefing-begin:hover { background: color-mix(in oklab, var(--mv-color, #7aa8ff) 30%, transparent); }
+
 /* Reading-line tracker (26-0822).  Tap a line and it stays lit, so the trip down to the answers
    and back lands on the same line.  See engine/runner.js for why this is an overlay rather than
    markup around the words.
