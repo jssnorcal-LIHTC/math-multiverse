@@ -3711,7 +3711,11 @@ function buildShelves(manifest) {
   }
   const out = [];
   for (const subj of SUBJECT_ORDER) {
-    if (subj === 'math') { out.push({ subject: 'math', label: 'Math', packs: [] }); continue; }
+    // The math shelf always exists, because it carries the six MODULES whether or not a pack
+    // manifest ever loads -- which is exactly why it used to be built with an empty `packs` array
+    // and a `subject: 'math'` pack could load and then never appear anywhere. It now carries its
+    // packs like every other shelf; renderLauncher is what puts the six worlds above them.
+    if (subj === 'math') { out.push({ subject: 'math', label: 'Math', packs: bySubject.math || [] }); continue; }
     if (bySubject[subj] && bySubject[subj].length) {
       out.push({ subject: subj, label: SUBJECT_LABELS[subj] || subj, packs: bySubject[subj] });
     }
@@ -3819,6 +3823,18 @@ function renderLauncher() {
   const grid = $('module-grid');
   grid.innerHTML = '';
   for (const shelf of SHELVES) {
+    const isMath = shelf.subject === 'math';
+    // A pack belongs to one grade. SHELVES stays the complete registry, because openPack and
+    // exitToLevels look packs up in it and must still resolve one that is open when the grade flips;
+    // it is only the launcher that hides what does not belong to the campaign on screen. Filtering
+    // inside buildShelves instead would hide a grade-6 pack forever from anyone who booted on grade 5,
+    // because the grade toggle re-renders but never rebuilds the shelves. The math shelf gets the
+    // same filter as every other subject.
+    const visible = (shelf.packs || []).filter(p => p.grade === ACTIVE_GRADE);
+    // An empty shelf is noise, not an empty state -- except the math shelf, which is never empty:
+    // it carries the six MODULES whether or not any math pack exists or belongs to this grade.
+    if (!isMath && !visible.length) continue;
+
     const wrap = document.createElement('div');
     wrap.className = 'subject-shelf';
     wrap.dataset.subject = shelf.subject;
@@ -3829,18 +3845,11 @@ function renderLauncher() {
 
     const inner = document.createElement('div');
     inner.className = 'module-grid';
-    if (shelf.subject === 'math') {
-      for (const m of MODULES) inner.appendChild(mathCardNode(m));
-    } else {
-      // A pack belongs to one grade. SHELVES stays the complete registry, because openPack and
-      // exitToLevels look packs up in it and must still resolve one that is open when the grade flips;
-      // it is only the launcher that hides what does not belong to the campaign on screen. Filtering
-      // inside buildShelves instead would hide a grade-6 pack forever from anyone who booted on grade 5,
-      // because the grade toggle re-renders but never rebuilds the shelves.
-      const visible = (shelf.packs || []).filter(p => p.grade === ACTIVE_GRADE);
-      if (!visible.length) continue;          // an empty shelf is noise, not an empty state
-      for (const entry of visible) inner.appendChild(packCardNode(entry));
-    }
+    // MODULES first, then math packs. Justin's 26-0725 call: the six worlds Niall already plays stay
+    // at the top of the launcher where they have always been, and anything new is an addition below
+    // them rather than something that displaces his game.
+    if (isMath) for (const m of MODULES) inner.appendChild(mathCardNode(m));
+    for (const entry of visible) inner.appendChild(packCardNode(entry));
     wrap.appendChild(inner);
     grid.appendChild(wrap);
   }
