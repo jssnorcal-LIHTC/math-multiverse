@@ -231,6 +231,114 @@ const L1 = [
   },
 ];
 
+// ---------------------------------------------------------------------------
+// LEVEL 2: naming shapes.
+//
+// CC1 problem 1-22, and rank 2 on the crosswalk's build list. The app has ZERO content for this
+// today: a full-text scan of the six math modules finds no occurrence of scalene, isosceles,
+// rhombus, trapezoid or obtuse, in either grade. The two shell topics that LOOKED like coverage,
+// coord-shape and coord-real-world, carried a label and a coach tip and were emitted by nothing;
+// WP1 deleted both.
+//
+// Three strands, because 5.G.B.3 and 5.G.B.4 are about a HIERARCHY rather than a list of names:
+//   by side     scalene, isosceles, equilateral
+//   by angle    acute, right, obtuse
+//   quadrilateral  the hierarchy itself, where every square is a rectangle and every rectangle a
+//                  parallelogram, and the reverse is false
+//
+// The figures reuse build/polygon-gen.js, which means every shape here is also drawn from the side
+// lengths that name it. A triangle called isosceles has two genuinely equal drawn edges, and
+// tests/figure-reconcile.js proves it: a shape whose name disagrees with its drawing is the same
+// defect class as a label that disagrees with its edge.
+// ---------------------------------------------------------------------------
+// BOTH classifications are COMPUTED from the side lengths, never typed.
+//
+// Blind certification caught a 12-9-7 triangle labelled acute.  It is not: the angle opposite the
+// 12 is 96.4 degrees, so it is obtuse, and the item would have marked the right answer wrong.  A
+// second spec was worse in a quieter way, 7-7-9.9 labelled right, which is obtuse by a hundredth
+// and visually indistinguishable from a right angle;  a genuine isosceles right triangle needs an
+// irrational hypotenuse and cannot carry a clean label at all, so it is not in this set.
+//
+// Typing a shape's NAME beside its measurements is the same defect as typing its coordinates, and
+// it has now produced an error in both places.  Both are derived here instead.
+function classifyByAngle(sides) {
+  const [a, b, c] = sides.slice().sort((x, y) => x - y);
+  const lhs = c * c, rhs = a * a + b * b;
+  if (Math.abs(lhs - rhs) < 1e-9) return 'right';
+  return lhs > rhs ? 'obtuse' : 'acute';
+}
+function classifyBySide(sides) {
+  const u = new Set(sides).size;
+  return u === 1 ? 'equilateral' : u === 2 ? 'isosceles' : 'scalene';
+}
+
+const L2_TRI = [
+  { id: 'tri-name-scalene', sides: [7, 8, 9],
+    alt: 'A triangle with three different side lengths, 7 cm, 8 cm and 9 cm.  No sides carry congruence ticks, and no corner carries a right-angle mark.' },
+  { id: 'tri-name-isosceles', sides: [4, 9, 9], ticks: { 1: 1, 2: 1 },
+    alt: 'A tall triangle with two equal sides of 9 cm, each carrying a single tick, and a short 4 cm side across the bottom.' },
+  { id: 'tri-name-equilateral', sides: [8, 8, 8], ticks: { 0: 1, 1: 1, 2: 1 },
+    alt: 'A triangle with all three sides equal at 8 cm, each carrying a single tick.' },
+  { id: 'tri-name-right', sides: [6, 10, 8], rightAngles: [0],
+    alt: 'A triangle with sides 6 cm, 10 cm and 8 cm.  The corner between the 6 cm and 8 cm sides carries a right-angle mark.' },
+  { id: 'tri-name-obtuse', sides: [13, 6, 8],
+    alt: 'A wide, flat triangle with sides 13 cm, 6 cm and 8 cm.  Its widest corner opens well past a square corner.' },
+  { id: 'tri-name-isos-obtuse', sides: [5, 5, 9], ticks: { 0: 1, 1: 1 },
+    alt: 'A wide, flat triangle with two equal sides of 5 cm, each carrying a tick, and a long 9 cm side.  The corner between the two equal sides opens well past square.' },
+].map((t) => Object.assign({}, t, { byside: classifyBySide(t.sides), byangle: classifyByAngle(t.sides) }));
+
+// The set has to teach that the two classifications are INDEPENDENT, which it only does if it
+// actually contains a shape that is isosceles and obtuse, and one that is scalene and right.
+{
+  const pairs = new Set(L2_TRI.map((t) => t.byside + '/' + t.byangle));
+  for (const need of ['scalene/acute', 'isosceles/acute', 'equilateral/acute', 'scalene/right', 'scalene/obtuse', 'isosceles/obtuse']) {
+    if (!pairs.has(need)) throw new Error(`cc1-pack-gen: L2 triangles do not cover ${need}; got ${[...pairs].join(', ')}`);
+  }
+  // A right-angle mark may only appear on a triangle that genuinely has one.
+  for (const t of L2_TRI) {
+    if (t.rightAngles && t.byangle !== 'right') throw new Error(`cc1-pack-gen: ${t.id} draws a right-angle mark but computes as ${t.byangle}`);
+    if (!t.rightAngles && t.byangle === 'right') throw new Error(`cc1-pack-gen: ${t.id} is a right triangle but draws no right-angle mark`);
+  }
+}
+
+const SIDE_NAMES = {
+  scalene: 'No two sides are the same length, which is what scalene means.',
+  isosceles: 'Exactly two sides are the same length, which is what isosceles means, and the ticks are how the figure says so.',
+  equilateral: 'All three sides are the same length, which is what equilateral means.',
+};
+const ANGLE_NAMES = {
+  acute: 'Every corner is smaller than a square corner, which makes it acute.',
+  right: 'One corner is exactly a square corner, marked with the small square, which makes it a right triangle.',
+  obtuse: 'One corner opens wider than a square corner, which makes it obtuse.',
+};
+
+// The quadrilateral hierarchy, as figures and as the relationships between them. Sides and ticks
+// are what make each name true, so the drawing carries the evidence rather than the caption.
+const L2_QUAD = [
+  { id: 'quad-square', shape: 'rectangle', vertices: [[0, 0], [6, 0], [6, 6], [0, 6]], sides: [6, 6, 6, 6],
+    ticks: { 0: 1, 1: 1, 2: 1, 3: 1 }, rightAngles: [0, 1, 2, 3], name: 'square',
+    alt: 'A quadrilateral with four equal sides of 6 cm, each carrying a tick, and a right-angle mark in every corner.' },
+  { id: 'quad-rectangle', shape: 'rectangle', vertices: [[0, 0], [9, 0], [9, 5], [0, 5]], sides: [9, 5, 9, 5],
+    rightAngles: [0, 1, 2, 3], name: 'rectangle',
+    alt: 'A quadrilateral with opposite sides equal, 9 cm and 5 cm, and a right-angle mark in every corner.' },
+  { id: 'quad-rhombus', shape: 'parallelogram', sides: [7, 7, 7, 7], ticks: { 0: 1, 1: 1, 2: 1, 3: 1 },
+    name: 'rhombus', lean: 58,
+    alt: 'A leaning quadrilateral with four equal sides of 7 cm, each carrying a tick, and no right-angle marks.' },
+  { id: 'quad-parallelogram', shape: 'parallelogram', sides: [10, 6, 10, 6], ticks: { 0: 1, 2: 1, 1: 2, 3: 2 },
+    name: 'parallelogram', lean: 62,
+    alt: 'A leaning quadrilateral with opposite sides equal, 10 cm and 6 cm, marked with one tick and two ticks, and no right-angle marks.' },
+  { id: 'quad-trapezoid', shape: 'trapezoid', sides: [11, 6, 5, 5], name: 'trapezoid',
+    alt: 'A quadrilateral with one pair of parallel sides, 11 cm along the bottom and 5 cm along the top, and two slanted sides of 6 cm and 5 cm.' },
+];
+
+const QUAD_WHY = {
+  square: 'Four equal sides AND four right angles.  A square is the one name that needs both.',
+  rectangle: 'Four right angles, with opposite sides equal but not all four the same.',
+  rhombus: 'Four equal sides, but the corners are not square, so it is a rhombus rather than a square.',
+  parallelogram: 'Two pairs of equal opposite sides, no right angles, and no set of four equal sides.',
+  trapezoid: 'Exactly one pair of parallel sides.  The other two sides go their own way.',
+};
+
 function specToDataTable(s) {
   return {
     shape: s.shape,
@@ -428,9 +536,166 @@ function buildLevel1() {
 }
 
 // ---------------------------------------------------------------------------
+function buildLevel2() {
+  const items = [];
+  const figures = [];
+
+  // ---- triangles, named twice: once by side, once by angle ----
+  L2_TRI.forEach((t) => {
+    const dt = {
+      shape: 'triangle', units: 'cm',
+      vertices: triangleVertices(t.sides[0], t.sides[1], t.sides[2]),
+      sides: t.sides.map((n) => ({ label: String(n) + ' cm', len: n })),
+      ticks: t.ticks || undefined,
+      rightAngles: t.rightAngles || undefined,
+    };
+    const figId = `fig-l2-${t.id}`;
+    figures.push({
+      id: figId, kind: 'diagram', genKind: 'polygon',
+      caption: `Naming practice: a triangle with sides ${t.sides.join(', ')} cm.`,
+      credit: 'Built for this pack in the V1 design tokens (original work).',
+      alt: t.alt, src: `art/cpm-cc1-g6/${figId}.svg`, dataTable: dt,
+    });
+
+    const sideOpts = ['scalene', 'isosceles', 'equilateral', 'right'];
+    const kSide = sideOpts.indexOf(t.byside);
+    const drSide = {};
+    sideOpts.forEach((o, i) => {
+      if (i === kSide) return;
+      drSide[String(i)] = o === 'right'
+        ? 'Right names an ANGLE, not a set of side lengths.  This question asks about the sides.'
+        : `A ${o} triangle needs ${o === 'scalene' ? 'no two sides equal' : o === 'isosceles' ? 'exactly two sides equal' : 'all three sides equal'}, and this figure does not have that.`;
+    });
+    items.push({
+      id: `l2-side-${t.id}`, type: 'mc', figureId: figId, passageId: 'p-naming-shapes',
+      targets: ['math-r5-classify-figures'], coachTopic: 'shape-triangle-by-side', dok: 2,
+      stem: `Classify this triangle by its SIDES.  Its sides measure ${t.sides.join(' cm, ')} cm.`,
+      choices: sideOpts, key: kSide, distractorRationale: drSide,
+      explain: `${SIDE_NAMES[t.byside]}  Sides and angles are two separate classifications, and a triangle carries one name from each list.`,
+    });
+
+    const angOpts = ['acute', 'right', 'obtuse', 'equilateral'];
+    const kAng = angOpts.indexOf(t.byangle);
+    const drAng = {};
+    angOpts.forEach((o, i) => {
+      if (i === kAng) return;
+      drAng[String(i)] = o === 'equilateral'
+        ? 'Equilateral names the SIDES, not an angle.  This question asks about the corners.'
+        : `An ${o} triangle needs ${o === 'acute' ? 'every corner smaller than a square corner' : o === 'right' ? 'one corner exactly square, which the figure would mark' : 'one corner wider than a square corner'}, and this figure does not have that.`;
+    });
+    items.push({
+      id: `l2-angle-${t.id}`, type: 'mc', figureId: figId, passageId: 'p-naming-shapes',
+      targets: ['math-r5-classify-figures'], coachTopic: 'shape-triangle-by-angle', dok: 2,
+      stem: `Now classify that same triangle, the one with sides ${t.sides.join(', ')} cm, by its ANGLES.`,
+      choices: angOpts, key: kAng, distractorRationale: drAng,
+      explain: `${ANGLE_NAMES[t.byangle]}  A triangle takes one name from the side list and one from the angle list, and the two are independent: this one is ${t.byside} and ${t.byangle}.`,
+    });
+  });
+
+  // ---- quadrilaterals, where the MOST EXACT name is the question ----
+  L2_QUAD.forEach((q, idx) => {
+    let vertices;
+    if (q.shape === 'rectangle') vertices = q.vertices;
+    else if (q.shape === 'parallelogram') vertices = parallelogramVertices(q.sides[0], q.sides[1], q.lean);
+    else vertices = trapezoidVertices(q.sides[0], q.sides[1], q.sides[2], q.sides[3]);
+    const dt = {
+      shape: q.shape, units: 'cm', vertices,
+      sides: q.sides.map((n) => ({ label: String(n) + ' cm', len: n })),
+      ticks: q.ticks || undefined, rightAngles: q.rightAngles || undefined,
+    };
+    const figId = `fig-l2-${q.id}`;
+    figures.push({
+      id: figId, kind: 'diagram', genKind: 'polygon',
+      caption: `Naming practice: a quadrilateral with sides ${q.sides.join(', ')} cm.`,
+      credit: 'Built for this pack in the V1 design tokens (original work).',
+      alt: q.alt, src: `art/cpm-cc1-g6/${figId}.svg`, dataTable: dt,
+    });
+    const others = ['square', 'rectangle', 'rhombus', 'parallelogram', 'trapezoid']
+      .filter((o) => o !== q.name)
+      .slice(0, 3)
+      .map((o) => ({ v: o, why: `${QUAD_WHY[o]}  This figure does not meet that.` }));
+    const { opts: shown, keyAt } = shuffleTo({ v: q.name }, others, idx);
+    const dr = {};
+    shown.forEach((o, i) => { if (i !== keyAt) dr[String(i)] = o.why; });
+    items.push({
+      id: `l2-quad-${q.id}`, type: 'mc', figureId: figId, passageId: 'p-naming-shapes',
+      targets: ['math-r5-classify-figures'], coachTopic: 'shape-quadrilateral', dok: 2,
+      stem: `What is the most exact name for this quadrilateral, whose sides are ${q.sides.join(', ')} cm?  Read the ticks and the corner marks first.`,
+      choices: shown.map((o) => o.v), key: keyAt, distractorRationale: dr,
+      explain: `${QUAD_WHY[q.name]}  The question asks for the MOST EXACT name, so a wider name that is also true is still the wrong answer here.`,
+    });
+  });
+
+  // ---- the hierarchy itself, which a list of names never teaches ----
+  const HIER = [
+    {
+      id: 'square-is-rectangle',
+      stem: 'Is every square also a rectangle?',
+      choices: [
+        'Yes, because a square has four right angles, which is what a rectangle needs.',
+        'No, because a rectangle must have two long sides and two short ones.',
+        'Only when the square is drawn tilted.',
+        'No, because a square already has its own name.',
+      ],
+      key: 0,
+      dr: {
+        1: 'A rectangle needs four right angles and equal opposite sides.  It never requires the long pair to differ from the short pair, so a square qualifies.',
+        2: 'Turning a shape does not change what it is.  A tilted square is still a square, and still a rectangle.',
+        3: 'Having a more exact name of its own does not remove a shape from the wider group.  A square is a rectangle with something extra.',
+      },
+      explain: 'A rectangle is any quadrilateral with four right angles and equal opposite sides.  A square has all of that AND four equal sides, so every square is a rectangle with something extra.  The reverse fails, because most rectangles are not squares.',
+    },
+    {
+      id: 'rectangle-is-square',
+      stem: 'Is every rectangle also a square?',
+      choices: [
+        'Yes, since both have four right angles.',
+        'No, because a square also needs all four sides equal.',
+        'Yes, if you measure carefully enough.',
+        'No, because a rectangle has no right angles.',
+      ],
+      key: 1,
+      dr: {
+        0: 'Four right angles is what makes a rectangle, and a square needs that AND four equal sides.  That extra requirement is what makes this direction fail.',
+        2: 'Measuring cannot turn a 9 by 5 rectangle into a square.  Its sides are genuinely different lengths.',
+        3: 'A rectangle has four right angles by definition.  That part is exactly what the two shapes share.',
+      },
+      explain: 'The relationship runs one way only.  Every square is a rectangle, because a square meets every rectangle requirement and adds one more.  A rectangle with two long sides and two short ones meets no such extra requirement, so it is not a square.',
+    },
+    {
+      id: 'square-is-rhombus',
+      stem: 'A rhombus is a quadrilateral with four equal sides.  Is every square also a rhombus?',
+      choices: [
+        'No, a rhombus has to lean.',
+        'Yes, because a square has four equal sides.',
+        'No, a rhombus is not allowed right angles.',
+        'Only squares smaller than the rhombus.',
+      ],
+      key: 1,
+      dr: {
+        0: 'Leaning is what a rhombus is usually DRAWN doing, not what the name requires.  The requirement is four equal sides.',
+        2: 'A rhombus is not forbidden right angles;  it simply does not require them.  A square is the rhombus that happens to have them.',
+        3: 'Size never decides a shape name.  The same shape drawn twice as large carries exactly the same name.',
+      },
+      explain: 'A rhombus needs four equal sides and nothing else.  A square has four equal sides, so every square is a rhombus, and it is a rectangle as well.  A square is the shape that sits in both groups at once.',
+    },
+  ];
+  for (const h of HIER) {
+    items.push({
+      id: `l2-hier-${h.id}`, type: 'mc', passageId: 'p-naming-shapes',
+      targets: ['math-r5-classify-figures'], coachTopic: 'shape-hierarchy', dok: 3,
+      stem: h.stem, choices: h.choices, key: h.key, distractorRationale: h.dr, explain: h.explain,
+    });
+  }
+
+  return { items, figures };
+}
+
+// ---------------------------------------------------------------------------
 // Assemble.
 // ---------------------------------------------------------------------------
 const l1 = buildLevel1();
+const l2 = buildLevel2();
 
 const pack = {
   meta: { id: 'cpm-cc1-g6', subject: 'math', grade: 6, title: 'Field Notes', standards: 'CCSS Math 6 (CPM CC1)', version: 1 },
@@ -463,6 +728,28 @@ const pack = {
         + 'Perimeter measures the boundary.  Area measures the space shut inside that boundary.  They answer '
         + 'different questions, and multiplying two side lengths gives you area, never perimeter.',
     },
+    {
+      id: 'p-naming-shapes',
+      title: 'Naming a shape',
+      docKind: 'field-manual',
+      genre: 'informational',
+      source: 'original',
+      text: 'A triangle takes two names at once, and they answer different questions.  The first name '
+        + 'describes its sides.  Scalene means no two sides match.  Isosceles means exactly two match.  '
+        + 'Equilateral means all three match.  Ticks drawn across two sides are how a figure tells you '
+        + 'they are equal without printing the same number twice.\n\n'
+        + 'The second name describes its corners.  Acute means every corner is smaller than a square '
+        + 'corner.  Right means one corner is exactly square, and a figure marks that with a small '
+        + 'square.  Obtuse means one corner opens wider than square.  A triangle can only ever have one '
+        + 'corner that is right or obtuse, so those names are never shared.\n\n'
+        + 'Quadrilateral names work differently, because they nest inside one another.  A rectangle is '
+        + 'any four-sided shape with four right angles and equal opposite sides.  A rhombus is any '
+        + 'four-sided shape with four equal sides.  A square meets both of those, so a square is a '
+        + 'rectangle and a rhombus at the same time.\n\n'
+        + 'That nesting runs in one direction only.  Every square is a rectangle, but most rectangles '
+        + 'are certainly not squares.  When a question asks for the most exact name available, a wider '
+        + 'name that happens to be true still counts as the wrong answer.',
+    },
   ],
   levels: [
     {
@@ -482,9 +769,26 @@ const pack = {
       },
       itemIds: l1.items.map((i) => i.id),
     },
+    {
+      id: 2,
+      name: 'Name the Shape',
+      goal: 'Name a triangle by its sides and by its angles, and give a quadrilateral its most exact name.',
+      targets: ['math-r5-classify-figures'],
+      lives: 4,
+      questions: 8,
+      briefing: {
+        title: 'Two names, not one',
+        lines: [
+          'A triangle gets TWO names, and they answer different questions.  One describes its sides.  Scalene means no two match, isosceles means exactly two match, equilateral means all three match.',
+          'The other describes its corners.  Acute means every corner is smaller than a square corner.  Right means one corner is exactly square.  Obtuse means one corner opens wider than square.',
+          'Quadrilaterals work differently.  Their names nest inside each other, so a square is also a rectangle and also a rhombus.  When a question asks for the most exact name, a wider name that is still true is the wrong answer.',
+        ],
+      },
+      itemIds: l2.items.map((i) => i.id),
+    },
   ],
-  items: l1.items,
-  figures: l1.figures,
+  items: l1.items.concat(l2.items),
+  figures: l1.figures.concat(l2.figures),
 };
 
 // The interleave rule validate-pack enforces: the first `questions` ids must cover every item type
