@@ -275,13 +275,23 @@ try {
       /cannot serve|Nothing to queue/i.test(unserved.cardText), unserved.cardText.slice(0, 200));
 
     // ---- a lesson whose topics exist but which also has gaps names BOTH ----
+    // Chosen from the crosswalk, not named here. This used to pin 1.1.3, the lesson Niall's homework
+    // came from, which was the obvious choice right up until the pack served all four of its targets
+    // and closed its last gap. Same lesson as the unserved case above: a fixture that encodes the
+    // backlog turns finished work into a red build.
     const partial = await page.evaluate(() => {
-      Save.setCurriculum({ lesson: '1.1.3', autoAdvance: false });
+      const row = (Curriculum.data.lessons || []).find((l) => (l.gaps || []).length && (l.moduleTopics || []).length);
+      if (!row) return { noPartialLessonLeft: true };
+      Save.setCurriculum({ lesson: row.lesson, autoAdvance: false });
       renderMissionCard();
-      return (document.getElementById('mission-body') || {}).textContent.replace(/\s+/g, ' ');
+      return { lesson: row.lesson, text: (document.getElementById('mission-body') || {}).textContent.replace(/\s+/g, ' ') };
     });
+    check('ARMING: the crosswalk still has a lesson that is partly served and partly not',
+      !partial.noPartialLessonLeft,
+      'no lesson has both a servable topic and an open gap, so the both-at-once case cannot be tested');
     check('a partly-served lesson still names its gaps on the card',
-      /Not covered yet/i.test(partial) && /warm-up|this lesson|needs work/i.test(partial), partial.slice(0, 200));
+      /Not covered yet/i.test(partial.text || '') && /warm-up|this lesson|needs work/i.test(partial.text || ''),
+      `${partial.lesson}: ${String(partial.text || '').slice(0, 200)}`);
 
     // ---- NEGATIVE CONTROL: the assembler CAN report an empty mission ----
     const emptyCtl = await page.evaluate(() => {

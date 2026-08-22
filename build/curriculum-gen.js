@@ -490,7 +490,9 @@ const STANDALONE = [
        + 'exactly, emitted at about 29% of F1 Apex Decimals Grade 5 level 1. Problem 1-20b is words '
        + 'back into decimals, and every one of that generator\'s four options is a word form, so the '
        + 'reverse direction cannot be drawn at all.',
-    gaps: ['read a word form and pick the decimal'],
+    // WP2 level 3 landed 26-0822: decword-to-digits is exactly problem 1-20b's direction, "Which
+    // number is 'three and twenty-four hundredths'?", 16 items in packs/cpm-cc1-g6.json.
+    gaps: [{ text: 'read a word form and pick the decimal', closedBy: 'decword-to-digits' }],
   },
 ];
 
