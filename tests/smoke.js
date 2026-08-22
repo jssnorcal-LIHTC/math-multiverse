@@ -116,8 +116,24 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
         cards: e.querySelectorAll('.module-card').length,
       })));
       const mathShelf = shelfCounts.find((s) => s.subject === 'math');
+      // The math shelf is the six MODULES plus whatever math packs the manifest declares FOR THIS
+      // GRADE. It was six-and-only-six until 26-0822, because buildShelves hard-emptied its packs
+      // array and a `subject: 'math'` pack could load and then appear nowhere. The expected count
+      // is now read off the live registry rather than hard-coded, so the first real math pack does
+      // not have to edit this line -- and the fixture controls below keep the check armed while
+      // there is still no such pack to count.
+      const mathPacksThisGrade = await page.evaluate((g) => {
+        if (typeof SHELVES === 'undefined') return null;
+        const sh = SHELVES.find((s) => s.subject === 'math');
+        return sh ? (sh.packs || []).filter((p) => p.grade === g).length : null;
+      }, grade);
+      if (mathPacksThisGrade === null) problems.push(`grade ${grade}: SHELVES has no math shelf in the registry`);
+      const wantMathCards = 6 + (mathPacksThisGrade || 0);
       if (!mathShelf) problems.push(`grade ${grade}: no math shelf rendered`);
-      else if (mathShelf.cards !== 6) problems.push(`grade ${grade}: math shelf expected 6 cards, got ${mathShelf.cards}`);
+      else if (mathShelf.cards !== wantMathCards) {
+        problems.push(`grade ${grade}: math shelf expected ${wantMathCards} card(s) `
+          + `(6 modules + ${mathPacksThisGrade} math pack(s) for this grade), got ${mathShelf.cards}`);
+      }
 
       // Assert what the cards ARE, not only how many, so a pack landing on the wrong shelf is caught by
       // name rather than by arithmetic. Checked per subject shelf, keyed off PACK_SHELVES below rather
@@ -146,6 +162,89 @@ const RESOURCE_NOISE = /Failed to load resource|net::|ERR_|favicon|status of (4|
       const mathTitles = await titlesOn('math');
       const strays = mathTitles.filter((t) => ALL_PACK_TITLES.includes(t));
       if (strays.length) problems.push(`grade ${grade}: pack card(s) [${strays.join(', ')}] sitting on the math shelf`);
+
+      // ---- WP3: the math shelf renders math packs, with its own positive and negative controls ----
+      //
+      // No math pack ships yet, so the assertion above has zero real targets to count and would
+      // report clean whether the shelf renders math packs or still hard-empties them -- exactly the
+      // silent-clean-on-nothing that constraint 12 bans. These two fixtures arm it: a synthetic
+      // grade-6 math pack MUST appear, after the six worlds, and a synthetic grade-5 one MUST NOT
+      // appear while grade 6 is on screen.
+      //
+      // The fixtures go in through buildShelves(manifest), NOT by pushing onto the live registry.
+      // The defect this covers lived in buildShelves, which hard-emptied the math shelf's `packs`
+      // array; a fixture pushed straight onto SHELVES lands AFTER that line has already run, so it
+      // exercises renderLauncher only and reports clean with the defect fully present. Measured:
+      // an earlier version of this control did exactly that and passed against a deliberately
+      // reverted buildShelves. Driving the real manifest path is what makes it a control.
+      {
+        const FIX_ON = 'ZZ Fixture Math Pack (this grade)';
+        const FIX_OFF = 'ZZ Fixture Math Pack (other grade)';
+        const fx = await page.evaluate(({ g, on, off }) => {
+          if (typeof SHELVES === 'undefined') return { ok: false, why: 'SHELVES is not reachable' };
+          // Reconstruct the real manifest from the live registry. buildShelves only groups by
+          // subject and preserves within-subject order, so rebuilding from this restores SHELVES
+          // exactly; the identity assertion below proves it rather than assuming it.
+          const realPacks = SHELVES.flatMap((s) => s.packs || []);
+          const idsBefore = SHELVES.map((s) => s.subject + ':' + (s.packs || []).map((p) => p.id).join(',')).join('|');
+          const mk = (title, gr) => ({
+            id: 'zz-fixture-g' + gr, subject: 'math', subjectLabel: 'Math', grade: gr, title,
+            standards: 'CCSS 6', icon: '?', color: '#888', description: 'fixture', levels: 6,
+            grandGoal: 'fixture', unlocked: true,
+          });
+          buildShelves({ version: 1, packs: realPacks.concat([mk(on, g), mk(off, g === 6 ? 5 : 6)]) });
+          const registryMath = (SHELVES.find((s) => s.subject === 'math') || { packs: [] }).packs.map((p) => p.title);
+          renderLauncher();
+          const titles = [...document.querySelectorAll('.subject-shelf[data-subject="math"] .mc-title')].map((e) => e.textContent.trim());
+          const otherShelves = [...document.querySelectorAll('.subject-shelf:not([data-subject="math"]) .mc-title')].map((e) => e.textContent.trim());
+
+          buildShelves({ version: 1, packs: realPacks });  // put the real registry back
+          renderLauncher();
+          const after = [...document.querySelectorAll('.subject-shelf[data-subject="math"] .mc-title')].map((e) => e.textContent.trim());
+          const idsAfter = SHELVES.map((s) => s.subject + ':' + (s.packs || []).map((p) => p.id).join(',')).join('|');
+          return { ok: true, titles, otherShelves, after, registryMath, restored: idsBefore === idsAfter, modules: MODULES.length };
+        }, { g: grade, on: FIX_ON, off: FIX_OFF });
+
+        if (!fx.ok) {
+          problems.push(`grade ${grade}: math-pack fixture could not run (${fx.why}), so the math shelf's pack rendering was NOT measured`);
+        } else {
+          // POSITIVE, half one: buildShelves must carry a subject:"math" pack into the registry at
+          // all. This is the half that the hard-emptied `packs: []` broke, and the half a fixture
+          // pushed straight onto SHELVES can never see.
+          if (!fx.registryMath.includes(FIX_ON) || !fx.registryMath.includes(FIX_OFF)) {
+            problems.push(`grade ${grade}: POSITIVE CONTROL failed in buildShelves -- a subject:"math" `
+              + `pack in the manifest did not reach the math shelf's registry entry. Registry held `
+              + `[${fx.registryMath.join(', ')}]. This is the defect where a math pack loads and appears nowhere.`);
+          }
+          // POSITIVE, half two: the same-grade pack renders, and it renders BELOW the six worlds.
+          const at = fx.titles.indexOf(FIX_ON);
+          if (at < 0) {
+            problems.push(`grade ${grade}: POSITIVE CONTROL failed in renderLauncher -- a subject:"math" grade-${grade} pack `
+              + `did not render on the math shelf at all. Shelf showed [${fx.titles.join(', ')}].`);
+          } else if (at < fx.modules) {
+            problems.push(`grade ${grade}: a math pack rendered at position ${at + 1}, above one of the six `
+              + 'worlds. Justin\'s 26-0725 call is that the six worlds stay at the top.');
+          }
+          // NEGATIVE: the other-grade pack must not render anywhere.
+          if (fx.titles.includes(FIX_OFF)) {
+            problems.push(`grade ${grade}: NEGATIVE CONTROL failed -- an off-grade math pack rendered on the `
+              + 'math shelf, so the grade filter is not reaching math packs');
+          }
+          if (fx.otherShelves.includes(FIX_ON) || fx.otherShelves.includes(FIX_OFF)) {
+            problems.push(`grade ${grade}: a math fixture pack rendered on a non-math shelf`);
+          }
+          // And the fixtures must leave nothing behind, or every later assertion is measuring them.
+          if (fx.after.includes(FIX_ON) || fx.after.includes(FIX_OFF)) {
+            problems.push(`grade ${grade}: the math-pack fixtures survived teardown and are still on the shelf`);
+          }
+          if (!fx.restored) {
+            problems.push(`grade ${grade}: rebuilding SHELVES from the live registry did not reproduce it `
+              + 'byte-for-byte, so the fixture teardown left the registry altered');
+          }
+          note(`grade ${grade}: math-pack controls ok (buildShelves carried both fixtures into the registry, `
+            + `positive renders at position ${at + 1} of ${fx.titles.length}, off-grade absent, registry restored)`);
+        }
+      }
 
       if (grade === 6) {
         const soon = await page.$$eval('#module-grid .module-card', (els) => els.filter((e) => /coming soon/i.test(e.textContent)).length);
