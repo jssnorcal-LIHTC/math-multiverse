@@ -83,3 +83,9 @@ jobs:
 
       - name: Reading-line tracker (tap a line, it stays lit; line geometry, reflow; 6 controls)
         run: node tests/reading-line.js
+
+      - name: Prose clarity (per-pack long-sentence ratchet, briefing ceiling; 3 controls)
+        run: node tests/prose-clarity.js
+
+      - name: Level briefing (shows before the first question, Begin on screen and 44px; 2 controls)
+        run: node tests/level-briefing.js

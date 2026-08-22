@@ -1,1790 +1,1795 @@
 {
-  "packId": "outpost-protocol-g6",
-  "model": "claude-sonnet-5",
-  "records": [
-    {
-      "itemId": "t1-ebsr-what-is-a-subsystem",
-      "itemHash": "adb2e1d44644976f",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-ebsr-the-bigger-job",
-      "itemHash": "69af5aea0f37faa3",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-ebsr-dim-light-panels",
-      "itemHash": "3783c4c9f0ef1dde",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-ebsr-why-this-example",
-      "itemHash": "0d08a3039d356adf",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-ms-life-support-organized",
-      "itemHash": "19726081c6260f6b",
-      "blind": [
-        0,
-        1,
-        3
-      ],
-      "authored": [
-        0,
-        1,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-hot-four-definitions",
-      "itemHash": "aed85e7977fe19e5",
-      "blind": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "authored": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-hot-ripple-examples",
-      "itemHash": "775a25599a513820",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-cloze-interaction-def",
-      "itemHash": "737a4c1fde624b68",
-      "blind": [
-        1
-      ],
-      "authored": [
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-mc-smallest-piece",
-      "itemHash": "41d3702de13f21ab",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-mc-two-events-connected",
-      "itemHash": "69f2c36dacbcfb28",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-mc-nested-correctly",
-      "itemHash": "c6fccd7294f288fc",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-order-scale-of-systems",
-      "itemHash": "1c0dfbe5ff7650bb",
-      "blind": [
-        1,
-        2,
-        4,
-        0,
-        3
-      ],
-      "authored": [
-        1,
-        2,
-        4,
-        0,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-ebsr-what-is-ruled-out",
-      "itemHash": "f11f5f7f2c7ef7ba",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-ebsr-real-cause-of-slip",
-      "itemHash": "757fa00f6b0460e5",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-ebsr-why-send-an-operative",
-      "itemHash": "a6b1c9b0a8d15415",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-ebsr-why-nothing-else-failed",
-      "itemHash": "caef08d5a004d15e",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-ms-why-oxygen-slipped",
-      "itemHash": "0c469da8af7e0e97",
-      "blind": [
-        0,
-        2,
-        4
-      ],
-      "authored": [
-        0,
-        2,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-hot-latest-drift-readings",
-      "itemHash": "54e0ae5c7a162e42",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-hot-dust-stayed-contained",
-      "itemHash": "a8b97378f420db2b",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-cloze-component-def",
-      "itemHash": "18234f1a01d03129",
-      "blind": [
-        0
-      ],
-      "authored": [
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-mc-oxygen-change",
-      "itemHash": "a107eb0427c1a50c",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-mc-normal-drift-phrase",
-      "itemHash": "e91fe726554b6d94",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-mc-dust-on-a-different-part",
-      "itemHash": "463de7d4d1039017",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-match-subsystem-status",
-      "itemHash": "04300c12cdc841d0",
-      "blind": [
-        2,
-        1,
-        0
-      ],
-      "authored": [
-        2,
-        1,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-ebsr-what-happens-next",
-      "itemHash": "b3acb1dae7f53713",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-ebsr-why-rain-forms",
-      "itemHash": "037b2e8f9d7d48dd",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-ebsr-earliest-warning-sign",
-      "itemHash": "98da599d90ff9912",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-ebsr-why-track-all-four",
-      "itemHash": "1e1ca37703ae185e",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-ms-signs-of-a-front",
-      "itemHash": "33358c4d6bbc5758",
-      "blind": [
-        1,
-        3,
-        5
-      ],
-      "authored": [
-        1,
-        3,
-        5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-hot-storm-signals-not-colony",
-      "itemHash": "3c6348ea72e9fdcc",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-hot-cold-air-mechanism",
-      "itemHash": "3d1152d4b4ff0ef0",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-cloze-air-mass-def",
-      "itemHash": "9b1731c520afbd8b",
-      "blind": [
-        2
-      ],
-      "authored": [
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-mc-what-is-a-front",
-      "itemHash": "9ac35b011272cc70",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-mc-strongest-signal-day",
-      "itemHash": "b22f9f84f41145f7",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-mc-rising-pressure-transfer",
-      "itemHash": "199ccce20aeff8eb",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-order-front-stages",
-      "itemHash": "a1fd8f92a5b103d5",
-      "blind": [
-        1,
-        3,
-        2,
-        0
-      ],
-      "authored": [
-        1,
-        3,
-        2,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-ebsr-why-different-climates",
-      "itemHash": "145f30bee490ef5d",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-ebsr-why-cairn-bay-swings-less",
-      "itemHash": "6f405ccf88842e49",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-ebsr-why-trust-the-average",
-      "itemHash": "72a9829407bb0754",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-ebsr-which-post-swings-more",
-      "itemHash": "c5a5fcaccaed4500",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-ms-why-cairn-bay-is-wetter",
-      "itemHash": "1fdd825b73a1d311",
-      "blind": [
-        0,
-        1,
-        4
-      ],
-      "authored": [
-        0,
-        1,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-hot-weather-vs-climate-def",
-      "itemHash": "2a6b13b6799ef4ae",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-hot-wind-and-current-mechanisms",
-      "itemHash": "5f71fa8c2333a54a",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-cloze-unequal-heating",
-      "itemHash": "c73be0536a568896",
-      "blind": [
-        1
-      ],
-      "authored": [
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-mc-steady-crop-post",
-      "itemHash": "16b1103b9103227e",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-mc-weather-word",
-      "itemHash": "d2d2d0c0879c5b74",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-mc-third-post-transfer",
-      "itemHash": "ed2902e452a6606e",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-match-pattern-to-cause",
-      "itemHash": "e1e4f8409f98ca16",
-      "blind": [
-        1,
-        3,
-        0,
-        2
-      ],
-      "authored": [
-        1,
-        3,
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-ebsr-real-cause-of-drop",
-      "itemHash": "01f9fa6f4d651c32",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-ebsr-two-different-clocks",
-      "itemHash": "1f8b956bff0ce12d",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-ebsr-steady-vs-bouncy",
-      "itemHash": "885e2349d83a1b28",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-ebsr-one-planetary-pattern",
-      "itemHash": "0e5ce63a5fff330e",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-ms-the-adaptation-limit",
-      "itemHash": "e041b6c279d0c3f0",
-      "blind": [
-        1,
-        2,
-        5
-      ],
-      "authored": [
-        1,
-        2,
-        5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-hot-gap-not-date",
-      "itemHash": "8cb671500fa50062",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-hot-bouncing-vs-steady",
-      "itemHash": "7774ad780ecb366d",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-cloze-herring-clock",
-      "itemHash": "3d1dc5314e6a406f",
-      "blind": [
-        0
-      ],
-      "authored": [
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-mc-herring-vs-nesting-shift",
-      "itemHash": "e6c29a814df9c861",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-mc-bouncing-instrument-transfer",
-      "itemHash": "70d05294cade9be3",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-mc-why-one-station-cannot-see-it",
-      "itemHash": "f598b80303dc3b4d",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ebsr-which-proposal-lacks-authority",
-      "itemHash": "3f0f41bedfb4c33e",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ebsr-why-proposal-b-still-fails",
-      "itemHash": "4d3ab81621252c12",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ebsr-one-week-is-not-climate",
-      "itemHash": "158e6fbe97b10260",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ebsr-one-year-is-not-proof",
-      "itemHash": "2410e80d622d89d0",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ms-proposals-against-constraints",
-      "itemHash": "1896bfe3d5c4869d",
-      "blind": [
-        0,
-        3,
-        4
-      ],
-      "authored": [
-        0,
-        3,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-hot-three-constraints",
-      "itemHash": "b255c9d9a0b1aa00",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-hot-proposal-flaws",
-      "itemHash": "851c0d654f8fb9a3",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-cloze-third-constraint",
-      "itemHash": "5b5cc6ddea975253",
-      "blind": [
-        2
-      ],
-      "authored": [
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-mc-first-constraint",
-      "itemHash": "369982fae4892620",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-mc-fishery-regulation-transfer",
-      "itemHash": "b31dbbc15c4d2d9a",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-mc-fish-timing-interaction",
-      "itemHash": "4e8a503fbc7652e4",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-ebsr-what-a-boundary-is",
-      "itemHash": "6c49fd97d9617a58",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-ebsr-why-the-same-air-changes-names",
-      "itemHash": "97ec44f0726b9bbc",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-ebsr-what-makes-a-handoff-an-interaction",
-      "itemHash": "b412eeed7096f726",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-ebsr-sealed-boundary-what-crosses",
-      "itemHash": "10db31dd68379bfc",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-ms-boundary-inputs-outputs",
-      "itemHash": "2df07ddd8c6b809b",
-      "blind": [
-        0,
-        2,
-        5
-      ],
-      "authored": [
-        0,
-        2,
-        5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-hot-same-air-two-boundaries",
-      "itemHash": "3f0c4b338150f1a3",
-      "blind": [
-        1,
-        4
-      ],
-      "authored": [
-        1,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-hot-sealed-boundary-crossings",
-      "itemHash": "acb867efe4b3539e",
-      "blind": [
-        2,
-        3
-      ],
-      "authored": [
-        2,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-cloze-input-def",
-      "itemHash": "02c2ede8276fb4d3",
-      "blind": [
-        1
-      ],
-      "authored": [
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-mc-move-the-line",
-      "itemHash": "f88d62be11d16aff",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-mc-what-a-seal-stops",
-      "itemHash": "933effc74e3b8345",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-mc-name-the-boundary-first",
-      "itemHash": "1662819bb361d5a8",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t1-order-water-path",
-      "itemHash": "a5e2abbdab70a373",
-      "blind": [
-        1,
-        3,
-        0,
-        2
-      ],
-      "authored": [
-        1,
-        3,
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-ebsr-why-the-order-skips-water",
-      "itemHash": "5c36bd7c5070b1fc",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-ebsr-what-closes-the-order",
-      "itemHash": "d2974cb0f9e3beaa",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-ebsr-the-failure-that-had-no-sensor",
-      "itemHash": "233e1940f84c9ba6",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-ebsr-why-a-standing-schedule",
-      "itemHash": "ead81ce56858e925",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-ms-what-the-order-states",
-      "itemHash": "f5367a599ddd54d3",
-      "blind": [
-        1,
-        2,
-        4
-      ],
-      "authored": [
-        1,
-        2,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-hot-evidence-not-conclusion",
-      "itemHash": "77b7d1ca0684b9a8",
-      "blind": [
-        0,
-        2
-      ],
-      "authored": [
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-hot-closes-on-evidence",
-      "itemHash": "30d451844f454134",
-      "blind": [
-        1,
-        3,
-        4
-      ],
-      "authored": [
-        1,
-        3,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-cloze-effort-versus-evidence",
-      "itemHash": "0b5f88d9c51448b7",
-      "blind": [
-        2
-      ],
-      "authored": [
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-mc-two-week-schedule",
-      "itemHash": "7debaac1a9b2a475",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-mc-panel-clean-no-recovery",
-      "itemHash": "0e95d816777f9d2b",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-mc-what-the-sensors-missed",
-      "itemHash": "4cd80d7b35a28eb4",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-match-order-status",
-      "itemHash": "380e9aeccac23dbe",
-      "blind": [
-        1,
-        2,
-        0
-      ],
-      "authored": [
-        1,
-        2,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-ebsr-air-behind-the-front",
-      "itemHash": "d8230fbf2312e8a3",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-ebsr-veer-consistency",
-      "itemHash": "bddaf81fcb638f29",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-ms-after-the-front-passed",
-      "itemHash": "8a232720046a4fb1",
-      "blind": [
-        0,
-        2,
-        3
-      ],
-      "authored": [
-        0,
-        2,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-ebsr-one-reading-is-not-a-warning",
-      "itemHash": "10b05cc9601410af",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-ebsr-judged-on-the-log",
-      "itemHash": "cc4f734f95e1ceb0",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-hot-warning-before-the-weather",
-      "itemHash": "d6b25321e20cfc31",
-      "blind": [
-        1,
-        4
-      ],
-      "authored": [
-        1,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-hot-rule-not-example",
-      "itemHash": "038323d0c3e34ac5",
-      "blind": [
-        0,
-        2
-      ],
-      "authored": [
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-cloze-source-region",
-      "itemHash": "619b186a49b4d587",
-      "blind": [
-        1
-      ],
-      "authored": [
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-mc-why-not-the-first-morning",
-      "itemHash": "37660d6b5b6e2fb6",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-mc-one-sharp-fall",
-      "itemHash": "7a975111b07cad03",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-mc-cost-of-the-two-mistakes",
-      "itemHash": "5777603067648d29",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-order-week-eleven-stages",
-      "itemHash": "a46dd665e99a7306",
-      "blind": [
-        0,
-        2,
-        3,
-        1
-      ],
-      "authored": [
-        0,
-        2,
-        3,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-ebsr-match-cause-to-column",
-      "itemHash": "d5fbd44a6afa9dad",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-ebsr-what-a-baseline-is",
-      "itemHash": "455b6c7066e44dbd",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-ms-reading-the-table",
-      "itemHash": "bf2df3bc916dd61c",
-      "blind": [
-        1,
-        3,
-        4
-      ],
-      "authored": [
-        1,
-        3,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-ebsr-why-two-kits",
-      "itemHash": "c0aface96c6d3dc7",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-ebsr-arrival-week-trap",
-      "itemHash": "9708d8f7d9623762",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-hot-cause-to-column",
-      "itemHash": "1b32ff023168d9dd",
-      "blind": [
-        2,
-        3
-      ],
-      "authored": [
-        2,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-hot-cause-not-consequence",
-      "itemHash": "d488f3915e7d83a2",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-cloze-baseline-def",
-      "itemHash": "00e6094d030172da",
-      "blind": [
-        0
-      ],
-      "authored": [
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-mc-swapped-cause-report",
-      "itemHash": "4ff2515f6e9b6fdf",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-mc-same-average-different-range",
-      "itemHash": "e3ca3c55b1dd25e7",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-mc-what-the-gear-list-follows",
-      "itemHash": "e564f90d36a40841",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-match-table-vocabulary",
-      "itemHash": "ffcfc41ce539873e",
-      "blind": [
-        2,
-        0,
-        1
-      ],
-      "authored": [
-        2,
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-ebsr-why-hatch-not-laying",
-      "itemHash": "e19e445072e3fb10",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-ebsr-two-clocks-speeds",
-      "itemHash": "9a99991abe463c18",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-ebsr-what-an-adaptation-limit-is",
-      "itemHash": "900d58c4d94366c7",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-ebsr-what-recovery-looks-like",
-      "itemHash": "18436653e633c2c0",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-ms-hatch-column",
-      "itemHash": "26e79f0f3eed7149",
-      "blind": [
-        2,
-        3,
-        5
-      ],
-      "authored": [
-        2,
-        3,
-        5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-hot-which-date-matters",
-      "itemHash": "db12d0a72d9d3770",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-hot-two-cues",
-      "itemHash": "58275362c5c3791d",
-      "blind": [
-        2,
-        3
-      ],
-      "authored": [
-        2,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-cloze-cue-limit",
-      "itemHash": "cc2318624dc648d0",
-      "blind": [
-        2
-      ],
-      "authored": [
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-mc-twentieth-season-hatch",
-      "itemHash": "282c6108011ae92d",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-mc-recovery-standard",
-      "itemHash": "c0a482ee81dfa104",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-mc-day-length-transfer",
-      "itemHash": "e05caebcb062f754",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ebsr-why-proposal-d-fails",
-      "itemHash": "4b54b72e1e52ebbf",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ebsr-gates-not-scores",
-      "itemHash": "5757dfe35b329b09",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ebsr-asking-for-an-easier-constraint",
-      "itemHash": "32908876f8d94d6b",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ms-board-method",
-      "itemHash": "0260f86db856c5b9",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ebsr-warning-rule-as-design",
-      "itemHash": "9f5df3478ce7ade8",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-hot-failing-one-gate",
-      "itemHash": "81f79d6195d682fd",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-hot-combining-collects",
-      "itemHash": "34f8e5f12983e212",
-      "blind": [
-        0,
-        1,
-        3
-      ],
-      "authored": [
-        0,
-        1,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-cloze-constraint-def",
-      "itemHash": "9a4207ddc9b4c631",
-      "blind": [
-        0
-      ],
-      "authored": [
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-mc-proposal-d-outcome",
-      "itemHash": "672033bff356770f",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-mc-two-more-proposals",
-      "itemHash": "7501d40e6b4aa2fd",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-mc-what-the-board-is-for",
-      "itemHash": "91dd0750aa90a07d",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-vis-trace-direction",
-      "itemHash": "a21a8896d8fc6d67",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-vis-plate-shows",
-      "itemHash": "ff3a697252d9e119",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-vis-which-is-component",
-      "itemHash": "5ae800db3e656a40",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-vis-nesting-order",
-      "itemHash": "4b2a6a7a9d289e07",
-      "blind": [
-        1,
-        0,
-        2
-      ],
-      "authored": [
-        1,
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-vis-which-climbs",
-      "itemHash": "d65da079291a8259",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-vis-read-the-values",
-      "itemHash": "0539b43e8f701fe8",
-      "blind": [
-        0,
-        2,
-        0
-      ],
-      "authored": [
-        0,
-        2,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-vis-two-scales",
-      "itemHash": "66cd8c986015ef6b",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-vis-where-the-cartridge-sits",
-      "itemHash": "e2524eaf5bb31b0f",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-vis-what-happens-to-warm-air",
-      "itemHash": "7e2b8d6428ed0172",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-vis-cold-air-slides",
-      "itemHash": "54a17cfa0e1674fc",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-vis-front-symbols",
-      "itemHash": "f78516ac4f8e17ed",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-vis-map-shows",
-      "itemHash": "f8719e6fb2c5b410",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-vis-which-post-is-wetter",
-      "itemHash": "0dacb04130d88f31",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-vis-read-both-panels",
-      "itemHash": "9fbe6e64bb0896d9",
-      "blind": [
-        0,
-        1,
-        0
-      ],
-      "authored": [
-        0,
-        1,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-vis-match-the-post",
-      "itemHash": "66ac613edebbc44a",
-      "blind": [
-        0,
-        1,
-        0
-      ],
-      "authored": [
-        0,
-        1,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-vis-why-the-coast-is-steadier",
-      "itemHash": "2eae7ab9dc10c821",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-vis-what-the-line-does",
-      "itemHash": "7e6431a1a145c26c",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-vis-fledge-values",
-      "itemHash": "f2ec694f2b4e69a5",
-      "blind": [
-        1,
-        0,
-        0
-      ],
-      "authored": [
-        1,
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-vis-chart-shows",
-      "itemHash": "a406385a36a80668",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-vis-one-station-alone",
-      "itemHash": "c5ef7f63f69194ed",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-vis-which-proposal-passes",
-      "itemHash": "24a5b2a5246ee647",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-vis-panel-shows",
-      "itemHash": "93165f18b87d9233",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-vis-order-the-tests",
-      "itemHash": "90573e1928a99e3e",
-      "blind": [
-        1,
-        0,
-        2
-      ],
-      "authored": [
-        1,
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-vis-two-figures-together",
-      "itemHash": "82ee3beee21dcd09",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    }
-  ]
+ "packId": "outpost-protocol-g6",
+ "model": "claude-sonnet-5",
+ "records": [
+  {
+   "itemId": "t1-ebsr-what-is-a-subsystem",
+   "itemHash": "1d54ad49803f9eb4",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-ebsr-the-bigger-job",
+   "itemHash": "e54bd08780ced4e7",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-ebsr-dim-light-panels",
+   "itemHash": "eb0dda0aadad6245",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-ebsr-why-this-example",
+   "itemHash": "86d1a2218bd9aba9",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-ms-life-support-organized",
+   "itemHash": "565a5828af0adaf4",
+   "blind": [
+    0,
+    1,
+    3
+   ],
+   "authored": [
+    0,
+    1,
+    3
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-hot-four-definitions",
+   "itemHash": "4df2e0d72c16e059",
+   "blind": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "authored": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-hot-ripple-examples",
+   "itemHash": "29c58d10d1631db9",
+   "blind": [
+    0,
+    1
+   ],
+   "authored": [
+    0,
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-cloze-interaction-def",
+   "itemHash": "82c6f7a9bf2632dc",
+   "blind": [
+    1
+   ],
+   "authored": [
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-mc-smallest-piece",
+   "itemHash": "d6dd34a0d47da9ad",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-mc-two-events-connected",
+   "itemHash": "55595aab6dbcd300",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-mc-nested-correctly",
+   "itemHash": "627846963acd1287",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-order-scale-of-systems",
+   "itemHash": "a03af9071e902f5b",
+   "blind": [
+    1,
+    2,
+    4,
+    0,
+    3
+   ],
+   "authored": [
+    1,
+    2,
+    4,
+    0,
+    3
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-ebsr-what-is-ruled-out",
+   "itemHash": "f11f5f7f2c7ef7ba",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-ebsr-real-cause-of-slip",
+   "itemHash": "d7f309d5ffe7f3a5",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-ebsr-why-send-an-operative",
+   "itemHash": "a6b1c9b0a8d15415",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-ebsr-why-nothing-else-failed",
+   "itemHash": "cb5df7363fe8722e",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-ms-why-oxygen-slipped",
+   "itemHash": "a9721055b616f2af",
+   "blind": [
+    0,
+    2,
+    4
+   ],
+   "authored": [
+    0,
+    2,
+    4
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-hot-latest-drift-readings",
+   "itemHash": "54e0ae5c7a162e42",
+   "blind": [
+    0,
+    1
+   ],
+   "authored": [
+    0,
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-hot-dust-stayed-contained",
+   "itemHash": "c0594d2daf15d44b",
+   "blind": [
+    0,
+    1
+   ],
+   "authored": [
+    0,
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-cloze-component-def",
+   "itemHash": "1d3d04f221fdea4b",
+   "blind": [
+    0
+   ],
+   "authored": [
+    0
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-mc-oxygen-change",
+   "itemHash": "a107eb0427c1a50c",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-mc-normal-drift-phrase",
+   "itemHash": "e91fe726554b6d94",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-mc-dust-on-a-different-part",
+   "itemHash": "0524661e54d454c7",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-match-subsystem-status",
+   "itemHash": "87b5fc18b7bde06a",
+   "blind": [
+    2,
+    1,
+    0
+   ],
+   "authored": [
+    2,
+    1,
+    0
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-ebsr-what-happens-next",
+   "itemHash": "b3acb1dae7f53713",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-ebsr-why-rain-forms",
+   "itemHash": "f7288d24354e222b",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-ebsr-earliest-warning-sign",
+   "itemHash": "98da599d90ff9912",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-ebsr-why-track-all-four",
+   "itemHash": "b702ef717bf21531",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-ms-signs-of-a-front",
+   "itemHash": "2e7d81ea6d8eb522",
+   "blind": [
+    1,
+    3,
+    5
+   ],
+   "authored": [
+    1,
+    3,
+    5
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-hot-storm-signals-not-colony",
+   "itemHash": "3c6348ea72e9fdcc",
+   "blind": [
+    0,
+    1,
+    2
+   ],
+   "authored": [
+    0,
+    1,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-hot-cold-air-mechanism",
+   "itemHash": "3f5c88d7551194eb",
+   "blind": [
+    0,
+    1
+   ],
+   "authored": [
+    0,
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-cloze-air-mass-def",
+   "itemHash": "57bb0e8dc4653de2",
+   "blind": [
+    2
+   ],
+   "authored": [
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-mc-what-is-a-front",
+   "itemHash": "2c9fa4e024ad4b27",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-mc-strongest-signal-day",
+   "itemHash": "b22f9f84f41145f7",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-mc-rising-pressure-transfer",
+   "itemHash": "7d212f43d94364e5",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-order-front-stages",
+   "itemHash": "18ab06e6c6333962",
+   "blind": [
+    1,
+    3,
+    2,
+    0
+   ],
+   "authored": [
+    1,
+    3,
+    2,
+    0
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-ebsr-why-different-climates",
+   "itemHash": "145f30bee490ef5d",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-ebsr-why-cairn-bay-swings-less",
+   "itemHash": "6f405ccf88842e49",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-ebsr-why-trust-the-average",
+   "itemHash": "72a9829407bb0754",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-ebsr-which-post-swings-more",
+   "itemHash": "c5a5fcaccaed4500",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-ms-why-cairn-bay-is-wetter",
+   "itemHash": "1fdd825b73a1d311",
+   "blind": [
+    0,
+    1,
+    4
+   ],
+   "authored": [
+    0,
+    1,
+    4
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-hot-weather-vs-climate-def",
+   "itemHash": "2a6b13b6799ef4ae",
+   "blind": [
+    0,
+    1
+   ],
+   "authored": [
+    0,
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-hot-wind-and-current-mechanisms",
+   "itemHash": "5f71fa8c2333a54a",
+   "blind": [
+    0,
+    1
+   ],
+   "authored": [
+    0,
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-cloze-unequal-heating",
+   "itemHash": "c73be0536a568896",
+   "blind": [
+    1
+   ],
+   "authored": [
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-mc-steady-crop-post",
+   "itemHash": "16b1103b9103227e",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-mc-weather-word",
+   "itemHash": "d2d2d0c0879c5b74",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-mc-third-post-transfer",
+   "itemHash": "ed2902e452a6606e",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-match-pattern-to-cause",
+   "itemHash": "e1e4f8409f98ca16",
+   "blind": [
+    1,
+    3,
+    0,
+    2
+   ],
+   "authored": [
+    1,
+    3,
+    0,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-ebsr-real-cause-of-drop",
+   "itemHash": "01f9fa6f4d651c32",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-ebsr-two-different-clocks",
+   "itemHash": "1f8b956bff0ce12d",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-ebsr-steady-vs-bouncy",
+   "itemHash": "030e937b23fcc867",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-ebsr-one-planetary-pattern",
+   "itemHash": "62ac41b6ff4cc573",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-ms-the-adaptation-limit",
+   "itemHash": "e041b6c279d0c3f0",
+   "blind": [
+    1,
+    2,
+    5
+   ],
+   "authored": [
+    1,
+    2,
+    5
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-hot-gap-not-date",
+   "itemHash": "8cb671500fa50062",
+   "blind": [
+    0,
+    1
+   ],
+   "authored": [
+    0,
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-hot-bouncing-vs-steady",
+   "itemHash": "84dbcbb6a11f634a",
+   "blind": [
+    0,
+    1
+   ],
+   "authored": [
+    0,
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-cloze-herring-clock",
+   "itemHash": "3d1dc5314e6a406f",
+   "blind": [
+    0
+   ],
+   "authored": [
+    0
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-mc-herring-vs-nesting-shift",
+   "itemHash": "e6c29a814df9c861",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-mc-bouncing-instrument-transfer",
+   "itemHash": "007904a7fd5b71cf",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-mc-why-one-station-cannot-see-it",
+   "itemHash": "3b36d59fbc424808",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-ebsr-which-proposal-lacks-authority",
+   "itemHash": "3f0f41bedfb4c33e",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-ebsr-why-proposal-b-still-fails",
+   "itemHash": "4d3ab81621252c12",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-ebsr-one-week-is-not-climate",
+   "itemHash": "158e6fbe97b10260",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-ebsr-one-year-is-not-proof",
+   "itemHash": "75e14a947bbdef12",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-ms-proposals-against-constraints",
+   "itemHash": "1896bfe3d5c4869d",
+   "blind": [
+    0,
+    3,
+    4
+   ],
+   "authored": [
+    0,
+    3,
+    4
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-hot-three-constraints",
+   "itemHash": "b255c9d9a0b1aa00",
+   "blind": [
+    0,
+    1,
+    2
+   ],
+   "authored": [
+    0,
+    1,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-hot-proposal-flaws",
+   "itemHash": "851c0d654f8fb9a3",
+   "blind": [
+    0,
+    1,
+    2
+   ],
+   "authored": [
+    0,
+    1,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-cloze-third-constraint",
+   "itemHash": "5b5cc6ddea975253",
+   "blind": [
+    2
+   ],
+   "authored": [
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-mc-first-constraint",
+   "itemHash": "369982fae4892620",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-mc-fishery-regulation-transfer",
+   "itemHash": "b31dbbc15c4d2d9a",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-mc-fish-timing-interaction",
+   "itemHash": "d8c7a618ec2bb5e2",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-ebsr-what-a-boundary-is",
+   "itemHash": "04114c6680055cd9",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-ebsr-why-the-same-air-changes-names",
+   "itemHash": "d2cd564b4195658e",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-ebsr-what-makes-a-handoff-an-interaction",
+   "itemHash": "8947f7043483855d",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-ebsr-sealed-boundary-what-crosses",
+   "itemHash": "2378187044f78050",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-ms-boundary-inputs-outputs",
+   "itemHash": "bc044e54878c965e",
+   "blind": [
+    0,
+    2,
+    5
+   ],
+   "authored": [
+    0,
+    2,
+    5
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-hot-same-air-two-boundaries",
+   "itemHash": "c08adf90f7908f53",
+   "blind": [
+    1,
+    4
+   ],
+   "authored": [
+    1,
+    4
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-hot-sealed-boundary-crossings",
+   "itemHash": "1050391f7f2b94c1",
+   "blind": [
+    2,
+    3
+   ],
+   "authored": [
+    2,
+    3
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-cloze-input-def",
+   "itemHash": "657816694f6d577d",
+   "blind": [
+    1
+   ],
+   "authored": [
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-mc-what-a-seal-stops",
+   "itemHash": "b835b18d54642ef9",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-mc-name-the-boundary-first",
+   "itemHash": "f976636df08a9607",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-order-water-path",
+   "itemHash": "aa2960f60dd30bdb",
+   "blind": [
+    1,
+    3,
+    0,
+    2
+   ],
+   "authored": [
+    1,
+    3,
+    0,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-ebsr-air-behind-the-front",
+   "itemHash": "d8230fbf2312e8a3",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-ebsr-veer-consistency",
+   "itemHash": "bddaf81fcb638f29",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-ms-after-the-front-passed",
+   "itemHash": "8a232720046a4fb1",
+   "blind": [
+    0,
+    2,
+    3
+   ],
+   "authored": [
+    0,
+    2,
+    3
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-ebsr-one-reading-is-not-a-warning",
+   "itemHash": "10b05cc9601410af",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-ebsr-judged-on-the-log",
+   "itemHash": "cc4f734f95e1ceb0",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-hot-warning-before-the-weather",
+   "itemHash": "d6b25321e20cfc31",
+   "blind": [
+    1,
+    4
+   ],
+   "authored": [
+    1,
+    4
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-hot-rule-not-example",
+   "itemHash": "038323d0c3e34ac5",
+   "blind": [
+    0,
+    2
+   ],
+   "authored": [
+    0,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-cloze-source-region",
+   "itemHash": "619b186a49b4d587",
+   "blind": [
+    1
+   ],
+   "authored": [
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-mc-why-not-the-first-morning",
+   "itemHash": "37660d6b5b6e2fb6",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-mc-one-sharp-fall",
+   "itemHash": "7a975111b07cad03",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-mc-cost-of-the-two-mistakes",
+   "itemHash": "5777603067648d29",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t3-order-week-eleven-stages",
+   "itemHash": "a46dd665e99a7306",
+   "blind": [
+    0,
+    2,
+    3,
+    1
+   ],
+   "authored": [
+    0,
+    2,
+    3,
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-ebsr-match-cause-to-column",
+   "itemHash": "6c8fe9527d3f4ca3",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-ebsr-what-a-baseline-is",
+   "itemHash": "abdd7ac6a8ab8ad1",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-ms-reading-the-table",
+   "itemHash": "5ac9ef2b2a1f11f1",
+   "blind": [
+    1,
+    3,
+    4
+   ],
+   "authored": [
+    1,
+    3,
+    4
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-ebsr-why-two-kits",
+   "itemHash": "c0aface96c6d3dc7",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-ebsr-arrival-week-trap",
+   "itemHash": "9708d8f7d9623762",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-hot-cause-to-column",
+   "itemHash": "5678f20adc7fc708",
+   "blind": [
+    2,
+    3
+   ],
+   "authored": [
+    2,
+    3
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-hot-cause-not-consequence",
+   "itemHash": "d488f3915e7d83a2",
+   "blind": [
+    1,
+    2
+   ],
+   "authored": [
+    1,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-cloze-baseline-def",
+   "itemHash": "5721c5b33bb9ed0b",
+   "blind": [
+    0
+   ],
+   "authored": [
+    0
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-mc-swapped-cause-report",
+   "itemHash": "38913dbba689411c",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-mc-same-average-different-range",
+   "itemHash": "d47707136b77256a",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-mc-what-the-gear-list-follows",
+   "itemHash": "e564f90d36a40841",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t4-match-table-vocabulary",
+   "itemHash": "6b28457e082e6f58",
+   "blind": [
+    2,
+    0,
+    1
+   ],
+   "authored": [
+    2,
+    0,
+    1
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-ebsr-why-hatch-not-laying",
+   "itemHash": "e19e445072e3fb10",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-ebsr-two-clocks-speeds",
+   "itemHash": "9a99991abe463c18",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-ebsr-what-an-adaptation-limit-is",
+   "itemHash": "900d58c4d94366c7",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-ebsr-what-recovery-looks-like",
+   "itemHash": "18436653e633c2c0",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-ms-hatch-column",
+   "itemHash": "26e79f0f3eed7149",
+   "blind": [
+    2,
+    3,
+    5
+   ],
+   "authored": [
+    2,
+    3,
+    5
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-hot-which-date-matters",
+   "itemHash": "db12d0a72d9d3770",
+   "blind": [
+    1,
+    2
+   ],
+   "authored": [
+    1,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-hot-two-cues",
+   "itemHash": "58275362c5c3791d",
+   "blind": [
+    2,
+    3
+   ],
+   "authored": [
+    2,
+    3
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-cloze-cue-limit",
+   "itemHash": "cc2318624dc648d0",
+   "blind": [
+    2
+   ],
+   "authored": [
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-mc-twentieth-season-hatch",
+   "itemHash": "282c6108011ae92d",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-mc-recovery-standard",
+   "itemHash": "c0a482ee81dfa104",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t5-mc-day-length-transfer",
+   "itemHash": "e05caebcb062f754",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-ebsr-why-proposal-d-fails",
+   "itemHash": "4b54b72e1e52ebbf",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-ebsr-gates-not-scores",
+   "itemHash": "5757dfe35b329b09",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-ebsr-asking-for-an-easier-constraint",
+   "itemHash": "32908876f8d94d6b",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-ms-board-method",
+   "itemHash": "0260f86db856c5b9",
+   "blind": [
+    0,
+    1,
+    2
+   ],
+   "authored": [
+    0,
+    1,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-ebsr-warning-rule-as-design",
+   "itemHash": "9f5df3478ce7ade8",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-hot-failing-one-gate",
+   "itemHash": "81f79d6195d682fd",
+   "blind": [
+    1,
+    2
+   ],
+   "authored": [
+    1,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-hot-combining-collects",
+   "itemHash": "34f8e5f12983e212",
+   "blind": [
+    0,
+    1,
+    3
+   ],
+   "authored": [
+    0,
+    1,
+    3
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-cloze-constraint-def",
+   "itemHash": "9a4207ddc9b4c631",
+   "blind": [
+    0
+   ],
+   "authored": [
+    0
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-mc-proposal-d-outcome",
+   "itemHash": "672033bff356770f",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-mc-two-more-proposals",
+   "itemHash": "7501d40e6b4aa2fd",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t6-mc-what-the-board-is-for",
+   "itemHash": "91dd0750aa90a07d",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l1-vis-trace-direction",
+   "itemHash": "d443da4c28f9c900",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l1-vis-plate-shows",
+   "itemHash": "8d3b42e0ee864fb0",
+   "blind": [
+    0,
+    1,
+    2
+   ],
+   "authored": [
+    0,
+    1,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l1-vis-which-is-component",
+   "itemHash": "14833db56946c674",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l2-vis-which-climbs",
+   "itemHash": "d65da079291a8259",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l2-vis-read-the-values",
+   "itemHash": "0539b43e8f701fe8",
+   "blind": [
+    0,
+    2,
+    0
+   ],
+   "authored": [
+    0,
+    2,
+    0
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l2-vis-two-scales",
+   "itemHash": "66cd8c986015ef6b",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l2-vis-where-the-cartridge-sits",
+   "itemHash": "56b36bd5951f6c64",
+   "blind": [
+    0,
+    1,
+    2
+   ],
+   "authored": [
+    0,
+    1,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l3-vis-what-happens-to-warm-air",
+   "itemHash": "04319b611666637b",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l3-vis-cold-air-slides",
+   "itemHash": "c66cb8bfaef7c987",
+   "blind": [
+    0,
+    0
+   ],
+   "authored": [
+    0,
+    0
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l3-vis-front-symbols",
+   "itemHash": "f35eac1dd78809e8",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l3-vis-map-shows",
+   "itemHash": "ba156fc252c974b6",
+   "blind": [
+    0,
+    1,
+    2
+   ],
+   "authored": [
+    0,
+    1,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l4-vis-which-post-is-wetter",
+   "itemHash": "0dacb04130d88f31",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l4-vis-read-both-panels",
+   "itemHash": "9fbe6e64bb0896d9",
+   "blind": [
+    0,
+    1,
+    0
+   ],
+   "authored": [
+    0,
+    1,
+    0
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l4-vis-match-the-post",
+   "itemHash": "66ac613edebbc44a",
+   "blind": [
+    0,
+    1,
+    0
+   ],
+   "authored": [
+    0,
+    1,
+    0
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l4-vis-why-the-coast-is-steadier",
+   "itemHash": "2eae7ab9dc10c821",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l5-vis-what-the-line-does",
+   "itemHash": "7e6431a1a145c26c",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l5-vis-fledge-values",
+   "itemHash": "f2ec694f2b4e69a5",
+   "blind": [
+    1,
+    0,
+    0
+   ],
+   "authored": [
+    1,
+    0,
+    0
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l5-vis-chart-shows",
+   "itemHash": "a406385a36a80668",
+   "blind": [
+    0,
+    1,
+    2
+   ],
+   "authored": [
+    0,
+    1,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l5-vis-one-station-alone",
+   "itemHash": "1a7e6790dfcc0005",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l6-vis-which-proposal-passes",
+   "itemHash": "24a5b2a5246ee647",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l6-vis-panel-shows",
+   "itemHash": "93165f18b87d9233",
+   "blind": [
+    0,
+    1,
+    2
+   ],
+   "authored": [
+    0,
+    1,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l6-vis-order-the-tests",
+   "itemHash": "90573e1928a99e3e",
+   "blind": [
+    1,
+    0,
+    2
+   ],
+   "authored": [
+    1,
+    0,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l6-vis-two-figures-together",
+   "itemHash": "82ee3beee21dcd09",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t1-mc-move-the-line",
+   "itemHash": "178ec82b752884c3",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-ebsr-why-the-order-skips-water",
+   "itemHash": "91dcefa30b49a69b",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-ebsr-what-closes-the-order",
+   "itemHash": "2a1adf8b7b73a52d",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-ebsr-the-failure-that-had-no-sensor",
+   "itemHash": "f691c3a1703ed571",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-ebsr-why-a-standing-schedule",
+   "itemHash": "0d36fae0716083bb",
+   "blind": 3,
+   "authored": 3,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-ms-what-the-order-states",
+   "itemHash": "aa53877d4af56889",
+   "blind": [
+    1,
+    2,
+    4
+   ],
+   "authored": [
+    1,
+    2,
+    4
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-hot-evidence-not-conclusion",
+   "itemHash": "71d729e4272c956d",
+   "blind": [
+    0
+   ],
+   "authored": [
+    0,
+    2
+   ],
+   "confidence": "high",
+   "status": "adjudicated",
+   "note": "The authored key stands.  The stem asks for the TWO sentences that show WHY the water subsystem and the food modules are cleared, and the blind read returned only one of them.  Span 0 gives the measurement that clears them, water reclamation holding near ninety-five percent and every meal covered, and span 2 gives the reason that measurement is decisive, which is that dust on a clear panel cannot reach a job that never depended on light.  Dropping span 2 leaves the evidence without its mechanism, which is exactly the distinction this item is built to teach.  Neither span was touched by the 26-0822 prose pass;  the item was re-answered only because its hash follows the passage, and it read agree on the identical key before that pass.",
+   "adjudicatedBy": "Justin Solomon (via Claude Code, 26-0822 WP-P prose pass)",
+   "adjudicatedAt": "2026-08-22"
+  },
+  {
+   "itemId": "t2-hot-closes-on-evidence",
+   "itemHash": "3ad8bb4203580207",
+   "blind": [
+    1,
+    2,
+    3
+   ],
+   "authored": [
+    1,
+    3,
+    4
+   ],
+   "confidence": "high",
+   "status": "adjudicated",
+   "note": "The authored key stands.  The stem asks for the three sentences showing the order closes on a MEASURED RESULT rather than on the work being finished, and the blind read swapped span 4 for span 2.  Span 2 is a scheduling fact, the date Dr. Kessler's next status log falls on, and says nothing about what closes the order;  span 4, that a clean panel is effort and a recovered reading is evidence, states the principle the whole item is about.  Span 3 was shortened in the 26-0822 prose pass, from 32 words to 26, and reworded from that log to that status log so it names its own referent rather than leaning on span 2 for it.  That change was made in response to this disagreement and did not move the blind read, which confirms the pull is the model under-weighting a principle sentence against a concrete one rather than an ambiguity in the text.",
+   "adjudicatedBy": "Justin Solomon (via Claude Code, 26-0822 WP-P prose pass)",
+   "adjudicatedAt": "2026-08-22"
+  },
+  {
+   "itemId": "t2-cloze-effort-versus-evidence",
+   "itemHash": "02abbcd29fd3b879",
+   "blind": [
+    2
+   ],
+   "authored": [
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-mc-two-week-schedule",
+   "itemHash": "00acc03a49f1c24f",
+   "blind": 1,
+   "authored": 1,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-mc-panel-clean-no-recovery",
+   "itemHash": "79d7b7e64d974a1c",
+   "blind": 2,
+   "authored": 2,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-mc-what-the-sensors-missed",
+   "itemHash": "158791a9adc94ea3",
+   "blind": 0,
+   "authored": 0,
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "t2-match-order-status",
+   "itemHash": "711e1f1885aedaca",
+   "blind": [
+    1,
+    2,
+    0
+   ],
+   "authored": [
+    1,
+    2,
+    0
+   ],
+   "confidence": "high",
+   "status": "agree"
+  },
+  {
+   "itemId": "l1-vis-nesting-order",
+   "itemHash": "25aac5c68ad8bc8c",
+   "blind": [
+    1,
+    0,
+    2
+   ],
+   "authored": [
+    1,
+    0,
+    2
+   ],
+   "confidence": "high",
+   "status": "agree"
+  }
+ ]
 }

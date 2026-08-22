@@ -36,6 +36,19 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
+// A level may open on a BRIEFING (WP-P, 26-0822): a panel shown once before the first question,
+// with the passage and the item held back until Begin is tapped. Every gate that opens a pack level
+// has to go through it, exactly as a child does. Deliberately NOT a back door around the briefing:
+// a gate that skipped it would stop measuring the path anybody actually takes.
+async function dismissBriefing(page) {
+  const begin = await page.$('.mv-briefing-begin');
+  if (!begin) return false;
+  await begin.click();
+  await page.waitForTimeout(150);
+  return true;
+}
+
+
 let chromium;
 try { chromium = require('playwright').chromium; }
 catch (e1) {
@@ -578,6 +591,7 @@ async function sampledRenderIntegration(page, armedEntry, problems, note) {
 
   try {
     await page.evaluate((idx) => window.playLevel(idx), targetLevelIdx);
+    await dismissBriefing(page);
     await page.waitForSelector('.mv-passage, .mv-item', { timeout: 8000 });
 
     // ---- Phase 1: strip / rail, by whichever route the CURRENT draw actually exercises ----
@@ -613,7 +627,8 @@ async function sampledRenderIntegration(page, armedEntry, problems, note) {
       if (!stripDone || !railDone) {
         // This draw did not satisfy an outstanding route. Not a defect -- advance rather than fail.
         await page.evaluate((idx) => window.playLevel(idx), targetLevelIdx);
-        await page.waitForSelector('.mv-passage, .mv-item', { timeout: 8000 });
+        await dismissBriefing(page);
+    await page.waitForSelector('.mv-passage, .mv-item', { timeout: 8000 });
       }
     }
     if (needStrip && !stripDone) note(`armed: pack "${entry.id}" level ${targetLevelIdx} never drew an item whose passage carries figureIds within the guard; strip assertion skipped this run (sampling, not a defect)`);
@@ -658,7 +673,8 @@ async function sampledRenderIntegration(page, armedEntry, problems, note) {
         } else {
           // Not a choice-based type this probe can key directly; re-roll the level's draw.
           await page.evaluate((idx) => window.playLevel(idx), targetLevelIdx);
-          await page.waitForSelector('.mv-passage, .mv-item', { timeout: 8000 });
+          await dismissBriefing(page);
+    await page.waitForSelector('.mv-passage, .mv-item', { timeout: 8000 });
         }
       }
       if (!answered) problems.push(`armed: pack "${entry.id}" level ${targetLevelIdx} never drew a choice-based item this probe could answer within its guard`);

@@ -60,6 +60,19 @@ const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css
 // Phase R, task 5.  Imported from the validator rather than re-listed, so a kind added there and
 // not here cannot leave a skin whose title contrast was never measured.
 const { DOC_KINDS: DOC_KINDS_FOR_CONTRAST } = require('./validate-pack.js');
+
+// A level may open on a BRIEFING (WP-P, 26-0822): a panel shown once before the first question,
+// with the passage and the item held back until Begin is tapped. Every gate that opens a pack level
+// has to go through it, exactly as a child does. Deliberately NOT a back door around the briefing:
+// a gate that skipped it would stop measuring the path anybody actually takes.
+async function dismissBriefing(page) {
+  const begin = await page.$('.mv-briefing-begin');
+  if (!begin) return false;
+  await begin.click();
+  await page.waitForTimeout(150);
+  return true;
+}
+
 // .mv-passage-title is 700 weight at roughly 16px, which is under WCAG's 18.66px-bold "large
 // text" exemption, so the floor is 4.5:1 and not 3:1.  Same reasoning the band's own rule
 // records for itself in engine.css.
@@ -146,7 +159,8 @@ function startServer() {
       if (!l) throw new Error('no open level card');
       l.click();
     });
-    await page.waitForSelector('.mv-passage, .mv-item', { timeout: 8000 });
+    await dismissBriefing(page);
+      await page.waitForSelector('.mv-passage, .mv-item', { timeout: 8000 });
     await page.waitForTimeout(700);
 
     // ---- phase R, task 5: passage-title contrast, swept ONCE per pack over every skin ----
