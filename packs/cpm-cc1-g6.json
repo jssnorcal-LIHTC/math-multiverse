@@ -262,6 +262,51 @@
     "l3-kind-why-bars-touch",
     "l3-kind-what-a-display-cannot-say"
    ]
+  },
+  {
+   "id": 6,
+   "name": "Review and Preview",
+   "goal": "Come back to every skill in the pack, each one asked a way it was not asked before.",
+   "targets": [
+    "math-r4-perimeter",
+    "math-r5-decimal-place-value",
+    "math-r5-numerical-patterns",
+    "math-ee-generalize",
+    "math-sp-displays"
+   ],
+   "lives": 4,
+   "questions": 8,
+   "briefing": {
+    "title": "Everything so far, asked backwards",
+    "lines": [
+     "This level mixes all five earlier ones, and none of the questions are the ones you have already answered.",
+     "A perimeter arrives already worked out, and what is wanted is the square that matches it.  A pattern gives you the dot count and asks which figure it belongs to.",
+     "Decimals get lined up against each other, which is where the longest number turns out not to be the biggest.",
+     "The last kind is new:  not reading a display, but choosing which display could answer a question at all."
+    ]
+   },
+   "itemIds": [
+    "l6-square-rect-8-5",
+    "l6-square-par-wide-14-5",
+    "l6-square-tri-right-6-8-10",
+    "l6-square-trap-10-4-6-5",
+    "l6-compare-square-7",
+    "l6-compare-rect-12-3",
+    "l6-compare-tri-isosceles-9-9-4",
+    "l6-compare-lshape-1",
+    "l6-inverse-p3n",
+    "l6-inverse-p2n1",
+    "l6-inverse-p4n2",
+    "l6-inverse-p3n2",
+    "l6-largest-1",
+    "l6-largest-2",
+    "l6-largest-3",
+    "l6-largest-4",
+    "l6-choose-1",
+    "l6-choose-2",
+    "l6-choose-3",
+    "l6-choose-4"
+   ]
   }
  ],
  "items": [
@@ -2878,6 +2923,510 @@
     "3": "It can:  counting the bars gives the number of intervals."
    },
    "explain": "Grouping is what a histogram does, and grouping loses the individual values.  Those 13 students each read somewhere between 20 and 29 minutes, and the display cannot say which.  A stem-and-leaf plot keeps that detail;  a histogram trades it away for a clearer shape."
+  },
+  {
+   "id": "l6-square-rect-8-5",
+   "type": "mc",
+   "figureId": "fig-l1-rect-8-5",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter",
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "perimeter-same-square",
+   "dok": 3,
+   "stem": "The rectangle in the figure has a perimeter of 26 cm.  A SQUARE with that same perimeter has sides of what length?",
+   "choices": [
+    "6.5 cm",
+    "13 cm",
+    "26 cm",
+    "7.5 cm"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This halves the perimeter instead of quartering it.  A square has FOUR equal sides, so the perimeter is shared out four ways, not two.",
+    "2": "This is the perimeter itself, which is the distance all the way round rather than the length of one side.",
+    "3": "Close, and one centimetre too long.  Check it:  four sides of that length would add up to more than 26 cm."
+   },
+   "explain": "Add the labelled sides and the rectangle's perimeter is 26 cm.  A square's four sides are all equal, so one side is 26 divided by 4, which is 6.5 cm.  Checking it backwards is quicker than the division:  four sides of 6.5 cm come to 26 cm."
+  },
+  {
+   "id": "l6-square-par-wide-14-5",
+   "type": "mc",
+   "figureId": "fig-l1-par-wide-14-5",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter",
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "perimeter-same-square",
+   "dok": 3,
+   "stem": "The parallelogram in the figure has a perimeter of 38 cm.  A SQUARE with that same perimeter has sides of what length?",
+   "choices": [
+    "19 cm",
+    "9.5 cm",
+    "38 cm",
+    "10.5 cm"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This halves the perimeter instead of quartering it.  A square has FOUR equal sides, so the perimeter is shared out four ways, not two.",
+    "2": "This is the perimeter itself, which is the distance all the way round rather than the length of one side.",
+    "3": "Close, and one centimetre too long.  Check it:  four sides of that length would add up to more than 38 cm."
+   },
+   "explain": "Add the labelled sides and the parallelogram's perimeter is 38 cm.  A square's four sides are all equal, so one side is 38 divided by 4, which is 9.5 cm.  Checking it backwards is quicker than the division:  four sides of 9.5 cm come to 38 cm."
+  },
+  {
+   "id": "l6-square-tri-right-6-8-10",
+   "type": "mc",
+   "figureId": "fig-l1-tri-right-6-8-10",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter",
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "perimeter-same-square",
+   "dok": 3,
+   "stem": "The triangle in the figure has a perimeter of 24 cm.  A SQUARE with that same perimeter has sides of what length?",
+   "choices": [
+    "12 cm",
+    "24 cm",
+    "6 cm",
+    "7 cm"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This halves the perimeter instead of quartering it.  A square has FOUR equal sides, so the perimeter is shared out four ways, not two.",
+    "1": "This is the perimeter itself, which is the distance all the way round rather than the length of one side.",
+    "3": "Close, and one centimetre too long.  Check it:  four sides of that length would add up to more than 24 cm."
+   },
+   "explain": "Add the labelled sides and the triangle's perimeter is 24 cm.  A square's four sides are all equal, so one side is 24 divided by 4, which is 6 cm.  Checking it backwards is quicker than the division:  four sides of 6 cm come to 24 cm."
+  },
+  {
+   "id": "l6-square-trap-10-4-6-5",
+   "type": "mc",
+   "figureId": "fig-l1-trap-10-4-6-5",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter",
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "perimeter-same-square",
+   "dok": 3,
+   "stem": "The trapezoid in the figure has a perimeter of 25 cm.  A SQUARE with that same perimeter has sides of what length?",
+   "choices": [
+    "12.5 cm",
+    "25 cm",
+    "7.25 cm",
+    "6.25 cm"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This halves the perimeter instead of quartering it.  A square has FOUR equal sides, so the perimeter is shared out four ways, not two.",
+    "1": "This is the perimeter itself, which is the distance all the way round rather than the length of one side.",
+    "2": "Close, and one centimetre too long.  Check it:  four sides of that length would add up to more than 25 cm."
+   },
+   "explain": "Add the labelled sides and the trapezoid's perimeter is 25 cm.  A square's four sides are all equal, so one side is 25 divided by 4, which is 6.25 cm.  Checking it backwards is quicker than the division:  four sides of 6.25 cm come to 25 cm."
+  },
+  {
+   "id": "l6-compare-square-7",
+   "type": "mc",
+   "figureId": "fig-l1-square-7",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-compare-pentagon",
+   "dok": 3,
+   "stem": "A regular pentagon has five sides of 10 cm each.  How much LONGER is the pentagon's perimeter than the square's in the figure?",
+   "choices": [
+    "78 cm",
+    "22 cm",
+    "50 cm",
+    "10 cm"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This adds the two perimeters.  \"How much longer\" is a subtraction:  it asks for the gap between them, not the total.",
+    "2": "This is the pentagon's whole perimeter, not the amount by which it beats the square.",
+    "3": "This is the length of ONE pentagon side.  Five of them make the pentagon's perimeter, and only then can the two shapes be compared."
+   },
+   "explain": "The pentagon first:  five sides of 10 cm give 10 x 5 = 50 cm.  The square's labelled sides add to 28 cm.  The pentagon is longer by 50 - 28 = 22 cm.  Both shapes have to be turned into one number each before they can be compared, which is the whole reason perimeter is worth having."
+  },
+  {
+   "id": "l6-compare-rect-12-3",
+   "type": "mc",
+   "figureId": "fig-l1-rect-12-3",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-compare-pentagon",
+   "dok": 3,
+   "stem": "A regular pentagon has five sides of 8 cm each.  How much LONGER is the pentagon's perimeter than the rectangle's in the figure?",
+   "choices": [
+    "70 cm",
+    "40 cm",
+    "10 cm",
+    "8 cm"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This adds the two perimeters.  \"How much longer\" is a subtraction:  it asks for the gap between them, not the total.",
+    "1": "This is the pentagon's whole perimeter, not the amount by which it beats the rectangle.",
+    "3": "This is the length of ONE pentagon side.  Five of them make the pentagon's perimeter, and only then can the two shapes be compared."
+   },
+   "explain": "The pentagon first:  five sides of 8 cm give 8 x 5 = 40 cm.  The rectangle's labelled sides add to 30 cm.  The pentagon is longer by 40 - 30 = 10 cm.  Both shapes have to be turned into one number each before they can be compared, which is the whole reason perimeter is worth having."
+  },
+  {
+   "id": "l6-compare-tri-isosceles-9-9-4",
+   "type": "mc",
+   "figureId": "fig-l1-tri-isosceles-9-9-4",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-compare-pentagon",
+   "dok": 3,
+   "stem": "A regular pentagon has five sides of 6 cm each.  How much LONGER is the pentagon's perimeter than the triangle's in the figure?",
+   "choices": [
+    "52 cm",
+    "30 cm",
+    "6 cm",
+    "8 cm"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This adds the two perimeters.  \"How much longer\" is a subtraction:  it asks for the gap between them, not the total.",
+    "1": "This is the pentagon's whole perimeter, not the amount by which it beats the triangle.",
+    "2": "This is the length of ONE pentagon side.  Five of them make the pentagon's perimeter, and only then can the two shapes be compared."
+   },
+   "explain": "The pentagon first:  five sides of 6 cm give 6 x 5 = 30 cm.  The triangle's labelled sides add to 22 cm.  The pentagon is longer by 30 - 22 = 8 cm.  Both shapes have to be turned into one number each before they can be compared, which is the whole reason perimeter is worth having."
+  },
+  {
+   "id": "l6-compare-lshape-1",
+   "type": "mc",
+   "figureId": "fig-l1-lshape-1",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-compare-pentagon",
+   "dok": 3,
+   "stem": "A regular pentagon has five sides of 9 cm each.  How much LONGER is the pentagon's perimeter than the L-shape's in the figure?",
+   "choices": [
+    "7 cm",
+    "83 cm",
+    "45 cm",
+    "9 cm"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This adds the two perimeters.  \"How much longer\" is a subtraction:  it asks for the gap between them, not the total.",
+    "2": "This is the pentagon's whole perimeter, not the amount by which it beats the L-shape.",
+    "3": "This is the length of ONE pentagon side.  Five of them make the pentagon's perimeter, and only then can the two shapes be compared."
+   },
+   "explain": "The pentagon first:  five sides of 9 cm give 9 x 5 = 45 cm.  The L-shape's labelled sides add to 38 cm.  The pentagon is longer by 45 - 38 = 7 cm.  Both shapes have to be turned into one number each before they can be compared, which is the whole reason perimeter is worth having."
+  },
+  {
+   "id": "l6-inverse-p3n",
+   "type": "mc",
+   "figureId": "fig-l5-p3n",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-which-figure",
+   "dok": 3,
+   "stem": "This pattern keeps going.  Which figure has exactly 27 dots?",
+   "choices": [
+    "figure 10",
+    "figure 8",
+    "figure 9",
+    "figure 27"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "One figure too far.  Put this number into the rule and it gives more than 27 dots.",
+    "1": "One figure short.  Put this number into the rule and it gives fewer than 27 dots.",
+    "3": "This is the number of DOTS, which the question gave you.  What it asks for is the FIGURE NUMBER that holds them."
+   },
+   "explain": "The rule is 3 x n.  Divide by 3:  27 / 3 = 9.  So figure 9 holds 27 dots.  Running a rule backwards undoes its steps in the opposite order."
+  },
+  {
+   "id": "l6-inverse-p2n1",
+   "type": "mc",
+   "figureId": "fig-l5-p2n1",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-which-figure",
+   "dok": 3,
+   "stem": "This pattern keeps going.  Which figure has exactly 25 dots?",
+   "choices": [
+    "figure 13",
+    "figure 11",
+    "figure 25",
+    "figure 12"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This divides by 2 and forgets the 1 that sits in every figure.  Take that group off FIRST, then divide.",
+    "1": "One figure short.  Put this number into the rule and it gives fewer than 25 dots.",
+    "2": "This is the number of DOTS, which the question gave you.  What it asks for is the FIGURE NUMBER that holds them."
+   },
+   "explain": "The rule is 2 x n + 1.  Take off the 1 that is in every figure:  25 - 1 = 24.  Then divide by 2:  24 / 2 = 12.  So figure 12 holds 25 dots.  Running a rule backwards undoes its steps in the opposite order."
+  },
+  {
+   "id": "l6-inverse-p4n2",
+   "type": "mc",
+   "figureId": "fig-l5-p4n2",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-which-figure",
+   "dok": 3,
+   "stem": "This pattern keeps going.  Which figure has exactly 38 dots?",
+   "choices": [
+    "figure 9",
+    "figure 10",
+    "figure 8",
+    "figure 38"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This divides by 4 and forgets the 2 that sits in every figure.  Take that group off FIRST, then divide.",
+    "2": "One figure short.  Put this number into the rule and it gives fewer than 38 dots.",
+    "3": "This is the number of DOTS, which the question gave you.  What it asks for is the FIGURE NUMBER that holds them."
+   },
+   "explain": "The rule is 4 x n + 2.  Take off the 2 that is in every figure:  38 - 2 = 36.  Then divide by 4:  36 / 4 = 9.  So figure 9 holds 38 dots.  Running a rule backwards undoes its steps in the opposite order."
+  },
+  {
+   "id": "l6-inverse-p3n2",
+   "type": "mc",
+   "figureId": "fig-l5-p3n2",
+   "passageId": "p-finding-the-rule",
+   "targets": [
+    "math-r5-numerical-patterns",
+    "math-ee-generalize"
+   ],
+   "coachTopic": "growpattern-which-figure",
+   "dok": 3,
+   "stem": "This pattern keeps going.  Which figure has exactly 32 dots?",
+   "choices": [
+    "figure 11",
+    "figure 10",
+    "figure 9",
+    "figure 32"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This divides by 3 and forgets the 2 that sits in every figure.  Take that group off FIRST, then divide.",
+    "2": "One figure short.  Put this number into the rule and it gives fewer than 32 dots.",
+    "3": "This is the number of DOTS, which the question gave you.  What it asks for is the FIGURE NUMBER that holds them."
+   },
+   "explain": "The rule is 3 x n + 2.  Take off the 2 that is in every figure:  32 - 2 = 30.  Then divide by 3:  30 / 3 = 10.  So figure 10 holds 32 dots.  Running a rule backwards undoes its steps in the opposite order."
+  },
+  {
+   "id": "l6-largest-1",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-compare",
+   "dok": 2,
+   "stem": "Four seedlings grew this many centimetres.  Which number is the TALLEST?",
+   "choices": [
+    "0.68",
+    "0.09",
+    "0.5",
+    "0.7"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "0.68 is smaller than 0.7.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does.",
+    "1": "0.09 is smaller than 0.7.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does.",
+    "2": "0.5 is smaller than 0.7.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does."
+   },
+   "explain": "Compare place by place from the left, starting at the tenths, and the first place where the numbers differ settles it.  That gives 0.7.  Watch the trap in this set:  more digits looks bigger, and 0.68 has more digits than 0.7.  A longer decimal is not a bigger one."
+  },
+  {
+   "id": "l6-largest-2",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-compare",
+   "dok": 2,
+   "stem": "Four parcels weigh this many kilograms.  Which number is the HEAVIEST?",
+   "choices": [
+    "0.5",
+    "0.45",
+    "0.405",
+    "0.049"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "0.45 is smaller than 0.5.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does.",
+    "2": "0.405 is smaller than 0.5.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does.",
+    "3": "0.049 is smaller than 0.5.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does."
+   },
+   "explain": "Compare place by place from the left, starting at the tenths, and the first place where the numbers differ settles it.  That gives 0.5.  Watch the trap in this set:  0.405 is the longest of the four and the smallest but one.  A longer decimal is not a bigger one."
+  },
+  {
+   "id": "l6-largest-3",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-compare",
+   "dok": 2,
+   "stem": "Four runners took this many seconds.  Which number is the SLOWEST?",
+   "choices": [
+    "1.09",
+    "1.2",
+    "1.15",
+    "1.099"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "1.09 is smaller than 1.2.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does.",
+    "2": "1.15 is smaller than 1.2.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does.",
+    "3": "1.099 is smaller than 1.2.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does."
+   },
+   "explain": "Compare place by place from the left, starting at the tenths, and the first place where the numbers differ settles it.  That gives 1.2.  Watch the trap in this set:  1.099 has the most digits after the point and is the smallest of the four.  A longer decimal is not a bigger one."
+  },
+  {
+   "id": "l6-largest-4",
+   "type": "mc",
+   "passageId": "p-reading-decimals",
+   "targets": [
+    "math-r5-decimal-place-value"
+   ],
+   "coachTopic": "decword-compare",
+   "dok": 2,
+   "stem": "Four days recorded this much rain in centimetres.  Which number is the WETTEST?",
+   "choices": [
+    "0.3",
+    "0.29",
+    "0.301",
+    "0.13"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "0.3 is smaller than 0.301.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does.",
+    "1": "0.29 is smaller than 0.301.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does.",
+    "3": "0.13 is smaller than 0.301.  Line the two up at the decimal point and compare one place at a time, starting at the tenths;  the first place where they differ decides it, and the number of digits never does."
+   },
+   "explain": "Compare place by place from the left, starting at the tenths, and the first place where the numbers differ settles it.  That gives 0.301.  Watch the trap in this set:  here the longest one IS the largest, so length is never the reason either way.  A longer decimal is not a bigger one."
+  },
+  {
+   "id": "l6-choose-1",
+   "type": "mc",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-sp-displays",
+    "math-r3-scaled-graphs"
+   ],
+   "coachTopic": "display-choose-the-kind",
+   "dok": 3,
+   "stem": "You want to know how many students read for between 20 and 29 minutes.  Which display answers that?",
+   "choices": [
+    "a histogram of how many minutes each student read",
+    "a bar graph of which pet each child keeps",
+    "a bar graph of how each student travels to school",
+    "a histogram of how tall each seedling is"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This sorts children by pet.  It never mentions minutes, so no bar on it can answer a question about reading time.",
+    "2": "This sorts students by how they travel.  It counts students, but not by how long they read.",
+    "3": "This is the right KIND of display and the wrong data.  Grouping into intervals only helps if the intervals are made of the thing you asked about."
+   },
+   "explain": "Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  That leaves a histogram of how many minutes each student read."
+  },
+  {
+   "id": "l6-choose-2",
+   "type": "mc",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-sp-displays",
+    "math-r3-scaled-graphs"
+   ],
+   "coachTopic": "display-choose-the-kind",
+   "dok": 3,
+   "stem": "You want to know whether more children keep a dog or a cat.  Which display answers that?",
+   "choices": [
+    "a histogram of how many minutes each student read",
+    "a bar graph of which pet each child keeps",
+    "a bar graph of how each student travels to school",
+    "a histogram of how tall each seedling is"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "A histogram groups numbers into intervals.  Dog and cat are names, not numbers, so they cannot be put in order along a number line.",
+    "2": "This is the right KIND of display and the wrong data.  It has named groups, but none of them is a pet.",
+    "3": "This groups heights into intervals.  It is measuring plants, not counting pets."
+   },
+   "explain": "Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  That leaves a bar graph of which pet each child keeps."
+  },
+  {
+   "id": "l6-choose-3",
+   "type": "mc",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-sp-displays",
+    "math-r3-scaled-graphs"
+   ],
+   "coachTopic": "display-choose-the-kind",
+   "dok": 3,
+   "stem": "You want to know how many seedlings are shorter than 5 cm.  Which display answers that?",
+   "choices": [
+    "a bar graph of which pet each child keeps",
+    "a histogram of how many minutes each student read",
+    "a histogram of how tall each seedling is",
+    "a bar graph of how each student travels to school"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This counts children by pet.  Nothing on it is measured in centimetres.",
+    "1": "This is the right KIND of display and the wrong data.  Its intervals are minutes, and the question asks about centimetres.",
+    "3": "This sorts students into named groups.  Heights are numbers and belong in intervals, not names."
+   },
+   "explain": "Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  That leaves a histogram of how tall each seedling is."
+  },
+  {
+   "id": "l6-choose-4",
+   "type": "mc",
+   "passageId": "p-reading-a-display",
+   "targets": [
+    "math-sp-displays",
+    "math-r3-scaled-graphs"
+   ],
+   "coachTopic": "display-choose-the-kind",
+   "dok": 3,
+   "stem": "You want to know which way of getting to school the fewest students use.  Which display answers that?",
+   "choices": [
+    "a histogram of how many minutes each student read",
+    "a bar graph of which pet each child keeps",
+    "a histogram of how tall each seedling is",
+    "a bar graph of how each student travels to school"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This groups minutes into intervals.  Walking and cycling are names, not numbers, so they do not sit on a number line.",
+    "1": "This is the right KIND of display and the wrong data.  Its named groups are pets, not journeys.",
+    "2": "This measures plants in intervals, and the question is about students."
+   },
+   "explain": "Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  That leaves a bar graph of how each student travels to school."
   }
  ],
  "figures": [

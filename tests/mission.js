@@ -242,19 +242,31 @@ try {
 
     // ---- A LESSON THE APP CANNOT SERVE SAYS SO ----
     const unserved = await page.evaluate(() => {
-      // 1.1.4 (histograms and bar graphs) is a confirmed GAP: no emitted topic serves it.
+      // A lesson the app cannot serve, CHOSEN FROM THE CROSSWALK rather than named here. This used
+      // to hard-code 1.1.4 (histograms and bar graphs) as a confirmed GAP, and the pack then went
+      // and served it: the gate failed because the program had made progress, which is the wrong
+      // reason for a gate to go red. Picking the first lesson that still declares a gap keeps the
+      // check measuring the behaviour instead of a snapshot of the backlog, and the arming
+      // assertion below turns "there are no gaps left" into its own honest result.
+      const row = (Curriculum.data.lessons || []).find((l) => (l.gaps || []).length);
+      if (!row) return { noGapLessonLeft: true };
       const m = buildMission({
-        lessonRow: Curriculum.row('1.1.4'), topicIndex: TOPIC_INDEX, mathPerTopic: {},
+        lessonRow: row, topicIndex: TOPIC_INDEX, mathPerTopic: {},
         packPerTopic: {}, packLevels: [], grade: 5, now: Date.now(), questionsFor: missionQuestionsFor,
       });
       // And what the CARD actually says, which is the thing the child reads.
-      Save.setCurriculum({ lesson: '1.1.4', autoAdvance: false });
+      Save.setCurriculum({ lesson: row.lesson, autoAdvance: false });
       renderMissionCard();
       return {
+        lesson: row.lesson,
         empty: m.empty, gaps: m.gaps, unservable: m.unservable, counts: m.counts,
         cardText: (document.getElementById('mission-body') || {}).textContent.replace(/\s+/g, ' '),
       };
     });
+    check('ARMING: the crosswalk still has at least one lesson with an open gap to test against',
+      !unserved.noGapLessonLeft,
+      'every lesson in packs/curriculum-cc1.json is now fully served -- if that is real, this check '
+      + 'and the two below it have nothing left to measure and should be retired with the backlog');
     check('a lesson with no servable topic produces an empty mission rather than a generic one',
       unserved.empty && unserved.counts.total === 0, JSON.stringify(unserved.counts));
     check('and it names what it cannot serve rather than going quiet',

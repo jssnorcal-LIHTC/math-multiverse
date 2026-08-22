@@ -80,8 +80,11 @@ const BLOCKS = [
        + 'and at most 15% of any of their draws. It also hands over both rules and asks for a '
        + 'comparison; it never shows a figure and asks the student to build the rule or predict '
        + 'the 100th term.',
-    gaps: ['a drawn growing pattern the student extends', 'find the rule from the figures',
-           'predict a far-out term such as the 100th'],
+    gaps: [
+      { text: 'a drawn growing pattern the student extends', closedBy: 'growpattern-next-figure' },
+      { text: 'find the rule from the figures', closedBy: 'growpattern-rule' },
+      { text: 'predict a far-out term such as the 100th', closedBy: 'growpattern-far-term' },
+    ],
   },
   {
     id: 'pg-1.1.4', page: 3, chapter: 1, title: 'Graphical Representations of Data: Histograms and Bar Graphs',
@@ -92,7 +95,11 @@ const BLOCKS = [
     why: 'No math generator emits a chart-reading topic. g6-stats-* read a comma-separated list of '
        + 'numbers, never a display. Real chart reading exists only under Science (Outpost Protocol '
        + 'level 2) and it is a line chart, not a categorical bar graph or a histogram.',
-    gaps: ['read a value off a bar graph', 'compare two bars', 'read a histogram bin'],
+    gaps: [
+      { text: 'read a value off a bar graph', closedBy: 'display-read-a-value' },
+      { text: 'compare two bars', closedBy: 'display-compare-bars' },
+      { text: 'read a histogram bin', closedBy: 'display-which-kind' },
+    ],
   },
   {
     id: 'pg-1.2.3', page: 7, chapter: 1, title: 'Types of Numbers',
@@ -221,7 +228,10 @@ const BLOCKS = [
     verdict: 'GAP',
     why: 'Nothing emitted generalises a pattern into a rule. This is the same shortfall 1.1.3 '
        + 'names, one chapter later and with the variable made explicit.',
-    gaps: ['write the rule for figure n', 'use the rule to reach a far term'],
+    gaps: [
+      { text: 'write the rule for figure n', closedBy: 'growpattern-rule' },
+      { text: 'use the rule to reach a far term', closedBy: 'growpattern-far-term' },
+    ],
   },
   {
     id: 'pg-4.1.3-note', page: 32, chapter: 4, title: 'Operations with Fractions: Mixed Numbers',
@@ -581,6 +591,78 @@ for (const b of ALL_ROWS) {
 
 const uniq = (arr) => [...new Set(arr)];
 
+// WHICH TARGETS A PACK ITEM ACTUALLY SERVES, read out of the packs rather than declared here.
+//
+// packItemTargets used to be typed into each BLOCKS row by hand, and it went stale the moment a
+// level shipped: after levels 4, 5 and 6 landed, the packs served seven targets and the crosswalk
+// still claimed two. A hand-maintained progress meter measures how recently someone remembered to
+// edit it, which is not the thing anyone wants to know. So a block's packItemTargets is now the
+// intersection of its own targets with the set the packs really serve, and it cannot overstate
+// (a target no item carries can never appear) or fall behind (a new level updates it on the next
+// build).
+const PACKED_TARGETS = (() => {
+  const served = new Set();
+  const manifestPath = path.join(ROOT, 'packs', 'manifest.json');
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  for (const p of manifest.packs || []) {
+    const file = path.join(ROOT, 'packs', p.id + '.json');
+    if (!fs.existsSync(file)) continue;
+    const pack = JSON.parse(fs.readFileSync(file, 'utf8'));
+    for (const item of pack.items || []) for (const t of item.targets || []) served.add(t);
+  }
+  if (!served.size) {
+    throw new Error('curriculum-gen: no pack item declares a target, so the coverage meter would '
+      + 'report every lesson as a gap. The manifest or the packs are not where this expects them.');
+  }
+  return served;
+})();
+
+// WHICH COACH TOPICS THE PACKS CARRY. A gap line may name the topic that closes it, and once that
+// topic ships the line stops being a gap. Keyed on coachTopic rather than on a target, because a
+// target is coarse: one target covers reading a bar, comparing two, and totalling them, and those
+// are three separate lines here. A closedBy that names a topic no pack carries is a BUILD ERROR
+// rather than a gap that stays open, so a typo cannot quietly hold a gap open forever; a gap whose
+// topic has not been built yet is written as a plain string and stays open until it has.
+const PACKED_TOPICS = (() => {
+  const topics = new Set();
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'packs', 'manifest.json'), 'utf8'));
+  for (const p of manifest.packs || []) {
+    const file = path.join(ROOT, 'packs', p.id + '.json');
+    if (!fs.existsSync(file)) continue;
+    const pack = JSON.parse(fs.readFileSync(file, 'utf8'));
+    for (const item of pack.items || []) if (item.coachTopic) topics.add(item.coachTopic);
+  }
+  return topics;
+})();
+
+let gapsClosed = 0;
+for (const b of BLOCKS.concat(STANDALONE)) {
+  b.gaps = (b.gaps || []).filter((g) => {
+    if (typeof g === 'string') return true;
+    if (!PACKED_TOPICS.has(g.closedBy)) {
+      throw new Error(`curriculum-gen: block ${b.id} says the gap ${JSON.stringify(g.text)} is closed `
+        + `by coachTopic ${JSON.stringify(g.closedBy)}, which no pack item carries. Write the gap as a `
+        + 'plain string until the topic exists, or fix the topic name.');
+    }
+    gapsClosed++;
+    return false;
+  }).map((g) => (typeof g === 'string' ? g : g.text));
+}
+
+for (const b of BLOCKS.concat(STANDALONE)) {
+  const derived = (b.targets || []).filter((t) => PACKED_TARGETS.has(t));
+  // A row that still carries a hand-typed list must not claim more than the packs serve. This is
+  // the check that would have caught the stale two-of-seven, and it runs before the field is
+  // replaced so the old value is still there to be judged.
+  for (const t of b.packItemTargets || []) {
+    if (!PACKED_TARGETS.has(t)) {
+      throw new Error(`curriculum-gen: block ${b.id} claims pack coverage of ${t}, but no pack item `
+        + 'carries that target. The crosswalk would report progress that does not exist.');
+    }
+  }
+  b.packItemTargets = derived;
+}
+
 const lessons = lessonIds.map((lesson) => {
   const chapter = Number(lesson.split('.')[0]);
   const problems = index.lessons[lesson];
@@ -679,6 +761,7 @@ const saTally = STANDALONE.reduce((n, b) => n + (b.verdict === 'GAP' ? 1 : 0), 0
 const gapLessons = lessons.filter((l) => l.gaps.length);
 const servedLessons = lessons.filter((l) => l.moduleTopics.length || l.packItemTargets.length);
 console.log(`wrote ${path.relative(ROOT, OUT_PATH)}`);
+console.log(`  ${gapsClosed} gap line(s) closed by a coach topic the packs now carry`);
 console.log(`  ${lessons.length} lessons, ${BLOCKS.length} Parent Guide blocks `
   + `(${BLOCKS.filter((b) => b.crossRef).length} cross-reference), ${STANDALONE.length} standalone gap rows`);
 console.log(`  confirmed census, Parent Guide blocks: ${tally.COVERED} COVERED / ${tally.PARTIAL} PARTIAL / ${tally.GAP} GAP`);
