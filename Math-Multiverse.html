@@ -13187,9 +13187,7 @@ const TOPIC_LABELS = {
   'frac-equiv': 'Equivalent fractions',
   'frac-simplify': 'Simplify to lowest terms',
   // F1 Decimals
-  'dec-place-value': 'Decimal place value',
   'dec-compare': 'Compare/order decimals',
-  'dec-add-sub': 'Add/subtract decimals',
   'dec-mult': 'Multiply decimals',
   'dec-div': 'Divide decimals',
   'dec-round': 'Round decimals',
@@ -13197,7 +13195,6 @@ const TOPIC_LABELS = {
   'dec-write-word': 'Write decimal in word form',
   'dec-expand': 'Expanded form',
   // Razor Crest
-  'coord-plot': 'Plot ordered pair',
   'coord-distance': 'Distance on grid',
   'coord-quadrant': 'Identify quadrant',
   'coord-reflect': 'Reflect across axis',
@@ -13205,25 +13202,14 @@ const TOPIC_LABELS = {
   'coord-identify': 'Read coords from marker',
   'coord-path': 'Move along a path on the grid',
   // Master Builder
-  'vol-lwh': 'Volume = L × W × H',
-  'vol-base-height': 'Volume = base area × height',
-  'vol-composite': 'Composite volume (add)',
-  'vol-missing-dim': 'Find missing dimension',
   'vol-unit-cubes': 'Count unit cubes',
   'vol-compare': 'Compare two volumes',
   'vol-hollow': 'Volume with hollow void (subtract)',
   'vol-scale': 'Scale a dimension',
   // Rocky
-  'unit-metric': 'Metric unit conversion',
-  'unit-customary': 'Customary unit conversion',
-  'unit-time': 'Time unit conversion',
-  'unit-multistep': 'Multi-step unit conversion',
-  'unit-eridian': 'Custom (Eridian) unit conversion',
   // Floating Bear
   'pemdas-simple': 'Order of operations, simple parens',
   'pemdas-multi': 'Order of operations + multiplication',
-  'pemdas-brackets': 'Brackets and braces',
-  'pemdas-nested': 'Nested expressions',
   'pemdas-full': 'Full PEMDAS',
   'pemdas-write-expr': 'Write an expression',
   'pemdas-compare': 'Compare two expressions',
@@ -13268,6 +13254,28 @@ const TOPIC_LABELS = {
   'g6-solve-add': 'Solve x + a = b',
   'g6-solve-mul': 'Solve a · x = b',
   'g6-evaluate2': 'Evaluate an expression (distributed)',
+  // FOURTEEN KEYS USED TO BE DEFINED TWICE, here and again in the coarse half below. A later
+  // key wins in an object literal, so the coarse label was the one shipping and the granular
+  // one had no effect. The duplicates are removed HERE rather than below, which keeps every
+  // label on screen exactly as it is; deleting the coarse copies instead would have renamed
+  // nine topics without anybody asking for it. The granular wordings, if the longer form is
+  // ever wanted:
+  //   coord-plot        live: 'Plot ordered pair'                granular was: 'Plot ordered pair'
+  //   dec-add-sub       live: 'Add/subtract decimals'            granular was: 'Add/subtract decimals'
+  //   dec-place-value   live: 'Decimal place value'              granular was: 'Decimal place value'
+  //   pemdas-brackets   live: 'Brackets'                         granular was: 'Brackets and braces'  <- differs
+  //   pemdas-nested     live: 'Nested expressions'               granular was: 'Nested expressions'
+  //   unit-customary    live: 'Customary conversion'             granular was: 'Customary unit conversion'  <- differs
+  //   unit-eridian      live: 'Custom Eridian unit'              granular was: 'Custom (Eridian) unit conversion'  <- differs
+  //   unit-metric       live: 'Metric conversion'                granular was: 'Metric unit conversion'  <- differs
+  //   unit-multistep    live: 'Multi-step unit conversion'       granular was: 'Multi-step unit conversion'
+  //   unit-time         live: 'Time conversion'                  granular was: 'Time unit conversion'  <- differs
+  //   vol-base-height   live: 'Volume (base × height)'           granular was: 'Volume = base area × height'  <- differs
+  //   vol-composite     live: 'Composite volume'                 granular was: 'Composite volume (add)'  <- differs
+  //   vol-lwh           live: 'Volume (L × W × H)'               granular was: 'Volume = L × W × H'  <- differs
+  //   vol-missing-dim   live: 'Missing dimension'                granular was: 'Find missing dimension'  <- differs
+  //
+  // tests/validate-curriculum.js fails on any NEW duplicate whose two labels disagree.
   // Coarse fallback labels (level-gen IDs used when a generator hasn't been tagged with a granular topic yet)
   'frac-like-denom': 'Fractions (same denominator)',
   'frac-unlike-easy': 'Fractions (unlike, easy)',
