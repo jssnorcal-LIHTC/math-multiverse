@@ -273,13 +273,13 @@ async function measure(port, assets, forceFlag) {
   // DECISION the app makes: scrollIntoView is wrapped, attachExplainNext is called for real, and the
   // argument it actually passed is read back. Reverting the guard flips that argument and fails
   // here, which is the property a gate has to have.
-  const scrollDecision = async (mode) => {
+  const scrollDecision = async (mode, controlDelayMs) => {
     const ctx = await browser2.newContext({ viewport: { width: 1024, height: 768 }, reducedMotion: mode });
     try {
       const pg = await ctx.newPage();
       await pg.goto(`http://127.0.0.1:${port}/Math-Multiverse.html`, { waitUntil: 'domcontentloaded' });
       await pg.waitForFunction(() => typeof window.attachExplainNext === 'function', null, { timeout: 8000 });
-      return await pg.evaluate(() => new Promise((resolve) => {
+      return await pg.evaluate((delayMs) => new Promise((resolve) => {
         const seen = [];
         const real = Element.prototype.scrollIntoView;
         Element.prototype.scrollIntoView = function patched(arg) {
@@ -294,7 +294,18 @@ async function measure(port, assets, forceFlag) {
         tile.setAttribute('style', 'height:60px');
         host.appendChild(spacer); host.appendChild(tile);
         document.body.appendChild(host);
-        const attached = window.attachExplainNext(tile, () => {});
+        // delayMs > 0 is the CONTROL run: instead of the app's own scroll, one that deliberately
+        // stays still for a while and only then moves. It goes through the very same sampler below,
+        // because a control that re-implements the thing it tests proves only that the copy agrees
+        // with itself. This is what holds the settle logic on a machine whose browser does not
+        // animate a smooth scroll at all, which is every run on this Windows box.
+        let attached = true;
+        if (delayMs > 0) {
+          seen.push('control');
+          setTimeout(() => { host.scrollTop = 99999; }, delayMs);
+        } else {
+          attached = window.attachExplainNext(tile, () => {});
+        }
         // WAIT FOR THE SCROLL TO SETTLE, do not assume it lands in a fixed number of frames. This
         // originally waited two frames, which is correct only where a smooth scroll does not
         // animate. It does not animate on this Windows machine and it DOES on CI's Linux Chromium,
@@ -303,15 +314,24 @@ async function measure(port, assets, forceFlag) {
         // carried out as well: an environment that animates can then also be asked whether the
         // reduce path jumped, and one that does not can say so instead of pretending.
         const positions = [];
-        let stable = 0, frames = 0, lastPos = null;
+        const startPos = Math.round(host.scrollTop);
+        let stable = 0, frames = 0, lastPos = null, moved = false;
         const tick = () => {
           const now = Math.round(host.scrollTop);
           positions.push(now);
+          if (now !== startPos) moved = true;
           stable = (now === lastPos) ? stable + 1 : 0;
           lastPos = now;
-          // Three still frames after a scroll has been requested, or a hard stop well past the
+          // Three still frames AFTER THE SCROLL HAS ACTUALLY MOVED, or a hard stop well past the
           // ~300ms a smooth scroll takes at 60fps.
-          if ((stable >= 3 && seen.length) || ++frames > 90) {
+          //
+          // The `moved` half is not belt and braces. Without it the loop accepted the stillness at
+          // the START: a smooth scroll sits at 0 for a few frames before it begins gliding, three
+          // of those frames satisfied "stable", and the probe reported that a working scroll had
+          // settled at 0px and done nothing. It passed twice on CI and then failed on main, because
+          // whether the glide begins within three frames is a race. Both real cases move -- the jump
+          // in one frame, the glide over many -- so requiring movement costs nothing and closes it.
+          if ((stable >= 3 && seen.length && moved) || ++frames > 90) {
             Element.prototype.scrollIntoView = real;
             host.remove();
             return resolve({
@@ -323,7 +343,7 @@ async function measure(port, assets, forceFlag) {
           requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
-      }));
+      }), controlDelayMs || 0);
     } finally { await ctx.close(); }
   };
 
@@ -331,10 +351,12 @@ async function measure(port, assets, forceFlag) {
     process.env.PLAYWRIGHT_EXECUTABLE_PATH
       ? { args: ['--disable-gpu', '--no-sandbox'], executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH }
       : { args: ['--disable-gpu', '--no-sandbox'] });
-  let sAllowed, sReduced;
+  let sAllowed, sReduced, sDelayed;
   try {
     sAllowed = await scrollDecision('no-preference');
     sReduced = await scrollDecision('reduce');
+    // A scroll that stays still for 120ms and only then moves, through the same sampler.
+    sDelayed = await scrollDecision('no-preference', 120);
   } finally { await browser2.close(); }
 
   console.log('\nNEXT-button scroll (attachExplainNext), behavior argument as actually passed:');
@@ -357,6 +379,20 @@ async function measure(port, assets, forceFlag) {
   }
   if (sReduced.behaviors[0] !== 'auto') {
     problems.push(`under prefers-reduced-motion attachExplainNext passed behavior ${JSON.stringify(sReduced.behaviors[0])} rather than "auto", so the NEXT button still glides into view. Constraint 7 is not kept: no stylesheet can collapse a JS scroll, so attachExplainNext has to read the preference itself.`);
+  }
+
+  // THE SAMPLER'S OWN CONTROL. The settle loop used to accept the stillness at the START, so a
+  // smooth scroll that sat at 0 for a few frames before gliding was reported as having settled at
+  // 0px and done nothing. It passed twice on CI and then failed on main, because whether the glide
+  // begins within three frames is a race. This control takes the race out of the question: a scroll
+  // that is still for 120ms and then jumps must be reported at its END, and it fails on any machine
+  // if the loop ever goes back to accepting the opening stillness -- including this one, where a
+  // real smooth scroll does not animate and so could never have caught it.
+  console.log(`  sampler control (still for 120ms, then jumps): settled at ${sDelayed.scrolled}px`);
+  if (!(sDelayed.scrolled > 0)) {
+    problems.push(`the settle sampler reported ${sDelayed.scrolled}px for a scroll that was deliberately `
+      + 'still for 120ms and then jumped to the bottom. It is accepting the stillness before the scroll '
+      + 'starts rather than the one after it ends, so every reading above is of a moment chosen at random.');
   }
 
   // SUPPLEMENTARY, and it arms itself. Whether a smooth scroll actually ANIMATES is a property of

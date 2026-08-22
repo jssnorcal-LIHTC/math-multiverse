@@ -129,9 +129,17 @@ function readShellTables() {
   }
   const granular = keysOf(labelsSrc.slice(0, cut));
   const coarse = keysOf(labelsSrc.slice(cut));
+  // The VALUES too, so a duplicate key that also disagrees about the label can be told from one that
+  // merely repeats itself. Nine of the fourteen duplicates that used to live here disagreed, and the
+  // coarse half silently won all nine: the granular label was dead source that still read as the
+  // live one to anyone grepping for it.
+  const valuesOf = (src) => new Map(
+    [...src.matchAll(/^\s*'([^']+)'\s*:\s*'((?:[^'\\]|\\.)*)'/gm)].map((m) => [m[1], m[2]]));
+  const granularVals = valuesOf(labelsSrc.slice(0, cut));
+  const coarseVals = valuesOf(labelsSrc.slice(cut));
   if (granular.size < 50) throw new Error(`validate-curriculum: only ${granular.size} granular TOPIC_LABELS keys parsed above the boundary, which is too few to be a real read`);
   if (coarse.size < 10) throw new Error(`validate-curriculum: only ${coarse.size} coarse TOPIC_LABELS keys parsed below the boundary, which is too few to be a real read`);
-  return { labelled, granular, coarse, tipped, fallbackTargets };
+  return { labelled, granular, coarse, granularVals, coarseVals, tipped, fallbackTargets };
 }
 
 // ---------------------------------------------------------------------------
@@ -230,7 +238,7 @@ const notes = [];
 
 const crosswalk = JSON.parse(fs.readFileSync(CROSSWALK_PATH, 'utf8'));
 const index = JSON.parse(fs.readFileSync(INDEX_PATH, 'utf8'));
-const { labelled, granular, coarse, tipped, fallbackTargets } = readShellTables();
+const { labelled, granular, coarse, granularVals, coarseVals, tipped, fallbackTargets } = readShellTables();
 const { emitted, drivers, draws, lateArrivals } = deriveEmittedTopics(N);
 
 // ---- NOT-ARMED guards. Silent-clean-on-nothing is banned. ----
@@ -352,9 +360,16 @@ if (ranked.length) {
 }
 
 // Duplicate keys inside TOPIC_LABELS: JS keeps the LAST one, so a granular entry duplicated in the
-// coarse half is dead source that still reads as a coverage claim to anyone grepping it. Reported
-// rather than failed, because the shipped runtime behaviour is the coarse entry's and is correct.
+// coarse half is dead source that still reads as a coverage claim to anyone grepping it.
+//
+// A duplicate that AGREES with itself is dead weight and only reported. One that DISAGREES is a
+// defect, and it is silent: the coarse label wins and the granular one, which is the more precise
+// of the two and the one somebody wrote on purpose, never reaches the screen. Fourteen such
+// duplicates lived here and nine of them disagreed -- "Brackets" was shipping over "Brackets and
+// braces", "Volume (L x W x H)" over "Volume = L x W x H". They were removed from the granular half
+// on 26-0822, which left every label on screen exactly as it was, and this check stops a new one.
 const dupKeys = [...granular].filter((t) => coarse.has(t)).sort();
+const conflictingDupes = dupKeys.filter((t) => granularVals.get(t) !== coarseVals.get(t));
 
 console.log(`\ndangling-label census: ${orphans.length} granular label(s) with a coach tip and no generator`);
 for (const t of orphans) {
@@ -364,6 +379,12 @@ for (const t of orphans) {
 if (!orphans.length) console.log('  (none)');
 console.log(`TOPIC_LABELS duplicate keys (granular entry also present in the coarse half, the later one wins): `
   + `${dupKeys.length}${dupKeys.length ? ' -- ' + dupKeys.join(', ') : ''}`);
+for (const t of conflictingDupes) {
+  problems.push(`TOPIC_LABELS defines "${t}" twice with DIFFERENT labels: the granular half says `
+    + `${JSON.stringify(granularVals.get(t))} and the coarse half says ${JSON.stringify(coarseVals.get(t))}. `
+    + 'The coarse one is later so it wins, and the granular one never reaches the screen even though '
+    + 'it is the more precise of the two. Keep one.');
+}
 
 console.log('\ncontrols:');
 for (const c of controls) {

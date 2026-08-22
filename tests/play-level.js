@@ -455,6 +455,18 @@ const READ_CARD = () => {
 
     await page.locator('.mv-shell').waitFor({ state: 'visible', timeout: 15000 });
 
+    // A level may open on a BRIEFING panel (WP-P, 26-0822): the passage and the item are held back
+    // until Begin is tapped. This driver predates that and waited on .mv-item, which exists but is
+    // HIDDEN behind the briefing, so it timed out on every briefing-bearing pack -- which is every
+    // pack the CC1 work added. Tapped exactly as a child taps it, never routed around: a driver that
+    // skipped the briefing would stop measuring the path anybody actually takes.
+    const beginBtn = await page.$('.mv-briefing-begin');
+    if (beginBtn) {
+      await beginBtn.click();
+      await page.waitForTimeout(200);
+      note('briefing: dismissed with Begin before the first question');
+    }
+
     // ---- play ----
     const served = [];
     const total = level.questions;
