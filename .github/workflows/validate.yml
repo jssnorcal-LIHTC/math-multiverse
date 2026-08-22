@@ -89,3 +89,9 @@ jobs:
 
       - name: Level briefing (shows before the first question, Begin on screen and 44px; 2 controls)
         run: node tests/level-briefing.js
+
+      - name: CC1 pack build is current (pack JSON and every polygon SVG match a fresh build)
+        run: node build/cc1-pack-gen.js --check
+
+      - name: Figure reconcile (drawing vs its labels vs the item's own answer; 4 controls)
+        run: node tests/figure-reconcile.js

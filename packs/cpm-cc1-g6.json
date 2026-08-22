@@ -1,0 +1,1508 @@
+{
+ "meta": {
+  "id": "cpm-cc1-g6",
+  "subject": "math",
+  "grade": 6,
+  "title": "Field Notes",
+  "standards": "CCSS Math 6 (CPM CC1)",
+  "version": 1
+ },
+ "skin": {
+  "color": "#e0692b",
+  "icon": "📐",
+  "grandGoal": "Chief Surveyor"
+ },
+ "passages": [
+  {
+   "id": "p-how-to-read-a-figure",
+   "title": "How to read a figure",
+   "docKind": "field-manual",
+   "genre": "informational",
+   "source": "original",
+   "text": "Every figure in these notes is already labelled, and each side carries its own length printed beside it.  Those printed labels are the only numbers to work from.  Never measure a drawing with a ruler.  A figure is drawn to be clear, not to scale, so a side marked twelve may look shorter than a side marked five.\n\nPerimeter is the distance all the way around the outside of a shape.  Start at any corner, travel along every edge once, and finish at the corner you started from.  Add the labels together as you go.  The most common mistake is getting back to the start and carrying on, which counts one edge twice.\n\nTwo marks turn up again and again, and both are worth learning now.  A small square drawn inside a corner means that corner is a right angle, exactly ninety degrees.  Short ticks drawn across two sides mean those sides are equal to each other, which is how a figure tells you about a side it never labelled.\n\nPerimeter measures the boundary.  Area measures the space shut inside that boundary.  They answer different questions, and multiplying two side lengths gives you area, never perimeter."
+  }
+ ],
+ "levels": [
+  {
+   "id": 1,
+   "name": "Walk the Edge",
+   "goal": "Find the perimeter of a labelled figure, from a rectangle to an L-shape.",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "lives": 4,
+   "questions": 8,
+   "briefing": {
+    "title": "What perimeter is",
+    "lines": [
+     "Perimeter is the distance all the way round the outside of a shape.  Picture walking the edge of a field and ending back where you started.",
+     "Every figure here is labelled, so you never measure the drawing.  Add the labels, going round once, and count every side exactly one time.",
+     "Watch for the trap.  Multiplying two sides gives you AREA, the space inside.  That is a different question, and it is the one this app used to ask."
+    ]
+   },
+   "itemIds": [
+    "l1-perim-rect-8-5",
+    "l1-perim-rule-rect-8-5",
+    "l1-perim-rect-12-3",
+    "l1-perim-rule-rect-12-3",
+    "l1-perim-square-7",
+    "l1-perim-par-9-6",
+    "l1-perim-trap-10-4-6-5",
+    "l1-perim-tri-scalene-7-9-12",
+    "l1-perim-tri-right-6-8-10",
+    "l1-perim-tri-isosceles-9-9-4",
+    "l1-perim-pent-regular-6",
+    "l1-perim-rule-pent-regular-6",
+    "l1-perim-hex-regular-4",
+    "l1-perim-rule-hex-regular-4",
+    "l1-perim-trap-right-12-5-7-4",
+    "l1-perim-par-wide-14-5",
+    "l1-perim-oct-regular-3",
+    "l1-perim-rule-oct-regular-3",
+    "l1-perim-lshape-2",
+    "l1-perim-lshape-1",
+    "l1-missing-rect-8-5",
+    "l1-missing-lshape-1"
+   ]
+  }
+ ],
+ "items": [
+  {
+   "id": "l1-perim-rect-8-5",
+   "type": "mc",
+   "figureId": "fig-l1-rect-8-5",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a rectangle in the figure.  Every side is labelled.",
+   "choices": [
+    "26 cm",
+    "40 cm",
+    "13 cm",
+    "34 cm"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This multiplies the two side lengths, which gives the AREA, not the distance round the outside.  Area fills the shape;  perimeter walks its edge.",
+    "2": "This adds one long side and one short side and stops.  That is only half the way round: a rectangle has two of each.",
+    "3": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 8 + 5 + 8 + 5 = 26 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-rule-rect-8-5",
+   "type": "mc",
+   "figureId": "fig-l1-rect-8-5",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-rectangle-rule",
+   "dok": 2,
+   "stem": "This rectangle is 8 cm by 5 cm.  Which calculation gives its perimeter?",
+   "choices": [
+    "8 x 5",
+    "8 + 5",
+    "2 x (8 + 5)",
+    "2 x 8"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This is the AREA of the rectangle, the space inside it, not the distance round its edge.",
+    "1": "This walks along one long side and one short side and stops.  That is half the way round.",
+    "3": "This counts the two long sides and forgets the two short ones."
+   },
+   "explain": "A rectangle has two sides of 8 cm and two of 5 cm, so the perimeter is 2 x (8 + 5) = 26 cm.  8 x 5 is the area, which measures the space inside rather than the walk round the edge."
+  },
+  {
+   "id": "l1-perim-rect-12-3",
+   "type": "mc",
+   "figureId": "fig-l1-rect-12-3",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a long thin rectangle in the figure.  Every side is labelled.",
+   "choices": [
+    "36 cm",
+    "30 cm",
+    "15 cm",
+    "42 cm"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This multiplies the two side lengths, which gives the AREA, not the distance round the outside.  Area fills the shape;  perimeter walks its edge.",
+    "2": "This adds one long side and one short side and stops.  That is only half the way round: a rectangle has two of each.",
+    "3": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 12 + 3 + 12 + 3 = 30 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-rule-rect-12-3",
+   "type": "mc",
+   "figureId": "fig-l1-rect-12-3",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-rectangle-rule",
+   "dok": 2,
+   "stem": "This rectangle is 12 cm by 3 cm.  Which calculation gives its perimeter?",
+   "choices": [
+    "12 x 3",
+    "12 + 3",
+    "2 x 12",
+    "2 x (12 + 3)"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This is the AREA of the rectangle, the space inside it, not the distance round its edge.",
+    "1": "This walks along one long side and one short side and stops.  That is half the way round.",
+    "2": "This counts the two long sides and forgets the two short ones."
+   },
+   "explain": "A rectangle has two sides of 12 cm and two of 3 cm, so the perimeter is 2 x (12 + 3) = 30 cm.  12 x 3 is the area, which measures the space inside rather than the walk round the edge."
+  },
+  {
+   "id": "l1-perim-square-7",
+   "type": "mc",
+   "figureId": "fig-l1-square-7",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a square in the figure.  Every side is labelled.",
+   "choices": [
+    "49 cm",
+    "7 cm",
+    "28 cm",
+    "35 cm"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This multiplies the two side lengths, which gives the AREA, not the distance round the outside.  Area fills the shape;  perimeter walks its edge.",
+    "1": "This adds one long side and one short side and stops.  That is only half the way round: a rectangle has two of each.",
+    "3": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 7 + 7 + 7 + 7 = 28 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-par-9-6",
+   "type": "mc",
+   "figureId": "fig-l1-par-9-6",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a parallelogram in the figure.  Every side is labelled.",
+   "choices": [
+    "24 cm",
+    "36 cm",
+    "39 cm",
+    "30 cm"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This misses one of the labelled sides.  Every labelled edge counts once, all the way round.",
+    "1": "This multiplies the longest side by the number of sides, which only works when every side is the same length.  These are not.",
+    "2": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 9 + 6 + 9 + 6 = 30 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-trap-10-4-6-5",
+   "type": "mc",
+   "figureId": "fig-l1-trap-10-4-6-5",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a trapezoid in the figure.  Every side is labelled.",
+   "choices": [
+    "25 cm",
+    "21 cm",
+    "40 cm",
+    "35 cm"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This misses one of the labelled sides.  Every labelled edge counts once, all the way round.",
+    "2": "This multiplies the longest side by the number of sides, which only works when every side is the same length.  These are not.",
+    "3": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 10 + 6 + 5 + 4 = 25 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-tri-scalene-7-9-12",
+   "type": "mc",
+   "figureId": "fig-l1-tri-scalene-7-9-12",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a scalene triangle in the figure.  Every side is labelled.",
+   "choices": [
+    "21 cm",
+    "28 cm",
+    "54 cm",
+    "40 cm"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This adds only two of the three sides.  Every side of the figure is part of the walk round it.",
+    "2": "This is base times height over two, which is the AREA formula for a triangle.  The question asks how far it is round the outside.",
+    "3": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 12 + 9 + 7 = 28 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-tri-right-6-8-10",
+   "type": "mc",
+   "figureId": "fig-l1-tri-right-6-8-10",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a right triangle in the figure.  Every side is labelled.",
+   "choices": [
+    "16 cm",
+    "30 cm",
+    "24 cm",
+    "34 cm"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This adds only two of the three sides.  Every side of the figure is part of the walk round it.",
+    "1": "This is base times height over two, which is the AREA formula for a triangle.  The question asks how far it is round the outside.",
+    "3": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 6 + 10 + 8 = 24 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-tri-isosceles-9-9-4",
+   "type": "mc",
+   "figureId": "fig-l1-tri-isosceles-9-9-4",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of an isosceles triangle in the figure.  Every side is labelled.",
+   "choices": [
+    "13 cm",
+    "18 cm",
+    "31 cm",
+    "22 cm"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This adds only two of the three sides.  Every side of the figure is part of the walk round it.",
+    "1": "This is base times height over two, which is the AREA formula for a triangle.  The question asks how far it is round the outside.",
+    "2": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 4 + 9 + 9 = 22 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-pent-regular-6",
+   "type": "mc",
+   "figureId": "fig-l1-pent-regular-6",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a regular pentagon in the figure.  Every side is labelled.",
+   "choices": [
+    "30 cm",
+    "24 cm",
+    "11 cm",
+    "36 cm"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This multiplies the side length by 4 instead of 5.  Count the sides on the figure before multiplying.",
+    "2": "This adds the side length to the number of sides.  A regular polygon's perimeter is the side length multiplied by how many sides there are.",
+    "3": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 6 + 6 + 6 + 6 + 6 = 30 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-rule-pent-regular-6",
+   "type": "mc",
+   "figureId": "fig-l1-pent-regular-6",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-regular-polygon",
+   "dok": 2,
+   "stem": "A regular pentagon has every side the same length.  Which calculation gives its perimeter fastest?",
+   "choices": [
+    "6 + 5",
+    "6 x 5",
+    "6 x 4",
+    "6 + 6"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This adds the side length to the number of sides.  Adding them mixes a length with a count;  the sides have to be added 5 times, which is the same as multiplying.",
+    "2": "This uses 4 sides.  Count the edges on the figure: there are 5.",
+    "3": "This adds only two of the sides.  A regular polygon has more than two, and every one of them counts."
+   },
+   "explain": "Every side is 6 cm and there are 5 of them, so the perimeter is 6 x 5 = 30 cm.  Adding 6 to itself 5 times gives the same number;  multiplying is the shortcut, and it only works because every side matches."
+  },
+  {
+   "id": "l1-perim-hex-regular-4",
+   "type": "mc",
+   "figureId": "fig-l1-hex-regular-4",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a regular hexagon in the figure.  Every side is labelled.",
+   "choices": [
+    "20 cm",
+    "24 cm",
+    "10 cm",
+    "28 cm"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This multiplies the side length by 5 instead of 6.  Count the sides on the figure before multiplying.",
+    "2": "This adds the side length to the number of sides.  A regular polygon's perimeter is the side length multiplied by how many sides there are.",
+    "3": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 4 + 4 + 4 + 4 + 4 + 4 = 24 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-rule-hex-regular-4",
+   "type": "mc",
+   "figureId": "fig-l1-hex-regular-4",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-regular-polygon",
+   "dok": 2,
+   "stem": "A regular hexagon has every side the same length.  Which calculation gives its perimeter fastest?",
+   "choices": [
+    "4 + 6",
+    "4 x 5",
+    "4 x 6",
+    "4 + 4"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This adds the side length to the number of sides.  Adding them mixes a length with a count;  the sides have to be added 6 times, which is the same as multiplying.",
+    "1": "This uses 5 sides.  Count the edges on the figure: there are 6.",
+    "3": "This adds only two of the sides.  A regular polygon has more than two, and every one of them counts."
+   },
+   "explain": "Every side is 4 cm and there are 6 of them, so the perimeter is 4 x 6 = 24 cm.  Adding 4 to itself 6 times gives the same number;  multiplying is the shortcut, and it only works because every side matches."
+  },
+  {
+   "id": "l1-perim-trap-right-12-5-7-4",
+   "type": "mc",
+   "figureId": "fig-l1-trap-right-12-5-7-4",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a right trapezoid in the figure.  Every side is labelled.",
+   "choices": [
+    "24 cm",
+    "48 cm",
+    "28 cm",
+    "40 cm"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This misses one of the labelled sides.  Every labelled edge counts once, all the way round.",
+    "1": "This multiplies the longest side by the number of sides, which only works when every side is the same length.  These are not.",
+    "3": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 12 + 5 + 7 + 4 = 28 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-par-wide-14-5",
+   "type": "mc",
+   "figureId": "fig-l1-par-wide-14-5",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a wide parallelogram in the figure.  Every side is labelled.",
+   "choices": [
+    "33 cm",
+    "56 cm",
+    "52 cm",
+    "38 cm"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This misses one of the labelled sides.  Every labelled edge counts once, all the way round.",
+    "1": "This multiplies the longest side by the number of sides, which only works when every side is the same length.  These are not.",
+    "2": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 14 + 5 + 14 + 5 = 38 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-oct-regular-3",
+   "type": "mc",
+   "figureId": "fig-l1-oct-regular-3",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a regular octagon in the figure.  Every side is labelled.",
+   "choices": [
+    "24 cm",
+    "21 cm",
+    "11 cm",
+    "27 cm"
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "This multiplies the side length by 7 instead of 8.  Count the sides on the figure before multiplying.",
+    "2": "This adds the side length to the number of sides.  A regular polygon's perimeter is the side length multiplied by how many sides there are.",
+    "3": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 3 + 3 + 3 + 3 + 3 + 3 + 3 + 3 = 24 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-rule-oct-regular-3",
+   "type": "mc",
+   "figureId": "fig-l1-oct-regular-3",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-regular-polygon",
+   "dok": 2,
+   "stem": "A regular octagon has every side the same length.  Which calculation gives its perimeter fastest?",
+   "choices": [
+    "3 + 8",
+    "3 x 8",
+    "3 x 7",
+    "3 + 3"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This adds the side length to the number of sides.  Adding them mixes a length with a count;  the sides have to be added 8 times, which is the same as multiplying.",
+    "2": "This uses 7 sides.  Count the edges on the figure: there are 8.",
+    "3": "This adds only two of the sides.  A regular polygon has more than two, and every one of them counts."
+   },
+   "explain": "Every side is 3 cm and there are 8 of them, so the perimeter is 3 x 8 = 24 cm.  Adding 3 to itself 8 times gives the same number;  multiplying is the shortcut, and it only works because every side matches."
+  },
+  {
+   "id": "l1-perim-lshape-2",
+   "type": "mc",
+   "figureId": "fig-l1-lshape-2",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of a second L-shaped figure in the figure.  Every side is labelled.",
+   "choices": [
+    "22 cm",
+    "30 cm",
+    "48 cm",
+    "38 cm"
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "This misses one of the labelled sides.  Every labelled edge counts once, all the way round.",
+    "2": "This multiplies the longest side by the number of sides, which only works when every side is the same length.  These are not.",
+    "3": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 7 + 3 + 4 + 5 + 3 + 8 = 30 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-perim-lshape-1",
+   "type": "mc",
+   "figureId": "fig-l1-lshape-1",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-labelled-polygon",
+   "dok": 2,
+   "stem": "Find the perimeter of an L-shaped figure in the figure.  Every side is labelled.",
+   "choices": [
+    "29 cm",
+    "60 cm",
+    "38 cm",
+    "48 cm"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This misses one of the labelled sides.  Every labelled edge counts once, all the way round.",
+    "1": "This multiplies the longest side by the number of sides, which only works when every side is the same length.  These are not.",
+    "3": "This counts one of the sides twice.  Start at a corner, go all the way round, and stop where you started."
+   },
+   "explain": "Perimeter is the distance all the way round the outside, so add every labelled side once: 10 + 4 + 6 + 5 + 4 + 9 = 38 cm.  The wrong options each come from a real habit: multiplying sides gives area rather than perimeter, stopping early misses an edge, and counting an edge twice walks past the corner you started from."
+  },
+  {
+   "id": "l1-missing-rect-8-5",
+   "type": "mc",
+   "figureId": "fig-l1-rect-8-5",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-missing-side",
+   "dok": 3,
+   "stem": "The perimeter of a rectangle is 26 cm.  Every side is labelled except one.  If the other sides are 8, 8, 5 cm, how long is the missing side?",
+   "choices": [
+    "21 cm",
+    "31 cm",
+    "7 cm",
+    "5 cm"
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "This is the total of the sides you were GIVEN.  The question asks for the one that is missing, which is what is left over after those are taken off the perimeter.",
+    "1": "This adds the missing side to the perimeter instead of taking the known sides away from it.  The perimeter already includes every side.",
+    "2": "This divides the perimeter by 4, which only gives a side length when every side is the same.  These are not all the same."
+   },
+   "explain": "The perimeter counts every side once, so the known sides plus the missing one make 26 cm.  Add the known sides: 8 + 8 + 5 = 21.  Take that off the perimeter: 26 - 21 = 5 cm."
+  },
+  {
+   "id": "l1-missing-lshape-1",
+   "type": "mc",
+   "figureId": "fig-l1-lshape-1",
+   "passageId": "p-how-to-read-a-figure",
+   "targets": [
+    "math-r4-perimeter"
+   ],
+   "coachTopic": "perimeter-missing-side",
+   "dok": 3,
+   "stem": "The perimeter of an L-shaped figure is 38 cm.  Every side is labelled except one.  If the other sides are 10, 4, 5, 4, 9 cm, how long is the missing side?",
+   "choices": [
+    "32 cm",
+    "44 cm",
+    "6 cm",
+    "10 cm"
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "This is the total of the sides you were GIVEN.  The question asks for the one that is missing, which is what is left over after those are taken off the perimeter.",
+    "1": "This adds the missing side to the perimeter instead of taking the known sides away from it.  The perimeter already includes every side.",
+    "3": "This is the longest side on the figure, not the missing one.  The missing side is whatever is left of the perimeter once every labelled side is taken off."
+   },
+   "explain": "The perimeter counts every side once, so the known sides plus the missing one make 38 cm.  Add the known sides: 10 + 4 + 5 + 4 + 9 = 32.  Take that off the perimeter: 38 - 32 = 6 cm."
+  }
+ ],
+ "figures": [
+  {
+   "id": "fig-l1-rect-8-5",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a rectangle, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A rectangle with the top and bottom sides labelled 8 cm and the left and right sides labelled 5 cm.  All four corners carry a right-angle mark.",
+   "src": "art/cpm-cc1-g6/fig-l1-rect-8-5.svg",
+   "dataTable": {
+    "shape": "rectangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      0
+     ],
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      0,
+      5
+     ]
+    ],
+    "sides": [
+     {
+      "label": "8 cm",
+      "len": 8
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     },
+     {
+      "label": "8 cm",
+      "len": 8
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     }
+    ],
+    "rightAngles": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "fig-l1-rect-12-3",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a long thin rectangle, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A wide rectangle with the top and bottom sides labelled 12 cm and the left and right sides labelled 3 cm.  All four corners carry a right-angle mark.",
+   "src": "art/cpm-cc1-g6/fig-l1-rect-12-3.svg",
+   "dataTable": {
+    "shape": "rectangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      0
+     ],
+     [
+      12,
+      0
+     ],
+     [
+      12,
+      3
+     ],
+     [
+      0,
+      3
+     ]
+    ],
+    "sides": [
+     {
+      "label": "12 cm",
+      "len": 12
+     },
+     {
+      "label": "3 cm",
+      "len": 3
+     },
+     {
+      "label": "12 cm",
+      "len": 12
+     },
+     {
+      "label": "3 cm",
+      "len": 3
+     }
+    ],
+    "rightAngles": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "fig-l1-square-7",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a square, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A square with all four sides labelled 7 cm.  Each side carries a single congruence tick and each corner carries a right-angle mark.",
+   "src": "art/cpm-cc1-g6/fig-l1-square-7.svg",
+   "dataTable": {
+    "shape": "rectangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      0
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      7
+     ],
+     [
+      0,
+      7
+     ]
+    ],
+    "sides": [
+     {
+      "label": "7 cm",
+      "len": 7
+     },
+     {
+      "label": "7 cm",
+      "len": 7
+     },
+     {
+      "label": "7 cm",
+      "len": 7
+     },
+     {
+      "label": "7 cm",
+      "len": 7
+     }
+    ],
+    "ticks": {
+     "0": 1,
+     "1": 1,
+     "2": 1,
+     "3": 1
+    },
+    "rightAngles": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "fig-l1-par-9-6",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a parallelogram, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A parallelogram.  The two long sides are labelled 9 cm and each carries one tick.  The two slanted sides are labelled 6 cm and each carries two ticks.",
+   "src": "art/cpm-cc1-g6/fig-l1-par-9-6.svg",
+   "dataTable": {
+    "shape": "parallelogram",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      5.2977
+     ],
+     [
+      9,
+      5.2977
+     ],
+     [
+      11.8168,
+      0
+     ],
+     [
+      2.8168,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "9 cm",
+      "len": 9
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "9 cm",
+      "len": 9
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     }
+    ],
+    "ticks": {
+     "0": 1,
+     "1": 2,
+     "2": 1,
+     "3": 2
+    },
+    "note": "not a rectangle"
+   }
+  },
+  {
+   "id": "fig-l1-trap-10-4-6-5",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a trapezoid, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A trapezoid.  The long bottom side is labelled 10 cm, the right slanted side 6 cm, the short top side 5 cm, and the left slanted side 4 cm.",
+   "src": "art/cpm-cc1-g6/fig-l1-trap-10-4-6-5.svg",
+   "dataTable": {
+    "shape": "trapezoid",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      3.9686
+     ],
+     [
+      10,
+      3.9686
+     ],
+     [
+      5.5,
+      0
+     ],
+     [
+      0.5,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "10 cm",
+      "len": 10
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     },
+     {
+      "label": "4 cm",
+      "len": 4
+     }
+    ]
+   }
+  },
+  {
+   "id": "fig-l1-tri-scalene-7-9-12",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a scalene triangle, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A triangle with three different side lengths, labelled 12 cm along the bottom, 9 cm on the right, and 7 cm on the left.",
+   "src": "art/cpm-cc1-g6/fig-l1-tri-scalene-7-9-12.svg",
+   "dataTable": {
+    "shape": "triangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      5.2175
+     ],
+     [
+      12,
+      5.2175
+     ],
+     [
+      4.6667,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "12 cm",
+      "len": 12
+     },
+     {
+      "label": "9 cm",
+      "len": 9
+     },
+     {
+      "label": "7 cm",
+      "len": 7
+     }
+    ]
+   }
+  },
+  {
+   "id": "fig-l1-tri-right-6-8-10",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a right triangle, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A right triangle.  The bottom side is labelled 6 cm, the slanted side 10 cm, and the upright side 8 cm.  The bottom-left corner carries a right-angle mark.",
+   "src": "art/cpm-cc1-g6/fig-l1-tri-right-6-8-10.svg",
+   "dataTable": {
+    "shape": "triangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      8
+     ],
+     [
+      6,
+      8
+     ],
+     [
+      0,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "10 cm",
+      "len": 10
+     },
+     {
+      "label": "8 cm",
+      "len": 8
+     }
+    ],
+    "rightAngles": [
+     0
+    ]
+   }
+  },
+  {
+   "id": "fig-l1-tri-isosceles-9-9-4",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: an isosceles triangle, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "An isosceles triangle.  The short bottom side is labelled 4 cm.  The two long slanted sides are each labelled 9 cm and each carries one tick.",
+   "src": "art/cpm-cc1-g6/fig-l1-tri-isosceles-9-9-4.svg",
+   "dataTable": {
+    "shape": "triangle",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      8.775
+     ],
+     [
+      4,
+      8.775
+     ],
+     [
+      2,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "4 cm",
+      "len": 4
+     },
+     {
+      "label": "9 cm",
+      "len": 9
+     },
+     {
+      "label": "9 cm",
+      "len": 9
+     }
+    ],
+    "ticks": {
+     "1": 1,
+     "2": 1
+    }
+   }
+  },
+  {
+   "id": "fig-l1-pent-regular-6",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a regular pentagon, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A regular pentagon.  All five sides are labelled 6 cm and each carries a single congruence tick.",
+   "src": "art/cpm-cc1-g6/fig-l1-pent-regular-6.svg",
+   "dataTable": {
+    "shape": "regular",
+    "units": "cm",
+    "vertices": [
+     [
+      -3,
+      4.1291
+     ],
+     [
+      -4.8541,
+      -1.5772
+     ],
+     [
+      0,
+      -5.1039
+     ],
+     [
+      4.8541,
+      -1.5772
+     ],
+     [
+      3,
+      4.1291
+     ]
+    ],
+    "sides": [
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     }
+    ],
+    "ticks": {
+     "0": 1,
+     "1": 1,
+     "2": 1,
+     "3": 1,
+     "4": 1
+    }
+   }
+  },
+  {
+   "id": "fig-l1-hex-regular-4",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a regular hexagon, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A regular hexagon.  All six sides are labelled 4 cm and each carries a single congruence tick.",
+   "src": "art/cpm-cc1-g6/fig-l1-hex-regular-4.svg",
+   "dataTable": {
+    "shape": "regular",
+    "units": "cm",
+    "vertices": [
+     [
+      -2,
+      3.4641
+     ],
+     [
+      -4,
+      0
+     ],
+     [
+      -2,
+      -3.4641
+     ],
+     [
+      2,
+      -3.4641
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      2,
+      3.4641
+     ]
+    ],
+    "sides": [
+     {
+      "label": "4 cm",
+      "len": 4
+     },
+     {
+      "label": "4 cm",
+      "len": 4
+     },
+     {
+      "label": "4 cm",
+      "len": 4
+     },
+     {
+      "label": "4 cm",
+      "len": 4
+     },
+     {
+      "label": "4 cm",
+      "len": 4
+     },
+     {
+      "label": "4 cm",
+      "len": 4
+     }
+    ],
+    "ticks": {
+     "0": 1,
+     "1": 1,
+     "2": 1,
+     "3": 1,
+     "4": 1,
+     "5": 1
+    }
+   }
+  },
+  {
+   "id": "fig-l1-trap-right-12-5-7-4",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a right trapezoid, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A trapezoid with two right angles on the right-hand side.  The long bottom side is labelled 12 cm, the upright right side 5 cm, the top side 7 cm, and the slanted left side 4 cm.",
+   "src": "art/cpm-cc1-g6/fig-l1-trap-right-12-5-7-4.svg",
+   "dataTable": {
+    "shape": "trapezoid",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      3.6661
+     ],
+     [
+      12,
+      3.6661
+     ],
+     [
+      8.6,
+      0
+     ],
+     [
+      1.6,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "12 cm",
+      "len": 12
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     },
+     {
+      "label": "7 cm",
+      "len": 7
+     },
+     {
+      "label": "4 cm",
+      "len": 4
+     }
+    ]
+   }
+  },
+  {
+   "id": "fig-l1-par-wide-14-5",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a wide parallelogram, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A wide parallelogram.  The two long sides are labelled 14 cm and each carries one tick.  The two short slanted sides are labelled 5 cm and each carries two ticks.",
+   "src": "art/cpm-cc1-g6/fig-l1-par-wide-14-5.svg",
+   "dataTable": {
+    "shape": "parallelogram",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      4.0958
+     ],
+     [
+      14,
+      4.0958
+     ],
+     [
+      16.8679,
+      0
+     ],
+     [
+      2.8679,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "14 cm",
+      "len": 14
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     },
+     {
+      "label": "14 cm",
+      "len": 14
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     }
+    ],
+    "ticks": {
+     "0": 1,
+     "1": 2,
+     "2": 1,
+     "3": 2
+    },
+    "note": "not a rectangle"
+   }
+  },
+  {
+   "id": "fig-l1-oct-regular-3",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a regular octagon, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A regular octagon.  All eight sides are labelled 3 cm and each carries a single congruence tick.",
+   "src": "art/cpm-cc1-g6/fig-l1-oct-regular-3.svg",
+   "dataTable": {
+    "shape": "regular",
+    "units": "cm",
+    "vertices": [
+     [
+      -1.5,
+      3.6213
+     ],
+     [
+      -3.6213,
+      1.5
+     ],
+     [
+      -3.6213,
+      -1.5
+     ],
+     [
+      -1.5,
+      -3.6213
+     ],
+     [
+      1.5,
+      -3.6213
+     ],
+     [
+      3.6213,
+      -1.5
+     ],
+     [
+      3.6213,
+      1.5
+     ],
+     [
+      1.5,
+      3.6213
+     ]
+    ],
+    "sides": [
+     {
+      "label": "3 cm",
+      "len": 3
+     },
+     {
+      "label": "3 cm",
+      "len": 3
+     },
+     {
+      "label": "3 cm",
+      "len": 3
+     },
+     {
+      "label": "3 cm",
+      "len": 3
+     },
+     {
+      "label": "3 cm",
+      "len": 3
+     },
+     {
+      "label": "3 cm",
+      "len": 3
+     },
+     {
+      "label": "3 cm",
+      "len": 3
+     },
+     {
+      "label": "3 cm",
+      "len": 3
+     }
+    ],
+    "ticks": {
+     "0": 1,
+     "1": 1,
+     "2": 1,
+     "3": 1,
+     "4": 1,
+     "5": 1,
+     "6": 1,
+     "7": 1
+    }
+   }
+  },
+  {
+   "id": "fig-l1-lshape-2",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: a second L-shaped figure, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "A second L-shaped figure with six sides, labelled in order around the outside: 7 cm, 3 cm, 4 cm, 5 cm, 3 cm and 8 cm.  Every corner carries a right-angle mark.",
+   "src": "art/cpm-cc1-g6/fig-l1-lshape-2.svg",
+   "dataTable": {
+    "shape": "lshape",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      8
+     ],
+     [
+      7,
+      8
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      0,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "7 cm",
+      "len": 7
+     },
+     {
+      "label": "3 cm",
+      "len": 3
+     },
+     {
+      "label": "4 cm",
+      "len": 4
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     },
+     {
+      "label": "3 cm",
+      "len": 3
+     },
+     {
+      "label": "8 cm",
+      "len": 8
+     }
+    ],
+    "rightAngles": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   }
+  },
+  {
+   "id": "fig-l1-lshape-1",
+   "kind": "diagram",
+   "genKind": "polygon",
+   "caption": "Perimeter practice: an L-shaped figure, every side labelled.",
+   "credit": "Built for this pack in the V1 design tokens (original work).",
+   "alt": "An L-shaped figure with six sides, labelled in order around the outside: 10 cm, 4 cm, 6 cm, 5 cm, 4 cm and 9 cm.  Every corner carries a right-angle mark.",
+   "src": "art/cpm-cc1-g6/fig-l1-lshape-1.svg",
+   "dataTable": {
+    "shape": "lshape",
+    "units": "cm",
+    "vertices": [
+     [
+      0,
+      9
+     ],
+     [
+      10,
+      9
+     ],
+     [
+      10,
+      5
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      0,
+      0
+     ]
+    ],
+    "sides": [
+     {
+      "label": "10 cm",
+      "len": 10
+     },
+     {
+      "label": "4 cm",
+      "len": 4
+     },
+     {
+      "label": "6 cm",
+      "len": 6
+     },
+     {
+      "label": "5 cm",
+      "len": 5
+     },
+     {
+      "label": "4 cm",
+      "len": 4
+     },
+     {
+      "label": "9 cm",
+      "len": 9
+     }
+    ],
+    "rightAngles": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,182 @@
+{
+  "packId": "cpm-cc1-g6",
+  "model": "claude-sonnet-5",
+  "records": [
+    {
+      "itemId": "l1-perim-rect-8-5",
+      "itemHash": "df0fee8d14028c6a",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-rule-rect-8-5",
+      "itemHash": "89045543d15f88eb",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-rect-12-3",
+      "itemHash": "8d99948c4dd71d6c",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-rule-rect-12-3",
+      "itemHash": "977d1c513c96affb",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-square-7",
+      "itemHash": "d94b1d81a93b197b",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-tri-right-6-8-10",
+      "itemHash": "1384a6611a7381fa",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-pent-regular-6",
+      "itemHash": "f99ddae13ff6ccc1",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-rule-pent-regular-6",
+      "itemHash": "d3fde5a04b166e84",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-hex-regular-4",
+      "itemHash": "bfc51e6bc6154082",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-rule-hex-regular-4",
+      "itemHash": "bc150cb37bf04fb2",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-oct-regular-3",
+      "itemHash": "b8abe7b97b3a2cc7",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-rule-oct-regular-3",
+      "itemHash": "7147f0632edba8b1",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-missing-rect-8-5",
+      "itemHash": "eaa2d6adb3922caf",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-par-9-6",
+      "itemHash": "d058809b220079eb",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-trap-10-4-6-5",
+      "itemHash": "4d3378a1bc90cb87",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-tri-scalene-7-9-12",
+      "itemHash": "f0183669c932e830",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-tri-isosceles-9-9-4",
+      "itemHash": "8b10eeda64d3c883",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-trap-right-12-5-7-4",
+      "itemHash": "053bcf40019b3bea",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-par-wide-14-5",
+      "itemHash": "6f96296b8c962a70",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-lshape-2",
+      "itemHash": "f00f132b2202321e",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-perim-lshape-1",
+      "itemHash": "32ce01663de047a4",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-missing-lshape-1",
+      "itemHash": "954b48d95d832a46",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    }
+  ]
+}
