@@ -30,7 +30,7 @@ jobs:
       - name: Validate content packs (structure, verbatim spans, readability, blind-verdict ledger)
         run: node tests/validate-pack.js
 
-      - name: Curriculum crosswalk gate (CC1 lesson map; emitted-topic check, gap count, 5 controls)
+      - name: Curriculum crosswalk gate (CC1 lesson map; emitted-topic check, gap count, build-list rank, 8 controls)
         run: node tests/validate-curriculum.js
 
       - name: Figure-derive gate (regenerated chart SVGs byte-match their committed src; fixture controls)
@@ -93,5 +93,5 @@ jobs:
       - name: CC1 pack build is current (pack JSON and every polygon SVG match a fresh build)
         run: node build/cc1-pack-gen.js --check
 
-      - name: Figure reconcile (drawing vs its labels vs the item's own answer; 4 controls)
+      - name: Figure reconcile (drawing vs its labels vs the item's own answer; 15 controls)
         run: node tests/figure-reconcile.js
