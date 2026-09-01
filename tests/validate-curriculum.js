@@ -227,6 +227,44 @@ function validate(cw, ctx) {
     if (!seen.has(lesson)) errors.push(`lesson ${lesson} is in the book's index but missing from the crosswalk`);
   }
 
+  // ---- THE BUILD LIST, checked against the gap lines it claims to rank ----
+  //
+  // The rank used to be a hand-typed position in BUILD_ORDER and it went stale exactly the way
+  // packItemTargets had: on 26-0901 five rows WP2 had finished still held ranks 2 through 6, so the
+  // printed backlog opened with five lines of completed work and the real next item sat at 7. The
+  // generator derives the rank now, and these are the artifact-side checks, because the artifact is
+  // what ships and what anybody reads.
+  const blocks = Array.isArray(cw.blocks) ? cw.blocks : [];
+  const rankedRows = blocks.filter((b) => b.rank);
+  if (blocks.length && !rankedRows.length) {
+    errors.push('ARMING: not one block carries a rank, so every build-list check below is vacuous. '
+      + 'Either the backlog is genuinely empty, which is a thing to celebrate and then retire these '
+      + 'checks for, or the rank stopped being emitted.');
+  }
+  for (const b of blocks) {
+    const open = (b.gaps || []).length;
+    if (open && !b.rank) {
+      errors.push(`block ${b.id} declares ${open} open gap line(s) and carries no rank, so it sits in `
+        + 'no build list and would be built never.');
+    }
+    if (b.rank && !open) {
+      errors.push(`block ${b.id} holds rank ${b.rank} with no open gap line left. A finished row must `
+        + 'retire from the build list rather than hold a place near the top of it.');
+    }
+    if (b.retired && (b.rank || open)) {
+      errors.push(`block ${b.id} is marked retired while carrying rank ${b.rank} and ${open} open gap `
+        + 'line(s). Retired means finished and unranked; it cannot mean both.');
+    }
+  }
+  // The ranks must be exactly 1..N. A duplicate or a hole means the renumbering did not happen,
+  // which is what a stale hand-typed list looks like from the outside.
+  const ranks = rankedRows.map((b) => b.rank).sort((x, y) => x - y);
+  const expected = ranks.map((_, i) => i + 1);
+  if (ranks.join(',') !== expected.join(',')) {
+    errors.push(`the ranked build list is not numbered 1..${ranks.length}: it reads ${ranks.join(', ')}. `
+      + 'A hole or a duplicate means finished rows were dropped without the rest being renumbered.');
+  }
+
   return errors;
 }
 
@@ -326,6 +364,32 @@ control('NEGATIVE 4: a row that serves nothing and declares no gap',
   (cw) => { cw.lessons[0].moduleTopics = []; cw.lessons[0].packItemTargets = []; cw.lessons[0].gaps = []; return 'a row serving nothing with an empty gaps[]'; },
   'reads as covered while covering nothing');
 
+// NEGATIVE 5 is the 26-0901 defect itself, replayed. Five finished rows held ranks 2 through 6 and
+// no gate said so, because the rank and the verdict were both hand-typed and neither was measured.
+control('NEGATIVE 5: a finished row still holding its rank',
+  (cw) => {
+    const b = cw.blocks.filter((x) => x.rank).sort((x, y) => x.rank - y.rank)[0];
+    b.gaps = [];
+    return `a rank-${b.rank} row with every gap line closed (${b.id})`;
+  },
+  'retire from the build list');
+
+control('NEGATIVE 6: open work that no build list names',
+  (cw) => {
+    const b = cw.blocks.filter((x) => x.rank && (x.gaps || []).length).sort((x, y) => y.rank - x.rank)[0];
+    b.rank = null;
+    return `a row with ${b.gaps.length} open gap line(s) and no rank (${b.id})`;
+  },
+  'sits in no build list');
+
+control('NEGATIVE 7: a hole in the numbering',
+  (cw) => {
+    const b = cw.blocks.filter((x) => x.rank).sort((x, y) => y.rank - x.rank)[0];
+    b.rank = b.rank + 5;
+    return 'a ranked list numbered with a gap in it';
+  },
+  'is not numbered 1..');
+
 // ---------------------------------------------------------------------------
 // Report.
 // ---------------------------------------------------------------------------
@@ -358,6 +422,12 @@ if (ranked.length) {
   for (const b of ranked.slice(0, 6)) console.log(`    ${String(b.rank).padStart(2)}. [${b.verdict}] ${b.lessons[0]} ${b.title}`);
   console.log(`    ... ${Math.max(0, ranked.length - 6)} more`);
 }
+// Retired rows are printed rather than merely dropped. A backlog that silently shortens looks the
+// same as one nobody is maintaining, and the whole point of deriving the rank was to make finished
+// work visible on the build that finishes it.
+const retired = (crosswalk.blocks || []).filter((b) => b.retired);
+console.log(`  retired from the build list, every gap line closed: ${retired.length}`
+  + (retired.length ? ` -- ${retired.map((b) => b.lessons[0]).join(', ')}` : ''));
 
 // Duplicate keys inside TOPIC_LABELS: JS keeps the LAST one, so a granular entry duplicated in the
 // coarse half is dead source that still reads as a coverage claim to anyone grepping it.

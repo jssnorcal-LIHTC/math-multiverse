@@ -503,31 +503,60 @@ const STANDALONE = [
 // independently, because Justin photographed that homework on 26-0819; the plan records all five
 // of its concepts. Every other lesson is tagged from its block, which is what `confidence` says.
 
-// The ranked build list, worst first: what WP2 fills and in what order. Ordered by whether the
-// row blocks the homework already on the table, then by whether it is a hard gap rather than a
-// partial. Every PARTIAL and GAP row appears exactly once; COVERED rows do not appear.
+// THE PRIORITY SEQUENCE. Not the rank. `rank` is derived from this list further down by dropping
+// the rows that have finished, so a row retires itself the day its last gap line closes and the
+// rows under it move up without anybody editing this array.
+//
+// It is a sequence rather than a rank because the ORDER is a judgment nothing can measure, while
+// the CUT is a measured fact. Finished rows are kept here on purpose: they are the record of what
+// was built and in what order, and their retirement is proven on every build rather than
+// remembered.
+//
+// THE CRITERION, re-set 26-0901. The original first key was "does this row block the homework
+// already on the table", and it ran out: that homework was CC1 lesson 1.1.3, and 1.1.3 is now at
+// zero gaps. What replaces it:
+//
+//   PRIMARY, curriculum position ascending. This app exists to track Niall's class, and Justin's
+//   only recurring input is which lesson they are on, so a row the class reaches in three weeks is
+//   worth more than one it reaches in March. Under the old second key -- hard gap before partial --
+//   box plots sat at 10 and Types of Numbers at 13, which builds chapter 8 content while the class
+//   is in chapter 2.
+//
+//   ONE PROMOTION, stated rather than buried in the order: pg-6.2.3 stays first. Its one open gap
+//   is perimeter written as an EXPRESSION; the pack already teaches perimeter as a number in L1 and
+//   L6 Review and Preview already previews algebra, so it improves a level Niall plays now rather
+//   than one he reaches later. It is the only row promoted out of curriculum order.
+//
+// Cost is deliberately NOT a key. Two of the near rows want a figure type nothing can draw yet
+// (stem-and-leaf, generic rectangles) and two want no figure at all (Types of Numbers, the
+// distributive property); ordering by cost would quietly re-sort the class's own sequence around
+// whatever happens to be cheap to build.
 const BUILD_ORDER = [
-  'pg-6.2.3',            // perimeter: problem 1-21, and currently taught as a wrong answer
-  'sa-classify-figures', // problem 1-22, zero content anywhere in the app
-  'pg-1.1.4',            // problem 1-23, and the lesson the class reaches next
-  'pg-1.1.3',            // problem 1-19, partial and in the wrong grade
-  'sa-decimal-word',     // problem 1-20b, the reverse direction that does not exist
-  'pg-4.1.1-gen',        // the same generalising shortfall as 1.1.3, made explicit
-  'pg-3.2.1',
-  'pg-3.2.3-abs',
-  'pg-2.1.2',
-  'pg-8.1.4',
-  'pg-3.1.2',
-  'pg-4.1.1-var',
-  'pg-1.2.3',
-  'pg-5.3.1',
-  'pg-2.3.3',
-  'pg-2.3.1',
-  'pg-4.2.1',
-  'pg-5.1.1',
-  'pg-6.2.4',
-  'pg-7.3.4',
-  'pg-8.3.2',
+  // Built, and retired from the rank automatically because no gap line is left. None of these was
+  // removed by hand, and none has to be.
+  'sa-classify-figures', // L2 Name the Shape, 26-0822
+  'pg-1.1.4',            // L5 Read the Chart, 26-0822
+  'pg-1.1.3',            // L4 Find the Rule, 26-0822
+  'sa-decimal-word',     // L3 Say the Number, 26-0822
+  'pg-4.1.1-gen',        // L4 and L6, 26-0822
+
+  // Open, in the order the criterion above sets.
+  'pg-6.2.3',            // 6.2.3  promoted: one item type from content that already ships
+  'pg-1.2.3',            // 1.2.3  primes, composites, factor pairs, GCF and LCM
+  'pg-2.1.2',            // 2.1.2  stem-and-leaf plots
+  'pg-2.3.1',            // 2.3.1  generic rectangles and partial products
+  'pg-2.3.3',            // 2.3.3  the distributive property
+  'pg-3.1.2',            // 3.1.2  fraction, decimal and percent equivalents
+  'pg-3.2.1',            // 3.2.1  operations with integers
+  'pg-3.2.3-abs',        // 3.2.3  absolute value
+  'pg-4.1.1-var',        // 4.1.1  variable expressions
+  'pg-4.2.1',            // 4.2.1  scaling figures and scale factor
+  'pg-5.1.1',            // 5.1.1  multiplying fractions with an area model
+  'pg-5.3.1',            // 5.3.1  area of polygons and complex figures
+  'pg-6.2.4',            // 6.2.4  combining like terms
+  'pg-7.3.4',            // 7.3.4  graphing and solving inequalities
+  'pg-8.1.4',            // 8.1.4  box plots
+  'pg-8.3.2',            // 8.3.2  distance, rate and time
 ];
 
 // ---------------------------------------------------------------------------
@@ -565,19 +594,15 @@ const index = JSON.parse(fs.readFileSync(INDEX_PATH, 'utf8'));
 const lessonIds = Object.keys(index.lessons);
 if (lessonIds.length < 60) throw new Error('curriculum-gen: the lesson index looks empty (' + lessonIds.length + ' lessons)');
 
-// Rank comes from BUILD_ORDER, once. A row named twice, or a PARTIAL/GAP row named nowhere, is a
-// build error rather than a silently unranked entry.
+// BUILD_ORDER's own shape, checked before anything reads it. The RANK is derived further down,
+// after the gap lines have been closed, because a row's rank depends on whether it is finished and
+// that is not known until then.
 const ALL_ROWS = BLOCKS.concat(STANDALONE);
-const RANK = new Map();
-BUILD_ORDER.forEach((id, i) => {
-  if (RANK.has(id)) throw new Error('curriculum-gen: BUILD_ORDER names ' + id + ' twice');
+const namedInOrder = new Set();
+for (const id of BUILD_ORDER) {
+  if (namedInOrder.has(id)) throw new Error('curriculum-gen: BUILD_ORDER names ' + id + ' twice');
   if (!ALL_ROWS.some((b) => b.id === id)) throw new Error('curriculum-gen: BUILD_ORDER names unknown row ' + id);
-  RANK.set(id, i + 1);
-});
-for (const b of ALL_ROWS) {
-  const needsRank = b.verdict !== 'COVERED' && !b.crossRef;
-  if (needsRank && !RANK.has(b.id)) throw new Error('curriculum-gen: ' + b.id + ' is ' + b.verdict + ' but BUILD_ORDER never ranks it');
-  if (!needsRank && RANK.has(b.id)) throw new Error('curriculum-gen: ' + b.id + ' is COVERED but BUILD_ORDER ranks it');
+  namedInOrder.add(id);
 }
 
 // A lesson may sit under more than one row (4.1.3 is named by three Parent Guide blocks, 1.1.3 by
@@ -665,6 +690,75 @@ for (const b of BLOCKS.concat(STANDALONE)) {
   b.packItemTargets = derived;
 }
 
+// ---------------------------------------------------------------------------
+// WHAT IS FINISHED, AND THEREFORE WHAT IS STILL RANKED.
+//
+// `verdict` and the rank were both hand-typed, and on 26-0901 both were stale the way
+// packItemTargets had been. Measured across all 38 rows, the authored verdict disagreed with the
+// packs on 8, and every one of the 8 was BEHIND the packs, never ahead; five rows WP2 had finished
+// still held ranks 2 through 6 and pushed the real backlog down under them. A field nobody
+// measures records how recently somebody remembered to edit it.
+//
+// A row is FINISHED when it has no open gap line left, and that is a measured fact: gap lines close
+// themselves against the coach topics the packs carry, and a closedBy naming a topic no pack
+// carries already throws above, so a gap cannot be closed by a typo.
+//
+// What is NOT measurable is the PARTIAL vs GAP split, so it stays authored. Three derivation rules
+// were tested against the 38 authored rows on 26-0901 and none beat 32 of 38. Keying "partly
+// served" on packItemTargets OVERSTATES: pg-2.1.2 reads as served because a bar-graph item carries
+// the coarse math-sp-displays target, while no stem-and-leaf item exists anywhere. Keying it on
+// moduleTopics UNDERSTATES: pg-6.2.3 reads as untouched, while the pack teaches perimeter as a
+// number in L1. The coarseness is the same one that made gap lines key on coachTopic instead.
+//
+// The two directions of drift are treated ASYMMETRICALLY, on purpose:
+//
+//   OVERSTATEMENT throws. A row authored COVERED while it still declares an open gap is a false
+//   claim about what the app teaches, and a false claim is never quietly corrected.
+//
+//   UNDERSTATEMENT is absorbed and reported. A row authored PARTIAL or GAP whose gap lines have all
+//   closed is the program having made progress, and progress must not redden a build. Two gates
+//   went red for precisely that reason on 26-0822; tasks/lessons.md carries the ruling.
+//
+// A row with no gap lines AND nothing serving it is silence rather than completion, and throws
+// rather than being read as finished.
+const VERDICT_DRIFT = [];
+for (const b of ALL_ROWS) {
+  const open = (b.gaps || []).length;
+  const served = (b.moduleTopics || []).length + (b.packItemTargets || []).length;
+  if (b.verdict === 'COVERED' && open) {
+    throw new Error('curriculum-gen: ' + b.id + ' is authored COVERED but still declares ' + open
+      + ' open gap line(s): ' + JSON.stringify(b.gaps) + '. COVERED claims the app already teaches '
+      + 'this, so either the verdict is wrong or those gap lines are.');
+  }
+  if (!open && !served && !b.crossRef) {
+    throw new Error('curriculum-gen: ' + b.id + ' declares no gap line, no module topic and no pack '
+      + 'item. That is silence rather than coverage, and it would be read as a finished row. Write '
+      + 'the gap lines, or name what serves it.');
+  }
+  if (b.verdict !== 'COVERED' && !open) {
+    VERDICT_DRIFT.push({ id: b.id, was: b.verdict, lesson: b.lessons[0], title: b.title });
+    b.verdict = 'COVERED';
+  }
+}
+
+// RANK: BUILD_ORDER filtered to the rows that are still open, renumbered from 1. A finished row
+// leaves the list on the next build and every row under it moves up on its own.
+const rowById = (id) => ALL_ROWS.find((b) => b.id === id);
+const OPEN_ROWS = BUILD_ORDER.map(rowById).filter((b) => (b.gaps || []).length);
+const RETIRED = BUILD_ORDER.map(rowById).filter((b) => !(b.gaps || []).length);
+const RETIRED_IDS = new Set(RETIRED.map((b) => b.id));
+const RANK = new Map();
+OPEN_ROWS.forEach((b, i) => RANK.set(b.id, i + 1));
+
+// Every row that still declares a gap must be named in BUILD_ORDER, or it is work nothing tracks.
+// The converse is no longer an error: a named row that has finished retires above.
+for (const b of ALL_ROWS) {
+  if ((b.gaps || []).length && !RANK.has(b.id)) {
+    throw new Error('curriculum-gen: ' + b.id + ' declares ' + b.gaps.length + ' open gap line(s) '
+      + 'but BUILD_ORDER never names it, so it would be ranked nowhere and built never.');
+  }
+}
+
 const lessons = lessonIds.map((lesson) => {
   const chapter = Number(lesson.split('.')[0]);
   const problems = index.lessons[lesson];
@@ -748,7 +842,7 @@ const out = {
     source: b.id.startsWith('pg-') ? 'parent-guide-toc' : 'homework-set',
     chapter: b.chapter, title: b.title, page: b.page || null, lessons: b.lessons,
     crossRef: b.crossRef || null,
-    verdict: b.verdict, rank: RANK.get(b.id) || null, why: b.why,
+    verdict: b.verdict, rank: RANK.get(b.id) || null, retired: RETIRED_IDS.has(b.id), why: b.why,
     targets: b.targets, moduleTopics: b.moduleTopics, packItemTargets: b.packItemTargets || [], gaps: b.gaps,
   })),
   lessons,
@@ -775,8 +869,13 @@ console.log(`  ${servedLessons.length}/${lessons.length} lessons are served by a
 console.log(`  ${gapLessons.length}/${lessons.length} lessons declare at least one gap`);
 console.log(`  GAP COUNT, the program's progress meter: ${out.lessons.reduce((n, l) => n + l.gaps.length, 0)} `
   + `open gaps across ${gapLessons.length} lessons`);
-console.log('\n  ranked build list (what WP2 fills, worst first):');
-for (const id of BUILD_ORDER) {
-  const b = ALL_ROWS.find((x) => x.id === id);
-  console.log(`   ${String(RANK.get(id)).padStart(2)}. [${b.verdict.padEnd(7)}] ${b.lessons[0].padEnd(6)} ${b.title}`);
+console.log('\n  ranked build list, worst first (BUILD_ORDER minus the rows that have finished):');
+for (const b of OPEN_ROWS) {
+  console.log(`   ${String(RANK.get(b.id)).padStart(2)}. [${b.verdict.padEnd(7)}] ${b.lessons[0].padEnd(6)} ${b.title}`);
+}
+console.log(`  retired from the build list, every gap line closed: ${RETIRED.length}`);
+for (const b of RETIRED) console.log(`       -- ${b.lessons[0].padEnd(6)} ${b.title}`);
+if (VERDICT_DRIFT.length) {
+  console.log(`  verdicts carried forward, the authored value having fallen behind the packs: ${VERDICT_DRIFT.length}`);
+  for (const d of VERDICT_DRIFT) console.log(`       ${d.was.padEnd(7)} -> COVERED  ${d.lesson.padEnd(6)} ${d.title}`);
 }

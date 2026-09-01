@@ -77,8 +77,9 @@
     "1.1.3"
    ],
    "crossRef": null,
-   "verdict": "PARTIAL",
-   "rank": 4,
+   "verdict": "COVERED",
+   "rank": null,
+   "retired": true,
    "why": "pemdas-pattern is emitted, but only out of The Floating Bear Grade 5 levels 2, 3 and 6 and at most 15% of any of their draws. It also hands over both rules and asks for a comparison; it never shows a figure and asks the student to build the rule or predict the 100th term.",
    "targets": [
     "math-r5-numerical-patterns",
@@ -103,8 +104,9 @@
     "1.1.4"
    ],
    "crossRef": null,
-   "verdict": "GAP",
-   "rank": 3,
+   "verdict": "COVERED",
+   "rank": null,
+   "retired": true,
    "why": "No math generator emits a chart-reading topic. g6-stats-* read a comma-separated list of numbers, never a display. Real chart reading exists only under Science (Outpost Protocol level 2) and it is a line chart, not a categorical bar graph or a histogram.",
    "targets": [
     "math-r3-scaled-graphs",
@@ -129,7 +131,8 @@
    ],
    "crossRef": null,
    "verdict": "GAP",
-   "rank": 13,
+   "rank": 2,
+   "retired": false,
    "why": "Zero emitted topics touch primes, composites, factors, multiples, GCF or LCM.",
    "targets": [
     "math-ns-factors-multiples"
@@ -153,7 +156,8 @@
    ],
    "crossRef": null,
    "verdict": "GAP",
-   "rank": 9,
+   "rank": 3,
+   "retired": false,
    "why": "No emitted topic reads any plot. Same root cause as 1.1.4.",
    "targets": [
     "math-sp-displays"
@@ -181,7 +185,8 @@
    ],
    "crossRef": null,
    "verdict": "GAP",
-   "rank": 16,
+   "rank": 4,
+   "retired": false,
    "why": "The area model itself is absent. g6-rect-area computes one rectangle's area from two given sides; it never decomposes a product into partial products.",
    "targets": [
     "math-ee-equivalent",
@@ -206,7 +211,8 @@
    ],
    "crossRef": null,
    "verdict": "PARTIAL",
-   "rank": 15,
+   "rank": 5,
+   "retired": false,
    "why": "g6-evaluate2 is emitted at 100% of The Floating Bear Grade 6 level 5, but it EVALUATES a(x + b) at a given x. Generating the equivalent expression, which is what 6.EE.A.3 asks and what the block teaches, is never asked.",
    "targets": [
     "math-ee-equivalent"
@@ -232,6 +238,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "frac-equiv is emitted from Fraction Rider Grade 5 levels 2, 3 and 6; frac-simplify from levels 3 and 6. Grade 5 track.",
    "targets": [
     "math-r5-fraction-add-sub"
@@ -257,7 +264,8 @@
    ],
    "crossRef": null,
    "verdict": "PARTIAL",
-   "rank": 11,
+   "rank": 6,
+   "retired": false,
    "why": "All three forms are emitted, each in its own world. No emitted topic CONVERTS between them, which is the whole content of the block.",
    "targets": [
     "math-rp-percent",
@@ -289,6 +297,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "All four are emitted from Fraction Rider Grade 5 levels 1, 2, 3 and 6.",
    "targets": [
     "math-r5-fraction-add-sub"
@@ -314,6 +323,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "Both emitted at 100% of Rocky Grade 6 levels 2 and 3.",
    "targets": [
     "math-rp-ratio-concept"
@@ -338,6 +348,7 @@
    "crossRef": null,
    "verdict": "GAP",
    "rank": 7,
+   "retired": false,
    "why": "No emitted topic does integer arithmetic. Razor Crest reaches negative numbers only as coordinates, and its answers are points and distances rather than signed sums.",
    "targets": [
     "math-ns-integers"
@@ -361,6 +372,7 @@
    "crossRef": null,
    "verdict": "GAP",
    "rank": 8,
+   "retired": false,
    "why": "Absolute value is used INSIDE g6-distance to compute a distance, and is never itself the question. No emitted topic names it.",
    "targets": [
     "math-ns-order-abs"
@@ -385,6 +397,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "All three emitted at 100% of Razor Crest Grade 6 levels 1, 2 and 3.",
    "targets": [
     "math-ns-coordinate-plane"
@@ -410,7 +423,8 @@
    ],
    "crossRef": null,
    "verdict": "PARTIAL",
-   "rank": 12,
+   "rank": 9,
+   "retired": false,
    "why": "CORRECTION to the preliminary census, which called this COVERED. g6-evaluate substitutes into an expression that is handed over. pemdas-write-expr does write an expression from words, but its expressions are ALL NUMERIC: reading the generator confirms every option is digits and operators. Writing an expression in which a LETTER stands for a number, which is 6.EE.A.2.a and the point of the block, is emitted nowhere.",
    "targets": [
     "math-ee-write-expression"
@@ -437,8 +451,9 @@
     "4.1.3"
    ],
    "crossRef": null,
-   "verdict": "GAP",
-   "rank": 6,
+   "verdict": "COVERED",
+   "rank": null,
+   "retired": true,
    "why": "Nothing emitted generalises a pattern into a rule. This is the same shortfall 1.1.3 names, one chapter later and with the variable made explicit.",
    "targets": [
     "math-ee-generalize"
@@ -461,6 +476,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "Both emitted from Fraction Rider Grade 5; frac-mixed-add from levels 1, 4 and 6, frac-mixed-sub from level 6.",
    "targets": [
     "math-r5-fraction-add-sub"
@@ -484,6 +500,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "All three emitted at 100% of The Floating Bear Grade 6 levels 1, 2 and 5.",
    "targets": [
     "math-ee-evaluate"
@@ -509,7 +526,8 @@
    ],
    "crossRef": null,
    "verdict": "GAP",
-   "rank": 17,
+   "rank": 10,
+   "retired": false,
    "why": "vol-scale is adjacent and does not serve it: it is emitted at 12% of LEGO Master Builder Grade 5 level 6 and scales ONE dimension of a solid. Scaling a two-dimensional figure and reading the scale factor back off it is emitted nowhere.",
    "targets": [
     "math-rp-ratio-concept"
@@ -533,6 +551,7 @@
    "crossRef": "pg-3.1.6",
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "The Parent Guide's Ratios entry at Lesson 3.1.6 points forward to Lessons 4.2.3 and 4.2.4 rather than restating itself, so the coverage is that section's. 4.2.3 is already inside the Scaling Figures range; 4.2.4 is reached only through this pointer.",
    "targets": [
     "math-rp-ratio-concept"
@@ -557,7 +576,8 @@
    ],
    "crossRef": null,
    "verdict": "PARTIAL",
-   "rank": 18,
+   "rank": 11,
+   "retired": false,
    "why": "The arithmetic is emitted from Fraction Rider Grade 5 levels 2, 4, 5 and 6. The AREA MODEL, which is what the block is named for and how CC1 teaches it, is absent.",
    "targets": [
     "math-r5-fraction-multiply"
@@ -584,6 +604,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "dec-mult at 70% of F1 Grade 5 level 4; g6-dec-mul from Grade 6 level 2; both percent topics at 100% of their own levels.",
    "targets": [
     "math-ns-multi-digit-ops",
@@ -612,7 +633,8 @@
    ],
    "crossRef": null,
    "verdict": "PARTIAL",
-   "rank": 14,
+   "rank": 12,
+   "retired": false,
    "why": "Rectangle and triangle only, each at 100% of its own LEGO Master Builder or Razor Crest Grade 6 level. The parallelogram, the trapezoid and any complex figure decomposed into parts, which are three of the block's four sections, are emitted nowhere.",
    "targets": [
     "math-g-area-polygons",
@@ -646,6 +668,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "The whole Grade 6 Fraction Rider campaign: all five emitted at 100% of their own levels.",
    "targets": [
     "math-ns-divide-fractions"
@@ -674,6 +697,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "Six emitted topics across all six Floating Bear Grade 5 levels. Grade 5 track.",
    "targets": [
     "math-ee-evaluate",
@@ -702,6 +726,7 @@
    "crossRef": null,
    "verdict": "PARTIAL",
    "rank": 1,
+   "retired": false,
    "why": "No module emits perimeter as a question, and in the six worlds it appears only as the DISTRACTOR inside area items, where the explain text names it to rule it out. packs/cpm-cc1-g6.json level 1 now serves it directly: 22 items over 15 labelled polygons, rectangle through L-shape, including two that run the relationship backwards from a given perimeter. Writing a perimeter as an EXPRESSION, the algebra-tile half of this block, is still absent.",
    "targets": [
     "math-r4-perimeter",
@@ -726,7 +751,8 @@
    ],
    "crossRef": null,
    "verdict": "GAP",
-   "rank": 19,
+   "rank": 13,
+   "retired": false,
    "why": "No emitted topic simplifies an expression by collecting terms.",
    "targets": [
     "math-ee-equivalent"
@@ -752,6 +778,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "Both rate topics at 100% of their own Grade 6 levels, plus the whole Grade 5 Rocky conversion campaign for 6.RP.A.3.d.",
    "targets": [
     "math-rp-unit-rate",
@@ -781,6 +808,7 @@
    "crossRef": "pg-6.1.1",
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "The Parent Guide points this range back at its own chapter-6 section rather than restating it, so the coverage is that section's.",
    "targets": [
     "math-ns-divide-fractions"
@@ -808,6 +836,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "All four Grade 6 decimal operations emitted from F1 Grade 6 levels 1, 2 and 6, plus the Grade 5 decimal campaign.",
    "targets": [
     "math-ns-multi-digit-ops",
@@ -836,7 +865,8 @@
    ],
    "crossRef": null,
    "verdict": "GAP",
-   "rank": 20,
+   "rank": 14,
+   "retired": false,
    "why": "No emitted topic writes, graphs or solves an inequality. frac-compare and pemdas-compare compare two fixed values; neither states a constraint on an unknown.",
    "targets": [
     "math-ee-inequalities"
@@ -862,6 +892,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "All three emitted from F1 Grade 6 level 5 at about a third of its draws each, and again from level 6.",
    "targets": [
     "math-sp-center-spread",
@@ -887,7 +918,8 @@
    ],
    "crossRef": null,
    "verdict": "GAP",
-   "rank": 10,
+   "rank": 15,
+   "retired": false,
    "why": "No emitted topic reads any plot. Third instance of the same root cause as 1.1.4 and 2.1.2.",
    "targets": [
     "math-sp-displays"
@@ -913,6 +945,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "Both emitted at 100% of The Floating Bear Grade 6 levels 3 and 4.",
    "targets": [
     "math-ee-solve-equations"
@@ -936,7 +969,8 @@
    ],
    "crossRef": null,
    "verdict": "GAP",
-   "rank": 21,
+   "rank": 16,
+   "retired": false,
    "why": "No emitted topic relates distance, rate and time. g6-unit-rate finds a rate and stops; the Grade 5 unit-time topic converts time units and never multiplies by a rate.",
    "targets": [
     "math-rp-unit-rate",
@@ -964,6 +998,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "Three Grade 6 topics at 100% of their own levels, plus the seven-topic Grade 5 LEGO Master Builder campaign underneath them.",
    "targets": [
     "math-g-volume-prisms",
@@ -1000,6 +1035,7 @@
    "crossRef": null,
    "verdict": "COVERED",
    "rank": null,
+   "retired": false,
    "why": "All three emitted at 100% of Rocky Grade 6 levels 4 and 5 and F1 Grade 6 level 4.",
    "targets": [
     "math-rp-percent"
@@ -1022,8 +1058,9 @@
     "1.1.3"
    ],
    "crossRef": null,
-   "verdict": "PARTIAL",
-   "rank": 2,
+   "verdict": "COVERED",
+   "rank": null,
+   "retired": true,
    "why": "Problem 1-22 asks for it and the app has zero content for it: no emitted topic names a shape, and a full-text scan of the six modules finds no occurrence of scalene, isosceles, rhombus, trapezoid or obtuse. The two shell topics that LOOK like coverage, coord-shape and coord-real-world, carry a label and a coach tip and are emitted by nothing; WP1 deletes them.",
    "targets": [
     "math-r5-classify-figures"
@@ -1044,8 +1081,9 @@
     "1.1.3"
    ],
    "crossRef": null,
-   "verdict": "PARTIAL",
-   "rank": 5,
+   "verdict": "COVERED",
+   "rank": null,
+   "retired": true,
    "why": "One direction of two. Problem 1-20a is decimals INTO words and dec-write-word serves it exactly, emitted at about 29% of F1 Apex Decimals Grade 5 level 1. Problem 1-20b is words back into decimals, and every one of that generator's four options is a word form, so the reverse direction cannot be drawn at all.",
    "targets": [
     "math-r5-decimal-place-value"
