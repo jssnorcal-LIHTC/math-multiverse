@@ -1,0 +1,272 @@
+{
+  "meta": {
+    "id": "figure-docs",
+    "subject": "ela",
+    "title": "Figure Docs Fixture",
+    "grade": 6,
+    "version": 1
+  },
+  "repeatPolicy": "rotate",
+  "passages": [
+    {
+      "id": "p-fx-first-rounds",
+      "title": "First Rounds",
+      "source": "original",
+      "genre": "literary",
+      "docKind": "status-log",
+      "figureIds": ["fig-route-loop"],
+      "text": "Evening rounds begin at the top of the hill and work downward toward the creek. The barn owls come first, because they are awake before anything else stirs. After the owls come the two red foxes, and after the foxes comes the otter pool. The path bends past the marsh boardwalk afterward, and something moved through the reeds while I stood there. Instead of guessing what it was, I recorded the time, 7:41, and kept walking. The tortoise yard is the last stop before the gate log at the bottom of the hill."
+    },
+    {
+      "id": "p-fx-long-way",
+      "title": "The Long Way Around",
+      "source": "original",
+      "genre": "informational",
+      "docKind": "procedure",
+      "figureIds": ["fig-route-line"],
+      "text": "The long way around is four moves, and a courier makes them in order. The first is doubling back, which turns a follower into someone walking the wrong way. The second is a reflective stop at a window, which shows the street behind without a glance over the shoulder. The third is a change of level, a stairway or an escalator, because a follower must commit to it in view. The fourth is the abort decision point, and a courier who reaches it unsure does not continue."
+    },
+    {
+      "id": "p-fx-two-track",
+      "title": "Night of May 26",
+      "source": "original",
+      "genre": "informational",
+      "docKind": "memo",
+      "figureIds": ["fig-timeline-two-track"],
+      "text": "Night of May 26. The planned schedule and the actual record do not agree everywhere, and the places they part are the point of this memo. The bulletin posted at 4:00 p.m., and the advisory begins at 6:00 p.m. The gate closed at 7:40 p.m., although Tanaka says maybe 7:30 p.m., which nobody else wrote down and no second record supports. Between 8:05 p.m. and 8:40 p.m. the sheet reads pairs sent, no entries, so nothing was logged at all in that window. The gust reading reached its peak 52 at 9:20 p.m. The count closed at 10:56 p.m., and the shift ran to 11:00 p.m."
+    },
+    {
+      "id": "p-fx-single",
+      "title": "Monitoring Summary",
+      "source": "original",
+      "genre": "informational",
+      "docKind": "status-log",
+      "figureIds": ["fig-timeline-single"],
+      "text": "Monitoring summary for the three nights the lot stood empty. On Monday the gate locked 9:10. On Tuesday the gate locked 9:05. On Wednesday the gate locked 9:12, and the record for the week was complete. The times are close enough that no one reading the sheet would call any of the three unusual, which is exactly why the fourth night mattered."
+    },
+    {
+      "id": "p-fx-diet-card",
+      "title": "The Diet Card",
+      "source": "original",
+      "genre": "informational",
+      "docKind": "procedure",
+      "figureIds": ["fig-facsimile"],
+      "text": "The diet card on the wall of enclosure four carries the animal's name, RANA, at the top, and the feed times underneath it. Below that a boxed line reads thiamine supplement, which is the line a keeper is meant to initial twice a day. Under the box the keeper wrote lot 3902 and underlined it. Whitlock's initials sit on the next line down. The line after that has been struck out entirely and cannot be read. The card is stamped CLEARANCE in the lower corner."
+    },
+    {
+      "id": "p-fx-three-accounts",
+      "title": "Three Accounts",
+      "source": "original",
+      "genre": "informational",
+      "docKind": "source-desk",
+      "figureIds": ["fig-facsimile-columns"],
+      "text": "Three accounts of the same evening were recorded the following morning, and no two of them agree on all three points. Fontaine gives the time as 7:41, places it at the marsh boardwalk, and describes a low call. Tanaka says maybe 7:30, places it at the gate, and also describes a low call. Bellweather gives 7:44, places it at the tortoise yard, and reports nothing at all. Only one of the three wrote anything down at the time."
+    },
+    {
+      "id": "p-fx-workup",
+      "title": "The Workup",
+      "source": "original",
+      "genre": "informational",
+      "docKind": "memo",
+      "figureIds": ["fig-schematic-flow"],
+      "text": "The workup traced the problem back one step at a time rather than guessing at the end of it. The fish the otter is fed contains thiaminase, an enzyme that breaks thiamine down. Freezing slows that enzyme without stopping it, so the longer a fish stays frozen the more thiamine is lost before it is ever eaten. The result is low thiamine, and low thiamine is what the lethargy and the lost appetite come from. Cooking would destroy the enzyme, but cooked fish is not what this animal is fed."
+    },
+    {
+      "id": "p-fx-tortoise-yard",
+      "title": "The Tortoise Yard",
+      "source": "original",
+      "genre": "literary",
+      "docKind": "recovered-entry",
+      "figureIds": ["fig-schematic-plan"],
+      "text": "The tortoise yard slopes down and away from the feeding shelf, which is where a keeper stands to count. The north wall runs along the top of the slope, and a wall of buried block surrounds the whole yard, sunk deeper than any of them could dig. The burrow mouth is hidden behind the manzanita at the eastern corner, and the sign above it has been there longer than I have."
+    }
+  ],
+  "figures": [
+    {
+      "id": "fig-timeline-two-track",
+      "kind": "diagram",
+      "gen": true,
+      "caption": "The planned schedule against the actual record for the night of May 26.",
+      "credit": "Built for this fixture from the passage text; original work.",
+      "alt": "A two-track timeline with a blocked window between 8:05 and 8:40 and one unverified entry.",
+      "src": "tests/fixtures/figure-docs/timeline-two-track.svg",
+      "dataTable": {
+        "type": "timeline",
+        "sourcePassageId": "p-fx-two-track",
+        "title": "Night of May 26",
+        "start": "4:00 p.m.",
+        "end": "11:00 p.m.",
+        "tracks": ["planned", "actual"],
+        "events": [
+          { "t": "4:00 p.m.", "label": "bulletin posted", "track": "planned" },
+          { "t": "6:00 p.m.", "label": "advisory begins", "track": "planned" },
+          { "t": "7:40 p.m.", "label": "gate closed", "track": "actual" },
+          { "t": "7:30 p.m.", "label": "maybe 7:30", "track": "actual", "kind": "unverified" },
+          { "t": "9:20 p.m.", "label": "peak 52", "track": "actual" },
+          { "t": "10:56 p.m.", "label": "count closed", "track": "actual" }
+        ],
+        "gaps": [
+          { "from": "8:05 p.m.", "to": "8:40 p.m.", "label": "pairs sent, no entries" }
+        ]
+      }
+    },
+    {
+      "id": "fig-timeline-single",
+      "kind": "diagram",
+      "gen": true,
+      "caption": "Gate-lock times across the three nights the lot stood empty.",
+      "credit": "Built for this fixture from the passage text; original work.",
+      "alt": "A single-track timeline of three nights, each with its gate-lock time.",
+      "src": "tests/fixtures/figure-docs/timeline-single.svg",
+      "dataTable": {
+        "type": "timeline",
+        "sourcePassageId": "p-fx-single",
+        "title": "Monitoring summary",
+        "start": "Monday",
+        "end": "Wednesday",
+        "tracks": ["record"],
+        "events": [
+          { "t": "Monday", "label": "gate locked 9:10", "track": "record" },
+          { "t": "Tuesday", "label": "gate locked 9:05", "track": "record" },
+          { "t": "Wednesday", "label": "gate locked 9:12", "track": "record" }
+        ]
+      }
+    },
+    {
+      "id": "fig-facsimile",
+      "kind": "diagram",
+      "gen": true,
+      "caption": "The diet card as it hangs on the wall of enclosure four.",
+      "credit": "Built for this fixture from the passage text; original work.",
+      "alt": "A document card with a boxed line, an underlined line and one struck-out line.",
+      "src": "tests/fixtures/figure-docs/facsimile.svg",
+      "dataTable": {
+        "type": "facsimile",
+        "sourcePassageId": "p-fx-diet-card",
+        "docKind": "procedure",
+        "title": "DIET CARD",
+        "header": [
+          { "label": "Animal", "value": "RANA" },
+          { "label": "Enclosure", "value": "four" }
+        ],
+        "lines": [
+          { "text": "thiamine supplement", "emphasis": "box" },
+          { "text": "lot 3902", "emphasis": "underline" },
+          { "text": "Whitlock's initials" },
+          { "text": "", "emphasis": "redact" }
+        ],
+        "stamp": "CLEARANCE"
+      }
+    },
+    {
+      "id": "fig-facsimile-columns",
+      "kind": "diagram",
+      "gen": true,
+      "caption": "The three accounts side by side, one column each.",
+      "credit": "Built for this fixture from the passage text; original work.",
+      "alt": "A three-column table comparing what each witness gave for time, place and sound.",
+      "src": "tests/fixtures/figure-docs/facsimile-columns.svg",
+      "dataTable": {
+        "type": "facsimile",
+        "sourcePassageId": "p-fx-three-accounts",
+        "docKind": "source-desk",
+        "title": "THREE ACCOUNTS",
+        "header": [{ "label": "Recorded", "value": "the following morning" }],
+        "columns": [
+          { "heading": "Fontaine", "rows": ["7:41", "marsh boardwalk", "a low call"] },
+          { "heading": "Tanaka", "rows": ["maybe 7:30", "the gate", "a low call"] },
+          { "heading": "Bellweather", "rows": ["7:44", "the tortoise yard", "nothing at all"] }
+        ]
+      }
+    },
+    {
+      "id": "fig-schematic-flow",
+      "kind": "diagram",
+      "gen": true,
+      "caption": "How the feed leads to the shortage, one step at a time.",
+      "credit": "Built for this fixture from the passage text; original work.",
+      "alt": "A left-to-right chain from fish through freezing to low thiamine.",
+      "src": "tests/fixtures/figure-docs/schematic-flow.svg",
+      "dataTable": {
+        "type": "schematic",
+        "sourcePassageId": "p-fx-workup",
+        "layout": "flow-lr",
+        "nodes": [
+          { "id": "fish", "label": "fish", "shape": "box" },
+          { "id": "frz", "label": "freezing", "shape": "box" },
+          { "id": "low", "label": "low thiamine", "shape": "round" }
+        ],
+        "edges": [
+          { "from": "fish", "to": "frz", "label": "contains thiaminase", "style": "arrow" },
+          { "from": "frz", "to": "low", "style": "arrow" }
+        ]
+      }
+    },
+    {
+      "id": "fig-schematic-plan",
+      "kind": "diagram",
+      "gen": true,
+      "caption": "The tortoise yard, looking down on it.",
+      "credit": "Built for this fixture from the passage text; original work.",
+      "alt": "A plan of the yard with the feeding shelf, the north wall and the burrow mouth.",
+      "src": "tests/fixtures/figure-docs/schematic-plan.svg",
+      "dataTable": {
+        "type": "schematic",
+        "sourcePassageId": "p-fx-tortoise-yard",
+        "layout": "plan",
+        "nodes": [
+          { "id": "shelf", "label": "feeding shelf", "shape": "box", "x": 20, "y": 30 },
+          { "id": "wall", "label": "north wall", "shape": "box", "x": 50, "y": 10 },
+          { "id": "burrow", "label": "burrow mouth", "shape": "round", "x": 80, "y": 70 }
+        ],
+        "edges": [
+          { "from": "shelf", "to": "burrow", "label": "eastern corner", "style": "line" }
+        ]
+      }
+    },
+    {
+      "id": "fig-route-loop",
+      "kind": "map",
+      "gen": true,
+      "caption": "The evening rounds, in the order they are walked.",
+      "credit": "Built for this fixture from the passage text; original work.",
+      "alt": "A six-stop loop from the barn owls down to the gate log.",
+      "src": "tests/fixtures/figure-docs/route-loop.svg",
+      "dataTable": {
+        "type": "route",
+        "sourcePassageId": "p-fx-first-rounds",
+        "path": "loop",
+        "stops": [
+          { "n": 1, "label": "barn owls" },
+          { "n": 2, "label": "red foxes" },
+          { "n": 3, "label": "otter pool" },
+          { "n": 4, "label": "marsh boardwalk", "note": "7:41" },
+          { "n": 5, "label": "tortoise yard" },
+          { "n": 6, "label": "gate log" }
+        ]
+      }
+    },
+    {
+      "id": "fig-route-line",
+      "kind": "map",
+      "gen": true,
+      "caption": "The four moves of the long way around, in order.",
+      "credit": "Built for this fixture from the passage text; original work.",
+      "alt": "A four-stop line from doubling back to the abort decision point.",
+      "src": "tests/fixtures/figure-docs/route-line.svg",
+      "dataTable": {
+        "type": "route",
+        "sourcePassageId": "p-fx-long-way",
+        "path": "line",
+        "stops": [
+          { "n": 1, "label": "doubling back" },
+          { "n": 2, "label": "reflective stop" },
+          { "n": 3, "label": "change of level" },
+          { "n": 4, "label": "the abort decision point" }
+        ]
+      }
+    }
+  ],
+  "items": [],
+  "levels": []
+}
