@@ -36,6 +36,9 @@ jobs:
       - name: Figure-derive gate (every gen:true figure byte-matches its committed src; per-type arming; chart + 4 document-type controls)
         run: node tests/figure-derive.js
 
+      - name: Figure fidelity (every ELA figure label is verbatim in its passage; every C-wave key is licensed by its dataTable; 3 controls)
+        run: node tests/figure-fidelity.js
+
       - name: Freshness unit gate (MVFresh service, module-grade union rejection)
         run: node tests/freshness.js
 

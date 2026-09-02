@@ -377,14 +377,21 @@ function renderTimeline(dataTable, accentColor) {
     entries.push({ n: p.i + 1, lead: p.e.t, label: p.e.label, mark: p.unver ? 'unverified' : null });
   });
 
+  // The caption names the WINDOW as well as what happened in it. Drawing only the label left the
+  // gap's own from/to in the dataTable and nowhere in the picture: a reader saw a hatched band with
+  // no times on it, and every byte-compare was green because the fixture came from this same
+  // renderer. tests/figure-fidelity.js part 2 is what caught it.
   let cursor = laneBottom + 14;
   gaps.forEach((g) => {
-    if (!g.label) return;
+    const bounded = (typeof g.from === 'string' && typeof g.to === 'string')
+      ? `${g.from} to ${g.to}` : '';
+    const caption = [bounded, g.label].filter(Boolean).join('  ');
+    if (!caption) return;
     const gx1 = posOfTime(g.from), gx2 = posOfTime(g.to);
     const cx = (gx1 + gx2) / 2;
-    const w = estimateTextWidth(g.label, NOTE_FONT);
+    const w = estimateTextWidth(caption, NOTE_FONT);
     const clamped = Math.min(VB_W - PAD - w / 2, Math.max(PAD + w / 2, cx));
-    out.push(text(clamped, cursor + NOTE_FONT, NOTE_FONT, g.label, { anchor: 'middle', opacity: '0.82' }));
+    out.push(text(clamped, cursor + NOTE_FONT, NOTE_FONT, caption, { anchor: 'middle', opacity: '0.82' }));
     cursor += ROW_H;
   });
 
