@@ -1,0 +1,13 @@
+{
+  "type": "schematic",
+  "sourcePassageId": "p-fx-tortoise-yard",
+  "layout": "plan",
+  "nodes": [
+    { "id": "shelf", "label": "feeding shelf", "shape": "box", "x": 20, "y": 30 },
+    { "id": "wall", "label": "north wall", "shape": "box", "x": 50, "y": 10 },
+    { "id": "burrow", "label": "burrow mouth", "shape": "round", "x": 80, "y": 70 }
+  ],
+  "edges": [
+    { "from": "shelf", "to": "burrow", "label": "eastern corner", "style": "line" }
+  ]
+}
