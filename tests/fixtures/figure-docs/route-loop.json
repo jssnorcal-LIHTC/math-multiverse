@@ -1,0 +1,13 @@
+{
+  "type": "route",
+  "sourcePassageId": "p-fx-first-rounds",
+  "path": "loop",
+  "stops": [
+    { "n": 1, "label": "barn owls" },
+    { "n": 2, "label": "red foxes" },
+    { "n": 3, "label": "otter pool" },
+    { "n": 4, "label": "marsh boardwalk", "note": "7:41" },
+    { "n": 5, "label": "tortoise yard" },
+    { "n": 6, "label": "gate log" }
+  ]
+}

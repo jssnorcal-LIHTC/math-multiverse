@@ -1,0 +1,34 @@
+{
+  "type": "facsimile",
+  "sourcePassageId": "p-fx-diet-card",
+  "docKind": "procedure",
+  "title": "DIET CARD",
+  "header": [
+    {
+      "label": "Animal",
+      "value": "RANA"
+    },
+    {
+      "label": "Enclosure",
+      "value": "four"
+    }
+  ],
+  "lines": [
+    {
+      "text": "thiamine supplement",
+      "emphasis": "box"
+    },
+    {
+      "text": "lot 3902",
+      "emphasis": "underline"
+    },
+    {
+      "text": "Whitlock's initials"
+    },
+    {
+      "text": "",
+      "emphasis": "redact"
+    }
+  ],
+  "stamp": "CLEARANCE"
+}

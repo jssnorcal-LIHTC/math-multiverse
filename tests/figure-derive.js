@@ -59,14 +59,31 @@ const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 const {
-  genSvg, renderFigure, resolveAccent, chartTargets, regenerate, layout,
+  genSvg, renderFigure, resolveAccent, genTargets, regenerate, layout,
   layoutPanels, INK, GRID, GLYPH_W, PANEL_GAP, MIN_PANEL_H, TICK_LABEL_H, MIN_TICK_GAP,
 } = require('../build/figure-gen.js');
 
 const REPO_ROOT = path.join(__dirname, '..');
 const PACK_DIR = path.join(REPO_ROOT, 'packs');
 const FIXTURE_DIR = path.join(REPO_ROOT, 'tests', 'fixtures', 'vis-demo');
-const NOT_ARMED_BANNER = 'figure-derive: NOT ARMED (no real pack declares a gen:true chart figure); fixture controls ran';
+const DOC_FIXTURE_DIR = path.join(REPO_ROOT, 'tests', 'fixtures', 'figure-docs');
+
+// Every dataTable shape this build can generate. The arming report below is PER TYPE, because a
+// single global counter is exactly the silent-clean shape constraint 12 exists to forbid: five bar
+// charts in the math pack kept the old scalar above zero, so the banner went dark and four document
+// types could have shipped with no real target and no warning at all.
+const ALL_GEN_TYPES = ['bar', 'line', 'panels', 'timeline', 'facsimile', 'schematic', 'route'];
+const DOC_TYPES = ['timeline', 'facsimile', 'schematic', 'route'];
+const notArmedBanner = (t) => `figure-derive: NOT ARMED for dataTable type "${t}" `
+  + '(no real pack declares a gen:true figure of that type); fixture controls ran';
+
+// The figures the widened selector MUST still return on a clean tree. If an edit to genTargets
+// narrows coverage, these named ids are what notices; a bare count would not, because a count can
+// stay whole while the membership changes.
+const BASELINE_REAL_IDS = [
+  'fig-l3-pets', 'fig-l3-walk', 'fig-l3-fruit', 'fig-l3-minutes', 'fig-l3-heights',
+  'fig-dome-drift', 'fig-climographs', 'fig-warming-curves',
+];
 
 const problems = [];
 const note = (m) => console.log('  ' + m);
@@ -864,7 +881,7 @@ function loadJson(p) { return JSON.parse(fs.readFileSync(p, 'utf8')); }
 function deriveAndCompare(pack, packDir, label) {
   const accent = resolveAccent(packDir, pack);
   let compared = 0;
-  for (const fig of chartTargets(pack)) {
+  for (const fig of genTargets(pack)) {
     const srcAbs = path.join(REPO_ROOT, fig.src);
     if (!fs.existsSync(srcAbs)) {
       fail(`${label}: figure "${fig.id}" declares gen:true but its src "${fig.src}" does not exist on disk`);
@@ -884,26 +901,47 @@ function deriveAndCompare(pack, packDir, label) {
   return compared;
 }
 
+// The resolved dataTable type of a generated figure. A panels chart carries NO dt.type at all, so
+// it is named by the shape it actually has rather than by a field it does not have.
+function resolvedType(fig) {
+  const dt = fig && fig.dataTable;
+  if (dt && Array.isArray(dt.panels)) return 'panels';
+  return dt && dt.type;
+}
+
+// Returns a Map of dataTable type -> how many REAL figures of that type were swept, plus the set of
+// ids seen, so the caller can report arming per type and check the baseline membership.
 function realPackSweep() {
-  let realTargets = 0;
-  if (!fs.existsSync(PACK_DIR)) return 0;
+  const realByType = new Map();
+  const seenIds = [];
+  if (!fs.existsSync(PACK_DIR)) return { realByType, seenIds };
   const files = fs.readdirSync(PACK_DIR)
     .filter((f) => f.endsWith('.json') && !f.endsWith('.verdicts.json') && f !== 'manifest.json');
   for (const f of files) {
     const abs = path.join(PACK_DIR, f);
     let pack;
     try { pack = loadJson(abs); } catch (e) { fail(`${f}: invalid JSON: ${e.message}`); continue; }
-    const targets = chartTargets(pack);
+    const targets = genTargets(pack);
     if (!targets.length) continue;
-    realTargets += targets.length;
+    for (const fig of targets) {
+      const t = resolvedType(fig);
+      realByType.set(t, (realByType.get(t) || 0) + 1);
+      seenIds.push(fig.id);
+      // packs/firsthand-g6.json carries hand-authored figures whose dataTable.type is 'features'.
+      // They have no generator and renderFigure would throw on every one, so admitting the type
+      // would turn a clean sweep into eight failures. Named here so a selector edit cannot let it in.
+      if (t === 'features') {
+        fail(`${f}: figure "${fig.id}" has dataTable.type "features", which no generator renders; the selector must not admit it`);
+      }
+    }
     deriveAndCompare(pack, PACK_DIR, f);
   }
-  return realTargets;
+  return { realByType, seenIds };
 }
 
 function loadFixture() {
   const pack = loadJson(path.join(FIXTURE_DIR, 'pack.json'));
-  const fig = chartTargets(pack).find((f) => f.id === 'fig-chart');
+  const fig = genTargets(pack).find((f) => f.id === 'fig-chart');
   if (!fig) throw new Error('fixture pack has no gen:true chart figure named "fig-chart"');
   return { pack, fig };
 }
@@ -1002,17 +1040,122 @@ function roundTripCheck() {
   }
 }
 
+// =====================================================================================================
+// DOCUMENT-TYPE CONTROLS. One positive and one negative per document type, over the figure-docs
+// fixture pack, so each of the four renderers has a control of its own rather than inheriting the
+// chart fixture's.
+//
+// The chart negative control above is NOT reused, and must not be: its tamper reads
+// `mutated.series[0].points[0]` OUTSIDE the try that guards the render, so handing it a document
+// dataTable (which has no `series`) throws a TypeError that propagates to the call site, sets
+// harnessError, prints RESULT: HARNESS ERROR and exits 2 before roundTripCheck ever runs. Each type
+// below gets its own accessor that fail()s BY NAME when the field it needs is absent.
+// =====================================================================================================
+
+// Where each document type keeps a label that must change the drawing when it changes. Returning
+// null (rather than throwing) is what lets a missing field be reported as a named control failure.
+const DOC_TAMPERS = {
+  timeline: (dt) => (dt.events && dt.events[0] && typeof dt.events[0].label === 'string'
+    ? (m) => { m.events[0].label = m.events[0].label + ' TAMPERED'; } : null),
+  facsimile: (dt) => {
+    if (dt.lines && dt.lines[0] && typeof dt.lines[0].text === 'string' && dt.lines[0].text) {
+      return (m) => { m.lines[0].text = m.lines[0].text + ' TAMPERED'; };
+    }
+    if (dt.columns && dt.columns[0] && typeof dt.columns[0].heading === 'string') {
+      return (m) => { m.columns[0].heading = m.columns[0].heading + ' TAMPERED'; };
+    }
+    return null;
+  },
+  schematic: (dt) => (dt.nodes && dt.nodes[0] && typeof dt.nodes[0].label === 'string'
+    ? (m) => { m.nodes[0].label = m.nodes[0].label + ' TAMPERED'; } : null),
+  route: (dt) => (dt.stops && dt.stops[0] && typeof dt.stops[0].label === 'string'
+    ? (m) => { m.stops[0].label = m.stops[0].label + ' TAMPERED'; } : null),
+};
+
+function docFixtureControls() {
+  const packPath = path.join(DOC_FIXTURE_DIR, 'pack.json');
+  if (!fs.existsSync(packPath)) {
+    fail('document controls: tests/fixtures/figure-docs/pack.json does not exist; the four document renderers have no control at all');
+    return;
+  }
+  const pack = loadJson(packPath);
+  const accent = resolveAccent(DOC_FIXTURE_DIR, pack);
+  const targets = genTargets(pack);
+
+  // ANTI-VACUITY, and it is per TYPE rather than per CALL. The gate's existing guard only asks
+  // whether the sweep compared anything at all, so the chart fixture alone keeps it quiet even if
+  // the selector silently dropped every document figure. A control that selects nothing proves
+  // nothing, and must say so.
+  for (const t of DOC_TYPES) {
+    const of = targets.filter((f) => resolvedType(f) === t);
+    if (!of.length) {
+      fail(`positive control ${t}: the selector matched no fixture figure of type "${t}"; the control proves nothing`);
+      continue;
+    }
+    for (const fig of of) {
+      const srcAbs = path.join(REPO_ROOT, fig.src);
+      if (!fs.existsSync(srcAbs)) {
+        fail(`positive control ${t}: figure "${fig.id}" declares src "${fig.src}", which is not on disk`);
+        continue;
+      }
+      let derived;
+      try { derived = renderFigure(fig, accent); }
+      catch (e) { fail(`positive control ${t}: ${e.message}`); continue; }
+      if (derived !== fs.readFileSync(srcAbs, 'utf8')) {
+        fail(`positive control ${t}: figure "${fig.id}" no longer byte-matches its committed src "${fig.src}" (accent ${accent})`);
+      } else {
+        note(`positive control ${t}: figure "${fig.id}" regenerated output byte-matches "${fig.src}"`);
+      }
+      // A renderer that drops a value writes the word into the drawing rather than failing, and a
+      // byte-compare against a fixture generated by that same renderer would never see it.
+      if (derived.indexOf('undefined') !== -1 || derived.indexOf('NaN') !== -1) {
+        fail(`positive control ${t}: figure "${fig.id}" renders a literal "undefined" or "NaN" into the SVG`);
+      }
+    }
+
+    // NEGATIVE: change one label in memory and require the drawing to change with it.
+    const fig = of[0];
+    const build = DOC_TAMPERS[t](fig.dataTable);
+    if (!build) {
+      fail(`negative control ${t}: fixture figure "${fig.id}" has no label field to tamper with, so the detector cannot be exercised`);
+      continue;
+    }
+    const mutated = JSON.parse(JSON.stringify(fig.dataTable));
+    build(mutated);
+    let tampered;
+    try { tampered = genSvg(mutated, accent); }
+    catch (e) { fail(`negative control ${t}: the tampered dataTable refused to render: ${e.message}`); continue; }
+    const clean = renderFigure(fig, accent);
+    if (tampered === clean) {
+      fail(`negative control ${t}: changing one label in the dataTable did not change the derived SVG; the detector cannot be trusted`);
+    } else {
+      note(`negative control ${t}: a tampered label correctly produced a mismatch -- the detector fired`);
+    }
+  }
+}
+
 console.log('\nfigure-derive gate:');
 let harnessError = null;
-let realTargets = 0;
+let sweep = { realByType: new Map(), seenIds: [] };
 try {
-  realTargets = realPackSweep();
+  sweep = realPackSweep();
 } catch (e) {
   harnessError = e;
 }
 
-if (!harnessError && realTargets === 0) {
-  console.log('\n' + NOT_ARMED_BANNER + '\n');
+if (!harnessError) {
+  const counts = ALL_GEN_TYPES.map((t) => `${t} ${sweep.realByType.get(t) || 0}`).join(', ');
+  note(`real generated figures by dataTable type: ${counts}`);
+  const dark = ALL_GEN_TYPES.filter((t) => !(sweep.realByType.get(t) || 0));
+  if (dark.length) {
+    console.log('');
+    dark.forEach((t) => console.log(notArmedBanner(t)));
+    console.log('');
+  }
+  const missing = BASELINE_REAL_IDS.filter((id) => sweep.seenIds.indexOf(id) === -1);
+  if (missing.length) {
+    fail(`the selector no longer returns baseline figure(s) ${JSON.stringify(missing)}; an edit to genTargets narrowed real coverage`);
+  }
 }
 
 // All three fixture checks run on EVERY invocation, armed or not (see FIX ROUND 3 in the header
@@ -1035,6 +1178,7 @@ try {
   const positiveOk = fixturePositiveControl();
   fixtureNegativeControl(positiveOk);
   roundTripCheck();
+  docFixtureControls();
 } catch (e) {
   if (!harnessError) harnessError = e;
 }

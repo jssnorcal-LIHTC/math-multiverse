@@ -13,7 +13,7 @@ job name `fuzz + smoke`, which is the required check) and blocks merges to `main
 | `npm run reading` | The read/respond surfaces are measured as PAINTED, not as authored. |
 | `npm run touch-targets` | Every header control is reachable by a 44px finger, measured by HIT-TESTING rather than by geometry. |
 | `npm run reduced-motion` | No SVG under `art/` uses SMIL, and every animated asset actually stops under `prefers-reduced-motion`. |
-| `npm test` | units, then validate-pack, figure-derive, freshness x3, shells, fuzz, smoke, figures-offline, reading-surface, tile-overlap, touch-targets, reduced-motion. |
+| `npm test` | units, then validate-pack, figure-derive, figure-fidelity, freshness x3, shells, fuzz, smoke, figures-offline, reading-surface, tile-overlap, touch-targets, reduced-motion. |
 
 Two tools are committed but deliberately **not** in `npm test`, because each needs a network
 origin and neither belongs in a hermetic gate:  `build/verify-deploy.js` (byte-compare what

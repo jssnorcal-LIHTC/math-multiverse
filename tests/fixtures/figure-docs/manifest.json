@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "packs": [
+    {
+      "id": "figure-docs",
+      "subject": "ela",
+      "subjectLabel": "English",
+      "grade": 6,
+      "title": "Figure Docs Fixture",
+      "standards": "CCSS ELA 6",
+      "icon": "🧪",
+      "color": "#3a6",
+      "description": "Fixture pack for the four document renderers. Not a shipped pack; not listed in packs/manifest.json.",
+      "levels": 1,
+      "grandGoal": "Fixture",
+      "unlocked": false
+    }
+  ]
+}
