@@ -242,7 +242,11 @@
         "l1-ebsr-count-not-failure",
         "l1-mc-two-kinds-of-still",
         "l1-ebsr-why-tortoise-under",
-        "l1-ebsr-not-hiding"
+        "l1-ebsr-not-hiding",
+        "l1-mc-what-the-map-numbers-after-the-time",
+        "l1-match-what-the-map-shows-about-each-stop",
+        "l1-mc-where-the-found-tortoises-were",
+        "l1-ms-what-the-yard-plan-shows"
       ],
       "reveal": {
         "figureId": "fig-l1-first-rounds"
@@ -267,7 +271,7 @@
         "l2-mc-narrow-column",
         "l2-order-how-the-case-assembles",
         "l2-ebsr-two-initials-purpose",
-        "l2-ms-thiamine-chain",
+        "l2-match-invoice-columns-line-for-line",
         "l2-hot-mechanism",
         "l2-cloze-what-paper-proves",
         "l2-mc-front-freezer-rule",
@@ -283,7 +287,11 @@
         "l2-ebsr-early-signs",
         "l2-mc-what-the-narrator-refuses",
         "l2-ebsr-clearance-lot",
-        "l2-ebsr-paper-cannot-diagnose"
+        "l2-ebsr-paper-cannot-diagnose",
+        "l2-ms-thiamine-chain",
+        "l2-mc-tally-strip-across-columns",
+        "l2-order-workup-chain-of-arrows",
+        "l2-cloze-heading-against-the-tally"
       ],
       "reveal": {
         "figureId": "fig-l2-cold-chain"
@@ -307,8 +315,8 @@
         "l3-cloze-which-account-holds",
         "l3-mc-why-page-exists",
         "l3-short-what-the-summary-will-not-do",
-        "l3-ebsr-only-roar",
-        "l3-ms-bittern-facts",
+        "l3-match-column-belongs-to-witness",
+        "l3-order-one-clock-two-tracks",
         "l3-hot-how-collected",
         "l3-cloze-bittern-closes-it",
         "l3-mc-what-none-of-them-did",
@@ -324,7 +332,11 @@
         "l3-ebsr-three-nights",
         "l3-mc-what-the-case-needed",
         "l3-ebsr-bittern-mistaken",
-        "l3-ebsr-inventory-no-roar"
+        "l3-ebsr-inventory-no-roar",
+        "l3-ms-bittern-facts",
+        "l3-ebsr-only-roar",
+        "l3-mc-what-the-hatched-band-shows",
+        "l3-cloze-read-the-rows-across"
       ],
       "reveal": {
         "figureId": "fig-l3-monitoring"
@@ -366,7 +378,11 @@
         "l4-ebsr-whose-numbers",
         "l4-mc-what-checking-means",
         "l4-ebsr-clipping-error-inspection",
-        "l4-ebsr-clipping-sourcing"
+        "l4-ebsr-clipping-sourcing",
+        "l4-mc-biggest-jump-on-the-grid",
+        "l4-cloze-bars-above-the-advisory",
+        "l4-ms-what-the-clipping-underlines",
+        "l4-match-plan-connectors"
       ],
       "reveal": {
         "figureId": "fig-l4-fence-nine"
@@ -407,7 +423,11 @@
         "l5-ebsr-alva-questions",
         "l5-mc-what-she-does-not-know",
         "l5-ebsr-why-no-name",
-        "l5-ebsr-hardest-kind-of-respect"
+        "l5-ebsr-hardest-kind-of-respect",
+        "l5-mc-what-the-place-row-records",
+        "l5-mc-the-row-left-blank",
+        "l5-ms-what-the-slip-shows",
+        "l5-cloze-two-names-one-empty-line"
       ],
       "reveal": {
         "figureId": "fig-l5-transfer-slip"
@@ -438,7 +458,7 @@
         "l6-hot-record-versus-memory",
         "l6-cloze-the-defence",
         "l6-mc-first-radio-entry",
-        "l6-short-the-defence",
+        "l6-order-timeline-clock-order",
         "l6-ebsr-what-cannot-settle",
         "l6-hot-first-two-steps",
         "l6-mc-why-tanaka-is-in-the-file",
@@ -450,7 +470,11 @@
         "l6-ebsr-defense-claim",
         "l6-mc-final-line",
         "l6-ebsr-correction-letter",
-        "l6-ebsr-bulletin-check-requirement"
+        "l6-ebsr-bulletin-check-requirement",
+        "l6-short-the-defence",
+        "l6-mc-dot-after-the-dashed-one",
+        "l6-mc-plain-line-in-the-schematic",
+        "l6-cloze-where-the-second-step-sits"
       ],
       "reveal": {
         "figureId": "fig-l6-night-of-the-storm"
@@ -5020,6 +5044,761 @@
       ],
       "maxWords": 10,
       "explain": "The report gives up the claim that nothing went wrong, because something plainly did, and replaces it with a stronger one: every failure is visible in the sanctuary's own paper, written by the people it happened to.  Any answer naming that everything was written down earns credit."
+    },
+    {
+      "id": "l1-mc-what-the-map-numbers-after-the-time",
+      "type": "mc",
+      "passageId": "p-l1-first-rounds",
+      "figureId": "fig-l1-first-rounds",
+      "figureFact": "tortoise yard",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 2,
+      "stem": "The map writes the walk's only time beside stop 4.  Which two stops does the map number after it?",
+      "choices": [
+        "Stop 5, the tortoise yard, and stop 6, the gate log",
+        "Stop 5, the otter pool, and stop 6, the gate log",
+        "Stop 5, the gate log, and stop 6, the tortoise yard",
+        "Stop 5, the red foxes, and stop 6, the tortoise yard"
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The otter pool comes earlier on the walk, before the time note;  it is the stop where Rana did not meet the narrator at the glass.",
+        "2": "That reverses the end of the round.  The tortoise yard is the last stop before the gate, so the gate log cannot come ahead of it.",
+        "3": "The red foxes are fed near the top of the hill, right after the owls, long before the walk reaches the marsh."
+      },
+      "explain": "The map counts the round downhill and gives every stop a number, so the two stops after the timed one are stop 5, the tortoise yard, and stop 6, the gate log.  The otter pool and the red foxes are already behind her by then, and the gate log cannot come first because the walk ends there.",
+      "whyTheFigureIsNeeded": "Only the drawing numbers the six stops and hangs the time note on stop 4, so only the drawing says which stops still lie ahead of that numbered position; the prose scatters the route across paragraphs and never numbers a stop."
+    },
+    {
+      "id": "l1-match-what-the-map-shows-about-each-stop",
+      "type": "match",
+      "passageId": "p-l1-first-rounds",
+      "figureId": "fig-l1-first-rounds",
+      "figureFact": "barn owls",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 2,
+      "stem": "The map treats each stop a little differently, from the barn owls at the top of the hill down to the creek.  Match each stop to what the map shows about it.",
+      "rowLabels": [
+        "Marsh boardwalk",
+        "Barn owls",
+        "Tortoise yard"
+      ],
+      "colLabels": [
+        "The stop the map numbers first, where the walk begins",
+        "The stop the map numbers fifth, just before the gate log",
+        "The one stop the map writes a time beside"
+      ],
+      "key": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "explain": "The map does three different jobs at once: it starts the count at the owls, it carries that count downhill to the tortoise yard at five, and it hangs a single time note on the marsh boardwalk.  Reading the drawing as a plain list of six places loses both the order and the one stop that is marked out from the rest.",
+      "whyTheFigureIsNeeded": "The drawing is what assigns each stop a number and what marks one stop out from the other five with a time beside it, a comparison across the whole route that no single sentence of the prose makes."
+    },
+    {
+      "id": "l1-mc-where-the-found-tortoises-were",
+      "type": "mc",
+      "passageId": "p-l1-count-that-would-not-close",
+      "figureId": "fig-l1-tortoise-yard",
+      "figureFact": "the mouth of a burrow",
+      "targets": [
+        "c1-lit-1-key-details",
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "stem": "The yard plan marks where each tortoise was during the search.  What does it show about the two the keepers actually found?",
+      "choices": [
+        "Ada and Salt are drawn on the far side of the yard from the mouth of a burrow",
+        "Ada and Salt are drawn right beside the burrow mouth, close enough to touch it",
+        "Ada is drawn against the north wall and Salt underneath the feeding shelf",
+        "All three tortoises are drawn together in the eastern corner of the yard"
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The plan puts both of them across the yard from the burrow, which is why the keepers work a slow grid through the whole enclosure before anyone looks at the corner.",
+        "2": "That reverses the two finds.  Salt was pressed against the north wall, and Ada was underneath the feeding shelf.",
+        "3": "Juniper is not with them anywhere;  she was nowhere at all during the search, and the plan draws her alone at the corner."
+      },
+      "explain": "The plan splits the yard in two.  Ada under the feeding shelf and Salt at the north wall sit together on one side, while the mouth of a burrow and Juniper sit at the corner across from them.  Swapping Ada and Salt, or gathering all three tortoises into one corner, disagrees with the search and with the drawing at the same time.",
+      "whyTheFigureIsNeeded": "The plan is the only place the yard's geography appears: the prose names each spot separately but never says that the feeding shelf and the north wall sit on the side of the yard opposite the burrow mouth."
+    },
+    {
+      "id": "l1-ms-what-the-yard-plan-shows",
+      "type": "ms",
+      "passageId": "p-l1-count-that-would-not-close",
+      "figureId": "fig-l1-tortoise-yard",
+      "figureFact": "the feeding shelf",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "Select the three statements the yard plan supports.",
+      "choices": [
+        "Salt is drawn nearer the north wall than any other animal in the yard.",
+        "The feeding shelf is drawn between Salt and Ada.",
+        "Juniper is drawn at the far corner, apart from the other two tortoises.",
+        "Ada is drawn pressed against the north wall with her head tucked in.",
+        "A second burrow mouth is drawn on the side of the yard where Ada was found."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "That position belongs to Salt.  Ada was half buried under the feeding shelf, and the plan runs the arrow to the wall from Salt instead.",
+        "4": "The plan marks one burrow mouth and no other, at the corner away from Ada;  the binder's map names a single burrow behind the manzanita."
+      },
+      "explain": "The plan puts Salt just under the north wall, sets the feeding shelf between Salt and Ada, and draws Juniper alone at the far corner beside the burrow.  The two wrong choices hand Salt's own position to Ada and add a second burrow that neither the plan nor the binder ever marks.",
+      "whyTheFigureIsNeeded": "Relative position is drawn, not written: the plan shows the feeding shelf lying between Salt and Ada, Salt closest to the north wall, and Juniper off at the far corner, none of which the prose states as a relationship."
+    },
+    {
+      "id": "l2-match-invoice-columns-line-for-line",
+      "type": "match",
+      "passageId": "p-l2-cold-chain-invoice",
+      "figureId": "fig-l2-cold-chain",
+      "figureFact": "The first invoice",
+      "targets": [
+        "c1-inf-1-key-details",
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "stem": "The card sets The first invoice beside the second one, line for line.  Match each line of the first invoice to the line printed opposite it in the second column.",
+      "rowLabels": [
+        "The lot number is 4471",
+        "packed on the fourth of December",
+        "the front freezer under a blue tag"
+      ],
+      "colLabels": [
+        "Freezer two, beneath a white tag marked check before use",
+        "The lot number the thaw log then repeats nineteen times, 3902",
+        "A packing date fourteen months before the delivery"
+      ],
+      "key": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "explain": "Every line of the first invoice has a line facing it in the second column.  Lot 4471 faces 3902, the number the thaw log then repeats nineteen times.  A December packing date faces one fourteen months old.  A blue tag in the front freezer faces a white tag in freezer two.  Reading one column on its own hides all three of those differences.",
+      "whyTheFigureIsNeeded": "The drawing prints the two invoices as parallel columns so each line sits opposite its counterpart, while the passage tells them as two separate paragraphs and never states which line faces which."
+    },
+    {
+      "id": "l2-mc-tally-strip-across-columns",
+      "type": "mc",
+      "passageId": "p-l2-otter-diet-card",
+      "figureId": "fig-l2-diet-card",
+      "figureFact": "three days",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "The card's tally strip prints its three columns side by side.  What does reading across them show?",
+      "choices": [
+        "The strip covers three days of feeding rather than fourteen",
+        "Every one of the twenty-eight fish squares is initialed, and the supplement column beside them carries initials on three days",
+        "The fish squares and the supplement column carry the same number of initials",
+        "Three of the twenty-eight fish squares were left blank"
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "The first column of the strip is fourteen days of feeding;  three is what the narrow column beside it adds up to.",
+        "2": "Twenty-eight initials sit in the fish grid and three in the column beside it, which is why the card prints them together.",
+        "3": "The narrator says every one of the twenty-eight fish squares was initialed;  the blanks are all in the supplement column."
+      },
+      "explain": "Set side by side, the three columns say one thing.  Fourteen days produced twenty-eight initialed fish squares, and the supplement column beside them carries initials on three days.  The wrong answers move the blanks into the fish grid, flatten two very different counts into one, or shrink fourteen days of feeding down to three.",
+      "whyTheFigureIsNeeded": "The drawing lines the three tally columns up in one strip so twenty-eight can be read straight across against three, where the passage reports the two counts in separate sentences."
+    },
+    {
+      "id": "l2-order-workup-chain-of-arrows",
+      "type": "order",
+      "passageId": "p-l2-lethargy-workup-rana",
+      "figureId": "fig-l2-workup",
+      "figureFact": "breaks thiamine apart",
+      "targets": [
+        "c1-inf-5-analysis",
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 2,
+      "stem": "The workup schematic joins four boxes with arrows, and one of those arrows carries the label breaks thiamine apart.  Put the four boxes in the order the arrows run.",
+      "tiles": [
+        "a shortage",
+        "raw frozen fish",
+        "appetite loss",
+        "thiaminase"
+      ],
+      "key": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "explain": "The schematic runs one way only.  Raw frozen fish carries thiaminase, thiaminase breaks thiamine apart, a shortage follows, and appetite loss is the sign that arrives first.  Any other order puts the sign before the shortage that causes it, or the enzyme before the fish that carries it.",
+      "whyTheFigureIsNeeded": "The drawing fixes the mechanism as a single left-to-right chain of four boxes, while the memo scatters those parts across two paragraphs and never sets them out in one order."
+    },
+    {
+      "id": "l2-cloze-heading-against-the-tally",
+      "type": "cloze",
+      "passageId": "p-l2-otter-diet-card",
+      "figureId": "fig-l2-diet-card",
+      "figureFact": "7:00 and 15:30",
+      "targets": [
+        "c1-inf-1-key-details",
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "stem": "Finish the reading of the card.  Its heading gives two feeds daily, 7:00 and 15:30, and the tally strip below counts fourteen days.  The twenty-eight fish squares therefore mean {{0}}, and a blank in the narrow column beside them means {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "one square for each of the two feeds on all fourteen days",
+            "twenty-eight days of feeding rather than fourteen",
+            "one square a day, with the fourteen days counted twice by mistake"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "the thiamine tablet was not initialed that day",
+            "no fish was fed at either feed that day",
+            "a second keeper did not watch the feeding"
+          ],
+          "key": 0
+        }
+      ],
+      "explain": "The heading and the tally strip only make sense read together.  Two feeds a day across fourteen days is twenty-eight feeds, which is exactly the number of fish squares on the strip.  The narrow column beside the grid is reserved for the supplement, so a blank there means the tablet went uninitialed, and says nothing at all about the fish.",
+      "whyTheFigureIsNeeded": "The drawing sets the feeding schedule in the card's heading directly above the tally strip, so two feeds a day can be counted against the twenty-eight squares that the passage never multiplies out."
+    },
+    {
+      "id": "l3-order-one-clock-two-tracks",
+      "type": "order",
+      "passageId": "p-l3-monitoring-summary",
+      "figureId": "fig-l3-monitoring",
+      "figureFact": "chain across the lot entrance",
+      "stem": "The timeline draws the gate log and the summary on one clock.  Put these four stretches of Wednesday night in the order the clock gives them.  The chain across the lot entrance is one of them.",
+      "targets": [
+        "c4-4-use-evidence",
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "tiles": [
+        "The three low calls begin on the summary track",
+        "The chain goes across the lot entrance, the last mark on the gate log track",
+        "The hatched band runs on with no mark on either track",
+        "The last visitor vehicle leaves, the first mark on the gate log track"
+      ],
+      "key": [
+        3,
+        1,
+        2,
+        0
+      ],
+      "explain": "All three gate log marks fall before the first low call, so the two tracks never overlap.  The last visitor vehicle leaves at 8:12.  The chain goes across at 8:22.  Some forty minutes then pass with nothing marked on either track.  Only after that does the first low call arrive at 9:04.  Putting a low call before the chain would undo the one thing these two records together establish, which is that the lot was empty and shut before the sound was recorded.",
+      "whyTheFigureIsNeeded": "Only the drawing merges the gate log and the summary onto a single clock and draws the empty stretch between them as a labelled band, whereas the passage reports the low calls and the gate log in separate paragraphs and never sequences the two records against each other."
+    },
+    {
+      "id": "l3-match-column-belongs-to-witness",
+      "type": "match",
+      "passageId": "p-l3-three-accounts",
+      "figureId": "fig-l3-three-accounts",
+      "figureFact": "low rather than loud",
+      "stem": "Each column on the page holds one witness's four answers, read from top to bottom.  One of those columns calls the sound low rather than loud.  Match each witness to the whole column that belongs to them.",
+      "targets": [
+        "c4-3-analyze-sources",
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "rowLabels": [
+        "Cleo Fontaine",
+        "Wes Tanaka",
+        "Ruth Bellweather"
+      ],
+      "colLabels": [
+        "Closer to nine, from the marsh, low rather than loud, given the same night",
+        "After dark, the marsh, like an old pump handle, given Thursday morning",
+        "After eight, the parking lot, a roar, given a full day later"
+      ],
+      "key": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "explain": "Each column belongs to one witness and answers the same four questions in the same four places: when, where, what it sounded like, and when the account was given.  Cleo Fontaine put a roar beside the parking lot and telephoned a full day later.  Wes Tanaka put a low sound out in the marsh and wrote it down the same night.  Ruth Bellweather put a sound like an old pump handle in the marsh and telephoned on Thursday morning.  A column that mixes a roar with the marsh belongs to nobody on the page.",
+      "whyTheFigureIsNeeded": "The passage gives each account its own paragraph, whereas the drawing sets the same four questions on shared rows across three columns, so only the drawing lets a reader assemble one witness's whole column and see that a mixed column belongs to no witness at all."
+    },
+    {
+      "id": "l3-mc-what-the-hatched-band-shows",
+      "type": "mc",
+      "passageId": "p-l3-monitoring-summary",
+      "figureId": "fig-l3-monitoring",
+      "figureFact": "some forty minutes",
+      "stem": "A hatched band is drawn across the middle of the timeline.  What does that band mark?",
+      "targets": [
+        "c4-4-use-evidence",
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 2,
+      "choices": [
+        "The stretch of the night when the recorder was switched off",
+        "A gap of some forty minutes between the last gate log entry and the first low call",
+        "The stretch in which the three low calls were logged",
+        "The forty-one minutes of usable audio the reviewer kept"
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "The recorder runs from sunset until midnight;  what stops at 8:22 is the gate log, not the recording.",
+        "2": "The three low calls sit past the band's right edge, at 9:04, 9:07 and 9:12.",
+        "3": "The forty-one minutes usable is a total gathered across all four hours, not one unbroken stretch of clock."
+      },
+      "explain": "The band runs from 8:22 to 9:04, from the gate log's last entry to the summary's first low call.  Its label reads some forty minutes.  That gap is what the two records together establish: the lot was chained and empty well before the sound was recorded.  Each wrong answer drops something into the band.  The recorder ran from sunset until midnight, the low calls sit past the band's right edge, and the forty-one minutes of usable audio is a total spread across four hours.",
+      "whyTheFigureIsNeeded": "The hatched band exists only in the drawing, where its position between the last gate log mark and the first low call is what carries the forty-minute gap;  the passage mentions forty minutes as a closing remark and never as a place on the clock."
+    },
+    {
+      "id": "l3-cloze-read-the-rows-across",
+      "type": "cloze",
+      "passageId": "p-l3-three-accounts",
+      "figureId": "fig-l3-three-accounts",
+      "figureFact": "Ruth Bellweather",
+      "stem": "Read the page one row at a time, straight across all three columns.  On the time row, Ruth Bellweather's column {{0}}.  On the bottom row, the one witness whose account was given the same night is {{1}}.",
+      "targets": [
+        "c4-3-analyze-sources",
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "blanks": [
+        {
+          "choices": [
+            "gives the only clock hour on the page",
+            "gives no clock hour at all, only after dark",
+            "gives the same hour as the column beside it"
+          ],
+          "key": 1
+        },
+        {
+          "choices": [
+            "Cleo Fontaine",
+            "Wes Tanaka",
+            "Ruth Bellweather"
+          ],
+          "key": 1
+        }
+      ],
+      "explain": "The time row reads after eight, closer to nine, and after dark, so two columns name an hour and one does not.  Ruth Bellweather's is the column with no hour in it.  The bottom row reads a full day later, the same night, and Thursday morning, so only Wes Tanaka wrote anything down while the evening was still going.  Cleo Fontaine spoke a full day later and Ruth Bellweather telephoned the next morning, both of them working from memory.",
+      "whyTheFigureIsNeeded": "Only the drawing lines the three witnesses' times up on one shared row, which is what makes visible at a glance that Ruth Bellweather's column names no clock hour while the two columns beside it do."
+    },
+    {
+      "id": "l4-mc-biggest-jump-on-the-grid",
+      "type": "mc",
+      "passageId": "p-l4-bulletin-fourteen",
+      "figureId": "fig-l4-bulletin",
+      "figureFact": "nine o'clock",
+      "targets": [
+        "c1-inf-1-key-details",
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "The gust grid is drawn as four bars that climb from left to right.  Between which two of them does the chart show the biggest rise?",
+      "choices": [
+        "From seven o'clock to eight o'clock",
+        "From nine o'clock to the peak reading at 9:20 p.m.",
+        "From eight o'clock to nine o'clock",
+        "The bars rise by the same amount every time"
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "Those two bar tops sit closest together on the grid, twenty-four then thirty-one, which is the smallest step of the night rather than the biggest.",
+        "1": "That last step runs from forty-four up to the peak of fifty-two, eight miles an hour, so it is smaller than the step before it.",
+        "3": "The four bar tops are not evenly spaced;  the grid climbs by seven, then thirteen, then eight."
+      },
+      "explain": "Reading the bar tops against the scale gives twenty-four, thirty-one, forty-four and then the peak of fifty-two.  The widest gap between two neighbouring bars is the thirteen miles an hour from eight o'clock to nine o'clock.  The wrong answers pick the smallest step, the last step, or assume an even climb the grid never shows.",
+      "whyTheFigureIsNeeded": "The chart draws all four readings to one scale, so the size of each step between neighbouring bars is visible as a gap; the prose only lists the numbers in separate sentences and never compares one step to another."
+    },
+    {
+      "id": "l4-cloze-bars-above-the-advisory",
+      "type": "cloze",
+      "passageId": "p-l4-bulletin-fourteen",
+      "figureId": "fig-l4-bulletin",
+      "figureFact": "gusts of up to 50 miles an hour",
+      "targets": [
+        "c1-inf-1-key-details",
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "Finish the reading of the gust grid.  The advisory note printed under the plot says gusts of up to 50 miles an hour, and the grid draws {{0}} above that number, the reading taken at {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "exactly one bar",
+            "two of the four bars",
+            "no bar at all"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "9:20 p.m.",
+            "nine o'clock",
+            "seven o'clock"
+          ],
+          "key": 0
+        }
+      ],
+      "explain": "Three of the four bars stop short of the advisory number: twenty-four, thirty-one and forty-four are all under fifty.  Only the last bar clears it, the peak of fifty-two at 9:20 p.m.  Choosing two bars counts the forty-four reading as though it crossed the line, and choosing none forgets that the peak went over the number the advisory had warned about.",
+      "whyTheFigureIsNeeded": "The chart prints the advisory note beneath the same plot as the four bar heights, so which bar tops fall short of fifty and which one clears it is something the drawing shows at a glance, while the prose states the advisory figure and the readings paragraphs apart."
+    },
+    {
+      "id": "l4-ms-what-the-clipping-underlines",
+      "type": "ms",
+      "passageId": "p-l4-storm-rips-fence",
+      "figureId": "fig-l4-storm-clipping",
+      "figureFact": "sanctuary records show the fence had not been",
+      "targets": [
+        "c4-4-use-evidence",
+        "c1-inf-4-reasoning"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 2,
+      "stem": "Some of the lines on the clipping are marked with a line drawn underneath.  Select the two claims that carry that mark.",
+      "choices": [
+        "A violent spring storm tore a hole in the perimeter fence at Marlowe Creek Wildlife Sanctuary Thursday night",
+        "sanctuary records show the fence had not been inspected since March",
+        "leaving a gap wide enough for an animal to walk through",
+        "the county was under a High Wind Warning that night, according to the National Weather Service",
+        "The byline belongs to a reporter named Cal Prentiss"
+      ],
+      "key": [
+        1,
+        3
+      ],
+      "distractorRationale": {
+        "0": "That is the article's opening line, printed plainly with no mark under it, and the passage counts the torn fence among the details the article gets right.",
+        "2": "That finishes the same opening sentence and carries no mark either;  no animal left the property, which the article also reports correctly.",
+        "4": "The byline sits in the clipping's header, above the article text, so it is not one of the marked lines at all."
+      },
+      "explain": "The marking picks out the two claims our own paperwork contradicts, the upkeep claim about inspections and the weather claim about a High Wind Warning.  Everything printed above them belongs to the opening sentence the passage treats as accurate, and the byline is a header row rather than a claim about the storm.",
+      "whyTheFigureIsNeeded": "The underline exists only on the drawing, so which of the clipping's printed lines carry the mark, and which sit plainly above them or up in the header, can be read nowhere but the facsimile."
+    },
+    {
+      "id": "l4-match-plan-connectors",
+      "type": "match",
+      "passageId": "p-l4-maintenance-file-fence-nine",
+      "figureId": "fig-l4-fence-nine",
+      "figureFact": "post fourteen",
+      "targets": [
+        "c1-inf-6-text-structure",
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "stem": "The plan marks panel six and post fourteen along the Fence Nine run.  Match each connector the plan draws to what that connector shows.",
+      "rowLabels": [
+        "The line running from panel six to the fence",
+        "The one arrow on the plan, which starts at the big willow",
+        "The line running from the fence down to the creek"
+      ],
+      "colLabels": [
+        "It ends at the post that snapped in the storm",
+        "It carries no label at all",
+        "It carries a date, the twenty-eighth of April"
+      ],
+      "key": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "explain": "The plan labels only two of its connectors, and each label does a different job.  The panel six line carries the date the mesh was tightened, and the willow's arrow points at post fourteen and names the limb lying there.  The line down to the creek carries nothing, because the creek is where the fence runs rather than something that happened to it.",
+      "whyTheFigureIsNeeded": "Only the plan puts the two marked points on the run side by side and shows which connector carries the April date, which one is a bare line, and where the single arrow starts and lands; the prose scatters those facts across four paragraphs and never draws the links."
+    },
+    {
+      "id": "l5-mc-what-the-place-row-records",
+      "type": "mc",
+      "passageId": "p-l5-rehabbers-van",
+      "figureId": "fig-l5-transfer-slip",
+      "figureFact": "thirty feet out in the shallow water",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 2,
+      "stem": "The transfer slip has a row marked place.  Which place does the slip record there?",
+      "choices": [
+        "The boardwalk, where the keeper was standing when her light found the bird",
+        "The spot thirty feet out in the shallow water, where the heron was standing",
+        "The maintenance gate, where the van pulled up a little after eight",
+        "The maintenance binder, where the carbon copy was carried that night"
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "The boardwalk is where the keeper watched from;  the slip records where the bird was, not where the person was.",
+        "2": "The gate is where the van stopped and where the slip was written on the hood, which is a different place from where the heron was found.",
+        "3": "The binder is where the copy went after the night was over, and it is not an entry on the slip at all."
+      },
+      "explain": "Three places turn up in this account, the boardwalk, the water, and the maintenance gate, and only the slip itself shows which one the form keeps.  The place row records where the heron was, thirty feet out in the shallow water, because the slip is a record of the bird rather than of the keeper's night.  The other three answers are all real places in the story, and none of them is what the form was asking for.",
+      "whyTheFigureIsNeeded": "The passage names three different places on that night and never says which one the form's place row holds, so only the drawing settles it."
+    },
+    {
+      "id": "l5-mc-the-row-left-blank",
+      "type": "mc",
+      "passageId": "p-l5-rehabbers-van",
+      "figureId": "fig-l5-transfer-slip",
+      "figureFact": "no name is written on the keeper row",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "stem": "What does the transfer slip show about the keeper who found the heron?",
+      "choices": [
+        "The slip does not name her, since no name is written on the keeper row",
+        "The slip enters her name just under the condition row",
+        "The slip carries her signature next to Alva's",
+        "The slip lists her in the same block as Whitlock"
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "That is where her row sits, and the row is printed with its label and left with nothing after it.",
+        "2": "Whitlock signed it and Alva signed it;  the keeper only carried the carbon copy back to the binder.",
+        "3": "Whitlock's name sits in the signature block, which is a separate part of the slip from the row for the keeper who found the bird."
+      },
+      "explain": "Every other row on the slip is filled in.  The time reads 8:40, the place reads thirty feet out in the shallow water, and the species and the condition are both written down.  The one row left empty is the row for the keeper who found the bird, so the last thing this file will ever say about the heron does not say who found her.  Each wrong answer borrows a name from the signature block or puts one on a row the slip leaves alone.",
+      "whyTheFigureIsNeeded": "The passage lists the finder's name among the slip's rows in a single sentence;  only the drawing shows that the row was printed and then left empty."
+    },
+    {
+      "id": "l5-ms-what-the-slip-shows",
+      "type": "ms",
+      "passageId": "p-l5-rehabbers-van",
+      "figureId": "fig-l5-transfer-slip",
+      "figureFact": "the name of the keeper who found the bird",
+      "targets": [
+        "c1-lit-1-key-details",
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 2,
+      "stem": "Read the transfer slip itself.  Select the three statements that match what the slip shows.",
+      "choices": [
+        "Nothing follows the printed row reading the name of the keeper who found the bird.",
+        "The signature block holds two names, Whitlock and Alva Reyes.",
+        "A stamp across the slip reads carbon copy.",
+        "The time entered on the slip is 7:22, the moment Whitlock reached Alva by telephone.",
+        "The slip records what Alva plans to do for the bird's wing."
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "7:22 is the time of the telephone call;  the time written on the slip is 8:40, out at the van in the rain.",
+        "4": "The sanctuary is not licensed to treat wild birds, and this slip is the last thing its file will ever say about the heron."
+      },
+      "explain": "The slip records one moment and nothing beyond it: a time, a place, a species, a condition, two signatures, and a stamp reading carbon copy.  The row set aside for the name of the keeper who found the bird has nothing after it, so the only names anywhere on the document are the two in the signature block.  The wrong choices move the telephone time onto the form and add a plan for the wing that the sanctuary is not licensed to write.",
+      "whyTheFigureIsNeeded": "The drawing shows which rows the form actually carries writing on, which the passage's one-sentence list of the slip's rows never distinguishes."
+    },
+    {
+      "id": "l5-cloze-two-names-one-empty-line",
+      "type": "cloze",
+      "passageId": "p-l5-rehabbers-van",
+      "figureId": "fig-l5-transfer-slip",
+      "figureFact": "both signatures",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "stem": "Finish the summary.  The slip carries both signatures, Whitlock and Alva Reyes, while the ruled row above them {{0}}, so the record never says {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "stays empty",
+            "is signed by the keeper as well",
+            "is filled in with the heron's name"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "who found the heron",
+            "where the heron was standing",
+            "what the heron's condition was"
+          ],
+          "key": 0
+        }
+      ],
+      "explain": "Two names are written on the slip, and both of them are signatures.  The row above them is printed for the keeper who found the bird, and it is left with nothing after it, so the file closes without ever saying who found her.  The place is on the slip, thirty feet out in the shallow water, and so is the condition, one wing carried wrong;  the finder is the one thing the form asks for and does not get.  The heron is entered as a species rather than by a name.",
+      "whyTheFigureIsNeeded": "Only the drawing shows the contrast between a signature block with two names on it and the row directly above it with none."
+    },
+    {
+      "id": "l6-order-timeline-clock-order",
+      "type": "order",
+      "passageId": "p-l6-night-of-the-storm",
+      "figureId": "fig-l6-night-of-the-storm",
+      "figureFact": "nothing written on it",
+      "stem": "On the timeline, the entry at 8 p.m. is labelled nothing written on it.  Put all four of these entries in the order the timeline draws them, from left to right.",
+      "tiles": [
+        "Every keeper is sent out in pairs",
+        "The eight o'clock line is left blank",
+        "The night's peak gust, 52 miles an hour",
+        "The pedestrian gate is pinned and initialed"
+      ],
+      "key": [
+        3,
+        1,
+        0,
+        2
+      ],
+      "targets": [
+        "c4-2-integrate",
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "explain": "The timeline runs by the clock rather than by which record an entry came from, so the pinned pedestrian gate at 7:44 comes first, then the eight o'clock line, then Ferris sending keepers out in pairs at 8:05, and last the peak gust at 9:20.  The page itself reaches the pairing order a paragraph before it reaches the blank line, so putting 8:05 ahead of 8 p.m. is the swap a reader makes by following the paragraphs instead of the clock.",
+      "whyTheFigureIsNeeded": "The page reports the 8:05 pairing order a paragraph before it reaches the blank eight o'clock line, so only the drawing shows the uninitialed check sitting ahead of the pairing order on the clock."
+    },
+    {
+      "id": "l6-mc-dot-after-the-dashed-one",
+      "type": "mc",
+      "passageId": "p-l6-night-of-the-storm",
+      "figureId": "fig-l6-night-of-the-storm",
+      "figureFact": "the last visitor vehicle out",
+      "stem": "The timeline draws one dot as a dashed circle with a question mark.  Which entry does the timeline place immediately after it?",
+      "choices": [
+        "The heron reported down in the marsh",
+        "The last visitor vehicle out",
+        "The transfer slip signed at the maintenance gate",
+        "The pedestrian gate pinned and initialed"
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "The heron report comes at 7:15, and the timeline sets it before the dashed dot rather than after it.",
+        "2": "The slip is signed at 8:40, an hour later;  it is the record the remembered time disagrees with, not the next dot along.",
+        "3": "The pedestrian gate is pinned at 7:44, which the timeline places one dot further on than the answer."
+      },
+      "targets": [
+        "c4-3-analyze-sources",
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "explain": "The dashed dot is Tanaka's remembered time for the van, and the timeline sets it at maybe seven-thirty, between the heron report at 7:15 and the gate log's last visitor vehicle out at 7:40.  Reaching for the 8:40 slip treats the record that contradicts the memory as the thing next to it, and reaching for the heron reads the timeline backwards.",
+      "whyTheFigureIsNeeded": "The page tells Tanaka's memory inside a paragraph about the 8:40 slip and never puts it in sequence, so only the drawing places the dashed dot between the 7:15 heron report and the 7:40 gate log entry."
+    },
+    {
+      "id": "l6-mc-plain-line-in-the-schematic",
+      "type": "mc",
+      "passageId": "p-l6-morning-report",
+      "figureId": "fig-l6-morning-report",
+      "figureFact": "not a failure of upkeep",
+      "stem": "Four pairs of boxes are joined in the schematic.  Three of the joins are arrows.  One is a plain line with no arrowhead.  Which pair does the plain line join?",
+      "choices": [
+        "The willow limb box and the box reading not a failure of upkeep",
+        "The box reading not a failure of upkeep and the box about the north service gate",
+        "The box about the north service gate and the box reading a failure of procedure",
+        "The box reading a failure of procedure and the box with rounded ends"
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "An arrow joins that pair, because finding one leads to the first step of the argument.",
+        "2": "An arrow joins that pair too, because finding two leads to the second step.",
+        "3": "An arrow joins that pair as well, carrying the second step into the third, the one the drawing gives rounded ends."
+      },
+      "targets": [
+        "c1-inf-4-reasoning",
+        "c1-inf-2-central-ideas"
+      ],
+      "coachTopic": "inference-argument",
+      "dok": 3,
+      "explain": "An arrow in this drawing means a finding leads to the step it supports, and the report keeps its findings separate from its argument on purpose.  The plain line does no leading at all;  it only carries the reader down the page from the first step to the second finding, which no step produced.  Choosing any of the arrows treats every join as the same kind of move.",
+      "whyTheFigureIsNeeded": "The page lists both findings and then all three steps, so only the drawing shows which join carries an argument and which one is simply the next thing down the page."
+    },
+    {
+      "id": "l6-cloze-where-the-second-step-sits",
+      "type": "cloze",
+      "passageId": "p-l6-morning-report",
+      "figureId": "fig-l6-morning-report",
+      "figureFact": "a failure of procedure",
+      "stem": "Finish the description of the schematic.  The box reading a failure of procedure follows straight from {{0}}, and the arrow out of it runs down to {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "the north service gate found standing open",
+            "the willow limb that came down across Fence Nine",
+            "the inspection line dated the twelfth of May"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "the promise that everything which went wrong was written down by the people it went wrong for",
+            "the change that gives the pin check a second initial column",
+            "the letter asking the Valley Register for a correction"
+          ],
+          "key": 0
+        }
+      ],
+      "targets": [
+        "c1-inf-2-central-ideas",
+        "c1-inf-4-reasoning"
+      ],
+      "coachTopic": "central-idea",
+      "dok": 3,
+      "explain": "The drawing gives each finding its own step:  the willow limb leads to not a failure of upkeep, and the north service gate found standing open leads to a failure of procedure.  The arrow out of that step runs to the box with rounded ends, the third step, where the defence is that every failure was written down by the people it happened to.  The inspection line of the twelfth of May supports the first step rather than the second, and the second initial column and the correction letter both come after the argument rather than inside it.",
+      "whyTheFigureIsNeeded": "The page groups both findings together and then all three steps, so only the drawing pairs the open gate with the procedure step and shows the argument closing in a single rounded box."
     }
   ],
   "figures": [
@@ -5499,7 +6278,7 @@
             "from": "willow",
             "to": "post",
             "style": "arrow",
-            "label": "lying across the fence line at post fourteen"
+            "label": "the fence line"
           }
         ]
       }
@@ -5583,12 +6362,6 @@
             "text": "perimeter fence at Marlowe Creek Wildlife"
           },
           {
-            "text": "Sanctuary Thursday night, leaving a gap"
-          },
-          {
-            "text": "wide enough for an animal to walk through"
-          },
-          {
             "text": "sanctuary records show the fence had not been",
             "emphasis": "underline"
           },
@@ -5604,8 +6377,7 @@
             "text": "night, according to the National Weather Service",
             "emphasis": "underline"
           }
-        ],
-        "stamp": "printed as plain statements of fact"
+        ]
       }
     },
     {

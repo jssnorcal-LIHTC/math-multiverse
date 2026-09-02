@@ -519,9 +519,12 @@ function renderFacsimile(dataTable, accentColor) {
         { stroke: accent, strokeWidth: 2, rx: 3, extra: 'data-emphasis="box"' }));
     } else if (em === 'underline') {
       out.push(line(innerX, hp(y + 5), innerX + w, hp(y + 5), accent, 2, { extra: 'data-emphasis="underline"' }));
-    } else {
-      out.push(line(innerX, hp(y + 7), CX + CW - 22, hp(y + 7), RULE, 1));
     }
+    // A plain line gets NO rule. Ruling every line made a flowing newspaper paragraph render as a
+    // stack of table rows, and worse, it made the gray rules almost indistinguishable from the
+    // ACCENT underline that marks a disputed sentence -- which is the one thing the figure exists
+    // to show. Rules now appear only where the document itself has one: under the title and under
+    // the header block.
     out.push(text(innerX, y, font, t.text));
   });
 
@@ -589,10 +592,32 @@ function renderFacsimile(dataTable, accentColor) {
     y = ry;
   }
 
+  // THE CARD MUST CONTAIN ITS CONTENTS. y has walked down the card as each block was drawn; if it
+  // has passed the bottom edge, lines were painted onto the panel BEHIND the card and the last one
+  // rendered outside the frame entirely. There was a fit check for the column table and none at all
+  // for the ruled lines, so a long clipping simply overflowed in silence.
+  if (y > CY + CH - 8) {
+    refuse(`facsimile: the content runs ${Math.ceil(y - (CY + CH - 8))}px past the bottom of the card; `
+      + 'drop a line or shorten the transcription');
+  }
+
   if (dt.stamp) {
     fitText(dt.stamp, LABEL_FONT, CW - 60, 'facsimile stamp');
     const sw = estimateTextWidth(dt.stamp, LABEL_FONT) + 26;
-    const sx = CX + CW - sw - 34, sy = CY + CH - 58;
+    // THE STAMP GOES IN THE TOP-RIGHT CORNER, beside the title. Pinned to the card BOTTOM it was
+    // drawn straight across the body copy of a long clipping, and a rotated stamp over text makes
+    // both illegible -- the two disputed sentences the figure exists to show were the ones it
+    // covered. Chasing the content downward instead just moved the collision around, because a card
+    // whose lines reach the bottom has no clear space below them by definition. The top-right is
+    // where a stamp goes on a real form, and the title is short and left-aligned, so the only thing
+    // it can collide with is a title long enough to reach it -- which is checked, not assumed.
+    const sx = CX + CW - sw - 26;
+    const sy = CY + 18;
+    const titleRight = dt.title ? innerX + estimateTextWidth(dt.title, TITLE_FONT) : innerX;
+    if (titleRight > sx - 16) {
+      refuse(`facsimile: the stamp ${JSON.stringify(dt.stamp)} would sit on the title `
+        + `${JSON.stringify(dt.title)}; shorten one of them`);
+    }
     const cx = sx + sw / 2, cy = sy + 20;
     out.push(`<g transform="rotate(-12 ${n2(cx)} ${n2(cy)})">`);
     out.push(rect(sx, sy, sw, 40, { stroke: STAMP_STROKE, strokeWidth: 2, rx: 4, extra: 'data-stamp="1"' }));
@@ -706,29 +731,74 @@ function renderSchematic(dataTable, accentColor) {
   out.push(`<g data-layout="${esc(layout)}"></g>`);
 
   // Edges under the nodes, so a line never crosses a label.
+  //
+  // THE ENDPOINTS ARE A RAY-BOX INTERSECTION, not an approximation. The previous version took
+  // `Math.min` of a half-width term and a half-height term, which is right only for a square
+  // approached along a diagonal: a wide box approached from below was cut short by its half-HEIGHT
+  // and the arrow stopped in mid-air pointing at nothing, while a tall one was overshot. Both were
+  // visible in the shipped Night Rounds plans.
+  const boxExit = (bx, dxu, dyu) => {
+    const hw = bx.w / 2, hh = bx.h / 2;
+    const tx = dxu === 0 ? Infinity : hw / Math.abs(dxu);
+    const ty = dyu === 0 ? Infinity : hh / Math.abs(dyu);
+    const t = Math.min(tx, ty);
+    return { x: bx.cx + dxu * t, y: bx.cy + dyu * t };
+  };
+
   edges.forEach((e) => {
     const a = boxById.get(e.from), b = boxById.get(e.to);
     const dx = b.cx - a.cx, dy = b.cy - a.cy;
     const len = Math.sqrt(dx * dx + dy * dy) || 1;
     const ux = dx / len, uy = dy / len;
-    const aOff = Math.min(a.w / 2 + 6, a.h / 2 + 6 + Math.abs(ux) * (a.w / 2));
-    const bOff = Math.min(b.w / 2 + 6, b.h / 2 + 6 + Math.abs(ux) * (b.w / 2));
-    const x1 = a.cx + ux * aOff, y1 = a.cy + uy * aOff;
-    const x2 = b.cx - ux * bOff, y2 = b.cy - uy * bOff;
+    const GAP = 6;
+    const pa = boxExit(a, ux, uy), pb = boxExit(b, -ux, -uy);
+    const x1 = pa.x + ux * GAP, y1 = pa.y + uy * GAP;
+    const x2 = pb.x - ux * GAP, y2 = pb.y - uy * GAP;
     out.push(line(x1, y1, x2, y2, PLOT_GRID, 2));
     if (e.style !== 'line') out.push(arrowHead(x2, y2, dx, dy, accent));
+
     if (e.label) {
-      const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
-      const w = estimateTextWidth(e.label, NOTE_FONT);
-      // Clear the boxes, not just the line. An edge between two adjacent nodes is short, so a label
-      // centred on it and lifted only 8px sat INSIDE the node it pointed at ("contains thiaminase"
-      // printed straight through the "freezing" box). When the label is wider than the free span
-      // between the two boxes, lift it clear of the taller box instead of overprinting it.
-      const span = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-      const lift = w > span ? Math.max(a.h, b.h) / 2 + 14 : 8;
+      // THE LABEL MUST CLEAR EVERY BOX, not merely the line it belongs to. Placing it at the edge
+      // midpoint with a fixed lift printed "was already eating" straight through "the feeding
+      // shelf" and left "pressed against" half under a box border. The midpoint of the VISIBLE
+      // segment is outside both endpoints' boxes by construction, but it can still land on a THIRD
+      // box, so each candidate offset is tested against every box and the first clear one wins.
       fitText(e.label, NOTE_FONT, VB_W - 2 * PAD, 'schematic edge label');
-      const clamped = Math.min(VB_W - PAD - w / 2, Math.max(PAD + w / 2, mx));
-      out.push(text(clamped, my - lift, NOTE_FONT, e.label, { anchor: 'middle', opacity: '0.82' }));
+      const w = estimateTextWidth(e.label, NOTE_FONT);
+      const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+      // Perpendicular to the edge, so the label sits beside the connector rather than on it.
+      const px = -uy, py = ux;
+      const step = NOTE_FONT * 0.8 + 8;
+      const clears = (cx, cy) => {
+        const l = cx - w / 2, r = cx + w / 2, t = cy - NOTE_FONT * 0.8, bt = cy + NOTE_FONT * 0.25;
+        if (l < PAD || r > VB_W - PAD || t < 0 || bt > VB_H) return false;
+        if (boxes.some((bx) => Math.abs(bx.cx - cx) < bx.w / 2 + w / 2 - 2
+          && Math.abs(bx.cy - cy) < bx.h / 2 + NOTE_FONT * 0.6 - 2)) return false;
+        // AND it must clear the CONNECTOR itself. A perpendicular offset slides a label sideways,
+        // but a label is usually wider than the offset, so on a vertical edge the line went straight
+        // through the middle of the words. Sampled along the segment, which handles every angle
+        // without a special case per direction.
+        for (let i = 0; i <= 24; i++) {
+          const sxp = x1 + (x2 - x1) * (i / 24), syp = y1 + (y2 - y1) * (i / 24);
+          if (sxp > l - 3 && sxp < r + 3 && syp > t - 3 && syp < bt + 3) return false;
+        }
+        return true;
+      };
+      let placed = null;
+      for (let k = 1; k <= 4 && !placed; k++) {
+        for (const s of [1, -1]) {
+          const cx = mx + px * step * k, cy = my + py * step * k;
+          if (clears(cx + 0, cy + 0)) { placed = { cx, cy }; break; }
+          const cx2 = mx - px * step * k, cy2 = my - py * step * k;
+          if (s === -1 && clears(cx2, cy2)) { placed = { cx: cx2, cy: cy2 }; break; }
+        }
+      }
+      if (!placed) {
+        refuse(`schematic: the label ${JSON.stringify(e.label)} on the edge ${JSON.stringify(e.from)} -> `
+          + `${JSON.stringify(e.to)} cannot be placed without covering a node; shorten it, move the `
+          + 'nodes apart, or carry the detail in the caption');
+      }
+      out.push(text(placed.cx, placed.cy, NOTE_FONT, e.label, { anchor: 'middle', opacity: '0.82' }));
     }
   });
 
