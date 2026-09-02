@@ -5069,7 +5069,7 @@
         "2": "That reverses the end of the round.  The tortoise yard is the last stop before the gate, so the gate log cannot come ahead of it.",
         "3": "The red foxes are fed near the top of the hill, right after the owls, long before the walk reaches the marsh."
       },
-      "explain": "The map counts the round downhill and gives every stop a number, so the two stops after the timed one are stop 5, the tortoise yard, and stop 6, the gate log.  The otter pool and the red foxes are already behind her by then, and the gate log cannot come first because the walk ends there.",
+      "explain": "The round works downhill, and the map gives every stop a number, so the two stops after the timed one are stop 5, the tortoise yard, and stop 6, the gate log.  The otter pool and the red foxes are already behind her by then, and the gate log cannot come first because the walk ends there.",
       "whyTheFigureIsNeeded": "Only the drawing numbers the six stops and hangs the time note on stop 4, so only the drawing says which stops still lie ahead of that numbered position; the prose scatters the route across paragraphs and never numbers a stop."
     },
     {
@@ -5083,7 +5083,7 @@
       ],
       "coachTopic": "evidence-story-details",
       "dok": 2,
-      "stem": "The map gives every stop a number, from the barn owls at the top of the hill down to the gate log, and it writes a time beside one of them.  Match each stop to what the map shows about it.",
+      "stem": "The map gives every stop a number, from the barn owls down to the gate log.  It writes a time beside just one stop.  Match each stop to what the map shows about it.",
       "rowLabels": [
         "Marsh boardwalk",
         "Barn owls",
@@ -5123,7 +5123,7 @@
       ],
       "coachTopic": "inference-evidence",
       "dok": 3,
-      "stem": "The yard plan marks where each of the three tortoises turned up.  What does it show about the two the keepers actually found?",
+      "stem": "The yard plan marks a spot for all three tortoises.  What does it show about the two the keepers actually found?",
       "choices": [
         "Ada and Salt are drawn on the far side of the yard from the mouth of a burrow",
         "Ada and Salt are drawn right beside the burrow mouth, close enough to touch it",
@@ -5182,7 +5182,7 @@
       ],
       "coachTopic": "research-integrate",
       "dok": 3,
-      "stem": "The card sets the first invoice beside the second one, line for line.  Match each line of the first invoice to the line printed opposite it in the second column.",
+      "stem": "The card sets the first invoice beside the second one, line for line.  Match each line of the first invoice to what the second invoice says about it.",
       "rowLabels": [
         "The lot number is 4471",
         "packed on the fourth of December",
@@ -5230,8 +5230,8 @@
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "The first column of the strip is fourteen days of feeding;  three is what the narrow column beside it adds up to.",
-        "2": "Twenty-eight initials sit in the fish grid and three in the column beside it, which is why the card prints them together.",
+        "0": "The first column of the strip is fourteen days of feeding;  three is what the supplement column adds up to.",
+        "2": "Twenty-eight initials sit in the fish squares column and three in the supplement column, which is why the card prints them together.",
         "3": "The narrator says every one of the twenty-eight fish squares was initialed;  the blanks are all in the supplement column."
       },
       "explain": "Set side by side, the three columns say one thing.  Fourteen days produced twenty-eight initialed fish squares, and the supplement column beside them carries initials on three days.  The wrong answers move the blanks into the fish grid, flatten two very different counts into one, or shrink fourteen days of feeding down to three.",
@@ -5277,7 +5277,7 @@
       ],
       "coachTopic": "structure-text",
       "dok": 3,
-      "stem": "Finish the reading of the card.  Its heading gives two feeds daily, 7:00 and 15:30, and the tally strip below counts fourteen days.  The twenty-eight fish squares therefore mean {{0}}, and a blank in the narrow column beside them means {{1}}.",
+      "stem": "Finish the reading of the card.  Its heading gives two feeds daily, 7:00 and 15:30, and the tally strip below counts fourteen days.  The twenty-eight fish squares therefore mean {{0}}, and a blank in the supplement column means {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -5296,7 +5296,7 @@
           "key": 0
         }
       ],
-      "explain": "The heading and the tally strip only make sense read together.  Two feeds a day across fourteen days is twenty-eight feeds, which is exactly the number of fish squares on the strip.  The narrow column beside the grid is reserved for the supplement, so a blank there means the tablet went uninitialed, and says nothing at all about the fish.",
+      "explain": "The heading and the tally strip only make sense read together.  Two feeds a day across fourteen days is twenty-eight feeds, which is exactly the number of fish squares on the strip.  The third column on the strip is headed supplement column, so a blank there means the tablet went uninitialed, and says nothing at all about the fish.",
       "whyTheFigureIsNeeded": "The drawing sets the feeding schedule in the card's heading directly above the tally strip, so two feeds a day can be counted against the twenty-eight squares that the passage never multiplies out."
     },
     {
@@ -5315,7 +5315,7 @@
       "tiles": [
         "The three low calls begin on the summary track",
         "The chain goes across the lot entrance, the last mark on the gate log track",
-        "The hatched band runs on with no mark on either track",
+        "The shaded stretch runs on with no mark on either track",
         "The last visitor vehicle leaves, the first mark on the gate log track"
       ],
       "key": [
@@ -5454,8 +5454,8 @@
         "1": "That last step runs from forty-four up to the peak of fifty-two, eight miles an hour, so it is smaller than the step before it.",
         "3": "The four bar tops are not evenly spaced;  the four bars climb by seven, then thirteen, then eight."
       },
-      "explain": "Reading the bar tops against the scale gives twenty-four, thirty-one, forty-four and then the peak of fifty-two.  The widest gap between two neighbouring bars is the thirteen miles an hour from eight o'clock to nine o'clock.  The wrong answers pick the smallest step, the last step, or assume an even climb the grid never shows.",
-      "whyTheFigureIsNeeded": "The chart draws all four readings to one scale, so the size of each step between neighbouring bars is visible as a gap; the prose only lists the numbers in separate sentences and never compares one step to another."
+      "explain": "Reading the bar tops against the scale gives twenty-four, thirty-one, forty-four and then the peak of fifty-two.  The widest gap between two neighboring bars is the thirteen miles an hour from eight o'clock to nine o'clock.  The wrong answers pick the smallest step, the last step, or assume an even climb the grid never shows.",
+      "whyTheFigureIsNeeded": "The chart draws all four readings to one scale, so the size of each step between neighboring bars is visible as a gap; the prose only lists the numbers in separate sentences and never compares one step to another."
     },
     {
       "id": "l4-cloze-bars-above-the-advisory",
@@ -5469,7 +5469,7 @@
       ],
       "coachTopic": "evidence-key-details",
       "dok": 2,
-      "stem": "Read the gust chart.  The note under it warns of gusts of up to 50 miles an hour.  The tallest bar {{0}} that warning, at {{1}}.",
+      "stem": "Read the gust chart.  The note under it says gusts of up to 50 miles an hour.  The tallest bar {{0}} that figure, at {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -5488,7 +5488,7 @@
           "key": 0
         }
       ],
-      "explain": "The note warns of gusts of up to 50 miles an hour.  The tallest bar on the chart is the reading taken at 9:20 p.m., and the caption gives it as the peak of 52, so it passes the warning rather than meeting or missing it.",
+      "explain": "The note gives 50 miles an hour.  The tallest bar on the chart is the reading taken at 9:20 p.m., and the caption gives it as the peak of 52, so it passes that figure rather than meeting or missing it.",
       "whyTheFigureIsNeeded": "The chart prints the advisory note beneath the same plot as the four bar heights, so which bar tops fall short of fifty and which one clears it is something the drawing shows at a glance, while the prose states the advisory figure and the readings paragraphs apart."
     },
     {
@@ -5520,7 +5520,7 @@
         "2": "The clipping stops printing that sentence at Marlowe Creek Wildlife, so those words are not on the card at all and nothing there is marked.",
         "4": "The byline sits in the clipping's header, above the article text, so it is not one of the marked lines at all."
       },
-      "explain": "The marking picks out the two claims our own paperwork contradicts, the upkeep claim about inspections and the weather claim about a High Wind Warning.  Everything printed above them belongs to the opening sentence the passage treats as accurate, and the byline is a header row rather than a claim about the storm.",
+      "explain": "The marking picks out the two claims our own paperwork contradicts, the upkeep claim about inspections and the weather claim about a High Wind Warning.  The two lines printed above them are the article's opening sentence, which the record neither disputes nor confirms, and the byline is a header row rather than a claim about the storm.",
       "whyTheFigureIsNeeded": "The underline exists only on the drawing, so which of the clipping's printed lines carry the mark, and which sit plainly above them or up in the header, can be read nowhere but the facsimile."
     },
     {
@@ -5764,7 +5764,7 @@
       "coachTopic": "inference-argument",
       "dok": 3,
       "explain": "Three arrows run down the page.  Two of them carry a finding into the step it supports, and the last carries the second step into the one after it.  The gap is between the first conclusion and the second finding, because a finding is not produced by an earlier conclusion.  The report opens with findings and keeps them separate from everything else on purpose, and the drawing keeps them separate too.",
-      "whyTheFigureIsNeeded": "The page lists both findings and then all three steps, so only the drawing shows which join carries an argument and which one is simply the next thing down the page."
+      "whyTheFigureIsNeeded": "The page lists both findings and then all three steps, so only the drawing shows which join carries an argument and where the page simply moves on with no connector at all."
     },
     {
       "id": "l6-cloze-where-the-second-step-sits",
@@ -5809,11 +5809,11 @@
       "src": "art/night-rounds-g6/fig-l1-first-rounds.svg",
       "caption": "Evening rounds run downhill in the same order every night, and only one stop on the walk got a time written beside it.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A looping route with six numbered stops labelled barn owls, red foxes, otter pool, marsh boardwalk, tortoise yard and gate log, with 7:41 noted beside the fourth stop.",
+      "alt": "A route with six numbered stops labelled barn owls, red foxes, otter pool, marsh boardwalk, tortoise yard and gate log, drawn as a line that ends at the last stop rather than closing back to the first, with 7:41 noted beside the fourth stop.",
       "dataTable": {
         "type": "route",
         "sourcePassageId": "p-l1-first-rounds",
-        "path": "loop",
+        "path": "line",
         "stops": [
           {
             "n": 1,
@@ -5928,7 +5928,7 @@
       "src": "art/night-rounds-g6/fig-l2-diet-card.svg",
       "caption": "The card asks for a thiamine tablet in the first feed every day, and over fourteen days the supplement column carries initials on three days.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A diet card facsimile headed RANA, with three fish amounts, a boxed thiamine supplement line, and a three-column tally of fourteen days, twenty-eight fish squares and three days.",
+      "alt": "A diet card facsimile headed RANA, with three fish amounts, a two-line thiamine supplement instruction inside a box, and a three-column tally of fourteen days, twenty-eight fish squares and three days.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-l2-otter-diet-card",
@@ -6048,7 +6048,7 @@
       "src": "art/night-rounds-g6/fig-l2-cold-chain.svg",
       "caption": "Side by side, the two invoices show a December lot under a blue tag and an older CLEARANCE lot under a white tag.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A binder card titled the cold chain, with a rule line and two columns headed The first invoice and The second invoice that compare dates, lot numbers, packing dates, freezers and tags, plus a CLEARANCE stamp.",
+      "alt": "A binder card titled the cold chain, with a rule line and two columns headed The first invoice and The second invoice that compare dates, lot numbers, packing dates, freezers and tags, with the word CLEARANCE printed in the second invoice column and nothing like it in the first.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-l2-cold-chain-invoice",
@@ -6064,7 +6064,7 @@
           {
             "heading": "The first invoice",
             "rows": [
-              "dated the eighth of January",
+              "the eighth of January",
               "The lot number is 4471",
               "packed on the fourth of December",
               "the front freezer under a blue tag"
@@ -6073,14 +6073,14 @@
           {
             "heading": "The second invoice",
             "rows": [
-              "dated the eleventh of January",
+              "the eleventh of January",
               "lot number 3902",
               "packed in November of the year before last",
-              "freezer two, beneath a white tag"
+              "freezer two, beneath a white tag",
+              "CLEARANCE"
             ]
           }
-        ],
-        "stamp": "CLEARANCE"
+        ]
       }
     },
     {
@@ -6090,7 +6090,7 @@
       "src": "art/night-rounds-g6/fig-l3-three-accounts.svg",
       "caption": "Three people heard something on Wednesday evening, and this page puts their three accounts side by side so you can see where they do not agree.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A document card headed three accounts of the night noise, with a boxed line reading None of the three witnesses saw anything at all above a three-column table under the names Cleo Fontaine, Wes Tanaka and Ruth Bellweather, each column giving that witness's time, place, sound and when the account was given.",
+      "alt": "A document card headed three accounts of the night noise, with a boxed line reading None of the three witnesses saw anything at all above a three-column table headed Fontaine, Tanaka and Bellweather, each column giving that witness's time, place, sound and when the account was given.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-l3-three-accounts",
@@ -6219,7 +6219,7 @@
             "id": "pasture",
             "label": "the north pasture",
             "shape": "box",
-            "x": 46,
+            "x": 58,
             "y": 8
           },
           {
@@ -6294,9 +6294,9 @@
       "kind": "chart",
       "gen": true,
       "src": "art/night-rounds-g6/fig-l4-bulletin.svg",
-      "caption": "The four gust numbers written on the bulletin that night, rising from 24 to a peak of 52.",
+      "caption": "Four of the gust numbers written on the bulletin that night, rising from 24 to a peak of 52.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A bar chart of four bars that rise from left to right, one bar for each recorded reading, with four short notes printed under the plot.",
+      "alt": "A bar chart of four bars that rise from left to right, one bar for each of four readings taken from the bulletin, with four short notes printed under the plot.",
       "dataTable": {
         "type": "bar",
         "sourcePassageId": "p-l4-bulletin-fourteen",
@@ -6331,7 +6331,7 @@
         "yLabel": "miles an hour",
         "notes": [
           "gusts of up to 50 miles an hour",
-          "The peak gust of the night is written in the margin beside the grid",
+          "52 miles an hour at 9:20 p.m.",
           "Every reading after ten o'clock falls steadily",
           "our own wind station and our own evening keeper"
         ]
@@ -6442,7 +6442,7 @@
       "src": "art/night-rounds-g6/fig-l6-night-of-the-storm.svg",
       "caption": "This timeline puts the night's entries in order, and the one time that rests on memory is drawn as a dashed circle with a question mark.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A single labelled track runs left to right with numbered dots from four o'clock to 10:56 p.m., one of them drawn as a dashed circle marked with a question mark, and a numbered key beneath pairs every dot with its time and its entry.",
+      "alt": "A single labelled track runs left to right with numbered dots in the order the entries happened rather than spaced by the clock, from four o'clock to 10:56 p.m., one of them drawn as a dashed circle marked with a question mark, and a numbered key beneath pairs every dot with its time and its entry.",
       "dataTable": {
         "type": "timeline",
         "sourcePassageId": "p-l6-night-of-the-storm",
@@ -6522,7 +6522,7 @@
       "src": "art/night-rounds-g6/fig-l6-morning-report.svg",
       "caption": "The boxes run down the page from what the report found to the last step of the argument it builds on those findings.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "Five labelled boxes stacked down the page and joined by lines and arrows, with the bottom box drawn with rounded ends.",
+      "alt": "Five labelled boxes stacked down the page, three of them joined to the box below by an arrow, with nothing drawn between the second and third boxes, and the bottom box drawn with rounded ends.",
       "dataTable": {
         "type": "schematic",
         "sourcePassageId": "p-l6-morning-report",

@@ -391,7 +391,13 @@ function renderTimeline(dataTable, accentColor) {
     const y = laneY(k);
     // tr is null for an unnamed single lane: draw the rule, draw no word.
     if (tr !== null) out.push(text(PAD, y + 6, NOTE_FONT, tr, { opacity: '0.82' }));
-    out.push(line(AX_L, hp(y), AX_R, hp(y), RULE, 1));
+    // A SOLID RULE IS A SCALE; A DASHED ONE IS A SEQUENCE. Two timelines in the same pack were
+    // drawn with the same device on two incompatible rules: one spaced its dots by the clock, so a
+    // forty-minute gap was visibly wide, and the other spaced twelve dots evenly, so three hours
+    // and four minutes got the same width. Nothing on either drawing said which. A child who
+    // learned to read spacing as elapsed time on the first read the second wrong. Ordinal lanes now
+    // carry a broken rule, and their alt text says so in words.
+    out.push(line(AX_L, hp(y), AX_R, hp(y), RULE, 1, timeMode ? undefined : { dash: '7 6' }));
   });
 
   // Marker numbers are placed in TWO PASSES, because two events close together in time put their
@@ -806,17 +812,34 @@ function renderSchematic(dataTable, accentColor) {
     return { x: bx.cx + dxu * t, y: bx.cy + dyu * t };
   };
 
-  edges.forEach((e) => {
+  // EVERY connector is measured before ANY label is placed. A label has to clear all of them, not
+  // just its own: on the Fence Nine plan the unlabelled fence-to-creek diagonal was drawn after the
+  // panel-six label and painted straight through the word "April", so the one connector visibly
+  // touching the date was the connector the item said carried no label at all. That made a second
+  // pairing defensible and the match item had two right answers. The rule the box test already
+  // stated -- clear EVERYTHING, not merely the thing you belong to -- now covers connectors too.
+  const segs = edges.map((e) => {
     const a = boxById.get(e.from), b = boxById.get(e.to);
     const dx = b.cx - a.cx, dy = b.cy - a.cy;
     const len = Math.sqrt(dx * dx + dy * dy) || 1;
     const ux = dx / len, uy = dy / len;
     const GAP = 6;
     const pa = boxExit(a, ux, uy), pb = boxExit(b, -ux, -uy);
-    const x1 = pa.x + ux * GAP, y1 = pa.y + uy * GAP;
-    const x2 = pb.x - ux * GAP, y2 = pb.y - uy * GAP;
-    out.push(line(x1, y1, x2, y2, PLOT_GRID, 2));
-    if (e.style !== 'line') out.push(arrowHead(x2, y2, dx, dy, accent));
+    return {
+      e, dx, dy, ux, uy,
+      x1: pa.x + ux * GAP, y1: pa.y + uy * GAP,
+      x2: pb.x - ux * GAP, y2: pb.y - uy * GAP,
+    };
+  });
+
+  segs.forEach((sg) => {
+    out.push(line(sg.x1, sg.y1, sg.x2, sg.y2, PLOT_GRID, 2));
+    if (sg.e.style !== 'line') out.push(arrowHead(sg.x2, sg.y2, sg.dx, sg.dy, accent));
+  });
+
+  segs.forEach((sg) => {
+    const e = sg.e;
+    const { x1, y1, x2, y2, ux, uy } = sg;
 
     if (e.label) {
       // THE LABEL MUST CLEAR EVERY BOX, not merely the line it belongs to. Placing it at the edge
@@ -835,13 +858,16 @@ function renderSchematic(dataTable, accentColor) {
         if (l < PAD || r > VB_W - PAD || t < 0 || bt > VB_H) return false;
         if (boxes.some((bx) => Math.abs(bx.cx - cx) < bx.w / 2 + w / 2 - 2
           && Math.abs(bx.cy - cy) < bx.h / 2 + NOTE_FONT * 0.6 - 2)) return false;
-        // AND it must clear the CONNECTOR itself. A perpendicular offset slides a label sideways,
-        // but a label is usually wider than the offset, so on a vertical edge the line went straight
-        // through the middle of the words. Sampled along the segment, which handles every angle
-        // without a special case per direction.
-        for (let i = 0; i <= 24; i++) {
-          const sxp = x1 + (x2 - x1) * (i / 24), syp = y1 + (y2 - y1) * (i / 24);
-          if (sxp > l - 3 && sxp < r + 3 && syp > t - 3 && syp < bt + 3) return false;
+        // AND it must clear EVERY CONNECTOR, its own included. A perpendicular offset slides a
+        // label sideways, but a label is usually wider than the offset, so on a vertical edge the
+        // line went straight through the middle of the words. Sampled along each segment, which
+        // handles every angle without a special case per direction.
+        for (const other of segs) {
+          for (let i = 0; i <= 32; i++) {
+            const sxp = other.x1 + (other.x2 - other.x1) * (i / 32);
+            const syp = other.y1 + (other.y2 - other.y1) * (i / 32);
+            if (sxp > l - 3 && sxp < r + 3 && syp > t - 3 && syp < bt + 3) return false;
+          }
         }
         return true;
       };
@@ -856,8 +882,8 @@ function renderSchematic(dataTable, accentColor) {
       }
       if (!placed) {
         refuse(`schematic: the label ${JSON.stringify(e.label)} on the edge ${JSON.stringify(e.from)} -> `
-          + `${JSON.stringify(e.to)} cannot be placed without covering a node; shorten it, move the `
-          + 'nodes apart, or carry the detail in the caption');
+          + `${JSON.stringify(e.to)} cannot be placed without covering a node or crossing a connector; `
+          + 'shorten it, move the nodes apart, or carry the detail in the caption');
       }
       out.push(text(placed.cx, placed.cy, NOTE_FONT, e.label, { anchor: 'middle', opacity: '0.82' }));
     }

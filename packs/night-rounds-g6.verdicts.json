@@ -1521,14 +1521,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-mc-what-the-map-numbers-after-the-time",
-      "itemHash": "d94dd77bcb1c36bc",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l1-ms-what-the-yard-plan-shows",
       "itemHash": "7e0330a1bbb6f29c",
       "blind": [
@@ -1541,30 +1533,6 @@
         1,
         2
       ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-match-invoice-columns-line-for-line",
-      "itemHash": "34ff6f26ca857f7f",
-      "blind": [
-        1,
-        2,
-        0
-      ],
-      "authored": [
-        1,
-        2,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-mc-tally-strip-across-columns",
-      "itemHash": "ea04790795308299",
-      "blind": 1,
-      "authored": 1,
       "confidence": "high",
       "status": "agree"
     },
@@ -1587,22 +1555,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-cloze-heading-against-the-tally",
-      "itemHash": "4ac1dffed0d82826",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l3-order-one-clock-two-tracks",
-      "itemHash": "86678d8e953aacd4",
+      "itemHash": "158ad4f63a25546c",
       "blind": [
         3,
         1,
@@ -1635,6 +1589,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l3-mc-what-the-hatched-band-shows",
+      "itemHash": "7d804965f09b96c8",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l3-cloze-read-the-rows-across",
       "itemHash": "b6484d9ac833f4c1",
       "blind": [
@@ -1644,98 +1606,6 @@
       "authored": [
         1,
         1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-mc-biggest-jump-on-the-grid",
-      "itemHash": "d65c1f499e0163ef",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-match-plan-connectors",
-      "itemHash": "f16eb0dfb96700ea",
-      "blind": [
-        2,
-        0,
-        1
-      ],
-      "authored": [
-        2,
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-dot-after-the-dashed-one",
-      "itemHash": "4e8d5cdb609b927f",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-match-what-the-map-shows-about-each-stop",
-      "itemHash": "016d34a5ab570a96",
-      "blind": [
-        2,
-        0,
-        1
-      ],
-      "authored": [
-        2,
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-mc-where-the-found-tortoises-were",
-      "itemHash": "cda57de7fe81c3cf",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-mc-what-the-hatched-band-shows",
-      "itemHash": "7d804965f09b96c8",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-cloze-bars-above-the-advisory",
-      "itemHash": "98c3349d4fc17dbd",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ms-what-the-clipping-underlines",
-      "itemHash": "cc923f0f167b789e",
-      "blind": [
-        1,
-        3
-      ],
-      "authored": [
-        1,
-        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -1805,8 +1675,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-plain-line-in-the-schematic",
-      "itemHash": "03399aaba808cc16",
+      "itemId": "l6-mc-dot-after-the-dashed-one",
+      "itemHash": "4e8d5cdb609b927f",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1823,6 +1693,136 @@
         0,
         0
       ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-what-the-map-numbers-after-the-time",
+      "itemHash": "eb5cbf0edf384aa6",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-match-what-the-map-shows-about-each-stop",
+      "itemHash": "93e22fe592379a9d",
+      "blind": [
+        2,
+        0,
+        1
+      ],
+      "authored": [
+        2,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-where-the-found-tortoises-were",
+      "itemHash": "b39212b1c6d4a88d",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-match-invoice-columns-line-for-line",
+      "itemHash": "bff01d5a0e90baf4",
+      "blind": [
+        1,
+        2,
+        0
+      ],
+      "authored": [
+        1,
+        2,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-tally-strip-across-columns",
+      "itemHash": "45d7d2b9a89475c4",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-cloze-heading-against-the-tally",
+      "itemHash": "c757552b38dbc823",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-biggest-jump-on-the-grid",
+      "itemHash": "8d9fe11661990ec6",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-cloze-bars-above-the-advisory",
+      "itemHash": "0db5b461c963a19a",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ms-what-the-clipping-underlines",
+      "itemHash": "94031d98e7a42cc9",
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-match-plan-connectors",
+      "itemHash": "5d9103e1e21c055f",
+      "blind": [
+        2,
+        0,
+        1
+      ],
+      "authored": [
+        2,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-plain-line-in-the-schematic",
+      "itemHash": "b7cafbb744a2d5e7",
+      "blind": 1,
+      "authored": 1,
       "confidence": "high",
       "status": "agree"
     }
