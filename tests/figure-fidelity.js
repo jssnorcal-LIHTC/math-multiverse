@@ -80,6 +80,10 @@ function norm(s) {
 // wolf gets switched off, which costs more than it catches.
 const SCOPE_WORDS = ['only', 'no other', 'never', 'none', 'always', 'every', 'all'];
 
+// What makes a string a statement of ABSENCE rather than an assertion. Used to bind the absences[]
+// exemption channel, which without it excused any invented sentence at all.
+const NEGATION = /(^|[^a-z])(no|not|never|none|nothing|without|blank|unsigned|missing|empty|left blank|nobody)([^a-z]|$)/;
+
 // Every string a renderer actually DRAWS. The plan's list omitted every string a bar chart draws and
 // every time a timeline draws, which would have left the gate checking nothing at all on a chart and
 // no time on a timeline while the plan's own text promises "times and numbers must appear as
@@ -170,14 +174,38 @@ function outOfCanvas(svg) {
     const anchor = get('text-anchor') || 'start';
     const x = parseFloat(get('x') || '0');
     const y = parseFloat(get('y') || '0');
-    const plain = String(r.inner).replace(/<[^>]*>/g, ' ')
+    // MEASURE PER LINE, NOT PER ELEMENT. A wrapped label is one <text> holding a <tspan> per line,
+    // so the element's collapsed content is every line concatenated. Measuring that as though it
+    // were drawn on one line over-reports the width by the number of lines and flags correct
+    // figures -- which is how this check first fired on two perfectly well-fitted ones.
+    const unesc = (t) => String(t).replace(/<[^>]*>/g, ' ')
       .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&amp;/g, '&')
       .replace(/\s+/g, ' ').trim();
+    const spans = [];
+    const sre = /<tspan\b([^>]*)>([\s\S]*?)<\/tspan>/g;
+    let sm;
+    let dy = 0;
+    while ((sm = sre.exec(r.inner)) !== null) {
+      const sa = sm[1];
+      const gx = /(?:^|\s)x="([^"]*)"/.exec(sa);
+      const gd = /(?:^|\s)dy="([^"]*)"/.exec(sa);
+      dy += gd ? parseFloat(gd[1]) : 0;
+      spans.push({ text: unesc(sm[2]), x: gx ? parseFloat(gx[1]) : x, y: y + dy });
+    }
+    const lines = spans.length ? spans : [{ text: unesc(r.inner), x: x, y: y }];
+    lines.forEach((ln) => measureOne(ln.text, ln.x, ln.y, fontSize, anchor, r.rot, bad));
+  });
+  return bad;
+}
+
+function measureOne(plain, x, y, fontSize, anchor, rot, bad) {
+  {
     if (!plain) return;
     const w = plain.length * 0.6 * fontSize;
     const left = anchor === 'end' ? x - w : anchor === 'middle' ? x - w / 2 : x;
     const box = [[left, y - 0.8 * fontSize], [left + w, y - 0.8 * fontSize],
       [left + w, y + 0.25 * fontSize], [left, y + 0.25 * fontSize]];
+    const r = { rot: rot };
     const pts = r.rot
       ? box.map((p) => {
         const dx = p[0] - r.rot.cx, dy = p[1] - r.rot.cy;
@@ -191,8 +219,7 @@ function outOfCanvas(svg) {
     if (l < -0.5 || rgt > 800.5 || t0 < -0.5 || b0 > 450.5) {
       bad.push({ text: plain, why: `x ${l.toFixed(1)}..${rgt.toFixed(1)}, y ${t0.toFixed(1)}..${b0.toFixed(1)}` });
     }
-  });
-  return bad;
+  }
 }
 
 // For rule 2(b): the text an item's KEY actually points at.
@@ -266,10 +293,16 @@ function checkFigure(where, fig, passages, itemsByFigure, packDir) {
       fail(`${where}: figure "${fig.id}" absences[${i}] needs a text (what the figure says) and an absent (the phrase that must NOT be in the passage)`);
       return;
     }
-    if (norm(a.text).indexOf(norm(a.absent)) === -1) {
-      fail(`${where}: figure "${fig.id}" absences[${i}] excuses ${JSON.stringify(a.text)} on the grounds that `
-        + `${JSON.stringify(a.absent)} is missing, but that phrase is not part of what the figure says; `
-        + 'an absence must be about the thing it excuses');
+    // The binding requirement: the excused string must actually BE a statement of absence. Requiring
+    // instead that `absent` be a substring of `text` was tried and was wrong in the honest direction
+    // -- "no name is written on the keeper row", justified by the absence of a name that appears
+    // nowhere in the passage, is exactly the case this channel exists for. A negation marker is what
+    // separates it from "the otter pool is the only stop anyone recorded", which asserts rather than
+    // negates and must go through rule 1 like any other claim.
+    if (!NEGATION.test(norm(a.text))) {
+      fail(`${where}: figure "${fig.id}" absences[${i}] excuses ${JSON.stringify(a.text)}, which states `
+        + 'something rather than stating that something is MISSING; the absence channel exempts only '
+        + 'a claim about what the record does not contain');
       return;
     }
     excused.add(norm(a.text));
