@@ -5132,7 +5132,7 @@
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "The plan puts both of them across the yard from the burrow, which is why the keepers work a slow grid through the whole enclosure before anyone looks at the corner.",
+        "1": "The plan puts both of them across the yard from the burrow, at the feeding shelf and the north wall.",
         "2": "That reverses the two finds.  Salt was pressed against the north wall, and Ada was underneath the feeding shelf.",
         "3": "Juniper is not with them anywhere;  she was nowhere at all during the search, and the plan draws her alone at the corner."
       },
@@ -5182,7 +5182,7 @@
       ],
       "coachTopic": "research-integrate",
       "dok": 3,
-      "stem": "The card sets The first invoice beside the second one, line for line.  Match each line of the first invoice to the line printed opposite it in the second column.",
+      "stem": "The card sets the first invoice beside the second one, line for line.  Match each line of the first invoice to the line printed opposite it in the second column.",
       "rowLabels": [
         "The lot number is 4471",
         "packed on the fourth of December",
@@ -5249,7 +5249,7 @@
       ],
       "coachTopic": "structure-text",
       "dok": 2,
-      "stem": "The workup schematic joins four boxes with arrows, and one of those arrows carries the label breaks thiamine apart.  Put the four boxes in the order the arrows run.",
+      "stem": "One arrow in the diagram is labelled breaks thiamine apart.  Put the four boxes in the order the arrows run.",
       "tiles": [
         "a shortage",
         "raw frozen fish",
@@ -5304,8 +5304,8 @@
       "type": "order",
       "passageId": "p-l3-monitoring-summary",
       "figureId": "fig-l3-monitoring",
-      "figureFact": "chain across the lot entrance",
-      "stem": "The timeline draws the gate log and the summary on one clock.  Put these four stretches of Wednesday night in the order the clock gives them.  The chain across the lot entrance is one of them.",
+      "figureFact": "gate log",
+      "stem": "The gate log lane runs along the top of the timeline.  Put these four entries in the order the timeline gives them.",
       "targets": [
         "c4-4-use-evidence",
         "c1-inf-5-analysis"
@@ -5389,10 +5389,10 @@
       "key": 1,
       "distractorRationale": {
         "0": "The recorder runs from sunset until midnight;  what stops at 8:22 is the gate log, not the recording.",
-        "2": "The three low calls sit past the band's right edge, at 9:04, 9:07 and 9:12.",
+        "2": "The first low call sits at the band's right edge, at 9:04, and the other two beyond it, at 9:07 and 9:12.",
         "3": "The forty-one minutes usable is a total gathered across all four hours, not one unbroken stretch of clock."
       },
-      "explain": "The band runs from 8:22 to 9:04, from the gate log's last entry to the summary's first low call.  Its label reads some forty minutes.  That gap is what the two records together establish: the lot was chained and empty well before the sound was recorded.  Each wrong answer drops something into the band.  The recorder ran from sunset until midnight, the low calls sit past the band's right edge, and the forty-one minutes of usable audio is a total spread across four hours.",
+      "explain": "The band runs from 8:22 to 9:04, from the gate log's last entry to the summary's first low call.  Its label reads some forty minutes.  That gap is what the two records together establish: the lot was chained and empty well before the sound was recorded.  Each wrong answer drops something into the band.  The recorder ran from sunset until midnight, the first low call sits at the band's right edge and the other two beyond it, and the forty-one minutes of usable audio is a total spread across four hours.",
       "whyTheFigureIsNeeded": "The hatched band exists only in the drawing, where its position between the last gate log mark and the first low call is what carries the forty-minute gap;  the passage mentions forty minutes as a closing remark and never as a place on the clock."
     },
     {
@@ -5469,13 +5469,13 @@
       ],
       "coachTopic": "evidence-key-details",
       "dok": 2,
-      "stem": "Finish the reading of the gust grid.  The advisory note printed under the plot says gusts of up to 50 miles an hour, and the grid draws {{0}} above that number, the reading taken at {{1}}.",
+      "stem": "Finish the reading of the gust grid.  The note printed under the plot warns of gusts of up to 50 miles an hour, and the highest reading the grid draws {{0}} that warning, at {{1}}.",
       "blanks": [
         {
           "choices": [
-            "exactly one bar",
-            "two of the four bars",
-            "no bar at all"
+            "passes it",
+            "falls just short of it",
+            "matches it exactly"
           ],
           "key": 0
         },
@@ -5488,7 +5488,7 @@
           "key": 0
         }
       ],
-      "explain": "Three of the four bars stop short of the advisory number: twenty-four, thirty-one and forty-four are all under fifty.  Only the last bar clears it, the peak of fifty-two at 9:20 p.m.  Choosing two bars counts the forty-four reading as though it crossed the line, and choosing none forgets that the peak went over the number the advisory had warned about.",
+      "explain": "The note warns of gusts of up to 50 miles an hour.  The tallest bar on the grid is the reading taken at 9:20 p.m., and the caption gives it as the peak of 52, so it passes the warning rather than meeting or missing it.",
       "whyTheFigureIsNeeded": "The chart prints the advisory note beneath the same plot as the four bar heights, so which bar tops fall short of fifty and which one clears it is something the drawing shows at a glance, while the prose states the advisory figure and the readings paragraphs apart."
     },
     {
@@ -5535,7 +5535,7 @@
       ],
       "coachTopic": "structure-text",
       "dok": 3,
-      "stem": "The plan marks panel six and post fourteen along the Fence Nine run.  Match each connector the plan draws to what that connector shows.",
+      "stem": "The plan marks panel six and post fourteen along Fence Nine.  Match each line the plan draws to what it shows.",
       "rowLabels": [
         "The line running from panel six to the fence",
         "The one arrow on the plan, which starts at the big willow",
@@ -5595,7 +5595,7 @@
       "type": "mc",
       "passageId": "p-l5-rehabbers-van",
       "figureId": "fig-l5-transfer-slip",
-      "figureFact": "no name is written on the keeper row",
+      "figureFact": "the name of the keeper who found the bird",
       "targets": [
         "c1-lit-4-reasoning"
       ],
@@ -5603,7 +5603,7 @@
       "dok": 3,
       "stem": "What does the transfer slip show about the keeper who found the heron?",
       "choices": [
-        "The slip does not name her, since no name is written on the keeper row",
+        "The slip does not name her: the row reading the name of the keeper who found the bird has nothing after it",
         "The slip enters her name just under the condition row",
         "The slip carries her signature next to Alva's",
         "The slip lists her in the same block as Whitlock"
@@ -5784,7 +5784,7 @@
         },
         {
           "choices": [
-            "the promise that everything which went wrong was written down by the people it went wrong for",
+            "the defence that everything which went wrong was written down by the people it went wrong for",
             "the change that gives the pin check a second initial column",
             "the letter asking the Valley Register for a correction"
           ],
@@ -6135,7 +6135,13 @@
           "the time",
           "came from",
           "the sound",
-          "spoke to me"
+          "when given"
+        ],
+        "paraphrase": [
+          {
+            "text": "when given",
+            "reason": "The three accounts reached the record three different ways (a telephone call a full day later, a volunteer-log entry the same night, and a telephone call on Thursday morning), and the passage uses no single phrase for all three. \"spoke to me\" was true of Fontaine only."
+          }
         ]
       }
     },
@@ -6338,7 +6344,7 @@
       "src": "art/night-rounds-g6/fig-l4-storm-clipping.svg",
       "caption": "The newspaper clipping with its headline and byline, and the two sentences the record disputes marked with a line under them.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A document card topped by a headline, with two header rows naming the paper and the byline, then four ruled lines of article text followed by four underlined lines, and a stamp across the card.",
+      "alt": "A newspaper clipping headed STORM RIPS SANCTUARY FENCE, with the paper and the byline above two plain lines of article text and four underlined lines, which are the two sentences the sanctuary record disputes.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-l4-storm-rips-fence",
@@ -6426,13 +6432,7 @@
             ]
           }
         ],
-        "stamp": "carbon copy",
-        "absences": [
-          {
-            "text": "no name is written on the keeper row",
-            "absent": "Mara Delgado"
-          }
-        ]
+        "stamp": "carbon copy"
       }
     },
     {
