@@ -5083,7 +5083,7 @@
       ],
       "coachTopic": "evidence-story-details",
       "dok": 2,
-      "stem": "The map treats each stop a little differently, from the barn owls at the top of the hill down to the creek.  Match each stop to what the map shows about it.",
+      "stem": "The map gives every stop a number, from the barn owls at the top of the hill down to the gate log, and it writes a time beside one of them.  Match each stop to what the map shows about it.",
       "rowLabels": [
         "Marsh boardwalk",
         "Barn owls",
@@ -5123,7 +5123,7 @@
       ],
       "coachTopic": "inference-evidence",
       "dok": 3,
-      "stem": "The yard plan marks where each tortoise was during the search.  What does it show about the two the keepers actually found?",
+      "stem": "The yard plan marks where each of the three tortoises turned up.  What does it show about the two the keepers actually found?",
       "choices": [
         "Ada and Salt are drawn on the far side of the yard from the mouth of a burrow",
         "Ada and Salt are drawn right beside the burrow mouth, close enough to touch it",
@@ -5373,7 +5373,7 @@
       "passageId": "p-l3-monitoring-summary",
       "figureId": "fig-l3-monitoring",
       "figureFact": "some forty minutes",
-      "stem": "A hatched band is drawn across the middle of the timeline.  What does that band mark?",
+      "stem": "One stretch of the timeline is shaded, with thin lines drawn across it.  What does that stretch mark?",
       "targets": [
         "c4-4-use-evidence",
         "c1-inf-5-analysis"
@@ -5469,7 +5469,7 @@
       ],
       "coachTopic": "evidence-key-details",
       "dok": 2,
-      "stem": "Finish the reading of the gust chart.  The note printed under the plot warns of gusts of up to 50 miles an hour, and the highest reading the grid draws {{0}} that warning, at {{1}}.",
+      "stem": "Read the gust chart.  The note under it warns of gusts of up to 50 miles an hour.  The tallest bar {{0}} that warning, at {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -5516,7 +5516,7 @@
         3
       ],
       "distractorRationale": {
-        "0": "Those are the two plain lines at the top of the clipping, printed with no mark under them, and the passage counts the torn fence among the details the article gets right.",
+        "0": "Those are the two plain lines at the top of the clipping, printed with no mark under them.",
         "2": "The clipping stops printing that sentence at Marlowe Creek Wildlife, so those words are not on the card at all and nothing there is marked.",
         "4": "The byline sits in the clipping's header, above the article text, so it is not one of the marked lines at all."
       },
@@ -5660,7 +5660,7 @@
       ],
       "coachTopic": "inference-evidence",
       "dok": 3,
-      "stem": "Finish the summary.  The slip carries both signatures, Whitlock and Alva Reyes, while the ruled row above them {{0}}, so the record never says {{1}}.",
+      "stem": "Finish the summary.  The slip carries both signatures, Whitlock and Alva Reyes, while the row above them {{0}}, so the record never says {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -5688,7 +5688,7 @@
       "passageId": "p-l6-night-of-the-storm",
       "figureId": "fig-l6-night-of-the-storm",
       "figureFact": "nothing written on it",
-      "stem": "On the timeline, the entry at 8 p.m. is labelled nothing written on it.  Put all four of these entries in the order the timeline draws them, from left to right.",
+      "stem": "On the timeline, the entry at 8 p.m. is labelled \"nothing written on it\".  Put all four of these entries in the order the timeline draws them, from left to right.",
       "tiles": [
         "Every keeper is sent out in pairs",
         "The eight o'clock line is left blank",
@@ -5744,12 +5744,12 @@
       "passageId": "p-l6-morning-report",
       "figureId": "fig-l6-morning-report",
       "figureFact": "not a failure of upkeep",
-      "stem": "The plan stacks five boxes down the page.  Arrows join some boxes to the box right below them.  Which two boxes that sit one above the other have no arrow between them?",
+      "stem": "Two boxes sit one above the other with no arrow between them.  Which two?",
       "choices": [
-        "The willow limb box and the box reading not a failure of upkeep",
-        "The box reading not a failure of upkeep and the box about the north service gate",
-        "The box about the north service gate and the box reading a failure of procedure",
-        "The box reading a failure of procedure and the box with rounded ends"
+        "The box reading \"a willow limb came down across Fence Nine\" and the box reading \"not a failure of upkeep\"",
+        "The box reading \"not a failure of upkeep\" and the box reading \"the north service gate was found standing open\"",
+        "The box reading \"the north service gate was found standing open\" and the box reading \"a failure of procedure\"",
+        "The box reading \"a failure of procedure\" and the box reading \"written down by the people it went wrong for\""
       ],
       "key": 1,
       "distractorRationale": {
@@ -5763,7 +5763,7 @@
       ],
       "coachTopic": "inference-argument",
       "dok": 3,
-      "explain": "Three arrows run down the page, and each one carries a finding into the step it supports.  The gap is between the first conclusion and the second finding, because a finding is not produced by an earlier conclusion.  The report opens with findings and keeps them separate from everything else on purpose, and the drawing keeps them separate too.",
+      "explain": "Three arrows run down the page.  Two of them carry a finding into the step it supports, and the last carries the second step into the one after it.  The gap is between the first conclusion and the second finding, because a finding is not produced by an earlier conclusion.  The report opens with findings and keeps them separate from everything else on purpose, and the drawing keeps them separate too.",
       "whyTheFigureIsNeeded": "The page lists both findings and then all three steps, so only the drawing shows which join carries an argument and which one is simply the next thing down the page."
     },
     {
@@ -5784,7 +5784,7 @@
         },
         {
           "choices": [
-            "the defence that everything which went wrong was written down by the people it went wrong for",
+            "the defense that everything which went wrong was written down by the people it went wrong for",
             "the change that gives the pin check a second initial column",
             "the letter asking the Valley Register for a correction"
           ],
@@ -5797,7 +5797,7 @@
       ],
       "coachTopic": "central-idea",
       "dok": 3,
-      "explain": "The drawing gives each finding its own step:  the willow limb leads to not a failure of upkeep, and the north service gate found standing open leads to a failure of procedure.  The arrow out of that step runs to the box with rounded ends, the third step, where the defence is that every failure was written down by the people it happened to.  The inspection line of the twelfth of May supports the first step rather than the second, and the second initial column and the correction letter both come after the argument rather than inside it.",
+      "explain": "The drawing gives each finding its own step:  the willow limb leads to not a failure of upkeep, and the north service gate found standing open leads to a failure of procedure.  The arrow out of that step runs to the box with rounded ends, the third step, where the defense is that every failure was written down by the people it happened to.  The inspection line of the twelfth of May supports the first step rather than the second, and the second initial column and the correction letter both come after the argument rather than inside it.",
       "whyTheFigureIsNeeded": "The page groups both findings together and then all three steps, so only the drawing pairs the open gate with the procedure step and shows the argument closing in a single rounded box."
     }
   ],
@@ -6393,7 +6393,7 @@
       "src": "art/night-rounds-g6/fig-l5-transfer-slip.svg",
       "caption": "The slip lists the time, the place, the bird, and both signatures, and it is the last thing the file will ever say about this heron.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A document card headed transfer slip, with rows reading Time 8:40, place, species and condition, then a ruled row reading the name of the keeper who found the bird with nothing written after it, a signature block listing Whitlock and Alva Reyes, and a slanted stamp reading carbon copy.",
+      "alt": "A transfer slip with rows reading Time 8:40, place thirty feet out in the shallow water, species Great blue heron, adult, and condition one wing carried wrong, then a fifth row labelled the name of the keeper who found the bird whose field is left empty, a signature block holding Whitlock and Alva Reyes, and a slanted stamp reading carbon copy.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-l5-rehabbers-van",
@@ -6417,12 +6417,6 @@
             "value": "one wing carried wrong"
           }
         ],
-        "lines": [
-          {
-            "text": "the name of the keeper who found the bird",
-            "emphasis": "box"
-          }
-        ],
         "columns": [
           {
             "heading": "both signatures",
@@ -6432,7 +6426,13 @@
             ]
           }
         ],
-        "stamp": "carbon copy"
+        "stamp": "carbon copy",
+        "lines": [
+          {
+            "text": "the name of the keeper who found the bird",
+            "emphasis": "blank"
+          }
+        ]
       }
     },
     {

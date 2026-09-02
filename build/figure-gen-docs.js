@@ -502,8 +502,18 @@ function renderFacsimile(dataTable, accentColor) {
       y += LABEL_FONT + 6;
       if (h.label) out.push(text(innerX, y, TICK_FONT, h.label, { opacity: '0.82' }));
       const hx = innerX + Math.ceil(labW) + 16;
-      fitText(h.value, LABEL_FONT, (CX + CW - 22) - hx, `facsimile header[${i}].value`);
-      out.push(text(hx, y, LABEL_FONT, h.value));
+      if (h.value === '') {
+        // A FIELD PRINTED AND LEFT EMPTY, drawn as the empty rule a form actually shows. This has
+        // to be DATA rather than an item's assertion: the previous attempt put the label in a box
+        // and let three items say the row was blank, but `emphasis: "box"` means PRINTED CONTENT
+        // BEING CALLED OUT everywhere else in this pack (the diet card's thiamine line, the witness
+        // table's "None of the three witnesses saw anything at all"), so the pack's one emphasis
+        // device was being read as its own opposite. An empty value draws an empty field.
+        out.push(line(hx, hp(y + 5), CX + CW - 22, hp(y + 5), RULE, 1, { extra: 'data-empty-field="1"' }));
+      } else {
+        fitText(h.value, LABEL_FONT, (CX + CW - 22) - hx, `facsimile header[${i}].value`);
+        out.push(text(hx, y, LABEL_FONT, h.value));
+      }
     });
     y += 12;
     out.push(line(innerX, hp(y), CX + CW - 22, hp(y), HEADER_STROKE, 1));
@@ -514,6 +524,22 @@ function renderFacsimile(dataTable, accentColor) {
     if (!l || typeof l !== 'object') refuse(`facsimile: line ${i} is not an object`);
     const em = l.emphasis;
     y += LABEL_FONT + 10;
+    if (em === 'blank') {
+      // A FIELD PRINTED AND LEFT EMPTY: the label, then the rule where the entry would go. This is
+      // DATA, not an item's assertion. The previous attempt boxed the label and let three items say
+      // the row was blank, but `emphasis: "box"` means PRINTED CONTENT BEING CALLED OUT everywhere
+      // else in this pack (the diet card's thiamine line, the witness table's "None of the three
+      // witnesses saw anything at all"), so the pack's one emphasis device was being read as its own
+      // opposite. A blank field now draws as a blank field.
+      if (typeof l.text !== 'string' || !l.text) refuse(`facsimile: line ${i} is blank but has no label`);
+      const lw = estimateTextWidth(l.text, LABEL_FONT);
+      // 90px reserved for the rule: enough that the empty field reads as a field, not a margin.
+      fitText(l.text, LABEL_FONT, innerW - 90, `facsimile line ${i} (blank field label)`);
+      out.push(text(innerX, y, LABEL_FONT, l.text));
+      out.push(line(innerX + lw + 14, hp(y + 5), CX + CW - 22, hp(y + 5), RULE, 1,
+        { extra: 'data-empty-field="1"' }));
+      return;
+    }
     if (em === 'redact') {
       // A redaction draws a bar and NEVER text under it: nothing a reader could recover.
       out.push(rect(innerX, y - LABEL_FONT + 2, innerW * 0.62, LABEL_FONT + 2,
