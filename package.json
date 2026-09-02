@@ -26,7 +26,7 @@
     "shells": "node tests/shells.js",
     "freshness-lib": "node tests/freshness-lib.js",
     "freshness-sim": "node tests/freshness-sim.js",
-    "units": "node tests/readability.test.js && node tests/targets.test.js && node tests/validate-pack.test.js && node tests/verdicts.test.js && node tests/shuffle-mc.test.js && node tests/items.test.js && node tests/pack.test.js && node tests/runner.test.js && node tests/figures.test.js && node tests/extract.test.js",
+    "units": "node tests/readability.test.js && node tests/targets.test.js && node tests/validate-pack.test.js && node tests/verdicts.test.js && node tests/shuffle-mc.test.js && node tests/items.test.js && node tests/pack.test.js && node tests/runner.test.js && node tests/figures.test.js && node tests/figure-docs.test.js && node tests/extract.test.js",
     "test": "npm run units && node tests/validate-pack.js && node tests/validate-curriculum.js && node tests/figure-derive.js && node tests/freshness.js && node tests/shells.js && node tests/freshness-lib.js && node tests/freshness-sim.js && node tests/fuzz.js && node tests/smoke.js && node tests/figures-offline.js && node tests/reading-surface.js && node tests/tile-overlap.js && node tests/touch-targets.js && node tests/reduced-motion.js && node tests/curriculum-pointer.js && node tests/mission.js && node tests/resume-level.js && node tests/reading-line.js && node tests/prose-clarity.js && node tests/level-briefing.js && node build/cc1-pack-gen.js --check && node tests/figure-reconcile.js"
   },
   "devDependencies": {

@@ -1,0 +1,19 @@
+{
+  "type": "timeline",
+  "sourcePassageId": "p-fx-two-track",
+  "title": "Night of May 26",
+  "start": "4:00 p.m.",
+  "end": "11:00 p.m.",
+  "tracks": ["planned", "actual"],
+  "events": [
+    { "t": "4:00 p.m.", "label": "bulletin posted", "track": "planned" },
+    { "t": "6:00 p.m.", "label": "advisory begins", "track": "planned" },
+    { "t": "7:40 p.m.", "label": "gate closed", "track": "actual" },
+    { "t": "7:30 p.m.", "label": "maybe 7:30", "track": "actual", "kind": "unverified" },
+    { "t": "9:20 p.m.", "label": "peak 52", "track": "actual" },
+    { "t": "10:56 p.m.", "label": "count closed", "track": "actual" }
+  ],
+  "gaps": [
+    { "from": "8:05 p.m.", "to": "8:40 p.m.", "label": "pairs sent, no entries" }
+  ]
+}

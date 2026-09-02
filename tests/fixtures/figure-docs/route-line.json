@@ -1,0 +1,11 @@
+{
+  "type": "route",
+  "sourcePassageId": "p-fx-long-way",
+  "path": "line",
+  "stops": [
+    { "n": 1, "label": "doubling back" },
+    { "n": 2, "label": "reflective stop" },
+    { "n": 3, "label": "change of level" },
+    { "n": 4, "label": "the abort decision point" }
+  ]
+}

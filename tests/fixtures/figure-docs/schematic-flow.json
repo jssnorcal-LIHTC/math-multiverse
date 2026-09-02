@@ -1,0 +1,14 @@
+{
+  "type": "schematic",
+  "sourcePassageId": "p-fx-workup",
+  "layout": "flow-lr",
+  "nodes": [
+    { "id": "fish", "label": "fish", "shape": "box" },
+    { "id": "frz", "label": "freezing", "shape": "box" },
+    { "id": "low", "label": "low thiamine", "shape": "round" }
+  ],
+  "edges": [
+    { "from": "fish", "to": "frz", "label": "contains thiaminase", "style": "arrow" },
+    { "from": "frz", "to": "low", "style": "arrow" }
+  ]
+}
