@@ -57,10 +57,22 @@ const fs = require('fs');
 const path = require('path');
 const { genPolygon, labelledPerimeter, drawnPerimeter } = require('../build/polygon-gen');
 const { genDots, dotsAt, cellsFor } = require('../build/dots-gen');
+// The SAME resolver build/figure-gen.js and tests/figure-derive.js use, so no two of the three can
+// disagree about which colour a pack's figures are drawn in.
+const { resolveAccent } = require('../build/figure-gen.js');
 
 const ROOT = path.join(__dirname, '..');
 const PACK_DIR = path.join(ROOT, 'packs');
-const ACCENT_BY_PACK = { 'cpm-cc1-g6': '#e0692b' };
+
+// Does packs/manifest.json actually declare this pack? A pack absent from it still RESOLVES an
+// accent, because resolveAccent returns the generator default rather than throwing, so the
+// difference is invisible at the call site and visible only here.
+function manifestDeclares(packId) {
+  try {
+    const m = JSON.parse(fs.readFileSync(path.join(PACK_DIR, 'manifest.json'), 'utf8'));
+    return (m.packs || []).some((p) => p && p.id === packId && typeof p.color === 'string');
+  } catch (e) { return false; }
+}
 
 const problems = [];
 const notes = [];
@@ -139,9 +151,21 @@ for (const f of fs.readdirSync(PACK_DIR).filter((x) => x.endsWith('.json') && !x
     && x.dataTable.type === 'bar' && Array.isArray(x.dataTable.categoryLabels));
   if (!polys.length && !dots.length && !charts.length) continue;
   packsWithPolygons++;
-  const accent = ACCENT_BY_PACK[packId];
-  if (!accent) {
-    problems.push(`${packId} ships polygon figures but has no accent colour in ACCENT_BY_PACK, so its SVGs cannot be regenerated for comparison`);
+  // ACCENT_BY_PACK was a hand-typed duplicate of the colours already in packs/manifest.json, keyed
+  // to cpm-cc1-g6 alone. It went stale the moment a SECOND pack shipped a generated figure, and the
+  // guard below fired on the wrong thing: its selector takes polygons, dots OR bar charts with
+  // categoryLabels, so the first ELA bar chart would have tripped a message that says "ships
+  // polygon figures" about a pack that ships none, and reddened npm test for a pack this gate has
+  // no quarrel with. Resolved from the manifest instead, which is where the colour actually lives.
+  // Behaviour-preserving on the tree that existed: manifest cpm-cc1-g6.color is #e0692b, the value
+  // the table carried.
+  // resolveAccent SWALLOWS every failure and hands back DEFAULT_ACCENT, so `if (!accent)` would be
+  // unreachable dead code -- a guard that can never fire is the same silent-clean shape the old
+  // hand-typed table had. The reachable question is whether the manifest actually declares this
+  // pack, which is what makes the resolved colour meaningful rather than a default in disguise.
+  const accent = resolveAccent(PACK_DIR, pack);
+  if (!manifestDeclares(packId)) {
+    problems.push(`${packId} declares generated figures but packs/manifest.json has no entry for it, so its accent colour is the generator default rather than the pack's own; its SVGs cannot be regenerated for comparison`);
     continue;
   }
   const itemsByFig = new Map();
@@ -508,6 +532,17 @@ const controls = [];
       && CHART_CLAIM['display-compare-bars'].want([4, 9, 13, 6]) === 9
       && CHART_CLAIM['display-total'].want([4, 9, 13, 6]) === 32,
     detail: 'tallest 13, tallest minus shortest 9, total 32',
+  });
+  // The guard that replaced ACCENT_BY_PACK. Its predecessor was unfalsifiable in the other
+  // direction: a hand-typed table that simply lacked a key produced a message naming polygons about
+  // a pack that shipped none. This asserts the replacement can still REFUSE, and refuses for a
+  // reason that is true.
+  controls.push({
+    name: 'CONTROL: a pack absent from packs/manifest.json is refused, and every shipped pack is present',
+    ok: manifestDeclares('cpm-cc1-g6') && manifestDeclares('night-rounds-g6')
+      && !manifestDeclares('no-such-pack-anywhere'),
+    detail: 'resolveAccent hands back the generator default for an undeclared pack rather than throwing, '
+      + 'so the manifest lookup is the only place that difference is visible',
   });
   controls.push({
     name: 'CONTROL: the perimeter claims re-derive correctly from a known perimeter',

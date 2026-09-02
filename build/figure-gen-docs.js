@@ -149,6 +149,20 @@ function head(title) {
   return out;
 }
 
+// MEASURE, THEN REFUSE. Six of the eight text-emitting sites used to draw whatever they were given
+// and, at best, CLAMP the anchor back inside the canvas -- which does not shrink the text, it only
+// slides the overflow to the other side. A transcribed label running off the edge is a data-truth
+// defect, not a cosmetic one: the figure then displays less than its dataTable says, and an item
+// written against it can key on the part nobody can read. Every drawn string goes through here.
+function fitText(value, font, maxW, where) {
+  const w = estimateTextWidth(value, font);
+  if (w > maxW) {
+    refuse(`${where}: ${JSON.stringify(value)} needs ${Math.ceil(w)}px but only ${Math.floor(maxW)}px are available; `
+      + 'shorten the transcription or move the detail to the caption');
+  }
+  return value;
+}
+
 function requireType(dt, want) {
   if (!dt || typeof dt !== 'object') refuse(`${want}: no dataTable was supplied`);
   if (dt.type !== want) {
@@ -241,14 +255,42 @@ function renderTimeline(dataTable, accentColor) {
 
   const events = Array.isArray(dt.events) ? dt.events : [];
   if (!events.length) refuse('timeline: no events, so there is no sequence to draw');
-  const tracks = Array.isArray(dt.tracks) && dt.tracks.length ? dt.tracks.slice() : ['record'];
+  // A MISSING tracks[] MEANS ONE UNNAMED LANE, NOT A LANE CALLED "record". Substituting a default
+  // name put a word on the canvas that no author wrote and no passage supports, and the fidelity
+  // gate could not see it: rule 1 iterates dt.tracks, which is EMPTY in exactly that case, so the
+  // one string the renderer invented was the one string never checked. That is the shape of defect
+  // this whole program exists to prevent, so the renderer draws nothing rather than a guess.
+  const named = Array.isArray(dt.tracks) && dt.tracks.length;
+  const tracks = named ? dt.tracks.slice() : [null];
+  if (named) {
+    dt.tracks.forEach((t, i) => {
+      if (typeof t !== 'string' || !t.trim()) refuse(`timeline: tracks[${i}] is not a non-empty string`);
+    });
+  }
+
+  // start and end are DRAWN, so they are transcriptions and must be strings. Testing only for
+  // `!== undefined` let a null through to String(null) and printed the word "null" on the canvas.
+  ['start', 'end'].forEach((k) => {
+    if (dt[k] !== undefined && (typeof dt[k] !== 'string' || !dt[k].trim())) {
+      refuse(`timeline: ${k} is ${JSON.stringify(dt[k])}; it is drawn, so it must be a non-empty string or absent`);
+    }
+  });
 
   events.forEach((e, i) => {
     if (!e || typeof e.label !== 'string' || !e.label) refuse(`timeline: event ${i} has no label`);
     if (typeof e.t !== 'string' || !e.t) refuse(`timeline: event ${i} (${e.label}) has no time`);
-    const tr = e.track === undefined ? tracks[0] : e.track;
-    if (tracks.indexOf(tr) === -1) {
-      refuse(`timeline: event ${i} (${e.label}) is on track ${JSON.stringify(tr)}, which is not one of ${JSON.stringify(tracks)}`);
+    // Defaulting an event onto the first lane is only safe when there IS one lane. With two, a
+    // missing track silently draws the event on "planned" byte-identically to one the author placed
+    // there deliberately, and the figure then asserts a lane the record does not support.
+    if (e.track === undefined) {
+      if (tracks.length > 1) {
+        refuse(`timeline: event ${i} (${e.label}) declares no track, but this timeline has ${tracks.length} `
+          + `(${JSON.stringify(tracks)}); name the one it belongs to rather than letting it default`);
+      }
+      return;
+    }
+    if (tracks.indexOf(e.track) === -1) {
+      refuse(`timeline: event ${i} (${e.label}) is on track ${JSON.stringify(e.track)}, which is not one of ${JSON.stringify(tracks)}`);
     }
   });
   const gaps = Array.isArray(dt.gaps) ? dt.gaps : [];
@@ -279,7 +321,8 @@ function renderTimeline(dataTable, accentColor) {
     }
   }
 
-  const trackLabelW = tracks.reduce((m, t) => Math.max(m, estimateTextWidth(t, NOTE_FONT)), 0);
+  // An unnamed lane draws no word, so it reserves no width for one.
+  const trackLabelW = tracks.reduce((m, t) => Math.max(m, t === null ? 0 : estimateTextWidth(t, NOTE_FONT)), 0);
   const AX_L = PAD + Math.ceil(trackLabelW) + 16;
   const AX_R = VB_W - PAD;
 
@@ -335,7 +378,8 @@ function renderTimeline(dataTable, accentColor) {
 
   tracks.forEach((tr, k) => {
     const y = laneY(k);
-    out.push(text(PAD, y + 6, NOTE_FONT, tr, { opacity: '0.82' }));
+    // tr is null for an unnamed single lane: draw the rule, draw no word.
+    if (tr !== null) out.push(text(PAD, y + 6, NOTE_FONT, tr, { opacity: '0.82' }));
     out.push(line(AX_L, hp(y), AX_R, hp(y), RULE, 1));
   });
 
@@ -390,6 +434,7 @@ function renderTimeline(dataTable, accentColor) {
     const gx1 = posOfTime(g.from), gx2 = posOfTime(g.to);
     const cx = (gx1 + gx2) / 2;
     const w = estimateTextWidth(caption, NOTE_FONT);
+    fitText(caption, NOTE_FONT, VB_W - 2 * PAD, 'timeline gap caption');
     const clamped = Math.min(VB_W - PAD - w / 2, Math.max(PAD + w / 2, cx));
     out.push(text(clamped, cursor + NOTE_FONT, NOTE_FONT, caption, { anchor: 'middle', opacity: '0.82' }));
     cursor += ROW_H;
@@ -439,7 +484,9 @@ function renderFacsimile(dataTable, accentColor) {
       if (!h || typeof h.value !== 'string') refuse(`facsimile: header row ${i} has no value`);
       y += LABEL_FONT + 6;
       if (h.label) out.push(text(innerX, y, TICK_FONT, h.label, { opacity: '0.82' }));
-      out.push(text(innerX + Math.ceil(labW) + 16, y, LABEL_FONT, h.value));
+      const hx = innerX + Math.ceil(labW) + 16;
+      fitText(h.value, LABEL_FONT, (CX + CW - 22) - hx, `facsimile header[${i}].value`);
+      out.push(text(hx, y, LABEL_FONT, h.value));
     });
     y += 12;
     out.push(line(innerX, hp(y), CX + CW - 22, hp(y), HEADER_STROKE, 1));
@@ -543,6 +590,7 @@ function renderFacsimile(dataTable, accentColor) {
   }
 
   if (dt.stamp) {
+    fitText(dt.stamp, LABEL_FONT, CW - 60, 'facsimile stamp');
     const sw = estimateTextWidth(dt.stamp, LABEL_FONT) + 26;
     const sx = CX + CW - sw - 34, sy = CY + CH - 58;
     const cx = sx + sw / 2, cy = sy + 20;
@@ -591,12 +639,20 @@ function renderSchematic(dataTable, accentColor) {
   const bodyW = VB_W - 2 * PAD;
 
   // Node size from the label, wrapped to at most two lines so a long transcribed phrase stays whole.
+  // How wide a node may be depends on what is BESIDE it, which depends on the layout. A single
+  // bodyW/3 for everything was wrong twice over: in flow-tb the nodes stack vertically and have no
+  // horizontal neighbour at all, and in plan they are placed by authored x/y rather than packed into
+  // columns. The real invariant is that no two boxes overlap, and that is checked after placement.
   const cellW = layout === 'flow-lr' ? bodyW / nodes.length
     : layout === 'grid' ? bodyW / Math.ceil(Math.sqrt(nodes.length))
-      : bodyW / 3;
+      : layout === 'flow-tb' ? bodyW
+        : bodyW / 2;
   const maxTextW = Math.max(80, cellW - 34);
   const boxes = nodes.map((nd) => {
     const wrapped = wrapToWidth(nd.label, TICK_FONT, maxTextW, 2);
+    // A wrapped line wider than the cell means the boxes overlap. keyBlock already refuses in
+    // this situation; the schematic used to draw the overlap and say nothing.
+    wrapped.forEach((ln) => fitText(ln, TICK_FONT, maxTextW, `schematic node ${JSON.stringify(nd.id)}`));
     const tw = wrapped.reduce((m, s) => Math.max(m, estimateTextWidth(s, TICK_FONT)), 0);
     return {
       node: nd,
@@ -629,6 +685,22 @@ function renderSchematic(dataTable, accentColor) {
     b.cy = Math.min(VB_H - PAD - b.h / 2, Math.max(bodyTop + b.h / 2, b.cy));
   });
 
+  // THE REAL INVARIANT: no two node boxes may overlap. A width heuristic only approximates this, and
+  // it approximated it badly in both directions -- refusing a wide node with nothing beside it, and
+  // (before any check existed) drawing two boxes on top of each other in a plan layout without a
+  // word. Measured on the FINAL placed geometry, after the on-canvas clamp.
+  for (let i = 0; i < boxes.length; i++) {
+    for (let j = i + 1; j < boxes.length; j++) {
+      const a = boxes[i], b = boxes[j];
+      const overlapX = Math.abs(a.cx - b.cx) < (a.w + b.w) / 2 - 1;
+      const overlapY = Math.abs(a.cy - b.cy) < (a.h + b.h) / 2 - 1;
+      if (overlapX && overlapY) {
+        refuse(`schematic: nodes ${JSON.stringify(a.node.id)} and ${JSON.stringify(b.node.id)} overlap `
+          + `in layout ${JSON.stringify(layout)}; move them apart or shorten a label`);
+      }
+    }
+  }
+
   const boxById = new Map(boxes.map((b) => [b.node.id, b]));
   const out = head(dt.title);
   out.push(`<g data-layout="${esc(layout)}"></g>`);
@@ -654,6 +726,7 @@ function renderSchematic(dataTable, accentColor) {
       // between the two boxes, lift it clear of the taller box instead of overprinting it.
       const span = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
       const lift = w > span ? Math.max(a.h, b.h) / 2 + 14 : 8;
+      fitText(e.label, NOTE_FONT, VB_W - 2 * PAD, 'schematic edge label');
       const clamped = Math.min(VB_W - PAD - w / 2, Math.max(PAD + w / 2, mx));
       out.push(text(clamped, my - lift, NOTE_FONT, e.label, { anchor: 'middle', opacity: '0.82' }));
     }
@@ -718,6 +791,8 @@ function renderRoute(dataTable, accentColor) {
         const anchor = right ? 'start' : left ? 'end' : 'middle';
         const lx = p.x + (right ? 20 : left ? -20 : 0);
         const ly = p.y + (Math.abs(Math.cos(p.a)) <= 0.2 ? (Math.sin(p.a) > 0 ? 34 : -22) : 7);
+        const room = anchor === 'start' ? (VB_W - PAD) - lx : anchor === 'end' ? lx - PAD : VB_W - 2 * PAD;
+        fitText(p.s.label, LABEL_FONT, room, `route stop ${p.s.n} label`);
         out.push(text(lx, ly, LABEL_FONT, p.s.label, { anchor: anchor }));
         if (p.s.note) {
           out.push(text(lx, ly + 22, NOTE_FONT, p.s.note, { anchor: anchor, fill: accent }));

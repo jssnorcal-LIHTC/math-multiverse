@@ -198,9 +198,25 @@ function blindQuestion(item, passage, figure) {
     ];
   }
 
+  // THE INSTRUCTION MUST MATCH WHAT THE MODEL IS ACTUALLY SHOWN. V3 added figureBlock above and
+  // left this line reading "from the passage alone", so every figure-bearing item was certified by
+  // a model told to ignore the very stimulus the child is asked about, with the figure's data
+  // pasted underneath the instruction to disregard it. The comment on blindQuestion already named
+  // that failure -- "it would look exactly like a clean agreement, the worst available failure for
+  // a certification pass" -- and described the case this line then reintroduced.
+  //
+  // This changes the PROMPT only. The ledger hash is item + passage.text + figure dataTable
+  // (itemHash below), so no committed record is invalidated by it. 132 of the 873 records on the
+  // tree at the time of this fix ARE figure-bearing (cpm-cc1-g6 84, firsthand-g6 24,
+  // outpost-protocol-g6 24) and were obtained under the old wording; re-certifying them is a
+  // separate decision and is recorded as open, not silently folded in here.
+  const answerFrom = (item && item.figureId)
+    ? 'Answer it yourself from the passage and the figure data below.'
+    : 'Answer it yourself from the passage alone.';
+
   const prompt = [
     'You are answering one reading-comprehension question for a grade 6 student.',
-    'Answer it yourself from the passage alone. Do not explain your reasoning at length.',
+    answerFrom + ' Do not explain your reasoning at length.',
     '',
     'PASSAGE:',
     passage.text,
