@@ -1585,6 +1585,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l2-mc-tally-strip-across-columns",
+      "itemHash": "ea04790795308299",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l2-order-workup-chain-of-arrows",
       "itemHash": "34452ce7ad49e755",
       "blind": [
@@ -1598,6 +1606,20 @@
         3,
         0,
         2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-cloze-heading-against-the-tally",
+      "itemHash": "4ac1dffed0d82826",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
       ],
       "confidence": "high",
       "status": "agree"
@@ -1695,68 +1717,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l4-match-plan-connectors",
-      "itemHash": "ed882e93356995e8",
-      "blind": [
-        2,
-        0,
-        1
-      ],
-      "authored": [
-        2,
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-what-the-place-row-records",
-      "itemHash": "65490033f4fc7e09",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-the-row-left-blank",
-      "itemHash": "aedbc5ec21490ebd",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ms-what-the-slip-shows",
-      "itemHash": "fa9067e23a39c44a",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-cloze-two-names-one-empty-line",
-      "itemHash": "9875ce2fae8626fe",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-order-timeline-clock-order",
       "itemHash": "602661f70a3d0a88",
       "blind": [
@@ -1783,14 +1743,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-plain-line-in-the-schematic",
-      "itemHash": "2c0ab51d090dafb4",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-cloze-where-the-second-step-sits",
       "itemHash": "025ef51768934f6e",
       "blind": [
@@ -1805,16 +1757,56 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-mc-tally-strip-across-columns",
-      "itemHash": "ea04790795308299",
+      "itemId": "l4-match-plan-connectors",
+      "itemHash": "e4e1ecd8d6b3e679",
+      "blind": [
+        2,
+        0,
+        1
+      ],
+      "authored": [
+        2,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-what-the-place-row-records",
+      "itemHash": "bd4e87716fec122c",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l2-cloze-heading-against-the-tally",
-      "itemHash": "4ac1dffed0d82826",
+      "itemId": "l5-mc-the-row-left-blank",
+      "itemHash": "263e108d85ab10d2",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ms-what-the-slip-shows",
+      "itemHash": "ded77905b714d231",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-cloze-two-names-one-empty-line",
+      "itemHash": "00582faf9afbc261",
       "blind": [
         0,
         0
@@ -1823,6 +1815,14 @@
         0,
         0
       ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-plain-line-in-the-schematic",
+      "itemHash": "5ed9f5c8b6790ee8",
+      "blind": 1,
+      "authored": 1,
       "confidence": "high",
       "status": "agree"
     }

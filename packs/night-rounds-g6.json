@@ -5560,7 +5560,7 @@
           1
         ]
       ],
-      "explain": "The plan labels only two of its connectors, and each label does a different job.  The panel six line carries the date the mesh was tightened, and the willow's arrow points at post fourteen and names the limb lying there.  The line down to the creek carries nothing, because the creek is where the fence runs rather than something that happened to it.",
+      "explain": "The plan labels only two of its connectors, and each label does a different job.  The panel six line carries the date the mesh was tightened, and the willow's arrow runs up to post fourteen and carries the words the fence line.  The line down to the creek carries nothing, because the creek is where the fence runs rather than something that happened to it.",
       "whyTheFigureIsNeeded": "Only the plan puts the two marked points on the run side by side and shows which connector carries the April date, which one is a bare line, and where the single arrow starts and lands; the prose scatters those facts across four paragraphs and never draws the links."
     },
     {
@@ -5744,7 +5744,7 @@
       "passageId": "p-l6-morning-report",
       "figureId": "fig-l6-morning-report",
       "figureFact": "not a failure of upkeep",
-      "stem": "Four pairs of boxes are joined in the schematic.  Three of the joins are arrows.  One is a plain line with no arrowhead.  Which pair does the plain line join?",
+      "stem": "The schematic stacks five boxes down the page, so four pairs of boxes sit next to each other. Only three of those pairs are joined by an arrow. Which pair is joined by nothing at all?",
       "choices": [
         "The willow limb box and the box reading not a failure of upkeep",
         "The box reading not a failure of upkeep and the box about the north service gate",
@@ -5753,9 +5753,9 @@
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "An arrow joins that pair, because finding one leads to the first step of the argument.",
-        "2": "An arrow joins that pair too, because finding two leads to the second step.",
-        "3": "An arrow joins that pair as well, carrying the second step into the third, the one the drawing gives rounded ends."
+        "0": "An arrow does join these two: the first finding leads to the conclusion drawn from it.",
+        "2": "An arrow joins these two as well, carrying the second finding into the conclusion it supports.",
+        "3": "An arrow joins these two, running from the conclusion to the last step of the argument."
       },
       "targets": [
         "c1-inf-4-reasoning",
@@ -5763,7 +5763,7 @@
       ],
       "coachTopic": "inference-argument",
       "dok": 3,
-      "explain": "An arrow in this drawing means a finding leads to the step it supports, and the report keeps its findings separate from its argument on purpose.  The plain line does no leading at all;  it only carries the reader down the page from the first step to the second finding, which no step produced.  Choosing any of the arrows treats every join as the same kind of move.",
+      "explain": "Three arrows run down the page, and each one carries a finding into the step it supports. The gap is between the first conclusion and the second finding, because a finding is not produced by an earlier conclusion. The report opens with findings and keeps them separate from everything else on purpose, and the drawing keeps them separate too.",
       "whyTheFigureIsNeeded": "The page lists both findings and then all three steps, so only the drawing shows which join carries an argument and which one is simply the next thing down the page."
     },
     {
@@ -6415,10 +6415,6 @@
           {
             "text": "the name of the keeper who found the bird",
             "emphasis": "box"
-          },
-          {
-            "text": "",
-            "emphasis": "redact"
           }
         ],
         "columns": [
