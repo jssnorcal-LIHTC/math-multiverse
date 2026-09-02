@@ -5441,7 +5441,7 @@
       ],
       "coachTopic": "evidence-key-details",
       "dok": 2,
-      "stem": "The gust grid is drawn as four bars that climb from left to right.  Between which two of them does the chart show the biggest rise?",
+      "stem": "The chart draws four of the night's gust numbers as bars that climb from left to right.  Between which two of them does the chart show the biggest rise?",
       "choices": [
         "From seven o'clock to eight o'clock",
         "From nine o'clock to the peak reading at 9:20 p.m.",
@@ -5450,9 +5450,9 @@
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "Those two bar tops sit closest together on the grid, twenty-four then thirty-one, which is the smallest step of the night rather than the biggest.",
+        "0": "Those two bar tops sit closest together on the grid, twenty-four then thirty-one, which is the smallest step among the four bars rather than the biggest.",
         "1": "That last step runs from forty-four up to the peak of fifty-two, eight miles an hour, so it is smaller than the step before it.",
-        "3": "The four bar tops are not evenly spaced;  the grid climbs by seven, then thirteen, then eight."
+        "3": "The four bar tops are not evenly spaced;  the four bars climb by seven, then thirteen, then eight."
       },
       "explain": "Reading the bar tops against the scale gives twenty-four, thirty-one, forty-four and then the peak of fifty-two.  The widest gap between two neighbouring bars is the thirteen miles an hour from eight o'clock to nine o'clock.  The wrong answers pick the smallest step, the last step, or assume an even climb the grid never shows.",
       "whyTheFigureIsNeeded": "The chart draws all four readings to one scale, so the size of each step between neighbouring bars is visible as a gap; the prose only lists the numbers in separate sentences and never compares one step to another."
@@ -5469,7 +5469,7 @@
       ],
       "coachTopic": "evidence-key-details",
       "dok": 2,
-      "stem": "Finish the reading of the gust grid.  The note printed under the plot warns of gusts of up to 50 miles an hour, and the highest reading the grid draws {{0}} that warning, at {{1}}.",
+      "stem": "Finish the reading of the gust chart.  The note printed under the plot warns of gusts of up to 50 miles an hour, and the highest reading the grid draws {{0}} that warning, at {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -5488,7 +5488,7 @@
           "key": 0
         }
       ],
-      "explain": "The note warns of gusts of up to 50 miles an hour.  The tallest bar on the grid is the reading taken at 9:20 p.m., and the caption gives it as the peak of 52, so it passes the warning rather than meeting or missing it.",
+      "explain": "The note warns of gusts of up to 50 miles an hour.  The tallest bar on the chart is the reading taken at 9:20 p.m., and the caption gives it as the peak of 52, so it passes the warning rather than meeting or missing it.",
       "whyTheFigureIsNeeded": "The chart prints the advisory note beneath the same plot as the four bar heights, so which bar tops fall short of fifty and which one clears it is something the drawing shows at a glance, while the prose states the advisory figure and the readings paragraphs apart."
     },
     {
@@ -5505,7 +5505,7 @@
       "dok": 2,
       "stem": "Some of the lines on the clipping are marked with a line drawn underneath.  Select the two claims that carry that mark.",
       "choices": [
-        "A violent spring storm tore a hole in the perimeter fence at Marlowe Creek Wildlife Sanctuary Thursday night",
+        "A violent spring storm tore a hole in the perimeter fence at Marlowe Creek Wildlife",
         "sanctuary records show the fence had not been inspected since March",
         "leaving a gap wide enough for an animal to walk through",
         "the county was under a High Wind Warning that night, according to the National Weather Service",
@@ -5516,8 +5516,8 @@
         3
       ],
       "distractorRationale": {
-        "0": "That is the article's opening line, printed plainly with no mark under it, and the passage counts the torn fence among the details the article gets right.",
-        "2": "That finishes the same opening sentence and carries no mark either;  no animal left the property, which the article also reports correctly.",
+        "0": "Those are the two plain lines at the top of the clipping, printed with no mark under them, and the passage counts the torn fence among the details the article gets right.",
+        "2": "The clipping stops printing that sentence at Marlowe Creek Wildlife, so those words are not on the card at all and nothing there is marked.",
         "4": "The byline sits in the clipping's header, above the article text, so it is not one of the marked lines at all."
       },
       "explain": "The marking picks out the two claims our own paperwork contradicts, the upkeep claim about inspections and the weather claim about a High Wind Warning.  Everything printed above them belongs to the opening sentence the passage treats as accurate, and the byline is a header row rather than a claim about the storm.",
@@ -5744,7 +5744,7 @@
       "passageId": "p-l6-morning-report",
       "figureId": "fig-l6-morning-report",
       "figureFact": "not a failure of upkeep",
-      "stem": "The schematic stacks five boxes down the page, so four pairs of boxes sit next to each other. Only three of those pairs are joined by an arrow. Which pair is joined by nothing at all?",
+      "stem": "The plan stacks five boxes down the page.  Arrows join some boxes to the box right below them.  Which two boxes that sit one above the other have no arrow between them?",
       "choices": [
         "The willow limb box and the box reading not a failure of upkeep",
         "The box reading not a failure of upkeep and the box about the north service gate",
@@ -5763,7 +5763,7 @@
       ],
       "coachTopic": "inference-argument",
       "dok": 3,
-      "explain": "Three arrows run down the page, and each one carries a finding into the step it supports. The gap is between the first conclusion and the second finding, because a finding is not produced by an earlier conclusion. The report opens with findings and keeps them separate from everything else on purpose, and the drawing keeps them separate too.",
+      "explain": "Three arrows run down the page, and each one carries a finding into the step it supports.  The gap is between the first conclusion and the second finding, because a finding is not produced by an earlier conclusion.  The report opens with findings and keeps them separate from everything else on purpose, and the drawing keeps them separate too.",
       "whyTheFigureIsNeeded": "The page lists both findings and then all three steps, so only the drawing shows which join carries an argument and which one is simply the next thing down the page."
     },
     {
