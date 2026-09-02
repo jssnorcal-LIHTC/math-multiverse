@@ -727,6 +727,12 @@ function genTargets(pack) {
     const dt = f.dataTable;
     if (!dt || typeof dt !== 'object' || Array.isArray(dt)) return false;
     if (Array.isArray(dt.panels)) return true;   // panels tables carry no dt.type at all
+    // `undefined` is admitted too, and deliberately: layout() reads `dt.type === 'bar' ? 'bar' :
+    // 'line'`, so a chart that omits type still RENDERS as a line chart. Excluding it here dropped
+    // exactly such a figure out of the CLI and the derive gate while genSvg went on drawing it -- a
+    // figure that exists on the page and in no check. The 'features' shape it was meant to exclude
+    // is already excluded by `f.gen !== true` above.
+    if (dt.type === undefined) return true;
     return dt.type === 'bar' || dt.type === 'line' || DOC_TYPES.indexOf(dt.type) !== -1;
   });
 }
