@@ -1585,14 +1585,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-mc-tally-strip-across-columns",
-      "itemHash": "6847284b84db1b01",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l2-order-workup-chain-of-arrows",
       "itemHash": "34452ce7ad49e755",
       "blind": [
@@ -1606,20 +1598,6 @@
         3,
         0,
         2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-cloze-heading-against-the-tally",
-      "itemHash": "71e762a1da409c1c",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
       ],
       "confidence": "high",
       "status": "agree"
@@ -1644,7 +1622,7 @@
     },
     {
       "itemId": "l3-match-column-belongs-to-witness",
-      "itemHash": "9170f879f7016d24",
+      "itemHash": "3733ac82288399d7",
       "blind": [
         2,
         0,
@@ -1668,7 +1646,7 @@
     },
     {
       "itemId": "l3-cloze-read-the-rows-across",
-      "itemHash": "213a358c5ffa0f3f",
+      "itemHash": "ee50685b4abc0a73",
       "blind": [
         1,
         1
@@ -1734,7 +1712,7 @@
     },
     {
       "itemId": "l5-mc-what-the-place-row-records",
-      "itemHash": "e21042938880ce1e",
+      "itemHash": "65490033f4fc7e09",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1742,7 +1720,7 @@
     },
     {
       "itemId": "l5-mc-the-row-left-blank",
-      "itemHash": "9ea2fcb97dd5f194",
+      "itemHash": "aedbc5ec21490ebd",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -1750,7 +1728,7 @@
     },
     {
       "itemId": "l5-ms-what-the-slip-shows",
-      "itemHash": "72aa4ea7e5def19f",
+      "itemHash": "fa9067e23a39c44a",
       "blind": [
         0,
         1,
@@ -1766,7 +1744,7 @@
     },
     {
       "itemId": "l5-cloze-two-names-one-empty-line",
-      "itemHash": "33edf62fb7b8c577",
+      "itemHash": "9875ce2fae8626fe",
       "blind": [
         0,
         0
@@ -1780,7 +1758,7 @@
     },
     {
       "itemId": "l6-order-timeline-clock-order",
-      "itemHash": "96d7ef52079fda11",
+      "itemHash": "602661f70a3d0a88",
       "blind": [
         3,
         1,
@@ -1798,7 +1776,7 @@
     },
     {
       "itemId": "l6-mc-dot-after-the-dashed-one",
-      "itemHash": "b74f693a88ae5254",
+      "itemHash": "4e8d5cdb609b927f",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1806,7 +1784,7 @@
     },
     {
       "itemId": "l6-mc-plain-line-in-the-schematic",
-      "itemHash": "08a40976c664df09",
+      "itemHash": "2c0ab51d090dafb4",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1814,7 +1792,29 @@
     },
     {
       "itemId": "l6-cloze-where-the-second-step-sits",
-      "itemHash": "5f78bace18fe03da",
+      "itemHash": "025ef51768934f6e",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-tally-strip-across-columns",
+      "itemHash": "ea04790795308299",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-cloze-heading-against-the-tally",
+      "itemHash": "4ac1dffed0d82826",
       "blind": [
         0,
         0

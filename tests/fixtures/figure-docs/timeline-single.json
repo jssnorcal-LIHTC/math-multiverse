@@ -2,12 +2,24 @@
   "type": "timeline",
   "sourcePassageId": "p-fx-single",
   "title": "Monitoring summary",
-  "start": "Monday",
-  "end": "Wednesday",
-  "tracks": ["record"],
+  "tracks": [
+    "record"
+  ],
   "events": [
-    { "t": "Monday", "label": "gate locked 9:10", "track": "record" },
-    { "t": "Tuesday", "label": "gate locked 9:05", "track": "record" },
-    { "t": "Wednesday", "label": "gate locked 9:12", "track": "record" }
+    {
+      "t": "Monday",
+      "label": "gate locked 9:10",
+      "track": "record"
+    },
+    {
+      "t": "Tuesday",
+      "label": "gate locked 9:05",
+      "track": "record"
+    },
+    {
+      "t": "Wednesday",
+      "label": "gate locked 9:12",
+      "track": "record"
+    }
   ]
 }

@@ -110,7 +110,9 @@ function polygon(points, fill) {
 // nothing here depends on id scoping when the same SVG is inlined, thumbnailed and lightboxed.
 function hatchBand(x, y, w, h, label) {
   const out = [rect(x, y, w, h, { stroke: HATCH_STROKE, extra: `data-gap="${esc(label || '')}"` })];
-  const step = 12;
+  // D15: a dense hatch reads as STRUCK OUT or removed. On a timeline the blocked window is the
+  // point of the figure, not a deletion, so the band is drawn sparsely enough to read as a region.
+  const step = 22;
   // Deterministic: a fixed step walked from a fixed origin, clipped by construction rather than by
   // a clip-path, so the same band is the same bytes every time.
   for (let o = step; o < w + h; o += step) {
@@ -359,6 +361,15 @@ function renderTimeline(dataTable, accentColor) {
   // The bounds get their own row well above the lanes. Drawn any lower they collide with the event
   // numbers, and in ordinal mode the first event sits at exactly AX_L, so "Monday" and the "1" under
   // it were printed on top of each other.
+  // D12/D13: start and end are AXIS BOUNDS, and an axis bound asserts a scale. In ordinal mode the
+  // markers are evenly spaced regardless of elapsed time, so two entries four minutes apart get the
+  // same gap as two three hours apart. Printing clock bounds over that reads as a measured axis and
+  // is a claim the drawing does not support, so it is refused rather than drawn.
+  if (!timeMode && (dt.start !== undefined || dt.end !== undefined)) {
+    refuse('timeline: start/end are axis bounds and this timeline is laid out in authored order, not '
+      + 'on a clock (its times do not all parse), so the spacing carries no scale for them to bound; '
+      + 'drop start and end, or write every time as a clock time');
+  }
   if (dt.start !== undefined || dt.end !== undefined) {
     if (dt.start !== undefined) out.push(text(AX_L, 74, TICK_FONT, dt.start, { opacity: '0.82' }));
     if (dt.end !== undefined) out.push(text(AX_R, 74, TICK_FONT, dt.end, { anchor: 'end', opacity: '0.82' }));
@@ -388,7 +399,10 @@ function renderTimeline(dataTable, accentColor) {
   // unreadable "4?3". Each lane is walked in x order and a number that would overlap the previous
   // one is lifted to a second row ABOVE the first (never below, which would collide with the next
   // lane). If both rows are taken the figure is REFUSED by name rather than drawn illegibly.
-  const NUM_ROWS = [-14, -32];
+  // D16: a staggered numeral must stay on its OWN lane's side. A fixed [-14,-32] put the second row
+  // for the LOWER lane midway between the two lanes, so which lane a numeral belonged to was a
+  // guess. The last lane staggers DOWNWARD, where nothing else lives; every other lane staggers up.
+  const rowsFor = (k) => (k === tracks.length - 1 ? [-14, 22] : [-14, -32]);
   const placed = [];
   const rowsByLane = new Map();
   events.forEach((e, i) => {
@@ -396,10 +410,13 @@ function renderTimeline(dataTable, accentColor) {
     const cx = posOf(i), cy = laneY(k);
     const unver = e.kind === 'unverified';
     const glyph = unver ? (i + 1) + '?' : String(i + 1);
-    const halfW = estimateTextWidth(glyph, NOTE_FONT) / 2 + 3;
+    // D14: +3 of clearance let the numerals for two markers 21px apart read as one cluster. A
+    // numeral needs air on both sides to be countable, not merely non-overlapping.
+    const halfW = estimateTextWidth(glyph, NOTE_FONT) / 2 + 9;
     if (!rowsByLane.has(k)) rowsByLane.set(k, [[], []]);
     const rows = rowsByLane.get(k);
     let row = -1;
+    const NUM_ROWS = rowsFor(k);
     for (let r = 0; r < NUM_ROWS.length && row === -1; r++) {
       const clash = rows[r].some((iv) => cx - halfW < iv[1] && cx + halfW > iv[0]);
       if (!clash) row = r;
@@ -409,7 +426,7 @@ function renderTimeline(dataTable, accentColor) {
         + `${JSON.stringify(tracks[k])} are too close to number legibly; space the events or split the figure`);
     }
     rows[row].push([cx - halfW, cx + halfW]);
-    placed.push({ e, i, cx, cy, unver, glyph, row });
+    placed.push({ e, i, cx, cy, unver, glyph, row, k });
   });
 
   const entries = [];
@@ -417,7 +434,7 @@ function renderTimeline(dataTable, accentColor) {
     out.push(circle(p.cx, p.cy, 7, p.unver
       ? { stroke: accent, strokeWidth: 2, dash: '3 3', extra: 'data-kind="unverified"' }
       : { fill: accent }));
-    out.push(text(p.cx, p.cy + NUM_ROWS[p.row], NOTE_FONT, p.glyph, { anchor: 'middle', fill: accent }));
+    out.push(text(p.cx, p.cy + rowsFor(p.k)[p.row], NOTE_FONT, p.glyph, { anchor: 'middle', fill: accent }));
     entries.push({ n: p.i + 1, lead: p.e.t, label: p.e.label, mark: p.unver ? 'unverified' : null });
   });
 
@@ -530,7 +547,10 @@ function renderFacsimile(dataTable, accentColor) {
 
   if (columns.length) {
     y += 18;
-    const colW = innerW / columns.length;
+    // The label column takes a share of the width; the data columns narrow to make room, so the
+    // table still fits the card rather than running off it.
+    const labelColW = Array.isArray(dt.rowLabels) && dt.rowLabels.length ? Math.min(150, innerW * 0.24) : 0;
+    const colW = (innerW - labelColW) / columns.length;
     const cellW = colW - 14;
     const rowsN = columns.reduce((m, c) => Math.max(m, (c && Array.isArray(c.rows) ? c.rows.length : 0)), 0);
     const CELL_LINE_H = 22;
@@ -550,6 +570,14 @@ function renderFacsimile(dataTable, accentColor) {
       return lines_;
     };
 
+    // D17: OPTIONAL ROW LABELS. Columns were named and rows were not, so a witness table's fourth
+    // row read as WHEN THE NOISE HAPPENED rather than when the account was given -- which is exactly
+    // the distinction its item tests. rowLabels is a leading column, fidelity-checked like any other
+    // transcription, and it narrows the data columns to make room rather than overflowing them.
+    const rowLabels = Array.isArray(dt.rowLabels) ? dt.rowLabels : null;
+    if (rowLabels && rowLabels.length !== rowsN) {
+      refuse(`facsimile: rowLabels has ${rowLabels.length} entries but the table has ${rowsN} rows`);
+    }
     const heads = columns.map((c, ci) => {
       if (!c || typeof c.heading !== 'string') refuse(`facsimile: column ${ci} has no heading`);
       return fitOrRefuse(c.heading, LABEL_FONT, `column heading`);
@@ -573,7 +601,7 @@ function renderFacsimile(dataTable, accentColor) {
 
     const tableBottom = y + needed;
     heads.forEach((h, ci) => {
-      const cx = innerX + ci * colW;
+      const cx = innerX + labelColW + ci * colW;
       out.push(textLines(cx, y + LABEL_FONT, LABEL_FONT, h, { lineH: CELL_LINE_H }));
       if (ci > 0) out.push(line(hp(cx - 8), y - 6, hp(cx - 8), tableBottom - 10, RULE, 1));
     });
@@ -581,9 +609,16 @@ function renderFacsimile(dataTable, accentColor) {
     out.push(line(innerX, hp(headBase), CX + CW - 22, hp(headBase), HEADER_STROKE, 1));
     let ry = headBase;
     cells.forEach((row, r) => {
+      if (labelColW) {
+        const lab = dt.rowLabels[r];
+        if (typeof lab === 'string' && lab.trim()) {
+          const wrapped = fitOrRefuse(lab, TICK_FONT, 'row label');
+          out.push(textLines(innerX, ry + TICK_FONT + 4, TICK_FONT, wrapped, { lineH: CELL_LINE_H, opacity: '0.82' }));
+        }
+      }
       row.forEach((cell, ci) => {
         if (!cell) return;
-        const cx = innerX + ci * colW;
+        const cx = innerX + labelColW + ci * colW;
         out.push(textLines(cx, ry + TICK_FONT + 4, TICK_FONT, cell, { lineH: CELL_LINE_H }));
       });
       ry += rowH[r];

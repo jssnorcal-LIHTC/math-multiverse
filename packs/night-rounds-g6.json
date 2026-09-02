@@ -5400,7 +5400,7 @@
       "type": "cloze",
       "passageId": "p-l3-three-accounts",
       "figureId": "fig-l3-three-accounts",
-      "figureFact": "Ruth Bellweather",
+      "figureFact": "Bellweather",
       "stem": "Read the page one row at a time, straight across all three columns.  On the time row, Ruth Bellweather's column {{0}}.  On the bottom row, the one witness whose account was given the same night is {{1}}.",
       "targets": [
         "c4-3-analyze-sources",
@@ -5964,9 +5964,9 @@
         ],
         "columns": [
           {
-            "heading": "Fourteen days",
+            "heading": "days of feeding",
             "rows": [
-              "of feeding"
+              "Fourteen"
             ]
           },
           {
@@ -6096,12 +6096,6 @@
         "sourcePassageId": "p-l3-three-accounts",
         "docKind": "source-desk",
         "title": "three accounts of the night noise",
-        "header": [
-          {
-            "label": "Three people",
-            "value": "after closing on Wednesday evening"
-          }
-        ],
         "lines": [
           {
             "text": "None of the three witnesses saw anything at all",
@@ -6110,7 +6104,7 @@
         ],
         "columns": [
           {
-            "heading": "Cleo Fontaine",
+            "heading": "Fontaine",
             "rows": [
               "after eight",
               "the parking lot",
@@ -6119,7 +6113,7 @@
             ]
           },
           {
-            "heading": "Wes Tanaka",
+            "heading": "Tanaka",
             "rows": [
               "closer to nine",
               "from the marsh",
@@ -6128,7 +6122,7 @@
             ]
           },
           {
-            "heading": "Ruth Bellweather",
+            "heading": "Bellweather",
             "rows": [
               "after dark",
               "the marsh",
@@ -6136,6 +6130,12 @@
               "Thursday morning"
             ]
           }
+        ],
+        "rowLabels": [
+          "the time",
+          "came from",
+          "the sound",
+          "spoke to me"
         ]
       }
     },
@@ -6413,7 +6413,12 @@
         ],
         "lines": [
           {
-            "text": "the name of the keeper who found the bird"
+            "text": "the name of the keeper who found the bird",
+            "emphasis": "box"
+          },
+          {
+            "text": "",
+            "emphasis": "redact"
           }
         ],
         "columns": [
@@ -6446,8 +6451,6 @@
         "type": "timeline",
         "sourcePassageId": "p-l6-night-of-the-storm",
         "title": "The night of the twenty-sixth of May",
-        "start": "four o'clock",
-        "end": "10:56 p.m.",
         "tracks": [
           "record"
         ],
@@ -6560,11 +6563,6 @@
             "from": "f1",
             "to": "s1",
             "style": "arrow"
-          },
-          {
-            "from": "s1",
-            "to": "f2",
-            "style": "line"
           },
           {
             "from": "f2",
