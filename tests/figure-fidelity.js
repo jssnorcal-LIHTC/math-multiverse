@@ -55,15 +55,30 @@ function loadJson(p) { return JSON.parse(fs.readFileSync(p, 'utf8')); }
 // normalisation and string extraction
 // =====================================================================================================
 
+// Case, curly quotes and whitespace only. Trailing punctuation is NOT stripped, and the earlier
+// version that stripped it from BOTH sides was a hole: a label authored as "gate closed?" reduced to
+// "gate closed", matched the passage, and the question mark -- a claim the passage does not make --
+// went unnoticed in both directions, because part 2 then compared the same stripped needle. A figure
+// that adds punctuation the passage does not have is adding a claim.
 function norm(s) {
   return String(s)
     .replace(/[‘’]/g, "'")
     .replace(/[“”]/g, '"')
     .toLowerCase()
     .replace(/\s+/g, ' ')
-    .replace(/[.,;:!?]+$/, '')
     .trim();
 }
+
+// Quantifiers assert scope: "the only stop", "every night", "no other witness". A caption is fed
+// verbatim to the blind certifier alongside the dataTable, so a quantifier the passage never uses is
+// an inference the figure adds to the record -- precisely the 26-0812 fig-proposals defect, which
+// was the single word "only" in a feature table. Legitimate uses are allowed: the test is whether
+// the PASSAGE uses the word too.
+// Deliberately narrow. It holds the words that assert EXCLUSIVITY or UNIVERSALITY, which is the
+// claim a figure cannot make on its own authority. Words like "each", "first" and "any" were tried
+// and removed: they fire on ordinary distributive prose ("one column each") and a rule that cries
+// wolf gets switched off, which costs more than it catches.
+const SCOPE_WORDS = ['only', 'no other', 'never', 'none', 'always', 'every', 'all'];
 
 // Every string a renderer actually DRAWS. The plan's list omitted every string a bar chart draws and
 // every time a timeline draws, which would have left the gate checking nothing at all on a chart and
@@ -72,8 +87,14 @@ function norm(s) {
 // notes at :679.
 function checkedStrings(dt) {
   const out = [];
+  // COERCE, do not skip. The earlier `typeof v === 'string'` guard silently dropped every non-string
+  // scalar, and the renderers String()-coerce a cell before drawing it -- so a facsimile row holding
+  // the NUMBER 3902 printed "3902" on the canvas while rule 1 never saw it. A number a figure states
+  // is a transcription like any other, and a wrong one is the most answerable-looking kind of lie.
   const add = (field, v) => {
-    if (typeof v === 'string' && v.trim()) out.push({ field, value: v });
+    if (v === undefined || v === null || typeof v === 'object') return;
+    const s = String(v);
+    if (s.trim()) out.push({ field, value: s });
   };
   add('title', dt.title);
   add('start', dt.start);
@@ -116,6 +137,62 @@ function textContents(svg) {
       .trim());
   }
   return out;
+}
+
+// Every text run's box, measured with the SAME model tests/figure-derive.js uses (GLYPH_W for width,
+// 0.8/0.25 of the font for ascent and descent). Rotated text is handled rather than ignored: the
+// facsimile stamp is drawn inside a <g transform="rotate(...)">, and reading its x/y as if the
+// transform were absent measured a real label in the wrong place entirely.
+function outOfCanvas(svg) {
+  const bad = [];
+  const re = /<g\b([^>]*)>([\s\S]*?)<\/g>|<text\b([^>]*)>([\s\S]*?)<\/text>/g;
+  let m;
+  const runs = [];
+  while ((m = re.exec(svg)) !== null) {
+    if (m[3] !== undefined) { runs.push({ attrs: m[3], inner: m[4], rot: null }); continue; }
+    const rm = /rotate\(\s*(-?[0-9.]+)\s+(-?[0-9.]+)\s+(-?[0-9.]+)\s*\)/.exec(m[1] || '');
+    const tre = /<text\b([^>]*)>([\s\S]*?)<\/text>/g;
+    let t;
+    while ((t = tre.exec(m[2])) !== null) {
+      runs.push({
+        attrs: t[1], inner: t[2],
+        rot: rm ? { a: parseFloat(rm[1]) * Math.PI / 180, cx: parseFloat(rm[2]), cy: parseFloat(rm[3]) } : null,
+      });
+    }
+  }
+  runs.forEach((r) => {
+    const get = (k) => {
+      const a = new RegExp('(?:^|\\s)' + k + '="([^"]*)"').exec(r.attrs);
+      return a ? a[1] : null;
+    };
+    const fontSize = parseFloat(get('font-size') || '0');
+    if (!fontSize) return;
+    const anchor = get('text-anchor') || 'start';
+    const x = parseFloat(get('x') || '0');
+    const y = parseFloat(get('y') || '0');
+    const plain = String(r.inner).replace(/<[^>]*>/g, ' ')
+      .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&amp;/g, '&')
+      .replace(/\s+/g, ' ').trim();
+    if (!plain) return;
+    const w = plain.length * 0.6 * fontSize;
+    const left = anchor === 'end' ? x - w : anchor === 'middle' ? x - w / 2 : x;
+    const box = [[left, y - 0.8 * fontSize], [left + w, y - 0.8 * fontSize],
+      [left + w, y + 0.25 * fontSize], [left, y + 0.25 * fontSize]];
+    const pts = r.rot
+      ? box.map((p) => {
+        const dx = p[0] - r.rot.cx, dy = p[1] - r.rot.cy;
+        return [r.rot.cx + dx * Math.cos(r.rot.a) - dy * Math.sin(r.rot.a),
+          r.rot.cy + dx * Math.sin(r.rot.a) + dy * Math.cos(r.rot.a)];
+      })
+      : box;
+    const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
+    const l = Math.min.apply(null, xs), rgt = Math.max.apply(null, xs);
+    const t0 = Math.min.apply(null, ys), b0 = Math.max.apply(null, ys);
+    if (l < -0.5 || rgt > 800.5 || t0 < -0.5 || b0 > 450.5) {
+      bad.push({ text: plain, why: `x ${l.toFixed(1)}..${rgt.toFixed(1)}, y ${t0.toFixed(1)}..${b0.toFixed(1)}` });
+    }
+  });
+  return bad;
 }
 
 // For rule 2(b): the text an item's KEY actually points at.
@@ -176,10 +253,23 @@ function checkFigure(where, fig, passages, itemsByFigure, packDir) {
   // An absence is a statement about what the passage does NOT contain, so it gets the INVERSE test:
   // the named thing must be missing from the passage. An absence that is actually present is a
   // figure telling the reader something false.
+  // An absence EXCUSES a drawn string from rule 1, so it is an exemption channel and is capped and
+  // bound like one. Uncapped and unbound it voided the whole gate: any invented sentence could be
+  // excused by pairing it with a nonsense "absent" string that is trivially missing from the passage.
+  // The binding requirement is that the absence be ABOUT the thing it excuses.
   const absences = Array.isArray(dt.absences) ? dt.absences : [];
+  if (absences.length > MAX_PARAPHRASE) {
+    fail(`${where}: figure "${fig.id}" declares ${absences.length} absence entries; the cap is ${MAX_PARAPHRASE}`);
+  }
   absences.forEach((a, i) => {
-    if (!a || typeof a.text !== 'string' || typeof a.absent !== 'string') {
+    if (!a || typeof a.text !== 'string' || typeof a.absent !== 'string' || !a.text.trim() || !a.absent.trim()) {
       fail(`${where}: figure "${fig.id}" absences[${i}] needs a text (what the figure says) and an absent (the phrase that must NOT be in the passage)`);
+      return;
+    }
+    if (norm(a.text).indexOf(norm(a.absent)) === -1) {
+      fail(`${where}: figure "${fig.id}" absences[${i}] excuses ${JSON.stringify(a.text)} on the grounds that `
+        + `${JSON.stringify(a.absent)} is missing, but that phrase is not part of what the figure says; `
+        + 'an absence must be about the thing it excuses');
       return;
     }
     excused.add(norm(a.text));
@@ -195,9 +285,12 @@ function checkFigure(where, fig, passages, itemsByFigure, packDir) {
   let checked = 0;
   const drawn = [];
   strings.forEach((s) => {
+    // An excused string is exempt from rule 1 and STILL SUBJECT TO PART 2. Dropping it from `drawn`
+    // let an exemption disable the drawn-check too, so a paraphrase or an absence bought silence in
+    // both directions at once when it was only ever meant to buy it in one.
+    drawn.push(s);
     if (excused.has(norm(s.value))) return;
     checked++;
-    drawn.push(s);
     if (hay.indexOf(norm(s.value)) === -1) {
       fail(`${where}: figure "${fig.id}" ${s.field} = ${JSON.stringify(s.value)} is not a verbatim substring of passage "${spid}"`);
     }
@@ -205,6 +298,30 @@ function checkFigure(where, fig, passages, itemsByFigure, packDir) {
   if (checked === 0) {
     fail(`${where}: figure "${fig.id}" has no fidelity-checked strings at all; the check on it is vacuous`);
   }
+
+  // The caption and the alt text are NOT transcriptions -- they are written for a reader and may use
+  // ordinary connective words. But both are shown to the blind certifier alongside the dataTable, so
+  // a claim in a caption can license a key just as a label can. Two mechanical rules, both narrow:
+  // every number must come from the passage, and every scope word must be one the passage itself
+  // uses. The judgment half stays with the two independent fidelity reviewers.
+  ['caption', 'alt'].forEach((field) => {
+    const v = fig[field];
+    if (typeof v !== 'string' || !v.trim()) return;
+    const nv = norm(v);
+    (nv.match(/\d[\d:,.]*/g) || []).forEach((num) => {
+      const bare = num.replace(/[.,]+$/, '');
+      if (hay.indexOf(bare) === -1) {
+        fail(`${where}: figure "${fig.id}" ${field} states the number "${bare}", which is not in passage "${spid}"`);
+      }
+    });
+    SCOPE_WORDS.forEach((wd) => {
+      const re = new RegExp('(^|[^a-z])' + wd + '([^a-z]|$)');
+      if (re.test(nv) && !re.test(hay)) {
+        fail(`${where}: figure "${fig.id}" ${field} uses the scope word "${wd}", which passage "${spid}" never uses; `
+          + 'a caption that widens or narrows a claim is an inference the record does not carry');
+      }
+    });
+  });
 
   // ---- part 2: the committed drawing actually carries what the table says ----
   const srcAbs = path.join(REPO_ROOT, fig.src || '');
@@ -217,18 +334,23 @@ function checkFigure(where, fig, passages, itemsByFigure, packDir) {
   drawn.forEach((s) => {
     const want = norm(s.value);
     if (contents.some((c) => c.indexOf(want) !== -1)) return;
-    // A renderer is allowed to truncate when nothing else fits, but only visibly, and only exactly
-    // as truncateToWidth declares it. Anything else is a label the reader never sees.
-    const isTruncation = contents.some((c) => {
-      if (c.indexOf('…') === -1) return false;
-      const stem = c.slice(0, c.indexOf('…')).trim();
-      return stem.length > 0 && want.indexOf(stem) === 0;
-    });
-    if (!isTruncation) {
-      fail(`${where}: figure "${fig.id}" ${s.field} = ${JSON.stringify(s.value)} is in the dataTable but is NOT drawn in ${fig.src}`);
-    } else {
-      note(`${where}: figure "${fig.id}" ${s.field} is drawn TRUNCATED; shorten the transcription if the reader needs it whole`);
-    }
+    // NO TRUNCATION ESCAPE. There used to be one and it was three defects at once: it scanned EVERY
+    // drawn run rather than the one corresponding to the missing label, it accepted a stem of any
+    // length (so a single shared character matched), and it was never bound to truncateToWidth at
+    // all. One ellipsis anywhere in a figure -- including one transcribed from a passage that trails
+    // off -- excused every other label sharing a first character. No renderer in this build
+    // truncates: each measures and REFUSES instead. A missing string is now a missing string.
+    fail(`${where}: figure "${fig.id}" ${s.field} = ${JSON.stringify(s.value)} is in the dataTable but is NOT drawn in ${fig.src}`);
+  });
+
+  // The other half of that rule: an ellipsis in the DRAWING that no authored string carries means
+  // something was cut, whoever cut it, and the reader cannot recover it.
+  const authored = drawn.map((s) => norm(s.value));
+  contents.forEach((c) => {
+    if (c.indexOf('…') === -1) return;
+    if (authored.some((k) => k.indexOf('…') !== -1 && c.indexOf(k) !== -1)) return;
+    fail(`${where}: figure "${fig.id}" draws ${JSON.stringify(c)}, whose ellipsis no authored string carries; `
+      + 'a label was cut');
   });
 
   // ---- mechanical checks on the committed drawing ----
@@ -237,13 +359,31 @@ function checkFigure(where, fig, passages, itemsByFigure, packDir) {
     fail(`${where}: figure "${fig.id}" src root must carry width, height, viewBox and role="img"; got ${JSON.stringify(root.slice(0, 120))}`);
   }
   const sizes = (svg.match(/font-size="([0-9.]+)"/g) || []).map((s) => parseFloat(/"([0-9.]+)"/.exec(s)[1]));
+  // A scan that matches nothing used to read as "no violations". A renderer that moved sizing into
+  // a style attribute or a <style> block would then draw every label at 9px and pass.
+  if (!sizes.length && contents.length) {
+    fail(`${where}: figure "${fig.id}" draws ${contents.length} text run(s) but declares no font-size at all; the floor check cannot see them`);
+  }
   const under = sizes.filter((n) => n < FONT_FLOOR);
   if (under.length) {
     fail(`${where}: figure "${fig.id}" draws text below the ${FONT_FLOOR}px authored floor: ${JSON.stringify(under)}`);
   }
-  if (svg.indexOf('undefined') !== -1 || svg.indexOf('NaN') !== -1) {
-    fail(`${where}: figure "${fig.id}" renders a literal "undefined" or "NaN"`);
-  }
+  // 'null' joins the literal scan: the timeline printed the word when start was null, and a scan
+  // that looks only for 'undefined' and 'NaN' walked straight past it.
+  ['undefined', 'NaN', '>null<'].forEach((lit) => {
+    if (svg.indexOf(lit) !== -1) {
+      fail(`${where}: figure "${fig.id}" renders a literal ${JSON.stringify(lit)} into the drawing`);
+    }
+  });
+
+  // CANVAS CONTAINMENT, MEASURED ON EVERY SHIPPED FIGURE. tests/figure-docs.test.js measures this
+  // too, but only over the eight hand-fitted fixtures -- it never reads packs/ at all -- so no gate
+  // measured a figure a reader will actually see. A label past the edge is a data-truth defect: the
+  // figure then displays less than its dataTable says. The bbox model is the one
+  // tests/figure-derive.js uses, so a figure that passes here cannot fail there.
+  outOfCanvas(svg).forEach((b) => {
+    fail(`${where}: figure "${fig.id}" draws ${JSON.stringify(b.text)} outside the 800x450 canvas (${b.why})`);
+  });
   return { checked };
 }
 
@@ -276,7 +416,13 @@ function checkItemLicence(where, item, fig) {
 function sweepPack(packPath, label) {
   const pack = loadJson(packPath);
   const packDir = path.dirname(packPath);
-  const figs = genTargets(pack);
+  // The sweep's universe is EVERY figure carrying a dataTable, not genTargets(pack). genTargets
+  // requires gen === true, so deleting that one boolean removed a figure from this gate and from
+  // figure-derive at the same time, while validate-pack still accepted it and blindQuestion still
+  // pasted its dataTable in front of the certifier. A figure whose dataTable is read is a figure
+  // whose dataTable is checked.
+  const figs = (pack.figures || []).filter((f) => f && f.dataTable && typeof f.dataTable === 'object'
+    && !Array.isArray(f.dataTable) && f.dataTable.type !== 'features');
   const passages = new Map((pack.passages || []).map((p) => [p.id, p]));
   const figById = new Map((pack.figures || []).map((f) => [f.id, f]));
   const itemsByFigure = new Map();
@@ -288,7 +434,14 @@ function sweepPack(packPath, label) {
 
   const withSpid = figs.filter((f) => f.dataTable && typeof f.dataTable.sourcePassageId === 'string');
   const docFigs = figs.filter((f) => f.dataTable && DOC_TYPES.indexOf(f.dataTable.type) !== -1);
-  const armed = withSpid.length > 0 || docFigs.length > 0;
+  // ARMING MUST NOT BE SELF-DISARMING. Keying it on the presence of sourcePassageId meant a pack
+  // could opt out of the whole gate by omitting the very field the gate exists to require, and
+  // keying it on gen:true meant one deleted boolean removed a figure from this gate AND from
+  // figure-derive while validate-pack still accepted it and the blind pass still read its dataTable.
+  // Subject is the fact that cannot be edited away without changing what the pack IS: a reading pack
+  // is a pack of passages, and a figure in one illustrates a passage or it does not belong there.
+  const isEla = pack.meta && pack.meta.subject === 'ela';
+  const armed = isEla || withSpid.length > 0 || docFigs.length > 0;
   if (!armed) return { armed: false, figures: 0, byType: {} };
 
   const byType = {};
@@ -351,8 +504,12 @@ function controlPositive() {
 function controlNegative() {
   const pack = loadJson(path.join(DOC_FIXTURE_DIR, 'pack.json'));
   const passages = new Map((pack.passages || []).map((p) => [p.id, p]));
-  const fig = JSON.parse(JSON.stringify(pack.figures.find((f) => f.id === 'fig-route-loop')));
-  if (!fig) { fail('control 2 (negative): fixture figure fig-route-loop is missing'); return; }
+  // Look up, guard, THEN deep-copy: JSON.stringify(undefined) returns undefined and JSON.parse then
+  // throws SyntaxError, so the guard below used to be unreachable and a renamed fixture would have
+  // surfaced as a harness error rather than the named failure it is.
+  const srcFig = pack.figures.find((f) => f.id === 'fig-route-loop');
+  if (!srcFig) { fail('control 2 (negative): fixture figure fig-route-loop is missing'); return; }
+  const fig = JSON.parse(JSON.stringify(srcFig));
   fig.dataTable.stops[0].label = 'a heron on the boardwalk';   // never in that passage
   const before = problems.length;
   checkFigure('control 2 (negative)', fig, passages, new Map(), DOC_FIXTURE_DIR);
@@ -368,8 +525,9 @@ function controlNegative() {
   // The same control for the OTHER half of the gate. Rule 2 is what stops an item being keyed to
   // something its figure never says, which is the failure the blind ledger structurally cannot see.
   const realFig = pack.figures.find((f) => f.id === 'fig-facsimile-columns');
-  const item = JSON.parse(JSON.stringify((pack.items || []).find((i) => i.figureId === 'fig-facsimile-columns')));
-  if (!item) { fail('control 2 (negative): no fixture item is keyed to fig-facsimile-columns'); return; }
+  const srcItem = (pack.items || []).find((i) => i.figureId === 'fig-facsimile-columns');
+  if (!realFig || !srcItem) { fail('control 2 (negative): no fixture item is keyed to fig-facsimile-columns'); return; }
+  const item = JSON.parse(JSON.stringify(srcItem));
   const b2 = problems.length;
   item.figureFact = 'the otter pool';   // real words, but not in THAT figure's table
   checkItemLicence('control 2 (negative)', item, realFig);

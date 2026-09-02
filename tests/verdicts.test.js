@@ -472,5 +472,33 @@ check('validateLedger and the blind pass hash a figure-bearing item THE SAME WAY
   assert.strictEqual(after.length, 1, 'editing the figure data did not stale the record');
 });
 
+// The blind prompt must not tell the certifier to ignore the stimulus it is about to be shown.
+// V3 added the figure block and left the instruction reading "from the passage alone", so every
+// figure-bearing item was certified by a model instructed to disregard the figure, with the
+// figure's own data pasted underneath that instruction. That failure is invisible in the ledger:
+// it reads as a clean agreement.
+check('the blind prompt tells a figure-bearing item to use the figure, and a plain item not to', () => {
+  const passage = { id: 'p1', text: 'The gate closed at 7:40 p.m.' };
+  const fig = {
+    id: 'f1', kind: 'chart', caption: 'c',
+    dataTable: { type: 'bar', series: [{ points: [[0, 24], [1, 31]] }], categoryLabels: ['seven', 'eight'] },
+  };
+  const withFig = { id: 'i1', type: 'mc', stem: 's', choices: ['a', 'b', 'c', 'd'], key: 2, passageId: 'p1', figureId: 'f1' };
+  const without = { id: 'i2', type: 'mc', stem: 's', choices: ['a', 'b', 'c', 'd'], key: 2, passageId: 'p1' };
+
+  const a = blindQuestion(withFig, passage, fig).prompt;
+  assert.ok(a.indexOf('from the passage alone') === -1,
+    'a figure-bearing item is still told to answer from the passage alone, while being shown the figure');
+  assert.ok(a.indexOf('from the passage and the figure data below') !== -1,
+    'a figure-bearing item is not told to use the figure');
+  assert.ok(a.indexOf('FIGURE DATA') !== -1, 'the figure block is missing, so this control is vacuous');
+
+  // The plain-item wording is unchanged, which is what keeps the 741 figure-less records comparable.
+  const b = blindQuestion(without, passage, null).prompt;
+  assert.ok(b.indexOf('from the passage alone') !== -1,
+    'a figure-less item should still be answered from the passage alone');
+  assert.ok(b.indexOf('FIGURE') === -1, 'a figure-less item must not be shown a figure block');
+});
+
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
 process.exit(failures ? 1 : 0);
