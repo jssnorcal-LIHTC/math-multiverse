@@ -639,9 +639,14 @@ function renderSchematic(dataTable, accentColor) {
   const bodyW = VB_W - 2 * PAD;
 
   // Node size from the label, wrapped to at most two lines so a long transcribed phrase stays whole.
+  // How wide a node may be depends on what is BESIDE it, which depends on the layout. A single
+  // bodyW/3 for everything was wrong twice over: in flow-tb the nodes stack vertically and have no
+  // horizontal neighbour at all, and in plan they are placed by authored x/y rather than packed into
+  // columns. The real invariant is that no two boxes overlap, and that is checked after placement.
   const cellW = layout === 'flow-lr' ? bodyW / nodes.length
     : layout === 'grid' ? bodyW / Math.ceil(Math.sqrt(nodes.length))
-      : bodyW / 3;
+      : layout === 'flow-tb' ? bodyW
+        : bodyW / 2;
   const maxTextW = Math.max(80, cellW - 34);
   const boxes = nodes.map((nd) => {
     const wrapped = wrapToWidth(nd.label, TICK_FONT, maxTextW, 2);
@@ -679,6 +684,22 @@ function renderSchematic(dataTable, accentColor) {
     b.cx = Math.min(VB_W - PAD - b.w / 2, Math.max(PAD + b.w / 2, b.cx));
     b.cy = Math.min(VB_H - PAD - b.h / 2, Math.max(bodyTop + b.h / 2, b.cy));
   });
+
+  // THE REAL INVARIANT: no two node boxes may overlap. A width heuristic only approximates this, and
+  // it approximated it badly in both directions -- refusing a wide node with nothing beside it, and
+  // (before any check existed) drawing two boxes on top of each other in a plan layout without a
+  // word. Measured on the FINAL placed geometry, after the on-canvas clamp.
+  for (let i = 0; i < boxes.length; i++) {
+    for (let j = i + 1; j < boxes.length; j++) {
+      const a = boxes[i], b = boxes[j];
+      const overlapX = Math.abs(a.cx - b.cx) < (a.w + b.w) / 2 - 1;
+      const overlapY = Math.abs(a.cy - b.cy) < (a.h + b.h) / 2 - 1;
+      if (overlapX && overlapY) {
+        refuse(`schematic: nodes ${JSON.stringify(a.node.id)} and ${JSON.stringify(b.node.id)} overlap `
+          + `in layout ${JSON.stringify(layout)}; move them apart or shorten a label`);
+      }
+    }
+  }
 
   const boxById = new Map(boxes.map((b) => [b.node.id, b]));
   const out = head(dt.title);
