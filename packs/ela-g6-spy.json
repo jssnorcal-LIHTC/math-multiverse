@@ -4956,7 +4956,7 @@
       ],
       "coachTopic": "evidence-key-details",
       "dok": 2,
-      "stem": "The drawing numbers every stop on the run in order.  It keeps numbering after the courier's three moves, so the run is over gets a number of its own.  Match each stop to the number the drawing gives it.",
+      "stem": "The drawing numbers every stop on the run in order.  It keeps numbering after the courier's three moves, so the words the run is over get a number of their own.  Match each stop to the number the drawing gives it.",
       "rowLabels": [
         "the run is over",
         "a change of level",
@@ -5179,7 +5179,7 @@
       ],
       "coachTopic": "evidence-story-details",
       "dok": 2,
-      "stem": "The Reading Room timeline sets the plan and the real time into one order.  In that order the exercise ends is not the last moment, and the plan's check-in is not the first.  Put all six moments in the order the timeline gives them.",
+      "stem": "The Reading Room timeline sets the plan and the real time into one order.  In that order the entry reading the exercise ends is not the last moment, and the plan's check-in is not the first.  Put all six moments in the order the timeline gives them.",
       "tiles": [
         "she checks in by two-twenty",
         "the phone buzzes once",
@@ -5301,13 +5301,13 @@
       "stem": "The staff log copies the maker's claim of ninety minutes into its own head, then records underneath what the staff themselves measured.  Match each part of the log to the job it does in that comparison.",
       "rowLabels": [
         "The head of the log, where the maker's claim of ninety minutes is written",
-        "The times column, which reads nine minutes for the first run and seven minutes for the second",
-        "The rock type column, which reads wet limestone on both of its rows"
+        "The times column, nine minutes then seven minutes",
+        "The rock type column, wet limestone on both rows"
       ],
       "colLabels": [
         "What the staff measured themselves, timed with a stopwatch in the tunnel",
         "The number being checked, copied in from the maker's own document",
-        "A condition that was the same on both runs, so it cannot explain why one run was shorter than the other"
+        "A condition that was the same on both runs"
       ],
       "key": [
         [
@@ -5342,11 +5342,11 @@
         "It puts the number where it will be read first and the words measured at a constant seventy degrees where they may be missed.",
         "It shows the brief is hiding nothing, so the thirty days can be taken at face value.",
         "It means the thirty-day number is true at seventy degrees and false everywhere else.",
-        "It marks the underlined lines as the most important claim on the page, since the brief chose to mark them."
+        "It marks the small print as the most important claim on the page, since the brief chose to mark it."
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "Printing a limit is better than hiding one, and it still does not make the two lines equally easy to notice.  Honest about a condition and safe to take at face value are two different things.",
+        "1": "Printing a limit is better than hiding one, and it still does not make the claim and the condition attached to it equally easy to notice.  Honest about a condition and safe to take at face value are two different things.",
         "2": "The small print says performance in other conditions may vary, which is not the same as false.  You turned a limit on the claim into the opposite claim.",
         "3": "The box is the mark this brief puts on the claim it is selling, and the underline is the mark it puts on the condition attached to that claim.  You read the two marks the wrong way round."
       },
@@ -5448,7 +5448,7 @@
       ],
       "coachTopic": "research-integrate",
       "dok": 3,
-      "explain": "Setting the two limestone tunnels side by side is what makes the point.  The rock is limestone in both, so limestone cannot be the thing that changed the answer.  What differs is that one is wet and one is dry, and the memo gives eight minutes under the wet one and fifty-one minutes under the dry one.  Reading a single tunnel on its own is how a condition gets mistaken for a verdict on the rock.",
+      "explain": "Setting the two limestone tunnels side by side is what makes the point.  The rock is limestone in both, so limestone cannot be the thing that changed the answer.  What differs in the rock row is that one is wet and one is dry, and the shape row differs too, a sharp bend against a gentle curve.  The memo gives eight minutes under the wet, sharply bent one and fifty-one minutes under the dry one with a gentle curve.  Reading a single tunnel on its own is how a condition gets mistaken for a verdict on the rock.",
       "whyTheFigureIsNeeded": "The memo strips out every depth and every footage the article carries and leaves rock, shape and result aligned under each tunnel, so the two limestone tunnels can be compared property by property; the article scatters those same facts through one narrative paragraph and never sets the second tunnel against the third."
     },
     {
@@ -5482,7 +5482,7 @@
       "coachTopic": "evidence-from-sources",
       "dok": 3,
       "explain": "The memo has two things to say under each climate, a temperature and a runtime, and every statement worth choosing pairs one with the other.  Twenty-six days belongs with the fifties, nineteen days with the heat above ninety degrees, and the shortest runtime of all with the freezing mountain.  The wrong choices each deny something the memo gives: that the runtimes differ, that one tag ran in all three tests, and that heat cost the tag time rather than winning it time.",
-      "whyTheFigureIsNeeded": "Each correct statement is a pairing of a temperature with the runtime measured at it, and the memo is the only place those two sit in the same column; the article puts each temperature and its runtime in separate sentences and then spends four paragraphs on why, so the pairings have to be reassembled from prose rather than read off."
+      "whyTheFigureIsNeeded": "Each correct statement is a pairing of a temperature with the runtime measured at it, and the memo is the only place those two sit in the same column; the article puts each temperature and its runtime in separate sentences and then spends the rest of the article on why, so the pairings have to be reassembled from prose rather than read off."
     },
     {
       "id": "l5-order-longest-hold-to-shortest",
@@ -5540,7 +5540,7 @@
       "coachTopic": "research-integrate",
       "dok": 3,
       "explain": "Both rows read together say more than either says alone.  The temperatures climb from the fifties to above ninety degrees and then fall to freezing, while the runtime shortens at every step, from twenty-six days to nineteen days to just under three.  Heat costs the tag time and freezing costs it far more, which is why the memo's own line says a number describes one climate, not every climate.",
-      "whyTheFigureIsNeeded": "The answer is a comparison of one whole row against another, in the memo's own left-to-right order, and only the memo puts the three temperatures in one line above the three runtimes.  A reader working from the article alone has to hold six separate values from three different paragraphs before the pattern appears."
+      "whyTheFigureIsNeeded": "The answer is a comparison of one whole row against another, in the memo's own left-to-right order, and only the memo puts the three temperatures in one line above the three runtimes.  A reader working from the article alone has to hold six separate values from one long paragraph, split across six sentences, before the pattern appears."
     },
     {
       "id": "l6-mc-rule-lane-against-the-log",
@@ -5566,7 +5566,7 @@
         "1": "The rule lane holds what was supposed to happen, not a record that it did.  The only check-in she ever logs is the two clicks, and those land at ten twenty-two and eleven seconds, which she calls late.",
         "3": "Her thumb goes on the transmit key at ten twenty-one and comes straight off again, and the clicks arrive before she decides.  The abort sits on the rule lane because the rule named it, not because she did it."
       },
-      "explain": "The two lanes do different jobs.  One holds what the plan said would happen, and the other holds what the narrator actually wrote down.  Set side by side at ten twenty, the plan's check-in has nothing on the radio but the hiss underneath it, and that gap is what she is sitting in when she puts her thumb on the key.  The hiss is not bad news, because it is the sound of a working set with nobody talking, which is why she waits instead of pressing the key.",
+      "explain": "The two lanes do different jobs.  One holds what the plan said would happen, and the other holds what the narrator actually wrote down.  Set side by side at ten twenty, the plan's check-in has nothing on the radio but the hiss underneath it, and that gap is what she is sitting in when she puts her thumb on the key.  The hiss is not bad news, because it is the sound of a working set with nobody talking, and the narrator calls it the only comfort in this job.  What keeps her from calling the exercise off is her own list, read down in order.",
       "whyTheFigureIsNeeded": "The passage tells the rule and the narrator's own record as one continuous voice, so a reader cannot separate them; only the drawing splits them into two lanes and shows that the check-in the rule demanded and the hiss she actually logged are the same minute, one entry per lane."
     },
     {
@@ -5594,7 +5594,7 @@
         "2": "Twenty-six days is close to thirty, and close is not the same as matched.  The article treats that small gap as ordinary, because a maker's own test is run at a comfortable room temperature and tends to show the best number a device can reach."
       },
       "explain": "The table is built so each climate's temperature sits directly above the runtime it produced.  Read across, the mild coastal column holds twenty-six days, the desert column drops to nineteen, and the freezing mountain column falls to just under three days.  That is not a straight slope from warm to cold, because the hottest column is not the shortest one.  It is a comfortable middle that works and two extremes that cost runtime, with the freezing end costing far more than the hot end.",
-      "whyTheFigureIsNeeded": "The article reports each climate in its own paragraph, so the three runtimes are never in view at once; only the card sets the three temperatures in one row above the three runtimes in the next, which is what lets a child see that the hottest column is not the shortest one."
+      "whyTheFigureIsNeeded": "The article runs all three climates through one paragraph and splits every temperature from its runtime across separate sentences, so the three pairings are never aligned; only the card sets the three temperatures in one row above the three runtimes in the next, which is what lets a child see that the hottest column is not the shortest one."
     },
     {
       "id": "l6-cloze-six-stops-one-run",
@@ -5607,7 +5607,7 @@
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "The article numbers only its three moves, and then gives the counting rule and the last rule as plain paragraphs.  The drawing numbers six stops on one line, so three sightings in three unrelated places is {{0}} of the same run.  Putting the rules on the same numbered line as the moves shows that {{1}}.",
+      "stem": "The article numbers only its three moves, and then gives the counting rule and the last rule as plain paragraphs.  The drawing numbers six stops on one line, so the stop reading three sightings in three unrelated places is {{0}} of the same run.  Putting the rules on the same numbered line as the moves shows that {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -6169,7 +6169,7 @@
       "src": "art/ela-g6-spy/fig-l4-cold-weather-log.svg",
       "caption": "In the cold, two of the four tags went silent at about sixty hours, and the longest one stopped just past sixty-eight.  This log is not published anywhere either.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A log card showing the trip temperature and, at its head, the thirty-day battery life the brief claims, above a two-column table pairing three groups of tags with the hours they lasted.",
+      "alt": "A log card showing the trip temperature and, at its head, the thirty-day battery life the brief claims, above a two-column table pairing three groups of tags with the point each went silent.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-cold-weather-log",
