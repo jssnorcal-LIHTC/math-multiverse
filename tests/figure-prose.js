@@ -99,6 +99,14 @@ const BANNED_WORDS = [
   'hatched\\s+(?:band|area|region|strip|stretch|section|panel)',
   'cross-?hatch\\w*', 'connector', 'glyph', 'viewbox', 'tspan', 'polyline',
   'swimlane', 'ordinal axis', 'the node', 'a node', 'nodes',
+  // Added after C4 round 5 found "Finish the description of the schematic." in a stem, on a figure
+  // whose own caption says "The boxes run down the page" and whose sibling item opens "Two boxes sit
+  // one above the other". Counted before banning, which is the rule that saved "labelled": across
+  // every pack, "schematic" appears in exactly TWO reader-facing fields, both written by this
+  // program, against 151 uses of "labelled" that made it this repo's own form. Two is not a
+  // convention, it is a slip. The word is a document TYPE in a dataTable and belongs there; it is
+  // not what a child calls the picture in front of them.
+  'schematic', 'facsimile',
 ];
 
 const EMPTY_CLAIM = new RegExp(

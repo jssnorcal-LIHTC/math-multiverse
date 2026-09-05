@@ -526,6 +526,28 @@ function renderFacsimile(dataTable, accentColor) {
     y += 6;
   }
 
+  // A BOX SPANS ITS WHOLE RUN, not one rect per line. An author marks EVERY line of an instruction
+  // `box` because the instruction wraps, and drawing one outline per line rendered the diet card's
+  // two-line thiamine instruction as two stacked rectangles of different widths (425px over 604px,
+  // sharing only their left edge), which reads as two separate boxed statements. The card it
+  // transcribes says the opposite: "Under the fish comes a line the card sets apart inside its own
+  // box" -- one box. Found by the C4 round-5 drawing lens, which read the shipped SVG rather than
+  // the dataTable.
+  //
+  // A RUN OF ONE IS BYTE-IDENTICAL to what this drew before (top y - font, height font + 12, width
+  // w + 16), so no single-line box anywhere moves; measured across all six packs, exactly one
+  // figure has a run longer than one.
+  const boxRunStart = new Array(lines.length).fill(-1);
+  const boxRunEnd = new Array(lines.length).fill(-1);
+  for (let i = 0; i < lines.length; i++) {
+    const l = lines[i];
+    if (!l || typeof l !== 'object' || l.emphasis !== 'box') continue;
+    boxRunStart[i] = (i > 0 && boxRunStart[i - 1] !== -1) ? boxRunStart[i - 1] : i;
+  }
+  for (let i = 0; i < lines.length; i++) {
+    if (boxRunStart[i] !== -1) boxRunEnd[boxRunStart[i]] = i;   // last write wins: the run's end
+  }
+
   lines.forEach((l, i) => {
     if (!l || typeof l !== 'object') refuse(`facsimile: line ${i} is not an object`);
     const em = l.emphasis;
@@ -564,8 +586,23 @@ function renderFacsimile(dataTable, accentColor) {
     const t = { text: l.text };
     const w = estimateTextWidth(t.text, font);
     if (em === 'box') {
-      out.push(rect(innerX - 8, y - font, w + 16, font + 12,
-        { stroke: accent, strokeWidth: 2, rx: 3, extra: 'data-emphasis="box"' }));
+      // Only the FIRST line of a run draws, and it draws the whole run. Lines advance by a fixed
+      // LABEL_FONT + 10 whatever their own font, so the run's extent is arithmetic, and the width
+      // is the widest line in it measured at the font that line will actually render with.
+      if (boxRunStart[i] === i) {
+        const step = LABEL_FONT + 10;
+        const end = boxRunEnd[i];
+        let widest = 0;
+        for (let k = i; k <= end; k++) {
+          const kt = lines[k].text;
+          const kf = estimateTextWidth(kt, LABEL_FONT) <= room ? LABEL_FONT : TICK_FONT;
+          widest = Math.max(widest, estimateTextWidth(kt, kf));
+        }
+        const top = y - font;
+        const bottom = y + (end - i) * step + 12;
+        out.push(rect(innerX - 8, top, widest + 16, bottom - top,
+          { stroke: accent, strokeWidth: 2, rx: 3, extra: 'data-emphasis="box"' }));
+      }
     } else if (em === 'underline') {
       out.push(line(innerX, hp(y + 5), innerX + w, hp(y + 5), accent, 2, { extra: 'data-emphasis="underline"' }));
     }

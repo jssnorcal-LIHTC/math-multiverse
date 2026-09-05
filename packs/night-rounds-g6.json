@@ -5069,7 +5069,7 @@
         "2": "That reverses the end of the round.  The tortoise yard is the last stop before the gate, so the gate log cannot come ahead of it.",
         "3": "The red foxes are fed near the top of the hill, right after the owls, long before the walk reaches the marsh."
       },
-      "explain": "The round works downhill, and the map gives every stop a number, so the two stops after the timed one are stop 5, the tortoise yard, and stop 6, the gate log.  The otter pool and the red foxes are already behind her by then, and the gate log cannot come first because the walk ends there.",
+      "explain": "The round works downhill, and the map gives every stop a number, so the two stops after the timed one are stop 5, the tortoise yard, and stop 6, the gate log.  The otter pool and the red foxes are already behind by then, and the gate log cannot come first because the walk ends there.",
       "whyTheFigureIsNeeded": "Only the drawing numbers the six stops and hangs the time note on stop 4, so only the drawing says which stops still lie ahead of that numbered position; the prose scatters the route across paragraphs and never numbers a stop."
     },
     {
@@ -5108,7 +5108,7 @@
           1
         ]
       ],
-      "explain": "The map does three different jobs at once: it starts the count at the owls, it carries that count downhill to the tortoise yard at five, and it hangs a single time note on the marsh boardwalk.  Reading the drawing as a plain list of six places loses both the order and the one stop that is marked out from the rest.",
+      "explain": "The map does three different jobs at once.  It starts the count at the owls, it carries that count downhill to the tortoise yard at five, and it hangs a single time note on the marsh boardwalk.  Reading the drawing as a plain list of six places loses both the order and the one stop that is marked out from the rest.",
       "whyTheFigureIsNeeded": "The drawing is what assigns each stop a number and what marks one stop out from the other five with a time beside it, a comparison across the whole route that no single sentence of the prose makes."
     },
     {
@@ -5134,7 +5134,7 @@
       "distractorRationale": {
         "1": "The plan puts both of them across the yard from the burrow, at the feeding shelf and the north wall.",
         "2": "That reverses the two finds.  Salt was pressed against the north wall, and Ada was underneath the feeding shelf.",
-        "3": "Juniper is not with them anywhere;  she was nowhere at all during the search, and the plan draws her alone at the corner."
+        "3": "Juniper is not with them anywhere;  Juniper was nowhere at all during the search, and the plan draws that tortoise alone at the corner."
       },
       "explain": "The plan splits the yard in two.  Ada under the feeding shelf and Salt at the north wall sit together on one side, while the mouth of a burrow and Juniper sit at the corner across from them.  Swapping Ada and Salt, or gathering all three tortoises into one corner, disagrees with the search and with the drawing at the same time.",
       "whyTheFigureIsNeeded": "The plan is the only place the yard's geography appears: the prose names each spot separately but never says that the feeding shelf and the north wall sit on the side of the yard opposite the burrow mouth."
@@ -5155,7 +5155,7 @@
         "Salt is drawn nearer the north wall than any other animal in the yard.",
         "The feeding shelf is drawn between Salt and Ada.",
         "Juniper is drawn at the far corner, apart from the other two tortoises.",
-        "Ada is drawn pressed against the north wall with her head tucked in.",
+        "Ada is drawn pressed against the north wall, head tucked in.",
         "A second burrow mouth is drawn on the side of the yard where Ada was found."
       ],
       "key": [
@@ -5262,7 +5262,7 @@
         0,
         2
       ],
-      "explain": "The schematic runs one way only.  Raw frozen fish carries thiaminase, thiaminase breaks thiamine apart, a shortage follows, and appetite loss is the sign that arrives first.  Any other order puts the sign before the shortage that causes it, or the enzyme before the fish that carries it.",
+      "explain": "The drawing runs one way only.  Raw frozen fish carries thiaminase, thiaminase breaks thiamine apart, a shortage follows, and appetite loss is the sign that arrives first.  Any other order puts the sign before the shortage that causes it, or the enzyme before the fish that carries it.",
       "whyTheFigureIsNeeded": "The drawing fixes the mechanism as a single left-to-right chain of four boxes, while the memo scatters those parts across two paragraphs and never sets them out in one order."
     },
     {
@@ -5297,7 +5297,7 @@
         }
       ],
       "explain": "The heading and the tally strip only make sense read together.  Two feeds a day across fourteen days is twenty-eight feeds, which is exactly the number of fish squares on the strip.  The third column on the strip is headed supplement column, so a blank there means the tablet went uninitialed, and says nothing at all about the fish.",
-      "whyTheFigureIsNeeded": "The drawing sets the feeding schedule in the card's heading directly above the tally strip, so two feeds a day can be counted against the twenty-eight squares that the passage never multiplies out."
+      "whyTheFigureIsNeeded": "The drawing sets the feeding schedule in the card's heading on the same card as the tally strip, so two feeds a day can be counted against the twenty-eight squares that the passage never multiplies out."
     },
     {
       "id": "l3-order-one-clock-two-tracks",
@@ -5520,7 +5520,7 @@
         "2": "The clipping stops printing that sentence at Marlowe Creek Wildlife, so those words are not on the card at all and nothing there is marked.",
         "4": "The byline sits in the clipping's header, above the article text, so it is not one of the marked lines at all."
       },
-      "explain": "The marking picks out the two claims our own paperwork contradicts, the upkeep claim about inspections and the weather claim about a High Wind Warning.  The two lines printed above them are the article's opening sentence, which the record neither disputes nor confirms, and the byline is a header row rather than a claim about the storm.",
+      "explain": "The marking picks out the two claims our own paperwork contradicts, the upkeep claim about inspections and the weather claim about a High Wind Warning.  The two lines printed above them are the article's opening sentence, printed with no mark under it, and the byline is a header row rather than a claim about the storm.",
       "whyTheFigureIsNeeded": "The underline exists only on the drawing, so which of the clipping's printed lines carry the mark, and which sit plainly above them or up in the header, can be read nowhere but the facsimile."
     },
     {
@@ -5576,7 +5576,7 @@
       "dok": 2,
       "stem": "The transfer slip has a row marked place.  Which place does the slip record there?",
       "choices": [
-        "The boardwalk, where the keeper was standing when her light found the bird",
+        "The boardwalk, where the keeper was standing when the light found the bird",
         "The spot thirty feet out in the shallow water, where the heron was standing",
         "The maintenance gate, where the van pulled up a little after eight",
         "The maintenance binder, where the carbon copy was carried that night"
@@ -5587,8 +5587,8 @@
         "2": "The gate is where the van stopped and where the slip was written on the hood, which is a different place from where the heron was found.",
         "3": "The binder is where the copy went after the night was over, and it is not an entry on the slip at all."
       },
-      "explain": "Three places turn up in this account, the boardwalk, the water, and the maintenance gate, and only the slip itself shows which one the form keeps.  The place row records where the heron was, thirty feet out in the shallow water, because the slip is a record of the bird rather than of the keeper's night.  The other three answers are all real places in the story, and none of them is what the form was asking for.",
-      "whyTheFigureIsNeeded": "The passage names three different places on that night and never says which one the form's place row holds, so only the drawing settles it."
+      "explain": "Several places turn up in this account, and only the slip itself shows which one the form keeps.  The place row records where the heron was, thirty feet out in the shallow water, because the slip is a record of the bird rather than of the keeper's night.  The other three answers are all real places in the story, and none of them is what the form was asking for.",
+      "whyTheFigureIsNeeded": "The passage names several different places on that night and never says which one the form's place row holds, so only the drawing settles it."
     },
     {
       "id": "l5-mc-the-row-left-blank",
@@ -5603,14 +5603,14 @@
       "dok": 3,
       "stem": "What does the transfer slip show about the keeper who found the heron?",
       "choices": [
-        "The slip does not name her: the row reading the name of the keeper who found the bird has nothing after it",
-        "The slip enters her name just under the condition row",
-        "The slip carries her signature next to Alva's",
-        "The slip lists her in the same block as Whitlock"
+        "The slip does not name the finder: the row reading the name of the keeper who found the bird has nothing after it",
+        "The slip enters the keeper's name just under the condition row",
+        "The slip carries the keeper's signature next to Alva's",
+        "The slip lists the keeper in the same block as Whitlock"
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "That is where her row sits, and the row is printed with its label and left with nothing after it.",
+        "1": "That is where the keeper's row sits, and the row is printed with its label and left with nothing after it.",
         "2": "Whitlock signed it and Alva signed it;  the keeper only carried the carbon copy back to the binder.",
         "3": "Whitlock's name sits in the signature block, which is a separate part of the slip from the row for the keeper who found the bird."
       },
@@ -5633,7 +5633,7 @@
       "choices": [
         "Nothing follows the printed row reading the name of the keeper who found the bird.",
         "The signature block holds two names, Whitlock and Alva Reyes.",
-        "A stamp across the slip reads carbon copy.",
+        "A stamp in the top corner of the slip reads carbon copy.",
         "The time entered on the slip is 7:22, the moment Whitlock reached Alva by telephone.",
         "The slip records what Alva plans to do for the bird's wing."
       ],
@@ -5707,7 +5707,7 @@
       ],
       "coachTopic": "research-integrate",
       "dok": 3,
-      "explain": "The timeline runs by the clock rather than by which record an entry came from, so the pinned pedestrian gate at 7:44 comes first, then the eight o'clock line, then Ferris sending keepers out in pairs at 8:05, and last the peak gust at 9:20.  The page itself reaches the pairing order a paragraph before it reaches the blank line, so putting 8:05 ahead of 8 p.m. is the swap a reader makes by following the paragraphs instead of the clock.",
+      "explain": "The timeline runs in clock order rather than by which record an entry came from.  That puts the pinned pedestrian gate at 7:44 first, then the eight o'clock line, then Ferris sending keepers out in pairs at 8:05, and last the peak gust at 9:20.  The page itself reaches the pairing order a paragraph before it reaches the blank line.  Putting 8:05 ahead of 8 p.m. is the swap a reader makes by following the paragraphs instead of the clock.",
       "whyTheFigureIsNeeded": "The page reports the 8:05 pairing order a paragraph before it reaches the blank eight o'clock line, so only the drawing shows the uninitialed check sitting ahead of the pairing order on the clock."
     },
     {
@@ -5772,7 +5772,7 @@
       "passageId": "p-l6-morning-report",
       "figureId": "fig-l6-morning-report",
       "figureFact": "a failure of procedure",
-      "stem": "Finish the description of the schematic.  The box reading a failure of procedure follows straight from {{0}}, and the arrow out of it runs down to {{1}}.",
+      "stem": "Finish the description of the boxes.  The box reading a failure of procedure follows straight from {{0}}, and the arrow out of it runs down to {{1}}.",
       "blanks": [
         {
           "choices": [
