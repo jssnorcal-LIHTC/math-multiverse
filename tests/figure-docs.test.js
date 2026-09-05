@@ -534,6 +534,60 @@ check('every renderer refuses a table whose type does not match it', () => {
 // occupy the identical rectangle and still render. Found by LOOKING at a plan where an arrow
 // arriving horizontally and an arrow arriving vertically met at the same node, which printed
 // "The badge reads green" straight through "straight down".
+// AN ORDINAL LANE POSITIONS BY TIME, NOT BY INDEX. Two entries at the same stated time must land
+// on the same vertical, because evenly spaced dots read as distinct moments and the drawing would
+// otherwise assert an order the clock does not give.
+check('an ordinal timeline puts two events at the SAME time on the same vertical', () => {
+  const dt = {
+    type: 'timeline', title: 'tied', tracks: ['the rule', 'the log'],
+    events: [
+      { t: 'ten fourteen', track: 'the log', label: 'goes in' },
+      { t: 'ten twenty', track: 'the rule', label: 'checks in' },
+      { t: 'ten twenty', track: 'the log', label: 'only the hiss' },
+      { t: 'ten twenty-two', track: 'the rule', label: 'calls it off' },
+    ],
+  };
+  const svg = docs.renderTimeline(dt, ACCENT);
+  const cx = [...svg.matchAll(/<circle cx="([\d.]+)" cy="([\d.]+)"/g)].map((m) => [+m[1], +m[2]]);
+  assert.strictEqual(cx.length, 4, 'four markers');
+  const tied = cx.filter((p) => Math.abs(p[0] - cx[1][0]) < 0.01);
+  assert.strictEqual(tied.length, 2, 'the two "ten twenty" events must share an x');
+  assert.notStrictEqual(tied[0][1], tied[1][1], 'and be separated by their tracks, not by x');
+  // NEGATIVE DIRECTION: three DISTINCT times give three distinct x values, so the check above is
+  // about ties and not about everything collapsing.
+  const xs = new Set(cx.map((p) => p[0].toFixed(2)));
+  assert.strictEqual(xs.size, 3, 'three distinct times give three distinct positions');
+});
+
+check('NEGATIVE CONTROL: two events tied on the SAME track are refused, not drawn on one point', () => {
+  const dt = {
+    type: 'timeline', title: 'tied', tracks: ['the log'],
+    events: [
+      { t: 'ten fourteen', track: 'the log', label: 'goes in' },
+      { t: 'ten twenty', track: 'the log', label: 'checks in' },
+      { t: 'ten twenty', track: 'the log', label: 'only the hiss' },
+    ],
+  };
+  assert.throws(() => docs.renderTimeline(dt, ACCENT), /share the time/,
+    'two events at one time on one track would be drawn on top of each other');
+});
+
+check('a key label and a key lead both WRAP rather than forcing a transcription to be shortened', () => {
+  const dt = {
+    type: 'timeline', title: 'long', tracks: ['the log'],
+    events: [
+      { t: 'ten twenty-two and eleven seconds', track: 'the log', label: 'nothing on the radio but the hiss' },
+      { t: 'ten fourteen', track: 'the log', label: 'goes in' },
+    ],
+  };
+  const svg = docs.renderTimeline(dt, ACCENT);
+  assert.ok(svg.includes('tspan'), 'a long lead or label wraps');
+  const flat = svg.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
+  assert.ok(flat.includes('ten twenty-two and eleven seconds'),
+    'the wrapped lead still reads as one collapsed string, which is what the fidelity gate reads');
+  assert.ok(flat.includes('nothing on the radio but the hiss'), 'and so does the wrapped label');
+});
+
 // A LINE AT THE FOOT OF A PAGE IS ITS OWN THING, not a second column. Cold Signal's log card
 // authored "one more line at the bottom of the page" as a parallel COLUMN, which split one sentence
 // across four ruled rows so each fragment paired with the log entry beside it -- four facts the

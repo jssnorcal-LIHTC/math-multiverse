@@ -187,42 +187,82 @@ function keyBlock(entries, top, accent) {
   const availH = VB_H - PAD - top;
   const gutter = 24;
 
-  let cols = 1;
-  let rowH = Math.min(ROW_H, Math.floor(availH / entries.length));
-  if (rowH < KEY_ROW_MIN) {
-    cols = 2;
-    rowH = Math.min(ROW_H, Math.floor(availH / Math.ceil(entries.length / 2)));
-    if (rowH < KEY_ROW_MIN) {
-      refuse(`key: ${entries.length} entries do not fit in ${Math.floor(availH)}px even in two columns; `
-        + 'split the figure or shorten the sequence');
-    }
-  }
-  const colW = (VB_W - 2 * PAD - (cols - 1) * gutter) / cols;
-  const perCol = Math.ceil(entries.length / cols);
-
+  // THE COLUMN COUNT IS CHOSEN AFTER WRAPPING, NOT BEFORE IT. It used to be decided from the row
+  // count alone, so a key whose labels wrapped could pass the one-column test on row height and then
+  // overflow once the wrapped lines were laid out -- with no second column ever tried. Both layouts
+  // are now measured for real and the first that fits wins.
+  const KEY_LINE_H = Math.max(NOTE_FONT + 2, 20);
   const numW = 30;
-  const leadFont = cols === 1 ? TICK_FONT : NOTE_FONT;
-  const labelFont = cols === 1 ? LABEL_FONT : TICK_FONT;
-  const leadW = entries.reduce((m, e) => Math.max(m, estimateTextWidth(e.lead || '', leadFont)), 0);
-  const labelX0 = numW + (leadW ? Math.ceil(leadW) + 14 : 0);
-  const room = colW - labelX0;
-
-  entries.forEach((e) => {
-    if (estimateTextWidth(e.label, labelFont) > room) {
-      refuse(`key: "${e.label}" needs ${Math.ceil(estimateTextWidth(e.label, labelFont))}px but only `
-        + `${Math.floor(room)}px remain beside its number and time; shorten the transcription or `
-        + 'move the detail into the caption');
+  const layoutFor = (cols) => {
+    const colW = (VB_W - 2 * PAD - (cols - 1) * gutter) / cols;
+    const perCol = Math.ceil(entries.length / cols);
+    const rowH = Math.min(ROW_H, Math.floor(availH / perCol));
+    if (rowH < KEY_ROW_MIN) return null;
+    const leadFont = cols === 1 ? TICK_FONT : NOTE_FONT;
+    const labelFont = cols === 1 ? LABEL_FONT : TICK_FONT;
+    // THE LEAD WRAPS TOO. A time is a transcription like any other and some of them are long --
+    // "ten twenty-two and eleven seconds" is thirty-three characters, and on one line it took so
+    // much of the row that no label fitted beside it in either layout. Capping the lead at 40% of
+    // the column keeps the label column usable; a lead that still will not fit fails the layout,
+    // and the caller tries the next one.
+    const leadCap = colW * 0.4;
+    const leads = entries.map((e) => (e.lead ? wrapToWidth(e.lead, leadFont, leadCap, 2) : []));
+    const leadW = leads.reduce((m, w) =>
+      Math.max(m, w.reduce((n, ln) => Math.max(n, estimateTextWidth(ln, leadFont)), 0)), 0);
+    if (leadW > leadCap) return null;
+    const labelX0 = numW + (leadW ? Math.ceil(leadW) + 14 : 0);
+    const room = colW - labelX0;
+    if (room <= 0) return null;
+    const wrapped = entries.map((e) => wrapToWidth(e.label, labelFont, room, 2));
+    const widest = wrapped.map((w) => w.reduce((m, ln) => Math.max(m, estimateTextWidth(ln, labelFont)), 0));
+    if (widest.some((w) => w > room)) return null;          // does not fit even wrapped to two lines
+    // A row is as tall as its TALLER half, lead or label.
+    const rowHs = wrapped.map((w, i) =>
+      rowH + (Math.max(w.length, leads[i].length || 1) - 1) * KEY_LINE_H);
+    for (let c = 0; c < cols; c++) {
+      const h = rowHs.slice(c * perCol, (c + 1) * perCol).reduce((a, b) => a + b, 0);
+      if (h > availH) return null;
     }
-  });
+    return { cols, colW, perCol, rowH, leadFont, labelFont, labelX0, room, wrapped, leads, rowHs };
+  };
+
+  const L = layoutFor(1) || layoutFor(2);
+  if (!L) {
+    refuse(`key: ${entries.length} entries do not fit in ${Math.floor(availH)}px even in two columns `
+      + 'with every label wrapped to two lines; split the figure or shorten the sequence');
+  }
+  const { cols, colW, perCol, leadFont, labelFont, labelX0 } = L;
+  const wrappedLabels = L.wrapped;
+  const wrappedLeads = L.leads;
+  const rowHs = L.rowHs;
+
+  // A KEY LABEL WRAPS, up to two lines, exactly as a table cell, a node label and a footnote do.
+  // It used to refuse outright, which pushed the author toward shortening a TRANSCRIPTION to fit a
+  // column -- and on fig-l3-relay-room it had already cost the truth: the record says the radio
+  // clicks at "ten twenty-two and eleven seconds", eleven seconds AFTER the cutoff the rule sets,
+  // and the figure carried the time truncated to "ten twenty-two" so the click and the cutoff were
+  // drawn as one moment. Restoring the real time widened the time column past what a single-line
+  // label could survive. The picture must bend to the record, not the record to the picture.
 
   entries.forEach((e, i) => {
     const col = Math.floor(i / perCol);
     const row = i % perCol;
     const x = PAD + col * (colW + gutter);
-    const y = top + row * rowH + NOTE_FONT;
+    let y = top + NOTE_FONT;
+    for (let r = col * perCol; r < col * perCol + row; r++) y += rowHs[r];
     out.push(text(x + numW - 8, y, NOTE_FONT, e.n + '.', { anchor: 'end', fill: accent }));
-    if (e.lead) out.push(text(x + numW, y, leadFont, e.lead, { opacity: '0.82' }));
-    out.push(text(x + labelX0, y, labelFont, e.label, e.mark ? { extra: `data-kind="${e.mark}"` } : undefined));
+    if (e.lead) {
+      const wl = wrappedLeads[i];
+      if (wl.length <= 1) out.push(text(x + numW, y, leadFont, e.lead, { opacity: '0.82' }));
+      else out.push(textLines(x + numW, y, leadFont, wl, { lineH: KEY_LINE_H, opacity: '0.82' }));
+    }
+    const w = wrappedLabels[i];
+    if (w.length === 1) {
+      out.push(text(x + labelX0, y, labelFont, e.label, e.mark ? { extra: `data-kind="${e.mark}"` } : undefined));
+    } else {
+      out.push(textLines(x + labelX0, y, labelFont, w,
+        Object.assign({ lineH: KEY_LINE_H }, e.mark ? { extra: `data-kind="${e.mark}"` } : {})));
+    }
   });
   return { out };
 }
@@ -337,24 +377,44 @@ function renderTimeline(dataTable, accentColor) {
     const span = hi - lo;
     xOf = (v) => (span === 0 ? (AX_L + AX_R) / 2 : AX_L + ((v - lo) / span) * (AX_R - AX_L));
   } else {
-    const n = events.length;
-    const byTime = new Map();
-    events.forEach((e, i) => { if (!byTime.has(e.t)) byTime.set(e.t, i); });
-    xOf = (v) => (n === 1 ? (AX_L + AX_R) / 2 : AX_L + (v / (n - 1)) * (AX_R - AX_L));
+    // AN ORDINAL LANE POSITIONS BY TIME, NOT BY INDEX, so two entries at the SAME time sit on the
+    // same vertical. Positioning by index put "ten twenty" on the rule lane a full step to the left
+    // of "ten twenty" on the log lane, and evenly spaced dots read as distinct moments: the drawing
+    // positively asserted that one happened before the other when the clock gives no such order.
+    // Found by the Cold Signal pixel review on fig-l3-relay-room, where two of the four pairs are
+    // tied. Ranking by distinct time also spaces the lane over the moments it actually has rather
+    // than over its event count.
+    const order = [];
+    const rankOf = new Map();
+    events.forEach((e) => { if (!rankOf.has(e.t)) { rankOf.set(e.t, order.length); order.push(e.t); } });
+    const m = order.length;
+    xOf = (r) => (m === 1 ? (AX_L + AX_R) / 2 : AX_L + (r / (m - 1)) * (AX_R - AX_L));
+    // Two tied events on the SAME track would now be drawn on top of each other. Different tracks
+    // is the honest case -- it is what "simultaneous" looks like -- so only the collision refuses.
+    const seen = new Map();
+    events.forEach((e) => {
+      const key = e.t + ' ' + (e.track || '');
+      if (seen.has(key)) {
+        refuse(`timeline: two events on track ${JSON.stringify(e.track || '')} share the time `
+          + `${JSON.stringify(e.t)}, so they would be drawn on the same point; put them on different `
+          + 'tracks or give them the times the record actually gives');
+      }
+      seen.set(key, true);
+    });
     gaps.forEach((g, gi) => {
-      if (!byTime.has(g.from) || !byTime.has(g.to)) {
+      if (!rankOf.has(g.from) || !rankOf.has(g.to)) {
         refuse(`timeline: gap ${gi} runs ${JSON.stringify(g.from)} to ${JSON.stringify(g.to)}, `
           + 'but this timeline is not on a clock scale, so a gap must name two event times exactly');
       }
     });
-    xOf.byTime = byTime;
+    xOf.rankOf = rankOf;
   }
   const posOf = timeMode
     ? (i) => xOf(parsed[i])
-    : (i) => xOf(i);
+    : (i) => xOf(xOf.rankOf.get(events[i].t));
   const posOfTime = timeMode
     ? (s) => xOf(parseClock(s))
-    : (s) => xOf(xOf.byTime.get(s));
+    : (s) => xOf(xOf.rankOf.get(s));
 
   const out = head(dt.title);
 
