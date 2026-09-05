@@ -1142,7 +1142,10 @@ function renderRoute(dataTable, accentColor) {
         return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a), a: a, s: s };
       });
       const poly = pts.map((p) => `${n2(p.x)},${n2(p.y)}`).join(' ');
-      out.push(`<polygon points="${poly}" fill="none" stroke="${PLOT_GRID}" stroke-width="2" data-path="loop" />`);
+      // Broken for the same reason the line route's rule is: a route carries ORDER, never distance.
+      // No shipped pack draws a loop today, so this keeps the device meaning one thing if one ever
+      // does, rather than leaving a solid closed path to read as measured.
+      out.push(`<polygon points="${poly}" fill="none" stroke="${PLOT_GRID}" stroke-width="2" stroke-dasharray="7 6" data-path="loop" />`);
       pts.forEach((p, i) => {
         out.push(circle(p.x, p.y, 13, { fill: accent }));
         out.push(text(p.x, p.y + 7, NOTE_FONT, String(p.s.n), { anchor: 'middle', fill: '#0f1218' }));
@@ -1162,9 +1165,26 @@ function renderRoute(dataTable, accentColor) {
   }
 
   // A line route, and the fallback for a loop whose labels will not fit around it.
+  //
+  // ITS RULE IS BROKEN, AND IT SAYS SO, for the same reason an ordinal timeline's is. A route is a
+  // sequence of places, and a passage gives an order rather than distances, so evenly spaced stops
+  // carry no scale for the spacing to mean. Drawn SOLID it was the one figure in Cold Signal that
+  // looked like it was to scale, using the identical numbered-dot vocabulary as the two dashed L3
+  // timelines beside it -- and it is the only one of the three with no clock data behind it at all.
+  // A child who has seen all three reads the solid one as the measured one. Caught by the pixel
+  // review, which put it as: "no legend anywhere explains solid versus dashed".
   const y = bodyTop + 46;
   const AX_L = PAD + 14, AX_R = VB_W - PAD - 14;
-  out.push(line(AX_L, hp(y), AX_R, hp(y), PLOT_GRID, 2, { extra: `data-path="${esc(path)}"` }));
+  out.push(line(AX_L, hp(y), AX_R, hp(y), PLOT_GRID, 2,
+    { dash: '7 6', extra: `data-path="${esc(path)}"` }));
+  {
+    const NOTE = 'in order, not to scale';
+    const noteW = estimateTextWidth(NOTE, NOTE_FONT);
+    const titleRight = dataTable.title ? PAD + estimateTextWidth(dataTable.title, TITLE_FONT) : PAD;
+    const fits = titleRight <= VB_W - PAD - noteW - 24;
+    out.push(text(VB_W - PAD, fits ? TITLE_Y : TITLE_Y + 26, NOTE_FONT, NOTE,
+      { anchor: 'end', opacity: '0.62' }));
+  }
   stops.forEach((s, i) => {
     const x = stops.length === 1 ? (AX_L + AX_R) / 2 : AX_L + (i / (stops.length - 1)) * (AX_R - AX_L);
     out.push(circle(x, y, 13, { fill: accent }));
