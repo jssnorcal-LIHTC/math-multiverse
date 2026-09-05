@@ -1523,14 +1523,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-mc-what-the-run-ends-at",
-      "itemHash": "a0b4b87c4f4ad01f",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l1-match-stop-to-its-number",
       "itemHash": "7462935b785d4d43",
       "blind": [
@@ -1540,6 +1532,36 @@
       ],
       "authored": [
         2,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ms-what-the-two-lines-show",
+      "itemHash": "37d77cceb1d535c1",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-cloze-which-line-carries-each-note",
+      "itemHash": "1f21e3c7ba538982",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
         0,
         1
       ],
@@ -1607,14 +1629,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l3-mc-the-time-on-both-records",
-      "itemHash": "17fbe980a6d7b560",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l3-ms-what-the-added-line-shows",
       "itemHash": "e3ce099447c6de30",
       "blind": [
@@ -1626,6 +1640,20 @@
         0,
         1,
         2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-cloze-which-record-holds-the-thumb",
+      "itemHash": "79bbe623e7abaf55",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
       ],
       "confidence": "high",
       "status": "agree"
@@ -1677,6 +1705,22 @@
       "status": "agree"
     },
     {
+      "itemId": "l5-ms-what-the-climate-memo-shows",
+      "itemHash": "bdd34597d8b1efb4",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l5-order-longest-hold-to-shortest",
       "itemHash": "9508c11c8f02ff59",
       "blind": [
@@ -1723,20 +1767,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-cloze-six-stops-one-run",
-      "itemHash": "db5d00481bc8c9c5",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-ms-claim-against-the-two-runs",
       "itemHash": "60d417de5cfe485b",
       "blind": [
@@ -1753,38 +1783,16 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-ms-what-the-two-lines-show",
-      "itemHash": "37d77cceb1d535c1",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-cloze-which-line-carries-each-note",
-      "itemHash": "1f21e3c7ba538982",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
+      "itemId": "l1-mc-what-the-run-ends-at",
+      "itemHash": "6caf34375ca99564",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l2-ms-two-columns-read",
-      "itemHash": "41b724c1569c79e5",
+      "itemHash": "631ba766b4550722",
       "blind": [
         0,
         1,
@@ -1799,22 +1807,16 @@
       "status": "agree"
     },
     {
-      "itemId": "l3-cloze-which-record-holds-the-thumb",
-      "itemHash": "79bbe623e7abaf55",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
+      "itemId": "l3-mc-the-time-on-both-records",
+      "itemHash": "0bfdb84b9789c0ee",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l4-ms-reading-across-the-cold-log",
-      "itemHash": "b6b05588731016d0",
+      "itemHash": "9ec93673e5764f08",
       "blind": [
         0,
         2,
@@ -1829,17 +1831,15 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-ms-what-the-climate-memo-shows",
-      "itemHash": "bdd34597d8b1efb4",
+      "itemId": "l6-cloze-six-stops-one-run",
+      "itemHash": "e1a09b0b68cc9cf6",
       "blind": [
         0,
-        1,
-        2
+        0
       ],
       "authored": [
         0,
-        1,
-        2
+        0
       ],
       "confidence": "high",
       "status": "agree"
