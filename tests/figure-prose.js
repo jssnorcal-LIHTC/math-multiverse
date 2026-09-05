@@ -127,7 +127,23 @@ const EMPTY_CLAIM = new RegExp(
 
 // A dataTable may only support an emptiness claim if it SAYS something is empty. These are the
 // only two ways this schema can say it.
+// A TABLE CELL DRAWN EMPTY IS A DRAWN BLANK.  This used to look only for emphasis:"blank" and an
+// empty `text`, so it could not see the two places a facsimile actually renders a blank: an empty
+// entry in columns[].rows, and an empty columns[].heading.  It therefore reported that
+// fig-l2-three-realms "carries no blank field" -- the Egyptian ruler cell, which is the single most
+// load-bearing blank in the pack and the whole subject of l2-mc-three-realms-ruler-row -- and that
+// fig-l4-archive-believes has none, when its row-label column heading is drawn empty beside two
+// filled ones.  Both are false statements about the drawing.
+//
+// This makes the gate fire LESS, which is the direction to be careful in.  It is taken anyway
+// because the old answer was wrong about the picture, and a gate that is wrong about the picture
+// forces correct prose to be rewritten to suit it.  The widening is deliberately narrow: an empty
+// string counts only where a facsimile RENDERS a cell, not anywhere in the table.
 function drawsAnEmptyField(dt) {
+  for (const col of (dt.columns || [])) {
+    if (typeof col.heading === 'string' && col.heading.trim() === '') return true;
+    if ((col.rows || []).some((r) => typeof r === 'string' && r.trim() === '')) return true;
+  }
   const hit = (o) => o && typeof o === 'object'
     && (o.emphasis === 'blank' || (typeof o.text === 'string' && o.text.trim() === ''));
   const walk = (n) => {
@@ -276,6 +292,17 @@ function controls() {
     columns: [{ heading: 'A', rows: ['r1', 'r2', 'r3'] }, { heading: 'B', rows: ['r1', 'r2', 'r3'] }] } };
   run('columns facsimile: "three rows" where each column holds three', { id: 'ctl7', stem: 'The left column holds three rows.' }, cols, false);
   run('columns facsimile: "five rows" where each column holds three', { id: 'ctl8', stem: 'The card sets out five rows.' }, cols, true);
+
+  // An empty CELL and an empty HEADING are drawn blanks; a filled table is not.
+  const blankCell = { id: 'ctl-cell', dataTable: { type: 'facsimile',
+    columns: [{ heading: 'A', rows: ['x', ''] }, { heading: 'B', rows: ['y', 'z'] }] } };
+  const blankHead = { id: 'ctl-head', dataTable: { type: 'facsimile',
+    columns: [{ heading: '', rows: ['x'] }, { heading: 'B', rows: ['y'] }] } };
+  const fullTable = { id: 'ctl-full', dataTable: { type: 'facsimile',
+    columns: [{ heading: 'A', rows: ['x'] }, { heading: 'B', rows: ['y'] }] } };
+  run('emptiness claim over a table with an empty CELL', { id: 'ctl9', stem: 'One cell is left blank.' }, blankCell, false);
+  run('emptiness claim over a table with an empty HEADING', { id: 'ctl10', stem: 'One cell is left blank.' }, blankHead, false);
+  run('emptiness claim over a table with NO blank still goes red', { id: 'ctl11', stem: 'One cell is left blank.' }, fullTable, true);
 
   const noBlank = { id: 'ctl-fac', dataTable: { type: 'facsimile', lines: [{ text: 'a name' }] } };
   const withBlank = { id: 'ctl-fac2', dataTable: { type: 'facsimile', lines: [{ text: 'a name', emphasis: 'blank' }] } };
