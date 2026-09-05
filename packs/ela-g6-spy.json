@@ -4995,7 +4995,7 @@
       ],
       "coachTopic": "evidence-key-details",
       "dok": 3,
-      "stem": "The drawing sets the method out as two lines, one for each person.  Choose the three the drawing actually shows.",
+      "stem": "The drawing sets the method out as two lines, one for each person.  Choose the three statements the drawing actually shows.",
       "choices": [
         "A chalk mark comes after hides something, on the same line",
         "Collects it comes after a slow route, on the same line",
@@ -5028,7 +5028,7 @@
       ],
       "coachTopic": "evidence-key-details",
       "dok": 2,
-      "stem": "Finish the description of the drawing.  The words the signal says one thing only sit on the line that starts at {{0}}, and the words a meeting that must be checked first sit on the line that starts at {{1}}.",
+      "stem": "Finish the description of the drawing.  One line carries the words the signal says one thing only.  That line starts at {{0}}.  The other line carries the words a meeting that must be checked first, and it starts at {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -5210,7 +5210,7 @@
       ],
       "coachTopic": "evidence-story-details",
       "dok": 3,
-      "stem": "The Halloway timeline keeps two records, The rule and I write down times.  One time is written on both of them.  Which two moments does the timeline set at that same time?",
+      "stem": "The Halloway timeline keeps two records, one marked The rule and one marked I write down times.  One time is written on both of them.  Which two moments does the timeline set at that same time?",
       "choices": [
         "he checks in, and nothing on the radio but the hiss",
         "he checks in, and the radio clicks twice",
@@ -5274,8 +5274,8 @@
       "blanks": [
         {
           "choices": [
-            "I write down times, the record of what the narrator saw and did himself",
-            "The rule, because the plan is what put his thumb there",
+            "I write down times, the record of what the narrator saw and did herself",
+            "The rule, because the plan is what put her thumb there",
             "both records at once, because it is the moment they meet"
           ],
           "key": 0
@@ -5289,7 +5289,7 @@
           "key": 0
         }
       ],
-      "explain": "The timeline sorts the afternoon by whose moment it is.  Everything the narrator saw, heard or did goes on I write down times, and the thumb on the transmit key is his own, so it goes there.  The rule holds two moments and neither of them actually happened: Jonah did not check in at ten twenty, and the exercise was never called off.  A record of what a plan required is not a record of what took place.",
+      "explain": "The timeline sorts the afternoon by whose moment it is.  Everything the narrator saw, heard or did goes on I write down times, and the thumb on the transmit key is her own, so it goes there.  The rule holds two moments and neither of them actually happened: Jonah did not check in at ten twenty, and the exercise was never called off.  A record of what a plan required is not a record of what took place.",
       "whyTheFigureIsNeeded": "The passage gives the rule in its opening paragraph, and the narrator's own moments across the paragraphs that follow, so it never sorts them.  The timeline is what puts each moment on one record or the other, and what shows that The rule carries only moments that did not happen."
     },
     {
@@ -5337,7 +5337,7 @@
       "passageId": "p-petrel-brief",
       "figureId": "fig-l4-petrel-brief",
       "figureFact": "measured at a constant seventy degrees",
-      "stem": "On the Petrel-4 page, Corvid Systems boxes its whole test claim: a fully charged Petrel-4 held a working fix thirty days straight.  Lower down the same page, two lines carry the red underline this brief uses for its small print.  What does that arrangement do to a reader in a hurry?",
+      "stem": "On the Petrel-4 page, Corvid Systems boxes its whole test claim: a fully charged Petrel-4 held a working fix for thirty days straight.  Lower down the same page, the red underline this brief uses for its small print marks the words measured at a constant seventy degrees.  What does that arrangement do to a reader in a hurry?",
       "choices": [
         "It puts the number where it will be read first and the words measured at a constant seventy degrees where they may be missed.",
         "It shows the brief is hiding nothing, so the thirty days can be taken at face value.",
@@ -5381,7 +5381,7 @@
       "distractorRationale": {
         "1": "The gone silent column has three rows, not one.  Two tags stopped at about sixty hours and the other two ran on into day three, so the four did not stop together.",
         "3": "Sixty-eight hours is under three days, and the claim written at the head of the log is thirty days.  You read the largest number in the column as though it had beaten that claim.",
-        "5": "The only thirty-day number on this page is the maker's claim at the head.  Everything the staff measured is counted in hours, and the longest of it is just past sixty-eight."
+        "5": "The only thirty-day number on this page is the maker's claim at the head.  Everything the staff measured stopped inside three days, and the longest of it is just past sixty-eight hours."
       },
       "targets": [
         "c4-3-analyze-sources"
@@ -5589,7 +5589,7 @@
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "The columns run mild coastal, desert climate, freezing mountain, which is the order the board ran the tests in.  Sorted by temperature the freezing column would sit at one end of the row, and it does not.",
+        "0": "The columns run mild coastal, desert climate, freezing mountain, which is the order the board ran the tests in.  Sorted from coolest to hottest the freezing column would come first, and on the card it comes last.",
         "1": "The card's own heading is that the tag did not change, and the article says the same thing in its own words.  One tag went into all three tests, so the difference has to sit in the temperature above each runtime, not in the tag.",
         "2": "Twenty-six days is close to thirty, and close is not the same as matched.  The article treats that small gap as ordinary, because a maker's own test is run at a comfortable room temperature and tends to show the best number a device can reach."
       },
@@ -6140,7 +6140,7 @@
         ],
         "lines": [
           {
-            "text": "a fully charged Petrel-4 held a working fix",
+            "text": "a fully charged Petrel-4 held a working fix for",
             "emphasis": "box"
           },
           {

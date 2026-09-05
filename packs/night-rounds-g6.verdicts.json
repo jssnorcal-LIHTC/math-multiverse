@@ -1545,6 +1545,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l1-mc-where-the-found-tortoises-were",
+      "itemHash": "b39212b1c6d4a88d",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l1-ms-what-the-yard-plan-shows",
       "itemHash": "1f08d5365f9c3740",
       "blind": [
@@ -1577,14 +1585,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-mc-tally-strip-across-columns",
-      "itemHash": "45d7d2b9a89475c4",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l2-order-workup-chain-of-arrows",
       "itemHash": "6a37d531dfdb1ef0",
       "blind": [
@@ -1598,20 +1598,6 @@
         3,
         0,
         2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-cloze-heading-against-the-tally",
-      "itemHash": "3a932e3092040bfd",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
       ],
       "confidence": "high",
       "status": "agree"
@@ -1819,10 +1805,24 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-mc-where-the-found-tortoises-were",
-      "itemHash": "b39212b1c6d4a88d",
-      "blind": 0,
-      "authored": 0,
+      "itemId": "l2-mc-tally-strip-across-columns",
+      "itemHash": "5bd050a83c951c10",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-cloze-heading-against-the-tally",
+      "itemHash": "bdcb42494cdc3d4b",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     }
