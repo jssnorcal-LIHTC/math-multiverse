@@ -417,6 +417,29 @@ function renderTimeline(dataTable, accentColor) {
     : (s) => xOf(xOf.rankOf.get(s));
 
   const out = head(dt.title);
+  // AND THE DRAWING SAYS SO, not only the alt. A broken rule was the whole cue and the explanation
+  // lived in alt text, which a sighted child never sees. Both Cold Signal reviewers raised it
+  // independently: a left-to-right rule with evenly spaced dots is the standard picture of a scale,
+  // so eighteen minutes is drawn exactly as wide as the one minute after it, and nothing teaches an
+  // eleven-year-old that a dash means otherwise.
+  //
+  // It sits on the TITLE line, right-aligned, because that is the one place on this canvas that
+  // costs no vertical space: put below the lanes it took 10px off the key, and the twelve-entry
+  // Night Rounds timeline stopped fitting. Refused if a long title would reach it, the same check
+  // the facsimile stamp makes rather than assuming.
+  if (!timeMode) {
+    const NOTE = 'in order, not to scale';
+    const noteW = estimateTextWidth(NOTE, NOTE_FONT);
+    const titleRight = dt.title ? PAD + estimateTextWidth(dt.title, TITLE_FONT) : PAD;
+    // Beside the title when it fits, on its own line under the title when it does not. Night Rounds
+    // titles its storm timeline "The night of the twenty-sixth of May", which is a transcription and
+    // reaches across; refusing it would have meant shortening the RECORD to make room for chrome,
+    // which is the trade this whole program exists to refuse. The second line is still well above
+    // the lanes, which start at 128, so it costs the key nothing.
+    const fits = titleRight <= VB_W - PAD - noteW - 24;
+    out.push(text(VB_W - PAD, fits ? TITLE_Y : TITLE_Y + 26, NOTE_FONT, NOTE,
+      { anchor: 'end', opacity: '0.62' }));
+  }
 
   // The bounds get their own row well above the lanes. Drawn any lower they collide with the event
   // numbers, and in ordinal mode the first event sits at exactly AX_L, so "Monday" and the "1" under
@@ -460,6 +483,13 @@ function renderTimeline(dataTable, accentColor) {
     out.push(line(AX_L, hp(y), AX_R, hp(y), RULE, 1, timeMode ? undefined : { dash: '7 6' }));
   });
 
+  // AND IT SAYS SO ON THE DRAWING, not only in the alt. The broken rule was the whole cue, and the
+  // explanation lived in alt text, which a sighted child never sees. Both Cold Signal reviewers
+  // raised the same thing independently: a left-to-right rule with evenly spaced dots is the
+  // standard picture of a scale, so the gap from two-oh-one to two-nineteen is drawn exactly as wide
+  // as the one-minute gap that follows it, and nothing teaches an eleven-year-old that a dash means
+  // otherwise. Six words under the last lane, in the same small type as the marker numbers.
+
   // Marker numbers are placed in TWO PASSES, because two events close together in time put their
   // numbers on top of each other: a disputed "maybe 7:30" beside a recorded 7:40 printed as an
   // unreadable "4?3". Each lane is walked in x order and a number that would overlap the previous
@@ -468,7 +498,14 @@ function renderTimeline(dataTable, accentColor) {
   // D16: a staggered numeral must stay on its OWN lane's side. A fixed [-14,-32] put the second row
   // for the LOWER lane midway between the two lanes, so which lane a numeral belonged to was a
   // guess. The last lane staggers DOWNWARD, where nothing else lives; every other lane staggers up.
-  const rowsFor = (k) => (k === tracks.length - 1 ? [-14, 22] : [-14, -32]);
+  // AND ON A MULTI-LANE TIMELINE THE LAST LANE'S NUMERALS GO BELOW ITS RULE ENTIRELY, not just the
+  // staggered ones. With two lanes the base row at -14 sat in the shallow corridor BETWEEN the
+  // rules, closer to its own lane but not clearly so, and which lane a numeral belonged to is
+  // exactly the distinction a two-lane figure exists to make -- which entries are the rule and
+  // which are the observed log. Each lane's numbers now sit on the OUTSIDE of the pair. A
+  // single-lane timeline is unchanged: it has no corridor, and nothing below it but the key.
+  const multiLane = tracks.length > 1;
+  const rowsFor = (k) => (multiLane && k === tracks.length - 1 ? [22, 40] : [-14, -32]);
   const placed = [];
   const rowsByLane = new Map();
   events.forEach((e, i) => {
@@ -508,6 +545,12 @@ function renderTimeline(dataTable, accentColor) {
   // gap's own from/to in the dataTable and nowhere in the picture: a reader saw a hatched band with
   // no times on it, and every byte-compare was green because the fixture came from this same
   // renderer. tests/figure-fidelity.js part 2 is what caught it.
+  // AND IT SAYS SO ON THE DRAWING, not only in the alt. The broken rule was the whole cue, and the
+  // explanation lived in alt text, which a sighted child never sees. Both Cold Signal reviewers
+  // raised it independently: a left-to-right rule with evenly spaced dots is the standard picture of
+  // a scale, so eighteen minutes is drawn exactly as wide as the one minute after it, and nothing
+  // teaches an eleven-year-old that a dash means otherwise. Placed BELOW the deepest numeral row so
+  // it cannot sit on one, and the key starts below it in turn.
   let cursor = laneBottom + 14;
   gaps.forEach((g) => {
     const bounded = (typeof g.from === 'string' && typeof g.to === 'string')

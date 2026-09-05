@@ -1,22 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img">
 <rect x="0" y="0" width="800" height="450" fill="#0f1218" />
 <text x="40" y="44" font-size="26" fill="#e8eef7">The Halloway exercise</text>
+<text x="760" y="44" font-size="18" fill="#e8eef7" text-anchor="end" fill-opacity="0.62">in order, not to scale</text>
 <text x="40" y="134" font-size="18" fill="#e8eef7" fill-opacity="0.82">The rule</text>
 <line x1="251" y1="128.5" x2="760" y2="128.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" stroke-dasharray="7 6" />
 <text x="40" y="180" font-size="18" fill="#e8eef7" fill-opacity="0.82">I write down times</text>
 <line x1="251" y1="174.5" x2="760" y2="174.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" stroke-dasharray="7 6" />
 <circle cx="251" cy="174" r="7" fill="#c8102e" />
-<text x="251" y="160" font-size="18" fill="#c8102e" text-anchor="middle">1</text>
+<text x="251" y="196" font-size="18" fill="#c8102e" text-anchor="middle">1</text>
 <circle cx="378.25" cy="128" r="7" fill="#c8102e" />
 <text x="378.25" y="114" font-size="18" fill="#c8102e" text-anchor="middle">2</text>
 <circle cx="378.25" cy="174" r="7" fill="#c8102e" />
-<text x="378.25" y="160" font-size="18" fill="#c8102e" text-anchor="middle">3</text>
+<text x="378.25" y="196" font-size="18" fill="#c8102e" text-anchor="middle">3</text>
 <circle cx="505.5" cy="174" r="7" fill="#c8102e" />
-<text x="505.5" y="160" font-size="18" fill="#c8102e" text-anchor="middle">4</text>
+<text x="505.5" y="196" font-size="18" fill="#c8102e" text-anchor="middle">4</text>
 <circle cx="632.75" cy="128" r="7" fill="#c8102e" />
 <text x="632.75" y="114" font-size="18" fill="#c8102e" text-anchor="middle">5</text>
 <circle cx="760" cy="174" r="7" fill="#c8102e" />
-<text x="760" y="160" font-size="18" fill="#c8102e" text-anchor="middle">6</text>
+<text x="760" y="196" font-size="18" fill="#c8102e" text-anchor="middle">6</text>
 <text x="62" y="234" font-size="18" fill="#c8102e" text-anchor="end">1.</text>
 <text x="70" y="234" font-size="20" fill="#e8eef7" fill-opacity="0.82">ten fourteen</text>
 <text x="300" y="234" font-size="22" fill="#e8eef7">Jonah goes in</text>
