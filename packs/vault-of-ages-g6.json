@@ -4969,6 +4969,28 @@
             "x": 16,
             "y": 92
           }
+        ],
+        "edges": [
+          {
+            "from": "door_seat",
+            "to": "table",
+            "style": "line"
+          },
+          {
+            "from": "theo",
+            "to": "table",
+            "style": "line"
+          },
+          {
+            "from": "dash",
+            "to": "table",
+            "style": "line"
+          },
+          {
+            "from": "fourth",
+            "to": "table",
+            "style": "line"
+          }
         ]
       }
     },
@@ -4979,7 +5001,7 @@
       "src": "art/vault-of-ages-g6/fig-l2-threadglass.svg",
       "caption": "The entry is updated each time new information surfaces, its largest question mark is the gap between two counts eleven years apart, and the filer's name is blacked out.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A case-file index card titled the Threadglass, with catalog number 114 at the top, then two underlined section headings: under the first, the gap between the entry's two counts named as its largest question mark, and under the second, a line reading in a private collection above a blacked-out bar where the filer's name would be.",
+      "alt": "A case-file index card titled the Threadglass, with catalog number 114 at the top, then two underlined section headings: under the first, the gap between the entry's two counts named as its largest question mark, and under the second, a blacked-out bar where the filer's name would be, with a line above it reading in a private collection.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-threadglass-entry",
@@ -5023,7 +5045,7 @@
       "src": "art/vault-of-ages-g6/fig-l2-wyrdstone.svg",
       "caption": "The stone's record runs step by step to the loan, and no verified sighting exists after that.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A numbered timeline on one lane running left to right from a coastal site to past the loan date, with a shaded stretch labelled no theft report covering the loan paperwork and every step after it and a dashed circle marking the unverified last step.",
+      "alt": "A numbered timeline on one lane running left to right from a coastal site to past the loan date, with a shaded stretch, labelled no theft report, covering the loan paperwork and every step after it, and a dashed circle marking the unverified last step.",
       "dataTable": {
         "type": "timeline",
         "sourcePassageId": "p-wyrdstone-entry",
@@ -5199,6 +5221,11 @@
           {
             "from": "ped",
             "to": "ring",
+            "style": "line"
+          },
+          {
+            "from": "room",
+            "to": "count",
             "style": "line"
           }
         ]
@@ -5502,7 +5529,7 @@
       "src": "art/vault-of-ages-g6/fig-l5-no-hurry.svg",
       "caption": "One lane records the times the plan expected and the other records the real times, and the shaded stretch marks the minutes when a service van blocked the view.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A two-lane timeline of numbered steps in the order they happen, split between a lane for the time the plan expected and a lane for the real time, with a shaded stretch labelled blocking most of my view covering the steps from two-nineteen to two-twenty-two.",
+      "alt": "A two-lane timeline of numbered steps in the order they happen, split between a lane for the time the plan expected and a lane for the real time, with a shaded stretch, labelled blocking most of my view, covering the steps from two-nineteen to two-twenty-two.",
       "dataTable": {
         "type": "timeline",
         "sourcePassageId": "p-no-hurry-at-all",
