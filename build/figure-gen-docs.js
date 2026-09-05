@@ -39,6 +39,7 @@ const DOC_TYPES = ['timeline', 'facsimile', 'schematic', 'route'];
 const PAD = 40;             // outer margin on every side
 const TITLE_Y = 44;         // baseline of a figure's title row
 const ROW_H = 26;           // one key/table row
+const CAP_LINE_H = 22;      // one wrapped line of a timeline gap caption
 const NODE_PAD_X = 16;      // horizontal padding inside a schematic node
 const NODE_LINE_H = 24;     // one wrapped line inside a schematic node
 
@@ -567,11 +568,41 @@ function renderTimeline(dataTable, accentColor) {
     if (!caption) return;
     const gx1 = posOfTime(g.from), gx2 = posOfTime(g.to);
     const cx = (gx1 + gx2) / 2;
-    const w = estimateTextWidth(caption, NOTE_FONT);
     fitText(caption, NOTE_FONT, VB_W - 2 * PAD, 'timeline gap caption');
-    const clamped = Math.min(VB_W - PAD - w / 2, Math.max(PAD + w / 2, cx));
-    out.push(text(clamped, cursor + NOTE_FONT, NOTE_FONT, caption, { anchor: 'middle', opacity: '0.82' }));
-    cursor += ROW_H;
+
+    // WRAP RATHER THAN SLIDE.  A gap caption's POSITION IS PART OF ITS CLAIM: it names the shaded
+    // span, so a caption that slides off that span names the wrong steps.  The clamp below keeps a
+    // caption inside the padded box by MOVING it, and estimateTextWidth runs 40-55% wide (GLYPH_W
+    // is 0.6 against a serif that measures about 0.44), so on a long caption it fires on overflow
+    // that will not happen and drags the caption away from its own region.  Measured on the
+    // committed art 26-0905:
+    //     fig-l2-wyrdstone   region centre 584, anchored 452   -132px, sitting under ticks 2-4
+    //     fig-l5-no-hurry    region centre 506, anchored 458    -49px
+    //     fig-l3-two-exits   region centre 408, anchored 408    centred, escaped by 1px
+    //     night-rounds fig-l3-monitoring  centre 462, anchored 462  centred (32-char caption)
+    // On wyrdstone that is not cosmetic: this pack's subject is which parts of a record can be
+    // vouched for, and the label naming the UNVOUCHED-FOR stretch sat over the vouched-for one.
+    //
+    // SHORTENING IS NOT THE FIX, and it was tried first.  Dropping the range and keeping the label
+    // re-creates the exact defect the block above this one records: "Drawing only the label left
+    // the gap's own from/to in the dataTable and nowhere in the picture."  Two gates caught it.
+    // Wrapping keeps every word, keeps font 18, and buys back half the width.  textLines emits ONE
+    // <text> with tspans joined by a space, so the collapsed content still reads as the original
+    // phrase and both figure-fidelity and the whitespace-collapse check see it whole.
+    //
+    // The clamp stays as the last resort, measured on the WIDEST line, so a caption that cannot be
+    // centred even wrapped still cannot escape the frame.
+    const room = 2 * Math.min(cx - PAD, VB_W - PAD - cx);
+    const capLines = wrapToWidth(caption, NOTE_FONT, Math.max(room, 160));
+    const widest = capLines.reduce((m, ln) => Math.max(m, estimateTextWidth(ln, NOTE_FONT)), 0);
+    const clamped = Math.min(VB_W - PAD - widest / 2, Math.max(PAD + widest / 2, cx));
+    // A one-line caption keeps the plain <text> it has always emitted, so a figure that never
+    // needed wrapping stays byte-identical and no shipped pack's art moves for this change.
+    out.push(capLines.length === 1
+      ? text(clamped, cursor + NOTE_FONT, NOTE_FONT, capLines[0], { anchor: 'middle', opacity: '0.82' })
+      : textLines(clamped, cursor + NOTE_FONT, NOTE_FONT, capLines,
+          { anchor: 'middle', opacity: '0.82', lineH: CAP_LINE_H }));
+    cursor += ROW_H + (capLines.length - 1) * CAP_LINE_H;
   });
 
   const key = keyBlock(entries, cursor + 6, accent);
