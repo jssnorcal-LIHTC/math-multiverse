@@ -1523,14 +1523,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-mc-what-the-run-ends-at",
-      "itemHash": "c2e8ff9edbec541c",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l1-match-stop-to-its-number",
       "itemHash": "1e027dde75c61a32",
       "blind": [
@@ -1542,22 +1534,6 @@
         2,
         0,
         1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-ms-what-the-two-lines-show",
-      "itemHash": "6cd4e9d18c22826d",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -1601,36 +1577,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-cloze-rock-chain-direction",
-      "itemHash": "67ecf14e15497d09",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-ms-two-columns-read",
-      "itemHash": "631ba766b4550722",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l3-order-plan-and-real-time-in-one-order",
       "itemHash": "07e875392e8eaa76",
       "blind": [
@@ -1653,77 +1599,17 @@
       "status": "agree"
     },
     {
-      "itemId": "l3-mc-the-time-on-both-records",
-      "itemHash": "bb55235c23998852",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-ms-what-the-added-line-shows",
-      "itemHash": "e3ce099447c6de30",
+      "itemId": "l4-match-claim-against-what-was-measured",
+      "itemHash": "8705af256c2653d4",
       "blind": [
-        0,
         1,
+        0,
         2
       ],
       "authored": [
-        0,
         1,
+        0,
         2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-cloze-which-record-holds-the-thumb",
-      "itemHash": "79bbe623e7abaf55",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-mc-where-the-condition-sits",
-      "itemHash": "4ccb3fca8056880f",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ms-reading-across-the-cold-log",
-      "itemHash": "9ec93673e5764f08",
-      "blind": [
-        0,
-        2,
-        4
-      ],
-      "authored": [
-        0,
-        2,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-cloze-how-the-page-introduces-itself",
-      "itemHash": "fa66c28e43051d85",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
       ],
       "confidence": "high",
       "status": "agree"
@@ -1753,14 +1639,160 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-cloze-temperatures-and-runtime",
-      "itemHash": "3fe59628b1bcce0f",
+      "itemId": "l1-mc-what-the-run-ends-at",
+      "itemHash": "dfeaa6f39a0cf077",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ms-what-the-two-lines-show",
+      "itemHash": "7a7b3e17eba1e9aa",
       "blind": [
         0,
-        0
+        2,
+        4
       ],
       "authored": [
         0,
+        2,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-cloze-rock-chain-direction",
+      "itemHash": "7cb3749847df8429",
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ms-two-columns-read",
+      "itemHash": "444ec947eab034d0",
+      "blind": [
+        1,
+        3,
+        5
+      ],
+      "authored": [
+        1,
+        3,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-mc-the-time-on-both-records",
+      "itemHash": "a68299c7499cd20a",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ms-what-the-added-line-shows",
+      "itemHash": "a789ce9f2a27df17",
+      "blind": [
+        0,
+        1,
+        4
+      ],
+      "authored": [
+        0,
+        1,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-cloze-which-record-holds-the-thumb",
+      "itemHash": "584f065cd7d8849d",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-where-the-condition-sits",
+      "itemHash": "2a90963c22fccf9e",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ms-reading-across-the-cold-log",
+      "itemHash": "6f464e954d775531",
+      "blind": [
+        2,
+        3,
+        5
+      ],
+      "authored": [
+        2,
+        3,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-cloze-how-the-page-introduces-itself",
+      "itemHash": "1d9fbde4e3ab32f9",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ms-what-the-climate-memo-shows",
+      "itemHash": "1af3b9bb24804a4a",
+      "blind": [
+        0,
+        3,
+        4
+      ],
+      "authored": [
+        0,
+        3,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-cloze-temperatures-and-runtime",
+      "itemHash": "66fbd2a3e7606766",
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
         0
       ],
       "confidence": "high",
@@ -1768,78 +1800,46 @@
     },
     {
       "itemId": "l6-mc-rule-lane-against-the-log",
-      "itemHash": "e9e8900d2f6873fc",
+      "itemHash": "3f56c7408de922ec",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-reading-the-runtime-row",
+      "itemHash": "5d82e2bba76b4585",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-reading-the-runtime-row",
-      "itemHash": "f1015a3d8e04b269",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-cloze-six-stops-one-run",
-      "itemHash": "b6c53f81810629f9",
+      "itemHash": "978730e64fc7e996",
       "blind": [
-        0,
-        0
+        1,
+        2
       ],
       "authored": [
-        0,
-        0
+        1,
+        2
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-ms-claim-against-the-two-runs",
-      "itemHash": "60d417de5cfe485b",
-      "blind": [
-        0,
-        1,
-        3
-      ],
-      "authored": [
-        0,
-        1,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-match-claim-against-what-was-measured",
-      "itemHash": "8705af256c2653d4",
+      "itemHash": "f958068aa1eadd7c",
       "blind": [
         1,
-        0,
-        2
+        2,
+        5
       ],
       "authored": [
         1,
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ms-what-the-climate-memo-shows",
-      "itemHash": "b24a4a793836fb38",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
+        2,
+        5
       ],
       "confidence": "high",
       "status": "agree"
