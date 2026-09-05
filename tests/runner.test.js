@@ -111,8 +111,42 @@ check('summarize marks dnf only when mistakes reach the life count', () => {
   const bad = { correct: false, partial: 0 };
   assert.strictEqual(R.summarize([bad, bad, bad], 3).dnf, true);
   assert.strictEqual(R.summarize([bad, bad, bad], 4).dnf, false, 'four lives means a third mistake still finishes');
-  assert.strictEqual(R.summarize([bad, bad, bad], 4).stars, 0, 'finishing with three mistakes still earns no stars');
   assert.strictEqual(R.summarize([bad, bad, bad, bad], 4).dnf, true);
+});
+
+// NIALL'S REPORT, 26-0904, now a gate. He plays four-life reading levels and noticed that the
+// fourth marker on the bar was decorative: three mistakes already scored zero and failed to clear
+// the level, and the fourth mistake scored zero too. The assertion that used to sit here --
+// "finishing with three mistakes still earns no stars" -- WROTE THAT DEFECT DOWN AS INTENDED, which
+// is why four rounds of test-writing never questioned it. A test can only protect the behaviour it
+// was pointed at.
+//
+// The rule now: running out of lives is the only zero. Every life the child can SEE on the bar has
+// to be worth something, so the last one is the difference between clearing the level and not.
+check('every life the bar shows is worth something: the last one clears the level', () => {
+  const bad = { correct: false, partial: 0 };
+  const run = (n, lives) => R.summarize(Array.from({ length: n }, () => bad), lives);
+
+  // Four lives, which is what all 36 shipped reading levels declare.
+  assert.strictEqual(run(0, 4).stars, 3);
+  assert.strictEqual(run(1, 4).stars, 2);
+  assert.strictEqual(run(2, 4).stars, 1);
+  assert.strictEqual(run(3, 4).stars, 1, 'the fourth life must buy a star, or the marker is decorative');
+  assert.strictEqual(run(3, 4).dnf, false, 'three mistakes on four lives is a finish, not a washout');
+  assert.strictEqual(run(4, 4).stars, 0, 'running out of lives is the only zero');
+  assert.strictEqual(run(4, 4).dnf, true);
+
+  // NEGATIVE CONTROL, so this check cannot pass vacuously: the OLD three-life ladder scored a
+  // third mistake on four lives as zero. If that value ever comes back, this fires.
+  const oldLadder = (m) => (m === 0 ? 3 : m <= 1 ? 2 : m <= 2 ? 1 : 0);
+  assert.strictEqual(oldLadder(3), 0, 'control: the ladder this replaced scored three mistakes as zero');
+  assert.notStrictEqual(run(3, 4).stars, oldLadder(3),
+    'the four-life ladder has silently reverted to the three-life one');
+
+  // THREE-LIFE LEVELS DO NOT MOVE. Every math module runs on three lives, so this column is the
+  // regression guard for Fraction Rider, Rocket Climb and the rest.
+  assert.deepStrictEqual([0, 1, 2, 3].map((m) => run(m, 3).stars), [3, 2, 1, 0],
+    'three-life levels changed, and no math module asked for that');
 });
 
 check('summarize defaults to three lives when a level does not set one', () => {
@@ -1137,12 +1171,45 @@ check("STAMP_THEME's subjects ('hist', 'sci') are members of the shell's real su
 // escaped defects.
 check('starsForMistakes and PackSave.STARS_FOR are the same ladder', () => {
   const P = require('../engine/pack.js');
-  for (let m = 0; m <= 12; m++) {
-    assert.strictEqual(R.starsForMistakes(m), P.PackSave.STARS_FOR(m),
-      'ladders disagree at ' + m + ' mistakes: runner ' + R.starsForMistakes(m) + ' vs pack ' + P.PackSave.STARS_FOR(m));
+  // Both ladders took a `lives` argument when the fourth life was made to count, so the agreement
+  // has to be proved ACROSS LIFE COUNTS as well. Checking only the default arity would let one copy
+  // stay three-life-only and still pass -- the same blind spot, one argument over.
+  for (const lives of [undefined, 3, 4, 5]) {
+    for (let m = 0; m <= 12; m++) {
+      assert.strictEqual(R.starsForMistakes(m, lives), P.PackSave.STARS_FOR(m, lives),
+        'ladders disagree at ' + m + ' mistakes on ' + lives + ' lives: runner '
+        + R.starsForMistakes(m, lives) + ' vs pack ' + P.PackSave.STARS_FOR(m, lives));
+    }
   }
-  assert.deepStrictEqual([0, 1, 2, 3].map(R.starsForMistakes), [3, 2, 1, 0],
+  assert.deepStrictEqual([0, 1, 2, 3].map((m) => R.starsForMistakes(m)), [3, 2, 1, 0],
     'the ladder itself moved off the math modules 0/1/2/3+ -> 3/2/1/0');
+});
+
+// The bar draws one marker per life and the ladder has to have a band for each one, or the child is
+// shown a life that does nothing. This is the check that would have caught the original defect at
+// the moment the packs moved to `lives: 4`, and it is written against the PACKS rather than against
+// a literal, so a future pack that sets `lives: 5` is covered without anyone remembering to come
+// back here.
+check('every declared life count has a distinct outcome at its last life', () => {
+  const fs = require('fs');
+  const path = require('path');
+  const packsDir = path.join(__dirname, '..', 'packs');
+  const counts = new Set();
+  for (const f of fs.readdirSync(packsDir)) {
+    if (!f.endsWith('.json') || f === 'manifest.json') continue;
+    const pack = JSON.parse(fs.readFileSync(path.join(packsDir, f), 'utf8'));
+    for (const lv of pack.levels || []) if (Number.isInteger(lv.lives)) counts.add(lv.lives);
+  }
+  counts.add(3);   // the math modules, which declare no lives and take the default
+  assert.ok(counts.size, 'no pack declares a life count; this check has nothing to measure');
+  for (const L of counts) {
+    const lastSurvivable = R.starsForMistakes(L - 1, L);
+    const outOfLives = R.starsForMistakes(L, L);
+    assert.ok(lastSurvivable > 0,
+      'on ' + L + ' lives, spending the last one still scores ' + lastSurvivable
+      + ': that life is decorative, which is exactly what Niall reported');
+    assert.strictEqual(outOfLives, 0, 'on ' + L + ' lives, running out must score zero');
+  }
 });
 
 console.log(failures ? `\nRESULT: FAIL (${failures})` : '\nRESULT: ALL CLEAN');
