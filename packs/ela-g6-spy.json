@@ -9,7 +9,7 @@
   },
   "skin": {
     "color": "#c8102e",
-    "icon": "\ud83d\udd75\ufe0f",
+    "icon": "🕵️",
     "grandGoal": "Signals Officer"
   },
   "passages": [
@@ -20,7 +20,10 @@
       "docKind": "procedure",
       "register": "TRADECRAFT NOTE",
       "source": "original",
-      "text": "A courier who is carrying something valuable does not take the fastest route to the meeting.  The fast route is a straight line, and a straight line is the easiest thing in the world to follow.  Instead the courier walks a route that is designed to make a follower show themselves.  Trainers call it a surveillance detection run, and it works because following a person is much harder than it looks.  A follower who is trying not to be seen has to keep making choices, and every choice is a chance to be wrong.\n\nThe first move is a doubling back.  The courier turns into a side street, walks half a block, and comes back out the way they came.  Anyone who is genuinely going that direction simply keeps going and is never seen again.  A follower has about two seconds to decide whether to turn around, stop, or walk straight past, and all three of those look strange.\n\nThe second move is a stop in front of something that reflects.  A shop window, a parked car, or a phone screen held at the right angle shows the street behind without a single turn of the head.  The courier is not looking for a suspicious face, because faces are a poor guide and everybody looks suspicious eventually.  The courier is looking for the same face twice.\n\nThe third move is a change of level.  Stairs, an escalator, a footbridge, or a train platform force everyone nearby to commit to a direction at the same moment.  A follower who has been drifting comfortably forty feet back now has to close that gap or lose the courier completely, and both of those are visible from the front.\n\nTraining gives the counting rule as three.  One sighting is nothing at all, two sightings in one afternoon are a coincidence worth writing down, and three sightings in three unrelated places mean the run is over.  Three is the number because people really do end up on the same street twice by accident, and almost never three times across a mile of turns nobody could predict.\n\nThe last rule is the one new couriers find hardest to obey.  If the route turns up a follower, the courier does not run, does not confront anybody, and does not go anywhere near the meeting.  The courier buys a carton of milk, goes home, and writes the whole thing up.  A meeting that is missed can be arranged again the next day at a small cost in time.  A meeting that is watched cannot be unwatched, and everyone who walks into it is finished.\n\nThat is why the run is measured in hours rather than minutes.  The point of taking the long way there has never been speed.  The point is to arrive knowing something about the street that you did not know when you left."
+      "text": "A courier who is carrying something valuable does not take the fastest route to the meeting.  The fast route is a straight line, and a straight line is the easiest thing in the world to follow.  Instead the courier walks a route that is designed to make a follower show themselves.  Trainers call it a surveillance detection run, and it works because following a person is much harder than it looks.  A follower who is trying not to be seen has to keep making choices, and every choice is a chance to be wrong.\n\nThe first move is a doubling back.  The courier turns into a side street, walks half a block, and comes back out the way they came.  Anyone who is genuinely going that direction simply keeps going and is never seen again.  A follower has about two seconds to decide whether to turn around, stop, or walk straight past, and all three of those look strange.\n\nThe second move is a stop in front of something that reflects.  A shop window, a parked car, or a phone screen held at the right angle shows the street behind without a single turn of the head.  The courier is not looking for a suspicious face, because faces are a poor guide and everybody looks suspicious eventually.  The courier is looking for the same face twice.\n\nThe third move is a change of level.  Stairs, an escalator, a footbridge, or a train platform force everyone nearby to commit to a direction at the same moment.  A follower who has been drifting comfortably forty feet back now has to close that gap or lose the courier completely, and both of those are visible from the front.\n\nTraining gives the counting rule as three.  One sighting is nothing at all, two sightings in one afternoon are a coincidence worth writing down, and three sightings in three unrelated places mean the run is over.  Three is the number because people really do end up on the same street twice by accident, and almost never three times across a mile of turns nobody could predict.\n\nThe last rule is the one new couriers find hardest to obey.  If the route turns up a follower, the courier does not run, does not confront anybody, and does not go anywhere near the meeting.  The courier buys a carton of milk, goes home, and writes the whole thing up.  A meeting that is missed can be arranged again the next day at a small cost in time.  A meeting that is watched cannot be unwatched, and everyone who walks into it is finished.\n\nThat is why the run is measured in hours rather than minutes.  The point of taking the long way there has never been speed.  The point is to arrive knowing something about the street that you did not know when you left.",
+      "figureIds": [
+        "fig-l1-long-way"
+      ]
     },
     {
       "id": "p-dead-air",
@@ -29,7 +32,10 @@
       "docKind": "field-manual",
       "register": "EQUIPMENT NOTE",
       "source": "original",
-      "text": "Every team that works underground runs into the same wall, and it has nothing to do with the price of their equipment.  Radio does not travel through rock.  A handheld set pushes a signal out through open air for a mile or more.  Stone and soil and concrete absorb that energy instead and turn it quietly into heat.  Thirty feet of granite will swallow a signal that would have crossed an entire valley above ground.  The deeper a team goes the less of the signal survives, and the fall is far steeper than most people expect.\n\nThe result is called dead air, and it is more dangerous than a quiet radio sounds.  A team below cannot report what it has found or ask for the one tool it forgot.  A crew above cannot pass down a warning about weather, a flooded passage, or a change in the plan.  Worse than either of those, silence is ambiguous, because it can mean several different things at once.  The surface crew has no way to tell whether the team below is busy, out of range, or in serious trouble.  Each of those situations calls for a completely different response.\n\nThe fix is not a more powerful radio, because power was never the problem that the rock created.  The fix is a relay.  A relay is a small transmitter parked where it can hear both sides at once, usually just inside the entrance where the tunnel is still shallow.  The team below reaches the relay, the relay reaches the surface, and no single transmission has to cross the whole distance by itself.  A long tunnel uses several relays in a chain, each one handing the message to the next like runners passing a baton.\n\nRelays fail, so a good team carries a second method that does not depend on them at all.  A hardwired line taped along the wall is heavy, slow to lay, and completely reliable once everything electronic has quit.  Planners call this a redundant system, and the word is not an insult in a tunnel.  A redundant system is one that a team hopes never to need and refuses to leave behind.\n\nThe last piece of the fix is a schedule.  The two crews agree on a fixed interval, usually fifteen minutes, at which the team below stops work and checks in.  That interval turns silence itself into information.  When a check-in is missed the surface crew does not have to guess anymore.  They can verify the time against the schedule and treat the miss as a signal of its own.  A call that does not come at the agreed minute means something has gone wrong, and that is a fact a rescue can actually act on."
+      "text": "Every team that works underground runs into the same wall, and it has nothing to do with the price of their equipment.  Radio does not travel through rock.  A handheld set pushes a signal out through open air for a mile or more.  Stone and soil and concrete absorb that energy instead and turn it quietly into heat.  Thirty feet of granite will swallow a signal that would have crossed an entire valley above ground.  The deeper a team goes the less of the signal survives, and the fall is far steeper than most people expect.\n\nThe result is called dead air, and it is more dangerous than a quiet radio sounds.  A team below cannot report what it has found or ask for the one tool it forgot.  A crew above cannot pass down a warning about weather, a flooded passage, or a change in the plan.  Worse than either of those, silence is ambiguous, because it can mean several different things at once.  The surface crew has no way to tell whether the team below is busy, out of range, or in serious trouble.  Each of those situations calls for a completely different response.\n\nThe fix is not a more powerful radio, because power was never the problem that the rock created.  The fix is a relay.  A relay is a small transmitter parked where it can hear both sides at once, usually just inside the entrance where the tunnel is still shallow.  The team below reaches the relay, the relay reaches the surface, and no single transmission has to cross the whole distance by itself.  A long tunnel uses several relays in a chain, each one handing the message to the next like runners passing a baton.\n\nRelays fail, so a good team carries a second method that does not depend on them at all.  A hardwired line taped along the wall is heavy, slow to lay, and completely reliable once everything electronic has quit.  Planners call this a redundant system, and the word is not an insult in a tunnel.  A redundant system is one that a team hopes never to need and refuses to leave behind.\n\nThe last piece of the fix is a schedule.  The two crews agree on a fixed interval, usually fifteen minutes, at which the team below stops work and checks in.  That interval turns silence itself into information.  When a check-in is missed the surface crew does not have to guess anymore.  They can verify the time against the schedule and treat the miss as a signal of its own.  A call that does not come at the agreed minute means something has gone wrong, and that is a fact a rescue can actually act on.",
+      "figureIds": [
+        "fig-l2-dead-air"
+      ]
     },
     {
       "id": "p-cover-story",
@@ -47,7 +53,10 @@
       "docKind": "status-log",
       "register": "EXERCISE LOG",
       "source": "original",
-      "text": "My job on the Halloway exercise is the least interesting one in the building, which Marchetti says is how you can tell it matters.  I sit in a parked van with a radio, a stopwatch, and a paper map, and I write down times.  Jonah goes in at ten fourteen.  The rule is that he checks in at ten twenty, and if nothing has come through by ten twenty-two I call the whole exercise off.\n\nAt ten twenty there is nothing on the radio but the hiss the set makes when it is working and nobody is talking.  That hiss is the only comfort in this job, because silence with no hiss underneath it means the set is dead and I am learning nothing at all.\n\nI can see the front doors from where I am parked, and I can see roughly four feet past them, and that is the whole of my view.  I watch those doors the way you watch a kettle that is refusing to boil.  A man in a green jacket goes in and does not come out.  Two women come out with a folded stroller between them.  Nobody who goes through that door is Jonah coming back out, which is the only solid fact I actually have.\n\nAt ten twenty-one I put my thumb on the transmit key and then take it off again.\n\nHere is the thing that nobody tells you about being the person holding the abort switch.  Calling it off is not the safe choice, whatever it feels like from inside a van.  It only feels safe because if I call it and I am wrong, the exercise dies quietly, everybody goes home early, and nothing bad ever happens to me.  If I do not call it and I am wrong, that is a very different sort of afternoon.\n\nSo I do the thing Marchetti drilled into the whole group back in September.  I say out loud what I actually know, in order, like reading down a list.  Jonah went in at ten fourteen and the lobby has a front desk.  A desk means a person, a person means questions, and questions take time that our plan never allowed for.  Nothing I can see from here says that he is in trouble.  Everything I can see from here says that he is standing somewhere talking to somebody.\n\nAt ten twenty-two and eleven seconds, which is late, the radio clicks twice.  Two clicks means inside, moving, no help needed.  I write the time down, and my hand is steadier than it was thirty seconds ago.\n\nI would like to say that I was calm about all of it.  What is true is that I was one second away from a decision I would have had to defend for the rest of the year.  The only reason I did not make it is that I had a list and I read my way down it.  Jonah will come out at ten forty-one and tell me the whole thing was easy.  I have decided in advance to let him."
+      "text": "My job on the Halloway exercise is the least interesting one in the building, which Marchetti says is how you can tell it matters.  I sit in a parked van with a radio, a stopwatch, and a paper map, and I write down times.  Jonah goes in at ten fourteen.  The rule is that he checks in at ten twenty, and if nothing has come through by ten twenty-two I call the whole exercise off.\n\nAt ten twenty there is nothing on the radio but the hiss the set makes when it is working and nobody is talking.  That hiss is the only comfort in this job, because silence with no hiss underneath it means the set is dead and I am learning nothing at all.\n\nI can see the front doors from where I am parked, and I can see roughly four feet past them, and that is the whole of my view.  I watch those doors the way you watch a kettle that is refusing to boil.  A man in a green jacket goes in and does not come out.  Two women come out with a folded stroller between them.  Nobody who goes through that door is Jonah coming back out, which is the only solid fact I actually have.\n\nAt ten twenty-one I put my thumb on the transmit key and then take it off again.\n\nHere is the thing that nobody tells you about being the person holding the abort switch.  Calling it off is not the safe choice, whatever it feels like from inside a van.  It only feels safe because if I call it and I am wrong, the exercise dies quietly, everybody goes home early, and nothing bad ever happens to me.  If I do not call it and I am wrong, that is a very different sort of afternoon.\n\nSo I do the thing Marchetti drilled into the whole group back in September.  I say out loud what I actually know, in order, like reading down a list.  Jonah went in at ten fourteen and the lobby has a front desk.  A desk means a person, a person means questions, and questions take time that our plan never allowed for.  Nothing I can see from here says that he is in trouble.  Everything I can see from here says that he is standing somewhere talking to somebody.\n\nAt ten twenty-two and eleven seconds, which is late, the radio clicks twice.  Two clicks means inside, moving, no help needed.  I write the time down, and my hand is steadier than it was thirty seconds ago.\n\nI would like to say that I was calm about all of it.  What is true is that I was one second away from a decision I would have had to defend for the rest of the year.  The only reason I did not make it is that I had a list and I read my way down it.  Jonah will come out at ten forty-one and tell me the whole thing was easy.  I have decided in advance to let him.",
+      "figureIds": [
+        "fig-l3-relay-room"
+      ]
     },
     {
       "id": "p-the-log",
@@ -56,7 +65,10 @@
       "docKind": "minutes",
       "register": "DEBRIEF",
       "source": "original",
-      "text": "The debrief room at Halloway has one long table, eight chairs that do not match, and a whiteboard nobody has cleaned properly in a year.  Marchetti hands out the log sheets face down, which is a small thing he does to stop people writing before they have thought.  The rule for the log is a single line, and it is that you write down what happened rather than what you meant to happen.\n\nJonah has his sheet filled in within four minutes.  It records entry at ten fourteen, contact with front desk staff, two clicks at ten twenty-two, the folder located and photographed and put back, and exit at ten forty-one.  Every word of that is true.  He is fairly sure it is also complete, which is a different question, and he knows that it is.\n\nThe part he has not written down took about thirty seconds.  It happened on the second floor landing, after the desk and before the model room.  He heard a door close somewhere below him and could not tell whether it was the front door or the office door.  He stood there with one hand on the rail and did absolutely nothing.  Then the building stayed quiet, so he went on up, and by the time he reached the cabinet he had already started calling it nothing.\n\nAcross the table Ines is still writing.  She writes slowly and she is on her second sheet, which Jonah finds mildly insulting until he reads the top line of hers upside down.  She has logged the eleven seconds she was late calling in, and the fact that she nearly aborted the exercise, and the reason she decided not to.\n\nMarchetti collects the sheets without reading a single one of them.  He says the logs are not marked and never have been marked.  He says the only thing a log is ever for is the next person.  That person will be standing on a landing somewhere with one hand on a rail, wondering whether the sound they just heard matters.\n\nJonah asks for his sheet back.  Marchetti hands it over with no expression at all, which is somehow worse than any comment would have been.\n\nHe writes one more line at the bottom of the page.  Thirty seconds lost on the second floor landing, cause unknown, no action taken.  It is the least impressive sentence on the whole sheet and it takes him longer to write than everything above it.\n\nWalking out, Ines asks him how it went, and Jonah says it was easy, because that is the answer he has been planning since the stairs.  Then he stops in the corridor and tells her about the landing instead, all of it, including the part where he stood still and did nothing.  She does not laugh at him.  She says that thirty seconds is short enough that most people would never have noticed it at all.  Then she says that this is exactly why he had to be the one who wrote it down."
+      "text": "The debrief room at Halloway has one long table, eight chairs that do not match, and a whiteboard nobody has cleaned properly in a year.  Marchetti hands out the log sheets face down, which is a small thing he does to stop people writing before they have thought.  The rule for the log is a single line, and it is that you write down what happened rather than what you meant to happen.\n\nJonah has his sheet filled in within four minutes.  It records entry at ten fourteen, contact with front desk staff, two clicks at ten twenty-two, the folder located and photographed and put back, and exit at ten forty-one.  Every word of that is true.  He is fairly sure it is also complete, which is a different question, and he knows that it is.\n\nThe part he has not written down took about thirty seconds.  It happened on the second floor landing, after the desk and before the model room.  He heard a door close somewhere below him and could not tell whether it was the front door or the office door.  He stood there with one hand on the rail and did absolutely nothing.  Then the building stayed quiet, so he went on up, and by the time he reached the cabinet he had already started calling it nothing.\n\nAcross the table Ines is still writing.  She writes slowly and she is on her second sheet, which Jonah finds mildly insulting until he reads the top line of hers upside down.  She has logged the eleven seconds she was late calling in, and the fact that she nearly aborted the exercise, and the reason she decided not to.\n\nMarchetti collects the sheets without reading a single one of them.  He says the logs are not marked and never have been marked.  He says the only thing a log is ever for is the next person.  That person will be standing on a landing somewhere with one hand on a rail, wondering whether the sound they just heard matters.\n\nJonah asks for his sheet back.  Marchetti hands it over with no expression at all, which is somehow worse than any comment would have been.\n\nHe writes one more line at the bottom of the page.  Thirty seconds lost on the second floor landing, cause unknown, no action taken.  It is the least impressive sentence on the whole sheet and it takes him longer to write than everything above it.\n\nWalking out, Ines asks him how it went, and Jonah says it was easy, because that is the answer he has been planning since the stairs.  Then he stops in the corridor and tells her about the landing instead, all of it, including the part where he stood still and did nothing.  She does not laugh at him.  She says that thirty seconds is short enough that most people would never have noticed it at all.  Then she says that this is exactly why he had to be the one who wrote it down.",
+      "figureIds": [
+        "fig-l3-the-log"
+      ]
     },
     {
       "id": "p-beacon-brief",
@@ -65,7 +77,10 @@
       "docKind": "source-desk",
       "register": "SOURCE A · PRODUCT BRIEF",
       "source": "original",
-      "text": "The text below is a product brief for the Wren-7 locator beacon.  It was written and published by Corvid Systems, the company that designs, builds, and sells the Wren-7.  The brief carries a document number but no date anywhere on the page.\n\nThe Wren-7 solves the oldest problem in underground work.  A search team that cannot be located cannot be helped.  Until now the only honest answer to dead air has been a length of wire and a great deal of hope.  The Wren-7 is a beacon about the size of a deck of cards.  It sends out a coded pulse on a very low frequency.  Low frequencies were chosen because they pass through solid rock far better than the frequencies ordinary radios use.\n\nIn testing, the Wren-7 held a clear signal through forty feet of stone for the full ninety minutes of its battery life.  Our own engineers ran that test in the Halloway service tunnel with the receiver at the surface entrance.  The signal never once dropped below the level the receiver needs to report a position.  No other beacon anywhere near this price comes close to that result.\n\nWhat this means for your department is simple.  Any tunnel in the country can now be worked with confidence.  The Wren-7 has proven that forty feet of rock is no longer a barrier to contact.  Departments that have been saving for hardwired line can spend that money where it will do more good.\n\nThe Wren-7 is rated for water, dust, and impact.  It clips to a belt or a pack strap and weighs eleven ounces.  It switches on with one control that a gloved hand can find without looking.  The battery is the standard cell your department already keeps in stock.  Setup takes under a minute, and the receiver reads out a distance as well as a direction.\n\nCorvid Systems has been building rescue gear for nineteen years and stands behind this product completely.  We are confident that once your team has carried a Wren-7 they will not want to go back into a tunnel without one.  Contact our sales office for volume pricing and to arrange a live test at your own site.\n\nThe brief ends with one line of small print along the bottom of the page.  It says that test results depend on local conditions.  It says that Corvid Systems makes no guarantee of performance in any particular location."
+      "text": "The text below is a product brief for the Wren-7 locator beacon.  It was written and published by Corvid Systems, the company that designs, builds, and sells the Wren-7.  The brief carries a document number but no date anywhere on the page.\n\nThe Wren-7 solves the oldest problem in underground work.  A search team that cannot be located cannot be helped.  Until now the only honest answer to dead air has been a length of wire and a great deal of hope.  The Wren-7 is a beacon about the size of a deck of cards.  It sends out a coded pulse on a very low frequency.  Low frequencies were chosen because they pass through solid rock far better than the frequencies ordinary radios use.\n\nIn testing, the Wren-7 held a clear signal through forty feet of stone for the full ninety minutes of its battery life.  Our own engineers ran that test in the Halloway service tunnel with the receiver at the surface entrance.  The signal never once dropped below the level the receiver needs to report a position.  No other beacon anywhere near this price comes close to that result.\n\nWhat this means for your department is simple.  Any tunnel in the country can now be worked with confidence.  The Wren-7 has proven that forty feet of rock is no longer a barrier to contact.  Departments that have been saving for hardwired line can spend that money where it will do more good.\n\nThe Wren-7 is rated for water, dust, and impact.  It clips to a belt or a pack strap and weighs eleven ounces.  It switches on with one control that a gloved hand can find without looking.  The battery is the standard cell your department already keeps in stock.  Setup takes under a minute, and the receiver reads out a distance as well as a direction.\n\nCorvid Systems has been building rescue gear for nineteen years and stands behind this product completely.  We are confident that once your team has carried a Wren-7 they will not want to go back into a tunnel without one.  Contact our sales office for volume pricing and to arrange a live test at your own site.\n\nThe brief ends with one line of small print along the bottom of the page.  It says that test results depend on local conditions.  It says that Corvid Systems makes no guarantee of performance in any particular location.",
+      "figureIds": [
+        "fig-l4-beacon-brief"
+      ]
     },
     {
       "id": "p-beacon-log",
@@ -74,7 +89,10 @@
       "docKind": "source-desk",
       "register": "SOURCE B · TRAINING LOG",
       "source": "original",
-      "text": "The text below is an entry from the equipment log kept by the training staff at the Halloway site.  It is dated the fourteenth of March and signed by two instructors, Marchetti and Osei.  The log is written for the staff themselves and is not published anywhere.\n\nTwo beacons of the Wren-7 model were tested over two days in the Halloway service tunnel.  That is the same tunnel named in the maker's brief.  The purpose was to decide whether this site should replace its hardwired line with beacons before the summer exercises.\n\nOn the first run a beacon was carried down to the thirty foot level and switched on at the marked bay.  The surface receiver held the signal for nine minutes and then lost it.  The signal did not come back during the twenty minutes the team waited at that depth.  It returned within four seconds once the beacon was carried up to the twenty foot level.  On the second run the same beacon was carried to the same bay by a different instructor.  That time the receiver lost the signal after seven minutes.\n\nBoth runs were timed with a stopwatch.  Two observers wrote the times down separately, and their times differ by no more than three seconds.  The receiver was the unit supplied with the beacons.  Its battery was replaced before each run.\n\nThe staff note two local conditions that may explain the gap between these results and the maker's claim.  The Halloway tunnel bends sharply at the twenty-five foot level.  A beacon below that bend is not in a straight line with the surface receiver.  The tunnel is also cut through wet limestone rather than dry granite, and the walls are damp along most of their length.  The staff make no claim about how this beacon works in other tunnels.  Two runs in one tunnel is nowhere near enough evidence for a statement that broad.\n\nThe staff recommend that the site keep its hardwired line and treat the beacon as a second method rather than a replacement.  A tool that works for nine minutes is genuinely useful.  A team that has planned around ninety minutes is not.  This entry will be reviewed again after the summer exercises.  Any team that runs its own test is asked to record times, depth, and rock type in this same format."
+      "text": "The text below is an entry from the equipment log kept by the training staff at the Halloway site.  It is dated the fourteenth of March and signed by two instructors, Marchetti and Osei.  The log is written for the staff themselves and is not published anywhere.\n\nTwo beacons of the Wren-7 model were tested over two days in the Halloway service tunnel.  That is the same tunnel named in the maker's brief.  The purpose was to decide whether this site should replace its hardwired line with beacons before the summer exercises.\n\nOn the first run a beacon was carried down to the thirty foot level and switched on at the marked bay.  The surface receiver held the signal for nine minutes and then lost it.  The signal did not come back during the twenty minutes the team waited at that depth.  It returned within four seconds once the beacon was carried up to the twenty foot level.  On the second run the same beacon was carried to the same bay by a different instructor.  That time the receiver lost the signal after seven minutes.\n\nBoth runs were timed with a stopwatch.  Two observers wrote the times down separately, and their times differ by no more than three seconds.  The receiver was the unit supplied with the beacons.  Its battery was replaced before each run.\n\nThe staff note two local conditions that may explain the gap between these results and the maker's claim.  The Halloway tunnel bends sharply at the twenty-five foot level.  A beacon below that bend is not in a straight line with the surface receiver.  The tunnel is also cut through wet limestone rather than dry granite, and the walls are damp along most of their length.  The staff make no claim about how this beacon works in other tunnels.  Two runs in one tunnel is nowhere near enough evidence for a statement that broad.\n\nThe staff recommend that the site keep its hardwired line and treat the beacon as a second method rather than a replacement.  A tool that works for nine minutes is genuinely useful.  A team that has planned around ninety minutes is not.  This entry will be reviewed again after the summer exercises.  Any team that runs its own test is asked to record times, depth, and rock type in this same format.",
+      "figureIds": [
+        "fig-l4-beacon-log"
+      ]
     },
     {
       "id": "p-three-tunnels",
@@ -83,7 +101,10 @@
       "docKind": "memo",
       "register": "COMPARISON · THREE TUNNELS",
       "source": "original",
-      "text": "A rescue training association ran the same beacon test in three different tunnels last spring.  It published all three results side by side, which turns out to be far more useful than any one of them alone.\n\nThe first tunnel was cut through dry granite and ran almost straight for two hundred feet.  A beacon at the forty foot level held its signal for the full life of the battery.  The receiver at the entrance never lost it once.  The second tunnel was wet limestone with a sharp bend at twenty-five feet.  A beacon at the thirty foot level lost contact there after eight minutes.  That is close to what the training staff at Halloway recorded in their own log.  The third tunnel was dry limestone with a gentle curve.  The beacon there held for fifty-one minutes before the signal became unreliable.\n\nRead on its own, each of those results looks like a verdict on the equipment.  Read together, they say something different, which is that the beacon is not the thing that changed.  Three conditions differed between the three tunnels.  Every one of them is a property of the ground rather than of the device.\n\nWater is the first of them.  Wet rock absorbs radio energy far more effectively than dry rock does.  Water is extremely good at turning a signal into heat.  A damp limestone wall can cost a team more range than another ten feet of depth would.\n\nThe shape of the path is the second.  A signal traveling through rock does best when the beacon and the receiver sit close to a straight line.  A sharp bend forces the signal to cut the corner through solid material instead of following the open passage.  That extra rock does the same work that greater depth would do.\n\nDepth is the third, and it is the one everybody thinks of first.  It clearly matters, but the association's own numbers show that it is not the whole story.  A beacon at forty feet in the first tunnel outperformed a beacon at thirty feet in the second by more than an hour.\n\nThe practical conclusion is not that these beacons are good or that they are bad.  It is that a claim about beacon performance is close to meaningless unless it names the depth, the rock, and the shape of the passage.  A team deciding what to buy should ask for the conditions of a test before asking for the result.  A number offered without those conditions should be treated as a number that cannot be checked.  The association recommends that every department run one test in its own worst tunnel rather than trusting a figure measured somewhere else."
+      "text": "A rescue training association ran the same beacon test in three different tunnels last spring.  It published all three results side by side, which turns out to be far more useful than any one of them alone.\n\nThe first tunnel was cut through dry granite and ran almost straight for two hundred feet.  A beacon at the forty foot level held its signal for the full life of the battery.  The receiver at the entrance never lost it once.  The second tunnel was wet limestone with a sharp bend at twenty-five feet.  A beacon at the thirty foot level lost contact there after eight minutes.  That is close to what the training staff at Halloway recorded in their own log.  The third tunnel was dry limestone with a gentle curve.  The beacon there held for fifty-one minutes before the signal became unreliable.\n\nRead on its own, each of those results looks like a verdict on the equipment.  Read together, they say something different, which is that the beacon is not the thing that changed.  Three conditions differed between the three tunnels.  Every one of them is a property of the ground rather than of the device.\n\nWater is the first of them.  Wet rock absorbs radio energy far more effectively than dry rock does.  Water is extremely good at turning a signal into heat.  A damp limestone wall can cost a team more range than another ten feet of depth would.\n\nThe shape of the path is the second.  A signal traveling through rock does best when the beacon and the receiver sit close to a straight line.  A sharp bend forces the signal to cut the corner through solid material instead of following the open passage.  That extra rock does the same work that greater depth would do.\n\nDepth is the third, and it is the one everybody thinks of first.  It clearly matters, but the association's own numbers show that it is not the whole story.  A beacon at forty feet in the first tunnel outperformed a beacon at thirty feet in the second by more than an hour.\n\nThe practical conclusion is not that these beacons are good or that they are bad.  It is that a claim about beacon performance is close to meaningless unless it names the depth, the rock, and the shape of the passage.  A team deciding what to buy should ask for the conditions of a test before asking for the result.  A number offered without those conditions should be treated as a number that cannot be checked.  The association recommends that every department run one test in its own worst tunnel rather than trusting a figure measured somewhere else.",
+      "figureIds": [
+        "fig-l5-three-tunnels"
+      ]
     },
     {
       "id": "p-dead-drop",
@@ -92,7 +113,10 @@
       "docKind": "procedure",
       "register": "TRADECRAFT NOTE",
       "source": "original",
-      "text": "A dead drop solves one problem.  Two people who are never seen together cannot be tied together.  A meeting puts both people in one place at one time.  A place and a time are exactly what a follower needs to prove a connection.  A dead drop takes the second person out of the picture.  One person hides something.  Much later, with nobody watching either person at once, a second person collects it.\n\nThe container is the first decision.  It is never a container that looks like a container.  A hollow bolt can thread into a fence post, a magnetic box can hide under a mailbox lip, or a folded paper can wait behind a loose brick.  Each one is built for a stranger's hands.  Each one means nothing to anyone who was not told to look.  A drop that draws a second glance has already failed, whether or not anyone opens it.\n\nThe location matters as much as the container.  A good site is public enough that standing there for thirty seconds needs no excuse.  It is also dull enough that nobody remembers who stood there.  A park bench works.  A doorway that a hundred people pass every hour works better.  A place only one kind of person would visit never works.  That single reason is the first thing an investigator would ask about.\n\nLoading a drop and knowing it is loaded are two separate problems, and the second is where most training time goes.  The collector cannot walk past the site every day just to check, because repetition is its own kind of pattern.  Instead the two sides agree on a signal placed somewhere else: a chalk mark on a lamppost, a strip of tape on a stop sign, or a plant moved from one side of a window to the other.  The signal says one thing only, that the drop is ready, and it says so from a distance, to someone walking past on the way to somewhere else.\n\nThe last rule belongs to the collector, not to whoever loaded the drop.  Walking straight from the signal to the drop site creates the very problem the method exists to avoid, because now a follower only has to watch one person do both things back to back.  So the collector treats the pickup like a meeting that must be checked first: a slow route, a stop that shows what is behind, and a walk away with nothing retrieved if anything looks wrong.  Empty hands are never the failure.  Going back tomorrow costs nothing, and being seen costs everything.\n\nThat is the whole point of splitting a handoff into two halves separated by hours or days instead of by feet.  Nobody has to be caught in the same place at the same time as anybody else, and a connection nobody observed can never later be proven."
+      "text": "A dead drop solves one problem.  Two people who are never seen together cannot be tied together.  A meeting puts both people in one place at one time.  A place and a time are exactly what a follower needs to prove a connection.  A dead drop takes the second person out of the picture.  One person hides something.  Much later, with nobody watching either person at once, a second person collects it.\n\nThe container is the first decision.  It is never a container that looks like a container.  A hollow bolt can thread into a fence post, a magnetic box can hide under a mailbox lip, or a folded paper can wait behind a loose brick.  Each one is built for a stranger's hands.  Each one means nothing to anyone who was not told to look.  A drop that draws a second glance has already failed, whether or not anyone opens it.\n\nThe location matters as much as the container.  A good site is public enough that standing there for thirty seconds needs no excuse.  It is also dull enough that nobody remembers who stood there.  A park bench works.  A doorway that a hundred people pass every hour works better.  A place only one kind of person would visit never works.  That single reason is the first thing an investigator would ask about.\n\nLoading a drop and knowing it is loaded are two separate problems, and the second is where most training time goes.  The collector cannot walk past the site every day just to check, because repetition is its own kind of pattern.  Instead the two sides agree on a signal placed somewhere else: a chalk mark on a lamppost, a strip of tape on a stop sign, or a plant moved from one side of a window to the other.  The signal says one thing only, that the drop is ready, and it says so from a distance, to someone walking past on the way to somewhere else.\n\nThe last rule belongs to the collector, not to whoever loaded the drop.  Walking straight from the signal to the drop site creates the very problem the method exists to avoid, because now a follower only has to watch one person do both things back to back.  So the collector treats the pickup like a meeting that must be checked first: a slow route, a stop that shows what is behind, and a walk away with nothing retrieved if anything looks wrong.  Empty hands are never the failure.  Going back tomorrow costs nothing, and being seen costs everything.\n\nThat is the whole point of splitting a handoff into two halves separated by hours or days instead of by feet.  Nobody has to be caught in the same place at the same time as anybody else, and a connection nobody observed can never later be proven.",
+      "figureIds": [
+        "fig-l1-dead-drop"
+      ]
     },
     {
       "id": "p-one-time-pad",
@@ -119,7 +143,10 @@
       "docKind": "status-log",
       "register": "EXERCISE LOG",
       "source": "original",
-      "text": "My job for the Reading Room exercise is to sit in the archive parking lot with a phone, a notepad, and nothing to do until Ines calls.  Marchetti assigned it to me the day after my own exercise.  He said that was deliberate, because watching teaches you things that going in never does.  I did not believe him until about four minutes ago.\n\nInes went in at two-oh-one.  The plan says she checks in by two-twenty.  If I have heard nothing by two-twenty-five, I call Marchetti, and the exercise ends whether she likes it or not.  My phone sits face up on the dashboard so I do not have to pick it up to see the screen.  That is its own kind of admission about how this feels from out here.\n\nAt two-nineteen a man in a grey jacket walks in through the archive doors.  At two-twenty-one the same man walks back out, alone, checking his phone the way people do when they are actually checking their phone and not pretending to.  I write down the time anyway.  Marchetti's other rule is that you log what you saw, not what you decided it meant.  Deciding what a stranger in a jacket was doing is exactly the kind of decision that has burned people before me.\n\nTwo-twenty-five arrives with no text on the screen.  My thumb hovers over Marchetti's contact, and I do not press it.  Ines gave me the reason once herself, after her own turn watching a door.  A plan has a margin built into it on purpose, and using the margin is not the same as the plan failing.  Two-twenty-five is late.  Two-twenty-five is not the same as gone.\n\nAt two-twenty-seven the phone buzzes once.  That is the signal for out and clear, no need to call back.  I let out a breath I did not notice I was holding, and write the real time down next to the time the plan expected, because Marchetti reads both numbers, not just the one that makes the exercise look tidy.\n\nInes tells me on the walk back that the second box slowed her down, the one she never asked for and almost trusted just because somebody handed it to her.  I tell her about the man in the grey jacket, and how sure I was for two whole seconds that I had found something.  Neither one of us actually found anything today, and what we found instead was the two seconds where we almost stopped checking.  Marchetti has told us often enough that those two seconds are the whole reason this job has a watcher at all."
+      "text": "My job for the Reading Room exercise is to sit in the archive parking lot with a phone, a notepad, and nothing to do until Ines calls.  Marchetti assigned it to me the day after my own exercise.  He said that was deliberate, because watching teaches you things that going in never does.  I did not believe him until about four minutes ago.\n\nInes went in at two-oh-one.  The plan says she checks in by two-twenty.  If I have heard nothing by two-twenty-five, I call Marchetti, and the exercise ends whether she likes it or not.  My phone sits face up on the dashboard so I do not have to pick it up to see the screen.  That is its own kind of admission about how this feels from out here.\n\nAt two-nineteen a man in a grey jacket walks in through the archive doors.  At two-twenty-one the same man walks back out, alone, checking his phone the way people do when they are actually checking their phone and not pretending to.  I write down the time anyway.  Marchetti's other rule is that you log what you saw, not what you decided it meant.  Deciding what a stranger in a jacket was doing is exactly the kind of decision that has burned people before me.\n\nTwo-twenty-five arrives with no text on the screen.  My thumb hovers over Marchetti's contact, and I do not press it.  Ines gave me the reason once herself, after her own turn watching a door.  A plan has a margin built into it on purpose, and using the margin is not the same as the plan failing.  Two-twenty-five is late.  Two-twenty-five is not the same as gone.\n\nAt two-twenty-seven the phone buzzes once.  That is the signal for out and clear, no need to call back.  I let out a breath I did not notice I was holding, and write the real time down next to the time the plan expected, because Marchetti reads both numbers, not just the one that makes the exercise look tidy.\n\nInes tells me on the walk back that the second box slowed her down, the one she never asked for and almost trusted just because somebody handed it to her.  I tell her about the man in the grey jacket, and how sure I was for two whole seconds that I had found something.  Neither one of us actually found anything today, and what we found instead was the two seconds where we almost stopped checking.  Marchetti has told us often enough that those two seconds are the whole reason this job has a watcher at all.",
+      "figureIds": [
+        "fig-l3-on-the-line"
+      ]
     },
     {
       "id": "p-petrel-brief",
@@ -128,7 +155,10 @@
       "docKind": "source-desk",
       "register": "SOURCE A · PRODUCT BRIEF",
       "source": "original",
-      "text": "The text below is a product brief for the Petrel-4 tracking tag.  It was written and published by Corvid Systems, the company that designs, builds, and sells the Petrel-4.  The brief carries a document number but no date anywhere on the page.\n\nEvery team that has ever lost a signal in the field wants the same thing.  They want a tracker that simply keeps working.  The Petrel-4 is a sealed tag the size of a matchbook.  It holds a GPS fix and reports it over a low-power link for as long as its single charge lasts.  Earlier tags on the market drained fast because they searched constantly for a signal, even when none was there.  The Petrel-4 solves that by learning the pattern of when a fix is likely and searching only then.\n\nIn testing, a fully charged Petrel-4 held a working fix for thirty days straight.  It reported its position on schedule every single time.  Our engineers ran that test at our own facility, cycling the unit through a normal daily routine of movement and stillness for the entire month.  Not once during the full thirty days did the tag miss a scheduled report.  No other tag in its size class has matched that number under comparable conditions.\n\nWhat this means for your team is simple.  A Petrel-4 clipped to a pack at the start of a long deployment will still be reporting a month later.  There is no battery swap, and no need to plan around a shorter window.  Teams that have been carrying spare batteries or backup trackers can leave that extra weight behind.\n\nThe Petrel-4 is rated for water, dust, and a two-meter drop onto concrete.  It charges from any standard cable in under two hours and pairs with a phone app in seconds.  The housing comes in three colors, though the electronics inside are identical across all three.  Corvid Systems has been building rescue and tracking gear for nineteen years and stands behind every unit that leaves the factory.\n\nContact our sales office to arrange a live demonstration at your own site, and ask about volume pricing for departments ordering more than ten units.  The brief closes with one line of small print beneath the order form.  It states that the thirty-day figure was measured at a constant seventy degrees, and that battery performance in other conditions may vary."
+      "text": "The text below is a product brief for the Petrel-4 tracking tag.  It was written and published by Corvid Systems, the company that designs, builds, and sells the Petrel-4.  The brief carries a document number but no date anywhere on the page.\n\nEvery team that has ever lost a signal in the field wants the same thing.  They want a tracker that simply keeps working.  The Petrel-4 is a sealed tag the size of a matchbook.  It holds a GPS fix and reports it over a low-power link for as long as its single charge lasts.  Earlier tags on the market drained fast because they searched constantly for a signal, even when none was there.  The Petrel-4 solves that by learning the pattern of when a fix is likely and searching only then.\n\nIn testing, a fully charged Petrel-4 held a working fix for thirty days straight.  It reported its position on schedule every single time.  Our engineers ran that test at our own facility, cycling the unit through a normal daily routine of movement and stillness for the entire month.  Not once during the full thirty days did the tag miss a scheduled report.  No other tag in its size class has matched that number under comparable conditions.\n\nWhat this means for your team is simple.  A Petrel-4 clipped to a pack at the start of a long deployment will still be reporting a month later.  There is no battery swap, and no need to plan around a shorter window.  Teams that have been carrying spare batteries or backup trackers can leave that extra weight behind.\n\nThe Petrel-4 is rated for water, dust, and a two-meter drop onto concrete.  It charges from any standard cable in under two hours and pairs with a phone app in seconds.  The housing comes in three colors, though the electronics inside are identical across all three.  Corvid Systems has been building rescue and tracking gear for nineteen years and stands behind every unit that leaves the factory.\n\nContact our sales office to arrange a live demonstration at your own site, and ask about volume pricing for departments ordering more than ten units.  The brief closes with one line of small print beneath the order form.  It states that the thirty-day figure was measured at a constant seventy degrees, and that battery performance in other conditions may vary.",
+      "figureIds": [
+        "fig-l4-petrel-brief"
+      ]
     },
     {
       "id": "p-cold-weather-log",
@@ -137,7 +167,10 @@
       "docKind": "source-desk",
       "register": "SOURCE B · TRIAL LOG",
       "source": "original",
-      "text": "The text below is an entry from the equipment log kept by the training staff at the Halloway site.  It is dated the second of January and signed by two trainers, Osei and Marchetti.  The log is written for the staff themselves.  It is not published anywhere.\n\nFour Petrel-4 tags went out on the January cold-weather trip, to test whether they could replace the site's older trackers for winter work.  The trip ran across three days.  Outdoor temperature held between fifteen and twenty-five degrees for most of each day.\n\nAll four tags began the trip at full charge.  By the end of day one, every tag had lost more charge than the maker's numbers would predict for one normal day.  By the end of day two, two of the four tags had gone silent, about sixty hours into what the brief calls a thirty-day battery life.  The other two tags lasted into day three before they also went silent.  The longest one stopped just past sixty-eight hours.\n\nEach tag was brought in and warmed up before staff checked it again, and all four came back to life within minutes.  That tells the staff the cold did not damage the tags, though something about the cold itself was draining the charge much faster than a warm day would.\n\nThe staff have two guesses.  A cold battery cannot give its full stored charge, and that is true of batteries in general, not just this tag.  The tag may also have searched harder for a signal in a test site with more tree cover than the maker used.  Neither guess was tested this time, so both stay questions for the next trial rather than settled facts.\n\nThe staff say Petrel-4 tags should not be trusted alone on any winter trip.  That holds true until someone measures a real cold-weather number, instead of assuming the summer number still applies.  A tag rated for thirty days that only lasts three in the cold is not broken.  It is a tag whose one published number describes one set of conditions, and a Halloway winter is not that set.  This entry will be checked again after a planned trial in February, at a colder site."
+      "text": "The text below is an entry from the equipment log kept by the training staff at the Halloway site.  It is dated the second of January and signed by two trainers, Osei and Marchetti.  The log is written for the staff themselves.  It is not published anywhere.\n\nFour Petrel-4 tags went out on the January cold-weather trip, to test whether they could replace the site's older trackers for winter work.  The trip ran across three days.  Outdoor temperature held between fifteen and twenty-five degrees for most of each day.\n\nAll four tags began the trip at full charge.  By the end of day one, every tag had lost more charge than the maker's numbers would predict for one normal day.  By the end of day two, two of the four tags had gone silent, about sixty hours into what the brief calls a thirty-day battery life.  The other two tags lasted into day three before they also went silent.  The longest one stopped just past sixty-eight hours.\n\nEach tag was brought in and warmed up before staff checked it again, and all four came back to life within minutes.  That tells the staff the cold did not damage the tags, though something about the cold itself was draining the charge much faster than a warm day would.\n\nThe staff have two guesses.  A cold battery cannot give its full stored charge, and that is true of batteries in general, not just this tag.  The tag may also have searched harder for a signal in a test site with more tree cover than the maker used.  Neither guess was tested this time, so both stay questions for the next trial rather than settled facts.\n\nThe staff say Petrel-4 tags should not be trusted alone on any winter trip.  That holds true until someone measures a real cold-weather number, instead of assuming the summer number still applies.  A tag rated for thirty days that only lasts three in the cold is not broken.  It is a tag whose one published number describes one set of conditions, and a Halloway winter is not that set.  This entry will be checked again after a planned trial in February, at a colder site.",
+      "figureIds": [
+        "fig-l4-cold-weather-log"
+      ]
     },
     {
       "id": "p-three-climates",
@@ -146,7 +179,10 @@
       "docKind": "memo",
       "register": "COMPARISON · THREE CLIMATES",
       "source": "original",
-      "text": "An equipment review board tested the same tracking tag in three different climates last winter.  It shared all three results together.  That turns out to matter more than any single number would on its own.\n\nThe first test ran in a mild coastal climate, with temperatures in the fifties throughout.  A tag there ran for twenty-six days on one charge.  That is close to the maker's own thirty-day number, and a range a buyer could plan around.  The second test ran in a desert climate, with daytime heat above ninety degrees.  That tag lasted only nineteen days, as repeated hot stretches seemed to wear the battery down faster than a mild day would.  The third test ran in a freezing mountain climate.  A tag there lasted just under three days before it went silent, a runtime the board called far below every other test.\n\nRead alone, each number looks like a verdict on the tag itself.  A buyer who reads only the top line could easily call the tag bad, or great, depending on which single test they saw.  Read together, the three results say something more exact.  The tag did not change between tests.  The climate did.\n\nCold is the clearest of the three factors.  A battery loses much of its charge in freezing air, no matter which device it powers.  That is true of the chemistry inside the battery, not of any one tag, though heat works differently and still costs runtime.  It wears the battery down a different way, over repeated hot stretches, rather than draining it all at once.  Mild weather costs the least of the three, which is why a maker's own test, run at a comfortable room temperature, tends to show the best number the device can reach.\n\nNone of this means a buyer should doubt every runtime number a maker shares.  It means a number describes one climate, not every climate, and a buyer who needs the cold to work has to ask for the cold number rather than accept the warmest one on offer.  The board's advice is the same one a careful buyer would reach alone.  Ask what temperature a number was measured at before you compare it to any other number.  Two numbers measured in two different climates are not really being compared at all."
+      "text": "An equipment review board tested the same tracking tag in three different climates last winter.  It shared all three results together.  That turns out to matter more than any single number would on its own.\n\nThe first test ran in a mild coastal climate, with temperatures in the fifties throughout.  A tag there ran for twenty-six days on one charge.  That is close to the maker's own thirty-day number, and a range a buyer could plan around.  The second test ran in a desert climate, with daytime heat above ninety degrees.  That tag lasted only nineteen days, as repeated hot stretches seemed to wear the battery down faster than a mild day would.  The third test ran in a freezing mountain climate.  A tag there lasted just under three days before it went silent, a runtime the board called far below every other test.\n\nRead alone, each number looks like a verdict on the tag itself.  A buyer who reads only the top line could easily call the tag bad, or great, depending on which single test they saw.  Read together, the three results say something more exact.  The tag did not change between tests.  The climate did.\n\nCold is the clearest of the three factors.  A battery loses much of its charge in freezing air, no matter which device it powers.  That is true of the chemistry inside the battery, not of any one tag, though heat works differently and still costs runtime.  It wears the battery down a different way, over repeated hot stretches, rather than draining it all at once.  Mild weather costs the least of the three, which is why a maker's own test, run at a comfortable room temperature, tends to show the best number the device can reach.\n\nNone of this means a buyer should doubt every runtime number a maker shares.  It means a number describes one climate, not every climate, and a buyer who needs the cold to work has to ask for the cold number rather than accept the warmest one on offer.  The board's advice is the same one a careful buyer would reach alone.  Ask what temperature a number was measured at before you compare it to any other number.  Two numbers measured in two different climates are not really being compared at all.",
+      "figureIds": [
+        "fig-l5-three-climates"
+      ]
     }
   ],
   "levels": [
@@ -185,7 +221,10 @@
         "l1-mc-only-one-kind-of-person",
         "l1-ebsr-signal-not-daily-check",
         "l1-ebsr-collectors-own-rule"
-      ]
+      ],
+      "reveal": {
+        "figureId": "fig-l1-long-way"
+      }
     },
     {
       "id": 2,
@@ -222,7 +261,10 @@
         "l2-mc-page-already-used",
         "l2-ebsr-practical-meaning",
         "l2-ebsr-closing-paragraph-job"
-      ]
+      ],
+      "reveal": {
+        "figureId": "fig-l2-dead-air"
+      }
     },
     {
       "id": 3,
@@ -260,7 +302,10 @@
         "l3-mc-two-viewpoints-compared",
         "l3-ebsr-why-two-seconds",
         "l3-ebsr-first-person-watcher"
-      ]
+      ],
+      "reveal": {
+        "figureId": "fig-l3-relay-room"
+      }
     },
     {
       "id": 4,
@@ -297,7 +342,10 @@
         "l4-mc-what-makes-the-log-careful",
         "l4-ebsr-two-guesses-not-facts",
         "l4-ebsr-thirty-vs-three"
-      ]
+      ],
+      "reveal": {
+        "figureId": "fig-l4-beacon-brief"
+      }
     },
     {
       "id": 5,
@@ -334,7 +382,10 @@
         "l5-mc-mountain-test-and-the-log",
         "l5-ebsr-advice-this-article-supports",
         "l5-ebsr-the-line-that-explains-petrel"
-      ]
+      ],
+      "reveal": {
+        "figureId": "fig-l5-three-tunnels"
+      }
     },
     {
       "id": 6,
@@ -375,7 +426,10 @@
         "l6-short-log-purpose",
         "l6-mc-two-briefs-compared",
         "l6-ms-two-studies-compared"
-      ]
+      ],
+      "reveal": {
+        "figureId": "fig-l1-dead-drop"
+      }
     }
   ],
   "items": [
@@ -4839,6 +4893,688 @@
         "5": "Neither article recommends giving up on the device; each treats it as genuinely useful once its real limits are understood and planned around."
       },
       "explain": "Both articles follow the same shape: report several results side by side, name the specific ground or climate condition that explains the spread, and close with practical advice rather than a verdict on the device. That shared structure, seen in two unrelated articles about two different tools, is a genuine pattern, not a coincidence."
+    }
+  ],
+  "figures": [
+    {
+      "id": "fig-l1-long-way",
+      "kind": "map",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l1-long-way.svg",
+      "caption": "The courier makes three moves in order, then follows the counting rule and the last rule.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A left-to-right line of six numbered dots, with a numbered key below it naming each move and rule in the order the passage gives them.",
+      "dataTable": {
+        "type": "route",
+        "sourcePassageId": "p-long-way",
+        "path": "line",
+        "title": "a surveillance detection run",
+        "stops": [
+          {
+            "n": 1,
+            "label": "a doubling back"
+          },
+          {
+            "n": 2,
+            "label": "a stop in front of something that reflects"
+          },
+          {
+            "n": 3,
+            "label": "a change of level"
+          },
+          {
+            "n": 4,
+            "label": "three sightings in three unrelated places"
+          },
+          {
+            "n": 5,
+            "label": "the run is over"
+          },
+          {
+            "n": 6,
+            "label": "buys a carton of milk, goes home"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fig-l1-dead-drop",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l1-dead-drop.svg",
+      "caption": "The person loading the drop and the collector each follow their own line, and the two lines do not meet.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A diagram with two rows of boxes that never touch: a top row running loading a drop, hides something, a chalk mark, and a bottom row running the collector, a slow route, collects it.",
+      "dataTable": {
+        "type": "schematic",
+        "sourcePassageId": "p-dead-drop",
+        "layout": "plan",
+        "title": "a dead drop",
+        "nodes": [
+          {
+            "id": "load",
+            "label": "loading a drop",
+            "shape": "round",
+            "x": 15,
+            "y": 24
+          },
+          {
+            "id": "hide",
+            "label": "hides something",
+            "shape": "box",
+            "x": 50,
+            "y": 24
+          },
+          {
+            "id": "mark",
+            "label": "a chalk mark",
+            "shape": "box",
+            "x": 85,
+            "y": 24
+          },
+          {
+            "id": "coll",
+            "label": "the collector",
+            "shape": "round",
+            "x": 15,
+            "y": 76
+          },
+          {
+            "id": "route",
+            "label": "a slow route",
+            "shape": "box",
+            "x": 50,
+            "y": 76
+          },
+          {
+            "id": "pick",
+            "label": "collects it",
+            "shape": "box",
+            "x": 85,
+            "y": 76
+          }
+        ],
+        "edges": [
+          {
+            "from": "load",
+            "to": "hide",
+            "style": "arrow"
+          },
+          {
+            "from": "hide",
+            "to": "mark",
+            "style": "arrow",
+            "label": "the drop is ready"
+          },
+          {
+            "from": "coll",
+            "to": "route",
+            "style": "arrow",
+            "label": "must be checked first"
+          },
+          {
+            "from": "route",
+            "to": "pick",
+            "style": "arrow"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fig-l2-dead-air",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l2-dead-air.svg",
+      "caption": "A relay parked just inside the entrance hears the team below and passes the message up to the surface crew, because the deeper a team goes, the less of the signal survives.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A plan diagram in two columns: on the left, boxes reading the team below, just inside the entrance, and the surface crew are joined by arrows pointing upward; on the right, thirty feet of granite sits above the deeper a team goes, with an arrow running down to the less of the signal survives.",
+      "dataTable": {
+        "type": "schematic",
+        "sourcePassageId": "p-dead-air",
+        "layout": "plan",
+        "title": "The fix is a relay",
+        "nodes": [
+          {
+            "id": "surface",
+            "label": "the surface crew",
+            "shape": "box",
+            "x": 24,
+            "y": 0
+          },
+          {
+            "id": "relay",
+            "label": "just inside the entrance",
+            "shape": "box",
+            "x": 24,
+            "y": 50
+          },
+          {
+            "id": "below",
+            "label": "the team below",
+            "shape": "box",
+            "x": 24,
+            "y": 100
+          },
+          {
+            "id": "rock",
+            "label": "thirty feet of granite",
+            "shape": "box",
+            "x": 79,
+            "y": 8
+          },
+          {
+            "id": "deeper",
+            "label": "the deeper a team goes",
+            "shape": "box",
+            "x": 79,
+            "y": 45
+          },
+          {
+            "id": "loss",
+            "label": "the less of the signal survives",
+            "shape": "box",
+            "x": 79,
+            "y": 85
+          }
+        ],
+        "edges": [
+          {
+            "from": "below",
+            "to": "relay",
+            "style": "arrow"
+          },
+          {
+            "from": "relay",
+            "to": "surface",
+            "style": "arrow"
+          },
+          {
+            "from": "rock",
+            "to": "deeper",
+            "style": "line"
+          },
+          {
+            "from": "deeper",
+            "to": "loss",
+            "style": "arrow"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fig-l3-relay-room",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l3-relay-room.svg",
+      "caption": "The thumb goes on the transmit key at ten twenty-one, just ahead of the ten twenty-two moment when the rule says to call the whole exercise off.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A timeline in two lanes: the upper lane, The rule, carries markers at ten twenty and ten twenty-two, while the lower lane, I write down times, carries four markers running from ten fourteen to ten twenty-two and eleven seconds.",
+      "dataTable": {
+        "type": "timeline",
+        "sourcePassageId": "p-relay-room",
+        "title": "The Halloway exercise",
+        "tracks": [
+          "The rule",
+          "I write down times"
+        ],
+        "events": [
+          {
+            "t": "ten fourteen",
+            "label": "Jonah goes in",
+            "track": "I write down times"
+          },
+          {
+            "t": "ten twenty",
+            "label": "he checks in at ten twenty",
+            "track": "The rule"
+          },
+          {
+            "t": "ten twenty",
+            "label": "nothing on the radio but the hiss",
+            "track": "I write down times"
+          },
+          {
+            "t": "ten twenty-one",
+            "label": "my thumb on the transmit key",
+            "track": "I write down times"
+          },
+          {
+            "t": "ten twenty-two",
+            "label": "I call the whole exercise off",
+            "track": "The rule"
+          },
+          {
+            "t": "ten twenty-two",
+            "label": "which is late, the radio clicks twice",
+            "track": "I write down times"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fig-l3-the-log",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l3-the-log.svg",
+      "caption": "Jonah's log sheet shows what happened in one column, and the line he went back and added sits in the column beside it.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A document card headed the log sheets, ruled into two columns: what happened lists the recorded entries from entry at ten fourteen to exit at ten forty-one, and one more line at the bottom of the page holds the sentence Jonah added, with a not marked stamp tilted at the lower right.",
+      "dataTable": {
+        "type": "facsimile",
+        "sourcePassageId": "p-the-log",
+        "docKind": "minutes",
+        "title": "the log sheets",
+        "columns": [
+          {
+            "heading": "what happened",
+            "rows": [
+              "entry at ten fourteen",
+              "contact with front desk staff",
+              "two clicks at ten twenty-two",
+              "the folder located and photographed and put back",
+              "exit at ten forty-one"
+            ]
+          },
+          {
+            "heading": "one more line at the bottom of the page",
+            "rows": [
+              "Thirty seconds lost",
+              "on the second floor landing",
+              "cause unknown",
+              "no action taken",
+              ""
+            ]
+          }
+        ],
+        "stamp": "not marked"
+      }
+    },
+    {
+      "id": "fig-l3-on-the-line",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l3-on-the-line.svg",
+      "caption": "The man in the grey jacket walks in at two-nineteen and back out at two-twenty-one, and the phone buzzes at two-twenty-seven, after the plan's two-twenty-five limit.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A timeline in two lanes: the plan above, with markers at two-twenty and two-twenty-five, and the real time below, with markers at two-oh-one, two-nineteen, two-twenty-one and two-twenty-seven.",
+      "dataTable": {
+        "type": "timeline",
+        "sourcePassageId": "p-on-the-line",
+        "title": "The Reading Room exercise",
+        "tracks": [
+          "the plan",
+          "the real time"
+        ],
+        "events": [
+          {
+            "t": "two-oh-one",
+            "label": "Ines went in",
+            "track": "the real time"
+          },
+          {
+            "t": "two-nineteen",
+            "label": "a man in a grey jacket walks in",
+            "track": "the real time"
+          },
+          {
+            "t": "two-twenty",
+            "label": "she checks in by two-twenty",
+            "track": "the plan"
+          },
+          {
+            "t": "two-twenty-one",
+            "label": "the same man walks back out, alone",
+            "track": "the real time"
+          },
+          {
+            "t": "two-twenty-five",
+            "label": "the exercise ends",
+            "track": "the plan"
+          },
+          {
+            "t": "two-twenty-seven",
+            "label": "the phone buzzes once",
+            "track": "the real time"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fig-l4-beacon-brief",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l4-beacon-brief.svg",
+      "caption": "Corvid Systems states its forty feet and ninety minutes up front, then sets the small print apart at the foot of the page.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A document card headed the Wren-7 locator beacon, with a boxed line about forty feet of stone and ninety minutes above the underlined small-print lines, stamped Corvid Systems.",
+      "dataTable": {
+        "type": "facsimile",
+        "sourcePassageId": "p-beacon-brief",
+        "docKind": "source-desk",
+        "title": "the Wren-7 locator beacon",
+        "header": [
+          {
+            "label": "published by",
+            "value": "Corvid Systems"
+          },
+          {
+            "label": "the brief carries",
+            "value": "a document number"
+          },
+          {
+            "label": "date",
+            "value": "no date anywhere on the page"
+          }
+        ],
+        "lines": [
+          {
+            "text": "In testing, the Wren-7 held a clear signal"
+          },
+          {
+            "text": "forty feet of stone for the full ninety minutes",
+            "emphasis": "box"
+          },
+          {
+            "text": "The signal never once dropped below the level"
+          },
+          {
+            "text": "one line of small print along the bottom"
+          },
+          {
+            "text": "test results depend on local conditions",
+            "emphasis": "underline"
+          },
+          {
+            "text": "Corvid Systems makes no guarantee of performance",
+            "emphasis": "underline"
+          }
+        ],
+        "stamp": "Corvid Systems"
+      }
+    },
+    {
+      "id": "fig-l4-beacon-log",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l4-beacon-log.svg",
+      "caption": "The staff logged nine minutes on the first run and seven minutes on the second, beside a claim of ninety minutes.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A log card with columns for run, times, depth and rock type, listing the first run at nine minutes and the second run at seven minutes, stamped not published anywhere.",
+      "dataTable": {
+        "type": "facsimile",
+        "sourcePassageId": "p-beacon-log",
+        "docKind": "source-desk",
+        "title": "the equipment log",
+        "header": [
+          {
+            "label": "dated",
+            "value": "the fourteenth of March"
+          },
+          {
+            "label": "signed by",
+            "value": "Marchetti and Osei"
+          },
+          {
+            "label": "tunnel",
+            "value": "the Halloway service tunnel"
+          },
+          {
+            "label": "the maker's claim",
+            "value": "ninety minutes"
+          }
+        ],
+        "columns": [
+          {
+            "heading": "run",
+            "rows": [
+              "the first run",
+              "the second run"
+            ]
+          },
+          {
+            "heading": "times",
+            "rows": [
+              "nine minutes",
+              "seven minutes"
+            ]
+          },
+          {
+            "heading": "depth",
+            "rows": [
+              "the thirty foot level",
+              "the same bay"
+            ]
+          },
+          {
+            "heading": "rock type",
+            "rows": [
+              "wet limestone",
+              "wet limestone"
+            ]
+          }
+        ],
+        "stamp": "not published anywhere"
+      }
+    },
+    {
+      "id": "fig-l4-petrel-brief",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l4-petrel-brief.svg",
+      "caption": "Corvid Systems prints thirty days straight as its headline, and puts the seventy degrees the test ran at down in the small print.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A document card headed the Petrel-4 tracking tag, with thirty days straight boxed near the top and two underlined small-print lines about seventy degrees below.",
+      "dataTable": {
+        "type": "facsimile",
+        "sourcePassageId": "p-petrel-brief",
+        "docKind": "source-desk",
+        "title": "the Petrel-4 tracking tag",
+        "header": [
+          {
+            "label": "published by",
+            "value": "Corvid Systems"
+          },
+          {
+            "label": "the brief carries",
+            "value": "a document number"
+          },
+          {
+            "label": "date",
+            "value": "no date anywhere on the page"
+          }
+        ],
+        "lines": [
+          {
+            "text": "a fully charged Petrel-4 held a working fix"
+          },
+          {
+            "text": "thirty days straight",
+            "emphasis": "box"
+          },
+          {
+            "text": "reported its position on schedule every single time"
+          },
+          {
+            "text": "one line of small print beneath the order form"
+          },
+          {
+            "text": "measured at a constant seventy degrees",
+            "emphasis": "underline"
+          },
+          {
+            "text": "battery performance in other conditions may vary",
+            "emphasis": "underline"
+          }
+        ],
+        "stamp": "Corvid Systems"
+      }
+    },
+    {
+      "id": "fig-l4-cold-weather-log",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l4-cold-weather-log.svg",
+      "caption": "In the cold, two of the four tags went silent at about sixty hours, and the longest one stopped just past sixty-eight.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A log card showing the trip temperature and a boxed line about a thirty-day battery life, above a two-column table pairing three groups of tags with the hours they lasted.",
+      "dataTable": {
+        "type": "facsimile",
+        "sourcePassageId": "p-cold-weather-log",
+        "docKind": "source-desk",
+        "title": "cold-weather trip",
+        "header": [
+          {
+            "label": "dated",
+            "value": "the second of January"
+          },
+          {
+            "label": "signed by",
+            "value": "Osei and Marchetti"
+          },
+          {
+            "label": "temperature",
+            "value": "fifteen and twenty-five degrees"
+          }
+        ],
+        "lines": [
+          {
+            "text": "what the brief calls a thirty-day battery life",
+            "emphasis": "box"
+          }
+        ],
+        "columns": [
+          {
+            "heading": "tags",
+            "rows": [
+              "two of the four tags",
+              "the other two tags",
+              "the longest one"
+            ]
+          },
+          {
+            "heading": "gone silent",
+            "rows": [
+              "about sixty hours",
+              "lasted into day three",
+              "just past sixty-eight hours"
+            ]
+          }
+        ],
+        "stamp": "not published anywhere"
+      }
+    },
+    {
+      "id": "fig-l5-three-tunnels",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l5-three-tunnels.svg",
+      "caption": "Three tunnels ran the same beacon test, and the table sets the rock and the shape of each one beside how long the beacon held, from the full life of the battery to eight minutes.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A memo card headed Three conditions differed, with a boxed line reading the beacon is not the thing that changed above a three-column table giving the rock, the shape and how long the beacon held in each tunnel.",
+      "dataTable": {
+        "type": "facsimile",
+        "sourcePassageId": "p-three-tunnels",
+        "docKind": "memo",
+        "title": "Three conditions differed",
+        "header": [
+          {
+            "label": "the same beacon test",
+            "value": "three different tunnels"
+          }
+        ],
+        "lines": [
+          {
+            "text": "the beacon is not the thing that changed",
+            "emphasis": "box"
+          }
+        ],
+        "columns": [
+          {
+            "heading": "the first tunnel",
+            "rows": [
+              "dry granite",
+              "ran almost straight",
+              "the full life of the battery"
+            ]
+          },
+          {
+            "heading": "the second tunnel",
+            "rows": [
+              "wet limestone",
+              "a sharp bend",
+              "eight minutes"
+            ]
+          },
+          {
+            "heading": "the third tunnel",
+            "rows": [
+              "dry limestone",
+              "a gentle curve",
+              "fifty-one minutes"
+            ]
+          }
+        ],
+        "stamp": "the ground"
+      }
+    },
+    {
+      "id": "fig-l5-three-climates",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l5-three-climates.svg",
+      "caption": "The same tracking tag ran in three climates, and the table sets the temperature of each one beside its runtime, from twenty-six days down to just under three days.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A memo card headed The tag did not change, with a three-column table giving temperatures and runtime for the mild coastal, desert and freezing mountain tests, stamped The climate did.",
+      "dataTable": {
+        "type": "facsimile",
+        "sourcePassageId": "p-three-climates",
+        "docKind": "memo",
+        "title": "The tag did not change",
+        "header": [
+          {
+            "label": "the same tracking tag",
+            "value": "three different climates"
+          },
+          {
+            "label": "shared",
+            "value": "all three results together"
+          }
+        ],
+        "lines": [
+          {
+            "text": "a number describes one climate, not every climate",
+            "emphasis": "box"
+          }
+        ],
+        "rowLabels": [
+          "temperatures",
+          "runtime"
+        ],
+        "columns": [
+          {
+            "heading": "mild coastal",
+            "rows": [
+              "in the fifties",
+              "twenty-six days"
+            ]
+          },
+          {
+            "heading": "desert climate",
+            "rows": [
+              "above ninety degrees",
+              "nineteen days"
+            ]
+          },
+          {
+            "heading": "freezing mountain",
+            "rows": [
+              "freezing",
+              "just under three days"
+            ]
+          }
+        ],
+        "stamp": "The climate did."
+      }
     }
   ]
 }
