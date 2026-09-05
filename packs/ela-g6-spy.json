@@ -5156,9 +5156,9 @@
       "kind": "diagram",
       "gen": true,
       "src": "art/ela-g6-spy/fig-l3-the-log.svg",
-      "caption": "Jonah's log sheet shows what happened in one column, and the line he went back and added sits in the column beside it.  Marchetti says the logs are not marked and never have been marked.",
+      "caption": "Jonah's log sheet lists what happened, and the line he went back and added runs along the bottom of the page.  Marchetti says the logs are not marked and never have been marked.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A document card headed the log sheets, ruled into two columns: what happened lists the recorded entries from entry at ten fourteen to exit at ten forty-one, and one more line at the bottom of the page holds the sentence Jonah added.",
+      "alt": "A document card headed the log sheets, listing under what happened the recorded entries from entry at ten fourteen to exit at ten forty-one, with the one line Jonah added written across the foot of the card below a rule.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-the-log",
@@ -5174,18 +5174,9 @@
               "the folder located and photographed and put back",
               "exit at ten forty-one"
             ]
-          },
-          {
-            "heading": "one more line at the bottom of the page",
-            "rows": [
-              "Thirty seconds lost",
-              "on the second floor landing",
-              "cause unknown",
-              "no action taken",
-              ""
-            ]
           }
-        ]
+        ],
+        "footnote": "Thirty seconds lost on the second floor landing, cause unknown, no action taken."
       }
     },
     {

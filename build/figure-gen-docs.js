@@ -696,6 +696,39 @@ function renderFacsimile(dataTable, accentColor) {
     y = ry;
   }
 
+  // A LINE AT THE FOOT OF THE PAGE IS ITS OWN THING, not a column. Cold Signal's log card needed
+  // "one more line at the bottom of the page" -- the passage's own words, and the whole point of
+  // the document, because Jonah adds it afterwards. Authored as a second COLUMN it became four
+  // fragments of one sentence sitting on four ruled rows, each one pairing with the log entry
+  // beside it, so the drawing manufactured four facts the record does not contain: that the ten
+  // fourteen entry cost thirty seconds, that contacting the front desk happened on the second floor
+  // landing, that the two clicks had unknown cause. Only "Thirty" was capitalised, which is the
+  // tell. The shape had no way to say "a line at the foot", so the author reached for the nearest
+  // thing that would render.
+  //
+  // Pinned to the bottom of the card, above a rule, and refused if the body reaches it -- so it
+  // cannot repeat the older failure of drawing over the content it was meant to sit beneath.
+  if (dt.footnote !== undefined) {
+    if (typeof dt.footnote !== 'string' || !dt.footnote) refuse('facsimile: footnote must be a non-empty string');
+    // It WRAPS, up to two lines. A sentence written along the foot of a page is a sentence, not a
+    // field, and refusing it for length would only push an author back to the shape that caused the
+    // defect. Two lines is the same ceiling the cells and node labels use.
+    const wrapped = wrapToWidth(dt.footnote, TICK_FONT, innerW, 2);
+    const widest = wrapped.reduce((m, s) => Math.max(m, estimateTextWidth(s, TICK_FONT)), 0);
+    if (widest > innerW) {
+      refuse(`facsimile footnote: ${JSON.stringify(dt.footnote)} does not fit two lines of `
+        + `${Math.floor(innerW)}px; shorten the transcription or move the detail to the caption`);
+    }
+    const FOOT_LINE_H = 22;   // same line pitch the column cells use
+    const fy = CY + CH - 22 - (wrapped.length - 1) * FOOT_LINE_H;
+    if (y > fy - 22) {
+      refuse(`facsimile: the footnote ${JSON.stringify(dt.footnote)} has no clear space at the foot of `
+        + 'the card; drop a line or shorten the transcription');
+    }
+    out.push(line(innerX, hp(fy - 18), CX + CW - 22, hp(fy - 18), RULE, 1));
+    out.push(textLines(innerX, fy, TICK_FONT, wrapped, { lineH: FOOT_LINE_H }));
+  }
+
   // THE CARD MUST CONTAIN ITS CONTENTS. y has walked down the card as each block was drawn; if it
   // has passed the bottom edge, lines were painted onto the panel BEHIND the card and the last one
   // rendered outside the frame entirely. There was a fit check for the column table and none at all

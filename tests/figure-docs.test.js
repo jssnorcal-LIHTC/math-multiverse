@@ -534,6 +534,56 @@ check('every renderer refuses a table whose type does not match it', () => {
 // occupy the identical rectangle and still render. Found by LOOKING at a plan where an arrow
 // arriving horizontally and an arrow arriving vertically met at the same node, which printed
 // "The badge reads green" straight through "straight down".
+// A LINE AT THE FOOT OF A PAGE IS ITS OWN THING, not a second column. Cold Signal's log card
+// authored "one more line at the bottom of the page" as a parallel COLUMN, which split one sentence
+// across four ruled rows so each fragment paired with the log entry beside it -- four facts the
+// record does not contain. The shape had no way to say "a line at the foot", so the author reached
+// for the nearest thing that rendered.
+check('a facsimile draws a footnote at the FOOT of the card, below its own rule, and it may wrap', () => {
+  const dt = {
+    type: 'facsimile', docKind: 'minutes', title: 'the log sheets',
+    columns: [{ heading: 'what happened', rows: ['entry at ten fourteen', 'exit at ten forty-one'] }],
+    footnote: 'Thirty seconds lost on the second floor landing, cause unknown, no action taken.',
+  };
+  const svg = docs.renderFacsimile(dt, ACCENT);
+  assert.ok(svg.includes('Thirty seconds lost'), 'the footnote must be drawn');
+  // It is BELOW the last column row, which is the whole claim the field makes.
+  const lastRow = svg.lastIndexOf('exit at ten forty-one');
+  const foot = svg.lastIndexOf('Thirty seconds lost');
+  assert.ok(foot > lastRow, 'the footnote must come after the table, not before it');
+  // Wrapped rather than refused: one <text> with two <tspan>s, so the fidelity gate still reads it
+  // as one collapsed string.
+  const el = svg.slice(foot - 200, foot + 300);
+  assert.ok(el.includes('tspan'), 'a long footnote wraps instead of being refused');
+});
+
+check('NEGATIVE CONTROL: a footnote with no room at the foot of the card is REFUSED', () => {
+  const rows = [];
+  // EIGHT rows, measured: eight renders without a footnote and refuses with one, so the footnote
+  // is the only difference between this check and the control below it. Nine rows refuses either
+  // way, on the table's own fit check, and would have proved nothing -- which is what the first
+  // version of this pair did.
+  for (let i = 0; i < 8; i++) rows.push('a log entry number ' + i);
+  const dt = {
+    type: 'facsimile', docKind: 'minutes', title: 'the log sheets',
+    columns: [{ heading: 'what happened', rows }],
+    footnote: 'Thirty seconds lost on the second floor landing, cause unknown, no action taken.',
+  };
+  assert.throws(() => docs.renderFacsimile(dt, ACCENT), /footnote/,
+    'a card whose table reaches the foot must refuse the footnote, not draw it over the table');
+});
+
+check('CONTROL: the same tall card WITHOUT the footnote renders, so the refusal is the FOOTNOTE', () => {
+  const rows = [];
+  for (let i = 0; i < 8; i++) rows.push('a log entry number ' + i);
+  const dt = {
+    type: 'facsimile', docKind: 'minutes', title: 'the log sheets',
+    columns: [{ heading: 'what happened', rows }],
+  };
+  const svg = docs.renderFacsimile(dt, ACCENT);
+  assert.ok(svg.includes('a log entry number 7'), 'the table alone should still draw');
+});
+
 // THE REAL GEOMETRY THAT SHIPPED THE DEFECT, not a synthetic stand-in. Two arrows arrive at
 // "shelf", one horizontally and one vertically, and their labels were printed one straight through
 // the other -- "The badge reads green" across "straight down" -- while every gate stayed green.
