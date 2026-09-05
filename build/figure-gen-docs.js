@@ -726,14 +726,23 @@ function renderFacsimile(dataTable, accentColor) {
           const kf = estimateTextWidth(kt, LABEL_FONT) <= room ? LABEL_FONT : TICK_FONT;
           widest = Math.max(widest, estimateTextWidth(kt, kf));
         }
-        const top = y - font;
-        const bottom = y + (end - i) * step + 12;
+        // THE BOX MUST NOT REACH THE LINE BELOW IT. With 12px of bottom padding the outline ended at
+        // y 276 while the next line's ascenders began at 274 -- a 2px OVERLAP, so on a card where a
+        // red rule already means "small print", the box's lower edge read as an underline on the
+        // line beneath it. Padding trimmed to 8 (descenders reach about 5px below the baseline, so
+        // it still contains them) and the run is followed by 4px of extra advance, measured back to
+        // 6px of clear space. Grew visible only once a box spanned TWO lines and sat mid-block.
+        const top = y - font - 2;
+        const bottom = y + (end - i) * step + 8;
         out.push(rect(innerX - 8, top, widest + 16, bottom - top,
           { stroke: accent, strokeWidth: 2, rx: 3, extra: 'data-emphasis="box"' }));
       }
     } else if (em === 'underline') {
       out.push(line(innerX, hp(y + 5), innerX + w, hp(y + 5), accent, 2, { extra: 'data-emphasis="underline"' }));
     }
+    // A boxed run ends with a little extra air, so the outline never crowds the next line.
+    if (em === 'box' && boxRunEnd[boxRunStart[i]] === i) y += 4;
+
     // A plain line gets NO rule. Ruling every line made a flowing newspaper paragraph render as a
     // stack of table rows, and worse, it made the gray rules almost indistinguishable from the
     // ACCENT underline that marks a disputed sentence -- which is the one thing the figure exists
