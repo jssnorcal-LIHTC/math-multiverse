@@ -98,13 +98,18 @@
   const VERSION = 1;
   const RECENT_MAX = 50;
 
-  // Identical ladder to Math-Multiverse.html:5027. Absolute mistakes, not percentage, so the
-  // meaning holds across levels of different length.
-  function STARS_FOR(mistakes) {
+  // Identical ladder to MVRunner.starsForMistakes, and tests/runner.test.js proves the two agree
+  // at every mistake count for every life count -- so this copy takes `lives` too. It must: the
+  // ladder became life-aware when Niall reported that the fourth life on a four-life reading level
+  // bought nothing (see the long note in engine/runner.js). Absolute mistakes, not percentage, so
+  // the meaning holds across levels of different length.
+  const DEFAULT_LIVES = 3;
+  function STARS_FOR(mistakes, lives) {
+    const L = Number.isInteger(lives) ? lives : DEFAULT_LIVES;
+    if (mistakes >= L) return 0;
     if (mistakes === 0) return 3;
     if (mistakes <= 1) return 2;
-    if (mistakes <= 2) return 1;
-    return 0;
+    return 1;
   }
 
   const PackSave = {
