@@ -4943,7 +4943,7 @@
         "3": "That is number 1, the very first thing on the drawing.  Check which end of the line you are reading from."
       },
       "explain": "The article hands out its rules in separate paragraphs, so it is easy to lose track of what actually comes last.  The drawing settles it by putting the whole run on one numbered line, and number 6 reads buys a carton of milk, goes home.  The counting rule's verdict takes number 5, and the drawing keeps numbering after it, so going home is a stop of the run rather than what follows it.",
-      "whyTheFigureIsNeeded": "The article numbers nothing past the third move, so prose alone never gives the run is over or buys a carton of milk, goes home a number of its own; only the drawing's numbered line puts them at 5 and 6."
+      "whyTheFigureIsNeeded": "The article numbers nothing past the third move, so prose alone never gives the run is over or buys a carton of milk, goes home a number of its own; only the drawing sets them on a numbered line and pairs each with its number in the key below."
     },
     {
       "id": "l1-match-stop-to-its-number",
@@ -4998,7 +4998,7 @@
       "stem": "The drawing sets the method out as two lines, one for each person.  Choose the three statements the drawing actually shows.",
       "choices": [
         "A chalk mark comes after the box reading hides something, on the same line",
-        "The box reading collects it comes after a slow route, on the same line",
+        "A slow route comes before the box reading collects it, on the same line",
         "The two lines never touch",
         "A chalk mark sits on the collector's line",
         "Loading a drop and the collector sit on the same line",
@@ -5014,7 +5014,7 @@
         "4": "The drawing gives loading a drop and the collector a line each.  They are the two people the article keeps apart, and keeping them apart is the whole reason a dead drop exists.",
         "5": "The drawing keeps the two lines apart from end to end.  The article's whole point is that the two people never have to be in the same place at the same time, so a handover would undo the method."
       },
-      "explain": "The drawing says three things the article leaves a reader to piece together.  A chalk mark goes up at the end of the same line as loading a drop, so the drawing puts the signal on the loading half of the method.  The box reading collects it comes only after a slow route, and the two lines never touch, which is the article's own point: a connection nobody observed can never later be proven.",
+      "explain": "The drawing says three things the article leaves a reader to piece together.  A chalk mark goes up at the end of the same line as loading a drop, so the drawing puts the signal on the loading half of the method.  A slow route always comes before the box reading collects it, and the two lines never touch, which is the article's own point: a connection nobody observed can never later be proven.",
       "whyTheFigureIsNeeded": "The article says the two sides agree on a signal but never says whose half places it or where it falls in the order, so only the drawing shows a chalk mark ending the loading line and shows the two halves running as separate lines that never meet."
     },
     {
@@ -5047,7 +5047,7 @@
           "key": 1
         }
       ],
-      "explain": "The words the signal says one thing only run along the line that starts at loading a drop, so the drawing gives that sentence to the loading half of the method.  The article never says who places the signal, so the drawing is the only thing that settles that one.  The words a meeting that must be checked first run along the line that starts at the collector, and the article puts it there too: the last rule belongs to the collector, not to whoever loaded the drop.",
+      "explain": "The line that starts at loading a drop is the one that carries the words the signal says one thing only, so the drawing gives that sentence to the loading half of the method.  The article never says who places the signal, so the drawing is the only thing that settles that one.  The line that starts at the collector carries the words a meeting that must be checked first, and the article puts it there too: the last rule belongs to the collector, not to whoever loaded the drop.",
       "whyTheFigureIsNeeded": "The article attaches the pickup rule to the collector but never says who places the signal, so which line carries the signal sentence is visible only on the drawing."
     },
     {
@@ -5179,7 +5179,7 @@
       ],
       "coachTopic": "evidence-story-details",
       "dok": 2,
-      "stem": "The Reading Room timeline sets the plan and the real time into one order.  In that order the entry reading the exercise ends is not the last moment, and the plan's check-in is not the first.  Put all six moments in the order the timeline gives them.",
+      "stem": "The Reading Room timeline sets the plan and the real time into one order.  In that order the last moment is not the entry reading the exercise ends, and the first is not the plan's check-in.  Put all six moments in the order the timeline gives them.",
       "tiles": [
         "she checks in by two-twenty",
         "the phone buzzes once",
@@ -5339,7 +5339,7 @@
       "figureFact": "measured at a constant seventy degrees",
       "stem": "On the Petrel-4 page, Corvid Systems boxes its whole test claim: a fully charged Petrel-4 held a working fix for thirty days straight.  This brief uses a red underline for its small print.  Lower down the same page, that underline marks the words measured at a constant seventy degrees.  What does that arrangement do to a reader in a hurry?",
       "choices": [
-        "It puts the number where it will be read first and the words measured at a constant seventy degrees where they may be missed.",
+        "It puts the number first and the words measured at a constant seventy degrees where they may be missed.",
         "It shows the brief is hiding nothing, so the thirty days can be taken at face value.",
         "It means the thirty-day number is true at seventy degrees and false everywhere else.",
         "It marks the small print as the most important claim on the page, since the brief chose to mark it."
@@ -5432,7 +5432,7 @@
       "figureFact": "eight minutes",
       "stem": "Two of the three tunnels on the memo are limestone.  Read what the memo gives under both of them.  What do those two tunnels show when they are set side by side?",
       "choices": [
-        "The same rock can give very different results, because the wet limestone tunnel is set down as eight minutes and the dry limestone one as fifty-one minutes.",
+        "The same rock gave very different results: eight minutes in the wet limestone tunnel and fifty-one in the dry.",
         "Limestone is the worst rock a beacon can be tested in, whatever else is true of the tunnel.",
         "The beacon carried into the limestone tunnels must have been a weaker beacon than the one used in granite.",
         "The two limestone tunnels come out the same, which shows the rock is the only thing that counts."
@@ -5557,7 +5557,7 @@
       "choices": [
         "The radio set had failed, so the narrator was learning nothing useful.",
         "Jonah checked in at ten twenty, and the narrator wrote his check-in down.",
-        "The rule expected a check-in at that minute, and what the narrator actually had was nothing on the radio but the hiss.",
+        "The rule expected a check-in at that minute, and the narrator had nothing on the radio but the hiss.",
         "The narrator called the whole exercise off at ten twenty, before the rule allowed it."
       ],
       "key": 2,
@@ -5585,7 +5585,7 @@
         "The columns are set out in order of temperature, from the coolest one to the hottest.",
         "The tag itself was weaker in the freezing mountain test than in the mild coastal one.",
         "The mild coastal column matched the maker's thirty-day number exactly.",
-        "Both the hot column and the freezing column fall below the mild one, and the freezing column falls furthest, to just under three days."
+        "The other two columns fall below the mild one, and the freezing falls furthest, to just under three days."
       ],
       "key": 3,
       "distractorRationale": {
@@ -5593,7 +5593,7 @@
         "1": "The card's own heading is that the tag did not change, and the article says the same thing in its own words.  One tag went into all three tests, so the difference has to sit in the temperature above each runtime, not in the tag.",
         "2": "Twenty-six days is close to thirty, and close is not the same as matched.  The article treats that small gap as ordinary, because a maker's own test is run at a comfortable room temperature and tends to show the best number a device can reach."
       },
-      "explain": "The table is built so each climate's temperature sits directly above the runtime it produced.  Read across, the mild coastal column holds twenty-six days, the desert column drops to nineteen, and the freezing mountain column falls to just under three days.  That is not a straight slope from warm to cold, because the hottest column is not the shortest one.  Mild weather is the temperature that works, and both extremes cost runtime, with the freezing end costing far more than the hot end.",
+      "explain": "The table is built so each climate's temperature sits directly above the runtime it produced.  Read across, the mild coastal column holds twenty-six days, the desert column drops to nineteen, and the freezing mountain column falls to just under three days.  That is not a straight slope from warm to cold, because the hottest column is not the shortest one.  Mild weather is the temperature that works, and both extremes cost runtime, with the freezing mountain column costing far more than the desert one.",
       "whyTheFigureIsNeeded": "The article runs all three climates through one paragraph and splits every temperature from its runtime across separate sentences, so the three pairings are never aligned; only the card sets the three temperatures in one row above the three runtimes in the next, which is what lets a child see that the hottest column is not the shortest one."
     },
     {
@@ -5627,7 +5627,7 @@
         }
       ],
       "explain": "The article names its three moves first, second and third and then switches to plain paragraphs for the counting rule and the last rule, so a reader can easily take those last two as separate advice.  The drawing does not allow that reading, because it sets all six stops on one numbered line, putting the counting rule's third sighting at four, its verdict at five, and going home at six.  Seen that way, going home is not the run breaking down.  The run is walked to make a follower show themselves, and stops five and six are what the article says to do once a follower has shown themselves.",
-      "whyTheFigureIsNeeded": "The article numbers only its first, second and third move and then drops into prose, so nothing in the text says the counting rule's third sighting is stop four, that its verdict is stop five, or that going home is stop six; only the drawing's numbered key puts all six on one line and makes them steps of a single run."
+      "whyTheFigureIsNeeded": "The article numbers only its first, second and third move and then drops into prose, so nothing in the text says the counting rule's third sighting is stop four, that its verdict is stop five, or that going home is stop six; only the drawing sets all six on one numbered line and names them in the key below it, which is what makes them steps of a single run."
     },
     {
       "id": "l6-ms-claim-against-the-two-runs",
@@ -6118,7 +6118,7 @@
       "src": "art/ela-g6-spy/fig-l4-petrel-brief.svg",
       "caption": "Corvid Systems prints thirty days straight as its headline, and puts the seventy degrees the test ran at down in the small print.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A document card headed the Petrel-4 tracking tag, with the claim about thirty days straight boxed whole near the top and the underlined small print about seventy degrees below.",
+      "alt": "A document card headed the Petrel-4 tracking tag, published by Corvid Systems, carrying a document number and a date line; the claim about thirty days straight is boxed whole above the underlined small print about seventy degrees, and the name Corvid Systems is stamped again in the corner.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-petrel-brief",
