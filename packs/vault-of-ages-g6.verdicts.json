@@ -4,7 +4,7 @@
   "records": [
     {
       "itemId": "l1-ebsr-why-throw-away",
-      "itemHash": "cdcccff2c542bdbb",
+      "itemHash": "d523b3ec6a5caf8f",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -12,7 +12,7 @@
     },
     {
       "itemId": "l1-ebsr-athenaeum-not-empty",
-      "itemHash": "cf0eaf4f3b389b8e",
+      "itemHash": "49a84aa7a3086fd5",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -20,7 +20,7 @@
     },
     {
       "itemId": "l1-ebsr-first-real-decision",
-      "itemHash": "f137a4828ee37259",
+      "itemHash": "602b7145d404a6f0",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -28,7 +28,7 @@
     },
     {
       "itemId": "l1-ebsr-finch-tests-noticing",
-      "itemHash": "1095aec8b1f2ff4d",
+      "itemHash": "ae6a056e0c308fa8",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -36,7 +36,7 @@
     },
     {
       "itemId": "l1-ms-building-not-abandoned",
-      "itemHash": "11b900f52c4075b4",
+      "itemHash": "8a9cdc99dec4f287",
       "blind": [
         0,
         1,
@@ -100,7 +100,7 @@
     },
     {
       "itemId": "l1-hot-finch-tests-by-asking",
-      "itemHash": "580d732a0aaf2d25",
+      "itemHash": "2400d269c5f67a21",
       "blind": [
         0,
         1,
@@ -130,7 +130,7 @@
     },
     {
       "itemId": "l1-hot-note-description",
-      "itemHash": "1ac1518dcdeacb2e",
+      "itemHash": "74b090b7bcd446b3",
       "blind": [
         0,
         1,
@@ -146,7 +146,7 @@
     },
     {
       "itemId": "l1-hot-because-clauses-inner-state",
-      "itemHash": "a7b177171cfd1b10",
+      "itemHash": "b4335b30139e1be3",
       "blind": [
         0,
         1
@@ -160,7 +160,7 @@
     },
     {
       "itemId": "l1-cloze-why-theo-goes-anyway",
-      "itemHash": "4dece3cdfd6c6864",
+      "itemHash": "364bf72248da5e63",
       "blind": [
         0,
         0
@@ -188,7 +188,7 @@
     },
     {
       "itemId": "l1-mc-floorboard-sound",
-      "itemHash": "34198e636522bae3",
+      "itemHash": "d4c500cdf13f5c18",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -196,7 +196,7 @@
     },
     {
       "itemId": "l1-mc-theo-never-wondered",
-      "itemHash": "454ee9698e604924",
+      "itemHash": "39c58b850d800f02",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -236,7 +236,7 @@
     },
     {
       "itemId": "l1-match-detail-to-meaning",
-      "itemHash": "d56de7ae01a66999",
+      "itemHash": "4cb7e91f60b48eb8",
       "blind": [
         2,
         0,
@@ -1514,7 +1514,7 @@
     },
     {
       "itemId": "l1-match-card-line-to-its-place",
-      "itemHash": "6d2d1d297e17dd3d",
+      "itemHash": "861dd4ea7ec2b5a6",
       "blind": [
         2,
         0,
@@ -1530,7 +1530,7 @@
     },
     {
       "itemId": "l1-mc-what-the-plan-puts-on-the-fourth",
-      "itemHash": "d12b1895355b543e",
+      "itemHash": "cc70067b4df1e7df",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -1538,7 +1538,7 @@
     },
     {
       "itemId": "l1-ms-how-the-plan-sets-the-table",
-      "itemHash": "f27e679a72fd2805",
+      "itemHash": "1ed02faa03922170",
       "blind": [
         1,
         3,
@@ -1568,7 +1568,7 @@
     },
     {
       "itemId": "l2-order-wyrdstone-record-run",
-      "itemHash": "9cd58d2ac5403a53",
+      "itemHash": "dece814e1e4fb79e",
       "blind": [
         2,
         3,
@@ -1613,7 +1613,7 @@
     },
     {
       "itemId": "l2-cloze-threadglass-card-headings",
-      "itemHash": "d8ab593cfa7285e7",
+      "itemHash": "f590de4f37f631eb",
       "blind": [
         1,
         0
@@ -1627,7 +1627,7 @@
     },
     {
       "itemId": "l3-order-log-with-the-unseen-minutes",
-      "itemHash": "b24dfbdeeb474b2f",
+      "itemHash": "b412faec304882d9",
       "blind": [
         3,
         4,
@@ -1647,31 +1647,15 @@
     },
     {
       "itemId": "l3-mc-where-the-flicker-sits",
-      "itemHash": "66d07a75e17f9916",
+      "itemHash": "135e18ac64028f70",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l3-ms-what-the-plan-groups-with-the-room",
-      "itemHash": "c5c5b05114a4874e",
-      "blind": [
-        0,
-        2,
-        4
-      ],
-      "authored": [
-        0,
-        2,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l3-cloze-row-against-row",
-      "itemHash": "3c1cd0c834a27046",
+      "itemHash": "63fcf069f586d72a",
       "blind": [
         2,
         1
@@ -1685,7 +1669,7 @@
     },
     {
       "itemId": "l4-match-chronicle-line-to-ledger-line",
-      "itemHash": "e6ebbe5bd196a1a9",
+      "itemHash": "349781816990baae",
       "blind": [
         1,
         2,
@@ -1701,7 +1685,7 @@
     },
     {
       "itemId": "l4-mc-which-inscription-line-is-boxed",
-      "itemHash": "1ceaec18b56cf31d",
+      "itemHash": "5c67e32fd45a0e12",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1709,7 +1693,7 @@
     },
     {
       "itemId": "l4-ms-what-the-ledger-page-keeps",
-      "itemHash": "18c728ff791beacc",
+      "itemHash": "801e80ad6f109d1c",
       "blind": [
         1,
         3,
@@ -1725,7 +1709,7 @@
     },
     {
       "itemId": "l4-mc-chronicle-evidence-row",
-      "itemHash": "9bd7de8f57c6171b",
+      "itemHash": "6f94d22f16067693",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1733,7 +1717,7 @@
     },
     {
       "itemId": "l5-mc-which-lane-carries-the-check-in",
-      "itemHash": "caec5c04ca1c37a2",
+      "itemHash": "6cbe15f299ed4cbc",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1741,7 +1725,7 @@
     },
     {
       "itemId": "l5-order-timeline-across-both-lanes",
-      "itemHash": "84ef31d2d078cc35",
+      "itemHash": "4eb0917b322f88f4",
       "blind": [
         3,
         1,
@@ -1781,7 +1765,7 @@
     },
     {
       "itemId": "l6-cloze-chronicle-card-top-block",
-      "itemHash": "9e92c8c8b69bb5fe",
+      "itemHash": "51015eec012c1742",
       "blind": [
         0,
         2
@@ -1802,16 +1786,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-chronicle-card-boxed-line",
-      "itemHash": "9dcc0a9049cb1355",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-ms-memo-row-questions",
-      "itemHash": "cef53b0605d1a690",
+      "itemHash": "3c16509fde3dba1a",
       "blind": [
         1,
         3,
@@ -1821,6 +1797,30 @@
         1,
         3,
         5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-chronicle-card-boxed-line",
+      "itemHash": "73c96f97499f6e2a",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ms-what-the-plan-groups-with-the-room",
+      "itemHash": "b2f2f7c357ff27d6",
+      "blind": [
+        0,
+        2,
+        4
+      ],
+      "authored": [
+        0,
+        2,
+        4
       ],
       "confidence": "high",
       "status": "agree"
