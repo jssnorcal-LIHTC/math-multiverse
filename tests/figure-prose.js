@@ -45,7 +45,15 @@ const COUNTERS = {
   node: (dt) => len(dt.nodes),
   lane: (dt) => (len(dt.tracks) || (dt.events ? 1 : 0)),
   track: (dt) => (len(dt.tracks) || (dt.events ? 1 : 0)),
-  row: (dt) => (len(dt.lines) || len(dt.rowLabels)),
+  // IN A TABLE, "ROWS" MEANS THE TABLE'S ROWS.  This used to read len(dt.lines) || len(dt.rowLabels),
+  // which is blind to a columns-style facsimile, where the rows live inside each column.  On
+  // fig-l3-three-seconds that counted the 2 free-standing lines above the table and reported the
+  // drawing as having 2 rows, so a correct sentence -- Theo's column does hold three row texts --
+  // was called an over-claim.  A gate that reddens correct prose gets prose rewritten to suit it,
+  // which is the wrong direction of travel.  Column rows win where a table has them;  the free
+  // lines and the row labels stay as the fallback for a card that is not a table.
+  row: (dt) => ((dt.columns || []).reduce((m, c) => Math.max(m, len(c.rows)), 0)
+    || len(dt.lines) || len(dt.rowLabels)),
   column: (dt) => len(dt.columns),
   stop: (dt) => len(dt.stops),
   bar: (dt) => (len(dt.categoryLabels) || len((dt.series && dt.series[0] && dt.series[0].values) || [])),
@@ -260,6 +268,14 @@ function controls() {
   run('count under: "one arrow" where one is drawn', { id: 'ctl2', stem: 'One arrow is labelled x.' }, schematic, false);
   run('totality mismatch: "the plan draws one box" where two are drawn', { id: 'ctl3', stem: 'The plan draws one box.' }, schematic, true);
   run('totality match: "the plan draws two boxes"', { id: 'ctl4', stem: 'The plan draws two boxes.' }, schematic, false);
+
+  // The row counter has to keep catching an over-claim on a COLUMNS facsimile, or widening it above
+  // traded a false positive for a false negative.
+  const cols = { id: 'ctl-cols', dataTable: { type: 'facsimile',
+    lines: [{ text: 'a heading line' }, { text: 'a second heading line' }],
+    columns: [{ heading: 'A', rows: ['r1', 'r2', 'r3'] }, { heading: 'B', rows: ['r1', 'r2', 'r3'] }] } };
+  run('columns facsimile: "three rows" where each column holds three', { id: 'ctl7', stem: 'The left column holds three rows.' }, cols, false);
+  run('columns facsimile: "five rows" where each column holds three', { id: 'ctl8', stem: 'The card sets out five rows.' }, cols, true);
 
   const noBlank = { id: 'ctl-fac', dataTable: { type: 'facsimile', lines: [{ text: 'a name' }] } };
   const withBlank = { id: 'ctl-fac2', dataTable: { type: 'facsimile', lines: [{ text: 'a name', emphasis: 'blank' }] } };
