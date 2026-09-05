@@ -5467,7 +5467,8 @@
         "header": [
           {
             "label": "the same beacon test",
-            "value": "three different tunnels"
+            "value": "three different tunnels",
+            "contrast": true
           }
         ],
         "lines": [
@@ -5524,7 +5525,8 @@
         "header": [
           {
             "label": "the same tracking tag",
-            "value": "three different climates"
+            "value": "three different climates",
+            "contrast": true
           },
           {
             "label": "shared",

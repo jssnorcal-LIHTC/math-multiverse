@@ -534,6 +534,41 @@ check('every renderer refuses a table whose type does not match it', () => {
 // occupy the identical rectangle and still render. Found by LOOKING at a plan where an arrow
 // arriving horizontally and an arrow arriving vertically met at the same node, which printed
 // "The badge reads green" straight through "straight down".
+// A CONTRAST ROW IN A FACSIMILE HEADER draws both halves at the same weight, so the pair block does
+// not teach "dim label, bright value" and then use the same shape for two things that are equals.
+check('a header row marked contrast draws both halves at the same size; an unmarked one does not', () => {
+  const base = {
+    type: 'facsimile', docKind: 'memo', title: 'a memo',
+    header: [{ label: 'the same beacon test', value: 'three different tunnels' }],
+    lines: [{ text: 'a plain line' }],
+  };
+  const plain = docs.renderFacsimile(JSON.parse(JSON.stringify(base)), ACCENT);
+  const withContrast = JSON.parse(JSON.stringify(base));
+  withContrast.header[0].contrast = true;
+  const marked = docs.renderFacsimile(withContrast, ACCENT);
+
+  const sizeOf = (svg, txt) => {
+    // No constructed regex here. The first version built one with '(\d+)' inside a SINGLE-QUOTED
+    // JS string, where \d collapses to a plain d, so the pattern hunted for the letter d and matched
+    // nothing -- the same trap tests/figure-prose.js hit with 'hatched\s+'. Splitting on the literal
+    // text has no escaping to get wrong.
+    const seg = svg.split('>' + txt + '<')[0];
+    const m = seg.lastIndexOf('font-size="');
+    if (m === -1) return null;
+    return Number(seg.slice(m + 11, seg.indexOf('"', m + 11)));
+  };
+  const labelPlain = sizeOf(plain, 'the same beacon test');
+  const valuePlain = sizeOf(plain, 'three different tunnels');
+  const labelMarked = sizeOf(marked, 'the same beacon test');
+  const valueMarked = sizeOf(marked, 'three different tunnels');
+
+  assert.ok(labelPlain && valuePlain && labelMarked && valueMarked, 'all four runs must be found');
+  assert.ok(labelPlain < valuePlain, 'CONTROL: an ordinary row keeps the dim small label');
+  assert.strictEqual(labelMarked, valueMarked, 'a contrast row sets both halves at one size');
+  // And the flag is what does it: without it the two sizes differ, with it they match.
+  assert.notStrictEqual(labelPlain, labelMarked, 'the flag must actually change the label');
+});
+
 // AN ORDINAL LANE POSITIONS BY TIME, NOT BY INDEX. Two entries at the same stated time must land
 // on the same vertical, because evenly spaced dots read as distinct moments and the drawing would
 // otherwise assert an order the clock does not give.

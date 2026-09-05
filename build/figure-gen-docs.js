@@ -616,11 +616,25 @@ function renderFacsimile(dataTable, accentColor) {
   }
 
   if (header.length) {
-    const labW = header.reduce((m, h) => Math.max(m, estimateTextWidth((h && h.label) || '', TICK_FONT)), 0);
+    const labW = header.reduce((m, h) => Math.max(m,
+      estimateTextWidth((h && h.label) || '', h && h.contrast === true ? LABEL_FONT : TICK_FONT)), 0);
     header.forEach((h, i) => {
       if (!h || typeof h.value !== 'string') refuse(`facsimile: header row ${i} has no value`);
       y += LABEL_FONT + 6;
-      if (h.label) out.push(text(innerX, y, TICK_FONT, h.label, { opacity: '0.82' }));
+      // A CONTRAST ROW SETS BOTH HALVES AT THE SAME WEIGHT. The header block's styling teaches one
+      // relation -- dim small label on the left, bright large value on the right, a field and its
+      // value -- and four of Cold Signal's six document cards use it that way. The two memo cards
+      // then used the SAME block for a contrast, "the same tracking tag | three different climates",
+      // where the left half carries half the argument (what stayed the same) and was wearing the
+      // throwaway-label treatment, with a genuine field-and-value row stacked directly beneath it
+      // and nothing to tell the two apart. Marking the row `contrast: true` draws both halves alike,
+      // so the block keeps ONE meaning per appearance. Rows without the flag are byte-identical.
+      const contrast = h.contrast === true;
+      if (h.label) {
+        out.push(contrast
+          ? text(innerX, y, LABEL_FONT, h.label)
+          : text(innerX, y, TICK_FONT, h.label, { opacity: '0.82' }));
+      }
       const hx = innerX + Math.ceil(labW) + 16;
       if (h.value === '') {
         // A FIELD PRINTED AND LEFT EMPTY, drawn as the empty rule a form actually shows. This has
