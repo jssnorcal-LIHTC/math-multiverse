@@ -1737,22 +1737,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-ms-what-the-climate-memo-shows",
-      "itemHash": "bdd34597d8b1efb4",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l5-order-longest-hold-to-shortest",
       "itemHash": "9508c11c8f02ff59",
       "blind": [
@@ -1830,7 +1814,7 @@
     },
     {
       "itemId": "l4-match-claim-against-what-was-measured",
-      "itemHash": "27c73d98bebbc7b3",
+      "itemHash": "8705af256c2653d4",
       "blind": [
         1,
         0,
@@ -1839,6 +1823,22 @@
       "authored": [
         1,
         0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ms-what-the-climate-memo-shows",
+      "itemHash": "b24a4a793836fb38",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
         2
       ],
       "confidence": "high",

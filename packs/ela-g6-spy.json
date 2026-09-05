@@ -5298,7 +5298,7 @@
       "passageId": "p-beacon-log",
       "figureId": "fig-l4-beacon-log",
       "figureFact": "ninety minutes",
-      "stem": "The staff log copies the maker's claim of ninety minutes into its own head.  Underneath it records what the staff timed and what they held steady.  Match each part of the log to the job it does in that comparison.",
+      "stem": "The staff log copies the maker's claim of ninety minutes into its own head.  Underneath, it records what the staff timed and what they held steady.  Match each part of the log to the job it does in that comparison.",
       "rowLabels": [
         "The head of the log, where the maker's claim of ninety minutes is written",
         "The times column, nine minutes then seven minutes",
@@ -5472,7 +5472,7 @@
         2
       ],
       "distractorRationale": {
-        "3": "The memo gives twenty-six days, nineteen days, and just under three days.  Runtimes that far apart are not the same number of days, and the spread is the whole reason the board shared all three results together.",
+        "3": "The memo gives twenty-six days, nineteen days, and just under three days.  Runtimes that far apart are not the same number of days, which is why all three results together say more than any one of them.",
         "4": "The memo carries the same tracking tag at its head, and the article says outright that the tag did not change between tests.  The climate changed instead, which is the finding.",
         "5": "The hottest air on the memo is above ninety degrees, and the runtime under it is nineteen days, which is shorter than the twenty-six days measured in the fifties.  This choice reverses what the table gives."
       },
@@ -5712,7 +5712,7 @@
       "src": "art/ela-g6-spy/fig-l1-dead-drop.svg",
       "caption": "The person loading the drop and the collector each follow their own line, and the two lines do not meet.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A diagram with two rows of boxes that never touch: a top row running loading a drop, hides something, a chalk mark, with the words the signal says one thing only written along it, and a bottom row running the collector, a slow route, collects it, with the words a meeting that must be checked first written along that one.",
+      "alt": "A diagram with two rows that never touch: a top row running from the rounded box loading a drop through hides something to a chalk mark, with the words the signal says one thing only written along it, and a bottom row running from the rounded box the collector through a slow route to collects it, with the words a meeting that must be checked first written along that one.",
       "dataTable": {
         "type": "schematic",
         "sourcePassageId": "p-dead-drop",
