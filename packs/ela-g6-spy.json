@@ -220,7 +220,11 @@
         "l1-ebsr-container-choice",
         "l1-mc-only-one-kind-of-person",
         "l1-ebsr-signal-not-daily-check",
-        "l1-ebsr-collectors-own-rule"
+        "l1-ebsr-collectors-own-rule",
+        "l1-mc-what-the-run-ends-at",
+        "l1-match-stop-to-its-number",
+        "l1-ms-what-the-two-lines-show",
+        "l1-cloze-which-line-carries-each-note"
       ],
       "reveal": {
         "figureId": "fig-l1-long-way"
@@ -260,7 +264,11 @@
         "l2-ebsr-build-then-explain",
         "l2-mc-page-already-used",
         "l2-ebsr-practical-meaning",
-        "l2-ebsr-closing-paragraph-job"
+        "l2-ebsr-closing-paragraph-job",
+        "l2-order-relay-chain-path",
+        "l2-mc-where-the-rock-chain-ends",
+        "l2-cloze-rock-chain-direction",
+        "l2-ms-two-columns-read"
       ],
       "reveal": {
         "figureId": "fig-l2-dead-air"
@@ -285,7 +293,7 @@
         "l3-cloze-narration-limits",
         "l3-short-who-the-log-is-for",
         "l3-ebsr-first-person-effect",
-        "l3-mc-whose-head-we-are-in",
+        "l3-order-plan-and-real-time-in-one-order",
         "l3-hot-left-off-the-sheet",
         "l3-ms-signs-ines-notices",
         "l3-cloze-caution-and-honesty",
@@ -301,7 +309,11 @@
         "l3-ebsr-what-the-slips-reveal",
         "l3-mc-two-viewpoints-compared",
         "l3-ebsr-why-two-seconds",
-        "l3-ebsr-first-person-watcher"
+        "l3-ebsr-first-person-watcher",
+        "l3-mc-whose-head-we-are-in",
+        "l3-mc-the-time-on-both-records",
+        "l3-ms-what-the-added-line-shows",
+        "l3-cloze-which-record-holds-the-thumb"
       ],
       "reveal": {
         "figureId": "fig-l3-relay-room"
@@ -341,7 +353,11 @@
         "l4-ebsr-what-the-cold-log-explains",
         "l4-mc-what-makes-the-log-careful",
         "l4-ebsr-two-guesses-not-facts",
-        "l4-ebsr-thirty-vs-three"
+        "l4-ebsr-thirty-vs-three",
+        "l4-match-claim-against-what-was-measured",
+        "l4-mc-where-the-condition-sits",
+        "l4-ms-reading-across-the-cold-log",
+        "l4-cloze-how-the-page-introduces-itself"
       ],
       "reveal": {
         "figureId": "fig-l4-beacon-brief"
@@ -381,7 +397,11 @@
         "l5-ebsr-what-the-three-runtimes-prove",
         "l5-mc-mountain-test-and-the-log",
         "l5-ebsr-advice-this-article-supports",
-        "l5-ebsr-the-line-that-explains-petrel"
+        "l5-ebsr-the-line-that-explains-petrel",
+        "l5-mc-two-limestone-tunnels",
+        "l5-ms-what-the-climate-memo-shows",
+        "l5-order-longest-hold-to-shortest",
+        "l5-cloze-temperatures-and-runtime"
       ],
       "reveal": {
         "figureId": "fig-l5-three-tunnels"
@@ -425,7 +445,11 @@
         "l6-ebsr-why-a-brief-sells",
         "l6-short-log-purpose",
         "l6-mc-two-briefs-compared",
-        "l6-ms-two-studies-compared"
+        "l6-ms-two-studies-compared",
+        "l6-mc-rule-lane-against-the-log",
+        "l6-mc-reading-the-runtime-row",
+        "l6-cloze-six-stops-one-run",
+        "l6-ms-claim-against-the-two-runs"
       ],
       "reveal": {
         "figureId": "fig-l3-on-the-line"
@@ -4893,6 +4917,750 @@
         "5": "Neither article recommends giving up on the device; each treats it as genuinely useful once its real limits are understood and planned around."
       },
       "explain": "Both articles follow the same shape: report several results side by side, name the specific ground or climate condition that explains the spread, and close with practical advice rather than a verdict on the device. That shared structure, seen in two unrelated articles about two different tools, is a genuine pattern, not a coincidence."
+    },
+    {
+      "id": "l1-mc-what-the-run-ends-at",
+      "type": "mc",
+      "passageId": "p-long-way",
+      "figureId": "fig-l1-long-way",
+      "figureFact": "buys a carton of milk, goes home",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "The drawing sets out six stops in order.  What does the drawing show as the run's last stop?",
+      "choices": [
+        "buys a carton of milk, goes home",
+        "the run is over",
+        "a stop in front of something that reflects",
+        "a doubling back"
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The drawing puts the run is over one stop earlier, at number 5.  The counting rule ends the run there, and the courier still has something left to do after it.",
+        "2": "That is number 2 on the drawing, the second of the courier's three moves.  It sits near the start of the line, not at the end.",
+        "3": "That is number 1, the very first thing on the drawing.  Check which end of the line you are reading from."
+      },
+      "explain": "The article hands out its rules in separate paragraphs, so it is easy to lose track of what actually comes last.  The drawing settles it by putting the whole run on one numbered line, and number 6 is buys a carton of milk, goes home.  Three sightings end the run, and the drawing shows the courier still has a last thing to do after that.",
+      "whyTheFigureIsNeeded": "The article gives the counting rule and the last rule in separate paragraphs and finishes the last one with writing the whole thing up, so prose alone does not say which of the run is over and buys a carton of milk, goes home comes later; only the drawing's numbered line puts them at 5 and 6."
+    },
+    {
+      "id": "l1-match-stop-to-its-number",
+      "type": "match",
+      "passageId": "p-long-way",
+      "figureId": "fig-l1-long-way",
+      "figureFact": "the run is over",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "The drawing numbers every stop on the run in order.  It keeps numbering after the courier's three moves, so the run is over gets a number of its own.  Match each stop to the number the drawing gives it.",
+      "rowLabels": [
+        "the run is over",
+        "a change of level",
+        "three sightings in three unrelated places"
+      ],
+      "colLabels": [
+        "number 3",
+        "number 4",
+        "number 5"
+      ],
+      "key": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "explain": "The article puts first, second and third on the courier's moves only, so the counting rule and the last rule can look like notes sitting outside the run.  The drawing puts them on the same numbered line: a change of level is number 3, three sightings in three unrelated places is number 4, and the run is over is number 5.  Read the numbers off the line rather than guessing from the order the paragraphs arrive in.",
+      "whyTheFigureIsNeeded": "The article numbers nothing past the third move, so numbers 4 and 5 exist only on the drawing; a reader cannot say what number three sightings in three unrelated places or the run is over carries without reading the numbered key."
+    },
+    {
+      "id": "l1-ms-what-the-two-lines-show",
+      "type": "ms",
+      "passageId": "p-dead-drop",
+      "figureId": "fig-l1-dead-drop",
+      "figureFact": "a chalk mark",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 3,
+      "stem": "The drawing sets the method out as two lines, one for each person.  Choose the three the drawing actually shows.",
+      "choices": [
+        "A chalk mark comes after hides something, on the same line",
+        "Collects it comes after a slow route, on the same line",
+        "The two lines never touch",
+        "A chalk mark sits on the collector's line",
+        "Loading a drop and the collector sit on the same line",
+        "The two lines join at the end, where the drop changes hands"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "The drawing puts a chalk mark on the same line as loading a drop, not on the collector's.  The collector reads the signal, and the article never says the collector is the one who leaves it.",
+        "4": "The drawing gives loading a drop and the collector a line each.  They are the two people the article keeps apart, and keeping them apart is the whole reason a dead drop exists.",
+        "5": "The drawing keeps the two lines apart from end to end.  The article's whole point is that the two people never have to be in the same place at the same time, so a handover would undo the method."
+      },
+      "explain": "The drawing says three things the article leaves a reader to piece together.  A chalk mark goes up at the end of the same line as loading a drop, so the drawing puts the signal on the loading half of the method.  Collects it comes only after a slow route, and the two lines never touch, which is the article's own point: a connection nobody observed can never later be proven.",
+      "whyTheFigureIsNeeded": "The article says the two sides agree on a signal but never says whose half places it or where it falls in the order, so only the drawing shows a chalk mark ending the loading line and shows the two halves running as separate lines that never meet."
+    },
+    {
+      "id": "l1-cloze-which-line-carries-each-note",
+      "type": "cloze",
+      "passageId": "p-dead-drop",
+      "figureId": "fig-l1-dead-drop",
+      "figureFact": "the signal says one thing only",
+      "targets": [
+        "c1-inf-1-key-details"
+      ],
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "Finish the description of the drawing.  The words the signal says one thing only sit on the line that starts at {{0}}, and the words a meeting that must be checked first sit on the line that starts at {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "loading a drop",
+            "the collector",
+            "collects it"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "hides something",
+            "the collector",
+            "a chalk mark"
+          ],
+          "key": 1
+        }
+      ],
+      "explain": "The article gives both of these sentences without saying whose half of the method each one belongs to.  The drawing settles it.  The signal says one thing only runs along the line that starts at loading a drop, so the drawing gives that sentence to the loading half of the method.  A meeting that must be checked first runs along the line that starts at the collector, because the care taken at pickup is the collector's own rule.",
+      "whyTheFigureIsNeeded": "The article states both sentences without attaching either to a person's half of the method, so which of the two lines carries each one is visible only on the drawing."
+    },
+    {
+      "id": "l2-order-relay-chain-path",
+      "type": "order",
+      "passageId": "p-dead-air",
+      "figureId": "fig-l2-dead-air",
+      "figureFact": "just inside the entrance",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 2,
+      "stem": "In the diagram, arrows join the boxes of the left-hand column, and one of those boxes reads just inside the entrance.  Put the three boxes in the order the message reaches them.",
+      "tiles": [
+        "the surface crew",
+        "just inside the entrance",
+        "the team below"
+      ],
+      "key": [
+        2,
+        1,
+        0
+      ],
+      "explain": "The two arrows in the left-hand column both point up the page, so the message starts at the bottom box and finishes at the top one.  It leaves the team below, is picked up just inside the entrance, and only then reaches the surface crew.  The article says the same thing in words: no single transmission has to cross the whole distance by itself.",
+      "whyTheFigureIsNeeded": "The passage names the relay by what it is, a small transmitter, while the drawing names it by where it sits, so only the drawing tells a reader that the box reading just inside the entrance is the middle stop on the message's path and which end of that path the arrows start from."
+    },
+    {
+      "id": "l2-mc-where-the-rock-chain-ends",
+      "type": "mc",
+      "passageId": "p-dead-air",
+      "figureId": "fig-l2-dead-air",
+      "figureFact": "the less of the signal survives",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 2,
+      "stem": "Follow the arrows from box to box along the diagram's right-hand column.  Which box do they arrive at last?",
+      "choices": [
+        "the deeper a team goes",
+        "the less of the signal survives",
+        "just inside the entrance",
+        "the surface crew"
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "That box is a step along the way rather than the end of it, because an arrow leaves it and runs on to the next box.",
+        "2": "That box is the relay's place, and it sits in the other column with the message's path.  The chain that starts at the rock never runs through it.",
+        "3": "The surface crew is the box at the top of the other column, where the message ends.  No arrow reaches it from the column that starts at the rock."
+      },
+      "explain": "The arrows on the right run from thirty feet of granite, to the deeper a team goes, and on to the less of the signal survives, so that last box is where the chain stops.  Two of the other choices are boxes in the left-hand column, which carries a message instead.",
+      "whyTheFigureIsNeeded": "The passage states the rock's effect inside one sentence, but only the drawing separates that idea into a chain of boxes with a first and a last, so a reader has to follow the arrows in the right-hand column to see which box the chain arrives at."
+    },
+    {
+      "id": "l2-cloze-rock-chain-direction",
+      "type": "cloze",
+      "passageId": "p-dead-air",
+      "figureId": "fig-l2-dead-air",
+      "figureFact": "the deeper a team goes",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 2,
+      "stem": "Finish the reading of the diagram.  In the right-hand column the arrows point {{0}} the page.  They run from {{1}}, to the deeper a team goes, and on to the last box of that column.",
+      "blanks": [
+        {
+          "choices": [
+            "down",
+            "up",
+            "across"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "thirty feet of granite",
+            "just inside the entrance",
+            "the team below"
+          ],
+          "key": 0
+        }
+      ],
+      "explain": "The right-hand column starts at the rock and works downward, from thirty feet of granite to the deeper a team goes and on to the last box.  Its arrows point the opposite way to the ones in the left-hand column, which carry a message up and out of the tunnel.",
+      "whyTheFigureIsNeeded": "Nothing in the passage says which way this chain is drawn or which box begins it on the page, and the two columns run opposite ways, so both blanks can only be filled by following the arrows in the right-hand column of the drawing."
+    },
+    {
+      "id": "l2-ms-two-columns-read",
+      "type": "ms",
+      "passageId": "p-dead-air",
+      "figureId": "fig-l2-dead-air",
+      "figureFact": "thirty feet of granite",
+      "targets": [
+        "c1-inf-6-text-structure"
+      ],
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "stem": "Look at the whole diagram, both columns of boxes.  Choose the three statements that match what it shows.",
+      "choices": [
+        "Thirty feet of granite is not one of the boxes on the message's path",
+        "No arrow runs across from one column to the other",
+        "One column follows a message, and the other follows what the rock does to a signal",
+        "The surface crew is the box at the foot of its column",
+        "An arrow runs from the surface crew back down to the team below",
+        "The right-hand column names the fix the article recommends"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "The surface crew is the box at the top of that column, and the team below is the one at the foot of it.  In this diagram the lower a box sits, the deeper it is.",
+        "4": "Both arrows in that column point up toward the surface, so the diagram draws no arrow coming back down.  A warning that cannot get down to the team is exactly the trouble the article describes.",
+        "5": "The fix in the article is the relay, and the relay is in the other column.  The boxes on the right name the rock and what it does to a signal."
+      },
+      "explain": "The two columns are drawn side by side and never join, so the message never passes through the boxes on the right.  One column follows a message from the team below up to the surface crew, and the other follows a signal from thirty feet of granite to the point where little of it survives.",
+      "whyTheFigureIsNeeded": "The passage runs the rock and the relay through the same paragraphs, so only the drawing shows them as two separate chains that no arrow joins, which is what tells a reader that thirty feet of granite is not a box the message travels through."
+    },
+    {
+      "id": "l3-order-plan-and-real-time-in-one-order",
+      "type": "order",
+      "passageId": "p-on-the-line",
+      "figureId": "fig-l3-on-the-line",
+      "figureFact": "the exercise ends",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 2,
+      "stem": "The Reading Room timeline sets the plan and the real time into one order.  In that order the exercise ends is not the last moment, and the plan's check-in is not the first.  Put all six moments in the order the timeline gives them.",
+      "tiles": [
+        "she checks in by two-twenty",
+        "the phone buzzes once",
+        "Ines went in",
+        "the exercise ends",
+        "a man in a grey jacket walks in",
+        "the same man walks back out, alone"
+      ],
+      "key": [
+        2,
+        4,
+        0,
+        5,
+        3,
+        1
+      ],
+      "explain": "The passage gives the plan first and the afternoon second, so reading it straight through puts the check-in time and the end of the exercise before the man in the jacket ever appears.  The timeline drops both records into one order instead.  Ines goes in, the man walks in, the check-in time falls due, the man walks back out, the exercise is meant to end, and only then does the phone buzz.  The plan's own ending comes fifth rather than last, and the buzz that ends the afternoon comes after it.",
+      "whyTheFigureIsNeeded": "The passage states the plan's check-in time and its end in one paragraph, and the afternoon's real moments in the next.  Nothing on the page puts the two records into a single sequence.  Only the timeline merges them, and only there does the plan's own ending sit fifth rather than last."
+    },
+    {
+      "id": "l3-mc-the-time-on-both-records",
+      "type": "mc",
+      "passageId": "p-relay-room",
+      "figureId": "fig-l3-relay-room",
+      "figureFact": "nothing on the radio but the hiss",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 3,
+      "stem": "The Halloway timeline keeps two records, The rule and I write down times.  One time is written on both of them.  Which two moments does the timeline set at that same time?",
+      "choices": [
+        "he checks in, and nothing on the radio but the hiss",
+        "he checks in, and the radio clicks twice",
+        "I call the whole exercise off, and my thumb on the transmit key",
+        "Jonah goes in, and nothing on the radio but the hiss"
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The radio clicks twice at ten twenty-two and eleven seconds, which the narrator calls late.  The timeline sets that moment last of all, and nothing on The rule shares it.",
+        "2": "The rule sets the call-off at ten twenty-two, and the thumb goes on the key at ten twenty-one.  The timeline gives those two moments different times.",
+        "3": "Jonah goes in at ten fourteen, earlier, before the check-in was ever due.  The timeline sets that moment first, and nothing on The rule shares it."
+      },
+      "explain": "The timeline writes ten twenty twice, once on each record.  On The rule it is the moment he checks in.  On I write down times it is nothing on the radio but the hiss.  Read together they say the check-in was due at exactly the moment the radio had nothing on it, which is the narrator's whole problem.  The clicks come later, at ten twenty-two and eleven seconds, and the thumb goes on the key at ten twenty-one, so neither of those shares its time with anything.",
+      "whyTheFigureIsNeeded": "The passage separates the two ten twenty moments by a paragraph and never says they are the same moment; the timeline is what writes that one time on both records and sets the expected check-in against the hiss."
+    },
+    {
+      "id": "l3-ms-what-the-added-line-shows",
+      "type": "ms",
+      "passageId": "p-the-log",
+      "figureId": "fig-l3-the-log",
+      "figureFact": "Thirty seconds lost on the second floor landing",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "stem": "Jonah's log sheet lists what happened, and the one line he added later runs along the foot of the sheet.  Choose the three things the sheet shows about that added line.",
+      "choices": [
+        "It sits below everything listed under what happened, at the foot of the sheet",
+        "It reads Thirty seconds lost on the second floor landing, cause unknown, no action taken",
+        "It comes after exit at ten forty-one, although the landing happened long before Jonah left",
+        "It takes the place of exit at ten forty-one on the sheet",
+        "It gives the time at which the thirty seconds began",
+        "Marchetti wrote it on the sheet when he collected it"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "Exit at ten forty-one is still on the sheet, listed under what happened.  The added line joins the sheet rather than replacing anything already on it.",
+        "4": "The added line says cause unknown and no action taken.  It gives no clock time at all, which is the point of it: he still does not know what he heard.",
+        "5": "Marchetti collects the sheets without reading a single one.  Jonah asks for his sheet back and writes the line himself, and it takes him longer than everything above it."
+      },
+      "explain": "The sheet lists what happened and then breaks off, and the added line sits under all of it at the foot of the page.  Its words are Thirty seconds lost on the second floor landing, cause unknown, no action taken.  Because it was added last, it lands after exit at ten forty-one, although the landing came long before Jonah left the building.  Nothing is taken off the sheet to make room for it, no time is put on it, and it is Jonah's own hand rather than Marchetti's.",
+      "whyTheFigureIsNeeded": "Only the sheet shows where the added line ended up: under everything listed under what happened, and after exit at ten forty-one.  The passage says only that Jonah wrote one more line at the bottom of the page, and never sets that line against the entries already there."
+    },
+    {
+      "id": "l3-cloze-which-record-holds-the-thumb",
+      "type": "cloze",
+      "passageId": "p-relay-room",
+      "figureId": "fig-l3-relay-room",
+      "figureFact": "my thumb on the transmit key",
+      "targets": [
+        "c1-lit-7-language-use"
+      ],
+      "coachTopic": "viewpoint-narrator",
+      "dok": 3,
+      "stem": "Finish the sentence about the Halloway timeline.  The timeline keeps two records, and my thumb on the transmit key goes on {{0}}, while The rule holds only {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "I write down times, the record of what the narrator saw and did himself",
+            "The rule, because the plan is what put his thumb there",
+            "both records at once, because it is the moment they meet"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "what the plan required, whether it happened or not",
+            "everything the narrator heard on the radio that afternoon",
+            "the moments Jonah sent out from inside the building"
+          ],
+          "key": 0
+        }
+      ],
+      "explain": "The timeline sorts the afternoon by whose moment it is.  Everything the narrator saw, heard or did goes on I write down times, and the thumb on the transmit key is his own, so it goes there.  The rule holds two moments and neither of them actually happened: Jonah did not check in at ten twenty, and the exercise was never called off.  A record of what a plan required is not a record of what took place.",
+      "whyTheFigureIsNeeded": "The passage gives the rule in its opening paragraph, and the narrator's own moments across the paragraphs that follow, so it never sorts them.  The timeline is what puts each moment on one record or the other, and what shows that The rule carries only moments that did not happen."
+    },
+    {
+      "id": "l4-match-claim-against-what-was-measured",
+      "type": "match",
+      "passageId": "p-beacon-log",
+      "figureId": "fig-l4-beacon-log",
+      "figureFact": "ninety minutes",
+      "stem": "The staff log copies the maker's claim of ninety minutes into its own head, then records underneath what the staff themselves measured.  Match each part of the log to the job it does in that comparison.",
+      "rowLabels": [
+        "The head of the log, where the maker's claim of ninety minutes is written",
+        "The times column, which reads nine minutes for the first run and seven minutes for the second",
+        "The rock type column, which reads wet limestone on both of its rows"
+      ],
+      "colLabels": [
+        "What the staff measured themselves, timed with a stopwatch in the tunnel",
+        "The number being checked, copied in from the maker's own document",
+        "A condition that was the same on both runs, so it cannot explain why one run was shorter than the other"
+      ],
+      "key": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "explain": "A log is worth reading in parts.  The number at the head came from the maker and is the thing being tested, the times underneath are the staff's own work, and the rock type is a condition held steady so that the two runs can be compared with each other.  Sorting a copied-in claim from a measured result is the whole job of checking a source, and this log's layout does that sorting for you.",
+      "whyTheFigureIsNeeded": "The prose never records rock type run by run and never places the maker's ninety minutes at the head of the log, so only the drawing separates the copied-in claim, the staff's own timed column, and the condition that was held steady across both rows."
+    },
+    {
+      "id": "l4-mc-where-the-condition-sits",
+      "type": "mc",
+      "passageId": "p-petrel-brief",
+      "figureId": "fig-l4-petrel-brief",
+      "figureFact": "measured at a constant seventy degrees",
+      "stem": "On the Petrel-4 page, Corvid Systems boxes its whole test claim: a fully charged Petrel-4 held a working fix thirty days straight.  Lower down the same page, two lines carry the red underline this brief uses for its small print.  What does that arrangement do to a reader in a hurry?",
+      "choices": [
+        "It puts the number where it will be read first and the words measured at a constant seventy degrees where they may be missed.",
+        "It shows the brief is hiding nothing, so the thirty days can be taken at face value.",
+        "It means the thirty-day number is true at seventy degrees and false everywhere else.",
+        "It marks the underlined lines as the most important claim on the page, since the brief chose to mark them."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "Printing a limit is better than hiding one, and it still does not make the two lines equally easy to notice.  Honest about a condition and safe to take at face value are two different things.",
+        "2": "The small print says performance in other conditions may vary, which is not the same as false.  You turned a limit on the claim into the opposite claim.",
+        "3": "The box is the mark this brief puts on the claim it is selling, and the underline is the mark it puts on the condition attached to that claim.  You read the two marks the wrong way round."
+      },
+      "targets": [
+        "c1-inf-4-reasoning"
+      ],
+      "coachTopic": "inference-argument",
+      "dok": 3,
+      "explain": "A page is read from the top, and this brief put its number above the condition that number depends on.  Both are printed on the same page, so nothing is hidden, yet a reader who stops after the boxed claim walks away with thirty days and no idea it was measured at a constant seventy degrees.  Reading a source properly means reading all the way down to the small print.",
+      "whyTheFigureIsNeeded": "The prose only reports that a line of small print exists at the close; the drawing is what shows the brief boxing its number as the headline and setting the seventy-degree condition further down the same page under a small-print rule, which is the arrangement the item asks about."
+    },
+    {
+      "id": "l4-ms-reading-across-the-cold-log",
+      "type": "ms",
+      "passageId": "p-cold-weather-log",
+      "figureId": "fig-l4-cold-weather-log",
+      "figureFact": "just past sixty-eight hours",
+      "stem": "The cold-weather log writes at its head what the brief calls a thirty-day battery life, then records what the staff measured in two columns, tags and gone silent.  Choose the three statements a reader can check by reading straight across those two columns.",
+      "choices": [
+        "Two of the four tags had gone silent at about sixty hours",
+        "All four tags went silent at the same hour",
+        "The other two tags are the ones that lasted into day three",
+        "The longest tag outlasted the thirty-day battery life the brief calls for",
+        "The longest one stopped just past sixty-eight hours",
+        "The tags were still reporting on the thirtieth day"
+      ],
+      "key": [
+        0,
+        2,
+        4
+      ],
+      "distractorRationale": {
+        "1": "The gone silent column has three rows, not one.  Two tags stopped at about sixty hours and the other two ran on into day three, so the four did not stop together.",
+        "3": "Sixty-eight hours is under three days, and the claim written at the head of the log is thirty days.  You read the largest number in the column as though it had beaten that claim.",
+        "5": "The only thirty-day number on this page is the maker's claim at the head.  Everything the staff measured is counted in hours, and the longest of it is just past sixty-eight."
+      },
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "explain": "A log's columns are built to be read across, one line at a time, and each line here pairs a group of tags with the point it fell silent.  Read that way the page gives three separate results rather than one, and the largest of the three is still counted in hours.  The thirty days at the head is the number under test, not a result the staff got.",
+      "whyTheFigureIsNeeded": "The prose tells the cold-weather story in sentences, and only the drawing pairs each group of tags with its own silence time on a line a reader can check straight across, with the brief's thirty days sitting at the head as the number under test."
+    },
+    {
+      "id": "l4-cloze-how-the-page-introduces-itself",
+      "type": "cloze",
+      "passageId": "p-beacon-brief",
+      "figureId": "fig-l4-beacon-brief",
+      "figureFact": "Corvid Systems",
+      "stem": "Complete a reader's note on the Wren-7 page.  The head of the page names Corvid Systems as its publisher, and the same name is stamped in the corner, which tells a reader {{0}}.  The date line at the head is filled with the words no date anywhere on the page, and that costs a reader {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "that the company selling the beacon is also the company that ran and published the test",
+            "that an outside laboratory checked the result before the page was printed",
+            "that the training staff at Halloway printed the page themselves"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "any way of telling how old the ninety-minute result is",
+            "the document number, which this page leaves out as well",
+            "the name of the tunnel the test was run in"
+          ],
+          "key": 0
+        }
+      ],
+      "targets": [
+        "c4-3-analyze-sources"
+      ],
+      "coachTopic": "research-source-check",
+      "dok": 3,
+      "explain": "The page introduces itself twice, once at its head and again in the corner stamp, and both times the name is the company that sells the beacon.  That matters, because the same page then offers that company's own test as proof.  The date is a separate cost: a result a reader cannot date is a result that cannot be lined up against anything measured since.",
+      "whyTheFigureIsNeeded": "The prose states the publisher and the missing date as facts in a sentence, and only the drawing shows the page introducing itself twice, in its head and again in a corner stamp, with its date line filled by the words no date anywhere on the page rather than standing empty."
+    },
+    {
+      "id": "l5-mc-two-limestone-tunnels",
+      "type": "mc",
+      "passageId": "p-three-tunnels",
+      "figureId": "fig-l5-three-tunnels",
+      "figureFact": "eight minutes",
+      "stem": "Two of the three tunnels on the memo are limestone.  Read what the memo gives under both of them.  What do those two tunnels show when they are set side by side?",
+      "choices": [
+        "The same rock can give very different results, because the wet limestone tunnel is set down as eight minutes and the dry limestone one as fifty-one minutes.",
+        "Limestone is the worst rock a beacon can be tested in, whatever else is true of the tunnel.",
+        "The beacon carried into the limestone tunnels must have been a weaker beacon than the one used in granite.",
+        "The two limestone tunnels come out the same, which shows the rock is the only thing that counts."
+      ],
+      "key": 0,
+      "distractorRationale": {
+        "1": "The article never ranks one rock against another.  It says wet rock absorbs radio energy far more than dry rock does, and the memo's own dry limestone tunnel held for fifty-one minutes.",
+        "2": "The memo carries the line that rules this out: the beacon is not the thing that changed.  The same beacon test ran in all three tunnels, so a difference between tunnels cannot be a difference in the beacon.",
+        "3": "The memo gives eight minutes under one limestone tunnel and fifty-one minutes under the other, so the two do not come out the same.  The article also sets shape and depth beside water."
+      },
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "explain": "Setting the two limestone tunnels side by side is what makes the point.  The rock is limestone in both, so limestone cannot be the thing that changed the answer.  What differs is that one is wet and one is dry, and the memo gives eight minutes under the wet one and fifty-one minutes under the dry one.  Reading a single tunnel on its own is how a condition gets mistaken for a verdict on the rock.",
+      "whyTheFigureIsNeeded": "The memo strips out every depth and every footage the article carries and leaves rock, shape and result aligned under each tunnel, so the two limestone tunnels can be compared property by property; the article scatters those same facts through one narrative paragraph and never sets the second tunnel against the third."
+    },
+    {
+      "id": "l5-ms-what-the-climate-memo-shows",
+      "type": "ms",
+      "passageId": "p-three-climates",
+      "figureId": "fig-l5-three-climates",
+      "figureFact": "twenty-six days",
+      "stem": "The memo gives a temperature and a runtime under each of its three climates.  Choose the three statements the memo supports.",
+      "choices": [
+        "The tag ran twenty-six days where the temperatures were in the fifties",
+        "The tag ran nineteen days where the heat was above ninety degrees",
+        "The shortest runtime on the memo, just under three days, is the one in the freezing mountain column",
+        "The tag ran the same number of days in every climate",
+        "A different tag was used in each of the three climates",
+        "The tag ran longest in the hottest air"
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "distractorRationale": {
+        "3": "The memo gives twenty-six days, nineteen days, and just under three days.  Runtimes that far apart are not the same number of days, and the spread is the whole reason the board shared all three results together.",
+        "4": "The memo is headed the same tracking tag, and the article says outright that the tag did not change between tests.  The climate changed instead, which is the finding.",
+        "5": "The hottest air on the memo is above ninety degrees, and the runtime under it is nineteen days, which is shorter than the twenty-six days measured in the fifties.  This choice reverses what the table gives."
+      },
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 3,
+      "explain": "The memo has two things to say under each climate, a temperature and a runtime, and every statement worth choosing pairs one with the other.  Twenty-six days belongs with the fifties, nineteen days with the heat above ninety degrees, and the shortest runtime of all with the freezing mountain.  The wrong choices each deny something the memo gives: that the runtimes differ, that one tag ran in all three tests, and that heat cost the tag time rather than winning it time.",
+      "whyTheFigureIsNeeded": "Each correct statement is a pairing of a temperature with the runtime measured at it, and the memo is the only place those two sit in the same column; the article puts each temperature and its runtime in separate sentences and then spends four paragraphs on why, so the pairings have to be reassembled from prose rather than read off."
+    },
+    {
+      "id": "l5-order-longest-hold-to-shortest",
+      "type": "order",
+      "passageId": "p-three-tunnels",
+      "figureId": "fig-l5-three-tunnels",
+      "figureFact": "fifty-one minutes",
+      "stem": "The memo's result row gives fifty-one minutes under one of the tunnels.  Read that row across and put the three tunnels in order of how long the beacon held, from the longest hold down to the shortest.",
+      "tiles": [
+        "the first tunnel",
+        "the second tunnel",
+        "the third tunnel"
+      ],
+      "key": [
+        0,
+        2,
+        1
+      ],
+      "targets": [
+        "c4-4-use-evidence"
+      ],
+      "coachTopic": "evidence-from-sources",
+      "dok": 3,
+      "explain": "The memo names the tunnels first, second, and third, and that is not the order of the results.  The first tunnel is the one where the beacon ran the full life of the battery, and the article says it beat the second by more than an hour, so its hold is the longest.  The third tunnel's fifty-one minutes comes next, and the second tunnel's eight minutes is last.  Taking the printed order for the ranking is the mistake this item is built on.",
+      "whyTheFigureIsNeeded": "The article never ranks the three holds; it reports each one inside its own tunnel's sentences, separated by depths, a bend measurement and a reference to the Halloway log.  The memo is the only place the three results stand in one line under headings that can be ordered, so the ranking has to be read across the table."
+    },
+    {
+      "id": "l5-cloze-temperatures-and-runtime",
+      "type": "cloze",
+      "passageId": "p-three-climates",
+      "figureId": "fig-l5-three-climates",
+      "figureFact": "above ninety degrees",
+      "stem": "Finish the reading of the memo.  Its temperatures row runs in the fifties, then above ninety degrees, then freezing, and under those same headings its runtime row runs {{0}}.  Read both rows together and the memo shows that {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "twenty-six days, then nineteen days, then just under three days",
+            "just under three days, then nineteen days, then twenty-six days",
+            "the same twenty-six days under every one of the climates"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "the hottest test is not the shortest one, because the freezing test is shorter still",
+            "the tag ran longest in the hottest air of the three",
+            "a broken tag must have been used for the desert test"
+          ],
+          "key": 0
+        }
+      ],
+      "targets": [
+        "c4-2-integrate"
+      ],
+      "coachTopic": "research-integrate",
+      "dok": 3,
+      "explain": "Both rows read together say more than either says alone.  The temperatures climb from the fifties to above ninety degrees and then fall to freezing, while the runtime shortens at every step, from twenty-six days to nineteen days to just under three.  Heat costs the tag time and freezing costs it far more, which is why the memo's own line says a number describes one climate, not every climate.",
+      "whyTheFigureIsNeeded": "The answer is a comparison of one whole row against another, in the memo's own left-to-right order, and only the memo puts the three temperatures in one line above the three runtimes.  A reader working from the article alone has to hold six separate values from three different paragraphs before the pattern appears."
+    },
+    {
+      "id": "l6-mc-rule-lane-against-the-log",
+      "type": "mc",
+      "passageId": "p-relay-room",
+      "figureId": "fig-l3-relay-room",
+      "figureFact": "nothing on the radio but the hiss",
+      "targets": [
+        "c1-lit-5-analysis"
+      ],
+      "coachTopic": "inference-relationships",
+      "dok": 3,
+      "stem": "The timeline has two lanes, one marked The rule and one marked I write down times.  At ten twenty it puts an entry on each of them.  What does reading those two together show?",
+      "choices": [
+        "The radio set had failed, so the narrator was learning nothing useful.",
+        "Jonah checked in at ten twenty, and the narrator wrote his check-in down.",
+        "The rule expected a check-in at that minute, and what the narrator actually had was nothing on the radio but the hiss.",
+        "The narrator called the whole exercise off at ten twenty, before the rule allowed it."
+      ],
+      "key": 2,
+      "distractorRationale": {
+        "0": "The hiss is the sound the set makes when it is working and nobody is talking.  The narrator says the frightening version is silence with no hiss underneath it, which is the opposite of what this minute gave her.",
+        "1": "The rule lane holds what was supposed to happen, not a record that it did.  The only check-in she ever logs is the two clicks, and those land at ten twenty-two and eleven seconds, which she calls late.",
+        "3": "Her thumb goes on the transmit key at ten twenty-one and comes straight off again, and the clicks arrive before she decides.  The abort sits on the rule lane because the rule named it, not because she did it."
+      },
+      "explain": "The two lanes do different jobs.  One holds what the plan said would happen, and the other holds what the narrator actually wrote down.  Set side by side at ten twenty, the plan's check-in has nothing on the radio but the hiss underneath it, and that gap is what she is sitting in when she puts her thumb on the key.  The hiss is not bad news, because it is the sound of a working set with nobody talking, which is why she waits instead of pressing the key.",
+      "whyTheFigureIsNeeded": "The passage tells the rule and the narrator's own record as one continuous voice, so a reader cannot separate them; only the drawing splits them into two lanes and shows that the check-in the rule demanded and the hiss she actually logged are the same minute, one entry per lane."
+    },
+    {
+      "id": "l6-mc-reading-the-runtime-row",
+      "type": "mc",
+      "passageId": "p-three-climates",
+      "figureId": "fig-l5-three-climates",
+      "figureFact": "just under three days",
+      "targets": [
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "evidence-across-texts",
+      "dok": 4,
+      "stem": "The card sets a temperature and a runtime under each climate.  Read the temperatures row and the runtime row across all three columns.  What does that pairing show?",
+      "choices": [
+        "The columns are set out in order of temperature, from the coolest one to the hottest.",
+        "The tag itself was weaker in the freezing mountain test than in the mild coastal one.",
+        "The mild coastal column matched the maker's thirty-day number exactly.",
+        "Both the hot column and the freezing column fall below the mild one, and the freezing column falls furthest, to just under three days."
+      ],
+      "key": 3,
+      "distractorRationale": {
+        "0": "The columns run mild coastal, desert climate, freezing mountain, which is the order the board ran the tests in.  Sorted by temperature the freezing column would sit at one end of the row, and it does not.",
+        "1": "The card's own heading is that the tag did not change, and the article says the same thing in its own words.  One tag went into all three tests, so the difference has to sit in the temperature above each runtime, not in the tag.",
+        "2": "Twenty-six days is close to thirty, and close is not the same as matched.  The article treats that small gap as ordinary, because a maker's own test is run at a comfortable room temperature and tends to show the best number a device can reach."
+      },
+      "explain": "The table is built so each climate's temperature sits directly above the runtime it produced.  Read across, the mild coastal column holds twenty-six days, the desert column drops to nineteen, and the freezing mountain column falls to just under three days.  That is not a straight slope from warm to cold, because the hottest column is not the shortest one.  It is a comfortable middle that works and two extremes that cost runtime, with the freezing end costing far more than the hot end.",
+      "whyTheFigureIsNeeded": "The article reports each climate in its own paragraph, so the three runtimes are never in view at once; only the card sets the three temperatures in one row above the three runtimes in the next, which is what lets a child see that the hottest column is not the shortest one."
+    },
+    {
+      "id": "l6-cloze-six-stops-one-run",
+      "type": "cloze",
+      "passageId": "p-long-way",
+      "figureId": "fig-l1-long-way",
+      "figureFact": "three sightings in three unrelated places",
+      "targets": [
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "inference-relationships",
+      "dok": 3,
+      "stem": "The article numbers only its three moves, and then gives the counting rule and the last rule as plain paragraphs.  The drawing numbers six stops on one line, so three sightings in three unrelated places is {{0}} of the same run.  Putting the rules on the same numbered line as the moves shows that {{1}}.",
+      "blanks": [
+        {
+          "choices": [
+            "stop four",
+            "stop two",
+            "stop six"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "stopping the run is one of its own steps, not a sign that the run went wrong",
+            "the counting rule takes over from the three moves once a courier has some experience",
+            "the three moves are listed from the one that works best to the one that works least"
+          ],
+          "key": 0
+        }
+      ],
+      "explain": "The article gives the three moves as a numbered list and then switches to plain paragraphs for the counting rule and the last rule, so a reader can easily take those last two as separate advice.  The drawing does not allow that reading, because it sets all six stops on one numbered line, with three sightings in three unrelated places at four, the run is over at five, and buys a carton of milk, goes home at six.  Seen that way, going home is not the run breaking down.  The run is walked to make a follower show themselves, and stops five and six are what the article says to do once one has.",
+      "whyTheFigureIsNeeded": "The article numbers only its first, second and third move and then drops into prose, so nothing in the text says the counting rule's verdict is stop four or that going home is stop six; only the drawing's numbered key puts all six on one line and makes them steps of a single run."
+    },
+    {
+      "id": "l6-ms-claim-against-the-two-runs",
+      "type": "ms",
+      "passageId": "p-beacon-log",
+      "figureId": "fig-l4-beacon-log",
+      "figureFact": "ninety minutes",
+      "targets": [
+        "c1-inf-5-analysis"
+      ],
+      "coachTopic": "evidence-across-texts",
+      "dok": 4,
+      "stem": "The log card prints the maker's claim at its head and the staff's own two runs in the table underneath.  Choose the three statements the card supports.",
+      "choices": [
+        "The claim at the head of the card is ninety minutes, and the longer of the two runs is nine minutes",
+        "Both runs are logged in the same rock type, so the rock cannot be what separates the two times",
+        "The two runs were carried out in two different tunnels",
+        "The second run held the signal for less time than the first did",
+        "The card is signed by the company that makes the beacon",
+        "The times column records how long each beacon's battery lasted"
+      ],
+      "key": [
+        0,
+        1,
+        3
+      ],
+      "distractorRationale": {
+        "2": "One tunnel is named at the head of the card, the Halloway service tunnel, and the article says both runs went down into that same tunnel.  The staff are careful to add that two runs in one tunnel is nowhere near enough evidence for a claim about other tunnels.",
+        "4": "The signatures are Marchetti and Osei, the two instructors, and the article says this log is written for the staff themselves and is not published anywhere.  The maker's own brief is the other source, and that is the published one.",
+        "5": "The times are how long the surface receiver held the signal before it lost it.  The article says the receiver's battery was replaced before each run, so battery life is not what these numbers measure."
+      },
+      "explain": "The card is worth reading because one number the maker published sits at the top of the same page as two numbers the staff measured themselves.  Ninety minutes is the claim, and the times column underneath reads nine minutes and then seven.  Reading down the rest of the table shows what did not change between the runs, because the rock type is wet limestone on both, so the drop from nine to seven cannot be blamed on the ground.  A claim and a measurement on one page is what makes this card worth more than either number would be alone.",
+      "whyTheFigureIsNeeded": "In the passage the maker's ninety-minute claim arrives in the last paragraph, far from the two measured runs; only the card puts that claim at the head of the same page as the table and lines the rock type up down both rows, which is what shows the ground is identical and cannot explain the drop from nine minutes to seven."
     }
   ],
   "figures": [

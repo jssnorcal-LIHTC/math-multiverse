@@ -390,7 +390,23 @@ function overTileScanInPage(px) {
   const problems = [];
   const note = (m) => console.log('  ' + m);
 
+  // A STYLESHEET RULE, NOT AN INLINE STYLE ON THE MODALS THAT HAPPEN TO EXIST RIGHT NOW. Setting
+  // display:none on each element found at call time leaves a race open: the coach modal is raised
+  // ASYNCHRONOUSLY after a wrong answer, so it can appear between hideModals() and the click that
+  // follows it, and Playwright then reports "<div id=\"coach-modal\" class=\"stats-modal\"> intercepts
+  // pointer events" and retries until it times out. That flaked this suite four times in one
+  // session, always under full-suite load and never on a re-run alone, which is the signature of a
+  // race rather than a defect in what is being tested.
+  //
+  // Demonstrated both ways before changing it: with the inline version a modal created AFTER the
+  // call still intercepts the click (elementFromPoint returns it); with this rule it does not.
   const hideModals = () => page.evaluate(() => {
+    if (!document.getElementById('mv-test-hide-modals')) {
+      const s = document.createElement('style');
+      s.id = 'mv-test-hide-modals';
+      s.textContent = '.stats-modal{display:none !important}';
+      document.head.appendChild(s);
+    }
     document.querySelectorAll('.stats-modal').forEach((m) => { m.style.display = 'none'; });
   });
 
