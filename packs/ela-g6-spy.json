@@ -5156,9 +5156,9 @@
       "kind": "diagram",
       "gen": true,
       "src": "art/ela-g6-spy/fig-l3-the-log.svg",
-      "caption": "Jonah's log sheet shows what happened in one column, and the line he went back and added sits in the column beside it.",
+      "caption": "Jonah's log sheet shows what happened in one column, and the line he went back and added sits in the column beside it.  Marchetti says the logs are not marked and never have been marked.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A document card headed the log sheets, ruled into two columns: what happened lists the recorded entries from entry at ten fourteen to exit at ten forty-one, and one more line at the bottom of the page holds the sentence Jonah added, with a not marked stamp tilted at the lower right.",
+      "alt": "A document card headed the log sheets, ruled into two columns: what happened lists the recorded entries from entry at ten fourteen to exit at ten forty-one, and one more line at the bottom of the page holds the sentence Jonah added.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-the-log",
@@ -5185,8 +5185,7 @@
               ""
             ]
           }
-        ],
-        "stamp": "not marked"
+        ]
       }
     },
     {
@@ -5297,9 +5296,9 @@
       "kind": "diagram",
       "gen": true,
       "src": "art/ela-g6-spy/fig-l4-beacon-log.svg",
-      "caption": "The staff logged nine minutes on the first run and seven minutes on the second, beside a claim of ninety minutes.",
+      "caption": "The staff logged nine minutes on the first run and seven minutes on the second, beside a claim of ninety minutes.  The log is written for the staff themselves and is not published anywhere.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A log card with columns for run, times, depth and rock type, listing the first run at nine minutes and the second run at seven minutes, stamped not published anywhere.",
+      "alt": "A log card with columns for run, times, depth and rock type, listing the first run at nine minutes and the second run at seven minutes.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-beacon-log",
@@ -5352,8 +5351,7 @@
               "wet limestone"
             ]
           }
-        ],
-        "stamp": "not published anywhere"
+        ]
       }
     },
     {
@@ -5414,7 +5412,7 @@
       "kind": "diagram",
       "gen": true,
       "src": "art/ela-g6-spy/fig-l4-cold-weather-log.svg",
-      "caption": "In the cold, two of the four tags went silent at about sixty hours, and the longest one stopped just past sixty-eight.",
+      "caption": "In the cold, two of the four tags went silent at about sixty hours, and the longest one stopped just past sixty-eight.  This log is not published anywhere either.",
       "credit": "Built for this project from the passage text; original work",
       "alt": "A log card showing the trip temperature and a boxed line about a thirty-day battery life, above a two-column table pairing three groups of tags with the hours they lasted.",
       "dataTable": {
@@ -5459,8 +5457,7 @@
               "just past sixty-eight hours"
             ]
           }
-        ],
-        "stamp": "not published anywhere"
+        ]
       }
     },
     {
@@ -5513,8 +5510,7 @@
               "fifty-one minutes"
             ]
           }
-        ],
-        "stamp": "the ground"
+        ]
       }
     },
     {
@@ -5524,7 +5520,7 @@
       "src": "art/ela-g6-spy/fig-l5-three-climates.svg",
       "caption": "The same tracking tag ran in three climates, and the table sets the temperature of each one beside its runtime, from twenty-six days down to just under three days.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A memo card headed The tag did not change, with a three-column table giving temperatures and runtime for the mild coastal, desert and freezing mountain tests, stamped The climate did.",
+      "alt": "A memo card headed The tag did not change, with a three-column table giving temperatures and runtime for the mild coastal, desert and freezing mountain tests.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-three-climates",
@@ -5572,8 +5568,7 @@
               "just under three days"
             ]
           }
-        ],
-        "stamp": "The climate did."
+        ]
       }
     }
   ]
