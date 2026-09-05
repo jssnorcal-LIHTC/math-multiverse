@@ -1529,10 +1529,18 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-mc-where-the-found-tortoises-were",
-      "itemHash": "21922a62bebda8f9",
-      "blind": 0,
-      "authored": 0,
+      "itemId": "l1-match-what-the-map-shows-about-each-stop",
+      "itemHash": "cb21f3258540080f",
+      "blind": [
+        2,
+        0,
+        1
+      ],
+      "authored": [
+        2,
+        0,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -1811,18 +1819,10 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-match-what-the-map-shows-about-each-stop",
-      "itemHash": "cb21f3258540080f",
-      "blind": [
-        2,
-        0,
-        1
-      ],
-      "authored": [
-        2,
-        0,
-        1
-      ],
+      "itemId": "l1-mc-where-the-found-tortoises-were",
+      "itemHash": "b39212b1c6d4a88d",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     }
