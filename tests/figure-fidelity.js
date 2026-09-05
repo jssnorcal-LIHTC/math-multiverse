@@ -116,6 +116,10 @@ function checkedStrings(dt) {
     ((c && c.rows) || []).forEach((r, j) => add(`columns[${i}].rows[${j}]`, r));
   });
   add('stamp', dt.stamp);
+  // A line at the FOOT of a document is a transcription like any other, and it must be checked
+  // like one -- it was added for Cold Signal's log card, whose whole point is the sentence Jonah
+  // adds at the bottom of the page.
+  add('footnote', dt.footnote);
   (dt.nodes || []).forEach((n, i) => add(`nodes[${i}].label`, n && n.label));
   (dt.edges || []).forEach((e, i) => add(`edges[${i}].label`, e && e.label));
   (dt.stops || []).forEach((s, i) => { add(`stops[${i}].label`, s && s.label); add(`stops[${i}].note`, s && s.note); });

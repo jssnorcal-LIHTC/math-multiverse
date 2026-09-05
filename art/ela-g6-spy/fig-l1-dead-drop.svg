@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img">
+<rect x="0" y="0" width="800" height="450" fill="#0f1218" />
+<text x="40" y="44" font-size="26" fill="#e8eef7">a dead drop</text>
+<g data-layout="plan"></g>
+<line x1="254" y1="157.68" x2="288" y2="157.68" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<polygon points="288,157.68 277,162.68 277,152.68" fill="#c8102e" />
+<line x1="512" y1="157.68" x2="558" y2="157.68" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<polygon points="558,157.68 547,162.68 547,152.68" fill="#c8102e" />
+<line x1="248" y1="330.32" x2="306" y2="330.32" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<polygon points="306,330.32 295,335.32 295,325.32" fill="#c8102e" />
+<line x1="494" y1="330.32" x2="564" y2="330.32" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<polygon points="564,330.32 553,335.32 553,325.32" fill="#c8102e" />
+<text x="535" y="202.48" font-size="18" fill="#e8eef7" text-anchor="middle" fill-opacity="0.82">the signal says one thing only</text>
+<text x="277" y="375.12" font-size="18" fill="#e8eef7" text-anchor="middle" fill-opacity="0.82">a meeting that must be checked first</text>
+<rect x="48" y="137.68" width="200" height="40" fill="rgba(232,238,247,0.06)" stroke="#c8102e" stroke-width="2" rx="20" data-shape="round" />
+<text x="148" y="164.68" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="148" dy="0">loading a drop</tspan></text>
+<rect x="294" y="137.68" width="212" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="400" y="164.68" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="400" dy="0">hides something</tspan></text>
+<rect x="564" y="137.68" width="176" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="652" y="164.68" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="652" dy="0">a chalk mark</tspan></text>
+<rect x="54" y="310.32" width="188" height="40" fill="rgba(232,238,247,0.06)" stroke="#c8102e" stroke-width="2" rx="20" data-shape="round" />
+<text x="148" y="337.32" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="148" dy="0">the collector</tspan></text>
+<rect x="312" y="310.32" width="176" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="400" y="337.32" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="400" dy="0">a slow route</tspan></text>
+<rect x="570" y="310.32" width="164" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="652" y="337.32" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="652" dy="0">collects it</tspan></text>
+</svg>
