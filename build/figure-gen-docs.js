@@ -600,7 +600,18 @@ function renderFacsimile(dataTable, accentColor) {
     y += TITLE_FONT;
     out.push(text(innerX, y, TITLE_FONT, dt.title));
     y += 12;
-    out.push(line(innerX, hp(y), CX + CW - 22, hp(y), HEADER_STROKE, 1));
+    // THE MASTHEAD RULE STOPS AT THE STAMP. Drawn full width it ran straight through the rotated
+    // Corvid Systems stamp -- the stamp box spans y 52..92 and the rule sits at y 88.5 -- so the
+    // crossing line read as part of the stamp and blurred where the masthead ended and the stamp
+    // began. It was the only place in the pack where a line ran through a drawn shape. The stamp's
+    // own left edge is recomputed here from the same expression the stamp block uses below, so the
+    // two cannot drift; the 16px gap matches the clearance the stamp already demands of the title.
+    let ruleRight = CX + CW - 22;
+    if (dt.stamp) {
+      const sw = estimateTextWidth(dt.stamp, LABEL_FONT) + 26;
+      ruleRight = Math.min(ruleRight, CX + CW - sw - 26 - 16);
+    }
+    out.push(line(innerX, hp(y), ruleRight, hp(y), HEADER_STROKE, 1));
     y += 10;
   }
 
