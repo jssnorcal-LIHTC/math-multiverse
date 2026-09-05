@@ -1569,22 +1569,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-order-relay-chain-path",
-      "itemHash": "24bfba1a52599245",
-      "blind": [
-        2,
-        1,
-        0
-      ],
-      "authored": [
-        2,
-        1,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l2-mc-where-the-rock-chain-ends",
       "itemHash": "6e2cf617ebb20e62",
       "blind": 1,
@@ -1602,6 +1586,22 @@
       "authored": [
         0,
         0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-ms-two-columns-read",
+      "itemHash": "631ba766b4550722",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -1683,6 +1683,22 @@
       "status": "agree"
     },
     {
+      "itemId": "l4-ms-reading-across-the-cold-log",
+      "itemHash": "9ec93673e5764f08",
+      "blind": [
+        0,
+        2,
+        4
+      ],
+      "authored": [
+        0,
+        2,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l4-cloze-how-the-page-introduces-itself",
       "itemHash": "fa66c28e43051d85",
       "blind": [
@@ -1759,14 +1775,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-reading-the-runtime-row",
-      "itemHash": "75e7e0ee48fa76ae",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-ms-claim-against-the-two-runs",
       "itemHash": "60d417de5cfe485b",
       "blind": [
@@ -1784,55 +1792,47 @@
     },
     {
       "itemId": "l1-mc-what-the-run-ends-at",
-      "itemHash": "6caf34375ca99564",
+      "itemHash": "044ae5ead6a7b374",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l2-ms-two-columns-read",
-      "itemHash": "631ba766b4550722",
+      "itemId": "l2-order-relay-chain-path",
+      "itemHash": "aea15d12d073d051",
       "blind": [
-        0,
+        2,
         1,
-        2
+        0
       ],
       "authored": [
-        0,
+        2,
         1,
-        2
+        0
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l3-mc-the-time-on-both-records",
-      "itemHash": "0bfdb84b9789c0ee",
+      "itemHash": "bb55235c23998852",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l4-ms-reading-across-the-cold-log",
-      "itemHash": "9ec93673e5764f08",
-      "blind": [
-        0,
-        2,
-        4
-      ],
-      "authored": [
-        0,
-        2,
-        4
-      ],
+      "itemId": "l6-mc-reading-the-runtime-row",
+      "itemHash": "af10877fcc595fba",
+      "blind": 3,
+      "authored": 3,
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-cloze-six-stops-one-run",
-      "itemHash": "e1a09b0b68cc9cf6",
+      "itemHash": "5a98eae98a47360d",
       "blind": [
         0,
         0

@@ -4943,7 +4943,7 @@
         "3": "That is number 1, the very first thing on the drawing.  Check which end of the line you are reading from."
       },
       "explain": "The article hands out its rules in separate paragraphs, so it is easy to lose track of what actually comes last.  The drawing settles it by putting the whole run on one numbered line, and number 6 reads buys a carton of milk, goes home.  The counting rule's verdict takes number 5, and the drawing keeps numbering after it, so going home is a stop of the run rather than what follows it.",
-      "whyTheFigureIsNeeded": "The article gives the counting rule and the last rule in separate paragraphs and finishes the last one with writing the whole thing up, so prose alone does not say which of the run is over and buys a carton of milk, goes home comes later; only the drawing's numbered line puts them at 5 and 6."
+      "whyTheFigureIsNeeded": "The article numbers nothing past the third move, so prose alone never gives the run is over or buys a carton of milk, goes home a number of its own; only the drawing's numbered line puts them at 5 and 6."
     },
     {
       "id": "l1-match-stop-to-its-number",
@@ -5061,7 +5061,7 @@
       ],
       "coachTopic": "structure-text",
       "dok": 2,
-      "stem": "In the diagram, arrows join the boxes of the left-hand column, and one of those boxes reads just inside the entrance.  Put the three boxes in the order the message reaches them.",
+      "stem": "In the diagram, arrows join the boxes of the left-hand column, and one of those boxes reads just inside the entrance.  Put the three boxes in the order the message passes through them.",
       "tiles": [
         "the surface crew",
         "just inside the entrance",
@@ -5223,7 +5223,7 @@
         "2": "The rule sets the call-off at ten twenty-two, and the thumb goes on the key at ten twenty-one.  The timeline gives those two moments different times.",
         "3": "Jonah goes in at ten fourteen, earlier, before the check-in was ever due.  The timeline sets that moment first, and nothing on The rule shares it."
       },
-      "explain": "The timeline writes ten twenty twice, once on each record.  On the record marked The rule it is the moment he checks in.  On the record marked I write down times it is nothing on the radio but the hiss.  Read together they say the check-in was due at exactly the moment the radio had nothing on it, which is the narrator's whole problem.  The clicks come later, at ten twenty-two and eleven seconds, and the thumb goes on the key at ten twenty-one, so neither of those shares its time with anything.",
+      "explain": "The timeline writes ten twenty twice, once on each record.  On the record marked The rule, it is the moment he checks in.  On the record marked I write down times, it is nothing on the radio but the hiss.  Read together they say the check-in was due at exactly the moment the radio had nothing on it, which is the narrator's whole problem.  The clicks come later, at ten twenty-two and eleven seconds, and the thumb goes on the key at ten twenty-one, so neither of those shares its time with anything.",
       "whyTheFigureIsNeeded": "The passage puts the two ten twenty moments in consecutive sentences across a paragraph break and never says they are the same moment; the timeline is what writes that one time on both records and sets the expected check-in against the hiss."
     },
     {
@@ -5593,7 +5593,7 @@
         "1": "The card's own heading is that the tag did not change, and the article says the same thing in its own words.  One tag went into all three tests, so the difference has to sit in the temperature above each runtime, not in the tag.",
         "2": "Twenty-six days is close to thirty, and close is not the same as matched.  The article treats that small gap as ordinary, because a maker's own test is run at a comfortable room temperature and tends to show the best number a device can reach."
       },
-      "explain": "The table is built so each climate's temperature sits directly above the runtime it produced.  Read across, the mild coastal column holds twenty-six days, the desert column drops to nineteen, and the freezing mountain column falls to just under three days.  That is not a straight slope from warm to cold, because the hottest column is not the shortest one.  It is a comfortable middle that works and two extremes that cost runtime, with the freezing end costing far more than the hot end.",
+      "explain": "The table is built so each climate's temperature sits directly above the runtime it produced.  Read across, the mild coastal column holds twenty-six days, the desert column drops to nineteen, and the freezing mountain column falls to just under three days.  That is not a straight slope from warm to cold, because the hottest column is not the shortest one.  Mild weather is the temperature that works, and both extremes cost runtime, with the freezing end costing far more than the hot end.",
       "whyTheFigureIsNeeded": "The article runs all three climates through one paragraph and splits every temperature from its runtime across separate sentences, so the three pairings are never aligned; only the card sets the three temperatures in one row above the three runtimes in the next, which is what lets a child see that the hottest column is not the shortest one."
     },
     {
@@ -5626,7 +5626,7 @@
           "key": 0
         }
       ],
-      "explain": "The article names its three moves first, second and third and then switches to plain paragraphs for the counting rule and the last rule, so a reader can easily take those last two as separate advice.  The drawing does not allow that reading, because it sets all six stops on one numbered line, putting the counting rule's third sighting at four, its verdict at five, and going home at six.  Seen that way, going home is not the run breaking down.  The run is walked to make a follower show themselves, and stops five and six are what the article says to do once one has.",
+      "explain": "The article names its three moves first, second and third and then switches to plain paragraphs for the counting rule and the last rule, so a reader can easily take those last two as separate advice.  The drawing does not allow that reading, because it sets all six stops on one numbered line, putting the counting rule's third sighting at four, its verdict at five, and going home at six.  Seen that way, going home is not the run breaking down.  The run is walked to make a follower show themselves, and stops five and six are what the article says to do once a follower has shown themselves.",
       "whyTheFigureIsNeeded": "The article numbers only its first, second and third move and then drops into prose, so nothing in the text says the counting rule's third sighting is stop four, that its verdict is stop five, or that going home is stop six; only the drawing's numbered key puts all six on one line and makes them steps of a single run."
     },
     {
