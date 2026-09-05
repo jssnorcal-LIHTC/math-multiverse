@@ -4981,7 +4981,7 @@
           1
         ]
       ],
-      "explain": "The article puts first, second and third on the courier's moves only, so the counting rule and the last rule can look like notes sitting outside the run.  The drawing puts them on the same numbered line: a change of level is number 3, three sightings in three unrelated places is number 4, and the run is over is number 5.  Read the numbers off the line rather than guessing from the order the paragraphs arrive in.",
+      "explain": "The article puts first, second and third on the courier's moves only, so the counting rule and the last rule can look like notes sitting outside the run.  The drawing puts them on the same numbered line: a change of level is number 3, three sightings in three unrelated places is number 4, and the words the run is over get number 5.  Read the numbers off the line rather than guessing from the order the paragraphs arrive in.",
       "whyTheFigureIsNeeded": "The article numbers nothing past the third move, so numbers 4 and 5 exist only on the drawing; a reader cannot say what number three sightings in three unrelated places or the run is over carries without reading the numbered key."
     },
     {
@@ -4997,8 +4997,8 @@
       "dok": 3,
       "stem": "The drawing sets the method out as two lines, one for each person.  Choose the three statements the drawing actually shows.",
       "choices": [
-        "A chalk mark comes after hides something, on the same line",
-        "Collects it comes after a slow route, on the same line",
+        "A chalk mark comes after the box reading hides something, on the same line",
+        "The box reading collects it comes after a slow route, on the same line",
         "The two lines never touch",
         "A chalk mark sits on the collector's line",
         "Loading a drop and the collector sit on the same line",
