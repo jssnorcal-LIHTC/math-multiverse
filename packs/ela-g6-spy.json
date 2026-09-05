@@ -4982,7 +4982,7 @@
         ]
       ],
       "explain": "The article puts first, second and third on the courier's moves only, so the counting rule and the last rule can look like notes sitting outside the run.  The drawing puts them on the same numbered line: number 3 is a change of level, number 4 is three sightings in three unrelated places, and number 5 is the words the run is over.  Read the numbers off the line rather than guessing from the order the paragraphs arrive in.",
-      "whyTheFigureIsNeeded": "The article numbers nothing past the third move, so numbers 4 and 5 exist only on the drawing; a reader cannot say what number three sightings in three unrelated places or the run is over carries without reading the numbered key."
+      "whyTheFigureIsNeeded": "The article numbers nothing past the third move, so numbers 4 and 5 exist only on the drawing; a reader cannot say which number the drawing gives to three sightings in three unrelated places, or which number it gives to the run is over, without reading the numbered key."
     },
     {
       "id": "l1-ms-what-the-two-lines-show",
@@ -5072,7 +5072,7 @@
         1,
         0
       ],
-      "explain": "The two arrows in the left-hand column both point up the page, so the message starts at the bottom box and finishes at the top one.  It leaves the team below, is picked up just inside the entrance, and only then reaches the surface crew.  The article says the same thing in words: no single transmission has to cross the whole distance by itself.",
+      "explain": "The two arrows in the left-hand column both point up the page, so the message starts at the bottom box and finishes at the top one.  It leaves the team below, is picked up just inside the entrance, and only then reaches the surface crew.  The article says the same thing in words: the team below reaches the relay, the relay reaches the surface.",
       "whyTheFigureIsNeeded": "The passage gives the relay's place and the order of the hops in words; only the drawing fixes which end of the left-hand column the arrows start from and draws the three as one path."
     },
     {
@@ -5274,8 +5274,8 @@
       "blanks": [
         {
           "choices": [
-            "The rule, because the plan is what put her thumb there",
-            "the record marked I write down times, which holds what the narrator saw, heard or did herself",
+            "The rule, because the plan is what put the narrator's thumb there",
+            "the record marked I write down times, which holds what the narrator saw, heard or did in person",
             "both records at once, because it is the moment they meet"
           ],
           "key": 1
@@ -5289,8 +5289,8 @@
           "key": 2
         }
       ],
-      "explain": "The timeline sorts the afternoon by whose moment it is.  Everything the narrator saw, heard or did goes on the record marked I write down times, and the thumb on the transmit key is her own, so it goes there.  The rule holds two moments and neither of them actually happened: Jonah did not check in at ten twenty, and the exercise was never called off.  A record of what a plan required is not a record of what took place.",
-      "whyTheFigureIsNeeded": "The passage's opening paragraph carries the narrator's first logged time and then the rule, and her remaining moments come across the paragraphs that follow, so it never sorts them.  The timeline is what puts each moment on one record or the other, and what shows that The rule carries only moments that did not happen."
+      "explain": "The timeline sorts the afternoon by whose moment it is.  Everything the narrator saw, heard or did goes on the record marked I write down times, and the thumb on the transmit key is the narrator's own, so it goes there.  The rule holds two moments and neither of them actually happened: Jonah did not check in at ten twenty, and the exercise was never called off.  A record of what a plan required is not a record of what took place.",
+      "whyTheFigureIsNeeded": "The passage's opening paragraph carries the narrator's first logged time and then the rule, and the narrator's remaining moments come across the paragraphs that follow, so it never sorts them.  The timeline is what puts each moment on one record or the other, and what shows that The rule carries only moments that did not happen."
     },
     {
       "id": "l4-match-claim-against-what-was-measured",
@@ -5422,7 +5422,7 @@
       "coachTopic": "research-source-check",
       "dok": 3,
       "explain": "The page introduces itself twice, once at its head and again in the corner stamp, and both times the name is the company that sells the beacon.  That matters, because the same page then offers that company's own test as proof.  The date is a separate cost: a result a reader cannot date is a result that cannot be lined up against anything measured since.",
-      "whyTheFigureIsNeeded": "The prose states the publisher and the missing date as facts in its opening paragraph, and only the drawing shows the page introducing itself twice, in its head and again in a corner stamp, with its date line filled by the words no date anywhere on the page rather than standing empty."
+      "whyTheFigureIsNeeded": "The prose states the publisher and the missing date as facts in its opening paragraph, and only the drawing shows the page introducing itself twice, in its head and again in a corner stamp, with its date line carrying words rather than a date: no date anywhere on the page."
     },
     {
       "id": "l5-mc-two-limestone-tunnels",
@@ -5439,7 +5439,7 @@
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "The article never says limestone is worse than granite.  It says wet rock absorbs radio energy far more than dry rock does, and the memo's own dry limestone tunnel held for fifty-one minutes.",
+        "1": "The article never says limestone is worse than granite.  It says wet rock absorbs radio energy far more effectively than dry rock does, and the memo's own dry limestone tunnel held for fifty-one minutes.",
         "2": "The memo carries the line that rules this out: the beacon is not the thing that changed.  The same beacon test ran in all three tunnels, so a difference between tunnels cannot be a difference in the beacon.",
         "3": "The memo gives eight minutes under one limestone tunnel and fifty-one minutes under the other, so the two do not come out the same.  The article also sets shape and depth beside water."
       },
@@ -5464,7 +5464,7 @@
         "A different tag was used in each of the three climates",
         "The tag ran nineteen days where the heat was above ninety degrees",
         "The shortest runtime on the memo, just under three days, is the one in the freezing mountain column",
-        "The tag ran longest in the hottest air"
+        "The tag ran twenty-six days where the heat was above ninety degrees"
       ],
       "key": [
         0,
@@ -5474,7 +5474,7 @@
       "distractorRationale": {
         "1": "The memo gives twenty-six days, nineteen days, and just under three days.  Runtimes that far apart are not the same number of days, which is why all three results together say more than any one of them.",
         "2": "The memo carries the same tracking tag at its head, and the article says outright that the tag did not change between tests.  The climate changed instead, which is the finding.",
-        "5": "The hottest air on the memo is above ninety degrees, and the runtime under it is nineteen days, which is shorter than the twenty-six days measured in the fifties.  This choice reverses what the table gives."
+        "5": "The hottest air on the memo is above ninety degrees, and the runtime under it is nineteen days, which is shorter than the twenty-six days measured in the fifties.  The longest runtime on the memo belongs to the mild coastal column, not the hottest one."
       },
       "targets": [
         "c4-4-use-evidence"
@@ -5576,7 +5576,7 @@
       "figureId": "fig-l5-three-climates",
       "figureFact": "just under three days",
       "targets": [
-        "c1-inf-5-analysis"
+        "c4-2-integrate"
       ],
       "coachTopic": "research-integrate",
       "dok": 3,
@@ -5671,7 +5671,7 @@
       "src": "art/ela-g6-spy/fig-l1-long-way.svg",
       "caption": "The courier makes three moves in order, then follows the counting rule and the last rule.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A left-to-right line of six numbered dots, with a numbered key below it naming each move and rule in the order the passage gives them.",
+      "alt": "A left-to-right line of six numbered dots, with a numbered key below it reading, in order, a doubling back, a stop in front of something that reflects, a change of level, three sightings in three unrelated places, the run is over, and buys a carton of milk, goes home.",
       "dataTable": {
         "type": "route",
         "sourcePassageId": "p-long-way",
