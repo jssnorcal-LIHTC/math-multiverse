@@ -52,6 +52,22 @@ const MAX_SENTENCE = {
 // A briefing is new prose written under the standard WP-P set, so it is held to it everywhere.
 const MAX_BRIEFING_SENTENCE = 28;
 
+// A FIGURE-STIMULUS ITEM -- one carrying a `figureFact` -- is new prose the ELA figures programme
+// wrote, so like a briefing it is held to a standard rather than to wherever it landed. The stem is
+// the instruction a child reads before anything else and the explain is what they are shown on
+// reveal; both are rendered, and NEITHER was measured by anything until 26-0905.
+//
+// WHY THESE TWO NUMBERS. Measured across all 48 such items in the two C-waves shipped so far, the
+// worst stem sentence is 25 words and the worst explain sentence is 42. They are pinned there, so
+// the gate is a ratchet on exactly the prose this programme is still writing.
+//
+// THEY WOULD HAVE FIRED. C4 round 3 rewrote l5-order-longest-hold-to-shortest's stem from 25 words
+// to 35 while chaining three imperatives, and rewrote l3-order-plan-and-real-time-in-one-order's
+// explain from 33 words to 52 by bolting a corrected clause onto the front of the old sentence.
+// Round 4's reviewers caught both by hand. The pack-level ceiling could not: ela-g6-spy is pinned
+// at 42 for its PASSAGES, and both defects sat under it.
+const MAX_FIGURE_ITEM = { stem: 25, explain: 42 };
+
 function sentencesOf(text) {
   return String(text || '')
     .split(/(?<=[.!?])\s+/)
@@ -121,6 +137,24 @@ for (const f of files) {
     }
   }
 
+  // Figure-stimulus items, where a pack has them.
+  let figureItemSents = 0;
+  for (const it of pack.items || []) {
+    if (!it || !it.figureFact) continue;
+    Object.keys(MAX_FIGURE_ITEM).forEach((field) => {
+      const cap = MAX_FIGURE_ITEM[field];
+      for (const sen of sentencesOf(it[field])) {
+        figureItemSents++;
+        const n = words(sen);
+        if (n > cap) {
+          problems.push(`${id}/${it.id} ${field}: a ${n}-word sentence, over the ${cap}-word `
+            + `figure-item ${field} ceiling: ${JSON.stringify(sen.slice(0, 90))}.  `
+            + `A question about a drawing may not be harder to read than the drawing.`);
+        }
+      }
+    });
+  }
+
   // A ceiling nothing comes near is decoration. Reported, not failed: lowering it is an editorial
   // decision, not something a gate gets to make on its own.
   const slack = ceiling - worst;
@@ -130,6 +164,7 @@ for (const f of files) {
     fk: +(fks.reduce((a, b) => a + b, 0) / fks.length).toFixed(1),
     cl: +(cls.reduce((a, b) => a + b, 0) / cls.length).toFixed(1),
     briefingSents,
+    figureItemSents,
   });
 }
 
@@ -159,6 +194,33 @@ const controls = [];
     ok: shortN <= Math.min(...Object.values(MAX_SENTENCE)),
     detail: `${shortN} words against the tightest ceiling ${Math.min(...Object.values(MAX_SENTENCE))}`,
   });
+  // The two figure-item ceilings get the REAL sentences C4 round 3 wrote and round 4 removed, so
+  // the control is a defect that actually shipped rather than a synthetic one.
+  const r3stem = 'Read that row across, then use what the article says about the first tunnel, and put '
+    + 'the three tunnels in order of how long the beacon held, from the longest hold down to the shortest.';
+  const r3explain = 'The passage puts the plan\'s check-in and its end in the same paragraph that opens '
+    + 'with Ines going in, and the man in the jacket only a paragraph later, so reading it straight through '
+    + 'puts the check-in time and the end of the exercise before the man in the jacket ever appears.';
+  const r4stem = 'Then read what the article says about the first tunnel.';
+  const nStem = words(sentencesOf(r3stem)[0] || r3stem);
+  const nExpl = words(sentencesOf(r3explain)[0] || r3explain);
+  const nOk = words(sentencesOf(r4stem)[0] || r4stem);
+  controls.push({
+    name: 'NEGATIVE: round 3\'s 35-word stem is over the figure-item stem ceiling',
+    ok: nStem > MAX_FIGURE_ITEM.stem,
+    detail: `${nStem} words against ${MAX_FIGURE_ITEM.stem}`,
+  });
+  controls.push({
+    name: 'NEGATIVE: round 3\'s 52-word explain is over the figure-item explain ceiling',
+    ok: nExpl > MAX_FIGURE_ITEM.explain,
+    detail: `${nExpl} words against ${MAX_FIGURE_ITEM.explain}`,
+  });
+  controls.push({
+    name: 'POSITIVE: the sentence that replaced it is under the stem ceiling',
+    ok: nOk <= MAX_FIGURE_ITEM.stem,
+    detail: `${nOk} words against ${MAX_FIGURE_ITEM.stem}`,
+  });
+  // A ceiling that no pack's items are measured against is decoration: say how many were read.
   // The splitter has to actually split, or every count above is one sentence long.
   const multi = sentencesOf('One. Two! Three?  Four.');
   controls.push({
@@ -194,5 +256,11 @@ if (problems.length) {
   console.log('\nRESULT: FAIL');
   process.exit(1);
 }
-console.log(`\nRESULT: ALL CLEAN (${rows.length} pack(s), ${rows.reduce((n, r) => n + r.briefingSents, 0)} briefing sentence(s), ${controls.length} controls)`);
+const figureItemSents = rows.reduce((n, r) => n + r.figureItemSents, 0);
+if (!figureItemSents) {
+  console.log('\nNOT ARMED: no pack carries a figure-stimulus item, so the figure-item ceilings measured nothing.');
+  console.log('RESULT: FAILED');
+  process.exit(1);
+}
+console.log(`\nRESULT: ALL CLEAN (${rows.length} pack(s), ${rows.reduce((n, r) => n + r.briefingSents, 0)} briefing sentence(s), ${figureItemSents} figure-item sentence(s), ${controls.length} controls)`);
 process.exit(0);
