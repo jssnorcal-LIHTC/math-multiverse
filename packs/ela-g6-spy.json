@@ -5196,7 +5196,7 @@
         3,
         1
       ],
-      "explain": "The passage puts the plan's check-in and its end in the same paragraph that opens with Ines going in, and the man in the jacket only a paragraph later, so reading it straight through puts the check-in time and the end of the exercise before the man in the jacket ever appears.  The timeline drops both records into one order instead.  Ines goes in, the man walks in, the check-in time falls due, the man walks back out, the exercise is meant to end, and only then does the phone buzz.  The plan's own ending comes fifth rather than last, and the buzz that ends the afternoon comes after it.",
+      "explain": "The passage puts the plan's check-in and its end in the same paragraph that opens with Ines going in.  The man in the grey jacket arrives only a paragraph later.  So reading it straight through puts the check-in time and the end of the exercise before the man in the jacket ever appears.  The timeline drops both records into one order instead.  Ines goes in, the man walks in, the check-in time falls due, the man walks back out, the exercise is meant to end, and only then does the phone buzz.  The plan's own ending comes fifth rather than last, and the buzz that ends the afternoon comes after it.",
       "whyTheFigureIsNeeded": "The passage puts the plan's check-in and its end in the same paragraph that opens with Ines going in, and the rest of the afternoon in the paragraphs after it.  Nothing on the page puts the two records into a single sequence.  Only the timeline merges them, and only there does the plan's own ending sit fifth rather than last."
     },
     {
@@ -5328,7 +5328,7 @@
       ],
       "coachTopic": "research-source-check",
       "dok": 3,
-      "explain": "A log is worth reading in parts.  The number at the head came from the maker and is the thing being tested, the times underneath are the staff's own work, and the rock type is a condition held steady so that the two runs can be compared with each other.  Sorting a copied-in claim from a measured result is the whole job of checking a source, and this log's layout does that sorting for you.",
+      "explain": "A log is worth reading in parts.  The number at the head came from the maker and is the thing being tested.  The times underneath are the staff's own work.  The rock type is a condition held steady, so the two runs can be compared with each other.  Sorting a copied-in claim from a measured result is the whole job of checking a source, and this log's layout does that sorting for you.",
       "whyTheFigureIsNeeded": "The prose never records rock type run by run and never places the maker's ninety minutes at the head of the log, so only the drawing separates the copied-in claim, the staff's own timed column, and the condition that was held steady across both rows."
     },
     {
@@ -5490,7 +5490,7 @@
       "passageId": "p-three-tunnels",
       "figureId": "fig-l5-three-tunnels",
       "figureFact": "fifty-one minutes",
-      "stem": "The memo's result row gives fifty-one minutes under one of the tunnels.  Read that row across, then use what the article says about the first tunnel, and put the three tunnels in order of how long the beacon held, from the longest hold down to the shortest.",
+      "stem": "The memo's result row gives fifty-one minutes under one of the tunnels.  Read that row across.  Then read what the article says about the first tunnel.  Put the three tunnels in order, from the longest hold down to the shortest.",
       "tiles": [
         "the first tunnel",
         "the second tunnel",
@@ -5567,7 +5567,7 @@
         "3": "Her thumb goes on the transmit key at ten twenty-one and comes straight off again, so nothing is ever sent.  The abort sits on the rule lane because the rule named it, not because she did it."
       },
       "explain": "The two lanes do different jobs.  One holds what the plan said would happen, and the other holds what the narrator actually wrote down.  Set side by side at ten twenty, the plan's check-in has nothing on the radio but the hiss underneath it, and that gap is what she is sitting in when she puts her thumb on the key.  The hiss is not bad news, because it is the sound of a working set with nobody talking, and the narrator calls it the only comfort in this job.  What keeps her from calling the exercise off is her own list, read down in order.",
-      "whyTheFigureIsNeeded": "The passage gives both moments as ten twenty but never says they are the same moment; the drawing is what puts one entry per lane on a single vertical, so the demand and the hiss stand as one minute rather than two sentences a paragraph apart."
+      "whyTheFigureIsNeeded": "The passage gives both moments as ten twenty but never says they are the same moment; the drawing is what puts one entry per lane on a single vertical, so the demand and the hiss stand as one minute rather than two consecutive sentences split by a paragraph break."
     },
     {
       "id": "l6-mc-reading-the-runtime-row",
@@ -5712,7 +5712,7 @@
       "src": "art/ela-g6-spy/fig-l1-dead-drop.svg",
       "caption": "The person loading the drop and the collector each follow their own line, and the two lines do not meet.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A diagram with two rows of boxes that never touch: a top row running loading a drop, hides something, a chalk mark, and a bottom row running the collector, a slow route, collects it.",
+      "alt": "A diagram with two rows of boxes that never touch: a top row running loading a drop, hides something, a chalk mark, with the words the signal says one thing only written along it, and a bottom row running the collector, a slow route, collects it, with the words a meeting that must be checked first written along that one.",
       "dataTable": {
         "type": "schematic",
         "sourcePassageId": "p-dead-drop",
@@ -5876,7 +5876,7 @@
       "src": "art/ela-g6-spy/fig-l3-relay-room.svg",
       "caption": "The thumb goes on the transmit key at ten twenty-one, just ahead of the ten twenty-two moment when the rule says to call the whole exercise off.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A timeline in two lanes: the upper lane, The rule, carries markers at ten twenty and ten twenty-two, while the lower lane, I write down times, carries four markers running from ten fourteen to ten twenty-two and eleven seconds.",
+      "alt": "A timeline in two lanes: the upper lane, The rule, carries markers at ten twenty and ten twenty-two, while the lower lane, I write down times, carries four markers, at ten fourteen, ten twenty, ten twenty-one, and ten twenty-two and eleven seconds, its ten twenty marker standing on the same vertical as the rule's.",
       "dataTable": {
         "type": "timeline",
         "sourcePassageId": "p-relay-room",
@@ -6004,7 +6004,7 @@
       "src": "art/ela-g6-spy/fig-l4-beacon-brief.svg",
       "caption": "Corvid Systems states its forty feet and ninety minutes up front, then sets the small print apart at the foot of the page.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A document card headed the Wren-7 locator beacon, with the testing claim about forty feet of stone and ninety minutes boxed whole, above the underlined small print, stamped Corvid Systems.",
+      "alt": "A document card headed the Wren-7 locator beacon, published by Corvid Systems, carrying a document number and, on its date line, the words no date anywhere on the page; the testing claim about forty feet of stone and ninety minutes is boxed whole above the underlined small print, and the name Corvid Systems is stamped again in the corner.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-beacon-brief",
@@ -6055,7 +6055,7 @@
       "src": "art/ela-g6-spy/fig-l4-beacon-log.svg",
       "caption": "The staff logged nine minutes on the first run and seven minutes on the second, beside a claim of ninety minutes.  The log is written for the staff themselves and is not published anywhere.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A log card with columns for run, times, depth and rock type, listing the first run at nine minutes and the second run at seven minutes.",
+      "alt": "A log card headed the equipment log, dated the fourteenth of March, signed by Marchetti and Osei, naming the Halloway service tunnel and, at its head, the maker's claim of ninety minutes, above columns for run, times, depth and rock type listing the first run at nine minutes and the second run at seven minutes, with wet limestone on both rows.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-beacon-log",
