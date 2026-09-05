@@ -216,6 +216,33 @@ function checkItem(item, fig, problems, tally) {
   });
 }
 
+// A FIGURE'S OWN alt AND caption ARE READER-FACING TOO, and until 26-0905 nothing looked at them.
+// engine/figures.js sets the img alt attribute from f.alt and the button's aria-label from
+// f.caption, so the alt is a non-visual reader's ONLY access to the drawing and the caption is read
+// out to anyone who tabs to it. The vocabulary rule was written for what a child receives, and a
+// child who hears "a hatched band" receives the draughtsman's word for it.
+//
+// COUNTED BEFORE BANNING, which is the rule that saved "labelled": across every pack there are
+// exactly TWO such uses in a figure alt, "hatched band" and "facsimile", both written by this
+// program. Two is a slip, not a convention. The count and emptiness checks are NOT extended here:
+// both need an item's claim to measure against a dataTable, while an alt describes its own figure
+// and is checked for fidelity by tests/figure-fidelity.js instead.
+function checkFigureProse(fig, problems, tally) {
+  ['alt', 'caption'].forEach((k) => {
+    const text = fig[k];
+    if (typeof text !== 'string' || !text.trim()) return;
+    BANNED_WORDS.forEach((w) => {
+      const re = new RegExp(`\\b(?:${w})\\b`, 'i');
+      const hit = re.exec(text);
+      if (hit) {
+        tally.vocab++;
+        problems.push(`${fig.id} ${k}: "${hit[0]}" is draughting vocabulary, not what a child hears`
+          + `\n      "${text.trim().slice(0, 120)}"`);
+      }
+    });
+  });
+}
+
 // ------------------------------------------------------------------------------------------
 // negative controls: the gate must go red on a defect it claims to catch, or it is decoration
 // ------------------------------------------------------------------------------------------
@@ -239,6 +266,15 @@ function controls() {
   run('emptiness with nothing empty drawn', { id: 'ctl5', stem: 'The row is left blank.' }, noBlank, true);
   run('emptiness with a blank field drawn', { id: 'ctl6', stem: 'The row is left blank.' }, withBlank, false);
 
+  // The alt/caption vocabulary check gets its own pair, because it runs on a different object.
+  {
+    const bad = { id: 'ctl-fig-alt', alt: 'A timeline with a hatched band across the middle.' };
+    const good = { id: 'ctl-fig-alt2', alt: 'A timeline with a shaded stretch across the middle.' };
+    const pa = []; checkFigureProse(bad, pa, { counts: 0, empties: 0, vocab: 0 });
+    out.push({ name: 'draughting word in a FIGURE ALT', red: pa.length > 0, ok: pa.length > 0 });
+    const pb = []; checkFigureProse(good, pb, { counts: 0, empties: 0, vocab: 0 });
+    out.push({ name: 'the same alt in a child\'s words', red: pb.length > 0, ok: pb.length === 0 });
+  }
   run('draughting word in a stem', { id: 'ctl7', stem: 'What does the hatched band show?' }, noBlank, true);
   run('same word in an explain', { id: 'ctl8', explain: 'The hatched band covers it.' }, noBlank, false);
 
@@ -250,6 +286,7 @@ function main() {
   const problems = [];
   const tally = { counts: 0, empties: 0, vocab: 0 };
   let itemsChecked = 0;
+  let figuresChecked = 0;
   let packsWithFigures = 0;
 
   const files = fs.readdirSync(PACKS_DIR)
@@ -262,6 +299,9 @@ function main() {
     const figs = new Map((pack.figures || []).map((x) => [x.id, x]));
     if (!figs.size) return;
     packsWithFigures++;
+    // Every figure, not only the ones an item is keyed on: an alt ships to a reader whether or not
+    // a question ever points at that figure.
+    figs.forEach((fig) => { figuresChecked++; checkFigureProse(fig, problems, tally); });
     (pack.items || []).forEach((it) => {
       if (!it.figureId) return;
       const fig = figs.get(it.figureId);
@@ -275,7 +315,8 @@ function main() {
   const ctl = controls();
   const ctlBad = ctl.filter((c) => !c.ok);
   console.log('=== figure-prose ===');
-  console.log(`  packs with figures: ${packsWithFigures}   items keyed on a figure: ${itemsChecked}`);
+  console.log(`  packs with figures: ${packsWithFigures}   items keyed on a figure: ${itemsChecked}`
+    + `   figure alts and captions read: ${figuresChecked}`);
   console.log(`  claims measured: ${tally.counts} count, ${tally.empties} emptiness, `
     + `${tally.vocab} vocabulary`);
   console.log('  negative controls:');
