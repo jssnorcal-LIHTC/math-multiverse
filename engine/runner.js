@@ -87,11 +87,40 @@
     return Math.round(100 * Math.max(0, Math.min(1, result.partial || 0)));
   }
 
-  function starsForMistakes(m) {
+  // THE LADDER IS LIFE-AWARE, and it has to be. Reported by Niall, 26-0904, in his own words:
+  // "when I get three questions wrong, not four, which would mean I would get zero stars, I still
+  // get zero stars, which means the fourth star is just there to do nothing."
+  //
+  // He is right, and the bar he is looking at is the reason. paintBar() draws one marker per LIFE,
+  // and every reading level in every pack declares `lives: 4` (36 levels across six packs). The
+  // ladder underneath was a fixed three-life ladder that never learned about `lives`, so on a
+  // four-life level:
+  //
+  //     0 wrong -> 3 stars, clears     2 wrong -> 1 star,  clears
+  //     1 wrong -> 2 stars, clears     3 wrong -> 0 stars, DOES NOT CLEAR
+  //                                    4 wrong -> 0 stars, DNF, does not clear
+  //
+  // The third mistake already cost everything there was to lose. The fourth marker sat on the bar
+  // through the rest of the level with nothing behind it -- no star to protect and no level to
+  // clear -- which is exactly what he noticed. A life the child can see must be a life that is
+  // worth something.
+  //
+  // RUNNING OUT OF LIVES IS NOW THE ONLY ZERO. Finishing a level earns at least one star, so the
+  // last life is the difference between clearing the level and not:
+  //
+  //     lives 4:  0 -> 3    1 -> 2    2 -> 1    3 -> 1    4 -> 0 (DNF)
+  //     lives 3:  0 -> 3    1 -> 2    2 -> 1              3 -> 0 (DNF)
+  //
+  // The three-life column is UNCHANGED, which matters: every math module (Fraction Rider, Rocket
+  // Climb and the rest) runs on three lives and its own copy of this ladder, and none of them
+  // moves. Only the four-life reading levels change, and only in the one band that had nothing
+  // in it. Reverting is one line: drop the `m >= L` guard and restore `return 0`.
+  function starsForMistakes(m, lives) {
+    const L = Number.isInteger(lives) ? lives : DEFAULT_LIVES;
+    if (m >= L) return 0;   // out of lives: the only way to score nothing
     if (m === 0) return 3;
     if (m <= 1) return 2;
-    if (m <= 2) return 1;
-    return 0;
+    return 1;               // survived it: the level clears
   }
 
   function summarize(results, lives) {
@@ -102,7 +131,10 @@
       if (!r || !r.correct) mistakes++;
     }
     const dnf = mistakes >= L;
-    return { score, mistakes, stars: dnf ? 0 : starsForMistakes(mistakes), dnf };
+    // starsForMistakes now returns 0 on its own when the lives are gone, so `dnf ? 0 :` is no
+    // longer load-bearing. It stays as the explicit statement of the rule, and the two agree by
+    // construction: both read the same L.
+    return { score, mistakes, stars: dnf ? 0 : starsForMistakes(mistakes, L), dnf };
   }
 
   // ---------------- DOM ----------------
