@@ -66,7 +66,28 @@ const MAX_BRIEFING_SENTENCE = 28;
 // explain from 33 words to 52 by bolting a corrected clause onto the front of the old sentence.
 // Round 4's reviewers caught both by hand. The pack-level ceiling could not: ela-g6-spy is pinned
 // at 42 for its PASSAGES, and both defects sat under it.
+//
+// A CLOZE STEM IS NOT WHAT THE CHILD READS. engine/items.js types.cloze.render splits the stem on
+// {{n}} and drops an inline <select> into the running sentence, so the sentence the child reads is
+// the stem WITH THE CHOSEN OPTION IN IT, and the grader's own miss note tells them to "Read the
+// whole sentence aloud with your choice in it". Measuring `it.stem` raw counts "{{0}}," as one word:
+// l3-cloze-which-record-holds-the-thumb scored 24 against a ceiling of 25 while rendering at 45,
+// the longest sentence in the pack. Found by C4 round 5, in the gate this session had just written.
+//
+// So a cloze is measured RENDERED, with each blank replaced by its keyed option, against its own
+// ceiling. 32 is the worst of the six once round 5's two rewrites landed (45 -> 26, 40 -> 20).
 const MAX_FIGURE_ITEM = { stem: 25, explain: 42 };
+const MAX_FIGURE_CLOZE_STEM = 32;
+
+// The stem exactly as engine/items.js renders it: every {{n}} replaced by the option the key names.
+function renderedStem(item) {
+  return String(item.stem || '').replace(/\{\{(\d+)\}\}/g, (m, n) => {
+    const b = (item.blanks || [])[Number(n)];
+    if (!b || !Array.isArray(b.choices)) return m;
+    const k = b.choices[b.key];
+    return typeof k === 'string' ? k : m;
+  });
+}
 
 function sentencesOf(text) {
   return String(text || '')
@@ -142,13 +163,16 @@ for (const f of files) {
   for (const it of pack.items || []) {
     if (!it || !it.figureFact) continue;
     Object.keys(MAX_FIGURE_ITEM).forEach((field) => {
-      const cap = MAX_FIGURE_ITEM[field];
-      for (const sen of sentencesOf(it[field])) {
+      const isCloze = it.type === 'cloze' && field === 'stem';
+      const cap = isCloze ? MAX_FIGURE_CLOZE_STEM : MAX_FIGURE_ITEM[field];
+      const text = isCloze ? renderedStem(it) : it[field];
+      for (const sen of sentencesOf(text)) {
         figureItemSents++;
         const n = words(sen);
         if (n > cap) {
-          problems.push(`${id}/${it.id} ${field}: a ${n}-word sentence, over the ${cap}-word `
-            + `figure-item ${field} ceiling: ${JSON.stringify(sen.slice(0, 90))}.  `
+          problems.push(`${id}/${it.id} ${field}${isCloze ? ' (as rendered, with the key in it)' : ''}: `
+            + `a ${n}-word sentence, over the ${cap}-word figure-item ${field} ceiling: `
+            + `${JSON.stringify(sen.slice(0, 90))}.  `
             + `A question about a drawing may not be harder to read than the drawing.`);
         }
       }
@@ -219,6 +243,29 @@ const controls = [];
     name: 'POSITIVE: the sentence that replaced it is under the stem ceiling',
     ok: nOk <= MAX_FIGURE_ITEM.stem,
     detail: `${nOk} words against ${MAX_FIGURE_ITEM.stem}`,
+  });
+  // The rendered-cloze path gets the REAL item round 5 rewrote, so the control is a defect that
+  // actually shipped and the substitution is shown to happen at all.
+  const clozeBefore = {
+    type: 'cloze',
+    stem: 'Finish the sentence about the Halloway timeline.  The timeline keeps two records, and the entry '
+      + 'reading my thumb on the transmit key goes on {{0}}, while The rule holds only {{1}}.',
+    blanks: [
+      { choices: ['I write down times, the record of what the narrator saw, heard or did herself'], key: 0 },
+      { choices: ['what the plan required, whether it happened or not'], key: 0 },
+    ],
+  };
+  const rawWorst = Math.max(...sentencesOf(clozeBefore.stem).map(words));
+  const renWorst = Math.max(...sentencesOf(renderedStem(clozeBefore)).map(words));
+  controls.push({
+    name: 'CONTROL: rendering a cloze stem substitutes the key, so the sentence gets longer',
+    ok: renWorst > rawWorst,
+    detail: `${rawWorst} words raw against ${renWorst} rendered`,
+  });
+  controls.push({
+    name: 'NEGATIVE: round 5\'s 45-word RENDERED cloze stem is over the cloze ceiling, though its raw form is under',
+    ok: renWorst > MAX_FIGURE_CLOZE_STEM && rawWorst <= MAX_FIGURE_ITEM.stem,
+    detail: `raw ${rawWorst} <= ${MAX_FIGURE_ITEM.stem}, rendered ${renWorst} > ${MAX_FIGURE_CLOZE_STEM}`,
   });
   // A ceiling that no pack's items are measured against is decoration: say how many were read.
   // The splitter has to actually split, or every count above is one sentence long.

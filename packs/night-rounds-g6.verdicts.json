@@ -1585,6 +1585,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l2-mc-tally-strip-across-columns",
+      "itemHash": "5bd050a83c951c10",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l2-order-workup-chain-of-arrows",
       "itemHash": "6a37d531dfdb1ef0",
       "blind": [
@@ -1791,8 +1799,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-cloze-where-the-second-step-sits",
-      "itemHash": "d596939658c4099e",
+      "itemId": "l2-cloze-heading-against-the-tally",
+      "itemHash": "8cf31efdedd457a3",
       "blind": [
         0,
         0
@@ -1805,16 +1813,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-mc-tally-strip-across-columns",
-      "itemHash": "5bd050a83c951c10",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-cloze-heading-against-the-tally",
-      "itemHash": "bdcb42494cdc3d4b",
+      "itemId": "l6-cloze-where-the-second-step-sits",
+      "itemHash": "61c3f7eb59eb1d77",
       "blind": [
         0,
         0
