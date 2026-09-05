@@ -732,7 +732,18 @@ function renderFacsimile(dataTable, accentColor) {
     y += 18;
     // The label column takes a share of the width; the data columns narrow to make room, so the
     // table still fits the card rather than running off it.
-    const labelColW = Array.isArray(dt.rowLabels) && dt.rowLabels.length ? Math.min(150, innerW * 0.24) : 0;
+    // THE STUB IS AS WIDE AS ITS LABELS, not a flat 150px. A fixed stub spent the same width on
+    // "the rock" as on a long row label and took it from the DATA columns, which is what made
+    // fig-l5-three-tunnels refuse row labels at all: the cell "the full life of the battery" could
+    // not fit what was left. Refusing labels is not neutral -- its sister card fig-l5-three-climates
+    // labels the same rows in the same position, so the leftmost column ends up meaning "which
+    // attribute" on one card and "the first attribute's data, unlabelled" on the other, which is
+    // the pixel review's finding. Still capped at 24% of the card so a long label cannot starve the
+    // table.
+    const labelColW = Array.isArray(dt.rowLabels) && dt.rowLabels.length
+      ? Math.min(innerW * 0.24,
+          dt.rowLabels.reduce((m, r) => Math.max(m, estimateTextWidth(String(r), TICK_FONT)), 0) + 18)
+      : 0;
     const colW = (innerW - labelColW) / columns.length;
     const cellW = colW - 14;
     const rowsN = columns.reduce((m, c) => Math.max(m, (c && Array.isArray(c.rows) ? c.rows.length : 0)), 0);

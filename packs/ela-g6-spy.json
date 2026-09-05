@@ -5458,7 +5458,7 @@
       "src": "art/ela-g6-spy/fig-l5-three-tunnels.svg",
       "caption": "Three tunnels ran the same beacon test, and the table sets the rock and the shape of each one beside how long the beacon held, from the full life of the battery to eight minutes.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A memo card headed Three conditions differed, with the line the beacon is not the thing that changed above a three-column table giving the rock, the shape and how long the beacon held in each tunnel.",
+      "alt": "A memo card headed Three conditions differed, with the line the beacon is not the thing that changed above a table whose three rows are labelled rock, shape and result and whose three columns are the first, second and third tunnels.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-three-tunnels",
@@ -5500,6 +5500,11 @@
               "fifty-one minutes"
             ]
           }
+        ],
+        "rowLabels": [
+          "rock",
+          "shape",
+          "result"
         ]
       }
     },
