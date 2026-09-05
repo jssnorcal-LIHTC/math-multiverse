@@ -5027,7 +5027,7 @@
       "src": "art/ela-g6-spy/fig-l2-dead-air.svg",
       "caption": "A relay parked just inside the entrance hears the team below and passes the message up to the surface crew, because the deeper a team goes, the less of the signal survives.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A plan diagram in two columns: on the left, boxes reading the team below, just inside the entrance, and the surface crew are joined by arrows pointing upward; on the right, an arrow runs down from the deeper a team goes to thirty feet of granite and on to the less of the signal survives.",
+      "alt": "A plan diagram in two columns: on the left, boxes reading the team below, just inside the entrance, and the surface crew are joined by arrows pointing upward; on the right, arrows run downward from thirty feet of granite through the deeper a team goes to the less of the signal survives, so lower means deeper in both columns.",
       "dataTable": {
         "type": "schematic",
         "sourcePassageId": "p-dead-air",
@@ -5060,14 +5060,14 @@
             "label": "thirty feet of granite",
             "shape": "box",
             "x": 79,
-            "y": 45
+            "y": 8
           },
           {
             "id": "deeper",
             "label": "the deeper a team goes",
             "shape": "box",
             "x": 79,
-            "y": 8
+            "y": 45
           },
           {
             "id": "loss",
@@ -5089,12 +5089,12 @@
             "style": "arrow"
           },
           {
-            "from": "deeper",
-            "to": "rock",
+            "from": "rock",
+            "to": "deeper",
             "style": "arrow"
           },
           {
-            "from": "rock",
+            "from": "deeper",
             "to": "loss",
             "style": "arrow"
           }
@@ -5258,7 +5258,7 @@
         ],
         "lines": [
           {
-            "text": "In testing, the Wren-7 held a clear signal",
+            "text": "In testing, the Wren-7 held a clear signal through",
             "emphasis": "box"
           },
           {
@@ -5267,9 +5267,6 @@
           },
           {
             "text": "The signal never once dropped below the level"
-          },
-          {
-            "text": "small print along the bottom of the page"
           },
           {
             "text": "test results depend on local conditions",
@@ -5386,9 +5383,6 @@
             "text": "reported its position on schedule every single time"
           },
           {
-            "text": "small print beneath the order form"
-          },
-          {
             "text": "measured at a constant seventy degrees",
             "emphasis": "underline"
           },
@@ -5427,8 +5421,8 @@
             "value": "fifteen and twenty-five degrees"
           },
           {
-            "label": "the brief calls",
-            "value": "a thirty-day battery life"
+            "label": "the brief",
+            "value": "calls a thirty-day battery life"
           }
         ],
         "columns": [
@@ -5527,10 +5521,6 @@
             "label": "the same tracking tag",
             "value": "three different climates",
             "contrast": true
-          },
-          {
-            "label": "shared",
-            "value": "all three results together"
           }
         ],
         "lines": [
