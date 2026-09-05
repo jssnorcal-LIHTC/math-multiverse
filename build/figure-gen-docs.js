@@ -874,6 +874,15 @@ function renderSchematic(dataTable, accentColor) {
     if (sg.e.style !== 'line') out.push(arrowHead(sg.x2, sg.y2, sg.dx, sg.dy, accent));
   });
 
+  // AND EVERY LABEL MUST CLEAR EVERY OTHER LABEL. Third step of the same rule, found the same way
+  // as the first two -- by looking at the picture rather than at the exit code. A plan with an
+  // arrow arriving horizontally and another arriving vertically at the same node put "The badge
+  // reads green" and "straight down" on the same few square centimetres, printing one through the
+  // other, and the renderer accepted it: `clears` tested boxes and connectors and nothing else, so
+  // two labels could occupy the identical rectangle and still pass. Placed labels now join the
+  // test, so a drawing whose words collide is REFUSED instead of shipped.
+  const placedLabels = [];
+
   segs.forEach((sg) => {
     const e = sg.e;
     const { x1, y1, x2, y2, ux, uy } = sg;
@@ -906,6 +915,11 @@ function renderSchematic(dataTable, accentColor) {
             if (sxp > l - 3 && sxp < r + 3 && syp > t - 3 && syp < bt + 3) return false;
           }
         }
+        // AND every label already placed. Rect overlap, with the same 2px tolerance the box test
+        // uses so two labels may sit shoulder to shoulder but never share ink.
+        for (const p of placedLabels) {
+          if (l < p.r - 2 && r > p.l + 2 && t < p.bt - 2 && bt > p.t + 2) return false;
+        }
         return true;
       };
       let placed = null;
@@ -922,6 +936,10 @@ function renderSchematic(dataTable, accentColor) {
           + `${JSON.stringify(e.to)} cannot be placed without covering a node or crossing a connector; `
           + 'shorten it, move the nodes apart, or carry the detail in the caption');
       }
+      placedLabels.push({
+        l: placed.cx - w / 2, r: placed.cx + w / 2,
+        t: placed.cy - NOTE_FONT * 0.8, bt: placed.cy + NOTE_FONT * 0.25,
+      });
       out.push(text(placed.cx, placed.cy, NOTE_FONT, e.label, { anchor: 'middle', opacity: '0.82' }));
     }
   });

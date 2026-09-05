@@ -529,5 +529,48 @@ check('every renderer refuses a table whose type does not match it', () => {
   assert.throws(() => docs.renderRoute(readFixture('timeline-single'), ACCENT), /route/i);
 });
 
+// AN EDGE LABEL MUST CLEAR EVERY OTHER EDGE LABEL. Third step of a rule the renderer already
+// enforced against boxes and against connectors, and the last one it was missing: two labels could
+// occupy the identical rectangle and still render. Found by LOOKING at a plan where an arrow
+// arriving horizontally and an arrow arriving vertically met at the same node, which printed
+// "The badge reads green" straight through "straight down".
+// THE REAL GEOMETRY THAT SHIPPED THE DEFECT, not a synthetic stand-in. Two arrows arrive at
+// "shelf", one horizontally and one vertically, and their labels were printed one straight through
+// the other -- "The badge reads green" across "straight down" -- while every gate stayed green.
+// Verified to be a true discriminator: with the label-vs-label test removed from the renderer this
+// table RENDERS, and with it in place it is REFUSED. A first attempt used an invented three-node
+// fixture which was refused either way, by the older connector rule, and so proved nothing; that
+// version passed with the new check deleted.
+const OVERLAPPING_LABELS = {
+  type: 'schematic', layout: 'plan', title: 'Frostbank Storage',
+  nodes: [
+    { id: 'doors', label: 'eleven doors', shape: 'box', x: 8, y: 72 },
+    { id: 'twelfth', label: 'The twelfth', shape: 'box', x: 42, y: 72 },
+    { id: 'panel', label: 'a single reader panel', shape: 'box', x: 42, y: 92 },
+    { id: 'camera', label: "the room's only camera", shape: 'box', x: 86, y: 26 },
+    { id: 'shelf', label: 'a raised shelf', shape: 'box', x: 86, y: 72 },
+  ],
+  edges: [
+    { from: 'doors', to: 'twelfth', label: 'a corridor so featureless', style: 'arrow' },
+    { from: 'panel', to: 'twelfth', style: 'line' },
+    { from: 'twelfth', to: 'shelf', label: 'The badge reads green', style: 'arrow' },
+    { from: 'camera', to: 'shelf', label: 'straight down', style: 'arrow' },
+  ],
+};
+
+check('NEGATIVE CONTROL: two edge labels that would overlap are REFUSED, not printed over each other', () => {
+  const dt = JSON.parse(JSON.stringify(OVERLAPPING_LABELS));
+  assert.throws(() => docs.renderSchematic(dt, ACCENT), /cannot be placed/,
+    'two labels sharing one rectangle must be refused, not drawn one through the other');
+});
+
+check('CONTROL: the same plan with one of the two labels dropped renders, so the refusal is the OVERLAP', () => {
+  // Without this, the refusal above could be about the geometry rather than about the labels.
+  const dt = JSON.parse(JSON.stringify(OVERLAPPING_LABELS));
+  delete dt.edges.find((e) => e.from === 'camera').label;
+  const svg = docs.renderSchematic(dt, ACCENT);
+  assert.ok(svg.includes('The badge reads green'), 'the one remaining label should draw');
+});
+
 console.log(failures ? 'figure-docs.test: ' + failures + ' FAILURE(S)' : 'figure-docs.test: all clean');
 process.exit(failures ? 1 : 0);
