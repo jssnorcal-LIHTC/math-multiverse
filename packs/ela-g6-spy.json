@@ -5004,13 +5004,13 @@
             "from": "hide",
             "to": "mark",
             "style": "arrow",
-            "label": "the drop is ready"
+            "label": "the signal says one thing only"
           },
           {
             "from": "coll",
             "to": "route",
             "style": "arrow",
-            "label": "must be checked first"
+            "label": "a meeting that must be checked first"
           },
           {
             "from": "route",
