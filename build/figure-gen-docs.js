@@ -187,42 +187,82 @@ function keyBlock(entries, top, accent) {
   const availH = VB_H - PAD - top;
   const gutter = 24;
 
-  let cols = 1;
-  let rowH = Math.min(ROW_H, Math.floor(availH / entries.length));
-  if (rowH < KEY_ROW_MIN) {
-    cols = 2;
-    rowH = Math.min(ROW_H, Math.floor(availH / Math.ceil(entries.length / 2)));
-    if (rowH < KEY_ROW_MIN) {
-      refuse(`key: ${entries.length} entries do not fit in ${Math.floor(availH)}px even in two columns; `
-        + 'split the figure or shorten the sequence');
-    }
-  }
-  const colW = (VB_W - 2 * PAD - (cols - 1) * gutter) / cols;
-  const perCol = Math.ceil(entries.length / cols);
-
+  // THE COLUMN COUNT IS CHOSEN AFTER WRAPPING, NOT BEFORE IT. It used to be decided from the row
+  // count alone, so a key whose labels wrapped could pass the one-column test on row height and then
+  // overflow once the wrapped lines were laid out -- with no second column ever tried. Both layouts
+  // are now measured for real and the first that fits wins.
+  const KEY_LINE_H = Math.max(NOTE_FONT + 2, 20);
   const numW = 30;
-  const leadFont = cols === 1 ? TICK_FONT : NOTE_FONT;
-  const labelFont = cols === 1 ? LABEL_FONT : TICK_FONT;
-  const leadW = entries.reduce((m, e) => Math.max(m, estimateTextWidth(e.lead || '', leadFont)), 0);
-  const labelX0 = numW + (leadW ? Math.ceil(leadW) + 14 : 0);
-  const room = colW - labelX0;
-
-  entries.forEach((e) => {
-    if (estimateTextWidth(e.label, labelFont) > room) {
-      refuse(`key: "${e.label}" needs ${Math.ceil(estimateTextWidth(e.label, labelFont))}px but only `
-        + `${Math.floor(room)}px remain beside its number and time; shorten the transcription or `
-        + 'move the detail into the caption');
+  const layoutFor = (cols) => {
+    const colW = (VB_W - 2 * PAD - (cols - 1) * gutter) / cols;
+    const perCol = Math.ceil(entries.length / cols);
+    const rowH = Math.min(ROW_H, Math.floor(availH / perCol));
+    if (rowH < KEY_ROW_MIN) return null;
+    const leadFont = cols === 1 ? TICK_FONT : NOTE_FONT;
+    const labelFont = cols === 1 ? LABEL_FONT : TICK_FONT;
+    // THE LEAD WRAPS TOO. A time is a transcription like any other and some of them are long --
+    // "ten twenty-two and eleven seconds" is thirty-three characters, and on one line it took so
+    // much of the row that no label fitted beside it in either layout. Capping the lead at 40% of
+    // the column keeps the label column usable; a lead that still will not fit fails the layout,
+    // and the caller tries the next one.
+    const leadCap = colW * 0.4;
+    const leads = entries.map((e) => (e.lead ? wrapToWidth(e.lead, leadFont, leadCap, 2) : []));
+    const leadW = leads.reduce((m, w) =>
+      Math.max(m, w.reduce((n, ln) => Math.max(n, estimateTextWidth(ln, leadFont)), 0)), 0);
+    if (leadW > leadCap) return null;
+    const labelX0 = numW + (leadW ? Math.ceil(leadW) + 14 : 0);
+    const room = colW - labelX0;
+    if (room <= 0) return null;
+    const wrapped = entries.map((e) => wrapToWidth(e.label, labelFont, room, 2));
+    const widest = wrapped.map((w) => w.reduce((m, ln) => Math.max(m, estimateTextWidth(ln, labelFont)), 0));
+    if (widest.some((w) => w > room)) return null;          // does not fit even wrapped to two lines
+    // A row is as tall as its TALLER half, lead or label.
+    const rowHs = wrapped.map((w, i) =>
+      rowH + (Math.max(w.length, leads[i].length || 1) - 1) * KEY_LINE_H);
+    for (let c = 0; c < cols; c++) {
+      const h = rowHs.slice(c * perCol, (c + 1) * perCol).reduce((a, b) => a + b, 0);
+      if (h > availH) return null;
     }
-  });
+    return { cols, colW, perCol, rowH, leadFont, labelFont, labelX0, room, wrapped, leads, rowHs };
+  };
+
+  const L = layoutFor(1) || layoutFor(2);
+  if (!L) {
+    refuse(`key: ${entries.length} entries do not fit in ${Math.floor(availH)}px even in two columns `
+      + 'with every label wrapped to two lines; split the figure or shorten the sequence');
+  }
+  const { cols, colW, perCol, leadFont, labelFont, labelX0 } = L;
+  const wrappedLabels = L.wrapped;
+  const wrappedLeads = L.leads;
+  const rowHs = L.rowHs;
+
+  // A KEY LABEL WRAPS, up to two lines, exactly as a table cell, a node label and a footnote do.
+  // It used to refuse outright, which pushed the author toward shortening a TRANSCRIPTION to fit a
+  // column -- and on fig-l3-relay-room it had already cost the truth: the record says the radio
+  // clicks at "ten twenty-two and eleven seconds", eleven seconds AFTER the cutoff the rule sets,
+  // and the figure carried the time truncated to "ten twenty-two" so the click and the cutoff were
+  // drawn as one moment. Restoring the real time widened the time column past what a single-line
+  // label could survive. The picture must bend to the record, not the record to the picture.
 
   entries.forEach((e, i) => {
     const col = Math.floor(i / perCol);
     const row = i % perCol;
     const x = PAD + col * (colW + gutter);
-    const y = top + row * rowH + NOTE_FONT;
+    let y = top + NOTE_FONT;
+    for (let r = col * perCol; r < col * perCol + row; r++) y += rowHs[r];
     out.push(text(x + numW - 8, y, NOTE_FONT, e.n + '.', { anchor: 'end', fill: accent }));
-    if (e.lead) out.push(text(x + numW, y, leadFont, e.lead, { opacity: '0.82' }));
-    out.push(text(x + labelX0, y, labelFont, e.label, e.mark ? { extra: `data-kind="${e.mark}"` } : undefined));
+    if (e.lead) {
+      const wl = wrappedLeads[i];
+      if (wl.length <= 1) out.push(text(x + numW, y, leadFont, e.lead, { opacity: '0.82' }));
+      else out.push(textLines(x + numW, y, leadFont, wl, { lineH: KEY_LINE_H, opacity: '0.82' }));
+    }
+    const w = wrappedLabels[i];
+    if (w.length === 1) {
+      out.push(text(x + labelX0, y, labelFont, e.label, e.mark ? { extra: `data-kind="${e.mark}"` } : undefined));
+    } else {
+      out.push(textLines(x + labelX0, y, labelFont, w,
+        Object.assign({ lineH: KEY_LINE_H }, e.mark ? { extra: `data-kind="${e.mark}"` } : {})));
+    }
   });
   return { out };
 }
@@ -337,26 +377,69 @@ function renderTimeline(dataTable, accentColor) {
     const span = hi - lo;
     xOf = (v) => (span === 0 ? (AX_L + AX_R) / 2 : AX_L + ((v - lo) / span) * (AX_R - AX_L));
   } else {
-    const n = events.length;
-    const byTime = new Map();
-    events.forEach((e, i) => { if (!byTime.has(e.t)) byTime.set(e.t, i); });
-    xOf = (v) => (n === 1 ? (AX_L + AX_R) / 2 : AX_L + (v / (n - 1)) * (AX_R - AX_L));
+    // AN ORDINAL LANE POSITIONS BY TIME, NOT BY INDEX, so two entries at the SAME time sit on the
+    // same vertical. Positioning by index put "ten twenty" on the rule lane a full step to the left
+    // of "ten twenty" on the log lane, and evenly spaced dots read as distinct moments: the drawing
+    // positively asserted that one happened before the other when the clock gives no such order.
+    // Found by the Cold Signal pixel review on fig-l3-relay-room, where two of the four pairs are
+    // tied. Ranking by distinct time also spaces the lane over the moments it actually has rather
+    // than over its event count.
+    const order = [];
+    const rankOf = new Map();
+    events.forEach((e) => { if (!rankOf.has(e.t)) { rankOf.set(e.t, order.length); order.push(e.t); } });
+    const m = order.length;
+    xOf = (r) => (m === 1 ? (AX_L + AX_R) / 2 : AX_L + (r / (m - 1)) * (AX_R - AX_L));
+    // Two tied events on the SAME track would now be drawn on top of each other. Different tracks
+    // is the honest case -- it is what "simultaneous" looks like -- so only the collision refuses.
+    const seen = new Map();
+    events.forEach((e) => {
+      const key = e.t + ' ' + (e.track || '');
+      if (seen.has(key)) {
+        refuse(`timeline: two events on track ${JSON.stringify(e.track || '')} share the time `
+          + `${JSON.stringify(e.t)}, so they would be drawn on the same point; put them on different `
+          + 'tracks or give them the times the record actually gives');
+      }
+      seen.set(key, true);
+    });
     gaps.forEach((g, gi) => {
-      if (!byTime.has(g.from) || !byTime.has(g.to)) {
+      if (!rankOf.has(g.from) || !rankOf.has(g.to)) {
         refuse(`timeline: gap ${gi} runs ${JSON.stringify(g.from)} to ${JSON.stringify(g.to)}, `
           + 'but this timeline is not on a clock scale, so a gap must name two event times exactly');
       }
     });
-    xOf.byTime = byTime;
+    xOf.rankOf = rankOf;
   }
   const posOf = timeMode
     ? (i) => xOf(parsed[i])
-    : (i) => xOf(i);
+    : (i) => xOf(xOf.rankOf.get(events[i].t));
   const posOfTime = timeMode
     ? (s) => xOf(parseClock(s))
-    : (s) => xOf(xOf.byTime.get(s));
+    : (s) => xOf(xOf.rankOf.get(s));
 
   const out = head(dt.title);
+  // AND THE DRAWING SAYS SO, not only the alt. A broken rule was the whole cue and the explanation
+  // lived in alt text, which a sighted child never sees. Both Cold Signal reviewers raised it
+  // independently: a left-to-right rule with evenly spaced dots is the standard picture of a scale,
+  // so eighteen minutes is drawn exactly as wide as the one minute after it, and nothing teaches an
+  // eleven-year-old that a dash means otherwise.
+  //
+  // It sits on the TITLE line, right-aligned, because that is the one place on this canvas that
+  // costs no vertical space: put below the lanes it took 10px off the key, and the twelve-entry
+  // Night Rounds timeline stopped fitting. Refused if a long title would reach it, the same check
+  // the facsimile stamp makes rather than assuming.
+  if (!timeMode) {
+    const NOTE = 'in order, not to scale';
+    const noteW = estimateTextWidth(NOTE, NOTE_FONT);
+    const titleRight = dt.title ? PAD + estimateTextWidth(dt.title, TITLE_FONT) : PAD;
+    // Beside the title when it fits, on its own line under the title when it does not. Night Rounds
+    // titles its storm timeline "The night of the twenty-sixth of May", which is a transcription and
+    // reaches across; refusing it would have meant shortening the RECORD to make room for chrome,
+    // which is the trade this whole program exists to refuse. The second line is still well above
+    // the lanes, which start at 128, so it costs the key nothing.
+    const fits = titleRight <= VB_W - PAD - noteW - 24;
+    out.push(text(VB_W - PAD, fits ? TITLE_Y : TITLE_Y + 26, NOTE_FONT, NOTE,
+      { anchor: 'end', opacity: '0.62' }));
+  }
 
   // The bounds get their own row well above the lanes. Drawn any lower they collide with the event
   // numbers, and in ordinal mode the first event sits at exactly AX_L, so "Monday" and the "1" under
@@ -400,6 +483,13 @@ function renderTimeline(dataTable, accentColor) {
     out.push(line(AX_L, hp(y), AX_R, hp(y), RULE, 1, timeMode ? undefined : { dash: '7 6' }));
   });
 
+  // AND IT SAYS SO ON THE DRAWING, not only in the alt. The broken rule was the whole cue, and the
+  // explanation lived in alt text, which a sighted child never sees. Both Cold Signal reviewers
+  // raised the same thing independently: a left-to-right rule with evenly spaced dots is the
+  // standard picture of a scale, so the gap from two-oh-one to two-nineteen is drawn exactly as wide
+  // as the one-minute gap that follows it, and nothing teaches an eleven-year-old that a dash means
+  // otherwise. Six words under the last lane, in the same small type as the marker numbers.
+
   // Marker numbers are placed in TWO PASSES, because two events close together in time put their
   // numbers on top of each other: a disputed "maybe 7:30" beside a recorded 7:40 printed as an
   // unreadable "4?3". Each lane is walked in x order and a number that would overlap the previous
@@ -408,7 +498,14 @@ function renderTimeline(dataTable, accentColor) {
   // D16: a staggered numeral must stay on its OWN lane's side. A fixed [-14,-32] put the second row
   // for the LOWER lane midway between the two lanes, so which lane a numeral belonged to was a
   // guess. The last lane staggers DOWNWARD, where nothing else lives; every other lane staggers up.
-  const rowsFor = (k) => (k === tracks.length - 1 ? [-14, 22] : [-14, -32]);
+  // AND ON A MULTI-LANE TIMELINE THE LAST LANE'S NUMERALS GO BELOW ITS RULE ENTIRELY, not just the
+  // staggered ones. With two lanes the base row at -14 sat in the shallow corridor BETWEEN the
+  // rules, closer to its own lane but not clearly so, and which lane a numeral belonged to is
+  // exactly the distinction a two-lane figure exists to make -- which entries are the rule and
+  // which are the observed log. Each lane's numbers now sit on the OUTSIDE of the pair. A
+  // single-lane timeline is unchanged: it has no corridor, and nothing below it but the key.
+  const multiLane = tracks.length > 1;
+  const rowsFor = (k) => (multiLane && k === tracks.length - 1 ? [22, 40] : [-14, -32]);
   const placed = [];
   const rowsByLane = new Map();
   events.forEach((e, i) => {
@@ -448,6 +545,12 @@ function renderTimeline(dataTable, accentColor) {
   // gap's own from/to in the dataTable and nowhere in the picture: a reader saw a hatched band with
   // no times on it, and every byte-compare was green because the fixture came from this same
   // renderer. tests/figure-fidelity.js part 2 is what caught it.
+  // AND IT SAYS SO ON THE DRAWING, not only in the alt. The broken rule was the whole cue, and the
+  // explanation lived in alt text, which a sighted child never sees. Both Cold Signal reviewers
+  // raised it independently: a left-to-right rule with evenly spaced dots is the standard picture of
+  // a scale, so eighteen minutes is drawn exactly as wide as the one minute after it, and nothing
+  // teaches an eleven-year-old that a dash means otherwise. Placed BELOW the deepest numeral row so
+  // it cannot sit on one, and the key starts below it in turn.
   let cursor = laneBottom + 14;
   gaps.forEach((g) => {
     const bounded = (typeof g.from === 'string' && typeof g.to === 'string')
@@ -497,16 +600,41 @@ function renderFacsimile(dataTable, accentColor) {
     y += TITLE_FONT;
     out.push(text(innerX, y, TITLE_FONT, dt.title));
     y += 12;
-    out.push(line(innerX, hp(y), CX + CW - 22, hp(y), HEADER_STROKE, 1));
+    // THE MASTHEAD RULE STOPS AT THE STAMP. Drawn full width it ran straight through the rotated
+    // Corvid Systems stamp -- the stamp box spans y 52..92 and the rule sits at y 88.5 -- so the
+    // crossing line read as part of the stamp and blurred where the masthead ended and the stamp
+    // began. It was the only place in the pack where a line ran through a drawn shape. The stamp's
+    // own left edge is recomputed here from the same expression the stamp block uses below, so the
+    // two cannot drift; the 16px gap matches the clearance the stamp already demands of the title.
+    let ruleRight = CX + CW - 22;
+    if (dt.stamp) {
+      const sw = estimateTextWidth(dt.stamp, LABEL_FONT) + 26;
+      ruleRight = Math.min(ruleRight, CX + CW - sw - 26 - 16);
+    }
+    out.push(line(innerX, hp(y), ruleRight, hp(y), HEADER_STROKE, 1));
     y += 10;
   }
 
   if (header.length) {
-    const labW = header.reduce((m, h) => Math.max(m, estimateTextWidth((h && h.label) || '', TICK_FONT)), 0);
+    const labW = header.reduce((m, h) => Math.max(m,
+      estimateTextWidth((h && h.label) || '', h && h.contrast === true ? LABEL_FONT : TICK_FONT)), 0);
     header.forEach((h, i) => {
       if (!h || typeof h.value !== 'string') refuse(`facsimile: header row ${i} has no value`);
       y += LABEL_FONT + 6;
-      if (h.label) out.push(text(innerX, y, TICK_FONT, h.label, { opacity: '0.82' }));
+      // A CONTRAST ROW SETS BOTH HALVES AT THE SAME WEIGHT. The header block's styling teaches one
+      // relation -- dim small label on the left, bright large value on the right, a field and its
+      // value -- and four of Cold Signal's six document cards use it that way. The two memo cards
+      // then used the SAME block for a contrast, "the same tracking tag | three different climates",
+      // where the left half carries half the argument (what stayed the same) and was wearing the
+      // throwaway-label treatment, with a genuine field-and-value row stacked directly beneath it
+      // and nothing to tell the two apart. Marking the row `contrast: true` draws both halves alike,
+      // so the block keeps ONE meaning per appearance. Rows without the flag are byte-identical.
+      const contrast = h.contrast === true;
+      if (h.label) {
+        out.push(contrast
+          ? text(innerX, y, LABEL_FONT, h.label)
+          : text(innerX, y, TICK_FONT, h.label, { opacity: '0.82' }));
+      }
       const hx = innerX + Math.ceil(labW) + 16;
       if (h.value === '') {
         // A FIELD PRINTED AND LEFT EMPTY, drawn as the empty rule a form actually shows. This has
@@ -598,14 +726,23 @@ function renderFacsimile(dataTable, accentColor) {
           const kf = estimateTextWidth(kt, LABEL_FONT) <= room ? LABEL_FONT : TICK_FONT;
           widest = Math.max(widest, estimateTextWidth(kt, kf));
         }
-        const top = y - font;
-        const bottom = y + (end - i) * step + 12;
+        // THE BOX MUST NOT REACH THE LINE BELOW IT. With 12px of bottom padding the outline ended at
+        // y 276 while the next line's ascenders began at 274 -- a 2px OVERLAP, so on a card where a
+        // red rule already means "small print", the box's lower edge read as an underline on the
+        // line beneath it. Padding trimmed to 8 (descenders reach about 5px below the baseline, so
+        // it still contains them) and the run is followed by 4px of extra advance, measured back to
+        // 6px of clear space. Grew visible only once a box spanned TWO lines and sat mid-block.
+        const top = y - font - 2;
+        const bottom = y + (end - i) * step + 8;
         out.push(rect(innerX - 8, top, widest + 16, bottom - top,
           { stroke: accent, strokeWidth: 2, rx: 3, extra: 'data-emphasis="box"' }));
       }
     } else if (em === 'underline') {
       out.push(line(innerX, hp(y + 5), innerX + w, hp(y + 5), accent, 2, { extra: 'data-emphasis="underline"' }));
     }
+    // A boxed run ends with a little extra air, so the outline never crowds the next line.
+    if (em === 'box' && boxRunEnd[boxRunStart[i]] === i) y += 4;
+
     // A plain line gets NO rule. Ruling every line made a flowing newspaper paragraph render as a
     // stack of table rows, and worse, it made the gray rules almost indistinguishable from the
     // ACCENT underline that marks a disputed sentence -- which is the one thing the figure exists
@@ -618,7 +755,18 @@ function renderFacsimile(dataTable, accentColor) {
     y += 18;
     // The label column takes a share of the width; the data columns narrow to make room, so the
     // table still fits the card rather than running off it.
-    const labelColW = Array.isArray(dt.rowLabels) && dt.rowLabels.length ? Math.min(150, innerW * 0.24) : 0;
+    // THE STUB IS AS WIDE AS ITS LABELS, not a flat 150px. A fixed stub spent the same width on
+    // "the rock" as on a long row label and took it from the DATA columns, which is what made
+    // fig-l5-three-tunnels refuse row labels at all: the cell "the full life of the battery" could
+    // not fit what was left. Refusing labels is not neutral -- its sister card fig-l5-three-climates
+    // labels the same rows in the same position, so the leftmost column ends up meaning "which
+    // attribute" on one card and "the first attribute's data, unlabelled" on the other, which is
+    // the pixel review's finding. Still capped at 24% of the card so a long label cannot starve the
+    // table.
+    const labelColW = Array.isArray(dt.rowLabels) && dt.rowLabels.length
+      ? Math.min(innerW * 0.24,
+          dt.rowLabels.reduce((m, r) => Math.max(m, estimateTextWidth(String(r), TICK_FONT)), 0) + 18)
+      : 0;
     const colW = (innerW - labelColW) / columns.length;
     const cellW = colW - 14;
     const rowsN = columns.reduce((m, c) => Math.max(m, (c && Array.isArray(c.rows) ? c.rows.length : 0)), 0);
@@ -694,6 +842,39 @@ function renderFacsimile(dataTable, accentColor) {
       if (r < cells.length - 1) out.push(line(innerX, hp(ry - 3), CX + CW - 22, hp(ry - 3), RULE, 1));
     });
     y = ry;
+  }
+
+  // A LINE AT THE FOOT OF THE PAGE IS ITS OWN THING, not a column. Cold Signal's log card needed
+  // "one more line at the bottom of the page" -- the passage's own words, and the whole point of
+  // the document, because Jonah adds it afterwards. Authored as a second COLUMN it became four
+  // fragments of one sentence sitting on four ruled rows, each one pairing with the log entry
+  // beside it, so the drawing manufactured four facts the record does not contain: that the ten
+  // fourteen entry cost thirty seconds, that contacting the front desk happened on the second floor
+  // landing, that the two clicks had unknown cause. Only "Thirty" was capitalised, which is the
+  // tell. The shape had no way to say "a line at the foot", so the author reached for the nearest
+  // thing that would render.
+  //
+  // Pinned to the bottom of the card, above a rule, and refused if the body reaches it -- so it
+  // cannot repeat the older failure of drawing over the content it was meant to sit beneath.
+  if (dt.footnote !== undefined) {
+    if (typeof dt.footnote !== 'string' || !dt.footnote) refuse('facsimile: footnote must be a non-empty string');
+    // It WRAPS, up to two lines. A sentence written along the foot of a page is a sentence, not a
+    // field, and refusing it for length would only push an author back to the shape that caused the
+    // defect. Two lines is the same ceiling the cells and node labels use.
+    const wrapped = wrapToWidth(dt.footnote, TICK_FONT, innerW, 2);
+    const widest = wrapped.reduce((m, s) => Math.max(m, estimateTextWidth(s, TICK_FONT)), 0);
+    if (widest > innerW) {
+      refuse(`facsimile footnote: ${JSON.stringify(dt.footnote)} does not fit two lines of `
+        + `${Math.floor(innerW)}px; shorten the transcription or move the detail to the caption`);
+    }
+    const FOOT_LINE_H = 22;   // same line pitch the column cells use
+    const fy = CY + CH - 22 - (wrapped.length - 1) * FOOT_LINE_H;
+    if (y > fy - 22) {
+      refuse(`facsimile: the footnote ${JSON.stringify(dt.footnote)} has no clear space at the foot of `
+        + 'the card; drop a line or shorten the transcription');
+    }
+    out.push(line(innerX, hp(fy - 18), CX + CW - 22, hp(fy - 18), RULE, 1));
+    out.push(textLines(innerX, fy, TICK_FONT, wrapped, { lineH: FOOT_LINE_H }));
   }
 
   // THE CARD MUST CONTAIN ITS CONTENTS. y has walked down the card as each block was drawn; if it
@@ -874,6 +1055,15 @@ function renderSchematic(dataTable, accentColor) {
     if (sg.e.style !== 'line') out.push(arrowHead(sg.x2, sg.y2, sg.dx, sg.dy, accent));
   });
 
+  // AND EVERY LABEL MUST CLEAR EVERY OTHER LABEL. Third step of the same rule, found the same way
+  // as the first two -- by looking at the picture rather than at the exit code. A plan with an
+  // arrow arriving horizontally and another arriving vertically at the same node put "The badge
+  // reads green" and "straight down" on the same few square centimetres, printing one through the
+  // other, and the renderer accepted it: `clears` tested boxes and connectors and nothing else, so
+  // two labels could occupy the identical rectangle and still pass. Placed labels now join the
+  // test, so a drawing whose words collide is REFUSED instead of shipped.
+  const placedLabels = [];
+
   segs.forEach((sg) => {
     const e = sg.e;
     const { x1, y1, x2, y2, ux, uy } = sg;
@@ -906,6 +1096,11 @@ function renderSchematic(dataTable, accentColor) {
             if (sxp > l - 3 && sxp < r + 3 && syp > t - 3 && syp < bt + 3) return false;
           }
         }
+        // AND every label already placed. Rect overlap, with the same 2px tolerance the box test
+        // uses so two labels may sit shoulder to shoulder but never share ink.
+        for (const p of placedLabels) {
+          if (l < p.r - 2 && r > p.l + 2 && t < p.bt - 2 && bt > p.t + 2) return false;
+        }
         return true;
       };
       let placed = null;
@@ -922,6 +1117,10 @@ function renderSchematic(dataTable, accentColor) {
           + `${JSON.stringify(e.to)} cannot be placed without covering a node or crossing a connector; `
           + 'shorten it, move the nodes apart, or carry the detail in the caption');
       }
+      placedLabels.push({
+        l: placed.cx - w / 2, r: placed.cx + w / 2,
+        t: placed.cy - NOTE_FONT * 0.8, bt: placed.cy + NOTE_FONT * 0.25,
+      });
       out.push(text(placed.cx, placed.cy, NOTE_FONT, e.label, { anchor: 'middle', opacity: '0.82' }));
     }
   });
@@ -977,7 +1176,10 @@ function renderRoute(dataTable, accentColor) {
         return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a), a: a, s: s };
       });
       const poly = pts.map((p) => `${n2(p.x)},${n2(p.y)}`).join(' ');
-      out.push(`<polygon points="${poly}" fill="none" stroke="${PLOT_GRID}" stroke-width="2" data-path="loop" />`);
+      // Broken for the same reason the line route's rule is: a route carries ORDER, never distance.
+      // No shipped pack draws a loop today, so this keeps the device meaning one thing if one ever
+      // does, rather than leaving a solid closed path to read as measured.
+      out.push(`<polygon points="${poly}" fill="none" stroke="${PLOT_GRID}" stroke-width="2" stroke-dasharray="7 6" data-path="loop" />`);
       pts.forEach((p, i) => {
         out.push(circle(p.x, p.y, 13, { fill: accent }));
         out.push(text(p.x, p.y + 7, NOTE_FONT, String(p.s.n), { anchor: 'middle', fill: '#0f1218' }));
@@ -997,9 +1199,26 @@ function renderRoute(dataTable, accentColor) {
   }
 
   // A line route, and the fallback for a loop whose labels will not fit around it.
+  //
+  // ITS RULE IS BROKEN, AND IT SAYS SO, for the same reason an ordinal timeline's is. A route is a
+  // sequence of places, and a passage gives an order rather than distances, so evenly spaced stops
+  // carry no scale for the spacing to mean. Drawn SOLID it was the one figure in Cold Signal that
+  // looked like it was to scale, using the identical numbered-dot vocabulary as the two dashed L3
+  // timelines beside it -- and it is the only one of the three with no clock data behind it at all.
+  // A child who has seen all three reads the solid one as the measured one. Caught by the pixel
+  // review, which put it as: "no legend anywhere explains solid versus dashed".
   const y = bodyTop + 46;
   const AX_L = PAD + 14, AX_R = VB_W - PAD - 14;
-  out.push(line(AX_L, hp(y), AX_R, hp(y), PLOT_GRID, 2, { extra: `data-path="${esc(path)}"` }));
+  out.push(line(AX_L, hp(y), AX_R, hp(y), PLOT_GRID, 2,
+    { dash: '7 6', extra: `data-path="${esc(path)}"` }));
+  {
+    const NOTE = 'in order, not to scale';
+    const noteW = estimateTextWidth(NOTE, NOTE_FONT);
+    const titleRight = dataTable.title ? PAD + estimateTextWidth(dataTable.title, TITLE_FONT) : PAD;
+    const fits = titleRight <= VB_W - PAD - noteW - 24;
+    out.push(text(VB_W - PAD, fits ? TITLE_Y : TITLE_Y + 26, NOTE_FONT, NOTE,
+      { anchor: 'end', opacity: '0.62' }));
+  }
   stops.forEach((s, i) => {
     const x = stops.length === 1 ? (AX_L + AX_R) / 2 : AX_L + (i / (stops.length - 1)) * (AX_R - AX_L);
     out.push(circle(x, y, 13, { fill: accent }));

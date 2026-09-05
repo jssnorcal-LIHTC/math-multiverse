@@ -123,40 +123,110 @@ function check(name, ok, detail) {
     // pick a point inside a line that has at least one line above and one below it.
     const target = await page.evaluate(() => {
       const box = document.querySelector('.mv-passage');
-      const para = [...box.querySelectorAll('.mv-para')].find((p) => p.textContent.length > 220);
-      if (!para) return null;
-      const t = para.firstChild;
-      const lines = [];
-      for (let i = 0; i < t.nodeValue.length; i++) {
-        const r = document.createRange();
-        r.setStart(t, i); r.setEnd(t, i + 1);
-        const rect = r.getClientRects()[0];
-        if (!rect || !rect.width) continue;
-        const last = lines[lines.length - 1];
-        if (!last || Math.abs(last.top - rect.top) > rect.height * 0.5) lines.push({ top: rect.top, height: rect.height, from: i, to: i, left: rect.left, right: rect.right });
-        else { last.to = i; last.right = rect.right; }
+      // EVERY long paragraph is a candidate, and the box is SCROLLED to it first, the way a reader
+      // reaches a paragraph before tapping a line in it. Taking only the first paragraph over 220
+      // chars and measuring it wherever it happened to sit was the older shape, and it fails two
+      // ways once the passage box is short: the paragraph's second line can be below the fold, and
+      // the paragraph itself can start below the fold so that NO three of its lines are visible.
+      const paras = [...box.querySelectorAll('.mv-para')].filter((p) => p.textContent.length > 220);
+      if (!paras.length) return null;
+      const measure = (para) => {
+        const t = para.firstChild;
+        const lines = [];
+        for (let i = 0; i < t.nodeValue.length; i++) {
+          const r = document.createRange();
+          r.setStart(t, i); r.setEnd(t, i + 1);
+          const rect = r.getClientRects()[0];
+          if (!rect || !rect.width) continue;
+          const last = lines[lines.length - 1];
+          if (!last || Math.abs(last.top - rect.top) > rect.height * 0.5) lines.push({ top: rect.top, height: rect.height, from: i, to: i, left: rect.left, right: rect.right });
+          else { last.to = i; last.right = rect.right; }
+        }
+        return lines;
+      };
+      let para = null, lines = null;
+      const tried = [];
+      for (const p of paras) {
+        // Scroll the paragraph to the top of the box, then re-measure: setting scrollTop reflects
+        // in getClientRects synchronously, so the numbers below are post-scroll geometry.
+        //
+        // Measured from the two rects rather than from offsetTop. The box is position:relative, so
+        // it IS the offsetParent of every .mv-para, which means p.offsetTop is ALREADY relative to
+        // the box and subtracting box.offsetTop over-scrolls by the box's own offset in its parent.
+        // That left exactly one line of each paragraph on screen (boxH 190, lineH 20 -- room for
+        // nine) and looked identical to "the passage is too short", which is a different bug.
+        box.scrollTop += p.getBoundingClientRect().top - box.getBoundingClientRect().top;
+        const ls = measure(p);
+        const vis = box.getBoundingClientRect();
+        const fits = (ln) => ln.top >= vis.top && (ln.top + ln.height) <= vis.bottom;
+        tried.push({ chars: p.textContent.length, lines: ls.length, visible: ls.filter(fits).length,
+          boxH: Math.round(vis.height), lineH: ls.length ? Math.round(ls[0].height) : null });
+        if (ls.length >= 3 && ls.filter(fits).length >= 3) { para = p; lines = ls; break; }
       }
+      // Say WHY, with numbers. "could not measure lines" on its own sent this round-trip through a
+      // browser probe to learn something the test already knew.
+      if (!para) return { failed: 'no paragraph offers three visible lines', tried, paras: paras.length };
+      const t = para.firstChild;
       if (lines.length < 3) return null;
-      const line = lines[1];
+      // THE TARGET MUST BE VISIBLE, not merely rendered. `.mv-passage` scrolls, so a line below the
+      // fold still reports a getClientRects() box -- one that lies BELOW the passage box's own
+      // bottom edge. Clicking there lands on `.mv-item`, the question below, and nothing lights:
+      // the tracker is behaving correctly, because a child cannot tap a line that is not on screen.
+      //
+      // This used to take lines[1] unconditionally, which was sound only while the passage box
+      // happened to be tall enough. It is not a fixed height: it is whatever the item below leaves
+      // over, measured between 344px and 542px across twelve loads of this same level, because the
+      // level serves a random item each time. Adding a figure reveal strip to this pack took ~22px
+      // off the top and pushed the short cases past the edge, so the suite began failing about one
+      // run in nine -- always on the SAME assertion, always with the target ten pixels below the
+      // box. Diagnosed by elementFromPoint at the tap: DIV.mv-item, not P.mv-para.
+      //
+      // Pick the first line that is FULLY inside the visible box and still has a line above and
+      // below it, so the neighbour assertions below keep their meaning.
+      const vis = box.getBoundingClientRect();
+      const inside = (ln) => ln.top >= vis.top && (ln.top + ln.height) <= vis.bottom;
+      let idx = -1;
+      for (let k = 1; k < lines.length - 1; k++) {
+        if (inside(lines[k - 1]) && inside(lines[k]) && inside(lines[k + 1])) { idx = k; break; }
+      }
+      if (idx === -1) return null;
+      const line = lines[idx];
       const mid = Math.floor((line.from + line.to) / 2);
       const r = document.createRange();
       r.setStart(t, mid); r.setEnd(t, mid + 1);
       const rect = r.getClientRects()[0];
+      // The neighbours are the lines either side of the one actually CHOSEN. They were lines[0] and
+      // lines[2], which was only ever right because idx was hard-coded to 1; leaving them fixed
+      // while idx moves would point the "covers ONLY that line" assertions at the wrong two lines
+      // and quietly stop testing anything.
+      const above = lines[idx - 1];
+      const below = lines[idx + 1];
       return {
         x: rect.left + rect.width / 2, y: rect.top + rect.height / 2,
-        lineIndex: 1, lineCount: lines.length,
+        lineIndex: idx, lineCount: lines.length,
         lineTop: line.top, lineBottom: line.top + line.height,
-        aboveTop: lines[0].top, belowTop: lines[2].top,
-        aboveMid: lines[0].top + lines[0].height / 2,
-        aboveBottom: lines[0].top + lines[0].height,
-        belowMid: lines[2].top + lines[2].height / 2,
+        boxTop: vis.top, boxBottom: vis.bottom,
+        aboveTop: above.top, belowTop: below.top,
+        aboveMid: above.top + above.height / 2,
+        aboveBottom: above.top + above.height,
+        belowMid: below.top + below.height / 2,
         word: t.nodeValue.slice(Math.max(0, mid - 6), mid + 7),
         lineText: t.nodeValue.slice(line.from, line.to + 1),
       };
     });
     check('the passage wraps to at least three rendered lines, so "a line" means something',
-      target && target.lineCount >= 3, target ? `${target.lineCount} lines` : 'could not measure lines');
-    if (!target) throw new Error('could not find a wrapped paragraph to tap');
+      target && target.lineCount >= 3,
+      target ? (target.failed ? `${target.failed}: ${JSON.stringify(target.tried)}` : `${target.lineCount} lines`)
+             : 'could not measure lines');
+    if (!target || target.failed) throw new Error('could not find a wrapped paragraph to tap: '
+      + (target ? target.failed + ' ' + JSON.stringify(target.tried) : 'null'));
+    // ARMING for the fix above: if the point we are about to click is not inside the passage box,
+    // the click lands on the question below and the tracker is right to ignore it. Asserting it
+    // here means a future regression in the target picker fails as "we aimed off the passage",
+    // which is the truth, instead of as "tapping a line lights it", which is not.
+    check('ARMING: the tap target is inside the VISIBLE passage box, not below the fold',
+      target.y >= target.boxTop && target.y <= target.boxBottom,
+      `target y ${Math.round(target.y)} against box ${Math.round(target.boxTop)}-${Math.round(target.boxBottom)}, line ${target.lineIndex} of ${target.lineCount}`);
 
     // ---- POSITIVE: a tap lights the line under it ----
     await page.mouse.click(target.x, target.y);

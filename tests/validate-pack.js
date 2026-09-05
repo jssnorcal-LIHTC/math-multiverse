@@ -436,6 +436,31 @@ function checkFigureReferences(pack, figuresById, passagesById, itemsById, error
       if (!reveal || typeof reveal !== 'object' || reveal.figureId === undefined) return;
       if (!figuresById.has(reveal.figureId)) {
         errors.push(`levels[${i}].reveal.figureId: "${reveal.figureId}" does not resolve to any figure`);
+        return;
+      }
+      // A REVEAL IS A REWARD FOR THE LEVEL THE CHILD JUST READ, so it must come from a passage
+      // that level actually serves. Cold Signal's L6 revealed a figure drawn from p-dead-drop,
+      // which appears in LEVEL 1 ONLY, so the tile earned for finishing the last level showed a
+      // document from a passage that level never puts on screen. Nothing caught it: the check
+      // above asks only whether the figure exists SOMEWHERE in the pack, and the transcription
+      // audit asked the same weaker question.
+      //
+      // Scoped to figures that declare `dataTable.sourcePassageId`, which is what ties a drawing
+      // to one passage. Photo and plate packs (firsthand, outpost-protocol) declare none and are
+      // silently exempt rather than falsely flagged -- their figures illustrate a subject, not a
+      // document, and 0 of 16 in each carry the field.
+      const rf = figuresById.get(reveal.figureId);
+      const srcPid = rf && rf.dataTable && rf.dataTable.sourcePassageId;
+      if (!srcPid) return;
+      const served = new Set();
+      (Array.isArray(lv.itemIds) ? lv.itemIds : []).forEach((iid) => {
+        const it = itemsById.get(iid);
+        if (it && it.passageId) served.add(it.passageId);
+      });
+      if (served.size && !served.has(srcPid)) {
+        errors.push(`levels[${i}].reveal.figureId: "${reveal.figureId}" is drawn from passage `
+          + `"${srcPid}", which this level does not serve; a level's reveal must come from a `
+          + `passage the child read in that level (served: ${[...served].join(', ')})`);
       }
     });
   }

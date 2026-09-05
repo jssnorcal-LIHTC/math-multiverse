@@ -529,5 +529,187 @@ check('every renderer refuses a table whose type does not match it', () => {
   assert.throws(() => docs.renderRoute(readFixture('timeline-single'), ACCENT), /route/i);
 });
 
+// AN EDGE LABEL MUST CLEAR EVERY OTHER EDGE LABEL. Third step of a rule the renderer already
+// enforced against boxes and against connectors, and the last one it was missing: two labels could
+// occupy the identical rectangle and still render. Found by LOOKING at a plan where an arrow
+// arriving horizontally and an arrow arriving vertically met at the same node, which printed
+// "The badge reads green" straight through "straight down".
+// A CONTRAST ROW IN A FACSIMILE HEADER draws both halves at the same weight, so the pair block does
+// not teach "dim label, bright value" and then use the same shape for two things that are equals.
+check('a header row marked contrast draws both halves at the same size; an unmarked one does not', () => {
+  const base = {
+    type: 'facsimile', docKind: 'memo', title: 'a memo',
+    header: [{ label: 'the same beacon test', value: 'three different tunnels' }],
+    lines: [{ text: 'a plain line' }],
+  };
+  const plain = docs.renderFacsimile(JSON.parse(JSON.stringify(base)), ACCENT);
+  const withContrast = JSON.parse(JSON.stringify(base));
+  withContrast.header[0].contrast = true;
+  const marked = docs.renderFacsimile(withContrast, ACCENT);
+
+  const sizeOf = (svg, txt) => {
+    // No constructed regex here. The first version built one with '(\d+)' inside a SINGLE-QUOTED
+    // JS string, where \d collapses to a plain d, so the pattern hunted for the letter d and matched
+    // nothing -- the same trap tests/figure-prose.js hit with 'hatched\s+'. Splitting on the literal
+    // text has no escaping to get wrong.
+    const seg = svg.split('>' + txt + '<')[0];
+    const m = seg.lastIndexOf('font-size="');
+    if (m === -1) return null;
+    return Number(seg.slice(m + 11, seg.indexOf('"', m + 11)));
+  };
+  const labelPlain = sizeOf(plain, 'the same beacon test');
+  const valuePlain = sizeOf(plain, 'three different tunnels');
+  const labelMarked = sizeOf(marked, 'the same beacon test');
+  const valueMarked = sizeOf(marked, 'three different tunnels');
+
+  assert.ok(labelPlain && valuePlain && labelMarked && valueMarked, 'all four runs must be found');
+  assert.ok(labelPlain < valuePlain, 'CONTROL: an ordinary row keeps the dim small label');
+  assert.strictEqual(labelMarked, valueMarked, 'a contrast row sets both halves at one size');
+  // And the flag is what does it: without it the two sizes differ, with it they match.
+  assert.notStrictEqual(labelPlain, labelMarked, 'the flag must actually change the label');
+});
+
+// AN ORDINAL LANE POSITIONS BY TIME, NOT BY INDEX. Two entries at the same stated time must land
+// on the same vertical, because evenly spaced dots read as distinct moments and the drawing would
+// otherwise assert an order the clock does not give.
+check('an ordinal timeline puts two events at the SAME time on the same vertical', () => {
+  const dt = {
+    type: 'timeline', title: 'tied', tracks: ['the rule', 'the log'],
+    events: [
+      { t: 'ten fourteen', track: 'the log', label: 'goes in' },
+      { t: 'ten twenty', track: 'the rule', label: 'checks in' },
+      { t: 'ten twenty', track: 'the log', label: 'only the hiss' },
+      { t: 'ten twenty-two', track: 'the rule', label: 'calls it off' },
+    ],
+  };
+  const svg = docs.renderTimeline(dt, ACCENT);
+  const cx = [...svg.matchAll(/<circle cx="([\d.]+)" cy="([\d.]+)"/g)].map((m) => [+m[1], +m[2]]);
+  assert.strictEqual(cx.length, 4, 'four markers');
+  const tied = cx.filter((p) => Math.abs(p[0] - cx[1][0]) < 0.01);
+  assert.strictEqual(tied.length, 2, 'the two "ten twenty" events must share an x');
+  assert.notStrictEqual(tied[0][1], tied[1][1], 'and be separated by their tracks, not by x');
+  // NEGATIVE DIRECTION: three DISTINCT times give three distinct x values, so the check above is
+  // about ties and not about everything collapsing.
+  const xs = new Set(cx.map((p) => p[0].toFixed(2)));
+  assert.strictEqual(xs.size, 3, 'three distinct times give three distinct positions');
+});
+
+check('NEGATIVE CONTROL: two events tied on the SAME track are refused, not drawn on one point', () => {
+  const dt = {
+    type: 'timeline', title: 'tied', tracks: ['the log'],
+    events: [
+      { t: 'ten fourteen', track: 'the log', label: 'goes in' },
+      { t: 'ten twenty', track: 'the log', label: 'checks in' },
+      { t: 'ten twenty', track: 'the log', label: 'only the hiss' },
+    ],
+  };
+  assert.throws(() => docs.renderTimeline(dt, ACCENT), /share the time/,
+    'two events at one time on one track would be drawn on top of each other');
+});
+
+check('a key label and a key lead both WRAP rather than forcing a transcription to be shortened', () => {
+  const dt = {
+    type: 'timeline', title: 'long', tracks: ['the log'],
+    events: [
+      { t: 'ten twenty-two and eleven seconds', track: 'the log', label: 'nothing on the radio but the hiss' },
+      { t: 'ten fourteen', track: 'the log', label: 'goes in' },
+    ],
+  };
+  const svg = docs.renderTimeline(dt, ACCENT);
+  assert.ok(svg.includes('tspan'), 'a long lead or label wraps');
+  const flat = svg.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
+  assert.ok(flat.includes('ten twenty-two and eleven seconds'),
+    'the wrapped lead still reads as one collapsed string, which is what the fidelity gate reads');
+  assert.ok(flat.includes('nothing on the radio but the hiss'), 'and so does the wrapped label');
+});
+
+// A LINE AT THE FOOT OF A PAGE IS ITS OWN THING, not a second column. Cold Signal's log card
+// authored "one more line at the bottom of the page" as a parallel COLUMN, which split one sentence
+// across four ruled rows so each fragment paired with the log entry beside it -- four facts the
+// record does not contain. The shape had no way to say "a line at the foot", so the author reached
+// for the nearest thing that rendered.
+check('a facsimile draws a footnote at the FOOT of the card, below its own rule, and it may wrap', () => {
+  const dt = {
+    type: 'facsimile', docKind: 'minutes', title: 'the log sheets',
+    columns: [{ heading: 'what happened', rows: ['entry at ten fourteen', 'exit at ten forty-one'] }],
+    footnote: 'Thirty seconds lost on the second floor landing, cause unknown, no action taken.',
+  };
+  const svg = docs.renderFacsimile(dt, ACCENT);
+  assert.ok(svg.includes('Thirty seconds lost'), 'the footnote must be drawn');
+  // It is BELOW the last column row, which is the whole claim the field makes.
+  const lastRow = svg.lastIndexOf('exit at ten forty-one');
+  const foot = svg.lastIndexOf('Thirty seconds lost');
+  assert.ok(foot > lastRow, 'the footnote must come after the table, not before it');
+  // Wrapped rather than refused: one <text> with two <tspan>s, so the fidelity gate still reads it
+  // as one collapsed string.
+  const el = svg.slice(foot - 200, foot + 300);
+  assert.ok(el.includes('tspan'), 'a long footnote wraps instead of being refused');
+});
+
+check('NEGATIVE CONTROL: a footnote with no room at the foot of the card is REFUSED', () => {
+  const rows = [];
+  // EIGHT rows, measured: eight renders without a footnote and refuses with one, so the footnote
+  // is the only difference between this check and the control below it. Nine rows refuses either
+  // way, on the table's own fit check, and would have proved nothing -- which is what the first
+  // version of this pair did.
+  for (let i = 0; i < 8; i++) rows.push('a log entry number ' + i);
+  const dt = {
+    type: 'facsimile', docKind: 'minutes', title: 'the log sheets',
+    columns: [{ heading: 'what happened', rows }],
+    footnote: 'Thirty seconds lost on the second floor landing, cause unknown, no action taken.',
+  };
+  assert.throws(() => docs.renderFacsimile(dt, ACCENT), /footnote/,
+    'a card whose table reaches the foot must refuse the footnote, not draw it over the table');
+});
+
+check('CONTROL: the same tall card WITHOUT the footnote renders, so the refusal is the FOOTNOTE', () => {
+  const rows = [];
+  for (let i = 0; i < 8; i++) rows.push('a log entry number ' + i);
+  const dt = {
+    type: 'facsimile', docKind: 'minutes', title: 'the log sheets',
+    columns: [{ heading: 'what happened', rows }],
+  };
+  const svg = docs.renderFacsimile(dt, ACCENT);
+  assert.ok(svg.includes('a log entry number 7'), 'the table alone should still draw');
+});
+
+// THE REAL GEOMETRY THAT SHIPPED THE DEFECT, not a synthetic stand-in. Two arrows arrive at
+// "shelf", one horizontally and one vertically, and their labels were printed one straight through
+// the other -- "The badge reads green" across "straight down" -- while every gate stayed green.
+// Verified to be a true discriminator: with the label-vs-label test removed from the renderer this
+// table RENDERS, and with it in place it is REFUSED. A first attempt used an invented three-node
+// fixture which was refused either way, by the older connector rule, and so proved nothing; that
+// version passed with the new check deleted.
+const OVERLAPPING_LABELS = {
+  type: 'schematic', layout: 'plan', title: 'Frostbank Storage',
+  nodes: [
+    { id: 'doors', label: 'eleven doors', shape: 'box', x: 8, y: 72 },
+    { id: 'twelfth', label: 'The twelfth', shape: 'box', x: 42, y: 72 },
+    { id: 'panel', label: 'a single reader panel', shape: 'box', x: 42, y: 92 },
+    { id: 'camera', label: "the room's only camera", shape: 'box', x: 86, y: 26 },
+    { id: 'shelf', label: 'a raised shelf', shape: 'box', x: 86, y: 72 },
+  ],
+  edges: [
+    { from: 'doors', to: 'twelfth', label: 'a corridor so featureless', style: 'arrow' },
+    { from: 'panel', to: 'twelfth', style: 'line' },
+    { from: 'twelfth', to: 'shelf', label: 'The badge reads green', style: 'arrow' },
+    { from: 'camera', to: 'shelf', label: 'straight down', style: 'arrow' },
+  ],
+};
+
+check('NEGATIVE CONTROL: two edge labels that would overlap are REFUSED, not printed over each other', () => {
+  const dt = JSON.parse(JSON.stringify(OVERLAPPING_LABELS));
+  assert.throws(() => docs.renderSchematic(dt, ACCENT), /cannot be placed/,
+    'two labels sharing one rectangle must be refused, not drawn one through the other');
+});
+
+check('CONTROL: the same plan with one of the two labels dropped renders, so the refusal is the OVERLAP', () => {
+  // Without this, the refusal above could be about the geometry rather than about the labels.
+  const dt = JSON.parse(JSON.stringify(OVERLAPPING_LABELS));
+  delete dt.edges.find((e) => e.from === 'camera').label;
+  const svg = docs.renderSchematic(dt, ACCENT);
+  assert.ok(svg.includes('The badge reads green'), 'the one remaining label should draw');
+});
+
 console.log(failures ? 'figure-docs.test: ' + failures + ' FAILURE(S)' : 'figure-docs.test: all clean');
 process.exit(failures ? 1 : 0);
