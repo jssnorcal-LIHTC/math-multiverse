@@ -555,7 +555,15 @@ function renderTimeline(dataTable, accentColor) {
   gaps.forEach((g) => {
     const bounded = (typeof g.from === 'string' && typeof g.to === 'string')
       ? `${g.from} to ${g.to}` : '';
-    const caption = [bounded, g.label].filter(Boolean).join('  ');
+    // A COMMA, NOT TWO SPACES.  SVG collapses consecutive whitespace exactly as HTML does, and no
+    // SVG in this repo carries xml:space="preserve", so the two spaces this used to join with
+    // rendered as ONE and every shipped pack drew "8:22 to 9:04 some forty minutes", with the range
+    // running into its label as one garbled clause.  Measured in a browser: preserving the pair
+    // buys 4.5px at font 18, which is a single space and still not a separator a child reads as
+    // one.  A comma is the separator, it is what the house style uses in place of a dash, and it is
+    // the SAME TWO CHARACTERS, so the width estimate is unchanged and no caption re-wraps or
+    // re-refuses.
+    const caption = [bounded, g.label].filter(Boolean).join(', ');
     if (!caption) return;
     const gx1 = posOfTime(g.from), gx2 = posOfTime(g.to);
     const cx = (gx1 + gx2) / 2;

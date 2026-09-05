@@ -437,6 +437,35 @@ check('timeline: a gap is drawn as a hatched band carrying its own label', () =>
   });
 });
 
+check('timeline: a gap caption survives SVG whitespace collapse, so its range and its label stay apart', () => {
+  // SVG COLLAPSES CONSECUTIVE WHITESPACE, exactly as HTML does, unless the element carries
+  // xml:space="preserve" -- and no SVG this repo generates carries it. The caption used to join
+  // "<from> to <to>" to the gap's label with TWO SPACES, so every shipped pack drew
+  // "8:22 to 9:04 some forty minutes" with the range running into its label as one garbled clause.
+  // A byte-compare could not see it: the two spaces were in the file, and the file was made by the
+  // same renderer the fixture came from. Only a browser (or this check) reads what a child reads.
+  const dt = readFixture('timeline-two-track');
+  const svg = docs.renderTimeline(dt, ACCENT);
+  const g = dt.gaps[0];
+  assert.ok(g && g.from && g.to && g.label, 'the fixture has no bounded, labelled gap, so this check is vacuous');
+  const bounded = g.from + ' to ' + g.to;
+  const caption = textContents(svg).find((t) => t.indexOf(bounded) !== -1 && t.indexOf(g.label) !== -1);
+  assert.ok(caption, 'no single text run carries both the gap range and its label');
+  // Render whitespace the way a browser does, then require a separator that is not whitespace.
+  const asRendered = caption.replace(/\s+/g, ' ');
+  const between = asRendered.slice(asRendered.indexOf(bounded) + bounded.length, asRendered.indexOf(g.label));
+  assert.ok(/[^\s]/.test(between),
+    'the range and the label are separated only by whitespace, which SVG collapses to one space: '
+    + JSON.stringify(asRendered));
+
+  // NEGATIVE CONTROL: the same caption joined the old way is caught. Without this the check above
+  // would pass on any string at all and prove nothing.
+  const oldStyle = bounded + '  ' + g.label;
+  const oldRendered = oldStyle.replace(/\s+/g, ' ');
+  const oldBetween = oldRendered.slice(oldRendered.indexOf(bounded) + bounded.length, oldRendered.indexOf(g.label));
+  assert.ok(!/[^\s]/.test(oldBetween), 'the negative control does not reproduce the old defect, so it discriminates nothing');
+});
+
 check('timeline: every authored event label and time is drawn', () => {
   const dt = readFixture('timeline-two-track');
   const texts = textContents(docs.renderTimeline(dt, ACCENT));
