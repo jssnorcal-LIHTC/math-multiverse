@@ -110,7 +110,9 @@ function polygon(points, fill) {
 // nothing here depends on id scoping when the same SVG is inlined, thumbnailed and lightboxed.
 function hatchBand(x, y, w, h, label) {
   const out = [rect(x, y, w, h, { stroke: HATCH_STROKE, extra: `data-gap="${esc(label || '')}"` })];
-  const step = 12;
+  // D15: a dense hatch reads as STRUCK OUT or removed. On a timeline the blocked window is the
+  // point of the figure, not a deletion, so the band is drawn sparsely enough to read as a region.
+  const step = 22;
   // Deterministic: a fixed step walked from a fixed origin, clipped by construction rather than by
   // a clip-path, so the same band is the same bytes every time.
   for (let o = step; o < w + h; o += step) {
@@ -359,6 +361,15 @@ function renderTimeline(dataTable, accentColor) {
   // The bounds get their own row well above the lanes. Drawn any lower they collide with the event
   // numbers, and in ordinal mode the first event sits at exactly AX_L, so "Monday" and the "1" under
   // it were printed on top of each other.
+  // D12/D13: start and end are AXIS BOUNDS, and an axis bound asserts a scale. In ordinal mode the
+  // markers are evenly spaced regardless of elapsed time, so two entries four minutes apart get the
+  // same gap as two three hours apart. Printing clock bounds over that reads as a measured axis and
+  // is a claim the drawing does not support, so it is refused rather than drawn.
+  if (!timeMode && (dt.start !== undefined || dt.end !== undefined)) {
+    refuse('timeline: start/end are axis bounds and this timeline is laid out in authored order, not '
+      + 'on a clock (its times do not all parse), so the spacing carries no scale for them to bound; '
+      + 'drop start and end, or write every time as a clock time');
+  }
   if (dt.start !== undefined || dt.end !== undefined) {
     if (dt.start !== undefined) out.push(text(AX_L, 74, TICK_FONT, dt.start, { opacity: '0.82' }));
     if (dt.end !== undefined) out.push(text(AX_R, 74, TICK_FONT, dt.end, { anchor: 'end', opacity: '0.82' }));
@@ -380,7 +391,13 @@ function renderTimeline(dataTable, accentColor) {
     const y = laneY(k);
     // tr is null for an unnamed single lane: draw the rule, draw no word.
     if (tr !== null) out.push(text(PAD, y + 6, NOTE_FONT, tr, { opacity: '0.82' }));
-    out.push(line(AX_L, hp(y), AX_R, hp(y), RULE, 1));
+    // A SOLID RULE IS A SCALE; A DASHED ONE IS A SEQUENCE. Two timelines in the same pack were
+    // drawn with the same device on two incompatible rules: one spaced its dots by the clock, so a
+    // forty-minute gap was visibly wide, and the other spaced twelve dots evenly, so three hours
+    // and four minutes got the same width. Nothing on either drawing said which. A child who
+    // learned to read spacing as elapsed time on the first read the second wrong. Ordinal lanes now
+    // carry a broken rule, and their alt text says so in words.
+    out.push(line(AX_L, hp(y), AX_R, hp(y), RULE, 1, timeMode ? undefined : { dash: '7 6' }));
   });
 
   // Marker numbers are placed in TWO PASSES, because two events close together in time put their
@@ -388,7 +405,10 @@ function renderTimeline(dataTable, accentColor) {
   // unreadable "4?3". Each lane is walked in x order and a number that would overlap the previous
   // one is lifted to a second row ABOVE the first (never below, which would collide with the next
   // lane). If both rows are taken the figure is REFUSED by name rather than drawn illegibly.
-  const NUM_ROWS = [-14, -32];
+  // D16: a staggered numeral must stay on its OWN lane's side. A fixed [-14,-32] put the second row
+  // for the LOWER lane midway between the two lanes, so which lane a numeral belonged to was a
+  // guess. The last lane staggers DOWNWARD, where nothing else lives; every other lane staggers up.
+  const rowsFor = (k) => (k === tracks.length - 1 ? [-14, 22] : [-14, -32]);
   const placed = [];
   const rowsByLane = new Map();
   events.forEach((e, i) => {
@@ -396,10 +416,13 @@ function renderTimeline(dataTable, accentColor) {
     const cx = posOf(i), cy = laneY(k);
     const unver = e.kind === 'unverified';
     const glyph = unver ? (i + 1) + '?' : String(i + 1);
-    const halfW = estimateTextWidth(glyph, NOTE_FONT) / 2 + 3;
+    // D14: +3 of clearance let the numerals for two markers 21px apart read as one cluster. A
+    // numeral needs air on both sides to be countable, not merely non-overlapping.
+    const halfW = estimateTextWidth(glyph, NOTE_FONT) / 2 + 9;
     if (!rowsByLane.has(k)) rowsByLane.set(k, [[], []]);
     const rows = rowsByLane.get(k);
     let row = -1;
+    const NUM_ROWS = rowsFor(k);
     for (let r = 0; r < NUM_ROWS.length && row === -1; r++) {
       const clash = rows[r].some((iv) => cx - halfW < iv[1] && cx + halfW > iv[0]);
       if (!clash) row = r;
@@ -409,7 +432,7 @@ function renderTimeline(dataTable, accentColor) {
         + `${JSON.stringify(tracks[k])} are too close to number legibly; space the events or split the figure`);
     }
     rows[row].push([cx - halfW, cx + halfW]);
-    placed.push({ e, i, cx, cy, unver, glyph, row });
+    placed.push({ e, i, cx, cy, unver, glyph, row, k });
   });
 
   const entries = [];
@@ -417,7 +440,7 @@ function renderTimeline(dataTable, accentColor) {
     out.push(circle(p.cx, p.cy, 7, p.unver
       ? { stroke: accent, strokeWidth: 2, dash: '3 3', extra: 'data-kind="unverified"' }
       : { fill: accent }));
-    out.push(text(p.cx, p.cy + NUM_ROWS[p.row], NOTE_FONT, p.glyph, { anchor: 'middle', fill: accent }));
+    out.push(text(p.cx, p.cy + rowsFor(p.k)[p.row], NOTE_FONT, p.glyph, { anchor: 'middle', fill: accent }));
     entries.push({ n: p.i + 1, lead: p.e.t, label: p.e.label, mark: p.unver ? 'unverified' : null });
   });
 
@@ -485,18 +508,66 @@ function renderFacsimile(dataTable, accentColor) {
       y += LABEL_FONT + 6;
       if (h.label) out.push(text(innerX, y, TICK_FONT, h.label, { opacity: '0.82' }));
       const hx = innerX + Math.ceil(labW) + 16;
-      fitText(h.value, LABEL_FONT, (CX + CW - 22) - hx, `facsimile header[${i}].value`);
-      out.push(text(hx, y, LABEL_FONT, h.value));
+      if (h.value === '') {
+        // A FIELD PRINTED AND LEFT EMPTY, drawn as the empty rule a form actually shows. This has
+        // to be DATA rather than an item's assertion: the previous attempt put the label in a box
+        // and let three items say the row was blank, but `emphasis: "box"` means PRINTED CONTENT
+        // BEING CALLED OUT everywhere else in this pack (the diet card's thiamine line, the witness
+        // table's "None of the three witnesses saw anything at all"), so the pack's one emphasis
+        // device was being read as its own opposite. An empty value draws an empty field.
+        out.push(line(hx, hp(y + 5), CX + CW - 22, hp(y + 5), RULE, 1, { extra: 'data-empty-field="1"' }));
+      } else {
+        fitText(h.value, LABEL_FONT, (CX + CW - 22) - hx, `facsimile header[${i}].value`);
+        out.push(text(hx, y, LABEL_FONT, h.value));
+      }
     });
     y += 12;
     out.push(line(innerX, hp(y), CX + CW - 22, hp(y), HEADER_STROKE, 1));
     y += 6;
   }
 
+  // A BOX SPANS ITS WHOLE RUN, not one rect per line. An author marks EVERY line of an instruction
+  // `box` because the instruction wraps, and drawing one outline per line rendered the diet card's
+  // two-line thiamine instruction as two stacked rectangles of different widths (425px over 604px,
+  // sharing only their left edge), which reads as two separate boxed statements. The card it
+  // transcribes says the opposite: "Under the fish comes a line the card sets apart inside its own
+  // box" -- one box. Found by the C4 round-5 drawing lens, which read the shipped SVG rather than
+  // the dataTable.
+  //
+  // A RUN OF ONE IS BYTE-IDENTICAL to what this drew before (top y - font, height font + 12, width
+  // w + 16), so no single-line box anywhere moves; measured across all six packs, exactly one
+  // figure has a run longer than one.
+  const boxRunStart = new Array(lines.length).fill(-1);
+  const boxRunEnd = new Array(lines.length).fill(-1);
+  for (let i = 0; i < lines.length; i++) {
+    const l = lines[i];
+    if (!l || typeof l !== 'object' || l.emphasis !== 'box') continue;
+    boxRunStart[i] = (i > 0 && boxRunStart[i - 1] !== -1) ? boxRunStart[i - 1] : i;
+  }
+  for (let i = 0; i < lines.length; i++) {
+    if (boxRunStart[i] !== -1) boxRunEnd[boxRunStart[i]] = i;   // last write wins: the run's end
+  }
+
   lines.forEach((l, i) => {
     if (!l || typeof l !== 'object') refuse(`facsimile: line ${i} is not an object`);
     const em = l.emphasis;
     y += LABEL_FONT + 10;
+    if (em === 'blank') {
+      // A FIELD PRINTED AND LEFT EMPTY: the label, then the rule where the entry would go. This is
+      // DATA, not an item's assertion. The previous attempt boxed the label and let three items say
+      // the row was blank, but `emphasis: "box"` means PRINTED CONTENT BEING CALLED OUT everywhere
+      // else in this pack (the diet card's thiamine line, the witness table's "None of the three
+      // witnesses saw anything at all"), so the pack's one emphasis device was being read as its own
+      // opposite. A blank field now draws as a blank field.
+      if (typeof l.text !== 'string' || !l.text) refuse(`facsimile: line ${i} is blank but has no label`);
+      const lw = estimateTextWidth(l.text, LABEL_FONT);
+      // 90px reserved for the rule: enough that the empty field reads as a field, not a margin.
+      fitText(l.text, LABEL_FONT, innerW - 90, `facsimile line ${i} (blank field label)`);
+      out.push(text(innerX, y, LABEL_FONT, l.text));
+      out.push(line(innerX + lw + 14, hp(y + 5), CX + CW - 22, hp(y + 5), RULE, 1,
+        { extra: 'data-empty-field="1"' }));
+      return;
+    }
     if (em === 'redact') {
       // A redaction draws a bar and NEVER text under it: nothing a reader could recover.
       out.push(rect(innerX, y - LABEL_FONT + 2, innerW * 0.62, LABEL_FONT + 2,
@@ -515,19 +586,40 @@ function renderFacsimile(dataTable, accentColor) {
     const t = { text: l.text };
     const w = estimateTextWidth(t.text, font);
     if (em === 'box') {
-      out.push(rect(innerX - 8, y - font, w + 16, font + 12,
-        { stroke: accent, strokeWidth: 2, rx: 3, extra: 'data-emphasis="box"' }));
+      // Only the FIRST line of a run draws, and it draws the whole run. Lines advance by a fixed
+      // LABEL_FONT + 10 whatever their own font, so the run's extent is arithmetic, and the width
+      // is the widest line in it measured at the font that line will actually render with.
+      if (boxRunStart[i] === i) {
+        const step = LABEL_FONT + 10;
+        const end = boxRunEnd[i];
+        let widest = 0;
+        for (let k = i; k <= end; k++) {
+          const kt = lines[k].text;
+          const kf = estimateTextWidth(kt, LABEL_FONT) <= room ? LABEL_FONT : TICK_FONT;
+          widest = Math.max(widest, estimateTextWidth(kt, kf));
+        }
+        const top = y - font;
+        const bottom = y + (end - i) * step + 12;
+        out.push(rect(innerX - 8, top, widest + 16, bottom - top,
+          { stroke: accent, strokeWidth: 2, rx: 3, extra: 'data-emphasis="box"' }));
+      }
     } else if (em === 'underline') {
       out.push(line(innerX, hp(y + 5), innerX + w, hp(y + 5), accent, 2, { extra: 'data-emphasis="underline"' }));
-    } else {
-      out.push(line(innerX, hp(y + 7), CX + CW - 22, hp(y + 7), RULE, 1));
     }
+    // A plain line gets NO rule. Ruling every line made a flowing newspaper paragraph render as a
+    // stack of table rows, and worse, it made the gray rules almost indistinguishable from the
+    // ACCENT underline that marks a disputed sentence -- which is the one thing the figure exists
+    // to show. Rules now appear only where the document itself has one: under the title and under
+    // the header block.
     out.push(text(innerX, y, font, t.text));
   });
 
   if (columns.length) {
     y += 18;
-    const colW = innerW / columns.length;
+    // The label column takes a share of the width; the data columns narrow to make room, so the
+    // table still fits the card rather than running off it.
+    const labelColW = Array.isArray(dt.rowLabels) && dt.rowLabels.length ? Math.min(150, innerW * 0.24) : 0;
+    const colW = (innerW - labelColW) / columns.length;
     const cellW = colW - 14;
     const rowsN = columns.reduce((m, c) => Math.max(m, (c && Array.isArray(c.rows) ? c.rows.length : 0)), 0);
     const CELL_LINE_H = 22;
@@ -547,6 +639,14 @@ function renderFacsimile(dataTable, accentColor) {
       return lines_;
     };
 
+    // D17: OPTIONAL ROW LABELS. Columns were named and rows were not, so a witness table's fourth
+    // row read as WHEN THE NOISE HAPPENED rather than when the account was given -- which is exactly
+    // the distinction its item tests. rowLabels is a leading column, fidelity-checked like any other
+    // transcription, and it narrows the data columns to make room rather than overflowing them.
+    const rowLabels = Array.isArray(dt.rowLabels) ? dt.rowLabels : null;
+    if (rowLabels && rowLabels.length !== rowsN) {
+      refuse(`facsimile: rowLabels has ${rowLabels.length} entries but the table has ${rowsN} rows`);
+    }
     const heads = columns.map((c, ci) => {
       if (!c || typeof c.heading !== 'string') refuse(`facsimile: column ${ci} has no heading`);
       return fitOrRefuse(c.heading, LABEL_FONT, `column heading`);
@@ -570,7 +670,7 @@ function renderFacsimile(dataTable, accentColor) {
 
     const tableBottom = y + needed;
     heads.forEach((h, ci) => {
-      const cx = innerX + ci * colW;
+      const cx = innerX + labelColW + ci * colW;
       out.push(textLines(cx, y + LABEL_FONT, LABEL_FONT, h, { lineH: CELL_LINE_H }));
       if (ci > 0) out.push(line(hp(cx - 8), y - 6, hp(cx - 8), tableBottom - 10, RULE, 1));
     });
@@ -578,9 +678,16 @@ function renderFacsimile(dataTable, accentColor) {
     out.push(line(innerX, hp(headBase), CX + CW - 22, hp(headBase), HEADER_STROKE, 1));
     let ry = headBase;
     cells.forEach((row, r) => {
+      if (labelColW) {
+        const lab = dt.rowLabels[r];
+        if (typeof lab === 'string' && lab.trim()) {
+          const wrapped = fitOrRefuse(lab, TICK_FONT, 'row label');
+          out.push(textLines(innerX, ry + TICK_FONT + 4, TICK_FONT, wrapped, { lineH: CELL_LINE_H, opacity: '0.82' }));
+        }
+      }
       row.forEach((cell, ci) => {
         if (!cell) return;
-        const cx = innerX + ci * colW;
+        const cx = innerX + labelColW + ci * colW;
         out.push(textLines(cx, ry + TICK_FONT + 4, TICK_FONT, cell, { lineH: CELL_LINE_H }));
       });
       ry += rowH[r];
@@ -589,10 +696,32 @@ function renderFacsimile(dataTable, accentColor) {
     y = ry;
   }
 
+  // THE CARD MUST CONTAIN ITS CONTENTS. y has walked down the card as each block was drawn; if it
+  // has passed the bottom edge, lines were painted onto the panel BEHIND the card and the last one
+  // rendered outside the frame entirely. There was a fit check for the column table and none at all
+  // for the ruled lines, so a long clipping simply overflowed in silence.
+  if (y > CY + CH - 8) {
+    refuse(`facsimile: the content runs ${Math.ceil(y - (CY + CH - 8))}px past the bottom of the card; `
+      + 'drop a line or shorten the transcription');
+  }
+
   if (dt.stamp) {
     fitText(dt.stamp, LABEL_FONT, CW - 60, 'facsimile stamp');
     const sw = estimateTextWidth(dt.stamp, LABEL_FONT) + 26;
-    const sx = CX + CW - sw - 34, sy = CY + CH - 58;
+    // THE STAMP GOES IN THE TOP-RIGHT CORNER, beside the title. Pinned to the card BOTTOM it was
+    // drawn straight across the body copy of a long clipping, and a rotated stamp over text makes
+    // both illegible -- the two disputed sentences the figure exists to show were the ones it
+    // covered. Chasing the content downward instead just moved the collision around, because a card
+    // whose lines reach the bottom has no clear space below them by definition. The top-right is
+    // where a stamp goes on a real form, and the title is short and left-aligned, so the only thing
+    // it can collide with is a title long enough to reach it -- which is checked, not assumed.
+    const sx = CX + CW - sw - 26;
+    const sy = CY + 18;
+    const titleRight = dt.title ? innerX + estimateTextWidth(dt.title, TITLE_FONT) : innerX;
+    if (titleRight > sx - 16) {
+      refuse(`facsimile: the stamp ${JSON.stringify(dt.stamp)} would sit on the title `
+        + `${JSON.stringify(dt.title)}; shorten one of them`);
+    }
     const cx = sx + sw / 2, cy = sy + 20;
     out.push(`<g transform="rotate(-12 ${n2(cx)} ${n2(cy)})">`);
     out.push(rect(sx, sy, sw, 40, { stroke: STAMP_STROKE, strokeWidth: 2, rx: 4, extra: 'data-stamp="1"' }));
@@ -706,29 +835,94 @@ function renderSchematic(dataTable, accentColor) {
   out.push(`<g data-layout="${esc(layout)}"></g>`);
 
   // Edges under the nodes, so a line never crosses a label.
-  edges.forEach((e) => {
+  //
+  // THE ENDPOINTS ARE A RAY-BOX INTERSECTION, not an approximation. The previous version took
+  // `Math.min` of a half-width term and a half-height term, which is right only for a square
+  // approached along a diagonal: a wide box approached from below was cut short by its half-HEIGHT
+  // and the arrow stopped in mid-air pointing at nothing, while a tall one was overshot. Both were
+  // visible in the shipped Night Rounds plans.
+  const boxExit = (bx, dxu, dyu) => {
+    const hw = bx.w / 2, hh = bx.h / 2;
+    const tx = dxu === 0 ? Infinity : hw / Math.abs(dxu);
+    const ty = dyu === 0 ? Infinity : hh / Math.abs(dyu);
+    const t = Math.min(tx, ty);
+    return { x: bx.cx + dxu * t, y: bx.cy + dyu * t };
+  };
+
+  // EVERY connector is measured before ANY label is placed. A label has to clear all of them, not
+  // just its own: on the Fence Nine plan the unlabelled fence-to-creek diagonal was drawn after the
+  // panel-six label and painted straight through the word "April", so the one connector visibly
+  // touching the date was the connector the item said carried no label at all. That made a second
+  // pairing defensible and the match item had two right answers. The rule the box test already
+  // stated -- clear EVERYTHING, not merely the thing you belong to -- now covers connectors too.
+  const segs = edges.map((e) => {
     const a = boxById.get(e.from), b = boxById.get(e.to);
     const dx = b.cx - a.cx, dy = b.cy - a.cy;
     const len = Math.sqrt(dx * dx + dy * dy) || 1;
     const ux = dx / len, uy = dy / len;
-    const aOff = Math.min(a.w / 2 + 6, a.h / 2 + 6 + Math.abs(ux) * (a.w / 2));
-    const bOff = Math.min(b.w / 2 + 6, b.h / 2 + 6 + Math.abs(ux) * (b.w / 2));
-    const x1 = a.cx + ux * aOff, y1 = a.cy + uy * aOff;
-    const x2 = b.cx - ux * bOff, y2 = b.cy - uy * bOff;
-    out.push(line(x1, y1, x2, y2, PLOT_GRID, 2));
-    if (e.style !== 'line') out.push(arrowHead(x2, y2, dx, dy, accent));
+    const GAP = 6;
+    const pa = boxExit(a, ux, uy), pb = boxExit(b, -ux, -uy);
+    return {
+      e, dx, dy, ux, uy,
+      x1: pa.x + ux * GAP, y1: pa.y + uy * GAP,
+      x2: pb.x - ux * GAP, y2: pb.y - uy * GAP,
+    };
+  });
+
+  segs.forEach((sg) => {
+    out.push(line(sg.x1, sg.y1, sg.x2, sg.y2, PLOT_GRID, 2));
+    if (sg.e.style !== 'line') out.push(arrowHead(sg.x2, sg.y2, sg.dx, sg.dy, accent));
+  });
+
+  segs.forEach((sg) => {
+    const e = sg.e;
+    const { x1, y1, x2, y2, ux, uy } = sg;
+
     if (e.label) {
-      const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
-      const w = estimateTextWidth(e.label, NOTE_FONT);
-      // Clear the boxes, not just the line. An edge between two adjacent nodes is short, so a label
-      // centred on it and lifted only 8px sat INSIDE the node it pointed at ("contains thiaminase"
-      // printed straight through the "freezing" box). When the label is wider than the free span
-      // between the two boxes, lift it clear of the taller box instead of overprinting it.
-      const span = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-      const lift = w > span ? Math.max(a.h, b.h) / 2 + 14 : 8;
+      // THE LABEL MUST CLEAR EVERY BOX, not merely the line it belongs to. Placing it at the edge
+      // midpoint with a fixed lift printed "was already eating" straight through "the feeding
+      // shelf" and left "pressed against" half under a box border. The midpoint of the VISIBLE
+      // segment is outside both endpoints' boxes by construction, but it can still land on a THIRD
+      // box, so each candidate offset is tested against every box and the first clear one wins.
       fitText(e.label, NOTE_FONT, VB_W - 2 * PAD, 'schematic edge label');
-      const clamped = Math.min(VB_W - PAD - w / 2, Math.max(PAD + w / 2, mx));
-      out.push(text(clamped, my - lift, NOTE_FONT, e.label, { anchor: 'middle', opacity: '0.82' }));
+      const w = estimateTextWidth(e.label, NOTE_FONT);
+      const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+      // Perpendicular to the edge, so the label sits beside the connector rather than on it.
+      const px = -uy, py = ux;
+      const step = NOTE_FONT * 0.8 + 8;
+      const clears = (cx, cy) => {
+        const l = cx - w / 2, r = cx + w / 2, t = cy - NOTE_FONT * 0.8, bt = cy + NOTE_FONT * 0.25;
+        if (l < PAD || r > VB_W - PAD || t < 0 || bt > VB_H) return false;
+        if (boxes.some((bx) => Math.abs(bx.cx - cx) < bx.w / 2 + w / 2 - 2
+          && Math.abs(bx.cy - cy) < bx.h / 2 + NOTE_FONT * 0.6 - 2)) return false;
+        // AND it must clear EVERY CONNECTOR, its own included. A perpendicular offset slides a
+        // label sideways, but a label is usually wider than the offset, so on a vertical edge the
+        // line went straight through the middle of the words. Sampled along each segment, which
+        // handles every angle without a special case per direction.
+        for (const other of segs) {
+          for (let i = 0; i <= 32; i++) {
+            const sxp = other.x1 + (other.x2 - other.x1) * (i / 32);
+            const syp = other.y1 + (other.y2 - other.y1) * (i / 32);
+            if (sxp > l - 3 && sxp < r + 3 && syp > t - 3 && syp < bt + 3) return false;
+          }
+        }
+        return true;
+      };
+      let placed = null;
+      for (let k = 1; k <= 4 && !placed; k++) {
+        for (const s of [1, -1]) {
+          const cx = mx + px * step * k, cy = my + py * step * k;
+          if (clears(cx + 0, cy + 0)) { placed = { cx, cy }; break; }
+          const cx2 = mx - px * step * k, cy2 = my - py * step * k;
+          if (s === -1 && clears(cx2, cy2)) { placed = { cx: cx2, cy: cy2 }; break; }
+        }
+      }
+      if (!placed) {
+        refuse(`schematic: the label ${JSON.stringify(e.label)} on the edge ${JSON.stringify(e.from)} -> `
+          + `${JSON.stringify(e.to)} cannot be placed without covering a node or crossing a connector; `
+          + 'shorten it, move the nodes apart, or carry the detail in the caption');
+      }
+      out.push(text(placed.cx, placed.cy, NOTE_FONT, e.label, { anchor: 'middle', opacity: '0.82' }));
     }
   });
 
