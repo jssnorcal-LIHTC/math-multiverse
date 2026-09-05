@@ -8,24 +8,14 @@
 <text x="78" y="154" font-size="20" fill="#e8eef7" fill-opacity="0.82">The byline</text>
 <text x="322" y="154" font-size="22" fill="#e8eef7">Cal Prentiss</text>
 <line x1="78" y1="166.5" x2="722" y2="166.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
-<line x1="78" y1="211.5" x2="722" y2="211.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" />
 <text x="78" y="204" font-size="22" fill="#e8eef7">A violent spring storm tore a hole in the</text>
-<line x1="78" y1="243.5" x2="722" y2="243.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" />
 <text x="78" y="236" font-size="22" fill="#e8eef7">perimeter fence at Marlowe Creek Wildlife</text>
-<line x1="78" y1="275.5" x2="722" y2="275.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" />
-<text x="78" y="268" font-size="22" fill="#e8eef7">Sanctuary Thursday night, leaving a gap</text>
-<line x1="78" y1="307.5" x2="722" y2="307.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" />
-<text x="78" y="300" font-size="22" fill="#e8eef7">wide enough for an animal to walk through</text>
+<line x1="78" y1="273.5" x2="672" y2="273.5" stroke="#b45309" stroke-width="2" data-emphasis="underline" />
+<text x="78" y="268" font-size="22" fill="#e8eef7">sanctuary records show the fence had not been</text>
+<line x1="78" y1="305.5" x2="355.2" y2="305.5" stroke="#b45309" stroke-width="2" data-emphasis="underline" />
+<text x="78" y="300" font-size="22" fill="#e8eef7">inspected since March</text>
 <line x1="78" y1="337.5" x2="672" y2="337.5" stroke="#b45309" stroke-width="2" data-emphasis="underline" />
-<text x="78" y="332" font-size="22" fill="#e8eef7">sanctuary records show the fence had not been</text>
-<line x1="78" y1="369.5" x2="355.2" y2="369.5" stroke="#b45309" stroke-width="2" data-emphasis="underline" />
-<text x="78" y="364" font-size="22" fill="#e8eef7">inspected since March</text>
-<line x1="78" y1="401.5" x2="672" y2="401.5" stroke="#b45309" stroke-width="2" data-emphasis="underline" />
-<text x="78" y="396" font-size="22" fill="#e8eef7">the county was under a High Wind Warning that</text>
-<line x1="78" y1="433.5" x2="654" y2="433.5" stroke="#b45309" stroke-width="2" data-emphasis="underline" />
-<text x="78" y="428" font-size="20" fill="#e8eef7">night, according to the National Weather Service</text>
-<g transform="rotate(-12 466 382)">
-<rect x="222" y="362" width="488" height="40" fill="none" stroke="rgba(232,238,247,0.65)" stroke-width="2" rx="4" data-stamp="1" />
-<text x="466" y="390" font-size="22" fill="#b45309" text-anchor="middle">printed as plain statements of fact</text>
-</g>
+<text x="78" y="332" font-size="22" fill="#e8eef7">the county was under a High Wind Warning that</text>
+<line x1="78" y1="369.5" x2="654" y2="369.5" stroke="#b45309" stroke-width="2" data-emphasis="underline" />
+<text x="78" y="364" font-size="20" fill="#e8eef7">night, according to the National Weather Service</text>
 </svg>

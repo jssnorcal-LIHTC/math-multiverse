@@ -221,3 +221,62 @@ the three ELA packs carry no figures, so their completion screens must show no c
 That absence is asserted, never skipped, and the closing banner names which of the four contracts
 was actually checked, so a reveal-less run can never read as if the twelve-tile card had been
 verified.
+
+## Every file in `tests/`, and what it is for
+
+The table above lists the npm entry points.  This one is the census: all 44 files under `tests/`,
+so a file cannot sit in the directory looking like a gate without being one.  The **run** column
+says how it is reached.  `npm test` means the composite gate runs it;  **helper** means it exports
+to other files and asserts nothing on its own;  **manual** means it is a diagnostic a person runs.
+
+| File | Run | What it is for |
+|---|---|---|
+| `blind-reanswer.js` | manual | Answers every comparable item in a pack with no access to the key, through the subscription CLI, and writes the verdict ledger. |
+| `curriculum-pointer.js` | `npm test` | The gate on the lesson pointer. |
+| `dom-stub.js` | helper | A DOM stub carrying only the surface `engine/items.js` and `engine/runner.js` actually touch, so a unit run needs no browser. |
+| `extract.js` | helper | Pulls each module's IIFE body out of `Math-Multiverse.html` and evaluates it in a vm context. |
+| `extract.test.js` | `npm test` | Regression gate on `extract.js`'s global injection and freshness-capture readiness. |
+| `figure-contact-sheet.js` | manual | Renders a pack's figures in the real shell and composes a contact sheet for pixel review. |
+| `figure-derive.js` | `npm test` | Proves every committed figure SVG is byte-derivable from its `dataTable`, and doubles as the unit for the generator. |
+| `figure-docs-shots.js` | manual | Renders each committed document fixture at lightbox scale for eye review. |
+| `figure-docs.test.js` | `npm test` | Unit gate for the four document renderers in `build/figure-gen-docs.js`. |
+| `figure-fidelity.js` | `npm test` | Proves a generated figure says only what its passage says, and that every item keyed on a figure is licensed by it. |
+| `figure-reconcile.js` | `npm test` | Reconciles the figure roster against the pack. |
+| `figures-offline.js` | `npm test` | Proves every figure renders with no network. |
+| `figures.test.js` | `npm test` | Unit gate for the chart renderers, including a no-DOM check that must go red if the stub is installed too early. |
+| `freshness.js` | `npm test` | Freshness unit gate, run inside a bare extract context with a spy storage. |
+| `freshness-lib.js` | `npm test` | The binding-constraint library gate. |
+| `freshness-sim.js` | `npm test` | Seeded 10-run simulation gate, two independent check types, ratcheted. |
+| `fuzz.js` | `npm run fuzz` | The boundary gate: drives every module's real question dispatch. |
+| `gate-common.js` | helper | Helpers shared by the content gates. |
+| `items.test.js` | `npm test` | Unit gate for `engine/items.js`: every item type's render, input and scoring path. |
+| `level-briefing.js` | `npm test` | The gate on the level briefing. |
+| `mission.js` | `npm test` | The gate on Today's Mission. |
+| `oracles.js` | helper | Independent recomputation of generated questions, used by the fuzz. |
+| `pack.test.js` | `npm test` | Unit gate for `engine/pack.js`: pack load, level selection and item ordering. |
+| `play-level.js` | manual | Drives a pack level to its end through the real app and asserts the completion screen. |
+| `prose-clarity.js` | `npm test` | The long-sentence ratchet. |
+| `readability.js` | helper | Flesch-Kincaid and Coleman-Liau grade levels, zero dependencies. |
+| `readability.test.js` | `npm test` | Plain-node assertions over `readability.js`. |
+| `reading-line.js` | `npm test` | Tap a line of the passage and it stays lit. |
+| `reading-surface.js` | `npm test` | The reading surface gate, measured as painted rather than as authored. |
+| `reduced-motion.js` | `npm test` | The accessibility promise, measured in painted pixels. |
+| `resume-level.js` | `npm test` | Leaving a level and coming back continues it. |
+| `runner.test.js` | `npm test` | Unit gate for `engine/runner.js`: the whole run lifecycle, scoring and reveal contracts. |
+| `shells.js` | `npm test` | Shell and template hygiene gate. |
+| `shuffle-mc.test.js` | `npm test` | Gate on `build/shuffle-mc.js`: choice order is permuted and the key follows it. |
+| `smoke.js` | `npm run smoke` | Headless render gate: serves the repo over http and boots the launcher plus all six modules. |
+| `targets.js` | helper | The frozen target vocabulary a pack may cite. |
+| `targets.test.js` | `npm test` | Gate on that vocabulary across four subjects sharing one id namespace. |
+| `tile-overlap.js` | `npm test` | Occlusion-corrected explain-tile overlap gate. |
+| `touch-targets.js` | `npm run touch-targets` | Header controls reachable by a 44px finger, by hit-testing rather than geometry. |
+| `validate-curriculum.js` | `npm test` | The gate on `packs/curriculum-cc1.json`. |
+| `validate-pack.js` | `npm test` | The content gate for authored packs. |
+| `validate-pack.test.js` | `npm test` | Unit gate for the content gate itself, including a POSIX-semantics simulation. |
+| `verdicts.js` | helper | The blind re-answer ledger: item hashing, the blind question, and ledger validation. |
+| `verdicts.test.js` | `npm test` | Unit gate for the ledger, including answer parsing and staleness detection. |
+
+Two files in that list are the reason the census exists.  `blind-reanswer.js` and
+`figure-contact-sheet.js` are the only steps in the figure pipeline a machine does not run for
+itself, and neither is reachable from `npm test`.  Reading the table is the only way to find that
+out;  running the suite is not.

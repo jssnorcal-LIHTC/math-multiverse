@@ -110,6 +110,7 @@ function checkedStrings(dt) {
   });
   (dt.header || []).forEach((h, i) => { add(`header[${i}].label`, h && h.label); add(`header[${i}].value`, h && h.value); });
   (dt.lines || []).forEach((l, i) => add(`lines[${i}].text`, l && l.text));
+  (dt.rowLabels || []).forEach((r, i) => add(`rowLabels[${i}]`, r));
   (dt.columns || []).forEach((c, i) => {
     add(`columns[${i}].heading`, c && c.heading);
     ((c && c.rows) || []).forEach((r, j) => add(`columns[${i}].rows[${j}]`, r));

@@ -4,18 +4,12 @@
 <text x="132" y="74" font-size="20" fill="#e8eef7" fill-opacity="0.82">4:00 p.m.</text>
 <text x="760" y="74" font-size="20" fill="#e8eef7" text-anchor="end" fill-opacity="0.82">11:00 p.m.</text>
 <rect x="498.33" y="108" width="52.33" height="94" fill="none" stroke="rgba(232,238,247,0.35)" stroke-width="1" data-gap="pairs sent, no entries" />
-<line x1="510.33" y1="108" x2="498.33" y2="120" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="522.33" y1="108" x2="498.33" y2="132" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="534.33" y1="108" x2="498.33" y2="144" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="546.33" y1="108" x2="498.33" y2="156" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="550.67" y1="115.67" x2="498.33" y2="168" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="550.67" y1="127.67" x2="498.33" y2="180" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="550.67" y1="139.67" x2="498.33" y2="192" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="550.67" y1="151.67" x2="500.33" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="550.67" y1="163.67" x2="512.33" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="550.67" y1="175.67" x2="524.33" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="520.33" y1="108" x2="498.33" y2="130" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="542.33" y1="108" x2="498.33" y2="152" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="550.67" y1="121.67" x2="498.33" y2="174" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="550.67" y1="143.67" x2="498.33" y2="196" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="550.67" y1="165.67" x2="514.33" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
 <line x1="550.67" y1="187.67" x2="536.33" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="550.67" y1="199.67" x2="548.33" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
 <text x="40" y="134" font-size="18" fill="#e8eef7" fill-opacity="0.82">planned</text>
 <line x1="132" y1="128.5" x2="760" y2="128.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" />
 <text x="40" y="180" font-size="18" fill="#e8eef7" fill-opacity="0.82">actual</text>
@@ -27,7 +21,7 @@
 <circle cx="460.95" cy="174" r="7" fill="#3a6" />
 <text x="460.95" y="160" font-size="18" fill="#3a6" text-anchor="middle">3</text>
 <circle cx="446" cy="174" r="7" fill="none" stroke="#3a6" stroke-width="2" stroke-dasharray="3 3" data-kind="unverified" />
-<text x="446" y="142" font-size="18" fill="#3a6" text-anchor="middle">4?</text>
+<text x="446" y="196" font-size="18" fill="#3a6" text-anchor="middle">4?</text>
 <circle cx="610.48" cy="174" r="7" fill="#3a6" />
 <text x="610.48" y="160" font-size="18" fill="#3a6" text-anchor="middle">5</text>
 <circle cx="754.02" cy="174" r="7" fill="#3a6" />
