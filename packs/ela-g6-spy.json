@@ -5014,7 +5014,7 @@
         "4": "The drawing gives loading a drop and the collector a line each.  They are the two people the article keeps apart, and keeping them apart is the whole reason a dead drop exists.",
         "5": "The drawing keeps the two lines apart from end to end.  The article's whole point is that the two people never have to be in the same place at the same time, so a handover would undo the method."
       },
-      "explain": "The drawing says three things the article leaves a reader to piece together.  A chalk mark goes up at the end of the same line as loading a drop, so the drawing puts the signal on the loading half of the method.  Collects it comes only after a slow route, and the two lines never touch, which is the article's own point: a connection nobody observed can never later be proven.",
+      "explain": "The drawing says three things the article leaves a reader to piece together.  A chalk mark goes up at the end of the same line as loading a drop, so the drawing puts the signal on the loading half of the method.  The box reading collects it comes only after a slow route, and the two lines never touch, which is the article's own point: a connection nobody observed can never later be proven.",
       "whyTheFigureIsNeeded": "The article says the two sides agree on a signal but never says whose half places it or where it falls in the order, so only the drawing shows a chalk mark ending the loading line and shows the two halves running as separate lines that never meet."
     },
     {
@@ -5047,7 +5047,7 @@
           "key": 1
         }
       ],
-      "explain": "The signal says one thing only runs along the line that starts at loading a drop, so the drawing gives that sentence to the loading half of the method.  The article never says who places the signal, so the drawing is the only thing that settles that one.  A meeting that must be checked first runs along the line that starts at the collector, and the article puts it there too: the last rule belongs to the collector, not to whoever loaded the drop.",
+      "explain": "The words the signal says one thing only run along the line that starts at loading a drop, so the drawing gives that sentence to the loading half of the method.  The article never says who places the signal, so the drawing is the only thing that settles that one.  The words a meeting that must be checked first run along the line that starts at the collector, and the article puts it there too: the last rule belongs to the collector, not to whoever loaded the drop.",
       "whyTheFigureIsNeeded": "The article attaches the pickup rule to the collector but never says who places the signal, so which line carries the signal sentence is visible only on the drawing."
     },
     {
@@ -5161,7 +5161,7 @@
         2
       ],
       "distractorRationale": {
-        "3": "The surface crew is the box at the top of that column, and the team below is the one at the foot of it.  In this diagram the lower a box sits, the deeper it is.",
+        "3": "The surface crew is the box at the top of that column, and the team below is the one at the foot of it.  In that column the lower a box sits, the deeper it is.",
         "4": "Both arrows in that column point up toward the surface, so the diagram draws no arrow coming back down.  A warning that cannot get down to the team is exactly the trouble the article describes.",
         "5": "The fix in the article is the relay, and the relay is in the other column.  The boxes on the right name the rock and what it does to a signal."
       },
@@ -5274,7 +5274,7 @@
       "blanks": [
         {
           "choices": [
-            "I write down times, the record of what the narrator saw, heard or did herself",
+            "the record marked I write down times, which holds what the narrator saw, heard or did herself",
             "The rule, because the plan is what put her thumb there",
             "both records at once, because it is the moment they meet"
           ],
@@ -5289,7 +5289,7 @@
           "key": 0
         }
       ],
-      "explain": "The timeline sorts the afternoon by whose moment it is.  Everything the narrator saw, heard or did goes on I write down times, and the thumb on the transmit key is her own, so it goes there.  The rule holds two moments and neither of them actually happened: Jonah did not check in at ten twenty, and the exercise was never called off.  A record of what a plan required is not a record of what took place.",
+      "explain": "The timeline sorts the afternoon by whose moment it is.  Everything the narrator saw, heard or did goes on the record marked I write down times, and the thumb on the transmit key is her own, so it goes there.  The rule holds two moments and neither of them actually happened: Jonah did not check in at ten twenty, and the exercise was never called off.  A record of what a plan required is not a record of what took place.",
       "whyTheFigureIsNeeded": "The passage's opening paragraph carries the narrator's first logged time and then the rule, and her remaining moments come across the paragraphs that follow, so it never sorts them.  The timeline is what puts each moment on one record or the other, and what shows that The rule carries only moments that did not happen."
     },
     {
@@ -5364,7 +5364,7 @@
       "passageId": "p-cold-weather-log",
       "figureId": "fig-l4-cold-weather-log",
       "figureFact": "just past sixty-eight hours",
-      "stem": "The cold-weather log writes at its head what the brief calls a thirty-day battery life.  Underneath, two columns headed tags and gone silent record what the staff measured.  Choose the three statements a reader can check by reading straight across those two columns.",
+      "stem": "The cold-weather log writes at its head what the brief calls a thirty-day battery life.  Underneath, the staff's own measurements sit in two columns, headed tags and gone silent.  Choose the three statements a reader can check by reading straight across those two columns.",
       "choices": [
         "Two of the four tags had gone silent at about sixty hours",
         "All four tags went silent at the same hour",
@@ -5473,7 +5473,7 @@
       ],
       "distractorRationale": {
         "3": "The memo gives twenty-six days, nineteen days, and just under three days.  Runtimes that far apart are not the same number of days, and the spread is the whole reason the board shared all three results together.",
-        "4": "The memo is headed the same tracking tag, and the article says outright that the tag did not change between tests.  The climate changed instead, which is the finding.",
+        "4": "The memo carries the same tracking tag at its head, and the article says outright that the tag did not change between tests.  The climate changed instead, which is the finding.",
         "5": "The hottest air on the memo is above ninety degrees, and the runtime under it is nineteen days, which is shorter than the twenty-six days measured in the fifties.  This choice reverses what the table gives."
       },
       "targets": [
@@ -5795,7 +5795,7 @@
       "src": "art/ela-g6-spy/fig-l2-dead-air.svg",
       "caption": "A relay parked just inside the entrance hears the team below and passes the message up to the surface crew, because the deeper a team goes, the less of the signal survives.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A plan diagram in two columns: on the left, boxes reading the team below, just inside the entrance, and the surface crew are joined by arrows pointing upward; on the right, arrows run downward from thirty feet of granite through the deeper a team goes to the less of the signal survives, so lower means deeper in both columns.",
+      "alt": "A plan diagram in two columns: on the left, boxes reading the team below, just inside the entrance, and the surface crew are joined by arrows pointing upward, so in that column lower means deeper; on the right, arrows run downward from thirty feet of granite through the deeper a team goes to the less of the signal survives.",
       "dataTable": {
         "type": "schematic",
         "sourcePassageId": "p-dead-air",
