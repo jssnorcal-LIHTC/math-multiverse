@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img">
+<rect x="0" y="0" width="800" height="450" fill="#0f1218" />
+<text x="40" y="44" font-size="26" fill="#e8eef7">the top two floors</text>
+<g data-layout="plan"></g>
+<line x1="169.6" y1="130.56" x2="169.6" y2="191.44" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<polygon points="169.6,191.44 164.6,180.44 174.6,180.44" fill="#7c5cff" />
+<line x1="241.68" y1="195.71" x2="471.92" y2="126.29" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<polygon points="471.92,126.29 462.83,134.25 459.94,124.68" fill="#7c5cff" />
+<line x1="544" y1="130.56" x2="544" y2="198.08" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<line x1="544" y1="250.08" x2="544" y2="312.24" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<line x1="512.15" y1="128.13" x2="260.07" y2="314.67" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<rect x="63.6" y="84.56" width="212" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="169.6" y="111.56" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="169.6" dy="0">the intake desk</tspan></text>
+<rect x="45.6" y="197.44" width="248" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="169.6" y="224.44" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="169.6" dy="0">a service elevator</tspan></text>
+<rect x="40" y="318.24" width="344" height="64" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="212" y="345.24" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="212" dy="0">the four exits and the two</tspan> <tspan x="212" dy="24">visible cameras</tspan></text>
+<rect x="366" y="84.56" width="356" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="544" y="111.56" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="544" dy="0">the center of a bright room</tspan></text>
+<rect x="432" y="204.08" width="224" height="40" fill="rgba(232,238,247,0.06)" stroke="#7c5cff" stroke-width="2" rx="20" data-shape="round" />
+<text x="544" y="231.08" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="544" dy="0">an open pedestal</tspan></text>
+<rect x="390" y="318.24" width="308" height="64" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="544" y="345.24" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="544" dy="0">a thin dark line in the</tspan> <tspan x="544" dy="24">floor circling it</tspan></text>
+</svg>

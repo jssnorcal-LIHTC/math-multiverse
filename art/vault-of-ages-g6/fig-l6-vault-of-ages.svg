@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img">
+<rect x="0" y="0" width="800" height="450" fill="#0f1218" />
+<text x="40" y="44" font-size="26" fill="#e8eef7">a door with no handle and no keyhole</text>
+<g data-layout="plan"></g>
+<line x1="155.2" y1="317.6" x2="155.2" y2="190.32" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<polygon points="155.2,190.32 160.2,201.32 150.2,201.32" fill="#7c5cff" />
+<line x1="400" y1="317.6" x2="400" y2="190.32" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<polygon points="400,190.32 405,201.32 395,201.32" fill="#7c5cff" />
+<line x1="637.37" y1="317.6" x2="636.23" y2="190.32" stroke="rgba(232,238,247,0.5)" stroke-width="2" />
+<polygon points="636.23,190.32 641.33,201.27 631.33,201.36" fill="#7c5cff" />
+<text x="200" y="253.96" font-size="18" fill="#e8eef7" text-anchor="middle" fill-opacity="0.82">first</text>
+<text x="681.6" y="253.56" font-size="18" fill="#e8eef7" text-anchor="middle" fill-opacity="0.82">last</text>
+<rect x="55.2" y="144.32" width="200" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="155.2" y="171.32" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="155.2" dy="0">leftmost notch</tspan></text>
+<rect x="312" y="144.32" width="176" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="400" y="171.32" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="400" dy="0">center notch</tspan></text>
+<rect x="512" y="144.32" width="248" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="636" y="171.32" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="636" dy="0">notch on the right</tspan></text>
+<rect x="61.2" y="323.6" width="188" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="155.2" y="350.6" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="155.2" dy="0">the Wyrdstone</tspan></text>
+<rect x="336" y="323.6" width="128" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="400" y="350.6" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="400" dy="0">the seal</tspan></text>
+<rect x="531.6" y="323.6" width="212" height="40" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.5)" stroke-width="2" rx="4" data-shape="box" />
+<text x="637.6" y="350.6" font-size="20" fill="#e8eef7" text-anchor="middle"><tspan x="637.6" dy="0">the Threadglass</tspan></text>
+</svg>
