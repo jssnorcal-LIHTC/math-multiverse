@@ -79,6 +79,12 @@ const MAX_BRIEFING_SENTENCE = 28;
 const MAX_FIGURE_ITEM = { stem: 25, explain: 42 };
 const MAX_FIGURE_CLOZE_STEM = 32;
 
+// A distractorRationale is COACHING, rendered to the learner by engine/runner.js:475 when they pick
+// the option it belongs to. It is the sentence a child reads at the moment they got something
+// wrong, so it is the last place a three-clause sentence belongs, and nothing measured it either.
+// Pinned at 31, the worst across all 115 rationale sentences in the two C-waves.
+const MAX_FIGURE_RATIONALE = 31;
+
 // The stem exactly as engine/items.js renders it: every {{n}} replaced by the option the key names.
 function renderedStem(item) {
   return String(item.stem || '').replace(/\{\{(\d+)\}\}/g, (m, n) => {
@@ -177,6 +183,19 @@ for (const f of files) {
         }
       }
     });
+    // distractorRationale is an object keyed by choice index, so it needs its own pass.
+    for (const [choice, note] of Object.entries(it.distractorRationale || {})) {
+      if (typeof note !== 'string') continue;
+      for (const sen of sentencesOf(note)) {
+        figureItemSents++;
+        const n = words(sen);
+        if (n > MAX_FIGURE_RATIONALE) {
+          problems.push(`${id}/${it.id} distractorRationale[${choice}]: a ${n}-word sentence, over the `
+            + `${MAX_FIGURE_RATIONALE}-word ceiling: ${JSON.stringify(sen.slice(0, 90))}.  `
+            + `This is what a child reads at the moment they got it wrong.`);
+        }
+      }
+    }
   }
 
   // A ceiling nothing comes near is decoration. Reported, not failed: lowering it is an editorial
@@ -266,6 +285,19 @@ const controls = [];
     name: 'NEGATIVE: round 5\'s 45-word RENDERED cloze stem is over the cloze ceiling, though its raw form is under',
     ok: renWorst > MAX_FIGURE_CLOZE_STEM && rawWorst <= MAX_FIGURE_ITEM.stem,
     detail: `raw ${rawWorst} <= ${MAX_FIGURE_ITEM.stem}, rendered ${renWorst} > ${MAX_FIGURE_CLOZE_STEM}`,
+  });
+  // The rationale ceiling gets the real 52-word explain again: one sentence over every item ceiling
+  // here, and the shortest real rationale sentence under all of them.
+  const shortNote = 'The two lines never touch.';
+  controls.push({
+    name: 'NEGATIVE: a 52-word sentence is over the distractorRationale ceiling too',
+    ok: nExpl > MAX_FIGURE_RATIONALE,
+    detail: `${nExpl} words against ${MAX_FIGURE_RATIONALE}`,
+  });
+  controls.push({
+    name: 'POSITIVE: a short rationale sentence is under it',
+    ok: words(sentencesOf(shortNote)[0] || shortNote) <= MAX_FIGURE_RATIONALE,
+    detail: `${words(sentencesOf(shortNote)[0] || shortNote)} words against ${MAX_FIGURE_RATIONALE}`,
   });
   // A ceiling that no pack's items are measured against is decoration: say how many were read.
   // The splitter has to actually split, or every count above is one sentence long.
