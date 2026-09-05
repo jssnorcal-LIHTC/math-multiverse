@@ -5047,8 +5047,8 @@
           "key": 1
         }
       ],
-      "explain": "The article gives both of these sentences without saying whose half of the method each one belongs to.  The drawing settles it.  The signal says one thing only runs along the line that starts at loading a drop, so the drawing gives that sentence to the loading half of the method.  A meeting that must be checked first runs along the line that starts at the collector, because the care taken at pickup is the collector's own rule.",
-      "whyTheFigureIsNeeded": "The article states both sentences without attaching either to a person's half of the method, so which of the two lines carries each one is visible only on the drawing."
+      "explain": "The signal says one thing only runs along the line that starts at loading a drop, so the drawing gives that sentence to the loading half of the method.  The article never says who places the signal, so the drawing is the only thing that settles that one.  A meeting that must be checked first runs along the line that starts at the collector, and the article puts it there too: the last rule belongs to the collector, not to whoever loaded the drop.",
+      "whyTheFigureIsNeeded": "The article attaches the pickup rule to the collector but never says who places the signal, so which line carries the signal sentence is visible only on the drawing."
     },
     {
       "id": "l2-order-relay-chain-path",
@@ -5073,7 +5073,7 @@
         0
       ],
       "explain": "The two arrows in the left-hand column both point up the page, so the message starts at the bottom box and finishes at the top one.  It leaves the team below, is picked up just inside the entrance, and only then reaches the surface crew.  The article says the same thing in words: no single transmission has to cross the whole distance by itself.",
-      "whyTheFigureIsNeeded": "The passage names the relay by what it is, a small transmitter, while the drawing names it by where it sits, so only the drawing tells a reader that the box reading just inside the entrance is the middle stop on the message's path and which end of that path the arrows start from."
+      "whyTheFigureIsNeeded": "The passage gives the relay's place and the order of the hops in words; only the drawing fixes which end of the left-hand column the arrows start from and draws the three as one path."
     },
     {
       "id": "l2-mc-where-the-rock-chain-ends",
@@ -5100,7 +5100,7 @@
         "3": "The surface crew is the box at the top of the other column, where the message ends.  No arrow reaches it from the column that starts at the rock."
       },
       "explain": "The arrows on the right run from thirty feet of granite, to the deeper a team goes, and on to the less of the signal survives, so that last box is where the chain stops.  Two of the other choices are boxes in the left-hand column, which carries a message instead.",
-      "whyTheFigureIsNeeded": "The passage states the rock's effect inside one sentence, but only the drawing separates that idea into a chain of boxes with a first and a last, so a reader has to follow the arrows in the right-hand column to see which box the chain arrives at."
+      "whyTheFigureIsNeeded": "The passage states the rock's effect across two sentences, but only the drawing separates that idea into a chain of boxes with a first and a last, so a reader has to follow the arrows in the right-hand column to see which box the chain arrives at."
     },
     {
       "id": "l2-cloze-rock-chain-direction",
@@ -5166,7 +5166,7 @@
         "5": "The fix in the article is the relay, and the relay is in the other column.  The boxes on the right name the rock and what it does to a signal."
       },
       "explain": "The two columns are drawn side by side and never join, so the message never passes through the boxes on the right.  One column follows a message from the team below up to the surface crew, and the other follows a signal from thirty feet of granite to the point where little of it survives.",
-      "whyTheFigureIsNeeded": "The passage runs the rock and the relay through the same paragraphs, so only the drawing shows them as two separate chains that no arrow joins, which is what tells a reader that thirty feet of granite is not a box the message travels through."
+      "whyTheFigureIsNeeded": "The passage gives the rock its own opening paragraph and does not name the relay until two paragraphs later, so only the drawing shows them as two separate chains that no arrow joins, which is what tells a reader that thirty feet of granite is not a box the message travels through."
     },
     {
       "id": "l3-order-plan-and-real-time-in-one-order",
@@ -5196,8 +5196,8 @@
         3,
         1
       ],
-      "explain": "The passage gives the plan first and the afternoon second, so reading it straight through puts the check-in time and the end of the exercise before the man in the jacket ever appears.  The timeline drops both records into one order instead.  Ines goes in, the man walks in, the check-in time falls due, the man walks back out, the exercise is meant to end, and only then does the phone buzz.  The plan's own ending comes fifth rather than last, and the buzz that ends the afternoon comes after it.",
-      "whyTheFigureIsNeeded": "The passage states the plan's check-in time and its end in one paragraph, and the afternoon's real moments in the next.  Nothing on the page puts the two records into a single sequence.  Only the timeline merges them, and only there does the plan's own ending sit fifth rather than last."
+      "explain": "The passage puts the plan's check-in and its end in the same paragraph that opens with Ines going in, and the man in the jacket only a paragraph later, so reading it straight through puts the check-in time and the end of the exercise before the man in the jacket ever appears.  The timeline drops both records into one order instead.  Ines goes in, the man walks in, the check-in time falls due, the man walks back out, the exercise is meant to end, and only then does the phone buzz.  The plan's own ending comes fifth rather than last, and the buzz that ends the afternoon comes after it.",
+      "whyTheFigureIsNeeded": "The passage puts the plan's check-in and its end in the same paragraph that opens with Ines going in, and the rest of the afternoon in the paragraphs after it.  Nothing on the page puts the two records into a single sequence.  Only the timeline merges them, and only there does the plan's own ending sit fifth rather than last."
     },
     {
       "id": "l3-mc-the-time-on-both-records",
@@ -5224,7 +5224,7 @@
         "3": "Jonah goes in at ten fourteen, earlier, before the check-in was ever due.  The timeline sets that moment first, and nothing on The rule shares it."
       },
       "explain": "The timeline writes ten twenty twice, once on each record.  On The rule it is the moment he checks in.  On I write down times it is nothing on the radio but the hiss.  Read together they say the check-in was due at exactly the moment the radio had nothing on it, which is the narrator's whole problem.  The clicks come later, at ten twenty-two and eleven seconds, and the thumb goes on the key at ten twenty-one, so neither of those shares its time with anything.",
-      "whyTheFigureIsNeeded": "The passage separates the two ten twenty moments by a paragraph and never says they are the same moment; the timeline is what writes that one time on both records and sets the expected check-in against the hiss."
+      "whyTheFigureIsNeeded": "The passage puts the two ten twenty moments in consecutive sentences across a paragraph break and never says they are the same moment; the timeline is what writes that one time on both records and sets the expected check-in against the hiss."
     },
     {
       "id": "l3-ms-what-the-added-line-shows",
@@ -5257,7 +5257,7 @@
         "5": "Marchetti collects the sheets without reading a single one.  Jonah asks for his sheet back and writes the line himself, and it takes him longer than everything above it."
       },
       "explain": "The sheet lists what happened and then breaks off, and the added line sits under all of it at the foot of the page.  Its words are Thirty seconds lost on the second floor landing, cause unknown, no action taken.  Because it was added last, it lands after exit at ten forty-one, although the landing came long before Jonah left the building.  Nothing is taken off the sheet to make room for it, no time is put on it, and it is Jonah's own hand rather than Marchetti's.",
-      "whyTheFigureIsNeeded": "Only the sheet shows where the added line ended up: under everything listed under what happened, and after exit at ten forty-one.  The passage says only that Jonah wrote one more line at the bottom of the page, and never sets that line against the entries already there."
+      "whyTheFigureIsNeeded": "The passage gives the added line's words and says it went at the bottom of the page.  Only the sheet shows it landing after exit at ten forty-one, with every entry already listed still in place."
     },
     {
       "id": "l3-cloze-which-record-holds-the-thumb",
@@ -5270,7 +5270,7 @@
       ],
       "coachTopic": "viewpoint-narrator",
       "dok": 3,
-      "stem": "Finish the sentence about the Halloway timeline.  The timeline keeps two records, and my thumb on the transmit key goes on {{0}}, while The rule holds only {{1}}.",
+      "stem": "Finish the sentence about the Halloway timeline.  The timeline keeps two records, and the entry reading my thumb on the transmit key goes on {{0}}, while The rule holds only {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -5290,7 +5290,7 @@
         }
       ],
       "explain": "The timeline sorts the afternoon by whose moment it is.  Everything the narrator saw, heard or did goes on I write down times, and the thumb on the transmit key is her own, so it goes there.  The rule holds two moments and neither of them actually happened: Jonah did not check in at ten twenty, and the exercise was never called off.  A record of what a plan required is not a record of what took place.",
-      "whyTheFigureIsNeeded": "The passage gives the rule in its opening paragraph, and the narrator's own moments across the paragraphs that follow, so it never sorts them.  The timeline is what puts each moment on one record or the other, and what shows that The rule carries only moments that did not happen."
+      "whyTheFigureIsNeeded": "The passage's opening paragraph carries the narrator's first logged time and then the rule, and her remaining moments come across the paragraphs that follow, so it never sorts them.  The timeline is what puts each moment on one record or the other, and what shows that The rule carries only moments that did not happen."
     },
     {
       "id": "l4-match-claim-against-what-was-measured",
@@ -5337,7 +5337,7 @@
       "passageId": "p-petrel-brief",
       "figureId": "fig-l4-petrel-brief",
       "figureFact": "measured at a constant seventy degrees",
-      "stem": "On the Petrel-4 page, Corvid Systems boxes its whole test claim: a fully charged Petrel-4 held a working fix for thirty days straight.  Lower down the same page, the red underline this brief uses for its small print marks the words measured at a constant seventy degrees.  What does that arrangement do to a reader in a hurry?",
+      "stem": "On the Petrel-4 page, Corvid Systems boxes its whole test claim: a fully charged Petrel-4 held a working fix for thirty days straight.  This brief uses a red underline for its small print.  Lower down the same page, that underline marks the words measured at a constant seventy degrees.  What does that arrangement do to a reader in a hurry?",
       "choices": [
         "It puts the number where it will be read first and the words measured at a constant seventy degrees where they may be missed.",
         "It shows the brief is hiding nothing, so the thirty days can be taken at face value.",
@@ -5356,7 +5356,7 @@
       "coachTopic": "inference-argument",
       "dok": 3,
       "explain": "A page is read from the top, and this brief put its number above the condition that number depends on.  Both are printed on the same page, so nothing is hidden, yet a reader who stops after the boxed claim walks away with thirty days and no idea it was measured at a constant seventy degrees.  Reading a source properly means reading all the way down to the small print.",
-      "whyTheFigureIsNeeded": "The prose only reports that a line of small print exists at the close; the drawing is what shows the brief boxing its number as the headline and setting the seventy-degree condition further down the same page under a small-print rule, which is the arrangement the item asks about."
+      "whyTheFigureIsNeeded": "The prose reports the small print's words and its place at the close; the drawing is what shows the brief boxing its number as the headline and marking the condition as small print, which is the arrangement the item asks about."
     },
     {
       "id": "l4-ms-reading-across-the-cold-log",
@@ -5364,7 +5364,7 @@
       "passageId": "p-cold-weather-log",
       "figureId": "fig-l4-cold-weather-log",
       "figureFact": "just past sixty-eight hours",
-      "stem": "The cold-weather log writes at its head what the brief calls a thirty-day battery life, then records what the staff measured in two columns, tags and gone silent.  Choose the three statements a reader can check by reading straight across those two columns.",
+      "stem": "The cold-weather log writes at its head what the brief calls a thirty-day battery life.  Underneath, two columns headed tags and gone silent record what the staff measured.  Choose the three statements a reader can check by reading straight across those two columns.",
       "choices": [
         "Two of the four tags had gone silent at about sixty hours",
         "All four tags went silent at the same hour",
@@ -5422,7 +5422,7 @@
       "coachTopic": "research-source-check",
       "dok": 3,
       "explain": "The page introduces itself twice, once at its head and again in the corner stamp, and both times the name is the company that sells the beacon.  That matters, because the same page then offers that company's own test as proof.  The date is a separate cost: a result a reader cannot date is a result that cannot be lined up against anything measured since.",
-      "whyTheFigureIsNeeded": "The prose states the publisher and the missing date as facts in a sentence, and only the drawing shows the page introducing itself twice, in its head and again in a corner stamp, with its date line filled by the words no date anywhere on the page rather than standing empty."
+      "whyTheFigureIsNeeded": "The prose states the publisher and the missing date as facts in its opening paragraph, and only the drawing shows the page introducing itself twice, in its head and again in a corner stamp, with its date line filled by the words no date anywhere on the page rather than standing empty."
     },
     {
       "id": "l5-mc-two-limestone-tunnels",
@@ -5482,7 +5482,7 @@
       "coachTopic": "evidence-from-sources",
       "dok": 3,
       "explain": "The memo has two things to say under each climate, a temperature and a runtime, and every statement worth choosing pairs one with the other.  Twenty-six days belongs with the fifties, nineteen days with the heat above ninety degrees, and the shortest runtime of all with the freezing mountain.  The wrong choices each deny something the memo gives: that the runtimes differ, that one tag ran in all three tests, and that heat cost the tag time rather than winning it time.",
-      "whyTheFigureIsNeeded": "Each correct statement is a pairing of a temperature with the runtime measured at it, and the memo is the only place those two sit in the same column; the article puts each temperature and its runtime in separate sentences and then spends the rest of the article on why, so the pairings have to be reassembled from prose rather than read off."
+      "whyTheFigureIsNeeded": "Each correct statement is a pairing of a temperature with the runtime measured at it, and the memo is the only place those two sit in the same column; the article puts each temperature and its runtime in separate sentences and then spends its remaining paragraphs on how to read the three together, so the pairings have to be reassembled from prose rather than read off."
     },
     {
       "id": "l5-order-longest-hold-to-shortest",
@@ -5490,7 +5490,7 @@
       "passageId": "p-three-tunnels",
       "figureId": "fig-l5-three-tunnels",
       "figureFact": "fifty-one minutes",
-      "stem": "The memo's result row gives fifty-one minutes under one of the tunnels.  Read that row across and put the three tunnels in order of how long the beacon held, from the longest hold down to the shortest.",
+      "stem": "The memo's result row gives fifty-one minutes under one of the tunnels.  Read that row across, then use what the article says about the first tunnel, and put the three tunnels in order of how long the beacon held, from the longest hold down to the shortest.",
       "tiles": [
         "the first tunnel",
         "the second tunnel",
@@ -5507,7 +5507,7 @@
       "coachTopic": "evidence-from-sources",
       "dok": 3,
       "explain": "The memo names the tunnels first, second, and third, and that is not the order of the results.  The first tunnel is the one where the beacon ran the full life of the battery, and the article says it beat the second by more than an hour, so its hold is the longest.  The third tunnel's fifty-one minutes comes next, and the second tunnel's eight minutes is last.  Taking the printed order for the ranking is the mistake this item is built on.",
-      "whyTheFigureIsNeeded": "The article never ranks the three holds; it reports each one inside its own tunnel's sentences, separated by depths, a bend measurement and a reference to the Halloway log.  The memo is the only place the three results stand in one line under headings that can be ordered, so the ranking has to be read across the table."
+      "whyTheFigureIsNeeded": "The article ranks only the first hold against the second and never puts all three in one order; it reports each one inside its own tunnel's sentences, separated by depths, a bend measurement and a reference to the Halloway log.  The memo is the only place the three results stand in one line under headings that can be ordered, so the table fixes the bottom two and the article settles the first."
     },
     {
       "id": "l5-cloze-temperatures-and-runtime",
@@ -5564,10 +5564,10 @@
       "distractorRationale": {
         "0": "The hiss is the sound the set makes when it is working and nobody is talking.  The narrator says the frightening version is silence with no hiss underneath it, which is the opposite of what this minute gave her.",
         "1": "The rule lane holds what was supposed to happen, not a record that it did.  The only check-in she ever logs is the two clicks, and those land at ten twenty-two and eleven seconds, which she calls late.",
-        "3": "Her thumb goes on the transmit key at ten twenty-one and comes straight off again, and the clicks arrive before she decides.  The abort sits on the rule lane because the rule named it, not because she did it."
+        "3": "Her thumb goes on the transmit key at ten twenty-one and comes straight off again, so nothing is ever sent.  The abort sits on the rule lane because the rule named it, not because she did it."
       },
       "explain": "The two lanes do different jobs.  One holds what the plan said would happen, and the other holds what the narrator actually wrote down.  Set side by side at ten twenty, the plan's check-in has nothing on the radio but the hiss underneath it, and that gap is what she is sitting in when she puts her thumb on the key.  The hiss is not bad news, because it is the sound of a working set with nobody talking, and the narrator calls it the only comfort in this job.  What keeps her from calling the exercise off is her own list, read down in order.",
-      "whyTheFigureIsNeeded": "The passage tells the rule and the narrator's own record as one continuous voice, so a reader cannot separate them; only the drawing splits them into two lanes and shows that the check-in the rule demanded and the hiss she actually logged are the same minute, one entry per lane."
+      "whyTheFigureIsNeeded": "The passage gives both moments as ten twenty but never says they are the same moment; the drawing is what puts one entry per lane on a single vertical, so the demand and the hiss stand as one minute rather than two sentences a paragraph apart."
     },
     {
       "id": "l6-mc-reading-the-runtime-row",
@@ -5626,7 +5626,7 @@
           "key": 0
         }
       ],
-      "explain": "The article gives the three moves as a numbered list and then switches to plain paragraphs for the counting rule and the last rule, so a reader can easily take those last two as separate advice.  The drawing does not allow that reading, because it sets all six stops on one numbered line, with three sightings in three unrelated places at four, the run is over at five, and buys a carton of milk, goes home at six.  Seen that way, going home is not the run breaking down.  The run is walked to make a follower show themselves, and stops five and six are what the article says to do once one has.",
+      "explain": "The article names its three moves first, second and third and then switches to plain paragraphs for the counting rule and the last rule, so a reader can easily take those last two as separate advice.  The drawing does not allow that reading, because it sets all six stops on one numbered line, with three sightings in three unrelated places at four, the run is over at five, and buys a carton of milk, goes home at six.  Seen that way, going home is not the run breaking down.  The run is walked to make a follower show themselves, and stops five and six are what the article says to do once one has.",
       "whyTheFigureIsNeeded": "The article numbers only its first, second and third move and then drops into prose, so nothing in the text says the counting rule's verdict is stop four or that going home is stop six; only the drawing's numbered key puts all six on one line and makes them steps of a single run."
     },
     {
@@ -6278,7 +6278,7 @@
       "src": "art/ela-g6-spy/fig-l5-three-climates.svg",
       "caption": "The same tracking tag ran in three climates, and the table sets the temperature of each one beside its runtime, from twenty-six days down to just under three days.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A memo card headed The tag did not change, with a three-column table giving temperatures and runtime for the mild coastal, desert and freezing mountain tests.",
+      "alt": "A memo card headed The tag did not change, with the line a number describes one climate, not every climate above a three-column table giving temperatures and runtime for the mild coastal, desert and freezing mountain tests.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-three-climates",
