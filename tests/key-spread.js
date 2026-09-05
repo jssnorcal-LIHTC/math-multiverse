@@ -64,15 +64,32 @@ function spreadOf(items) {
   return out;
 }
 
-// The offence: a position holding more than an even share plus the slack.
+// The offence: a position holding more than an even share plus the slack -- OR FEWER THAN AN EVEN
+// SHARE MINUS IT.
+//
+// WHY THERE IS A FLOOR, added 26-0905.  The first version of this gate had a ceiling only, and a
+// ceiling-only gate cannot see the over-correction it causes.  The Vault C-wave was authored under a
+// brief that quoted this gate, and it came back with NINE mc keys at positions {1:4, 2:1, 3:4} and
+// TEN cloze blanks at {1:5, 2:5}: not one key at A, and not one cloze key at index 0.  The gate was
+// green.  "The answer is never the first option" is exactly as learnable as "the answer is always
+// the first option", and a child who eliminates A on sight is reading the test rather than the
+// drawing -- the very thing this file exists to stop.  Under a uniform draw that pair of holes has
+// probability 0.0013, so it was the brief's doing, not chance.
+//
+// The floor is the ceiling's mirror and it degrades safely: with fewer slots than positions,
+// floor(even) - SLACK goes to zero or below and nothing can be flagged, so a short wave is never
+// punished for a hole it had no room to fill.  Checked against the two shipped packs before it
+// landed: Cold Signal mc {0:2,1:2,2:2,3:1} and cloze {0:4,1:4,2:4}, and night-rounds, all clear.
 function offenders(bucket) {
   const bad = [];
   if (!bucket.slots || !bucket.width) return bad;
   const even = bucket.slots / bucket.width;
   const ceiling = Math.ceil(even) + SLACK;
+  const floorN = Math.max(0, Math.floor(even) - SLACK);
   for (let p = 0; p < bucket.width; p++) {
     const c = bucket.counts[p] || 0;
-    if (c > ceiling) bad.push({ pos: p, count: c, ceiling, even: +even.toFixed(2) });
+    if (c > ceiling) bad.push({ pos: p, count: c, ceiling, even: +even.toFixed(2), how: 'over' });
+    else if (c < floorN) bad.push({ pos: p, count: c, floor: floorN, even: +even.toFixed(2), how: 'under' });
   }
   return bad;
 }
@@ -107,9 +124,14 @@ for (const f of files) {
       packN: whole[type].n,
     });
     for (const o of offenders(g)) {
-      problems.push(`${id} ${type}: position ${o.pos} holds ${o.count} of ${g.slots} keyed slot(s), over the `
-        + `${o.ceiling} an even share of ${o.even} allows.  The answer's POSITION is an answer.  `
-        + `Spread the keys and re-run the blind pass for every item you move.`);
+      problems.push(o.how === 'over'
+        ? `${id} ${type}: position ${o.pos} holds ${o.count} of ${g.slots} keyed slot(s), over the `
+          + `${o.ceiling} an even share of ${o.even} allows.  The answer's POSITION is an answer.  `
+          + `Spread the keys and re-run the blind pass for every item you move.`
+        : `${id} ${type}: position ${o.pos} holds only ${o.count} of ${g.slots} keyed slot(s), under `
+          + `the ${o.floor} an even share of ${o.even} requires.  A position the answer NEVER takes is `
+          + `as learnable as one it always takes.  Spread the keys and re-run the blind pass for `
+          + `every item you move.`);
     }
   }
 }
@@ -142,6 +164,30 @@ const controls = [];
     name: 'POSITIVE: the spread that replaced it goes green',
     ok: stillBad.length === 0,
     detail: stillBad.length ? `still red on ${stillBad.join(', ')}` : 'green on all three types',
+  });
+
+  // NEGATIVE CONTROL FOR THE FLOOR, on the real numbers that exposed the gap: the Vault C-wave as
+  // its authors first returned it, 9 mc keys and 10 cloze blanks with position 0 empty in both.
+  // This passed the ceiling-only version of this gate.
+  const holed = [
+    ...[1, 1, 1, 1, 2, 3, 3, 3, 3].map((k) => ({ type: 'mc', key: k, choices: [1, 2, 3, 4] })),
+    ...[[1, 2], [1, 2], [1, 2], [1, 2], [1, 2]].map((ks) => ({ type: 'cloze', blanks: ks.map((k) => ({ key: k, choices: [1, 2, 3] })) })),
+  ];
+  const h = spreadOf(holed);
+  const holeBad = ['mc', 'cloze'].filter((t) => offenders(h[t]).some((o) => o.how === 'under'));
+  controls.push({
+    name: 'NEGATIVE: a position the answer NEVER takes goes red',
+    ok: holeBad.length === 2,
+    detail: `under-flagged on ${holeBad.join(', ') || 'nothing'};  mc ${JSON.stringify(h.mc.counts)}, cloze ${JSON.stringify(h.cloze.counts)}`,
+  });
+
+  // CONTROL: a wave too short to fill every position must NOT be flagged for the holes it had no
+  // room to fill, or the floor would punish every small wave.
+  const tiny = spreadOf([{ type: 'mc', key: 0, choices: [1, 2, 3, 4] }, { type: 'mc', key: 2, choices: [1, 2, 3, 4] }]);
+  controls.push({
+    name: 'CONTROL: two items over four positions are NOT flagged for the two they cannot fill',
+    ok: offenders(tiny.mc).length === 0,
+    detail: JSON.stringify(tiny.mc.counts),
   });
 
   // A gate that cannot see a single-position pack is not measuring position at all.
