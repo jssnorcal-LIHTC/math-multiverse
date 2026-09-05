@@ -5125,14 +5125,14 @@
       "dok": 3,
       "stem": "The yard plan marks a spot for all three tortoises.  What does it show about the two the keepers actually found?",
       "choices": [
-        "Ada and Salt are drawn on the far side of the yard from the mouth of a burrow",
         "Ada and Salt are drawn right beside the burrow mouth, close enough to touch it",
+        "Ada and Salt are drawn on the far side of the yard from the mouth of a burrow",
         "Ada is drawn against the north wall and Salt underneath the feeding shelf",
         "All three tortoises are drawn together in the eastern corner of the yard"
       ],
-      "key": 0,
+      "key": 1,
       "distractorRationale": {
-        "1": "The plan puts both of them across the yard from the burrow, at the feeding shelf and the north wall.",
+        "0": "The plan puts both of them across the yard from the burrow, at the feeding shelf and the north wall.",
         "2": "That reverses the two finds.  Salt was pressed against the north wall, and Ada was underneath the feeding shelf.",
         "3": "Juniper is not with them anywhere;  she was nowhere at all during the search, and the plan draws her alone at the corner."
       },
@@ -5224,14 +5224,14 @@
       "stem": "The card's tally strip prints its three columns side by side.  What does reading across them show?",
       "choices": [
         "The strip covers three days of feeding rather than fourteen",
-        "Every one of the twenty-eight fish squares is initialed, and the supplement column beside them carries initials on three days",
         "The fish squares and the supplement column carry the same number of initials",
+        "Every one of the twenty-eight fish squares is initialed, and the supplement column beside them carries initials on three days",
         "Three of the twenty-eight fish squares were left blank"
       ],
-      "key": 1,
+      "key": 2,
       "distractorRationale": {
         "0": "The first column of the strip is fourteen days of feeding;  three is what the supplement column adds up to.",
-        "2": "Twenty-eight initials sit in the fish squares column and three in the supplement column, which is why the card prints them together.",
+        "1": "Twenty-eight initials sit in the fish squares column and three in the supplement column, which is why the card prints them together.",
         "3": "The narrator says every one of the twenty-eight fish squares was initialed;  the blanks are all in the supplement column."
       },
       "explain": "Set side by side, the three columns say one thing.  Fourteen days produced twenty-eight initialed fish squares, and the supplement column beside them carries initials on three days.  The wrong answers move the blanks into the fish grid, flatten two very different counts into one, or shrink fourteen days of feeding down to three.",
@@ -5277,7 +5277,7 @@
       ],
       "coachTopic": "structure-text",
       "dok": 3,
-      "stem": "Finish the reading of the card.  Its heading gives two feeds daily, 7:00 and 15:30, and the tally strip below counts fourteen days.  The twenty-eight fish squares therefore mean {{0}}, and a blank in the supplement column means {{1}}.",
+      "stem": "Finish the reading of the card.  Its heading gives two feeds daily, 7:00 and 15:30, and the tally strip below counts fourteen days.  The twenty-eight fish squares therefore mean {{0}}.  A blank in the supplement column means {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -5289,11 +5289,11 @@
         },
         {
           "choices": [
-            "the thiamine tablet was not initialed that day",
             "no fish was fed at either feed that day",
+            "the thiamine tablet was not initialed that day",
             "a second keeper did not watch the feeding"
           ],
-          "key": 0
+          "key": 1
         }
       ],
       "explain": "The heading and the tally strip only make sense read together.  Two feeds a day across fourteen days is twenty-eight feeds, which is exactly the number of fish squares on the strip.  The third column on the strip is headed supplement column, so a blank there means the tablet went uninitialed, and says nothing at all about the fish.",
@@ -5382,15 +5382,15 @@
       "dok": 2,
       "choices": [
         "The stretch of the night when the recorder was switched off",
-        "A gap of some forty minutes between the last gate log entry and the first low call",
         "The stretch in which the three low calls were logged",
-        "The forty-one minutes of usable audio the reviewer kept"
+        "The forty-one minutes of usable audio the reviewer kept",
+        "A gap of some forty minutes between the last gate log entry and the first low call"
       ],
-      "key": 1,
+      "key": 3,
       "distractorRationale": {
         "0": "The recorder runs from sunset until midnight;  what stops at 8:22 is the gate log, not the recording.",
-        "2": "The first low call sits at the band's right edge, at 9:04, and the other two beyond it, at 9:07 and 9:12.",
-        "3": "The forty-one minutes usable is a total gathered across all four hours, not one unbroken stretch of clock."
+        "1": "The first low call sits at the band's right edge, at 9:04, and the other two beyond it, at 9:07 and 9:12.",
+        "2": "The forty-one minutes usable is a total gathered across all four hours, not one unbroken stretch of clock."
       },
       "explain": "The band runs from 8:22 to 9:04, from the gate log's last entry to the summary's first low call.  Its label reads some forty minutes.  That gap is what the two records together establish: the lot was chained and empty well before the sound was recorded.  Each wrong answer drops something into the band.  The recorder ran from sunset until midnight, the first low call sits at the band's right edge and the other two beyond it, and the forty-one minutes of usable audio is a total spread across four hours.",
       "whyTheFigureIsNeeded": "The hatched band exists only in the drawing, where its position between the last gate log mark and the first low call is what carries the forty-minute gap;  the passage mentions forty minutes as a closing remark and never as a place on the clock."
@@ -5412,18 +5412,18 @@
         {
           "choices": [
             "gives the only clock hour on the page",
-            "gives no clock hour at all, only after dark",
-            "gives the same hour as the column beside it"
+            "gives the same hour as the column beside it",
+            "gives no clock hour at all, only after dark"
           ],
-          "key": 1
+          "key": 2
         },
         {
           "choices": [
-            "Cleo Fontaine",
             "Wes Tanaka",
+            "Cleo Fontaine",
             "Ruth Bellweather"
           ],
-          "key": 1
+          "key": 0
         }
       ],
       "explain": "The time row reads after eight, closer to nine, and after dark, so two columns name an hour and one does not.  Ruth Bellweather's is the column with no hour in it.  The bottom row reads a full day later, the same night, and Thursday morning, so only Wes Tanaka wrote anything down while the evening was still going.  Cleo Fontaine spoke a full day later and Ruth Bellweather telephoned the next morning, both of them working from memory.",
@@ -5443,15 +5443,15 @@
       "dok": 2,
       "stem": "The chart draws four of the night's gust numbers as bars that climb from left to right.  Between which two of them does the chart show the biggest rise?",
       "choices": [
+        "From eight o'clock to nine o'clock",
         "From seven o'clock to eight o'clock",
         "From nine o'clock to the peak reading at 9:20 p.m.",
-        "From eight o'clock to nine o'clock",
         "The bars rise by the same amount every time"
       ],
-      "key": 2,
+      "key": 0,
       "distractorRationale": {
-        "0": "Those two bar tops sit closest together on the grid, twenty-four then thirty-one, which is the smallest step among the four bars rather than the biggest.",
-        "1": "That last step runs from forty-four up to the peak of fifty-two, eight miles an hour, so it is smaller than the step before it.",
+        "1": "Those two bar tops sit closest together on the grid, twenty-four then thirty-one, which is the smallest step among the four bars rather than the biggest.",
+        "2": "That last step runs from forty-four up to the peak of fifty-two, eight miles an hour, so it is smaller than the step before it.",
         "3": "The four bar tops are not evenly spaced;  the four bars climb by seven, then thirteen, then eight."
       },
       "explain": "Reading the bar tops against the scale gives twenty-four, thirty-one, forty-four and then the peak of fifty-two.  The widest gap between two neighboring bars is the thirteen miles an hour from eight o'clock to nine o'clock.  The wrong answers pick the smallest step, the last step, or assume an even climb the grid never shows.",
@@ -5473,19 +5473,19 @@
       "blanks": [
         {
           "choices": [
-            "passes it",
             "falls just short of it",
+            "passes it",
             "matches it exactly"
           ],
-          "key": 0
+          "key": 1
         },
         {
           "choices": [
-            "9:20 p.m.",
             "nine o'clock",
-            "seven o'clock"
+            "seven o'clock",
+            "9:20 p.m."
           ],
-          "key": 0
+          "key": 2
         }
       ],
       "explain": "The note gives 50 miles an hour.  The tallest bar on the chart is the reading taken at 9:20 p.m., and the caption gives it as the peak of 52, so it passes that figure rather than meeting or missing it.",
@@ -5603,15 +5603,15 @@
       "dok": 3,
       "stem": "What does the transfer slip show about the keeper who found the heron?",
       "choices": [
-        "The slip does not name the finder: the row reading the name of the keeper who found the bird has nothing after it",
         "The slip enters the keeper's name just under the condition row",
         "The slip carries the keeper's signature next to Alva's",
+        "The slip does not name the finder: the row reading the name of the keeper who found the bird has nothing after it",
         "The slip lists the keeper in the same block as Whitlock"
       ],
-      "key": 0,
+      "key": 2,
       "distractorRationale": {
-        "1": "That is where the keeper's row sits, and the row is printed with its label and left with nothing after it.",
-        "2": "Whitlock signed it and Alva signed it;  the keeper only carried the carbon copy back to the binder.",
+        "0": "That is where the keeper's row sits, and the row is printed with its label and left with nothing after it.",
+        "1": "Whitlock signed it and Alva signed it;  the keeper only carried the carbon copy back to the binder.",
         "3": "Whitlock's name sits in the signature block, which is a separate part of the slip from the row for the keeper who found the bird."
       },
       "explain": "Every other row on the slip is filled in.  The time reads 8:40, the place reads thirty feet out in the shallow water, and the species and the condition are both written down.  The one row left empty is the row for the keeper who found the bird, so the last thing this file will ever say about the heron does not say who found her.  Each wrong answer borrows a name from the signature block or puts one on a row the slip leaves alone.",
@@ -5672,11 +5672,11 @@
         },
         {
           "choices": [
-            "who found the heron",
             "where the heron was standing",
+            "who found the heron",
             "what the heron's condition was"
           ],
-          "key": 0
+          "key": 1
         }
       ],
       "explain": "Two names are written on the slip, and both of them are signatures.  The row above them is printed for the keeper who found the bird, and it is left with nothing after it, so the file closes without ever saying who found her.  The place is on the slip, thirty feet out in the shallow water, and so is the condition, one wing carried wrong;  the finder is the one thing the form asks for and does not get.  The heron is entered as a species rather than by a name.",
@@ -5719,15 +5719,15 @@
       "stem": "The timeline draws one dot as a dashed circle with a question mark.  Which entry does the timeline place immediately after it?",
       "choices": [
         "The heron reported down in the marsh",
-        "The last visitor vehicle out",
         "The transfer slip signed at the maintenance gate",
-        "The pedestrian gate pinned and initialed"
+        "The pedestrian gate pinned and initialed",
+        "The last visitor vehicle out"
       ],
-      "key": 1,
+      "key": 3,
       "distractorRationale": {
         "0": "The heron report comes at 7:15, and the timeline sets it before the dashed dot rather than after it.",
-        "2": "The slip is signed at 8:40, an hour later;  it is the record the remembered time disagrees with, not the next dot along.",
-        "3": "The pedestrian gate is pinned at 7:44, which the timeline places one dot further on than the answer."
+        "1": "The slip is signed at 8:40, an hour later;  it is the record the remembered time disagrees with, not the next dot along.",
+        "2": "The pedestrian gate is pinned at 7:44, which the timeline places one dot further on than the answer."
       },
       "targets": [
         "c4-3-analyze-sources",
@@ -5746,14 +5746,14 @@
       "figureFact": "not a failure of upkeep",
       "stem": "Two boxes sit one above the other with no arrow between them.  Which two?",
       "choices": [
-        "The box reading \"a willow limb came down across Fence Nine\" and the box reading \"not a failure of upkeep\"",
         "The box reading \"not a failure of upkeep\" and the box reading \"the north service gate was found standing open\"",
+        "The box reading \"a willow limb came down across Fence Nine\" and the box reading \"not a failure of upkeep\"",
         "The box reading \"the north service gate was found standing open\" and the box reading \"a failure of procedure\"",
         "The box reading \"a failure of procedure\" and the box reading \"written down by the people it went wrong for\""
       ],
-      "key": 1,
+      "key": 0,
       "distractorRationale": {
-        "0": "An arrow does join these two: the first finding leads to the conclusion drawn from it.",
+        "1": "An arrow does join these two: the first finding leads to the conclusion drawn from it.",
         "2": "An arrow joins these two as well, carrying the second finding into the conclusion it supports.",
         "3": "An arrow joins these two, running from the conclusion to the last step of the argument."
       },
@@ -5772,15 +5772,15 @@
       "passageId": "p-l6-morning-report",
       "figureId": "fig-l6-morning-report",
       "figureFact": "a failure of procedure",
-      "stem": "Finish the description of the boxes.  The box reading a failure of procedure follows straight from {{0}}, and the arrow out of it runs down to {{1}}.",
+      "stem": "Finish the description of the boxes.  The box reading a failure of procedure follows straight from {{0}}.  The arrow out of it runs down to {{1}}.",
       "blanks": [
         {
           "choices": [
-            "the north service gate found standing open",
             "the willow limb that came down across Fence Nine",
-            "the inspection line dated the twelfth of May"
+            "the inspection line dated the twelfth of May",
+            "the north service gate found standing open"
           ],
-          "key": 0
+          "key": 2
         },
         {
           "choices": [
@@ -5954,7 +5954,7 @@
             "text": "two hundred grams of whole rainbow trout"
           },
           {
-            "text": "Thiamine supplement, one tablet",
+            "text": "Thiamine supplement, one tablet,",
             "emphasis": "box"
           },
           {

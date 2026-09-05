@@ -361,6 +361,43 @@ function checkFigure(where, fig, passages, itemsByFigure, packDir) {
     });
   });
 
+  // ---- rule 1b: A RUN OF BOXED LINES IS ONE QUOTATION, so it must be verbatim when JOINED ----
+  //
+  // Rule 1 checks each transcribed string on its own, and two lines that are each verbatim can still
+  // MISQUOTE when read together. The beacon brief shipped "In testing, the Wren-7 held a clear
+  // signal" over "forty feet of stone for the full ninety minutes" with the passage's "through"
+  // dropped at the line break, green the whole way, inside the one box the item tells a reader to
+  // stop and read. Fixing that one by hand missed its twin: the Petrel brief dropped "for", and the
+  // Night Rounds diet card dropped a comma. Three of the three multi-line boxed runs in the repo
+  // were wrong, and nothing could see it.
+  //
+  // BOXED runs only, and that is the whole distinction: build/figure-gen-docs.js draws a run of
+  // consecutive `emphasis: "box"` lines as ONE outline, so a reader takes them as one continuous
+  // sentence. Consecutive UNDERLINED lines each get their own rule, so they read as separate marks
+  // and are legitimately two different quoted sentences -- measured in this repo, the underline runs
+  // sit 11 to 46 characters apart in their passages with a sentence boundary between them, while
+  // every boxed run is a single sentence broken for width.
+  (() => {
+    const lines = Array.isArray(dt.lines) ? dt.lines : [];
+    let i = 0;
+    while (i < lines.length) {
+      const em = lines[i] && lines[i].emphasis;
+      let j = i;
+      while (j + 1 < lines.length && lines[j + 1] && lines[j + 1].emphasis === em
+             && typeof lines[j + 1].text === 'string') j++;
+      if (em === 'box' && j > i && lines.slice(i, j + 1).every((l) => typeof l.text === 'string')) {
+        const joined = lines.slice(i, j + 1).map((l) => l.text).join(' ');
+        if (hay.indexOf(norm(joined)) === -1) {
+          fail(`${where}: figure "${fig.id}" draws lines ${i}..${j} inside ONE box, so they read as one `
+            + `sentence, and joined they are NOT verbatim in passage "${spid}": ${JSON.stringify(joined)}. `
+            + 'The box is breaking a quotation and dropping the words at the break; extend the earlier '
+            + 'line to carry them.');
+        }
+      }
+      i = j + 1;
+    }
+  })();
+
   // ---- part 2: the committed drawing actually carries what the table says ----
   const srcAbs = path.join(REPO_ROOT, fig.src || '');
   if (!fig.src || !fs.existsSync(srcAbs)) {
