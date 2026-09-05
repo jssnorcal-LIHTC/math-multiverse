@@ -5027,7 +5027,7 @@
       "src": "art/ela-g6-spy/fig-l2-dead-air.svg",
       "caption": "A relay parked just inside the entrance hears the team below and passes the message up to the surface crew, because the deeper a team goes, the less of the signal survives.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A plan diagram in two columns: on the left, boxes reading the team below, just inside the entrance, and the surface crew are joined by arrows pointing upward; on the right, thirty feet of granite sits above the deeper a team goes, with an arrow running down to the less of the signal survives.",
+      "alt": "A plan diagram in two columns: on the left, boxes reading the team below, just inside the entrance, and the surface crew are joined by arrows pointing upward; on the right, an arrow runs down from the deeper a team goes to thirty feet of granite and on to the less of the signal survives.",
       "dataTable": {
         "type": "schematic",
         "sourcePassageId": "p-dead-air",
@@ -5060,14 +5060,14 @@
             "label": "thirty feet of granite",
             "shape": "box",
             "x": 79,
-            "y": 8
+            "y": 45
           },
           {
             "id": "deeper",
             "label": "the deeper a team goes",
             "shape": "box",
             "x": 79,
-            "y": 45
+            "y": 8
           },
           {
             "id": "loss",
@@ -5089,12 +5089,12 @@
             "style": "arrow"
           },
           {
-            "from": "rock",
-            "to": "deeper",
-            "style": "line"
+            "from": "deeper",
+            "to": "rock",
+            "style": "arrow"
           },
           {
-            "from": "deeper",
+            "from": "rock",
             "to": "loss",
             "style": "arrow"
           }
@@ -5236,7 +5236,7 @@
       "src": "art/ela-g6-spy/fig-l4-beacon-brief.svg",
       "caption": "Corvid Systems states its forty feet and ninety minutes up front, then sets the small print apart at the foot of the page.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A document card headed the Wren-7 locator beacon, with a boxed line about forty feet of stone and ninety minutes above the underlined small-print lines, stamped Corvid Systems.",
+      "alt": "A document card headed the Wren-7 locator beacon, with the testing claim about forty feet of stone and ninety minutes boxed whole, above the underlined small print, stamped Corvid Systems.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-beacon-brief",
@@ -5258,7 +5258,8 @@
         ],
         "lines": [
           {
-            "text": "In testing, the Wren-7 held a clear signal"
+            "text": "In testing, the Wren-7 held a clear signal",
+            "emphasis": "box"
           },
           {
             "text": "forty feet of stone for the full ninety minutes",
@@ -5268,7 +5269,7 @@
             "text": "The signal never once dropped below the level"
           },
           {
-            "text": "one line of small print along the bottom"
+            "text": "small print along the bottom of the page"
           },
           {
             "text": "test results depend on local conditions",
@@ -5352,7 +5353,7 @@
       "src": "art/ela-g6-spy/fig-l4-petrel-brief.svg",
       "caption": "Corvid Systems prints thirty days straight as its headline, and puts the seventy degrees the test ran at down in the small print.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A document card headed the Petrel-4 tracking tag, with thirty days straight boxed near the top and two underlined small-print lines about seventy degrees below.",
+      "alt": "A document card headed the Petrel-4 tracking tag, with the claim about thirty days straight boxed whole near the top and the underlined small print about seventy degrees below.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-petrel-brief",
@@ -5374,7 +5375,8 @@
         ],
         "lines": [
           {
-            "text": "a fully charged Petrel-4 held a working fix"
+            "text": "a fully charged Petrel-4 held a working fix",
+            "emphasis": "box"
           },
           {
             "text": "thirty days straight",
@@ -5384,7 +5386,7 @@
             "text": "reported its position on schedule every single time"
           },
           {
-            "text": "one line of small print beneath the order form"
+            "text": "small print beneath the order form"
           },
           {
             "text": "measured at a constant seventy degrees",
@@ -5405,7 +5407,7 @@
       "src": "art/ela-g6-spy/fig-l4-cold-weather-log.svg",
       "caption": "In the cold, two of the four tags went silent at about sixty hours, and the longest one stopped just past sixty-eight.  This log is not published anywhere either.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A log card showing the trip temperature and a boxed line about a thirty-day battery life, above a two-column table pairing three groups of tags with the hours they lasted.",
+      "alt": "A log card showing the trip temperature and, at its head, the thirty-day battery life the brief claims, above a two-column table pairing three groups of tags with the hours they lasted.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-cold-weather-log",
@@ -5423,12 +5425,10 @@
           {
             "label": "temperature",
             "value": "fifteen and twenty-five degrees"
-          }
-        ],
-        "lines": [
+          },
           {
-            "text": "what the brief calls a thirty-day battery life",
-            "emphasis": "box"
+            "label": "the brief calls",
+            "value": "a thirty-day battery life"
           }
         ],
         "columns": [
@@ -5458,7 +5458,7 @@
       "src": "art/ela-g6-spy/fig-l5-three-tunnels.svg",
       "caption": "Three tunnels ran the same beacon test, and the table sets the rock and the shape of each one beside how long the beacon held, from the full life of the battery to eight minutes.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A memo card headed Three conditions differed, with a boxed line reading the beacon is not the thing that changed above a three-column table giving the rock, the shape and how long the beacon held in each tunnel.",
+      "alt": "A memo card headed Three conditions differed, with the line the beacon is not the thing that changed above a three-column table giving the rock, the shape and how long the beacon held in each tunnel.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-three-tunnels",
@@ -5472,8 +5472,7 @@
         ],
         "lines": [
           {
-            "text": "the beacon is not the thing that changed",
-            "emphasis": "box"
+            "text": "the beacon is not the thing that changed"
           }
         ],
         "columns": [
@@ -5529,8 +5528,7 @@
         ],
         "lines": [
           {
-            "text": "a number describes one climate, not every climate",
-            "emphasis": "box"
+            "text": "a number describes one climate, not every climate"
           }
         ],
         "rowLabels": [
