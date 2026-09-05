@@ -1523,8 +1523,16 @@
       "status": "agree"
     },
     {
+      "itemId": "l1-mc-what-the-run-ends-at",
+      "itemHash": "c2e8ff9edbec541c",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l1-match-stop-to-its-number",
-      "itemHash": "7462935b785d4d43",
+      "itemHash": "1e027dde75c61a32",
       "blind": [
         2,
         0,
@@ -1532,6 +1540,36 @@
       ],
       "authored": [
         2,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ms-what-the-two-lines-show",
+      "itemHash": "6cd4e9d18c22826d",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-cloze-which-line-carries-each-note",
+      "itemHash": "7fbca826e165e838",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
         0,
         1
       ],
@@ -1593,6 +1631,28 @@
       "status": "agree"
     },
     {
+      "itemId": "l3-order-plan-and-real-time-in-one-order",
+      "itemHash": "07e875392e8eaa76",
+      "blind": [
+        2,
+        4,
+        0,
+        5,
+        3,
+        1
+      ],
+      "authored": [
+        2,
+        4,
+        0,
+        5,
+        3,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l3-mc-the-time-on-both-records",
       "itemHash": "bb55235c23998852",
       "blind": 0,
@@ -1631,18 +1691,10 @@
       "status": "agree"
     },
     {
-      "itemId": "l4-match-claim-against-what-was-measured",
-      "itemHash": "6952be7f668bcf16",
-      "blind": [
-        1,
-        0,
-        2
-      ],
-      "authored": [
-        1,
-        0,
-        2
-      ],
+      "itemId": "l4-mc-where-the-condition-sits",
+      "itemHash": "4ccb3fca8056880f",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -1673,6 +1725,14 @@
         0,
         0
       ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-two-limestone-tunnels",
+      "itemHash": "b168b32e1e6fee6d",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -1710,7 +1770,37 @@
     },
     {
       "itemId": "l5-cloze-temperatures-and-runtime",
-      "itemHash": "6217c706dfebc3cd",
+      "itemHash": "3fe59628b1bcce0f",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-rule-lane-against-the-log",
+      "itemHash": "e9e8900d2f6873fc",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-reading-the-runtime-row",
+      "itemHash": "f1015a3d8e04b269",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-cloze-six-stops-one-run",
+      "itemHash": "b6c53f81810629f9",
       "blind": [
         0,
         0
@@ -1739,107 +1829,17 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-mc-what-the-run-ends-at",
-      "itemHash": "c2e8ff9edbec541c",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-ms-what-the-two-lines-show",
-      "itemHash": "6cd4e9d18c22826d",
+      "itemId": "l4-match-claim-against-what-was-measured",
+      "itemHash": "27c73d98bebbc7b3",
       "blind": [
-        0,
         1,
+        0,
         2
       ],
       "authored": [
-        0,
         1,
+        0,
         2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-cloze-which-line-carries-each-note",
-      "itemHash": "7fbca826e165e838",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-order-plan-and-real-time-in-one-order",
-      "itemHash": "07e875392e8eaa76",
-      "blind": [
-        2,
-        4,
-        0,
-        5,
-        3,
-        1
-      ],
-      "authored": [
-        2,
-        4,
-        0,
-        5,
-        3,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-mc-where-the-condition-sits",
-      "itemHash": "4ccb3fca8056880f",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-two-limestone-tunnels",
-      "itemHash": "b168b32e1e6fee6d",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-rule-lane-against-the-log",
-      "itemHash": "afc4117bb97384df",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-reading-the-runtime-row",
-      "itemHash": "f1015a3d8e04b269",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-cloze-six-stops-one-run",
-      "itemHash": "b6c53f81810629f9",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
       ],
       "confidence": "high",
       "status": "agree"

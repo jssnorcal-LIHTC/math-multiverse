@@ -4956,7 +4956,7 @@
       ],
       "coachTopic": "evidence-key-details",
       "dok": 2,
-      "stem": "The drawing numbers every stop on the run in order.  It keeps numbering after the courier's three moves, so the words the run is over get a number of their own.  Match each stop to the number the drawing gives it.",
+      "stem": "The drawing numbers every stop on the run in order.  It keeps numbering after the courier's three moves, and it gives a number to the words the run is over as well.  Match each stop to the number the drawing gives it.",
       "rowLabels": [
         "the run is over",
         "a change of level",
@@ -4981,7 +4981,7 @@
           1
         ]
       ],
-      "explain": "The article puts first, second and third on the courier's moves only, so the counting rule and the last rule can look like notes sitting outside the run.  The drawing puts them on the same numbered line: a change of level is number 3, three sightings in three unrelated places is number 4, and the words the run is over get number 5.  Read the numbers off the line rather than guessing from the order the paragraphs arrive in.",
+      "explain": "The article puts first, second and third on the courier's moves only, so the counting rule and the last rule can look like notes sitting outside the run.  The drawing puts them on the same numbered line: number 3 is a change of level, number 4 is three sightings in three unrelated places, and number 5 is the words the run is over.  Read the numbers off the line rather than guessing from the order the paragraphs arrive in.",
       "whyTheFigureIsNeeded": "The article numbers nothing past the third move, so numbers 4 and 5 exist only on the drawing; a reader cannot say what number three sightings in three unrelated places or the run is over carries without reading the numbered key."
     },
     {
@@ -5298,7 +5298,7 @@
       "passageId": "p-beacon-log",
       "figureId": "fig-l4-beacon-log",
       "figureFact": "ninety minutes",
-      "stem": "The staff log copies the maker's claim of ninety minutes into its own head, then records underneath what the staff themselves measured.  Match each part of the log to the job it does in that comparison.",
+      "stem": "The staff log copies the maker's claim of ninety minutes into its own head.  Underneath it records what the staff timed and what they held steady.  Match each part of the log to the job it does in that comparison.",
       "rowLabels": [
         "The head of the log, where the maker's claim of ninety minutes is written",
         "The times column, nine minutes then seven minutes",
@@ -5515,7 +5515,7 @@
       "passageId": "p-three-climates",
       "figureId": "fig-l5-three-climates",
       "figureFact": "above ninety degrees",
-      "stem": "Finish the reading of the memo.  Its temperatures row runs in the fifties, then above ninety degrees, then freezing, and under those same headings its runtime row runs {{0}}.  Read both rows together and the memo shows that {{1}}.",
+      "stem": "Finish the reading of the memo.  Its temperatures row runs in the fifties, then above ninety degrees, then freezing, and in the same order its runtime row runs {{0}}.  Read both rows together and the memo shows that {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -5557,7 +5557,7 @@
       "choices": [
         "The radio set had failed, so the narrator was learning nothing useful.",
         "Jonah checked in at ten twenty, and the narrator wrote his check-in down.",
-        "The rule expected a check-in at that minute, and the narrator had nothing on the radio but the hiss.",
+        "The rule expected a check-in, and the narrator had nothing on the radio but the hiss.",
         "The narrator called the whole exercise off at ten twenty, before the rule allowed it."
       ],
       "key": 2,
@@ -6118,7 +6118,7 @@
       "src": "art/ela-g6-spy/fig-l4-petrel-brief.svg",
       "caption": "Corvid Systems prints thirty days straight as its headline, and puts the seventy degrees the test ran at down in the small print.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A document card headed the Petrel-4 tracking tag, published by Corvid Systems, carrying a document number and a date line; the claim about thirty days straight is boxed whole above the underlined small print about seventy degrees, and the name Corvid Systems is stamped again in the corner.",
+      "alt": "A document card headed the Petrel-4 tracking tag, published by Corvid Systems, carrying a document number and, on its date line, the words no date anywhere on the page; the claim about thirty days straight is boxed whole above the underlined small print about seventy degrees, and the name Corvid Systems is stamped again in the corner.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-petrel-brief",
