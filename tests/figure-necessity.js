@@ -3,6 +3,7 @@
 //
 //   node tests/figure-necessity.js vault-of-ages-g6
 //   node tests/figure-necessity.js vault-of-ages-g6 --only l1-mc-x,l2-ms-y --concurrency 3
+//   node tests/figure-necessity.js vault-of-ages-g6 --runs 3        <-- see NON-DETERMINISM below
 //
 // WHY THIS EXISTS.
 //
@@ -35,6 +36,24 @@
 // blind-reanswer is not: it shells out to the `claude -p` subscription CLI, dozens of calls per
 // run. It reports. A pack owner decides what to do about a decorative item, because the fix is
 // re-authoring, not a field edit.
+//
+// NON-DETERMINISM, MEASURED, AND IT BOUNDS EVERYTHING BELOW.  The same item, same text, same
+// prompt, run three times, answered RIGHT, RIGHT, wrong -- every one of them at "high" confidence.
+// So a single run per item is a coin with a bias, not a reading, and "high confidence" says nothing
+// about stability.  Consequences, stated rather than buried:
+//
+//   * A one-run pack total carries per-item noise of at least one item in 24, so two totals a few
+//     points apart are the same total.  88% against 83% on the same pack before and after a fix
+//     pass is NOT a demonstrated improvement.
+//   * The cross-pack comparison SURVIVES this, and is in fact strengthened by it: 88 / 92 / 87
+//     across three packs is one spread inside the noise, which is the evidence that the three packs
+//     are indistinguishable and none of them meets the bar.  That was the load-bearing conclusion.
+//   * --runs N re-answers each item N times and reports the split.  An item right in every run is
+//     decorative and an item wrong in every run is load-bearing;  a mixed item is UNSTABLE and is
+//     reported as such rather than rounded into one bucket.
+//
+// Use --runs 3 or more before acting on any single item.  The one-run mode is for a pack-level
+// sketch, and it must be described as one.
 //
 // READING THE RESULT HONESTLY. One model answering one prompt once is evidence, not proof. A single
 // "right without the figure" is a reason to go and look at the item; a wave where most items answer
@@ -111,7 +130,7 @@ async function pool(jobs, n) {
 
 async function main() {
   const packId = process.argv[2];
-  if (!packId) { console.error('usage: node tests/figure-necessity.js <packId> [--only id,id] [--concurrency N]'); process.exit(2); }
+  if (!packId) { console.error('usage: node tests/figure-necessity.js <packId> [--only id,id] [--concurrency N] [--runs N]'); process.exit(2); }
   const packPath = path.join(PACK_DIR, packId + '.json');
   const pack = loadPackFile(packPath);
   const passages = new Map((pack.passages || []).map((p) => [p.id, p]));
@@ -119,6 +138,7 @@ async function main() {
   const only = arg('--only', null);
   const onlySet = only ? new Set(only.split(',').map((s) => s.trim()).filter(Boolean)) : null;
   const concurrency = Math.max(1, parseInt(arg('--concurrency', '3'), 10));
+  const runs = Math.max(1, parseInt(arg('--runs', '1'), 10));
 
   // The wave under test is the figure-stimulus items: the ones that CLAIM the figure is necessary.
   let items = (pack.items || []).filter((it) => it && it.figureFact && it.figureId);
@@ -136,7 +156,11 @@ async function main() {
 
   console.log(`\nfigure-necessity: ${items.length} figure-stimulus item(s) in ${packId}, answered WITHOUT the figure, concurrency ${concurrency}`);
 
-  const rows = await pool(items.map((it) => async () => {
+  // One job per (item, run).  Flattened rather than nested so the concurrency pool stays the only
+  // thing deciding how many CLI calls are in flight.
+  const jobs = [];
+  for (const it of items) for (let k = 0; k < runs; k++) jobs.push({ it, k });
+  const raws = await pool(jobs.map(({ it }) => async () => {
     const passage = passages.get(it.passageId);
     if (!passage) return { id: it.id, error: 'no passage ' + it.passageId };
     // The one line that defines this pass: the same prompt builder, on an item that declares no
@@ -153,16 +177,37 @@ async function main() {
     } catch (e) { return { id: it.id, type: it.type, error: e.message }; }
   }), concurrency);
 
-  const dec = [], load = [], both = [], failed = [];
+  // Fold the runs back together.  An item is DECORATIVE or LOAD-BEARING only if every run agreed;
+  // a split is reported as UNSTABLE rather than rounded into whichever answer happened to win.
+  const byId = new Map();
+  raws.forEach((r, i) => {
+    const it = jobs[i].it;
+    if (!byId.has(it.id)) byId.set(it.id, { id: it.id, type: it.type, rights: 0, wrongs: 0, errors: [], confs: [] });
+    const a = byId.get(it.id);
+    if (r.error) a.errors.push(r.error);
+    else { if (r.right) a.rights++; else a.wrongs++; a.confs.push(r.confidence); }
+  });
+  const rows = [...byId.values()].map((a) => ({
+    id: a.id,
+    type: a.type,
+    rights: a.rights,
+    wrongs: a.wrongs,
+    error: (a.rights + a.wrongs) === 0 ? (a.errors[0] || 'no result') : null,
+    unstable: a.rights > 0 && a.wrongs > 0,
+    right: a.wrongs === 0 && a.rights > 0,
+    confidence: a.confs.length ? (a.confs.every((c) => c === a.confs[0]) ? a.confs[0] : 'mixed') : 'n/a',
+  }));
+
+  const dec = [], load = [], both = [], failed = [], unstable = [];
   console.log('\n  item                                        type   without fig   conf     with fig');
   for (const r of rows) {
     const w = withFig.get(r.id);
     const withStr = !w ? '(no record)' : (w.status === 'agree' ? 'agree' : w.status);
     if (r.error) { failed.push(r); console.log(`  ${r.id.padEnd(42)} ${String(r.type || '').padEnd(6)} ERROR  ${r.error.slice(0, 60)}`); continue; }
-    const verdict = r.right ? 'RIGHT' : 'wrong';
+    const verdict = r.unstable ? `SPLIT ${r.rights}/${r.rights + r.wrongs}` : (r.right ? 'RIGHT' : 'wrong');
     console.log(`  ${r.id.padEnd(42)} ${r.type.padEnd(6)} ${verdict.padEnd(13)} ${String(r.confidence).padEnd(8)} ${withStr}`);
     const withOk = w && (w.status === 'agree' || w.status === 'adjudicated');
-    if (r.right) dec.push(r); else if (withOk) load.push(r); else both.push(r);
+    if (r.unstable) unstable.push(r); else if (r.right) dec.push(r); else if (withOk) load.push(r); else both.push(r);
   }
 
   console.log('\n  DECORATIVE -- answered correctly with the figure withheld, so the passage already');
@@ -174,6 +219,11 @@ async function main() {
   if (!load.length) console.log('    (none)');
   for (const r of load) console.log(`    ${r.id}`);
 
+  if (unstable.length) {
+    console.log('\n  UNSTABLE -- the runs disagreed with each other on identical prompts, so this item');
+    console.log('  has no reading yet.  That is the instrument, not the pack:');
+    for (const r of unstable) console.log(`    ${r.id}  right in ${r.rights} of ${r.rights + r.wrongs} run(s)`);
+  }
   if (both.length) {
     console.log('\n  INCONCLUSIVE -- wrong both ways, so this says nothing about the figure:');
     for (const r of both) console.log(`    ${r.id}`);
@@ -184,8 +234,12 @@ async function main() {
   }
 
   const measured = rows.length - failed.length;
-  console.log(`\n  measured ${measured} of ${rows.length};  decorative ${dec.length}, load-bearing ${load.length}`
-    + `, inconclusive ${both.length}${measured ? `  (${Math.round(100 * dec.length / measured)}% decorative)` : ''}`);
+  console.log(`\n  measured ${measured} of ${rows.length} over ${runs} run(s) each;  decorative ${dec.length}, `
+    + `load-bearing ${load.length}, unstable ${unstable.length}, inconclusive ${both.length}`
+    + `${measured ? `  (${Math.round(100 * dec.length / measured)}% decorative)` : ''}`);
+  if (runs > 1 && unstable.length) {
+    console.log(`  ${unstable.length} item(s) answered differently across identical prompts.  That is the instrument.`);
+  }
   console.log('\n  A "decorative" row is a reason to go and read the item, not a verdict on it: this pass');
   console.log('  can only UNDER-report, since a model answering from the passage proves the passage');
   console.log('  suffices, while a model that fails may simply have failed.');
