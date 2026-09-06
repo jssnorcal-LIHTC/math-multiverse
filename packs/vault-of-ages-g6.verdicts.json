@@ -1567,51 +1567,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-order-wyrdstone-record-run",
-      "itemHash": "101a6ab113066aa8",
-      "blind": [
-        2,
-        3,
-        0,
-        1
-      ],
-      "authored": [
-        2,
-        3,
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-mc-three-realms-ruler-row",
-      "itemHash": "0633fcd9578211c3",
-      "blind": 1,
-      "authored": 0,
-      "confidence": "high",
-      "status": "adjudicated",
-      "adjudicatedBy": "Claude Opus 5 (1M context), session 01P5YjbV4jr2q1KsXRwqEsqc",
-      "adjudicatedAt": "2026-09-05",
-      "note": "The authored key stands and the blind answer is wrong on the committed evidence. The dataTable row \"a ruler\" holds \"The kingdom has a ruler\" under The Greek, \"ruled by a figure\" under The Norse, and an empty string under The Egyptian, so the Egyptian column is the one that gives nothing. The drawing says the same thing and says it more plainly than the JSON does: in fig-l2-three-realms.svg every row places its cells at x=78, 239, 400 and 561, and the \"a ruler\" row at y=342 carries text at 239 and 561 and NOTHING at 400, directly under the heading \"The Egyptian\" which itself sits at x=400. No cell shifted to fill the blank. The blind pass reads the dataTable JSON rather than the picture, and the likely error is an off-by-one across the leading row-label column \"three traditions\", which would align the heading The Greek with the Egyptian column data. A child sees the aligned drawing, not the JSON, so the ambiguity the blind pass is built to detect is not present. The item rebuts the blind answer in its own distractorRationale for that choice: \"The Greek column does fill that row in: it reads The kingdom has a ruler.\" The key and every rationale index were re-derived from text identity during the key-spread re-key and were re-checked here: the key carries no rationale and each distractor rationale matches its own choice text."
-    },
-    {
-      "itemId": "l2-ms-wyrdstone-shaded-stretch",
-      "itemHash": "fd2a779063f739ee",
-      "blind": [
-        0,
-        2,
-        5
-      ],
-      "authored": [
-        0,
-        2,
-        5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l2-cloze-threadglass-card-headings",
       "itemHash": "f590de4f37f631eb",
       "blind": [
@@ -1622,34 +1577,6 @@
         1,
         0
       ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-order-log-with-the-unseen-minutes",
-      "itemHash": "b412faec304882d9",
-      "blind": [
-        3,
-        4,
-        1,
-        0,
-        2
-      ],
-      "authored": [
-        3,
-        4,
-        1,
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-mc-where-the-flicker-sits",
-      "itemHash": "1ad630a96cf63309",
-      "blind": 2,
-      "authored": 2,
       "confidence": "high",
       "status": "agree"
     },
@@ -1665,20 +1592,6 @@
         0,
         2,
         4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-cloze-row-against-row",
-      "itemHash": "06b07c12ef5744c2",
-      "blind": [
-        2,
-        1
-      ],
-      "authored": [
-        2,
-        1
       ],
       "confidence": "high",
       "status": "agree"
@@ -1758,14 +1671,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-mc-what-both-arrows-end-at",
-      "itemHash": "a2dd626926b3bc3e",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l5-cloze-plain-line-to-the-panel",
       "itemHash": "11c7e34a343aa2f4",
       "blind": [
@@ -1794,6 +1699,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l6-mc-ledger-card-who-kept-it",
+      "itemHash": "6a479607d77c7492",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-ms-memo-row-questions",
       "itemHash": "3c16509fde3dba1a",
       "blind": [
@@ -1818,10 +1731,97 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-ledger-card-who-kept-it",
-      "itemHash": "6a479607d77c7492",
+      "itemId": "l2-order-wyrdstone-record-run",
+      "itemHash": "fcbb10e443eb4d20",
+      "blind": [
+        2,
+        3,
+        0,
+        1
+      ],
+      "authored": [
+        2,
+        3,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-three-realms-ruler-row",
+      "itemHash": "1dae45cea389cfdb",
       "blind": 1,
-      "authored": 1,
+      "authored": 0,
+      "confidence": "high",
+      "status": "adjudicated",
+      "adjudicatedBy": "Claude Opus 5 (1M context), session 01P5YjbV4jr2q1KsXRwqEsqc",
+      "adjudicatedAt": "2026-09-05",
+      "note": "The authored key stands, and this is now the SECOND independent reproduction of the same blind error, on a re-run after the item text changed, which makes it a systematic artefact of the input rather than a one-off. The dataTable row \"a ruler\" holds \"The kingdom has a ruler\" under The Greek, \"ruled by a figure\" under The Norse, and an empty string under The Egyptian. The drawing says it more plainly than the JSON does: in fig-l2-three-realms.svg every row places its cells at x=78, 239, 400 and 561, the \"a ruler\" row at y=342 carries text at 239 and 561 and NOTHING at 400, and the heading \"The Egyptian\" itself sits at x=400, with the vertical column rules at x=231.5, 392.5 and 553.5 bracketing the blank. No cell shifted to fill it. The blind pass reads the dataTable JSON rather than the picture, and the likely error is an off-by-one across the leading row-label column \"three traditions\", which would align the heading The Greek with the Egyptian column data; a reader of the aligned drawing cannot make that slip. Independently corroborated twice: C4 round 1 key-lens re-derived the key from the SVG and sided with the key, and the figure-necessity pass at --runs 3 reports this item SPLIT 2 of 3, so it is genuinely hard from the passage alone and easy from the picture, which is the profile of a load-bearing figure. The item also rebuts the blind answer in its own rationale for that choice: \"The Greek column does fill that row in: it reads The kingdom has a ruler.\""
+    },
+    {
+      "itemId": "l2-ms-wyrdstone-shaded-stretch",
+      "itemHash": "23a4230ba52b032a",
+      "blind": [
+        0,
+        2,
+        5
+      ],
+      "authored": [
+        0,
+        2,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-order-log-with-the-unseen-minutes",
+      "itemHash": "0f3b952be1833efb",
+      "blind": [
+        3,
+        4,
+        1,
+        0,
+        2
+      ],
+      "authored": [
+        3,
+        4,
+        1,
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-mc-where-the-flicker-sits",
+      "itemHash": "2084e631b26a6115",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-cloze-row-against-row",
+      "itemHash": "36d24f7e0be328ba",
+      "blind": [
+        2,
+        1
+      ],
+      "authored": [
+        2,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-what-both-arrows-end-at",
+      "itemHash": "83d04ebb9b66b66a",
+      "blind": 2,
+      "authored": 2,
       "confidence": "high",
       "status": "agree"
     }

@@ -5043,7 +5043,7 @@
       ],
       "coachTopic": "structure-text",
       "dok": 2,
-      "stem": "The timeline sets the whole record out as one numbered line, and it ends at the entry reading past the loan date.  Put these four entries in the order the timeline numbers them.",
+      "stem": "The timeline sets the whole record out as one numbered line, and it ends at the entry reading \"past the loan date\".  Put these four entries in the order the timeline numbers them.",
       "tiles": [
         "The researcher's listed institution has no record",
         "No verified sighting exists past the loan date",
@@ -5056,7 +5056,7 @@
         0,
         1
       ],
-      "explain": "The timeline runs the whole record on one numbered line.  Number 4 is the paperwork, number 5 is the stone never coming back, and number 6 is the institution with no record of the researcher.  Number 7 goes to the entry reading past the loan date, which closes the run rather than opening a new section.",
+      "explain": "The timeline runs the whole record on one numbered line.  Number 4 is the paperwork, number 5 is the stone never coming back, and number 6 is the institution with no record of the researcher.  Number 7 goes to the entry reading \"past the loan date\", which closes the run rather than opening a new section.",
       "whyTheFigureIsNeeded": "The entry splits these four steps under two headings, Documented history and Current status, and the timeline is what runs them as one numbered line and gives the current-status step a number of its own after the loan paperwork.",
       "svgRead": "Counted the numbered markers in fig-l2-wyrdstone.svg: circles at cx 56, 173.33, 290.67, 408, 525.33, 642.67 and 760, numbered 1 to 7 above the lane, with the numbered rows below reading, in order, the loan paperwork was completed and filed correctly at 4, the stone itself was never returned at 5, the researcher's listed institution has no record at 6, and past the loan date with no verified sighting exists at 7."
     },
@@ -5080,11 +5080,11 @@
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "The Greek column does fill that row in: it reads The kingdom has a ruler.  Read down the column headed The Greek before deciding it gives nothing.",
-        "2": "The Norse column does fill that row in: it reads ruled by a figure.  Read down the column headed The Norse before deciding it gives nothing.",
+        "1": "The Greek column does fill that row in: it reads \"The kingdom has a ruler\".  Read down the column headed The Greek before deciding it gives nothing.",
+        "2": "The Norse column does fill that row in: it reads \"ruled by a figure\".  Read down the column headed The Norse before deciding it gives nothing.",
         "3": "Two of the three traditions name a ruler and the third does not, so the memo does not show them agreeing there.  The one thing all three agree on sits in the line above the columns."
       },
-      "explain": "The comparison settles it in the row reading a ruler.  The Greek column reads The kingdom has a ruler.  The Norse column reads ruled by a figure.  The Egyptian column gives nothing there.  The Egyptian paragraph describes a journey and a weighing, and it names no ruler for that underworld.",
+      "explain": "The comparison settles it in the row reading a ruler.  The Greek column reads \"The kingdom has a ruler\".  The Norse column reads \"ruled by a figure\".  The Egyptian column gives nothing there.  The Egyptian paragraph describes a journey and a weighing, and it names no ruler for that underworld.",
       "whyTheFigureIsNeeded": "The passage gives each tradition its own paragraph, so the prose never lines the three up on the question of a ruler; only the memo puts them in one row, where the Egyptian column having no answer becomes visible.",
       "svgRead": "In fig-l2-three-realms.svg the last row sits at y 342 and carries three text elements only: x 78 a ruler, x 239 The kingdom has a ruler, x 561 ruled by a figure.  There is no text element at x 400 on that row, which is where the Egyptian column's entries sit on the two rows above."
     },
@@ -5099,7 +5099,7 @@
       ],
       "coachTopic": "evidence-key-details",
       "dok": 3,
-      "stem": "A shaded stretch runs across part of the timeline, marked no theft report.  Choose the three entries below that sit inside that stretch.",
+      "stem": "A shaded stretch runs across part of the timeline, marked \"no theft report\".  Choose the three entries below that sit inside that stretch.",
       "choices": [
         "The loan paperwork was completed and filed correctly",
         "A university excavation recovered the stone from a coastal site",
@@ -5167,7 +5167,7 @@
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "Put these five moments in the order the log sets them out, including the shaded stretch marked the two minutes I could not see.",
+      "stem": "Put these five moments in the order the log sets them out, including the shaded stretch marked \"the two minutes I could not see\".",
       "tiles": [
         "The van pulls away",
         "the two minutes I could not see",
@@ -5199,14 +5199,14 @@
       "dok": 3,
       "stem": "The debrief minutes set Dash's log beside Theo's log.  Where do the minutes put the moment Finch asks about?",
       "choices": [
-        "In Theo's log, on the row that follows the line reading delivered a cover story about a framing order.",
-        "In Dash's log, on the row that follows the line reading nothing could be confirmed.",
-        "Above both logs, in the two lines naming a flicker of recognition on Kade's face.",
+        "In Theo's log, on the row that follows the line reading \"delivered a cover story about a framing order\".",
+        "In Dash's log, on the row that follows the line reading \"nothing could be confirmed\".",
+        "Above both logs, in the two lines naming \"a flicker of recognition on Kade's face\".",
         "In both logs at once, on the one row the two of them share."
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "The row after that one reads left without incident, which is Theo's summary of the visit.  It says nothing about Kade's face.",
+        "0": "The row after that one reads \"left without incident\", which is Theo's summary of the visit.  It says nothing about Kade's face.",
         "1": "The flicker is not a row in either log: the minutes print it on the two lines above both columns.  The row after \"nothing could be confirmed\" reads \"Dash wrote down the gap.\"",
         "3": "The two logs are set side by side, and every entry belongs to one column or the other.  Each log fills its own side of every row, and the flicker is on neither side."
       },
@@ -5259,7 +5259,7 @@
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "Finish the comparison.  Where Dash's log records that nothing could be confirmed, the row facing it says {{0}}.  Where the last row on Dash's side reads that he wrote the gap down, the row facing it says {{1}}.",
+      "stem": "Finish the comparison.  Where Dash's log records that nothing could be confirmed, the row facing it in Theo's log says {{0}}.  Where the last row on Dash's side reads that he wrote the gap down, the row facing it says {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -5492,7 +5492,7 @@
       ],
       "coachTopic": "structure-story-parts",
       "dok": 3,
-      "explain": "Two joins end at the same box.  One is the arrow running down from the room's only camera, and the other is the arrow out of the twelfth door, which the plan labels The badge reads green.  That box is a raised shelf, and the plan is where those two facts sit side by side.",
+      "explain": "Two joins end at the same box.  One is the arrow running down from the room's only camera, and the other is the arrow out of the twelfth door, which the plan labels \"The badge reads green\".  That box is a raised shelf, and the plan is where those two facts sit side by side.",
       "whyTheFigureIsNeeded": "The passage puts the route through the twelfth door in its third paragraph and the camera pointing straight down in its fourth, and the plan is where the two joins can be told apart by kind, an arrow out of the twelfth door and a second arrow down from the room's only camera.",
       "svgRead": "Counted in art/vault-of-ages-g6/fig-l5-frostbank-vault.svg: 4 <line> joins and 3 <polygon> arrowheads.  The heads are <polygon points=\"254.4,244 243.4,249 243.4,239\"/> pointing right into the twelfth box (rect x=\"260.4\"), <polygon points=\"495.6,244 484.6,249 484.6,239\"/> pointing right into the shelf box (rect x=\"501.6\" y=\"224\"), and <polygon points=\"601.6,218 596.6,207 606.6,207\"/> whose apex is below its base, so it points down into that same shelf box.  No head sits at the eleven-doors box (rect x=\"40\")."
     },
