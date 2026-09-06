@@ -5207,7 +5207,7 @@
       "key": 2,
       "distractorRationale": {
         "0": "The row after that one reads left without incident, which is Theo's summary of the visit.  It says nothing about Kade's face.",
-        "1": "The row after nothing could be confirmed reads Dash wrote down the gap.  The flicker is not a row in either log: the minutes print it on the two lines above both columns.",
+        "1": "The flicker is not a row in either log: the minutes print it on the two lines above both columns.  The row after \"nothing could be confirmed\" reads \"Dash wrote down the gap.\"",
         "3": "The two logs are set side by side, and every entry belongs to one column or the other.  Each log fills its own side of every row, and the flicker is on neither side."
       },
       "explain": "The minutes print the flicker on two lines above both columns, as the moment Theo's log leaves out.  It is not a row in either column, which is the whole point: Theo's account is accurate and still incomplete.",
@@ -5259,7 +5259,7 @@
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "Finish the comparison.  Where Dash's log records that nothing could be confirmed, the row facing it gives {{0}}.  Where the last row on Dash's side reads that he wrote the gap down, the row facing it gives {{1}}.",
+      "stem": "Finish the comparison.  Where Dash's log records that nothing could be confirmed, the row facing it says {{0}}.  Where the last row on Dash's side reads that he wrote the gap down, the row facing it says {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -5278,7 +5278,7 @@
           "key": 1
         }
       ],
-      "explain": "Set side by side, the two logs answer each other row by row.  Dash records that nothing could be confirmed and the row facing it gives a clean exit, then Dash records the gap and the row facing it gives the judgment that the detail did not matter.",
+      "explain": "Set side by side, the two logs answer each other row by row.  Dash records that nothing could be confirmed and the row facing it reports a clean exit, then Dash records the gap and the row facing it reports the judgment that the detail did not matter.",
       "whyTheFigureIsNeeded": "The passage gives Dash's log one paragraph and Theo's the next, and never sets a line from one against a line from the other; the drawing is the only place the two logs share a row.",
       "svgRead": "Opened art/vault-of-ages-g6/fig-l3-three-seconds.svg and read the pairings off the y coordinates, either side of the divider at x=392.5.  y=238: \"the door was empty both before and after\" faces \"delivered a cover story about a framing order\".  y=288: \"nothing could be confirmed\" faces \"left without incident\".  y=338: \"Dash wrote down the gap.\" faces \"not important enough to write down\", and it is the last row in each column.  Both blanks key on those row-for-row pairings, which exist nowhere but the drawing."
     },
@@ -5420,14 +5420,14 @@
       "figureFact": "the plan says I call Finch",
       "stem": "On the timeline, which lane carries the entry reading she checks in by two-twenty, and which other entry shares that lane?",
       "choices": [
-        "The lane for the real time, alongside the entry reading a service van pulls up.",
-        "The lane for the time the plan expected, alongside the entry reading the plan says I call Finch.",
-        "The lane for the real time, alongside the entry reading Mila went in at two.",
-        "The lane for the time the plan expected, alongside the entry reading The van pulls away at two-twenty-two."
+        "The lane for the real time, alongside the entry reading \"a service van pulls up\".",
+        "The lane for the time the plan expected, alongside the entry reading \"the plan says I call Finch\".",
+        "The lane for the real time, alongside the entry reading \"Mila went in at two\".",
+        "The lane for the time the plan expected, alongside the entry reading \"The van pulls away at two-twenty-two\"."
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "On the lane for the real time the timeline puts the entry reading a service van pulls up.  The check-in does not sit there.  Theo watched the van arrive; he never saw Mila check in by two-twenty.",
+        "0": "On the lane for the real time, the timeline puts the entry reading \"a service van pulls up\".  The check-in does not sit there.  Theo watched the van arrive and never saw Mila check in by two-twenty.",
         "2": "Mila going in at two does sit on the lane for the real time, and the check-in does not.  The plan expected the check-in; Theo never watched it happen.",
         "3": "The lane is right, but the entry beside it is wrong.  The timeline puts the van's departure on the lane for the real time, because Theo watched it from the car."
       },
@@ -5436,7 +5436,7 @@
       ],
       "coachTopic": "structure-story-parts",
       "dok": 3,
-      "explain": "The timeline splits the entries between two lanes, and the check-in sits on the lane for the time the plan expected, next to the entry reading the plan says I call Finch.  Neither had happened; both are what the plan wanted.",
+      "explain": "The timeline splits the entries between two lanes, and the check-in sits on the lane for the time the plan expected, next to the entry reading \"the plan says I call Finch\".  Neither had happened; both are what the plan wanted.",
       "whyTheFigureIsNeeded": "The passage states the check-in and the call to Finch as a rule in its second paragraph and never sorts either from the events Theo actually watched, so only the timeline says which of the six entries the plan merely expected.",
       "svgRead": "Counted in art/vault-of-ages-g6/fig-l5-no-hurry.svg.  The lane label 'the time the plan expected' sits at y=134 over a rule at y1=\"128.5\", and 'the real time' at y=180 over a rule at y1=\"174.5\".  Step 3 (she checks in by two-twenty) is <circle cx=\"506.2\" cy=\"128\" r=\"7\"/> and step 6 (the plan says I call Finch) is <circle cx=\"760\" cy=\"128\" r=\"7\"/>, both on the plan lane; steps 1, 2, 4 and 5 are all at cy=\"174\" on the real-time lane."
     },
@@ -5448,10 +5448,10 @@
       "figureFact": "the real time",
       "stem": "Put these four entries back in the order the timeline gives them, across the real time and the time the plan expected.",
       "tiles": [
-        "the entry reading The van pulls away at two-twenty-two",
-        "the entry reading she checks in by two-twenty",
-        "the entry reading the plan says I call Finch",
-        "the entry reading a service van pulls up"
+        "the entry reading \"The van pulls away at two-twenty-two\"",
+        "the entry reading \"she checks in by two-twenty\"",
+        "the entry reading \"the plan says I call Finch\"",
+        "the entry reading \"a service van pulls up\""
       ],
       "key": [
         3,
@@ -6059,7 +6059,7 @@
       "src": "art/vault-of-ages-g6/fig-l3-three-seconds.svg",
       "caption": "The debrief minutes set Dash's log beside Theo's log, row by row.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "The debrief minutes, headed with the one moment Theo's log leaves out, a flicker of recognition on Kade's face, above two columns setting Dash's log beside Theo's log row by row, with Dash's three rows reading the door was empty both before and after, nothing could be confirmed, and Dash wrote down the gap.  Theo's three read delivered a cover story about a framing order, left without incident, and not important enough to write down.",
+      "alt": "The debrief minutes, headed with the one moment Theo's log leaves out, a flicker of recognition on Kade's face, above two columns setting Dash's log beside Theo's log row by row, so that the row reading \"nothing could be confirmed\" faces the row reading \"left without incident\", and the row reading \"Dash wrote down the gap.\" faces the row reading \"not important enough to write down\", under a first row reading \"the door was empty both before and after\" against \"delivered a cover story about a framing order\".",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-three-seconds",
