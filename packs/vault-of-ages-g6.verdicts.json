@@ -1514,7 +1514,7 @@
     },
     {
       "itemId": "l1-match-card-line-to-its-place",
-      "itemHash": "861dd4ea7ec2b5a6",
+      "itemHash": "b8373869e122d881",
       "blind": [
         2,
         0,
@@ -1597,7 +1597,7 @@
     },
     {
       "itemId": "l2-ms-wyrdstone-shaded-stretch",
-      "itemHash": "e9cde7e6aeeeb5f1",
+      "itemHash": "fd2a779063f739ee",
       "blind": [
         0,
         2,
@@ -1646,8 +1646,16 @@
       "status": "agree"
     },
     {
+      "itemId": "l3-mc-where-the-flicker-sits",
+      "itemHash": "1ad630a96cf63309",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l3-ms-what-the-plan-groups-with-the-room",
-      "itemHash": "0f276bea74da3fc5",
+      "itemHash": "9f0c06b17e3ad994",
       "blind": [
         0,
         2,
@@ -1677,7 +1685,7 @@
     },
     {
       "itemId": "l4-match-chronicle-line-to-ledger-line",
-      "itemHash": "349781816990baae",
+      "itemHash": "2c7c415ef6db48ab",
       "blind": [
         1,
         2,
@@ -1725,7 +1733,7 @@
     },
     {
       "itemId": "l5-mc-which-lane-carries-the-check-in",
-      "itemHash": "550ccc1c0de68e4e",
+      "itemHash": "dd599569c7f54f33",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1786,14 +1794,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-ledger-card-who-kept-it",
-      "itemHash": "913dd6ceaca43f16",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-ms-memo-row-questions",
       "itemHash": "3c16509fde3dba1a",
       "blind": [
@@ -1818,10 +1818,10 @@
       "status": "agree"
     },
     {
-      "itemId": "l3-mc-where-the-flicker-sits",
-      "itemHash": "1ad630a96cf63309",
-      "blind": 2,
-      "authored": 2,
+      "itemId": "l6-mc-ledger-card-who-kept-it",
+      "itemHash": "6a479607d77c7492",
+      "blind": 1,
+      "authored": 1,
       "confidence": "high",
       "status": "agree"
     }
