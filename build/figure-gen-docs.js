@@ -481,9 +481,24 @@ function renderTimeline(dataTable, accentColor) {
   const laneBottom = laneY(tracks.length - 1) + 22;
 
   // Gap bands first, so markers and rules draw over them.
+  //
+  // INSET BY THE MARKER RADIUS, and this is not a nicety. A gap is defined tick-to-tick, so
+  // posOfTime(from) and posOfTime(to) ARE two marker centres and the band's border lands exactly on
+  // two dots by construction, on every gap timeline in the repo. The dot straddles the rule, and
+  // the numeral above it, which is the one that says where the unvouched-for stretch begins, has a
+  // vertical rule drawn through it.
+  //
+  // Insetting by the marker radius (7, as drawn below) puts the border at the dot's edge rather
+  // than through its centre. It also reads truer: the stretch nobody can vouch for runs BETWEEN the
+  // two recorded events, not across them.
+  //
+  // Guarded so a degenerate gap cannot invert: two ticks closer together than 2r keep a 2px band.
+  const MARKER_R = 7;
   gaps.forEach((g) => {
     const gx1 = posOfTime(g.from), gx2 = posOfTime(g.to);
-    const x = Math.min(gx1, gx2), w = Math.max(2, Math.abs(gx2 - gx1));
+    const rawX = Math.min(gx1, gx2), rawW = Math.max(2, Math.abs(gx2 - gx1));
+    const inset = Math.min(MARKER_R, Math.max(0, (rawW - 2) / 2));
+    const x = rawX + inset, w = Math.max(2, rawW - 2 * inset);
     hatchBand(x, laneTop - 20, w, laneBottom - laneTop + 26, g.label).forEach((s) => out.push(s));
   });
 
@@ -881,20 +896,38 @@ function renderFacsimile(dataTable, accentColor) {
     out.push(line(innerX, hp(headBase), CX + CW - 22, hp(headBase), HEADER_STROKE, 1));
     let ry = headBase;
     cells.forEach((row, r) => {
+      let lines = 1;
       if (labelColW) {
         const lab = dt.rowLabels[r];
         if (typeof lab === 'string' && lab.trim()) {
           const wrapped = fitOrRefuse(lab, TICK_FONT, 'row label');
+          lines = Math.max(lines, wrapped.length);
           out.push(textLines(innerX, ry + TICK_FONT + 4, TICK_FONT, wrapped, { lineH: CELL_LINE_H, opacity: '0.82' }));
         }
       }
       row.forEach((cell, ci) => {
         if (!cell) return;
+        lines = Math.max(lines, cell.length);
         const cx = innerX + labelColW + ci * colW;
         out.push(textLines(cx, ry + TICK_FONT + 4, TICK_FONT, cell, { lineH: CELL_LINE_H }));
       });
+      const lastBaseline = ry + TICK_FONT + 4 + (lines - 1) * CELL_LINE_H;
       ry += rowH[r];
-      if (r < cells.length - 1) out.push(line(innerX, hp(ry - 3), CX + CW - 22, hp(ry - 3), RULE, 1));
+      // A ROW RULE MUST CLEAR THE DESCENDERS OF ITS OWN LAST LINE.
+      //
+      // The rule was pinned to the row box alone, at ry - 3. On a one-line row that lands 23.5px
+      // under the baseline and is fine. On a row where any cell WRAPS, the second line eats the
+      // box and the rule lands 1.5px under that baseline, while a 20px serif descender runs about
+      // 4px, so every g, y, p and j on a wrapped last line is drawn through. Measured on the
+      // committed art before this change: fig-l2-three-realms at "misty realm", fig-l3-three-
+      // seconds at "before and after", both at exactly 1.5px.
+      //
+      // Anchored to the LAST BASELINE, so it only moves where the defect is: max() leaves every
+      // one-line row byte-identical and drops a wrapped row's rule to baseline + 7. rowH is
+      // untouched, so the table's height and its does-it-fit refusal are unchanged, and the next
+      // row's glyph tops still clear the rule by about 7px.
+      const ruleY = Math.max(ry - 3, lastBaseline + 7);
+      if (r < cells.length - 1) out.push(line(innerX, hp(ruleY), CX + CW - 22, hp(ruleY), RULE, 1));
     });
     y = ry;
   }
