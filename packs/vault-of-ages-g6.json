@@ -4909,9 +4909,9 @@
       "dok": 2,
       "stem": "The drawing shows the whole card, with exactly eight words of message above the address from the back.  Match each line to the place the drawing gives it.",
       "rowLabels": [
-        "Come find out why.",
-        "the old Bellhaven Athenaeum",
-        "the library building three streets over"
+        "the line reading \"Come find out why.\"",
+        "the line reading \"the old Bellhaven Athenaeum\"",
+        "the line reading \"the library building three streets over\""
       ],
       "colLabels": [
         "the first line of the address, under the message",
@@ -4932,7 +4932,7 @@
           1
         ]
       ],
-      "explain": "The story hands the card's words out inside its own sentences and keeps the address on the back.  On the drawing the message ends with the words Come find out why.  Under it the address opens with the old Bellhaven Athenaeum, and the library building three streets over comes last of all.",
+      "explain": "The story hands the card's words out inside its own sentences and keeps the address on the back.  On the drawing the message ends with the words \"Come find out why.\"  Under it the address opens with \"the old Bellhaven Athenaeum\", and \"the library building three streets over\" comes last of all.",
       "whyTheFigureIsNeeded": "The story hands the card's words out inside its own sentences and keeps the address on the back; the card is what lays the whole page out in order, with its three header rows above the message and the address below it.",
       "svgRead": "The card's five body lines in fig-l1-card-under-door.svg run at y=232 You noticed the gap., y=264 Come find out why., y=296 an address on the back:, y=328 the old Bellhaven Athenaeum and y=360 the library building three streets over, so the message ends at y=264, the Athenaeum's name opens the address, and the library line is the last text element in the file."
     },
@@ -4960,7 +4960,7 @@
         "2": "That count comes from the narrator at the start of the scene.  The plan puts a different set of words on the fourth chair, not a count of chairs.",
         "3": "The plan puts those words on Theo's chair, another of the three it draws from the story.  They give a name rather than describe a chair."
       },
-      "explain": "The plan takes three of its chair labels from the story, one for each of the three who take a chair.  The fourth carries something different: the plan marks it with the words the fourth chair is still empty.  That is the one seat nobody has taken.",
+      "explain": "Three of the plan's chair labels name the person who takes that chair.  The fourth names nobody, because nobody takes it: the plan marks it with the words \"the fourth chair is still empty\", taken from the story's last sentence.  That is the one seat left over.",
       "whyTheFigureIsNeeded": "The story counts the unused chairs twice, two near the start and one at the very end, and never fixes the table at one moment; the plan does, and it shows which chair the record describes instead of naming a person.",
       "svgRead": "The four chair rects in fig-l1-two-empty-chairs.svg read the one nearest the door, introduces himself as Theo, his name is Dash and the fourth chair is still empty; only the last is drawn with rx=32 and stroke #7c5cff, the other three using rx=4 and stroke rgba(232,238,247,0.5)."
     },
@@ -4996,7 +4996,7 @@
       },
       "explain": "A view from above looks straight down on the room, so it can show where each chair stands.  This one puts Finch's table in the middle with four chairs set around it, one at each corner and each joined to it by a plain line, and it draws no chair for Finch herself.",
       "whyTheFigureIsNeeded": "The story says four chairs stand around Finch's table and stops there; the plan is what draws where they stand, one at each corner with a plain line joining each of them to the table.",
-      "svgRead": "fig-l1-two-empty-chairs.svg draws five rects: the table at x=306 to 494, y=224 to 264, and four chairs at x=40,y=84.56, x=416,y=84.56, x=532.8,y=363.44 and x=40,y=346, so the table is in the middle with a chair at each corner and no fifth chair anywhere in the file."
+      "svgRead": "fig-l1-two-empty-chairs.svg draws five node rects, plus a page background: the table at x=306 to 494, y=224 to 264, and four chairs at x=40,y=84.56, x=416,y=84.56, x=532.8,y=363.44 and x=40,y=346, so the table is in the middle with a chair at each corner and no fifth chair anywhere in the file."
     },
     {
       "id": "l1-cloze-the-moment-the-plan-draws",
@@ -5071,7 +5071,7 @@
       ],
       "coachTopic": "central-idea",
       "dok": 3,
-      "stem": "The memo sets the three traditions side by side.  In the row reading a ruler, what does the comparison show?",
+      "stem": "The memo sets the three traditions side by side.  In the row reading \"a ruler\", what does the comparison show?",
       "choices": [
         "The Egyptian column gives nothing there, while the Greek and Norse columns both fill it in.",
         "The Greek column gives nothing there, while the Egyptian and Norse columns both fill it in.",
@@ -5080,11 +5080,11 @@
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "The Greek column does fill that row in: it reads \"The kingdom has a ruler\".  Read down the column headed The Greek before deciding it gives nothing.",
-        "2": "The Norse column does fill that row in: it reads \"ruled by a figure\".  Read down the column headed The Norse before deciding it gives nothing.",
+        "1": "The Greek column does fill that row in: it reads \"The kingdom has a ruler\".  Read down the column headed \"The Greek\" before deciding it gives nothing.",
+        "2": "The Norse column does fill that row in: it reads \"ruled by a figure\".  Read down the column headed \"The Norse\" before deciding it gives nothing.",
         "3": "Two of the three traditions name a ruler and the third does not, so the memo does not show them agreeing there.  The one thing all three agree on sits in the line above the columns."
       },
-      "explain": "The comparison settles it in the row reading a ruler.  The Greek column reads \"The kingdom has a ruler\".  The Norse column reads \"ruled by a figure\".  The Egyptian column gives nothing there.  The Egyptian paragraph describes a journey and a weighing, and it names no ruler for that underworld.",
+      "explain": "The comparison settles it in the row reading \"a ruler\".  The Greek column reads \"The kingdom has a ruler\".  The Norse column reads \"ruled by a figure\".  The Egyptian column gives nothing there.  The Egyptian paragraph describes a journey and a weighing, and it names no ruler for that underworld.",
       "whyTheFigureIsNeeded": "The passage gives each tradition its own paragraph, so the prose never lines the three up on the question of a ruler; only the memo puts them in one row, where the Egyptian column having no answer becomes visible.",
       "svgRead": "In fig-l2-three-realms.svg the last row sits at y 342 and carries three text elements only: x 78 a ruler, x 239 The kingdom has a ruler, x 561 ruled by a figure.  There is no text element at x 400 on that row, which is where the Egyptian column's entries sit on the two rows above."
     },
@@ -5152,7 +5152,7 @@
           "key": 0
         }
       ],
-      "explain": "The card prints two of the entry's headings.  The words calling the eleven-year gap the entry's single largest question mark sit under the heading Documented history.  Under the heading Current status, the card prints the words in a private collection, and the blacked-out bar sits just below them.  The card keeps where the disc is now in one section and what the Archive still cannot explain in the other.",
+      "explain": "The card prints two of the entry's headings.  The words calling the eleven-year gap the entry's single largest question mark sit under the heading Documented history.  Under the heading Current status, the card prints the words \"in a private collection\", and the blacked-out bar sits just below them.  The card keeps where the disc is now in one section and what the Archive still cannot explain in the other.",
       "whyTheFigureIsNeeded": "The entry runs four headed sections and the card prints two of them, and it sets the blacked-out bar directly under the private-collection line, so the card shows which of the entry's four headings it chose to keep and what it put beneath each one.",
       "svgRead": "In fig-l2-threadglass.svg there are two underline rules, at y 181.5 under the text Documented history. at y 176 and at y 277.5 under the text Current status. at y 272.  The text in a private collection sits at y 304 and the solid bar carrying data-emphasis redact is drawn at y 316 to 340, below it."
     },
@@ -5182,8 +5182,8 @@
         0,
         2
       ],
-      "explain": "The log lists four entries in the order they happened, and the shaded stretch belongs inside that order rather than beside it.  Theo goes in, the van double-parks, then come the minutes nobody can vouch for, then the van pulls away and Theo comes out.",
-      "whyTheFigureIsNeeded": "The passage spreads these moments across four paragraphs and never sets the unseen minutes down as one item in a list; the log is what gives that stretch a place of its own in the numbered run.",
+      "explain": "The log lists four entries in the order they happened, and the shaded stretch belongs inside that order rather than beside it.  Theo goes in, the van double-parks, then come the two minutes the log could not see, then the van pulls away and Theo comes out.",
+      "whyTheFigureIsNeeded": "The passage spreads these moments across four paragraphs and never sets the unseen minutes down as one item in a list; the log is what gives that stretch a place of its own inside the run, between the van arriving and the van pulling away.",
       "svgRead": "Opened art/vault-of-ages-g6/fig-l3-two-exits.svg.  The log is four numbered rows, <text x=\"62\" y=\"214\">1.</text> through <text x=\"62\" y=\"292\">4.</text>, reading eleven on the dot / eleven-eleven / eleven-thirteen / eleven-fourteen against Theo went in / a delivery van double-parks / The van pulls away / the revolving door spits Theo out.  The stretch is <rect x=\"290.67\" y=\"108\" width=\"234.67\" height=\"48\" data-gap=\"the two minutes I could not see\">, spanning marks 2 and 3, with <text x=\"408\" y=\"182\">eleven-eleven to eleven-thirteen, the two minutes I could not see</text> beneath it.  WARNING FOR THE NEXT AUTHOR: the brief calls this the clock timeline, and the rendered file is not.  Its lane rule carries stroke-dasharray=\"7 6\", its marks sit at x=56 / 290.67 / 525.33 / 760 (evenly spaced), and the header reads \"in order, not to scale\".  So this item keys on ORDER only, never on spacing, distance or duration."
     },
     {
@@ -5241,11 +5241,11 @@
       ],
       "distractorRationale": {
         "1": "The plan puts the intake desk on the way in, with an arrow running on to the elevator.  It is where Theo starts, not part of the room he came to see.",
-        "3": "The cardboard box is something Theo carries in and leaves at the desk.  The plan never draws it, since it is not part of the gallery room.",
+        "3": "The cardboard box is something Theo carries in and leaves at the desk.  The plan draws the fixed places and fittings he moves between, and a thing he is carrying is not one of them.",
         "5": "The plan puts a service elevator on the way in, between the desk and the room.  Theo rides it up before he has seen anything at all."
       },
-      "explain": "The plan separates the two by the kind of join it draws, not by where a box sits.  Arrows carry Theo from the desk to the elevator and on to the room.  Plain lines run from the room to the pedestal, from the pedestal to the dark line in the floor, and from the room to the count of exits and cameras.",
-      "whyTheFigureIsNeeded": "The passage names these six things in four different paragraphs and counts the exits and cameras only as Theo walks out; the plan is the one place that sorts them into the way in and the room he came to see.",
+      "explain": "The plan separates the way in from the room Theo came to see by the kind of join it draws, not by where each box sits on the sheet.  Arrows carry Theo from the desk to the elevator and on to the room.  Plain lines run from the room to the pedestal, from the pedestal to the dark line in the floor, and from the room to the count of exits and cameras.",
+      "whyTheFigureIsNeeded": "The passage names these six things in four different paragraphs and counts the exits and cameras only as Theo walks out; the plan is the one place that sorts the five it draws into the way in and the room he came to see, and it leaves the cardboard box off the sheet altogether.",
       "svgRead": "Opened art/vault-of-ages-g6/fig-l3-kade-collection.svg and counted every line.  Exactly two arrowheads are drawn (<polygon> at 169.6,191.44 for the intake desk to the service elevator, and at 471.92,126.29 for the elevator on to the room), so the way in is a two-arrow route.  Three plain lines run without arrowheads: room to pedestal (544,130.56 to 544,198.08), pedestal to the dark line (544,250.08 to 544,312.24), and room to the exits-and-cameras box (512.15,128.13 to 260.07,314.67).  The pedestal alone is rx=\"20\" with stroke=\"#7c5cff\", the pack's rounded accent box for the thing standing open.  DELIBERATE CHOICE: the exits-and-cameras box is drawn at x=40 on the LEFT of the sheet, so the stem asks only what the plan JOINS BY PLAIN LINES and makes no left/right claim.  The key rests on the line style, which the alt states and the caption deliberately no longer does."
     },
     {
@@ -5259,7 +5259,7 @@
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "Finish the comparison.  Where Dash's log records that nothing could be confirmed, the row facing it in Theo's log says {{0}}.  Where the last row on Dash's side reads that he wrote the gap down, the row facing it says {{1}}.",
+      "stem": "Finish the comparison.  Where Dash's log records that nothing could be confirmed, the row facing it in Theo's log says {{0}}.  Where the last row on Dash's side reads that Dash wrote the gap down, the row facing it in Theo's log says {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -5279,7 +5279,7 @@
         }
       ],
       "explain": "Set side by side, the two logs answer each other row by row.  Dash records that nothing could be confirmed and the row facing it reports a clean exit, then Dash records the gap and the row facing it reports the judgment that the detail did not matter.",
-      "whyTheFigureIsNeeded": "The passage gives Dash's log one paragraph and Theo's the next, and never sets a line from one against a line from the other; the drawing is the only place the two logs share a row.",
+      "whyTheFigureIsNeeded": "The passage gives \"Dash's log\" one paragraph and Theo's the next, and never sets a line from one against a line from the other; the drawing is the only place the two logs share a row.",
       "svgRead": "Opened art/vault-of-ages-g6/fig-l3-three-seconds.svg and read the pairings off the y coordinates, either side of the divider at x=392.5.  y=238: \"the door was empty both before and after\" faces \"delivered a cover story about a framing order\".  y=288: \"nothing could be confirmed\" faces \"left without incident\".  y=338: \"Dash wrote down the gap.\" faces \"not important enough to write down\", and it is the last row in each column.  Both blanks key on those row-for-row pairings, which exist nowhere but the drawing."
     },
     {
@@ -5318,7 +5318,7 @@
       ],
       "coachTopic": "research-source-check",
       "dok": 3,
-      "explain": "Each row of the memo puts one question to both records.  On the claim row the chronicle denies entry by anyone the temple did not choose, and the ledger reports one.  The evidence row sets faith against tool marks, and on the weak point row, a record that cannot check itself faces a guild's own private record.",
+      "explain": "Each row of the memo puts one question to both records.  On the claim row the chronicle denies that anyone the temple did not choose has entered, and the ledger reports an entry.  The evidence row sets faith against tool marks, and on the weak point row, a record that cannot check itself faces a guild's own private record.",
       "whyTheFigureIsNeeded": "The memo lines the two records up row by row, so the chronicle's answer and the ledger's answer to the same question sit opposite each other; the passage sets the two records against each other in prose, sentence by sentence, and the memo is what assigns each phrase a row and a column, so a reader can see which question every pair is answering.",
       "svgRead": "fig-l4-archive-believes.svg: four row-name text elements at x=\"78\" (y=196 claim, y=246 evidence, y=296 check it, y=346 weak point), a chronicle column at x=\"292.67\" and a ledger column at x=\"507.33\", every one of the eight data cells carrying text; that confirms the stem's \"every row ... for both records\".  The keyed pairings are table content, not appearance."
     },
@@ -5339,7 +5339,7 @@
       "distractorRationale": {
         "0": "That line sits on the inscription with no box around it.  It reports where the seal is, and the inscription does not mark it as resting on belief.",
         "1": "The inscription carries that sentence, spread over two lines, and draws no box around either of them.",
-        "2": "That sentence belongs to the chronicle's account of Isis, and the drawing does not carry it.  A box marks a claim, not a piece of the story."
+        "2": "That sentence belongs to the chronicle's account of Isis, and the drawing does not carry it.  The box goes round the line the chronicle asks you to take on faith, not round a piece of the story."
       },
       "targets": [
         "c4-3-analyze-sources"
@@ -5380,7 +5380,7 @@
       ],
       "coachTopic": "research-source-check",
       "dok": 3,
-      "explain": "The ledger page is a short pull from a long account.  It keeps the writer's guild rank, the finding that the seal had already been moved once, and the two different tool marks in the setting stone that back it.  Two of the others sit in the Reckoner's full account and never reach the page, and the third, the name of the entrant who moved the seal first, is a name the guild's own record no longer holds.",
+      "explain": "The ledger page is a short pull from a long account.  It keeps the writer's guild rank, the finding that the seal had already been moved once, and the two different tool marks that back it, cut into the setting stone.  Two of the others sit in the Reckoner's full account and never reach the page, and the third, the name of the entrant who moved the seal first, is a name the guild's own record no longer holds.",
       "whyTheFigureIsNeeded": "Five of the six options are things the Reckoner's full account gives, so the passage cannot separate those five; only the drawing shows which few of them the guild's own page actually carried, which is the whole skill of reading what a record kept against what its writer knew.",
       "svgRead": "fig-l4-reckoners-ledger.svg draws three header pairs (kept by / guild rank Reckoner / for the next Reckoner at y=126, 154, 182) and five body lines at y=232, 264, 296, 328, 360, ending \"from two different centuries.\"  Searching the file finds no \"no longer records\", no \"removes what it finds\" and no \"leaving the seal\", which is what makes choices 0, 2 and 4 wrong.  The file holds only two rect elements, the background and the card frame, and zero data-emphasis attributes, so this page marks nothing."
     },
@@ -5390,7 +5390,7 @@
       "passageId": "p-what-the-archive-believes",
       "figureId": "fig-l4-archive-believes",
       "figureFact": "a claim resting on faith",
-      "stem": "The memo gives the temple chronicle and the guild ledger one line each on the row named evidence.  What does it print for the chronicle?",
+      "stem": "The memo gives the temple chronicle and the guild ledger one line each on the row named \"evidence\".  What does it print for the chronicle?",
       "choices": [
         "two sets of tool marks",
         "a claim resting on faith",
@@ -5401,7 +5401,7 @@
       "distractorRationale": {
         "0": "That is the guild ledger's evidence, printed in the other column.  The memo keeps the two records apart, and this question asks about the chronicle.",
         "2": "That is the chronicle's claim, which the memo prints on the row above.  Evidence is the reason offered for a claim, not the claim itself.",
-        "3": "That is how the memo rates whether the chronicle's claim can be checked.  It sits lower down, on the row named check it, not on the evidence row."
+        "3": "That is how the memo rates whether the chronicle's claim can be checked.  It sits lower down, on the row named \"check it\", not on the evidence row."
       },
       "targets": [
         "c4-4-use-evidence"
@@ -5427,17 +5427,17 @@
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "On the lane for the real time, the timeline puts the entry reading \"a service van pulls up\".  The check-in does not sit there.  Theo watched the van arrive and never saw Mila check in by two-twenty.",
-        "2": "Mila going in at two does sit on the lane for the real time, and the check-in does not.  The plan expected the check-in; Theo never watched it happen.",
-        "3": "The lane is right, but the entry beside it is wrong.  The timeline puts the van's departure on the lane for the real time, because Theo watched it from the car."
+        "0": "On the lane for the real time, the timeline puts the entry reading \"a service van pulls up\".  The check-in does not sit there, because two-twenty is a time the plan named rather than a time the log records.",
+        "2": "Mila going in at two does sit on the lane for the real time, and the check-in does not.  Two-twenty is a time the plan named, not a time the log records something happening.",
+        "3": "The lane is right, but the entry beside it is wrong.  The timeline puts the van's departure on the lane for the real time, because two-twenty-two is a time something was recorded as happening, not a time the plan named."
       },
       "targets": [
         "c1-lit-6-text-structure"
       ],
       "coachTopic": "structure-story-parts",
       "dok": 3,
-      "explain": "The timeline splits the entries between two lanes, and the check-in sits on the lane for the time the plan expected, next to the entry reading \"the plan says I call Finch\".  Neither had happened; both are what the plan wanted.",
-      "whyTheFigureIsNeeded": "The passage states the check-in and the call to Finch inside a rule in its second paragraph and the watched events three paragraphs later, and the timeline is what puts each of the six entries on a named lane, so the two sets can be read against each other at once.",
+      "explain": "The timeline splits the entries between two lanes, and the check-in sits on the lane for the time the plan expected, next to the entry reading \"the plan says I call Finch\".  Both are times the plan named, not times the log records something happening.",
+      "whyTheFigureIsNeeded": "The passage gives the check-in in the same sentence as Mila going in, in its second paragraph, and spreads the recorded times from that paragraph through to its last, and the timeline is what puts each of the six entries on a named lane, so the two sets can be read against each other at once.",
       "svgRead": "Counted in art/vault-of-ages-g6/fig-l5-no-hurry.svg.  The lane label 'the time the plan expected' sits at y=134 over a rule at y1=\"128.5\", and 'the real time' at y=180 over a rule at y1=\"174.5\".  Step 3 (she checks in by two-twenty) is <circle cx=\"506.2\" cy=\"128\" r=\"7\"/> and step 6 (the plan says I call Finch) is <circle cx=\"760\" cy=\"128\" r=\"7\"/>, both on the plan lane; steps 1, 2, 4 and 5 are all at cy=\"174\" on the real-time lane."
     },
     {
@@ -5493,7 +5493,7 @@
       "coachTopic": "structure-story-parts",
       "dok": 3,
       "explain": "Two joins end at the same box.  One is the arrow running down from the room's only camera, and the other is the arrow out of the twelfth door, which the plan labels \"The badge reads green\".  That box is a raised shelf, and the plan is where those two facts sit side by side.",
-      "whyTheFigureIsNeeded": "The passage puts the route through the twelfth door in its third paragraph and the camera pointing straight down in its fourth, and the plan is where the two joins can be told apart by kind, an arrow out of the twelfth door and a second arrow down from the room's only camera.",
+      "whyTheFigureIsNeeded": "The passage puts the route through the twelfth door in its third paragraph and the camera pointing straight down in its fourth, and the plan is where the two joins can be seen meeting at the same box from two different places, one arrow out of the twelfth door and a second down from the room's only camera.",
       "svgRead": "Counted in art/vault-of-ages-g6/fig-l5-frostbank-vault.svg: 4 <line> joins and 3 <polygon> arrowheads.  The heads are <polygon points=\"254.4,244 243.4,249 243.4,239\"/> pointing right into the twelfth box (rect x=\"260.4\"), <polygon points=\"495.6,244 484.6,249 484.6,239\"/> pointing right into the shelf box (rect x=\"501.6\" y=\"224\"), and <polygon points=\"601.6,218 596.6,207 606.6,207\"/> whose apex is below its base, so it points down into that same shelf box.  No head sits at the eleven-doors box (rect x=\"40\")."
     },
     {
@@ -5526,7 +5526,7 @@
       ],
       "coachTopic": "structure-story-parts",
       "dok": 3,
-      "explain": "Everywhere else the plan uses an arrow, which marks a step or a result.  The panel is joined by a plain line instead, and a plain line means the two things simply sit together, so the panel belongs to the vault door itself.",
+      "explain": "Everywhere else the plan uses an arrow, and an arrow points from one thing to another.  The panel is joined by a plain line instead, and a plain line means the two things simply sit together, so the panel belongs to the vault door itself.",
       "whyTheFigureIsNeeded": "The prose lists the reader panel as one more feature of the door slab, while the plan is the only place that draws the difference between a step along Mila's route and a thing merely attached to the door she is standing at.",
       "svgRead": "Counted in art/vault-of-ages-g6/fig-l5-frostbank-vault.svg: of the 4 <line> joins, exactly one carries no <polygon> head, and it is <line x1=\"342.4\" y1=\"310.96\" x2=\"342.4\" y2=\"270\"/>, running straight up from the panel box (rect x=\"200.4\" y=\"316.96\") to the twelfth box (rect x=\"260.4\" y=\"224\").  The panel box is therefore below the twelfth, and the other three joins each end in an arrowhead."
     },
@@ -5536,7 +5536,7 @@
       "passageId": "p-temple-chronicle",
       "figureId": "fig-l4-temple-chronicle",
       "figureFact": "Temple scribes",
-      "stem": "Finish the chronicle card reading.  The row reading \"Temple scribes\" gives \"{{0}}\", and the row reading \"carved into\" gives \"{{1}}\".",
+      "stem": "Finish the reading of the chronicle card.  The row reading \"Temple scribes\" gives \"{{0}}\", and the row reading \"carved into\" gives \"{{1}}\".",
       "blanks": [
         {
           "choices": [
@@ -5561,7 +5561,7 @@
       "coachTopic": "viewpoint-purpose",
       "dok": 3,
       "explain": "The card's top block answers who made the inscription and where, before any of its carved lines appear.  The scribes' reason and the carving place sit one row apart in that block.",
-      "whyTheFigureIsNeeded": "The passage runs the carving place and the scribes' motive together inside one prose paragraph; the card is what splits them onto two labeled rows, so a child has to find which row carries which value instead of recalling a sentence.",
+      "whyTheFigureIsNeeded": "The passage runs the carving place and the scribes' motive together inside one prose paragraph, in two sentences that name neither as a field; the card is what splits them onto two labeled rows, so a child locates each value by its label rather than by where it fell in the prose.",
       "svgRead": "Opened art/vault-of-ages-g6/fig-l4-temple-chronicle.svg.  The top block is three label/value pairs: <text x=\"78\" y=\"126\">carved into</text> beside <text x=\"262\" y=\"126\">a temple chamber at Abydos</text>; <text x=\"78\" y=\"154\">Temple scribes</text> beside <text x=\"262\" y=\"154\">wrote to honor the priesthood</text>; <text x=\"78\" y=\"182\">carries</text> beside <text x=\"262\" y=\"182\">no author's name</text>.  Rows y=126 and y=154 are adjacent, which is the \"one row apart\" in the explain, and the rule <line x1=\"78\" y1=\"194.5\" x2=\"722\" y2=\"194.5\"> sits between the block and the first carved line at y=232, which is the \"before any of its carved lines appear\"."
     },
     {
@@ -5589,7 +5589,7 @@
       "coachTopic": "evidence-across-texts",
       "dok": 3,
       "explain": "The card's top block puts the keeper first, and the keeper is the guild itself.  The ledger was passed down inside that guild and added to by each generation, and this page is one entrant's own account within it.",
-      "whyTheFigureIsNeeded": "The passage states the keeper once, in its framing note, then never returns to it; the card promotes it to the first labeled field at the head of the page, so the item turns on reading that block rather than on remembering one clause.",
+      "whyTheFigureIsNeeded": "The passage leaves the keeper in its framing note and the Reckoner's own page never labels it; the card promotes it to the first labeled field at the head of the page, so the item turns on reading that block rather than on gathering the guild back out of the prose.",
       "svgRead": "Opened art/vault-of-ages-g6/fig-l4-reckoners-ledger.svg.  <text x=\"78\" y=\"126\">kept by</text> beside <text x=\"214\" y=\"126\">a guild of tomb entrants</text> is the FIRST row of the top block, above y=154 guild rank / Reckoner and y=182 for / the next Reckoner, which is what \"puts the keeper first\" rests on.  Counted the rects: exactly two, the page panel and the background, so this card marks none of its lines."
     },
     {
@@ -5642,7 +5642,7 @@
       "key": 3,
       "distractorRationale": {
         "0": "That line sits above the box, unmarked.  It reports where the seal is, and the chronicle does not ask the reader to take that on trust.",
-        "1": "That line is the chronicle's claim itself, and the card leaves it unboxed.  The box goes round the sentence telling the reader how the claim is to be taken.",
+        "1": "That line is the chronicle's own statement that no enemy has entered, and the card leaves it unboxed.  The box goes round the next line, the one asking the reader to take that on faith.",
         "2": "The card does not carry that sentence.  It belongs to the chronicle's account of Isis, which the card leaves out entirely."
       },
       "targets": [
@@ -5650,7 +5650,7 @@
       ],
       "coachTopic": "inference-argument",
       "dok": 3,
-      "explain": "A box in this pack means one thing: the document is asking to be believed without offering proof.  The chronicle says as much in its own words, calling its protection of the seal a fact requiring only faith.",
+      "explain": "A box around a line means one thing: the document is asking to be believed without offering proof.  The chronicle says as much in its own words, calling its protection of the seal a fact requiring only faith.",
       "whyTheFigureIsNeeded": "The passage prints the chronicle's closing lines as ordinary prose and marks none of them; the card is the only place one carved line carries a box, so the flag is a mark made on the document rather than a sentence written about it.",
       "svgRead": "Opened art/vault-of-ages-g6/fig-l4-temple-chronicle.svg and counted: exactly ONE element carries data-emphasis=\"box\", <rect x=\"70\" y=\"304\" width=\"464.8\" height=\"32\" stroke=\"#7c5cff\">, and the only text inside it is <text x=\"78\" y=\"332\">It is a fact requiring only faith.</text>.  The other carved lines sit at y=232, y=264 and y=296, all above and outside that rect, which is what distractors 0 and 1 turn on.  Searched the file for \"Isis\": zero hits, so choice 2 names a sentence the card does not carry."
     }
@@ -5663,7 +5663,7 @@
       "src": "art/vault-of-ages-g6/fig-l1-card-under-door.svg",
       "caption": "The card holds a handwritten message on the front, and on the back it gives the address of the old Bellhaven Athenaeum.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "The plain white card, showing the eight-word message it carries and, below it, the address written on the back.",
+      "alt": "A plain white card.  Its three header rows pair \"at eleven at night\" with \"under Theo Brack's door\", \"plain white and unlined\" with \"exactly eight words\", and \"handwriting\" with \"so neat it looks printed\".  Below them the card shows five lines in order: \"You noticed the gap.\", \"Come find out why.\", \"an address on the back:\", \"the old Bellhaven Athenaeum\", and \"the library building three streets over\".",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-card-under-door",
@@ -5709,7 +5709,7 @@
       "src": "art/vault-of-ages-g6/fig-l1-two-empty-chairs.svg",
       "caption": "A plan view of Finch's table, drawn from above.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A plan view of Finch's table with four chairs set around it at its corners, a plain line joining each one to the table, three of them drawn as plain boxes and the fourth drawn as a rounded, highlighted shape marked still empty.",
+      "alt": "A plan view of \"Finch's table\" with four chairs set around it at its corners, a plain line joining each one to the table.  Three are drawn as plain boxes and carry the words \"the one nearest the door\", \"introduces himself as Theo\" and \"his name is Dash\".  The fourth is drawn as a rounded, highlighted shape and carries the words \"the fourth chair is still empty\".",
       "dataTable": {
         "type": "schematic",
         "sourcePassageId": "p-two-empty-chairs",
@@ -5783,7 +5783,7 @@
       "src": "art/vault-of-ages-g6/fig-l2-threadglass.svg",
       "caption": "The entry is updated each time new information surfaces, its largest question mark is the gap between two counts eleven years apart, and the filer's name is blacked out.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A case-file index card titled the Threadglass, with catalog number 114 at the top, then two underlined section headings.  Under the first, \"Documented history.\", the gap between the entry's two counts is named as its largest question mark.  Under the second, \"Current status.\", a line reading in a private collection sits above a blacked-out bar where the filer's name would be.",
+      "alt": "A case-file index card titled the Threadglass, with catalog number 114 at the top, then two underlined section headings.  Under the first, \"Documented history.\", the gap between the entry's two counts is named as its largest question mark.  Under the second, \"Current status.\", a line reading \"in a private collection\" sits above a blacked-out bar where the filer's name would be.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-threadglass-entry",
@@ -5827,7 +5827,7 @@
       "src": "art/vault-of-ages-g6/fig-l2-wyrdstone.svg",
       "caption": "The stone's record runs step by step, from a coastal site to past the loan date.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A numbered timeline on one lane running left to right from a coastal site to past the loan date, with a shaded stretch, labelled no theft report, covering the loan paperwork and every step after it, and a dashed circle marking the unverified last step.",
+      "alt": "A numbered timeline on one lane running left to right from a coastal site to past the loan date, with a shaded stretch, labelled \"no theft report\", covering the loan paperwork and every step after it, and a dashed circle marking the unverified last step.",
       "dataTable": {
         "type": "timeline",
         "sourcePassageId": "p-wyrdstone-entry",
@@ -5879,7 +5879,7 @@
       "src": "art/vault-of-ages-g6/fig-l2-three-realms.svg",
       "caption": "Three traditions set out side by side, one column each, with the same three rows down the left.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A memo comparison table with a row-label column and one column each for The Greek, The Egyptian and The Norse, comparing a place the dead go, the dead and a ruler, with the Egyptian ruler cell left blank, under a header line reading they agree, a real place with real geography.",
+      "alt": "A memo comparison table with a row-label column and one column each for The Greek, The Egyptian and The Norse, comparing a place the dead go, the dead and a ruler, with the Egyptian ruler cell left blank, under a header line reading \"they agree\", a real place with real geography.",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-three-realms-below",
@@ -6020,7 +6020,7 @@
       "src": "art/vault-of-ages-g6/fig-l3-two-exits.svg",
       "caption": "The log runs in order from eleven on the dot to eleven-fourteen, with one stretch of it shaded.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A timeline with marks at eleven on the dot, eleven-eleven, eleven-thirteen and eleven-fourteen, and a shaded stretch across the window between eleven-eleven and eleven-thirteen labelled as the minutes that could not be seen.",
+      "alt": "A timeline of four marks in the order they happen: \"Theo went in\" at eleven on the dot, \"a delivery van double-parks\" at eleven-eleven, \"The van pulls away\" at eleven-thirteen, and \"the revolving door spits Theo out\" at eleven-fourteen.  A shaded stretch between eleven-eleven and eleven-thirteen is labelled \"the two minutes I could not see\".",
       "dataTable": {
         "type": "timeline",
         "sourcePassageId": "p-two-exits-one-elevator",
@@ -6100,7 +6100,7 @@
       "src": "art/vault-of-ages-g6/fig-l4-temple-chronicle.svg",
       "caption": "The temple's own scribes carved this chronicle, and the card boxes one of its carved lines.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A carved temple inscription with three labelled rows: carved into, a temple chamber at Abydos; Temple scribes, wrote to honor the priesthood; and carries, no author's name.  Below them four carved lines: \"The seal remains in this chamber to this day.\", \"No enemy of the temple has ever set foot\", \"in this chamber.\", and, drawn inside a box, \"It is a fact requiring only faith.\"",
+      "alt": "A carved temple inscription.  Its three header rows pair \"carved into\" with \"a temple chamber at Abydos\", \"Temple scribes\" with \"wrote to honor the priesthood\", and \"carries\" with \"no author's name\".  Below them four carved lines: \"The seal remains in this chamber to this day.\", \"No enemy of the temple has ever set foot\", \"in this chamber.\", and, drawn inside a box, \"It is a fact requiring only faith.\"",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-temple-chronicle",
@@ -6144,7 +6144,7 @@
       "src": "art/vault-of-ages-g6/fig-l4-reckoners-ledger.svg",
       "caption": "This ledger page was written from inside the chamber, and it is a short pull from a longer account.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A guild ledger page with three labelled rows: kept by, a guild of tomb entrants; guild rank, Reckoner; and for, the next Reckoner.  Below them the writer's account of what was found, with the two different tool marks in the setting stone given as the reason to believe it.",
+      "alt": "A guild ledger page.  Its three header rows pair \"kept by\" with \"a guild of tomb entrants\", \"guild rank\" with \"Reckoner\", and \"for\" with \"the next Reckoner\".  Below them five lines: \"I am writing from inside the very chamber\", \"The seal had already been moved once\", \"the setting stone beneath the seal shows\", \"two different tool marks,\", and \"from two different centuries.\"",
       "dataTable": {
         "type": "facsimile",
         "sourcePassageId": "p-reckoners-ledger",
@@ -6311,7 +6311,7 @@
       "src": "art/vault-of-ages-g6/fig-l5-no-hurry.svg",
       "caption": "One lane records the times the plan expected and the other records the real times, and the shaded stretch marks the minutes when a service van blocked the view.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A two-lane timeline of numbered steps in the order they happen, split between a lane for the time the plan expected and a lane for the real time, with a shaded stretch, labelled blocking most of my view, covering the steps from two-nineteen to two-twenty-two.",
+      "alt": "A two-lane timeline of six numbered steps in the order they happen.  On the lane for the real time: \"Mila went in at two\" at two, \"a service van pulls up\" at two-nineteen, \"The van pulls away at two-twenty-two\" at two-twenty-two, and \"the radio clicks twice\" at two-twenty-four.  On the lane for the time the plan expected: \"she checks in by two-twenty\" at two-twenty and \"the plan says I call Finch\" at two-twenty-five.  A shaded stretch labelled \"blocking most of my view\" covers the steps from two-nineteen to two-twenty-two.",
       "dataTable": {
         "type": "timeline",
         "sourcePassageId": "p-no-hurry-at-all",
@@ -6368,7 +6368,7 @@
       "src": "art/vault-of-ages-g6/fig-l5-weight-of-a-thread.svg",
       "caption": "Finch's telling moves through three parts, from the story of the three sisters, to what a field report has to be, to the stone someone carved as a tribute.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "Three labelled boxes joined left to right by arrows, reading three sisters, then A field report, then a tribute.",
+      "alt": "Three labelled boxes joined left to right by arrows, reading \"three sisters\", then A field report, then a tribute.",
       "dataTable": {
         "type": "schematic",
         "sourcePassageId": "p-weight-of-a-thread",
@@ -6414,7 +6414,7 @@
       "src": "art/vault-of-ages-g6/fig-l6-vault-of-ages.svg",
       "caption": "Each key fits a different notch on the door, and the order runs left to right: the Wyrdstone first, then the seal, and the Threadglass last.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A plan diagram of a door showing three labelled boxes across it for the leftmost notch, the center notch and the notch on the right, with an arrow running up into each of those from a box labelled the Wyrdstone, the seal and the Threadglass.",
+      "alt": "A plan diagram of a door showing three labelled boxes across it for the leftmost notch, the center notch and the notch on the right, with an arrow running up into each of those from a box labelled \"the Wyrdstone\", the seal and the Threadglass.",
       "dataTable": {
         "type": "schematic",
         "sourcePassageId": "p-vault-of-ages",

@@ -10,8 +10,10 @@
 // Uses the `claude -p` subscription CLI on purpose. This is authoring-time verification that runs
 // hundreds of calls; paying metered API rates for it would be the wrong tool.
 //
-// Existing adjudicated records are PRESERVED when their itemHash still matches, so a re-run never
-// silently discards a human decision.
+// Existing adjudicated records are PRESERVED when their itemHash still matches.  When the item is
+// EDITED the hash moves and the record is re-asked, and a single blind answer used to be enough
+// to retire a human adjudication;  see RETIRED ADJUDICATION CHECK below for why that is no
+// longer true and for the run that caught it.  A re-run never silently discards a human decision.
 
 const fs = require('fs');
 const path = require('path');
@@ -107,6 +109,24 @@ function parseAnswer(raw, optionCount) {
   // and only for the types that are sets (see sameAnswer in verdicts.js), never at record time.
   const answer = Array.isArray(obj.answer) ? obj.answer.map(toIdx) : toIdx(obj.answer);
   return { answer, confidence: obj.confidence || 'unknown' };
+}
+
+// THE RETIREMENT RULE, as a pure function so it can be gated rather than asserted.
+//
+// Retiring a human adjudication is the one write in this file that destroys information, so the
+// decision to do it is separated from the I/O that surrounds it and pinned by --self-test-retired-
+// adjudication below.  votes may contain nulls (a failed call);  a null is not a vote for the key.
+function retirementVerdict(votes, authored, type) {
+  const counted = votes.filter((v) => v !== null && v !== undefined);
+  const wins = counted.filter((v) => sameAnswer(v, authored, type)).length;
+  return {
+    wins,
+    total: votes.length,
+    counted: counted.length,
+    // Unanimous across every run, and every run must have returned something.  A single agree with
+    // two failures is not three readings, it is one.
+    retire: counted.length === votes.length && votes.length >= 3 && wins === votes.length,
+  };
 }
 
 async function pool(jobs, size) {
@@ -218,6 +238,63 @@ async function main() {
     });
   });
 
+  // A RETIRED ADJUDICATION MUST NOT REST ON ONE DRAW.
+  //
+  // The guarantee at the top of this file -- "a re-run never silently discards a human decision" --
+  // was only true while the hash held. Line ~166 preserves an adjudicated record when
+  // p.itemHash === h; when the item is EDITED the hash moves, the record is re-run, and a single
+  // blind answer overwrites the adjudication. That is precisely the moment the human decision most
+  // needs deliberate reconsideration, and it was the moment with the least evidence behind it.
+  //
+  // Measured on l2-mc-three-realms-ruler-row, 26-0915: the item carried an adjudication whose own
+  // note recorded the blind error reproduced TWICE. Its stem was edited, the hash moved, one
+  // re-certification returned agree, and the adjudication was retired. Two further runs on the
+  // identical text both reproduced the error at high confidence: 1 agree against 3 disagree over
+  // four runs. The single agree was noise, and this file's own non-determinism note (tests/
+  // figure-necessity.js, "RIGHT, RIGHT, wrong, all at high confidence") had already said so.
+  //
+  // So: an item that WAS adjudicated and now comes back agree is re-asked twice more, and only a
+  // unanimous three wins the retirement. Anything else keeps the human in the loop, with the prior
+  // note carried forward so the next reader does not have to reconstruct it from git.
+  const retired = fresh.filter(r => r.status === 'agree'
+    && prior.get(r.itemId) && prior.get(r.itemId).status === 'adjudicated');
+  if (retired.length) {
+    console.log(`\nRETIRED ADJUDICATION CHECK: ${retired.length} item(s) held a human adjudication and`);
+    console.log('came back agree.  Re-asking each twice more;  only a unanimous three retires it.');
+    for (const rec of retired) {
+      const item = (pack.items || []).find(i => i.id === rec.itemId);
+      const passage = passages.get(item.passageId);
+      const votes = [rec.blind];
+      for (let n = 0; n < 2; n++) {
+        try {
+          const { prompt, optionCount } = blindQuestion(item, passage, figures.get(item.figureId));
+          const { answer } = parseAnswer(await callClaude(prompt), optionCount);
+          votes.push(answer);
+        } catch (e) { votes.push(null); }
+      }
+      const authored = authoredKeyOf(item);
+      const v = retirementVerdict(votes, authored, item.type);
+      console.log(`  ${rec.itemId}: ${v.wins} of ${v.total} run(s) agree with the authored key`
+        + (v.counted < v.total ? `  (${v.total - v.counted} call(s) failed)` : ''));
+      if (v.retire) {
+        console.log('    unanimous;  the adjudication is retired on three readings, not one');
+        continue;
+      }
+      const wins = v.wins;
+      const prev = prior.get(rec.itemId);
+      rec.status = 'needs-adjudication';
+      rec.blind = votes.find(v => v !== null && !sameAnswer(v, authored, item.type));
+      rec.runs = votes.length;
+      rec.agreeRuns = wins;
+      rec.priorNote = prev.note;
+      rec.priorAdjudicatedAt = prev.adjudicatedAt;
+      disagree++;
+      agree--;
+      console.log('    SPLIT.  The single agree was noise;  the adjudication STANDS and the record');
+      console.log('    is held at needs-adjudication with the prior note carried forward.');
+    }
+  }
+
   const out = { packId, model: MODEL_LABEL, records: keep.concat(fresh) };
   fs.writeFileSync(ledgerPath, JSON.stringify(out, null, 2) + '\n');
 
@@ -284,6 +361,39 @@ function selfTestRoster() {
 
 // Only run a pack when invoked directly. tests/verdicts.test.js requires this file to reach
 // parseAnswer, and a bare require must not start a run or call process.exit.
+// Gate for the rule above.  Runs offline, no CLI, no pack.  Each case is a control: the first two
+// prove the guard FIRES on the shape that actually happened (one agree, then disagreements), and the
+// last two prove it does not fire spuriously.  Without the failing cases a green here would mean
+// nothing, which is the defect class this whole round was about.
+if (require.main === module && process.argv.includes('--self-test-retired-adjudication')) {
+  const cases = [
+    { name: 'the l2-mc shape: one agree then two disagreements -> KEEP the adjudication',
+      votes: [0, 1, 1], authored: 0, type: 'mc', retire: false },
+    { name: 'a single dissent is enough to keep it',
+      votes: [0, 0, 1], authored: 0, type: 'mc', retire: false },
+    { name: 'unanimous three -> retire',
+      votes: [0, 0, 0], authored: 0, type: 'mc', retire: true },
+    { name: 'one agree and two FAILED calls is one reading, not three -> KEEP',
+      votes: [0, null, null], authored: 0, type: 'mc', retire: false },
+    { name: 'fewer than three readings never retires',
+      votes: [0, 0], authored: 0, type: 'mc', retire: false },
+    { name: 'order type compares structurally, unanimous -> retire',
+      votes: [[2, 3, 0, 1], [2, 3, 0, 1], [2, 3, 0, 1]], authored: [2, 3, 0, 1], type: 'order', retire: true },
+    { name: 'order type, one run in a different order -> KEEP',
+      votes: [[2, 3, 0, 1], [0, 1, 2, 3], [2, 3, 0, 1]], authored: [2, 3, 0, 1], type: 'order', retire: false },
+  ];
+  let bad = 0;
+  for (const c of cases) {
+    const got = retirementVerdict(c.votes, c.authored, c.type);
+    const ok = got.retire === c.retire;
+    if (!ok) bad++;
+    console.log(`  ${ok ? 'ok  ' : 'FAIL'}  ${c.name}  (wins ${got.wins}/${got.total}, retire ${got.retire})`);
+  }
+  console.log('');
+  console.log(bad ? 'RESULT: FAIL (' + bad + ')' : 'RESULT: ALL CLEAN');
+  process.exit(bad ? 1 : 0);
+}
+
 if (require.main === module && process.argv.includes('--self-test-roster')) {
   selfTestRoster();
 } else if (require.main === module) {

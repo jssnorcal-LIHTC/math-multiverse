@@ -12,75 +12,87 @@
 // Two more items had the same class untouched.  A claim of completeness in a commit message is not
 // completeness;  this is.
 //
-//   node sweep-unquoted-labels.js <pack.json> [--all]
+//   node sweep-unquoted-labels.js <pack.json> [--min N]
 //
-// Default reports only labels of three words or more, which is where the garden paths live.  --all
-// includes short ones.
+// THIS IS VERSION 2, AND VERSION 1 IS WHY IT EXISTS.  C4 round 4 found that v1 reported "Every cued
+// drawn label in reader-facing prose is closed at both edges" over a pack carrying seven unclosed
+// ones, and that the miss had three independent causes.  All three are the same shape as the defect
+// this file was written to catch, one level up: a predicate that reaches one case and not the case
+// beside it.
+//
+//   THE FLOOR.  v1 defaulted to MINWORDS = 3 and hid anything shorter behind --all.  Its SIBLING,
+//   tests/sweep-caption-key.js, was written in the SAME COMMIT and carries its own post-mortem at
+//   line 5 saying v1 of THAT sweep skipped keys shorter than three words and that v2 therefore has
+//   no length floor.  The identical floor was diagnosed, written up and removed in one sweep and
+//   left standing in the other.  Measured on 51f56d3: vault 0 hits at the floor and 7 without it,
+//   ela-g6-spy 15 and 31, night-rounds-g6 9 and 18.  The short ones are not the harmless ones:
+//   "the row named check it" and "the row reading a ruler" are the two worst garden paths in the
+//   Vault pack, and the shipping commit for v1 cited "a ruler" BY NAME as its motivating example.
+//   There is now no floor.  --min N raises one for triage; --all is accepted and is a no-op.
+//
+//   THE CUE GATE.  v1's CUE required the cue verb to sit immediately left of the label, so any
+//   intervening noun hid it: "the plan marks it with the words <label>", "the card prints the words
+//   <label>", "the message ends with the words <label>".  Six-word clause-shaped labels were
+//   invisible at every floor.  The cue may now carry an intervening "the words / the line / the
+//   phrase", and "with the words" is a cue in its own right.
+//
+//   THE ITERATION SET.  v1's loop was `(pack.items || [])`, so a figure's own alt and caption were
+//   never read at all, and the alt is the non-visual reader's whole substitute for the drawing.
+//   Four of round 4's findings were on figure alts.  Figures are now swept against their own drawn
+//   strings.
+//
+//   THE STANDALONE LABEL.  A cue-based predicate cannot see a label that IS the entire field, which
+//   is how a match item's rowLabels are written.  l1-match ships three bare ones, one an imperative
+//   with a terminal full stop, while its sibling l4-match quotes all six of its row and column
+//   labels in the pack's idiom.  Row and column labels are now checked whole.
 const fs = require('fs');
+const { drawnStrings, readerStrings, eachCuedUse } = require('./unquoted-labels-lib');
 
 const pack = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
-const ALL = process.argv.includes('--all');
-const MINWORDS = ALL ? 1 : 3;
-
-// Cue verbs that open a quotation of drawn text.
-const CUE = /\b(reading|reads|read|labelled|labeled|labels|label|headed|marked|named|naming|says|saying|gives|giving|carries|carrying|prints|printing)\s+$/i;
-
-// Every string a figure actually draws.
-function drawnStrings(fig) {
-  const out = new Set();
-  const walk = (n) => {
-    if (typeof n === 'string') { if (n.trim()) out.add(n.trim()); return; }
-    if (Array.isArray(n)) return n.forEach(walk);
-    if (n && typeof n === 'object') Object.values(n).forEach(walk);
-  };
-  walk(fig.dataTable);
-  return [...out].sort((a, b) => b.length - a.length);
-}
-
-// Reader-facing fields only.  svgRead is authoring evidence and is excluded on purpose; a
-// non-reader-facing field is allowed to be terse.
-function readerStrings(it) {
-  const out = [];
-  const push = (where, v) => { if (typeof v === 'string' && v.trim()) out.push({ where, text: v }); };
-  push('stem', it.stem);
-  push('explain', it.explain);
-  push('whyTheFigureIsNeeded', it.whyTheFigureIsNeeded);
-  (it.choices || []).forEach((c, i) => push(`choices[${i}]`, c));
-  (it.tiles || []).forEach((c, i) => push(`tiles[${i}]`, c));
-  (it.rowLabels || []).forEach((c, i) => push(`rowLabels[${i}]`, c));
-  (it.colLabels || []).forEach((c, i) => push(`colLabels[${i}]`, c));
-  (it.blanks || []).forEach((b, n) => (b.choices || []).forEach((c, i) => push(`blanks[${n}].choices[${i}]`, c)));
-  Object.entries(it.distractorRationale || {}).forEach(([k, v]) => push(`distractorRationale[${k}]`, v));
-  return out;
-}
+const minArg = process.argv.indexOf('--min');
+const MINWORDS = minArg > -1 ? Math.max(1, parseInt(process.argv[minArg + 1], 10) || 1) : 1;
 
 const figs = Object.fromEntries((pack.figures || []).map((f) => [f.id, f]));
 let checked = 0;
 const hits = [];
 
+// One prose field against one figure's drawn strings.  `owner` is what gets reported: an item id
+// for item prose, a figure id for an alt or a caption.
+function sweepField(owner, where, text, labels) {
+  eachCuedUse(text, labels, MINWORDS, (u) => {
+    checked++;
+    if (u.closed) return;
+    hits.push({ item: owner, where, label: u.label, openQ: u.openQ, closeQ: u.closeQ,
+      ctx: (u.before.slice(-28) + '>>' + u.label + '<<' + u.after.slice(0, 24)).replace(/\s+/g, ' ') });
+  });
+}
+
+// A row or column label that IS a drawn string, whole, carries no cue to key on and so is
+// invisible to sweepField at any floor.  The pack's idiom wraps it: the line reading "x".
+function sweepStandalone(owner, where, text, labelSet) {
+  const bare = text.trim();
+  if (!labelSet.has(bare)) return;
+  checked++;
+  hits.push({ item: owner, where, label: bare, openQ: false, closeQ: false, standalone: true,
+    ctx: ('>>' + bare + '<<').replace(/\s+/g, ' ') });
+}
+
 for (const it of (pack.items || []).filter((i) => i.figureFact && i.figureId)) {
   const fig = figs[it.figureId];
   if (!fig) continue;
   const labels = drawnStrings(fig);
+  const labelSet = new Set(labels);
   for (const { where, text } of readerStrings(it)) {
-    for (const L of labels) {
-      if (L.split(/\s+/).length < MINWORDS) continue;
-      let from = 0;
-      for (;;) {
-        const i = text.indexOf(L, from);
-        if (i === -1) break;
-        from = i + 1;
-        const before = text.slice(0, i);
-        if (!CUE.test(before)) continue;      // not introduced as a quotation
-        checked++;
-        const openQ = /["“]\s*$/.test(before);
-        const after = text.slice(i + L.length);
-        const closeQ = /^\s*["”]/.test(after);
-        if (openQ && closeQ) continue;        // properly closed
-        hits.push({ item: it.id, where, label: L, openQ, closeQ,
-          ctx: (before.slice(-28) + '>>' + L + '<<' + after.slice(0, 24)).replace(/\s+/g, ' ') });
-      }
-    }
+    sweepField(it.id, where, text, labels);
+    if (/^(rowLabels|colLabels)\[/.test(where)) sweepStandalone(it.id, where, text, labelSet);
+  }
+}
+
+// The alt is the non-visual reader's entire substitute for the drawing, and v1 never read one.
+for (const fig of (pack.figures || [])) {
+  const labels = drawnStrings(fig);
+  for (const k of ['alt', 'caption']) {
+    if (typeof fig[k] === 'string' && fig[k].trim()) sweepField(fig.id, k, fig[k], labels);
   }
 }
 
@@ -90,7 +102,8 @@ for (const h of hits) (byItem[h.item] = byItem[h.item] || []).push(h);
 for (const [id, hs] of Object.entries(byItem)) {
   console.log(`  ${id}`);
   for (const h of hs) {
-    const state = h.openQ ? 'opened but not closed' : (h.closeQ ? 'closed but not opened' : 'unquoted');
+    const state = h.standalone ? 'bare drawn label, whole field'
+      : h.openQ ? 'opened but not closed' : (h.closeQ ? 'closed but not opened' : 'unquoted');
     console.log(`    ${h.where.padEnd(28)} ${state}`);
     console.log(`        ...${h.ctx}...`);
   }
