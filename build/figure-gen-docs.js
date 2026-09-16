@@ -251,7 +251,23 @@ function keyBlock(entries, top, accent) {
     const x = PAD + col * (colW + gutter);
     let y = top + NOTE_FONT;
     for (let r = col * perCol; r < col * perCol + row; r++) y += rowHs[r];
-    out.push(text(x + numW - 8, y, NOTE_FONT, e.n + '.', { anchor: 'end', fill: accent }));
+    // THE MARK HAS TO BE VISIBLE, not merely present in the markup.
+    //
+    // An unverified TICK has carried a real treatment since V1: a hollow, dashed ring in the accent
+    // colour, with its number written "7?" instead of "7". The matching LIST ROW carried
+    // data-kind="unverified" and rendered byte-identically to its verified neighbours, so the two
+    // halves of one figure disagreed about the same step, and the list is where a child actually
+    // reads them. Two occurrences, one per pack: vault-of-ages-g6/fig-l2-wyrdstone and
+    // night-rounds-g6/fig-l6-night-of-the-storm.
+    //
+    // The row number takes the SAME "?" the axis already puts on that step, so the child meets one
+    // mark in two places rather than two marks meaning one thing. It is also the only treatment
+    // that costs no vertical space, which matters: a dashed rule under the label was tried first
+    // and collided with the next row's ascenders on fig-l6-night-of-the-storm, whose twelve
+    // entries sit at a 20px pitch under a 22px font. Both byte gates passed that version and the
+    // first figure looked correct; only rendering the SECOND one showed it.
+    out.push(text(x + numW - 8, y, NOTE_FONT, e.n + (e.mark === 'unverified' ? '?' : '.'),
+      { anchor: 'end', fill: accent }));
     if (e.lead) {
       const wl = wrappedLeads[i];
       if (wl.length <= 1) out.push(text(x + numW, y, leadFont, e.lead, { opacity: '0.82' }));
