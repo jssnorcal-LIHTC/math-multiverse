@@ -1,0 +1,58 @@
+[
+  {
+    "pack": "ela-g6-spy",
+    "item": "l1-ms-what-the-two-lines-show",
+    "field": "distractorRationale[1]",
+    "label": "the collector",
+    "reason": "Subject of a that-clause, not a quotation: 'the article never says the collector is the one who leaves it'. The drawn box happens to carry the same words. Quoting it makes the sentence say the article never says the phrase, which is not the claim."
+  },
+  {
+    "pack": "ela-g6-spy",
+    "item": "l6-ms-claim-against-the-two-runs",
+    "field": "explain",
+    "label": "nine minutes",
+    "reason": "One cue over a series whose second member is elliptical: 'reads nine minutes and then seven'. Quoting the first and leaving 'seven' bare is worse than leaving both bare, and 'seven' cannot be quoted to match because the drawn value is 'seven minutes'."
+  },
+  {
+    "pack": "night-rounds-g6",
+    "item": "l2-order-workup-chain-of-arrows",
+    "field": "explain",
+    "label": "thiaminase",
+    "reason": "A substance named in a narrative chain, and the very next clause repeats it bare: 'Raw frozen fish carries thiaminase, thiaminase breaks thiamine apart'. Quoting the first occurrence only would be the sibling miss this sweep exists to catch."
+  },
+  {
+    "pack": "night-rounds-g6",
+    "item": "l2-cloze-heading-against-the-tally",
+    "field": "stem",
+    "label": "two feeds daily",
+    "reason": "One cue over a heading read as a running phrase: 'Its heading gives two feeds daily, 7:00 and 15:30'. The three parts are one heading, not three quotable labels."
+  },
+  {
+    "pack": "night-rounds-g6",
+    "item": "l3-cloze-read-the-rows-across",
+    "field": "explain",
+    "label": "a full day later",
+    "reason": "One cue over three drawn times read as a series: 'The bottom row reads a full day later, the same night, and Thursday morning'. Every member or none, and as a series none reads better."
+  },
+  {
+    "pack": "night-rounds-g6",
+    "item": "l3-cloze-read-the-rows-across",
+    "field": "explain",
+    "label": "after eight",
+    "reason": "The sibling clause in the same field, same shape: 'The time row reads after eight, closer to nine, and after dark'."
+  },
+  {
+    "pack": "night-rounds-g6",
+    "item": "l4-ms-what-the-clipping-underlines",
+    "field": "choices[4]",
+    "label": "Cal Prentiss",
+    "reason": "Naming a person, not quoting drawn text: 'The byline belongs to a reporter named Cal Prentiss'. The byline is drawn, but 'named X' here introduces the person rather than the string."
+  },
+  {
+    "pack": "night-rounds-g6",
+    "item": "l5-cloze-two-names-one-empty-line",
+    "field": "stem",
+    "label": "both signatures",
+    "reason": "The slip's own column heading used as a summary word before the two names it heads: 'The slip carries both signatures, Whitlock and Alva Reyes'. Quoting it separates the heading from the list it introduces."
+  }
+]

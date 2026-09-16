@@ -39,6 +39,9 @@ jobs:
       - name: Figure fidelity (every ELA figure label is verbatim in its passage; every C-wave key is licensed by its dataTable; 3 controls)
         run: node tests/figure-fidelity.js
 
+      - name: Unquoted drawn labels (every cued label closed at both edges in all three ELA packs; reviewed exceptions allowlisted, stale entries fail)
+        run: npm run unquoted-labels
+
       - name: Freshness unit gate (MVFresh service, module-grade union rejection)
         run: node tests/freshness.js
 
