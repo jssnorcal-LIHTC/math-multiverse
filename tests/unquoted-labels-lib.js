@@ -25,10 +25,34 @@ const CUEVERB = 'reading|reads|read|labelled|labeled|labels|label|headed|marked|
 // words" because "opens with" and "ends with" were not cues.  Quoting one of three and leaving two
 // is the sibling miss this whole programme keeps making, reproduced inside a single sentence.
 const CUEWITH = 'opens?|ends?|begins?|starts?|closes?|finishes?';
+// "the words X" is a quotation cue ON ITS OWN, wherever the verb sits.  The cross-cutting pass found
+// four more unclosed labels in ela-g6-spy behind verbs the list does not hold and never should:
+// "the drawing PUTS the words X", "it gives a number TO the words X".  Chasing the verb is the wrong
+// axis;  the naming noun is the cue.  Probed across all three packs before landing: 4 real hits, 0
+// false positives.
+const CUENOUN = '(?:the|its)\\s+(?:words?|phrase)';
 const CUE = new RegExp(
   '(?:\\b(?:' + CUEVERB + ')(?:\\s+(?:the|a|an)\\s+(?:words?|lines?|phrase|entry|text|heading))?'
   + '|\\b(?:' + CUEWITH + ')\\s+with(?:\\s+(?:the|a|an)\\s+(?:words?|lines?|phrase|entry|text|heading))?'
-  + '|\\bwith\\s+the\\s+words?)\\s+$', 'i');
+  + '|\\bwith\\s+the\\s+words?'
+  + '|\\b' + CUENOUN + ')\\s+$', 'i');
+
+// A dataTable holds two kinds of string and only one of them is DRAWN TEXT.  Walking all of them
+// was the root cause of a false-positive class the cross-cutting pass had to unpick by hand:
+//
+//   shape: "box"          flagged "a labelled box for the fence", where box is a common noun and
+//                         the value is a rendering instruction.  It also matched inside "boxes",
+//                         which the word-boundary check below then had to catch separately.
+//   id: "willow"          flagged "a labelled willow";  the DRAWN label on that node is "big willow".
+//   from/to: "8:22"       a structural reference to an event, not the gap's label, which is
+//                         "some forty minutes".
+//
+// So the walk skips structural keys.  Drawn text lives in label, value, heading, text, title,
+// stamp, rows and tracks;  everything named below positions, references or renders it.
+const STRUCTURAL = new Set([
+  'type', 'layout', 'docKind', 'shape', 'style', 'emphasis', 'id', 'kind', 'mark',
+  'sourcePassageId', 'from', 'to', 'track', 'gen', 'src',
+]);
 
 // Every string a figure actually draws.  Longest first, so a label that contains a shorter one is
 // considered before its own substring.
@@ -37,7 +61,9 @@ function drawnStrings(fig) {
   const walk = (n) => {
     if (typeof n === 'string') { if (n.trim()) out.add(n.trim()); return; }
     if (Array.isArray(n)) return n.forEach(walk);
-    if (n && typeof n === 'object') Object.values(n).forEach(walk);
+    if (n && typeof n === 'object') {
+      for (const [k, v] of Object.entries(n)) if (!STRUCTURAL.has(k)) walk(v);
+    }
   };
   walk(fig.dataTable);
   return [...out].sort((a, b) => b.length - a.length);

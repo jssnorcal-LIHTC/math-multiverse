@@ -3,13 +3,13 @@
 <text x="40" y="44" font-size="26" fill="#e8eef7">Night of May 26</text>
 <text x="132" y="74" font-size="20" fill="#e8eef7" fill-opacity="0.82">4:00 p.m.</text>
 <text x="760" y="74" font-size="20" fill="#e8eef7" text-anchor="end" fill-opacity="0.82">11:00 p.m.</text>
-<rect x="498.33" y="108" width="52.33" height="94" fill="none" stroke="rgba(232,238,247,0.35)" stroke-width="1" data-gap="pairs sent, no entries" />
-<line x1="520.33" y1="108" x2="498.33" y2="130" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="542.33" y1="108" x2="498.33" y2="152" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="550.67" y1="121.67" x2="498.33" y2="174" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="550.67" y1="143.67" x2="498.33" y2="196" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="550.67" y1="165.67" x2="514.33" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="550.67" y1="187.67" x2="536.33" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<rect x="505.33" y="108" width="38.33" height="94" fill="none" stroke="rgba(232,238,247,0.35)" stroke-width="1" data-gap="pairs sent, no entries" />
+<line x1="527.33" y1="108" x2="505.33" y2="130" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="543.67" y1="113.67" x2="505.33" y2="152" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="543.67" y1="135.67" x2="505.33" y2="174" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="543.67" y1="157.67" x2="505.33" y2="196" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="543.67" y1="179.67" x2="521.33" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="543.67" y1="201.67" x2="543.33" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
 <text x="40" y="134" font-size="18" fill="#e8eef7" fill-opacity="0.82">planned</text>
 <line x1="132" y1="128.5" x2="760" y2="128.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" />
 <text x="40" y="180" font-size="18" fill="#e8eef7" fill-opacity="0.82">actual</text>
@@ -36,7 +36,7 @@
 <text x="62" y="330" font-size="18" fill="#3a6" text-anchor="end">3.</text>
 <text x="70" y="330" font-size="20" fill="#e8eef7" fill-opacity="0.82">7:40 p.m.</text>
 <text x="204" y="330" font-size="22" fill="#e8eef7">gate closed</text>
-<text x="62" y="354" font-size="18" fill="#3a6" text-anchor="end">4.</text>
+<text x="62" y="354" font-size="18" fill="#3a6" text-anchor="end">4?</text>
 <text x="70" y="354" font-size="20" fill="#e8eef7" fill-opacity="0.82">7:30 p.m.</text>
 <text x="204" y="354" font-size="22" fill="#e8eef7" data-kind="unverified">maybe 7:30</text>
 <text x="62" y="378" font-size="18" fill="#3a6" text-anchor="end">5.</text>

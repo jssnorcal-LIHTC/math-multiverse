@@ -1545,6 +1545,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l1-mc-where-the-found-tortoises-were",
+      "itemHash": "eb4f15d4d9a8560e",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l1-ms-what-the-yard-plan-shows",
       "itemHash": "1f08d5365f9c3740",
       "blind": [
@@ -1561,36 +1569,10 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-match-invoice-columns-line-for-line",
-      "itemHash": "bff01d5a0e90baf4",
-      "blind": [
-        1,
-        2,
-        0
-      ],
-      "authored": [
-        1,
-        2,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-order-workup-chain-of-arrows",
-      "itemHash": "6a37d531dfdb1ef0",
-      "blind": [
-        1,
-        3,
-        0,
-        2
-      ],
-      "authored": [
-        1,
-        3,
-        0,
-        2
-      ],
+      "itemId": "l2-mc-tally-strip-across-columns",
+      "itemHash": "f8dd9c2214b017a4",
+      "blind": 2,
+      "authored": 2,
       "confidence": "high",
       "status": "agree"
     },
@@ -1629,6 +1611,28 @@
       "status": "agree"
     },
     {
+      "itemId": "l3-cloze-read-the-rows-across",
+      "itemHash": "98a6d2e3624a4432",
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-biggest-jump-on-the-grid",
+      "itemHash": "03e821af87607c81",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l4-ms-what-the-clipping-underlines",
       "itemHash": "49528ec19dde6e46",
       "blind": [
@@ -1643,41 +1647,15 @@
       "status": "agree"
     },
     {
-      "itemId": "l4-match-plan-connectors",
-      "itemHash": "5d9103e1e21c055f",
+      "itemId": "l5-cloze-two-names-one-empty-line",
+      "itemHash": "d475e547484c7e03",
       "blind": [
-        2,
         0,
         1
       ],
       "authored": [
-        2,
         0,
         1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-what-the-place-row-records",
-      "itemHash": "41b8cee48635edb7",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ms-what-the-slip-shows",
-      "itemHash": "df4cb68ad330d3a1",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -1701,102 +1679,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-mc-where-the-found-tortoises-were",
-      "itemHash": "eb4f15d4d9a8560e",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-mc-tally-strip-across-columns",
-      "itemHash": "f8dd9c2214b017a4",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-cloze-heading-against-the-tally",
-      "itemHash": "e9a3c62aa2055f95",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-mc-what-the-hatched-band-shows",
-      "itemHash": "b4323b4c558ed5f5",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-cloze-read-the-rows-across",
-      "itemHash": "98a6d2e3624a4432",
-      "blind": [
-        2,
-        0
-      ],
-      "authored": [
-        2,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-mc-biggest-jump-on-the-grid",
-      "itemHash": "03e821af87607c81",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-cloze-bars-above-the-advisory",
-      "itemHash": "9cc0336ba2a11c48",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-the-row-left-blank",
-      "itemHash": "4d69f1a659744c8d",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-cloze-two-names-one-empty-line",
-      "itemHash": "d475e547484c7e03",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-mc-dot-after-the-dashed-one",
       "itemHash": "629ba388726ad579",
       "blind": 3,
@@ -1813,8 +1695,126 @@
       "status": "agree"
     },
     {
+      "itemId": "l2-match-invoice-columns-line-for-line",
+      "itemHash": "1776d48a4bbd692f",
+      "blind": [
+        1,
+        2,
+        0
+      ],
+      "authored": [
+        1,
+        2,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-order-workup-chain-of-arrows",
+      "itemHash": "1ecf429b2df2521e",
+      "blind": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "authored": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-cloze-heading-against-the-tally",
+      "itemHash": "6acd89f8ae10203f",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-mc-what-the-hatched-band-shows",
+      "itemHash": "b123accb9e40dfdd",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-cloze-bars-above-the-advisory",
+      "itemHash": "4c13b155b6dbcd3f",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-match-plan-connectors",
+      "itemHash": "d776aca5d9028cef",
+      "blind": [
+        2,
+        0,
+        1
+      ],
+      "authored": [
+        2,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-what-the-place-row-records",
+      "itemHash": "1f41170b63ce14f7",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-the-row-left-blank",
+      "itemHash": "777de8c169571637",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ms-what-the-slip-shows",
+      "itemHash": "5fc678e023752b61",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-cloze-where-the-second-step-sits",
-      "itemHash": "2080726f3932c69c",
+      "itemHash": "c55043c5ae19e7b0",
       "blind": [
         2,
         0
