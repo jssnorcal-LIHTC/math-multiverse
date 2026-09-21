@@ -46,9 +46,33 @@
 //   with a terminal full stop, while its sibling l4-match quotes all six of its row and column
 //   labels in the pack's idiom.  Row and column labels are now checked whole.
 const fs = require('fs');
+const path = require('path');
 const { drawnStrings, readerStrings, eachCuedUse } = require('./unquoted-labels-lib');
 
+// A GATE, NOT A REPORTER, as of 26-0915.  The predicate cannot separate a real unclosed label from
+// the three shapes the cross-cutting pass had to unpick by hand, and no amount of widening will: a
+// comma after a quoted label is equally normal in a CORRECT use ('the row reading "a ruler", what
+// does the comparison show?'), so a series heuristic would start missing real defects.  The
+// exceptions are therefore enumerated with reasons and everything else fails.
+//
+// Same ratchet as the freshness gate: an allowlist entry that no longer matches anything is itself
+// a failure, so the list cannot quietly rot into a blanket permission.
+const ALLOWLIST_PATH = path.join(__dirname, 'unquoted-labels-allowlist.json');
+let ALLOW = [];
+try {
+  ALLOW = JSON.parse(fs.readFileSync(ALLOWLIST_PATH, 'utf8'));
+  if (!Array.isArray(ALLOW)) throw new Error('unquoted-labels-allowlist.json must be a JSON array');
+} catch (e) {
+  if (e.code !== 'ENOENT') { console.error('allowlist unreadable: ' + e.message); process.exit(2); }
+}
+
 const pack = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+const PACK_ID = path.basename(process.argv[2]).replace(/\.json$/, '');
+const SEP = String.fromCharCode(0);
+const allowKey = (p2, i2, f2, l2) => [p2, i2, f2, l2].join(SEP);
+const allowed = new Map(ALLOW.filter((e) => e.pack === PACK_ID)
+  .map((e) => [allowKey(e.pack, e.item, e.field, e.label), e]));
+const used = new Set();
 const minArg = process.argv.indexOf('--min');
 const MINWORDS = minArg > -1 ? Math.max(1, parseInt(process.argv[minArg + 1], 10) || 1) : 1;
 
@@ -111,3 +135,24 @@ for (const [id, hs] of Object.entries(byItem)) {
 console.log(hits.length
   ? `\n  ${hits.length} label use(s) not closed at both edges, across ${Object.keys(byItem).length} item(s).`
   : '\n  Every cued drawn label in reader-facing prose is closed at both edges.');
+
+const unexplained = hits.filter((h) => {
+  const k = allowKey(PACK_ID, h.item, h.where, h.label);
+  if (allowed.has(k)) { used.add(k); return false; }
+  return true;
+});
+const stale = [...allowed.entries()].filter(([k]) => !used.has(k)).map(([, e]) => e);
+
+if (allowed.size) {
+  console.log(`  ${allowed.size - stale.length} of ${allowed.size} allowlisted exception(s) still apply.`);
+}
+if (stale.length) {
+  console.log(`\n  STALE ALLOWLIST: ${stale.length} entry(s) match nothing any more.  Delete them.`);
+  stale.forEach((e) => console.log(`    ${e.item}.${e.field}  ${JSON.stringify(e.label)}`));
+}
+if (unexplained.length) {
+  console.log(`\n  ${unexplained.length} use(s) are NOT allowlisted.  Close each one, or add it to`);
+  console.log('  tests/unquoted-labels-allowlist.json with a reason saying why quoting is wrong.');
+}
+if (unexplained.length || stale.length) process.exit(1);
+console.log('\nRESULT: ALL CLEAN');

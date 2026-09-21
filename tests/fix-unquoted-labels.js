@@ -9,10 +9,29 @@
 //
 //   node tests/fix-unquoted-labels.js <path/to/pack.json> [--min N]
 //
-// WHAT IT WILL NOT DO.  A row or column label that IS a drawn string, whole, has no cue to key on
-// and no single right rewrite: quoting it bare and wrapping it in the pack's idiom
-// ('the line reading "x"') are different editorial choices, and a match grid's row labels are what
-// the child drags.  Those are listed at the end for a hand decision and are never rewritten here.
+// WHAT IT WILL NOT DO, AND WHY EACH EXCLUSION WAS EARNED.
+//
+// A ROW OR COLUMN LABEL that IS a drawn string, whole, has no cue to key on and no single right
+// rewrite: quoting it bare and wrapping it in the pack's idiom ('the line reading "x"') are
+// different editorial choices, and a match grid's row labels are what the child drags.
+//
+// A FIGURE ALT OR CAPTION, never, as of the cross-cutting pass on 26-0915.  The sweep reads them
+// and this file does not touch them, and the asymmetry is deliberate.  Batch-applying to the alts
+// of two shipped packs damaged NINE of them in two ways that a cue-and-substring predicate cannot
+// tell apart from a real fix:
+//
+//   the list.  An alt names drawn items in series -- "six numbered stops labelled barn owls, red
+//   foxes, otter pool, ..." -- and one cue governs all six.  Quoting the first and leaving five
+//   bare reads worse than leaving all six bare.  Seven alts came back like that.
+//   the common noun.  "a labelled box for the fence" and "a labelled willow": both are drawn
+//   strings elsewhere in that figure, neither is a quotation here.
+//   the substring.  fig-l3-monitoring's gap label is the whole string "8:22 to 9:04, some forty
+//   minutes", and "8:22" is separately a drawn tick.  The fixer quoted the tick, turning a correct
+//   sentence into one that misnames the caption.
+//
+// An alt is prose about a picture, so its drawn strings arrive in lists and as ordinary words.  An
+// item's stem or rationale cites ONE label at a time, which is why the same predicate is safe there
+// and is not safe here.  Alts are listed at the end for a hand read.
 const fs = require('fs');
 const { drawnStrings, readerStrings, closeLabels } = require('./unquoted-labels-lib');
 
@@ -53,15 +72,28 @@ for (const it of (pack.items || []).filter((i) => i.figureFact && i.figureId)) {
   }
 }
 
-// The alt is the non-visual reader's entire substitute for the drawing, and v1 never read one.
+// REPORTED, NEVER REWRITTEN.  See the header: a cue-and-substring predicate cannot tell a real
+// unclosed label in an alt from a list, a common noun, or a substring of the label it belongs to,
+// and it got all three wrong on nine alts before this exclusion existed.
+const figureHits = [];
 for (const fig of (pack.figures || [])) {
   const labels = drawnStrings(fig);
-  for (const k of ['alt', 'caption']) doField(fig, k, fig.id, k, labels);
+  for (const k of ['alt', 'caption']) {
+    if (typeof fig[k] !== 'string') continue;
+    const r = closeLabels(fig[k], labels, MINWORDS);
+    if (r.n) figureHits.push(`${fig.id}.${k}  (${r.n} cued use(s) the sweep can see)`);
+  }
 }
 
 fs.writeFileSync(P, JSON.stringify(pack, null, 2) + '\n');
 console.log(`\n${total} label use(s) closed across ${touched.size} item(s)/figure(s)`);
 console.log('ITEMS TO RE-CERTIFY: ' + [...touched].filter((t) => !t.startsWith('fig-')).join(','));
+if (figureHits.length) {
+  console.log('');
+  console.log(`${figureHits.length} figure alt/caption field(s) carry a cued label the sweep can see.`);
+  console.log('NOT rewritten, by design;  read each one and edit by hand:');
+  figureHits.forEach((s2) => console.log('  ' + s2));
+}
 if (standalone.length) {
   console.log(`\n${standalone.length} bare drawn label(s) standing as a whole row/column label.`);
   console.log('NOT rewritten;  each needs a hand decision:');
