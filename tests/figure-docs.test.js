@@ -29,7 +29,7 @@ const fs = require('fs');
 const path = require('path');
 
 const docs = require('../build/figure-gen-docs.js');
-const { genSvg, GLYPH_W, VB_W, VB_H } = require('../build/figure-gen.js');
+const { genSvg, estimateTextWidth, VB_W, VB_H } = require('../build/figure-gen.js');
 
 const FIX = path.join(__dirname, 'fixtures', 'figure-docs');
 const ACCENT = '#3a6';
@@ -128,9 +128,10 @@ function unesc(s) {
 }
 
 // The SAME estimator build/figure-gen.js uses for its own left margin (estimateTextWidth), rebuilt
-// from the GLYPH_W constant it exports so the two can never disagree about how wide a label is.
+// by CALLING the function it exports, never a re-derivation of it, so the two can never disagree
+// about how wide a label is (Stage D, 26-0921:  a per-character table, no longer one constant).
 function estWidth(text, fontSize) {
-  return unesc(text).length * GLYPH_W * fontSize;
+  return estimateTextWidth(unesc(text), fontSize);
 }
 
 // The collapsed text content of each <text> element, tspans folded in. THIS is the level a fidelity
@@ -222,10 +223,13 @@ check('the canvas constants are the ones figure-gen.js already publishes', () =>
 check('figure-tokens and figure-gen publish the SAME tokens (no drift between chart and doc paths)', () => {
   const tok = require('../build/figure-tokens.js');
   const gen = require('../build/figure-gen.js');
-  ['INK', 'GRID', 'PLOT_GRID', 'DEFAULT_ACCENT', 'GLYPH_W', 'VB_W', 'VB_H'].forEach((k) => {
+  ['INK', 'GRID', 'PLOT_GRID', 'DEFAULT_ACCENT', 'estimateTextWidth', 'VB_W', 'VB_H'].forEach((k) => {
     assert.strictEqual(tok[k], gen[k], 'token ' + k + ' differs between figure-tokens and figure-gen');
   });
-  assert.strictEqual(tok.GLYPH_W, 0.6);
+  // The flat constant is GONE, not merely unused:  a consumer still reading it would get undefined
+  // and size every label at NaN, so its absence is asserted rather than assumed.
+  assert.strictEqual(tok.GLYPH_W, undefined, 'GLYPH_W is back;  every width must come from estimateTextWidth');
+  assert.strictEqual(gen.GLYPH_W, undefined, 'figure-gen re-exports GLYPH_W again');
   assert.strictEqual(tok.FONT_FLOOR, FONT_FLOOR);
   // The doc renderers must be reachable from the chart module's own dispatch table.
   assert.deepStrictEqual(gen.DOC_TYPES, docs.DOC_TYPES);
@@ -709,14 +713,24 @@ check('CONTROL: the same tall card WITHOUT the footnote renders, so the refusal 
 // table RENDERS, and with it in place it is REFUSED. A first attempt used an invented three-node
 // fixture which was refused either way, by the older connector rule, and so proved nothing; that
 // version passed with the new check deleted.
+//
+// STAGE D MOVED TWO NODES, 26-0921, AND HAD TO.  Under the per-character width table the shipped
+// geometry no longer collides at all:  with true widths the renderer places "straight down" beside
+// its arrow and "The badge reads green" under its own, and a render of it reads clean.  So the
+// control stopped discriminating, which is the failure this note warns about.  The camera now sits
+// directly above a lower shelf (camera y 26 -> 50, shelf y 72 -> 78), found by searching node
+// positions for a plan that RENDERS with the label-vs-label test deleted and is REFUSED with it.
+// The render without the test was read:  the two labels print one through the other, exactly the
+// shipped shape.  Longer labels on the old geometry were tried first and all of them were refused
+// either way, by the box and connector rules, so they proved nothing.
 const OVERLAPPING_LABELS = {
   type: 'schematic', layout: 'plan', title: 'Frostbank Storage',
   nodes: [
     { id: 'doors', label: 'eleven doors', shape: 'box', x: 8, y: 72 },
     { id: 'twelfth', label: 'The twelfth', shape: 'box', x: 42, y: 72 },
     { id: 'panel', label: 'a single reader panel', shape: 'box', x: 42, y: 92 },
-    { id: 'camera', label: "the room's only camera", shape: 'box', x: 86, y: 26 },
-    { id: 'shelf', label: 'a raised shelf', shape: 'box', x: 86, y: 72 },
+    { id: 'camera', label: "the room's only camera", shape: 'box', x: 86, y: 50 },
+    { id: 'shelf', label: 'a raised shelf', shape: 'box', x: 86, y: 78 },
   ],
   edges: [
     { from: 'doors', to: 'twelfth', label: 'a corridor so featureless', style: 'arrow' },
