@@ -37,7 +37,7 @@ const fs = require('fs');
 const path = require('path');
 const { stableStringify } = require('./verdicts.js');
 const { genTargets } = require('../build/figure-gen.js');
-const { FONT_FLOOR, truncateToWidth } = require('../build/figure-tokens.js');
+const { FONT_FLOOR, truncateToWidth, estimateTextWidth } = require('../build/figure-tokens.js');
 
 const REPO_ROOT = path.join(__dirname, '..');
 const PACK_DIR = path.join(REPO_ROOT, 'packs');
@@ -148,7 +148,7 @@ function textContents(svg) {
   return out;
 }
 
-// Every text run's box, measured with the SAME model tests/figure-derive.js uses (GLYPH_W for width,
+// Every text run's box, measured with the SAME model tests/figure-derive.js uses (estimateTextWidth,
 // 0.8/0.25 of the font for ascent and descent). Rotated text is handled rather than ignored: the
 // facsimile stamp is drawn inside a <g transform="rotate(...)">, and reading its x/y as if the
 // transform were absent measured a real label in the wrong place entirely.
@@ -206,7 +206,9 @@ function outOfCanvas(svg) {
 function measureOne(plain, x, y, fontSize, anchor, rot, bad) {
   {
     if (!plain) return;
-    const w = plain.length * 0.6 * fontSize;
+    // The generators' own estimator (build/figure-tokens.js), never a literal:  this line was a
+    // hard-coded 0.6 that no search for the constant's NAME would ever have found.
+    const w = estimateTextWidth(plain, fontSize);
     const left = anchor === 'end' ? x - w : anchor === 'middle' ? x - w / 2 : x;
     const box = [[left, y - 0.8 * fontSize], [left + w, y - 0.8 * fontSize],
       [left + w, y + 0.25 * fontSize], [left, y + 0.25 * fontSize]];

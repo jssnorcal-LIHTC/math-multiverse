@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" font-family="'Times New Roman', Times, 'Liberation Serif', serif" role="img">
 <rect x="0" y="0" width="800" height="450" fill="#0f1218" />
 <rect x="56" y="34" width="688" height="386" fill="rgba(232,238,247,0.06)" stroke="rgba(232,238,247,0.28)" stroke-width="1" rx="6" />
 <text x="78" y="76" font-size="26" fill="#e8eef7">the cold chain</text>
 <line x1="78" y1="88.5" x2="722" y2="88.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
 <text x="78" y="126" font-size="20" fill="#e8eef7" fill-opacity="0.82">Our own rule</text>
-<text x="238" y="126" font-size="22" fill="#e8eef7">six months in the freezer</text>
+<text x="204" y="126" font-size="22" fill="#e8eef7">six months in the freezer</text>
 <line x1="78" y1="138.5" x2="722" y2="138.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
 <text x="78" y="184" font-size="22" fill="#e8eef7"><tspan x="78" dy="0">The first invoice</tspan></text>
 <text x="400" y="184" font-size="22" fill="#e8eef7"><tspan x="400" dy="0">The second invoice</tspan></text>
-<line x1="392.5" y1="156" x2="392.5" y2="380" stroke="rgba(232,238,247,0.28)" stroke-width="1" />
+<line x1="392.5" y1="156" x2="392.5" y2="358" stroke="rgba(232,238,247,0.28)" stroke-width="1" />
 <line x1="78" y1="196.5" x2="722" y2="196.5" stroke="rgba(232,238,247,0.5)" stroke-width="1" />
 <text x="78" y="220" font-size="20" fill="#e8eef7"><tspan x="78" dy="0">the eighth of January</tspan></text>
 <text x="400" y="220" font-size="20" fill="#e8eef7"><tspan x="400" dy="0">the eleventh of January</tspan></text>
@@ -16,11 +16,11 @@
 <text x="78" y="248" font-size="20" fill="#e8eef7"><tspan x="78" dy="0">The lot number is 4471</tspan></text>
 <text x="400" y="248" font-size="20" fill="#e8eef7"><tspan x="400" dy="0">lot number 3902</tspan></text>
 <line x1="78" y1="255.5" x2="722" y2="255.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" />
-<text x="78" y="276" font-size="20" fill="#e8eef7"><tspan x="78" dy="0">packed on the fourth of</tspan> <tspan x="78" dy="22">December</tspan></text>
-<text x="400" y="276" font-size="20" fill="#e8eef7"><tspan x="400" dy="0">packed in November of the</tspan> <tspan x="400" dy="22">year before last</tspan></text>
+<text x="78" y="276" font-size="20" fill="#e8eef7"><tspan x="78" dy="0">packed on the fourth of December</tspan></text>
+<text x="400" y="276" font-size="20" fill="#e8eef7"><tspan x="400" dy="0">packed in November of the year</tspan> <tspan x="400" dy="22">before last</tspan></text>
 <line x1="78" y1="305.5" x2="722" y2="305.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" />
-<text x="78" y="326" font-size="20" fill="#e8eef7"><tspan x="78" dy="0">the front freezer under a</tspan> <tspan x="78" dy="22">blue tag</tspan></text>
-<text x="400" y="326" font-size="20" fill="#e8eef7"><tspan x="400" dy="0">freezer two, beneath a</tspan> <tspan x="400" dy="22">white tag</tspan></text>
-<line x1="78" y1="355.5" x2="722" y2="355.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" />
-<text x="400" y="376" font-size="20" fill="#e8eef7"><tspan x="400" dy="0">CLEARANCE</tspan></text>
+<text x="78" y="326" font-size="20" fill="#e8eef7"><tspan x="78" dy="0">the front freezer under a blue tag</tspan></text>
+<text x="400" y="326" font-size="20" fill="#e8eef7"><tspan x="400" dy="0">freezer two, beneath a white tag</tspan></text>
+<line x1="78" y1="333.5" x2="722" y2="333.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" />
+<text x="400" y="354" font-size="20" fill="#e8eef7"><tspan x="400" dy="0">CLEARANCE</tspan></text>
 </svg>
