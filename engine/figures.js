@@ -190,8 +190,13 @@
     zoom.appendChild(img);
     frame.appendChild(zoom);
     box.appendChild(frame);
-    box.appendChild(el('div', 'mv-lb-cap', f.caption));
-    box.appendChild(el('div', 'mv-lb-credit', f.credit));
+    // Art pass, Stage B 6b: caption and credit share one opaque band (.mv-lb-foot in engine.css)
+    // rather than sitting straight on the 93% scrim, where the page's own text showed through on
+    // the same rows with no gap before the caption's first glyph.
+    const foot = el('div', 'mv-lb-foot');
+    foot.appendChild(el('div', 'mv-lb-cap', f.caption));
+    foot.appendChild(el('div', 'mv-lb-credit', f.credit));
+    box.appendChild(foot);
 
     // Double-tap toggles zoom; a single tap on the image must not also close the lightbox, so
     // it stops propagation the same as a tab tap does.
