@@ -156,6 +156,56 @@ function figureRoutes(pack) {
 // every declared tab's own view src and overlay, selected by KIND rather than a hardcoded index.
 // Used by BOTH the fixture positive control and the armed sampled-render integration, so "the armed
 // path gets the same firable oracle" is one function, not two numbers that happen to agree today.
+// Art pass Stage B 6a (26-0921): inside a .mv-passage the thumb height is no longer a constant.  It
+// is clamp(44px, 35cqh - 18px, 96px) of the passage's own content box (engine.css), so the oracle
+// computes the SAME expression from the passage it actually measures, and asserts the composed
+// geometry against that.  Outside a passage (the fixture probe) there is no size container and the
+// thumb stays at 96, so the positive control below still asserts exactly 98 / 128x96.
+function expectedThumbH(passageContentH) {
+  if (passageContentH == null) return 96;
+  return Math.min(96, Math.max(44, 0.35 * passageContentH - 18));
+}
+
+// Stage B 6a's actual promise, asserted where it matters: AT THE PASSAGE FLOOR the prose still
+// shows.  Measured before the fix, over 642 strip items in five packs, a passage at its floor showed
+// 0.51 lines of prose on arrival because a fixed 96px thumb took the room.  The live passage is
+// pinned to its own floor, scrolled to the top, and the lines of prose visible under the strip are
+// counted.  NEGATIVE CONTROL in the same pass: switching the passage's container off puts the thumb
+// back to a fixed 96px, and the same count must then fall under the bar, or this check could not
+// have failed and says nothing.  Every inline style is restored before returning.
+const FLOOR_PROSE_LINES = 2.5;
+async function assertStripAtFloor(page, problems, note, label) {
+  const m = await page.evaluate(() => {
+    const box = document.querySelector('.mv-passage');
+    if (!box || !box.querySelector('.mv-figs') || !box.querySelector('.mv-para')) return null;
+    const saved = { flex: box.style.flex, height: box.style.height, containerType: box.style.containerType, scrollTop: box.scrollTop };
+    const read = () => {
+      box.scrollTop = 0;
+      const cs = getComputedStyle(box);
+      const br = box.getBoundingClientRect();
+      const contentBottom = br.bottom - parseFloat(cs.borderBottomWidth) - parseFloat(cs.paddingBottom);
+      const para = box.querySelector('.mv-para');
+      const lh = parseFloat(getComputedStyle(para).lineHeight);
+      const img = box.querySelector('.mv-figs .mv-fig-img').getBoundingClientRect();
+      return { boxH: br.height, thumbH: img.height, lines: Math.max(0, contentBottom - para.getBoundingClientRect().top) / lh };
+    };
+    box.style.flex = '0 0 auto';
+    box.style.height = getComputedStyle(box).minHeight;
+    const fixed = read();
+    box.style.containerType = 'normal';
+    const control = read();
+    box.style.flex = saved.flex; box.style.height = saved.height; box.style.containerType = saved.containerType;
+    box.scrollTop = saved.scrollTop;
+    return { fixed, control };
+  });
+  if (!m) { problems.push(`${label}: floor check found no passage with a strip and prose to measure`); return; }
+  const f = m.fixed, c = m.control;
+  if (f.lines < FLOOR_PROSE_LINES) problems.push(`${label}: at the passage floor (${f.boxH.toFixed(0)}px box) only ${f.lines.toFixed(2)} line(s) of prose show under a ${f.thumbH.toFixed(1)}px thumb, bar is ${FLOOR_PROSE_LINES}`);
+  if (f.thumbH < 44 - 0.5) problems.push(`${label}: at the passage floor the thumb is ${f.thumbH.toFixed(1)}px, under the 44px touch floor`);
+  if (c.lines >= FLOOR_PROSE_LINES) problems.push(`${label}: NEGATIVE CONTROL did not fire: with the container off the floor still shows ${c.lines.toFixed(2)} lines (thumb ${c.thumbH.toFixed(1)}px), so this check cannot tell the fix from its absence`);
+  else note(`${label}: at the passage floor ${f.lines.toFixed(2)} lines of prose show under a ${f.thumbH.toFixed(1)}px thumb;  control with the container off: ${c.lines.toFixed(2)} lines under ${c.thumbH.toFixed(1)}px, correctly under the ${FLOOR_PROSE_LINES}-line bar`);
+}
+
 async function assertFigureStrip(page, scopeSel, figures, problems, note, label) {
   const before = problems.length;
   const geo = await page.evaluate((sel) => {
@@ -164,15 +214,23 @@ async function assertFigureStrip(page, scopeSel, figures, problems, note, label)
     const r = box.getBoundingClientRect();
     const img = box.querySelector('.mv-fig-img');
     const ir = img ? img.getBoundingClientRect() : null;
-    return { h: r.height, imgW: ir && ir.width, imgH: ir && ir.height, count: box.querySelectorAll('.mv-fig').length };
+    const passage = box.closest('.mv-passage');
+    let passageContentH = null;
+    if (passage && window.CSS && CSS.supports('height: 1cqh')) {
+      const cs = getComputedStyle(passage);
+      passageContentH = passage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    }
+    return { h: r.height, imgW: ir && ir.width, imgH: ir && ir.height, count: box.querySelectorAll('.mv-fig').length, passageContentH };
   }, scopeSel);
   if (!geo) { problems.push(`${label}: no .mv-figs strip rendered under "${scopeSel}"`); return; }
   if (geo.count !== figures.length) problems.push(`${label}: strip rendered ${geo.count} .mv-fig, expected ${figures.length}`);
-  // Composed, not the declared cap: 96px image height + 1px border top/bottom = 98. An assertion
-  // against the 104px cap alone cannot fail when the composed height grows past what the cap was
-  // meant to bound, which is exactly the shape of defect this check exists to catch.
-  if (Math.round(geo.h) !== 98) problems.push(`${label}: .mv-figs composed height is ${Math.round(geo.h)}px, expected 98px (96px image + 1px border top/bottom)`);
-  if (Math.round(geo.imgW) !== 128 || Math.round(geo.imgH) !== 96) problems.push(`${label}: .mv-fig-img box is ${Math.round(geo.imgW)}x${Math.round(geo.imgH)}, expected 128x96`);
+  // Composed, not the declared cap: the image height + 1px border top/bottom (98 for a 96px thumb).
+  // An assertion against the cap alone cannot fail when the composed height grows past what the cap
+  // was meant to bound, which is exactly the shape of defect this check exists to catch.
+  const wantH = expectedThumbH(geo.passageContentH);
+  const why = geo.passageContentH == null ? 'no passage container' : `passage content box ${geo.passageContentH.toFixed(1)}px`;
+  if (Math.abs(geo.h - (wantH + 2)) > 0.75) problems.push(`${label}: .mv-figs composed height is ${geo.h.toFixed(1)}px, expected ${(wantH + 2).toFixed(1)}px (${wantH.toFixed(1)}px image + 1px border top/bottom; ${why})`);
+  if (Math.round(geo.imgW) !== 128 || Math.abs(geo.imgH - wantH) > 0.75) problems.push(`${label}: .mv-fig-img box is ${geo.imgW.toFixed(1)}x${geo.imgH.toFixed(1)}, expected 128x${wantH.toFixed(1)} (${why})`);
   if (problems.length === before) note(`${label}: strip rendered ${geo.count} thumb(s), composed height ${Math.round(geo.h)}px, image box ${Math.round(geo.imgW)}x${Math.round(geo.imgH)}`);
 
   const photoIdx = figures.findIndex((f) => f.kind !== 'plate');
@@ -183,8 +241,30 @@ async function assertFigureStrip(page, scopeSel, figures, problems, note, label)
     const lbInfo = await page.evaluate(() => {
       const lb = document.querySelector('.mv-lightbox');
       const img = lb && lb.querySelector('.mv-lb-img');
-      return { present: !!lb, src: img ? img.src : null };
+      // Stage B 6b: the caption and credit must sit on a band that is fully opaque and spans the
+      // lightbox edge to edge, so no page text can show through on a caption row.  The alpha is
+      // read off the computed colour, not trusted from the stylesheet.
+      const foot = lb && lb.querySelector('.mv-lb-foot');
+      let band = null;
+      if (foot) {
+        const bg = getComputedStyle(foot).backgroundColor;
+        const mm = /rgba?\(([^)]+)\)/.exec(bg);
+        const parts = mm ? mm[1].split(',').map((s) => parseFloat(s)) : [];
+        band = { alpha: parts.length === 4 ? parts[3] : (parts.length === 3 ? 1 : 0), footW: foot.getBoundingClientRect().width, lbW: lb.getBoundingClientRect().width,
+          holdsCap: !!foot.querySelector('.mv-lb-cap'), holdsCredit: !!foot.querySelector('.mv-lb-credit'),
+          looseCap: !!lb.querySelector(':scope > .mv-lb-cap, :scope > .mv-lb-credit') };
+      }
+      return { present: !!lb, src: img ? img.src : null, band };
     });
+    if (lbInfo.present) {
+      const b = lbInfo.band;
+      if (!b) problems.push(`${label}: lightbox has no .mv-lb-foot band under the figure`);
+      else {
+        if (b.alpha < 1) problems.push(`${label}: caption band background alpha is ${b.alpha}, not opaque, so page text ghosts through on the caption rows`);
+        if (Math.abs(b.footW - b.lbW) > 0.5) problems.push(`${label}: caption band is ${b.footW.toFixed(0)}px wide in a ${b.lbW.toFixed(0)}px lightbox, so page text can still sit beside the caption`);
+        if (!b.holdsCap || !b.holdsCredit || b.looseCap) problems.push(`${label}: caption and credit are not both inside the band (cap ${b.holdsCap}, credit ${b.holdsCredit}, loose ${b.looseCap})`);
+      }
+    }
     const f0 = figures[photoIdx];
     const wantSuffix = (f0.kind === 'plate' ? f0.views[0].src : f0.src).split('/').pop();
     if (!lbInfo.present) problems.push(`${label}: tapping thumb ${photoIdx} (kind "${f0.kind}") did not open .mv-lightbox`);
@@ -617,6 +697,7 @@ async function sampledRenderIntegration(page, armedEntry, problems, note) {
       if (needStrip && !stripDone && drawHasStrip) {
         const stripFigs = ps.figureIds.map((fid) => figuresById.get(fid)).filter(Boolean);
         await assertFigureStrip(page, '.mv-passage', stripFigs, problems, note, `armed: pack "${entry.id}" passage "${ps.id}"`);
+        await assertStripAtFloor(page, problems, note, `armed: pack "${entry.id}" passage "${ps.id}" floor`);
         stripDone = true;
       }
       if (needRail && !railDone && drawHasRail) {

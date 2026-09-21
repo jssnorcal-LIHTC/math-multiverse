@@ -170,6 +170,29 @@
   border-radius: 7px; padding: 0; background: none; cursor: pointer; overflow: hidden;
   max-height: calc(var(--mv-fig-h) + 8px); }
 .mv-fig-img { display: block; width: 128px; height: var(--mv-fig-h, 96px); object-fit: contain; }
+/* Art pass, Stage B 6a (26-0921): the strip is sized against the PANEL it sits in, not in fixed
+   points.  At the passage floor a fixed 96px thumb (110px of strip with its margins) left HALF A
+   LINE of prose visible on arrival: measured in Chromium with the real strip over every item whose
+   passage carries one, 642 items across five packs, 347 of them at the floor at 1024x654 (the iPad
+   Safari landscape viewport), every one of those at 0.51 lines.  The child had to scroll past the
+   pictures to reach the first sentence.
+   The thumb now scales with the passage box's own content height:  96px while the box has 326px or
+   more (so every roomy passage renders exactly as before, and tests/figures-offline.js's 128x96
+   oracle still holds there), falling linearly to 44px at the 178px floor content box, which is the
+   touch-target floor tests/touch-targets.js holds everything else to.  The WIDTH stays 128px, as
+   the rail's already does at 72px:  a 4:3 width was tried first and at the 44px floor it made the
+   thumb 59px wide, which clipped its own "DIAGRAM" badge to "DIAGRA" (seen in a screenshot, not
+   in any measurement).  The rail (.mv-item-fig) sets its own --mv-fig-h and is not inside .mv-figs,
+   so it is untouched.
+   container-type:size is safe on .mv-passage specifically:  its height already comes from the
+   flex split (`flex: 1 1 0` plus an explicit min-height), never from its content, and its width
+   from .mv-shell's default stretch, so size containment changes neither;  the lightbox it could
+   otherwise capture is appended to document.body.  Behind @supports so a browser without
+   container units keeps the fixed 96px rather than resolving an invalid height to auto. */
+@supports (height: 1cqh) {
+  .mv-passage { container-type: size; }
+  .mv-figs { --mv-fig-h: clamp(44px, calc(35cqh - 18px), 96px); }
+}
 .mv-fig-badge { position: absolute; left: 4px; bottom: 4px; font-size: 0.72rem;
   letter-spacing: 0.08em; font-weight: 700; padding: 1px 5px; border-radius: 4px;
   background: rgba(0,0,0,0.78); color: #e8eef7; }
@@ -223,6 +246,14 @@
    by accident but leaves the cap silently disarmed for this one figure context. */
 .mv-item-fig { margin: 0 0 8px; --mv-fig-h: 72px; }
 
+/* Art pass, Stage B 6b (26-0921): caption and credit sit on an OPAQUE band, not on the scrim.
+   The scrim is 93% opaque, so the page's own text showed through at 7% on the same rows as the
+   caption, with the caption's first glyph 0px from the ghosted text beside it.  The band spans
+   the lightbox edge to edge (the negative margin reaches back through its 18px padding), so no
+   page text can sit on a caption row at all, and it is the scrim's own colour at full opacity,
+   so over the dark page it is the same colour as the scrim around it and reads as no shape. */
+.mv-lb-foot { align-self: stretch; margin: 0 -18px; padding: 6px 18px; background: rgb(4,8,16);
+  display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .mv-lb-cap { font-size: 0.92rem; text-align: center; max-width: 80ch; }
 .mv-lb-credit { font-size: 0.78rem; color: var(--text-secondary); }
 .mv-plate-tabs { display: flex; gap: 6px; }
