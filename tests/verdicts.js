@@ -85,7 +85,18 @@ function authoredKeyOf(item) {
   if (item.type === 'mc') return Number.isInteger(item.key) ? item.key : null;
   if (item.type === 'ms') return Array.isArray(item.key) ? item.key.slice() : null;
   if (item.type === 'hottext') return Array.isArray(item.key) ? item.key.slice() : null;
-  if (item.type === 'ebsr') return (item.partA && Number.isInteger(item.partA.key)) ? item.partA.key : null;
+  // EBSR is graded on BOTH parts (engine/items.js types.ebsr.grade:  full credit needs Part A's key AND
+  // the Part B line mapped from it), so it is certified on both:  [Part A key, that Part B line].
+  // UNTIL 26-0921 THIS RETURNED partA.key ALONE, so no Part B line in any pack had ever been blind-
+  // checked, and 240 EBSR records said "agree" about half of what the child is graded on.  Found when
+  // l3-ebsr-why-two-seconds (Cold Signal) turned out to map its correct claim to "I write down the time
+  // anyway." while the margin sentence that states the claim word for word was mapped from a wrong one.
+  if (item.type === 'ebsr') {
+    if (!item.partA || !Number.isInteger(item.partA.key)) return null;
+    const m = item.partB && item.partB.key;
+    const b = m && typeof m === 'object' && !Array.isArray(m) ? m[String(item.partA.key)] : null;
+    return Number.isInteger(b) ? [item.partA.key, b] : null;
+  }
   if (item.type === 'order') return Array.isArray(item.key) ? item.key.slice() : null;
   if (item.type === 'cloze') {
     if (!Array.isArray(item.blanks) || !item.blanks.length) return null;
@@ -127,11 +138,19 @@ function blindSpecOf(item) {
     case 'mc':
       return { stem: item.stem, body: lettered(item.choices || []),
                spec: '"answer": the single letter you choose', count: (item.choices || []).length };
-    case 'ebsr':
-      return { stem: (item.partA && item.partA.stem) || '',
-               body: lettered((item.partA && item.partA.choices) || []),
-               spec: '"answer": the single letter you choose',
-               count: ((item.partA && item.partA.choices) || []).length };
+    case 'ebsr': {
+      // Both parts, as the child meets them:  Part A, then Part B asking for the line that supports the
+      // answer just given.  Answered together as [Part A letter, Part B letter] and compared in order.
+      // One letter range is checked by the parser, so the two parts must be the same width;  every pack
+      // is four and four, and a mismatch is refused here rather than half-checked.
+      const a = (item.partA && item.partA.choices) || [];
+      const b = (item.partB && item.partB.choices) || [];
+      if (a.length !== b.length) throw new Error('blindSpecOf: ebsr ' + JSON.stringify(item.id) + ' has ' + a.length + ' Part A and ' + b.length + ' Part B options;  the parser checks one range');
+      return { stem: 'PART A.  ' + ((item.partA && item.partA.stem) || '') + '\n\nPART B.  ' + ((item.partB && item.partB.stem) || ''),
+               body: 'PART A OPTIONS:\n' + lettered(a) + '\n\nPART B OPTIONS:\n' + lettered(b),
+               spec: '"answer": an array of two letters, your Part A answer first and then the Part B sentence that best supports it',
+               count: a.length };
+    }
     case 'ms':
       // Keeps the answer count. types.ms.render shows the student a literal "Choose N." hint, so
       // telling the blind pass N puts it in the same information state as the child: fidelity, not

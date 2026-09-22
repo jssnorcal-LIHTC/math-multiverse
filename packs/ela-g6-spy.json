@@ -592,12 +592,12 @@
       "partA": {
         "stem": "What is the main point of the paragraph about the counting rule?",
         "choices": [
-          "Three is the number because coincidence can explain one sighting or two, and almost never three.",
-          "A courier should write down every person they happen to see more than once.",
-          "The route works because a follower has to keep making choices that can go wrong.",
+          "A courier should write down every person seen twice in one afternoon, since two is already a pattern.",
+          "Coincidence can explain two sightings but almost never three, which is why the rule is three.",
+          "The route works because a follower has to keep making choices, and any one of them can go wrong.",
           "The counting rule tells the courier how many moves to make on the route."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -608,14 +608,14 @@
           "A follower who is trying not to be seen has to keep making choices, and every choice is a chance to be wrong."
         ],
         "key": {
-          "0": 0,
-          "1": 2,
+          "0": 2,
+          "1": 0,
           "2": 3,
           "3": 1
         }
       },
       "distractorRationale": {
-        "1": "Two sightings are worth writing down; that is one rung of a ladder, not the paragraph's point.  The paragraph is answering why the number is three.",
+        "0": "Two sightings are worth writing down, and the paragraph calls them a coincidence, not a pattern.  That is one rung of a ladder, and the paragraph is answering why the number is three.",
         "2": "True, and from the first paragraph.  Evidence taken from somewhere else in the article cannot settle a question about this paragraph.",
         "3": "There are three moves and there are three sightings, and they are two different threes.  The counting rule counts sightings."
       },
@@ -680,14 +680,14 @@
       "dok": 2,
       "stem": "When the courier doubles back, what does the article say happens to an ordinary person who is not following anybody?",
       "choices": [
+        "They get about two seconds to decide whether to stop or walk past.",
         "They keep walking the way they were already going and are never seen again.",
-        "They get about two seconds to decide whether to stop or walk straight past.",
         "They turn into the side street and come back out the way they came.",
         "They end up on the same street twice by accident, which is why the rule is three."
       ],
-      "key": 0,
+      "key": 1,
       "distractorRationale": {
-        "1": "The two seconds belong to the follower.  This paragraph is built on a contrast between two people, and swapping them is the fastest way to lose it.",
+        "0": "The two seconds belong to the follower.  This paragraph is built on a contrast between two people, and swapping them is the fastest way to lose it.",
         "2": "That is the courier, not the passer-by.  Three people move through this paragraph and only one of them turns into the side street on purpose.",
         "3": "That is the reason the counting rule needs three sightings, taken from a paragraph much further down and answered to a different question."
       },
@@ -753,22 +753,22 @@
       "dok": 3,
       "stem": "The article names things a follower has to do that an ordinary person on the street does not.  Choose the three the article actually states.",
       "choices": [
-        "Decide inside about two seconds whether to turn around, stop, or walk straight past",
+        "Walk faster than the courier for the whole route, never letting any gap open up",
         "Close a forty-foot gap, or lose the courier, when the route changes level",
-        "Keep making choices, any one of which can be the wrong one",
-        "Walk faster than the courier for the whole of the route",
+        "Report back to somebody once the courier finally reaches the meeting place",
+        "Decide in about two seconds whether to turn around, stop, or walk past",
         "Look suspicious enough for the courier to pick their face out of a crowd",
-        "Report back to somebody once the courier reaches the meeting"
+        "Keep making choices, any one of which can be the wrong one"
       ],
       "key": [
-        0,
         1,
-        2
+        3,
+        5
       ],
       "distractorRationale": {
-        "3": "The article never asks the follower for speed.  Speed is the courier's temptation in this article, and the article talks them out of it.",
-        "4": "The article says the opposite.  Faces are a poor guide, and the courier is not hunting a suspicious one.  You picked what the word suspicious made you expect.",
-        "5": "Nothing here says what a follower does afterwards.  That comes from spy stories you already know rather than from this text."
+        "0": "The article pictures a follower drifting comfortably forty feet back, and it is the change of level that forces that gap closed.  It never has the follower walk faster than the courier the whole way.",
+        "2": "Nothing here says what a follower does afterwards.  That comes from spy stories you already know rather than from this text.",
+        "4": "The article says the opposite.  Faces are a poor guide, and the courier is not hunting a suspicious one.  You picked what the word suspicious made you expect."
       },
       "explain": "The article says a follower has to decide fast, has to close a gap that becomes visible from the front, and has to keep making choices that can go wrong.  Anything about walking faster, looking suspicious, or reporting back arrives from spy stories you already know rather than from this text."
     },
@@ -786,8 +786,8 @@
         {
           "choices": [
             "a straight line is the fastest way to reach the meeting",
-            "the route itself is built to make a follower show themselves",
-            "a longer walk tires out anybody who is following"
+            "the route is built to make a follower show themselves",
+            "a longer walk wears out anybody who is trying to keep up"
           ],
           "key": 1
         },
@@ -850,12 +850,12 @@
       "partA": {
         "stem": "The article spends its first two paragraphs on one thing and its last three on another.  What is that turn?",
         "choices": [
-          "It turns from the problem the rock creates to the methods that work around it.",
+          "It turns from what a radio can do above ground to what happens to it below ground.",
           "It turns from cheap equipment to expensive equipment.",
-          "It turns from what happens above ground to what happens below ground.",
+          "It turns from the problem the rock creates to the methods that work around it.",
           "It turns from radios to schedules, dropping equipment altogether."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -866,15 +866,15 @@
           "Every team that works underground runs into the same wall, and it has nothing to do with the price of their equipment."
         ],
         "key": {
-          "0": 1,
+          "0": 0,
           "1": 3,
-          "2": 0,
+          "2": 1,
           "3": 2
         }
       },
       "distractorRationale": {
+        "0": "Above ground turns up in one sentence, as a comparison.  The article is below ground from its first line to its last.",
         "1": "Price is mentioned once, in the first sentence, and only to rule it out.  A word can appear in an article without being what the article is organised around.",
-        "2": "Above ground turns up in one sentence, as a comparison.  The article is below ground from its first line to its last.",
         "3": "The schedule is the last piece of the fix, not the second half of the article.  You described one paragraph and called it the shape of the whole thing."
       },
       "explain": "The article is built as a problem and then the fixes that answer it, and one sentence marks the hinge by saying what the fix is not.  Price, open air, and the schedule all appear somewhere in the article, and none of them is the shape of the whole thing."
@@ -932,12 +932,12 @@
       "partA": {
         "stem": "What job does the last paragraph do in the article?",
         "choices": [
-          "It adds a third fix, one that works by making silence itself mean something.",
           "It repeats the problem from the opening so the reader remembers it.",
+          "It adds a third fix, one that works by making silence itself mean something.",
           "It explains why a relay is parked near the entrance of a tunnel.",
-          "It warns the reader that no fix in the article can really be relied on."
+          "It warns the reader that relays fail, so no fix in the article can really be relied on."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -948,16 +948,16 @@
           "That interval turns silence itself into information."
         ],
         "key": {
-          "0": 3,
-          "1": 2,
+          "0": 2,
+          "1": 3,
           "2": 1,
           "3": 0
         }
       },
       "distractorRationale": {
-        "1": "Silence turns up in both paragraphs, which is why this looks like a repeat.  The first time it is a problem and the last time it is a tool, so the article has moved rather than circled.",
+        "0": "Silence turns up in both paragraphs, which is why this looks like a repeat.  The first time it is a problem and the last time it is a tool, so the article has moved rather than circled.",
         "2": "That is the relay paragraph, two paragraphs earlier.  The question asks what the LAST paragraph does, so check where your evidence actually sits.",
-        "3": "Relays fail is the reason for the backup, not a verdict on the whole article.  A sentence that admits a limit is usually setting up the next idea."
+        "3": "\"Relays fail\" comes in the paragraph before the last one, and it is the reason for the backup, not a verdict on every fix.  A sentence that admits a limit is usually setting up the next idea."
       },
       "explain": "The last paragraph adds a third fix rather than repeating anything.  A schedule makes a missed call mean something, which turns silence from a puzzle into a message.  Answering with a fact from an earlier paragraph means the question about position never got answered at all."
     },
@@ -973,12 +973,12 @@
       "partA": {
         "stem": "The article says that silence is ambiguous.  What does ambiguous mean here?",
         "choices": [
-          "It can mean more than one thing, so it does not tell you which.",
           "It is dangerous and should be treated as an emergency.",
-          "It happens whenever a team goes deeper than a radio can reach.",
+          "It can mean more than one thing, so it does not tell you which.",
+          "It happens whenever a team goes deeper than a handheld radio can reach.",
           "It cannot be heard clearly through the rock."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -989,14 +989,14 @@
           "The deeper a team goes the less of the signal survives, and the fall is far steeper than most people expect."
         ],
         "key": {
-          "0": 0,
-          "1": 2,
+          "0": 2,
+          "1": 0,
           "2": 3,
           "3": 1
         }
       },
       "distractorRationale": {
-        "1": "Dangerous is a word from the sentence next door.  Nearby is not the same as the same, and the article is careful to say that trouble is only one of the possibilities.",
+        "0": "Dangerous is a word from the sentence next door.  Nearby is not the same as the same, and the article is careful to say that trouble is only one of the possibilities.",
         "2": "That is what causes the silence.  A word is not defined by what makes it happen.",
         "3": "You defined the word by the rock instead of by the silence.  Ambiguous is about meaning, not about volume."
       },
@@ -1016,7 +1016,7 @@
         "Events in the order they happened",
         "A problem, and then the fixes that answer it",
         "Two crews compared side by side",
-        "A claim, and then the objections to it"
+        "A claim, and then the objections raised against it"
       ],
       "key": 1,
       "distractorRationale": {
@@ -1038,8 +1038,8 @@
       "stem": "The article gives the name dead air to one particular situation.  Which situation?",
       "choices": [
         "Air in a tunnel that has gone stale and is no longer safe to breathe",
-        "The moment a battery in a handheld set finally runs out",
-        "Radio silence underground, where the silence could mean any one of several things",
+        "The moment a battery in a handheld set runs out and the radio goes quiet",
+        "Radio silence underground, which could mean any of several things",
         "The gap between two relays in a long chain"
       ],
       "key": 2,
@@ -1061,14 +1061,14 @@
       "dok": 3,
       "stem": "Why does the paragraph about what a silent radio costs come before the paragraph about relays?",
       "choices": [
-        "A reader has to see why the silence matters before a fix will seem worth the trouble.",
         "It is the order the two crews would meet the problem in real life.",
+        "A reader has to see why silence matters before a fix seems worth the trouble.",
         "Relays are the harder idea, so the article saves the hardest paragraph for last.",
         "The article is listing its ideas from the cheapest to the most expensive."
       ],
-      "key": 0,
+      "key": 1,
       "distractorRationale": {
-        "1": "The article is not telling a story in time order.  Nothing in it happens before or after anything else, so the paragraphs must be arranged by idea instead.",
+        "0": "The article is not telling a story in time order.  Nothing in it happens before or after anything else, so the paragraphs must be arranged by idea instead.",
         "2": "Relays are not the last paragraph, and the article never ranks its ideas by difficulty.  Check where a paragraph actually sits before deciding what it is doing there.",
         "3": "The very first sentence says price has nothing to do with the problem.  Cost is the one order the article goes out of its way to rule out."
       },
@@ -1134,20 +1134,20 @@
       "stem": "Choose the three statements that are true about how this article uses the word signal.",
       "choices": [
         "It means the radio energy that a handheld set pushes out",
-        "It means something rock can absorb and turn quietly into heat",
+        "It means the fifteen-minute schedule the two crews agree on",
         "By the last paragraph it also means a missed check-in that tells the surface crew something",
         "It means the hand gestures a team uses once the radios have failed",
-        "It means the fifteen-minute schedule the two crews agree on",
+        "It means something rock can absorb and turn quietly into heat",
         "It means the wire of a hardwired line taped along the wall"
       ],
       "key": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "distractorRationale": {
+        "1": "The schedule is what CREATES the signal in the last paragraph.  The signal is the call that does not come.",
         "3": "The article never mentions hand signals.  That is a sensible guess about tunnels, and a guess you cannot point at a sentence for.",
-        "4": "The schedule is what CREATES the signal in the last paragraph.  The signal is the call that does not come.",
         "5": "A hardwired line carries a signal; it is not one.  Watch the difference between a thing and what it travels along."
       },
       "explain": "The article uses signal for the radio energy that rock absorbs, and then in the last paragraph for a missed call that means something on its own.  Watching one word pick up a second meaning inside a single article is most of what an academic vocabulary question is asking for."
@@ -1165,17 +1165,17 @@
       "blanks": [
         {
           "choices": [
-            "ambiguous",
             "reliable",
+            "ambiguous",
             "redundant"
           ],
-          "key": 0
+          "key": 1
         },
         {
           "choices": [
-            "baton",
+            "transmitter",
             "interval",
-            "relay"
+            "handheld set"
           ],
           "key": 1
         }
@@ -1220,18 +1220,18 @@
       "partA": {
         "stem": "Why does the narrator decide not to call the exercise off at ten twenty-one?",
         "choices": [
-          "Nothing the narrator can actually see says Jonah is in trouble, and the delay has an ordinary explanation.",
-          "The rule allows waiting until ten twenty-two before the call has to be made.",
           "The narrator is afraid of having to defend the decision for the rest of the year.",
-          "The two clicks arrive on the radio and show that Jonah is fine."
+          "The rule allows the narrator to wait until ten twenty-two before the call has to be made.",
+          "Nothing the narrator can see says trouble, and the desk explains the delay.",
+          "The two clicks come through on the radio and show the narrator that Jonah is fine."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "What is true is that I was one second away from a decision I would have had to defend for the rest of the year.",
           "Nothing I can see from here says that he is in trouble.",
+          "What is true is that I was one second away from a decision I would have had to defend for the rest of the year.",
           "At ten twenty-two and eleven seconds, which is late, the radio clicks twice.",
           "The rule is that he checks in at ten twenty, and if nothing has come through by ten twenty-two I call the whole exercise off."
         ],
@@ -1243,8 +1243,8 @@
         }
       },
       "distractorRationale": {
+        "0": "That sentence is about the decision NOT made, looking back afterwards.  Fear is in the passage, and the narrator names it as a reason calling it off feels safe, which is the opposite of what stops them.",
         "1": "The rule sets the deadline; it does not make the decision.  The narrator is one second from calling it and stops for a reason the rule says nothing about.",
-        "2": "That sentence is about the decision NOT made, looking back afterwards.  Fear is in the passage, and the narrator names it as a reason calling it off feels safe, which is the opposite of what stops them.",
         "3": "Check the clock.  The clicks land at ten twenty-two and eleven seconds, after the moment the question asks about.  Evidence that arrives later cannot be the reason for an earlier decision."
       },
       "explain": "The decision turns on what the narrator can and cannot see.  Nothing visible says trouble, and a front desk explains the delay perfectly well.  The rule, the fear, and the two clicks are all real, and the clicks in particular arrive after the decision had already been made."
@@ -1261,12 +1261,12 @@
       "partA": {
         "stem": "What does telling this story from inside the van, in the narrator's own voice, let the reader know that an outside view could not?",
         "choices": [
-          "How little the narrator can actually see, and how much of the tension comes from not knowing.",
-          "What is happening to Jonah inside the museum while the narrator waits.",
-          "That the narrator is the calmest person on the exercise.",
-          "What Marchetti thinks of the narrator's decision afterwards."
+          "That the narrator stays calm the whole time, calmer than anyone on the exercise.",
+          "What is happening to Jonah at the front desk inside the museum while the narrator waits.",
+          "How little the narrator can see, so the tension comes from not knowing.",
+          "What Marchetti, who drilled the whole group in September, thinks of the decision."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1277,15 +1277,15 @@
           "I would like to say that I was calm about all of it."
         ],
         "key": {
-          "0": 2,
+          "0": 3,
           "1": 0,
-          "2": 3,
+          "2": 2,
           "3": 1
         }
       },
       "distractorRationale": {
+        "0": "Read the next sentence.  Would like to say is an admission, not a claim, and the passage immediately says what is true instead.",
         "1": "The narrator knows the lobby has a front desk and knows when Jonah went in.  Everything after that is worked out from a parked van, which is exactly what this narration cannot show you.",
-        "2": "Read the next sentence.  Would like to say is an admission, not a claim, and the passage immediately says what is true instead.",
         "3": "Marchetti is in the passage as training the narrator remembers, not as a person whose thoughts we get.  A name appearing is not the same as a viewpoint appearing."
       },
       "explain": "Being stuck inside the narrator's head is the whole point.  The view is the front doors and roughly four feet past them, so every reassurance in the passage is worked out rather than seen.  A narrator who says they would like to have been calm is admitting the opposite in the same breath."
@@ -1407,10 +1407,10 @@
       "dok": 3,
       "stem": "This story is told about Jonah rather than by him.  What does that let the reader see?",
       "choices": [
-        "What both Jonah and Ines are thinking, the whole way through",
+        "What both Jonah and Ines are thinking, the whole way through the story",
         "Only what somebody standing in the doorway of the room could see",
         "What Marchetti makes of each sheet as he collects it",
-        "Jonah's thinking, while Ines's reasons stay hidden until Jonah reads them"
+        "Jonah's mind, with Ines's reasons hidden until he reads them"
       ],
       "key": 3,
       "distractorRationale": {
@@ -1431,15 +1431,15 @@
       "dok": 3,
       "stem": "Jonah asks for his sheet back and adds one more line.  What has he worked out?",
       "choices": [
-        "A log that leaves out the part he could not explain is no use to whoever reads it next.",
-        "He wants Marchetti to see that his sheet is longer than Ines's.",
         "He has decided the thirty seconds on the landing were dangerous after all.",
+        "He wants Marchetti to see that his sheet is now longer than the one Ines wrote.",
+        "A log that skips what he could not explain is no use to the next reader.",
         "He is copying Ines, because hers was the sheet that got read."
       ],
-      "key": 0,
+      "key": 2,
       "distractorRationale": {
+        "0": "The line he writes says cause unknown and no action taken.  He still does not know what the sound was; what changed is that he wrote it down anyway.",
         "1": "Marchetti collects the sheets without reading a single one, and says so.  Length cannot be the point of something nobody marks.",
-        "2": "The line he writes says cause unknown and no action taken.  He still does not know what the sound was; what changed is that he wrote it down anyway.",
         "3": "Nobody's sheet got read.  Ines shows him what a complete log looks like, which is not the same as him copying her to be noticed."
       },
       "explain": "Jonah adds the line because Marchetti has just said who a log is for.  It is not for the marker, because nobody marks it.  It is for the next person standing on a landing, and the least impressive sentence on the sheet is the only one that helps them."
@@ -1505,21 +1505,21 @@
       "dok": 3,
       "stem": "Jonah's offer to wait works because of things he knows and Ferris does not.  Choose the three the story actually gives him.",
       "choices": [
-        "The education office does not open until half past ten",
+        "The permission letter really was sent to the office last week",
         "Ferris would have to leave her desk to find out",
         "What he offered can be checked, so it does not sound invented on the spot",
         "Ferris has already telephoned his school once that morning",
-        "The permission letter really was sent to the office last week",
+        "The education office does not open until half past ten",
         "There is nobody else at the front desk who could cover for her"
       ],
       "key": [
-        0,
         1,
-        2
+        2,
+        4
       ],
       "distractorRationale": {
+        "0": "Jonah has no idea whether that letter exists.  What a character says out loud is not automatically true, even when saying it works.",
         "3": "Ferris never telephones anybody in this story.  Adding that makes the moment far safer than it was, and the risk that she might is the whole scene.",
-        "4": "Jonah has no idea whether that letter exists.  What a character says out loud is not automatically true, even when saying it works.",
         "5": "The story never says whether anyone else works that desk.  It is a fair guess, and this question is asking for what is on the page instead."
       },
       "explain": "Three facts sit behind the offer and Jonah holds all three: the office is shut, it is two floors up, and checking it means abandoning the desk.  A guess about staffing and a hope about a letter are not the same kind of thing at all."
@@ -1537,17 +1537,17 @@
       "blanks": [
         {
           "choices": [
-            "what he can see and hear",
+            "what Marchetti says about her",
             "everything she is feeling",
-            "what Marchetti says about her"
+            "what he can see and hear"
           ],
-          "key": 0
+          "key": 2
         },
         {
           "choices": [
             "out loud to the whole room",
             "upside down across the table",
-            "after the debrief has ended"
+            "once the whole debrief has ended"
           ],
           "key": 1
         }
@@ -1709,12 +1709,12 @@
       "partA": {
         "stem": "Source B measured nine minutes where Source A promised ninety.  Why does Source B still refuse to call the Wren-7 a bad beacon?",
         "choices": [
-          "Two runs in one tunnel cannot settle how the beacon behaves anywhere else.",
-          "The bend and the damp walls prove the beacon itself was never the problem.",
           "They are keeping the hardwired line, so the beacon does not matter to them.",
+          "The bend and the damp walls prove the beacon was never the problem.",
+          "Two runs in one tunnel cannot settle how the beacon behaves anywhere else.",
           "The staff think nine minutes is long enough for the work they do."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from Source B best supports the answer you just gave?",
@@ -1725,15 +1725,15 @@
           "The staff note two local conditions that may explain the gap between these results and the maker's claim."
         ],
         "key": {
-          "0": 2,
+          "0": 0,
           "1": 3,
-          "2": 0,
+          "2": 2,
           "3": 1
         }
       },
       "distractorRationale": {
+        "0": "Keeping the line is what they recommend, not the reason behind it.  They also say to treat the beacon as a second method, which is a long way from saying it does not matter.",
         "1": "The staff say the bend and the damp may explain the gap.  Turning a possible explanation into a proof is the same move Source A makes, and Source B is careful not to make it.",
-        "2": "Keeping the line is what they recommend, not the reason behind it.  They also say to treat the beacon as a second method, which is a long way from saying it does not matter.",
         "3": "The log does say nine minutes is useful, which is about what the tool is worth rather than about how far the evidence reaches.  You answered why they still like it instead of why they will not judge it."
       },
       "explain": "Source B holds itself to the rule Source A breaks.  It has two runs in one tunnel, so it reports what those two runs showed and refuses to turn them into a verdict on the beacon anywhere else.  Measuring a small number does not entitle you to a big claim any more than measuring a large one does."
@@ -1749,7 +1749,7 @@
       "dok": 3,
       "stem": "The small print at the bottom of Source A says test results depend on local conditions.  What does that line do to the brief's biggest claim?",
       "choices": [
-        "It proves the brief is honest, so the ninety minutes can be trusted.",
+        "It proves the brief is honest, so a team can trust the ninety minutes it promises.",
         "It means the beacon will not work anywhere except Halloway.",
         "It quietly takes back the part of the claim the large print made loudest.",
         "It applies only to the parts about water, dust, and impact."
@@ -1773,18 +1773,18 @@
       "dok": 3,
       "stem": "A team is deciding what to carry into the Halloway tunnel next week.  The maker's brief promises ninety minutes and this log measured nine.  Which source should the team plan around?",
       "choices": [
-        "The brief, because ninety minutes is the safer number to plan around.",
-        "The log, because it was measured in the tunnel the team is actually going into.",
+        "The brief, because ninety minutes is the safer number for a team to plan around.",
+        "The log, because two people timed its runs and it has nothing to sell.",
         "Neither, because two sources that disagree cancel each other out.",
         "The brief, because it was written by the engineers who built the beacon."
       ],
       "key": 1,
       "distractorRationale": {
         "0": "Planning around the bigger number is the opposite of safe.  A team that expects ninety minutes and gets nine is stranded at exactly the moment the plan says everything is fine.",
-        "2": "Two sources that disagree are a reason to look at how each one was made, not a reason to give up.  One of these named its depth, its rock, and its date, and the other named none of them.",
+        "2": "Two sources that disagree are a reason to look at how each one was made, not a reason to give up.  One of these named its rock type, its date, and two separate timekeepers, and the other named none of them.",
         "3": "The engineers who built it also sell it, and theirs is the test nobody outside the company watched.  Knowing how a thing was made does not make you the right person to judge it."
       },
-      "explain": "Both sources tested the same tunnel, which is what makes this decidable rather than a matter of opinion.  The log names its depth, its rock, its date, and two independent timekeepers; the brief names none of those and sells the beacon.  For a team walking into Halloway, the log is not only more careful, it is about their tunnel."
+      "explain": "Both sources tested the same tunnel, which is what makes this decidable rather than a matter of opinion.  The log names its depth, its rock type, its date, and two independent timekeepers; the brief names only a depth, and it sells the beacon.  For a team walking into Halloway, both numbers claim to be about their tunnel, and only the log was timed by two people with nothing to sell."
     },
     {
       "id": "l4-mc-what-the-brief-leaves-out",
@@ -1912,9 +1912,9 @@
         },
         {
           "choices": [
-            "reaches the more cautious conclusion",
+            "reaches the more cautious of the two conclusions",
             "was written by people who work underground",
-            "names the conditions its numbers were measured in"
+            "names the conditions behind its numbers"
           ],
           "key": 2
         }
@@ -1970,7 +1970,7 @@
         "stem": "Reading the three tunnel results together changes what any one of them means.  What do the three together show?",
         "choices": [
           "Dry granite is the only rock a beacon can be used in.",
-          "The beacon is unreliable, because two of the three tunnels went badly.",
+          "The beacon is unreliable, because two of the three tunnels went badly for it.",
           "The ground the beacon sits in explains the differences, not the beacon.",
           "Depth is what decides how long a signal lasts."
         ],
@@ -2092,12 +2092,12 @@
       "partA": {
         "stem": "One moment in this log shows the signal loss was about where the beacon sat rather than about a beacon that had failed.  Which moment?",
         "choices": [
-          "The signal came back within four seconds once the beacon was carried up ten feet.",
-          "The beacon was switched on at the marked bay, the same spot both times.",
+          "The team waited twenty minutes at thirty feet and nothing came back.",
+          "The beacon was switched on at the marked bay, and it was the same spot on both runs.",
           "The same beacon lost the signal on the second run as well.",
-          "The team waited twenty minutes at thirty feet and nothing came back."
+          "The signal came back within four seconds once the beacon was carried up ten feet."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the log would you quote to back the answer you just gave?",
@@ -2108,16 +2108,16 @@
           "On the second run the same beacon was carried to the same bay by a different instructor."
         ],
         "key": {
-          "0": 2,
+          "0": 1,
           "1": 0,
           "2": 3,
-          "3": 1
+          "3": 2
         }
       },
       "distractorRationale": {
+        "0": "Twenty minutes of nothing is the strongest evidence that the signal was truly gone.  It says how badly the signal failed, not what would bring it back.",
         "1": "Using the same marked bay is what makes the two runs comparable, so it is a control on the test rather than a finding from it.  A fixed starting spot explains nothing about the loss.",
-        "2": "A second failure at the same spot shows the first was not a fluke, which is worth knowing and does not tell you why.  Repeating a result is not the same as locating its cause.",
-        "3": "Twenty minutes of nothing is the strongest evidence that the signal was truly gone.  It says how badly the signal failed, not what would bring it back."
+        "2": "A second failure at the same spot shows the first was not a fluke, which is worth knowing and does not tell you why.  Repeating a result is not the same as locating its cause."
       },
       "explain": "One detail in this log behaves like a switch: carry the beacon up ten feet and the signal is back in four seconds.  That is the difference between a beacon that has failed and a beacon that is in the wrong place, and it is the line that ties the log to the bend at twenty-five feet in the very next paragraph."
     },
@@ -2180,10 +2180,10 @@
       "dok": 3,
       "stem": "The association published all three tunnel results side by side instead of reporting the best one.  Why does that make the results more useful?",
       "choices": [
-        "It shows the association is not being paid by the beacon's maker.",
-        "The differences between them are what reveal that the ground, not the beacon, is doing the work.",
+        "It shows the association is not being paid by the beacon's maker to hide bad results.",
+        "The differences show that the ground, not the beacon, is doing the work.",
         "Three numbers averaged together give a more accurate figure than one number does.",
-        "It gives a buyer three chances to find a result they like."
+        "It gives a buyer three chances to find a result they like and then quote that one."
       ],
       "key": 1,
       "distractorRationale": {
@@ -2296,14 +2296,14 @@
         },
         {
           "choices": [
-            "mistakes in the timing",
+            "mistakes in the stopwatch timing",
             "properties of the ground",
-            "faults in the receiver"
+            "faults in the surface receiver"
           ],
           "key": 1
         }
       ],
-      "explain": "Putting two sources together means lining up their conditions before their numbers.  Halloway and the second tunnel share wet limestone and a sharp bend, so eight minutes and nine minutes are one finding rather than two, and the maker's ninety came out of dry granite in a straight run.  Nothing about the beacon has to change for all three numbers to be true at once."
+      "explain": "Putting two sources together means lining up their conditions before their numbers.  Halloway and the second tunnel share wet limestone and a sharp bend, so eight minutes and nine minutes are one finding rather than two.  That finding points at the ground, which is where the Halloway staff looked to explain the gap with the maker's ninety minutes.  Nothing about the beacon has to change for both short runs to be true."
     },
     {
       "id": "l5-order-how-the-case-is-built",
@@ -2339,36 +2339,36 @@
       "coachTopic": "central-theme",
       "dok": 3,
       "partA": {
-        "stem": "What is this story finally saying a log is for?",
+        "stem": "At the end of the story, Ines tells Jonah why he had to be the one who wrote down the thirty seconds on the landing.  What idea about logs does she add to the story?",
         "choices": [
-          "For recording the parts of a job that went to plan.",
-          "For proving to Marchetti that the exercise was done properly.",
-          "For the next person, who will be standing where you stood and needing what you knew.",
-          "For settling who was late and who was on time."
+          "A log should record what a writer meant to do, not only what happened.",
+          "The least impressive line on a sheet is the one that takes longest to write.",
+          "Only the person who noticed a small moment can put it in the log.",
+          "A log counts for more when a friend tells you the entry was worth writing."
         ],
         "key": 2
       },
       "partB": {
         "stem": "Which sentence from the story best supports the answer you just gave?",
         "choices": [
-          "Marchetti hands out the log sheets face down, which is a small thing he does to stop people writing before they have thought.",
-          "That person will be standing on a landing somewhere with one hand on a rail, wondering whether the sound they just heard matters.",
-          "She has logged the eleven seconds she was late calling in, and the fact that she nearly aborted the exercise, and the reason she decided not to.",
-          "It records entry at ten fourteen, contact with front desk staff, two clicks at ten twenty-two, the folder located and photographed and put back, and exit at ten forty-one."
+          "It is the least impressive sentence on the whole sheet and it takes him longer to write than everything above it.",
+          "The rule for the log is a single line, and it is that you write down what happened rather than what you meant to happen.",
+          "She does not laugh at him.",
+          "She says that thirty seconds is short enough that most people would never have noticed it at all."
         ],
         "key": {
-          "0": 3,
+          "0": 1,
           "1": 0,
-          "2": 1,
+          "2": 3,
           "3": 2
         }
       },
       "distractorRationale": {
-        "0": "Jonah's first sheet is exactly that, every step that went to plan and nothing else.  The story spends the rest of its length showing why that sheet is not finished.",
-        "1": "Marchetti runs the debrief and hands out the sheets, so it is a fair guess that he is the reader.  He collects them without reading a single one and says the logs are not marked and never have been.",
-        "3": "Ines does log the eleven seconds she was late, and in the same breath she logs the reason she decided not to abort.  She is recording a decision, not confessing a time."
+        "0": "The rule for the log says the opposite: you write down what happened rather than what you meant to happen.  Ines is talking about who had to write the moment down, not about plans.",
+        "1": "That is true of Jonah's added line, and it comes before Ines says anything.  Her comment is about why the line had to be his, because most people would never have noticed thirty seconds at all.",
+        "3": "Ines does not laugh at him, and she agrees the line had to be written.  It was already on his sheet before she said a word, and it matters because of who noticed the moment, not because a friend approved of it."
       },
-      "explain": "Marchetti gives the answer in one line and the story then proves it twice.  A log is not for the marker, because nobody marks it, and it is not for the writer either.  It is for whoever ends up on a landing with one hand on a rail, which is exactly why the part Jonah could not explain is the part that had to go in."
+      "explain": "Ines points out that thirty seconds is short enough that most people would never have noticed it.  That is what makes it Jonah's job, because a moment nobody else saw can reach the log only through the one person who did.  The story ends on that idea: a log is only as complete as the writer who is willing to put the small things in."
     },
     {
       "id": "l6-mc-what-the-lobby-scene-is-about",
@@ -2381,14 +2381,14 @@
       "dok": 3,
       "stem": "Which sentence best states what this whole scene is about?",
       "choices": [
-        "Getting past a front desk is mostly a matter of not looking nervous.",
+        "Getting past a front desk is mostly a matter of not looking nervous while you do it.",
         "A good cover story is one that answers every question before it is asked.",
         "A museum is easy to enter if you know which bus goes there.",
-        "A cover story only has to last until you can offer something dull and checkable instead."
+        "A cover only needs to last until you offer something dull and checkable."
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "His pulse is loud and his hands shake on the stairs, and he still gets upstairs.  The scene says nerves are not what decides it, and the boring checkable answer is.",
+        "0": "Walking in as if he belongs only gets Jonah across the lobby.  What gets him past Ferris is the boring, checkable answer he offers, not how calm he looks while he gives it.",
         "1": "The card has eleven words on it and the second question is not one of them, which is the moment the scene is built around.  A cover that answered everything would have made the scene unnecessary.",
         "2": "The bus does turn out to matter, and it matters because it was true and Ferris already knew it, not because it is a route to the museum.  You took the detail and left its reason behind."
       },
@@ -2406,7 +2406,7 @@
       "partA": {
         "stem": "One object in the opening description of the front desk is compared to something else.  What does that comparison tell you about the woman holding it?",
         "choices": [
-          "She is not really paying attention to whoever is in front of her.",
+          "She is not really paying attention to whoever is standing in front of her.",
           "She is suspicious of Jonah from the moment he walks in.",
           "She has done this so many times that it bores her.",
           "She uses it to hold people at a distance without having to say so."
@@ -2471,36 +2471,36 @@
       "coachTopic": "evidence-across-texts",
       "dok": 4,
       "partA": {
-        "stem": "In the debrief story Ines logs the reason she decided not to abort the exercise.  What does this story show that reason was?",
+        "stem": "In the debrief story, Ines logs that she nearly aborted the exercise.  What does this story show about how near she came?",
         "choices": [
-          "She was waiting for Jonah to come out and tell her the whole thing was easy.",
-          "She said out loud what she actually knew, in order, and none of it said Jonah was in trouble.",
-          "She trusted that the least interesting job in the building could not matter much.",
-          "Calling it off felt safe from inside the van, so she went with the feeling."
+          "She had already started the call when the two clicks came through and stopped her.",
+          "She put her thumb on the transmit key at ten twenty-one, then took it off.",
+          "She came nearest at ten twenty-one, the time the rule set for calling it off.",
+          "She reached for the key only once she could see Jonah was in trouble."
         ],
         "key": 1
       },
       "partB": {
         "stem": "Which sentence from this story best supports the answer you just gave?",
         "choices": [
-          "I say out loud what I actually know, in order, like reading down a list.",
-          "My job on the Halloway exercise is the least interesting one in the building, which Marchetti says is how you can tell it matters.",
-          "Jonah will come out at ten forty-one and tell me the whole thing was easy.",
-          "Calling it off is not the safe choice, whatever it feels like from inside a van."
+          "At ten twenty-one I put my thumb on the transmit key and then take it off again.",
+          "Nothing I can see from here says that he is in trouble.",
+          "At ten twenty-two and eleven seconds, which is late, the radio clicks twice.",
+          "The rule is that he checks in at ten twenty, and if nothing has come through by ten twenty-two I call the whole exercise off."
         ],
         "key": {
           "0": 2,
           "1": 0,
-          "2": 1,
-          "3": 3
+          "2": 3,
+          "3": 1
         }
       },
       "distractorRationale": {
-        "0": "Jonah saying it was easy happens at ten forty-one, once everything is over.  A story is allowed to look forward, and what it looks forward to cannot be a reason for something that has already happened.",
-        "2": "Marchetti's line is that the least interesting job is how you can tell it matters.  You stopped at the comma, and the sentence turns immediately after it.",
-        "3": "That is the sentence she is arguing against, not the one she followed.  Calling it off is not the safe choice, and reading the line as though it said the opposite reverses the whole paragraph."
+        "0": "She says the only reason she did not make the call is that she had a list and read her way down it.  The clicks come later, at ten twenty-two and eleven seconds, and two clicks mean no help is needed.",
+        "2": "The rule sets ten twenty-two for calling it off, not ten twenty-one.  At ten twenty-one no rule told her to do anything, and her thumb went onto the key anyway.",
+        "3": "The story says the opposite.  Nothing she can see says Jonah is in trouble, and everything she can see says he is talking to somebody."
       },
-      "explain": "Both stories describe the same minute from opposite sides, and only this one shows the inside of it.  Ines does not decide by feel; she says out loud what she actually knows, in order, and the list ends with nothing that says Jonah is in trouble.  That reasoning is why her log runs to a second sheet while Jonah's outcomes fit on one."
+      "explain": "The debrief story tells you that Ines nearly aborted the exercise, but not how near she came.  This story shows it.  At ten twenty-one her thumb goes onto the transmit key, and then she takes it off again, a minute before the rule would have made her call it off.  Reading the two stories together turns the word nearly into a moment you can point to."
     },
     {
       "id": "l6-mc-easy-in-two-stories",
@@ -2513,16 +2513,16 @@
       "dok": 4,
       "stem": "In the van story Ines predicts Jonah will say the whole thing was easy, and decides in advance to let him.  Here he says it, and then does something else.  What has changed between the two moments?",
       "choices": [
-        "He has learned who a log is for, so the easy version stops being enough for him.",
-        "He is telling the truth in one story and lying in the other.",
+        "He has decided Ines was wrong to expect him to say it.",
+        "He is telling the truth in one story and lying to Ines in the other.",
         "He tells her about the landing because Marchetti made him add the line.",
-        "He has decided Ines was wrong to expect him to say it."
+        "He has now logged the landing, so easy is not the whole story."
       ],
-      "key": 0,
+      "key": 3,
       "distractorRationale": {
+        "0": "Her prediction is right, and he says exactly what she expected, in the corridor.  What changes is what he does after saying it, not whether she read him correctly.",
         "1": "Easy is what he has been planning to say since the stairs, in both stories.  Neither one calls it a lie, and the interesting part is that he stops leaving it there.",
-        "2": "Marchetti hands the sheet back with no expression at all and asks for nothing.  Jonah is the one who asks for the sheet, which is what makes the line worth writing.",
-        "3": "Her prediction is right, and he says exactly what she expected, in the corridor.  What changes is what he does after saying it, not whether she read him correctly."
+        "2": "Marchetti hands the sheet back with no expression at all and asks for nothing.  Jonah is the one who asks for the sheet, which is what makes the line worth writing."
       },
       "explain": "Ines expects the easy version and is willing to let it stand, which is a kindness rather than a test.  Between the van and the corridor Jonah hears who a log is for, writes the least impressive sentence on his sheet, and then tells her the same thing out loud without being asked.  He says easy in both stories; in only one of them does he stop there."
     },
@@ -2593,20 +2593,20 @@
       "partA": {
         "stem": "Source A gives real facts about a real product.  What is the writer's purpose in giving them?",
         "choices": [
-          "To move a reader from interest to a purchase.",
+          "To tell a department what the beacon is rated for and how it is carried.",
           "To warn departments about the danger of dead air.",
           "To prove that rock is no longer a barrier to radio contact.",
-          "To tell a department what the beacon is rated for and how it is carried."
+          "To move a reader from interest to a purchase."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from Source A best supports the answer you just gave?",
         "choices": [
           "The Wren-7 has proven that forty feet of rock is no longer a barrier to contact.",
-          "Departments that have been saving for hardwired line can spend that money where it will do more good.",
+          "The Wren-7 is rated for water, dust, and impact.",
           "Until now the only honest answer to dead air has been a length of wire and a great deal of hope.",
-          "The Wren-7 is rated for water, dust, and impact."
+          "Departments that have been saving for hardwired line can spend that money where it will do more good."
         ],
         "key": {
           "0": 1,
@@ -2616,9 +2616,9 @@
         }
       },
       "distractorRationale": {
+        "0": "Water, dust, and impact are what the beacon is rated for, and that paragraph is the product description.  A part of a document is not the purpose of the document.",
         "1": "The brief does describe dead air, in one sentence, just before the beacon arrives to solve it.  A danger set up in a single line is the opening of a sales pitch rather than the point of the document.",
-        "2": "That is the brief's boldest claim, and a claim is what a document says rather than what it is for.  The very next line tells departments where to spend the money instead.",
-        "3": "Water, dust, and impact are what the beacon is rated for, and that paragraph is the product description.  A part of a document is not the purpose of the document."
+        "2": "That is the brief's boldest claim, and a claim is what a document says rather than what it is for.  The very next line tells departments where to spend the money instead."
       },
       "explain": "Purpose is not the same as content, and this document is full of real content.  Every part of it points one way: the danger gets one sentence, the test gets one paragraph, and the reader is then told where to move a budget and given a sales office to ring.  A document written to record a test would have carried a date."
     },
@@ -2655,7 +2655,7 @@
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "The article says silence is ambiguous.  Which chain of causes does the article actually build around that idea?",
+      "stem": "Which chain of causes does the article build, with each step leading to the next?",
       "choices": [
         "Relays fail, so the signal dies, so silence becomes ambiguous.",
         "Rock absorbs the signal, so a team needs a more powerful radio, and a powerful radio ends the silence.",
@@ -2682,10 +2682,10 @@
       "stem": "The article gives three moves and one counting rule.  Choose the three statements that describe how those parts work together.",
       "choices": [
         "Each move forces a follower into a choice that could be the wrong one",
-        "The moves are listed in the order of how well each one works",
-        "Each move is designed for a different kind of street",
-        "The moves create sightings, and the counting rule says how many sightings mean anything",
-        "One move on its own proves nothing, which is why there are three of them",
+        "The moves are listed in order, from the one that works best to the one that works least",
+        "Each move is designed for a different kind of street, such as a busy one or a quiet one",
+        "The moves make sightings, and the rule says how many count",
+        "A single sighting from one move is nothing on its own",
         "The counting rule replaces the moves once a courier is experienced"
       ],
       "key": [
@@ -2698,7 +2698,7 @@
         "2": "Stairs, windows, and side streets do suggest different streets, and the article never sorts them that way.  It sorts them by what each one does to a follower.",
         "5": "The rule counts what the moves produce, so it cannot replace them.  With no moves there are no sightings to count."
       },
-      "explain": "The three moves and the counting rule are one system rather than four separate tips.  Every move puts a follower somewhere that staying hidden requires a decision, every decision risks a sighting, and the rule of three is what turns a pile of sightings into a verdict.  One sighting is nothing at all, which is precisely why one move would be."
+      "explain": "The three moves and the counting rule are one system rather than four separate tips.  Every move puts a follower somewhere that staying hidden requires a decision, every decision risks a sighting, and the rule of three is what turns a pile of sightings into a verdict.  One sighting is nothing at all, so no single move can settle anything by itself."
     },
     {
       "id": "l1-ebsr-why-two-people",
@@ -2712,12 +2712,12 @@
       "partA": {
         "stem": "What problem does a dead drop solve?",
         "choices": [
-          "It lets two people exchange something without ever being seen together at one place and time.",
-          "It lets a courier avoid ever having to choose a hiding spot for the exchange.",
-          "It lets the person loading the drop skip the job of watching for followers.",
+          "It lets the person hiding the item skip choosing a container, since any hiding spot will do.",
+          "It lets two people exchange something without being seen together at one place and time.",
+          "It lets the person loading the drop skip watching for followers, since the last rule is the collector's.",
           "It lets a signal be sent instead of holding a face-to-face conversation."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2728,15 +2728,15 @@
           "The container is the first decision."
         ],
         "key": {
-          "0": 2,
-          "1": 3,
+          "0": 3,
+          "1": 2,
           "2": 1,
           "3": 0
         }
       },
       "distractorRationale": {
-        "1": "The passage never says a courier can skip choosing a hiding spot; picking the right container is exactly the first decision it describes. You are recalling a real detail attached to the wrong question.",
-        "2": "The last rule is aimed at the collector, and it says the collector must still check for a follower before the pickup. Nobody in this method is exempted from watching.",
+        "0": "The container is the first decision, and the article spends a whole paragraph on it, so not just any hiding spot will do.  You are recalling a real detail attached to the wrong question.",
+        "2": "The last rule is aimed at the collector, and a rule about one person is not a free pass for the other.  The problem a dead drop solves is two people being seen together.",
         "3": "A signal is one small piece of the method, the part that says a drop is ready. Removing the moment two people would be seen together is the actual point; the signal is just how the two sides arrange that."
       },
       "explain": "A dead drop solves the problem a meeting creates, which is that two people standing together can be tied together. Taking the second person out of that moment, not the container or the signal, is what the whole method is built around."
@@ -2753,12 +2753,12 @@
       "partA": {
         "stem": "Why is a dead drop container built to look ordinary, like a bolt or a loose brick?",
         "choices": [
-          "So a stranger who notices it, on purpose or by accident, sees nothing worth a second look.",
-          "So it can be checked by walking past it every day without drawing attention.",
-          "So it can hold a message written in a code no stranger could read.",
-          "So the collector never has to travel to a public place to retrieve it."
+          "To let the collector walk past it every day to check on it without drawing any attention.",
+          "To give anyone who notices it, by chance or on purpose, nothing worth a second look.",
+          "To hold a message written in a code that no stranger could read.",
+          "To spare the collector from standing in a public place, where someone might see the pickup."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2769,14 +2769,14 @@
           "The collector cannot walk past the site every day just to check, because repetition is its own kind of pattern."
         ],
         "key": {
-          "0": 2,
-          "1": 3,
+          "0": 3,
+          "1": 2,
           "2": 1,
           "3": 0
         }
       },
       "distractorRationale": {
-        "1": "Walking past the same spot every day is exactly the pattern the passage says a collector must avoid. An ordinary-looking container does not make daily visits safe.",
+        "0": "Walking past the same spot every day is exactly the pattern the passage says a collector must avoid. An ordinary-looking container does not make daily visits safe.",
         "2": "This passage never mentions codes or ciphers. Looking ordinary is about fooling a passerby's eyes, not about hiding writing from a reader.",
         "3": "The passage says a good site is public enough to need no excuse for standing there. A hidden, non-public site is the opposite of what it recommends."
       },
@@ -2794,12 +2794,12 @@
       "partA": {
         "stem": "Why do the two sides use a signal placed somewhere else, instead of just checking the drop site itself?",
         "choices": [
-          "Because checking the same site over and over is its own kind of pattern that can be noticed.",
-          "Because the signal is faster to read than opening the container.",
-          "Because a signal can carry more information than a loaded container can.",
-          "Because the collector is not allowed to visit the drop site at all."
+          "Because a chalk mark or a strip of tape is faster to read than opening the container.",
+          "Because repeated visits to the site are a pattern a watcher could notice.",
+          "Because a signal lets the collector skip the slow, careful route that a pickup would need.",
+          "Because the last rule forbids the collector from going anywhere near the drop site."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2810,16 +2810,16 @@
           "Instead the two sides agree on a signal placed somewhere else: a chalk mark on a lamppost, a strip of tape on a stop sign, or a plant moved from one side of a window to the other."
         ],
         "key": {
-          "0": 1,
-          "1": 3,
+          "0": 3,
+          "1": 1,
           "2": 0,
           "3": 2
         }
       },
       "distractorRationale": {
-        "1": "That sentence lists what a signal can look like, not a claim about reading speed; the passage never compares how fast a signal is to read against opening a container.",
-        "2": "The passage says the signal \"says one thing only,\" which is the opposite of carrying more information. A loaded container is never read through the signal at all.",
-        "3": "That sentence says the opposite of the answer: the last rule requires the collector to still visit, carefully, rather than forbidding the visit entirely."
+        "0": "That sentence lists what a signal can look like, not a claim about reading speed; the passage never compares how fast a signal is to read against opening a container.",
+        "2": "The slow route is still part of the pickup, because the passage says the collector treats it like a meeting that must be checked first.  The signal replaces the daily checking, not the careful walk.",
+        "3": "The last rule belongs to the collector, and it tells them how to visit the site, carefully, not to stay away.  A rule about the pickup cannot forbid the pickup."
       },
       "explain": "A signal exists because checking the drop site itself, over and over, would create a pattern a watcher could notice. Moving that repeated checking to a separate, everyday-looking spot is the entire reason the two-part system exists."
     },
@@ -2875,22 +2875,22 @@
       "dok": 3,
       "stem": "The article gives real qualities of a good dead-drop location. Choose the three the article actually states.",
       "choices": [
-        "Public enough that standing there briefly needs no excuse",
-        "Dull enough that nobody remembers who stood there",
-        "A place only one kind of person would have a reason to visit",
         "Close enough to the meeting that the walk takes only minutes",
+        "Marked clearly enough that the collector cannot miss it",
+        "Busy enough that no one kind of visitor stands out",
+        "Public enough that standing there briefly needs no excuse",
         "Guarded enough that a stranger could never reach it",
-        "Marked clearly enough that the collector cannot miss it"
+        "Dull enough that nobody remembers who stood there"
       ],
       "key": [
-        0,
-        1,
-        2
+        2,
+        3,
+        5
       ],
       "distractorRationale": {
-        "3": "The article never talks about distance to a meeting; a dead drop replaces a meeting rather than sitting near one.",
-        "4": "A guarded location is the opposite of what the article recommends. A dead drop needs to look like nowhere in particular, not somewhere protected.",
-        "5": "A drop that is easy to spot is a drop that has already failed. The whole design depends on nobody but the two sides noticing it at all."
+        "0": "The article never talks about distance to a meeting; a dead drop replaces a meeting rather than sitting near one.",
+        "1": "A drop that is easy to spot is a drop that has already failed. The whole design depends on nobody but the two sides noticing it at all.",
+        "4": "A guarded location is the opposite of what the article recommends. A dead drop needs to look like nowhere in particular, not somewhere protected."
       },
       "explain": "A good site is defined by three qualities working together: it is ordinary enough to need no excuse, forgettable enough that nobody remembers standing there, and general enough that no single kind of visitor stands out. Distance, guards, and visibility are never part of the article's own definition."
     },
@@ -2906,12 +2906,12 @@
       "partA": {
         "stem": "The article says a repeated scramble \"leaves a seam where the repeat shows.\" What does \"seam\" mean here?",
         "choices": [
-          "A place where a pattern breaks through and becomes visible to someone looking for it.",
           "A physical stitch sewn into the paper the pad is printed on.",
-          "A second, backup copy of the pad kept in case the first is lost.",
-          "The exact moment a message is sent from the sender to the receiver."
+          "A place where a hidden pattern becomes visible to someone looking for it.",
+          "A second, identical copy of the pad, kept by the receiver in case the first is lost.",
+          "The exact moment the sender finishes combining the message with the pad and sends it."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2922,15 +2922,15 @@
           "To encode a message, the sender combines it with the pad one character at a time."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
+          "0": 0,
+          "1": 1,
           "2": 2,
           "3": 3
         }
       },
       "distractorRationale": {
-        "1": "The article never mentions paper or stitching. A \"seam\" here is used the way a crack in a wall is used, a figure of speech for a weak spot, not an actual sewn line.",
-        "2": "A backup copy is never discussed in this passage. The \"seam\" is a flaw in the scrambling itself, not a spare copy of anything.",
+        "0": "The article never mentions paper or stitching. A \"seam\" here is used the way a crack in a wall is used, a figure of speech for a weak spot, not an actual sewn line.",
+        "2": "The receiver's identical copy is real, and it is how the message gets read, not a spare kept in case one is lost.  A seam is a flaw in the scrambling itself, not a copy of anything.",
         "3": "Sending a message is an event in time, while a seam is a place where a pattern shows through. The two ideas belong to different parts of the article."
       },
       "explain": "A codebreaker \"goes looking for that seam first,\" which only makes sense if a seam is something that can be found and examined: a spot where a repeated pattern becomes visible, not a physical object or a moment in time."
@@ -2988,12 +2988,12 @@
       "partA": {
         "stem": "The last paragraph says the method is not \"practical at real scale.\" What does that phrase mean as the article uses it?",
         "choices": [
-          "The method works perfectly but is too much effort to use for ordinary, everyday traffic.",
-          "The method does not actually work once a message grows past a certain length.",
+          "The method stops protecting a message once the message grows past a certain length.",
+          "The method cannot be broken, but it takes too much effort for everyday traffic.",
           "The method was only ever tested on a small number of messages.",
-          "The method requires equipment too expensive for most operations to buy."
+          "The method needs equipment so expensive that most operations cannot afford to buy it."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -3004,14 +3004,14 @@
           "That is why the method survives today mostly for messages that are short, rare, and important enough to be worth the cost."
         ],
         "key": {
-          "0": 3,
+          "0": 2,
           "1": 0,
-          "2": 1,
-          "3": 2
+          "2": 3,
+          "3": 1
         }
       },
       "distractorRationale": {
-        "1": "The article never says the cipher stops working at some length; its strength is described as complete, not limited by size.",
+        "0": "The article never says the cipher stops working at some length; its strength is described as complete, not limited by size.",
         "2": "Testing and sample size are never mentioned. The article's worry is the ongoing cost of running the method every day, not how much it was tried before.",
         "3": "Cost here means effort and logistics, printing, distributing, and guarding enough pad, not money for equipment, which the article never raises."
       },
@@ -3029,12 +3029,12 @@
       "partA": {
         "stem": "What job does the article's last paragraph do that the paragraphs before it do not?",
         "choices": [
-          "It shifts from explaining why the cipher is strong to explaining why it is hard to actually use.",
           "It repeats the definition of a one-time pad for a reader who skipped ahead.",
-          "It introduces the one-time pad for the first time.",
+          "It turns from why the cipher is strong to why it is hard to use.",
+          "It is where the article first tells the reader what a one-time pad is.",
           "It lists every historical operation where the method was ever broken."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -3045,14 +3045,14 @@
           "A pad is a long string of letters or numbers, chosen at random."
         ],
         "key": {
-          "0": 2,
-          "1": 3,
+          "0": 3,
+          "1": 2,
           "2": 0,
           "3": 1
         }
       },
       "distractorRationale": {
-        "1": "The last paragraph does not restate the definition; it opens a new question about cost that the earlier paragraphs never raise.",
+        "0": "The last paragraph does not restate the definition; it opens a new question about cost that the earlier paragraphs never raise.",
         "2": "The pad is introduced in paragraph two, long before the last paragraph, so this cannot be the last paragraph's job.",
         "3": "The article names one general pattern of failure, not a list of specific historical operations, and that pattern already appeared in paragraph four."
       },
@@ -3069,22 +3069,22 @@
       "dok": 3,
       "stem": "The article explains what happens when a page of the pad is used twice. Choose the three true statements.",
       "choices": [
-        "Two messages scrambled with the same pad stretch can be compared against each other",
+        "A computer is required before reuse can ever be exploited",
         "Comparing two such messages cancels out the randomness that protected them",
+        "Reuse makes the cipher a little weaker, but it still cannot be broken by anyone",
         "A trained reader can pick the resulting pattern apart by hand",
-        "Reuse makes the cipher slightly weaker but still unbreakable",
-        "Reuse was mostly a danger for very short messages",
-        "A computer is required before reuse can ever be exploited"
+        "Reuse was mostly a danger for very short messages, where patterns are easy to spot",
+        "Two messages scrambled with one stretch of pad can be compared"
       ],
       "key": [
-        0,
         1,
-        2
+        3,
+        5
       ],
       "distractorRationale": {
-        "3": "The article says reuse breaks the method completely, not a little; \"slightly weaker but unbreakable\" is the opposite of what it claims.",
-        "4": "Message length is never connected to the danger of reuse anywhere in the article; the danger comes from repeating the pad, not from how short a message is.",
-        "5": "The article's own example describes an analyst noticing the pattern by comparing messages, with no mention of a computer at all."
+        "0": "The article's own example describes an analyst noticing the pattern by comparing messages, with no mention of a computer at all.",
+        "2": "The article says reuse breaks the method completely rather than a little.  Calling the cipher a little weaker but still unbreakable is the opposite of what it claims.",
+        "4": "Message length is never connected to the danger of reuse anywhere in the article; the danger comes from repeating the pad, not from how short a message is."
       },
       "explain": "Reuse is dangerous specifically because it lets two scrambled messages be lined up against each other, and that comparison is what cancels out the randomness and exposes a pattern a person can work through by hand, a complete failure rather than a partial one."
     },
@@ -3141,12 +3141,12 @@
       "partA": {
         "stem": "What does Ines learn from reading the request slips left in the tray while she waits?",
         "choices": [
-          "That someone not on her own list has requested boxes from the same shelf range this month.",
+          "That the Halloway folder she came for has already been checked out by somebody else.",
           "That the archivist has been assigned to watch her specifically.",
-          "That the Halloway folder has already been checked out by somebody else.",
+          "That someone not on her list asked for boxes from her shelf range this month.",
           "That the archive closes earlier than the fifteen minutes she was told to wait."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -3157,15 +3157,15 @@
           "The Halloway folder is exactly where the request slip said it would be."
         ],
         "key": {
-          "0": 1,
+          "0": 3,
           "1": 0,
-          "2": 3,
+          "2": 1,
           "3": 2
         }
       },
       "distractorRationale": {
+        "0": "That sentence says the folder turns up exactly where it was expected, which is the opposite of already checked out by somebody else.",
         "1": "That line describes the archivist's manner toward every visitor, not information Ines gathers about the case from the slips.",
-        "2": "That sentence says the folder turns up exactly where it was expected, which is the opposite of already checked out by somebody else.",
         "3": "The fifteen minutes is stated as the normal wait time, not a closing time, and it is what gives her the chance to read the slips in the first place."
       },
       "explain": "Ines uses her waiting time to read the request slips upside down, and what she finds is a name on the same shelf range that was never on the list Marchetti gave her, a detail that raises a question the passage leaves open rather than answers."
@@ -3182,12 +3182,12 @@
       "partA": {
         "stem": "Why does the narrator hold off calling Marchetti at two-twenty-five, even though Ines is already late checking in?",
         "choices": [
-          "Because the plan's margin exists on purpose, and being a little late is not the same as the plan failing.",
-          "Because the narrator cannot reach Marchetti's contact from inside the parked car.",
           "Because Ines had already sent a text that the narrator simply had not noticed yet.",
-          "Because the rules only allow a call to be made after thirty minutes, not twenty-five."
+          "Because the narrator cannot reach Marchetti's contact from inside the parked car.",
+          "Because the plan has a margin on purpose, and late is not the same as gone.",
+          "Because the narrator's job is to write the times down, not to make the call."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -3198,16 +3198,16 @@
           "I write down the time anyway."
         ],
         "key": {
-          "0": 3,
+          "0": 1,
           "1": 0,
           "2": 2,
-          "3": 1
+          "3": 3
         }
       },
       "distractorRationale": {
+        "0": "The passage never suggests a missed text; the narrator has heard nothing at all by two-twenty-five, and that silence is exactly the problem being weighed.",
         "1": "The phone sitting face up is about how closely the narrator is watching the screen, not about whether a call is physically possible to make.",
-        "2": "The passage never suggests a missed text; the narrator has heard nothing at all by two-twenty-five, and that silence is exactly the problem being weighed.",
-        "3": "The plan's deadline is stated as two-twenty-five, not thirty minutes, and the two-minute gap the narrator waits inside is the margin, not a different rule."
+        "3": "The plan says that if nothing has come by two-twenty-five, the narrator calls Marchetti, so making that call is part of the job.  Writing the time down is something the narrator does as well, not instead."
       },
       "explain": "The narrator reasons from a rule Ines herself explained earlier: a plan's built-in margin exists so a few late minutes do not automatically mean disaster. Two-twenty-five is late by the plan's own clock, but the narrator treats late and gone as two different facts rather than collapsing them into one."
     },
@@ -3265,19 +3265,19 @@
       "choices": [
         "A lanyard on the archivist that says TRAINEE",
         "A second name on the shelf request slips that was not on her own list",
-        "A second box the archivist brings her without being asked",
-        "A security camera pointed at the reading room table",
         "A note left inside the Halloway folder addressed to her",
+        "A security camera pointed at the reading room table",
+        "A second box the archivist brings her without being asked",
         "An exit that the archivist tells her is reserved for staff only"
       ],
       "key": [
         0,
         1,
-        2
+        4
       ],
       "distractorRationale": {
+        "2": "The Halloway folder contains photographs and a page of notes, not any note addressed to Ines personally.",
         "3": "No camera is ever mentioned in the passage; nothing in the scene describes how the room is watched.",
-        "4": "The Halloway folder contains photographs and a page of notes, not any note addressed to Ines personally.",
         "5": "The passage never describes a staff-only exit or any instruction about how she is meant to leave."
       },
       "explain": "Three concrete details anchor this scene: the trainee lanyard, the unfamiliar name on the shelf slips, and the unrequested second box. Every other option invents a detail, a camera, a personal note, a restricted exit, that this passage never actually gives."
@@ -3335,31 +3335,31 @@
       "partA": {
         "stem": "According to the training log, what does bringing the dead tags back indoors and warming them up show?",
         "choices": [
-          "That the cold did not damage the tags, since they all came back to life once warm.",
-          "That the tags were defective from the manufacturer before the exercise even began.",
           "That the tree cover at the test site had no effect on the results.",
+          "That warming the tags settled which of the staff's two guesses about the cause was right.",
+          "That the cold did not damage the tags, since they all came back to life once warm.",
           "That the maker's thirty-day figure was measured indoors rather than outdoors."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the log best supports the answer you just gave?",
         "choices": [
-          "The staff have two guesses.",
           "Each tag was brought in and warmed up before staff checked it again, and all four came back to life within minutes.",
+          "The staff have two guesses.",
           "The tag may also have searched harder for a signal in a test site with more tree cover than the maker used.",
           "This entry will be checked again after a planned trial in February, at a colder site."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
-          "2": 3,
+          "0": 3,
+          "1": 1,
+          "2": 0,
           "3": 2
         }
       },
       "distractorRationale": {
-        "1": "The staff having two guesses is about what caused the short battery life, a separate point from what the recovery test itself proved.",
-        "2": "Tree cover is offered as one of the staff's two guesses about the cause, not something the recovery test ruled in or out.",
+        "0": "Tree cover is offered as one of the staff's two guesses about the cause, not something the recovery test ruled in or out.",
+        "1": "The staff's two guesses come after the warming, and the log says neither guess was tested this time.  Warming the tags shows only that the cold did no lasting damage.",
         "3": "The log never says where the maker's own test was run; it only reports where the Halloway trial took place."
       },
       "explain": "Warming the tags and watching all four come back within minutes tells the staff the cold had not broken anything permanently. That single result rules out damage as the explanation and points toward something about cold temperature itself draining the charge."
@@ -3376,12 +3376,12 @@
       "partA": {
         "stem": "How does the training log itself signal that its explanation for the short battery life is not yet proven?",
         "choices": [
-          "It calls its two explanations guesses and says neither was tested directly this trial.",
-          "It says the explanation was copied directly from the maker's own brief.",
-          "It says the instructors disagreed with each other about the cause.",
-          "It says the tags will never be tested again after this log entry."
+          "It says the times were lost, so the test must be run again in February.",
+          "It says the trip was only a test of whether the tags could replace the older trackers.",
+          "It calls its two explanations guesses and says neither was tested this time.",
+          "It says the two trainers who signed it, Osei and Marchetti, disagreed about the cause."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the log best supports the answer you just gave?",
@@ -3392,16 +3392,16 @@
           "This entry will be checked again after a planned trial in February, at a colder site."
         ],
         "key": {
-          "0": 0,
+          "0": 3,
           "1": 2,
-          "2": 3,
+          "2": 0,
           "3": 1
         }
       },
       "distractorRationale": {
-        "1": "Two names signing an entry shows who is responsible for it, not whether the entry itself claims certainty about its cause.",
-        "2": "The opening line about testing a possible replacement explains the trip's purpose, not how confident the staff are in their explanation.",
-        "3": "A planned February trial is the opposite of never testing again; the log explicitly leaves the question open for a future check."
+        "0": "The times were not lost.  The log records that two tags went silent about sixty hours in and that the longest stopped just past sixty-eight hours.  The February trial is planned so the entry can be checked again at a colder site.",
+        "1": "That is the trip's purpose, stated in the opening line.  It tells you why the tags went out, not how sure the staff are about why they went silent.",
+        "3": "Two names signing an entry shows who is responsible for it.  Nothing in the log says Osei and Marchetti disagreed, and it gives its two guesses side by side."
       },
       "explain": "A source that calls its own explanation a guess and names it as untested is being honest about the limits of what it has shown. That single admission is what separates a careful field log from a source that overstates what one trial can actually prove."
     },
@@ -3458,21 +3458,21 @@
       "stem": "The brief gives a reader several real reasons to be cautious about its thirty-day claim. Choose the three the brief actually supports.",
       "choices": [
         "The engineers who ran the test work for the company that sells the tag",
-        "The brief carries no date, so a reader cannot tell how current the claim is",
+        "The brief refuses to say how the battery is charged",
         "The small print admits performance may vary outside the tested condition",
         "The brief admits the thirty-day figure was never actually reached in testing",
         "The housing colors described in the brief do not match the photograph",
-        "The brief refuses to say how the battery is charged"
+        "The brief carries no date, so a reader cannot tell how current the claim is"
       ],
       "key": [
         0,
-        1,
-        2
+        2,
+        5
       ],
       "distractorRationale": {
+        "1": "The brief states plainly that the tag charges from any standard cable in under two hours; charging is not withheld information.",
         "3": "The brief says the tag held a working fix for the full thirty days every time; it never admits the figure was missed.",
-        "4": "The brief mentions housing colors but describes no photograph at all, so there is nothing for a color to mismatch.",
-        "5": "The brief states plainly that the tag charges from any standard cable in under two hours; charging is not withheld information."
+        "4": "The brief mentions housing colors but describes no photograph at all, so there is nothing for a color to mismatch."
       },
       "explain": "A careful reader watches for exactly these three signals: who ran the test, whether the claim can be dated and checked against anything else, and whether the source itself admits a limit. The brief supplies all three, which is why its headline number deserves a second look rather than outright trust."
     },
@@ -3488,32 +3488,32 @@
       "partA": {
         "stem": "The Halloway training staff measured a Petrel-4 losing its signal after about sixty hours in freezing temperatures. Which of the three climates in this article does that result sit closest to?",
         "choices": [
-          "The freezing mountain climate, where a tag also lasted only a few days before going silent.",
-          "The mild coastal climate, because both tests used the same brand of tag.",
+          "None of them, since this article never mentions cold-weather testing at all.",
+          "The mild coastal climate, because the two tests used the same brand of tracking tag.",
           "The desert climate, because both tests involved extreme weather.",
-          "None of them, since this article never mentions cold-weather testing at all."
+          "The freezing mountain climate, where a tag also went silent within days."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the article best supports the answer you just gave?",
         "choices": [
           "The first test ran in a mild coastal climate, with temperatures in the fifties throughout.",
-          "A tag there lasted just under three days before it went silent, a runtime the board called far below every other test.",
+          "Cold is the clearest of the three factors.",
           "The second test ran in a desert climate, with daytime heat above ninety degrees.",
-          "Cold is the clearest of the three factors."
+          "A tag there lasted just under three days before it went silent, a runtime the board called far below every other test."
         ],
         "key": {
           "0": 1,
           "1": 0,
-          "2": 3,
-          "3": 2
+          "2": 2,
+          "3": 3
         }
       },
       "distractorRationale": {
+        "0": "The article is precisely about cold-weather-style testing; it tests three climates, one of them freezing, so this option ignores content the passage clearly contains.",
         "1": "Using the same brand of tag is not the reason two results belong together; the article groups results by matching conditions, not by matching product.",
-        "2": "Extreme heat and extreme cold are named as two separate, differently acting factors; sharing the word \"extreme\" does not make them the same condition.",
-        "3": "The article is precisely about cold-weather-style testing; it tests three climates, one of them freezing, so this option ignores content the passage clearly contains."
+        "2": "Extreme heat and extreme cold are named as two separate, differently acting factors; sharing the word \"extreme\" does not make them the same condition."
       },
       "explain": "Two results belong together when their conditions match, not when their numbers happen to be close by coincidence. Freezing temperature is the shared condition between the Halloway trial and the article's own mountain-climate test, which is why the two short runtimes are the same finding rather than two unrelated ones."
     },
@@ -3529,12 +3529,12 @@
       "partA": {
         "stem": "Read together rather than one at a time, what do the article's three test results actually prove about the tag?",
         "choices": [
-          "That the tag itself did not change between tests; the climate it was tested in did.",
+          "That only the coastal result should be trusted, since it is closest to the maker's claim.",
           "That the tag is unreliable and should not be trusted in any climate.",
           "That the desert test was performed incorrectly, since heat should not affect a battery.",
-          "That only the coastal result should be trusted, since it is closest to the maker's claim."
+          "That the tag itself did not change between tests; the climate it was tested in did."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the article best supports the answer you just gave?",
@@ -3545,16 +3545,16 @@
           "That is close to the maker's own thirty-day number, and a range a buyer could plan around."
         ],
         "key": {
-          "0": 2,
+          "0": 3,
           "1": 1,
           "2": 0,
-          "3": 3
+          "3": 2
         }
       },
       "distractorRationale": {
+        "0": "Trusting only the closest-to-claim result is the same mistake in the opposite direction, cherry-picking one number instead of reading all three together.",
         "1": "The article argues against exactly this reading; calling the tag simply unreliable is the mistake a reader makes by trusting only one test in isolation.",
-        "2": "The article never questions whether the desert test was performed correctly; it treats heat as a real, expected factor in battery performance, not an error.",
-        "3": "Trusting only the closest-to-claim result is the same mistake in the opposite direction, cherry-picking one number instead of reading all three together."
+        "2": "The article never questions whether the desert test was performed correctly; it treats heat as a real, expected factor in battery performance, not an error."
       },
       "explain": "A single test result can look like a verdict on the device. Placing all three side by side changes the conclusion entirely: the one thing that stayed constant was the tag, and the one thing that changed each time was the climate around it."
     },
@@ -3570,12 +3570,12 @@
       "partA": {
         "stem": "Which piece of advice does this article's own evidence actually support?",
         "choices": [
-          "Ask what temperature a runtime figure was measured at before comparing it to any other figure.",
-          "Always trust the highest runtime figure a maker publishes.",
-          "Avoid using any tracking tag in a climate other than a mild one.",
-          "Compare tags only by price, since climate affects every tag equally."
+          "Use a tracking tag only in mild weather, since mild weather costs the least runtime.",
+          "Keep tags out of the heat, since heat drains a battery faster than the cold does.",
+          "Ask what temperature a number was measured at, since it describes one climate.",
+          "Leave the tag at home on cold trips, since in freezing air it lasts under three days."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the article best supports the answer you just gave?",
@@ -3586,16 +3586,16 @@
           "A tag there lasted just under three days before it went silent, a runtime the board called far below every other test."
         ],
         "key": {
-          "0": 0,
+          "0": 1,
           "1": 2,
-          "2": 1,
+          "2": 0,
           "3": 3
         }
       },
       "distractorRationale": {
-        "1": "The article warns that a maker's own test tends to show the best possible number; trusting the highest figure by default is the habit it argues against.",
-        "2": "The article never tells a buyer to avoid non-mild climates altogether; it says to ask for the right number, not to avoid using the tag.",
-        "3": "Price never appears anywhere in the article; the whole argument concerns how climate, not price, affects a runtime figure."
+        "0": "Mild weather does cost the least, and the article never tells a buyer to stay out of every other climate.  It says to ask for the right number, not to stop using the tag.",
+        "1": "Heat does cost the tag runtime, nineteen days against twenty-six, and the freezing test cost far more, just under three days.  Advice that ranks heat as the worst climate gets the article's own numbers backwards.",
+        "3": "Just under three days is one test's result in one freezing climate.  The article's advice is to ask for the cold number before you plan, not to stop carrying the tag."
       },
       "explain": "The article's central argument is that a runtime number only means something once its conditions are known. The advice that follows directly from that evidence is to ask what temperature a figure was measured at, not to trust a single number or avoid a climate outright."
     },
@@ -3611,32 +3611,32 @@
       "partA": {
         "stem": "Which idea from this article explains why a buyer should be cautious about the Petrel-4 brief's single thirty-day number?",
         "choices": [
-          "A maker's own test, run under its most favorable conditions, tends to produce the best possible number rather than a typical one.",
+          "A buyer should never trust any number that comes from an indoor test.",
           "A tag tested in a mild climate will always outperform a tag tested in a desert climate.",
           "Every maker's brief exaggerates its numbers on purpose.",
-          "A buyer should never trust any number that comes from an indoor test."
+          "A maker's own test, run under its most favorable conditions, tends to produce the best possible number rather than a typical one."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the article best supports the answer you just gave?",
         "choices": [
-          "None of this means a buyer should doubt every runtime number a maker shares.",
           "Mild weather costs the least of the three, which is why a maker's own test, run at a comfortable room temperature, tends to show the best number the device can reach.",
+          "None of this means a buyer should doubt every runtime number a maker shares.",
           "The first test ran in a mild coastal climate, with temperatures in the fifties throughout.",
           "The second test ran in a desert climate, with daytime heat above ninety degrees."
         ],
         "key": {
-          "0": 1,
+          "0": 2,
           "1": 3,
-          "2": 0,
-          "3": 2
+          "2": 1,
+          "3": 0
         }
       },
       "distractorRationale": {
+        "0": "The article's caution is about knowing the temperature a number was measured at, not about rejecting indoor testing altogether; a warm, comfortable indoor test is exactly the kind this article discusses without condemning it outright.",
         "1": "The article reports what happened in these three specific tests; it never claims mild climates always beat desert climates as a general rule, only that conditions changed the result this time.",
-        "2": "The article says the opposite directly: it warns a reader not to doubt every number a maker shares, which is not the same as accusing every maker of exaggerating on purpose.",
-        "3": "The article's caution is about knowing the temperature a number was measured at, not about rejecting indoor testing altogether; a warm, comfortable indoor test is exactly the kind this article discusses without condemning it outright."
+        "2": "The article says the opposite directly: it warns a reader not to doubt every number a maker shares, which is not the same as accusing every maker of exaggerating on purpose."
       },
       "explain": "The Petrel-4 brief's thirty-day figure came from the maker's own facility, run under comfortable conditions the maker chose. This article explains exactly why that kind of test tends to produce the best possible number rather than a typical one, which is the reasoning a cautious buyer needs before trusting it."
     },
@@ -3651,22 +3651,22 @@
       "dok": 3,
       "stem": "The Halloway cold-weather log and this article were written by people who never worked together. Choose the three statements both sources would agree with.",
       "choices": [
-        "Cold temperature can cause a tracking tag to lose its charge much faster than normal",
-        "A single test in one set of conditions should not be treated as the whole truth about a device",
-        "The exact temperature or climate of a test matters to judging its result",
-        "A tag that fails in the cold is always a defective tag",
-        "Every department should stop using tracking tags entirely",
-        "A maker's brief should never be read at all"
+        "A tag that fails in the cold must be a defective tag that should be sent back",
+        "One test in one set of conditions is not the whole truth about a device",
+        "A maker's brief should never be read at all",
+        "Cold can make a tracking tag lose its charge much faster than normal",
+        "Every department should stop using tracking tags entirely until a better one exists",
+        "The exact temperature or climate of a test matters to judging its result"
       ],
       "key": [
-        0,
         1,
-        2
+        3,
+        5
       ],
       "distractorRationale": {
-        "3": "Both sources say the opposite. The log calls a cold-weather failure a property of conditions, not a defect, and the article makes the identical point about climate rather than the device.",
-        "4": "Neither source recommends abandoning tracking tags; the log plans a follow-up trial and the article advises asking better questions, not giving up on the tool.",
-        "5": "Neither source says a brief should be ignored outright; both treat it as one data point that needs its conditions checked, not as something to refuse to read."
+        "0": "Both sources say the opposite. The log calls a cold-weather failure a property of conditions, not a defect, and the article makes the identical point about climate rather than the device.",
+        "2": "Neither source says a brief should be ignored outright; both treat it as one data point that needs its conditions checked, not as something to refuse to read.",
+        "4": "Neither source recommends abandoning tracking tags; the log plans a follow-up trial and the article advises asking better questions, not giving up on the tool."
       },
       "explain": "Two sources written independently agree here on a method rather than a specific verdict: cold genuinely costs charge, one test never tells the whole story, and the conditions behind a number decide whether it can be trusted. That kind of agreement, reached without either source knowing about the other, is stronger than either source alone."
     },
@@ -3731,22 +3731,22 @@
       "blanks": [
         {
           "choices": [
-            "the two sides never have to be in the same place at the same time",
-            "the container is always heavier than a stranger could lift",
-            "the signal is broadcast on the radio for anyone to hear"
+            "the two sides never have to be in one place at one time",
+            "the person who loads it waits nearby to watch the pickup",
+            "the signal is broadcast on the radio for anyone nearby to hear"
           ],
           "key": 0
         },
         {
           "choices": [
-            "walking straight to the drop the moment the signal appears would let a follower watch one person do both halves of the handoff",
-            "the container might not be waterproof",
-            "a chalk mark fades too quickly to be seen"
+            "the container might not be waterproof, so rain could ruin whatever is hidden inside",
+            "a follower watching the signal could trail whoever checks it straight to the drop",
+            "a chalk mark fades so fast that the collector could miss the signal altogether"
           ],
-          "key": 0
+          "key": 1
         }
       ],
-      "explain": "The method works because it removes the moment when two people would be in the same place at once, and the collector's own caution exists because skipping it would recreate exactly that moment, letting a follower watch one person load and collect back to back."
+      "explain": "The method works because it removes the moment when two people would be in the same place at once.  The collector still moves carefully because walking straight from the signal to the drop would let a follower see one person check the signal and then go to the drop, which is the link the method exists to hide."
     },
     {
       "id": "l2-hot-what-a-pad-is",
@@ -3807,19 +3807,19 @@
       "blanks": [
         {
           "choices": [
-            "every page is used exactly once and then destroyed",
-            "the pad is printed on waterproof paper",
-            "the message is written entirely in numbers"
+            "the pad is printed on paper that no water can damage",
+            "each page is used exactly once, then destroyed",
+            "the message is written in numbers instead of letters"
           ],
-          "key": 0
+          "key": 1
         },
         {
           "choices": [
-            "compared against each other, which cancels the randomness out",
+            "translated into a foreign language first",
             "sent over a faster radio frequency",
-            "translated into a foreign language first"
+            "compared against each other, which cancels the randomness out"
           ],
-          "key": 0
+          "key": 2
         }
       ],
       "explain": "The pad's strength depends entirely on the one-use rule, not on the material it is printed on or the frequency a message travels over. Reuse matters because it lets two scrambled messages be lined up against each other, and that comparison is what cancels out the randomness that was protecting them."
@@ -4111,14 +4111,14 @@
       "dok": 2,
       "stem": "Why does the article say a place only one kind of person would visit never works as a drop site?",
       "choices": [
-        "That single reason for being there is the first thing an investigator would ask about.",
-        "Such a place is usually too small to hide a container.",
-        "Such a place is always too far from the meeting to be practical.",
-        "A follower could not reach such a place without being seen."
+        "Such a place is usually too small or too crowded to hide a container in safely.",
+        "An investigator would ask first about the one reason anyone is there.",
+        "Such a place is too far from where the meeting would be, so the walk takes too long.",
+        "A follower could not reach such a place without being seen, which would give the drop away."
       ],
-      "key": 0,
+      "key": 1,
       "distractorRationale": {
-        "1": "Size of the location is never discussed in the article as a reason a site fails.",
+        "0": "The article never gives size or crowding as a reason a site fails.  It gives one reason, and that reason is about who would be there.",
         "2": "Distance from a meeting is irrelevant here; a dead drop replaces a meeting rather than sitting near one.",
         "3": "The article's concern is what an investigator would ask about a visitor's reason for being there, not whether a follower could physically reach the spot."
       },
@@ -4195,16 +4195,16 @@
       "dok": 3,
       "stem": "Why does the article explain what a one-time pad is before explaining the rule that makes it work?",
       "choices": [
-        "A reader needs to understand what is being combined with what before the one-use rule can make sense.",
-        "The one-use rule was discovered before the pad itself was invented.",
+        "The one-use rule was discovered first, and the pad itself was invented after it.",
+        "The one-use rule makes sense only once you know what gets combined with what.",
         "The article is arranged from the least important idea to the most important idea.",
-        "The definition paragraph is shorter and easier to read first."
+        "The definition paragraph is the shortest one, so it is the easiest to read first."
       ],
-      "key": 0,
+      "key": 1,
       "distractorRationale": {
-        "1": "The article gives no dates and never claims the rule predates the invention; it presents ideas in a logical order, not a historical one.",
+        "0": "The article gives no dates and never claims the rule predates the invention; it presents ideas in a logical order, not a historical one.",
         "2": "Paragraph order is not a ranking of importance in this article; each paragraph builds on the one before it.",
-        "3": "Paragraph length is never a stated reason for the article's order, and the definition paragraph is not obviously shorter than the others."
+        "3": "The definition paragraph is the longest one in the article, not the shortest.  Paragraph length is never a reason the article gives for its order, and each paragraph builds on the one before it."
       },
       "explain": "Explaining that a pad combines with a message one character at a time gives a reader the mechanism they need before the next paragraph can explain why using each stretch only once matters. Skipping the definition would leave the rule floating without anything to attach to."
     },
@@ -4219,14 +4219,14 @@
       "dok": 2,
       "stem": "In the article, what does an operator \"reaching for a page already used\" mean?",
       "choices": [
-        "Choosing to reuse a stretch of the pad that has already scrambled an earlier message.",
-        "Turning to an old, worn-out physical notebook instead of a new one.",
-        "Asking a different operator to send the same message a second time.",
+        "Turning to an old, worn-out paper notebook instead of opening a fresh one.",
+        "Reusing a stretch of pad that already scrambled an earlier message.",
+        "Asking a different operator to send the same message out a second time.",
         "Writing a message in pencil instead of ink."
       ],
-      "key": 0,
+      "key": 1,
       "distractorRationale": {
-        "1": "The article never distinguishes new notebooks from worn ones; its concern is whether a specific stretch of the pad has been used before, not the notebook's condition.",
+        "0": "The article never distinguishes new notebooks from worn ones; its concern is whether a specific stretch of the pad has been used before, not the notebook's condition.",
         "2": "The article describes one operator reusing pad material under pressure, not two operators sending duplicate messages.",
         "3": "Pencil versus ink is never mentioned anywhere in the article; the danger is reusing random material, not the writing instrument."
       },
@@ -4269,15 +4269,15 @@
       "dok": 2,
       "stem": "What does Ines find when she reads the request slips left in the tray?",
       "choices": [
-        "A name from this month's requests on the same shelf range that was not on her own list.",
-        "A note from Marchetti warning her about a second player.",
-        "A password needed to open the Halloway folder.",
-        "A different address for the county archive."
+        "A password she would need before the archivist could bring up the Halloway folder",
+        "A note from Marchetti warning her that a second player has joined the exercise",
+        "Someone not on her list who asked for boxes from her shelf range",
+        "A different address for the county archive, written on the back of a slip"
       ],
-      "key": 0,
+      "key": 2,
       "distractorRationale": {
+        "0": "The passage never mentions a password; the folder is retrieved normally through the archivist and photographed.",
         "1": "No note from Marchetti appears anywhere in the passage; the second name is something Ines herself notices and has to interpret.",
-        "2": "The passage never mentions a password; the folder is retrieved normally through the archivist and photographed.",
         "3": "No alternate address appears in the passage; Ines is already inside the correct archive."
       },
       "explain": "The request slips give Ines one specific, unexplained fact: a name on the same shelf range that Marchetti never gave her. The passage leaves what that name means unresolved, which is exactly what makes it worth noticing."
@@ -4293,16 +4293,16 @@
       "dok": 3,
       "stem": "What does the narrator do differently from simply reacting to whatever is seen through the windshield?",
       "choices": [
-        "The narrator separates what was actually seen from what it might mean, and writes down only the former.",
+        "The narrator calls Marchetti the instant anything outside the windshield looks unusual.",
         "The narrator leaves the car to get a closer look at the man in the grey jacket.",
-        "The narrator calls Marchetti the instant something looks unusual.",
-        "The narrator ignores the two-twenty-five deadline entirely."
+        "The narrator logs only what was seen, and not what it might have meant.",
+        "The narrator ignores the two-twenty-five deadline and waits for Ines no matter what."
       ],
-      "key": 0,
+      "key": 2,
       "distractorRationale": {
+        "0": "The narrator specifically does not call the moment something looks unusual, choosing instead to wait inside the plan's built-in margin.",
         "1": "The passage never shows the narrator leaving the car; every observation happens from the parked vantage point.",
-        "2": "The narrator specifically does not call the moment something looks unusual, choosing instead to wait inside the plan's built-in margin.",
-        "3": "The deadline is not ignored; it is tracked precisely, down to the exact minute and second."
+        "3": "The deadline is not ignored.  The narrator's thumb hovers over Marchetti's contact at two-twenty-five, and the wait that follows stays inside the plan's margin, not a wait with no end."
       },
       "explain": "Rather than acting on every passing impression, the narrator follows Marchetti's rule of logging what was seen and setting aside any guess about what it meant, which is what lets a stranger in a jacket pass by without triggering an early call."
     },
@@ -4362,16 +4362,16 @@
       "dok": 3,
       "stem": "A department is deciding whether to trust the Petrel-4 for a winter mission next month. The brief promises thirty days and the Halloway log measured about three in the cold. Which source should the department plan around?",
       "choices": [
-        "The log, because it was measured under winter conditions like the ones the department will actually face.",
+        "The brief, because it was written by the engineers who designed and built the tag.",
         "The brief, because thirty days is the safer number to plan a mission around.",
-        "Neither, because two disagreeing sources cancel each other out.",
-        "The brief, because it was written by the engineers who designed the tag."
+        "Neither, because two sources that disagree this much simply cancel each other out.",
+        "The log, because it measured the tag in the cold the mission will face."
       ],
-      "key": 0,
+      "key": 3,
       "distractorRationale": {
+        "0": "The engineers who designed the tag also sell it, which is precisely the detail that should make their own number less automatically trustworthy, not more.",
         "1": "Planning around the bigger number is the riskier choice, not the safer one; a team expecting thirty days and losing power at three is stranded exactly when the plan says everything is fine.",
-        "2": "Two disagreeing sources are a reason to examine how each was measured, not a reason to abandon the question; one names its dates and conditions and the other does not.",
-        "3": "The engineers who designed the tag also sell it, which is precisely the detail that should make their own number less automatically trustworthy, not more."
+        "2": "Two disagreeing sources are a reason to examine how each was measured, not a reason to abandon the question; one names its dates and conditions and the other does not."
       },
       "explain": "Both sources describe the same tag, but only one was measured under the winter conditions the department is actually planning for. That match between the log's test conditions and the department's real mission is what makes it the safer number to plan around, not who wrote it or which number is bigger."
     },
@@ -4410,16 +4410,16 @@
       "dok": 2,
       "stem": "What makes the Halloway log a more careful source than the Petrel-4 brief, based on the details each one includes?",
       "choices": [
-        "The log names its exact dates, temperatures, and instructors, and admits what it has not yet proven.",
-        "The log is much longer than the brief, with more paragraphs of detail.",
-        "The log was reviewed by a lawyer before it was filed.",
-        "The log was written using a computer instead of by hand."
+        "The log tested the tags at Corvid's own facility, where the brief's test was run.",
+        "The log runs much longer than the brief, with more paragraphs and longer sentences.",
+        "The log names its dates, temperatures and signers, and admits what is unproven.",
+        "The log gives just one runtime for all four tags, while the brief gives several."
       ],
-      "key": 0,
+      "key": 2,
       "distractorRationale": {
+        "0": "The log's tags went out on a three-day cold-weather trip, not to Corvid's facility.  Only the brief's own test was run at the company's facility.",
         "1": "Length is not what the passage points to as a mark of care; a long document can still hide its testing conditions, and a short one can state them plainly.",
-        "2": "No legal review of either document is mentioned anywhere in either source.",
-        "3": "Neither source says how it was physically written; that detail plays no role in either passage."
+        "3": "It is the other way round.  The log reports several times, about sixty hours for two tags and just past sixty-eight hours for the longest, while the brief gives the one number thirty days."
       },
       "explain": "Care in a source shows up in what it is willing to name and what it refuses to claim. The log states its dates, its temperatures, its instructors, and flags its own explanation as unproven, while the brief offers one favorable number with far less about how it was produced."
     },
@@ -4494,16 +4494,16 @@
       "dok": 2,
       "stem": "Which of these is the best summary of the article's advice to a buyer?",
       "choices": [
-        "Ask what climate a runtime number was tested in before trusting it, rather than accepting the number alone.",
+        "Trust a maker's own test over an independent review board's test.",
         "Buy the tag with the highest published runtime number, since a bigger number is always more reliable.",
         "Avoid every tracking tag, since none of them can be trusted in any climate.",
-        "Trust a maker's own test over an independent review board's test."
+        "Ask what climate a runtime number was tested in before you trust it."
       ],
-      "key": 0,
+      "key": 3,
       "distractorRationale": {
+        "0": "The article gives no reason to prefer a maker's test over an independent one; if anything, its own review-board test is offered as the more trustworthy comparison.",
         "1": "The article specifically warns that a maker's own test tends to produce the best possible number rather than a typical one, so treating the biggest number as automatically the most reliable is the mistake it argues against.",
-        "2": "The article never recommends avoiding tracking tags altogether; its advice is about how to read a number, not whether to use the product.",
-        "3": "The article gives no reason to prefer a maker's test over an independent one; if anything, its own review-board test is offered as the more trustworthy comparison."
+        "2": "The article never recommends avoiding tracking tags altogether; its advice is about how to read a number, not whether to use the product."
       },
       "explain": "The article does not tell a buyer which tag to choose or which number is biggest. It tells a buyer to ask a question first, what climate was this number measured in, before deciding whether that number applies to their own situation."
     },
@@ -4518,16 +4518,16 @@
       "dok": 3,
       "stem": "How does the mountain-climate result in this article relate to the Halloway training log from the cold-weather trial?",
       "choices": [
-        "Both describe a Petrel-4-style tag losing its charge within a few days under freezing conditions.",
-        "Both describe a tag that was later found to be physically defective.",
-        "Both were written by the same review board on the same day.",
-        "Both recommend replacing hardwired lines with tracking tags immediately."
+        "Both recommend replacing hardwired lines with tracking tags immediately.",
+        "Both describe a tag that was later taken apart and found to be physically defective.",
+        "Both were written by the same review board, on the same day, about the same trip.",
+        "Both describe a tag going silent within days in freezing weather."
       ],
-      "key": 0,
+      "key": 3,
       "distractorRationale": {
+        "0": "Neither source recommends replacing anything immediately; the log explicitly advises keeping the older system as a backup until more testing is done.",
         "1": "Neither source calls the tag defective; both attribute the short runtime to cold conditions rather than to a fault in the device.",
-        "2": "The mountain-climate test belongs to an equipment review board, and the cold-weather log belongs to Halloway's own training staff, two different, independent sources.",
-        "3": "Neither source recommends replacing anything immediately; the log explicitly advises keeping the older system as a backup until more testing is done."
+        "2": "The mountain-climate test belongs to an equipment review board, and the cold-weather log belongs to Halloway's own training staff, two different, independent sources."
       },
       "explain": "Two sources, produced independently by different people, land on the same finding: a tag in freezing conditions loses its charge within days rather than weeks. That kind of agreement, reached without either source knowing about the other, is stronger evidence than either result alone."
     },
@@ -4567,32 +4567,32 @@
       "partA": {
         "stem": "What is the central idea of the watching scene as a whole?",
         "choices": [
-          "Noticing the moment you almost stop checking is more valuable than finding an actual threat.",
+          "Calling Marchetti immediately is always the safest choice.",
           "A watcher's job is easy as long as nothing unusual happens.",
           "The man in the grey jacket was secretly involved in the exercise.",
-          "Calling Marchetti immediately is always the safest choice."
+          "Noticing the moment you almost stop checking is more valuable than finding an actual threat."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "I did not believe him until about four minutes ago.",
-          "Neither one of us actually found anything today, and what we found instead was the two seconds where we almost stopped checking.",
+          "At two-nineteen a man in a grey jacket walks in through the archive doors.",
           "A plan has a margin built into it on purpose, and using the margin is not the same as the plan failing.",
-          "At two-nineteen a man in a grey jacket walks in through the archive doors."
+          "Neither one of us actually found anything today, and what we found instead was the two seconds where we almost stopped checking."
         ],
         "key": {
-          "0": 1,
+          "0": 2,
           "1": 0,
-          "2": 3,
-          "3": 2
+          "2": 1,
+          "3": 3
         }
       },
       "distractorRationale": {
+        "0": "That sentence argues against calling immediately, since a plan's margin means late is not automatically a failure; it does not support urgency.",
         "1": "That line is about the narrator not believing something in advance, not about the job being easy; what follows shows the wait was genuinely tense.",
-        "2": "The passage never says the man was part of the exercise; he is logged as an observation, not identified as connected to anything.",
-        "3": "That sentence argues against calling immediately, since a plan's margin means late is not automatically a failure; it does not support urgency."
+        "2": "The passage never says the man was part of the exercise; he is logged as an observation, not identified as connected to anything."
       },
       "explain": "The scene's real discovery is not a threat spotted outside the car; it is the narrator noticing, afterward, the exact two seconds where checking almost stopped. That moment of near-carelessness, not the man in the jacket, is what the scene is actually about."
     },
@@ -4607,16 +4607,16 @@
       "dok": 3,
       "stem": "What is The Reading Room, as a whole, really about?",
       "choices": [
-        "Staying careful even when nothing has obviously gone wrong yet.",
+        "Showing that Marchetti's cover stories never work as planned.",
         "Learning the fastest way to search a county archive.",
         "Proving that archivists cannot be trusted with sensitive folders.",
-        "Showing that Marchetti's cover stories never work as planned."
+        "Staying careful even when nothing has obviously gone wrong yet."
       ],
-      "key": 0,
+      "key": 3,
       "distractorRationale": {
+        "0": "Ines's cover story works exactly as intended, and the passage never suggests otherwise; the tension comes from an unexpected box, not a failed cover.",
         "1": "Speed is never the passage's concern; Ines uses the fifteen-minute wait productively rather than trying to shorten it.",
-        "2": "The archivist is never shown acting untrustworthy; the caution in the scene belongs entirely to Ines, not to any failure on his part.",
-        "3": "Ines's cover story works exactly as intended, and the passage never suggests otherwise; the tension comes from an unexpected box, not a failed cover."
+        "2": "The archivist is never shown acting untrustworthy; the caution in the scene belongs entirely to Ines, not to any failure on his part."
       },
       "explain": "Nothing in the scene actually goes wrong. The tension comes entirely from Ines choosing to stay careful anyway, reading slips she did not have to read and opening a box slowly that she did not have to open at all."
     },
@@ -4632,34 +4632,34 @@
       "partA": {
         "stem": "What does the passage mean by saying Jonah can hear \"his own pulse doing something stupid and loud in his ears\"?",
         "choices": [
-          "That his nervousness has become so intense it feels almost like noise he cannot ignore.",
+          "That Jonah is worried his own heartbeat might damage his hearing.",
           "That a real, external noise is disturbing him from somewhere nearby.",
           "That Jonah is annoyed at how loudly Ferris is speaking to him.",
-          "That Jonah is worried his own heartbeat might damage his hearing."
+          "That he is so nervous his own heartbeat sounds loud to him."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "The museum lobby smells like floor polish and cold coffee.",
-          "There is a long beat where Jonah can hear his own pulse doing something stupid and loud in his ears.",
+          "She asks which school he is from, and he tells her without any trouble at all.",
           "His hands are shaking slightly, which annoys him, because nothing has actually gone wrong.",
-          "She asks which school he is from, and he tells her without any trouble at all."
+          "There is a long beat where Jonah can hear his own pulse doing something stupid and loud in his ears."
         ],
         "key": {
-          "0": 1,
+          "0": 3,
           "1": 0,
-          "2": 3,
+          "2": 1,
           "3": 2
         }
       },
       "distractorRationale": {
+        "0": "That sentence is the one the question asks about.  It says his pulse feels loud to him, and nothing in it or anywhere else in the passage says he worries about his hearing.",
         "1": "That sentence describes smell, not sound, and nothing in the passage suggests an actual external noise is bothering Jonah.",
-        "2": "That sentence describes his hands shaking, a different physical detail entirely, and expresses annoyance at the shaking, not any worry about hearing.",
-        "3": "That sentence is about how easily he answers Ferris's question, not about her volume or tone; nothing describes her as loud."
+        "2": "That sentence is about how easily he answers Ferris's question, not about her volume or tone; nothing describes her as loud."
       },
-      "explain": "A racing pulse cannot literally be loud enough to hear from outside the body. Describing it as loud and stupid is the passage's way of putting the reader inside Jonah's own nervousness, where his heartbeat feels impossible to ignore, rather than reporting an actual external sound."
+      "explain": "A racing pulse cannot literally be loud enough to hear from outside the body.  Describing it as loud and stupid puts the reader inside Jonah's own nervousness, where his heartbeat feels impossible to ignore, rather than reporting an actual external sound.  The sentence the question quotes says only that the pulse is loud, not why, so the proof has to come from another line.  His hands shaking on the stairs, when nothing has actually gone wrong, show the same nervousness."
     },
     {
       "id": "l6-hot-precise-not-vague",
@@ -4694,36 +4694,36 @@
       "coachTopic": "inference-relationships",
       "dok": 4,
       "partA": {
-        "stem": "Both Jonah's museum visit and Ines's archive visit involve a gatekeeper asking an unexpected question. What is the key difference in how each trainee responds?",
+        "stem": "At the museum, Jonah's cover card runs out when Ferris asks a second question.  What keeps Ines from ever reaching that point with the archivist?",
         "choices": [
-          "Jonah improvises a boring, checkable answer on the spot, while Ines has already decided in advance how to treat an unearned offer.",
-          "Jonah refuses to answer Ferris's question at all, while Ines answers every question immediately.",
-          "Jonah is caught and sent away, while Ines is allowed to leave with nothing.",
-          "Both trainees respond by inventing a detailed story on the spot."
+          "She tells him her real reason for coming, so there is nothing to catch.",
+          "She was told to give no story, so she says nothing at all when he asks.",
+          "He is a trainee with slips to sort, too busy to ask her anything more.",
+          "Her answer is so dull that he has no reason to ask her anything more."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from The Reading Room best supports the answer you just gave?",
         "choices": [
-          "He asks what she is researching, in the bored voice of someone who asks it forty times a day.",
-          "For one long second she runs the math Marchetti trained into her: a stranger offering more than you asked for is either kindness or a test, and the only way to tell them apart is to notice which one makes you careless.",
-          "The unclaimed box sits back on its cart, unopened past the first folder.",
-          "Ines tells him the truth turned sideways: a school project on local transportation."
+          "No name to use, no story if anyone asks, because a reading room's whole reason for existing is that anybody can walk in and ask for a folder.",
+          "He wears a lanyard that says TRAINEE, and a stack of request slips he clearly has not finished sorting.",
+          "Ines tells him the truth turned sideways: a school project on local transportation.",
+          "It is the kind of answer nobody has ever wanted to hear more about."
         ],
         "key": {
-          "0": 1,
+          "0": 2,
           "1": 0,
-          "2": 3,
-          "3": 2
+          "2": 1,
+          "3": 3
         }
       },
       "distractorRationale": {
-        "1": "That line is about the archivist's routine manner, not about Ines refusing to answer; she answers his question about her research without any resistance.",
-        "2": "That detail describes what happens to the unclaimed box afterward, not whether Ines was caught; nothing in the passage shows her being stopped or questioned further.",
-        "3": "Ines does have a cover answer ready, but it is a short, ordinary line rather than an elaborate story invented in the moment, which is a real difference from Jonah's improvised letter explanation."
+        "0": "The truth turned sideways is not the whole truth.  She is there to photograph the Halloway folder, and she says school project, which is true enough to say easily and dull enough that nobody asks more.",
+        "1": "The brief does say no story if anyone asks, and she still answers him.  She tells him the truth turned sideways, a school project, and his questions stop because of how dull that answer is.",
+        "2": "The lanyard and the unsorted slips are real, and they describe him rather than the reason his questions stop.  The passage gives that reason right after her answer: nobody has ever wanted to hear more about it."
       },
-      "explain": "Jonah's cover story runs out and he has to invent a plausible-sounding, checkable excuse in real time. Ines never runs out of anything, because she has already decided in advance, before any test arrives, exactly how she will treat an unearned offer. The difference is preparation versus improvisation."
+      "explain": "Marchetti told Jonah a cover story should be boring enough that nobody asks a second question, and his card ran out when Ferris asked one anyway.  Ines never gets that far.  She gives the truth turned sideways, a school project on local transportation, and the passage says at once that it is the kind of answer nobody has ever wanted to hear more about."
     },
     {
       "id": "l6-mc-two-watchers-compared",
@@ -4736,16 +4736,16 @@
       "dok": 3,
       "stem": "Both On the Line and The Van on Halloway Road follow someone waiting in a car for a signal. What do the two watchers have in common in how they handle the wait?",
       "choices": [
-        "Both narrators talk themselves through what they actually know, in order, rather than reacting to their first guess.",
+        "Both narrators are told over the radio exactly what to expect.",
         "Both narrators call for help before the agreed deadline arrives.",
         "Both narrators leave the vehicle to get a closer look at what is happening.",
-        "Both narrators are told over the radio exactly what to expect."
+        "Both narrators talk themselves through what they actually know, in order, rather than reacting to their first guess."
       ],
-      "key": 0,
+      "key": 3,
       "distractorRationale": {
+        "0": "Neither passage describes an ongoing radio briefing; each narrator works from a plan agreed on beforehand and a signal that arrives only once.",
         "1": "Neither narrator calls early; both specifically wait until their deadline, trusting the plan's built-in margin instead of acting on a first guess.",
-        "2": "Neither narrator leaves the vehicle at any point; both watchers stay parked and observe from where they are.",
-        "3": "Neither passage describes an ongoing radio briefing; each narrator works from a plan agreed on beforehand and a signal that arrives only once."
+        "2": "Neither narrator leaves the vehicle at any point; both watchers stay parked and observe from where they are."
       },
       "explain": "Both watchers face the same temptation, a fast reaction to an ambiguous sign, and both resist it the same way, by naming exactly what they know rather than what they are guessing. That shared discipline, not the specific details of either scene, is what connects the two."
     },
@@ -4785,19 +4785,19 @@
       "blanks": [
         {
           "choices": [
-            "two-twenty-five, when the deadline passes with no word from Ines",
-            "two-oh-one, when Ines first goes into the archive",
-            "four minutes into the wait, before anything has happened yet"
+            "four minutes into the wait, before anything has happened yet",
+            "two-oh-one, when Ines first goes in through the archive doors",
+            "two-twenty-five, when the deadline passes in silence"
           ],
-          "key": 0
+          "key": 2
         },
         {
           "choices": [
-            "the phone buzzes once at two-twenty-seven",
+            "Marchetti assigns the narrator to the parking lot",
             "the man in the grey jacket first appears",
-            "Marchetti assigns the narrator to the parking lot"
+            "the phone buzzes once at two-twenty-seven"
           ],
-          "key": 0
+          "key": 2
         }
       ],
       "explain": "The scene is built around a single deadline. Tension climbs as two-twenty-five arrives with silence, and it breaks the instant a single buzz answers it two minutes later, a shape the passage follows exactly in the order it happened."
@@ -4812,36 +4812,36 @@
       "coachTopic": "viewpoint-purpose",
       "dok": 3,
       "partA": {
-        "stem": "What is the purpose of the Petrel-4 brief's small print, which admits the thirty-day figure was measured at a constant temperature?",
+        "stem": "Early in the brief, Corvid Systems describes earlier tags that drained fast because they searched for a signal all the time.  Why would a brief written to sell the Petrel-4 include that?",
         "choices": [
-          "It protects the company from a false claim while the rest of the brief still emphasizes the most impressive possible number.",
-          "It is required by law to appear on every product brief.",
-          "It proves the company does not actually believe its own thirty-day figure.",
-          "It exists to help a buyer choose a colder test location for their own trial."
+          "It tells teams to pack spare batteries in case a tag drains fast.",
+          "It admits that the Petrel-4 also searches when there is no signal.",
+          "It reports a test Corvid ran on the older tags at its own facility.",
+          "It sets up a problem that the Petrel-4 is then said to solve."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the brief best supports the answer you just gave?",
         "choices": [
-          "The brief carries a document number but no date anywhere on the page.",
-          "It states that the thirty-day figure was measured at a constant seventy degrees, and that battery performance in other conditions may vary.",
-          "Contact our sales office to arrange a live demonstration at your own site, and ask about volume pricing for departments ordering more than ten units.",
-          "Not once during the full thirty days did the tag miss a scheduled report."
+          "Teams that have been carrying spare batteries or backup trackers can leave that extra weight behind.",
+          "Our engineers ran that test at our own facility, cycling the unit through a normal daily routine of movement and stillness for the entire month.",
+          "Earlier tags on the market drained fast because they searched constantly for a signal, even when none was there.",
+          "The Petrel-4 solves that by learning the pattern of when a fix is likely and searching only then."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
-          "2": 3,
-          "3": 2
+          "0": 0,
+          "1": 2,
+          "2": 1,
+          "3": 3
         }
       },
       "distractorRationale": {
-        "1": "A document number with no date is a separate detail about the brief's format, and nothing in the passage claims small print is legally required.",
-        "2": "That sentence is a sales pitch inviting a demonstration and bulk orders, not advice about testing conditions.",
-        "3": "The rest of the brief states the thirty-day claim with full confidence, including a perfect record of scheduled reports, which is the opposite of not believing it."
+        "0": "The brief tells teams the opposite: they can leave spare batteries and backup trackers behind.  Describing tags that drained fast makes the Petrel-4 sound like the end of that worry, not a reason to pack for it.",
+        "1": "That sentence is about earlier tags, and the very next one says the Petrel-4 searches only when a fix is likely.  The brief describes the old habit so it can say its own tag has dropped it.",
+        "2": "The test at Corvid's own facility was a month of the Petrel-4 itself.  The brief reports no test of older tags, and it describes their problem only to set up its own tag as the answer."
       },
-      "explain": "A single admitting sentence, tucked beneath the order form, lets the company say the number is technically true while every other sentence in the brief pushes the most favorable version of it. That combination, headline confidence plus a narrow qualifier, is what a persuasive document does when it wants to stay accurate and still sound impressive."
+      "explain": "A brief written to sell starts with a problem its product can end.  Earlier tags drained fast because they searched for a signal all the time, and the next sentence says the Petrel-4 solves that by searching only when a fix is likely.  Naming the old weakness first is how the brief makes its own tag sound like the answer before a single test result appears."
     },
     {
       "id": "l6-short-log-purpose",
@@ -5237,14 +5237,14 @@
       ],
       "coachTopic": "inference-evidence",
       "dok": 3,
-      "stem": "Jonah's log sheet lists what happened, and the one line he added later runs along the foot of the sheet.  Choose the three things the sheet shows about that added line.",
+      "stem": "Jonah's log sheet lists what happened, and he added one more line to it later.  Choose the three things the sheet shows about that added line.",
       "choices": [
-        "It sits below everything listed under what happened, at the foot of the sheet",
+        "It comes below every other entry on the sheet",
         "It reads Thirty seconds lost on the second floor landing, cause unknown, no action taken",
-        "It takes the place of exit at ten forty-one on the sheet",
-        "It gives the time at which the thirty seconds began",
-        "It comes after exit at ten forty-one, although the landing happened long before Jonah left",
-        "Marchetti wrote it on the sheet when he collected it"
+        "It takes the place of exit at ten forty-one, which is no longer on the sheet",
+        "It gives the clock time at which the thirty seconds on the landing began",
+        "It comes after exit at ten forty-one, though the landing came first",
+        "Marchetti wrote it along the foot of the sheet when he collected the logs"
       ],
       "key": [
         0,
@@ -5341,7 +5341,7 @@
       "choices": [
         "It shows the brief is hiding nothing, so the thirty days can be taken at face value.",
         "It means the thirty-day number is true at seventy degrees and false everywhere else.",
-        "It marks the small print as the most important claim on the page, since the brief chose to mark it.",
+        "It marks the small print as the most important claim on the page, since the brief took the trouble to mark it.",
         "It puts the number first and the words \"measured at a constant seventy degrees\" where they may be missed."
       ],
       "key": 3,
@@ -5432,7 +5432,7 @@
       "figureFact": "eight minutes",
       "stem": "Two of the three tunnels on the memo are limestone.  Read what the memo gives under both of them.  What do those two tunnels show when they are set side by side?",
       "choices": [
-        "The same rock gave very different results: eight minutes in the wet limestone tunnel and fifty-one in the dry.",
+        "The same rock gave very different results: eight minutes in the wet tunnel and fifty-one in the dry.",
         "Limestone is the worst rock a beacon can be tested in, whatever else is true of the tunnel.",
         "The beacon carried into the limestone tunnels must have been a weaker beacon than the one used in granite.",
         "The two limestone tunnels come out the same, which shows the rock is the only thing that counts."
@@ -5520,7 +5520,7 @@
         {
           "choices": [
             "just under three days, then nineteen days, then twenty-six days",
-            "the same twenty-six days under every one of the climates",
+            "the same twenty-six days in every climate, whether mild, hot or freezing",
             "twenty-six days, then nineteen days, then just under three days"
           ],
           "key": 2
@@ -5547,27 +5547,27 @@
       "type": "mc",
       "passageId": "p-relay-room",
       "figureId": "fig-l3-relay-room",
-      "figureFact": "nothing on the radio but the hiss",
+      "figureFact": "I call the whole exercise off",
       "targets": [
         "c1-lit-5-analysis"
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "The timeline has two lanes, one marked \"The rule\" and one marked \"I write down times\".  At ten twenty it puts an entry on each of them.  What does reading those two together show?",
+      "stem": "On the timeline, the lane marked \"The rule\" puts \"I call the whole exercise off\" at ten twenty-two.  Find the first entry after that time on the lane marked \"I write down times\".  What do those two entries show when you read them together?",
       "choices": [
-        "The radio set had failed, so the narrator was learning nothing useful.",
-        "The rule expected a check-in, and the narrator had nothing on the radio but the hiss.",
-        "Jonah checked in at ten twenty, and the narrator wrote his check-in down.",
-        "The narrator called the whole exercise off at ten twenty, before the rule allowed it."
+        "The narrator called the exercise off at ten twenty-two, and the clicks came too late to stop it.",
+        "The rule's moment to call it off passed, and the check-in came eleven seconds after.",
+        "Jonah clicked twice at exactly the time the rule had set for him to check in.",
+        "The rule gave the narrator eleven more seconds past ten twenty-two to decide what to do."
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "The hiss is the sound the set makes when it is working and nobody is talking.  The narrator says silence with no hiss underneath it is the version that means the set is dead, which is the opposite of what this minute gave her.",
-        "2": "The rule lane holds what was supposed to happen, not a record that it did.  The only check-in she ever logs is the two clicks, and those land at ten twenty-two and eleven seconds, which she calls late.",
-        "3": "Her thumb goes on the transmit key at ten twenty-one and comes straight off again, so nothing is ever sent.  The abort sits on the rule lane because the rule named it, not because she did it."
+        "0": "The call-off is on the rule's lane because the rule named it, not because anyone did it.  Her thumb came off the transmit key at ten twenty-one, and nothing was ever sent.",
+        "2": "The rule set the check-in for ten twenty, not ten twenty-two.  The clicks came at ten twenty-two and eleven seconds, which the narrator herself calls late.",
+        "3": "The rule says that if nothing has come through by ten twenty-two, the exercise is called off.  The eleven seconds are past the rule's time, not extra time the rule handed out."
       },
-      "explain": "The two lanes do different jobs.  One holds what the plan said would happen, and the other holds what the narrator saw, heard or did herself.  Set side by side at ten twenty, the plan's check-in has nothing on the radio but the hiss underneath it, and that gap is what she is sitting in when she puts her thumb on the key.  The hiss is not bad news, because it is the sound of a working set with nobody talking, and the narrator calls it the only comfort in this job.  What keeps her from calling the exercise off is her own list, read down in order.",
-      "whyTheFigureIsNeeded": "The passage gives both moments as ten twenty but never says they are the same moment; the drawing is what puts one entry per lane on a single vertical, so the demand and the hiss stand as one minute rather than two consecutive sentences split by a paragraph break."
+      "explain": "Reading one lane against the other shows what the plan demanded and what the narrator did.  The rule's lane puts \"I call the whole exercise off\" at ten twenty-two, and the narrator's own lane has no call at that time; its next entry is \"the radio clicks twice\" at ten twenty-two and eleven seconds.  The deadline passed without the call being made, and the check-in arrived just after it.  That gap is the decision she reached by reading down her list rather than by the clock alone.",
+      "whyTheFigureIsNeeded": "The passage gives the rule's ten twenty-two deadline in its first paragraph and the two clicks near its end, and it does not set them side by side; the timeline puts the call-off on the rule's lane and the clicks on the narrator's, eleven seconds apart, which is what shows the deadline passing with no call made."
     },
     {
       "id": "l6-mc-reading-the-runtime-row",
@@ -5580,21 +5580,21 @@
       ],
       "coachTopic": "research-integrate",
       "dok": 3,
-      "stem": "The card sets a temperature and a runtime under each climate.  Read the temperatures row and the runtime row across all three columns.  What does that pairing show?",
+      "stem": "Find the desert column on the card, and the freezing mountain column, where the runtime reads \"just under three days\".  How does the article explain the gap between those two runtimes?",
       "choices": [
-        "The columns are set out in order of temperature, from the coolest one to the hottest.",
-        "The tag itself was weaker in the freezing mountain test than in the mild coastal one.",
-        "The other two columns fall below the mild one, and the freezing falls furthest, to just under three days.",
-        "The mild coastal column matched the maker's thirty-day number exactly."
+        "Heat and cold cost a battery about the same, so the gap has to come from the tags.",
+        "Freezing air breaks the tag itself, while heat only makes the tag search harder.",
+        "Cold drains a battery fast, while heat wears it down over repeated hot stretches.",
+        "Heat protects a battery, so the desert tag outlasted what a mild day would have given."
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "The columns run mild coastal, desert climate, freezing mountain, which is the order the board ran the tests in.  Sorted from coolest to hottest the freezing column would come first, and on the card it comes last.",
-        "1": "The card's own heading is that the tag did not change, and the article says the same thing in its own words.  One tag went into all three tests, so the difference has to sit in the temperature above each runtime, not in the tag.",
-        "3": "Twenty-six days is close to thirty, and close is not the same as matched.  The article treats that small gap as ordinary, because a maker's own test is run at a comfortable room temperature and tends to show the best number a device can reach."
+        "0": "The card's own heading says the tag did not change, and the same tracking tag went into every test.  The article calls cold the clearest of the three factors, so heat and cold do not cost the same.",
+        "1": "The article says the loss comes from the chemistry inside the battery, not from any one tag, so nothing about the tag breaks.  Searching harder for a signal is one of the Halloway staff's guesses, and this article never raises it.",
+        "3": "The card puts nineteen days under the desert column and twenty-six under the mild one, so the heat cost the tag a week.  The article says heat still costs runtime."
       },
-      "explain": "The table is built so each climate's temperature sits directly above the runtime it produced.  Read across, the mild coastal column holds twenty-six days, the desert column drops to nineteen, and the freezing mountain column falls to just under three days.  That is not a straight slope from warm to cold, because the hottest column is not the shortest one.  Mild weather is the temperature that works, and both extremes cost runtime, with the freezing mountain column costing far more than the desert one.",
-      "whyTheFigureIsNeeded": "The article runs all three climates through one paragraph and splits every temperature from its runtime across separate sentences, so the three pairings are never aligned; only the card sets the three temperatures in one row above the three runtimes in the next, which is what lets a child see that the hottest column is not the shortest one."
+      "explain": "The card sets nineteen days under the desert column and just under three days under the freezing mountain column.  The article explains the gap in its paragraph on the three factors.  Cold drains a battery's charge in freezing air, while heat wears it down a different way, over repeated hot stretches, rather than all at once.  Both cost the tag time, and the card shows how much more the cold cost.",
+      "whyTheFigureIsNeeded": "The article gives the desert and mountain runtimes in separate sentences and explains heat and cold two paragraphs later; the card sets the two runtimes side by side under their temperatures, so the size of the gap is read off the card before the article's explanation is matched to it."
     },
     {
       "id": "l6-cloze-six-stops-one-run",
@@ -5607,47 +5607,47 @@
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "The article numbers only its three moves, and then gives the counting rule and the last rule as plain paragraphs.  The drawing numbers six stops on one line, so the stop reading \"three sightings in three unrelated places\" is {{0}} of the same run.  Putting the rules on the same numbered line as the moves shows that {{1}}.",
+      "stem": "Find the stop on the drawing's numbered line that reads \"three sightings in three unrelated places\".  Its place on the line shows that the sightings it counts {{0}}.  That means {{1}}.",
       "blanks": [
         {
           "choices": [
-            "stop two",
-            "stop four",
-            "stop six"
+            "all come from the change of level, stop three",
+            "can come from any of the three moves before it",
+            "come from stops five and six, which come after it on the line"
           ],
           "key": 1
         },
         {
           "choices": [
-            "the counting rule takes over from the three moves once a courier has some experience",
-            "the three moves are listed from the one that works best to the one that works least",
-            "stopping the run is one of its own steps, not a sign that the run went wrong"
+            "each move has to catch the same follower three times all on its own",
+            "the counting rule starts over again at the start of every new move",
+            "a follower who gets past one move can still be seen at the next"
           ],
           "key": 2
         }
       ],
-      "explain": "The article names its three moves first, second and third and then switches to plain paragraphs for the counting rule and the last rule, so a reader can easily take those last two as separate advice.  The drawing does not allow that reading, because it sets all six stops on one numbered line, putting the counting rule's third sighting at four, its verdict at five, and going home at six.  Seen that way, going home is not the run breaking down.  The run is walked to make a follower show themselves, and stops five and six are what the article says to do once a follower has shown themselves.",
-      "whyTheFigureIsNeeded": "The article numbers only its first, second and third move and then drops into prose, so nothing in the text says the counting rule's third sighting is stop four, that its verdict is stop five, or that going home is stop six; only the drawing sets all six on one numbered line and names them in the key below it, which is what makes them steps of a single run."
+      "explain": "The drawing puts \"three sightings in three unrelated places\" at stop four, after all three moves on one numbered line, so the sightings it counts can come from any of the moves before it.  Each move is one more chance for a follower to be seen, and a follower who gets past one move can still be seen at the next.  That is how the count can reach three across a single run.",
+      "whyTheFigureIsNeeded": "The article gives the counting rule a paragraph of its own after the three moves, so it can read as a separate note; the drawing numbers the three sightings as stop four on the same line, straight after the change of level, which is what shows the count running across the moves before it."
     },
     {
       "id": "l6-ms-claim-against-the-two-runs",
       "type": "ms",
       "passageId": "p-beacon-log",
       "figureId": "fig-l4-beacon-log",
-      "figureFact": "ninety minutes",
+      "figureFact": "the thirty foot level",
       "targets": [
         "c1-inf-5-analysis"
       ],
       "coachTopic": "evidence-across-texts",
       "dok": 4,
-      "stem": "The log card prints \"the maker's claim\" at its head and the staff's own two runs in the table underneath.  Choose the three statements the card supports.",
+      "stem": "Source A says its beacon held a clear signal through forty feet of stone for ninety minutes.  It also says that forty feet of rock is no longer a barrier.  Set the log card beside those claims.  Choose the three statements the card supports.",
       "choices": [
-        "The two runs were carried out in two different tunnels",
-        "The claim at the head of the card is ninety minutes, and the longer of the two runs is nine minutes",
-        "Both runs are logged in the same rock type, so the rock cannot be what separates the two times",
-        "The card is signed by the company that makes the beacon",
-        "The times column records how long each beacon's battery lasted",
-        "The second run held the signal for less time than the first did"
+        "The card names a different tunnel from the one where Source A's engineers ran their test",
+        "The first run was at the thirty foot level, shallower than Source A's forty feet",
+        "Neither of the staff's runs held the signal for even ten minutes",
+        "The card shows the second run was carried deeper than the first before the signal was lost",
+        "The card shows that Corvid Systems' own engineers timed both of the staff's runs",
+        "The card's times go against the claim that forty feet of rock is no longer a barrier"
       ],
       "key": [
         1,
@@ -5655,12 +5655,12 @@
         5
       ],
       "distractorRationale": {
-        "0": "One tunnel is named at the head of the card, the Halloway service tunnel, and the article says both runs went down into that same tunnel.  The staff are careful to add that two runs in one tunnel is nowhere near enough evidence for a claim about other tunnels.",
-        "3": "The signatures are Marchetti and Osei, the two instructors, and the article says this log is written for the staff themselves and is not published anywhere.  The maker's own brief is the other source, and that is the published one.",
-        "4": "The times are how long the surface receiver held the signal before it lost it.  The beacon was still sending when it was carried up to the twenty foot level, so its battery had not run out at nine minutes."
+        "0": "The card names \"the Halloway service tunnel\", and that is the tunnel Source A names for its own test.  The two sources disagree about one tunnel, not two.",
+        "3": "The card puts the second run at the same bay as the first, so it was not carried any deeper.  The two runs differ in time, nine minutes against seven, not in depth.",
+        "4": "The card is signed by Marchetti and Osei, the two instructors, and the log says two observers timed each run with a stopwatch.  Corvid's engineers ran Source A's test, not these."
       },
-      "explain": "The card is worth reading because one number the maker published sits at the head of the same page as two numbers the staff measured themselves.  Ninety minutes is the claim, and the times column underneath reads nine minutes and then seven.  Reading down the rest of the table shows what did not change between the runs, because the rock type is wet limestone on both, so the drop from nine to seven cannot be blamed on the ground.  A claim and a measurement on one page is what makes this card worth more than either number would be alone.",
-      "whyTheFigureIsNeeded": "In the passage the maker's ninety-minute claim arrives in the last paragraph, far from the two measured runs; only the card puts that claim at the head of the same page as the table and lines the rock type up down both rows, which is what shows the ground is identical and cannot explain the drop from nine minutes to seven."
+      "explain": "Setting the card beside Source A shows how far the claim reaches past what was measured.  Source A claims ninety minutes through forty feet of stone.  The card puts the first run at the thirty foot level, shallower than that, and the times column underneath reads nine minutes and then seven, so neither run reached even ten minutes.  A beacon that lost its signal above forty feet is hard to fit with a claim that forty feet of rock is no longer a barrier.",
+      "whyTheFigureIsNeeded": "In the log's prose the depth of the first run comes in one sentence and the second run is placed only at the same bay, with each time in a sentence of its own; the card sets depth and time side by side on one row for each run, under the tunnel it names, which is what lets both runs be read against Source A's forty feet at once."
     }
   ],
   "figures": [

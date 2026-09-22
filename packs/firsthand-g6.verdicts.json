@@ -4,9 +4,15 @@
   "records": [
     {
       "itemId": "t1-ebsr-why-egypt-united-sooner",
-      "itemHash": "3f2abf783c2d655b",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "5f0017d55ab462bf",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -51,8 +57,14 @@
     {
       "itemId": "t1-ebsr-the-real-dispute",
       "itemHash": "6fc19d551cf6ac99",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -82,12 +94,12 @@
     },
     {
       "itemId": "t1-cloze-hieroglyphs",
-      "itemHash": "a5eb4cfa86e52a66",
+      "itemHash": "58326d74578e70eb",
       "blind": [
-        0
+        1
       ],
       "authored": [
-        0
+        1
       ],
       "confidence": "high",
       "status": "agree"
@@ -95,8 +107,14 @@
     {
       "itemId": "t1-ebsr-common-standing-clause",
       "itemHash": "d476ecbe325e3fe5",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -117,8 +135,14 @@
     {
       "itemId": "t1-ebsr-why-mummification",
       "itemHash": "99b2ee87c8f3ed22",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -133,14 +157,20 @@
     {
       "itemId": "t2-ebsr-abrahams-covenant",
       "itemHash": "f03175ceee538e22",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t2-mc-solomons-temple",
-      "itemHash": "5dca2a712385ba83",
+      "itemHash": "c34f69351b2107c9",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -162,7 +192,7 @@
     },
     {
       "itemId": "t2-ms-surviving-the-losses",
-      "itemHash": "b7fc5ba5d37483f5",
+      "itemHash": "e95b1275ac1735e0",
       "blind": [
         1,
         2,
@@ -178,9 +208,15 @@
     },
     {
       "itemId": "t2-ebsr-judges-to-kings",
-      "itemHash": "199689230240cd17",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "60ae1fc3e95c6daf",
+      "blind": [
+        1,
+        1
+      ],
+      "authored": [
+        1,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -206,7 +242,7 @@
     },
     {
       "itemId": "t2-mc-second-temple-destruction",
-      "itemHash": "1c4c3c3ccd53ad65",
+      "itemHash": "0927c777037e633e",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -214,21 +250,27 @@
     },
     {
       "itemId": "t2-cloze-monotheism",
-      "itemHash": "86d5a3154891d5a8",
+      "itemHash": "77ce6313d24537fa",
       "blind": [
-        0
+        1
       ],
       "authored": [
-        0
+        1
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t2-ebsr-babylonian-conquest-result",
-      "itemHash": "3e823cf17fcae7b6",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "ba1d4119f43daeb5",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -249,14 +291,20 @@
     {
       "itemId": "t2-ebsr-yavneh-shift",
       "itemHash": "23a10a87b584ff5f",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t2-mc-yavneh-permission",
-      "itemHash": "3dca2b3eea30a1d9",
+      "itemHash": "d33a81e234c4a93e",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -264,17 +312,23 @@
     },
     {
       "itemId": "t3-ebsr-democracys-real-reach",
-      "itemHash": "271ff3ea0592ddd9",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "dc9265bb453b2472",
+      "blind": [
+        2,
+        2
+      ],
+      "authored": [
+        2,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t3-mc-marathon-outcome",
-      "itemHash": "08c9e491611a3b72",
-      "blind": 2,
-      "authored": 2,
+      "itemHash": "23b056f340999e23",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -310,9 +364,15 @@
     },
     {
       "itemId": "t3-ebsr-athens-claims-navy-decisive",
-      "itemHash": "6f28c98a7ed33817",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "72032b7ae4a6102f",
+      "blind": [
+        1,
+        1
+      ],
+      "authored": [
+        1,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -344,12 +404,12 @@
     },
     {
       "itemId": "t3-cloze-city-states",
-      "itemHash": "967c9e5b9ae2909c",
+      "itemHash": "9d0795f33dad01ca",
       "blind": [
-        0
+        2
       ],
       "authored": [
-        0
+        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -357,8 +417,14 @@
     {
       "itemId": "t3-ebsr-spartan-government-structure",
       "itemHash": "e1baf50bb0d1a9f6",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -379,8 +445,14 @@
     {
       "itemId": "t3-ebsr-sparta-claims-turning-points",
       "itemHash": "605185312ed8dd3f",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        3
+      ],
+      "authored": [
+        0,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -394,15 +466,21 @@
     },
     {
       "itemId": "t4-ebsr-undeciphered-script",
-      "itemHash": "97cdf1ecda1e424a",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "a7c3be0ced329b03",
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t4-mc-mohenjo-daro-planning",
-      "itemHash": "44731f198a0be071",
+      "itemHash": "97f8de47537b17c2",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -440,9 +518,15 @@
     },
     {
       "itemId": "t4-ebsr-indus-decline-evidence",
-      "itemHash": "e2ba642c33a8dc6f",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "c89ff1369b7e7a84",
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -456,21 +540,27 @@
     },
     {
       "itemId": "t4-cloze-dharma",
-      "itemHash": "5d7a7a023bb01731",
+      "itemHash": "9a6f5c29d9d5eae5",
       "blind": [
-        0
+        2
       ],
       "authored": [
-        0
+        2
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t4-ebsr-buddhas-teaching",
-      "itemHash": "8807ece1e874c456",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "b6c248457f317d28",
+      "blind": [
+        2,
+        1
+      ],
+      "authored": [
+        2,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -491,8 +581,14 @@
     {
       "itemId": "t4-ebsr-ashokas-change",
       "itemHash": "1678267c2f09c30a",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -501,14 +597,6 @@
       "itemHash": "a24c4821d42322c2",
       "blind": 3,
       "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-ebsr-confucius-vs-laozi",
-      "itemHash": "bce79e7812f38813",
-      "blind": 0,
-      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -553,8 +641,14 @@
     {
       "itemId": "t5-ebsr-qin-after-standardizing",
       "itemHash": "c5de3d00949353b9",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        3
+      ],
+      "authored": [
+        0,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -578,7 +672,7 @@
     },
     {
       "itemId": "t5-mc-warring-states-cause",
-      "itemHash": "d2bb1066cf16c904",
+      "itemHash": "c56ea388ba49923c",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -586,12 +680,12 @@
     },
     {
       "itemId": "t5-cloze-mandate-of-heaven",
-      "itemHash": "0351557c06d4a398",
+      "itemHash": "95e86ba570fc5378",
       "blind": [
-        0
+        2
       ],
       "authored": [
-        0
+        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -599,8 +693,14 @@
     {
       "itemId": "t5-ebsr-han-deliberate-choice",
       "itemHash": "1e656c28bc4c09d8",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        3
+      ],
+      "authored": [
+        0,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -620,9 +720,15 @@
     },
     {
       "itemId": "t5-ebsr-buddhism-reaches-china",
-      "itemHash": "cd7763586c629ec4",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "c8b0277ee20ddf22",
+      "blind": [
+        3,
+        1
+      ],
+      "authored": [
+        3,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -635,16 +741,8 @@
       "status": "agree"
     },
     {
-      "itemId": "t6-ebsr-twelve-tables-vs-hammurabi",
-      "itemHash": "cfff79de40421970",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t6-mc-kingdom-to-republic",
-      "itemHash": "650a1cbe4e453bc3",
+      "itemHash": "07a60c40b425641d",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -682,15 +780,21 @@
     },
     {
       "itemId": "t6-ebsr-republic-to-empire",
-      "itemHash": "3920aa3ad10178f2",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "553ad9d2d7f630a5",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t6-mc-reachback-saul-first-king",
-      "itemHash": "e1f8bb95d537ef21",
+      "itemHash": "62f1d73a09ea7a59",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -698,21 +802,27 @@
     },
     {
       "itemId": "t6-cloze-patrician",
-      "itemHash": "b2f624f61decfd85",
+      "itemHash": "d9708d4537f8b884",
       "blind": [
-        0
+        2
       ],
       "authored": [
-        0
+        2
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t6-ebsr-reachback-hammurabi-dispute",
-      "itemHash": "0c47abf9aad3959f",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "1bd2e828b6eb51da",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -732,15 +842,21 @@
     },
     {
       "itemId": "t6-ebsr-reachback-athenian-reach",
-      "itemHash": "f6af90ec5ae2753e",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "106708ad630d3ce4",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t6-mc-reachback-zhang-qian-silk-road",
-      "itemHash": "3e4c5ee6c45208a1",
+      "itemHash": "59ad7e59c84396f5",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -748,48 +864,72 @@
     },
     {
       "itemId": "t1-ebsr-why-the-clay-record-survived",
-      "itemHash": "7f2aabf0aae2d911",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "dfa5c13cf692448e",
+      "blind": [
+        1,
+        0
+      ],
+      "authored": [
+        1,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t1-ebsr-what-the-earliest-tablets-hold",
       "itemHash": "7310317d1deaac82",
-      "blind": 1,
-      "authored": 1,
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t1-ebsr-sargon-and-the-first-empire",
-      "itemHash": "ecc5930a90329729",
-      "blind": 2,
-      "authored": 2,
+      "itemHash": "0defed4e713f39d7",
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t1-ebsr-farming-and-settling-down",
       "itemHash": "91c1d3608bfb8718",
-      "blind": 3,
-      "authored": 3,
+      "blind": [
+        3,
+        2
+      ],
+      "authored": [
+        3,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t1-ms-what-the-clay-kept",
-      "itemHash": "8dde6195b9c39204",
+      "itemHash": "9e077ee9089db015",
       "blind": [
         0,
         2,
-        5
+        3
       ],
       "authored": [
         0,
         2,
-        5
+        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -836,7 +976,7 @@
     },
     {
       "itemId": "t1-mc-why-burned-palaces-helped",
-      "itemHash": "d0ac45e3e71680ac",
+      "itemHash": "17735506718d250b",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -844,7 +984,7 @@
     },
     {
       "itemId": "t1-mc-verified-but-unresolved",
-      "itemHash": "f4dd41d4ec0f2b74",
+      "itemHash": "fd36fc9e249c6717",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -876,48 +1016,72 @@
     },
     {
       "itemId": "t2-ebsr-why-the-outside-stones-count",
-      "itemHash": "c912df9815e33aa1",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "9521cd13cdefd2a0",
+      "blind": [
+        1,
+        0
+      ],
+      "authored": [
+        1,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t2-ebsr-what-happened-to-the-north",
-      "itemHash": "dc3a027249970471",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "95fa97f347bc7a15",
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t2-ebsr-whose-reasoning-is-it",
-      "itemHash": "96a347839eea9e23",
-      "blind": 2,
-      "authored": 2,
+      "itemHash": "42ed98d0ef76396a",
+      "blind": [
+        2,
+        1
+      ],
+      "authored": [
+        2,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t2-ebsr-what-should-have-happened",
-      "itemHash": "07719844e46c2714",
-      "blind": 3,
-      "authored": 3,
+      "itemHash": "d8ed135ba5725dd2",
+      "blind": [
+        3,
+        2
+      ],
+      "authored": [
+        3,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t2-ms-the-kingdom-that-split",
-      "itemHash": "3bea777f6514d5c9",
+      "itemHash": "6604ffff70d5771b",
       "blind": [
         1,
         3,
-        5
+        4
       ],
       "authored": [
         1,
         3,
-        5
+        4
       ],
       "confidence": "high",
       "status": "agree"
@@ -1008,33 +1172,57 @@
     },
     {
       "itemId": "t3-ebsr-no-single-greek-religion",
-      "itemHash": "d33171688f0b3588",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "8c064662c1f0705b",
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t3-ebsr-why-calendars-are-good-evidence",
-      "itemHash": "3fe44a626887f7d8",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "97ca31fcef6d3116",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t3-ebsr-how-the-long-war-ended",
-      "itemHash": "4a3533423f2b5a21",
-      "blind": 2,
-      "authored": 2,
+      "itemHash": "b9c8fc69c0b285ed",
+      "blind": [
+        2,
+        1
+      ],
+      "authored": [
+        2,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t3-ebsr-the-wars-warning-label",
-      "itemHash": "9da13f56e0ed59f3",
-      "blind": 3,
-      "authored": 3,
+      "itemHash": "8fd48a58a7265444",
+      "blind": [
+        3,
+        1
+      ],
+      "authored": [
+        3,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -1096,7 +1284,7 @@
     },
     {
       "itemId": "t3-mc-olympia-as-worship",
-      "itemHash": "edeea3e2bb6a50c0",
+      "itemHash": "e9d4560b99c5ecfb",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1104,7 +1292,7 @@
     },
     {
       "itemId": "t3-mc-what-freed-spartans-to-train",
-      "itemHash": "3a06b6915734f144",
+      "itemHash": "43216d8cb7ea8a86",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1140,33 +1328,57 @@
     },
     {
       "itemId": "t4-ebsr-why-the-visitor-counts",
-      "itemHash": "86f5709ff1e9b653",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "1d4514eac205b16b",
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t4-ebsr-where-the-numerals-began",
-      "itemHash": "899e6b55eaa7d9a1",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "5ffd66b4cc9db1d6",
+      "blind": [
+        1,
+        0
+      ],
+      "authored": [
+        1,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t4-ebsr-what-aryabhata-argued",
       "itemHash": "7e813adb30c5ea72",
-      "blind": 2,
-      "authored": 2,
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t4-ebsr-what-karma-means",
-      "itemHash": "5327d894c5abbc8e",
-      "blind": 3,
-      "authored": 3,
+      "itemHash": "67402512e63875b1",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -1236,7 +1448,7 @@
     },
     {
       "itemId": "t4-mc-what-made-the-cities-advanced",
-      "itemHash": "fd9c061e0c07a799",
+      "itemHash": "3b9d8c74938f9651",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1244,7 +1456,7 @@
     },
     {
       "itemId": "t4-mc-what-the-title-means",
-      "itemHash": "4a8287b2bf085fbe",
+      "itemHash": "240641aa75463397",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1253,32 +1465,56 @@
     {
       "itemId": "t5-ebsr-what-legalism-taught",
       "itemHash": "8a30910490635057",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t5-ebsr-the-credit-for-paper",
-      "itemHash": "24d89c829b4d7f0f",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "1e468dd10466a596",
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t5-ebsr-legalist-habits-outlast-the-qin",
-      "itemHash": "e951068876219358",
-      "blind": 2,
-      "authored": 2,
+      "itemHash": "4b2b48161fff774a",
+      "blind": [
+        2,
+        1
+      ],
+      "authored": [
+        2,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t5-ebsr-what-the-credit-leaves-out",
       "itemHash": "22911a60785c295c",
-      "blind": 3,
-      "authored": 3,
+      "blind": [
+        3,
+        2
+      ],
+      "authored": [
+        3,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -1348,7 +1584,7 @@
     },
     {
       "itemId": "t5-mc-what-han-officials-studied",
-      "itemHash": "3f7f66f7881cddf8",
+      "itemHash": "165b99b4302b19e5",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -1380,33 +1616,57 @@
     },
     {
       "itemId": "t6-ebsr-what-the-office-can-file",
-      "itemHash": "b534dfb5c8275faf",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "d216047d1dbbe17b",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t6-ebsr-reachback-one-witness",
-      "itemHash": "f79bd25a5b2ce758",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "eae1912938b43c8f",
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t6-ebsr-reachback-the-messenger",
-      "itemHash": "a9e103312591ccb2",
-      "blind": 2,
-      "authored": 2,
+      "itemHash": "6bf2e36872541c83",
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "t6-ebsr-reachback-what-survives",
-      "itemHash": "acc5da316a642dcf",
-      "blind": 3,
-      "authored": 3,
+      "itemHash": "ab36da887a5fecc3",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -1456,7 +1716,7 @@
     },
     {
       "itemId": "t6-cloze-earliest-writings",
-      "itemHash": "bf8da07408b2a727",
+      "itemHash": "c9e926317d02de8d",
       "blind": [
         2
       ],
@@ -1500,16 +1760,16 @@
     },
     {
       "itemId": "l1-vis-rivers-map-shows",
-      "itemHash": "511b859f0950f606",
+      "itemHash": "99ddac6fbabeb1a0",
       "blind": [
         0,
-        1,
-        2
+        3,
+        4
       ],
       "authored": [
         0,
-        1,
-        2
+        3,
+        4
       ],
       "confidence": "high",
       "status": "agree"
@@ -1545,8 +1805,26 @@
       "status": "agree"
     },
     {
+      "itemId": "l2-vis-temple-order",
+      "itemHash": "6831fa1f26004080",
+      "blind": [
+        1,
+        0,
+        3,
+        2
+      ],
+      "authored": [
+        1,
+        0,
+        3,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l2-vis-timeline-no-years",
-      "itemHash": "708c692b26694cc8",
+      "itemHash": "1f097b843db7d993",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1554,7 +1832,7 @@
     },
     {
       "itemId": "l2-vis-where-they-were-moved",
-      "itemHash": "a8d4672ae69d40f4",
+      "itemHash": "656d03be1609e8cb",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -1562,16 +1840,16 @@
     },
     {
       "itemId": "l2-vis-exile-map-shows",
-      "itemHash": "525b750e82e3e290",
+      "itemHash": "d32392d6f9ca390c",
       "blind": [
         0,
         1,
-        2
+        3
       ],
       "authored": [
         0,
         1,
-        2
+        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -1586,7 +1864,7 @@
     },
     {
       "itemId": "l3-vis-two-turning-points",
-      "itemHash": "53c0d298cc42ce3a",
+      "itemHash": "6bc5be2dbe1eb6fb",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -1624,16 +1902,16 @@
     },
     {
       "itemId": "l4-vis-indus-map-shows",
-      "itemHash": "a2eea2271cedbb6b",
+      "itemHash": "c41dda6cff3d50ca",
       "blind": [
-        0,
         1,
-        2
+        2,
+        4
       ],
       "authored": [
-        0,
         1,
-        2
+        2,
+        4
       ],
       "confidence": "high",
       "status": "agree"
@@ -1662,7 +1940,7 @@
     },
     {
       "itemId": "l5-vis-what-went-which-way",
-      "itemHash": "2eeff9f46c18b9c9",
+      "itemHash": "29d408c37970400f",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1694,7 +1972,7 @@
     },
     {
       "itemId": "l5-vis-cross-era-sequence",
-      "itemHash": "94f68adfd64df60e",
+      "itemHash": "9298fe7c909c03d4",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -1702,34 +1980,16 @@
     },
     {
       "itemId": "l6-vis-rome-map-reads",
-      "itemHash": "30b15ee57c5aa527",
+      "itemHash": "d33e550b074b42ac",
       "blind": [
         0,
-        0,
-        0
+        1,
+        1
       ],
       "authored": [
         0,
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-vis-temple-order",
-      "itemHash": "6831fa1f26004080",
-      "blind": [
         1,
-        0,
-        3,
-        2
-      ],
-      "authored": [
-        1,
-        0,
-        3,
-        2
+        1
       ],
       "confidence": "high",
       "status": "agree"
@@ -1762,16 +2022,44 @@
     },
     {
       "itemId": "l6-vis-plate-features",
-      "itemHash": "1b350f8b607975a0",
+      "itemHash": "ae000c20800fc241",
       "blind": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "authored": [
         0,
-        1,
-        2
+        2,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-ebsr-confucius-vs-laozi",
+      "itemHash": "cb3f150290bafb4e",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-twelve-tables-vs-hammurabi",
+      "itemHash": "2b1a705675d199f1",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
       ],
       "confidence": "high",
       "status": "agree"

@@ -1257,34 +1257,42 @@ const L6_LARGEST = [
 ];
 
 // E. Which display answers the question. The preview step.
+//
+// NEW DATA, NOT THE DISPLAYS LEVEL 5 DREW (26-0921).  These four once named the pets, seedlings,
+// travel and reading-minutes displays the child had just read at level 5, and l3-kind-what-a-display-
+// cannot-say's stem said outright that "a histogram shows that 13 students read for 20 to 29
+// minutes", which is this set's first answer.  A review item then tests memory of an earlier item
+// rather than the choice of display (tests/sweep-review-echo.js, Justin:  "no review questions can
+// echo").  So the four data sets are ones no earlier level shows, and the skill is the same:  named
+// groups go in a bar graph, numbers grouped into intervals in a histogram.
 const L6_CHOOSE = [
-  { ask: 'how many students read for between 20 and 29 minutes',
-    key: 'a histogram of how many minutes each student read',
+  { ask: 'how many runners finished the race in between 30 and 39 minutes',
+    key: 'a histogram of how many minutes each runner took to finish a race',
     wrongs: [
-      { v: 'a bar graph of which pet each child keeps', why: 'This sorts children by pet.  It never mentions minutes, so no bar on it can answer a question about reading time.' },
-      { v: 'a bar graph of how each student travels to school', why: 'This sorts students by how they travel.  It counts students, but not by how long they read.' },
-      { v: 'a histogram of how tall each seedling is', why: 'This is the right KIND of display and the wrong data.  Grouping into intervals only helps if the intervals are made of the thing you asked about.' },
+      { v: 'a bar graph of which colour each child likes best', why: 'This sorts children by favourite colour.  It never mentions minutes, so no bar on it can answer a question about race times.' },
+      { v: 'a bar graph of which lunch each student picked', why: 'This sorts students by the lunch they picked.  It counts students, but not by how long anyone took to run.' },
+      { v: 'a histogram of how much each puppy weighs', why: 'This is the right KIND of display and the wrong data.  Grouping into intervals only helps if the intervals are made of the thing you asked about.' },
     ] },
-  { ask: 'whether more children keep a dog or a cat',
-    key: 'a bar graph of which pet each child keeps',
+  { ask: 'whether more children like blue best or green best',
+    key: 'a bar graph of which colour each child likes best',
     wrongs: [
-      { v: 'a histogram of how many minutes each student read', why: 'A histogram groups numbers into intervals.  Dog and cat are names, not numbers, so they cannot be put in order along a number line.' },
-      { v: 'a bar graph of how each student travels to school', why: 'This is the right KIND of display and the wrong data.  It has named groups, but none of them is a pet.' },
-      { v: 'a histogram of how tall each seedling is', why: 'This groups heights into intervals.  It is measuring plants, not counting pets.' },
+      { v: 'a histogram of how many minutes each runner took to finish a race', why: 'A histogram groups numbers into intervals.  Blue and green are names, not numbers, so they cannot be put in order along a number line.' },
+      { v: 'a bar graph of which lunch each student picked', why: 'This is the right KIND of display and the wrong data.  It has named groups, but none of them is a colour.' },
+      { v: 'a histogram of how much each puppy weighs', why: 'This groups weights into intervals.  It is weighing puppies, not counting colours.' },
     ] },
-  { ask: 'how many seedlings are shorter than 5 cm',
-    key: 'a histogram of how tall each seedling is',
+  { ask: 'how many puppies weigh less than 5 kilograms',
+    key: 'a histogram of how much each puppy weighs',
     wrongs: [
-      { v: 'a bar graph of which pet each child keeps', why: 'This counts children by pet.  Nothing on it is measured in centimetres.' },
-      { v: 'a histogram of how many minutes each student read', why: 'This is the right KIND of display and the wrong data.  Its intervals are minutes, and the question asks about centimetres.' },
-      { v: 'a bar graph of how each student travels to school', why: 'This sorts students into named groups.  Heights are numbers and belong in intervals, not names.' },
+      { v: 'a bar graph of which colour each child likes best', why: 'This counts children by favourite colour.  Nothing on it is measured in kilograms.' },
+      { v: 'a histogram of how many minutes each runner took to finish a race', why: 'This is the right KIND of display and the wrong data.  Its intervals are minutes, and the question asks about kilograms.' },
+      { v: 'a bar graph of which lunch each student picked', why: 'This sorts students into named groups.  Weights are numbers and belong in intervals, not names.' },
     ] },
-  { ask: 'which way of getting to school the fewest students use',
-    key: 'a bar graph of how each student travels to school',
+  { ask: 'which lunch the fewest students picked',
+    key: 'a bar graph of which lunch each student picked',
     wrongs: [
-      { v: 'a histogram of how many minutes each student read', why: 'This groups minutes into intervals.  Walking and cycling are names, not numbers, so they do not sit on a number line.' },
-      { v: 'a bar graph of which pet each child keeps', why: 'This is the right KIND of display and the wrong data.  Its named groups are pets, not journeys.' },
-      { v: 'a histogram of how tall each seedling is', why: 'This measures plants in intervals, and the question is about students.' },
+      { v: 'a histogram of how many minutes each runner took to finish a race', why: 'This groups minutes into intervals.  Soup and pasta are names, not numbers, so they do not sit on a number line.' },
+      { v: 'a bar graph of which colour each child likes best', why: 'This is the right KIND of display and the wrong data.  Its named groups are colours, not lunches.' },
+      { v: 'a histogram of how much each puppy weighs', why: 'This weighs puppies in intervals, and the question is about students.' },
     ] },
 ];
 

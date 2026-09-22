@@ -508,12 +508,12 @@
    "partA": {
     "stem": "Which sentence best explains what a subsystem is?",
     "choices": [
-     "A subsystem is a smaller system that sits inside a bigger one and handles one piece of the larger job.",
      "A subsystem is the smallest piece inside a system that a technician actually repairs.",
+     "A subsystem is a smaller system that sits inside a bigger one and handles one piece of the larger job.",
      "A subsystem is what happens when one part of a station changes and a connected part changes too.",
-     "A subsystem is the station's entire life-support system, covering air, water, and food together."
+     "A subsystem is the station's whole life-support system, which keeps the crew breathing, hydrated, and fed."
     ],
-    "key": 0
+    "key": 1
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -524,14 +524,14 @@
      "An interaction is what happens when one part changes, and a connected part changes with it."
     ],
     "key": {
-     "0": 2,
-     "1": 0,
+     "0": 0,
+     "1": 2,
      "2": 3,
      "3": 1
     }
    },
    "distractorRationale": {
-    "1": "This describes a COMPONENT, the smallest repairable part inside a subsystem, not the subsystem itself.",
+    "0": "This describes a COMPONENT, the smallest repairable part inside a subsystem, not the subsystem itself.",
     "2": "This describes an INTERACTION, what happens when one part changes and a connected part changes too, not what a subsystem is.",
     "3": "This describes the whole SYSTEM (life support), not one of the smaller subsystems nested inside it."
    },
@@ -590,12 +590,12 @@
    "partA": {
     "stem": "According to the passage, what happens when the food subsystem's light panels dim?",
     "choices": [
+     "Carbon dioxide climbs, so the crew works slower, sleeps worse, and makes fewer repairs.",
      "The crops grow slower, and the crew eats less of what the station grows.",
-     "Carbon dioxide climbs, and the crew works slower and sleeps worse.",
      "The station's water taps stop working completely.",
      "One failing component ripples through the whole system at once."
     ],
-    "key": 0
+    "key": 1
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -606,14 +606,14 @@
      "The water subsystem catches the moisture the crew breathes out, filters it, and pipes clean water back to the taps."
     ],
     "key": {
-     "0": 2,
-     "1": 0,
+     "0": 0,
+     "1": 2,
      "2": 3,
      "3": 1
     }
    },
    "distractorRationale": {
-    "1": "This describes the AIR subsystem's clogged scrubber, a different failure with a different cause.  The question asks about dim light panels, which affect crops, not carbon dioxide.",
+    "0": "This describes the AIR subsystem's clogged scrubber, a different failure with a different cause.  The question asks about dim light panels, which affect crops, not carbon dioxide.",
     "2": "This sentence describes the water subsystem working normally, not failing.  Nothing in the passage says dim light panels affect the water subsystem at all.",
     "3": "This is the passage's general rule about ripples, true but too broad.  It does not say what specifically happens when the light panels themselves dim."
    },
@@ -878,12 +878,12 @@
    "partA": {
     "stem": "By day one hundred eighteen, which subsystem does the log rule out as the source of the drift?",
     "choices": [
+     "The algae bioreactor, since its daily readings went low while its gear still worked.",
      "The water subsystem, since it was still reclaiming at ninety-five percent.",
-     "The algae bioreactor, since its readings had started coming in low.",
      "The algae bioreactor, since it was producing more oxygen than usual.",
      "Dr. Kessler, since her notes call the drift \"within normal drift.\""
     ],
-    "key": 0
+    "key": 1
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -894,14 +894,14 @@
      "One subsystem keeps drawing her attention: the algae bioreactor tucked beneath the food modules, the dome's main source of extra oxygen."
     ],
     "key": {
-     "0": 2,
-     "1": 1,
+     "0": 1,
+     "1": 2,
      "2": 3,
      "3": 0
     }
    },
    "distractorRationale": {
-    "1": "This sentence is about the bioreactor's own falling readings, the subsystem the log is actually suspicious of, not one it rules out.",
+    "0": "This sentence is about the bioreactor's own falling readings, the subsystem the log is actually suspicious of, not one it rules out.",
     "2": "This quote names the bioreactor as the one still drawing her attention, not one that is ruled out, and it never says its oxygen output rose.",
     "3": "This quote is from the earlier day-one-hundred-four entry, which called an earlier, smaller shift normal drift.  It is not the day-one-hundred-eighteen ruling-out sentence."
    },
@@ -919,31 +919,31 @@
    "partA": {
     "stem": "What is the real reason the dome's oxygen kept slipping, according to the field report?",
     "choices": [
-     "Dust on the bioreactor's roof panels blocked light the algae needed to grow quickly.",
-     "The bioreactor's equipment had broken down after one hundred eighteen days.",
+     "The bioreactor's roof panels had cracked and broken after one hundred eighteen days.",
+     "Dust on the bioreactor's roof panels blocked light the algae needed to grow.",
      "The food crops began pulling in more carbon dioxide than usual.",
-     "The water subsystem's filter membrane had clogged and needed cleaning."
+     "The water subsystem's filter membrane had clogged with dust and needed cleaning."
     ],
-    "key": 0
+    "key": 1
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
      "The water subsystem kept reclaiming at ninety-five percent the entire time, and the food crops kept the crew fed, since dust on one component touches neither.",
      "Less light through the panel means less light reaching the algae, and less light means slower growth.",
-     "Sunlight reaches a shallow tank of green algae through the dome's clear roof panels, and the algae uses that light to grow and release oxygen.",
+     "It pulls in carbon dioxide as it goes, the same way the dome's food crops do, only faster per square foot of tank.",
      "The roof panels above the bioreactor were not broken."
     ],
     "key": {
-     "0": 1,
-     "1": 3,
+     "0": 3,
+     "1": 1,
      "2": 2,
      "3": 0
     }
    },
    "distractorRationale": {
-    "1": "This sentence says the opposite: the roof panels were not broken.  The problem was a layer of dust, not broken equipment.",
-    "2": "This sentence explains that algae grows faster than food crops per square foot, not that the food crops themselves started pulling in more carbon dioxide.",
+    "0": "This sentence says the opposite: the roof panels were not broken.  The problem was a layer of dust, not cracked or broken panels.",
+    "2": "This sentence says the algae pulls in carbon dioxide the same way the food crops do, only faster.  It never says the food crops started pulling in more carbon dioxide than usual.",
     "3": "This sentence names the water subsystem as one of the two systems dust did not touch, which rules it out rather than naming it as the cause."
    },
    "explain": "The report traces the cause step by step: dust on the roof panels blocked light, less light meant slower algae growth, and slower-growing algae released less oxygen and pulled in less carbon dioxide, which matches exactly what the status log had been tracking.  Each wrong choice either denies part of that chain or names a different subsystem the report explicitly clears."
@@ -1001,12 +1001,12 @@
    "partA": {
     "stem": "Why did the food crops and water subsystem stay fine even while the bioreactor's oxygen output dropped?",
     "choices": [
-     "Dust settled only on the bioreactor's roof panels, a problem that does not touch the other components.",
-     "The food crops and water subsystem do not depend on sunlight at all.",
+     "The food crops and water subsystem run without light, so dust on a panel could not slow them.",
+     "Dust could harm only the one part that needs light through a clear surface.",
      "Dr. Kessler repaired the water subsystem before the dust could spread to it.",
      "The dome's vents stopped circulating air to every subsystem except the bioreactor."
     ],
-    "key": 0
+    "key": 1
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1017,14 +1017,14 @@
      "It only touched the one component whose whole job depends on light getting through a clear surface."
     ],
     "key": {
-     "0": 3,
-     "1": 2,
+     "0": 2,
+     "1": 3,
      "2": 0,
      "3": 1
     }
    },
    "distractorRationale": {
-    "1": "This sentence actually says the food crops use sunlight too, the same way the algae does.  The passage never claims the food crops or water subsystem skip sunlight.",
+    "0": "The report never says the food crops or the water subsystem go without light.  It says they stayed fine because the dust touched only the one component whose job depends on light getting through a clear surface.",
     "2": "This sentence describes what wiping the panel down would do to fix it, a future step, not something Dr. Kessler had already done to the water subsystem.",
     "3": "This sentence says dust blew in through the same vents that mix the whole dome's air, not that the vents singled out the bioreactor and stopped elsewhere."
    },
@@ -1120,13 +1120,13 @@
    "blanks": [
     {
      "choices": [
-      "component",
       "subsystem",
+      "component",
       "interaction"
      ],
-     "key": 0,
+     "key": 1,
      "distractorRationale": {
-      "1": "A subsystem is a smaller system nested inside a bigger one, like the bioreactor itself; the roof panel is smaller still, the single repairable piece inside that subsystem.",
+      "0": "A subsystem is a smaller system nested inside a bigger one, like the bioreactor itself; the roof panel is smaller still, the single repairable piece inside that subsystem.",
       "2": "An interaction is an event, what happens when one part changes and a connected part changes too, not a physical part like the roof panel itself."
      }
     }
@@ -1254,8 +1254,8 @@
    "partA": {
     "stem": "Based on the five days of readings, what is most likely later on the fifth day and into the sixth at Halyard Point?",
     "choices": [
-     "The stormy weather will likely continue, since day five brought the barometer's bottom, the week's strongest wind, and rain all day.",
-     "The weather will likely turn calm and clear, since the barometer bottomed out on day five.",
+     "The stormy weather will likely continue, since day five brought the week's strongest wind and rain all day.",
+     "The weather will likely clear up later on day five, since the barometer bottomed out that day.",
      "The brindle tern colony will likely lose nests, since the count already dropped this week.",
      "Temperatures will likely rise back toward the seventies, since day two was the warmest day."
     ],
@@ -1266,7 +1266,7 @@
     "choices": [
      "The temperature climbed to seventy-six degrees, and humidity rose to fifty-eight percent.",
      "On the fifth day, the barometer bottomed out.",
-     "It reached thirty-one miles per hour.",
+     "Rain fell through the day without a break.",
      "That count matched last week's."
     ],
     "key": {
@@ -1277,7 +1277,7 @@
     }
    },
    "distractorRationale": {
-    "1": "Clearing really does follow a front, so the instinct behind this answer is sound.  The log ends mid-storm, though, with day five still recording rain through the whole day at the week's strongest wind, so calm and clear is not what the next hours bring.",
+    "1": "A barometer that bottoms out has reached its lowest point, which does not mean the storm is over.  Rain fell through day five without a break, so the weather did not clear that day.  The log never shows the pressure starting to rise.",
     "2": "The log says the nest count matched last week's exactly, which means the colony did not lose nests this week.",
     "3": "Day two was the warmest day logged, but temperature fell every day after that, from seventy-one down to fifty-eight, so a rise back to the seventies does not match the trend."
    },
@@ -1336,12 +1336,12 @@
    "partA": {
     "stem": "Which single reading gave the earliest warning that conditions were changing at Halyard Point?",
     "choices": [
-     "Air pressure, since the barometer had already begun slipping by the second day.",
-     "Wind speed, since it was the first number to change noticeably.",
      "The nest count, since it changed before any of the weather readings did.",
+     "Wind speed, since it picked up to twenty-two miles per hour before anything else moved.",
+     "Air pressure, since the barometer had begun slipping by the second day.",
      "Temperature, since it fell every single day of the log."
     ],
-    "key": 0
+    "key": 2
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1352,18 +1352,18 @@
      "The wind swung to the northwest and picked up to twenty-two miles per hour."
     ],
     "key": {
-     "0": 1,
+     "0": 0,
      "1": 3,
-     "2": 0,
+     "2": 1,
      "3": 2
     }
    },
    "distractorRationale": {
-    "1": "Wind speed does not pick up noticeably until the fourth day, well after the barometer had already begun falling on day two.",
-    "2": "The nest count matched the count from the week before, which means it did not change at all during this log.",
+    "0": "The nest count matched the count from the week before, which means it did not change at all during this log.",
+    "1": "Wind speed does not reach twenty-two miles per hour until the fourth day, well after the barometer had already begun falling on day two.",
     "3": "Temperature actually rose on the second day, to seventy-six degrees, before it started falling later in the week, so it did not fall every single day."
    },
-   "explain": "The log's own numbers show the barometer was already slipping by the second day, from thirty and one tenth inches down to thirty inches even, while temperature was still rising and the other readings had not moved yet, making pressure the earliest signal of the change ahead.  The other choices each misread when a reading actually started moving."
+   "explain": "The log's own numbers show the barometer was already slipping by the second day, from thirty and one tenth inches down to thirty inches even, well before the wind reached twenty-two miles per hour or the temperature began to fall, making pressure the earliest signal of the change ahead.  The other choices each misread when a reading actually started moving."
   },
   {
    "id": "t3-ebsr-why-track-all-four",
@@ -1377,12 +1377,12 @@
    "partA": {
     "stem": "Why does the field manual say a relay should track pressure, temperature, humidity, and wind together rather than just one of them?",
     "choices": [
-     "Tracking all four together can name a front's arrival a full day or more before the sky shows any sign.",
+     "Wind direction alone is enough to prove a front has arrived, since wind blows toward lower pressure.",
      "Each number only changes once a year, so together they give a full annual picture.",
-     "Wind direction alone is always enough to prove a front has arrived.",
+     "Read together, the four can call a front a day or more before the sky shows it.",
      "The four numbers always change in the exact same order, so any one predicts the rest."
     ],
-    "key": 0
+    "key": 2
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1393,15 +1393,15 @@
      "That is exactly why Halyard Point logs every one of them, every single morning."
     ],
     "key": {
-     "0": 2,
+     "0": 1,
      "1": 3,
-     "2": 1,
+     "2": 2,
      "3": 0
     }
    },
    "distractorRationale": {
+    "0": "This sentence explains why the wind shifts, but it places wind direction as just one sign that follows pressure, not something that proves a front alone.",
     "1": "This sentence says the relay logs every reading every single morning, a daily habit, not something that happens only once a year.",
-    "2": "This sentence places wind direction as just one sign that follows pressure, not something that proves a front alone.",
     "3": "This sentence shows temperature and wind speed arrive last in the sequence, after pressure and humidity have already changed, so the four numbers do not all move in lockstep as one single predictor."
    },
    "explain": "The manual gives its own stated reason: tracking pressure, temperature, humidity, and wind together lets a relay call a front's arrival a full day or more before the sky itself gives any warning, which no single reading alone can do as reliably.  Each wrong choice invents a claim about the numbers that the passage does not make."
@@ -2000,31 +2000,31 @@
    "partA": {
     "stem": "What is the real cause of the colony's dropping chick survival rate, according to the record?",
     "choices": [
-     "The chicks now hatch weeks before the herring, their one food source, arrive.",
-     "The colony has been laying fewer eggs every year.",
      "The herring have stopped arriving at Halyard Point entirely.",
-     "The nesting date itself, no matter when it falls, causes lower survival."
+     "The colony has been laying fewer eggs every year.",
+     "The chicks now hatch weeks before the herring, their one food source, arrive.",
+     "The earlier nesting date itself causes lower survival, whether or not the herring have come."
     ],
-    "key": 0
+    "key": 2
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
-     "In the first logged season, the colony's first eggs came on April seventh.",
-     "The herring's arrival date has held near April twenty-first every season.",
      "The colony's chicks now hatch weeks before their food source even arrives.",
+     "The herring's arrival date has held near April twenty-first every season.",
+     "In the first logged season, the colony's first eggs came on April seventh.",
      "It was never the nesting date by itself."
     ],
     "key": {
-     "0": 2,
-     "1": 0,
-     "2": 1,
+     "0": 1,
+     "1": 2,
+     "2": 0,
      "3": 3
     }
    },
    "distractorRationale": {
+    "0": "This sentence says the herring's arrival date has held steady near April twenty-first, which means they still arrive every season, just on their own schedule.",
     "1": "This sentence is about when the eggs appear, not how many eggs the colony lays.  The record never reports a falling egg count.",
-    "2": "This sentence says the herring's arrival date has held steady near April twenty-first, which means they still arrive every season, just on their own schedule.",
     "3": "The record states the opposite directly: it was never the nesting date by itself that mattered."
    },
    "explain": "The record's own closing description names the real cause: the colony's chicks now hatch weeks before the herring, their one food source, even arrive, a reversal from the colony's early seasons, when the herring were already there and settled in.  Each wrong choice either invents a detail the record does not report or contradicts its own stated conclusion."
@@ -2042,9 +2042,9 @@
     "stem": "Why has the colony's nesting date drifted earlier while the herring's arrival date has stayed almost the same?",
     "choices": [
      "Terns respond to warming spring air and water, while herring respond to a slower-changing ocean-temperature clock far out at sea.",
-     "Terns and herring both respond to the exact same signal, so both dates should have shifted together.",
-     "The herring have simply chosen to arrive later every year on purpose.",
-     "The terns' nesting date is fixed by the calendar and cannot actually change."
+     "Terns and herring respond to the same warm mark, but the herring's date has shifted too little for the record to show.",
+     "The terns' warm mark has moved earlier, while the herring ignore the temperature and keep to a calendar date.",
+     "The terns have chosen to nest earlier each spring, while the herring have kept to the same date out of habit."
     ],
     "key": 0
    },
@@ -2057,18 +2057,18 @@
      "That clock runs slower than the coastal air the terns respond to."
     ],
     "key": {
-     "0": 1,
-     "1": 3,
+     "0": 3,
+     "1": 1,
      "2": 2,
      "3": 0
     }
    },
    "distractorRationale": {
-    "1": "This sentence describes the terns' own signal, the spring air and water warming past a threshold, which is a different, faster-changing cue than the herring's ocean-temperature clock.",
-    "2": "The record says the herring's arrival date has held near the same date every season, which is the opposite of choosing to arrive later.",
-    "3": "This sentence reports the nesting date moving twenty-eight days earlier over thirty seasons, which directly shows the date can and did change."
+    "1": "This sentence is about the terns' own warm mark, not one the herring share.  The herring go by a different signal, ocean temperature at sea, and the record does show their date has shifted three days either way.",
+    "2": "The terns' half is right, and the herring's date has held near April twenty-first.  That is not because they ignore temperature.  The record says they time their arrival by ocean temperature at sea, which changes more slowly than the coastal air.",
+    "3": "This sentence shows the terns now nest twenty-eight days earlier, not that they have chosen to.  The record says their bodies respond to warming air and water, and the herring time their arrival by ocean temperature at sea, not out of habit."
    },
-   "explain": "The passage names two separate clocks: terns respond to spring air and water warming past a threshold, a fast-moving signal, while herring time their arrival by ocean temperature far out at sea, a clock that runs slower than the coastal air the terns respond to, so the two dates have drifted apart instead of moving together.  Each wrong choice either merges the two clocks or misreads which date actually shifted."
+   "explain": "The passage names two separate clocks.  Terns lay their first eggs once spring air and water cross a warm mark, and warming has pulled that mark earlier.  Herring time their arrival by ocean temperature at sea, a clock that runs slower than the coastal air.  Their date has barely moved, so the two dates have drifted apart.  The sentence about the warm mark explains only the terns' half, while the sentence about the slower clock explains both dates at once.  Each wrong choice either gives both animals one signal, takes temperature out of the herring's timing, or turns the animals' responses into choice and habit."
   },
   {
    "id": "t5-ebsr-steady-vs-bouncy",
@@ -2082,20 +2082,20 @@
    "partA": {
     "stem": "Why does Network Command treat the carbon dioxide and fuel-use trends as signs of a steady, human-linked cause rather than normal weather bouncing around?",
     "choices": [
-     "Both numbers climbed by close to the same amount every single year for ten years without ever dropping back.",
-     "The temperature line also climbed by the exact same amount every year, just like the other two.",
      "Carbon dioxide and fuel use are measured at only one station, so they cannot be compared to anything.",
+     "The temperature line also climbed by the exact same amount every year, just like the other two.",
+     "Both climbed by nearly the same amount each year for ten years, never once dropping back.",
      "The carbon dioxide line dropped back to normal levels several times over the ten years."
     ],
-    "key": 0
+    "key": 2
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
-     "Every station on the network logs its local temperature.",
-     "Some years rose sharply.",
      "Not one of the past ten years has dropped back.",
-     "That climb has stayed steady, year after year."
+     "Some years rose sharply.",
+     "Every station on the network logs its local temperature.",
+     "Averaged across every station, the network's combined temperature reading has climbed nearly every year."
     ],
     "key": {
      "0": 2,
@@ -2105,9 +2105,9 @@
     }
    },
    "distractorRationale": {
-    "1": "This sentence is actually about the temperature line, described elsewhere as bouncing, some years rising sharply and one year barely rising at all, not climbing by the same amount every year.",
-    "2": "The passage describes carbon dioxide and fuel-use data gathered network-wide, across every station, not from just one location.",
-    "3": "The passage says the opposite: that climb has stayed steady, year after year, without a single year dropping back."
+    "0": "The passage describes carbon dioxide and fuel-use data gathered network-wide, across every station, not from just one location.",
+    "1": "This sentence says the combined temperature climbed nearly every year, not by the same amount each year.  The report says the temperature line bounces, while the steady climb belongs to carbon dioxide and fuel use.",
+    "3": "Years that rose sharply are part of the temperature line's bounce, not the carbon dioxide line.  The report says carbon dioxide climbed in the same direction every year and never dropped back."
    },
    "explain": "Network Command draws the distinction directly: a signal that bounces up and down, like the temperature line, points to short-term natural causes, while a signal that climbs the same steady amount every year without ever reversing, like the carbon dioxide and fuel-use lines together, points to a steady, ongoing cause instead.  Each wrong choice either misassigns the bouncing pattern or denies the steady climb the report describes."
   },
@@ -2241,14 +2241,14 @@
    "blanks": [
     {
      "choices": [
-      "clock",
+      "mark",
       "gap",
-      "mark"
+      "clock"
      ],
-     "key": 0,
+     "key": 2,
      "distractorRationale": {
-      "1": "The gap is the growing difference between the nesting date and the herring's arrival date, not the herring's own internal timing mechanism.",
-      "2": "The warm mark is the temperature threshold the terns respond to, a different animal's cue, not the herring's own ocean-temperature timing."
+      "0": "The warm mark is the temperature threshold the terns respond to, a different animal's cue, not the herring's own ocean-temperature timing.",
+      "1": "The gap is the growing difference between the nesting date and the herring's arrival date, not the herring's own internal timing mechanism."
      }
     }
    ],
@@ -2266,10 +2266,10 @@
    "dok": 3,
    "stem": "Over the thirty logged seasons, how did the herring's arrival date compare to the tern colony's nesting date?",
    "choices": [
-    "The herring's arrival date barely moved while the nesting date shifted twenty-eight days earlier.",
+    "The herring's date barely moved, while nesting shifted twenty-eight days earlier.",
     "Both dates shifted by almost exactly the same amount, staying in step with each other.",
     "The herring's arrival date shifted earlier by even more than the nesting date did.",
-    "Neither date changed at all across the thirty seasons."
+    "Neither date moved more than a few days in either direction across the thirty seasons."
    ],
    "key": 0,
    "distractorRationale": {
@@ -2360,20 +2360,20 @@
    "partA": {
     "stem": "Which proposal fails Command's constraint that the response must use only authority the Network already holds?",
     "choices": [
-     "Proposal C, since it depends on a fishery authority that does not answer to the Network.",
+     "All three proposals fail this constraint equally.",
      "Proposal A, since the Network has never run a feeding station before.",
      "Proposal B, since fencing requires authority the Network does not have over its own land.",
-     "All three proposals fail this constraint equally."
+     "Proposal C, since it depends on a fishery authority that does not answer to the Network."
     ],
-    "key": 0
+    "key": 3
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
      "That authority covers its posts and the land around them.",
      "The Network runs feeding stations at two other posts.",
-     "The fishery authority does not answer to the Network, though.",
-     "The authority to run one is not in question."
+     "The authority to run one is not in question.",
+     "The fishery authority does not answer to the Network, though."
     ],
     "key": {
      "0": 2,
@@ -2383,9 +2383,9 @@
     }
    },
    "distractorRationale": {
+    "0": "This sentence says the authority question for Proposal A is not even in question, meaning it clearly passes, so the three proposals do not all fail equally.",
     "1": "This sentence says the Network already runs feeding stations at two other posts, which means it has done this before, not never.",
-    "2": "This sentence says the Network's own authority covers its posts and the land around them, exactly where fencing would go, so fencing does not require authority it lacks.",
-    "3": "This sentence says the authority question for Proposal A is not even in question, meaning it clearly passes, so the three proposals do not all fail equally."
+    "2": "This sentence says the Network's own authority covers its posts and the land around them, exactly where fencing would go, so fencing does not require authority it lacks."
    },
    "explain": "The report states plainly that the fishery authority does not answer to the Network, which means Proposal C would need cooperation from outside the Network's own authority, exactly the kind of authority Command's third constraint rules out.  The other choices each misread which proposal actually has that authority problem."
   },
@@ -2401,32 +2401,32 @@
    "partA": {
     "stem": "Proposal B fits Command's time and cost limits easily.  Why might it still fail to solve the colony's actual problem?",
     "choices": [
-     "The record shows chicks are starving during the food gap, a problem fencing against predators does not touch.",
+     "The Network lacks the authority to build fencing on its own land.",
      "The fencing would cost far more than the field budget allows.",
      "Fencing cannot be built within the one-season time limit Command set.",
-     "The Network lacks the authority to build fencing on its own land."
+     "The record shows chicks are starving during the food gap, a problem fencing against predators does not touch."
     ],
-    "key": 0
+    "key": 3
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
      "That authority covers its posts and the land around them.",
      "It can go up within days.",
-     "Fencing does nothing to touch that problem.",
-     "The fencing is inexpensive."
+     "The fencing is inexpensive.",
+     "Fencing does nothing to touch that problem."
     ],
     "key": {
-     "0": 2,
-     "1": 3,
+     "0": 0,
+     "1": 2,
      "2": 1,
-     "3": 0
+     "3": 3
     }
    },
    "distractorRationale": {
+    "0": "This sentence says the Network's own authority covers its posts and the land around them, exactly where fencing would go.",
     "1": "This sentence says the fencing is inexpensive, the opposite of costing far more than the budget allows.",
-    "2": "This sentence says fencing can go up within days, well within any one-season time limit.",
-    "3": "This sentence says the Network's own authority covers its posts and the land around them, exactly where fencing would go."
+    "2": "This sentence says fencing can go up within days, well within any one-season time limit."
    },
    "explain": "The report names the real weakness directly: the record shows chicks starving during the gap before the herring arrive, and fencing, which only keeps predators away from eggs and chicks, does nothing to touch that specific problem, even though it easily satisfies every one of Command's other constraints.  Each wrong choice invents a time, cost, or authority problem the report explicitly rules out."
   },
@@ -2440,36 +2440,36 @@
    "coachTopic": "evidence-final-deployment",
    "dok": 3,
    "partA": {
-    "stem": "An operative back at Sable Flats logs one unusually wet week and radios that the post's climate has changed.  What is the flaw in that call?",
+    "stem": "Suppose the wind belt at this latitude blew from the east instead, crossing hundreds of miles of dry land before it reached Cairn Bay.  Based on the report, what would most likely happen to Cairn Bay's rainfall?",
     "choices": [
-     "One week of weather is not the same as a change in the long-term climate pattern averaged over years.",
-     "Sable Flats never receives rain of any kind, so the report must be a mistake.",
-     "Climate and weather mean exactly the same thing, so the call is correct.",
-     "The operative should have checked whether the wind belt shifted before saying anything."
+     "It would stay the same, since the current along its coast is what brings Cairn Bay its rain.",
+     "It would rise, since wind picks up more moisture the longer it travels over dry land.",
+     "It would stay the same, since Cairn Bay would still sit at the same latitude and sun angle.",
+     "It would drop, since wind that crosses dry land arrives dry, just as at Sable Flats."
     ],
-    "key": 0
+    "key": 3
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
-     "Weather is what is happening outside the window this morning.",
-     "A single storm or a single clear week can happen at either station.",
-     "Climate is the pattern averaged over years.",
-     "These long-term patterns do not change because of one storm."
+     "It arrives far drier than it left the coast.",
+     "It still carries the moisture it picked up crossing the ocean.",
+     "The sun reaches both at nearly the same angle all year.",
+     "A current moving along Cairn Bay's coastline keeps the water near the post within a narrow temperature range all year."
     ],
     "key": {
-     "0": 2,
-     "1": 3,
-     "2": 0,
-     "3": 1
+     "0": 3,
+     "1": 1,
+     "2": 2,
+     "3": 0
     }
    },
    "distractorRationale": {
-    "1": "This sentence says the opposite: long-term patterns do not change because of one storm, so a single storm cannot prove the climate itself has changed.",
-    "2": "This sentence defines weather narrowly, as what is happening outside the window this morning, a single moment, which the passage treats as different from climate, the pattern averaged over years.",
-    "3": "This sentence is about a single storm or clear week happening at a station, not about checking wind belts specifically, which the passage never suggests as a required step here."
+    "0": "The current keeps the coastal water in a narrow temperature range, so it explains Cairn Bay's steady temperatures, not its rain.  The rain comes from wind that arrives straight off the water.",
+    "1": "The report says the opposite about land.  Wind picks up its moisture crossing the ocean, and the same wind drops most of it crossing dry land, which is why it reaches Sable Flats far drier.",
+    "2": "Sable Flats and Cairn Bay already share a latitude and a sun angle, and the report says their climates still differ.  Where the wind has been decides the rain, not the latitude."
    },
-   "explain": "The passage draws the distinction directly: climate is the pattern averaged over years, while a single storm or a single clear week, exactly like the wet week the operative logged, can happen at either station without its long-term climate actually changing.  Each wrong choice either denies that distinction or invents a step the passage never asks for."
+   "explain": "The report ties rain to where the wind belt has already been.  Wind off the ocean still carries its moisture, and the same wind drops most of it crossing dry land, so it reaches Sable Flats far drier.  A wind that crossed hundreds of miles of land before reaching Cairn Bay would arrive dry there too, and Cairn Bay's rain would drop."
   },
   {
    "id": "t6-ebsr-one-year-is-not-proof",
@@ -2481,36 +2481,36 @@
    "coachTopic": "evidence-final-deployment",
    "dok": 4,
    "partA": {
-    "stem": "A new operative argues that this year's especially warm reading at one station is, by itself, solid proof of the network's warming pattern.  What is the flaw in that argument?",
+    "stem": "A new operative says carbon dioxide and temperature could just be two numbers that happen to rise at the same time.  How does the report answer that?",
     "choices": [
-     "A single year's temperature reading bounces naturally, so only the longer, steady trend across many stations and years actually counts as evidence.",
-     "Temperature readings are never reliable at any single station.",
-     "The warming pattern can only be proven using carbon dioxide data, never temperature.",
-     "One especially warm year always matches the carbon dioxide trend exactly."
+     "It leaves the question open, since one station cannot see a planetary pattern.",
+     "It points out that every station logs both numbers, so the two must be connected.",
+     "It shows temperature climbing by the same amount every year, in step with carbon dioxide.",
+     "It explains that carbon dioxide holds in heat that would otherwise escape to space."
     ],
-    "key": 0
+    "key": 3
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
-     "Every station on the network logs its local temperature.",
+     "It lets sunlight in, then traps some of the heat that would otherwise escape back to space.",
      "Every station's air-sampling equipment also logs atmospheric carbon dioxide.",
-     "A signal that bounces up and down, like the temperature line, usually points to short-term natural causes.",
-     "Some years rose sharply."
+     "One station cannot see a planetary pattern.",
+     "Averaged across every station, the network's combined temperature reading has climbed nearly every year."
     ],
     "key": {
      "0": 2,
-     "1": 0,
-     "2": 1,
-     "3": 3
+     "1": 1,
+     "2": 3,
+     "3": 0
     }
    },
    "distractorRationale": {
-    "1": "This sentence says every station logs its own local temperature as a matter of course, which the network clearly treats as usable data, not something unreliable.",
-    "2": "This sentence says carbon dioxide is another number the network tracks, alongside temperature, not the only signal that can count as evidence.",
-    "3": "This sentence says some years rose sharply while others barely rose at all, which is exactly the bounce that does not match carbon dioxide's steady, unbroken climb."
+    "0": "One station alone cannot see a planetary pattern, but this report reads the whole network, and it does answer the doubt.  It explains how carbon dioxide holds in heat.",
+    "1": "Every station does log carbon dioxide, but logging two numbers in the same place does not connect them.  The report connects them through what carbon dioxide does to heat.",
+    "2": "This sentence says the combined temperature climbed nearly every year, not that it climbed by the same amount each year.  The temperature line bounces, so the report does not rest on the two lines climbing in step."
    },
-   "explain": "The synthesis explains why a single warm year is not solid proof: a signal that bounces up and down, like the temperature line, usually points to short-term natural causes, and only a steady climb across many years and every station, the way carbon dioxide and fuel use behave together, points to the network's real warming pattern.  Each wrong choice either dismisses temperature entirely or claims a match the passage does not support."
+   "explain": "The report does not rest on two lines that happen to climb together.  Carbon dioxide lets sunlight in, then traps some of the heat that would otherwise escape back to space, so more of it in the air points to a warmer planet.  That is a real physical mechanism, not a coincidence."
   },
   {
    "id": "t6-ms-proposals-against-constraints",
@@ -2630,9 +2630,9 @@
    "dok": 2,
    "stem": "What is Command's FIRST constraint on the response, the one it states before cost or authority?",
    "choices": [
-    "The response must cost less than this year's field budget for Halyard Point.",
+    "The response must cost less than this year's field budget, with no emergency request.",
     "The response must use only authority the Network already holds.",
-    "The response must be approved by the fishery authority before it can begin.",
+    "The response must be approved by the fishery authority before any of it can begin.",
     "The response must show a real effect on chick survival within one nesting season."
    ],
    "key": 3,
@@ -2765,10 +2765,10 @@
    "partA": {
     "stem": "Why is the crew quarters' damp air an input under one boundary and not an input at all under a wider one?",
     "choices": [
-     "The crew produces less damp air once the whole life-support system is running.",
-     "Moving the line changes what crosses it, and only things that cross it can be inputs.",
+     "The crew breathes out less damp air once the whole life-support system is running.",
+     "Moving the line changes what crosses it, and only what crosses in is an input.",
      "Damp air is really a component rather than an input.",
-     "The water subsystem is the only subsystem sitting inside life support."
+     "The water subsystem is the only subsystem sitting inside the wider life-support line."
     ],
     "key": 1
    },
@@ -2806,9 +2806,9 @@
    "partA": {
     "stem": "According to the manual, what makes the handoff between two subsystems an interaction?",
     "choices": [
-     "The two subsystems are repaired by the same technician.",
-     "The two subsystems sit inside the same sealed station.",
-     "One subsystem's output is the next one's input, so a change in one reaches the other.",
+     "The two subsystems are repaired by the same technician in the same room.",
+     "The two subsystems sit inside the same sealed station, where no matter crosses.",
+     "One subsystem's output becomes the input of the subsystem beside it.",
      "An operative tracing the ripple through the station is what creates it."
     ],
     "key": 2
@@ -2992,9 +2992,9 @@
    "dok": 3,
    "stem": "An operative redraws a boundary so the crew quarters now fall inside it.  What does the movement of that damp air become under the new line?",
    "choices": [
-    "An output, since the air now leaves the water subsystem behind.",
-    "A component of the water subsystem.",
-    "An interaction, since it is now a handoff between two subsystems inside the line.",
+    "An output, since the damp air now leaves the crew quarters for the water subsystem.",
+    "A component of the water subsystem, like the filter membrane inside the line.",
+    "An interaction, since it is now a handoff between two subsystems.",
     "Nothing the manual names, because movement inside a line goes uncounted."
    ],
    "key": 2,
@@ -3089,12 +3089,12 @@
    "partA": {
     "stem": "Why does this order leave the water subsystem and the food modules off it entirely?",
     "choices": [
-     "Dust on a clear panel cannot affect a job that never depended on light passing through.",
      "Both of them had already been cleaned earlier in the same week.",
+     "Dust on a clear panel cannot affect a job that never needed light through it.",
      "Both of them had failed, so a cleaning order would not have helped either one.",
-     "Only one operative was free that morning, so the order had to stay short."
+     "Only one operative was free that morning, so the order could cover just one small job."
     ],
-    "key": 0
+    "key": 1
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -3105,14 +3105,14 @@
      "Water reclamation has held near ninety-five percent through the whole drift, and the food modules have covered every meal."
     ],
     "key": {
-     "0": 1,
-     "1": 2,
+     "0": 2,
+     "1": 1,
      "2": 3,
      "3": 0
     }
    },
    "distractorRationale": {
-    "1": "The log records no scheduled cleaning of any kind since the seal closed, so nothing on the dome had been cleaned recently, those two subsystems included.",
+    "0": "The log records no scheduled cleaning of any kind since the seal closed, so nothing on the dome had been cleaned recently, those two subsystems included.",
     "2": "Neither subsystem failed.  Water reclamation held near ninety-five percent and the food modules covered every meal, right through the drift.",
     "3": "One operative for about twenty minutes is the size of the panel job itself.  It is not the reason two working subsystems were left off the order."
    },
@@ -3215,7 +3215,7 @@
      "Because wiping the panel is too large a job for a single operative.",
      "Because the dome's other subsystems need the same two-week cleaning.",
      "Because Dr. Kessler files a status log every four weeks.",
-     "Because a task belonging to nobody does not get done, which is how the dust built up."
+     "Because a task that no one owns does not get done."
     ],
     "key": 3
    },
@@ -3254,20 +3254,20 @@
    "choices": [
     "The bioreactor's equipment had failed and now needs replacing.",
     "Dust blocking light is what slowed the algae down.",
-    "The water subsystem and the food modules both stay off this order.",
+    "The drift is a sign of a change happening across the whole network.",
     "The order closes as soon as the panel has been wiped clean.",
     "Panel cleaning becomes a repeating task with somebody's name on it.",
-    "The drift is a sign of a change happening across the whole network."
+    "The water subsystem and the food modules both stay off this order."
    ],
    "key": [
     1,
-    2,
-    4
+    4,
+    5
    ],
    "distractorRationale": {
     "0": "The order says nothing inside the dome had broken and every piece of gear was working exactly as built.  Nothing is being replaced.",
-    "3": "The order says it does not close on the morning the panel comes clean.  It closes only once a later log shows the oxygen reading climbing back.",
-    "5": "Nothing in the order points outside the dome.  The cause it names is dust on one panel inside this one station, traced across twenty-eight straight days of buildup."
+    "2": "Nothing in the order points outside the dome.  The cause it names is dust on one panel inside this one station, traced across twenty-eight straight days of buildup.",
+    "3": "The order says it does not close on the morning the panel comes clean.  It closes only once a later log shows the oxygen reading climbing back."
    },
    "explain": "The order makes three claims and no more: dust on the clear panel starved the algae of light, the two working subsystems stay off the order because the evidence cleared them, and cleaning becomes a scheduled task with an owner.  The wrong choices each add something the order rules out, whether broken gear, an early close, or a cause reaching beyond this one dome."
   },
@@ -3382,10 +3382,10 @@
    "dok": 3,
    "stem": "Suppose the panel is wiped clean but the day-one-hundred-forty-six log still shows oxygen at nineteen and a half percent.  What does this order say should happen?",
    "choices": [
-    "The order closes anyway, since the required work was completed.",
-    "The water subsystem should be cleaned next.",
-    "The order stays open, because it closes on the reading rather than on the work.",
-    "The dome should be unsealed to let outside air in."
+    "The order closes anyway, since the required work was completed on time.",
+    "The water subsystem should be cleaned next, in case dust reached it too.",
+    "The order stays open, because it closes on the reading, not the work.",
+    "The dome should be unsealed to let fresh outside air in to raise the oxygen."
    ],
    "key": 2,
    "distractorRationale": {
@@ -3407,9 +3407,9 @@
    "stem": "Why could the dome's own instruments not report the failure this order describes?",
    "choices": [
     "Instruments measure quantities, and a job nobody scheduled is not one.",
-    "The sensors had been coated by the same layer of dust.",
-    "The bioreactor has no sensor of its own to report with.",
-    "The drift was too small for any instrument to detect."
+    "The sensors had been coated by the same layer of dust that dimmed the panel.",
+    "The bioreactor has no sensor of its own, so nothing tracked its oxygen output.",
+    "The drift was too small, a fraction of a percent, for any instrument to detect."
    ],
    "key": 0,
    "distractorRationale": {
@@ -3467,12 +3467,12 @@
    "partA": {
     "stem": "Amaro notes that the air arriving behind the front was cold and very dry.  What does he read that as telling him?",
     "choices": [
-     "That the air mass had been sitting over cold land before it reached the relay.",
-     "That the air mass had crossed warm open ocean, which dried it out on the way.",
      "That the front had stalled over the headland and stopped moving.",
+     "That the air mass had crossed warm open ocean, which dried it out on the way.",
+     "That the air mass had sat over cold land before it reached the relay.",
      "That the relay's humidity instrument had failed during the night."
     ],
-    "key": 0
+    "key": 2
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -3483,15 +3483,15 @@
      "The air that came in behind the front was cold and very dry, which is the mark of an air mass that has been sitting over cold land."
     ],
     "key": {
-     "0": 3,
+     "0": 2,
      "1": 0,
-     "2": 2,
+     "2": 3,
      "3": 1
     }
    },
    "distractorRationale": {
+    "0": "Rising pressure and a clearing sky are the marks of a front that has passed through, not of one sitting still overhead.",
     "1": "Air sitting over warm ocean water picks moisture up rather than losing it, so an ocean crossing is not what would have dried this air out.  The warmer, moister readings that might suggest an ocean came on the second morning, ahead of the front rather than behind it, and the direction a wind arrives from does not by itself name where its air has been.",
-    "2": "Rising pressure and a clearing sky are the marks of a front that has passed through, not of one sitting still overhead.",
     "3": "The humidity drop agrees with every other reading that morning: the coldest temperature of the week, rising pressure, a clear sky.  A broken instrument would not line up with all three."
    },
    "explain": "An air mass takes on the temperature and moisture of whatever it has been sitting over, so cold and dry together point back to cold land as the source region.  Amaro is reading the air's own properties rather than guessing from the direction it arrived from."
@@ -3579,10 +3579,10 @@
    "partA": {
     "stem": "Under the standing procedure, why is one falling barometer reading not enough to issue a warning?",
     "choices": [
-     "The barometer is the least reliable of the four instruments a relay tracks.",
+     "The barometer is the least reliable of the four instruments a relay officer tracks.",
      "Pressure has to be checked against the colony's nest count first.",
-     "Pressure can drop for an hour and climb straight back, so one reading proves nothing.",
-     "A warning may only go out in the twelve hours after a reading falls."
+     "Pressure can fall for an hour and climb back, so one reading proves nothing.",
+     "A warning may only go out during the twelve hours after a reading first falls."
     ],
     "key": 2
    },
@@ -3602,7 +3602,7 @@
     }
    },
    "distractorRationale": {
-    "0": "The procedure never calls the barometer unreliable.  It says the officer watching it is badly placed to judge it in the moment, which is why the rule is written down beforehand.",
+    "0": "The procedure never calls the barometer unreliable.  A barometer that falls and climbs right back is ordinary weather, not a broken instrument, and that is why one reading is not enough.",
     "1": "The procedure keeps the colony line out of the warning decision entirely.  It is never used as a check on anything.",
     "3": "The twelve hours run the other way.  The warning must go out at least twelve hours BEFORE the front is expected, so that boats can still act on it."
    },
@@ -3621,9 +3621,9 @@
     "stem": "The procedure says a correct call made from the wrong readings is still a bad call.  What is the reasoning behind that?",
     "choices": [
      "Officers who guess correctly get rewarded and stop following the procedure.",
-     "The weather that follows a call is the only fair test of that call.",
-     "Readings that did not support the call should be left out of the file.",
-     "A call that got lucky teaches nothing, and the same reasoning will fail somebody else later."
+     "The weather that follows a call is the only fair test of whether the call was right.",
+     "Readings that did not support the call should be left out of the file to avoid confusion.",
+     "A lucky call teaches nothing, and its reasoning will fail someone later."
     ],
     "key": 3
    },
@@ -3783,10 +3783,10 @@
    "dok": 3,
    "stem": "Why does Command's procedure deliberately lean toward calling a front early?",
    "choices": [
-    "Early warnings turn out to be correct more often than late ones.",
-    "Officers are judged on how many warnings they manage to issue.",
+    "Early warnings turn out to be correct more often than warnings sent close to the rain.",
+    "Officers are judged on how many warnings they issue, so more calls count in their favor.",
     "A needless warning costs a harbor one day;  a late one costs boats and crews.",
-    "The four readings are easier to read early in the morning."
+    "The four readings are easier to read early in the morning, before the wind picks up."
    ],
    "key": 2,
    "distractorRationale": {
@@ -3832,12 +3832,12 @@
    "partA": {
     "stem": "According to this manual, which cause belongs with the rainfall column?",
     "choices": [
-     "Where the wind belt has already travelled, over open water or over dry land.",
-     "The current that runs along the Cairn Bay coastline.",
-     "Water changing temperature far more slowly than land does.",
-     "The size of the post's own ten-year average."
+     "Water changing temperature far more slowly than the land around it does.",
+     "The current that runs along the Cairn Bay coastline and holds its air steady.",
+     "The path the wind belt took, over open water or over dry land.",
+     "The size of the post's own ten-year average, compared against its baseline."
     ],
-    "key": 0
+    "key": 2
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -3848,15 +3848,15 @@
      "Reading the temperature column, the cause is water and the current: a coastal current holds the air above Cairn Bay inside a narrower band all year."
     ],
     "key": {
-     "0": 1,
+     "0": 3,
      "1": 0,
-     "2": 3,
+     "2": 1,
      "3": 2
     }
    },
    "distractorRationale": {
+    "0": "Water's slow temperature change is one of the two causes the manual pairs with the TEMPERATURE column.  Pairing it with rainfall is the swap the manual warns about.",
     "1": "The manual names this as the exact mistake to avoid: the current does not explain the rainfall.  The current belongs with the temperature column.",
-    "2": "Water's slow temperature change is one of the two causes the manual pairs with the TEMPERATURE column.  Pairing it with rainfall is the swap the manual warns about.",
     "3": "An average summarises a column rather than causing it.  The manual asks which cause explains the column, and an average explains nothing by itself."
    },
    "explain": "The manual pairs each column with its own cause and says so explicitly: the wind belt's path over water or over land explains the rainfall, while water and the current explain the temperature range.  Swapping the two can still produce the right number for entirely the wrong reason, which is the mistake the next operative would inherit."
@@ -3944,10 +3944,10 @@
    "partA": {
     "stem": "Why does the briefing tell a Sable Flats transfer to pack for hard heat and hard cold both?",
     "choices": [
-     "Sable Flats is simply a harder posting than Cairn Bay is.",
-     "Rain at Sable Flats can arrive in any season without warning.",
-     "Its average high and average low sit sixty-eight degrees apart across one year.",
-     "One mid-weight kit already covers most of the year there."
+     "Sable Flats is simply a harder posting than Cairn Bay, so it needs more gear.",
+     "Rain at Sable Flats can arrive in any season, so gear must cover every kind of weather.",
+     "Its average high and low sit sixty-eight degrees apart across one year.",
+     "One mid-weight kit covers most of the year there, so the heat and cold gear are only spares."
     ],
     "key": 2
    },
@@ -3969,7 +3969,7 @@
    "distractorRationale": {
     "0": "The briefing says the kit differs because the year differs, not because one posting is harder than the other.",
     "1": "Sable Flats averages nine inches of rain a year against Cairn Bay's forty-two.  The two-kit advice is about the temperature spread, not about rain.",
-    "3": "That line is about Cairn Bay, whose spread is thirty-three degrees.  It is the reason Cairn Bay needs one kit rather than two."
+    "3": "That line is about Cairn Bay, whose spread is thirty-three degrees.  At Sable Flats an operative ends up using both piles, because its year swings sixty-eight degrees."
    },
    "explain": "Sable Flats averages a summer high of ninety-six degrees against a winter low of twenty-eight, so a single kit cannot cover both ends of its year.  Cairn Bay's spread is thirty-three degrees, roughly half as wide, which is why one mid-weight kit does the job there."
   },
@@ -3987,7 +3987,7 @@
     "choices": [
      "Cairn Bay never gets cold, so the transfer must have misread something.",
      "The transfer should have packed for the wettest year on record instead.",
-     "Cold snaps at Cairn Bay are caused by the current along its coast.",
+     "Cold snaps at Cairn Bay are caused by the current that runs along its coast all year.",
      "The gear list follows the ten-year averages, not the weather on arrival day."
     ],
     "key": 3
@@ -4075,13 +4075,13 @@
    "blanks": [
     {
      "choices": [
-      "baseline",
       "average",
+      "baseline",
       "range"
      ],
-     "key": 0,
+     "key": 1,
      "distractorRationale": {
-      "1": "An average is the years added together and divided by how many there were.  It describes what an ordinary year looks like;  it is not the reference record a station gets measured against.",
+      "0": "An average is the years added together and divided by how many there were.  It describes what an ordinary year looks like;  it is not the reference record a station gets measured against.",
       "2": "A range is the distance between the highest reading and the lowest one, which is a spread inside a station's record rather than the record used as a reference."
      }
     }
@@ -4102,8 +4102,8 @@
    "choices": [
     "It has explained the rainfall column with the temperature column's cause.",
     "It has the figure wrong;  Cairn Bay averages nine inches a year.",
-    "Nothing is wrong, since the current shapes the whole climate there.",
-    "It should have used a single year instead of the ten-year average."
+    "Nothing is wrong, since the current along the coast shapes the whole climate there.",
+    "It should have used the single wettest year instead of the ten-year average."
    ],
    "key": 0,
    "distractorRationale": {
@@ -4124,14 +4124,14 @@
    "dok": 3,
    "stem": "Two posts report the same average summer high.  According to the manual, what can you still not conclude?",
    "choices": [
-    "That the two posts have kept records for the same number of years.",
-    "That both averages were worked out the same way.",
-    "That both posts file a ten-year table at all.",
-    "That their readings spread out by the same amount above and below it."
+    "That each average shows what an ordinary summer looks like at its own post.",
+    "That both averages were worked out the same way, by adding and dividing.",
+    "That both posts file a ten-year table of their own.",
+    "That their readings spread out across the same range."
    ],
    "key": 3,
    "distractorRationale": {
-    "0": "How long a record runs is a separate matter from what its numbers say.  Sharing an average tells you nothing either way about record length.",
+    "0": "You can conclude this one.  The manual says an average answers exactly one question, which is what an ordinary year looks like at a post.",
     "1": "Every post's average is the years added and divided by how many there were;  that is simply the definition.  What can still differ is the spread hidden behind the same figure.",
     "2": "The manual opens by saying every post on the network files one, so that much is never in doubt."
    },
@@ -4209,18 +4209,18 @@
    "partA": {
     "stem": "Why does the memo build a hatch-date column instead of working from the first-egg dates directly?",
     "choices": [
-     "A chick eats nothing before it hatches, so hatching is when the food has to be there.",
-     "The first-egg dates in the record are less accurate than the hatch dates.",
+     "The colony stopped moving its laying date earlier once the fledge rate began to fall.",
+     "The first-egg dates in the record are less accurate than the hatch dates the memo builds.",
      "The herring arrive on the same day the colony lays its first eggs.",
-     "The colony stopped moving its laying date earlier once the fledge rate fell."
+     "A chick eats nothing before it hatches, so hatching is when the food must be there."
     ],
-    "key": 0
+    "key": 3
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
-     "The thirtieth season's March tenth puts it around April first.",
      "Tern eggs take about twenty-two days to hatch, and a chick eats nothing at all before it hatches.",
+     "The thirtieth season's March tenth puts it around April first.",
      "The useful column is the hatch date, and the record lets us build that column ourselves.",
      "The herring arrival has held near April twenty-first every season, and it has drifted only about three days either way."
     ],
@@ -4232,9 +4232,9 @@
     }
    },
    "distractorRationale": {
+    "0": "First eggs kept moving earlier right through the record, reaching March tenth by the thirtieth season, even while the fledge rate was falling.",
     "1": "The memo never questions the first-egg dates.  It builds the hatch column out of them, so the hatch date is more useful rather than more accurate.",
-    "2": "The herring hold near April twenty-first every season no matter when the eggs are laid.  Their arrival is not tied to the colony's laying date at all.",
-    "3": "First eggs kept moving earlier right through the record, reaching March tenth by the thirtieth season, even while the fledge rate was falling."
+    "2": "The herring hold near April twenty-first every season no matter when the eggs are laid.  Their arrival is not tied to the colony's laying date at all."
    },
    "explain": "Eggs take about twenty-two days to hatch and a chick eats nothing before it hatches, so the date that decides whether food is available is the hatch date rather than the laying date.  Building that column from the record is what lets the memo set the chicks and the herring against each other honestly."
   },
@@ -4250,9 +4250,9 @@
    "partA": {
     "stem": "According to the memo, why have the terns and the herring shifted their timing at such different rates?",
     "choices": [
-     "The herring have not been tracked for as many seasons as the colony has.",
-     "Each reads a different cue, and the sea warms far more slowly than coastal air.",
-     "The terns have been failing to respond to their surroundings properly.",
+     "The herring have not been tracked for as many seasons as the colony's nesting has.",
+     "Each reads its own cue, and the sea warms far more slowly than coastal air.",
+     "The terns have been failing to respond to their warming surroundings properly.",
      "The mismatch began with the fish arriving later each season."
     ],
     "key": 1
@@ -4260,15 +4260,15 @@
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
-     "These terns respond just as they are built to respond.",
-     "The mismatch did not start with the fish.",
      "The herring read ocean temperature out at sea, and the sea warms slowly.",
+     "The mismatch did not start with the fish.",
+     "These terns respond just as they are built to respond.",
      "The herring arrival has held near April twenty-first every season, and it has drifted only about three days either way."
     ],
     "key": {
      "0": 3,
-     "1": 2,
-     "2": 0,
+     "1": 0,
+     "2": 2,
      "3": 1
     }
    },
@@ -4333,9 +4333,9 @@
     "stem": "The memo warns Command not to accept one good season as evidence of recovery.  What would count instead?",
     "choices": [
      "A single season in which the chicks hatch after the herring have arrived.",
-     "The colony's first eggs moving back toward April seventh.",
+     "The colony's first eggs moving back toward April seventh, where the record began.",
      "The herring beginning to arrive three weeks earlier than they now do.",
-     "Chick survival rising across several seasons in a row rather than in one strong year."
+     "Chick survival rising across several seasons in a row, not just one."
     ],
     "key": 3
    },
@@ -4502,9 +4502,9 @@
    "stem": "Command asks whether one strong season would prove the colony is recovering.  How does the memo answer?",
    "choices": [
     "No, because a single season is ordinary variation rather than a trend.",
-    "Yes, if the fledge rate climbs back above seventy-six percent.",
+    "Yes, if the fledge rate climbs back above the first season's seventy-six percent.",
     "Yes, provided the herring also arrive earlier that same year.",
-    "No, because thirty seasons is too short a record to show recovery."
+    "No, because thirty seasons is too short a record to show whether a colony recovers."
    ],
    "key": 0,
    "distractorRationale": {
@@ -4527,7 +4527,7 @@
    "choices": [
     "Move it earlier, since every bird responds to a warmer spring.",
     "Stop it nesting altogether once its food moved.",
-    "Make its eggs take longer than twenty-two days to hatch.",
+    "Make its eggs take more than twenty-two days to hatch.",
     "Leave it steady, because the cue it reads has not moved."
    ],
    "key": 3,
@@ -4577,12 +4577,12 @@
    "partA": {
     "stem": "Why does the board rule that Proposal D's petition half still cannot count, when the other half clears every gate?",
     "choices": [
-     "Joining two plans collects their weaknesses instead of averaging them out.",
+     "Running two plans at once would cost more than this year's field budget allows.",
      "The feeding station stops working once a petition is filed alongside it.",
      "The board is not permitted to consider any option beyond the three filed.",
-     "Proposal D would cost more than this year's field budget allows."
+     "Joining two plans collects their weaknesses instead of averaging them out."
     ],
-    "key": 0
+    "key": 3
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -4593,16 +4593,16 @@
      "Bolting two plans together does not average their weaknesses out."
     ],
     "key": {
-     "0": 3,
+     "0": 1,
      "1": 0,
      "2": 2,
-     "3": 1
+     "3": 3
     }
    },
    "distractorRationale": {
+    "0": "The board names two problems with the petition half, authority and the one-season window.  Cost is not among them.",
     "1": "The board says the opposite: whatever the feeding station does on its own it still does.  Pairing it with the petition changes neither half.",
-    "2": "The board did consider it, entering it in the minutes as Proposal D.  It failed on its merits rather than being ruled out for arriving late.",
-    "3": "The board names two problems with the petition half, authority and the one-season window.  Cost is not among them."
+    "2": "The board did consider it, entering it in the minutes as Proposal D.  It failed on its merits rather than being ruled out for arriving late."
    },
    "explain": "A combined plan has to clear every constraint that either half has to clear, so the petition's two failures, authority and the one-season window, travel into Proposal D unchanged.  Pairing a failing part with a working part does not average the two; the board records that it collects them."
   },
@@ -4621,21 +4621,21 @@
      "Each constraint is worth points, and the highest total across the three wins.",
      "Failing any one of them puts a proposal out, however well it does on the others.",
      "The board scores the proposals and sends its own ranking to Command.",
-     "A constraint can be lowered if none of the proposals manages to clear it."
+     "A constraint can be lowered by the board if none of the proposals manages to clear it."
     ],
     "key": 1
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
-     "Only the proposals clearing all three get compared against each other, and only then does anybody discuss which one is better.",
-     "The window is a constraint Command set, and Command is the only body that can change it.",
      "A proposal failing one gate is out of the running, however strong it happens to look on the other two.",
+     "The window is a constraint Command set, and Command is the only body that can change it.",
+     "Only the proposals clearing all three get compared against each other, and only then does anybody discuss which one is better.",
      "The board does not choose."
     ],
     "key": {
-     "0": 0,
-     "1": 2,
+     "0": 2,
+     "1": 0,
      "2": 3,
      "3": 1
     }
@@ -4659,26 +4659,26 @@
    "partA": {
     "stem": "The fourth member asks the board to widen the one-season window.  Why does the board decline?",
     "choices": [
-     "Two seasons still would not be long enough for the petition to be decided.",
-     "The request was ruled out of order and struck from the minutes.",
-     "Changing a constraint is not the same as meeting it, and only Command can change this one.",
-     "The board had already settled on a proposal before the request was raised."
+     "Two seasons still would not be long enough for the fishery petition to be decided.",
+     "The request was ruled out of order and struck from the minutes before any vote.",
+     "Changing a constraint is not meeting it, and only Command can change this one.",
+     "The board had already settled on a proposal before the fourth member raised the request."
     ],
     "key": 2
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
-     "The board does not choose.",
      "Asking for an easier constraint is not the same thing as meeting the one in front of you.",
+     "The board does not choose.",
      "The request was recorded and forwarded to Command as a separate item, and the evaluation continues under the window as written.",
      "The petition half still asks for an outcome outside the Network's own authority, and it still cannot be decided inside the one-season window."
     ],
     "key": {
      "0": 3,
      "1": 2,
-     "2": 1,
-     "3": 0
+     "2": 0,
+     "3": 1
     }
    },
    "distractorRationale": {
@@ -4699,22 +4699,22 @@
    "dok": 4,
    "stem": "Choose the three findings the review board actually recorded in its minutes.",
    "choices": [
-    "A plan built from two parts carries the weaknesses of both parts.",
-    "Only proposals clearing all three constraints get compared with each other.",
+    "The board widened the review window to two seasons.",
+    "The petition may be counted toward this season's approved response.",
     "The one response aimed at the fish rather than the colony lies outside the Network's authority.",
     "The board ranked the three filed proposals from strongest to weakest.",
-    "The board widened the review window to two seasons.",
-    "The petition may be counted toward this season's approved response."
+    "A plan built from two parts carries the weaknesses of both parts.",
+    "Only proposals clearing all three constraints get compared with each other."
    ],
    "key": [
-    0,
-    1,
-    2
+    2,
+    4,
+    5
    ],
    "distractorRationale": {
-    "3": "The minutes say the board does not choose.  It records the method and leaves the recommendation with the operative.",
-    "4": "The board declined to widen the window, since only Command can change a constraint Command set.  The request was forwarded rather than granted.",
-    "5": "The board records the opposite: the petition cannot count toward this season's approved response, because its outcome lies outside the Network's authority."
+    "0": "The board declined to widen the window, since only Command can change a constraint Command set.  The request was forwarded rather than granted.",
+    "1": "The board records the opposite: the petition cannot count toward this season's approved response, because its outcome lies outside the Network's authority.",
+    "3": "The minutes say the board does not choose.  It records the method and leaves the recommendation with the operative."
    },
    "explain": "The three findings are the method the chair asked to have entered word for word, the ruling that a combined plan collects its parts' weaknesses, and the closing line about where each response is AIMED.  The petition is the one thing on the table aimed at the fish rather than at the colony, and it is also the one thing the Network cannot decide for itself.  Each wrong choice credits the board with an action it explicitly refused: ranking the proposals, widening a constraint, or letting the petition count toward this season."
   },
@@ -4728,22 +4728,22 @@
    "coachTopic": "evidence-final-deployment",
    "dok": 4,
    "partA": {
-    "stem": "Command's warning procedure leans toward calling a front early on purpose.  Which trade-off does that choice accept?",
+    "stem": "Command writes the warning rule down ahead of time rather than letting each officer decide during a storm.  What weakness in an officer's judgment is that meant to guard against?",
     "choices": [
-     "Officers have to track more than four readings every morning.",
-     "Warnings will tend to arrive at the same time as the rain does.",
-     "The colony count has to be folded into the warning decision.",
-     "Some harbors get emptied for nothing, so that no warning ever arrives too late."
+     "Officers tend to send warnings nobody needed, so the written rule holds calls back until the rain.",
+     "An officer cannot tell when a front will arrive, so the rule predicts its arrival twelve hours ahead.",
+     "Officers are judged on the weather that follows a call, so a written rule shields them from blame.",
+     "An officer watching a reading fall is the worst judge of what it means, so the rule is set beforehand."
     ],
     "key": 3
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
-     "The colony line belongs at the bottom of the page and stays out of the warning decision entirely.",
-     "At least two of the four tracked readings must move together, from one morning to the next.",
-     "A warning arriving alongside the rain is not a warning at all.",
-     "A warning nobody needed empties a harbor for a single day, while a warning that came late costs boats and the crews aboard them."
+     "A call gets judged on the log rather than on the weather that happened to follow.",
+     "An officer explaining an unnecessary warning still has everybody available to explain it to.",
+     "The warning goes out at least twelve hours before the front is expected to arrive.",
+     "An officer watching a barometer fall is the worst possible person to be deciding what a falling barometer means."
     ],
     "key": {
      "0": 1,
@@ -4753,11 +4753,11 @@
     }
    },
    "distractorRationale": {
-    "0": "The procedure works from the same four readings throughout.  Leaning early changes when a call gets made, not how many instruments an officer reads.",
-    "1": "That is the outcome leaning early exists to avoid.  A warning arriving with the rain is not a warning at all, only a report.",
-    "2": "The colony line stays out of the warning decision entirely, whichever way the procedure leans."
+    "0": "The procedure leans toward calling a front early on purpose, and it accepts a warning nobody needed as the cheaper mistake.  It never holds a call back until the rain, since a warning that arrives with the rain is only a report.",
+    "1": "The procedure says outright that nothing in it tells an officer what the weather is going to do.  The twelve hours are a deadline for sending a warning, not a forecast of when the front arrives.",
+    "2": "A call is judged on the log, not on the weather that happened to follow, and the procedure says nothing about protecting officers from blame."
    },
-   "explain": "Two mistakes are possible and they do not cost the same: an unnecessary warning empties a harbor for a day, while a late warning costs boats and crews.  Command accepts the cheaper mistake more often in order to make the expensive one rare, which is a design choice about which failure to tolerate."
+   "explain": "Command writes the rule so that no officer has to invent one in the moment, because the officer watching a barometer fall is the worst possible person to decide what the fall means.  With the rule written down ahead of time, the readings decide when a warning goes out, not the worry of the moment."
   },
   {
    "id": "t6-hot-failing-one-gate",
@@ -4821,14 +4821,14 @@
    "blanks": [
     {
      "choices": [
-      "constraint",
+      "finding",
       "proposal",
-      "finding"
+      "constraint"
      ],
-     "key": 0,
+     "key": 2,
      "distractorRationale": {
-      "1": "A proposal is one of the responses being evaluated.  The window is the thing proposals get measured against, which is the opposite side of the evaluation.",
-      "2": "A finding is what the board records after it evaluates something.  The window existed before the board ever met, because Command set it."
+      "0": "A finding is what the board records after it evaluates something.  The window existed before the board ever met, because Command set it.",
+      "1": "A proposal is one of the responses being evaluated.  The window is the thing proposals get measured against, which is the opposite side of the evaluation."
      }
     }
    ],
@@ -4848,8 +4848,8 @@
    "choices": [
     "That Proposal D replaces Proposal A as the recommended plan.",
     "That its petition half cannot count toward this season's approved response.",
-    "That Proposal D clears all three constraints once the halves are combined.",
-    "That Proposal D is out of order for being raised after the filing."
+    "That Proposal D clears all three constraints once its two halves are combined.",
+    "That Proposal D is out of order for being raised after the three proposals were filed."
    ],
    "key": 1,
    "distractorRationale": {
@@ -4870,10 +4870,10 @@
    "dok": 4,
    "stem": "A fifth proposal is cheap, fast and fully within the Network's authority.  A sixth is cheaper still but lies outside that authority.  How does the board's method treat them?",
    "choices": [
-    "The sixth wins, since cost is the constraint Command names first.",
+    "The sixth wins, since cost is the first of the constraints Command names.",
     "Both go forward, with the lower cost breaking the tie between them.",
     "The fifth joins the comparison;  the sixth is out whatever it costs.",
-    "Neither goes forward until Command agrees to widen a constraint."
+    "Neither goes forward until Command agrees to widen one of its three constraints."
    ],
    "key": 2,
    "distractorRationale": {
@@ -4896,7 +4896,7 @@
    "choices": [
     "To rank the proposals and forward that ranking to Command.",
     "To change any constraint that none of the proposals can clear.",
-    "To file the operative's recommendation on the operative's behalf.",
+    "To file the operative's recommendation to Command on the operative's behalf.",
     "To record how the choosing has to be done, rather than to choose."
    ],
    "key": 3,
@@ -4943,9 +4943,9 @@
    "stem": "Watch the moving trace on the plate. Which way does the signal travel, and why does that direction fit what the plate maps?",
    "explain": "The plate's own printed caption names these as the skin's nerves, and skin nerves carry feeling from the body back to the spine. The trace runs that way. If it ran outward, it would be teaching the opposite of what the picture is a map of.",
    "choices": [
-    "Away from the spine, because the brain sends every signal outward to the skin.",
+    "Away from the spine, because the brain sends every signal outward along the nerves to the skin.",
     "Toward the spine, because the plate maps the nerves that move the arm.",
-    "Both ways at once, because the front and back plates run in opposite directions.",
+    "Both ways at once, because the front plate and the back plate run their traces in opposite directions.",
     "Toward the spine, because the plate maps the skin's nerves, which carry feeling inward."
    ],
    "key": 3,
@@ -4969,17 +4969,17 @@
    "choices": [
     "There are two views on tabs, one of the front and one of the back.",
     "Each view is a whole standing figure, not a close-up of one limb.",
-    "A trace runs along the arm and travels toward the spine.",
     "The plate labels each muscle the arm uses to lift a load.",
+    "A trace runs along the arm and travels toward the spine.",
     "A cutaway shows the brain and the spinal cord inside the body."
    ],
    "key": [
     0,
     1,
-    2
+    3
    ],
    "distractorRationale": {
-    "3": "No muscle is labelled anywhere on either view. The plate maps nerve territories in the skin.",
+    "2": "No muscle is labelled anywhere on either view. The plate maps nerve territories in the skin.",
     "4": "Neither view opens the body up. Both are outside views of a whole standing figure."
    },
    "explain": "Three things are on the plate and two are not. Two tabs give a front and a back view, each of a whole standing figure, and a trace runs along the arm toward the spine. No muscles are labelled and nothing is cut away to show the brain or spinal cord."
@@ -4997,7 +4997,7 @@
    "stem": "On the life-support diagram, which box is labelled as a component?",
    "explain": "The diagram puts its labels right on the boxes. The bottom row holds the scrubber cartridge, the filter membrane and the light panel, and each carries the label component. Air, Water and Food are one row up, labelled subsystem, and Life Support at the top is the system.",
    "choices": [
-    "Scrubber cartridge",
+    "Light panel",
     "Air",
     "Life Support",
     "Water"
@@ -5045,9 +5045,9 @@
    "stem": "Across the days the chart covers, what happens to the two lines?",
    "explain": "The chart has two panels. The top one takes carbon dioxide from 410 to 430 to 452 parts per million, climbing the whole way. The bottom one takes oxygen from 20.5 to 20.0 to 19.5 percent, falling the whole way. One goes up, one goes down, and neither turns around.",
    "choices": [
-    "Both lines climb, one faster than the other.",
+    "Both lines climb the whole way, with carbon dioxide rising faster than oxygen.",
     "Carbon dioxide climbs the whole way while oxygen falls the whole way.",
-    "Carbon dioxide climbs at first and then levels off near the end.",
+    "Carbon dioxide climbs at first and then levels off, rising less from the middle point to the end.",
     "Oxygen falls at first and then recovers by the last day."
    ],
    "key": 1,
@@ -5121,9 +5121,9 @@
    "stem": "The two panels are drawn on two separate scales. Why does that matter when you read them?",
    "explain": "One panel counts parts per million and the other counts percent, so the same amount of ink means different things in each. That makes a comparison inside one panel fair, and a comparison of steepness across the two meaningless. The caption says so too.",
    "choices": [
-    "Because it means one panel's readings are more accurate than the other's.",
+    "Because it means one panel's sensors take more accurate readings than the other's.",
     "Because the two quantities are actually measured in the same unit underneath.",
-    "Because a line's steepness can only be compared inside its own panel, not across the two.",
+    "Because a line's steepness can be compared only inside its own panel.",
     "Because it means the two lines must cross somewhere between the days shown."
    ],
    "key": 2,
@@ -5183,10 +5183,10 @@
    "stem": "In the cross-section, what happens to the warm air where the front is drawn?",
    "explain": "The cross-section shows cold air sliding in low and shoving the warm air up above it. Air that rises cools, its moisture condenses into cloud, and the rain falls from there. That is the whole chain the picture draws.",
    "choices": [
-    "It slides in low, underneath the cold air.",
-    "It is held in place by the cold air and stops moving.",
+    "It slides in low, underneath the cold air, the way water spreads under oil.",
+    "It is held in place by the cold air on both sides and stops moving.",
     "It sinks and dries out as the cold air passes over the top of it.",
-    "It is forced upward, and its moisture condenses into clouds that drop rain."
+    "It is forced up, and its moisture condenses into rain clouds."
    ],
    "key": 3,
    "distractorRationale": {
@@ -5271,19 +5271,19 @@
    "dok": 2,
    "stem": "Choose the three things this surface map actually puts on the page.",
    "choices": [
-    "Fronts drawn as lines carrying triangles or semicircles.",
+    "A forecast of what the weather will do over the next three days.",
     "Pressure centres marked with the letters H and L.",
     "Isobars labelled with pressure values between 993 and 1016.",
-    "A forecast of what the weather will do over the next three days.",
+    "Fronts drawn as lines carrying triangles or semicircles.",
     "A photograph of the storm taken from a satellite."
    ],
    "key": [
-    0,
     1,
-    2
+    2,
+    3
    ],
    "distractorRationale": {
-    "3": "The map is a record of one morning, not a forecast. Nothing on it says what happens next.",
+    "0": "The map is a record of one morning, not a forecast. Nothing on it says what happens next.",
     "4": "There is no photograph on this map. It is a drawn chart of symbols, letters and labelled lines."
    },
    "explain": "This is a surface analysis for a single morning. It carries front symbols, H and L pressure centres, and isobars labelled from 993 to 1016. It is not a forecast, and it holds no satellite picture."
@@ -5301,10 +5301,10 @@
    "stem": "Read the rainfall panel. Which post gets more rain in an average year, and roughly how much more?",
    "explain": "The rainfall panel gives one bar per post: Sable Flats at 9 inches a year, Cairn Bay at 42. Dividing 42 by 9 gives a little under five, so Cairn Bay gets close to five times the rain. The 68 and 33 belong to the other panel and are degrees of seasonal swing.",
    "choices": [
-    "Cairn Bay, at 42 inches against Sable Flats' 9, so getting about twice as much.",
-    "Cairn Bay, at 42 inches against Sable Flats' 9, so getting close to five times as much.",
-    "Sable Flats, at 68 inches against Cairn Bay's 33.",
-    "Neither, because the two bars in the rainfall panel are the same height."
+    "Cairn Bay, at 42 inches against Sable Flats' 9, about twice as much.",
+    "Cairn Bay, at 42 inches against Sable Flats' 9, close to five times as much.",
+    "Sable Flats, at 68 inches against Cairn Bay's 33, about twice as much.",
+    "Neither, because the two bars in the rainfall panel stand at the same height."
    ],
    "key": 1,
    "distractorRationale": {
@@ -5514,19 +5514,19 @@
    "stem": "Choose the three things this chart and its notes actually tell you.",
    "choices": [
     "The fledge rate is lower at every reading than at the one before.",
-    "In season 1 the chicks hatched about eight days after the herring arrived.",
+    "The colony will die out within the next ten seasons.",
     "By season 30 the chicks hatched about three weeks before the herring arrived.",
     "The herring now arrive about a month later than they used to.",
-    "The colony will die out within the next ten seasons."
+    "In season 1 the chicks hatched about eight days after the herring arrived."
    ],
    "key": [
     0,
-    1,
-    2
+    2,
+    4
    ],
    "distractorRationale": {
-    "3": "The notes say the opposite about the herring: their arrival holds near April 21 every season, drifting only about three days either way. It is the chicks whose timing moved.",
-    "4": "The chart stops at season 30 and predicts nothing. A falling line is not a forecast of when it reaches zero."
+    "1": "The chart stops at season 30 and predicts nothing. A falling line is not a forecast of when it reaches zero.",
+    "3": "The notes say the opposite about the herring: their arrival holds near April 21 every season, drifting only about three days either way. It is the chicks whose timing moved."
    },
    "explain": "Three of these are on the chart or in its notes: the fall at every step, the eight days after in season 1, and the three weeks before by season 30. The herring did not move, which is the whole point, and nothing here forecasts an end date."
   },
@@ -5594,18 +5594,18 @@
    "choices": [
     "Every proposal is checked against the same three tests.",
     "One of the three tests is whether the plan has an effect within one season.",
-    "Card B shows no verdict at all for the authority test.",
+    "Every card carries a YES on at least two of the three tests.",
     "Each proposal is checked against whichever tests suit it best.",
-    "Every card carries a YES on at least two of the three tests."
+    "Card B shows no verdict at all for the authority test."
    ],
    "key": [
     0,
     1,
-    2
+    4
    ],
    "distractorRationale": {
-    "3": "That would defeat the point of a comparison panel. The header names three tests and every card is read down the same three.",
-    "4": "Card C carries only one YES, against two NOs, so this is not true of every card."
+    "2": "Card C carries only one YES, against two NOs, so this is not true of every card.",
+    "3": "That would defeat the point of a comparison panel. The header names three tests and every card is read down the same three."
    },
    "explain": "The header names the three tests and every card is read down the same three, one of which is whether the plan has an effect within one season. Card B simply has no authority verdict on it, which the panel leaves empty rather than inventing. And card C carries only one YES, so no rule about \"at least two\" holds across all three."
   },
