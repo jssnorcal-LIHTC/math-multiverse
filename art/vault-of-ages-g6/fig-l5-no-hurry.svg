@@ -2,19 +2,20 @@
 <rect x="0" y="0" width="800" height="450" fill="#0f1218" />
 <text x="40" y="44" font-size="26" fill="#e8eef7">the plan's own clock</text>
 <text x="760" y="44" font-size="18" fill="#e8eef7" text-anchor="end" fill-opacity="0.62">in order, not to scale</text>
-<rect x="359.8" y="108" width="189.6" height="94" fill="none" stroke="rgba(232,238,247,0.35)" stroke-width="1" data-gap="blocking most of my view" />
-<line x1="381.8" y1="108" x2="359.8" y2="130" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="403.8" y1="108" x2="359.8" y2="152" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="425.8" y1="108" x2="359.8" y2="174" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="447.8" y1="108" x2="359.8" y2="196" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="469.8" y1="108" x2="375.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="491.8" y1="108" x2="397.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="513.8" y1="108" x2="419.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="535.8" y1="108" x2="441.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="549.4" y1="116.4" x2="463.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="549.4" y1="138.4" x2="485.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="549.4" y1="160.4" x2="507.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
-<line x1="549.4" y1="182.4" x2="529.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<rect x="359.8" y="95" width="189.6" height="107" fill="none" stroke="rgba(232,238,247,0.35)" stroke-width="1" data-gap="blocking most of my view" />
+<line x1="381.8" y1="95" x2="359.8" y2="117" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="403.8" y1="95" x2="359.8" y2="139" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="425.8" y1="95" x2="359.8" y2="161" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="447.8" y1="95" x2="359.8" y2="183" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="469.8" y1="95" x2="362.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="491.8" y1="95" x2="384.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="513.8" y1="95" x2="406.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="535.8" y1="95" x2="428.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="549.4" y1="103.4" x2="450.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="549.4" y1="125.4" x2="472.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="549.4" y1="147.4" x2="494.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="549.4" y1="169.4" x2="516.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
+<line x1="549.4" y1="191.4" x2="538.8" y2="202" stroke="rgba(232,238,247,0.35)" stroke-width="1" />
 <text x="40" y="134" font-size="18" fill="#e8eef7" fill-opacity="0.82">the time the plan expected</text>
 <line x1="251" y1="128.5" x2="760" y2="128.5" stroke="rgba(232,238,247,0.28)" stroke-width="1" stroke-dasharray="7 6" />
 <text x="40" y="180" font-size="18" fill="#e8eef7" fill-opacity="0.82">the real time</text>
