@@ -381,6 +381,36 @@ check('facsimile: a redacted line draws a bar and places NO text under it', () =
   });
 });
 
+// A BOXED LINE'S DESCENDERS MUST CLEAR THE BOX (26-0921).  The run's 4px of "extra air" was added
+// before its LAST line was drawn, not after it, so that line sat 4px lower than the box was sized for,
+// and on fig-l4-temple-chronicle the q, g and y of "requiring only" ran through the box's bottom
+// stroke.  Seen at 4x by the distractors lens, invisible to every byte gate.  Asserted on one-line and
+// two-line runs:  the stroke's inner edge (bottom - 1) must sit below each boxed line's baseline plus
+// the bbox model's DESCENT, and the next line must still start below the box.
+check('facsimile: a boxed run contains its own descenders, one line or two', () => {
+  const { DESCENT, LABEL_FONT } = require('../build/figure-tokens.js');
+  [['It is a fact requiring only faith.'], ['a fully charged Petrel-4 held a working fix for', 'thirty days straight']].forEach((run) => {
+    const dt = { type: 'facsimile', title: 'a card', lines: [{ text: 'a plain line above' }, ...run.map((t) => ({ text: t, emphasis: 'box' })), { text: 'a plain line below' }] };
+    const svg = docs.renderFacsimile(dt, ACCENT);
+    const box = /<rect x="[^"]*" y="([^"]*)" width="[^"]*" height="([^"]*)"[^>]*data-emphasis="box"/.exec(svg);
+    assert.ok(box, 'no boxed run drawn');
+    const bottom = Number(box[1]) + Number(box[2]);
+    // No regex built from the label: find the run by its exact text, then read that element's y.
+    const baseOf = (t) => {
+      const at = svg.indexOf('>' + t + '</text>');
+      assert.ok(at !== -1, 'line not drawn: ' + t);
+      const open = svg.lastIndexOf('<text', at);
+      return Number(/ y="([^"]*)"/.exec(svg.slice(open, at))[1]);
+    };
+    run.forEach((t) => {
+      const need = baseOf(t) + DESCENT * LABEL_FONT;
+      assert.ok(bottom - 1 >= need, `"${t}" descends to ${need.toFixed(2)} but the box's stroke begins at ${bottom - 1}`);
+    });
+    const below = baseOf('a plain line below');
+    assert.ok(below - 0.8 * LABEL_FONT > bottom + 1, `the line below the box starts at ${(below - 0.8 * LABEL_FONT).toFixed(1)}, inside the box ending ${bottom + 1}`);
+  });
+});
+
 check('facsimile: every authored line and header value is actually drawn', () => {
   const dt = readFixture('facsimile');
   const svg = docs.renderFacsimile(dt, ACCENT);

@@ -858,8 +858,6 @@ function renderFacsimile(dataTable, accentColor) {
       const uy = hp(y + Math.ceil(T.DESCENT * font) + 2);
       out.push(line(innerX, uy, innerX + w, uy, accent, 2, { extra: 'data-emphasis="underline"' }));
     }
-    // A boxed run ends with a little extra air, so the outline never crowds the next line.
-    if (em === 'box' && boxRunEnd[boxRunStart[i]] === i) y += 4;
 
     // A plain line gets NO rule. Ruling every line made a flowing newspaper paragraph render as a
     // stack of table rows, and worse, it made the gray rules almost indistinguishable from the
@@ -867,6 +865,11 @@ function renderFacsimile(dataTable, accentColor) {
     // to show. Rules now appear only where the document itself has one: under the title and under
     // the header block.
     out.push(text(innerX, y, font, t.text));
+    // A boxed run ends with a little extra air, so the outline never crowds the next line.  The air
+    // goes AFTER the run's last line is drawn (26-0921).  It used to be added before, which drew that
+    // line 4px lower than the box above was sized for:  its descenders ran through the box's bottom
+    // stroke on every boxed line in the corpus.  tests/figure-docs.test.js pins it.
+    if (em === 'box' && boxRunEnd[boxRunStart[i]] === i) y += 4;
   });
 
   if (columns.length) {

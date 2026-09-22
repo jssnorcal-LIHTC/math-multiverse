@@ -4947,7 +4947,7 @@
       ],
       "coachTopic": "evidence-story-details",
       "dok": 2,
-      "stem": "Three of the plan's four chairs carry words the story gives about whoever sits there.  Which words does the plan put on the fourth?",
+      "stem": "Look at how the plan draws its chairs.  Which of these words sit inside a rounded box with a colored outline, not a plain one?",
       "choices": [
         "the fourth chair is still empty",
         "the one nearest the door",
@@ -4956,11 +4956,11 @@
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "The plan puts those words on the chair the narrator takes, one of the three it draws from the story.  They name a seat rather than say anything about the fourth chair.",
-        "2": "That count comes from the narrator at the start of the scene.  The plan puts a different set of words on the fourth chair, not a count of chairs.",
-        "3": "The plan puts those words on Theo's chair, another of the three it draws from the story.  They give a name rather than describe a chair."
+        "1": "The plan puts those words on the chair the narrator takes, and draws that chair in a plain box.  They name a seat that someone sits in.",
+        "2": "That count comes from the narrator near the start of the scene, and the plan does not print it anywhere.  The rounded box carries different words.",
+        "3": "The plan puts those words on Theo's chair, and draws that chair in a plain box.  Theo sits there, and the rounded box marks the one chair nobody takes."
       },
-      "explain": "Three of the plan's chair labels name the person who takes that chair.  The fourth names nobody, because nobody takes it: the plan marks it with the words \"the fourth chair is still empty\", taken from the story's last sentence.  That is the one seat left over.",
+      "explain": "The plan draws three chairs in plain boxes, each labeled with words the story gives about whoever sits there:  the seat nearest the door, Theo, and Dash.  Nobody takes the fourth, so the plan draws it in a rounded, colored box with the words \"the fourth chair is still empty\", taken from the story's last sentence.",
       "whyTheFigureIsNeeded": "The story counts the unused chairs twice, two near the start and one at the very end, and never fixes the table at one moment; the plan does, and it shows which chair the record describes instead of naming a person.",
       "svgRead": "The four chair rects in fig-l1-two-empty-chairs.svg read the one nearest the door, introduces himself as Theo, his name is Dash and the fourth chair is still empty; only the last is drawn with rx=20 and stroke #7c5cff, the other three using rx=4 and stroke rgba(232,238,247,0.5)."
     },
@@ -4977,11 +4977,11 @@
       "dok": 2,
       "stem": "The plan is a view of Finch's table from above.  Choose the three statements the plan actually shows.",
       "choices": [
-        "The four chairs stand in a row along one edge.",
-        "Finch's table sits in the middle of the plan, with the chairs set around it.",
-        "A fifth chair stands at the head of the table for Finch.",
+        "The four chairs stand in a row, all along one edge of the table.",
+        "Finch's table sits in the middle of the plan with the chairs set around it.",
+        "Five chairs stand around the table, one of them kept for Finch.",
         "The chairs are set around the table, not gathered on one side.",
-        "Four chairs stand around the table, no more and no fewer.",
+        "Exactly four chairs stand around the table.",
         "The plan draws the table off to one side of the chairs."
       ],
       "key": [
@@ -5037,13 +5037,13 @@
       "type": "order",
       "passageId": "p-wyrdstone-entry",
       "figureId": "fig-l2-wyrdstone",
-      "figureFact": "past the loan date",
+      "figureFact": "no theft report",
       "targets": [
         "c1-inf-6-text-structure"
       ],
       "coachTopic": "structure-text",
       "dok": 2,
-      "stem": "The timeline sets the whole record out as one numbered line, and it ends at the entry reading \"past the loan date\".  Put these four entries in the order the timeline numbers them.",
+      "stem": "The timeline sets the whole record out as one numbered line, with a shaded stretch marked \"no theft report\".  Put these four entries in the order the timeline numbers them.",
       "tiles": [
         "The researcher's listed institution has no record",
         "No verified sighting exists past the loan date",
@@ -5225,14 +5225,14 @@
       ],
       "coachTopic": "evidence-story-details",
       "dok": 3,
-      "stem": "Select the three things the plan joins by plain lines, not by the arrows carrying Theo in.",
+      "stem": "Select the three things the plan connects only by joins that carry no arrowhead.",
       "choices": [
         "an open pedestal, with no case around it at all",
-        "the intake desk, where a man barely looks up from his screen",
+        "the intake desk, where a man barely looks up",
         "the four exits and the two visible cameras",
-        "a flat cardboard box holding an actual empty picture frame",
+        "Kade, crossing the room toward him",
         "a thin dark line in the floor circling it",
-        "a service elevator, the ride Theo takes up to the gallery floor"
+        "a service elevator"
       ],
       "key": [
         0,
@@ -5240,13 +5240,13 @@
         4
       ],
       "distractorRationale": {
-        "1": "The plan puts the intake desk on the way in, with an arrow running on to the elevator.  It is where Theo starts, not part of the room he came to see.",
-        "3": "The cardboard box is something Theo carries in and leaves at the desk.  The plan draws the fixed places and fittings he moves between, and a thing he is carrying is not one of them.",
-        "5": "The plan puts a service elevator on the way in, between the desk and the room.  Theo rides it up before he has seen anything at all."
+        "1": "The desk's only join is an arrow running on to the elevator.  Its arrowhead sits at the elevator end, not at the desk, but the join still carries one.",
+        "3": "Kade crosses the room in the story, but the plan draws places and fittings, not people.  She is not on the plan at all, so nothing joins her to anything.",
+        "5": "An arrow runs into the service elevator from the desk and another runs out of it to the room, so the plan joins it with arrowheads, not without them."
       },
       "explain": "The plan separates the way in from the room Theo came to see by the kind of join it draws, not by where each box sits on the sheet.  Arrows carry Theo from the desk to the elevator and on to the room.  Plain lines run from the room to the pedestal, from the pedestal to the dark line in the floor, and from the room to the count of exits and cameras.",
-      "whyTheFigureIsNeeded": "The passage names these six things in four different paragraphs and counts the exits and cameras only as Theo walks out; the plan is the one place that sorts the five it draws into the way in and the room he came to see, and it leaves the cardboard box off the sheet altogether.",
-      "svgRead": "Opened art/vault-of-ages-g6/fig-l3-kade-collection.svg and counted every line.  Exactly two arrowheads are drawn (<polygon> at 169.6,191.44 for the intake desk to the service elevator, and at 471.92,126.29 for the elevator on to the room), so the way in is a two-arrow route.  Three plain lines run without arrowheads: room to pedestal (544,130.56 to 544,198.08), pedestal to the dark line (544,250.08 to 544,324.24), and room to the exits-and-cameras box (508.5,127.85 to 223.38,314.95).  The pedestal alone is rx=\"20\" with stroke=\"#7c5cff\", the pack's rounded accent box for the thing standing open.  DELIBERATE CHOICE: the exits-and-cameras box is drawn at x=48.6 on the LEFT of the sheet, so the stem asks only what the plan JOINS BY PLAIN LINES and makes no left/right claim.  The key rests on the line style, which the alt states and the caption deliberately no longer does."
+      "whyTheFigureIsNeeded": "The passage mentions these six things across four paragraphs and never says which is joined to which; the plan is where the joins are drawn, arrows for the way in and plain lines for the room he came to see, and it leaves Kade off the sheet altogether.",
+      "svgRead": "Opened art/vault-of-ages-g6/fig-l3-kade-collection.svg and counted every line.  Exactly two arrowheads are drawn (<polygon> at 169.6,191.44 for the intake desk to the service elevator, and at 471.92,126.29 for the elevator on to the room), so the way in is a two-arrow route.  Three plain lines run without arrowheads: room to pedestal (544,130.56 to 544,198.08), pedestal to the dark line (544,250.08 to 544,324.24), and room to the exits-and-cameras box (508.5,127.85 to 223.38,314.95).  The pedestal alone is rx=\"20\" with stroke=\"#7c5cff\", the pack's rounded accent box for the thing standing open.  DELIBERATE CHOICE: the exits-and-cameras box is drawn at x=48.6 on the LEFT of the sheet, so the stem asks only which things the plan connects by joins that carry no arrowhead, and makes no left/right claim.  The key rests on the line style, which the alt states and the caption deliberately no longer does."
     },
     {
       "id": "l3-cloze-row-against-row",
@@ -5332,14 +5332,14 @@
       "choices": [
         "The seal remains in this chamber to this day.",
         "No enemy of the temple has ever set foot in this chamber.",
-        "An ordinary mourner would have wept.",
+        "The temple's protection over the seal is not a claim requiring proof.",
         "It is a fact requiring only faith."
       ],
       "key": 3,
       "distractorRationale": {
         "0": "That line sits on the inscription with no box around it.  It reports where the seal is, and the inscription does not mark it as resting on belief.",
         "1": "The inscription carries that sentence, spread over two lines, and draws no box around either of them.",
-        "2": "That sentence belongs to the chronicle's account of Isis, and the drawing does not carry it.  The box goes round the line the chronicle asks you to take on faith, not round a piece of the story."
+        "2": "The chronicle does say that, in the sentence just before the one about faith, but the drawing does not carry it at all.  The box goes round the next sentence, which asks for faith instead of proof."
       },
       "targets": [
         "c4-3-analyze-sources"
@@ -5348,7 +5348,7 @@
       "dok": 3,
       "explain": "The inscription draws its one box around the sentence about faith, and that sentence is the chronicle's answer to anyone asking for proof.  The other lines report what the temple believes about the seal, and the drawing leaves them unmarked.",
       "whyTheFigureIsNeeded": "The passage prints the chronicle's closing lines as ordinary prose and marks none of them; the card is the only place one carved line carries a box, so the flag is a mark made on the document rather than a sentence written about it.",
-      "svgRead": "fig-l4-temple-chronicle.svg holds exactly three rect elements: the page background (0,0,800,450), the card frame (56,34,688,386), and one carrying data-emphasis=\"box\" at x=70 y=304 width=293.49 height=32.  That box spans y 304-336 and encloses the text at y=332, \"It is a fact requiring only faith.\"  The lines at y=232 and at y=264/y=296 fall outside it, which licenses rationales 0 and 1; \"An ordinary mourner would have wept.\" appears in none of the file's eleven text elements, which licenses rationale 2."
+      "svgRead": "fig-l4-temple-chronicle.svg holds exactly three rect elements: the page background (0,0,800,450), the card frame (56,34,688,386), and one carrying data-emphasis=\"box\" at x=70 y=304 width=293.49 height=32.  That box spans y 304-336 and encloses the text at y=328, \"It is a fact requiring only faith.\"  The lines at y=232 and at y=264/y=296 fall outside it, which licenses rationales 0 and 1; \"The temple's protection over the seal is not a claim requiring proof.\" appears in none of the file's eleven text elements (searched for \"protection\":  zero hits), which licenses rationale 2.  That sentence is in the passage, directly before the boxed one, which is why it is the distractor:  it carries the stem's own words \"claim\" and \"proof\", so only the drawing's box settles which line is marked."
     },
     {
       "id": "l4-ms-what-the-ledger-page-keeps",
@@ -5390,7 +5390,7 @@
       "passageId": "p-what-the-archive-believes",
       "figureId": "fig-l4-archive-believes",
       "figureFact": "a claim resting on faith",
-      "stem": "The memo gives the temple chronicle and the guild ledger one line each on the row named \"evidence\".  What does it print for the chronicle?",
+      "stem": "The memo sets the temple chronicle beside the guild ledger and asks the same questions of both.  What support does it list for the chronicle?",
       "choices": [
         "two sets of tool marks",
         "a claim resting on faith",
@@ -5597,15 +5597,15 @@
       "type": "ms",
       "passageId": "p-what-the-archive-believes",
       "figureId": "fig-l4-archive-believes",
-      "figureFact": "weak point",
+      "figureFact": "evidence",
       "stem": "The memo sets the two accounts in side-by-side columns.  Select the three of these questions that its row labels put to each account.",
       "choices": [
-        "when each account was written",
+        "what date each account was written",
         "what each account claims",
-        "who first found each account",
+        "what each account says the seal looks like",
         "what evidence each account gives",
         "where each account is kept now",
-        "what weak point each account has"
+        "where each account is weak"
       ],
       "key": [
         1,
@@ -5614,7 +5614,7 @@
       ],
       "distractorRationale": {
         "0": "No row on the memo asks about dates.  The two accounts are compared on what they say and how far each one can be trusted, not on when they were written.",
-        "2": "The memo never says who found either account.  It compares what each one claims and how well that claim holds up, not how it reached the Archive.",
+        "2": "No row on the memo asks what the seal looks like.  The memo asks what each account claims, what backs that claim, whether it can be checked, and where it is weak.",
         "4": "The memo has no row for where either account is stored.  It asks instead about the claim itself, the evidence behind it, and the point where each account is weak."
       },
       "targets": [
@@ -5635,9 +5635,9 @@
       "stem": "One line on the chronicle card is drawn inside a box.  Which line is it, and what does that box mark?",
       "choices": [
         "\"The seal remains in this chamber to this day.\", marking where the seal now sits.",
-        "\"No enemy of the temple has ever set foot in this chamber.\", marking its strongest evidence.",
+        "\"No enemy of the temple has ever set foot in this chamber.\", marking the chronicle's strongest evidence.",
         "\"Isis worked instead.\", marking the moment the story turns to her.",
-        "\"It is a fact requiring only faith.\", marking a claim the chronicle offers without proof."
+        "\"It is a fact requiring only faith.\", marking what the chronicle asks the reader to take on trust."
       ],
       "key": 3,
       "distractorRationale": {
@@ -5650,9 +5650,9 @@
       ],
       "coachTopic": "inference-argument",
       "dok": 3,
-      "explain": "A box around a line means one thing: the document is asking to be believed without offering proof.  The chronicle says as much in its own words, calling its protection of the seal a fact requiring only faith.",
+      "explain": "On this card, a box around a line means one thing: the document is asking to be believed without offering proof.  The chronicle says as much in its own words, calling its protection of the seal a fact requiring only faith.",
       "whyTheFigureIsNeeded": "The passage prints the chronicle's closing lines as ordinary prose and marks none of them; the card is the only place one carved line carries a box, so the flag is a mark made on the document rather than a sentence written about it.",
-      "svgRead": "Opened art/vault-of-ages-g6/fig-l4-temple-chronicle.svg and counted: exactly ONE element carries data-emphasis=\"box\", <rect x=\"70\" y=\"304\" width=\"293.49\" height=\"32\" stroke=\"#7c5cff\">, and the only text inside it is <text x=\"78\" y=\"332\">It is a fact requiring only faith.</text>.  The other carved lines sit at y=232, y=264 and y=296, all above and outside that rect, which is what distractors 0 and 1 turn on.  Searched the file for \"Isis\": zero hits, so choice 2 names a sentence the card does not carry."
+      "svgRead": "Opened art/vault-of-ages-g6/fig-l4-temple-chronicle.svg and counted: exactly ONE element carries data-emphasis=\"box\", <rect x=\"70\" y=\"304\" width=\"293.49\" height=\"32\" stroke=\"#7c5cff\">, and the only text inside it is <text x=\"78\" y=\"328\">It is a fact requiring only faith.</text>.  The other carved lines sit at y=232, y=264 and y=296, all above and outside that rect, which is what distractors 0 and 1 turn on.  Searched the file for \"Isis\": zero hits, so choice 2 names a sentence the card does not carry."
     }
   ],
   "figures": [
