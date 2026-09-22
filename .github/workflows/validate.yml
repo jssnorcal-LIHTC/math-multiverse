@@ -39,6 +39,9 @@ jobs:
       - name: Figure fidelity (every ELA figure label is verbatim in its passage; every C-wave key is licensed by its dataTable; 3 controls)
         run: node tests/figure-fidelity.js
 
+      - name: svgRead is current (every SVG fragment an item quotes as evidence is still in the figure file; 1 control)
+        run: node tests/svgread-current.js
+
       - name: Unquoted drawn labels (every cued label closed at both edges in all three ELA packs; reviewed exceptions allowlisted, stale entries fail)
         run: npm run unquoted-labels
 
@@ -65,6 +68,9 @@ jobs:
 
       - name: Figures offline (every figure/badge asset decodes with no network; fixture controls)
         run: node tests/figures-offline.js
+
+      - name: Figure text width (every generated label measured in Chromium against the width it was sized by; never under, never 10% fat; environment font calibrated first; 2 controls)
+        run: node tests/figure-text-width.js
 
       - name: Reading surface (every pack item keeps a readable passage at 1024x768)
         run: node tests/reading-surface.js
