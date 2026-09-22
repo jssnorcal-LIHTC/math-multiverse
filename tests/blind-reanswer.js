@@ -116,16 +116,31 @@ function parseAnswer(raw, optionCount) {
 // Retiring a human adjudication is the one write in this file that destroys information, so the
 // decision to do it is separated from the I/O that surrounds it and pinned by --self-test-retired-
 // adjudication below.  votes may contain nulls (a failed call);  a null is not a vote for the key.
-function retirementVerdict(votes, authored, type) {
+//
+// AND IT WEIGHS THE RECORD, NOT ONLY THIS RUN (26-0921, Justin:  "change the rule").  A unanimous three
+// used to retire an adjudication however the item had read before.  l2-mc-three-realms-ruler-row read
+// 1 agree against 3 disagree on 26-0915, then 3 agree on 26-0921, and three draws retired a decision
+// that seven draws split 4 to 3.  A result that DESTROYS information needs more evidence than one that
+// adds it, so retirement now also needs the agreements ON RECORD (history plus this run) to outnumber
+// the disagreements at least two to one.  `history` is the record's structured blindHistory,
+// {agree, disagree}, which every re-ask of an adjudicated item now adds to.
+function retirementVerdict(votes, authored, type, history) {
   const counted = votes.filter((v) => v !== null && v !== undefined);
   const wins = counted.filter((v) => sameAnswer(v, authored, type)).length;
+  const h = history && typeof history === 'object' ? history : {};
+  const agreeAll = (Number.isInteger(h.agree) ? h.agree : 0) + wins;
+  const disagreeAll = (Number.isInteger(h.disagree) ? h.disagree : 0) + (counted.length - wins);
+  // Unanimous across every run, and every run must have returned something.  A single agree with
+  // two failures is not three readings, it is one.
+  const unanimous = counted.length === votes.length && votes.length >= 3 && wins === votes.length;
   return {
     wins,
     total: votes.length,
     counted: counted.length,
-    // Unanimous across every run, and every run must have returned something.  A single agree with
-    // two failures is not three readings, it is one.
-    retire: counted.length === votes.length && votes.length >= 3 && wins === votes.length,
+    agreeAll,
+    disagreeAll,
+    unanimous,
+    retire: unanimous && agreeAll >= 2 * disagreeAll,
   };
 }
 
@@ -273,15 +288,31 @@ async function main() {
         } catch (e) { votes.push(null); }
       }
       const authored = authoredKeyOf(item);
-      const v = retirementVerdict(votes, authored, item.type);
+      const prev = prior.get(rec.itemId);
+      const v = retirementVerdict(votes, authored, item.type, prev.blindHistory);
+      const history = { agree: v.agreeAll, disagree: v.disagreeAll };
       console.log(`  ${rec.itemId}: ${v.wins} of ${v.total} run(s) agree with the authored key`
-        + (v.counted < v.total ? `  (${v.total - v.counted} call(s) failed)` : ''));
+        + (v.counted < v.total ? `  (${v.total - v.counted} call(s) failed)` : '')
+        + `;  on record ${v.agreeAll} agree against ${v.disagreeAll} disagree`);
       if (v.retire) {
-        console.log('    unanimous;  the adjudication is retired on three readings, not one');
+        rec.blindHistory = history;
+        console.log('    unanimous, and two to one on record;  the adjudication is retired');
+        continue;
+      }
+      if (v.unanimous) {
+        // Unanimous today, but the record still splits:  the human decision STANDS, now with the new
+        // readings on it.  Status stays adjudicated, the adjudicator and note carry forward.
+        rec.status = 'adjudicated';
+        rec.adjudicatedBy = prev.adjudicatedBy;
+        rec.adjudicatedAt = prev.adjudicatedAt;
+        rec.note = prev.note + `  [Re-asked on edited text:  ${v.wins} of ${v.total} agree, which on record makes `
+          + `${v.agreeAll} agree against ${v.disagreeAll} disagree, short of two to one, so the adjudication stands.]`;
+        rec.blindHistory = history;
+        console.log('    unanimous today, but the record is short of two to one;  the adjudication STANDS');
         continue;
       }
       const wins = v.wins;
-      const prev = prior.get(rec.itemId);
+      rec.blindHistory = history;
       rec.status = 'needs-adjudication';
       rec.blind = votes.find(v => v !== null && !sameAnswer(v, authored, item.type));
       rec.runs = votes.length;
@@ -381,10 +412,21 @@ if (require.main === module && process.argv.includes('--self-test-retired-adjudi
       votes: [[2, 3, 0, 1], [2, 3, 0, 1], [2, 3, 0, 1]], authored: [2, 3, 0, 1], type: 'order', retire: true },
     { name: 'order type, one run in a different order -> KEEP',
       votes: [[2, 3, 0, 1], [0, 1, 2, 3], [2, 3, 0, 1]], authored: [2, 3, 0, 1], type: 'order', retire: false },
+    // 26-0921:  the record counts.  The first case is the real one.
+    { name: 'the l2-mc record: 1 agree / 3 disagree on file, then a unanimous three -> KEEP (4 against 3)',
+      votes: [0, 0, 0], authored: 0, type: 'mc', history: { agree: 1, disagree: 3 }, retire: false },
+    { name: 'on file 0 agree / 2 disagree, then a unanimous three -> KEEP (3 against 2)',
+      votes: [0, 0, 0], authored: 0, type: 'mc', history: { agree: 0, disagree: 2 }, retire: false },
+    { name: 'on file 1 agree / 1 disagree, then a unanimous three -> retire (4 against 1)',
+      votes: [0, 0, 0], authored: 0, type: 'mc', history: { agree: 1, disagree: 1 }, retire: true },
+    { name: 'on file 3 agree / 3 disagree, then a unanimous three -> retire (6 against 3, exactly two to one)',
+      votes: [0, 0, 0], authored: 0, type: 'mc', history: { agree: 3, disagree: 3 }, retire: true },
+    { name: 'a malformed history is read as none, so a unanimous three still retires',
+      votes: [0, 0, 0], authored: 0, type: 'mc', history: { agree: 'x' }, retire: true },
   ];
   let bad = 0;
   for (const c of cases) {
-    const got = retirementVerdict(c.votes, c.authored, c.type);
+    const got = retirementVerdict(c.votes, c.authored, c.type, c.history);
     const ok = got.retire === c.retire;
     if (!ok) bad++;
     console.log(`  ${ok ? 'ok  ' : 'FAIL'}  ${c.name}  (wins ${got.wins}/${got.total}, retire ${got.retire})`);
