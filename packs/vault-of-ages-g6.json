@@ -4962,7 +4962,7 @@
       },
       "explain": "Three of the plan's chair labels name the person who takes that chair.  The fourth names nobody, because nobody takes it: the plan marks it with the words \"the fourth chair is still empty\", taken from the story's last sentence.  That is the one seat left over.",
       "whyTheFigureIsNeeded": "The story counts the unused chairs twice, two near the start and one at the very end, and never fixes the table at one moment; the plan does, and it shows which chair the record describes instead of naming a person.",
-      "svgRead": "The four chair rects in fig-l1-two-empty-chairs.svg read the one nearest the door, introduces himself as Theo, his name is Dash and the fourth chair is still empty; only the last is drawn with rx=32 and stroke #7c5cff, the other three using rx=4 and stroke rgba(232,238,247,0.5)."
+      "svgRead": "The four chair rects in fig-l1-two-empty-chairs.svg read the one nearest the door, introduces himself as Theo, his name is Dash and the fourth chair is still empty; only the last is drawn with rx=20 and stroke #7c5cff, the other three using rx=4 and stroke rgba(232,238,247,0.5)."
     },
     {
       "id": "l1-ms-how-the-plan-sets-the-table",
@@ -4996,7 +4996,7 @@
       },
       "explain": "A view from above looks straight down on the room, so it can show where each chair stands.  This one puts Finch's table in the middle with four chairs set around it, one at each corner and each joined to it by a plain line, and it draws no chair for Finch herself.",
       "whyTheFigureIsNeeded": "The story says four chairs stand around Finch's table and stops there; the plan is what draws where they stand, one at each corner with a plain line joining each of them to the table.",
-      "svgRead": "fig-l1-two-empty-chairs.svg draws five node rects, plus a page background: the table at x=306 to 494, y=224 to 264, and four chairs at x=40,y=84.56, x=416,y=84.56, x=532.8,y=363.44 and x=40,y=346, so the table is in the middle with a chair at each corner and no fifth chair anywhere in the file."
+      "svgRead": "fig-l1-two-empty-chairs.svg draws five node rects, plus a page background: the table at x=332 to 468, y=224 to 264, and four chairs at x=40.7,y=84.56, x=505,y=84.56, x=558.3,y=363.44 and x=40,y=363.44, so the table is in the middle with a chair at each corner and no fifth chair anywhere in the file."
     },
     {
       "id": "l1-cloze-the-moment-the-plan-draws",
@@ -5030,7 +5030,7 @@
       ],
       "explain": "The story counts two chairs nobody is using at the start and only one at the very end, once Dash has taken his seat.  The plan draws that later moment, so it marks a single chair and gives the other three to the people at the table.",
       "whyTheFigureIsNeeded": "The story gives two different counts of the chairs nobody is using, two near the start and one at the very end, and never says which to picture; the plan settles it by drawing the table at a single moment.",
-      "svgRead": "fig-l1-two-empty-chairs.svg draws four chair rects, three of them reading the one nearest the door, introduces himself as Theo and his name is Dash, and only the rect reading the fourth chair is still empty carries the accent stroke #7c5cff with rx=32, so exactly one of the four is marked."
+      "svgRead": "fig-l1-two-empty-chairs.svg draws four chair rects, three of them reading the one nearest the door, introduces himself as Theo and his name is Dash, and only the rect reading the fourth chair is still empty carries the accent stroke #7c5cff with rx=20, so exactly one of the four is marked."
     },
     {
       "id": "l2-order-wyrdstone-record-run",
@@ -5086,7 +5086,7 @@
       },
       "explain": "The comparison settles it in the row reading \"a ruler\".  The Greek column reads \"The kingdom has a ruler\".  The Norse column reads \"ruled by a figure\".  The Egyptian column gives nothing there.  The Egyptian paragraph describes a journey and a weighing, and it names no ruler for that underworld.",
       "whyTheFigureIsNeeded": "The passage gives each tradition its own paragraph, so the prose never lines the three up on the question of a ruler; only the memo puts them in one row, where the Egyptian column having no answer becomes visible.",
-      "svgRead": "In fig-l2-three-realms.svg the last row sits at y 342 and carries three text elements only: x 78 a ruler, x 239 The kingdom has a ruler, x 561 ruled by a figure.  There is no text element at x 400 on that row, which is where the Egyptian column's entries sit on the two rows above."
+      "svgRead": "In fig-l2-three-realms.svg the last row sits at y 320 and carries three text elements only: x 78 a ruler, x 239 The kingdom has a ruler, x 561 ruled by a figure.  There is no text element at x 400 on that row, which is where the Egyptian column's entries sit on the two rows above."
     },
     {
       "id": "l2-ms-wyrdstone-shaded-stretch",
@@ -5120,7 +5120,7 @@
       },
       "explain": "The timeline shades the record from the loan paperwork onward, and marks that stretch no theft report.  The paperwork, the stone never coming back and the institution with no record all sit inside the shading.  The excavation, the teaching collection and the request all sit before it.  The entry calls the case a theft with no theft report, and the shading shows which part of the record that silence covers.",
       "whyTheFigureIsNeeded": "The entry says the theft came with no theft report but never says which part of the record that silence covers, so only the timeline shows the shading beginning at the loan paperwork and running to the end of the run.",
-      "svgRead": "In fig-l2-wyrdstone.svg the shaded stretch is the ruled area from x 408 to x 760 carrying data-gap no theft report.  The markers at cx 408, 525.33, 642.67 and 760 fall inside it, which are entries 4 to 7; the markers at cx 56, 173.33 and 290.67, entries 1 to 3, fall outside it."
+      "svgRead": "In fig-l2-wyrdstone.svg the shaded stretch is the ruled area from x 398 to x 770 carrying data-gap no theft report, drawn around its two end markers because this gap is marked inclusive in the dataTable.  The markers at cx 408, 525.33, 642.67 and 760 fall wholly inside it, each dot 3px clear of the border, which are entries 4 to 7; the markers at cx 56, 173.33 and 290.67, entries 1 to 3, fall outside it."
     },
     {
       "id": "l2-cloze-threadglass-card-headings",
@@ -5154,7 +5154,7 @@
       ],
       "explain": "The card prints two of the entry's headings.  The words calling the eleven-year gap the entry's single largest question mark sit under the heading Documented history.  Under the heading Current status, the card prints the words \"in a private collection\", and the blacked-out bar sits just below them.  The card keeps where the disc is now in one section and what the Archive still cannot explain in the other.",
       "whyTheFigureIsNeeded": "The entry runs four headed sections and the card prints two of them, and it sets the blacked-out bar directly under the private-collection line, so the card shows which of the entry's four headings it chose to keep and what it put beneath each one.",
-      "svgRead": "In fig-l2-threadglass.svg there are two underline rules, at y 181.5 under the text Documented history. at y 176 and at y 277.5 under the text Current status. at y 272.  The text in a private collection sits at y 304 and the solid bar carrying data-emphasis redact is drawn at y 316 to 340, below it."
+      "svgRead": "In fig-l2-threadglass.svg there are two underline rules, at y 184.5 under the text Documented history. at y 176 and at y 280.5 under the text Current status. at y 272.  The text in a private collection sits at y 304 and the solid bar carrying data-emphasis redact is drawn at y 316 to 340, below it."
     },
     {
       "id": "l3-order-log-with-the-unseen-minutes",
@@ -5212,7 +5212,7 @@
       },
       "explain": "The minutes print the flicker on two lines above both columns, as the moment Theo's log leaves out.  It is not a row in either column, which is the whole point: Theo's account is accurate and still incomplete.",
       "whyTheFigureIsNeeded": "The passage tells the flicker as a story beat inside Finch's questioning; only the drawing shows it standing outside both logs, as a heading over a comparison rather than a line either log recorded.",
-      "svgRead": "Opened art/vault-of-ages-g6/fig-l3-three-seconds.svg and counted.  Two full-width lines sit at y=130 (\"leaves out the one moment that might matter most:\") and y=162 (\"a flicker of recognition on Kade's face\"), both ABOVE the column headings Dash's log / Theo's log at y=202.  Theo's column then holds exactly three row texts, at y=238, y=288 and y=338, and none of them is the flicker; the row after \"delivered a cover story about a framing order\" is \"left without incident\", and the row after Dash's \"nothing could be confirmed\" is \"Dash wrote down the gap.\"  A divider runs at x=392.5, so no row spans both columns.  \"two lines\" is a count of the two <text> elements at y=130 and y=162, not an inference from the dataTable."
+      "svgRead": "Opened art/vault-of-ages-g6/fig-l3-three-seconds.svg and counted.  Two full-width lines sit at y=130 (\"leaves out the one moment that might matter most:\") and y=162 (\"a flicker of recognition on Kade's face\"), both ABOVE the column headings Dash's log / Theo's log at y=202.  Theo's column then holds exactly three row texts, at y=238, y=288 and y=316, and none of them is the flicker; the row after \"delivered a cover story about a framing order\" is \"left without incident\", and the row after Dash's \"nothing could be confirmed\" is \"Dash wrote down the gap.\"  A divider runs at x=392.5, so no row spans both columns.  \"two lines\" is a count of the two <text> elements at y=130 and y=162, not an inference from the dataTable."
     },
     {
       "id": "l3-ms-what-the-plan-groups-with-the-room",
@@ -5246,7 +5246,7 @@
       },
       "explain": "The plan separates the way in from the room Theo came to see by the kind of join it draws, not by where each box sits on the sheet.  Arrows carry Theo from the desk to the elevator and on to the room.  Plain lines run from the room to the pedestal, from the pedestal to the dark line in the floor, and from the room to the count of exits and cameras.",
       "whyTheFigureIsNeeded": "The passage names these six things in four different paragraphs and counts the exits and cameras only as Theo walks out; the plan is the one place that sorts the five it draws into the way in and the room he came to see, and it leaves the cardboard box off the sheet altogether.",
-      "svgRead": "Opened art/vault-of-ages-g6/fig-l3-kade-collection.svg and counted every line.  Exactly two arrowheads are drawn (<polygon> at 169.6,191.44 for the intake desk to the service elevator, and at 471.92,126.29 for the elevator on to the room), so the way in is a two-arrow route.  Three plain lines run without arrowheads: room to pedestal (544,130.56 to 544,198.08), pedestal to the dark line (544,250.08 to 544,312.24), and room to the exits-and-cameras box (512.15,128.13 to 260.07,314.67).  The pedestal alone is rx=\"20\" with stroke=\"#7c5cff\", the pack's rounded accent box for the thing standing open.  DELIBERATE CHOICE: the exits-and-cameras box is drawn at x=40 on the LEFT of the sheet, so the stem asks only what the plan JOINS BY PLAIN LINES and makes no left/right claim.  The key rests on the line style, which the alt states and the caption deliberately no longer does."
+      "svgRead": "Opened art/vault-of-ages-g6/fig-l3-kade-collection.svg and counted every line.  Exactly two arrowheads are drawn (<polygon> at 169.6,191.44 for the intake desk to the service elevator, and at 471.92,126.29 for the elevator on to the room), so the way in is a two-arrow route.  Three plain lines run without arrowheads: room to pedestal (544,130.56 to 544,198.08), pedestal to the dark line (544,250.08 to 544,324.24), and room to the exits-and-cameras box (508.5,127.85 to 223.38,314.95).  The pedestal alone is rx=\"20\" with stroke=\"#7c5cff\", the pack's rounded accent box for the thing standing open.  DELIBERATE CHOICE: the exits-and-cameras box is drawn at x=48.6 on the LEFT of the sheet, so the stem asks only what the plan JOINS BY PLAIN LINES and makes no left/right claim.  The key rests on the line style, which the alt states and the caption deliberately no longer does."
     },
     {
       "id": "l3-cloze-row-against-row",
@@ -5280,7 +5280,7 @@
       ],
       "explain": "Set side by side, the two logs answer each other row by row.  Dash records that nothing could be confirmed and the row facing it reports a clean exit, then Dash records the gap and the row facing it reports the judgment that the detail did not matter.",
       "whyTheFigureIsNeeded": "The passage gives \"Dash's log\" one paragraph and Theo's the next, and never sets a line from one against a line from the other; the drawing is the only place the two logs share a row.",
-      "svgRead": "Opened art/vault-of-ages-g6/fig-l3-three-seconds.svg and read the pairings off the y coordinates, either side of the divider at x=392.5.  y=238: \"the door was empty both before and after\" faces \"delivered a cover story about a framing order\".  y=288: \"nothing could be confirmed\" faces \"left without incident\".  y=338: \"Dash wrote down the gap.\" faces \"not important enough to write down\", and it is the last row in each column.  Both blanks key on those row-for-row pairings, which exist nowhere but the drawing."
+      "svgRead": "Opened art/vault-of-ages-g6/fig-l3-three-seconds.svg and read the pairings off the y coordinates, either side of the divider at x=392.5.  y=238: \"the door was empty both before and after\" faces \"delivered a cover story about a framing order\".  y=288: \"nothing could be confirmed\" faces \"left without incident\".  y=316: \"Dash wrote down the gap.\" faces \"not important enough to write down\", and it is the last row in each column.  Both blanks key on those row-for-row pairings, which exist nowhere but the drawing."
     },
     {
       "id": "l4-match-chronicle-line-to-ledger-line",
@@ -5320,7 +5320,7 @@
       "dok": 3,
       "explain": "Each row of the memo puts one question to both records.  On the claim row the chronicle denies that anyone the temple did not choose has entered, and the ledger reports an entry.  The evidence row sets faith against tool marks, and on the weak point row, a record that cannot check itself faces a guild's own private record.",
       "whyTheFigureIsNeeded": "The memo lines the two records up row by row, so the chronicle's answer and the ledger's answer to the same question sit opposite each other; the passage sets the two records against each other in prose, sentence by sentence, and the memo is what assigns each phrase a row and a column, so a reader can see which question every pair is answering.",
-      "svgRead": "fig-l4-archive-believes.svg: four row-name text elements at x=\"78\" (y=196 claim, y=246 evidence, y=296 check it, y=346 weak point), a chronicle column at x=\"292.67\" and a ledger column at x=\"507.33\", every one of the eight data cells carrying text; that confirms the stem's \"every row ... for both records\".  The keyed pairings are table content, not appearance."
+      "svgRead": "fig-l4-archive-believes.svg: four row-name text elements at x=\"78\" (y=174 claim, y=224 evidence, y=252 check it, y=302 weak point), a chronicle column at x=\"292.67\" and a ledger column at x=\"507.33\", every one of the eight data cells carrying text; that confirms the stem's \"every row ... for both records\".  The keyed pairings are table content, not appearance."
     },
     {
       "id": "l4-mc-which-inscription-line-is-boxed",
@@ -5348,7 +5348,7 @@
       "dok": 3,
       "explain": "The inscription draws its one box around the sentence about faith, and that sentence is the chronicle's answer to anyone asking for proof.  The other lines report what the temple believes about the seal, and the drawing leaves them unmarked.",
       "whyTheFigureIsNeeded": "The passage prints the chronicle's closing lines as ordinary prose and marks none of them; the card is the only place one carved line carries a box, so the flag is a mark made on the document rather than a sentence written about it.",
-      "svgRead": "fig-l4-temple-chronicle.svg holds exactly three rect elements: the page background (0,0,800,450), the card frame (56,34,688,386), and one carrying data-emphasis=\"box\" at x=70 y=304 width=464.8 height=32.  That box spans y 304-336 and encloses the text at y=332, \"It is a fact requiring only faith.\"  The lines at y=232 and at y=264/y=296 fall outside it, which licenses rationales 0 and 1; \"An ordinary mourner would have wept.\" appears in none of the file's eleven text elements, which licenses rationale 2."
+      "svgRead": "fig-l4-temple-chronicle.svg holds exactly three rect elements: the page background (0,0,800,450), the card frame (56,34,688,386), and one carrying data-emphasis=\"box\" at x=70 y=304 width=293.49 height=32.  That box spans y 304-336 and encloses the text at y=332, \"It is a fact requiring only faith.\"  The lines at y=232 and at y=264/y=296 fall outside it, which licenses rationales 0 and 1; \"An ordinary mourner would have wept.\" appears in none of the file's eleven text elements, which licenses rationale 2."
     },
     {
       "id": "l4-ms-what-the-ledger-page-keeps",
@@ -5410,7 +5410,7 @@
       "dok": 3,
       "explain": "The memo answers the same questions for both records, and on the row named \"evidence\", it gives the chronicle \"a claim resting on faith\" while it gives the ledger \"two sets of tool marks\".  One answer asks for belief, and the other points at something in the stone.",
       "whyTheFigureIsNeeded": "The passage never sorts its own sentences into claim, evidence, check it and weak point, and it never says which of the things it reports about the chronicle counts as that source's evidence; the memo assigns each phrase a row and a column, so both the row and the column have to be read off the drawing.",
-      "svgRead": "fig-l4-archive-believes.svg: on the evidence row (y=246) the chronicle column at x=\"292.67\" reads \"a claim resting\" / \"on faith\" and the ledger column at x=\"507.33\" reads \"two sets of tool\" / \"marks\".  Row order in the file is claim y=196, evidence y=246, check it y=296, weak point y=346, so \"the row above\" in rationale 2 and \"lower down ... check it\" in rationale 3 are both confirmed against the drawing."
+      "svgRead": "fig-l4-archive-believes.svg: on the evidence row (y=224) the chronicle column at x=\"292.67\" reads \"a claim resting on faith\" and the ledger column at x=\"507.33\" reads \"two sets of tool marks\", each on one line.  Row order in the file is claim y=174, evidence y=224, check it y=252, weak point y=302, so \"the row above\" in rationale 2 and \"lower down ... check it\" in rationale 3 are both confirmed against the drawing."
     },
     {
       "id": "l5-mc-which-lane-carries-the-check-in",
@@ -5624,7 +5624,7 @@
       "dok": 3,
       "explain": "A comparison table's power is in its rows: the same question goes to both accounts, so the answers can be read straight across.  Three of the memo's own row labels are what each one claims, what evidence it gives, and what weakens it.",
       "whyTheFigureIsNeeded": "The questions the Archive puts to both sources exist nowhere in the passage as a set; they are the memo's own row labels, and the alignment that lets a reader compare straight across is the drawing's contribution rather than the prose's.",
-      "svgRead": "Opened art/vault-of-ages-g6/fig-l4-archive-believes.svg.  The row-label column sits at x=78 (claim y=196, evidence y=246, check it y=296, weak point y=346) and the two account columns at x=292.67 (temple chronicle) and x=507.33 (guild ledger), split by vertical rules at x=285.5 and x=499.5, which is the \"side-by-side columns\".  Checked every row: all four carry text at BOTH x=292.67 and x=507.33, so \"the same question goes to both accounts\" holds and the only cell on the card without text is the row-label column's own heading, drawn empty beside the two account headings."
+      "svgRead": "Opened art/vault-of-ages-g6/fig-l4-archive-believes.svg.  The row-label column sits at x=78 (claim y=174, evidence y=224, check it y=252, weak point y=302) and the two account columns at x=292.67 (temple chronicle) and x=507.33 (guild ledger), split by vertical rules at x=285.5 and x=499.5, which is the \"side-by-side columns\".  Checked every row: all four carry text at BOTH x=292.67 and x=507.33, so \"the same question goes to both accounts\" holds and the only cell on the card without text is the row-label column's own heading, drawn empty beside the two account headings."
     },
     {
       "id": "l6-mc-chronicle-card-boxed-line",
@@ -5867,7 +5867,8 @@
           {
             "from": "The loan paperwork",
             "to": "past the loan date",
-            "label": "no theft report"
+            "label": "no theft report",
+            "inclusive": true
           }
         ]
       }

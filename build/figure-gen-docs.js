@@ -493,14 +493,28 @@ function renderTimeline(dataTable, accentColor) {
   // two recorded events, not across them.
   //
   // Guarded so a degenerate gap cannot invert: two ticks closer together than 2r keep a 2px band.
-  const MARKER_R = 7;
+  //
+  // BUT NOT EVERY GAP IS BETWEEN ITS ENDS, and the sentence above was wrong for one of them (found
+  // 26-0921, after it shipped).  fig-l2-wyrdstone's stretch is "no theft report" from the loan
+  // paperwork to the last step:  the ENDPOINTS belong to it, its alt says it covers "the loan
+  // paperwork and every step after it", and l2-ms-wyrdstone-shaded-stretch keys the paperwork as
+  // INSIDE.  The inset put that dot outside the band, touching its border, so the drawing
+  // contradicted the key, and no gate could see it:  the blind pass reads the dataTable, not pixels.
+  // A gap now says which it is.  `inclusive: true` draws the band AROUND both endpoint dots, 3px
+  // clear of each, so they sit visibly inside;  the default stays the inset, for a gap that is the
+  // time between two recorded events (two minutes unseen, a van in the way, forty minutes unlogged).
+  const MARKER_R = 7, ENCLOSE = MARKER_R + 3;
+  const bands = [];
   gaps.forEach((g) => {
     const gx1 = posOfTime(g.from), gx2 = posOfTime(g.to);
     const rawX = Math.min(gx1, gx2), rawW = Math.max(2, Math.abs(gx2 - gx1));
-    const inset = Math.min(MARKER_R, Math.max(0, (rawW - 2) / 2));
+    const inset = g.inclusive === true ? -ENCLOSE : Math.min(MARKER_R, Math.max(0, (rawW - 2) / 2));
     const x = rawX + inset, w = Math.max(2, rawW - 2 * inset);
-    hatchBand(x, laneTop - 20, w, laneBottom - laneTop + 26, g.label).forEach((s) => out.push(s));
+    bands.push({ x, w, label: g.label });
   });
+  // The bands are DRAWN here, under the rules and markers, but their top is only known once the
+  // marker numerals are placed below, so their slot in `out` is kept and filled then.
+  const bandAt = out.length;
 
   tracks.forEach((tr, k) => {
     const y = laneY(k);
@@ -563,6 +577,25 @@ function renderTimeline(dataTable, accentColor) {
     rows[row].push([cx - halfW, cx + halfW]);
     placed.push({ e, i, cx, cy, unver, glyph, row, k });
   });
+
+  // A BAND STARTS ABOVE THE NUMERALS INSIDE IT (26-0921).  Its top sat at laneTop - 20, which is
+  // y=108, and a numeral placed above its dot has its baseline at y=114 and its glyph from about
+  // y=100:  so the band's top border ran through the middle of every number inside the stretch,
+  // the same fault the inset above fixed for the side borders and missed on this one.  The top now
+  // clears the highest numeral over the band's own span by 4px (glyph height from the bbox model's
+  // ASCENT);  a band with no numeral above it keeps the old top.  The bottom is unchanged.
+  const bandLines = [];
+  bands.forEach((bd) => {
+    let top = laneTop - 20;
+    placed.forEach((pl) => {
+      const off = rowsFor(pl.k)[pl.row];
+      if (off < 0 && pl.cx >= bd.x - 1 && pl.cx <= bd.x + bd.w + 1) {
+        top = Math.min(top, pl.cy + off - Math.ceil(T.ASCENT * NOTE_FONT) - 4);
+      }
+    });
+    hatchBand(bd.x, top, bd.w, laneBottom + 6 - top, bd.label).forEach((s) => bandLines.push(s));
+  });
+  out.splice(bandAt, 0, ...bandLines);
 
   const entries = [];
   placed.forEach((p) => {
