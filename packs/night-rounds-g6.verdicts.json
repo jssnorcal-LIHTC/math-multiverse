@@ -4,65 +4,113 @@
   "records": [
     {
       "itemId": "l1-ebsr-why-record-two",
-      "itemHash": "3d87a7fa3a87e9e8",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "177bd6ad5d0233bb",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l1-ebsr-rana-detail",
       "itemHash": "6b97a6da5d6392aa",
-      "blind": 2,
-      "authored": 2,
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l1-ebsr-central-idea-record",
       "itemHash": "21e65b8494dbce7a",
-      "blind": 1,
-      "authored": 1,
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l1-ebsr-ferris-instruction",
       "itemHash": "c3bbcc6da317839a",
-      "blind": 2,
-      "authored": 2,
+      "blind": [
+        2,
+        2
+      ],
+      "authored": [
+        2,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l1-ebsr-binder-solves",
-      "itemHash": "c736f802481b6868",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "6291bd35bb292f29",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l1-ebsr-count-not-failure",
-      "itemHash": "7c8af3f8a4046e68",
-      "blind": 3,
-      "authored": 3,
+      "itemHash": "23f643b63abba031",
+      "blind": [
+        3,
+        2
+      ],
+      "authored": [
+        3,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l1-ebsr-why-tortoise-under",
-      "itemHash": "d29de04b53628d80",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "d26e4b9b8bbbe48c",
+      "blind": [
+        1,
+        1
+      ],
+      "authored": [
+        1,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l1-ebsr-not-hiding",
-      "itemHash": "d334e7954e67dcad",
-      "blind": 2,
-      "authored": 2,
+      "itemHash": "58cb92629ac5f1e9",
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -174,7 +222,7 @@
     },
     {
       "itemId": "l1-cloze-count-stays-open",
-      "itemHash": "afaafc549bf19993",
+      "itemHash": "b2086b4b94d2950c",
       "blind": [
         2,
         1
@@ -188,7 +236,7 @@
     },
     {
       "itemId": "l1-mc-what-the-rule-asks",
-      "itemHash": "0718cea0726a4030",
+      "itemHash": "83327c7d94fe21f0",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -212,7 +260,7 @@
     },
     {
       "itemId": "l1-mc-why-not-dig",
-      "itemHash": "4258a5c79adcefb6",
+      "itemHash": "eeb7e97c27b08930",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -220,7 +268,7 @@
     },
     {
       "itemId": "l1-mc-what-she-feels-underground",
-      "itemHash": "897981ca3d5503ab",
+      "itemHash": "7c1eee57ca3a9c62",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -268,80 +316,128 @@
     },
     {
       "itemId": "l2-ebsr-supplement-column",
-      "itemHash": "8f835e6f26d2016b",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "569260b76ec8db55",
+      "blind": [
+        1,
+        1
+      ],
+      "authored": [
+        1,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l2-ebsr-two-initials-purpose",
       "itemHash": "8cd74676f1a7810b",
-      "blind": 3,
-      "authored": 3,
+      "blind": [
+        3,
+        2
+      ],
+      "authored": [
+        3,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l2-ebsr-white-tag-meaning",
       "itemHash": "00e1296220f09d43",
-      "blind": 2,
-      "authored": 2,
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l2-ebsr-thiaminase-does",
       "itemHash": "9b2a380b9427636d",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        3
+      ],
+      "authored": [
+        0,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l2-ebsr-frozen-not-same-food",
       "itemHash": "f31955b1a63ee7a4",
-      "blind": 1,
-      "authored": 1,
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l2-ebsr-early-signs",
       "itemHash": "5cfd4eaa8a51d65c",
-      "blind": 3,
-      "authored": 3,
+      "blind": [
+        3,
+        1
+      ],
+      "authored": [
+        3,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l2-ebsr-clearance-lot",
       "itemHash": "70ef7db609de84ce",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        3
+      ],
+      "authored": [
+        0,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l2-ebsr-paper-cannot-diagnose",
-      "itemHash": "8924c9c33e04810f",
-      "blind": 2,
-      "authored": 2,
+      "itemHash": "09677fdb832157f4",
+      "blind": [
+        2,
+        2
+      ],
+      "authored": [
+        2,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l2-ms-diet-card-facts",
-      "itemHash": "05694f388171b213",
+      "itemHash": "6c4e4450ccb82347",
       "blind": [
-        0,
-        1,
-        2
+        2,
+        3,
+        4
       ],
       "authored": [
-        0,
-        1,
-        2
+        2,
+        3,
+        4
       ],
       "confidence": "high",
       "status": "agree"
@@ -422,7 +518,7 @@
     },
     {
       "itemId": "l2-cloze-thiamine-chain",
-      "itemHash": "48f0b2d3e52e9ce0",
+      "itemHash": "5ded08075dcc24b7",
       "blind": [
         0,
         2
@@ -450,7 +546,7 @@
     },
     {
       "itemId": "l2-mc-narrow-column",
-      "itemHash": "0c7432738804f790",
+      "itemHash": "0267cf0489376b25",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -458,7 +554,7 @@
     },
     {
       "itemId": "l2-mc-front-freezer-rule",
-      "itemHash": "ade7123301d54bce",
+      "itemHash": "de599120a34e1e6b",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -466,7 +562,7 @@
     },
     {
       "itemId": "l2-mc-why-supplement-exists",
-      "itemHash": "0169e26204b0194d",
+      "itemHash": "05843a4e97b09a89",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -490,7 +586,7 @@
     },
     {
       "itemId": "l2-mc-what-the-narrator-refuses",
-      "itemHash": "46ac6d734cbfa65e",
+      "itemHash": "d3a5caee8929e338",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -534,96 +630,144 @@
     },
     {
       "itemId": "l3-ebsr-account-written-same-night",
-      "itemHash": "734c4b30f9bd25fb",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "2adee187b49bdafd",
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l3-ebsr-only-roar",
       "itemHash": "f9e0fa00a44b771e",
-      "blind": 2,
-      "authored": 2,
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l3-ebsr-whitlock-note",
       "itemHash": "4eb39628cdd65104",
-      "blind": 3,
-      "authored": 3,
+      "blind": [
+        3,
+        2
+      ],
+      "authored": [
+        3,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l3-ebsr-lot-empty",
-      "itemHash": "b32fd864f15ec703",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "3e0f92af9a812ff3",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l3-ebsr-summary-does-not-name",
       "itemHash": "23ba7e1eb4c19704",
-      "blind": 2,
-      "authored": 2,
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l3-ebsr-three-nights",
-      "itemHash": "87b360961b0dd78a",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "e32b1efed7345b97",
+      "blind": [
+        1,
+        0
+      ],
+      "authored": [
+        1,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l3-ebsr-bittern-mistaken",
       "itemHash": "7d06604a88000e52",
-      "blind": 3,
-      "authored": 3,
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l3-ebsr-inventory-no-roar",
       "itemHash": "d9c5dfb7243daa3e",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        3
+      ],
+      "authored": [
+        0,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l3-ms-records-show",
-      "itemHash": "f7c4a54ee508f3d9",
+      "itemHash": "7aa12aa924a45227",
       "blind": [
-        0,
         1,
-        2
+        2,
+        3
       ],
       "authored": [
-        0,
         1,
-        2
+        2,
+        3
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l3-ms-bittern-facts",
-      "itemHash": "0641f0257c6409fb",
+      "itemHash": "d303b22b4832b44d",
       "blind": [
         0,
-        1,
-        2
+        3,
+        4
       ],
       "authored": [
         0,
-        1,
-        2
+        3,
+        4
       ],
       "confidence": "high",
       "status": "agree"
@@ -688,7 +832,7 @@
     },
     {
       "itemId": "l3-cloze-which-account-holds",
-      "itemHash": "cc3377a0c541bdb3",
+      "itemHash": "d0bb9feaf52bff79",
       "blind": [
         1,
         2
@@ -732,7 +876,7 @@
     },
     {
       "itemId": "l3-mc-usable-audio",
-      "itemHash": "68ad76338b5876f5",
+      "itemHash": "116e17ac374f0201",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -748,7 +892,7 @@
     },
     {
       "itemId": "l3-mc-why-bill-up",
-      "itemHash": "d3beb3e3d63609e9",
+      "itemHash": "6020bc4b9b854c7c",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -756,7 +900,7 @@
     },
     {
       "itemId": "l3-mc-what-the-case-needed",
-      "itemHash": "7cd1f01e6da806c4",
+      "itemHash": "88374a6b19dd377e",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -764,96 +908,144 @@
     },
     {
       "itemId": "l4-ebsr-inspection-line",
-      "itemHash": "a2233547cc6787a8",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "941d28827d483f5c",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l4-ebsr-binder-structure",
-      "itemHash": "026316d1a801cc16",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "8a45bc6a04ce825b",
+      "blind": [
+        1,
+        0
+      ],
+      "authored": [
+        1,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l4-ebsr-binder-claim-limit",
-      "itemHash": "a80f56b85ef80256",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "7dc69db0d730a035",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l4-ebsr-advisory-vs-warning",
       "itemHash": "06ce2daaebfec40c",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l4-ebsr-bulletin-three-parts",
       "itemHash": "cd4cda736bc1d35c",
-      "blind": 2,
-      "authored": 2,
+      "blind": [
+        2,
+        1
+      ],
+      "authored": [
+        2,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l4-ebsr-whose-numbers",
-      "itemHash": "f3011f9766adc583",
-      "blind": 3,
-      "authored": 3,
+      "itemHash": "65647d8ca7b69c81",
+      "blind": [
+        3,
+        2
+      ],
+      "authored": [
+        3,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l4-ebsr-clipping-error-inspection",
-      "itemHash": "4ac69d44087fbf57",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "8d6cbde48ff1da4a",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l4-ebsr-clipping-sourcing",
       "itemHash": "55c8fdbee8c1a737",
-      "blind": 2,
-      "authored": 2,
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l4-ms-article-accurate",
-      "itemHash": "ee03d429860b8436",
+      "itemHash": "b2d18e0b981e6709",
       "blind": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "authored": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l4-ms-bulletin-contents",
-      "itemHash": "0a2d29f5836320c5",
+      "itemHash": "33f48806153d689d",
       "blind": [
-        0,
         1,
-        2
+        3,
+        4
       ],
       "authored": [
-        0,
         1,
-        2
+        3,
+        4
       ],
       "confidence": "high",
       "status": "agree"
@@ -944,7 +1136,7 @@
     },
     {
       "itemId": "l4-mc-uninitialed-inspection",
-      "itemHash": "944200875e8036c6",
+      "itemHash": "3cc953061f33a438",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -952,7 +1144,7 @@
     },
     {
       "itemId": "l4-mc-limb-note",
-      "itemHash": "961a472b3d7580ef",
+      "itemHash": "a8fec8881a3973ab",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -960,7 +1152,7 @@
     },
     {
       "itemId": "l4-mc-advisory-window",
-      "itemHash": "33f3c27177264ad8",
+      "itemHash": "080ecd8ba64f41ac",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -968,7 +1160,7 @@
     },
     {
       "itemId": "l4-mc-bulletin-last-line",
-      "itemHash": "d5ac111beebf15ad",
+      "itemHash": "94c4a791173e53f2",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -976,7 +1168,7 @@
     },
     {
       "itemId": "l4-mc-what-the-article-rests-on",
-      "itemHash": "f991c4fbb27206f7",
+      "itemHash": "a24e81dce9c41653",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -984,7 +1176,7 @@
     },
     {
       "itemId": "l4-mc-what-checking-means",
-      "itemHash": "d64c2833a7e8e5e4",
+      "itemHash": "650566923a20e8ca",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1023,97 +1215,131 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-ebsr-air-was-a-road",
-      "itemHash": "277a1fb94d7c772c",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l5-ebsr-why-wind-pushes-her",
-      "itemHash": "7d5ed878c9481a75",
-      "blind": 2,
-      "authored": 2,
+      "itemHash": "537153f7fe6b9149",
+      "blind": [
+        3,
+        1
+      ],
+      "authored": [
+        3,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l5-ebsr-what-the-lights-were",
       "itemHash": "1e2940b96f7aaa77",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l5-ebsr-stillness-is-what-she-is",
       "itemHash": "ecc925d1c914ef24",
-      "blind": 2,
-      "authored": 2,
+      "blind": [
+        2,
+        2
+      ],
+      "authored": [
+        2,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l5-ebsr-why-not-wade-out",
       "itemHash": "122192aa6932c72f",
-      "blind": 1,
-      "authored": 1,
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l5-ebsr-alva-questions",
-      "itemHash": "7bc4886a7358b575",
-      "blind": 2,
-      "authored": 2,
+      "itemHash": "94ab10bd1c50a48e",
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l5-ebsr-why-no-name",
       "itemHash": "5c38b4a21218e512",
-      "blind": 1,
-      "authored": 1,
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l5-ebsr-hardest-kind-of-respect",
-      "itemHash": "c1464049d2919531",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "325806a69cdf4735",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l5-ms-what-she-did-not-do",
-      "itemHash": "f9c3fa7d72e97eb7",
+      "itemHash": "c3b0d8cfce590273",
       "blind": [
-        0,
         1,
-        2
+        2,
+        4
       ],
       "authored": [
-        0,
         1,
-        2
+        2,
+        4
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l5-ms-figurative-heron",
-      "itemHash": "2b0989be7e9d8e01",
+      "itemHash": "a0419a5e2cc74f60",
       "blind": [
         0,
         1,
-        2
+        4
       ],
       "authored": [
         0,
         1,
-        2
+        4
       ],
       "confidence": "high",
       "status": "agree"
@@ -1178,7 +1404,7 @@
     },
     {
       "itemId": "l5-cloze-inside-her-senses",
-      "itemHash": "44361064c9a34c5a",
+      "itemHash": "e5f8c35c017e5c58",
       "blind": [
         1,
         0
@@ -1222,7 +1448,7 @@
     },
     {
       "itemId": "l5-mc-alvas-instruction",
-      "itemHash": "fbc693c6eb225be0",
+      "itemHash": "f90bab2f81136fd5",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -1230,7 +1456,7 @@
     },
     {
       "itemId": "l5-mc-how-alva-works",
-      "itemHash": "2383a4b3c6ae79f4",
+      "itemHash": "73e5560e72d426c8",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1238,7 +1464,7 @@
     },
     {
       "itemId": "l5-mc-what-a-name-anchors",
-      "itemHash": "43c6986e6bb536cc",
+      "itemHash": "0040f2661695646d",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -1290,96 +1516,144 @@
     },
     {
       "itemId": "l6-ebsr-slip-versus-memory",
-      "itemHash": "b81fd52ad761b941",
-      "blind": 2,
-      "authored": 2,
+      "itemHash": "e653659a4a345c99",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-ebsr-blank-line",
-      "itemHash": "3f8372f9d4a84992",
-      "blind": 0,
-      "authored": 0,
+      "itemHash": "0b0126ae30e374e6",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-ebsr-what-cannot-settle",
       "itemHash": "9b791f6edf822784",
-      "blind": 1,
-      "authored": 1,
+      "blind": [
+        1,
+        1
+      ],
+      "authored": [
+        1,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-ebsr-two-records-agree",
       "itemHash": "26cb585a0029d4f4",
-      "blind": 3,
-      "authored": 3,
+      "blind": [
+        3,
+        1
+      ],
+      "authored": [
+        3,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-ebsr-report-second-step",
       "itemHash": "7a72c96954b495fc",
-      "blind": 0,
-      "authored": 0,
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-ebsr-defense-claim",
-      "itemHash": "1960b60ab7963044",
-      "blind": 2,
-      "authored": 2,
+      "itemHash": "a36bd74f6c60b2d4",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-ebsr-correction-letter",
       "itemHash": "a2bfcf4950eee6a9",
-      "blind": 2,
-      "authored": 2,
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-ebsr-bulletin-check-requirement",
-      "itemHash": "a9351c9b6d9ea6e4",
-      "blind": 1,
-      "authored": 1,
+      "itemHash": "8e0080961dee7ea3",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-ms-five-records",
-      "itemHash": "4f731bf50b2abf02",
+      "itemHash": "ba8dba42551fc191",
       "blind": [
-        0,
-        1,
-        2
+        2,
+        3,
+        4
       ],
       "authored": [
-        0,
-        1,
-        2
+        2,
+        3,
+        4
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-ms-three-changes",
-      "itemHash": "ac6ad46bd7e14e5f",
+      "itemHash": "29ce34b7446997c5",
       "blind": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "authored": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "confidence": "high",
       "status": "agree"
@@ -1446,13 +1720,13 @@
     },
     {
       "itemId": "l6-cloze-settled-and-open",
-      "itemHash": "5f1aa767c80f0941",
+      "itemHash": "7011d998c379cec5",
       "blind": [
-        1,
+        2,
         0
       ],
       "authored": [
-        1,
+        2,
         0
       ],
       "confidence": "high",
@@ -1474,7 +1748,7 @@
     },
     {
       "itemId": "l6-mc-what-a-timeline-is-for",
-      "itemHash": "f6527fcc0d5a051c",
+      "itemHash": "3b157394ebe310e1",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -1514,7 +1788,7 @@
     },
     {
       "itemId": "l6-mc-final-line",
-      "itemHash": "2ebc133a041de2a4",
+      "itemHash": "4774dc798831d03f",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1554,16 +1828,32 @@
     },
     {
       "itemId": "l1-ms-what-the-yard-plan-shows",
-      "itemHash": "1f08d5365f9c3740",
+      "itemHash": "8d26aa68e5b72279",
       "blind": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "authored": [
         0,
+        2,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-match-invoice-columns-line-for-line",
+      "itemHash": "1776d48a4bbd692f",
+      "blind": [
         1,
-        2
+        2,
+        0
+      ],
+      "authored": [
+        1,
+        2,
+        0
       ],
       "confidence": "high",
       "status": "agree"
@@ -1573,6 +1863,38 @@
       "itemHash": "f8dd9c2214b017a4",
       "blind": 2,
       "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-order-workup-chain-of-arrows",
+      "itemHash": "1ecf429b2df2521e",
+      "blind": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "authored": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-cloze-heading-against-the-tally",
+      "itemHash": "6905957aa906e7c8",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -1611,8 +1933,16 @@
       "status": "agree"
     },
     {
+      "itemId": "l3-mc-what-the-hatched-band-shows",
+      "itemHash": "b123accb9e40dfdd",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l3-cloze-read-the-rows-across",
-      "itemHash": "98a6d2e3624a4432",
+      "itemHash": "08bb172fb7ad8953",
       "blind": [
         2,
         0
@@ -1633,6 +1963,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l4-cloze-bars-above-the-advisory",
+      "itemHash": "4c13b155b6dbcd3f",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l4-ms-what-the-clipping-underlines",
       "itemHash": "49528ec19dde6e46",
       "blind": [
@@ -1641,6 +1985,54 @@
       ],
       "authored": [
         1,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-match-plan-connectors",
+      "itemHash": "d776aca5d9028cef",
+      "blind": [
+        2,
+        0,
+        1
+      ],
+      "authored": [
+        2,
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-what-the-place-row-records",
+      "itemHash": "7f2de4ede499b327",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-the-row-left-blank",
+      "itemHash": "777de8c169571637",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ms-what-the-slip-shows",
+      "itemHash": "8cdf804535436067",
+      "blind": [
+        1,
+        2,
+        3
+      ],
+      "authored": [
+        1,
+        2,
         3
       ],
       "confidence": "high",
@@ -1680,7 +2072,7 @@
     },
     {
       "itemId": "l6-mc-dot-after-the-dashed-one",
-      "itemHash": "629ba388726ad579",
+      "itemHash": "7cbd18ea24d81c69",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1688,127 +2080,9 @@
     },
     {
       "itemId": "l6-mc-plain-line-in-the-schematic",
-      "itemHash": "d8d555a03f835165",
+      "itemHash": "b47ba3f0af727e1c",
       "blind": 0,
       "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-match-invoice-columns-line-for-line",
-      "itemHash": "1776d48a4bbd692f",
-      "blind": [
-        1,
-        2,
-        0
-      ],
-      "authored": [
-        1,
-        2,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-order-workup-chain-of-arrows",
-      "itemHash": "1ecf429b2df2521e",
-      "blind": [
-        1,
-        3,
-        0,
-        2
-      ],
-      "authored": [
-        1,
-        3,
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-cloze-heading-against-the-tally",
-      "itemHash": "6acd89f8ae10203f",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-mc-what-the-hatched-band-shows",
-      "itemHash": "b123accb9e40dfdd",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-cloze-bars-above-the-advisory",
-      "itemHash": "4c13b155b6dbcd3f",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-match-plan-connectors",
-      "itemHash": "d776aca5d9028cef",
-      "blind": [
-        2,
-        0,
-        1
-      ],
-      "authored": [
-        2,
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-what-the-place-row-records",
-      "itemHash": "1f41170b63ce14f7",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-the-row-left-blank",
-      "itemHash": "777de8c169571637",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ms-what-the-slip-shows",
-      "itemHash": "5fc678e023752b61",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
       "confidence": "high",
       "status": "agree"
     },
@@ -1822,6 +2096,20 @@
       "authored": [
         2,
         0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-air-was-a-road",
+      "itemHash": "567e59e0a75aec9d",
+      "blind": [
+        1,
+        1
+      ],
+      "authored": [
+        1,
+        1
       ],
       "confidence": "high",
       "status": "agree"

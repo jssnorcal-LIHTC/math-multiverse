@@ -507,7 +507,7 @@
         "choices": [
           "The gate log at the bottom of the hill wanted a signature and a time, and I stood there holding the pen without signing anything.",
           "Count everything twice, she said, and record what you actually observe, never what you expect to observe.",
-          "I counted a second time, exactly the way she had instructed me, and arrived at two again.",
+          "You have to slow yourself down deliberately in order to count animals that refuse to move.",
           "Every part of me wanted to write down three, because three was the comfortable number that would have let me go home."
         ],
         "key": {
@@ -520,7 +520,7 @@
       "distractorRationale": {
         "1": "The passage says the opposite: three was the number that would have let her go home, so writing it would have ended her night sooner, not later.",
         "2": "The gate log did want a signature, but what stops her is the number itself, not a rule about when the log can be filled in.",
-        "3": "She counted twice, exactly the way she had been instructed, and reached two both times, so an untrusted single count is not the reason."
+        "3": "That line is about slowing down to count animals that barely move.  She counted twice, exactly the way she had been instructed, and reached two both times, so an untrusted single count is not the reason."
       },
       "explain": "Whitlock's rule is to record what you actually observe rather than what you expect, and two is what the narrator observed on both counts.  The wrong choices each borrow a real detail from the night, the log, the wish to go home, the second count, and treat it as the reason she hesitated."
     },
@@ -660,7 +660,7 @@
       "partA": {
         "stem": "According to the yard binder, why is Juniper missing from the evening count?",
         "choices": [
-          "She has dug herself a burrow and gone underground, which she has done before.",
+          "She has dug a burrow and gone underground, as she did before.",
           "An earlier keeper moved her to a different part of the yard.",
           "The count sheet was printed with the wrong number of tortoises on it.",
           "She is under the feeding shelf, where the sand stays warmer than the air."
@@ -724,7 +724,7 @@
         }
       },
       "distractorRationale": {
-        "0": "Blame never enters her explanation;  her point is about what an open record does for the keeper who reads it next.",
+        "0": "Blame never enters her explanation;  her point is that an open count is a question the next keeper can answer.",
         "1": "She ends the search once the burrow is found and calls the open count fine, so continued searching is not what she is asking for.",
         "2": "She writes the observed number and adds an explanation beside it, which is the opposite of closing the count with the expected three."
       },
@@ -743,7 +743,7 @@
       "partA": {
         "stem": "Why is the tortoise in this passage staying underground?",
         "choices": [
-          "Something frightened her near the tunnel mouth and she is waiting it out.",
+          "Something dragged near the tunnel mouth and frightened her, so she is waiting it out.",
           "Her body is settling into a long, deliberate stillness for the cold months.",
           "She is ill, since she has stopped eating and her heartbeat has slowed.",
           "The burrow is where her food is stored for the cold part of the year."
@@ -788,7 +788,7 @@
           "Hiding happens quickly, while digging her burrow took her an entire morning.",
           "Hiding happens above ground, while she has taken herself below it.",
           "Hiding is a response to something, while this is a season she is entering.",
-          "Hiding is silent, while she can still feel feet and carts moving overhead."
+          "Hiding is silent, while she still feels feet and carts moving overhead."
         ],
         "key": 2
       },
@@ -1025,7 +1025,7 @@
         },
         {
           "choices": [
-            "a mistake that has to be corrected before anybody goes home",
+            "a mistake that has to be fixed before the evening shift can go home",
             "a question recorded well enough for the next keeper to answer",
             "proof that nobody on the evening shift is to blame"
           ],
@@ -1045,10 +1045,10 @@
       "dok": 2,
       "stem": "What does Whitlock's counting rule actually ask a keeper to do?",
       "choices": [
-        "Write down what she sees, even when it disagrees with the sheet",
-        "Count until the yard and the sheet finally agree",
+        "Record what she sees, even when it disagrees with the sheet",
+        "Keep counting again and again until the yard and the sheet agree",
         "Count once quickly, then move on to the next stop",
-        "Ask a senior keeper before recording any unusual number"
+        "Ask a senior keeper before recording any number that looks unusual"
       ],
       "key": 0,
       "distractorRationale": {
@@ -1118,10 +1118,10 @@
       "dok": 2,
       "stem": "Why does nobody dig the burrow open once it is found?",
       "choices": [
-        "The sand is packed too hard for the keepers to dig through",
-        "Digging would violate a rule written by the state inspector",
+        "The sand around the burrow is packed too hard for the keepers to dig through",
+        "Digging would violate a rule written by the state wildlife inspector",
         "They cannot be certain which burrow she went into",
-        "How long she stays under is her business rather than the keepers'"
+        "How long she stays under is her business, not the keepers'"
       ],
       "key": 3,
       "distractorRationale": {
@@ -1142,9 +1142,9 @@
       "dok": 2,
       "stem": "What still reaches the tortoise once the tunnel bends?",
       "choices": [
-        "Movement overhead, carried to her through the ground itself",
+        "Movement overhead, carried to her through the ground",
         "Daylight, which reaches all the way to where she rests",
-        "The changing temperature of the day above her",
+        "The day's heat and cold, swinging back and forth above her",
         "The smell of the food she has stopped eating"
       ],
       "key": 0,
@@ -1268,7 +1268,7 @@
         "choices": [
           "Every one of the twenty-eight feeds was initialed in both columns.",
           "The supplement was initialed on only three of the fourteen days.",
-          "The column is meant for the fish, so blanks in it do not matter.",
+          "The column is meant for the fish, so its blanks do not matter.",
           "The supplement is optional on days when the fish is freshly delivered."
         ],
         "key": 1
@@ -1555,9 +1555,9 @@
       "partA": {
         "stem": "What does the narrator say the freezer paperwork can and cannot establish on its own?",
         "choices": [
-          "It proves that the missing supplement is what made Rana ill.",
+          "It proves that the missing supplement is what made Rana ill, as the veterinarian said.",
           "It shows nothing useful until the blood results come back from the laboratory.",
-          "It shows separate records pointing one direction, which is the most paperwork can do.",
+          "It shows separate records pointing one way, which is all paper can do.",
           "It proves that suppliers are legally required to follow the six-month rule."
         ],
         "key": 2
@@ -1595,20 +1595,20 @@
       "dok": 2,
       "stem": "Choose the three rules that the diet card itself sets out.",
       "choices": [
-        "The thiamine tablet is crushed into the first feed every day, with no exceptions.",
-        "Fish is drawn from the front freezer only, oldest lot first.",
-        "The narrow column is initialed only when the supplement has been given.",
         "The card records which freezer each thawed lot actually came from.",
-        "A white-tag lot may be thawed without being checked by a keeper."
+        "A white-tag lot may be thawed without being checked by a keeper.",
+        "The narrow column is initialed only when the supplement has been given.",
+        "The thiamine tablet is crushed into the first feed every day, with no exceptions.",
+        "Fish is drawn from the front freezer only, oldest lot first."
       ],
       "key": [
-        0,
-        1,
-        2
+        2,
+        3,
+        4
       ],
       "distractorRationale": {
-        "3": "The thaw log inside the cold chain binder records the source freezer;  the diet card only states the rule about which freezer to use.",
-        "4": "A white-tag lot must be pulled and checked by a keeper before anybody thaws it, which is the opposite of what this choice claims."
+        "0": "The thaw log inside the cold chain binder records the source freezer;  the diet card only states the rule about which freezer to use.",
+        "1": "A white-tag lot must be pulled and checked by a keeper before anybody thaws it, which is the opposite of what this choice claims."
       },
       "explain": "The card sets a daily tablet, a front-freezer-first drawing rule, and a separate initial reserved for the supplement.  The two wrong choices hand the card the thaw log's job and delete the inspection step that the white tag exists to require."
     },
@@ -1757,7 +1757,7 @@
           "choices": [
             "the animal needs it to turn food into usable energy",
             "it keeps the fish from spoiling on the tray",
-            "it replaces the fat an otter loses in cold water"
+            "it replaces the body fat an otter loses swimming in cold water"
           ],
           "key": 0
         },
@@ -1814,9 +1814,9 @@
       "dok": 2,
       "stem": "What is the narrow column beside the feeding grid for?",
       "choices": [
-        "A note of which freezer the fish was drawn from",
+        "A note of which freezer and lot the fish was drawn from",
         "The weight of fish left uneaten at each feed",
-        "A separate initial confirming the tablet was actually given",
+        "A separate initial showing the tablet was given",
         "The initials of a second keeper who watched the feed"
       ],
       "key": 2,
@@ -1839,7 +1839,7 @@
       "stem": "What does the card mean by \"blue tag before white tag\"?",
       "choices": [
         "Thaw two lots together so the older one is diluted",
-        "Keep blue-tag fish for the morning feed and white for the afternoon",
+        "Keep blue-tag fish for the morning feed and white-tag fish for the afternoon",
         "Discard white-tag stock without inspecting it",
         "Use the more recently packed stock before reaching for the older stock"
       ],
@@ -1862,15 +1862,15 @@
       "dok": 3,
       "stem": "Why does a fish diet need a thiamine tablet at all?",
       "choices": [
-        "The fish carries an enzyme that destroys the vitamin the animal needs",
-        "Fish never contains thiamine in the first place",
-        "Otters cannot absorb vitamins from raw food",
+        "The fish carries an enzyme that breaks down thiamine",
+        "Fish contains no thiamine in the first place, frozen or fresh",
+        "Otters cannot absorb vitamins from raw food, only from cooked",
         "The tablet replaces the fat an otter burns swimming in cold water"
       ],
       "key": 0,
       "distractorRationale": {
         "1": "The problem is loss over time rather than absence:  a fish frozen last month still holds thiamine that a year-old fish has lost.",
-        "2": "Nothing in the memo questions absorption;  the enzyme destroys the vitamin before the animal ever eats it.",
+        "2": "Nothing in the memo questions absorption.  Cooking comes up only because heat destroys the enzyme, which breaks the vitamin apart before the otter ever eats the fish.",
         "3": "The memo is about a vitamin and its enzyme, and no energy-from-fat explanation appears anywhere in it."
       },
       "explain": "Thiaminase breaks thiamine apart, freezing only slows it, and the supplement exists to put back what the enzyme removes.  Each wrong answer relocates the problem to the fish having none, the otter absorbing none, or the cold water, none of which the memo says."
@@ -1938,7 +1938,7 @@
       "choices": [
         "Name the keeper whose initials are missing",
         "Copy the invoices into her notebook at all",
-        "Accept that the six-month rule is only a sanctuary policy",
+        "Accept that the six-month freezer rule is only a sanctuary policy",
         "Turn a stack of agreeing records into a medical conclusion"
       ],
       "key": 3,
@@ -2012,7 +2012,7 @@
         "stem": "Which of the three accounts was recorded the same night it happened?",
         "choices": [
           "Fontaine's, because she reached the sanctuary by telephone the next afternoon.",
-          "Tanaka's, because he wrote it into the volunteer log about twenty minutes afterward.",
+          "Tanaka's, because he wrote it down about twenty minutes later.",
           "Bellweather's, because she telephoned the office without being asked to.",
           "All three, because Whitlock had them collected onto a single page."
         ],
@@ -2136,9 +2136,9 @@
         "stem": "What do the gate log entries establish about the parking lot that Wednesday evening?",
         "choices": [
           "It was swept, empty, and chained well before the low call was recorded.",
-          "It stayed open until the recorder captured the low call after nine.",
+          "It stayed open to traffic until the recorder captured the low call after nine.",
           "It was closed by a keeper who never signed for the closing.",
-          "The sound recorder had been moved to the parking lot for the evening."
+          "The sound recorder had been moved from the boardwalk to the parking lot that evening."
         ],
         "key": 0
       },
@@ -2219,7 +2219,7 @@
         "stem": "What does the comparison box in the summary add to the case?",
         "choices": [
           "It shows the call happened only on the night the witnesses heard it.",
-          "It shows the same unidentified call in the record on three nights running.",
+          "It shows the same unidentified call recorded three nights running.",
           "It identifies the call by comparing it with a recording of a big cat.",
           "It proves the sound moved closer to the parking lot each evening."
         ],
@@ -2343,19 +2343,19 @@
       "dok": 3,
       "stem": "Select the three statements the night's records actually support.",
       "choices": [
-        "The low call was logged three times, at 9:04, 9:07, and 9:12.",
+        "The recorder captured four full hours of usable audio that night.",
         "The parking lot was swept, empty, and chained by 8:22 p.m.",
         "Between sunset and 8:40 p.m. the summary lists only frogs, a distant siren, and a truck.",
-        "The recorder captured four full hours of usable audio that night.",
+        "The low call was logged three times, at 9:04, 9:07, and 9:12.",
         "The summary names the species responsible for the low call."
       ],
       "key": [
-        0,
         1,
-        2
+        2,
+        3
       ],
       "distractorRationale": {
-        "3": "Only forty-one minutes of those four hours were usable;  wind and highway noise took the rest of the recording.",
+        "0": "Only forty-one minutes of those four hours were usable;  wind and highway noise took the rest of the recording.",
         "4": "The reviewer wrote source not identified and recommended a field guide check instead of naming any species himself."
       },
       "explain": "The three supported statements are the ones a reader can point to a line for: the three logged times, the chained lot, and the short list of identified sounds before 8:40.  The wrong choices inflate the usable audio and credit the summary with an identification it deliberately withholds."
@@ -2373,19 +2373,19 @@
       "stem": "Choose the three details the field guide gives about the American bittern.",
       "choices": [
         "It freezes with its bill pointed straight up when it believes it is being watched.",
-        "Its call is repeated in a short series with a pause between each boom.",
-        "The call is given mostly in spring, at dusk or after dark.",
         "It is the loudest bird anywhere in North America.",
-        "It lives at Marlowe Creek as part of the sanctuary's collection."
+        "It lives at Marlowe Creek as part of the sanctuary's collection.",
+        "Its call is repeated in a short series with a pause between each boom.",
+        "The call is given mostly in spring, at dusk or after dark."
       ],
       "key": [
         0,
-        1,
-        2
+        3,
+        4
       ],
       "distractorRationale": {
-        "3": "The guide calls the boom deeper than most bird sounds and says it carries far, which is a claim about pitch and distance rather than about loudness.",
-        "4": "The bittern is a wild bird out in the marsh, and Ferris points out that the marsh is not an exhibit at all."
+        "1": "The guide calls the boom deeper than most bird sounds and says it carries far, which is a claim about pitch and distance rather than about loudness.",
+        "2": "The bittern is a wild bird out in the marsh, and Ferris points out that the marsh is not an exhibit at all."
       },
       "explain": "The guide supplies three checkable details: the bill-up freeze, the short repeated series, and the spring, after-dark timing of the call.  The two wrong choices upgrade a deep sound into the loudest one and move a wild bird onto the sanctuary's animal inventory."
     },
@@ -2503,8 +2503,8 @@
       "blanks": [
         {
           "choices": [
-            "the one describing a roar beside the parking lot",
-            "the one that was written into the volunteer log that night",
+            "the one describing a roar like a big cat beside the parking lot",
+            "the one written into the volunteer log that night",
             "the one from the neighbour who has heard it all week"
           ],
           "key": 1
@@ -2611,8 +2611,8 @@
       "dok": 1,
       "stem": "What does the summary mean by forty-one minutes usable out of four hours?",
       "choices": [
-        "The recorder only ran for forty-one minutes that night",
-        "The reviewer had forty-one minutes to finish the review",
+        "The recorder only ran for forty-one minutes of the four hours",
+        "The reviewer had forty-one minutes to finish reviewing the file",
         "Most of the recording was too noisy to identify anything in",
         "Forty-one minutes of sound came from the marsh itself"
       ],
@@ -2660,10 +2660,10 @@
       "dok": 2,
       "stem": "According to the guide, why does a bittern point its bill straight up?",
       "choices": [
-        "Its streaked throat then lines up with the reeds and the bird disappears",
+        "Its streaked throat blends in with the reeds around it",
         "The posture makes its call carry further across the water",
-        "It watches for movement overhead that way",
-        "It is a warning display aimed at anything approaching"
+        "It lets the bird watch the sky for hawks passing overhead",
+        "It is a warning display aimed at anything that comes too close"
       ],
       "key": 0,
       "distractorRationale": {
@@ -2685,10 +2685,10 @@
       "dok": 3,
       "stem": "What does the narrator say the case actually required?",
       "choices": [
-        "Catching the bird to confirm the species",
-        "Giving up the habit of trusting the most dramatic description",
-        "Waiting for the bird to return on a fourth evening",
-        "Asking the witnesses to listen to the recording"
+        "Catching the bird in the marsh to confirm that it is a bittern",
+        "Refusing to treat the loudest account as the most reliable",
+        "Waiting for the bird to call again on a fourth evening in a row",
+        "Asking all three witnesses to listen to Wednesday's recording"
       ],
       "key": 1,
       "distractorRationale": {
@@ -2770,10 +2770,10 @@
       "partA": {
         "stem": "What do the two most recent inspection lines in the Fence Nine section establish?",
         "choices": [
-          "That the fence was walked on the twelfth of May and its posts recorded as sound.",
+          "That the fence was walked on the twelfth of May, all posts sound.",
           "That the fence had not been walked since the storm damaged post fourteen.",
-          "That inspections happen only when a work order requires one.",
-          "That the fence is walked once a month by whoever is available."
+          "That inspections happen only when a work order calls for a keeper to walk the fence.",
+          "That the fence is walked once a month by whichever keeper happens to be free."
         ],
         "key": 0
       },
@@ -2812,8 +2812,8 @@
         "stem": "How is the Fence Nine section of the maintenance binder organized?",
         "choices": [
           "Every entry is filed together in one list, sorted by which keeper wrote it.",
-          "The schedule comes first, then dated inspection lines, then work orders kept separately.",
-          "The section opens with the storm and works backward through the year.",
+          "It opens with the schedule, then inspection lines, then work orders.",
+          "The section opens with the night of the storm and works backward through the spring.",
           "The newspaper clipping is filed at the front, ahead of the sanctuary's own records."
         ],
         "key": 1
@@ -2853,7 +2853,7 @@
       "partA": {
         "stem": "What does the narrator say a binder can and cannot do?",
         "choices": [
-          "It can prove what happened in the dark, because every line is dated.",
+          "It can prove what happened in the dark, since every line is dated.",
           "It can record what somebody wrote at the time and who signed for it.",
           "It can settle an argument by outvoting the accounts that disagree with it.",
           "It can substitute for an inspection that nobody got around to initialing."
@@ -2979,7 +2979,7 @@
         "stem": "Whose measurements are the hourly wind figures at the bottom of Bulletin 14?",
         "choices": [
           "The weather service's, quoted from the advisory it issued for the county.",
-          "The newspaper's, gathered from a neighbor who lives across the creek.",
+          "The newspaper's, taken from a neighbor who lives across the creek.",
           "Nobody's in particular, because the grid was still blank in the morning.",
           "The sanctuary's own, read from its station by its own evening keeper."
         ],
@@ -3020,12 +3020,12 @@
       "partA": {
         "stem": "Which claim in the newspaper article does the maintenance binder contradict?",
         "choices": [
-          "That a post snapped at ground level during the storm.",
           "That the sanctuary had not inspected the fence since March.",
-          "That the gap was wide enough for an animal to walk through.",
+          "That a post snapped at ground level during the storm.",
+          "That the gap was wide enough for an animal to walk through it.",
           "That every animal was accounted for by eleven o'clock."
         ],
-        "key": 1
+        "key": 0
       },
       "partB": {
         "stem": "Which line from the passage most directly backs up your answer?",
@@ -3036,16 +3036,16 @@
           "A post did snap at ground level, a temporary panel was set the same night, and no animal left the property."
         ],
         "key": {
-          "0": 3,
-          "1": 1,
+          "0": 1,
+          "1": 3,
           "2": 0,
           "3": 2
         }
       },
       "distractorRationale": {
-        "0": "That detail is accurate and matches work order 318, so the binder confirms it rather than contradicting it.",
+        "1": "That detail is accurate and matches work order 318, so the binder confirms it rather than contradicting it.",
         "2": "The size of the gap is the article's opening description, and nothing in the sanctuary's records disputes it.",
-        "3": "That line is quoted correctly from the head keeper, and the radio log closes the count at 10:56 p.m., so the record backs it up rather than contradicting it."
+        "3": "That line is quoted correctly from the head keeper, and the narrator lists it among the details the article got right, so the binder does not contradict it."
       },
       "explain": "The binder carries dated, initialed inspection lines from the twenty-eighth of April and the twelfth of May, which is the record the March claim runs into.  The wrong choices pick details the article actually got right, including a quotation the sanctuary itself confirms."
     },
@@ -3104,19 +3104,19 @@
       "stem": "Choose the three details the article reports accurately.",
       "choices": [
         "A post snapped at ground level during the storm.",
-        "A temporary panel was set the same night.",
+        "The fence had gone uninspected since March.",
         "No animal left the property.",
         "The county was under a High Wind Warning that night.",
-        "The fence had gone uninspected since March."
+        "A temporary panel was set the same night."
       ],
       "key": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "distractorRationale": {
-        "3": "Bulletin 14 quotes a Wind Advisory and explains that an advisory sits one step below a High Wind Warning, so the county was not under the warning.",
-        "4": "The maintenance binder carries dated, initialed inspection lines from the twenty-eighth of April and the twelfth of May, both long after March."
+        "1": "The maintenance binder carries dated, initialed inspection lines from the twenty-eighth of April and the twelfth of May, both long after March.",
+        "3": "Bulletin 14 quotes a Wind Advisory and explains that an advisory sits one step below a High Wind Warning, so the county was not under the warning."
       },
       "explain": "The article gets the physical damage, the temporary repair, and the animal count right, which is why it cannot be dismissed as worthless.  The two wrong choices are its two failures, and each is contradicted by a different sanctuary record rather than by an outside authority."
     },
@@ -3132,22 +3132,22 @@
       "dok": 2,
       "stem": "Select the three instructions Bulletin 14 gives the sanctuary staff.",
       "choices": [
-        "Bring the crane flock inside before dark.",
-        "Check every service gate pin a second time at 8 p.m. and initial the sheet.",
-        "Run rounds in pairs after dark, carrying two radios.",
         "Telephone the weather service every hour for an updated forecast.",
-        "Close the sanctuary to visitors for the whole of the following day."
+        "Check every service gate pin a second time at 8 p.m. and initial the sheet.",
+        "Close the sanctuary to visitors for the whole of the following day.",
+        "Bring the crane flock inside before dark.",
+        "Run rounds in pairs after dark, carrying two radios."
       ],
       "key": [
-        0,
         1,
-        2
+        3,
+        4
       ],
       "distractorRationale": {
-        "3": "The hourly task is reading the sanctuary's own wind station on the maintenance shed and writing the number down, not calling the weather service.",
-        "4": "Nothing in the bulletin closes the sanctuary;  its list covers the animals, the gates, the carts, the rounds, and the wind readings."
+        "0": "The hourly task is reading the sanctuary's own wind station on the maintenance shed and writing the number down, not calling the weather service.",
+        "2": "Nothing in the bulletin closes the sanctuary;  its list covers the animals, the gates, the carts, the rounds, and the wind readings."
       },
-      "explain": "The third part of the bulletin is a list of things this property does about weather, and the pin check at eight o'clock is the one the storm night turns on.  The wrong choices replace the sanctuary's own wind station with a phone call and invent a closure the bulletin never orders."
+      "explain": "The third part of the bulletin is a list of things this property does about weather, and all three right answers come straight from that list.  The wrong choices replace the sanctuary's own wind station with a phone call and invent a closure the bulletin never orders."
     },
     {
       "id": "l4-hot-inspections-walked",
@@ -3325,7 +3325,7 @@
       "choices": [
         "Keepers who forget to initial are disciplined afterward",
         "An inspection has to be repeated if the initials are missing",
-        "A walk nobody signed for cannot be relied on later, whatever anyone remembers",
+        "A walk nobody signed for cannot be relied on later",
         "The schedule allows an inspection to be skipped every other cycle"
       ],
       "key": 2,
@@ -3334,7 +3334,7 @@
         "1": "No repetition rule appears;  the sentence is about what the file can support, not about redoing work.",
         "3": "The schedule is every two weeks without exception, and the sentence tightens that rather than loosening it."
       },
-      "explain": "The line sets the file's standard of proof: initials are what turn a walk into evidence, so an unsigned one is invisible to anybody reading later.  It is exactly the standard the blank eight o'clock pin line fails on the storm night."
+      "explain": "The line sets the file's standard of proof: initials are what turn a walk into evidence, so an unsigned one is invisible to anybody reading later."
     },
     {
       "id": "l4-mc-limb-note",
@@ -3350,7 +3350,7 @@
       "choices": [
         "The exact hour the post snapped",
         "A recommendation to replace the whole fence line",
-        "Confirmation that nobody had tampered with the fence",
+        "Confirmation that nobody had tampered with the fence that night",
         "Where the fallen limb came from, matched by its break"
       ],
       "key": 3,
@@ -3374,9 +3374,9 @@
       "stem": "What period does the quoted Wind Advisory cover?",
       "choices": [
         "From six on Thursday evening until six on Friday morning",
-        "From the moment the bulletin went up until midnight",
+        "From the moment the bulletin went up at four until midnight",
         "The whole of Thursday and Friday",
-        "Only the hours when gusts were actually recorded"
+        "Only the hours when the station actually recorded strong gusts"
       ],
       "key": 0,
       "distractorRationale": {
@@ -3398,8 +3398,8 @@
       "stem": "The operations desk prints the same closing line on every bulletin.  What is it claiming?",
       "choices": [
         "Forecasts are unreliable and should be treated with suspicion",
-        "The document records the sanctuary's response, not the weather itself",
-        "Only the operations desk may issue weather instructions",
+        "A bulletin records the sanctuary's response, not a forecast",
+        "Only the operations desk may issue weather instructions to keepers",
         "Each bulletin replaces the one before it"
       ],
       "key": 1,
@@ -3422,10 +3422,10 @@
       "dok": 3,
       "stem": "A reader wants to check the article's claim about years of warnings.  What can they follow it back to?",
       "choices": [
-        "The maintenance binder, which the reporter examined",
-        "The head keeper, who is quoted in the article",
-        "Nothing, because the only source given is an unnamed neighbour",
-        "The weather service, cited elsewhere in the piece"
+        "The maintenance binder, which the reporter examined for the story",
+        "The head keeper, who is quoted by name in the same article",
+        "Nothing, since its only source is an unnamed neighbour",
+        "The weather service, which is cited elsewhere in the piece"
       ],
       "key": 2,
       "distractorRationale": {
@@ -3446,10 +3446,10 @@
       "dok": 2,
       "stem": "What does the narrator conclude about newspapers as sources?",
       "choices": [
-        "One should be trusted less than any internal record",
+        "One deserves less trust than any record kept inside the sanctuary",
         "One cannot be checked at all without the reporter's notes",
         "One is only worth reading when it quotes somebody by name",
-        "One can be checked the same way the sanctuary checks its own paperwork"
+        "One can be checked like the sanctuary's own paperwork"
       ],
       "key": 3,
       "distractorRationale": {
@@ -3556,9 +3556,9 @@
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "She folded her neck back against her shoulders, trailed her legs out straight behind her, and beat down hard into air that kept sliding out from underneath her.",
-          "All afternoon the air had been a road underneath her.",
+          "By evening the road was gone, and the storm had pulled the light down long before the sun was due to follow it.",
           "Below her the ground became a collection of shapes she remembered nothing about: a roadway curving the wrong direction, a rooftop, a field of low brush.",
-          "The river supplied the direction and the cottonwoods supplied the edges, and the changing light told her when to travel."
+          "Beyond the lights lay water, black and wrinkling, and water is the one thing she can always read."
         ],
         "key": {
           "0": 2,
@@ -3569,7 +3569,7 @@
       },
       "distractorRationale": {
         "0": "An actual roadway appears later, among the unfamiliar shapes below her, which is a different thing from the image the earlier sentence builds.",
-        "2": "The river and the cottonwoods gave her direction and edges, but the road image describes the air she was moving through, not the landmarks.",
+        "2": "That line is about the water she found after the storm pushed her off course.  The road image describes the air she moved through that afternoon, not the river or any water below her.",
         "3": "That effort begins once the wind arrives in the evening;  the road image describes the easy afternoon that came before it."
       },
       "explain": "Calling the air a road turns something invisible into something solid and reliable, which is exactly what she loses when the evening wind arrives.  The wrong choices read the image literally, transfer it to the river, or move it forward into the struggle it is meant to contrast with."
@@ -3586,12 +3586,12 @@
       "partA": {
         "stem": "Why is this particular bird so badly affected by the wind?",
         "choices": [
-          "Because she was already injured before the wind reached her.",
-          "Because she had never flown this stretch of the valley before.",
-          "Because her wings are broad and slow, so the wind has a large surface to push.",
-          "Because she folded her neck and trailed her legs instead of flying straight."
+          "Because a branch had already injured her wing before the wind reached her.",
+          "Because she had never flown this stretch of the valley and had no landmarks to steer by.",
+          "Because she folded her neck and trailed her legs instead of flying straight.",
+          "Because her broad, slow wings give the wind a large surface to push."
         ],
-        "key": 2
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage is the best evidence for that answer?",
@@ -3604,14 +3604,14 @@
         "key": {
           "0": 3,
           "1": 0,
-          "2": 1,
-          "3": 2
+          "2": 2,
+          "3": 1
         }
       },
       "distractorRationale": {
         "0": "The wing is hurt during the descent, after the wind has already pushed her out of the valley, so the injury cannot be the cause.",
         "1": "She had flown that line more times than she could have counted;  unfamiliarity comes later, once the wind has moved her off it.",
-        "3": "That posture is what her body already understood to do;  the passage presents it as her answer to the wind rather than as her mistake."
+        "2": "That posture is what her body already understood to do;  the passage presents it as her answer to the wind rather than as her mistake."
       },
       "explain": "The passage builds a cause and effect: wings designed for unhurried distance give a hard wind a large surface to work on, and the pushing never stops.  The wrong choices reverse the order of the injury, forget how well she knew the route, or blame the flight posture her body chose correctly."
     },
@@ -3753,9 +3753,9 @@
       "partA": {
         "stem": "What do Alva's four questions on the telephone show about how she works?",
         "choices": [
-          "She is deciding whether the bird is worth the forty-minute drive.",
+          "She is deciding whether the bird is worth the forty-minute drive in a storm.",
           "She is checking whether the sanctuary followed its own paperwork rules.",
-          "She wants the bird's condition and how much it has already been disturbed.",
+          "She wants to know the bird's condition and how close people have come.",
           "She is more interested in the weather than in the bird's injuries."
         ],
         "key": 2
@@ -3763,15 +3763,15 @@
       "partB": {
         "stem": "Which sentence from the passage is the best evidence for that answer?",
         "choices": [
-          "At the van she filled out a transfer slip on the hood, in the rain, with the crate already loaded, and the time she wrote on it was 8:40.",
+          "How close had anybody approached it, and how long ago.",
           "A bird that runs from you in a storm is a bird with a second injury.",
           "That somebody is Alva Reyes, a licensed wildlife rehabilitator who lives forty minutes from here and has taken birds from us before.",
-          "How close had anybody approached it, and how long ago."
+          "At the van she filled out a transfer slip on the hood, in the rain, with the crate already loaded, and the time she wrote on it was 8:40."
         ],
         "key": {
           "0": 2,
-          "1": 0,
-          "2": 3,
+          "1": 3,
+          "2": 0,
           "3": 1
         }
       },
@@ -3837,31 +3837,31 @@
         "stem": "What does the narrator mean by calling the refusal to name the heron the hardest kind of respect?",
         "choices": [
           "Respect means keeping a wild bird's record shorter than a resident's.",
-          "Restraint looks like indifference from outside, even when it is the opposite.",
-          "She respects the rehabilitator more than she respects the bird.",
-          "Naming an animal is disrespectful in every situation."
+          "Naming an animal is disrespectful, even for the residents in the files.",
+          "She respects the rehabilitator's privacy more than she respects the bird.",
+          "Her restraint looks like not caring, though it is the opposite."
         ],
-        "key": 1
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage would you cite to defend that answer?",
         "choices": [
-          "There is one line about her in the daily log, and there is a carbon copy of a slip that somebody else signed, and that is the whole of it.",
+          "It is the hardest kind, because from the outside it looks exactly like not caring.",
           "Every animal in our files has a name, and the names are not decoration.",
           "Alva is not required to tell us, and we are not entitled to ask her.",
-          "It is the hardest kind, because from the outside it looks exactly like not caring."
+          "There is one line about her in the daily log, and there is a carbon copy of a slip that somebody else signed, and that is the whole of it."
         ],
         "key": {
-          "0": 0,
-          "1": 3,
+          "0": 3,
+          "1": 1,
           "2": 2,
-          "3": 1
+          "3": 0
         }
       },
       "distractorRationale": {
         "0": "The short record follows from the rule, but the closing line is about how the restraint looks to other people, not about length.",
-        "2": "Not being entitled to ask is part of the same restraint;  the sentence is about the bird, not about ranking people.",
-        "3": "Residents are named on purpose, and the passage calls those names load-bearing rather than disrespectful."
+        "1": "Residents are named on purpose, and the passage calls those names load-bearing rather than disrespectful.",
+        "2": "Not being entitled to ask is part of the same restraint;  the sentence is about the bird, not about ranking people."
       },
       "explain": "The narrator names the cost of the discipline: it produces no visible sign of caring, which is why she calls it the hardest kind of respect.  The wrong choices flatten it into physical distance, into a comparison between people, or into a rule against naming any animal at all."
     },
@@ -3876,20 +3876,20 @@
       "dok": 2,
       "stem": "Choose the three things the narrator actually did on the night she found the heron.",
       "choices": [
-        "She kept her distance and kept the bird in sight.",
+        "She carried the bird up to the maintenance gate to wait for the van.",
         "She wrote down the rehabilitator's instruction word for word.",
         "She carried the carbon copy of the transfer slip back to the binder.",
         "She threw a towel over the bird to keep it calm until help arrived.",
-        "She carried the bird up to the maintenance gate to wait for the van."
+        "She kept her distance and kept the bird in sight."
       ],
       "key": [
-        0,
         1,
-        2
+        2,
+        4
       ],
       "distractorRationale": {
-        "3": "She lists throwing a towel over the bird as one of the things she specifically did not do;  Alva uses the towel later.",
-        "4": "She never attempted to carry the bird anywhere at all, and Alva collects it from the water herself."
+        "0": "She never attempted to carry the bird anywhere at all, and Alva collects it from the water herself.",
+        "3": "She lists throwing a towel over the bird as one of the things she specifically did not do;  Alva uses the towel later."
       },
       "explain": "Her whole role that night was distance, sight, a written-down instruction, and the paperwork afterward, which is what the sanctuary is actually permitted to do.  The two wrong choices are drawn from the list of actions she names and rejects in the same paragraph."
     },
@@ -3907,18 +3907,18 @@
       "choices": [
         "It compares the wind to shoves rather than to gusts.",
         "It describes human things without naming them, because the bird has no words for them.",
-        "It compares the sound of wind in the reeds to breathing.",
+        "It explains the bird's injury using the words a veterinarian would use.",
         "It quotes the keeper who finds the bird at the end.",
-        "It explains the bird's injury using the words a veterinarian would use."
+        "It compares the sound of wind in the reeds to breathing."
       ],
       "key": [
         0,
         1,
-        2
+        4
       ],
       "distractorRationale": {
-        "3": "A voice travels out into the darkness at the end, but the passage never gives its words;  the bird hears steadiness rather than sentences.",
-        "4": "The injury is described only as a wing that will not fold in and will not lift, which is what the bird can feel rather than a diagnosis."
+        "2": "The injury is described only as a wing that will not fold in and will not lift, which is what the bird can feel rather than a diagnosis.",
+        "3": "A voice travels out into the darkness at the end, but the passage never gives its words;  the bird hears steadiness rather than sentences."
       },
       "explain": "The passage stays inside what a heron can perceive, so wind becomes shoves, reeds become breathing, and a sanctuary becomes lights strung in a row.  The two wrong choices import a quoted human voice and medical vocabulary, both of which this point of view deliberately withholds."
     },
@@ -4037,14 +4037,14 @@
           "choices": [
             "a place she has visited in other seasons",
             "a line of small cold lights strung in a row",
-            "a marsh she recognises from the air"
+            "a marsh she recognises from many earlier flights"
           ],
           "key": 1
         },
         {
           "choices": [
             "a wing that will not fold in and will not lift",
-            "a strain the rehabilitator will later diagnose",
+            "a strain that the rehabilitator will later diagnose",
             "a broken bone she can feel grinding"
           ],
           "key": 0
@@ -4145,7 +4145,7 @@
         "A chased bird will leave the property before she arrives",
         "Chasing would count as treating the bird without a license",
         "A frightened bird moving in a storm collects a second injury",
-        "The bird would be too tired to travel by the time she came"
+        "The bird would be too worn out to travel by the time she arrived"
       ],
       "key": 2,
       "distractorRationale": {
@@ -4167,8 +4167,8 @@
       "dok": 2,
       "stem": "What does the narrator notice about how Alva handles the heron?",
       "choices": [
-        "She works fast and loudly to startle the bird into the crate",
-        "She waits for the bird to walk into the crate on its own",
+        "She works fast and loudly so that the startled bird leaps into the crate",
+        "She waits at the water's edge for the bird to walk into the crate on its own",
         "She asks the keeper to hold the towel while she lifts",
         "She approaches from the side, talking low, and secures the bill first"
       ],
@@ -4193,9 +4193,9 @@
       "stem": "Calling a name an anchor for a record suggests what about the names in the files?",
       "choices": [
         "They hold a history together so it can be found and added to",
-        "They keep an animal from being moved to another sanctuary",
+        "They keep a resident animal from being moved to another sanctuary",
         "They weigh a file down with detail nobody needs",
-        "They make an animal easier for visitors to remember"
+        "They make each animal easier for visitors to remember and ask about"
       ],
       "key": 0,
       "distractorRationale": {
@@ -4294,16 +4294,16 @@
         "choices": [
           "Tanaka's account, because he was on the property and saw the van himself.",
           "Neither, because a disagreement between two sources cannot be resolved.",
-          "The transfer slip, because it carries a time and two signatures and his memory carries neither.",
-          "Tanaka's account, because the wind readings show the wind rose after he says the van left."
+          "Tanaka's account, because the wind readings show the wind rose after he says the van left.",
+          "The transfer slip, because it is signed and timed, unlike his memory."
         ],
-        "key": 2
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "Nine o'clock reads 44 miles an hour, and the margin records the night's peak gust, 52 miles an hour at 9:20 p.m.",
           "The slip carries a time and two signatures, while his memory carries neither, and he is the first person to say so.",
+          "Nine o'clock reads 44 miles an hour, and the margin records the night's peak gust, 52 miles an hour at 9:20 p.m.",
           "The recollection belongs to Wes Tanaka, who was on the property until nine and wrote nothing down.",
           "Build one page that puts every record of the night of the twenty-sixth of May in order, and mark every place where they disagree."
         ],
@@ -4317,7 +4317,7 @@
       "distractorRationale": {
         "0": "Being present is not the same as recording anything;  the page notes he wrote nothing down that night.",
         "1": "Marking a disagreement is the first step, not the last;  the page then weighs the two sources against each other.",
-        "3": "The wind grid records what the wind did, which cannot confirm a departure time nobody wrote down at the moment it happened."
+        "2": "The wind grid records what the wind did, which cannot confirm a departure time nobody wrote down at the moment it happened."
       },
       "explain": "A signed slip fixes a time at the moment of the event, while a recollection fixes it days later, and Tanaka is the first to admit the difference.  The wrong choices treat presence as documentation, treat any disagreement as unresolvable, or ask the wind grid to answer a question about people."
     },
@@ -4336,21 +4336,21 @@
           "That the required second check of every service gate pin was never initialed.",
           "That the gates were never pinned at any point that evening.",
           "That somebody removed the pin from the north service gate before eight.",
-          "That the sheet beside the keeper room door was never printed for that night."
+          "That the pin sheet beside the keeper room door was never printed for that night."
         ],
         "key": 0
       },
       "partB": {
         "stem": "Which sentence from the passage is the best evidence for that answer?",
         "choices": [
-          "The gate log shows the last visitor vehicle out at 7:40 p.m., and the pedestrian gate pinned and initialed at 7:44 p.m.",
           "The sheet for the twenty-sixth of May has a printed line for eight o'clock and nothing written on it.",
+          "The gate log shows the last visitor vehicle out at 7:40 p.m., and the pedestrian gate pinned and initialed at 7:44 p.m.",
           "Bulletin 14 requires a second check of every service gate pin at 8 p.m., initialed on the sheet beside the keeper room door.",
           "At 10:05 p.m. Ferris reported the north service gate standing open, with its latch pin lying in the mud below the hinge, bent."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
+          "0": 0,
+          "1": 1,
           "2": 3,
           "3": 2
         }
@@ -4503,30 +4503,30 @@
         "choices": [
           "That the sanctuary handled the storm without anything going wrong.",
           "That the newspaper is responsible for the damage to the sanctuary's reputation.",
-          "That everything which went wrong was written down by the people it went wrong for.",
-          "That a record protects the keeper who wrote it from being blamed later."
+          "That a record protects the keeper who wrote it from being blamed for mistakes later.",
+          "That whatever went wrong was written down by the people it went wrong for."
         ],
-        "key": 2
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage is the best evidence for that answer?",
         "choices": [
-          "It does not argue about the headline, and it never complains about the unnamed neighbor.",
           "The defense is that everything which went wrong was written down by the people it went wrong for.",
+          "It does not argue about the headline, and it never complains about the unnamed neighbor.",
           "A record is not a defense of the person who wrote it.",
           "The sanctuary's defense is not that nothing went wrong, because something plainly did."
         ],
         "key": {
           "0": 3,
-          "1": 0,
-          "2": 1,
-          "3": 2
+          "1": 1,
+          "2": 2,
+          "3": 0
         }
       },
       "distractorRationale": {
         "0": "The report concedes immediately that something went wrong;  denying it is the position the third step is written against.",
         "1": "The attached letter asks only for a correction of two claims and deliberately avoids arguing about the headline or the neighbor.",
-        "3": "The closing lines say a record is not a defense of its writer at all;  it is a promise to whoever reads it next."
+        "2": "The closing lines say a record is not a defense of its writer at all;  it is a promise to whoever reads it next."
       },
       "explain": "The report trades the claim of a perfect night for a stronger one: the failures are visible in the sanctuary's own paper, written by the people they happened to.  The wrong choices claim perfection, blame the newspaper, or turn the record into personal protection the last lines reject."
     },
@@ -4586,11 +4586,11 @@
         "stem": "Bulletin 14 asked several things of the evening shift.  Which one do the night's records show was never written down?",
         "choices": [
           "Reading the wind station and logging what it showed.",
-          "The second check of every service gate pin at eight o'clock.",
+          "Pinning the pedestrian gate once the last visitor vehicle had gone.",
           "Sending keepers out in pairs for the rest of the evening.",
-          "Pinning the pedestrian gate once the last visitor had gone."
+          "The second check of every service gate pin at eight o'clock."
         ],
-        "key": 1
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage would you cite to defend that answer?",
@@ -4602,15 +4602,15 @@
         ],
         "key": {
           "0": 3,
-          "1": 0,
+          "1": 1,
           "2": 2,
-          "3": 1
+          "3": 0
         }
       },
       "distractorRationale": {
         "0": "The grid runs right through the evening and carries the night's peak gust, so those readings were taken and written down.",
-        "2": "The radio log records Ferris sending every keeper out in pairs at 8:05, so that instruction was carried out and written down.",
-        "3": "The gate log shows that gate pinned and initialed at 7:44, which is the same two-part record the eight o'clock line is missing."
+        "1": "The gate log shows that gate pinned and initialed at 7:44, which is the same two-part record the eight o'clock line is missing.",
+        "2": "The radio log records Ferris sending every keeper out in pairs at 8:05, so that instruction was carried out and written down."
       },
       "explain": "The page shows three of the bulletin's tasks carried out and written down, and one row on the pin sheet with no initials in it anywhere.  Each wrong choice names a task some record in the timeline positively confirms, which is the difference between a task nobody did and a task nobody logged."
     },
@@ -4626,20 +4626,20 @@
       "dok": 3,
       "stem": "Choose the three sources that belong to the five records covering the night of the storm.",
       "choices": [
-        "The gate log.",
-        "Work order 318.",
+        "The Valley Register article about the fence.",
+        "Wes Tanaka's memory of the van.",
         "The signed transfer slip for the heron.",
-        "Wes Tanaka's recollection of the van leaving.",
-        "The Valley Register article about the fence."
+        "The radio log.",
+        "The gate log."
       ],
       "key": [
-        0,
-        1,
-        2
+        2,
+        3,
+        4
       ],
       "distractorRationale": {
-        "3": "Tanaka's recollection is the one account on the page that is not a record;  he was present until nine and wrote nothing down.",
-        "4": "The newspaper article is an outside source published two days later and is not among the five records the page assembles."
+        "0": "The newspaper article is an outside source published two days later and is not among the five records the page assembles.",
+        "1": "Tanaka's recollection is the one account on the page that is not a record;  he was present until nine and wrote nothing down."
       },
       "explain": "The five records are the gate log, the radio log, the wind station grid, work order 318, and the signed transfer slip, all written during the night itself.  The two wrong choices are the memory the page weighs against those records and an outside article written afterward."
     },
@@ -4656,19 +4656,19 @@
       "stem": "Select the three changes the morning report puts in place.",
       "choices": [
         "The pin check gains a second initial column.",
-        "The wind station grid is filled in by whoever walks rounds.",
+        "The maintenance binder is closed to anyone outside the sanctuary.",
         "The volunteer log gains a line asking what you heard and when you wrote it down.",
         "Night rounds move an hour earlier during storm season.",
-        "The maintenance binder is closed to anyone outside the sanctuary."
+        "The wind station grid is filled in by whoever walks rounds."
       ],
       "key": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "distractorRationale": {
-        "3": "No change to the timing of rounds appears anywhere;  the three changes all concern who writes a record and when.",
-        "4": "The report moves in the opposite direction, using its own records openly, including in a correction letter sent to a newspaper."
+        "1": "The report moves in the opposite direction, using its own records openly, including in a correction letter sent to a newspaper.",
+        "3": "No change to the timing of rounds appears anywhere;  the three changes all concern who writes a record and when."
       },
       "explain": "Each change repairs the exact record that failed: a second initial for the pin check, a named writer for the wind grid, and a timing line for the volunteer log.  The two wrong choices reschedule rounds and hide the binder, neither of which follows from the report's findings."
     },
@@ -4787,16 +4787,16 @@
       "blanks": [
         {
           "choices": [
-            "why the storm brought the willow limb down",
-            "which keeper found the fence gap, and at what time",
-            "whether the newspaper will print a correction"
+            "why the storm brought the willow limb down across the fence",
+            "whether the Valley Register will print a correction",
+            "which keeper found the fence gap, and at what time"
           ],
-          "key": 1
+          "key": 2
         },
         {
           "choices": [
             "how the latch pin came out of the north service gate",
-            "what time the heron left with the rehabilitator",
+            "what time the heron left with the licensed rehabilitator",
             "whether the eight o'clock pin check was initialed"
           ],
           "key": 0
@@ -4847,10 +4847,10 @@
       "dok": 3,
       "stem": "What is the assignment behind this page?",
       "choices": [
-        "Decide who was responsible for the open gate",
-        "Summarise the night for the newspaper's correction",
-        "Put every record of the night in order and mark where they disagree",
-        "Establish which witness account was the most accurate"
+        "Decide which keeper was responsible for leaving the gate open",
+        "Write a summary of the night for the newspaper's correction",
+        "Put the records in order and mark where they disagree",
+        "Establish which witness account of the night was the most accurate"
       ],
       "key": 2,
       "distractorRationale": {
@@ -4970,9 +4970,9 @@
       "stem": "What does the report's last line say a record is for?",
       "choices": [
         "Protecting the keeper who filled it in from later blame",
-        "Satisfying an inspector who may ask for it",
-        "Proving that the sanctuary followed every procedure",
-        "The person who reads it next, rather than the person who wrote it"
+        "Satisfying an inspector who may later ask to see the file",
+        "Proving that the sanctuary followed every procedure that night",
+        "Keeping a promise to the person who reads it next"
       ],
       "key": 3,
       "distractorRationale": {
@@ -4980,7 +4980,7 @@
         "1": "Inspectors are named elsewhere as readers, but the closing line is broader than any one audience.",
         "2": "The report has just conceded a procedure that was missed, so proving compliance cannot be the claim."
       },
-      "explain": "The closing line turns a record from a shield into an obligation owed forward, which is the same idea the very first level states as a rule about honesty at the moment of writing.  The wrong answers each make the record serve its author or an audit rather than the next reader."
+      "explain": "The closing line turns a record from a shield into an obligation owed forward, to whoever reads it next.  The wrong answers each make the record serve its author or an audit rather than the next reader."
     },
     {
       "id": "l6-short-what-cannot-be-settled",
@@ -5153,19 +5153,19 @@
       "stem": "Select the three statements the yard plan supports.",
       "choices": [
         "Salt is drawn nearer the north wall than any other animal in the yard.",
-        "The feeding shelf is drawn between Salt and Ada.",
-        "Juniper is drawn at the far corner, apart from the other two tortoises.",
         "Ada is drawn pressed against the north wall, head tucked in.",
-        "A second burrow mouth is drawn on the side of the yard where Ada was found."
+        "The feeding shelf is drawn between Salt and Ada.",
+        "A second burrow mouth is drawn on the side of the yard where Ada was found.",
+        "Juniper is drawn at the far corner, apart from the other two tortoises."
       ],
       "key": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "distractorRationale": {
-        "3": "That position belongs to Salt.  Ada was half buried under the feeding shelf, and the plan runs the arrow to the wall from Salt instead.",
-        "4": "The plan marks one burrow mouth and no other, at the corner away from Ada;  the binder's map names a single burrow behind the manzanita."
+        "1": "That position belongs to Salt.  Ada was half buried under the feeding shelf, and the plan runs the arrow to the wall from Salt instead.",
+        "3": "The plan marks one burrow mouth and no other, at the corner away from Ada;  the binder's map names a single burrow behind the manzanita."
       },
       "explain": "The plan puts Salt just under the north wall, sets the feeding shelf between Salt and Ada, and draws Juniper alone at the far corner beside the burrow.  The two wrong choices hand Salt's own position to Ada and add a second burrow that neither the plan nor the binder ever marks.",
       "whyTheFigureIsNeeded": "Relative position is drawn, not written: the plan shows the feeding shelf lying between Salt and Ada, Salt closest to the north wall, and Juniper off at the far corner, none of which the prose states as a relationship."
@@ -5289,9 +5289,9 @@
         },
         {
           "choices": [
-            "no fish was fed at either feed that day",
+            "no fish was fed at either of that day's two feeds",
             "the thiamine tablet was not initialed that day",
-            "a second keeper did not watch the feeding"
+            "a second keeper did not watch and sign for the feeding"
           ],
           "key": 1
         }
@@ -5412,7 +5412,7 @@
         {
           "choices": [
             "gives the only clock hour on the page",
-            "gives the same hour as the column beside it",
+            "gives the same clock hour as the column beside it",
             "gives no clock hour at all, only after dark"
           ],
           "key": 2
@@ -5579,7 +5579,7 @@
         "The boardwalk, where the keeper was standing when the light found the bird",
         "The spot thirty feet out in the shallow water, where the heron was standing",
         "The maintenance gate, where the van pulled up a little after eight",
-        "The maintenance binder, where the carbon copy was carried that night"
+        "The maintenance binder, where the keeper carried the slip's carbon copy that night"
       ],
       "key": 1,
       "distractorRationale": {
@@ -5631,19 +5631,19 @@
       "dok": 2,
       "stem": "Read the transfer slip itself.  Select the three statements that match what the slip shows.",
       "choices": [
+        "The time entered on the slip is 7:22, the moment Whitlock reached Alva by telephone.",
         "Nothing follows the printed row reading \"the name of the keeper who found the bird\".",
         "The signature block holds two names, Whitlock and Alva Reyes.",
         "A stamp in the top corner of the slip reads \"carbon copy\".",
-        "The time entered on the slip is 7:22, the moment Whitlock reached Alva by telephone.",
         "The slip records what Alva plans to do for the bird's wing."
       ],
       "key": [
-        0,
         1,
-        2
+        2,
+        3
       ],
       "distractorRationale": {
-        "3": "7:22 is the time of the telephone call;  the time written on the slip is 8:40, out at the van in the rain.",
+        "0": "7:22 is the time of the telephone call;  the time written on the slip is 8:40, out at the van in the rain.",
         "4": "The sanctuary is not licensed to treat wild birds, and this slip is the last thing its file will ever say about the heron."
       },
       "explain": "The slip records one moment and nothing beyond it: a time, a place, a species, a condition, two signatures, and a stamp reading \"carbon copy\".  The row set aside for the name of the keeper who found the bird has nothing after it, so the only names anywhere on the document are the two in the signature block.  The wrong choices move the telephone time onto the form and add a plan for the wing that the sanctuary is not licensed to write.",
@@ -5716,18 +5716,18 @@
       "passageId": "p-l6-night-of-the-storm",
       "figureId": "fig-l6-night-of-the-storm",
       "figureFact": "the last visitor vehicle out",
-      "stem": "The timeline draws one dot as a dashed circle with a question mark.  Which entry does the timeline place immediately after it?",
+      "stem": "The timeline draws one dot as a dashed circle with a question mark.  Which two entries does the timeline place on either side of it?",
       "choices": [
-        "The heron reported down in the marsh",
-        "The transfer slip signed at the maintenance gate",
-        "The pedestrian gate pinned and initialed",
-        "The last visitor vehicle out"
+        "The last visitor vehicle out and the pedestrian gate pinned",
+        "Bulletin 14 going up and the pedestrian gate pinned",
+        "Bulletin 14 going up and the heron report",
+        "The heron report and the last visitor vehicle out"
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "The heron report comes at 7:15, and the timeline sets it before the dashed dot rather than after it.",
-        "1": "The slip is signed at 8:40, an hour later;  it is the record the remembered time disagrees with, not the next dot along.",
-        "2": "The pedestrian gate is pinned at 7:44, which the timeline places one dot further on than the answer."
+        "0": "Both of these come after the dashed dot.  The last visitor vehicle out is the dot just past it, and the pedestrian gate is pinned one dot later, at 7:44.",
+        "1": "Each of these is one dot too far away.  Bulletin 14 comes before the heron report, and the pedestrian gate comes after the last visitor vehicle out.",
+        "2": "Both of these come before the dashed dot.  Bulletin 14 is the first dot, and the heron report at 7:15 is the one just ahead of the dashed one."
       },
       "targets": [
         "c4-3-analyze-sources",
@@ -5735,7 +5735,7 @@
       ],
       "coachTopic": "research-source-check",
       "dok": 3,
-      "explain": "The dashed dot is Tanaka's remembered time for the van, and the timeline sets it at maybe seven-thirty, between the heron report at 7:15 and the gate log's last visitor vehicle out at 7:40.  Reaching for the 8:40 slip treats the record that contradicts the memory as the thing next to it, and reaching for the heron reads the timeline backwards.",
+      "explain": "The dashed dot is Tanaka's remembered time for the van, maybe seven-thirty.  The timeline sets it between the heron report at 7:15 and the last visitor vehicle out at 7:40, so those are the two dots beside it.  The other answers take both dots from one side of it, or reach one dot too far on each side.",
       "whyTheFigureIsNeeded": "The page tells Tanaka's memory inside a paragraph about the 8:40 slip and never puts it in sequence, so only the drawing places the dashed dot between the 7:15 heron report and the 7:40 gate log entry."
     },
     {
@@ -5749,7 +5749,7 @@
         "The box reading \"not a failure of upkeep\" and the box reading \"the north service gate was found standing open\"",
         "The box reading \"a willow limb came down across Fence Nine\" and the box reading \"not a failure of upkeep\"",
         "The box reading \"the north service gate was found standing open\" and the box reading \"a failure of procedure\"",
-        "The box reading \"a failure of procedure\" and the box reading \"written down by the people it went wrong for\""
+        "The box reading \"a failure of procedure\" and the rounded box reading \"written down by the people it went wrong for\""
       ],
       "key": 0,
       "distractorRationale": {
