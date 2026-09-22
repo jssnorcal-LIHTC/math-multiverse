@@ -60,8 +60,12 @@ const fs = require('fs');
 const path = require('path');
 const {
   genSvg, renderFigure, resolveAccent, genTargets, regenerate, layout,
-  layoutPanels, INK, GRID, GLYPH_W, PANEL_GAP, MIN_PANEL_H, TICK_LABEL_H, MIN_TICK_GAP,
+  layoutPanels, INK, GRID, estimateTextWidth, PANEL_GAP, MIN_PANEL_H, TICK_LABEL_H, MIN_TICK_GAP,
 } = require('../build/figure-gen.js');
+// A text run's content as the renderer DRAWS it:  entities decoded, so "&amp;" is one glyph, not five.
+function unescXml(s) {
+  return String(s).replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&amp;/g, '&');
+}
 
 const REPO_ROOT = path.join(__dirname, '..');
 const PACK_DIR = path.join(REPO_ROOT, 'packs');
@@ -141,7 +145,8 @@ function parseTexts(svg) {
 }
 function allFontSizes(svg) { return parseTexts(svg).map((t) => t.fontSize); }
 function textBBox(t) {
-  const w = t.text.length * GLYPH_W * t.fontSize;
+  // The generator's own estimator, not a re-derivation of it (Stage D:  per-character since 26-0921).
+  const w = estimateTextWidth(unescXml(t.text), t.fontSize);
   const ascent = 0.8 * t.fontSize, descent = 0.25 * t.fontSize;
   const left = t.anchor === 'end' ? t.x - w : t.anchor === 'middle' ? t.x - w / 2 : t.x;
   return { left, right: left + w, top: t.y - ascent, bottom: t.y + descent };

@@ -493,14 +493,28 @@ function renderTimeline(dataTable, accentColor) {
   // two recorded events, not across them.
   //
   // Guarded so a degenerate gap cannot invert: two ticks closer together than 2r keep a 2px band.
-  const MARKER_R = 7;
+  //
+  // BUT NOT EVERY GAP IS BETWEEN ITS ENDS, and the sentence above was wrong for one of them (found
+  // 26-0921, after it shipped).  fig-l2-wyrdstone's stretch is "no theft report" from the loan
+  // paperwork to the last step:  the ENDPOINTS belong to it, its alt says it covers "the loan
+  // paperwork and every step after it", and l2-ms-wyrdstone-shaded-stretch keys the paperwork as
+  // INSIDE.  The inset put that dot outside the band, touching its border, so the drawing
+  // contradicted the key, and no gate could see it:  the blind pass reads the dataTable, not pixels.
+  // A gap now says which it is.  `inclusive: true` draws the band AROUND both endpoint dots, 3px
+  // clear of each, so they sit visibly inside;  the default stays the inset, for a gap that is the
+  // time between two recorded events (two minutes unseen, a van in the way, forty minutes unlogged).
+  const MARKER_R = 7, ENCLOSE = MARKER_R + 3;
+  const bands = [];
   gaps.forEach((g) => {
     const gx1 = posOfTime(g.from), gx2 = posOfTime(g.to);
     const rawX = Math.min(gx1, gx2), rawW = Math.max(2, Math.abs(gx2 - gx1));
-    const inset = Math.min(MARKER_R, Math.max(0, (rawW - 2) / 2));
+    const inset = g.inclusive === true ? -ENCLOSE : Math.min(MARKER_R, Math.max(0, (rawW - 2) / 2));
     const x = rawX + inset, w = Math.max(2, rawW - 2 * inset);
-    hatchBand(x, laneTop - 20, w, laneBottom - laneTop + 26, g.label).forEach((s) => out.push(s));
+    bands.push({ x, w, label: g.label });
   });
+  // The bands are DRAWN here, under the rules and markers, but their top is only known once the
+  // marker numerals are placed below, so their slot in `out` is kept and filled then.
+  const bandAt = out.length;
 
   tracks.forEach((tr, k) => {
     const y = laneY(k);
@@ -564,6 +578,25 @@ function renderTimeline(dataTable, accentColor) {
     placed.push({ e, i, cx, cy, unver, glyph, row, k });
   });
 
+  // A BAND STARTS ABOVE THE NUMERALS INSIDE IT (26-0921).  Its top sat at laneTop - 20, which is
+  // y=108, and a numeral placed above its dot has its baseline at y=114 and its glyph from about
+  // y=100:  so the band's top border ran through the middle of every number inside the stretch,
+  // the same fault the inset above fixed for the side borders and missed on this one.  The top now
+  // clears the highest numeral over the band's own span by 4px (glyph height from the bbox model's
+  // ASCENT);  a band with no numeral above it keeps the old top.  The bottom is unchanged.
+  const bandLines = [];
+  bands.forEach((bd) => {
+    let top = laneTop - 20;
+    placed.forEach((pl) => {
+      const off = rowsFor(pl.k)[pl.row];
+      if (off < 0 && pl.cx >= bd.x - 1 && pl.cx <= bd.x + bd.w + 1) {
+        top = Math.min(top, pl.cy + off - Math.ceil(T.ASCENT * NOTE_FONT) - 4);
+      }
+    });
+    hatchBand(bd.x, top, bd.w, laneBottom + 6 - top, bd.label).forEach((s) => bandLines.push(s));
+  });
+  out.splice(bandAt, 0, ...bandLines);
+
   const entries = [];
   placed.forEach((p) => {
     out.push(circle(p.cx, p.cy, 7, p.unver
@@ -603,8 +636,8 @@ function renderTimeline(dataTable, accentColor) {
 
     // WRAP RATHER THAN SLIDE.  A gap caption's POSITION IS PART OF ITS CLAIM: it names the shaded
     // span, so a caption that slides off that span names the wrong steps.  The clamp below keeps a
-    // caption inside the padded box by MOVING it, and estimateTextWidth runs 40-55% wide (GLYPH_W
-    // is 0.6 against a serif that measures about 0.44), so on a long caption it fires on overflow
+    // caption inside the padded box by MOVING it, and estimateTextWidth ran 40-55% wide until Stage D
+    // (a flat 0.6 em against a serif that averages about 0.46), so on a long caption it fired on overflow
     // that will not happen and drags the caption away from its own region.  Measured on the
     // committed art 26-0905:
     //     fig-l2-wyrdstone   region centre 584, anchored 452   -132px, sitting under ticks 2-4
@@ -624,7 +657,16 @@ function renderTimeline(dataTable, accentColor) {
     // The clamp stays as the last resort, measured on the WIDEST line, so a caption that cannot be
     // centred even wrapped still cannot escape the frame.
     const room = 2 * Math.min(cx - PAD, VB_W - PAD - cx);
-    const capLines = wrapToWidth(caption, NOTE_FONT, Math.max(room, 160));
+    let capLines = wrapToWidth(caption, NOTE_FONT, Math.max(room, 160));
+    // BREAK AT THE SEAM (Stage D, 26-0921).  The caption is two things joined by a comma, the range
+    // and the gap's own label, and a greedy wrap breaks wherever the width runs out:  under the
+    // measured widths fig-l2-wyrdstone drew "...past the loan date, no / theft report", splitting
+    // the label "no theft report" itself.  When a caption has to wrap and both halves fit the room,
+    // the range ends the first line and the label is the second.  The collapsed text is unchanged.
+    if (capLines.length > 1 && bounded && g.label) {
+      const seam = [`${bounded},`, String(g.label)];
+      if (seam.every((ln) => estimateTextWidth(ln, NOTE_FONT) <= Math.max(room, 160))) capLines = seam;
+    }
     const widest = capLines.reduce((m, ln) => Math.max(m, estimateTextWidth(ln, NOTE_FONT)), 0);
     const clamped = Math.min(VB_W - PAD - widest / 2, Math.max(PAD + widest / 2, cx));
     // A one-line caption keeps the plain <text> it has always emitted, so a figure that never
@@ -808,7 +850,13 @@ function renderFacsimile(dataTable, accentColor) {
           { stroke: accent, strokeWidth: 2, rx: 3, extra: 'data-emphasis="box"' }));
       }
     } else if (em === 'underline') {
-      out.push(line(innerX, hp(y + 5), innerX + w, hp(y + 5), accent, 2, { extra: 'data-emphasis="underline"' }));
+      // BELOW THE DESCENDERS, not through them (Stage D, 26-0921).  The rule was pinned at y + 5,
+      // which at 22px put its 2px stroke's top edge at y + 4.5 while a "y" in Times New Roman
+      // descends to y + 4.75 (0.216 em, measured off times.ttf), so "Documented history." had its
+      // own underline touching the tail of its y.  Now DESCENT (the bbox model's 0.25 em, a little
+      // deeper than the font's) plus 2px, so it clears at every size:  y + 8 at 22px, 2.75px clear.
+      const uy = hp(y + Math.ceil(T.DESCENT * font) + 2);
+      out.push(line(innerX, uy, innerX + w, uy, accent, 2, { extra: 'data-emphasis="underline"' }));
     }
     // A boxed run ends with a little extra air, so the outline never crowds the next line.
     if (em === 'box' && boxRunEnd[boxRunStart[i]] === i) y += 4;
@@ -1078,7 +1126,29 @@ function renderSchematic(dataTable, accentColor) {
       b.cx = PAD + cellW * ((i % cols) + 0.5);
       b.cy = bodyTop + (bodyH / rows) * (Math.floor(i / cols) + 0.5);
     }
-    // Keep every box wholly on the canvas whatever the authored coordinates say.
+    // WRAP RATHER THAN SLIDE, the rule the timeline gap caption already follows (Stage D, 26-0921).
+    // A node's POSITION is part of what the drawing says:  its column, its row, the arrow that runs
+    // into it.  A box too wide for the room around its own centre used to be slid sideways by the
+    // clamp below, and on fig-l3-kade-collection that put "the four exits and the two visible
+    // cameras" 21.9px out of its column (42.4px under the old flat width estimate) with a 32px
+    // gutter against its neighbour.  So a box that would be clamped is first RE-WRAPPED to the room
+    // either side of its centre, and keeps that wrap only if it fits WITHOUT ADDING A LINE.
+    // That last clause was learned from the first version, which re-wrapped any clamped box:  it
+    // split "the fourth chair is still / empty" again (the very wrap this pass exists to remove),
+    // "eleven / doors" and "introduces himself as / Theo".  All three are single-line boxes at the
+    // canvas edge, where a few pixels of slide say nothing;  kade's box was already two lines.
+    const roomText = 2 * Math.min(b.cx - PAD, VB_W - PAD - b.cx) - NODE_PAD_X * 2;
+    if (b.w > roomText + NODE_PAD_X * 2 && roomText >= 80) {
+      const rewrapped = wrapToWidth(b.node.label, TICK_FONT, roomText, 2);
+      const rw = rewrapped.reduce((m, s) => Math.max(m, estimateTextWidth(s, TICK_FONT)), 0);
+      if (rw <= roomText && rewrapped.length <= b.lines.length) {
+        b.lines = rewrapped;
+        b.w = Math.ceil(rw) + NODE_PAD_X * 2;
+        b.h = rewrapped.length * NODE_LINE_H + 16;
+      }
+    }
+    // Keep every box wholly on the canvas whatever the authored coordinates say:  the last resort,
+    // for a label that cannot fit the room around its centre even wrapped.
     b.cx = Math.min(VB_W - PAD - b.w / 2, Math.max(PAD + b.w / 2, b.cx));
     b.cy = Math.min(VB_H - PAD - b.h / 2, Math.max(bodyTop + b.h / 2, b.cy));
   });
