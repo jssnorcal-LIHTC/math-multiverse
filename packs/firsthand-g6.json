@@ -2183,16 +2183,16 @@
         "stem": "According to the case file, how did Confucius's answer to that long disorder differ from Laozi's?",
         "choices": [
           "Confucius taught harmony through everyone properly filling their role, while Laozi's teaching pointed toward following nature's own way instead.",
-          "Confucius taught people to follow the Dao, while Laozi taught strict loyalty to the emperor.",
-          "Both Confucius and Laozi taught the exact same idea, using different words for it.",
-          "Confucius taught total nonviolence, while Laozi taught aggressive military conquest."
+          "Confucius taught people to follow the Dao, the natural way of the world, while Laozi taught people to serve and obey their emperor.",
+          "Confucius and Laozi agreed on one answer to the disorder, and each school put that shared answer into its own words.",
+          "Confucius taught rulers to lay down their weapons, while Laozi taught that one strong ruler should end the fighting by force."
         ],
         "key": 0
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "His teaching pointed closer to the other side.",
+          "Neither school ended the fighting.",
           "Confucius taught that harmony grows from everyone filling their role well.",
           "A ruler named Ying Zheng did.",
           "He beat every rival state and named himself Qin Shi Huangdi, China's first emperor."
@@ -2205,9 +2205,9 @@
         }
       },
       "distractorRationale": {
-        "1": "This line is about Ying Zheng making himself China's first emperor, not about either teacher.  The passage gives following the Dao to Laozi's teaching, not Confucius's, and never has Laozi teach loyalty to an emperor.",
-        "2": "The passage says Laozi's teaching pointed closer to the other side from Confucius, meaning the two schools differed, not that they taught the exact same idea.",
-        "3": "Neither philosopher's teaching is described as promoting military conquest or total nonviolence in this passage; that language belongs to a different part of the file, about the Qin emperor's own unification, not to either school of thought."
+        "1": "The passage ties following the Dao, the natural way of the world, to Laozi's teaching, not to Confucius's.  It never has Laozi teach people to obey an emperor.  The sentence naming China's first emperor is about Ying Zheng, not either teacher.",
+        "2": "The sentence saying neither school ended the fighting tells what both schools failed to do, not what either one taught.  The passage calls them two very different schools of thought, so the two teachers did not agree on one answer.",
+        "3": "The passage says a ruler named Ying Zheng ended the fighting, not either teacher.  Laozi's teaching held that people should not force events against their natural course.  The passage never has Confucius teach rulers to lay down their weapons."
       },
       "explain": "The passage contrasts the two schools directly: Confucius taught that harmony grows from everyone properly filling their role, while Laozi's teaching pointed toward the natural way of the world instead, without forcing events.  The other choices each swap the two teachers' ideas or invent a claim neither philosopher is credited with in the passage."
     },
@@ -2564,7 +2564,7 @@
           "The Twelve Tables were Rome's first attempt at law of any kind, just as Hammurabi's code was Mesopotamia's first attempt at law of any kind.",
           "Both codes were kept secret from ordinary citizens, and only kings and priests were ever allowed to know what they actually said.",
           "Hammurabi's code punished every rank of society equally, exactly as the Twelve Tables did, so neither code treated a victim's standing as relevant.",
-          "The Twelve Tables were posted for every citizen to see, while Hammurabi's code punished the same crime differently by the victim's rank."
+          "The Twelve Tables were posted as the same laws for all, while Hammurabi's code punished the same crime differently by the victim's rank."
         ],
         "key": 3
       },
@@ -2573,7 +2573,7 @@
         "choices": [
           "That fight in time produced the Twelve Tables, Rome's first written law code.",
           "For years afterward, rich patrician families held nearly all the real power.",
-          "Rome gave out citizenship widely across its conquered lands, a reach that went far past Athens and its own narrow assembly.",
+          "The file that opened with a river and a code of law now closes with an empire, one built from nearly every civilization this record has ever checked.",
           "The code was posted in public so that every citizen, patrician or plebeian, could actually see the same laws applied to all, even though rank still shaped much of Roman life."
         ],
         "key": {
@@ -2584,11 +2584,11 @@
         }
       },
       "distractorRationale": {
-        "0": "The Twelve Tables were Rome's first written law code, but this passage never claims Hammurabi's code was Mesopotamia's very first law of any kind, only that it is the record's earliest filed dispute.",
+        "0": "The Twelve Tables were Rome's first written law code, but the passage never says either code was a first attempt at law of any kind.  It says only that Hammurabi's code was filed at the very start of this record.",
         "1": "The passage says patrician families held nearly all the real power for years, which explains a power imbalance, but it never claims either code was kept secret from ordinary citizens; the Twelve Tables were posted publicly precisely so laws could be seen.",
-        "2": "This line is about how widely Rome handed out citizenship, not about how either code punished a crime.  The passage says the opposite about Hammurabi's code:  its laws punished the same crime differently depending on who the victim was."
+        "2": "This line says only that the file opened with a code of law and closes with an empire built from many civilizations, not that the two codes worked alike.  The passage says the opposite about Hammurabi's code: its laws punished the same crime differently depending on who the victim was."
       },
-      "explain": "The passage draws the comparison directly: the Twelve Tables were posted in public for every citizen to read, even though rank still shaped much of Roman life, while Hammurabi's code, filed at the start of this record, punished the same crime differently depending on the victim's standing.  The other choices each state the reverse of a specific claim or add a detail the passage does not support."
+      "explain": "The passage draws the comparison directly.  The Twelve Tables were posted in public so every citizen could see the same laws applied to all, even though rank still shaped much of Roman life.  Hammurabi's code, filed at the start of this record, punished the same crime differently depending on who the victim was.  The other choices each state the reverse of a specific claim or add a detail the passage does not support."
     },
     {
       "id": "t6-mc-kingdom-to-republic",

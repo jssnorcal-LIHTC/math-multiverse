@@ -522,7 +522,7 @@
         "2": "The gate log did want a signature, but what stops her is the number itself, not a rule about when the log can be filled in.",
         "3": "That line is about slowing down to count animals that barely move.  She counted twice, exactly the way she had been instructed, and reached two both times, so an untrusted single count is not the reason."
       },
-      "explain": "Whitlock's rule is to record what you actually observe rather than what you expect, and two is what the narrator observed on both counts.  The wrong choices each borrow a real detail from the night, the log, the wish to go home, the second count, and treat it as the reason she hesitated."
+      "explain": "Whitlock's rule is to record what you actually observe rather than what you expect, and two is what the narrator observed on both counts.  Each wrong choice borrows a real detail from the night, such as the gate log, the wish to go home, or how many times she counted, and treats it as the reason she wrote two."
     },
     {
       "id": "l1-ebsr-rana-detail",
@@ -3555,7 +3555,7 @@
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "She folded her neck back against her shoulders, trailed her legs out straight behind her, and beat down hard into air that kept sliding out from underneath her.",
+          "The last of the wind caught her at the moment she had nothing left to answer it with.",
           "By evening the road was gone, and the storm had pulled the light down long before the sun was due to follow it.",
           "Below her the ground became a collection of shapes she remembered nothing about: a roadway curving the wrong direction, a rooftop, a field of low brush.",
           "Beyond the lights lay water, black and wrinkling, and water is the one thing she can always read."
@@ -5744,17 +5744,17 @@
       "passageId": "p-l6-morning-report",
       "figureId": "fig-l6-morning-report",
       "figureFact": "not a failure of upkeep",
-      "stem": "Two boxes sit one above the other with no arrow between them.  Which two?",
+      "stem": "Two neighboring boxes in the stack have no arrow between them.  Which two?",
       "choices": [
-        "The box reading \"not a failure of upkeep\" and the box reading \"the north service gate was found standing open\"",
-        "The box reading \"a willow limb came down across Fence Nine\" and the box reading \"not a failure of upkeep\"",
+        "The box reading \"the north service gate was found standing open\" and the box reading \"not a failure of upkeep\"",
+        "The box reading \"a willow limb came down across Fence Nine\" and the box reading \"the north service gate was found standing open\"",
         "The box reading \"the north service gate was found standing open\" and the box reading \"a failure of procedure\"",
-        "The box reading \"a failure of procedure\" and the rounded box reading \"written down by the people it went wrong for\""
+        "The box reading \"a failure of procedure\" and the box reading \"written down by the people it went wrong for\""
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "An arrow does join these two: the first finding leads to the conclusion drawn from it.",
-        "2": "An arrow joins these two as well, carrying the second finding into the conclusion it supports.",
+        "1": "No arrow joins these two findings, but they are not neighbors.  The box reading \"not a failure of upkeep\" is drawn between them.",
+        "2": "An arrow joins these two, carrying the second finding into the conclusion it supports.",
         "3": "An arrow joins these two, running from the conclusion to the last step of the argument."
       },
       "targets": [
@@ -5763,8 +5763,8 @@
       ],
       "coachTopic": "inference-argument",
       "dok": 3,
-      "explain": "Three arrows run down the page.  Two of them carry a finding into the step it supports, and the last carries the second step into the one after it.  The gap is between the first conclusion and the second finding, because a finding is not produced by an earlier conclusion.  The report opens with findings and keeps them separate from everything else on purpose, and the drawing keeps them separate too.",
-      "whyTheFigureIsNeeded": "The page lists both findings and then all three steps, so only the drawing shows which join carries an argument and where the page simply moves on with no connector at all."
+      "explain": "Three arrows run down the page.  Two of them carry a finding into the step it supports, and the last carries the second step into the one after it.  The gap is between the first conclusion and the second finding, because a finding is not produced by an earlier conclusion.  The report lists both findings before any step.  The drawing instead puts each finding directly above the step it supports, so the two findings are never neighbors.",
+      "whyTheFigureIsNeeded": "The passage lists both findings before any step, so only the drawing shows each finding placed directly above the step it supports and the one pair of neighbors with no arrow."
     },
     {
       "id": "l6-cloze-where-the-second-step-sits",

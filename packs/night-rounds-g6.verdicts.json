@@ -3,20 +3,6 @@
   "model": "claude-sonnet-5",
   "records": [
     {
-      "itemId": "l1-ebsr-why-record-two",
-      "itemHash": "177bd6ad5d0233bb",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l1-ebsr-rana-detail",
       "itemHash": "6b97a6da5d6392aa",
       "blind": [
@@ -2079,14 +2065,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-plain-line-in-the-schematic",
-      "itemHash": "b47ba3f0af727e1c",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-cloze-where-the-second-step-sits",
       "itemHash": "c55043c5ae19e7b0",
       "blind": [
@@ -2101,8 +2079,22 @@
       "status": "agree"
     },
     {
+      "itemId": "l1-ebsr-why-record-two",
+      "itemHash": "80dd503e52eb41ef",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l5-ebsr-air-was-a-road",
-      "itemHash": "567e59e0a75aec9d",
+      "itemHash": "6cc07389c7857ab5",
       "blind": [
         1,
         1
@@ -2111,6 +2103,14 @@
         1,
         1
       ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-plain-line-in-the-schematic",
+      "itemHash": "5c5ab67fce1f46c7",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     }

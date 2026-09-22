@@ -1445,7 +1445,7 @@
         "choices": [
           "Each section builds on the last, so the reader understands the object's full history before learning what is still unknown today.",
           "The Archive always alphabetizes its section headings.",
-          "Current status is the least important section, so it goes last.",
+          "Current status is the least important section of the entry, so the Archive puts it last, where a reader can skip it.",
           "The current status was fully known before the rest of the entry was written."
         ],
         "key": 0
@@ -1470,7 +1470,7 @@
         "2": "This line calls the Wyrdstone the Archive's oldest open case.  That makes its current status the most pressing part of the entry, not the least important.",
         "3": "Logging leads as they come in shows the case is still actively open, not that its status was already fully known before the rest of the entry was drafted."
       },
-      "explain": "The sections move in a logical order: what the object is, where it comes from, what happened to it, and only then, once all of that context exists, what is still unresolved today. Putting Current status last lets the reader understand the whole history before facing the open question."
+      "explain": "The sections move in a logical order: what the object is, where it comes from, what happened to it, and only then, once all of that context exists, what is still unresolved today.  Putting Current status last lets the reader understand the whole history before facing the open question."
     },
     {
       "id": "l2-ms-wyrdstone-loan-facts",
@@ -2205,12 +2205,12 @@
       "coachTopic": "inference-relationships",
       "dok": 3,
       "partA": {
-        "stem": "How does the passage show that Dash and Theo keep acting like strangers, even after Theo exits the building safely?",
+        "stem": "How does the passage show that Dash and Theo keep their connection hidden, even after Theo comes out safely?",
         "choices": [
-          "Dash immediately runs across the street to meet Theo.",
+          "Theo rushes off down the sidewalk, so he is gone before anyone can link him to Dash.",
           "Neither of them acknowledges the other, and they deliberately walk away in different directions.",
-          "Theo waves at Dash's bench on his way out.",
-          "They radio each other by name to confirm the meeting point."
+          "Theo pretends not to see Dash, while Dash gives a small wave that a passer-by would miss.",
+          "They talk in secret code names over the radio, so anyone listening cannot tell who they are."
         ],
         "key": 1
       },
@@ -2230,11 +2230,11 @@
         }
       },
       "distractorRationale": {
-        "0": "This line describes Theo leaving the building. It does not describe Dash crossing the street or the two of them meeting up.",
-        "2": "Theo deliberately not looking at the bench is the opposite of waving. It reinforces that they are acting like strangers, not greeting each other.",
-        "3": "This line describes a coded radio signal, two clicks, rather than names spoken aloud over the channel."
+        "0": "This line shows Theo coming out onto the sidewalk, not rushing off.  The very next sentence says he walks at exactly the speed of someone who is not in a hurry, since that is the only speed that looks right from a distance.",
+        "2": "This line fits the first half of this choice, because Theo does not look at Dash's bench.  The second half is wrong: Dash says, \"I do not wave,\" so there is no wave at all, not even a small one.",
+        "3": "This line shows that the radio signal is two clicks, which means clear, no pickup.  Nobody speaks on the radio at all, so no code names are used, and the only answer is one click back."
       },
-      "explain": "The passage is explicit that staying apart is deliberate: two strangers who have never met, walking in different directions, even though they clearly know each other and just finished the same job. No wave, no names on the radio, nothing that would connect them if anyone happened to be watching."
+      "explain": "The passage is explicit that staying apart is deliberate: two strangers who have never met, walking in different directions, even though they clearly know each other and just finished the same job.  No wave, no hurry, no names on the radio, nothing that would connect them if anyone happened to be watching."
     },
     {
       "id": "l3-ebsr-accurate-not-complete",
@@ -2291,8 +2291,8 @@
         "choices": [
           "Dash's log gets the minute the van double-parked wrong, while Theo's log is completely accurate.",
           "Dash recorded his uncertainty directly, while Theo quietly resolved his and left it out.",
-          "Dash refused to write a log at all, while Theo wrote two separate versions.",
-          "Dash's log covers a longer time period than Theo's."
+          "Dash wrote far more than he needed to, while Theo wrote only what mattered most.",
+          "Dash logged only the two minutes the van was parked, while Theo logged his whole visit."
         ],
         "key": 1
       },
@@ -2313,10 +2313,10 @@
       },
       "distractorRationale": {
         "0": "This line says Theo's account is true about what he did.  It does not say Dash got anything wrong, and nothing in the passage says Dash's log has a mistake in it.",
-        "2": "Dash's log is described as thorough, not refused. Both boys wrote a single log each, and neither wrote two versions.",
-        "3": "This line gives the two exact minutes Dash recorded for the van.  It shows how precise his log is, not that it covers a longer stretch of time than Theo's."
+        "2": "This line calls Dash's log thorough, even stubborn, but nothing says he wrote more than he needed.  Theo did not keep only what mattered most, since his log left out the one moment that might matter most.",
+        "3": "This line gives the minute the van double-parked and the minute it left.  Dash's log also says the door was empty both before and after, so it covers more than those two minutes."
       },
-      "explain": "The real difference is what each boy did with the part he could not be sure about. Dash wrote the gap down exactly as a gap, while Theo noticed something uncertain, quietly decided it was not important, and left it out of his account entirely."
+      "explain": "The real difference is what each boy did with the part he could not be sure about.  Dash wrote the gap down exactly as a gap, while Theo noticed something uncertain, quietly decided it was not important, and left it out of his account entirely."
     },
     {
       "id": "l3-ms-finchs-method",
@@ -2720,11 +2720,11 @@
         }
       },
       "distractorRationale": {
-        "0": "This opening line of the story gives no date or century for when the chronicle itself was carved. It does not support a claim about the timing of the writing.",
-        "1": "This line names the commissioning king directly, which contradicts the idea that no commissioner is ever mentioned.",
-        "3": "This line is a plain, consistent detail about the seal's material. Nothing about it contradicts anything else the chronicle states."
+        "0": "This opening line of the story gives no date or century for when the chronicle itself was carved.  It does not support a claim about the timing of the writing.",
+        "1": "This line mentions the chronicle's own commissioning king.  The chronicle never gives his name, but it does say that a king ordered it.  Knowing his name would not help an outsider check the claim anyway.",
+        "3": "This line is a plain, consistent detail about the seal's material.  Nothing about it contradicts anything else the chronicle states."
       },
-      "explain": "The chronicle carries no independent author, only the temple's own seal, and the same priesthood that guards the chamber is the priesthood whose authority stands behind the claim. That means nobody outside the temple ever had a chance to check the story before it was carved into the wall."
+      "explain": "The chronicle carries no independent author, only the temple's own seal, and the same priesthood that guards the chamber is the priesthood whose authority stands behind the claim.  That means nobody outside the temple ever had a chance to check the story before it was carved into the wall."
     },
     {
       "id": "l4-ebsr-faith-not-proof",
@@ -2820,10 +2820,10 @@
       "partA": {
         "stem": "What piece of physical evidence does the Reckoner cite to support the claim that the chamber was entered before?",
         "choices": [
-          "A missing piece of the seal itself.",
-          "A written confession left by a previous entrant.",
-          "Two different sets of tool marks on the setting stone, from two different centuries.",
-          "A map showing a second entrance to the chamber."
+          "A missing piece of the seal, chipped off at one corner.",
+          "A written confession left in the chamber by an earlier entrant.",
+          "Two sets of tool marks on the setting stone, from two different centuries.",
+          "A map showing a second, hidden entrance to the chamber."
         ],
         "key": 2
       },
@@ -2843,11 +2843,11 @@
         }
       },
       "distractorRationale": {
-        "0": "The seal being exactly where it should be shows it is intact and present, which argues against a missing piece, not for one.",
-        "1": "This line mentions an entrant whose name is no longer recorded, not a written confession. No confession is ever described in the passage.",
-        "3": "This line explains why a guard-trained priest missed the tool marks. It does not describe a map or a second entrance."
+        "0": "This line says only that the seal is where the wall says it should be.  Nothing in the ledger says a piece of the seal is missing.",
+        "1": "This line mentions an entrant whose name is no longer recorded, not a written confession.  No confession is ever described in the passage.",
+        "3": "This line explains why a guard-trained priest missed the tool marks.  It does not describe a map or a second entrance."
       },
-      "explain": "The Reckoner points to something checkable in principle: two distinct sets of tool marks, left by two different people across two different centuries, on the stone beneath the seal. That is physical evidence, not a rumor, a confession, or a map."
+      "explain": "The Reckoner points to something checkable in principle: two distinct sets of tool marks, left by two different people across two different centuries, on the stone beneath the seal.  That is physical evidence.  The ledger never mentions a missing piece, a confession, or a map."
     },
     {
       "id": "l4-ebsr-why-not-remove-seal",
@@ -3533,12 +3533,12 @@
       "coachTopic": "structure-story-parts",
       "dok": 4,
       "partA": {
-        "stem": "How does the door's sound, described as \"exhaling,\" function within the structure of this scene?",
+        "stem": "How does the moment the twelfth door opens fit into the structure of this scene?",
         "choices": [
           "It is a random detail unconnected to anything before or after it.",
           "It is the story's opening image, before any other description begins.",
           "It marks the turning point between the corridor's buildup of tension and Mila's entry into the vault itself.",
-          "It signals that Mila has already left the building completely."
+          "It signals that Mila has already finished her job and left the building, with the stone still behind her."
         ],
         "key": 2
       },
@@ -3546,7 +3546,7 @@
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "Walking back out through the twelve doors, Mila counts them again in reverse.",
-          "Inside, the Wyrdstone sits alone on a raised shelf, under a single cone of light.",
+          "The vault door itself is unremarkable: a slab of pale metal, with a single reader panel.",
           "The door releases with a sound less like an opening and more like something exhaling, a long low breath of air that had clearly been sealed in for longer than eleven minutes could explain.",
           "Frostbank Storage keeps its lowest floor at a temperature the brochure calls archival."
         ],
@@ -3558,11 +3558,11 @@
         }
       },
       "distractorRationale": {
-        "0": "This line describes exactly what comes right after the door opens, connecting the two moments directly. That argues against the sound being unconnected to anything.",
-        "1": "This line is the passage's actual opening sentence, describing the temperature of the whole floor. It is not the exhaling sound this item asks about.",
+        "0": "This line says the door looks plain, not that its opening is unconnected to anything.  The door opens right where the long corridor ends and the vault begins, so that moment joins the two parts of the scene.",
+        "1": "This line is the passage's real opening sentence, about the temperature of the whole floor.  The twelfth door opens much later, after the long walk down the corridor.",
         "3": "This line describes Mila's actual exit at the very end of the passage, not the moment the vault door first opens."
       },
-      "explain": "The exhaling door sits at the hinge of the scene: everything before it builds tension through the cold, the corridor, and the dimming lights, and everything after it shifts into the vault itself and the Wyrdstone. That placement is what makes it a structural turning point, not just a random sound effect."
+      "explain": "The exhaling door sits at the hinge of the scene: everything before it builds tension through the cold, the corridor, and the dimming lights, and everything after it shifts into the vault itself and the Wyrdstone.  That placement is what makes it a structural turning point, not just a random sound effect."
     },
     {
       "id": "l5-ms-figurative-sensations",
@@ -3604,12 +3604,12 @@
       "coachTopic": "vocab-figurative",
       "dok": 3,
       "partA": {
-        "stem": "Theo compares the building to a glacier, saying it seems \"patient, in no hurry.\" What does this comparison suggest about how the building affects him?",
+        "stem": "Theo uses a comparison from nature to describe the Frostbank building.  What does this comparison suggest about how the building affects him?",
         "choices": [
-          "It reminds him that glaciers move very quickly.",
-          "It makes him think the building is friendly and welcoming.",
+          "It makes the building seem worn out and shabby, as if it is slowly melting away.",
+          "It makes him think the building is friendly and welcoming, a safe place he would like to visit.",
           "It feels less like an ordinary building and more like something vast, still, and faintly unsettling.",
-          "It convinces him the building is about to collapse."
+          "It convinces him the building is about to collapse while Mila is still inside."
         ],
         "key": 2
       },
@@ -3617,9 +3617,9 @@
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "It is the kind of gray that is not really a color, so much as an absence of one, low and flat, built without a single window on this side.",
-          "I decide that comparison is not helping either, and try to stop making them.",
+          "If the radio stays silent past two-twenty-five, the plan says I call Finch, and the whole thing ends, whatever ends turns out to mean for someone still inside.",
           "From where I sit, it looks less like a place people work and more like something that grew out of the parking lot on its own, patient, in no hurry, the way glaciers are in no hurry.",
-          "The building itself does not help."
+          "I remind myself, out loud, quietly, that a service van is the single most ordinary thing that could possibly happen outside a storage building on a weekday afternoon."
         ],
         "key": {
           "0": 0,
@@ -3629,11 +3629,11 @@
         }
       },
       "distractorRationale": {
-        "0": "This line describes the building's flat, windowless appearance. It says nothing about glacier speed one way or the other.",
-        "1": "This line says the building 'does not help,' which is closer to unsettling than friendly. It offers no sense of welcome.",
-        "3": "This line shows Theo trying to stop making unsettling comparisons, which argues against the comparison making him think of collapse."
+        "0": "This line describes the building as gray, flat, and windowless, but nothing in it says the building is worn out or shabby.  A glacier in no hurry is huge and patient, not melting away.",
+        "1": "This line shows Theo reminding himself that a service van is ordinary, so it is about the van, not the building.  Nothing in the glacier comparison makes the building seem friendly, welcoming, or safe.",
+        "3": "This line is about what the plan says will happen if the radio stays silent, not about the building falling down with Mila inside.  A building that seems patient and in no hurry is the opposite of one about to collapse."
       },
-      "explain": "Comparing the building to a glacier borrows the huge, slow, ancient stillness of a glacier and applies it to an ordinary storage building, which makes it feel bigger and stranger than it really is. Theo notices this himself and even tries to stop making the comparison, which shows how much it is affecting his nerves."
+      "explain": "Theo says the building looks like something that grew out of the parking lot on its own, patient and in no hurry, the way glaciers are.  The comparison gives an ordinary storage building a glacier's huge, slow stillness, so it feels bigger and stranger than it really is.  In the very next sentence, Theo tries to stop making comparisons at all, which shows that the image unsettles him."
     },
     {
       "id": "l5-ebsr-missed-stair",
@@ -3757,36 +3757,36 @@
       "coachTopic": "vocab-figurative",
       "dok": 3,
       "partA": {
-        "stem": "Finch calls a field report that predicts what will happen \"a guess wearing a record's clothing.\" What is this comparison suggesting?",
+        "stem": "Finch calls a field report that predicts what will happen \"a guess wearing a record's clothing.\"  What is this comparison suggesting?",
         "choices": [
           "The report looks official and trustworthy on the surface, but underneath it is really just an unproven guess.",
-          "The report is literally written on a piece of clothing.",
-          "The report is too short to be taken seriously.",
-          "The report was copied word for word from someone else's notes."
+          "The report mostly describes the clothes the writer was wearing out in the field.",
+          "The report is too short to be taken seriously, since it tells only a little of what happened.",
+          "The report was copied word for word from someone else's notes, so none of it is the writer's own."
         ],
         "key": 0
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "She taps the stone sitting in its case at the center of the table: the Wyrdstone, cool even through the glass.",
+          "Finch tells the story the same way every time.",
           "Nobody down the line can tell the difference just by looking at it.",
           "A report that carves ahead of the truth, even a little, even with the best intentions in the world, stops being a record.",
           "It starts being a guess wearing a record's clothing."
         ],
         "key": {
           "0": 1,
-          "1": 0,
+          "1": 3,
           "2": 2,
-          "3": 3
+          "3": 0
         }
       },
       "distractorRationale": {
-        "1": "This line describes Finch tapping the physical stone on the table. It has nothing to do with clothing or disguise.",
-        "2": "This line explains what happens to a report that predicts ahead of time. It does not say anything about the report's length.",
-        "3": "This line only names the comparison, a guess dressed up as a record.  It says nothing about copying someone else's notes."
+        "1": "This line uses clothing only as a comparison.  Nothing in the passage tells what any writer wore; the guess is simply dressed up to look like a record.",
+        "2": "This line says a report that carves ahead \"even a little\" stops being a record.  Here \"a little\" means how far ahead the report guesses, not how long the report is.",
+        "3": "This line is about Finch telling her story the same way each time, not about how a report gets written.  Nothing in the passage says a report was copied from someone else's notes."
       },
-      "explain": "Dressing a guess in a record's clothing means the guess looks exactly like a trustworthy fact from the outside, even though nothing underneath actually confirms it. That is what makes a predicted report so dangerous: it can fool a reader later who has no way to tell it apart from something genuinely observed."
+      "explain": "Dressing a guess in a record's clothing means the guess looks exactly like a trustworthy fact from the outside, even though nothing underneath actually confirms it.  That is what makes a predicted report so dangerous: it can fool a reader later who has no way to tell it apart from something genuinely observed."
     },
     {
       "id": "l5-ebsr-parable-connects-to-scene",
@@ -4224,11 +4224,11 @@
       "coachTopic": "central-theme",
       "dok": 4,
       "partA": {
-        "stem": "What does the narrator's final thought about Finch's lesson suggest about the story's theme?",
+        "stem": "What theme does the passage develop about noticing?",
         "choices": [
           "The narrator has decided to stop noticing things from now on.",
-          "Finch regrets ever training the crew, now that Kade has found the door as well.",
-          "Noticing things is completely useless without physical courage.",
+          "The right keys matter more than noticing, since Kade found the door first.",
+          "Noticing things does little good for someone who lacks physical courage.",
           "Noticing is a strength, but it can lead into real danger."
         ],
         "key": 3
@@ -4250,10 +4250,10 @@
       },
       "distractorRationale": {
         "0": "This line describes a tense pause while Dash sets the stone.  It says nothing about the narrator deciding to stop noticing things.",
-        "1": "This line is about Kade discovering the door first. It has nothing to do with Finch regretting the crew's training.",
-        "2": "This line shows the narrator noticing a pattern, with no word about courage.  Nothing in the passage says noticing is useless without it."
+        "1": "This line says Kade found the door first, but she never noticed the crew slip past her.  The crew only worked out what the keys were for because Mila noticed the spiral, so noticing mattered more than the keys.",
+        "2": "This line shows the narrator noticing a pattern, with no word about courage.  Nothing in the passage says noticing needs courage to do any good."
       },
-      "explain": "Calling the lesson both a warning and a compliment means the same skill that makes the crew capable also puts them in real danger, standing in a room that should not exist, facing a rival who wanted it just as badly. That double meaning is the theme the whole passage has been building toward."
+      "explain": "Calling the lesson both a warning and a compliment means the same skill that makes the crew capable also leads them into real danger.  It takes them down a staircase that should not exist and right past a rival who never noticed them slip by.  That double meaning is the theme the whole passage has been building toward."
     },
     {
       "id": "l6-ebsr-callback-to-first-lesson",
@@ -4265,22 +4265,22 @@
       "coachTopic": "central-theme",
       "dok": 3,
       "partA": {
-        "stem": "How does the ending of this passage connect back to the very first thing Finch told Theo, in an earlier scene?",
+        "stem": "On the first day, Finch told Theo that the Archive goes deeper than anyone walking past it ever guessed.  How does this final passage connect back to that claim?",
         "choices": [
-          "It shows the crew abandoning everything Finch taught them.",
-          "It shows that Finch was wrong about what mattered most.",
-          "It reveals that Theo never actually trusted Finch's training.",
-          "It confirms that the same quality Finch praised at the start, noticing, is what saves the crew at the end."
+          "It shows the claim was the kind of thing trainers say to sound impressive.",
+          "It shows that Kade, not Finch, knew how deep the Archive went, since she found this door first.",
+          "It shows the claim scared Theo, since he stops breathing when the door lights up.",
+          "It shows the claim was true, since the crew has gone down to a hidden part of the Archive under the old library."
         ],
         "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "Finch always said noticing was the only qualification that ever mattered here.",
-          "We only worked that out because Mila noticed the same spiral, scaled three different ways, on three objects that supposedly had nothing to do with each other.",
-          "I spent months assuming that was the kind of thing trainers say to sound impressive.",
-          "I set the Threadglass last, into the notch on the right."
+          "Now I am standing at the bottom of a staircase that should not exist, under a library that closed two winters ago.",
+          "It turns out Kade spent years finding the keys and never noticed the three of us slip past her, at the door she thought she alone knew how to open.",
+          "I stop breathing, the way I stopped breathing outside Frostbank.",
+          "I spent months assuming that was the kind of thing trainers say to sound impressive."
         ],
         "key": {
           "0": 3,
@@ -4290,11 +4290,11 @@
         }
       },
       "distractorRationale": {
-        "0": "Setting the relic into its notch is the crew following the training and the plan closely, not abandoning it.",
-        "1": "This line shows Mila's noticing directly solving the mystery of the door, which argues for Finch being right, not wrong.",
-        "2": "This line describes the narrator's doubt from months earlier, a doubt the passage explicitly says he is now revising, not evidence he never trusted Finch by the end."
+        "0": "This line is Theo's old doubt, from the months when he thought Finch was only trying to sound impressive.  A few sentences later he says he is revising that assumption completely, because the claim has turned out to be true.",
+        "1": "This line tells only what Kade believed about the door.  Finch knew the Archive went deeper months before this night, since she told Theo so on his very first day.",
+        "2": "This line shows Theo holding his breath as the door lights up.  Nothing in the passage ties that moment to Finch's claim, which Theo had doubted rather than feared."
       },
-      "explain": "The passage draws a direct line from Finch's very first lesson to the crew's final success: the same instinct to notice small, easy-to-miss details is exactly what lets them recognize the matching spiral and solve the door. That callback is the clearest sign of what the whole pack has been building toward."
+      "explain": "On the first day, Finch said the Archive goes deeper than anyone guessed, and Theo spent months thinking that was the kind of thing trainers say.  Now he stands at the bottom of a staircase that should not exist, under a library that closed two winters ago.  He is revising that assumption completely, because the ending shows Finch's claim was true."
     },
     {
       "id": "l6-ms-earlier-skills-pay-off",
@@ -4462,9 +4462,9 @@
         "stem": "What is the chronicle's main purpose in describing Isis's search across every province?",
         "choices": [
           "To warn priests never to search for anything themselves.",
-          "To provide an exact map of the kingdom's provinces for travelers.",
-          "To argue that Set was innocent of any wrongdoing.",
-          "To present Isis's devotion as extraordinary, setting up the temple's own claim to guard something equally extraordinary."
+          "To give travelers an exact map of the kingdom, with each province and its borders marked.",
+          "To argue that Set was innocent of any wrongdoing against his brother Osiris.",
+          "To present Isis's devotion as extraordinary, setting up the temple's claim to guard something just as great."
         ],
         "key": 3
       },
@@ -4472,7 +4472,7 @@
         "stem": "Which sentence from Source A best supports the answer you just gave?",
         "choices": [
           "Isis pressed on, through all the provinces that remained.",
-          "She searched every province of the kingdom herself, refusing all rest.",
+          "His body was scattered beyond the borders of the living world.",
           "She gathered every piece of what Set had scattered.",
           "The god Osiris was struck down by his brother Set."
         ],
@@ -4484,11 +4484,11 @@
         }
       },
       "distractorRationale": {
-        "0": "This line shows Isis gathering every scattered piece herself. The chronicle holds her search up as devotion to admire, not as something priests are warned never to do.",
-        "1": "This line is about Isis's determination during her search. It gives no map details or directions useful to a traveler.",
+        "0": "This line shows Isis gathering every piece Set had scattered.  The chronicle holds her search up as devotion to admire, not as something priests are warned never to do.",
+        "1": "This line mentions borders, but they are the borders of the living world, not lines on a map.  The chronicle gives no province a name and shows no route a traveler could follow.",
         "2": "This line names Set as Osiris's attacker directly, which argues against any claim that the chronicle presents Set as innocent."
       },
-      "explain": "The chronicle builds up Isis's tireless devotion for a reason: it sets the emotional stage for the temple's own claim to be an equally devoted, unfailing guardian of what she left behind. The purpose is persuasive, not geographic or legal, and it is definitely not a warning against searching."
+      "explain": "The chronicle builds up Isis's tireless devotion for a reason: it sets the emotional stage for the temple's own claim to be an equally devoted, unfailing guardian of what she left behind.  The purpose is persuasive, not geographic or legal, and it is definitely not a warning against searching."
     },
     {
       "id": "l6-ebsr-catalog-purpose-vs-chronicle",
@@ -4502,7 +4502,7 @@
       "partA": {
         "stem": "What is the overall purpose of a catalog entry like this one, compared to the Temple Chronicle's purpose?",
         "choices": [
-          "To argue that the old maze legend the disc honors is completely true.",
+          "To argue that the old maze legend the disc honors really did happen.",
           "To convince readers that the Archive is more powerful than any temple.",
           "To advertise the Threadglass for sale to a private collector like the one who has it.",
           "To record facts and open questions plainly, not to persuade anyone."
@@ -4514,7 +4514,7 @@
         "choices": [
           "The gap between those two counts is the single largest question mark in this entry.",
           "No theft was ever reported to any police record the Archive has found.",
-          "The disc is almost certainly a later tribute to that story, not a prop from the events the story tells.",
+          "It is about a hero who escaped a builder's maze by following a single unbroken thread.",
           "Archive field work places the Threadglass in a private collection as of last spring."
         ],
         "key": {
@@ -4525,11 +4525,11 @@
         }
       },
       "distractorRationale": {
-        "0": "This line shows the entry treating the maze legend with caution, likely a tribute rather than proof, which argues against the entry trying to prove the legend true.",
-        "1": "This line is a fact about missing theft records. It says nothing about comparing the Archive's power to a temple's.",
-        "2": "This line reports where the object is currently believed to be. It is not phrased as a sales pitch to any buyer."
+        "0": "This line only tells what the old maze legend is about.  Telling a story is not the same as arguing that it really did happen.  The entry even says the disc is almost certainly a later tribute to that story.",
+        "1": "This line is a fact about missing theft records.  It says nothing about comparing the Archive's power to a temple's.",
+        "2": "This line reports where the object is currently believed to be.  It is not phrased as a sales pitch to any buyer."
       },
-      "explain": "A catalog entry like this one aims to record what is known and unknown as plainly as possible, unlike the chronicle's persuasive, devotional purpose. That difference in purpose is exactly why the two kinds of documents read so differently, even when they describe similar kinds of objects."
+      "explain": "A catalog entry like this one aims to record what is known and unknown as plainly as possible, unlike the chronicle's persuasive, devotional purpose.  That difference in purpose is exactly why the two kinds of documents read so differently, even when they describe similar kinds of objects."
     },
     {
       "id": "l6-ms-archive-analysis-method",
@@ -5632,25 +5632,25 @@
       "passageId": "p-temple-chronicle",
       "figureId": "fig-l4-temple-chronicle",
       "figureFact": "a translation of an inscription",
-      "stem": "The card headed \"a translation of an inscription\" shows four carved lines under its heading.  Counting sentences, not lines, how many of the chronicle's sentences does it carve?",
+      "stem": "How many of the chronicle's sentences are carved on the card headed \"a translation of an inscription\"?",
       "choices": [
         "four",
         "two",
-        "five",
+        "seven",
         "three"
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "The card shows four carved lines, but the second and third lines are one sentence, broken because it is too long to fit.  Count where each sentence ends, not how many lines there are.",
-        "1": "Count again, sentence by sentence.  The line about the seal, the line about no enemy and the boxed line about faith make three.",
-        "2": "Only four lines are carved under the heading, so no count of sentences can reach five.  The rows above the rule are labels, not carved sentences."
+        "0": "The card shows four carved lines, but the second and third lines are one sentence.  The third line starts with a lowercase letter and finishes the sentence the second line begins.  Count where each sentence ends, not how many lines there are.",
+        "1": "Count again, sentence by sentence.  The line about the seal, the two lines about no enemy and the boxed line about faith make three.",
+        "2": "Seven counts every row under the heading.  The first three rows pair a label with its value and are not sentences from the chronicle.  The four carved lines below them hold three sentences."
       },
       "targets": [
         "c1-inf-4-reasoning"
       ],
       "coachTopic": "inference-argument",
-      "dok": 3,
-      "explain": "The card carves three of the chronicle's sentences:  the seal remains in the chamber, no enemy has ever set foot in it, and, in the box, it is a fact requiring only faith.  It shows four lines only because the sentence about no enemy is too long for one line and runs on to the next.  Count where each sentence ends, not how many lines there are.",
+      "dok": 2,
+      "explain": "The card carves three of the chronicle's sentences:  the seal remains in the chamber, no enemy has ever set foot in it, and, in the box, it is a fact requiring only faith.  The sentence about no enemy runs across two lines, the second starting with a lowercase letter, so four lines hold three sentences.  Count where each sentence ends, not how many lines there are.",
       "whyTheFigureIsNeeded": "The passage prints the whole chronicle as running prose; only the card shows which of its sentences were carved, and how its four lines divide them.",
       "svgRead": "Opened art/vault-of-ages-g6/fig-l4-temple-chronicle.svg.  Under the title <text x=\"78\" y=\"76\">a translation of an inscription</text> and below the rule at y1=\"194.5\", exactly four carved lines are drawn:  <text x=\"78\" y=\"232\">The seal remains in this chamber to this day.</text>, <text x=\"78\" y=\"264\">No enemy of the temple has ever set foot</text>, <text x=\"78\" y=\"296\">in this chamber.</text>, and <text x=\"78\" y=\"328\">It is a fact requiring only faith.</text> inside the one rect carrying data-emphasis=\"box\".  The line at y=296 starts in lower case and ends the sentence begun at y=264, so four lines carry three sentences.  The three rows above the rule (carved into, Temple scribes, carries) are label and value pairs, not carved sentences."
     }

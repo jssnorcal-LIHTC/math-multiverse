@@ -1255,7 +1255,7 @@
     "stem": "Based on the five days of readings, what is most likely later on the fifth day and into the sixth at Halyard Point?",
     "choices": [
      "The stormy weather will likely continue, since day five brought the week's strongest wind and rain all day.",
-     "The weather will likely turn calm and clear, since the barometer bottomed out on day five.",
+     "The weather will likely clear up later on day five, since the barometer bottomed out that day.",
      "The brindle tern colony will likely lose nests, since the count already dropped this week.",
      "Temperatures will likely rise back toward the seventies, since day two was the warmest day."
     ],
@@ -1277,7 +1277,7 @@
     }
    },
    "distractorRationale": {
-    "1": "Clearing really does follow a front, so the instinct behind this answer is sound.  The log ends mid-storm, though, with day five still recording rain through the whole day at the week's strongest wind, so calm and clear is not what the next hours bring.",
+    "1": "A barometer that bottoms out has reached its lowest point, which does not mean the storm is over.  Rain fell through day five without a break, so the weather did not clear that day.  The log never shows the pressure starting to rise.",
     "2": "The log says the nest count matched last week's exactly, which means the colony did not lose nests this week.",
     "3": "Day two was the warmest day logged, but temperature fell every day after that, from seventy-one down to fifty-eight, so a rise back to the seventies does not match the trend."
    },
@@ -2042,9 +2042,9 @@
     "stem": "Why has the colony's nesting date drifted earlier while the herring's arrival date has stayed almost the same?",
     "choices": [
      "Terns respond to warming spring air and water, while herring respond to a slower-changing ocean-temperature clock far out at sea.",
-     "Terns and herring both respond to the exact same signal, so both dates should have shifted together.",
-     "The herring have simply chosen to arrive later every year on purpose.",
-     "The terns' nesting date is fixed by the calendar and cannot actually change."
+     "Terns and herring respond to the same warm mark, but the herring's date has shifted too little for the record to show.",
+     "The terns' warm mark has moved earlier, while the herring ignore the temperature and keep to a calendar date.",
+     "The terns have chosen to nest earlier each spring, while the herring have kept to the same date out of habit."
     ],
     "key": 0
    },
@@ -2064,11 +2064,11 @@
     }
    },
    "distractorRationale": {
-    "1": "This sentence describes the terns' own signal, the spring air and water warming past a threshold, which is a different, faster-changing cue than the herring's ocean-temperature clock.",
-    "2": "The record says the herring's arrival date has held near the same date every season, which is the opposite of choosing to arrive later.",
-    "3": "This sentence reports the nesting date moving twenty-eight days earlier over thirty seasons, which directly shows the date can and did change."
+    "1": "This sentence is about the terns' own warm mark, not one the herring share.  The herring go by a different signal, ocean temperature at sea, and the record does show their date has shifted three days either way.",
+    "2": "The terns' half is right, and the herring's date has held near April twenty-first.  That is not because they ignore temperature.  The record says they time their arrival by ocean temperature at sea, which changes more slowly than the coastal air.",
+    "3": "This sentence shows the terns now nest twenty-eight days earlier, not that they have chosen to.  The record says their bodies respond to warming air and water, and the herring time their arrival by ocean temperature at sea, not out of habit."
    },
-   "explain": "The passage names two separate clocks: terns respond to spring air and water warming past a threshold, a fast-moving signal, while herring time their arrival by ocean temperature far out at sea, a clock that runs slower than the coastal air the terns respond to, so the two dates have drifted apart instead of moving together.  Each wrong choice either merges the two clocks or misreads which date actually shifted."
+   "explain": "The passage names two separate clocks.  Terns lay their first eggs once spring air and water cross a warm mark, and warming has pulled that mark earlier.  Herring time their arrival by ocean temperature at sea, a clock that runs slower than the coastal air.  Their date has barely moved, so the two dates have drifted apart.  The sentence about the warm mark explains only the terns' half, while the sentence about the slower clock explains both dates at once.  Each wrong choice either gives both animals one signal, takes temperature out of the herring's timing, or turns the animals' responses into choice and habit."
   },
   {
    "id": "t5-ebsr-steady-vs-bouncy",

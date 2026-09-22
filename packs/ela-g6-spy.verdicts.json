@@ -787,14 +787,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-what-the-lobby-scene-is-about",
-      "itemHash": "2e2d6c4273232c4c",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-ebsr-a-clipboard-like-a-wall",
       "itemHash": "ef3a818f4751a1fb",
       "blind": [
@@ -2119,8 +2111,16 @@
       "status": "agree"
     },
     {
+      "itemId": "l6-mc-what-the-lobby-scene-is-about",
+      "itemHash": "16c4e2feeb14a8c6",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-ebsr-pulse-loud-in-his-ears",
-      "itemHash": "14c8355eee78f604",
+      "itemHash": "94351a745d0df14f",
       "blind": [
         3,
         2
