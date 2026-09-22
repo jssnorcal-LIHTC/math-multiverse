@@ -248,6 +248,22 @@ check('an adjudicated disagreement needs a note and an adjudicator', () => {
   assert.deepStrictEqual(validateLedger(p, good).errors, []);
 });
 
+check('blindHistory, when present, must be counts the retirement rule can read', () => {
+  const p = clone();
+  const base = {
+    blind: 0, authored: 0, status: 'adjudicated',
+    note: 'Key confirmed. The blind pass split on this item across sessions, and the drawing settles it.',
+    adjudicatedBy: 'claude', adjudicatedAt: '2026-09-21',
+  };
+  const good = ledgerFor(p, { 'i-mc-1': Object.assign({}, base, { blindHistory: { agree: 4, disagree: 3 } }) });
+  assert.deepStrictEqual(validateLedger(p, good).errors, []);
+  // A history the rule would silently read as none is refused, in each way it can be malformed.
+  [{ agree: '4', disagree: 3 }, { agree: 4 }, { agree: -1, disagree: 0 }, { agree: 1.5, disagree: 0 }, null, 'x'].forEach((bh) => {
+    const bad = ledgerFor(p, { 'i-mc-1': Object.assign({}, base, { blindHistory: bh }) });
+    assert.strictEqual(validateLedger(p, bad).errors.some(e => /blindHistory/.test(e)), true, 'accepted ' + JSON.stringify(bh));
+  });
+});
+
 check('an unknown status is caught', () => {
   const p = clone();
   const l = ledgerFor(p, { 'i-mc-1': { status: 'probably-fine' } });
