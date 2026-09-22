@@ -328,6 +328,16 @@ function validateLedger(pack, ledger) {
       if (!r.adjudicatedBy) errors.push(`items(${item.id}): an adjudicated verdict needs adjudicatedBy`);
       if (!r.adjudicatedAt) errors.push(`items(${item.id}): an adjudicated verdict needs adjudicatedAt`);
     }
+    // blindHistory (26-0921) is the record of every blind reading of an adjudicated item, which the
+    // retirement rule in tests/blind-reanswer.js weighs.  Optional, but when present it must be counts
+    // the rule can actually read:  a malformed one would silently count as no history at all.
+    if (r.blindHistory !== undefined) {
+      const bh = r.blindHistory;
+      const okCount = (n) => Number.isInteger(n) && n >= 0;
+      if (!bh || typeof bh !== 'object' || !okCount(bh.agree) || !okCount(bh.disagree)) {
+        errors.push(`items(${item.id}): blindHistory must be {agree, disagree} as non-negative integers, got ${JSON.stringify(bh)}`);
+      }
+    }
     if (!sameAnswer(r.authored, authoredKeyOf(item), item.type)) {
       errors.push(`items(${item.id}): ledger records authored ${JSON.stringify(r.authored)} but the item's key is ${JSON.stringify(authoredKeyOf(item))}`);
     }
