@@ -1,0 +1,171 @@
+'use strict';
+// sweep-review-echo.js -- a review question may not echo an earlier level.
+//
+// Justin, 26-0921:  "no review questions can echo".  Level 6 of every pack is a review level, and a
+// review item that re-asks what an earlier item asked, or whose answer an earlier item already states,
+// tests memory of that earlier item instead of the skill.  Measured before this gate existed:  the
+// level-6 twin l6-mc-chronicle-card-boxed-line shared its figure, its boxed line and its key position
+// with a level-4 item, and its key's description repeated the level-4 stem word for word.
+//
+// An ECHO is any of:
+//   E1  KEY STATED EARLIER  a level-6 key (the keyed choice of an mc, ms, ebsr Part A, the Part B line
+//       mapped from the Part A key, or a cloze blank) whose content words appear, 80% or more of them and at least three, in ONE earlier-level
+//       field that asserts something:  a stem, a KEYED choice, an explain, a distractorRationale or a
+//       whyTheFigureIsNeeded.  Unkeyed choices do not count:  a wrong answer gives nothing away.
+//       A key of fewer than three content words is NOT scored, on purpose.  Measured 26-0921, every
+//       such key that matched an earlier key was a vocabulary term applied to a new case (Outpost's
+//       "interaction", for the fish-timing event) or a number that happens to recur in the math pack
+//       ("6 cm").  A review level has to be able to key a taught word again in a new case.  What this
+//       cannot see is a short key that re-asks the same FACT, and a paraphrase:  Firsthand's author
+//       found four by reading ("Saul" as the first king, keyed at level 2 and asked again at level 6)
+//       and rewrote them.  Those stay a reader's job, and the lens pass reads every level-6 rewrite.
+//   E2  SAME QUESTION      a level-6 item on the same figure AND the same figureFact as an earlier item.
+//   E3  SAME STEM           a level-6 stem whose content words overlap an earlier stem's on the same
+//       passage by 70% or more (the share of the smaller set).
+//
+//   node tests/sweep-review-echo.js            every pack in the manifest;  exits 1 on any echo
+//
+// CONTROLS in the same pass:  a synthetic level-6 item planted with each kind of echo must be caught,
+// and the same pack with the plant removed must come back clean.
+
+const fs = require('fs');
+const path = require('path');
+const ROOT = path.join(__dirname, '..');
+
+const STOP = new Set(('a an the of to in on at by for and or but is are was were be been being it its this that these those with '
+  + 'from as each which what who whom whose where when why how one two three four five six does do did has have had not no nor so '
+  + 'than then there their them they he she his her him we you i my me our your into over under about any all some own same both '
+  + 'only just still more most very can could would should will may might must also because if out up down off again once here').split(' '));
+const norm = (w) => w.toLowerCase().replace(/[‘’]/g, "'").replace(/'s$/, '').replace(/[^a-z0-9-]/g, '').replace(/([^s])s$/, '$1');
+const words = (s) => String(s == null ? '' : s).split(/\s+/).map(norm).filter((w) => w && !STOP.has(w));
+
+function keysOf(it) {
+  const out = [];
+  const add = (choices, key, where) => (Array.isArray(key) ? key : [key]).forEach((k) => {
+    if (Array.isArray(choices) && Number.isInteger(k) && choices[k] !== undefined) out.push({ text: String(choices[k]), where });
+  });
+  if (it.type === 'mc' || it.type === 'ms') add(it.choices, it.key, 'key');
+  if (it.type === 'ebsr') {
+    if (it.partA) add(it.partA.choices, it.partA.key, 'partA key');
+    // Part B's key is a MAP from each Part A choice to the line that supports it (engine/items.js).
+    // Only the line mapped from Part A's KEY is the answer;  the others support wrong claims, and a
+    // child who remembers one of them from an earlier level is led to a wrong answer, not given one.
+    if (it.partA && it.partB && Array.isArray(it.partB.choices)) {
+      const kb = it.partB.key;
+      const canon = kb && typeof kb === 'object' && !Array.isArray(kb) ? kb[String(it.partA.key)] : kb;
+      add(it.partB.choices, [canon].filter(Number.isInteger), 'partB key');
+    }
+  }
+  if (it.type === 'cloze') (it.blanks || []).forEach((b, i) => add(b.choices, b.key, `blank ${i} key`));
+  return out;
+}
+
+// The fields of an earlier item that ASSERT something.
+function assertingFields(it) {
+  const out = [];
+  const push = (v, where) => { if (typeof v === 'string' && v) out.push({ text: v, where }); };
+  push(it.stem, 'stem');
+  push(it.explain, 'explain');
+  push(it.whyTheFigureIsNeeded, 'whyTheFigureIsNeeded');
+  if (it.distractorRationale && typeof it.distractorRationale === 'object') {
+    for (const [k, v] of Object.entries(it.distractorRationale)) push(v, `distractorRationale.${k}`);
+  }
+  if (it.partA) push(it.partA.stem, 'partA.stem');
+  if (it.partB) push(it.partB.stem, 'partB.stem');
+  keysOf(it).forEach((k) => push(k.text, k.where));
+  return out;
+}
+
+function echoesIn(pack) {
+  const found = [];
+  const levels = pack.levels || [];
+  if (levels.length < 6) return found;
+  const byId = new Map((pack.items || []).map((i) => [i.id, i]));
+  const review = (levels[5].itemIds || []).map((id) => byId.get(id)).filter(Boolean);
+  const earlier = levels.slice(0, 5).flatMap((l, li) => (l.itemIds || []).map((id) => ({ it: byId.get(id), level: li + 1 }))).filter((x) => x.it);
+  for (const it of review) {
+    for (const k of keysOf(it)) {
+      const kw = [...new Set(words(k.text))];
+      if (kw.length < 3) continue;
+      for (const { it: ot, level } of earlier) {
+        for (const f of assertingFields(ot)) {
+          const fw = new Set(words(f.text));
+          const hit = kw.filter((w) => fw.has(w)).length;
+          if (hit / kw.length >= 0.8) {
+            found.push({ kind: 'E1', item: it.id, detail: `${k.where} "${k.text}" is stated by level ${level} ${ot.id}.${f.where} (${hit}/${kw.length} words)` });
+          }
+        }
+      }
+    }
+    if (it.figureId && it.figureFact) {
+      for (const { it: ot, level } of earlier) {
+        if (ot.figureId === it.figureId && ot.figureFact === it.figureFact) {
+          found.push({ kind: 'E2', item: it.id, detail: `same figure ${it.figureId} and figureFact "${it.figureFact}" as level ${level} ${ot.id}` });
+        }
+      }
+    }
+    const st = new Set(words(it.stem || (it.partA && it.partA.stem)));
+    for (const { it: ot, level } of earlier) {
+      if (ot.passageId !== it.passageId) continue;
+      const os = new Set(words(ot.stem || (ot.partA && ot.partA.stem)));
+      const small = Math.min(st.size, os.size);
+      if (small < 4) continue;
+      const shared = [...st].filter((w) => os.has(w)).length;
+      if (shared / small >= 0.7) found.push({ kind: 'E3', item: it.id, detail: `stem overlaps level ${level} ${ot.id}'s stem ${shared}/${small}` });
+    }
+  }
+  return found;
+}
+
+const problems = [];
+const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'packs', 'manifest.json'), 'utf8'));
+let packs = 0, reviewItems = 0;
+for (const e of manifest.packs) {
+  const pack = JSON.parse(fs.readFileSync(path.join(ROOT, 'packs', `${e.id}.json`), 'utf8'));
+  if (!pack.levels || pack.levels.length < 6) continue;
+  packs++;
+  reviewItems += (pack.levels[5].itemIds || []).length;
+  for (const f of echoesIn(pack)) problems.push(`${f.kind}  ${e.id}/${f.item}:  ${f.detail}`);
+}
+console.log(`sweep-review-echo: ${packs} pack(s), ${reviewItems} level-6 item(s) checked against every earlier level`);
+
+// ---- controls ----
+{
+  const base = {
+    levels: [1, 2, 3, 4, 5, 6].map((n) => ({ itemIds: [] })),
+    items: [],
+  };
+  const early = { id: 'e1', type: 'mc', passageId: 'p', figureId: 'f', figureFact: 'the red lantern',
+    stem: 'Which lantern does the keeper light first on the north wall?', choices: ['the red lantern by the gate', 'b', 'c', 'd'], key: 0,
+    explain: 'The keeper always lights the red lantern by the gate before any other.' };
+  base.items.push(early); base.levels[0].itemIds.push('e1');
+  const plant = (item) => { const p = JSON.parse(JSON.stringify(base)); p.items.push(item); p.levels[5].itemIds.push(item.id); return p; };
+  const clean = plant({ id: 'r0', type: 'mc', passageId: 'q', stem: 'Why does the keeper walk the east path at dusk?',
+    choices: ['to count the goats in the yard', 'x', 'y', 'z'], key: 0 });
+  const e1 = plant({ id: 'r1', type: 'mc', passageId: 'q', stem: 'What comes first?', choices: ['the red lantern by the gate', 'x', 'y', 'z'], key: 0 });
+  const e2 = plant({ id: 'r2', type: 'mc', passageId: 'q', figureId: 'f', figureFact: 'the red lantern', stem: 'Look again at the drawing.',
+    choices: ['one', 'two', 'three', 'four'], key: 1 });
+  const e3 = plant({ id: 'r3', type: 'mc', passageId: 'p', stem: 'Which lantern does the keeper light first on the north wall of the yard?',
+    choices: ['one', 'two', 'three', 'four'], key: 2 });
+  // Part B:  the line mapped from Part A's key is the answer;  a line mapped from a wrong Part A choice
+  // is not, so an earlier key sitting there leads a remembering child AWAY from the answer.
+  const ebsr = (canon) => plant({ id: 'r4', type: 'ebsr', passageId: 'q',
+    partA: { stem: 'Why is the yard kept dark?', choices: ['to rest the goats', 'x', 'y', 'z'], key: 0 },
+    partB: { stem: 'Which line supports it?', choices: ['the red lantern by the gate', 'the goats sleep early in winter', 'q', 'r'],
+      key: canon ? { 0: 0, 1: 1, 2: 2, 3: 3 } : { 0: 1, 1: 0, 2: 2, 3: 3 } } });
+  const kinds = (p) => echoesIn(p).map((f) => f.kind);
+  const expect = [[clean, []], [e1, ['E1']], [e2, ['E2']], [e3, ['E3']], [ebsr(true), ['E1']], [ebsr(false), []]];
+  expect.forEach(([p, want], i) => {
+    const got = [...new Set(kinds(p))].sort();
+    if (JSON.stringify(got) !== JSON.stringify(want)) problems.push(`CONTROL ${i} failed:  expected ${JSON.stringify(want)}, got ${JSON.stringify(got)}`);
+  });
+  if (!problems.some((p) => p.startsWith('CONTROL'))) console.log('  controls:  a clean review item passes;  a planted E1, E2 and E3 are each caught;  an earlier key as the Part B answer is caught, as the support for a wrong claim it is not  (fired)');
+}
+
+if (problems.length) {
+  console.log(`\n=== sweep-review-echo: ${problems.length} problem(s) ===`);
+  problems.forEach((p) => console.log('  ' + p));
+  console.log('\nRESULT: FAILED');
+  process.exit(1);
+}
+console.log('\nRESULT: ALL CLEAN');

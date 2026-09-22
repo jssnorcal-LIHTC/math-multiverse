@@ -478,12 +478,12 @@
       "partA": {
         "stem": "Why does Theo almost throw the card away?",
         "choices": [
-          "A stranger who knew something he never said out loud is an unsettling thought at night.",
-          "He does not think the card was meant for him.",
-          "He suspects a classmate from school sent it as a joke.",
-          "He dislikes getting mail after nine o'clock."
+          "He thinks the neat, printed-looking card was meant for another tenant.",
+          "A stranger knows something he noticed but never said out loud.",
+          "He suspects a neighbor on his floor sent it as a joke about the floorboard.",
+          "He is annoyed that anyone would bother him with mail so late at night."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -494,16 +494,16 @@
           "Nobody else on this floor has ever mentioned it."
         ],
         "key": {
-          "0": 2,
-          "1": 0,
+          "0": 0,
+          "1": 2,
           "2": 3,
           "3": 1
         }
       },
       "distractorRationale": {
-        "1": "The neat handwriting is a detail about how the note looks, not about who it is for. Nothing in the passage suggests Theo doubts the card was addressed to him.",
-        "2": "Nobody else mentioning the floorboard tells you Theo has kept the detail to himself. It does not point to a classmate or a joke, and the passage never mentions school at all.",
-        "3": "The nine o'clock detail explains why the timing feels strange, not why Theo almost throws the card away. He is unsettled by what the card knows, not by when it arrived."
+        "0": "The neat handwriting is a detail about how the card looks, not about who it is for.  Nothing in the passage suggests Theo thinks it was meant for anyone else.",
+        "2": "Nobody else on the floor mentioning the floorboard shows that Theo has kept it to himself.  It does not point to a neighbor, and nothing in the passage suggests a joke.",
+        "3": "The late hour explains why the card's arrival feels strange, not why Theo almost throws it away.  He is unsettled by what the card knows, not annoyed by the time."
       },
       "explain": "Theo almost throws the card away because it proves someone else has been watching closely enough to notice something he never told anyone. That is unsettling on its own, independent of the hour or the handwriting."
     },
@@ -520,7 +520,7 @@
         "stem": "What does Theo notice about the Athenaeum before he goes inside?",
         "choices": [
           "The front doors are chained shut, but a side door stands open a crack.",
-          "The building has a new sign advertising its reopening.",
+          "The building has a new sign on the front advertising that it will reopen soon.",
           "Lights are burning in every window.",
           "A guard is posted at the front entrance."
         ],
@@ -604,7 +604,7 @@
           "Small details he noticed on his way into the building.",
           "How well he can pick a lock.",
           "How fast he can run up a staircase.",
-          "Whether he can keep a secret from his family."
+          "Whether he can keep the floorboard and the card a secret from his family."
         ],
         "key": 0
       },
@@ -626,7 +626,7 @@
       "distractorRationale": {
         "1": "The open side door is a detail Theo notices, not a lock Finch asks him to pick. The passage never describes any lock-picking at all.",
         "2": "The second staircase appears at the very end of the scene, after the questioning is already finished. It has nothing to do with speed or running.",
-        "3": "This line is about the floorboard, not about family or secrecy. The passage never mentions Theo's family."
+        "3": "This line says nobody on Theo's floor has mentioned the floorboard.  Finch never asks him about keeping secrets, and the passage never mentions his family."
       },
       "explain": "Finch's questions are all about small, easy-to-miss details from Theo's walk in: an unlocked chain, a light left on, where the dust changes. That pattern of questions is the actual test, not anything physical like running or picking locks."
     },
@@ -641,12 +641,12 @@
       "dok": 3,
       "stem": "Choose the three details that show the Athenaeum is not really as empty as it looks from the street.",
       "choices": [
-        "The dust inside is thinner than it should be for a building empty two years.",
+        "The dust inside is thinner than it should be for an empty building.",
         "A side door under the fire escape stands open half an inch.",
-        "The front doors are chained shut.",
+        "The front doors are chained shut, exactly as they have been for two years.",
         "A woman is waiting at the bottom of a staircase inside.",
-        "The windows are boarded up.",
-        "The building closed to the public two winters ago."
+        "The windows Theo has walked past a hundred times are boarded up.",
+        "The building closed to the public two winters ago and has sat dark ever since."
       ],
       "key": [
         0,
@@ -716,7 +716,7 @@
           "She notices the two empty chairs before Finch has said a single word.",
           "She notices that Theo seems nervous talking to a stranger.",
           "She notices that the photograph shows a glass disc.",
-          "She notices that a private collector now owns the Threadglass."
+          "She notices that a private collector with a good lawyer owns the Threadglass."
         ],
         "key": 0
       },
@@ -755,7 +755,7 @@
         "stem": "Why does Finch say the Archive does not involve lawyers?",
         "choices": [
           "Because lawyers require explaining things in rooms with records.",
-          "Because the Archive cannot afford legal fees.",
+          "Because the Archive cannot afford a lawyer as good as the private collector's.",
           "Because Kade already has a lawyer working against them.",
           "Because lawyers are not allowed inside the Athenaeum."
         ],
@@ -778,8 +778,8 @@
       },
       "distractorRationale": {
         "1": "This line describes the collector's lawyer, the person the Archive is up against. It says nothing about whether the Archive itself can afford one.",
-        "2": "This line is about how Finch answers questions in general. It has nothing to do with lawyers or legal risk specifically.",
-        "3": "The risk Finch mentions is about taking the Threadglass back, not about a rule against lawyers entering any particular building."
+        "2": "This line is about the risk of taking the Threadglass back.  It gives no reason for avoiding lawyers, and Finch's real reason is about explaining things in rooms with records.",
+        "3": "This line is about Finch's habit of not answering questions.  It says nothing about lawyers being kept out of any building."
       },
       "explain": "Finch gives one exact reason for skipping lawyers: they need explanations that end up in official records. That reason is about avoiding a paper trail, not about cost, location, or Kade's own legal team."
     },
@@ -797,7 +797,7 @@
         "choices": [
           "A third kid, Dash, arrives late and drops into one of the empty chairs.",
           "Finch reveals who currently owns the Threadglass.",
-          "The photograph of the Threadglass disappears from the table.",
+          "The photograph Finch set on the table between them suddenly goes missing.",
           "Theo decides he does not want to help find the Threadglass."
         ],
         "key": 0
@@ -837,10 +837,10 @@
       "choices": [
         "She sets a photograph on the table instead of explaining out loud first.",
         "She answers \"that is the correct question\" without actually answering it.",
-        "The Threadglass was documented in three separate archives.",
-        "She lets Dash's late arrival pass without much comment, and turns it into a lesson instead.",
-        "A private collector currently owns the Threadglass.",
-        "The disc is etched with a spiral pattern."
+        "The Threadglass was documented in three separate archives across two centuries.",
+        "She lets Dash's late arrival pass without much comment and turns it into a lesson.",
+        "A private collector with a very good lawyer currently owns the Threadglass.",
+        "The disc is etched with a spiral pattern that curves in on itself like a shell."
       ],
       "key": [
         0,
@@ -1021,10 +1021,10 @@
       "dok": 2,
       "stem": "Why has Theo stepped over the loose floorboard every day for the past year, instead of just walking on it?",
       "choices": [
-        "Stepping on it makes a sound like a complaint, and nobody on the floor has ever mentioned it.",
+        "Stepping on it makes a sound like a complaint.",
         "His landlord warned him never to step on that spot.",
-        "He does not realize the floorboard is loose.",
-        "The floorboard is sharp enough to be dangerous."
+        "He does not realize that the floorboard in the hallway is loose.",
+        "The loose floorboard is sharp enough to be dangerous to step on."
       ],
       "key": 0,
       "distractorRationale": {
@@ -1117,10 +1117,10 @@
       "dok": 3,
       "stem": "Finch says the Threadglass was taken from three different countries. What does this detail suggest about whoever wanted it?",
       "choices": [
-        "Someone valued it enough to risk being caught multiple times, in multiple places.",
-        "No single collector ever cared enough to keep it safely.",
+        "Someone wanted it enough to risk getting caught three times.",
+        "No single collector ever cared enough to keep it safe for very long.",
         "The object was too fragile to stay anywhere for long.",
-        "Museums kept accidentally losing track of the same object."
+        "Museums in three countries kept losing track of the same object by accident."
       ],
       "key": 0,
       "distractorRationale": {
@@ -1238,12 +1238,12 @@
       "partA": {
         "stem": "This entry is organized into four labeled sections. What is the purpose of the \"Documented history\" section specifically?",
         "choices": [
-          "To trace who owned or held the object over time, up to the point it went missing.",
           "To describe exactly what the object looks like.",
+          "To trace who owned or held the object over time, up to the point it went missing.",
           "To explain the legend the object is connected to.",
-          "To give the Archive's best guess about where the object is now."
+          "To give the Archive's best guess, from an insurance filing, about where the object is now."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1254,14 +1254,14 @@
           "It is about a hero who escaped a builder's maze by following a single unbroken thread."
         ],
         "key": {
-          "0": 2,
-          "1": 0,
+          "0": 0,
+          "1": 2,
           "2": 3,
           "3": 1
         }
       },
       "distractorRationale": {
-        "1": "That line comes from the Description section, which covers appearance, not ownership history.",
+        "0": "That line comes from the Description section, which covers appearance, not ownership history.",
         "2": "That line comes from the Origin section, which covers the legend behind the object, not who has owned it.",
         "3": "That line comes from the Current status section, which covers where the object is believed to be now, not its past ownership."
       },
@@ -1320,12 +1320,12 @@
       "partA": {
         "stem": "According to the entry, why do Archive researchers think the Threadglass is a later tribute rather than a genuine prop from the original legend?",
         "choices": [
-          "Glassmaking of that quality did not exist when the maze legend is set.",
           "The disc has never been photographed clearly.",
+          "Glassmaking of that quality did not exist when the maze legend is set.",
           "The disc was found in a family collection, not a temple.",
-          "The spiral pattern does not match the maze legend closely enough."
+          "The spiral pattern on its face does not match the maze in the legend closely enough."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1336,14 +1336,14 @@
           "The etching is shallow."
         ],
         "key": {
-          "0": 1,
-          "1": 3,
+          "0": 3,
+          "1": 1,
           "2": 0,
           "3": 2
         }
       },
       "distractorRationale": {
-        "1": "The entry never discusses photography at all. The shallow etching is about how the pattern catches light, not about image quality.",
+        "0": "The entry never discusses photography at all. The shallow etching is about how the pattern catches light, not about image quality.",
         "2": "Being found in a family collection describes a much later stage of the object's history. It says nothing about whether the object is old enough to be part of the original legend.",
         "3": "This line describes the spiral as a single unbroken line, which actually matches the legend closely. It does not describe any mismatch."
       },
@@ -1361,12 +1361,12 @@
       "partA": {
         "stem": "What is unusual about how the Wyrdstone was actually taken?",
         "choices": [
-          "The person who took it filed correct loan paperwork first, then vanished with the stone anyway.",
           "It was stolen during a break-in at a museum at night.",
-          "It was taken by someone who forged the university's paperwork.",
-          "It disappeared from a shrine where it had been left by a believer."
+          "The borrower filed correct loan paperwork, then vanished with the stone anyway.",
+          "It was taken by someone who forged the university's loan paperwork to get it out.",
+          "It disappeared from the shrine where a believer had left it long ago as a tribute."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1377,16 +1377,16 @@
           "The loan paperwork was completed and filed correctly."
         ],
         "key": {
-          "0": 3,
-          "1": 2,
+          "0": 2,
+          "1": 3,
           "2": 1,
           "3": 0
         }
       },
       "distractorRationale": {
-        "1": "This line describes how archaeologists originally found the stone, decades before it went missing. It has nothing to do with the actual theft.",
-        "2": "This line is from the Origin section and describes an ancient practice, long before the modern loan. It does not describe how the stone recently disappeared.",
-        "3": "The researcher's institution having no record explains why the loan looks fake in hindsight, but the paperwork itself was filed correctly at the time, which is the detail the item asks about."
+        "0": "This line describes how archaeologists originally found the stone, decades before it went missing. It has nothing to do with the actual theft.",
+        "2": "This line shows the researcher's listed institution has never heard of that name, which can sound like forgery.  The loan paperwork itself was completed and filed correctly.",
+        "3": "This line, from the Origin section, tells where the stone was most likely left long ago.  It went missing much later, after a loan from a teaching collection."
       },
       "explain": "What makes this theft unusual is the method: the borrower did everything correctly on paper, filing a legitimate-looking loan request, and simply never returned the object. That is very different from a break-in or an obviously forged document."
     },
@@ -1402,32 +1402,32 @@
       "partA": {
         "stem": "What is the central idea of the Wyrdstone's \"Documented history\" section?",
         "choices": [
-          "A properly filed loan is how the stone actually disappeared, which makes the theft hard to trace.",
-          "The stone was studied constantly for thirty years.",
-          "The stone was stolen the same week it was excavated.",
-          "The university refused to lend the stone to outside researchers."
+          "The stone was studied constantly for thirty years in the university's teaching collection.",
+          "The stone went out on a correctly filed loan and was never returned.",
+          "The stone was stolen by a visiting researcher the same week it was excavated.",
+          "The university refused to lend the stone to any researcher from outside its own walls."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "The loan paperwork was completed and filed correctly.",
+          "The researcher's listed institution has no record of anyone by that name.",
           "It was logged into a teaching collection, where it sat largely unexamined for over thirty years.",
           "A visiting researcher requested it for study eight years ago.",
           "The stone itself was never returned."
         ],
         "key": {
-          "0": 3,
-          "1": 1,
+          "0": 1,
+          "1": 3,
           "2": 2,
           "3": 0
         }
       },
       "distractorRationale": {
-        "1": "This line says the opposite: the stone sat largely unexamined for over thirty years, not under constant study.",
-        "2": "The excavation and the loan request are separated by more than thirty years in the passage, not the same week.",
-        "3": "The university did approve and file the loan paperwork correctly. It never refused to lend the stone."
+        "0": "This line says the opposite: the stone sat largely unexamined for over thirty years, not under constant study.",
+        "2": "A visiting researcher did request the stone, but eight years ago, more than thirty years after the excavation.  It was not taken the same week it was found.",
+        "3": "This line shows the listed institution has no record of the researcher, which could sound like a reason to refuse.  The loan paperwork was still completed and filed correctly, so the university did lend the stone."
       },
       "explain": "The section's real point is that the stone sat quietly for decades, then disappeared through a request that looked completely normal on paper. That is what makes the case so hard to trace, not constant study or an outright refusal to lend it."
     },
@@ -1445,7 +1445,7 @@
         "choices": [
           "Each section builds on the last, so the reader understands the object's full history before learning what is still unknown today.",
           "The Archive always alphabetizes its section headings.",
-          "Current status is the least important section, so it goes last.",
+          "Current status is the least important section of the entry, so the Archive puts it last, where a reader can skip it.",
           "The current status was fully known before the rest of the entry was written."
         ],
         "key": 0
@@ -1459,18 +1459,18 @@
           "Any lead, however small, is to be logged immediately rather than investigated alone."
         ],
         "key": {
-          "0": 1,
+          "0": 2,
           "1": 0,
-          "2": 2,
+          "2": 1,
           "3": 3
         }
       },
       "distractorRationale": {
         "1": "The word alphabet appears in the Description section, describing the carved runes, not the Archive's rule for ordering its own section headings.",
-        "2": "No verified sighting existing is exactly why the case stays open and important. It argues against Current status being the least significant section.",
+        "2": "This line calls the Wyrdstone the Archive's oldest open case.  That makes its current status the most pressing part of the entry, not the least important.",
         "3": "Logging leads as they come in shows the case is still actively open, not that its status was already fully known before the rest of the entry was drafted."
       },
-      "explain": "The sections move in a logical order: what the object is, where it comes from, what happened to it, and only then, once all of that context exists, what is still unresolved today. Putting Current status last lets the reader understand the whole history before facing the open question."
+      "explain": "The sections move in a logical order: what the object is, where it comes from, what happened to it, and only then, once all of that context exists, what is still unresolved today.  Putting Current status last lets the reader understand the whole history before facing the open question."
     },
     {
       "id": "l2-ms-wyrdstone-loan-facts",
@@ -1484,21 +1484,21 @@
       "stem": "Select the three facts the entry states directly about how the Wyrdstone loan was handled.",
       "choices": [
         "A visiting researcher requested it for study eight years ago.",
+        "The researcher was later found and arrested for taking the stone.",
+        "The stone was insured for a large sum before it left the building.",
         "The loan paperwork was completed and filed correctly.",
-        "The researcher's listed institution has no record of anyone by that name.",
-        "The researcher was later arrested for the theft.",
-        "The university has since banned all outside loan requests.",
-        "The stone was insured for a large sum before it left the building."
+        "The university has since banned all outside loan requests for its collection.",
+        "The researcher's listed institution has no record of anyone by that name."
       ],
       "key": [
         0,
-        1,
-        2
+        3,
+        5
       ],
       "distractorRationale": {
-        "3": "The entry never mentions an arrest. It only says the researcher's listed institution could not be found, not that anyone was caught.",
-        "4": "The entry says nothing about the university changing its loan policy after this case.",
-        "5": "Insurance is never mentioned anywhere in this entry."
+        "1": "The entry never mentions an arrest. It only says the researcher's listed institution could not be found, not that anyone was caught.",
+        "2": "Insurance is never mentioned anywhere in this entry.",
+        "4": "The entry says nothing about the university changing its loan policy after this case."
       },
       "explain": "The entry states three clear facts about the loan: when it was requested, that the paperwork was filed correctly, and that the researcher's listed institution turned out not to exist. An arrest, a policy change, and insurance are never mentioned."
     },
@@ -1555,12 +1555,12 @@
       "partA": {
         "stem": "What is the central idea of the paragraph describing the Egyptian underworld?",
         "choices": [
-          "The Egyptian underworld is a journey with one decisive moment, not a place to simply arrive at.",
-          "The Egyptian underworld rewards only warriors who died in battle.",
+          "The Egyptian underworld rewards warriors who died in battle with a place in a golden hall.",
+          "The Egyptian underworld is less a place than a journey toward one decisive moment.",
           "The Egyptian underworld has no guarded regions at all.",
-          "The Egyptian underworld is ruled by a ferryman who demands payment."
+          "The Egyptian underworld is ruled by a ferryman who demands a coin to cross its river."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1571,14 +1571,14 @@
           "The ferryman will not carry a soul across without payment."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
+          "0": 0,
+          "1": 1,
           "2": 2,
           "3": 3
         }
       },
       "distractorRationale": {
-        "1": "Preparing for a final conflict describes the Norse golden hall for warriors, not anything in the Egyptian underworld's description.",
+        "0": "Preparing for a final conflict describes the Norse golden hall for warriors, not anything in the Egyptian underworld's description.",
         "2": "This line says the opposite of the choice: every region is guarded, according to the passage, not left open.",
         "3": "A ferryman demanding payment is a detail from the Greek underworld's description, not the Egyptian one."
       },
@@ -1595,12 +1595,12 @@
       "dok": 4,
       "stem": "Select the three statements that correctly describe a difference between at least two of the three underworlds described in the passage.",
       "choices": [
-        "The Greek underworld mostly leaves the dead un-judged, while the Egyptian underworld judges every single soul.",
-        "The Norse underworld sorts the dead by how they died, while the Egyptian underworld sorts them by a single weighing at the end of a journey.",
-        "The Egyptian underworld requires a coin for passage, exactly like the Greek underworld does.",
-        "The Norse tradition spends much less time describing its second realm than the Egyptian tradition spends on its journey.",
-        "All three traditions agree that fairness alone decides where the dead end up.",
-        "The Greek underworld and the Norse underworld are described in exactly the same amount of detail."
+        "The Greek underworld mostly leaves the dead unjudged, while the Egyptian one judges each soul.",
+        "The Norse underworld sorts the dead by how they died, while the Egyptian underworld weighs each heart at the end.",
+        "The Egyptian underworld is a single kingdom with provinces, while the Greek one is a journey.",
+        "The Norse tradition says little about its second realm, while the Egyptian one details its journey.",
+        "The Greek underworld sends warriors who died in battle to a golden hall, while the Norse one does not.",
+        "The Greek ferryman carries every soul across for free, while each Egyptian traveler must pay a coin."
       ],
       "key": [
         0,
@@ -1608,11 +1608,11 @@
         3
       ],
       "distractorRationale": {
-        "2": "A coin for passage is a Greek-specific detail. The passage never describes anything like it in the Egyptian underworld.",
-        "4": "The passage says the three traditions disagree about whether fairness or fate decides anyone's fate. They do not all agree on this point.",
-        "5": "The passage never compares the exact length or detail level of the Greek and Norse descriptions to each other directly."
+        "2": "The passage has these the other way around.  The Greek underworld is the single kingdom with regions, and the Egyptian one is the journey through twelve regions.",
+        "4": "The golden hall for warriors who died in battle belongs to the Norse underworld.  The passage never gives the Greek underworld a hall for warriors.",
+        "5": "The Greek ferryman will not carry a soul across without payment.  The passage never asks an Egyptian traveler for a coin, only for the correct words and a heart that balances the feather."
       },
-      "explain": "Real differences the passage draws out include who gets judged, what sorts the dead in each tradition, and how much attention each tradition gives to its less dramatic afterlife. A shared coin custom, universal agreement on fairness, and equal detail across two specific traditions are not things the passage actually states."
+      "explain": "Real differences the passage draws out include who gets judged, what sorts the dead in each tradition, and how much attention each tradition gives to its less dramatic afterlife.  Each of the other three statements hands a detail to the wrong tradition: the single kingdom is Greek, the golden hall is Norse, and the ferryman who wants a coin is Greek."
     },
     {
       "id": "l2-hot-description-vs-history",
@@ -1723,17 +1723,17 @@
           "choices": [
             "the researcher filed the paperwork correctly, the same as any real loan request",
             "the museum had already agreed to donate the stone permanently",
-            "the researcher was a former Archive employee everyone trusted by reputation"
+            "the researcher was a well-known former Archive employee everyone trusted on sight"
           ],
           "key": 0
         },
         {
           "choices": [
-            "the institution listed on the paperwork turns out to have no record of that researcher at all",
             "the stone was insured for its full value before it left the building",
+            "the institution listed on the paperwork turns out to have no record of that researcher at all",
             "the university has since closed its teaching collection completely"
           ],
-          "key": 0
+          "key": 1
         }
       ],
       "explain": "The loan looks unremarkable at the time because every form was filed the way a genuine request would be, which is exactly why the case is so hard to trace once the listed institution turns out not to know the researcher at all. Insurance and a closed collection are never mentioned anywhere in this entry."
@@ -1751,19 +1751,19 @@
       "blanks": [
         {
           "choices": [
-            "judged, sorted by how they died, or left simply to continue existing",
             "guarded by the same single ruler in every tradition",
+            "judged, sorted by how they died, or left simply to continue existing",
             "reachable only by burning the body first"
           ],
-          "key": 0
+          "key": 1
         },
         {
           "choices": [
-            "a real place, reached by a specific path worth describing in careful detail",
             "an idea no culture ever bothered to describe in any detail",
-            "exactly the same distance from the world of the living in each tradition"
+            "a real place, reached by a specific path worth describing in careful detail",
+            "exactly the same distance from the world of the living in each of the three traditions"
           ],
-          "key": 0
+          "key": 1
         }
       ],
       "explain": "The passage spends most of its length on disagreement, judged against sorted against simply continuing, and then closes on the one thing every tradition shares: treating the border itself as a real, describable place, not a vague idea. Nothing in the passage claims the traditions share a single ruler or an identical distance."
@@ -1780,7 +1780,7 @@
       "stem": "According to the entry, why has no one ever measured the Threadglass's spiral exactly the same way twice?",
       "choices": [
         "The glass is too fragile to be touched or handled.",
-        "The Archive has never allowed anyone to examine it closely.",
+        "The Archive has never allowed anyone to examine the disc closely.",
         "The line has no clear start or end point for a ruler to use.",
         "The spiral pattern changes slightly every year."
       ],
@@ -1804,7 +1804,7 @@
       "stem": "According to its catalog entry, what older legend is the Threadglass loosely connected to?",
       "choices": [
         "Three sisters who carved the shape of every life as it happened.",
-        "A search across every province of a kingdom for scattered pieces.",
+        "A search across every province of a kingdom for the scattered pieces of a god.",
         "A chamber a priesthood has guarded for six generations.",
         "A hero who escaped a builder's maze by following a single unbroken thread."
       ],
@@ -1827,10 +1827,10 @@
       "dok": 3,
       "stem": "This entry is organized into four labeled sections. What is the specific purpose of the \"Origin\" section?",
       "choices": [
-        "To explain what older legend or story the object is historically connected to.",
-        "To describe exactly what the object looks like.",
+        "To explain which older legend the object is historically tied to.",
+        "To describe exactly what the object looks like, down to its size and color.",
         "To trace who has owned the object over time.",
-        "To report where the object is currently believed to be."
+        "To report where the object is currently believed to be, based on an insurance filing."
       ],
       "key": 0,
       "distractorRationale": {
@@ -1851,7 +1851,7 @@
       "dok": 2,
       "stem": "What does the readable portion of the Wyrdstone's carved inscription actually say?",
       "choices": [
-        "A full warning against ever removing the stone from its shrine.",
+        "A full warning against ever removing the stone from the shrine where it was left.",
         "\"Thread of what was already true,\" which is not even a complete sentence.",
         "The name of the person who originally carved it.",
         "Detailed instructions for how the stone should be used."
@@ -1877,8 +1877,8 @@
       "choices": [
         "Egyptian tradition requires a coin to balance the scale against the feather.",
         "Norse tradition uses a coin to mark where a warrior died in battle.",
-        "The Greek underworld's ferryman will not carry a soul across the boundary river without payment.",
-        "All three traditions described in the passage share the exact same coin custom."
+        "The Greek ferryman will not carry a soul across the boundary river without payment.",
+        "All three traditions described in the passage share the exact same custom of burying a coin."
       ],
       "key": 2,
       "distractorRationale": {
@@ -1899,10 +1899,10 @@
       "dok": 3,
       "stem": "What is the central idea of the Wyrdstone's catalog entry as a whole?",
       "choices": [
-        "The Wyrdstone is worthless and not worth the Archive's time to pursue.",
-        "A museum employee was definitely responsible for stealing the stone.",
-        "Runic inscriptions like this one are always impossible to translate.",
-        "A carefully documented object can still vanish through a theft that looks completely ordinary on paper."
+        "The Wyrdstone is worthless and not worth the Archive's time to pursue any further.",
+        "A museum employee was definitely responsible for stealing the stone from its collection.",
+        "Runic inscriptions like the one carved on this stone are always impossible to translate.",
+        "A well-recorded object can still vanish in a theft that looks ordinary on paper."
       ],
       "key": 3,
       "distractorRationale": {
@@ -1972,12 +1972,12 @@
       "partA": {
         "stem": "What does the thin dark line circling the pedestal most likely mean?",
         "choices": [
-          "It is a hidden security sensor that would trigger if the Threadglass is moved or touched.",
-          "It is a decorative border painted around the pedestal.",
-          "It marks where visitors are allowed to stand.",
-          "It shows where the floor was recently repaired."
+          "It marks the spot where visitors are allowed to stand and look at the Threadglass.",
+          "It is a decorative border painted around the pedestal to make the display look grand.",
+          "It is a hidden sensor that guards the pedestal like an unseen fence.",
+          "It shows where the gallery floor was recently torn up and repaired around the pedestal."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1988,15 +1988,15 @@
           "Instead the Threadglass sits on an open pedestal, in the center of a bright room, lit from above."
         ],
         "key": {
-          "0": 1,
+          "0": 0,
           "1": 3,
-          "2": 0,
+          "2": 1,
           "3": 2
         }
       },
       "distractorRationale": {
-        "1": "The passage describes the Threadglass sitting on an open, brightly lit pedestal, meant to look impressive, not decorated with a painted border.",
-        "2": "Being close enough to touch tells you the object is unprotected by distance. It does not describe a marked boundary for where visitors may stand.",
+        "0": "Being close enough to touch tells you the object is unprotected by distance. It does not describe a marked boundary for where visitors may stand.",
+        "1": "A bright, open display can look grand, but the passage compares the line to a fence nobody could see unless they already knew where to look.  A decoration is meant to be seen, and this line is meant to go unnoticed.",
         "3": "Theo's surprise at the gallery floor is about the lack of glass cases and ropes in general. It is not about a repair to the floor itself."
       },
       "explain": "The passage calls the line \"like a fence nobody could see unless they already knew where to look,\" right after noting the pedestal has no case at all. Given Theo's earlier thought that the open display was either confidence or an obvious trap, the line reads as a hidden sensor rather than decoration or a foot-traffic marker."
@@ -2013,12 +2013,12 @@
       "partA": {
         "stem": "What does Theo's answer to Kade reveal about his approach to lying under pressure?",
         "choices": [
-          "He builds his cover story around one true, checkable detail rather than inventing something new.",
-          "He avoids answering her question at all.",
-          "He panics and admits he does not know why he is there.",
-          "He tells Kade a completely different story than the one on his badge."
+          "He avoids her question and only offers to leave the frame and come back.",
+          "He builds his cover around one true detail that can be checked.",
+          "He panics under her level questioning and admits he does not know why he is there.",
+          "He tells Kade a completely different story from the one printed on his badge."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2029,15 +2029,15 @@
           "Theo's answer is ready before he decides to give it."
         ],
         "key": {
-          "0": 1,
-          "1": 3,
+          "0": 3,
+          "1": 1,
           "2": 0,
           "3": 2
         }
       },
       "distractorRationale": {
-        "1": "This describes Kade's calm tone while asking her question. It says nothing about Theo panicking or freezing up in response.",
-        "2": "Theo's answer arrives instantly and confidently, which is the opposite of avoiding the question entirely.",
+        "0": "This line shows Theo's answer is ready at once, so he does not avoid her question.  He names the framing shop first and offers to leave the frame after that.",
+        "2": "This line describes Kade's calm, level tone as she asks who sent him.  It says nothing about Theo panicking, and he never admits anything.",
         "3": "The framing shop detail matches the cover story on his badge exactly. It is not a new or different story from what he started with."
       },
       "explain": "Theo's whole strategy is built on Finch's rule: never invent a new lie, just offer a true, boring detail that can be checked. Mentioning the real framing shop by name is exactly that kind of detail, not a panic response or a contradiction of his cover."
@@ -2054,12 +2054,12 @@
       "partA": {
         "stem": "How does Theo's private assessment of the open pedestal compare to what a careless display might seem to suggest at first glance?",
         "choices": [
-          "The open display looks careless, but Theo suspects it actually signals confidence or a hidden trap.",
-          "The open display convinces Theo the gallery has no security at all.",
+          "The open display convinces Theo that the gallery has no real security of any kind.",
+          "The open display looks careless, but Theo sees it as confidence or a trap.",
           "The open display makes Theo believe Kade is not the real owner.",
-          "The open display leads Theo to believe the Threadglass is a fake."
+          "The open display leads Theo to believe that the Threadglass on the pedestal is a fake."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2070,14 +2070,14 @@
           "He has already counted the four exits and the two visible cameras."
         ],
         "key": {
-          "0": 1,
-          "1": 3,
+          "0": 3,
+          "1": 1,
           "2": 0,
           "3": 2
         }
       },
       "distractorRationale": {
-        "1": "Counting exits and cameras shows Theo is actively tracking real security measures. That runs against the idea that he thinks there is no security at all.",
+        "0": "Counting exits and cameras shows Theo is actively tracking real security measures. That runs against the idea that he thinks there is no security at all.",
         "2": "Kade's introduction is a neutral piece of dialogue. It does not cause Theo to doubt whether she owns the gallery.",
         "3": "This line describes what Theo expected to see before he arrived, based on ordinary museums. It does not describe a conclusion he reaches about whether the object is fake."
       },
@@ -2095,20 +2095,20 @@
       "stem": "Select the three details that show Theo is gathering information even while appearing to just make a delivery.",
       "choices": [
         "He counts the four exits and the two visible cameras.",
-        "He notices the thin dark line circling the pedestal.",
+        "He wears a laminated badge identifying him as a delivery worker.",
         "He carries a floor plan Mila drew, memorized rather than carried on paper.",
         "He hands over the box at the front desk.",
-        "He wears a laminated badge identifying him as a delivery worker.",
+        "He notices the thin dark line circling the pedestal.",
         "He leaves the gallery when Kade tells him to."
       ],
       "key": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "distractorRationale": {
+        "1": "The badge is part of his disguise. It is something he uses to blend in, not a piece of information he collects.",
         "3": "Handing over the box is simply completing his cover task. It is an action he takes, not information he is gathering.",
-        "4": "The badge is part of his disguise. It is something he uses to blend in, not a piece of information he collects.",
         "5": "Leaving when told is following an instruction. It does not involve noticing or gathering anything new."
       },
       "explain": "Three moments show Theo actively collecting intelligence: counting exits and cameras, noticing the hidden security line, and carrying a memorized floor plan. Wearing the badge, handing over the box, and leaving on cue are all part of playing the cover role, not gathering information."
@@ -2125,12 +2125,12 @@
       "partA": {
         "stem": "What does Dash's decision to write down the two-minute gap, instead of guessing what happened during it, reveal about his approach to the job?",
         "choices": [
-          "He values recording exactly what he observed over guessing at an explanation.",
-          "He does not trust Theo to handle the situation.",
-          "He is more interested in the van than in Theo.",
+          "He does not trust Theo to handle the job, so he watches the door for trouble.",
+          "He values recording exactly what he saw over guessing at what it meant.",
+          "He cares more about the van blocking his view than about what Theo is doing.",
           "He believes something has definitely gone wrong."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2141,14 +2141,14 @@
           "It is not the same fact as something has gone wrong."
         ],
         "key": {
-          "0": 2,
-          "1": 1,
+          "0": 1,
+          "1": 2,
           "2": 0,
           "3": 3
         }
       },
       "distractorRationale": {
-        "1": "Calling Theo's cover story clever shows Dash trusts the plan. It does not suggest distrust of Theo's ability to handle himself.",
+        "0": "Calling Theo's cover story clever shows Dash trusts the plan. It does not suggest distrust of Theo's ability to handle himself.",
         "2": "This line is about what Dash could not see, not about which person or object interests him more.",
         "3": "Dash explicitly separates the fact of not seeing Theo from any conclusion that something has gone wrong. This line argues against the choice, not for it."
       },
@@ -2166,12 +2166,12 @@
       "partA": {
         "stem": "Why does Dash decide not to keep thinking about the possibility that something happened during the van's two minutes?",
         "choices": [
-          "Dwelling on an unconfirmed fear will not give him any new, useful information.",
+          "Mila, listening on the other channel, orders him over the radio to stop thinking about it.",
           "He is confident Theo is never in any real danger.",
-          "Mila orders him to stop thinking about it over the radio.",
+          "Dwelling on an unconfirmed fear will not give him any new, useful information.",
           "He falls asleep briefly and forgets about the van."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2182,15 +2182,15 @@
           "I have a radio, a folded map of the block, and a sandwich I am too nervous to eat."
         ],
         "key": {
-          "0": 2,
+          "0": 1,
           "1": 0,
-          "2": 1,
+          "2": 2,
           "3": 3
         }
       },
       "distractorRationale": {
+        "0": "Mila is listening on the radio, but nothing in the passage shows her actually telling Dash what to think about.",
         "1": "Admiring the cover story shows trust in the plan overall. It is not the same as being certain Theo faces no danger at all.",
-        "2": "Mila is listening on the radio, but nothing in the passage shows her actually telling Dash what to think about.",
         "3": "Being too nervous to eat shows Dash is alert and anxious, not drowsy or forgetful."
       },
       "explain": "Dash chooses to redirect his attention to something useful, counting the door, rather than spiral on a possibility he cannot confirm either way. Sitting with an unanswerable fear does not help him do his actual job, which is watching the door."
@@ -2205,14 +2205,14 @@
       "coachTopic": "inference-relationships",
       "dok": 3,
       "partA": {
-        "stem": "How does the passage show that Dash and Theo keep acting like strangers, even after Theo exits the building safely?",
+        "stem": "How does the passage show that Dash and Theo keep their connection hidden, even after Theo comes out safely?",
         "choices": [
+          "Theo rushes off down the sidewalk, so he is gone before anyone can link him to Dash.",
           "Neither of them acknowledges the other, and they deliberately walk away in different directions.",
-          "Dash immediately runs across the street to meet Theo.",
-          "Theo waves at Dash's bench on his way out.",
-          "They radio each other by name to confirm the meeting point."
+          "Theo pretends not to see Dash, while Dash gives a small wave that a passer-by would miss.",
+          "They talk in secret code names over the radio, so anyone listening cannot tell who they are."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2223,18 +2223,18 @@
           "We are, by design, two strangers who have never met, walking away from the same building in two different directions."
         ],
         "key": {
-          "0": 3,
-          "1": 2,
+          "0": 2,
+          "1": 3,
           "2": 1,
           "3": 0
         }
       },
       "distractorRationale": {
-        "1": "This line describes Theo leaving the building. It does not describe Dash crossing the street or the two of them meeting up.",
-        "2": "This line describes a coded radio signal, two clicks, rather than names spoken aloud over the channel.",
-        "3": "Theo deliberately not looking at the bench is the opposite of waving. It reinforces that they are acting like strangers, not greeting each other."
+        "0": "This line shows Theo coming out onto the sidewalk, not rushing off.  The very next sentence says he walks at exactly the speed of someone who is not in a hurry, since that is the only speed that looks right from a distance.",
+        "2": "This line fits the first half of this choice, because Theo does not look at Dash's bench.  The second half is wrong: Dash says, \"I do not wave,\" so there is no wave at all, not even a small one.",
+        "3": "This line shows that the radio signal is two clicks, which means clear, no pickup.  Nobody speaks on the radio at all, so no code names are used, and the only answer is one click back."
       },
-      "explain": "The passage is explicit that staying apart is deliberate: two strangers who have never met, walking in different directions, even though they clearly know each other and just finished the same job. No wave, no names on the radio, nothing that would connect them if anyone happened to be watching."
+      "explain": "The passage is explicit that staying apart is deliberate: two strangers who have never met, walking in different directions, even though they clearly know each other and just finished the same job.  No wave, no hurry, no names on the radio, nothing that would connect them if anyone happened to be watching."
     },
     {
       "id": "l3-ebsr-accurate-not-complete",
@@ -2248,12 +2248,12 @@
       "partA": {
         "stem": "Is Theo's original log entry, \"I entered and left without incident,\" false?",
         "choices": [
-          "No, it is accurate but incomplete, since it leaves out a detail Theo judged unimportant on his own.",
           "Yes, because he never actually spoke with Kade at all.",
-          "Yes, because he invented the framing order cover story on the spot.",
-          "No, and the log already includes everything meaningful that happened."
+          "No, it is accurate but leaves out a detail Theo decided was unimportant.",
+          "No, and it needs nothing added to it, since it already covers everything Theo did.",
+          "Yes, it is false, because it leaves out the one moment that might matter most."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2264,16 +2264,16 @@
           "Theo's claim, I entered and left without incident, is completely accurate."
         ],
         "key": {
-          "0": 3,
-          "1": 1,
+          "0": 1,
+          "1": 3,
           "2": 2,
           "3": 0
         }
       },
       "distractorRationale": {
-        "1": "The log itself states that Theo spoke with a woman who introduced herself as Kade. That directly contradicts the idea that no conversation happened.",
-        "2": "The passage never says the cover story was invented on the spot. It is treated throughout as a planned, rehearsed cover, not something made up in the moment.",
-        "3": "This line explicitly says something important was left out, a flicker on Kade's face, which contradicts the idea that the log already includes everything meaningful."
+        "0": "The log itself states that Theo spoke with a woman who introduced herself as Kade. That directly contradicts the idea that no conversation happened.",
+        "2": "This line says the log covers everything Theo did.  It still leaves out something he saw, and Finch has him add those three seconds, so the log did need something added.",
+        "3": "This line shows the log leaves a moment out.  Leaving a detail out makes an account incomplete, not false, and the passage calls Theo's claim completely accurate."
       },
       "explain": "Finch's whole point is that Theo's log is technically true and still misses something that might matter. Being accurate and being complete are not the same thing, and the flicker of recognition on Kade's face is exactly the kind of detail an accurate-but-incomplete account can hide."
     },
@@ -2289,34 +2289,34 @@
       "partA": {
         "stem": "How does Dash's log differ from Theo's, in terms of what each of them chose to do with uncertainty?",
         "choices": [
+          "Dash's log gets the minute the van double-parked wrong, while Theo's log is completely accurate.",
           "Dash recorded his uncertainty directly, while Theo quietly resolved his and left it out.",
-          "Dash's log contains errors, while Theo's log is completely accurate.",
-          "Dash refused to write a log at all, while Theo wrote two separate versions.",
-          "Dash's log covers a longer time period than Theo's."
+          "Dash wrote far more than he needed to, while Theo wrote only what mattered most.",
+          "Dash logged only the two minutes the van was parked, while Theo logged his whole visit."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "It states flatly that the door was empty both before and after, and that nothing could be confirmed about the two minutes in between.",
+          "It is a true and complete account of everything Theo did.",
           "It gives the exact minute the van double-parked, and the exact minute it left.",
           "Dash's log is thorough to the point of stubbornness.",
           "Dash wrote down the gap."
         ],
         "key": {
-          "0": 3,
-          "1": 1,
+          "0": 0,
+          "1": 3,
           "2": 2,
-          "3": 0
+          "3": 1
         }
       },
       "distractorRationale": {
-        "1": "The exact times recorded show precision, not mistakes. Nothing in the passage suggests Dash's log contains any errors.",
-        "2": "Dash's log is described as thorough, not refused. Both boys wrote a single log each, and neither wrote two versions.",
-        "3": "This line describes what the log honestly admits it cannot confirm. It does not compare the length of time each log covers."
+        "0": "This line says Theo's account is true about what he did.  It does not say Dash got anything wrong, and nothing in the passage says Dash's log has a mistake in it.",
+        "2": "This line calls Dash's log thorough, even stubborn, but nothing says he wrote more than he needed.  Theo did not keep only what mattered most, since his log left out the one moment that might matter most.",
+        "3": "This line gives the minute the van double-parked and the minute it left.  Dash's log also says the door was empty both before and after, so it covers more than those two minutes."
       },
-      "explain": "The real difference is what each boy did with the part he could not be sure about. Dash wrote the gap down exactly as a gap, while Theo noticed something uncertain, quietly decided it was not important, and left it out of his account entirely."
+      "explain": "The real difference is what each boy did with the part he could not be sure about.  Dash wrote the gap down exactly as a gap, while Theo noticed something uncertain, quietly decided it was not important, and left it out of his account entirely."
     },
     {
       "id": "l3-ms-finchs-method",
@@ -2329,22 +2329,22 @@
       "dok": 3,
       "stem": "Select the three things Finch's method of reading the logs out loud accomplishes in this scene.",
       "choices": [
-        "It catches the exact detail Theo's log leaves out.",
-        "It shows the crew that Dash's habit of recording gaps honestly is valuable.",
-        "It forces Theo to write the missing detail down himself, in his own words.",
-        "It punishes Dash for writing too much detail.",
         "It proves that Theo lied in his original log.",
-        "It ends the exercise early because of Theo's mistake."
+        "It shows the crew that Dash's habit of recording gaps honestly is valuable.",
+        "It ends the exercise early because of Theo's mistake.",
+        "It punishes Dash for writing too much detail.",
+        "It catches the exact detail Theo's log leaves out.",
+        "It forces Theo to write the missing detail down himself, in his own words."
       ],
       "key": [
-        0,
         1,
-        2
+        4,
+        5
       ],
       "distractorRationale": {
-        "3": "Finch reads Dash's line twice with clear approval, since Dash wrote down the gap honestly. That is praise, not punishment.",
-        "4": "Finch and Theo both agree his original log was accurate, only incomplete. Nobody in the passage calls it a lie.",
-        "5": "The passage ends with Theo adding the missing detail to his log, not with the exercise being cut short."
+        "0": "Finch and Theo both agree his original log was accurate, only incomplete. Nobody in the passage calls it a lie.",
+        "2": "The passage ends with Theo adding the missing detail to his log, not with the exercise being cut short.",
+        "3": "Finch reads Dash's line twice with clear approval, since Dash wrote down the gap honestly. That is praise, not punishment."
       },
       "explain": "Finch's method does real work: it surfaces the missing three seconds, holds up Dash's honesty about uncertainty as the standard to meet, and makes Theo write the correction in his own words rather than simply telling him the answer. It is not punishment, proof of a lie, or an early end to the exercise."
     },
@@ -2483,19 +2483,19 @@
       "blanks": [
         {
           "choices": [
-            "a gap he could not see, exactly as a gap, without guessing what filled it",
             "a full description of everyone who entered the building that day",
-            "a guess about what the delivery van was carrying"
+            "the gap he could not see, exactly as a gap, with no guess",
+            "a guess about what the delivery van double-parked outside was carrying"
           ],
-          "key": 0
+          "key": 1
         },
         {
           "choices": [
-            "a brief change in Kade's expression that Theo decided on his own was not worth writing down",
             "the fact that he spoke with Kade at all",
+            "a brief change in Kade's expression that Theo decided on his own was not worth writing down",
             "the name of the framing shop he mentioned to her"
           ],
-          "key": 0
+          "key": 1
         }
       ],
       "explain": "Dash's discipline is recording an unseen gap honestly, as a gap, rather than filling it with a guess, while Theo's first draft is accurate about the meeting itself but silently drops a small, uncertain detail he decided on his own did not matter. Finch's question is what finally surfaces it."
@@ -2511,10 +2511,10 @@
       "dok": 3,
       "stem": "Why does Theo memorize Mila's floor plan instead of carrying a paper copy into the gallery?",
       "choices": [
-        "A paper copy could be found and used as evidence if he were ever searched.",
+        "A paper copy could be found and used as evidence against him.",
         "He simply forgot to bring the paper copy that day.",
-        "Mila refuses to let anyone else hold the paper copy.",
-        "Archive rules forbid carrying paper documents into a job."
+        "Mila refuses to let anyone else hold the paper copy of her plan.",
+        "Archive rules forbid anyone to carry paper documents into a job."
       ],
       "key": 0,
       "distractorRationale": {
@@ -2538,7 +2538,7 @@
         "Deliveries are never legally allowed to be questioned by security.",
         "A guarded building lets a delivery walk right up to the door without a second thought.",
         "Kade specifically requested a delivery be sent that day.",
-        "Theo has posed as a delivery worker many times before and is well known for it."
+        "Theo has posed as a delivery worker many times before and is well known for it at the gallery."
       ],
       "key": 1,
       "distractorRationale": {
@@ -2561,14 +2561,14 @@
       "choices": [
         "She immediately recognizes him as a serious threat to her gallery.",
         "She already knows exactly who sent him before he even answers.",
-        "She judges that pursuing the question further is not worth her effort, so she lets it go.",
-        "She believes his cover story completely, without a shred of doubt."
+        "She decides that catching him in a lie is not worth her effort.",
+        "She believes his cover story completely, without a shred of doubt about the shop."
       ],
       "key": 2,
       "distractorRationale": {
         "0": "The passage never shows Kade treating Theo as a threat; she studies him briefly and then simply moves on. If you picked this, you raised the stakes higher than the text supports.",
         "1": "Nothing in the passage suggests Kade already knows who sent Theo. Her question about who sent him implies the opposite, genuine uncertainty.",
-        "3": "\"Not worth the effort of catching him in something\" is not the same as full belief. You may have missed the difference between deciding to drop a question and being fully convinced by the answer."
+        "3": "\"Not worth the effort of catching in something\" is not the same as full belief.  You may have missed the difference between deciding to drop a question and being fully convinced by the answer."
       },
       "explain": "The passage describes Kade studying Theo only \"for exactly as long as it takes to decide he is not worth the effort of catching in something,\" a specific, calculated choice to stop paying attention rather than either suspicion resolved or full trust earned."
     },
@@ -2583,10 +2583,10 @@
       "dok": 3,
       "stem": "Why does Finch read debrief logs out loud to the whole group, without warning anyone beforehand?",
       "choices": [
-        "Archive record-keeping rules require every log to be read aloud.",
-        "She has trouble reading quietly to herself.",
-        "She wants to embarrass whoever made a mistake in front of the group.",
-        "It is a deliberate teaching method, matching how she never explains a test until it is already underway."
+        "Archive record-keeping rules require every debrief log to be read aloud to the group.",
+        "She has trouble reading quietly to herself and finds it easier out loud.",
+        "She wants to embarrass whoever made a mistake, in front of the whole group.",
+        "It is a deliberate method, like never explaining a test beforehand."
       ],
       "key": 3,
       "distractorRationale": {
@@ -2697,12 +2697,12 @@
       "partA": {
         "stem": "What makes the Temple Chronicle's claim about the chamber difficult to verify from outside?",
         "choices": [
-          "The same priesthood that guards the chamber is also the one that wrote its history.",
+          "The chronicle was carved centuries after Osiris was struck down by his brother.",
           "The chronicle never mentions who commissioned it.",
-          "The chronicle was written centuries after Osiris died.",
-          "The chronicle contradicts itself about who sealed the chamber."
+          "The temple that guards the chamber also wrote its history, under its own seal.",
+          "The chronicle contradicts itself about who sealed the chamber and what stone was used."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from Source A best supports the answer you just gave?",
@@ -2713,18 +2713,18 @@
           "She carried a single seal, cut from the same stone as the temple's own base."
         ],
         "key": {
-          "0": 1,
+          "0": 2,
           "1": 0,
-          "2": 2,
+          "2": 1,
           "3": 3
         }
       },
       "distractorRationale": {
-        "1": "This line names the commissioning king directly, which contradicts the idea that no commissioner is ever mentioned.",
-        "2": "This opening line of the story gives no date or century for when the chronicle itself was carved. It does not support a claim about the timing of the writing.",
-        "3": "This line is a plain, consistent detail about the seal's material. Nothing about it contradicts anything else the chronicle states."
+        "0": "This opening line of the story gives no date or century for when the chronicle itself was carved.  It does not support a claim about the timing of the writing.",
+        "1": "This line mentions the chronicle's own commissioning king.  The chronicle never gives his name, but it does say that a king ordered it.  Knowing his name would not help an outsider check the claim anyway.",
+        "3": "This line is a plain, consistent detail about the seal's material.  Nothing about it contradicts anything else the chronicle states."
       },
-      "explain": "The chronicle carries no independent author, only the temple's own seal, and the same priesthood that guards the chamber is the priesthood whose authority stands behind the claim. That means nobody outside the temple ever had a chance to check the story before it was carved into the wall."
+      "explain": "The chronicle carries no independent author, only the temple's own seal, and the same priesthood that guards the chamber is the priesthood whose authority stands behind the claim.  That means nobody outside the temple ever had a chance to check the story before it was carved into the wall."
     },
     {
       "id": "l4-ebsr-faith-not-proof",
@@ -2779,12 +2779,12 @@
       "partA": {
         "stem": "The chronicle claims \"no enemy of the temple has ever set foot in this chamber.\" What does the existence of a document like the Reckoner's Ledger, Source B, suggest about that specific claim?",
         "choices": [
-          "The claim may be false, since an outside account describes entering the very same chamber.",
-          "The claim is proven completely true by the ledger.",
           "The ledger agrees the chamber has never been entered.",
-          "The ledger has nothing to do with the chamber the chronicle describes."
+          "The claim is proven completely true by the ledger.",
+          "The claim may be false, since an outside account describes entering the very same chamber.",
+          "The ledger describes some other temple's chamber, not the innermost room the chronicle describes."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from Source A best supports the answer you just gave?",
@@ -2795,15 +2795,15 @@
           "She pressed it into the innermost room of this very temple."
         ],
         "key": {
-          "0": 2,
+          "0": 0,
           "1": 1,
-          "2": 0,
+          "2": 2,
           "3": 3
         }
       },
       "distractorRationale": {
+        "0": "This line states the chronicle's claim that the seal is still there. It says nothing about whether another source agrees or disagrees with the no-enemy claim.",
         "1": "This line just restates the chronicle's own confidence in its protection. It is not outside proof, since it comes from the very document being questioned.",
-        "2": "This line states the chronicle's claim that the seal is still there. It says nothing about whether another source agrees or disagrees with the no-enemy claim.",
         "3": "This line pins down the exact chamber the chronicle describes, which actually helps confirm the ledger is talking about the same room, not a different one."
       },
       "explain": "The chronicle makes an absolute claim: no enemy ever entered. A separate, outside account describing entry into that same specific chamber directly challenges that absolute claim, whether or not the outside account turns out to be fully accurate itself."
@@ -2820,12 +2820,12 @@
       "partA": {
         "stem": "What piece of physical evidence does the Reckoner cite to support the claim that the chamber was entered before?",
         "choices": [
-          "Two different sets of tool marks on the setting stone, from two different centuries.",
-          "A written confession left by a previous entrant.",
-          "A missing piece of the seal itself.",
-          "A map showing a second entrance to the chamber."
+          "A missing piece of the seal, chipped off at one corner.",
+          "A written confession left in the chamber by an earlier entrant.",
+          "Two sets of tool marks on the setting stone, from two different centuries.",
+          "A map showing a second, hidden entrance to the chamber."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from Source B best supports the answer you just gave?",
@@ -2836,18 +2836,18 @@
           "I know this because the setting stone beneath the seal shows two different tool marks, from two different centuries."
         ],
         "key": {
-          "0": 3,
+          "0": 0,
           "1": 2,
-          "2": 1,
-          "3": 0
+          "2": 3,
+          "3": 1
         }
       },
       "distractorRationale": {
-        "1": "This line mentions an entrant whose name is no longer recorded, not a written confession. No confession is ever described in the passage.",
-        "2": "The seal being exactly where it should be shows it is intact and present, which argues against a missing piece, not for one.",
-        "3": "This line explains why a guard-trained priest missed the tool marks. It does not describe a map or a second entrance."
+        "0": "This line says only that the seal is where the wall says it should be.  Nothing in the ledger says a piece of the seal is missing.",
+        "1": "This line mentions an entrant whose name is no longer recorded, not a written confession.  No confession is ever described in the passage.",
+        "3": "This line explains why a guard-trained priest missed the tool marks.  It does not describe a map or a second entrance."
       },
-      "explain": "The Reckoner points to something checkable in principle: two distinct sets of tool marks, left by two different people across two different centuries, on the stone beneath the seal. That is physical evidence, not a rumor, a confession, or a map."
+      "explain": "The Reckoner points to something checkable in principle: two distinct sets of tool marks, left by two different people across two different centuries, on the stone beneath the seal.  That is physical evidence.  The ledger never mentions a missing piece, a confession, or a map."
     },
     {
       "id": "l4-ebsr-why-not-remove-seal",
@@ -2861,12 +2861,12 @@
       "partA": {
         "stem": "Why does the Reckoner choose not to remove the seal, even after finding it?",
         "choices": [
-          "Taking what the guild finds would draw hunters, and a hunted guild stops finding anything.",
+          "The Reckoner swore an oath to the gods to leave the seal exactly as it was found.",
           "The seal is too heavy to carry out of the chamber.",
-          "Removing it would break the guild's oath to the gods.",
-          "The Reckoner cannot figure out how to detach it from the stone."
+          "Taking the seal would get the guild hunted, and a hunted guild finds nothing.",
+          "The Reckoner is leaving the seal for the next Reckoner to carry out of the chamber."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from Source B best supports the answer you just gave?",
@@ -2877,18 +2877,18 @@
           "A guild that removes what it finds is a guild that gets hunted."
         ],
         "key": {
-          "0": 3,
+          "0": 0,
           "1": 2,
-          "2": 0,
+          "2": 3,
           "3": 1
         }
       },
       "distractorRationale": {
+        "0": "This line shows the Reckoner leaving the seal as it was found.  It names no oath and no gods, and the reason the Reckoner gives is about the guild being hunted.",
         "1": "This line simply confirms the seal's location. It says nothing about the seal's weight or how difficult it would be to move.",
-        "2": "This line is about the guild's practice of recording mistakes for future members, not about any religious oath.",
-        "3": "The Reckoner describes leaving the seal on purpose, with a clear reason given. That is a deliberate choice, not an admission of being unable to remove it."
+        "3": "This line says the Reckoner is writing for the next Reckoner, not saving the seal for anyone to take.  The seal stays because a guild that removes what it finds gets hunted."
       },
-      "explain": "The Reckoner gives a practical, strategic reason: taking objects draws attention, and a hunted guild cannot keep operating. That is a calculated choice about the guild's own survival, not a matter of weight, oath, or ability."
+      "explain": "The Reckoner gives a practical, strategic reason: taking objects draws attention, and a hunted guild cannot keep operating.  That is a calculated choice about the guild's own survival, not a matter of weight, an oath, or a plan to take the seal later."
     },
     {
       "id": "l4-ebsr-reckoners-actual-purpose",
@@ -2902,12 +2902,12 @@
       "partA": {
         "stem": "What is the Reckoner's actual purpose in writing this ledger entry?",
         "choices": [
-          "To correct the temple's official story for whoever from the guild reads it next.",
-          "To brag to the temple priests about outsmarting them.",
-          "To convince readers that temples can never be trusted.",
+          "To convince readers that no temple can be trusted to tell the truth about its chambers.",
+          "To brag to the Abydos priests about slipping past their guard and into the chamber.",
+          "To correct the temple's story for whoever from the guild reads it next.",
           "To request permission to remove the seal on a future visit."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from Source B best supports the answer you just gave?",
@@ -2918,15 +2918,15 @@
           "I am recording what the wall got wrong, for the next Reckoner."
         ],
         "key": {
-          "0": 3,
+          "0": 0,
           "1": 2,
-          "2": 0,
+          "2": 3,
           "3": 1
         }
       },
       "distractorRationale": {
+        "0": "Saying every temple is wrong at least once is different from claiming no temple can ever be trusted. The Reckoner is correcting one specific error, not making a sweeping judgment.",
         "1": "This line is a general observation about temples, written for the guild's own record. It is not addressed to any priest and never brags to one.",
-        "2": "Saying every temple is wrong at least once is different from claiming no temple can ever be trusted. The Reckoner is correcting one specific error, not making a sweeping judgment.",
         "3": "The Reckoner states plainly that the seal is not being removed. That directly rules out a request to remove it later."
       },
       "explain": "The Reckoner's stated purpose is narrow and practical: record what this one chronicle got wrong, for whichever guild member reads the ledger next. That is different from bragging to the temple, condemning every temple everywhere, or asking to take the seal."
@@ -2942,21 +2942,21 @@
       "dok": 4,
       "stem": "Select the three details from the ledger that make the Reckoner's account at least partly checkable, rather than a claim resting only on the Reckoner's word.",
       "choices": [
-        "Two different sets of tool marks are described on the setting stone.",
+        "The Reckoner says the guild has operated for several centuries.",
         "The tool marks are said to come from two different centuries.",
         "The seal is described as being exactly where the temple's own wall says it should be.",
         "The Reckoner claims to have felt a strange presence in the chamber.",
-        "The Reckoner says the guild has operated for several centuries.",
+        "Two different sets of tool marks are described on the setting stone.",
         "The Reckoner promises the story is completely true."
       ],
       "key": [
-        0,
         1,
-        2
+        2,
+        4
       ],
       "distractorRationale": {
+        "0": "The guild's long history is background information about the ledger itself. It is not physical evidence about this specific chamber.",
         "3": "A feeling of presence is not something a later examiner could verify. The passage never mentions this at all, and a feeling could never be checked by anyone else.",
-        "4": "The guild's long history is background information about the ledger itself. It is not physical evidence about this specific chamber.",
         "5": "A promise that a story is true is just a claim, the same kind of unverifiable statement the ledger criticizes in the temple chronicle."
       },
       "explain": "What makes the Reckoner's account partly checkable is specific, physical detail: tool marks, their number, their apparent age, and the seal's exact position, all things a later examiner could in principle go look at directly. A simple promise or a feeling is not checkable by anyone else."
@@ -2973,12 +2973,12 @@
       "partA": {
         "stem": "According to the Archive's analysis, which type of claim is generally easier to weigh: one resting on faith, or one resting on physical evidence?",
         "choices": [
-          "One resting on physical evidence, because it can in principle be checked by someone else.",
-          "One resting on faith, because it comes from a trusted institution.",
           "Neither type of claim can ever be weighed at all.",
-          "Both types are equally easy to weigh once a claim is written down."
+          "One resting on faith, because it comes from a trusted institution like a temple.",
+          "One resting on physical evidence, since others could in principle check it.",
+          "Both types are equally easy to weigh, since the entry reaches no conclusion about either."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2989,16 +2989,16 @@
           "A claim resting on physical evidence is generally easier to weigh than a claim resting on faith."
         ],
         "key": {
-          "0": 3,
+          "0": 0,
           "1": 2,
-          "2": 0,
+          "2": 3,
           "3": 1
         }
       },
       "distractorRationale": {
+        "0": "This line says the seal's history is not settled yet.  One open case does not mean no claim can ever be weighed, and the passage says a claim resting on physical evidence is easier to weigh.",
         "1": "This line simply identifies who carved the chronicle. It does not argue that faith-based claims are generally easier to weigh.",
-        "2": "This entry being unusually unresolved is the exception the passage points out, not proof that no claim can ever be weighed at all.",
-        "3": "The seal's history staying unsettled is about this one case specifically. It does not mean every claim is equally hard to weigh in general."
+        "3": "This line says this one entry ends without a conclusion.  Reaching no conclusion about one case does not make the two kinds of claim equally easy to weigh, and the passage says physical evidence is easier."
       },
       "explain": "The Archive draws a clear general distinction: physical evidence can, at least in principle, be checked by someone else later, while a faith-based claim from the very institution being questioned cannot. That is why the entry treats the two accounts so differently."
     },
@@ -3014,12 +3014,12 @@
       "partA": {
         "stem": "Why does the Archive's entry end without picking a side between the two accounts?",
         "choices": [
-          "Neither claim has actually been checked yet, even though the ledger's claim could be.",
-          "The Archive has decided both accounts are equally false.",
           "The Archive ran out of space to finish the entry.",
-          "The Archive already found the tool marks and confirmed the ledger's story."
+          "The Archive has decided both accounts are equally false.",
+          "Neither claim has actually been checked yet, even though the ledger's claim could be.",
+          "The Archive already sent a researcher who found the tool marks and confirmed the ledger's story."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -3030,15 +3030,15 @@
           "The other has told a story that could be checked, and simply never was."
         ],
         "key": {
-          "0": 3,
+          "0": 0,
           "1": 2,
-          "2": 0,
+          "2": 3,
           "3": 1
         }
       },
       "distractorRationale": {
+        "0": "The entry's lack of a conclusion is described as a deliberate, honest choice, not a result of running out of space to write.",
         "1": "The passage explicitly says the chronicle's unverifiable nature does not make it false. That rules out the idea that the Archive has judged both accounts false.",
-        "2": "The entry's lack of a conclusion is described as a deliberate, honest choice, not a result of running out of space to write.",
         "3": "This line confirms nobody outside the guild has ever examined the stone, which is the opposite of the Archive having confirmed the tool marks itself."
       },
       "explain": "The Archive is careful to separate two different kinds of unresolved claims: one that can never be checked by its nature, and one that could be checked but simply has not been yet. Neither has actually been confirmed, so the entry ends honestly, without picking a winner."
@@ -3055,20 +3055,20 @@
       "stem": "Select the three statements the Archive's analysis makes about why each source might not be fully trustworthy.",
       "choices": [
         "The priesthood that guards the chamber is the same group that wrote its history.",
-        "A guild of thieves has its own reason to make itself look skilled rather than reckless.",
+        "The guild ledger was written by more than one person.",
         "Nobody outside the guild has ever been allowed to examine the tool marks.",
         "The temple chronicle was carved in a language modern readers cannot translate.",
-        "The guild ledger was written by more than one person.",
+        "A guild of thieves has its own reason to make itself look skilled rather than reckless.",
         "The setting stone has since been destroyed."
       ],
       "key": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "distractorRationale": {
+        "1": "Multiple contributors writing the ledger over generations is mentioned, but the Archive never treats that fact itself as a reason to distrust it.",
         "3": "The passage never mentions a translation problem. The entry is presented as already understood, in both sources.",
-        "4": "Multiple contributors writing the ledger over generations is mentioned, but the Archive never treats that fact itself as a reason to distrust it.",
         "5": "The passage never says the setting stone was destroyed. The problem is that nobody outside the guild has examined it, not that it no longer exists."
       },
       "explain": "The Archive's doubts about each source are specific: the temple's guards and historians are the same people, and the guild's own reputation gives it reason to shade the truth, while nobody outside the guild has actually checked the physical evidence it claims to have. A language barrier, multiple authors, or a destroyed stone are not reasons the passage gives."
@@ -3208,19 +3208,19 @@
       "blanks": [
         {
           "choices": [
-            "taking it would draw hunters, and a hunted guild cannot keep finding anything",
             "the seal is protected by a curse the Reckoner fears",
+            "taking it would draw hunters, and a hunted guild cannot keep finding anything",
             "the seal is bolted too firmly to the stone to move"
           ],
-          "key": 0
+          "key": 1
         },
         {
           "choices": [
-            "the next Reckoner has real evidence instead of just the guild's own word",
-            "the temple priests will eventually find the note and apologize",
-            "the guild can sell the story to outside collectors later"
+            "the temple priests will one day find the note and admit their chronicle was wrong",
+            "the next Reckoner has real evidence, not just the guild's word",
+            "the guild can sell the tool-mark story to outside collectors later"
           ],
-          "key": 0
+          "key": 1
         }
       ],
       "explain": "The Reckoner's choice is strategic, not supernatural or physical, since taking the seal would expose the guild to hunters, so leaving it in place while recording the tool marks passes real, checkable evidence forward to whoever reads the ledger next. No curse, no stuck seal, and no sale to outsiders appears anywhere in the source."
@@ -3332,9 +3332,9 @@
       "dok": 3,
       "stem": "What do the Temple Chronicle and the Reckoner's Ledger actually agree on, despite their conflicting claims?",
       "choices": [
-        "Both agree on the exact date the seal was originally placed.",
-        "Both agree that the seal has since been destroyed.",
-        "Both describe the same specific chamber and the same seal, placed there by Isis.",
+        "Both agree on the exact date when Isis first placed the seal in the chamber.",
+        "Both agree that the seal has since been destroyed by Set's followers.",
+        "Both describe the same chamber and the same seal inside it.",
         "Both agree that no such chamber actually exists at all."
       ],
       "key": 2,
@@ -3453,12 +3453,12 @@
       "partA": {
         "stem": "The passage says the cold \"settles there like it has been invited.\" What does this comparison suggest about the cold?",
         "choices": [
-          "The cold arrives easily and comfortably, as though it belongs there, not like an unwelcome intrusion.",
-          "The cold is a literal guest that Mila greeted at the door.",
-          "The cold only appears when someone opens a door for it.",
+          "The cold only comes in when someone opens a door and invites it inside.",
+          "The cold is a literal guest that Mila greeted at the door of the vault.",
+          "The cold makes itself at home, as though it belongs there.",
           "The cold is dangerous enough to require an invitation to enter safely."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -3469,15 +3469,15 @@
           "Mila calls it simply cold."
         ],
         "key": {
-          "0": 0,
+          "0": 2,
           "1": 3,
-          "2": 2,
+          "2": 0,
           "3": 1
         }
       },
       "distractorRationale": {
+        "0": "This line describes the door's exhaling sound, not a connection between the cold and an opened door.",
         "1": "This line is a plain, literal statement of fact. It contains no comparison and does not describe the cold as a literal guest.",
-        "2": "This line describes the door's exhaling sound, not a connection between the cold and an opened door.",
         "3": "This line is about the cold turning into a sound in Mila's perception, a different figurative comparison from the invited-guest image the item asks about."
       },
       "explain": "Calling the cold's arrival like being invited is personification: it gives the cold the manners of a welcome guest rather than the aggression of an intruder. That word choice makes the cold feel natural to the space, almost expected, rather than threatening."
@@ -3494,12 +3494,12 @@
       "partA": {
         "stem": "The corridor's ceiling lights are described as receding \"like the narrowing end of a tunnel.\" What feeling does this image create?",
         "choices": [
-          "A sense that the corridor is squeezing inward, making the space feel smaller and more closed in.",
-          "A sense of relief that the corridor is well lit.",
-          "A sense that the corridor is getting wider toward the vault.",
-          "A sense that the lights are about to fail completely."
+          "A sense that the lights are about to fail completely and leave Mila in the dark.",
+          "A sense of relief that the corridor is well lit all the way to the twelfth door.",
+          "A sense that the corridor is getting wider and roomier as it nears the vault.",
+          "A sense that the corridor is closing in, making the space feel smaller."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -3510,16 +3510,16 @@
           "Each light is slightly dimmer than the last."
         ],
         "key": {
-          "0": 0,
+          "0": 1,
           "1": 3,
           "2": 2,
-          "3": 1
+          "3": 0
         }
       },
       "distractorRationale": {
+        "0": "This line expresses Mila's uncertainty about the cause of the dimming. It does not suggest the lights are about to fail completely.",
         "1": "Dimming lights create a sense of things getting darker, not brighter. This line argues against any feeling of relief about being well lit.",
-        "2": "This line is a neutral statement about which door matters most. It does not describe the corridor's width or shape.",
-        "3": "This line expresses Mila's uncertainty about the cause of the dimming. It does not suggest the lights are about to fail completely."
+        "2": "This line is a neutral statement about which door matters most. It does not describe the corridor's width or shape."
       },
       "explain": "Comparing the receding lights to a narrowing tunnel makes the corridor feel like it is closing in, even though nothing physically changes width. That image builds a quiet, closed-in tension that the more literal description of dimming lights alone would not create."
     },
@@ -3533,36 +3533,36 @@
       "coachTopic": "structure-story-parts",
       "dok": 4,
       "partA": {
-        "stem": "How does the door's sound, described as \"exhaling,\" function within the structure of this scene?",
+        "stem": "How does the moment the twelfth door opens fit into the structure of this scene?",
         "choices": [
-          "It marks the turning point between the corridor's buildup of tension and Mila's entry into the vault itself.",
-          "It is the story's opening image, before any other description begins.",
           "It is a random detail unconnected to anything before or after it.",
-          "It signals that Mila has already left the building completely."
+          "It is the story's opening image, before any other description begins.",
+          "It marks the turning point between the corridor's buildup of tension and Mila's entry into the vault itself.",
+          "It signals that Mila has already finished her job and left the building, with the stone still behind her."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "Walking back out through the twelve doors, Mila counts them again in reverse.",
-          "Inside, the Wyrdstone sits alone on a raised shelf, under a single cone of light.",
+          "The vault door itself is unremarkable: a slab of pale metal, with a single reader panel.",
           "The door releases with a sound less like an opening and more like something exhaling, a long low breath of air that had clearly been sealed in for longer than eleven minutes could explain.",
           "Frostbank Storage keeps its lowest floor at a temperature the brochure calls archival."
         ],
         "key": {
-          "0": 2,
+          "0": 1,
           "1": 3,
-          "2": 1,
+          "2": 2,
           "3": 0
         }
       },
       "distractorRationale": {
-        "1": "This line is the passage's actual opening sentence, describing the temperature of the whole floor. It is not the exhaling sound this item asks about.",
-        "2": "This line describes Mila's actual exit at the very end of the passage, not the moment the vault door first opens.",
-        "3": "This line describes exactly what comes right after the door opens, connecting the two moments directly. That argues against the sound being unconnected to anything."
+        "0": "This line says the door looks plain, not that its opening is unconnected to anything.  The door opens right where the long corridor ends and the vault begins, so that moment joins the two parts of the scene.",
+        "1": "This line is the passage's real opening sentence, about the temperature of the whole floor.  The twelfth door opens much later, after the long walk down the corridor.",
+        "3": "This line describes Mila's actual exit at the very end of the passage, not the moment the vault door first opens."
       },
-      "explain": "The exhaling door sits at the hinge of the scene: everything before it builds tension through the cold, the corridor, and the dimming lights, and everything after it shifts into the vault itself and the Wyrdstone. That placement is what makes it a structural turning point, not just a random sound effect."
+      "explain": "The exhaling door sits at the hinge of the scene: everything before it builds tension through the cold, the corridor, and the dimming lights, and everything after it shifts into the vault itself and the Wyrdstone.  That placement is what makes it a structural turning point, not just a random sound effect."
     },
     {
       "id": "l5-ms-figurative-sensations",
@@ -3575,21 +3575,21 @@
       "dok": 3,
       "stem": "Select the three figurative comparisons the passage uses to describe sensations Mila experiences in the vault.",
       "choices": [
-        "The cold settling like it has been invited.",
+        "The camera pointing straight down at the shelf.",
         "The ceiling lights receding like the narrowing end of a tunnel.",
         "Sensing the dark far wall the way you sense a person standing just behind you.",
         "The badge being good for exactly one door.",
-        "The camera pointing straight down at the shelf.",
+        "The cold settling like it has been invited.",
         "The stone looking smaller than the catalog photograph."
       ],
       "key": [
-        0,
         1,
-        2
+        2,
+        4
       ],
       "distractorRationale": {
+        "0": "This describes the camera's actual physical position and angle. It is a literal detail, not a comparison.",
         "3": "This is a literal, practical fact about how the cover badge works. It is not a figurative comparison.",
-        "4": "This describes the camera's actual physical position and angle. It is a literal detail, not a comparison.",
         "5": "This compares the stone's size to a photograph in a direct, literal way, not through a figurative image like the others."
       },
       "explain": "Three moments use figurative comparison to convey a feeling rather than a plain fact: the cold behaving like an invited guest, the lights behaving like a narrowing tunnel, and the darkness sensed the way a person behind you is sensed. The badge, the camera angle, and the stone's size are stated as plain, literal facts."
@@ -3604,36 +3604,36 @@
       "coachTopic": "vocab-figurative",
       "dok": 3,
       "partA": {
-        "stem": "Theo compares the building to a glacier, saying it seems \"patient, in no hurry.\" What does this comparison suggest about how the building affects him?",
+        "stem": "Theo uses a comparison from nature to describe the Frostbank building.  What does this comparison suggest about how the building affects him?",
         "choices": [
+          "It makes the building seem worn out and shabby, as if it is slowly melting away.",
+          "It makes him think the building is friendly and welcoming, a safe place he would like to visit.",
           "It feels less like an ordinary building and more like something vast, still, and faintly unsettling.",
-          "It makes him think the building is friendly and welcoming.",
-          "It reminds him that glaciers move very quickly.",
-          "It convinces him the building is about to collapse."
+          "It convinces him the building is about to collapse while Mila is still inside."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "It is the kind of gray that is not really a color, so much as an absence of one, low and flat, built without a single window on this side.",
-          "I decide that comparison is not helping either, and try to stop making them.",
+          "If the radio stays silent past two-twenty-five, the plan says I call Finch, and the whole thing ends, whatever ends turns out to mean for someone still inside.",
           "From where I sit, it looks less like a place people work and more like something that grew out of the parking lot on its own, patient, in no hurry, the way glaciers are in no hurry.",
-          "The building itself does not help."
+          "I remind myself, out loud, quietly, that a service van is the single most ordinary thing that could possibly happen outside a storage building on a weekday afternoon."
         ],
         "key": {
-          "0": 2,
+          "0": 0,
           "1": 3,
-          "2": 1,
-          "3": 0
+          "2": 2,
+          "3": 1
         }
       },
       "distractorRationale": {
-        "1": "This line says the building 'does not help,' which is closer to unsettling than friendly. It offers no sense of welcome.",
-        "2": "This line describes the building's flat, windowless appearance. It says nothing about glacier speed one way or the other.",
-        "3": "This line shows Theo trying to stop making unsettling comparisons, which argues against the comparison making him think of collapse."
+        "0": "This line describes the building as gray, flat, and windowless, but nothing in it says the building is worn out or shabby.  A glacier in no hurry is huge and patient, not melting away.",
+        "1": "This line shows Theo reminding himself that a service van is ordinary, so it is about the van, not the building.  Nothing in the glacier comparison makes the building seem friendly, welcoming, or safe.",
+        "3": "This line is about what the plan says will happen if the radio stays silent, not about the building falling down with Mila inside.  A building that seems patient and in no hurry is the opposite of one about to collapse."
       },
-      "explain": "Comparing the building to a glacier borrows the huge, slow, ancient stillness of a glacier and applies it to an ordinary storage building, which makes it feel bigger and stranger than it really is. Theo notices this himself and even tries to stop making the comparison, which shows how much it is affecting his nerves."
+      "explain": "Theo says the building looks like something that grew out of the parking lot on its own, patient and in no hurry, the way glaciers are.  The comparison gives an ordinary storage building a glacier's huge, slow stillness, so it feels bigger and stranger than it really is.  In the very next sentence, Theo tries to stop making comparisons at all, which shows that the image unsettles him."
     },
     {
       "id": "l5-ebsr-missed-stair",
@@ -3647,32 +3647,32 @@
       "partA": {
         "stem": "Theo describes his chest doing \"a cold drop like a missed stair in the dark.\" What does this comparison capture about the sensation?",
         "choices": [
-          "A sudden, startling jolt of fear that arrives before his mind can process a reason for it.",
-          "A slow, gradual increase in worry over several minutes.",
-          "A pleasant feeling of relief.",
-          "A physical injury he sustains while getting out of the car."
+          "A real fall he takes on a dark stair as he gets out of the rented car.",
+          "A slow, gradual increase in worry that builds over several minutes of waiting.",
+          "A pleasant feeling of relief, like finally letting out a held breath.",
+          "A sudden jolt of fear that hits before his mind knows why."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "I have never been so aware of my own breathing as I am right now, sitting in a rented car outside a building with the word Frostbank stamped across it, in letters too small for a place that size, watching a door that has not moved in eleven minutes.",
-          "At two-twenty-four the radio clicks twice, and I let out a breath I did not know I had been holding for four straight minutes.",
           "My whole chest does something unpleasant and sudden, a cold drop like a missed stair in the dark.",
+          "At two-twenty-four the radio clicks twice, and I let out a breath I did not know I had been holding for four straight minutes.",
           "I have read that rule so many times in my head that it has stopped sounding like words."
         ],
         "key": {
-          "0": 2,
+          "0": 0,
           "1": 3,
-          "2": 1,
-          "3": 0
+          "2": 2,
+          "3": 1
         }
       },
       "distractorRationale": {
+        "0": "This line shows Theo sitting in the rented car, watching the door.  He never leaves the car in the passage, and he takes no real fall.",
         "1": "This line is about a rule becoming familiar through repetition over time, a slow process, not a sudden jolt in the moment.",
-        "2": "This line describes actual relief, but it happens later in the passage, once the radio finally clicks, not at the moment of the van appearing.",
-        "3": "This line is about Theo sitting and watching the door in general. It describes no physical injury of any kind."
+        "2": "This line describes actual relief, but it happens later in the passage, once the radio finally clicks, not at the moment of the van appearing."
       },
       "explain": "The missed-stair comparison captures exactly the specific, sudden lurch of a false step, a jolt the body feels before the mind has caught up to what caused it. That is very different from gradual worry, relief, or any actual physical injury."
     },
@@ -3688,19 +3688,19 @@
       "partA": {
         "stem": "How does the final paragraph, with the radio click and the written-down time, function in relation to the rest of the passage?",
         "choices": [
-          "It resolves the tension the earlier paragraphs built up around the unexplained service van.",
-          "It introduces a brand-new problem that the passage never addresses.",
+          "It shifts the passage into Mila's point of view, as she checks in over the radio.",
+          "It introduces a brand-new problem at the very end that the passage never goes back to.",
           "It repeats the exact same information as the opening paragraph.",
-          "It shifts the passage into Mila's point of view instead of Theo's."
+          "It releases the tension that the unexplained service van built up."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "I write the real time down next to the time the plan expected.",
-          "I have never been so aware of my own breathing as I am right now, sitting in a rented car outside a building with the word Frostbank stamped across it, in letters too small for a place that size, watching a door that has not moved in eleven minutes.",
           "At two-twenty-four the radio clicks twice, and I let out a breath I did not know I had been holding for four straight minutes.",
+          "I have never been so aware of my own breathing as I am right now, sitting in a rented car outside a building with the word Frostbank stamped across it, in letters too small for a place that size, watching a door that has not moved in eleven minutes.",
+          "I write the real time down next to the time the plan expected.",
           "At two-nineteen a service van pulls up to a loading door I did not know existed, blocking most of my view of the entrance Mila actually used."
         ],
         "key": {
@@ -3711,9 +3711,9 @@
         }
       },
       "distractorRationale": {
+        "0": "Theo continues to narrate in the first person right through the final line. The passage never shifts into Mila's point of view.",
         "1": "This line introduces the van, the original source of tension, near the middle of the passage. It is not a new problem appearing at the end.",
-        "2": "This is the passage's actual opening line. Comparing it to the ending shows the two are different, not repeated.",
-        "3": "Theo continues to narrate in the first person right through the final line. The passage never shifts into Mila's point of view."
+        "2": "This is the passage's actual opening line. Comparing it to the ending shows the two are different, not repeated."
       },
       "explain": "The radio click releases exactly the tension the van's appearance created earlier: an unexplained gap that Theo had to sit with, unresolved, for several paragraphs. That final beat gives the scene its shape, moving from uncertainty to resolution, rather than introducing something new or simply repeating the opening."
     },
@@ -3729,21 +3729,21 @@
       "stem": "Select the three moments that mark a clear shift in what Theo is doing or feeling across the passage.",
       "choices": [
         "The moment the service van blocks his view of the entrance.",
-        "The moment he reminds himself that fear is not evidence.",
+        "The fact that the badge Mila carries is good.",
         "The moment the radio finally clicks twice.",
         "The fact that Mila went in at two o'clock.",
         "The fact that the building has no windows on one side.",
-        "The fact that the badge Mila carries is good."
+        "The moment he reminds himself that fear is not evidence."
       ],
       "key": [
         0,
-        1,
-        2
+        2,
+        5
       ],
       "distractorRationale": {
+        "1": "The badge being good is a fact Theo recalls to reassure himself. It does not mark a new shift in the scene's action.",
         "3": "Mila going in at two is background information stated early, not a shift in what Theo himself is doing or feeling in the moment.",
-        "4": "The building's windowless side is a fixed physical description, not a moment where anything changes for Theo.",
-        "5": "The badge being good is a fact Theo recalls to reassure himself. It does not mark a new shift in the scene's action."
+        "4": "The building's windowless side is a fixed physical description, not a moment where anything changes for Theo."
       },
       "explain": "Three real turning points move the scene forward: the van creating sudden alarm, Theo consciously choosing to reason instead of panic, and the radio click finally resolving the tension. The other details are background facts that stay constant rather than points where something changes."
     },
@@ -3757,36 +3757,36 @@
       "coachTopic": "vocab-figurative",
       "dok": 3,
       "partA": {
-        "stem": "Finch calls a field report that predicts what will happen \"a guess wearing a record's clothing.\" What is this comparison suggesting?",
+        "stem": "Finch calls a field report that predicts what will happen \"a guess wearing a record's clothing.\"  What is this comparison suggesting?",
         "choices": [
           "The report looks official and trustworthy on the surface, but underneath it is really just an unproven guess.",
-          "The report is literally written on a piece of clothing.",
-          "The report is too short to be taken seriously.",
-          "The report was copied word for word from someone else's notes."
+          "The report mostly describes the clothes the writer was wearing out in the field.",
+          "The report is too short to be taken seriously, since it tells only a little of what happened.",
+          "The report was copied word for word from someone else's notes, so none of it is the writer's own."
         ],
         "key": 0
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "She taps the stone sitting in its case at the center of the table: the Wyrdstone, cool even through the glass.",
-          "It starts being a guess wearing a record's clothing.",
+          "Finch tells the story the same way every time.",
+          "Nobody down the line can tell the difference just by looking at it.",
           "A report that carves ahead of the truth, even a little, even with the best intentions in the world, stops being a record.",
-          "Nobody down the line can tell the difference just by looking at it."
+          "It starts being a guess wearing a record's clothing."
         ],
         "key": {
           "0": 1,
-          "1": 0,
-          "2": 3,
-          "3": 2
+          "1": 3,
+          "2": 2,
+          "3": 0
         }
       },
       "distractorRationale": {
-        "1": "This line describes Finch tapping the physical stone on the table. It has nothing to do with clothing or disguise.",
-        "2": "This line explains what happens to a report that predicts ahead of time. It does not say anything about the report's length.",
-        "3": "This line is about the danger of a guess being indistinguishable from a real record later on. It does not describe copying someone else's work."
+        "1": "This line uses clothing only as a comparison.  Nothing in the passage tells what any writer wore; the guess is simply dressed up to look like a record.",
+        "2": "This line says a report that carves ahead \"even a little\" stops being a record.  Here \"a little\" means how far ahead the report guesses, not how long the report is.",
+        "3": "This line is about Finch telling her story the same way each time, not about how a report gets written.  Nothing in the passage says a report was copied from someone else's notes."
       },
-      "explain": "Dressing a guess in a record's clothing means the guess looks exactly like a trustworthy fact from the outside, even though nothing underneath actually confirms it. That is what makes a predicted report so dangerous: it can fool a reader later who has no way to tell it apart from something genuinely observed."
+      "explain": "Dressing a guess in a record's clothing means the guess looks exactly like a trustworthy fact from the outside, even though nothing underneath actually confirms it.  That is what makes a predicted report so dangerous: it can fool a reader later who has no way to tell it apart from something genuinely observed."
     },
     {
       "id": "l5-ebsr-parable-connects-to-scene",
@@ -3800,32 +3800,32 @@
       "partA": {
         "stem": "How does the parable about the three sisters relate to the rest of the scene at the table?",
         "choices": [
-          "It is a story Finch uses on purpose to teach the crew a lesson about writing honest field reports.",
-          "It has no connection at all to anything the crew is doing that day.",
-          "It replaces the crew's actual training for the day entirely.",
-          "It is a story Dash tells to distract Finch from a mistake he made."
+          "It is a story Dash tells to distract Finch from a mistake he made.",
+          "It has no connection at all to anything the crew is doing at the table that day.",
+          "It is a history lesson meant to settle whether the three sisters ever got it wrong.",
+          "It is Finch's way of teaching the crew how to write honest field reports."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "It was carved by someone who believed the story enough to spend months carving a tribute to it.",
           "A field report, she says, is exactly that kind of carving.",
+          "It was carved by someone who believed the story enough to spend months carving a tribute to it.",
           "Finch tells the story the same way every time.",
           "Dash asks whether the sisters ever got it wrong."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
+          "0": 2,
+          "1": 1,
           "2": 3,
-          "3": 2
+          "3": 0
         }
       },
       "distractorRationale": {
+        "0": "This line shows Finch telling the story the same way every time.  Finch is the one telling it, not Dash, and nobody is hiding a mistake.",
         "1": "This line is about who carved the actual Wyrdstone, long before this scene. It does not show whether the parable connects to the crew's training.",
-        "2": "This line is about Finch's storytelling habits in general. It does not explain the parable's connection to field reports.",
-        "3": "This line shows Dash asking Finch a question about the sisters. It is not Dash telling a story of his own."
+        "2": "This line shows Dash asking whether the sisters got it wrong, and Finch calls that the wrong question.  The story is a lesson about field reports, not a history lesson."
       },
       "explain": "Finch draws the connection herself, directly: a field report has to be carved stroke by stroke behind the moment, exactly like the sisters' carving, never ahead of it. The parable is not a random aside; it is the exact lesson the scene is built to teach."
     },
@@ -3934,19 +3934,19 @@
       "blanks": [
         {
           "choices": [
-            "natural and expected in the space, rather than threatening",
             "violent and sudden, like an unwelcome attack",
+            "natural and expected in the space, rather than threatening",
             "warm, since an invited guest is usually welcome and comfortable"
           ],
-          "key": 0
+          "key": 1
         },
         {
           "choices": [
-            "smaller and more closed in than it actually is",
-            "brighter and more open than it actually is",
-            "exactly the same width the whole way down"
+            "exactly the same width the whole way down",
+            "brighter, wider, and more open than it actually is",
+            "smaller and more closed in than it actually is"
           ],
-          "key": 0
+          "key": 2
         }
       ],
       "explain": "An invited guest arrives comfortably, which is why the cold reads as natural rather than threatening, even though it is still uncomfortably cold. A narrowing tunnel closes inward, which is why the corridor feels smaller than its actual, unchanging width. Warmth and brightness are not what either comparison is actually building."
@@ -3964,19 +3964,19 @@
       "blanks": [
         {
           "choices": [
-            "the story is actually a lesson about how a field report must be written",
-            "the sisters are real people the crew will soon meet",
-            "the Wyrdstone was carved by one of the three sisters herself"
+            "the Wyrdstone was carved by one of the three sisters herself, long ago",
+            "the sisters are real people the crew will soon meet at the old tree",
+            "the story is really a lesson in how to write a field report"
           ],
-          "key": 0
+          "key": 2
         },
         {
           "choices": [
-            "field reports, not for the old legend itself",
+            "choosing which sister the crew should trust most",
             "deciding whether the legend is historically true",
-            "choosing which sister the crew should trust most"
+            "field reports, not for the old legend itself"
           ],
-          "key": 0
+          "key": 2
         }
       ],
       "explain": "The scene is structured to delay its own point, since the parable comes first and only afterward does Finch connect it to field reports, which is why a question that sounds like it is about ancient sisters is really about the crew's own habits of writing things down. The sisters are never claimed to be real people the crew will meet, and the Wyrdstone's carver is described as an unnamed later believer, not one of the sisters."
@@ -3992,10 +3992,10 @@
       "dok": 3,
       "stem": "The passage compares sensing the vault's dark far wall to sensing \"a person standing just behind you before you turn around.\" What feeling does this comparison create?",
       "choices": [
-        "An eerie sense of being watched or not alone, even though nothing is actually confirmed.",
-        "Calm reassurance that the room is completely empty.",
-        "Certainty that Kade is hiding somewhere nearby.",
-        "A scientific explanation for why the room is so dimly lit."
+        "An eerie sense of not being alone, though nothing is confirmed.",
+        "Calm reassurance that the dark room around the shelf is completely empty.",
+        "Certainty that Kade is hiding somewhere nearby in the dark, watching Mila.",
+        "A scientific explanation for why the room beyond the shelf is so dimly lit."
       ],
       "key": 0,
       "distractorRationale": {
@@ -4016,9 +4016,9 @@
       "dok": 3,
       "stem": "The narrator describes the building's gray as \"not really a color, so much as an absence of one.\" What does this suggest about the building?",
       "choices": [
-        "The building is actually painted a bright white.",
-        "It emphasizes how flat and lifeless the building looks, almost without any real character at all.",
-        "The building has no walls facing the street.",
+        "The building is actually painted a bright white that only looks gray from far away.",
+        "The building looks flat and lifeless, without any real character.",
+        "The building has no real walls at all on the side facing the parking lot.",
         "The narrator cannot see the building clearly because it is dark outside."
       ],
       "key": 1,
@@ -4040,14 +4040,14 @@
       "dok": 3,
       "stem": "The narrator says fear \"argues\" that it is evidence, no matter how loudly. What figurative technique is being used here?",
       "choices": [
-        "A simile comparing fear directly to a courtroom.",
-        "A literal, factual claim about legal evidence.",
-        "Personification, giving fear the human ability to make an argument.",
+        "A simile, comparing fear directly to a lawyer in a courtroom.",
+        "A literal, factual claim about the rules of legal evidence.",
+        "Personification, giving fear the human power to argue.",
         "Onomatopoeia, a word that imitates a sound."
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "A simile would need the word \"like\" or \"as\" to compare fear to a courtroom directly. No such comparison word appears here.",
+        "0": "A simile would need the word \"like\" or \"as\" to compare fear to a lawyer directly.  No such comparison word appears here.",
         "1": "This sentence is about the narrator's own reasoning, not about legal evidence in any literal sense. You may have taken the word \"evidence\" too literally.",
         "3": "Onomatopoeia names a word that imitates a sound, like \"buzz\" or \"click.\" \"Argues\" is not a sound-imitating word at all."
       },
@@ -4065,9 +4065,9 @@
       "stem": "What does Finch mean by saying the Wyrdstone's carver spent \"a season of their life saying so in rock\"?",
       "choices": [
         "The carver literally spoke sentences that were later carved by someone else.",
-        "The carver was being punished with forced labor in a quarry.",
-        "The rock itself physically changed color to display a message.",
-        "The act of carving functions like a lasting statement, permanently expressed in stone rather than spoken aloud."
+        "The carver was being punished with a season of forced labor in a stone quarry.",
+        "The rock itself physically changed color over the season to display a message.",
+        "Carving the stone was a lasting statement, made in rock instead of speech."
       ],
       "key": 3,
       "distractorRationale": {
@@ -4088,10 +4088,10 @@
       "dok": 3,
       "stem": "What is the effect of describing the corridor's lights as growing dimmer, one at a time, as Mila approaches the vault door?",
       "choices": [
-        "It builds mounting tension and unease as she gets closer to the vault, pacing the buildup before she enters.",
+        "It builds tension step by step as she nears the vault.",
         "It shows the building is having electrical problems that need repair.",
         "It proves someone deliberately sabotaged the lighting system.",
-        "It has no real connection to the passage's mood or pacing."
+        "It has no real connection to the passage's mood or its pacing at all."
       ],
       "key": 0,
       "distractorRationale": {
@@ -4185,12 +4185,12 @@
       "partA": {
         "stem": "What is the central theme of this final passage?",
         "choices": [
-          "Paying close attention to small details, over time, is what actually makes success possible.",
-          "Physical strength is what allows the crew to open the final door.",
-          "Luck alone explains why the crew succeeds where Kade fails.",
-          "Working alone is more effective than working as a team."
+          "Working alone is more effective than working as a team.",
+          "Physical strength is what finally allows the crew to force open the vault's last door.",
+          "Luck alone explains why the crew succeeds at the door where Kade, after years of work, fails.",
+          "Close attention to small details, over time, is what makes success possible."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -4201,16 +4201,16 @@
           "Dash sets the Wyrdstone into the leftmost notch first."
         ],
         "key": {
-          "0": 0,
+          "0": 1,
           "1": 3,
           "2": 2,
-          "3": 1
+          "3": 0
         }
       },
       "distractorRationale": {
+        "0": "This line shows Mila's careful, ongoing attention to evidence, working alongside the rest of the crew. It argues for teamwork, not for working alone.",
         "1": "This line describes an action Dash takes with the Wyrdstone. It says nothing about physical strength being what opens the door.",
-        "2": "The narrator credits noticing and 'the exact right kind of luck' together, not luck by itself, and this line also shows Mila's careful attention rather than random chance.",
-        "3": "This line shows Mila's careful, ongoing attention to evidence, working alongside the rest of the crew. It argues for teamwork, not for working alone."
+        "2": "The narrator credits noticing and 'the exact right kind of luck' together, not luck by itself, and this line also shows Mila's careful attention rather than random chance."
       },
       "explain": "The passage circles back explicitly to Finch's very first lesson: noticing is what matters most. Every relic the crew recovers, and the final door itself, comes down to small details someone paid close attention to over months, not to strength, chance alone, or solo effort."
     },
@@ -4224,14 +4224,14 @@
       "coachTopic": "central-theme",
       "dok": 4,
       "partA": {
-        "stem": "What does the final line, calling Finch's words \"a warning as much as a compliment,\" suggest about the story's theme?",
+        "stem": "What theme does the passage develop about noticing?",
         "choices": [
-          "Being someone who notices everything is valuable, but it also means carrying real responsibility.",
-          "Finch regrets ever training the crew in the first place.",
-          "Noticing things is completely useless without physical courage.",
-          "The narrator has decided to stop noticing things from now on."
+          "The narrator has decided to stop noticing things from now on.",
+          "The right keys matter more than noticing, since Kade found the door first.",
+          "Noticing things does little good for someone who lacks physical courage.",
+          "Noticing is a strength, but it can lead into real danger."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -4242,18 +4242,18 @@
           "Kade found this door before we did."
         ],
         "key": {
-          "0": 0,
+          "0": 1,
           "1": 3,
           "2": 2,
-          "3": 1
+          "3": 0
         }
       },
       "distractorRationale": {
-        "1": "This line is about Kade discovering the door first. It has nothing to do with Finch regretting the crew's training.",
-        "2": "This line describes a tense pause while Dash sets the stone. It says nothing about courage making noticing useless.",
-        "3": "This line is the narrator actively noticing a pattern match, which is the opposite of deciding to stop noticing things."
+        "0": "This line describes a tense pause while Dash sets the stone.  It says nothing about the narrator deciding to stop noticing things.",
+        "1": "This line says Kade found the door first, but she never noticed the crew slip past her.  The crew only worked out what the keys were for because Mila noticed the spiral, so noticing mattered more than the keys.",
+        "2": "This line shows the narrator noticing a pattern, with no word about courage.  Nothing in the passage says noticing needs courage to do any good."
       },
-      "explain": "Calling the lesson both a warning and a compliment means the same skill that makes the crew capable also puts them in real danger, standing in a room that should not exist, facing a rival who wanted it just as badly. That double meaning is the theme the whole passage has been building toward."
+      "explain": "Calling the lesson both a warning and a compliment means the same skill that makes the crew capable also leads them into real danger.  It takes them down a staircase that should not exist and right past a rival who never noticed them slip by.  That double meaning is the theme the whole passage has been building toward."
     },
     {
       "id": "l6-ebsr-callback-to-first-lesson",
@@ -4265,36 +4265,36 @@
       "coachTopic": "central-theme",
       "dok": 3,
       "partA": {
-        "stem": "How does the ending of this passage connect back to the very first thing Finch told Theo, in an earlier scene?",
+        "stem": "On the first day, Finch told Theo that the Archive goes deeper than anyone walking past it ever guessed.  How does this final passage connect back to that claim?",
         "choices": [
-          "It confirms that the same quality Finch praised at the start, noticing, is what saves the crew at the end.",
-          "It shows that Finch was wrong about what mattered most.",
-          "It reveals that Theo never actually trusted Finch's training.",
-          "It shows the crew abandoning everything Finch taught them."
+          "It shows the claim was the kind of thing trainers say to sound impressive.",
+          "It shows that Kade, not Finch, knew how deep the Archive went, since she found this door first.",
+          "It shows the claim scared Theo, since he stops breathing when the door lights up.",
+          "It shows the claim was true, since the crew has gone down to a hidden part of the Archive under the old library."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "We only worked that out because Mila noticed the same spiral, scaled three different ways, on three objects that supposedly had nothing to do with each other.",
-          "Finch always said noticing was the only qualification that ever mattered here.",
-          "I spent months assuming that was the kind of thing trainers say to sound impressive.",
-          "I set the Threadglass last, into the notch on the right."
+          "Now I am standing at the bottom of a staircase that should not exist, under a library that closed two winters ago.",
+          "It turns out Kade spent years finding the keys and never noticed the three of us slip past her, at the door she thought she alone knew how to open.",
+          "I stop breathing, the way I stopped breathing outside Frostbank.",
+          "I spent months assuming that was the kind of thing trainers say to sound impressive."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
-          "2": 3,
-          "3": 2
+          "0": 3,
+          "1": 1,
+          "2": 2,
+          "3": 0
         }
       },
       "distractorRationale": {
-        "1": "This line shows Mila's noticing directly solving the mystery of the door, which argues for Finch being right, not wrong.",
-        "2": "This line describes the narrator's doubt from months earlier, a doubt the passage explicitly says he is now revising, not evidence he never trusted Finch by the end.",
-        "3": "Setting the relic into its notch is the crew following the training and the plan closely, not abandoning it."
+        "0": "This line is Theo's old doubt, from the months when he thought Finch was only trying to sound impressive.  A few sentences later he says he is revising that assumption completely, because the claim has turned out to be true.",
+        "1": "This line tells only what Kade believed about the door.  Finch knew the Archive went deeper months before this night, since she told Theo so on his very first day.",
+        "2": "This line shows Theo holding his breath as the door lights up.  Nothing in the passage ties that moment to Finch's claim, which Theo had doubted rather than feared."
       },
-      "explain": "The passage draws a direct line from Finch's very first lesson to the crew's final success: the same instinct to notice small, easy-to-miss details is exactly what lets them recognize the matching spiral and solve the door. That callback is the clearest sign of what the whole pack has been building toward."
+      "explain": "On the first day, Finch said the Archive goes deeper than anyone guessed, and Theo spent months thinking that was the kind of thing trainers say.  Now he stands at the bottom of a staircase that should not exist, under a library that closed two winters ago.  He is revising that assumption completely, because the ending shows Finch's claim was true."
     },
     {
       "id": "l6-ms-earlier-skills-pay-off",
@@ -4307,24 +4307,24 @@
       "dok": 4,
       "stem": "Select the three details from the final passage that show the crew's success depended on skills built up earlier in the story.",
       "choices": [
-        "Mila recognizes the same spiral pattern across three unrelated objects.",
-        "The crew reads the tool marks on the seal with the same care shown in an earlier debrief.",
-        "Theo recalls the exact spiral pattern from an object he once delivered in a box.",
-        "Kade spent years collecting the three relics.",
+        "The vault behind the door holds centuries of objects that people once hid.",
         "The door releases a thread of light when the third relic is placed.",
-        "The vault holds centuries of hidden objects."
+        "Theo recalls the exact spiral pattern from an object he once delivered in a box.",
+        "Kade spent years collecting the three relics from three different collections.",
+        "Mila reads the seal's tool marks with the care she gives all evidence.",
+        "Mila recognizes the same spiral pattern across three unrelated objects."
       ],
       "key": [
-        0,
-        1,
-        2
+        2,
+        4,
+        5
       ],
       "distractorRationale": {
-        "3": "Kade's years of collecting are about the rival's own effort, not a skill the crew itself built up over the story.",
-        "4": "The light appearing is a result of the crew's success, not a skill they used to achieve it.",
-        "5": "The contents of the vault describe what is inside the room. They are not a skill the crew developed earlier in the story."
+        "0": "The contents of the vault describe what is inside the room. They are not a skill the crew developed earlier in the story.",
+        "1": "The light appearing is a result of the crew's success, not a skill they used to achieve it.",
+        "3": "Kade's years of collecting are about the rival's own effort, not a skill the crew itself built up over the story."
       },
-      "explain": "Three moments show earlier training paying off directly: Mila's pattern recognition, careful evidence-reading habits from the debrief scene, and Theo's own memory for detail. Kade's collecting, the door's light, and the vault's contents are all plot outcomes, not skills the crew themselves practiced and applied."
+      "explain": "Three moments show earlier training paying off directly:  Mila's pattern recognition, the care with evidence she has shown since the day she counted two empty chairs, and Theo's own memory for detail.  Kade's collecting, the door's light, and the vault's contents are all plot outcomes, not skills the crew themselves practiced and applied."
     },
     {
       "id": "l6-ebsr-unverifiable-meaning",
@@ -4338,32 +4338,32 @@
       "partA": {
         "stem": "In this passage, what does the word \"unverifiable\" mean, based on how the Archive uses it?",
         "choices": [
-          "Impossible for anyone outside the source to check or confirm.",
-          "Definitely false and not worth considering.",
+          "Missing important details.",
+          "Definitely false, and so not worth an Archive researcher's time to consider.",
           "Written in a language nobody can translate.",
-          "Missing important details."
+          "Impossible for anyone outside the source to check or confirm."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "That does not make the chronicle false.",
           "No outside party was ever allowed to check it.",
+          "That does not make the chronicle false.",
           "Two accounts of the Abydos seal chamber survive in Archive records.",
           "The temple chronicle was carved by scribes working for the priesthood itself."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
+          "0": 2,
+          "1": 1,
           "2": 3,
-          "3": 2
+          "3": 0
         }
       },
       "distractorRationale": {
+        "0": "This line is a plain fact about how many accounts survive.  It does not say that unverifiable means missing details.",
         "1": "The passage explicitly separates being unverifiable from being false. Unverifiable claims might still turn out to be true; nobody has simply been able to check them.",
-        "2": "This line is a plain fact about how many accounts exist. It does not describe any translation problem.",
-        "3": "This line names who carved the chronicle. It does not define what unverifiable means in context."
+        "2": "This line names who carved the chronicle.  It does not describe any problem with translating it."
       },
       "explain": "The Archive uses unverifiable to mean nobody outside the source has ever had a chance to check the claim, a statement about access, not about the claim being false, poorly written, or incomplete. That distinction is exactly why the entry treats an unverifiable claim so carefully instead of just rejecting it."
     },
@@ -4379,32 +4379,32 @@
       "partA": {
         "stem": "What is the chronicle's own argument for why readers should believe its claim about the chamber?",
         "choices": [
-          "The priesthood was chosen by the gods themselves, and its record has never needed to explain a failure.",
-          "Independent witnesses confirmed the chamber was never entered.",
+          "Outside inspectors check every year that the seal still remains in the chamber.",
+          "Independent witnesses from outside the temple confirmed the chamber was never entered.",
           "A written confession from every known enemy proves the chamber was safe.",
-          "The chamber was tested by outside inspectors every year."
+          "The gods chose the temple's priests, and its records show no failure."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from Source A best supports the answer you just gave?",
         "choices": [
-          "No enemy of the temple has ever set foot in this chamber.",
           "It is maintained by the priesthood the gods themselves selected for this single purpose, generation after generation, without a single failure the temple's own records have ever needed to explain.",
+          "No enemy of the temple has ever set foot in this chamber.",
           "The seal remains in this chamber to this day.",
           "The chronicle exists to record that fact, for every generation of priests who serve here after the scribes who carved it have themselves passed into the west."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
+          "0": 2,
+          "1": 1,
           "2": 3,
-          "3": 2
+          "3": 0
         }
       },
       "distractorRationale": {
+        "0": "This line says the seal is still in the chamber, but only on the chronicle's own word.  No outside inspector is ever mentioned.",
         "1": "This line is the claim itself, that no enemy ever entered. It is not evidence of any independent witness confirming it.",
-        "2": "This line is the seal's current location according to the chronicle. It says nothing about inspectors visiting the chamber.",
-        "3": "This line explains who the chronicle is written for, future priests, not a confession gathered from any enemy."
+        "2": "This line says the chronicle was written for the priests who serve after its scribes.  It is not a confession from any enemy, and none is ever mentioned."
       },
       "explain": "The chronicle's argument rests entirely on the priesthood's own claimed authority and its own unblemished record, not on any independent confirmation from witnesses, enemies, or outside inspectors. Tracing the argument back shows it ultimately depends on trusting the very institution making the claim."
     },
@@ -4418,36 +4418,36 @@
       "coachTopic": "evidence-across-texts",
       "dok": 4,
       "partA": {
-        "stem": "How does the ledger's account of the tool marks function as a response to the temple chronicle's claim, Source A?",
+        "stem": "The ledger answers the chronicle's claim with the tool marks.  What does its last paragraph add to that answer?",
         "choices": [
-          "It directly challenges the chronicle by offering a checkable, physical detail the chronicle never mentions.",
-          "It confirms every detail of the chronicle exactly as written.",
-          "It ignores the chronicle completely and describes an unrelated location.",
-          "It admits the Reckoner never actually found the chamber."
+          "It gives up on the truth, since every temple and every account is wrong at least once.",
+          "It asks the next Reckoner to trust the guild's story, since the tool marks proved it.",
+          "It admits the wall was right after all, since the seal sits where the wall says.",
+          "It doubts the guild's own story too, just as it doubted the wall's story."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from Source B best supports the answer you just gave?",
         "choices": [
-          "I found the seal exactly where the wall says it should be.",
+          "It is not the one our own guild likes to tell about itself, either.",
           "I know this because the setting stone beneath the seal shows two different tool marks, from two different centuries.",
-          "Every temple claims its innermost chamber has never been entered.",
-          "I am writing from inside the very chamber the Abydos priests have sworn, for six generations, that no enemy has ever reached."
+          "Every temple is wrong at least once.",
+          "I found the seal exactly where the wall says it should be."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
+          "0": 2,
+          "1": 1,
           "2": 3,
-          "3": 2
+          "3": 0
         }
       },
       "distractorRationale": {
-        "1": "The Reckoner does confirm the seal's location matches the chronicle, but that is one detail, not every detail. The tool marks specifically contradict the chronicle's larger claim.",
-        "2": "This is a general statement about temples, not a description of some unrelated location. The Reckoner is still discussing this exact chamber.",
-        "3": "This line states plainly that the Reckoner is inside the very chamber in question, which is the opposite of admitting it was never found."
+        "0": "Every temple is wrong at least once, but the last paragraph does not give up on the truth.  It says the truth is whatever the last person to look closely wrote down.",
+        "1": "This line shows the tool marks proving the wall wrong.  The last paragraph then says the true history is not the story the guild tells about itself, either, so it asks no one to trust the guild.",
+        "2": "The seal is where the wall says it is, but the last paragraph says the chamber's true history is not the one carved on its wall."
       },
-      "explain": "The tool marks are the ledger's sharpest tool against the chronicle: a specific, physical detail that directly contradicts the chronicle's absolute claim, rather than simply restating or ignoring it. That is what makes the two sources genuinely worth reading side by side."
+      "explain": "The tool marks prove the wall wrong, and the last paragraph goes one step further.  It says the true history is not the guild's own story either, only what the last person to look closely wrote down.  The ledger doubts its own side, just as it doubted the wall."
     },
     {
       "id": "l6-ebsr-isis-search-purpose",
@@ -4461,34 +4461,34 @@
       "partA": {
         "stem": "What is the chronicle's main purpose in describing Isis's search across every province?",
         "choices": [
-          "To present Isis's devotion as extraordinary, setting up the temple's own claim to guard something equally extraordinary.",
-          "To provide an exact map of the kingdom's provinces for travelers.",
-          "To argue that Set was innocent of any wrongdoing.",
-          "To warn priests never to search for anything themselves."
+          "To warn priests never to search for anything themselves.",
+          "To give travelers an exact map of the kingdom, with each province and its borders marked.",
+          "To argue that Set was innocent of any wrongdoing against his brother Osiris.",
+          "To present Isis's devotion as extraordinary, setting up the temple's claim to guard something just as great."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from Source A best supports the answer you just gave?",
         "choices": [
-          "She searched every province of the kingdom herself, refusing all rest.",
           "Isis pressed on, through all the provinces that remained.",
+          "His body was scattered beyond the borders of the living world.",
           "She gathered every piece of what Set had scattered.",
           "The god Osiris was struck down by his brother Set."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
+          "0": 2,
+          "1": 1,
           "2": 3,
-          "3": 2
+          "3": 0
         }
       },
       "distractorRationale": {
-        "1": "This line is about Isis's determination during her search. It gives no map details or directions useful to a traveler.",
-        "2": "This line describes Isis gathering the scattered pieces. It says nothing about Set's innocence, and the story elsewhere calls him a betrayer.",
-        "3": "This line names Set as Osiris's attacker directly, which argues against any claim that the chronicle presents Set as innocent."
+        "0": "This line shows Isis gathering every piece Set had scattered.  The chronicle holds her search up as devotion to admire, not as something priests are warned never to do.",
+        "1": "This line mentions borders, but they are the borders of the living world, not lines on a map.  The chronicle gives no province a name and shows no route a traveler could follow.",
+        "2": "This line names Set as Osiris's attacker directly, which argues against any claim that the chronicle presents Set as innocent."
       },
-      "explain": "The chronicle builds up Isis's tireless devotion for a reason: it sets the emotional stage for the temple's own claim to be an equally devoted, unfailing guardian of what she left behind. The purpose is persuasive, not geographic or legal, and it is definitely not a warning against searching."
+      "explain": "The chronicle builds up Isis's tireless devotion for a reason: it sets the emotional stage for the temple's own claim to be an equally devoted, unfailing guardian of what she left behind.  The purpose is persuasive, not geographic or legal, and it is definitely not a warning against searching."
     },
     {
       "id": "l6-ebsr-catalog-purpose-vs-chronicle",
@@ -4502,34 +4502,34 @@
       "partA": {
         "stem": "What is the overall purpose of a catalog entry like this one, compared to the Temple Chronicle's purpose?",
         "choices": [
-          "To record verified facts and open questions plainly, without trying to persuade the reader of anything.",
+          "To argue that the old maze legend the disc honors really did happen.",
           "To convince readers that the Archive is more powerful than any temple.",
-          "To advertise the Threadglass for sale to private collectors.",
-          "To argue that the maze legend is completely true."
+          "To advertise the Threadglass for sale to a private collector like the one who has it.",
+          "To record facts and open questions plainly, not to persuade anyone."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
+          "The gap between those two counts is the single largest question mark in this entry.",
           "No theft was ever reported to any police record the Archive has found.",
-          "The entry below is the current record for catalog number 114, known informally as the Threadglass.",
-          "The disc is almost certainly a later tribute to that story, not a prop from the events the story tells.",
+          "It is about a hero who escaped a builder's maze by following a single unbroken thread.",
           "Archive field work places the Threadglass in a private collection as of last spring."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
+          "0": 2,
+          "1": 1,
           "2": 3,
-          "3": 2
+          "3": 0
         }
       },
       "distractorRationale": {
-        "1": "This line is a fact about missing theft records. It says nothing about comparing the Archive's power to a temple's.",
-        "2": "This line reports where the object is currently believed to be. It is not phrased as a sales pitch to any buyer.",
-        "3": "This line shows the entry treating the maze legend with caution, likely a tribute rather than proof, which argues against the entry trying to prove the legend true."
+        "0": "This line only tells what the old maze legend is about.  Telling a story is not the same as arguing that it really did happen.  The entry even says the disc is almost certainly a later tribute to that story.",
+        "1": "This line is a fact about missing theft records.  It says nothing about comparing the Archive's power to a temple's.",
+        "2": "This line reports where the object is currently believed to be.  It is not phrased as a sales pitch to any buyer."
       },
-      "explain": "A catalog entry like this one aims to record what is known and unknown as plainly as possible, unlike the chronicle's persuasive, devotional purpose. That difference in purpose is exactly why the two kinds of documents read so differently, even when they describe similar kinds of objects."
+      "explain": "A catalog entry like this one aims to record what is known and unknown as plainly as possible, unlike the chronicle's persuasive, devotional purpose.  That difference in purpose is exactly why the two kinds of documents read so differently, even when they describe similar kinds of objects."
     },
     {
       "id": "l6-ms-archive-analysis-method",
@@ -4542,22 +4542,22 @@
       "dok": 4,
       "stem": "Select the three moves the Archive's analysis makes when judging the two sources about the seal chamber.",
       "choices": [
-        "It considers who is making each claim and what they might gain from it.",
-        "It asks whether each claim could, in principle, be checked by someone else.",
+        "It sides with whichever of the two sources uses the more confident language.",
+        "It dismisses both sources as worthless, since neither one can be fully trusted.",
         "It refuses to conclude which source is correct until more evidence exists.",
-        "It sides with whichever source uses more confident language.",
+        "It considers who is making each claim and what they might gain from it.",
         "It assumes the older source is automatically the more reliable one.",
-        "It dismisses both sources as worthless."
+        "It asks whether each claim could, in principle, be checked by others."
       ],
       "key": [
-        0,
-        1,
-        2
+        2,
+        3,
+        5
       ],
       "distractorRationale": {
-        "3": "The passage never mentions confidence of language as a factor. Both sources sound quite confident, and the Archive weighs them on other grounds.",
-        "4": "The passage never compares the ages of the two sources as a reason to trust one over the other.",
-        "5": "The Archive treats both sources as worth recording and weighing carefully. It never dismisses either one as worthless."
+        "0": "The passage never mentions confidence of language as a factor. Both sources sound quite confident, and the Archive weighs them on other grounds.",
+        "1": "The Archive treats both sources as worth recording and weighing carefully. It never dismisses either one as worthless.",
+        "4": "The passage never compares the ages of the two sources as a reason to trust one over the other."
       },
       "explain": "The Archive's method is careful and specific: consider each source's motive, ask whether the claim could be checked, and hold off on a conclusion rather than guessing. Confidence of tone, the age of a source, and dismissing sources outright are not part of that method."
     },
@@ -4666,19 +4666,19 @@
       "blanks": [
         {
           "choices": [
-            "a key, cut to fit one notch in a lock built to need all three at once",
-            "a weapon meant to be used against a rival collector",
-            "a copy, with the real relic hidden somewhere else entirely"
+            "a copy, with the real relic hidden somewhere else in the Archive",
+            "a weapon the crew means to use against Kade, the rival collector",
+            "a key, cut to fit one notch in a lock that needs all three"
           ],
-          "key": 0
+          "key": 2
         },
         {
           "choices": [
-            "Mila's habit of noticing small, matching details solves what years of collecting never could",
+            "Finch personally opens the door for them",
             "the crew is simply stronger and faster than Kade",
-            "Finch personally opens the door for them"
+            "Mila's habit of noticing small, matching details solves what years of collecting never could"
           ],
-          "key": 0
+          "key": 2
         }
       ],
       "explain": "The passage is explicit that each relic is a key rather than a prize in itself, and the crew's advantage over Kade is never strength or an outside rescue but Mila's own habit of noticing a small, matching detail, the exact skill Finch prized from the very first scene of the whole story."
@@ -4696,19 +4696,19 @@
       "blanks": [
         {
           "choices": [
-            "record what is known and what is still uncertain, as plainly as possible",
+            "prove that every legend connected to the object, like the maze story, is true",
             "advertise the object for sale to the highest bidder",
-            "prove that every legend connected to the object is completely true"
+            "record what is known and what is still uncertain, as plainly as possible"
           ],
-          "key": 0
+          "key": 2
         },
         {
           "choices": [
-            "that the object's exact disappearance was never fully explained",
-            "that the Archive secretly already owns the object",
-            "that the entry itself might be entirely fictional"
+            "that the entry itself might be entirely made up by its writers",
+            "that the Archive secretly already owns the object it is tracking",
+            "that the object's disappearance was never fully explained"
           ],
-          "key": 0
+          "key": 2
         }
       ],
       "explain": "A catalog entry's job is plain record-keeping rather than persuasion, exactly why it can admit an open question, like the unexplained gap in the Threadglass's history, without that admission weakening its purpose. A sales pitch or a claim of total proof would work against that same plain, recording purpose."
@@ -4748,7 +4748,7 @@
       "dok": 3,
       "stem": "What do Mila's introduction in \"Two Empty Chairs\" and her role in the final vault have in common?",
       "choices": [
-        "In both scenes, she openly distrusts Theo and refuses to work with him.",
+        "In both scenes, she openly distrusts Theo and refuses to work closely with him or Dash.",
         "In both scenes, she refuses to speak until someone else speaks first.",
         "In both scenes, she is the last member of the crew to arrive.",
         "In both scenes, she notices an absence or a gap before anyone else has explained it."
@@ -4772,9 +4772,9 @@
       "dok": 4,
       "stem": "Mila re-reads the seal's tool marks \"one more time, like she is checking a signature.\" How does this echo a lesson from earlier in the story?",
       "choices": [
-        "It reflects the same discipline Dash showed logging an unexplained gap honestly instead of guessing at it.",
-        "It reflects Kade's own habit of collecting objects without asking questions.",
-        "It reflects Theo's particular skill at inventing believable cover stories.",
+        "It reflects the same discipline Dash showed in logging a gap, not a guess.",
+        "It reflects Kade's own habit of collecting objects for years without asking questions.",
+        "It reflects Theo's particular skill at inventing believable cover stories under pressure.",
         "It reflects a brand-new skill the story never shows earlier on."
       ],
       "key": 0,
@@ -4820,10 +4820,10 @@
       "dok": 4,
       "stem": "Comparing the Reckoner's Ledger's tool-mark evidence to the Temple Chronicle's faith-based claim, which standard does the Archive treat as more useful for future research?",
       "choices": [
-        "Whichever source uses more confident, persuasive language.",
-        "Whichever source happens to be older.",
-        "Physical evidence that could, in principle, be checked directly, even though nobody has fully checked it yet.",
-        "Whichever source was written first-hand rather than carved into a wall."
+        "Whichever source uses the more confident and persuasive language to make its claim.",
+        "Whichever of the two sources happens to be older and closer to the events.",
+        "Whichever source rests on physical evidence that could still be checked.",
+        "Whichever source was written first-hand by a visitor rather than carved into a wall."
       ],
       "key": 2,
       "distractorRationale": {
@@ -5219,7 +5219,7 @@
       "type": "ms",
       "passageId": "p-kade-collection",
       "figureId": "fig-l3-kade-collection",
-      "figureFact": "the four exits and the two visible cameras",
+      "figureFact": "the two visible cameras",
       "targets": [
         "c1-lit-4-reasoning"
       ],
@@ -5229,8 +5229,8 @@
       "choices": [
         "an open pedestal, with no case around it at all",
         "the intake desk, where a man barely looks up",
-        "the four exits and the two visible cameras",
-        "Kade, crossing the room toward him",
+        "the two visible cameras",
+        "the four exits",
         "a thin dark line in the floor circling it",
         "a service elevator"
       ],
@@ -5241,12 +5241,12 @@
       ],
       "distractorRationale": {
         "1": "The desk's only join is an arrow running on to the elevator.  Its arrowhead sits at the elevator end, not at the desk, but the join still carries one.",
-        "3": "Kade crosses the room in the story, but the plan draws places and fittings, not people.  She is not on the plan at all, so nothing joins her to anything.",
+        "3": "The plan draws an arrow from the room out to the four exits, because an exit is a way out.  That join carries an arrowhead, like the joins on the way in.",
         "5": "An arrow runs into the service elevator from the desk and another runs out of it to the room, so the plan joins it with arrowheads, not without them."
       },
-      "explain": "The plan separates the way in from the room Theo came to see by the kind of join it draws, not by where each box sits on the sheet.  Arrows carry Theo from the desk to the elevator and on to the room.  Plain lines run from the room to the pedestal, from the pedestal to the dark line in the floor, and from the room to the count of exits and cameras.",
-      "whyTheFigureIsNeeded": "The passage mentions these six things across four paragraphs and never says which is joined to which; the plan is where the joins are drawn, arrows for the way in and plain lines for the room he came to see, and it leaves Kade off the sheet altogether.",
-      "svgRead": "Opened art/vault-of-ages-g6/fig-l3-kade-collection.svg and counted every line.  Exactly two arrowheads are drawn (<polygon> at 169.6,191.44 for the intake desk to the service elevator, and at 471.92,126.29 for the elevator on to the room), so the way in is a two-arrow route.  Three plain lines run without arrowheads: room to pedestal (544,130.56 to 544,198.08), pedestal to the dark line (544,250.08 to 544,324.24), and room to the exits-and-cameras box (508.5,127.85 to 223.38,314.95).  The pedestal alone is rx=\"20\" with stroke=\"#7c5cff\", the pack's rounded accent box for the thing standing open.  DELIBERATE CHOICE: the exits-and-cameras box is drawn at x=48.6 on the LEFT of the sheet, so the stem asks only which things the plan connects by joins that carry no arrowhead, and makes no left/right claim.  The key rests on the line style, which the alt states and the caption deliberately no longer does."
+      "explain": "The plan draws the ways a person can move as arrows:  from the desk to the elevator, from the elevator into the room, and out of the room to the four exits.  It joins the room to the things that stand in it with plain lines:  the pedestal, the dark line in the floor around it, and the two visible cameras.",
+      "whyTheFigureIsNeeded": "The passage names the exits and the cameras together, in one sentence, as two things Theo counted; only the plan pulls them apart, drawing the exits as a way out with an arrow and the cameras as part of the room with a plain line.",
+      "svgRead": "Opened art/vault-of-ages-g6/fig-l3-kade-collection.svg and counted every line.  Exactly three arrowheads are drawn:  <polygon points=\"155.2,201.4 150.2,190.4 160.2,190.4\"/> at the elevator end of the join from the intake desk, <polygon points=\"414.83,126.73 406.38,135.37 402.76,126.04\"/> at the room end of the join from the service elevator, and <polygon points=\"184.31,339.72 189.66,328.89 195.99,336.63\"/> at the far end of the join from the room to the four exits (rect x=\"84.7\" y=\"343.52\").  Three plain lines run with no arrowhead:  room to pedestal (472,130.56 to 472,211.36), pedestal to the dark line (472,263.36 to 472,337.52), and room to the two visible cameras (525.46,126.87 to 593.54,155.29), whose box is rect x=\"534\" y=\"157.6\".  The pedestal alone is rx=\"20\" with stroke=\"#7c5cff\".  The exits and the cameras were one box until 26-0921;  the passage counts them in one sentence, and splitting them is what the item turns on:  both are security details Theo notices, and only the plan joins one by an arrow and the other by a plain line."
     },
     {
       "id": "l3-cloze-row-against-row",
@@ -5631,28 +5631,28 @@
       "type": "mc",
       "passageId": "p-temple-chronicle",
       "figureId": "fig-l4-temple-chronicle",
-      "figureFact": "It is a fact requiring only faith.",
-      "stem": "One line on the chronicle card is drawn inside a box.  Which line is it, and what does that box mark?",
+      "figureFact": "a translation of an inscription",
+      "stem": "How many of the chronicle's sentences are carved on the card headed \"a translation of an inscription\"?",
       "choices": [
-        "\"The seal remains in this chamber to this day.\", marking where the seal now sits.",
-        "\"No enemy of the temple has ever set foot in this chamber.\", marking the chronicle's strongest evidence.",
-        "\"Isis worked instead.\", marking the moment the story turns to her.",
-        "\"It is a fact requiring only faith.\", marking what the chronicle asks the reader to take on trust."
+        "four",
+        "two",
+        "seven",
+        "three"
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "That line sits above the box, unmarked.  It reports where the seal is, and the chronicle does not ask the reader to take that on trust.",
-        "1": "That line is the chronicle's own statement that no enemy has entered, and the card leaves it unboxed.  The box goes round the next line, the one asking the reader to take that on faith.",
-        "2": "The card does not carry that sentence.  It belongs to the chronicle's account of Isis, which the card leaves out entirely."
+        "0": "The card shows four carved lines, but the second and third lines are one sentence.  The third line starts with a lowercase letter and finishes the sentence the second line begins.  Count where each sentence ends, not how many lines there are.",
+        "1": "Count again, sentence by sentence.  The line about the seal, the two lines about no enemy and the boxed line about faith make three.",
+        "2": "Seven counts every row under the heading.  The first three rows pair a label with its value and are not sentences from the chronicle.  The four carved lines below them hold three sentences."
       },
       "targets": [
         "c1-inf-4-reasoning"
       ],
       "coachTopic": "inference-argument",
-      "dok": 3,
-      "explain": "On this card, a box around a line means one thing: the document is asking to be believed without offering proof.  The chronicle says as much in its own words, calling its protection of the seal a fact requiring only faith.",
-      "whyTheFigureIsNeeded": "The passage prints the chronicle's closing lines as ordinary prose and marks none of them; the card is the only place one carved line carries a box, so the flag is a mark made on the document rather than a sentence written about it.",
-      "svgRead": "Opened art/vault-of-ages-g6/fig-l4-temple-chronicle.svg and counted: exactly ONE element carries data-emphasis=\"box\", <rect x=\"70\" y=\"304\" width=\"293.49\" height=\"32\" stroke=\"#7c5cff\">, and the only text inside it is <text x=\"78\" y=\"328\">It is a fact requiring only faith.</text>.  The other carved lines sit at y=232, y=264 and y=296, all above and outside that rect, which is what distractors 0 and 1 turn on.  Searched the file for \"Isis\": zero hits, so choice 2 names a sentence the card does not carry."
+      "dok": 2,
+      "explain": "The card carves three of the chronicle's sentences:  the seal remains in the chamber, no enemy has ever set foot in it, and, in the box, it is a fact requiring only faith.  The sentence about no enemy runs across two lines, the second starting with a lowercase letter, so four lines hold three sentences.  Count where each sentence ends, not how many lines there are.",
+      "whyTheFigureIsNeeded": "The passage prints the whole chronicle as running prose; only the card shows which of its sentences were carved, and how its four lines divide them.",
+      "svgRead": "Opened art/vault-of-ages-g6/fig-l4-temple-chronicle.svg.  Under the title <text x=\"78\" y=\"76\">a translation of an inscription</text> and below the rule at y1=\"194.5\", exactly four carved lines are drawn:  <text x=\"78\" y=\"232\">The seal remains in this chamber to this day.</text>, <text x=\"78\" y=\"264\">No enemy of the temple has ever set foot</text>, <text x=\"78\" y=\"296\">in this chamber.</text>, and <text x=\"78\" y=\"328\">It is a fact requiring only faith.</text> inside the one rect carrying data-emphasis=\"box\".  The line at y=296 starts in lower case and ends the sentence begun at y=264, so four lines carry three sentences.  The three rows above the rule (carved into, Temple scribes, carries) are label and value pairs, not carved sentences."
     }
   ],
   "figures": [
@@ -5935,7 +5935,7 @@
       "src": "art/vault-of-ages-g6/fig-l3-kade-collection.svg",
       "caption": "The plan shows the top two floors, from the intake desk to the room Theo came to see.",
       "credit": "Built for this project from the passage text; original work",
-      "alt": "A floor plan with the intake desk, a service elevator and a box listing the four exits and the two visible cameras down the left side, and on the right the center of a bright room holding an open pedestal with a thin dark line in the floor circling it.  Arrows run from the desk to the elevator and on into the room; plain lines tie the room to the pedestal, the pedestal to the dark line in the floor, and the room to the exits-and-cameras box.",
+      "alt": "A floor plan with \"the intake desk\", \"a service elevator\" and \"the four exits\" down the left side, and on the right \"the center of a bright room\", with \"an open pedestal\" below it, \"a thin dark line in the floor circling it\" below that, and \"the two visible cameras\" beside the room.  Arrows run from the desk to the elevator, from the elevator into the room, and from the room out to the four exits;  plain lines tie the room to the pedestal and to the cameras, and the pedestal to the dark line in the floor.",
       "dataTable": {
         "type": "schematic",
         "sourcePassageId": "p-kade-collection",
@@ -5946,43 +5946,50 @@
             "id": "desk",
             "label": "the intake desk",
             "shape": "box",
-            "x": 18,
+            "x": 16,
             "y": 8
           },
           {
             "id": "lift",
             "label": "a service elevator",
             "shape": "box",
-            "x": 18,
-            "y": 42
+            "x": 16,
+            "y": 45
           },
           {
-            "id": "count",
-            "label": "the four exits and the two visible cameras",
+            "id": "exits",
+            "label": "the four exits",
             "shape": "box",
-            "x": 18,
-            "y": 82
+            "x": 16,
+            "y": 86
           },
           {
             "id": "room",
             "label": "the center of a bright room",
             "shape": "box",
-            "x": 70,
+            "x": 60,
             "y": 8
           },
           {
             "id": "ped",
             "label": "an open pedestal",
             "shape": "round",
-            "x": 70,
-            "y": 44
+            "x": 60,
+            "y": 48
           },
           {
             "id": "ring",
             "label": "a thin dark line in the floor circling it",
             "shape": "box",
-            "x": 70,
-            "y": 82
+            "x": 60,
+            "y": 86
+          },
+          {
+            "id": "cams",
+            "label": "the two visible cameras",
+            "shape": "box",
+            "x": 92,
+            "y": 30
           }
         ],
         "edges": [
@@ -5998,6 +6005,11 @@
           },
           {
             "from": "room",
+            "to": "exits",
+            "style": "arrow"
+          },
+          {
+            "from": "room",
             "to": "ped",
             "style": "line"
           },
@@ -6008,7 +6020,7 @@
           },
           {
             "from": "room",
-            "to": "count",
+            "to": "cams",
             "style": "line"
           }
         ]

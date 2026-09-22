@@ -107,3 +107,15 @@ jobs:
 
       - name: Figure reconcile (drawing vs its labels vs the item's own answer; 16 controls)
         run: node tests/figure-reconcile.js
+
+      - name: Key spread (the answer's POSITION is not the answer; whole reading packs; 8 controls)
+        run: node tests/key-spread.js
+
+      - name: Answer cues (the answer's LENGTH is not the answer; every rank, ms both ends; 7 controls)
+        run: node tests/answer-cues.js
+
+      - name: Review echo (a level-6 item does not re-ask or give away an earlier level; 6 controls)
+        run: node tests/sweep-review-echo.js
+
+      - name: EBSR rationale (the feedback a child reads is about the wrong answer they picked; 3 controls)
+        run: node tests/sweep-ebsr-rationale.js

@@ -119,10 +119,10 @@ check('blind-reanswer.js resolvedItemHash matches the real N4 passage-aware item
     'resolvedItemHash must move when the passage moves, or this pin is not testing passage-awareness at all');
 });
 
-check('authoredKeyOf reads mc, ms and ebsr partA keys', () => {
+check('authoredKeyOf reads mc, ms and ebsr keys', () => {
   const p = clone();
   assert.strictEqual(authoredKeyOf(p.items[0]), 0);
-  assert.strictEqual(authoredKeyOf(p.items[1]), 1);   // ebsr uses partA.key
+  assert.deepStrictEqual(authoredKeyOf(p.items[1]), [1, 0]);   // ebsr:  Part A's key, then the Part B line mapped from it
   assert.deepStrictEqual(authoredKeyOf({ type: 'ms', key: [0, 2] }), [0, 2]);
   assert.strictEqual(authoredKeyOf({ type: 'order' }), null);
 });
@@ -329,7 +329,28 @@ check('an unknown type defaults to the STRICT comparison, so a new type fails lo
   // Scalars are unaffected by any of this.
   assert.strictEqual(sameAnswer(2, 2, 'mc'), true);
   assert.strictEqual(sameAnswer(2, 0, 'mc'), false);
-  assert.strictEqual(sameAnswer(1, 1, 'ebsr'), true);
+  assert.strictEqual(sameAnswer([1, 0], [1, 0], 'ebsr'), true);
+  assert.strictEqual(sameAnswer([1, 0], [0, 1], 'ebsr'), false, 'ebsr is a sequence:  Part A first, then Part B');
+});
+
+check('an EBSR is certified on BOTH parts:  the Part B line mapped from the key is part of its answer', () => {
+  // 26-0921.  Until then authoredKeyOf returned Part A's key alone, so no Part B line in any pack had
+  // ever been blind-checked, although engine/items.js gives full credit only for Part A's key AND the
+  // line mapped from it.  l3-ebsr-why-two-seconds (Cold Signal) mapped its correct claim to "I write
+  // down the time anyway." while the margin sentence that states the claim was mapped from a wrong
+  // one, and it carried a clean "agree" at high confidence.
+  const p = clone();
+  const it = p.items[1];
+  assert.deepStrictEqual(authoredKeyOf(it), [1, 0]);
+  // The right claim with the wrong line must NOT read as agreement.
+  assert.strictEqual(sameAnswer([1, 2], authoredKeyOf(it), 'ebsr'), false);
+  assert.strictEqual(sameAnswer([1, 0], authoredKeyOf(it), 'ebsr'), true);
+  // The blind reader is shown Part B, and asked for both letters.
+  const { prompt } = blindQuestion(it, p.passages.find((q) => q.id === it.passageId));
+  assert.ok(prompt.includes(it.partB.choices[3]), 'the blind prompt must carry the Part B options');
+  assert.ok(prompt.includes('two letters'), 'the blind prompt must ask for a Part A letter and a Part B letter');
+  // And the parser keeps the two letters in the order sent.
+  assert.deepStrictEqual(parseAnswer('{"answer": ["B", "A"], "confidence": "high"}', 4).answer, [1, 0]);
 });
 
 check('parseAnswer records the letters the model actually sent, in the order it sent them', () => {

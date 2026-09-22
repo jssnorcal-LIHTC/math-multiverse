@@ -29,6 +29,17 @@
 // position 0; re-placing those means re-certifying 144 blind verdicts, which is a decision for a
 // pack owner and not something a gate added mid-review gets to force.
 //
+// WIDENED 26-0921, BY THE PACK OWNER.  Justin:  "rewrite item 1 and recheck each one", all five
+// reading packs.  Every item in those packs is being re-checked anyway, so the reason for reporting
+// the rest and gating only the wave is gone, and the whole of each READING pack (every pack but the
+// math one) is now gated too, by the same even-share rule, grouped by kind and width, with
+// EBSR Part A and the Part B line mapped from Part A's key counted as sets of their own.  Measured at
+// 2ebf9b8:  Vault's Part A key sat at position A in 48 of 48 sets, Cold Signal's mc key in 26 of 43,
+// and Night Rounds keyed 11 of its 15 multi-selects exactly their first three options.  A
+// multi-select keyed exactly its first k options now fails on its own, because "the answers are the
+// top ones" is a pattern whatever the per-position counts say.  build/rebalance-key-positions.js
+// does the moving.  The math pack is generated, is not a reading pack, and stays REPORTED.
+//
 // HARD RULES (constraint 12). A run that finds no figure-stimulus items FAILS rather than passing
 // quietly, and both controls must fire: the real pre-fix distribution goes red, the post-fix one
 // goes green.
@@ -136,6 +147,48 @@ for (const f of files) {
   }
 }
 
+// ---- WHOLE READING PACKS (26-0921) ----
+// Single-answer sets by kind and width;  a multi-select by width, one slot per key.
+function wholeGroups(items) {
+  const g = new Map();
+  const bucket = (k, width) => { if (!g.has(k)) g.set(k, { counts: {}, slots: 0, width, n: 0, firstK: [] }); return g.get(k); };
+  const bump = (b, pos) => { b.counts[pos] = (b.counts[pos] || 0) + 1; b.slots++; };
+  for (const it of items) {
+    if (it.type === 'mc' && Number.isInteger(it.key) && Array.isArray(it.choices)) {
+      const b = bucket(`mc/${it.choices.length}`, it.choices.length); b.n++; bump(b, it.key);
+    } else if (it.type === 'ebsr' && it.partA && it.partB && Number.isInteger(it.partA.key)) {
+      const a = bucket(`partA/${it.partA.choices.length}`, it.partA.choices.length); a.n++; bump(a, it.partA.key);
+      const kb = it.partB.key && typeof it.partB.key === 'object' ? it.partB.key[String(it.partA.key)] : null;
+      if (Number.isInteger(kb)) { const b = bucket(`partB/${it.partB.choices.length}`, it.partB.choices.length); b.n++; bump(b, kb); }
+    } else if (it.type === 'cloze' && Array.isArray(it.blanks)) {
+      for (const bl of it.blanks) if (bl && Array.isArray(bl.choices) && Number.isInteger(bl.key)) { const b = bucket(`cloze/${bl.choices.length}`, bl.choices.length); b.n++; bump(b, bl.key); }
+    } else if (it.type === 'ms' && Array.isArray(it.key) && Array.isArray(it.choices)) {
+      const b = bucket(`ms/${it.choices.length}`, it.choices.length); b.n++;
+      for (const k of it.key) bump(b, k);
+      if (it.key.length && [...it.key].sort((x, y) => x - y).every((k, i) => k === i)) b.firstK.push(it.id || '(item)');
+    }
+  }
+  return g;
+}
+const wholeRows = [];
+for (const f of files) {
+  let pack;
+  try { pack = JSON.parse(fs.readFileSync(path.join(PACK_DIR, f), 'utf8')); } catch (e) { continue; }
+  const id = f.replace(/\.json$/, '');
+  const items = pack.items || [];
+  const reading = ((pack.meta && pack.meta.subject) || '') !== 'math';   // the math pack has passages too
+  for (const [k, b] of wholeGroups(items)) {
+    wholeRows.push({ id, k, n: b.n, counts: JSON.stringify(b.counts), gated: reading });
+    if (!reading) continue;
+    for (const o of offenders(b)) {
+      problems.push(`${id} ${k} (whole pack):  position ${o.pos} holds ${o.count} of ${b.slots} keyed slot(s), `
+        + (o.how === 'over' ? `over the ${o.ceiling}` : `under the ${o.floor}`) + ` an even share of ${o.even} allows.  `
+        + `node build/rebalance-key-positions.js ${id} spreads them;  re-run the blind pass for every item it moves.`);
+    }
+    if (b.firstK.length) problems.push(`${id} ${k} (whole pack):  ${b.firstK.length} multi-select(s) keyed exactly their first options:  ${b.firstK.join(', ')}`);
+  }
+}
+
 // ---- CONTROLS.  The measurement has to be shown able to fail, on REAL data. ----
 const controls = [];
 {
@@ -198,6 +251,20 @@ const controls = [];
     detail: JSON.stringify(allA.mc.counts),
   });
 }
+{
+  // WHOLE-PACK CONTROLS, on the real shapes that widened the gate:  Vault's Part A at 2ebf9b8 (48 of
+  // 48 at position A), and a multi-select keyed exactly its first three.
+  const vaultA = wholeGroups([...Array(48)].map(() => ({ type: 'ebsr', partA: { choices: [1, 2, 3, 4], key: 0 }, partB: { choices: [1, 2, 3, 4], key: { 0: 0, 1: 1, 2: 2, 3: 3 } } })));
+  controls.push({ name: 'NEGATIVE (whole pack): Vault Part A as it stood, 48 of 48 at A, goes red',
+    ok: offenders(vaultA.get('partA/4')).length > 0, detail: JSON.stringify(vaultA.get('partA/4').counts) });
+  const evenA = wholeGroups([...Array(48)].map((_, i) => ({ type: 'ebsr', partA: { choices: [1, 2, 3, 4], key: i % 4 }, partB: { choices: [1, 2, 3, 4], key: { 0: (i + 1) % 4, 1: (i + 1) % 4, 2: (i + 1) % 4, 3: (i + 1) % 4 } } })));
+  controls.push({ name: 'POSITIVE (whole pack): the spread the rebalancer leaves, 12/12/12/12 on both parts, goes green',
+    ok: !offenders(evenA.get('partA/4')).length && !offenders(evenA.get('partB/4')).length,
+    detail: `${JSON.stringify(evenA.get('partA/4').counts)} / ${JSON.stringify(evenA.get('partB/4').counts)}` });
+  const top3 = wholeGroups([{ type: 'ms', id: 'x', choices: [1, 2, 3, 4, 5, 6], key: [0, 1, 2] }]);
+  controls.push({ name: 'NEGATIVE (whole pack): a multi-select keyed exactly its first three is caught',
+    ok: top3.get('ms/6').firstK.length === 1, detail: JSON.stringify(top3.get('ms/6').firstK) });
+}
 for (const c of controls) if (!c.ok) problems.push(`CONTROL "${c.name}" failed (${c.detail}); every measurement above is void`);
 
 // ---- report ----
@@ -207,9 +274,10 @@ for (const r of rows) {
   console.log(r.id.padEnd(22) + r.type.padEnd(7) + String(r.n).padEnd(7) + String(r.slots).padEnd(7)
     + String(r.width).padEnd(7) + r.counts.padEnd(27) + r.packCounts + '  over ' + r.packN + ' item(s)');
 }
-console.log('\n  Gated: items carrying a figureFact.  The "whole pack" column is REPORTED, not enforced:');
-console.log('  re-placing a certified item\'s key means re-running its blind pass, which is a pack owner\'s');
-console.log('  call and not a gate\'s.  A number far off an even share there is worth someone\'s attention.');
+console.log('\n  Gated above: items carrying a figureFact.  Below: every set in each pack, gated for the reading');
+console.log('  packs (the pack owner\'s call, 26-0921) and reported for the generated math pack.');
+console.log('\n' + 'pack'.padEnd(22) + 'group      sets   key positions');
+for (const r of wholeRows) console.log(r.id.padEnd(22) + r.k.padEnd(11) + String(r.n).padEnd(7) + r.counts + (r.gated ? '' : '   (reported only)'));
 
 console.log('\ncontrols:');
 for (const c of controls) console.log(`  ${c.ok ? 'ok  ' : 'BAD '} ${c.name}  (${c.detail})`);

@@ -198,8 +198,12 @@ async function main() {
       if (p) keep.push(p);
       continue;
     }
-    if (p && p.itemHash === h && p.status === 'adjudicated') { keep.push(p); continue; }
-    if (p && p.itemHash === h && p.status === 'agree' && !onlySet) { keep.push(p); continue; }
+    // A record is current only if its hash holds AND it certified the key the item has now.  The second
+    // test is what re-asks every EBSR after 26-0921, when its key grew from Part A alone to both parts:
+    // the hash did not move, but the old record never looked at Part B.
+    const sameKey = p && sameAnswer(p.authored, authoredKeyOf(item), item.type);
+    if (p && p.itemHash === h && p.status === 'adjudicated' && sameKey) { keep.push(p); continue; }
+    if (p && p.itemHash === h && p.status === 'agree' && sameKey && !onlySet) { keep.push(p); continue; }
     todo.push(item);
   }
 

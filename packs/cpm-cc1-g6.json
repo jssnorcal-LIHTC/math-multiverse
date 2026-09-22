@@ -3338,20 +3338,20 @@
    ],
    "coachTopic": "display-choose-the-kind",
    "dok": 3,
-   "stem": "You want to know how many students read for between 20 and 29 minutes.  Which display answers that?",
+   "stem": "You want to know how many runners finished the race in between 30 and 39 minutes.  Which display answers that?",
    "choices": [
-    "a histogram of how many minutes each student read",
-    "a bar graph of which pet each child keeps",
-    "a bar graph of how each student travels to school",
-    "a histogram of how tall each seedling is"
+    "a histogram of how many minutes each runner took to finish a race",
+    "a bar graph of which colour each child likes best",
+    "a bar graph of which lunch each student picked",
+    "a histogram of how much each puppy weighs"
    ],
    "key": 0,
    "distractorRationale": {
-    "1": "This sorts children by pet.  It never mentions minutes, so no bar on it can answer a question about reading time.",
-    "2": "This sorts students by how they travel.  It counts students, but not by how long they read.",
+    "1": "This sorts children by favourite colour.  It never mentions minutes, so no bar on it can answer a question about race times.",
+    "2": "This sorts students by the lunch they picked.  It counts students, but not by how long anyone took to run.",
     "3": "This is the right KIND of display and the wrong data.  Grouping into intervals only helps if the intervals are made of the thing you asked about."
    },
-   "explain": "Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  That leaves a histogram of how many minutes each student read."
+   "explain": "Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  That leaves a histogram of how many minutes each runner took to finish a race."
   },
   {
    "id": "l6-choose-2",
@@ -3363,20 +3363,20 @@
    ],
    "coachTopic": "display-choose-the-kind",
    "dok": 3,
-   "stem": "You want to know whether more children keep a dog or a cat.  Which display answers that?",
+   "stem": "You want to know whether more children like blue best or green best.  Which display answers that?",
    "choices": [
-    "a histogram of how many minutes each student read",
-    "a bar graph of which pet each child keeps",
-    "a bar graph of how each student travels to school",
-    "a histogram of how tall each seedling is"
+    "a histogram of how many minutes each runner took to finish a race",
+    "a bar graph of which colour each child likes best",
+    "a bar graph of which lunch each student picked",
+    "a histogram of how much each puppy weighs"
    ],
    "key": 1,
    "distractorRationale": {
-    "0": "A histogram groups numbers into intervals.  Dog and cat are names, not numbers, so they cannot be put in order along a number line.",
-    "2": "This is the right KIND of display and the wrong data.  It has named groups, but none of them is a pet.",
-    "3": "This groups heights into intervals.  It is measuring plants, not counting pets."
+    "0": "A histogram groups numbers into intervals.  Blue and green are names, not numbers, so they cannot be put in order along a number line.",
+    "2": "This is the right KIND of display and the wrong data.  It has named groups, but none of them is a colour.",
+    "3": "This groups weights into intervals.  It is weighing puppies, not counting colours."
    },
-   "explain": "Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  That leaves a bar graph of which pet each child keeps."
+   "explain": "Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  That leaves a bar graph of which colour each child likes best."
   },
   {
    "id": "l6-choose-3",
@@ -3388,20 +3388,20 @@
    ],
    "coachTopic": "display-choose-the-kind",
    "dok": 3,
-   "stem": "You want to know how many seedlings are shorter than 5 cm.  Which display answers that?",
+   "stem": "You want to know how many puppies weigh less than 5 kilograms.  Which display answers that?",
    "choices": [
-    "a bar graph of which pet each child keeps",
-    "a histogram of how many minutes each student read",
-    "a histogram of how tall each seedling is",
-    "a bar graph of how each student travels to school"
+    "a bar graph of which colour each child likes best",
+    "a histogram of how many minutes each runner took to finish a race",
+    "a histogram of how much each puppy weighs",
+    "a bar graph of which lunch each student picked"
    ],
    "key": 2,
    "distractorRationale": {
-    "0": "This counts children by pet.  Nothing on it is measured in centimetres.",
-    "1": "This is the right KIND of display and the wrong data.  Its intervals are minutes, and the question asks about centimetres.",
-    "3": "This sorts students into named groups.  Heights are numbers and belong in intervals, not names."
+    "0": "This counts children by favourite colour.  Nothing on it is measured in kilograms.",
+    "1": "This is the right KIND of display and the wrong data.  Its intervals are minutes, and the question asks about kilograms.",
+    "3": "This sorts students into named groups.  Weights are numbers and belong in intervals, not names."
    },
-   "explain": "Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  That leaves a histogram of how tall each seedling is."
+   "explain": "Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  That leaves a histogram of how much each puppy weighs."
   },
   {
    "id": "l6-choose-4",
@@ -3413,20 +3413,20 @@
    ],
    "coachTopic": "display-choose-the-kind",
    "dok": 3,
-   "stem": "You want to know which way of getting to school the fewest students use.  Which display answers that?",
+   "stem": "You want to know which lunch the fewest students picked.  Which display answers that?",
    "choices": [
-    "a histogram of how many minutes each student read",
-    "a bar graph of which pet each child keeps",
-    "a histogram of how tall each seedling is",
-    "a bar graph of how each student travels to school"
+    "a histogram of how many minutes each runner took to finish a race",
+    "a bar graph of which colour each child likes best",
+    "a histogram of how much each puppy weighs",
+    "a bar graph of which lunch each student picked"
    ],
    "key": 3,
    "distractorRationale": {
-    "0": "This groups minutes into intervals.  Walking and cycling are names, not numbers, so they do not sit on a number line.",
-    "1": "This is the right KIND of display and the wrong data.  Its named groups are pets, not journeys.",
-    "2": "This measures plants in intervals, and the question is about students."
+    "0": "This groups minutes into intervals.  Soup and pasta are names, not numbers, so they do not sit on a number line.",
+    "1": "This is the right KIND of display and the wrong data.  Its named groups are colours, not lunches.",
+    "2": "This weighs puppies in intervals, and the question is about students."
    },
-   "explain": "Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  That leaves a bar graph of how each student travels to school."
+   "explain": "Two things have to match, and only one option gets both right.  The DATA has to be the thing you asked about, and the KIND has to fit it:  named groups go in a bar graph, numbers grouped into intervals go in a histogram.  That leaves a bar graph of which lunch each student picked."
   }
  ],
  "figures": [
