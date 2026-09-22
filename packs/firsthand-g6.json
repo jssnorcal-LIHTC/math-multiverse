@@ -719,30 +719,30 @@
       "partA": {
         "stem": "According to the briefing, why did Egypt unite into a civilization sooner than the pattern in Mesopotamia?",
         "choices": [
+          "The Tigris and the Euphrates flooded every year, spreading fresh soil that grew far more food than dry ground could.",
           "The Nile flooded on a far steadier yearly schedule, and deserts on both sides kept most invaders away.",
-          "The Tigris and the Euphrates flooded every year, spreading fresh soil across the land nearby.",
           "Managing floodwater in Mesopotamia took real teamwork, canals, walls, and shared rules.",
           "Farming grew more food than hunting ever had, so people could settle down."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "The floods were hard to predict, though, coming early some years and late in others.",
+          "In Mesopotamia, the Tigris and the Euphrates flooded every year, spreading fresh soil across the land nearby.",
           "Farming grew more food than hunting ever had, and extra food let some people stop searching for their next meal.",
           "Deserts on both sides of the Nile kept most invaders away, and a steadier, safer valley let Egypt unite sooner.",
           "Managing that water took real teamwork, canals, walls, and shared rules."
         ],
         "key": {
-          "0": 2,
-          "1": 0,
+          "0": 0,
+          "1": 2,
           "2": 3,
           "3": 1
         }
       },
       "distractorRationale": {
-        "1": "This is true of Mesopotamia's rivers, but the passage credits Egypt's unity to the Nile's steadier schedule and the deserts, not to Mesopotamia's flooding.",
+        "0": "This is true of Mesopotamia's rivers, but the passage credits Egypt's unity to the Nile's steadier schedule and the deserts, not to Mesopotamia's flooding.",
         "2": "This describes the extra teamwork Mesopotamia's unpredictable floods required, the opposite of why Egypt needed less of that kind of organizing.",
         "3": "This explains why farming let people settle down at all, a step every river-valley civilization shared, not the specific reason Egypt united sooner than Mesopotamia."
       },
@@ -938,13 +938,13 @@
       "blanks": [
         {
           "choices": [
-            "hieroglyphs",
             "cuneiform",
+            "hieroglyphs",
             "ma'at"
           ],
-          "key": 0,
+          "key": 1,
           "distractorRationale": {
-            "1": "Cuneiform is the wedge-shaped writing system Mesopotamian scribes pressed into wet clay with a cut reed, not the picture-based system Egyptian scribes carved onto papyrus and stone.",
+            "0": "Cuneiform is the wedge-shaped writing system Mesopotamian scribes pressed into wet clay with a cut reed, not the picture-based system Egyptian scribes carved onto papyrus and stone.",
             "2": "Ma'at names the balance the pharaoh was believed to keep in the world, not a writing system at all."
           }
         }
@@ -1134,10 +1134,10 @@
       "dok": 2,
       "stem": "According to the case file, what did Solomon do as Israel's third king?",
       "choices": [
-        "He united the tribes more firmly and made Jerusalem his capital for the first time.",
-        "He led the people out of slavery in Egypt, an event remembered as the Exodus.",
+        "He united the tribes more firmly and made Jerusalem the kingdom's capital for the first time.",
+        "He led the people out of slavery in Egypt, an event the tradition remembers as the Exodus.",
         "He became Israel's very first king, after years of being led only by judges.",
-        "He built the First Temple in Jerusalem, one central place for the tradition's most sacred rites."
+        "He built the First Temple in Jerusalem, one central place for the most sacred rites."
       ],
       "key": 3,
       "distractorRationale": {
@@ -1194,7 +1194,7 @@
         4
       ],
       "distractorRationale": {
-        "0": "The passage says the tradition survived by not rebuilding its state or Temple, proving it had never truly depended on either one alone.",
+        "0": "The passage says the tradition did not rebuild either its state or its Temple, and it names no third Temple anywhere.",
         "3": "The diaspora is the scattering of a people far from their own homeland, the opposite of returning to one unified kingdom."
       },
       "explain": "The three correct details trace the file's own sequence: the Babylonian destruction and exile, the Second Temple's later Roman destruction, and Yohanan ben Zakkai's school at Yavneh.  The two wrong choices each invert what the passage actually says about rebuilding and about what the diaspora means."
@@ -1211,12 +1211,12 @@
       "partA": {
         "stem": "According to the case file, what changed when the Israelites moved from judges to kings?",
         "choices": [
-          "Saul became the first king, and David then united the tribes more firmly and made Jerusalem his capital.",
-          "Judges were replaced by a Temple that centered all worship in Jerusalem.",
-          "Moses received a code of law that renewed the covenant for the first time.",
-          "The tribes split permanently and never united under one ruler again."
+          "Judges were replaced by a single Temple in Jerusalem that centered all of the tradition's worship.",
+          "David, the second king, united the tribes more firmly and made Jerusalem his capital.",
+          "Moses received a code of law at Mount Sinai, renewing the covenant Abraham had made.",
+          "The tribes split apart for good, and no single ruler ever united them again."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1227,14 +1227,14 @@
           "Saul became the first."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
+          "0": 0,
+          "1": 1,
           "2": 2,
           "3": 3
         }
       },
       "distractorRationale": {
-        "1": "The Temple came later, built by Solomon, David's son; it did not replace judges, kings did.",
+        "0": "The Temple came later, built by Solomon, David's son; it did not replace judges, kings did.",
         "2": "Moses and his code of law come from the earlier Exodus story, well before Saul and David's kingship began.",
         "3": "The passage says the opposite: David united the tribes more firmly, not that they split apart permanently."
       },
@@ -1279,7 +1279,7 @@
       "choices": [
         "A Roman army destroyed it during a revolt long after Israel's old kings had reigned.",
         "The Babylonian army destroyed it and forced many Israelites into exile.",
-        "Persian rulers destroyed it soon after allowing the exiles to return and rebuild it.",
+        "Persian rulers destroyed it soon after allowing the exiles to return and rebuild it there.",
         "It still stands today, since the case file never records its destruction."
       ],
       "key": 0,
@@ -1303,13 +1303,13 @@
       "blanks": [
         {
           "choices": [
-            "monotheism",
             "polytheism",
+            "monotheism",
             "covenant"
           ],
-          "key": 0,
+          "key": 1,
           "distractorRationale": {
-            "1": "Polytheism means believing in many gods at once, the opposite of the one-God belief the passage says took root among the Israelites.",
+            "0": "Polytheism means believing in many gods at once, the opposite of the one-God belief the passage says took root among the Israelites.",
             "2": "Covenant names the solemn promise of land and heirs Abraham made with God, not the belief in exactly one God itself."
           }
         }
@@ -1329,12 +1329,12 @@
       "partA": {
         "stem": "According to the case file, what happened after the Babylonian army conquered the kingdom of Judah?",
         "choices": [
+          "Persian rulers let the exiles return within the same year and rebuild the Temple on its old site in Jerusalem.",
           "The army destroyed the First Temple and forced many Israelites into exile, far from their own land.",
-          "Persian rulers immediately let the exiles return and rebuild the Temple that same year.",
           "A Roman army destroyed the Temple during a revolt.",
           "Yohanan ben Zakkai opened a small school at Yavneh."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1345,14 +1345,14 @@
           "Years later, Persian rulers let the exiles return and build a Second Temple on that same site."
         ],
         "key": {
-          "0": 2,
-          "1": 3,
+          "0": 3,
+          "1": 2,
           "2": 0,
           "3": 1
         }
       },
       "distractorRationale": {
-        "1": "The passage says this return happened years later, not immediately, and it describes the Second Temple's building, a separate later event from the Babylonian conquest itself.",
+        "0": "The passage says this return happened years later, not within the same year, and it describes the Second Temple's building, a separate later event from the Babylonian conquest itself.",
         "2": "This describes the Second Temple's destruction by Rome, centuries after the Babylonian conquest of the First Temple, a different event entirely.",
         "3": "Yohanan ben Zakkai's school came after the Temple's second and final destruction by Rome, a much later turn in the story, not a direct result of the Babylonian conquest."
       },
@@ -1434,10 +1434,10 @@
       "dok": 3,
       "stem": "According to the case file, how did Yohanan ben Zakkai actually get to open his school at Yavneh?",
       "choices": [
-        "Persian rulers granted him land at Yavneh after the First Temple's destruction.",
-        "He escaped the besieged city and got permission from Roman rulers to open a small school there.",
+        "Persian rulers granted him land at Yavneh soon after the Babylonian army destroyed the First Temple.",
+        "He escaped the besieged city and got permission from Roman rulers to open a school.",
         "He led an armed revolt that forced Rome to grant the tradition a new Temple.",
-        "The Israelite kings still ruling at the time appointed him to lead the school."
+        "The Israelite kings still ruling at the time appointed him to lead a new school at Yavneh."
       ],
       "key": 1,
       "distractorRationale": {
@@ -1459,12 +1459,12 @@
       "partA": {
         "stem": "According to Source A, how far did Athenian democracy's voice actually reach?",
         "choices": [
-          "It gave a real, direct voice only to adult male citizens, since enslaved people, foreigners, and women could not vote.",
-          "It gave every resident of Athens, including enslaved people and foreigners, an equal direct vote.",
-          "It reached every city-state in Greece equally, uniting them under one shared government.",
+          "It reached every city-state in Greece equally, uniting the separate cities under one shared government.",
+          "It reached every resident of Athens, giving enslaved people and foreigners an equal, direct vote on its laws.",
+          "It reached only adult male citizens; enslaved people, foreigners, and women could not vote.",
           "It reached only a small council of elders, similar to Sparta's own system."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1475,15 +1475,15 @@
           "Its assembly let adult male citizens vote directly on the city's laws."
         ],
         "key": {
-          "0": 2,
+          "0": 0,
           "1": 3,
-          "2": 0,
+          "2": 2,
           "3": 1
         }
       },
       "distractorRationale": {
+        "0": "Athens's assembly governed only Athens's own laws; the passage describes Greece as dozens of separate city-states, not one united government.",
         "1": "The passage specifically excludes enslaved people, foreigners, and women from voting, so the vote was never equal or open to every resident.",
-        "2": "Athens's assembly governed only Athens's own laws; the passage describes Greece as dozens of separate city-states, not one united government.",
         "3": "This phrase describes the vote's limited reach within Athens itself, not a comparison to Sparta's much smaller ruling council, which this source never makes."
       },
       "explain": "Source A states plainly that Athens's assembly let adult male citizens vote directly, then immediately narrows that claim: enslaved people, foreigners, and women could not vote at all.  The other choices each stretch or shrink that real reach into a claim the source does not make."
@@ -1499,15 +1499,15 @@
       "dok": 2,
       "stem": "According to Source A, what happened at Marathon?",
       "choices": [
-        "A combined Spartan and Athenian navy trapped the Persian fleet in a narrow strait.",
-        "A small Spartan force held a narrow mountain pass against a much larger Persian army.",
         "Athenian soldiers stood almost alone and turned back the first Persian invasion outright.",
+        "A small Spartan-led force held a narrow mountain pass against a Persian army many times its size.",
+        "A combined Spartan and Athenian navy trapped the Persian fleet in a narrow strait.",
         "An allied Greek army defeated the last Persian force on open ground."
       ],
-      "key": 2,
+      "key": 0,
       "distractorRationale": {
-        "0": "The trapped-fleet naval battle is Salamis, part of the second Persian invasion, fought years after Marathon and credited to Athens's navy alone in this source.",
         "1": "That stand describes Thermopylae, an event from Source B's account of the second invasion, not Marathon, and not part of Source A at all.",
+        "2": "The trapped-fleet naval battle is Salamis, part of the second Persian invasion, fought years after Marathon and credited to Athens's navy alone in this source.",
         "3": "That battle is Plataea, the final land battle of the second invasion described in Source B, not Marathon, which this source credits to Athenian soldiers alone."
       },
       "explain": "Source A states directly that Athenian soldiers stood almost alone at Marathon and turned back the first Persian invasion outright, before the larger, later invasion that led to Salamis.  Each wrong choice borrows a different battle, Salamis, Thermopylae, or Plataea, from later in the war or from the separate Spartan-leaning account."
@@ -1576,12 +1576,12 @@
       "partA": {
         "stem": "According to Source A, what does the Athenian account argue actually decided the war's outcome?",
         "choices": [
-          "Ships, not soldiers, decided the war, since the navy trapped and wrecked the Persian fleet at Salamis.",
-          "The stand at Thermopylae decided the war by delaying the Persian army.",
-          "The Battle of Plataea decided the war, led by an allied land army.",
-          "Sparta's harsh military training decided the war before it even began."
+          "The stand at Thermopylae decided the war, because the small force there delayed the Persian army.",
+          "Ships, not soldiers, decided the war, when the navy wrecked the Persian fleet at Salamis.",
+          "The Battle of Plataea decided the war, when an allied land army beat the last Persian force.",
+          "Sparta's harsh, lifelong military training decided the war before the first battle even began."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -1592,14 +1592,14 @@
           "At Salamis, that navy trapped the Persian fleet in a narrow strait."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
+          "0": 0,
+          "1": 1,
           "2": 3,
           "3": 2
         }
       },
       "distractorRationale": {
-        "1": "This source does not credit Thermopylae; it names Marathon as the Athenian-led battle, and its own final argument is that ships, not any land stand, decided the war.",
+        "0": "This source does not credit Thermopylae; it names Marathon as the Athenian-led battle, and its own final argument is that ships, not any land stand, decided the war.",
         "2": "Source A never mentions Plataea; this source's whole argument is that the navy's win at Salamis, not any land battle, decided the war's outcome.",
         "3": "This source never claims the war was decided before it began; Alexander's later empire is a separate note about Greek culture spreading, unrelated to who won the Persian Wars."
       },
@@ -1666,14 +1666,14 @@
       "blanks": [
         {
           "choices": [
-            "city-states",
+            "empires",
             "kingdoms",
-            "empires"
+            "city-states"
           ],
-          "key": 0,
+          "key": 2,
           "distractorRationale": {
-            "1": "A kingdom is ruled by one king over a larger, unified territory, not the pattern of many small, separately governed places that Greece's mountains and coastline produced.",
-            "2": "An empire controls many conquered lands under one central power, the opposite of Greece breaking apart into dozens of small, independent governments."
+            "0": "An empire controls many conquered lands under one central power, the opposite of Greece breaking apart into dozens of small, independent governments.",
+            "1": "A kingdom is ruled by one king over a larger, unified territory, not the pattern of many small, separately governed places that Greece's mountains and coastline produced."
           }
         }
       ],
@@ -1822,19 +1822,19 @@
       "partA": {
         "stem": "According to the case file, what makes the Indus Valley civilization's own written record different from every other early civilization in the file?",
         "choices": [
-          "No scholar has ever managed to read the Indus script, so its own words stay locked away.",
+          "The Indus script has been fully translated, revealing court records, temple writings, and trader letters.",
           "The Indus people left behind no written script at all.",
-          "The Indus script has been fully translated, revealing detailed court records.",
+          "No scholar has ever managed to read the Indus script, so its own words stay locked away.",
           "The Indus civilization's cities were too small to have kept any records."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "Every other early society in this record can be read straight, in its own words.",
-          "The Indus Valley civilization built some of the best-planned cities anywhere in the old world.",
           "No scholar has ever managed to read it.",
+          "The Indus Valley civilization built some of the best-planned cities anywhere in the old world.",
+          "Every other early society in this record can be read straight, in its own words.",
           "The Indus people also left behind a written script."
         ],
         "key": {
@@ -1845,8 +1845,8 @@
         }
       },
       "distractorRationale": {
+        "0": "The passage says the opposite: no scholar has ever managed to read the Indus script, unlike every other early civilization in this record.",
         "1": "The passage says the Indus people did leave behind a written script, carved into thousands of stone seals; the gap is that nobody can read it, not that it never existed.",
-        "2": "The passage says the opposite: no scholar has ever managed to read the Indus script, unlike every other early civilization in this record.",
         "3": "The passage describes Indus cities as some of the best-planned anywhere in the old world, which argues against the idea that they were too small to keep records."
       },
       "explain": "The passage states plainly that the Indus people left behind a written script, but no scholar has ever managed to read it, unlike every other early civilization in this file, which can be read directly in its own words.  The other choices each contradict a specific detail the passage states about the script or the cities."
@@ -1863,14 +1863,14 @@
       "stem": "According to the case file, what made Mohenjo-daro and Harappa unusual for their time?",
       "choices": [
         "They were the only cities in the old world whose written record has been fully translated.",
-        "They sat on careful grids, with baked-brick homes linked to covered drains, an advanced setup for its time.",
-        "They were built entirely underground to protect residents from a weaker monsoon.",
+        "They sat on careful grids, and their baked-brick homes linked to covered drains.",
+        "They were built underground to shelter people from a weaker monsoon.",
         "They were ruled by an emperor named Ashoka, who later adopted Buddhist teachings."
       ],
       "key": 1,
       "distractorRationale": {
         "0": "The case file says the opposite: no scholar has ever managed to read the Indus script, so it stays the one early record in this file that cannot be read.",
-        "2": "The case file never describes underground cities; it credits Mohenjo-daro and Harappa with careful grids, baked-brick homes, and covered drains, all built at ground level.",
+        "2": "The case file never describes underground cities; it credits Mohenjo-daro and Harappa with careful grids, baked-brick homes, and covered drains, and the weaker monsoon belongs to its evidence for the decline.",
         "3": "Ashoka ruled the later Maurya Empire, generations after the Indus cities had already emptied out; he is never linked to Mohenjo-daro or Harappa in the case file."
       },
       "explain": "The case file credits Mohenjo-daro and Harappa directly with an advanced setup for their time, careful city grids and baked-brick homes linked to covered drains.  Each wrong choice claims a fact about translation, underground building, or a much later ruler that the case file does not connect to these two cities."
@@ -1939,32 +1939,32 @@
       "partA": {
         "stem": "According to the case file, what does the clearest physical evidence suggest about the Indus civilization's decline?",
         "choices": [
-          "Shifting rivers and a weaker monsoon likely made farming much harder to sustain over time.",
-          "A single sudden flood destroyed every Indus city in one year.",
           "Scholars have fully settled on one proven cause for the decline.",
-          "New migrants attacked and burned every Indus city to the ground."
+          "A single sudden flood from a shifting river destroyed every Indus city within one year.",
+          "Shifting rivers and a weaker monsoon likely made farming much harder to keep up.",
+          "Indo-Aryan migrants arriving from the northwest attacked and burned the biggest Indus cities."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "That means longer, harsher dry spells across the region.",
-          "Scholars still argue over how much of the fall came from nature alone.",
           "The clearest evidence involves shifting rivers.",
+          "Scholars still argue over how much of the fall came from nature alone.",
+          "Sometime after the Indus cities faded, new migrants arrived from the northwest.",
           "Many of the biggest cities emptied out slowly, not all at once."
         ],
         "key": {
-          "0": 2,
+          "0": 1,
           "1": 3,
-          "2": 1,
-          "3": 0
+          "2": 0,
+          "3": 2
         }
       },
       "distractorRationale": {
+        "0": "The passage says scholars still argue over how much of the fall came from nature alone, the opposite of a fully settled, proven cause.",
         "1": "The passage says cities emptied out slowly, not all at once, which argues against any single sudden flood destroying everything in one year.",
-        "2": "The passage says scholars still argue over how much of the fall came from nature alone, the opposite of a fully settled, proven cause.",
-        "3": "The passage never mentions migrants attacking or burning cities; it describes environmental evidence, shifting rivers and a weaker monsoon, not an armed attack."
+        "3": "The passage says the migrants arrived only after the Indus cities had faded, and it never describes an attack; its evidence is shifting rivers and a weaker monsoon."
       },
       "explain": "The passage names the clearest physical evidence directly: shifting rivers and signs of a weaker monsoon, pointing to longer, harsher dry spells that likely made farming far harder to sustain.  The other choices each claim a level of certainty or a cause, sudden disaster or attack, that the passage does not support."
     },
@@ -2026,14 +2026,14 @@
       "blanks": [
         {
           "choices": [
-            "dharma",
+            "varna",
             "karma",
-            "varna"
+            "dharma"
           ],
-          "key": 0,
+          "key": 2,
           "distractorRationale": {
-            "1": "Karma names the belief that every act carries results that follow a person forward, a law of cause and effect, not the term for a person's own proper duty.",
-            "2": "Varna names the four broad groups Vedic life split people into by birth, not the word for a person's own proper duty in life."
+            "0": "Varna names the four broad groups Vedic life split people into by birth, not the word for a person's own proper duty in life.",
+            "1": "Karma names the belief that every act carries results that follow a person forward, a law of cause and effect, not the term for a person's own proper duty."
           }
         }
       ],
@@ -2052,12 +2052,12 @@
       "partA": {
         "stem": "According to the case file, what did the Buddha teach about the source of suffering?",
         "choices": [
-          "Suffering grows from craving, wanting things to be other than they are, and a strict path could end it.",
-          "Suffering comes from being born into the wrong varna and cannot be escaped.",
-          "Suffering ends the moment a person becomes wealthy and powerful.",
+          "Suffering comes from giving up an easy life, so a person should hold on to wealth and comfort.",
+          "Suffering comes from being born into a lower varna, and no path can free a person from it.",
+          "Suffering grows from craving, wanting things to be other than they are.",
           "Suffering is caused by the gods and can only end through animal sacrifice."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2068,15 +2068,15 @@
           "He taught that a strict path could end that craving for good."
         ],
         "key": {
-          "0": 1,
+          "0": 2,
           "1": 0,
-          "2": 2,
+          "2": 1,
           "3": 3
         }
       },
       "distractorRationale": {
+        "0": "Siddhartha Gautama gave up his own easy life after seeing how much suffering filled the world, and he taught that suffering grows from craving, not from giving comfort up.",
         "1": "The passage says the Buddha's path welcomed anyone, no matter which varna a person had been born into, the opposite of suffering being locked to one's varna.",
-        "2": "The passage says Siddhartha Gautama gave up an easy, wealthy life after seeing suffering, which argues against wealth and power being the answer to suffering.",
         "3": "The passage never mentions gods causing suffering or animal sacrifice; the Buddha's teaching centers on craving and a disciplined path, not ritual sacrifice."
       },
       "explain": "The passage states the Buddha's teaching directly: suffering grows from craving, wanting things to be different than they are, and a strict, disciplined path could end that craving for good.  The other choices each attach a cause or cure to suffering that the passage never credits to the Buddha's teaching."
@@ -2195,7 +2195,7 @@
           "His teaching pointed closer to the other side.",
           "Confucius taught that harmony grows from everyone filling their role well.",
           "A ruler named Ying Zheng did.",
-          "It held that people should follow the Dao, the natural way of the world, without forcing events against their own natural course."
+          "He beat every rival state and named himself Qin Shi Huangdi, China's first emperor."
         ],
         "key": {
           "0": 1,
@@ -2205,7 +2205,7 @@
         }
       },
       "distractorRationale": {
-        "1": "The passage assigns following the Dao to Laozi's teaching, not Confucius's, and never says Laozi taught loyalty to an emperor.",
+        "1": "This line is about Ying Zheng making himself China's first emperor, not about either teacher.  The passage gives following the Dao to Laozi's teaching, not Confucius's, and never has Laozi teach loyalty to an emperor.",
         "2": "The passage says Laozi's teaching pointed closer to the other side from Confucius, meaning the two schools differed, not that they taught the exact same idea.",
         "3": "Neither philosopher's teaching is described as promoting military conquest or total nonviolence in this passage; that language belongs to a different part of the file, about the Qin emperor's own unification, not to either school of thought."
       },
@@ -2380,9 +2380,9 @@
       "stem": "According to the case file, what actually caused the Warring States era?",
       "choices": [
         "Qin Shi Huangdi ordered rival texts burned, which broke China apart into fighting states.",
-        "Zhou power weakened over the years, and China broke apart into rival states that fought nearly nonstop.",
+        "Zhou power weakened, and China broke into rival states that fought nearly nonstop.",
         "The Han dynasty's collapse left China without any government at all.",
-        "A weaker monsoon and shifting rivers made farming too difficult to sustain a single ruler."
+        "A weaker monsoon and shifting rivers made farming too difficult to support a single ruler."
       ],
       "key": 1,
       "distractorRationale": {
@@ -2405,14 +2405,14 @@
       "blanks": [
         {
           "choices": [
-            "Mandate of Heaven",
+            "Warring States era",
             "Silk Road",
-            "Warring States era"
+            "Mandate of Heaven"
           ],
-          "key": 0,
+          "key": 2,
           "distractorRationale": {
-            "1": "The Silk Road names the long web of trade routes linking Han China to Central Asia, not the idea about when a ruler keeps or loses the right to rule.",
-            "2": "The Warring States era names the period of nonstop fighting after Zhou power weakened, an era, not the idea itself that explained a ruler's right to rule."
+            "0": "The Warring States era names the period of nonstop fighting after Zhou power weakened, an era, not the idea itself that explained a ruler's right to rule.",
+            "1": "The Silk Road names the long web of trade routes linking Han China to Central Asia, not the idea about when a ruler keeps or loses the right to rule."
           }
         }
       ],
@@ -2496,32 +2496,32 @@
       "partA": {
         "stem": "According to the case file, how did Buddhism reach China?",
         "choices": [
-          "It arrived gradually from India, carried along the same trade routes silk traders used.",
-          "It began in China and then spread outward to India along the Silk Road.",
-          "It replaced both Confucianism and Daoism completely once it arrived.",
-          "It arrived suddenly with a Han army sent to conquer India."
+          "It arrived suddenly with a Han army sent to conquer India.",
+          "It began in China and then spread outward along the Silk Road until it reached India.",
+          "It reached China and quickly replaced both Confucianism and Daoism as the main faith.",
+          "It came slowly from India, along the same routes the silk traders used."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "Buddhism took root beside Confucianism and Daoism rather than replacing either one.",
           "Buddhism reached China this way, coming slowly from India along the same routes the silk traders used.",
-          "A Han official named Zhang Qian is often credited with opening these links.",
+          "Caravans carried Chinese silk west and brought back horses, glass, and goods from far regions in return.",
           "Ideas and faiths traveled with the traders who carried them."
         ],
         "key": {
-          "0": 1,
+          "0": 3,
           "1": 2,
           "2": 0,
-          "3": 3
+          "3": 1
         }
       },
       "distractorRationale": {
-        "1": "Zhang Qian is credited with opening the Silk Road's western links from China's side, but the passage says Buddhism traveled the opposite direction, from India into China, not the reverse.",
-        "2": "The passage says the opposite: Buddhism took root beside Confucianism and Daoism, not replacing either one.",
-        "3": "The passage credits traders, not an army, with carrying ideas and faiths along the Silk Road; no conquest of India is mentioned anywhere in this file."
+        "0": "The passage credits traders, not an army, with carrying ideas and faiths along the Silk Road; no conquest of India is mentioned anywhere in this file.",
+        "1": "Chinese silk did travel west along these routes, but the passage says Buddhism traveled the other way, coming slowly from India into China.",
+        "2": "The passage says the opposite: Buddhism took root beside Confucianism and Daoism, not replacing either one."
       },
       "explain": "The passage states directly that Buddhism reached China gradually from India, carried along the very same routes the silk traders used, and that it took root beside Confucianism and Daoism rather than replacing either one.  The other choices each reverse the route's direction or invent a method of arrival the passage never describes."
     },
@@ -2561,32 +2561,32 @@
       "partA": {
         "stem": "According to the case file, how did Rome's Twelve Tables compare to Hammurabi's code, filed at the start of this record?",
         "choices": [
-          "The Twelve Tables were posted in public for every citizen to read, even though rank still shaped much of Roman life, while Hammurabi's code punished the same crime differently by rank.",
+          "The Twelve Tables were Rome's first attempt at law of any kind, just as Hammurabi's code was Mesopotamia's first attempt at law of any kind.",
           "Both codes were kept secret from ordinary citizens, and only kings and priests were ever allowed to know what they actually said.",
           "Hammurabi's code punished every rank of society equally, exactly as the Twelve Tables did, so neither code treated a victim's standing as relevant.",
-          "The Twelve Tables were Rome's first attempt at law of any kind, just as Hammurabi's code was Mesopotamia's first attempt at law of any kind."
+          "The Twelve Tables were posted for every citizen to see, while Hammurabi's code punished the same crime differently by the victim's rank."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "That fight in time produced the Twelve Tables, Rome's first written law code.",
           "For years afterward, rich patrician families held nearly all the real power.",
-          "The code was posted in public so that every citizen, patrician or plebeian, could actually see the same laws applied to all, even though rank still shaped much of Roman life.",
-          "Its finished laws still punished the same crime in different ways, depending on who the victim was."
+          "Rome gave out citizenship widely across its conquered lands, a reach that went far past Athens and its own narrow assembly.",
+          "The code was posted in public so that every citizen, patrician or plebeian, could actually see the same laws applied to all, even though rank still shaped much of Roman life."
         ],
         "key": {
-          "0": 2,
+          "0": 0,
           "1": 1,
-          "2": 3,
-          "3": 0
+          "2": 2,
+          "3": 3
         }
       },
       "distractorRationale": {
+        "0": "The Twelve Tables were Rome's first written law code, but this passage never claims Hammurabi's code was Mesopotamia's very first law of any kind, only that it is the record's earliest filed dispute.",
         "1": "The passage says patrician families held nearly all the real power for years, which explains a power imbalance, but it never claims either code was kept secret from ordinary citizens; the Twelve Tables were posted publicly precisely so laws could be seen.",
-        "2": "The passage says the opposite about Hammurabi's code: its finished laws still punished the same crime differently depending on who the victim was, not equally for every rank.",
-        "3": "The Twelve Tables were Rome's first written law code, but this passage never claims Hammurabi's code was Mesopotamia's very first law of any kind, only that it is the record's earliest filed dispute."
+        "2": "This line is about how widely Rome handed out citizenship, not about how either code punished a crime.  The passage says the opposite about Hammurabi's code:  its laws punished the same crime differently depending on who the victim was."
       },
       "explain": "The passage draws the comparison directly: the Twelve Tables were posted in public for every citizen to read, even though rank still shaped much of Roman life, while Hammurabi's code, filed at the start of this record, punished the same crime differently depending on the victim's standing.  The other choices each state the reverse of a specific claim or add a detail the passage does not support."
     },
@@ -2601,10 +2601,10 @@
       "dok": 2,
       "stem": "According to the closing file, what happened when Rome threw out its own king?",
       "choices": [
-        "It became an empire immediately, ruled by a single emperor from that point on.",
-        "It kept the same king in place, but stripped him of any real power.",
+        "It became an empire right away, ruled by a single emperor who took the name Augustus.",
+        "It kept the same king on the throne, but the Senate stripped him of any real power.",
         "It split permanently into two separate, independent city-states.",
-        "It became a republic instead, led by two elected consuls and a council called the Senate."
+        "It became a republic, led by two elected consuls and a council called the Senate."
       ],
       "key": 3,
       "distractorRationale": {
@@ -2612,7 +2612,7 @@
         "1": "The case file says Rome threw out its own king entirely and became a republic instead, not that it kept the king as a powerless figurehead.",
         "2": "The case file describes Rome uniting under elected consuls and a Senate as one republic, not splitting into separate city-states, a pattern this file credits to Greece instead."
       },
-      "explain": "The closing file states directly that Rome began as a kingdom, then threw out its own king and became a republic instead, led by two elected consuls along with a council called the Senate.  Each wrong choice claims an empire arrived immediately, a king stayed on in name only, or Rome split apart, none of which the file describes at this point."
+      "explain": "The closing file states directly that Rome began as a kingdom, then threw out its own king and became a republic instead, led by two elected consuls along with a council called the Senate.  Each wrong choice claims an empire arrived right away, a king stayed on in name only, or Rome split apart, none of which the file describes at this point."
     },
     {
       "id": "t6-hot-rome-absorbs-greece",
@@ -2678,32 +2678,32 @@
       "partA": {
         "stem": "According to the case file, what ended Rome's nearly five-hundred-year-old republic?",
         "choices": [
-          "Julius Caesar's seizure of power, his assassination, and the civil war that followed, ending with his heir Octavian becoming emperor as Augustus.",
+          "Patrician and plebeian families united peacefully and voted to create an empire.",
           "A foreign invasion that conquered Rome and installed a new king from outside.",
           "The Senate voluntarily handed power to Carthage after losing the wars against it.",
-          "Patrician and plebeian families united peacefully and voted to create an empire."
+          "Julius Caesar's seizure of power, his assassination, and the civil war that followed, ending with his heir Octavian becoming emperor as Augustus."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "Rome fought the rival city of Carthage across three long wars and won.",
-          "His adopted heir, Octavian, rose as Rome's first emperor, taking the name Augustus.",
+          "A general named Julius Caesar seized power by force.",
           "Senators feared he wished to rule as a king, and they killed him.",
-          "A general named Julius Caesar seized power by force."
+          "His adopted heir, Octavian, rose as Rome's first emperor, taking the name Augustus."
         ],
         "key": {
-          "0": 1,
-          "1": 3,
+          "0": 2,
+          "1": 1,
           "2": 0,
-          "3": 2
+          "3": 3
         }
       },
       "distractorRationale": {
+        "0": "The transition was violent, not peaceful: senators killed Caesar out of fear he wanted to be king, and years of civil war followed before Augustus became emperor.",
         "1": "Julius Caesar, the general who seized power, was Roman himself, not a foreign king; the passage never describes any outside invasion.",
-        "2": "The passage says Rome fought Carthage across three wars and won; Rome defeated Carthage, it did not hand power to it.",
-        "3": "The transition was violent, not peaceful: senators killed Caesar out of fear he wanted to be king, and years of civil war followed before Augustus became emperor."
+        "2": "The passage says Rome fought Carthage across three wars and won; Rome defeated Carthage, it did not hand power to it."
       },
       "explain": "The passage traces the republic's end directly: Julius Caesar seized power by force, senators killed him fearing he wanted to rule as a king, and after more years of civil war his heir Octavian became Rome's first emperor, taking the name Augustus.  The other choices each invent a peaceful, foreign, or unrelated cause the passage does not describe."
     },
@@ -2737,20 +2737,20 @@
       ],
       "coachTopic": "evidence-shortest-file",
       "dok": 2,
-      "stem": "While closing the file, the Recorder checks the record's shortest file one more time.  According to that entry, who was named as the Israelites' very first king?",
+      "stem": "While closing the file, the Recorder checks the entry on a covenant without a kingdom one more time.  According to that entry, what three things stood as one for years after Solomon?",
       "choices": [
-        "Saul",
-        "David",
-        "Solomon",
-        "Abraham"
+        "A king who ruled, a Temple that centered worship, and a covenant explaining both.",
+        "Judges called on in trouble, a code of law from Sinai, and a promise of heirs.",
+        "A king, a Temple, and an army strong enough to keep outside armies away.",
+        "Abraham's covenant, Moses's code of law, and David's new capital city at Jerusalem."
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "The entry names David as the second king, the one who united the tribes more firmly and made Jerusalem his capital, not the first.",
-        "2": "The entry names Solomon as David's son, who built the First Temple; he ruled after both Saul and David, not as the first king.",
-        "3": "Abraham is the figure the entry credits with the tradition's founding covenant, generations before Israel had any king at all."
+        "1": "Judges led before there were any kings, and the code from Sinai and the promise to Abraham come earlier still; the three the entry names after Solomon are a king, a Temple, and a covenant.",
+        "2": "The entry never mentions an army that kept others out; the three things it names are a king, a Temple, and a covenant, and it says outside armies later tore two of them away.",
+        "3": "Each of these is real, but they come from different stages of the story; the three the entry names as standing together after Solomon are a king, a Temple, and a covenant."
       },
-      "explain": "Closing the file, the Recorder confirms the shortest file's own sequence one more time: the entry names Saul as the Israelites' very first king, before David united the tribes more firmly and Solomon later built the First Temple.  Each wrong choice names a real figure from the same entry, but one who ruled later or belongs to an earlier part of the story."
+      "explain": "The entry sums up the years after Solomon in three short sentences: a king ruled, a Temple centered worship, and a covenant explained why both stood at all.  It then warns that outside armies later tore two of those three away, which is the loss the next entries follow.  Each wrong choice gathers real pieces from earlier in the story, or adds an army the entry never mentions."
     },
     {
       "id": "t6-cloze-patrician",
@@ -2765,19 +2765,19 @@
       "blanks": [
         {
           "choices": [
-            "patrician",
+            "Carthaginian",
             "plebeian",
-            "consul"
+            "patrician"
           ],
-          "key": 0,
+          "key": 2,
           "distractorRationale": {
-            "1": "Plebeian names the plain citizens who fought for a bigger share of power, the opposite rank from the wealthy families this sentence says already held nearly all of it.",
-            "2": "A consul was one of Rome's two elected leaders, an office held by one person, not the name for a whole wealthy family class."
+            "0": "Carthage was the rival city Rome fought across three long wars; the families this sentence means are Rome's own, inside its republic.",
+            "1": "Plebeian names the plain citizens who fought for a bigger share of power, the opposite rank from the wealthy families this sentence says already held nearly all of it."
           }
         }
       ],
       "quote": "For years afterward, rich patrician families held nearly all the real power.",
-      "explain": "The file names patrician families directly as the wealthy class that held nearly all of Rome's real power in the early republic.  Plebeian names the opposite, plainer class that fought for a share of that power, and consul names an elected office, not a whole family class, so neither term fits here."
+      "explain": "The file names patrician families directly as the wealthy class that held nearly all of Rome's real power in the early republic.  Plebeian names the opposite, plainer class that fought for a share of that power, and Carthaginian names the people of Rome's rival city, not a class inside Rome, so neither term fits here."
     },
     {
       "id": "t6-ebsr-reachback-hammurabi-dispute",
@@ -2787,38 +2787,38 @@
         "hist-t1-first-entry"
       ],
       "coachTopic": "evidence-first-entry",
-      "dok": 4,
+      "dok": 3,
       "partA": {
-        "stem": "While closing the file, the Recorder reopens the very first case one more time.  According to that entry, what did the code's actual clauses do that its opening promise never admitted to?",
+        "stem": "While closing the file, the Recorder reopens the very first case one more time.  The entry says most of the other surviving clauses share the same pattern as the eye clauses.  What do the clauses about a careless builder show?",
         "choices": [
-          "The clauses punished the very same injury differently depending on the victim's social standing, even though the opening promised fair treatment for all.",
-          "The clauses proved the stone the code was carved on was a forgery.",
-          "The clauses removed all punishment for harming an enslaved person.",
-          "The clauses gave Hammurabi's opening promise its only recorded praise."
+          "His punishment is set by his own rank, not by the rank of the person who died.",
+          "He is put to death whoever dies, because the injury itself never changes.",
+          "He pays a sum of silver to the owner's family, the same payment the common-standing clause orders.",
+          "His punishment depends on who died: death if an owner dies, a replacement if an enslaved worker does."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "Nothing here is a forgery.",
-          "The punishment changes with the victim's standing.",
-          "A third clause covers that same injury done to an enslaved person.",
-          "The injury itself never changes at all."
+          "The injury itself never changes at all.",
+          "It orders a payment of silver instead of a matching injury.",
+          "One clause covers a man of high standing who destroys another man's eye.",
+          "That same builder's careless work, if it only kills the owner's enslaved worker, costs him a replacement instead."
         ],
         "key": {
-          "0": 1,
+          "0": 2,
           "1": 0,
-          "2": 2,
+          "2": 1,
           "3": 3
         }
       },
       "distractorRationale": {
-        "1": "The entry states directly that nothing here is a forgery; the dispute was never about whether the code is real.",
-        "2": "The entry says a third clause still covers that same injury done to an enslaved person, setting a smaller payment, not removing punishment entirely.",
-        "3": "The entry never praises the opening promise; it says the punishment changes with the victim's standing even though the injury itself never changes, which is a criticism of the gap, not praise for it."
+        "0": "The entry ties each punishment to the victim's standing, not the attacker's, and the builder clauses follow the same pattern: what he owes depends on who died.",
+        "1": "The entry says the injury never changes, but the punishment does: a builder whose work kills an owner is put to death, while one whose work kills an enslaved worker owes a replacement.",
+        "2": "The silver payment belongs to the eye clause for a man of common standing; the builder clauses set death for killing an owner and a replacement for killing an enslaved worker."
       },
-      "explain": "The recovered entry states the real gap plainly: the punishment changes with the victim's standing, even though the injury itself never changes at all, which the code's own opening promise of fairness never admits to.  The other choices each misread a detail from the entry as proving forgery, removing punishment, or offering praise, none of which the entry actually says."
+      "explain": "The entry says most of the surviving clauses follow the eye clauses' pattern, and the builder clauses show it plainly: a careless builder whose work kills a house owner is put to death, but if it only kills the owner's enslaved worker, he owes a replacement instead.  The harm is a death either way, and the punishment changes with the victim's standing.  Each wrong choice keeps the punishment fixed, borrows the silver from a different clause, or ties the punishment to the builder's own rank instead of the victim's."
     },
     {
       "id": "t6-hot-plebeians-fight-for-a-share",
@@ -2854,36 +2854,36 @@
       "coachTopic": "evidence-two-accounts",
       "dok": 4,
       "partA": {
-        "stem": "The Recorder checks the Aegean Desk's own account one more time before closing the file.  According to that account, how far did Athenian democracy's real reach actually extend?",
+        "stem": "The Recorder checks the Aegean Desk's own account one more time before closing the file.  That account argues that ships won the war.  What does it still admit about the other Greek cities?",
         "choices": [
-          "It reached only adult male citizens directly, since enslaved people, foreigners, and women could not vote at all.",
-          "It reached every person living in Athens, with no exceptions at all.",
-          "It reached across every Greek city-state equally, uniting them under one shared vote.",
-          "It reached only Sparta's small council of elders and overseers."
+          "That each one guarded its own coast and kept its ships at home.",
+          "That they refused to fight Persia and left the war to Athens alone.",
+          "That they sent citizens to vote on the war in Athens's own assembly.",
+          "That they fought bravely in the war as well."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "Each one ran its own government.",
-          "Its assembly let adult male citizens vote directly on the city's laws.",
-          "Instead, dozens of separate city-states grew up.",
-          "Enslaved people, foreigners, and women could not vote."
+          "This account does not deny that other cities fought bravely too.",
+          "Each one guarded its own coast.",
+          "Athenian soldiers stood almost alone at Marathon.",
+          "Its assembly let adult male citizens vote directly on the city's laws."
         ],
         "key": {
-          "0": 3,
-          "1": 1,
-          "2": 2,
+          "0": 1,
+          "1": 2,
+          "2": 3,
           "3": 0
         }
       },
       "distractorRationale": {
-        "1": "The assembly did let adult male citizens vote directly, but the very same account immediately adds that enslaved people, foreigners, and women could not vote at all, so it was never every person with no exceptions.",
-        "2": "This source says the opposite: dozens of separate city-states grew up, each running its own government, not one shared vote across all of Greece.",
-        "3": "This source describes Athens running its own government, separate from every other city-state; it never describes Sparta's council, which belongs to the other, Spartan-leaning account."
+        "0": "Each city guarding its own coast describes how Greece was split up before the war; the account never says the others kept their ships at home, and it admits they fought bravely too.",
+        "1": "Athenian soldiers did stand almost alone at Marathon, but that was one battle, and the account never says the other cities refused to fight; it admits they fought bravely too.",
+        "2": "The assembly let Athens's own adult male citizens vote on Athens's own laws; each city-state ran its own government, and the account never has other cities voting there."
       },
-      "explain": "The Aegean Desk's own account narrows its claim directly: the assembly let adult male citizens vote, then immediately states that enslaved people, foreigners, and women could not vote at all, meaning democracy's real reach stopped well short of everyone in Athens.  The other choices each widen or misplace that reach in a way this specific account never claims."
+      "explain": "Source A argues hard for its own city, that ships, not soldiers, won the war, yet it still admits one point: it does not deny that other cities fought bravely too.  Noticing what a one-sided account admits is part of weighing it.  Each wrong choice stretches a real line from the account, about Marathon, the assembly, or the separate coasts, into a claim about the other cities that the account never makes."
     },
     {
       "id": "t6-mc-reachback-zhang-qian-silk-road",
@@ -2894,20 +2894,20 @@
       ],
       "coachTopic": "evidence-what-was-burned",
       "dok": 3,
-      "stem": "While closing the file, the Recorder checks an earlier entry on Han China one more time.  According to that entry, who is often credited with opening the Silk Road's western links?",
+      "stem": "While closing the file, the Recorder checks an earlier entry on Han China one more time.  According to that entry, what wore the Qin dynasty down so fast after its first emperor died?",
       "choices": [
-        "Qin Shi Huangdi, the emperor who first unified China's writing, money, and weights.",
-        "Zhang Qian, a Han official who traveled west on a state trip.",
-        "Confucius, the philosopher whose teaching the Han later placed at the center of government.",
-        "Yohanan ben Zakkai, the teacher who opened a school after a Temple's destruction."
+        "Buddhist teaching that arrived from India and replaced its laws.",
+        "Its own harsh rule, along with open revolt.",
+        "Han rulers who put Confucian teaching back at the center.",
+        "The cost of the trade routes that linked it to Central Asia."
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "The entry credits Qin Shi Huangdi with unifying China under the earlier Qin dynasty, not with opening the Silk Road's western links, a Han-era achievement credited to Zhang Qian instead.",
-        "2": "The entry credits Confucius with a school of thought about harmony and proper roles, not with any trade route; opening the Silk Road's links is credited to the official Zhang Qian.",
-        "3": "Yohanan ben Zakkai belongs to an entirely different case file, on the Ancient Hebrews; the Han entry credits Zhang Qian, not him, with opening the Silk Road's western links."
+        "0": "Buddhism reached China later, along the Han trade routes, and took root beside Confucianism and Daoism; the entry never ties it to the Qin's fall.",
+        "2": "The Han put Confucian teaching back at the center after the Qin had already fallen; it was the Han's own choice, not what ended the Qin.",
+        "3": "The trade routes belong to Han China, which reached much farther than its own borders; the entry never ties them to the Qin's fall."
       },
-      "explain": "The Han entry credits a Han official named Zhang Qian with opening the Silk Road's western links, traveling west on a state trip even though trade along parts of the route likely came before him.  Each wrong choice borrows a name from a different ruler, philosopher, or even a different case file entirely, none of whom the entry connects to opening the route."
+      "explain": "The entry opens with the Qin's end in two sentences: the dynasty fell apart only a few years after its first emperor died, and harsh rule and open revolt wore it down fast.  Each wrong choice takes something that came after the Qin, the Han's choice, the trade routes, or Buddhism's arrival, and makes it the cause."
     },
     {
       "id": "t1-ebsr-why-the-clay-record-survived",
@@ -2921,12 +2921,12 @@
       "partA": {
         "stem": "According to the recovered entry, why does so much of the oldest written record come from Southern Mesopotamia in particular?",
         "choices": [
-          "Its scribes wrote on clay, a material tough enough to sit in a ruin and wait.",
           "Its scribes cut their records into stone, which the plain had in large supply.",
-          "Its villages grew into cities, and cities are what create a need for records.",
+          "Its scribes wrote on clay, a material tough enough to sit in a ruin and wait.",
+          "Its villages grew into cities, and cities created the need for records.",
           "Its earliest tablets recorded counts of goods rather than poems or laws."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -2937,14 +2937,14 @@
           "Villages had grown into cities, and cities needed records."
         ],
         "key": {
-          "0": 0,
-          "1": 2,
+          "0": 2,
+          "1": 0,
           "2": 3,
           "3": 1
         }
       },
       "distractorRationale": {
-        "1": "The entry says the opposite about stone: that plain had almost none of it, and very little timber either, which is exactly why its scribes reached for river mud instead.",
+        "0": "The entry says the opposite about stone: that plain had almost none of it, and very little timber either, which is exactly why its scribes reached for river mud instead.",
         "2": "Villages growing into cities explains why anyone needed records at all, a step every early civilization shared; it does not explain why this plain's records in particular are the ones that survived.",
         "3": "What the tablets say is a separate question from why they lasted; receipts and poems written on the same clay would have survived a ruin equally well."
       },
@@ -3003,9 +3003,9 @@
       "partA": {
         "stem": "According to the recovered entry, what changed on that plain once a ruler named Sargon took the Sumerian cities?",
         "choices": [
-          "Each city went on running its own government and guarding its own walls, exactly as before.",
-          "Babylon took over the plain, and its king issued the law code this file already holds.",
-          "Cities that had each run themselves came under one ruler, in what many historians call the first empire in the record.",
+          "Each city went on running its own government, guarding its own walls, and honoring its own god.",
+          "Babylon took over the plain at once, and its king issued the law code this file already holds.",
+          "Separate cities came under one ruler, in what many historians call the first empire.",
           "The plain's palaces burned, and the tablets stored inside came out harder than they went in."
         ],
         "key": 2
@@ -3087,19 +3087,19 @@
         "A stepped temple platform called a ziggurat stood at the center of many early Sumerian cities.",
         "Southern Mesopotamia had plenty of stone and timber, so its scribes rarely bothered with clay.",
         "Metalworkers on that plain mixed copper with tin to make bronze.",
-        "Fire destroyed the clay tablets that were stored inside the plain's palaces.",
+        "A ruler named Sargon conquered the Sumerian cities and ruled them from his own capital at Akkad.",
         "The tablets show enslaved people standing at the top of the order, above kings and priests.",
-        "A ruler named Sargon conquered the Sumerian cities and ruled them from his own capital at Akkad."
+        "Fire destroyed the clay tablets that were stored inside the plain's palaces."
       ],
       "key": [
         0,
         2,
-        5
+        3
       ],
       "distractorRationale": {
         "1": "The entry says the reverse: that plain had almost no stone and very little timber, and river mud without limit, which is the whole reason clay became its writing material.",
-        "3": "Fire destroys most records, but the entry's favorite point is that fire BAKES clay harder, so tablets came out of burned palaces tougher than they went in.",
-        "4": "The tablets show kings and priests at the top and enslaved people at the bottom, many of them captives taken in war, so this choice turns the order upside down."
+        "4": "The tablets show kings and priests at the top and enslaved people at the bottom, many of them captives taken in war, so this choice turns the order upside down.",
+        "5": "Fire destroys most records, but the entry's favorite point is that fire BAKES clay harder, so tablets came out of burned palaces tougher than they went in."
       },
       "explain": "All three correct details come straight from the entry: the ziggurat standing at the center of many Sumerian cities, the copper-and-tin mixture that made bronze, and Sargon's conquest of the Sumerian cities from his capital at Akkad.  The three wrong choices each invert something the entry actually says, about the plain's materials, about what fire did to clay, or about who stood where in the order the tablets record."
     },
@@ -3189,7 +3189,7 @@
       "dok": 3,
       "stem": "According to the recovered entry, why did the tablets stored inside the plain's palaces survive being burned?",
       "choices": [
-        "Scribes carried the tablets out of the palaces before the fires reached them.",
+        "Scribes carried the tablets out of the burning palaces before the fires could reach them.",
         "The tablets were cut into stone, which fire cannot damage.",
         "Fire bakes clay harder, so they came out of the ashes tougher than they went in.",
         "The palaces were built of baked brick that kept the fires out."
@@ -3213,10 +3213,10 @@
       "dok": 3,
       "stem": "According to the recovered entry, why does the Provenance Office file the Code of Hammurabi as verified but unresolved?",
       "choices": [
-        "The stone is genuine, yet the code's opening promise and its actual clauses do not fully agree.",
-        "The stone the code was carved on has never been found.",
-        "Scholars cannot agree whether Hammurabi ruled Babylon at all.",
-        "The code covers house builders and merchants but leaves out farmers entirely."
+        "The stone is real, but the code's promise and its clauses do not fully agree.",
+        "The stone the code was carved on is missing, so scholars cannot check the clauses against it.",
+        "Scholars still disagree about whether Hammurabi truly ruled as a king of Babylon.",
+        "The code covers house builders and merchants, but it leaves out farmers entirely."
       ],
       "key": 0,
       "distractorRationale": {
@@ -3298,12 +3298,12 @@
       "partA": {
         "stem": "According to the case file, why does the Office weigh the two carved stones so heavily?",
         "choices": [
-          "Each was made to praise its own king rather than to back up the Hebrew Bible, and each still names a king of Israel.",
-          "Both were carved by Israelite kings recording their own kingdom's history.",
-          "Together they settle which Assyrian king finished the siege of Samaria.",
+          "Both were carved by kings of Israel, Omri and Jehu, to record their own kingdom's history in stone.",
+          "Each was cut to praise its own king, not to back up the Hebrew Bible, yet names a king of Israel.",
+          "Together they settle which Assyrian king finished the siege of Samaria, a point the other records dispute.",
           "They give the reason the northern kingdom fell, calling it a punishment for abandoning the covenant."
         ],
-        "key": 0
+        "key": 1
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -3314,14 +3314,14 @@
           "A carved stone known as the Mesha Stele was raised by a king of Moab."
         ],
         "key": {
-          "0": 0,
-          "1": 3,
+          "0": 3,
+          "1": 0,
           "2": 1,
           "3": 2
         }
       },
       "distractorRationale": {
-        "1": "One stone was raised by a king of Moab and the other lists tribute paid to an Assyrian king; neither was made by an Israelite king writing his own history.",
+        "0": "Omri and Jehu are the kings of Israel the stones NAME, not the ones who carved them; one stone was raised by a king of Moab, and the other lists tribute paid to an Assyrian king.",
         "2": "The case file leaves that question open on purpose: the Assyrian records themselves do not fully agree about it, and the Office files the disagreement rather than smoothing it away.",
         "3": "That explanation belongs to the account preserved in the Hebrew Bible, not to either stone, and the Office records it as the account's own reasoning."
       },
@@ -3341,7 +3341,7 @@
         "choices": [
           "It outlasted the southern kingdom by a long stretch.",
           "Assyria captured its capital, and Assyria's own royal records report that capture.",
-          "Its people became the ten lost tribes, which the record confirms as fact.",
+          "Its people became the ten lost tribes, still wandering somewhere, which the record confirms as fact.",
           "It kept the line of David along with the Temple in Jerusalem."
         ],
         "key": 1
@@ -3380,10 +3380,10 @@
       "partA": {
         "stem": "According to the case file, how does the Office handle the explanation the Hebrew Bible gives for the northern kingdom's fall?",
         "choices": [
-          "It files that explanation as the confirmed cause of the Assyrian conquest.",
+          "It files that explanation as the confirmed cause of the Assyrian conquest of Samaria.",
           "It throws the explanation out, because Assyrian records contradict it.",
-          "It records that explanation as the account's own reasoning rather than adopting it as a finding.",
-          "It treats the explanation as one of the later stories it files as legend."
+          "It records that explanation as the account's own reasoning, not as a finding.",
+          "It treats the explanation as one of the later lost-tribes stories it files as legend."
         ],
         "key": 2
       },
@@ -3421,10 +3421,10 @@
       "partA": {
         "stem": "According to the case file on how the tradition survived, what should normally have become of a people in its position?",
         "choices": [
-          "It should have built its Temple a third time on the very same site.",
+          "It should have rebuilt its Temple a third time on the very same site in Jerusalem.",
           "It should have produced the longest file in the whole Office archive.",
-          "It should have shifted its center toward study, prayer, and law.",
-          "It should have blended into the peoples around it and stopped being a separate tradition."
+          "It should have shifted its center toward study, prayer, and law that any group could carry.",
+          "It should have blended into the peoples around it and stopped being separate."
         ],
         "key": 3
       },
@@ -3465,18 +3465,18 @@
         "The Black Obelisk names Jehu, a later king of Israel, among those who paid tribute.",
         "Assyrian royal records agree exactly on which king finished the siege of Samaria.",
         "The southern kingdom, Judah, kept the line of David and the Temple in Jerusalem.",
-        "The Office files the ten lost tribes stories as verified record.",
-        "The Hebrew Bible describes Solomon's kingdom breaking apart soon after his death, around nine hundred thirty BCE."
+        "The Hebrew Bible describes Solomon's kingdom breaking apart soon after his death, around nine hundred thirty BCE.",
+        "The Office files the ten lost tribes stories as verified record."
       ],
       "key": [
         1,
         3,
-        5
+        4
       ],
       "distractorRationale": {
         "0": "The Mesha Stele was raised by a king of Moab, and it names Omri of Israel as an enemy; an enemy's monument naming him is precisely what makes it useful as outside evidence.",
         "2": "Those records do not fully agree on that point, and the case file says the Office files the disagreement rather than smoothing it away.",
-        "4": "The Office files those stories as legend; they grew up much later, and nothing in the entry treats them as anything the record verifies."
+        "5": "The Office files those stories as legend; they grew up much later, and nothing in the entry treats them as anything the record verifies."
       },
       "explain": "The three correct details are the ones the case file supports directly: the Black Obelisk naming Jehu among those who paid tribute, Judah keeping the line of David and the Jerusalem Temple, and the split coming soon after Solomon died.  The three wrong choices each move a stone to the wrong maker, overstate how well the Assyrian records agree, or promote a later legend into the record."
     },
@@ -3665,12 +3665,12 @@
       "partA": {
         "stem": "According to the case file, why does the Office refuse to describe one single Greek religion?",
         "choices": [
-          "There was no shared book and no shared creed, and what each city did varied from place to place.",
-          "Greek cities honored entirely different gods from one another, sharing no names at all.",
           "No evidence about Greek worship survived for the Office to work from.",
+          "Greek cities honored entirely different gods from one another, and they shared no names at all.",
+          "There was no shared book or creed, and what each city did varied from place to place.",
           "Greek worship happened only inside private households, never in public."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -3681,15 +3681,15 @@
           "There was no single Greek religion with one book and one creed."
         ],
         "key": {
-          "0": 3,
+          "0": 2,
           "1": 0,
-          "2": 2,
+          "2": 3,
           "3": 1
         }
       },
       "distractorRationale": {
+        "0": "Evidence does survive, and the entry names its favorite kind: pieces of stone-carved offering calendars, working documents nobody wrote for a later reader.",
         "1": "The case file says many Greek cities honored the SAME gods under the same names; the variation it describes is in what each city did, not in which gods they named.",
-        "2": "Evidence does survive, and the entry names its favorite kind: pieces of stone-carved offering calendars, working documents nobody wrote for a later reader.",
         "3": "Household practice reached inside the house TOO, on top of the public processions, festivals, and games the entry has already described, so it was never the only setting."
       },
       "explain": "The case file opens by stating its limits: there was no single Greek religion with one book and one creed, many cities honored the same gods under the same names, and what each city actually did varied from place to place.  Each wrong choice pushes that carefulness too far in one direction, denying shared names, denying surviving evidence, or shrinking worship down to the household alone."
@@ -3707,9 +3707,9 @@
         "stem": "According to the case file, what makes the carved offering calendars the Office's favorite kind of evidence?",
         "choices": [
           "They list which animal was owed to which god on which day.",
-          "They were working documents, written to do a job rather than to impress a later reader.",
-          "They record what worshippers believed the Pythia's answers meant.",
-          "They are the only Greek evidence that survives in stone at all."
+          "They were working documents, written for use rather than for a later reader.",
+          "They record what worshippers at Delphi believed the Pythia's hard-to-read answers meant.",
+          "They are the only pieces of Greek worship that anyone ever carved into stone and kept."
         ],
         "key": 1
       },
@@ -3731,7 +3731,7 @@
       "distractorRationale": {
         "0": "That is what the calendars SAY, and it is accurate, but the entry credits their value to something else: they were working papers, not written for anyone later to read.",
         "2": "Belief about the Pythia belongs to the Delphi section at the end of this entry; the calendars list offerings owed, not what anyone believed about an oracle.",
-        "3": "The entry describes other stone objects too, including carved pillars standing at Athenian doorways and street corners, so the calendars are not the only stone that survives."
+        "3": "The entry describes other carved stone too: pillars topped with a carved head stood at Athenian doorways and street corners, and people passing by honored them in small ways."
       },
       "explain": "The Office prizes a document written for use rather than for an audience, and a city's carved list of which offering fell due on which day is exactly that: nobody wrote it for posterity, which is why it can be trusted about ordinary practice.  Each wrong choice trades that reason for the calendars' contents, for a different section of the entry, or for a claim about survival the entry never makes."
     },
@@ -3747,10 +3747,10 @@
       "partA": {
         "stem": "According to the case file, what happened to Athens in the year after the battle at Aegospotami?",
         "choices": [
-          "It rebuilt its navy with money supplied by Persia.",
-          "It signed a truce that was meant to end the fighting.",
-          "It surrendered, its long defensive walls came down, and thirty men were installed to rule it.",
-          "It beat a Spartan army on open ground and ended Spartan dominance."
+          "It rebuilt its navy with money supplied by Persia, until its ships matched Sparta's at last.",
+          "It signed a truce called the Peace of Nicias, which was supposed to end the fighting for good.",
+          "It surrendered, its long walls came down, and thirty men were installed to rule it.",
+          "It beat a Spartan army on open ground at Leuctra, and Spartan dominance ended right there."
         ],
         "key": 2
       },
@@ -3788,10 +3788,10 @@
       "partA": {
         "stem": "According to the case file, what is the warning label the Office attaches to this war?",
         "choices": [
-          "The war's outcome is disputed, and no account agrees on who won it.",
-          "The sickness that struck Athens has never been identified.",
-          "No writer of the time recorded the war's final years at all.",
-          "Nearly all of what is known comes from one participant who had his own stake in the story."
+          "The war's outcome is still disputed, and no two accounts agree on which side really won it.",
+          "The sickness that struck crowded Athens and killed Pericles has never been identified.",
+          "No writer at all recorded the war's final years, since the main account stops early.",
+          "Much of what is known traces back to one participant with a stake in the story."
         ],
         "key": 3
       },
@@ -3934,8 +3934,8 @@
       "stem": "According to the case file, how did the Greeks who gathered at Olympia understand the games there?",
       "choices": [
         "As sport, in the way modern readers file them.",
-        "As a festival for Dionysus filled with days of plays.",
-        "As a truce that let cities settle their quarrels.",
+        "As a festival for Dionysus, filled with days of plays performed in the open air.",
+        "As a truce that let the cities settle their quarrels before the athletes arrived.",
         "As worship, held in honor of Zeus on ground that held his temple."
       ],
       "key": 3,
@@ -3957,7 +3957,7 @@
       "dok": 2,
       "stem": "According to Source B, what let Spartan citizens stay in training at all times?",
       "choices": [
-        "Two kings ruled at once and divided the farm work between them.",
+        "Two kings ruled at once and divided the farm work between the two of them.",
         "A large group of unfree workers farmed the land in their place.",
         "A small board of overseers ran the fields as daily business.",
         "Plain citizens took turns leaving the army each year to farm."
@@ -4032,12 +4032,12 @@
       "partA": {
         "stem": "According to the case file, why does the Office weigh the traveling monk's notebook so highly?",
         "choices": [
-          "He served no Indian ruler, so he had no reputation to protect in what he wrote down.",
-          "He came to India specifically to report on its government for a court at home.",
           "He left the only surviving account of the Gupta rulers.",
+          "He came to India specifically to report on its government and courts for a ruler back home.",
+          "He served no Indian ruler, so he had no reputation to protect in what he wrote down.",
           "He wrote down the two long poems the record cannot assign to any author."
         ],
-        "key": 0
+        "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -4048,15 +4048,15 @@
           "Rulers of the Gupta family united much of northern India starting around three hundred twenty CE."
         ],
         "key": {
-          "0": 0,
+          "0": 3,
           "1": 2,
-          "2": 3,
+          "2": 0,
           "3": 1
         }
       },
       "distractorRationale": {
+        "0": "The entry never calls his notebook the only account of Gupta rule; its value comes from his lack of a stake, not from being the sole source.",
         "1": "He came for Buddhist texts, and the entry says he described everything else along the way; he was never sent to report on any government.",
-        "2": "The entry never calls his notebook the only account of Gupta rule; its value comes from his lack of a stake, not from being the sole source.",
         "3": "The two long poems are a separate item at the end of the entry, copied and recited across the same centuries; the entry never credits them to the traveling monk."
       },
       "explain": "The Office's reason is about interest, not about detail: a visitor who served no Indian king had no ruler's reputation riding on what he wrote, which is rare in this record and is why the entry weighs him accordingly.  Each wrong choice trades that reason for a purpose, a monopoly, or a piece of writing the entry assigns somewhere else."
@@ -4075,7 +4075,7 @@
         "choices": [
           "Arabic-speaking scholars never actually used the system themselves.",
           "It credits the scholars who carried the system west instead of the ones who built it.",
-          "The system had no way to mark an empty place until Europe added one.",
+          "The system had no way to mark an empty place until European scholars added a zero of their own.",
           "The digits were the work of one scholar whose name the record has lost."
         ],
         "key": 1
@@ -4083,16 +4083,16 @@
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "The number system matters more than any single scholar.",
-          "Arabic-speaking scholars took up the system and carried it west.",
           "The name credits the messenger and skips the sender.",
+          "Arabic-speaking scholars took up the system and carried it west.",
+          "The number system matters more than any single scholar.",
           "A symbol for zero held the empty place."
         ],
         "key": {
           "0": 1,
-          "1": 2,
+          "1": 0,
           "2": 3,
-          "3": 0
+          "3": 2
         }
       },
       "distractorRationale": {
@@ -4155,26 +4155,26 @@
       "partA": {
         "stem": "According to the case file, what did Hindus come to believe karma means?",
         "choices": [
-          "A person's proper duty in life.",
-          "One of four broad groups a person is born into.",
-          "The craving that leads to suffering.",
-          "That every act a person does carries results that follow that person forward."
+          "A person's proper duty in life, the work each person is expected to carry out.",
+          "The name for one of the four broad groups that birth sorted people into.",
+          "The craving, or wanting things to be other than they are, that leads to suffering.",
+          "The idea that every act carries results that follow a person forward."
         ],
         "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "Vedic life also split into four broad groups, called varnas.",
-          "He taught that suffering grows from craving, wanting things to be other than they are.",
           "They also came to believe in karma, the belief that every act carries results that follow a person forward.",
+          "He taught that suffering grows from craving, wanting things to be other than they are.",
+          "Vedic life also split into four broad groups, called varnas.",
           "Hindus came to believe in dharma, a person's proper duty in life."
         ],
         "key": {
           "0": 3,
-          "1": 0,
+          "1": 2,
           "2": 1,
-          "3": 2
+          "3": 0
         }
       },
       "distractorRationale": {
@@ -4325,7 +4325,7 @@
       "stem": "According to the case file, what made Mohenjo-daro and Harappa unusual for their own time?",
       "choices": [
         "A written script that scholars have since been able to read in full.",
-        "Court records and temple writings of the kind other early societies left.",
+        "Court records and temple writings of the kind other early societies left behind.",
         "Canals dug to survive a monsoon that had grown weaker.",
         "Homes of baked brick connected to covered drains, laid out on a planned grid."
       ],
@@ -4348,10 +4348,10 @@
       "dok": 2,
       "stem": "According to the case file, what does the title his followers gave Siddhartha Gautama mean?",
       "choices": [
-        "The teacher of dharma, a person's proper duty in life.",
+        "The teacher of dharma, which means a person's proper duty in life.",
         "The awakened one, which is what his followers meant by the title.",
         "The one who has ended all suffering for everyone.",
-        "The emperor's guide, chosen generations after his lifetime."
+        "The emperor's guide, a title chosen generations after his own lifetime."
       ],
       "key": 1,
       "distractorRationale": {
@@ -4442,7 +4442,7 @@
       "partA": {
         "stem": "According to the recovered entry, how does the Office qualify the credit a court official received for paper?",
         "choices": [
-          "The credit is wrong, because paper was actually first made in another country.",
+          "The credit is wrong, because paper was actually first made in another country and brought to China.",
           "Older scraps have since turned up, so the craft was already in use before he improved it.",
           "The credit stands unchallenged, since no older paper has ever been found.",
           "The credit hardly matters, because cheap writing material changed nothing."
@@ -4483,7 +4483,7 @@
       "partA": {
         "stem": "According to the recovered entry, what became of Legalist practice after the Qin dynasty ended?",
         "choices": [
-          "It disappeared with the Qin, since the Han put Confucian teaching at the center.",
+          "It disappeared along with the Qin, since the Han put Confucian teaching back at the center.",
           "It became one of the two schools the Office's earlier entry set side by side.",
           "It stayed inside the machinery of Han law, and dynasties after the Han kept it as well.",
           "It ended when the dynasty came apart around two hundred twenty CE."
@@ -4696,7 +4696,7 @@
         "The Confucian classics, which the Qin had earlier tried to destroy.",
         "The Legalist writings the Qin state had run on.",
         "The Buddhist texts arriving along the trade routes.",
-        "The records of an official's journey west toward Central Asia."
+        "The records of an official's long journey west toward Central Asia and beyond."
       ],
       "key": 0,
       "distractorRationale": {
@@ -4778,12 +4778,12 @@
       "partA": {
         "stem": "According to the recovered entry, why is the Office able to file the execution itself as record?",
         "choices": [
-          "A Roman writer from outside the movement reports the same death under the same governor.",
+          "Rome ruled the province through officials it sent out from the capital.",
           "The movement's own followers taught that the teacher was the Messiah.",
-          "The letters a man named Paul wrote are the earliest Christian writings in the record.",
-          "Rome ruled the province through officials it sent out from the capital."
+          "The letters a man named Paul wrote in the fifties CE are the earliest Christian writings in the record.",
+          "A Roman writer from outside the movement reports the same death under the same governor."
         ],
-        "key": 0
+        "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
@@ -4794,16 +4794,16 @@
           "A Roman writer named Tacitus reports the same death under that governor."
         ],
         "key": {
-          "0": 3,
+          "0": 1,
           "1": 0,
           "2": 2,
-          "3": 1
+          "3": 3
         }
       },
       "distractorRationale": {
+        "0": "Roman rule of the province is the setting the entry establishes first, which is how there was a Roman governor at all; it is not the reason the death can be filed as record.",
         "1": "What followers taught is belief content, which the entry says the Office cannot check; the execution is filed as record because a writer outside the movement reports it.",
-        "2": "Those letters are the earliest Christian writings, and that matters for dating the movement, but the entry rests the execution on outside reporting rather than on the letters.",
-        "3": "Roman rule of the province is the setting the entry establishes first, which is how there was a Roman governor at all; it is not the reason the death can be filed as record."
+        "2": "Those letters are the earliest Christian writings, and that matters for dating the movement, but the entry rests the execution on outside reporting rather than on the letters."
       },
       "explain": "The entry draws its line where the evidence changes: a Roman writer with no connection to the movement reports the same death under the same governor, so the execution is filed as record, while what people believed about that teacher is filed only as what they believed.  Each wrong choice offers belief content, a dating point, or the political setting in place of the outside report the Office actually rests on."
     },
@@ -4815,14 +4815,14 @@
         "hist-t3-greece"
       ],
       "coachTopic": "evidence-two-accounts",
-      "dok": 4,
+      "dok": 2,
       "partA": {
-        "stem": "Closing the file, the Recorder reopens the long war between Athens and Sparta.  According to that entry, why does the Office attach a warning label to what is known about it?",
+        "stem": "Closing the file, the Recorder reopens the long war between Athens and Sparta.  According to that entry, what helped keep the fighting going for twenty-seven years?",
         "choices": [
-          "The years the war ran are disputed among modern scholars.",
-          "Much of it traces back to a single participant who had his own stake in the story.",
-          "Persia's payment for a Spartan fleet was never confirmed.",
-          "The Office could not decide which side started the fighting."
+          "A sickness kept returning to crowded, walled-in Athens, so neither side could finish the fighting.",
+          "Athens was stronger at sea, Sparta on land, and neither could easily reach the other.",
+          "A truce signed partway through held for years before it finally broke down.",
+          "Persia kept paying for both sides' fleets, so neither navy could ever pull far enough ahead."
         ],
         "key": 1
       },
@@ -4830,23 +4830,23 @@
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "Persia then paid for a Spartan fleet, and Spartan ships became a match for Athenian ones at last.",
-          "Athens and Sparta fought for twenty-seven years, from four hundred thirty-one to four hundred four BCE.",
-          "Much of what is known about it traces back to one man.",
-          "The Office files the war as record and the telling as evidence with an interest attached."
+          "A sickness struck crowded, walled-in Athens beginning in four hundred thirty BCE, and it returned more than once over the next few years.",
+          "A truce called the Peace of Nicias, signed in four hundred twenty-one BCE, was supposed to end the fighting.",
+          "Neither could easily reach the other's strength, which is one reason the war ran so long."
         ],
         "key": {
           "0": 1,
-          "1": 2,
-          "2": 0,
-          "3": 3
+          "1": 3,
+          "2": 2,
+          "3": 0
         }
       },
       "distractorRationale": {
-        "0": "The entry gives the war's span as settled record; what modern scholars still argue over there is the sickness that struck Athens, not the years of the war.",
-        "2": "The entry states that payment as record, and treats it as part of why Spartan ships became a match for Athenian ones; nothing there calls it unconfirmed.",
-        "3": "The Office's stated position is about the TELLING, filed as evidence with an interest attached; that entry never raises a question about who started the war."
+        "0": "The sickness did strike Athens more than once and killed Pericles, but the entry never gives it as a reason the war lasted; the reason it gives is the two sides' different strengths.",
+        "2": "The Peace of Nicias did not hold for years: the entry says it held poorly and broke down, and it never names the truce as a reason the war ran long.",
+        "3": "Persia paid for a Spartan fleet only, and that money finally let Spartan ships match Athenian ones, which helped end the war rather than stretch it out."
       },
-      "explain": "That entry keeps two things apart, and the capstone borrows the habit: the war itself is filed as record, while the fullest account of it came from an Athenian general who fought in it, lost a command, and wrote in exile with a stake in how it reads.  Each wrong choice attaches the warning to the dates, to a payment, or to a dispute that entry never opens."
+      "explain": "That entry sets the two sides side by side: Athens had the stronger navy and an empire of tribute-paying allies, Sparta had the stronger army, and neither could easily reach the other's strength, which is one reason the war ran so long.  Each wrong choice takes a real event from the same war, the sickness, the truce, or Persia's money, and turns it into a reason the entry never gives."
     },
     {
       "id": "t6-ebsr-reachback-the-messenger",
@@ -4856,38 +4856,38 @@
         "hist-t4-india"
       ],
       "coachTopic": "evidence-quiet-record",
-      "dok": 4,
+      "dok": 2,
       "partA": {
-        "stem": "Before closing the file, the Recorder checks the entry on a visitor's notes and a number that traveled.  According to that entry, what did the Office correct about the ten digits most of the world writes with?",
+        "stem": "Before closing the file, the Recorder checks the entry on a visitor's notes and a number that traveled.  Later writers call the Gupta centuries a golden age.  What plainer description does the Office give instead?",
         "choices": [
-          "They were invented by a scholar born in four hundred seventy-six CE.",
-          "Their value comes from a visitor with no stake in a ruler's reputation.",
-          "Their usual name credits the scholars who carried them west instead of the ones who built them.",
-          "Their symbols had no way at all to mark an empty place."
+          "Gupta rulers united much of northern India and kept it at peace for centuries.",
+          "A visiting monk with no stake praised the Gupta courts in his notes.",
+          "Courts paid for scholars, and their work still turns up in daily life.",
+          "One scholar, Aryabhata, did the work that made those centuries worth remembering."
         ],
         "key": 2
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "A scholar named Aryabhata, born in four hundred seventy-six CE, wrote a short book on astronomy and mathematics.",
-          "The name credits the messenger and skips the sender.",
-          "An outside witness with no stake in a ruler's reputation is rare in this record, and the Office weighs him accordingly.",
-          "A symbol for zero held the empty place."
+          "He worked out a value for the ratio between a circle's rim and the line straight across it, close enough to stay useful for centuries.",
+          "Rulers of the Gupta family united much of northern India starting around three hundred twenty CE.",
+          "A Chinese Buddhist monk named Faxian walked overland to India around four hundred CE, stayed for years, and wrote down what he saw.",
+          "Courts paid for scholars, and the work those scholars did still turns up in daily life around the world."
         ],
         "key": {
-          "0": 0,
+          "0": 1,
           "1": 2,
-          "2": 1,
-          "3": 3
+          "2": 3,
+          "3": 0
         }
       },
       "distractorRationale": {
-        "0": "That birth year belongs to Aryabhata, whom the entry credits with a short book on astronomy and mathematics; the entry says the number system matters more than any single scholar.",
-        "1": "The no-stake witness is that entry's OTHER anchor, the traveling monk's notebook, filed alongside the number system rather than as part of it.",
-        "3": "The entry says a symbol for zero held the empty place, so the system did mark it, and that symbol is part of what makes the system work."
+        "0": "The Gupta rulers did unite much of northern India, but that is the entry's setting, and it never mentions peace; the plainer description is about courts and the scholars they paid.",
+        "1": "The monk came for Buddhist texts and served no Indian king, and the entry never has him praise the Gupta courts; the plainer description is the Office's own.",
+        "3": "Aryabhata did work that stayed useful for centuries, but the entry says the number system matters more than any single scholar, and its plainer description is about courts paying for scholars."
       },
-      "explain": "The capstone reaches back for the cleanest example of a name that drifted: the ten digits were built by Indian mathematicians, carried west by Arabic-speaking scholars, and then named for the carriers, so the usual name credits the messenger and skips the sender.  Each wrong choice picks a different piece of that entry, its named scholar, its other anchor, or its zero, and puts it where the correction belongs."
+      "explain": "The entry names the label and then trades it for something a Recorder can check: later writers call these centuries a golden age, and the Office prefers a plainer description, that courts paid for scholars and the work those scholars did still turns up in daily life around the world.  Each wrong choice takes a real part of the same entry, the Gupta union, the monk's notebook, or Aryabhata's work, and passes it off as the Office's own description."
     },
     {
       "id": "t6-ebsr-reachback-what-survives",
@@ -4897,38 +4897,38 @@
         "hist-t5-china"
       ],
       "coachTopic": "evidence-what-was-burned",
-      "dok": 4,
+      "dok": 2,
       "partA": {
-        "stem": "Closing the file, the Recorder returns to the entry on China's third school.  According to that entry, why should cheap writing material matter to a Recorder at all?",
+        "stem": "Closing the file, the Recorder returns to the entry on China's third school.  According to that entry, what made the Qin known as a harsh state?",
         "choices": [
-          "It proves one court official invented paper entirely on his own.",
-          "It shows that Legalist habits stayed inside Han law.",
-          "It explains why the dynasty came apart around two hundred twenty CE.",
-          "It changes what gets written down and copied, so the record after it runs thicker."
+          "The Han, who came next and put Confucian teaching at the center.",
+          "Han Fei, who first thought of the ideas the Qin later used.",
+          "A law that fell far harder on the poor than on the rich.",
+          "Its own decision to run on Legalist ideas."
         ],
         "key": 3
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "Scraps of older paper have turned up since, so the craft was already in use before he improved it.",
-          "Cheap writing material changes what gets written down and what gets copied.",
-          "The dynasty itself came apart around two hundred twenty CE, worn down by revolts, court struggles, and generals who stopped listening.",
-          "Han law kept much of the same machinery, and later dynasties kept it too."
+          "The Qin's harsh reputation follows from those choices.",
+          "The Han dynasty that came next put Confucian teaching at the center.",
+          "It held that law should fall on everyone the same way, whatever a person's rank.",
+          "A thinker named Han Fei set the argument out most fully."
         ],
         "key": {
-          "0": 0,
+          "0": 1,
           "1": 3,
           "2": 2,
-          "3": 1
+          "3": 0
         }
       },
       "distractorRationale": {
-        "0": "That entry qualifies the credit directly: older scraps have turned up since, so the craft was already in use before the official improved it.",
-        "1": "Legalist habits surviving in Han law is a separate finding earlier in that entry, about how a government ran rather than about what the record preserves.",
-        "2": "That entry credits the dynasty's collapse to revolts, court struggles, and generals who stopped listening, with no connection at all to writing material."
+        "0": "The Han came after the Qin and made the opposite choice; the entry ties the Qin's harsh reputation to the Qin's own choice to run on Legalist ideas.",
+        "1": "Han Fei set the argument out most fully, but the entry says the Qin had run on these ideas long before him, so he did not first think of them.",
+        "2": "Legalism held the reverse, that law should fall on everyone the same way, whatever a person's rank; the harsh reputation follows from the Qin's choice to run on those ideas."
       },
-      "explain": "The capstone reaches back for the point a Recorder cares about most: what survives depends on what people wrote on, so a cheaper material means more gets written down and copied and the record after it runs thicker.  Each wrong choice takes a real finding from that same entry, about a credit, about Legalist habits, or about a dynasty's fall, and answers a question it was not built to answer."
+      "explain": "The entry names the Qin's choices first: the state ran on Legalist ideas long before Han Fei, a minister named Shang Yang rebuilt it around them, and Li Si carried them into the unified empire.  Then it says the Qin's harsh reputation follows from those choices.  Each wrong choice pins the reputation on the Han, on the thinker who argued the case, or on a rule about rank the school never held."
     },
     {
       "id": "t6-ms-the-long-ending",
@@ -5021,19 +5021,19 @@
       "blanks": [
         {
           "choices": [
-            "poems",
-            "laws",
+            "long poems",
+            "law codes",
             "letters"
           ],
           "key": 2,
           "distractorRationale": {
             "0": "The long poems in this record are the two Indian epics filed in another entry, copied and recited across centuries; the earliest Christian writings named here take a different form.",
-            "1": "A law code is what the record's very first file holds, carved in stone under a Babylonian king, and the entry never describes the earliest Christian writings as laws."
+            "1": "A law code is what the record's very first file holds, carved in stone under a Babylonian king, and the entry never describes the earliest Christian writings as law codes."
           }
         }
       ],
       "quote": "The earliest Christian writings in the record are letters, not stories about Jesus.",
-      "explain": "The entry makes a point of the form: the earliest Christian writings in the record are letters written to small groups, not stories about Jesus, which is what makes them the closest written evidence to the events.  Poems and laws each belong to other files in this record, so neither restores the sentence."
+      "explain": "The entry makes a point of the form: the earliest Christian writings in the record are letters written to small groups, not stories about Jesus, which is what makes them the closest written evidence to the events.  Long poems and law codes each belong to other files in this record, so neither restores the sentence."
     },
     {
       "id": "t6-mc-reachback-what-both-scripts-did",
@@ -5168,19 +5168,19 @@
       "stem": "Choose the three things this map actually puts on the page.",
       "choices": [
         "Three rivers, labelled Tigris, Euphrates and Nile.",
-        "Two regions, labelled Mesopotamia and Egypt.",
-        "The word desert, on each side of the Nile.",
         "The first cities of each region, marked with dots.",
-        "Arrows showing which way each river's floodwater ran."
+        "Arrows showing which way each river's floodwater ran.",
+        "Two regions, labelled Mesopotamia and Egypt.",
+        "The word desert, on each side of the Nile."
       ],
       "key": [
         0,
-        1,
-        2
+        3,
+        4
       ],
       "distractorRationale": {
-        "3": "No city is marked anywhere on this map. The briefing names none, so the map marks none.",
-        "4": "There are no arrows on this map. The flood behaviour is written in the notes, not drawn."
+        "1": "No city is marked anywhere on this map. The briefing names none, so the map marks none.",
+        "2": "There are no arrows on this map. The flood behaviour is written in the notes, not drawn."
       },
       "explain": "Three things are on the map and two are not. It labels three rivers, two regions, and the desert on each side of the Nile. It marks no cities at all, and it draws no arrows."
     },
@@ -5298,10 +5298,10 @@
       "stem": "This timeline carries no dates at all, and says so on its face. What does that tell you about the file it comes from?",
       "explain": "The line under the heading says it outright: the passage gives no years, so none are shown. A figure can only carry what its source carries, and putting dates on this one would make it look better sourced than the file behind it.",
       "choices": [
-        "The events are so recent that dating them is unnecessary.",
-        "The order of the events is disputed, so dates would be misleading.",
+        "The events are so recent that the file saw no need to give dates for them.",
+        "The order of the events is still disputed, so any dates shown would be misleading.",
         "The dates were left out to keep the figure short.",
-        "The file gives the order of these events but never gives a year for any of them."
+        "The file gives the order of these events but no year for any of them."
       ],
       "key": 3,
       "distractorRationale": {
@@ -5323,10 +5323,10 @@
       "stem": "The map draws a dashed arrow leaving Samaria. Where does it run, and what does the note say it stands for?",
       "explain": "One dashed arrow runs from Samaria north-east to Assyria. The note under the map says Assyria took Samaria around seven hundred twenty-two BCE and then moved many of the defeated people to other parts of its empire. The arrow is that movement.",
       "choices": [
-        "North-east to Assyria, standing for the defeated people Assyria moved to other parts of its empire.",
-        "South to Jerusalem, standing for refugees fleeing into Judah.",
+        "North-east to Assyria, standing for defeated people moved elsewhere in its empire.",
+        "South to Jerusalem, standing for refugees fleeing from Samaria into the kingdom of Judah.",
         "North-east to Assyria, standing for the route the Assyrian army took to reach Samaria.",
-        "West to the sea, standing for trade leaving the kingdom."
+        "West to the sea, standing for trade and goods leaving the northern kingdom by ship."
       ],
       "key": 0,
       "distractorRationale": {
@@ -5349,17 +5349,17 @@
       "choices": [
         "Two cities are marked: Samaria and Jerusalem.",
         "Samaria sits in the region labelled Israel and Jerusalem in the one labelled Judah.",
-        "The map keeps a disagreement in the Assyrian records rather than settling it.",
         "The map names the Assyrian king who finished the siege of Samaria.",
+        "The map keeps a disagreement in the Assyrian records rather than settling it.",
         "The map shows the border between Israel and Judah as a solid line."
       ],
       "key": [
         0,
         1,
-        2
+        3
       ],
       "distractorRationale": {
-        "3": "The map does the opposite. Its note says Assyrian records do not fully agree about which king finished the siege, and it keeps that disagreement.",
+        "2": "The map does the opposite. Its note says Assyrian records do not fully agree about which king finished the siege, and it keeps that disagreement.",
         "4": "No border is drawn on this map. The two regions carry labels, not a line between them."
       },
       "explain": "The map marks Samaria and Jerusalem, labels Israel around one and Judah around the other, and carries a note saying the Assyrian records do not agree about which king finished the siege. It names no king, and it draws no border."
@@ -5402,7 +5402,7 @@
       "stem": "The map labels the ground at two of its three places. Which pairing is right?",
       "explain": "The map labels Thermopylae a narrow mountain pass and Plataea open ground. Its notes match: the stand at the pass ended in defeat but bought Greece time, and on open ground at Plataea an allied Greek army beat the Persians outright.",
       "choices": [
-        "Thermopylae is open ground; Plataea is a narrow mountain pass.",
+        "Thermopylae is open ground; Plataea is a mountain pass.",
         "Both are labelled open ground, which is why the map pairs them.",
         "Thermopylae is a narrow mountain pass; Plataea is open ground.",
         "Salamis is labelled a narrow mountain pass."
@@ -5515,20 +5515,20 @@
       "dok": 2,
       "stem": "Choose the three things this map and its notes tell you.",
       "choices": [
-        "The river running to the sea is labelled Indus.",
+        "The map translates one line of the Indus script.",
         "Both marked cities were laid out on careful grids.",
         "The script from these cities has never been read by any scholar.",
         "The map gives the year each city was founded.",
-        "The map translates one line of the Indus script."
+        "The river running to the sea is labelled Indus."
       ],
       "key": [
-        0,
         1,
-        2
+        2,
+        4
       ],
       "distractorRationale": {
-        "3": "No year appears anywhere on this map. It marks places and carries three notes.",
-        "4": "Nothing on the map is translated. Its last note says the script has never been read, which is why."
+        "0": "Nothing on the map is translated. Its last note says the script has never been read, which is why.",
+        "3": "No year appears anywhere on this map. It marks places and carries three notes."
       },
       "explain": "Three things are here: the labelled river, the careful grids, and the note that no scholar has ever managed to read the script. No date is given and nothing is translated, which is the point of calling this a quiet record."
     },
@@ -5609,10 +5609,10 @@
       "stem": "Read the two trade arrows. Which direction did silk travel, and what came back the other way?",
       "explain": "Two arrows run between the same ends. The solid one is labelled silk, carried west. The dashed one running back is labelled horses, glass, and goods from far regions, brought back.",
       "choices": [
-        "Silk was brought east into China, and horses were carried west.",
-        "Silk went west and nothing came back along the same routes.",
+        "Silk was brought east into China, and horses and glass were carried west out of it.",
+        "Silk went west, and nothing at all came back along the same routes in return.",
         "Silk and horses both travelled west together.",
-        "Silk was carried west, and horses, glass and goods from far regions were brought back."
+        "Silk went west, and horses, glass and goods from far regions came back."
       ],
       "key": 3,
       "distractorRationale": {
@@ -5696,10 +5696,10 @@
       "stem": "The temple timeline shows a tradition surviving the loss of its centre. Which step on it is the one that shows the survival rather than the loss?",
       "explain": "Four of the five steps are losses or returns tied to a building. The last step is different: a school opens at Yavneh and teaches with no Temple at all, which is the tradition carrying on without the thing it kept losing.",
       "choices": [
-        "The Babylonian army destroying the First Temple.",
-        "A Roman army destroying the Second Temple during a revolt.",
-        "Yohanan ben Zakkai opening a school at Yavneh and teaching with no Temple at all.",
-        "Persian rulers letting the exiles return."
+        "The Babylonian army conquering Judah and destroying the First Temple in Jerusalem.",
+        "A Roman army destroying the Second Temple during a revolt, centuries after it was built.",
+        "Yohanan ben Zakkai opening a school at Yavneh and teaching with no Temple.",
+        "Persian rulers letting the exiles return and build a Second Temple on the same site."
       ],
       "key": 2,
       "distractorRationale": {
@@ -5734,25 +5734,25 @@
         },
         {
           "choices": [
-            "Constantinople",
             "Rome",
+            "Constantinople",
             "Jerusalem"
           ],
-          "key": 0,
+          "key": 1,
           "distractorRationale": {
-            "1": "Rome is the western one.",
+            "0": "Rome is the western one.",
             "2": "Jerusalem is not marked on this map at all."
           }
         },
         {
           "choices": [
-            "no border at all",
             "a solid line",
+            "no border at all",
             "a dashed line"
           ],
-          "key": 0,
+          "key": 1,
           "distractorRationale": {
-            "1": "No line of any kind divides the halves on this map.",
+            "0": "No line of any kind divides the halves on this map.",
             "2": "There is no dashed divider either. The halves carry labels and nothing between them."
           }
         }
@@ -5822,19 +5822,19 @@
       "stem": "Choose the three things this plate actually carries.",
       "choices": [
         "Broken column drums and carved capitals lying in the foreground.",
-        "A numbered key and a printed title along the bottom edge.",
+        "A drawn reconstruction of the Forum as it looked when new.",
         "A second tab showing a Roman marble portrait bust.",
         "A photograph of the Forum as it looks today.",
-        "A drawn reconstruction of the Forum as it looked when new."
+        "A numbered key and a printed title along the bottom edge."
       ],
       "key": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "distractorRationale": {
-        "3": "The first tab is an eighteenth-century etching, not a modern photograph. The second tab is a photograph, but of a bust rather than the Forum.",
-        "4": "Nothing here is reconstructed. The etching draws the Forum as ruins and pasture, which is why it was called the Campo Vaccino."
+        "1": "Nothing here is reconstructed. The etching draws the Forum as ruins and pasture, which is why it was called the Campo Vaccino.",
+        "3": "The first tab is an eighteenth-century etching, not a modern photograph. The second tab is a photograph, but of a bust rather than the Forum."
       },
       "explain": "Three of these are on the plate. The broken drums and capitals lie in the foreground, and a numbered key and printed title run along the bottom edge. A second tab holds a marble portrait bust. There is no modern photograph of the Forum, and no reconstruction of it when new."
     }
