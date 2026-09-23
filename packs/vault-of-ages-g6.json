@@ -558,12 +558,12 @@
       "coachTopic": "viewpoint-narrator",
       "dok": 3,
       "partA": {
-        "stem": "The story is told from outside Theo's head, in the third person, but it still lets readers know what he is privately thinking. Which detail best shows this?",
+        "stem": "The story is told from outside Theo's head, in the third person, but it still lets readers know what he is privately thinking.  Which detail best shows this?",
         "choices": [
-          "The narration says walking through the gap is \"the first real decision he has made in longer than he wants to admit.\"",
-          "The narration describes the card as plain white and unlined.",
-          "The narration explains that the Athenaeum closed two winters ago.",
-          "The narration notes that Finch is standing with her arms folded."
+          "The narration calls stepping through the gap his first real decision \"in longer than he wants to admit.\"",
+          "The narration describes the card as plain white and unlined, with very neat handwriting.",
+          "The narration explains that the Athenaeum closed to the public two winters ago.",
+          "The narration notes that Finch waits at the bottom of the staircase with her arms folded."
         ],
         "key": 0
       },
@@ -583,11 +583,11 @@
         }
       },
       "distractorRationale": {
-        "1": "This line describes what the card physically looks like. It tells you nothing about what Theo is thinking or feeling as he reads it.",
-        "2": "This is a plain fact about the building's history. A narrator could report it without any access to a character's private thoughts at all.",
-        "3": "Folded arms and a not-quite-smile describe Finch from the outside, the way a stranger watching the scene might describe her. It says nothing about Theo's inner thoughts."
+        "1": "This line describes what the card physically looks like.  It tells you nothing about what Theo is thinking or feeling as he reads it.",
+        "2": "This is a plain fact about the building's history.  A narrator could report it without any access to a character's private thoughts at all.",
+        "3": "Folded arms and a not-quite-smile describe Finch from the outside, the way a stranger watching the scene might describe her.  It says nothing about Theo's inner thoughts."
       },
-      "explain": "A narrator writing from outside a character's head can still reveal that character's private thoughts through word choice, not just physical description. Calling the decision one Theo \"wants to admit\" is a judgment only someone with access to his private thinking could report."
+      "explain": "A narrator writing from outside a character's head can still reveal that character's private thoughts through word choice, not just physical description.  Calling the decision one Theo \"wants to admit\" is a judgment only someone with access to his private thinking could report."
     },
     {
       "id": "l1-ebsr-finch-tests-noticing",
@@ -672,10 +672,10 @@
       "partA": {
         "stem": "What happened to the Threadglass?",
         "choices": [
-          "It was documented in three archives, then vanished from all of them within the same decade.",
-          "It was destroyed in a fire at a museum.",
-          "It was donated to the Archive by its original owner.",
-          "It has never been seen by anyone outside Finch's crew."
+          "It was recorded in three archives, then vanished from all three within one decade.",
+          "It was destroyed in a fire at one of the three archives that held it.",
+          "It was donated to the Archive by its original owner, a private collector.",
+          "It has never been seen by anyone outside Finch's crew in its two centuries."
         ],
         "key": 0
       },
@@ -695,11 +695,11 @@
         }
       },
       "distractorRationale": {
-        "1": "Being risky to hold is not the same as being destroyed. The passage describes the Threadglass being taken and hidden, and never mentions a fire.",
-        "2": "A private collector holding the disc is the opposite of a donation. The passage never says who originally gave it to anyone.",
-        "3": "Being documented in three separate archives across two centuries is the opposite of never being seen. Plenty of people saw it before it disappeared."
+        "1": "Being risky to hold is not the same as being destroyed.  The passage describes the Threadglass being taken and hidden, and never mentions a fire.",
+        "2": "A private collector holding the disc is the opposite of a donation.  The passage never says who originally gave it to anyone.",
+        "3": "Being documented in three separate archives across two centuries is the opposite of never being seen.  Plenty of people saw it before it disappeared."
       },
-      "explain": "The Threadglass has a public paper trail: three archives recorded it over two centuries. Then, within one decade, it vanished from all three collections at once, which is the detail this item is asking about directly."
+      "explain": "The Threadglass has a public paper trail: three archives recorded it over two centuries.  Then, within one decade, it vanished from all three collections at once, which is the detail this item is asking about directly."
     },
     {
       "id": "l1-ebsr-mila-counts-chairs",
@@ -959,26 +959,26 @@
       ],
       "coachTopic": "evidence-story-details",
       "dok": 2,
-      "stem": "Finish the summary. Theo almost throws the note away because {{0}}, but the next day he goes to the Athenaeum anyway because {{1}}.",
+      "stem": "Finish the summary.  Theo almost throws the note away because {{0}}, but the next day he goes to the Athenaeum anyway because {{1}}.",
       "blanks": [
         {
           "choices": [
             "a stranger who noticed something he never told anyone is unsettling to think about",
-            "the handwriting looks messy and hard to read",
-            "he does not believe the note is meant for him"
+            "the handwriting looks so messy that he cannot read it even after four tries",
+            "he does not believe a note about a floorboard could be meant for him"
           ],
           "key": 0
         },
         {
           "choices": [
             "sitting at home wondering about it feels worse than whatever he might find out",
-            "a second note arrives telling him to hurry",
-            "his family insists he go find out who sent it"
+            "a second note arrives under his door telling him to hurry before dark",
+            "his family insists he go and find out who sent the card so late at night"
           ],
           "key": 0
         }
       ],
-      "explain": "The note unsettles Theo because it proves someone else noticed a secret he never spoke aloud, and what finally moves him is not new information but the plain fact that not knowing has become worse than any answer could be. A second note and a nagging family are both invented; neither appears anywhere in the passage."
+      "explain": "The note unsettles Theo because it proves someone else noticed a secret he never spoke aloud, and what finally moves him is not new information but the plain fact that not knowing has become worse than any answer could be.  A second note and a nagging family are both invented; neither appears anywhere in the passage."
     },
     {
       "id": "l1-cloze-mila-narration-effect",
@@ -989,26 +989,26 @@
       ],
       "coachTopic": "viewpoint-narrator",
       "dok": 3,
-      "stem": "Complete the summary of how Mila's narration works. Because Mila tells the story in the first person, readers learn {{0}}, and her opening line about counting chairs shows readers {{1}} before Finch has said anything at all.",
+      "stem": "Complete the summary of how Mila's narration works.  Because Mila tells the story in the first person, readers learn {{0}}, and her opening line about counting chairs shows readers {{1}} before Finch has said anything at all.",
       "blanks": [
         {
           "choices": [
             "her own private thoughts and reactions, not just what everyone in the room can see",
-            "exactly what Theo and Dash are privately thinking too",
-            "only the events a hidden camera would record"
+            "what Theo and Dash are privately thinking as they arrive",
+            "only the events a hidden camera in the corner of the room would record"
           ],
           "key": 0
         },
         {
           "choices": [
             "that she notices absences and gaps before anyone explains them",
-            "that she is afraid of Finch",
-            "that she already knows about the Threadglass"
+            "that she is afraid of Finch from the moment she walks in",
+            "that she already knows about the missing Threadglass"
           ],
           "key": 0
         }
       ],
-      "explain": "First-person narration limits the story to what happens inside one head, Mila's, which is why readers know her private reactions but never Theo's or Dash's. Her very first sentence, about counting chairs, establishes her defining habit immediately: noticing a gap before anyone has explained it, a pattern the rest of the passage keeps confirming."
+      "explain": "First-person narration limits the story to what happens inside one head, Mila's, which is why readers know her private reactions but never Theo's or Dash's.  Her very first sentence, about counting chairs, establishes her defining habit immediately: noticing a gap before anyone has explained it, a pattern the rest of the passage keeps confirming."
     },
     {
       "id": "l1-mc-floorboard-sound",
@@ -1045,16 +1045,16 @@
       "dok": 2,
       "stem": "Before the card slides under his door, how does Theo generally think about the Athenaeum?",
       "choices": [
-        "He often imagined the building was haunted.",
-        "He has walked past its boarded windows a hundred times without once wondering what was still inside.",
-        "He always suspected something valuable was hidden there.",
+        "He often imagined the building was haunted, since it had been empty for two winters.",
+        "He has walked past its boarded windows a hundred times without wondering what was inside.",
+        "He always suspected something valuable was hidden behind its boarded windows.",
         "He avoided walking anywhere near the building."
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "The passage never mentions Theo thinking the building was haunted. You are inventing a feeling the text does not describe.",
-        "2": "The whole point of this detail is that Theo suspected nothing at all before the card arrived. If you picked this, you reversed the passage's actual meaning.",
-        "3": "Walking past the windows a hundred times is the opposite of avoiding the building. You may have skipped over the word \"past.\""
+        "0": "The passage never mentions Theo thinking the building was haunted.  You are inventing a feeling the text does not describe.",
+        "2": "The whole point of this detail is that Theo suspected nothing at all before the card arrived.  If you picked this, you reversed the passage's actual meaning.",
+        "3": "Walking past the windows a hundred times is the opposite of avoiding the building.  You may have skipped over the word \"past.\""
       },
       "explain": "The passage is specific that Theo passed the Athenaeum constantly without any curiosity at all, which makes the card's arrival a real turning point rather than the confirmation of something he already suspected."
     },
@@ -1069,18 +1069,18 @@
       "dok": 3,
       "stem": "Why does Mila choose the chair nearest the door?",
       "choices": [
-        "It is the only chair left by the time she arrives.",
+        "It is the only chair left by the time she arrives, after Theo takes the other.",
         "Finch specifically assigns her that seat.",
-        "She says she likes knowing where the door is, a small preference that hints at a cautious personality.",
-        "It is closest to the photograph Finch sets on the table."
+        "She says she likes knowing where the door is, a small habit that hints she is cautious.",
+        "It is closest to the photograph of the glass disc that Finch sets on the table."
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "Mila arrives early enough to have a choice; the passage never suggests other chairs are already taken when she sits down. You may be assuming a reason that fits a different kind of scene.",
-        "1": "Nobody assigns seats in this scene. Mila makes her own choice, and her own narration tells you exactly why.",
-        "3": "The photograph is not placed on the table until after everyone is already seated. If you picked this, you reordered events that happen in the opposite sequence."
+        "0": "Mila arrives early enough to have a choice; the passage never suggests other chairs are already taken when she sits down.  You may be assuming a reason that fits a different kind of scene.",
+        "1": "Nobody assigns seats in this scene.  Mila makes her own choice, and her own narration tells you exactly why.",
+        "3": "The photograph is not placed on the table until after everyone is already seated.  If you picked this, you reordered events that happen in the opposite sequence."
       },
-      "explain": "Mila explains her own reasoning directly, in her own first-person voice: she likes knowing where the door is. That small, deliberate choice is exactly the kind of detail only first-person narration can hand a reader so plainly."
+      "explain": "Mila explains her own reasoning directly, in her own first-person voice: she likes knowing where the door is.  That small, deliberate choice is exactly the kind of detail only first-person narration can hand a reader so plainly."
     },
     {
       "id": "l1-mc-trust-each-other",
@@ -1093,18 +1093,18 @@
       "dok": 3,
       "stem": "According to Finch, what changes once Dash joins Theo and Mila at the table?",
       "choices": [
-        "Finch decides she can no longer trust any of the three.",
-        "The group must now vote on every future decision.",
+        "Finch decides she can no longer trust any of the three, since Dash arrived late.",
+        "The three of them must now vote on every decision about the Threadglass.",
         "Dash is immediately given final say over the mission.",
-        "The question shifts from whether Finch trusts them to whether the three of them can trust each other."
+        "The question shifts from whether Finch trusts them to whether they can trust each other."
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "Finch's words describe a shift, not a loss of trust on her part. If you picked this, you read her comment as more negative than the passage actually states.",
-        "1": "Voting is never mentioned anywhere in this scene. You may be filling in a detail the text never gives you.",
-        "2": "Nothing in the passage puts Dash in charge of anything. He arrives late and is treated the same as Theo and Mila, not given special authority."
+        "0": "Finch's words describe a shift, not a loss of trust on her part.  If you picked this, you read her comment as more negative than the passage actually states.",
+        "1": "Voting is never mentioned anywhere in this scene.  You may be filling in a detail the text never gives you.",
+        "2": "Nothing in the passage puts Dash in charge of anything.  He arrives late and is treated the same as Theo and Mila, not given special authority."
       },
-      "explain": "Finch draws a clear line: the part about whether she trusts them is finishing, and a new part is beginning, whether the three of them can trust each other. That shift matters because it points the story toward the crew's relationships, not just their relationship with Finch."
+      "explain": "Finch draws a clear line: the part about whether she trusts them is finishing, and a new part is beginning, whether the three of them can trust each other.  That shift matters because it points the story toward the crew's relationships, not just their relationship with Finch."
     },
     {
       "id": "l1-mc-repeat-theft-pattern",
@@ -1141,16 +1141,16 @@
       "dok": 3,
       "stem": "When Theo says the etched pattern looks like \"a maze with no walls,\" how does Mila react, in her own narration?",
       "choices": [
-        "She tells Theo his answer is wrong.",
-        "She admits it is a better answer than her own would have been, since she was still counting the empty chairs.",
-        "She ignores his answer completely and changes the subject.",
-        "She repeats his answer back to Finch as if it were her own idea."
+        "She tells Theo his answer is wrong, because a maze has to have walls.",
+        "She admits it is better than her own answer would have been, since she was still counting chairs.",
+        "She ignores his answer completely and waits for Finch to speak.",
+        "She repeats his answer back to Finch as if the maze idea were her own, to impress her."
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "Mila never says Theo's answer is wrong. She actually admits it is better than what she would have offered, which is closer to the opposite of this choice.",
-        "2": "Mila's narration responds directly to Theo's answer instead of moving past it. If you picked this, you skipped the sentence where she reacts to what he said.",
-        "3": "Nothing in the passage shows Mila claiming Theo's idea as her own. Her narration credits the comparison to him, not to herself."
+        "0": "Mila never says Theo's answer is wrong.  She actually admits it is better than what she would have offered, which is closer to the opposite of this choice.",
+        "2": "Mila's narration responds directly to Theo's answer instead of moving past it.  If you picked this, you skipped the sentence where she reacts to what he said.",
+        "3": "Nothing in the passage shows Mila claiming Theo's idea as her own.  Her narration credits the comparison to him, not to herself."
       },
       "explain": "Mila's first-person narration lets readers see a private, generous admission that only her own point of view could reveal: Theo's answer beats the one she would have given, because she was too busy counting chairs to notice the pattern herself."
     },
@@ -1279,10 +1279,10 @@
       "partA": {
         "stem": "What exactly makes the Threadglass's disappearance stand out as suspicious?",
         "choices": [
-          "It was confirmed present in one inventory and gone in the very next one, with no theft ever reported.",
-          "The Archive has no photograph of the object.",
-          "The object was never insured.",
-          "Nobody has ever measured the spiral pattern on its surface."
+          "It was present at one formal count and gone at the next, with no theft ever reported.",
+          "The Archive has no photograph of the object to show what it looked like.",
+          "The object was never insured, by the museums or by anyone else.",
+          "Nobody has ever measured the spiral pattern etched into one face of the disc."
         ],
         "key": 0
       },
@@ -1302,11 +1302,11 @@
         }
       },
       "distractorRationale": {
-        "1": "The entry never mentions whether a photograph exists. The shallow etching is a detail about the object's appearance, unrelated to photography.",
-        "2": "An insurance filing is mentioned directly in the Current status section, so the object clearly was insured at some point. This line actually argues against the choice, not for it.",
-        "3": "The unmeasured spiral is a fact about the object's design. It has nothing to do with how or why the object went missing."
+        "1": "The entry never mentions whether a photograph exists.  The shallow etching is a detail about the object's appearance, unrelated to photography.",
+        "2": "An insurance filing is mentioned directly in the Current status section, so the object clearly was insured at some point.  This line actually argues against the choice, not for it.",
+        "3": "The entry says no one has measured the spiral the same way twice, which is a fact about the object's design.  It has nothing to do with how or why the object went missing."
       },
-      "explain": "The suspicious part is precise: the object was confirmed present at one inventory, then simply gone at the next, and no theft was ever filed anywhere the Archive could find. An object does not usually vanish from a secure collection without leaving some kind of report behind."
+      "explain": "The suspicious part is precise: the object was confirmed present at one inventory, then simply gone at the next, and no theft was ever filed anywhere the Archive could find.  An object does not usually vanish from a secure collection without leaving some kind of report behind."
     },
     {
       "id": "l2-ebsr-why-a-tribute",
@@ -1514,10 +1514,10 @@
       "partA": {
         "stem": "What is the one point all three traditions agree on, according to the passage?",
         "choices": [
-          "The border between the living and the dead is a real place, reached by a real path worth describing exactly.",
-          "The dead are always judged based on how they lived.",
-          "Warriors receive better treatment than everyone else.",
-          "A ferryman decides who may cross into the afterlife."
+          "The border between life and death is a real place, reached by a real path worth describing exactly.",
+          "The dead are always judged on how they lived, then sent to reward or punishment.",
+          "Warriors and the greatly honored receive better treatment than everyone else.",
+          "A ferryman decides who may cross into the afterlife, and he must be paid a coin to do it."
         ],
         "key": 0
       },
@@ -1537,11 +1537,11 @@
         }
       },
       "distractorRationale": {
-        "1": "The Norse underworld explicitly does not judge most of the dead, according to the passage. That rules out judgment as something all three traditions share.",
-        "2": "Reward for the greatly honored is described only for the Greek underworld. It is not a point all three traditions make about warriors or anyone else.",
-        "3": "A ferryman requiring payment is a Greek-specific detail. Egyptian and Norse traditions, as described here, do not mention one."
+        "1": "The Norse underworld explicitly does not judge most of the dead, according to the passage.  That rules out judgment as something all three traditions share.",
+        "2": "Reward for the greatly honored is described only for the Greek underworld, and the golden hall for warriors only for the Norse.  Neither is a point all three traditions make.",
+        "3": "A ferryman requiring payment is a Greek-specific detail.  Egyptian and Norse traditions, as described here, do not mention one."
       },
-      "explain": "The passage explicitly separates what the three traditions disagree about, judgment, journey, and fairness, from the one thing they share: a real, carefully described border between life and death. That shared point is the passage's actual central idea."
+      "explain": "The passage explicitly separates what the three traditions disagree about, judgment, journey, and fairness, from the one thing they share: a real, carefully described border between life and death.  That shared point is the passage's actual central idea."
     },
     {
       "id": "l2-ebsr-egyptian-paragraph-idea",
@@ -1717,7 +1717,7 @@
       ],
       "coachTopic": "evidence-key-details",
       "dok": 3,
-      "stem": "Finish the summary. The Wyrdstone's loan looked ordinary at first because {{0}}, which is exactly what makes its disappearance so hard to trace, since {{1}}.",
+      "stem": "Finish the summary.  The Wyrdstone's loan looked ordinary at first because {{0}}, which is exactly what makes its disappearance so hard to trace, since {{1}}.",
       "blanks": [
         {
           "choices": [
@@ -1730,13 +1730,13 @@
         {
           "choices": [
             "the stone was insured for its full value before it left the building",
-            "the institution listed on the paperwork turns out to have no record of that researcher at all",
+            "the institution listed on the paperwork has no record of anyone by that name",
             "the university has since closed its teaching collection completely"
           ],
           "key": 1
         }
       ],
-      "explain": "The loan looks unremarkable at the time because every form was filed the way a genuine request would be, which is exactly why the case is so hard to trace once the listed institution turns out not to know the researcher at all. Insurance and a closed collection are never mentioned anywhere in this entry."
+      "explain": "The loan looks unremarkable at the time because every form was filed the way a genuine request would be, which is exactly why the case is so hard to trace once the listed institution turns out not to know the researcher at all.  Insurance and a closed collection are never mentioned anywhere in this entry."
     },
     {
       "id": "l2-cloze-shared-border-point",
@@ -1747,11 +1747,11 @@
       ],
       "coachTopic": "central-idea",
       "dok": 3,
-      "stem": "Complete the summary. The three underworlds disagree about whether the dead are {{0}}, but every tradition still describes the border between life and death as {{1}}.",
+      "stem": "Complete the summary.  The three underworlds disagree about whether the dead are {{0}}, but every tradition still describes the border between life and death as {{1}}.",
       "blanks": [
         {
           "choices": [
-            "guarded by the same single ruler in every tradition",
+            "guarded by one single ruler who is the same in every tradition",
             "judged, sorted by how they died, or left simply to continue existing",
             "reachable only by burning the body first"
           ],
@@ -1761,12 +1761,12 @@
           "choices": [
             "an idea no culture ever bothered to describe in any detail",
             "a real place, reached by a specific path worth describing in careful detail",
-            "exactly the same distance from the world of the living in each of the three traditions"
+            "the same distance from the world of the living in each of the three traditions"
           ],
           "key": 1
         }
       ],
-      "explain": "The passage spends most of its length on disagreement, judged against sorted against simply continuing, and then closes on the one thing every tradition shares: treating the border itself as a real, describable place, not a vague idea. Nothing in the passage claims the traditions share a single ruler or an identical distance."
+      "explain": "The passage spends most of its length on disagreement, judged against sorted against simply continuing, and then closes on the one thing every tradition shares: treating the border itself as a real, describable place, not a vague idea.  Nothing in the passage claims the traditions share a single ruler or an identical distance."
     },
     {
       "id": "l2-mc-spiral-cant-be-measured",
@@ -2449,26 +2449,26 @@
       ],
       "coachTopic": "inference-evidence",
       "dok": 2,
-      "stem": "Finish the summary. Theo answers Kade's question instantly because {{0}}, and he offers the real framing shop's name specifically because {{1}}.",
+      "stem": "Finish the summary.  Theo answers Kade's question instantly because {{0}}, and he offers the real framing shop's name specifically because {{1}}.",
       "blanks": [
         {
           "choices": [
             "Finch had already drilled a rule into him for exactly this moment",
-            "he genuinely works for the framing shop",
-            "Kade's question catches him completely off guard"
+            "he genuinely works for the framing shop two streets over",
+            "Kade's question catches him off guard and he blurts out a name"
           ],
           "key": 0
         },
         {
           "choices": [
             "a true, checkable detail is harder to catch in a lie than an invented one",
-            "Mila radios him the name at the last second",
-            "he wants Kade to call the shop and get him in trouble"
+            "Mila reads him the shop's name over the radio at the last second",
+            "he wants Kade to call the shop and catch him in the lie right away"
           ],
           "key": 0
         }
       ],
-      "explain": "Theo's speed comes from preparation, not luck, since Finch trained the rule into him long before this scene. He reaches for the real shop's name because a detail that can actually be checked survives scrutiny far better than anything invented on the spot, which is the whole logic behind Finch's cover-story rule."
+      "explain": "Theo's speed comes from preparation, not luck, since Finch trained the rule into him long before this scene.  He reaches for the real shop's name because a detail that can actually be checked survives scrutiny far better than anything invented on the spot, which is the whole logic behind Finch's cover-story rule."
     },
     {
       "id": "l3-cloze-dash-vs-theo-logs",
@@ -2479,7 +2479,7 @@
       ],
       "coachTopic": "inference-relationships",
       "dok": 4,
-      "stem": "Complete the summary comparing the two logs. Dash's log records {{0}}, while Theo's original log leaves out {{1}} until Finch asks about it directly.",
+      "stem": "Complete the summary comparing the two logs.  Dash's log records {{0}}, while Theo's original log leaves out {{1}} until Finch asks about it directly.",
       "blanks": [
         {
           "choices": [
@@ -2491,14 +2491,14 @@
         },
         {
           "choices": [
-            "the fact that he spoke with Kade at all",
-            "a brief change in Kade's expression that Theo decided on his own was not worth writing down",
-            "the name of the framing shop he mentioned to her"
+            "the fact that he met and spoke with a woman who introduced herself as Kade",
+            "a brief change in Kade's expression that he decided was not worth writing down",
+            "the cover story about a framing order that he gave Kade in the gallery"
           ],
           "key": 1
         }
       ],
-      "explain": "Dash's discipline is recording an unseen gap honestly, as a gap, rather than filling it with a guess, while Theo's first draft is accurate about the meeting itself but silently drops a small, uncertain detail he decided on his own did not matter. Finch's question is what finally surfaces it."
+      "explain": "Dash's discipline is recording an unseen gap honestly, as a gap, rather than filling it with a guess, while Theo's first draft is accurate about the meeting itself but silently drops a small, uncertain detail he decided on his own did not matter.  Finch's question is what finally surfaces it."
     },
     {
       "id": "l3-mc-why-memorize-floorplan",
@@ -2607,16 +2607,16 @@
       "dok": 2,
       "stem": "What specific instruction does Finch give Theo about revising his log?",
       "choices": [
-        "Add the missing three seconds exactly as he observed them, with no guess attached about what they meant.",
-        "Rewrite the entire log from scratch in his own words.",
-        "Ask Kade directly what the flicker on her face meant.",
-        "Leave the log exactly as it was originally written."
+        "Add the missing three seconds exactly as he saw them, with no guess about what they meant.",
+        "Rewrite the entire log from scratch in his own words, starting with the framing order.",
+        "Ask Kade directly what the flicker on her face meant, then write down her answer.",
+        "Leave the log exactly as it was, since his account of the visit is already true."
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "Finch asks for one specific addition, not a full rewrite. If you picked this, you overstated how much of the log actually needs to change.",
-        "2": "The passage never suggests Theo could simply ask Kade about it later. The instruction is about writing the log accurately, not gathering new information.",
-        "3": "Finch's whole point is that the original log is incomplete. Leaving it unchanged would ignore exactly the lesson this scene is teaching."
+        "1": "Finch asks for one specific addition, not a full rewrite.  If you picked this, you overstated how much of the log actually needs to change.",
+        "2": "The passage never suggests Theo could simply ask Kade about it later.  The instruction is about writing the log accurately, not gathering new information.",
+        "3": "Finch's whole point is that the original log is incomplete.  Leaving it unchanged would ignore exactly the lesson this scene is teaching."
       },
       "explain": "Finch's instruction is precise and narrow: record the missing three seconds exactly as observed, with no guess attached about what the flicker meant, which is the same discipline of separating observation from interpretation that the whole scene has been building toward."
     },
@@ -2631,15 +2631,15 @@
       "dok": 4,
       "stem": "Comparing the gallery scene to the debrief scene, what stays consistent about how Theo handles uncertain information?",
       "choices": [
-        "He is equally careless with every kind of detail in both scenes.",
-        "He is careful and deliberate when building a cover story, but he tends to underestimate small details he notices himself.",
-        "He refuses to speak at all in both scenes.",
-        "He asks Finch for direct help in the middle of both scenes."
+        "He is equally careless with every kind of detail in both scenes, from his cover story to his log.",
+        "He is careful when building a cover story, but he tends to brush off small details he notices himself.",
+        "He refuses to speak at all in both scenes, even when Kade asks him a question.",
+        "He asks Finch for help in the middle of both scenes, at the gallery and again at the debrief."
       ],
       "key": 1,
       "distractorRationale": {
         "0": "Theo's cover-story answer to Kade is fast, prepared, and deliberate, which rules out carelessness in that half of the comparison.",
-        "2": "Theo speaks confidently and at length in both scenes, especially to Kade and later in his own log. This choice contradicts what actually happens.",
+        "2": "Theo speaks confidently and at length in both scenes, especially to Kade and later in his own log.  This choice contradicts what actually happens.",
         "3": "Finch is not present during the gallery scene at all, and in the debrief scene Theo answers her question himself rather than asking for help."
       },
       "explain": "Across both scenes, Theo shows the same pattern: real skill at constructing a careful, checkable cover story on the spot, paired with a habit of quietly deciding a small detail he personally noticed, like a flicker on Kade's face, was not worth mentioning."
@@ -3204,13 +3204,13 @@
       ],
       "coachTopic": "research-source-check",
       "dok": 3,
-      "stem": "Complete the summary. The Reckoner chooses not to remove the seal because {{0}}, and instead records the tool marks so that {{1}}.",
+      "stem": "Complete the summary.  The Reckoner chooses not to remove the seal because {{0}}, and instead records the tool marks so that {{1}}.",
       "blanks": [
         {
           "choices": [
-            "the seal is protected by a curse the Reckoner fears",
+            "the seal is protected by an old temple curse that the Reckoner fears",
             "taking it would draw hunters, and a hunted guild cannot keep finding anything",
-            "the seal is bolted too firmly to the stone to move"
+            "the seal is bolted too firmly to the setting stone for one person to move"
           ],
           "key": 1
         },
@@ -3223,7 +3223,7 @@
           "key": 1
         }
       ],
-      "explain": "The Reckoner's choice is strategic, not supernatural or physical, since taking the seal would expose the guild to hunters, so leaving it in place while recording the tool marks passes real, checkable evidence forward to whoever reads the ledger next. No curse, no stuck seal, and no sale to outsiders appears anywhere in the source."
+      "explain": "The Reckoner's choice is strategic, not supernatural or physical, since taking the seal would expose the guild to hunters, so leaving it in place while recording the tool marks passes real, checkable evidence forward to whoever reads the ledger next.  No curse, no stuck seal, and no sale to outsiders appears anywhere in the source."
     },
     {
       "id": "l4-mc-ledger-seal-moved-before",
@@ -3236,16 +3236,16 @@
       "dok": 3,
       "stem": "According to the ledger, what happened to the seal before this Reckoner ever arrived in the chamber?",
       "choices": [
-        "It was destroyed and later replaced with a copy.",
-        "It was moved permanently to a different temple.",
-        "It had already been moved once, generations earlier, by an unnamed entrant, then quietly returned.",
-        "It had never once been disturbed before this visit."
+        "It was destroyed long ago and later replaced with a copy made from the same stone.",
+        "It was moved permanently to a different temple, far from the Abydos chamber.",
+        "It had been moved once, generations earlier, by an unnamed entrant, then quietly returned.",
+        "It had never once been disturbed before this visit, just as the priests had sworn."
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "The ledger describes the original seal being moved and returned, never destroyed or replaced. You are adding an event the text does not describe.",
-        "1": "The ledger places the seal in this same chamber the whole time, not moved to another temple. If you picked this, you misread where the seal ends up.",
-        "3": "The tool marks themselves are the ledger's proof that the seal was disturbed before. This choice directly contradicts what the Reckoner physically found."
+        "0": "The ledger describes the original seal being moved and returned, never destroyed or replaced.  You are adding an event the text does not describe.",
+        "1": "The ledger places the seal in this same chamber the whole time, not moved to another temple.  If you picked this, you misread where the seal ends up.",
+        "3": "The tool marks themselves are the ledger's proof that the seal was disturbed before.  This choice directly contradicts what the Reckoner physically found."
       },
       "explain": "The ledger traces a second layer of history the chronicle never mentions: the seal was already moved once, long before this Reckoner's own visit, by an entrant whose name the guild no longer records, then quietly returned to the same spot."
     },
@@ -3284,16 +3284,16 @@
       "dok": 4,
       "stem": "If the entry ends without settling which source is correct, what kind of progress does it claim to have made instead?",
       "choices": [
-        "The seal's history is \"not settled\" but is \"better understood,\" treating clearer understanding as progress on its own.",
-        "No progress at all, since nothing about the case was ever decided.",
-        "Proof that the Temple Chronicle is entirely fictional.",
-        "Proof that the Reckoner's Ledger is completely accurate."
+        "The history is \"not settled\" but \"better understood,\" so clearer understanding counts as progress.",
+        "No progress at all, since neither source was proven right or wrong in the end.",
+        "Proof that the Temple Chronicle is false, since no outsider could check it.",
+        "Proof that the Reckoner's Ledger is completely accurate, because of the tool marks."
       ],
       "key": 0,
       "distractorRationale": {
         "1": "The entry's closing line explicitly claims a kind of progress, being \"better understood,\" which rules out the idea that nothing at all was accomplished.",
-        "2": "The passage never calls the chronicle fictional; it only says its claim cannot currently be checked. This choice overstates the Archive's actual conclusion.",
-        "3": "The Archive explicitly declines to declare either source fully correct. Calling the ledger \"completely accurate\" goes further than the passage supports."
+        "2": "The passage never calls the chronicle fictional; it only says its claim cannot currently be checked.  This choice overstates the Archive's actual conclusion.",
+        "3": "The Archive explicitly declines to declare either source fully correct.  Calling the ledger \"completely accurate\" goes further than the passage supports."
       },
       "explain": "The entry's final lines draw a careful distinction between settling a question and understanding it better, treating the second as real progress even when the first is not yet possible, since the physical evidence still has not been examined directly."
     },
@@ -4112,16 +4112,16 @@
       "dok": 3,
       "stem": "How is the scene between Finch and the crew at the table structured overall?",
       "choices": [
-        "It moves from the present day back into Finch's own childhood.",
-        "It moves from a story about the past, the three sisters, to a direct lesson applied to the crew's present work.",
-        "It is told entirely out of order, with the ending revealed first.",
-        "It consists of unconnected fragments with no clear structure at all."
+        "It moves from the present day back into Finch's own childhood beneath the oldest tree.",
+        "It moves from a story about the three sisters to a direct lesson about the crew's own field reports.",
+        "It is told entirely out of order, opening with the Wyrdstone and ending with the sisters.",
+        "It is a set of unconnected fragments about the sisters, the stone, and Dash, with no clear order."
       ],
       "key": 1,
       "distractorRationale": {
         "0": "The scene never shifts into any part of Finch's own personal past; the story she tells is about the three sisters, not about herself.",
         "2": "The scene proceeds in a clear, forward order: story, then lesson, then question, then closing reflection, not out of order.",
-        "3": "The scene builds deliberately, connecting the parable directly to field reports and then to Dash's question and Finch's closing reflection. Nothing about it is disconnected fragments."
+        "3": "The scene builds deliberately, connecting the parable directly to field reports and then to Dash's question and Finch's closing reflection.  Nothing about it is disconnected fragments."
       },
       "explain": "The scene is built in a clear sequence on purpose: Finch tells the sisters' story first, then explicitly connects it to how a field report has to be written, which is what prompts Dash's question and Finch's closing reflection on the stone itself."
     },
@@ -4249,7 +4249,7 @@
         }
       },
       "distractorRationale": {
-        "0": "This line describes a tense pause while Dash sets the stone.  It says nothing about the narrator deciding to stop noticing things.",
+        "0": "This line describes the moment after Dash sets the stone.  It says nothing about the narrator deciding to stop noticing things.",
         "1": "This line says Kade found the door first, but she never noticed the crew slip past her.  The crew only worked out what the keys were for because Mila noticed the spiral, so noticing mattered more than the keys.",
         "2": "This line shows the narrator noticing a pattern, with no word about courage.  Nothing in the passage says noticing needs courage to do any good."
       },
@@ -4305,26 +4305,26 @@
       ],
       "coachTopic": "central-theme",
       "dok": 4,
-      "stem": "Select the three details from the final passage that show the crew's success depended on skills built up earlier in the story.",
+      "stem": "Select the three details from the final passage that show the crew's success does not feel like a clean, safe victory.",
       "choices": [
-        "The vault behind the door holds centuries of objects that people once hid.",
-        "The door releases a thread of light when the third relic is placed.",
-        "Theo recalls the exact spiral pattern from an object he once delivered in a box.",
-        "Kade spent years collecting the three relics from three different collections.",
-        "Mila reads the seal's tool marks with the care she gives all evidence.",
-        "Mila recognizes the same spiral pattern across three unrelated objects."
+        "Dash sets the Wyrdstone into the leftmost notch first, because he always wants to find out what happens next.",
+        "For one long second after the first relic goes in, nothing happens, and Theo says that is worse than something going badly.",
+        "The spiral on the door matches a piece of glass Theo once delivered in a picture-frame box.",
+        "Theo stops breathing, and this time there is no radio to click twice and tell him it is fine.",
+        "Mila sets the seal into the center notch, and Theo sets the Threadglass last, on the right.",
+        "Theo ends up in the room holding nothing but a working radio and the exact right kind of luck."
       ],
       "key": [
-        2,
-        4,
+        1,
+        3,
         5
       ],
       "distractorRationale": {
-        "0": "The contents of the vault describe what is inside the room. They are not a skill the crew developed earlier in the story.",
-        "1": "The light appearing is a result of the crew's success, not a skill they used to achieve it.",
-        "3": "Kade's years of collecting are about the rival's own effort, not a skill the crew itself built up over the story."
+        "0": "Dash going first shows what he is like: he always wants to find out what happens next.  It says nothing about how the win feels.",
+        "2": "The matching glass is how Theo recognizes the spiral.  It is a clue to the door, not a sign that the success feels uncertain.",
+        "4": "Setting the last two relics in their notches is how the door gets opened.  Placing them shows nothing about how uncertain the win feels."
       },
-      "explain": "Three moments show earlier training paying off directly:  Mila's pattern recognition, the care with evidence she has shown since the day she counted two empty chairs, and Theo's own memory for detail.  Kade's collecting, the door's light, and the vault's contents are all plot outcomes, not skills the crew themselves practiced and applied."
+      "explain": "The ending is a success, but it never feels safe.  The first relic brings a long second of nothing, which Theo says is worse than something going badly; he stops breathing with no radio to tell him it is fine; and he ends up in the room with nothing but a radio and the right kind of luck.  Dash's habit, the matching glass and the ordinary shelves are true details, but none of them shows how uncertain the win feels."
     },
     {
       "id": "l6-ebsr-unverifiable-meaning",
@@ -4571,18 +4571,18 @@
       "coachTopic": "central-theme",
       "dok": 3,
       "mode": "sentence",
-      "stem": "Tap the two sentences that show a crew member's skill from earlier in the story solving part of the final door. The other two simply describe an object or an action in the moment.",
+      "stem": "Tap the two sentences that show a crew member's skill from earlier in the story solving part of the final door.  The other two simply describe an object or an action in the moment.",
       "spans": [
         "We only worked that out because Mila noticed the same spiral, scaled three different ways, on three objects that supposedly had nothing to do with each other.",
         "She reads the tool marks on its underside one more time, like she is checking a signature.",
-        "It matches the pattern on a piece of glass I once delivered in a picture-frame box.",
+        "Then the spiral on the door catches a thread of light, from somewhere inside it that was clearly never powered by anything as ordinary as electricity.",
         "Dash sets the Wyrdstone into the leftmost notch first."
       ],
       "key": [
         0,
         1
       ],
-      "explain": "Mila's pattern-noticing and her careful habit of checking evidence like a signature are the two moments that show earlier training actually solving this final puzzle. The narrator recalling a delivery and Dash placing a stone are plot actions in the moment, not examples of a skill built up earlier in the story."
+      "explain": "Mila's pattern-noticing and her careful habit of checking evidence like a signature are the two moments that show earlier training actually solving this final puzzle.  The thread of light is something the door does in the moment, and Dash placing a stone is an action in the moment, not a skill built up earlier in the story."
     },
     {
       "id": "l6-hot-not-gold-or-gods",
@@ -4633,25 +4633,26 @@
     {
       "id": "l6-hot-checkable-vs-not",
       "type": "hottext",
-      "passageId": "p-what-the-archive-believes",
+      "passageId": "p-three-realms-below",
       "targets": [
         "c1-inf-3-word-meanings"
       ],
       "coachTopic": "vocab-context",
       "dok": 3,
       "mode": "sentence",
-      "stem": "Tap the two sentences that describe a claim which could be checked, even though nobody has checked it yet. The other two describe a claim that can never be checked at all.",
+      "stem": "The memo uses the word \"shades\" in its description of the Greek underworld.  Tap the two sentences that help a reader work out what a shade is.",
       "spans": [
-        "A claim resting on physical evidence is generally easier to weigh than a claim resting on faith.",
-        "The other has told a story that could be checked, and simply never was.",
-        "The chronicle's claim is unverifiable by its very nature.",
-        "No outside party was ever allowed to check it."
+        "Every tradition the Archive studies describes a place the dead go.",
+        "Most of the dead are said to drift as shades through a grey plain.",
+        "They are neither rewarded nor punished, adrift in a fog most Greek writers describe as endless rather than dark.",
+        "The kingdom has a ruler, a boundary river, and a ferryman.",
+        "Each region is guarded."
       ],
       "key": [
-        0,
-        1
+        1,
+        2
       ],
-      "explain": "The ledger's tool-mark claim rests on physical evidence that could, in principle, be examined by someone else later, exactly what these two sentences state. The chronicle's claim is described as unverifiable by its very nature, a completely different category from a claim that simply has not been checked yet."
+      "explain": "A shade is what the memo calls one of the Greek dead.  One sentence says most of the dead drift as shades, and the next describes them: neither rewarded nor punished, adrift in a fog.  The first sentence only says every tradition has a place the dead go, and the other two describe the Greek kingdom's ruler and river and the guards along the Egyptian journey."
     },
     {
       "id": "l6-cloze-relics-are-keys",
@@ -4662,26 +4663,26 @@
       ],
       "coachTopic": "central-theme",
       "dok": 3,
-      "stem": "Finish the summary of the pack's final lesson. Every relic in the vault turns out to be {{0}}, and the crew succeeds where Kade fails because {{1}}.",
+      "stem": "Finish the summary of how the final door opens.  The door stays shut until {{0}}, and just before it opens, the whole door goes quiet in a way that feels {{1}}.",
       "blanks": [
         {
           "choices": [
-            "a copy, with the real relic hidden somewhere else in the Archive",
-            "a weapon the crew means to use against Kade, the rival collector",
-            "a key, cut to fit one notch in a lock that needs all three"
+            "Dash sets the Wyrdstone into the leftmost notch",
+            "the narrator finds a handle hidden behind the spiral",
+            "all three relics are in place on the door"
           ],
           "key": 2
         },
         {
           "choices": [
-            "Finch personally opens the door for them",
-            "the crew is simply stronger and faster than Kade",
-            "Mila's habit of noticing small, matching details solves what years of collecting never could"
+            "calm and safe, like the end of a long storm",
+            "empty, as if the door had never been there",
+            "louder than the sound it was making a second before"
           ],
           "key": 2
         }
       ],
-      "explain": "The passage is explicit that each relic is a key rather than a prize in itself, and the crew's advantage over Kade is never strength or an outside rescue but Mila's own habit of noticing a small, matching detail, the exact skill Finch prized from the very first scene of the whole story."
+      "explain": "Dash's stone makes the spiral catch a thread of light, but the door stays shut until all three relics are in place.  Just before it opens, the door goes quiet, and the narrator says that quiet is somehow louder than the sound it was making a second ago."
     },
     {
       "id": "l6-cloze-catalog-purpose-again",
@@ -4692,26 +4693,26 @@
       ],
       "coachTopic": "viewpoint-purpose",
       "dok": 3,
-      "stem": "Complete the summary of this catalog entry's purpose. Unlike a persuasive document meant to convince someone, a catalog entry exists mainly to {{0}}, which is why it can openly admit {{1}}.",
+      "stem": "Complete the summary of what this entry's record-keeping shows about its purpose.  Each entry is {{0}}, and when the Threadglass's status changes, the Archive promises {{1}}, so a reader can always see where a fact came from.",
       "blanks": [
         {
           "choices": [
-            "prove that every legend connected to the object, like the maze story, is true",
-            "advertise the object for sale to the highest bidder",
-            "record what is known and what is still uncertain, as plainly as possible"
+            "written once, when an object first goes missing, and then closed",
+            "deleted as soon as the relic it tracks is recovered",
+            "kept for good and updated whenever new information surfaces"
           ],
           "key": 2
         },
         {
           "choices": [
-            "that the entry itself might be entirely made up by its writers",
-            "that the Archive secretly already owns the object it is tracking",
-            "that the object's disappearance was never fully explained"
+            "the name of the collector who holds it now",
+            "a fresh measurement of the spiral on its face",
+            "a note on how it learned of the change"
           ],
           "key": 2
         }
       ],
-      "explain": "A catalog entry's job is plain record-keeping rather than persuasion, exactly why it can admit an open question, like the unexplained gap in the Threadglass's history, without that admission weakening its purpose. A sales pitch or a claim of total proof would work against that same plain, recording purpose."
+      "explain": "The entry's first lines say every tracked object keeps one entry for good, updated each time new information surfaces and never deleted, even after a recovery.  Its last lines promise that the next update will come with a note explaining how the Archive came to know of the change.  A record kept that way always shows its reader where a fact came from."
     },
     {
       "id": "l6-mc-theo-arc-noticing",
@@ -4724,18 +4725,18 @@
       "dok": 4,
       "stem": "Looking back from Theo's very first scene to the final vault, what does his arc reveal about the pack's central theme?",
       "choices": [
-        "Theo mostly relies on physical strength to succeed by the end of the story.",
-        "Theo abandons everything Finch ever taught him by the final scene.",
-        "What Finch first had to teach him, paying attention to small details, becomes the very skill that helps solve the final door.",
+        "Theo mostly relies on physical strength by the end, forcing the final door open instead of reading it.",
+        "Theo abandons everything Finch ever taught him by the final scene and simply follows Dash's lead.",
+        "What Finch first had to teach him, paying attention to small details, is what lets him recognize the spiral on the door.",
         "Theo never changes or grows at all across the whole story."
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "No physical challenge or contest of strength ever appears in the final vault scene. The door opens through recognizing a pattern, not through force.",
+        "0": "No physical challenge or contest of strength ever appears in the final vault scene.  The door opens through recognizing a pattern, not through force.",
         "1": "The final scene shows the crew closely following Finch's training, especially careful evidence-reading, not abandoning it.",
-        "3": "Theo's own narration marks his growth directly, noting that he is \"revising\" an assumption he held for months. That is explicit change, not an absence of it."
+        "3": "Theo's own narration marks his growth directly, noting that he is \"revising\" an assumption he held for months.  That is explicit change, not an absence of it."
       },
-      "explain": "Theo begins the story walking past the Athenaeum without a single moment of curiosity, and ends it recognizing a pattern that solves the final door, which is the clearest possible sign that noticing, the very skill Finch first tested him on, is the theme the whole pack has been building toward."
+      "explain": "Theo begins the story walking past the Athenaeum without a single moment of curiosity, and ends it recognizing the spiral on the final door, which is the clearest possible sign that noticing, the very skill Finch first tested him on, is the theme the whole pack has been building toward."
     },
     {
       "id": "l6-mc-mila-instinct-summary",
@@ -4755,11 +4756,11 @@
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "Mila works closely and trustingly alongside Theo and Dash in both scenes. Nothing suggests open distrust between them.",
-        "1": "Mila speaks first in both scenes, asking the question about the empty chairs early on and later being the one who first explains the matching spiral.",
+        "0": "Mila works closely and trustingly alongside Theo and Dash in both scenes.  Nothing suggests open distrust between them.",
+        "1": "Nothing in either scene shows Mila refusing to speak.  In the chairs scene she asks the question she actually cares about, and in the vault scene the narrator reports what she noticed, not who spoke first.",
         "2": "In the chairs scene Mila is already seated when Theo and Dash arrive; she is not the last to arrive in either scene."
       },
-      "explain": "In her very first scene, Mila counts two empty chairs before Finch says a word, and in the final vault, she is the one who first notices the same spiral scaled across three unrelated objects, the same instinct for spotting a gap or a pattern before anyone else does."
+      "explain": "In her very first scene, Mila counts two empty chairs before Finch says a word.  In the final vault, she is again the first to spot a pattern the rest of the crew had missed.  Both times she catches a gap or a link before anyone has explained it."
     },
     {
       "id": "l6-mc-log-discipline-echoes",
@@ -4794,17 +4795,17 @@
       ],
       "coachTopic": "central-theme",
       "dok": 4,
-      "stem": "The final vault door \"opens like a held breath finally let go.\" Where else in the story does a held-breath comparison appear, and what does the echo suggest?",
+      "stem": "The final vault door \"opens like a held breath finally let go.\"  Where else in the story does a held-breath comparison appear, and what does the echo suggest?",
       "choices": [
-        "The phrase never appears anywhere else in the story.",
-        "The same image described the corridor at Frostbank, tying the tension the crew has carried across separate jobs into one final release.",
-        "It echoes something Kade once says about her own private collection.",
-        "It describes only Theo's personal fear of small, enclosed spaces."
+        "The phrase never appears anywhere else in the story, so the image is brand new at the final door.",
+        "The same image described the Frostbank corridor, tying the tension the crew has carried across separate jobs into one final release.",
+        "It echoes something Kade once says about her own private collection, the gallery where she keeps the Threadglass.",
+        "It describes only Theo's personal fear of small, enclosed spaces, like the staircase under the closed library."
       ],
       "key": 1,
       "distractorRationale": {
         "0": "The held-breath image appears earlier, describing the Frostbank corridor's own tense hum, which directly contradicts the claim that the phrase never appears again.",
-        "2": "Kade never uses this comparison; it belongs to Mila's own narration at Frostbank and returns in the narrator's voice at the final vault.",
+        "2": "Kade never uses this comparison.  It first describes the corridor Mila walks through at Frostbank, and it returns in the narrator's voice at the final vault.",
         "3": "The comparison describes the setting and the mood of the corridor, not a specific fear belonging to Theo alone."
       },
       "explain": "The same held-breath image first described the tense hum filling the Frostbank corridor, and its return at the final door ties together the tension the crew has carried across separate, earlier jobs into one last release, rather than introducing a brand-new comparison."
@@ -4841,21 +4842,21 @@
         "c1-inf-4-reasoning"
       ],
       "coachTopic": "inference-argument",
-      "dok": 4,
-      "stem": "How does the Archive's own catalog-entry format, shown in the Threadglass entry, differ from the Temple Chronicle's underlying argument?",
+      "dok": 2,
+      "stem": "The Threadglass entry says its etching only shows clearly when light crosses the glass at an angle.  How do historians read that detail?",
       "choices": [
-        "Both formats argue for exactly the same kind of certainty about their subject.",
-        "The catalog entry exists mainly to persuade collectors to purchase the object.",
-        "The chronicle openly admits, like a catalog entry does, when it cannot be verified.",
-        "A catalog entry openly records what is uncertain, while the chronicle argues for certainty based on the temple's own unbroken authority."
+        "As wear from being moved twice more between institutions.",
+        "As something done on purpose, not as a flaw in the original casting.",
+        "As proof that the disc is a prop from the events of the maze legend.",
+        "As a sign that the disc in the photograph is a later copy."
       ],
-      "key": 3,
+      "key": 1,
       "distractorRationale": {
-        "0": "The Threadglass entry openly names a large unexplained gap in its own history, while the chronicle claims an unbroken, unquestioned record. These are close to opposite approaches, not the same kind of certainty.",
-        "1": "The Threadglass entry is written as a plain record, not as a sales pitch, and it never addresses any buyer directly.",
-        "2": "The chronicle calls its own claim \"a fact requiring only faith,\" the opposite of admitting it cannot currently be verified."
+        "0": "The entry lists the moves as part of the disc's history, not as the cause of its shallow etching.",
+        "2": "The entry says the disc is almost certainly a later tribute to the maze story, not a prop from it.",
+        "3": "Nothing in the entry calls the disc a copy.  The only reading it gives of the etching is the historians' own."
       },
-      "explain": "The Threadglass catalog entry is comfortable openly stating an unexplained gap in its own history, while the Temple Chronicle argues for total, unbroken certainty resting on the temple's own authority, a genuine difference in what each kind of document is willing to admit it does not know."
+      "explain": "The entry reports the shallow etching and then gives the historians' reading of it: they believe it was done on purpose, not a flaw in the original casting.  The moves between institutions, the maze legend and the idea of a copy come from other parts of the entry, and none of them explains the etching."
     },
     {
       "id": "l6-short-reckoner-title-meaning",
@@ -4894,7 +4895,7 @@
         "one of three keys"
       ],
       "maxWords": 4,
-      "explain": "The passage states plainly that every relic recovered across the whole story was never the real target at all, only a key cut to fit one notch in a lock that needed all three at once, reframing everything the crew did earlier as building toward this one final door."
+      "explain": "The passage says plainly that none of the relics was ever the real target.  Each one was only a key, which turns everything the crew did earlier into steps toward this one final door."
     },
     {
       "id": "l1-match-card-line-to-its-place",
