@@ -511,9 +511,9 @@
         "stem": "What is the central idea of the article as a whole?",
         "choices": [
           "The long route is worth the hours because the walk itself is how a courier finds out whether anyone is following.",
-          "A courier's most important skill is picking a suspicious face out of a crowd.",
+          "A courier's most important skill is picking a suspicious face out of a crowd on a busy street.",
           "Doubling back is the single most reliable of the courier's moves.",
-          "Missing a meeting costs a team very little, so meetings should be rescheduled often."
+          "Missing a meeting costs a team very little, so couriers should reschedule meetings as often as they can."
         ],
         "key": 0
       },
@@ -632,10 +632,10 @@
       "dok": 2,
       "stem": "What does a change of level, such as stairs or a train platform, force a follower to do?",
       "choices": [
-        "Decide at once whether to close the gap or lose the courier, where the choice can be seen from the front",
+        "Decide at once whether to close the gap or lose the courier, in plain view from the front",
         "Turn around inside about two seconds and walk back the way they came",
-        "Stop in front of a window and check the street behind them",
-        "Wait forty feet back until the courier reaches the meeting"
+        "Stop in front of a shop window and check the street behind them in the glass",
+        "Keep drifting forty feet back until the courier reaches the meeting"
       ],
       "key": 0,
       "distractorRationale": {
@@ -656,9 +656,9 @@
       "dok": 3,
       "stem": "Which of these is the best summary of the article?",
       "choices": [
-        "Couriers use shop windows, parked cars, and phone screens to watch the street behind them without turning their heads.",
+        "Couriers pause at shop windows and parked cars, or angle a phone screen, to watch the street behind them without turning their heads.",
         "Following somebody through a city is difficult, and most followers are spotted within two seconds of the first turn.",
-        "Couriers walk a long, deliberately awkward route because the route is what makes a follower show themselves, and a courier who finds one calls the meeting off.",
+        "Couriers walk a long, deliberately awkward route because it makes a follower show themselves, and a courier who finds one calls the meeting off.",
         "Couriers are trained never to hurry, because arriving late at a meeting matters less than arriving safely."
       ],
       "key": 2,
@@ -1668,9 +1668,9 @@
       "partA": {
         "stem": "Source B reports that the signal lasted nine minutes.  Which detail tells a reader that the nine minutes itself was recorded carefully?",
         "choices": [
-          "Two instructors signed the entry at the bottom.",
-          "The receiver battery was fresh for every run.",
-          "The entry will be looked at again after the summer exercises.",
+          "Two instructors, Marchetti and Osei, signed their names to the entry at the bottom.",
+          "The receiver's battery was replaced with a fresh one before every run.",
+          "The staff will look at the entry again once the summer exercises are finished.",
           "Two people timed the same run on their own and came out within three seconds of each other."
         ],
         "key": 3
@@ -2051,9 +2051,9 @@
       "partA": {
         "stem": "A team has to write one sentence of advice for buyers and back it with this article.  Which sentence can the article actually support?",
         "choices": [
-          "Do not buy beacons at all, because two of the three tunnels went badly.",
+          "Do not buy these beacons, because in one tunnel the signal was lost after only eight minutes.",
           "Buy the beacon that performed best in dry granite.",
-          "Run your test in your easiest tunnel so the beacon gets a fair chance.",
+          "Run your test in your easiest, driest tunnel so the beacon gets a fair chance to do its best.",
           "Ask what the depth, the rock, and the shape of the passage were before believing a beacon's number."
         ],
         "key": 3
@@ -2074,7 +2074,7 @@
         }
       },
       "distractorRationale": {
-        "0": "Two poor results is a count of outcomes, and the article says outright that the beacon is not the thing that changed.  The line you would be quoting is the one describing the misreading.",
+        "0": "One tunnel losing the signal after eight minutes is a single outcome, and the article says outright that the beacon is not the thing that changed.  The line you would be quoting is the one describing the misreading.",
         "1": "That result is real and it belongs to the granite rather than to the beacon.  Turning the best condition into a shopping rule is the mistake the article spends three paragraphs undoing.",
         "2": "The line you would be leaning on recommends the opposite: test in your own worst tunnel.  Reversing a recommendation and citing it anyway is the fastest way to be caught."
       },
@@ -2133,9 +2133,9 @@
       "stem": "The Halloway training log and this article were written by different people who never worked together.  What do they agree on?",
       "choices": [
         "That a beacon's number means nothing until you know the rock, the depth, and the shape of the passage.",
-        "That every department should buy whichever beacon did best in granite.",
-        "That the Wren-7 is a poor beacon.",
-        "That wet limestone is the only condition that matters."
+        "That every department should buy whichever beacon held its signal longest in dry granite.",
+        "That the Wren-7 is a poor beacon that should not be carried underground.",
+        "That wet limestone is the only condition that matters, and depth makes no difference."
       ],
       "key": 0,
       "distractorRationale": {
@@ -2565,8 +2565,8 @@
         {
           "choices": [
             "calling the exercise off is not the safe choice",
-            "the radio set has broken down",
-            "Jonah has already been caught"
+            "the hiss means the radio set has broken down",
+            "Jonah has already been caught at the desk"
           ],
           "key": 0
         },
@@ -2579,7 +2579,7 @@
           "key": 2
         }
       ],
-      "explain": "The aside is not a digression; it is positioned.  It arrives at ten twenty-one, one minute before the radio clicks, so the reader weighs the decision without yet knowing how it turns out.  Move the same paragraph to the end and it stops being a decision and becomes an excuse, because by then everybody knows nothing went wrong."
+      "explain": "The aside is not a digression; it is positioned.  It arrives at ten twenty-one, one minute before the radio clicks, so the reader weighs the decision without yet knowing how it turns out.  Move the same paragraph to the end and it stops being a decision and becomes an excuse, because by then everybody knows nothing went wrong.  The hiss gets an aside of its own, but the narrator says the hiss means the set is working; only silence with no hiss underneath would mean it is dead."
     },
     {
       "id": "l6-ebsr-what-the-brief-is-for",
@@ -2658,9 +2658,9 @@
       "stem": "Which chain of causes does the article build, with each step leading to the next?",
       "choices": [
         "Relays fail, so the signal dies, so silence becomes ambiguous.",
-        "Rock absorbs the signal, so a team needs a more powerful radio, and a powerful radio ends the silence.",
+        "Rock absorbs the signal, so a team needs a more powerful radio, and a powerful radio pushes through and ends the silence.",
         "Rock absorbs the signal, so a radio goes quiet, and a quiet radio could mean three different things, so the crews fix a time to check in.",
-        "A team below is in trouble, so the radio goes quiet, so the surface crew sends help."
+        "A team below is in trouble, so the radio goes quiet, so the surface crew sends help down the tunnel."
       ],
       "key": 2,
       "distractorRationale": {
@@ -2835,10 +2835,10 @@
       "partA": {
         "stem": "Why does the passage insist that the collector, not just the person who loaded the drop, must still take a slow, checked route to the pickup?",
         "choices": [
-          "Because walking straight from the signal to the drop site would let a follower watch one person do both things back to back.",
-          "Because the collector is more likely to be followed than the person who loaded the drop.",
+          "Because going straight from the signal to the drop lets a follower watch one person do both things back to back.",
+          "Because the collector is more likely to be followed than the person who loaded the drop hours earlier.",
           "Because the container might have been damaged since it was loaded.",
-          "Because the signal itself might be a fake left by an investigator."
+          "Because the signal itself might be a fake chalk mark left by an investigator to trap the collector."
         ],
         "key": 0
       },
@@ -2860,9 +2860,9 @@
       "distractorRationale": {
         "1": "Nothing in the passage says one role is watched more than the other; the risk it names is behavior, not identity, one person doing two connected things in a row.",
         "2": "The passage never raises damage to the container as a reason for caution; that is a worry this article does not mention at all.",
-        "3": "The passage never suggests a signal could be faked by an outsider. Its concern is a follower watching a real signal and a real pickup happen together."
+        "3": "The passage never suggests a signal could be faked by an outsider.  Its concern is a follower watching a real signal and a real pickup happen together."
       },
-      "explain": "The whole method exists to keep two actions from being watched as one. If the collector skipped their own caution and walked straight to the drop the instant the signal appeared, a follower would only need to watch a single person to prove the whole connection."
+      "explain": "The whole method exists to keep two actions from being watched as one.  If the collector skipped their own caution and walked straight to the drop the instant the signal appeared, a follower would only need to watch a single person to prove the whole connection."
     },
     {
       "id": "l1-ms-what-makes-a-good-site",
@@ -3221,11 +3221,11 @@
       "coachTopic": "viewpoint-narrator",
       "dok": 3,
       "partA": {
-        "stem": "This scene is told in first person, from the watcher's own point of view. What does that choice let the reader experience that a third-person account of the same events would not?",
+        "stem": "This scene is told in first person, from the watcher's own point of view.  What does that choice let the reader experience that a third-person account of the same events would not?",
         "choices": [
-          "The narrator's own uncertainty in the moment, including a decision not made, rather than only the outcome of the wait.",
-          "A clear view into what is happening inside the archive at the same time.",
-          "A complete list of everyone who enters and exits the building during the wait.",
+          "The narrator's own uncertainty in the moment, including a decision not made, not only how the wait ends.",
+          "A clear view into what is happening inside the archive while the narrator waits outside.",
+          "A complete, timed list of everyone who enters and exits the archive building during the wait.",
           "Proof of exactly what Ines is thinking while she is inside."
         ],
         "key": 0
@@ -3250,7 +3250,7 @@
         "2": "One man entering and leaving is a single observation, not a complete record of everyone who came and went; the passage never claims to track every visitor.",
         "3": "This line explains a rule Ines shared at some earlier point, not a window into what she is thinking during this specific wait."
       },
-      "explain": "A third-person, outside account could report only that the narrator waited and then received a signal. Writing it in first person instead lets the reader sit inside the narrator's own held breath and the thumb that hovers but does not press, an uncertainty a purely external account would have to leave out."
+      "explain": "A third-person, outside account could report only that the narrator waited and then received a signal.  Writing it in first person instead lets the reader sit inside the narrator's own held breath and the thumb that hovers but does not press, an uncertainty a purely external account would have to leave out."
     },
     {
       "id": "l3-ms-signs-ines-notices",
@@ -3292,11 +3292,11 @@
       "coachTopic": "research-source-check",
       "dok": 3,
       "partA": {
-        "stem": "The brief's small print says the thirty-day figure was measured at a constant seventy degrees. Why should that detail make a reader slow down before trusting the number?",
+        "stem": "The brief's small print says the thirty-day figure was measured at a constant seventy degrees.  Why should that detail make a reader slow down before trusting the number?",
         "choices": [
-          "Because it means the headline number describes one comfortable condition, not every condition a buyer might use the tag in.",
-          "Because seventy degrees is an unusually high temperature for any lab to use.",
-          "Because it proves the thirty-day figure was invented rather than measured at all.",
+          "Because the headline number describes one comfortable condition, not every condition a buyer might use the tag in.",
+          "Because seventy degrees is an unusually high temperature for any lab to use in a battery test.",
+          "Because it proves the thirty-day figure was invented by the sellers rather than measured in a test.",
           "Because it means the tag cannot function at any other temperature."
         ],
         "key": 0
@@ -3321,7 +3321,7 @@
         "2": "The brief does not say the number was invented; it says the number was measured under one specific condition, which is a different and much narrower claim.",
         "3": "\"Performance may vary\" concedes the tag still works elsewhere, just not necessarily for as long; it does not claim the tag stops functioning outside seventy degrees."
       },
-      "explain": "A number that holds true at one comfortable temperature is not automatically true everywhere else. The brief's own small print admits performance may vary, which is exactly the kind of detail a careful reader has to notice before assuming the headline claim applies to their own conditions."
+      "explain": "A number that holds true at one comfortable temperature is not automatically true everywhere else.  The brief's own small print admits performance may vary, which is exactly the kind of detail a careful reader has to notice before assuming the headline claim applies to their own conditions."
     },
     {
       "id": "l4-ebsr-what-the-cold-log-explains",
@@ -3415,11 +3415,11 @@
       "coachTopic": "inference-argument",
       "dok": 3,
       "partA": {
-        "stem": "Why does the log say a tag rated for thirty days that only lasts three in the cold is \"not a faulty tag\"?",
+        "stem": "Why does the log say a tag rated for thirty days that only lasts three in the cold \"is not broken\"?",
         "choices": [
-          "Because the published number describes one set of conditions, and a Halloway winter is a different set entirely.",
-          "Because three days is actually longer than the log expected the tag to last.",
-          "Because the tag was never designed to be used outdoors at all.",
+          "Because the published number describes one set of conditions, and a Halloway winter is a different set.",
+          "Because three days is actually longer than the staff expected the tag to last in that cold.",
+          "Because the tag was built for use indoors and was never designed to go outdoors at all.",
           "Because a faulty tag would not have come back to life once warmed."
         ],
         "key": 0
@@ -3444,7 +3444,7 @@
         "2": "Nothing in the log or the brief says the tag is indoor-only; the whole exercise is an outdoor cold-weather trial.",
         "3": "The recovery detail supports a different point, that the cold did not damage the tags, which is related but answers a different question than whether the tag is faulty."
       },
-      "explain": "A published number is a description of the conditions it was measured under, not a promise that holds everywhere. Calling the tag not faulty separates a real defect from a number that simply describes a different, warmer set of conditions than the one it was carried into."
+      "explain": "A published number is a description of the conditions it was measured under, not a promise that holds everywhere.  Calling the tag not broken separates a real defect from a number that simply describes a different, warmer set of conditions than the one it was carried into."
     },
     {
       "id": "l4-ms-reasons-to-slow-down-on-petrel",
@@ -3612,9 +3612,9 @@
         "stem": "Which idea from this article explains why a buyer should be cautious about the Petrel-4 brief's single thirty-day number?",
         "choices": [
           "A buyer should never trust any number that comes from an indoor test.",
-          "A tag tested in a mild climate will always outperform a tag tested in a desert climate.",
-          "Every maker's brief exaggerates its numbers on purpose.",
-          "A maker's own test, run under its most favorable conditions, tends to produce the best possible number rather than a typical one."
+          "A tag tested in a mild climate will always outlast a tag tested in a desert climate by about a week.",
+          "Corvid Systems tested the tag in the desert and left that number out of its brief.",
+          "A maker's own test, run in its most favorable conditions, tends to give the best possible number, not a typical one."
         ],
         "key": 3
       },
@@ -3635,10 +3635,10 @@
       },
       "distractorRationale": {
         "0": "The article's caution is about knowing the temperature a number was measured at, not about rejecting indoor testing altogether; a warm, comfortable indoor test is exactly the kind this article discusses without condemning it outright.",
-        "1": "The article reports what happened in these three specific tests; it never claims mild climates always beat desert climates as a general rule, only that conditions changed the result this time.",
-        "2": "The article says the opposite directly: it warns a reader not to doubt every number a maker shares, which is not the same as accusing every maker of exaggerating on purpose."
+        "1": "The article reports what happened in these three specific tests, where the gap was one week in one pair of tests.  It never turns that into a rule that a mild climate always wins by a set amount.",
+        "2": "The desert test belongs to the review board, not to Corvid, and the article warns a reader not to doubt every number a maker shares."
       },
-      "explain": "The Petrel-4 brief's thirty-day figure came from the maker's own facility, run under comfortable conditions the maker chose. This article explains exactly why that kind of test tends to produce the best possible number rather than a typical one, which is the reasoning a cautious buyer needs before trusting it."
+      "explain": "The Petrel-4 brief's thirty-day figure came from the maker's own facility, run under comfortable conditions the maker chose.  This article explains exactly why that kind of test tends to produce the best possible number rather than a typical one, which is the reasoning a cautious buyer needs before trusting it."
     },
     {
       "id": "l5-ms-what-both-sources-would-agree-on",
@@ -3815,14 +3815,14 @@
         },
         {
           "choices": [
-            "translated into a foreign language first",
-            "sent over a faster radio frequency",
+            "traced back to the courier who first carried them",
+            "sent over a faster radio frequency that a listener can catch",
             "compared against each other, which cancels the randomness out"
           ],
           "key": 2
         }
       ],
-      "explain": "The pad's strength depends entirely on the one-use rule, not on the material it is printed on or the frequency a message travels over. Reuse matters because it lets two scrambled messages be lined up against each other, and that comparison is what cancels out the randomness that was protecting them."
+      "explain": "The pad's strength depends entirely on the one-use rule, not on the material it is printed on or the frequency a message travels over.  Reuse matters because it lets two scrambled messages be lined up against each other, and that comparison is what cancels out the randomness that was protecting them."
     },
     {
       "id": "l3-hot-ines-being-careful",
@@ -3884,21 +3884,21 @@
         {
           "choices": [
             "a stranger offering more than was asked for could be a trap as easily as kindness",
-            "the archivist told her the box was dangerous",
-            "Marchetti had warned her specifically about that shelf"
+            "the archivist warned her that the second box from that shelf was dangerous",
+            "Marchetti had warned her specifically about that shelf before she went in"
           ],
           "key": 0
         },
         {
           "choices": [
             "a reading room keeps that record whether she lies or not",
-            "she forgot to bring a false name with her",
-            "the archivist was watching her sign it"
+            "she forgot to bring the false name Marchetti gave her",
+            "the archivist was watching closely as she signed it"
           ],
           "key": 0
         }
       ],
-      "explain": "Ines's caution comes from a rule, not a specific warning: an unearned offer could be a trap as easily as kindness. Her honest signature comes from the same clear-eyed reasoning, since a reading room keeps its record regardless of what name goes on it, so a lie buys nothing unless somebody happens to be checking."
+      "explain": "Ines's caution comes from a rule, not a specific warning: an unearned offer could be a trap as easily as kindness.  Her honest signature comes from the same clear-eyed reasoning, since a reading room keeps its record regardless of what name goes on it, so a lie buys nothing unless somebody happens to be checking."
     },
     {
       "id": "l4-hot-claims-needing-a-check",
@@ -3960,21 +3960,21 @@
         {
           "choices": [
             "the engineers who ran the test work for the company that sells the tag",
-            "the tag is too small to hold a real battery",
-            "the brief never mentions a battery at all"
+            "a tag the size of a matchbook is too small to hold a real battery",
+            "the brief's thirty-day number was never measured by anyone at all"
           ],
           "key": 0
         },
         {
           "choices": [
             "it names its dates and conditions and admits its explanation is still just a guess",
-            "it was written by the same company that sells the tag",
-            "it promises a number bigger than the brief's own claim"
+            "it was written by Corvid Systems, the same company that sells the tag",
+            "it promises the tag will run even longer than the brief's thirty days"
           ],
           "key": 0
         }
       ],
-      "explain": "The brief's number is worth a second look because the people who measured it are the people who sell the product. The log earns more trust for the opposite reason: it names exactly when and under what conditions it tested, and it is honest that its own explanation has not yet been proven."
+      "explain": "The brief's number is worth a second look because the people who measured it are the people who sell the product.  The log earns more trust for the opposite reason: it names exactly when and under what conditions it tested, and it is honest that its own explanation has not yet been proven.  The brief's number was measured, by Corvid's own engineers at Corvid's own facility, and nothing says the tag is too small for a real battery.  The log was written by the Halloway staff rather than Corvid, and its number is shorter than thirty days, not longer."
     },
     {
       "id": "l5-hot-lesson-not-one-test",
@@ -4036,21 +4036,21 @@
         {
           "choices": [
             "the tag itself never changed between tests, only the climate around it did",
-            "the desert test must have used a broken tag",
-            "only the coastal number can ever be trusted"
+            "the desert test must have used a broken tag that drained too early",
+            "only the mild coastal number, near thirty days, can be trusted"
           ],
           "key": 0
         },
         {
           "choices": [
             "ask what temperature any runtime number was measured at before comparing it to another",
-            "buy only tags tested in mild coastal climates",
-            "ignore every number a maker publishes"
+            "buy only tags tested in mild coastal climates, where the runtime ran longest",
+            "ignore every runtime number a maker publishes, since the three tests disagree"
           ],
           "key": 0
         }
       ],
-      "explain": "Three results, read side by side, isolate the one thing that actually varied: the climate around a tag that itself never changed. The advice that follows is not to distrust every number or trust only one climate, but to ask what conditions any single number was measured under."
+      "explain": "Three results, read side by side, isolate the one thing that actually varied: the climate around a tag that itself never changed.  The advice that follows is not to distrust every number or trust only one climate, but to ask what conditions any single number was measured under."
     },
     {
       "id": "l1-mc-second-glance",
@@ -4087,18 +4087,18 @@
       "dok": 3,
       "stem": "Which choice best states why the article says a dead drop takes the second person out of the picture?",
       "choices": [
-        "Removing the moment two people would stand together removes the only proof a follower could use to connect them.",
-        "Only one person is ever trained to load and collect drops.",
+        "It removes the moment two people would stand together, the only proof a follower could use to connect them.",
+        "Only one person is ever trained to both load and collect drops, so a second person has no job.",
         "A second person would make the container too heavy to hide.",
-        "The collector always works completely alone, without any trainer."
+        "The collector always works completely alone, without any trainer to show them where the drop is."
       ],
       "key": 0,
       "distractorRationale": {
         "1": "The article never claims only one person is trained; it describes two roles, loading and collecting, without saying either is done by an untrained person.",
         "2": "Container weight is never mentioned as a concern connected to a second person.",
-        "3": "The article never discusses training or how many people are involved in preparing someone for the job; it is about the moment of the exchange itself."
+        "3": "The article never says who trains the collector or what a trainer shows them.  It takes the second person out so that no follower ever sees two people in one place at one time."
       },
-      "explain": "A meeting proves a connection because a follower can see two people together at once. Removing the second person from that single moment removes the only proof a follower would have, which is the entire reason the method works."
+      "explain": "A meeting proves a connection because a follower can see two people together at once.  Removing the second person from that single moment removes the only proof a follower would have, which is the entire reason the method works."
     },
     {
       "id": "l1-mc-only-one-kind-of-person",
@@ -4171,18 +4171,18 @@
       "dok": 3,
       "stem": "What does the article mean by calling a properly used one-time pad \"closer to a lock with no shape for a key to have ever fit\"?",
       "choices": [
-        "Without the pad, no possible original message can be favored over any other, so there is nothing for a codebreaker to unlock.",
-        "The one-time pad was invented by a locksmith rather than a mathematician.",
-        "A one-time pad physically resembles a padlock in its packaging.",
+        "Without the pad, every possible original message is equally likely, so a codebreaker has nothing to unlock.",
+        "The one-time pad was invented by a locksmith, which is why the article calls it a lock.",
+        "The rule for combining the pad with a message is kept secret, so no codebreaker can learn it.",
         "The pad can be used to unlock a message once, but never a second time."
       ],
       "key": 0,
       "distractorRationale": {
         "1": "The article never discusses who invented the one-time pad or what profession they had.",
-        "2": "Nothing in the article compares the pad's physical appearance to a padlock; the comparison is about how unbreakable the cipher is, not what it looks like.",
+        "2": "The article says the opposite about the rule: it is fixed, and anyone could learn it in a minute.  The protection comes from the random pad, not from a secret rule.",
         "3": "The \"no shape for a key\" image describes the scrambled message itself being unopenable, not a limit on how many times the pad can be used."
       },
-      "explain": "A lock with no shape for a key to fit cannot be picked, because there is nothing about it a key could match. The article uses that image to explain that a properly used one-time pad leaves no pattern at all for a codebreaker to work against."
+      "explain": "A lock with no shape for a key to fit cannot be picked, because there is nothing about it a key could match.  The article uses that image to explain that a properly used one-time pad leaves no pattern at all for a codebreaker to work against."
     },
     {
       "id": "l2-mc-definition-before-rule",
@@ -4280,7 +4280,7 @@
         "1": "No note from Marchetti appears anywhere in the passage; the second name is something Ines herself notices and has to interpret.",
         "3": "No alternate address appears in the passage; Ines is already inside the correct archive."
       },
-      "explain": "The request slips give Ines one specific, unexplained fact: a name on the same shelf range that Marchetti never gave her. The passage leaves what that name means unresolved, which is exactly what makes it worth noticing."
+      "explain": "The request slips give Ines one specific, unexplained fact: a name on the same shelf range that Marchetti never gave her.  Noticing a detail that does not fit the plan is exactly the habit this exercise trains."
     },
     {
       "id": "l3-mc-saw-not-decided",
@@ -4315,11 +4315,11 @@
       ],
       "coachTopic": "viewpoint-narrator",
       "dok": 3,
-      "stem": "The Reading Room and On the Line both follow a character making a careful decision under pressure. What is different about how each scene lets the reader experience that decision?",
+      "stem": "The Reading Room and On the Line both follow a character making a careful decision under pressure.  What is different about how each scene lets the reader experience that decision?",
       "choices": [
-        "One is told from outside the decision-maker in third person, while the other is told from inside the decision-maker in first person.",
-        "One takes place during the day, and the other takes place entirely at night.",
-        "One character is nervous, and the other character feels no pressure at all.",
+        "One is told from outside the decision-maker in third person, and the other from inside, in first person.",
+        "One takes place during the day in the archive, and the other takes place entirely at night.",
+        "One character is nervous about the plan, and the other gets through the whole task feeling no pressure.",
         "One scene includes dialogue, and the other scene includes none at all."
       ],
       "key": 0,
@@ -4328,7 +4328,7 @@
         "2": "Both characters register pressure in their own way; the narrator of the watching scene notices a held breath, and Ines runs through careful reasoning of her own.",
         "3": "The Reading Room includes brief dialogue with the archivist, and On the Line includes almost none, but that is not the deeper contrast the question is asking about."
       },
-      "explain": "The Reading Room is told about Ines from outside, so the reader watches her actions and infers her reasoning. On the Line is narrated by the watcher directly, so the reader sits inside a held breath and a thumb that hovers but does not press, an intimacy that third person does not offer in the same way."
+      "explain": "The Reading Room is told about Ines from outside, so the reader watches her actions and infers her reasoning.  On the Line is narrated by the watcher directly, so the reader sits inside a held breath and a thumb that hovers but does not press, an intimacy that third person does not offer in the same way."
     },
     {
       "id": "l3-short-second-box-handling",
@@ -4386,9 +4386,9 @@
       "dok": 3,
       "stem": "Why does the training log describe its own explanation for the short battery life as a \"guess\" rather than stating it as settled fact?",
       "choices": [
-        "The log tested the tags' recovery, not the specific cause of the charge loss, so the cause remains unconfirmed.",
-        "The instructors could not agree on how to write the entry.",
-        "The brief already gave a different, more trustworthy explanation.",
+        "The staff tested whether the tags recovered, not what caused the charge loss, so the cause is unconfirmed.",
+        "The two trainers could not agree on which of their two guesses belonged in the entry.",
+        "The maker's brief had already explained the cold drain, and the log trusted that instead.",
         "The tags were too damaged afterward to be examined again."
       ],
       "key": 0,
@@ -4397,7 +4397,7 @@
         "2": "The brief offers no cold-weather explanation at all; it only claims a thirty-day figure measured at seventy degrees.",
         "3": "The tags are shown recovering fully once warmed, which is the opposite of being too damaged to examine."
       },
-      "explain": "The staff tested whether the cold had permanently damaged the tags, and it had not, but that same test does not prove what actually caused the fast charge loss in the first place. Calling the explanation a guess is the log being precise about which question its evidence actually answers."
+      "explain": "The staff tested whether the cold had permanently damaged the tags, and it had not, but that same test does not prove what actually caused the fast charge loss in the first place.  Calling the explanation a guess is the log being precise about which question its evidence actually answers."
     },
     {
       "id": "l4-mc-what-makes-the-log-careful",
@@ -4468,12 +4468,12 @@
       ],
       "coachTopic": "research-integrate",
       "dok": 3,
-      "stem": "A buyer read only the desert-climate result from this article and concluded the tag was unreliable. What did the buyer's conclusion get wrong?",
+      "stem": "A buyer read only the desert-climate result from this article and concluded the tag was unreliable.  What did the buyer's conclusion get wrong?",
       "choices": [
-        "It treated one test's result as a verdict on the tag, when the article shows the climate, not the tag, is what changed.",
+        "It treated one result as a verdict on the tag, when the article shows the climate, not the tag, is what changed.",
         "It assumed heat could never affect a battery's performance at all.",
-        "It assumed the desert test used a different tag than the other two tests.",
-        "It assumed nineteen days was actually longer than the maker's own claim."
+        "It assumed the desert test used a different, weaker tag than the coastal and freezing mountain tests.",
+        "It assumed nineteen days in the desert was longer than the maker's own thirty-day claim."
       ],
       "key": 0,
       "distractorRationale": {
@@ -4481,7 +4481,7 @@
         "2": "The article describes the same tag tested in three different climates, not three different tags.",
         "3": "Nineteen days is shorter than the maker's thirty-day claim, not longer; that comparison is not where this buyer's error lies."
       },
-      "explain": "A single result, read alone, looks like a verdict on the device itself. The article's whole argument is that the tag stayed constant across all three tests and only the surrounding climate changed, which is exactly the context a one-test reading throws away."
+      "explain": "A single result, read alone, looks like a verdict on the device itself.  The article's whole argument is that the tag stayed constant across all three tests and only the surrounding climate changed, which is exactly the context a one-test reading throws away."
     },
     {
       "id": "l5-mc-best-summary-of-advice",
@@ -4567,9 +4567,9 @@
       "partA": {
         "stem": "What is the central idea of the watching scene as a whole?",
         "choices": [
-          "Calling Marchetti immediately is always the safest choice.",
+          "Calling Marchetti the moment anything looks wrong is always the safest choice.",
           "A watcher's job is easy as long as nothing unusual happens.",
-          "The man in the grey jacket was secretly involved in the exercise.",
+          "The man in the grey jacket was secretly part of the exercise, sent in as a test.",
           "Noticing the moment you almost stop checking is more valuable than finding an actual threat."
         ],
         "key": 3
@@ -4594,7 +4594,7 @@
         "1": "That line is about the narrator not believing something in advance, not about the job being easy; what follows shows the wait was genuinely tense.",
         "2": "The passage never says the man was part of the exercise; he is logged as an observation, not identified as connected to anything."
       },
-      "explain": "The scene's real discovery is not a threat spotted outside the car; it is the narrator noticing, afterward, the exact two seconds where checking almost stopped. That moment of near-carelessness, not the man in the jacket, is what the scene is actually about."
+      "explain": "The scene's real discovery is not a threat spotted outside the car; it is the narrator noticing, afterward, the exact two seconds where checking almost stopped.  That moment of near-carelessness, not the man in the jacket, is what the scene is actually about."
     },
     {
       "id": "l6-mc-what-the-archive-scene-is-about",
@@ -4671,18 +4671,18 @@
       "coachTopic": "vocab-figurative",
       "dok": 2,
       "mode": "sentence",
-      "stem": "Tap the two sentences that use a precise comparison to make an ordinary action feel deliberate, rather than simply stating what happened.",
+      "stem": "Tap the two sentences that use figurative language to describe Ines or the room, rather than simply stating what happened.",
       "spans": [
-        "She reads the request slips still sitting in the tray, upside down, the way you read a newspaper on someone else's table.",
-        "The second box she opens last, and slowly, turning each folder over before she reads it, the way you check a step before you put your weight on it.",
+        "Ines has never liked reading rooms, and she is fairly sure the feeling is mutual.",
         "She thanks him, takes both boxes to the table nearest the window, and opens the one she actually came for first.",
-        "The unclaimed box sits back on its cart, unopened past the first folder."
+        "She reads the request slips still sitting in the tray, upside down, the way you read a newspaper on someone else's table.",
+        "The Halloway folder is exactly where the request slip said it would be."
       ],
       "key": [
         0,
-        1
+        2
       ],
-      "explain": "Two sentences borrow a familiar comparison, reading a newspaper on someone else's table, checking a step before trusting your weight to it, to make an ordinary action feel like a deliberate skill rather than an accident. The other two sentences simply report what Ines does, without that added comparison."
+      "explain": "Two sentences say more than their words literally mean.  A room cannot dislike anybody, so calling the feeling mutual is a joke about how out of place Ines feels there.  Reading slips the way you read a newspaper on someone else's table compares her quiet snooping to an everyday habit.  The other two sentences simply report what Ines does and finds."
     },
     {
       "id": "l6-ebsr-two-infiltrations-compared",
@@ -4734,20 +4734,20 @@
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "Both On the Line and The Van on Halloway Road follow someone waiting in a car for a signal. What do the two watchers have in common in how they handle the wait?",
+      "stem": "Both On the Line and The Van on Halloway Road follow someone waiting in a car for a signal.  What do the two watchers have in common in how they handle the wait?",
       "choices": [
-        "Both narrators are told over the radio exactly what to expect.",
-        "Both narrators call for help before the agreed deadline arrives.",
-        "Both narrators leave the vehicle to get a closer look at what is happening.",
+        "Both narrators are told over the radio, minute by minute, exactly what is happening inside.",
+        "Both narrators call for help as soon as the check-in time passes, before the deadline arrives.",
+        "Both narrators leave the vehicle to walk over and get a closer look at the doors they are watching.",
         "Both narrators talk themselves through what they actually know, in order, rather than reacting to their first guess."
       ],
       "key": 3,
       "distractorRationale": {
         "0": "Neither passage describes an ongoing radio briefing; each narrator works from a plan agreed on beforehand and a signal that arrives only once.",
-        "1": "Neither narrator calls early; both specifically wait until their deadline, trusting the plan's built-in margin instead of acting on a first guess.",
+        "1": "Neither narrator calls at all.  Each one comes close, reaching for the call and then holding off, but coming close to calling is not calling.",
         "2": "Neither narrator leaves the vehicle at any point; both watchers stay parked and observe from where they are."
       },
-      "explain": "Both watchers face the same temptation, a fast reaction to an ambiguous sign, and both resist it the same way, by naming exactly what they know rather than what they are guessing. That shared discipline, not the specific details of either scene, is what connects the two."
+      "explain": "Both watchers face the same temptation, a fast reaction to an ambiguous sign, and both resist it the same way, by naming exactly what they know rather than what they are guessing.  That shared discipline, not the specific details of either scene, is what connects the two."
     },
     {
       "id": "l6-hot-scene-that-turns",
@@ -4759,18 +4759,18 @@
       "coachTopic": "structure-story-parts",
       "dok": 3,
       "mode": "sentence",
-      "stem": "Tap the two sentences that mark the moment the scene's tension shifts, from a routine wait to something requiring a decision.",
+      "stem": "Tap the two sentences near the end that leave part of the story unfinished, setting up a problem for later instead of closing it.",
       "spans": [
-        "When the archivist returns, he is not carrying one box.",
-        "Ines has not asked for a second box.",
-        "The archivist at the desk is younger than she expected.",
-        "He slides a slip across the counter, telling her the boxes take fifteen minutes to bring up from the stacks."
+        "Three photographs and a page of notes photograph cleanly in under a minute.",
+        "The unclaimed box sits back on its cart, unopened past the first folder.",
+        "Walking out, she signs the log with a real signature this time.",
+        "Ines decides on the stairs that the second name on that shelf list is tomorrow's problem, not today's."
       ],
       "key": [
-        0,
-        1
+        1,
+        3
       ],
-      "explain": "Everything before the archivist returns with two boxes is ordinary setup, a desk, a wait, some slips to read. The scene turns the instant a second box appears that nobody asked for, and the two sentences marking that arrival are what separate routine from decision."
+      "explain": "The job itself is finished once the Halloway folder is photographed, and signing the log closes her visit.  Two sentences refuse to close everything, though.  The second box goes back on its cart mostly unread, and the unknown name on the shelf list is saved for tomorrow, so the scene ends with a problem still waiting."
     },
     {
       "id": "l6-cloze-where-the-tension-turns",
@@ -4873,12 +4873,12 @@
       ],
       "coachTopic": "evidence-across-texts",
       "dok": 4,
-      "stem": "Both the Wren-7 brief and the Petrel-4 brief are written by Corvid Systems to sell a product. What do the two briefs have in common in how they handle a weakness in their own claim?",
+      "stem": "Both the Wren-7 brief and the Petrel-4 brief are written by Corvid Systems to sell a product.  What do the two briefs have in common in how they handle a weakness in their own claim?",
       "choices": [
         "Both state their best-case number with full confidence and place the limiting condition in a single line near the end.",
-        "Both admit early in the brief that their product does not work as advertised.",
-        "Both refuse to mention any test result at all.",
-        "Both recommend a competitor's product as a backup option."
+        "Both open by admitting that their product does not work as advertised, then list its selling points.",
+        "Both refuse to mention any test result at all and offer general promises instead.",
+        "Both recommend carrying a competitor's product as a backup in case theirs fails."
       ],
       "key": 0,
       "distractorRationale": {
@@ -5274,9 +5274,9 @@
       "blanks": [
         {
           "choices": [
-            "The rule, because the plan is what put the narrator's thumb there",
-            "the record marked \"I write down times\", which holds what the narrator saw, heard or did in person",
-            "both records at once, because it is the moment they meet"
+            "The rule, because the plan told the narrator to reach for the key at ten twenty-one",
+            "the record marked \"I write down times\", which holds what the narrator saw, heard or did",
+            "both records at once, because the thumb belongs to the plan and to the narrator"
           ],
           "key": 1
         },
@@ -5528,8 +5528,8 @@
         {
           "choices": [
             "the hottest test is not the shortest one, because the freezing test is shorter still",
-            "the tag ran longest in the hottest air of the three",
-            "a broken tag must have been used for the desert test"
+            "the tag ran longest in the hottest air of the three, above ninety degrees",
+            "a broken tag must have been used for the desert test and not the others"
           ],
           "key": 0
         }

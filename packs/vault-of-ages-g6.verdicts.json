@@ -32,7 +32,7 @@
     },
     {
       "itemId": "l1-ebsr-first-real-decision",
-      "itemHash": "602b7145d404a6f0",
+      "itemHash": "56ca55564a12a47b",
       "blind": [
         0,
         1
@@ -76,7 +76,7 @@
     },
     {
       "itemId": "l1-ebsr-what-happened-to-threadglass",
-      "itemHash": "c5750701995b9b96",
+      "itemHash": "86425c46647295ab",
       "blind": [
         0,
         2
@@ -208,7 +208,7 @@
     },
     {
       "itemId": "l1-cloze-why-theo-goes-anyway",
-      "itemHash": "364bf72248da5e63",
+      "itemHash": "0a45f858d22d2b84",
       "blind": [
         0,
         0
@@ -222,7 +222,7 @@
     },
     {
       "itemId": "l1-cloze-mila-narration-effect",
-      "itemHash": "d8a8caadc6e90b42",
+      "itemHash": "50b5794a5bb89174",
       "blind": [
         0,
         0
@@ -244,7 +244,7 @@
     },
     {
       "itemId": "l1-mc-theo-never-wondered",
-      "itemHash": "39c58b850d800f02",
+      "itemHash": "2f17adebb1f76f6e",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -252,7 +252,7 @@
     },
     {
       "itemId": "l1-mc-mila-seat-choice",
-      "itemHash": "9ad7f16f8a471ed4",
+      "itemHash": "8a98d21540ccc6fb",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -260,7 +260,7 @@
     },
     {
       "itemId": "l1-mc-trust-each-other",
-      "itemHash": "eca3cd6e86aa79fe",
+      "itemHash": "265cbaa4d0e31749",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -276,7 +276,7 @@
     },
     {
       "itemId": "l1-mc-theo-answer-better",
-      "itemHash": "6d2891a63c182d5c",
+      "itemHash": "5469868661d7a8e8",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -330,7 +330,7 @@
     },
     {
       "itemId": "l2-ebsr-why-disappearance-suspicious",
-      "itemHash": "aaf9abe593fc3e67",
+      "itemHash": "ef91599b7d16dccc",
       "blind": [
         0,
         2
@@ -385,6 +385,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l2-ebsr-current-status-last",
+      "itemHash": "99772d593fb4eae8",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l2-ms-wyrdstone-loan-facts",
       "itemHash": "01949d83c0c7e4c3",
       "blind": [
@@ -402,7 +416,7 @@
     },
     {
       "itemId": "l2-ebsr-three-realms-shared-point",
-      "itemHash": "3004e974cf0928b2",
+      "itemHash": "b4240f8db8b741d4",
       "blind": [
         0,
         3
@@ -504,7 +518,7 @@
     },
     {
       "itemId": "l2-cloze-loan-looked-ordinary",
-      "itemHash": "898ea7444e2a005a",
+      "itemHash": "a6366e9d2a3ef9a5",
       "blind": [
         0,
         1
@@ -518,7 +532,7 @@
     },
     {
       "itemId": "l2-cloze-shared-border-point",
-      "itemHash": "cd69f646bfcbd82f",
+      "itemHash": "62aee218a8be5143",
       "blind": [
         1,
         1
@@ -701,8 +715,36 @@
       "status": "agree"
     },
     {
+      "itemId": "l3-ebsr-strangers-by-design",
+      "itemHash": "fbc2db4f9c2c3754",
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l3-ebsr-accurate-not-complete",
       "itemHash": "0999582c253df1cd",
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ebsr-dash-versus-theo-logs",
+      "itemHash": "9fcedea400b9d827",
       "blind": [
         1,
         3
@@ -788,7 +830,7 @@
     },
     {
       "itemId": "l3-cloze-theo-instant-answer",
-      "itemHash": "d8b6b1124b75b22a",
+      "itemHash": "5cd0e3bf1d4578e2",
       "blind": [
         0,
         0
@@ -802,7 +844,7 @@
     },
     {
       "itemId": "l3-cloze-dash-vs-theo-logs",
-      "itemHash": "dca11edffe2ae980",
+      "itemHash": "997e8adaa5713d35",
       "blind": [
         1,
         1
@@ -848,7 +890,7 @@
     },
     {
       "itemId": "l3-mc-finchs-exact-instruction",
-      "itemHash": "1477cd8ed1219ada",
+      "itemHash": "2a9c860d75456836",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -856,10 +898,24 @@
     },
     {
       "itemId": "l3-mc-theo-consistent-blind-spot",
-      "itemHash": "78e9216f239bf4ea",
+      "itemHash": "130c31c4895886fe",
       "blind": 1,
       "authored": 1,
       "confidence": "medium",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-same-institution-guards-and-writes",
+      "itemHash": "c8cdbd4974dc4ff1",
+      "blind": [
+        2,
+        1
+      ],
+      "authored": [
+        2,
+        1
+      ],
+      "confidence": "high",
       "status": "agree"
     },
     {
@@ -886,6 +942,20 @@
       "authored": [
         2,
         2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-tool-marks-evidence",
+      "itemHash": "fe1671fbb431090b",
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -1050,7 +1120,7 @@
     },
     {
       "itemId": "l4-cloze-reckoner-strategic-choice",
-      "itemHash": "4298779cc3b71ae4",
+      "itemHash": "254f0ba07d81c0c6",
       "blind": [
         1,
         1
@@ -1064,7 +1134,7 @@
     },
     {
       "itemId": "l4-mc-ledger-seal-moved-before",
-      "itemHash": "81ca586ef3620f5a",
+      "itemHash": "f7bc823b77766d51",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -1080,7 +1150,7 @@
     },
     {
       "itemId": "l4-mc-progress-without-settling",
-      "itemHash": "d10eeb80afef0c16",
+      "itemHash": "d01190eb423aedac",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -1171,6 +1241,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l5-ebsr-door-exhale-turning-point",
+      "itemHash": "c7d07a85cd26b141",
+      "blind": [
+        2,
+        2
+      ],
+      "authored": [
+        2,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l5-ms-figurative-sensations",
       "itemHash": "26995cec7fbb4b77",
       "blind": [
@@ -1182,6 +1266,20 @@
         1,
         2,
         4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-glacier-comparison",
+      "itemHash": "2653769b57c8cfa2",
+      "blind": [
+        2,
+        2
+      ],
+      "authored": [
+        2,
+        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -1226,6 +1324,20 @@
         0,
         2,
         5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-guess-in-records-clothing",
+      "itemHash": "c4c2f09c24986914",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
       ],
       "confidence": "high",
       "status": "agree"
@@ -1370,7 +1482,7 @@
     },
     {
       "itemId": "l5-mc-three-part-scene-structure",
-      "itemHash": "a38fced1ed4b2287",
+      "itemHash": "1e7f7dbdc7c5ad42",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1427,16 +1539,44 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-ms-earlier-skills-pay-off",
-      "itemHash": "757d4f353b436f7e",
+      "itemId": "l6-ebsr-warning-and-compliment",
+      "itemHash": "cc59b084d6b1df09",
       "blind": [
-        2,
-        4,
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-callback-to-first-lesson",
+      "itemHash": "d11a7ada4b76d2c8",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ms-earlier-skills-pay-off",
+      "itemHash": "e8537b5a18ad5700",
+      "blind": [
+        1,
+        3,
         5
       ],
       "authored": [
-        2,
-        4,
+        1,
+        3,
         5
       ],
       "confidence": "high",
@@ -1485,6 +1625,34 @@
       "status": "agree"
     },
     {
+      "itemId": "l6-ebsr-isis-search-purpose",
+      "itemHash": "733e1edff227c057",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-catalog-purpose-vs-chronicle",
+      "itemHash": "0bbedfbdc23c9fdb",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-ms-archive-analysis-method",
       "itemHash": "5697b52f5bfd5b0f",
       "blind": [
@@ -1502,7 +1670,7 @@
     },
     {
       "itemId": "l6-hot-earlier-skills-solve-door",
-      "itemHash": "f0643e229b0f2fa7",
+      "itemHash": "d948f0b58d6145df",
       "blind": [
         0,
         1
@@ -1543,22 +1711,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-hot-checkable-vs-not",
-      "itemHash": "a4cc90e901e8badc",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-cloze-relics-are-keys",
-      "itemHash": "c79aeeddd487e106",
+      "itemHash": "4db5fea571d67745",
       "blind": [
         2,
         2
@@ -1572,7 +1726,7 @@
     },
     {
       "itemId": "l6-cloze-catalog-purpose-again",
-      "itemHash": "fab9fe27118f22d9",
+      "itemHash": "2385ff81c57eb797",
       "blind": [
         2,
         2
@@ -1586,7 +1740,7 @@
     },
     {
       "itemId": "l6-mc-theo-arc-noticing",
-      "itemHash": "ab753fca0a317127",
+      "itemHash": "af2820cf3a57354e",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -1594,7 +1748,7 @@
     },
     {
       "itemId": "l6-mc-mila-instinct-summary",
-      "itemHash": "3fba8162b6776916",
+      "itemHash": "f67a44baaa718347",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1610,7 +1764,7 @@
     },
     {
       "itemId": "l6-mc-figurative-echo-held-breath",
-      "itemHash": "36388b4242cde03d",
+      "itemHash": "28bbddd3146cbb23",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1626,10 +1780,10 @@
     },
     {
       "itemId": "l6-mc-archive-catalog-vs-chronicle-purpose",
-      "itemHash": "c1cb5333e7d88277",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "medium",
+      "itemHash": "1ad4dc6ca4531e9c",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
       "status": "agree"
     },
     {
@@ -1942,178 +2096,24 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-ebsr-current-status-last",
-      "itemHash": "99772d593fb4eae8",
-      "blind": [
-        0,
-        2
-      ],
-      "authored": [
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-ebsr-strangers-by-design",
-      "itemHash": "fbc2db4f9c2c3754",
-      "blind": [
-        1,
-        3
-      ],
-      "authored": [
-        1,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-ebsr-dash-versus-theo-logs",
-      "itemHash": "9fcedea400b9d827",
-      "blind": [
-        1,
-        3
-      ],
-      "authored": [
-        1,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ebsr-same-institution-guards-and-writes",
-      "itemHash": "c8cdbd4974dc4ff1",
-      "blind": [
-        2,
-        1
-      ],
-      "authored": [
-        2,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ebsr-tool-marks-evidence",
-      "itemHash": "fe1671fbb431090b",
-      "blind": [
-        2,
-        3
-      ],
-      "authored": [
-        2,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ebsr-door-exhale-turning-point",
-      "itemHash": "c7d07a85cd26b141",
-      "blind": [
-        2,
-        2
-      ],
-      "authored": [
-        2,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ebsr-glacier-comparison",
-      "itemHash": "2653769b57c8cfa2",
-      "blind": [
-        2,
-        2
-      ],
-      "authored": [
-        2,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ebsr-guess-in-records-clothing",
-      "itemHash": "c4c2f09c24986914",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-warning-and-compliment",
-      "itemHash": "b3856020481d4ae2",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-callback-to-first-lesson",
-      "itemHash": "d11a7ada4b76d2c8",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-isis-search-purpose",
-      "itemHash": "733e1edff227c057",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-catalog-purpose-vs-chronicle",
-      "itemHash": "0bbedfbdc23c9fdb",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-mc-chronicle-card-boxed-line",
       "itemHash": "dc2803bcabfa383c",
       "blind": 3,
       "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-hot-checkable-vs-not",
+      "itemHash": "a03db5c2ab73b059",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
       "confidence": "high",
       "status": "agree"
     }

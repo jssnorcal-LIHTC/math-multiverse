@@ -35,6 +35,18 @@
 // Length is characters, trimmed:  what the eye measures on the screen.  A group with fewer than 2w
 // sets is reported and not gated, because a share over six sets says nothing.
 //
+// THE MAGNITUDE RULE (26-0922).  The rank rule was met by #82 and a second cue survived it:  rank
+// says WHICH option is longest, not BY HOW MUCH, and the key was written long and qualified while a
+// distractor that happened to be longest was only a little longer.  Measured on main 5d852f9:  where
+// one EBSR Part A option was at least 1.5 times its runner-up, it was the key in 20 of 20 sets (mc 29
+// of 31, cloze 21 of 29), so "tap the one that is clearly longer" still won.  A set is OUTSIZED when
+// its longest option is at least 1.3 times the runner-up AND at least 8 characters longer (the floor
+// keeps short cloze words out:  "three" against "two" is a ratio, not a cue a child can see).  Per
+// group, the key may be the outsized option in at most max(1, 4/3 * outsized / w) sets:  the same
+// third over chance, with one set of grace so a group with a single outsized set is not failed by it.
+// A fix is rank-preserving:  trim the key or lengthen the runner-up with true content, so the rank
+// rule above is untouched.
+//
 // TARGETS.  --targets <pack> prints, for every group of that pack the gate FAILS, the sets to change
 // and the length rank each should move to.  The ranks come out even:  each rank gets an equal quota, the sets
 // already holding a rank keep it up to that quota (those most firmly placed first, so the cheapest
@@ -54,6 +66,17 @@ const ROOT = path.join(__dirname, '..');
 const len = (s) => String(s == null ? '' : s).trim().length;
 const capFor = (w) => 4 / (3 * w);
 const MIN_SETS = (w) => 2 * w;
+const OUT_RATIO = 1.3, OUT_CHARS = 8;
+
+// The index of a set's OUTSIZED option (see THE MAGNITUDE RULE), or -1.
+function outsizedIndex(choices) {
+  const ls = choices.map(len);
+  const order = ls.map((l, i) => [l, i]).sort((a, b) => b[0] - a[0]);
+  if (order.length < 2) return -1;
+  const [top, next] = order;
+  return top[0] >= OUT_RATIO * next[0] && top[0] - next[0] >= OUT_CHARS ? top[1] : -1;
+}
+const magnitudeAllow = (outsized, w) => Math.max(1, (4 / 3) * outsized / w);
 
 // Every answer set in a pack.  `field` is the item path to the set's choices, for the targets list.
 function setsOf(pack) {
@@ -144,8 +167,12 @@ function measure(sets) {
     const gated = n >= MIN_SETS(w);
     const bad = [];
     if (gated) share.forEach((c, i) => { if (c / n > cap + 1e-9) bad.push(`the key holds length rank ${i + 1} of ${w}${i === 0 ? ' (longest)' : i === w - 1 ? ' (shortest)' : ''} in ${c.toFixed(1)} of ${n} sets, ${(100 * c / n).toFixed(0)}%, over the ${(100 * cap).toFixed(0)}% a third over chance allows`); });
-    out.push({ gk, kind: g.kind, width: w, n, gated, bad, share,
-      summary: `ranks ${share.map((c) => (100 * c / n).toFixed(0) + '%').join(' / ')}  (longest first;  cap ${(100 * cap).toFixed(0)}% each)` });
+    const outs = g.sets.map((s) => outsizedIndex(s.choices)).filter((i) => i >= 0).length;
+    const keyedOut = g.sets.filter((s) => outsizedIndex(s.choices) === s.key).length;
+    const allow = magnitudeAllow(outs, w);
+    if (gated && keyedOut > allow + 1e-9) bad.push(`outsized:  the key is the option ${OUT_RATIO}x and ${OUT_CHARS}+ characters longer than every other in ${keyedOut} of the ${outs} outsized sets, over the ${allow.toFixed(1)} a third over chance allows`);
+    out.push({ gk, kind: g.kind, width: w, n, gated, bad, share, outs, keyedOut,
+      summary: `ranks ${share.map((c) => (100 * c / n).toFixed(0) + '%').join(' / ')}  (longest first;  cap ${(100 * cap).toFixed(0)}% each);  outsized ${outs}, key ${keyedOut} (allow ${allow.toFixed(1)})` });
   }
   return out;
 }
@@ -175,7 +202,9 @@ function targetsFor(pack) {
   // Only a group the gate fails is re-authored.  A passing group is left as it is, whatever its
   // spread:  Part B's options are sentences quoted from the passage, at chance in every pack already,
   // and re-choosing a quotation to even out a distribution nobody can exploit is churn, not a fix.
-  const failing = new Set(measure(sets).filter((g) => g.gated && g.bad.length).map((g) => g.gk));
+  const measured = measure(sets);
+  const failing = new Set(measured.filter((g) => g.gated && g.bad.some((b) => !b.startsWith('outsized'))).map((g) => g.gk));
+  const failingMag = new Set(measured.filter((g) => g.gated && g.bad.some((b) => b.startsWith('outsized'))).map((g) => g.gk));
   const groups = new Map();
   for (const s of sets) {
     if (s.kind === 'ms') continue;
@@ -227,6 +256,18 @@ function targetsFor(pack) {
         lengths: s.choices.map(len), charsAtLeast: costTo(s, t) });
     }
   }
+  // Magnitude:  every keyed outsized set in a group the magnitude rule fails, most outsized first.
+  // The fix keeps the key's rank:  bring the runner-up to within 1.2x of the key, or trim the key.
+  for (const s of sets) {
+    if (s.kind === 'ms' || !failingMag.has(`${s.kind}/${s.choices.length}`)) continue;
+    if (outsizedIndex(s.choices) !== s.key) continue;
+    const ls = s.choices.map(len);
+    const runner = ls.map((l, i) => [l, i]).filter(([, i]) => i !== s.key).sort((a, b) => b[0] - a[0])[0];
+    edits.push({ group: `${s.kind}/${s.choices.length}`, id: s.id, field: s.field, key: s.key, magnitude: true,
+      lengths: ls, ratio: +(ls[s.key] / runner[0]).toFixed(2), runnerUp: runner[1],
+      fix: `lengthen choice ${runner[1]} to at least ${Math.ceil(ls[s.key] / 1.2)}, or trim the key to at most ${Math.floor(runner[0] * 1.2)} (keep it the longest)` });
+  }
+  edits.sort((a, b) => (b.magnitude ? b.ratio : 0) - (a.magnitude ? a.ratio : 0));
   // ms:  the items that give the most keys away to a length-picker, until the pack is at chance.
   const ms = sets.filter((s) => s.kind === 'ms');
   if (failing.has('ms')) {
@@ -301,11 +342,36 @@ for (const e of manifest.packs) {
     ['POSITIVE: an ms whose keys interleave with the distractors',
       Array.from({ length: 10 }, (_, i) => ({ kind: 'ms', choices: ['x'.repeat(60), 'x'.repeat(50), 'x'.repeat(40), 'x'.repeat(30), 'x'.repeat(20), 'x'.repeat(10)], keys: i % 2 ? [0, 3, 4] : [1, 2, 5] })), false],
   ];
+  // Magnitude:  every case keeps the rank spread even (12 sets at each rank), so only THE MAGNITUDE
+  // RULE can turn it red.  x(...) builds an mc from option lengths.
+  const x = (ls, key) => ({ kind: 'mc', choices: ls.map((l) => 'x'.repeat(l)), key });
+  const evenRest = (decoysPerRank) => [2, 3, 4].flatMap((r) => Array.from({ length: 12 }, (_, i) =>
+    i < decoysPerRank ? x([100, 60, 55, 50], r - 1) : x([70, 68, 66, 64], r - 1)));
+  const clozeWords = (words, key) => ({ kind: 'cloze', choices: words, key });
+  const magCases = [
+    ['NEGATIVE: an even rank spread whose 12 longest keys are each 1.67x their runner-up (the 5d852f9 shape)',
+      [...Array.from({ length: 12 }, () => x([100, 60, 55, 50], 0)), ...evenRest(0)], true],
+    ['POSITIVE: the same sets fixed rank-preserving, each key within 1.1x of its runner-up',
+      [...Array.from({ length: 12 }, () => x([70, 64, 60, 56], 0)), ...evenRest(0)], false],
+    ['POSITIVE: 12 outsized sets, only 3 keyed on the outsized option, 9 outsized decoys',
+      [...Array.from({ length: 12 }, (_, i) => (i < 3 ? x([100, 60, 55, 50], 0) : x([70, 66, 62, 58], 0))), ...evenRest(3)], false],
+    ['POSITIVE: short cloze words, 1.67x but 2 characters apart (under the floor)',
+      [0, 1, 2].flatMap((r) => Array.from({ length: 6 }, () => clozeWords(['seven', 'four', 'ten'].map((w, i) => (i === 0 ? 'seven' : w)), r)))
+        .map((s, i) => (i < 6 ? clozeWords(['seven', 'two', 'ten'], 0) : s)), false],
+  ];
+  const redMag = (sets) => measure(sets).some((g) => g.bad.some((b) => b.startsWith('outsized')));
+  const redRank = (sets) => measure(sets).some((g) => g.bad.some((b) => !b.startsWith('outsized')));
   console.log('\ncontrols:');
   for (const [name, sets, wantRed] of cases) {
     const got = red(sets);
     console.log(`  ${got === wantRed ? 'ok  ' : 'BAD '} ${name}  (${got ? 'red' : 'green'})`);
     if (got !== wantRed) problems.push(`CONTROL "${name}" came back ${got ? 'red' : 'green'};  every measurement above is void`);
+  }
+  for (const [name, sets, wantRed] of magCases) {
+    const got = redMag(sets), rankRed = redRank(sets);
+    const ok = got === wantRed && !rankRed;
+    console.log(`  ${ok ? 'ok  ' : 'BAD '} ${name}  (magnitude ${got ? 'red' : 'green'}${rankRed ? ', RANK RED:  the control is not isolated' : ''})`);
+    if (!ok) problems.push(`CONTROL "${name}" came back magnitude ${got ? 'red' : 'green'}${rankRed ? ' with the rank rule red' : ''};  every measurement above is void`);
   }
 }
 

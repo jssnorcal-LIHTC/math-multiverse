@@ -57,6 +57,10 @@ function keysOf(it) {
     }
   }
   if (it.type === 'cloze') (it.blanks || []).forEach((b, i) => add(b.choices, b.key, `blank ${i} key`));
+  // A hottext keys the passage sentences it asks for;  each keyed span is an answer (26-0922:  the
+  // first draft of this gate left them out, and a keyed span shared with a sibling's Part B key is
+  // the same answer asked twice).
+  if (it.type === 'hottext') add(it.spans, it.key, 'keyed span');
   return out;
 }
 
@@ -113,21 +117,54 @@ function echoesIn(pack) {
       const shared = [...st].filter((w) => os.has(w)).length;
       if (shared / small >= 0.7) found.push({ kind: 'E3', item: it.id, detail: `stem overlaps level ${level} ${ot.id}'s stem ${shared}/${small}` });
     }
+    // E4  KEY STATED BY A SIBLING (26-0922).  Level 6 serves its items shuffled, so a sibling in the
+    // same level can come first and hand this one its answer.  Same test as E1, run against every
+    // OTHER level-6 item in both directions.
+    for (const k of keysOf(it)) {
+      const kw = [...new Set(words(k.text))];
+      if (kw.length < 3) continue;
+      for (const ot of review) {
+        if (ot === it) continue;
+        for (const f of assertingFields(ot)) {
+          const fw = new Set(words(f.text));
+          const hit = kw.filter((w) => fw.has(w)).length;
+          if (hit / kw.length >= 0.8) {
+            found.push({ kind: 'E4', item: it.id, sig: `${it.id}|${k.where}|${ot.id}.${f.where}`,
+              detail: `${k.where} "${k.text}" is stated by level-6 sibling ${ot.id}.${f.where} (${hit}/${kw.length} words)` });
+          }
+        }
+      }
+    }
   }
   return found;
 }
 
+// Reviewed E4 false positives:  { pack, sig, reason }.  An entry that no longer matches a finding is
+// STALE and fails, so the list cannot outlive the text it excused.
+const ALLOW_PATH = path.join(__dirname, 'review-echo-allowlist.json');
+function applyAllow(packId, found, allow, used) {
+  return found.filter((f) => {
+    if (f.kind !== 'E4') return true;
+    const hit = allow.find((a) => a.pack === packId && a.sig === f.sig);
+    if (hit) used.add(hit);
+    return !hit;
+  });
+}
+
 const problems = [];
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'packs', 'manifest.json'), 'utf8'));
+const allow = fs.existsSync(ALLOW_PATH) ? JSON.parse(fs.readFileSync(ALLOW_PATH, 'utf8')) : [];
+const used = new Set();
 let packs = 0, reviewItems = 0;
 for (const e of manifest.packs) {
   const pack = JSON.parse(fs.readFileSync(path.join(ROOT, 'packs', `${e.id}.json`), 'utf8'));
   if (!pack.levels || pack.levels.length < 6) continue;
   packs++;
   reviewItems += (pack.levels[5].itemIds || []).length;
-  for (const f of echoesIn(pack)) problems.push(`${f.kind}  ${e.id}/${f.item}:  ${f.detail}`);
+  for (const f of applyAllow(e.id, echoesIn(pack), allow, used)) problems.push(`${f.kind}  ${e.id}/${f.item}:  ${f.detail}${f.sig ? `  [sig ${f.sig}]` : ''}`);
 }
-console.log(`sweep-review-echo: ${packs} pack(s), ${reviewItems} level-6 item(s) checked against every earlier level`);
+for (const a of allow) if (!used.has(a)) problems.push(`STALE allowlist entry ${a.pack} ${a.sig}:  it no longer matches a finding;  remove it`);
+console.log(`sweep-review-echo: ${packs} pack(s), ${reviewItems} level-6 item(s) checked against every earlier level and every level-6 sibling;  ${used.size} reviewed E4 exception(s)`);
 
 // ---- controls ----
 {
@@ -154,12 +191,30 @@ console.log(`sweep-review-echo: ${packs} pack(s), ${reviewItems} level-6 item(s)
     partB: { stem: 'Which line supports it?', choices: ['the red lantern by the gate', 'the goats sleep early in winter', 'q', 'r'],
       key: canon ? { 0: 0, 1: 1, 2: 2, 3: 3 } : { 0: 1, 1: 0, 2: 2, 3: 3 } } });
   const kinds = (p) => echoesIn(p).map((f) => f.kind);
-  const expect = [[clean, []], [e1, ['E1']], [e2, ['E2']], [e3, ['E3']], [ebsr(true), ['E1']], [ebsr(false), []]];
+  // E4:  two level-6 siblings.  s1's explain states s2's key;  a third sibling states nothing.
+  const sib = (withEcho) => {
+    const p = JSON.parse(JSON.stringify(base));
+    p.items.push({ id: 's1', type: 'mc', passageId: 'q', stem: 'What does the keeper do at dusk?', choices: ['a', 'b', 'c', 'd'], key: 0,
+      explain: withEcho ? 'At dusk the keeper counts the goats sleeping in the yard.' : 'At dusk the keeper walks the east path.' });
+    p.items.push({ id: 's2', type: 'mc', passageId: 'q', stem: 'Why is the yard quiet?', choices: ['the goats sleeping in the yard', 'x', 'y', 'z'], key: 0 });
+    p.levels[5].itemIds.push('s1', 's2');
+    return p;
+  };
+  const expect = [[clean, []], [e1, ['E1']], [e2, ['E2']], [e3, ['E3']], [ebsr(true), ['E1']], [ebsr(false), []],
+    [sib(true), ['E4']], [sib(false), []]];
   expect.forEach(([p, want], i) => {
     const got = [...new Set(kinds(p))].sort();
     if (JSON.stringify(got) !== JSON.stringify(want)) problems.push(`CONTROL ${i} failed:  expected ${JSON.stringify(want)}, got ${JSON.stringify(got)}`);
   });
-  if (!problems.some((p) => p.startsWith('CONTROL'))) console.log('  controls:  a clean review item passes;  a planted E1, E2 and E3 are each caught;  an earlier key as the Part B answer is caught, as the support for a wrong claim it is not  (fired)');
+  // The allowlist excuses exactly its own signature, and an unused entry is detected.
+  const f4 = echoesIn(sib(true));
+  const u1 = new Set();
+  const excused = applyAllow('t', f4, [{ pack: 't', sig: f4[0] && f4[0].sig, reason: 'control' }], u1);
+  if (excused.some((f) => f.kind === 'E4') || u1.size !== 1) problems.push('CONTROL allowlist failed:  a listed E4 signature was not excused');
+  const u2 = new Set();
+  applyAllow('t', echoesIn(sib(false)), [{ pack: 't', sig: 'nothing|here|at.all', reason: 'control' }], u2);
+  if (u2.size !== 0) problems.push('CONTROL stale-allowlist failed:  an entry matching nothing was counted as used');
+  if (!problems.some((p) => p.startsWith('CONTROL'))) console.log('  controls:  a clean review item passes;  a planted E1, E2 and E3 are each caught;  an earlier key as the Part B answer is caught, as the support for a wrong claim it is not;  a sibling that states a level-6 key is caught (E4) and one that does not passes;  the allowlist excuses its own signature only, and an unused entry is detected  (fired)');
 }
 
 if (problems.length) {

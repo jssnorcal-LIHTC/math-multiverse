@@ -3,6 +3,20 @@
   "model": "claude-sonnet-5",
   "records": [
     {
+      "itemId": "l1-ebsr-why-record-two",
+      "itemHash": "80dd503e52eb41ef",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l1-ebsr-rana-detail",
       "itemHash": "6b97a6da5d6392aa",
       "blind": [
@@ -262,7 +276,7 @@
     },
     {
       "itemId": "l1-mc-two-kinds-of-still",
-      "itemHash": "dd579460076dff84",
+      "itemHash": "59265ffcc8b9c694",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -504,7 +518,7 @@
     },
     {
       "itemId": "l2-cloze-thiamine-chain",
-      "itemHash": "5ded08075dcc24b7",
+      "itemHash": "804333b7c5595383",
       "blind": [
         0,
         2
@@ -846,7 +860,7 @@
     },
     {
       "itemId": "l3-mc-why-page-exists",
-      "itemHash": "3920272ddd8c2332",
+      "itemHash": "8f897620c8083439",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -1094,7 +1108,7 @@
     },
     {
       "itemId": "l4-cloze-two-errors",
-      "itemHash": "a5eaaa99532d3eb9",
+      "itemHash": "c56b8b4dbb0971c0",
       "blind": [
         1,
         0
@@ -1102,20 +1116,6 @@
       "authored": [
         1,
         0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-cloze-binder-limits",
-      "itemHash": "53f6d7c529959cf1",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
       ],
       "confidence": "high",
       "status": "agree"
@@ -1196,6 +1196,20 @@
         2,
         1,
         0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-air-was-a-road",
+      "itemHash": "6cc07389c7857ab5",
+      "blind": [
+        1,
+        1
+      ],
+      "authored": [
+        1,
+        1
       ],
       "confidence": "high",
       "status": "agree"
@@ -1404,7 +1418,7 @@
     },
     {
       "itemId": "l5-cloze-not-our-animal",
-      "itemHash": "74a62fe6016ee0c5",
+      "itemHash": "75b72c08ad9a336d",
       "blind": [
         1,
         2
@@ -1418,7 +1432,7 @@
     },
     {
       "itemId": "l5-mc-what-she-knows-the-route-by",
-      "itemHash": "cefb0d773067d825",
+      "itemHash": "baf43d58a842d970",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -1426,7 +1440,7 @@
     },
     {
       "itemId": "l5-mc-what-water-means-to-her",
-      "itemHash": "a36a939e87febdea",
+      "itemHash": "68de7bf8a04bb63a",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1502,7 +1516,7 @@
     },
     {
       "itemId": "l6-ebsr-slip-versus-memory",
-      "itemHash": "e653659a4a345c99",
+      "itemHash": "a5b60096d156bd5e",
       "blind": [
         3,
         0
@@ -1524,20 +1538,6 @@
       "authored": [
         0,
         0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-what-cannot-settle",
-      "itemHash": "9b791f6edf822784",
-      "blind": [
-        1,
-        1
-      ],
-      "authored": [
-        1,
-        1
       ],
       "confidence": "high",
       "status": "agree"
@@ -1629,105 +1629,31 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-ms-three-changes",
-      "itemHash": "29ce34b7446997c5",
-      "blind": [
-        0,
-        2,
-        4
-      ],
-      "authored": [
-        0,
-        2,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-hot-what-the-page-settles",
-      "itemHash": "754c4e504544c5a2",
+      "itemHash": "ce5b771fb5c80cb9",
       "blind": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "authored": [
         0,
-        1,
-        2
+        2,
+        4
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-hot-record-versus-memory",
-      "itemHash": "c94e4fdba168d6a6",
+      "itemHash": "3a64b1b244e84995",
       "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-hot-first-two-steps",
-      "itemHash": "7650c5abac921818",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-hot-three-changes",
-      "itemHash": "8d502630688956a4",
-      "blind": [
-        0,
         1,
-        2
+        3
       ],
       "authored": [
-        0,
         1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-cloze-settled-and-open",
-      "itemHash": "7011d998c379cec5",
-      "blind": [
-        2,
-        0
-      ],
-      "authored": [
-        2,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-cloze-the-defence",
-      "itemHash": "11c41556f20402d7",
-      "blind": [
-        0,
-        2
-      ],
-      "authored": [
-        0,
-        2
+        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -1742,7 +1668,7 @@
     },
     {
       "itemId": "l6-mc-first-radio-entry",
-      "itemHash": "64c3f21229edd643",
+      "itemHash": "fe7396fc3ca15e87",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1750,7 +1676,7 @@
     },
     {
       "itemId": "l6-mc-why-tanaka-is-in-the-file",
-      "itemHash": "dd50687c6acc5d49",
+      "itemHash": "9576c233fc6033a6",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -1758,7 +1684,7 @@
     },
     {
       "itemId": "l6-mc-what-report-refuses",
-      "itemHash": "145e86fe84799b17",
+      "itemHash": "12406045c95242fd",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1846,7 +1772,7 @@
     },
     {
       "itemId": "l2-mc-tally-strip-across-columns",
-      "itemHash": "f8dd9c2214b017a4",
+      "itemHash": "9ea07319ef783b61",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -1920,7 +1846,7 @@
     },
     {
       "itemId": "l3-mc-what-the-hatched-band-shows",
-      "itemHash": "b123accb9e40dfdd",
+      "itemHash": "a4259e1df1b47166",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -2002,7 +1928,7 @@
     },
     {
       "itemId": "l5-mc-the-row-left-blank",
-      "itemHash": "777de8c169571637",
+      "itemHash": "ffdda88e780afbf6",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -2066,7 +1992,7 @@
     },
     {
       "itemId": "l6-cloze-where-the-second-step-sits",
-      "itemHash": "c55043c5ae19e7b0",
+      "itemHash": "f7ffaa4c32b0edde",
       "blind": [
         2,
         0
@@ -2079,8 +2005,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-ebsr-why-record-two",
-      "itemHash": "80dd503e52eb41ef",
+      "itemId": "l4-cloze-binder-limits",
+      "itemHash": "b954eece7ea85fc3",
       "blind": [
         0,
         1
@@ -2093,8 +2019,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-ebsr-air-was-a-road",
-      "itemHash": "6cc07389c7857ab5",
+      "itemId": "l6-ebsr-what-cannot-settle",
+      "itemHash": "1b1b01fda99f0344",
       "blind": [
         1,
         1
@@ -2102,13 +2028,83 @@
       "authored": [
         1,
         1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ms-three-changes",
+      "itemHash": "0f14e1748a9c9704",
+      "blind": [
+        0,
+        4
+      ],
+      "authored": [
+        0,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-hot-first-two-steps",
+      "itemHash": "659879cfd34d8639",
+      "blind": [
+        1,
+        4
+      ],
+      "authored": [
+        1,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-hot-three-changes",
+      "itemHash": "906b9583b6cf0f1d",
+      "blind": [
+        1,
+        2,
+        4
+      ],
+      "authored": [
+        1,
+        2,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-cloze-settled-and-open",
+      "itemHash": "92d761d3bae68489",
+      "blind": [
+        2
+      ],
+      "authored": [
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-cloze-the-defence",
+      "itemHash": "1287a05c8e49a603",
+      "blind": [
+        2,
+        2
+      ],
+      "authored": [
+        2,
+        2
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
       "itemId": "l6-mc-plain-line-in-the-schematic",
-      "itemHash": "5c5ab67fce1f46c7",
+      "itemHash": "a400c9c573a992d7",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
