@@ -18,7 +18,7 @@
     },
     {
       "itemId": "l1-ebsr-central-idea-whole",
-      "itemHash": "21933fe7314364e7",
+      "itemHash": "1f88e330007428d2",
       "blind": [
         0,
         2
@@ -60,17 +60,9 @@
     },
     {
       "itemId": "l1-mc-change-of-level",
-      "itemHash": "8d08ba981f7a5e85",
+      "itemHash": "63510be4d6533eb5",
       "blind": 0,
       "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-mc-best-summary",
-      "itemHash": "3ca0176acb889f1e",
-      "blind": 2,
-      "authored": 2,
       "confidence": "high",
       "status": "agree"
     },
@@ -486,7 +478,7 @@
     },
     {
       "itemId": "l4-ebsr-how-the-times-were-taken",
-      "itemHash": "e0eaa5e850b18552",
+      "itemHash": "88450b96abc193ef",
       "blind": [
         3,
         3
@@ -641,20 +633,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-ebsr-advice-the-article-supports",
-      "itemHash": "d7498a4eb7c4aaea",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l5-ebsr-the-line-that-locates-the-fault",
       "itemHash": "52e62f5190468755",
       "blind": [
@@ -670,7 +648,7 @@
     },
     {
       "itemId": "l5-mc-what-two-sources-agree-on",
-      "itemHash": "2ba483a99afdd1f1",
+      "itemHash": "da6f476260e574b4",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -787,6 +765,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l6-mc-what-the-lobby-scene-is-about",
+      "itemHash": "16c4e2feeb14a8c6",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-ebsr-a-clipboard-like-a-wall",
       "itemHash": "ef3a818f4751a1fb",
       "blind": [
@@ -853,20 +839,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-cloze-where-the-aside-sits",
-      "itemHash": "2e651eee71c293fe",
-      "blind": [
-        0,
-        2
-      ],
-      "authored": [
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-ebsr-what-the-brief-is-for",
       "itemHash": "8cc1888cf0cdbe33",
       "blind": [
@@ -882,7 +854,7 @@
     },
     {
       "itemId": "l6-mc-the-chain-under-dead-air",
-      "itemHash": "95361ed303947729",
+      "itemHash": "175c393b6414bbf8",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -941,20 +913,6 @@
       ],
       "authored": [
         1,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-ebsr-collectors-own-rule",
-      "itemHash": "6d4456023613b348",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
         1
       ],
       "confidence": "high",
@@ -1091,20 +1049,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l3-ebsr-first-person-watcher",
-      "itemHash": "946b90ee64a757e7",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l3-ms-signs-ines-notices",
       "itemHash": "cf6c804163877794",
       "blind": [
@@ -1116,20 +1060,6 @@
         0,
         1,
         4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ebsr-whose-conditions-matter",
-      "itemHash": "7605b86536912777",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
       ],
       "confidence": "high",
       "status": "agree"
@@ -1158,20 +1088,6 @@
       "authored": [
         2,
         0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ebsr-thirty-vs-three",
-      "itemHash": "585607f174e078a8",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
       ],
       "confidence": "high",
       "status": "agree"
@@ -1229,20 +1145,6 @@
       ],
       "authored": [
         2,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ebsr-the-line-that-explains-petrel",
-      "itemHash": "ceecbfdd58214919",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
         0
       ],
       "confidence": "high",
@@ -1335,20 +1237,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l2-cloze-unbreakable-condition",
-      "itemHash": "a0d14196386d56dc",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l3-hot-ines-being-careful",
       "itemHash": "a58191b91f01888e",
       "blind": [
@@ -1372,20 +1260,6 @@
       "authored": [
         0,
         1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-cloze-caution-and-honesty",
-      "itemHash": "df9a36e78e3055df",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
       ],
       "confidence": "high",
       "status": "agree"
@@ -1419,20 +1293,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l4-cloze-which-source-to-trust",
-      "itemHash": "c74ae0cdbc8db9b8",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l5-hot-lesson-not-one-test",
       "itemHash": "acfea3956d534b60",
       "blind": [
@@ -1461,30 +1321,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-cloze-reading-all-three",
-      "itemHash": "ac80223bececddee",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l1-mc-second-glance",
       "itemHash": "0609ad7a05b4a23a",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-mc-why-remove-the-second-person",
-      "itemHash": "69f7cb8c7873353f",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -1511,14 +1349,6 @@
         1,
         2
       ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-mc-lock-with-no-shape",
-      "itemHash": "ea91f003ee69b595",
-      "blind": 0,
-      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -1559,14 +1389,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l3-mc-name-on-the-slips",
-      "itemHash": "34c451f9aad542a4",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l3-mc-saw-not-decided",
       "itemHash": "bea4ece85462894c",
       "blind": 2,
@@ -1575,26 +1397,10 @@
       "status": "agree"
     },
     {
-      "itemId": "l3-mc-two-viewpoints-compared",
-      "itemHash": "7614bd817b5855e9",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "medium",
-      "status": "agree"
-    },
-    {
       "itemId": "l4-mc-which-source-for-winter",
       "itemHash": "77c75c91a87ec48d",
       "blind": 3,
       "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-mc-why-call-it-a-guess",
-      "itemHash": "757ce600f894f520",
-      "blind": 0,
-      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -1619,14 +1425,6 @@
         1,
         2
       ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-one-test-mistake",
-      "itemHash": "d43cf53815adc86c",
-      "blind": 0,
-      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -1665,20 +1463,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-ebsr-two-seconds-that-mattered",
-      "itemHash": "f2578d8eaff15e16",
-      "blind": [
-        3,
-        3
-      ],
-      "authored": [
-        3,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-mc-what-the-archive-scene-is-about",
       "itemHash": "c19508a5bf376d9a",
       "blind": 3,
@@ -1687,15 +1471,29 @@
       "status": "agree"
     },
     {
+      "itemId": "l6-ebsr-pulse-loud-in-his-ears",
+      "itemHash": "94351a745d0df14f",
+      "blind": [
+        3,
+        2
+      ],
+      "authored": [
+        3,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-hot-precise-not-vague",
-      "itemHash": "020a42c6758e26d4",
+      "itemHash": "26ded34502419786",
       "blind": [
         0,
-        1
+        2
       ],
       "authored": [
         0,
-        1
+        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -1715,23 +1513,15 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-two-watchers-compared",
-      "itemHash": "e9cf628cc948abef",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-hot-scene-that-turns",
-      "itemHash": "0abc055f7eeb963d",
+      "itemHash": "d546bae301a78bcd",
       "blind": [
-        0,
-        1
+        1,
+        3
       ],
       "authored": [
-        0,
-        1
+        1,
+        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -1761,14 +1551,6 @@
         3,
         3
       ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-two-briefs-compared",
-      "itemHash": "0e26d9a993268857",
-      "blind": 0,
-      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -1943,20 +1725,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l3-cloze-which-record-holds-the-thumb",
-      "itemHash": "9c73f4f8d354b0a8",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l4-match-claim-against-what-was-measured",
       "itemHash": "8705af256c2653d4",
       "blind": [
@@ -2052,7 +1820,7 @@
     },
     {
       "itemId": "l5-cloze-temperatures-and-runtime",
-      "itemHash": "4eab825a8ef273ed",
+      "itemHash": "6c82009b54f29a7f",
       "blind": [
         2,
         0
@@ -2111,22 +1879,254 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-what-the-lobby-scene-is-about",
-      "itemHash": "16c4e2feeb14a8c6",
+      "itemId": "l1-mc-best-summary",
+      "itemHash": "e99d685f3453fcc5",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-advice-the-article-supports",
+      "itemHash": "1258e66704ba1a4c",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-cloze-where-the-aside-sits",
+      "itemHash": "2aaca36a798daf6c",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-collectors-own-rule",
+      "itemHash": "8778e49f2642a806",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-ebsr-first-person-watcher",
+      "itemHash": "10a99c47d9887377",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-whose-conditions-matter",
+      "itemHash": "a9891f8202ce40e2",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-thirty-vs-three",
+      "itemHash": "cc50dd6e5dead8f9",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-the-line-that-explains-petrel",
+      "itemHash": "c9a1bb069de75c68",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-cloze-unbreakable-condition",
+      "itemHash": "bbbfc24a8d910002",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-cloze-caution-and-honesty",
+      "itemHash": "7c9a8563202be792",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-cloze-which-source-to-trust",
+      "itemHash": "b47f75f1a9978743",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-cloze-reading-all-three",
+      "itemHash": "4bd7da44f84301a0",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-why-remove-the-second-person",
+      "itemHash": "5d22df211549a96b",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-lock-with-no-shape",
+      "itemHash": "e1660690ab9d195c",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-mc-name-on-the-slips",
+      "itemHash": "fa9b04e10fed32c7",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-mc-two-viewpoints-compared",
+      "itemHash": "2bd02061a0b5efc2",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "medium",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-why-call-it-a-guess",
+      "itemHash": "92ed263ef9c339c9",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-one-test-mistake",
+      "itemHash": "629b7d356df558e2",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-two-seconds-that-mattered",
+      "itemHash": "2949afca501f5496",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-two-watchers-compared",
+      "itemHash": "4bb7452fc571f0bd",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l6-ebsr-pulse-loud-in-his-ears",
-      "itemHash": "94351a745d0df14f",
+      "itemId": "l6-mc-two-briefs-compared",
+      "itemHash": "f43ecdce8e472b17",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l3-cloze-which-record-holds-the-thumb",
+      "itemHash": "4ab30d162faa7174",
       "blind": [
-        3,
+        1,
         2
       ],
       "authored": [
-        3,
+        1,
         2
       ],
       "confidence": "high",
