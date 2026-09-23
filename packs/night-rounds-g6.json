@@ -1169,8 +1169,8 @@
       "choices": [
         "She moves quickly once she has started digging",
         "She is following something settled and unforced, not making a decision",
-        "She is being pushed into the burrow by the cold",
-        "She will come back up as soon as the weather turns"
+        "She is being pushed down into the burrow by the coming cold",
+        "She will come back up as soon as the weather turns warm again"
       ],
       "key": 1,
       "distractorRationale": {
@@ -1763,8 +1763,8 @@
         },
         {
           "choices": [
-            "a freezer adds thiaminase to whatever is stored in it",
-            "cold makes an otter need more of the vitamin than usual",
+            "a freezer slowly adds thiaminase to whatever fish is stored in it",
+            "the cold makes an otter burn through more of the vitamin than usual",
             "freezing only slows the enzyme that destroys thiamine, so the loss keeps going"
           ],
           "key": 2
@@ -2562,10 +2562,10 @@
       "dok": 2,
       "stem": "Why does Whitlock want all three accounts written on one page in the witnesses' own words?",
       "choices": [
-        "So the differences between them stay visible instead of being smoothed away",
-        "So the account that repeats most often can be identified",
-        "So the witnesses can be asked to sign what they said",
-        "So the newspaper can be given a single tidy statement"
+        "To keep the differences between them visible instead of smoothing them away",
+        "To find which account repeats most often and treat that one as true",
+        "To have the witnesses sign what they each said on the telephone",
+        "To give the newspaper a single tidy statement about the noise"
       ],
       "key": 0,
       "distractorRationale": {
@@ -3272,8 +3272,8 @@
         {
           "choices": [
             "which weather product the county was actually under",
-            "what time the gap was closed that night",
-            "who the head keeper is"
+            "what time the fence gap was closed that night",
+            "who the head keeper is and what she said"
           ],
           "key": 0
         }
@@ -3309,7 +3309,7 @@
           "key": 1
         }
       ],
-      "explain": "The file draws its own limit in the closing lines: a binder is a record of what a person wrote and signed for, not a witness to the event itself.  It knows the fence is three hundred and forty feet long, that post fourteen broke, and that the last inspection was the twelfth of May, because somebody dated and initialed each of those.  What nobody wrote down while it was happening, it cannot supply, and judging accounts and measuring wind belong to other records entirely."
+      "explain": "The file draws its own limit in the closing lines:  a binder is a record of what a person wrote and signed for, not an account of the event itself.  It knows the fence is three hundred and forty feet long, that post fourteen broke, and that the last inspection was the twelfth of May, because somebody dated and initialed each of those.  What nobody wrote down while it was happening, it cannot supply, and judging accounts and measuring wind belong to other records entirely."
     },
     {
       "id": "l4-mc-uninitialed-inspection",
@@ -4065,9 +4065,9 @@
       "blanks": [
         {
           "choices": [
-            "the water is too deep to wade out safely",
+            "the water thirty feet out is too deep for her to wade safely",
             "a wild bird that lands here is not the sanctuary's animal to treat",
-            "she is afraid of the bird's bill"
+            "she is afraid of the heron's bill, a spear aimed at her face"
           ],
           "key": 1
         },
@@ -4094,9 +4094,9 @@
       "stem": "What has the heron used to hold her line down the valley before tonight?",
       "choices": [
         "The river for direction, the trees for edges, and the light for timing",
-        "A memory of the count of days between journeys",
-        "The lights of the places people have built",
-        "The wind, which usually pushes her the right way"
+        "A memory of the count of days between one journey and the next",
+        "The lights of the places people have built along the river",
+        "The wind, which usually pushes her the right way down the valley"
       ],
       "key": 0,
       "distractorRationale": {
@@ -4120,8 +4120,8 @@
       "choices": [
         "She can see fish in it even from a height",
         "It is the only thing below her she still recognises once the valley is gone",
-        "It is the safest surface for a heron to land on",
-        "It reflects the lights and shows her where people are"
+        "It is the safest surface for a heron to land on in a strong wind",
+        "It reflects the line of small lights and shows her where people are"
       ],
       "key": 1,
       "distractorRationale": {
@@ -4315,7 +4315,7 @@
         }
       },
       "distractorRationale": {
-        "0": "Being present is not the same as recording anything;  the page notes he wrote nothing down that night.",
+        "0": "Being on the property is not the same as recording anything, and a memory carries no time or signature to check.",
         "1": "Marking a disagreement is the first step, not the last;  the page then weighs the two sources against each other.",
         "2": "The wind grid records what the wind did, which cannot confirm a departure time nobody wrote down at the moment it happened."
       },
@@ -4402,7 +4402,7 @@
         "2": "The transfer slip settles that question;  the conflicting memory is exactly what the signed record outweighs.",
         "3": "The grid carries an hourly reading for nine o'clock and a peak gust in the margin, so the wind is among the settled facts."
       },
-      "explain": "The page draws its own boundary: it can order events that were recorded and cannot explain an event nobody recorded or witnessed.  Each wrong choice picks a question the records do answer and treats it as open, which is the mistake the closing lines are written to prevent."
+      "explain": "The page names the one question it cannot answer:  it can order events that were recorded and cannot explain an event nobody recorded.  Each wrong choice picks a question the records do answer and treats it as open, which is the mistake the closing lines are written to prevent."
     },
     {
       "id": "l6-ebsr-two-records-agree",
@@ -4653,24 +4653,24 @@
       ],
       "coachTopic": "central-idea",
       "dok": 3,
-      "stem": "Select the three changes the morning report puts in place.",
+      "stem": "Select the two changes that deal with the time between when something happens and when somebody writes it down.",
       "choices": [
+        "The wind station grid is filled in by whoever walks rounds.",
         "The pin check gains a second initial column.",
-        "The maintenance binder is closed to anyone outside the sanctuary.",
-        "The volunteer log gains a line asking what you heard and when you wrote it down.",
         "Night rounds move an hour earlier during storm season.",
-        "The wind station grid is filled in by whoever walks rounds."
+        "The maintenance binder is closed to anyone outside the sanctuary.",
+        "The volunteer log gains a line asking what you heard and when you wrote it down."
       ],
       "key": [
         0,
-        2,
         4
       ],
       "distractorRationale": {
-        "1": "The report moves in the opposite direction, using its own records openly, including in a correction letter sent to a newspaper.",
-        "3": "No change to the timing of rounds appears anywhere;  the three changes all concern who writes a record and when."
+        "1": "The second initial column is a real change, but it is about the pin check sheet, not about how long anyone waits to write.",
+        "2": "No change to the timing of rounds appears anywhere in the report.",
+        "3": "The report moves the other way, using its own records openly, even in a letter sent to a newspaper."
       },
-      "explain": "Each change repairs the exact record that failed: a second initial for the pin check, a named writer for the wind grid, and a timing line for the volunteer log.  The two wrong choices reschedule rounds and hide the binder, neither of which follows from the report's findings."
+      "explain": "The wind grid will now be filled in by whoever is walking rounds, instead of from memory at the end of the night, which shortens the wait.  The volunteer log will ask when you wrote down what you heard, which puts that wait on the page.  The pin check change is about who signs the sheet, not about time."
     },
     {
       "id": "l6-hot-what-the-page-settles",
@@ -4683,20 +4683,20 @@
       "coachTopic": "research-integrate",
       "dok": 3,
       "mode": "sentence",
-      "stem": "Tap the three sentences that state something this page CAN settle.",
+      "stem": "Tap the three sentences that report an entry from the radio log.",
       "spans": [
-        "It can settle when the gap was found and who found it, because two separate records agree.",
-        "It can settle that the heron left with a licensed rehabilitator at 8:40 p.m., because a signed slip outweighs a memory.",
-        "It can settle that the eight o'clock pin check was never initialed, because the line for it is empty.",
-        "It cannot say how the pin came out of that gate, because no record was written while it was happening and nobody saw it.",
-        "A timeline is not a witness."
+        "The radio log also records Ferris sending every keeper out in pairs at 8:05 p.m., exactly as the bulletin asked.",
+        "Work order 318 opens at 10:30 p.m. and closes the fence with a temporary panel.",
+        "At 10:05 p.m. Ferris reported the north service gate standing open, with its latch pin lying in the mud below the hinge, bent.",
+        "The transfer slip is signed at 8:40 p.m., at the maintenance gate, by Head Keeper Whitlock and by the licensed rehabilitator who took the bird.",
+        "The radio log's final entry of the night comes at 10:56 p.m.: all animals accounted for, count closed, no animal off property."
       ],
       "key": [
         0,
-        1,
-        2
+        2,
+        4
       ],
-      "explain": "Three sentences name settled questions and give the reason each is settled: two records agreeing, a signed slip outweighing a memory, and an empty line where initials belong.  The last two mark the boundary instead, naming the question no record can answer and why a timeline cannot testify."
+      "explain": "Three sentences come from the radio log:  Ferris sending keepers out in pairs, the report of the open gate at 10:05, and the final entry closing the count.  The gate report does not name its record, but it comes in the paragraph that opens by naming the radio log.  The other two sentences come from the work order and the transfer slip."
     },
     {
       "id": "l6-hot-record-versus-memory",
@@ -4708,19 +4708,19 @@
       "coachTopic": "research-source-check",
       "dok": 3,
       "mode": "sentence",
-      "stem": "Tap the two sentences that draw the line between a record and a recollection.",
+      "stem": "Tap the two sentences that separate the night's records from its one recollection, and tell whose recollection it is.",
       "spans": [
+        "The evening begins on paper at four o'clock, when Bulletin 14 went up on the keeper room door.",
         "Five records cover that night, and one recollection does not.",
-        "The slip carries a time and two signatures, while his memory carries neither, and he is the first person to say so.",
-        "Tanaka remembers that van differently.",
-        "The wind station grid runs alongside all of this.",
-        "At 10:05 p.m. Ferris reported the north service gate standing open, with its latch pin lying in the mud below the hinge, bent."
+        "The transfer slip is signed at 8:40 p.m., at the maintenance gate, by Head Keeper Whitlock and by the licensed rehabilitator who took the bird.",
+        "The recollection belongs to Wes Tanaka, who was on the property until nine and wrote nothing down.",
+        "The wind station grid runs alongside all of this."
       ],
       "key": [
-        0,
-        1
+        1,
+        3
       ],
-      "explain": "The first sentence sorts the night's sources into records and one recollection, and the second explains what actually separates them: a time and two signatures against neither.  The others report that the memory differs, and give two entries from the timeline itself."
+      "explain": "One sentence splits the night's sources into five records and one recollection.  The other says whose recollection it is and why it counts as one:  Tanaka wrote nothing down.  The other three sentences describe records, a posted bulletin, a signed slip and the wind grid."
     },
     {
       "id": "l6-hot-first-two-steps",
@@ -4733,45 +4733,44 @@
       "coachTopic": "inference-argument",
       "dok": 3,
       "mode": "sentence",
-      "stem": "Tap the two sentences that state the first two steps of the report's argument.",
+      "stem": "Tap the two sentences that record what was found at Fence Nine, before the report argues anything about it.",
       "spans": [
-        "The first step is that the fence failure was not a failure of upkeep.",
-        "The second step is that the open gate was a failure of procedure, whatever the equipment did.",
-        "The third step ties the whole stack of paper together.",
+        "The report opens with findings, and it keeps them separate from everything else on purpose.",
+        "Finding one: a willow limb came down across Fence Nine at post fourteen, and the post snapped at ground level.",
         "The report says nothing whatsoever about how the pin came out, which is the sentence I would have been most tempted to write.",
-        "This one ran to two full pages."
+        "The first step is that the fence failure was not a failure of upkeep.",
+        "The gap was found on rounds at 9:52 p.m. and closed with a temporary panel before eleven."
       ],
       "key": [
-        0,
-        1
+        1,
+        4
       ],
-      "explain": "The report numbers its own argument, and the first two steps make claims about the fence and about the gate.  The third span announces a step without stating it, the fourth describes a deliberate silence, and the fifth is the length of the document."
+      "explain": "The report keeps its findings apart from its argument.  At Fence Nine it records two plain facts:  the willow limb snapped the post at ground level, and the gap was found at 9:52 and closed before eleven.  The first step says what those facts mean, that the failure was not one of upkeep, which is an argument rather than a finding.  Neither of the other two sentences records anything found at Fence Nine."
     },
     {
       "id": "l6-hot-three-changes",
       "type": "hottext",
       "passageId": "p-l6-morning-report",
       "targets": [
-        "c1-inf-2-central-ideas",
-        "c1-inf-4-reasoning"
+        "c4-3-analyze-sources"
       ],
-      "coachTopic": "central-idea",
+      "coachTopic": "research-source-check",
       "dok": 2,
       "mode": "sentence",
-      "stem": "Tap the three sentences that name a change the report actually puts in place.",
+      "stem": "Tap the three sentences where the narrator tells you her own thoughts or plans, not just what the report says.",
       "spans": [
-        "The pin check gains a second initial column, exactly like the supplement column on a diet card.",
-        "The wind station grid gets filled in by whoever is walking rounds, rather than by whoever remembers at the end of the night.",
-        "The volunteer log gains a new line at the top of every entry, asking what you heard and when you wrote it down.",
+        "The report opens with findings, and it keeps them separate from everything else on purpose.",
+        "I am copying out the argument rather than the whole document, because the argument is the part that will still matter in a month.",
+        "The report says nothing whatsoever about how the pin came out, which is the sentence I would have been most tempted to write.",
         "The letter asks for nothing else.",
-        "A record is not a defense of the person who wrote it."
+        "The report ends with a line I fully intend to steal."
       ],
       "key": [
-        0,
         1,
-        2
+        2,
+        4
       ],
-      "explain": "Each change repairs the record that failed that night: a second initial for the pin check, a named writer for the wind grid, and a timing line for the volunteer log.  The other two spans describe the correction letter's restraint and the closing idea about what a record is for."
+      "explain": "Three times the narrator steps in with her own view.  She explains why she copies only the argument, admits which sentence she would have been tempted to write, and says she means to steal the last line.  The other two sentences only describe what the report and its letter do."
     },
     {
       "id": "l6-cloze-settled-and-open",
@@ -4783,26 +4782,18 @@
       ],
       "coachTopic": "research-integrate",
       "dok": 4,
-      "stem": "Finish the summary.  The timeline settles {{0}}, and it leaves open {{1}}.",
+      "stem": "Finish the summary.  The page says a timeline shows which questions are answered, and it shows {{0}}.",
       "blanks": [
         {
           "choices": [
-            "why the storm brought the willow limb down across the fence",
-            "whether the Valley Register will print a correction",
-            "which keeper found the fence gap, and at what time"
+            "who was to blame for it all",
+            "what happened where nobody was watching",
+            "exactly where those answers stop"
           ],
           "key": 2
-        },
-        {
-          "choices": [
-            "how the latch pin came out of the north service gate",
-            "what time the heron left with the licensed rehabilitator",
-            "whether the eight o'clock pin check was initialed"
-          ],
-          "key": 0
         }
       ],
-      "explain": "Two separate records agree about the gap, so its time and its finder are settled;  a signed slip settles the heron's departure at 8:40, and an empty printed line settles that the eight o'clock check went uninitialed.  What no record covers is how the pin came out, because nobody wrote anything while it was happening and nobody saw it.  The storm damage and the newspaper's response are simply not questions this page was built to answer."
+      "explain": "The page's last lines say what a timeline is good for.  It puts recorded events in order, so it shows which questions the records answer and exactly where those answers stop.  It says nothing about blame, and nothing about events no record covers."
     },
     {
       "id": "l6-cloze-the-defence",
@@ -4814,26 +4805,26 @@
       ],
       "coachTopic": "inference-argument",
       "dok": 3,
-      "stem": "Finish the summary.  The report argues the open gate was {{0}}, and its defence of the sanctuary is that {{1}}.",
+      "stem": "Finish the summary.  The storm night got a morning report because {{0}}, and each change in this one names {{1}}.",
       "blanks": [
         {
           "choices": [
-            "a step somebody skipped rather than a part that broke",
-            "the result of a bent pin that should have been replaced",
-            "nobody's fault, given the strength of the wind"
+            "a bulletin went up on the keeper room door that afternoon",
+            "a heron left the property with a licensed rehabilitator",
+            "it produced work order 318, for the panel on Fence Nine"
           ],
-          "key": 0
+          "key": 2
         },
         {
           "choices": [
-            "the storm was severe enough to excuse the damage",
-            "nothing actually went wrong that night",
-            "everything that went wrong was written down by the people it happened to"
+            "the keeper who first asked for that change",
+            "the date on which the change takes effect",
+            "the particular record it is meant to repair"
           ],
           "key": 2
         }
       ],
-      "explain": "The second step of the argument rests on the blank eight o'clock line rather than on anybody's opinion, which makes the open gate a procedure failure;  the report deliberately says nothing about how the pin came out.  Its third step then trades the claim of a perfect night for a stronger one, that every failure is visible in the sanctuary's own paper.  Blaming the equipment, excusing the wind, or denying that anything went wrong are all positions the report explicitly declines to take."
+      "explain": "Whitlock files a morning report after any night that produces a work order, and the storm night produced work order 318, which closed Fence Nine with a temporary panel.  The report then ties each of its changes to a record:  every change names the particular record it repairs."
     },
     {
       "id": "l6-mc-what-a-timeline-is-for",
@@ -4872,9 +4863,9 @@
       "dok": 2,
       "stem": "What is the first radio log entry that matters to this timeline?",
       "choices": [
-        "The last visitor vehicle leaving the property",
+        "The last visitor vehicle driving out through the gate",
         "The gap in Fence Nine at post fourteen",
-        "Bulletin 14 going up on the keeper room door",
+        "Bulletin 14 going up on the keeper room door that afternoon",
         "A heron reported down in the marsh with one wing carried wrong"
       ],
       "key": 3,
@@ -4894,20 +4885,20 @@
       ],
       "coachTopic": "research-source-check",
       "dok": 3,
-      "stem": "Why does the page include a recollection at all, when it has five records?",
+      "stem": "Tanaka puts the van's departure at maybe seven-thirty.  What is that guess based on?",
       "choices": [
-        "It is one of the places the sources disagree, which the assignment asks for",
-        "It fills a gap none of the five records covers",
-        "It is the only account from somebody who was present",
-        "It corrects a time the slip records incorrectly"
+        "How light the sky was, and whether the wind had risen yet",
+        "A time he wrote in the gate log as the van drove out",
+        "The time printed on the transfer slip that he signed",
+        "A radio call he heard as the van reached the gate"
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "The transfer slip covers the same moment with a time and two signatures, so the memory adds no new ground.",
-        "2": "The keepers who wrote the radio log and the gate log were present too, and they wrote at the time.",
-        "3": "The comparison runs the other way:  the slip carries a time and signatures, the memory carries neither, and Tanaka says so himself."
+        "1": "No log entry carries Tanaka's name or his time for the van.  His guess comes from memory alone.",
+        "2": "Tanaka did not sign the transfer slip, and its time is more than an hour later than his guess.",
+        "3": "The page lists no radio entry about the van, so there was no call for him to hear."
       },
-      "explain": "The assignment asks for every place the sources disagree, so a recollection that conflicts with a signed slip belongs on the page precisely because it loses.  Recording the conflict is what lets a later reader see that the question was asked and settled."
+      "explain": "Tanaka told the narrator the van left \"while there was still light in the sky, before the wind picked up, maybe seven-thirty.\"  His time is an estimate from what he saw and felt that evening, which is why he says maybe."
     },
     {
       "id": "l6-mc-what-report-refuses",
@@ -4918,20 +4909,20 @@
       ],
       "coachTopic": "inference-argument",
       "dok": 4,
-      "stem": "The narrator says the report leaves out the sentence she would most have wanted to write.  What is it?",
+      "stem": "The report keeps its findings separate from everything else, on purpose.  What does that let a reader do?",
       "choices": [
-        "A defence of the keeper who missed the eight o'clock check",
-        "An explanation of how the latch pin came out of the gate",
-        "An accusation aimed at the newspaper",
-        "A claim that the storm was worse than the advisory predicted"
+        "Skip the argument, since the findings already say who was at fault",
+        "Check what happened before weighing what the report argues",
+        "Read the three changes first, since they come before the findings",
+        "Tell which keeper left the north service gate open"
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "The report does not defend anybody;  it records the blank line and builds a change from it.",
-        "2": "The attached letter is deliberately narrow, asking for a correction on two claims and nothing more.",
-        "3": "The wind readings are simply logged, and the report never argues about severity."
+        "0": "The findings only record what was found.  They name no one at fault, and the argument still comes after them.",
+        "2": "The changes come last, after the steps of the argument, so a reader meets the findings first.",
+        "3": "No finding names a keeper.  The report records what was found at the gate, not who was on duty there."
       },
-      "explain": "The tempting sentence is the causal one, because a cause makes a report feel finished, and the report refuses it because no record supports it.  Each wrong answer names something the report also does not do, but none is the sentence the narrator admits she wanted."
+      "explain": "Findings are what the records show, and the argument is what the report claims those records mean.  Keeping the two apart lets a reader check the facts first and then judge each step of the argument against them."
     },
     {
       "id": "l6-mc-why-second-column",
@@ -4992,25 +4983,21 @@
       ],
       "coachTopic": "research-source-check",
       "dok": 4,
-      "stem": "In eight words or fewer, what is the one thing this timeline cannot settle?",
+      "stem": "In eight words or fewer, what does the narrator say a timeline is not?",
       "accept": [
-        "how the pin came out",
-        "how the pin got out",
-        "how the latch pin came out",
-        "how the latch pin got out",
-        "how the pin came out of the gate",
-        "how the pin got out of the gate",
-        "how the pin came out of that gate",
-        "how the gate pin came out",
-        "how the pin came loose",
-        "how the pin fell out",
-        "how the pin left the gate",
-        "why the pin came out",
-        "why the pin came loose",
-        "what made the pin come out"
+        "a witness",
+        "not a witness",
+        "a timeline is not a witness",
+        "an eyewitness",
+        "not an eyewitness",
+        "a witness to the night",
+        "a witness to what happened",
+        "someone who saw it happen",
+        "a person who saw it happen",
+        "someone who saw it"
       ],
       "maxWords": 8,
-      "explain": "Every other question on the page has a record behind it, but nobody wrote anything while the pin was coming out and nobody saw it happen, so the timeline stops there.  Any short phrasing naming the pin coming out of the gate earns credit here."
+      "explain": "Near the end, the narrator says it in five words:  a timeline is not a witness.  It can only put in order what somebody wrote down, so it cannot tell you anything nobody recorded."
     },
     {
       "id": "l6-short-the-defence",
@@ -5022,28 +5009,35 @@
       ],
       "coachTopic": "central-idea",
       "dok": 3,
-      "stem": "In ten words or fewer, what is the sanctuary's actual defence, according to the report?",
+      "stem": "In ten words or fewer, what does the report say its third step ties together?",
       "accept": [
-        "everything that went wrong was written down",
-        "everything that went wrong is written down",
-        "everything that went wrong was recorded",
-        "everything was written down",
-        "everything was recorded",
-        "everything wrong was written down",
-        "everything wrong was recorded",
-        "it was all written down",
-        "it was all recorded",
-        "it was all written down by the people involved",
-        "they wrote everything down",
-        "they wrote down everything that went wrong",
-        "every failure was written down at the time",
-        "every mistake was written down",
-        "all the mistakes were written down",
-        "the failures were recorded by the people they happened to",
-        "nothing was hidden; it was all written down"
+        "the whole stack of paper",
+        "whole stack of paper",
+        "the stack of paper",
+        "the whole stack",
+        "all the paper",
+        "all of the paper",
+        "all the papers",
+        "the papers",
+        "all the paperwork",
+        "the paperwork",
+        "all the records",
+        "all of the records",
+        "every record",
+        "the records",
+        "the whole stack of records",
+        "the stack of records",
+        "all the documents",
+        "everything",
+        "all the evidence",
+        "every document",
+        "all the documents on the night",
+        "the whole report",
+        "all the records together",
+        "every record from the night"
       ],
       "maxWords": 10,
-      "explain": "The report gives up the claim that nothing went wrong, because something plainly did, and replaces it with a stronger one: every failure is visible in the sanctuary's own paper, written by the people it happened to.  Any answer naming that everything was written down earns credit."
+      "explain": "The report opens its third step by saying that step ties the whole stack of paper together, so every record from the night is read as one.  Any answer naming the stack of paper or all the records earns credit."
     },
     {
       "id": "l1-mc-what-the-map-numbers-after-the-time",
@@ -5223,10 +5217,10 @@
       "dok": 2,
       "stem": "The card's tally strip prints its three columns side by side.  What does reading across them show?",
       "choices": [
-        "The strip covers three days of feeding rather than fourteen",
-        "The fish squares and the supplement column carry the same number of initials",
-        "Every one of the twenty-eight fish squares is initialed, and the supplement column beside them carries initials on three days",
-        "Three of the twenty-eight fish squares were left blank"
+        "The strip covers three days of feeding rather than the fourteen the narrator read",
+        "The fish squares and the supplement column carry the same number of initials, twenty-eight each",
+        "All twenty-eight fish squares carry a keeper's initials, but the supplement column has them on only three days",
+        "Three of the twenty-eight fish squares were left blank, on days when a feed was missed"
       ],
       "key": 2,
       "distractorRationale": {
@@ -5381,9 +5375,9 @@
       "coachTopic": "research-integrate",
       "dok": 2,
       "choices": [
-        "The stretch of the night when the recorder was switched off",
+        "The stretch of the night when the recorder was switched off after the lot closed",
         "The stretch in which the three low calls were logged",
-        "The forty-one minutes of usable audio the reviewer kept",
+        "The forty-one minutes of usable audio the reviewer kept from the four hours",
         "A gap of some forty minutes between the last gate log entry and the first low call"
       ],
       "key": 3,
@@ -5603,10 +5597,10 @@
       "dok": 3,
       "stem": "What does the transfer slip show about the keeper who found the heron?",
       "choices": [
-        "The slip enters the keeper's name just under the condition row",
-        "The slip carries the keeper's signature next to Alva's",
-        "The slip does not name the finder: the row reading \"the name of the keeper who found the bird\" has nothing after it",
-        "The slip lists the keeper in the same block as Whitlock"
+        "The slip enters the keeper's name on its own row, just under the condition \"one wing carried wrong\"",
+        "The slip carries the keeper's signature next to Alva's, as the one who found the heron",
+        "The slip leaves the finder out: the row \"the name of the keeper who found the bird\" has nothing after it",
+        "The slip lists the keeper in the same block as Whitlock, under the heading \"both signatures\""
       ],
       "key": 2,
       "distractorRationale": {
@@ -5753,7 +5747,7 @@
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "No arrow joins these two findings, but they are not neighbors.  The box reading \"not a failure of upkeep\" is drawn between them.",
+        "1": "No arrow joins these two findings, but they are not neighbors.  Another box is drawn between them.",
         "2": "An arrow joins these two, carrying the second finding into the conclusion it supports.",
         "3": "An arrow joins these two, running from the conclusion to the last step of the argument."
       },
@@ -5771,22 +5765,22 @@
       "type": "cloze",
       "passageId": "p-l6-morning-report",
       "figureId": "fig-l6-morning-report",
-      "figureFact": "a failure of procedure",
-      "stem": "Finish the description of the boxes.  The box reading \"a failure of procedure\" follows straight from {{0}}.  The arrow out of it runs down to {{1}}.",
+      "figureFact": "not a failure of upkeep",
+      "stem": "Finish the description of the boxes.  The box reading \"not a failure of upkeep\" follows straight from {{0}}.  The one box drawn with rounded ends comes at {{1}}.",
       "blanks": [
         {
           "choices": [
-            "the willow limb that came down across Fence Nine",
-            "the inspection line dated the twelfth of May",
-            "the north service gate found standing open"
+            "the box about the open north service gate",
+            "the box about the inspection line",
+            "the box about the willow limb"
           ],
           "key": 2
         },
         {
           "choices": [
-            "the defense that everything which went wrong was written down by the people it went wrong for",
-            "the change that gives the pin check a second initial column",
-            "the letter asking the Valley Register for a correction"
+            "the bottom of the stack, where the argument ends",
+            "the top of the stack, above both findings",
+            "the center of the stack, between the findings"
           ],
           "key": 0
         }
@@ -5797,8 +5791,8 @@
       ],
       "coachTopic": "central-idea",
       "dok": 3,
-      "explain": "The drawing gives each finding its own step:  the willow limb leads to not a failure of upkeep, and the north service gate found standing open leads to a failure of procedure.  The arrow out of that step runs to the box with rounded ends, the third step, where the defense is that every failure was written down by the people it happened to.  The inspection line of the twelfth of May supports the first step rather than the second, and the second initial column and the correction letter both come after the argument rather than inside it.",
-      "whyTheFigureIsNeeded": "The page groups both findings together and then all three steps, so only the drawing pairs the open gate with the procedure step and shows the argument closing in a single rounded box."
+      "explain": "An arrow runs from the willow limb's box straight down into not a failure of upkeep, so that finding is the one this step rests on.  No box in the stack mentions the inspection line.  The single box with rounded ends is the last one, at the bottom of the stack, where the argument ends.",
+      "whyTheFigureIsNeeded": "The page lists both findings before any step, so only the drawing joins the willow limb to the upkeep step and shows the argument closing in a single rounded box."
     }
   ],
   "figures": [

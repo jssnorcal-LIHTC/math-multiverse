@@ -46,7 +46,7 @@
     },
     {
       "itemId": "t1-ebsr-why-this-example",
-      "itemHash": "86d1a2218bd9aba9",
+      "itemHash": "f3146318f260c161",
       "blind": [
         0,
         1
@@ -191,20 +191,6 @@
       "status": "agree"
     },
     {
-      "itemId": "t2-ebsr-why-send-an-operative",
-      "itemHash": "a6b1c9b0a8d15415",
-      "blind": [
-        0,
-        2
-      ],
-      "authored": [
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t2-ebsr-why-nothing-else-failed",
       "itemHash": "394b056b9e44e29a",
       "blind": [
@@ -292,7 +278,7 @@
     },
     {
       "itemId": "t2-mc-dust-on-a-different-part",
-      "itemHash": "0524661e54d454c7",
+      "itemHash": "52045df7c3939995",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -316,7 +302,7 @@
     },
     {
       "itemId": "t3-ebsr-why-rain-forms",
-      "itemHash": "f7288d24354e222b",
+      "itemHash": "6a3c2792e27ed864",
       "blind": [
         0,
         2
@@ -324,20 +310,6 @@
       "authored": [
         0,
         2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-ebsr-earliest-warning-sign",
-      "itemHash": "a1c36ac456c365fd",
-      "blind": [
-        2,
-        1
-      ],
-      "authored": [
-        2,
-        1
       ],
       "confidence": "high",
       "status": "agree"
@@ -368,22 +340,6 @@
         1,
         3,
         5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t3-hot-storm-signals-not-colony",
-      "itemHash": "3c6348ea72e9fdcc",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -424,7 +380,7 @@
     },
     {
       "itemId": "t3-mc-strongest-signal-day",
-      "itemHash": "b22f9f84f41145f7",
+      "itemHash": "cef06105b91cfd17",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -457,22 +413,8 @@
       "status": "agree"
     },
     {
-      "itemId": "t4-ebsr-why-different-climates",
-      "itemHash": "145f30bee490ef5d",
-      "blind": [
-        0,
-        3
-      ],
-      "authored": [
-        0,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t4-ebsr-why-cairn-bay-swings-less",
-      "itemHash": "6f405ccf88842e49",
+      "itemHash": "7d6d08cd842569ea",
       "blind": [
         0,
         1
@@ -480,20 +422,6 @@
       "authored": [
         0,
         1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t4-ebsr-why-trust-the-average",
-      "itemHash": "72a9829407bb0754",
-      "blind": [
-        0,
-        2
-      ],
-      "authored": [
-        0,
-        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -585,14 +513,6 @@
       "status": "agree"
     },
     {
-      "itemId": "t4-mc-third-post-transfer",
-      "itemHash": "ed2902e452a6606e",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t4-match-pattern-to-cause",
       "itemHash": "e1e4f8409f98ca16",
       "blind": [
@@ -620,6 +540,20 @@
       "authored": [
         2,
         0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t5-ebsr-two-different-clocks",
+      "itemHash": "0e1d138301840cc1",
+      "blind": [
+        0,
+        3
+      ],
+      "authored": [
+        0,
+        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -726,7 +660,7 @@
     },
     {
       "itemId": "t5-mc-why-one-station-cannot-see-it",
-      "itemHash": "3b36d59fbc424808",
+      "itemHash": "786b374fdd61a381",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
@@ -734,7 +668,7 @@
     },
     {
       "itemId": "t6-ebsr-which-proposal-lacks-authority",
-      "itemHash": "4aeb50d1a8ae3c28",
+      "itemHash": "98c7195f1e8b2096",
       "blind": [
         3,
         3
@@ -748,7 +682,7 @@
     },
     {
       "itemId": "t6-ebsr-why-proposal-b-still-fails",
-      "itemHash": "b6fd819d8d9a03d8",
+      "itemHash": "fa5b15cd4213ac2d",
       "blind": [
         3,
         3
@@ -805,38 +739,6 @@
       "status": "agree"
     },
     {
-      "itemId": "t6-hot-three-constraints",
-      "itemHash": "b255c9d9a0b1aa00",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-hot-proposal-flaws",
-      "itemHash": "851c0d654f8fb9a3",
-      "blind": [
-        0,
-        1,
-        2
-      ],
-      "authored": [
-        0,
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t6-cloze-third-constraint",
       "itemHash": "5b5cc6ddea975253",
       "blind": [
@@ -858,7 +760,7 @@
     },
     {
       "itemId": "t6-mc-fishery-regulation-transfer",
-      "itemHash": "b31dbbc15c4d2d9a",
+      "itemHash": "50ed263528e40f9a",
       "blind": 0,
       "authored": 0,
       "confidence": "high",
@@ -1002,7 +904,7 @@
     },
     {
       "itemId": "t1-mc-name-the-boundary-first",
-      "itemHash": "f976636df08a9607",
+      "itemHash": "a9a1e063b2bc8a48",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1036,20 +938,6 @@
       "authored": [
         1,
         1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t2-ebsr-what-closes-the-order",
-      "itemHash": "2a1adf8b7b73a52d",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -1299,7 +1187,7 @@
     },
     {
       "itemId": "t3-mc-why-not-the-first-morning",
-      "itemHash": "37660d6b5b6e2fb6",
+      "itemHash": "b9328a6b04321297",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
@@ -1521,7 +1409,7 @@
     },
     {
       "itemId": "t5-ebsr-what-an-adaptation-limit-is",
-      "itemHash": "900d58c4d94366c7",
+      "itemHash": "ccba900e8139340d",
       "blind": [
         2,
         1
@@ -1628,36 +1516,8 @@
       "status": "agree"
     },
     {
-      "itemId": "t6-ebsr-why-proposal-d-fails",
-      "itemHash": "0d5c62a9f0e9e4bb",
-      "blind": [
-        3,
-        3
-      ],
-      "authored": [
-        3,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ebsr-gates-not-scores",
-      "itemHash": "8b730c9a6c2bcbdd",
-      "blind": [
-        1,
-        0
-      ],
-      "authored": [
-        1,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t6-ebsr-asking-for-an-easier-constraint",
-      "itemHash": "3aee20ad1821f798",
+      "itemHash": "cf38927849bc53d9",
       "blind": [
         2,
         0
@@ -1665,22 +1525,6 @@
       "authored": [
         2,
         0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ms-board-method",
-      "itemHash": "03bb34b8ba7bc3fd",
-      "blind": [
-        2,
-        4,
-        5
-      ],
-      "authored": [
-        2,
-        4,
-        5
       ],
       "confidence": "high",
       "status": "agree"
@@ -1700,36 +1544,6 @@
       "status": "agree"
     },
     {
-      "itemId": "t6-hot-failing-one-gate",
-      "itemHash": "81f79d6195d682fd",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-hot-combining-collects",
-      "itemHash": "34f8e5f12983e212",
-      "blind": [
-        0,
-        1,
-        3
-      ],
-      "authored": [
-        0,
-        1,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "t6-cloze-constraint-def",
       "itemHash": "0da3b7b203971feb",
       "blind": [
@@ -1743,25 +1557,9 @@
     },
     {
       "itemId": "t6-mc-proposal-d-outcome",
-      "itemHash": "49a8cd68edf2bbbb",
+      "itemHash": "306e21909b465925",
       "blind": 1,
       "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-mc-two-more-proposals",
-      "itemHash": "32cdb6c4a4ecd7fc",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-mc-what-the-board-is-for",
-      "itemHash": "490dc148774edb71",
-      "blind": 3,
-      "authored": 3,
       "confidence": "high",
       "status": "agree"
     },
@@ -1948,14 +1746,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l4-vis-why-the-coast-is-steadier",
-      "itemHash": "2eae7ab9dc10c821",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l5-vis-what-the-line-does",
       "itemHash": "7e6431a1a145c26c",
       "blind": 3,
@@ -1992,14 +1782,6 @@
         2,
         4
       ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-vis-one-station-alone",
-      "itemHash": "1a7e6790dfcc0005",
-      "blind": 0,
-      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -2052,8 +1834,8 @@
       "status": "agree"
     },
     {
-      "itemId": "t3-ebsr-what-happens-next",
-      "itemHash": "2106c7bd509de8bb",
+      "itemId": "t2-ebsr-why-send-an-operative",
+      "itemHash": "7bf13213feadb5e7",
       "blind": [
         0,
         2
@@ -2066,8 +1848,52 @@
       "status": "agree"
     },
     {
-      "itemId": "t5-ebsr-two-different-clocks",
-      "itemHash": "0e1d138301840cc1",
+      "itemId": "t3-ebsr-what-happens-next",
+      "itemHash": "0df4d043ca2f4c13",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-ebsr-earliest-warning-sign",
+      "itemHash": "78d1d8e32743afeb",
+      "blind": [
+        2,
+        1
+      ],
+      "authored": [
+        2,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t3-hot-storm-signals-not-colony",
+      "itemHash": "c08488042408465f",
+      "blind": [
+        0,
+        1,
+        2
+      ],
+      "authored": [
+        0,
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-ebsr-why-different-climates",
+      "itemHash": "82e14062a9780ab1",
       "blind": [
         0,
         3
@@ -2076,6 +1902,178 @@
         0,
         3
       ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-ebsr-why-trust-the-average",
+      "itemHash": "67364540c671a5ee",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t4-mc-third-post-transfer",
+      "itemHash": "baee5ee0fab34d76",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-hot-three-constraints",
+      "itemHash": "b8e65be97842bf57",
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-hot-proposal-flaws",
+      "itemHash": "8ba91c4eea54072b",
+      "blind": [
+        3,
+        1,
+        5
+      ],
+      "authored": [
+        1,
+        3,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t2-ebsr-what-closes-the-order",
+      "itemHash": "021f6ad1c6539470",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-why-proposal-d-fails",
+      "itemHash": "e9d2395647a1af63",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-gates-not-scores",
+      "itemHash": "6a8a50f1483d0270",
+      "blind": [
+        1,
+        0
+      ],
+      "authored": [
+        1,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ms-board-method",
+      "itemHash": "52a7ab6eeac5c2fc",
+      "blind": [
+        2,
+        4,
+        5
+      ],
+      "authored": [
+        2,
+        4,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-hot-failing-one-gate",
+      "itemHash": "6f041f3ea4b59895",
+      "blind": [
+        1,
+        4
+      ],
+      "authored": [
+        1,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-hot-combining-collects",
+      "itemHash": "94dabd2891119649",
+      "blind": [
+        1,
+        2,
+        4
+      ],
+      "authored": [
+        1,
+        2,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-mc-two-more-proposals",
+      "itemHash": "c4b7da6d6c5d9be2",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-mc-what-the-board-is-for",
+      "itemHash": "a07bd954e15d7b01",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-vis-why-the-coast-is-steadier",
+      "itemHash": "5bd612548fc1b964",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-vis-one-station-alone",
+      "itemHash": "eeb6ae9a4aebb793",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     }
