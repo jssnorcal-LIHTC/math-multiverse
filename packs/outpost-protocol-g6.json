@@ -53,7 +53,7 @@
    "figureIds": [
     "fig-front-goes"
    ],
-   "text": "Halyard Point Relay sits on a headland.  The coast juts out into open water there.  That makes it the Network's best post for storm warnings.  Relay Officer Dez Amaro logs four readings every morning.  He tracks air pressure, temperature, humidity, and wind.\n\nOn the first day, the barometer read thirty and one tenth inches.  The temperature reached seventy-four degrees, and humidity sat at fifty-two percent.  The wind came light out of the southwest.  The sky stayed clear through the afternoon.\n\nOn the second day, the barometer slipped to thirty inches even.  The temperature climbed to seventy-six degrees, and humidity rose to fifty-eight percent.  The wind came from the southwest, a little stronger than the day before.  A haze had moved in by evening.\n\nOn the third day, the barometer fell further.  It read twenty-nine and eight tenths inches.  The temperature dropped to seventy-one degrees, and humidity climbed to sixty-seven percent.  The wind shifted to blow out of the west.  Low clouds were building along the horizon by midday.\n\nOn the fourth day, the barometer read twenty-nine and six tenths inches.  That was its lowest reading of the week.  Temperature fell again, to sixty-five degrees, and humidity reached seventy-nine percent.  The wind swung to the northwest and picked up to twenty-two miles per hour.  The relay logged its first rain of the week.  That happened by early afternoon.\n\nOn the fifth day, the barometer bottomed out.  It read twenty-nine and five tenths inches.  Temperature had dropped to fifty-eight degrees.  Humidity reached eighty-eight percent.  The wind now blew hard from the north.  It reached thirty-one miles per hour.  Rain fell through the day without a break.\n\nOfficer Amaro's log adds one more line every week.  It logs the colony no matter the weather.  The brindle tern colony below the relay held at two hundred fourteen active nests.  That count matched last week's.  The note is routine, filed every week.  It sits at the bottom of the page.  Five days of falling pressure and rising wind sit above it."
+   "text": "Halyard Point Relay sits on a headland.  The coast juts out into open water there.  That makes it the Network's best post for storm warnings.  Relay Officer Dez Amaro logs four readings every morning.  He tracks air pressure, temperature, humidity, and wind.\n\nOn the first day, the barometer read thirty and one tenth inches.  The temperature reached seventy-four degrees, and humidity sat at fifty-two percent.  The wind came light out of the southwest.  The sky stayed clear through the afternoon.\n\nOn the second day, the barometer slipped to thirty inches even.  The temperature climbed to seventy-six degrees, and humidity rose to fifty-eight percent.  The wind came from the southwest, a little stronger than the day before.  A haze had moved in by evening.\n\nOn the third day, the barometer fell further.  It read twenty-nine and eight tenths inches.  The temperature dropped to seventy-one degrees, and humidity climbed to sixty-seven percent.  The wind shifted to blow out of the west.  Low clouds were building along the horizon by midday.\n\nOn the fourth day, the barometer read twenty-nine and six tenths inches.  That was its lowest reading of the week so far.  Temperature fell again, to sixty-five degrees, and humidity reached seventy-nine percent.  The wind swung to the northwest and picked up to twenty-two miles per hour.  The relay logged its first rain of the week.  That happened by early afternoon.\n\nOn the fifth day, the barometer bottomed out.  It read twenty-nine and five tenths inches.  Temperature had dropped to fifty-eight degrees.  Humidity reached eighty-eight percent.  The wind now blew hard from the north.  It reached thirty-one miles per hour.  Rain fell through the day without a break.\n\nOfficer Amaro's log adds one more line every week.  It logs the colony no matter the weather.  The brindle tern colony below the relay held at two hundred fourteen active nests.  That count matched last week's.  The note is routine, filed every week.  It sits at the bottom of the page.  Five days of falling pressure and rising wind sit above it."
   },
   {
    "id": "p-halyard-reading-the-front",
@@ -631,10 +631,10 @@
    "partA": {
     "stem": "Why does the passage use the station's own life-support system as its worked example for systems and subsystems?",
     "choices": [
-     "Every operative lives inside that system from their first night, so it is a relatable starting example.",
-     "It is the only system that exists anywhere on the station.",
-     "It is the smallest system an operative will ever study.",
-     "It is the system that connects a station to the entire planet."
+     "Every operative lives inside it from their first night, so it is easy to picture.",
+     "It is the only system on the station, so there is no other example to use.",
+     "It is the smallest system an operative will ever study or repair.",
+     "It is the system that connects a station to the planet that holds it."
     ],
     "key": 0
    },
@@ -961,16 +961,16 @@
     "stem": "Why does Dr. Kessler's log ask Network Command to send an operative in person?",
     "choices": [
      "Instrument readings can show that a number is falling but cannot explain why it is falling.",
-     "The dome's instruments had stopped sending any readings at all.",
+     "The dome's instruments had stopped sending any readings at all to Network Command.",
      "The crew on board the dome had asked to be replaced.",
-     "Network Command ordered a routine inspection every four weeks."
+     "Network Command ordered a routine inspection every four weeks, and one was now due."
     ],
     "key": 0
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
-     "Four straight weeks of drift have passed, and why is the question the dome needs answered.",
+     "Nothing enters and nothing leaves, though sunlight gets in and data goes out each morning.",
      "She files this status log every four weeks.",
      "Sensor readings show a number falling, but they cannot say why.",
      "Neither shift was large enough to worry the crew, and Dr. Kessler's log calls it \"within normal drift.\""
@@ -983,7 +983,7 @@
     }
    },
    "distractorRationale": {
-    "1": "This sentence says four weeks of drift have passed, meaning the sensors kept reading the whole time.  It does not say the instruments stopped working.",
+    "1": "This sentence says data goes out every morning, so the instruments never stopped sending readings.",
     "2": "This sentence is about an earlier, smaller shift the crew was not worried about, not about why an operative gets sent now.",
     "3": "This sentence describes how often Dr. Kessler files her regular log, a routine schedule, not the specific reason she is now asking for an operative."
    },
@@ -1194,9 +1194,9 @@
    "stem": "Suppose the same kind of dust that coated the bioreactor's roof panels had instead settled on the water subsystem's filter membrane.  Based on the report's actual mechanism, what would most likely happen?",
    "choices": [
     "The water subsystem would also start producing less oxygen.",
-    "It would not lose oxygen output the way the bioreactor did, since the water subsystem's job does not depend on light passing through a clear surface.",
-    "The water subsystem would immediately stop reclaiming water completely.",
-    "The water subsystem would need a broken pump repaired, the same way a technician fixes any dusty component."
+    "It would not lose oxygen output like the bioreactor, since the water subsystem's job does not depend on light through a clear surface.",
+    "The water subsystem would immediately stop reclaiming water completely, the moment the dust settled.",
+    "The water subsystem would need a broken pump repaired, the same way a technician fixes any dusty component on the dome."
    ],
    "key": 1,
    "distractorRationale": {
@@ -1296,9 +1296,9 @@
     "stem": "According to the field manual, why does warm air end up as rain when a cold front arrives?",
     "choices": [
      "Cold, dense air shoves warm air upward, and rising air cools until its moisture turns to clouds and falls as rain.",
-     "Warm air sinks below the cold air and gets squeezed until moisture is forced out.",
+     "Warm air sinks below the cold air and gets squeezed until its moisture is forced out as rain.",
      "The wind blows the rain in from somewhere else once the front passes.",
-     "Cold air holds more moisture than warm air, so it releases rain as it advances."
+     "Cold air holds more moisture than warm air, so it drops that extra water as rain while it advances."
     ],
     "key": 0
    },
@@ -1546,10 +1546,10 @@
    "dok": 3,
    "stem": "Which day's readings, taken together, are the week's strongest signal of the front's closest approach?",
    "choices": [
-    "Day one, since the sky stayed clear and the wind was light out of the southwest.",
-    "Day two, since the temperature reached its highest point of the week.",
-    "Day three, since low clouds started building along the horizon.",
-    "Day five, since pressure bottomed out, humidity reached eighty-eight percent, and wind reached thirty-one miles per hour, all at once."
+    "Day one, since the barometer read thirty and one tenth and the wind came light out of the southwest.",
+    "Day two, since the temperature reached its highest point of the week at seventy-six degrees.",
+    "Day three, since the wind shifted west and low clouds started building along the horizon.",
+    "Day five, since pressure bottomed out while humidity reached eighty-eight percent and wind thirty-one miles per hour."
    ],
    "key": 3,
    "distractorRationale": {
@@ -1619,10 +1619,10 @@
    "partA": {
     "stem": "Why do Sable Flats and Cairn Bay have such different climates despite sharing a latitude?",
     "choices": [
-     "Cairn Bay sits on the coast where wind and currents bring moisture and steady temperatures, while Sable Flats sits far inland without them.",
-     "The sun reaches Cairn Bay at a much steeper angle than it reaches Sable Flats.",
-     "Sable Flats is located at a completely different latitude than Cairn Bay.",
-     "Cairn Bay receives more rainfall because it sits at a higher elevation than Sable Flats."
+     "Cairn Bay is on the coast, where wind and a current bring moisture and steady temperatures, and Sable Flats is far inland.",
+     "The sun reaches Cairn Bay at a much steeper angle than it reaches Sable Flats in summer.",
+     "Sable Flats is located at a completely different latitude than Cairn Bay, much farther north.",
+     "Cairn Bay receives more rainfall because it stands at a much higher elevation than inland Sable Flats."
     ],
     "key": 0
    },
@@ -1630,7 +1630,7 @@
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
      "Sable Flats Post and Cairn Bay Post sit at almost the exact same latitude.",
-     "Open ocean stretches away to its west.",
+     "They do not, and the gap between them is large enough that operatives transferring between the two posts are warned to repack their gear completely.",
      "The sun reaches both at nearly the same angle all year.",
      "Cairn Bay sits directly on the coast."
     ],
@@ -1644,7 +1644,7 @@
    "distractorRationale": {
     "1": "This sentence says the sun reaches both posts at nearly the same angle, the opposite of a steep-angle difference explaining the gap.",
     "2": "This sentence says the two posts sit at almost the exact same latitude, directly contradicting the claim that they are at different latitudes.",
-    "3": "The passage explains the gap through wind, currents, and distance from the ocean.  It never mentions elevation at either post."
+    "3": "This sentence shows how large the gap is, not what causes it.  The passage explains the gap through wind, currents, and distance from the ocean.  It never mentions elevation at either post."
    },
    "explain": "The passage's own explanation is position relative to the ocean: Cairn Bay sits on the coast, where wind belts and an ocean current bring in moisture and steady temperatures, while Sable Flats sits far inland without either, even though both posts share nearly the same latitude and sun angle.  Each wrong choice either contradicts the shared-latitude setup or invents a cause the passage never gives."
   },
@@ -1660,9 +1660,9 @@
    "partA": {
     "stem": "Why does Cairn Bay's temperature swing less across the year than Sable Flats' does?",
     "choices": [
-     "An ocean current keeps the coastal water in a narrow temperature range, and water changes temperature more slowly than land.",
-     "Cairn Bay has cooler summers because it never receives direct sunlight.",
-     "Sable Flats has a current running along its coast that cools it faster than Cairn Bay.",
+     "A current keeps the coastal water in a narrow temperature range, and water changes temperature more slowly than land.",
+     "Cairn Bay has cooler summers because it never receives direct sunlight through its clouds.",
+     "Sable Flats has a current running along its coast that cools it down faster than Cairn Bay each winter.",
      "Cairn Bay's wind belt blows only in the winter months."
     ],
     "key": 0
@@ -1701,10 +1701,10 @@
    "partA": {
     "stem": "Why does Network Command trust the ten-year average over a single wet or dry year at Sable Flats?",
     "choices": [
-     "A single year, like the wet year of fourteen inches, can give a visitor a wrong idea of what most years there are actually like.",
-     "A single year always reports the exact same rainfall as the ten-year average.",
-     "Ten-year averages are recalculated only once, so they never need checking again.",
-     "Sable Flats has never had a drought year worth recording."
+     "A single year, like the wet year of fourteen inches, can give a visitor a wrong idea of most years there.",
+     "A single year reports the same rainfall as the ten-year average, nine inches.",
+     "Ten-year averages are worked out only once, at the end of the decade, so they never need checking again.",
+     "Sable Flats has never had a drought year worth recording in ten years."
     ],
     "key": 0
    },
@@ -1933,10 +1933,10 @@
    "dok": 4,
    "stem": "A third post sits at the same latitude as Sable Flats and Cairn Bay, but far inland with no coastal current anywhere nearby.  Based on the passage's own explanation, would this new post most likely resemble Sable Flats or Cairn Bay?",
    "choices": [
-    "Cairn Bay, since every post at the same latitude eventually reports a similar climate.",
-    "Cairn Bay, since inland posts always receive more ocean-carried moisture than coastal posts.",
-    "Neither post, since latitude is the only factor the passage says matters.",
-    "Sable Flats, since being far from the ocean means no current and no ocean-carried moisture to moderate its temperature or add rainfall."
+    "Cairn Bay, since every post at the same latitude eventually reports a similar climate over time.",
+    "Cairn Bay, since inland posts always receive more ocean-carried moisture than posts on the coast.",
+    "Neither post, since latitude is what the passage says decides a climate.",
+    "Sable Flats, since far from the ocean there is no current to steady its temperature and no ocean moisture for rain."
    ],
    "key": 3,
    "distractorRationale": {
@@ -2314,8 +2314,8 @@
    "dok": 2,
    "stem": "According to the synthesis report, why can a single field station not see the network's full warming pattern on its own?",
    "choices": [
-    "A single station's instruments are never accurate enough to be trusted.",
-    "Network Command deliberately hides the combined data from individual stations.",
+    "A single station's instruments are never accurate enough to be trusted on their own.",
+    "Network Command deliberately hides the combined data from individual stations and their officers.",
     "A lone station can only see its own local report, not the pattern across every station and year together.",
     "Each station's local mystery has nothing to do with any of the others."
    ],
@@ -2358,22 +2358,22 @@
    "coachTopic": "evidence-final-deployment",
    "dok": 4,
    "partA": {
-    "stem": "Which proposal fails Command's constraint that the response must use only authority the Network already holds?",
+    "stem": "Command says any response must show its effect within one nesting season.  Why does Command set that limit?",
     "choices": [
-     "All three proposals fail this constraint equally.",
-     "Proposal A, since the Network has never run a feeding station before.",
-     "Proposal B, since fencing requires authority the Network does not have over its own land.",
-     "Proposal C, since it depends on a fishery authority that does not answer to the Network."
+     "Chicks hatch three weeks before the herring arrive, so any help has to come fast.",
+     "The report is due before next season, so the plan has to be finished by then.",
+     "No petition is ever decided that fast, and Command wrote the limit to rule out Proposal C.",
+     "Command will not spend a second season's budget on a plan that has shown no early result."
     ],
     "key": 3
    },
    "partB": {
     "stem": "Which sentence from the passage best supports the answer you just gave?",
     "choices": [
-     "That authority covers its posts and the land around them.",
-     "The Network runs feeding stations at two other posts.",
-     "The authority to run one is not in question.",
-     "The fishery authority does not answer to the Network, though."
+     "No petition has ever been decided in under four months.",
+     "The operative's recommendation is due before the next nesting season begins.",
+     "Chicks hatch three weeks before the herring arrive.",
+     "Command will not commit a second season of field budget to a plan."
     ],
     "key": {
      "0": 2,
@@ -2383,11 +2383,11 @@
     }
    },
    "distractorRationale": {
-    "0": "This sentence says the authority question for Proposal A is not even in question, meaning it clearly passes, so the three proposals do not all fail equally.",
-    "1": "This sentence says the Network already runs feeding stations at two other posts, which means it has done this before, not never.",
-    "2": "This sentence says the Network's own authority covers its posts and the land around them, exactly where fencing would go, so fencing does not require authority it lacks."
+    "0": "Chicks hatching three weeks before the herring arrive is the problem the proposals are trying to fix.  It is not the reason for the time limit, which is about how long Command will pay before it sees a result.",
+    "1": "The operative's recommendation is due before next season, but that is when the choice must be made.  It says nothing about how soon a chosen plan has to work.",
+    "2": "Command set its three constraints first, before any proposal was filed, so the limit was not written against Proposal C.  The slow petition is simply one plan that fails it."
    },
-   "explain": "The report states plainly that the fishery authority does not answer to the Network, which means Proposal C would need cooperation from outside the Network's own authority, exactly the kind of authority Command's third constraint rules out.  The other choices each misread which proposal actually has that authority problem."
+   "explain": "Command's reason is money and patience.  It will not commit a second season of field budget to a plan, so a plan must show an early result first.  The hatching gap is the problem being solved, the report's due date is when the choice is made, and the constraints were set before any proposal existed."
   },
   {
    "id": "t6-ebsr-why-proposal-b-still-fails",
@@ -2404,7 +2404,7 @@
      "The Network lacks the authority to build fencing on its own land.",
      "The fencing would cost far more than the field budget allows.",
      "Fencing cannot be built within the one-season time limit Command set.",
-     "The record shows chicks are starving during the food gap, a problem fencing against predators does not touch."
+     "Chicks are starving in the food gap, a problem fencing out predators cannot touch."
     ],
     "key": 3
    },
@@ -2552,20 +2552,18 @@
    "coachTopic": "evidence-final-deployment",
    "dok": 3,
    "mode": "sentence",
-   "stem": "Tap the three sentences that each state one of Command's named constraints on the response.",
+   "stem": "Tap the two sentences that each name something the response is not allowed to do, or that the Network cannot do.",
    "spans": [
-    "That effect must appear within one nesting season.",
-    "Second, the response must cost less than this year's field budget for Halyard Point.",
-    "Third, the response must use only authority the Network already holds.",
+    "The operative filing the final report must recommend one of three proposals.",
     "No emergency funding request is allowed.",
-    "The operative filing the final report must recommend one of three proposals."
+    "That authority covers its posts and the land around them.",
+    "It cannot regulate ocean conditions outside its boundary either."
    ],
    "key": [
-    0,
     1,
-    2
+    3
    ],
-   "explain": "The three correct sentences each state one of Command's three named constraints directly: a one-season time limit, a cost limit tied to this year's budget, and a limit to authority the Network already holds.  The other two sentences add a supporting detail about emergency funding and describe the operative's overall task, neither one a constraint statement itself."
+   "explain": "Two sentences mark limits: no emergency funding request, and no power over ocean conditions beyond the Network's boundary.  The other two say what the operative has to do and how far the Network's authority does reach, which is permission rather than a limit."
   },
   {
    "id": "t6-hot-proposal-flaws",
@@ -2577,20 +2575,21 @@
    "coachTopic": "evidence-final-deployment",
    "dok": 4,
    "mode": "sentence",
-   "stem": "Tap the three sentences, one for each proposal, that each name the specific reason that proposal falls short.",
+   "stem": "Tap the three sentences, one for each proposal, that each name something that proposal would do well.",
    "spans": [
-    "It treats the survival gap each season rather than closing it.",
-    "Fencing does nothing to touch that problem.",
-    "The outcome does not lie inside the Network's authority.",
-    "Setup takes under two weeks.",
-    "It can go up within days."
+    "The effect would end the moment the feeding station stopped.",
+    "It would likely raise survival among hatched chicks.",
+    "No petition has ever been decided in under four months.",
+    "The cost fits well inside this year's field budget.",
+    "Predators are not what this record has shown killing chicks, though.",
+    "If it worked, it would close the mismatch at its root."
    ],
    "key": [
-    0,
     1,
-    2
+    3,
+    5
    ],
-   "explain": "Each correct sentence names the specific reason one proposal falls short: Proposal A only treats the gap each season instead of closing it, Proposal B's fencing never touches the actual food-gap problem, and Proposal C's outcome sits outside the Network's own authority.  The other two sentences each describe a strength, fast setup, for a different proposal, not a flaw."
+   "explain": "Each proposal has one real strength here.  A's cost fits well inside this year's budget, and B would likely raise survival among hatched chicks.  C, if it worked, would close the mismatch at its root.  The other three sentences each name a limit rather than a strength."
   },
   {
    "id": "t6-cloze-third-constraint",
@@ -2654,7 +2653,7 @@
    "dok": 4,
    "stem": "Suppose a fourth proposal called for the Network to seek new region-wide fishery regulation that would move the herring season's start date permanently.  Based on the report's own reasoning about Proposal C, would this new idea likely satisfy Command's authority constraint?",
    "choices": [
-    "No, since it would still depend on a fishery authority that does not answer to the Network, the same problem Proposal C already has.",
+    "No, it would still depend on a fishery authority that does not answer to the Network, as Proposal C does.",
     "Yes, since a permanent regulation change is always more powerful than a one-time petition.",
     "Yes, since region-wide regulation falls outside any single fishery authority's control.",
     "There is no way to know without more information about the fishery authority."
@@ -3040,9 +3039,9 @@
    "dok": 3,
    "stem": "An operative files a report reading only \"the water system failed.\"  Using Instructor Perrin's rule, what is missing?",
    "choices": [
-    "The exact time the failure was first noticed.",
+    "The exact time the failure was first noticed by the crew.",
     "How many crew members the failure affected.",
-    "Whether the station is sealed or open to the outside.",
+    "Whether the station is sealed or open to the outside air and water.",
     "Which line the trouble sits inside, so a technician knows where to go."
    ],
    "key": 3,
@@ -3128,11 +3127,11 @@
    "coachTopic": "evidence-sealed-station",
    "dok": 3,
    "partA": {
-    "stem": "According to the order, what has to happen before the order can be closed?",
+    "stem": "According to the order, what is the one condition that closes it?",
     "choices": [
-     "The panel has to be wiped with the dry cloth and then the damp one.",
+     "One operative has to wipe the panel with the dry cloth and then the damp one.",
      "A later status log has to show the oxygen reading climbing back toward twenty and a half percent.",
-     "Somebody has to be named as the owner of the two-week cleaning task.",
+     "Somebody has to be named on the maintenance board as the owner of the two-week cleaning task.",
      "Network Command has to file its own second copy of the order."
     ],
     "key": 1
@@ -3735,9 +3734,9 @@
    "dok": 3,
    "stem": "Why could Amaro not have issued the coast warning on the first morning of week eleven?",
    "choices": [
-    "The barometer had not yet reached its lowest point.",
-    "The colony count had not been filed for the week yet.",
-    "The wind had not yet swung round to the north.",
+    "The barometer had not yet fallen to twenty-nine and three tenths, its lowest point.",
+    "The colony count had not been filed for the week yet at the bottom of the page.",
+    "The wind had not yet swung round from the southwest to the north.",
     "Nothing had moved yet, and a first morning has no morning before it to compare against."
    ],
    "key": 3,
@@ -4291,8 +4290,8 @@
    "partA": {
     "stem": "What does the memo mean when it calls this an adaptation limit?",
     "choices": [
-     "A species runs short of food once its own population grows too large.",
-     "A colony stops responding to its surroundings after enough bad seasons.",
+     "A species runs short of food once its own population grows too large for the herring.",
+     "A colony stops responding to its surroundings after enough bad seasons in a row.",
      "A species can follow its own cue and no further, even once that cue stops predicting the food.",
      "A record stops being reliable once it has run for thirty seasons."
     ],
@@ -4575,7 +4574,7 @@
    "coachTopic": "evidence-final-deployment",
    "dok": 4,
    "partA": {
-    "stem": "Why does the board rule that Proposal D's petition half still cannot count, when the other half clears every gate?",
+    "stem": "The second member argued that the feeding station and the petition would work well together.  Why does the board's finding reject that thinking?",
     "choices": [
      "Running two plans at once would cost more than this year's field budget allows.",
      "The feeding station stops working once a petition is filed alongside it.",
@@ -4641,8 +4640,8 @@
     }
    },
    "distractorRationale": {
-    "0": "The board compares proposals only after all three constraints are cleared, so a comparison never runs across a failed one.  Points would let a strong showing cover a failure.",
-    "2": "The minutes say the board does not choose.  It records how the choosing has to be done and leaves the recommendation with the operative.",
+    "0": "Points would let a strong showing on two constraints make up for a failure on the third.  A gate does not allow that.",
+    "2": "The minutes say the board does not choose, so it sends no ranking of its own to Command.",
     "3": "Only Command can change a constraint Command set, and the board specifically declined to widen the window itself."
    },
    "explain": "A gate is pass or fail: clearing two constraints beautifully earns nothing if the third fails, because the proposal never reaches the comparison stage at all.  Scores would let a strong showing on cost or speed quietly cover a failure on authority, which is exactly what the chair wanted ruled out in writing."
@@ -4661,7 +4660,7 @@
     "choices": [
      "Two seasons still would not be long enough for the fishery petition to be decided.",
      "The request was ruled out of order and struck from the minutes before any vote.",
-     "Changing a constraint is not meeting it, and only Command can change this one.",
+     "Asking for an easier constraint is not the same as meeting the one the proposals must pass.",
      "The board had already settled on a proposal before the fourth member raised the request."
     ],
     "key": 2
@@ -4684,7 +4683,7 @@
    "distractorRationale": {
     "0": "Widening the window would clear the petition's TIMING problem, so time is not the objection here.  The board declined because the window is Command's to change rather than the board's, and the authority gate would still stand however wide the window got.",
     "1": "The request was recorded and forwarded to Command as its own item.  Declining to act on a request is not the same as striking it.",
-    "3": "The board does not choose at all.  Its job is to record how the choosing has to be done."
+    "3": "The minutes say the board does not choose, so it had no proposal of its own to settle on."
    },
    "explain": "The board separates two different moves: meeting the constraint in front of you, and asking for a different constraint.  Only Command can change a window Command set, so the request goes forward as its own item while the evaluation continues under the window as written."
   },
@@ -4700,7 +4699,7 @@
    "stem": "Choose the three findings the review board actually recorded in its minutes.",
    "choices": [
     "The board widened the review window to two seasons.",
-    "The petition may be counted toward this season's approved response.",
+    "The board sent the petition back to be filed again next season.",
     "The one response aimed at the fish rather than the colony lies outside the Network's authority.",
     "The board ranked the three filed proposals from strongest to weakest.",
     "A plan built from two parts carries the weaknesses of both parts.",
@@ -4713,10 +4712,10 @@
    ],
    "distractorRationale": {
     "0": "The board declined to widen the window, since only Command can change a constraint Command set.  The request was forwarded rather than granted.",
-    "1": "The board records the opposite: the petition cannot count toward this season's approved response, because its outcome lies outside the Network's authority.",
-    "3": "The minutes say the board does not choose.  It records the method and leaves the recommendation with the operative."
+    "1": "Nothing in the minutes sends the petition anywhere.  The only item the board passed on was a separate request about the window, and it went to Command.",
+    "3": "The minutes say the board does not choose, and ranking the proposals would be a choice."
    },
-   "explain": "The three findings are the method the chair asked to have entered word for word, the ruling that a combined plan collects its parts' weaknesses, and the closing line about where each response is AIMED.  The petition is the one thing on the table aimed at the fish rather than at the colony, and it is also the one thing the Network cannot decide for itself.  Each wrong choice credits the board with an action it explicitly refused: ranking the proposals, widening a constraint, or letting the petition count toward this season."
+   "explain": "Three findings are on the record.  Proposals are compared only after they clear all three constraints, and a plan built from two parts carries both parts' weaknesses.  The one response aimed at the fish is also the one the Network cannot decide for itself.  Each wrong choice credits the board with something the minutes never record: sending the petition back, widening a constraint, or ranking the proposals."
   },
   {
    "id": "t6-ebsr-warning-rule-as-design",
@@ -4769,19 +4768,19 @@
    "coachTopic": "evidence-final-deployment",
    "dok": 4,
    "mode": "sentence",
-   "stem": "Tap the two sentences that state what happens to a proposal that fails a single one of Command's constraints.",
+   "stem": "Tap the two sentences that show the chair making sure the board's reasoning is on the record before the operative files anything.",
    "spans": [
+    "Minutes of the Halyard Point review board, four members present.",
     "The chair opened with the method and asked that it go into the minutes word for word.",
-    "Command's three constraints are gates rather than scores, and a proposal either clears a gate or it does not.",
-    "A proposal failing one gate is out of the running, however strong it happens to look on the other two.",
-    "Only the proposals clearing all three get compared against each other, and only then does anybody discuss which one is better.",
-    "The second member raised a fourth option, entered in the minutes as Proposal D."
+    "The board's finding on Proposal D was recorded as follows.",
+    "The request was recorded and forwarded to Command as a separate item, and the evaluation continues under the window as written.",
+    "One line closes the minutes, entered at the chair's request."
    ],
    "key": [
     1,
-    2
+    4
    ],
-   "explain": "The keyed pair carries the pass-or-fail rule: a proposal either clears a gate or it does not, and failing one puts it out however strong it looks on the other two.  The comparison sentence describes what happens to proposals that PASS all three, and the other two record who was speaking rather than what the rule is."
+   "explain": "The chair makes two requests about the record: the method goes into the minutes word for word at the start, and one line closes them at the end.  The other sentences also mention the minutes or something recorded, but none of them is the chair asking for anything."
   },
   {
    "id": "t6-hot-combining-collects",
@@ -4793,20 +4792,20 @@
    "coachTopic": "evidence-final-deployment",
    "dok": 4,
    "mode": "sentence",
-   "stem": "Tap the three sentences that state why joining two plans does not repair the weaker one.",
+   "stem": "Tap the three sentences that give the second member's side: what Proposal D is and why it was raised.  The other two belong to the board's answer.",
    "spans": [
-    "Bolting two plans together does not average their weaknesses out.",
-    "It collects them.",
-    "The petition half still asks for an outcome outside the Network's own authority, and it still cannot be decided inside the one-season window.",
     "Neither problem gets any smaller by pairing the petition with something that works.",
-    "The board therefore records that the petition cannot count toward this season's approved response."
+    "The second member raised a fourth option, entered in the minutes as Proposal D.",
+    "Run the feeding station this season, and file the fishery petition at the same time.",
+    "Whatever the feeding station does on its own it still does, and whatever it does not do it still does not do.",
+    "The thinking was that the station covers the chicks now while the petition works on the cause."
    ],
    "key": [
-    0,
     1,
-    3
+    2,
+    4
    ],
-   "explain": "The three keyed sentences give the general principle and then apply it: weaknesses are collected rather than averaged, so pairing the petition with something that works leaves both of its problems exactly the size they were.  The other two name the petition's specific failures and record the ruling that follows, which are the inputs and the output of the reasoning rather than the reasoning itself."
+   "explain": "The second member's side takes three sentences.  A fourth option is entered in the minutes, and it would run the feeding station this season while the petition is filed.  The thinking is that the station covers the chicks now while the petition works on the cause.  The other two come later, in the board's finding, and say what pairing the halves does not change."
   },
   {
    "id": "t6-cloze-constraint-def",
@@ -4853,11 +4852,11 @@
    ],
    "key": 1,
    "distractorRationale": {
-    "0": "The board does not choose at all.  It records how the choosing has to be done and leaves the recommendation with the operative.",
-    "2": "Combining collects the weaknesses rather than averaging them away, so the petition's two failures travel into Proposal D unchanged.",
+    "0": "Nothing in the minutes makes Proposal D, or any other plan, the recommended one.  The ruling on D is only about its petition half.",
+    "2": "Proposal D still carries the petition, and the petition still needs authority the Network does not hold and still cannot be decided within one season.",
     "3": "It was entered in the minutes as Proposal D and evaluated on its merits.  Nothing was dismissed for arriving late."
    },
-   "explain": "The board finds that bolting two plans together does not average their weaknesses out but collects them, so the petition half still asks for an outcome outside the Network's authority and still cannot be decided inside the one-season window.  Its ruling is narrow and specific: the petition cannot be counted toward this season's approved response."
+   "explain": "The minutes record one narrow ruling on Proposal D.  Its petition half cannot be counted toward this season's approved response, because it still needs authority the Network does not hold and cannot be decided within one season.  Nothing in the minutes makes D the plan to use, or says it clears every constraint."
   },
   {
    "id": "t6-mc-two-more-proposals",
@@ -4877,9 +4876,9 @@
    ],
    "key": 2,
    "distractorRationale": {
-    "0": "Command's first constraint is a real effect on chick survival within one nesting season, not cost, and in any case no constraint outranks another when all three are gates.",
+    "0": "Cost is only one of the three gates, and no gate outranks another, so the order Command lists them in does not matter here.  A proposal outside the Network's authority is out, whatever it costs.",
     "1": "A proposal failing the authority gate never reaches the comparison stage at all, so there is no tie for cost to break.",
-    "3": "The fifth clears all three constraints exactly as written.  Asking for an easier constraint is not the same thing as meeting the one in front of you."
+    "3": "The fifth clears all three constraints exactly as written, so nothing has to change before it goes forward."
    },
    "explain": "Constraints are gates rather than scores, so clearing two of them beautifully earns nothing if the third fails: the proposal never reaches the stage where anybody discusses which option is better.  Being cheapest is a trade-off, and trade-offs only start to matter among the proposals that have already cleared every gate."
   },
@@ -4892,20 +4891,20 @@
    ],
    "coachTopic": "evidence-final-deployment",
    "dok": 3,
-   "stem": "According to the minutes, what is the review board's own job?",
+   "stem": "According to the minutes, what is this meeting of the review board for?",
    "choices": [
-    "To rank the proposals and forward that ranking to Command.",
-    "To change any constraint that none of the proposals can clear.",
-    "To file the operative's recommendation to Command on the operative's behalf.",
-    "To record how the choosing has to be done, rather than to choose."
+    "To choose the proposal Command should fund this season, then send it on.",
+    "To review the operative's recommendation after Command has already approved it.",
+    "To draft the three proposals the operative will later have to choose among.",
+    "To review the three filed proposals before the operative's recommendation goes to Command."
    ],
    "key": 3,
    "distractorRationale": {
-    "0": "The minutes say the board does not choose.  Ranking is precisely what it declined to do.",
-    "1": "Only Command can change a constraint Command set, which is why the board forwarded the request to widen the window rather than granting it.",
-    "2": "The recommendation stays with the operative.  The board's minutes record the method before that filing happens."
+    "0": "The minutes say the board does not choose.  The choice is left to the operative's recommendation.",
+    "1": "The board meets before the recommendation goes to Command, not after Command has approved anything.",
+    "2": "The three proposals were already filed when the board met.  Its purpose was to review them."
    },
-   "explain": "The minutes open and close on the same point: the board does not choose, it records how the choosing has to be done.  That is why the chair asked for the gates-not-scores method to go into the record word for word, and why a request to widen a constraint was forwarded to Command as a separate item rather than acted on."
+   "explain": "The minutes open with the board's purpose: review the three filed proposals before the operative's recommendation goes to Command.  The board does not choose.  It records how the choosing has to be done, and the choice stays with the operative."
   },
   {
    "id": "t6-short-constraints-act-as",
@@ -4916,19 +4915,46 @@
    ],
    "coachTopic": "evidence-final-deployment",
    "dok": 3,
-   "stem": "In five words or fewer, name what the chair says Command's three constraints act as.",
+   "stem": "A new proposal is cheap and fully within the Network's authority, but its effect would take three nesting seasons to show.  Under the chair's method, what happens to it?  Answer in five words or fewer.",
    "accept": [
-    "gates",
-    "the gates",
-    "gates not scores",
-    "gates rather than scores",
-    "pass or fail gates",
-    "three gates",
-    "gates to clear",
-    "gates a proposal must clear"
+    "out of the running",
+    "it is out of the running",
+    "it's out of the running",
+    "out",
+    "it is out",
+    "it's out",
+    "it is ruled out",
+    "ruled out",
+    "it gets ruled out",
+    "it fails a gate",
+    "it fails the window",
+    "it fails the one-season window",
+    "it fails the time gate",
+    "not compared",
+    "it is not compared",
+    "it never gets compared",
+    "never compared",
+    "rejected",
+    "it is rejected",
+    "dropped",
+    "it is dropped",
+    "eliminated",
+    "it is eliminated",
+    "it fails",
+    "fails a gate",
+    "it fails one gate",
+    "fails one gate",
+    "fails the time gate",
+    "it gets rejected",
+    "gets rejected",
+    "it is cut",
+    "it does not get compared",
+    "not compared with the others",
+    "out of the comparison",
+    "it never reaches the comparison"
    ],
    "maxWords": 5,
-   "explain": "The chair asks for one word to go into the minutes word for word: the three constraints are gates rather than scores.  A gate is passed or failed, so a proposal failing any one of them is out however strong it looks on the other two, and only the proposals clearing all three are ever compared against each other."
+   "explain": "The one-season window is one of Command's three constraints, and the chair treats each one as a gate.  A proposal that fails one gate is out of the running, however cheap it is and however well it fits the Network's authority, so this one never reaches the comparison."
   },
   {
    "id": "l1-vis-trace-direction",
@@ -5410,17 +5436,17 @@
    ],
    "coachTopic": "evidence-long-pattern",
    "dok": 3,
-   "stem": "Both posts sit at the same latitude and get the same sun angle. What does the diagram give as the reason their climates differ?",
-   "explain": "The diagram holds latitude constant on purpose, then shows what is left: Cairn Bay on the coast with a current nearby, Sable Flats well inland in dry continental air, and a wind belt that comes off the ocean and drops its moisture before it gets inland. Position relative to the ocean is the whole answer.",
+   "stem": "What does the diagram give as the reason the two posts' climates differ?",
+   "explain": "The diagram holds latitude constant on purpose, then shows what is left: Cairn Bay on the coast with a current nearby, Sable Flats well inland in dry continental air, and a wind belt that comes off the ocean and drops its moisture before it gets inland.  Position relative to the ocean is the whole answer.",
    "choices": [
-    "One is much further north, so it gets a lower sun angle all year.",
+    "One is much further north than the other, so it gets a lower sun angle all year.",
     "One sits at a much higher elevation than the other.",
     "One sits on the coast with a current nearby, and the other sits well inland in dry continental air.",
-    "The wind belt blows off the ocean and reaches both posts equally wet."
+    "The wind belt blows off the ocean and reaches both posts equally wet, coast and inland alike."
    ],
    "key": 2,
    "distractorRationale": {
-    "0": "The diagram says the opposite in as many words: same latitude, same sun angle all year. Latitude is the thing held equal here.",
+    "0": "The diagram says the opposite in as many words: same latitude, same sun angle all year.  Latitude is the thing held equal here.",
     "1": "Elevation is never drawn or labelled anywhere on this diagram.",
     "3": "The diagram says the wind arrives far drier inland, having dropped its moisture along the way."
    }
@@ -5540,19 +5566,19 @@
    ],
    "coachTopic": "evidence-breaking-point",
    "dok": 3,
-   "stem": "The diagram is titled so that one station cannot see the pattern alone. Which detail on it explains why?",
-   "explain": "The diagram separates two behaviours. Temperature climbs overall but bounces year to year, so a short local record can show a fall that is not the pattern. Carbon dioxide and fuel-use climb together and never reverse. Putting three stations side by side is what makes the bouncing average out.",
+   "stem": "The diagram is titled so that one station cannot see the pattern alone.  Which detail on it explains why?",
+   "explain": "The diagram separates two behaviours.  Temperature climbs overall but bounces year to year, so a short local record can show a fall that is not the pattern.  Carbon dioxide and fuel-use climb together and never reverse.  Putting three stations side by side is what makes the bouncing average out.",
    "choices": [
-    "Temperature climbs overall while still bouncing year to year, so a single station's run of years can point either way.",
-    "Only Network Command records temperature, and the stations record nothing.",
+    "Temperature climbs overall while bouncing year to year, so one station's run of years can point either way.",
+    "Only Network Command records temperature, while the stations just send in carbon dioxide.",
     "The three stations are too far apart to compare with one another.",
-    "Carbon dioxide reverses direction often, so no station can trust its own readings."
+    "Carbon dioxide reverses direction often, so no station can trust its own air-sampling readings."
    ],
    "key": 0,
    "distractorRationale": {
-    "1": "The diagram says every station logs temperature and carbon dioxide. Command adds a fuel-use index on top of that.",
+    "1": "The diagram says every station logs temperature and carbon dioxide.  Command adds a fuel-use index on top of that.",
     "2": "Distance is never given on the diagram, and the whole point is that their records are compared.",
-    "3": "The diagram says carbon dioxide and fuel-use climb on almost the same line and never reverse. It is temperature that bounces."
+    "3": "The diagram says carbon dioxide and fuel-use climb on almost the same line and never reverse.  It is temperature that bounces."
    }
   },
   {
