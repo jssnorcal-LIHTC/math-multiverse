@@ -760,8 +760,8 @@
       "stem": "According to the case file, what does ma'at mean to Egyptians?",
       "choices": [
         "The balance across the whole world that Egyptians believed the pharaoh's divine power was meant to keep.",
-        "The written record Mesopotamian scribes pressed into wet clay using a cut reed.",
-        "The peace deal Ramses the Second signed after reigning for decades.",
+        "The written record Mesopotamian scribes pressed into wet clay, one tablet at a time, using a cut reed.",
+        "The peace deal Ramses the Second signed after reigning for decades and building huge monuments.",
         "The name of the trading trip Hatshepsut sent south along the coast."
       ],
       "key": 0,
@@ -836,10 +836,10 @@
       "partA": {
         "stem": "What is the real dispute the Provenance Office files about Hammurabi's Code?",
         "choices": [
-          "Whether the code's opening promise of fairness actually matches what its clauses did for people of different social standing.",
-          "Whether the stone the code was carved on is a forgery.",
-          "Whether Hammurabi actually ruled Babylon in ancient Mesopotamia.",
-          "Whether the code covered house builders as well as merchants and farmers."
+          "Whether the code's opening promise of fairness matches what its clauses did for people of different standing.",
+          "Whether the stone the code was carved on is a forgery made long after Hammurabi's time.",
+          "Whether Hammurabi actually ruled Babylon in ancient Mesopotamia or was a later legend.",
+          "Whether the code's surviving clauses covered house builders as well as merchants and farmers."
         ],
         "key": 0
       },
@@ -1069,9 +1069,9 @@
       "dok": 2,
       "stem": "According to the case file, how did Mesopotamian scribes' writing method differ from Egyptian scribes'?",
       "choices": [
-        "Mesopotamian scribes carved hieroglyphs into stone, while Egyptian scribes pressed cuneiform into wet clay.",
-        "Both sets of scribes used the exact same wedge-shaped cuneiform system, just carved into different materials.",
-        "Mesopotamian scribes pressed wedge-shaped cuneiform marks into wet clay with a cut reed, while Egyptian scribes drew or carved hieroglyphs onto papyrus and stone.",
+        "Mesopotamian scribes carved hieroglyphs into stone, while Egyptian scribes pressed cuneiform into wet clay with a reed.",
+        "Both sets of scribes used the exact same wedge-shaped cuneiform system, just pressed or carved into different materials.",
+        "Mesopotamian scribes pressed cuneiform into wet clay with a cut reed, while Egyptian scribes drew or carved hieroglyphs onto papyrus and stone.",
         "Egyptian scribes left behind no written record at all, unlike Mesopotamian scribes."
       ],
       "key": 2,
@@ -1394,10 +1394,10 @@
       "partA": {
         "stem": "According to the case file, what did Yohanan ben Zakkai's school at Yavneh actually change?",
         "choices": [
-          "It shifted the tradition's center from Temple sacrifice toward study, prayer, and law any community could carry anywhere.",
-          "It convinced the Roman army to rebuild the destroyed Temple.",
-          "It reunited the kingdom of Judah under a single king again.",
-          "It ended the diaspora and brought every exile back to Jerusalem."
+          "It moved the tradition's center from Temple offerings to study, prayer, and law any group could carry anywhere.",
+          "It convinced the Roman army to rebuild the destroyed Temple so priests could make offerings again.",
+          "It reunited the kingdom of Judah under a single king again after Rome crushed the state.",
+          "It ended the diaspora and brought every exile back to Jerusalem to rebuild the Temple."
         ],
         "key": 0
       },
@@ -1640,10 +1640,10 @@
       "dok": 3,
       "stem": "According to Source B, what was the actual outcome of the stand at Thermopylae?",
       "choices": [
-        "The small Spartan force won outright, driving the entire Persian army out of Greece for good.",
+        "The small Spartan force won outright, driving the entire Persian army out of Greece for good that same year.",
         "The stand never actually happened; it is a legend with no evidence behind it in this account.",
-        "Athens's navy won the battle at Thermopylae by trapping the Persian fleet in a narrow strait.",
-        "The stand ended in defeat for the small, Spartan-led force, but it bought Greece precious time and became a lasting sign of resistance."
+        "Athens's navy won the battle at Thermopylae by trapping the Persian fleet in a narrow strait near the pass.",
+        "The stand ended in defeat for the small Spartan-led force, but it bought Greece time and became a lasting sign of resistance."
       ],
       "key": 3,
       "distractorRationale": {
@@ -1692,10 +1692,10 @@
       "partA": {
         "stem": "According to Source B, how was power actually organized in Sparta's government?",
         "choices": [
-          "Two kings, a council of elders, and a small board of overseers called ephors shared power, with real authority sitting in a much smaller group than in Athens.",
-          "One king ruled alone, with an assembly of all citizens holding the real power.",
-          "Helots elected the ephors, who then chose Sparta's kings.",
-          "Power was shared equally between every adult citizen, the same as in Athens."
+          "Two kings, a council of elders, and the ephors shared power, and the real authority lay with a small, older group.",
+          "One king ruled alone, and an assembly of all plain citizens held the real power over his choices.",
+          "Helots, the unfree workers who farmed the land, elected the ephors, who then chose the kings.",
+          "Power was shared equally and kept in balance between every adult citizen, the same as in Athens."
         ],
         "key": 0
       },
@@ -1704,8 +1704,8 @@
         "choices": [
           "Plain citizens still met in an assembly.",
           "Real power sat with a much smaller, older group than Athens ever let near its own choices.",
-          "A small board of overseers, called ephors, ran its daily business.",
-          "Two kings ruled Sparta at once, checking each other's power."
+          "A large group of unfree workers, called helots, farmed the land instead.",
+          "That government looked nothing like Athens."
         ],
         "key": {
           "0": 1,
@@ -1717,7 +1717,7 @@
       "distractorRationale": {
         "1": "Citizens did meet in an assembly, but the passage says real authority sat with the smaller council and ephors instead, not with the full citizen assembly.",
         "2": "Ephors were a small board of overseers, but the passage never says helots, Sparta's unfree laborers, elected them.",
-        "3": "Two kings ruling together, not equal power for every citizen, is what this source describes; Sparta's government looked nothing like Athens, the passage says directly."
+        "3": "This sentence says Sparta's government looked nothing like Athens, so it cannot have shared power equally the way this choice says Athens did."
       },
       "explain": "Source B lays out Sparta's structure directly: two kings checking each other, a council of elders, and a small board of ephors, with real authority sitting in a far smaller, older group than Athens ever allowed near its own decisions.  The other choices each misplace power in a group the source does not credit with holding it."
     },
@@ -1757,10 +1757,10 @@
       "partA": {
         "stem": "According to Source B, what does the Spartan-leaning account argue actually turned the war?",
         "choices": [
-          "Thermopylae's stand and Sparta's leadership at Plataea were the war's real turning points, not the navy at Salamis.",
-          "The navy's win at Salamis was the single moment that decided everything.",
-          "Athens alone drove the Persian invasion out of Greece for good.",
-          "The helots' farming work was the war's real turning point."
+          "The stand at Thermopylae and Sparta's lead at Plataea were the real turning points, not Salamis.",
+          "The navy's win in the sea battle at Salamis was the single moment that decided everything.",
+          "Athens alone drove the Persian invasion out of Greece for good, without Spartan help.",
+          "The helots' farming work was the war's real turning point, since it let Spartans train."
         ],
         "key": 0
       },
@@ -2117,10 +2117,10 @@
       "partA": {
         "stem": "According to the case file, what changed about Ashoka's rule after his war against Kalinga?",
         "choices": [
-          "He adopted Buddhist teachings and turned his state toward nonviolence and the welfare of ordinary people.",
-          "He conquered even more kingdoms to make up for the war's cost.",
-          "He abandoned the Maurya Empire and retired from ruling entirely.",
-          "He erased all record of the war from his empire's history."
+          "He took up Buddhist ways and turned his state toward nonviolence and the welfare of ordinary people.",
+          "He conquered even more kingdoms to make up for the war's cost in dead and captured.",
+          "He abandoned the Maurya Empire and retired from ruling entirely to follow the Buddha's path.",
+          "He erased all record of the war from his empire's history and its carved stone."
         ],
         "key": 0
       },
@@ -2222,8 +2222,8 @@
       "dok": 2,
       "stem": "According to the case file, what did the Mandate of Heaven actually mean for a Zhou ruler?",
       "choices": [
-        "Heaven gave a ruler the right to rule only while that ruler ruled fairly, and Heaven could pull that right back from one who did not.",
-        "It meant a ruler's family would keep power forever, no matter how that ruler governed.",
+        "Heaven gave a ruler the right to rule only while ruling fairly, and could pull it back from one who did not.",
+        "It meant a ruler's family would keep power forever, no matter how badly that ruler governed.",
         "It meant only a ruler who defeated every rival state could ever claim the throne.",
         "It meant Confucian texts had to be studied before anyone could serve as an official."
       ],
@@ -2299,18 +2299,18 @@
       "partA": {
         "stem": "According to the case file, what did Qin Shi Huangdi do after standardizing the empire's writing, money, and weights?",
         "choices": [
-          "He moved against ideas that threatened his power, ordering rival texts, especially Confucian writings, burned.",
-          "He restored Confucian teaching as the center of government.",
-          "He divided the empire back into many separate rival states.",
-          "He opened trade routes connecting China to Central Asia."
+          "He moved against threatening ideas, ordering rival texts, especially Confucian ones, burned.",
+          "He restored Confucian teaching as the center of government and made officials study it.",
+          "He divided the empire back into many separate rival states, as in the Warring States era.",
+          "He opened trade routes connecting China to Central Asia and the lands beyond."
         ],
         "key": 0
       },
       "partB": {
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
-          "One system replaced the many different ones lands had used before.",
-          "He also moved right against ideas that threatened his new power.",
+          "He beat every rival state and named himself Qin Shi Huangdi, China's first emperor.",
+          "He set one standard for the empire's writing, money, and weights.",
           "A number of scholars who defied the order were put to death too.",
           "Records written later say he ordered rival texts burned, with Confucian works a main target."
         ],
@@ -2323,8 +2323,8 @@
       },
       "distractorRationale": {
         "1": "Scholars who defied the order were put to death, the opposite of Confucian teaching being restored; that restoration happens later, in the next file, under the Han dynasty instead.",
-        "2": "The passage says one system replaced the many different ones lands had used before, describing unification, the opposite of dividing the empire back into rival states.",
-        "3": "Opening trade routes to Central Asia is a Han dynasty achievement described in the next case file, not something this passage credits to Qin Shi Huangdi."
+        "2": "The passage says he beat every rival state and named himself China's first emperor, and that one system replaced the many different ones lands had used before.  That is unification, the opposite of dividing the empire back into rival states.",
+        "3": "One standard for writing, money, and weights is not a trade route.  The passage never credits Qin Shi Huangdi with opening routes to Central Asia."
       },
       "explain": "The passage states directly that after standardizing writing, money, and weights, Qin Shi Huangdi moved against ideas that threatened his power, ordering rival texts, especially Confucian writings, burned, with defiant scholars put to death.  The other choices each borrow an achievement or event that belongs to a different ruler or a different case file."
     },
@@ -2431,10 +2431,10 @@
       "partA": {
         "stem": "According to the case file, what deliberate choice did the Han dynasty make that the Qin never had?",
         "choices": [
-          "Han rulers stopped treating Confucian teaching as a threat and placed it back at the center of government.",
-          "Han rulers banned all study of the Confucian classics permanently.",
-          "Han rulers let birth alone decide who could serve the state.",
-          "Han rulers closed every trade route the Qin had opened."
+          "Han rulers stopped seeing Confucian teaching as a threat and put it at the center of government.",
+          "Han rulers banned all study of the Confucian classics permanently, as the Qin had tried to do.",
+          "Han rulers let birth alone decide who could serve the state, not study of the classics.",
+          "Han rulers closed every trade route to Central Asia that the Qin had opened."
         ],
         "key": 0
       },
@@ -2636,7 +2636,7 @@
         3,
         4
       ],
-      "explain": "Closing the file, Rome is shown matching many of its own gods to Greek ones, treating each pair as one god under two names, and taking in Greek philosophy too, both direct callbacks to the civilization studied in an earlier case file.  The other sentences describe the wars against Carthage, Rome's road network, or its own civil war, none of which is an idea absorbed from an earlier civilization."
+      "explain": "Closing the file, Rome is shown matching many of its own gods to Greek ones, treating each pair as one god under two names, and taking in Greek philosophy too, both direct callbacks to the civilization studied in an earlier case file.  The other three sentences stay inside Rome's own story, and none of them is an idea absorbed from an earlier civilization."
     },
     {
       "id": "t6-ms-closing-facts",
@@ -2650,10 +2650,10 @@
       "stem": "Choose the three details that are true, according to the case file closing on Rome.",
       "choices": [
         "Rome lost all three of its long wars against Carthage.",
-        "Rome overthrew its own king and became a republic before later becoming an empire.",
-        "Rome matched many of its own gods to Greek ones, treating each pair as one god under two names.",
+        "Rome came to hold most of the coast around the Mediterranean Sea.",
+        "A road web linked Rome's lands, moving troops and officials fast across huge distances.",
         "Rome's location on a sea-facing peninsula pushed it steadily outward.",
-        "Rome kept citizenship limited to the city of Rome itself and never extended it."
+        "Rome kept citizenship for the people of the city of Rome itself."
       ],
       "key": [
         1,
@@ -2664,7 +2664,7 @@
         "0": "The passage says Rome fought Carthage across three long wars and won, not that Rome lost all three.",
         "4": "The passage says Rome gave out citizenship widely across its conquered lands, a reach far past a narrow assembly limited to one city."
       },
-      "explain": "The three correct details trace the closing file's own account: Rome's shift from kingdom to republic to empire, its matching of many of its own gods to Greek ones, each pair treated as one god under two names, and the peninsula geography that pushed its expansion outward.  The two wrong choices each invert what the passage actually says about the Punic Wars and about how widely Rome extended citizenship."
+      "explain": "The three correct details trace the closing file's own account.  Rome came to hold most of the Mediterranean coast, its road web moved troops and officials fast across huge distances, and its peninsula pushed it steadily outward.  The two wrong choices each invert what the passage says about the Punic Wars and about how widely Rome extended citizenship."
     },
     {
       "id": "t6-ebsr-republic-to-empire",
@@ -2676,12 +2676,12 @@
       "coachTopic": "evidence-closing-the-file",
       "dok": 3,
       "partA": {
-        "stem": "According to the case file, what ended Rome's nearly five-hundred-year-old republic?",
+        "stem": "According to the case file, what was the final step that turned Rome's nearly five-hundred-year-old republic into an empire?",
         "choices": [
-          "Patrician and plebeian families united peacefully and voted to create an empire.",
-          "A foreign invasion that conquered Rome and installed a new king from outside.",
-          "The Senate voluntarily handed power to Carthage after losing the wars against it.",
-          "Julius Caesar's seizure of power, his assassination, and the civil war that followed, ending with his heir Octavian becoming emperor as Augustus."
+          "Patrician and plebeian families united peacefully and voted together in the Senate to create an empire.",
+          "A foreign invasion that conquered Rome and put a new king from outside the peninsula on its throne.",
+          "The Senate voluntarily handed power to Carthage after losing the three long wars fought against it.",
+          "Caesar's heir Octavian took power as Rome's first emperor and ruled under the name Augustus."
         ],
         "key": 3
       },
@@ -2705,7 +2705,7 @@
         "1": "Julius Caesar, the general who seized power, was Roman himself, not a foreign king; the passage never describes any outside invasion.",
         "2": "The passage says Rome fought Carthage across three wars and won; Rome defeated Carthage, it did not hand power to it."
       },
-      "explain": "The passage traces the republic's end directly: Julius Caesar seized power by force, senators killed him fearing he wanted to rule as a king, and after more years of civil war his heir Octavian became Rome's first emperor, taking the name Augustus.  The other choices each invent a peaceful, foreign, or unrelated cause the passage does not describe."
+      "explain": "The passage traces the republic's end in steps.  Julius Caesar seized power by force, senators killed him fearing he wanted to rule as a king, and more years of civil war followed.  The final step came when his adopted heir, Octavian, rose as Rome's first emperor, taking the name Augustus.  The other choices each invent a peaceful, foreign, or unrelated cause the passage does not describe."
     },
     {
       "id": "t6-short-rome-citizenship-vs-athens",
@@ -2793,7 +2793,7 @@
         "choices": [
           "His punishment is set by his own rank, not by the rank of the person who died.",
           "He is put to death whoever dies, because the injury itself never changes.",
-          "He pays a sum of silver to the owner's family, the same payment the common-standing clause orders.",
+          "He pays the owner a set share of silver, the way the eye clause for an enslaved person does.",
           "His punishment depends on who died: death if an owner dies, a replacement if an enslaved worker does."
         ],
         "key": 3
@@ -2802,7 +2802,7 @@
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "The injury itself never changes at all.",
-          "It orders a payment of silver instead of a matching injury.",
+          "It sets the payment lower still, at half the enslaved person's own value, paid to that person's owner.",
           "One clause covers a man of high standing who destroys another man's eye.",
           "That same builder's careless work, if it only kills the owner's enslaved worker, costs him a replacement instead."
         ],
@@ -2816,7 +2816,7 @@
       "distractorRationale": {
         "0": "The entry ties each punishment to the victim's standing, not the attacker's, and the builder clauses follow the same pattern: what he owes depends on who died.",
         "1": "The entry says the injury never changes, but the punishment does: a builder whose work kills an owner is put to death, while one whose work kills an enslaved worker owes a replacement.",
-        "2": "The silver payment belongs to the eye clause for a man of common standing; the builder clauses set death for killing an owner and a replacement for killing an enslaved worker."
+        "2": "Payments belong to the eye clauses, for an injured man of common standing or an enslaved person; the builder clauses set death for killing an owner and a replacement for killing an enslaved worker."
       },
       "explain": "The entry says most of the surviving clauses follow the eye clauses' pattern, and the builder clauses show it plainly: a careless builder whose work kills a house owner is put to death, but if it only kills the owner's enslaved worker, he owes a replacement instead.  The harm is a death either way, and the punishment changes with the victim's standing.  Each wrong choice keeps the punishment fixed, borrows the silver from a different clause, or ties the punishment to the builder's own rank instead of the victim's."
     },
@@ -3045,9 +3045,9 @@
         "stem": "According to the briefing, what let people stop moving with the seasons and settle in one place?",
         "choices": [
           "Towns eventually grew large enough to turn into the first cities.",
-          "Rivers flooded every year and spread fresh soil across the land nearby.",
-          "People lived in small bands and gathered whatever wild food they could find.",
-          "Farming produced more food than hunting and gathering had, so some people no longer had to search for their next meal."
+          "Rivers like the Tigris and Euphrates flooded every year and spread fresh soil across the land nearby.",
+          "People lived in small bands and gathered whatever wild food they could find as the seasons changed.",
+          "Farming grew more food than hunting and gathering, so some people no longer had to search for their next meal."
         ],
         "key": 3
       },
@@ -3981,10 +3981,10 @@
       "dok": 3,
       "stem": "According to the case file, how does the Office file the sickness that struck Athens during the long war?",
       "choices": [
-        "As the reason Athens eventually lost the war.",
-        "As a weapon Sparta used against a walled city.",
+        "As the main reason Athens lost the war and surrendered to Sparta.",
+        "As a weapon Sparta used against the crowded, walled-in city of Athens.",
         "As unidentified, because modern scholars still argue about what it was.",
-        "As the event that ended the Peace of Nicias."
+        "As the event that ended the Peace of Nicias and restarted the war."
       ],
       "key": 2,
       "distractorRationale": {
@@ -4413,7 +4413,7 @@
         "choices": [
           "It taught that people behave well only when rules are clear, rewards are certain, and punishments are heavy.",
           "It held that law should fall on everyone the same way, whatever a person's rank.",
-          "Another minister, Li Si, later carried them into the unified empire.",
+          "A minister named Shang Yang rebuilt the state around them, generations before the first emperor.",
           "Virtue, in its view, was too slow and too rare to hold a state together."
         ],
         "key": {
@@ -4426,7 +4426,7 @@
       "distractorRationale": {
         "1": "Order from virtue is the Confucian answer this file's earlier entry describes; Legalism held that virtue was too slow and too rare to hold a state together.",
         "2": "The entry says the reverse: the school held that law should fall on everyone the same way, whatever a person's rank.",
-        "3": "A minister carrying these ideas into the unified empire is HOW the school reached the whole empire; it is not what the school taught about keeping order."
+        "3": "A minister rebuilding the state around these ideas is HOW the school came to run the Qin; it is not what the school taught about keeping order."
       },
       "explain": "The entry states the school's own claim directly: people behave well only when rules are clear, rewards are certain, and punishments are heavy, because virtue is too slow and too rare to hold a state together.  Each wrong choice substitutes a rival school's answer, inverts the school's stated position on rank, or mistakes how the school gained power for what it actually taught."
     },
@@ -4524,10 +4524,10 @@
       "partA": {
         "stem": "According to the case file on Han China, what does the entry add to the credit Zhang Qian receives for the route west?",
         "choices": [
-          "He is the only person the entry connects to the route in any way.",
-          "He carried Buddhism into China himself along that route.",
-          "The route got its name from writers alive during his lifetime.",
-          "Trade along parts of the route probably existed before his journey, so he did not start it from nothing."
+          "He is the only person the entry connects to the route, so he opened it by himself.",
+          "He carried Buddhism into China himself along that route from India.",
+          "The route got its name, the Silk Road, from writers alive during his own lifetime.",
+          "Trade along parts of the route probably came before his journey, so he did not start it."
         ],
         "key": 3
       },
@@ -5140,19 +5140,19 @@
       ],
       "coachTopic": "evidence-first-entry",
       "dok": 2,
-      "stem": "The map puts two river systems side by side. What does it say is different about how they flooded?",
-      "explain": "The map carries one note per system. The Tigris and Euphrates flooded every year, but the timing was hard to predict, coming early some years and late in others. The Nile flooded on a far steadier yearly schedule. Both flooded; only one could be planned around.",
+      "stem": "The map puts two river systems side by side.  What does it say is different about how they flooded?",
+      "explain": "The map carries one note per system.  The Tigris and Euphrates flooded every year, but the timing was hard to predict, coming early some years and late in others.  The Nile flooded on a far steadier yearly schedule.  Both flooded; only one could be planned around.",
       "choices": [
-        "The Tigris and Euphrates flooded on a steady schedule, while the Nile was hard to predict.",
+        "The Tigris and Euphrates flooded on a steady yearly schedule, while the Nile was hard to predict each year.",
         "The Nile flooded every year and the Tigris and Euphrates did not flood at all.",
-        "The Tigris and Euphrates flooded every year but were hard to predict, while the Nile flooded on a far steadier schedule.",
+        "The Tigris and Euphrates flooded every year but were hard to predict, while the Nile flooded on a steadier schedule.",
         "Both rivers flooded at exactly the same time each year."
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "That is the two notes swapped. The map gives the unpredictable flooding to the Tigris and Euphrates and the steady schedule to the Nile.",
-        "1": "Both notes describe yearly flooding. The difference the map draws is how predictable it was, not whether it happened.",
-        "3": "Then there would be nothing to compare. The map's whole point is that one system's timing could be planned around and the other's could not."
+        "0": "That is the two notes swapped.  The map gives the unpredictable flooding to the Tigris and Euphrates and the steady schedule to the Nile.",
+        "1": "Both notes describe yearly flooding.  The difference the map draws is how predictable it was, not whether it happened.",
+        "3": "Then there would be nothing to compare.  The map's whole point is that one system's timing could be planned around and the other's could not."
       }
     },
     {
@@ -5374,18 +5374,18 @@
       ],
       "coachTopic": "evidence-two-accounts",
       "dok": 3,
-      "stem": "Two places on this map are marked with filled dots and one with an open dashed circle. Why is Salamis drawn differently?",
-      "explain": "The map says why in its own note: Salamis is drawn open because this account treats that sea battle differently. The two filled dots are the places this account credits with the war's real turning points, Thermopylae and Plataea.",
+      "stem": "Two places on this map are marked with filled dots and one with an open dashed circle.  Why is Salamis drawn differently?",
+      "explain": "The map says why in its own note: Salamis is drawn open because this account treats that sea battle differently.  The two filled dots are the places this account credits with the war's real turning points, Thermopylae and Plataea.",
       "choices": [
         "Because nobody knows where Salamis was.",
         "Because this account treats that sea battle differently from the two it credits as turning points.",
-        "Because Salamis was a land battle and the other two were at sea.",
-        "Because Salamis happened long after the other two."
+        "Because Salamis was a land battle on open ground and the other two were fought at sea.",
+        "Because Salamis happened long after the other two, once the war was already over."
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "Its position is marked on the map like the others. What differs is how this account weighs it, not where it sits.",
-        "2": "The map has that backwards. Salamis is the sea battle; Thermopylae is a mountain pass and Plataea is open ground.",
+        "0": "Its position is marked on the map like the others.  What differs is how this account weighs it, not where it sits.",
+        "2": "The map has that backwards.  Salamis is the sea battle; Thermopylae is a mountain pass and Plataea is open ground.",
         "3": "The map says nothing about when Salamis happened relative to the others, and its note is about how this account treats it."
       }
     },
@@ -5463,17 +5463,17 @@
       ],
       "coachTopic": "evidence-two-accounts",
       "dok": 3,
-      "stem": "Case File Zero's map argued that geography decided where a civilization could begin. Looking at that map again, what kind of feature was doing the deciding?",
-      "explain": "The rivers map labels three rivers, two regions and the desert on either side of the Nile. That is the whole vocabulary it uses: water and the land beside it. No city, no road and no port appears on it.",
+      "stem": "Case File Zero's map argued that geography decided where a civilization could begin.  Looking at that map again, what kind of feature was doing the deciding?",
+      "explain": "The rivers map labels three rivers, two regions and the desert on either side of the Nile.  That is the whole vocabulary it uses: water and the land beside it.  No city, no road and no port appears on it.",
       "choices": [
-        "Mountain passes and the ground armies had to cross.",
+        "Mountain passes and the ground armies had to cross to reach them.",
         "Cities and the roads between them.",
-        "Coastlines and the ports along them.",
+        "Coastlines and the ports along them, where ships could land.",
         "Rivers and the land beside them, with deserts flanking one of the valleys."
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "That is the Greece map, not this one. The rivers map marks no passes and no battles.",
+        "0": "That is the Greece map, not this one.  The rivers map marks no passes and no battles.",
         "1": "No city is marked anywhere on the rivers map, and no roads are drawn.",
         "2": "The map traces coastlines because they are geography, but nothing on it is labelled a port and no port is named."
       }
@@ -5489,17 +5489,17 @@
       "coachTopic": "evidence-quiet-record",
       "dok": 2,
       "stem": "Which two cities does this map mark, and what does its note say they had in common?",
-      "explain": "The map marks two cities, Harappa and Mohenjo-daro, and its note says both sat on careful grids, with baked-brick homes linked to covered drains. That planning is the thing the file can still read even though the writing cannot be read.",
+      "explain": "The map marks two cities, Harappa and Mohenjo-daro, and its note says both sat on careful grids, with baked-brick homes linked to covered drains.  That planning is the thing the file can still read even though the writing cannot be read.",
       "choices": [
-        "Harappa and Mohenjo-daro, both built without any drains at all.",
+        "Harappa and Mohenjo-daro, both built around a great stone temple at the center.",
         "Harappa and Nineveh, both on the Indus.",
-        "Harappa and Mohenjo-daro, both laid out on careful grids with baked-brick homes linked to covered drains.",
-        "Mohenjo-daro alone, since Harappa is only named in the note."
+        "Harappa and Mohenjo-daro, both on careful grids with baked-brick homes linked to covered drains.",
+        "Mohenjo-daro alone, since Harappa is only named in the note and is not marked on the map."
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "The cities are right and the note is reversed. It says baked-brick homes linked to covered drains, which is the opposite of no drains.",
-        "1": "Nineveh is not on this map. The two marked cities are Harappa and Mohenjo-daro.",
+        "0": "The cities are right, but the note says nothing about a temple.  It says both were laid out on careful grids, with baked-brick homes linked to covered drains.",
+        "1": "Nineveh is not on this map.  The two marked cities are Harappa and Mohenjo-daro.",
         "3": "Both are marked with dots on the map itself, not only mentioned."
       }
     },
@@ -5668,18 +5668,18 @@
       ],
       "coachTopic": "evidence-what-was-burned",
       "dok": 3,
-      "stem": "The map credits Zhang Qian with opening these links, then adds a qualification. What is it, and why does it matter?",
-      "explain": "The note reads that Zhang Qian is often credited with opening these links, though trade along parts of the route likely came before his trip. A file that keeps that qualification is telling you the credit is real and the beginning is older than the credit.",
+      "stem": "The map credits Zhang Qian with opening these links, then adds a qualification.  What is it, and why does it matter?",
+      "explain": "The note reads that Zhang Qian is often credited with opening these links, though trade along parts of the route likely came before his trip.  A file that keeps that qualification is telling you the credit is real and the beginning is older than the credit.",
       "choices": [
-        "That trade along parts of the route likely came before his trip, so opening is not the same as starting.",
-        "That Zhang Qian never actually made the trip.",
-        "That the routes closed again soon after his trip.",
-        "That no city on the route can be named."
+        "That trade along parts of the route likely came first, so opening is not the same as starting.",
+        "That Zhang Qian never actually made the trip, so the credit belongs to someone else.",
+        "That the routes closed again soon after his trip, once the silk stopped moving west.",
+        "That no city on the route can be named, so the map cannot show where he went."
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "The map says he is often credited with opening the links and does not doubt the journey. What it qualifies is whether trade began with him.",
-        "2": "Nothing on the map says the routes closed. The qualification is about what came before, not after.",
+        "1": "The map says he is often credited with opening the links and does not doubt the journey.  What it qualifies is whether trade began with him.",
+        "2": "Nothing on the map says the routes closed.  The qualification is about what came before, not after.",
         "3": "The map names no city, but that is a separate fact and not the qualification attached to Zhang Qian."
       }
     },
