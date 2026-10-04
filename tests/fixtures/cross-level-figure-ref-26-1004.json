@@ -1,0 +1,594 @@
+{
+ "_about": "I5 controls for tests/sweep-cross-level.js (26-1004).  mustFire:  the case the Phase 1 lens found after every other rule read clean, verbatim.  mustStayClean:  the same item after its fix, and the two near-misses I5 met on its first run over every pack (a drawing noun used as a verb;  an object the item's own passage names).",
+ "source": "packs/*.json, branch ela-figs/cross-level-echo, 26-1004 (outpost item text unchanged since 02a63cf)",
+ "mustFire": [
+  {
+   "note": "Outpost level 6 asks the child to put its own proposals panel together with \"the fledge-rate chart\", which only level 5 shows (fig-warming-curves).",
+   "meta": {
+    "id": "outpost-protocol-g6",
+    "subject": "sci"
+   },
+   "passages": [
+    {
+     "id": "p-toussaint-adaptation-memo",
+     "title": "Analyst's Memo: The Limits of Shifting Earlier",
+     "text": "From Chief Analyst Mireille Toussaint to Network Command.  Subject: what the Halyard Point record actually shows.\n\nWhy the colony nests earlier is settled, and the record answers it plainly.  The question worth Command's time is a different one.  Why did nesting earlier stop helping the chicks?\n\nStart with the date that matters, which is not the day the first eggs appear.  Tern eggs take about twenty-two days to hatch, and a chick eats nothing at all before it hatches.  The useful column is the hatch date, and the record lets us build that column ourselves.  First eggs came on April seventh in the first logged season, so the eggs hatched around April twenty-ninth.  By the tenth season first eggs came on March twenty-seventh, so hatching fell around April eighteenth.  The twentieth season's March eighteenth puts hatching around April ninth.  The thirtieth season's March tenth puts it around April first.\n\nNow set the herring beside that column.  The herring arrival has held near April twenty-first every season, and it has drifted only about three days either way.  In the first logged season the chicks hatched eight days after the herring had already arrived.  By the tenth season the chicks were hatching before the herring got there.  By the thirtieth season they were hatching about three weeks before.\n\nTwo clocks are running here, and they run at different speeds.  The terns read the coastal air, which has warmed quickly over thirty seasons.  The herring read ocean temperature out at sea, and the sea warms slowly.  The mismatch did not start with the fish.  It started with the birds, and the birds are not doing anything wrong.\n\nThat is what an adaptation limit is, and it is worth stating with care.  An animal can shift its timing only as far and as fast as its own cue shifts.  These terns respond just as they are built to respond.  Their cue used to predict the food, and now it does not.  A cue is useful only while the thing it predicts keeps moving with it.\n\nThe fledge column is the receipt.  Seventy-six percent in the first season, sixty-four by the tenth, fifty-two by the twentieth, thirty-nine by the thirtieth.\n\nCommand has asked what recovery would look like.  It would look like the fledge column climbing across several seasons in a row.  One good season is weather rather than recovery, and Command should not be sold one."
+    },
+    {
+     "id": "p-final-deployment-proposals",
+     "title": "Final Deployment: Three Proposals for Halyard Point",
+     "text": "Network Command has approved one field response at Halyard Point.  It targets a gap.  The tern colony's nesting date and the herring's arrival keep drifting apart.  The operative filing the final report must recommend one of three proposals.\n\nCommand set three constraints first.  The response must show a real effect on chick survival.  That effect must appear within one nesting season.  Command will not commit a second season of field budget to a plan.  That plan must show an early result.  Second, the response must cost less than this year's field budget for Halyard Point.  No emergency funding request is allowed.  Third, the response must use only authority the Network already holds.  That authority covers its posts and the land around them.  The Network cannot regulate fishing seasons.  It cannot regulate ocean conditions outside its boundary either.\n\nProposal A calls for a temporary feeding station near the nest sites.  Chicks hatch three weeks before the herring arrive.  The station would stock fish through that exact window.  Setup takes under two weeks.  The cost fits well inside this year's field budget.  The Network runs feeding stations at two other posts.  The authority to run one is not in question.  The effect would end the moment the feeding station stopped.  It treats the survival gap each season rather than closing it.\n\nProposal B calls for fencing around the colony's nest sites.  It would keep ground predators away from eggs and chicks.  The fencing is inexpensive.  It can go up within days.  That fits well inside the time limit Command set.  It fits the cost limit too.  It would likely raise survival among hatched chicks.  Predators are not what this record has shown killing chicks, though.  The record shows chicks starving during the gap.  That gap sits before the herring arrive.  Fencing does nothing to touch that problem.\n\nProposal C calls for the Network to petition the fishery authority.  The petition would ask to delay the herring season's opening.  The delay would run three weeks.  That would time the fish run to arrive when the chicks need it.  If it worked, it would close the mismatch at its root.  It would stop covering for the mismatch every season instead.  The fishery authority does not answer to the Network, though.  No petition has ever been decided in under four months.  That is well past the one-season window Command set.  The outcome does not lie inside the Network's authority.\n\nThe operative's recommendation is due before the next nesting season begins."
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-warming-curves",
+     "caption": "Halyard Point's brindle terns: the fledge rate that measures chick survival falls from 76 percent to 39 percent across thirty nesting seasons.",
+     "alt": "A line chart plots fledge rate in percent against nesting season. The line falls from 76 percent in season 1, to 64 percent in season 10, to 52 percent in season 20, to 39 percent in season 30.",
+     "dataTable": {
+      "type": "line",
+      "xLabel": "season",
+      "yLabel": "fledge rate (percent)",
+      "yDomain": [
+       0,
+       100
+      ],
+      "series": [
+       {
+        "label": "fledge rate",
+        "points": [
+         [
+          1,
+          76
+         ],
+         [
+          10,
+          64
+         ],
+         [
+          20,
+          52
+         ],
+         [
+          30,
+          39
+         ]
+        ]
+       }
+      ],
+      "notes": [
+       "Season 1: chicks hatched about 8 days after the herring arrived.",
+       "Season 30: chicks hatched about 3 weeks before the herring arrived.",
+       "Herring arrival holds near April 21 every season, drifting about 3 days either way."
+      ]
+     }
+    },
+    {
+     "id": "fig-proposals",
+     "caption": "Three proposals for Halyard Point, checked against Command's three tests: an effect within one season, cost within budget, and only the Network's own authority.",
+     "alt": "Three side-by-side cards. Proposal A, a feeding station, passes all three tests but ends when the station stops. Proposal B, fencing, is within budget and quick to build but does not fix starving chicks, since predators are not the cause. Proposal C, a petition to delay the herring season, would close the mismatch at its root but takes over four months, past the one-season window, and lies outside the Network's own authority.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A three-card comparison titled \"Three proposals for Halyard Point\".",
+       "The header states that every proposal is checked against three tests: effect within one season, cost within budget, and the Network’s own authority.",
+       "Proposal A, a feeding station, carries YES on all three: within budget, within authority, and a real effect while it runs. Its card adds that the effect ends when the station stops.",
+       "Proposal B, fencing, carries YES within budget and YES ready in days, and a NO reading \"starving chicks, not predators\". Its card sums it up as fast and cheap, wrong cause.",
+       "Proposal C, a petition to delay the herring season, carries YES it closes the mismatch at its root, NO it takes over four months and so runs past one season, and NO it is outside the Network’s own authority. Its card sums it up as the right fix, wrong timeline and reach.",
+       "Card B shows no verdict for the authority test at all."
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "itemIds": [
+      "l5-vis-what-the-line-does"
+     ]
+    },
+    {
+     "itemIds": [
+      "l6-vis-two-figures-together"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l5-vis-what-the-line-does",
+     "type": "mc",
+     "passageId": "p-toussaint-adaptation-memo",
+     "figureId": "fig-warming-curves",
+     "targets": [
+      "sci-t5-warming-adaptation"
+     ],
+     "coachTopic": "evidence-breaking-point",
+     "dok": 2,
+     "stem": "Read the fledge-rate line across the thirty seasons. What does it do?",
+     "explain": "The line gives four readings: 76 percent at season 1, then 64, then 52, then 39. Every step is lower than the one before, and the last is about half the first rather than close to nothing.",
+     "choices": [
+      "It falls, then recovers a little by season 30.",
+      "It holds steady until about season 20, then drops sharply.",
+      "It drops almost to zero by season 30.",
+      "It falls at every step, from 76 percent down to 39."
+     ],
+     "key": 3,
+     "distractorRationale": {
+      "0": "There is no recovery. The four readings run 76, 64, 52, 39, each lower than the one before.",
+      "1": "It is already down to 64 by season 10 and 52 by season 20. The fall starts immediately.",
+      "2": "It ends at 39 percent, which is a serious fall but nowhere near zero. The axis runs to 100, so the height is easy to read honestly."
+     }
+    },
+    {
+     "id": "l6-vis-two-figures-together",
+     "type": "mc",
+     "passageId": "p-final-deployment-proposals",
+     "figureId": "fig-proposals",
+     "targets": [
+      "sci-t6-design-evaluate"
+     ],
+     "coachTopic": "evidence-final-deployment",
+     "dok": 3,
+     "stem": "The proposals panel tests each plan for an effect within one season. The fledge-rate chart shows a decline measured across thirty seasons. What does putting those two together tell you about Proposal A, the feeding station?",
+     "explain": "Read the two together and the mismatch is in the timescales. The panel measures each proposal by what it does within one season, and records that A's effect ends when the station stops. The chart measures a fall across thirty seasons. A can help while it runs and still leave the long decline untouched.",
+     "choices": [
+      "It solves the decline, because the chart's fall is only about half and a feeding station covers that.",
+      "It fails the budget test, which is why the chart keeps falling.",
+      "It can help while it runs, but a one-season effect does not answer a thirty-season decline.",
+      "The two cannot be compared, because one is a chart and the other is a panel."
+     ],
+     "key": 2,
+     "distractorRationale": {
+      "0": "The panel itself records that A's effect ends when the station stops. Something that stops is not a match for a trend measured across thirty seasons.",
+      "1": "The panel puts A within budget. The chart's fall has nothing to do with what a proposal costs.",
+      "3": "They are measured in the same unit that matters here, time. One tests an effect over a season; the other measures a change over thirty."
+     }
+    }
+   ]
+  }
+ ],
+ "mustStayClean": [
+  {
+   "note": "The same item fixed:  the drift it set against the panel now comes from its own passage.",
+   "meta": {
+    "id": "outpost-protocol-g6",
+    "subject": "sci"
+   },
+   "passages": [
+    {
+     "id": "p-toussaint-adaptation-memo",
+     "title": "Analyst's Memo: The Limits of Shifting Earlier",
+     "text": "From Chief Analyst Mireille Toussaint to Network Command.  Subject: what the Halyard Point record actually shows.\n\nWhy the colony nests earlier is settled, and the record answers it plainly.  The question worth Command's time is a different one.  Why did nesting earlier stop helping the chicks?\n\nStart with the date that matters, which is not the day the first eggs appear.  Tern eggs take about twenty-two days to hatch, and a chick eats nothing at all before it hatches.  The useful column is the hatch date, and the record lets us build that column ourselves.  First eggs came on April seventh in the first logged season, so the eggs hatched around April twenty-ninth.  By the tenth season first eggs came on March twenty-seventh, so hatching fell around April eighteenth.  The twentieth season's March eighteenth puts hatching around April ninth.  The thirtieth season's March tenth puts it around April first.\n\nNow set the herring beside that column.  The herring arrival has held near April twenty-first every season, and it has drifted only about three days either way.  In the first logged season the chicks hatched eight days after the herring had already arrived.  By the tenth season the chicks were hatching before the herring got there.  By the thirtieth season they were hatching about three weeks before.\n\nTwo clocks are running here, and they run at different speeds.  The terns read the coastal air, which has warmed quickly over thirty seasons.  The herring read ocean temperature out at sea, and the sea warms slowly.  The mismatch did not start with the fish.  It started with the birds, and the birds are not doing anything wrong.\n\nThat is what an adaptation limit is, and it is worth stating with care.  An animal can shift its timing only as far and as fast as its own cue shifts.  These terns respond just as they are built to respond.  Their cue used to predict the food, and now it does not.  A cue is useful only while the thing it predicts keeps moving with it.\n\nThe fledge column is the receipt.  Seventy-six percent in the first season, sixty-four by the tenth, fifty-two by the twentieth, thirty-nine by the thirtieth.\n\nCommand has asked what recovery would look like.  It would look like the fledge column climbing across several seasons in a row.  One good season is weather rather than recovery, and Command should not be sold one."
+    },
+    {
+     "id": "p-final-deployment-proposals",
+     "title": "Final Deployment: Three Proposals for Halyard Point",
+     "text": "Network Command has approved one field response at Halyard Point.  It targets a gap.  The tern colony's nesting date and the herring's arrival keep drifting apart.  The operative filing the final report must recommend one of three proposals.\n\nCommand set three constraints first.  The response must show a real effect on chick survival.  That effect must appear within one nesting season.  Command will not commit a second season of field budget to a plan.  That plan must show an early result.  Second, the response must cost less than this year's field budget for Halyard Point.  No emergency funding request is allowed.  Third, the response must use only authority the Network already holds.  That authority covers its posts and the land around them.  The Network cannot regulate fishing seasons.  It cannot regulate ocean conditions outside its boundary either.\n\nProposal A calls for a temporary feeding station near the nest sites.  Chicks hatch three weeks before the herring arrive.  The station would stock fish through that exact window.  Setup takes under two weeks.  The cost fits well inside this year's field budget.  The Network runs feeding stations at two other posts.  The authority to run one is not in question.  The effect would end the moment the feeding station stopped.  It treats the survival gap each season rather than closing it.\n\nProposal B calls for fencing around the colony's nest sites.  It would keep ground predators away from eggs and chicks.  The fencing is inexpensive.  It can go up within days.  That fits well inside the time limit Command set.  It fits the cost limit too.  It would likely raise survival among hatched chicks.  Predators are not what this record has shown killing chicks, though.  The record shows chicks starving during the gap.  That gap sits before the herring arrive.  Fencing does nothing to touch that problem.\n\nProposal C calls for the Network to petition the fishery authority.  The petition would ask to delay the herring season's opening.  The delay would run three weeks.  That would time the fish run to arrive when the chicks need it.  If it worked, it would close the mismatch at its root.  It would stop covering for the mismatch every season instead.  The fishery authority does not answer to the Network, though.  No petition has ever been decided in under four months.  That is well past the one-season window Command set.  The outcome does not lie inside the Network's authority.\n\nThe operative's recommendation is due before the next nesting season begins."
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-warming-curves",
+     "caption": "Halyard Point's brindle terns: the fledge rate that measures chick survival falls from 76 percent to 39 percent across thirty nesting seasons.",
+     "alt": "A line chart plots fledge rate in percent against nesting season. The line falls from 76 percent in season 1, to 64 percent in season 10, to 52 percent in season 20, to 39 percent in season 30.",
+     "dataTable": {
+      "type": "line",
+      "xLabel": "season",
+      "yLabel": "fledge rate (percent)",
+      "yDomain": [
+       0,
+       100
+      ],
+      "series": [
+       {
+        "label": "fledge rate",
+        "points": [
+         [
+          1,
+          76
+         ],
+         [
+          10,
+          64
+         ],
+         [
+          20,
+          52
+         ],
+         [
+          30,
+          39
+         ]
+        ]
+       }
+      ],
+      "notes": [
+       "Season 1: chicks hatched about 8 days after the herring arrived.",
+       "Season 30: chicks hatched about 3 weeks before the herring arrived.",
+       "Herring arrival holds near April 21 every season, drifting about 3 days either way."
+      ]
+     }
+    },
+    {
+     "id": "fig-proposals",
+     "caption": "Three proposals for Halyard Point, checked against Command's three tests: an effect within one season, cost within budget, and only the Network's own authority.",
+     "alt": "Three side-by-side cards. Proposal A, a feeding station, passes all three tests but ends when the station stops. Proposal B, fencing, is within budget and quick to build but does not fix starving chicks, since predators are not the cause. Proposal C, a petition to delay the herring season, would close the mismatch at its root but takes over four months, past the one-season window, and lies outside the Network's own authority.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A three-card comparison titled \"Three proposals for Halyard Point\".",
+       "The header states that every proposal is checked against three tests: effect within one season, cost within budget, and the Network’s own authority.",
+       "Proposal A, a feeding station, carries YES on all three: within budget, within authority, and a real effect while it runs. Its card adds that the effect ends when the station stops.",
+       "Proposal B, fencing, carries YES within budget and YES ready in days, and a NO reading \"starving chicks, not predators\". Its card sums it up as fast and cheap, wrong cause.",
+       "Proposal C, a petition to delay the herring season, carries YES it closes the mismatch at its root, NO it takes over four months and so runs past one season, and NO it is outside the Network’s own authority. Its card sums it up as the right fix, wrong timeline and reach.",
+       "Card B shows no verdict for the authority test at all."
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "itemIds": [
+      "l5-vis-what-the-line-does"
+     ]
+    },
+    {
+     "itemIds": [
+      "l6-vis-two-figures-together"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l5-vis-what-the-line-does",
+     "type": "mc",
+     "passageId": "p-toussaint-adaptation-memo",
+     "figureId": "fig-warming-curves",
+     "targets": [
+      "sci-t5-warming-adaptation"
+     ],
+     "coachTopic": "evidence-breaking-point",
+     "dok": 2,
+     "stem": "Read the fledge-rate line across the thirty seasons. What does it do?",
+     "explain": "The line gives four readings: 76 percent at season 1, then 64, then 52, then 39. Every step is lower than the one before, and the last is about half the first rather than close to nothing.",
+     "choices": [
+      "It falls, then recovers a little by season 30.",
+      "It holds steady until about season 20, then drops sharply.",
+      "It drops almost to zero by season 30.",
+      "It falls at every step, from 76 percent down to 39."
+     ],
+     "key": 3,
+     "distractorRationale": {
+      "0": "There is no recovery. The four readings run 76, 64, 52, 39, each lower than the one before.",
+      "1": "It is already down to 64 by season 10 and 52 by season 20. The fall starts immediately.",
+      "2": "It ends at 39 percent, which is a serious fall but nowhere near zero. The axis runs to 100, so the height is easy to read honestly."
+     }
+    },
+    {
+     "id": "l6-vis-two-figures-together",
+     "type": "mc",
+     "passageId": "p-final-deployment-proposals",
+     "figureId": "fig-proposals",
+     "targets": [
+      "sci-t6-design-evaluate"
+     ],
+     "coachTopic": "evidence-final-deployment",
+     "dok": 3,
+     "stem": "The proposals panel tests each plan for an effect within one season.  The passage says the colony's nesting date and the herring's arrival keep drifting apart.  What does putting those two together tell you about Proposal A, the feeding station?",
+     "explain": "Read the two together and the mismatch is in time.  The panel measures each proposal by what it does within one season, and records that A's effect ends when the station stops.  The passage says the nesting date and the herring's arrival keep drifting apart.  A can help while it runs and still leave that drift untouched.",
+     "choices": [
+      "It ends the drift, because one season of feeding brings the two dates back together",
+      "It fails the budget test, which is why the dates keep drifting apart",
+      "It can help while it runs, but a one-season effect does not stop the drift",
+      "The two cannot be compared, because one is a test and the other is a trend"
+     ],
+     "key": 2,
+     "distractorRationale": {
+      "0": "The panel itself records that A's effect ends when the station stops.  Something that stops is no match for a drift that keeps going.",
+      "1": "The panel puts A within budget.  The drift has nothing to do with what a proposal costs.",
+      "3": "They can be read together on time:  the panel tests a single season, and the passage describes a drift that keeps going."
+     }
+    }
+   ]
+  },
+  {
+   "note": "\"Which source should the team plan around?\":  plan is a verb, not level 2's plan diagram.",
+   "meta": {
+    "id": "ela-g6-spy",
+    "subject": "ela"
+   },
+   "passages": [
+    {
+     "id": "p-dead-air",
+     "title": "Dead Air",
+     "text": "Every team that works underground runs into the same wall, and it has nothing to do with the price of their equipment.  Radio does not travel through rock.  A handheld set pushes a signal out through open air for a mile or more.  Stone and soil and concrete absorb that energy instead and turn it quietly into heat.  Thirty feet of granite will swallow a signal that would have crossed an entire valley above ground.  The deeper a team goes the less of the signal survives, and the fall is far steeper than most people expect.\n\nThe result is called dead air, and it is more dangerous than a quiet radio sounds.  A team below cannot report what it has found or ask for the one tool it forgot.  A crew above cannot pass down a warning about weather, a flooded passage, or a change in the plan.  Worse than either of those, silence is ambiguous, because it can mean several different things at once.  The surface crew has no way to tell whether the team below is busy, out of range, or in serious trouble.  Each of those situations calls for a completely different response.\n\nThe fix is not a more powerful radio, because power was never the problem that the rock created.  The fix is a relay.  A relay is a small transmitter parked where it can hear both sides at once, usually just inside the entrance where the tunnel is still shallow.  The team below reaches the relay, the relay reaches the surface, and no single transmission has to cross the whole distance by itself.  A long tunnel uses several relays in a chain, each one handing the message to the next like runners passing a baton.\n\nRelays fail, so a good team carries a second method that does not depend on them at all.  A hardwired line taped along the wall is heavy, slow to lay, and completely reliable once everything electronic has quit.  Planners call this a redundant system, and the word is not an insult in a tunnel.  A redundant system is one that a team hopes never to need and refuses to leave behind.\n\nThe last piece of the fix is a schedule.  The two crews agree on a fixed interval, usually fifteen minutes, at which the team below stops work and checks in.  That interval turns silence itself into information.  When a check-in is missed the surface crew does not have to guess anymore.  They can verify the time against the schedule and treat the miss as a signal of its own.  A call that does not come at the agreed minute means something has gone wrong, and that is a fact a rescue can actually act on."
+    },
+    {
+     "id": "p-beacon-log",
+     "title": "Source B: Training Log, Team Four",
+     "text": "The text below is an entry from the equipment log kept by the training staff at the Halloway site.  It is dated the fourteenth of March and signed by two instructors, Marchetti and Osei.  The log is written for the staff themselves and is not published anywhere.\n\nTwo beacons of the Wren-7 model were tested over two days in the Halloway service tunnel.  That is the same tunnel named in the maker's brief.  The purpose was to decide whether this site should replace its hardwired line with beacons before the summer exercises.\n\nOn the first run a beacon was carried down to the thirty foot level and switched on at the marked bay.  The surface receiver held the signal for nine minutes and then lost it.  The signal did not come back during the twenty minutes the team waited at that depth.  It returned within four seconds once the beacon was carried up to the twenty foot level.  On the second run the same beacon was carried to the same bay by a different instructor.  That time the receiver lost the signal after seven minutes.\n\nBoth runs were timed with a stopwatch.  Two observers wrote the times down separately, and their times differ by no more than three seconds.  The receiver was the unit supplied with the beacons.  Its battery was replaced before each run.\n\nThe staff note two local conditions that may explain the gap between these results and the maker's claim.  The Halloway tunnel bends sharply at the twenty-five foot level.  A beacon below that bend is not in a straight line with the surface receiver.  The tunnel is also cut through wet limestone rather than dry granite, and the walls are damp along most of their length.  The staff make no claim about how this beacon works in other tunnels.  Two runs in one tunnel is nowhere near enough evidence for a statement that broad.\n\nThe staff recommend that the site keep its hardwired line and treat the beacon as a second method rather than a replacement.  A tool that works for nine minutes is genuinely useful.  A team that has planned around ninety minutes is not.  This entry will be reviewed again after the summer exercises.  Any team that runs its own test is asked to record times, depth, and rock type in this same format."
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l2-dead-air",
+     "caption": "A relay parked just inside the entrance hears the team below and passes the message up to the surface crew, because the deeper a team goes, the less of the signal survives.",
+     "alt": "A plan diagram in two columns: on the left, boxes reading \"the team below\", \"just inside the entrance\" and \"the surface crew\" are joined by arrows pointing upward, so in that column lower means deeper; on the right, arrows run downward from \"thirty feet of granite\", to \"the deeper a team goes\", and on to \"the less of the signal survives\".  No arrow runs across from one column to the other.",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-dead-air",
+      "layout": "plan",
+      "title": "The fix is a relay",
+      "nodes": [
+       {
+        "id": "surface",
+        "label": "the surface crew",
+        "shape": "box",
+        "x": 24,
+        "y": 0
+       },
+       {
+        "id": "relay",
+        "label": "just inside the entrance",
+        "shape": "box",
+        "x": 24,
+        "y": 50
+       },
+       {
+        "id": "below",
+        "label": "the team below",
+        "shape": "box",
+        "x": 24,
+        "y": 100
+       },
+       {
+        "id": "rock",
+        "label": "thirty feet of granite",
+        "shape": "box",
+        "x": 79,
+        "y": 8
+       },
+       {
+        "id": "deeper",
+        "label": "the deeper a team goes",
+        "shape": "box",
+        "x": 79,
+        "y": 45
+       },
+       {
+        "id": "loss",
+        "label": "the less of the signal survives",
+        "shape": "box",
+        "x": 79,
+        "y": 85
+       }
+      ],
+      "edges": [
+       {
+        "from": "below",
+        "to": "relay",
+        "style": "arrow"
+       },
+       {
+        "from": "relay",
+        "to": "surface",
+        "style": "arrow"
+       },
+       {
+        "from": "rock",
+        "to": "deeper",
+        "style": "arrow"
+       },
+       {
+        "from": "deeper",
+        "to": "loss",
+        "style": "arrow"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "itemIds": [
+      "l2-order-relay-chain-path"
+     ]
+    },
+    {
+     "itemIds": [
+      "l4-mc-which-source-for-halloway"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l2-order-relay-chain-path",
+     "type": "order",
+     "passageId": "p-dead-air",
+     "figureId": "fig-l2-dead-air",
+     "figureFact": "just inside the entrance",
+     "targets": [
+      "c1-inf-6-text-structure"
+     ],
+     "coachTopic": "structure-text",
+     "dok": 2,
+     "stem": "In the diagram, arrows join the boxes of the left-hand column, and one of those boxes reads \"just inside the entrance\".  Put the three boxes in the order the message passes through them.",
+     "tiles": [
+      "the surface crew",
+      "just inside the entrance",
+      "the team below"
+     ],
+     "key": [
+      2,
+      1,
+      0
+     ],
+     "explain": "The two arrows in the left-hand column both point up the page, so the message starts at the bottom box and finishes at the top one.  It leaves the team below, is picked up just inside the entrance, and only then reaches the surface crew.  The article says the same thing in words: the team below reaches the relay, the relay reaches the surface.",
+     "whyTheFigureIsNeeded": "The passage gives the relay's place and the order of the hops in words; only the drawing fixes which end of the left-hand column the arrows start from and draws the three as one path."
+    },
+    {
+     "id": "l4-mc-which-source-for-halloway",
+     "type": "mc",
+     "passageId": "p-beacon-log",
+     "targets": [
+      "c4-3-analyze-sources"
+     ],
+     "coachTopic": "research-source-check",
+     "dok": 3,
+     "stem": "A team is deciding what to carry into the Halloway tunnel next week.  The maker's brief promises ninety minutes and this log measured nine.  Which source should the team plan around?",
+     "choices": [
+      "The brief, because ninety minutes is the safer number for a team to plan around.",
+      "The log, because two people timed its runs and it has nothing to sell.",
+      "Neither, because two sources that disagree cancel each other out.",
+      "The brief, because it was written by the engineers who built the beacon."
+     ],
+     "key": 1,
+     "distractorRationale": {
+      "0": "Planning around the bigger number is the opposite of safe.  A team that expects ninety minutes and gets nine is stranded at exactly the moment the plan says everything is fine.",
+      "2": "Two sources that disagree are a reason to look at how each one was made, not a reason to give up.  One of these named its rock type, its date, and two separate timekeepers, and the other named none of them.",
+      "3": "The engineers who built it also sell it, and theirs is the test nobody outside the company watched.  Knowing how a thing was made does not make you the right person to judge it."
+     },
+     "explain": "Both sources tested the same tunnel, which is what makes this decidable rather than a matter of opinion.  The log names its depth, its rock type, its date, and two independent timekeepers; the brief names only a depth, and it sells the beacon.  For a team walking into Halloway, both numbers claim to be about their tunnel, and only the log was timed by two people with nothing to sell."
+    }
+   ]
+  },
+  {
+   "note": "\"smaller than the catalog photograph\" quotes the item's own passage:  the story's object, not level 2's card.",
+   "meta": {
+    "id": "vault-of-ages-g6",
+    "subject": "ela"
+   },
+   "passages": [
+    {
+     "id": "p-threadglass-entry",
+     "title": "Catalog Entry: The Threadglass",
+     "text": "Every object the Archive tracks gets one entry in the master catalog.  The entry is updated each time new information surfaces.  It is never deleted, even after a relic is recovered.  The entry below is the current record for catalog number 114, known informally as the Threadglass.\n\nDescription.  It is a flat disc of pale green glass, four inches across.  One face is etched with a single continuous spiral line that never crosses itself.  The etching is shallow.  It only shows clearly when light crosses the glass at an angle.  Historians believe that was done on purpose, not a flaw in the original casting.  No one has ever measured the spiral exactly the same way twice.  The line has no clear start or end for a ruler to use.\n\nOrigin.  The Threadglass turns up in written records three separate times across roughly two hundred years.  Each mention connects it to a story.  The story is about a path that could not be walked twice by accident.  Each record ties the object loosely to an older legend.  It is about a hero who escaped a builder's maze by following a single unbroken thread.  Archive researchers are careful to note something.  The disc is almost certainly a later tribute to that story, not a prop from the events the story tells.  Glassmaking this fine did not exist when the maze legend is set.\n\nDocumented history.  The disc entered the Ashford family collection in the nineteenth century.  It passed to a regional museum by gift.  It was moved twice more between institutions.  A formal count in the 1970s confirmed it was present and secure.  A second count, taken eleven years later, could not find it.  No theft was ever reported to any police record the Archive has found.  The gap between those two counts is the single largest question mark in this entry.\n\nCurrent status.  Archive field work places the Threadglass in a private collection as of last spring.  The lead comes from an insurance filing.  It describes an object that matches this entry in exact size.  The filer's name is blacked out in the copy the Archive obtained.  This entry will be updated again once the object's status changes.  A note will explain how the Archive came to know it changed."
+    },
+    {
+     "id": "p-frostbank-vault",
+     "title": "The Frostbank Vault",
+     "text": "Frostbank Storage keeps its lowest floor at a temperature the brochure calls archival.  Mila calls it simply cold.  It is the kind of cold that finds the gap between a coat's top button and a scarf within the first ten seconds, and settles there like it has been invited.  She has been inside four minutes.  She has already stopped noticing the cold as cold, and started noticing it as a sound: a low mechanical hum, filling the corridor the way silence fills a held breath.\n\nHer cover today is thinner than Theo's ever get: a badge borrowed from a records-transfer service.  It is good for exactly one door, before someone checks a list she is not on.  She has counted eleven doors already.  The twelfth is the one that matters.  It sits at the end of a corridor so featureless that the ceiling lights seem to recede toward it, like the narrowing end of a tunnel.  Each light is slightly dimmer than the last.  Mila genuinely cannot decide whether that is by design, or a trick of the cold.\n\nThe vault door itself is unremarkable: a slab of pale metal, with a single reader panel.  Mila finds that disappointing, in a way she was not expecting.  A room this deliberately built to feel like the edge of the world, she thinks, owed her something more dramatic at the actual edge.  The badge reads green.  The door releases with a sound less like an opening and more like something exhaling, a long low breath of air that had clearly been sealed in for longer than eleven minutes could explain.\n\nInside, the Wyrdstone sits alone on a raised shelf, under a single cone of light.  The rest of the room falls away into a darkness so complete that Mila cannot see the far wall.  She can only sense it, the way you sense a person standing just behind you before you turn around.  The stone itself looks smaller than the catalog photograph suggested, almost disappointingly plain, a grey oval that could be mistaken for nothing more than a stone someone picked up on a beach and never put down.  She does not touch it.  Her job today is only to confirm it is here.  She notes, for whoever comes back to actually take it, that the room's only camera sits directly above the shelf.  It points straight down, blind to everything but the four square feet it was built to watch.\n\nWalking back out through the twelve doors, Mila counts them again in reverse.  She notices, for the first time, that the corridor felt longer walking in than it does walking out.  A held breath always feels longer than the exhale that finally lets it go."
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l2-threadglass",
+     "caption": "The entry is updated each time new information surfaces, its largest question mark is the gap between two counts eleven years apart, and the filer's name is blacked out.",
+     "alt": "A case-file index card titled the Threadglass, with catalog number 114 at the top, then two underlined section headings.  Under the first, \"Documented history.\", the gap between the entry's two counts is named as its largest question mark.  Under the second, \"Current status.\", a line reading \"in a private collection\" sits above a blacked-out bar where the filer's name would be.",
+     "dataTable": {
+      "type": "facsimile",
+      "sourcePassageId": "p-threadglass-entry",
+      "docKind": "case-file",
+      "title": "the Threadglass",
+      "header": [
+       {
+        "label": "catalog number",
+        "value": "114"
+       }
+      ],
+      "lines": [
+       {
+        "text": "Documented history.",
+        "emphasis": "underline"
+       },
+       {
+        "text": "The gap between those two counts is the"
+       },
+       {
+        "text": "single largest question mark in this entry."
+       },
+       {
+        "text": "Current status.",
+        "emphasis": "underline"
+       },
+       {
+        "text": "in a private collection"
+       },
+       {
+        "text": "",
+        "emphasis": "redact"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "itemIds": [
+      "l2-cloze-threadglass-card-headings"
+     ]
+    },
+    {
+     "itemIds": [
+      "l5-ms-figurative-sensations"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l2-cloze-threadglass-card-headings",
+     "type": "cloze",
+     "passageId": "p-threadglass-entry",
+     "figureId": "fig-l2-threadglass",
+     "figureFact": "in a private collection",
+     "targets": [
+      "c1-inf-6-text-structure"
+     ],
+     "coachTopic": "structure-text",
+     "dok": 2,
+     "stem": "Finish the description of the card.  Under one of its two headings, the card prints the words \"in a private collection\".  That heading reads {{0}}.  The card's other heading reads {{1}}, and the words under it name the entry's single largest question mark.",
+     "blanks": [
+      {
+       "choices": [
+        "Documented history",
+        "Current status",
+        "Description"
+       ],
+       "key": 1
+      },
+      {
+       "choices": [
+        "Documented history",
+        "Origin",
+        "Description"
+       ],
+       "key": 0
+      }
+     ],
+     "explain": "The card prints two of the entry's headings.  The words calling the eleven-year gap the entry's single largest question mark sit under the heading Documented history.  Under the heading Current status, the card prints the words \"in a private collection\", and the blacked-out bar sits just below them.  The card keeps where the disc is now in one section and what the Archive still cannot explain in the other.",
+     "whyTheFigureIsNeeded": "The entry runs four headed sections and the card prints two of them, and it sets the blacked-out bar directly under the private-collection line, so the card shows which of the entry's four headings it chose to keep and what it put beneath each one.",
+     "svgRead": "In fig-l2-threadglass.svg there are two underline rules, at y 184.5 under the text Documented history. at y 176 and at y 280.5 under the text Current status. at y 272.  The text in a private collection sits at y 304 and the solid bar carrying data-emphasis redact is drawn at y 316 to 340, below it."
+    },
+    {
+     "id": "l5-ms-figurative-sensations",
+     "type": "ms",
+     "passageId": "p-frostbank-vault",
+     "targets": [
+      "c1-lit-3-word-meanings"
+     ],
+     "coachTopic": "vocab-figurative",
+     "dok": 3,
+     "stem": "Select the three figurative comparisons the passage uses to describe sensations Mila experiences in the vault.",
+     "choices": [
+      "The camera pointing straight down at the shelf.",
+      "The ceiling lights receding like the narrowing end of a tunnel.",
+      "Sensing the dark far wall the way you sense a person standing just behind you.",
+      "The badge being good for exactly one door.",
+      "The cold settling like it has been invited.",
+      "The stone looking smaller than the catalog photograph."
+     ],
+     "key": [
+      1,
+      2,
+      4
+     ],
+     "distractorRationale": {
+      "0": "This describes the camera's actual physical position and angle. It is a literal detail, not a comparison.",
+      "3": "This is a literal, practical fact about how the cover badge works. It is not a figurative comparison.",
+      "5": "This compares the stone's size to a photograph in a direct, literal way, not through a figurative image like the others."
+     },
+     "explain": "Three moments use figurative comparison to convey a feeling rather than a plain fact: the cold behaving like an invited guest, the lights behaving like a narrowing tunnel, and the darkness sensed the way a person behind you is sensed. The badge, the camera angle, and the stone's size are stated as plain, literal facts."
+    }
+   ]
+  }
+ ]
+}

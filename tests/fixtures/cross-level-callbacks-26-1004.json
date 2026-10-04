@@ -1,0 +1,2000 @@
+{
+ "_about": "Real callback questions from 02a63cf, the positive controls of rule I4 in tests/sweep-cross-level.js, and one same-level reference that must stay clean.  Each case is a mini pack:  the item verbatim, its own passage in full, and a title-only stub for every other level's passage.  Never edit these to make the gate pass.",
+ "source": "packs/*.json @ 02a63cf",
+ "mustFire": [
+  {
+   "note": "Vault L6 cites the level-1 story by its title, in quotes:  \"Two Empty Chairs\".",
+   "meta": {
+    "id": "vault-of-ages-g6",
+    "subject": "ela"
+   },
+   "passages": [
+    {
+     "id": "p-vault-of-ages",
+     "title": "The Vault of Ages",
+     "genre": "literary",
+     "docKind": "recovered-entry",
+     "register": "FIELD NOTE",
+     "source": "original",
+     "text": "Finch told us on the first day that the Archive goes deeper than the last hundred people who walked past it ever guessed.  I spent months assuming that was the kind of thing trainers say to sound impressive.  Now I am standing at the bottom of a staircase that should not exist, under a library that closed two winters ago.  I am looking at a door with no handle and no keyhole, only a spiral etched into its center.  It matches the pattern on a piece of glass I once delivered in a picture-frame box.  I am revising that assumption completely.\n\nKade found this door before we did.  That is the only reason any of us are standing here at eleven at night, instead of asleep in our own beds.  Three relics were taken, from three different collections, over three different decades.  Finch says every one of them was never really the target.  Each one was a key, cut to fit a different notch in a lock built to need all three at once.  Kade spent years collecting keys, without ever telling herself, or anyone else, what door they were for.  We only worked that out because Mila noticed the same spiral, scaled three different ways, on three objects that supposedly had nothing to do with each other.\n\nDash sets the Wyrdstone into the leftmost notch first.  Dash always wants to be the one who finds out what happens next.  For one long second, nothing happens at all.  That is somehow worse than something happening badly would have been.  Then the spiral on the door catches a thread of light, from somewhere inside it that was clearly never powered by anything as ordinary as electricity.  I stop breathing, the way I stopped breathing outside Frostbank.  Except this time there is no radio to click twice and tell me it is fine.\n\nMila sets the seal into the center notch.  She reads the tool marks on its underside one more time, like she is checking a signature.  It is the same care she has given every piece of evidence, since the day she counted two empty chairs and decided the question that actually mattered was the one nobody had answered yet.  I set the Threadglass last, into the notch on the right.  The whole door goes quiet, in a way that is somehow louder than the sound it was making a second ago.\n\nThe door does not open like a door.  It opens like a held breath finally let go.  What is on the other side is not gold, or gods, or anything a story would have promised us.  It is shelves, ordinary as any library's, holding centuries of objects that people once loved enough to hide.  Kade is not standing among them.  It turns out Kade spent years finding the keys and never noticed the three of us slip past her, at the door she thought she alone knew how to open.  Finch always said noticing was the only qualification that ever mattered here.  I am standing in a room that should not exist, holding nothing but a working radio and the exact right kind of luck.  I finally understand that she meant it as a warning as much as a compliment.",
+     "figureIds": [
+      "fig-l6-vault-of-ages"
+     ]
+    },
+    {
+     "id": "p-card-under-door",
+     "title": "The Card Under the Door",
+     "text": ""
+    },
+    {
+     "id": "p-two-empty-chairs",
+     "title": "Two Empty Chairs",
+     "text": ""
+    },
+    {
+     "id": "p-threadglass-entry",
+     "title": "Catalog Entry: The Threadglass",
+     "text": ""
+    },
+    {
+     "id": "p-wyrdstone-entry",
+     "title": "Catalog Entry: The Wyrdstone",
+     "text": ""
+    },
+    {
+     "id": "p-three-realms-below",
+     "title": "Three Realms Below",
+     "text": ""
+    },
+    {
+     "id": "p-kade-collection",
+     "title": "The Kade Collection",
+     "text": ""
+    },
+    {
+     "id": "p-two-exits-one-elevator",
+     "title": "Two Exits, One Elevator",
+     "text": ""
+    },
+    {
+     "id": "p-three-seconds",
+     "title": "Three Seconds",
+     "text": ""
+    },
+    {
+     "id": "p-temple-chronicle",
+     "title": "Source A: The Temple Chronicle",
+     "text": ""
+    },
+    {
+     "id": "p-reckoners-ledger",
+     "title": "Source B: The Reckoner's Ledger",
+     "text": ""
+    },
+    {
+     "id": "p-what-the-archive-believes",
+     "title": "What the Archive Believes",
+     "text": ""
+    },
+    {
+     "id": "p-frostbank-vault",
+     "title": "The Frostbank Vault",
+     "text": ""
+    },
+    {
+     "id": "p-no-hurry-at-all",
+     "title": "No Hurry At All",
+     "text": ""
+    },
+    {
+     "id": "p-weight-of-a-thread",
+     "title": "The Weight of a Thread",
+     "text": ""
+    }
+   ],
+   "figures": [],
+   "levels": [
+    {
+     "itemIds": [
+      "stub-p-card-under-door",
+      "stub-p-two-empty-chairs"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-threadglass-entry",
+      "stub-p-wyrdstone-entry",
+      "stub-p-three-realms-below"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-kade-collection",
+      "stub-p-two-exits-one-elevator",
+      "stub-p-three-seconds"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-temple-chronicle",
+      "stub-p-reckoners-ledger",
+      "stub-p-what-the-archive-believes"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-frostbank-vault",
+      "stub-p-no-hurry-at-all",
+      "stub-p-weight-of-a-thread"
+     ]
+    },
+    {
+     "itemIds": [
+      "l6-mc-mila-instinct-summary"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l6-mc-mila-instinct-summary",
+     "type": "mc",
+     "passageId": "p-vault-of-ages",
+     "targets": [
+      "c1-lit-2-central-ideas"
+     ],
+     "coachTopic": "central-theme",
+     "dok": 3,
+     "stem": "What do Mila's introduction in \"Two Empty Chairs\" and her role in the final vault have in common?",
+     "choices": [
+      "In both scenes, she openly distrusts Theo and refuses to work closely with him or Dash.",
+      "In both scenes, she refuses to speak until someone else speaks first.",
+      "In both scenes, she is the last member of the crew to arrive.",
+      "In both scenes, she notices an absence or a gap before anyone else has explained it."
+     ],
+     "key": 3,
+     "distractorRationale": {
+      "0": "Mila works closely and trustingly alongside Theo and Dash in both scenes.  Nothing suggests open distrust between them.",
+      "1": "Nothing in either scene shows Mila refusing to speak.  In the chairs scene she asks the question she actually cares about, and in the vault scene the narrator reports what she noticed, not who spoke first.",
+      "2": "In the chairs scene Mila is already seated when Theo and Dash arrive; she is not the last to arrive in either scene."
+     },
+     "explain": "In her very first scene, Mila counts two empty chairs before Finch says a word.  In the final vault, she is again the first to spot a pattern the rest of the crew had missed.  Both times she catches a gap or a link before anyone has explained it."
+    },
+    {
+     "id": "stub-p-card-under-door",
+     "type": "mc",
+     "passageId": "p-card-under-door",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-two-empty-chairs",
+     "type": "mc",
+     "passageId": "p-two-empty-chairs",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-threadglass-entry",
+     "type": "mc",
+     "passageId": "p-threadglass-entry",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-wyrdstone-entry",
+     "type": "mc",
+     "passageId": "p-wyrdstone-entry",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-three-realms-below",
+     "type": "mc",
+     "passageId": "p-three-realms-below",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-kade-collection",
+     "type": "mc",
+     "passageId": "p-kade-collection",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-two-exits-one-elevator",
+     "type": "mc",
+     "passageId": "p-two-exits-one-elevator",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-three-seconds",
+     "type": "mc",
+     "passageId": "p-three-seconds",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-temple-chronicle",
+     "type": "mc",
+     "passageId": "p-temple-chronicle",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-reckoners-ledger",
+     "type": "mc",
+     "passageId": "p-reckoners-ledger",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-what-the-archive-believes",
+     "type": "mc",
+     "passageId": "p-what-the-archive-believes",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-frostbank-vault",
+     "type": "mc",
+     "passageId": "p-frostbank-vault",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-no-hurry-at-all",
+     "type": "mc",
+     "passageId": "p-no-hurry-at-all",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-weight-of-a-thread",
+     "type": "mc",
+     "passageId": "p-weight-of-a-thread",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    }
+   ]
+  },
+  {
+   "note": "Vault L6 asks where else in the story an image appeared (the answer is level 5's Frostbank).",
+   "meta": {
+    "id": "vault-of-ages-g6",
+    "subject": "ela"
+   },
+   "passages": [
+    {
+     "id": "p-vault-of-ages",
+     "title": "The Vault of Ages",
+     "genre": "literary",
+     "docKind": "recovered-entry",
+     "register": "FIELD NOTE",
+     "source": "original",
+     "text": "Finch told us on the first day that the Archive goes deeper than the last hundred people who walked past it ever guessed.  I spent months assuming that was the kind of thing trainers say to sound impressive.  Now I am standing at the bottom of a staircase that should not exist, under a library that closed two winters ago.  I am looking at a door with no handle and no keyhole, only a spiral etched into its center.  It matches the pattern on a piece of glass I once delivered in a picture-frame box.  I am revising that assumption completely.\n\nKade found this door before we did.  That is the only reason any of us are standing here at eleven at night, instead of asleep in our own beds.  Three relics were taken, from three different collections, over three different decades.  Finch says every one of them was never really the target.  Each one was a key, cut to fit a different notch in a lock built to need all three at once.  Kade spent years collecting keys, without ever telling herself, or anyone else, what door they were for.  We only worked that out because Mila noticed the same spiral, scaled three different ways, on three objects that supposedly had nothing to do with each other.\n\nDash sets the Wyrdstone into the leftmost notch first.  Dash always wants to be the one who finds out what happens next.  For one long second, nothing happens at all.  That is somehow worse than something happening badly would have been.  Then the spiral on the door catches a thread of light, from somewhere inside it that was clearly never powered by anything as ordinary as electricity.  I stop breathing, the way I stopped breathing outside Frostbank.  Except this time there is no radio to click twice and tell me it is fine.\n\nMila sets the seal into the center notch.  She reads the tool marks on its underside one more time, like she is checking a signature.  It is the same care she has given every piece of evidence, since the day she counted two empty chairs and decided the question that actually mattered was the one nobody had answered yet.  I set the Threadglass last, into the notch on the right.  The whole door goes quiet, in a way that is somehow louder than the sound it was making a second ago.\n\nThe door does not open like a door.  It opens like a held breath finally let go.  What is on the other side is not gold, or gods, or anything a story would have promised us.  It is shelves, ordinary as any library's, holding centuries of objects that people once loved enough to hide.  Kade is not standing among them.  It turns out Kade spent years finding the keys and never noticed the three of us slip past her, at the door she thought she alone knew how to open.  Finch always said noticing was the only qualification that ever mattered here.  I am standing in a room that should not exist, holding nothing but a working radio and the exact right kind of luck.  I finally understand that she meant it as a warning as much as a compliment.",
+     "figureIds": [
+      "fig-l6-vault-of-ages"
+     ]
+    },
+    {
+     "id": "p-card-under-door",
+     "title": "The Card Under the Door",
+     "text": ""
+    },
+    {
+     "id": "p-two-empty-chairs",
+     "title": "Two Empty Chairs",
+     "text": ""
+    },
+    {
+     "id": "p-threadglass-entry",
+     "title": "Catalog Entry: The Threadglass",
+     "text": ""
+    },
+    {
+     "id": "p-wyrdstone-entry",
+     "title": "Catalog Entry: The Wyrdstone",
+     "text": ""
+    },
+    {
+     "id": "p-three-realms-below",
+     "title": "Three Realms Below",
+     "text": ""
+    },
+    {
+     "id": "p-kade-collection",
+     "title": "The Kade Collection",
+     "text": ""
+    },
+    {
+     "id": "p-two-exits-one-elevator",
+     "title": "Two Exits, One Elevator",
+     "text": ""
+    },
+    {
+     "id": "p-three-seconds",
+     "title": "Three Seconds",
+     "text": ""
+    },
+    {
+     "id": "p-temple-chronicle",
+     "title": "Source A: The Temple Chronicle",
+     "text": ""
+    },
+    {
+     "id": "p-reckoners-ledger",
+     "title": "Source B: The Reckoner's Ledger",
+     "text": ""
+    },
+    {
+     "id": "p-what-the-archive-believes",
+     "title": "What the Archive Believes",
+     "text": ""
+    },
+    {
+     "id": "p-frostbank-vault",
+     "title": "The Frostbank Vault",
+     "text": ""
+    },
+    {
+     "id": "p-no-hurry-at-all",
+     "title": "No Hurry At All",
+     "text": ""
+    },
+    {
+     "id": "p-weight-of-a-thread",
+     "title": "The Weight of a Thread",
+     "text": ""
+    }
+   ],
+   "figures": [],
+   "levels": [
+    {
+     "itemIds": [
+      "stub-p-card-under-door",
+      "stub-p-two-empty-chairs"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-threadglass-entry",
+      "stub-p-wyrdstone-entry",
+      "stub-p-three-realms-below"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-kade-collection",
+      "stub-p-two-exits-one-elevator",
+      "stub-p-three-seconds"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-temple-chronicle",
+      "stub-p-reckoners-ledger",
+      "stub-p-what-the-archive-believes"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-frostbank-vault",
+      "stub-p-no-hurry-at-all",
+      "stub-p-weight-of-a-thread"
+     ]
+    },
+    {
+     "itemIds": [
+      "l6-mc-figurative-echo-held-breath"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l6-mc-figurative-echo-held-breath",
+     "type": "mc",
+     "passageId": "p-vault-of-ages",
+     "targets": [
+      "c1-lit-2-central-ideas"
+     ],
+     "coachTopic": "central-theme",
+     "dok": 4,
+     "stem": "The final vault door \"opens like a held breath finally let go.\"  Where else in the story does a held-breath comparison appear, and what does the echo suggest?",
+     "choices": [
+      "The phrase never appears anywhere else in the story, so the image is brand new at the final door.",
+      "The same image described the Frostbank corridor, tying the tension the crew has carried across separate jobs into one final release.",
+      "It echoes something Kade once says about her own private collection, the gallery where she keeps the Threadglass.",
+      "It describes only Theo's personal fear of small, enclosed spaces, like the staircase under the closed library."
+     ],
+     "key": 1,
+     "distractorRationale": {
+      "0": "The held-breath image appears earlier, describing the Frostbank corridor's own tense hum, which directly contradicts the claim that the phrase never appears again.",
+      "2": "Kade never uses this comparison.  It first describes the corridor Mila walks through at Frostbank, and it returns in the narrator's voice at the final vault.",
+      "3": "The comparison describes the setting and the mood of the corridor, not a specific fear belonging to Theo alone."
+     },
+     "explain": "The same held-breath image first described the tense hum filling the Frostbank corridor, and its return at the final door ties together the tension the crew has carried across separate, earlier jobs into one last release, rather than introducing a brand-new comparison."
+    },
+    {
+     "id": "stub-p-card-under-door",
+     "type": "mc",
+     "passageId": "p-card-under-door",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-two-empty-chairs",
+     "type": "mc",
+     "passageId": "p-two-empty-chairs",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-threadglass-entry",
+     "type": "mc",
+     "passageId": "p-threadglass-entry",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-wyrdstone-entry",
+     "type": "mc",
+     "passageId": "p-wyrdstone-entry",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-three-realms-below",
+     "type": "mc",
+     "passageId": "p-three-realms-below",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-kade-collection",
+     "type": "mc",
+     "passageId": "p-kade-collection",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-two-exits-one-elevator",
+     "type": "mc",
+     "passageId": "p-two-exits-one-elevator",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-three-seconds",
+     "type": "mc",
+     "passageId": "p-three-seconds",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-temple-chronicle",
+     "type": "mc",
+     "passageId": "p-temple-chronicle",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-reckoners-ledger",
+     "type": "mc",
+     "passageId": "p-reckoners-ledger",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-what-the-archive-believes",
+     "type": "mc",
+     "passageId": "p-what-the-archive-believes",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-frostbank-vault",
+     "type": "mc",
+     "passageId": "p-frostbank-vault",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-no-hurry-at-all",
+     "type": "mc",
+     "passageId": "p-no-hurry-at-all",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-weight-of-a-thread",
+     "type": "mc",
+     "passageId": "p-weight-of-a-thread",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    }
+   ]
+  },
+  {
+   "note": "Firsthand L6 points at a civilization studied earlier in this record.",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "passages": [
+    {
+     "id": "p-t6-closing-the-file",
+     "title": "Case File: Closing the File on Rome",
+     "genre": "informational",
+     "docKind": "case-file",
+     "figureIds": [
+      "fig-rome-plate",
+      "fig-roman-bust"
+     ],
+     "source": "original",
+     "text": "This is the last entry in the whole case file.  It closes in a different way than every entry before it.  Rome does not open a new puzzle.  It answers back into every puzzle this file has already opened.\n\nRome began as a kingdom, then threw out its own king and became a republic instead.  Two elected consuls led it, along with a council called the Senate.  For years afterward, rich patrician families held nearly all the real power.  Plain plebeian citizens fought for a bigger share of it.  That fight in time produced the Twelve Tables, Rome's first written law code.  The code was posted in public so that every citizen, patrician or plebeian, could actually see the same laws applied to all, even though rank still shaped much of Roman life.  Compare that to Hammurabi's own code, filed at the very start of this record.  Its finished laws still punished the same crime in different ways, depending on who the victim was.\n\nRome's spot on a sea-facing peninsula pushed it steadily outward.  Rome fought the rival city of Carthage across three long wars and won.  Rome then held most of the Mediterranean coast.  A road web linked it all, moving troops and officials fast across huge distances.\n\nThe republic itself could not survive its own success.  A general named Julius Caesar seized power by force.  Senators feared he wished to rule as a king, and they killed him.  More years of civil war came next.  His adopted heir, Octavian, rose as Rome's first emperor, taking the name Augustus.  A republic without a king had lasted nearly five hundred years before an empire took its place.\n\nRome gave out citizenship widely across its conquered lands, a reach that went far past Athens and its own narrow assembly.  Athens had let its citizens vote right on the city's own laws, years earlier.  Rome also matched many of its own gods to Greek ones, treating each pair as one god under two names.  Rome took in Greek philosophy too.  The file that opened with a river and a code of law now closes with an empire, one built from nearly every civilization this record has ever checked."
+    },
+    {
+     "id": "p-t1-first-entry-briefing",
+     "title": "Case File Zero: Before the First City",
+     "text": ""
+    },
+    {
+     "id": "p-t1-hammurabi-recovered-entry",
+     "title": "Recovered Entry: The Code of Hammurabi",
+     "text": ""
+    },
+    {
+     "id": "p-t1-nile-two-kingdoms",
+     "title": "Case File: Two Kingdoms of the Nile",
+     "text": ""
+    },
+    {
+     "id": "p-t2-covenant-and-kingdom",
+     "title": "Case File: A Covenant Without a Kingdom Yet",
+     "text": ""
+    },
+    {
+     "id": "p-t2-surviving-without-temple",
+     "title": "Case File: The Shortest File Outlasts Its Own Temple",
+     "text": ""
+    },
+    {
+     "id": "p-t3-source-a-athenian",
+     "title": "Source A: The Athenian Account, Filed by the Aegean Desk",
+     "text": ""
+    },
+    {
+     "id": "p-t3-source-b-spartan",
+     "title": "Source B: The Spartan-Leaning Account, Filed by the Peloponnese Desk",
+     "text": ""
+    },
+    {
+     "id": "p-t4-quiet-record-indus",
+     "title": "Case File: The Quiet Record of the Indus",
+     "text": ""
+    },
+    {
+     "id": "p-t4-dharma-buddha-ashoka",
+     "title": "Case File: Dharma, the Buddha, and an Emperor's Change of Heart",
+     "text": ""
+    },
+    {
+     "id": "p-t5-two-schools-one-emperor",
+     "title": "Case File: Two Schools of Thought, One Unifying Emperor",
+     "text": ""
+    },
+    {
+     "id": "p-t5-han-and-the-road",
+     "title": "Case File: The Han Restoration and the Long Road West",
+     "text": ""
+    },
+    {
+     "id": "p-t1-clay-and-the-first-empires",
+     "title": "Recovered Entry: What the Clay Kept",
+     "text": ""
+    },
+    {
+     "id": "p-t2-kingdom-divided",
+     "title": "Case File: The Kingdom That Split in Two",
+     "text": ""
+    },
+    {
+     "id": "p-t3-gods-of-the-everyday",
+     "title": "Case File: The Gods of the Everyday",
+     "text": ""
+    },
+    {
+     "id": "p-t3-one-witness-long-war",
+     "title": "Case File: One Witness, One Long War",
+     "text": ""
+    },
+    {
+     "id": "p-t4-visitor-and-the-traveling-number",
+     "title": "Case File: A Visitor's Notes and a Number That Traveled",
+     "text": ""
+    },
+    {
+     "id": "p-t5-third-school-and-the-paper",
+     "title": "Recovered Entry: The Third School, and the Paper That Followed",
+     "text": ""
+    }
+   ],
+   "figures": [],
+   "levels": [
+    {
+     "itemIds": [
+      "stub-p-t1-first-entry-briefing",
+      "stub-p-t1-hammurabi-recovered-entry",
+      "stub-p-t1-nile-two-kingdoms",
+      "stub-p-t1-clay-and-the-first-empires"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-t2-covenant-and-kingdom",
+      "stub-p-t2-surviving-without-temple",
+      "stub-p-t2-kingdom-divided"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-t3-source-a-athenian",
+      "stub-p-t3-source-b-spartan",
+      "stub-p-t3-gods-of-the-everyday",
+      "stub-p-t3-one-witness-long-war"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-t4-quiet-record-indus",
+      "stub-p-t4-dharma-buddha-ashoka",
+      "stub-p-t5-han-and-the-road",
+      "stub-p-t4-visitor-and-the-traveling-number"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-t5-two-schools-one-emperor",
+      "stub-p-t5-third-school-and-the-paper"
+     ]
+    },
+    {
+     "itemIds": [
+      "t6-hot-rome-absorbs-greece"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "t6-hot-rome-absorbs-greece",
+     "type": "hottext",
+     "passageId": "p-t6-closing-the-file",
+     "targets": [
+      "hist-t6-rome"
+     ],
+     "coachTopic": "evidence-closing-the-file",
+     "dok": 2,
+     "mode": "sentence",
+     "stem": "Tap the two sentences that show Rome absorbing ideas directly from a civilization studied earlier in this record.",
+     "spans": [
+      "Rome fought the rival city of Carthage across three long wars and won.",
+      "A road web linked it all, moving troops and officials fast across huge distances.",
+      "More years of civil war came next.",
+      "Rome also matched many of its own gods to Greek ones, treating each pair as one god under two names.",
+      "Rome took in Greek philosophy too."
+     ],
+     "key": [
+      3,
+      4
+     ],
+     "explain": "Closing the file, Rome is shown matching many of its own gods to Greek ones, treating each pair as one god under two names, and taking in Greek philosophy too, both direct callbacks to the civilization studied in an earlier case file.  The other three sentences stay inside Rome's own story, and none of them is an idea absorbed from an earlier civilization."
+    },
+    {
+     "id": "stub-p-t1-first-entry-briefing",
+     "type": "mc",
+     "passageId": "p-t1-first-entry-briefing",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t1-hammurabi-recovered-entry",
+     "type": "mc",
+     "passageId": "p-t1-hammurabi-recovered-entry",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t1-nile-two-kingdoms",
+     "type": "mc",
+     "passageId": "p-t1-nile-two-kingdoms",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t2-covenant-and-kingdom",
+     "type": "mc",
+     "passageId": "p-t2-covenant-and-kingdom",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t2-surviving-without-temple",
+     "type": "mc",
+     "passageId": "p-t2-surviving-without-temple",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t3-source-a-athenian",
+     "type": "mc",
+     "passageId": "p-t3-source-a-athenian",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t3-source-b-spartan",
+     "type": "mc",
+     "passageId": "p-t3-source-b-spartan",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t4-quiet-record-indus",
+     "type": "mc",
+     "passageId": "p-t4-quiet-record-indus",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t4-dharma-buddha-ashoka",
+     "type": "mc",
+     "passageId": "p-t4-dharma-buddha-ashoka",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t5-two-schools-one-emperor",
+     "type": "mc",
+     "passageId": "p-t5-two-schools-one-emperor",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t5-han-and-the-road",
+     "type": "mc",
+     "passageId": "p-t5-han-and-the-road",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t1-clay-and-the-first-empires",
+     "type": "mc",
+     "passageId": "p-t1-clay-and-the-first-empires",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t2-kingdom-divided",
+     "type": "mc",
+     "passageId": "p-t2-kingdom-divided",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t3-gods-of-the-everyday",
+     "type": "mc",
+     "passageId": "p-t3-gods-of-the-everyday",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t3-one-witness-long-war",
+     "type": "mc",
+     "passageId": "p-t3-one-witness-long-war",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t4-visitor-and-the-traveling-number",
+     "type": "mc",
+     "passageId": "p-t4-visitor-and-the-traveling-number",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t5-third-school-and-the-paper",
+     "type": "mc",
+     "passageId": "p-t5-third-school-and-the-paper",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    }
+   ]
+  },
+  {
+   "note": "Cold Signal L5 asks about the level-4 Halloway training log by name.",
+   "meta": {
+    "id": "ela-g6-spy",
+    "subject": "ela"
+   },
+   "passages": [
+    {
+     "id": "p-three-tunnels",
+     "title": "Three Tunnels, Three Answers",
+     "genre": "informational",
+     "docKind": "memo",
+     "register": "COMPARISON · THREE TUNNELS",
+     "source": "original",
+     "text": "A rescue training association ran the same beacon test in three different tunnels last spring.  It published all three results side by side, which turns out to be far more useful than any one of them alone.\n\nThe first tunnel was cut through dry granite and ran almost straight for two hundred feet.  A beacon at the forty foot level held its signal for the full life of the battery.  The receiver at the entrance never lost it once.  The second tunnel was wet limestone with a sharp bend at twenty-five feet.  A beacon at the thirty foot level lost contact there after eight minutes.  That is close to what the training staff at Halloway recorded in their own log.  The third tunnel was dry limestone with a gentle curve.  The beacon there held for fifty-one minutes before the signal became unreliable.\n\nRead on its own, each of those results looks like a verdict on the equipment.  Read together, they say something different, which is that the beacon is not the thing that changed.  Three conditions differed between the three tunnels.  Every one of them is a property of the ground rather than of the device.\n\nWater is the first of them.  Wet rock absorbs radio energy far more effectively than dry rock does.  Water is extremely good at turning a signal into heat.  A damp limestone wall can cost a team more range than another ten feet of depth would.\n\nThe shape of the path is the second.  A signal traveling through rock does best when the beacon and the receiver sit close to a straight line.  A sharp bend forces the signal to cut the corner through solid material instead of following the open passage.  That extra rock does the same work that greater depth would do.\n\nDepth is the third, and it is the one everybody thinks of first.  It clearly matters, but the association's own numbers show that it is not the whole story.  A beacon at forty feet in the first tunnel outperformed a beacon at thirty feet in the second by more than an hour.\n\nThe practical conclusion is not that these beacons are good or that they are bad.  It is that a claim about beacon performance is close to meaningless unless it names the depth, the rock, and the shape of the passage.  A team deciding what to buy should ask for the conditions of a test before asking for the result.  A number offered without those conditions should be treated as a number that cannot be checked.  The association recommends that every department run one test in its own worst tunnel rather than trusting a figure measured somewhere else.",
+     "figureIds": [
+      "fig-l5-three-tunnels"
+     ]
+    },
+    {
+     "id": "p-long-way",
+     "title": "The Long Way There",
+     "text": ""
+    },
+    {
+     "id": "p-dead-air",
+     "title": "Dead Air",
+     "text": ""
+    },
+    {
+     "id": "p-cover-story",
+     "title": "Cover Story",
+     "text": ""
+    },
+    {
+     "id": "p-relay-room",
+     "title": "The Van on Halloway Road",
+     "text": ""
+    },
+    {
+     "id": "p-the-log",
+     "title": "What the Log Is For",
+     "text": ""
+    },
+    {
+     "id": "p-beacon-brief",
+     "title": "Source A: The Wren-7 Brief",
+     "text": ""
+    },
+    {
+     "id": "p-beacon-log",
+     "title": "Source B: Training Log, Team Four",
+     "text": ""
+    },
+    {
+     "id": "p-dead-drop",
+     "title": "The Dead Drop",
+     "text": ""
+    },
+    {
+     "id": "p-one-time-pad",
+     "title": "The One-Time Pad",
+     "text": ""
+    },
+    {
+     "id": "p-reading-room",
+     "title": "The Reading Room",
+     "text": ""
+    },
+    {
+     "id": "p-on-the-line",
+     "title": "On the Line",
+     "text": ""
+    },
+    {
+     "id": "p-petrel-brief",
+     "title": "Source A: The Petrel-4 Brief",
+     "text": ""
+    },
+    {
+     "id": "p-cold-weather-log",
+     "title": "Source B: Cold-Weather Trial Log",
+     "text": ""
+    }
+   ],
+   "figures": [],
+   "levels": [
+    {
+     "itemIds": [
+      "stub-p-long-way",
+      "stub-p-dead-drop"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-dead-air",
+      "stub-p-one-time-pad"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-cover-story",
+      "stub-p-relay-room",
+      "stub-p-the-log",
+      "stub-p-reading-room",
+      "stub-p-on-the-line"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-beacon-brief",
+      "stub-p-beacon-log",
+      "stub-p-petrel-brief",
+      "stub-p-cold-weather-log"
+     ]
+    },
+    {
+     "itemIds": [
+      "l5-mc-what-two-sources-agree-on"
+     ]
+    },
+    {
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "l5-mc-what-two-sources-agree-on",
+     "type": "mc",
+     "passageId": "p-three-tunnels",
+     "targets": [
+      "c4-2-integrate"
+     ],
+     "coachTopic": "research-integrate",
+     "dok": 3,
+     "stem": "The Halloway training log and this article were written by different people who never worked together.  What do they agree on?",
+     "choices": [
+      "That a beacon's number means nothing until you know the rock, the depth, and the shape of the passage.",
+      "That every department should buy whichever beacon held its signal longest in dry granite.",
+      "That the Wren-7 is a poor beacon that should not be carried underground.",
+      "That wet limestone is the only condition that matters, and depth makes no difference."
+     ],
+     "key": 0,
+     "distractorRationale": {
+      "1": "Granite is where one beacon did best, which is a fact about the ground.  Neither source turns a condition into shopping advice, and the article's advice runs the other way entirely.",
+      "2": "Neither source says it.  The log refuses to judge the beacon from two runs, and the article says outright that the beacon is not the thing that changed.",
+      "3": "Water is the first of three conditions the article lists, with the bend and the depth behind it.  Taking the first item on a list for the whole list is the quickest way to misread an article like this."
+     },
+     "explain": "Two sources that never met agree on a method rather than on a verdict.  The log records depth, rock, and time and then refuses to generalise; the article compares three sets of conditions and concludes that a number without conditions cannot be checked.  Agreement of that kind is worth more than either source alone, because neither one could have arranged it."
+    },
+    {
+     "id": "stub-p-long-way",
+     "type": "mc",
+     "passageId": "p-long-way",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-dead-air",
+     "type": "mc",
+     "passageId": "p-dead-air",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-cover-story",
+     "type": "mc",
+     "passageId": "p-cover-story",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-relay-room",
+     "type": "mc",
+     "passageId": "p-relay-room",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-the-log",
+     "type": "mc",
+     "passageId": "p-the-log",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-beacon-brief",
+     "type": "mc",
+     "passageId": "p-beacon-brief",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-beacon-log",
+     "type": "mc",
+     "passageId": "p-beacon-log",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-dead-drop",
+     "type": "mc",
+     "passageId": "p-dead-drop",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-one-time-pad",
+     "type": "mc",
+     "passageId": "p-one-time-pad",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-reading-room",
+     "type": "mc",
+     "passageId": "p-reading-room",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-on-the-line",
+     "type": "mc",
+     "passageId": "p-on-the-line",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-petrel-brief",
+     "type": "mc",
+     "passageId": "p-petrel-brief",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-cold-weather-log",
+     "type": "mc",
+     "passageId": "p-cold-weather-log",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    }
+   ]
+  }
+ ],
+ "mustStayClean": [
+  {
+   "note": "Firsthand L5 refers to the Office's earlier entry, which is a level-5 entry:  same level, not a callback.",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "passages": [
+    {
+     "id": "p-t5-third-school-and-the-paper",
+     "title": "Recovered Entry: The Third School, and the Paper That Followed",
+     "genre": "informational",
+     "docKind": "recovered-entry",
+     "source": "original",
+     "text": "The Office's earlier entry on China sets two schools of thought side by side.  Neither of them is the one the Qin state actually ran on.  This entry files the third.\n\nThe school the Qin ran on is called Legalism.  It taught that people behave well only when rules are clear, rewards are certain, and punishments are heavy.  Virtue, in its view, was too slow and too rare to hold a state together.  It held that law should fall on everyone the same way, whatever a person's rank.  A thinker named Han Fei set the argument out most fully.  Qin had run on these ideas long before him.  A minister named Shang Yang rebuilt the state around them, generations before the first emperor.  Another minister, Li Si, later carried them into the unified empire.  The Qin's harsh reputation follows from those choices.  What the Qin then did to rival texts is already filed, on the strength of records written later.\n\nThe Han dynasty that came next put Confucian teaching at the center.  Legalist habits did not leave with the Qin, though.  Han law kept much of the same machinery, and later dynasties kept it too.\n\nHan workshops also solved a problem the Office cares about more than most.  Before paper, Chinese writers used strips of bamboo tied into bundles, which were heavy.  They also used silk, which was costly.  A court official named Cai Lun was credited in one hundred five CE with a better method, using bark, rag, and worn-out fishing net beaten into pulp.  Scraps of older paper have turned up since, so the craft was already in use before he improved it.  Cheap writing material changes what gets written down and what gets copied.  Everything after this point in the Chinese record is thicker because of it.\n\nOther Han work survives in the same practical spirit.  Han histories credit an official named Zhang Heng with an instrument built in one hundred thirty-two CE.  Those histories say it registered a distant earth tremor and showed which direction it came from.  Han doctors wrote medical texts that were still being studied centuries later.\n\nThe dynasty itself came apart around two hundred twenty CE, worn down by revolts, court struggles, and generals who stopped listening.  China broke into rival states again."
+    },
+    {
+     "id": "p-t1-first-entry-briefing",
+     "title": "Case File Zero: Before the First City",
+     "text": ""
+    },
+    {
+     "id": "p-t1-hammurabi-recovered-entry",
+     "title": "Recovered Entry: The Code of Hammurabi",
+     "text": ""
+    },
+    {
+     "id": "p-t1-nile-two-kingdoms",
+     "title": "Case File: Two Kingdoms of the Nile",
+     "text": ""
+    },
+    {
+     "id": "p-t2-covenant-and-kingdom",
+     "title": "Case File: A Covenant Without a Kingdom Yet",
+     "text": ""
+    },
+    {
+     "id": "p-t2-surviving-without-temple",
+     "title": "Case File: The Shortest File Outlasts Its Own Temple",
+     "text": ""
+    },
+    {
+     "id": "p-t3-source-a-athenian",
+     "title": "Source A: The Athenian Account, Filed by the Aegean Desk",
+     "text": ""
+    },
+    {
+     "id": "p-t3-source-b-spartan",
+     "title": "Source B: The Spartan-Leaning Account, Filed by the Peloponnese Desk",
+     "text": ""
+    },
+    {
+     "id": "p-t4-quiet-record-indus",
+     "title": "Case File: The Quiet Record of the Indus",
+     "text": ""
+    },
+    {
+     "id": "p-t4-dharma-buddha-ashoka",
+     "title": "Case File: Dharma, the Buddha, and an Emperor's Change of Heart",
+     "text": ""
+    },
+    {
+     "id": "p-t5-han-and-the-road",
+     "title": "Case File: The Han Restoration and the Long Road West",
+     "text": ""
+    },
+    {
+     "id": "p-t6-closing-the-file",
+     "title": "Case File: Closing the File on Rome",
+     "text": ""
+    },
+    {
+     "id": "p-t1-clay-and-the-first-empires",
+     "title": "Recovered Entry: What the Clay Kept",
+     "text": ""
+    },
+    {
+     "id": "p-t2-kingdom-divided",
+     "title": "Case File: The Kingdom That Split in Two",
+     "text": ""
+    },
+    {
+     "id": "p-t3-gods-of-the-everyday",
+     "title": "Case File: The Gods of the Everyday",
+     "text": ""
+    },
+    {
+     "id": "p-t3-one-witness-long-war",
+     "title": "Case File: One Witness, One Long War",
+     "text": ""
+    },
+    {
+     "id": "p-t4-visitor-and-the-traveling-number",
+     "title": "Case File: A Visitor's Notes and a Number That Traveled",
+     "text": ""
+    },
+    {
+     "id": "p-t6-earliest-letters",
+     "title": "Recovered Entry: The Earliest Letters in the File",
+     "text": ""
+    },
+    {
+     "id": "p-t6-long-ending",
+     "title": "Case File Addendum: The Long Ending",
+     "text": ""
+    }
+   ],
+   "figures": [],
+   "levels": [
+    {
+     "itemIds": [
+      "stub-p-t1-first-entry-briefing",
+      "stub-p-t1-hammurabi-recovered-entry",
+      "stub-p-t1-nile-two-kingdoms",
+      "stub-p-t1-clay-and-the-first-empires"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-t2-covenant-and-kingdom",
+      "stub-p-t2-surviving-without-temple",
+      "stub-p-t2-kingdom-divided"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-t3-source-a-athenian",
+      "stub-p-t3-source-b-spartan",
+      "stub-p-t3-gods-of-the-everyday",
+      "stub-p-t3-one-witness-long-war"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-t4-quiet-record-indus",
+      "stub-p-t4-dharma-buddha-ashoka",
+      "stub-p-t5-han-and-the-road",
+      "stub-p-t4-visitor-and-the-traveling-number"
+     ]
+    },
+    {
+     "itemIds": [
+      "t5-ebsr-legalist-habits-outlast-the-qin"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-t6-closing-the-file",
+      "stub-p-t6-earliest-letters",
+      "stub-p-t6-long-ending"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "t5-ebsr-legalist-habits-outlast-the-qin",
+     "type": "ebsr",
+     "passageId": "p-t5-third-school-and-the-paper",
+     "targets": [
+      "hist-t5-china"
+     ],
+     "coachTopic": "evidence-what-was-burned",
+     "dok": 3,
+     "partA": {
+      "stem": "According to the recovered entry, what became of Legalist practice after the Qin dynasty ended?",
+      "choices": [
+       "It disappeared along with the Qin, since the Han put Confucian teaching back at the center.",
+       "It became one of the two schools the Office's earlier entry set side by side.",
+       "It stayed inside the machinery of Han law, and dynasties after the Han kept it as well.",
+       "It ended when the dynasty came apart around two hundred twenty CE."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "The dynasty itself came apart around two hundred twenty CE, worn down by revolts, court struggles, and generals who stopped listening.",
+       "Han law kept much of the same machinery, and later dynasties kept it too.",
+       "The Office's earlier entry on China sets two schools of thought side by side.",
+       "The Han dynasty that came next put Confucian teaching at the center."
+      ],
+      "key": {
+       "0": 3,
+       "1": 2,
+       "2": 1,
+       "3": 0
+      }
+     },
+     "distractorRationale": {
+      "0": "The Han did put Confucian teaching at the center, and the entry says so, then adds directly that Legalist habits did not leave with the Qin.",
+      "1": "The earlier entry sets two other schools side by side; this entry exists precisely because Legalism is the THIRD school, the one that entry does not cover.",
+      "3": "The Han did come apart around that year, but the entry says later dynasties kept the same machinery, so the practice outlasted the Han too."
+     },
+     "explain": "The entry separates a dynasty's fall from a practice's survival: the Qin ended and the Han restored Confucian teaching at the center, yet Han law kept much of the same Legalist machinery and later dynasties kept it after that.  Each wrong choice ties the practice's life to one dynasty's life, or files it under the wrong entry entirely."
+    },
+    {
+     "id": "stub-p-t1-first-entry-briefing",
+     "type": "mc",
+     "passageId": "p-t1-first-entry-briefing",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t1-hammurabi-recovered-entry",
+     "type": "mc",
+     "passageId": "p-t1-hammurabi-recovered-entry",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t1-nile-two-kingdoms",
+     "type": "mc",
+     "passageId": "p-t1-nile-two-kingdoms",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t2-covenant-and-kingdom",
+     "type": "mc",
+     "passageId": "p-t2-covenant-and-kingdom",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t2-surviving-without-temple",
+     "type": "mc",
+     "passageId": "p-t2-surviving-without-temple",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t3-source-a-athenian",
+     "type": "mc",
+     "passageId": "p-t3-source-a-athenian",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t3-source-b-spartan",
+     "type": "mc",
+     "passageId": "p-t3-source-b-spartan",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t4-quiet-record-indus",
+     "type": "mc",
+     "passageId": "p-t4-quiet-record-indus",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t4-dharma-buddha-ashoka",
+     "type": "mc",
+     "passageId": "p-t4-dharma-buddha-ashoka",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t5-han-and-the-road",
+     "type": "mc",
+     "passageId": "p-t5-han-and-the-road",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t6-closing-the-file",
+     "type": "mc",
+     "passageId": "p-t6-closing-the-file",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t1-clay-and-the-first-empires",
+     "type": "mc",
+     "passageId": "p-t1-clay-and-the-first-empires",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t2-kingdom-divided",
+     "type": "mc",
+     "passageId": "p-t2-kingdom-divided",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t3-gods-of-the-everyday",
+     "type": "mc",
+     "passageId": "p-t3-gods-of-the-everyday",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t3-one-witness-long-war",
+     "type": "mc",
+     "passageId": "p-t3-one-witness-long-war",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t4-visitor-and-the-traveling-number",
+     "type": "mc",
+     "passageId": "p-t4-visitor-and-the-traveling-number",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t6-earliest-letters",
+     "type": "mc",
+     "passageId": "p-t6-earliest-letters",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-t6-long-ending",
+     "type": "mc",
+     "passageId": "p-t6-long-ending",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    }
+   ]
+  },
+  {
+   "note": "Vault L1 names the Threadglass, which its own passage introduces;  level 2's catalog entry carries the same word in its title.",
+   "meta": {
+    "id": "vault-of-ages-g6",
+    "subject": "ela"
+   },
+   "passages": [
+    {
+     "id": "p-two-empty-chairs",
+     "title": "Two Empty Chairs",
+     "genre": "literary",
+     "docKind": "status-log",
+     "register": "CREW LOG",
+     "source": "original",
+     "text": "I count four chairs around Finch's table, and only two of them get used, which tells me something before anyone says a word.  I take the one nearest the door, because I like knowing where the door is, and a boy about my age takes the other one without asking whether it is taken.  He introduces himself as Theo, then seems to regret it immediately, like talking to a stranger is a skill he is still building.  I decide I like him better for that than I would have liked someone smooth.\n\nFinch does not explain what this place is.  She sets a single photograph on the table between us: a glass disc, roughly the size of a coaster, etched with a pattern that curves in on itself like a shell.  She asks what we notice, and Theo says the pattern looks like a maze with no walls.  That is a better answer than mine would have been, because I was still counting the empty chairs.\n\nI ask the question I actually care about.  Why are there two empty chairs?  Did two people quit, or have two people simply not arrived yet?  Finch says that is the correct question to have asked, though she does not answer it.  I have known her for eleven minutes, and I already understand that this is going to be a pattern.\n\nShe tells us the disc in the photograph has a name, the Threadglass, documented in three separate archives across two centuries.  Then it vanished from all three collections within the same decade.  Objects like that do not vanish on their own, she says.  Someone wanted it enough to risk being caught holding it, three times, in three different countries.  She wants to know if we want it back badly enough to take a much smaller risk than that.\n\nTheo asks who has it now.  Finch says a private collector, one with a very good lawyer and a very quiet gallery.  The Archive does not involve lawyers, she adds, because lawyers require you to explain things in rooms with records.  I like that answer more than I expected to.\n\nThe door opens before she finishes, and a third kid drops into one of the empty chairs like he has been late to better things than this.  He says his name is Dash, apologizes to no one in particular, and asks whether he missed anything important.  Finch says he missed the part where she decides whether to trust any of us.  The part he is walking into now, she says, is the part where we start deciding whether to trust each other.  Nobody laughs.  I notice that the fourth chair is still empty, and that nobody else in the room has looked at it once.",
+     "figureIds": [
+      "fig-l1-two-empty-chairs"
+     ]
+    },
+    {
+     "id": "p-threadglass-entry",
+     "title": "Catalog Entry: The Threadglass",
+     "text": ""
+    },
+    {
+     "id": "p-wyrdstone-entry",
+     "title": "Catalog Entry: The Wyrdstone",
+     "text": ""
+    },
+    {
+     "id": "p-three-realms-below",
+     "title": "Three Realms Below",
+     "text": ""
+    },
+    {
+     "id": "p-kade-collection",
+     "title": "The Kade Collection",
+     "text": ""
+    },
+    {
+     "id": "p-two-exits-one-elevator",
+     "title": "Two Exits, One Elevator",
+     "text": ""
+    },
+    {
+     "id": "p-three-seconds",
+     "title": "Three Seconds",
+     "text": ""
+    },
+    {
+     "id": "p-temple-chronicle",
+     "title": "Source A: The Temple Chronicle",
+     "text": ""
+    },
+    {
+     "id": "p-reckoners-ledger",
+     "title": "Source B: The Reckoner's Ledger",
+     "text": ""
+    },
+    {
+     "id": "p-what-the-archive-believes",
+     "title": "What the Archive Believes",
+     "text": ""
+    },
+    {
+     "id": "p-frostbank-vault",
+     "title": "The Frostbank Vault",
+     "text": ""
+    },
+    {
+     "id": "p-no-hurry-at-all",
+     "title": "No Hurry At All",
+     "text": ""
+    },
+    {
+     "id": "p-weight-of-a-thread",
+     "title": "The Weight of a Thread",
+     "text": ""
+    },
+    {
+     "id": "p-vault-of-ages",
+     "title": "The Vault of Ages",
+     "text": ""
+    }
+   ],
+   "figures": [],
+   "levels": [
+    {
+     "itemIds": [
+      "l1-ebsr-what-happened-to-threadglass"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-threadglass-entry",
+      "stub-p-wyrdstone-entry",
+      "stub-p-three-realms-below"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-kade-collection",
+      "stub-p-two-exits-one-elevator",
+      "stub-p-three-seconds"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-temple-chronicle",
+      "stub-p-reckoners-ledger",
+      "stub-p-what-the-archive-believes"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-frostbank-vault",
+      "stub-p-no-hurry-at-all",
+      "stub-p-weight-of-a-thread"
+     ]
+    },
+    {
+     "itemIds": [
+      "stub-p-vault-of-ages"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l1-ebsr-what-happened-to-threadglass",
+     "type": "ebsr",
+     "passageId": "p-two-empty-chairs",
+     "targets": [
+      "c1-lit-1-key-details"
+     ],
+     "coachTopic": "evidence-story-details",
+     "dok": 2,
+     "partA": {
+      "stem": "What happened to the Threadglass?",
+      "choices": [
+       "It was recorded in three archives, then vanished from all three within one decade.",
+       "It was destroyed in a fire at one of the three archives that held it.",
+       "It was donated to the Archive by its original owner, a private collector.",
+       "It has never been seen by anyone outside Finch's crew in its two centuries."
+      ],
+      "key": 0
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Finch says a private collector, one with a very good lawyer and a very quiet gallery.",
+       "Someone wanted it enough to risk being caught holding it, three times, in three different countries.",
+       "Then it vanished from all three collections within the same decade.",
+       "She tells us the disc in the photograph has a name, the Threadglass, documented in three separate archives across two centuries."
+      ],
+      "key": {
+       "0": 2,
+       "1": 1,
+       "2": 0,
+       "3": 3
+      }
+     },
+     "distractorRationale": {
+      "1": "Being risky to hold is not the same as being destroyed.  The passage describes the Threadglass being taken and hidden, and never mentions a fire.",
+      "2": "A private collector holding the disc is the opposite of a donation.  The passage never says who originally gave it to anyone.",
+      "3": "Being documented in three separate archives across two centuries is the opposite of never being seen.  Plenty of people saw it before it disappeared."
+     },
+     "explain": "The Threadglass has a public paper trail: three archives recorded it over two centuries.  Then, within one decade, it vanished from all three collections at once, which is the detail this item is asking about directly."
+    },
+    {
+     "id": "stub-p-threadglass-entry",
+     "type": "mc",
+     "passageId": "p-threadglass-entry",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-wyrdstone-entry",
+     "type": "mc",
+     "passageId": "p-wyrdstone-entry",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-three-realms-below",
+     "type": "mc",
+     "passageId": "p-three-realms-below",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-kade-collection",
+     "type": "mc",
+     "passageId": "p-kade-collection",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-two-exits-one-elevator",
+     "type": "mc",
+     "passageId": "p-two-exits-one-elevator",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-three-seconds",
+     "type": "mc",
+     "passageId": "p-three-seconds",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-temple-chronicle",
+     "type": "mc",
+     "passageId": "p-temple-chronicle",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-reckoners-ledger",
+     "type": "mc",
+     "passageId": "p-reckoners-ledger",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-what-the-archive-believes",
+     "type": "mc",
+     "passageId": "p-what-the-archive-believes",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-frostbank-vault",
+     "type": "mc",
+     "passageId": "p-frostbank-vault",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-no-hurry-at-all",
+     "type": "mc",
+     "passageId": "p-no-hurry-at-all",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-weight-of-a-thread",
+     "type": "mc",
+     "passageId": "p-weight-of-a-thread",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    },
+    {
+     "id": "stub-p-vault-of-ages",
+     "type": "mc",
+     "passageId": "p-vault-of-ages",
+     "stem": "stub",
+     "choices": [
+      "a",
+      "b"
+     ],
+     "key": 0
+    }
+   ]
+  }
+ ]
+}
