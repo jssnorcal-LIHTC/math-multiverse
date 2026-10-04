@@ -183,6 +183,39 @@
       "figureIds": [
         "fig-l5-three-climates"
       ]
+    },
+    {
+      "id": "p-the-last-run",
+      "title": "The Last Run",
+      "genre": "literary",
+      "docKind": "recovered-entry",
+      "register": "FIELD NOTE",
+      "source": "original",
+      "text": "The last exercise of the course has one rule printed at the top of the sheet, and Marchetti reads it out twice.  The person you are bringing out never decides anything:  not the route, not the timing, and not whether to run.\n\nThe person is Okafor, a quiet instructor who will spend the morning pretending to be frightened.  He is sitting in the station café with a cold cup of tea.  The plan says Ines walks in at nine forty, with a folded newspaper carried under her arm, and Okafor follows her out at nine forty-two.  Jonah waits on the far platform as the second pair of eyes, and if anything looks wrong, he takes off his scarf and the whole run stops.\n\nWhat actually happens is different.  At nine forty Ines is standing outside the café door, and the newspaper under her arm feels as heavy as a brick.  A man in a grey coat has taken the table beside Okafor's.  He is reading nothing, and his phone lies face down beside a full cup that he has not touched.\n\nInes does not go in.  She walks past the door as if the café were any other shop, and she keeps walking until a shop window gives her the platform behind her.  Jonah's scarf is still around his neck.  The man in the grey coat might be nobody, or he might be part of the exercise, and she cannot tell which.  The rule does not ask her to tell.  It only asks her not to hand the choice to Okafor.\n\nAt nine forty-six she comes back the long way, past the ticket machines.  The grey coat is gone, although the cup beside the empty chair is still full.  She walks in, sets the newspaper on the counter, and buys a bottle of water she does not want.  Okafor stands up without a word and follows her out, four minutes late and exactly on the plan's second route.\n\nThey walk the second route the way it was written, through the parking garage and up a ramp that seems a mile long, to the street where the car is waiting with its engine already running.  Nobody runs.  Ines's heart is running for both of them.\n\nAfterward Marchetti asks why she was late, and Ines tells him about the man in the grey coat, the untouched cup, and the phone lying face down.  Marchetti says the man was a stranger who had nothing to do with anyone.  Then he says she did the only right thing, because four minutes cost nothing.  A plan is a promise to the person you are bringing out, and the promise is that you will not gamble with him.",
+      "figureIds": [
+        "fig-l6-the-last-run"
+      ]
+    },
+    {
+      "id": "p-the-stop",
+      "title": "The Stop",
+      "genre": "literary",
+      "docKind": "recovered-entry",
+      "register": "FIELD NOTE",
+      "source": "original",
+      "text": "A week later it is Jonah's turn to lead the last exercise, and Ines is the second pair of eyes.  The plan card is the same kind of card, with the same newspaper and the same scarf, and Jonah has read it so many times that the words have worn smooth in his head.\n\nHe is halfway across the market square at ten past two when Ines takes off her scarf, and the whole plan stops like a clock with its battery pulled out.\n\nEvery part of him wants to keep going.  The source is right there, twenty steps away, pretending to choose apples at a fruit stall, and nothing Jonah can see is wrong.  The square is full of ordinary people doing ordinary things, and he has a question ready, which is simply why.\n\nHe does not ask it.  Instead he turns left rather than right, walks past the bakery without stopping, and leaves the square at the same easy pace he came in with.  The source keeps choosing apples and never looks up.  The run is over, and Jonah feels as if someone has pulled the ground out from under his shoes.\n\nOn the walk back Ines explains what she saw.  A delivery van had stopped across the far exit, the one their second route needed, and its driver had started stacking crates in the gap.  From where Jonah stood, he could not possibly have seen it, but from the bench beside the fountain, she could see nothing else.\n\nThat evening Marchetti asks Jonah what the day taught him.  Jonah thinks about the apples, the van, and the question he never asked.  Then he says that the person who can see the danger is not always the person standing closest to it.  The fallback is tomorrow at the same hour, and the source will still be there."
+    },
+    {
+      "id": "p-getting-someone-out",
+      "title": "Getting Someone Out",
+      "genre": "informational",
+      "docKind": "procedure",
+      "register": "TRADECRAFT NOTE",
+      "source": "original",
+      "text": "Moving a person is harder than moving a package.  A package does not get frightened, change its mind, or decide halfway down a street that it would rather run.  An exfiltration is therefore planned around one rule before any other:  the person being moved never decides anything.\n\nEvery exfiltration starts with a plan card, and every line on it is settled before the day.  The card names the signal that means go and the signal that means stop.  It names a first route and a second route, and the second is planned as carefully as the first, because a second route that was only sketched is not really a route at all.  It names a time limit, and if the pickup slips by more than ten minutes, the whole run is called off.  Last, it names a fallback, so that calling a run off never means losing the person.\n\nA training card shows how short a plan card can be.  Each line on it fits on one row, in a few plain words.  One row reads a scarf taken off, and another reads a folded newspaper carried under the arm.  The rest read ten minutes, out through the front door, through the parking garage, and the same hour on the next day.  Under the rows, one line is set apart in a box:  nobody runs.\n\nThe stop signal outranks everything else on the card.  Whoever sees it stops at once, without arguing and without asking why, because a stop that has to be explained is a stop that comes too late.\n\nNobody runs, even on the second route.  A walking person blends into a crowd, while a running person is the one thing everybody turns to look at.  Even when a team is certain it has been seen, it keeps walking.\n\nThe hardest part for new officers is the waiting.  A pickup that is a few minutes late feels like a disaster to the person standing at the door, but it almost never is.  A late pickup costs a few minutes.  A pickup made in a hurry, past a signal nobody stopped to check, can cost the person everything.\n\nTrainers call the card a promise.  The person being moved has handed over every choice, and the only thing they hold in return is the card.  An officer who keeps to it, even when keeping to it feels painfully slow, is keeping that promise.",
+      "figureIds": [
+        "fig-l6-training-card"
+      ]
     }
   ],
   "levels": [
@@ -422,37 +455,37 @@
       "lives": 4,
       "questions": 12,
       "itemIds": [
-        "l6-ebsr-what-a-log-is-for",
-        "l6-mc-easy-in-two-stories",
-        "l6-mc-what-the-lobby-scene-is-about",
-        "l6-ebsr-a-clipboard-like-a-wall",
-        "l6-hot-where-the-cover-runs-out",
-        "l6-ebsr-why-her-log-runs-longer",
-        "l6-hot-plain-words-carrying-more",
-        "l6-cloze-where-the-aside-sits",
-        "l6-ebsr-what-the-brief-is-for",
-        "l6-short-who-the-entry-was-written-for",
-        "l6-mc-the-chain-under-dead-air",
-        "l6-ms-three-moves-one-system",
-        "l6-ebsr-two-seconds-that-mattered",
-        "l6-mc-what-the-archive-scene-is-about",
-        "l6-ebsr-pulse-loud-in-his-ears",
-        "l6-hot-precise-not-vague",
-        "l6-ebsr-two-infiltrations-compared",
-        "l6-mc-two-watchers-compared",
-        "l6-hot-scene-that-turns",
-        "l6-cloze-where-the-tension-turns",
-        "l6-ebsr-why-a-brief-sells",
-        "l6-short-log-purpose",
-        "l6-mc-two-briefs-compared",
-        "l6-ms-two-studies-compared",
-        "l6-mc-rule-lane-against-the-log",
-        "l6-mc-reading-the-runtime-row",
-        "l6-cloze-six-stops-one-run",
-        "l6-ms-claim-against-the-two-runs"
+        "l6-ebsr-the-promise-kept",
+        "l6-mc-the-choice-falls-on-ines",
+        "l6-mc-why-she-walks-past",
+        "l6-ebsr-heavy-as-a-brick",
+        "l6-hot-where-the-plan-turns",
+        "l6-ebsr-what-the-scarf-says",
+        "l6-hot-saying-more-than-it-means",
+        "l6-cloze-how-the-run-is-framed",
+        "l6-ebsr-a-person-not-a-package",
+        "l6-short-what-the-stop-outranks",
+        "l6-mc-why-plan-the-second-route",
+        "l6-ms-what-a-card-names",
+        "l6-ebsr-the-lesson-jonah-takes",
+        "l6-mc-where-jonah-is",
+        "l6-ebsr-the-ground-pulled-out",
+        "l6-hot-two-comparisons",
+        "l6-ebsr-who-could-see-it",
+        "l6-mc-the-source-stays-calm",
+        "l6-hot-the-reason-held-back",
+        "l6-cloze-start-and-last-line",
+        "l6-ebsr-why-call-it-a-promise",
+        "l6-short-the-hardest-part",
+        "l6-mc-late-or-hurried",
+        "l6-ms-rules-and-their-reasons",
+        "l6-mc-the-lanes-at-nine-forty",
+        "l6-mc-inside-the-time-limit",
+        "l6-cloze-reading-the-training-card",
+        "l6-ms-how-the-card-is-laid-out"
       ],
       "reveal": {
-        "figureId": "fig-l3-on-the-line"
+        "figureId": "fig-l6-the-last-run"
       }
     }
   ],
@@ -2330,31 +2363,31 @@
       "explain": "The article does not open with its advice, and that ordering is the argument.  Three results come first, then the observation that reading them together changes what they mean, then the three ground conditions that explain the spread, and only then the rule for a buyer.  Move the advice to the front and it is nothing but an opinion."
     },
     {
-      "id": "l6-ebsr-what-a-log-is-for",
+      "id": "l6-ebsr-the-promise-kept",
       "type": "ebsr",
-      "passageId": "p-the-log",
+      "passageId": "p-the-last-run",
       "targets": [
         "c1-lit-2-central-ideas"
       ],
       "coachTopic": "central-theme",
       "dok": 3,
       "partA": {
-        "stem": "At the end of the story, Ines tells Jonah why he had to be the one who wrote down the thirty seconds on the landing.  What idea about logs does she add to the story?",
+        "stem": "What is the central idea of \"The Last Run\"?",
         "choices": [
-          "A log should record what a writer meant to do, not only what happened.",
-          "The least impressive line on a sheet is the one that takes longest to write.",
-          "Only the person who noticed a small moment can put it in the log.",
-          "A log counts for more when a friend tells you the entry was worth writing."
+          "That being a few minutes late can ruin a whole exercise",
+          "That strangers sitting near a café table are usually part of the exercise",
+          "That sticking to the plan means not gambling with the person",
+          "That the quickest way out of a station is the safest one"
         ],
         "key": 2
       },
       "partB": {
-        "stem": "Which sentence from the story best supports the answer you just gave?",
+        "stem": "Which sentence from the passage best supports your answer?",
         "choices": [
-          "It is the least impressive sentence on the whole sheet and it takes him longer to write than everything above it.",
-          "The rule for the log is a single line, and it is that you write down what happened rather than what you meant to happen.",
-          "She does not laugh at him.",
-          "She says that thirty seconds is short enough that most people would never have noticed it at all."
+          "A man in a grey coat has taken the table beside Okafor's.",
+          "Afterward Marchetti asks why she was late, and Ines tells him about the man in the grey coat, the untouched cup, and the phone lying face down.",
+          "They walk the second route the way it was written, through the parking garage and up a ramp that seems a mile long, to the street where the car is waiting with its engine already running.",
+          "A plan is a promise to the person you are bringing out, and the promise is that you will not gamble with him."
         ],
         "key": {
           "0": 1,
@@ -2364,62 +2397,62 @@
         }
       },
       "distractorRationale": {
-        "0": "The rule for the log says the opposite: you write down what happened rather than what you meant to happen.  Ines is talking about who had to write the moment down, not about plans.",
-        "1": "That is true of Jonah's added line, and it comes before Ines says anything.  Her comment is about why the line had to be his, because most people would never have noticed thirty seconds at all.",
-        "3": "Ines does not laugh at him, and she agrees the line had to be written.  It was already on his sheet before she said a word, and it matters because of who noticed the moment, not because a friend approved of it."
+        "0": "Marchetti says the opposite:  four minutes cost nothing, and she did the only right thing by being late.",
+        "1": "Marchetti says the man in the grey coat was a stranger with nothing to do with anyone.  The story's point is not about strangers.",
+        "3": "The story never praises speed.  They walk the second route the way it was written, and nobody runs."
       },
-      "explain": "Ines points out that thirty seconds is short enough that most people would never have noticed it.  That is what makes it Jonah's job, because a moment nobody else saw can reach the log only through the one person who did.  The story ends on that idea: a log is only as complete as the writer who is willing to put the small things in."
+      "explain": "The story ends by naming its idea outright:  a plan is a promise to the person you are bringing out, and the promise is that you will not gamble with him.  Ines's four-minute delay keeps that promise."
     },
     {
-      "id": "l6-mc-what-the-lobby-scene-is-about",
+      "id": "l6-mc-why-she-walks-past",
       "type": "mc",
-      "passageId": "p-cover-story",
+      "passageId": "p-the-last-run",
       "targets": [
-        "c1-lit-2-central-ideas"
+        "c1-lit-5-analysis"
       ],
-      "coachTopic": "central-theme",
+      "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "Which sentence best states what this whole scene is about?",
+      "stem": "Why does Ines walk past the café door at nine forty instead of going in?",
       "choices": [
-        "Getting past a front desk is mostly a matter of not looking nervous while you do it.",
-        "A good cover story is one that answers every question before it is asked.",
-        "A museum is easy to enter if you know which bus goes there.",
-        "A cover only needs to last until you offer something dull and checkable."
+        "She was early, and the plan had her wait until nine forty-two",
+        "She had left the folded newspaper on the train",
+        "Okafor waved her away from his table through the café's front window",
+        "A stranger by Okafor looked wrong, and she would not risk it"
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "Walking in as if he belongs only gets Jonah across the lobby.  What gets him past Ferris is the boring, checkable answer he offers, not how calm he looks while he gives it.",
-        "1": "The card has eleven words on it and the second question is not one of them, which is the moment the scene is built around.  A cover that answered everything would have made the scene unnecessary.",
-        "2": "The bus does turn out to matter, and it matters because it was true and Ferris already knew it, not because it is a route to the museum.  You took the detail and left its reason behind."
+        "0": "She was on time:  the plan has her walking in at nine forty.  What she sees inside the café is what holds her back.",
+        "1": "The newspaper is still under her arm, and she later sets it on the counter.",
+        "2": "Okafor does nothing at all.  He stays at his table and gives no signal of any kind."
       },
-      "explain": "Marchetti's card runs out at the second question, and what saves Jonah is the rule underneath it: never invent, offer something boring that can be checked.  The bus works for the same reason the offer to wait does, because both are true and both would cost Ferris something to verify.  The scene is about what you do once the script has ended."
+      "explain": "Ines sees a man in a grey coat at the table beside Okafor's, reading nothing, his phone face down beside an untouched cup.  She cannot tell whether he matters, so she does not walk in, and she comes back the long way once he is gone."
     },
     {
-      "id": "l6-ebsr-a-clipboard-like-a-wall",
+      "id": "l6-ebsr-heavy-as-a-brick",
       "type": "ebsr",
-      "passageId": "p-cover-story",
+      "passageId": "p-the-last-run",
       "targets": [
         "c1-lit-3-word-meanings"
       ],
       "coachTopic": "vocab-figurative",
       "dok": 3,
       "partA": {
-        "stem": "One object in the opening description of the front desk is compared to something else.  What does that comparison tell you about the woman holding it?",
+        "stem": "At the café door, the newspaper under Ines's arm \"feels as heavy as a brick.\"  What does that comparison suggest?",
         "choices": [
-          "She is not really paying attention to whoever is standing in front of her.",
-          "She is suspicious of Jonah from the moment he walks in.",
-          "She has done this so many times that it bores her.",
-          "She uses it to hold people at a distance without having to say so."
+          "Ines is getting cold from waiting outside in the wind",
+          "Ines is tired out from walking all the way across the station",
+          "Ines is planning to leave the newspaper behind somewhere",
+          "Ines feels the weight of the signal she is about to give"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from the story best supports the answer you just gave?",
+        "stem": "Which sentence from the passage best supports your answer?",
         "choices": [
-          "Then she waves him toward the stairs and tells him not to touch anything in the model room, in the flat tone of somebody who has said that sentence four thousand times.",
-          "She asks him to sign the visitor log and does not look up while she says it.",
-          "The woman at the front desk has reading glasses pushed up into her hair and a clipboard she holds like a small wall.",
-          "Ferris looks at him for two entire seconds without blinking."
+          "She walks past the door as if the café were any other shop, and she keeps walking until a shop window gives her the platform behind her.",
+          "He is sitting in the station café with a cold cup of tea.",
+          "The plan says Ines walks in at nine forty, with a folded newspaper carried under her arm, and Okafor follows her out at nine forty-two.",
+          "At nine forty-six she comes back the long way, past the ticket machines."
         ],
         "key": {
           "0": 1,
@@ -2429,64 +2462,64 @@
         }
       },
       "distractorRationale": {
-        "0": "She does not look up while she speaks, which is true and is a different idea.  A wall is about keeping something on the far side of it, not about failing to notice it.",
-        "1": "Two entire seconds without blinking is real suspicion, and it arrives after he offers to wait.  The clipboard is already up before she has any reason at all, which is what makes it a wall rather than a reaction.",
-        "2": "The four-thousand-times line comes later and it is about routine.  You carried a second image over to explain the first, and the two are doing different work."
+        "0": "Nothing in the story says she is cold.  The weight is in what the newspaper means, not in the weather.",
+        "1": "Nothing in the story says she is tired.  She comes back the long way past the ticket machines because she chooses to, not because she is worn out.",
+        "2": "The comparison is about how the newspaper feels at the door, not about where it ends up.  She keeps it under her arm as she walks past the door."
       },
-      "explain": "A wall is not a shield and it is not a mood; it is a thing that keeps other people on the far side of it.  Ferris holds the clipboard that way with every visitor, before Jonah has said a word, so the comparison tells you about her job rather than about him.  Figurative language is a question about what the comparison is for."
+      "explain": "The folded newspaper is the plan's signal:  the plan has Ines walk in with it at nine forty, and Okafor follows.  Calling it heavy as a brick shows how much that signal weighs on her at the door, because giving it would send Okafor out with her."
     },
     {
-      "id": "l6-hot-plain-words-carrying-more",
+      "id": "l6-hot-saying-more-than-it-means",
       "type": "hottext",
-      "passageId": "p-relay-room",
+      "passageId": "p-the-last-run",
       "targets": [
         "c1-lit-3-word-meanings"
       ],
       "coachTopic": "vocab-figurative",
       "dok": 3,
       "mode": "sentence",
-      "stem": "Tap the three sentences where the narrator's plain words carry far more than they say.  The other three mean exactly what they say and no more.",
+      "stem": "Tap the three sentences that use figurative language instead of saying plainly what happens.",
       "spans": [
-        "Jonah goes in at ten fourteen.",
-        "If I do not call it and I am wrong, that is a very different sort of afternoon.",
-        "I write the time down, and my hand is steadier than it was thirty seconds ago.",
-        "Two clicks means inside, moving, no help needed.",
-        "Two women come out with a folded stroller between them.",
-        "I have decided in advance to let him."
+        "He is sitting in the station café with a cold cup of tea.",
+        "She walks past the door as if the café were any other shop, and she keeps walking until a shop window gives her the platform behind her.",
+        "Ines's heart is running for both of them.",
+        "The plan says Ines walks in at nine forty, with a folded newspaper carried under her arm, and Okafor follows her out at nine forty-two.",
+        "Afterward Marchetti asks why she was late, and Ines tells him about the man in the grey coat, the untouched cup, and the phone lying face down.",
+        "They walk the second route the way it was written, through the parking garage and up a ramp that seems a mile long, to the street where the car is waiting with its engine already running."
       ],
       "key": [
         1,
         2,
         5
       ],
-      "explain": "This narrator never names a feeling, so the meaning sits underneath the words.  A very different sort of afternoon means somebody gets hurt, a hand that is steadier now is a hand that was shaking a minute ago, and deciding in advance to let him means deciding not to say what the minute cost her.  The time, the radio code and the two women with the stroller mean precisely what they say, which is what makes the other three stand out."
+      "explain": "Three sentences say more than they literally mean:  a shop window gives her the platform behind her, her heart is running for both of them, and a ramp seems a mile long.  The other three report plainly what is there, what was planned, and what Ines tells Marchetti afterward."
     },
     {
-      "id": "l6-ebsr-why-her-log-runs-longer",
+      "id": "l6-ebsr-what-the-scarf-says",
       "type": "ebsr",
-      "passageId": "p-relay-room",
+      "passageId": "p-the-last-run",
       "targets": [
         "c1-lit-5-analysis"
       ],
-      "coachTopic": "evidence-across-texts",
-      "dok": 4,
+      "coachTopic": "inference-relationships",
+      "dok": 3,
       "partA": {
-        "stem": "In the debrief story, Ines logs that she nearly aborted the exercise.  What does this story show about how near she came?",
+        "stem": "While Ines stands at the café door, what does Jonah's scarf tell her?",
         "choices": [
-          "She had already started the call when the two clicks came through and stopped her.",
-          "She put her thumb on the transmit key at ten twenty-one, then took it off.",
-          "She came nearest at ten twenty-one, the time the rule set for calling it off.",
-          "She reached for the key only once she could see Jonah was in trouble."
+          "That Jonah has also spotted the man in the grey coat inside",
+          "That Jonah has seen nothing to stop the run",
+          "That Jonah wants her to call the whole run off now",
+          "That Jonah is getting cold out on the far platform"
         ],
         "key": 1
       },
       "partB": {
-        "stem": "Which sentence from this story best supports the answer you just gave?",
+        "stem": "Which sentence from the passage best supports your answer?",
         "choices": [
-          "At ten twenty-one I put my thumb on the transmit key and then take it off again.",
-          "Nothing I can see from here says that he is in trouble.",
-          "At ten twenty-two and eleven seconds, which is late, the radio clicks twice.",
-          "The rule is that he checks in at ten twenty, and if nothing has come through by ten twenty-two I call the whole exercise off."
+          "Jonah's scarf is still around his neck.",
+          "He is sitting in the station café with a cold cup of tea.",
+          "A man in a grey coat has taken the table beside Okafor's.",
+          "Ines does not go in."
         ],
         "key": {
           "0": 2,
@@ -2496,117 +2529,117 @@
         }
       },
       "distractorRationale": {
-        "0": "She says the only reason she did not make the call is that she had a list and read her way down it.  The clicks come later, at ten twenty-two and eleven seconds, and two clicks mean no help is needed.",
-        "2": "The rule sets ten twenty-two for calling it off, not ten twenty-one.  At ten twenty-one no rule told her to do anything, and her thumb went onto the key anyway.",
-        "3": "The story says the opposite.  Nothing she can see says Jonah is in trouble, and everything she can see says he is talking to somebody."
+        "0": "If Jonah had seen something wrong, he would have taken his scarf off.  It stays on.",
+        "2": "Taking the scarf off is the signal to stop, and Jonah has not done that.",
+        "3": "Nothing in the story says Jonah is cold.  The scarf matters as a signal:  taking it off would stop the run, and it is still on."
       },
-      "explain": "The debrief story tells you that Ines nearly aborted the exercise, but not how near she came.  This story shows it.  At ten twenty-one her thumb goes onto the transmit key, and then she takes it off again, a minute before the rule would have made her call it off.  Reading the two stories together turns the word nearly into a moment you can point to."
+      "explain": "Jonah's only job is to take off his scarf if anything looks wrong, which would stop the whole run.  His scarf is still around his neck, so from the platform he has seen nothing that calls for a stop."
     },
     {
-      "id": "l6-mc-easy-in-two-stories",
+      "id": "l6-mc-the-choice-falls-on-ines",
       "type": "mc",
-      "passageId": "p-the-log",
+      "passageId": "p-the-last-run",
       "targets": [
         "c1-lit-5-analysis"
       ],
-      "coachTopic": "evidence-across-texts",
+      "coachTopic": "inference-relationships",
       "dok": 4,
-      "stem": "In the van story Ines predicts Jonah will say the whole thing was easy, and decides in advance to let him.  Here he says it, and then does something else.  What has changed between the two moments?",
+      "stem": "Okafor is not allowed to decide anything during the run.  How does that rule shape what Ines does at the café door?",
       "choices": [
-        "He has decided Ines was wrong to expect him to say it.",
-        "He is telling the truth in one story and lying to Ines in the other.",
-        "He tells her about the landing because Marchetti made him add the line.",
-        "He has now logged the landing, so easy is not the whole story."
+        "It means she must go in at nine forty, exactly as the plan says",
+        "It means she has to ask Marchetti before she changes the timing",
+        "It means Jonah must decide for her from the far platform",
+        "It means the choice to wait is hers alone, so she holds back"
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "Her prediction is right, and he says exactly what she expected, in the corridor.  What changes is what he does after saying it, not whether she read him correctly.",
-        "1": "Easy is what he has been planning to say since the stairs, in both stories.  Neither one calls it a lie, and the interesting part is that he stops leaving it there.",
-        "2": "Marchetti hands the sheet back with no expression at all and asks for nothing.  Jonah is the one who asks for the sheet, which is what makes the line worth writing."
+        "0": "She does not go in at nine forty, and Marchetti says holding back was the only right thing.  The rule only asks her not to hand the choice to Okafor.",
+        "1": "Nobody asks Marchetti anything during the run.  He asks her why she was late only afterward.",
+        "2": "Jonah has one job on the far platform, the scarf.  Nothing in the story has him deciding anything for Ines."
       },
-      "explain": "Ines expects the easy version and is willing to let it stand, which is a kindness rather than a test.  Between the van and the corridor Jonah hears who a log is for, writes the least impressive sentence on his sheet, and then tells her the same thing out loud without being asked.  He says easy in both stories; in only one of them does he stop there."
+      "explain": "The rule says the person being brought out never decides anything, so nothing at the door can be left to Okafor.  The choice falls on Ines alone, and she makes it herself by walking past the door and coming back later."
     },
     {
-      "id": "l6-hot-where-the-cover-runs-out",
+      "id": "l6-hot-where-the-plan-turns",
       "type": "hottext",
-      "passageId": "p-cover-story",
+      "passageId": "p-the-last-run",
       "targets": [
         "c1-lit-6-text-structure"
       ],
       "coachTopic": "structure-story-parts",
       "dok": 3,
       "mode": "sentence",
-      "stem": "One sentence is where the card in Jonah's pocket runs out, and one is the rule the story gives him instead.  Tap those two.",
+      "stem": "Tap the two sentences where the story turns away from the plan.",
       "spans": [
-        "It says school project, local architecture, and the number fourteen bus from Halloway Road.",
-        "Then she asks whether his teacher sent a permission letter ahead, and the answer to that is nowhere on the card.",
-        "There is a long beat where Jonah can hear his own pulse doing something stupid and loud in his ears.",
-        "Jonah climbs the stairs at an ordinary pace and makes himself count them.",
-        "Marchetti's real rule surfaces half a second later, which is that when the cover runs out you never invent, you offer something boring that can be checked.",
-        "Halfway up he works out that the useful part was never the letter at all."
+        "The person is Okafor, a quiet instructor who will spend the morning pretending to be frightened.",
+        "What actually happens is different.",
+        "Jonah's scarf is still around his neck.",
+        "Afterward Marchetti asks why she was late, and Ines tells him about the man in the grey coat, the untouched cup, and the phone lying face down.",
+        "Ines does not go in.",
+        "Nobody runs."
       ],
       "key": [
         1,
         4
       ],
-      "explain": "A scene is built out of parts that each do a job, and two of these are the hinge the rest turns on.  One sentence is where the cover runs out, and the next thing the reader is given is the rule that replaces it.  The eleven words, the loud pulse, the counted stairs, and the realisation on the way up all sit on one side of that hinge or the other, which is how you can tell none of them is it."
+      "explain": "The story sets out the plan first, then turns on two short sentences:  what actually happens is different, and Ines does not go in.  Everything after them follows from her choice at the door."
     },
     {
-      "id": "l6-cloze-where-the-aside-sits",
+      "id": "l6-cloze-how-the-run-is-framed",
       "type": "cloze",
-      "passageId": "p-relay-room",
+      "passageId": "p-the-last-run",
       "targets": [
         "c1-lit-6-text-structure"
       ],
       "coachTopic": "structure-story-parts",
       "dok": 3,
-      "stem": "Complete the note on how this story is built.  The narrator stops the clock in the middle of the wait to explain that {{0}}, and that aside is placed where it is because it comes {{1}}, so the reader is holding the decision at the same moment she is.",
+      "stem": "Finish the description of how the story is built.  It opens with {{0}}, and it closes with {{1}}.",
       "blanks": [
         {
           "choices": [
-            "calling the exercise off is not the safe choice",
-            "the hiss means the radio set has broken down",
-            "Jonah has already been caught at the desk"
+            "the rule that Marchetti reads out twice",
+            "the car waiting at the top of the ramp",
+            "the man in the grey coat at the next table"
           ],
           "key": 0
         },
         {
           "choices": [
-            "after Jonah comes back out",
-            "at the very start of the story",
-            "before the radio clicks twice"
+            "Ines buying a bottle of water she does not want",
+            "Jonah taking off his scarf on the platform",
+            "Marchetti explaining why the delay was right"
           ],
           "key": 2
         }
       ],
-      "explain": "The aside is not a digression; it is positioned.  It arrives at ten twenty-one, one minute before the radio clicks, so the reader weighs the decision without yet knowing how it turns out.  Move the same paragraph to the end and it stops being a decision and becomes an excuse, because by then everybody knows nothing went wrong.  The hiss gets an aside of its own, but the narrator says the hiss means the set is working; only silence with no hiss underneath would mean it is dead."
+      "explain": "The story is framed by Marchetti.  It opens with the rule he reads out twice, that the person being brought out never decides anything, and it closes with his verdict on the morning:  four minutes cost nothing."
     },
     {
-      "id": "l6-ebsr-what-the-brief-is-for",
+      "id": "l6-ebsr-a-person-not-a-package",
       "type": "ebsr",
-      "passageId": "p-beacon-brief",
+      "passageId": "p-getting-someone-out",
       "targets": [
         "c1-inf-7-language-use"
       ],
       "coachTopic": "viewpoint-purpose",
       "dok": 3,
       "partA": {
-        "stem": "Source A gives real facts about a real product.  What is the writer's purpose in giving them?",
+        "stem": "Why does the note begin by comparing a person with a package?",
         "choices": [
-          "To tell a department what the beacon is rated for and how it is carried.",
-          "To warn departments about the danger of dead air.",
-          "To prove that rock is no longer a barrier to radio contact.",
-          "To move a reader from interest to a purchase."
+          "To show that packages are much harder to hide than people on a crowded street",
+          "To show that a person needs a faster route than a package does",
+          "To show that a package needs no plan card, unlike a person",
+          "To show that a person can get frightened, and a package cannot"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from Source A best supports the answer you just gave?",
+        "stem": "Which sentence from the note best supports your answer?",
         "choices": [
-          "The Wren-7 has proven that forty feet of rock is no longer a barrier to contact.",
-          "The Wren-7 is rated for water, dust, and impact.",
-          "Until now the only honest answer to dead air has been a length of wire and a great deal of hope.",
-          "Departments that have been saving for hardwired line can spend that money where it will do more good."
+          "Every exfiltration starts with a plan card, and every line on it is settled before the day.",
+          "Moving a person is harder than moving a package.",
+          "It names a time limit, and if the pickup slips by more than ten minutes, the whole run is called off.",
+          "A package does not get frightened, change its mind, or decide halfway down a street that it would rather run."
         ],
         "key": {
           "0": 1,
@@ -2616,77 +2649,84 @@
         }
       },
       "distractorRationale": {
-        "0": "Water, dust, and impact are what the beacon is rated for, and that paragraph is the product description.  A part of a document is not the purpose of the document.",
-        "1": "The brief does describe dead air, in one sentence, just before the beacon arrives to solve it.  A danger set up in a single line is the opening of a sales pitch rather than the point of the document.",
-        "2": "That is the brief's boldest claim, and a claim is what a document says rather than what it is for.  The very next line tells departments where to spend the money instead."
+        "0": "The note never says packages are hard to hide.  It says a person is harder to move, because a person can be frightened.",
+        "1": "Speed is not the point, and the note says nobody runs.  The difference is that a person can change their mind and a package cannot.",
+        "2": "The note says every exfiltration starts with a plan card.  It compares the two to explain why the person never decides, not to say who needs a card."
       },
-      "explain": "Purpose is not the same as content, and this document is full of real content.  Every part of it points one way: the danger gets one sentence, the test gets one paragraph, and the reader is then told where to move a budget and given a sales office to ring.  A document written to record a test would have carried a date."
+      "explain": "The comparison sets up the note's first rule.  A package cannot get frightened, change its mind or decide to run, and a person can, so the whole exfiltration is planned around keeping every decision out of the moved person's hands."
     },
     {
-      "id": "l6-short-who-the-entry-was-written-for",
+      "id": "l6-short-what-the-stop-outranks",
       "type": "shorttext",
-      "passageId": "p-beacon-log",
+      "passageId": "p-getting-someone-out",
       "targets": [
         "c1-inf-7-language-use"
       ],
       "coachTopic": "viewpoint-purpose",
       "dok": 2,
-      "stem": "Source B was never published anywhere.  In three words or fewer, who was it written for?",
+      "stem": "In five words or fewer, what does the stop signal outrank?",
       "accept": [
-        "the staff",
-        "staff",
-        "the staff themselves",
-        "staff themselves",
-        "the training staff",
-        "training staff",
-        "themselves",
-        "the instructors",
-        "instructors"
+        "everything else",
+        "everything else on the card",
+        "everything else on it",
+        "everything on the card",
+        "everything on it",
+        "everything",
+        "anything else",
+        "anything else on the card",
+        "every other line",
+        "all other lines",
+        "all the other lines",
+        "all the rest",
+        "the rest of the card",
+        "all the others",
+        "every other rule",
+        "all the other rules"
       ],
-      "maxWords": 3,
-      "explain": "The entry says outright that it is written for the staff themselves and is not published anywhere, and everything else about it follows from that one fact.  Nobody is being persuaded, so the numbers arrive raw, the awkward local conditions get written down, and the limits of the evidence are stated rather than hidden."
+      "maxWords": 5,
+      "explain": "The note puts the stop signal above every other line on the card, so it wins over the go signal, the routes and the time limit alike.  To outrank something is to rank higher than it."
     },
     {
-      "id": "l6-mc-the-chain-under-dead-air",
+      "id": "l6-mc-why-plan-the-second-route",
       "type": "mc",
-      "passageId": "p-dead-air",
+      "passageId": "p-getting-someone-out",
       "targets": [
         "c1-inf-5-analysis"
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "Which chain of causes does the article build, with each step leading to the next?",
+      "stem": "According to the note, why is the second route planned as carefully as the first?",
       "choices": [
-        "Relays fail, so the signal dies, so silence becomes ambiguous.",
-        "Rock absorbs the signal, so a team needs a more powerful radio, and a powerful radio pushes through and ends the silence.",
-        "Rock absorbs the signal, so a radio goes quiet, and a quiet radio could mean three different things, so the crews fix a time to check in.",
-        "A team below is in trouble, so the radio goes quiet, so the surface crew sends help down the tunnel."
+        "Because the second route usually turns out to be the faster one",
+        "Because the person being moved picks which route to take",
+        "Because a route that was only sketched is not really a route",
+        "Because the time limit starts counting on the second route"
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "Relays are part of the fix, and the fix comes after the problem.  Putting the cure before the disease turns the second half of the article into the cause of the first.",
-        "1": "That is the chain the article names and then rejects in a single sentence, saying power was never the problem the rock created.  Rejected reasoning is still reasoning printed on the page, which is why it is easy to pick up by mistake.",
-        "3": "You have run it backwards.  Trouble is one of the three things silence might mean, and the whole difficulty is that the crew above cannot tell which, so silence cannot be what tells them to send help."
+        "0": "Speed is not why.  Nobody runs on either route, and the note never says which is faster.",
+        "1": "The person being moved never decides anything, including the route.",
+        "3": "The ten-minute rule is about lateness, not about either route.  A second route that was only sketched is not really a route at all."
       },
-      "explain": "Following an article means following what causes what.  Rock turns signal into heat, so radios go quiet; silence can mean busy, out of range, or in serious trouble, so it carries no usable information; a fixed check-in interval is what turns a missed minute back into a fact.  Every fix in the second half answers a specific problem named in the first."
+      "explain": "A team that switches to its second route needs a real route, not a rough idea.  The note says a second route that was only sketched is not really a route at all, so it is planned as carefully as the first."
     },
     {
-      "id": "l6-ms-three-moves-one-system",
+      "id": "l6-ms-what-a-card-names",
       "type": "ms",
-      "passageId": "p-long-way",
+      "passageId": "p-getting-someone-out",
       "targets": [
         "c1-inf-5-analysis"
       ],
       "coachTopic": "inference-relationships",
-      "dok": 3,
-      "stem": "The article gives three moves and one counting rule.  Choose the three statements that describe how those parts work together.",
+      "dok": 2,
+      "stem": "Choose the three things the note says a plan card names before the day.",
       "choices": [
-        "Each move forces a follower into a choice that could be the wrong one",
-        "The moves are listed in order, from the one that works best to the one that works least",
-        "Each move is designed for a different kind of street, such as a busy one or a quiet one",
-        "The moves make sightings, and the rule says how many count",
-        "A single sighting from one move is nothing on its own",
-        "The counting rule replaces the moves once a courier is experienced"
+        "a signal that means stop",
+        "the name of the person being moved",
+        "the officer who will lead the run",
+        "a time limit for the pickup",
+        "a fallback for another day",
+        "a password the person must say"
       ],
       "key": [
         0,
@@ -2694,11 +2734,11 @@
         4
       ],
       "distractorRationale": {
-        "1": "They are numbered first, second, third, and numbering is not ranking.  The article never says one move works better than another, and the change of level is never called the best.",
-        "2": "Stairs, windows, and side streets do suggest different streets, and the article never sorts them that way.  It sorts them by what each one does to a follower.",
-        "5": "The rule counts what the moves produce, so it cannot replace them.  With no moves there are no sightings to count."
+        "1": "The card names signals, routes, a time limit and a fallback.  It never names the person.",
+        "2": "No officer's name is in the note's list of what the card names.",
+        "5": "The note lists no password among the card's lines:  only signals, routes, a time limit and a fallback."
       },
-      "explain": "The three moves and the counting rule are one system rather than four separate tips.  Every move puts a follower somewhere that staying hidden requires a decision, every decision risks a sighting, and the rule of three is what turns a pile of sightings into a verdict.  One sighting is nothing at all, so no single move can settle anything by itself."
+      "explain": "The card settles everything before the day:  the signal that means go, the signal that means stop, a first and a second route, a time limit, and a fallback for another day."
     },
     {
       "id": "l1-ebsr-why-two-people",
@@ -4554,31 +4594,31 @@
       "explain": "The article does not open with its advice. It reports three test results first, draws out the lesson that the tag stayed constant while climate changed, explains the three physical reasons climate matters, and only then tells a buyer what to ask. Moving the advice to the front would turn it into an opinion with nothing underneath it."
     },
     {
-      "id": "l6-ebsr-two-seconds-that-mattered",
+      "id": "l6-ebsr-the-lesson-jonah-takes",
       "type": "ebsr",
-      "passageId": "p-on-the-line",
+      "passageId": "p-the-stop",
       "targets": [
         "c1-lit-2-central-ideas"
       ],
       "coachTopic": "central-idea",
       "dok": 3,
       "partA": {
-        "stem": "What is the central idea of the watching scene as a whole?",
+        "stem": "What lesson does Jonah take from the day?",
         "choices": [
-          "Calling Marchetti the moment anything looks wrong is always the safest choice.",
-          "A watcher's job is easy as long as nothing unusual happens.",
-          "The man in the grey jacket was secretly part of the exercise, sent in as a test.",
-          "Noticing the moment you almost stop checking is more valuable than finding an actual threat."
+          "A run should go on until someone can say why it must stop",
+          "The one leading the run should decide whether it stops",
+          "A run that ends early means the one leading it has failed",
+          "Whoever can see a danger may not be the one nearest to it"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "stem": "Which sentence from the passage best supports your answer?",
         "choices": [
-          "I did not believe him until about four minutes ago.",
-          "At two-nineteen a man in a grey jacket walks in through the archive doors.",
-          "A plan has a margin built into it on purpose, and using the margin is not the same as the plan failing.",
-          "Neither one of us actually found anything today, and what we found instead was the two seconds where we almost stopped checking."
+          "The source is right there, twenty steps away, pretending to choose apples at a fruit stall, and nothing Jonah can see is wrong.",
+          "The run is over, and Jonah feels as if someone has pulled the ground out from under his shoes.",
+          "The square is full of ordinary people doing ordinary things, and he has a question ready, which is simply why.",
+          "Then he says that the person who can see the danger is not always the person standing closest to it."
         ],
         "key": {
           "0": 2,
@@ -4588,62 +4628,62 @@
         }
       },
       "distractorRationale": {
-        "0": "That sentence argues against calling immediately, since a plan's margin means late is not automatically a failure; it does not support urgency.",
-        "1": "That line is about the narrator not believing something in advance, not about the job being easy; what follows shows the wait was genuinely tense.",
-        "2": "The passage never says the man was part of the exercise; he is logged as an observation, not identified as connected to anything."
+        "0": "Jonah never asks why, and the stop was still right.  The reason came only afterward.",
+        "1": "Jonah was leading and saw nothing wrong, yet the stop was right.  Ines, not the one leading, was the one who called it.",
+        "2": "Jonah ends the day with a lesson, not a failure.  Stopping the run was the right call."
       },
-      "explain": "The scene's real discovery is not a threat spotted outside the car; it is the narrator noticing, afterward, the exact two seconds where checking almost stopped.  That moment of near-carelessness, not the man in the jacket, is what the scene is actually about."
+      "explain": "Jonah was closest to the source, and nothing he could see was wrong, yet the run was right to stop.  His lesson is that the person who can see the danger is not always the person standing closest to it."
     },
     {
-      "id": "l6-mc-what-the-archive-scene-is-about",
+      "id": "l6-mc-where-jonah-is",
       "type": "mc",
-      "passageId": "p-reading-room",
+      "passageId": "p-the-stop",
       "targets": [
-        "c1-lit-2-central-ideas"
+        "c1-lit-5-analysis"
       ],
-      "coachTopic": "central-idea",
-      "dok": 3,
-      "stem": "What is The Reading Room, as a whole, really about?",
+      "coachTopic": "inference-relationships",
+      "dok": 2,
+      "stem": "What is Jonah doing at the moment Ines takes off her scarf?",
       "choices": [
-        "Showing that Marchetti's cover stories never work as planned.",
-        "Learning the fastest way to search a county archive.",
-        "Proving that archivists cannot be trusted with sensitive folders.",
-        "Staying careful even when nothing has obviously gone wrong yet."
+        "Buying bread at the bakery on the corner",
+        "Sitting on the bench beside the fountain",
+        "Waiting at the far exit with the delivery van",
+        "Crossing the square toward the source"
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "Ines's cover story works exactly as intended, and the passage never suggests otherwise; the tension comes from an unexpected box, not a failed cover.",
-        "1": "Speed is never the passage's concern; Ines uses the fifteen-minute wait productively rather than trying to shorten it.",
-        "2": "The archivist is never shown acting untrustworthy; the caution in the scene belongs entirely to Ines, not to any failure on his part."
+        "0": "He walks past the bakery afterward, without stopping, on his way out of the square.",
+        "1": "Jonah is not on any bench.  He is halfway across the market square when the scarf comes off.",
+        "2": "Jonah is not at any exit.  He is out in the square, heading for the source at the fruit stall."
       },
-      "explain": "Nothing in the scene actually goes wrong. The tension comes entirely from Ines choosing to stay careful anyway, reading slips she did not have to read and opening a box slowly that she did not have to open at all."
+      "explain": "The scarf comes off when Jonah is halfway across the market square at ten past two, heading for the source at the fruit stall.  Only then does he turn left and walk out of the square."
     },
     {
-      "id": "l6-ebsr-pulse-loud-in-his-ears",
+      "id": "l6-ebsr-the-ground-pulled-out",
       "type": "ebsr",
-      "passageId": "p-cover-story",
+      "passageId": "p-the-stop",
       "targets": [
         "c1-lit-3-word-meanings"
       ],
       "coachTopic": "vocab-figurative",
       "dok": 3,
       "partA": {
-        "stem": "What does the passage mean by saying Jonah can hear \"his own pulse doing something stupid and loud in his ears\"?",
+        "stem": "When the run stops, Jonah feels as if someone \"has pulled the ground out from under his shoes.\"  What does that comparison show?",
         "choices": [
-          "That Jonah is worried his own heartbeat might damage his hearing.",
-          "That a real, external noise is disturbing him from somewhere nearby.",
-          "That Jonah is annoyed at how loudly Ferris is speaking to him.",
-          "That he is so nervous his own heartbeat sounds loud to him."
+          "Jonah has tripped on the cobbles of the busy market square",
+          "Jonah is angry with Ines for giving him the stop signal",
+          "Jonah is glad that the long, tense run is finally over",
+          "Jonah is shaken, since he was sure it was going well"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "stem": "Which sentence from the passage best supports your answer?",
         "choices": [
-          "The museum lobby smells like floor polish and cold coffee.",
-          "She asks which school he is from, and he tells her without any trouble at all.",
-          "His hands are shaking slightly, which annoys him, because nothing has actually gone wrong.",
-          "There is a long beat where Jonah can hear his own pulse doing something stupid and loud in his ears."
+          "The square is full of ordinary people doing ordinary things, and he has a question ready, which is simply why.",
+          "The fallback is tomorrow at the same hour, and the source will still be there.",
+          "The source is right there, twenty steps away, pretending to choose apples at a fruit stall, and nothing Jonah can see is wrong.",
+          "Instead he turns left rather than right, walks past the bakery without stopping, and leaves the square at the same easy pace he came in with."
         ],
         "key": {
           "0": 3,
@@ -4653,61 +4693,61 @@
         }
       },
       "distractorRationale": {
-        "0": "That sentence is the one the question asks about.  It says his pulse feels loud to him, and nothing in it or anywhere else in the passage says he worries about his hearing.",
-        "1": "That sentence describes smell, not sound, and nothing in the passage suggests an actual external noise is bothering Jonah.",
-        "2": "That sentence is about how easily he answers Ferris's question, not about her volume or tone; nothing describes her as loud."
+        "0": "Nobody trips.  The ground is a comparison for how sure he had felt, not a real fall.",
+        "1": "Jonah never argues or blames her.  He does not even ask why.",
+        "2": "Relief is not what the comparison shows.  Losing the ground under you is a shock, not a rest."
       },
-      "explain": "A racing pulse cannot literally be loud enough to hear from outside the body.  Describing it as loud and stupid puts the reader inside Jonah's own nervousness, where his heartbeat feels impossible to ignore, rather than reporting an actual external sound.  The sentence the question quotes says only that the pulse is loud, not why, so the proof has to come from another line.  His hands shaking on the stairs, when nothing has actually gone wrong, show the same nervousness."
+      "explain": "Jonah was sure everything was fine:  the source was twenty steps away and nothing he could see was wrong.  Having the run stopped anyway feels like losing the ground under his feet, a sudden shock when he thought he was standing on something solid."
     },
     {
-      "id": "l6-hot-precise-not-vague",
+      "id": "l6-hot-two-comparisons",
       "type": "hottext",
-      "passageId": "p-reading-room",
+      "passageId": "p-the-stop",
       "targets": [
         "c1-lit-3-word-meanings"
       ],
       "coachTopic": "vocab-figurative",
       "dok": 2,
       "mode": "sentence",
-      "stem": "Tap the two sentences that use figurative language to describe Ines or the room, rather than simply stating what happened.",
+      "stem": "Tap the two sentences that describe something by comparing it to something else.",
       "spans": [
-        "Ines has never liked reading rooms, and she is fairly sure the feeling is mutual.",
-        "She thanks him, takes both boxes to the table nearest the window, and opens the one she actually came for first.",
-        "She reads the request slips still sitting in the tray, upside down, the way you read a newspaper on someone else's table.",
-        "The Halloway folder is exactly where the request slip said it would be."
+        "The plan card is the same kind of card, with the same newspaper and the same scarf, and Jonah has read it so many times that the words have worn smooth in his head.",
+        "The square is full of ordinary people doing ordinary things, and he has a question ready, which is simply why.",
+        "He is halfway across the market square at ten past two when Ines takes off her scarf, and the whole plan stops like a clock with its battery pulled out.",
+        "The source is right there, twenty steps away, pretending to choose apples at a fruit stall, and nothing Jonah can see is wrong."
       ],
       "key": [
         0,
         2
       ],
-      "explain": "Two sentences say more than their words literally mean.  A room cannot dislike anybody, so calling the feeling mutual is a joke about how out of place Ines feels there.  Reading slips the way you read a newspaper on someone else's table compares her quiet snooping to an everyday habit.  The other two sentences simply report what Ines does and finds."
+      "explain": "Two sentences compare one thing to another.  The plan's words have worn smooth in Jonah's head, the way something handled too often wears smooth, and the plan stops like a clock with its battery pulled out.  The other two simply report what is there."
     },
     {
-      "id": "l6-ebsr-two-infiltrations-compared",
+      "id": "l6-ebsr-who-could-see-it",
       "type": "ebsr",
-      "passageId": "p-reading-room",
+      "passageId": "p-the-stop",
       "targets": [
         "c1-lit-5-analysis"
       ],
       "coachTopic": "inference-relationships",
-      "dok": 4,
+      "dok": 3,
       "partA": {
-        "stem": "At the museum, Jonah's cover card runs out when Ferris asks a second question.  What keeps Ines from ever reaching that point with the archivist?",
+        "stem": "Why could Ines see the danger when Jonah could not?",
         "choices": [
-          "She tells him her real reason for coming, so there is nothing to catch.",
-          "She was told to give no story, so she says nothing at all when he asks.",
-          "He is a trainee with slips to sort, too busy to ask her anything more.",
-          "Her answer is so dull that he has no reason to ask her anything more."
+          "She had planned the van well ahead of time as a test for Jonah",
+          "Jonah was too busy choosing apples at the fruit stall to look",
+          "Ines knew the market square far better than Jonah did",
+          "From the bench, she could see the far exit and he could not"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from The Reading Room best supports the answer you just gave?",
+        "stem": "Which sentence from the passage best supports your answer?",
         "choices": [
-          "No name to use, no story if anyone asks, because a reading room's whole reason for existing is that anybody can walk in and ask for a folder.",
-          "He wears a lanyard that says TRAINEE, and a stack of request slips he clearly has not finished sorting.",
-          "Ines tells him the truth turned sideways: a school project on local transportation.",
-          "It is the kind of answer nobody has ever wanted to hear more about."
+          "The source keeps choosing apples and never looks up.",
+          "He is halfway across the market square at ten past two when Ines takes off her scarf, and the whole plan stops like a clock with its battery pulled out.",
+          "A delivery van had stopped across the far exit, the one their second route needed, and its driver had started stacking crates in the gap.",
+          "From where Jonah stood, he could not possibly have seen it, but from the bench beside the fountain, she could see nothing else."
         ],
         "key": {
           "0": 2,
@@ -4717,115 +4757,115 @@
         }
       },
       "distractorRationale": {
-        "0": "The truth turned sideways is not the whole truth.  She is there to photograph the Halloway folder, and she says school project, which is true enough to say easily and dull enough that nobody asks more.",
-        "1": "The brief does say no story if anyone asks, and she still answers him.  She tells him the truth turned sideways, a school project, and his questions stop because of how dull that answer is.",
-        "2": "The lanyard and the unsorted slips are real, and they describe him rather than the reason his questions stop.  The passage gives that reason right after her answer: nobody has ever wanted to hear more about it."
+        "0": "Nothing says Ines planned the van.  A driver stopped there and started stacking crates.",
+        "1": "The source is the one choosing apples, not Jonah.  Nothing says Jonah stopped to choose anything.",
+        "2": "The story never compares how well they knew the square.  It says Jonah could not possibly have seen the van, and Ines could."
       },
-      "explain": "Marchetti told Jonah a cover story should be boring enough that nobody asks a second question, and his card ran out when Ferris asked one anyway.  Ines never gets that far.  She gives the truth turned sideways, a school project on local transportation, and the passage says at once that it is the kind of answer nobody has ever wanted to hear more about."
+      "explain": "Ines and Jonah were looking from different places.  From where Jonah stood, he could not possibly have seen the van at the far exit, but from the bench beside the fountain, Ines could see nothing else."
     },
     {
-      "id": "l6-mc-two-watchers-compared",
+      "id": "l6-mc-the-source-stays-calm",
       "type": "mc",
-      "passageId": "p-on-the-line",
+      "passageId": "p-the-stop",
       "targets": [
         "c1-lit-5-analysis"
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "Both On the Line and The Van on Halloway Road follow someone waiting in a car for a signal.  What do the two watchers have in common in how they handle the wait?",
+      "stem": "When the run stops, the source keeps choosing apples and never looks up.  What does that show?",
       "choices": [
-        "Both narrators are told over the radio, minute by minute, exactly what is happening inside.",
-        "Both narrators call for help as soon as the check-in time passes, before the deadline arrives.",
-        "Both narrators leave the vehicle to walk over and get a closer look at the doors they are watching.",
-        "Both narrators talk themselves through what they actually know, in order, rather than reacting to their first guess."
+        "That the source will pick a new time for the run",
+        "That the source is angry with the team for stopping the run",
+        "That the source had seen the van before Ines did",
+        "That the source stays in role and leaves the choices to the team"
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "Neither passage describes an ongoing radio briefing; each narrator works from a plan agreed on beforehand and a signal that arrives only once.",
-        "1": "Neither narrator calls at all.  Each one comes close, reaching for the call and then holding off, but coming close to calling is not calling.",
-        "2": "Neither narrator leaves the vehicle at any point; both watchers stay parked and observe from where they are."
+        "0": "The source picks nothing.  Nothing in the story has the source deciding anything about the run.",
+        "1": "Nothing shows anger.  The source never even looks up.",
+        "2": "Nothing in the story says the source saw the van, or anything else.  The source keeps choosing apples."
       },
-      "explain": "Both watchers face the same temptation, a fast reaction to an ambiguous sign, and both resist it the same way, by naming exactly what they know rather than what they are guessing.  That shared discipline, not the specific details of either scene, is what connects the two."
+      "explain": "The source is pretending to choose apples, and when the run stops the source simply goes on pretending.  The source never looks up to ask what is happening, because the choices belong to the team, not to the person being brought out."
     },
     {
-      "id": "l6-hot-scene-that-turns",
+      "id": "l6-hot-the-reason-held-back",
       "type": "hottext",
-      "passageId": "p-reading-room",
+      "passageId": "p-the-stop",
       "targets": [
         "c1-lit-6-text-structure"
       ],
       "coachTopic": "structure-story-parts",
       "dok": 3,
       "mode": "sentence",
-      "stem": "Tap the two sentences near the end that leave part of the story unfinished, setting up a problem for later instead of closing it.",
+      "stem": "The story keeps the reason for the stop hidden at first.  Tap the two sentences where the reason finally comes out.",
       "spans": [
-        "Three photographs and a page of notes photograph cleanly in under a minute.",
-        "The unclaimed box sits back on its cart, unopened past the first folder.",
-        "Walking out, she signs the log with a real signature this time.",
-        "Ines decides on the stairs that the second name on that shelf list is tomorrow's problem, not today's."
+        "That evening Marchetti asks Jonah what the day taught him.",
+        "On the walk back Ines explains what she saw.",
+        "The source is right there, twenty steps away, pretending to choose apples at a fruit stall, and nothing Jonah can see is wrong.",
+        "A delivery van had stopped across the far exit, the one their second route needed, and its driver had started stacking crates in the gap."
       ],
       "key": [
         1,
         3
       ],
-      "explain": "The job itself is finished once the Halloway folder is photographed, and signing the log closes her visit.  Two sentences refuse to close everything, though.  The second box goes back on its cart mostly unread, and the unknown name on the shelf list is saved for tomorrow, so the scene ends with a problem still waiting."
+      "explain": "The stop happens in the middle of the story with no reason given, and Jonah never asks for one.  The reason comes only on the walk back:  Ines explains what she saw, a delivery van stopped across the far exit their second route needed."
     },
     {
-      "id": "l6-cloze-where-the-tension-turns",
+      "id": "l6-cloze-start-and-last-line",
       "type": "cloze",
-      "passageId": "p-on-the-line",
+      "passageId": "p-the-stop",
       "targets": [
         "c1-lit-6-text-structure"
       ],
       "coachTopic": "structure-story-parts",
       "dok": 3,
-      "stem": "Finish the summary.  The scene's tension rises sharply at {{0}}, and it resolves the moment {{1}}.",
+      "stem": "Finish the sentences about the order of the story.  It starts with {{0}}, and its last line is about {{1}}.",
       "blanks": [
         {
           "choices": [
-            "four minutes into the wait, before anything has happened yet",
-            "two-oh-one, when Ines first goes in through the archive doors",
-            "two-twenty-five, when the deadline passes in silence"
+            "the van at the far exit",
+            "Marchetti's question that evening",
+            "Jonah taking his turn to lead"
           ],
           "key": 2
         },
         {
           "choices": [
-            "Marchetti assigns the narrator to the parking lot",
-            "the man in the grey jacket first appears",
-            "the phone buzzes once at two-twenty-seven"
+            "the source choosing apples",
+            "the driver stacking crates in the gap",
+            "the fallback set for the next day"
           ],
           "key": 2
         }
       ],
-      "explain": "The scene is built around a single deadline. Tension climbs as two-twenty-five arrives with silence, and it breaks the instant a single buzz answers it two minutes later, a shape the passage follows exactly in the order it happened."
+      "explain": "The story starts with Jonah taking his turn to lead and ends looking forward, not back:  the fallback is tomorrow at the same hour, and the source will still be there."
     },
     {
-      "id": "l6-ebsr-why-a-brief-sells",
+      "id": "l6-ebsr-why-call-it-a-promise",
       "type": "ebsr",
-      "passageId": "p-petrel-brief",
+      "passageId": "p-getting-someone-out",
       "targets": [
         "c1-inf-7-language-use"
       ],
       "coachTopic": "viewpoint-purpose",
       "dok": 3,
       "partA": {
-        "stem": "Early in the brief, Corvid Systems describes earlier tags that drained fast because they searched for a signal all the time.  Why would a brief written to sell the Petrel-4 include that?",
+        "stem": "Why does the note end by calling the card a promise?",
         "choices": [
-          "It tells teams to pack spare batteries in case a tag drains fast.",
-          "It admits that the Petrel-4 also searches when there is no signal.",
-          "It reports a test Corvid ran on the older tags at its own facility.",
-          "It sets up a problem that the Petrel-4 is then said to solve."
+          "To remind officers that the card can still be changed partway through a run",
+          "To show that the person being moved helps settle every line before the day",
+          "To promise the person being moved that the pickup will be on time",
+          "To show that the card is all the moved person gets back for every choice"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from the brief best supports the answer you just gave?",
+        "stem": "Which sentence from the note best supports your answer?",
         "choices": [
-          "Teams that have been carrying spare batteries or backup trackers can leave that extra weight behind.",
-          "Our engineers ran that test at our own facility, cycling the unit through a normal daily routine of movement and stillness for the entire month.",
-          "Earlier tags on the market drained fast because they searched constantly for a signal, even when none was there.",
-          "The Petrel-4 solves that by learning the pattern of when a fix is likely and searching only then."
+          "Last, it names a fallback, so that calling a run off never means losing the person.",
+          "It names a time limit, and if the pickup slips by more than ten minutes, the whole run is called off.",
+          "Every exfiltration starts with a plan card, and every line on it is settled before the day.",
+          "The person being moved has handed over every choice, and the only thing they hold in return is the card."
         ],
         "key": {
           "0": 0,
@@ -4835,74 +4875,78 @@
         }
       },
       "distractorRationale": {
-        "0": "The brief tells teams the opposite: they can leave spare batteries and backup trackers behind.  Describing tags that drained fast makes the Petrel-4 sound like the end of that worry, not a reason to pack for it.",
-        "1": "That sentence is about earlier tags, and the very next one says the Petrel-4 searches only when a fix is likely.  The brief describes the old habit so it can say its own tag has dropped it.",
-        "2": "The test at Corvid's own facility was a month of the Petrel-4 itself.  The brief reports no test of older tags, and it describes their problem only to set up its own tag as the answer."
+        "0": "The note says every line on the card is settled before the day.  It is not changed during the run.",
+        "1": "The person being moved never decides anything.  Every line is settled before the day, and the person only holds the card.",
+        "2": "The card lets a pickup slip by up to ten minutes.  The promise is to keep to the card, not to be quick."
       },
-      "explain": "A brief written to sell starts with a problem its product can end.  Earlier tags drained fast because they searched for a signal all the time, and the next sentence says the Petrel-4 solves that by searching only when a fix is likely.  Naming the old weakness first is how the brief makes its own tag sound like the answer before a single test result appears."
+      "explain": "The person being moved hands over every choice, and the card is all they get in return.  That is why the note calls the card a promise."
     },
     {
-      "id": "l6-short-log-purpose",
+      "id": "l6-short-the-hardest-part",
       "type": "shorttext",
-      "passageId": "p-cold-weather-log",
+      "passageId": "p-getting-someone-out",
       "targets": [
         "c1-inf-7-language-use"
       ],
       "coachTopic": "viewpoint-purpose",
       "dok": 2,
-      "stem": "In four words or fewer, who is the Halloway cold-weather log actually written for?",
+      "stem": "In four words or fewer, what does the note call the hardest part for new officers?",
       "accept": [
-        "the staff themselves",
-        "training staff",
-        "the staff",
-        "site staff",
-        "themselves",
-        "staff themselves"
+        "the waiting",
+        "waiting",
+        "the wait",
+        "wait",
+        "the waiting part",
+        "waiting at the door",
+        "waiting for the pickup",
+        "waiting for a pickup",
+        "waiting around",
+        "the waiting is hardest"
       ],
       "maxWords": 4,
-      "explain": "The log states its own audience directly: it is written for the staff themselves, not published anywhere, which is a different purpose entirely from a brief meant to sell a product to an outside buyer."
+      "explain": "The note names it plainly:  the hardest part for new officers is the waiting.  A pickup a few minutes behind feels like a disaster to the person standing at the door, but it almost never is."
     },
     {
-      "id": "l6-mc-two-briefs-compared",
+      "id": "l6-mc-late-or-hurried",
       "type": "mc",
-      "passageId": "p-petrel-brief",
+      "passageId": "p-getting-someone-out",
       "targets": [
         "c1-inf-5-analysis"
       ],
-      "coachTopic": "evidence-across-texts",
-      "dok": 4,
-      "stem": "Both the Wren-7 brief and the Petrel-4 brief are written by Corvid Systems to sell a product.  What do the two briefs have in common in how they handle a weakness in their own claim?",
+      "coachTopic": "inference-relationships",
+      "dok": 3,
+      "stem": "According to the note, why is a late pickup better than a hurried one?",
       "choices": [
-        "Both state their best-case number with full confidence and place the limiting condition in a single line near the end.",
-        "Both open by admitting that their product does not work as advertised, then list its selling points.",
-        "Both refuse to mention any test result at all and offer general promises instead.",
-        "Both recommend carrying a competitor's product as a backup in case theirs fails."
+        "A late one costs minutes, but a hurried one can cost everything",
+        "A hurried one breaks the time limit, but a late one stays inside it",
+        "A late one lets the person being moved choose the route",
+        "A late one feels calm to the officer standing at the door"
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "Neither brief admits a failure early; each opens with confident claims and saves its one qualifying detail for a single line much later in the document.",
-        "2": "Both briefs lead with a specific test result, the Wren-7's forty feet of stone and the Petrel-4's thirty days, stated as a central selling point.",
-        "3": "Neither brief recommends any other company's product; both are focused entirely on selling their own."
+        "1": "The ten-minute rule is about lateness, not haste.  Hurrying is dangerous because it rushes past a signal nobody checked.",
+        "2": "The person being moved never decides anything, so lateness does not give them a choice.",
+        "3": "The note says the opposite:  a late pickup feels like a disaster to the person standing at the door, even though it almost never is."
       },
-      "explain": "Two briefs, written by the same company for two different products, follow the identical pattern: an impressive headline number stated with total confidence, and one honest qualifier tucked into the small print where a skimming reader is least likely to find it."
+      "explain": "The note weighs the two side by side.  A late pickup costs a few minutes, while a pickup made in a hurry, past a signal nobody stopped to check, can cost the person everything."
     },
     {
-      "id": "l6-ms-two-studies-compared",
+      "id": "l6-ms-rules-and-their-reasons",
       "type": "ms",
-      "passageId": "p-three-climates",
+      "passageId": "p-getting-someone-out",
       "targets": [
         "c1-inf-5-analysis"
       ],
       "coachTopic": "evidence-across-texts",
-      "dok": 4,
-      "stem": "Three Climates, Three Runtimes and Three Tunnels, Three Answers both test the same kind of device across three different conditions. Choose the three ways the two articles are genuinely alike.",
+      "dok": 3,
+      "stem": "Choose the three statements that match one of the note's rules to the reason the note gives for it.",
       "choices": [
-        "Both report three separate results before drawing any general conclusion from them",
-        "Both conclude that the device itself, not the surrounding conditions, is what varied",
-        "Both end with practical advice about what a buyer or team should ask for",
-        "Both were written by the same organization that manufactures the device",
-        "Both name a specific physical property of the environment as the real explanation",
-        "Both recommend abandoning the device entirely"
+        "Nobody runs, because running makes a person stand out",
+        "Nobody runs, because the two routes are always far too short for it",
+        "The stop signal is obeyed at once, since an explained stop is too late",
+        "The stop signal is obeyed at once, because only the trainers are allowed to give it",
+        "A fallback is named, so calling a run off never means losing the person",
+        "A fallback is named, so that the person being moved can pick a better day"
       ],
       "key": [
         0,
@@ -4910,11 +4954,11 @@
         4
       ],
       "distractorRationale": {
-        "1": "Both articles conclude the opposite: the device stayed constant across every test, and the environment around it is what actually changed.",
-        "3": "Neither article is written by a manufacturer; one comes from an equipment review board and the other from a rescue training association, both independent of any company that sells the device.",
-        "5": "Neither article recommends giving up on the device; each treats it as genuinely useful once its real limits are understood and planned around."
+        "1": "The note never says the routes are short.  It says nobody runs because a running person is the one thing everybody looks at.",
+        "3": "Anyone who sees the stop signal obeys it.  The note says nothing about who is allowed to give it.",
+        "5": "The person being moved never decides anything, including the day.  The fallback exists so that the person is never lost."
       },
-      "explain": "Both articles follow the same shape: report several results side by side, name the specific ground or climate condition that explains the spread, and close with practical advice rather than a verdict on the device. That shared structure, seen in two unrelated articles about two different tools, is a genuine pattern, not a coincidence."
+      "explain": "Each rule comes with its reason.  Running makes a person the one thing everybody looks at, a stop that has to be explained comes too late, and a fallback means that calling a run off never loses the person."
     },
     {
       "id": "l1-mc-what-the-run-ends-at",
@@ -5541,111 +5585,114 @@
       "whyTheFigureIsNeeded": "The answer is a comparison of one whole row against another, in the memo's own left-to-right order, and only the memo puts the three temperatures in one line above the three runtimes.  A reader working from the article alone has to hold six separate values from one long paragraph, split across six sentences, before the pattern appears."
     },
     {
-      "id": "l6-mc-rule-lane-against-the-log",
+      "id": "l6-mc-the-lanes-at-nine-forty",
       "type": "mc",
-      "passageId": "p-relay-room",
-      "figureId": "fig-l3-relay-room",
-      "figureFact": "I call the whole exercise off",
+      "passageId": "p-the-last-run",
+      "figureId": "fig-l6-the-last-run",
+      "figureFact": "Ines is standing outside the café door",
       "targets": [
         "c1-lit-5-analysis"
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "On the timeline, the lane marked \"The rule\" puts \"I call the whole exercise off\" at ten twenty-two.  Find the first entry after that time on the lane marked \"I write down times\".  What do those two entries show when you read them together?",
+      "stem": "On the timeline, which dot stands at the same time as dot 1, and what does it show?",
       "choices": [
-        "The narrator called the exercise off at ten twenty-two, and the clicks came too late to stop it.",
-        "The rule's moment to call it off passed, and the check-in came eleven seconds after.",
-        "Jonah clicked twice at exactly the time the rule had set for him to check in.",
-        "The rule gave the narrator eleven more seconds past ten twenty-two to decide what to do."
+        "Dot 2, where Okafor follows her out of the café",
+        "Dot 3, where Ines is standing outside the café door",
+        "Dot 4, where Ines is standing outside the café door",
+        "Dot 3, where Ines walks in with the folded newspaper"
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "The call-off is on the rule's lane because the rule named it, not because anyone did it.  Her thumb came off the transmit key at ten twenty-one, and nothing was ever sent.",
-        "2": "The rule set the check-in for ten twenty, not ten twenty-two.  The clicks came at ten twenty-two and eleven seconds, which the narrator herself calls late.",
-        "3": "The rule says that if nothing has come through by ten twenty-two, the exercise is called off.  The eleven seconds are past the rule's time, not extra time the rule handed out."
+        "0": "Dot 2 is in the plan's lane too, two minutes after dot 1.  The dot across from dot 1, at the same time, is dot 3.",
+        "2": "Dot 4 is the last dot of the morning, not the one at nine forty.  The dot across from dot 1 is dot 3.",
+        "3": "Dot 3 is the right dot, but it shows Ines standing outside the café door.  Walking in is dot 1, in the plan's lane."
       },
-      "explain": "Reading one lane against the other shows what the plan demanded and what the narrator did.  The rule's lane puts \"I call the whole exercise off\" at ten twenty-two, and the narrator's own lane has no call at that time; its next entry is \"the radio clicks twice\" at ten twenty-two and eleven seconds.  The deadline passed without the call being made, and the check-in arrived just after it.  That gap is the decision she reached by reading down her list rather than by the clock alone.",
-      "whyTheFigureIsNeeded": "The passage gives the rule's ten twenty-two deadline in its first paragraph and the two clicks near its end, and it does not set them side by side; the timeline puts the call-off on the rule's lane and the clicks on the narrator's, eleven seconds apart, which is what shows the deadline passing with no call made."
+      "explain": "Dots 1 and 3 both stand at nine forty, one in each lane.  Dot 1, in the plan, has Ines walking in, and dot 3, in what actually happens, has her standing outside the café door.  Read across, they show the morning leaving the plan.",
+      "whyTheFigureIsNeeded": "The numbered dots and the lanes they belong to are drawn on the timeline, not in the story;  the item asks which dot stands across from dot 1, and only the drawing pairs them.",
+      "svgRead": "Opened art/ela-g6-spy/fig-l6-the-last-run.svg.  Dot 1 is <circle cx=\"221\" cy=\"128\" r=\"7\"/> with <text x=\"221\" y=\"114\">1</text> in the lane <text x=\"40\" y=\"134\">the plan</text>;  dot 3 is <circle cx=\"221\" cy=\"174\" r=\"7\"/> with <text x=\"221\" y=\"196\">3</text> in the lane <text x=\"40\" y=\"180\">what actually happens</text>, both at x=221.  The key pairs <text x=\"70\" y=\"234\">nine forty</text> with <text x=\"203\" y=\"234\">Ines walks in</text>, and <text x=\"70\" y=\"286\">nine forty</text> with <text x=\"203\" y=\"286\">Ines is standing outside the café door</text>."
     },
     {
-      "id": "l6-mc-reading-the-runtime-row",
+      "id": "l6-mc-inside-the-time-limit",
       "type": "mc",
-      "passageId": "p-three-climates",
-      "figureId": "fig-l5-three-climates",
-      "figureFact": "just under three days",
+      "passageId": "p-the-last-run",
+      "figureId": "fig-l6-the-last-run",
+      "figureFact": "she comes back the long way",
       "targets": [
         "c4-2-integrate"
       ],
       "coachTopic": "research-integrate",
       "dok": 3,
-      "stem": "Find the desert column on the card, and the freezing mountain column, where the runtime reads \"just under three days\".  How does the article explain the gap between those two runtimes?",
+      "stem": "The tradecraft note in this level calls a run off if the pickup slips by more than ten minutes.  On the timeline, which dot marks \"she comes back the long way\", and did the run stay inside that limit?",
       "choices": [
-        "Heat and cold cost a battery about the same, so the gap has to come from the tags.",
-        "Freezing air breaks the tag itself, while heat only makes the tag search harder.",
-        "Cold drains a battery fast, while heat wears it down over repeated hot stretches.",
-        "Heat protects a battery, so the desert tag outlasted what a mild day would have given."
+        "Dot 3, and no, it slipped by more than ten minutes",
+        "Dot 4, and no, it slipped by more than ten minutes",
+        "Dot 4, and yes, it came four minutes after dot 2",
+        "Dot 2, and yes, it came on time at nine forty-two"
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "The card's own heading says the tag did not change, and the same tracking tag went into every test.  The article calls cold the clearest of the three factors, so heat and cold do not cost the same.",
-        "1": "The article says the loss comes from the chemistry inside the battery, not from any one tag, so nothing about the tag breaks.  Searching harder for a signal is one of the Halloway staff's guesses, and this article never raises it.",
-        "3": "The card puts nineteen days under the desert column and twenty-six under the mild one, so the heat cost the tag a week.  The article says heat still costs runtime."
+        "0": "Dot 3 is not her return.  She comes back at dot 4, nine forty-six, only four minutes after the plan's nine forty-two.",
+        "1": "Dot 4 is the right dot, but nine forty-six is only four minutes after the plan's nine forty-two, well inside ten.",
+        "3": "Dot 2 is in the plan's lane, the pickup the plan expected at nine forty-two.  She comes back later, at dot 4."
       },
-      "explain": "The card sets nineteen days under the desert column and just under three days under the freezing mountain column.  The article explains the gap in its paragraph on the three factors.  Cold drains a battery's charge in freezing air, while heat wears it down a different way, over repeated hot stretches, rather than all at once.  Both cost the tag time, and the card shows how much more the cold cost.",
-      "whyTheFigureIsNeeded": "The article gives the desert and mountain runtimes in separate sentences and explains heat and cold two paragraphs later; the card sets the two runtimes side by side under their temperatures, so the size of the gap is read off the card before the article's explanation is matched to it."
+      "explain": "Dot 4, at nine forty-six, is \"she comes back the long way\".  The plan's pickup, dot 2, is nine forty-two, so the run slipped by four minutes, well inside the note's ten.",
+      "whyTheFigureIsNeeded": "The dots and their numbers are drawn on the timeline alone;  the item asks which dot is her return and reads it against dot 2, the plan's pickup, across the two lanes.",
+      "svgRead": "Opened art/ela-g6-spy/fig-l6-the-last-run.svg.  Dot 2 is <circle cx=\"490.5\" cy=\"128\" r=\"7\"/> with <text x=\"490.5\" y=\"114\">2</text>, keyed <text x=\"70\" y=\"260\">nine forty-two</text> beside <text x=\"203\" y=\"260\">Okafor follows her out</text>.  Dot 4 is <circle cx=\"760\" cy=\"174\" r=\"7\"/> with <text x=\"760\" y=\"196\">4</text>, keyed <text x=\"70\" y=\"312\">nine forty-six</text> beside <text x=\"203\" y=\"312\">she comes back the long way</text>."
     },
     {
-      "id": "l6-cloze-six-stops-one-run",
+      "id": "l6-cloze-reading-the-training-card",
       "type": "cloze",
-      "passageId": "p-long-way",
-      "figureId": "fig-l1-long-way",
-      "figureFact": "three sightings in three unrelated places",
+      "passageId": "p-getting-someone-out",
+      "figureId": "fig-l6-training-card",
+      "figureFact": "first route",
       "targets": [
         "c1-inf-5-analysis"
       ],
       "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "Find the stop on the drawing's numbered line that reads \"three sightings in three unrelated places\".  Its place on the line shows that the sightings it counts {{0}}.  That means {{1}}.",
+      "stem": "On the card titled \"a training card\", the row for stop reads \"{{0}}\", and the row for the first route reads \"{{1}}\".",
       "blanks": [
         {
           "choices": [
-            "all come from the change of level, stop three",
-            "can come from any of the three moves before it",
-            "come from stops five and six, which come after it on the line"
+            "a folded newspaper carried under the arm",
+            "a scarf taken off",
+            "ten minutes"
           ],
           "key": 1
         },
         {
           "choices": [
-            "each move has to catch the same follower three times all on its own",
-            "the counting rule starts over again at the start of every new move",
-            "a follower who gets past one move can still be seen at the next"
+            "through the parking garage",
+            "the same hour on the next day",
+            "out through the front door"
           ],
           "key": 2
         }
       ],
-      "explain": "The drawing puts \"three sightings in three unrelated places\" at stop four, after all three moves on one numbered line, so the sightings it counts can come from any of the moves before it.  Each move is one more chance for a follower to be seen, and a follower who gets past one move can still be seen at the next.  That is how the count can reach three across a single run.",
-      "whyTheFigureIsNeeded": "The article gives the counting rule a paragraph of its own after the three moves, so it can read as a separate note; the drawing numbers the three sightings as stop four on the same line, straight after the change of level, which is what shows the count running across the moves before it."
+      "explain": "On the card, the row labelled \"stop\" reads \"a scarf taken off\", and the row labelled \"first route\" reads \"out through the front door\".  The note lists the card's words without saying which row each one fills, so the card is what pairs them.",
+      "whyTheFigureIsNeeded": "The note lists the card's words without saying which row each one fills;  only the card pairs \"stop\" with its signal and \"first route\" with its way out.",
+      "svgRead": "Opened art/ela-g6-spy/fig-l6-training-card.svg.  The row <text x=\"78\" y=\"154\">stop</text> is paired with <text x=\"199\" y=\"154\">a scarf taken off</text>, and the row <text x=\"78\" y=\"238\">first route</text> with <text x=\"199\" y=\"238\">out through the front door</text>."
     },
     {
-      "id": "l6-ms-claim-against-the-two-runs",
+      "id": "l6-ms-how-the-card-is-laid-out",
       "type": "ms",
-      "passageId": "p-beacon-log",
-      "figureId": "fig-l4-beacon-log",
-      "figureFact": "the thirty foot level",
+      "passageId": "p-getting-someone-out",
+      "figureId": "fig-l6-training-card",
+      "figureFact": "time limit",
       "targets": [
         "c1-inf-5-analysis"
       ],
       "coachTopic": "evidence-across-texts",
-      "dok": 4,
-      "stem": "Source A says its beacon held a clear signal through forty feet of stone for ninety minutes.  It also says that forty feet of rock is no longer a barrier.  Set the log card beside those claims.  Choose the three statements the card supports.",
+      "dok": 3,
+      "stem": "Choose the three statements that describe how this card is laid out.",
       "choices": [
-        "The card names a different tunnel from the one where Source A's engineers ran their test",
-        "The first run was at the thirty foot level, shallower than Source A's forty feet",
-        "Neither of the staff's runs held the signal for even ten minutes",
-        "The card shows the second run was carried deeper than the first before the signal was lost",
-        "The card shows that Corvid Systems' own engineers timed both of the staff's runs",
-        "The card's times go against the claim that forty feet of rock is no longer a barrier"
+        "The two routes are drawn on the card as a small street map",
+        "Each signal, go and stop, has its own labelled row",
+        "The time limit has a row of its own, under the two signals",
+        "A round stamp is printed across the card's top corner",
+        "The fallback is the first row printed on the card",
+        "One line is set apart inside a box below the rows"
       ],
       "key": [
         1,
@@ -5653,12 +5700,13 @@
         5
       ],
       "distractorRationale": {
-        "0": "The card names \"the Halloway service tunnel\", and that is the tunnel Source A names for its own test.  The two sources disagree about one tunnel, not two.",
-        "3": "The card puts the second run at the same bay as the first, so it was not carried any deeper.  The two runs differ in time, nine minutes against seven, not in depth.",
-        "4": "The card is signed by Marchetti and Osei, the two instructors, and the log says two observers timed each run with a stopwatch.  Corvid's engineers ran Source A's test, not these."
+        "0": "No map is drawn.  The two routes are written out in words, each on a row of its own, like the rest of the card.",
+        "3": "There is no stamp on this card.  The one line set apart is drawn inside a box.",
+        "4": "The first row is the signal for go.  The fallback comes after the time limit, partway down the card."
       },
-      "explain": "Setting the card beside Source A shows how far the claim reaches past what was measured.  Source A claims ninety minutes through forty feet of stone.  The card puts the first run at the thirty foot level, shallower than that, and the times column underneath reads nine minutes and then seven, so neither run reached even ten minutes.  A beacon that lost its signal above forty feet is hard to fit with a claim that forty feet of rock is no longer a barrier.",
-      "whyTheFigureIsNeeded": "In the log's prose the depth of the first run comes in one sentence and the second run is placed only at the same bay, with each time in a sentence of its own; the card sets depth and time side by side on one row for each run, under the tunnel it names, which is what lets both runs be read against Source A's forty feet at once."
+      "explain": "The card is laid out in labelled rows:  go and stop first, then the time limit and the fallback, then the two routes, with a rule underneath.  Below the rule, one line is drawn inside a box.",
+      "whyTheFigureIsNeeded": "The note lists what the card holds in running prose;  only the drawing shows how this card lays it out, row by row, with one line boxed.",
+      "svgRead": "Opened art/ela-g6-spy/fig-l6-training-card.svg.  The labelled rows run down the card in this order:  <text x=\"78\" y=\"126\">go</text>, <text x=\"78\" y=\"154\">stop</text>, <text x=\"78\" y=\"182\">time limit</text>, <text x=\"78\" y=\"210\">fallback</text>, <text x=\"78\" y=\"238\">first route</text> and <text x=\"78\" y=\"266\">second route</text>, each value written in words at x=199, with a rule at y1=\"278.5\".  The only boxed element is RECT (70,292,128.67,32), carrying data-emphasis=\"box\";  no stamp and no map is drawn."
     }
   ],
   "figures": [
@@ -6319,6 +6367,93 @@
               "freezing",
               "just under three days"
             ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "fig-l6-the-last-run",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l6-the-last-run.svg",
+      "caption": "Two lanes for one morning:  what the plan said would happen, and what actually happened.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A timeline with two lanes.  The lane \"the plan\" has \"Ines walks in\" at nine forty and \"Okafor follows her out\" at nine forty-two.  The lane \"what actually happens\" has \"Ines is standing outside the café door\" at nine forty and \"she comes back the long way\" at nine forty-six.",
+      "dataTable": {
+        "type": "timeline",
+        "sourcePassageId": "p-the-last-run",
+        "title": "the last exercise of the course",
+        "tracks": [
+          "the plan",
+          "what actually happens"
+        ],
+        "events": [
+          {
+            "t": "nine forty",
+            "label": "Ines walks in",
+            "track": "the plan"
+          },
+          {
+            "t": "nine forty-two",
+            "label": "Okafor follows her out",
+            "track": "the plan"
+          },
+          {
+            "t": "nine forty",
+            "label": "Ines is standing outside the café door",
+            "track": "what actually happens"
+          },
+          {
+            "t": "nine forty-six",
+            "label": "she comes back the long way",
+            "track": "what actually happens"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fig-l6-training-card",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/ela-g6-spy/fig-l6-training-card.svg",
+      "caption": "A training card, short on purpose:  the signals, the time limit, the fallback, the routes, and the one line set apart.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A card titled \"a training card\".  Its rows pair \"go\" with \"a folded newspaper carried under the arm\", \"stop\" with \"a scarf taken off\", \"time limit\" with \"ten minutes\", \"fallback\" with \"the same hour on the next day\", \"first route\" with \"out through the front door\", and \"second route\" with \"through the parking garage\".  Below them one line, \"nobody runs\", is drawn inside a box.",
+      "dataTable": {
+        "type": "facsimile",
+        "sourcePassageId": "p-getting-someone-out",
+        "docKind": "procedure",
+        "title": "a training card",
+        "header": [
+          {
+            "label": "go",
+            "value": "a folded newspaper carried under the arm"
+          },
+          {
+            "label": "stop",
+            "value": "a scarf taken off"
+          },
+          {
+            "label": "time limit",
+            "value": "ten minutes"
+          },
+          {
+            "label": "fallback",
+            "value": "the same hour on the next day"
+          },
+          {
+            "label": "first route",
+            "value": "out through the front door"
+          },
+          {
+            "label": "second route",
+            "value": "through the parking garage"
+          }
+        ],
+        "lines": [
+          {
+            "text": "nobody runs",
+            "emphasis": "box"
           }
         ]
       }
