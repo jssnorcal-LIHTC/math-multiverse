@@ -117,7 +117,7 @@ jobs:
       - name: Review echo (a level-6 item does not re-ask or give away an earlier level; 6 controls)
         run: node tests/sweep-review-echo.js
 
-      - name: Cross-level echo (every level asks only about its own stories;  Niall's Vault case, four real callbacks and the lens's fledge-rate chart are controls)
+      - name: Cross-level echo (every level asks only about its own stories;  Niall's Vault case, four real callbacks and the reviews' fledge-rate chart and Samaria map cases are controls)
         run: node tests/sweep-cross-level.js
 
       - name: EBSR rationale (the feedback a child reads is about the wrong answer they picked; 3 controls)

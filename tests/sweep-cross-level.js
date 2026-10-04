@@ -39,6 +39,15 @@
 //       figure the item's own level shows matches, it is the level's own drawing;  if none does and a figure
 //       only another level shows matches, it is a finding.  That case, verbatim, is the control
 //       (tests/fixtures/cross-level-figure-ref-26-1004.json), with its fixed text as the clean twin.
+//   I6  NO NAME FROM ANOTHER LEVEL'S STORY.  Found by the Phase 2 lens, 26-1004:  Firsthand level 6 offered
+//       "Samaria" and "Jerusalem", places only level 2 names.  I4 knew names only from a hand-written list, so
+//       its first run over every pack also found Vault level 1 calling its unnamed narrator "Mila" (a name the
+//       child meets in level 3), "Kade" in two distractors and "Qin" in another.  A name is a word the passages
+//       capitalize mid-sentence and never write in lowercase;  it is a finding in a question whose own level
+//       (passages, titles, figures) never uses it while another level's passage does.  Frame words the game
+//       shows on every level (the skin, level names and goals:  "The Archive") are exempt, and a long name
+//       matches its word forms ("Buddhist" in a level that says "Buddhism").  Controls:
+//       tests/fixtures/cross-level-names-26-1004.json.
 //
 //   node tests/sweep-cross-level.js            every pack in the manifest;  exits 1 on any finding
 //
@@ -60,6 +69,7 @@ const ALLOW_PATH = path.join(__dirname, 'cross-level-allowlist.json');
 const NIALL_PATH = path.join(__dirname, 'fixtures', 'cross-level-niall-vault-26-1004.json');
 const CALLBACKS_PATH = path.join(__dirname, 'fixtures', 'cross-level-callbacks-26-1004.json');
 const FIGREF_PATH = path.join(__dirname, 'fixtures', 'cross-level-figure-ref-26-1004.json');
+const NAMES_PATH = path.join(__dirname, 'fixtures', 'cross-level-names-26-1004.json');
 
 // Phrases that send a child back to another part of the series.  Each was a real callback on 26-1004, and
 // each was checked against every question in every pack for a false hit first:  "one more time" and "earlier
@@ -229,7 +239,68 @@ function findingsIn(pack) {
       }
     }
   });
+  // I6
+  const properNames = passageNames(pack.passages || []);
+  const frame = wordSet([JSON.stringify(pack.skin || {}), ...levels.map((l) => `${l.name || ''} ${l.goal || ''}`)].join(' '));
+  const figuresById = new Map((pack.figures || []).map((f) => [f.id, f]));
+  const levelPassages = levels.map((l, li) => [...passageLevels].filter(([, m]) => m.has(li + 1)).map(([pid]) => passagesById.get(pid)).filter(Boolean));
+  const ownWords = levels.map((l, li) => wordSet([
+    ...levelPassages[li].map((p) => `${p.title || ''} ${p.text || ''}`),
+    ...[...figureLevels].filter(([, m]) => m.has(li + 1)).map(([fid]) => figuresById.get(fid)).filter(Boolean)
+      .map((f) => [f.caption, f.alt, JSON.stringify(f.dataTable || '')].join(' ')),
+  ].join(' ')));
+  const otherWords = levels.map((l, li) => wordSet(levelPassages[li].map((p) => p.text || '').join(' ')));
+  levels.forEach((l, li) => {
+    const lv = li + 1;
+    for (const id of l.itemIds || []) {
+      const it = byId.get(id);
+      if (!it) continue;
+      const why = [];
+      for (const m of foldText(askedRaw(it)).matchAll(/\b([A-Z][a-z]+(?:-[A-Z]?[a-z]+)*)\b/g)) {
+        const w = m[1].toLowerCase();
+        if (!properNames.has(w) || frame.has(w) || hasWord(ownWords[li], w) || why.some((x) => x.startsWith(`"${w}"`))) continue;
+        const from = otherWords.map((s, k) => (k !== li && s.has(w) ? k + 1 : 0)).filter(Boolean);
+        if (from.length) why.push(`"${w}" (level ${from.join('/')})`);
+      }
+      if (why.length) {
+        const sig = `I6|${id}`;
+        found.push({ rule: 'I6', sig, group: sig, level: lv, detail: `level ${lv} ${id} names what only another level's story names:  ${why.join(', ')}` });
+      }
+    }
+  });
   return found;
+}
+
+// I6's names:  words the passages capitalize in the middle of a sentence and never write in lowercase ("Samaria",
+// "Kade");  a word capitalized only where a sentence starts ("If", "Match") is not one.
+const foldText = (s) => String(s == null ? '' : s).replace(/[‘’]/g, "'").replace(/'s\b/g, '');
+function passageNames(passages) {
+  const mid = new Set(), low = new Set();
+  for (const p of passages) {
+    const t = foldText(p.text);
+    for (const m of t.matchAll(/\b([A-Za-z][a-z]+(?:-[A-Za-z]?[a-z]+)*)\b/g)) {
+      const w = m[1].toLowerCase();
+      if (m[1][0] === m[1][0].toLowerCase()) { low.add(w); continue; }
+      const before = t.slice(0, m.index).replace(/\s+$/, '');
+      if (before && !/[.!?:;"“(\n]$/.test(before)) mid.add(w);
+    }
+  }
+  return new Set([...mid].filter((w) => !low.has(w)));
+}
+const wordSet = (s) => new Set(foldText(s).toLowerCase().split(/[^a-z0-9-]+/).filter(Boolean));
+// A level that says "Buddhism" or "Europe" has met "Buddhist" and "European":  a long name matches on all but its last
+// two letters.
+const hasWord = (set, w) => set.has(w) || (w.length >= 6 && [...set].some((x) => x.startsWith(w.slice(0, w.length - 2))));
+// The asked text with its capitals kept (askedText lowercases), for I6.
+function askedRaw(it) {
+  const parts = [it.stem];
+  if (it.choices) parts.push(...it.choices);
+  if (it.partA) parts.push(it.partA.stem, ...(it.partA.choices || []));
+  if (it.blanks) it.blanks.forEach((b) => parts.push(...((b && b.choices) || [])));
+  if (it.rowLabels) parts.push(...it.rowLabels);
+  if (it.colLabels) parts.push(...it.colLabels);
+  if (it.tiles) parts.push(...it.tiles);
+  return parts.filter(Boolean).join(' | ');
 }
 
 // I5's drawing nouns, and the words in front of one that say WHERE in a drawing, not WHICH drawing.
@@ -265,7 +336,7 @@ const TITLE_PREFIX = /^(source [ab]: |catalog entry: |case file: |case file zero
 function titleCore(t) { return normText(t).replace(TITLE_PREFIX, '').replace(/^the /, '').trim(); }
 
 // An I1 or I2 group fails while two or more of its levels are NOT excused;  an excused level is "used" only
-// while the sharing it excuses still exists.  An I3, I4 or I5 finding fails unless its own signature is excused.
+// while the sharing it excuses still exists.  An I3 to I6 finding fails unless its own signature is excused.
 function applyAllow(packId, found, allow, used) {
   const mine = allow.filter((a) => a.pack === packId);
   const excused = (f) => mine.find((a) => a.sig === f.sig);
@@ -278,7 +349,7 @@ function applyAllow(packId, found, allow, used) {
   for (const fs_ of groups.values()) {
     const open = fs_.filter((f) => !excused(f));
     fs_.forEach((f) => { const a = excused(f); if (a) used.add(a); });
-    if (fs_[0].rule === 'I3' || fs_[0].rule === 'I4' || fs_[0].rule === 'I5') out.push(...open);
+    if (['I3', 'I4', 'I5', 'I6'].includes(fs_[0].rule)) out.push(...open);
     else if (open.length >= 2) out.push(...open);
   }
   return out;
@@ -292,7 +363,7 @@ function main() {
   const allow = fs.existsSync(ALLOW_PATH) ? loadJson(ALLOW_PATH) : [];
   const used = new Set();
   let packs = 0;
-  const counts = { I1: 0, I2: 0, I3: 0, I4: 0, I5: 0 };
+  const counts = { I1: 0, I2: 0, I3: 0, I4: 0, I5: 0, I6: 0 };
   for (const e of manifest.packs) {
     const pack = loadJson(path.join(ROOT, 'packs', `${e.id}.json`));
     if (!pack.levels || pack.levels.length < 2) continue;
@@ -340,6 +411,21 @@ function main() {
       if (g.length) ctl.push(`CONTROL figure reference failed:  I5 fired on a case that is not one (${c.note}):  ${g[0].detail}`);
     }
 
+    // 4.  I6, THE PHASE 2 LENS'S CASE and the first-run cases:  Samaria and Jerusalem at Firsthand level 6, and Vault
+    //     level 1's unnamed "Mila", must fire;  each fixed, a frame word, a word form and a sentence-initial "If" must
+    //     not.  Each exemption is also shown to carry its weight:  without the level names, "Archive" fires.
+    const nm = loadJson(NAMES_PATH);
+    for (const c of nm.mustFire) {
+      if (!findingsIn(c).some((f) => f.rule === 'I6')) ctl.push(`CONTROL names failed:  I6 missed a real case (${c.note})`);
+    }
+    for (const c of nm.mustStayClean) {
+      const g = findingsIn(c).filter((f) => f.rule === 'I6');
+      if (g.length) ctl.push(`CONTROL names failed:  I6 fired on a case that is not one (${c.note}):  ${g[0].detail}`);
+    }
+    const unframed = JSON.parse(JSON.stringify(nm.mustStayClean.find((c) => /Archive/.test(c.note))));
+    unframed.levels.forEach((l) => { delete l.name; delete l.goal; });
+    if (!findingsIn(unframed).some((f) => f.rule === 'I6')) ctl.push('CONTROL names failed:  with the level names removed, "Archive" should fire;  the frame exemption is not what passed it');
+
     // A clean six-level pack, then one plant per rule.
     const clean = () => {
       const p = { passages: [], figures: [], levels: [], items: [] };
@@ -385,11 +471,11 @@ function main() {
     applyAllow('t', findingsIn(clean()), [{ pack: 't', sig: 'I1|p9@L6', reason: 'control' }], u3);
     if (u3.size !== 0) ctl.push('CONTROL stale-allowlist failed:  an entry matching nothing was counted as used');
     if (ctl.length) problems.push(...ctl);
-    else console.log('  controls:  Niall\'s case (Vault level 6 on two level-2 passages, verbatim from 02a63cf) is caught;  four real callbacks from 02a63cf fire I4, and a same-level "earlier entry" and a level\'s own word do not;  Outpost level 6 reading level 5\'s fledge-rate chart fires I5, and its fixed text, "plan around" and the catalog photograph do not;  a clean pack passes;  a shared passage, an item figure, a reveal and a passage strip are each caught;  an earlier level stating a key is caught and a later one restating it is not;  a math pack is exempt from I1 and I2 and still held to I3;  the allowlist excuses its own level only and an unused entry is stale  (fired)');
+    else console.log('  controls:  Niall\'s case (Vault level 6 on two level-2 passages, verbatim from 02a63cf) is caught;  four real callbacks from 02a63cf fire I4, and a same-level "earlier entry" and a level\'s own word do not;  Outpost level 6 reading level 5\'s fledge-rate chart fires I5, and its fixed text, "plan around" and the catalog photograph do not;  Firsthand level 6 offering Samaria and Vault level 1\'s unnamed "Mila" fire I6, and their fixes, a frame word, a word form and a sentence-initial "If" do not;  a clean pack passes;  a shared passage, an item figure, a reveal and a passage strip are each caught;  an earlier level stating a key is caught and a later one restating it is not;  a math pack is exempt from I1 and I2 and still held to I3;  the allowlist excuses its own level only and an unused entry is stale  (fired)');
   }
 
   if (problems.length) {
-    console.log(`\n=== sweep-cross-level: ${problems.length} problem(s)  (I1 ${counts.I1}, I2 ${counts.I2}, I3 ${counts.I3}, I4 ${counts.I4}, I5 ${counts.I5}) ===`);
+    console.log(`\n=== sweep-cross-level: ${problems.length} problem(s)  (I1 ${counts.I1}, I2 ${counts.I2}, I3 ${counts.I3}, I4 ${counts.I4}, I5 ${counts.I5}, I6 ${counts.I6}) ===`);
     problems.forEach((p) => console.log('  ' + p));
     console.log('\nRESULT: FAILED');
     process.exit(1);
