@@ -185,6 +185,14 @@
    "docKind": "minutes",
    "source": "original",
    "text": "Minutes of the Halyard Point review board, four members present.  Purpose: review the three filed proposals before the operative's recommendation goes to Command.  The board does not choose.  The board records how the choosing has to be done.\n\nThe chair opened with the method and asked that it go into the minutes word for word.  Command's three constraints are gates rather than scores, and a proposal either clears a gate or it does not.  A proposal failing one gate is out of the running, however strong it happens to look on the other two.  Only the proposals clearing all three get compared against each other, and only then does anybody discuss which one is better.\n\nThe second member raised a fourth option, entered in the minutes as Proposal D.  Run the feeding station this season, and file the fishery petition at the same time.  The thinking was that the station covers the chicks now while the petition works on the cause.\n\nThe board's finding on Proposal D was recorded as follows.  Bolting two plans together does not average their weaknesses out.  It collects them.  The petition half still asks for an outcome outside the Network's own authority, and it still cannot be decided inside the one-season window.  Neither problem gets any smaller by pairing the petition with something that works.  The board therefore records that the petition cannot count toward this season's approved response.  Whatever the feeding station does on its own it still does, and whatever it does not do it still does not do.\n\nThe fourth member then asked the board to widen the window to two seasons, which would clear the petition's timing problem.  The board declined and gave its reason.  The window is a constraint Command set, and Command is the only body that can change it.  Asking for an easier constraint is not the same thing as meeting the one in front of you.  The request was recorded and forwarded to Command as a separate item, and the evaluation continues under the window as written.\n\nOne line closes the minutes, entered at the chair's request.  Every response the Network can carry out on its own authority works on the colony's side of the gap.  The one thing on the table that acts on the fish rather than on the colony is the petition.  That is also the one thing the Network cannot decide for itself.  The board wanted that in writing before the operative files anything."
+  },
+  {
+   "id": "p-filed-recommendation",
+   "title": "Filed Recommendation: Proving It Worked",
+   "genre": "informational",
+   "docKind": "memo",
+   "source": "original",
+   "text": "I am recommending the feeding station for this season, and I am filing it with a plan for proving it worked.  Command asked for a real effect on chick survival within one nesting season.  A plan that cannot show its own result by the end of that season has not met the test yet.  The proof is therefore part of the recommendation.\n\nThe measure is the fledge rate, the share of hatched chicks that live long enough to fly.  It is the same column the colony's own record has kept for thirty seasons.  The record's latest reading is thirty-nine percent.  This season's rate will be set beside that number, because a colony is compared against its own record and not against a colony somewhere else.\n\nThe count has to cover the whole colony.  Chicks near the station will be easy to find and easy to count.  Chicks at the far edge of the nest sites will not.  If keepers count only the chicks they can see from the station, the rate will look better than it is.  That is why every nest gets a number before its first egg hatches.  Every numbered nest gets checked on the same rounds until its chicks fly or are lost.\n\nThe station will keep its own log as well.  Each day's entry records how much fish went out and how much was left uneaten.  A tray still full at the end of the day would mean the fish is not reaching the chicks, and that would matter more than any count.\n\nOne more rule goes in writing before the season starts.  If the fledge rate does not rise above thirty-nine percent, I will report that the station failed, and I will not explain the number away.  A result I would accept only when it suits me is not a result.\n\nNone of this touches the timing gap itself.  This plan treats one season, and it does not wait on anything the Network cannot do for itself."
   }
  ],
  "levels": [
@@ -279,7 +287,7 @@
     "l2-vis-which-climbs",
     "l2-vis-read-the-values",
     "l2-vis-two-scales",
-    "l2-vis-where-the-cartridge-sits"
+    "l2-vis-where-each-reading-is-shown"
    ],
    "briefing": {
     "title": "The problem in front of you",
@@ -468,10 +476,10 @@
     "t6-cloze-constraint-def",
     "t6-mc-fishery-regulation-transfer",
     "l6-vis-order-the-tests",
-    "t6-ebsr-one-week-is-not-climate",
+    "t6-ebsr-how-the-plan-measures",
     "t6-hot-failing-one-gate",
-    "t6-mc-fish-timing-interaction",
-    "t6-ebsr-one-year-is-not-proof",
+    "t6-mc-why-count-the-far-edge",
+    "t6-ebsr-the-rule-written-first",
     "t6-hot-combining-collects",
     "t6-mc-proposal-d-outcome",
     "t6-ebsr-why-proposal-d-fails",
@@ -479,7 +487,7 @@
     "t6-ebsr-gates-not-scores",
     "t6-mc-what-the-board-is-for",
     "t6-ebsr-asking-for-an-easier-constraint",
-    "t6-ebsr-warning-rule-as-design",
+    "t6-ebsr-why-log-the-leftovers",
     "l6-vis-which-proposal-passes",
     "l6-vis-panel-shows",
     "l6-vis-two-figures-together",
@@ -2431,31 +2439,72 @@
    "explain": "The report names the real weakness directly: the record shows chicks starving during the gap before the herring arrive, and fencing, which only keeps predators away from eggs and chicks, does nothing to touch that specific problem, even though it easily satisfies every one of Command's other constraints.  Each wrong choice invents a time, cost, or authority problem the report explicitly rules out."
   },
   {
-   "id": "t6-ebsr-one-week-is-not-climate",
+   "id": "t6-ebsr-how-the-plan-measures",
    "type": "ebsr",
-   "passageId": "p-two-posts-one-latitude",
+   "passageId": "p-filed-recommendation",
    "targets": [
-    "sci-t4-climate-patterns"
+    "sci-t6-design-evaluate"
    ],
    "coachTopic": "evidence-final-deployment",
    "dok": 3,
    "partA": {
-    "stem": "Suppose the wind belt at this latitude blew from the east instead, crossing hundreds of miles of dry land before it reached Cairn Bay.  Based on the report, what would most likely happen to Cairn Bay's rainfall?",
+    "stem": "How will the operative show, within one season, whether the station worked?",
     "choices": [
-     "It would stay the same, since the current along its coast is what brings Cairn Bay its rain.",
-     "It would rise, since wind picks up more moisture the longer it travels over dry land.",
-     "It would stay the same, since Cairn Bay would still sit at the same latitude and sun angle.",
-     "It would drop, since wind that crosses dry land arrives dry, just as at Sable Flats."
+     "By weighing how much fish the station hands out each day",
+     "By counting the chicks near the station, where they are easy to see",
+     "By checking that the record's latest reading stays the same",
+     "By measuring the fledge rate, the share of hatched chicks that fly"
     ],
     "key": 3
    },
    "partB": {
-    "stem": "Which sentence from the passage best supports the answer you just gave?",
+    "stem": "Which sentence from the recommendation best supports your answer?",
     "choices": [
-     "It arrives far drier than it left the coast.",
-     "It still carries the moisture it picked up crossing the ocean.",
-     "The sun reaches both at nearly the same angle all year.",
-     "A current moving along Cairn Bay's coastline keeps the water near the post within a narrow temperature range all year."
+     "The measure is the fledge rate, the share of hatched chicks that live long enough to fly.",
+     "Each day's entry records how much fish went out and how much was left uneaten.",
+     "Chicks near the station will be easy to find and easy to count.",
+     "The record's latest reading is thirty-nine percent."
+    ],
+    "key": {
+     "0": 1,
+     "1": 2,
+     "2": 3,
+     "3": 0
+    }
+   },
+   "distractorRationale": {
+    "0": "The fish log is the station's own record of what went out each day.  Command asked for an effect on chick survival, and the fish log does not count chicks.",
+    "1": "The plan's count covers every numbered nest across the whole colony, not just the chicks beside the station, and its measure is the fledge rate.",
+    "2": "The latest reading is the number this season gets compared with, not the measure itself.  The plan measures this season's fledge rate."
+   },
+   "explain": "Command's test is survival, so the plan measures survival directly:  the fledge rate, the share of hatched chicks that live long enough to fly.  It is the same measure the colony's record has kept for thirty seasons, which is what makes this season's number mean something."
+  },
+  {
+   "id": "t6-ebsr-the-rule-written-first",
+   "type": "ebsr",
+   "passageId": "p-filed-recommendation",
+   "targets": [
+    "sci-t6-design-evaluate"
+   ],
+   "coachTopic": "evidence-final-deployment",
+   "dok": 3,
+   "partA": {
+    "stem": "The operative writes one rule down before the season starts.  What is that rule for?",
+    "choices": [
+     "To promise Command that the station will raise the fledge rate",
+     "To make sure the station's fish log is filled in every day",
+     "To leave room to explain away a low number if one comes in",
+     "To fix in advance what will count as failure, so it cannot be bent"
+    ],
+    "key": 3
+   },
+   "partB": {
+    "stem": "Which sentence from the recommendation best supports your answer?",
+    "choices": [
+     "If the fledge rate does not rise above thirty-nine percent, I will report that the station failed, and I will not explain the number away.",
+     "Each day's entry records how much fish went out and how much was left uneaten.",
+     "None of this touches the timing gap itself.",
+     "I am recommending the feeding station for this season, and I am filing it with a plan for proving it worked."
     ],
     "key": {
      "0": 3,
@@ -2465,52 +2514,11 @@
     }
    },
    "distractorRationale": {
-    "0": "The current keeps the coastal water in a narrow temperature range, so it explains Cairn Bay's steady temperatures, not its rain.  The rain comes from wind that arrives straight off the water.",
-    "1": "The report says the opposite about land.  Wind picks up its moisture crossing the ocean, and the same wind drops most of it crossing dry land, which is why it reaches Sable Flats far drier.",
-    "2": "Sable Flats and Cairn Bay already share a latitude and a sun angle, and the report says their climates still differ.  Where the wind has been decides the rain, not the latitude."
+    "0": "The plan does not promise success.  It sets out how a failure would be reported, which is the opposite of a promise.",
+    "1": "The fish log is a separate record the station keeps.  The written rule is about what the fledge rate has to show.",
+    "2": "The line about the timing gap only says what the plan does not treat.  The rule says the reverse of leaving room:  if the rate does not rise, the operative will report a failure and will not explain the number away."
    },
-   "explain": "The report ties rain to where the wind belt has already been.  Wind off the ocean still carries its moisture, and the same wind drops most of it crossing dry land, so it reaches Sable Flats far drier.  A wind that crossed hundreds of miles of land before reaching Cairn Bay would arrive dry there too, and Cairn Bay's rain would drop."
-  },
-  {
-   "id": "t6-ebsr-one-year-is-not-proof",
-   "type": "ebsr",
-   "passageId": "p-network-synthesis",
-   "targets": [
-    "sci-t5-warming-adaptation"
-   ],
-   "coachTopic": "evidence-final-deployment",
-   "dok": 4,
-   "partA": {
-    "stem": "A new operative says carbon dioxide and temperature could just be two numbers that happen to rise at the same time.  How does the report answer that?",
-    "choices": [
-     "It leaves the question open, since one station cannot see a planetary pattern.",
-     "It points out that every station logs both numbers, so the two must be connected.",
-     "It shows temperature climbing by the same amount every year, in step with carbon dioxide.",
-     "It explains that carbon dioxide holds in heat that would otherwise escape to space."
-    ],
-    "key": 3
-   },
-   "partB": {
-    "stem": "Which sentence from the passage best supports the answer you just gave?",
-    "choices": [
-     "It lets sunlight in, then traps some of the heat that would otherwise escape back to space.",
-     "Every station's air-sampling equipment also logs atmospheric carbon dioxide.",
-     "One station cannot see a planetary pattern.",
-     "Averaged across every station, the network's combined temperature reading has climbed nearly every year."
-    ],
-    "key": {
-     "0": 2,
-     "1": 1,
-     "2": 3,
-     "3": 0
-    }
-   },
-   "distractorRationale": {
-    "0": "One station alone cannot see a planetary pattern, but this report reads the whole network, and it does answer the doubt.  It explains how carbon dioxide holds in heat.",
-    "1": "Every station does log carbon dioxide, but logging two numbers in the same place does not connect them.  The report connects them through what carbon dioxide does to heat.",
-    "2": "This sentence says the combined temperature climbed nearly every year, not that it climbed by the same amount each year.  The temperature line bounces, so the report does not rest on the two lines climbing in step."
-   },
-   "explain": "The report does not rest on two lines that happen to climb together.  Carbon dioxide lets sunlight in, then traps some of the heat that would otherwise escape back to space, so more of it in the air points to a warmer planet.  That is a real physical mechanism, not a coincidence."
+   "explain": "Writing the rule down before the season starts fixes what counts as failure while nobody knows the answer yet.  If the fledge rate does not rise above thirty-nine percent, the station failed, and the operative has already promised not to explain the number away, because a result accepted only when it suits you is not a result."
   },
   {
    "id": "t6-ms-proposals-against-constraints",
@@ -2667,28 +2675,28 @@
    "explain": "The report's actual objection to Proposal C is that the fishery authority does not answer to the Network and could take months longer than Command's one-season window to decide, a problem tied to WHO controls the decision, not to the size or permanence of what is being asked for, so a bigger regional version of the same request would run into the identical authority and timing problem."
   },
   {
-   "id": "t6-mc-fish-timing-interaction",
+   "id": "t6-mc-why-count-the-far-edge",
    "type": "mc",
-   "passageId": "p-field-manual-systems",
+   "passageId": "p-filed-recommendation",
    "targets": [
-    "sci-t1-systems-vocab"
+    "sci-t6-design-evaluate"
    ],
    "coachTopic": "evidence-final-deployment",
    "dok": 3,
-   "stem": "The colony's survival problem began as a shift in the terns' own nesting timing, driven by warming spring air, and it eventually showed up as a falling fledge rate in the chicks.  Using the field manual's own vocabulary, which word best names the way a change in one part led to a change in a different, connected part?",
+   "stem": "Why will every numbered nest be checked on the same rounds, including the nests at the far edge of the colony?",
    "choices": [
-    "component",
-    "interaction",
-    "system",
-    "subsystem"
+    "Because the nests at the far edge are the ones the station feeds first",
+    "Because counting only the easy chicks would make the rate look better than it is",
+    "Because Command will pay only for the nests keepers can see from the station",
+    "Because the far edge is where the fish run arrives earliest each spring"
    ],
    "key": 1,
    "distractorRationale": {
-    "0": "Component names one small physical part, not the connection between a timing shift in one species and a survival change in another.",
-    "2": "System names a whole set of parts working toward one job, not the specific ripple connecting one change to another.",
-    "3": "Subsystem names one smaller system nested inside a bigger one, not the event of one part's change causing a connected part to change too."
+    "0": "The plan never says the station feeds the far edge first.  It checks those nests because they are hard to see, not because of how the fish is handed out.",
+    "2": "Nothing in the plan ties payment to which nests can be seen.  The rounds cover every numbered nest so that the count is fair.",
+    "3": "The plan says nothing about where the fish arrive.  It checks the far edge because those chicks are the hardest to find, not because of the fish."
    },
-   "explain": "The field manual defines an interaction as what happens when one part changes and a connected part changes with it, exactly the shape of the colony's own mystery: the terns' own nesting timing shifted twenty-eight days earlier, driven by warming spring air, and that shift rippled into chicks hatching weeks before their food arrives and a falling fledge rate, the same vocabulary word tile one introduces on a station's own life-support system."
+   "explain": "A count is only as fair as the nests it reaches.  Chicks near the station are easy to find and the ones at the far edge are not, so counting only what keepers can see from the station would make the fledge rate look better than it is.  Numbering every nest and checking each one on the same rounds keeps the count honest."
   },
   {
    "id": "t6-short-best-proposal",
@@ -4718,45 +4726,45 @@
    "explain": "Three findings are on the record.  Proposals are compared only after they clear all three constraints, and a plan built from two parts carries both parts' weaknesses.  The one response aimed at the fish is also the one the Network cannot decide for itself.  Each wrong choice credits the board with something the minutes never record: sending the petition back, widening a constraint, or ranking the proposals."
   },
   {
-   "id": "t6-ebsr-warning-rule-as-design",
+   "id": "t6-ebsr-why-log-the-leftovers",
    "type": "ebsr",
-   "passageId": "p-halyard-warning-procedure",
+   "passageId": "p-filed-recommendation",
    "targets": [
-    "sci-t3-weather-evidence"
+    "sci-t6-design-evaluate"
    ],
    "coachTopic": "evidence-final-deployment",
-   "dok": 4,
+   "dok": 3,
    "partA": {
-    "stem": "Command writes the warning rule down ahead of time rather than letting each officer decide during a storm.  What weakness in an officer's judgment is that meant to guard against?",
+    "stem": "Why does the station's own log record how much fish was left uneaten each day?",
     "choices": [
-     "Officers tend to send warnings nobody needed, so the written rule holds calls back until the rain.",
-     "An officer cannot tell when a front will arrive, so the rule predicts its arrival twelve hours ahead.",
-     "Officers are judged on the weather that follows a call, so a written rule shields them from blame.",
-     "An officer watching a reading fall is the worst judge of what it means, so the rule is set beforehand."
+     "To work out how many chicks hatched on each day of the season",
+     "To show Command what each day's fish cost the field budget",
+     "To compare this colony with a colony at another post",
+     "To show early whether the fish is reaching the chicks at all"
     ],
     "key": 3
    },
    "partB": {
-    "stem": "Which sentence from the passage best supports the answer you just gave?",
+    "stem": "Which sentence from the recommendation best supports your answer?",
     "choices": [
-     "A call gets judged on the log rather than on the weather that happened to follow.",
-     "An officer explaining an unnecessary warning still has everybody available to explain it to.",
-     "The warning goes out at least twelve hours before the front is expected to arrive.",
-     "An officer watching a barometer fall is the worst possible person to be deciding what a falling barometer means."
+     "Every numbered nest gets checked on the same rounds until its chicks fly or are lost.",
+     "Command asked for a real effect on chick survival within one nesting season.",
+     "This season's rate will be set beside that number, because a colony is compared against its own record and not against a colony somewhere else.",
+     "A tray still full at the end of the day would mean the fish is not reaching the chicks, and that would matter more than any count."
     ],
     "key": {
-     "0": 1,
-     "1": 2,
-     "2": 0,
+     "0": 0,
+     "1": 1,
+     "2": 2,
      "3": 3
     }
    },
    "distractorRationale": {
-    "0": "The procedure leans toward calling a front early on purpose, and it accepts a warning nobody needed as the cheaper mistake.  It never holds a call back until the rain, since a warning that arrives with the rain is only a report.",
-    "1": "The procedure says outright that nothing in it tells an officer what the weather is going to do.  The twelve hours are a deadline for sending a warning, not a forecast of when the front arrives.",
-    "2": "A call is judged on the log, not on the weather that happened to follow, and the procedure says nothing about protecting officers from blame."
+    "0": "Hatching is tracked on the nest rounds, not in the station's log.  The log is about the fish.",
+    "1": "The log counts fish, not money, and the plan never mentions what the fish costs.  An uneaten tray is about whether the food reaches the chicks.",
+    "2": "The plan compares the colony only with its own record, and the fish log plays no part in that comparison."
    },
-   "explain": "Command writes the rule so that no officer has to invent one in the moment, because the officer watching a barometer fall is the worst possible person to decide what the fall means.  With the rule written down ahead of time, the readings decide when a warning goes out, not the worry of the moment."
+   "explain": "The fledge rate comes in only at the end of the season, but the fish log can warn early.  If trays are still full at the end of the day, the fish is not reaching the chicks, and a station that is not being used cannot be helping, whatever the final count turns out to be."
   },
   {
    "id": "t6-hot-failing-one-gate",
@@ -5160,41 +5168,41 @@
    }
   },
   {
-   "id": "l2-vis-where-the-cartridge-sits",
+   "id": "l2-vis-where-each-reading-is-shown",
    "type": "match",
-   "passageId": "p-field-manual-systems",
-   "figureId": "fig-station-systems",
+   "passageId": "p-meridian-status-log",
+   "figureId": "fig-dome-drift",
    "targets": [
     "sci-t2-systems-subsystems"
    ],
    "coachTopic": "evidence-sealed-station",
    "dok": 2,
-   "stem": "The diagram puts each box on a row and labels that row. Match each box to the level the diagram gives it.",
+   "stem": "The chart's day axis is marked from 80 to 130.  Match each item to how the chart gives it, or whether it gives it at all.",
    "rowLabels": [
-    "Life Support",
-    "Air",
-    "Scrubber cartridge"
+    "Carbon dioxide on day 104",
+    "Water reclamation on day 118",
+    "Oxygen on day 80"
    ],
    "colLabels": [
-    "The system",
-    "A subsystem",
-    "A component"
+    "Not given anywhere on the chart",
+    "Plotted as a point on a panel",
+    "Given only in the note under the chart"
    ],
    "key": [
     [
      0,
-     0
-    ],
-    [
-     1,
      1
     ],
     [
-     2,
+     1,
      2
+    ],
+    [
+     2,
+     0
     ]
    ],
-   "explain": "This diagram uses position to mean something. Life Support sits alone at the top and is labelled the system. Air sits on the middle row with Water and Food, all labelled subsystems. The scrubber cartridge sits on the bottom row, labelled a component, with nothing drawn beneath it."
+   "explain": "Carbon dioxide is plotted as points on days 90, 104 and 118, so its day 104 reading is a point on its panel.  Water reclamation is never plotted:  the note under the chart gives it as holding steady near 95 to 96 percent across the same days.  The axis starts at 80, but no reading is drawn before day 90, so the chart gives no oxygen reading for day 80."
   },
   {
    "id": "l3-vis-what-happens-to-warm-air",
@@ -5668,19 +5676,19 @@
    ],
    "coachTopic": "evidence-final-deployment",
    "dok": 3,
-   "stem": "The proposals panel tests each plan for an effect within one season. The fledge-rate chart shows a decline measured across thirty seasons. What does putting those two together tell you about Proposal A, the feeding station?",
-   "explain": "Read the two together and the mismatch is in the timescales. The panel measures each proposal by what it does within one season, and records that A's effect ends when the station stops. The chart measures a fall across thirty seasons. A can help while it runs and still leave the long decline untouched.",
+   "stem": "The proposals panel tests each plan for an effect within one season.  The passage says the colony's nesting date and the herring's arrival keep drifting apart.  What does putting those two together tell you about Proposal A, the feeding station?",
+   "explain": "Read the two together and the mismatch is in time.  The panel measures each proposal by what it does within one season, and records that A's effect ends when the station stops.  The passage says the nesting date and the herring's arrival keep drifting apart.  A can help while it runs and still leave that drift untouched.",
    "choices": [
-    "It solves the decline, because the chart's fall is only about half and a feeding station covers that.",
-    "It fails the budget test, which is why the chart keeps falling.",
-    "It can help while it runs, but a one-season effect does not answer a thirty-season decline.",
-    "The two cannot be compared, because one is a chart and the other is a panel."
+    "It ends the drift, because one season of feeding brings the two dates back together",
+    "It fails the budget test, which is why the dates keep drifting apart",
+    "It can help while it runs, but a one-season effect does not stop the drift",
+    "The two cannot be compared, because one is a test and the other is a trend"
    ],
    "key": 2,
    "distractorRationale": {
-    "0": "The panel itself records that A's effect ends when the station stops. Something that stops is not a match for a trend measured across thirty seasons.",
-    "1": "The panel puts A within budget. The chart's fall has nothing to do with what a proposal costs.",
-    "3": "They are measured in the same unit that matters here, time. One tests an effect over a season; the other measures a change over thirty."
+    "0": "The panel itself records that A's effect ends when the station stops.  Something that stops is no match for a drift that keeps going.",
+    "1": "The panel puts A within budget.  The drift has nothing to do with what a proposal costs.",
+    "3": "They can be read together on time:  the panel tests a single season, and the passage describes a drift that keeps going."
    }
   }
  ],

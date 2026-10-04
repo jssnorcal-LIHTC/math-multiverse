@@ -375,29 +375,29 @@
       "questions": 8,
       "itemIds": [
         "l5-ebsr-what-three-results-add-up-to",
-        "l5-mc-what-two-sources-agree-on",
+        "l5-mc-run-your-own-test",
         "l5-hot-ground-not-device",
-        "l5-ms-what-both-sources-back",
-        "l5-cloze-lining-up-two-sources",
+        "l5-ms-past-what-the-tests-show",
+        "l5-cloze-water-first-depth-last",
         "l5-order-how-the-case-is-built",
-        "l5-ebsr-which-tunnel-halloway-sits-with",
+        "l5-ebsr-bend-does-depths-work",
         "l5-mc-why-publish-all-three",
-        "l5-hot-measured-or-concluded",
-        "l5-ms-what-both-sources-would-agree-on",
+        "l5-hot-measured-or-judged",
+        "l5-ms-weather-not-the-tag",
         "l5-cloze-reading-all-three",
         "l5-order-the-articles-case",
         "l5-ebsr-advice-the-article-supports",
-        "l5-mc-the-line-that-covers-the-claim",
+        "l5-mc-answering-the-mountain-buyer",
         "l5-hot-lesson-not-one-test",
-        "l5-ebsr-the-line-that-locates-the-fault",
+        "l5-ebsr-a-conclusion-too-far",
         "l5-mc-one-test-mistake",
         "l5-hot-advice-not-a-report",
-        "l5-ebsr-which-climate-halloway-sits-with",
+        "l5-ebsr-the-one-careful-sentence",
         "l5-mc-best-summary-of-advice",
         "l5-ebsr-what-the-three-runtimes-prove",
-        "l5-mc-mountain-test-and-the-log",
+        "l5-mc-where-heat-comes-in",
         "l5-ebsr-advice-this-article-supports",
-        "l5-ebsr-the-line-that-explains-petrel",
+        "l5-ebsr-what-mild-weather-showed",
         "l5-mc-two-limestone-tunnels",
         "l5-ms-what-the-climate-memo-shows",
         "l5-order-longest-hold-to-shortest",
@@ -1994,12 +1994,12 @@
       "distractorRationale": {
         "0": "Granite is where the best result happened, so it is easy to read it as the only rock that works.  The third tunnel was limestone and held for fifty-one minutes, which breaks that rule.",
         "1": "Two poor results out of three feels like a verdict, and it is the reading the article warns against in its very next sentence.  Counting outcomes is not the same as comparing conditions.",
-        "3": "Depth is on the list, and the article puts it third and says outright that it is not the whole story.  Picking the cause everybody thinks of first is the habit this piece is written against."
+        "3": "Depth is on the list, and the article says outright that it is not the whole story.  Water and the shape of the path matter too."
       },
-      "explain": "The same beacon behaved three different ways, so whatever changed was not the beacon.  Water, the shape of the path, and depth are all properties of the ground, and the article puts them in that order on purpose, because the cause everybody reaches for first turns out to be the weakest of the three."
+      "explain": "The same beacon behaved three different ways, so whatever changed was not the beacon.  Depth, the shape of the path and water are all properties of the ground, so the ground is what explains the differences."
     },
     {
-      "id": "l5-ebsr-which-tunnel-halloway-sits-with",
+      "id": "l5-ebsr-bend-does-depths-work",
       "type": "ebsr",
       "passageId": "p-three-tunnels",
       "targets": [
@@ -2008,36 +2008,36 @@
       "coachTopic": "research-integrate",
       "dok": 3,
       "partA": {
-        "stem": "The training staff at Halloway measured nine minutes at the thirty foot level.  Which of the three tunnels in this article does their result belong next to?",
+        "stem": "The tag report in this level says heat and cold both cost a battery runtime, but in different ways.  What does this tunnel article say about how a sharp bend and greater depth cost a beacon its range?",
         "choices": [
-          "The third, because its rock is limestone too.",
-          "The second, because Halloway is wet limestone with a bend at much the same depth.",
-          "The first, because that is where the beacon was tested at forty feet, the depth the maker advertised.",
-          "None of them, because this article never mentions Halloway."
+          "A bend costs range mainly when the rock around it is also wet",
+          "Depth costs more, since it is the one that everybody thinks of first",
+          "They do the same work, because both put more rock in the signal's way",
+          "A bend helps the signal by letting it follow the open passage"
         ],
-        "key": 1
+        "key": 2
       },
       "partB": {
-        "stem": "Which sentence from the article best supports the answer you just gave?",
+        "stem": "Which sentence from the article best supports your answer?",
         "choices": [
-          "A beacon at the forty foot level held its signal for the full life of the battery.",
-          "That is close to what the training staff at Halloway recorded in their own log.",
-          "A rescue training association ran the same beacon test in three different tunnels last spring.",
-          "The third tunnel was dry limestone with a gentle curve."
+          "That extra rock does the same work that greater depth would do.",
+          "A sharp bend forces the signal to cut the corner through solid material instead of following the open passage.",
+          "A damp limestone wall can cost a team more range than another ten feet of depth would.",
+          "Depth is the third, and it is the one everybody thinks of first."
         ],
         "key": {
-          "0": 3,
-          "1": 1,
+          "0": 2,
+          "1": 3,
           "2": 0,
-          "3": 2
+          "3": 1
         }
       },
       "distractorRationale": {
-        "0": "Limestone in both names is a word match, and the article's whole point is that wet and dry limestone behave nothing alike.  The third tunnel held for fifty-one minutes where Halloway held for nine.",
-        "2": "Forty feet is the number the maker chose to advertise, and the Halloway staff worked at thirty.  You matched the claim instead of matching the conditions.",
-        "3": "The article names Halloway directly, one sentence after the second tunnel's result.  Deciding a source is unrelated before finishing it costs you the single link it was written to make."
+        "0": "The article treats water and the bend as two separate conditions.  A bend costs range because the signal cuts through solid rock, wet or dry.",
+        "1": "Thinking of depth first is the habit the article corrects.  It says the extra rock a bend adds does the same work that depth does, not less.",
+        "3": "It is the other way round:  the article says a bend makes the signal leave the open passage and go through rock."
       },
-      "explain": "Two sources line up when their conditions line up, not when their numbers do.  Halloway is wet limestone, bent at twenty-five feet, measured at thirty, and so is the second tunnel, which is why eight minutes and nine minutes are the same finding arrived at twice.  The article says so itself, in one sentence that is easy to read straight past."
+      "explain": "The tag report sets two costs side by side and says they work differently.  This article sets two costs side by side and says they work the same way:  a sharp bend makes the signal cut through extra rock, and that extra rock does the same work that greater depth would do."
     },
     {
       "id": "l5-ebsr-advice-the-article-supports",
@@ -2081,48 +2081,48 @@
       "explain": "Using evidence means the sentence you wrote has to be the sentence your source will hold up.  The article's own conclusion names depth, rock, and shape, so a buyer's rule built on those three is supported line for line.  A rule built on the best result quietly drops the conditions that produced it."
     },
     {
-      "id": "l5-ebsr-the-line-that-locates-the-fault",
+      "id": "l5-ebsr-a-conclusion-too-far",
       "type": "ebsr",
-      "passageId": "p-beacon-log",
+      "passageId": "p-three-climates",
       "targets": [
         "c4-4-use-evidence"
       ],
       "coachTopic": "evidence-from-sources",
       "dok": 3,
       "partA": {
-        "stem": "One moment in this log shows the signal loss was about where the beacon sat rather than about a beacon that had failed.  Which moment?",
+        "stem": "Which conclusion goes further than this article's own evidence allows?",
         "choices": [
-          "The team waited twenty minutes at thirty feet and nothing came back.",
-          "The beacon was switched on at the marked bay, and it was the same spot on both runs.",
-          "The same beacon lost the signal on the second run as well.",
-          "The signal came back within four seconds once the beacon was carried up ten feet."
+          "Freezing air can drain a tag's battery far faster than mild air",
+          "Heat costs a battery runtime too, though in a different way",
+          "One runtime number describes one climate, not every climate",
+          "Every runtime number a maker shares should be doubted"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from the log would you quote to back the answer you just gave?",
+        "stem": "Which sentence from the article best supports your answer?",
         "choices": [
-          "On the first run a beacon was carried down to the thirty foot level and switched on at the marked bay.",
-          "The signal did not come back during the twenty minutes the team waited at that depth.",
-          "It returned within four seconds once the beacon was carried up to the twenty foot level.",
-          "On the second run the same beacon was carried to the same bay by a different instructor."
+          "A battery loses much of its charge in freezing air, no matter which device it powers.",
+          "It wears the battery down a different way, over repeated hot stretches, rather than draining it all at once.",
+          "None of this means a buyer should doubt every runtime number a maker shares.",
+          "Two numbers measured in two different climates are not really being compared at all."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
+          "0": 0,
+          "1": 1,
           "2": 3,
           "3": 2
         }
       },
       "distractorRationale": {
-        "0": "Twenty minutes of nothing is the strongest evidence that the signal was truly gone.  It says how badly the signal failed, not what would bring it back.",
-        "1": "Using the same marked bay is what makes the two runs comparable, so it is a control on the test rather than a finding from it.  A fixed starting spot explains nothing about the loss.",
-        "2": "A second failure at the same spot shows the first was not a fluke, which is worth knowing and does not tell you why.  Repeating a result is not the same as locating its cause."
+        "0": "The article says freezing air does exactly this to a battery, so this conclusion stays inside its evidence.",
+        "1": "The article says heat still costs runtime and wears the battery down a different way, over repeated hot stretches.",
+        "2": "That is the article's own lesson about comparing results, so it stays inside what the tests showed."
       },
-      "explain": "One detail in this log behaves like a switch: carry the beacon up ten feet and the signal is back in four seconds.  That is the difference between a beacon that has failed and a beacon that is in the wrong place, and it is the line that ties the log to the bend at twenty-five feet in the very next paragraph."
+      "explain": "A careful reader keeps what a source says apart from what it does not.  This article warns against trusting a single warm-weather number, but it stops well short of doubting every number a maker shares, and it says so in a sentence of its own:  none of this means a buyer should doubt every runtime number a maker shares."
     },
     {
-      "id": "l5-mc-what-two-sources-agree-on",
+      "id": "l5-mc-run-your-own-test",
       "type": "mc",
       "passageId": "p-three-tunnels",
       "targets": [
@@ -2130,44 +2130,44 @@
       ],
       "coachTopic": "research-integrate",
       "dok": 3,
-      "stem": "The Halloway training log and this article were written by different people who never worked together.  What do they agree on?",
+      "stem": "The tag report in this level tells a buyer who needs the tag to work in the cold to ask for the cold number, not the warmest one on offer.  How does this tunnel article's closing advice go further than that?",
       "choices": [
-        "That a beacon's number means nothing until you know the rock, the depth, and the shape of the passage.",
-        "That every department should buy whichever beacon held its signal longest in dry granite.",
-        "That the Wren-7 is a poor beacon that should not be carried underground.",
-        "That wet limestone is the only condition that matters, and depth makes no difference."
+        "It tells a department to trust the deepest result the association measured",
+        "It tells a buyer to pick the beacon that held up in the dry granite tunnel",
+        "It tells a department to run its own test, not trust a number from elsewhere",
+        "It tells a buyer to trust whichever number the beacon's maker publishes"
       ],
-      "key": 0,
+      "key": 2,
       "distractorRationale": {
-        "1": "Granite is where one beacon did best, which is a fact about the ground.  Neither source turns a condition into shopping advice, and the article's advice runs the other way entirely.",
-        "2": "Neither source says it.  The log refuses to judge the beacon from two runs, and the article says outright that the beacon is not the thing that changed.",
-        "3": "Water is the first of three conditions the article lists, with the bend and the depth behind it.  Taking the first item on a list for the whole list is the quickest way to misread an article like this."
+        "0": "The article warns against exactly that.  Depth is the condition it says everybody thinks of first, and the association's own numbers show it is not the whole story.",
+        "1": "Choosing on one good run is reading a single number alone.  The article's point is that the granite result says more about the tunnel than about the beacon.",
+        "3": "The article says a number offered without its conditions cannot be checked, so it gives no reason to trust a maker's number as it stands."
       },
-      "explain": "Two sources that never met agree on a method rather than on a verdict.  The log records depth, rock, and time and then refuses to generalise; the article compares three sets of conditions and concludes that a number without conditions cannot be checked.  Agreement of that kind is worth more than either source alone, because neither one could have arranged it."
+      "explain": "Both reports want a reader to get a number measured in the conditions they will really face.  The tag report says to ask for that number.  This article goes a step further and tells each department to run one test in its own worst tunnel, so the number is its own instead of one measured somewhere else."
     },
     {
-      "id": "l5-mc-the-line-that-covers-the-claim",
+      "id": "l5-mc-answering-the-mountain-buyer",
       "type": "mc",
-      "passageId": "p-beacon-log",
+      "passageId": "p-three-climates",
       "targets": [
         "c4-4-use-evidence"
       ],
       "coachTopic": "evidence-from-sources",
       "dok": 3,
-      "stem": "A report claims that the Halloway staff tested the beacon in the very tunnel the maker had already advertised.  Which line from the log covers the whole of that claim?",
+      "stem": "A buyer says the tag must be badly made, because it went silent in the mountains in just under three days.  Which line from the article answers that buyer most directly?",
       "choices": [
-        "The staff make no claim about how this beacon works in other tunnels.",
-        "Two beacons of the Wren-7 model were tested over two days in the Halloway service tunnel.",
-        "That is the same tunnel named in the maker's brief.",
-        "The purpose was to decide whether this site should replace its hardwired line with beacons before the summer exercises."
+        "A tag there lasted just under three days before it went silent, a runtime the board called far below every other test.",
+        "A battery loses much of its charge in freezing air, no matter which device it powers.",
+        "That is close to the maker's own thirty-day number, and a range a buyer could plan around.",
+        "The third test ran in a freezing mountain climate."
       ],
-      "key": 2,
+      "key": 1,
       "distractorRationale": {
-        "0": "That line is the limit the staff put on their own result.  It is the sentence you would need for a completely different claim.",
-        "1": "That line proves they tested at Halloway and stops there.  The claim has two halves, and the half about the maker having already named the tunnel is missing.",
-        "3": "That is why they ran the test, not where.  A purpose and a place are different things, and only one of them appears in the claim."
+        "0": "That line is the result the buyer is pointing at.  Repeating it agrees with the buyer instead of answering them.",
+        "2": "The coastal number shows the tag can do well, but it does not say why the tag did badly in the mountains.",
+        "3": "Naming the climate tells you where the test ran.  It does not say that the cold, not the tag, cut the runtime."
       },
-      "explain": "Evidence has to cover the whole claim rather than most of it.  This claim ties two facts together, the tunnel the staff used and the tunnel the maker advertised, and only one line in the log puts both of them in a single sentence.  A quotation that proves half a claim is how a report gets taken apart."
+      "explain": "The buyer reads a cold-weather runtime as a verdict on the tag.  The line that answers them is the one about the battery:  freezing air drains a battery's charge no matter which device it powers, so the short runtime is a fact about the cold that would happen to any tag."
     },
     {
       "id": "l5-mc-why-publish-all-three",
@@ -2191,7 +2191,7 @@
         "2": "Averaging fifty-one minutes, eight minutes, and a full battery would hide the very thing the article found.  The spread is the finding, and an average is a way of throwing it away.",
         "3": "That is what a buyer should not do with them, and the article says to ask for conditions before results.  Three numbers to choose between is the problem, not the point."
       },
-      "explain": "One result reads as a verdict on the equipment and three read as an experiment.  The beacon is the constant across all three tunnels, so anything that changed has to be the ground, which is what lets the article name water, shape, and depth as the three things that did.  Side by side is not a courtesy; it is the method."
+      "explain": "One result reads as a verdict on the equipment and three read as an experiment.  The beacon is the constant across all three tunnels, so anything that changed has to be the ground, which is what lets the article name three conditions of the ground as the things that did.  Side by side is not a courtesy; it is the method."
     },
     {
       "id": "l5-hot-ground-not-device",
@@ -2220,33 +2220,33 @@
       "explain": "The article's central move is to separate the device from the ground it is used in, and these three sentences are where the ground does the explaining: wet rock turns signal into heat, a bend forces the signal through extra stone, and damp walls can cost more range than ten more feet of depth.  The other three are the article describing its own report and telling you what to do with it."
     },
     {
-      "id": "l5-hot-measured-or-concluded",
+      "id": "l5-hot-measured-or-judged",
       "type": "hottext",
-      "passageId": "p-beacon-log",
+      "passageId": "p-three-tunnels",
       "targets": [
         "c4-4-use-evidence"
       ],
       "coachTopic": "evidence-from-sources",
       "dok": 3,
       "mode": "word",
-      "stem": "A report can quote a measurement as a fact and must quote a judgement as an opinion.  Tap the three phrases the staff measured.",
+      "stem": "A report can quote a measurement as a fact, but it must quote a judgment as someone's opinion.  Tap the three phrases that the association measured.",
       "spans": [
-        "held the signal for nine minutes",
-        "may explain the gap",
-        "lost the signal after seven minutes",
-        "nowhere near enough evidence",
-        "differ by no more than three seconds",
-        "treat the beacon as a second method"
+        "far more useful than any one of them alone",
+        "held its signal for the full life of the battery",
+        "close to meaningless",
+        "lost contact there after eight minutes",
+        "a number that cannot be checked",
+        "held for fifty-one minutes before the signal became unreliable"
       ],
       "key": [
-        0,
-        2,
-        4
+        1,
+        3,
+        5
       ],
-      "explain": "Three of these came off a stopwatch and three came out of a discussion, and a report has to keep them apart.  Nine minutes, seven minutes, and a three-second spread between two observers can be quoted as facts about what happened.  May explain, nowhere near enough, and treat it as a second method are the staff reasoning, and quoting reasoning as though it were measurement is how a source gets misused."
+      "explain": "Three of these came off the tests:  a signal held for the battery's full life, contact lost after eight minutes, and a signal held for fifty-one minutes.  Far more useful, close to meaningless, and a number that cannot be checked are judgments the article makes about those results, and a careful report quotes them as judgments."
     },
     {
-      "id": "l5-ms-what-both-sources-back",
+      "id": "l5-ms-past-what-the-tests-show",
       "type": "ms",
       "passageId": "p-three-tunnels",
       "targets": [
@@ -2254,29 +2254,29 @@
       ],
       "coachTopic": "evidence-from-sources",
       "dok": 3,
-      "stem": "Choose the three statements that both the Halloway training log and this article would back up.",
+      "stem": "Choose the three conclusions that go further than this article's results allow.",
       "choices": [
-        "The Wren-7 is the worst beacon on the market",
-        "Wet rock costs a beacon range",
-        "Depth is the only thing that decides how far a signal travels",
-        "A bend between the beacon and the receiver costs a beacon range",
-        "A department can trust a figure measured in another department's tunnel",
-        "A performance figure with no conditions attached cannot be checked"
+        "The beacon is a poor product that buyers should avoid",
+        "Wet rock absorbs radio energy far more than dry rock",
+        "Depth has no effect on how far a signal travels",
+        "A sharp bend can cost a beacon some of its range",
+        "A result means little until its conditions are named",
+        "A beacon in dry rock keeps its signal the whole time"
       ],
       "key": [
-        1,
-        3,
+        0,
+        2,
         5
       ],
       "distractorRationale": {
-        "0": "Neither source ranks the beacon against anything, and both tested one beacon rather than several.  There is nothing in either one to build a worst out of.",
-        "2": "Depth is on the article's list and it comes third, behind water and shape, and the article says outright that it is not the whole story.  Picking the cause you thought of first is the habit both sources are written against.",
-        "4": "Both say the opposite in almost the same words: the article tells departments to test their own worst tunnel, and the log refuses to speak about any tunnel except its own."
+        "1": "The article says exactly this, and its wet tunnel is where the beacon did worst.",
+        "3": "Supported:  the article names the shape of the path as one of its three conditions and explains how a bend costs a beacon range.",
+        "4": "That is the article's own conclusion, drawn from its three results, so it does not reach past them."
       },
-      "explain": "Two sources agree on three things and all three are about conditions rather than about the product.  Water and bends cost range in both accounts, and both refuse a number that arrives without the depth, the rock, and the shape it was measured in.  Anything about how good or bad the beacon is comes from neither of them."
+      "explain": "Each of the three goes past what the tests showed.  The article says its point is not that the beacons are good or bad.  It says depth clearly matters, even though it is not the whole story.  Its dry limestone tunnel still lost a reliable signal after fifty-one minutes, so dry rock is no guarantee."
     },
     {
-      "id": "l5-cloze-lining-up-two-sources",
+      "id": "l5-cloze-water-first-depth-last",
       "type": "cloze",
       "passageId": "p-three-tunnels",
       "targets": [
@@ -2284,26 +2284,26 @@
       ],
       "coachTopic": "research-integrate",
       "dok": 3,
-      "stem": "Complete the summary that puts both sources together.  Halloway measured nine minutes and the association's second tunnel measured eight, and those two results agree because both tunnels are {{0}}, which lets the gap with the maker's ninety-minute claim be explained by {{1}} rather than by the beacon.",
+      "stem": "Finish the comparison.  The tag report in this level picks out cold as the clearest of its three factors.  This article puts {{0}} first among its own three, and it saves {{1}} for last, even though that is the one everybody thinks of first.",
       "blanks": [
         {
           "choices": [
-            "at the same depth below the surface",
-            "tested by the same two instructors",
-            "wet limestone with a sharp bend"
+            "the shape of the path",
+            "water",
+            "depth"
           ],
-          "key": 2
+          "key": 1
         },
         {
           "choices": [
-            "mistakes in the stopwatch timing",
-            "properties of the ground",
-            "faults in the surface receiver"
+            "water",
+            "the bend at twenty-five feet",
+            "depth"
           ],
-          "key": 1
+          "key": 2
         }
       ],
-      "explain": "Putting two sources together means lining up their conditions before their numbers.  Halloway and the second tunnel share wet limestone and a sharp bend, so eight minutes and nine minutes are one finding rather than two.  That finding points at the ground, which is where the Halloway staff looked to explain the gap with the maker's ninety minutes.  Nothing about the beacon has to change for both short runs to be true."
+      "explain": "Both reports list three conditions and trace their results to where each test ran.  This article names water first and the shape of the path second, and it puts depth third on purpose:  depth is the one everybody thinks of first, and the article's own numbers show it is not the whole story."
     },
     {
       "id": "l5-order-how-the-case-is-built",
@@ -3477,7 +3477,7 @@
       "explain": "A careful reader watches for exactly these three signals: who ran the test, whether the claim can be dated and checked against anything else, and whether the source itself admits a limit. The brief supplies all three, which is why its headline number deserves a second look rather than outright trust."
     },
     {
-      "id": "l5-ebsr-which-climate-halloway-sits-with",
+      "id": "l5-ebsr-the-one-careful-sentence",
       "type": "ebsr",
       "passageId": "p-three-climates",
       "targets": [
@@ -3486,36 +3486,36 @@
       "coachTopic": "research-integrate",
       "dok": 3,
       "partA": {
-        "stem": "The Halloway training staff measured a Petrel-4 losing its signal after about sixty hours in freezing temperatures. Which of the three climates in this article does that result sit closest to?",
+        "stem": "The tunnel report in this level states each of its causes as plain fact.  Which sentence in this tag article gives its cause more cautiously?",
         "choices": [
-          "None of them, since this article never mentions cold-weather testing at all.",
-          "The mild coastal climate, because the two tests used the same brand of tracking tag.",
-          "The desert climate, because both tests involved extreme weather.",
-          "The freezing mountain climate, where a tag also went silent within days."
+          "The cold sentence, which says freezing air drains a battery's charge",
+          "The desert sentence, which says hot stretches seemed to wear the battery down",
+          "The mild-weather sentence, which says mild weather costs the least",
+          "The mountain sentence, which says the board called that runtime far below the rest"
         ],
-        "key": 3
+        "key": 1
       },
       "partB": {
-        "stem": "Which sentence from the article best supports the answer you just gave?",
+        "stem": "Which sentence from the article best supports your answer?",
         "choices": [
-          "The first test ran in a mild coastal climate, with temperatures in the fifties throughout.",
           "Cold is the clearest of the three factors.",
-          "The second test ran in a desert climate, with daytime heat above ninety degrees.",
-          "A tag there lasted just under three days before it went silent, a runtime the board called far below every other test."
+          "Mild weather costs the least of the three, which is why a maker's own test, run at a comfortable room temperature, tends to show the best number the device can reach.",
+          "A tag there lasted just under three days before it went silent, a runtime the board called far below every other test.",
+          "That tag lasted only nineteen days, as repeated hot stretches seemed to wear the battery down faster than a mild day would."
         ],
         "key": {
-          "0": 1,
-          "1": 0,
-          "2": 2,
-          "3": 3
+          "0": 0,
+          "1": 3,
+          "2": 1,
+          "3": 2
         }
       },
       "distractorRationale": {
-        "0": "The article is precisely about cold-weather-style testing; it tests three climates, one of them freezing, so this option ignores content the passage clearly contains.",
-        "1": "Using the same brand of tag is not the reason two results belong together; the article groups results by matching conditions, not by matching product.",
-        "2": "Extreme heat and extreme cold are named as two separate, differently acting factors; sharing the word \"extreme\" does not make them the same condition."
+        "0": "The cold sentence is stated flatly, and calling cold the clearest of the three factors is a confident claim, not a cautious one.",
+        "2": "Mild weather costing the least is stated as plain fact, and the sentence goes on to explain the maker's number with it.",
+        "3": "That sentence reports a runtime and what the board called it.  It names no cause, so there is nothing in it to hedge."
       },
-      "explain": "Two results belong together when their conditions match, not when their numbers happen to be close by coincidence. Freezing temperature is the shared condition between the Halloway trial and the article's own mountain-climate test, which is why the two short runtimes are the same finding rather than two unrelated ones."
+      "explain": "Setting two sources side by side includes noticing how sure each one is.  The tunnel report states its causes plainly, and most of this article does too, but the desert sentence says the hot stretches seemed to wear the battery down, which presents the cause as a likely reading of the result rather than a measured fact."
     },
     {
       "id": "l5-ebsr-what-the-three-runtimes-prove",
@@ -3600,7 +3600,7 @@
       "explain": "The article's central argument is that a runtime number only means something once its conditions are known. The advice that follows directly from that evidence is to ask what temperature a figure was measured at, not to trust a single number or avoid a climate outright."
     },
     {
-      "id": "l5-ebsr-the-line-that-explains-petrel",
+      "id": "l5-ebsr-what-mild-weather-showed",
       "type": "ebsr",
       "passageId": "p-three-climates",
       "targets": [
@@ -3609,39 +3609,39 @@
       "coachTopic": "evidence-from-sources",
       "dok": 3,
       "partA": {
-        "stem": "Which idea from this article explains why a buyer should be cautious about the Petrel-4 brief's single thirty-day number?",
+        "stem": "What does the board's evidence show about the tag in mild weather?",
         "choices": [
-          "A buyer should never trust any number that comes from an indoor test.",
-          "A tag tested in a mild climate will always outlast a tag tested in a desert climate by about a week.",
-          "Corvid Systems tested the tag in the desert and left that number out of its brief.",
-          "A maker's own test, run in its most favorable conditions, tends to give the best possible number, not a typical one."
+          "It ran longer than the maker's own number had promised",
+          "It ran out sooner than it did in the desert heat",
+          "It gave the shortest runtime the board recorded",
+          "It ran close to the maker's own thirty-day number"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from the article best supports the answer you just gave?",
+        "stem": "Which sentence from the article best supports your answer?",
         "choices": [
-          "Mild weather costs the least of the three, which is why a maker's own test, run at a comfortable room temperature, tends to show the best number the device can reach.",
-          "None of this means a buyer should doubt every runtime number a maker shares.",
-          "The first test ran in a mild coastal climate, with temperatures in the fifties throughout.",
-          "The second test ran in a desert climate, with daytime heat above ninety degrees."
+          "A tag there lasted just under three days before it went silent, a runtime the board called far below every other test.",
+          "That is close to the maker's own thirty-day number, and a range a buyer could plan around.",
+          "A tag there ran for twenty-six days on one charge.",
+          "That tag lasted only nineteen days, as repeated hot stretches seemed to wear the battery down faster than a mild day would."
         ],
         "key": {
           "0": 2,
           "1": 3,
-          "2": 1,
-          "3": 0
+          "2": 0,
+          "3": 1
         }
       },
       "distractorRationale": {
-        "0": "The article's caution is about knowing the temperature a number was measured at, not about rejecting indoor testing altogether; a warm, comfortable indoor test is exactly the kind this article discusses without condemning it outright.",
-        "1": "The article reports what happened in these three specific tests, where the gap was one week in one pair of tests.  It never turns that into a rule that a mild climate always wins by a set amount.",
-        "2": "The desert test belongs to the review board, not to Corvid, and the article warns a reader not to doubt every number a maker shares."
+        "0": "Twenty-six days is short of the maker's thirty, not longer.  Reading a big number as a win skips the comparison the board makes.",
+        "1": "The desert tag lasted nineteen days, so the mild tag outlasted it by a week.",
+        "2": "The shortest runtime was the mountain test, just under three days.  Mild weather gave the longest runtime of the three."
       },
-      "explain": "The Petrel-4 brief's thirty-day figure came from the maker's own facility, run under comfortable conditions the maker chose.  This article explains exactly why that kind of test tends to produce the best possible number rather than a typical one, which is the reasoning a cautious buyer needs before trusting it."
+      "explain": "The board puts its mild-weather result in context with a single sentence:  twenty-six days is close to the maker's own thirty-day number, and a range a buyer could plan around.  That sentence is the evidence for what mild weather showed, in that one climate."
     },
     {
-      "id": "l5-ms-what-both-sources-would-agree-on",
+      "id": "l5-ms-weather-not-the-tag",
       "type": "ms",
       "passageId": "p-three-climates",
       "targets": [
@@ -3649,26 +3649,24 @@
       ],
       "coachTopic": "research-integrate",
       "dok": 3,
-      "stem": "The Halloway cold-weather log and this article were written by people who never worked together. Choose the three statements both sources would agree with.",
+      "stem": "The tunnel report in this level says its three conditions are properties of the ground, not of the beacon.  Choose the two statements that show this tag article treating the weather the same way, as the cause rather than the tag.",
       "choices": [
-        "A tag that fails in the cold must be a defective tag that should be sent back",
-        "One test in one set of conditions is not the whole truth about a device",
-        "A maker's brief should never be read at all",
-        "Cold can make a tracking tag lose its charge much faster than normal",
-        "Every department should stop using tracking tags entirely until a better one exists",
-        "The exact temperature or climate of a test matters to judging its result"
+        "It says the tag that went silent in the mountains was a faulty unit",
+        "It says heat costs runtime too, wearing a battery down over hot stretches",
+        "It ranks the tag against other brands tested in the same three climates",
+        "It says mild weather costs a battery the least of the three conditions",
+        "It says the mountain runtime was far below the other two tests"
       ],
       "key": [
         1,
-        3,
-        5
+        3
       ],
       "distractorRationale": {
-        "0": "Both sources say the opposite. The log calls a cold-weather failure a property of conditions, not a defect, and the article makes the identical point about climate rather than the device.",
-        "2": "Neither source says a brief should be ignored outright; both treat it as one data point that needs its conditions checked, not as something to refuse to read.",
-        "4": "Neither source recommends abandoning tracking tags; the log plans a follow-up trial and the article advises asking better questions, not giving up on the tool."
+        "0": "The article blames the cold for the mountain result.  Nothing in it says the unit was faulty.",
+        "2": "Only one tag was tested.  The article compares climates, not brands, so it has nothing to rank.",
+        "4": "That compares one result with the others.  It does not say what caused the short runtime."
       },
-      "explain": "Two sources written independently agree here on a method rather than a specific verdict: cold genuinely costs charge, one test never tells the whole story, and the conditions behind a number decide whether it can be trusted. That kind of agreement, reached without either source knowing about the other, is stronger than either source alone."
+      "explain": "The tunnel report pins its results on the ground rather than the beacon, and this article does the same with the weather.  Heat costs runtime in its own way, over repeated hot stretches, and mild weather costs the least, so each result is a reading of its weather rather than a mark against the tag."
     },
     {
       "id": "l1-hot-real-examples",
@@ -4050,7 +4048,7 @@
           "key": 0
         }
       ],
-      "explain": "Three results, read side by side, isolate the one thing that actually varied: the climate around a tag that itself never changed.  The advice that follows is not to distrust every number or trust only one climate, but to ask what conditions any single number was measured under."
+      "explain": "Three results, read side by side, isolate the one thing that actually varied: the climate around a tag that itself never changed.  The advice that follows is to ask what conditions any single number was measured under."
     },
     {
       "id": "l1-mc-second-glance",
@@ -4508,28 +4506,28 @@
       "explain": "The article does not tell a buyer which tag to choose or which number is biggest. It tells a buyer to ask a question first, what climate was this number measured in, before deciding whether that number applies to their own situation."
     },
     {
-      "id": "l5-mc-mountain-test-and-the-log",
+      "id": "l5-mc-where-heat-comes-in",
       "type": "mc",
-      "passageId": "p-three-climates",
+      "passageId": "p-three-tunnels",
       "targets": [
         "c4-2-integrate"
       ],
       "coachTopic": "research-integrate",
       "dok": 3,
-      "stem": "How does the mountain-climate result in this article relate to the Halloway training log from the cold-weather trial?",
+      "stem": "In the tag report in this level, heat is the weather of the desert test, wearing a battery down.  Where does heat come into this tunnel article?",
       "choices": [
-        "Both recommend replacing hardwired lines with tracking tags immediately.",
-        "Both describe a tag that was later taken apart and found to be physically defective.",
-        "Both were written by the same review board, on the same day, about the same trip.",
-        "Both describe a tag going silent within days in freezing weather."
+        "The beacon's battery warms the granite around it, so the first tunnel held longest",
+        "The third tunnel ran warmest, which is why its signal faded after fifty-one minutes",
+        "The sharp bend in the second tunnel heats the signal until contact is lost",
+        "Water in the rock turns part of the signal into heat, which is how wet rock costs range"
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "Neither source recommends replacing anything immediately; the log explicitly advises keeping the older system as a backup until more testing is done.",
-        "1": "Neither source calls the tag defective; both attribute the short runtime to cold conditions rather than to a fault in the device.",
-        "2": "The mountain-climate test belongs to an equipment review board, and the cold-weather log belongs to Halloway's own training staff, two different, independent sources."
+        "0": "The article never says the battery warms the rock.  The first tunnel held because it was dry and almost straight, not because of heat.",
+        "1": "No tunnel's temperature is given.  The article explains its results by water, the shape of the path, and depth, not by how warm a tunnel ran.",
+        "2": "The article says nothing about heat at the bend.  Heat comes in only in the paragraph on water, which says water is extremely good at turning a signal into heat."
       },
-      "explain": "Two sources, produced independently by different people, land on the same finding: a tag in freezing conditions loses its charge within days rather than weeks. That kind of agreement, reached without either source knowing about the other, is stronger evidence than either result alone."
+      "explain": "The same word does a different job in each report.  In the tag report heat is weather that wears a battery down;  in this article heat is where a signal's energy goes when water in the rock absorbs it, and that is how wet rock costs a beacon its range."
     },
     {
       "id": "l5-order-the-articles-case",

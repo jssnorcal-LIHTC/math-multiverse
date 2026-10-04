@@ -415,6 +415,20 @@
       "status": "agree"
     },
     {
+      "itemId": "t3-ebsr-spartan-government-structure",
+      "itemHash": "3699113021a11cf9",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "t3-hot-source-b-argues-its-case",
       "itemHash": "9bc8c219aaa53fd8",
       "blind": [
@@ -639,6 +653,20 @@
       "status": "agree"
     },
     {
+      "itemId": "t5-ebsr-qin-after-standardizing",
+      "itemHash": "49cd3d69674c4825",
+      "blind": [
+        0,
+        3
+      ],
+      "authored": [
+        0,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "t5-match-ideas-to-school",
       "itemHash": "9f6e8626123043a7",
       "blind": [
@@ -749,6 +777,50 @@
       "status": "agree"
     },
     {
+      "itemId": "t6-hot-rome-absorbs-greece",
+      "itemHash": "28047f80308585a0",
+      "blind": [
+        3,
+        4
+      ],
+      "authored": [
+        3,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ms-closing-facts",
+      "itemHash": "b6b1795d061386ac",
+      "blind": [
+        1,
+        2,
+        3
+      ],
+      "authored": [
+        1,
+        2,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-republic-to-empire",
+      "itemHash": "223761835cde2d17",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "t6-mc-reachback-saul-first-king",
       "itemHash": "62f1d73a09ea7a59",
       "blind": 0,
@@ -764,6 +836,20 @@
       ],
       "authored": [
         2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "t6-ebsr-reachback-hammurabi-dispute",
+      "itemHash": "4a7acbfb678e4822",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -1693,6 +1779,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l1-vis-two-rivers-contrast",
+      "itemHash": "b47b430f9b3e1a39",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l1-vis-rivers-map-shows",
       "itemHash": "99ddac6fbabeb1a0",
       "blind": [
@@ -1789,6 +1883,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l3-vis-how-salamis-is-drawn",
+      "itemHash": "826e6d6113ae2ab7",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l3-vis-two-turning-points",
       "itemHash": "6bc5be2dbe1eb6fb",
       "blind": 2,
@@ -1807,6 +1909,14 @@
         0,
         0
       ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-vis-two-cities",
+      "itemHash": "6c6e96b9c81d8815",
+      "blind": 2,
+      "authored": 2,
       "confidence": "high",
       "status": "agree"
     },
@@ -1841,14 +1951,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l4-vis-road-preview",
-      "itemHash": "2cf3ac0be9e6a116",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l5-vis-what-went-which-way",
       "itemHash": "29d408c37970400f",
       "blind": 3,
@@ -1873,10 +1975,10 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-vis-cross-era-sequence",
-      "itemHash": "9298fe7c909c03d4",
-      "blind": 2,
-      "authored": 2,
+      "itemId": "l5-vis-the-hedge",
+      "itemHash": "a182846216f39942",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -1939,128 +2041,26 @@
       "status": "agree"
     },
     {
-      "itemId": "t3-ebsr-spartan-government-structure",
-      "itemHash": "3699113021a11cf9",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t5-ebsr-qin-after-standardizing",
-      "itemHash": "49cd3d69674c4825",
-      "blind": [
-        0,
-        3
-      ],
-      "authored": [
-        0,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-hot-rome-absorbs-greece",
-      "itemHash": "28047f80308585a0",
-      "blind": [
-        3,
-        4
-      ],
-      "authored": [
-        3,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ms-closing-facts",
-      "itemHash": "b6b1795d061386ac",
-      "blind": [
-        1,
-        2,
-        3
-      ],
-      "authored": [
-        1,
-        2,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ebsr-republic-to-empire",
-      "itemHash": "223761835cde2d17",
-      "blind": [
-        3,
-        3
-      ],
-      "authored": [
-        3,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "t6-ebsr-reachback-hammurabi-dispute",
-      "itemHash": "4a7acbfb678e4822",
-      "blind": [
-        3,
-        3
-      ],
-      "authored": [
-        3,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-vis-two-rivers-contrast",
-      "itemHash": "b47b430f9b3e1a39",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-vis-how-salamis-is-drawn",
-      "itemHash": "826e6d6113ae2ab7",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-vis-geography-callback",
-      "itemHash": "d683225e4871cae4",
+      "itemId": "l3-vis-the-battle-left-off",
+      "itemHash": "5b70e27a5fbd8cb5",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l4-vis-two-cities",
-      "itemHash": "6c6e96b9c81d8815",
-      "blind": 2,
-      "authored": 2,
+      "itemId": "l4-vis-the-note-set-apart",
+      "itemHash": "58e8556730102bfe",
+      "blind": 1,
+      "authored": 1,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l5-vis-the-hedge",
-      "itemHash": "a182846216f39942",
-      "blind": 0,
-      "authored": 0,
+      "itemId": "l5-vis-arrows-not-cities",
+      "itemHash": "043339afb1d87c69",
+      "blind": 2,
+      "authored": 2,
       "confidence": "high",
       "status": "agree"
     }

@@ -1,0 +1,402 @@
+'use strict';
+// sweep-cross-level.js -- every level asks only about its own stories.
+//
+// Justin, 26-1004, relaying Niall:  "in Vault of Ages, in the sixth level, it was asking a question about
+// what happened in the second level."  The 26-0921 rule ("no review questions can echo") had been built as
+// sweep-review-echo.js's E1 to E4:  a review item may not repeat an earlier question, figure fact or keyed
+// answer.  Every pack read ALL CLEAN while level 6 still served 56 questions on EARLIER levels' passages
+// (Cold Signal 28 of 28, Vault 15, Firsthand 9, Outpost 4), and 7 practice items did the same.  A new
+// question about an old story passed every one of E1 to E4, because Niall's own case was never one of their
+// controls.  It is the FIRST control here, verbatim from 02a63cf
+// (tests/fixtures/cross-level-niall-vault-26-1004.json).
+//
+//   I1  ONE LEVEL PER PASSAGE.  A passage is served by the items of one level only.
+//   I2  ONE LEVEL PER FIGURE.  A figure belongs to one level only, counting every way a level shows it:  an
+//       item that reads it, the level's reveal, and the figure strip of a passage the level serves.  A
+//       drawing from an earlier level is the earlier story coming back.
+//   I3  NO EARLIER LEVEL STATES THE KEY.  sweep-review-echo's E1 test (a key's content words, 80% or more
+//       and at least three, inside one asserting field of another item), widened from level 6 to every
+//       level, checked against every EARLIER level.  Only that direction:  a later item that restates an
+//       earlier key teaches it again, it does not ask about it.
+//   I4  NO QUESTION POINTS BACK.  A question can ask about an earlier story from its OWN passage:  Vault's
+//       level 6 asked "What do Mila's introduction in 'Two Empty Chairs' and her role in the final vault have
+//       in common?", Firsthand's "a civilization studied earlier in this record", Cold Signal level 5 "The
+//       Halloway training log and this article...".  I1 cannot see those, because the passage is the level's
+//       own.  So the text a child is ASKED (stem, options, Part A, blank and tile options, row and column
+//       labels;  never a Part B line or a hottext span, which quote the item's own passage) may not carry a
+//       pointer phrase (POINTERS), cite another level's passage title in quotation marks or where the item's
+//       own passage never uses it, or name another level's document from SOURCE_NAMES.  The real cases are
+//       the controls (tests/fixtures/cross-level-callbacks-26-1004.json), with a same-level "earlier entry"
+//       and a word a level's own passage introduces as the two that must stay clean.  A passage may still
+//       remember the series (the Vault finale's keys are the earlier relics);  a question may not ask about
+//       the remembering.
+//   I5  NO QUESTION READS ANOTHER LEVEL'S DRAWING.  Found by the Phase 1 lens, 26-1004, after every rule
+//       above read ALL CLEAN:  Outpost's level 6 asked the child to put "the proposals panel" (its own) together
+//       with "the fledge-rate chart", which only level 5 shows.  The item's figure was its own, so I2 was
+//       blind, and the chart was named by what it plots, not by a title, so I4 was too.  So in the asked text,
+//       a drawing noun (chart, map, timeline, panel, card, plan, ...) with the words in front of it ("the
+//       fledge-rate chart") is matched against every figure's caption, alt text, table title and id:  if a
+//       figure the item's own level shows matches, it is the level's own drawing;  if none does and a figure
+//       only another level shows matches, it is a finding.  That case, verbatim, is the control
+//       (tests/fixtures/cross-level-figure-ref-26-1004.json), with its fixed text as the clean twin.
+//
+//   node tests/sweep-cross-level.js            every pack in the manifest;  exits 1 on any finding
+//
+// SCOPE.  I1 and I2 apply to every pack whose passages are read as texts (ela, hist, sci).  The math pack
+// (meta.subject "math") is exempt from those two, on purpose:  its passages are how-to notes (how to read a
+// figure, how to read a decimal), and its figures are shapes to compute on, so its level 6 ("Review and
+// Preview") re-computes on level-1 shapes by design and no story comes back.  Whether it should is a separate
+// call, logged 26-1004.  I3 and I4 apply to every pack.
+//
+// Reviewed exceptions live in tests/cross-level-allowlist.json as { pack, sig, reason }.  An entry that no
+// longer matches a finding is STALE and fails, so the list cannot outlive the content it excused.
+
+const fs = require('fs');
+const path = require('path');
+const { STOP, norm, words, keysOf, assertingFields } = require('./echo-lib');
+
+const ROOT = path.join(__dirname, '..');
+const ALLOW_PATH = path.join(__dirname, 'cross-level-allowlist.json');
+const NIALL_PATH = path.join(__dirname, 'fixtures', 'cross-level-niall-vault-26-1004.json');
+const CALLBACKS_PATH = path.join(__dirname, 'fixtures', 'cross-level-callbacks-26-1004.json');
+const FIGREF_PATH = path.join(__dirname, 'fixtures', 'cross-level-figure-ref-26-1004.json');
+
+// Phrases that send a child back to another part of the series.  Each was a real callback on 26-1004, and
+// each was checked against every question in every pack for a false hit first:  "one more time" and "earlier
+// entry" were dropped, because a question can quote the first from its own passage and Firsthand uses the
+// second for an entry on its own level.
+const POINTERS = ['earlier in the story', 'earlier in this record', 'earlier in the record', 'studied earlier',
+  'start of this record', 'a lesson from earlier', 'from earlier in', 'where else in the story', 'first scene',
+  'on the first day', 'connect back', 'connects back', 'looking back', 'rereads', 'reopens', 'previous level',
+  'earlier level', 'in the van story', 'debrief story', 'both stories', 'two stories', 'another story', 'the other story'];
+const POINTER_RES = [/\becho(es|ed)?\b/];
+// Names that belong to one level's story, mapped to a passage of that level.  Later levels used them to ask
+// about the earlier story:  "The Halloway training log and this article...", "the Petrel-4 brief's single
+// thirty-day number", "the Frostbank corridor", "Hammurabi's code".  A name is exempt in a level that serves
+// its passage, and in a level whose own passage TITLE carries it (Cold Signal level 3's "The Van on Halloway
+// Road" is that level's own story).  Names a passage's own TEXT carries are not exempt:  the Vault finale
+// remembers Frostbank, and that is exactly the remembering a question may not ask about.
+const SOURCE_NAMES = {
+  'ela-g6-spy': [['halloway', 'p-beacon-log'], ['cold-weather log', 'p-cold-weather-log'], ['cold-weather trial', 'p-cold-weather-log'],
+    ['petrel-4', 'p-petrel-brief'], ['wren-7', 'p-beacon-brief'], ['corvid', 'p-beacon-brief']],
+  'vault-of-ages-g6': [['frostbank', 'p-frostbank-vault'], ['two empty chairs', 'p-two-empty-chairs'],
+    ['temple chronicle', 'p-temple-chronicle'], ["reckoner's ledger", 'p-reckoners-ledger']],
+  'firsthand-g6': [['hammurabi', 'p-t1-hammurabi-recovered-entry'], ['aegean desk', 'p-t3-source-a-athenian'],
+    ['peloponnese desk', 'p-t3-source-b-spartan'], ['athens', 'p-t3-source-a-athenian'], ['athenian', 'p-t3-source-a-athenian'],
+    ['sparta', 'p-t3-source-b-spartan']],
+};
+
+// Every level that shows each passage and each figure, and how.
+function usage(pack) {
+  const byId = new Map((pack.items || []).map((i) => [i.id, i]));
+  const passagesById = new Map((pack.passages || []).map((p) => [p.id, p]));
+  const passageLevels = new Map();   // passageId -> Map(level -> [itemIds])
+  const figureLevels = new Map();    // figureId  -> Map(level -> [how])
+  const note = (map, key, lv, how) => {
+    if (!map.has(key)) map.set(key, new Map());
+    const m = map.get(key);
+    if (!m.has(lv)) m.set(lv, []);
+    m.get(lv).push(how);
+  };
+  (pack.levels || []).forEach((l, li) => {
+    const lv = li + 1;
+    const served = new Set();
+    for (const id of l.itemIds || []) {
+      const it = byId.get(id);
+      if (!it) continue;
+      if (it.passageId) { note(passageLevels, it.passageId, lv, id); served.add(it.passageId); }
+      if (it.figureId) note(figureLevels, it.figureId, lv, `item ${id}`);
+    }
+    if (l.reveal && l.reveal.figureId) note(figureLevels, l.reveal.figureId, lv, 'reveal');
+    for (const pid of served) {
+      const p = passagesById.get(pid);
+      for (const fid of (p && p.figureIds) || []) note(figureLevels, fid, lv, `strip of ${pid}`);
+    }
+  });
+  return { byId, passageLevels, figureLevels };
+}
+
+const EXEMPT_FROM_I1_I2 = new Set(['math']);
+
+function findingsIn(pack) {
+  const found = [];
+  const { byId, passageLevels, figureLevels } = usage(pack);
+  const shared = !EXEMPT_FROM_I1_I2.has(pack.meta && pack.meta.subject);
+  for (const [pid, m] of shared ? passageLevels : []) {
+    if (m.size < 2) continue;
+    const lvs = [...m.keys()].sort((a, b) => a - b);
+    for (const lv of lvs) {
+      found.push({ rule: 'I1', sig: `I1|${pid}@L${lv}`, group: `I1|${pid}`, level: lv,
+        detail: `passage ${pid} is served by levels ${lvs.join(', ')};  level ${lv} by ${m.get(lv).join(', ')}` });
+    }
+  }
+  for (const [fid, m] of shared ? figureLevels : []) {
+    if (m.size < 2) continue;
+    const lvs = [...m.keys()].sort((a, b) => a - b);
+    for (const lv of lvs) {
+      found.push({ rule: 'I2', sig: `I2|${fid}@L${lv}`, group: `I2|${fid}`, level: lv,
+        detail: `figure ${fid} is shown by levels ${lvs.join(', ')};  level ${lv} by ${[...new Set(m.get(lv))].join(', ')}` });
+    }
+  }
+  const levels = pack.levels || [];
+  for (let L = 1; L < levels.length; L++) {
+    const earlier = levels.slice(0, L).flatMap((l, li) => (l.itemIds || []).map((id) => ({ it: byId.get(id), level: li + 1 }))).filter((x) => x.it);
+    for (const id of levels[L].itemIds || []) {
+      const it = byId.get(id);
+      if (!it) continue;
+      for (const k of keysOf(it)) {
+        const kw = [...new Set(words(k.text))];
+        if (kw.length < 3) continue;
+        for (const { it: ot, level } of earlier) {
+          for (const f of assertingFields(ot)) {
+            const fw = new Set(words(f.text));
+            const hit = kw.filter((w) => fw.has(w)).length;
+            if (hit / kw.length >= 0.8) {
+              const sig = `I3|${it.id}|${k.where}|${ot.id}.${f.where}`;
+              found.push({ rule: 'I3', sig, group: sig, level: L + 1,
+                detail: `level ${L + 1} ${it.id} ${k.where} "${k.text}" is stated by level ${level} ${ot.id}.${f.where} (${hit}/${kw.length} words)` });
+            }
+          }
+        }
+      }
+    }
+  }
+  // I4
+  const levelsOf = new Map();
+  for (const [pid, m] of passageLevels) levelsOf.set(pid, [...m.keys()]);
+  const passagesById = new Map((pack.passages || []).map((p) => [p.id, p]));
+  const names = (SOURCE_NAMES[pack.meta && pack.meta.id] || []).map(([n, pid]) => ({ n, pid }));
+  levels.forEach((l, li) => {
+    const lv = li + 1;
+    for (const id of l.itemIds || []) {
+      const it = byId.get(id);
+      if (!it) continue;
+      const asked = askedText(it);
+      const own = normText((passagesById.get(it.passageId) || {}).text);
+      const why = [];
+      POINTERS.forEach((ph) => { if (asked.includes(ph)) why.push(`"${ph}"`); });
+      POINTER_RES.forEach((re) => { const m = asked.match(re); if (m) why.push(`"${m[0]}"`); });
+      for (const p of pack.passages || []) {
+        const lvs = levelsOf.get(p.id) || [];
+        if (p.id === it.passageId || !lvs.length || lvs.includes(lv)) continue;
+        const core = titleCore(p.title);
+        if (core.split(' ').length < 2 && core.length < 8) continue;
+        const cited = asked.includes(`"${core}"`) || asked.includes(`"the ${core}"`) || asked.includes(`'${core}'`);
+        if (cited || (asked.includes(core) && !own.includes(core))) why.push(`the title of ${p.id} (level ${lvs.join('/')})`);
+      }
+      for (const { n, pid } of names) {
+        const lvs = levelsOf.get(pid) || [];
+        if (!lvs.length || lvs.includes(lv) || !asked.includes(n)) continue;
+        const ownTitles = (l.itemIds || []).map((x) => byId.get(x)).filter(Boolean)
+          .map((x) => normText((passagesById.get(x.passageId) || {}).title));
+        if (ownTitles.some((t) => t.includes(n))) continue;
+        why.push(`"${n}", from level ${Math.min(...lvs)}'s story`);
+      }
+      if (why.length) {
+        const sig = `I4|${id}`;
+        found.push({ rule: 'I4', sig, group: sig, level: lv, detail: `level ${lv} ${id} points back:  ${why.join(', ')}` });
+      }
+    }
+  });
+  // I5
+  const figWords = new Map((pack.figures || []).map((f) => [f.id, new Set(tokens([f.caption, f.alt,
+    f.dataTable && f.dataTable.title, f.id.replace(/^fig-/, '')].join(' ')))]));
+  levels.forEach((l, li) => {
+    const lv = li + 1;
+    const own = [...figureLevels].filter(([, m]) => m.has(lv)).map(([fid]) => fid);
+    const other = [...figureLevels].filter(([, m]) => !m.has(lv)).map(([fid]) => fid);
+    for (const id of l.itemIds || []) {
+      const it = byId.get(id);
+      if (!it) continue;
+      const why = [];
+      const asked = askedText(it);
+      const ownText = normText((passagesById.get(it.passageId) || {}).text);
+      for (const m of asked.matchAll(FIG_REF)) {
+        const phrase = m[0].replace(/^\S+\s+/, '').trim();
+        // The story's own object ("smaller than the catalog photograph" quotes the item's own passage), or the
+        // noun used as a verb ("which source should the team plan around"):  neither names a drawing.
+        if (ownText.includes(phrase) || VERB_NEXT.test(asked.slice(m.index + m[0].length))) continue;
+        const mods = tokens(m[1]).filter((w) => !GENERIC_MODS.has(w) && w.length >= 3);
+        if (!mods.length) continue;
+        const matches = (fid) => figWords.has(fid) && mods.every((w) => figWords.get(fid).has(w));
+        if (own.some(matches)) continue;
+        const hit = other.filter(matches);
+        if (hit.length) why.push(`"${m[0].trim()}" is ${hit.map((f) => `${f} (level ${[...figureLevels.get(f).keys()].join('/')})`).join(', ')}`);
+      }
+      if (why.length) {
+        const sig = `I5|${id}`;
+        found.push({ rule: 'I5', sig, group: sig, level: lv, detail: `level ${lv} ${id} reads another level's drawing:  ${why.join(';  ')}` });
+      }
+    }
+  });
+  return found;
+}
+
+// I5's drawing nouns, and the words in front of one that say WHERE in a drawing, not WHICH drawing.
+const FIG_NOUNS = 'chart|map|graph|diagram|timeline|photo|photograph|panel|card|plan|drawing|picture|plate|etching';
+// A modifier word is never a function word, so "the order the timeline" or "the reading of the card" is not read
+// as a drawing's name:  the phrase must run straight from its article to the noun.
+const MOD_STOP = 'the|a|an|of|to|in|on|at|by|for|and|or|but|is|are|was|were|be|been|it|its|this|that|these|those|with|'
+  + 'has|have|had|no|not|does|did|do|what|which|who|how|from|into|than|as';
+const MOD_WORD = `(?!(?:${MOD_STOP})\\b)[a-z][a-z'-]*`;
+const FIG_REF = new RegExp(`\\b(?:the|this|that|its|their)\\s+((?:${MOD_WORD}\\s+){0,2}${MOD_WORD})\\s+(?:${FIG_NOUNS})s?\\b`, 'g');
+const VERB_NEXT = /^\s+(around|ahead|out)\b/;
+const GENERIC_MODS = new Set(('left right top bottom first second third fourth upper lower same other whole small large '
+  + 'full size each every last next new old one two three four both own printed drawn marked middle center centre '
+  + 'side front back').split(' '));
+const tokens = (s) => String(s == null ? '' : s).toLowerCase().split(/[^a-z0-9']+/).map(norm).filter((w) => w && !STOP.has(w));
+
+function normText(s) {
+  return String(s == null ? '' : s).toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ');
+}
+// The text a child is asked.  Part B lines and hottext spans are left out on purpose:  each is a verbatim quote of
+// the item's own passage (validate-pack holds them to that), so a passage that remembers is not a question that asks.
+function askedText(it) {
+  const parts = [it.stem];
+  if (it.choices) parts.push(...it.choices);
+  if (it.partA) parts.push(it.partA.stem, ...(it.partA.choices || []));
+  if (it.blanks) it.blanks.forEach((b) => parts.push(...((b && b.choices) || [])));
+  if (it.rowLabels) parts.push(...it.rowLabels);
+  if (it.colLabels) parts.push(...it.colLabels);
+  if (it.tiles) parts.push(...it.tiles);
+  return normText(parts.filter(Boolean).join(' | '));
+}
+const TITLE_PREFIX = /^(source [ab]: |catalog entry: |case file: |case file zero: |recovered entry: |case file addendum: |field manual: |field report: |status log: |weather log: |standing procedure: |maintenance order: |transfer briefing: |analyst's memo: |review board minutes: |final deployment: )/;
+function titleCore(t) { return normText(t).replace(TITLE_PREFIX, '').replace(/^the /, '').trim(); }
+
+// An I1 or I2 group fails while two or more of its levels are NOT excused;  an excused level is "used" only
+// while the sharing it excuses still exists.  An I3, I4 or I5 finding fails unless its own signature is excused.
+function applyAllow(packId, found, allow, used) {
+  const mine = allow.filter((a) => a.pack === packId);
+  const excused = (f) => mine.find((a) => a.sig === f.sig);
+  const out = [];
+  const groups = new Map();
+  for (const f of found) {
+    if (!groups.has(f.group)) groups.set(f.group, []);
+    groups.get(f.group).push(f);
+  }
+  for (const fs_ of groups.values()) {
+    const open = fs_.filter((f) => !excused(f));
+    fs_.forEach((f) => { const a = excused(f); if (a) used.add(a); });
+    if (fs_[0].rule === 'I3' || fs_[0].rule === 'I4' || fs_[0].rule === 'I5') out.push(...open);
+    else if (open.length >= 2) out.push(...open);
+  }
+  return out;
+}
+
+function loadJson(p) { return JSON.parse(fs.readFileSync(p, 'utf8')); }
+
+function main() {
+  const problems = [];
+  const manifest = loadJson(path.join(ROOT, 'packs', 'manifest.json'));
+  const allow = fs.existsSync(ALLOW_PATH) ? loadJson(ALLOW_PATH) : [];
+  const used = new Set();
+  let packs = 0;
+  const counts = { I1: 0, I2: 0, I3: 0, I4: 0, I5: 0 };
+  for (const e of manifest.packs) {
+    const pack = loadJson(path.join(ROOT, 'packs', `${e.id}.json`));
+    if (!pack.levels || pack.levels.length < 2) continue;
+    packs++;
+    for (const f of applyAllow(e.id, findingsIn(pack), allow, used)) {
+      counts[f.rule]++;
+      problems.push(`${f.rule}  ${e.id}:  ${f.detail}  [sig ${f.sig}]`);
+    }
+  }
+  for (const a of allow) {
+    if (!a.reason || String(a.reason).split(/\s+/).length < 8) problems.push(`allowlist entry ${a.pack} ${a.sig}:  needs a reason of eight words or more`);
+    if (!used.has(a)) problems.push(`STALE allowlist entry ${a.pack} ${a.sig}:  it no longer matches a finding;  remove it`);
+  }
+  console.log(`sweep-cross-level: ${packs} pack(s);  every passage, figure and earlier-level key checked;  ${used.size} reviewed exception(s)`);
+
+  // ---- controls ----
+  {
+    const ctl = [];
+    // 1.  NIALL'S CASE, verbatim.  Vault level 6 served four items on two level-2 passages.
+    const niall = loadJson(NIALL_PATH);
+    const nf = findingsIn(niall).filter((f) => f.rule === 'I1');
+    const want = ['I1|p-threadglass-entry@L2', 'I1|p-threadglass-entry@L6', 'I1|p-three-realms-below@L2', 'I1|p-three-realms-below@L6'].sort();
+    const got = [...new Set(nf.map((f) => f.sig))].sort();
+    if (JSON.stringify(got) !== JSON.stringify(want)) ctl.push(`CONTROL Niall failed:  expected ${JSON.stringify(want)}, got ${JSON.stringify(got)}`);
+    if (applyAllow('vault-of-ages-g6', findingsIn(niall), [], new Set()).length === 0) ctl.push('CONTROL Niall failed:  his case came back clean');
+
+    // 2.  THE REAL CALLBACKS, verbatim.  Each must fire I4;  the same-level reference and the level's own word must not.
+    const cb = loadJson(CALLBACKS_PATH);
+    for (const c of cb.mustFire) {
+      if (!findingsIn(c).some((f) => f.rule === 'I4')) ctl.push(`CONTROL callback failed:  I4 missed a real case (${c.note})`);
+    }
+    for (const c of cb.mustStayClean) {
+      const g = findingsIn(c).filter((f) => f.rule === 'I4');
+      if (g.length) ctl.push(`CONTROL callback failed:  I4 fired on a case that is not a callback (${c.note}):  ${g[0].detail}`);
+    }
+
+    // 3.  I5, THE LENS'S CASE, verbatim:  Outpost level 6 on level 5's fledge-rate chart must fire;  its fixed text, a
+    //     drawing noun used as a verb and an object the item's own passage names must not.
+    const fr = loadJson(FIGREF_PATH);
+    for (const c of fr.mustFire) {
+      if (!findingsIn(c).some((f) => f.rule === 'I5')) ctl.push(`CONTROL figure reference failed:  I5 missed a real case (${c.note})`);
+    }
+    for (const c of fr.mustStayClean) {
+      const g = findingsIn(c).filter((f) => f.rule === 'I5');
+      if (g.length) ctl.push(`CONTROL figure reference failed:  I5 fired on a case that is not one (${c.note}):  ${g[0].detail}`);
+    }
+
+    // A clean six-level pack, then one plant per rule.
+    const clean = () => {
+      const p = { passages: [], figures: [], levels: [], items: [] };
+      for (let n = 1; n <= 6; n++) {
+        p.passages.push({ id: `p${n}`, text: `Passage ${n}.`, figureIds: [`f${n}`] });
+        p.figures.push({ id: `f${n}` });
+        p.items.push({ id: `i${n}`, type: 'mc', passageId: `p${n}`, figureId: `f${n}`,
+          stem: `Which lamp is lit in room ${n}?`, choices: [`the lamp of room ${n} by the stair`, 'x', 'y', 'z'], key: 0,
+          explain: `Room ${n} keeps its own lamp.` });
+        p.levels.push({ itemIds: [`i${n}`], reveal: { figureId: `f${n}` } });
+      }
+      return p;
+    };
+    const rules = (p) => [...new Set(findingsIn(p).map((f) => f.rule))].sort();
+    const plants = [
+      ['clean pack', clean(), []],
+      ['level 2 item on level 1 passage', (() => { const p = clean(); p.items[1].passageId = 'p1'; return p; })(), ['I1', 'I2']],
+      ['level 2 item reads level 1 figure', (() => { const p = clean(); p.items[1].figureId = 'f1'; return p; })(), ['I2']],
+      ['level 2 reveal is level 1 figure', (() => { const p = clean(); p.levels[1].reveal.figureId = 'f1'; return p; })(), ['I2']],
+      ['level 2 passage strip shows level 1 figure', (() => { const p = clean(); p.passages[1].figureIds = ['f1']; return p; })(), ['I2']],
+      ['level 1 explain states level 3 key', (() => { const p = clean(); p.items[0].explain = 'Room 3 keeps the lamp of room 3 by the stair.'; return p; })(), ['I3']],
+      ['level 3 explain restates level 1 key (later teaches, does not ask)', (() => { const p = clean(); p.items[2].explain = 'Remember the lamp of room 1 by the stair.'; return p; })(), []],
+    ];
+    for (const [name, p, wantRules] of plants) {
+      const g = rules(p);
+      if (JSON.stringify(g) !== JSON.stringify(wantRules)) ctl.push(`CONTROL "${name}" failed:  expected ${JSON.stringify(wantRules)}, got ${JSON.stringify(g)}`);
+    }
+    // The math exemption covers I1 and I2 only:  the same shared passage in a math pack is not a finding.
+    const mathTwin = (() => { const p = clean(); p.meta = { subject: 'math' }; p.items[1].passageId = 'p1'; p.items[1].figureId = 'f1'; return p; })();
+    if (rules(mathTwin).length) ctl.push(`CONTROL math exemption failed:  got ${JSON.stringify(rules(mathTwin))}`);
+    const mathI3 = (() => { const p = clean(); p.meta = { subject: 'math' }; p.items[0].explain = 'Room 3 keeps the lamp of room 3 by the stair.'; return p; })();
+    if (JSON.stringify(rules(mathI3)) !== JSON.stringify(['I3'])) ctl.push(`CONTROL math I3 failed:  I3 must still apply to a math pack, got ${JSON.stringify(rules(mathI3))}`);
+    // The allowlist excuses its own level only;  a second unexcused level still fails;  an unused entry is stale.
+    const two = (() => { const p = clean(); p.items[1].passageId = 'p1'; p.items[2].passageId = 'p1'; return p; })();
+    const ff = findingsIn(two).filter((f) => f.rule === 'I1');
+    const u1 = new Set();
+    const left1 = applyAllow('t', ff, [{ pack: 't', sig: 'I1|p1@L2', reason: 'control' }], u1);
+    if (left1.length !== 2 || u1.size !== 1) ctl.push(`CONTROL allowlist failed:  excusing one of three levels left ${left1.length} open (want 2)`);
+    const u2 = new Set();
+    const left2 = applyAllow('t', ff, [{ pack: 't', sig: 'I1|p1@L2', reason: 'control' }, { pack: 't', sig: 'I1|p1@L3', reason: 'control' }], u2);
+    if (left2.length !== 0 || u2.size !== 2) ctl.push(`CONTROL allowlist failed:  excusing two of three levels left ${left2.length} open (want 0)`);
+    const u3 = new Set();
+    applyAllow('t', findingsIn(clean()), [{ pack: 't', sig: 'I1|p9@L6', reason: 'control' }], u3);
+    if (u3.size !== 0) ctl.push('CONTROL stale-allowlist failed:  an entry matching nothing was counted as used');
+    if (ctl.length) problems.push(...ctl);
+    else console.log('  controls:  Niall\'s case (Vault level 6 on two level-2 passages, verbatim from 02a63cf) is caught;  four real callbacks from 02a63cf fire I4, and a same-level "earlier entry" and a level\'s own word do not;  Outpost level 6 reading level 5\'s fledge-rate chart fires I5, and its fixed text, "plan around" and the catalog photograph do not;  a clean pack passes;  a shared passage, an item figure, a reveal and a passage strip are each caught;  an earlier level stating a key is caught and a later one restating it is not;  a math pack is exempt from I1 and I2 and still held to I3;  the allowlist excuses its own level only and an unused entry is stale  (fired)');
+  }
+
+  if (problems.length) {
+    console.log(`\n=== sweep-cross-level: ${problems.length} problem(s)  (I1 ${counts.I1}, I2 ${counts.I2}, I3 ${counts.I3}, I4 ${counts.I4}, I5 ${counts.I5}) ===`);
+    problems.forEach((p) => console.log('  ' + p));
+    console.log('\nRESULT: FAILED');
+    process.exit(1);
+  }
+  console.log('\nRESULT: ALL CLEAN');
+}
+
+module.exports = { findingsIn, applyAllow, askedText, titleCore, POINTERS, SOURCE_NAMES };
+
+if (require.main === module) main();

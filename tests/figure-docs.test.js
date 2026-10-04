@@ -424,6 +424,43 @@ check('facsimile: every authored line and header value is actually drawn', () =>
   assert.ok(texts.some((t) => t.indexOf(dt.stamp) !== -1), 'the stamp was not drawn');
 });
 
+// A STAMP STAYS ON ITS CARD.  The stamp turns -12 degrees about its own centre, so a wide one lifts its top-right
+// corner above the box it was placed in.  At a fixed CY + 18 the 255px "Nothing leaves the room." stamp on Vault's
+// fig-l6-keepers-register crossed the card's top border by 8px (lens, 26-1004);  every narrower stamp had stayed
+// inside.  That card is the first control, then the fixture, then every stamped facsimile in every pack.
+check('facsimile: every corner of a rotated stamp stays inside the card', () => {
+  const CX = 56, CY = 34, CW = VB_W - 2 * CX, CH = VB_H - CY - 30;
+  const stampCorners = (svg) => {
+    const m = /<g transform="rotate\((-?[\d.]+) ([\d.]+) ([\d.]+)\)">\s*<rect x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)"[^>]*data-stamp="1"/.exec(svg);
+    if (!m) return null;
+    const [deg, cx, cy, x, y, w, h] = m.slice(1).map(Number);
+    const a = (deg * Math.PI) / 180;
+    return [[x, y], [x + w, y], [x, y + h], [x + w, y + h]].map(([px, py]) => {
+      const dx = px - cx, dy = py - cy;
+      return [cx + dx * Math.cos(a) - dy * Math.sin(a), cy + dx * Math.sin(a) + dy * Math.cos(a)];
+    });
+  };
+  const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'packs', 'manifest.json'), 'utf8'));
+  const stamped = [];
+  for (const e of manifest.packs) {
+    const pack = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'packs', `${e.id}.json`), 'utf8'));
+    for (const f of pack.figures || []) {
+      if (f.dataTable && f.dataTable.type === 'facsimile' && f.dataTable.stamp) stamped.push([`${e.id}/${f.id}`, f.dataTable]);
+    }
+  }
+  const register = stamped.find(([n]) => n === 'vault-of-ages-g6/fig-l6-keepers-register');
+  assert.ok(register, 'the control is missing:  Vault\'s fig-l6-keepers-register no longer carries a stamp');
+  const cases = [register, ['fixture facsimile', readFixture('facsimile')], ...stamped.filter((s) => s !== register)];
+  for (const [name, dt] of cases) {
+    const corners = stampCorners(docs.renderFacsimile(dt, ACCENT));
+    assert.ok(corners, `${name}:  no stamp drawn`);
+    for (const [px, py] of corners) {
+      assert.ok(px >= CX && px <= CX + CW && py >= CY && py <= CY + CH,
+        `${name}:  a stamp corner lands at (${px.toFixed(1)}, ${py.toFixed(1)}), outside the card (${CX}, ${CY}) to (${CX + CW}, ${CY + CH})`);
+    }
+  }
+});
+
 check('facsimile: every column heading and cell is drawn', () => {
   const dt = readFixture('facsimile-columns');
   const svg = docs.renderFacsimile(dt, ACCENT);

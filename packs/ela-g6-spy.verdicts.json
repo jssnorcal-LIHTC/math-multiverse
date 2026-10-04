@@ -67,6 +67,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l1-mc-best-summary",
+      "itemHash": "e99d685f3453fcc5",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l1-mc-ordinary-passerby",
       "itemHash": "3a84793c62f75505",
       "blind": 1,
@@ -605,36 +613,22 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-ebsr-what-three-results-add-up-to",
-      "itemHash": "ede44fadbf3fd39b",
+      "itemId": "l5-ebsr-advice-the-article-supports",
+      "itemHash": "1258e66704ba1a4c",
       "blind": [
-        2,
-        3
+        3,
+        0
       ],
       "authored": [
-        2,
-        3
+        3,
+        0
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l5-ebsr-which-tunnel-halloway-sits-with",
-      "itemHash": "e376b915e33b725a",
-      "blind": [
-        1,
-        1
-      ],
-      "authored": [
-        1,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ebsr-the-line-that-locates-the-fault",
-      "itemHash": "52e62f5190468755",
+      "itemId": "l5-ebsr-a-conclusion-too-far",
+      "itemHash": "9201f77ed78d9386",
       "blind": [
         3,
         2
@@ -647,24 +641,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-mc-what-two-sources-agree-on",
-      "itemHash": "da6f476260e574b4",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-the-line-that-covers-the-claim",
-      "itemHash": "4cf0c2120231b035",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-why-publish-all-three",
-      "itemHash": "674a759bf37092c0",
+      "itemId": "l5-mc-answering-the-mountain-buyer",
+      "itemHash": "e62af318a94d65e7",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -687,47 +665,15 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-hot-measured-or-concluded",
-      "itemHash": "a5a1089ed9b83a38",
-      "blind": [
-        0,
-        2,
-        4
-      ],
-      "authored": [
-        0,
-        2,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ms-what-both-sources-back",
-      "itemHash": "aa580de585c3db53",
+      "itemId": "l5-cloze-water-first-depth-last",
+      "itemHash": "32c99eb20525d855",
       "blind": [
         1,
-        3,
-        5
+        2
       ],
       "authored": [
         1,
-        3,
-        5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-cloze-lining-up-two-sources",
-      "itemHash": "d6c990e65c80a59a",
-      "blind": [
-        2,
-        1
-      ],
-      "authored": [
-        2,
-        1
+        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -839,6 +785,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l6-cloze-where-the-aside-sits",
+      "itemHash": "2aaca36a798daf6c",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-ebsr-what-the-brief-is-for",
       "itemHash": "8cc1888cf0cdbe33",
       "blind": [
@@ -913,6 +873,20 @@
       ],
       "authored": [
         1,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-collectors-own-rule",
+      "itemHash": "8778e49f2642a806",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
         1
       ],
       "confidence": "high",
@@ -1049,6 +1023,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l3-ebsr-first-person-watcher",
+      "itemHash": "10a99c47d9887377",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l3-ms-signs-ines-notices",
       "itemHash": "cf6c804163877794",
       "blind": [
@@ -1060,6 +1048,20 @@
         0,
         1,
         4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-ebsr-whose-conditions-matter",
+      "itemHash": "a9891f8202ce40e2",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
       ],
       "confidence": "high",
       "status": "agree"
@@ -1093,6 +1095,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l4-ebsr-thirty-vs-three",
+      "itemHash": "cc50dd6e5dead8f9",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l4-ms-reasons-to-slow-down-on-petrel",
       "itemHash": "d224ec6a6266fab5",
       "blind": [
@@ -1104,20 +1120,6 @@
         0,
         2,
         5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ebsr-which-climate-halloway-sits-with",
-      "itemHash": "3bf2757e3fb1436d",
-      "blind": [
-        3,
-        3
-      ],
-      "authored": [
-        3,
-        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -1146,22 +1148,6 @@
       "authored": [
         2,
         0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ms-what-both-sources-would-agree-on",
-      "itemHash": "0fd3fe3f45410573",
-      "blind": [
-        1,
-        3,
-        5
-      ],
-      "authored": [
-        1,
-        3,
-        5
       ],
       "confidence": "high",
       "status": "agree"
@@ -1237,6 +1223,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l2-cloze-unbreakable-condition",
+      "itemHash": "bbbfc24a8d910002",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l3-hot-ines-being-careful",
       "itemHash": "a58191b91f01888e",
       "blind": [
@@ -1265,6 +1265,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l3-cloze-caution-and-honesty",
+      "itemHash": "7c9a8563202be792",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l4-hot-claims-needing-a-check",
       "itemHash": "297b0badbb662cfe",
       "blind": [
@@ -1288,6 +1302,20 @@
       "authored": [
         0,
         1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-cloze-which-source-to-trust",
+      "itemHash": "b47f75f1a9978743",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
       ],
       "confidence": "high",
       "status": "agree"
@@ -1329,6 +1357,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l1-mc-why-remove-the-second-person",
+      "itemHash": "5d22df211549a96b",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l1-mc-only-one-kind-of-person",
       "itemHash": "fcc956d17ec3a6ad",
       "blind": 1,
@@ -1349,6 +1385,14 @@
         1,
         2
       ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l2-mc-lock-with-no-shape",
+      "itemHash": "e1660690ab9d195c",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -1389,6 +1433,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l3-mc-name-on-the-slips",
+      "itemHash": "fa9b04e10fed32c7",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l3-mc-saw-not-decided",
       "itemHash": "bea4ece85462894c",
       "blind": 2,
@@ -1397,10 +1449,26 @@
       "status": "agree"
     },
     {
+      "itemId": "l3-mc-two-viewpoints-compared",
+      "itemHash": "2bd02061a0b5efc2",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "medium",
+      "status": "agree"
+    },
+    {
       "itemId": "l4-mc-which-source-for-winter",
       "itemHash": "77c75c91a87ec48d",
       "blind": 3,
       "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l4-mc-why-call-it-a-guess",
+      "itemHash": "92ed263ef9c339c9",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -1429,19 +1497,19 @@
       "status": "agree"
     },
     {
+      "itemId": "l5-mc-one-test-mistake",
+      "itemHash": "629b7d356df558e2",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l5-mc-best-summary-of-advice",
       "itemHash": "c69c486af002aaf2",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-mountain-test-and-the-log",
-      "itemHash": "3455c4f0743edd06",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "medium",
       "status": "agree"
     },
     {
@@ -1458,6 +1526,20 @@
         3,
         0,
         2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-two-seconds-that-mattered",
+      "itemHash": "2949afca501f5496",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
       ],
       "confidence": "high",
       "status": "agree"
@@ -1513,6 +1595,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l6-mc-two-watchers-compared",
+      "itemHash": "4bb7452fc571f0bd",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-hot-scene-that-turns",
       "itemHash": "d546bae301a78bcd",
       "blind": [
@@ -1551,6 +1641,14 @@
         3,
         3
       ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-two-briefs-compared",
+      "itemHash": "f43ecdce8e472b17",
+      "blind": 0,
+      "authored": 0,
       "confidence": "high",
       "status": "agree"
     },
@@ -1725,6 +1823,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l3-cloze-which-record-holds-the-thumb",
+      "itemHash": "4ab30d162faa7174",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l4-match-claim-against-what-was-measured",
       "itemHash": "8705af256c2653d4",
       "blind": [
@@ -1879,256 +1991,142 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-mc-best-summary",
-      "itemHash": "e99d685f3453fcc5",
+      "itemId": "l5-ebsr-what-three-results-add-up-to",
+      "itemHash": "be92c5bbf5abe56c",
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-bend-does-depths-work",
+      "itemHash": "9d1ff0bb47fba3ad",
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-run-your-own-test",
+      "itemHash": "80336bc396bc8f36",
       "blind": 2,
       "authored": 2,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l5-ebsr-advice-the-article-supports",
-      "itemHash": "1258e66704ba1a4c",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
+      "itemId": "l5-mc-why-publish-all-three",
+      "itemHash": "69a0f51ffb945b32",
+      "blind": 1,
+      "authored": 1,
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l6-cloze-where-the-aside-sits",
-      "itemHash": "2aaca36a798daf6c",
-      "blind": [
-        0,
-        2
-      ],
-      "authored": [
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-ebsr-collectors-own-rule",
-      "itemHash": "8778e49f2642a806",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-ebsr-first-person-watcher",
-      "itemHash": "10a99c47d9887377",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ebsr-whose-conditions-matter",
-      "itemHash": "a9891f8202ce40e2",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l4-ebsr-thirty-vs-three",
-      "itemHash": "cc50dd6e5dead8f9",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ebsr-the-line-that-explains-petrel",
-      "itemHash": "c9a1bb069de75c68",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-cloze-unbreakable-condition",
-      "itemHash": "bbbfc24a8d910002",
+      "itemId": "l5-hot-measured-or-judged",
+      "itemHash": "2583c3cace6d83d9",
       "blind": [
         1,
-        2
+        3,
+        5
       ],
       "authored": [
         1,
-        2
+        3,
+        5
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l3-cloze-caution-and-honesty",
-      "itemHash": "7c9a8563202be792",
+      "itemId": "l5-ms-past-what-the-tests-show",
+      "itemHash": "bb717b2c7f35bd54",
       "blind": [
         0,
-        0
+        2,
+        5
       ],
       "authored": [
         0,
-        0
+        2,
+        5
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l4-cloze-which-source-to-trust",
-      "itemHash": "b47f75f1a9978743",
+      "itemId": "l5-ebsr-the-one-careful-sentence",
+      "itemHash": "64fef96a5a5855b6",
       "blind": [
-        0,
-        0
+        1,
+        3
       ],
       "authored": [
-        0,
-        0
+        1,
+        3
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l5-cloze-reading-all-three",
-      "itemHash": "4bd7da44f84301a0",
+      "itemId": "l5-ebsr-what-mild-weather-showed",
+      "itemHash": "094041f9eade4c35",
       "blind": [
-        0,
-        0
+        3,
+        1
       ],
       "authored": [
-        0,
-        0
+        3,
+        1
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l1-mc-why-remove-the-second-person",
-      "itemHash": "5d22df211549a96b",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l2-mc-lock-with-no-shape",
-      "itemHash": "e1660690ab9d195c",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-mc-name-on-the-slips",
-      "itemHash": "fa9b04e10fed32c7",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-mc-two-viewpoints-compared",
-      "itemHash": "2bd02061a0b5efc2",
-      "blind": 0,
-      "authored": 0,
+      "itemId": "l5-ms-weather-not-the-tag",
+      "itemHash": "3b5a7e08c6f831ec",
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
       "confidence": "medium",
       "status": "agree"
     },
     {
-      "itemId": "l4-mc-why-call-it-a-guess",
-      "itemHash": "92ed263ef9c339c9",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-one-test-mistake",
-      "itemHash": "629b7d356df558e2",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-two-seconds-that-mattered",
-      "itemHash": "2949afca501f5496",
+      "itemId": "l5-cloze-reading-all-three",
+      "itemHash": "8e418d7f543ea048",
       "blind": [
-        3,
-        3
+        0,
+        0
       ],
       "authored": [
-        3,
-        3
+        0,
+        0
       ],
       "confidence": "high",
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-two-watchers-compared",
-      "itemHash": "4bb7452fc571f0bd",
+      "itemId": "l5-mc-where-heat-comes-in",
+      "itemHash": "4d98a76b3443ab85",
       "blind": 3,
       "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-two-briefs-compared",
-      "itemHash": "f43ecdce8e472b17",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l3-cloze-which-record-holds-the-thumb",
-      "itemHash": "4ab30d162faa7174",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
-      ],
       "confidence": "high",
       "status": "agree"
     }

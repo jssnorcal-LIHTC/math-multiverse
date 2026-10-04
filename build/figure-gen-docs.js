@@ -1036,7 +1036,12 @@ function renderFacsimile(dataTable, accentColor) {
     // where a stamp goes on a real form, and the title is short and left-aligned, so the only thing
     // it can collide with is a title long enough to reach it -- which is checked, not assumed.
     const sx = CX + CW - sw - 26;
-    const sy = CY + 18;
+    // The stamp turns -12 degrees about its center, so its top-right corner rises above the box's
+    // unrotated top edge by (sw/2)sin12 + 20cos12 - 20.  At a fixed CY + 18 the 255px stamp on Vault's
+    // fig-l6-keepers-register crossed the card's own border (lens, 26-1004);  lower any stamp whose
+    // corner would come within 4px of it.  tests/figure-docs.test.js holds every stamp to its card.
+    const rise = (sw / 2) * Math.sin(Math.PI / 15) + 20 * Math.cos(Math.PI / 15) - 20;
+    const sy = Math.max(CY + 18, CY + 4 + rise);
     const titleRight = dt.title ? innerX + estimateTextWidth(dt.title, TITLE_FONT) : innerX;
     if (titleRight > sx - 16) {
       refuse(`facsimile: the stamp ${JSON.stringify(dt.stamp)} would sit on the title `
