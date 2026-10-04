@@ -1,0 +1,3089 @@
+{
+ "_about": "I7 controls for tests/sweep-cross-level.js (26-1004).  mustFire:  the eight practice items whose feedback (the explanation, an option's rationale, or a blank's rationale) sent a child to another level, found by the completion check after I1 to I6 read clean:  names from another level's story, \"Tile 3\", \"two levels earlier\", and \"the very start of this record\".  mustStayClean:  each one fixed, plus five near-misses I7 has to pass:  a word form (\"Babylonian\" where the level says \"Babylon\"), a level's own \"different file\" and \"earlier entry\", and two of I4's pointers that are a passage talking about itself.  Each slice keeps its pack's levels in place, serves only the passages the case needs, and was checked against the whole pack before it was written.",
+ "source": "packs/*.json at 2733c3e, with tasks/cross-level-echo-26-1004/batches/p4-feedback-*.json as the fixes",
+ "mustFire": [
+  {
+   "note": "Vault level 2 traces two distractors to \"the Osiris and Isis story connected to the Abydos seal\", a level-4 relic.",
+   "itemId": "l2-mc-threadglass-old-legend",
+   "meta": {
+    "id": "vault-of-ages-g6",
+    "subject": "ela"
+   },
+   "skin": {
+    "color": "#7c5cff",
+    "icon": "🗝️",
+    "grandGoal": "Vault Keeper"
+   },
+   "passages": [
+    {
+     "id": "p-threadglass-entry",
+     "title": "Catalog Entry: The Threadglass",
+     "text": "Every object the Archive tracks gets one entry in the master catalog.  The entry is updated each time new information surfaces.  It is never deleted, even after a relic is recovered.  The entry below is the current record for catalog number 114, known informally as the Threadglass.\n\nDescription.  It is a flat disc of pale green glass, four inches across.  One face is etched with a single continuous spiral line that never crosses itself.  The etching is shallow.  It only shows clearly when light crosses the glass at an angle.  Historians believe that was done on purpose, not a flaw in the original casting.  No one has ever measured the spiral exactly the same way twice.  The line has no clear start or end for a ruler to use.\n\nOrigin.  The Threadglass turns up in written records three separate times across roughly two hundred years.  Each mention connects it to a story.  The story is about a path that could not be walked twice by accident.  Each record ties the object loosely to an older legend.  It is about a hero who escaped a builder's maze by following a single unbroken thread.  Archive researchers are careful to note something.  The disc is almost certainly a later tribute to that story, not a prop from the events the story tells.  Glassmaking this fine did not exist when the maze legend is set.\n\nDocumented history.  The disc entered the Ashford family collection in the nineteenth century.  It passed to a regional museum by gift.  It was moved twice more between institutions.  A formal count in the 1970s confirmed it was present and secure.  A second count, taken eleven years later, could not find it.  No theft was ever reported to any police record the Archive has found.  The gap between those two counts is the single largest question mark in this entry.\n\nCurrent status.  Archive field work places the Threadglass in a private collection as of last spring.  The lead comes from an insurance filing.  It describes an object that matches this entry in exact size.  The filer's name is blacked out in the copy the Archive obtained.  This entry will be updated again once the object's status changes.  A note will explain how the Archive came to know it changed.",
+     "figureIds": [
+      "fig-l2-threadglass"
+     ]
+    },
+    {
+     "id": "p-temple-chronicle",
+     "title": "Source A: The Temple Chronicle",
+     "text": "The text below is a translation of an inscription, carved into the inner wall of a temple chamber at Abydos.  Temple scribes of this period wrote to honor the priesthood that commissioned their work.  This chronicle carries no author's name, only the seal of the temple itself.\n\nThe god Osiris was struck down by his brother Set.  His body was scattered beyond the borders of the living world.  It was Isis who would not accept the loss as final.  She searched every province of the kingdom herself, refusing all rest.  She gathered every piece of what Set had scattered.  An ordinary mourner would have wept.  Isis worked instead.  An ordinary sister would have given up the search after the first province turned up nothing.  Isis pressed on, through all the provinces that remained.\n\nIsis restored her brother enough to grant him a final breath of life.  Still, she knew something.  Set's jealousy would not rest simply because Osiris had been mourned properly.  She carried a single seal, cut from the same stone as the temple's own base.  She pressed it into the innermost room of this very temple.  Sealed within it was a piece of what she had restored, so that Set's followers could never undo it.\n\nThe seal remains in this chamber to this day.  It is protected by the priesthood that has kept this temple since the reign of the chronicle's own commissioning king, and by his line after him, without interruption.  No enemy of the temple has ever set foot in this chamber.  The chronicle exists to record that fact, for every generation of priests who serve here after the scribes who carved it have themselves passed into the west.\n\nLet it be known, to any who read this wall, that the temple's protection over the seal is not a claim requiring proof.  It is a fact requiring only faith.  It is maintained by the priesthood the gods themselves selected for this single purpose, generation after generation, without a single failure the temple's own records have ever needed to explain.",
+     "figureIds": [
+      "fig-l4-temple-chronicle"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l2-threadglass",
+     "caption": "The entry is updated each time new information surfaces, its largest question mark is the gap between two counts eleven years apart, and the filer's name is blacked out.",
+     "alt": "A case-file index card titled the Threadglass, with catalog number 114 at the top, then two underlined section headings.  Under the first, \"Documented history.\", the gap between the entry's two counts is named as its largest question mark.  Under the second, \"Current status.\", a line reading \"in a private collection\" sits above a blacked-out bar where the filer's name would be.",
+     "dataTable": {
+      "type": "facsimile",
+      "sourcePassageId": "p-threadglass-entry",
+      "docKind": "case-file",
+      "title": "the Threadglass",
+      "header": [
+       {
+        "label": "catalog number",
+        "value": "114"
+       }
+      ],
+      "lines": [
+       {
+        "text": "Documented history.",
+        "emphasis": "underline"
+       },
+       {
+        "text": "The gap between those two counts is the"
+       },
+       {
+        "text": "single largest question mark in this entry."
+       },
+       {
+        "text": "Current status.",
+        "emphasis": "underline"
+       },
+       {
+        "text": "in a private collection"
+       },
+       {
+        "text": "",
+        "emphasis": "redact"
+       }
+      ]
+     }
+    },
+    {
+     "id": "fig-l4-temple-chronicle",
+     "caption": "The temple's own scribes carved this chronicle, and the card boxes one of its carved lines.",
+     "alt": "A carved temple inscription.  Its three header rows pair \"carved into\" with \"a temple chamber at Abydos\", \"Temple scribes\" with \"wrote to honor the priesthood\", and \"carries\" with \"no author's name\".  Below them four carved lines: \"The seal remains in this chamber to this day.\", \"No enemy of the temple has ever set foot\", \"in this chamber.\", and, drawn inside a box, \"It is a fact requiring only faith.\"",
+     "dataTable": {
+      "type": "facsimile",
+      "sourcePassageId": "p-temple-chronicle",
+      "docKind": "source-desk",
+      "title": "a translation of an inscription",
+      "header": [
+       {
+        "label": "carved into",
+        "value": "a temple chamber at Abydos"
+       },
+       {
+        "label": "Temple scribes",
+        "value": "wrote to honor the priesthood"
+       },
+       {
+        "label": "carries",
+        "value": "no author's name"
+       }
+      ],
+      "lines": [
+       {
+        "text": "The seal remains in this chamber to this day."
+       },
+       {
+        "text": "No enemy of the temple has ever set foot"
+       },
+       {
+        "text": "in this chamber."
+       },
+       {
+        "text": "It is a fact requiring only faith.",
+        "emphasis": "box"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "The Crew Forms",
+     "goal": "Meet the crew, and learn what noticing can prove.",
+     "itemIds": []
+    },
+    {
+     "name": "The Archive",
+     "goal": "Read the record before you read the room.",
+     "itemIds": [
+      "l2-mc-threadglass-old-legend"
+     ]
+    },
+    {
+     "name": "The First Heist",
+     "goal": "Say what a person did, then say what they left out.",
+     "itemIds": []
+    },
+    {
+     "name": "Three Tellings",
+     "goal": "Two tellings disagree. Find out which one can actually be checked.",
+     "itemIds": [
+      "l4-ebsr-same-institution-guards-and-writes"
+     ]
+    },
+    {
+     "name": "The Language of Myth",
+     "goal": "Feel how a sentence is built, not just what it says.",
+     "itemIds": []
+    },
+    {
+     "name": "The Final Vault",
+     "goal": "Everything the crew learned, all at once, behind one door.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "l2-mc-threadglass-old-legend",
+     "type": "mc",
+     "passageId": "p-threadglass-entry",
+     "targets": [
+      "c1-inf-1-key-details"
+     ],
+     "coachTopic": "evidence-key-details",
+     "dok": 2,
+     "stem": "According to its catalog entry, what older legend is the Threadglass loosely connected to?",
+     "choices": [
+      "Three sisters who carved the shape of every life as it happened.",
+      "A search across every province of a kingdom for the scattered pieces of a god.",
+      "A chamber a priesthood has guarded for six generations.",
+      "A hero who escaped a builder's maze by following a single unbroken thread."
+     ],
+     "key": 3,
+     "distractorRationale": {
+      "0": "That legend belongs to the Wyrdstone's entry, not the Threadglass's. You matched the right kind of answer to the wrong relic.",
+      "1": "That search across a kingdom is part of the Osiris and Isis story connected to the Abydos seal, a completely different relic and tradition.",
+      "2": "A guarded chamber describes the Abydos seal's own history, not the Threadglass's. Each relic in the Archive connects to its own separate legend."
+     },
+     "explain": "The Threadglass entry names its own specific legend directly: a hero who escaped a maze by following one unbroken thread, which is why the object's spiral pattern is treated as a tribute to that particular story rather than to either of the Archive's other two relics."
+    },
+    {
+     "id": "l4-ebsr-same-institution-guards-and-writes",
+     "type": "ebsr",
+     "passageId": "p-temple-chronicle",
+     "targets": [
+      "c4-3-analyze-sources"
+     ],
+     "coachTopic": "research-source-check",
+     "dok": 4,
+     "partA": {
+      "stem": "What makes the Temple Chronicle's claim about the chamber difficult to verify from outside?",
+      "choices": [
+       "The chronicle was carved centuries after Osiris was struck down by his brother.",
+       "The chronicle never mentions who commissioned it.",
+       "The temple that guards the chamber also wrote its history, under its own seal.",
+       "The chronicle contradicts itself about who sealed the chamber and what stone was used."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from Source A best supports the answer you just gave?",
+      "choices": [
+       "It is protected by the priesthood that has kept this temple since the reign of the chronicle's own commissioning king, and by his line after him, without interruption.",
+       "This chronicle carries no author's name, only the seal of the temple itself.",
+       "The god Osiris was struck down by his brother Set.",
+       "She carried a single seal, cut from the same stone as the temple's own base."
+      ],
+      "key": {
+       "0": 2,
+       "1": 0,
+       "2": 1,
+       "3": 3
+      }
+     },
+     "distractorRationale": {
+      "0": "This opening line of the story gives no date or century for when the chronicle itself was carved.  It does not support a claim about the timing of the writing.",
+      "1": "This line mentions the chronicle's own commissioning king.  The chronicle never gives his name, but it does say that a king ordered it.  Knowing his name would not help an outsider check the claim anyway.",
+      "3": "This line is a plain, consistent detail about the seal's material.  Nothing about it contradicts anything else the chronicle states."
+     },
+     "explain": "The chronicle carries no independent author, only the temple's own seal, and the same priesthood that guards the chamber is the priesthood whose authority stands behind the claim.  That means nobody outside the temple ever had a chance to check the story before it was carved into the wall."
+    }
+   ]
+  },
+  {
+   "note": "Outpost level 4 explains with \"Tile 3's field manual\".",
+   "itemId": "t4-mc-weather-word",
+   "meta": {
+    "id": "outpost-protocol-g6",
+    "subject": "sci"
+   },
+   "skin": {
+    "color": "#1a8f5e",
+    "icon": "🛰️",
+    "grandGoal": "Field Director"
+   },
+   "passages": [
+    {
+     "id": "p-two-posts-one-latitude",
+     "title": "Field Report: Two Posts, One Latitude",
+     "text": "Sable Flats Post and Cairn Bay Post sit at almost the exact same latitude.  The sun reaches both at nearly the same angle all year.  By the logic of latitude alone, the two posts should report similar climates.  They do not, and the gap between them is large enough that operatives transferring between the two posts are warned to repack their gear completely.  What worked at one post does not work at the other.\n\nSable Flats sits well inland, a long way from open water.  It sits on flat ground, with nothing between it and the dry continental air overhead.  Cairn Bay sits directly on the coast.  Open ocean stretches away to its west.  That single difference in position changes almost everything else about the two posts' year.\n\nUnequal heating across the planet drives global wind belts.  These are broad rivers of moving air.  They circle the planet in roughly the same bands every year.  The wind belt crossing this latitude blows from the west, off the ocean, before it reaches Sable Flats.  At Cairn Bay, that wind arrives straight off the water.  It still carries the moisture it picked up crossing the ocean.  By the time the same wind belt reaches Sable Flats, it has already crossed hundreds of miles of dry land.  It has dropped most of its moisture along the way.  It arrives far drier than it left the coast.\n\nOcean currents add a second layer to the difference.  A current moving along Cairn Bay's coastline keeps the water near the post within a narrow temperature range all year.  Water changes temperature far more slowly than land does.  Air sitting over that current picks up the same steadiness.  Cairn Bay's temperatures swing less between summer and winter than a place with no ocean nearby.  Sable Flats has no current to moderate it.  Its land surface heats fast under summer sun.  It cools fast once winter sun angles drop.  Its temperature swings far wider across the year than Cairn Bay's does.\n\nNone of this is about today's weather at either post.  A single storm or a single clear week can happen at either station.  These long-term patterns do not change because of one storm.  Halyard Point can log five unusual days without its climate actually changing, the same way.  Climate is the pattern averaged over years.  Weather is what is happening outside the window this morning.  The two posts prove that a shared latitude guarantees neither one.",
+     "figureIds": [
+      "fig-latitude-currents"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-latitude-currents",
+     "caption": "Sable Flats and Cairn Bay share almost the same latitude, but a coast, an ocean current, and a wind belt that dries out over land give them very different climates.",
+     "alt": "A map showing two posts at the same latitude, marked by a dashed line. On the left, Cairn Bay sits on the coast next to open ocean, with a current arrow along its coastline. On the right, Sable Flats sits well inland, over dry, continental land. A wide arrow labeled wind belt: blows off the ocean tapers as it crosses the land, labeled arrives far drier, drops its moisture along the way. Two boxes below summarize: Cairn Bay's coast and nearby current give it a smaller seasonal swing; Sable Flats' inland position with no current gives it a wider seasonal swing.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A comparison titled \"Same latitude, different climate\".",
+       "Both posts sit at the same latitude and receive the same sun angle all year.",
+       "Cairn Bay is on the coast, with an ocean current nearby.",
+       "Sable Flats is well inland, in dry continental air.",
+       "A wind belt blows off the ocean and arrives far drier inland, having dropped its moisture along the way.",
+       "Cairn Bay, on the coast with a current nearby, has the smaller seasonal swing."
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "New Posting",
+     "goal": "Learn to read a system: parts, subsystems, and the ripples between them.",
+     "itemIds": []
+    },
+    {
+     "name": "The Sealed Station",
+     "goal": "Diagnose why Meridian Dome's air is drifting before supplies run out.",
+     "itemIds": []
+    },
+    {
+     "name": "Storm Front",
+     "goal": "Read the incoming data fast enough to warn the coast before the front arrives.",
+     "itemIds": []
+    },
+    {
+     "name": "The Long Pattern",
+     "goal": "Explain why two outposts at the same latitude report very different climates.",
+     "itemIds": [
+      "t4-mc-weather-word"
+     ]
+    },
+    {
+     "name": "Breaking Point",
+     "goal": "Trace every local mystery back to the one planetary pattern underneath it.",
+     "itemIds": []
+    },
+    {
+     "name": "Final Deployment",
+     "goal": "Design and defend the Network's official response plan, the final field review.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t4-mc-weather-word",
+     "type": "mc",
+     "passageId": "p-two-posts-one-latitude",
+     "targets": [
+      "sci-t4-climate-patterns"
+     ],
+     "coachTopic": "evidence-long-pattern",
+     "dok": 2,
+     "stem": "Which term names \"what is happening outside the window this morning,\" as opposed to a pattern averaged over years?",
+     "choices": [
+      "climate",
+      "front",
+      "weather",
+      "air mass"
+     ],
+     "key": 2,
+     "distractorRationale": {
+      "0": "Climate is the passage's own term for the pattern averaged over years, the opposite of what is happening outside the window on one particular morning.",
+      "1": "A front is the meeting point of two air masses, a cause of a single weather event, not the general word for today's conditions outside the window.",
+      "3": "An air mass is a huge body of air with its own temperature and moisture, one piece of the weather mechanism, not the general term for today's conditions."
+     },
+     "explain": "The passage defines weather directly as what is happening outside the window this morning, in deliberate contrast to climate, the pattern averaged over years, the same distinction Tile 3's field manual sets up with front and air mass, two different vocabulary words for two different pieces of the mechanism."
+    }
+   ]
+  },
+  {
+   "note": "Firsthand level 1 credits \"baked brick\" to \"the Indus cities in a later file\".",
+   "itemId": "t1-mc-why-burned-palaces-helped",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t1-clay-and-the-first-empires",
+     "title": "Recovered Entry: What the Clay Kept",
+     "text": "This entry answers a question every new Recorder asks.  Why does so much of the oldest record come from one flat, muddy plain?  The answer is clay.  Southern Mesopotamia had almost no stone and very little timber, but it had river mud without limit.  Scribes there wrote on wet clay tablets, and clay is stubborn.  A tablet dropped in a ruin simply waits.\n\nThe first cities on that plain were Sumerian.  Uruk and Ur each ran its own government, guarded its own walls, and honored its own patron god.  A stepped temple platform called a ziggurat stood at the center of many of them.  Villages had grown into cities, and cities needed records.  The earliest tablets are not poems or laws at all.  They are receipts, counting sacks of grain, jars of oil, and heads of livestock.  Others are school exercises, copied out by students learning the script, with the mistakes still sitting on them.\n\nThe tablets also show who stood where.  Kings and priests sat at the top, and merchants, artisans, and farmers came next.  Enslaved people sat at the bottom, many of them captives taken in war.\n\nThose same centuries produced tools the whole world later borrowed.  Potters shaped clay on a turning wheel, and heavy carts rolled on wheels too.  Farmers cut furrows with a plow instead of a digging stick, and sailors caught the wind with a sail.  Metalworkers mixed copper with tin to make bronze, which held an edge far better than either metal alone.\n\nNo city on that plain stayed free forever.  A ruler named Sargon conquered the Sumerian cities and ruled them from Akkad, his own capital, and many historians call what he built the first empire in the record.  Babylon rose later, under the king whose law code this file already holds, and Assyria rose to dominate the region later still.\n\nHere is the part the Office likes best.  Fire destroys most records, but fire bakes clay harder.  Palaces on that plain burned more than once, and the tablets stored inside came out of the ashes tougher than they went in.  The record survives partly because somebody's city was sacked.",
+     "figureIds": [
+      "fig-cuneiform-tablet"
+     ]
+    },
+    {
+     "id": "p-t4-quiet-record-indus",
+     "title": "Case File: The Quiet Record of the Indus",
+     "text": "Some files in the Office archive are quiet for a reason.  Nothing bad happened; the people involved simply cannot speak for themselves yet.  The Indus Valley civilization built some of the best-planned cities anywhere in the old world.  Mohenjo-daro and Harappa sat on careful grids.  Baked-brick homes linked to covered drains, an advanced setup for its time.\n\nThe Indus people also left behind a written script.  It was cut into thousands of small stone seals.  No scholar has ever managed to read it.  Every other early society in this record can be read straight, in its own words.  Court records, temple writings, and trader letters survive elsewhere.  The Indus people left none of that.  Whatever its people believed, ruled, or argued about stays locked behind an unread script.  This file treats that gap honestly instead of guessing past it.\n\nIts fall is easier to weigh, though still not fully settled.  The clearest evidence involves shifting rivers.  One major stream that once fed Indus farms seems to have dried up or changed path.  Evidence also points to a weaker monsoon.  That means longer, harsher dry spells across the region.  Farming likely grew far harder to keep up.  Many of the biggest cities emptied out slowly, not all at once.  Scholars still argue over how much of the fall came from nature alone.\n\nSometime after the Indus cities faded, new migrants arrived from the northwest.  Many scholars think these Indo-Aryan migrants brought an early form of Sanskrit with them.  They brought a new set of faith practices too.  Those practices were set down in hymns called the Vedas.  The Vedas became the base the next file builds right on top of.",
+     "figureIds": [
+      "fig-indus-map",
+      "fig-indus-seal"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-cuneiform-tablet",
+     "caption": "A clay tablet from southern Mesopotamia, pressed with early signs and seal marks.  It is an account of goods, not a poem and not a law.",
+     "alt": "A small squarish clay tablet, light brown, covered in rows of shallow impressed marks and round punched holes, with a seal impression across part of the surface."
+    },
+    {
+     "id": "fig-indus-map",
+     "caption": "The Indus and its two grid-planned cities, Harappa and Mohenjo-daro.",
+     "alt": "A map of the Indus valley. The river runs south to the sea. Harappa and Mohenjo-daro are marked. Notes say both cities sat on careful grids with baked-brick homes linked to covered drains, that their script was cut into thousands of small stone seals, and that no scholar has ever managed to read it.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Indus valley, with the river drawn running to the sea.",
+       "Two cities are marked and labelled: Harappa and Mohenjo-daro.",
+       "The river is labelled Indus.",
+       "A note reads: both cities sat on careful grids, with baked-brick homes linked to covered drains.",
+       "A note reads: their script was cut into thousands of small stone seals.",
+       "A note in a different colour reads: no scholar has ever managed to read it."
+      ]
+     }
+    },
+    {
+     "id": "fig-indus-seal",
+     "caption": "An Indus stamp seal and the modern impression taken from it.  The animal is clear; the row of signs above it is the script no scholar has ever managed to read.",
+     "alt": "A small square seal at left and its pale clay impression at right, each showing a horned animal in profile above a short line of angular signs."
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": [
+      "t1-mc-why-burned-palaces-helped"
+     ]
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": []
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": [
+      "t4-ebsr-undeciphered-script"
+     ]
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": []
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t1-mc-why-burned-palaces-helped",
+     "type": "mc",
+     "passageId": "p-t1-clay-and-the-first-empires",
+     "targets": [
+      "hist-t1-first-entry"
+     ],
+     "coachTopic": "evidence-first-entry",
+     "dok": 3,
+     "stem": "According to the recovered entry, why did the tablets stored inside the plain's palaces survive being burned?",
+     "choices": [
+      "Scribes carried the tablets out of the burning palaces before the fires could reach them.",
+      "The tablets were cut into stone, which fire cannot damage.",
+      "Fire bakes clay harder, so they came out of the ashes tougher than they went in.",
+      "The palaces were built of baked brick that kept the fires out."
+     ],
+     "key": 2,
+     "distractorRationale": {
+      "0": "The entry never describes anyone rescuing tablets; it credits their survival to what fire does to clay, which is the opposite of a rescue.",
+      "1": "Stone is the one material that plain almost entirely lacked, and that shortage is exactly why its scribes wrote on river mud instead.",
+      "3": "Baked brick belongs to the Indus cities in a later file; this entry says the palaces burned more than once, and the burning is what hardened the tablets."
+     },
+     "explain": "The entry saves its favorite point for last: fire destroys most records, but fire bakes clay harder, so tablets stored in a palace that burned came out tougher than they went in.  Each wrong choice supplies a rescue, a material, or a building method the entry never claims, and one of them borrows from a different case file entirely."
+    },
+    {
+     "id": "t4-ebsr-undeciphered-script",
+     "type": "ebsr",
+     "passageId": "p-t4-quiet-record-indus",
+     "targets": [
+      "hist-t4-india"
+     ],
+     "coachTopic": "evidence-quiet-record",
+     "dok": 2,
+     "partA": {
+      "stem": "According to the case file, what makes the Indus Valley civilization's own written record different from every other early civilization in the file?",
+      "choices": [
+       "The Indus script has been fully translated, revealing court records, temple writings, and trader letters.",
+       "The Indus people left behind no written script at all.",
+       "No scholar has ever managed to read the Indus script, so its own words stay locked away.",
+       "The Indus civilization's cities were too small to have kept any records."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "No scholar has ever managed to read it.",
+       "The Indus Valley civilization built some of the best-planned cities anywhere in the old world.",
+       "Every other early society in this record can be read straight, in its own words.",
+       "The Indus people also left behind a written script."
+      ],
+      "key": {
+       "0": 2,
+       "1": 3,
+       "2": 0,
+       "3": 1
+      }
+     },
+     "distractorRationale": {
+      "0": "The passage says the opposite: no scholar has ever managed to read the Indus script, unlike every other early civilization in this record.",
+      "1": "The passage says the Indus people did leave behind a written script, carved into thousands of stone seals; the gap is that nobody can read it, not that it never existed.",
+      "3": "The passage describes Indus cities as some of the best-planned anywhere in the old world, which argues against the idea that they were too small to keep records."
+     },
+     "explain": "The passage states plainly that the Indus people left behind a written script, but no scholar has ever managed to read it, unlike every other early civilization in this file, which can be read directly in its own words.  The other choices each contradict a specific detail the passage states about the script or the cities."
+    }
+   ]
+  },
+  {
+   "note": "Firsthand level 1 cites \"the separate Indus civilization, in a later file\".",
+   "itemId": "t1-mc-writing-systems-method",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t1-nile-two-kingdoms",
+     "title": "Case File: Two Kingdoms of the Nile",
+     "text": "Egyptians believed their king, the pharaoh, was not an ordinary ruler.  They believed he held a kind of divine power.  His main job was keeping the whole world in balance, a balance Egyptians called ma'at.  Two pharaohs left a large mark on the record.  Hatshepsut ruled Egypt in her own right as a full pharaoh, not merely as a king's wife.  She sent a famous trading trip south along the coast.  Years later, Ramses the Second reigned for decades and built huge monuments.  He later signed one of the oldest peace deals in the whole record.\n\nReligion shaped how Egyptians treated their own dead.  Egyptians believed a spirit needed a preserved body to survive into the next life, so skilled workers made mummies to stop a body from decaying.  Wealthier Egyptians built large tombs and filled them with goods the dead were thought to need on the trip ahead.  That belief is the real reason the pyramids exist at all.\n\nSouth of Egypt, along the same river, sat the kingdom of Kush.  Egypt and Kush traded gold, ivory, and other goods for centuries, but their bond was never simply friendly.  Egypt's own armies took over Kush during Egypt's strongest era.  Years later, that balance flipped.  Kushite kings conquered Egypt itself and ruled it as pharaohs in their own right, keeping many Egyptian customs alongside their own.\n\nThe two peoples even wrote their history in different ways.  Mesopotamian scribes pressed wedge-shaped cuneiform marks into wet clay, using a cut reed, one tablet at a time.  Egyptian scribes instead drew or carved hieroglyphs onto papyrus and stone, a system built from hundreds of small pictures.  Both systems did the same basic job.  They let a record live on long after its maker was gone.",
+     "figureIds": [
+      "fig-egypt-scribe"
+     ]
+    },
+    {
+     "id": "p-t4-quiet-record-indus",
+     "title": "Case File: The Quiet Record of the Indus",
+     "text": "Some files in the Office archive are quiet for a reason.  Nothing bad happened; the people involved simply cannot speak for themselves yet.  The Indus Valley civilization built some of the best-planned cities anywhere in the old world.  Mohenjo-daro and Harappa sat on careful grids.  Baked-brick homes linked to covered drains, an advanced setup for its time.\n\nThe Indus people also left behind a written script.  It was cut into thousands of small stone seals.  No scholar has ever managed to read it.  Every other early society in this record can be read straight, in its own words.  Court records, temple writings, and trader letters survive elsewhere.  The Indus people left none of that.  Whatever its people believed, ruled, or argued about stays locked behind an unread script.  This file treats that gap honestly instead of guessing past it.\n\nIts fall is easier to weigh, though still not fully settled.  The clearest evidence involves shifting rivers.  One major stream that once fed Indus farms seems to have dried up or changed path.  Evidence also points to a weaker monsoon.  That means longer, harsher dry spells across the region.  Farming likely grew far harder to keep up.  Many of the biggest cities emptied out slowly, not all at once.  Scholars still argue over how much of the fall came from nature alone.\n\nSometime after the Indus cities faded, new migrants arrived from the northwest.  Many scholars think these Indo-Aryan migrants brought an early form of Sanskrit with them.  They brought a new set of faith practices too.  Those practices were set down in hymns called the Vedas.  The Vedas became the base the next file builds right on top of.",
+     "figureIds": [
+      "fig-indus-map",
+      "fig-indus-seal"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-egypt-scribe",
+     "caption": "A limestone statue of Nikare, an Egyptian official, seated cross-legged in the pose Egyptian sculpture kept for scribes.",
+     "alt": "A weathered limestone statue of a man seated cross-legged, hands resting on his lap, wearing a shoulder-length wig."
+    },
+    {
+     "id": "fig-indus-map",
+     "caption": "The Indus and its two grid-planned cities, Harappa and Mohenjo-daro.",
+     "alt": "A map of the Indus valley. The river runs south to the sea. Harappa and Mohenjo-daro are marked. Notes say both cities sat on careful grids with baked-brick homes linked to covered drains, that their script was cut into thousands of small stone seals, and that no scholar has ever managed to read it.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Indus valley, with the river drawn running to the sea.",
+       "Two cities are marked and labelled: Harappa and Mohenjo-daro.",
+       "The river is labelled Indus.",
+       "A note reads: both cities sat on careful grids, with baked-brick homes linked to covered drains.",
+       "A note reads: their script was cut into thousands of small stone seals.",
+       "A note in a different colour reads: no scholar has ever managed to read it."
+      ]
+     }
+    },
+    {
+     "id": "fig-indus-seal",
+     "caption": "An Indus stamp seal and the modern impression taken from it.  The animal is clear; the row of signs above it is the script no scholar has ever managed to read.",
+     "alt": "A small square seal at left and its pale clay impression at right, each showing a horned animal in profile above a short line of angular signs."
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": [
+      "t1-mc-writing-systems-method"
+     ]
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": []
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": [
+      "t4-ebsr-undeciphered-script"
+     ]
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": []
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t1-mc-writing-systems-method",
+     "type": "mc",
+     "passageId": "p-t1-nile-two-kingdoms",
+     "targets": [
+      "hist-t1-first-entry"
+     ],
+     "coachTopic": "evidence-first-entry",
+     "dok": 2,
+     "stem": "According to the case file, how did Mesopotamian scribes' writing method differ from Egyptian scribes'?",
+     "choices": [
+      "Mesopotamian scribes carved hieroglyphs into stone, while Egyptian scribes pressed cuneiform into wet clay with a reed.",
+      "Both sets of scribes used the exact same wedge-shaped cuneiform system, just pressed or carved into different materials.",
+      "Mesopotamian scribes pressed cuneiform into wet clay with a cut reed, while Egyptian scribes drew or carved hieroglyphs onto papyrus and stone.",
+      "Egyptian scribes left behind no written record at all, unlike Mesopotamian scribes."
+     ],
+     "key": 2,
+     "distractorRationale": {
+      "0": "This reverses which civilization used which system; the case file credits cuneiform to Mesopotamian scribes and hieroglyphs to Egyptian scribes, not the other way around.",
+      "1": "The case file describes two different systems, wedge-shaped cuneiform pressed into clay and picture-based hieroglyphs carved onto papyrus and stone, not one shared system.",
+      "3": "The case file says Egyptian scribes did leave a written record, hieroglyphs carved onto papyrus and stone; it is the separate Indus civilization, in a later file, whose script survives unread."
+     },
+     "explain": "The case file describes two distinct systems: Mesopotamian scribes pressed wedge-shaped cuneiform marks into wet clay with a cut reed, one tablet at a time, while Egyptian scribes instead drew or carved hieroglyphs onto papyrus and stone.  The other choices each reverse which civilization used which system, deny that two systems existed, or borrow the wrong civilization's own writing gap."
+    },
+    {
+     "id": "t4-ebsr-undeciphered-script",
+     "type": "ebsr",
+     "passageId": "p-t4-quiet-record-indus",
+     "targets": [
+      "hist-t4-india"
+     ],
+     "coachTopic": "evidence-quiet-record",
+     "dok": 2,
+     "partA": {
+      "stem": "According to the case file, what makes the Indus Valley civilization's own written record different from every other early civilization in the file?",
+      "choices": [
+       "The Indus script has been fully translated, revealing court records, temple writings, and trader letters.",
+       "The Indus people left behind no written script at all.",
+       "No scholar has ever managed to read the Indus script, so its own words stay locked away.",
+       "The Indus civilization's cities were too small to have kept any records."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "No scholar has ever managed to read it.",
+       "The Indus Valley civilization built some of the best-planned cities anywhere in the old world.",
+       "Every other early society in this record can be read straight, in its own words.",
+       "The Indus people also left behind a written script."
+      ],
+      "key": {
+       "0": 2,
+       "1": 3,
+       "2": 0,
+       "3": 1
+      }
+     },
+     "distractorRationale": {
+      "0": "The passage says the opposite: no scholar has ever managed to read the Indus script, unlike every other early civilization in this record.",
+      "1": "The passage says the Indus people did leave behind a written script, carved into thousands of stone seals; the gap is that nobody can read it, not that it never existed.",
+      "3": "The passage describes Indus cities as some of the best-planned anywhere in the old world, which argues against the idea that they were too small to keep records."
+     },
+     "explain": "The passage states plainly that the Indus people left behind a written script, but no scholar has ever managed to read it, unlike every other early civilization in this file, which can be read directly in its own words.  The other choices each contradict a specific detail the passage states about the script or the cities."
+    }
+   ]
+  },
+  {
+   "note": "Firsthand level 2 explains a wrong \"Babylon\" by \"the law code filed at the very start of this record\".",
+   "itemId": "t2-cloze-samaria",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t2-kingdom-divided",
+     "title": "Case File: The Kingdom That Split in Two",
+     "text": "The Office keeps one rule for sacred texts.  Read them for what they claim.  Then look for anything outside them that touches the same claim.  This entry is the best case in the archive for that rule.\n\nThe Hebrew Bible describes Solomon's kingdom breaking apart soon after he died, around nine hundred thirty BCE.  The northern tribes pulled away and formed a kingdom called Israel.  The northern kingdom's capital came to be a city named Samaria.  In that account, the southern tribes kept the line of David and the Temple in Jerusalem, in a smaller kingdom called Judah.  In that account, two kingdoms now stood where one had stood before.\n\nThen the outside evidence arrives, and it is unusually good.  A carved stone known as the Mesha Stele was raised by a king of Moab.  It names Omri, a king of Israel, as an enemy who had pressed hard on Moab.  An Assyrian monument known as the Black Obelisk lists tribute paid to an Assyrian king.  It names Jehu, a later king of Israel, among those who paid.  Neither stone was cut to prove the Hebrew Bible right.  Each was cut to praise its own king, which is exactly why the Office weighs it.\n\nThe northern kingdom fell to Assyria.  Assyrian armies took Samaria around seven hundred twenty-two BCE, and Assyrian royal records report the capture in their own words.  Those records do not fully agree about which king finished the siege, and the Office files that disagreement rather than smoothing it away.  Assyria then moved many of the defeated people to other parts of its empire.  Newcomers were settled in their place.\n\nThe account preserved in the Hebrew Bible explains the fall in its own terms.  It describes the defeat as a punishment for abandoning the covenant.  That reasoning belongs to the account, and the Office records it as the account's own.\n\nMuch later, stories grew up about ten lost tribes still wandering somewhere.  The Office files those stories as legend.  Judah lasted longer than its northern neighbor did.  What finally happened to Judah is filed under the exile that followed.",
+     "figureIds": [
+      "fig-exile-map"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-exile-map",
+     "caption": "Two kingdoms where one had stood: Israel with its capital at Samaria, Judah with the Temple in Jerusalem, and the direction Assyria moved the defeated people.",
+     "alt": "A map of the eastern Mediterranean and Mesopotamia. Samaria and Jerusalem are marked in the Levant, labelled Israel and Judah. A dashed arrow curves north-east from Samaria to Assyria. A note says Assyrian records do not fully agree about which king finished the siege, and that this file keeps that disagreement.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Levant and Mesopotamia.",
+       "Two cities are marked and labelled: Samaria and Jerusalem.",
+       "Three regions are labelled: ISRAEL around Samaria, JUDAH around Jerusalem, and ASSYRIA to the north-east.",
+       "A dashed arrow runs from Samaria north-east to Assyria.",
+       "A note reads: Assyrian armies took Samaria around seven hundred twenty-two BCE.",
+       "A note reads: Assyria then moved many of the defeated people to other parts of its empire.",
+       "A note in a different colour reads: Assyrian records do not fully agree about which king finished the siege, and this file keeps that disagreement rather than smoothing it away."
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": []
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": [
+      "t2-cloze-samaria"
+     ]
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": []
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": []
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t2-cloze-samaria",
+     "type": "cloze",
+     "passageId": "p-t2-kingdom-divided",
+     "targets": [
+      "hist-t2-hebrews"
+     ],
+     "coachTopic": "evidence-shortest-file",
+     "dok": 2,
+     "stem": "The northern kingdom's capital came to be a city named {{0}}.",
+     "blanks": [
+      {
+       "choices": [
+        "Jerusalem",
+        "Samaria",
+        "Babylon"
+       ],
+       "key": 1,
+       "distractorRationale": {
+        "0": "Jerusalem stayed with the SOUTHERN kingdom, Judah, along with the line of David and the Temple; the northern kingdom of Israel had a capital of its own.",
+        "2": "Babylon is the Mesopotamian city whose king issued the law code filed at the very start of this record, and it was never a capital of either Israelite kingdom."
+       }
+      }
+     ],
+     "quote": "The northern kingdom's capital came to be a city named Samaria.",
+     "explain": "The case file gives the northern kingdom's capital as Samaria, the city Assyrian armies later took.  Jerusalem belongs to the southern kingdom in the same sentence pair, and Babylon belongs to an entirely different file, so neither one restores this sentence."
+    }
+   ]
+  },
+  {
+   "note": "Firsthand level 4 says \"Tablets belong to Mesopotamia's clay record\", in a blank's rationale.",
+   "itemId": "l4-vis-indus-notes",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t4-quiet-record-indus",
+     "title": "Case File: The Quiet Record of the Indus",
+     "text": "Some files in the Office archive are quiet for a reason.  Nothing bad happened; the people involved simply cannot speak for themselves yet.  The Indus Valley civilization built some of the best-planned cities anywhere in the old world.  Mohenjo-daro and Harappa sat on careful grids.  Baked-brick homes linked to covered drains, an advanced setup for its time.\n\nThe Indus people also left behind a written script.  It was cut into thousands of small stone seals.  No scholar has ever managed to read it.  Every other early society in this record can be read straight, in its own words.  Court records, temple writings, and trader letters survive elsewhere.  The Indus people left none of that.  Whatever its people believed, ruled, or argued about stays locked behind an unread script.  This file treats that gap honestly instead of guessing past it.\n\nIts fall is easier to weigh, though still not fully settled.  The clearest evidence involves shifting rivers.  One major stream that once fed Indus farms seems to have dried up or changed path.  Evidence also points to a weaker monsoon.  That means longer, harsher dry spells across the region.  Farming likely grew far harder to keep up.  Many of the biggest cities emptied out slowly, not all at once.  Scholars still argue over how much of the fall came from nature alone.\n\nSometime after the Indus cities faded, new migrants arrived from the northwest.  Many scholars think these Indo-Aryan migrants brought an early form of Sanskrit with them.  They brought a new set of faith practices too.  Those practices were set down in hymns called the Vedas.  The Vedas became the base the next file builds right on top of.",
+     "figureIds": [
+      "fig-indus-map",
+      "fig-indus-seal"
+     ]
+    },
+    {
+     "id": "p-t1-clay-and-the-first-empires",
+     "title": "Recovered Entry: What the Clay Kept",
+     "text": "This entry answers a question every new Recorder asks.  Why does so much of the oldest record come from one flat, muddy plain?  The answer is clay.  Southern Mesopotamia had almost no stone and very little timber, but it had river mud without limit.  Scribes there wrote on wet clay tablets, and clay is stubborn.  A tablet dropped in a ruin simply waits.\n\nThe first cities on that plain were Sumerian.  Uruk and Ur each ran its own government, guarded its own walls, and honored its own patron god.  A stepped temple platform called a ziggurat stood at the center of many of them.  Villages had grown into cities, and cities needed records.  The earliest tablets are not poems or laws at all.  They are receipts, counting sacks of grain, jars of oil, and heads of livestock.  Others are school exercises, copied out by students learning the script, with the mistakes still sitting on them.\n\nThe tablets also show who stood where.  Kings and priests sat at the top, and merchants, artisans, and farmers came next.  Enslaved people sat at the bottom, many of them captives taken in war.\n\nThose same centuries produced tools the whole world later borrowed.  Potters shaped clay on a turning wheel, and heavy carts rolled on wheels too.  Farmers cut furrows with a plow instead of a digging stick, and sailors caught the wind with a sail.  Metalworkers mixed copper with tin to make bronze, which held an edge far better than either metal alone.\n\nNo city on that plain stayed free forever.  A ruler named Sargon conquered the Sumerian cities and ruled them from Akkad, his own capital, and many historians call what he built the first empire in the record.  Babylon rose later, under the king whose law code this file already holds, and Assyria rose to dominate the region later still.\n\nHere is the part the Office likes best.  Fire destroys most records, but fire bakes clay harder.  Palaces on that plain burned more than once, and the tablets stored inside came out of the ashes tougher than they went in.  The record survives partly because somebody's city was sacked.",
+     "figureIds": [
+      "fig-cuneiform-tablet"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-indus-map",
+     "caption": "The Indus and its two grid-planned cities, Harappa and Mohenjo-daro.",
+     "alt": "A map of the Indus valley. The river runs south to the sea. Harappa and Mohenjo-daro are marked. Notes say both cities sat on careful grids with baked-brick homes linked to covered drains, that their script was cut into thousands of small stone seals, and that no scholar has ever managed to read it.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Indus valley, with the river drawn running to the sea.",
+       "Two cities are marked and labelled: Harappa and Mohenjo-daro.",
+       "The river is labelled Indus.",
+       "A note reads: both cities sat on careful grids, with baked-brick homes linked to covered drains.",
+       "A note reads: their script was cut into thousands of small stone seals.",
+       "A note in a different colour reads: no scholar has ever managed to read it."
+      ]
+     }
+    },
+    {
+     "id": "fig-indus-seal",
+     "caption": "An Indus stamp seal and the modern impression taken from it.  The animal is clear; the row of signs above it is the script no scholar has ever managed to read.",
+     "alt": "A small square seal at left and its pale clay impression at right, each showing a horned animal in profile above a short line of angular signs."
+    },
+    {
+     "id": "fig-cuneiform-tablet",
+     "caption": "A clay tablet from southern Mesopotamia, pressed with early signs and seal marks.  It is an account of goods, not a poem and not a law.",
+     "alt": "A small squarish clay tablet, light brown, covered in rows of shallow impressed marks and round punched holes, with a seal impression across part of the surface."
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": [
+      "t1-ebsr-why-the-clay-record-survived"
+     ]
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": []
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": [
+      "l4-vis-indus-notes"
+     ]
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": []
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "l4-vis-indus-notes",
+     "type": "cloze",
+     "passageId": "p-t4-quiet-record-indus",
+     "figureId": "fig-indus-map",
+     "targets": [
+      "hist-t4-india"
+     ],
+     "coachTopic": "evidence-quiet-record",
+     "dok": 2,
+     "stem": "The map's notes say the script was cut into thousands of small stone {{0}}, and that {{1}} has ever managed to read it.",
+     "blanks": [
+      {
+       "choices": [
+        "seals",
+        "tablets",
+        "walls"
+       ],
+       "key": 0,
+       "distractorRationale": {
+        "1": "Tablets belong to Mesopotamia's clay record, not to this note.",
+        "2": "The note says small stone seals, not walls."
+       }
+      },
+      {
+       "choices": [
+        "no scholar",
+        "only one scholar",
+        "every scholar"
+       ],
+       "key": 0,
+       "distractorRationale": {
+        "1": "The note allows no exception. It says no scholar has managed it.",
+        "2": "That reverses the note entirely."
+       }
+      }
+     ],
+     "explain": "Two of the map's three notes carry this: the script was cut into thousands of small stone seals, and no scholar has ever managed to read it."
+    },
+    {
+     "id": "t1-ebsr-why-the-clay-record-survived",
+     "type": "ebsr",
+     "passageId": "p-t1-clay-and-the-first-empires",
+     "targets": [
+      "hist-t1-first-entry"
+     ],
+     "coachTopic": "evidence-first-entry",
+     "dok": 3,
+     "partA": {
+      "stem": "According to the recovered entry, why does so much of the oldest written record come from Southern Mesopotamia in particular?",
+      "choices": [
+       "Its scribes cut their records into stone, which the plain had in large supply.",
+       "Its scribes wrote on clay, a material tough enough to sit in a ruin and wait.",
+       "Its villages grew into cities, and cities created the need for records.",
+       "Its earliest tablets recorded counts of goods rather than poems or laws."
+      ],
+      "key": 1
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Scribes there wrote on wet clay tablets, and clay is stubborn.",
+       "The earliest tablets are not poems or laws at all.",
+       "Southern Mesopotamia had almost no stone and very little timber, but it had river mud without limit.",
+       "Villages had grown into cities, and cities needed records."
+      ],
+      "key": {
+       "0": 2,
+       "1": 0,
+       "2": 3,
+       "3": 1
+      }
+     },
+     "distractorRationale": {
+      "0": "The entry says the opposite about stone: that plain had almost none of it, and very little timber either, which is exactly why its scribes reached for river mud instead.",
+      "2": "Villages growing into cities explains why anyone needed records at all, a step every early civilization shared; it does not explain why this plain's records in particular are the ones that survived.",
+      "3": "What the tablets say is a separate question from why they lasted; receipts and poems written on the same clay would have survived a ruin equally well."
+     },
+     "explain": "The entry answers its own opening question directly: scribes on that plain wrote on wet clay, and clay is stubborn, so a tablet dropped in a ruin simply waits to be found.  Each wrong choice names a true detail from the entry, about stone, about cities, or about what the tablets say, that answers a different question than the one asked."
+    }
+   ]
+  },
+  {
+   "note": "Firsthand level 5 borrows the Indus decline as a distractor and says so:  \"in a different tile's file\".",
+   "itemId": "t5-mc-warring-states-cause",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t5-two-schools-one-emperor",
+     "title": "Case File: Two Schools of Thought, One Unifying Emperor",
+     "text": "The Huang He, known in English as the Yellow River, flooded often and hard.  Later writers gave it the name China's Sorrow.  Its floodwaters also carried rich soil that made the river valley worth the risk.  Early Chinese life grew up right along its banks.\n\nChina's earliest well-known dynasty was the Shang, which gave way to the Zhou dynasty.  The Zhou brought in an idea called the Mandate of Heaven.  Heaven gave a ruler the right to rule only while that ruler ruled fairly.  Heaven could pull that right back from a ruler who did not.  Zhou power weakened over the years.  China broke apart into rival states that fought nearly nonstop, in a time later called the Warring States era.\n\nTwo very different schools of thought tried to answer that long disorder.  Confucius taught that harmony grows from everyone filling their role well.  A ruler should act fairly, a child should honor a parent, and a friend should treat a friend with respect.  Order, in his teaching, comes from virtue lived by everyone at once.  A different path is tied to a teacher known as Laozi.  His teaching pointed closer to the other side.  It held that people should follow the Dao, the natural way of the world, without forcing events against their own natural course.\n\nNeither school ended the fighting.  A ruler named Ying Zheng did.  He beat every rival state and named himself Qin Shi Huangdi, China's first emperor.  He set one standard for the empire's writing, money, and weights.  One system replaced the many different ones lands had used before.  He also moved right against ideas that threatened his new power.  Records written later say he ordered rival texts burned, with Confucian works a main target.  A number of scholars who defied the order were put to death too.  This is the record this file's own title borrows its warning from."
+    },
+    {
+     "id": "p-t4-quiet-record-indus",
+     "title": "Case File: The Quiet Record of the Indus",
+     "text": "Some files in the Office archive are quiet for a reason.  Nothing bad happened; the people involved simply cannot speak for themselves yet.  The Indus Valley civilization built some of the best-planned cities anywhere in the old world.  Mohenjo-daro and Harappa sat on careful grids.  Baked-brick homes linked to covered drains, an advanced setup for its time.\n\nThe Indus people also left behind a written script.  It was cut into thousands of small stone seals.  No scholar has ever managed to read it.  Every other early society in this record can be read straight, in its own words.  Court records, temple writings, and trader letters survive elsewhere.  The Indus people left none of that.  Whatever its people believed, ruled, or argued about stays locked behind an unread script.  This file treats that gap honestly instead of guessing past it.\n\nIts fall is easier to weigh, though still not fully settled.  The clearest evidence involves shifting rivers.  One major stream that once fed Indus farms seems to have dried up or changed path.  Evidence also points to a weaker monsoon.  That means longer, harsher dry spells across the region.  Farming likely grew far harder to keep up.  Many of the biggest cities emptied out slowly, not all at once.  Scholars still argue over how much of the fall came from nature alone.\n\nSometime after the Indus cities faded, new migrants arrived from the northwest.  Many scholars think these Indo-Aryan migrants brought an early form of Sanskrit with them.  They brought a new set of faith practices too.  Those practices were set down in hymns called the Vedas.  The Vedas became the base the next file builds right on top of.",
+     "figureIds": [
+      "fig-indus-map",
+      "fig-indus-seal"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-indus-map",
+     "caption": "The Indus and its two grid-planned cities, Harappa and Mohenjo-daro.",
+     "alt": "A map of the Indus valley. The river runs south to the sea. Harappa and Mohenjo-daro are marked. Notes say both cities sat on careful grids with baked-brick homes linked to covered drains, that their script was cut into thousands of small stone seals, and that no scholar has ever managed to read it.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Indus valley, with the river drawn running to the sea.",
+       "Two cities are marked and labelled: Harappa and Mohenjo-daro.",
+       "The river is labelled Indus.",
+       "A note reads: both cities sat on careful grids, with baked-brick homes linked to covered drains.",
+       "A note reads: their script was cut into thousands of small stone seals.",
+       "A note in a different colour reads: no scholar has ever managed to read it."
+      ]
+     }
+    },
+    {
+     "id": "fig-indus-seal",
+     "caption": "An Indus stamp seal and the modern impression taken from it.  The animal is clear; the row of signs above it is the script no scholar has ever managed to read.",
+     "alt": "A small square seal at left and its pale clay impression at right, each showing a horned animal in profile above a short line of angular signs."
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": []
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": []
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": [
+      "t4-ebsr-undeciphered-script"
+     ]
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": [
+      "t5-mc-warring-states-cause"
+     ]
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t5-mc-warring-states-cause",
+     "type": "mc",
+     "passageId": "p-t5-two-schools-one-emperor",
+     "targets": [
+      "hist-t5-china"
+     ],
+     "coachTopic": "evidence-what-was-burned",
+     "dok": 3,
+     "stem": "According to the case file, what actually caused the Warring States era?",
+     "choices": [
+      "Qin Shi Huangdi ordered rival texts burned, which broke China apart into fighting states.",
+      "Zhou power weakened, and China broke into rival states that fought nearly nonstop.",
+      "The Han dynasty's collapse left China without any government at all.",
+      "A weaker monsoon and shifting rivers made farming too difficult to support a single ruler."
+     ],
+     "key": 1,
+     "distractorRationale": {
+      "0": "Qin Shi Huangdi's burning of rival texts came after he had already unified China as its first emperor, ending the Warring States era rather than causing it.",
+      "2": "The Han dynasty is a later dynasty that came after the Qin; its own fall is a separate, later event from the earlier Warring States era.",
+      "3": "Weaker monsoons and shifting rivers are the case file's evidence for the Indus civilization's decline, in a different tile's file, not the cause of China's own Warring States era."
+     },
+     "explain": "The case file states directly that Zhou power weakened over the years, and China broke apart into rival states that fought nearly nonstop, in the era later called the Warring States era.  Each wrong choice borrows a cause from a later ruler, a different dynasty, or even a different civilization's own file entirely."
+    },
+    {
+     "id": "t4-ebsr-undeciphered-script",
+     "type": "ebsr",
+     "passageId": "p-t4-quiet-record-indus",
+     "targets": [
+      "hist-t4-india"
+     ],
+     "coachTopic": "evidence-quiet-record",
+     "dok": 2,
+     "partA": {
+      "stem": "According to the case file, what makes the Indus Valley civilization's own written record different from every other early civilization in the file?",
+      "choices": [
+       "The Indus script has been fully translated, revealing court records, temple writings, and trader letters.",
+       "The Indus people left behind no written script at all.",
+       "No scholar has ever managed to read the Indus script, so its own words stay locked away.",
+       "The Indus civilization's cities were too small to have kept any records."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "No scholar has ever managed to read it.",
+       "The Indus Valley civilization built some of the best-planned cities anywhere in the old world.",
+       "Every other early society in this record can be read straight, in its own words.",
+       "The Indus people also left behind a written script."
+      ],
+      "key": {
+       "0": 2,
+       "1": 3,
+       "2": 0,
+       "3": 1
+      }
+     },
+     "distractorRationale": {
+      "0": "The passage says the opposite: no scholar has ever managed to read the Indus script, unlike every other early civilization in this record.",
+      "1": "The passage says the Indus people did leave behind a written script, carved into thousands of stone seals; the gap is that nobody can read it, not that it never existed.",
+      "3": "The passage describes Indus cities as some of the best-planned anywhere in the old world, which argues against the idea that they were too small to keep records."
+     },
+     "explain": "The passage states plainly that the Indus people left behind a written script, but no scholar has ever managed to read it, unlike every other early civilization in this file, which can be read directly in its own words.  The other choices each contradict a specific detail the passage states about the script or the cities."
+    }
+   ]
+  },
+  {
+   "note": "Night Rounds level 6 explains with \"a case two levels earlier\".",
+   "itemId": "l6-mc-why-second-column",
+   "meta": {
+    "id": "night-rounds-g6",
+    "subject": "ela"
+   },
+   "skin": {
+    "color": "#b45309",
+    "icon": "🐾",
+    "grandGoal": "Head Keeper"
+   },
+   "passages": [
+    {
+     "id": "p-l6-morning-report",
+     "title": "The Morning Report",
+     "text": "Whitlock files a morning report after any night that produces a work order.  This one ran to two full pages.  I am copying out the argument rather than the whole document, because the argument is the part that will still matter in a month.\n\nThe report opens with findings, and it keeps them separate from everything else on purpose.  Finding one: a willow limb came down across Fence Nine at post fourteen, and the post snapped at ground level.  The gap was found on rounds at 9:52 p.m. and closed with a temporary panel before eleven.  Finding two: the north service gate was found standing open at 10:05 p.m., and the eight o'clock pin check required by Bulletin 14 was never initialed.  The report says nothing whatsoever about how the pin came out, which is the sentence I would have been most tempted to write.\n\nThen the report makes an argument, and it makes that argument in three steps.\n\nThe first step is that the fence failure was not a failure of upkeep.  The report supports that step with the inspection line dated the twelfth of May, initialed by the keeper who walked the fence.  The second step is that the open gate was a failure of procedure, whatever the equipment did.  The report supports that step with the blank eight o'clock line rather than with anybody's opinion.  The third step ties the whole stack of paper together.  The sanctuary's defense is not that nothing went wrong, because something plainly did.  The defense is that everything which went wrong was written down by the people it went wrong for.\n\nThree changes follow from those steps, and each change names the record it repairs.  The pin check gains a second initial column, exactly like the supplement column on a diet card.  One signature can no longer cover two separate jobs.  The wind station grid gets filled in by whoever is walking rounds, rather than by whoever remembers at the end of the night.  The volunteer log gains a new line at the top of every entry, asking what you heard and when you wrote it down.\n\nThe last section is a letter, and Whitlock attached a copy of it.  The letter asks the Valley Register for a correction.  It names two claims, along with the record that contradicts each one.  Against the sentence about no inspection since March, it cites the inspection line from the twelfth of May.  Against the sentence about a High Wind Warning, it cites Bulletin 14, which quotes a Wind Advisory and explains the difference between the two.  The letter asks for nothing else.  It does not argue about the headline, and it never complains about the unnamed neighbor.\n\nThe report ends with a line I fully intend to steal.  A record is not a defense of the person who wrote it.  It is a promise to the person who reads it next.",
+     "figureIds": [
+      "fig-l6-morning-report"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l6-morning-report",
+     "caption": "The boxes run down the page from what the report found to the last step of the argument it builds on those findings.",
+     "alt": "Five labelled boxes stacked down the page, three of them joined to the box below by an arrow, with nothing drawn between the second and third boxes, and the bottom box drawn with rounded ends.",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-l6-morning-report",
+      "layout": "flow-tb",
+      "nodes": [
+       {
+        "id": "f1",
+        "label": "a willow limb came down across Fence Nine",
+        "shape": "box"
+       },
+       {
+        "id": "s1",
+        "label": "not a failure of upkeep",
+        "shape": "box"
+       },
+       {
+        "id": "f2",
+        "label": "the north service gate was found standing open",
+        "shape": "box"
+       },
+       {
+        "id": "s2",
+        "label": "a failure of procedure",
+        "shape": "box"
+       },
+       {
+        "id": "s3",
+        "label": "written down by the people it went wrong for",
+        "shape": "round"
+       }
+      ],
+      "edges": [
+       {
+        "from": "f1",
+        "to": "s1",
+        "style": "arrow"
+       },
+       {
+        "from": "f2",
+        "to": "s2",
+        "style": "arrow"
+       },
+       {
+        "from": "s2",
+        "to": "s3",
+        "style": "arrow"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Rounds",
+     "goal": "Walk the evening route, and learn why a keeper writes down what she sees.",
+     "itemIds": []
+    },
+    {
+     "name": "The Wrong Diet",
+     "goal": "Read a diet card, a vet memo, and an invoice until the otter's slow week makes sense.",
+     "itemIds": []
+    },
+    {
+     "name": "The Night Noise",
+     "goal": "Weigh three witness accounts against the night's own records.",
+     "itemIds": []
+    },
+    {
+     "name": "The Fence Gap",
+     "goal": "Separate storm damage from rumor using the maintenance file, the bulletin, and the newspaper.",
+     "itemIds": []
+    },
+    {
+     "name": "The Heron's Night",
+     "goal": "Follow the heron down out of the storm, and the rule that a wild animal is not ours.",
+     "itemIds": []
+    },
+    {
+     "name": "The Open Gate",
+     "goal": "Assemble the night of the storm from five records and one memory, and judge which sources hold.",
+     "itemIds": [
+      "l6-mc-why-second-column"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l6-mc-why-second-column",
+     "type": "mc",
+     "passageId": "p-l6-morning-report",
+     "targets": [
+      "c1-inf-4-reasoning",
+      "c4-2-integrate"
+     ],
+     "coachTopic": "inference-argument",
+     "dok": 3,
+     "stem": "Why does the pin check get a second initial column, of all the possible fixes?",
+     "choices": [
+      "Two keepers should be present whenever a gate is pinned",
+      "The old sheet had no line for eight o'clock at all",
+      "One signature was covering two separate jobs, exactly as on a diet card",
+      "Initials are easier to check than a written time"
+     ],
+     "key": 2,
+     "distractorRationale": {
+      "0": "The change is about two tasks rather than two people, which is the same design the diet card uses for fish and tablet.",
+      "1": "The line was printed and simply left blank, which is what made the omission visible.",
+      "3": "The report never compares formats;  it identifies which record failed and repairs that record."
+     },
+     "explain": "The fix is borrowed from a case two levels earlier: when one initial can cover two jobs, the job people forget is the one that goes unrecorded.  Splitting the column makes the omission visible the same night rather than in a report afterward."
+    }
+   ]
+  }
+ ],
+ "mustStayClean": [
+  {
+   "note": "The Threadglass item fixed:  two distractors of its own, rationales that stay in the entry.",
+   "itemId": "l2-mc-threadglass-old-legend",
+   "meta": {
+    "id": "vault-of-ages-g6",
+    "subject": "ela"
+   },
+   "skin": {
+    "color": "#7c5cff",
+    "icon": "🗝️",
+    "grandGoal": "Vault Keeper"
+   },
+   "passages": [
+    {
+     "id": "p-threadglass-entry",
+     "title": "Catalog Entry: The Threadglass",
+     "text": "Every object the Archive tracks gets one entry in the master catalog.  The entry is updated each time new information surfaces.  It is never deleted, even after a relic is recovered.  The entry below is the current record for catalog number 114, known informally as the Threadglass.\n\nDescription.  It is a flat disc of pale green glass, four inches across.  One face is etched with a single continuous spiral line that never crosses itself.  The etching is shallow.  It only shows clearly when light crosses the glass at an angle.  Historians believe that was done on purpose, not a flaw in the original casting.  No one has ever measured the spiral exactly the same way twice.  The line has no clear start or end for a ruler to use.\n\nOrigin.  The Threadglass turns up in written records three separate times across roughly two hundred years.  Each mention connects it to a story.  The story is about a path that could not be walked twice by accident.  Each record ties the object loosely to an older legend.  It is about a hero who escaped a builder's maze by following a single unbroken thread.  Archive researchers are careful to note something.  The disc is almost certainly a later tribute to that story, not a prop from the events the story tells.  Glassmaking this fine did not exist when the maze legend is set.\n\nDocumented history.  The disc entered the Ashford family collection in the nineteenth century.  It passed to a regional museum by gift.  It was moved twice more between institutions.  A formal count in the 1970s confirmed it was present and secure.  A second count, taken eleven years later, could not find it.  No theft was ever reported to any police record the Archive has found.  The gap between those two counts is the single largest question mark in this entry.\n\nCurrent status.  Archive field work places the Threadglass in a private collection as of last spring.  The lead comes from an insurance filing.  It describes an object that matches this entry in exact size.  The filer's name is blacked out in the copy the Archive obtained.  This entry will be updated again once the object's status changes.  A note will explain how the Archive came to know it changed.",
+     "figureIds": [
+      "fig-l2-threadglass"
+     ]
+    },
+    {
+     "id": "p-temple-chronicle",
+     "title": "Source A: The Temple Chronicle",
+     "text": "The text below is a translation of an inscription, carved into the inner wall of a temple chamber at Abydos.  Temple scribes of this period wrote to honor the priesthood that commissioned their work.  This chronicle carries no author's name, only the seal of the temple itself.\n\nThe god Osiris was struck down by his brother Set.  His body was scattered beyond the borders of the living world.  It was Isis who would not accept the loss as final.  She searched every province of the kingdom herself, refusing all rest.  She gathered every piece of what Set had scattered.  An ordinary mourner would have wept.  Isis worked instead.  An ordinary sister would have given up the search after the first province turned up nothing.  Isis pressed on, through all the provinces that remained.\n\nIsis restored her brother enough to grant him a final breath of life.  Still, she knew something.  Set's jealousy would not rest simply because Osiris had been mourned properly.  She carried a single seal, cut from the same stone as the temple's own base.  She pressed it into the innermost room of this very temple.  Sealed within it was a piece of what she had restored, so that Set's followers could never undo it.\n\nThe seal remains in this chamber to this day.  It is protected by the priesthood that has kept this temple since the reign of the chronicle's own commissioning king, and by his line after him, without interruption.  No enemy of the temple has ever set foot in this chamber.  The chronicle exists to record that fact, for every generation of priests who serve here after the scribes who carved it have themselves passed into the west.\n\nLet it be known, to any who read this wall, that the temple's protection over the seal is not a claim requiring proof.  It is a fact requiring only faith.  It is maintained by the priesthood the gods themselves selected for this single purpose, generation after generation, without a single failure the temple's own records have ever needed to explain.",
+     "figureIds": [
+      "fig-l4-temple-chronicle"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l2-threadglass",
+     "caption": "The entry is updated each time new information surfaces, its largest question mark is the gap between two counts eleven years apart, and the filer's name is blacked out.",
+     "alt": "A case-file index card titled the Threadglass, with catalog number 114 at the top, then two underlined section headings.  Under the first, \"Documented history.\", the gap between the entry's two counts is named as its largest question mark.  Under the second, \"Current status.\", a line reading \"in a private collection\" sits above a blacked-out bar where the filer's name would be.",
+     "dataTable": {
+      "type": "facsimile",
+      "sourcePassageId": "p-threadglass-entry",
+      "docKind": "case-file",
+      "title": "the Threadglass",
+      "header": [
+       {
+        "label": "catalog number",
+        "value": "114"
+       }
+      ],
+      "lines": [
+       {
+        "text": "Documented history.",
+        "emphasis": "underline"
+       },
+       {
+        "text": "The gap between those two counts is the"
+       },
+       {
+        "text": "single largest question mark in this entry."
+       },
+       {
+        "text": "Current status.",
+        "emphasis": "underline"
+       },
+       {
+        "text": "in a private collection"
+       },
+       {
+        "text": "",
+        "emphasis": "redact"
+       }
+      ]
+     }
+    },
+    {
+     "id": "fig-l4-temple-chronicle",
+     "caption": "The temple's own scribes carved this chronicle, and the card boxes one of its carved lines.",
+     "alt": "A carved temple inscription.  Its three header rows pair \"carved into\" with \"a temple chamber at Abydos\", \"Temple scribes\" with \"wrote to honor the priesthood\", and \"carries\" with \"no author's name\".  Below them four carved lines: \"The seal remains in this chamber to this day.\", \"No enemy of the temple has ever set foot\", \"in this chamber.\", and, drawn inside a box, \"It is a fact requiring only faith.\"",
+     "dataTable": {
+      "type": "facsimile",
+      "sourcePassageId": "p-temple-chronicle",
+      "docKind": "source-desk",
+      "title": "a translation of an inscription",
+      "header": [
+       {
+        "label": "carved into",
+        "value": "a temple chamber at Abydos"
+       },
+       {
+        "label": "Temple scribes",
+        "value": "wrote to honor the priesthood"
+       },
+       {
+        "label": "carries",
+        "value": "no author's name"
+       }
+      ],
+      "lines": [
+       {
+        "text": "The seal remains in this chamber to this day."
+       },
+       {
+        "text": "No enemy of the temple has ever set foot"
+       },
+       {
+        "text": "in this chamber."
+       },
+       {
+        "text": "It is a fact requiring only faith.",
+        "emphasis": "box"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "The Crew Forms",
+     "goal": "Meet the crew, and learn what noticing can prove.",
+     "itemIds": []
+    },
+    {
+     "name": "The Archive",
+     "goal": "Read the record before you read the room.",
+     "itemIds": [
+      "l2-mc-threadglass-old-legend"
+     ]
+    },
+    {
+     "name": "The First Heist",
+     "goal": "Say what a person did, then say what they left out.",
+     "itemIds": []
+    },
+    {
+     "name": "Three Tellings",
+     "goal": "Two tellings disagree. Find out which one can actually be checked.",
+     "itemIds": [
+      "l4-ebsr-same-institution-guards-and-writes"
+     ]
+    },
+    {
+     "name": "The Language of Myth",
+     "goal": "Feel how a sentence is built, not just what it says.",
+     "itemIds": []
+    },
+    {
+     "name": "The Final Vault",
+     "goal": "Everything the crew learned, all at once, behind one door.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "l2-mc-threadglass-old-legend",
+     "type": "mc",
+     "passageId": "p-threadglass-entry",
+     "targets": [
+      "c1-inf-1-key-details"
+     ],
+     "coachTopic": "evidence-key-details",
+     "dok": 2,
+     "stem": "According to its catalog entry, what older legend is the Threadglass loosely connected to?",
+     "choices": [
+      "Three sisters who carved the shape of every life as it happened.",
+      "A sailor who crossed every sea in the world to carry one lost lantern home again.",
+      "A bell that rang by itself whenever a promise was broken.",
+      "A hero who escaped a builder's maze by following a single unbroken thread."
+     ],
+     "key": 3,
+     "distractorRationale": {
+      "0": "That legend belongs to the Wyrdstone's entry, not the Threadglass's. You matched the right kind of answer to the wrong relic.",
+      "1": "Nothing in the Threadglass entry mentions a sailor or a lantern.  Its legend is about a hero, a maze, and a single thread.",
+      "2": "The Threadglass entry describes no bell.  Its legend is the hero who followed one unbroken thread out of a maze."
+     },
+     "explain": "The Threadglass entry names its own specific legend directly: a hero who escaped a maze by following one unbroken thread, which is why the object's spiral pattern is treated as a tribute to that particular story."
+    },
+    {
+     "id": "l4-ebsr-same-institution-guards-and-writes",
+     "type": "ebsr",
+     "passageId": "p-temple-chronicle",
+     "targets": [
+      "c4-3-analyze-sources"
+     ],
+     "coachTopic": "research-source-check",
+     "dok": 4,
+     "partA": {
+      "stem": "What makes the Temple Chronicle's claim about the chamber difficult to verify from outside?",
+      "choices": [
+       "The chronicle was carved centuries after Osiris was struck down by his brother.",
+       "The chronicle never mentions who commissioned it.",
+       "The temple that guards the chamber also wrote its history, under its own seal.",
+       "The chronicle contradicts itself about who sealed the chamber and what stone was used."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from Source A best supports the answer you just gave?",
+      "choices": [
+       "It is protected by the priesthood that has kept this temple since the reign of the chronicle's own commissioning king, and by his line after him, without interruption.",
+       "This chronicle carries no author's name, only the seal of the temple itself.",
+       "The god Osiris was struck down by his brother Set.",
+       "She carried a single seal, cut from the same stone as the temple's own base."
+      ],
+      "key": {
+       "0": 2,
+       "1": 0,
+       "2": 1,
+       "3": 3
+      }
+     },
+     "distractorRationale": {
+      "0": "This opening line of the story gives no date or century for when the chronicle itself was carved.  It does not support a claim about the timing of the writing.",
+      "1": "This line mentions the chronicle's own commissioning king.  The chronicle never gives his name, but it does say that a king ordered it.  Knowing his name would not help an outsider check the claim anyway.",
+      "3": "This line is a plain, consistent detail about the seal's material.  Nothing about it contradicts anything else the chronicle states."
+     },
+     "explain": "The chronicle carries no independent author, only the temple's own seal, and the same priesthood that guards the chamber is the priesthood whose authority stands behind the claim.  That means nobody outside the temple ever had a chance to check the story before it was carved into the wall."
+    }
+   ]
+  },
+  {
+   "note": "The weather item fixed:  front and air mass explained without the level they came from.",
+   "itemId": "t4-mc-weather-word",
+   "meta": {
+    "id": "outpost-protocol-g6",
+    "subject": "sci"
+   },
+   "skin": {
+    "color": "#1a8f5e",
+    "icon": "🛰️",
+    "grandGoal": "Field Director"
+   },
+   "passages": [
+    {
+     "id": "p-two-posts-one-latitude",
+     "title": "Field Report: Two Posts, One Latitude",
+     "text": "Sable Flats Post and Cairn Bay Post sit at almost the exact same latitude.  The sun reaches both at nearly the same angle all year.  By the logic of latitude alone, the two posts should report similar climates.  They do not, and the gap between them is large enough that operatives transferring between the two posts are warned to repack their gear completely.  What worked at one post does not work at the other.\n\nSable Flats sits well inland, a long way from open water.  It sits on flat ground, with nothing between it and the dry continental air overhead.  Cairn Bay sits directly on the coast.  Open ocean stretches away to its west.  That single difference in position changes almost everything else about the two posts' year.\n\nUnequal heating across the planet drives global wind belts.  These are broad rivers of moving air.  They circle the planet in roughly the same bands every year.  The wind belt crossing this latitude blows from the west, off the ocean, before it reaches Sable Flats.  At Cairn Bay, that wind arrives straight off the water.  It still carries the moisture it picked up crossing the ocean.  By the time the same wind belt reaches Sable Flats, it has already crossed hundreds of miles of dry land.  It has dropped most of its moisture along the way.  It arrives far drier than it left the coast.\n\nOcean currents add a second layer to the difference.  A current moving along Cairn Bay's coastline keeps the water near the post within a narrow temperature range all year.  Water changes temperature far more slowly than land does.  Air sitting over that current picks up the same steadiness.  Cairn Bay's temperatures swing less between summer and winter than a place with no ocean nearby.  Sable Flats has no current to moderate it.  Its land surface heats fast under summer sun.  It cools fast once winter sun angles drop.  Its temperature swings far wider across the year than Cairn Bay's does.\n\nNone of this is about today's weather at either post.  A single storm or a single clear week can happen at either station.  These long-term patterns do not change because of one storm.  Halyard Point can log five unusual days without its climate actually changing, the same way.  Climate is the pattern averaged over years.  Weather is what is happening outside the window this morning.  The two posts prove that a shared latitude guarantees neither one.",
+     "figureIds": [
+      "fig-latitude-currents"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-latitude-currents",
+     "caption": "Sable Flats and Cairn Bay share almost the same latitude, but a coast, an ocean current, and a wind belt that dries out over land give them very different climates.",
+     "alt": "A map showing two posts at the same latitude, marked by a dashed line. On the left, Cairn Bay sits on the coast next to open ocean, with a current arrow along its coastline. On the right, Sable Flats sits well inland, over dry, continental land. A wide arrow labeled wind belt: blows off the ocean tapers as it crosses the land, labeled arrives far drier, drops its moisture along the way. Two boxes below summarize: Cairn Bay's coast and nearby current give it a smaller seasonal swing; Sable Flats' inland position with no current gives it a wider seasonal swing.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A comparison titled \"Same latitude, different climate\".",
+       "Both posts sit at the same latitude and receive the same sun angle all year.",
+       "Cairn Bay is on the coast, with an ocean current nearby.",
+       "Sable Flats is well inland, in dry continental air.",
+       "A wind belt blows off the ocean and arrives far drier inland, having dropped its moisture along the way.",
+       "Cairn Bay, on the coast with a current nearby, has the smaller seasonal swing."
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "New Posting",
+     "goal": "Learn to read a system: parts, subsystems, and the ripples between them.",
+     "itemIds": []
+    },
+    {
+     "name": "The Sealed Station",
+     "goal": "Diagnose why Meridian Dome's air is drifting before supplies run out.",
+     "itemIds": []
+    },
+    {
+     "name": "Storm Front",
+     "goal": "Read the incoming data fast enough to warn the coast before the front arrives.",
+     "itemIds": []
+    },
+    {
+     "name": "The Long Pattern",
+     "goal": "Explain why two outposts at the same latitude report very different climates.",
+     "itemIds": [
+      "t4-mc-weather-word"
+     ]
+    },
+    {
+     "name": "Breaking Point",
+     "goal": "Trace every local mystery back to the one planetary pattern underneath it.",
+     "itemIds": []
+    },
+    {
+     "name": "Final Deployment",
+     "goal": "Design and defend the Network's official response plan, the final field review.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t4-mc-weather-word",
+     "type": "mc",
+     "passageId": "p-two-posts-one-latitude",
+     "targets": [
+      "sci-t4-climate-patterns"
+     ],
+     "coachTopic": "evidence-long-pattern",
+     "dok": 2,
+     "stem": "Which term names \"what is happening outside the window this morning,\" as opposed to a pattern averaged over years?",
+     "choices": [
+      "climate",
+      "front",
+      "weather",
+      "air mass"
+     ],
+     "key": 2,
+     "distractorRationale": {
+      "0": "Climate is the passage's own term for the pattern averaged over years, the opposite of what is happening outside the window on one particular morning.",
+      "1": "A front is the meeting point of two air masses, a cause of a single weather event, not the general word for today's conditions outside the window.",
+      "3": "An air mass is a huge body of air with its own temperature and moisture, one piece of the weather mechanism, not the general term for today's conditions."
+     },
+     "explain": "The passage defines weather directly as what is happening outside the window this morning, in deliberate contrast to climate, the pattern averaged over years.  Front and air mass each name one piece of the weather mechanism, not the general word for today's conditions."
+    }
+   ]
+  },
+  {
+   "note": "The burned-palaces item fixed:  a hiding place the entry never claims, in place of the borrowed brick.",
+   "itemId": "t1-mc-why-burned-palaces-helped",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t1-clay-and-the-first-empires",
+     "title": "Recovered Entry: What the Clay Kept",
+     "text": "This entry answers a question every new Recorder asks.  Why does so much of the oldest record come from one flat, muddy plain?  The answer is clay.  Southern Mesopotamia had almost no stone and very little timber, but it had river mud without limit.  Scribes there wrote on wet clay tablets, and clay is stubborn.  A tablet dropped in a ruin simply waits.\n\nThe first cities on that plain were Sumerian.  Uruk and Ur each ran its own government, guarded its own walls, and honored its own patron god.  A stepped temple platform called a ziggurat stood at the center of many of them.  Villages had grown into cities, and cities needed records.  The earliest tablets are not poems or laws at all.  They are receipts, counting sacks of grain, jars of oil, and heads of livestock.  Others are school exercises, copied out by students learning the script, with the mistakes still sitting on them.\n\nThe tablets also show who stood where.  Kings and priests sat at the top, and merchants, artisans, and farmers came next.  Enslaved people sat at the bottom, many of them captives taken in war.\n\nThose same centuries produced tools the whole world later borrowed.  Potters shaped clay on a turning wheel, and heavy carts rolled on wheels too.  Farmers cut furrows with a plow instead of a digging stick, and sailors caught the wind with a sail.  Metalworkers mixed copper with tin to make bronze, which held an edge far better than either metal alone.\n\nNo city on that plain stayed free forever.  A ruler named Sargon conquered the Sumerian cities and ruled them from Akkad, his own capital, and many historians call what he built the first empire in the record.  Babylon rose later, under the king whose law code this file already holds, and Assyria rose to dominate the region later still.\n\nHere is the part the Office likes best.  Fire destroys most records, but fire bakes clay harder.  Palaces on that plain burned more than once, and the tablets stored inside came out of the ashes tougher than they went in.  The record survives partly because somebody's city was sacked.",
+     "figureIds": [
+      "fig-cuneiform-tablet"
+     ]
+    },
+    {
+     "id": "p-t4-quiet-record-indus",
+     "title": "Case File: The Quiet Record of the Indus",
+     "text": "Some files in the Office archive are quiet for a reason.  Nothing bad happened; the people involved simply cannot speak for themselves yet.  The Indus Valley civilization built some of the best-planned cities anywhere in the old world.  Mohenjo-daro and Harappa sat on careful grids.  Baked-brick homes linked to covered drains, an advanced setup for its time.\n\nThe Indus people also left behind a written script.  It was cut into thousands of small stone seals.  No scholar has ever managed to read it.  Every other early society in this record can be read straight, in its own words.  Court records, temple writings, and trader letters survive elsewhere.  The Indus people left none of that.  Whatever its people believed, ruled, or argued about stays locked behind an unread script.  This file treats that gap honestly instead of guessing past it.\n\nIts fall is easier to weigh, though still not fully settled.  The clearest evidence involves shifting rivers.  One major stream that once fed Indus farms seems to have dried up or changed path.  Evidence also points to a weaker monsoon.  That means longer, harsher dry spells across the region.  Farming likely grew far harder to keep up.  Many of the biggest cities emptied out slowly, not all at once.  Scholars still argue over how much of the fall came from nature alone.\n\nSometime after the Indus cities faded, new migrants arrived from the northwest.  Many scholars think these Indo-Aryan migrants brought an early form of Sanskrit with them.  They brought a new set of faith practices too.  Those practices were set down in hymns called the Vedas.  The Vedas became the base the next file builds right on top of.",
+     "figureIds": [
+      "fig-indus-map",
+      "fig-indus-seal"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-cuneiform-tablet",
+     "caption": "A clay tablet from southern Mesopotamia, pressed with early signs and seal marks.  It is an account of goods, not a poem and not a law.",
+     "alt": "A small squarish clay tablet, light brown, covered in rows of shallow impressed marks and round punched holes, with a seal impression across part of the surface."
+    },
+    {
+     "id": "fig-indus-map",
+     "caption": "The Indus and its two grid-planned cities, Harappa and Mohenjo-daro.",
+     "alt": "A map of the Indus valley. The river runs south to the sea. Harappa and Mohenjo-daro are marked. Notes say both cities sat on careful grids with baked-brick homes linked to covered drains, that their script was cut into thousands of small stone seals, and that no scholar has ever managed to read it.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Indus valley, with the river drawn running to the sea.",
+       "Two cities are marked and labelled: Harappa and Mohenjo-daro.",
+       "The river is labelled Indus.",
+       "A note reads: both cities sat on careful grids, with baked-brick homes linked to covered drains.",
+       "A note reads: their script was cut into thousands of small stone seals.",
+       "A note in a different colour reads: no scholar has ever managed to read it."
+      ]
+     }
+    },
+    {
+     "id": "fig-indus-seal",
+     "caption": "An Indus stamp seal and the modern impression taken from it.  The animal is clear; the row of signs above it is the script no scholar has ever managed to read.",
+     "alt": "A small square seal at left and its pale clay impression at right, each showing a horned animal in profile above a short line of angular signs."
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": [
+      "t1-mc-why-burned-palaces-helped"
+     ]
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": []
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": [
+      "t4-ebsr-undeciphered-script"
+     ]
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": []
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t1-mc-why-burned-palaces-helped",
+     "type": "mc",
+     "passageId": "p-t1-clay-and-the-first-empires",
+     "targets": [
+      "hist-t1-first-entry"
+     ],
+     "coachTopic": "evidence-first-entry",
+     "dok": 3,
+     "stem": "According to the recovered entry, why did the tablets stored inside the plain's palaces survive being burned?",
+     "choices": [
+      "Scribes carried the tablets out of the burning palaces before the fires could reach them.",
+      "The tablets were cut into stone, which fire cannot damage.",
+      "Fire bakes clay harder, so they came out of the ashes tougher than they went in.",
+      "The tablets were buried under the palace floors, far from the flames."
+     ],
+     "key": 2,
+     "distractorRationale": {
+      "0": "The entry never describes anyone rescuing tablets; it credits their survival to what fire does to clay, which is the opposite of a rescue.",
+      "1": "Stone is the one material that plain almost entirely lacked, and that shortage is exactly why its scribes wrote on river mud instead.",
+      "3": "Nothing in the entry says the tablets were buried; it says the palaces burned more than once, and the burning is what hardened the tablets."
+     },
+     "explain": "The entry saves its favorite point for last: fire destroys most records, but fire bakes clay harder, so tablets stored in a palace that burned came out tougher than they went in.  Each wrong choice supplies a rescue, a material, or a hiding place the entry never claims."
+    },
+    {
+     "id": "t4-ebsr-undeciphered-script",
+     "type": "ebsr",
+     "passageId": "p-t4-quiet-record-indus",
+     "targets": [
+      "hist-t4-india"
+     ],
+     "coachTopic": "evidence-quiet-record",
+     "dok": 2,
+     "partA": {
+      "stem": "According to the case file, what makes the Indus Valley civilization's own written record different from every other early civilization in the file?",
+      "choices": [
+       "The Indus script has been fully translated, revealing court records, temple writings, and trader letters.",
+       "The Indus people left behind no written script at all.",
+       "No scholar has ever managed to read the Indus script, so its own words stay locked away.",
+       "The Indus civilization's cities were too small to have kept any records."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "No scholar has ever managed to read it.",
+       "The Indus Valley civilization built some of the best-planned cities anywhere in the old world.",
+       "Every other early society in this record can be read straight, in its own words.",
+       "The Indus people also left behind a written script."
+      ],
+      "key": {
+       "0": 2,
+       "1": 3,
+       "2": 0,
+       "3": 1
+      }
+     },
+     "distractorRationale": {
+      "0": "The passage says the opposite: no scholar has ever managed to read the Indus script, unlike every other early civilization in this record.",
+      "1": "The passage says the Indus people did leave behind a written script, carved into thousands of stone seals; the gap is that nobody can read it, not that it never existed.",
+      "3": "The passage describes Indus cities as some of the best-planned anywhere in the old world, which argues against the idea that they were too small to keep records."
+     },
+     "explain": "The passage states plainly that the Indus people left behind a written script, but no scholar has ever managed to read it, unlike every other early civilization in this file, which can be read directly in its own words.  The other choices each contradict a specific detail the passage states about the script or the cities."
+    }
+   ]
+  },
+  {
+   "note": "The writing-systems item fixed:  the rationale stops at the Egyptian record.",
+   "itemId": "t1-mc-writing-systems-method",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t1-nile-two-kingdoms",
+     "title": "Case File: Two Kingdoms of the Nile",
+     "text": "Egyptians believed their king, the pharaoh, was not an ordinary ruler.  They believed he held a kind of divine power.  His main job was keeping the whole world in balance, a balance Egyptians called ma'at.  Two pharaohs left a large mark on the record.  Hatshepsut ruled Egypt in her own right as a full pharaoh, not merely as a king's wife.  She sent a famous trading trip south along the coast.  Years later, Ramses the Second reigned for decades and built huge monuments.  He later signed one of the oldest peace deals in the whole record.\n\nReligion shaped how Egyptians treated their own dead.  Egyptians believed a spirit needed a preserved body to survive into the next life, so skilled workers made mummies to stop a body from decaying.  Wealthier Egyptians built large tombs and filled them with goods the dead were thought to need on the trip ahead.  That belief is the real reason the pyramids exist at all.\n\nSouth of Egypt, along the same river, sat the kingdom of Kush.  Egypt and Kush traded gold, ivory, and other goods for centuries, but their bond was never simply friendly.  Egypt's own armies took over Kush during Egypt's strongest era.  Years later, that balance flipped.  Kushite kings conquered Egypt itself and ruled it as pharaohs in their own right, keeping many Egyptian customs alongside their own.\n\nThe two peoples even wrote their history in different ways.  Mesopotamian scribes pressed wedge-shaped cuneiform marks into wet clay, using a cut reed, one tablet at a time.  Egyptian scribes instead drew or carved hieroglyphs onto papyrus and stone, a system built from hundreds of small pictures.  Both systems did the same basic job.  They let a record live on long after its maker was gone.",
+     "figureIds": [
+      "fig-egypt-scribe"
+     ]
+    },
+    {
+     "id": "p-t4-quiet-record-indus",
+     "title": "Case File: The Quiet Record of the Indus",
+     "text": "Some files in the Office archive are quiet for a reason.  Nothing bad happened; the people involved simply cannot speak for themselves yet.  The Indus Valley civilization built some of the best-planned cities anywhere in the old world.  Mohenjo-daro and Harappa sat on careful grids.  Baked-brick homes linked to covered drains, an advanced setup for its time.\n\nThe Indus people also left behind a written script.  It was cut into thousands of small stone seals.  No scholar has ever managed to read it.  Every other early society in this record can be read straight, in its own words.  Court records, temple writings, and trader letters survive elsewhere.  The Indus people left none of that.  Whatever its people believed, ruled, or argued about stays locked behind an unread script.  This file treats that gap honestly instead of guessing past it.\n\nIts fall is easier to weigh, though still not fully settled.  The clearest evidence involves shifting rivers.  One major stream that once fed Indus farms seems to have dried up or changed path.  Evidence also points to a weaker monsoon.  That means longer, harsher dry spells across the region.  Farming likely grew far harder to keep up.  Many of the biggest cities emptied out slowly, not all at once.  Scholars still argue over how much of the fall came from nature alone.\n\nSometime after the Indus cities faded, new migrants arrived from the northwest.  Many scholars think these Indo-Aryan migrants brought an early form of Sanskrit with them.  They brought a new set of faith practices too.  Those practices were set down in hymns called the Vedas.  The Vedas became the base the next file builds right on top of.",
+     "figureIds": [
+      "fig-indus-map",
+      "fig-indus-seal"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-egypt-scribe",
+     "caption": "A limestone statue of Nikare, an Egyptian official, seated cross-legged in the pose Egyptian sculpture kept for scribes.",
+     "alt": "A weathered limestone statue of a man seated cross-legged, hands resting on his lap, wearing a shoulder-length wig."
+    },
+    {
+     "id": "fig-indus-map",
+     "caption": "The Indus and its two grid-planned cities, Harappa and Mohenjo-daro.",
+     "alt": "A map of the Indus valley. The river runs south to the sea. Harappa and Mohenjo-daro are marked. Notes say both cities sat on careful grids with baked-brick homes linked to covered drains, that their script was cut into thousands of small stone seals, and that no scholar has ever managed to read it.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Indus valley, with the river drawn running to the sea.",
+       "Two cities are marked and labelled: Harappa and Mohenjo-daro.",
+       "The river is labelled Indus.",
+       "A note reads: both cities sat on careful grids, with baked-brick homes linked to covered drains.",
+       "A note reads: their script was cut into thousands of small stone seals.",
+       "A note in a different colour reads: no scholar has ever managed to read it."
+      ]
+     }
+    },
+    {
+     "id": "fig-indus-seal",
+     "caption": "An Indus stamp seal and the modern impression taken from it.  The animal is clear; the row of signs above it is the script no scholar has ever managed to read.",
+     "alt": "A small square seal at left and its pale clay impression at right, each showing a horned animal in profile above a short line of angular signs."
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": [
+      "t1-mc-writing-systems-method"
+     ]
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": []
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": [
+      "t4-ebsr-undeciphered-script"
+     ]
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": []
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t1-mc-writing-systems-method",
+     "type": "mc",
+     "passageId": "p-t1-nile-two-kingdoms",
+     "targets": [
+      "hist-t1-first-entry"
+     ],
+     "coachTopic": "evidence-first-entry",
+     "dok": 2,
+     "stem": "According to the case file, how did Mesopotamian scribes' writing method differ from Egyptian scribes'?",
+     "choices": [
+      "Mesopotamian scribes carved hieroglyphs into stone, while Egyptian scribes pressed cuneiform into wet clay with a reed.",
+      "Both sets of scribes used the exact same wedge-shaped cuneiform system, just pressed or carved into different materials.",
+      "Mesopotamian scribes pressed cuneiform into wet clay with a cut reed, while Egyptian scribes drew or carved hieroglyphs onto papyrus and stone.",
+      "Egyptian scribes left behind no written record at all, unlike Mesopotamian scribes."
+     ],
+     "key": 2,
+     "distractorRationale": {
+      "0": "This reverses which civilization used which system; the case file credits cuneiform to Mesopotamian scribes and hieroglyphs to Egyptian scribes, not the other way around.",
+      "1": "The case file describes two different systems, wedge-shaped cuneiform pressed into clay and picture-based hieroglyphs carved onto papyrus and stone, not one shared system.",
+      "3": "The case file says Egyptian scribes did leave a written record, hieroglyphs carved onto papyrus and stone."
+     },
+     "explain": "The case file describes two distinct systems: Mesopotamian scribes pressed wedge-shaped cuneiform marks into wet clay with a cut reed, one tablet at a time, while Egyptian scribes instead drew or carved hieroglyphs onto papyrus and stone.  The other choices each reverse which civilization used which system, deny that two systems existed, or claim the Egyptians left no written record at all."
+    },
+    {
+     "id": "t4-ebsr-undeciphered-script",
+     "type": "ebsr",
+     "passageId": "p-t4-quiet-record-indus",
+     "targets": [
+      "hist-t4-india"
+     ],
+     "coachTopic": "evidence-quiet-record",
+     "dok": 2,
+     "partA": {
+      "stem": "According to the case file, what makes the Indus Valley civilization's own written record different from every other early civilization in the file?",
+      "choices": [
+       "The Indus script has been fully translated, revealing court records, temple writings, and trader letters.",
+       "The Indus people left behind no written script at all.",
+       "No scholar has ever managed to read the Indus script, so its own words stay locked away.",
+       "The Indus civilization's cities were too small to have kept any records."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "No scholar has ever managed to read it.",
+       "The Indus Valley civilization built some of the best-planned cities anywhere in the old world.",
+       "Every other early society in this record can be read straight, in its own words.",
+       "The Indus people also left behind a written script."
+      ],
+      "key": {
+       "0": 2,
+       "1": 3,
+       "2": 0,
+       "3": 1
+      }
+     },
+     "distractorRationale": {
+      "0": "The passage says the opposite: no scholar has ever managed to read the Indus script, unlike every other early civilization in this record.",
+      "1": "The passage says the Indus people did leave behind a written script, carved into thousands of stone seals; the gap is that nobody can read it, not that it never existed.",
+      "3": "The passage describes Indus cities as some of the best-planned anywhere in the old world, which argues against the idea that they were too small to keep records."
+     },
+     "explain": "The passage states plainly that the Indus people left behind a written script, but no scholar has ever managed to read it, unlike every other early civilization in this file, which can be read directly in its own words.  The other choices each contradict a specific detail the passage states about the script or the cities."
+    }
+   ]
+  },
+  {
+   "note": "The Samaria item fixed:  Babylon was never a capital of either kingdom.",
+   "itemId": "t2-cloze-samaria",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t2-kingdom-divided",
+     "title": "Case File: The Kingdom That Split in Two",
+     "text": "The Office keeps one rule for sacred texts.  Read them for what they claim.  Then look for anything outside them that touches the same claim.  This entry is the best case in the archive for that rule.\n\nThe Hebrew Bible describes Solomon's kingdom breaking apart soon after he died, around nine hundred thirty BCE.  The northern tribes pulled away and formed a kingdom called Israel.  The northern kingdom's capital came to be a city named Samaria.  In that account, the southern tribes kept the line of David and the Temple in Jerusalem, in a smaller kingdom called Judah.  In that account, two kingdoms now stood where one had stood before.\n\nThen the outside evidence arrives, and it is unusually good.  A carved stone known as the Mesha Stele was raised by a king of Moab.  It names Omri, a king of Israel, as an enemy who had pressed hard on Moab.  An Assyrian monument known as the Black Obelisk lists tribute paid to an Assyrian king.  It names Jehu, a later king of Israel, among those who paid.  Neither stone was cut to prove the Hebrew Bible right.  Each was cut to praise its own king, which is exactly why the Office weighs it.\n\nThe northern kingdom fell to Assyria.  Assyrian armies took Samaria around seven hundred twenty-two BCE, and Assyrian royal records report the capture in their own words.  Those records do not fully agree about which king finished the siege, and the Office files that disagreement rather than smoothing it away.  Assyria then moved many of the defeated people to other parts of its empire.  Newcomers were settled in their place.\n\nThe account preserved in the Hebrew Bible explains the fall in its own terms.  It describes the defeat as a punishment for abandoning the covenant.  That reasoning belongs to the account, and the Office records it as the account's own.\n\nMuch later, stories grew up about ten lost tribes still wandering somewhere.  The Office files those stories as legend.  Judah lasted longer than its northern neighbor did.  What finally happened to Judah is filed under the exile that followed.",
+     "figureIds": [
+      "fig-exile-map"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-exile-map",
+     "caption": "Two kingdoms where one had stood: Israel with its capital at Samaria, Judah with the Temple in Jerusalem, and the direction Assyria moved the defeated people.",
+     "alt": "A map of the eastern Mediterranean and Mesopotamia. Samaria and Jerusalem are marked in the Levant, labelled Israel and Judah. A dashed arrow curves north-east from Samaria to Assyria. A note says Assyrian records do not fully agree about which king finished the siege, and that this file keeps that disagreement.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Levant and Mesopotamia.",
+       "Two cities are marked and labelled: Samaria and Jerusalem.",
+       "Three regions are labelled: ISRAEL around Samaria, JUDAH around Jerusalem, and ASSYRIA to the north-east.",
+       "A dashed arrow runs from Samaria north-east to Assyria.",
+       "A note reads: Assyrian armies took Samaria around seven hundred twenty-two BCE.",
+       "A note reads: Assyria then moved many of the defeated people to other parts of its empire.",
+       "A note in a different colour reads: Assyrian records do not fully agree about which king finished the siege, and this file keeps that disagreement rather than smoothing it away."
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": []
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": [
+      "t2-cloze-samaria"
+     ]
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": []
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": []
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t2-cloze-samaria",
+     "type": "cloze",
+     "passageId": "p-t2-kingdom-divided",
+     "targets": [
+      "hist-t2-hebrews"
+     ],
+     "coachTopic": "evidence-shortest-file",
+     "dok": 2,
+     "stem": "The northern kingdom's capital came to be a city named {{0}}.",
+     "blanks": [
+      {
+       "choices": [
+        "Jerusalem",
+        "Samaria",
+        "Babylon"
+       ],
+       "key": 1,
+       "distractorRationale": {
+        "0": "Jerusalem stayed with the SOUTHERN kingdom, Judah, along with the line of David and the Temple; the northern kingdom of Israel had a capital of its own.",
+        "2": "Babylon was never a capital of either Israelite kingdom.  The case file names Samaria as the northern kingdom's capital."
+       }
+      }
+     ],
+     "quote": "The northern kingdom's capital came to be a city named Samaria.",
+     "explain": "The case file gives the northern kingdom's capital as Samaria, the city Assyrian armies later took.  Jerusalem belongs to the southern kingdom in the same sentence pair, and Babylon was never a capital of either kingdom, so neither one restores this sentence."
+    }
+   ]
+  },
+  {
+   "note": "The Indus map item fixed:  none of the map's notes mentions tablets.",
+   "itemId": "l4-vis-indus-notes",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t4-quiet-record-indus",
+     "title": "Case File: The Quiet Record of the Indus",
+     "text": "Some files in the Office archive are quiet for a reason.  Nothing bad happened; the people involved simply cannot speak for themselves yet.  The Indus Valley civilization built some of the best-planned cities anywhere in the old world.  Mohenjo-daro and Harappa sat on careful grids.  Baked-brick homes linked to covered drains, an advanced setup for its time.\n\nThe Indus people also left behind a written script.  It was cut into thousands of small stone seals.  No scholar has ever managed to read it.  Every other early society in this record can be read straight, in its own words.  Court records, temple writings, and trader letters survive elsewhere.  The Indus people left none of that.  Whatever its people believed, ruled, or argued about stays locked behind an unread script.  This file treats that gap honestly instead of guessing past it.\n\nIts fall is easier to weigh, though still not fully settled.  The clearest evidence involves shifting rivers.  One major stream that once fed Indus farms seems to have dried up or changed path.  Evidence also points to a weaker monsoon.  That means longer, harsher dry spells across the region.  Farming likely grew far harder to keep up.  Many of the biggest cities emptied out slowly, not all at once.  Scholars still argue over how much of the fall came from nature alone.\n\nSometime after the Indus cities faded, new migrants arrived from the northwest.  Many scholars think these Indo-Aryan migrants brought an early form of Sanskrit with them.  They brought a new set of faith practices too.  Those practices were set down in hymns called the Vedas.  The Vedas became the base the next file builds right on top of.",
+     "figureIds": [
+      "fig-indus-map",
+      "fig-indus-seal"
+     ]
+    },
+    {
+     "id": "p-t1-clay-and-the-first-empires",
+     "title": "Recovered Entry: What the Clay Kept",
+     "text": "This entry answers a question every new Recorder asks.  Why does so much of the oldest record come from one flat, muddy plain?  The answer is clay.  Southern Mesopotamia had almost no stone and very little timber, but it had river mud without limit.  Scribes there wrote on wet clay tablets, and clay is stubborn.  A tablet dropped in a ruin simply waits.\n\nThe first cities on that plain were Sumerian.  Uruk and Ur each ran its own government, guarded its own walls, and honored its own patron god.  A stepped temple platform called a ziggurat stood at the center of many of them.  Villages had grown into cities, and cities needed records.  The earliest tablets are not poems or laws at all.  They are receipts, counting sacks of grain, jars of oil, and heads of livestock.  Others are school exercises, copied out by students learning the script, with the mistakes still sitting on them.\n\nThe tablets also show who stood where.  Kings and priests sat at the top, and merchants, artisans, and farmers came next.  Enslaved people sat at the bottom, many of them captives taken in war.\n\nThose same centuries produced tools the whole world later borrowed.  Potters shaped clay on a turning wheel, and heavy carts rolled on wheels too.  Farmers cut furrows with a plow instead of a digging stick, and sailors caught the wind with a sail.  Metalworkers mixed copper with tin to make bronze, which held an edge far better than either metal alone.\n\nNo city on that plain stayed free forever.  A ruler named Sargon conquered the Sumerian cities and ruled them from Akkad, his own capital, and many historians call what he built the first empire in the record.  Babylon rose later, under the king whose law code this file already holds, and Assyria rose to dominate the region later still.\n\nHere is the part the Office likes best.  Fire destroys most records, but fire bakes clay harder.  Palaces on that plain burned more than once, and the tablets stored inside came out of the ashes tougher than they went in.  The record survives partly because somebody's city was sacked.",
+     "figureIds": [
+      "fig-cuneiform-tablet"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-indus-map",
+     "caption": "The Indus and its two grid-planned cities, Harappa and Mohenjo-daro.",
+     "alt": "A map of the Indus valley. The river runs south to the sea. Harappa and Mohenjo-daro are marked. Notes say both cities sat on careful grids with baked-brick homes linked to covered drains, that their script was cut into thousands of small stone seals, and that no scholar has ever managed to read it.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Indus valley, with the river drawn running to the sea.",
+       "Two cities are marked and labelled: Harappa and Mohenjo-daro.",
+       "The river is labelled Indus.",
+       "A note reads: both cities sat on careful grids, with baked-brick homes linked to covered drains.",
+       "A note reads: their script was cut into thousands of small stone seals.",
+       "A note in a different colour reads: no scholar has ever managed to read it."
+      ]
+     }
+    },
+    {
+     "id": "fig-indus-seal",
+     "caption": "An Indus stamp seal and the modern impression taken from it.  The animal is clear; the row of signs above it is the script no scholar has ever managed to read.",
+     "alt": "A small square seal at left and its pale clay impression at right, each showing a horned animal in profile above a short line of angular signs."
+    },
+    {
+     "id": "fig-cuneiform-tablet",
+     "caption": "A clay tablet from southern Mesopotamia, pressed with early signs and seal marks.  It is an account of goods, not a poem and not a law.",
+     "alt": "A small squarish clay tablet, light brown, covered in rows of shallow impressed marks and round punched holes, with a seal impression across part of the surface."
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": [
+      "t1-ebsr-why-the-clay-record-survived"
+     ]
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": []
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": [
+      "l4-vis-indus-notes"
+     ]
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": []
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "l4-vis-indus-notes",
+     "type": "cloze",
+     "passageId": "p-t4-quiet-record-indus",
+     "figureId": "fig-indus-map",
+     "targets": [
+      "hist-t4-india"
+     ],
+     "coachTopic": "evidence-quiet-record",
+     "dok": 2,
+     "stem": "The map's notes say the script was cut into thousands of small stone {{0}}, and that {{1}} has ever managed to read it.",
+     "blanks": [
+      {
+       "choices": [
+        "seals",
+        "tablets",
+        "walls"
+       ],
+       "key": 0,
+       "distractorRationale": {
+        "1": "None of the map's notes mentions tablets.  They say the script was cut into small stone seals.",
+        "2": "The note says small stone seals, not walls."
+       }
+      },
+      {
+       "choices": [
+        "no scholar",
+        "only one scholar",
+        "every scholar"
+       ],
+       "key": 0,
+       "distractorRationale": {
+        "1": "The note allows no exception. It says no scholar has managed it.",
+        "2": "That reverses the note entirely."
+       }
+      }
+     ],
+     "explain": "Two of the map's three notes carry this: the script was cut into thousands of small stone seals, and no scholar has ever managed to read it."
+    },
+    {
+     "id": "t1-ebsr-why-the-clay-record-survived",
+     "type": "ebsr",
+     "passageId": "p-t1-clay-and-the-first-empires",
+     "targets": [
+      "hist-t1-first-entry"
+     ],
+     "coachTopic": "evidence-first-entry",
+     "dok": 3,
+     "partA": {
+      "stem": "According to the recovered entry, why does so much of the oldest written record come from Southern Mesopotamia in particular?",
+      "choices": [
+       "Its scribes cut their records into stone, which the plain had in large supply.",
+       "Its scribes wrote on clay, a material tough enough to sit in a ruin and wait.",
+       "Its villages grew into cities, and cities created the need for records.",
+       "Its earliest tablets recorded counts of goods rather than poems or laws."
+      ],
+      "key": 1
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Scribes there wrote on wet clay tablets, and clay is stubborn.",
+       "The earliest tablets are not poems or laws at all.",
+       "Southern Mesopotamia had almost no stone and very little timber, but it had river mud without limit.",
+       "Villages had grown into cities, and cities needed records."
+      ],
+      "key": {
+       "0": 2,
+       "1": 0,
+       "2": 3,
+       "3": 1
+      }
+     },
+     "distractorRationale": {
+      "0": "The entry says the opposite about stone: that plain had almost none of it, and very little timber either, which is exactly why its scribes reached for river mud instead.",
+      "2": "Villages growing into cities explains why anyone needed records at all, a step every early civilization shared; it does not explain why this plain's records in particular are the ones that survived.",
+      "3": "What the tablets say is a separate question from why they lasted; receipts and poems written on the same clay would have survived a ruin equally well."
+     },
+     "explain": "The entry answers its own opening question directly: scribes on that plain wrote on wet clay, and clay is stubborn, so a tablet dropped in a ruin simply waits to be found.  Each wrong choice names a true detail from the entry, about stone, about cities, or about what the tablets say, that answers a different question than the one asked."
+    }
+   ]
+  },
+  {
+   "note": "The Warring States item fixed:  the Huang He's floods, from its own passage, as the tempting wrong cause.",
+   "itemId": "t5-mc-warring-states-cause",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t5-two-schools-one-emperor",
+     "title": "Case File: Two Schools of Thought, One Unifying Emperor",
+     "text": "The Huang He, known in English as the Yellow River, flooded often and hard.  Later writers gave it the name China's Sorrow.  Its floodwaters also carried rich soil that made the river valley worth the risk.  Early Chinese life grew up right along its banks.\n\nChina's earliest well-known dynasty was the Shang, which gave way to the Zhou dynasty.  The Zhou brought in an idea called the Mandate of Heaven.  Heaven gave a ruler the right to rule only while that ruler ruled fairly.  Heaven could pull that right back from a ruler who did not.  Zhou power weakened over the years.  China broke apart into rival states that fought nearly nonstop, in a time later called the Warring States era.\n\nTwo very different schools of thought tried to answer that long disorder.  Confucius taught that harmony grows from everyone filling their role well.  A ruler should act fairly, a child should honor a parent, and a friend should treat a friend with respect.  Order, in his teaching, comes from virtue lived by everyone at once.  A different path is tied to a teacher known as Laozi.  His teaching pointed closer to the other side.  It held that people should follow the Dao, the natural way of the world, without forcing events against their own natural course.\n\nNeither school ended the fighting.  A ruler named Ying Zheng did.  He beat every rival state and named himself Qin Shi Huangdi, China's first emperor.  He set one standard for the empire's writing, money, and weights.  One system replaced the many different ones lands had used before.  He also moved right against ideas that threatened his new power.  Records written later say he ordered rival texts burned, with Confucian works a main target.  A number of scholars who defied the order were put to death too.  This is the record this file's own title borrows its warning from."
+    },
+    {
+     "id": "p-t4-quiet-record-indus",
+     "title": "Case File: The Quiet Record of the Indus",
+     "text": "Some files in the Office archive are quiet for a reason.  Nothing bad happened; the people involved simply cannot speak for themselves yet.  The Indus Valley civilization built some of the best-planned cities anywhere in the old world.  Mohenjo-daro and Harappa sat on careful grids.  Baked-brick homes linked to covered drains, an advanced setup for its time.\n\nThe Indus people also left behind a written script.  It was cut into thousands of small stone seals.  No scholar has ever managed to read it.  Every other early society in this record can be read straight, in its own words.  Court records, temple writings, and trader letters survive elsewhere.  The Indus people left none of that.  Whatever its people believed, ruled, or argued about stays locked behind an unread script.  This file treats that gap honestly instead of guessing past it.\n\nIts fall is easier to weigh, though still not fully settled.  The clearest evidence involves shifting rivers.  One major stream that once fed Indus farms seems to have dried up or changed path.  Evidence also points to a weaker monsoon.  That means longer, harsher dry spells across the region.  Farming likely grew far harder to keep up.  Many of the biggest cities emptied out slowly, not all at once.  Scholars still argue over how much of the fall came from nature alone.\n\nSometime after the Indus cities faded, new migrants arrived from the northwest.  Many scholars think these Indo-Aryan migrants brought an early form of Sanskrit with them.  They brought a new set of faith practices too.  Those practices were set down in hymns called the Vedas.  The Vedas became the base the next file builds right on top of.",
+     "figureIds": [
+      "fig-indus-map",
+      "fig-indus-seal"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-indus-map",
+     "caption": "The Indus and its two grid-planned cities, Harappa and Mohenjo-daro.",
+     "alt": "A map of the Indus valley. The river runs south to the sea. Harappa and Mohenjo-daro are marked. Notes say both cities sat on careful grids with baked-brick homes linked to covered drains, that their script was cut into thousands of small stone seals, and that no scholar has ever managed to read it.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Indus valley, with the river drawn running to the sea.",
+       "Two cities are marked and labelled: Harappa and Mohenjo-daro.",
+       "The river is labelled Indus.",
+       "A note reads: both cities sat on careful grids, with baked-brick homes linked to covered drains.",
+       "A note reads: their script was cut into thousands of small stone seals.",
+       "A note in a different colour reads: no scholar has ever managed to read it."
+      ]
+     }
+    },
+    {
+     "id": "fig-indus-seal",
+     "caption": "An Indus stamp seal and the modern impression taken from it.  The animal is clear; the row of signs above it is the script no scholar has ever managed to read.",
+     "alt": "A small square seal at left and its pale clay impression at right, each showing a horned animal in profile above a short line of angular signs."
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": []
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": []
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": [
+      "t4-ebsr-undeciphered-script"
+     ]
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": [
+      "t5-mc-warring-states-cause"
+     ]
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t5-mc-warring-states-cause",
+     "type": "mc",
+     "passageId": "p-t5-two-schools-one-emperor",
+     "targets": [
+      "hist-t5-china"
+     ],
+     "coachTopic": "evidence-what-was-burned",
+     "dok": 3,
+     "stem": "According to the case file, what actually caused the Warring States era?",
+     "choices": [
+      "Qin Shi Huangdi ordered rival texts burned, which broke China apart into fighting states.",
+      "Zhou power weakened, and China broke into rival states that fought nearly nonstop.",
+      "The Han dynasty's collapse left China without any government at all.",
+      "The Huang He flooded so often and so hard that the valley could no longer feed one kingdom."
+     ],
+     "key": 1,
+     "distractorRationale": {
+      "0": "Qin Shi Huangdi's burning of rival texts came after he had already unified China as its first emperor, ending the Warring States era rather than causing it.",
+      "2": "The Han dynasty is a later dynasty that came after the Qin; its own fall is a separate, later event from the earlier Warring States era.",
+      "3": "The case file says the Huang He flooded often and hard, but it also says the floodwaters carried rich soil, and it never blames the floods for the Warring States era."
+     },
+     "explain": "The case file states directly that Zhou power weakened over the years, and China broke apart into rival states that fought nearly nonstop, in the era later called the Warring States era.  Each wrong choice blames something the case file never names as the cause, whether a later ruler's act, a later dynasty's fall, or the river's floods."
+    },
+    {
+     "id": "t4-ebsr-undeciphered-script",
+     "type": "ebsr",
+     "passageId": "p-t4-quiet-record-indus",
+     "targets": [
+      "hist-t4-india"
+     ],
+     "coachTopic": "evidence-quiet-record",
+     "dok": 2,
+     "partA": {
+      "stem": "According to the case file, what makes the Indus Valley civilization's own written record different from every other early civilization in the file?",
+      "choices": [
+       "The Indus script has been fully translated, revealing court records, temple writings, and trader letters.",
+       "The Indus people left behind no written script at all.",
+       "No scholar has ever managed to read the Indus script, so its own words stay locked away.",
+       "The Indus civilization's cities were too small to have kept any records."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "No scholar has ever managed to read it.",
+       "The Indus Valley civilization built some of the best-planned cities anywhere in the old world.",
+       "Every other early society in this record can be read straight, in its own words.",
+       "The Indus people also left behind a written script."
+      ],
+      "key": {
+       "0": 2,
+       "1": 3,
+       "2": 0,
+       "3": 1
+      }
+     },
+     "distractorRationale": {
+      "0": "The passage says the opposite: no scholar has ever managed to read the Indus script, unlike every other early civilization in this record.",
+      "1": "The passage says the Indus people did leave behind a written script, carved into thousands of stone seals; the gap is that nobody can read it, not that it never existed.",
+      "3": "The passage describes Indus cities as some of the best-planned anywhere in the old world, which argues against the idea that they were too small to keep records."
+     },
+     "explain": "The passage states plainly that the Indus people left behind a written script, but no scholar has ever managed to read it, unlike every other early civilization in this file, which can be read directly in its own words.  The other choices each contradict a specific detail the passage states about the script or the cities."
+    }
+   ]
+  },
+  {
+   "note": "The second-column item fixed:  the report's own diet-card sentence, not the level it came from.",
+   "itemId": "l6-mc-why-second-column",
+   "meta": {
+    "id": "night-rounds-g6",
+    "subject": "ela"
+   },
+   "skin": {
+    "color": "#b45309",
+    "icon": "🐾",
+    "grandGoal": "Head Keeper"
+   },
+   "passages": [
+    {
+     "id": "p-l6-morning-report",
+     "title": "The Morning Report",
+     "text": "Whitlock files a morning report after any night that produces a work order.  This one ran to two full pages.  I am copying out the argument rather than the whole document, because the argument is the part that will still matter in a month.\n\nThe report opens with findings, and it keeps them separate from everything else on purpose.  Finding one: a willow limb came down across Fence Nine at post fourteen, and the post snapped at ground level.  The gap was found on rounds at 9:52 p.m. and closed with a temporary panel before eleven.  Finding two: the north service gate was found standing open at 10:05 p.m., and the eight o'clock pin check required by Bulletin 14 was never initialed.  The report says nothing whatsoever about how the pin came out, which is the sentence I would have been most tempted to write.\n\nThen the report makes an argument, and it makes that argument in three steps.\n\nThe first step is that the fence failure was not a failure of upkeep.  The report supports that step with the inspection line dated the twelfth of May, initialed by the keeper who walked the fence.  The second step is that the open gate was a failure of procedure, whatever the equipment did.  The report supports that step with the blank eight o'clock line rather than with anybody's opinion.  The third step ties the whole stack of paper together.  The sanctuary's defense is not that nothing went wrong, because something plainly did.  The defense is that everything which went wrong was written down by the people it went wrong for.\n\nThree changes follow from those steps, and each change names the record it repairs.  The pin check gains a second initial column, exactly like the supplement column on a diet card.  One signature can no longer cover two separate jobs.  The wind station grid gets filled in by whoever is walking rounds, rather than by whoever remembers at the end of the night.  The volunteer log gains a new line at the top of every entry, asking what you heard and when you wrote it down.\n\nThe last section is a letter, and Whitlock attached a copy of it.  The letter asks the Valley Register for a correction.  It names two claims, along with the record that contradicts each one.  Against the sentence about no inspection since March, it cites the inspection line from the twelfth of May.  Against the sentence about a High Wind Warning, it cites Bulletin 14, which quotes a Wind Advisory and explains the difference between the two.  The letter asks for nothing else.  It does not argue about the headline, and it never complains about the unnamed neighbor.\n\nThe report ends with a line I fully intend to steal.  A record is not a defense of the person who wrote it.  It is a promise to the person who reads it next.",
+     "figureIds": [
+      "fig-l6-morning-report"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l6-morning-report",
+     "caption": "The boxes run down the page from what the report found to the last step of the argument it builds on those findings.",
+     "alt": "Five labelled boxes stacked down the page, three of them joined to the box below by an arrow, with nothing drawn between the second and third boxes, and the bottom box drawn with rounded ends.",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-l6-morning-report",
+      "layout": "flow-tb",
+      "nodes": [
+       {
+        "id": "f1",
+        "label": "a willow limb came down across Fence Nine",
+        "shape": "box"
+       },
+       {
+        "id": "s1",
+        "label": "not a failure of upkeep",
+        "shape": "box"
+       },
+       {
+        "id": "f2",
+        "label": "the north service gate was found standing open",
+        "shape": "box"
+       },
+       {
+        "id": "s2",
+        "label": "a failure of procedure",
+        "shape": "box"
+       },
+       {
+        "id": "s3",
+        "label": "written down by the people it went wrong for",
+        "shape": "round"
+       }
+      ],
+      "edges": [
+       {
+        "from": "f1",
+        "to": "s1",
+        "style": "arrow"
+       },
+       {
+        "from": "f2",
+        "to": "s2",
+        "style": "arrow"
+       },
+       {
+        "from": "s2",
+        "to": "s3",
+        "style": "arrow"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Rounds",
+     "goal": "Walk the evening route, and learn why a keeper writes down what she sees.",
+     "itemIds": []
+    },
+    {
+     "name": "The Wrong Diet",
+     "goal": "Read a diet card, a vet memo, and an invoice until the otter's slow week makes sense.",
+     "itemIds": []
+    },
+    {
+     "name": "The Night Noise",
+     "goal": "Weigh three witness accounts against the night's own records.",
+     "itemIds": []
+    },
+    {
+     "name": "The Fence Gap",
+     "goal": "Separate storm damage from rumor using the maintenance file, the bulletin, and the newspaper.",
+     "itemIds": []
+    },
+    {
+     "name": "The Heron's Night",
+     "goal": "Follow the heron down out of the storm, and the rule that a wild animal is not ours.",
+     "itemIds": []
+    },
+    {
+     "name": "The Open Gate",
+     "goal": "Assemble the night of the storm from five records and one memory, and judge which sources hold.",
+     "itemIds": [
+      "l6-mc-why-second-column"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l6-mc-why-second-column",
+     "type": "mc",
+     "passageId": "p-l6-morning-report",
+     "targets": [
+      "c1-inf-4-reasoning",
+      "c4-2-integrate"
+     ],
+     "coachTopic": "inference-argument",
+     "dok": 3,
+     "stem": "Why does the pin check get a second initial column, of all the possible fixes?",
+     "choices": [
+      "Two keepers should be present whenever a gate is pinned",
+      "The old sheet had no line for eight o'clock at all",
+      "One signature was covering two separate jobs, exactly as on a diet card",
+      "Initials are easier to check than a written time"
+     ],
+     "key": 2,
+     "distractorRationale": {
+      "0": "The change is about two jobs rather than two people.  The report says one signature can no longer cover two separate jobs.",
+      "1": "The line was printed and simply left blank, which is what made the omission visible.",
+      "3": "The report never compares formats;  it identifies which record failed and repairs that record."
+     },
+     "explain": "The report borrows the fix from the supplement column on a diet card: when one initial can cover two jobs, the job people forget is the one that goes unrecorded.  Splitting the column makes the omission visible the same night rather than in a report afterward."
+    }
+   ]
+  },
+  {
+   "note": "\"Babylonian\" (level 2's word) in a level whose own text says \"Babylon\":  a word form, not another level.",
+   "itemId": "t1-ebsr-what-the-earliest-tablets-hold",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t1-clay-and-the-first-empires",
+     "title": "Recovered Entry: What the Clay Kept",
+     "text": "This entry answers a question every new Recorder asks.  Why does so much of the oldest record come from one flat, muddy plain?  The answer is clay.  Southern Mesopotamia had almost no stone and very little timber, but it had river mud without limit.  Scribes there wrote on wet clay tablets, and clay is stubborn.  A tablet dropped in a ruin simply waits.\n\nThe first cities on that plain were Sumerian.  Uruk and Ur each ran its own government, guarded its own walls, and honored its own patron god.  A stepped temple platform called a ziggurat stood at the center of many of them.  Villages had grown into cities, and cities needed records.  The earliest tablets are not poems or laws at all.  They are receipts, counting sacks of grain, jars of oil, and heads of livestock.  Others are school exercises, copied out by students learning the script, with the mistakes still sitting on them.\n\nThe tablets also show who stood where.  Kings and priests sat at the top, and merchants, artisans, and farmers came next.  Enslaved people sat at the bottom, many of them captives taken in war.\n\nThose same centuries produced tools the whole world later borrowed.  Potters shaped clay on a turning wheel, and heavy carts rolled on wheels too.  Farmers cut furrows with a plow instead of a digging stick, and sailors caught the wind with a sail.  Metalworkers mixed copper with tin to make bronze, which held an edge far better than either metal alone.\n\nNo city on that plain stayed free forever.  A ruler named Sargon conquered the Sumerian cities and ruled them from Akkad, his own capital, and many historians call what he built the first empire in the record.  Babylon rose later, under the king whose law code this file already holds, and Assyria rose to dominate the region later still.\n\nHere is the part the Office likes best.  Fire destroys most records, but fire bakes clay harder.  Palaces on that plain burned more than once, and the tablets stored inside came out of the ashes tougher than they went in.  The record survives partly because somebody's city was sacked.",
+     "figureIds": [
+      "fig-cuneiform-tablet"
+     ]
+    },
+    {
+     "id": "p-t2-surviving-without-temple",
+     "title": "Case File: The Shortest File Outlasts Its Own Temple",
+     "text": "This case file is the shortest one in the whole Office archive.  That is exactly what makes it worth checking closely.  A tradition without a king, a Temple, or a homeland of its own should have simply faded away.  It should have faded into the peoples around it.  The record shows it did not.\n\nThe first blow came when the Babylonian army conquered the kingdom of Judah.  The army destroyed the First Temple in Jerusalem and forced many Israelites into exile, far from their own land.  That exile is remembered as the diaspora.  It grew as more people scattered even further from home over later years.  Years later, Persian rulers let the exiles return and build a Second Temple on that same site.\n\nThe Second Temple stood for centuries.  Then a Roman army destroyed it too, during a revolt long after Israel's old kings had reigned.  This second loss should have finished the tradition for good.  Rome had already crushed the state.  Now the Temple, the tradition's central home, was gone too.\n\nThe record credits a teacher named Yohanan ben Zakkai with the turn that followed.  Tradition holds that he escaped the besieged city.  He got permission from Roman rulers to open a small school in a town called Yavneh.  Teaching there, without any Temple at all, he changed the tradition's whole center of gravity.  Priests had once made offerings in one sacred building.  Now study, prayer, and law took that place, and any group could carry those things with it, anywhere.\n\nThat shift is the real claim behind this file's short length, now fully checked.  The tradition outlived its own state and its own Temple.  It did not rebuild either one.  It proved instead that it had never truly leaned on them alone.",
+     "figureIds": [
+      "fig-temple-timeline"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-cuneiform-tablet",
+     "caption": "A clay tablet from southern Mesopotamia, pressed with early signs and seal marks.  It is an account of goods, not a poem and not a law.",
+     "alt": "A small squarish clay tablet, light brown, covered in rows of shallow impressed marks and round punched holes, with a seal impression across part of the surface."
+    },
+    {
+     "id": "fig-temple-timeline",
+     "caption": "The order of events this file states, from the First Temple to a school at Yavneh.  The passage gives no years, so none are shown.",
+     "alt": "A vertical timeline of five steps with no dates: the Babylonian army conquers Judah and destroys the First Temple; many Israelites are forced into exile, the diaspora; Persian rulers let the exiles return and build a Second Temple on the same site; the Second Temple stands for centuries and a Roman army destroys it during a revolt; Yohanan ben Zakkai opens a school at Yavneh and teaches with no Temple at all.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A vertical timeline headed \"ORDER OF EVENTS, AS THIS FILE STATES THEM\".",
+       "A line beneath the heading reads: the passage gives no years, so none are shown.  NO DATES APPEAR ANYWHERE ON THIS FIGURE.",
+       "Step 1: the Babylonian army conquers Judah and destroys the First Temple in Jerusalem.",
+       "Step 2: many Israelites are forced into exile far from their own land.  This is the diaspora.",
+       "Step 3: Persian rulers let the exiles return and build a Second Temple on that same site.",
+       "Step 4: the Second Temple stands for centuries, then a Roman army destroys it during a revolt.",
+       "Step 5: Yohanan ben Zakkai opens a school at Yavneh, and teaches with no Temple at all."
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": [
+      "t1-ebsr-what-the-earliest-tablets-hold"
+     ]
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": [
+      "t2-ms-surviving-the-losses"
+     ]
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": []
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": []
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t1-ebsr-what-the-earliest-tablets-hold",
+     "type": "ebsr",
+     "passageId": "p-t1-clay-and-the-first-empires",
+     "targets": [
+      "hist-t1-first-entry"
+     ],
+     "coachTopic": "evidence-first-entry",
+     "dok": 2,
+     "partA": {
+      "stem": "According to the recovered entry, what do the very earliest tablets from that plain actually record?",
+      "choices": [
+       "The laws handed down by the kings who ruled the Sumerian cities.",
+       "Everyday counts of goods: grain, oil, and livestock.",
+       "Plans for the stepped temple platforms the cities built.",
+       "Lists naming the patron god each city honored as its own."
+      ],
+      "key": 1
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Uruk and Ur each ran its own government, guarded its own walls, and honored its own patron god.",
+       "The earliest tablets are not poems or laws at all.",
+       "They are receipts, counting sacks of grain, jars of oil, and heads of livestock.",
+       "A stepped temple platform called a ziggurat stood at the center of many of them."
+      ],
+      "key": {
+       "0": 1,
+       "1": 2,
+       "2": 3,
+       "3": 0
+      }
+     },
+     "distractorRationale": {
+      "0": "The entry states plainly that the earliest tablets are not laws at all; a written law code arrives later in the record, in the Babylonian entry this file already holds.",
+      "2": "The stepped temple platform, the ziggurat, is in the entry and stood at the center of many of those cities, but the entry never describes a tablet holding a plan for one; the earliest tablets it names count grain, oil, and livestock.",
+      "3": "Each city did honor its own patron god, and the entry says so, but it never describes a tablet listing those gods; the tablets it describes count goods."
+     },
+     "explain": "The entry sets up the surprise on purpose: the earliest tablets are not poems or laws, they are receipts counting sacks of grain, jars of oil, and heads of livestock.  Each wrong choice borrows something else the entry mentions, a law code, a ziggurat, or patron gods, and puts it in the place the receipts actually hold."
+    },
+    {
+     "id": "t2-ms-surviving-the-losses",
+     "type": "ms",
+     "passageId": "p-t2-surviving-without-temple",
+     "targets": [
+      "hist-t2-hebrews"
+     ],
+     "coachTopic": "evidence-shortest-file",
+     "dok": 2,
+     "stem": "Choose the three details that are true, according to the case file on how the tradition survived.",
+     "choices": [
+      "The tradition rebuilt the Temple a third time to survive.",
+      "The Babylonian army destroyed the First Temple and forced many Israelites into exile.",
+      "A Roman army later destroyed the Second Temple during a revolt.",
+      "The diaspora describes Israelites returning to a single unified kingdom.",
+      "Yohanan ben Zakkai escaped the besieged city and opened a school at Yavneh."
+     ],
+     "key": [
+      1,
+      2,
+      4
+     ],
+     "distractorRationale": {
+      "0": "The passage says the tradition did not rebuild either its state or its Temple, and it names no third Temple anywhere.",
+      "3": "The diaspora is the scattering of a people far from their own homeland, the opposite of returning to one unified kingdom."
+     },
+     "explain": "The three correct details trace the file's own sequence: the Babylonian destruction and exile, the Second Temple's later Roman destruction, and Yohanan ben Zakkai's school at Yavneh.  The two wrong choices each invert what the passage actually says about rebuilding and about what the diaspora means."
+    }
+   ]
+  },
+  {
+   "note": "\"Maurya names an earlier Indian empire in a different file\":  level 4's own file on Ashoka.",
+   "itemId": "t4-cloze-gupta",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t4-visitor-and-the-traveling-number",
+     "title": "Case File: A Visitor's Notes and a Number That Traveled",
+     "text": "Two pieces of evidence anchor this entry.  One is a traveler's notebook.  The other is a number.\n\nRulers of the Gupta family united much of northern India starting around three hundred twenty CE.  Later writers often call the centuries that followed a golden age.  The Office prefers a plainer description.  Courts paid for scholars, and the work those scholars did still turns up in daily life around the world.\n\nA scholar named Aryabhata, born in four hundred seventy-six CE, wrote a short book on astronomy and mathematics.  He worked out a value for the ratio between a circle's rim and the line straight across it, close enough to stay useful for centuries.  He also argued that the earth turns on its own axis, which is why the stars appear to move across the sky.  Other scholars in the same tradition wrote on medicine and on the paths of the planets.\n\nThe number system matters more than any single scholar.  Indian mathematicians wrote with ten symbols and gave each one a value based on where it sat.  A symbol for zero held the empty place.  Arabic-speaking scholars took up the system and carried it west.  Europe learned it from them and called the symbols Arabic numerals, which is why much of the world still calls them that.  The name credits the messenger and skips the sender.  The Office files the correction and moves on.\n\nNow the notebook.  A Chinese Buddhist monk named Faxian walked overland to India around four hundred CE, stayed for years, and wrote down what he saw.  He was not writing to flatter an Indian king, because he did not serve one.  He came for Buddhist texts and described everything else along the way.  An outside witness with no stake in a ruler's reputation is rare in this record, and the Office weighs him accordingly.\n\nTwo long poems, the Mahabharata and the Ramayana, were also being copied and recited through these centuries.  Tradition names an author for each.  Both poems grew over so many centuries that the Office files those names as tradition rather than as record."
+    }
+   ],
+   "figures": [],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": []
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": []
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": [
+      "t4-cloze-gupta"
+     ]
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": []
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t4-cloze-gupta",
+     "type": "cloze",
+     "passageId": "p-t4-visitor-and-the-traveling-number",
+     "targets": [
+      "hist-t4-india"
+     ],
+     "coachTopic": "evidence-quiet-record",
+     "dok": 2,
+     "stem": "Rulers of the {{0}} family united much of northern India starting around three hundred twenty CE.",
+     "blanks": [
+      {
+       "choices": [
+        "Maurya",
+        "Chola",
+        "Gupta"
+       ],
+       "key": 2,
+       "distractorRationale": {
+        "0": "The Maurya Empire is the earlier Indian state the record's file on Ashoka describes, the biggest the subcontinent had then seen; this entry covers a family that united northern India centuries afterward.",
+        "1": "The Chola family is not named anywhere in this entry.  The entry credits the Gupta family with uniting much of northern India."
+       }
+      }
+     ],
+     "quote": "Rulers of the Gupta family united much of northern India starting around three hundred twenty CE.",
+     "explain": "The case file credits the Gupta family with uniting much of northern India from around that year, the era whose scholars the rest of the entry describes.  Maurya names an earlier Indian empire in a different file, and Chola appears nowhere in the entry, so neither restores this sentence."
+    }
+   ]
+  },
+  {
+   "note": "\"the two schools the Office's earlier entry on China already sets side by side\":  level 5's own first file.",
+   "itemId": "t5-cloze-legalism",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "skin": {
+    "color": "#8b5e34",
+    "icon": "🗂️",
+    "grandGoal": "Senior Recorder"
+   },
+   "passages": [
+    {
+     "id": "p-t5-third-school-and-the-paper",
+     "title": "Recovered Entry: The Third School, and the Paper That Followed",
+     "text": "The Office's earlier entry on China sets two schools of thought side by side.  Neither of them is the one the Qin state actually ran on.  This entry files the third.\n\nThe school the Qin ran on is called Legalism.  It taught that people behave well only when rules are clear, rewards are certain, and punishments are heavy.  Virtue, in its view, was too slow and too rare to hold a state together.  It held that law should fall on everyone the same way, whatever a person's rank.  A thinker named Han Fei set the argument out most fully.  Qin had run on these ideas long before him.  A minister named Shang Yang rebuilt the state around them, generations before the first emperor.  Another minister, Li Si, later carried them into the unified empire.  The Qin's harsh reputation follows from those choices.  What the Qin then did to rival texts is already filed, on the strength of records written later.\n\nThe Han dynasty that came next put Confucian teaching at the center.  Legalist habits did not leave with the Qin, though.  Han law kept much of the same machinery, and later dynasties kept it too.\n\nHan workshops also solved a problem the Office cares about more than most.  Before paper, Chinese writers used strips of bamboo tied into bundles, which were heavy.  They also used silk, which was costly.  A court official named Cai Lun was credited in one hundred five CE with a better method, using bark, rag, and worn-out fishing net beaten into pulp.  Scraps of older paper have turned up since, so the craft was already in use before he improved it.  Cheap writing material changes what gets written down and what gets copied.  Everything after this point in the Chinese record is thicker because of it.\n\nOther Han work survives in the same practical spirit.  Han histories credit an official named Zhang Heng with an instrument built in one hundred thirty-two CE.  Those histories say it registered a distant earth tremor and showed which direction it came from.  Han doctors wrote medical texts that were still being studied centuries later.\n\nThe dynasty itself came apart around two hundred twenty CE, worn down by revolts, court struggles, and generals who stopped listening.  China broke into rival states again."
+    }
+   ],
+   "figures": [],
+   "levels": [
+    {
+     "name": "First Entry",
+     "goal": "Open the record's oldest case: migration, river geography, and Hammurabi's code.",
+     "itemIds": []
+    },
+    {
+     "name": "Shortest File",
+     "goal": "Verify how a tradition survived losing its own Temple and its own state.",
+     "itemIds": []
+    },
+    {
+     "name": "Two Accounts",
+     "goal": "Document two honestly conflicting accounts of the same war, and explain the gap.",
+     "itemIds": []
+    },
+    {
+     "name": "The Quiet Record",
+     "goal": "Work around a script nobody can read, and weigh the evidence for a civilization's decline.",
+     "itemIds": []
+    },
+    {
+     "name": "What Was Burned",
+     "goal": "Trace two schools of thought through a war-torn era, straight into a burned record.",
+     "itemIds": [
+      "t5-cloze-legalism"
+     ]
+    },
+    {
+     "name": "Closing the File",
+     "goal": "Close the case on Rome:  how a republic became an empire, and what the record can file about a new faith and about the empire's end.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t5-cloze-legalism",
+     "type": "cloze",
+     "passageId": "p-t5-third-school-and-the-paper",
+     "targets": [
+      "hist-t5-china"
+     ],
+     "coachTopic": "evidence-what-was-burned",
+     "dok": 2,
+     "stem": "The school the Qin ran on is called {{0}}.",
+     "blanks": [
+      {
+       "choices": [
+        "Daoism",
+        "Legalism",
+        "Confucianism"
+       ],
+       "key": 1,
+       "distractorRationale": {
+        "0": "Daoism is the path tied to a teacher known as Laozi, which held that people should follow the Dao without forcing events; it is one of the two schools the earlier entry already covers.",
+        "2": "Confucian teaching is the other school the earlier entry covers, and the Han later put it at the center of government; the Qin treated it as a threat rather than running on it."
+       }
+      }
+     ],
+     "quote": "The school the Qin ran on is called Legalism.",
+     "explain": "This entry exists to file the third school, the one the Qin state actually ran on, and names it Legalism.  Daoism and Confucian teaching are the two schools the Office's earlier entry on China already sets side by side, which is exactly why neither can fill this blank."
+    }
+   ]
+  },
+  {
+   "note": "I4 pointer, a passage talking about itself:  \"unrelated details from earlier in the log\".",
+   "itemId": "t2-ebsr-why-send-an-operative",
+   "meta": {
+    "id": "outpost-protocol-g6",
+    "subject": "sci"
+   },
+   "skin": {
+    "color": "#1a8f5e",
+    "icon": "🛰️",
+    "grandGoal": "Field Director"
+   },
+   "passages": [
+    {
+     "id": "p-meridian-status-log",
+     "title": "Status Log: Meridian Dome, Days Ninety to One Hundred Eighteen",
+     "text": "Meridian Dome has run as a sealed system for one hundred eighteen days, its longest run.  Nothing enters and nothing leaves, though sunlight gets in and data goes out each morning.  Dr. Renata Kessler is the dome's systems lead.  She files this status log every four weeks.  Network Command can track the numbers without a crisis.\n\nOn day ninety, the dome's air held steady, and carbon dioxide read four hundred ten parts per million, or ppm.  Oxygen sat near twenty and a half percent.  Both numbers matched every reading since the seal closed, and the water subsystem was saving ninety-six percent of all the crew used.  The food modules were producing enough to cover every meal, with a small surplus.\n\nBy day one hundred four, the numbers had shifted.  Carbon dioxide had climbed to four hundred thirty ppm.  Oxygen had slipped to twenty percent even.  Neither shift was large enough to worry the crew, and Dr. Kessler's log calls it \"within normal drift.\"  Her notes say systems wander before they settle.\n\nBy day one hundred eighteen, the drift had not settled.  Carbon dioxide now reads four hundred fifty-two ppm.  Oxygen has fallen to nineteen and a half percent.  Water reclamation has held steady near ninety-five percent.  The food modules are still meeting every meal.  Neither of those subsystems appears to be the source.  One subsystem keeps drawing her attention: the algae bioreactor tucked beneath the food modules, the dome's main source of extra oxygen.  Its daily readings have gone low, though nothing about its gear has failed.\n\nDr. Kessler's log closes with one line, asking Network Command to send an operative to walk the dome.  Sensor readings show a number falling, but they cannot say why.  Four straight weeks of drift have passed, and why is the question the dome needs answered.",
+     "figureIds": [
+      "fig-dome-drift"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-dome-drift",
+     "caption": "Meridian Dome's sealed air, day 90 to day 118: carbon dioxide climbing while oxygen falls, plotted on two separate scales.",
+     "alt": "Two stacked line charts share the x-axis \"day.\" The top chart plots carbon dioxide in parts per million, climbing from 410 on day 90, to 430 on day 104, to 452 on day 118. The bottom chart plots oxygen in percent, falling from 20.5 on day 90, to 20.0 on day 104, to 19.5 on day 118.",
+     "dataTable": {
+      "panels": [
+       {
+        "type": "line",
+        "yLabel": "CO2 (ppm)",
+        "series": [
+         {
+          "label": "CO2",
+          "points": [
+           [
+            90,
+            410
+           ],
+           [
+            104,
+            430
+           ],
+           [
+            118,
+            452
+           ]
+          ]
+         }
+        ]
+       },
+       {
+        "type": "line",
+        "yLabel": "O2 (percent)",
+        "series": [
+         {
+          "label": "O2",
+          "points": [
+           [
+            90,
+            20.5
+           ],
+           [
+            104,
+            20
+           ],
+           [
+            118,
+            19.5
+           ]
+          ]
+         }
+        ]
+       }
+      ],
+      "xLabel": "day",
+      "notes": [
+       "Water reclamation held steady near 95 to 96 percent across the same days."
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "New Posting",
+     "goal": "Learn to read a system: parts, subsystems, and the ripples between them.",
+     "itemIds": []
+    },
+    {
+     "name": "The Sealed Station",
+     "goal": "Diagnose why Meridian Dome's air is drifting before supplies run out.",
+     "itemIds": [
+      "t2-ebsr-why-send-an-operative"
+     ]
+    },
+    {
+     "name": "Storm Front",
+     "goal": "Read the incoming data fast enough to warn the coast before the front arrives.",
+     "itemIds": []
+    },
+    {
+     "name": "The Long Pattern",
+     "goal": "Explain why two outposts at the same latitude report very different climates.",
+     "itemIds": []
+    },
+    {
+     "name": "Breaking Point",
+     "goal": "Trace every local mystery back to the one planetary pattern underneath it.",
+     "itemIds": []
+    },
+    {
+     "name": "Final Deployment",
+     "goal": "Design and defend the Network's official response plan, the final field review.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t2-ebsr-why-send-an-operative",
+     "type": "ebsr",
+     "passageId": "p-meridian-status-log",
+     "targets": [
+      "sci-t2-systems-subsystems"
+     ],
+     "coachTopic": "evidence-sealed-station",
+     "dok": 2,
+     "partA": {
+      "stem": "Why does Dr. Kessler's log ask Network Command to send an operative in person?",
+      "choices": [
+       "Instrument readings can show that a number is falling but cannot explain why it is falling.",
+       "The dome's instruments had stopped sending any readings at all to Network Command.",
+       "The crew on board the dome had asked to be replaced.",
+       "Network Command ordered a routine inspection every four weeks, and one was now due."
+      ],
+      "key": 0
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Nothing enters and nothing leaves, though sunlight gets in and data goes out each morning.",
+       "She files this status log every four weeks.",
+       "Sensor readings show a number falling, but they cannot say why.",
+       "Neither shift was large enough to worry the crew, and Dr. Kessler's log calls it \"within normal drift.\""
+      ],
+      "key": {
+       "0": 2,
+       "1": 0,
+       "2": 3,
+       "3": 1
+      }
+     },
+     "distractorRationale": {
+      "1": "This sentence says data goes out every morning, so the instruments never stopped sending readings.",
+      "2": "This sentence is about an earlier, smaller shift the crew was not worried about, not about why an operative gets sent now.",
+      "3": "This sentence describes how often Dr. Kessler files her regular log, a routine schedule, not the specific reason she is now asking for an operative."
+     },
+     "explain": "Dr. Kessler's log gives the reason directly: sensor readings can show a number falling but cannot explain why, and after four weeks of the same unexplained drift, that is exactly the question an operative walking the dome in person can answer.  The other choices mix up unrelated details from earlier in the log."
+    }
+   ]
+  },
+  {
+   "note": "I4 pointer, a passage talking about itself:  \"looking back afterwards\".",
+   "itemId": "l3-ebsr-why-not-abort",
+   "meta": {
+    "id": "ela-g6-spy",
+    "subject": "ela"
+   },
+   "skin": {
+    "color": "#c8102e",
+    "icon": "🕵️",
+    "grandGoal": "Signals Officer"
+   },
+   "passages": [
+    {
+     "id": "p-relay-room",
+     "title": "The Van on Halloway Road",
+     "text": "My job on the Halloway exercise is the least interesting one in the building, which Marchetti says is how you can tell it matters.  I sit in a parked van with a radio, a stopwatch, and a paper map, and I write down times.  Jonah goes in at ten fourteen.  The rule is that he checks in at ten twenty, and if nothing has come through by ten twenty-two I call the whole exercise off.\n\nAt ten twenty there is nothing on the radio but the hiss the set makes when it is working and nobody is talking.  That hiss is the only comfort in this job, because silence with no hiss underneath it means the set is dead and I am learning nothing at all.\n\nI can see the front doors from where I am parked, and I can see roughly four feet past them, and that is the whole of my view.  I watch those doors the way you watch a kettle that is refusing to boil.  A man in a green jacket goes in and does not come out.  Two women come out with a folded stroller between them.  Nobody who goes through that door is Jonah coming back out, which is the only solid fact I actually have.\n\nAt ten twenty-one I put my thumb on the transmit key and then take it off again.\n\nHere is the thing that nobody tells you about being the person holding the abort switch.  Calling it off is not the safe choice, whatever it feels like from inside a van.  It only feels safe because if I call it and I am wrong, the exercise dies quietly, everybody goes home early, and nothing bad ever happens to me.  If I do not call it and I am wrong, that is a very different sort of afternoon.\n\nSo I do the thing Marchetti drilled into the whole group back in September.  I say out loud what I actually know, in order, like reading down a list.  Jonah went in at ten fourteen and the lobby has a front desk.  A desk means a person, a person means questions, and questions take time that our plan never allowed for.  Nothing I can see from here says that he is in trouble.  Everything I can see from here says that he is standing somewhere talking to somebody.\n\nAt ten twenty-two and eleven seconds, which is late, the radio clicks twice.  Two clicks means inside, moving, no help needed.  I write the time down, and my hand is steadier than it was thirty seconds ago.\n\nI would like to say that I was calm about all of it.  What is true is that I was one second away from a decision I would have had to defend for the rest of the year.  The only reason I did not make it is that I had a list and I read my way down it.  Jonah will come out at ten forty-one and tell me the whole thing was easy.  I have decided in advance to let him.",
+     "figureIds": [
+      "fig-l3-relay-room"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l3-relay-room",
+     "caption": "The thumb goes on the transmit key at ten twenty-one, just ahead of the ten twenty-two moment when the rule says to call the whole exercise off.",
+     "alt": "A timeline in two lanes: the upper lane, The rule, carries markers at ten twenty and ten twenty-two, while the lower lane, I write down times, carries four markers, at ten fourteen, ten twenty, ten twenty-one, and ten twenty-two and eleven seconds, its ten twenty marker standing on the same vertical as the rule's.",
+     "dataTable": {
+      "type": "timeline",
+      "sourcePassageId": "p-relay-room",
+      "title": "The Halloway exercise",
+      "tracks": [
+       "The rule",
+       "I write down times"
+      ],
+      "events": [
+       {
+        "t": "ten fourteen",
+        "label": "Jonah goes in",
+        "track": "I write down times"
+       },
+       {
+        "t": "ten twenty",
+        "label": "he checks in",
+        "track": "The rule"
+       },
+       {
+        "t": "ten twenty",
+        "label": "nothing on the radio but the hiss",
+        "track": "I write down times"
+       },
+       {
+        "t": "ten twenty-one",
+        "label": "my thumb on the transmit key",
+        "track": "I write down times"
+       },
+       {
+        "t": "ten twenty-two",
+        "label": "I call the whole exercise off",
+        "track": "The rule"
+       },
+       {
+        "t": "ten twenty-two and eleven seconds",
+        "label": "the radio clicks twice",
+        "track": "I write down times"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "Tradecraft",
+     "goal": "Find the detail, then find the line that proves it.",
+     "itemIds": []
+    },
+    {
+     "name": "The Briefing",
+     "goal": "Read the shape of an article, and the words it defines as it goes.",
+     "itemIds": []
+    },
+    {
+     "name": "Cover Story",
+     "goal": "Work out what a narrator knows, and separate it from what they guess.",
+     "itemIds": [
+      "l3-ebsr-why-not-abort"
+     ]
+    },
+    {
+     "name": "Source Check",
+     "goal": "Two sources disagree.  Find the one carrying a tell, and say what the tell costs it.",
+     "itemIds": []
+    },
+    {
+     "name": "Cross-Reference",
+     "goal": "Put two sources side by side, then quote the line that carries your point.",
+     "itemIds": []
+    },
+    {
+     "name": "Exfiltration",
+     "goal": "Everything at once: what a text is about, what its words are doing, how it is built, and whose voice you are in.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "l3-ebsr-why-not-abort",
+     "type": "ebsr",
+     "passageId": "p-relay-room",
+     "targets": [
+      "c1-lit-4-reasoning"
+     ],
+     "coachTopic": "inference-evidence",
+     "dok": 3,
+     "partA": {
+      "stem": "Why does the narrator decide not to call the exercise off at ten twenty-one?",
+      "choices": [
+       "The narrator is afraid of having to defend the decision for the rest of the year.",
+       "The rule allows the narrator to wait until ten twenty-two before the call has to be made.",
+       "Nothing the narrator can see says trouble, and the desk explains the delay.",
+       "The two clicks come through on the radio and show the narrator that Jonah is fine."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Nothing I can see from here says that he is in trouble.",
+       "What is true is that I was one second away from a decision I would have had to defend for the rest of the year.",
+       "At ten twenty-two and eleven seconds, which is late, the radio clicks twice.",
+       "The rule is that he checks in at ten twenty, and if nothing has come through by ten twenty-two I call the whole exercise off."
+      ],
+      "key": {
+       "0": 1,
+       "1": 3,
+       "2": 0,
+       "3": 2
+      }
+     },
+     "distractorRationale": {
+      "0": "That sentence is about the decision NOT made, looking back afterwards.  Fear is in the passage, and the narrator names it as a reason calling it off feels safe, which is the opposite of what stops them.",
+      "1": "The rule sets the deadline; it does not make the decision.  The narrator is one second from calling it and stops for a reason the rule says nothing about.",
+      "3": "Check the clock.  The clicks land at ten twenty-two and eleven seconds, after the moment the question asks about.  Evidence that arrives later cannot be the reason for an earlier decision."
+     },
+     "explain": "The decision turns on what the narrator can and cannot see.  Nothing visible says trouble, and a front desk explains the delay perfectly well.  The rule, the fear, and the two clicks are all real, and the clicks in particular arrive after the decision had already been made."
+    }
+   ]
+  }
+ ]
+}

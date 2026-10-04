@@ -1,0 +1,1694 @@
+{
+ "_about": "I4 controls for the three lowercase story objects in tests/sweep-cross-level.js SOURCE_NAMES (26-1004).  mustFire:  the completion audit's wrong answers, each naming an object only another level's story carries:  \"the maintenance binder\" at Night Rounds level 6 (levels 4 and 5 carry it), \"hungriest stretch\" at Outpost level 6 (level 5's phrase), and \"the dome\" at Outpost level 1 (level 2's station).  mustStayClean:  each one fixed, and Night Rounds level 5's own \"maintenance binder\", which passes only because the name lists both levels' passages.  Slices as in the feedback fixture, checked against the whole pack before they were written.",
+ "source": "packs/*.json at 2733c3e, with tasks/cross-level-echo-26-1004/batches/p4-feedback-*.json as the fixes",
+ "mustFire": [
+  {
+   "note": "Night Rounds level 6 offers \"The maintenance binder is closed to anyone outside the sanctuary\", a file only levels 4 and 5 carry.",
+   "itemId": "l6-ms-three-changes",
+   "meta": {
+    "id": "night-rounds-g6",
+    "subject": "ela"
+   },
+   "skin": {
+    "color": "#b45309",
+    "icon": "🐾",
+    "grandGoal": "Head Keeper"
+   },
+   "passages": [
+    {
+     "id": "p-l6-morning-report",
+     "title": "The Morning Report",
+     "text": "Whitlock files a morning report after any night that produces a work order.  This one ran to two full pages.  I am copying out the argument rather than the whole document, because the argument is the part that will still matter in a month.\n\nThe report opens with findings, and it keeps them separate from everything else on purpose.  Finding one: a willow limb came down across Fence Nine at post fourteen, and the post snapped at ground level.  The gap was found on rounds at 9:52 p.m. and closed with a temporary panel before eleven.  Finding two: the north service gate was found standing open at 10:05 p.m., and the eight o'clock pin check required by Bulletin 14 was never initialed.  The report says nothing whatsoever about how the pin came out, which is the sentence I would have been most tempted to write.\n\nThen the report makes an argument, and it makes that argument in three steps.\n\nThe first step is that the fence failure was not a failure of upkeep.  The report supports that step with the inspection line dated the twelfth of May, initialed by the keeper who walked the fence.  The second step is that the open gate was a failure of procedure, whatever the equipment did.  The report supports that step with the blank eight o'clock line rather than with anybody's opinion.  The third step ties the whole stack of paper together.  The sanctuary's defense is not that nothing went wrong, because something plainly did.  The defense is that everything which went wrong was written down by the people it went wrong for.\n\nThree changes follow from those steps, and each change names the record it repairs.  The pin check gains a second initial column, exactly like the supplement column on a diet card.  One signature can no longer cover two separate jobs.  The wind station grid gets filled in by whoever is walking rounds, rather than by whoever remembers at the end of the night.  The volunteer log gains a new line at the top of every entry, asking what you heard and when you wrote it down.\n\nThe last section is a letter, and Whitlock attached a copy of it.  The letter asks the Valley Register for a correction.  It names two claims, along with the record that contradicts each one.  Against the sentence about no inspection since March, it cites the inspection line from the twelfth of May.  Against the sentence about a High Wind Warning, it cites Bulletin 14, which quotes a Wind Advisory and explains the difference between the two.  The letter asks for nothing else.  It does not argue about the headline, and it never complains about the unnamed neighbor.\n\nThe report ends with a line I fully intend to steal.  A record is not a defense of the person who wrote it.  It is a promise to the person who reads it next.",
+     "figureIds": [
+      "fig-l6-morning-report"
+     ]
+    },
+    {
+     "id": "p-l4-maintenance-file-fence-nine",
+     "title": "The Maintenance File on Fence Nine",
+     "text": "Fence Nine is the woven-wire fence running along the north pasture, between the pasture and the creek.  It measures three hundred and forty feet end to end.  The maintenance binder gives every fence on the property its own section, and the section for Fence Nine is the thickest one in the book.  I copied out the last two months of it after the storm, together with the two work orders that follow.\n\nThe section opens with the inspection schedule, which is our own rule and nobody else's.  Every fence on the perimeter is walked end to end once every two weeks.  The keeper who walks it dates the line and initials it.  An inspection that was never initialed did not happen, as far as this binder is concerned.\n\nThe two most recent inspection lines read as follows.  On the twenty-eighth of April, Ray Bettencourt walked Fence Nine and tightened the mesh at panel six.  On the twelfth of May, Ray Bettencourt walked the same fence again and replaced two loose staples.  His line ends with the words all posts sound.\n\nWork orders are kept separately from inspections, and this section contains two of them.  Work order 214, dated the third of April, covers the north service gate, whose hinge was rehung and whose latch pin was replaced.  Work order 318 was opened at 10:30 p.m. on the twenty-sixth of May, during the storm itself, and it reads: post fourteen snapped at ground level, mesh torn back on the creek side, temporary panel set, permanent repair to follow.\n\nThe discovery line is the one the newspaper never asked about.  It reads: gap in Fence Nine found during night rounds at 9:52 p.m. on the twenty-sixth of May by junior keeper Mara Delgado, reported by radio to Bo Ferris.  Underneath it, Bettencourt added a note the next morning.  A willow limb roughly fifteen feet long was lying across the fence line at post fourteen.  The break in the limb matches the big willow on the creek bank.\n\nEvery line in this section carries a date and a set of initials.  That is the entire point of keeping it.  A binder cannot tell you what actually happened out there in the dark.  It can tell you what somebody wrote down at the time, and who was willing to sign a name beside it.",
+     "figureIds": [
+      "fig-l4-fence-nine"
+     ]
+    },
+    {
+     "id": "p-l5-rehabbers-van",
+     "title": "The Rehabber's Van",
+     "text": "Thursday, 7:15 in the evening, under a sky the storm had already turned the colour of slate, and the wind was loud enough that I had to key my radio twice.\n\nI found her from the boardwalk, thirty feet out in the shallow water, standing exactly where no heron in her right mind stands during a storm.  Great blue heron, adult, one wing carried wrong.  She had her bill pointed straight up when my light reached her, a posture I have since read about in bitterns, and which our field guide says herons will also take when they hold still.\n\nHere is what I did not do.  I never waded out to her, I never threw a towel over her, and I never attempted to carry her anywhere at all.  Whitlock's rule about wild animals is one sentence long, and every keeper here can recite it from memory.  A wild animal that lands on our property is not our animal.\n\nWe are not licensed to treat wild birds.  The sanctuary cares for the residents in its files and for nobody else, and a heron off the river belongs to a different set of rules than Rana does.  My job was to keep my distance, keep her in sight, and get somebody on the telephone whose license covers exactly this.\n\nThat somebody is Alva Reyes, a licensed wildlife rehabilitator who lives forty minutes from here and has taken birds from us before.  Whitlock reached her by telephone at 7:22.  Alva asked four questions, and not one of them was a question I had expected.  Was the bird standing, and was it standing in water.  How close had anybody approached it, and how long ago.\n\nThen she said she was on her way, and she added one more thing that I wrote down word for word.  Do not chase her.  A bird that runs from you in a storm is a bird with a second injury.\n\nHer van pulled up to the maintenance gate a little after eight, in rain that was coming down flat.  She works quietly, and she arrived carrying a towel, a crate lined with something soft, and a way of moving that made her appear considerably slower than she actually was.  She came at the heron from the side rather than the front, talking the whole time in a low voice that had nothing to do with words.  It took her under a minute.  The bill goes into the towel first, which she told me afterward is the part nobody forgets, because a heron's bill is a spear and it is aimed at your face.\n\nAt the van she filled out a transfer slip on the hood, in the rain, with the crate already loaded, and the time she wrote on it was 8:40.  Time, place, species, condition, the name of the keeper who found the bird, and both signatures.  Whitlock signed it and Alva signed it, and I carried the carbon copy back to the maintenance binder.\n\nThat slip is the last thing our file will ever say about this bird.  She is not our animal, and I know perfectly well that this is the correct answer.  I stood at the gate anyway, in the wind, until the taillights were gone.",
+     "figureIds": [
+      "fig-l5-transfer-slip"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l6-morning-report",
+     "caption": "The boxes run down the page from what the report found to the last step of the argument it builds on those findings.",
+     "alt": "Five labelled boxes stacked down the page, three of them joined to the box below by an arrow, with nothing drawn between the second and third boxes, and the bottom box drawn with rounded ends.",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-l6-morning-report",
+      "layout": "flow-tb",
+      "nodes": [
+       {
+        "id": "f1",
+        "label": "a willow limb came down across Fence Nine",
+        "shape": "box"
+       },
+       {
+        "id": "s1",
+        "label": "not a failure of upkeep",
+        "shape": "box"
+       },
+       {
+        "id": "f2",
+        "label": "the north service gate was found standing open",
+        "shape": "box"
+       },
+       {
+        "id": "s2",
+        "label": "a failure of procedure",
+        "shape": "box"
+       },
+       {
+        "id": "s3",
+        "label": "written down by the people it went wrong for",
+        "shape": "round"
+       }
+      ],
+      "edges": [
+       {
+        "from": "f1",
+        "to": "s1",
+        "style": "arrow"
+       },
+       {
+        "from": "f2",
+        "to": "s2",
+        "style": "arrow"
+       },
+       {
+        "from": "s2",
+        "to": "s3",
+        "style": "arrow"
+       }
+      ]
+     }
+    },
+    {
+     "id": "fig-l4-fence-nine",
+     "caption": "A plan of Fence Nine between the north pasture and the creek, marking panel six, post fourteen, and the willow whose limb came down on the fence line.",
+     "alt": "A plan diagram in which a labelled box for the fence sits between a box for the pasture and a box for the creek, with connectors running out to two marked points along the run and up from a labelled willow to one of them.",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-l4-maintenance-file-fence-nine",
+      "layout": "plan",
+      "nodes": [
+       {
+        "id": "pasture",
+        "label": "the north pasture",
+        "shape": "box",
+        "x": 58,
+        "y": 8
+       },
+       {
+        "id": "panel",
+        "label": "panel six",
+        "shape": "round",
+        "x": 12,
+        "y": 46
+       },
+       {
+        "id": "fence",
+        "label": "Fence Nine",
+        "shape": "box",
+        "x": 46,
+        "y": 46
+       },
+       {
+        "id": "post",
+        "label": "post fourteen",
+        "shape": "round",
+        "x": 80,
+        "y": 46
+       },
+       {
+        "id": "creek",
+        "label": "the creek",
+        "shape": "box",
+        "x": 20,
+        "y": 86
+       },
+       {
+        "id": "willow",
+        "label": "big willow",
+        "shape": "round",
+        "x": 82,
+        "y": 86
+       }
+      ],
+      "edges": [
+       {
+        "from": "pasture",
+        "to": "fence",
+        "style": "line"
+       },
+       {
+        "from": "panel",
+        "to": "fence",
+        "style": "line",
+        "label": "the twenty-eighth of April"
+       },
+       {
+        "from": "fence",
+        "to": "post",
+        "style": "line"
+       },
+       {
+        "from": "fence",
+        "to": "creek",
+        "style": "line"
+       },
+       {
+        "from": "willow",
+        "to": "post",
+        "style": "arrow",
+        "label": "the fence line"
+       }
+      ]
+     }
+    },
+    {
+     "id": "fig-l5-transfer-slip",
+     "caption": "The slip lists the time, the place, the bird, and both signatures, and it is the last thing the file will ever say about this heron.",
+     "alt": "A transfer slip whose rows pair \"Time\" with 8:40, \"place\" with \"thirty feet out in the shallow water\", \"species\" with \"Great blue heron, adult\", and \"condition\" with \"one wing carried wrong\", then a fifth row labelled \"the name of the keeper who found the bird\" whose field is left empty, a signature block headed \"both signatures\" holding Whitlock and Alva Reyes, and a slanted stamp reading \"carbon copy\".",
+     "dataTable": {
+      "type": "facsimile",
+      "sourcePassageId": "p-l5-rehabbers-van",
+      "docKind": "status-log",
+      "title": "transfer slip",
+      "header": [
+       {
+        "label": "Time",
+        "value": "8:40"
+       },
+       {
+        "label": "place",
+        "value": "thirty feet out in the shallow water"
+       },
+       {
+        "label": "species",
+        "value": "Great blue heron, adult"
+       },
+       {
+        "label": "condition",
+        "value": "one wing carried wrong"
+       }
+      ],
+      "columns": [
+       {
+        "heading": "both signatures",
+        "rows": [
+         "Whitlock",
+         "Alva Reyes"
+        ]
+       }
+      ],
+      "stamp": "carbon copy",
+      "lines": [
+       {
+        "text": "the name of the keeper who found the bird",
+        "emphasis": "blank"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Rounds",
+     "goal": "Walk the evening route, and learn why a keeper writes down what she sees.",
+     "itemIds": []
+    },
+    {
+     "name": "The Wrong Diet",
+     "goal": "Read a diet card, a vet memo, and an invoice until the otter's slow week makes sense.",
+     "itemIds": []
+    },
+    {
+     "name": "The Night Noise",
+     "goal": "Weigh three witness accounts against the night's own records.",
+     "itemIds": []
+    },
+    {
+     "name": "The Fence Gap",
+     "goal": "Separate storm damage from rumor using the maintenance file, the bulletin, and the newspaper.",
+     "itemIds": [
+      "l4-ebsr-inspection-line"
+     ]
+    },
+    {
+     "name": "The Heron's Night",
+     "goal": "Follow the heron down out of the storm, and the rule that a wild animal is not ours.",
+     "itemIds": [
+      "l5-ms-what-she-did-not-do"
+     ]
+    },
+    {
+     "name": "The Open Gate",
+     "goal": "Assemble the night of the storm from five records and one memory, and judge which sources hold.",
+     "itemIds": [
+      "l6-ms-three-changes"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l6-ms-three-changes",
+     "type": "ms",
+     "passageId": "p-l6-morning-report",
+     "targets": [
+      "c1-inf-2-central-ideas",
+      "c1-inf-4-reasoning"
+     ],
+     "coachTopic": "central-idea",
+     "dok": 3,
+     "stem": "Select the two changes that deal with the time between when something happens and when somebody writes it down.",
+     "choices": [
+      "The wind station grid is filled in by whoever walks rounds.",
+      "The pin check gains a second initial column.",
+      "Night rounds move an hour earlier during storm season.",
+      "The maintenance binder is closed to anyone outside the sanctuary.",
+      "The volunteer log gains a line asking what you heard and when you wrote it down."
+     ],
+     "key": [
+      0,
+      4
+     ],
+     "distractorRationale": {
+      "1": "The second initial column is a real change, but it is about the pin check sheet, not about how long anyone waits to write.",
+      "2": "No change to the timing of rounds appears anywhere in the report.",
+      "3": "The report moves the other way, using its own records openly, even in a letter sent to a newspaper."
+     },
+     "explain": "The wind grid will now be filled in by whoever is walking rounds, instead of from memory at the end of the night, which shortens the wait.  The volunteer log will ask when you wrote down what you heard, which puts that wait on the page.  The pin check change is about who signs the sheet, not about time."
+    },
+    {
+     "id": "l4-ebsr-inspection-line",
+     "type": "ebsr",
+     "passageId": "p-l4-maintenance-file-fence-nine",
+     "targets": [
+      "c4-4-use-evidence",
+      "c1-inf-1-key-details"
+     ],
+     "coachTopic": "research-integrate",
+     "dok": 2,
+     "partA": {
+      "stem": "What do the two most recent inspection lines in the Fence Nine section establish?",
+      "choices": [
+       "That the fence was walked on the twelfth of May, all posts sound.",
+       "That the fence had not been walked since the storm damaged post fourteen.",
+       "That inspections happen only when a work order calls for a keeper to walk the fence.",
+       "That the fence is walked once a month by whichever keeper happens to be free."
+      ],
+      "key": 0
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Work orders are kept separately from inspections, and this section contains two of them.",
+       "On the twelfth of May, Ray Bettencourt walked the same fence again and replaced two loose staples.",
+       "Every fence on the perimeter is walked end to end once every two weeks.",
+       "Work order 318 was opened at 10:30 p.m. on the twenty-sixth of May, during the storm itself, and it reads: post fourteen snapped at ground level, mesh torn back on the creek side, temporary panel set, permanent repair to follow."
+      ],
+      "key": {
+       "0": 1,
+       "1": 3,
+       "2": 0,
+       "3": 2
+      }
+     },
+     "distractorRationale": {
+      "1": "Post fourteen snapped during the storm on the twenty-sixth, two weeks after the most recent inspection line was dated and initialed.",
+      "2": "Work orders are kept separately from inspections precisely because the two-week walk happens on a schedule of its own.",
+      "3": "The schedule is every two weeks, not monthly, and both recent lines carry the same keeper's name and initials."
+     },
+     "explain": "Two dated, initialed lines put a keeper on the fence on the twenty-eighth of April and again on the twelfth of May, ending with the words all posts sound.  The wrong choices confuse the storm damage, the work-order system, or a monthly schedule with what the inspection lines themselves record."
+    },
+    {
+     "id": "l5-ms-what-she-did-not-do",
+     "type": "ms",
+     "passageId": "p-l5-rehabbers-van",
+     "targets": [
+      "c1-lit-4-reasoning"
+     ],
+     "coachTopic": "evidence-story-details",
+     "dok": 2,
+     "stem": "Choose the three things the narrator actually did on the night she found the heron.",
+     "choices": [
+      "She carried the bird up to the maintenance gate to wait for the van.",
+      "She wrote down the rehabilitator's instruction word for word.",
+      "She carried the carbon copy of the transfer slip back to the binder.",
+      "She threw a towel over the bird to keep it calm until help arrived.",
+      "She kept her distance and kept the bird in sight."
+     ],
+     "key": [
+      1,
+      2,
+      4
+     ],
+     "distractorRationale": {
+      "0": "She never attempted to carry the bird anywhere at all, and Alva collects it from the water herself.",
+      "3": "She lists throwing a towel over the bird as one of the things she specifically did not do;  Alva uses the towel later."
+     },
+     "explain": "Her whole role that night was distance, sight, a written-down instruction, and the paperwork afterward, which is what the sanctuary is actually permitted to do.  The two wrong choices are drawn from the list of actions she names and rejects in the same paragraph."
+    }
+   ]
+  },
+  {
+   "note": "Outpost level 6 offers \"the chicks' hungriest stretch\", level 5's phrase.",
+   "itemId": "t6-ms-proposals-against-constraints",
+   "meta": {
+    "id": "outpost-protocol-g6",
+    "subject": "sci"
+   },
+   "skin": {
+    "color": "#1a8f5e",
+    "icon": "🛰️",
+    "grandGoal": "Field Director"
+   },
+   "passages": [
+    {
+     "id": "p-final-deployment-proposals",
+     "title": "Final Deployment: Three Proposals for Halyard Point",
+     "text": "Network Command has approved one field response at Halyard Point.  It targets a gap.  The tern colony's nesting date and the herring's arrival keep drifting apart.  The operative filing the final report must recommend one of three proposals.\n\nCommand set three constraints first.  The response must show a real effect on chick survival.  That effect must appear within one nesting season.  Command will not commit a second season of field budget to a plan.  That plan must show an early result.  Second, the response must cost less than this year's field budget for Halyard Point.  No emergency funding request is allowed.  Third, the response must use only authority the Network already holds.  That authority covers its posts and the land around them.  The Network cannot regulate fishing seasons.  It cannot regulate ocean conditions outside its boundary either.\n\nProposal A calls for a temporary feeding station near the nest sites.  Chicks hatch three weeks before the herring arrive.  The station would stock fish through that exact window.  Setup takes under two weeks.  The cost fits well inside this year's field budget.  The Network runs feeding stations at two other posts.  The authority to run one is not in question.  The effect would end the moment the feeding station stopped.  It treats the survival gap each season rather than closing it.\n\nProposal B calls for fencing around the colony's nest sites.  It would keep ground predators away from eggs and chicks.  The fencing is inexpensive.  It can go up within days.  That fits well inside the time limit Command set.  It fits the cost limit too.  It would likely raise survival among hatched chicks.  Predators are not what this record has shown killing chicks, though.  The record shows chicks starving during the gap.  That gap sits before the herring arrive.  Fencing does nothing to touch that problem.\n\nProposal C calls for the Network to petition the fishery authority.  The petition would ask to delay the herring season's opening.  The delay would run three weeks.  That would time the fish run to arrive when the chicks need it.  If it worked, it would close the mismatch at its root.  It would stop covering for the mismatch every season instead.  The fishery authority does not answer to the Network, though.  No petition has ever been decided in under four months.  That is well past the one-season window Command set.  The outcome does not lie inside the Network's authority.\n\nThe operative's recommendation is due before the next nesting season begins.",
+     "figureIds": [
+      "fig-proposals"
+     ]
+    },
+    {
+     "id": "p-halyard-nesting-record",
+     "title": "Halyard Point Relay: Thirty-Year Nesting Record",
+     "text": "The brindle tern colony below Halyard Point Relay gets logged every spring, and the relay has tracked it from the start.  The record now runs thirty full nesting seasons, and two numbers matter most here.  One is the date the colony's first eggs appear each year, and the other is the percent of chicks that survive long enough to fly.\n\nIn the first logged season, the colony's first eggs came on April seventh.  Seventy-six percent of the chicks that hatched went on to fledge.  By the tenth season, first eggs had moved up to March twenty-seventh.  That is eleven days earlier than the first year.  The fledge rate had slipped to sixty-four percent.  By the twentieth season, first eggs came on March eighteenth.  That is twenty days earlier than the record began.  The fledge rate had dropped to fifty-two percent.  In the thirtieth season, first eggs came on March tenth.  That is twenty-eight days earlier than the colony's first logged year.  Only thirty-nine percent of hatched chicks lived to fly.\n\nThe colony is not nesting earlier by chance, since terns time their first eggs to the spring air and water.  Their bodies respond once conditions cross a warm mark, and thirty years of warming have pulled that mark earlier.\n\nSpring herring feed the colony's chicks once they hatch, not from the moment an egg is laid.  Tern eggs take about twenty-two days to hatch.  A chick's own hungriest stretch begins roughly three weeks after its egg first appears, not the day the egg is laid.  That small fish times its own arrival by ocean temperature at sea.  That clock runs slower than the coastal air the terns respond to.  The herring's arrival date has held near April twenty-first every season.  It has drifted only three days either way.  In the colony's first logged season, eggs hatched around April twenty-ninth, more than a week after the herring had already arrived and settled in.  By the thirtieth season, eggs were hatching around April first, about three weeks before the herring showed up.  The colony's chicks now hatch weeks before their food source even arrives.\n\nThe gap between the two dates is what the fledge-rate column has been tracking.  It was never the nesting date by itself."
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-proposals",
+     "caption": "Three proposals for Halyard Point, checked against Command's three tests: an effect within one season, cost within budget, and only the Network's own authority.",
+     "alt": "Three side-by-side cards. Proposal A, a feeding station, passes all three tests but ends when the station stops. Proposal B, fencing, is within budget and quick to build but does not fix starving chicks, since predators are not the cause. Proposal C, a petition to delay the herring season, would close the mismatch at its root but takes over four months, past the one-season window, and lies outside the Network's own authority.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A three-card comparison titled \"Three proposals for Halyard Point\".",
+       "The header states that every proposal is checked against three tests: effect within one season, cost within budget, and the Network’s own authority.",
+       "Proposal A, a feeding station, carries YES on all three: within budget, within authority, and a real effect while it runs. Its card adds that the effect ends when the station stops.",
+       "Proposal B, fencing, carries YES within budget and YES ready in days, and a NO reading \"starving chicks, not predators\". Its card sums it up as fast and cheap, wrong cause.",
+       "Proposal C, a petition to delay the herring season, carries YES it closes the mismatch at its root, NO it takes over four months and so runs past one season, and NO it is outside the Network’s own authority. Its card sums it up as the right fix, wrong timeline and reach.",
+       "Card B shows no verdict for the authority test at all."
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "New Posting",
+     "goal": "Learn to read a system: parts, subsystems, and the ripples between them.",
+     "itemIds": []
+    },
+    {
+     "name": "The Sealed Station",
+     "goal": "Diagnose why Meridian Dome's air is drifting before supplies run out.",
+     "itemIds": []
+    },
+    {
+     "name": "Storm Front",
+     "goal": "Read the incoming data fast enough to warn the coast before the front arrives.",
+     "itemIds": []
+    },
+    {
+     "name": "The Long Pattern",
+     "goal": "Explain why two outposts at the same latitude report very different climates.",
+     "itemIds": []
+    },
+    {
+     "name": "Breaking Point",
+     "goal": "Trace every local mystery back to the one planetary pattern underneath it.",
+     "itemIds": [
+      "t5-ebsr-real-cause-of-drop"
+     ]
+    },
+    {
+     "name": "Final Deployment",
+     "goal": "Design and defend the Network's official response plan, the final field review.",
+     "itemIds": [
+      "t6-ms-proposals-against-constraints"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "t6-ms-proposals-against-constraints",
+     "type": "ms",
+     "passageId": "p-final-deployment-proposals",
+     "targets": [
+      "sci-t6-design-evaluate"
+     ],
+     "coachTopic": "evidence-final-deployment",
+     "dok": 4,
+     "stem": "Choose the three true facts about how the three proposals measure up against Command's constraints.",
+     "choices": [
+      "Proposal A treats the survival gap each season instead of closing it for good.",
+      "Proposal A requires authority the Network does not currently have.",
+      "Proposal B is too expensive to fit inside this year's field budget.",
+      "Proposal B satisfies the time and cost limits but does not fix the actual food gap.",
+      "Proposal C could take longer than Command's one-season window to even be decided.",
+      "Proposal C is guaranteed to arrive before the chicks' hungriest stretch next season."
+     ],
+     "key": [
+      0,
+      3,
+      4
+     ],
+     "distractorRationale": {
+      "1": "The report says the authority to run a feeding station is not even in question, since the Network already runs two elsewhere.",
+      "2": "The report says the fencing itself is inexpensive, well inside the cost limit Command set.",
+      "5": "The report says no petition has ever been decided in under four months, well past the one-season window, so Proposal C is not guaranteed to arrive in time at all."
+     },
+     "explain": "The three correct facts summarize each proposal's real trade-off: Proposal A only treats the symptom each season, Proposal B is cheap and fast but does not fix the food gap, and Proposal C could take longer to decide than Command's own window allows.  The three wrong choices each invert a specific constraint the report states about a different proposal."
+    },
+    {
+     "id": "t5-ebsr-real-cause-of-drop",
+     "type": "ebsr",
+     "passageId": "p-halyard-nesting-record",
+     "targets": [
+      "sci-t5-warming-adaptation"
+     ],
+     "coachTopic": "evidence-breaking-point",
+     "dok": 3,
+     "partA": {
+      "stem": "What is the real cause of the colony's dropping chick survival rate, according to the record?",
+      "choices": [
+       "The herring have stopped arriving at Halyard Point entirely.",
+       "The colony has been laying fewer eggs every year.",
+       "The chicks now hatch weeks before the herring, their one food source, arrive.",
+       "The earlier nesting date itself causes lower survival, whether or not the herring have come."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "The colony's chicks now hatch weeks before their food source even arrives.",
+       "The herring's arrival date has held near April twenty-first every season.",
+       "In the first logged season, the colony's first eggs came on April seventh.",
+       "It was never the nesting date by itself."
+      ],
+      "key": {
+       "0": 1,
+       "1": 2,
+       "2": 0,
+       "3": 3
+      }
+     },
+     "distractorRationale": {
+      "0": "This sentence says the herring's arrival date has held steady near April twenty-first, which means they still arrive every season, just on their own schedule.",
+      "1": "This sentence is about when the eggs appear, not how many eggs the colony lays.  The record never reports a falling egg count.",
+      "3": "The record states the opposite directly: it was never the nesting date by itself that mattered."
+     },
+     "explain": "The record's own closing description names the real cause: the colony's chicks now hatch weeks before the herring, their one food source, even arrive, a reversal from the colony's early seasons, when the herring were already there and settled in.  Each wrong choice either invents a detail the record does not report or contradicts its own stated conclusion."
+    }
+   ]
+  },
+  {
+   "note": "Outpost level 1 offers \"Water piped in from outside the dome\", level 2's station.",
+   "itemId": "t1-mc-what-a-seal-stops",
+   "meta": {
+    "id": "outpost-protocol-g6",
+    "subject": "sci"
+   },
+   "skin": {
+    "color": "#1a8f5e",
+    "icon": "🛰️",
+    "grandGoal": "Field Director"
+   },
+   "passages": [
+    {
+     "id": "p-training-bay-boundaries",
+     "title": "Field Manual: Boundaries, Inputs, and Outputs",
+     "text": "Instructor Perrin runs the training bay at Relay Station Zero, and she opens every posting with the same question.  Where does this system stop?  New operatives find that question strange at first, because a system sounds like a thing a person could walk up and point at.  A system is really whatever somebody decided to draw a line around, and that line has a name.  The line is called a boundary.\n\nA boundary marks what counts as part of the system, and everything else counts as outside it.  Anything crossing the boundary on its way in is an input, and anything crossing on its way out is an output.  Move the line, and the same water or the same air changes names entirely.  That is not a trick question.  That is the whole skill.\n\nPerrin uses the training bay's own water subsystem to show operatives how it works.  Draw the boundary around that one subsystem, and damp air from the crew quarters becomes an input, while clean water sent back to the taps becomes an output.  The filter membrane sits inside the line, so the membrane is a component rather than an input.  Now draw the boundary around all of life support instead, with the whole crew inside the larger line.  That same damp air never crosses the new boundary at all, because water is only moving from one subsystem to the next.\n\nHere is why the training bay drills this so hard before an operative ever ships out.  The output of one subsystem is usually the input of the subsystem beside it, and that handoff is what the manual calls an interaction.  Trace the handoffs through a station and an operative has traced the ripple.  A report naming the wrong boundary sends a technician into the wrong room.  Whatever failed is sitting inside somebody's boundary, and the job is knowing whose.\n\nSome boundaries are drawn far tighter than others.  A sealed station draws its line so no matter crosses either way, though sunlight still crosses it going in and the day's readings still go out by radio.  Energy and information cross a seal that solid, liquid, and gas cannot.  Perrin says most crews forget that difference by about the fourth day.\n\nThe rule she wants copied into every logbook is a short one.  Name the boundary before naming the failure.  An operative reporting that the water system failed has named nothing yet, while an operative reporting which line the trouble sits inside has started the actual work."
+    },
+    {
+     "id": "p-meridian-status-log",
+     "title": "Status Log: Meridian Dome, Days Ninety to One Hundred Eighteen",
+     "text": "Meridian Dome has run as a sealed system for one hundred eighteen days, its longest run.  Nothing enters and nothing leaves, though sunlight gets in and data goes out each morning.  Dr. Renata Kessler is the dome's systems lead.  She files this status log every four weeks.  Network Command can track the numbers without a crisis.\n\nOn day ninety, the dome's air held steady, and carbon dioxide read four hundred ten parts per million, or ppm.  Oxygen sat near twenty and a half percent.  Both numbers matched every reading since the seal closed, and the water subsystem was saving ninety-six percent of all the crew used.  The food modules were producing enough to cover every meal, with a small surplus.\n\nBy day one hundred four, the numbers had shifted.  Carbon dioxide had climbed to four hundred thirty ppm.  Oxygen had slipped to twenty percent even.  Neither shift was large enough to worry the crew, and Dr. Kessler's log calls it \"within normal drift.\"  Her notes say systems wander before they settle.\n\nBy day one hundred eighteen, the drift had not settled.  Carbon dioxide now reads four hundred fifty-two ppm.  Oxygen has fallen to nineteen and a half percent.  Water reclamation has held steady near ninety-five percent.  The food modules are still meeting every meal.  Neither of those subsystems appears to be the source.  One subsystem keeps drawing her attention: the algae bioreactor tucked beneath the food modules, the dome's main source of extra oxygen.  Its daily readings have gone low, though nothing about its gear has failed.\n\nDr. Kessler's log closes with one line, asking Network Command to send an operative to walk the dome.  Sensor readings show a number falling, but they cannot say why.  Four straight weeks of drift have passed, and why is the question the dome needs answered.",
+     "figureIds": [
+      "fig-dome-drift"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-dome-drift",
+     "caption": "Meridian Dome's sealed air, day 90 to day 118: carbon dioxide climbing while oxygen falls, plotted on two separate scales.",
+     "alt": "Two stacked line charts share the x-axis \"day.\" The top chart plots carbon dioxide in parts per million, climbing from 410 on day 90, to 430 on day 104, to 452 on day 118. The bottom chart plots oxygen in percent, falling from 20.5 on day 90, to 20.0 on day 104, to 19.5 on day 118.",
+     "dataTable": {
+      "panels": [
+       {
+        "type": "line",
+        "yLabel": "CO2 (ppm)",
+        "series": [
+         {
+          "label": "CO2",
+          "points": [
+           [
+            90,
+            410
+           ],
+           [
+            104,
+            430
+           ],
+           [
+            118,
+            452
+           ]
+          ]
+         }
+        ]
+       },
+       {
+        "type": "line",
+        "yLabel": "O2 (percent)",
+        "series": [
+         {
+          "label": "O2",
+          "points": [
+           [
+            90,
+            20.5
+           ],
+           [
+            104,
+            20
+           ],
+           [
+            118,
+            19.5
+           ]
+          ]
+         }
+        ]
+       }
+      ],
+      "xLabel": "day",
+      "notes": [
+       "Water reclamation held steady near 95 to 96 percent across the same days."
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "New Posting",
+     "goal": "Learn to read a system: parts, subsystems, and the ripples between them.",
+     "itemIds": [
+      "t1-mc-what-a-seal-stops"
+     ]
+    },
+    {
+     "name": "The Sealed Station",
+     "goal": "Diagnose why Meridian Dome's air is drifting before supplies run out.",
+     "itemIds": [
+      "t2-ebsr-what-is-ruled-out"
+     ]
+    },
+    {
+     "name": "Storm Front",
+     "goal": "Read the incoming data fast enough to warn the coast before the front arrives.",
+     "itemIds": []
+    },
+    {
+     "name": "The Long Pattern",
+     "goal": "Explain why two outposts at the same latitude report very different climates.",
+     "itemIds": []
+    },
+    {
+     "name": "Breaking Point",
+     "goal": "Trace every local mystery back to the one planetary pattern underneath it.",
+     "itemIds": []
+    },
+    {
+     "name": "Final Deployment",
+     "goal": "Design and defend the Network's official response plan, the final field review.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t1-mc-what-a-seal-stops",
+     "type": "mc",
+     "passageId": "p-training-bay-boundaries",
+     "targets": [
+      "sci-t1-systems-vocab"
+     ],
+     "coachTopic": "evidence-systems-vocab",
+     "dok": 2,
+     "stem": "According to the manual, which of these can cross the boundary of a sealed station?",
+     "choices": [
+      "Radio signals carrying the day's readings out.",
+      "Water piped in from outside the dome.",
+      "Replacement filter membranes brought in by supply run.",
+      "Air vented in from the outside atmosphere."
+     ],
+     "key": 0,
+     "distractorRationale": {
+      "1": "A sealed line stops matter in both directions, and water is matter.  The manual names solid, liquid and gas together as what a seal stops.",
+      "2": "A membrane is a solid object, and no matter crosses a seal.  The manual lists only energy and information as getting through.",
+      "3": "Gas is matter too, and the seal stops it exactly as it stops liquids and solids.  Sunlight and radio are the exceptions, not air."
+     },
+     "explain": "The manual is precise about what a seal does and does not stop: no matter crosses in either direction, while sunlight still crosses going in and the day's readings still go out by radio.  Energy and information cross a seal that solid, liquid and gas cannot, which is why a sealed station can still report home."
+    },
+    {
+     "id": "t2-ebsr-what-is-ruled-out",
+     "type": "ebsr",
+     "passageId": "p-meridian-status-log",
+     "targets": [
+      "sci-t2-systems-subsystems"
+     ],
+     "coachTopic": "evidence-sealed-station",
+     "dok": 3,
+     "partA": {
+      "stem": "By day one hundred eighteen, which subsystem does the log rule out as the source of the drift?",
+      "choices": [
+       "The algae bioreactor, since its daily readings went low while its gear still worked.",
+       "The water subsystem, since it was still reclaiming at ninety-five percent.",
+       "The algae bioreactor, since it was producing more oxygen than usual.",
+       "Dr. Kessler, since her notes call the drift \"within normal drift.\""
+      ],
+      "key": 1
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Neither shift was large enough to worry the crew, and Dr. Kessler's log calls it \"within normal drift.\"",
+       "Its daily readings have gone low, though nothing about its gear has failed.",
+       "Water reclamation has held steady near ninety-five percent.",
+       "One subsystem keeps drawing her attention: the algae bioreactor tucked beneath the food modules, the dome's main source of extra oxygen."
+      ],
+      "key": {
+       "0": 1,
+       "1": 2,
+       "2": 3,
+       "3": 0
+      }
+     },
+     "distractorRationale": {
+      "0": "This sentence is about the bioreactor's own falling readings, the subsystem the log is actually suspicious of, not one it rules out.",
+      "2": "This quote names the bioreactor as the one still drawing her attention, not one that is ruled out, and it never says its oxygen output rose.",
+      "3": "This quote is from the earlier day-one-hundred-four entry, which called an earlier, smaller shift normal drift.  It is not the day-one-hundred-eighteen ruling-out sentence."
+     },
+     "explain": "By the final entry, the log states plainly that water reclamation held steady near ninety-five percent, which rules the water subsystem out directly as the source of the drift.  The other choices each point to the bioreactor, the actual suspect, or an earlier, unrelated note instead."
+    }
+   ]
+  }
+ ],
+ "mustStayClean": [
+  {
+   "note": "The three-changes item fixed:  the report's own records.",
+   "itemId": "l6-ms-three-changes",
+   "meta": {
+    "id": "night-rounds-g6",
+    "subject": "ela"
+   },
+   "skin": {
+    "color": "#b45309",
+    "icon": "🐾",
+    "grandGoal": "Head Keeper"
+   },
+   "passages": [
+    {
+     "id": "p-l6-morning-report",
+     "title": "The Morning Report",
+     "text": "Whitlock files a morning report after any night that produces a work order.  This one ran to two full pages.  I am copying out the argument rather than the whole document, because the argument is the part that will still matter in a month.\n\nThe report opens with findings, and it keeps them separate from everything else on purpose.  Finding one: a willow limb came down across Fence Nine at post fourteen, and the post snapped at ground level.  The gap was found on rounds at 9:52 p.m. and closed with a temporary panel before eleven.  Finding two: the north service gate was found standing open at 10:05 p.m., and the eight o'clock pin check required by Bulletin 14 was never initialed.  The report says nothing whatsoever about how the pin came out, which is the sentence I would have been most tempted to write.\n\nThen the report makes an argument, and it makes that argument in three steps.\n\nThe first step is that the fence failure was not a failure of upkeep.  The report supports that step with the inspection line dated the twelfth of May, initialed by the keeper who walked the fence.  The second step is that the open gate was a failure of procedure, whatever the equipment did.  The report supports that step with the blank eight o'clock line rather than with anybody's opinion.  The third step ties the whole stack of paper together.  The sanctuary's defense is not that nothing went wrong, because something plainly did.  The defense is that everything which went wrong was written down by the people it went wrong for.\n\nThree changes follow from those steps, and each change names the record it repairs.  The pin check gains a second initial column, exactly like the supplement column on a diet card.  One signature can no longer cover two separate jobs.  The wind station grid gets filled in by whoever is walking rounds, rather than by whoever remembers at the end of the night.  The volunteer log gains a new line at the top of every entry, asking what you heard and when you wrote it down.\n\nThe last section is a letter, and Whitlock attached a copy of it.  The letter asks the Valley Register for a correction.  It names two claims, along with the record that contradicts each one.  Against the sentence about no inspection since March, it cites the inspection line from the twelfth of May.  Against the sentence about a High Wind Warning, it cites Bulletin 14, which quotes a Wind Advisory and explains the difference between the two.  The letter asks for nothing else.  It does not argue about the headline, and it never complains about the unnamed neighbor.\n\nThe report ends with a line I fully intend to steal.  A record is not a defense of the person who wrote it.  It is a promise to the person who reads it next.",
+     "figureIds": [
+      "fig-l6-morning-report"
+     ]
+    },
+    {
+     "id": "p-l4-maintenance-file-fence-nine",
+     "title": "The Maintenance File on Fence Nine",
+     "text": "Fence Nine is the woven-wire fence running along the north pasture, between the pasture and the creek.  It measures three hundred and forty feet end to end.  The maintenance binder gives every fence on the property its own section, and the section for Fence Nine is the thickest one in the book.  I copied out the last two months of it after the storm, together with the two work orders that follow.\n\nThe section opens with the inspection schedule, which is our own rule and nobody else's.  Every fence on the perimeter is walked end to end once every two weeks.  The keeper who walks it dates the line and initials it.  An inspection that was never initialed did not happen, as far as this binder is concerned.\n\nThe two most recent inspection lines read as follows.  On the twenty-eighth of April, Ray Bettencourt walked Fence Nine and tightened the mesh at panel six.  On the twelfth of May, Ray Bettencourt walked the same fence again and replaced two loose staples.  His line ends with the words all posts sound.\n\nWork orders are kept separately from inspections, and this section contains two of them.  Work order 214, dated the third of April, covers the north service gate, whose hinge was rehung and whose latch pin was replaced.  Work order 318 was opened at 10:30 p.m. on the twenty-sixth of May, during the storm itself, and it reads: post fourteen snapped at ground level, mesh torn back on the creek side, temporary panel set, permanent repair to follow.\n\nThe discovery line is the one the newspaper never asked about.  It reads: gap in Fence Nine found during night rounds at 9:52 p.m. on the twenty-sixth of May by junior keeper Mara Delgado, reported by radio to Bo Ferris.  Underneath it, Bettencourt added a note the next morning.  A willow limb roughly fifteen feet long was lying across the fence line at post fourteen.  The break in the limb matches the big willow on the creek bank.\n\nEvery line in this section carries a date and a set of initials.  That is the entire point of keeping it.  A binder cannot tell you what actually happened out there in the dark.  It can tell you what somebody wrote down at the time, and who was willing to sign a name beside it.",
+     "figureIds": [
+      "fig-l4-fence-nine"
+     ]
+    },
+    {
+     "id": "p-l5-rehabbers-van",
+     "title": "The Rehabber's Van",
+     "text": "Thursday, 7:15 in the evening, under a sky the storm had already turned the colour of slate, and the wind was loud enough that I had to key my radio twice.\n\nI found her from the boardwalk, thirty feet out in the shallow water, standing exactly where no heron in her right mind stands during a storm.  Great blue heron, adult, one wing carried wrong.  She had her bill pointed straight up when my light reached her, a posture I have since read about in bitterns, and which our field guide says herons will also take when they hold still.\n\nHere is what I did not do.  I never waded out to her, I never threw a towel over her, and I never attempted to carry her anywhere at all.  Whitlock's rule about wild animals is one sentence long, and every keeper here can recite it from memory.  A wild animal that lands on our property is not our animal.\n\nWe are not licensed to treat wild birds.  The sanctuary cares for the residents in its files and for nobody else, and a heron off the river belongs to a different set of rules than Rana does.  My job was to keep my distance, keep her in sight, and get somebody on the telephone whose license covers exactly this.\n\nThat somebody is Alva Reyes, a licensed wildlife rehabilitator who lives forty minutes from here and has taken birds from us before.  Whitlock reached her by telephone at 7:22.  Alva asked four questions, and not one of them was a question I had expected.  Was the bird standing, and was it standing in water.  How close had anybody approached it, and how long ago.\n\nThen she said she was on her way, and she added one more thing that I wrote down word for word.  Do not chase her.  A bird that runs from you in a storm is a bird with a second injury.\n\nHer van pulled up to the maintenance gate a little after eight, in rain that was coming down flat.  She works quietly, and she arrived carrying a towel, a crate lined with something soft, and a way of moving that made her appear considerably slower than she actually was.  She came at the heron from the side rather than the front, talking the whole time in a low voice that had nothing to do with words.  It took her under a minute.  The bill goes into the towel first, which she told me afterward is the part nobody forgets, because a heron's bill is a spear and it is aimed at your face.\n\nAt the van she filled out a transfer slip on the hood, in the rain, with the crate already loaded, and the time she wrote on it was 8:40.  Time, place, species, condition, the name of the keeper who found the bird, and both signatures.  Whitlock signed it and Alva signed it, and I carried the carbon copy back to the maintenance binder.\n\nThat slip is the last thing our file will ever say about this bird.  She is not our animal, and I know perfectly well that this is the correct answer.  I stood at the gate anyway, in the wind, until the taillights were gone.",
+     "figureIds": [
+      "fig-l5-transfer-slip"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l6-morning-report",
+     "caption": "The boxes run down the page from what the report found to the last step of the argument it builds on those findings.",
+     "alt": "Five labelled boxes stacked down the page, three of them joined to the box below by an arrow, with nothing drawn between the second and third boxes, and the bottom box drawn with rounded ends.",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-l6-morning-report",
+      "layout": "flow-tb",
+      "nodes": [
+       {
+        "id": "f1",
+        "label": "a willow limb came down across Fence Nine",
+        "shape": "box"
+       },
+       {
+        "id": "s1",
+        "label": "not a failure of upkeep",
+        "shape": "box"
+       },
+       {
+        "id": "f2",
+        "label": "the north service gate was found standing open",
+        "shape": "box"
+       },
+       {
+        "id": "s2",
+        "label": "a failure of procedure",
+        "shape": "box"
+       },
+       {
+        "id": "s3",
+        "label": "written down by the people it went wrong for",
+        "shape": "round"
+       }
+      ],
+      "edges": [
+       {
+        "from": "f1",
+        "to": "s1",
+        "style": "arrow"
+       },
+       {
+        "from": "f2",
+        "to": "s2",
+        "style": "arrow"
+       },
+       {
+        "from": "s2",
+        "to": "s3",
+        "style": "arrow"
+       }
+      ]
+     }
+    },
+    {
+     "id": "fig-l4-fence-nine",
+     "caption": "A plan of Fence Nine between the north pasture and the creek, marking panel six, post fourteen, and the willow whose limb came down on the fence line.",
+     "alt": "A plan diagram in which a labelled box for the fence sits between a box for the pasture and a box for the creek, with connectors running out to two marked points along the run and up from a labelled willow to one of them.",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-l4-maintenance-file-fence-nine",
+      "layout": "plan",
+      "nodes": [
+       {
+        "id": "pasture",
+        "label": "the north pasture",
+        "shape": "box",
+        "x": 58,
+        "y": 8
+       },
+       {
+        "id": "panel",
+        "label": "panel six",
+        "shape": "round",
+        "x": 12,
+        "y": 46
+       },
+       {
+        "id": "fence",
+        "label": "Fence Nine",
+        "shape": "box",
+        "x": 46,
+        "y": 46
+       },
+       {
+        "id": "post",
+        "label": "post fourteen",
+        "shape": "round",
+        "x": 80,
+        "y": 46
+       },
+       {
+        "id": "creek",
+        "label": "the creek",
+        "shape": "box",
+        "x": 20,
+        "y": 86
+       },
+       {
+        "id": "willow",
+        "label": "big willow",
+        "shape": "round",
+        "x": 82,
+        "y": 86
+       }
+      ],
+      "edges": [
+       {
+        "from": "pasture",
+        "to": "fence",
+        "style": "line"
+       },
+       {
+        "from": "panel",
+        "to": "fence",
+        "style": "line",
+        "label": "the twenty-eighth of April"
+       },
+       {
+        "from": "fence",
+        "to": "post",
+        "style": "line"
+       },
+       {
+        "from": "fence",
+        "to": "creek",
+        "style": "line"
+       },
+       {
+        "from": "willow",
+        "to": "post",
+        "style": "arrow",
+        "label": "the fence line"
+       }
+      ]
+     }
+    },
+    {
+     "id": "fig-l5-transfer-slip",
+     "caption": "The slip lists the time, the place, the bird, and both signatures, and it is the last thing the file will ever say about this heron.",
+     "alt": "A transfer slip whose rows pair \"Time\" with 8:40, \"place\" with \"thirty feet out in the shallow water\", \"species\" with \"Great blue heron, adult\", and \"condition\" with \"one wing carried wrong\", then a fifth row labelled \"the name of the keeper who found the bird\" whose field is left empty, a signature block headed \"both signatures\" holding Whitlock and Alva Reyes, and a slanted stamp reading \"carbon copy\".",
+     "dataTable": {
+      "type": "facsimile",
+      "sourcePassageId": "p-l5-rehabbers-van",
+      "docKind": "status-log",
+      "title": "transfer slip",
+      "header": [
+       {
+        "label": "Time",
+        "value": "8:40"
+       },
+       {
+        "label": "place",
+        "value": "thirty feet out in the shallow water"
+       },
+       {
+        "label": "species",
+        "value": "Great blue heron, adult"
+       },
+       {
+        "label": "condition",
+        "value": "one wing carried wrong"
+       }
+      ],
+      "columns": [
+       {
+        "heading": "both signatures",
+        "rows": [
+         "Whitlock",
+         "Alva Reyes"
+        ]
+       }
+      ],
+      "stamp": "carbon copy",
+      "lines": [
+       {
+        "text": "the name of the keeper who found the bird",
+        "emphasis": "blank"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Rounds",
+     "goal": "Walk the evening route, and learn why a keeper writes down what she sees.",
+     "itemIds": []
+    },
+    {
+     "name": "The Wrong Diet",
+     "goal": "Read a diet card, a vet memo, and an invoice until the otter's slow week makes sense.",
+     "itemIds": []
+    },
+    {
+     "name": "The Night Noise",
+     "goal": "Weigh three witness accounts against the night's own records.",
+     "itemIds": []
+    },
+    {
+     "name": "The Fence Gap",
+     "goal": "Separate storm damage from rumor using the maintenance file, the bulletin, and the newspaper.",
+     "itemIds": [
+      "l4-ebsr-inspection-line"
+     ]
+    },
+    {
+     "name": "The Heron's Night",
+     "goal": "Follow the heron down out of the storm, and the rule that a wild animal is not ours.",
+     "itemIds": [
+      "l5-ms-what-she-did-not-do"
+     ]
+    },
+    {
+     "name": "The Open Gate",
+     "goal": "Assemble the night of the storm from five records and one memory, and judge which sources hold.",
+     "itemIds": [
+      "l6-ms-three-changes"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l6-ms-three-changes",
+     "type": "ms",
+     "passageId": "p-l6-morning-report",
+     "targets": [
+      "c1-inf-2-central-ideas",
+      "c1-inf-4-reasoning"
+     ],
+     "coachTopic": "central-idea",
+     "dok": 3,
+     "stem": "Select the two changes that deal with the time between when something happens and when somebody writes it down.",
+     "choices": [
+      "The wind station grid is filled in by whoever walks rounds.",
+      "The pin check gains a second initial column.",
+      "Night rounds move an hour earlier during storm season.",
+      "The sanctuary's records are closed to anyone outside its gates.",
+      "The volunteer log gains a line asking what you heard and when you wrote it down."
+     ],
+     "key": [
+      0,
+      4
+     ],
+     "distractorRationale": {
+      "1": "The second initial column is a real change, but it is about the pin check sheet, not about how long anyone waits to write.",
+      "2": "No change to the timing of rounds appears anywhere in the report.",
+      "3": "The report moves the other way, using its own records openly, even in a letter sent to a newspaper."
+     },
+     "explain": "The wind grid will now be filled in by whoever is walking rounds, instead of from memory at the end of the night, which shortens the wait.  The volunteer log will ask when you wrote down what you heard, which puts that wait on the page.  The pin check change is about who signs the sheet, not about time."
+    },
+    {
+     "id": "l4-ebsr-inspection-line",
+     "type": "ebsr",
+     "passageId": "p-l4-maintenance-file-fence-nine",
+     "targets": [
+      "c4-4-use-evidence",
+      "c1-inf-1-key-details"
+     ],
+     "coachTopic": "research-integrate",
+     "dok": 2,
+     "partA": {
+      "stem": "What do the two most recent inspection lines in the Fence Nine section establish?",
+      "choices": [
+       "That the fence was walked on the twelfth of May, all posts sound.",
+       "That the fence had not been walked since the storm damaged post fourteen.",
+       "That inspections happen only when a work order calls for a keeper to walk the fence.",
+       "That the fence is walked once a month by whichever keeper happens to be free."
+      ],
+      "key": 0
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Work orders are kept separately from inspections, and this section contains two of them.",
+       "On the twelfth of May, Ray Bettencourt walked the same fence again and replaced two loose staples.",
+       "Every fence on the perimeter is walked end to end once every two weeks.",
+       "Work order 318 was opened at 10:30 p.m. on the twenty-sixth of May, during the storm itself, and it reads: post fourteen snapped at ground level, mesh torn back on the creek side, temporary panel set, permanent repair to follow."
+      ],
+      "key": {
+       "0": 1,
+       "1": 3,
+       "2": 0,
+       "3": 2
+      }
+     },
+     "distractorRationale": {
+      "1": "Post fourteen snapped during the storm on the twenty-sixth, two weeks after the most recent inspection line was dated and initialed.",
+      "2": "Work orders are kept separately from inspections precisely because the two-week walk happens on a schedule of its own.",
+      "3": "The schedule is every two weeks, not monthly, and both recent lines carry the same keeper's name and initials."
+     },
+     "explain": "Two dated, initialed lines put a keeper on the fence on the twenty-eighth of April and again on the twelfth of May, ending with the words all posts sound.  The wrong choices confuse the storm damage, the work-order system, or a monthly schedule with what the inspection lines themselves record."
+    },
+    {
+     "id": "l5-ms-what-she-did-not-do",
+     "type": "ms",
+     "passageId": "p-l5-rehabbers-van",
+     "targets": [
+      "c1-lit-4-reasoning"
+     ],
+     "coachTopic": "evidence-story-details",
+     "dok": 2,
+     "stem": "Choose the three things the narrator actually did on the night she found the heron.",
+     "choices": [
+      "She carried the bird up to the maintenance gate to wait for the van.",
+      "She wrote down the rehabilitator's instruction word for word.",
+      "She carried the carbon copy of the transfer slip back to the binder.",
+      "She threw a towel over the bird to keep it calm until help arrived.",
+      "She kept her distance and kept the bird in sight."
+     ],
+     "key": [
+      1,
+      2,
+      4
+     ],
+     "distractorRationale": {
+      "0": "She never attempted to carry the bird anywhere at all, and Alva collects it from the water herself.",
+      "3": "She lists throwing a towel over the bird as one of the things she specifically did not do;  Alva uses the towel later."
+     },
+     "explain": "Her whole role that night was distance, sight, a written-down instruction, and the paperwork afterward, which is what the sanctuary is actually permitted to do.  The two wrong choices are drawn from the list of actions she names and rejects in the same paragraph."
+    }
+   ]
+  },
+  {
+   "note": "The proposals item fixed:  the fish run timed to arrive when the chicks need it, the report's own words.",
+   "itemId": "t6-ms-proposals-against-constraints",
+   "meta": {
+    "id": "outpost-protocol-g6",
+    "subject": "sci"
+   },
+   "skin": {
+    "color": "#1a8f5e",
+    "icon": "🛰️",
+    "grandGoal": "Field Director"
+   },
+   "passages": [
+    {
+     "id": "p-final-deployment-proposals",
+     "title": "Final Deployment: Three Proposals for Halyard Point",
+     "text": "Network Command has approved one field response at Halyard Point.  It targets a gap.  The tern colony's nesting date and the herring's arrival keep drifting apart.  The operative filing the final report must recommend one of three proposals.\n\nCommand set three constraints first.  The response must show a real effect on chick survival.  That effect must appear within one nesting season.  Command will not commit a second season of field budget to a plan.  That plan must show an early result.  Second, the response must cost less than this year's field budget for Halyard Point.  No emergency funding request is allowed.  Third, the response must use only authority the Network already holds.  That authority covers its posts and the land around them.  The Network cannot regulate fishing seasons.  It cannot regulate ocean conditions outside its boundary either.\n\nProposal A calls for a temporary feeding station near the nest sites.  Chicks hatch three weeks before the herring arrive.  The station would stock fish through that exact window.  Setup takes under two weeks.  The cost fits well inside this year's field budget.  The Network runs feeding stations at two other posts.  The authority to run one is not in question.  The effect would end the moment the feeding station stopped.  It treats the survival gap each season rather than closing it.\n\nProposal B calls for fencing around the colony's nest sites.  It would keep ground predators away from eggs and chicks.  The fencing is inexpensive.  It can go up within days.  That fits well inside the time limit Command set.  It fits the cost limit too.  It would likely raise survival among hatched chicks.  Predators are not what this record has shown killing chicks, though.  The record shows chicks starving during the gap.  That gap sits before the herring arrive.  Fencing does nothing to touch that problem.\n\nProposal C calls for the Network to petition the fishery authority.  The petition would ask to delay the herring season's opening.  The delay would run three weeks.  That would time the fish run to arrive when the chicks need it.  If it worked, it would close the mismatch at its root.  It would stop covering for the mismatch every season instead.  The fishery authority does not answer to the Network, though.  No petition has ever been decided in under four months.  That is well past the one-season window Command set.  The outcome does not lie inside the Network's authority.\n\nThe operative's recommendation is due before the next nesting season begins.",
+     "figureIds": [
+      "fig-proposals"
+     ]
+    },
+    {
+     "id": "p-halyard-nesting-record",
+     "title": "Halyard Point Relay: Thirty-Year Nesting Record",
+     "text": "The brindle tern colony below Halyard Point Relay gets logged every spring, and the relay has tracked it from the start.  The record now runs thirty full nesting seasons, and two numbers matter most here.  One is the date the colony's first eggs appear each year, and the other is the percent of chicks that survive long enough to fly.\n\nIn the first logged season, the colony's first eggs came on April seventh.  Seventy-six percent of the chicks that hatched went on to fledge.  By the tenth season, first eggs had moved up to March twenty-seventh.  That is eleven days earlier than the first year.  The fledge rate had slipped to sixty-four percent.  By the twentieth season, first eggs came on March eighteenth.  That is twenty days earlier than the record began.  The fledge rate had dropped to fifty-two percent.  In the thirtieth season, first eggs came on March tenth.  That is twenty-eight days earlier than the colony's first logged year.  Only thirty-nine percent of hatched chicks lived to fly.\n\nThe colony is not nesting earlier by chance, since terns time their first eggs to the spring air and water.  Their bodies respond once conditions cross a warm mark, and thirty years of warming have pulled that mark earlier.\n\nSpring herring feed the colony's chicks once they hatch, not from the moment an egg is laid.  Tern eggs take about twenty-two days to hatch.  A chick's own hungriest stretch begins roughly three weeks after its egg first appears, not the day the egg is laid.  That small fish times its own arrival by ocean temperature at sea.  That clock runs slower than the coastal air the terns respond to.  The herring's arrival date has held near April twenty-first every season.  It has drifted only three days either way.  In the colony's first logged season, eggs hatched around April twenty-ninth, more than a week after the herring had already arrived and settled in.  By the thirtieth season, eggs were hatching around April first, about three weeks before the herring showed up.  The colony's chicks now hatch weeks before their food source even arrives.\n\nThe gap between the two dates is what the fledge-rate column has been tracking.  It was never the nesting date by itself."
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-proposals",
+     "caption": "Three proposals for Halyard Point, checked against Command's three tests: an effect within one season, cost within budget, and only the Network's own authority.",
+     "alt": "Three side-by-side cards. Proposal A, a feeding station, passes all three tests but ends when the station stops. Proposal B, fencing, is within budget and quick to build but does not fix starving chicks, since predators are not the cause. Proposal C, a petition to delay the herring season, would close the mismatch at its root but takes over four months, past the one-season window, and lies outside the Network's own authority.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A three-card comparison titled \"Three proposals for Halyard Point\".",
+       "The header states that every proposal is checked against three tests: effect within one season, cost within budget, and the Network’s own authority.",
+       "Proposal A, a feeding station, carries YES on all three: within budget, within authority, and a real effect while it runs. Its card adds that the effect ends when the station stops.",
+       "Proposal B, fencing, carries YES within budget and YES ready in days, and a NO reading \"starving chicks, not predators\". Its card sums it up as fast and cheap, wrong cause.",
+       "Proposal C, a petition to delay the herring season, carries YES it closes the mismatch at its root, NO it takes over four months and so runs past one season, and NO it is outside the Network’s own authority. Its card sums it up as the right fix, wrong timeline and reach.",
+       "Card B shows no verdict for the authority test at all."
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "New Posting",
+     "goal": "Learn to read a system: parts, subsystems, and the ripples between them.",
+     "itemIds": []
+    },
+    {
+     "name": "The Sealed Station",
+     "goal": "Diagnose why Meridian Dome's air is drifting before supplies run out.",
+     "itemIds": []
+    },
+    {
+     "name": "Storm Front",
+     "goal": "Read the incoming data fast enough to warn the coast before the front arrives.",
+     "itemIds": []
+    },
+    {
+     "name": "The Long Pattern",
+     "goal": "Explain why two outposts at the same latitude report very different climates.",
+     "itemIds": []
+    },
+    {
+     "name": "Breaking Point",
+     "goal": "Trace every local mystery back to the one planetary pattern underneath it.",
+     "itemIds": [
+      "t5-ebsr-real-cause-of-drop"
+     ]
+    },
+    {
+     "name": "Final Deployment",
+     "goal": "Design and defend the Network's official response plan, the final field review.",
+     "itemIds": [
+      "t6-ms-proposals-against-constraints"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "t6-ms-proposals-against-constraints",
+     "type": "ms",
+     "passageId": "p-final-deployment-proposals",
+     "targets": [
+      "sci-t6-design-evaluate"
+     ],
+     "coachTopic": "evidence-final-deployment",
+     "dok": 4,
+     "stem": "Choose the three true facts about how the three proposals measure up against Command's constraints.",
+     "choices": [
+      "Proposal A treats the survival gap each season instead of closing it for good.",
+      "Proposal A requires authority the Network does not currently have.",
+      "Proposal B is too expensive to fit inside this year's field budget.",
+      "Proposal B satisfies the time and cost limits but does not fix the actual food gap.",
+      "Proposal C could take longer than Command's one-season window to even be decided.",
+      "Proposal C is guaranteed to time the fish run to arrive when the chicks need it next season."
+     ],
+     "key": [
+      0,
+      3,
+      4
+     ],
+     "distractorRationale": {
+      "1": "The report says the authority to run a feeding station is not even in question, since the Network already runs two elsewhere.",
+      "2": "The report says the fencing itself is inexpensive, well inside the cost limit Command set.",
+      "5": "The report says no petition has ever been decided in under four months, well past the one-season window, so Proposal C is not guaranteed to arrive in time at all."
+     },
+     "explain": "The three correct facts summarize each proposal's real trade-off: Proposal A only treats the symptom each season, Proposal B is cheap and fast but does not fix the food gap, and Proposal C could take longer to decide than Command's own window allows.  The three wrong choices each invert a specific constraint the report states about a different proposal."
+    },
+    {
+     "id": "t5-ebsr-real-cause-of-drop",
+     "type": "ebsr",
+     "passageId": "p-halyard-nesting-record",
+     "targets": [
+      "sci-t5-warming-adaptation"
+     ],
+     "coachTopic": "evidence-breaking-point",
+     "dok": 3,
+     "partA": {
+      "stem": "What is the real cause of the colony's dropping chick survival rate, according to the record?",
+      "choices": [
+       "The herring have stopped arriving at Halyard Point entirely.",
+       "The colony has been laying fewer eggs every year.",
+       "The chicks now hatch weeks before the herring, their one food source, arrive.",
+       "The earlier nesting date itself causes lower survival, whether or not the herring have come."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "The colony's chicks now hatch weeks before their food source even arrives.",
+       "The herring's arrival date has held near April twenty-first every season.",
+       "In the first logged season, the colony's first eggs came on April seventh.",
+       "It was never the nesting date by itself."
+      ],
+      "key": {
+       "0": 1,
+       "1": 2,
+       "2": 0,
+       "3": 3
+      }
+     },
+     "distractorRationale": {
+      "0": "This sentence says the herring's arrival date has held steady near April twenty-first, which means they still arrive every season, just on their own schedule.",
+      "1": "This sentence is about when the eggs appear, not how many eggs the colony lays.  The record never reports a falling egg count.",
+      "3": "The record states the opposite directly: it was never the nesting date by itself that mattered."
+     },
+     "explain": "The record's own closing description names the real cause: the colony's chicks now hatch weeks before the herring, their one food source, even arrive, a reversal from the colony's early seasons, when the herring were already there and settled in.  Each wrong choice either invents a detail the record does not report or contradicts its own stated conclusion."
+    }
+   ]
+  },
+  {
+   "note": "The seal item fixed:  outside the station, the manual's own word.",
+   "itemId": "t1-mc-what-a-seal-stops",
+   "meta": {
+    "id": "outpost-protocol-g6",
+    "subject": "sci"
+   },
+   "skin": {
+    "color": "#1a8f5e",
+    "icon": "🛰️",
+    "grandGoal": "Field Director"
+   },
+   "passages": [
+    {
+     "id": "p-training-bay-boundaries",
+     "title": "Field Manual: Boundaries, Inputs, and Outputs",
+     "text": "Instructor Perrin runs the training bay at Relay Station Zero, and she opens every posting with the same question.  Where does this system stop?  New operatives find that question strange at first, because a system sounds like a thing a person could walk up and point at.  A system is really whatever somebody decided to draw a line around, and that line has a name.  The line is called a boundary.\n\nA boundary marks what counts as part of the system, and everything else counts as outside it.  Anything crossing the boundary on its way in is an input, and anything crossing on its way out is an output.  Move the line, and the same water or the same air changes names entirely.  That is not a trick question.  That is the whole skill.\n\nPerrin uses the training bay's own water subsystem to show operatives how it works.  Draw the boundary around that one subsystem, and damp air from the crew quarters becomes an input, while clean water sent back to the taps becomes an output.  The filter membrane sits inside the line, so the membrane is a component rather than an input.  Now draw the boundary around all of life support instead, with the whole crew inside the larger line.  That same damp air never crosses the new boundary at all, because water is only moving from one subsystem to the next.\n\nHere is why the training bay drills this so hard before an operative ever ships out.  The output of one subsystem is usually the input of the subsystem beside it, and that handoff is what the manual calls an interaction.  Trace the handoffs through a station and an operative has traced the ripple.  A report naming the wrong boundary sends a technician into the wrong room.  Whatever failed is sitting inside somebody's boundary, and the job is knowing whose.\n\nSome boundaries are drawn far tighter than others.  A sealed station draws its line so no matter crosses either way, though sunlight still crosses it going in and the day's readings still go out by radio.  Energy and information cross a seal that solid, liquid, and gas cannot.  Perrin says most crews forget that difference by about the fourth day.\n\nThe rule she wants copied into every logbook is a short one.  Name the boundary before naming the failure.  An operative reporting that the water system failed has named nothing yet, while an operative reporting which line the trouble sits inside has started the actual work."
+    },
+    {
+     "id": "p-meridian-status-log",
+     "title": "Status Log: Meridian Dome, Days Ninety to One Hundred Eighteen",
+     "text": "Meridian Dome has run as a sealed system for one hundred eighteen days, its longest run.  Nothing enters and nothing leaves, though sunlight gets in and data goes out each morning.  Dr. Renata Kessler is the dome's systems lead.  She files this status log every four weeks.  Network Command can track the numbers without a crisis.\n\nOn day ninety, the dome's air held steady, and carbon dioxide read four hundred ten parts per million, or ppm.  Oxygen sat near twenty and a half percent.  Both numbers matched every reading since the seal closed, and the water subsystem was saving ninety-six percent of all the crew used.  The food modules were producing enough to cover every meal, with a small surplus.\n\nBy day one hundred four, the numbers had shifted.  Carbon dioxide had climbed to four hundred thirty ppm.  Oxygen had slipped to twenty percent even.  Neither shift was large enough to worry the crew, and Dr. Kessler's log calls it \"within normal drift.\"  Her notes say systems wander before they settle.\n\nBy day one hundred eighteen, the drift had not settled.  Carbon dioxide now reads four hundred fifty-two ppm.  Oxygen has fallen to nineteen and a half percent.  Water reclamation has held steady near ninety-five percent.  The food modules are still meeting every meal.  Neither of those subsystems appears to be the source.  One subsystem keeps drawing her attention: the algae bioreactor tucked beneath the food modules, the dome's main source of extra oxygen.  Its daily readings have gone low, though nothing about its gear has failed.\n\nDr. Kessler's log closes with one line, asking Network Command to send an operative to walk the dome.  Sensor readings show a number falling, but they cannot say why.  Four straight weeks of drift have passed, and why is the question the dome needs answered.",
+     "figureIds": [
+      "fig-dome-drift"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-dome-drift",
+     "caption": "Meridian Dome's sealed air, day 90 to day 118: carbon dioxide climbing while oxygen falls, plotted on two separate scales.",
+     "alt": "Two stacked line charts share the x-axis \"day.\" The top chart plots carbon dioxide in parts per million, climbing from 410 on day 90, to 430 on day 104, to 452 on day 118. The bottom chart plots oxygen in percent, falling from 20.5 on day 90, to 20.0 on day 104, to 19.5 on day 118.",
+     "dataTable": {
+      "panels": [
+       {
+        "type": "line",
+        "yLabel": "CO2 (ppm)",
+        "series": [
+         {
+          "label": "CO2",
+          "points": [
+           [
+            90,
+            410
+           ],
+           [
+            104,
+            430
+           ],
+           [
+            118,
+            452
+           ]
+          ]
+         }
+        ]
+       },
+       {
+        "type": "line",
+        "yLabel": "O2 (percent)",
+        "series": [
+         {
+          "label": "O2",
+          "points": [
+           [
+            90,
+            20.5
+           ],
+           [
+            104,
+            20
+           ],
+           [
+            118,
+            19.5
+           ]
+          ]
+         }
+        ]
+       }
+      ],
+      "xLabel": "day",
+      "notes": [
+       "Water reclamation held steady near 95 to 96 percent across the same days."
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "New Posting",
+     "goal": "Learn to read a system: parts, subsystems, and the ripples between them.",
+     "itemIds": [
+      "t1-mc-what-a-seal-stops"
+     ]
+    },
+    {
+     "name": "The Sealed Station",
+     "goal": "Diagnose why Meridian Dome's air is drifting before supplies run out.",
+     "itemIds": [
+      "t2-ebsr-what-is-ruled-out"
+     ]
+    },
+    {
+     "name": "Storm Front",
+     "goal": "Read the incoming data fast enough to warn the coast before the front arrives.",
+     "itemIds": []
+    },
+    {
+     "name": "The Long Pattern",
+     "goal": "Explain why two outposts at the same latitude report very different climates.",
+     "itemIds": []
+    },
+    {
+     "name": "Breaking Point",
+     "goal": "Trace every local mystery back to the one planetary pattern underneath it.",
+     "itemIds": []
+    },
+    {
+     "name": "Final Deployment",
+     "goal": "Design and defend the Network's official response plan, the final field review.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "t1-mc-what-a-seal-stops",
+     "type": "mc",
+     "passageId": "p-training-bay-boundaries",
+     "targets": [
+      "sci-t1-systems-vocab"
+     ],
+     "coachTopic": "evidence-systems-vocab",
+     "dok": 2,
+     "stem": "According to the manual, which of these can cross the boundary of a sealed station?",
+     "choices": [
+      "Radio signals carrying the day's readings out.",
+      "Water piped in from outside the station.",
+      "Replacement filter membranes brought in by supply run.",
+      "Air vented in from the outside atmosphere."
+     ],
+     "key": 0,
+     "distractorRationale": {
+      "1": "A sealed line stops matter in both directions, and water is matter.  The manual names solid, liquid and gas together as what a seal stops.",
+      "2": "A membrane is a solid object, and no matter crosses a seal.  The manual lists only energy and information as getting through.",
+      "3": "Gas is matter too, and the seal stops it exactly as it stops liquids and solids.  Sunlight and radio are the exceptions, not air."
+     },
+     "explain": "The manual is precise about what a seal does and does not stop: no matter crosses in either direction, while sunlight still crosses going in and the day's readings still go out by radio.  Energy and information cross a seal that solid, liquid and gas cannot, which is why a sealed station can still report home."
+    },
+    {
+     "id": "t2-ebsr-what-is-ruled-out",
+     "type": "ebsr",
+     "passageId": "p-meridian-status-log",
+     "targets": [
+      "sci-t2-systems-subsystems"
+     ],
+     "coachTopic": "evidence-sealed-station",
+     "dok": 3,
+     "partA": {
+      "stem": "By day one hundred eighteen, which subsystem does the log rule out as the source of the drift?",
+      "choices": [
+       "The algae bioreactor, since its daily readings went low while its gear still worked.",
+       "The water subsystem, since it was still reclaiming at ninety-five percent.",
+       "The algae bioreactor, since it was producing more oxygen than usual.",
+       "Dr. Kessler, since her notes call the drift \"within normal drift.\""
+      ],
+      "key": 1
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Neither shift was large enough to worry the crew, and Dr. Kessler's log calls it \"within normal drift.\"",
+       "Its daily readings have gone low, though nothing about its gear has failed.",
+       "Water reclamation has held steady near ninety-five percent.",
+       "One subsystem keeps drawing her attention: the algae bioreactor tucked beneath the food modules, the dome's main source of extra oxygen."
+      ],
+      "key": {
+       "0": 1,
+       "1": 2,
+       "2": 3,
+       "3": 0
+      }
+     },
+     "distractorRationale": {
+      "0": "This sentence is about the bioreactor's own falling readings, the subsystem the log is actually suspicious of, not one it rules out.",
+      "2": "This quote names the bioreactor as the one still drawing her attention, not one that is ruled out, and it never says its oxygen output rose.",
+      "3": "This quote is from the earlier day-one-hundred-four entry, which called an earlier, smaller shift normal drift.  It is not the day-one-hundred-eighteen ruling-out sentence."
+     },
+     "explain": "By the final entry, the log states plainly that water reclamation held steady near ninety-five percent, which rules the water subsystem out directly as the source of the drift.  The other choices each point to the bioreactor, the actual suspect, or an earlier, unrelated note instead."
+    }
+   ]
+  },
+  {
+   "note": "\"The maintenance binder\" at level 5, whose own story carries the slip's carbon copy back to it:  the name lists both levels' passages.",
+   "itemId": "l5-mc-what-the-place-row-records",
+   "meta": {
+    "id": "night-rounds-g6",
+    "subject": "ela"
+   },
+   "skin": {
+    "color": "#b45309",
+    "icon": "🐾",
+    "grandGoal": "Head Keeper"
+   },
+   "passages": [
+    {
+     "id": "p-l5-rehabbers-van",
+     "title": "The Rehabber's Van",
+     "text": "Thursday, 7:15 in the evening, under a sky the storm had already turned the colour of slate, and the wind was loud enough that I had to key my radio twice.\n\nI found her from the boardwalk, thirty feet out in the shallow water, standing exactly where no heron in her right mind stands during a storm.  Great blue heron, adult, one wing carried wrong.  She had her bill pointed straight up when my light reached her, a posture I have since read about in bitterns, and which our field guide says herons will also take when they hold still.\n\nHere is what I did not do.  I never waded out to her, I never threw a towel over her, and I never attempted to carry her anywhere at all.  Whitlock's rule about wild animals is one sentence long, and every keeper here can recite it from memory.  A wild animal that lands on our property is not our animal.\n\nWe are not licensed to treat wild birds.  The sanctuary cares for the residents in its files and for nobody else, and a heron off the river belongs to a different set of rules than Rana does.  My job was to keep my distance, keep her in sight, and get somebody on the telephone whose license covers exactly this.\n\nThat somebody is Alva Reyes, a licensed wildlife rehabilitator who lives forty minutes from here and has taken birds from us before.  Whitlock reached her by telephone at 7:22.  Alva asked four questions, and not one of them was a question I had expected.  Was the bird standing, and was it standing in water.  How close had anybody approached it, and how long ago.\n\nThen she said she was on her way, and she added one more thing that I wrote down word for word.  Do not chase her.  A bird that runs from you in a storm is a bird with a second injury.\n\nHer van pulled up to the maintenance gate a little after eight, in rain that was coming down flat.  She works quietly, and she arrived carrying a towel, a crate lined with something soft, and a way of moving that made her appear considerably slower than she actually was.  She came at the heron from the side rather than the front, talking the whole time in a low voice that had nothing to do with words.  It took her under a minute.  The bill goes into the towel first, which she told me afterward is the part nobody forgets, because a heron's bill is a spear and it is aimed at your face.\n\nAt the van she filled out a transfer slip on the hood, in the rain, with the crate already loaded, and the time she wrote on it was 8:40.  Time, place, species, condition, the name of the keeper who found the bird, and both signatures.  Whitlock signed it and Alva signed it, and I carried the carbon copy back to the maintenance binder.\n\nThat slip is the last thing our file will ever say about this bird.  She is not our animal, and I know perfectly well that this is the correct answer.  I stood at the gate anyway, in the wind, until the taillights were gone.",
+     "figureIds": [
+      "fig-l5-transfer-slip"
+     ]
+    },
+    {
+     "id": "p-l4-maintenance-file-fence-nine",
+     "title": "The Maintenance File on Fence Nine",
+     "text": "Fence Nine is the woven-wire fence running along the north pasture, between the pasture and the creek.  It measures three hundred and forty feet end to end.  The maintenance binder gives every fence on the property its own section, and the section for Fence Nine is the thickest one in the book.  I copied out the last two months of it after the storm, together with the two work orders that follow.\n\nThe section opens with the inspection schedule, which is our own rule and nobody else's.  Every fence on the perimeter is walked end to end once every two weeks.  The keeper who walks it dates the line and initials it.  An inspection that was never initialed did not happen, as far as this binder is concerned.\n\nThe two most recent inspection lines read as follows.  On the twenty-eighth of April, Ray Bettencourt walked Fence Nine and tightened the mesh at panel six.  On the twelfth of May, Ray Bettencourt walked the same fence again and replaced two loose staples.  His line ends with the words all posts sound.\n\nWork orders are kept separately from inspections, and this section contains two of them.  Work order 214, dated the third of April, covers the north service gate, whose hinge was rehung and whose latch pin was replaced.  Work order 318 was opened at 10:30 p.m. on the twenty-sixth of May, during the storm itself, and it reads: post fourteen snapped at ground level, mesh torn back on the creek side, temporary panel set, permanent repair to follow.\n\nThe discovery line is the one the newspaper never asked about.  It reads: gap in Fence Nine found during night rounds at 9:52 p.m. on the twenty-sixth of May by junior keeper Mara Delgado, reported by radio to Bo Ferris.  Underneath it, Bettencourt added a note the next morning.  A willow limb roughly fifteen feet long was lying across the fence line at post fourteen.  The break in the limb matches the big willow on the creek bank.\n\nEvery line in this section carries a date and a set of initials.  That is the entire point of keeping it.  A binder cannot tell you what actually happened out there in the dark.  It can tell you what somebody wrote down at the time, and who was willing to sign a name beside it.",
+     "figureIds": [
+      "fig-l4-fence-nine"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l5-transfer-slip",
+     "caption": "The slip lists the time, the place, the bird, and both signatures, and it is the last thing the file will ever say about this heron.",
+     "alt": "A transfer slip whose rows pair \"Time\" with 8:40, \"place\" with \"thirty feet out in the shallow water\", \"species\" with \"Great blue heron, adult\", and \"condition\" with \"one wing carried wrong\", then a fifth row labelled \"the name of the keeper who found the bird\" whose field is left empty, a signature block headed \"both signatures\" holding Whitlock and Alva Reyes, and a slanted stamp reading \"carbon copy\".",
+     "dataTable": {
+      "type": "facsimile",
+      "sourcePassageId": "p-l5-rehabbers-van",
+      "docKind": "status-log",
+      "title": "transfer slip",
+      "header": [
+       {
+        "label": "Time",
+        "value": "8:40"
+       },
+       {
+        "label": "place",
+        "value": "thirty feet out in the shallow water"
+       },
+       {
+        "label": "species",
+        "value": "Great blue heron, adult"
+       },
+       {
+        "label": "condition",
+        "value": "one wing carried wrong"
+       }
+      ],
+      "columns": [
+       {
+        "heading": "both signatures",
+        "rows": [
+         "Whitlock",
+         "Alva Reyes"
+        ]
+       }
+      ],
+      "stamp": "carbon copy",
+      "lines": [
+       {
+        "text": "the name of the keeper who found the bird",
+        "emphasis": "blank"
+       }
+      ]
+     }
+    },
+    {
+     "id": "fig-l4-fence-nine",
+     "caption": "A plan of Fence Nine between the north pasture and the creek, marking panel six, post fourteen, and the willow whose limb came down on the fence line.",
+     "alt": "A plan diagram in which a labelled box for the fence sits between a box for the pasture and a box for the creek, with connectors running out to two marked points along the run and up from a labelled willow to one of them.",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-l4-maintenance-file-fence-nine",
+      "layout": "plan",
+      "nodes": [
+       {
+        "id": "pasture",
+        "label": "the north pasture",
+        "shape": "box",
+        "x": 58,
+        "y": 8
+       },
+       {
+        "id": "panel",
+        "label": "panel six",
+        "shape": "round",
+        "x": 12,
+        "y": 46
+       },
+       {
+        "id": "fence",
+        "label": "Fence Nine",
+        "shape": "box",
+        "x": 46,
+        "y": 46
+       },
+       {
+        "id": "post",
+        "label": "post fourteen",
+        "shape": "round",
+        "x": 80,
+        "y": 46
+       },
+       {
+        "id": "creek",
+        "label": "the creek",
+        "shape": "box",
+        "x": 20,
+        "y": 86
+       },
+       {
+        "id": "willow",
+        "label": "big willow",
+        "shape": "round",
+        "x": 82,
+        "y": 86
+       }
+      ],
+      "edges": [
+       {
+        "from": "pasture",
+        "to": "fence",
+        "style": "line"
+       },
+       {
+        "from": "panel",
+        "to": "fence",
+        "style": "line",
+        "label": "the twenty-eighth of April"
+       },
+       {
+        "from": "fence",
+        "to": "post",
+        "style": "line"
+       },
+       {
+        "from": "fence",
+        "to": "creek",
+        "style": "line"
+       },
+       {
+        "from": "willow",
+        "to": "post",
+        "style": "arrow",
+        "label": "the fence line"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "First Rounds",
+     "goal": "Walk the evening route, and learn why a keeper writes down what she sees.",
+     "itemIds": []
+    },
+    {
+     "name": "The Wrong Diet",
+     "goal": "Read a diet card, a vet memo, and an invoice until the otter's slow week makes sense.",
+     "itemIds": []
+    },
+    {
+     "name": "The Night Noise",
+     "goal": "Weigh three witness accounts against the night's own records.",
+     "itemIds": []
+    },
+    {
+     "name": "The Fence Gap",
+     "goal": "Separate storm damage from rumor using the maintenance file, the bulletin, and the newspaper.",
+     "itemIds": [
+      "l4-ebsr-inspection-line"
+     ]
+    },
+    {
+     "name": "The Heron's Night",
+     "goal": "Follow the heron down out of the storm, and the rule that a wild animal is not ours.",
+     "itemIds": [
+      "l5-mc-what-the-place-row-records"
+     ]
+    },
+    {
+     "name": "The Open Gate",
+     "goal": "Assemble the night of the storm from five records and one memory, and judge which sources hold.",
+     "itemIds": []
+    }
+   ],
+   "items": [
+    {
+     "id": "l5-mc-what-the-place-row-records",
+     "type": "mc",
+     "passageId": "p-l5-rehabbers-van",
+     "figureId": "fig-l5-transfer-slip",
+     "figureFact": "thirty feet out in the shallow water",
+     "targets": [
+      "c1-lit-1-key-details"
+     ],
+     "coachTopic": "evidence-story-details",
+     "dok": 2,
+     "stem": "The transfer slip has a row marked \"place\".  Which place does the slip record there?",
+     "choices": [
+      "The boardwalk, where the keeper was standing when the light found the bird",
+      "The spot thirty feet out in the shallow water, where the heron was standing",
+      "The maintenance gate, where the van pulled up a little after eight",
+      "The maintenance binder, where the keeper carried the slip's carbon copy that night"
+     ],
+     "key": 1,
+     "distractorRationale": {
+      "0": "The boardwalk is where the keeper watched from;  the slip records where the bird was, not where the person was.",
+      "2": "The gate is where the van stopped and where the slip was written on the hood, which is a different place from where the heron was found.",
+      "3": "The binder is where the copy went after the night was over, and it is not an entry on the slip at all."
+     },
+     "explain": "Several places turn up in this account, and only the slip itself shows which one the form keeps.  The place row records where the heron was, thirty feet out in the shallow water, because the slip is a record of the bird rather than of the keeper's night.  The other three answers are all real places in the story, and none of them is what the form was asking for.",
+     "whyTheFigureIsNeeded": "The passage names several different places on that night and never says which one the form's place row holds, so only the drawing settles it."
+    },
+    {
+     "id": "l4-ebsr-inspection-line",
+     "type": "ebsr",
+     "passageId": "p-l4-maintenance-file-fence-nine",
+     "targets": [
+      "c4-4-use-evidence",
+      "c1-inf-1-key-details"
+     ],
+     "coachTopic": "research-integrate",
+     "dok": 2,
+     "partA": {
+      "stem": "What do the two most recent inspection lines in the Fence Nine section establish?",
+      "choices": [
+       "That the fence was walked on the twelfth of May, all posts sound.",
+       "That the fence had not been walked since the storm damaged post fourteen.",
+       "That inspections happen only when a work order calls for a keeper to walk the fence.",
+       "That the fence is walked once a month by whichever keeper happens to be free."
+      ],
+      "key": 0
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Work orders are kept separately from inspections, and this section contains two of them.",
+       "On the twelfth of May, Ray Bettencourt walked the same fence again and replaced two loose staples.",
+       "Every fence on the perimeter is walked end to end once every two weeks.",
+       "Work order 318 was opened at 10:30 p.m. on the twenty-sixth of May, during the storm itself, and it reads: post fourteen snapped at ground level, mesh torn back on the creek side, temporary panel set, permanent repair to follow."
+      ],
+      "key": {
+       "0": 1,
+       "1": 3,
+       "2": 0,
+       "3": 2
+      }
+     },
+     "distractorRationale": {
+      "1": "Post fourteen snapped during the storm on the twenty-sixth, two weeks after the most recent inspection line was dated and initialed.",
+      "2": "Work orders are kept separately from inspections precisely because the two-week walk happens on a schedule of its own.",
+      "3": "The schedule is every two weeks, not monthly, and both recent lines carry the same keeper's name and initials."
+     },
+     "explain": "Two dated, initialed lines put a keeper on the fence on the twenty-eighth of April and again on the twelfth of May, ending with the words all posts sound.  The wrong choices confuse the storm damage, the work-order system, or a monthly schedule with what the inspection lines themselves record."
+    }
+   ]
+  }
+ ]
+}

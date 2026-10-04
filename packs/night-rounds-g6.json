@@ -4658,7 +4658,7 @@
         "The wind station grid is filled in by whoever walks rounds.",
         "The pin check gains a second initial column.",
         "Night rounds move an hour earlier during storm season.",
-        "The maintenance binder is closed to anyone outside the sanctuary.",
+        "The sanctuary's records are closed to anyone outside its gates.",
         "The volunteer log gains a line asking what you heard and when you wrote it down."
       ],
       "key": [
@@ -4943,11 +4943,11 @@
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "The change is about two tasks rather than two people, which is the same design the diet card uses for fish and tablet.",
+        "0": "The change is about two jobs rather than two people.  The report says one signature can no longer cover two separate jobs.",
         "1": "The line was printed and simply left blank, which is what made the omission visible.",
         "3": "The report never compares formats;  it identifies which record failed and repairs that record."
       },
-      "explain": "The fix is borrowed from a case two levels earlier: when one initial can cover two jobs, the job people forget is the one that goes unrecorded.  Splitting the column makes the omission visible the same night rather than in a report afterward."
+      "explain": "The report borrows the fix from the supplement column on a diet card: when one initial can cover two jobs, the job people forget is the one that goes unrecorded.  Splitting the column makes the omission visible the same night rather than in a report afterward."
     },
     {
       "id": "l6-mc-final-line",
