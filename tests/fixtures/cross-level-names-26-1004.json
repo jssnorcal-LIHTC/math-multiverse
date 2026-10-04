@@ -1,0 +1,1528 @@
+{
+ "_about": "I6 controls for tests/sweep-cross-level.js (26-1004).  mustFire:  Firsthand level 6 offering Samaria and Jerusalem (level-2 places), the case lens A2 found after every other rule read clean;  and Vault level 1 calling its unnamed narrator \"Mila\", a name the child first meets in level 3.  mustStayClean:  each one fixed, plus the three near-misses I6 has to pass:  the frame word \"Archive\" (level 2's own name, shown on the level list), \"Buddhist\" where the level says \"Buddhism\", and \"If\", capitalized only where a sentence starts.",
+ "source": "packs/*.json at 4975b26, with batches/p2-names-*.json and lens A2's fix for l6-vis-rome-map-reads",
+ "mustFire": [
+  {
+   "note": "Firsthand level 6 offers Samaria and Jerusalem, places only level 2 names.",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "passages": [
+    {
+     "id": "p-t2-kingdom-divided",
+     "title": "Case File: The Kingdom That Split in Two",
+     "text": "The Office keeps one rule for sacred texts.  Read them for what they claim.  Then look for anything outside them that touches the same claim.  This entry is the best case in the archive for that rule.\n\nThe Hebrew Bible describes Solomon's kingdom breaking apart soon after he died, around nine hundred thirty BCE.  The northern tribes pulled away and formed a kingdom called Israel.  The northern kingdom's capital came to be a city named Samaria.  In that account, the southern tribes kept the line of David and the Temple in Jerusalem, in a smaller kingdom called Judah.  In that account, two kingdoms now stood where one had stood before.\n\nThen the outside evidence arrives, and it is unusually good.  A carved stone known as the Mesha Stele was raised by a king of Moab.  It names Omri, a king of Israel, as an enemy who had pressed hard on Moab.  An Assyrian monument known as the Black Obelisk lists tribute paid to an Assyrian king.  It names Jehu, a later king of Israel, among those who paid.  Neither stone was cut to prove the Hebrew Bible right.  Each was cut to praise its own king, which is exactly why the Office weighs it.\n\nThe northern kingdom fell to Assyria.  Assyrian armies took Samaria around seven hundred twenty-two BCE, and Assyrian royal records report the capture in their own words.  Those records do not fully agree about which king finished the siege, and the Office files that disagreement rather than smoothing it away.  Assyria then moved many of the defeated people to other parts of its empire.  Newcomers were settled in their place.\n\nThe account preserved in the Hebrew Bible explains the fall in its own terms.  It describes the defeat as a punishment for abandoning the covenant.  That reasoning belongs to the account, and the Office records it as the account's own.\n\nMuch later, stories grew up about ten lost tribes still wandering somewhere.  The Office files those stories as legend.  Judah lasted longer than its northern neighbor did.  What finally happened to Judah is filed under the exile that followed.",
+     "figureIds": [
+      "fig-exile-map"
+     ]
+    },
+    {
+     "id": "p-t6-long-ending",
+     "title": "Case File Addendum: The Long Ending",
+     "text": "The closing entry on Rome is filed and sealed.  This addendum sits behind it for one reason.  The file closed on an empire that had not finished happening yet.\n\nThe two centuries after Augustus ran quieter inside the borders than the years before them had.  Later writers gave that stretch its name, the Pax Romana, the Roman peace.  Goods moved along paved roads and safe sea lanes.  Roman coins worked across a huge stretch of ground.  Engineers built aqueducts that carried water for miles, and they used concrete to raise vaults and domes that still stand today.\n\nThe quiet did not hold, and in the two hundreds CE the empire nearly came apart.  Armies made and unmade emperors at speed.  Borders came under pressure from groups pushing in from outside.  Coins carried less and less silver, and prices climbed.\n\nLater emperors held the thing together by changing its shape, and Diocletian split the work of ruling among several men.  Constantine moved the capital east, to a Greek city he rebuilt and renamed for himself.  In three hundred ninety-five CE the empire was divided into a western half and an eastern half, each with its own ruler.\n\nThe western half thinned out over the next hundred years.  Rome itself was sacked, in four hundred ten and again in four hundred fifty-five CE.  In four hundred seventy-six CE a commander removed the last emperor the west still had, and put no one in his place.\n\nThe eastern half did not fall then.  Ruled from Constantinople, it lasted nearly another thousand years.  Its own people called themselves Romans, in Greek, and rarely used any other name for their state.  Much later, European scholars began calling that empire Byzantine, a name its own people never used for their empire.\n\nThat is this record's closing warning, and it fits every file in the drawer.  A phrase like the fall of Rome sounds like a single event.  What the evidence shows is a government ending in one half, a government carrying on in the other, and roads, law, and language living on past both.  Names get applied by whoever writes last, and checking who applied a name, and when, is the whole job.",
+     "figureIds": [
+      "fig-rome-map"
+     ]
+    },
+    {
+     "id": "p-t6-closing-the-file",
+     "title": "Case File: Closing the File on Rome",
+     "text": "This is the last entry in the whole case file.  It closes in a different way than every entry before it.  Rome does not open a new puzzle.  It answers back into every puzzle this file has already opened.\n\nRome began as a kingdom, then threw out its own king and became a republic instead.  Two elected consuls led it, along with a council called the Senate.  For years afterward, rich patrician families held nearly all the real power.  Plain plebeian citizens fought for a bigger share of it.  That fight in time produced the Twelve Tables, Rome's first written law code.  The code was posted in public so that every citizen, patrician or plebeian, could actually see the same laws applied to all, even though rank still shaped much of Roman life.  Compare that to Hammurabi's own code, filed at the very start of this record.  Its finished laws still punished the same crime in different ways, depending on who the victim was.\n\nRome's spot on a sea-facing peninsula pushed it steadily outward.  Rome fought the rival city of Carthage across three long wars and won.  Rome then held most of the Mediterranean coast.  A road web linked it all, moving troops and officials fast across huge distances.\n\nThe republic itself could not survive its own success.  A general named Julius Caesar seized power by force.  Senators feared he wished to rule as a king, and they killed him.  More years of civil war came next.  His adopted heir, Octavian, rose as Rome's first emperor, taking the name Augustus.  A republic without a king had lasted nearly five hundred years before an empire took its place.\n\nRome gave out citizenship widely across its conquered lands, a reach that went far past Athens and its own narrow assembly.  Athens had let its citizens vote right on the city's own laws, years earlier.  Rome also matched many of its own gods to Greek ones, treating each pair as one god under two names.  Rome took in Greek philosophy too.  The file that opened with a river and a code of law now closes with an empire, one built from nearly every civilization this record has ever checked.",
+     "figureIds": [
+      "fig-rome-plate",
+      "fig-roman-bust"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-rome-map",
+     "caption": "Rome and Constantinople, the two capitals behind the empire’s division into a western and an eastern half.",
+     "alt": "A map of the Mediterranean. Rome and Constantinople are marked, with the western and eastern halves labelled on either side. No border is drawn between them. Notes say the empire was divided in three hundred ninety-five CE, that the west thinned out, that Rome was sacked twice, and that its last emperor was removed in four hundred seventy-six.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Mediterranean with two cities marked: Rome and Constantinople.",
+       "Two areas are labelled WESTERN HALF and EASTERN HALF.",
+       "NO BORDER IS DRAWN between the two halves anywhere on the map.",
+       "A note reads: in three hundred ninety-five CE the empire was divided into a western half and an eastern half, each with its own ruler.",
+       "A note reads: the west thinned out.  Rome was sacked in four hundred ten and again in four hundred fifty-five; in four hundred seventy-six its last emperor was removed."
+      ]
+     }
+    },
+    {
+     "id": "fig-exile-map",
+     "caption": "Two kingdoms where one had stood: Israel with its capital at Samaria, Judah with the Temple in Jerusalem, and the direction Assyria moved the defeated people.",
+     "alt": "A map of the eastern Mediterranean and Mesopotamia. Samaria and Jerusalem are marked in the Levant, labelled Israel and Judah. A dashed arrow curves north-east from Samaria to Assyria. A note says Assyrian records do not fully agree about which king finished the siege, and that this file keeps that disagreement.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Levant and Mesopotamia.",
+       "Two cities are marked and labelled: Samaria and Jerusalem.",
+       "Three regions are labelled: ISRAEL around Samaria, JUDAH around Jerusalem, and ASSYRIA to the north-east.",
+       "A dashed arrow runs from Samaria north-east to Assyria.",
+       "A note reads: Assyrian armies took Samaria around seven hundred twenty-two BCE.",
+       "A note reads: Assyria then moved many of the defeated people to other parts of its empire.",
+       "A note in a different colour reads: Assyrian records do not fully agree about which king finished the siege, and this file keeps that disagreement rather than smoothing it away."
+      ]
+     }
+    },
+    {
+     "id": "fig-rome-plate",
+     "caption": "Piranesi's view of the Roman Forum, etched about 1775, when it was pasture and known as the Campo Vaccino.  The second view is a Roman portrait bust from the same file.",
+     "alt": "An eighteenth-century etching looking across the Roman Forum from the Capitol. The Arch of Septimius Severus stands at the lower left, tall columns of the Temple of Vespasian rise at the right, broken column drums and carved capitals lie in the foreground, and the Colosseum sits on the skyline in the distance. A numbered key and the title Veduta di Campo Vaccino are printed along the bottom edge.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "An eighteenth-century etching of the Roman Forum seen from the Capitol, shown on the first of two tabs.",
+       "The Arch of Septimius Severus stands at the lower left.",
+       "Tall columns of the Temple of Vespasian rise at the right.",
+       "Broken column drums and carved capitals lie scattered across the foreground.",
+       "The Colosseum sits on the skyline in the distance.",
+       "A numbered key and the printed title \"Veduta di Campo Vaccino\" run along the bottom edge of the plate.",
+       "The second tab shows a Roman marble portrait bust, a photograph rather than an etching."
+      ]
+     }
+    },
+    {
+     "id": "fig-roman-bust",
+     "caption": "A Roman marble portrait bust of the emperor Gaius, better known as Caligula, carved during his own short reign.",
+     "alt": "A white marble bust of a young man with short cropped hair, his head turned slightly to his right, on a dark base."
+    }
+   ],
+   "levels": [
+    {
+     "itemIds": [
+      "t2-ebsr-why-the-outside-stones-count"
+     ]
+    },
+    {
+     "itemIds": [
+      "l6-vis-rome-map-reads",
+      "t6-ebsr-twelve-tables-vs-hammurabi"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "t2-ebsr-why-the-outside-stones-count",
+     "type": "ebsr",
+     "passageId": "p-t2-kingdom-divided",
+     "targets": [
+      "hist-t2-hebrews"
+     ],
+     "coachTopic": "evidence-shortest-file",
+     "dok": 3,
+     "partA": {
+      "stem": "According to the case file, why does the Office weigh the two carved stones so heavily?",
+      "choices": [
+       "Both were carved by kings of Israel, Omri and Jehu, to record their own kingdom's history in stone.",
+       "Each was cut to praise its own king, not to back up the Hebrew Bible, yet names a king of Israel.",
+       "Together they settle which Assyrian king finished the siege of Samaria, a point the other records dispute.",
+       "They give the reason the northern kingdom fell, calling it a punishment for abandoning the covenant."
+      ],
+      "key": 1
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Each was cut to praise its own king, which is exactly why the Office weighs it.",
+       "Those records do not fully agree about which king finished the siege, and the Office files that disagreement rather than smoothing it away.",
+       "It describes the defeat as a punishment for abandoning the covenant.",
+       "A carved stone known as the Mesha Stele was raised by a king of Moab."
+      ],
+      "key": {
+       "0": 3,
+       "1": 0,
+       "2": 1,
+       "3": 2
+      }
+     },
+     "distractorRationale": {
+      "0": "Omri and Jehu are the kings of Israel the stones NAME, not the ones who carved them; one stone was raised by a king of Moab, and the other lists tribute paid to an Assyrian king.",
+      "2": "The case file leaves that question open on purpose: the Assyrian records themselves do not fully agree about it, and the Office files the disagreement rather than smoothing it away.",
+      "3": "That explanation belongs to the account preserved in the Hebrew Bible, not to either stone, and the Office records it as the account's own reasoning."
+     },
+     "explain": "The case file explains its own method: a monument cut to praise a Moabite or Assyrian king had no reason to support the Hebrew Bible, and it names Israelite kings anyway, which is exactly what makes it useful outside evidence.  The other choices misplace who carved the stones, overstate what they settle, or hand the stones an explanation that belongs to the written account instead."
+    },
+    {
+     "id": "l6-vis-rome-map-reads",
+     "type": "cloze",
+     "passageId": "p-t6-long-ending",
+     "figureId": "fig-rome-map",
+     "targets": [
+      "hist-t6-rome"
+     ],
+     "coachTopic": "evidence-closing-the-file",
+     "dok": 2,
+     "stem": "The map marks two cities, {{0}} in the western half and {{1}} in the eastern, and draws {{2}} between the two halves.",
+     "blanks": [
+      {
+       "choices": [
+        "Rome",
+        "Constantinople",
+        "Samaria"
+       ],
+       "key": 0,
+       "distractorRationale": {
+        "1": "Constantinople is the eastern one on this map.",
+        "2": "Samaria belongs to the exile map, not this one."
+       }
+      },
+      {
+       "choices": [
+        "Rome",
+        "Constantinople",
+        "Jerusalem"
+       ],
+       "key": 1,
+       "distractorRationale": {
+        "0": "Rome is the western one.",
+        "2": "Jerusalem is not marked on this map at all."
+       }
+      },
+      {
+       "choices": [
+        "a solid line",
+        "no border at all",
+        "a dashed line"
+       ],
+       "key": 1,
+       "distractorRationale": {
+        "0": "No line of any kind divides the halves on this map.",
+        "2": "There is no dashed divider either. The halves carry labels and nothing between them."
+       }
+      }
+     ],
+     "explain": "Rome sits in the half labelled WESTERN and Constantinople in the half labelled EASTERN. No border is drawn between them, because the file says the empire was divided and never says where the line ran."
+    },
+    {
+     "id": "t6-ebsr-twelve-tables-vs-hammurabi",
+     "type": "ebsr",
+     "passageId": "p-t6-closing-the-file",
+     "targets": [
+      "hist-t6-rome"
+     ],
+     "coachTopic": "evidence-closing-the-file",
+     "dok": 4,
+     "partA": {
+      "stem": "According to the case file, how did Rome's Twelve Tables compare to Hammurabi's code, filed at the start of this record?",
+      "choices": [
+       "The Twelve Tables were Rome's first attempt at law of any kind, just as Hammurabi's code was Mesopotamia's first attempt at law of any kind.",
+       "Both codes were kept secret from ordinary citizens, and only kings and priests were ever allowed to know what they actually said.",
+       "Hammurabi's code punished every rank of society equally, exactly as the Twelve Tables did, so neither code treated a victim's standing as relevant.",
+       "The Twelve Tables were posted as the same laws for all, while Hammurabi's code punished the same crime differently by the victim's rank."
+      ],
+      "key": 3
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "That fight in time produced the Twelve Tables, Rome's first written law code.",
+       "For years afterward, rich patrician families held nearly all the real power.",
+       "The file that opened with a river and a code of law now closes with an empire, one built from nearly every civilization this record has ever checked.",
+       "The code was posted in public so that every citizen, patrician or plebeian, could actually see the same laws applied to all, even though rank still shaped much of Roman life."
+      ],
+      "key": {
+       "0": 0,
+       "1": 1,
+       "2": 2,
+       "3": 3
+      }
+     },
+     "distractorRationale": {
+      "0": "The Twelve Tables were Rome's first written law code, but the passage never says either code was a first attempt at law of any kind.  It says only that Hammurabi's code was filed at the very start of this record.",
+      "1": "The passage says patrician families held nearly all the real power for years, which explains a power imbalance, but it never claims either code was kept secret from ordinary citizens; the Twelve Tables were posted publicly precisely so laws could be seen.",
+      "2": "This line says only that the file opened with a code of law and closes with an empire built from many civilizations, not that the two codes worked alike.  The passage says the opposite about Hammurabi's code: its laws punished the same crime differently depending on who the victim was."
+     },
+     "explain": "The passage draws the comparison directly.  The Twelve Tables were posted in public so every citizen could see the same laws applied to all, even though rank still shaped much of Roman life.  Hammurabi's code, filed at the start of this record, punished the same crime differently depending on who the victim was.  The other choices each state the reverse of a specific claim or add a detail the passage does not support."
+    }
+   ]
+  },
+  {
+   "note": "Vault level 1 says \"Mila\" though its passage never names its narrator;  level 3 does.",
+   "meta": {
+    "id": "vault-of-ages-g6",
+    "subject": "ela"
+   },
+   "passages": [
+    {
+     "id": "p-two-empty-chairs",
+     "title": "Two Empty Chairs",
+     "text": "I count four chairs around Finch's table, and only two of them get used, which tells me something before anyone says a word.  I take the one nearest the door, because I like knowing where the door is, and a boy about my age takes the other one without asking whether it is taken.  He introduces himself as Theo, then seems to regret it immediately, like talking to a stranger is a skill he is still building.  I decide I like him better for that than I would have liked someone smooth.\n\nFinch does not explain what this place is.  She sets a single photograph on the table between us: a glass disc, roughly the size of a coaster, etched with a pattern that curves in on itself like a shell.  She asks what we notice, and Theo says the pattern looks like a maze with no walls.  That is a better answer than mine would have been, because I was still counting the empty chairs.\n\nI ask the question I actually care about.  Why are there two empty chairs?  Did two people quit, or have two people simply not arrived yet?  Finch says that is the correct question to have asked, though she does not answer it.  I have known her for eleven minutes, and I already understand that this is going to be a pattern.\n\nShe tells us the disc in the photograph has a name, the Threadglass, documented in three separate archives across two centuries.  Then it vanished from all three collections within the same decade.  Objects like that do not vanish on their own, she says.  Someone wanted it enough to risk being caught holding it, three times, in three different countries.  She wants to know if we want it back badly enough to take a much smaller risk than that.\n\nTheo asks who has it now.  Finch says a private collector, one with a very good lawyer and a very quiet gallery.  The Archive does not involve lawyers, she adds, because lawyers require you to explain things in rooms with records.  I like that answer more than I expected to.\n\nThe door opens before she finishes, and a third kid drops into one of the empty chairs like he has been late to better things than this.  He says his name is Dash, apologizes to no one in particular, and asks whether he missed anything important.  Finch says he missed the part where she decides whether to trust any of us.  The part he is walking into now, she says, is the part where we start deciding whether to trust each other.  Nobody laughs.  I notice that the fourth chair is still empty, and that nobody else in the room has looked at it once.",
+     "figureIds": [
+      "fig-l1-two-empty-chairs"
+     ]
+    },
+    {
+     "id": "p-kade-collection",
+     "title": "The Kade Collection",
+     "text": "The card Finch gives Theo for this one has a different kind of lie built into it.  It is a laminated badge that says he is delivering a framing order to Augustine Kade's private gallery.  He also carries a flat cardboard box.  As far as Theo can tell, it contains an actual empty picture frame, in case anybody asks to see inside it.  Finch calls this kind of cover honest bait.  A delivery, she says, is the one kind of stranger a guarded building lets walk right up to the door without a second thought.\n\nThe gallery occupies the top two floors of a building with no sign on the street.  Theo has learned that is its own kind of announcement, to anyone who already knows what they are looking for.  A man at the intake desk barely looks up from his screen before waving him toward a service elevator.  Theo spends the ride up reminding himself of something.  The box in his hands is the least interesting thing he is carrying.  The interesting thing is a floor plan Mila drew from three different sets of public renovation permits, memorized rather than carried.\n\nThe gallery floor is not what Theo expected.  He pictured locked glass cases and velvet ropes, the way a museum keeps things at arm's length from visitors.  Instead the Threadglass sits on an open pedestal, in the center of a bright room, lit from above.  It is close enough to touch.  That strikes him as either supreme confidence, or a trap so obvious that nobody sane could believe it was real.  He decides it does not matter which.  His job today is not to touch anything.  His job is to look.\n\nA woman crosses the room toward him before he has finished looking.  She moves like someone who has never once had to hurry in her life.  She introduces herself as Kade.  She says the framing order is not something she remembers placing.  Then she asks, in a tone as level as the floor, who exactly sent him.\n\nTheo's answer is ready before he decides to give it.  The rule Finch drilled into him is simple: never invent, offer something boring that can be checked.  He says the order came through a framing shop two streets over.  He gives the shop's real name.  He offers to leave the frame and come back, once she has sorted out the confusion on her end.  It is a true detail wrapped around a lie.  True details are the only kind that survive a phone call.\n\nKade studies him for exactly as long as it takes to decide he is not worth the effort of catching in something.  Then she tells him to leave the box at the desk on his way out.  Theo does exactly that.  He does not look at the pedestal again on his way past it.  He has already counted the four exits and the two visible cameras.  He has already noticed that the pedestal has no case around it at all, only a thin dark line in the floor circling it, like a fence nobody could see unless they already knew where to look.",
+     "figureIds": [
+      "fig-l3-kade-collection"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l1-two-empty-chairs",
+     "caption": "A plan view of Finch's table, drawn from above.",
+     "alt": "A plan view of \"Finch's table\" with four chairs set around it at its corners, a plain line joining each one to the table.  Three are drawn as plain boxes and carry the words \"the one nearest the door\", \"introduces himself as Theo\" and \"his name is Dash\".  The fourth is drawn as a rounded, highlighted shape and carries the words \"the fourth chair is still empty\".",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-two-empty-chairs",
+      "layout": "plan",
+      "title": "four chairs around Finch's table",
+      "nodes": [
+       {
+        "id": "door_seat",
+        "label": "the one nearest the door",
+        "shape": "box",
+        "x": 16,
+        "y": 8
+       },
+       {
+        "id": "theo",
+        "label": "introduces himself as Theo",
+        "shape": "box",
+        "x": 84,
+        "y": 8
+       },
+       {
+        "id": "table",
+        "label": "Finch's table",
+        "shape": "box",
+        "x": 50,
+        "y": 50
+       },
+       {
+        "id": "dash",
+        "label": "his name is Dash",
+        "shape": "box",
+        "x": 84,
+        "y": 92
+       },
+       {
+        "id": "fourth",
+        "label": "the fourth chair is still empty",
+        "shape": "round",
+        "x": 16,
+        "y": 92
+       }
+      ],
+      "edges": [
+       {
+        "from": "door_seat",
+        "to": "table",
+        "style": "line"
+       },
+       {
+        "from": "theo",
+        "to": "table",
+        "style": "line"
+       },
+       {
+        "from": "dash",
+        "to": "table",
+        "style": "line"
+       },
+       {
+        "from": "fourth",
+        "to": "table",
+        "style": "line"
+       }
+      ]
+     }
+    },
+    {
+     "id": "fig-l3-kade-collection",
+     "caption": "The plan shows the top two floors, from the intake desk to the room Theo came to see.",
+     "alt": "A floor plan with \"the intake desk\", \"a service elevator\" and \"the four exits\" down the left side, and on the right \"the center of a bright room\", with \"an open pedestal\" below it, \"a thin dark line in the floor circling it\" below that, and \"the two visible cameras\" beside the room.  Arrows run from the desk to the elevator, from the elevator into the room, and from the room out to the four exits;  plain lines tie the room to the pedestal and to the cameras, and the pedestal to the dark line in the floor.",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-kade-collection",
+      "layout": "plan",
+      "title": "the top two floors",
+      "nodes": [
+       {
+        "id": "desk",
+        "label": "the intake desk",
+        "shape": "box",
+        "x": 16,
+        "y": 8
+       },
+       {
+        "id": "lift",
+        "label": "a service elevator",
+        "shape": "box",
+        "x": 16,
+        "y": 45
+       },
+       {
+        "id": "exits",
+        "label": "the four exits",
+        "shape": "box",
+        "x": 16,
+        "y": 86
+       },
+       {
+        "id": "room",
+        "label": "the center of a bright room",
+        "shape": "box",
+        "x": 60,
+        "y": 8
+       },
+       {
+        "id": "ped",
+        "label": "an open pedestal",
+        "shape": "round",
+        "x": 60,
+        "y": 48
+       },
+       {
+        "id": "ring",
+        "label": "a thin dark line in the floor circling it",
+        "shape": "box",
+        "x": 60,
+        "y": 86
+       },
+       {
+        "id": "cams",
+        "label": "the two visible cameras",
+        "shape": "box",
+        "x": 92,
+        "y": 30
+       }
+      ],
+      "edges": [
+       {
+        "from": "desk",
+        "to": "lift",
+        "style": "arrow"
+       },
+       {
+        "from": "lift",
+        "to": "room",
+        "style": "arrow"
+       },
+       {
+        "from": "room",
+        "to": "exits",
+        "style": "arrow"
+       },
+       {
+        "from": "room",
+        "to": "ped",
+        "style": "line"
+       },
+       {
+        "from": "ped",
+        "to": "ring",
+        "style": "line"
+       },
+       {
+        "from": "room",
+        "to": "cams",
+        "style": "line"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "itemIds": [
+      "l1-mc-trust-each-other"
+     ]
+    },
+    {
+     "itemIds": [
+      "l3-ebsr-what-the-line-means"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l1-mc-trust-each-other",
+     "type": "mc",
+     "passageId": "p-two-empty-chairs",
+     "targets": [
+      "c1-lit-1-key-details"
+     ],
+     "coachTopic": "evidence-story-details",
+     "dok": 3,
+     "stem": "According to Finch, what changes once Dash joins Theo and Mila at the table?",
+     "choices": [
+      "Finch decides she can no longer trust any of the three, since Dash arrived late.",
+      "The three of them must now vote on every decision about the Threadglass.",
+      "Dash is immediately given final say over the mission.",
+      "The question shifts from whether Finch trusts them to whether they can trust each other."
+     ],
+     "key": 3,
+     "distractorRationale": {
+      "0": "Finch's words describe a shift, not a loss of trust on her part.  If you picked this, you read her comment as more negative than the passage actually states.",
+      "1": "Voting is never mentioned anywhere in this scene.  You may be filling in a detail the text never gives you.",
+      "2": "Nothing in the passage puts Dash in charge of anything.  He arrives late and is treated the same as Theo and Mila, not given special authority."
+     },
+     "explain": "Finch draws a clear line: the part about whether she trusts them is finishing, and a new part is beginning, whether the three of them can trust each other.  That shift matters because it points the story toward the crew's relationships, not just their relationship with Finch."
+    },
+    {
+     "id": "l3-ebsr-what-the-line-means",
+     "type": "ebsr",
+     "passageId": "p-kade-collection",
+     "targets": [
+      "c1-lit-4-reasoning"
+     ],
+     "coachTopic": "inference-evidence",
+     "dok": 4,
+     "partA": {
+      "stem": "What does the thin dark line circling the pedestal most likely mean?",
+      "choices": [
+       "It marks the spot where visitors are allowed to stand and look at the Threadglass.",
+       "It is a decorative border painted around the pedestal to make the display look grand.",
+       "It is a hidden sensor that guards the pedestal like an unseen fence.",
+       "It shows where the gallery floor was recently torn up and repaired around the pedestal."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "It is close enough to touch.",
+       "He has already noticed that the pedestal has no case around it at all, only a thin dark line in the floor circling it, like a fence nobody could see unless they already knew where to look.",
+       "The gallery floor is not what Theo expected.",
+       "Instead the Threadglass sits on an open pedestal, in the center of a bright room, lit from above."
+      ],
+      "key": {
+       "0": 0,
+       "1": 3,
+       "2": 1,
+       "3": 2
+      }
+     },
+     "distractorRationale": {
+      "0": "Being close enough to touch tells you the object is unprotected by distance. It does not describe a marked boundary for where visitors may stand.",
+      "1": "A bright, open display can look grand, but the passage compares the line to a fence nobody could see unless they already knew where to look.  A decoration is meant to be seen, and this line is meant to go unnoticed.",
+      "3": "Theo's surprise at the gallery floor is about the lack of glass cases and ropes in general. It is not about a repair to the floor itself."
+     },
+     "explain": "The passage calls the line \"like a fence nobody could see unless they already knew where to look,\" right after noting the pedestal has no case at all. Given Theo's earlier thought that the open display was either confidence or an obvious trap, the line reads as a hidden sensor rather than decoration or a foot-traffic marker."
+    }
+   ]
+  }
+ ],
+ "mustStayClean": [
+  {
+   "note": "The map item fixed:  Carthage, which its own level names.",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "passages": [
+    {
+     "id": "p-t2-kingdom-divided",
+     "title": "Case File: The Kingdom That Split in Two",
+     "text": "The Office keeps one rule for sacred texts.  Read them for what they claim.  Then look for anything outside them that touches the same claim.  This entry is the best case in the archive for that rule.\n\nThe Hebrew Bible describes Solomon's kingdom breaking apart soon after he died, around nine hundred thirty BCE.  The northern tribes pulled away and formed a kingdom called Israel.  The northern kingdom's capital came to be a city named Samaria.  In that account, the southern tribes kept the line of David and the Temple in Jerusalem, in a smaller kingdom called Judah.  In that account, two kingdoms now stood where one had stood before.\n\nThen the outside evidence arrives, and it is unusually good.  A carved stone known as the Mesha Stele was raised by a king of Moab.  It names Omri, a king of Israel, as an enemy who had pressed hard on Moab.  An Assyrian monument known as the Black Obelisk lists tribute paid to an Assyrian king.  It names Jehu, a later king of Israel, among those who paid.  Neither stone was cut to prove the Hebrew Bible right.  Each was cut to praise its own king, which is exactly why the Office weighs it.\n\nThe northern kingdom fell to Assyria.  Assyrian armies took Samaria around seven hundred twenty-two BCE, and Assyrian royal records report the capture in their own words.  Those records do not fully agree about which king finished the siege, and the Office files that disagreement rather than smoothing it away.  Assyria then moved many of the defeated people to other parts of its empire.  Newcomers were settled in their place.\n\nThe account preserved in the Hebrew Bible explains the fall in its own terms.  It describes the defeat as a punishment for abandoning the covenant.  That reasoning belongs to the account, and the Office records it as the account's own.\n\nMuch later, stories grew up about ten lost tribes still wandering somewhere.  The Office files those stories as legend.  Judah lasted longer than its northern neighbor did.  What finally happened to Judah is filed under the exile that followed.",
+     "figureIds": [
+      "fig-exile-map"
+     ]
+    },
+    {
+     "id": "p-t6-long-ending",
+     "title": "Case File Addendum: The Long Ending",
+     "text": "The closing entry on Rome is filed and sealed.  This addendum sits behind it for one reason.  The file closed on an empire that had not finished happening yet.\n\nThe two centuries after Augustus ran quieter inside the borders than the years before them had.  Later writers gave that stretch its name, the Pax Romana, the Roman peace.  Goods moved along paved roads and safe sea lanes.  Roman coins worked across a huge stretch of ground.  Engineers built aqueducts that carried water for miles, and they used concrete to raise vaults and domes that still stand today.\n\nThe quiet did not hold, and in the two hundreds CE the empire nearly came apart.  Armies made and unmade emperors at speed.  Borders came under pressure from groups pushing in from outside.  Coins carried less and less silver, and prices climbed.\n\nLater emperors held the thing together by changing its shape, and Diocletian split the work of ruling among several men.  Constantine moved the capital east, to a Greek city he rebuilt and renamed for himself.  In three hundred ninety-five CE the empire was divided into a western half and an eastern half, each with its own ruler.\n\nThe western half thinned out over the next hundred years.  Rome itself was sacked, in four hundred ten and again in four hundred fifty-five CE.  In four hundred seventy-six CE a commander removed the last emperor the west still had, and put no one in his place.\n\nThe eastern half did not fall then.  Ruled from Constantinople, it lasted nearly another thousand years.  Its own people called themselves Romans, in Greek, and rarely used any other name for their state.  Much later, European scholars began calling that empire Byzantine, a name its own people never used for their empire.\n\nThat is this record's closing warning, and it fits every file in the drawer.  A phrase like the fall of Rome sounds like a single event.  What the evidence shows is a government ending in one half, a government carrying on in the other, and roads, law, and language living on past both.  Names get applied by whoever writes last, and checking who applied a name, and when, is the whole job.",
+     "figureIds": [
+      "fig-rome-map"
+     ]
+    },
+    {
+     "id": "p-t6-closing-the-file",
+     "title": "Case File: Closing the File on Rome",
+     "text": "This is the last entry in the whole case file.  It closes in a different way than every entry before it.  Rome does not open a new puzzle.  It answers back into every puzzle this file has already opened.\n\nRome began as a kingdom, then threw out its own king and became a republic instead.  Two elected consuls led it, along with a council called the Senate.  For years afterward, rich patrician families held nearly all the real power.  Plain plebeian citizens fought for a bigger share of it.  That fight in time produced the Twelve Tables, Rome's first written law code.  The code was posted in public so that every citizen, patrician or plebeian, could actually see the same laws applied to all, even though rank still shaped much of Roman life.  Compare that to Hammurabi's own code, filed at the very start of this record.  Its finished laws still punished the same crime in different ways, depending on who the victim was.\n\nRome's spot on a sea-facing peninsula pushed it steadily outward.  Rome fought the rival city of Carthage across three long wars and won.  Rome then held most of the Mediterranean coast.  A road web linked it all, moving troops and officials fast across huge distances.\n\nThe republic itself could not survive its own success.  A general named Julius Caesar seized power by force.  Senators feared he wished to rule as a king, and they killed him.  More years of civil war came next.  His adopted heir, Octavian, rose as Rome's first emperor, taking the name Augustus.  A republic without a king had lasted nearly five hundred years before an empire took its place.\n\nRome gave out citizenship widely across its conquered lands, a reach that went far past Athens and its own narrow assembly.  Athens had let its citizens vote right on the city's own laws, years earlier.  Rome also matched many of its own gods to Greek ones, treating each pair as one god under two names.  Rome took in Greek philosophy too.  The file that opened with a river and a code of law now closes with an empire, one built from nearly every civilization this record has ever checked.",
+     "figureIds": [
+      "fig-rome-plate",
+      "fig-roman-bust"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-rome-map",
+     "caption": "Rome and Constantinople, the two capitals behind the empire’s division into a western and an eastern half.",
+     "alt": "A map of the Mediterranean. Rome and Constantinople are marked, with the western and eastern halves labelled on either side. No border is drawn between them. Notes say the empire was divided in three hundred ninety-five CE, that the west thinned out, that Rome was sacked twice, and that its last emperor was removed in four hundred seventy-six.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Mediterranean with two cities marked: Rome and Constantinople.",
+       "Two areas are labelled WESTERN HALF and EASTERN HALF.",
+       "NO BORDER IS DRAWN between the two halves anywhere on the map.",
+       "A note reads: in three hundred ninety-five CE the empire was divided into a western half and an eastern half, each with its own ruler.",
+       "A note reads: the west thinned out.  Rome was sacked in four hundred ten and again in four hundred fifty-five; in four hundred seventy-six its last emperor was removed."
+      ]
+     }
+    },
+    {
+     "id": "fig-exile-map",
+     "caption": "Two kingdoms where one had stood: Israel with its capital at Samaria, Judah with the Temple in Jerusalem, and the direction Assyria moved the defeated people.",
+     "alt": "A map of the eastern Mediterranean and Mesopotamia. Samaria and Jerusalem are marked in the Levant, labelled Israel and Judah. A dashed arrow curves north-east from Samaria to Assyria. A note says Assyrian records do not fully agree about which king finished the siege, and that this file keeps that disagreement.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of the Levant and Mesopotamia.",
+       "Two cities are marked and labelled: Samaria and Jerusalem.",
+       "Three regions are labelled: ISRAEL around Samaria, JUDAH around Jerusalem, and ASSYRIA to the north-east.",
+       "A dashed arrow runs from Samaria north-east to Assyria.",
+       "A note reads: Assyrian armies took Samaria around seven hundred twenty-two BCE.",
+       "A note reads: Assyria then moved many of the defeated people to other parts of its empire.",
+       "A note in a different colour reads: Assyrian records do not fully agree about which king finished the siege, and this file keeps that disagreement rather than smoothing it away."
+      ]
+     }
+    },
+    {
+     "id": "fig-rome-plate",
+     "caption": "Piranesi's view of the Roman Forum, etched about 1775, when it was pasture and known as the Campo Vaccino.  The second view is a Roman portrait bust from the same file.",
+     "alt": "An eighteenth-century etching looking across the Roman Forum from the Capitol. The Arch of Septimius Severus stands at the lower left, tall columns of the Temple of Vespasian rise at the right, broken column drums and carved capitals lie in the foreground, and the Colosseum sits on the skyline in the distance. A numbered key and the title Veduta di Campo Vaccino are printed along the bottom edge.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "An eighteenth-century etching of the Roman Forum seen from the Capitol, shown on the first of two tabs.",
+       "The Arch of Septimius Severus stands at the lower left.",
+       "Tall columns of the Temple of Vespasian rise at the right.",
+       "Broken column drums and carved capitals lie scattered across the foreground.",
+       "The Colosseum sits on the skyline in the distance.",
+       "A numbered key and the printed title \"Veduta di Campo Vaccino\" run along the bottom edge of the plate.",
+       "The second tab shows a Roman marble portrait bust, a photograph rather than an etching."
+      ]
+     }
+    },
+    {
+     "id": "fig-roman-bust",
+     "caption": "A Roman marble portrait bust of the emperor Gaius, better known as Caligula, carved during his own short reign.",
+     "alt": "A white marble bust of a young man with short cropped hair, his head turned slightly to his right, on a dark base."
+    }
+   ],
+   "levels": [
+    {
+     "itemIds": [
+      "t2-ebsr-why-the-outside-stones-count"
+     ]
+    },
+    {
+     "itemIds": [
+      "l6-vis-rome-map-reads",
+      "t6-ebsr-twelve-tables-vs-hammurabi"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "t2-ebsr-why-the-outside-stones-count",
+     "type": "ebsr",
+     "passageId": "p-t2-kingdom-divided",
+     "targets": [
+      "hist-t2-hebrews"
+     ],
+     "coachTopic": "evidence-shortest-file",
+     "dok": 3,
+     "partA": {
+      "stem": "According to the case file, why does the Office weigh the two carved stones so heavily?",
+      "choices": [
+       "Both were carved by kings of Israel, Omri and Jehu, to record their own kingdom's history in stone.",
+       "Each was cut to praise its own king, not to back up the Hebrew Bible, yet names a king of Israel.",
+       "Together they settle which Assyrian king finished the siege of Samaria, a point the other records dispute.",
+       "They give the reason the northern kingdom fell, calling it a punishment for abandoning the covenant."
+      ],
+      "key": 1
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "Each was cut to praise its own king, which is exactly why the Office weighs it.",
+       "Those records do not fully agree about which king finished the siege, and the Office files that disagreement rather than smoothing it away.",
+       "It describes the defeat as a punishment for abandoning the covenant.",
+       "A carved stone known as the Mesha Stele was raised by a king of Moab."
+      ],
+      "key": {
+       "0": 3,
+       "1": 0,
+       "2": 1,
+       "3": 2
+      }
+     },
+     "distractorRationale": {
+      "0": "Omri and Jehu are the kings of Israel the stones NAME, not the ones who carved them; one stone was raised by a king of Moab, and the other lists tribute paid to an Assyrian king.",
+      "2": "The case file leaves that question open on purpose: the Assyrian records themselves do not fully agree about it, and the Office files the disagreement rather than smoothing it away.",
+      "3": "That explanation belongs to the account preserved in the Hebrew Bible, not to either stone, and the Office records it as the account's own reasoning."
+     },
+     "explain": "The case file explains its own method: a monument cut to praise a Moabite or Assyrian king had no reason to support the Hebrew Bible, and it names Israelite kings anyway, which is exactly what makes it useful outside evidence.  The other choices misplace who carved the stones, overstate what they settle, or hand the stones an explanation that belongs to the written account instead."
+    },
+    {
+     "id": "l6-vis-rome-map-reads",
+     "type": "cloze",
+     "passageId": "p-t6-long-ending",
+     "figureId": "fig-rome-map",
+     "targets": [
+      "hist-t6-rome"
+     ],
+     "coachTopic": "evidence-closing-the-file",
+     "dok": 2,
+     "stem": "The map marks two cities, {{0}} in the western half and {{1}} in the eastern, and draws {{2}} between the two halves.",
+     "blanks": [
+      {
+       "choices": [
+        "Rome",
+        "Constantinople",
+        "Carthage"
+       ],
+       "key": 0,
+       "distractorRationale": {
+        "1": "Constantinople is the eastern one on this map.",
+        "2": "Samaria belongs to the exile map, not this one."
+       }
+      },
+      {
+       "choices": [
+        "Rome",
+        "Constantinople",
+        "Carthage"
+       ],
+       "key": 1,
+       "distractorRationale": {
+        "0": "Rome is the western one.",
+        "2": "Jerusalem is not marked on this map at all."
+       }
+      },
+      {
+       "choices": [
+        "a solid line",
+        "no border at all",
+        "a dashed line"
+       ],
+       "key": 1,
+       "distractorRationale": {
+        "0": "No line of any kind divides the halves on this map.",
+        "2": "There is no dashed divider either. The halves carry labels and nothing between them."
+       }
+      }
+     ],
+     "explain": "Rome sits in the half labelled WESTERN and Constantinople in the half labelled EASTERN. No border is drawn between them, because the file says the empire was divided and never says where the line ran."
+    },
+    {
+     "id": "t6-ebsr-twelve-tables-vs-hammurabi",
+     "type": "ebsr",
+     "passageId": "p-t6-closing-the-file",
+     "targets": [
+      "hist-t6-rome"
+     ],
+     "coachTopic": "evidence-closing-the-file",
+     "dok": 4,
+     "partA": {
+      "stem": "According to the case file, how did Rome's Twelve Tables compare to Hammurabi's code, filed at the start of this record?",
+      "choices": [
+       "The Twelve Tables were Rome's first attempt at law of any kind, just as Hammurabi's code was Mesopotamia's first attempt at law of any kind.",
+       "Both codes were kept secret from ordinary citizens, and only kings and priests were ever allowed to know what they actually said.",
+       "Hammurabi's code punished every rank of society equally, exactly as the Twelve Tables did, so neither code treated a victim's standing as relevant.",
+       "The Twelve Tables were posted as the same laws for all, while Hammurabi's code punished the same crime differently by the victim's rank."
+      ],
+      "key": 3
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "That fight in time produced the Twelve Tables, Rome's first written law code.",
+       "For years afterward, rich patrician families held nearly all the real power.",
+       "The file that opened with a river and a code of law now closes with an empire, one built from nearly every civilization this record has ever checked.",
+       "The code was posted in public so that every citizen, patrician or plebeian, could actually see the same laws applied to all, even though rank still shaped much of Roman life."
+      ],
+      "key": {
+       "0": 0,
+       "1": 1,
+       "2": 2,
+       "3": 3
+      }
+     },
+     "distractorRationale": {
+      "0": "The Twelve Tables were Rome's first written law code, but the passage never says either code was a first attempt at law of any kind.  It says only that Hammurabi's code was filed at the very start of this record.",
+      "1": "The passage says patrician families held nearly all the real power for years, which explains a power imbalance, but it never claims either code was kept secret from ordinary citizens; the Twelve Tables were posted publicly precisely so laws could be seen.",
+      "2": "This line says only that the file opened with a code of law and closes with an empire built from many civilizations, not that the two codes worked alike.  The passage says the opposite about Hammurabi's code: its laws punished the same crime differently depending on who the victim was."
+     },
+     "explain": "The passage draws the comparison directly.  The Twelve Tables were posted in public so every citizen could see the same laws applied to all, even though rank still shaped much of Roman life.  Hammurabi's code, filed at the start of this record, punished the same crime differently depending on who the victim was.  The other choices each state the reverse of a specific claim or add a detail the passage does not support."
+    }
+   ]
+  },
+  {
+   "note": "The level-1 passage now names its narrator.",
+   "meta": {
+    "id": "vault-of-ages-g6",
+    "subject": "ela"
+   },
+   "passages": [
+    {
+     "id": "p-two-empty-chairs",
+     "title": "Two Empty Chairs",
+     "text": "I count four chairs around Finch's table, and only two of them get used, which tells me something before anyone says a word.  I take the one nearest the door, because I like knowing where the door is, and a boy about my age takes the other one without asking whether it is taken.  He introduces himself as Theo, then seems to regret it immediately, like talking to a stranger is a skill he is still building.  I decide I like him better for that than I would have liked someone smooth.  I tell him my name is Mila, and he nods like he means to remember it.\n\nFinch does not explain what this place is.  She sets a single photograph on the table between us: a glass disc, roughly the size of a coaster, etched with a pattern that curves in on itself like a shell.  She asks what we notice, and Theo says the pattern looks like a maze with no walls.  That is a better answer than mine would have been, because I was still counting the empty chairs.\n\nI ask the question I actually care about.  Why are there two empty chairs?  Did two people quit, or have two people simply not arrived yet?  Finch says that is the correct question to have asked, though she does not answer it.  I have known her for eleven minutes, and I already understand that this is going to be a pattern.\n\nShe tells us the disc in the photograph has a name, the Threadglass, documented in three separate archives across two centuries.  Then it vanished from all three collections within the same decade.  Objects like that do not vanish on their own, she says.  Someone wanted it enough to risk being caught holding it, three times, in three different countries.  She wants to know if we want it back badly enough to take a much smaller risk than that.\n\nTheo asks who has it now.  Finch says a private collector, one with a very good lawyer and a very quiet gallery.  The Archive does not involve lawyers, she adds, because lawyers require you to explain things in rooms with records.  I like that answer more than I expected to.\n\nThe door opens before she finishes, and a third kid drops into one of the empty chairs like he has been late to better things than this.  He says his name is Dash, apologizes to no one in particular, and asks whether he missed anything important.  Finch says he missed the part where she decides whether to trust any of us.  The part he is walking into now, she says, is the part where we start deciding whether to trust each other.  Nobody laughs.  I notice that the fourth chair is still empty, and that nobody else in the room has looked at it once.",
+     "figureIds": [
+      "fig-l1-two-empty-chairs"
+     ]
+    },
+    {
+     "id": "p-kade-collection",
+     "title": "The Kade Collection",
+     "text": "The card Finch gives Theo for this one has a different kind of lie built into it.  It is a laminated badge that says he is delivering a framing order to Augustine Kade's private gallery.  He also carries a flat cardboard box.  As far as Theo can tell, it contains an actual empty picture frame, in case anybody asks to see inside it.  Finch calls this kind of cover honest bait.  A delivery, she says, is the one kind of stranger a guarded building lets walk right up to the door without a second thought.\n\nThe gallery occupies the top two floors of a building with no sign on the street.  Theo has learned that is its own kind of announcement, to anyone who already knows what they are looking for.  A man at the intake desk barely looks up from his screen before waving him toward a service elevator.  Theo spends the ride up reminding himself of something.  The box in his hands is the least interesting thing he is carrying.  The interesting thing is a floor plan Mila drew from three different sets of public renovation permits, memorized rather than carried.\n\nThe gallery floor is not what Theo expected.  He pictured locked glass cases and velvet ropes, the way a museum keeps things at arm's length from visitors.  Instead the Threadglass sits on an open pedestal, in the center of a bright room, lit from above.  It is close enough to touch.  That strikes him as either supreme confidence, or a trap so obvious that nobody sane could believe it was real.  He decides it does not matter which.  His job today is not to touch anything.  His job is to look.\n\nA woman crosses the room toward him before he has finished looking.  She moves like someone who has never once had to hurry in her life.  She introduces herself as Kade.  She says the framing order is not something she remembers placing.  Then she asks, in a tone as level as the floor, who exactly sent him.\n\nTheo's answer is ready before he decides to give it.  The rule Finch drilled into him is simple: never invent, offer something boring that can be checked.  He says the order came through a framing shop two streets over.  He gives the shop's real name.  He offers to leave the frame and come back, once she has sorted out the confusion on her end.  It is a true detail wrapped around a lie.  True details are the only kind that survive a phone call.\n\nKade studies him for exactly as long as it takes to decide he is not worth the effort of catching in something.  Then she tells him to leave the box at the desk on his way out.  Theo does exactly that.  He does not look at the pedestal again on his way past it.  He has already counted the four exits and the two visible cameras.  He has already noticed that the pedestal has no case around it at all, only a thin dark line in the floor circling it, like a fence nobody could see unless they already knew where to look.",
+     "figureIds": [
+      "fig-l3-kade-collection"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l1-two-empty-chairs",
+     "caption": "A plan view of Finch's table, drawn from above.",
+     "alt": "A plan view of \"Finch's table\" with four chairs set around it at its corners, a plain line joining each one to the table.  Three are drawn as plain boxes and carry the words \"the one nearest the door\", \"introduces himself as Theo\" and \"his name is Dash\".  The fourth is drawn as a rounded, highlighted shape and carries the words \"the fourth chair is still empty\".",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-two-empty-chairs",
+      "layout": "plan",
+      "title": "four chairs around Finch's table",
+      "nodes": [
+       {
+        "id": "door_seat",
+        "label": "the one nearest the door",
+        "shape": "box",
+        "x": 16,
+        "y": 8
+       },
+       {
+        "id": "theo",
+        "label": "introduces himself as Theo",
+        "shape": "box",
+        "x": 84,
+        "y": 8
+       },
+       {
+        "id": "table",
+        "label": "Finch's table",
+        "shape": "box",
+        "x": 50,
+        "y": 50
+       },
+       {
+        "id": "dash",
+        "label": "his name is Dash",
+        "shape": "box",
+        "x": 84,
+        "y": 92
+       },
+       {
+        "id": "fourth",
+        "label": "the fourth chair is still empty",
+        "shape": "round",
+        "x": 16,
+        "y": 92
+       }
+      ],
+      "edges": [
+       {
+        "from": "door_seat",
+        "to": "table",
+        "style": "line"
+       },
+       {
+        "from": "theo",
+        "to": "table",
+        "style": "line"
+       },
+       {
+        "from": "dash",
+        "to": "table",
+        "style": "line"
+       },
+       {
+        "from": "fourth",
+        "to": "table",
+        "style": "line"
+       }
+      ]
+     }
+    },
+    {
+     "id": "fig-l3-kade-collection",
+     "caption": "The plan shows the top two floors, from the intake desk to the room Theo came to see.",
+     "alt": "A floor plan with \"the intake desk\", \"a service elevator\" and \"the four exits\" down the left side, and on the right \"the center of a bright room\", with \"an open pedestal\" below it, \"a thin dark line in the floor circling it\" below that, and \"the two visible cameras\" beside the room.  Arrows run from the desk to the elevator, from the elevator into the room, and from the room out to the four exits;  plain lines tie the room to the pedestal and to the cameras, and the pedestal to the dark line in the floor.",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-kade-collection",
+      "layout": "plan",
+      "title": "the top two floors",
+      "nodes": [
+       {
+        "id": "desk",
+        "label": "the intake desk",
+        "shape": "box",
+        "x": 16,
+        "y": 8
+       },
+       {
+        "id": "lift",
+        "label": "a service elevator",
+        "shape": "box",
+        "x": 16,
+        "y": 45
+       },
+       {
+        "id": "exits",
+        "label": "the four exits",
+        "shape": "box",
+        "x": 16,
+        "y": 86
+       },
+       {
+        "id": "room",
+        "label": "the center of a bright room",
+        "shape": "box",
+        "x": 60,
+        "y": 8
+       },
+       {
+        "id": "ped",
+        "label": "an open pedestal",
+        "shape": "round",
+        "x": 60,
+        "y": 48
+       },
+       {
+        "id": "ring",
+        "label": "a thin dark line in the floor circling it",
+        "shape": "box",
+        "x": 60,
+        "y": 86
+       },
+       {
+        "id": "cams",
+        "label": "the two visible cameras",
+        "shape": "box",
+        "x": 92,
+        "y": 30
+       }
+      ],
+      "edges": [
+       {
+        "from": "desk",
+        "to": "lift",
+        "style": "arrow"
+       },
+       {
+        "from": "lift",
+        "to": "room",
+        "style": "arrow"
+       },
+       {
+        "from": "room",
+        "to": "exits",
+        "style": "arrow"
+       },
+       {
+        "from": "room",
+        "to": "ped",
+        "style": "line"
+       },
+       {
+        "from": "ped",
+        "to": "ring",
+        "style": "line"
+       },
+       {
+        "from": "room",
+        "to": "cams",
+        "style": "line"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "itemIds": [
+      "l1-mc-trust-each-other"
+     ]
+    },
+    {
+     "itemIds": [
+      "l3-ebsr-what-the-line-means"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l1-mc-trust-each-other",
+     "type": "mc",
+     "passageId": "p-two-empty-chairs",
+     "targets": [
+      "c1-lit-1-key-details"
+     ],
+     "coachTopic": "evidence-story-details",
+     "dok": 3,
+     "stem": "According to Finch, what changes once Dash joins Theo and Mila at the table?",
+     "choices": [
+      "Finch decides she can no longer trust any of the three, since Dash arrived late.",
+      "The three of them must now vote on every decision about the Threadglass.",
+      "Dash is immediately given final say over the mission.",
+      "The question shifts from whether Finch trusts them to whether they can trust each other."
+     ],
+     "key": 3,
+     "distractorRationale": {
+      "0": "Finch's words describe a shift, not a loss of trust on her part.  If you picked this, you read her comment as more negative than the passage actually states.",
+      "1": "Voting is never mentioned anywhere in this scene.  You may be filling in a detail the text never gives you.",
+      "2": "Nothing in the passage puts Dash in charge of anything.  He arrives late and is treated the same as Theo and Mila, not given special authority."
+     },
+     "explain": "Finch draws a clear line: the part about whether she trusts them is finishing, and a new part is beginning, whether the three of them can trust each other.  That shift matters because it points the story toward the crew's relationships, not just their relationship with Finch."
+    },
+    {
+     "id": "l3-ebsr-what-the-line-means",
+     "type": "ebsr",
+     "passageId": "p-kade-collection",
+     "targets": [
+      "c1-lit-4-reasoning"
+     ],
+     "coachTopic": "inference-evidence",
+     "dok": 4,
+     "partA": {
+      "stem": "What does the thin dark line circling the pedestal most likely mean?",
+      "choices": [
+       "It marks the spot where visitors are allowed to stand and look at the Threadglass.",
+       "It is a decorative border painted around the pedestal to make the display look grand.",
+       "It is a hidden sensor that guards the pedestal like an unseen fence.",
+       "It shows where the gallery floor was recently torn up and repaired around the pedestal."
+      ],
+      "key": 2
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "It is close enough to touch.",
+       "He has already noticed that the pedestal has no case around it at all, only a thin dark line in the floor circling it, like a fence nobody could see unless they already knew where to look.",
+       "The gallery floor is not what Theo expected.",
+       "Instead the Threadglass sits on an open pedestal, in the center of a bright room, lit from above."
+      ],
+      "key": {
+       "0": 0,
+       "1": 3,
+       "2": 1,
+       "3": 2
+      }
+     },
+     "distractorRationale": {
+      "0": "Being close enough to touch tells you the object is unprotected by distance. It does not describe a marked boundary for where visitors may stand.",
+      "1": "A bright, open display can look grand, but the passage compares the line to a fence nobody could see unless they already knew where to look.  A decoration is meant to be seen, and this line is meant to go unnoticed.",
+      "3": "Theo's surprise at the gallery floor is about the lack of glass cases and ropes in general. It is not about a repair to the floor itself."
+     },
+     "explain": "The passage calls the line \"like a fence nobody could see unless they already knew where to look,\" right after noting the pedestal has no case at all. Given Theo's earlier thought that the open display was either confidence or an obvious trap, the line reads as a hidden sensor rather than decoration or a foot-traffic marker."
+    }
+   ]
+  },
+  {
+   "note": "\"Archive rules\" in level 3:  \"The Archive\" is level 2's own on-screen name, frame vocabulary on every level.",
+   "meta": {
+    "id": "vault-of-ages-g6",
+    "subject": "ela"
+   },
+   "passages": [
+    {
+     "id": "p-threadglass-entry",
+     "title": "Catalog Entry: The Threadglass",
+     "text": "Every object the Archive tracks gets one entry in the master catalog.  The entry is updated each time new information surfaces.  It is never deleted, even after a relic is recovered.  The entry below is the current record for catalog number 114, known informally as the Threadglass.\n\nDescription.  It is a flat disc of pale green glass, four inches across.  One face is etched with a single continuous spiral line that never crosses itself.  The etching is shallow.  It only shows clearly when light crosses the glass at an angle.  Historians believe that was done on purpose, not a flaw in the original casting.  No one has ever measured the spiral exactly the same way twice.  The line has no clear start or end for a ruler to use.\n\nOrigin.  The Threadglass turns up in written records three separate times across roughly two hundred years.  Each mention connects it to a story.  The story is about a path that could not be walked twice by accident.  Each record ties the object loosely to an older legend.  It is about a hero who escaped a builder's maze by following a single unbroken thread.  Archive researchers are careful to note something.  The disc is almost certainly a later tribute to that story, not a prop from the events the story tells.  Glassmaking this fine did not exist when the maze legend is set.\n\nDocumented history.  The disc entered the Ashford family collection in the nineteenth century.  It passed to a regional museum by gift.  It was moved twice more between institutions.  A formal count in the 1970s confirmed it was present and secure.  A second count, taken eleven years later, could not find it.  No theft was ever reported to any police record the Archive has found.  The gap between those two counts is the single largest question mark in this entry.\n\nCurrent status.  Archive field work places the Threadglass in a private collection as of last spring.  The lead comes from an insurance filing.  It describes an object that matches this entry in exact size.  The filer's name is blacked out in the copy the Archive obtained.  This entry will be updated again once the object's status changes.  A note will explain how the Archive came to know it changed.",
+     "figureIds": [
+      "fig-l2-threadglass"
+     ]
+    },
+    {
+     "id": "p-kade-collection",
+     "title": "The Kade Collection",
+     "text": "The card Finch gives Theo for this one has a different kind of lie built into it.  It is a laminated badge that says he is delivering a framing order to Augustine Kade's private gallery.  He also carries a flat cardboard box.  As far as Theo can tell, it contains an actual empty picture frame, in case anybody asks to see inside it.  Finch calls this kind of cover honest bait.  A delivery, she says, is the one kind of stranger a guarded building lets walk right up to the door without a second thought.\n\nThe gallery occupies the top two floors of a building with no sign on the street.  Theo has learned that is its own kind of announcement, to anyone who already knows what they are looking for.  A man at the intake desk barely looks up from his screen before waving him toward a service elevator.  Theo spends the ride up reminding himself of something.  The box in his hands is the least interesting thing he is carrying.  The interesting thing is a floor plan Mila drew from three different sets of public renovation permits, memorized rather than carried.\n\nThe gallery floor is not what Theo expected.  He pictured locked glass cases and velvet ropes, the way a museum keeps things at arm's length from visitors.  Instead the Threadglass sits on an open pedestal, in the center of a bright room, lit from above.  It is close enough to touch.  That strikes him as either supreme confidence, or a trap so obvious that nobody sane could believe it was real.  He decides it does not matter which.  His job today is not to touch anything.  His job is to look.\n\nA woman crosses the room toward him before he has finished looking.  She moves like someone who has never once had to hurry in her life.  She introduces herself as Kade.  She says the framing order is not something she remembers placing.  Then she asks, in a tone as level as the floor, who exactly sent him.\n\nTheo's answer is ready before he decides to give it.  The rule Finch drilled into him is simple: never invent, offer something boring that can be checked.  He says the order came through a framing shop two streets over.  He gives the shop's real name.  He offers to leave the frame and come back, once she has sorted out the confusion on her end.  It is a true detail wrapped around a lie.  True details are the only kind that survive a phone call.\n\nKade studies him for exactly as long as it takes to decide he is not worth the effort of catching in something.  Then she tells him to leave the box at the desk on his way out.  Theo does exactly that.  He does not look at the pedestal again on his way past it.  He has already counted the four exits and the two visible cameras.  He has already noticed that the pedestal has no case around it at all, only a thin dark line in the floor circling it, like a fence nobody could see unless they already knew where to look.",
+     "figureIds": [
+      "fig-l3-kade-collection"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l2-threadglass",
+     "caption": "The entry is updated each time new information surfaces, its largest question mark is the gap between two counts eleven years apart, and the filer's name is blacked out.",
+     "alt": "A case-file index card titled the Threadglass, with catalog number 114 at the top, then two underlined section headings.  Under the first, \"Documented history.\", the gap between the entry's two counts is named as its largest question mark.  Under the second, \"Current status.\", a line reading \"in a private collection\" sits above a blacked-out bar where the filer's name would be.",
+     "dataTable": {
+      "type": "facsimile",
+      "sourcePassageId": "p-threadglass-entry",
+      "docKind": "case-file",
+      "title": "the Threadglass",
+      "header": [
+       {
+        "label": "catalog number",
+        "value": "114"
+       }
+      ],
+      "lines": [
+       {
+        "text": "Documented history.",
+        "emphasis": "underline"
+       },
+       {
+        "text": "The gap between those two counts is the"
+       },
+       {
+        "text": "single largest question mark in this entry."
+       },
+       {
+        "text": "Current status.",
+        "emphasis": "underline"
+       },
+       {
+        "text": "in a private collection"
+       },
+       {
+        "text": "",
+        "emphasis": "redact"
+       }
+      ]
+     }
+    },
+    {
+     "id": "fig-l3-kade-collection",
+     "caption": "The plan shows the top two floors, from the intake desk to the room Theo came to see.",
+     "alt": "A floor plan with \"the intake desk\", \"a service elevator\" and \"the four exits\" down the left side, and on the right \"the center of a bright room\", with \"an open pedestal\" below it, \"a thin dark line in the floor circling it\" below that, and \"the two visible cameras\" beside the room.  Arrows run from the desk to the elevator, from the elevator into the room, and from the room out to the four exits;  plain lines tie the room to the pedestal and to the cameras, and the pedestal to the dark line in the floor.",
+     "dataTable": {
+      "type": "schematic",
+      "sourcePassageId": "p-kade-collection",
+      "layout": "plan",
+      "title": "the top two floors",
+      "nodes": [
+       {
+        "id": "desk",
+        "label": "the intake desk",
+        "shape": "box",
+        "x": 16,
+        "y": 8
+       },
+       {
+        "id": "lift",
+        "label": "a service elevator",
+        "shape": "box",
+        "x": 16,
+        "y": 45
+       },
+       {
+        "id": "exits",
+        "label": "the four exits",
+        "shape": "box",
+        "x": 16,
+        "y": 86
+       },
+       {
+        "id": "room",
+        "label": "the center of a bright room",
+        "shape": "box",
+        "x": 60,
+        "y": 8
+       },
+       {
+        "id": "ped",
+        "label": "an open pedestal",
+        "shape": "round",
+        "x": 60,
+        "y": 48
+       },
+       {
+        "id": "ring",
+        "label": "a thin dark line in the floor circling it",
+        "shape": "box",
+        "x": 60,
+        "y": 86
+       },
+       {
+        "id": "cams",
+        "label": "the two visible cameras",
+        "shape": "box",
+        "x": 92,
+        "y": 30
+       }
+      ],
+      "edges": [
+       {
+        "from": "desk",
+        "to": "lift",
+        "style": "arrow"
+       },
+       {
+        "from": "lift",
+        "to": "room",
+        "style": "arrow"
+       },
+       {
+        "from": "room",
+        "to": "exits",
+        "style": "arrow"
+       },
+       {
+        "from": "room",
+        "to": "ped",
+        "style": "line"
+       },
+       {
+        "from": "ped",
+        "to": "ring",
+        "style": "line"
+       },
+       {
+        "from": "room",
+        "to": "cams",
+        "style": "line"
+       }
+      ]
+     }
+    }
+   ],
+   "levels": [
+    {
+     "name": "The Archive",
+     "goal": "Read the record before you read the room.",
+     "itemIds": [
+      "l2-ebsr-documented-history-purpose"
+     ]
+    },
+    {
+     "name": "The First Heist",
+     "goal": "Say what a person did, then say what they left out.",
+     "itemIds": [
+      "l3-mc-why-memorize-floorplan"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l2-ebsr-documented-history-purpose",
+     "type": "ebsr",
+     "passageId": "p-threadglass-entry",
+     "targets": [
+      "c1-inf-6-text-structure"
+     ],
+     "coachTopic": "structure-text",
+     "dok": 3,
+     "partA": {
+      "stem": "This entry is organized into four labeled sections. What is the purpose of the \"Documented history\" section specifically?",
+      "choices": [
+       "To describe exactly what the object looks like.",
+       "To trace who owned or held the object over time, up to the point it went missing.",
+       "To explain the legend the object is connected to.",
+       "To give the Archive's best guess, from an insurance filing, about where the object is now."
+      ],
+      "key": 1
+     },
+     "partB": {
+      "stem": "Which sentence from the passage best supports the answer you just gave?",
+      "choices": [
+       "It is a flat disc of pale green glass, four inches across.",
+       "Archive field work places the Threadglass in a private collection as of last spring.",
+       "The disc entered the Ashford family collection in the nineteenth century.",
+       "It is about a hero who escaped a builder's maze by following a single unbroken thread."
+      ],
+      "key": {
+       "0": 0,
+       "1": 2,
+       "2": 3,
+       "3": 1
+      }
+     },
+     "distractorRationale": {
+      "0": "That line comes from the Description section, which covers appearance, not ownership history.",
+      "2": "That line comes from the Origin section, which covers the legend behind the object, not who has owned it.",
+      "3": "That line comes from the Current status section, which covers where the object is believed to be now, not its past ownership."
+     },
+     "explain": "The Documented history section has one job: tracing the object from its earliest known owner forward through each transfer, right up to the point where it could no longer be located. That is different from describing the object, explaining its legend, or reporting its present location."
+    },
+    {
+     "id": "l3-mc-why-memorize-floorplan",
+     "type": "mc",
+     "passageId": "p-kade-collection",
+     "targets": [
+      "c1-lit-4-reasoning"
+     ],
+     "coachTopic": "inference-evidence",
+     "dok": 3,
+     "stem": "Why does Theo memorize Mila's floor plan instead of carrying a paper copy into the gallery?",
+     "choices": [
+      "A paper copy could be found and used as evidence against him.",
+      "He simply forgot to bring the paper copy that day.",
+      "Mila refuses to let anyone else hold the paper copy of her plan.",
+      "Archive rules forbid anyone to carry paper documents into a job."
+     ],
+     "key": 0,
+     "distractorRationale": {
+      "1": "The passage describes memorizing the plan as a deliberate choice, not an accident. If you picked this, you missed that this is presented as intentional planning.",
+      "2": "Nothing in the passage suggests Mila controls who holds the plan. You are inventing a rule the text never states.",
+      "3": "The passage never mentions any general Archive rule about paper documents. You are supplying an explanation broader than what the text actually supports."
+     },
+     "explain": "The passage frames the floor plan as \"memorized rather than carried,\" which matters because a physical copy could be found on him and used as proof of planning, exactly the kind of risk the crew works hard to avoid leaving behind."
+    }
+   ]
+  },
+  {
+   "note": "\"Buddhist\" in a level whose own text says \"Buddhism\".",
+   "meta": {
+    "id": "firsthand-g6",
+    "subject": "hist"
+   },
+   "passages": [
+    {
+     "id": "p-t4-dharma-buddha-ashoka",
+     "title": "Case File: Dharma, the Buddha, and an Emperor's Change of Heart",
+     "text": "Many scholars think Vedic hymns arrived with the Indo-Aryan migrants.  Over time, they grew into a much larger faith, the one now known as Hinduism.  Hindus came to believe in dharma, a person's proper duty in life.  They also came to believe in karma, the belief that every act carries results that follow a person forward.  Vedic life also split into four broad groups, called varnas.  Birth decided which varna a person belonged to.  This setup shaped daily life for years afterward.\n\nYears into this faith, a prince named Siddhartha Gautama gave up his easy life.  He had seen how much plain suffering filled the world.  He taught that suffering grows from craving, wanting things to be other than they are.  He taught that a strict path could end that craving for good.  His followers called him the Buddha, meaning the awakened one.  His teaching grew into a path open to anyone, no matter which varna a person had been born into.\n\nYears later, an emperor named Ashoka ruled the Maurya Empire.  By then, it was the biggest state the Indian subcontinent had ever seen.  Early in his reign, Ashoka waged a brutal war against the kingdom of Kalinga.  His own carved words tell of a huge number of dead and captured.  They tell of his own horror at what the war had cost.  After Kalinga, Ashoka took up Buddhist ways.  He turned his huge state toward a strikingly new goal.  He had edicts cut into pillars and rock faces across his empire, pushing nonviolence, tolerance of other faiths, and the good of plain people, not more war.\n\nFew rulers in the old record changed course that plainly.  Fewer still left the proof cut in stone for a Recorder to find, more than two thousand years later."
+    },
+    {
+     "id": "p-t5-han-and-the-road",
+     "title": "Case File: The Han Restoration and the Long Road West",
+     "text": "The Qin dynasty fell apart only a few years after its first emperor died.  Harsh rule and open revolt wore it down fast.  The Han dynasty that came next ruled far longer.  It made a choice the Qin never had.  Han rulers stopped treating Confucian teaching as a threat and put it back at the very center of government instead.\n\nHan officials had to study the Confucian classics, the same texts the Qin had once tried to burn.  A person's grasp of those texts more and more shaped who could serve the state.  That change built a government of trained scholar-officials.  Birth alone no longer decided who ran the country, a lasting shift in how China chose its leaders.\n\nHan China also reached much farther than its own borders.  A long web of trade routes linked Han cities to Central Asia and beyond.  Later writers called this web the Silk Road.  Caravans carried Chinese silk west and brought back horses, glass, and goods from far regions in return.  A Han official named Zhang Qian is often credited with opening these links.  He traveled west on a state trip, though trade along parts of the route likely came before his trip.  Goods were never the only thing moving along that road.  Ideas and faiths traveled with the traders who carried them.\n\nBuddhism reached China this way, coming slowly from India along the same routes the silk traders used.  Buddhism took root beside Confucianism and Daoism rather than replacing either one.  Chinese thought, from that point on, kept following the very same road.",
+     "figureIds": [
+      "fig-silkroad-map",
+      "fig-han-bronze"
+     ]
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-silkroad-map",
+     "caption": "The web of routes later writers called the Silk Road: silk carried west, horses and glass and other goods brought back, and Buddhism travelling the same road from India.",
+     "alt": "A map of Asia with three curved arrows. One runs west from Han China, labelled silk carried west. A dashed arrow runs back east, labelled horses, glass, and goods from far regions. A third dotted arrow runs from India north-east into China, labelled Buddhism from India. A note says Zhang Qian is often credited with opening these links, though trade along parts of the route likely came before his trip.",
+     "dataTable": {
+      "type": "features",
+      "items": [
+       "A map of Asia carrying three curved arrows and no city labels at all.",
+       "One arrow runs west from eastern China, labelled \"silk, carried west\".",
+       "A dashed arrow runs back east, labelled \"horses, glass, and goods from far regions, brought back\".",
+       "A dotted arrow runs from India north-east into China, labelled \"Buddhism, from India\".",
+       "A note reads: a long web of trade routes linked Han cities to Central Asia and beyond.",
+       "A note reads: later writers called this web the Silk Road.",
+       "A note in a different colour reads: Zhang Qian is often credited with opening these links, though trade along parts of the route likely came before his trip."
+      ]
+     }
+    },
+    {
+     "id": "fig-han-bronze",
+     "caption": "A gilded bronze belt plaque made in north China during the Han dynasty, cast as a curled winged animal.",
+     "alt": "A small bronze plaque shaped like a curled winged creature, its raised outlines gilded gold against a dark ground."
+    }
+   ],
+   "levels": [
+    {
+     "itemIds": [
+      "t4-short-ashokas-new-goal"
+     ]
+    },
+    {
+     "itemIds": [
+      "t5-mc-silk-road-goods"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "t4-short-ashokas-new-goal",
+     "type": "shorttext",
+     "passageId": "p-t4-dharma-buddha-ashoka",
+     "targets": [
+      "hist-t4-india"
+     ],
+     "coachTopic": "evidence-quiet-record",
+     "dok": 3,
+     "stem": "In eight words or fewer, name the new goal Ashoka's edicts pushed after his war against Kalinga, in place of more conquest.",
+     "accept": [
+      "nonviolence, tolerance, and the good of ordinary people",
+      "nonviolence and tolerance of other faiths",
+      "nonviolence, tolerance, and the welfare of the people",
+      "nonviolence and the good of plain people",
+      "nonviolence, tolerance, and plain people's welfare",
+      "nonviolence, tolerance, and people's welfare"
+     ],
+     "maxWords": 8,
+     "explain": "Ashoka's own edicts, cut into pillars and rock faces across his empire, pushed nonviolence, tolerance of other faiths, and the good of plain people, a striking reversal from more conquest after the brutal war against Kalinga.  Any short phrasing naming that new nonviolence-and-welfare goal, rather than a return to warfare, earns credit here."
+    },
+    {
+     "id": "t5-mc-silk-road-goods",
+     "type": "mc",
+     "passageId": "p-t5-han-and-the-road",
+     "targets": [
+      "hist-t5-china"
+     ],
+     "coachTopic": "evidence-what-was-burned",
+     "dok": 2,
+     "stem": "According to the case file, what did caravans actually carry along the Silk Road?",
+     "choices": [
+      "They carried only Confucian texts west, to spread scholar-official training beyond China's own borders.",
+      "They carried rival texts west specifically to have them burned outside China's own borders.",
+      "They carried Chinese silk west and brought back horses, glass, and goods from far regions in return.",
+      "They carried Buddhist monks only, since no ordinary goods moved along the route."
+     ],
+     "key": 2,
+     "distractorRationale": {
+      "0": "The case file names silk as the good caravans carried west, along with ideas and faiths traveling with the traders; it never limits the caravans' cargo to Confucian texts alone.",
+      "1": "Burning rival texts is credited to Qin Shi Huangdi, generations before the Han dynasty's own Silk Road trade described here, and it happened inside China, not along any trade route.",
+      "3": "The case file says Buddhism reached China gradually as an idea traveling with traders, alongside real goods like silk, horses, and glass, not that only monks moved along the route."
+     },
+     "explain": "The case file states plainly that caravans carried Chinese silk west and brought back horses, glass, and goods from far regions in return, with ideas and faiths like Buddhism traveling alongside those traders.  Each wrong choice narrows the caravans' cargo to something the case file credits to a different ruler, a different era, or ideas alone rather than real traded goods."
+    }
+   ]
+  },
+  {
+   "note": "\"If\", capitalized only where a sentence starts.",
+   "meta": {
+    "id": "cpm-cc1-g6",
+    "subject": "math"
+   },
+   "passages": [
+    {
+     "id": "p-how-to-read-a-figure",
+     "title": "How to read a figure",
+     "text": "Every figure in these notes is already labelled, and each side carries its own length printed beside it.  Those printed labels are the only numbers to work from.  Never measure a drawing with a ruler.  A figure is drawn to be clear, not to scale, so a side marked twelve may look shorter than a side marked five.\n\nPerimeter is the distance all the way around the outside of a shape.  Start at any corner, travel along every edge once, and finish at the corner you started from.  Add the labels together as you go.  The most common mistake is getting back to the start and carrying on, which counts one edge twice.\n\nTwo marks turn up again and again, and both are worth learning now.  A small square drawn inside a corner means that corner is a right angle, exactly ninety degrees.  Short ticks drawn across two sides mean those sides are equal to each other, which is how a figure tells you about a side it never labelled.\n\nPerimeter measures the boundary.  Area measures the space shut inside that boundary.  They answer different questions, and multiplying two side lengths gives you area, never perimeter."
+    },
+    {
+     "id": "p-finding-the-rule",
+     "title": "Finding the rule",
+     "text": "A growing pattern is a set of figures where each one is built from the one before it by adding the same amount.  The figures are numbered, and figure 1 is where the counting starts.  Three figures is enough to see what is happening, which is why three is what you are usually given.\n\nWork out the growth first.  Count the dots in each figure, then find the difference between figure 1 and figure 2, and between figure 2 and figure 3.  Those two differences are equal in every pattern here, and that shared number is how much the pattern grows each step.\n\nThe rule multiplies the figure number by that growth.  If a pattern grows by 3 each step, the rule starts as 3 times n, where n stands for the figure number.  Then check it against figure 1.  If the rule gives fewer dots than figure 1 actually has, the difference is a fixed group.  It sits in every figure, and it gets added on the end.\n\nA rule earns its keep on the figures nobody would draw.  Figure 100 takes one line of arithmetic with a rule and an entire evening without one.  That is the whole reason for writing the rule down instead of counting on."
+    }
+   ],
+   "figures": [
+    {
+     "id": "fig-l1-rect-8-5",
+     "caption": "Perimeter practice: a rectangle, every side labelled.",
+     "alt": "A rectangle with the top and bottom sides labelled 8 cm and the left and right sides labelled 5 cm.  All four corners carry a right-angle mark.",
+     "dataTable": {
+      "shape": "rectangle",
+      "units": "cm",
+      "vertices": [
+       [
+        0,
+        0
+       ],
+       [
+        8,
+        0
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        0,
+        5
+       ]
+      ],
+      "sides": [
+       {
+        "label": "8 cm",
+        "len": 8
+       },
+       {
+        "label": "5 cm",
+        "len": 5
+       },
+       {
+        "label": "8 cm",
+        "len": 8
+       },
+       {
+        "label": "5 cm",
+        "len": 5
+       }
+      ],
+      "rightAngles": [
+       0,
+       1,
+       2,
+       3
+      ]
+     }
+    },
+    {
+     "id": "fig-l5-p3n",
+     "caption": "A growing dot pattern: figures 1, 2 and 3 hold 3, 6, 9 dots.",
+     "alt": "Three dot figures in a row.  Figure 1 has 3 dots in a single row of three, figure 2 has 6 dots in two rows of three, and figure 3 has 9 dots in three rows of three.",
+     "dataTable": {
+      "rule": {
+       "a": 3,
+       "b": 0
+      },
+      "shown": [
+       1,
+       2,
+       3
+      ],
+      "layout": "stack",
+      "dotUnit": "dot"
+     }
+    }
+   ],
+   "levels": [
+    {
+     "itemIds": [
+      "l1-missing-rect-8-5"
+     ]
+    },
+    {
+     "itemIds": [
+      "l5-next-p3n"
+     ]
+    }
+   ],
+   "items": [
+    {
+     "id": "l1-missing-rect-8-5",
+     "type": "mc",
+     "figureId": "fig-l1-rect-8-5",
+     "passageId": "p-how-to-read-a-figure",
+     "targets": [
+      "math-r4-perimeter"
+     ],
+     "coachTopic": "perimeter-missing-side",
+     "dok": 3,
+     "stem": "The perimeter of a rectangle is 26 cm.  Every side is labelled except one.  If the other sides are 8, 8, 5 cm, how long is the missing side?",
+     "choices": [
+      "21 cm",
+      "31 cm",
+      "7 cm",
+      "5 cm"
+     ],
+     "key": 3,
+     "distractorRationale": {
+      "0": "This is the total of the sides you were GIVEN.  The question asks for the one that is missing, which is what is left over after those are taken off the perimeter.",
+      "1": "This adds the missing side to the perimeter instead of taking the known sides away from it.  The perimeter already includes every side.",
+      "2": "This divides the perimeter by 4, which only gives a side length when every side is the same.  These are not all the same."
+     },
+     "explain": "The perimeter counts every side once, so the known sides plus the missing one make 26 cm.  Add the known sides: 8 + 8 + 5 = 21.  Take that off the perimeter: 26 - 21 = 5 cm."
+    },
+    {
+     "id": "l5-next-p3n",
+     "type": "mc",
+     "figureId": "fig-l5-p3n",
+     "passageId": "p-finding-the-rule",
+     "targets": [
+      "math-r5-numerical-patterns"
+     ],
+     "coachTopic": "growpattern-next-figure",
+     "dok": 2,
+     "stem": "Figures 1, 2 and 3 hold 3, 6, 9 dots.  How many dots would figure 4 have?",
+     "choices": [
+      "12",
+      "10",
+      "18",
+      "15"
+     ],
+     "key": 0,
+     "distractorRationale": {
+      "1": "This adds one more dot than figure 3.  Look at how much the pattern grows between figures 1 and 2, and again between 2 and 3;  it is the same jump every time, and it is not one.",
+      "2": "This doubles figure 3.  The pattern ADDS the same amount each time rather than doubling, which is why the jumps between figures are all equal.",
+      "3": "This takes one jump too many and lands on figure 5.  Count carefully: figure 4 is one step past figure 3."
+     },
+     "explain": "The pattern grows by the same amount every step:  6 - 3 = 3, and 9 - 6 = 3.  So figure 4 has 9 + 3 = 12 dots."
+    }
+   ]
+  }
+ ]
+}

@@ -32,7 +32,7 @@
       "docKind": "status-log",
       "register": "CREW LOG",
       "source": "original",
-      "text": "I count four chairs around Finch's table, and only two of them get used, which tells me something before anyone says a word.  I take the one nearest the door, because I like knowing where the door is, and a boy about my age takes the other one without asking whether it is taken.  He introduces himself as Theo, then seems to regret it immediately, like talking to a stranger is a skill he is still building.  I decide I like him better for that than I would have liked someone smooth.\n\nFinch does not explain what this place is.  She sets a single photograph on the table between us: a glass disc, roughly the size of a coaster, etched with a pattern that curves in on itself like a shell.  She asks what we notice, and Theo says the pattern looks like a maze with no walls.  That is a better answer than mine would have been, because I was still counting the empty chairs.\n\nI ask the question I actually care about.  Why are there two empty chairs?  Did two people quit, or have two people simply not arrived yet?  Finch says that is the correct question to have asked, though she does not answer it.  I have known her for eleven minutes, and I already understand that this is going to be a pattern.\n\nShe tells us the disc in the photograph has a name, the Threadglass, documented in three separate archives across two centuries.  Then it vanished from all three collections within the same decade.  Objects like that do not vanish on their own, she says.  Someone wanted it enough to risk being caught holding it, three times, in three different countries.  She wants to know if we want it back badly enough to take a much smaller risk than that.\n\nTheo asks who has it now.  Finch says a private collector, one with a very good lawyer and a very quiet gallery.  The Archive does not involve lawyers, she adds, because lawyers require you to explain things in rooms with records.  I like that answer more than I expected to.\n\nThe door opens before she finishes, and a third kid drops into one of the empty chairs like he has been late to better things than this.  He says his name is Dash, apologizes to no one in particular, and asks whether he missed anything important.  Finch says he missed the part where she decides whether to trust any of us.  The part he is walking into now, she says, is the part where we start deciding whether to trust each other.  Nobody laughs.  I notice that the fourth chair is still empty, and that nobody else in the room has looked at it once.",
+      "text": "I count four chairs around Finch's table, and only two of them get used, which tells me something before anyone says a word.  I take the one nearest the door, because I like knowing where the door is, and a boy about my age takes the other one without asking whether it is taken.  He introduces himself as Theo, then seems to regret it immediately, like talking to a stranger is a skill he is still building.  I decide I like him better for that than I would have liked someone smooth.  I tell him my name is Mila, and he nods like he means to remember it.\n\nFinch does not explain what this place is.  She sets a single photograph on the table between us: a glass disc, roughly the size of a coaster, etched with a pattern that curves in on itself like a shell.  She asks what we notice, and Theo says the pattern looks like a maze with no walls.  That is a better answer than mine would have been, because I was still counting the empty chairs.\n\nI ask the question I actually care about.  Why are there two empty chairs?  Did two people quit, or have two people simply not arrived yet?  Finch says that is the correct question to have asked, though she does not answer it.  I have known her for eleven minutes, and I already understand that this is going to be a pattern.\n\nShe tells us the disc in the photograph has a name, the Threadglass, documented in three separate archives across two centuries.  Then it vanished from all three collections within the same decade.  Objects like that do not vanish on their own, she says.  Someone wanted it enough to risk being caught holding it, three times, in three different countries.  She wants to know if we want it back badly enough to take a much smaller risk than that.\n\nTheo asks who has it now.  Finch says a private collector, one with a very good lawyer and a very quiet gallery.  The Archive does not involve lawyers, she adds, because lawyers require you to explain things in rooms with records.  I like that answer more than I expected to.\n\nThe door opens before she finishes, and a third kid drops into one of the empty chairs like he has been late to better things than this.  He says his name is Dash, apologizes to no one in particular, and asks whether he missed anything important.  Finch says he missed the part where she decides whether to trust any of us.  The part he is walking into now, she says, is the part where we start deciding whether to trust each other.  Nobody laughs.  I notice that the fourth chair is still empty, and that nobody else in the room has looked at it once.",
       "figureIds": [
         "fig-l1-two-empty-chairs"
       ]
@@ -768,7 +768,7 @@
         "choices": [
           "Because lawyers require explaining things in rooms with records.",
           "Because the Archive cannot afford a lawyer as good as the private collector's.",
-          "Because Kade already has a lawyer working against them.",
+          "Because a lawyer would make taking it back far too risky.",
           "Because lawyers are not allowed inside the Athenaeum."
         ],
         "key": 0
@@ -793,7 +793,7 @@
         "2": "This line is about the risk of taking the Threadglass back.  It gives no reason for avoiding lawyers, and Finch's real reason is about explaining things in rooms with records.",
         "3": "This line is about Finch's habit of not answering questions.  It says nothing about lawyers being kept out of any building."
       },
-      "explain": "Finch gives one exact reason for skipping lawyers: they need explanations that end up in official records. That reason is about avoiding a paper trail, not about cost, location, or Kade's own legal team."
+      "explain": "Finch gives one exact reason for skipping lawyers: they need explanations that end up in official records. That reason is about avoiding a paper trail, not about cost, location, or risk."
     },
     {
       "id": "l1-ebsr-dash-interrupts",
@@ -4006,13 +4006,13 @@
       "choices": [
         "An eerie sense of not being alone, though nothing is confirmed.",
         "Calm reassurance that the dark room around the shelf is completely empty.",
-        "Certainty that Kade is hiding somewhere nearby in the dark, watching Mila.",
+        "Certainty that someone is hiding somewhere nearby in the dark, watching Mila.",
         "A scientific explanation for why the room beyond the shelf is so dimly lit."
       ],
       "key": 0,
       "distractorRationale": {
         "1": "The comparison borrows an uneasy, watched feeling, which is the opposite of calm reassurance. If you picked this, you read the image backward.",
-        "2": "The passage never mentions Kade being anywhere near the vault. You are adding a specific threat the text does not name.",
+        "2": "The comparison gives the feeling of a presence, not a certainty.  Nothing in the passage says anyone is really hiding in the dark.",
         "3": "This comparison is about a feeling, not a physical explanation. You may have mistaken a figurative image for a literal, factual one."
       },
       "explain": "Comparing an unseen wall to an unseen person standing just behind you borrows the specific, uneasy feeling of sensing a presence you cannot confirm, which makes the vault's darkness feel unsettling rather than simply unlit."

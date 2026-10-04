@@ -75,78 +75,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-ebsr-what-happened-to-threadglass",
-      "itemHash": "86425c46647295ab",
-      "blind": [
-        0,
-        2
-      ],
-      "authored": [
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-ebsr-mila-counts-chairs",
-      "itemHash": "5ab9380d2d304006",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-ebsr-why-no-lawyers",
-      "itemHash": "a0801a8019fe9d53",
-      "blind": [
-        0,
-        3
-      ],
-      "authored": [
-        0,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-ebsr-dash-interrupts",
-      "itemHash": "9f17aea3e77469dc",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-ms-finch-shows-not-tells",
-      "itemHash": "310d1a011ea42a03",
-      "blind": [
-        0,
-        1,
-        3
-      ],
-      "authored": [
-        0,
-        1,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l1-hot-finch-tests-by-asking",
       "itemHash": "2400d269c5f67a21",
       "blind": [
@@ -158,20 +86,6 @@
         0,
         1,
         2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-hot-mila-private-judgment",
-      "itemHash": "437b9c7a18387538",
-      "blind": [
-        0,
-        1
-      ],
-      "authored": [
-        0,
-        1
       ],
       "confidence": "high",
       "status": "agree"
@@ -221,20 +135,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l1-cloze-mila-narration-effect",
-      "itemHash": "50b5794a5bb89174",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l1-mc-floorboard-sound",
       "itemHash": "eb79f868f04b0a87",
       "blind": 0,
@@ -245,38 +145,6 @@
     {
       "itemId": "l1-mc-theo-never-wondered",
       "itemHash": "2f17adebb1f76f6e",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-mc-mila-seat-choice",
-      "itemHash": "8a98d21540ccc6fb",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-mc-trust-each-other",
-      "itemHash": "265cbaa4d0e31749",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-mc-repeat-theft-pattern",
-      "itemHash": "7bdb4b2dd956b60e",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-mc-theo-answer-better",
-      "itemHash": "5469868661d7a8e8",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -294,22 +162,6 @@
         2,
         0,
         1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-match-crew-first-detail",
-      "itemHash": "ca4887789d4be6d2",
-      "blind": [
-        1,
-        0,
-        2
-      ],
-      "authored": [
-        1,
-        0,
-        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -1441,14 +1293,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-mc-sensing-the-dark-wall",
-      "itemHash": "ade532ca2cb36876",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l5-mc-gray-absence-of-color",
       "itemHash": "707fbc26e142af20",
       "blind": 1,
@@ -1525,6 +1369,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l6-ebsr-central-theme-noticing",
+      "itemHash": "47f8bbdd155493de",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-ebsr-warning-and-compliment",
       "itemHash": "cc59b084d6b1df09",
       "blind": [
@@ -1534,6 +1392,136 @@
       "authored": [
         3,
         0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-checking-a-signature",
+      "itemHash": "31b8cd7572d1117a",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ms-earlier-skills-pay-off",
+      "itemHash": "e8cdc2233e5a8edd",
+      "blind": [
+        1,
+        3,
+        5
+      ],
+      "authored": [
+        1,
+        3,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-not-a-treasury",
+      "itemHash": "b3fa3cd2c00b1000",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-why-three-keys",
+      "itemHash": "47ddaa394dc779b3",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-a-price-they-would-pay",
+      "itemHash": "87bd5e8217267e97",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-a-different-hand",
+      "itemHash": "9948d15dfd6567fb",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-what-the-last-line-asks",
+      "itemHash": "0312e5de08885572",
+      "blind": [
+        3,
+        0
+      ],
+      "authored": [
+        3,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ms-what-an-entry-records",
+      "itemHash": "df876565de173ccc",
+      "blind": [
+        2,
+        3,
+        5
+      ],
+      "authored": [
+        2,
+        3,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-hot-no-ordinary-door",
+      "itemHash": "a8301b517cad35c5",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -1567,6 +1555,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l6-hot-before-a-shelf",
+      "itemHash": "d026e982b031d3a2",
+      "blind": [
+        1,
+        2
+      ],
+      "authored": [
+        1,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-cloze-relics-are-keys",
       "itemHash": "4db5fea571d67745",
       "blind": [
@@ -1581,8 +1583,62 @@
       "status": "agree"
     },
     {
+      "itemId": "l6-cloze-a-repair-is-a-story",
+      "itemHash": "d2cf5248975517e1",
+      "blind": [
+        2,
+        2
+      ],
+      "authored": [
+        2,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-revising-the-assumption",
+      "itemHash": "b0617a54e5e4b0cb",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-dash-goes-first",
+      "itemHash": "19789c714d817a6c",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-why-they-are-here-tonight",
+      "itemHash": "17eb611dd6c34f4c",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-mc-a-held-breath",
       "itemHash": "f612bfa7bb346c41",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-how-the-register-is-built",
+      "itemHash": "09e6d85ba78c65ec",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-what-the-room-keeps",
+      "itemHash": "9b3ba0dd7386c757",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -1600,44 +1656,6 @@
         2,
         0,
         1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-mc-what-the-plan-puts-on-the-fourth",
-      "itemHash": "580a9f941db67cef",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-ms-how-the-plan-sets-the-table",
-      "itemHash": "a8b241331c20820e",
-      "blind": [
-        1,
-        3,
-        4
-      ],
-      "authored": [
-        1,
-        3,
-        4
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l1-cloze-the-moment-the-plan-draws",
-      "itemHash": "f3abf0af78763299",
-      "blind": [
-        0,
-        2
-      ],
-      "authored": [
-        0,
-        2
       ],
       "confidence": "high",
       "status": "agree"
@@ -1860,234 +1878,6 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-ms-what-the-plan-shows",
-      "itemHash": "776946f1780e778a",
-      "blind": [
-        1,
-        3,
-        5
-      ],
-      "authored": [
-        1,
-        3,
-        5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-central-theme-noticing",
-      "itemHash": "47f8bbdd155493de",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-checking-a-signature",
-      "itemHash": "31b8cd7572d1117a",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ms-earlier-skills-pay-off",
-      "itemHash": "e8cdc2233e5a8edd",
-      "blind": [
-        1,
-        3,
-        5
-      ],
-      "authored": [
-        1,
-        3,
-        5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-not-a-treasury",
-      "itemHash": "b3fa3cd2c00b1000",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-why-three-keys",
-      "itemHash": "47ddaa394dc779b3",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-a-price-they-would-pay",
-      "itemHash": "87bd5e8217267e97",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-a-different-hand",
-      "itemHash": "9948d15dfd6567fb",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-what-the-last-line-asks",
-      "itemHash": "0312e5de08885572",
-      "blind": [
-        3,
-        0
-      ],
-      "authored": [
-        3,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ms-what-an-entry-records",
-      "itemHash": "df876565de173ccc",
-      "blind": [
-        2,
-        3,
-        5
-      ],
-      "authored": [
-        2,
-        3,
-        5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-hot-no-ordinary-door",
-      "itemHash": "a8301b517cad35c5",
-      "blind": [
-        0,
-        2
-      ],
-      "authored": [
-        0,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-hot-before-a-shelf",
-      "itemHash": "d026e982b031d3a2",
-      "blind": [
-        1,
-        2
-      ],
-      "authored": [
-        1,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-cloze-a-repair-is-a-story",
-      "itemHash": "d2cf5248975517e1",
-      "blind": [
-        2,
-        2
-      ],
-      "authored": [
-        2,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-revising-the-assumption",
-      "itemHash": "b0617a54e5e4b0cb",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-dash-goes-first",
-      "itemHash": "19789c714d817a6c",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-why-they-are-here-tonight",
-      "itemHash": "17eb611dd6c34f4c",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-how-the-register-is-built",
-      "itemHash": "09e6d85ba78c65ec",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-what-the-room-keeps",
-      "itemHash": "9b3ba0dd7386c757",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
       "itemId": "l6-cloze-register-card-rows",
       "itemHash": "1534858af9d10bb8",
       "blind": [
@@ -2110,11 +1900,221 @@
       "status": "agree"
     },
     {
+      "itemId": "l6-ms-what-the-plan-shows",
+      "itemHash": "776946f1780e778a",
+      "blind": [
+        1,
+        3,
+        5
+      ],
+      "authored": [
+        1,
+        3,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l6-mc-the-boxed-line",
       "itemHash": "ed944966bd513637",
       "blind": 3,
       "authored": 3,
       "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-what-happened-to-threadglass",
+      "itemHash": "340fa18a21ae2de2",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-mila-counts-chairs",
+      "itemHash": "b1d60273d2a68c5b",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-why-no-lawyers",
+      "itemHash": "edf1a80f45e5777f",
+      "blind": [
+        0,
+        3
+      ],
+      "authored": [
+        0,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ebsr-dash-interrupts",
+      "itemHash": "041c7ebf497cb626",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ms-finch-shows-not-tells",
+      "itemHash": "eee236ff8c20a60a",
+      "blind": [
+        0,
+        1,
+        3
+      ],
+      "authored": [
+        0,
+        1,
+        3
+      ],
+      "confidence": "medium",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-hot-mila-private-judgment",
+      "itemHash": "de1fcbe5fea4dd3f",
+      "blind": [
+        0,
+        1
+      ],
+      "authored": [
+        0,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-cloze-mila-narration-effect",
+      "itemHash": "c5586999ae42c199",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-mila-seat-choice",
+      "itemHash": "4a963ce6617d559c",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-trust-each-other",
+      "itemHash": "656c75523af58f6a",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-repeat-theft-pattern",
+      "itemHash": "fa4d6e6200abd04f",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-theo-answer-better",
+      "itemHash": "a208ac7a9526beef",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-match-crew-first-detail",
+      "itemHash": "3ee05be860e071f5",
+      "blind": [
+        1,
+        0,
+        2
+      ],
+      "authored": [
+        1,
+        0,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-sensing-the-dark-wall",
+      "itemHash": "5ab9cf0fe4c23f9a",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-mc-what-the-plan-puts-on-the-fourth",
+      "itemHash": "22886356a3e27736",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-ms-how-the-plan-sets-the-table",
+      "itemHash": "c3976ff963bcc1fa",
+      "blind": [
+        1,
+        3,
+        4
+      ],
+      "authored": [
+        1,
+        3,
+        4
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l1-cloze-the-moment-the-plan-draws",
+      "itemHash": "38828b4685920962",
+      "blind": [
+        0,
+        2
+      ],
+      "authored": [
+        0,
+        2
+      ],
+      "confidence": "medium",
       "status": "agree"
     }
   ]
