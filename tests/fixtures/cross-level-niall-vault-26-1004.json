@@ -1,0 +1,750 @@
+{
+ "_about": "Niall's case, the FIRST positive control of tests/sweep-cross-level.js.  Justin, 26-1004, relaying Niall:  \"in Vault of Ages, in the sixth level, it was asking a question about what happened in the second level.\"  Verbatim from packs/vault-of-ages-g6.json at 02a63cf:  the two level-2 passages level 6 served, the level-2 items on them, and the four level-6 items that asked about them.  Never edit this to make the gate pass:  the gate must FAIL it.",
+ "source": "packs/vault-of-ages-g6.json @ 02a63cf",
+ "passages": [
+  {
+   "id": "p-threadglass-entry",
+   "title": "Catalog Entry: The Threadglass",
+   "genre": "informational",
+   "docKind": "case-file",
+   "register": "ARCHIVE CATALOG · ENTRY",
+   "source": "original",
+   "text": "Every object the Archive tracks gets one entry in the master catalog.  The entry is updated each time new information surfaces.  It is never deleted, even after a relic is recovered.  The entry below is the current record for catalog number 114, known informally as the Threadglass.\n\nDescription.  It is a flat disc of pale green glass, four inches across.  One face is etched with a single continuous spiral line that never crosses itself.  The etching is shallow.  It only shows clearly when light crosses the glass at an angle.  Historians believe that was done on purpose, not a flaw in the original casting.  No one has ever measured the spiral exactly the same way twice.  The line has no clear start or end for a ruler to use.\n\nOrigin.  The Threadglass turns up in written records three separate times across roughly two hundred years.  Each mention connects it to a story.  The story is about a path that could not be walked twice by accident.  Each record ties the object loosely to an older legend.  It is about a hero who escaped a builder's maze by following a single unbroken thread.  Archive researchers are careful to note something.  The disc is almost certainly a later tribute to that story, not a prop from the events the story tells.  Glassmaking this fine did not exist when the maze legend is set.\n\nDocumented history.  The disc entered the Ashford family collection in the nineteenth century.  It passed to a regional museum by gift.  It was moved twice more between institutions.  A formal count in the 1970s confirmed it was present and secure.  A second count, taken eleven years later, could not find it.  No theft was ever reported to any police record the Archive has found.  The gap between those two counts is the single largest question mark in this entry.\n\nCurrent status.  Archive field work places the Threadglass in a private collection as of last spring.  The lead comes from an insurance filing.  It describes an object that matches this entry in exact size.  The filer's name is blacked out in the copy the Archive obtained.  This entry will be updated again once the object's status changes.  A note will explain how the Archive came to know it changed.",
+   "figureIds": [
+    "fig-l2-threadglass"
+   ]
+  },
+  {
+   "id": "p-three-realms-below",
+   "title": "Three Realms Below",
+   "genre": "informational",
+   "docKind": "memo",
+   "register": "COMPARISON · THREE TRADITIONS",
+   "source": "original",
+   "text": "Every tradition the Archive studies describes a place the dead go.  Reading three of those descriptions side by side says more about how each culture explained the world than any single one does alone.\n\nThe Greek underworld is described as a single kingdom with regions inside it, the way a country has provinces.  Most of the dead are said to drift as shades through a grey plain.  They are neither rewarded nor punished, adrift in a fog most Greek writers describe as endless rather than dark.  Two smaller regions sit at the far edges of that kingdom.  One is for punishment, reserved for those who wronged the gods directly rather than other people.  One is for reward, reserved for a small number of the greatly honored.  The kingdom has a ruler, a boundary river, and a ferryman.  The ferryman will not carry a soul across without payment.  That is why the old custom of burying a coin with a body comes from this tradition specifically.\n\nThe Egyptian underworld is described less as a place than as a journey.  It is a passage through twelve regions that mirror the twelve hours of night.  Each region is guarded.  Each one requires the traveler to know the correct words to pass safely.  At the journey's end, the heart of the dead person is weighed on a scale against a single feather.  The two sides of that scale must balance exactly for the traveler to continue onward.  A heart heavier than the feather does not lead to a lesser punishment.  It ends the journey completely.  That is why so much Egyptian funeral writing is devoted to coaching the dead through this one moment, rather than describing what comes after it.\n\nThe Norse underworld splits the dead by the manner of their death, rather than by anything they did in life.  Warriors who died in battle are described as being taken to a golden hall.  There they prepare for a final conflict still to come.  Nearly everyone else travels instead to a cold and misty realm, regardless of how they lived.  That realm is ruled by a figure said to be half living and half corpse.  The dead there simply continue existing, rather than being judged.  Norse tradition spends comparatively little of its writing describing this second realm in detail.  Some Archive researchers read that gap as its own kind of statement, about which fate the culture's storytellers actually wanted to dwell on.\n\nRead together, the three traditions disagree about almost everything.  Are the dead judged, sorted, or do they simply continue?  Does the journey matter more than the destination?  Does fairness or fate decide where anyone ends up?  On one point, though, they agree without exception.  The border between the living and the dead is a real place with real geography.  It is crossed by a real path, one the people who told these stories believed was worth describing in exact and careful detail.",
+   "figureIds": [
+    "fig-l2-three-realms"
+   ]
+  }
+ ],
+ "figures": [],
+ "levels": [
+  {
+   "id": 1,
+   "name": "The Crew Forms",
+   "itemIds": []
+  },
+  {
+   "id": 2,
+   "name": "The Archive",
+   "itemIds": [
+    "l2-ebsr-documented-history-purpose",
+    "l2-mc-spiral-cant-be-measured",
+    "l2-hot-description-vs-history",
+    "l2-order-threadglass-entry-sections",
+    "l2-ebsr-why-disappearance-suspicious",
+    "l2-mc-threadglass-old-legend",
+    "l2-hot-gap-is-suspicious",
+    "l2-ms-three-realms-differences",
+    "l2-cloze-shared-border-point",
+    "l2-order-three-realms-sequence",
+    "l2-ebsr-why-a-tribute",
+    "l2-mc-origin-section-purpose",
+    "l2-hot-topic-sentences-three-realms",
+    "l2-mc-greek-coin-custom",
+    "l2-ebsr-three-realms-shared-point",
+    "l2-ebsr-egyptian-paragraph-idea",
+    "l2-mc-three-realms-ruler-row",
+    "l2-cloze-threadglass-card-headings"
+   ]
+  },
+  {
+   "id": 3,
+   "name": "The First Heist",
+   "itemIds": []
+  },
+  {
+   "id": 4,
+   "name": "Three Tellings",
+   "itemIds": []
+  },
+  {
+   "id": 5,
+   "name": "The Language of Myth",
+   "itemIds": []
+  },
+  {
+   "id": 6,
+   "name": "The Final Vault",
+   "itemIds": [
+    "l6-cloze-catalog-purpose-again",
+    "l6-hot-checkable-vs-not",
+    "l6-mc-archive-catalog-vs-chronicle-purpose",
+    "l6-ebsr-catalog-purpose-vs-chronicle"
+   ]
+  }
+ ],
+ "items": [
+  {
+   "id": "l2-ebsr-documented-history-purpose",
+   "type": "ebsr",
+   "passageId": "p-threadglass-entry",
+   "targets": [
+    "c1-inf-6-text-structure"
+   ],
+   "coachTopic": "structure-text",
+   "dok": 3,
+   "partA": {
+    "stem": "This entry is organized into four labeled sections. What is the purpose of the \"Documented history\" section specifically?",
+    "choices": [
+     "To describe exactly what the object looks like.",
+     "To trace who owned or held the object over time, up to the point it went missing.",
+     "To explain the legend the object is connected to.",
+     "To give the Archive's best guess, from an insurance filing, about where the object is now."
+    ],
+    "key": 1
+   },
+   "partB": {
+    "stem": "Which sentence from the passage best supports the answer you just gave?",
+    "choices": [
+     "It is a flat disc of pale green glass, four inches across.",
+     "Archive field work places the Threadglass in a private collection as of last spring.",
+     "The disc entered the Ashford family collection in the nineteenth century.",
+     "It is about a hero who escaped a builder's maze by following a single unbroken thread."
+    ],
+    "key": {
+     "0": 0,
+     "1": 2,
+     "2": 3,
+     "3": 1
+    }
+   },
+   "distractorRationale": {
+    "0": "That line comes from the Description section, which covers appearance, not ownership history.",
+    "2": "That line comes from the Origin section, which covers the legend behind the object, not who has owned it.",
+    "3": "That line comes from the Current status section, which covers where the object is believed to be now, not its past ownership."
+   },
+   "explain": "The Documented history section has one job: tracing the object from its earliest known owner forward through each transfer, right up to the point where it could no longer be located. That is different from describing the object, explaining its legend, or reporting its present location."
+  },
+  {
+   "id": "l2-mc-spiral-cant-be-measured",
+   "type": "mc",
+   "passageId": "p-threadglass-entry",
+   "targets": [
+    "c1-inf-1-key-details"
+   ],
+   "coachTopic": "evidence-key-details",
+   "dok": 2,
+   "stem": "According to the entry, why has no one ever measured the Threadglass's spiral exactly the same way twice?",
+   "choices": [
+    "The glass is too fragile to be touched or handled.",
+    "The Archive has never allowed anyone to examine the disc closely.",
+    "The line has no clear start or end point for a ruler to use.",
+    "The spiral pattern changes slightly every year."
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "Fragility is never mentioned in the entry. You are supplying a reason the text does not actually give.",
+    "1": "The entry describes researchers examining and describing the object in detail, which argues against nobody being allowed close access.",
+    "3": "The entry never suggests the pattern itself changes over time; only the measurement is described as inconsistent. If you picked this, you mixed up the object changing with the difficulty of measuring it."
+   },
+   "explain": "The entry gives a precise, physical reason: the spiral line has no clear start or end for a ruler to use, which is a fact about the shape itself, not about fragility, restricted access, or the pattern changing over time."
+  },
+  {
+   "id": "l2-hot-description-vs-history",
+   "type": "hottext",
+   "passageId": "p-threadglass-entry",
+   "targets": [
+    "c1-inf-6-text-structure"
+   ],
+   "coachTopic": "structure-text",
+   "dok": 3,
+   "mode": "sentence",
+   "stem": "Tap the two sentences that come from the Description section. The other two come from Documented history.",
+   "spans": [
+    "It is a flat disc of pale green glass, four inches across.",
+    "The etching is shallow.",
+    "The disc entered the Ashford family collection in the nineteenth century.",
+    "A formal count in the 1970s confirmed it was present and secure."
+   ],
+   "key": [
+    0,
+    1
+   ],
+   "explain": "The first two sentences describe what the object physically looks like, which is the Description section's job, while the last two trace who owned or counted the object over time, which belongs to Documented history. Sorting a sentence correctly means asking what job it is doing, not just which paragraph it sits near."
+  },
+  {
+   "id": "l2-order-threadglass-entry-sections",
+   "type": "order",
+   "passageId": "p-threadglass-entry",
+   "targets": [
+    "c1-inf-6-text-structure"
+   ],
+   "coachTopic": "structure-text",
+   "dok": 2,
+   "stem": "Put the sections of the Threadglass catalog entry in the order they actually appear.",
+   "tiles": [
+    "Documented history",
+    "Origin",
+    "Current status",
+    "Description"
+   ],
+   "key": [
+    3,
+    1,
+    0,
+    2
+   ],
+   "explain": "The entry moves in a deliberate sequence: first describing what the object physically is, then explaining the legend it connects to, then tracing who owned it over time, and only at the end reporting what remains unresolved today. Reordering these sections would break the buildup from established fact to open question."
+  },
+  {
+   "id": "l2-ebsr-why-disappearance-suspicious",
+   "type": "ebsr",
+   "passageId": "p-threadglass-entry",
+   "targets": [
+    "c1-inf-1-key-details"
+   ],
+   "coachTopic": "evidence-key-details",
+   "dok": 3,
+   "partA": {
+    "stem": "What exactly makes the Threadglass's disappearance stand out as suspicious?",
+    "choices": [
+     "It was present at one formal count and gone at the next, with no theft ever reported.",
+     "The Archive has no photograph of the object to show what it looked like.",
+     "The object was never insured, by the museums or by anyone else.",
+     "Nobody has ever measured the spiral pattern etched into one face of the disc."
+    ],
+    "key": 0
+   },
+   "partB": {
+    "stem": "Which sentence from the passage best supports the answer you just gave?",
+    "choices": [
+     "The lead comes from an insurance filing.",
+     "The etching is shallow.",
+     "No theft was ever reported to any police record the Archive has found.",
+     "No one has ever measured the spiral exactly the same way twice."
+    ],
+    "key": {
+     "0": 2,
+     "1": 1,
+     "2": 0,
+     "3": 3
+    }
+   },
+   "distractorRationale": {
+    "1": "The entry never mentions whether a photograph exists.  The shallow etching is a detail about the object's appearance, unrelated to photography.",
+    "2": "An insurance filing is mentioned directly in the Current status section, so the object clearly was insured at some point.  This line actually argues against the choice, not for it.",
+    "3": "The entry says no one has measured the spiral the same way twice, which is a fact about the object's design.  It has nothing to do with how or why the object went missing."
+   },
+   "explain": "The suspicious part is precise: the object was confirmed present at one inventory, then simply gone at the next, and no theft was ever filed anywhere the Archive could find.  An object does not usually vanish from a secure collection without leaving some kind of report behind."
+  },
+  {
+   "id": "l2-mc-threadglass-old-legend",
+   "type": "mc",
+   "passageId": "p-threadglass-entry",
+   "targets": [
+    "c1-inf-1-key-details"
+   ],
+   "coachTopic": "evidence-key-details",
+   "dok": 2,
+   "stem": "According to its catalog entry, what older legend is the Threadglass loosely connected to?",
+   "choices": [
+    "Three sisters who carved the shape of every life as it happened.",
+    "A search across every province of a kingdom for the scattered pieces of a god.",
+    "A chamber a priesthood has guarded for six generations.",
+    "A hero who escaped a builder's maze by following a single unbroken thread."
+   ],
+   "key": 3,
+   "distractorRationale": {
+    "0": "That legend belongs to the Wyrdstone's entry, not the Threadglass's. You matched the right kind of answer to the wrong relic.",
+    "1": "That search across a kingdom is part of the Osiris and Isis story connected to the Abydos seal, a completely different relic and tradition.",
+    "2": "A guarded chamber describes the Abydos seal's own history, not the Threadglass's. Each relic in the Archive connects to its own separate legend."
+   },
+   "explain": "The Threadglass entry names its own specific legend directly: a hero who escaped a maze by following one unbroken thread, which is why the object's spiral pattern is treated as a tribute to that particular story rather than to either of the Archive's other two relics."
+  },
+  {
+   "id": "l2-hot-gap-is-suspicious",
+   "type": "hottext",
+   "passageId": "p-threadglass-entry",
+   "targets": [
+    "c1-inf-1-key-details"
+   ],
+   "coachTopic": "evidence-key-details",
+   "dok": 3,
+   "mode": "sentence",
+   "stem": "Tap the two sentences that together explain why the missing decade between counts is suspicious. The other two describe the object's appearance instead.",
+   "spans": [
+    "A formal count in the 1970s confirmed it was present and secure.",
+    "A second count, taken eleven years later, could not find it.",
+    "It is a flat disc of pale green glass, four inches across.",
+    "One face is etched with a single continuous spiral line that never crosses itself."
+   ],
+   "key": [
+    0,
+    1
+   ],
+   "explain": "Present and secure, then simply gone eleven years later, is exactly the pair of facts that makes the gap suspicious, an object confirmed and then missing with nothing in between to explain the change. The disc's color and its spiral pattern are physical description from a different section entirely, and say nothing about when or how it disappeared."
+  },
+  {
+   "id": "l2-ms-three-realms-differences",
+   "type": "ms",
+   "passageId": "p-three-realms-below",
+   "targets": [
+    "c1-inf-2-central-ideas"
+   ],
+   "coachTopic": "central-idea",
+   "dok": 4,
+   "stem": "Select the three statements that correctly describe a difference between at least two of the three underworlds described in the passage.",
+   "choices": [
+    "The Greek underworld mostly leaves the dead unjudged, while the Egyptian one judges each soul.",
+    "The Norse underworld sorts the dead by how they died, while the Egyptian underworld weighs each heart at the end.",
+    "The Egyptian underworld is a single kingdom with provinces, while the Greek one is a journey.",
+    "The Norse tradition says little about its second realm, while the Egyptian one details its journey.",
+    "The Greek underworld sends warriors who died in battle to a golden hall, while the Norse one does not.",
+    "The Greek ferryman carries every soul across for free, while each Egyptian traveler must pay a coin."
+   ],
+   "key": [
+    0,
+    1,
+    3
+   ],
+   "distractorRationale": {
+    "2": "The passage has these the other way around.  The Greek underworld is the single kingdom with regions, and the Egyptian one is the journey through twelve regions.",
+    "4": "The golden hall for warriors who died in battle belongs to the Norse underworld.  The passage never gives the Greek underworld a hall for warriors.",
+    "5": "The Greek ferryman will not carry a soul across without payment.  The passage never asks an Egyptian traveler for a coin, only for the correct words and a heart that balances the feather."
+   },
+   "explain": "Real differences the passage draws out include who gets judged, what sorts the dead in each tradition, and how much attention each tradition gives to its less dramatic afterlife.  Each of the other three statements hands a detail to the wrong tradition: the single kingdom is Greek, the golden hall is Norse, and the ferryman who wants a coin is Greek."
+  },
+  {
+   "id": "l2-cloze-shared-border-point",
+   "type": "cloze",
+   "passageId": "p-three-realms-below",
+   "targets": [
+    "c1-inf-2-central-ideas"
+   ],
+   "coachTopic": "central-idea",
+   "dok": 3,
+   "stem": "Complete the summary.  The three underworlds disagree about whether the dead are {{0}}, but every tradition still describes the border between life and death as {{1}}.",
+   "blanks": [
+    {
+     "choices": [
+      "guarded by one single ruler who is the same in every tradition",
+      "judged, sorted by how they died, or left simply to continue existing",
+      "reachable only by burning the body first"
+     ],
+     "key": 1
+    },
+    {
+     "choices": [
+      "an idea no culture ever bothered to describe in any detail",
+      "a real place, reached by a specific path worth describing in careful detail",
+      "the same distance from the world of the living in each of the three traditions"
+     ],
+     "key": 1
+    }
+   ],
+   "explain": "The passage spends most of its length on disagreement, judged against sorted against simply continuing, and then closes on the one thing every tradition shares: treating the border itself as a real, describable place, not a vague idea.  Nothing in the passage claims the traditions share a single ruler or an identical distance."
+  },
+  {
+   "id": "l2-order-three-realms-sequence",
+   "type": "order",
+   "passageId": "p-three-realms-below",
+   "targets": [
+    "c1-inf-6-text-structure"
+   ],
+   "coachTopic": "structure-text",
+   "dok": 3,
+   "stem": "Put the parts of \"Three Realms Below\" in the order they appear.",
+   "tiles": [
+    "A comparison of what all three traditions share despite their differences",
+    "A description of the Egyptian underworld as a guarded journey",
+    "A description of the Greek underworld as a single kingdom with regions",
+    "A description of the Norse underworld split by manner of death"
+   ],
+   "key": [
+    2,
+    1,
+    3,
+    0
+   ],
+   "explain": "The passage moves tradition by tradition, Greek first, then Egyptian, then Norse, describing each one fully on its own terms before the final paragraph steps back to compare all three together. Reading the comparison first would remove the very details it depends on."
+  },
+  {
+   "id": "l2-ebsr-why-a-tribute",
+   "type": "ebsr",
+   "passageId": "p-threadglass-entry",
+   "targets": [
+    "c1-inf-1-key-details"
+   ],
+   "coachTopic": "evidence-key-details",
+   "dok": 3,
+   "partA": {
+    "stem": "According to the entry, why do Archive researchers think the Threadglass is a later tribute rather than a genuine prop from the original legend?",
+    "choices": [
+     "The disc has never been photographed clearly.",
+     "Glassmaking of that quality did not exist when the maze legend is set.",
+     "The disc was found in a family collection, not a temple.",
+     "The spiral pattern on its face does not match the maze in the legend closely enough."
+    ],
+    "key": 1
+   },
+   "partB": {
+    "stem": "Which sentence from the passage best supports the answer you just gave?",
+    "choices": [
+     "The disc entered the Ashford family collection in the nineteenth century.",
+     "Glassmaking this fine did not exist when the maze legend is set.",
+     "One face is etched with a single continuous spiral line that never crosses itself.",
+     "The etching is shallow."
+    ],
+    "key": {
+     "0": 3,
+     "1": 1,
+     "2": 0,
+     "3": 2
+    }
+   },
+   "distractorRationale": {
+    "0": "The entry never discusses photography at all. The shallow etching is about how the pattern catches light, not about image quality.",
+    "2": "Being found in a family collection describes a much later stage of the object's history. It says nothing about whether the object is old enough to be part of the original legend.",
+    "3": "This line describes the spiral as a single unbroken line, which actually matches the legend closely. It does not describe any mismatch."
+   },
+   "explain": "The entry gives one specific, checkable reason: the maze legend is set in a time before glass this fine could have been made. That is a fact about manufacturing technology, not about ownership, photography, or how well the pattern matches the story."
+  },
+  {
+   "id": "l2-mc-origin-section-purpose",
+   "type": "mc",
+   "passageId": "p-threadglass-entry",
+   "targets": [
+    "c1-inf-6-text-structure"
+   ],
+   "coachTopic": "structure-text",
+   "dok": 3,
+   "stem": "This entry is organized into four labeled sections. What is the specific purpose of the \"Origin\" section?",
+   "choices": [
+    "To explain which older legend the object is historically tied to.",
+    "To describe exactly what the object looks like, down to its size and color.",
+    "To trace who has owned the object over time.",
+    "To report where the object is currently believed to be, based on an insurance filing."
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "That is the job of the Description section, which covers appearance, not legend or history. You matched the purpose to the wrong section.",
+    "2": "Tracing ownership over time is the Documented history section's specific job, not Origin's.",
+    "3": "Reporting the object's current location belongs to the Current status section, which comes after Origin in the entry."
+   },
+   "explain": "The Origin section has one clear job: connecting the object to whatever older legend or story it is historically tied to, distinct from describing its appearance, tracing its owners, or reporting where it is now."
+  },
+  {
+   "id": "l2-hot-topic-sentences-three-realms",
+   "type": "hottext",
+   "passageId": "p-three-realms-below",
+   "targets": [
+    "c1-inf-6-text-structure"
+   ],
+   "coachTopic": "structure-text",
+   "dok": 3,
+   "mode": "sentence",
+   "stem": "Tap the three sentences that each open one tradition's paragraph and announce which underworld it is about. The other two come from the closing paragraph instead.",
+   "spans": [
+    "The Greek underworld is described as a single kingdom with regions inside it, the way a country has provinces.",
+    "The Egyptian underworld is described less as a place than as a journey.",
+    "The Norse underworld splits the dead by the manner of their death, rather than by anything they did in life.",
+    "Read together, the three traditions disagree about almost everything.",
+    "On one point, though, they agree without exception."
+   ],
+   "key": [
+    0,
+    1,
+    2
+   ],
+   "explain": "Each of the three body paragraphs opens by naming its tradition and its defining shape, a kingdom, a journey, or a split by manner of death. The last two sentences come from the closing paragraph, which compares all three together rather than opening any single tradition's own description."
+  },
+  {
+   "id": "l2-mc-greek-coin-custom",
+   "type": "mc",
+   "passageId": "p-three-realms-below",
+   "targets": [
+    "c1-inf-1-key-details"
+   ],
+   "coachTopic": "evidence-key-details",
+   "dok": 3,
+   "stem": "According to the passage, why does the old custom of burying a coin with a body come specifically from Greek tradition?",
+   "choices": [
+    "Egyptian tradition requires a coin to balance the scale against the feather.",
+    "Norse tradition uses a coin to mark where a warrior died in battle.",
+    "The Greek ferryman will not carry a soul across the boundary river without payment.",
+    "All three traditions described in the passage share the exact same custom of burying a coin."
+   ],
+   "key": 2,
+   "distractorRationale": {
+    "0": "The Egyptian weighing scene involves a feather, never a coin. You combined two separate traditions' details into one incorrect answer.",
+    "1": "The passage never mentions Norse burial customs involving a coin. You may be assuming a detail the text does not state.",
+    "3": "The passage describes the coin custom as coming from Greek tradition specifically, not from all three equally. If you picked this, you missed the word \"specifically\" in the question."
+   },
+   "explain": "The passage ties the custom directly to one specific detail: the Greek ferryman refuses to carry a soul across without payment, which is exactly why burying a coin with a body traces back to Greek tradition rather than to Egyptian or Norse beliefs."
+  },
+  {
+   "id": "l2-ebsr-three-realms-shared-point",
+   "type": "ebsr",
+   "passageId": "p-three-realms-below",
+   "targets": [
+    "c1-inf-2-central-ideas"
+   ],
+   "coachTopic": "central-idea",
+   "dok": 3,
+   "partA": {
+    "stem": "What is the one point all three traditions agree on, according to the passage?",
+    "choices": [
+     "The border between life and death is a real place, reached by a real path worth describing exactly.",
+     "The dead are always judged on how they lived, then sent to reward or punishment.",
+     "Warriors and the greatly honored receive better treatment than everyone else.",
+     "A ferryman decides who may cross into the afterlife, and he must be paid a coin to do it."
+    ],
+    "key": 0
+   },
+   "partB": {
+    "stem": "Which sentence from the passage best supports the answer you just gave?",
+    "choices": [
+     "The ferryman will not carry a soul across without payment.",
+     "The dead there simply continue existing, rather than being judged.",
+     "One is for reward, reserved for a small number of the greatly honored.",
+     "The border between the living and the dead is a real place with real geography."
+    ],
+    "key": {
+     "0": 3,
+     "1": 1,
+     "2": 2,
+     "3": 0
+    }
+   },
+   "distractorRationale": {
+    "1": "The Norse underworld explicitly does not judge most of the dead, according to the passage.  That rules out judgment as something all three traditions share.",
+    "2": "Reward for the greatly honored is described only for the Greek underworld, and the golden hall for warriors only for the Norse.  Neither is a point all three traditions make.",
+    "3": "A ferryman requiring payment is a Greek-specific detail.  Egyptian and Norse traditions, as described here, do not mention one."
+   },
+   "explain": "The passage explicitly separates what the three traditions disagree about, judgment, journey, and fairness, from the one thing they share: a real, carefully described border between life and death.  That shared point is the passage's actual central idea."
+  },
+  {
+   "id": "l2-ebsr-egyptian-paragraph-idea",
+   "type": "ebsr",
+   "passageId": "p-three-realms-below",
+   "targets": [
+    "c1-inf-2-central-ideas"
+   ],
+   "coachTopic": "central-idea",
+   "dok": 3,
+   "partA": {
+    "stem": "What is the central idea of the paragraph describing the Egyptian underworld?",
+    "choices": [
+     "The Egyptian underworld rewards warriors who died in battle with a place in a golden hall.",
+     "The Egyptian underworld is less a place than a journey toward one decisive moment.",
+     "The Egyptian underworld has no guarded regions at all.",
+     "The Egyptian underworld is ruled by a ferryman who demands a coin to cross its river."
+    ],
+    "key": 1
+   },
+   "partB": {
+    "stem": "Which sentence from the passage best supports the answer you just gave?",
+    "choices": [
+     "There they prepare for a final conflict still to come.",
+     "The Egyptian underworld is described less as a place than as a journey.",
+     "Each region is guarded.",
+     "The ferryman will not carry a soul across without payment."
+    ],
+    "key": {
+     "0": 0,
+     "1": 1,
+     "2": 2,
+     "3": 3
+    }
+   },
+   "distractorRationale": {
+    "0": "Preparing for a final conflict describes the Norse golden hall for warriors, not anything in the Egyptian underworld's description.",
+    "2": "This line says the opposite of the choice: every region is guarded, according to the passage, not left open.",
+    "3": "A ferryman demanding payment is a detail from the Greek underworld's description, not the Egyptian one."
+   },
+   "explain": "The paragraph's real point is that the Egyptian underworld is structured as a journey through twelve guarded regions, all leading to one decisive weighing. Details about warriors, an unguarded path, or a ferryman all belong to a different tradition's description, not this one."
+  },
+  {
+   "id": "l2-mc-three-realms-ruler-row",
+   "type": "mc",
+   "passageId": "p-three-realms-below",
+   "figureId": "fig-l2-three-realms",
+   "figureFact": "The Egyptian",
+   "targets": [
+    "c1-inf-2-central-ideas"
+   ],
+   "coachTopic": "central-idea",
+   "dok": 3,
+   "stem": "The memo sets the three traditions side by side.  In the row reading \"a ruler\", what does the comparison show?",
+   "choices": [
+    "The Egyptian column gives nothing there, while the Greek and Norse columns both fill it in.",
+    "The Greek column gives nothing there, while the Egyptian and Norse columns both fill it in.",
+    "The Norse column gives nothing there, while the Greek and Egyptian columns both fill it in.",
+    "All three traditions fill that row in, so the memo has them agreeing on a ruler."
+   ],
+   "key": 0,
+   "distractorRationale": {
+    "1": "The Greek column does fill that row in: it reads \"The kingdom has a ruler\".  Read down the column headed \"The Greek\" before deciding it gives nothing.",
+    "2": "The Norse column does fill that row in: it reads \"ruled by a figure\".  Read down the column headed \"The Norse\" before deciding it gives nothing.",
+    "3": "Two of the three traditions name a ruler and the third does not, so the memo does not show them agreeing there.  The one thing all three agree on sits in the line above the columns."
+   },
+   "explain": "The comparison settles it in the row reading \"a ruler\".  The Greek column reads \"The kingdom has a ruler\".  The Norse column reads \"ruled by a figure\".  The Egyptian column gives nothing there.  The Egyptian paragraph describes a journey and a weighing, and it names no ruler for that underworld.",
+   "whyTheFigureIsNeeded": "The passage gives each tradition its own paragraph, so the prose never lines the three up on the question of a ruler; only the memo puts them in one row, where the Egyptian column having no answer becomes visible.",
+   "svgRead": "In fig-l2-three-realms.svg the last row sits at y 320 and carries three text elements only: x 78 a ruler, x 239 The kingdom has a ruler, x 561 ruled by a figure.  There is no text element at x 400 on that row, which is where the Egyptian column's entries sit on the two rows above."
+  },
+  {
+   "id": "l2-cloze-threadglass-card-headings",
+   "type": "cloze",
+   "passageId": "p-threadglass-entry",
+   "figureId": "fig-l2-threadglass",
+   "figureFact": "in a private collection",
+   "targets": [
+    "c1-inf-6-text-structure"
+   ],
+   "coachTopic": "structure-text",
+   "dok": 2,
+   "stem": "Finish the description of the card.  Under one of its two headings, the card prints the words \"in a private collection\".  That heading reads {{0}}.  The card's other heading reads {{1}}, and the words under it name the entry's single largest question mark.",
+   "blanks": [
+    {
+     "choices": [
+      "Documented history",
+      "Current status",
+      "Description"
+     ],
+     "key": 1
+    },
+    {
+     "choices": [
+      "Documented history",
+      "Origin",
+      "Description"
+     ],
+     "key": 0
+    }
+   ],
+   "explain": "The card prints two of the entry's headings.  The words calling the eleven-year gap the entry's single largest question mark sit under the heading Documented history.  Under the heading Current status, the card prints the words \"in a private collection\", and the blacked-out bar sits just below them.  The card keeps where the disc is now in one section and what the Archive still cannot explain in the other.",
+   "whyTheFigureIsNeeded": "The entry runs four headed sections and the card prints two of them, and it sets the blacked-out bar directly under the private-collection line, so the card shows which of the entry's four headings it chose to keep and what it put beneath each one.",
+   "svgRead": "In fig-l2-threadglass.svg there are two underline rules, at y 184.5 under the text Documented history. at y 176 and at y 280.5 under the text Current status. at y 272.  The text in a private collection sits at y 304 and the solid bar carrying data-emphasis redact is drawn at y 316 to 340, below it."
+  },
+  {
+   "id": "l6-cloze-catalog-purpose-again",
+   "type": "cloze",
+   "passageId": "p-threadglass-entry",
+   "targets": [
+    "c1-inf-7-language-use"
+   ],
+   "coachTopic": "viewpoint-purpose",
+   "dok": 3,
+   "stem": "Complete the summary of what this entry's record-keeping shows about its purpose.  Each entry is {{0}}, and when the Threadglass's status changes, the Archive promises {{1}}, so a reader can always see where a fact came from.",
+   "blanks": [
+    {
+     "choices": [
+      "written once, when an object first goes missing, and then closed",
+      "deleted as soon as the relic it tracks is recovered",
+      "kept for good and updated whenever new information surfaces"
+     ],
+     "key": 2
+    },
+    {
+     "choices": [
+      "the name of the collector who holds it now",
+      "a fresh measurement of the spiral on its face",
+      "a note on how it learned of the change"
+     ],
+     "key": 2
+    }
+   ],
+   "explain": "The entry's first lines say every tracked object keeps one entry for good, updated each time new information surfaces and never deleted, even after a recovery.  Its last lines promise that the next update will come with a note explaining how the Archive came to know of the change.  A record kept that way always shows its reader where a fact came from."
+  },
+  {
+   "id": "l6-hot-checkable-vs-not",
+   "type": "hottext",
+   "passageId": "p-three-realms-below",
+   "targets": [
+    "c1-inf-3-word-meanings"
+   ],
+   "coachTopic": "vocab-context",
+   "dok": 3,
+   "mode": "sentence",
+   "stem": "The memo uses the word \"shades\" in its description of the Greek underworld.  Tap the two sentences that help a reader work out what a shade is.",
+   "spans": [
+    "Every tradition the Archive studies describes a place the dead go.",
+    "Most of the dead are said to drift as shades through a grey plain.",
+    "They are neither rewarded nor punished, adrift in a fog most Greek writers describe as endless rather than dark.",
+    "The kingdom has a ruler, a boundary river, and a ferryman.",
+    "Each region is guarded."
+   ],
+   "key": [
+    1,
+    2
+   ],
+   "explain": "A shade is what the memo calls one of the Greek dead.  One sentence says most of the dead drift as shades, and the next describes them: neither rewarded nor punished, adrift in a fog.  The first sentence only says every tradition has a place the dead go, and the other two describe the Greek kingdom's ruler and river and the guards along the Egyptian journey."
+  },
+  {
+   "id": "l6-mc-archive-catalog-vs-chronicle-purpose",
+   "type": "mc",
+   "passageId": "p-threadglass-entry",
+   "targets": [
+    "c1-inf-4-reasoning"
+   ],
+   "coachTopic": "inference-argument",
+   "dok": 2,
+   "stem": "The Threadglass entry says its etching only shows clearly when light crosses the glass at an angle.  How do historians read that detail?",
+   "choices": [
+    "As wear from being moved twice more between institutions.",
+    "As something done on purpose, not as a flaw in the original casting.",
+    "As proof that the disc is a prop from the events of the maze legend.",
+    "As a sign that the disc in the photograph is a later copy."
+   ],
+   "key": 1,
+   "distractorRationale": {
+    "0": "The entry lists the moves as part of the disc's history, not as the cause of its shallow etching.",
+    "2": "The entry says the disc is almost certainly a later tribute to the maze story, not a prop from it.",
+    "3": "Nothing in the entry calls the disc a copy.  The only reading it gives of the etching is the historians' own."
+   },
+   "explain": "The entry reports the shallow etching and then gives the historians' reading of it: they believe it was done on purpose, not a flaw in the original casting.  The moves between institutions, the maze legend and the idea of a copy come from other parts of the entry, and none of them explains the etching."
+  },
+  {
+   "id": "l6-ebsr-catalog-purpose-vs-chronicle",
+   "type": "ebsr",
+   "passageId": "p-threadglass-entry",
+   "targets": [
+    "c1-inf-7-language-use"
+   ],
+   "coachTopic": "viewpoint-purpose",
+   "dok": 3,
+   "partA": {
+    "stem": "What is the overall purpose of a catalog entry like this one, compared to the Temple Chronicle's purpose?",
+    "choices": [
+     "To argue that the old maze legend the disc honors really did happen.",
+     "To convince readers that the Archive is more powerful than any temple.",
+     "To advertise the Threadglass for sale to a private collector like the one who has it.",
+     "To record facts and open questions plainly, not to persuade anyone."
+    ],
+    "key": 3
+   },
+   "partB": {
+    "stem": "Which sentence from the passage best supports the answer you just gave?",
+    "choices": [
+     "The gap between those two counts is the single largest question mark in this entry.",
+     "No theft was ever reported to any police record the Archive has found.",
+     "It is about a hero who escaped a builder's maze by following a single unbroken thread.",
+     "Archive field work places the Threadglass in a private collection as of last spring."
+    ],
+    "key": {
+     "0": 2,
+     "1": 1,
+     "2": 3,
+     "3": 0
+    }
+   },
+   "distractorRationale": {
+    "0": "This line only tells what the old maze legend is about.  Telling a story is not the same as arguing that it really did happen.  The entry even says the disc is almost certainly a later tribute to that story.",
+    "1": "This line is a fact about missing theft records.  It says nothing about comparing the Archive's power to a temple's.",
+    "2": "This line reports where the object is currently believed to be.  It is not phrased as a sales pitch to any buyer."
+   },
+   "explain": "A catalog entry like this one aims to record what is known and unknown as plainly as possible, unlike the chronicle's persuasive, devotional purpose.  That difference in purpose is exactly why the two kinds of documents read so differently, even when they describe similar kinds of objects."
+  }
+ ]
+}

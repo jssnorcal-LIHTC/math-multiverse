@@ -573,7 +573,7 @@
         "l3-vis-how-salamis-is-drawn",
         "l3-vis-two-turning-points",
         "l3-vis-persia-notes",
-        "l3-vis-geography-callback"
+        "l3-vis-the-battle-left-off"
       ]
     },
     {
@@ -616,7 +616,7 @@
         "l4-vis-two-cities",
         "l4-vis-indus-map-shows",
         "l4-vis-indus-notes",
-        "l4-vis-road-preview"
+        "l4-vis-the-note-set-apart"
       ]
     },
     {
@@ -659,7 +659,7 @@
         "l5-vis-what-went-which-way",
         "l5-vis-match-the-arrow",
         "l5-vis-the-hedge",
-        "l5-vis-cross-era-sequence"
+        "l5-vis-arrows-not-cities"
       ]
     },
     {
@@ -5454,29 +5454,29 @@
       "explain": "Two notes sit under the map. Thermopylae: the stand ended in defeat, but it bought Greece precious time. Plataea: an allied Greek army beat the Persians outright."
     },
     {
-      "id": "l3-vis-geography-callback",
+      "id": "l3-vis-the-battle-left-off",
       "type": "mc",
-      "passageId": "p-t1-first-entry-briefing",
-      "figureId": "fig-rivers-map",
+      "passageId": "p-t3-source-b-spartan",
+      "figureId": "fig-persia-maps",
       "targets": [
         "hist-t3-greece"
       ],
       "coachTopic": "evidence-two-accounts",
       "dok": 3,
-      "stem": "Case File Zero's map argued that geography decided where a civilization could begin.  Looking at that map again, what kind of feature was doing the deciding?",
-      "explain": "The rivers map labels three rivers, two regions and the desert on either side of the Nile.  That is the whole vocabulary it uses: water and the land beside it.  No city, no road and no port appears on it.",
+      "stem": "The Athenian account says Marathon turned back the first Persian invasion.  Look at the places this map marks and at its first note.  What does the map suggest about how this account sees Marathon?",
       "choices": [
-        "Mountain passes and the ground armies had to cross to reach them.",
-        "Cities and the roads between them.",
-        "Coastlines and the ports along them, where ships could land.",
-        "Rivers and the land beside them, with deserts flanking one of the valleys."
+        "It marks Marathon as the narrow mountain pass",
+        "It draws Marathon as the open dashed circle",
+        "It counts Marathon as the greatest Spartan win of the whole war",
+        "It leaves Marathon out of the turning points it credits"
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "That is the Greece map, not this one.  The rivers map marks no passes and no battles.",
-        "1": "No city is marked anywhere on the rivers map, and no roads are drawn.",
-        "2": "The map traces coastlines because they are geography, but nothing on it is labelled a port and no port is named."
-      }
+        "0": "The narrow mountain pass is Thermopylae.  Marathon is not drawn anywhere on this map.",
+        "1": "The open dashed circle is Salamis, which the account treats differently.  Marathon is not drawn anywhere on this map.",
+        "2": "A battle the account counted as Sparta's greatest win would be marked, not missing.  The map's notes give Sparta's turning points as other places."
+      },
+      "explain": "The map shows what this account stresses.  Its first note says the account credits Sparta with the war's real turning points, and Marathon does not appear on the map at all, so the account does not count Marathon among them, whatever the Athenian account says about it."
     },
     {
       "id": "l4-vis-two-cities",
@@ -5572,29 +5572,29 @@
       "explain": "Two of the map's three notes carry this: the script was cut into thousands of small stone seals, and no scholar has ever managed to read it."
     },
     {
-      "id": "l4-vis-road-preview",
+      "id": "l4-vis-the-note-set-apart",
       "type": "mc",
-      "passageId": "p-t5-han-and-the-road",
-      "figureId": "fig-silkroad-map",
+      "passageId": "p-t4-quiet-record-indus",
+      "figureId": "fig-indus-map",
       "targets": [
         "hist-t4-india"
       ],
       "coachTopic": "evidence-quiet-record",
-      "dok": 2,
-      "stem": "Look ahead to the trade-routes map. One of its three arrows starts in India. What does that arrow carry?",
-      "explain": "The map draws three arrows and labels each one. Silk goes west from China, horses and glass and other goods come back, and a third arrow runs from India into China carrying Buddhism.",
+      "dok": 3,
+      "stem": "Of the three notes under this map, one is printed in a different color.  What kind of information does the map set apart that way?",
       "choices": [
-        "Silk, travelling from India to the west.",
-        "Buddhism, travelling from India into China.",
-        "Horses and glass, travelling from India into China.",
-        "Traders returning home to India with Chinese goods."
+        "A place name, the river the two cities stood beside",
+        "A limit, something this record still cannot find out",
+        "A plan, the way the two cities were laid out on grids",
+        "A count, the thousands of stone seals that were found"
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "The silk arrow starts in eastern China and runs west. The arrow from India is labelled Buddhism.",
-        "2": "Horses and glass are on the dashed return arrow from Central Asia, not on the one from India.",
-        "3": "The map labels that arrow Buddhism, from India. Nothing on it is about a return journey."
-      }
+        "0": "The river's name, Indus, is a label on the map itself, not one of the three notes under it.",
+        "2": "The grids are in an ordinary note.  That note reports what the cities were, and it is printed like the others.",
+        "3": "The seals are in an ordinary note.  A count is something the record knows, and the different color is kept for something it does not."
+      },
+      "explain": "Two of the notes report what the record knows about these cities, from their grids to their drains.  The note printed in a different color is about the script cut into the seals, and it marks a limit instead:  something the record still cannot find out, because nobody can read it."
     },
     {
       "id": "l5-vis-what-went-which-way",
@@ -5684,29 +5684,29 @@
       }
     },
     {
-      "id": "l5-vis-cross-era-sequence",
+      "id": "l5-vis-arrows-not-cities",
       "type": "mc",
-      "passageId": "p-t2-surviving-without-temple",
-      "figureId": "fig-temple-timeline",
+      "passageId": "p-t5-han-and-the-road",
+      "figureId": "fig-silkroad-map",
       "targets": [
         "hist-t5-china"
       ],
       "coachTopic": "evidence-what-was-burned",
       "dok": 3,
-      "stem": "The temple timeline shows a tradition surviving the loss of its centre. Which step on it is the one that shows the survival rather than the loss?",
-      "explain": "Four of the five steps are losses or returns tied to a building. The last step is different: a school opens at Yavneh and teaches with no Temple at all, which is the tradition carrying on without the thing it kept losing.",
+      "stem": "Look at what this map labels and what it leaves off.  What is it built to show?",
       "choices": [
-        "The Babylonian army conquering Judah and destroying the First Temple in Jerusalem.",
-        "A Roman army destroying the Second Temple during a revolt, centuries after it was built.",
-        "Yohanan ben Zakkai opening a school at Yavneh and teaching with no Temple.",
-        "Persian rulers letting the exiles return and build a Second Temple on the same site."
+        "Where each of the Han cities stood along the road west",
+        "How many days a caravan needed to cross each stretch",
+        "What moved along the routes and which way it went",
+        "Which emperor ruled each stretch of the routes"
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "That is the first loss on the timeline, the thing survived rather than the surviving.",
-        "1": "That is the second loss. The step after it is the one that shows what continued.",
-        "3": "That step rebuilds the centre rather than doing without it. The survival step is the one that needs no Temple."
-      }
+        "0": "The map has no city labels at all, so it cannot show where the cities stood.  Its arrows carry goods and ideas, not places.",
+        "1": "Nothing on the map gives a time or a distance.  Its labels name what each arrow carried.",
+        "3": "No ruler is named anywhere on the map.  Each arrow is labelled with what travelled along it."
+      },
+      "explain": "This map labels no cities, gives no times and names no rulers.  Its three arrows each carry a label, silk carried west, horses and glass brought back, and Buddhism from India, so what it shows is what moved along the routes and which way it went."
     },
     {
       "id": "l6-vis-rome-map-reads",
