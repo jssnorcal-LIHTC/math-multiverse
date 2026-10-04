@@ -613,6 +613,34 @@
       "status": "agree"
     },
     {
+      "itemId": "l5-ebsr-what-three-results-add-up-to",
+      "itemHash": "be92c5bbf5abe56c",
+      "blind": [
+        2,
+        3
+      ],
+      "authored": [
+        2,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-bend-does-depths-work",
+      "itemHash": "9d1ff0bb47fba3ad",
+      "blind": [
+        2,
+        0
+      ],
+      "authored": [
+        2,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l5-ebsr-advice-the-article-supports",
       "itemHash": "1258e66704ba1a4c",
       "blind": [
@@ -641,8 +669,24 @@
       "status": "agree"
     },
     {
+      "itemId": "l5-mc-run-your-own-test",
+      "itemHash": "80336bc396bc8f36",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l5-mc-answering-the-mountain-buyer",
       "itemHash": "e62af318a94d65e7",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-mc-why-publish-all-three",
+      "itemHash": "69a0f51ffb945b32",
       "blind": 1,
       "authored": 1,
       "confidence": "high",
@@ -659,6 +703,38 @@
       "authored": [
         1,
         3,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-hot-measured-or-judged",
+      "itemHash": "2583c3cace6d83d9",
+      "blind": [
+        1,
+        3,
+        5
+      ],
+      "authored": [
+        1,
+        3,
+        5
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ms-past-what-the-tests-show",
+      "itemHash": "bb717b2c7f35bd54",
+      "blind": [
+        0,
+        2,
+        5
+      ],
+      "authored": [
+        0,
+        2,
         5
       ],
       "confidence": "high",
@@ -697,8 +773,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-ebsr-what-a-log-is-for",
-      "itemHash": "ff464da7c1ebf9ac",
+      "itemId": "l6-ebsr-the-promise-kept",
+      "itemHash": "92d1843308709730",
       "blind": [
         2,
         3
@@ -711,16 +787,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-what-the-lobby-scene-is-about",
-      "itemHash": "16c4e2feeb14a8c6",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-a-clipboard-like-a-wall",
-      "itemHash": "ef3a818f4751a1fb",
+      "itemId": "l6-ebsr-heavy-as-a-brick",
+      "itemHash": "ab1e5cd42738a819",
       "blind": [
         3,
         2
@@ -733,8 +801,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-hot-plain-words-carrying-more",
-      "itemHash": "aaf365c0ca03079f",
+      "itemId": "l6-hot-saying-more-than-it-means",
+      "itemHash": "5d21cf71bf1a5531",
       "blind": [
         1,
         2,
@@ -749,30 +817,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-ebsr-why-her-log-runs-longer",
-      "itemHash": "eceb836100e62826",
-      "blind": [
-        1,
-        0
-      ],
-      "authored": [
-        1,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-easy-in-two-stories",
-      "itemHash": "37bfe1874ae5c477",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-hot-where-the-cover-runs-out",
-      "itemHash": "e67601240d0a63f4",
+      "itemId": "l6-hot-where-the-plan-turns",
+      "itemHash": "dc56243d8e9da7b3",
       "blind": [
         1,
         4
@@ -785,8 +831,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-cloze-where-the-aside-sits",
-      "itemHash": "2aaca36a798daf6c",
+      "itemId": "l6-cloze-how-the-run-is-framed",
+      "itemHash": "ef53adabfec23001",
       "blind": [
         0,
         2
@@ -799,30 +845,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-ebsr-what-the-brief-is-for",
-      "itemHash": "8cc1888cf0cdbe33",
-      "blind": [
-        3,
-        3
-      ],
-      "authored": [
-        3,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-the-chain-under-dead-air",
-      "itemHash": "175c393b6414bbf8",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ms-three-moves-one-system",
-      "itemHash": "2d73a80d9460832c",
+      "itemId": "l6-ms-what-a-card-names",
+      "itemHash": "09ebe840cc14578f",
       "blind": [
         0,
         3,
@@ -833,7 +857,7 @@
         3,
         4
       ],
-      "confidence": "high",
+      "confidence": "medium",
       "status": "agree"
     },
     {
@@ -1125,6 +1149,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l5-ebsr-the-one-careful-sentence",
+      "itemHash": "64fef96a5a5855b6",
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l5-ebsr-what-the-three-runtimes-prove",
       "itemHash": "c974650947fe6394",
       "blind": [
@@ -1150,6 +1188,34 @@
         0
       ],
       "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ebsr-what-mild-weather-showed",
+      "itemHash": "094041f9eade4c35",
+      "blind": [
+        3,
+        1
+      ],
+      "authored": [
+        3,
+        1
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l5-ms-weather-not-the-tag",
+      "itemHash": "3b5a7e08c6f831ec",
+      "blind": [
+        1,
+        3
+      ],
+      "authored": [
+        1,
+        3
+      ],
+      "confidence": "medium",
       "status": "agree"
     },
     {
@@ -1349,6 +1415,20 @@
       "status": "agree"
     },
     {
+      "itemId": "l5-cloze-reading-all-three",
+      "itemHash": "8e418d7f543ea048",
+      "blind": [
+        0,
+        0
+      ],
+      "authored": [
+        0,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l1-mc-second-glance",
       "itemHash": "0609ad7a05b4a23a",
       "blind": 0,
@@ -1513,6 +1593,14 @@
       "status": "agree"
     },
     {
+      "itemId": "l5-mc-where-heat-comes-in",
+      "itemHash": "4d98a76b3443ab85",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
       "itemId": "l5-order-the-articles-case",
       "itemHash": "051598281dcde8c4",
       "blind": [
@@ -1531,44 +1619,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-ebsr-two-seconds-that-mattered",
-      "itemHash": "2949afca501f5496",
-      "blind": [
-        3,
-        3
-      ],
-      "authored": [
-        3,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-what-the-archive-scene-is-about",
-      "itemHash": "c19508a5bf376d9a",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ebsr-pulse-loud-in-his-ears",
-      "itemHash": "94351a745d0df14f",
-      "blind": [
-        3,
-        2
-      ],
-      "authored": [
-        3,
-        2
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-hot-precise-not-vague",
-      "itemHash": "26ded34502419786",
+      "itemId": "l6-hot-two-comparisons",
+      "itemHash": "5695eab0a114a21f",
       "blind": [
         0,
         2
@@ -1581,30 +1633,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-ebsr-two-infiltrations-compared",
-      "itemHash": "c99ef6e1665e9f45",
-      "blind": [
-        3,
-        3
-      ],
-      "authored": [
-        3,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-two-watchers-compared",
-      "itemHash": "4bb7452fc571f0bd",
-      "blind": 3,
-      "authored": 3,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-hot-scene-that-turns",
-      "itemHash": "d546bae301a78bcd",
+      "itemId": "l6-hot-the-reason-held-back",
+      "itemHash": "72b38671e592c142",
       "blind": [
         1,
         3
@@ -1617,8 +1647,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-cloze-where-the-tension-turns",
-      "itemHash": "a014d4f5485503d2",
+      "itemId": "l6-cloze-start-and-last-line",
+      "itemHash": "125e9496fe74340c",
       "blind": [
         2,
         2
@@ -1631,30 +1661,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-ebsr-why-a-brief-sells",
-      "itemHash": "5eb738fc2ca99304",
-      "blind": [
-        3,
-        3
-      ],
-      "authored": [
-        3,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-two-briefs-compared",
-      "itemHash": "f43ecdce8e472b17",
-      "blind": 0,
-      "authored": 0,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-ms-two-studies-compared",
-      "itemHash": "1bb1538c1925da70",
+      "itemId": "l6-ms-rules-and-their-reasons",
+      "itemHash": "946b53755eacdea3",
       "blind": [
         0,
         2,
@@ -1945,24 +1953,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-mc-rule-lane-against-the-log",
-      "itemHash": "8a1b8f485a623cb1",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-mc-reading-the-runtime-row",
-      "itemHash": "56fb4cd96a290ea9",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l6-cloze-six-stops-one-run",
-      "itemHash": "8085df709470e141",
+      "itemId": "l6-cloze-reading-the-training-card",
+      "itemHash": "1686c98c739e0c0c",
       "blind": [
         1,
         2
@@ -1975,8 +1967,8 @@
       "status": "agree"
     },
     {
-      "itemId": "l6-ms-claim-against-the-two-runs",
-      "itemHash": "cf6b083ef25cc95e",
+      "itemId": "l6-ms-how-the-card-is-laid-out",
+      "itemHash": "723535ceedee4449",
       "blind": [
         1,
         2,
@@ -1991,142 +1983,150 @@
       "status": "agree"
     },
     {
-      "itemId": "l5-ebsr-what-three-results-add-up-to",
-      "itemHash": "be92c5bbf5abe56c",
-      "blind": [
-        2,
-        3
-      ],
-      "authored": [
-        2,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ebsr-bend-does-depths-work",
-      "itemHash": "9d1ff0bb47fba3ad",
-      "blind": [
-        2,
-        0
-      ],
-      "authored": [
-        2,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-run-your-own-test",
-      "itemHash": "80336bc396bc8f36",
-      "blind": 2,
-      "authored": 2,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-why-publish-all-three",
-      "itemHash": "69a0f51ffb945b32",
-      "blind": 1,
-      "authored": 1,
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-hot-measured-or-judged",
-      "itemHash": "2583c3cace6d83d9",
-      "blind": [
-        1,
-        3,
-        5
-      ],
-      "authored": [
-        1,
-        3,
-        5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ms-past-what-the-tests-show",
-      "itemHash": "bb717b2c7f35bd54",
-      "blind": [
-        0,
-        2,
-        5
-      ],
-      "authored": [
-        0,
-        2,
-        5
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ebsr-the-one-careful-sentence",
-      "itemHash": "64fef96a5a5855b6",
-      "blind": [
-        1,
-        3
-      ],
-      "authored": [
-        1,
-        3
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ebsr-what-mild-weather-showed",
-      "itemHash": "094041f9eade4c35",
-      "blind": [
-        3,
-        1
-      ],
-      "authored": [
-        3,
-        1
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-ms-weather-not-the-tag",
-      "itemHash": "3b5a7e08c6f831ec",
-      "blind": [
-        1,
-        3
-      ],
-      "authored": [
-        1,
-        3
-      ],
-      "confidence": "medium",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-cloze-reading-all-three",
-      "itemHash": "8e418d7f543ea048",
-      "blind": [
-        0,
-        0
-      ],
-      "authored": [
-        0,
-        0
-      ],
-      "confidence": "high",
-      "status": "agree"
-    },
-    {
-      "itemId": "l5-mc-where-heat-comes-in",
-      "itemHash": "4d98a76b3443ab85",
+      "itemId": "l6-mc-why-she-walks-past",
+      "itemHash": "b155682c24aea5f8",
       "blind": 3,
       "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-what-the-scarf-says",
+      "itemHash": "51cc6603bd03d83c",
+      "blind": [
+        1,
+        0
+      ],
+      "authored": [
+        1,
+        0
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-the-choice-falls-on-ines",
+      "itemHash": "1b4078c30036c582",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-a-person-not-a-package",
+      "itemHash": "d185b90046f03632",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-why-plan-the-second-route",
+      "itemHash": "f6e43e412821b72d",
+      "blind": 2,
+      "authored": 2,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-the-lesson-jonah-takes",
+      "itemHash": "8acdff002229d11a",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-where-jonah-is",
+      "itemHash": "79301c02cf0f5c15",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-the-ground-pulled-out",
+      "itemHash": "d99dc5a64af3b99c",
+      "blind": [
+        3,
+        2
+      ],
+      "authored": [
+        3,
+        2
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-who-could-see-it",
+      "itemHash": "6df2618069f0c37c",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-the-source-stays-calm",
+      "itemHash": "af14a41e10624873",
+      "blind": 3,
+      "authored": 3,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-ebsr-why-call-it-a-promise",
+      "itemHash": "ca36f65eaac99757",
+      "blind": [
+        3,
+        3
+      ],
+      "authored": [
+        3,
+        3
+      ],
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-late-or-hurried",
+      "itemHash": "46fb137f3487a284",
+      "blind": 0,
+      "authored": 0,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-the-lanes-at-nine-forty",
+      "itemHash": "8d80db227d87a3f7",
+      "blind": 1,
+      "authored": 1,
+      "confidence": "high",
+      "status": "agree"
+    },
+    {
+      "itemId": "l6-mc-inside-the-time-limit",
+      "itemHash": "3d8fbdb4937da34c",
+      "blind": 2,
+      "authored": 2,
       "confidence": "high",
       "status": "agree"
     }
