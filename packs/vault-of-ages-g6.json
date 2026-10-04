@@ -192,6 +192,18 @@
       "figureIds": [
         "fig-l6-vault-of-ages"
       ]
+    },
+    {
+      "id": "p-keepers-register",
+      "title": "Recovered Entry: The Keepers' Register",
+      "genre": "informational",
+      "docKind": "recovered-entry",
+      "register": "RECOVERED ENTRY",
+      "source": "original",
+      "text": "The first book on the first shelf is not an object anyone hid, but the register that explains this room in the keepers' own words.\n\nThis room keeps things that people loved enough to hide.  It is not a treasury.  Nothing here was chosen because it was worth money, and nothing will ever be sold.  An object comes here when the world above would have broken it, sold it, or forgotten what it meant to the person who loved it.\n\nEvery object is entered in the register before it reaches a shelf.  Each entry records four things:  what the object is, who hid it, the year it came in, and the reason it was hidden.  The reason is written in the hider's own words, however short they are.  An object that arrives without a reason is turned away at the door.  A thing with no reason is only a thing, and this room does not keep things.\n\nThree rules govern everything on the shelves.  Nothing leaves the room.  Anything may be looked at, for as long as anyone likes.  Nothing is cleaned or mended.  A repair is a second story laid over the first, and the register keeps only first stories.\n\nThe door was built to need three keys, so that no single keeper could ever open it alone.  Each key was cut to look like an ordinary relic, the kind of object a museum would be glad to display.  Each was given to a different keeper, who hid it in a different place, in plain sight, where it would one day be studied and listed and never once suspected.  If one key were lost, the room would stay closed for good, and the keepers decided they could live with that.\n\nThe register's own first entry shows how an entry should look.  Under \"object\", it reads \"a brass compass with a cracked face\", and under \"hidden by\", it reads \"a lighthouse keeper's daughter\".  Under \"year\", it reads \"the first year of the register\".  Under \"reason\", it reads \"that her father steered by it for forty winters, and that it should not be made to point anywhere else.\"\n\nThe last line of the register is written in a different hand from the rest.  Whoever reads this has found what three keepers spent their lives hiding.  Look at everything, take nothing, and write down why you came.",
+      "figureIds": [
+        "fig-l6-keepers-register"
+      ]
     }
   ],
   "levels": [
@@ -432,33 +444,33 @@
       "questions": 12,
       "itemIds": [
         "l6-ebsr-central-theme-noticing",
-        "l6-mc-theo-arc-noticing",
-        "l6-hot-earlier-skills-solve-door",
+        "l6-mc-revising-the-assumption",
+        "l6-hot-no-ordinary-door",
         "l6-ms-earlier-skills-pay-off",
         "l6-cloze-relics-are-keys",
-        "l6-short-reckoner-title-meaning",
+        "l6-short-in-plain-sight",
         "l6-ebsr-warning-and-compliment",
-        "l6-mc-mila-instinct-summary",
+        "l6-mc-dash-goes-first",
         "l6-hot-not-gold-or-gods",
-        "l6-ms-archive-analysis-method",
-        "l6-cloze-catalog-purpose-again",
+        "l6-ms-what-an-entry-records",
+        "l6-cloze-a-repair-is-a-story",
         "l6-short-what-relics-really-are",
-        "l6-ebsr-callback-to-first-lesson",
-        "l6-mc-log-discipline-echoes",
+        "l6-ebsr-checking-a-signature",
+        "l6-mc-why-they-are-here-tonight",
         "l6-hot-kade-failure-precise",
-        "l6-ebsr-unverifiable-meaning",
-        "l6-mc-figurative-echo-held-breath",
-        "l6-hot-checkable-vs-not",
-        "l6-ebsr-chronicle-own-argument",
-        "l6-mc-tool-marks-vs-faith-standard",
-        "l6-ebsr-tool-marks-as-response",
-        "l6-mc-archive-catalog-vs-chronicle-purpose",
-        "l6-ebsr-isis-search-purpose",
-        "l6-ebsr-catalog-purpose-vs-chronicle",
-        "l6-cloze-chronicle-card-top-block",
-        "l6-mc-ledger-card-who-kept-it",
-        "l6-ms-memo-row-questions",
-        "l6-mc-chronicle-card-boxed-line"
+        "l6-ebsr-not-a-treasury",
+        "l6-mc-a-held-breath",
+        "l6-hot-before-a-shelf",
+        "l6-ebsr-why-three-keys",
+        "l6-mc-how-the-register-is-built",
+        "l6-ebsr-a-price-they-would-pay",
+        "l6-mc-what-the-room-keeps",
+        "l6-ebsr-a-different-hand",
+        "l6-ebsr-what-the-last-line-asks",
+        "l6-cloze-register-card-rows",
+        "l6-mc-the-arrow-with-no-word",
+        "l6-ms-what-the-plan-shows",
+        "l6-mc-the-boxed-line"
       ],
       "reveal": {
         "figureId": "fig-l6-vault-of-ages"
@@ -4196,7 +4208,7 @@
         "stem": "Which sentence from the passage best supports the answer you just gave?",
         "choices": [
           "Finch always said noticing was the only qualification that ever mattered here.",
-          "It is the same care she has given every piece of evidence, since the day she counted two empty chairs and decided the question that actually mattered was the one nobody had answered yet.",
+          "Kade spent years collecting keys, without ever telling herself, or anyone else, what door they were for.",
           "I am standing in a room that should not exist, holding nothing but a working radio and the exact right kind of luck.",
           "Dash sets the Wyrdstone into the leftmost notch first."
         ],
@@ -4208,11 +4220,11 @@
         }
       },
       "distractorRationale": {
-        "0": "This line shows Mila's careful, ongoing attention to evidence, working alongside the rest of the crew. It argues for teamwork, not for working alone.",
+        "0": "Kade kept the keys to herself for years, and it is the crew, not Kade, who ends up past the door.  Going it alone did not win here.",
         "1": "This line describes an action Dash takes with the Wyrdstone. It says nothing about physical strength being what opens the door.",
-        "2": "The narrator credits noticing and 'the exact right kind of luck' together, not luck by itself, and this line also shows Mila's careful attention rather than random chance."
+        "2": "The narrator credits noticing and the exact right kind of luck together, not luck by itself, and the crew only worked out what the relics were for because Mila noticed the spiral."
       },
-      "explain": "The passage circles back explicitly to Finch's very first lesson: noticing is what matters most. Every relic the crew recovers, and the final door itself, comes down to small details someone paid close attention to over months, not to strength, chance alone, or solo effort."
+      "explain": "The passage keeps returning to noticing.  Mila noticed the same spiral on three objects, which is how the crew worked out what the relics were for, and Finch always said noticing was the only qualification that ever mattered here.  The door opens because of small details someone paid close attention to, not because of strength, chance, or one person working by themselves."
     },
     {
       "id": "l6-ebsr-warning-and-compliment",
@@ -4256,31 +4268,31 @@
       "explain": "Calling the lesson both a warning and a compliment means the same skill that makes the crew capable also leads them into real danger.  It takes them down a staircase that should not exist and right past a rival who never noticed them slip by.  That double meaning is the theme the whole passage has been building toward."
     },
     {
-      "id": "l6-ebsr-callback-to-first-lesson",
+      "id": "l6-ebsr-checking-a-signature",
       "type": "ebsr",
       "passageId": "p-vault-of-ages",
       "targets": [
-        "c1-lit-2-central-ideas"
+        "c1-lit-3-word-meanings"
       ],
-      "coachTopic": "central-theme",
+      "coachTopic": "vocab-figurative",
       "dok": 3,
       "partA": {
-        "stem": "On the first day, Finch told Theo that the Archive goes deeper than anyone walking past it ever guessed.  How does this final passage connect back to that claim?",
+        "stem": "The narrator says Mila reads the seal's tool marks \"like she is checking a signature.\"  What does that comparison suggest?",
         "choices": [
-          "It shows the claim was the kind of thing trainers say to sound impressive.",
-          "It shows that Kade, not Finch, knew how deep the Archive went, since she found this door first.",
-          "It shows the claim scared Theo, since he stops breathing when the door lights up.",
-          "It shows the claim was true, since the crew has gone down to a hidden part of the Archive under the old library."
+          "She is writing her own name on the seal before she uses it",
+          "She is stalling because she is afraid to set the seal",
+          "She is reading the seal's marks to learn where it was made",
+          "She checks the marks closely, to be sure they are genuine"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "stem": "Which sentence from the passage best supports your answer?",
         "choices": [
-          "Now I am standing at the bottom of a staircase that should not exist, under a library that closed two winters ago.",
-          "It turns out Kade spent years finding the keys and never noticed the three of us slip past her, at the door she thought she alone knew how to open.",
-          "I stop breathing, the way I stopped breathing outside Frostbank.",
-          "I spent months assuming that was the kind of thing trainers say to sound impressive."
+          "She reads the tool marks on its underside one more time, like she is checking a signature.",
+          "For one long second, nothing happens at all.",
+          "Each one was a key, cut to fit a different notch in a lock built to need all three at once.",
+          "Mila sets the seal into the center notch."
         ],
         "key": {
           "0": 3,
@@ -4290,11 +4302,11 @@
         }
       },
       "distractorRationale": {
-        "0": "This line is Theo's old doubt, from the months when he thought Finch was only trying to sound impressive.  A few sentences later he says he is revising that assumption completely, because the claim has turned out to be true.",
-        "1": "This line tells only what Kade believed about the door.  Finch knew the Archive went deeper months before this night, since she told Theo so on his very first day.",
-        "2": "This line shows Theo holding his breath as the door lights up.  Nothing in the passage ties that moment to Finch's claim, which Theo had doubted rather than feared."
+        "0": "Nobody writes on the seal.  The comparison is about how carefully she reads its marks, the way you would check a signature.",
+        "1": "Mila is not stalling.  She looks one more time and then sets the seal, steady and deliberate.",
+        "2": "She reads the marks one more time, so she is checking marks she has read before, not learning something new.  Checking a signature means making sure it is genuine."
       },
-      "explain": "On the first day, Finch said the Archive goes deeper than anyone guessed, and Theo spent months thinking that was the kind of thing trainers say.  Now he stands at the bottom of a staircase that should not exist, under a library that closed two winters ago.  He is revising that assumption completely, because the ending shows Finch's claim was true."
+      "explain": "You check a signature to make sure it is genuine before you trust what it signs.  Mila treats the tool marks on the seal the same way, reading them one more time before she sets it in the lock, with the same care she gives every piece of evidence."
     },
     {
       "id": "l6-ms-earlier-skills-pay-off",
@@ -4308,11 +4320,11 @@
       "stem": "Select the three details from the final passage that show the crew's success does not feel like a clean, safe victory.",
       "choices": [
         "Dash sets the Wyrdstone into the leftmost notch first, because he always wants to find out what happens next.",
-        "For one long second after the first relic goes in, nothing happens, and Theo says that is worse than something going badly.",
-        "The spiral on the door matches a piece of glass Theo once delivered in a picture-frame box.",
-        "Theo stops breathing, and this time there is no radio to click twice and tell him it is fine.",
-        "Mila sets the seal into the center notch, and Theo sets the Threadglass last, on the right.",
-        "Theo ends up in the room holding nothing but a working radio and the exact right kind of luck."
+        "For one long second after the first relic goes in, nothing happens, and the narrator says that is worse than something going badly.",
+        "The staircase down to the door is under a library that closed two winters ago.",
+        "The narrator stops breathing, with no radio to click twice and say it is fine.",
+        "Mila sets the seal into the center notch, and the narrator sets the Threadglass last, on the right.",
+        "The narrator ends up in the room holding nothing but a working radio and the exact right kind of luck."
       ],
       "key": [
         1,
@@ -4321,37 +4333,37 @@
       ],
       "distractorRationale": {
         "0": "Dash going first shows what he is like: he always wants to find out what happens next.  It says nothing about how the win feels.",
-        "2": "The matching glass is how Theo recognizes the spiral.  It is a clue to the door, not a sign that the success feels uncertain.",
+        "2": "The closed library tells where the door is.  It says nothing about how the win feels.",
         "4": "Setting the last two relics in their notches is how the door gets opened.  Placing them shows nothing about how uncertain the win feels."
       },
-      "explain": "The ending is a success, but it never feels safe.  The first relic brings a long second of nothing, which Theo says is worse than something going badly; he stops breathing with no radio to tell him it is fine; and he ends up in the room with nothing but a radio and the right kind of luck.  Dash's habit, the matching glass and the ordinary shelves are true details, but none of them shows how uncertain the win feels."
+      "explain": "The ending is a success, but it never feels safe.  The first relic brings a long second of nothing, which the narrator says is worse than something going badly; the narrator stops breathing with no radio to say it is fine; and the narrator ends up in the room with nothing but a radio and the right kind of luck.  Dash's habit, the closed library and the last two relics going in are true details, but none of them shows how uncertain the win feels."
     },
     {
-      "id": "l6-ebsr-unverifiable-meaning",
+      "id": "l6-ebsr-not-a-treasury",
       "type": "ebsr",
-      "passageId": "p-what-the-archive-believes",
+      "passageId": "p-keepers-register",
       "targets": [
         "c1-inf-3-word-meanings"
       ],
       "coachTopic": "vocab-context",
       "dok": 3,
       "partA": {
-        "stem": "In this passage, what does the word \"unverifiable\" mean, based on how the Archive uses it?",
+        "stem": "The register says, \"It is not a treasury.\"  What does treasury mean as the register uses it?",
         "choices": [
-          "Missing important details.",
-          "Definitely false, and so not worth an Archive researcher's time to consider.",
-          "Written in a language nobody can translate.",
-          "Impossible for anyone outside the source to check or confirm."
+          "A shelf where broken objects wait to be mended",
+          "A book that lists every object in a room",
+          "A door that needs more than one key to open",
+          "A place where things are kept for what they are worth"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "stem": "Which sentence from the register best supports your answer?",
         "choices": [
-          "No outside party was ever allowed to check it.",
-          "That does not make the chronicle false.",
-          "Two accounts of the Abydos seal chamber survive in Archive records.",
-          "The temple chronicle was carved by scribes working for the priesthood itself."
+          "Nothing here was chosen because it was worth money, and nothing will ever be sold.",
+          "Every object is entered in the register before it reaches a shelf.",
+          "Nothing is cleaned or mended.",
+          "The door was built to need three keys, so that no single keeper could ever open it alone."
         ],
         "key": {
           "0": 2,
@@ -4361,38 +4373,38 @@
         }
       },
       "distractorRationale": {
-        "0": "This line is a plain fact about how many accounts survive.  It does not say that unverifiable means missing details.",
-        "1": "The passage explicitly separates being unverifiable from being false. Unverifiable claims might still turn out to be true; nobody has simply been able to check them.",
-        "2": "This line names who carved the chronicle.  It does not describe any problem with translating it."
+        "0": "Nothing in the room is mended at all.  Treasury is about value, and the next sentence is about what the room was chosen for.",
+        "1": "The register is the book that lists the objects.  The word treasury names the kind of place the room is not.",
+        "2": "The three keys describe the door.  The sentence after treasury is about money and selling, not about locks."
       },
-      "explain": "The Archive uses unverifiable to mean nobody outside the source has ever had a chance to check the claim, a statement about access, not about the claim being false, poorly written, or incomplete. That distinction is exactly why the entry treats an unverifiable claim so carefully instead of just rejecting it."
+      "explain": "A treasury keeps things for what they are worth.  The register says the room is not one, and the very next sentence explains the difference:  nothing here was chosen because it was worth money, and nothing will ever be sold."
     },
     {
-      "id": "l6-ebsr-chronicle-own-argument",
+      "id": "l6-ebsr-why-three-keys",
       "type": "ebsr",
-      "passageId": "p-temple-chronicle",
+      "passageId": "p-keepers-register",
       "targets": [
         "c1-inf-4-reasoning"
       ],
       "coachTopic": "inference-argument",
-      "dok": 4,
+      "dok": 3,
       "partA": {
-        "stem": "What is the chronicle's own argument for why readers should believe its claim about the chamber?",
+        "stem": "Why was the door built to need three keys?",
         "choices": [
-          "Outside inspectors check every year that the seal still remains in the chamber.",
-          "Independent witnesses from outside the temple confirmed the chamber was never entered.",
-          "A written confession from every known enemy proves the chamber was safe.",
-          "The gods chose the temple's priests, and its records show no failure."
+          "So the keys could be sold one at a time if money ran short",
+          "Because each hiding place could hold only one relic",
+          "So each key could pass for a relic a museum would display",
+          "So that opening it would always take more than one keeper"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from Source A best supports the answer you just gave?",
+        "stem": "Which sentence from the register best supports your answer?",
         "choices": [
-          "It is maintained by the priesthood the gods themselves selected for this single purpose, generation after generation, without a single failure the temple's own records have ever needed to explain.",
-          "No enemy of the temple has ever set foot in this chamber.",
-          "The seal remains in this chamber to this day.",
-          "The chronicle exists to record that fact, for every generation of priests who serve here after the scribes who carved it have themselves passed into the west."
+          "The door was built to need three keys, so that no single keeper could ever open it alone.",
+          "Each was given to a different keeper, who hid it in a different place, in plain sight, where it would one day be studied and listed and never once suspected.",
+          "Nothing here was chosen because it was worth money, and nothing will ever be sold.",
+          "Each key was cut to look like an ordinary relic, the kind of object a museum would be glad to display."
         ],
         "key": {
           "0": 2,
@@ -4402,38 +4414,38 @@
         }
       },
       "distractorRationale": {
-        "0": "This line says the seal is still in the chamber, but only on the chronicle's own word.  No outside inspector is ever mentioned.",
-        "1": "This line is the claim itself, that no enemy ever entered. It is not evidence of any independent witness confirming it.",
-        "2": "This line says the chronicle was written for the priests who serve after its scribes.  It is not a confession from any enemy, and none is ever mentioned."
+        "0": "The register says nothing here will ever be sold.  The three keys are about who can open the door, not about money.",
+        "1": "Each key went to a different keeper and a different place because the keepers chose to spread them, not because a place could hold only one.",
+        "2": "Looking like a relic a museum would display is how each key was hidden.  It does not explain why the door needs three of them."
       },
-      "explain": "The chronicle's argument rests entirely on the priesthood's own claimed authority and its own unblemished record, not on any independent confirmation from witnesses, enemies, or outside inspectors. Tracing the argument back shows it ultimately depends on trusting the very institution making the claim."
+      "explain": "Three keys held by three different keepers means no single person can decide to open the room alone, which is exactly what the door was built to prevent.  The keepers spread the keys on purpose so that opening it would always take more than one of them."
     },
     {
-      "id": "l6-ebsr-tool-marks-as-response",
+      "id": "l6-ebsr-a-price-they-would-pay",
       "type": "ebsr",
-      "passageId": "p-reckoners-ledger",
+      "passageId": "p-keepers-register",
       "targets": [
-        "c1-inf-5-analysis"
+        "c1-inf-4-reasoning"
       ],
-      "coachTopic": "evidence-across-texts",
-      "dok": 4,
+      "coachTopic": "inference-argument",
+      "dok": 3,
       "partA": {
-        "stem": "The ledger answers the chronicle's claim with the tool marks.  What does its last paragraph add to that answer?",
+        "stem": "What does the register show about how the keepers weighed keeping the room safe against being able to open it?",
         "choices": [
-          "It gives up on the truth, since every temple and every account is wrong at least once.",
-          "It asks the next Reckoner to trust the guild's story, since the tool marks proved it.",
-          "It admits the wall was right after all, since the seal sits where the wall says.",
-          "It doubts the guild's own story too, just as it doubted the wall's story."
+          "They expected to lose a key and planned to make a spare",
+          "They wanted every visitor to take one object home",
+          "They trusted one keeper above the other two",
+          "They accepted that the room might stay closed forever"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from Source B best supports the answer you just gave?",
+        "stem": "Which sentence from the register best supports your answer?",
         "choices": [
-          "It is not the one our own guild likes to tell about itself, either.",
-          "I know this because the setting stone beneath the seal shows two different tool marks, from two different centuries.",
-          "Every temple is wrong at least once.",
-          "I found the seal exactly where the wall says it should be."
+          "If one key were lost, the room would stay closed for good, and the keepers decided they could live with that.",
+          "Anything may be looked at, for as long as anyone likes.",
+          "Each key was cut to look like an ordinary relic, the kind of object a museum would be glad to display.",
+          "Each was given to a different keeper, who hid it in a different place, in plain sight, where it would one day be studied and listed and never once suspected."
         ],
         "key": {
           "0": 2,
@@ -4443,38 +4455,38 @@
         }
       },
       "distractorRationale": {
-        "0": "Every temple is wrong at least once, but the last paragraph does not give up on the truth.  It says the truth is whatever the last person to look closely wrote down.",
-        "1": "This line shows the tool marks proving the wall wrong.  The last paragraph then says the true history is not the story the guild tells about itself, either, so it asks no one to trust the guild.",
-        "2": "The seal is where the wall says it is, but the last paragraph says the chamber's true history is not the one carved on its wall."
+        "0": "No spare is mentioned.  The register says a lost key would keep the room closed, and the keepers accepted that.",
+        "1": "The register allows looking, not taking:  every object stays on its shelf.",
+        "2": "The keys went to three different keepers, one each.  Nothing in the register puts one keeper above the others."
       },
-      "explain": "The tool marks prove the wall wrong, and the last paragraph goes one step further.  It says the true history is not the guild's own story either, only what the last person to look closely wrote down.  The ledger doubts its own side, just as it doubted the wall."
+      "explain": "The keepers knew that losing a single key would close the room for good, and they decided they could live with that.  Keeping the room safe mattered more to them than being sure it could always be opened."
     },
     {
-      "id": "l6-ebsr-isis-search-purpose",
+      "id": "l6-ebsr-a-different-hand",
       "type": "ebsr",
-      "passageId": "p-temple-chronicle",
+      "passageId": "p-keepers-register",
       "targets": [
-        "c1-inf-7-language-use"
+        "c1-inf-3-word-meanings"
       ],
-      "coachTopic": "viewpoint-purpose",
-      "dok": 4,
+      "coachTopic": "vocab-context",
+      "dok": 3,
       "partA": {
-        "stem": "What is the chronicle's main purpose in describing Isis's search across every province?",
+        "stem": "What does the register tell you about who wrote its very last line?",
         "choices": [
-          "To warn priests never to search for anything themselves.",
-          "To give travelers an exact map of the kingdom, with each province and its borders marked.",
-          "To argue that Set was innocent of any wrongdoing against his brother Osiris.",
-          "To present Isis's devotion as extraordinary, setting up the temple's claim to guard something just as great."
+          "A hider added it as the reason for their own object",
+          "The lighthouse keeper's daughter wrote it beside her entry",
+          "The three keepers wrote it together as a fourth rule",
+          "Someone other than the register's main writer added it"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from Source A best supports the answer you just gave?",
+        "stem": "Which sentence from the register best supports your answer?",
         "choices": [
-          "Isis pressed on, through all the provinces that remained.",
-          "His body was scattered beyond the borders of the living world.",
-          "She gathered every piece of what Set had scattered.",
-          "The god Osiris was struck down by his brother Set."
+          "The last line of the register is written in a different hand from the rest.",
+          "Under \"object\", it reads \"a brass compass with a cracked face\", and under \"hidden by\", it reads \"a lighthouse keeper's daughter\".",
+          "The reason is written in the hider's own words, however short they are.",
+          "Three rules govern everything on the shelves."
         ],
         "key": {
           "0": 2,
@@ -4484,38 +4496,38 @@
         }
       },
       "distractorRationale": {
-        "0": "This line shows Isis gathering every piece Set had scattered.  The chronicle holds her search up as devotion to admire, not as something priests are warned never to do.",
-        "1": "This line mentions borders, but they are the borders of the living world, not lines on a map.  The chronicle gives no province a name and shows no route a traveler could follow.",
-        "2": "This line names Set as Osiris's attacker directly, which argues against any claim that the chronicle presents Set as innocent."
+        "0": "Each reason belongs to its own entry.  The last line is written to whoever finds the room, in a hand unlike the rest.",
+        "1": "The daughter's words are the reason in the first entry.  Nothing says she wrote the last line, which is in a different hand from the rest.",
+        "2": "The three rules have their own paragraph, and the last line is in one different hand, not three.  A different hand means different handwriting."
       },
-      "explain": "The chronicle builds up Isis's tireless devotion for a reason: it sets the emotional stage for the temple's own claim to be an equally devoted, unfailing guardian of what she left behind.  The purpose is persuasive, not geographic or legal, and it is definitely not a warning against searching."
+      "explain": "Hand here means handwriting.  A line written in a different hand from the rest was added by a different writer, so the last words of the register come from someone other than the person who wrote the entries before it."
     },
     {
-      "id": "l6-ebsr-catalog-purpose-vs-chronicle",
+      "id": "l6-ebsr-what-the-last-line-asks",
       "type": "ebsr",
-      "passageId": "p-threadglass-entry",
+      "passageId": "p-keepers-register",
       "targets": [
         "c1-inf-7-language-use"
       ],
       "coachTopic": "viewpoint-purpose",
       "dok": 3,
       "partA": {
-        "stem": "What is the overall purpose of a catalog entry like this one, compared to the Temple Chronicle's purpose?",
+        "stem": "What does the register's last line ask of the person who reads it?",
         "choices": [
-          "To argue that the old maze legend the disc honors really did happen.",
-          "To convince readers that the Archive is more powerful than any temple.",
-          "To advertise the Threadglass for sale to a private collector like the one who has it.",
-          "To record facts and open questions plainly, not to persuade anyone."
+          "To take one object home as a reward for finding the room",
+          "To mend the cracked compass on the first shelf",
+          "To hide a fourth key somewhere in plain sight",
+          "To follow the room's rules and add a reason of their own"
         ],
         "key": 3
       },
       "partB": {
-        "stem": "Which sentence from the passage best supports the answer you just gave?",
+        "stem": "Which sentence from the register best supports your answer?",
         "choices": [
-          "The gap between those two counts is the single largest question mark in this entry.",
-          "No theft was ever reported to any police record the Archive has found.",
-          "It is about a hero who escaped a builder's maze by following a single unbroken thread.",
-          "Archive field work places the Threadglass in a private collection as of last spring."
+          "Look at everything, take nothing, and write down why you came.",
+          "Under \"object\", it reads \"a brass compass with a cracked face\", and under \"hidden by\", it reads \"a lighthouse keeper's daughter\".",
+          "Whoever reads this has found what three keepers spent their lives hiding.",
+          "Each key was cut to look like an ordinary relic, the kind of object a museum would be glad to display."
         ],
         "key": {
           "0": 2,
@@ -4525,29 +4537,29 @@
         }
       },
       "distractorRationale": {
-        "0": "This line only tells what the old maze legend is about.  Telling a story is not the same as arguing that it really did happen.  The entry even says the disc is almost certainly a later tribute to that story.",
-        "1": "This line is a fact about missing theft records.  It says nothing about comparing the Archive's power to a temple's.",
-        "2": "This line reports where the object is currently believed to be.  It is not phrased as a sales pitch to any buyer."
+        "0": "The line says take nothing.  Finding the room earns a look, not a prize.",
+        "1": "The rules forbid mending, and the last line asks only for looking and writing, not for repairs.",
+        "2": "The keys are already hidden and found.  The last line asks the reader to write down why they came."
       },
-      "explain": "A catalog entry like this one aims to record what is known and unknown as plainly as possible, unlike the chronicle's persuasive, devotional purpose.  That difference in purpose is exactly why the two kinds of documents read so differently, even when they describe similar kinds of objects."
+      "explain": "The last line turns the reader into one more entry:  look at everything, take nothing, and write down why you came.  Looking and taking nothing follow the room's rules, and writing down why you came gives the reader a reason of their own."
     },
     {
-      "id": "l6-ms-archive-analysis-method",
+      "id": "l6-ms-what-an-entry-records",
       "type": "ms",
-      "passageId": "p-what-the-archive-believes",
+      "passageId": "p-keepers-register",
       "targets": [
-        "c1-inf-4-reasoning"
+        "c1-inf-1-key-details"
       ],
-      "coachTopic": "inference-argument",
-      "dok": 4,
-      "stem": "Select the three moves the Archive's analysis makes when judging the two sources about the seal chamber.",
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
+      "stem": "The register says each entry records four things.  Choose the three of them listed here.",
       "choices": [
-        "It sides with whichever of the two sources uses the more confident language.",
-        "It dismisses both sources as worthless, since neither one can be fully trusted.",
-        "It refuses to conclude which source is correct until more evidence exists.",
-        "It considers who is making each claim and what they might gain from it.",
-        "It assumes the older source is automatically the more reliable one.",
-        "It asks whether each claim could, in principle, be checked by others."
+        "what the object is worth",
+        "where the object was found",
+        "who hid the object",
+        "the year the object came in",
+        "which shelf the object is kept on",
+        "the reason it was hidden"
       ],
       "key": [
         2,
@@ -4555,34 +4567,35 @@
         5
       ],
       "distractorRationale": {
-        "0": "The passage never mentions confidence of language as a factor. Both sources sound quite confident, and the Archive weighs them on other grounds.",
-        "1": "The Archive treats both sources as worth recording and weighing carefully. It never dismisses either one as worthless.",
-        "4": "The passage never compares the ages of the two sources as a reason to trust one over the other."
+        "0": "Worth plays no part in an entry, because the room does not keep objects for their value.",
+        "1": "An entry records who hid the object, not where it was found.  The finder is not part of the entry.",
+        "4": "An entry says nothing about shelves at all.  Its four parts are the object, its hider, its year and its reason."
       },
-      "explain": "The Archive's method is careful and specific: consider each source's motive, ask whether the claim could be checked, and hold off on a conclusion rather than guessing. Confidence of tone, the age of a source, and dismissing sources outright are not part of that method."
+      "explain": "Each entry records four things:  what the object is, who hid it, the year it came in, and the reason it was hidden, in the hider's own words.  Its worth, where it was found and which shelf it is on are not part of the record."
     },
     {
-      "id": "l6-hot-earlier-skills-solve-door",
+      "id": "l6-hot-no-ordinary-door",
       "type": "hottext",
       "passageId": "p-vault-of-ages",
       "targets": [
-        "c1-lit-2-central-ideas"
+        "c1-lit-1-key-details"
       ],
-      "coachTopic": "central-theme",
-      "dok": 3,
+      "coachTopic": "evidence-story-details",
+      "dok": 2,
       "mode": "sentence",
-      "stem": "Tap the two sentences that show a crew member's skill from earlier in the story solving part of the final door.  The other two simply describe an object or an action in the moment.",
+      "stem": "Tap the two sentences that show something strange about the door itself.  The others show the crew at work.",
       "spans": [
-        "We only worked that out because Mila noticed the same spiral, scaled three different ways, on three objects that supposedly had nothing to do with each other.",
-        "She reads the tool marks on its underside one more time, like she is checking a signature.",
+        "I am looking at a door with no handle and no keyhole, only a spiral etched into its center.",
+        "Dash sets the Wyrdstone into the leftmost notch first.",
         "Then the spiral on the door catches a thread of light, from somewhere inside it that was clearly never powered by anything as ordinary as electricity.",
-        "Dash sets the Wyrdstone into the leftmost notch first."
+        "Mila sets the seal into the center notch.",
+        "I set the Threadglass last, into the notch on the right."
       ],
       "key": [
         0,
-        1
+        2
       ],
-      "explain": "Mila's pattern-noticing and her careful habit of checking evidence like a signature are the two moments that show earlier training actually solving this final puzzle.  The thread of light is something the door does in the moment, and Dash placing a stone is an action in the moment, not a skill built up earlier in the story."
+      "explain": "Two sentences set this door apart:  it has no handle and no keyhole, only a spiral, and its spiral lights up from something that was never ordinary electricity.  The other three are the crew's own moves, one notch at a time."
     },
     {
       "id": "l6-hot-not-gold-or-gods",
@@ -4631,28 +4644,28 @@
       "explain": "Both chosen sentences are specifically about Kade, years spent collecting keys without ever understanding what door they opened, and, in the end, never noticing the crew slip past her at that very door. The facts about three relics and a three-notch lock describe the mechanism itself, which matters to the plot but says nothing about why Kade personally failed."
     },
     {
-      "id": "l6-hot-checkable-vs-not",
+      "id": "l6-hot-before-a-shelf",
       "type": "hottext",
-      "passageId": "p-three-realms-below",
+      "passageId": "p-keepers-register",
       "targets": [
-        "c1-inf-3-word-meanings"
+        "c1-inf-1-key-details"
       ],
-      "coachTopic": "vocab-context",
-      "dok": 3,
+      "coachTopic": "evidence-key-details",
+      "dok": 2,
       "mode": "sentence",
-      "stem": "The memo uses the word \"shades\" in its description of the Greek underworld.  Tap the two sentences that help a reader work out what a shade is.",
+      "stem": "Tap the two sentences that tell what an object needs before the room will keep it.",
       "spans": [
-        "Every tradition the Archive studies describes a place the dead go.",
-        "Most of the dead are said to drift as shades through a grey plain.",
-        "They are neither rewarded nor punished, adrift in a fog most Greek writers describe as endless rather than dark.",
-        "The kingdom has a ruler, a boundary river, and a ferryman.",
-        "Each region is guarded."
+        "Anything may be looked at, for as long as anyone likes.",
+        "Every object is entered in the register before it reaches a shelf.",
+        "An object that arrives without a reason is turned away at the door.",
+        "Each key was cut to look like an ordinary relic, the kind of object a museum would be glad to display.",
+        "The last line of the register is written in a different hand from the rest."
       ],
       "key": [
         1,
         2
       ],
-      "explain": "A shade is what the memo calls one of the Greek dead.  One sentence says most of the dead drift as shades, and the next describes them: neither rewarded nor punished, adrift in a fog.  The first sentence only says every tradition has a place the dead go, and the other two describe the Greek kingdom's ruler and river and the guards along the Egyptian journey."
+      "explain": "Two steps come before any shelf.  The object is entered in the register first, and it must arrive with a reason, because an object without one is turned away at the door.  The other sentences are about looking, the keys and the register's last line."
     },
     {
       "id": "l6-cloze-relics-are-keys",
@@ -4685,197 +4698,222 @@
       "explain": "Dash's stone makes the spiral catch a thread of light, but the door stays shut until all three relics are in place.  Just before it opens, the door goes quiet, and the narrator says that quiet is somehow louder than the sound it was making a second ago."
     },
     {
-      "id": "l6-cloze-catalog-purpose-again",
+      "id": "l6-cloze-a-repair-is-a-story",
       "type": "cloze",
-      "passageId": "p-threadglass-entry",
+      "passageId": "p-keepers-register",
       "targets": [
         "c1-inf-7-language-use"
       ],
       "coachTopic": "viewpoint-purpose",
       "dok": 3,
-      "stem": "Complete the summary of what this entry's record-keeping shows about its purpose.  Each entry is {{0}}, and when the Threadglass's status changes, the Archive promises {{1}}, so a reader can always see where a fact came from.",
+      "stem": "Finish the sentence.  The register calls a repair {{0}}, so mending an object would {{1}}.",
       "blanks": [
         {
           "choices": [
-            "written once, when an object first goes missing, and then closed",
-            "deleted as soon as the relic it tracks is recovered",
-            "kept for good and updated whenever new information surfaces"
+            "a rule for the shelves",
+            "a reason written in the hider's own words",
+            "a second story laid over the first"
           ],
           "key": 2
         },
         {
           "choices": [
-            "the name of the collector who holds it now",
-            "a fresh measurement of the spiral on its face",
-            "a note on how it learned of the change"
+            "make the object worth far more money to a buyer",
+            "let the object leave the room",
+            "cover the story the object already tells"
           ],
           "key": 2
         }
       ],
-      "explain": "The entry's first lines say every tracked object keeps one entry for good, updated each time new information surfaces and never deleted, even after a recovery.  Its last lines promise that the next update will come with a note explaining how the Archive came to know of the change.  A record kept that way always shows its reader where a fact came from."
+      "explain": "The register keeps only first stories, the ones the objects carried when they were hidden.  A repair would add a new story on top of that first one, which is why the rule says nothing is cleaned or mended."
     },
     {
-      "id": "l6-mc-theo-arc-noticing",
+      "id": "l6-mc-revising-the-assumption",
       "type": "mc",
       "passageId": "p-vault-of-ages",
       "targets": [
-        "c1-lit-2-central-ideas"
+        "c1-lit-4-reasoning"
       ],
-      "coachTopic": "central-theme",
-      "dok": 4,
-      "stem": "Looking back from Theo's very first scene to the final vault, what does his arc reveal about the pack's central theme?",
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "stem": "Near the start of the passage, the narrator says, \"I am revising that assumption completely.\"  What has the narrator decided?",
       "choices": [
-        "Theo mostly relies on physical strength by the end, forcing the final door open instead of reading it.",
-        "Theo abandons everything Finch ever taught him by the final scene and simply follows Dash's lead.",
-        "What Finch first had to teach him, paying attention to small details, is what lets him recognize the spiral on the door.",
-        "Theo never changes or grows at all across the whole story."
+        "That trainers often try too hard to sound impressive",
+        "That the library above the staircase closed too soon",
+        "That Finch's claim about the Archive was true after all",
+        "That Kade herself carved the spiral into the door's center"
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "No physical challenge or contest of strength ever appears in the final vault scene.  The door opens through recognizing a pattern, not through force.",
-        "1": "The final scene shows the crew closely following Finch's training, especially careful evidence-reading, not abandoning it.",
-        "3": "Theo's own narration marks his growth directly, noting that he is \"revising\" an assumption he held for months.  That is explicit change, not an absence of it."
+        "0": "The narrator is not judging trainers in general.  The assumption was that Finch's claim was only the kind of thing trainers say.",
+        "1": "The closed library is a detail of where the door is.  The narrator's revision is about believing Finch.",
+        "3": "Nothing says Kade carved the spiral.  The revision is about Finch's claim that the Archive goes deeper than anyone guessed."
       },
-      "explain": "Theo begins the story walking past the Athenaeum without a single moment of curiosity, and ends it recognizing the spiral on the final door, which is the clearest possible sign that noticing, the very skill Finch first tested him on, is the theme the whole pack has been building toward."
+      "explain": "The narrator spent months assuming Finch's claim, that the Archive goes deeper than people ever guessed, was just something trainers say to sound impressive.  Standing at the bottom of a staircase that should not exist, the narrator now sees the claim was simply true, and drops the assumption."
     },
     {
-      "id": "l6-mc-mila-instinct-summary",
+      "id": "l6-mc-dash-goes-first",
       "type": "mc",
       "passageId": "p-vault-of-ages",
       "targets": [
-        "c1-lit-2-central-ideas"
+        "c1-lit-5-analysis"
       ],
-      "coachTopic": "central-theme",
+      "coachTopic": "inference-relationships",
       "dok": 3,
-      "stem": "What do Mila's introduction in \"Two Empty Chairs\" and her role in the final vault have in common?",
+      "stem": "The narrator says, \"Dash always wants to be the one who finds out what happens next.\"  What does that tell you about Dash?",
       "choices": [
-        "In both scenes, she openly distrusts Theo and refuses to work closely with him or Dash.",
-        "In both scenes, she refuses to speak until someone else speaks first.",
-        "In both scenes, she is the last member of the crew to arrive.",
-        "In both scenes, she notices an absence or a gap before anyone else has explained it."
+        "He is the leader, so the others wait for his order",
+        "He wants to show the others that he is not afraid",
+        "He does not trust the others to handle the relics",
+        "He is eager to go first and see what follows"
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "Mila works closely and trustingly alongside Theo and Dash in both scenes.  Nothing suggests open distrust between them.",
-        "1": "Nothing in either scene shows Mila refusing to speak.  In the chairs scene she asks the question she actually cares about, and in the vault scene the narrator reports what she noticed, not who spoke first.",
-        "2": "In the chairs scene Mila is already seated when Theo and Dash arrive; she is not the last to arrive in either scene."
+        "0": "Nothing says Dash leads the crew.  The narrator's reason is that he always wants to find out what happens next.",
+        "1": "The sentence is about wanting to know what happens next, not about proving anything to the others.",
+        "2": "The others each set a relic too.  The sentence is about Dash wanting to be first, not about trust."
       },
-      "explain": "In her very first scene, Mila counts two empty chairs before Finch says a word.  In the final vault, she is again the first to spot a pattern the rest of the crew had missed.  Both times she catches a gap or a link before anyone has explained it."
+      "explain": "Dash is the one who sets the first relic, and the narrator explains why with one line about his character:  he always wants to be the one who finds out what happens next.  He is eager to act first, even when nobody knows what the door will do."
     },
     {
-      "id": "l6-mc-log-discipline-echoes",
+      "id": "l6-mc-why-they-are-here-tonight",
       "type": "mc",
       "passageId": "p-vault-of-ages",
       "targets": [
-        "c1-lit-2-central-ideas"
+        "c1-lit-4-reasoning"
       ],
-      "coachTopic": "central-theme",
-      "dok": 4,
-      "stem": "Mila re-reads the seal's tool marks \"one more time, like she is checking a signature.\" How does this echo a lesson from earlier in the story?",
+      "coachTopic": "inference-evidence",
+      "dok": 2,
+      "stem": "Why is the crew standing at the door at eleven at night, instead of asleep in their own beds?",
       "choices": [
-        "It reflects the same discipline Dash showed in logging a gap, not a guess.",
-        "It reflects Kade's own habit of collecting objects for years without asking questions.",
-        "It reflects Theo's particular skill at inventing believable cover stories under pressure.",
-        "It reflects a brand-new skill the story never shows earlier on."
+        "Kade had already found the door, so they could not wait",
+        "Finch told them the spiral lights up after dark",
+        "Mila had just worked out what the three relics were for",
+        "The library above the staircase had just closed for good"
       ],
       "key": 0,
       "distractorRationale": {
-        "1": "Kade is described as collecting keys \"without ever telling herself... what door they were for,\" which is closer to the opposite of Mila's careful checking.",
-        "2": "Inventing a cover story is Theo's particular skill, built on a boring, checkable detail, not the careful re-checking of physical evidence Mila is doing here.",
-        "3": "The story shows this exact habit earlier, in how carefully evidence gets logged and double-checked during the crew's training. It is not introduced for the first time here."
+        "1": "Nothing in the passage ties the spiral to the dark.  The narrator says Kade finding the door first is the only reason they are there.",
+        "2": "Mila's noticing is how the crew learned what the relics were for.  The narrator gives a different reason for the late hour:  Kade found the door first.",
+        "3": "The library closed two winters ago, not tonight.  The narrator says Kade finding the door first is the only reason they are there."
       },
-      "explain": "Mila's careful re-reading of physical evidence directly echoes Dash's earlier discipline of recording an unexplained gap honestly rather than guessing at it, the same insistence on checking evidence carefully instead of assuming, now applied to a relic instead of a debrief log."
+      "explain": "The narrator says Kade found this door before the crew did, and that this is the only reason they are standing there at eleven at night instead of asleep.  Once Kade had found the door, the crew could not wait for morning."
     },
     {
-      "id": "l6-mc-figurative-echo-held-breath",
+      "id": "l6-mc-a-held-breath",
       "type": "mc",
       "passageId": "p-vault-of-ages",
       "targets": [
-        "c1-lit-2-central-ideas"
+        "c1-lit-3-word-meanings"
       ],
-      "coachTopic": "central-theme",
-      "dok": 4,
-      "stem": "The final vault door \"opens like a held breath finally let go.\"  Where else in the story does a held-breath comparison appear, and what does the echo suggest?",
+      "coachTopic": "vocab-figurative",
+      "dok": 3,
+      "stem": "The door \"opens like a held breath finally let go.\"  What does that comparison suggest about the moment it opens?",
       "choices": [
-        "The phrase never appears anywhere else in the story, so the image is brand new at the final door.",
-        "The same image described the Frostbank corridor, tying the tension the crew has carried across separate jobs into one final release.",
-        "It echoes something Kade once says about her own private collection, the gallery where she keeps the Threadglass.",
-        "It describes only Theo's personal fear of small, enclosed spaces, like the staircase under the closed library."
+        "The door is stiff, and it takes a hard push to open",
+        "A long, tense wait ends at last, and the tension lets go",
+        "The crew is still out of breath from the long staircase down",
+        "The door is about to slam shut again in a moment"
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "The held-breath image appears earlier, describing the Frostbank corridor's own tense hum, which directly contradicts the claim that the phrase never appears again.",
-        "2": "Kade never uses this comparison.  It first describes the corridor Mila walks through at Frostbank, and it returns in the narrator's voice at the final vault.",
-        "3": "The comparison describes the setting and the mood of the corridor, not a specific fear belonging to Theo alone."
+        "0": "Nothing about the door is stiff.  The comparison is about the feeling of the moment, not the effort of pushing.",
+        "2": "The breath in the comparison is the scene's held tension, not the crew's tired lungs.",
+        "3": "The door stays open, and the crew walks into the room behind it."
       },
-      "explain": "The same held-breath image first described the tense hum filling the Frostbank corridor, and its return at the final door ties together the tension the crew has carried across separate, earlier jobs into one last release, rather than introducing a brand-new comparison."
+      "explain": "A held breath is tension you keep inside until something happens, and letting it go is relief.  The door opening that way tells you the long, tense wait at the door is finally over."
     },
     {
-      "id": "l6-mc-tool-marks-vs-faith-standard",
+      "id": "l6-mc-how-the-register-is-built",
       "type": "mc",
-      "passageId": "p-reckoners-ledger",
+      "passageId": "p-keepers-register",
       "targets": [
-        "c1-inf-5-analysis"
+        "c1-inf-6-text-structure"
       ],
-      "coachTopic": "evidence-across-texts",
-      "dok": 4,
-      "stem": "Comparing the Reckoner's Ledger's tool-mark evidence to the Temple Chronicle's faith-based claim, which standard does the Archive treat as more useful for future research?",
+      "coachTopic": "structure-text",
+      "dok": 3,
+      "stem": "How is the register's explanation of the room put together?",
       "choices": [
-        "Whichever source uses the more confident and persuasive language to make its claim.",
-        "Whichever of the two sources happens to be older and closer to the events.",
-        "Whichever source rests on physical evidence that could still be checked.",
-        "Whichever source was written first-hand by a visitor rather than carved into a wall."
+        "It lists every object on the shelves, from the oldest to the newest",
+        "It tells the life story of each keeper who hid a key, one keeper at a time",
+        "It moves from the room's purpose to its entries, its rules and its door",
+        "It answers questions from visitors, one question in each paragraph"
       ],
       "key": 2,
       "distractorRationale": {
-        "0": "The Archive explicitly refuses to weigh sources by how confident or persuasive they sound. This choice describes exactly the standard the Archive rejects.",
-        "1": "Age is never treated as a deciding factor anywhere in the Archive's analysis of these two sources.",
-        "3": "The chronicle is carved and the ledger is a first-person account, but the Archive's stated reason for favoring checkability is about the type of evidence, not about which format the source is written in."
+        "0": "The register describes only one entry, its own first one.  It explains how entries work rather than listing the shelves.",
+        "1": "The keepers are never named or followed one by one.  The register is about the room, not their lives.",
+        "3": "No visitor asks anything.  The register explains the room in the keepers' own words, from its purpose to its door."
       },
-      "explain": "The Archive's own analysis treats physical, checkable evidence, like the tool marks the Reckoner describes, as more useful going forward than a claim resting purely on faith, precisely because a later researcher could still examine that evidence directly, even though nobody has done so yet."
+      "explain": "The register moves in a clear order:  what the room is for, how an object gets in, the three rules for the shelves, how the door keeps the room shut, and then a sample entry and a last line for whoever reads it."
     },
     {
-      "id": "l6-mc-archive-catalog-vs-chronicle-purpose",
+      "id": "l6-mc-what-the-room-keeps",
       "type": "mc",
-      "passageId": "p-threadglass-entry",
+      "passageId": "p-keepers-register",
       "targets": [
-        "c1-inf-4-reasoning"
+        "c1-inf-2-central-ideas"
       ],
-      "coachTopic": "inference-argument",
-      "dok": 2,
-      "stem": "The Threadglass entry says its etching only shows clearly when light crosses the glass at an angle.  How do historians read that detail?",
+      "coachTopic": "central-idea",
+      "dok": 3,
+      "stem": "The register says, \"this room does not keep things.\"  What does the room keep instead?",
       "choices": [
-        "As wear from being moved twice more between institutions.",
-        "As something done on purpose, not as a flaw in the original casting.",
-        "As proof that the disc is a prop from the events of the maze legend.",
-        "As a sign that the disc in the photograph is a later copy."
+        "Objects worth enough money to be worth guarding",
+        "Objects together with the reasons people hid them",
+        "Objects that have been cleaned and carefully mended",
+        "Objects that museums would not want to display"
       ],
       "key": 1,
       "distractorRationale": {
-        "0": "The entry lists the moves as part of the disc's history, not as the cause of its shallow etching.",
-        "2": "The entry says the disc is almost certainly a later tribute to the maze story, not a prop from it.",
-        "3": "Nothing in the entry calls the disc a copy.  The only reading it gives of the etching is the historians' own."
+        "0": "The register says nothing here was chosen because it was worth money.  Value is not what the room keeps.",
+        "2": "The rules say nothing here is cleaned or mended, so cleaned and mended objects are not what the room keeps.",
+        "3": "The register never says what museums think of the objects on its shelves, so museum interest is not what decides what the room keeps."
       },
-      "explain": "The entry reports the shallow etching and then gives the historians' reading of it: they believe it was done on purpose, not a flaw in the original casting.  The moves between institutions, the maze legend and the idea of a copy come from other parts of the entry, and none of them explains the etching."
+      "explain": "An object only comes in with its hider's own words about why it was hidden.  The room keeps that pairing, the thing and what it meant to someone, which is why an object that arrives with nothing written beside it is turned away."
     },
     {
-      "id": "l6-short-reckoner-title-meaning",
+      "id": "l6-short-in-plain-sight",
       "type": "shorttext",
-      "passageId": "p-reckoners-ledger",
+      "passageId": "p-keepers-register",
       "targets": [
         "c1-inf-3-word-meanings"
       ],
       "coachTopic": "vocab-context",
-      "dok": 3,
-      "stem": "In the guild's own ledger, in four words or fewer, what earns someone the title \"Reckoner\"?",
+      "dok": 2,
+      "stem": "In four words or fewer, what does the register mean when it says each key was hidden \"in plain sight\"?",
       "accept": [
-        "proving a chronicle wrong",
-        "proving a temple wrong",
-        "disproving a chronicle",
-        "proving a story wrong"
+        "out in the open",
+        "in the open",
+        "openly",
+        "in full view",
+        "in plain view",
+        "in view",
+        "in open view",
+        "on display",
+        "openly on display",
+        "on open display",
+        "openly displayed",
+        "displayed openly",
+        "on show",
+        "in public",
+        "out in public",
+        "in public view",
+        "visible",
+        "visible to all",
+        "visible to everyone",
+        "easy to see",
+        "where everyone sees it",
+        "where anyone sees it",
+        "where everyone can see",
+        "where anyone can see",
+        "where everyone could see",
+        "where anyone could see",
+        "where people can see",
+        "where people could see",
+        "where all can see"
       ],
       "maxWords": 4,
-      "explain": "The ledger states the rule directly: the title goes to whoever most recently proved one of the temple's own chronicles wrong, which frames the entire guild's purpose around checking claims made by institutions that guard their own authority."
+      "explain": "Hidden in plain sight means hidden where anyone could see it.  Each key was left out in the open, where it would be studied and listed, and still never once suspected."
     },
     {
       "id": "l6-short-what-relics-really-are",
@@ -4895,7 +4933,7 @@
         "one of three keys"
       ],
       "maxWords": 4,
-      "explain": "The passage says plainly that none of the relics was ever the real target.  Each one was only a key, which turns everything the crew did earlier into steps toward this one final door."
+      "explain": "Finch says none of the relics was ever really the target.  Each one was a key, cut to fit a different notch in a lock built to need all three at once."
     },
     {
       "id": "l1-match-card-line-to-its-place",
@@ -5532,81 +5570,86 @@
       "svgRead": "Counted in art/vault-of-ages-g6/fig-l5-frostbank-vault.svg: of the 4 <line> joins, exactly one carries no <polygon> head, and it is <line x1=\"342.4\" y1=\"310.96\" x2=\"342.4\" y2=\"270\"/>, running straight up from the panel box (rect x=\"241.4\" y=\"316.96\") to the twelfth box (rect x=\"278.4\" y=\"224\").  The panel box is therefore below the twelfth, and the other three joins each end in an arrowhead."
     },
     {
-      "id": "l6-cloze-chronicle-card-top-block",
+      "id": "l6-cloze-register-card-rows",
       "type": "cloze",
-      "passageId": "p-temple-chronicle",
-      "figureId": "fig-l4-temple-chronicle",
-      "figureFact": "Temple scribes",
-      "stem": "Finish the reading of the chronicle card.  The row reading \"Temple scribes\" gives \"{{0}}\", and the row reading \"carved into\" gives \"{{1}}\".",
-      "blanks": [
-        {
-          "choices": [
-            "wrote to honor the priesthood",
-            "no author's name",
-            "gathered every scattered piece"
-          ],
-          "key": 0
-        },
-        {
-          "choices": [
-            "every province of the kingdom",
-            "the borders of the living world",
-            "a temple chamber at Abydos"
-          ],
-          "key": 2
-        }
-      ],
-      "targets": [
-        "c1-inf-7-language-use"
-      ],
-      "coachTopic": "viewpoint-purpose",
-      "dok": 3,
-      "explain": "The card's top block answers who made the inscription and where, before any of its carved lines appear.  The scribes' reason and the carving place sit one row apart in that block.",
-      "whyTheFigureIsNeeded": "The passage runs the carving place and the scribes' motive together inside one prose paragraph, in two sentences that name neither as a field; the card is what splits them onto two labeled rows, so a child locates each value by its label rather than by where it fell in the prose.",
-      "svgRead": "Opened art/vault-of-ages-g6/fig-l4-temple-chronicle.svg.  The top block is three label/value pairs: <text x=\"78\" y=\"126\">carved into</text> beside <text x=\"220\" y=\"126\">a temple chamber at Abydos</text>; <text x=\"78\" y=\"154\">Temple scribes</text> beside <text x=\"220\" y=\"154\">wrote to honor the priesthood</text>; <text x=\"78\" y=\"182\">carries</text> beside <text x=\"220\" y=\"182\">no author's name</text>.  Rows y=126 and y=154 are adjacent, which is the \"one row apart\" in the explain, and the rule <line x1=\"78\" y1=\"194.5\" x2=\"722\" y2=\"194.5\"> sits between the block and the first carved line at y=232, which is the \"before any of its carved lines appear\"."
-    },
-    {
-      "id": "l6-mc-ledger-card-who-kept-it",
-      "type": "mc",
-      "passageId": "p-reckoners-ledger",
-      "figureId": "fig-l4-reckoners-ledger",
-      "figureFact": "a guild of tomb entrants",
-      "stem": "The ledger card's top block names who kept this page.  What does that tell a reader about where the record comes from?",
-      "choices": [
-        "It comes from the priests of Abydos, who guard the chamber themselves.",
-        "It comes from a guild of tomb entrants, not from the temple.",
-        "It comes from one writer who kept the page his whole life.",
-        "It comes from a later reader who copied the page long afterward."
-      ],
-      "key": 1,
-      "distractorRationale": {
-        "0": "The card names a guild as the keeper of this page.  The Abydos priests are the people the Reckoner is writing about, not the people who kept the ledger.",
-        "2": "The ledger this page sits in was passed down and added to by each generation of the guild.  The record does not come from one writer keeping a page of his own.",
-        "3": "The guild kept and added to this ledger itself, generation after generation.  Nothing in the ledger describes an outside reader copying it later."
-      },
+      "passageId": "p-keepers-register",
+      "figureId": "fig-l6-keepers-register",
+      "figureFact": "hidden by",
       "targets": [
         "c1-inf-5-analysis"
       ],
       "coachTopic": "evidence-across-texts",
       "dok": 3,
-      "explain": "The card's top block puts the keeper first, and the keeper is the guild itself.  The ledger was passed down inside that guild and added to by each generation, and this page is one entrant's own account within it.",
-      "whyTheFigureIsNeeded": "The passage leaves the keeper in its framing note and the Reckoner's own page never labels it; the card promotes it to the first labeled field at the head of the page, so the item turns on reading that block rather than on gathering the guild back out of the prose.",
-      "svgRead": "Opened art/vault-of-ages-g6/fig-l4-reckoners-ledger.svg.  <text x=\"78\" y=\"126\">kept by</text> beside <text x=\"179\" y=\"126\">a guild of tomb entrants</text> is the FIRST row of the top block, above y=154 guild rank / Reckoner and y=182 for / the next Reckoner, which is what \"puts the keeper first\" rests on.  Counted the rects: exactly two, the page panel and the background, so this card marks none of its lines."
+      "stem": "Finish the reading of the register card.  The row reading \"hidden by\" gives \"{{0}}\", and the card's stamp reads \"{{1}}\"",
+      "blanks": [
+        {
+          "choices": [
+            "a lighthouse keeper's daughter",
+            "her father, who steered by it",
+            "one of the three keepers"
+          ],
+          "key": 0
+        },
+        {
+          "choices": [
+            "Nothing is cleaned or mended.",
+            "Anything may be looked at.",
+            "Nothing leaves the room."
+          ],
+          "key": 2
+        }
+      ],
+      "explain": "The card gives the hider a labelled row of her own, the second one down, and it reads \"a lighthouse keeper's daughter\".  The stamp carries one of the register's three rules:  \"Nothing leaves the room.\"",
+      "whyTheFigureIsNeeded": "The passage lists the register's three rules and never says which of them appears on the entry;  only the card carries a stamp, so the second blank can be read only from the drawing.",
+      "svgRead": "Opened art/vault-of-ages-g6/fig-l6-keepers-register.svg.  The header row <text x=\"78\" y=\"154\">hidden by</text> is paired with <text x=\"176\" y=\"154\">a lighthouse keeper's daughter</text>.  The stamp is the one rect carrying data-stamp=\"1\", drawn inside transform=\"rotate(-12 590.47 84.08)\", and its text <text x=\"590.47\" y=\"92.08\">Nothing leaves the room.</text> is the only rule drawn anywhere on the card."
     },
     {
-      "id": "l6-ms-memo-row-questions",
-      "type": "ms",
-      "passageId": "p-what-the-archive-believes",
-      "figureId": "fig-l4-archive-believes",
-      "figureFact": "evidence",
-      "stem": "The memo sets the two accounts in side-by-side columns.  Select the three of these questions that its row labels put to each account.",
+      "id": "l6-mc-the-arrow-with-no-word",
+      "type": "mc",
+      "passageId": "p-vault-of-ages",
+      "figureId": "fig-l6-vault-of-ages",
+      "figureFact": "the seal",
+      "targets": [
+        "c1-lit-4-reasoning"
+      ],
+      "coachTopic": "inference-evidence",
+      "dok": 3,
+      "stem": "Look at the words beside the arrows on the plan of the door.  Which statement about them is true?",
       "choices": [
-        "what date each account was written",
-        "what each account claims",
-        "what each account says the seal looks like",
-        "what evidence each account gives",
-        "where each account is kept now",
-        "where each account is weak"
+        "The Wyrdstone's arrow has no word, because it goes in first and needs no reminder",
+        "The seal's arrow has no word, because between first and last it can only be second",
+        "The Threadglass's arrow has no word, because its notch is the easiest to find",
+        "Every arrow carries a word, so none of the order is left to work out"
+      ],
+      "key": 1,
+      "distractorRationale": {
+        "0": "The Wyrdstone's arrow is the one marked \"first\".  Going in first is exactly what its word says.",
+        "2": "The Threadglass's arrow is the one marked \"last\", so it does carry a word.",
+        "3": "Only two of the three arrows carry a word.  The middle one, from the seal, has none."
+      },
+      "explain": "The plan marks the outer two arrows \"first\" and \"last\" and leaves the middle one bare.  With a first and a last already given, the arrow in between, the one running up from the seal to the center notch, can only be second, so the plan does not need to say it.",
+      "whyTheFigureIsNeeded": "The passage tells the order in sentences and never mentions arrows or the words beside them;  only the plan shows which arrows carry a word, so the item turns on reading the drawing.",
+      "svgRead": "Opened art/vault-of-ages-g6/fig-l6-vault-of-ages.svg.  Three arrows run up into the notches:  <line x1=\"155.2\" y1=\"317.6\" x2=\"155.2\" y2=\"190.32\"/>, <line x1=\"400\" y1=\"317.6\" x2=\"400\" y2=\"190.32\"/> and <line x1=\"637.6\" y1=\"317.6\" x2=\"637.6\" y2=\"190.32\"/>.  Only two carry a word:  <text x=\"177.6\" y=\"253.96\">first</text> beside the left one and <text x=\"660\" y=\"253.96\">last</text> beside the right one.  The middle one runs up from the box labelled the seal, <text x=\"400\" y=\"350.6\">, to the box labelled center notch, and no word is drawn beside it."
+    },
+    {
+      "id": "l6-ms-what-the-plan-shows",
+      "type": "ms",
+      "passageId": "p-vault-of-ages",
+      "figureId": "fig-l6-vault-of-ages",
+      "figureFact": "notch",
+      "targets": [
+        "c1-lit-1-key-details"
+      ],
+      "coachTopic": "evidence-story-details",
+      "dok": 2,
+      "stem": "Choose the three things this plan of the door shows.",
+      "choices": [
+        "A keyhole drawn at the center of the door",
+        "Three notches drawn across the door",
+        "The staircase that leads down to the door",
+        "An arrow running up from each relic into its notch",
+        "Where each member of the crew is standing",
+        "Each relic's name in a box below its notch"
       ],
       "key": [
         1,
@@ -5614,46 +5657,41 @@
         5
       ],
       "distractorRationale": {
-        "0": "No row on the memo asks about dates.  The two accounts are compared on what they say and how far each one can be trusted, not on when they were written.",
-        "2": "No row on the memo asks what the seal looks like.  The memo asks what each account claims, what backs that claim, whether it can be checked, and where it is weak.",
-        "4": "The memo has no row for where either account is stored.  It asks instead about the claim itself, the evidence behind it, and the point where each account is weak."
+        "0": "The plan draws no keyhole, and its own title says the door has none.",
+        "2": "The plan shows only the door, its notches and the relics.  The staircase is in the story, not on the plan.",
+        "4": "No crew member is drawn on the plan.  It shows which relic fits which notch, not who placed it."
       },
+      "explain": "The plan shows the door's three notches across the top, a box for each relic underneath, and an arrow running up from each relic into the notch it fits.  It leaves out everything else in the scene, from the staircase to the crew.",
+      "whyTheFigureIsNeeded": "The passage tells the scene as a series of actions;  only the plan lays the notches side by side, puts each relic in a box under its notch and joins them with arrows, which is what each correct option names.",
+      "svgRead": "Opened art/vault-of-ages-g6/fig-l6-vault-of-ages.svg.  Three notch boxes run across the top at y=144.32:  RECT (79.7,144.32,151,40), RECT (333,144.32,134,40) and RECT (548.6,144.32,178,40).  Three relic boxes run along the bottom at y=323.6, one under each notch, and each is joined to its notch by an arrow whose head points up, such as <polygon points=\"400,190.32 405,201.32 395,201.32\"/>.  The title is <text x=\"40\" y=\"44\">a door with no handle and no keyhole</text>;  no keyhole, staircase or person is drawn."
+    },
+    {
+      "id": "l6-mc-the-boxed-line",
+      "type": "mc",
+      "passageId": "p-keepers-register",
+      "figureId": "fig-l6-keepers-register",
+      "figureFact": "the register's own first entry",
       "targets": [
         "c1-inf-4-reasoning"
       ],
       "coachTopic": "inference-argument",
       "dok": 3,
-      "explain": "A comparison table's power is in its rows: the same question goes to both accounts, so the answers can be read straight across.  Three of the memo's own row labels are what each one claims, what evidence it gives, and what weakens it.",
-      "whyTheFigureIsNeeded": "The questions the Archive puts to both sources exist nowhere in the passage as a set; they are the memo's own row labels, and the alignment that lets a reader compare straight across is the drawing's contribution rather than the prose's.",
-      "svgRead": "Opened art/vault-of-ages-g6/fig-l4-archive-believes.svg.  The row-label column sits at x=78 (claim y=174, evidence y=224, check it y=252, weak point y=302) and the two account columns at x=292.67 (temple chronicle) and x=507.33 (guild ledger), split by vertical rules at x=285.5 and x=499.5, which is the \"side-by-side columns\".  Checked every row: all four carry text at BOTH x=292.67 and x=507.33, so \"the same question goes to both accounts\" holds and the only cell on the card without text is the row-label column's own heading, drawn empty beside the two account headings."
-    },
-    {
-      "id": "l6-mc-chronicle-card-boxed-line",
-      "type": "mc",
-      "passageId": "p-temple-chronicle",
-      "figureId": "fig-l4-temple-chronicle",
-      "figureFact": "a translation of an inscription",
-      "stem": "How many of the chronicle's sentences are carved on the card headed \"a translation of an inscription\"?",
+      "stem": "On the card titled \"the register's own first entry\", one line of the reason is drawn inside a box.  What does that boxed line add to the reason?",
       "choices": [
-        "four",
-        "two",
-        "seven",
-        "three"
+        "The year the compass came into the register",
+        "How long her father steered by the compass",
+        "How the compass's face came to be cracked",
+        "A wish that the compass be left as it is"
       ],
       "key": 3,
       "distractorRationale": {
-        "0": "The card shows four carved lines, but the second and third lines are one sentence.  The third line starts with a lowercase letter and finishes the sentence the second line begins.  Count where each sentence ends, not how many lines there are.",
-        "1": "Count again, sentence by sentence.  The line about the seal, the two lines about no enemy and the boxed line about faith make three.",
-        "2": "Seven counts every row under the heading.  The first three rows pair a label with its value and are not sentences from the chronicle.  The four carved lines below them hold three sentences."
+        "0": "The year has its own row near the top of the card.  The boxed line is the end of the reason.",
+        "1": "Her father steering by it for forty winters is the line above the box, and that line has no box.",
+        "2": "Nothing on the card says how the face cracked.  The boxed line says the compass should not be made to point anywhere else."
       },
-      "targets": [
-        "c1-inf-4-reasoning"
-      ],
-      "coachTopic": "inference-argument",
-      "dok": 2,
-      "explain": "The card carves three of the chronicle's sentences:  the seal remains in the chamber, no enemy has ever set foot in it, and, in the box, it is a fact requiring only faith.  The sentence about no enemy runs across two lines, the second starting with a lowercase letter, so four lines hold three sentences.  Count where each sentence ends, not how many lines there are.",
-      "whyTheFigureIsNeeded": "The passage prints the whole chronicle as running prose; only the card shows which of its sentences were carved, and how its four lines divide them.",
-      "svgRead": "Opened art/vault-of-ages-g6/fig-l4-temple-chronicle.svg.  Under the title <text x=\"78\" y=\"76\">a translation of an inscription</text> and below the rule at y1=\"194.5\", exactly four carved lines are drawn:  <text x=\"78\" y=\"232\">The seal remains in this chamber to this day.</text>, <text x=\"78\" y=\"264\">No enemy of the temple has ever set foot</text>, <text x=\"78\" y=\"296\">in this chamber.</text>, and <text x=\"78\" y=\"328\">It is a fact requiring only faith.</text> inside the one rect carrying data-emphasis=\"box\".  The line at y=296 starts in lower case and ends the sentence begun at y=264, so four lines carry three sentences.  The three rows above the rule (carved into, Temple scribes, carries) are label and value pairs, not carved sentences."
+      "explain": "The reason runs over two lines, and only the second is boxed:  that the compass should not be made to point anywhere else.  After forty winters of guiding her father, it is to be left as it is, pointing nowhere new.",
+      "whyTheFigureIsNeeded": "The passage gives the reason as one running sentence and calls out no part of it;  only the card sets its last line inside a box, so the item turns on finding which line the drawing calls out.",
+      "svgRead": "Opened art/vault-of-ages-g6/fig-l6-keepers-register.svg.  Exactly one rect carries data-emphasis=\"box\", RECT (70,272,504.94,32), and the line drawn inside it is <text x=\"78\" y=\"296\">and that it should not be made to point anywhere else.</text>.  The line above it, <text x=\"78\" y=\"264\">that her father steered by it for forty winters,</text>, has no box."
     }
   ],
   "figures": [
@@ -6497,6 +6535,48 @@
             "style": "arrow"
           }
         ]
+      }
+    },
+    {
+      "id": "fig-l6-keepers-register",
+      "kind": "diagram",
+      "gen": true,
+      "src": "art/vault-of-ages-g6/fig-l6-keepers-register.svg",
+      "caption": "The register's first entry, set out as a card:  its year, its hider and its object above the hider's reason.",
+      "credit": "Built for this project from the passage text; original work",
+      "alt": "A register card titled \"the register's own first entry\".  Three header rows pair \"year\" with \"the first year of the register\", \"hidden by\" with \"a lighthouse keeper's daughter\", and \"object\" with \"a brass compass with a cracked face\".  Below them a line reads \"reason\", then two lines give the reason, the second drawn inside a box.  A stamp on the card reads \"Nothing leaves the room.\"",
+      "dataTable": {
+        "type": "facsimile",
+        "sourcePassageId": "p-keepers-register",
+        "docKind": "case-file",
+        "title": "the register's own first entry",
+        "header": [
+          {
+            "label": "year",
+            "value": "the first year of the register"
+          },
+          {
+            "label": "hidden by",
+            "value": "a lighthouse keeper's daughter"
+          },
+          {
+            "label": "object",
+            "value": "a brass compass with a cracked face"
+          }
+        ],
+        "lines": [
+          {
+            "text": "reason"
+          },
+          {
+            "text": "that her father steered by it for forty winters,"
+          },
+          {
+            "text": "and that it should not be made to point anywhere else.",
+            "emphasis": "box"
+          }
+        ],
+        "stamp": "Nothing leaves the room."
       }
     }
   ]
