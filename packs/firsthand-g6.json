@@ -1078,9 +1078,9 @@
       "distractorRationale": {
         "0": "This reverses which civilization used which system; the case file credits cuneiform to Mesopotamian scribes and hieroglyphs to Egyptian scribes, not the other way around.",
         "1": "The case file describes two different systems, wedge-shaped cuneiform pressed into clay and picture-based hieroglyphs carved onto papyrus and stone, not one shared system.",
-        "3": "The case file says Egyptian scribes did leave a written record, hieroglyphs carved onto papyrus and stone; it is the separate Indus civilization, in a later file, whose script survives unread."
+        "3": "The case file says Egyptian scribes did leave a written record, hieroglyphs carved onto papyrus and stone."
       },
-      "explain": "The case file describes two distinct systems: Mesopotamian scribes pressed wedge-shaped cuneiform marks into wet clay with a cut reed, one tablet at a time, while Egyptian scribes instead drew or carved hieroglyphs onto papyrus and stone.  The other choices each reverse which civilization used which system, deny that two systems existed, or borrow the wrong civilization's own writing gap."
+      "explain": "The case file describes two distinct systems: Mesopotamian scribes pressed wedge-shaped cuneiform marks into wet clay with a cut reed, one tablet at a time, while Egyptian scribes instead drew or carved hieroglyphs onto papyrus and stone.  The other choices each reverse which civilization used which system, deny that two systems existed, or claim the Egyptians left no written record at all."
     },
     {
       "id": "t2-ebsr-abrahams-covenant",
@@ -2382,15 +2382,15 @@
         "Qin Shi Huangdi ordered rival texts burned, which broke China apart into fighting states.",
         "Zhou power weakened, and China broke into rival states that fought nearly nonstop.",
         "The Han dynasty's collapse left China without any government at all.",
-        "A weaker monsoon and shifting rivers made farming too difficult to support a single ruler."
+        "The Huang He flooded so often and so hard that the valley could no longer feed one kingdom."
       ],
       "key": 1,
       "distractorRationale": {
         "0": "Qin Shi Huangdi's burning of rival texts came after he had already unified China as its first emperor, ending the Warring States era rather than causing it.",
         "2": "The Han dynasty is a later dynasty that came after the Qin; its own fall is a separate, later event from the earlier Warring States era.",
-        "3": "Weaker monsoons and shifting rivers are the case file's evidence for the Indus civilization's decline, in a different tile's file, not the cause of China's own Warring States era."
+        "3": "The case file says the Huang He flooded often and hard, but it also says the floodwaters carried rich soil, and it never blames the floods for the Warring States era."
       },
-      "explain": "The case file states directly that Zhou power weakened over the years, and China broke apart into rival states that fought nearly nonstop, in the era later called the Warring States era.  Each wrong choice borrows a cause from a later ruler, a different dynasty, or even a different civilization's own file entirely."
+      "explain": "The case file states directly that Zhou power weakened over the years, and China broke apart into rival states that fought nearly nonstop, in the era later called the Warring States era.  Each wrong choice blames something the case file never names as the cause, whether a later ruler's act, a later dynasty's fall, or the river's floods."
     },
     {
       "id": "t5-cloze-mandate-of-heaven",
@@ -3208,15 +3208,15 @@
         "Scribes carried the tablets out of the burning palaces before the fires could reach them.",
         "The tablets were cut into stone, which fire cannot damage.",
         "Fire bakes clay harder, so they came out of the ashes tougher than they went in.",
-        "The palaces were built of baked brick that kept the fires out."
+        "The tablets were buried under the palace floors, far from the flames."
       ],
       "key": 2,
       "distractorRationale": {
         "0": "The entry never describes anyone rescuing tablets; it credits their survival to what fire does to clay, which is the opposite of a rescue.",
         "1": "Stone is the one material that plain almost entirely lacked, and that shortage is exactly why its scribes wrote on river mud instead.",
-        "3": "Baked brick belongs to the Indus cities in a later file; this entry says the palaces burned more than once, and the burning is what hardened the tablets."
+        "3": "Nothing in the entry says the tablets were buried; it says the palaces burned more than once, and the burning is what hardened the tablets."
       },
-      "explain": "The entry saves its favorite point for last: fire destroys most records, but fire bakes clay harder, so tablets stored in a palace that burned came out tougher than they went in.  Each wrong choice supplies a rescue, a material, or a building method the entry never claims, and one of them borrows from a different case file entirely."
+      "explain": "The entry saves its favorite point for last: fire destroys most records, but fire bakes clay harder, so tablets stored in a palace that burned came out tougher than they went in.  Each wrong choice supplies a rescue, a material, or a hiding place the entry never claims."
     },
     {
       "id": "t1-mc-verified-but-unresolved",
@@ -3564,12 +3564,12 @@
           "key": 1,
           "distractorRationale": {
             "0": "Jerusalem stayed with the SOUTHERN kingdom, Judah, along with the line of David and the Temple; the northern kingdom of Israel had a capital of its own.",
-            "2": "Babylon is the Mesopotamian city whose king issued the law code filed at the very start of this record, and it was never a capital of either Israelite kingdom."
+            "2": "Babylon was never a capital of either Israelite kingdom.  The case file names Samaria as the northern kingdom's capital."
           }
         }
       ],
       "quote": "The northern kingdom's capital came to be a city named Samaria.",
-      "explain": "The case file gives the northern kingdom's capital as Samaria, the city Assyrian armies later took.  Jerusalem belongs to the southern kingdom in the same sentence pair, and Babylon belongs to an entirely different file, so neither one restores this sentence."
+      "explain": "The case file gives the northern kingdom's capital as Samaria, the city Assyrian armies later took.  Jerusalem belongs to the southern kingdom in the same sentence pair, and Babylon was never a capital of either kingdom, so neither one restores this sentence."
     },
     {
       "id": "t2-mc-who-the-obelisk-names",
@@ -5568,7 +5568,7 @@
           ],
           "key": 0,
           "distractorRationale": {
-            "1": "Tablets belong to Mesopotamia's clay record, not to this note.",
+            "1": "None of the map's notes mentions tablets.  They say the script was cut into small stone seals.",
             "2": "The note says small stone seals, not walls."
           }
         },

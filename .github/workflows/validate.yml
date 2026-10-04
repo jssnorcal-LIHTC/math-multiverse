@@ -42,6 +42,9 @@ jobs:
       - name: svgRead is current (every SVG fragment an item quotes as evidence is still in the figure file; 1 control)
         run: node tests/svgread-current.js
 
+      - name: Figure prose (an item's counts, blanks and drawing words match the drawing it describes; in npm test, missing here until 26-1004)
+        run: node tests/figure-prose.js
+
       - name: Unquoted drawn labels (every cued label closed at both edges in all three ELA packs; reviewed exceptions allowlisted, stale entries fail)
         run: npm run unquoted-labels
 
@@ -117,7 +120,7 @@ jobs:
       - name: Review echo (a level-6 item does not re-ask or give away an earlier level; 6 controls)
         run: node tests/sweep-review-echo.js
 
-      - name: Cross-level echo (every level asks only about its own stories;  Niall's Vault case, four real callbacks and the reviews' fledge-rate chart and Samaria map cases are controls)
+      - name: Cross-level echo (every level asks only about its own stories, and its feedback points nowhere else;  Niall's Vault case, four real callbacks, the reviews' fledge-rate chart and Samaria map cases, and the completion audit's feedback and story-object cases are controls)
         run: node tests/sweep-cross-level.js
 
       - name: EBSR rationale (the feedback a child reads is about the wrong answer they picked; 3 controls)
