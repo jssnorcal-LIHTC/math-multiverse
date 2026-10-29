@@ -42,7 +42,7 @@ catch (e1) {
 
 const ROOT = path.join(__dirname, '..');
 
-// The iPad 6 in landscape, which is the device Niall actually uses.
+// The iPad 6 in landscape, which is the device the player actually uses.
 const VIEWPORT = { width: 1024, height: 768 };
 
 // A passage must keep at least this much height.  One .mv-para line is about 21px at 0.95rem/1.5,
@@ -328,7 +328,7 @@ function startServer() {
           footerBelowFrame: footer ? Math.round(footer.getBoundingClientRect().bottom - fr.bottom) : 0,
 
           // ---- phase R: the read/respond separation, measured in painted pixels ----
-          // Niall's report was that the text he reads and the responses were not separated.
+          // The player's report was that the text he reads and the responses were not separated.
           // The defect was literal: .mv-item painted rgba(0,0,0,0), so the answer region had no
           // material of its own and the passage's 3% wash sat one percent from .mv-choice's 4%.
           // Asserting the PAINTED values, not the stylesheet, is the point: a rule that is
@@ -407,7 +407,7 @@ function startServer() {
     else {
       const transparent = (c) => !c || c === 'transparent' || /rgba\([^)]*,\s*0\s*\)$/.test(c);
       if (transparent(s.itemBg)) {
-        problems.push(`${tag}: the respond zone paints ${s.itemBg} -- it has no material of its own, which is the defect Niall reported`);
+        problems.push(`${tag}: the respond zone paints ${s.itemBg} -- it has no material of its own, which is the defect the player reported`);
       }
       if (s.itemBg === s.passageBg) {
         problems.push(`${tag}: the reading surface and the respond zone both paint ${s.itemBg} -- they are the same material`);

@@ -114,7 +114,7 @@ check('summarize marks dnf only when mistakes reach the life count', () => {
   assert.strictEqual(R.summarize([bad, bad, bad, bad], 4).dnf, true);
 });
 
-// NIALL'S REPORT, 26-0904, now a gate. He plays four-life reading levels and noticed that the
+// THE PLAYER'S REPORT, 26-0904, now a gate. He plays four-life reading levels and noticed that the
 // fourth marker on the bar was decorative: three mistakes already scored zero and failed to clear
 // the level, and the fourth mistake scored zero too. The assertion that used to sit here --
 // "finishing with three mistakes still earns no stars" -- WROTE THAT DEFECT DOWN AS INTENDED, which
@@ -1207,7 +1207,7 @@ check('every declared life count has a distinct outcome at its last life', () =>
     const outOfLives = R.starsForMistakes(L, L);
     assert.ok(lastSurvivable > 0,
       'on ' + L + ' lives, spending the last one still scores ' + lastSurvivable
-      + ': that life is decorative, which is exactly what Niall reported');
+      + ': that life is decorative, which is exactly what the player reported');
     assert.strictEqual(outOfLives, 0, 'on ' + L + ' lives, running out must score zero');
   }
 });

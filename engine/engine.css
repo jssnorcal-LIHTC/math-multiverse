@@ -433,7 +433,7 @@
    required: a flex item will not shrink below its content without it, which is the usual reason this
    pattern still overflows. ebsr's render calls scrollIntoView on Part B when it appears, which scrolls
    this box, so revealing Part B still brings it into view. */
-/* Phase R, task 1 (Niall, 26-0812): "no separation between the text that the user reads and the
+/* Phase R, task 1 (the player, 26-0812): "no separation between the text that the user reads and the
    responses."  Measured before changing anything, at 1024x768 on the running app: .mv-passage
    painted rgba(255,255,255,0.03), .mv-choice painted rgba(255,255,255,0.04), both carrying the
    same --border-subtle, and .mv-item painted rgba(0,0,0,0) with no border and no padding.  The
@@ -443,7 +443,7 @@
    The two surfaces now read as two materials, which is the distinction the page was missing:
    the passage is a recessed sheet (a document, tinted by its docKind), and this is the raised
    console you operate.  --bg-elevated against the passage's near-transparent wash carries the
-   tonal step, and the accent top edge carries the COLOUR cue Niall actually asked for, tied to
+   tonal step, and the accent top edge carries the COLOUR cue the player actually asked for, tied to
    the pack's own identity the same way the register band is.
 
    Colour is deliberately not doing this alone (roadmap risk, phase R): the ground step, the
@@ -470,7 +470,7 @@
    So the console was 1.106:1 above the untinted sheet and 1.09 to 1.10:1 BELOW all three tinted
    ones.  On 37 of the 85 dressed passages the raised console was the darker surface of the two,
    which is the intended relationship pointing backwards, and every one of those ratios is inside
-   the range a dark theme reads as "the same material".  Niall's original report was that the text
+   the range a dark theme reads as "the same material".  The player's original report was that the text
    he reads and the responses were not separated;  the ground step answering it was worth about
    one percent of luminance.
 

@@ -3,7 +3,7 @@
 //
 //   node tests/prose-clarity.js
 //
-// WHY THIS EXISTS. Justin tested the science pack with Niall on 26-0822 and reported it as too
+// WHY THIS EXISTS. Justin tested the science pack with the player on 26-0822 and reported it as too
 // obtuse and short on context. The readability indices did not explain it: measured against
 // Firsthand, the pack he says reads well, science ran FK 6.4 against 6.1 and Coleman-Liau 9.1
 // against 8.9, and its MEAN sentence was actually SHORTER at 13.1 words against 12.2. What did

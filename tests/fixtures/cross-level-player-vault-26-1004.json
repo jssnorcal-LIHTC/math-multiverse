@@ -1,5 +1,5 @@
 {
- "_about": "Niall's case, the FIRST positive control of tests/sweep-cross-level.js.  Justin, 26-1004, relaying Niall:  \"in Vault of Ages, in the sixth level, it was asking a question about what happened in the second level.\"  Verbatim from packs/vault-of-ages-g6.json at 02a63cf:  the two level-2 passages level 6 served, the level-2 items on them, and the four level-6 items that asked about them.  Never edit this to make the gate pass:  the gate must FAIL it.",
+ "_about": "The player's case, the FIRST positive control of tests/sweep-cross-level.js.  Justin, 26-1004, relaying the player:  \"in Vault of Ages, in the sixth level, it was asking a question about what happened in the second level.\"  Verbatim from packs/vault-of-ages-g6.json at 02a63cf:  the two level-2 passages level 6 served, the level-2 items on them, and the four level-6 items that asked about them.  Never edit this to make the gate pass:  the gate must FAIL it.",
  "source": "packs/vault-of-ages-g6.json @ 02a63cf",
  "passages": [
   {

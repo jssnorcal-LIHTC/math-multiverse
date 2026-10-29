@@ -6,7 +6,7 @@
 //   2. Keep pack progress in its OWN localStorage key.
 //
 // The separate key is the important part. The math save lives in mathMultiverse.save.v1 and
-// mathMultiverse.save.g6.v1 and holds real progress Niall earned. Migrating it to hold subjects
+// mathMultiverse.save.g6.v1 and holds real progress the player earned. Migrating it to hold subjects
 // would risk that progress for no gain, so packs get multiverse.packs.v1 and the math keys are
 // never opened. Phase 5 reconciles analytics across both; nothing before then needs to.
 //
@@ -100,7 +100,7 @@
 
   // Identical ladder to MVRunner.starsForMistakes, and tests/runner.test.js proves the two agree
   // at every mistake count for every life count -- so this copy takes `lives` too. It must: the
-  // ladder became life-aware when Niall reported that the fourth life on a four-life reading level
+  // ladder became life-aware when the player reported that the fourth life on a four-life reading level
   // bought nothing (see the long note in engine/runner.js). Absolute mistakes, not percentage, so
   // the meaning holds across levels of different length.
   const DEFAULT_LIVES = 3;

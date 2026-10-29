@@ -1,14 +1,14 @@
 'use strict';
 // sweep-cross-level.js -- every level asks only about its own stories.
 //
-// Justin, 26-1004, relaying Niall:  "in Vault of Ages, in the sixth level, it was asking a question about
+// Justin, 26-1004, relaying the player:  "in Vault of Ages, in the sixth level, it was asking a question about
 // what happened in the second level."  The 26-0921 rule ("no review questions can echo") had been built as
 // sweep-review-echo.js's E1 to E4:  a review item may not repeat an earlier question, figure fact or keyed
 // answer.  Every pack read ALL CLEAN while level 6 still served 56 questions on EARLIER levels' passages
 // (Cold Signal 28 of 28, Vault 15, Firsthand 9, Outpost 4), and 7 practice items did the same.  A new
-// question about an old story passed every one of E1 to E4, because Niall's own case was never one of their
+// question about an old story passed every one of E1 to E4, because the player's own case was never one of their
 // controls.  It is the FIRST control here, verbatim from 02a63cf
-// (tests/fixtures/cross-level-niall-vault-26-1004.json).
+// (tests/fixtures/cross-level-player-vault-26-1004.json).
 //
 //   I1  ONE LEVEL PER PASSAGE.  A passage is served by the items of one level only.
 //   I2  ONE LEVEL PER FIGURE.  A figure belongs to one level only, counting every way a level shows it:  an
@@ -77,7 +77,7 @@ const { STOP, norm, words, keysOf, assertingFields } = require('./echo-lib');
 
 const ROOT = path.join(__dirname, '..');
 const ALLOW_PATH = path.join(__dirname, 'cross-level-allowlist.json');
-const NIALL_PATH = path.join(__dirname, 'fixtures', 'cross-level-niall-vault-26-1004.json');
+const PLAYER_PATH = path.join(__dirname, 'fixtures', 'cross-level-player-vault-26-1004.json');
 const CALLBACKS_PATH = path.join(__dirname, 'fixtures', 'cross-level-callbacks-26-1004.json');
 const FIGREF_PATH = path.join(__dirname, 'fixtures', 'cross-level-figure-ref-26-1004.json');
 const NAMES_PATH = path.join(__dirname, 'fixtures', 'cross-level-names-26-1004.json');
@@ -449,13 +449,13 @@ function main() {
   // ---- controls ----
   {
     const ctl = [];
-    // 1.  NIALL'S CASE, verbatim.  Vault level 6 served four items on two level-2 passages.
-    const niall = loadJson(NIALL_PATH);
-    const nf = findingsIn(niall).filter((f) => f.rule === 'I1');
+    // 1.  THE PLAYER'S CASE, verbatim.  Vault level 6 served four items on two level-2 passages.
+    const playerCase = loadJson(PLAYER_PATH);
+    const nf = findingsIn(playerCase).filter((f) => f.rule === 'I1');
     const want = ['I1|p-threadglass-entry@L2', 'I1|p-threadglass-entry@L6', 'I1|p-three-realms-below@L2', 'I1|p-three-realms-below@L6'].sort();
     const got = [...new Set(nf.map((f) => f.sig))].sort();
-    if (JSON.stringify(got) !== JSON.stringify(want)) ctl.push(`CONTROL Niall failed:  expected ${JSON.stringify(want)}, got ${JSON.stringify(got)}`);
-    if (applyAllow('vault-of-ages-g6', findingsIn(niall), [], new Set()).length === 0) ctl.push('CONTROL Niall failed:  his case came back clean');
+    if (JSON.stringify(got) !== JSON.stringify(want)) ctl.push(`CONTROL player case failed:  expected ${JSON.stringify(want)}, got ${JSON.stringify(got)}`);
+    if (applyAllow('vault-of-ages-g6', findingsIn(playerCase), [], new Set()).length === 0) ctl.push('CONTROL player case failed:  his case came back clean');
 
     // 2.  THE REAL CALLBACKS, verbatim.  Each must fire I4;  the same-level reference and the level's own word must not.
     const cb = loadJson(CALLBACKS_PATH);
@@ -581,7 +581,7 @@ function main() {
     applyAllow('t', findingsIn(clean()), [{ pack: 't', sig: 'I1|p9@L6', reason: 'control' }], u3);
     if (u3.size !== 0) ctl.push('CONTROL stale-allowlist failed:  an entry matching nothing was counted as used');
     if (ctl.length) problems.push(...ctl);
-    else console.log('  controls:  Niall\'s case (Vault level 6 on two level-2 passages, verbatim from 02a63cf) is caught;  four real callbacks from 02a63cf fire I4, and a same-level "earlier entry" and a level\'s own word do not;  Outpost level 6 reading level 5\'s fledge-rate chart fires I5, and its fixed text, "plan around" and the catalog photograph do not;  Firsthand level 6 offering Samaria and Vault level 1\'s unnamed "Mila" fire I6, and their fixes, a frame word, a word form and a sentence-initial "If" do not;  the eight feedback texts from 2733c3e that sent a child to another level fire I7 on their own items, and their fixes, "Babylonian" beside its level\'s "Babylon", a level\'s own "different file" and "earlier entry", and two I4 pointers a passage uses about itself do not;  the audit\'s three borrowed story objects (a binder, a phrase, a dome) fire I4, and their fixes and level 5\'s own binder do not;  a level by number or counted back fires, and a level\'s own number does not;  a clean pack passes;  a shared passage, an item figure, a reveal and a passage strip are each caught;  an earlier level stating a key is caught and a later one restating it is not;  a math pack is exempt from I1 and I2 and still held to I3;  the allowlist excuses its own level only and an unused entry is stale  (fired)');
+    else console.log('  controls:  the player\'s case (Vault level 6 on two level-2 passages, verbatim from 02a63cf) is caught;  four real callbacks from 02a63cf fire I4, and a same-level "earlier entry" and a level\'s own word do not;  Outpost level 6 reading level 5\'s fledge-rate chart fires I5, and its fixed text, "plan around" and the catalog photograph do not;  Firsthand level 6 offering Samaria and Vault level 1\'s unnamed "Mila" fire I6, and their fixes, a frame word, a word form and a sentence-initial "If" do not;  the eight feedback texts from 2733c3e that sent a child to another level fire I7 on their own items, and their fixes, "Babylonian" beside its level\'s "Babylon", a level\'s own "different file" and "earlier entry", and two I4 pointers a passage uses about itself do not;  the audit\'s three borrowed story objects (a binder, a phrase, a dome) fire I4, and their fixes and level 5\'s own binder do not;  a level by number or counted back fires, and a level\'s own number does not;  a clean pack passes;  a shared passage, an item figure, a reveal and a passage strip are each caught;  an earlier level stating a key is caught and a later one restating it is not;  a math pack is exempt from I1 and I2 and still held to I3;  the allowlist excuses its own level only and an unused entry is stale  (fired)');
   }
 
   if (problems.length) {
