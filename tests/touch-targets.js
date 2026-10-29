@@ -65,7 +65,7 @@ catch (e1) {
 
 const ROOT = path.join(__dirname, '..');
 
-// The iPad 6 in landscape, which is the device Niall actually uses, and the width the one-row
+// The iPad 6 in landscape, which is the device the player actually uses, and the width the one-row
 // header compaction was tuned for.
 //
 // `--width`/`--height` override it, and exist for one reason: the wrapped-bar case is the one this

@@ -516,7 +516,7 @@ const STANDALONE = [
 // already on the table", and it ran out: that homework was CC1 lesson 1.1.3, and 1.1.3 is now at
 // zero gaps. What replaces it:
 //
-//   PRIMARY, curriculum position ascending. This app exists to track Niall's class, and Justin's
+//   PRIMARY, curriculum position ascending. This app exists to track the player's class, and Justin's
 //   only recurring input is which lesson they are on, so a row the class reaches in three weeks is
 //   worth more than one it reaches in March. Under the old second key -- hard gap before partial --
 //   box plots sat at 10 and Types of Numbers at 13, which builds chapter 8 content while the class
@@ -524,7 +524,7 @@ const STANDALONE = [
 //
 //   ONE PROMOTION, stated rather than buried in the order: pg-6.2.3 stays first. Its one open gap
 //   is perimeter written as an EXPRESSION; the pack already teaches perimeter as a number in L1 and
-//   L6 Review and Preview already previews algebra, so it improves a level Niall plays now rather
+//   L6 Review and Preview already previews algebra, so it improves a level the player plays now rather
 //   than one he reaches later. It is the only row promoted out of curriculum order.
 //
 // Cost is deliberately NOT a key. Two of the near rows want a figure type nothing can draw yet

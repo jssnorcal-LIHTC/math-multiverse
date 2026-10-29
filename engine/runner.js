@@ -87,7 +87,7 @@
     return Math.round(100 * Math.max(0, Math.min(1, result.partial || 0)));
   }
 
-  // THE LADDER IS LIFE-AWARE, and it has to be. Reported by Niall, 26-0904, in his own words:
+  // THE LADDER IS LIFE-AWARE, and it has to be. Reported by the player, 26-0904, in his own words:
   // "when I get three questions wrong, not four, which would mean I would get zero stars, I still
   // get zero stars, which means the fourth star is just there to do nothing."
   //
@@ -150,7 +150,7 @@
   // length the last visible line is sliced mid-sentence with no rule, no fade and no gap before
   // the question begins.  A child scanning down cannot tell whether the article ended, whether
   // the app broke, or whether there is more below, and in the shot that was taken to check
-  // Niall's report the clipped half-line was the single most broken-looking thing on screen.
+  // In the player's report the clipped half-line was the single most broken-looking thing on screen.
   //
   // `data-clipped` is written ONLY while the box genuinely overflows AND is not scrolled to its
   // end, so a passage that fits, and a passage the child has read to the bottom, both paint

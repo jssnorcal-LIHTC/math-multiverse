@@ -275,7 +275,7 @@ try {
       /cannot serve|Nothing to queue/i.test(unserved.cardText), unserved.cardText.slice(0, 200));
 
     // ---- a lesson whose topics exist but which also has gaps names BOTH ----
-    // Chosen from the crosswalk, not named here. This used to pin 1.1.3, the lesson Niall's homework
+    // Chosen from the crosswalk, not named here. This used to pin 1.1.3, the lesson the player's homework
     // came from, which was the obvious choice right up until the pack served all four of its targets
     // and closed its last gap. Same lesson as the unserved case above: a fixture that encodes the
     // backlog turns finished work into a red build.
@@ -414,7 +414,7 @@ try {
     check('the launcher still does not scroll at 1024x768', !freePlay.pageScrolls);
 
     // ---- a mission step actually STARTS that level ----
-    // Everything above measures what the mission decides. This measures the one thing Niall does
+    // Everything above measures what the mission decides. This measures the one thing the player does
     // with it. Driven by clicking the real button, not by calling startMissionStep directly.
     const started = await page.evaluate(() => {
       localStorage.clear();

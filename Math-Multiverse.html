@@ -570,7 +570,7 @@
      stars) sits in normal flow at the bottom of the same card. Nothing reserved space for it, so
      whenever the goal text pushed the meta row down the two painted on top of each other: a 12px
      vertical overlap on 3 of 6 Cold Signal cards and 5 of 6 HARDLINE Fraction Rider cards, so this
-     predates the pack and Niall has been reading it on the math game. The overlay occupies the band
+     predates the pack and the player has been reading it on the math game. The overlay occupies the band
      from 10px to about 27px above the card's bottom edge, so a locked card reserves that band as
      padding. Only locked cards need it: .lvl-best never renders on a level nobody has played. */
   .level-card.locked { padding-bottom: 32px; }
@@ -3881,7 +3881,7 @@ function renderHeader() {
 let SHELVES = [{ subject: 'math', label: 'Math', packs: [] }];
 
 const SUBJECT_LABELS = { ela: 'English', sci: 'Science', hist: 'History' };
-// Math first, Justin's call 26-0725: the six worlds Niall already plays stay at the top of the launcher
+// Math first, Justin's call 26-0725: the six worlds the player already plays stay at the top of the launcher
 // where they have always been, and every new subject is an addition below them rather than something that
 // displaces his game. New subjects append here.
 const SUBJECT_ORDER = ['math', 'ela', 'sci', 'hist'];
@@ -4638,7 +4638,7 @@ function renderLauncher() {
 
     const inner = document.createElement('div');
     inner.className = 'module-grid';
-    // MODULES first, then math packs. Justin's 26-0725 call: the six worlds Niall already plays stay
+    // MODULES first, then math packs. Justin's 26-0725 call: the six worlds the player already plays stay
     // at the top of the launcher where they have always been, and anything new is an addition below
     // them rather than something that displaces his game.
     if (isMath) for (const m of MODULES) inner.appendChild(mathCardNode(m));

@@ -218,7 +218,7 @@ function check(name, ok, detail) {
       localStorage.clear();
       const old = {
         version: 1,
-        profile: { name: 'Niall' },
+        profile: { name: 'Player' },
         stats: { totalCorrect: 412, totalAnswered: 500, sessionCount: 31 },
         modules: {
           'fraction-rider': { unlocked: true, levelsCleared: 4, levelStars: [3, 3, 2, 3, 0, 0], levelBest: [100, 95, 70, 90, null, null] },
@@ -252,7 +252,7 @@ function check(name, ok, detail) {
       curriculum: JSON.parse(JSON.stringify(Save.state.curriculum)),
     }));
     const lost = [];
-    if (loaded.name !== 'Niall') lost.push('profile.name');
+    if (loaded.name !== 'Player') lost.push('profile.name');
     if (loaded.cleared !== 4) lost.push('levelsCleared');
     if (loaded.stars !== '3,3,2,3,0,0') lost.push('levelStars');
     if (loaded.best !== JSON.stringify([100, 55, null, null, null, null])) lost.push('levelBest');
