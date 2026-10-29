@@ -769,7 +769,7 @@
   }
   /* Hover styles only on real hover devices. iPad Safari sticks :hover after
      tap, which made the previously-tapped button look "selected" on the next
-     question — Justin's son saw highlighted answers carry across. */
+     question — a player saw highlighted answers carry across. */
   @media (hover: hover) {
     .fr-ans:hover:not(:disabled) {
       transform: translateY(-2px);
@@ -6477,7 +6477,7 @@ function pedDistractorsFloat(correct, decimals, mistakes, fallbackOffsets) {
         callbacks.onComplete(state.score, stars);
       }
 
-      // Skip the cast/view pick screen — Justin's son saw the Mando/Grogu
+      // Skip the cast/view pick screen — a player saw the Mando/Grogu
       // cast photos as click targets and got stuck because they were
       // decorative. Default to chase cam and launch gameplay immediately
       // when the level is entered.

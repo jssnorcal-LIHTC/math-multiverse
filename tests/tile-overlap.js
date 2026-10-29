@@ -76,7 +76,7 @@ const MODULES = [
 ];
 
 // Modules that boot straight into gameplay (fraction-rider never had a pick screen; razor-crest
-// has one in the DOM but init() skips it -- "Justin's son saw the cast photos as click targets
+// has one in the DOM but init() skips it -- "a player saw the cast photos as click targets
 // and got stuck", so state.view defaults and startFlight() runs immediately). Everything else
 // shows a picker that must be cleared: f1-decimals and master-builder gate their GO button on
 // selecting a driver/builder card first; rocky-translator and floating-bear's GO button is live
